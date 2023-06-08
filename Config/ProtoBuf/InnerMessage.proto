@@ -1,0 +1,21 @@
+syntax = "proto3";
+package Sining.Message;
+
+/// Gate服务器登录到Map服务器
+message I_G2MLoginRequest // IRouteRequest,I_M2GLoginResponse
+{
+	int64 AccountId = 1;
+}
+message I_M2GLoginResponse // IRouteResponse
+{
+	int64 AddressRouteId = 1;
+}
+/// Gate服务器登录到Chat服务器
+message I_G2ChatLoginRequest // IRouteRequest,I_M2ChatLoginResponse
+{
+	int64 AccountId = 1;
+}
+message I_M2ChatLoginResponse // IRouteResponse
+{
+	int64 AddressRouteId = 1;
+}

@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.App", "Fantasy.App\Fantasy.App.csproj", "{CD137C28-9DE2-4FFF-86BB-51502481D6CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Hotfix", "Fantasy.Hotfix\Fantasy.Hotfix.csproj", "{F9A1E3EC-5692-47CD-8756-3C6C4984E805}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Model", "Fantasy.Model\Fantasy.Model.csproj", "{E0028825-CD4B-40F9-8D94-975EC96E43A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Core", "Fantasy.Core\Fantasy.Core.csproj", "{C2D3CDC4-FDD0-4A4E-94DF-56E341DD9883}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{C531529C-FA29-4373-86D9-9FA570843722}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{74F78592-3F53-48D1-8A7E-3F33A3FABC4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCPLibrary", "..\Plugins\KCPLibrary\KCPLibrary.csproj", "{0BD0B499-876E-4755-B3BF-DE8CCC5DD8F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Mathematics", "..\Plugins\Unity.Mathematics\Unity.Mathematics.csproj", "{EDB6ABD4-A7D4-498C-97FC-F3892B16E1C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Fantasy_Develop|Any CPU = Fantasy_Develop|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD137C28-9DE2-4FFF-86BB-51502481D6CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD137C28-9DE2-4FFF-86BB-51502481D6CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD137C28-9DE2-4FFF-86BB-51502481D6CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD137C28-9DE2-4FFF-86BB-51502481D6CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD137C28-9DE2-4FFF-86BB-51502481D6CE}.Fantasy_Develop|Any CPU.ActiveCfg = Fantasy_Develop|Any CPU
+		{CD137C28-9DE2-4FFF-86BB-51502481D6CE}.Fantasy_Develop|Any CPU.Build.0 = Fantasy_Develop|Any CPU
+		{F9A1E3EC-5692-47CD-8756-3C6C4984E805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A1E3EC-5692-47CD-8756-3C6C4984E805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A1E3EC-5692-47CD-8756-3C6C4984E805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A1E3EC-5692-47CD-8756-3C6C4984E805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9A1E3EC-5692-47CD-8756-3C6C4984E805}.Fantasy_Develop|Any CPU.ActiveCfg = Fantasy_Develop|Any CPU
+		{F9A1E3EC-5692-47CD-8756-3C6C4984E805}.Fantasy_Develop|Any CPU.Build.0 = Fantasy_Develop|Any CPU
+		{E0028825-CD4B-40F9-8D94-975EC96E43A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0028825-CD4B-40F9-8D94-975EC96E43A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0028825-CD4B-40F9-8D94-975EC96E43A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0028825-CD4B-40F9-8D94-975EC96E43A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0028825-CD4B-40F9-8D94-975EC96E43A0}.Fantasy_Develop|Any CPU.ActiveCfg = Fantasy_Develop|Any CPU
+		{E0028825-CD4B-40F9-8D94-975EC96E43A0}.Fantasy_Develop|Any CPU.Build.0 = Fantasy_Develop|Any CPU
+		{C2D3CDC4-FDD0-4A4E-94DF-56E341DD9883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2D3CDC4-FDD0-4A4E-94DF-56E341DD9883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2D3CDC4-FDD0-4A4E-94DF-56E341DD9883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2D3CDC4-FDD0-4A4E-94DF-56E341DD9883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2D3CDC4-FDD0-4A4E-94DF-56E341DD9883}.Fantasy_Develop|Any CPU.ActiveCfg = Fantasy_Develop|Any CPU
+		{C2D3CDC4-FDD0-4A4E-94DF-56E341DD9883}.Fantasy_Develop|Any CPU.Build.0 = Fantasy_Develop|Any CPU
+		{0BD0B499-876E-4755-B3BF-DE8CCC5DD8F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BD0B499-876E-4755-B3BF-DE8CCC5DD8F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BD0B499-876E-4755-B3BF-DE8CCC5DD8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BD0B499-876E-4755-B3BF-DE8CCC5DD8F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BD0B499-876E-4755-B3BF-DE8CCC5DD8F0}.Fantasy_Develop|Any CPU.ActiveCfg = Fantasy_Develop|Any CPU
+		{0BD0B499-876E-4755-B3BF-DE8CCC5DD8F0}.Fantasy_Develop|Any CPU.Build.0 = Fantasy_Develop|Any CPU
+		{EDB6ABD4-A7D4-498C-97FC-F3892B16E1C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDB6ABD4-A7D4-498C-97FC-F3892B16E1C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDB6ABD4-A7D4-498C-97FC-F3892B16E1C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDB6ABD4-A7D4-498C-97FC-F3892B16E1C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDB6ABD4-A7D4-498C-97FC-F3892B16E1C3}.Fantasy_Develop|Any CPU.ActiveCfg = Fantasy_Develop|Any CPU
+		{EDB6ABD4-A7D4-498C-97FC-F3892B16E1C3}.Fantasy_Develop|Any CPU.Build.0 = Fantasy_Develop|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CD137C28-9DE2-4FFF-86BB-51502481D6CE} = {C531529C-FA29-4373-86D9-9FA570843722}
+		{C2D3CDC4-FDD0-4A4E-94DF-56E341DD9883} = {C531529C-FA29-4373-86D9-9FA570843722}
+		{F9A1E3EC-5692-47CD-8756-3C6C4984E805} = {C531529C-FA29-4373-86D9-9FA570843722}
+		{E0028825-CD4B-40F9-8D94-975EC96E43A0} = {C531529C-FA29-4373-86D9-9FA570843722}
+		{0BD0B499-876E-4755-B3BF-DE8CCC5DD8F0} = {74F78592-3F53-48D1-8A7E-3F33A3FABC4B}
+		{EDB6ABD4-A7D4-498C-97FC-F3892B16E1C3} = {74F78592-3F53-48D1-8A7E-3F33A3FABC4B}
+	EndGlobalSection
+EndGlobal

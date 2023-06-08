@@ -1,0 +1,36 @@
+# Specify filepatterns you want git to ignore.
+# Client-Unity
+/Client/Unity/Unity.sln
+/Client/Unity/Assembly-CSharp.csproj
+/Client/Unity/Assembly-CSharp-Editor.csproj
+/Client/Unity/Assembly-CSharp-firstpass.csproj
+/Client/Unity/Fantasy.Core.csproj
+/Client/Unity/Fantasy.Editor.csproj
+/Client/Unity/Fantasy.Entry.csproj
+/Client/Unity/Fantasy.Hotfix.csproj
+/Client/Unity/Fantasy.Model.csproj
+/Client/Unity/HybridCLRData
+/Client/Unity/Library
+/Client/Unity/Logs
+/Client/Unity/Temp
+/Client/Unity/AssetBundles
+/Client/Unity/obj
+/Client/Unity/*.blob
+# Server
+/Server/Fantasy.App/bin
+/Server/Fantasy.App/obj
+/Server/Fantasy.Core/bin
+/Server/Fantasy.Core/obj
+/Server/Fantasy.Hotfix/bin
+/Server/Fantasy.Hotfix/obj
+/Server/Fantasy.Model/bin
+/Server/Fantasy.Model/obj
+# Plugins
+/Plugins/KCPLibrary/bin
+/Plugins/KCPLibrary/obj
+/Plugins/Unity.Mathematics/bin
+/Plugins/Unity.Mathematics/obj
+# Other
+.idea
+/Bin
+*.DS_Store

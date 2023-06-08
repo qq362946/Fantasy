@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+        <Configurations>Debug;Release;Fantasy_Develop</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;FANTASY_SERVER</DefineConstants>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants>TRACE;FANTASY_SERVER</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Fantasy_Develop' ">
+      <OutputPath>bin\Debug/net7.0/</OutputPath>
+      <DefineConstants>TRACE;FANTASY_SERVER</DefineConstants>
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <DebugSymbols>true</DebugSymbols>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Fantasy.Develop' ">
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Fantasy.Develop' ">
+      <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Fantasy.Develop' ">
+      <DefineConstants>TRACE;FANTASY_SERVER</DefineConstants>
+    </PropertyGroup>
+    <ItemGroup>
+        <Using Include="Fantasy" />
+        <Using Include="Fantasy.Helper" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Fantasy.Model\Fantasy.Model.csproj" />
+    </ItemGroup>
+</Project>
