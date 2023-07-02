@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{04369D7C-8DB9-46EB-A4C2-05642CEC374E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCPLibrary", "Plugins\KCPLibrary\KCPLibrary.csproj", "{F14774FF-ED4A-43AF-AACA-A46A7E89EB07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Mathematics", "Plugins\Unity.Mathematics\Unity.Mathematics.csproj", "{6D77EC74-4886-4100-8B02-7C5A5F1B68B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "Fantasy.Net\Fantasy.Net.csproj", "{8B538164-B76A-48C1-A449-C69E5DFA04E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F14774FF-ED4A-43AF-AACA-A46A7E89EB07} = {04369D7C-8DB9-46EB-A4C2-05642CEC374E}
+		{6D77EC74-4886-4100-8B02-7C5A5F1B68B1} = {04369D7C-8DB9-46EB-A4C2-05642CEC374E}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F14774FF-ED4A-43AF-AACA-A46A7E89EB07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F14774FF-ED4A-43AF-AACA-A46A7E89EB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F14774FF-ED4A-43AF-AACA-A46A7E89EB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F14774FF-ED4A-43AF-AACA-A46A7E89EB07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D77EC74-4886-4100-8B02-7C5A5F1B68B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D77EC74-4886-4100-8B02-7C5A5F1B68B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D77EC74-4886-4100-8B02-7C5A5F1B68B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D77EC74-4886-4100-8B02-7C5A5F1B68B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B538164-B76A-48C1-A449-C69E5DFA04E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B538164-B76A-48C1-A449-C69E5DFA04E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B538164-B76A-48C1-A449-C69E5DFA04E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B538164-B76A-48C1-A449-C69E5DFA04E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

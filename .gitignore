@@ -1,36 +1,44 @@
 # Specify filepatterns you want git to ignore.
 # Client-Unity
-/Client/Unity/Unity.sln
-/Client/Unity/Assembly-CSharp.csproj
-/Client/Unity/Assembly-CSharp-Editor.csproj
-/Client/Unity/Assembly-CSharp-firstpass.csproj
-/Client/Unity/Fantasy.Core.csproj
-/Client/Unity/Fantasy.Editor.csproj
-/Client/Unity/Fantasy.Entry.csproj
-/Client/Unity/Fantasy.Hotfix.csproj
-/Client/Unity/Fantasy.Model.csproj
-/Client/Unity/HybridCLRData
-/Client/Unity/Library
-/Client/Unity/Logs
-/Client/Unity/Temp
-/Client/Unity/AssetBundles
-/Client/Unity/obj
-/Client/Unity/*.blob
+/Demo/Client/Unity/Unity.sln
+/Demo/Client/Unity/Assembly-CSharp.csproj
+/Demo/Client/Unity/Assembly-CSharp-Editor.csproj
+/Demo/Client/Unity/Assembly-CSharp-firstpass.csproj
+/Demo/Client/Unity/Fantasy.Unity.csproj
+/Demo/Client/Unity/Fantasy.Core.csproj
+/Demo/Client/Unity/Fantasy.Editor.csproj
+/Demo/Client/Unity/Fantasy.Entry.csproj
+/Demo/Client/Unity/Fantasy.Hotfix.csproj
+/Demo/Client/Unity/Fantasy.Model.csproj
+/Demo/Client/Unity/HybridCLRData
+/Demo/Client/Unity/Library
+/Demo/Client/Unity/Logs
+/Demo/Client/Unity/Temp
+/Demo/Client/Unity/AssetBundles
+/Demo/Client/Unity/obj
+/Demo/Client/Unity/*.blob
 # Server
-/Server/Fantasy.App/bin
-/Server/Fantasy.App/obj
-/Server/Fantasy.Core/bin
-/Server/Fantasy.Core/obj
-/Server/Fantasy.Hotfix/bin
-/Server/Fantasy.Hotfix/obj
-/Server/Fantasy.Model/bin
-/Server/Fantasy.Model/obj
+/Demo/Server/Fantasy.App/bin
+/Demo/Server/Fantasy.App/obj
+/Demo/Server/Fantasy.Core/bin
+/Demo/Server/Fantasy.Core/obj
+/Demo/Server/Fantasy.Hotfix/bin
+/Demo/Server/Fantasy.Hotfix/obj
+/Demo/Server/Fantasy.Model/bin
+/Demo/Server/Fantasy.Model/obj
 # Plugins
 /Plugins/KCPLibrary/bin
 /Plugins/KCPLibrary/obj
 /Plugins/Unity.Mathematics/bin
 /Plugins/Unity.Mathematics/obj
+# Net
+/Fantasy.Net/Fantasy.Net/bin
+/Fantasy.Net/Fantasy.Net/obj
+/Fantasy.Net/Plugins/KCPLibrary/bin
+/Fantasy.Net/Plugins/KCPLibrary/obj
+/Fantasy.Net/Plugins/Unity.Mathematics/bin
+/Fantasy.Net/Plugins/Unity.Mathematics/obj
 # Other
 .idea
-/Bin
+/Demo/Bin
 *.DS_Store

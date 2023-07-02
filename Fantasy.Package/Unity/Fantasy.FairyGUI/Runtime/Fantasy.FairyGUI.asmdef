@@ -1,0 +1,16 @@
+{
+    "name": "Fantasy.FairyGUI",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8a65ae8b988044e388dbfab2a622a48c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

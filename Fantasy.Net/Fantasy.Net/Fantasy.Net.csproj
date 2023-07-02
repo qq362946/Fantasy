@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Fantasy.Server</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <NoWarn>1701;1702;IL2121;CS8603;IL2121;CS8625;IL2121;CS8618</NoWarn>
+      <WarningsAsErrors>;NU1605;SYSLIB0011;CS8618;;CS8625</WarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <NoWarn>1701;1702;IL2121;CS8603;IL2121;CS8625;IL2121;CS8618</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CommandLineParser" Version="2.9.1" />
+      <PackageReference Include="EPPlus" Version="6.2.6" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
+      <PackageReference Include="MongoDB.Bson" Version="2.20.0" />
+      <PackageReference Include="MongoDB.Driver" Version="2.20.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="NLog" Version="5.2.0" />
+      <PackageReference Include="protobuf-net" Version="3.2.26" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Plugins\KCPLibrary\KCPLibrary.csproj" />
+      <ProjectReference Include="..\Plugins\Unity.Mathematics\Unity.Mathematics.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Share\.DS_Store" />
+      <Content Include="Share\Helper\Mongo\.DS_Store" />
+      <Content Include="Share\Helper\Proto\.DS_Store" />
+    </ItemGroup>
+
+</Project>
