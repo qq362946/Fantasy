@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using Fantasy.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -156,19 +157,25 @@ namespace Fantasy.Core.Editor
 
         private void Generate(SerializedProperty dataProperty)
         {
-            var generatePath = Preferences.GetGeneratePath();
+            var generatePath = FantasySettingsScriptableObject.Instance.uiGenerateSavePath;
 
-            if (string.IsNullOrEmpty(generatePath))
+            if (!Directory.Exists($"{generatePath}/Entity"))
             {
-                EditorUtility.DisplayDialog("Generate Code", "Please enter the path in the menu first Fantasy/ReferencePreferences Set GeneratePath", "OK");
+                Directory.CreateDirectory($"{generatePath}/Entity");
                 return;
             }
-
-            if (!Directory.Exists(generatePath))
-            {
-                EditorUtility.DisplayDialog("Generate Code", $"{generatePath} is not a valid path", "OK");
-                return;
-            }
+            
+            // if (string.IsNullOrEmpty(generatePath))
+            // {
+            //     EditorUtility.DisplayDialog("Generate Code", "Please enter the path in the menu first Fantasy/ReferencePreferences Set GeneratePath", "OK");
+            //     return;
+            // }
+            //
+            // if (!Directory.Exists(generatePath))
+            // {
+            //     EditorUtility.DisplayDialog("Generate Code", $"{generatePath} is not a valid path", "OK");
+            //     return;
+            // }
 
             if (string.IsNullOrEmpty(_fantasyUI.assetName))
             {
@@ -230,6 +237,7 @@ namespace Fantasy.Core.Editor
             var combinePath = Path.Combine(generatePath, $"Entity/{_fantasyUI.componentName}.cs");
             using var entityStreamWriter = new StreamWriter(combinePath);
             entityStreamWriter.Write(sb.ToString());
+            AssetDatabase.Refresh();
             Log.Debug($"代码生成位置:{combinePath}");
         }
     }

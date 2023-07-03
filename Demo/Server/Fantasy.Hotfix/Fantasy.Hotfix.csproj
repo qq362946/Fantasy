@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Fantasy.Model\Fantasy.Model.csproj" />
+    </ItemGroup>
+
 </Project>

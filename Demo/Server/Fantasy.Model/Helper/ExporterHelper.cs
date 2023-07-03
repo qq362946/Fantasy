@@ -15,7 +15,7 @@ public static class ExporterHelper
         // ProtoBuf生成到服务端的文件夹位置
         ProtoBufDefine.ServerDirectory = $"{projectPath}/Server/Fantasy.Model/Generate/NetworkProtocol/";
         // ProtoBuf生成到客户端的文件夹位置
-        ProtoBufDefine.ClientDirectory = $"{projectPath}/Client/Unity/Assets/Scripts/Fantasy/Fantasy.Model/Generate/NetworkProtocol/";
+        ProtoBufDefine.ClientDirectory = $"{projectPath}/Client/Unity/Assets/Scripts/Model/Generate/NetworkProtocol/";
         // ProtoBuf生成代码模板的位置
         ProtoBufDefine.ProtoBufTemplatePath = $"{projectPath}/Config/Template/ProtoTemplate.txt";
         // Excel配置文件根目录
@@ -25,7 +25,7 @@ public static class ExporterHelper
         // Excel生成服务器代码的文件夹位置
         ExcelDefine.ServerFileDirectory = $"{projectPath}/Server/Fantasy.Model/Generate/ConfigTable/Entity/";
         // Excel生成客户端代码文件夹位置
-        ExcelDefine.ClientFileDirectory = $"{projectPath}/Client/Unity/Assets/Scripts/Fantasy/Fantasy.Model/Generate/ConfigTable/Entity/";
+        ExcelDefine.ClientFileDirectory = $"{projectPath}/Client/Unity/Assets/Scripts/Model/Generate/ConfigTable/Entity/";
         // Excel生成服务器二进制数据文件夹位置
         ExcelDefine.ServerBinaryDirectory = $"{projectPath}/Config/Binary/";
         // Excel生成客户端二进制数据文件夹位置
@@ -39,6 +39,6 @@ public static class ExporterHelper
         // 服务器自定义导出代码文件夹位置
         ExcelDefine.ServerCustomExportDirectory = $"{projectPath}/Server/Fantasy.Model/Generate/CustomExport/";
         // 客户端自定义导出代码文件夹位置
-        ExcelDefine.ClientCustomExportDirectory = $"{projectPath}/Client/Unity/Assets/Scripts/Fantasy/Fantasy.Model/Generate/CustomExport/";
+        ExcelDefine.ClientCustomExportDirectory = $"{projectPath}/Client/Unity/Assets/Scripts/Model/Generate/CustomExport/";
     }
 }

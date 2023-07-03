@@ -1,11 +1,2 @@
 syntax = "proto3";
 package Sining.Message;
-
-message I_G2M_TestBosnMessage_Req // IBsonRouteRequest,I_G2M_TestBosnMessage_Res
-{
-	string Name = 1;
-}
-message I_G2M_TestBosnMessage_Res // IBsonRouteResponse
-{
-	int64 RouteId = 1;
-}

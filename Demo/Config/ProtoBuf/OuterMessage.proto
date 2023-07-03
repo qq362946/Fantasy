@@ -1,44 +1,13 @@
 syntax = "proto3";
 package Fantasy.Network.Message;
 
-message H_C2L_TestMessage // IMessage
+/// 登录到服务器
+message H_C2G_LoginRequest // IRequest,H_G2C_LoginResponse
 {
-	int32 Key = 1;
+	string UserName = 1; 	// 用户名
+	string Password = 2;	// 密码
 }
-/// 注册
-message H_C2A_RegisterAccount // IRequest,H_A2C_RegisterAccount
+message H_G2C_LoginResponse // IResponse
 {
-	string Account = 1;
-	string Pw = 2;
-	string Pw2 = 3; 
-	string Code = 4; // 激活码
-	string Version = 5; // 版本号
-	string DeviceId = 6; // 注册设备
-}
-message H_A2C_RegisterAccount // IResponse
-{
-	string Account = 1;
-}
-/// 测试代码
-message H_C2Chat_GetTest_Req // ICustomRouteRequest,ChatRoute,H_Chat2C_GetTest_Res
-{
-	string Name = 1;
-}
-message H_Chat2C_GetTest_Res // ICustomRouteResponse
-{
-	string ResultName = 1;
-}
-/// 测试Addressable协议
-message H_C2M_AddressableRequest // IAddressableRouteRequest,H_M2C_AddressableResponse
-{
-	string Name = 1;
-}
-message H_M2C_AddressableResponse // IAddressableRouteResponse
-{
-	string ResultName = 1;
-}
-/// 测试Addressable协议
-message H_C2M_TestAddressable // IAddressableRouteMessage
-{
-	string Name = 1;
+	string Text = 1;
 }
