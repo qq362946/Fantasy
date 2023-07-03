@@ -8,7 +8,7 @@ namespace Fantasy.Editor
     public class FantasySettingsScriptableObject : ScriptableObjectSingleton<FantasySettingsScriptableObject>
     {
         [FormerlySerializedAs("AutoCopyAssembly")] 
-        [Header("自动拷贝程序集(接华佗等热更后需要单独处理程序集的处理的时候可能要关闭)")]
+        [Header("自动拷贝程序集到HotUpdatePath目录中")]
         public bool autoCopyAssembly = true;
         [FormerlySerializedAs("UIGenerateSavePath")] 
         [Header("UI生层代码路径")]
