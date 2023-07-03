@@ -39,9 +39,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="Share\.DS_Store" />
-      <Content Include="Share\Helper\Mongo\.DS_Store" />
-      <Content Include="Share\Helper\Proto\.DS_Store" />
+      <Folder Include="Runtime\Core\" />
     </ItemGroup>
 
 </Project>
