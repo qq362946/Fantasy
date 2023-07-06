@@ -6,7 +6,7 @@ Fantsy服务器框架源于ETServer框架，但极为简洁，性能更强，易
 ## 使用指南
 1.安装.Net7 SDK    
 2.指定项目使用的.Net SDK版本  
-如已有高于Net7的SDK，需要在Fantasy根目录下，通过 global.json指定使用.Net7 
+如已有高于Net7的SDK，需要在Fantasy根目录下，通过 global.json指定使用.Net7   
 3.需要单独编译 Fantasy.Hotfix.csproj  
 
 ## 交流与讨论：  
