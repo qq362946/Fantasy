@@ -37,9 +37,4 @@
       <ProjectReference Include="..\Plugins\KCPLibrary\KCPLibrary.csproj" />
       <ProjectReference Include="..\Plugins\Unity.Mathematics\Unity.Mathematics.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Runtime\Core\" />
-    </ItemGroup>
-
 </Project>

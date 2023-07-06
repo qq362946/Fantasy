@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCPLibrary", "Plugins\KCPLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Mathematics", "Plugins\Unity.Mathematics\Unity.Mathematics.csproj", "{6D77EC74-4886-4100-8B02-7C5A5F1B68B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "Fantasy.Net\Fantasy.Net.csproj", "{8B538164-B76A-48C1-A449-C69E5DFA04E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "Fantasy\Fantasy.Net.csproj", "{FA1985DD-B990-4C19-912E-60D5991EFB53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,9 +26,9 @@ Global
 		{6D77EC74-4886-4100-8B02-7C5A5F1B68B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D77EC74-4886-4100-8B02-7C5A5F1B68B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D77EC74-4886-4100-8B02-7C5A5F1B68B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B538164-B76A-48C1-A449-C69E5DFA04E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B538164-B76A-48C1-A449-C69E5DFA04E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B538164-B76A-48C1-A449-C69E5DFA04E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B538164-B76A-48C1-A449-C69E5DFA04E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA1985DD-B990-4C19-912E-60D5991EFB53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA1985DD-B990-4C19-912E-60D5991EFB53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA1985DD-B990-4C19-912E-60D5991EFB53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA1985DD-B990-4C19-912E-60D5991EFB53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
