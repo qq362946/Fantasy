@@ -1,4 +1,9 @@
 # Specify filepatterns you want git to ignore.
+# obj/
+# Bin/
+# bin/
+global.json
+
 # Client-Unity
 /Demo/Client/Unity/Unity.sln
 /Demo/Client/Unity/Assembly-CSharp.csproj
