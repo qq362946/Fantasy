@@ -1,7 +1,7 @@
 # Specify filepatterns you want git to ignore.
-# obj/
-# Bin/
-# bin/
+obj/
+Bin/
+bin/
 global.json
 
 # Client-Unity
