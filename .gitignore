@@ -34,6 +34,8 @@
 # Net
 /Fantasy.Net/Fantasy.Net/bin
 /Fantasy.Net/Fantasy.Net/obj
+/Fantasy.Net/Fantasy/bin
+/Fantasy.Net/Fantasy/obj
 /Fantasy.Net/Plugins/KCPLibrary/bin
 /Fantasy.Net/Plugins/KCPLibrary/obj
 /Fantasy.Net/Plugins/Unity.Mathematics/bin
