@@ -20,6 +20,7 @@ namespace Fantasy.Core.Network
 
         private bool _isInit;
         private Action _onConnectFail;
+        private Action _onConnectComplete;
         private long _connectTimeoutId;
         public override event Action OnDispose;
         public override event Action<uint> OnChangeChannelId;
@@ -88,7 +89,7 @@ namespace Fantasy.Core.Network
             });
         }
 
-        public override uint Connect(IPEndPoint remoteEndPoint, Action onConnectFail, int connectTimeout = 5000)
+        public override uint Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, int connectTimeout = 5000)
         {
             if (_isInit)
             {
@@ -97,6 +98,7 @@ namespace Fantasy.Core.Network
             
             _isInit = true;
             _onConnectFail = onConnectFail;
+            _onConnectComplete = onConnectComplete;
             ChannelId = CreateChannelId();
             _kcpSettings = KCPSettings.Create(NetworkTarget);
             _maxSndWnd = _kcpSettings.MaxSendWindowSize;
@@ -242,7 +244,11 @@ namespace Fantasy.Core.Network
                             _messageCache = null;
                             ConnectionPtrChannel.Add(_kcpIntPtr, this);
                             // 调用ChannelId改变事件、就算没有改变也要发下、接收事件的地方会判定下
-                            ThreadSynchronizationContext.Main.Post(() => { OnChangeChannelId(ChannelId); });
+                            ThreadSynchronizationContext.Main.Post(() =>
+                            {
+                                OnChangeChannelId(ChannelId);
+                                _onConnectComplete?.Invoke();
+                            });
                             // 到这里正确创建上连接了、可以正常发送消息了
                             break;
                         }

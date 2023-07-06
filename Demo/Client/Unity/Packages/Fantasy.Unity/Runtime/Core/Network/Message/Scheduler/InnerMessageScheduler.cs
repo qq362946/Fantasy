@@ -1,3 +1,4 @@
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #if FANTASY_NET
 
 namespace Fantasy.Core.Network
@@ -6,6 +7,7 @@ namespace Fantasy.Core.Network
     {
         protected override async FTask Handler(Session session, Type messageType, APackInfo packInfo)
         {
+            var disposeMemoryStream = true;
             var packInfoMemoryStream = packInfo.MemoryStream;
             
             try
@@ -64,18 +66,31 @@ namespace Fantasy.Core.Network
                     }
                     case > Opcode.OuterRouteMessage:
                     {
-                        var obj = packInfo.Deserialize(messageType);
                         var entity = Entity.GetEntity(packInfo.RouteId);
 
-                        if (entity == null)
+                        switch (entity)
                         {
-                            var response = MessageDispatcherSystem.Instance.CreateResponse((IRouteMessage)obj, CoreErrorCode.ErrNotFoundRoute);
-                            session.Send(response, packInfo.RpcId, packInfo.RouteId);
-                            return;
+                            case null:
+                            {
+                                var obj = packInfo.Deserialize(messageType);
+                                var response = MessageDispatcherSystem.Instance.CreateResponse((IRouteMessage)obj, CoreErrorCode.ErrNotFoundRoute);
+                                session.Send(response, packInfo.RpcId, packInfo.RouteId);
+                                return;
+                            }
+                            case Session gateSession:
+                            {
+                                // 这里如果是Session只可能是Gate的Session、如果是的话、肯定是转发Address消息
+                                disposeMemoryStream = false;
+                                gateSession.Send(packInfoMemoryStream, packInfo.RpcId);
+                                return;
+                            }
+                            default:
+                            {
+                                var obj = packInfo.Deserialize(messageType);
+                                await MessageDispatcherSystem.Instance.RouteMessageHandler(session, messageType, entity, obj, packInfo.RpcId);
+                                return;
+                            }
                         }
-
-                        await MessageDispatcherSystem.Instance.RouteMessageHandler(session, messageType, entity, obj, packInfo.RpcId);
-                        return;
                     }
                     default:
                     {
@@ -85,7 +100,7 @@ namespace Fantasy.Core.Network
             }
             catch (Exception e)
             {
-                if (packInfoMemoryStream.CanRead)
+                if (disposeMemoryStream && packInfoMemoryStream.CanRead)
                 {
                     // ReSharper disable once MethodHasAsyncOverload
                     packInfoMemoryStream.Dispose();

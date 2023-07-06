@@ -88,7 +88,7 @@ namespace Fantasy
     public partial class I_AddressableGet_Response : AProto, IRouteResponse
     {
         public uint OpCode() { return Opcode.AddressableGetResponse; }
-        [ProtoMember(91, IsRequired = false)]
+        [ProtoMember(91, IsRequired = true)]
         public int ErrorCode { get; set; }
         [ProtoMember(1)]
         public long RouteId { get; set; }
@@ -110,7 +110,7 @@ namespace Fantasy
     public partial class I_AddressableRemove_Response : AProto, IRouteResponse
     {
         public uint OpCode() { return Opcode.AddressableRemoveResponse; }
-        [ProtoMember(91, IsRequired = false)]
+        [ProtoMember(91, IsRequired = true)]
         public int ErrorCode { get; set; }
     }
     /// <summary>
@@ -130,7 +130,7 @@ namespace Fantasy
     public partial class I_AddressableLock_Response : AProto, IRouteResponse
     {
         public uint OpCode() { return Opcode.AddressableLockResponse; }
-        [ProtoMember(91, IsRequired = false)]
+        [ProtoMember(91, IsRequired = true)]
         public int ErrorCode { get; set; }
     }
     /// <summary>
@@ -154,7 +154,7 @@ namespace Fantasy
     public partial class I_AddressableUnLock_Response : AProto, IRouteResponse
     {
         public uint OpCode() { return Opcode.AddressableUnLockResponse; }
-        [ProtoMember(91, IsRequired = false)]
+        [ProtoMember(91, IsRequired = true)]
         public int ErrorCode { get; set; }
     }
 }

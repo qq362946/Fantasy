@@ -82,11 +82,10 @@ namespace Fantasy
             var ipEndPoint = NetworkHelper.ToIPEndPoint($"{machineConfigInfo.InnerBindIP}:{serverConfigInfo.InnerPort}");
             var clientNetworkComponent = Entity.Create<ClientNetworkComponent>(Scene);
             clientNetworkComponent.Initialize(NetworkProtocolType.KCP, NetworkTarget.Inner);
-            clientNetworkComponent.Connect(ipEndPoint, () =>
+            clientNetworkComponent.Connect(ipEndPoint,null, () =>
             {
                 Log.Error($"Unable to connect to the target server sourceServerId:{Id} targetServerId:{targetServerId}");
             });
-
             _sessions.Add(targetServerId, new ConnectInfo(clientNetworkComponent.Session, clientNetworkComponent));
             return clientNetworkComponent.Session;
         }

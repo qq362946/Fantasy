@@ -71,7 +71,7 @@ public sealed class ExcelExporter
         var pdbBytes = File.ReadAllBytes(Path.Combine(Environment.CurrentDirectory, "Fantasy.Model.pdb"));
         var assembly = assemblyLoadContext.LoadFromStream(new MemoryStream(dllBytes), new MemoryStream(pdbBytes));
         // 加载程序集
-        AssemblyManager.Load(int.MaxValue, assembly);
+        AssemblyManager.LoadAssembly(int.MaxValue, assembly);
         
         // 执行自定义导出
         

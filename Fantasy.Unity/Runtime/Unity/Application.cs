@@ -12,7 +12,7 @@ namespace Fantasy
     
     public static class Application
     {
-        public static void Initialize(int assemblyNameCoreKey)
+        public static void Initialize()
         {
             // 设置默认的线程的同步上下文
             SynchronizationContext.SetSynchronizationContext(ThreadSynchronizationContext.Main);
@@ -21,7 +21,7 @@ namespace Fantasy
             // 如果不这样、会无法把程序集的单例注册到SingletonManager中
             SingletonSystem.Initialize();
             // 加载核心程序集
-            AssemblyManager.Load(assemblyNameCoreKey, typeof(AssemblyManager).Assembly);
+            AssemblyManager.Initialize();
         }
         
         public static void Close()

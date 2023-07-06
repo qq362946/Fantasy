@@ -32,6 +32,12 @@ namespace Fantasy.Core.Network
                         action.SetResult(aResponse);
                         return;
                     }
+                    case < Opcode.OuterRouteRequest:
+                    {
+                        var message = packInfo.Deserialize(messageType);
+                        MessageDispatcherSystem.Instance.MessageHandler(session, messageType, message, packInfo.RpcId, packInfo.ProtocolCode);
+                        return;
+                    }
                 }
             }
             catch (Exception e)

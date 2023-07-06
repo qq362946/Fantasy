@@ -68,12 +68,12 @@ namespace Fantasy
             Scenes.Add(scene);
             return scene;
         }
-        public void CreateSession(string remoteAddress, NetworkProtocolType networkProtocolType, Action onConnectFail)
+        public void CreateSession(string remoteAddress, NetworkProtocolType networkProtocolType, Action onConnectComplete, Action onConnectFail, int connectTimeout = 5000)
         {
             var address = NetworkHelper.ToIPEndPoint(remoteAddress);
             var clientNetworkComponent = AddComponent<ClientNetworkComponent>();
             clientNetworkComponent.Initialize(networkProtocolType, NetworkTarget.Outer);
-            clientNetworkComponent.Connect(address, onConnectFail);
+            clientNetworkComponent.Connect(address, onConnectComplete, onConnectFail, connectTimeout);
             Session = clientNetworkComponent.Session;
         }
 #else

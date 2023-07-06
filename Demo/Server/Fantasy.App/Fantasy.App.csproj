@@ -16,7 +16,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Fantasy.Hotfix\Fantasy.Hotfix.csproj" />
-      <ProjectReference Include="..\Fantasy.Model\Fantasy.Model.csproj" />
     </ItemGroup>
 
     <ItemGroup>

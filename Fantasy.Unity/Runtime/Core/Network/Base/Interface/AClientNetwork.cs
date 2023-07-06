@@ -13,7 +13,7 @@ namespace Fantasy.Core.Network
 
         protected AClientNetwork(Scene scene, NetworkType networkType, NetworkProtocolType networkProtocolType, NetworkTarget networkTarget) : base(scene, networkType, networkProtocolType, networkTarget) { }
 
-        public abstract uint Connect(IPEndPoint remoteEndPoint, Action onConnectFail, int connectTimeout = 5000);
+        public abstract uint Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, int connectTimeout = 5000);
     
         public override void Dispose()
         {

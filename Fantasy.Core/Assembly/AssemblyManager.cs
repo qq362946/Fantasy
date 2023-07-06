@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 #if FANTASY_NET
 using System.Runtime.Loader;
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #endif
 #pragma warning disable CS8603
 #pragma warning disable CS8618
@@ -15,7 +16,12 @@ namespace Fantasy.Helper
         public static event Action<int> OnReLoadAssemblyEvent;
         private static readonly Dictionary<int, AssemblyInfo> AssemblyList = new Dictionary<int, AssemblyInfo>();
 
-        public static void Load(int assemblyName, Assembly assembly)
+        public static void Initialize()
+        {
+            LoadAssembly(int.MaxValue, typeof(AssemblyManager).Assembly);
+        }
+
+        public static void LoadAssembly(int assemblyName, Assembly assembly)
         {
             var isReLoad = false;
 
@@ -46,6 +52,16 @@ namespace Fantasy.Helper
             {
                 OnReLoadAssemblyEvent(assemblyName);
             }
+        }
+        
+        public static void Load(int assemblyName, Assembly assembly)
+        {
+            if (int.MaxValue == assemblyName)
+            {
+                throw new NotSupportedException("AssemblyName cannot be 2147483647");
+            }
+
+            LoadAssembly(assemblyName, assembly);
         }
 
         public static IEnumerable<Type> ForEach()

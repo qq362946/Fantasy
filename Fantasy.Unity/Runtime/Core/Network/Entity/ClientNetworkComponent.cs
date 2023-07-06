@@ -31,14 +31,14 @@ namespace Fantasy.Core.Network
             }
         }
 
-        public void Connect(IPEndPoint remoteEndPoint, Action onConnectFail, int connectTimeout = 5000)
+        public void Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, int connectTimeout = 5000)
         {
             if (Network == null || Network.IsDisposed)
             {
                 throw new NotSupportedException("Network is null or isDisposed");
             }
 
-            Network.Connect(remoteEndPoint, onConnectFail, connectTimeout);
+            Network.Connect(remoteEndPoint, onConnectComplete, onConnectFail, connectTimeout);
             Session = Session.Create(Network);
         }
 

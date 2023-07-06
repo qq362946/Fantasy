@@ -39,7 +39,6 @@ namespace Fantasy.Editor
 
         public override void OnActivate(string searchContext, VisualElement rootElement)
         {
-            EditorStatusWatcher.OnEditorFocused += OnEditorFocused;
             Init();
             base.OnActivate(searchContext, rootElement);
         }
@@ -47,14 +46,7 @@ namespace Fantasy.Editor
         public override void OnDeactivate()
         {
             base.OnDeactivate();
-            EditorStatusWatcher.OnEditorFocused -= OnEditorFocused;
             FantasySettingsScriptableObject.Save();
-        }
-        
-        private void OnEditorFocused()
-        {
-            Init();
-            Repaint();
         }
 
         private void Init()

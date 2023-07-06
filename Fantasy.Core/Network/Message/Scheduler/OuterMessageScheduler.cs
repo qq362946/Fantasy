@@ -1,5 +1,6 @@
 using System;
 using Fantasy.IO;
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
 namespace Fantasy.Core.Network
 {
@@ -49,7 +50,9 @@ namespace Fantasy.Core.Network
                             {
                                 var runtimeId = session.RuntimeId;
                                 var response = await addressableRouteComponent.Call(packInfo.RouteTypeCode, messageType, packInfoMemoryStream);
+                                
                                 // session可能已经断开了，所以这里需要判断
+                                
                                 if (session.RuntimeId == runtimeId)
                                 {
                                     session.Send(response, packInfo.RpcId);

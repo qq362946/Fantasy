@@ -1,4 +1,4 @@
-namespace Fantasy.Model;
+namespace Fantasy.Hotfix;
 
 public static class Entry
 {

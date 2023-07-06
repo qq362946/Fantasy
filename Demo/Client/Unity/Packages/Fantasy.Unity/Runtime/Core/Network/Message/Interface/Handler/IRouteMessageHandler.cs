@@ -40,9 +40,8 @@ namespace Fantasy.Core.Network
                 {
                     scene = entity.Scene;
                 }
-
-                //TODO 需要修改scene.World
-                Log.Error($"SceneWorld:{1} SceneRouteId:{scene.RouteId} SceneType:{scene.SceneInfo.SceneType} EntityId {tEntity.Id} : Error {e}");
+                
+                Log.Error($"SceneWorld:{session.Scene.World.Id} SceneRouteId:{scene.RouteId} SceneType:{scene.SceneInfo.SceneType} EntityId {tEntity.Id} : Error {e}");
             }
         }
         
@@ -100,8 +99,8 @@ namespace Fantasy.Core.Network
                 {
                     scene = entity.Scene;
                 }
-                //TODO 需要修改scene.World
-                Log.Error($"SceneWorld:{1} SceneRouteId:{scene.RouteId} SceneType:{scene.SceneInfo.SceneType} EntityId {tEntity.Id} : Error {e}");
+                
+                Log.Error($"SceneWorld:{session.Scene.World.Id} SceneRouteId:{scene.RouteId} SceneType:{scene.SceneInfo.SceneType} EntityId {tEntity.Id} : Error {e}");
                 response.ErrorCode = CoreErrorCode.ErrRpcFail;
             }
             finally
@@ -144,9 +143,8 @@ namespace Fantasy.Core.Network
                 {
                     scene = entity.Scene;
                 }
-
-                //TODO 需要修改scene.World
-                Log.Error($"SceneWorld:{1} SceneRouteId:{scene.RouteId} SceneType:{scene.SceneInfo.SceneType} EntityId {tEntity.Id} : Error {e}");
+                
+                Log.Error($"SceneWorld:{session.Scene.World.Id} SceneRouteId:{scene.RouteId} SceneType:{scene.SceneInfo.SceneType} EntityId {tEntity.Id} : Error {e}");
             }
             finally
             {
@@ -208,8 +206,8 @@ namespace Fantasy.Core.Network
                 {
                     scene = entity.Scene;
                 }
-                //TODO 需要修改scene.World
-                Log.Error($"SceneWorld:{1} SceneRouteId:{scene.RouteId} SceneType:{scene.SceneInfo.SceneType} EntityId {tEntity.Id} : Error {e}");
+                
+                Log.Error($"SceneWorld:{session.Scene.World.Id} SceneRouteId:{scene.RouteId} SceneType:{scene.SceneInfo.SceneType} EntityId {tEntity.Id} : Error {e}");
                 response.ErrorCode = CoreErrorCode.ErrRpcFail;
             }
             finally

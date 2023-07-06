@@ -19,6 +19,7 @@ namespace Fantasy.Core.Network
 
         private bool _isInit;
         private Action _onConnectFail;
+        private Action _onConnectComplete;
         private long _connectTimeoutId;
         public override event Action OnDispose;
         public override event Action<uint> OnChangeChannelId = channelId => { };
@@ -29,7 +30,7 @@ namespace Fantasy.Core.Network
             NetworkThread.Instance.AddNetwork(this);
         }
 
-        public override uint Connect(IPEndPoint remoteEndPoint, Action onConnectFail, int connectTimeout = 5000)
+        public override uint Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, int connectTimeout = 5000)
         {
             if (_isInit)
             {
@@ -38,6 +39,7 @@ namespace Fantasy.Core.Network
             
             _isInit = true;
             _onConnectFail = onConnectFail;
+            _onConnectComplete = onConnectComplete;
             ChannelId = 0xC0000000 | (uint) new Random().Next();
 
             _sendAction = (rpcId, routeTypeOpCode, routeId, memoryStream, message) =>
@@ -196,6 +198,11 @@ namespace Fantasy.Core.Network
 
             _messageCache.Clear();
             _messageCache = null;
+
+            if (_onConnectComplete != null)
+            {
+                ThreadSynchronizationContext.Main.Post(_onConnectComplete);
+            }
         }
 
         public override void Send(uint channelId, uint rpcId, long routeTypeOpCode, long routeId, object message)

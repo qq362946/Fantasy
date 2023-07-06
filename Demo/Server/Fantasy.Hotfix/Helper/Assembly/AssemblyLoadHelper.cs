@@ -1,4 +1,3 @@
-using System.Runtime.Loader;
 using Fantasy.Core;
 using Fantasy.Core.DataBase;
 using Fantasy.Helper;
@@ -8,13 +7,9 @@ namespace Fantasy;
 
 public static class AssemblyLoadHelper
 {
-    private const string HotfixDll = "Fantasy.Hotfix";
-    private static AssemblyLoadContext? _assemblyLoadContext = null;
-
     public static void Initialize()
     {
-        LoadModelDll();
-        LoadHotfixDll();
+        AssemblyManager.Load(AssemblyName.Model, typeof(AssemblyLoadHelper).Assembly);
     }
 
     public static void BindConfig()
@@ -144,25 +139,5 @@ public static class AssemblyLoadHelper
         
             return list;
         };
-    }
-
-    private static void LoadModelDll()
-    {
-        AssemblyManager.Load(AssemblyName.Model, typeof(AssemblyLoadHelper).Assembly);
-    }
-
-    public static void LoadHotfixDll()
-    {
-        if (_assemblyLoadContext != null)
-        {
-            _assemblyLoadContext.Unload();
-            System.GC.Collect();
-        }
-
-        _assemblyLoadContext = new AssemblyLoadContext(HotfixDll, true);
-        var dllBytes = File.ReadAllBytes(Path.Combine(Environment.CurrentDirectory, $"{HotfixDll}.dll"));
-        var pdbBytes = File.ReadAllBytes(Path.Combine(Environment.CurrentDirectory, $"{HotfixDll}.pdb"));
-        var assembly = _assemblyLoadContext.LoadFromStream(new MemoryStream(dllBytes), new MemoryStream(pdbBytes));
-        AssemblyManager.Load(AssemblyName.Hotfix, assembly);
     }
 }

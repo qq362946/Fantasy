@@ -37,6 +37,7 @@ namespace Fantasy.Core.Network
         public static async FTask<long> GetAddressableRouteId(Scene scene, long addressableId)
         {
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
+            
             var response = (I_AddressableGet_Response) await MessageHelper.CallInnerRoute(scene, addressableScene.EntityId,
                 new I_AddressableGet_Request
                 {
