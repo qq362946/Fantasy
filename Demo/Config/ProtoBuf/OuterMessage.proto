@@ -57,3 +57,13 @@ message H_M2C_ReceiveAddressMessageToServer // IAddressableRouteMessage
 {
 	string Message = 1;	// 消息信息
 }
+/// 客户端发送消息请求登录服务器
+message H_C2G_LoginRequest // IRequest,H_G2C_LoginResponse
+{
+	string UserName = 1;
+	string Password = 2;
+}
+message H_G2C_LoginResponse // IResponse
+{
+	string Text = 1;
+}

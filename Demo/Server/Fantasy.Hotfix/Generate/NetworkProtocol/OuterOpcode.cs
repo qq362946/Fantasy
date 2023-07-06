@@ -14,5 +14,7 @@ namespace Fantasy
 		 public const int H_M2C_MessageResponse = 250000001;
 		 public const int H_C2M_PushAddressMessageToClient = 190000002;
 		 public const int H_M2C_ReceiveAddressMessageToServer = 190000003;
+		 public const int H_C2G_LoginRequest = 110000003;
+		 public const int H_G2C_LoginResponse = 160000003;
 	}
 }

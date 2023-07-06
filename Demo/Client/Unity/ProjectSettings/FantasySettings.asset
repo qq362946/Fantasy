@@ -17,5 +17,4 @@ MonoBehaviour:
   editorModel: 1
   remoteUpdatePath: http://127.0.0.1
   hotUpdatePath: Assets/Bundles/HotUpdate/
-  hotUpdateAssemblyDefinitions:
-  - {fileID: 5897886265953266890, guid: ab6b0120444314dc992833ca96b6eaa0, type: 3}
+  hotUpdateAssemblyDefinitions: []
