@@ -15,7 +15,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Fantasy.Hotfix\Fantasy.Hotfix.csproj" />
+      <ProjectReference Include="..\Hotfix\Fantasy.Hotfix.csproj" />
     </ItemGroup>
 
     <ItemGroup>

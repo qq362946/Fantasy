@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.App", "Fantasy.App\Fantasy.App.csproj", "{A33F0C04-BD73-4479-977A-C168E3BC2646}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.App", "App\Fantasy.App.csproj", "{A33F0C04-BD73-4479-977A-C168E3BC2646}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Hotfix", "Fantasy.Hotfix\Fantasy.Hotfix.csproj", "{6A48C992-7B37-4D02-9E35-65CD5284D859}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "..\..\Fantasy.Net\Fantasy.Net.csproj", "{01DB22C6-AD1E-44D7-BA6F-1A94F13AD324}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "..\..\Fantasy.Net\Fantasy\Fantasy.Net.csproj", "{13E064D6-5A3D-4AA7-A8B4-7EC101EF748C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Hotfix", "Hotfix\Fantasy.Hotfix.csproj", "{8A63C258-07FD-45DC-BE10-45CE00A23811}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,14 +16,14 @@ Global
 		{A33F0C04-BD73-4479-977A-C168E3BC2646}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A33F0C04-BD73-4479-977A-C168E3BC2646}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A33F0C04-BD73-4479-977A-C168E3BC2646}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6A48C992-7B37-4D02-9E35-65CD5284D859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A48C992-7B37-4D02-9E35-65CD5284D859}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A48C992-7B37-4D02-9E35-65CD5284D859}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A48C992-7B37-4D02-9E35-65CD5284D859}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13E064D6-5A3D-4AA7-A8B4-7EC101EF748C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13E064D6-5A3D-4AA7-A8B4-7EC101EF748C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13E064D6-5A3D-4AA7-A8B4-7EC101EF748C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13E064D6-5A3D-4AA7-A8B4-7EC101EF748C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01DB22C6-AD1E-44D7-BA6F-1A94F13AD324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01DB22C6-AD1E-44D7-BA6F-1A94F13AD324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01DB22C6-AD1E-44D7-BA6F-1A94F13AD324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01DB22C6-AD1E-44D7-BA6F-1A94F13AD324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A63C258-07FD-45DC-BE10-45CE00A23811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A63C258-07FD-45DC-BE10-45CE00A23811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A63C258-07FD-45DC-BE10-45CE00A23811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A63C258-07FD-45DC-BE10-45CE00A23811}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
