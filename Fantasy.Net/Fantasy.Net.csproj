@@ -40,8 +40,11 @@
 
     <!-- 排除引用 -->
     <ItemGroup>
-      <Compile Remove="Fantasy.sln" />
-      <Compile Remove="Plugins" />
-      <Compile Remove="Plugins\**" />
+        <Compile Remove="Fantasy.sln" />
+        <Compile Remove="Plugins" />
+        <Compile Remove="Plugins\**" />
+        <Compile Remove="Plugins\**" />
+        <Compile Remove="bin" />
+        <Compile Remove="obj" />
     </ItemGroup>
 </Project>

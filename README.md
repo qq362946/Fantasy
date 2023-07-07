@@ -4,6 +4,8 @@ Fantasy框架易于学习易于使用，只需要在服务端引用Fantasy.Net�
 目前提供了Unity前端应用参考，前端主要添加Packages中的Fantasy.Unity，也可以按需要添加Fantasy.FairyGUI,Fantasy.HybridCLR。  
 后续计划增加Fantasy Go版本，和Unreal前端应用参考。
 
+## Fantasy 功能介绍 后续更新中。
+
 ## 使用指南
 1.安装.NET 7.0 SDK    
 2.指定项目使用的.NET 7.0   
