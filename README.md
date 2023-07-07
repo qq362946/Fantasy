@@ -3,6 +3,8 @@ Fantsy服务器框架源于ETServer框架，但极为简洁，性能更强，易
 目前提供了Unity前端应用参考，前端引用Fantasy.Unity。  
 后续计划增加Fantsy Go版本，和Unreal前端应用参考。
 
+## Fantasy 功能介绍 后续更新中。
+
 ## 使用指南
 1.安装.Net7 SDK    
 2.指定项目使用的.Net SDK版本  
