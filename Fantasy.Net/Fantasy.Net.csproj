@@ -34,7 +34,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Plugins\KCPLibrary\KCPLibrary.csproj" />
-      <ProjectReference Include="..\Plugins\Unity.Mathematics\Unity.Mathematics.csproj" />
+      <ProjectReference Include="Plugins\KCPLibrary\KCPLibrary.csproj" />
+      <ProjectReference Include="Plugins\Unity.Mathematics\Unity.Mathematics.csproj" />
+    </ItemGroup>
+
+    <!-- 排除引用 -->
+    <ItemGroup>
+      <Compile Remove="Fantasy.sln" />
+      <Compile Remove="Plugins" />
+      <Compile Remove="Plugins\**" />
     </ItemGroup>
 </Project>
