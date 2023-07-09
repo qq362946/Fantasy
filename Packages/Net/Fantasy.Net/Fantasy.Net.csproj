@@ -32,19 +32,19 @@
       <PackageReference Include="NLog" Version="5.2.0" />
       <PackageReference Include="protobuf-net" Version="3.2.26" />
     </ItemGroup>
-
+    
     <ItemGroup>
-      <ProjectReference Include="Plugins\KCPLibrary\KCPLibrary.csproj" />
-      <ProjectReference Include="Plugins\Unity.Mathematics\Unity.Mathematics.csproj" />
-    </ItemGroup>
-
-    <!-- 排除引用 -->
-    <ItemGroup>
-        <Compile Remove="Fantasy.sln" />
-        <Compile Remove="Plugins" />
-        <Compile Remove="Plugins\**" />
-        <Compile Remove="Plugins\**" />
-        <Compile Remove="bin" />
-        <Compile Remove="obj" />
+      <Content Include="Plugins\KCPLibrary\kcp.dll">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+          <Link>kcp.dll</Link>
+      </Content>
+      <Content Include="Plugins\KCPLibrary\kcp.dylib">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+          <Link>kcp.dylib</Link>
+      </Content>
+      <Content Include="Plugins\KCPLibrary\kcp.so">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+          <Link>kcp.so</Link>
+      </Content>
     </ItemGroup>
 </Project>
