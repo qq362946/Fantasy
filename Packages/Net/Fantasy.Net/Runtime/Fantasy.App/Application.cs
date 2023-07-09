@@ -1,6 +1,7 @@
 using CommandLine;
 using Fantasy.Core;
 using Fantasy.Helper;
+using Microsoft.Extensions.Configuration;
 using NLog;
 
 namespace Fantasy

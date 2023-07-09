@@ -89,5 +89,24 @@ namespace Fantasy.Helper
                 CopyDirectory(directory, destinationPath, overwrite);
             }
         }
+        
+        /// <summary>
+        /// 清除文件夹里的所有文件
+        /// </summary>
+        /// <param name="folderPath"></param>
+        public static void ClearDirectoryFile(string folderPath)
+        {
+            if (!Directory.Exists(folderPath))
+            {
+                return;
+            }
+        
+            var files = Directory.GetFiles(folderPath);
+        
+            foreach (var file in files)
+            {
+                File.Delete(file);
+            }
+        }
     }
 }

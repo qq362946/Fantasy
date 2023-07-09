@@ -1,24 +1,18 @@
 using Fantasy.Core;
 using Fantasy.Core.DataBase;
-using Fantasy.Helper;
 #pragma warning disable CS8603
 
-namespace Fantasy;
+namespace Fantasy.Hotfix;
 
-public static class AssemblyLoadHelper
+public static class ConfigTableHelper
 {
-    public static void Initialize()
-    {
-        AssemblyManager.Load(AssemblyName.Model, typeof(AssemblyLoadHelper).Assembly);
-    }
-
-    public static void BindConfig()
+    public static void Bind()
     {
         // 框架需要一些的配置文件来启动服务器和创建网络服务所以需要ServerConfig.xlsx和MachineConfig.xlsx的配置
         // 由于配置表的代码是生成在框架外面的、框架没办法直接获取到配置文件
         // 考虑到这两个配置文件开发者可能会修改结构、所以提供了一个委托来让开发者开自己定义如何获取框架需要的东西
         // 本来想提供一个接口让玩家把ServerConfig和MachineConfig添加到框架中、但这样就不支持热更
-        // 提供委托方式就可以支持配置表热更。因为配置表读取就是支持热更的
+        // 提供委托方式就可以支持配置表热更。因为配置表读取本就是支持热更的
         // 虽然这块稍微麻烦点、但好在配置一次以后基本不会改动、后面有更好的办法我会把这个给去掉
         ConfigTableManage.ServerConfig = serverId =>
         {

@@ -16,22 +16,19 @@ try
     //      Export:导出配置表工具
     //      例如我要启动导表工具参数就应该是--AppType Export就可以了Mode和AppId都可以不用设置
     // AppId:告诉框架应该启动哪个服务器、对应ServerConfig.xls的Id 如果Mode使用的Develop的话、这个Id不生效
-
-    // 配置框架导出的路径
-    ExporterHelper.Initialize();
     // 初始化框架
     Application.Initialize();
     // 演示的框架创建了Model和Hotfix两个工程所以需要AssemblyManager.Load来加载这两个程序集
     // 这个看个人而定、你也可以不按照演示框架这样创建2个程序集、总之有几个程序集就AssemblyManager.Load一下加载到框架中
     // 因为App这个工程就不需要了、因为这里没有逻辑、具体看AssemblyLoadHelper的逻辑、自己写一下
     // 加载需要的程序集、这里因为每个人都框架规划都不一样、所以这块开放出自己定义
-    AssemblyLoadHelper.Initialize();
+    AssemblyHelper.Initialize();
     // 绑定框架需要的配置文件
     // 框架启动服务器需要配置文件才可以启动、比如需要启动什么服务器、服务器的监听地址是什么等等、所以要提前绑定一下
-    AssemblyLoadHelper.BindConfig();
+    ConfigTableHelper.Bind();
     // 启动框架
     // 启动框架会加载Demo下Config/Excel/Server里四个文件配置
-    // 因为上面BindConfig已经绑定好了、所以框架可以直接读取这4个配置文件进行启动
+    // 因为上面ConfigTableHelper.Bind已经绑定好了、所以框架可以直接读取这4个配置文件进行启动
     Application.Start().Coroutine();
     // 框架启动后需要执行的逻辑、现在是我是写的启动服务器的逻辑、同上这里也开放出来自定义
     // 但这里一定是异步的、不然框架部分功能可能不会正常、因为阻塞到这里、需要Update需要下面的才可以驱动

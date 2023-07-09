@@ -47,8 +47,8 @@ public sealed class ExcelExporter
                     File.Delete(versionFilePath);
                 }
 
-                Exporter.ClearDirectoryFile(ExcelDefine.ServerFileDirectory);
-                Exporter.ClearDirectoryFile(ExcelDefine.ClientFileDirectory);
+                FileHelper.ClearDirectoryFile(ExcelDefine.ServerFileDirectory);
+                FileHelper.ClearDirectoryFile(ExcelDefine.ClientFileDirectory);
                 break;
             }
         }
@@ -63,8 +63,8 @@ public sealed class ExcelExporter
     private static void CustomExport()
     {
         // 清除文件夹
-        Exporter.ClearDirectoryFile(ExcelDefine.ServerCustomExportDirectory);
-        Exporter.ClearDirectoryFile(ExcelDefine.ClientCustomExportDirectory);
+        FileHelper.ClearDirectoryFile(ExcelDefine.ServerCustomExportDirectory);
+        FileHelper.ClearDirectoryFile(ExcelDefine.ClientCustomExportDirectory);
         // 找到程序集
         var assemblyLoadContext = new AssemblyLoadContext("ExporterDll", true);
         var dllBytes = File.ReadAllBytes(Path.Combine(Environment.CurrentDirectory, "Fantasy.Model.dll"));

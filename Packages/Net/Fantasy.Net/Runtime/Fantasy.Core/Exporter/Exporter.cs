@@ -4,13 +4,15 @@ using System.Reflection;
 using System.Runtime.Loader;
 using System.Text;
 using Fantasy.Helper;
+using Microsoft.Extensions.Configuration;
+#pragma warning disable CS8601
+
 #pragma warning disable CS8618
 
 namespace Fantasy.Core;
 
 public sealed class Exporter
 {
-    public static Action ExporterAction;
     public void Start()
     {
         Console.OutputEncoding = Encoding.UTF8;
@@ -37,6 +39,7 @@ public sealed class Exporter
             
         LogInfo("");
         exportType = (ExportType) key;
+        LoadConfig();
         
         switch (exportType)
         {
@@ -57,20 +60,50 @@ public sealed class Exporter
         Console.ReadKey();
         Environment.Exit(0);
     }
-    
-    public static void ClearDirectoryFile(string folderPath)
+
+    private void LoadConfig()
     {
-        if (!Directory.Exists(folderPath))
+        const string settingsName = "FantasySettings.json";
+        var currentDirectory = Directory.GetCurrentDirectory();
+
+        if (!File.Exists(Path.Combine(currentDirectory, settingsName)))
         {
-            return;
+            throw new FileNotFoundException($"not found {settingsName} in OutputDirectory");
         }
-        
-        var files = Directory.GetFiles(folderPath);
-        
-        foreach (var file in files)
-        {
-            File.Delete(file);
-        }
+
+        var configurationRoot = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile(settingsName)
+            .Build();
+        // ProtoBuf文件所在的位置文件夹位置
+        ProtoBufDefine.ProtoBufDirectory = configurationRoot["Export:ProtoBufDirectory:Value"];
+        // ProtoBuf生成到服务端的文件夹位置
+        ProtoBufDefine.ServerDirectory = configurationRoot["Export:ProtoBufServerDirectory:Value"];
+        // ProtoBuf生成到客户端的文件夹位置
+        ProtoBufDefine.ClientDirectory = configurationRoot["Export:ProtoBufClientDirectory:Value"];
+        // ProtoBuf生成代码模板的位置
+        ProtoBufDefine.ProtoBufTemplatePath = configurationRoot["Export:ProtoBufTemplatePath:Value"];
+        // Excel配置文件根目录
+        ExcelDefine.ProgramPath = configurationRoot["Export:ExcelProgramPath:Value"];
+        // Excel版本文件的位置
+        ExcelDefine.ExcelVersionFile = configurationRoot["Export:ExcelVersionFile:Value"];
+        // Excel生成服务器代码的文件夹位置
+        ExcelDefine.ServerFileDirectory = configurationRoot["Export:ExcelServerFileDirectory:Value"];
+        // Excel生成客户端代码文件夹位置
+        ExcelDefine.ClientFileDirectory = configurationRoot["Export:ExcelClientFileDirectory:Value"];
+        // Excel生成服务器二进制数据文件夹位置
+        ExcelDefine.ServerBinaryDirectory = configurationRoot["Export:ExcelServerBinaryDirectory:Value"];
+        // Excel生成客户端二进制数据文件夹位置
+        ExcelDefine.ClientBinaryDirectory = configurationRoot["Export:ExcelClientBinaryDirectory:Value"];
+        // Excel生成服务器Json数据文件夹位置
+        ExcelDefine.ServerJsonDirectory = configurationRoot["Export:ExcelServerJsonDirectory:Value"];
+        // Excel生成客户端Json数据文件夹位置
+        ExcelDefine.ClientJsonDirectory = configurationRoot["Export:ExcelClientJsonDirectory:Value"];
+        // Excel生成代码模板的位置
+        ExcelDefine.ExcelTemplatePath = configurationRoot["Export:ExcelTemplatePath:Value"];
+        // 服务器自定义导出代码文件夹位置
+        ExcelDefine.ServerCustomExportDirectory = configurationRoot["Export:ServerCustomExportDirectory:Value"];
+        // 客户端自定义导出代码文件夹位置
+        ExcelDefine.ClientCustomExportDirectory = configurationRoot["Export:ClientCustomExportDirectory:Value"];
     }
 
     public static void LogInfo(string msg)
