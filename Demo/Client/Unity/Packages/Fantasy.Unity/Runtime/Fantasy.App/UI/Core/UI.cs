@@ -25,10 +25,6 @@ namespace Fantasy.Core
             UIComponent.Instance.RemoveComponent(Id, false);
 
             GameObject = null;
-            AssetName = null;
-            BundleName = null;
-            Layer = UILayer.None;
-            
             base.Dispose();
         }
 

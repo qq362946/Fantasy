@@ -24,11 +24,7 @@ namespace Fantasy.Core
             AssetBundleHelper.UnloadBundle(AssetName);
             UIComponent.Instance.RemoveComponent(Id, false);
 
-            GameObject = null;
-            AssetName = null;
-            BundleName = null;
-            Layer = UILayer.None;
-            
+            GameObject = null;            
             base.Dispose();
         }
 
