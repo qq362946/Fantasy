@@ -12,6 +12,6 @@ namespace Fantasy.Core.Network
     
     public interface IResponse : IMessage
     {
-        int ErrorCode { get; set; }
+        uint ErrorCode { get; set; }
     }
 }
