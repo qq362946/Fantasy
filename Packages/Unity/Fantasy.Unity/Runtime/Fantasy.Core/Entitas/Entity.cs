@@ -398,12 +398,6 @@ namespace Fantasy
 
         public void Deserialize(Scene scene, bool resetId = false)
         {
-            if (IsDisposed)
-            {
-                Log.Error($"component is Disposed {this.GetType().FullName}");
-                return;
-            }
-            
             if (RuntimeId != 0)
             {
                 return;
