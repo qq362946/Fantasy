@@ -21,7 +21,7 @@
             "Comment": "Excel配置文件根目录"
         },
         "ExcelVersionFile": {
-            "Value": ".../../../Config/Excel/Version.txt",
+            "Value": "../../../Config/Excel/Version.txt",
             "Comment": "Excel版本文件的位置"
         },
         "ExcelServerFileDirectory": {
@@ -59,6 +59,20 @@
         "ClientCustomExportDirectory": {
             "Value": "../../../Client/Unity/Assets/Scripts/Hotfix/Generate/CustomExport/",
             "Comment": "客户端自定义导出代码文件夹位置"
+        },
+        "CustomExportAssembly": {
+            "Value": "Fantasy.Hotfix",
+            "Comment": "自定义导出代码存放的程序集"
+        }
+    },
+    "Network": {
+        "SessionIdleCheckerInterval": {
+            "Value": 5000,
+            "Comment": "每隔多久检查一个Session的对话时间"
+        },
+        "SessionIdleCheckerTimeout": {
+            "Value": 8000,
+            "Comment": "距上一次接收对话的时间如果超过设定的时间会自定断开Session"
         }
     }
 }

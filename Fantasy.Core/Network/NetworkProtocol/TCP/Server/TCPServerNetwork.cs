@@ -173,7 +173,7 @@ namespace Fantasy.Core.Network
                         return;
                     }
 
-                    Session.Create(NetworkMessageScheduler, channel);
+                    Session.Create(NetworkMessageScheduler, channel, NetworkTarget);
                 });
                 
                 _connectionChannel.Add(channelId, channel);

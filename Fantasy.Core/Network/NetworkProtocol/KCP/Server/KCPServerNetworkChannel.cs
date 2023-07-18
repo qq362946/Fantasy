@@ -97,7 +97,7 @@ namespace Fantasy.Core.Network
                     return;
                 }
 
-                Session.Create(networkMessageScheduler, this);
+                Session.Create(networkMessageScheduler, this, networkTarget);
             });
         }
 

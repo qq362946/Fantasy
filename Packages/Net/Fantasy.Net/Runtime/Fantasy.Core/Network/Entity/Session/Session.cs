@@ -19,7 +19,7 @@ namespace Fantasy.Core.Network
         private static readonly Dictionary<long, Session> Sessions = new ();
         public readonly Dictionary<long, FTask<IResponse>> RequestCallback = new();
 
-        public static void Create(ANetworkMessageScheduler networkMessageScheduler, ANetworkChannel channel)
+        public static void Create(ANetworkMessageScheduler networkMessageScheduler, ANetworkChannel channel, NetworkTarget networkTarget)
         {
 #if FANTASY_DEVELOP
             if (ThreadSynchronizationContext.Main.ThreadId != Thread.CurrentThread.ManagedThreadId)
@@ -33,6 +33,14 @@ namespace Fantasy.Core.Network
             session.NetworkMessageScheduler = networkMessageScheduler;
             channel.OnDispose += session.Dispose;
             channel.OnReceiveMemoryStream += session.OnReceive;
+#if FANTASY_NET
+            if (networkTarget == NetworkTarget.Outer)
+            {
+                var interval = Define.SessionIdleCheckerInterval;
+                var timeOut = Define.SessionIdleCheckerTimeout;
+                session.AddComponent<SessionIdleCheckerComponent>().Start(interval, timeOut);
+            }
+#endif
             Sessions.Add(session.Id, session);
         }
 
@@ -112,7 +120,7 @@ namespace Fantasy.Core.Network
 
             if (networkId != 0 && channelId != 0)
             {
-                NetworkThread.Instance?.SynchronizationContext.Post(() =>
+                NetworkThread.Instance.SynchronizationContext.Post(() =>
                 {
                     NetworkThread.Instance?.RemoveChannel(networkId, channelId);
                 });

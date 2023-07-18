@@ -18,10 +18,11 @@ namespace Fantasy.Core.Network
         #region 逻辑线程
 
         private bool _isInit;
-        private Action _onConnectFail;
-        private Action _onConnectComplete;
         private long _connectTimeoutId;
         public override event Action OnDispose;
+        public override event Action OnConnectFail;
+        public override event Action OnConnectComplete;
+        public override event Action OnConnectDisconnect;
         public override event Action<uint> OnChangeChannelId = channelId => { };
         public override event Action<APackInfo> OnReceiveMemoryStream;
 
@@ -30,7 +31,7 @@ namespace Fantasy.Core.Network
             NetworkThread.Instance.AddNetwork(this);
         }
 
-        public override uint Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, int connectTimeout = 5000)
+        public override uint Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, int connectTimeout = 5000)
         {
             if (_isInit)
             {
@@ -38,8 +39,8 @@ namespace Fantasy.Core.Network
             }
             
             _isInit = true;
-            _onConnectFail = onConnectFail;
-            _onConnectComplete = onConnectComplete;
+            OnConnectFail = onConnectFail;
+            OnConnectComplete = onConnectComplete;
             ChannelId = 0xC0000000 | (uint) new Random().Next();
 
             _sendAction = (rpcId, routeTypeOpCode, routeId, memoryStream, message) =>
@@ -66,7 +67,7 @@ namespace Fantasy.Core.Network
 
             _connectTimeoutId = TimerScheduler.Instance.Core.OnceTimer(connectTimeout, () =>
             {
-                _onConnectFail?.Invoke();
+                OnConnectFail?.Invoke();
                 Dispose();
             });
             
@@ -87,7 +88,7 @@ namespace Fantasy.Core.Network
                     return;
                 }
 
-                OnConnectComplete(outArgs);
+                OnNetworkConnectComplete(outArgs);
             });
 
             return ChannelId;
@@ -106,6 +107,11 @@ namespace Fantasy.Core.Network
             {
                 if (_socket.Connected)
                 {
+                    if (OnConnectDisconnect != null)
+                    {
+                        ThreadSynchronizationContext.Main.Post(OnConnectDisconnect);
+                    }
+
                     _socket.Disconnect(true);
                     _socket.Close();
                 }
@@ -145,7 +151,7 @@ namespace Fantasy.Core.Network
         private readonly SocketAsyncEventArgs _innArgs = new SocketAsyncEventArgs();
         private Queue<MessageCacheInfo> _messageCache = new Queue<MessageCacheInfo>();
 
-        private void OnConnectComplete(SocketAsyncEventArgs asyncEventArgs)
+        private void OnNetworkConnectComplete(SocketAsyncEventArgs asyncEventArgs)
         {
 #if FANTASY_DEVELOP
             if (NetworkThread.Instance.ManagedThreadId != Thread.CurrentThread.ManagedThreadId)
@@ -163,9 +169,9 @@ namespace Fantasy.Core.Network
             {
                 Log.Error($"Unable to connect to the target server asyncEventArgs:{asyncEventArgs.SocketError}");
                 
-                if (_onConnectFail != null)
+                if (OnConnectFail != null)
                 {
-                    ThreadSynchronizationContext.Main.Post(_onConnectFail);
+                    ThreadSynchronizationContext.Main.Post(OnConnectFail);
                 }
                 
                 Dispose();
@@ -199,9 +205,9 @@ namespace Fantasy.Core.Network
             _messageCache.Clear();
             _messageCache = null;
 
-            if (_onConnectComplete != null)
+            if (OnConnectComplete != null)
             {
-                ThreadSynchronizationContext.Main.Post(_onConnectComplete);
+                ThreadSynchronizationContext.Main.Post(OnConnectComplete);
             }
         }
 
@@ -509,7 +515,7 @@ namespace Fantasy.Core.Network
             {
                 case SocketAsyncOperation.Connect:
                 {
-                    NetworkThread.Instance.SynchronizationContext.Post(() => OnConnectComplete(asyncEventArgs));
+                    NetworkThread.Instance.SynchronizationContext.Post(() => OnNetworkConnectComplete(asyncEventArgs));
                     break;
                 }
                 case SocketAsyncOperation.Receive:

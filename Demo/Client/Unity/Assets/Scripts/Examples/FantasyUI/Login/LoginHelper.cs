@@ -22,6 +22,9 @@ namespace Fantasy
             self.Scene.CreateSession("127.0.0.1:20000", NetworkProtocolType.KCP, null, () =>
             {
                 Log.Error("无法连接到服务器");
+            }, () =>
+            {
+                Log.Error("服务器主动断开了连接");
             });
             // 发送给服务器登录的消息
             self.Login().Coroutine();

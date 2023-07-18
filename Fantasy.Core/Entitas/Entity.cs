@@ -397,7 +397,7 @@ namespace Fantasy
         #region Deserialize
 
         public void Deserialize(Scene scene, bool resetId = false)
-        {            
+        {
             if (RuntimeId != 0)
             {
                 return;

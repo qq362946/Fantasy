@@ -55,8 +55,9 @@ public class Entry : MonoBehaviour
         // networkProtocolType:网络协议类型、目前只有TCP和UDP(KCP)这两种
         // onConnectComplete:当跟服务器建立连接后的回调
         // onConnectFail:当网络无法连接或出错时的回调
+        // onConnectDisconnect:当服务器主动断开连接客户端收到的回调
         // connectTimeout:连接超时时间、默认是5000毫秒
-        Scene.CreateSession("127.0.0.1:20000", NetworkProtocolType.KCP, OnConnectComplete, OnConnectFail);
+        Scene.CreateSession("127.0.0.1:20000", NetworkProtocolType.KCP, OnConnectComplete, OnConnectFail, null);
         // 注意:框架使用的ProtoBuf协议、文件定义的位置在Demo下Config/ProtoBuf/里
         // 生成协议是在服务器工程生成
         // ProtoBuf有三个文件:
