@@ -39,7 +39,7 @@ public class H_C2G_LoginAddressRequestHandler : MessageRPC<H_C2G_LoginAddressReq
             sceneEntityId,
             new I_G2M_LoginAddressRequest()
             {
-                AddressId = session.Id,
+                AddressableId = session.Id,
                 GateRouteId = session.RuntimeId,
             });
         if (loginAddressResponse.ErrorCode != 0)
@@ -48,6 +48,6 @@ public class H_C2G_LoginAddressRequestHandler : MessageRPC<H_C2G_LoginAddressReq
             return;
         }
         // 3、可寻址消息组件、挂载了这个组件可以接收和发送Addressable消息
-        session.AddComponent<AddressableRouteComponent>();
+        session.AddComponent<AddressableRouteComponent>().SetAddressableId(loginAddressResponse.AddressableId);
     }
 }

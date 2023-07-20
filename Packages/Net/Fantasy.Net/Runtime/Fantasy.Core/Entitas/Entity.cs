@@ -405,6 +405,7 @@ namespace Fantasy
 
             try
             {
+                Scene = scene;
 #if FANTASY_NET
                 RuntimeId = IdFactory.NextEntityId(scene.RouteId);
 #else
@@ -423,7 +424,6 @@ namespace Fantasy
                     foreach (var entity in _treeDb)
                     {
                         entity.Parent = this;
-                        entity.Scene = scene;
                         entity.Deserialize(scene, resetId);
                         _tree.Add(entity.GetType(), entity);
                     }
@@ -435,7 +435,6 @@ namespace Fantasy
                     foreach (var entity in _multiDb)
                     {
                         entity.Parent = this;
-                        entity.Scene = scene;
                         entity.Deserialize(scene, resetId);
                         _multi.Add(entity.Id, (ISupportedMultiEntity)entity);
                     }

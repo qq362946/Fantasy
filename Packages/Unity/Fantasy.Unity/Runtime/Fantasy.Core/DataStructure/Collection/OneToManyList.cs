@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-#pragma warning disable CS8600
-#pragma warning disable CS8603
 
 namespace Fantasy.DataStructure
 {

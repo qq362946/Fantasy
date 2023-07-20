@@ -1,8 +1,4 @@
-#pragma warning disable CS8602
-#pragma warning disable CS8601
-#pragma warning disable CS8625
-#pragma warning disable CS8604
-#pragma warning disable CS8600
+
 namespace Fantasy.DataStructure
 {
     /// <summary>
@@ -35,8 +31,7 @@ namespace Fantasy.DataStructure
                 if (layer <= rLevel)
                 {
                     var currentRight = cur.Right;
-                    cur.Right = new SkipTableNode<TValue>(sortKey, viceKey, key, value,
-                        layer == 1 ? cur.Index + 1 : 0, cur, cur.Right, null);
+                    cur.Right = new SkipTableNode<TValue>(sortKey, viceKey, key, value, layer == 1 ? cur.Index + 1 : 0, cur, cur.Right, null);
 
                     if (currentRight != null)
                     {

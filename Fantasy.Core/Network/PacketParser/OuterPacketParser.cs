@@ -2,9 +2,6 @@ using System;
 using System.IO;
 using Fantasy.DataStructure;
 using Fantasy.Helper;
-#pragma warning disable CS8603
-#pragma warning disable CS8600
-#pragma warning disable CS8625
 
 namespace Fantasy.Core.Network
 {
@@ -34,7 +31,11 @@ namespace Fantasy.Core.Network
         {
             using (MemoryStream)
             {
-                MemoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
+                if (MemoryStream.Length >= Packet.OuterPacketHeadLength)
+                {
+                    MemoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
+                }
+                
                 return ProtoBufHelper.FromStream(messageType, MemoryStream);
             }
         }
@@ -85,12 +86,6 @@ namespace Fantasy.Core.Network
                 
                     _isUnPackHead = true;
                     packInfo = OuterPackInfo.Create(_rpcId, _protocolCode, _routeTypeCode);
-
-                    if (_messagePacketLength <= 0)
-                    {
-                        return true;
-                    }
-                    
                     var memoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
                     // 写入消息体的信息到内存中
                     memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
@@ -103,7 +98,7 @@ namespace Fantasy.Core.Network
                     memoryStream.Write(BitConverter.GetBytes(_routeTypeCode));
                     memoryStream.Seek(0, SeekOrigin.Begin);
                     packInfo.MemoryStream = memoryStream;
-                    return true;
+                    return _messagePacketLength > 0;
                 }
                 catch (Exception e)
                 {
@@ -119,9 +114,10 @@ namespace Fantasy.Core.Network
         public override APackInfo UnPack(MemoryStream memoryStream)
         {
             OuterPackInfo packInfo = null;
-            
+
             try
             {
+                // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
                 if (memoryStream == null)
                 {
                     return null;
@@ -149,16 +145,16 @@ namespace Fantasy.Core.Network
                 {
                     return null;
                 }
+                
+                packInfo.MemoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
 
                 if (_messagePacketLength <= 0)
                 {
                     return packInfo;
                 }
                 
-                var outMemoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
-                memoryStream.WriteTo(outMemoryStream);
-                outMemoryStream.Seek(0, SeekOrigin.Begin);
-                packInfo.MemoryStream = outMemoryStream;
+                memoryStream.WriteTo(packInfo.MemoryStream);
+                packInfo.MemoryStream.Seek(0, SeekOrigin.Begin);
                 return packInfo;
             }
             catch (Exception e)

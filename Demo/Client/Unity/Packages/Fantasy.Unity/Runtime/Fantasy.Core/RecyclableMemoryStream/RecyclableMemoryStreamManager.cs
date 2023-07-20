@@ -20,10 +20,6 @@
 // THE SOFTWARE.
 // ---------------------------------------------------------------------
 
-#pragma warning disable CS8625
-#pragma warning disable CS8604
-#pragma warning disable CS8600
-#pragma warning disable CS8618
 namespace Fantasy.IO
 {
     using System;

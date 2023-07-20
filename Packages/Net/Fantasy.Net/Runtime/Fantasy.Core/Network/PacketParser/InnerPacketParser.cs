@@ -1,9 +1,6 @@
 #if FANTASY_NET
 using Fantasy.DataStructure;
 using Fantasy.Helper;
-#pragma warning disable CS8600
-#pragma warning disable CS8625
-#pragma warning disable CS8603
 
 namespace Fantasy.Core.Network;
 
@@ -44,7 +41,10 @@ public sealed class InnerPackInfo : APackInfo
     {
         using (MemoryStream)
         {
-            MemoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
+            if (MemoryStream.Length >= Packet.InnerPacketHeadLength)
+            {
+                MemoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
+            }
 
             switch (ProtocolCode)
             {
@@ -100,7 +100,7 @@ public sealed class InnerPacketParser : APacketParser
                 {
                     return false;
                 }
-
+                
                 _ = buffer.Read(_messageHead, 0, Packet.InnerPacketHeadLength);
                 _messagePacketLength = BitConverter.ToInt32(_messageHead, 0);
 
@@ -124,12 +124,6 @@ public sealed class InnerPacketParser : APacketParser
 
                 _isUnPackHead = true;
                 packInfo = InnerPackInfo.Create(_rpcId, _routeId, _protocolCode);
-
-                if (_messagePacketLength > 0)
-                {
-                    return true;
-                }
-            
                 var memoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
                 // 写入消息体的信息到内存中
                 memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
@@ -183,16 +177,16 @@ public sealed class InnerPacketParser : APacketParser
             {
                 return null;
             }
+            
+            packInfo.MemoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
 
             if (_messagePacketLength <= 0)
             {
                 return packInfo;
             }
             
-            var outMemoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
-            memoryStream.WriteTo(outMemoryStream);
-            outMemoryStream.Seek(0, SeekOrigin.Begin);
-            packInfo.MemoryStream = outMemoryStream;
+            memoryStream.WriteTo(packInfo.MemoryStream);
+            packInfo.MemoryStream.Seek(0, SeekOrigin.Begin);
             return packInfo;
         }
         catch (Exception e)

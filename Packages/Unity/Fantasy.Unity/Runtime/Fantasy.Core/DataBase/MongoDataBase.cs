@@ -160,7 +160,7 @@ public sealed class MongoDataBase : IDateBase
         }
     }
 
-    public async FTask<T> First<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity
+    public async FTask<T?> First<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity
     {
         using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
         {

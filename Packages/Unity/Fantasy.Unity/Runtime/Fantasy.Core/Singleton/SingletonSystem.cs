@@ -5,9 +5,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using Fantasy.DataStructure;
-#pragma warning disable CS8601
-#pragma warning disable CS8604
-#pragma warning disable CS8600
 
 namespace Fantasy.Helper
 {
@@ -84,7 +81,7 @@ namespace Fantasy.Helper
                 return;
             }
 
-            var count = singletons.Count;
+            // var count = singletons.Count;
             UnLoad(singletons);
             Singletons.RemoveKey(assemblyName);
             // Log.Info($"assembly:{assemblyName} Unload Singleton count:{count}");

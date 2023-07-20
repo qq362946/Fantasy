@@ -11,15 +11,15 @@
       <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-      <NoWarn>1701;1702;IL2121;CS8603;IL2121;CS8625;IL2121;CS8618</NoWarn>
-      <WarningsAsErrors>;NU1605;SYSLIB0011;CS8618;;CS8625</WarningsAsErrors>
+      <NoWarn>1701;1702;IL2121;CS8603;CS8602;CS8625;IL2121;CS8618;IL2121;CS8600;CS8604;CS8601;SYSLIB0023</NoWarn>
+      <WarningsAsErrors>;NU1605;SYSLIB0011;CS8618;CS8602;CS8625;CS8603;CS8600;CS8625;CS8600;</WarningsAsErrors>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
       <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-      <NoWarn>1701;1702;IL2121;CS8603;IL2121;CS8625;IL2121;CS8618</NoWarn>
+      <NoWarn>1701;1702;IL2121;CS8603;IL2121;CS8625;IL2121;CS8618;CS8602;CS8603;CS8600;CS8625;CS8600;;CS8604;CS8601;SYSLIB0023</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -31,20 +31,5 @@
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="NLog" Version="5.2.0" />
       <PackageReference Include="protobuf-net" Version="3.2.26" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Content Include="Plugins\KCPLibrary\kcp.dll">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-          <Link>kcp.dll</Link>
-      </Content>
-      <Content Include="Plugins\KCPLibrary\kcp.dylib">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-          <Link>kcp.dylib</Link>
-      </Content>
-      <Content Include="Plugins\KCPLibrary\kcp.so">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-          <Link>kcp.so</Link>
-      </Content>
     </ItemGroup>
 </Project>

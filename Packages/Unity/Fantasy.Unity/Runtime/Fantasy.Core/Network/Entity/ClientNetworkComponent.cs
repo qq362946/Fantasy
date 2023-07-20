@@ -37,7 +37,7 @@ namespace Fantasy.Core.Network
             {
                 throw new NotSupportedException("Network is null or isDisposed");
             }
-
+            
             Network.Connect(remoteEndPoint, onConnectComplete, onConnectFail, onConnectDisconnect, connectTimeout);
             Session = Session.Create(Network);
         }

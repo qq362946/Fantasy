@@ -243,15 +243,15 @@ namespace Fantasy.Core.Network
             {
                 return;
             }
-
+            
             if (asyncEventArgs.BytesTransferred == 0)
             {
                 Dispose();
                 return;
             }
-            
+           
             _receiveBuffer.LastIndex += asyncEventArgs.BytesTransferred;
-                
+            
             if (_receiveBuffer.LastIndex >= CircularBuffer.ChunkSize)
             {
                 _receiveBuffer.AddLast();
@@ -266,12 +266,12 @@ namespace Fantasy.Core.Network
                     {
                         return;
                     }
-
+                    
                     if (!PacketParser.UnPack(_receiveBuffer, out var packInfo))
                     {
                         break;
                     }
-
+                    
                     ThreadSynchronizationContext.Main.Post(() =>
                     {
                         if (IsDisposed)

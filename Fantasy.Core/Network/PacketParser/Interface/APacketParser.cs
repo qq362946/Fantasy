@@ -17,8 +17,8 @@ namespace Fantasy.Core.Network
                 {
 #if FANTASY_NET
                     return new InnerPacketParser();
-                    #else
-                    return null;
+#else
+                    throw new NotSupportedException($"PacketParserHelper Create NotSupport {networkTarget}");
 #endif
                 }
                 case NetworkTarget.Outer:

@@ -51,7 +51,7 @@ public class SessionIdleCheckerComponent : Entity
         {
             return;
         }
-
+        
         Log.Warning($"session timeout id:{Id}");
         _session.Dispose();
     }

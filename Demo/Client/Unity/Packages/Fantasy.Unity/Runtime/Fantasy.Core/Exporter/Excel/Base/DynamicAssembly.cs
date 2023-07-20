@@ -3,8 +3,6 @@ using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using ProtoBuf;
-#pragma warning disable CS8600
-#pragma warning disable CS8601
 
 namespace Fantasy.Core;
 

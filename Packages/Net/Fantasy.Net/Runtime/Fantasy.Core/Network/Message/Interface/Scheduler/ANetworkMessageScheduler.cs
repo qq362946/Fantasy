@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using Fantasy.Helper;
-#pragma warning disable CS8600
+
 
 namespace Fantasy.Core.Network
 {
@@ -78,7 +78,7 @@ namespace Fantasy.Core.Network
                     // ReSharper disable once MethodHasAsyncOverload
                     packInfoMemoryStream.Dispose();
                 }
-                
+
                 Log.Error($"NetworkMessageScheduler error messageProtocolCode:{packInfo.ProtocolCode} messageType:{messageType} SessionId {session.Id} IsDispose {session.IsDisposed} {e}");
             }
             finally

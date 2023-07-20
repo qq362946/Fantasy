@@ -9,12 +9,6 @@ using Fantasy.Helper;
 using Newtonsoft.Json;
 using OfficeOpenXml;
 using static System.String;
-#pragma warning disable CS8625
-#pragma warning disable CS8604
-#pragma warning disable CS8602
-#pragma warning disable CS8601
-#pragma warning disable CS8600
-#pragma warning disable CS8618
 
 namespace Fantasy.Core;
 

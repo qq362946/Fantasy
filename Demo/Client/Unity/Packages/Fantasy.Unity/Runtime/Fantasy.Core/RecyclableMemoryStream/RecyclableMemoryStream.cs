@@ -20,10 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma warning disable CS8604
-#pragma warning disable CS8618
-#pragma warning disable CS8625
-#pragma warning disable CS8600
 namespace Fantasy.IO
 {
     using System;

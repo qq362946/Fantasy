@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Fantasy.DataStructure;
 using Fantasy.Helper;
 using Type = System.Type;
-#pragma warning disable CS8600
 
 // ReSharper disable MethodOverloadWithOptionalParameter
 
