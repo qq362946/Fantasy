@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.IO;
 using Fantasy.DataStructure;
 using Fantasy.Helper;
@@ -7,6 +8,7 @@ namespace Fantasy.Core.Network
 {
     public abstract class APacketParser : IDisposable
     {
+        protected MemoryPool<byte> MemoryPool;
         protected bool IsDisposed { get; private set; }
 
         public static APacketParser CreatePacketParser(NetworkTarget networkTarget)
@@ -33,11 +35,11 @@ namespace Fantasy.Core.Network
         }
 
         public abstract bool UnPack(CircularBuffer buffer, out APackInfo packInfo);
-        public abstract APackInfo UnPack(MemoryStream memoryStream);
-
+        public abstract bool UnPack(IMemoryOwner<byte> memoryOwner, out APackInfo packInfo);
         public virtual void Dispose()
         {
             IsDisposed = true;
+            MemoryPool.Dispose();
         }
     }
 }

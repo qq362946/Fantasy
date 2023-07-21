@@ -142,6 +142,7 @@ namespace Fantasy.Core.Network
             
             messageHandler.Handle(session, rpcId, protocolCode, message).Coroutine();
         }
+
 #if FANTASY_NET
         public async FTask RouteMessageHandler(Session session, Type type, Entity entity, object message, uint rpcId)
         {

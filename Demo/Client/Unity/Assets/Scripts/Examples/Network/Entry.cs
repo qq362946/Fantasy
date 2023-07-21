@@ -2,6 +2,7 @@ using System;
 using Fantasy;
 using Fantasy.Core.Network;
 using Fantasy.Helper;
+using Fantasy.Model;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,6 +70,8 @@ public class Entry : MonoBehaviour
     private void OnConnectComplete()
     {
         IsConnect = true;
+        // 挂载心跳组件，设置每隔3000毫秒发送一次心跳给服务器
+        Scene.Session.AddComponent<SessionHeartbeatComponent>().Start(3000);
         LogDebug("已连接到服务器");
     }
 

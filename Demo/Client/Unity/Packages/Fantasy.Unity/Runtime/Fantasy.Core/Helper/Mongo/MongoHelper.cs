@@ -1,5 +1,6 @@
 #if FANTASY_NET
 using MongoDB.Bson;
+using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using Unity.Mathematics;
@@ -42,6 +43,37 @@ public sealed class MongoHelper : Singleton<MongoHelper>
                 BsonClassMap.LookupClassMap(type);
             }
         });
+    }
+
+    public object Deserialize(Span<byte> span, Type type)
+    {
+        using var stream = MemoryStreamHelper.GetRecyclableMemoryStream();
+        stream.Write(span);
+        stream.Seek(0, SeekOrigin.Begin);
+        return BsonSerializer.Deserialize(stream, type);
+    }
+
+    public object Deserialize(Memory<byte> memory, Type type)
+    {
+        using var stream = MemoryStreamHelper.GetRecyclableMemoryStream();
+        stream.Write(memory.Span);
+        stream.Seek(0, SeekOrigin.Begin);
+        return BsonSerializer.Deserialize(stream, type);
+    }
+    
+    public object Deserialize<T>(Span<byte> span)
+    {
+        using var stream = MemoryStreamHelper.GetRecyclableMemoryStream();
+        stream.Write(span);
+        stream.Seek(0, SeekOrigin.Begin);
+        return BsonSerializer.Deserialize<T>(stream);
+    }
+
+    public object Deserialize<T>(Memory<byte> memory)
+    {
+        using var stream = MemoryStreamHelper.GetRecyclableMemoryStream();
+        stream.Seek(0, SeekOrigin.Begin);
+        return BsonSerializer.Deserialize<T>(stream);
     }
 
     public T Deserialize<T>(byte[] bytes)
@@ -89,10 +121,20 @@ public sealed class MongoHelper : Singleton<MongoHelper>
         return t.ToBson();
     }
 
+    public void SerializeTo<T>(T t, Memory<byte> memory)
+    {
+        using var memoryStream = new MemoryStream();
+        using (var writer = new BsonBinaryWriter(memoryStream, BsonBinaryWriterSettings.Defaults))
+        {
+            BsonSerializer.Serialize(writer, typeof(T), t);
+        }
+
+        memoryStream.GetBuffer().AsMemory().CopyTo(memory);
+    }
+
     public void SerializeTo<T>(T t, MemoryStream stream)
     {
         var bytes = t.ToBson();
-
         stream.Write(bytes, 0, bytes.Length);
     }
 

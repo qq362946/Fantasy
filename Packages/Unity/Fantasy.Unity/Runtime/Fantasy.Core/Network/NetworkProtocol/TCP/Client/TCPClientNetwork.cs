@@ -1,14 +1,12 @@
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using Fantasy.DataStructure;
-#pragma warning disable CS8622
-#pragma warning disable CS8625
-#pragma warning disable CS8618
-
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable InconsistentNaming
 
 namespace Fantasy.Core.Network
@@ -41,6 +39,7 @@ namespace Fantasy.Core.Network
             _isInit = true;
             OnConnectFail = onConnectFail;
             OnConnectComplete = onConnectComplete;
+            OnConnectDisconnect = onConnectDisconnect;
             ChannelId = 0xC0000000 | (uint) new Random().Next();
 
             _sendAction = (rpcId, routeTypeOpCode, routeId, memoryStream, message) =>

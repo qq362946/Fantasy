@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -21,8 +22,7 @@ namespace Fantasy.Core.Network
         public readonly uint CreateTime;
         private readonly Socket _socket;
         private Action<uint, uint> _addToUpdate;
-        private MemoryStream _receiveMemoryStream;
-        private readonly CircularBuffer _receiveBuffer = new CircularBuffer();
+        private MemoryPool<byte> _memoryPool;
         public Kcp Kcp { get; private set; }
 
         public override event Action OnDispose;
@@ -40,6 +40,7 @@ namespace Fantasy.Core.Network
             _socket = socket;
             CreateTime = createTime;
             RemoteEndPoint = remoteEndPoint;
+            _memoryPool = MemoryPool<byte>.Shared;
         }
 
         public override void Dispose()
@@ -66,7 +67,8 @@ namespace Fantasy.Core.Network
 #endif
             _maxSndWnd = 0;
             _addToUpdate = null;
-            _receiveMemoryStream?.Dispose();
+            _memoryPool.Dispose();
+            _memoryPool = null;
             ThreadSynchronizationContext.Main.Post(OnDispose);
             base.Dispose();
         }
@@ -84,7 +86,6 @@ namespace Fantasy.Core.Network
             _maxSndWnd = maxSndWnd;
             _addToUpdate = addToUpdate;
             _rawSendBuffer = new byte[ushort.MaxValue];
-            _receiveMemoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
             PacketParser = APacketParser.CreatePacketParser(networkTarget);
             
             ThreadSynchronizationContext.Main.Post(() =>
@@ -164,9 +165,8 @@ namespace Fantasy.Core.Network
                         throw new Exception("SocketError.NetworkReset");
                     }
                     
-                    _receiveMemoryStream.SetLength(peekSize);
-                    _receiveMemoryStream.Seek(0, SeekOrigin.Begin);
-                    var receiveCount = Kcp.Receive(_receiveMemoryStream.GetBuffer(), peekSize);;
+                    var receiveMemoryOwner = _memoryPool.Rent(Packet.OuterPacketMaxLength);
+                    var receiveCount = Kcp.Receive(receiveMemoryOwner.Memory, peekSize);
 
                     // 如果接收的长度跟peekSize不一样，不需要处理，因为消息肯定有问题的(虽然不可能出现)。
 
@@ -176,9 +176,7 @@ namespace Fantasy.Core.Network
                         break;
                     }
 
-                    var packInfo = PacketParser.UnPack(_receiveMemoryStream);
-
-                    if (packInfo == null)
+                    if (!PacketParser.UnPack(receiveMemoryOwner,out var packInfo))
                     {
                         break;
                     }

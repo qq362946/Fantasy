@@ -139,6 +139,99 @@ namespace kcp2k
             return 0;
         }
 
+        public int Receive(Memory<byte> memory, int len)
+        {
+            // kcp's ispeek feature is not supported.
+            // this makes 'merge fragment' code significantly easier because
+            // we can iterate while queue.Count > 0 and dequeue each time.
+            // if we had to consider ispeek then count would always be > 0 and
+            // we would have to remove only after the loop.
+            //
+            //bool ispeek = len < 0;
+            if (len < 0)
+                throw new NotSupportedException("Receive ispeek for negative len is not supported!");
+
+            if (rcv_queue.Count == 0)
+                return -1;
+
+            if (len < 0) len = -len;
+
+            int peeksize = PeekSize();
+
+            if (peeksize < 0)
+                return -2;
+
+            if (peeksize > len)
+                return -3;
+
+            bool recover = rcv_queue.Count >= rcv_wnd;
+
+            // merge fragment.
+            int offset = 0;
+            len = 0;
+            // original KCP iterates rcv_queue and deletes if !ispeek.
+            // removing from a c# queue while iterating is not possible, but
+            // we can change to 'while Count > 0' and remove every time.
+            // (we can remove every time because we removed ispeek support!)
+            while (rcv_queue.Count > 0)
+            {
+                // unlike original kcp, we dequeue instead of just getting the
+                // entry. this is fine because we remove it in ANY case.
+                Segment seg = rcv_queue.Dequeue();
+                // copy segment data into our buffer
+                var asMemory = seg.data.GetBuffer().AsMemory();
+                var slice = asMemory.Slice(0, (int)seg.data.Position);
+                var offsetMemory = memory.Slice(offset);
+                slice.CopyTo(offsetMemory);
+                offset += (int)seg.data.Position;
+                len += (int)seg.data.Position;
+                uint fragment = seg.frg;
+
+                // note: ispeek is not supported in order to simplify this loop
+
+                // unlike original kcp, we don't need to remove seg from queue
+                // because we already dequeued it.
+                // simply delete it
+                SegmentDelete(seg);
+
+                if (fragment == 0)
+                    break;
+            }
+
+            // move available data from rcv_buf -> rcv_queue
+            int removed = 0;
+            foreach (Segment seg in rcv_buf)
+            {
+                if (seg.sn == rcv_nxt && rcv_queue.Count < rcv_wnd)
+                {
+                    // can't remove while iterating. remember how many to remove
+                    // and do it after the loop.
+                    // note: don't return segment. we only add it to rcv_queue
+                    ++removed;
+                    // add
+                    rcv_queue.Enqueue(seg);
+                    // increase sequence number for next segment
+                    rcv_nxt++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            rcv_buf.RemoveRange(0, removed);
+
+            // fast recover
+            if (rcv_queue.Count < rcv_wnd && recover)
+            {
+                // ready to send back CMD_WINS in flush
+                // tell remote my window size
+                probe |= ASK_TELL;
+            }
+
+            return len;
+        }
+
         // ikcp_recv
         // receive data from kcp state machine
         //   returns number of bytes read.
@@ -270,6 +363,62 @@ namespace kcp2k
             }
 
             return length;
+        }
+
+        public int Send(Memory<byte> memory)
+        {
+            // fragment count
+            int count;
+            var len = memory.Length;
+            if (len < 0) return -1;
+
+            // streaming mode: removed. we never want to send 'hello' and
+            // receive 'he' 'll' 'o'. we want to always receive 'hello'.
+
+            // calculate amount of fragments necessary for 'len'
+            if (len <= mss) count = 1;
+            else count = (int)((len + mss - 1) / mss);
+
+            // IMPORTANT kcp encodes 'frg' as 1 byte.
+            // so we can only support up to 255 fragments.
+            // (which limits max message size to around 288 KB)
+            // this is difficult to debug. let's make this 100% obvious.
+            if (count > FRG_MAX)
+                throw new Exception($"Send len={len} requires {count} fragments, but kcp can only handle up to {FRG_MAX} fragments.");
+
+            // original kcp uses WND_RCV const instead of rcv_wnd runtime:
+            // https://github.com/skywind3000/kcp/pull/291/files
+            // which always limits max message size to 144 KB:
+            //if (count >= WND_RCV) return -2;
+            // using configured rcv_wnd uncorks max message size to 'any':
+            if (count >= rcv_wnd) return -2;
+
+            if (count == 0) count = 1;
+
+            // fragment
+            var offset = 0;
+            for (int i = 0; i < count; i++)
+            {
+                int size = len > (int)mss ? (int)mss : len;
+                Segment seg = SegmentNew();
+
+                if (len > 0)
+                {
+                    var slice = memory.Span.Slice(offset, size);
+                    seg.data.Write(slice);
+                }
+                // seg.len = size: WriteBytes sets segment.Position!
+
+                // set fragment number.
+                // if the message requires no fragmentation, then
+                // seg.frg becomes 1-0-1 = 0
+                seg.frg = (uint)(count - i - 1);
+                snd_queue.Enqueue(seg);
+                offset += size;
+                len -= size;
+            }
+
+            return 0;
         }
 
         // ikcp_send

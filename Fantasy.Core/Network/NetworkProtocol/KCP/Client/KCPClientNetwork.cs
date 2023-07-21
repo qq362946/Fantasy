@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -62,14 +63,14 @@ namespace Fantasy.Core.Network
                 _kcp = null;
                 _maxSndWnd = 0;
                 _updateMinTime = 0;
-
+                _memoryPool.Dispose();
+                _memoryPool = null;
                 _sendAction = null;
                 _rawSendBuffer = null;
                 _rawReceiveBuffer = null;
                 
                 _packetParser?.Dispose();
-                _receiveMemoryStream?.Dispose();
-                
+
                 ClearConnectTimeout(ref _connectTimeoutId);
 
                 if (_messageCache != null)
@@ -103,6 +104,7 @@ namespace Fantasy.Core.Network
             _maxSndWnd = _kcpSettings.MaxSendWindowSize;
             _messageCache = new Queue<MessageCacheInfo>();
             _rawReceiveBuffer = new byte[_kcpSettings.Mtu + 5];
+            _memoryPool = MemoryPool<byte>.Shared;
 
             _sendAction = (rpcId, routeTypeOpCode, routeId, memoryStream, message) =>
             {
@@ -152,7 +154,7 @@ namespace Fantasy.Core.Network
         private byte[] _rawReceiveBuffer;
         private KCPSettings _kcpSettings;
         private APacketParser _packetParser;
-        private MemoryStream _receiveMemoryStream;
+        private MemoryPool<byte> _memoryPool;
         private Queue<MessageCacheInfo> _messageCache;
         private Action<uint, long, long, MemoryStream, object> _sendAction;
         private readonly Queue<uint> _updateTimeOutTime = new Queue<uint>();
@@ -208,7 +210,6 @@ namespace Fantasy.Core.Network
                             _kcp.SetWindowSize(_kcpSettings.SendWindowSize, _kcpSettings.ReceiveWindowSize);
                             _kcp.SetMtu(_kcpSettings.Mtu);
                             _rawSendBuffer = new byte[ushort.MaxValue];
-                            _receiveMemoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
                             _packetParser = APacketParser.CreatePacketParser(NetworkTarget);
                             
                             // 把缓存的消息全部发送给服务器
@@ -306,10 +307,8 @@ namespace Fantasy.Core.Network
                 Dispose();
                 return;
             }
-
-            // 发送消息
+            
             _kcp.Send(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
-            // 因为memoryStream对象池出来的、所以需要手动回收下
             memoryStream.Dispose();
             AddToUpdate(0);
         }
@@ -416,9 +415,8 @@ namespace Fantasy.Core.Network
                         throw new Exception("SocketError.NetworkReset");
                     }
 
-                    _receiveMemoryStream.SetLength(peekSize);
-                    _receiveMemoryStream.Seek(0, SeekOrigin.Begin);
-                    var receiveCount = _kcp.Receive(_receiveMemoryStream.GetBuffer(), peekSize);
+                    var receiveMemoryOwner = _memoryPool.Rent(Packet.OuterPacketMaxLength);
+                    var receiveCount = _kcp.Receive(receiveMemoryOwner.Memory, peekSize);
 
                     // 如果接收的长度跟peekSize不一样，不需要处理，因为消息肯定有问题的(虽然不可能出现)。
 
@@ -428,13 +426,10 @@ namespace Fantasy.Core.Network
                         break;
                     }
 
-                    var packInfo = _packetParser.UnPack(_receiveMemoryStream);
-
-                    if (packInfo == null)
+                    if (!_packetParser.UnPack(receiveMemoryOwner, out var packInfo))
                     {
                         break;
                     }
-                    
 
                     ThreadSynchronizationContext.Main.Post(() =>
                     {

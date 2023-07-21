@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.IO;
 using Fantasy.Helper;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
