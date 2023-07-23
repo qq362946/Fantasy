@@ -112,7 +112,7 @@ namespace Fantasy.Core.Network
             var id = Id;
             var networkId = NetworkId;
             var channelId = ChannelId;
-            
+
             foreach (var requestCallback in RequestCallback.Values.ToArray())
             {
                 requestCallback.SetException(new Exception($"session is dispose: {Id}"));
@@ -126,11 +126,13 @@ namespace Fantasy.Core.Network
                 });
             }
 
+            NetworkId = 0;
+            ChannelId = 0;
+            base.Dispose();
             Sessions.Remove(id);
 #if NETDEBUG
             Log.Debug($"Sessions Dispose Count:{Sessions.Count}");
 #endif
-            base.Dispose();
         }
 
         public virtual void Send(object message, uint rpcId = 0, long routeId = 0)

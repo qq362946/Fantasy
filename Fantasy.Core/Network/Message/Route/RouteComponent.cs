@@ -6,31 +6,31 @@ namespace Fantasy.Core.Network;
 /// </summary>
 public sealed class RouteComponent : Entity
 {
-    private readonly Dictionary<long, long> _routeAddress = new Dictionary<long, long>();
+    public readonly Dictionary<long, long> RouteAddress = new Dictionary<long, long>();
 
     public void AddAddress(long routeType, long routeId)
     {
-        _routeAddress.Add(routeType, routeId);
+        RouteAddress.Add(routeType, routeId);
     }
 
     public void RemoveAddress(long routeType)
     {
-        _routeAddress.Remove(routeType);
+        RouteAddress.Remove(routeType);
     }
 
     public long GetRouteId(long routeType)
     {
-        return _routeAddress.TryGetValue(routeType, out var routeId) ? routeId : 0;
+        return RouteAddress.TryGetValue(routeType, out var routeId) ? routeId : 0;
     }
 
     public bool TryGetRouteId(long routeType, out long routeId)
     {
-        return _routeAddress.TryGetValue(routeType, out routeId);
+        return RouteAddress.TryGetValue(routeType, out routeId);
     }
 
     public override void Dispose()
     {
-        _routeAddress.Clear();
+        RouteAddress.Clear();
         base.Dispose();
     }
 }
