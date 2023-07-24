@@ -209,7 +209,7 @@ namespace Fantasy
 
         public T AddComponent<T>() where T : Entity, new()
         {
-            var entity = Create<T>(Scene.RouteId, false);
+            var entity = Create<T>(Id, Scene.RouteId, false);
             AddComponent(entity);
             EntitiesSystem.Instance.Awake(entity);
             EntitiesSystem.Instance.StartUpdate(entity);
@@ -255,6 +255,12 @@ namespace Fantasy
             }
             else
             {
+#if FANTASY_NET
+                if (component is ISupportedSingleCollection && component.Id != Id)
+                {
+                    Log.Error($"component type :{component.GetType().FullName} for implementing ISupportedSingleCollection, it is required that the Id must be the same as the parent");
+                }
+#endif
                 if (_tree == null)
                 {
                     _tree = DictionaryPool<Type, Entity>.Create();
@@ -281,6 +287,8 @@ namespace Fantasy
         #endregion
 
         #region GetComponent
+
+        public DictionaryPool<Type, Entity> GetTree => _tree;
 
         public T GetComponent<T>() where T : Entity, new()
         {

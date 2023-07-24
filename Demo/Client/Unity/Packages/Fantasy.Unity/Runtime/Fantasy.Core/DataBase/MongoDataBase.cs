@@ -13,7 +13,7 @@ public sealed class MongoDataBase : IDateBase
     private MongoClient _mongoClient;
     private IMongoDatabase _mongoDatabase;
     private readonly HashSet<string> _collections = new HashSet<string>();
-    private readonly CoroutineLockQueueType _mongoDataBaseLock = new CoroutineLockQueueType("MongoDataBaseLock");
+    
 
     public IDateBase Initialize(string connectionString, string dbName)
     {
@@ -87,9 +87,16 @@ public sealed class MongoDataBase : IDateBase
 
     #region Query
 
+    public async FTask<T> QueryNotLock<T>(long id, string collection = null) where T : Entity
+    {
+        var cursor = await GetCollection<T>(collection).FindAsync(d => d.Id == id);
+        var v = await cursor.FirstOrDefaultAsync();
+        return v;
+    }
+    
     public async FTask<T> Query<T>(long id, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(id))
+        using (await IDateBase.DataBaseLock.Lock(id))
         {
             var cursor = await GetCollection<T>(collection).FindAsync(d => d.Id == id);
             var v = await cursor.FirstOrDefaultAsync();
@@ -99,7 +106,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             var count = await Count(filter);
             var dates = await QueryByPage(filter, pageIndex, pageSize, collection);
@@ -109,7 +116,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             var count = await Count(filter);
 
@@ -121,7 +128,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             return await GetCollection<T>(collection).Find(filter).Skip((pageIndex - 1) * pageSize)
                 .Limit(pageSize)
@@ -131,7 +138,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             var projection = Builders<T>.Projection.Include("");
 
@@ -147,7 +154,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<List<T>> QueryByPageOrderBy<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             if (isAsc)
             {
@@ -162,7 +169,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<T?> First<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             var cursor = await GetCollection<T>(collection).FindAsync(filter);
 
@@ -172,7 +179,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<T> First<T>(string json, string[] cols, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             var projection = Builders<T>.Projection.Include("");
             
@@ -193,7 +200,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<List<T>> QueryOrderBy<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             if (isAsc)
             {
@@ -207,7 +214,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             var cursor = await GetCollection<T>(collection).FindAsync(filter);
             var v = await cursor.ToListAsync();
@@ -217,7 +224,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask Query(long id, List<string> collectionNames, List<Entity> result)
     {
-        using (await _mongoDataBaseLock.Lock(id))
+        using (await IDateBase.DataBaseLock.Lock(id))
         {
             if (collectionNames == null || collectionNames.Count == 0)
             {
@@ -242,7 +249,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<List<T>> QueryJson<T>(string json, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
             var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition);
@@ -253,7 +260,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<List<T>> QueryJson<T>(string json, string[] cols, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             var projection = Builders<T>.Projection.Include("");
             
@@ -274,7 +281,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<List<T>> QueryJson<T>(long taskId, string json, string collection = null) where T : Entity
     {
-        using (await _mongoDataBaseLock.Lock(taskId))
+        using (await IDateBase.DataBaseLock.Lock(taskId))
         {
             FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
             var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition);
@@ -285,7 +292,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string[] cols, string collection = null) where T : class
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             var projection = Builders<T>.Projection.Include(cols[0]);
 
@@ -312,7 +319,7 @@ public sealed class MongoDataBase : IDateBase
 
         var clone = MongoHelper.Instance.Clone(entity);
         
-        using (await _mongoDataBaseLock.Lock(clone.Id))
+        using (await IDateBase.DataBaseLock.Lock(clone.Id))
         {
             await GetCollection(collection ?? clone.GetType().Name).ReplaceOneAsync(
                 (IClientSessionHandle) transactionSession, d => d.Id == clone.Id, clone,
@@ -331,7 +338,7 @@ public sealed class MongoDataBase : IDateBase
 
         var clone = MongoHelper.Instance.Clone(entity);
 
-        using (await _mongoDataBaseLock.Lock(clone.Id))
+        using (await IDateBase.DataBaseLock.Lock(clone.Id))
         {
             await GetCollection(collection ?? clone.GetType().Name).ReplaceOneAsync(d => d.Id == clone.Id, clone,
                 new ReplaceOptions {IsUpsert = true});
@@ -349,7 +356,7 @@ public sealed class MongoDataBase : IDateBase
 
         var clone = MongoHelper.Instance.Clone(entity);
 
-        using (await _mongoDataBaseLock.Lock(clone.Id))
+        using (await IDateBase.DataBaseLock.Lock(clone.Id))
         {
             await GetCollection(collection ?? clone.GetType().Name).ReplaceOneAsync(d => d.Id == clone.Id, clone, new ReplaceOptions {IsUpsert = true});
         }
@@ -365,7 +372,7 @@ public sealed class MongoDataBase : IDateBase
 
         var clones = MongoHelper.Instance.Clone(entities);
 
-        using (await _mongoDataBaseLock.Lock(id))
+        using (await IDateBase.DataBaseLock.Lock(id))
         {
             foreach (Entity clone in clones)
             {
@@ -393,7 +400,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask InsertBatch<T>(IEnumerable<T> list, string collection = null) where T : Entity, new()
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             await GetCollection<T>(collection ?? typeof(T).Name).InsertManyAsync(list);
         }
@@ -401,7 +408,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask InsertBatch<T>(object transactionSession, IEnumerable<T> list, string collection = null) where T : Entity, new()
     {
-        using (await _mongoDataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await IDateBase.DataBaseLock.Lock(RandomHelper.RandInt64()))
         {
             await GetCollection<T>(collection ?? typeof(T).Name).InsertManyAsync((IClientSessionHandle) transactionSession, list);
         }
@@ -413,7 +420,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<long> Remove<T>(object transactionSession, long id, string collection = null) where T : Entity, new()
     {
-        using (await _mongoDataBaseLock.Lock(id))
+        using (await IDateBase.DataBaseLock.Lock(id))
         {
             var result = await GetCollection<T>(collection).DeleteOneAsync((IClientSessionHandle) transactionSession, d => d.Id == id);
             return result.DeletedCount;
@@ -422,7 +429,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<long> Remove<T>(long id, string collection = null) where T : Entity, new()
     {
-        using (await _mongoDataBaseLock.Lock(id))
+        using (await IDateBase.DataBaseLock.Lock(id))
         {
             var result = await GetCollection<T>(collection).DeleteOneAsync(d => d.Id == id);
             return result.DeletedCount;
@@ -431,7 +438,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<long> Remove<T>(long id, object transactionSession, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new()
     {
-        using (await _mongoDataBaseLock.Lock(id))
+        using (await IDateBase.DataBaseLock.Lock(id))
         {
             var result = await GetCollection<T>(collection).DeleteManyAsync((IClientSessionHandle) transactionSession, filter);
             return result.DeletedCount;
@@ -440,7 +447,7 @@ public sealed class MongoDataBase : IDateBase
 
     public async FTask<long> Remove<T>(long id, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new()
     {
-        using (await _mongoDataBaseLock.Lock(id))
+        using (await IDateBase.DataBaseLock.Lock(id))
         {
             var result = await GetCollection<T>(collection).DeleteManyAsync(filter);
             return result.DeletedCount;
