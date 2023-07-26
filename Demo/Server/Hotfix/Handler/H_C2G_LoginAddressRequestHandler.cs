@@ -26,7 +26,7 @@ public class H_C2G_LoginAddressRequestHandler : MessageRPC<H_C2G_LoginAddressReq
         var sceneEntityId = 0L;
         foreach (var sceneConfig in SceneConfigData.Instance.List)
         {
-            if (sceneConfig.RouteId == 3072)
+            if (sceneConfig.ServerConfigId == 3072)
             {
                 sceneEntityId = sceneConfig.EntityId;
                 break;

@@ -95,23 +95,23 @@ namespace Fantasy
 
         public static T Create<T>(Scene scene, bool isRunEvent = true) where T : Entity, new()
         {
-            var entity = Create<T>(scene.RouteId, isRunEvent);
+            var entity = Create<T>(scene.LocationId, isRunEvent);
             entity.Scene = scene;
             return entity;
         }
 
         public static T Create<T>(Scene scene, long id, bool isRunEvent = true) where T : Entity, new()
         {
-            var entity = Create<T>(id, scene.RouteId, isRunEvent);
+            var entity = Create<T>(id, scene.LocationId, isRunEvent);
             entity.Scene = scene;
             return entity;
         }
 
-        private static T Create<T>(uint routeId, bool isRunEvent = true) where T : Entity, new()
+        private static T Create<T>(uint locationId, bool isRunEvent = true) where T : Entity, new()
         {
             var entity = Rent<T>(typeof(T));
 #if FANTASY_NET
-            entity.Id = entity.RuntimeId = IdFactory.NextEntityId(routeId);
+            entity.Id = entity.RuntimeId = IdFactory.NextEntityId(locationId);
 #else
             entity.Id = entity.RuntimeId = IdFactory.NextRunTimeId();
 #endif
@@ -126,12 +126,12 @@ namespace Fantasy
             return entity;
         }
 
-        private static T Create<T>(long id, uint routeId, bool isRunEvent = true) where T : Entity, new()
+        protected static T Create<T>(long id, uint locationId, bool isRunEvent = true) where T : Entity, new()
         {
-            return Create<T>(id, IdFactory.NextEntityId(routeId), isRunEvent);
+            return Create<T>(id, IdFactory.NextEntityId(locationId), isRunEvent);
         }
 
-        private static T Create<T>(long id, long runtimeId, bool isRunEvent = true) where T : Entity, new()
+        protected static T Create<T>(long id, long runtimeId, bool isRunEvent = true) where T : Entity, new()
         {
             var entity = Rent<T>(typeof(T));
             entity.Id = id;
@@ -144,13 +144,6 @@ namespace Fantasy
                 EntitiesSystem.Instance.StartUpdate(entity);
             }
 
-            return entity;
-        }
-
-        protected static Scene CreateScene(long id, bool isRunEvent = true)
-        {
-            var entity = Create<Scene>(id, id, isRunEvent);
-            entity.Scene = entity;
             return entity;
         }
 
@@ -176,12 +169,12 @@ namespace Fantasy
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        public Scene Scene { get; private set; }
+        public Scene Scene { get; protected set; }
         
         [BsonIgnore] 
         [JsonIgnore]
         [IgnoreDataMember]
-        public Entity Parent { get; private set; }
+        public Entity Parent { get; protected set; }
 
         [BsonElement("t")] 
         [BsonIgnoreIfNull] 
@@ -209,7 +202,7 @@ namespace Fantasy
 
         public T AddComponent<T>() where T : Entity, new()
         {
-            var entity = Create<T>(Id, Scene.RouteId, false);
+            var entity = Create<T>(Id, Scene.LocationId, false);
             AddComponent(entity);
             EntitiesSystem.Instance.Awake(entity);
             EntitiesSystem.Instance.StartUpdate(entity);
@@ -218,7 +211,7 @@ namespace Fantasy
 
         public T AddComponent<T>(long id) where T : Entity, new()
         {
-            var entity = Create<T>(id, Scene.RouteId, false);
+            var entity = Create<T>(id, Scene.LocationId, false);
             AddComponent(entity);
             EntitiesSystem.Instance.Awake(entity);
             EntitiesSystem.Instance.StartUpdate(entity);
@@ -415,7 +408,7 @@ namespace Fantasy
             {
                 Scene = scene;
 #if FANTASY_NET
-                RuntimeId = IdFactory.NextEntityId(scene.RouteId);
+                RuntimeId = IdFactory.NextEntityId(scene.LocationId);
 #else
                 RuntimeId = IdFactory.NextRunTimeId();
 #endif

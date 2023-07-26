@@ -32,7 +32,7 @@ namespace Fantasy.Helper
             return new RuntimeIdStruct(_lastRunTimeIdTime, _lastRunTimeIdSequence);
         }
 
-        public static long NextEntityId(uint routeId)
+        public static long NextEntityId(uint locationId)
         {
             var time = (uint)((TimeHelper.Now - Epoch2023) / 1000);
 
@@ -47,7 +47,7 @@ namespace Fantasy.Helper
                 _lastEntityIdSequence = 0;
             }
 
-            return new EntityIdStruct(routeId, _lastEntityIdTime, _lastEntityIdSequence);
+            return new EntityIdStruct(locationId, _lastEntityIdTime, _lastEntityIdSequence);
         }
 
         public static uint GetRouteId(long entityId)

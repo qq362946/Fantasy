@@ -79,7 +79,7 @@ namespace Fantasy
 		[ProtoMember(2, IsRequired  = true)]
 		public long EntityId { get; set; } // 实体Id
 		[ProtoMember(3, IsRequired  = true)]
-		public uint RouteId { get; set; } // 路由Id
+		public uint ServerConfigId { get; set; } // 路由Id
 		[ProtoMember(4, IsRequired  = true)]
 		public uint WorldId { get; set; } // 世界Id
 		[ProtoMember(5, IsRequired  = true)]
