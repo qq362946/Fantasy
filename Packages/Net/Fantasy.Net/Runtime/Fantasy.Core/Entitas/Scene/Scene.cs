@@ -150,18 +150,7 @@ namespace Fantasy
 
             if (sceneType > 0)
             {
-                switch (sceneSubType)
-                {
-                    case 1:
-                    {
-                        break;
-                    }
-                    default:
-                    {
-                        await EventSystem.Instance.PublishAsync(new OnCreateScene(scene));
-                        break;
-                    }
-                }
+                await EventSystem.Instance.PublishAsync(new OnCreateScene(scene));
             }
 
             Scenes.Add(scene);
