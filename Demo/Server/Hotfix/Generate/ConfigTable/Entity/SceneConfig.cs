@@ -85,7 +85,7 @@ namespace Fantasy
 		[ProtoMember(5, IsRequired  = true)]
 		public string SceneType { get; set; } // Scene类型
 		[ProtoMember(6, IsRequired  = true)]
-		public string Name { get; set; } // 名称
+		public string SceneSubType { get; set; } // Scene子类型
 		[ProtoMember(7, IsRequired  = true)]
 		public string NetworkProtocol { get; set; } // 协议类型
 		[ProtoMember(8, IsRequired  = true)]

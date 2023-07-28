@@ -1,8 +1,6 @@
 #if FANTASY_NET
 using Fantasy.Core.DataBase;
 using Fantasy.Helper;
-#pragma warning disable CS8603
-#pragma warning disable CS8618
 
 namespace Fantasy.Core
 {

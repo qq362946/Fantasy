@@ -5,6 +5,11 @@ namespace Fantasy.Helper
 {
     public static class FileHelper
     {
+        public static string GetFullPath(string relativePath)
+        {
+            return Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), relativePath));
+        }
+        
         /// <summary>
         /// 拷贝文件到目标路径、如果目标目录不存在会自动创建目录
         /// </summary>

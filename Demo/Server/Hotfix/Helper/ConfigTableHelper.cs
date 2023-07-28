@@ -70,8 +70,10 @@ public static class ConfigTableHelper
             return new SceneConfigInfo()
             {
                 Id = sceneConfig.Id,
-                SceneType = sceneConfig.SceneType,
-                Name = sceneConfig.Name,
+                SceneType = SceneType.SceneTypeDic[sceneConfig.SceneType],
+                SceneSubType = SceneSubType.SceneSubTypeDic[sceneConfig.SceneSubType],
+                SceneTypeStr = sceneConfig.SceneType,
+                SceneSubTypeStr = sceneConfig.SceneSubType,
                 NetworkProtocol = sceneConfig.NetworkProtocol,
                 ServerConfigId = sceneConfig.ServerConfigId,
                 WorldId = sceneConfig.WorldId,
@@ -122,8 +124,10 @@ public static class ConfigTableHelper
                 {
                     Id = sceneConfig.Id,
                     EntityId = sceneConfig.EntityId,
-                    SceneType = sceneConfig.SceneType,
-                    Name = sceneConfig.Name,
+                    SceneType = SceneType.SceneTypeDic[sceneConfig.SceneType],
+                    SceneSubType = SceneSubType.SceneSubTypeDic[sceneConfig.SceneSubType],
+                    SceneTypeStr = sceneConfig.SceneType,
+                    SceneSubTypeStr = sceneConfig.SceneSubType,
                     NetworkProtocol = sceneConfig.NetworkProtocol,
                     ServerConfigId = sceneConfig.ServerConfigId,
                     WorldId = sceneConfig.WorldId,

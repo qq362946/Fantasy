@@ -138,7 +138,7 @@ namespace Fantasy
                 Id = serverConfigId
             };
 
-            server.Scene = await Scene.Create(server,null,$"ServerScene{serverConfigId}");
+            server.Scene = await Scene.Create(server);
 
             // 创建网络、Server下的网络只能是内部网络、外部网络是在Scene中定义
             
@@ -153,7 +153,7 @@ namespace Fantasy
             
             foreach (var sceneConfig in sceneInfos)
             {
-                await Scene.Create(server, sceneConfig.SceneType, sceneConfig.Name, sceneConfig.EntityId,
+                await Scene.Create(server, sceneConfig.SceneType, sceneConfig.SceneSubType, sceneConfig.EntityId,
                     sceneConfig.WorldId, sceneConfig.NetworkProtocol, outerBindIp, sceneConfig.OuterPort);
             }
 

@@ -16,7 +16,13 @@ public class OnCreateScene : AsyncEventSystem<Fantasy.OnCreateScene>
         var scene = self.Scene;
         switch (scene.SceneType)
         {
-            case "Gate":
+            case SceneType.Addressable:
+            {
+                // 挂载管理Address地址组件
+                scene.AddComponent<AddressableManageComponent>();
+                break;
+            }
+            case SceneType.Gate:
             {
                 break;
             }

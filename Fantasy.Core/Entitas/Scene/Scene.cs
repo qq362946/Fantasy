@@ -6,20 +6,18 @@ using Fantasy.Helper;
 using Fantasy.Core;
 using Fantasy.Core.DataBase;
 #endif
-#pragma warning disable CS8625
-#pragma warning disable CS8618
 namespace Fantasy
 {
-    public sealed class Scene : Entity, INotSupportedPool
+    public class Scene : Entity, INotSupportedPool
     {
-        public string Name { get; private set; }
         public uint LocationId { get; private set; }
 #if FANTASY_UNITY
         public Session Session { get; private set; }
         public SceneConfigInfo SceneInfo { get; private set; }
 #endif
 #if FANTASY_NET
-        public string SceneType { get; private set; }
+        public int SceneType { get; private set; }
+        public int SceneSubType { get; private set; }
         public World? World { get; private set; }
         public Server Server { get; private set; }
 #endif
@@ -31,13 +29,13 @@ namespace Fantasy
             {
                 return;
             }
-
-            Name = null;
+            
             LocationId = 0;
 #if FANTASY_NET
             World = null;
             Server = null;
-            SceneType = null;
+            SceneType = 0;
+            SceneSubType = 0;
 #endif
 #if FANTASY_UNITY
             SceneInfo = null;
@@ -59,13 +57,12 @@ namespace Fantasy
             }
         }
 #if FANTASY_UNITY
-        public static Scene Create(string name)
+        public static Scene Create()
         {
             var sceneId = IdFactory.NextRunTimeId();
             var scene = Create<Scene>(sceneId, sceneId);
             scene.Scene = scene;
             scene.Parent = scene;
-            scene.Name = name;
             Scenes.Add(scene);
             return scene;
         }
@@ -82,16 +79,16 @@ namespace Fantasy
         /// 创建一个Scene、但这个Scene是在某个Scene下面的Scene
         /// </summary>
         /// <param name="scene"></param>
-        /// <param name="sceneName"></param>
         /// <param name="sceneType"></param>
+        /// <param name="sceneSubType"></param>
         /// <returns></returns>
-        public static async FTask<Scene> Create(Scene scene, string sceneType, string sceneName)
+        public static async FTask<T> Create<T>(Scene scene, int sceneType, int sceneSubType) where T : Scene, new()
         {
-            var newScene = Create<Scene>(scene);
+            var newScene = Create<T>(scene);
             newScene.Scene = scene;
             newScene.Parent = scene;
-            newScene.Name = sceneName;
             newScene.SceneType = sceneType;
+            newScene.SceneSubType = sceneSubType;
             newScene.Server = scene.Server;
             newScene.LocationId = scene.Server.Id;
             
@@ -99,14 +96,14 @@ namespace Fantasy
             {
                 newScene.World = scene.World;
             }
-            
-            if (!string.IsNullOrEmpty(sceneType))
+
+            if (sceneType > 0)
             {
                 await EventSystem.Instance.PublishAsync(new OnCreateScene(scene));
             }
-            
+
             Scenes.Add(scene);
-            return scene;
+            return newScene;
         }
 
         /// <summary>
@@ -114,14 +111,14 @@ namespace Fantasy
         /// </summary>
         /// <param name="server"></param>
         /// <param name="sceneType"></param>
-        /// <param name="sceneName"></param>
+        /// <param name="sceneSubType"></param>
         /// <param name="sceneId"></param>
         /// <param name="worldId"></param>
         /// <param name="networkProtocol"></param>
         /// <param name="outerBindIp"></param>
         /// <param name="outerPort"></param>
         /// <returns></returns>
-        public static async FTask<Scene> Create(Server server, string sceneType, string sceneName, long sceneId =0, uint worldId =0, string networkProtocol = null, string outerBindIp = null, int outerPort = 0)
+        public static async FTask<Scene> Create(Server server, int sceneType = 0, int sceneSubType = 0, long sceneId = 0, uint worldId = 0, string networkProtocol = null, string outerBindIp = null, int outerPort = 0)
         {
             if (sceneId == 0)
             {
@@ -131,8 +128,8 @@ namespace Fantasy
             var scene = Create<Scene>(sceneId, sceneId);
             scene.Scene = scene;
             scene.Parent = scene;
-            scene.Name = sceneName;
             scene.SceneType = sceneType;
+            scene.SceneSubType = sceneSubType;
             scene.Server = server;
             scene.LocationId = server.Id;
 
@@ -151,22 +148,9 @@ namespace Fantasy
                 serverNetworkComponent.Initialize(networkProtocolType, NetworkTarget.Outer, address);
             }
 
-            if (!string.IsNullOrEmpty(sceneType))
+            if (sceneType > 0)
             {
-                switch (sceneType)
-                {
-                    case "Addressable":
-                    {
-                        scene.AddComponent<AddressableManageComponent>();
-                        break;
-                    }
-                    default:
-                    {
-                        // 没有SceneType目前只有代码创建的Scene才会这样、目前只有Server的Scene是这样
-                        await EventSystem.Instance.PublishAsync(new OnCreateScene(scene));
-                        break;
-                    }
-                }
+                await EventSystem.Instance.PublishAsync(new OnCreateScene(scene));
             }
 
             Scenes.Add(scene);
