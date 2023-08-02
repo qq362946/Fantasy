@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Fantasy.Core.Network
@@ -7,16 +8,30 @@ namespace Fantasy.Core.Network
         private readonly Dictionary<long, long> _addressable = new();
         private readonly Dictionary<long, WaitCoroutineLock> _locks = new();
         private readonly CoroutineLockQueueType _addressableLock = new CoroutineLockQueueType("AddressableLock");
-        
-        public async FTask Add(long addressableId, long routeId)
+
+        public async FTask Add(long addressableId, long routeId, bool isLock)
         {
-            using (await _addressableLock.Lock(addressableId))
+            WaitCoroutineLock waitCoroutineLock = null;
+            try
             {
+                if (isLock)
+                {
+                    waitCoroutineLock = await _addressableLock.Lock(addressableId);
+                }
+                
                 _addressable[addressableId] = routeId;
                 Log.Debug($"AddressableManageComponent Add addressableId:{addressableId} routeId:{routeId}");
             }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+            finally
+            {
+                waitCoroutineLock?.Dispose();
+            }
         }
-        
+
         public async FTask<long> Get(long addressableId)
         {
             using (await _addressableLock.Lock(addressableId))
@@ -31,6 +46,7 @@ namespace Fantasy.Core.Network
             using (await _addressableLock.Lock(addressableId))
             {
                 _addressable.Remove(addressableId);
+                Log.Debug($"Addressable Remove addressableId: {addressableId} _addressable:{_addressable.Count}");
             }
         }
 

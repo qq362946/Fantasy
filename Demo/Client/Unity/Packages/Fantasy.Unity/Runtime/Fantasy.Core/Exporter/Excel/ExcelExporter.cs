@@ -735,7 +735,7 @@ public sealed class ExcelExporter
 
                 return;
             }
-            case "AttrConfig":
+            case "IntDictionaryConfig":
             {
                 if (value.Trim() == "" || value.Trim() == "{}")
                 {
@@ -743,7 +743,21 @@ public sealed class ExcelExporter
                     return;
                 }
 
-                var attr = new AttrConfig {KV = JsonConvert.DeserializeObject<Dictionary<int, int>>(value)};
+                var attr = new IntDictionaryConfig {Dic = JsonConvert.DeserializeObject<Dictionary<int, int>>(value)};
+
+                propertyInfo.SetValue(config, attr);
+
+                return;
+            }
+            case "StringDictionaryConfig":
+            {
+                if (value.Trim() == "" || value.Trim() == "{}")
+                {
+                    propertyInfo.SetValue(config, null);
+                    return;
+                }
+
+                var attr = new StringDictionaryConfig {Dic = JsonConvert.DeserializeObject<Dictionary<int, string>>(value)};
 
                 propertyInfo.SetValue(config, attr);
 

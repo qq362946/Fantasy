@@ -2,6 +2,9 @@
 using System.Buffers;
 using Fantasy.DataStructure;
 using Fantasy.Helper;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
 namespace Fantasy.Core.Network;
@@ -200,7 +203,17 @@ public sealed class InnerPacketParser : APacketParser
         {
             if (message is IBsonMessage)
             {
-                MongoHelper.Instance.SerializeTo(message, memoryStream);
+                try
+                {
+                    
+                    MongoHelper.Instance.SerializeTo(message, memoryStream);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                
             }
             else
             {

@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using Fantasy.DataStructure;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8618
 #pragma warning disable CS8625
 #pragma warning disable CS8601
@@ -279,9 +280,59 @@ namespace Fantasy
         
         #endregion
 
-        #region GetComponent
+#if FANTASY_NET
+        #region ForEach
 
-        public DictionaryPool<Type, Entity> GetTree => _tree;
+        public IEnumerable<Entity> ForEachSingleCollection
+        {
+            get
+            {
+                foreach (var (_, treeEntity) in _tree)
+                {
+                    if (treeEntity is not ISupportedSingleCollection)
+                    {
+                        continue;
+                    }
+
+                    yield return treeEntity;
+                }
+            }
+        }
+
+        public IEnumerable<Entity> ForEachTransfer
+        {
+            get
+            {
+                if (_tree != null)
+                {
+                    foreach (var (_, treeEntity) in _tree)
+                    {
+                        if (treeEntity is ISupportedSingleCollection || treeEntity is ISupportedTransfer)
+                        {
+                            yield return treeEntity;
+                        }
+                    }
+                }
+
+                if (_multiDb != null)
+                {
+                    foreach (var treeEntity in _multiDb)
+                    {
+                        if (treeEntity is not ISupportedTransfer)
+                        {
+                            continue;
+                        }
+
+                        yield return treeEntity;
+                    }
+                }
+            }
+        }
+
+        #endregion
+#endif
+
+        #region GetComponent
 
         public T GetComponent<T>() where T : Entity, new()
         {

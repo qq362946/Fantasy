@@ -31,7 +31,6 @@ namespace Fantasy.Core.Network
             try
             {
                 DisposePackInfo = false;
-
                 switch (packInfo.RouteTypeCode)
                 {
                     case CoreRouteType.Route:
@@ -120,7 +119,7 @@ namespace Fantasy.Core.Network
             }
             finally
             {
-                packInfo.Dispose();
+                NetworkThread.Instance.SynchronizationContext.Post(packInfo.Dispose);
             }
 
             throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode} messageType:{messageType}");

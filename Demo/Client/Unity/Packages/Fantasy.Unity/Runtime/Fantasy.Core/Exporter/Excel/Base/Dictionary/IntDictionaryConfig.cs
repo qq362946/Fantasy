@@ -4,28 +4,29 @@ using ProtoBuf;
 namespace Fantasy.Core
 {
     [ProtoContract]
-    public sealed class AttrConfig
+    public class IntDictionaryConfig
     {
-        [ProtoMember(1, IsRequired = true)] public Dictionary<int, int> KV;
-
+        [ProtoMember(1, IsRequired = true)] 
+        public Dictionary<int, int> Dic;
+        
         public int this[int key] => GetValue(key);
 
         public bool TryGetValue(int key, out int value)
         {
-            value = 0;
+            value = default;
 
-            if (!KV.ContainsKey(key))
+            if (!Dic.ContainsKey(key))
             {
                 return false;
             }
         
-            value = KV[key];
+            value = Dic[key];
             return true;
         }
 
         private int GetValue(int key)
         {
-            return KV.ContainsKey(key) ? KV[key] : 0;
+            return Dic.TryGetValue(key, out var value) ? value : default;
         }
     }
 }

@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.fantasy.unity": "file:/./Packages/Fantasy.Unity",
-    "com.unity.collab-proxy": "2.0.4",
+    "com.unity.collab-proxy": "2.0.5",
     "com.unity.feature.development": "1.0.1",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.7.4",

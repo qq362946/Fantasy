@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Bson.Serialization.Serializers;
 using Unity.Mathematics;
 
 namespace Fantasy.Helper;
@@ -20,6 +21,7 @@ public sealed class MongoHelper : Singleton<MongoHelper>
         BsonSerializer.TryRegisterSerializer(typeof(float3), new StructBsonSerialize<float3>());
         BsonSerializer.TryRegisterSerializer(typeof(float4), new StructBsonSerialize<float4>());
         BsonSerializer.TryRegisterSerializer(typeof(quaternion), new StructBsonSerialize<quaternion>());
+        BsonSerializer.RegisterSerializer(new ObjectSerializer(x => true));
     }
 
     protected override void OnLoad(int assemblyName)
@@ -134,8 +136,8 @@ public sealed class MongoHelper : Singleton<MongoHelper>
 
     public void SerializeTo<T>(T t, MemoryStream stream)
     {
-        var bytes = t.ToBson();
-        stream.Write(bytes, 0, bytes.Length);
+        using var writer = new BsonBinaryWriter(stream, BsonBinaryWriterSettings.Defaults);
+        BsonSerializer.Serialize(writer, typeof(T), t);
     }
 
     public T Clone<T>(T t)

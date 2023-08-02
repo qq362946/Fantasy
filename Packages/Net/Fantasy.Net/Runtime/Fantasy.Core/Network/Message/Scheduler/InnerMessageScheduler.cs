@@ -10,7 +10,6 @@ namespace Fantasy.Core.Network
             try
             {
                 DisposePackInfo = false;
-
                 switch (packInfo.ProtocolCode)
                 {
                     case >= Opcode.InnerBsonRouteResponse:
@@ -103,7 +102,7 @@ namespace Fantasy.Core.Network
             }
             finally
             {
-                packInfo.Dispose();
+                NetworkThread.Instance.SynchronizationContext.Post(packInfo.Dispose);
             }
         }
 

@@ -64,6 +64,14 @@ namespace Fantasy.Helper
             LoadAssembly(assemblyName, assembly);
         }
 
+        public static IEnumerable<int> ForEachAssemblyName()
+        {
+            foreach (var (key, _) in AssemblyList)
+            {
+                yield return key;
+            }
+        }
+
         public static IEnumerable<Type> ForEach()
         {
             foreach (var (_, assemblyInfo) in AssemblyList)
