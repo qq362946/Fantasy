@@ -82,6 +82,7 @@ namespace Fantasy.Helper
             {
                 case AssetBundleUpdateState.NoUpdateRequired:
                 {
+                    UpdateAssetBundleManifest();
                     yield return AssetBundleCheckStage.Complete;
                     yield break;
                 }
@@ -227,7 +228,7 @@ namespace Fantasy.Helper
                 if (!assetBundle.isStreamedSceneAssetBundle)
                 {
                     var assets = assetBundle.LoadAllAssets();
-                
+                    
                     foreach (var asset in assets)
                     {
                         AddResource(assetBundleName, asset.name, asset);
@@ -417,11 +418,12 @@ namespace Fantasy.Helper
 
         private static void UpdateAssetBundleManifest()
         {
-#if !UNITY_EDITOR
-            LoadOneBundle(Define.AssetBundleManifestName);
-            _assetBundleManifestObject = GetAsset<AssetBundleManifest>(Define.AssetBundleManifestName, "AssetBundleManifest");
-            UnloadBundle(Define.AssetBundleManifestName, false);
-#endif
+            if (!Define.IsEditor)
+            {
+                LoadOneBundle(Define.AssetBundleManifestName);
+                _assetBundleManifestObject = GetAsset<AssetBundleManifest>(Define.AssetBundleManifestName, "AssetBundleManifest");
+                UnloadBundle(Define.AssetBundleManifestName, false);
+            }
         }
 
         private static async FTask<byte[]> GetStreamingAssets(string path)
