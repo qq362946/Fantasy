@@ -735,6 +735,15 @@ public sealed class ExcelExporter
 
                 return;
             }
+            case "uint[]":
+            {
+                if (value != "0")
+                {
+                    propertyInfo.SetValue(config, value.Split(",").Select(d => Convert.ToUInt32(d)).ToArray());
+                }
+
+                return;
+            }
             case "IntDictionaryConfig":
             {
                 if (value.Trim() == "" || value.Trim() == "{}")

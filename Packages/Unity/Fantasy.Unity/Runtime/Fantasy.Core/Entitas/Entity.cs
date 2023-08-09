@@ -334,6 +334,11 @@ namespace Fantasy
 
         #region GetComponent
 
+        public T GetParent<T>() where T : Entity, new()
+        {
+            return (T)Parent;
+        }
+
         public T GetComponent<T>() where T : Entity, new()
         {
             return GetComponent(typeof(T)) as T;
