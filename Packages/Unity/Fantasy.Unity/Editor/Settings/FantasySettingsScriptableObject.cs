@@ -9,7 +9,7 @@ namespace Fantasy.Editor
     {
         [FormerlySerializedAs("AutoCopyAssembly")] 
         [Header("自动拷贝程序集到HotUpdatePath目录中")]
-        public bool autoCopyAssembly = true;
+        public bool autoCopyAssembly = false;
         [FormerlySerializedAs("UIGenerateSavePath")] 
         [Header("UI生层代码路径")]
         public string uiGenerateSavePath;
