@@ -1,0 +1,471 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Fantasy 命名空间
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Fantasy 命名空间
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy">
+
+  <h1 id="Fantasy" data-uid="Fantasy" class="text-break">Fantasy 命名空间
+</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+类
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AProto.html">AProto</a></dt>
+      <dd><p>提供 ProtoBuf 序列化和反序列化支持的抽象基类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AppDefine.html">AppDefine</a></dt>
+      <dd><p>控制台程序定义类型</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Application.html">Application</a></dt>
+      <dd><p>Fantasy 应用程序入口类型</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AsyncEventSystem-1.html">AsyncEventSystem&lt;T&gt;</a></dt>
+      <dd><p>异步事件系统的抽象基类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AwakeSystem-1.html">AwakeSystem&lt;T&gt;</a></dt>
+      <dd><p>表示用于实现实体唤醒逻辑的抽象基类。继承此类的子类用于处理特定类型的实体的唤醒操作。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.CommandLineOptions.html">CommandLineOptions</a></dt>
+      <dd><p>命令行选项类，用于解析命令行参数。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ConcurrentPool-1.html">ConcurrentPool&lt;T&gt;</a></dt>
+      <dd><p>线程安全的静态通用对象池。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.DeserializeSystem-1.html">DeserializeSystem&lt;T&gt;</a></dt>
+      <dd><p>表示一个用于反序列化特定类型实体的系统抽象类，扩展自 <a class="xref" href="Fantasy.IDeserializeSystem.html">IDeserializeSystem</a>。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.DestroySystem-1.html">DestroySystem&lt;T&gt;</a></dt>
+      <dd><p>表示用于实现实体销毁逻辑的抽象基类。继承此类的子类用于处理特定类型的实体的销毁操作。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.EntitiesSystem.html">EntitiesSystem</a></dt>
+      <dd><p>实体系统管理器，用于管理各种实体系统的生命周期和更新</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Entity.html">Entity</a></dt>
+      <dd><p>实体基类，用于实体创建、回收、获取，和组件操作</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.EventSystem.html">EventSystem</a></dt>
+      <dd><p>事件系统类，用于加卸载程序集，发布和订阅事件。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.EventSystem-1.html">EventSystem&lt;T&gt;</a></dt>
+      <dd><p>事件系统的抽象基类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.FCancellationToken.html">FCancellationToken</a></dt>
+      <dd><p>表示一个自定义的取消标记，允许添加和移除取消动作，并可用于取消一组注册的动作。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+      <dd><p>轻量级异步任务类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.FTask-1.html">FTask&lt;T&gt;</a></dt>
+      <dd><p>表示一个轻量级的异步任务（Future Task），提供类似于 Task 的异步编程模型，但仅适用于某些简单的异步操作。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableAdd_Request.html">I_AddressableAdd_Request</a></dt>
+      <dd><p>添加一个可寻址地址请求</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableAdd_Response.html">I_AddressableAdd_Response</a></dt>
+      <dd><p>添加一个可寻址地址响应</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableGet_Request.html">I_AddressableGet_Request</a></dt>
+      <dd><p>查询一个可寻址请求</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableGet_Response.html">I_AddressableGet_Response</a></dt>
+      <dd><p>查询一个可寻址响应</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableLock_Request.html">I_AddressableLock_Request</a></dt>
+      <dd><p>锁定一个可寻址请求。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableLock_Response.html">I_AddressableLock_Response</a></dt>
+      <dd><p>锁定一个可寻址响应。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableRemove_Request.html">I_AddressableRemove_Request</a></dt>
+      <dd><p>删除一个可寻址请求</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableRemove_Response.html">I_AddressableRemove_Response</a></dt>
+      <dd><p>删除一个可寻址响应</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableUnLock_Request.html">I_AddressableUnLock_Request</a></dt>
+      <dd><p>解锁一个可寻址地址请求。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableUnLock_Response.html">I_AddressableUnLock_Response</a></dt>
+      <dd><p>解锁一个可寻址地址响应。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Log.html">Log</a></dt>
+      <dd><p>提供日志记录功能的静态类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.MachineConfigInfo.html">MachineConfigInfo</a></dt>
+      <dd><p>机器配置信息的类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.NLog.html">NLog</a></dt>
+      <dd><p>使用 NLog 实现的日志记录器。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.PingRequest.html">PingRequest</a></dt>
+      <dd><p>表示Ping请求消息的类，实现了 <a class="xref" href="Fantasy.Core.Network.IRequest.html">IRequest</a> 接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.PingResponse.html">PingResponse</a></dt>
+      <dd><p>表示Ping响应消息的类，实现了 <a class="xref" href="Fantasy.Core.Network.IResponse.html">IResponse</a> 接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.PoolCore-1.html">PoolCore&lt;T&gt;</a></dt>
+      <dd><p>泛型对象池核心类，用于创建和管理可重复使用的对象实例。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.PoolWithDisposable-1.html">PoolWithDisposable&lt;T&gt;</a></dt>
+      <dd><p>静态通用对象池，用于存储实现了 IDisposable 接口的对象。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Pool-1.html">Pool&lt;T&gt;</a></dt>
+      <dd><p>静态通用对象池。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Response.html">Response</a></dt>
+      <dd><p>表示响应消息的基类，实现了 <a class="xref" href="Fantasy.Core.Network.IResponse.html">IResponse</a> 接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RouteResponse.html">RouteResponse</a></dt>
+      <dd><p>表示路由响应消息的类，实现了 <a class="xref" href="Fantasy.Core.Network.IRouteResponse.html">IRouteResponse</a> 接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Scene.html">Scene</a></dt>
+      <dd><p>表示一个场景实体，用于创建与管理特定的游戏场景信息。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SceneConfigInfo.html">SceneConfigInfo</a></dt>
+      <dd><p>场景配置信息的类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Server.html">Server</a></dt>
+      <dd><p>网络中的服务器。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ServerConfigInfo.html">ServerConfigInfo</a></dt>
+      <dd><p>服务器配置信息。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SingleCollectionAttribute.html">SingleCollectionAttribute</a></dt>
+      <dd><p>表示用于指定实体的单一集合存储属性。此属性用于配合 <a class="xref" href="Fantasy.ISupportedSingleCollection.html">ISupportedSingleCollection</a> 接口使用，
+用于定义实体属于哪个父实体的子集合，以及在数据库中使用的集合名称。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ThreadSynchronizationContext.html">ThreadSynchronizationContext</a></dt>
+      <dd><p>一个用于线程同步的上下文。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.TimerAction.html">TimerAction</a></dt>
+      <dd><p>计时器操作类，用于管理定时器相关信息。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.TimerHandler-1.html">TimerHandler&lt;T&gt;</a></dt>
+      <dd><p>计时器抽象类，提供了一个基础框架，用于创建处理计时器事件的具体类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.TimerScheduler.html">TimerScheduler</a></dt>
+      <dd><p>计时器调度器类，用于管理计时器任务的调度。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.TimerSchedulerCore.html">TimerSchedulerCore</a></dt>
+      <dd><p>计时器调度核心类，提供计时器的核心功能。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.UpdateSystem-1.html">UpdateSystem&lt;T&gt;</a></dt>
+      <dd><p>表示实体更新系统的抽象基类。继承此类可以定义特定类型实体的更新逻辑。</p>
+</dd>
+    </dl>
+    <h3 id="structs">
+结构
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AsyncFTaskCompletedMethodBuilder.html">AsyncFTaskCompletedMethodBuilder</a></dt>
+      <dd><p>用于构建已完成的异步任务方法的构建器。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AsyncFTaskMethodBuilder.html">AsyncFTaskMethodBuilder</a></dt>
+      <dd><p>用于异步任务方法的构建器。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AsyncFTaskMethodBuilder-1.html">AsyncFTaskMethodBuilder&lt;T&gt;</a></dt>
+      <dd><p>表示用于构建泛型异步任务方法的构建器。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.EntityReference-1.html">EntityReference&lt;T&gt;</a></dt>
+      <dd><p>实体引用只读结构，用作对 Entity 实例的引用。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.FTaskCompleted.html">FTaskCompleted</a></dt>
+      <dd><p>已完成的异步任务结构。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OnCreateScene.html">OnCreateScene</a></dt>
+      <dd><p>表示当创建新场景时引发的事件数据结构。</p>
+</dd>
+    </dl>
+    <h3 id="interfaces">
+接口
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IAsyncEvent.html">IAsyncEvent</a></dt>
+      <dd><p>定义异步事件的接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IAwakeSystem.html">IAwakeSystem</a></dt>
+      <dd><p>定义实体的唤醒系统接口。当需要在实体唤醒时执行特定的逻辑时，应实现此接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IDeserializeSystem.html">IDeserializeSystem</a></dt>
+      <dd><p>表示一个用于反序列化的系统接口，扩展自 <a class="xref" href="Fantasy.IEntitiesSystem.html">IEntitiesSystem</a>。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IDestroySystem.html">IDestroySystem</a></dt>
+      <dd><p>定义实体销毁系统接口。当需要在实体销毁时执行特定的逻辑时，应实现此接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IEntitiesSystem.html">IEntitiesSystem</a></dt>
+      <dd><p>定义实体系统的接口。实体系统用于管理特定类型的实体，执行与该类型实体相关的逻辑。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IEvent.html">IEvent</a></dt>
+      <dd><p>定义事件的接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ILog.html">ILog</a></dt>
+      <dd><p>定义日志记录功能的接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.INotSupportedPool.html">INotSupportedPool</a></dt>
+      <dd><p>Entity不支持对象池创建和回收</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ISingleCollectionRoot.html">ISingleCollectionRoot</a></dt>
+      <dd><p>Entity保存到数据库的时候会根据子组件设置分离存储特性分表存储在不同的集合表中</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ISupportedDataBase.html">ISupportedDataBase</a></dt>
+      <dd><p>Entity支持数据库</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ISupportedMultiEntity.html">ISupportedMultiEntity</a></dt>
+      <dd><p>支持再一个组件里添加多个同类型组件</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ISupportedSingleCollection.html">ISupportedSingleCollection</a></dt>
+      <dd><p>定义实体支持单一集合存储的接口。当实体需要单独存储在一个集合中，并且在保存到数据库时不会与父组件一起保存在同一个集合中时，应实现此接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ISupportedTransfer.html">ISupportedTransfer</a></dt>
+      <dd><p>Entity支持传送</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IUpdateSystem.html">IUpdateSystem</a></dt>
+      <dd><p>定义实体更新系统的接口。实体更新系统用于管理特定类型的实体，在每次更新时执行与该类型实体相关的逻辑。</p>
+</dd>
+    </dl>
+    <h3 id="enums">
+枚举
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.STaskStatus.html">STaskStatus</a></dt>
+      <dd><p>表示异步任务的状态。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.TimerType.html">TimerType</a></dt>
+      <dd><p>枚举对象TimerType</p>
+</dd>
+    </dl>
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

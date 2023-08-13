@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>EventSystem 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="EventSystem 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.EventSystem">
+
+
+
+  <h1 id="Fantasy_EventSystem" data-uid="Fantasy.EventSystem" class="text-break">
+    EventSystem 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>事件系统类，用于加卸载程序集，发布和订阅事件。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class EventSystem : Singleton&lt;EventSystem&gt;, ISingleton, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Fantasy.Helper.Singleton-1.html">Singleton</a>&lt;<a class="xref" href="Fantasy.EventSystem.html">EventSystem</a>&gt;</div>
+      <div><span class="xref">EventSystem</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>实现</dt>
+    <dd>
+      <div><a class="xref" href="Fantasy.Helper.ISingleton.html">ISingleton</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Fantasy.Helper.Singleton-1.html#Fantasy_Helper_Singleton_1_Initialize">Singleton&lt;EventSystem&gt;.Initialize()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Helper.Singleton-1.html#Fantasy_Helper_Singleton_1_IsDisposed">Singleton&lt;EventSystem&gt;.IsDisposed</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Helper.Singleton-1.html#Fantasy_Helper_Singleton_1_Instance">Singleton&lt;EventSystem&gt;.Instance</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">构造函数
+</h2>
+
+
+  <a id="Fantasy_EventSystem__ctor_" data-uid="Fantasy.EventSystem.#ctor*"></a>
+
+  <h3 id="Fantasy_EventSystem__ctor" data-uid="Fantasy.EventSystem.#ctor">
+  EventSystem()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EventSystem()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_EventSystem_Dispose_" data-uid="Fantasy.EventSystem.Dispose*"></a>
+
+  <h3 id="Fantasy_EventSystem_Dispose" data-uid="Fantasy.EventSystem.Dispose">
+  Dispose()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>清理资源和事件订阅</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_EventSystem_OnLoad_" data-uid="Fantasy.EventSystem.OnLoad*"></a>
+
+  <h3 id="Fantasy_EventSystem_OnLoad_System_Int32_" data-uid="Fantasy.EventSystem.OnLoad(System.Int32)">
+  OnLoad(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>在程序集加载时，遍历寻找并初始化事件。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnLoad(int assemblyName)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>assemblyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>程序集名</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_EventSystem_OnUnLoad_" data-uid="Fantasy.EventSystem.OnUnLoad*"></a>
+
+  <h3 id="Fantasy_EventSystem_OnUnLoad_System_Int32_" data-uid="Fantasy.EventSystem.OnUnLoad(System.Int32)">
+  OnUnLoad(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>在程序集卸载时，移除相关事件。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnUnLoad(int assemblyName)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>assemblyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>程序集名</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_EventSystem_PublishAsync_" data-uid="Fantasy.EventSystem.PublishAsync*"></a>
+
+  <h3 id="Fantasy_EventSystem_PublishAsync__1___0_" data-uid="Fantasy.EventSystem.PublishAsync``1(``0)">
+  PublishAsync&lt;TEventData&gt;(TEventData)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>异步发布一个值类型的事件数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FTask PublishAsync&lt;TEventData&gt;(TEventData eventData) where TEventData : struct</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>eventData</code> <span class="xref">TEventData</span></dt>
+    <dd><p>事件数据实例。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd><p>表示异步操作的任务。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>TEventData</code></dt>
+    <dd><p>事件数据类型（值类型）。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_EventSystem_PublishAsync_" data-uid="Fantasy.EventSystem.PublishAsync*"></a>
+
+  <h3 id="Fantasy_EventSystem_PublishAsync__1___0_System_Boolean_" data-uid="Fantasy.EventSystem.PublishAsync``1(``0,System.Boolean)">
+  PublishAsync&lt;TEventData&gt;(TEventData, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>异步发布一个继承自 Entity 的事件数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FTask PublishAsync&lt;TEventData&gt;(TEventData eventData, bool isDisposed = true) where TEventData : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>eventData</code> <span class="xref">TEventData</span></dt>
+    <dd><p>事件数据实例。</p>
+</dd>
+    <dt><code>isDisposed</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>是否释放事件数据。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd><p>表示异步操作的任务。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>TEventData</code></dt>
+    <dd><p>事件数据类型（继承自 Entity）。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_EventSystem_Publish_" data-uid="Fantasy.EventSystem.Publish*"></a>
+
+  <h3 id="Fantasy_EventSystem_Publish__1___0_" data-uid="Fantasy.EventSystem.Publish``1(``0)">
+  Publish&lt;TEventData&gt;(TEventData)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>发布一个值类型的事件数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Publish&lt;TEventData&gt;(TEventData eventData) where TEventData : struct</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>eventData</code> <span class="xref">TEventData</span></dt>
+    <dd><p>事件数据实例。</p>
+</dd>
+  </dl>
+
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>TEventData</code></dt>
+    <dd><p>事件数据类型（值类型）。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_EventSystem_Publish_" data-uid="Fantasy.EventSystem.Publish*"></a>
+
+  <h3 id="Fantasy_EventSystem_Publish__1___0_System_Boolean_" data-uid="Fantasy.EventSystem.Publish``1(``0,System.Boolean)">
+  Publish&lt;TEventData&gt;(TEventData, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>发布一个继承自 Entity 的事件数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Publish&lt;TEventData&gt;(TEventData eventData, bool isDisposed = true) where TEventData : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>eventData</code> <span class="xref">TEventData</span></dt>
+    <dd><p>事件数据实例。</p>
+</dd>
+    <dt><code>isDisposed</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>是否释放事件数据。</p>
+</dd>
+  </dl>
+
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>TEventData</code></dt>
+    <dd><p>事件数据类型（继承自 Entity）。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
