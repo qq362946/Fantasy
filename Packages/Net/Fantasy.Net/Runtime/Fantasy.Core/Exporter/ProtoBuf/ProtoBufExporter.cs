@@ -4,20 +4,48 @@ using Fantasy.Core.Network;
 
 namespace Fantasy.Core;
 
+/// <summary>
+/// ProtoBuf操作码类型枚举
+/// </summary>
 public enum ProtoBufOpCodeType
 {
+    /// <summary>
+    /// 无
+    /// </summary>
     None = 0,
+    /// <summary>
+    /// 外部操作码类型
+    /// </summary>
     Outer = 1,
+    /// <summary>
+    /// 内部操作码类型
+    /// </summary>
     Inner = 2,
+    /// <summary>
+    /// 使用BSON的内部操作码类型
+    /// </summary>
     InnerBson = 3,
 }
 
+/// <summary>
+/// 操作码信息类
+/// </summary>
 public sealed class OpcodeInfo
 {
+    /// <summary>
+    /// 操作码
+    /// </summary>
     public uint Code;
+    /// <summary>
+    /// 名称
+    /// </summary>
     public string Name;
 }
 
+
+/// <summary>
+/// ProtoBuf导出器类
+/// </summary>
 public sealed class ProtoBufExporter
 {
     private uint _aMessage;
@@ -31,6 +59,9 @@ public sealed class ProtoBufExporter
     
     private readonly List<OpcodeInfo> _opcodes = new();
 
+    /// <summary>
+    /// 构造函数，用于初始化导出器
+    /// </summary>
     public ProtoBufExporter()
     {
         Console.OutputEncoding = Encoding.UTF8;
@@ -446,7 +477,10 @@ public sealed class ProtoBufExporter
                 return "null";
         }
     }
-    
+
+    /// <summary>
+    /// 加载模板
+    /// </summary>
     private void LoadTemplate()
     {
         string[] lines = File.ReadAllLines(Define.ProtoBufTemplatePath, Encoding.UTF8);

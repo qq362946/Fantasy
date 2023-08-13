@@ -1,5 +1,8 @@
 namespace Fantasy.Core.Network
 {
+    /// <summary>
+    /// 提供了一组框架内置的核心路由类型。
+    /// </summary>
     public class CoreRouteType
     {
         /// <summary>

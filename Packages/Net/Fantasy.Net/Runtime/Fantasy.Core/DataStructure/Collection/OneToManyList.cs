@@ -4,10 +4,19 @@ using System.Linq;
 
 namespace Fantasy.DataStructure
 {
+    /// <summary>
+    /// 可回收的、一对多关系的列表池。
+    /// </summary>
+    /// <typeparam name="TKey">键的类型。</typeparam>
+    /// <typeparam name="TValue">值的类型。</typeparam>
     public class OneToManyListPool<TKey, TValue> : OneToManyList<TKey, TValue>, IDisposable where TKey : notnull
     {
         private bool _isDispose;
 
+        /// <summary>
+        /// 创建一个 <see cref="OneToManyListPool{TKey, TValue}"/> 一对多关系的列表池的实例。
+        /// </summary>
+        /// <returns>创建的实例。</returns>
         public static OneToManyListPool<TKey, TValue> Create()
         {
             var list = Pool<OneToManyListPool<TKey, TValue>>.Rent();
@@ -15,6 +24,9 @@ namespace Fantasy.DataStructure
             return list;
         }
 
+        /// <summary>
+        /// 释放当前对象所占用的资源，并将对象回收到对象池中。
+        /// </summary>
         public void Dispose()
         {
             if (_isDispose)
@@ -28,12 +40,20 @@ namespace Fantasy.DataStructure
         }
     }
 
+    /// <summary>
+    /// 一对多关系的列表字典。
+    /// </summary>
+    /// <typeparam name="TKey">键的类型。</typeparam>
+    /// <typeparam name="TValue">值的类型。</typeparam>
     public class OneToManyList<TKey, TValue> : Dictionary<TKey, List<TValue>> where TKey : notnull
     {
         private readonly Queue<List<TValue>> _queue = new Queue<List<TValue>>();
         private readonly int _recyclingLimit = 120;
         private static List<TValue> _empty = new List<TValue>();
 
+        /// <summary>
+        /// 初始化一个新的 <see cref="OneToManyList{TKey, TValue}"/> 实例。
+        /// </summary>
         public OneToManyList()
         {
         }
@@ -50,6 +70,12 @@ namespace Fantasy.DataStructure
             _recyclingLimit = recyclingLimit;
         }
 
+        /// <summary>
+        /// 判断给定的键和值是否存在于列表中。
+        /// </summary>
+        /// <param name="key">要搜索的键。</param>
+        /// <param name="value">要搜索的值。</param>
+        /// <returns>如果存在则为 <see langword="true"/>，否则为 <see langword="false"/>。</returns>
         public bool Contains(TKey key, TValue value)
         {
             TryGetValue(key, out var list);
@@ -57,6 +83,11 @@ namespace Fantasy.DataStructure
             return list != null && list.Contains(value);
         }
 
+        /// <summary>
+        /// 向列表中添加指定键和值。
+        /// </summary>
+        /// <param name="key">要添加值的键。</param>
+        /// <param name="value">要添加的值。</param>
         public void Add(TKey key, TValue value)
         {
             if (!TryGetValue(key, out var list))
@@ -71,11 +102,22 @@ namespace Fantasy.DataStructure
             list.Add(value);
         }
 
+        /// <summary>
+        /// 获取指定键对应的列表中的第一个值。
+        /// </summary>
+        /// <param name="key">要获取值的键。</param>
+        /// <returns>键对应的列表中的第一个值。</returns>
         public TValue First(TKey key)
         {
             return !TryGetValue(key, out var list) ? default : list.FirstOrDefault();
         }
 
+        /// <summary>
+        /// 从列表中移除指定键和值。
+        /// </summary>
+        /// <param name="key">要移除值的键。</param>
+        /// <param name="value">要移除的值。</param>
+        /// <returns>如果成功移除则为 <see langword="true"/>，否则为 <see langword="false"/>。</returns>
         public bool RemoveValue(TKey key, TValue value)
         {
             if (!TryGetValue(key, out var list))
@@ -93,6 +135,11 @@ namespace Fantasy.DataStructure
             return isRemove;
         }
 
+        /// <summary>
+        /// 从列表中移除指定键及其关联的所有值。
+        /// </summary>
+        /// <param name="key">要移除的键。</param>
+        /// <returns>如果成功移除则为 <see langword="true"/>，否则为 <see langword="false"/>。</returns>
         public bool RemoveByKey(TKey key)
         {
             if (!TryGetValue(key, out var list))
@@ -105,6 +152,11 @@ namespace Fantasy.DataStructure
             return true;
         }
 
+        /// <summary>
+        /// 获取指定键关联的所有值的列表。
+        /// </summary>
+        /// <param name="key">要获取值的键。</param>
+        /// <returns>键关联的所有值的列表。</returns>
         public List<TValue> GetValues(TKey key)
         {
             if (TryGetValue(key, out List<TValue> list))
@@ -115,6 +167,9 @@ namespace Fantasy.DataStructure
             return _empty;
         }
 
+        /// <summary>
+        /// 清除字典中的所有键值对，并回收相关的值集合。
+        /// </summary>
         public new void Clear()
         {
             foreach (var keyValuePair in this) Recycle(keyValuePair.Value);
@@ -122,11 +177,19 @@ namespace Fantasy.DataStructure
             base.Clear();
         }
 
+        /// <summary>
+        /// 从空闲值集合队列中获取一个值集合，如果队列为空则创建一个新的值集合。
+        /// </summary>
+        /// <returns>从队列中获取的值集合。</returns>
         private List<TValue> Fetch()
         {
             return _queue.Count <= 0 ? new List<TValue>() : _queue.Dequeue();
         }
 
+        /// <summary>
+        /// 回收一个不再使用的值集合到空闲值集合队列中。
+        /// </summary>
+        /// <param name="list">要回收的值集合。</param>
         private void Recycle(List<TValue> list)
         {
             list.Clear();

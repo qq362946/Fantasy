@@ -6,16 +6,19 @@ using Fantasy.Core;
 
 namespace Fantasy;
 
+/// <summary>
+/// 命令行选项类，用于解析命令行参数。
+/// </summary>
 public class CommandLineOptions
 {
     /// <summary>
-    /// 进程Id
+    /// 进程Id，获取或设置进程的唯一标识符。
     /// </summary>
     [Option("AppId", Required = false, Default = (uint)0, HelpText = "Enter an AppId such as 1")]
     public uint AppId { get; set; }
 
     /// <summary>
-    /// App类型
+    /// App类型，获取或设置应用程序的类型。
     /// Game - 游戏服务器App
     /// Export - 导表App
     /// </summary>
@@ -23,7 +26,7 @@ public class CommandLineOptions
     public string AppType { get; set; }
 
     /// <summary>
-    /// 服务器运行模式
+    /// 服务器运行模式，获取或设置服务器的运行模式。
     /// Develop - 开发模式（所有Server都在一个进程中）
     /// Release - 发布模式（每个Server都在独立的进程中）
     /// </summary>
@@ -32,7 +35,7 @@ public class CommandLineOptions
 
 #if FANTASY_NET
     /// <summary>
-    /// 导表的类型
+    /// 导表的类型，获取或设置导表的类型。
     /// </summary>
     [Option("ExcelExportType", Required = false, Default = ExportType.None, HelpText = "Increment,All")]
     public ExportType ExportType { get; set; }

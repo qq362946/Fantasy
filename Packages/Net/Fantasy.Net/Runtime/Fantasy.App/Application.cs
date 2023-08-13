@@ -6,8 +6,16 @@ using NLog;
 
 namespace Fantasy
 {
+    /// <summary>
+    /// Fantasy 应用程序入口类型
+    /// </summary>
     public static class Application
     {
+        /// <summary>
+        /// 执行 Fantasy 应用程序的初始化操作。
+        /// </summary>
+        /// <exception cref="Exception">当命令行格式异常时抛出。</exception>
+        /// <exception cref="NotSupportedException">不支持的 AppType 类型异常。</exception>
         public static void Initialize()
         {
             // 设置默认的线程的同步上下文
@@ -64,7 +72,12 @@ namespace Fantasy
             // 加载核心程序集
             AssemblyManager.Initialize();
         }
-        
+
+        /// <summary>
+        /// 启动 Fantasy 应用程序。
+        /// 在发布模式下，只会启动一个指定的 Server。您可以创建一个专门的 Server 来管理其他 Server 的启动。
+        /// </summary>
+        /// <returns><see cref="FTask"/></returns>
         public static async FTask Start()
         {
             switch (AppDefine.Options.Mode)
@@ -90,7 +103,10 @@ namespace Fantasy
                 }
             }
         }
-        
+
+        /// <summary>
+        /// 关闭 Fantasy 应用程序，释放 SingletonSystem 中的实例和已加载的程序集。
+        /// </summary>
         public static void Close()
         {
             SingletonSystem.Dispose();

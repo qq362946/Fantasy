@@ -4,11 +4,26 @@ using Fantasy.Helper;
 
 namespace Fantasy.Core.Network
 {
+    /// <summary>
+    /// 抽象网络消息调度器基类，用于处理网络消息的调度和处理逻辑。
+    /// </summary>
     public abstract class ANetworkMessageScheduler
     {
+        /// <summary>
+        /// 标识是否需要释放消息包信息。
+        /// </summary>
         protected bool DisposePackInfo;
+        /// <summary>
+        /// 用于回复Ping消息的响应实例。
+        /// </summary>
         private readonly PingResponse _pingResponse = new PingResponse();
 
+        /// <summary>
+        /// 调度网络消息的方法。
+        /// </summary>
+        /// <param name="session">会话对象。</param>
+        /// <param name="packInfo">消息包信息。</param>
+        /// <returns>异步任务。</returns>
         public async FTask Scheduler(Session session, APackInfo packInfo)
         {
             Type messageType = null;
@@ -84,6 +99,16 @@ namespace Fantasy.Core.Network
             }
         }
 
+        /// <summary>
+        /// 内部调度网络消息的方法。
+        /// </summary>
+        /// <param name="session">会话对象。</param>
+        /// <param name="rpcId">RPC标识。</param>
+        /// <param name="routeId">路由标识。</param>
+        /// <param name="protocolCode">协议代码。</param>
+        /// <param name="routeTypeCode">路由类型代码。</param>
+        /// <param name="message">要处理的消息对象。</param>
+        /// <returns>异步任务。</returns>
         public async FTask InnerScheduler(Session session, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, object message)
         {
             var messageType = message.GetType();
@@ -123,7 +148,25 @@ namespace Fantasy.Core.Network
             }
         }
 
+        /// <summary>
+        /// 处理外部网络消息的抽象方法。
+        /// </summary>
+        /// <param name="session">会话对象。</param>
+        /// <param name="messageType">消息类型。</param>
+        /// <param name="packInfo">消息包信息。</param>
+        /// <returns>异步任务。</returns>
         protected abstract FTask Handler(Session session, Type messageType, APackInfo packInfo);
+        /// <summary>
+        /// 处理内部网络消息的抽象方法。
+        /// </summary>
+        /// <param name="session">会话对象。</param>
+        /// <param name="rpcId">RPC标识。</param>
+        /// <param name="routeId">路由标识。</param>
+        /// <param name="protocolCode">协议代码。</param>
+        /// <param name="routeTypeCode">路由类型代码。</param>
+        /// <param name="messageType">消息类型。</param>
+        /// <param name="message">要处理的消息对象。</param>
+        /// <returns>异步任务。</returns>
         protected abstract FTask InnerHandler(Session session, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, Type messageType, object message);
     }
 }

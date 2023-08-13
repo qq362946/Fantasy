@@ -13,10 +13,18 @@ using kcp2k;
 
 namespace Fantasy.Core.Network
 {
+    /// <summary>
+    /// KCP 服务端网络实现。
+    /// </summary>
     public class KCPServerNetwork : ANetwork, INetworkUpdate
     {
         #region 逻辑线程
-
+        /// <summary>
+        /// 构造函数，初始化 KCP 服务端网络实例。
+        /// </summary>
+        /// <param name="scene">场景实例。</param>
+        /// <param name="networkTarget">网络目标。</param>
+        /// <param name="address">绑定的地址和端口。</param>
         public KCPServerNetwork(Scene scene, NetworkTarget networkTarget, IPEndPoint address) : base(scene, NetworkType.Server, NetworkProtocolType.KCP, networkTarget)
         {
             _startTime = TimeHelper.Now;
@@ -41,6 +49,9 @@ namespace Fantasy.Core.Network
             });
         }
 
+        /// <summary>
+        /// 释放<see cref="KCPServerNetwork"/>实例使用的所有资源。
+        /// </summary>
         public override void Dispose()
         {
             if (IsDisposed)
@@ -105,6 +116,14 @@ namespace Fantasy.Core.Network
         private KCPSettings KcpSettings { get; set; }
         private uint TimeNow => (uint) (TimeHelper.Now - _startTime);
 
+        /// <summary>
+        /// 向指定通道发送数据，使用KCP协议。
+        /// </summary>
+        /// <param name="channelId">通道ID。</param>
+        /// <param name="rpcId">远程过程调用的ID。</param>
+        /// <param name="routeTypeOpCode">路由类型和操作码。</param>
+        /// <param name="routeId">路由ID。</param>
+        /// <param name="memoryStream">包含要发送数据的<see cref="MemoryStream"/>。</param>
         public override void Send(uint channelId, uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream)
         {
 #if FANTASY_DEVELOP
@@ -123,6 +142,14 @@ namespace Fantasy.Core.Network
             channel.Send(sendMemoryStream);
         }
 
+        /// <summary>
+        /// 向指定通道发送数据，使用KCP协议。
+        /// </summary>
+        /// <param name="channelId">通道ID。</param>
+        /// <param name="rpcId">远程过程调用的ID。</param>
+        /// <param name="routeTypeOpCode">路由类型和操作码。</param>
+        /// <param name="routeId">路由ID。</param>
+        /// <param name="message">包含要发送数据的对象。</param>
         public override void Send(uint channelId, uint rpcId, long routeTypeOpCode, long routeId, object message)
         {
 #if FANTASY_DEVELOP
@@ -141,6 +168,11 @@ namespace Fantasy.Core.Network
             channel.Send(memoryStream);
         }
 
+        /// <summary>
+        /// 发送指定通道的数据，以重复通道ID的方式。
+        /// </summary>
+        /// <param name="channelId">通道ID。</param>
+        /// <param name="clientEndPoint">客户端终结点。</param>
         private void SendToRepeatChannelId(uint channelId, EndPoint clientEndPoint)
         {
 #if FANTASY_DEVELOP
@@ -154,7 +186,10 @@ namespace Fantasy.Core.Network
             _sendBuff.WriteTo(1, channelId);
             _socket.SendTo(_sendBuff, 0, 5, SocketFlags.None, clientEndPoint);
         }
-        
+
+        /// <summary>
+        /// 接收来自客户端的数据。
+        /// </summary>
         private void Receive()
         {
 #if FANTASY_DEVELOP
@@ -164,17 +199,20 @@ namespace Fantasy.Core.Network
                 return;
             }
 #endif
+            // 循环接收数据，直到没有数据可用
             while (_socket != null && _socket.Available > 0)
             {
                 try
                 {
+                    // 接收数据并更新客户端终结点
                     var receiveLength = _socket.ReceiveFrom(_rawReceiveBuffer, ref _clientEndPoint);
                     
                     if (receiveLength < 1)
                     {
                         continue;
                     }
-                    
+
+                    // 解析数据包头部
                     var header = (KcpHeader) _rawReceiveBuffer[0];
                     var channelId = BitConverter.ToUInt32(_rawReceiveBuffer, 1);
 
@@ -184,13 +222,14 @@ namespace Fantasy.Core.Network
                         {
                             if (receiveLength != 5)
                             {
-                                break;
-                            }
+                                break; // 数据长度异常，忽略处理
+                                }
 
                             if (_pendingConnection.TryGetValue(channelId, out var channel))
                             {
                                 if (!_clientEndPoint.Equals(channel.RemoteEndPoint))
                                 {
+                                    // 重复通道ID，向客户端发送重复通道ID消息
                                     SendToRepeatChannelId(channelId, _clientEndPoint);
                                 }
                                 
@@ -199,6 +238,7 @@ namespace Fantasy.Core.Network
 
                             if (_connectionChannel.ContainsKey(channelId))
                             {
+                                // 已存在的通道ID，向客户端发送重复通道ID消息
                                 SendToRepeatChannelId(channelId, _clientEndPoint);
                                 break;
                             }
@@ -273,8 +313,14 @@ namespace Fantasy.Core.Network
                 }
             }
         }
-        
 
+        /// <summary>
+        /// 移除待处理连接。
+        /// </summary>
+        /// <param name="channelId">通道ID。</param>
+        /// <param name="remoteEndPoint">远程终结点。</param>
+        /// <param name="channel">待处理的网络通道。</param>
+        /// <returns>是否成功移除待处理连接。</returns>
         private bool RemovePendingConnection(uint channelId, EndPoint remoteEndPoint, out KCPServerNetworkChannel channel)
         {
 #if FANTASY_DEVELOP
@@ -303,7 +349,11 @@ namespace Fantasy.Core.Network
 #endif
             return true;
         }
-        
+
+        /// <summary>
+        /// 从网络中移除指定通道。
+        /// </summary>
+        /// <param name="channelId">要移除的通道ID。</param>
         public override void RemoveChannel(uint channelId)
         {
 #if FANTASY_DEVELOP
@@ -333,6 +383,9 @@ namespace Fantasy.Core.Network
             }
         }
 
+        /// <summary>
+        /// 更新网络处理逻辑。
+        /// </summary>
         public void Update()
         {
 #if FANTASY_DEVELOP
@@ -342,10 +395,12 @@ namespace Fantasy.Core.Network
                 return;
             }
 #endif
+            // 接收来自客户端的数据
             Receive();
             
             var nowTime = TimeNow;
 
+            // 检查是否有定时更新任务需要执行
             if (nowTime >= _updateMinTime && _updateTimer.Count > 0)
             {
                 foreach (var timeId in _updateTimer)
@@ -360,7 +415,8 @@ namespace Fantasy.Core.Network
             
                     _updateTimeOutTime.Enqueue(key);
                 }
-                
+
+                // 处理超时的更新任务
                 while (_updateTimeOutTime.TryDequeue(out var time))
                 {
                     foreach (var channelId in _updateTimer[time])
@@ -372,6 +428,7 @@ namespace Fantasy.Core.Network
                 }
             }
 
+            // 执行待更新的通道逻辑
             if (_updateChannels.Count > 0)
             {
                 foreach (var channelId in _updateChannels)
@@ -435,6 +492,11 @@ namespace Fantasy.Core.Network
             }
         }
 
+        /// <summary>
+        /// 将通道加入到更新列表中。
+        /// </summary>
+        /// <param name="tillTime">更新时间。</param>
+        /// <param name="channelId">通道ID。</param>
         private void AddToUpdate(uint tillTime, uint channelId)
         {
 #if FANTASY_DEVELOP

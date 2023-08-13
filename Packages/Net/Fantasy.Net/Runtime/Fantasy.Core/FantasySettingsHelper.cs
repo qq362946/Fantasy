@@ -7,8 +7,14 @@ using Microsoft.Extensions.Configuration;
 
 namespace Fantasy.Core;
 
+/// <summary>
+/// FantasySettingsHelper 类用于加载和管理 Fantasy 系统的各项设置。
+/// </summary>
 public static class FantasySettingsHelper
 {
+    /// <summary>
+    /// 初始化 Fantasy 系统的各项设置。
+    /// </summary>
     public static void Initialize()
     {
         const string settingsName = "FantasySettings.json";

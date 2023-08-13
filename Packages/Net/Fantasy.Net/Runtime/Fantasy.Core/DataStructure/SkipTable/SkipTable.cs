@@ -2,12 +2,24 @@
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// 跳表升序版
+    /// 跳表数据结构（升序版）
     /// </summary>
-    /// <typeparam name="TValue"></typeparam>
+    /// <typeparam name="TValue">跳表中存储的值的类型。</typeparam>
     public class SkipTable<TValue> : SkipTableBase<TValue>
     {
+        /// <summary>
+        /// 创建一个新的跳表实例。
+        /// </summary>
+        /// <param name="maxLayer">跳表的最大层数。</param>
         public SkipTable(int maxLayer = 8) : base(maxLayer) { }
+
+        /// <summary>
+        /// 向跳表中添加一个新节点。
+        /// </summary>
+        /// <param name="sortKey">节点的主排序键。</param>
+        /// <param name="viceKey">节点的副排序键。</param>
+        /// <param name="key">节点的唯一键。</param>
+        /// <param name="value">要添加的值。</param>
         public override void Add(long sortKey, long viceKey, long key, TValue value)
         {
             var rLevel = 1;
@@ -31,6 +43,8 @@ namespace Fantasy.DataStructure
                 if (layer <= rLevel)
                 {
                     var currentRight = cur.Right;
+
+                    // 在当前层插入新节点
                     cur.Right = new SkipTableNode<TValue>(sortKey, viceKey, key, value, layer == 1 ? cur.Index + 1 : 0, cur, cur.Right, null);
 
                     if (currentRight != null)
@@ -45,6 +59,7 @@ namespace Fantasy.DataStructure
 
                     if (layer == 1)
                     {
+                        // 更新索引信息
                         cur.Right.Index = cur.Index + 1;
                         Node.Add(key, cur.Right);
 
@@ -63,6 +78,15 @@ namespace Fantasy.DataStructure
                 cur = cur.Down;
             }
         }
+
+        /// <summary>
+        /// 从跳表中移除一个节点。
+        /// </summary>
+        /// <param name="sortKey">节点的主排序键。</param>
+        /// <param name="viceKey">节点的副排序键。</param>
+        /// <param name="key">节点的唯一键。</param>
+        /// <param name="value">被移除的节点的值。</param>
+        /// <returns>如果成功移除节点，则为 true；否则为 false。</returns>
         public override bool Remove(long sortKey, long viceKey, long key, out TValue value)
         {
             value = default;

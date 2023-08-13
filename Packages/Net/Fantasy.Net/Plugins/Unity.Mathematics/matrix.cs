@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using static Unity.Mathematics.math;
 #pragma warning disable CS8981
+#pragma warning disable CS0419
 
 namespace Unity.Mathematics
 {
