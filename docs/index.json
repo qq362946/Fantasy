@@ -1,18 +1,103 @@
 {
-  "docs/base-start.html": {
-    "href": "docs/base-start.html",
-    "title": "Start Fantasy | Fantasy.Net API Reference",
-    "keywords": "Start Fantasy Build your technical documentation site with docfx. Converts .NET assembly, XML code comment, REST API Swagger files and markdown into rendered HTML pages, JSON model or PDF files."
+  "blog/fantasy-rogoulike-video1.html": {
+    "href": "blog/fantasy-rogoulike-video1.html",
+    "title": "基于Fantasy的roguelike项目预览视频01 | blog | Fantasy.Net API Reference",
+    "keywords": "roguelike项目预览视频01 C# 服务器框架Fantasy ☢ 开发交流群 656091376 ▷ 视频观看：https://www.bilibili.com/video/BV1Yu4y117b2 上线级登录注册实现： 采用鉴权服务器验证（短连接）、根据用户Id或名字指定一个服务器生成一个Token发送给客户端。 客户端通过Token连接登录到指定的服务器进行登录。ToKen采用JWT的RSA加密、几乎没有破解的可能、能有效的保证服务器的安全性和一致性。 分开鉴权和游戏服务器的关系、比如鉴权是其他平台开发的、如PHP、JAVA等、这些服务器生成Token就可以了。 鉴权是独立的跟其他服务器没有任何关系、就很容易做成多个区或服的鉴权登录服务器、单独部署到一个服务器中、不需要跟随游戏服务器。 鉴权服务器是最容易攻击的、现在如果被攻击了、可以随时在启动一个鉴权就可以了、完全不影响游戏服务器的逻辑。 无缝大地图实现： 使用9宫格根据人物坐标每隔一定时间计算所在格子的位置来渲染周围9个格子的地图。 具体算法:Mathf.RoundToInt(position.x / self.CellSize.x)。 周围地图都使用对象池来进行缓存、避免重复创建。 地图传送实现 分为CopyDispatcher、CopyManage、Copy三部分组成。 当执行传送时会首先去CopyDispatcher服务器申请一个副本、CopyDispatcher会找到当前负载（人数最少）服务器。 请求CopyManage服务器创建一个新的副本、CopyDispatcher把这个服务器添加到定时检测任务、查看这个副本是否过期、如果过期会减少负载。 Copy必须有超时时间、如果时间不够可以通过CopyDispatcher来进行续约，通过copySceneRouteId执行传送逻辑传送到目标副本中。 传送成功后客户端会收到H_G2C_TransferStart消息、客户端执行切换地图的相关逻辑。"
+  },
+  "case/index.html": {
+    "href": "case/index.html",
+    "title": "行业典型案例 | case | Fantasy.Net API Reference",
+    "keywords": "行业典型案例页面建设中..."
   },
   "docs/index.html": {
     "href": "docs/index.html",
     "title": "Fantassy 手册 | Fantasy.Net API Reference",
-    "keywords": "Fantasy高性能服务器框架 Fantasy服务器框架源于ETServer框架，但Fantasy极为简洁，性能更强，基于Fantasy开发的服务端程序，可用于游戏服务器，物联网服务器，应用程序服务器等。 Fantasy框架易于学习易于使用，只需要在服务端引用Fantasy.Net即可。 目前提供了Unity前端应用参考，前端主要添加Packages中的Fantasy.Unity，也可以按需要添加Fantasy.FairyGUI,Fantasy.HybridCLR。 后续计划增加Fantasy Go版本，和Unreal前端应用参考。 Quick Start Build your technical documentation site with docfx. Converts .NET assembly, XML code comment, REST API Swagger files and markdown into rendered HTML pages, JSON model or PDF files. 交流与讨论： 学习交流网站： http://www.taikr.com __讨论QQ群 : Fantasy服务器开发交流群 656091376 __"
+    "keywords": "Fantasy高性能服务器框架 Fantasy服务器框架源于ETServer框架，但Fantasy极为简洁，性能更强，基于Fantasy开发的服务端程序，可用于游戏服务器，物联网服务器，应用程序服务器等。 Fantasy框架易于学习易于使用，只需要在服务端引用Fantasy.Net即可。 目前提供了Unity前端应用参考，前端主要添加Packages中的Fantasy.Unity，也可以按需要添加Fantasy.FairyGUI,Fantasy.HybridCLR。后续计划增加Fantasy Go版本，和Unreal前端应用参考。 Quick Start Build your technical documentation site with docfx. Converts .NET assembly, XML code comment, REST API Swagger files and markdown into rendered HTML pages, JSON model or PDF files. 交流与讨论： 学习交流网站： https://www.taikr.com __讨论QQ群 : Fantasy服务器开发交流群 656091376 __"
+  },
+  "docs/practice/config.html": {
+    "href": "docs/practice/config.html",
+    "title": "配置文件 | config | Fantasy.Net API Reference",
+    "keywords": "配置文件页面建设中..."
+  },
+  "docs/practice/ecs.html": {
+    "href": "docs/practice/ecs.html",
+    "title": "ECS实战 | ECS | Fantasy.Net API Reference",
+    "keywords": "ECS实战页面建设中..."
+  },
+  "docs/practice/mongodb.html": {
+    "href": "docs/practice/mongodb.html",
+    "title": "数据库mongodb | mongodb | Fantasy.Net API Reference",
+    "keywords": "数据库mongodb页面建设中..."
+  },
+  "docs/practice/multi.html": {
+    "href": "docs/practice/multi.html",
+    "title": "多服与地图传送 | multiserver | Fantasy.Net API Reference",
+    "keywords": "多服与地图传送页面建设中..."
+  },
+  "docs/practice/protocol.html": {
+    "href": "docs/practice/protocol.html",
+    "title": "消息协议 | protocol | Fantasy.Net API Reference",
+    "keywords": "消息协议页面建设中..."
+  },
+  "docs/practice/scene.html": {
+    "href": "docs/practice/scene.html",
+    "title": "Scene使用 | scene | Fantasy.Net API Reference",
+    "keywords": "Scene使用页面建设中..."
+  },
+  "docs/start/baseprotocol.html": {
+    "href": "docs/start/baseprotocol.html",
+    "title": "基本消息协议 | baseprotocol | Fantasy.Net API Reference",
+    "keywords": "基本消息协议页面建设中..."
+  },
+  "docs/start/gatelogic.html": {
+    "href": "docs/start/gatelogic.html",
+    "title": "gate基本逻辑 | gatelogic | Fantasy.Net API Reference",
+    "keywords": "gate基本逻辑页面建设中..."
+  },
+  "docs/start/import.html": {
+    "href": "docs/start/import.html",
+    "title": "前后端导入package | import | Fantasy.Net API Reference",
+    "keywords": "前后端导入package页面建设中..."
+  },
+  "docs/start/maplogic.html": {
+    "href": "docs/start/maplogic.html",
+    "title": "map基本逻辑 | maplogic | Fantasy.Net API Reference",
+    "keywords": "map基本逻辑页面建设中..."
+  },
+  "docs/start/move.html": {
+    "href": "docs/start/move.html",
+    "title": "基本移动同步 | movesync | Fantasy.Net API Reference",
+    "keywords": "基本移动同步页面建设中..."
+  },
+  "docs/start/quickstart.html": {
+    "href": "docs/start/quickstart.html",
+    "title": "Start Fantasy | quickstart | Fantasy.Net API Reference",
+    "keywords": "Start Fantasy页面建设中..."
+  },
+  "docs/start/realmlogic.html": {
+    "href": "docs/start/realmlogic.html",
+    "title": "realm基本逻辑 | realmlogic | Fantasy.Net API Reference",
+    "keywords": "realm基本逻辑页面建设中..."
+  },
+  "docs/start/sws.html": {
+    "href": "docs/start/sws.html",
+    "title": "server/world/scene | sws | Fantasy.Net API Reference",
+    "keywords": "server/world/scene页面建设中..."
+  },
+  "download/index.html": {
+    "href": "download/index.html",
+    "title": "框架下载 | download | Fantasy.Net API Reference",
+    "keywords": "框架下载页面建设中..."
   },
   "index.html": {
     "href": "index.html",
     "title": "",
     "keywords": ""
+  },
+  "packages/index.html": {
+    "href": "packages/index.html",
+    "title": "框架程序包 | packages | Fantasy.Net API Reference",
+    "keywords": "框架程序包页面建设中..."
   },
   "reference/Fantasy.AProto.html": {
     "href": "reference/Fantasy.AProto.html",

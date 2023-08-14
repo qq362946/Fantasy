@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Fantassy 手册 | Fantasy.Net API Reference </title>
+      <title>基于Fantasy的roguelike项目预览视频01 | blog | Fantasy.Net API Reference </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Fantassy 手册 | Fantasy.Net API Reference ">
+      <meta name="title" content="基于Fantasy的roguelike项目预览视频01 | blog | Fantasy.Net API Reference ">
       
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
@@ -15,7 +15,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/roubincode/Fantasy/blob/main/DocFx/docs/index.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/roubincode/Fantasy/blob/main/DocFx/blog/fantasy-rogoulike-video1.md/#L1">
   </head>
 
   <script type="module">
@@ -75,25 +75,37 @@
         </div>
 
         <article data-uid="">
+<h2 id="roguelike项目预览视频01"><center>roguelike项目预览视频01</center></h2>
 
-<table><tr>
-<td style="width:70%">
-<h2 id="fantasy高性能服务器框架">Fantasy高性能服务器框架</h2>
-<p>Fantasy服务器框架源于ETServer框架，但Fantasy极为简洁，性能更强，基于Fantasy开发的服务端程序，可用于游戏服务器，物联网服务器，应用程序服务器等。 Fantasy框架易于学习易于使用，只需要在服务端引用Fantasy.Net即可。<br>
-<br>
-目前提供了Unity前端应用参考，前端主要添加Packages中的Fantasy.Unity，也可以按需要添加Fantasy.FairyGUI,Fantasy.HybridCLR。后续计划增加Fantasy Go版本，和Unreal前端应用参考。</p>
-</td>
-<td style="width:30%">
-<img alt="" height="150" src="https://www.taikr.com/files/default/2023/08-14/233255714eef495026.jpg" width="300">
-<img alt="" height="160" src="https://www.taikr.com/files/default/2023/08-14/2332546c999e985903.jpg" width="300">
-</td>
-</tr></table>
-<h2 id="quick-start">Quick Start</h2>
-<p>Build your technical documentation site with docfx. Converts .NET assembly, XML code comment, REST API Swagger files and markdown into rendered HTML pages, JSON model or PDF files.
-<br><br></p>
-<h3 id="交流与讨论">交流与讨论：</h3>
-<p><a href="https://www.taikr.com">学习交流网站：</a> <a href="https://www.taikr.com">https://www.taikr.com</a><br>
-__讨论QQ群 : Fantasy服务器开发交流群 656091376 __</p>
+<p>C# 服务器框架Fantasy <a href="https://dwurl.cn/HXxe6b">☢ 开发交流群 656091376</a></p>
+<p>▷ 视频观看：<a href="https://www.bilibili.com/video/BV1Yu4y117b2">https://www.bilibili.com/video/BV1Yu4y117b2</a></p>
+<h2 id="上线级登录注册实现">上线级登录注册实现：</h2>
+<ol>
+<li>采用鉴权服务器验证（短连接）、根据用户Id或名字指定一个服务器生成一个Token发送给客户端。</li>
+<li>客户端通过Token连接登录到指定的服务器进行登录。ToKen采用JWT的RSA加密、几乎没有破解的可能、能有效的保证服务器的安全性和一致性。</li>
+<li>分开鉴权和游戏服务器的关系、比如鉴权是其他平台开发的、如PHP、JAVA等、这些服务器生成Token就可以了。</li>
+<li>鉴权是独立的跟其他服务器没有任何关系、就很容易做成多个区或服的鉴权登录服务器、单独部署到一个服务器中、不需要跟随游戏服务器。</li>
+<li>鉴权服务器是最容易攻击的、现在如果被攻击了、可以随时在启动一个鉴权就可以了、完全不影响游戏服务器的逻辑。</li>
+</ol>
+<img alt="" height="457" src="https://www.taikr.com/files/default/2023/08-14/233254659082095745.jpg" width="700">
+<br><br>
+<h2 id="无缝大地图实现">无缝大地图实现：</h2>
+<ol>
+<li>使用9宫格根据人物坐标每隔一定时间计算所在格子的位置来渲染周围9个格子的地图。</li>
+<li>具体算法:Mathf.RoundToInt(position.x / self.CellSize.x)。</li>
+<li>周围地图都使用对象池来进行缓存、避免重复创建。</li>
+</ol>
+<img alt="" height="457" src="https://www.taikr.com/files/default/2023/08-14/233254690da1609171.jpg" width="700">
+<br><br>
+<h2 id="地图传送实现">地图传送实现</h2>
+<ol>
+<li>分为CopyDispatcher、CopyManage、Copy三部分组成。</li>
+<li>当执行传送时会首先去CopyDispatcher服务器申请一个副本、CopyDispatcher会找到当前负载（人数最少）服务器。</li>
+<li>请求CopyManage服务器创建一个新的副本、CopyDispatcher把这个服务器添加到定时检测任务、查看这个副本是否过期、如果过期会减少负载。</li>
+<li>Copy必须有超时时间、如果时间不够可以通过CopyDispatcher来进行续约，通过copySceneRouteId执行传送逻辑传送到目标副本中。</li>
+<li>传送成功后客户端会收到H_G2C_TransferStart消息、客户端执行切换地图的相关逻辑。</li>
+</ol>
+<img alt="" height="447" src="https://www.taikr.com/files/default/2023/08-14/2332546c999e985903.jpg" width="700">
 </article>
 
 

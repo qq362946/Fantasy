@@ -13,10 +13,49 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "docs/base-start.md",
+      "source_relative_path": "blog/fantasy-rogoulike-video1.md",
       "output": {
         ".html": {
-          "relative_path": "docs/base-start.html"
+          "relative_path": "blog/fantasy-rogoulike-video1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "blog/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "blog/toc.html"
+        },
+        ".json": {
+          "relative_path": "blog/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "case/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "case/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "case/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "case/toc.html"
+        },
+        ".json": {
+          "relative_path": "case/toc.json"
         }
       },
       "version": ""
@@ -32,6 +71,149 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "docs/practice/config.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/practice/config.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/practice/ecs.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/practice/ecs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/practice/mongodb.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/practice/mongodb.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/practice/multi.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/practice/multi.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/practice/protocol.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/practice/protocol.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/practice/scene.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/practice/scene.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/start/baseprotocol.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/start/baseprotocol.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/start/gatelogic.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/start/gatelogic.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/start/import.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/start/import.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/start/maplogic.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/start/maplogic.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/start/move.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/start/move.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/start/quickstart.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/start/quickstart.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/start/realmlogic.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/start/realmlogic.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/start/sws.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/start/sws.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Toc",
       "source_relative_path": "docs/toc.yml",
       "output": {
@@ -45,11 +227,63 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "download/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "download/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "download/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "download/toc.html"
+        },
+        ".json": {
+          "relative_path": "download/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
       "type": "Redirection",
       "source_relative_path": "index.md",
       "output": {
         ".html": {
           "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "packages/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "packages/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "packages/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "packages/toc.html"
+        },
+        ".json": {
+          "relative_path": "packages/toc.json"
         }
       },
       "version": ""
@@ -3518,9 +3752,6 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
