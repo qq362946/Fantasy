@@ -6,8 +6,16 @@ using ProtoBuf;
 
 namespace Fantasy.Core;
 
+/// <summary>
+/// 动态程序集类，用于加载动态生成的程序集并获取动态信息。
+/// </summary>
 public static class DynamicAssembly
 {
+    /// <summary>
+    /// 加载指定路径下的动态程序集。
+    /// </summary>
+    /// <param name="path">程序集文件路径。</param>
+    /// <returns>加载的动态程序集。</returns>
     public static Assembly Load(string path)
     {
         var fileList = new List<string>();
@@ -85,7 +93,13 @@ public static class DynamicAssembly
         ms.Seek(0, SeekOrigin.Begin);
         return Assembly.Load(ms.ToArray());
     }
-    
+
+    /// <summary>
+    /// 获取动态程序集中指定表格的动态信息。
+    /// </summary>
+    /// <param name="dynamicAssembly">动态程序集。</param>
+    /// <param name="tableName">表格名称。</param>
+    /// <returns>动态信息对象。</returns>
     public static DynamicConfigDataType GetDynamicInfo(Assembly dynamicAssembly, string tableName)
     {
         var dynamicConfigDataType = new DynamicConfigDataType
@@ -112,7 +126,13 @@ public static class DynamicAssembly
 
         return dynamicConfigDataType;
     }
-    
+
+    /// <summary>
+    /// 根据类型名称获取动态类型。
+    /// </summary>
+    /// <param name="dynamicAssembly">动态程序集。</param>
+    /// <param name="typeName">类型名称。</param>
+    /// <returns>动态类型。</returns>
     private static Type GetConfigType(Assembly dynamicAssembly, string typeName)
     {
         var configType = dynamicAssembly.GetType($"Fantasy.{typeName}");
@@ -125,7 +145,12 @@ public static class DynamicAssembly
         return configType;
         // return dynamicAssembly.GetType($"Fantasy.{typeName}");
     }
-    
+
+    /// <summary>
+    /// 创建动态实例。
+    /// </summary>
+    /// <param name="configType">动态类型。</param>
+    /// <returns>动态实例。</returns>
     public static AProto CreateInstance(Type configType)
     {
         var config = (AProto) Activator.CreateInstance(configType);

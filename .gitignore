@@ -49,3 +49,6 @@ global.json
 .idea
 /Demo/Bin
 *.DS_Store
+/Demo/Server/.vs
+/.vs
+/DocFx

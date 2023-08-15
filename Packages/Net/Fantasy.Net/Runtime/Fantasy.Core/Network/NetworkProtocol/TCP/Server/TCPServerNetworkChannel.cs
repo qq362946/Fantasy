@@ -9,6 +9,9 @@ using Fantasy.DataStructure;
 
 namespace Fantasy.Core.Network
 {
+    /// <summary>
+    /// TCP 服务器网络通道，用于处理服务器与客户端之间的数据通信。
+    /// </summary>
     public sealed class TCPServerNetworkChannel : ANetworkChannel
     {
         #region 网络主线程
@@ -20,9 +23,21 @@ namespace Fantasy.Core.Network
         private readonly SocketAsyncEventArgs _outArgs = new SocketAsyncEventArgs();
         private readonly SocketAsyncEventArgs _innArgs = new SocketAsyncEventArgs();
 
+        /// <summary>
+        /// 当通道被释放时触发的事件。
+        /// </summary>
         public override event Action OnDispose;
+        /// <summary>
+        /// 当接收到内存流数据时触发的事件。
+        /// </summary>
         public override event Action<APackInfo> OnReceiveMemoryStream;
 
+        /// <summary>
+        /// 初始化 TCPServerNetworkChannel 实例。
+        /// </summary>
+        /// <param name="id">通道 ID。</param>
+        /// <param name="socket">与客户端连接的 Socket。</param>
+        /// <param name="network">所属的网络实例。</param>
         public TCPServerNetworkChannel(uint id, Socket socket, ANetwork network) : base(network.Scene, id, network.Id)
         {
 #if FANTASY_DEVELOP
@@ -42,6 +57,9 @@ namespace Fantasy.Core.Network
             PacketParser = APacketParser.CreatePacketParser(network.NetworkTarget);
         }
 
+        /// <summary>
+        /// 释放资源并关闭通道。
+        /// </summary>
         public override void Dispose()
         {
 #if FANTASY_DEVELOP
@@ -71,7 +89,11 @@ namespace Fantasy.Core.Network
             ThreadSynchronizationContext.Main.Post(OnDispose);
             base.Dispose();
         }
-        
+
+        /// <summary>
+        /// 向通道发送内存流数据。
+        /// </summary>
+        /// <param name="memoryStream">待发送的内存流。</param>
         public void Send(MemoryStream memoryStream)
         {
 #if FANTASY_DEVELOP
@@ -195,6 +217,9 @@ namespace Fantasy.Core.Network
             }
         }
 
+        /// <summary>
+        /// 开始接收数据。
+        /// </summary>
         public void Receive()
         {
 #if FANTASY_DEVELOP
