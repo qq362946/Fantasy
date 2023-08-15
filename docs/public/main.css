@@ -48,9 +48,17 @@ h3 {
   line-height: 1.8;
 }
 
+h4 {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
 h5 {
   font-size: 14px;
   padding: 10px 0px;
+}
+[data-bs-theme='light'] article {
+  background:#f3f5f8;
 }
 article {
   background: #25282d;
