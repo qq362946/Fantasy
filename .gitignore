@@ -2,53 +2,23 @@
 obj/
 Bin/
 bin/
+Temp/
+Library/
+Logs/
+temp/
+DocFx/
 global.json
 
 # Client-Unity
-/Demo/Client/Unity/Unity.sln
-/Demo/Client/Unity/Assembly-CSharp.csproj
-/Demo/Client/Unity/Assembly-CSharp-Editor.csproj
-/Demo/Client/Unity/Assembly-CSharp-firstpass.csproj
-/Demo/Client/Unity/Fantasy.Unity.csproj
-/Demo/Client/Unity/Fantasy.Core.csproj
-/Demo/Client/Unity/Fantasy.Editor.csproj
-/Demo/Client/Unity/Fantasy.Entry.csproj
-/Demo/Client/Unity/Fantasy.Hotfix.csproj
-/Demo/Client/Unity/Fantasy.Model.csproj
-/Demo/Client/Unity/HybridCLRData
-/Demo/Client/Unity/Library
-/Demo/Client/Unity/Logs
-/Demo/Client/Unity/Temp
-/Demo/Client/Unity/AssetBundles
-/Demo/Client/Unity/obj
+HybridCLRData/
+AssetBundles/
+UserSettings/
+/Demo/Client/Unity/*.sln
+/Demo/Client/Unity/*.csproj
 /Demo/Client/Unity/*.blob
-# Server
-/Demo/Server/Fantasy.App/bin
-/Demo/Server/Fantasy.App/obj
-/Demo/Server/Fantasy.Core/bin
-/Demo/Server/Fantasy.Core/obj
-/Demo/Server/Fantasy.Hotfix/bin
-/Demo/Server/Fantasy.Hotfix/obj
-/Demo/Server/Fantasy.Model/bin
-/Demo/Server/Fantasy.Model/obj
-# Plugins
-/Plugins/KCPLibrary/bin
-/Plugins/KCPLibrary/obj
-/Plugins/Unity.Mathematics/bin
-/Plugins/Unity.Mathematics/obj
-# Net
-/Fantasy.Net/Fantasy.Net/bin
-/Fantasy.Net/Fantasy.Net/obj
-/Fantasy.Net/Fantasy/bin
-/Fantasy.Net/Fantasy/obj
-/Fantasy.Net/Plugins/KCPLibrary/bin
-/Fantasy.Net/Plugins/KCPLibrary/obj
-/Fantasy.Net/Plugins/Unity.Mathematics/bin
-/Fantasy.Net/Plugins/Unity.Mathematics/obj
+
 # Other
 .idea
-/Demo/Bin
+.vs
+.vscode
 *.DS_Store
-/Demo/Server/.vs
-/.vs
-/DocFx
