@@ -104,6 +104,18 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
+        /// 获取目录下的所有文件
+        /// </summary>
+        /// <param name="folderPath">文件夹路径。</param>
+        /// <param name="searchPattern">需要查找的文件通配符</param>
+        /// <param name="searchOption">查找的类型</param>
+        /// <returns></returns>
+        public static string[] GetDirectoryFile(string folderPath, string searchPattern, SearchOption searchOption)
+        {
+            return Directory.GetFiles(folderPath, searchPattern, searchOption);
+        }
+
+        /// <summary>
         /// 清空文件夹内的所有文件。
         /// </summary>
         /// <param name="folderPath">文件夹路径。</param>

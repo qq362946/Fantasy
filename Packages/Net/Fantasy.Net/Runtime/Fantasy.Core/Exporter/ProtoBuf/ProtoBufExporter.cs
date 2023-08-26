@@ -1,6 +1,7 @@
 #if FANTASY_NET
 using System.Text;
 using Fantasy.Core.Network;
+using Fantasy.Helper;
 
 namespace Fantasy.Core;
 
@@ -86,9 +87,9 @@ public sealed class ProtoBufExporter
             Directory.CreateDirectory($"{Define.ProtoBufDirectory}Inner");
         }
         
-        if (!Directory.Exists($"{Define.ProtoBufDirectory}Bson"))
+        if (!Directory.Exists($"{Define.ProtoBufDirectory}InnerBosn"))
         {
-            Directory.CreateDirectory($"{Define.ProtoBufDirectory}Bson");
+            Directory.CreateDirectory($"{Define.ProtoBufDirectory}InnerBosn");
         }
 
         var tasks = new Task[2];
@@ -110,7 +111,7 @@ public sealed class ProtoBufExporter
         OpcodeInfo opcodeInfo = null;
         _opcodes.Clear();
         var file = new StringBuilder();
-        var saveDirectory = new Dictionary<string,string>();
+        var saveDirectory = new Dictionary<string, string>();
         
         switch (opCodeType)
         {
@@ -125,8 +126,9 @@ public sealed class ProtoBufExporter
                 opCodeName = "OuterOpcode";
                 saveDirectory.Add(Define.ProtoBufServerDirectory, _serverTemplate);
                 saveDirectory.Add(Define.ProtoBufClientDirectory, _clientTemplate);
-                files.Add($"{Define.ProtoBufDirectory}OuterMessage.proto");
-                files.AddRange(Directory.GetFiles($"{Define.ProtoBufDirectory}Outer").ToList());
+                var protoBufFiles = FileHelper.GetDirectoryFile(
+                    $"{Define.ProtoBufDirectory}Outer", "*.proto", SearchOption.AllDirectories);
+                files.AddRange(protoBufFiles);
                 break;
             }
             case ProtoBufOpCodeType.Inner:
@@ -140,8 +142,9 @@ public sealed class ProtoBufExporter
                 _aRouteResponse = Opcode.InnerRouteResponse + 1000;
                 opCodeName = "InnerOpcode";
                 saveDirectory.Add(Define.ProtoBufServerDirectory, _serverTemplate);
-                files.Add($"{Define.ProtoBufDirectory}InnerMessage.proto");
-                files.AddRange(Directory.GetFiles($"{Define.ProtoBufDirectory}Inner").ToList());
+                var protoBufFiles = FileHelper.GetDirectoryFile(
+                    $"{Define.ProtoBufDirectory}Inner", "*.proto", SearchOption.AllDirectories);
+                files.AddRange(protoBufFiles);
                 break;
             }
             case ProtoBufOpCodeType.InnerBson:
@@ -155,8 +158,9 @@ public sealed class ProtoBufExporter
                 _aRouteResponse = Opcode.InnerBsonRouteResponse + 1000;
                 opCodeName = "InnerBsonOpcode";
                 saveDirectory.Add(Define.ProtoBufServerDirectory, _serverTemplate);
-                files.Add($"{Define.ProtoBufDirectory}InnerBsonMessage.proto");
-                files.AddRange(Directory.GetFiles($"{Define.ProtoBufDirectory}Bson").ToList());
+                var protoBufFiles = FileHelper.GetDirectoryFile(
+                    $"{Define.ProtoBufDirectory}InnerBosn", "*.proto", SearchOption.AllDirectories);
+                files.AddRange(protoBufFiles);
                 break;
             }
         }
