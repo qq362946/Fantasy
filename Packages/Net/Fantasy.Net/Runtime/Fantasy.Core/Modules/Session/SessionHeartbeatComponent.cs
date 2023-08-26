@@ -5,22 +5,22 @@ using Fantasy.Helper;
 namespace Fantasy.Model
 {
     /// <summary>
-    /// ¸ºÔğ¹ÜÀí»á»°ĞÄÌøµÄ×é¼ş¡£
+    /// è´Ÿè´£ç®¡ç†ä¼šè¯å¿ƒè·³çš„ç»„ä»¶ã€‚
     /// </summary>
     public class SessionHeartbeatComponent : Entity
     {
-        private long _timerId;  // ĞÄÌø¼ä¸ô¼ÆÊ±Æ÷µÄ ID
-        private long _selfRunTimeId;  // ÓÃÓÚÈ·±£×é¼şÍêÕûĞÔµÄ×ÔÉíÔËĞĞÊ± ID
-        private Session _session;  // ¶Ô»á»°¶ÔÏóµÄÒıÓÃ
-        private readonly PingRequest _pingRequest = new PingRequest(); // ĞÄÌøµÄ Ping ÇëÇó¶ÔÏó
+        private long _timerId;  // å¿ƒè·³é—´éš”è®¡æ—¶å™¨çš„ ID
+        private long _selfRunTimeId;  // ç”¨äºç¡®ä¿ç»„ä»¶å®Œæ•´æ€§çš„è‡ªèº«è¿è¡Œæ—¶ ID
+        private Session _session;  // å¯¹ä¼šè¯å¯¹è±¡çš„å¼•ç”¨
+        private readonly PingRequest _pingRequest = new PingRequest(); // å¿ƒè·³çš„ Ping è¯·æ±‚å¯¹è±¡
         
         /// <summary>
-        /// »ñÈ¡µ±Ç°µÄ Ping Öµ¡£
+        /// è·å–å½“å‰çš„ Ping å€¼ã€‚
         /// </summary>
         public int Ping { get; private set; }
 
         /// <summary>
-        /// ÖØĞ´ Dispose ·½·¨ÒÔÊÍ·Å×ÊÔ´¡£
+        /// é‡å†™ Dispose æ–¹æ³•ä»¥é‡Šæ”¾èµ„æºã€‚
         /// </summary>
         public override void Dispose()
         {
@@ -32,9 +32,9 @@ namespace Fantasy.Model
         }
 
         /// <summary>
-        /// Ê¹ÓÃÖ¸¶¨µÄ¼ä¸ôÆô¶¯ĞÄÌø¹¦ÄÜ¡£
+        /// ä½¿ç”¨æŒ‡å®šçš„é—´éš”å¯åŠ¨å¿ƒè·³åŠŸèƒ½ã€‚
         /// </summary>
-        /// <param name="interval">ÒÔºÁÃëÎªµ¥Î»µÄĞÄÌøÇëÇó·¢ËÍ¼ä¸ô¡£</param>
+        /// <param name="interval">ä»¥æ¯«ç§’ä¸ºå•ä½çš„å¿ƒè·³è¯·æ±‚å‘é€é—´éš”ã€‚</param>
         public void Start(int interval)
         {
             _session = (Session)Parent;
@@ -43,22 +43,22 @@ namespace Fantasy.Model
         }
 
         /// <summary>
-        /// Í£Ö¹ĞÄÌø¹¦ÄÜ¡£
+        /// åœæ­¢å¿ƒè·³åŠŸèƒ½ã€‚
         /// </summary>
         public void Stop()
         {
             if (_timerId == 0)
             {
-                return; // Èç¹û¼ÆÊ±Æ÷ ID Îª 0£¬Ôò¼ÆÊ±Æ÷Î´¼¤»î£¬Ö±½Ó·µ»Ø
+                return; // å¦‚æœè®¡æ—¶å™¨ ID ä¸º 0ï¼Œåˆ™è®¡æ—¶å™¨æœªæ¿€æ´»ï¼Œç›´æ¥è¿”å›
             }
             
             TimerScheduler.Instance?.Unity.RemoveByRef(ref _timerId);
         }
 
         /// <summary>
-        /// Òì²½·¢ËÍĞÄÌøÇëÇó²¢´¦ÀíÏìÓ¦¡£
+        /// å¼‚æ­¥å‘é€å¿ƒè·³è¯·æ±‚å¹¶å¤„ç†å“åº”ã€‚
         /// </summary>
-        /// <returns>±íÊ¾½øĞĞÖĞ²Ù×÷µÄÒì²½ÈÎÎñ¡£</returns>
+        /// <returns>è¡¨ç¤ºè¿›è¡Œä¸­æ“ä½œçš„å¼‚æ­¥ä»»åŠ¡ã€‚</returns>
         private async FTask RepeatedSend()
         {
             if (_selfRunTimeId != RuntimeId)
@@ -74,7 +74,7 @@ namespace Fantasy.Model
                 return;
             }
             
-            var responseTime = TimeHelper.Now; // ¼ÇÂ¼½ÓÊÕĞÄÌøÏìÓ¦µÄÊ±¼ä
+            var responseTime = TimeHelper.Now; // è®°å½•æ¥æ”¶å¿ƒè·³å“åº”çš„æ—¶é—´
             Ping = (int)(responseTime - requestTime) / 2;
             TimeHelper.TimeDiff = pingResponse.Now + Ping - responseTime;
         }

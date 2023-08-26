@@ -3,32 +3,32 @@ using System;
 namespace Fantasy
 {
     /// <summary>
-    /// ����ʵ��Ļ���ϵͳ�ӿڡ�����Ҫ��ʵ�廽��ʱִ���ض����߼�ʱ��Ӧʵ�ִ˽ӿڡ�
+    /// 定义实体的唤醒系统接口。当需要在实体唤醒时执行特定的逻辑时，应实现此接口。
     /// </summary>
     public interface IAwakeSystem : IEntitiesSystem { }
 
     /// <summary>
-    /// ��ʾ����ʵ��ʵ�廽���߼��ĳ�����ࡣ�̳д�����������ڴ����ض����͵�ʵ��Ļ��Ѳ�����
+    /// 表示用于实现实体唤醒逻辑的抽象基类。继承此类的子类用于处理特定类型的实体的唤醒操作。
     /// </summary>
-    /// <typeparam name="T">��Ҫ���������߼���ʵ�����͡�</typeparam>
+    /// <typeparam name="T">需要处理唤醒逻辑的实体类型。</typeparam>
     public abstract class AwakeSystem<T> : IAwakeSystem where T : Entity
     {
         /// <summary>
-        /// ��ȡ��Ҫ���������߼���ʵ�����͡�
+        /// 获取需要处理唤醒逻辑的实体类型。
         /// </summary>
-        /// <returns>ʵ�����͡�</returns>
+        /// <returns>实体类型。</returns>
         public Type EntitiesType() => typeof(T);
 
         /// <summary>
-        /// ��ʵ�廽��ʱִ�е��߼�������Ӧʵ�ִ˷����Դ����ض�ʵ�����͵Ļ��Ѳ�����
+        /// 在实体唤醒时执行的逻辑。子类应实现此方法以处理特定实体类型的唤醒操作。
         /// </summary>
-        /// <param name="self">���ڻ��ѵ�ʵ�塣</param>
+        /// <param name="self">正在唤醒的实体。</param>
         protected abstract void Awake(T self);
 
         /// <summary>
-        /// ����ʵ��Ļ����߼�����ʵ�廽��ʱ������ô˷�����ִ����Ӧ�Ļ��Ѳ�����
+        /// 调用实体的唤醒逻辑。在实体唤醒时，会调用此方法来执行相应的唤醒操作。
         /// </summary>
-        /// <param name="self">���ڻ��ѵ�ʵ�塣</param>
+        /// <param name="self">正在唤醒的实体。</param>
         public void Invoke(Entity self)
         {
             Awake((T) self);

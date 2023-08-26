@@ -10,29 +10,29 @@ using System.Runtime.Loader;
 namespace Fantasy.Helper
 {
     /// <summary>
-    /// ¹ÜÀí³ÌĞò¼¯¼ÓÔØºÍĞ¶ÔØµÄ°ïÖúÀà¡£
+    /// ç®¡ç†ç¨‹åºé›†åŠ è½½å’Œå¸è½½çš„å¸®åŠ©ç±»ã€‚
     /// </summary>
     public static class AssemblyManager
     {
         /// <summary>
-        /// µ±³ÌĞò¼¯¼ÓÔØÊ±´¥·¢µÄÊÂ¼ş¡£
+        /// å½“ç¨‹åºé›†åŠ è½½æ—¶è§¦å‘çš„äº‹ä»¶ã€‚
         /// </summary>
         public static event Action<int> OnLoadAssemblyEvent;
         /// <summary>
-        /// µ±³ÌĞò¼¯Ğ¶ÔØÊ±´¥·¢µÄÊÂ¼ş¡£
+        /// å½“ç¨‹åºé›†å¸è½½æ—¶è§¦å‘çš„äº‹ä»¶ã€‚
         /// </summary>
         public static event Action<int> OnUnLoadAssemblyEvent;
         /// <summary>
-        /// µ±ÖØĞÂ¼ÓÔØ³ÌĞò¼¯Ê±´¥·¢µÄÊÂ¼ş¡£
+        /// å½“é‡æ–°åŠ è½½ç¨‹åºé›†æ—¶è§¦å‘çš„äº‹ä»¶ã€‚
         /// </summary>
         public static event Action<int> OnReLoadAssemblyEvent;
         /// <summary>
-        /// ´æ´¢ÒÑ¼ÓÔØµÄ³ÌĞò¼¯ĞÅÏ¢µÄ×Öµä¡£
+        /// å­˜å‚¨å·²åŠ è½½çš„ç¨‹åºé›†ä¿¡æ¯çš„å­—å…¸ã€‚
         /// </summary>
         private static readonly Dictionary<int, AssemblyInfo> AssemblyList = new Dictionary<int, AssemblyInfo>();
 
         /// <summary>
-        /// ³õÊ¼»¯ AssemblyManager£¬¼ÓÔØµ±Ç°³ÌĞò¼¯¡£
+        /// åˆå§‹åŒ– AssemblyManagerï¼ŒåŠ è½½å½“å‰ç¨‹åºé›†ã€‚
         /// </summary>
         public static void Initialize()
         {
@@ -40,16 +40,16 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// ¼ÓÔØÖ¸¶¨µÄ³ÌĞò¼¯£¬²¢´¥·¢ÏàÓ¦µÄÊÂ¼ş¡£
-        /// ÎŞMaxValueÅĞ¶Ï¡£
+        /// åŠ è½½æŒ‡å®šçš„ç¨‹åºé›†ï¼Œå¹¶è§¦å‘ç›¸åº”çš„äº‹ä»¶ã€‚
+        /// æ— MaxValueåˆ¤æ–­ã€‚
         /// </summary>
-        /// <param name="assemblyName">³ÌĞò¼¯Ãû³Æ¡£</param>
-        /// <param name="assembly">Òª¼ÓÔØµÄ³ÌĞò¼¯¡£</param>
+        /// <param name="assemblyName">ç¨‹åºé›†åç§°ã€‚</param>
+        /// <param name="assembly">è¦åŠ è½½çš„ç¨‹åºé›†ã€‚</param>
         public static void LoadAssembly(int assemblyName, Assembly assembly)
         {
             var isReLoad = false;
 
-            // ¼ì²éÊÇ·ñÒÑ¾­´æÔÚÏàÍ¬Ãû³ÆµÄ³ÌĞò¼¯
+            // æ£€æŸ¥æ˜¯å¦å·²ç»å­˜åœ¨ç›¸åŒåç§°çš„ç¨‹åºé›†
             if (!AssemblyList.TryGetValue(assemblyName, out var assemblyInfo))
             {
                 assemblyInfo = new AssemblyInfo();
@@ -57,28 +57,28 @@ namespace Fantasy.Helper
             }
             else
             {
-                // ÈôÒÑ´æÔÚ£¬Ôò±íÊ¾ÖØĞÂ¼ÓÔØ
+                // è‹¥å·²å­˜åœ¨ï¼Œåˆ™è¡¨ç¤ºé‡æ–°åŠ è½½
                 isReLoad = true;
-                // Ğ¶ÔØÖ®Ç°µÄ³ÌĞò¼¯
+                // å¸è½½ä¹‹å‰çš„ç¨‹åºé›†
                 assemblyInfo.Unload();
 
-                // ´¥·¢ OnUnLoadAssemblyEvent ÊÂ¼ş£¬Í¨Öª³ÌĞò¼¯±»Ğ¶ÔØ
+                // è§¦å‘ OnUnLoadAssemblyEvent äº‹ä»¶ï¼Œé€šçŸ¥ç¨‹åºé›†è¢«å¸è½½
                 if (OnUnLoadAssemblyEvent != null)
                 {
                     OnUnLoadAssemblyEvent(assemblyName);
                 }
             }
 
-            // ¼ÓÔØĞÂµÄ³ÌĞò¼¯
+            // åŠ è½½æ–°çš„ç¨‹åºé›†
             assemblyInfo.Load(assembly);
 
-            // ´¥·¢ OnLoadAssemblyEvent ÊÂ¼ş£¬Í¨Öª³ÌĞò¼¯ÒÑ¼ÓÔØ
+            // è§¦å‘ OnLoadAssemblyEvent äº‹ä»¶ï¼Œé€šçŸ¥ç¨‹åºé›†å·²åŠ è½½
             if (OnLoadAssemblyEvent != null)
             {
                 OnLoadAssemblyEvent(assemblyName);
             }
 
-            // ÈôÎªÖØĞÂ¼ÓÔØÇÒ´æÔÚ OnReLoadAssemblyEvent ÊÂ¼ş£¬Ôò´¥·¢´ËÊÂ¼ş£¬Í¨Öª³ÌĞò¼¯ÒÑÖØĞÂ¼ÓÔØ
+            // è‹¥ä¸ºé‡æ–°åŠ è½½ä¸”å­˜åœ¨ OnReLoadAssemblyEvent äº‹ä»¶ï¼Œåˆ™è§¦å‘æ­¤äº‹ä»¶ï¼Œé€šçŸ¥ç¨‹åºé›†å·²é‡æ–°åŠ è½½
             if (isReLoad && OnReLoadAssemblyEvent != null)
             {
                 OnReLoadAssemblyEvent(assemblyName);
@@ -86,11 +86,11 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// ¼ÓÔØÖ¸¶¨µÄ³ÌĞò¼¯¡£ÓĞMaxValueÅĞ¶Ï
+        /// åŠ è½½æŒ‡å®šçš„ç¨‹åºé›†ã€‚æœ‰MaxValueåˆ¤æ–­
         /// </summary>
-        /// <param name="assemblyName">³ÌĞò¼¯Ãû³Æ¡£</param>
-        /// <param name="assembly">Òª¼ÓÔØµÄ³ÌĞò¼¯¡£</param>
-        /// <exception cref="NotSupportedException">µ±³ÌĞò¼¯Ãû³ÆÎª <see cref="int.MaxValue"/> Ê±£¬Å×³öÒì³£¡£</exception>
+        /// <param name="assemblyName">ç¨‹åºé›†åç§°ã€‚</param>
+        /// <param name="assembly">è¦åŠ è½½çš„ç¨‹åºé›†ã€‚</param>
+        /// <exception cref="NotSupportedException">å½“ç¨‹åºé›†åç§°ä¸º <see cref="int.MaxValue"/> æ—¶ï¼ŒæŠ›å‡ºå¼‚å¸¸ã€‚</exception>
         public static void Load(int assemblyName, Assembly assembly)
         {
             if (int.MaxValue == assemblyName)
@@ -102,9 +102,9 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// »ñÈ¡ËùÓĞÒÑ¼ÓÔØ³ÌĞò¼¯µÄÃû³Æ¡£
+        /// è·å–æ‰€æœ‰å·²åŠ è½½ç¨‹åºé›†çš„åç§°ã€‚
         /// </summary>
-        /// <returns>ËùÓĞÒÑ¼ÓÔØ³ÌĞò¼¯µÄÃû³Æ¡£</returns>
+        /// <returns>æ‰€æœ‰å·²åŠ è½½ç¨‹åºé›†çš„åç§°ã€‚</returns>
         public static IEnumerable<int> ForEachAssemblyName()
         {
             foreach (var (key, _) in AssemblyList)
@@ -114,9 +114,9 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// »ñÈ¡ËùÓĞÒÑ¼ÓÔØ³ÌĞò¼¯ÖĞµÄËùÓĞÀàĞÍ¡£
+        /// è·å–æ‰€æœ‰å·²åŠ è½½ç¨‹åºé›†ä¸­çš„æ‰€æœ‰ç±»å‹ã€‚
         /// </summary>
-        /// <returns>ËùÓĞÒÑ¼ÓÔØ³ÌĞò¼¯ÖĞµÄÀàĞÍ¡£</returns>
+        /// <returns>æ‰€æœ‰å·²åŠ è½½ç¨‹åºé›†ä¸­çš„ç±»å‹ã€‚</returns>
         public static IEnumerable<Type> ForEach()
         {
             foreach (var (_, assemblyInfo) in AssemblyList)
@@ -129,10 +129,10 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// »ñÈ¡Ö¸¶¨³ÌĞò¼¯ÖĞµÄËùÓĞÀàĞÍ¡£
+        /// è·å–æŒ‡å®šç¨‹åºé›†ä¸­çš„æ‰€æœ‰ç±»å‹ã€‚
         /// </summary>
-        /// <param name="assemblyName">³ÌĞò¼¯Ãû³Æ¡£</param>
-        /// <returns>Ö¸¶¨³ÌĞò¼¯ÖĞµÄÀàĞÍ¡£</returns>
+        /// <param name="assemblyName">ç¨‹åºé›†åç§°ã€‚</param>
+        /// <returns>æŒ‡å®šç¨‹åºé›†ä¸­çš„ç±»å‹ã€‚</returns>
         public static IEnumerable<Type> ForEach(int assemblyName)
         {
             if (!AssemblyList.TryGetValue(assemblyName, out var assemblyInfo))
@@ -147,10 +147,10 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// »ñÈ¡ËùÓĞÒÑ¼ÓÔØ³ÌĞò¼¯ÖĞÊµÏÖÖ¸¶¨ÀàĞÍµÄËùÓĞÀàĞÍ¡£
+        /// è·å–æ‰€æœ‰å·²åŠ è½½ç¨‹åºé›†ä¸­å®ç°æŒ‡å®šç±»å‹çš„æ‰€æœ‰ç±»å‹ã€‚
         /// </summary>
-        /// <param name="findType">Òª²éÕÒµÄ»ùÀà»ò½Ó¿ÚÀàĞÍ¡£</param>
-        /// <returns>ËùÓĞÒÑ¼ÓÔØ³ÌĞò¼¯ÖĞÊµÏÖÖ¸¶¨ÀàĞÍµÄÀàĞÍ¡£</returns>
+        /// <param name="findType">è¦æŸ¥æ‰¾çš„åŸºç±»æˆ–æ¥å£ç±»å‹ã€‚</param>
+        /// <returns>æ‰€æœ‰å·²åŠ è½½ç¨‹åºé›†ä¸­å®ç°æŒ‡å®šç±»å‹çš„ç±»å‹ã€‚</returns>
         public static IEnumerable<Type> ForEach(Type findType)
         {
             foreach (var (_, assemblyInfo) in AssemblyList)
@@ -168,11 +168,11 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// »ñÈ¡Ö¸¶¨³ÌĞò¼¯ÖĞÊµÏÖÖ¸¶¨ÀàĞÍµÄËùÓĞÀàĞÍ¡£
+        /// è·å–æŒ‡å®šç¨‹åºé›†ä¸­å®ç°æŒ‡å®šç±»å‹çš„æ‰€æœ‰ç±»å‹ã€‚
         /// </summary>
-        /// <param name="assemblyName">³ÌĞò¼¯Ãû³Æ¡£</param>
-        /// <param name="findType">Òª²éÕÒµÄ»ùÀà»ò½Ó¿ÚÀàĞÍ¡£</param>
-        /// <returns>Ö¸¶¨³ÌĞò¼¯ÖĞÊµÏÖÖ¸¶¨ÀàĞÍµÄÀàĞÍ¡£</returns>
+        /// <param name="assemblyName">ç¨‹åºé›†åç§°ã€‚</param>
+        /// <param name="findType">è¦æŸ¥æ‰¾çš„åŸºç±»æˆ–æ¥å£ç±»å‹ã€‚</param>
+        /// <returns>æŒ‡å®šç¨‹åºé›†ä¸­å®ç°æŒ‡å®šç±»å‹çš„ç±»å‹ã€‚</returns>
         public static IEnumerable<Type> ForEach(int assemblyName, Type findType)
         {
             if (!AssemblyList.TryGetValue(assemblyName, out var assemblyInfo))
@@ -192,30 +192,30 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// »ñÈ¡Ö¸¶¨³ÌĞò¼¯µÄÊµÀı¡£
+        /// è·å–æŒ‡å®šç¨‹åºé›†çš„å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="assemblyName">³ÌĞò¼¯Ãû³Æ¡£</param>
-        /// <returns>Ö¸¶¨³ÌĞò¼¯µÄÊµÀı£¬Èç¹ûÎ´¼ÓÔØÔò·µ»Ø null¡£</returns>
+        /// <param name="assemblyName">ç¨‹åºé›†åç§°ã€‚</param>
+        /// <returns>æŒ‡å®šç¨‹åºé›†çš„å®ä¾‹ï¼Œå¦‚æœæœªåŠ è½½åˆ™è¿”å› nullã€‚</returns>
         public static Assembly GetAssembly(int assemblyName)
         {
             return !AssemblyList.TryGetValue(assemblyName, out var assemblyInfo) ? null : assemblyInfo.Assembly;
         }
 
         /// <summary>
-        /// ÊÍ·Å×ÊÔ´£¬Ğ¶ÔØËùÓĞ¼ÓÔØµÄ³ÌĞò¼¯¡£
+        /// é‡Šæ”¾èµ„æºï¼Œå¸è½½æ‰€æœ‰åŠ è½½çš„ç¨‹åºé›†ã€‚
         /// </summary>
         public static void Dispose()
         {
-            // Ğ¶ÔØËùÓĞÒÑ¼ÓÔØµÄ³ÌĞò¼¯
+            // å¸è½½æ‰€æœ‰å·²åŠ è½½çš„ç¨‹åºé›†
             foreach (var (_, assemblyInfo) in AssemblyList)
             {
                 assemblyInfo.Unload();
             }
 
-            // Çå¿ÕÒÑ¼ÓÔØµÄ³ÌĞò¼¯ÁĞ±í
+            // æ¸…ç©ºå·²åŠ è½½çš„ç¨‹åºé›†åˆ—è¡¨
             AssemblyList.Clear();
 
-            // ÒÆ³ıËùÓĞÊÂ¼ş´¦Àí³ÌĞò£¬ÒÔ±ÜÃâÊÂ¼şĞ¹Â©ºÍÄÚ´æĞ¹Â©
+            // ç§»é™¤æ‰€æœ‰äº‹ä»¶å¤„ç†ç¨‹åºï¼Œä»¥é¿å…äº‹ä»¶æ³„æ¼å’Œå†…å­˜æ³„æ¼
             if (OnLoadAssemblyEvent != null)
             {
                 foreach (var @delegate in OnLoadAssemblyEvent.GetInvocationList())

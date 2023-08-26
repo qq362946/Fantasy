@@ -7,7 +7,7 @@ using Fantasy.Helper;
 namespace Fantasy.Hotfix;
 
 /// <summary>
-/// µ¥Àı¼¯ºÏ¹ÜÀíÆ÷Àà£¬¼Ì³Ğ×Ô <see cref="Singleton{T}"/>¡£
+/// å•ä¾‹é›†åˆç®¡ç†å™¨ç±»ï¼Œç»§æ‰¿è‡ª <see cref="Singleton{T}"/>ã€‚
 /// </summary>
 public class SingleCollection : Singleton<SingleCollection>
 {
@@ -15,7 +15,7 @@ public class SingleCollection : Singleton<SingleCollection>
     private readonly OneToManyList<int, SingleCollectionInfo> _assemblyCollections = new OneToManyList<int, SingleCollectionInfo>();
 
     /// <summary>
-    /// ±íÊ¾µ¥Àı¼¯ºÏµÄĞÅÏ¢Àà¡£
+    /// è¡¨ç¤ºå•ä¾‹é›†åˆçš„ä¿¡æ¯ç±»ã€‚
     /// </summary>
     private sealed class SingleCollectionInfo
     {
@@ -30,9 +30,9 @@ public class SingleCollection : Singleton<SingleCollection>
     }
 
     /// <summary>
-    /// ÔÚ³ÌĞò¼¯¼ÓÔØÊ±Ö´ĞĞµÄ·½·¨¡£
+    /// åœ¨ç¨‹åºé›†åŠ è½½æ—¶æ‰§è¡Œçš„æ–¹æ³•ã€‚
     /// </summary>
-    /// <param name="assemblyName">³ÌĞò¼¯Ãû³Æ¡£</param>
+    /// <param name="assemblyName">ç¨‹åºé›†åç§°ã€‚</param>
     protected override void OnLoad(int assemblyName)
     {
         foreach (var type in AssemblyManager.ForEach(assemblyName, typeof(ISupportedSingleCollection)))
@@ -54,9 +54,9 @@ public class SingleCollection : Singleton<SingleCollection>
     }
 
     /// <summary>
-    /// ÔÚ³ÌĞò¼¯Ğ¶ÔØÊ±Ö´ĞĞµÄ·½·¨¡£
+    /// åœ¨ç¨‹åºé›†å¸è½½æ—¶æ‰§è¡Œçš„æ–¹æ³•ã€‚
     /// </summary>
-    /// <param name="assemblyName">³ÌĞò¼¯Ãû³Æ¡£</param>
+    /// <param name="assemblyName">ç¨‹åºé›†åç§°ã€‚</param>
     protected override void OnUnLoad(int assemblyName)
     {
         if (!_assemblyCollections.TryGetValue(assemblyName, out var types))
@@ -73,10 +73,10 @@ public class SingleCollection : Singleton<SingleCollection>
     }
 
     /// <summary>
-    /// Òì²½»ñÈ¡ÊµÌåµÄ¼¯ºÏÊı¾İ¡£
+    /// å¼‚æ­¥è·å–å®ä½“çš„é›†åˆæ•°æ®ã€‚
     /// </summary>
-    /// <param name="entity">ÊµÌå¶ÔÏó¡£</param>
-    /// <returns>±íÊ¾Òì²½²Ù×÷µÄÈÎÎñ¡£</returns>
+    /// <param name="entity">å®ä½“å¯¹è±¡ã€‚</param>
+    /// <returns>è¡¨ç¤ºå¼‚æ­¥æ“ä½œçš„ä»»åŠ¡ã€‚</returns>
     public async FTask GetCollections(Entity entity)
     {
         if (entity is not ISingleCollectionRoot)
@@ -104,10 +104,10 @@ public class SingleCollection : Singleton<SingleCollection>
     }
 
     /// <summary>
-    /// Òì²½±£´æÊµÌåµÄ¼¯ºÏÊı¾İ¡£
+    /// å¼‚æ­¥ä¿å­˜å®ä½“çš„é›†åˆæ•°æ®ã€‚
     /// </summary>
-    /// <param name="entity">ÊµÌå¶ÔÏó¡£</param>
-    /// <returns>±íÊ¾Òì²½²Ù×÷µÄÈÎÎñ¡£</returns>
+    /// <param name="entity">å®ä½“å¯¹è±¡ã€‚</param>
+    /// <returns>è¡¨ç¤ºå¼‚æ­¥æ“ä½œçš„ä»»åŠ¡ã€‚</returns>
     public async FTask SaveCollections(Entity entity)
     {
         if (entity is not ISingleCollectionRoot)

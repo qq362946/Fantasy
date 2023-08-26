@@ -4,16 +4,16 @@ using Fantasy.IO;
 namespace Fantasy.Helper
 {
     /// <summary>
-    /// Ìá¹©»ñÈ¡¿É»ØÊÕÄÚ´æÁ÷µÄ°ïÖú·½·¨¡£
+    /// æä¾›è·å–å¯å›æ”¶å†…å­˜æµçš„å¸®åŠ©æ–¹æ³•ã€‚
     /// </summary>
     public static class MemoryStreamHelper
     {
         private static readonly RecyclableMemoryStreamManager Manager = new RecyclableMemoryStreamManager();
 
         /// <summary>
-        /// »ñÈ¡Ò»¸ö¿É»ØÊÕÄÚ´æÁ÷ÊµÀı¡£
+        /// è·å–ä¸€ä¸ªå¯å›æ”¶å†…å­˜æµå®ä¾‹ã€‚
         /// </summary>
-        /// <returns>¿É»ØÊÕÄÚ´æÁ÷ÊµÀı¡£</returns>
+        /// <returns>å¯å›æ”¶å†…å­˜æµå®ä¾‹ã€‚</returns>
         public static MemoryStream GetRecyclableMemoryStream()
         {
             return Manager.GetStream();

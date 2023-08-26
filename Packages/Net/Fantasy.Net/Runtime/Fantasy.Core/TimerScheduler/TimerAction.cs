@@ -6,31 +6,31 @@ using Fantasy.Helper;
 namespace Fantasy
 {
     /// <summary>
-    /// ¼ÆÊ±Æ÷²Ù×÷Àà£¬ÓÃÓÚ¹ÜÀí¶¨Ê±Æ÷Ïà¹ØĞÅÏ¢¡£
+    /// è®¡æ—¶å™¨æ“ä½œç±»ï¼Œç”¨äºç®¡ç†å®šæ—¶å™¨ç›¸å…³ä¿¡æ¯ã€‚
     /// </summary>
     public sealed class TimerAction : IDisposable
     {
         /// <summary>
-        /// Î¨Ò»±êÊ¶·û¡£
+        /// å”¯ä¸€æ ‡è¯†ç¬¦ã€‚
         /// </summary>
         public long Id;
         /// <summary>
-        /// ´¥·¢Ê±¼ä¡£
+        /// è§¦å‘æ—¶é—´ã€‚
         /// </summary>
         public long Time;
         /// <summary>
-        /// »Øµ÷¶ÔÏó¡£
+        /// å›è°ƒå¯¹è±¡ã€‚
         /// </summary>
         public object Callback;
         /// <summary>
-        /// ¼ÆÊ±Æ÷ÀàĞÍ¡£
+        /// è®¡æ—¶å™¨ç±»å‹ã€‚
         /// </summary>
         public TimerType TimerType;
 
         /// <summary>
-        /// ´´½¨Ò»¸ö <see cref="TimerAction"/> ÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ª <see cref="TimerAction"/> å®ä¾‹ã€‚
         /// </summary>
-        /// <returns>ĞÂ´´½¨µÄ <see cref="TimerAction"/> ÊµÀı¡£</returns>
+        /// <returns>æ–°åˆ›å»ºçš„ <see cref="TimerAction"/> å®ä¾‹ã€‚</returns>
         public static TimerAction Create()
         {
             var timerAction = Pool<TimerAction>.Rent();
@@ -39,7 +39,7 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ÊÍ·Å×ÊÔ´¡£
+        /// é‡Šæ”¾èµ„æºã€‚
         /// </summary>
         public void Dispose()
         {

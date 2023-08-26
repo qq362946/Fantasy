@@ -3,18 +3,18 @@
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// Ìá¹©²Ù×÷µØÖ·Ó³ÉäµÄ¸¨Öú·½·¨¡£
+    /// æä¾›æ“ä½œåœ°å€æ˜ å°„çš„è¾…åŠ©æ–¹æ³•ã€‚
     /// </summary>
     public static class AddressableHelper
     {
-        // ÉùÃ÷Ò»¸öË½ÓĞ¾²Ì¬Ö»¶ÁÁĞ±í AddressableScenes£¬ÓÃÓÚ´æ´¢µØÖ·Ó³ÉäµÄ³¡¾°ÅäÖÃĞÅÏ¢
+        // å£°æ˜ä¸€ä¸ªç§æœ‰é™æ€åªè¯»åˆ—è¡¨ AddressableScenesï¼Œç”¨äºå­˜å‚¨åœ°å€æ˜ å°„çš„åœºæ™¯é…ç½®ä¿¡æ¯
         private static readonly List<SceneConfigInfo> AddressableScenes = new List<SceneConfigInfo>();
 
         static AddressableHelper()
         {
-            // »ñÈ¡ËùÓĞ³¡¾°ÅäÖÃĞÅÏ¢
+            // è·å–æ‰€æœ‰åœºæ™¯é…ç½®ä¿¡æ¯
             var sceneConfigInfos = ConfigTableManage.AllSceneConfig();
-            // ±éÀú³¡¾°ÅäÖÃĞÅÏ¢£¬É¸Ñ¡³öµØÖ·Ó³ÉäÀàĞÍµÄ³¡¾°£¬²¢Ìí¼Óµ½ AddressableScenes ÁĞ±íÖĞ
+            // éå†åœºæ™¯é…ç½®ä¿¡æ¯ï¼Œç­›é€‰å‡ºåœ°å€æ˜ å°„ç±»å‹çš„åœºæ™¯ï¼Œå¹¶æ·»åŠ åˆ° AddressableScenes åˆ—è¡¨ä¸­
             foreach (var sceneConfigInfo in sceneConfigInfos)
             {
                 if (sceneConfigInfo.SceneTypeStr == "Addressable")
@@ -25,17 +25,17 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// Ìí¼ÓµØÖ·Ó³Éä²¢·µ»Ø²Ù×÷½á¹û¡£
+        /// æ·»åŠ åœ°å€æ˜ å°„å¹¶è¿”å›æ“ä½œç»“æœã€‚
         /// </summary>
-        /// <param name="scene">³¡¾°ÊµÀı¡£</param>
-        /// <param name="addressableId">µØÖ·Ó³ÉäµÄÎ¨Ò»±êÊ¶¡£</param>
-        /// <param name="routeId">Â·ÓÉ ID¡£</param>
-        /// <param name="isLock">ÊÇ·ñËø¶¨¡£</param>
+        /// <param name="scene">åœºæ™¯å®ä¾‹ã€‚</param>
+        /// <param name="addressableId">åœ°å€æ˜ å°„çš„å”¯ä¸€æ ‡è¯†ã€‚</param>
+        /// <param name="routeId">è·¯ç”± IDã€‚</param>
+        /// <param name="isLock">æ˜¯å¦é”å®šã€‚</param>
         public static async FTask AddAddressable(Scene scene, long addressableId, long routeId, bool isLock = true)
         {
-            // »ñÈ¡Ö¸¶¨Ë÷ÒıµÄµØÖ·Ó³Éä³¡¾°ÅäÖÃĞÅÏ¢
+            // è·å–æŒ‡å®šç´¢å¼•çš„åœ°å€æ˜ å°„åœºæ™¯é…ç½®ä¿¡æ¯
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
-            // µ÷ÓÃÄÚ²¿Â·ÓÉ·½·¨£¬·¢ËÍÌí¼ÓµØÖ·Ó³ÉäµÄÇëÇó²¢µÈ´ıÏìÓ¦
+            // è°ƒç”¨å†…éƒ¨è·¯ç”±æ–¹æ³•ï¼Œå‘é€æ·»åŠ åœ°å€æ˜ å°„çš„è¯·æ±‚å¹¶ç­‰å¾…å“åº”
             var response = await MessageHelper.CallInnerRoute(scene, addressableScene.EntityId,
                 new I_AddressableAdd_Request
                 {
@@ -48,22 +48,22 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// »ñÈ¡µØÖ·Ó³ÉäµÄÂ·ÓÉ ID¡£
+        /// è·å–åœ°å€æ˜ å°„çš„è·¯ç”± IDã€‚
         /// </summary>
-        /// <param name="scene">³¡¾°ÊµÀı¡£</param>
-        /// <param name="addressableId">µØÖ·Ó³ÉäµÄÎ¨Ò»±êÊ¶¡£</param>
-        /// <returns>µØÖ·Ó³ÉäµÄÂ·ÓÉ ID¡£</returns>
+        /// <param name="scene">åœºæ™¯å®ä¾‹ã€‚</param>
+        /// <param name="addressableId">åœ°å€æ˜ å°„çš„å”¯ä¸€æ ‡è¯†ã€‚</param>
+        /// <returns>åœ°å€æ˜ å°„çš„è·¯ç”± IDã€‚</returns>
         public static async FTask<long> GetAddressableRouteId(Scene scene, long addressableId)
         {
-            // »ñÈ¡Ö¸¶¨Ë÷ÒıµÄµØÖ·Ó³Éä³¡¾°ÅäÖÃĞÅÏ¢
+            // è·å–æŒ‡å®šç´¢å¼•çš„åœ°å€æ˜ å°„åœºæ™¯é…ç½®ä¿¡æ¯
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
-            // µ÷ÓÃÄÚ²¿Â·ÓÉ·½·¨£¬·¢ËÍ»ñÈ¡µØÖ·Ó³ÉäÂ·ÓÉ ID µÄÇëÇó²¢µÈ´ıÏìÓ¦
+            // è°ƒç”¨å†…éƒ¨è·¯ç”±æ–¹æ³•ï¼Œå‘é€è·å–åœ°å€æ˜ å°„è·¯ç”± ID çš„è¯·æ±‚å¹¶ç­‰å¾…å“åº”
             var response = (I_AddressableGet_Response) await MessageHelper.CallInnerRoute(scene, addressableScene.EntityId,
                 new I_AddressableGet_Request
                 {
                     AddressableId = addressableId
                 });
-            // ¼ì²éÏìÓ¦´íÎóÂë£¬Èç¹ûÎªÁã£¬·µ»ØÂ·ÓÉ ID£»·ñÔò£¬Êä³ö´íÎóĞÅÏ¢²¢·µ»Ø 0
+            // æ£€æŸ¥å“åº”é”™è¯¯ç ï¼Œå¦‚æœä¸ºé›¶ï¼Œè¿”å›è·¯ç”± IDï¼›å¦åˆ™ï¼Œè¾“å‡ºé”™è¯¯ä¿¡æ¯å¹¶è¿”å› 0
             if (response.ErrorCode == 0)
             {
                 return response.RouteId;
@@ -74,10 +74,10 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ÒÆ³ıÖ¸¶¨µØÖ·Ó³Éä¡£
+        /// ç§»é™¤æŒ‡å®šåœ°å€æ˜ å°„ã€‚
         /// </summary>
-        /// <param name="scene">³¡¾°ÊµÀı¡£</param>
-        /// <param name="addressableId">µØÖ·Ó³ÉäµÄÎ¨Ò»±êÊ¶¡£</param>
+        /// <param name="scene">åœºæ™¯å®ä¾‹ã€‚</param>
+        /// <param name="addressableId">åœ°å€æ˜ å°„çš„å”¯ä¸€æ ‡è¯†ã€‚</param>
         public static async FTask RemoveAddressable(Scene scene, long addressableId)
         {
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
@@ -94,10 +94,10 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// Ëø¶¨Ö¸¶¨µØÖ·Ó³Éä¡£
+        /// é”å®šæŒ‡å®šåœ°å€æ˜ å°„ã€‚
         /// </summary>
-        /// <param name="scene">³¡¾°ÊµÀı¡£</param>
-        /// <param name="addressableId">µØÖ·Ó³ÉäµÄÎ¨Ò»±êÊ¶¡£</param>
+        /// <param name="scene">åœºæ™¯å®ä¾‹ã€‚</param>
+        /// <param name="addressableId">åœ°å€æ˜ å°„çš„å”¯ä¸€æ ‡è¯†ã€‚</param>
         public static async FTask LockAddressable(Scene scene, long addressableId)
         {
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
@@ -114,12 +114,12 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ½âËøÖ¸¶¨µØÖ·Ó³Éä¡£
+        /// è§£é”æŒ‡å®šåœ°å€æ˜ å°„ã€‚
         /// </summary>
-        /// <param name="scene">³¡¾°ÊµÀı¡£</param>
-        /// <param name="addressableId">µØÖ·Ó³ÉäµÄÎ¨Ò»±êÊ¶¡£</param>
-        /// <param name="routeId">Â·ÓÉ ID¡£</param>
-        /// <param name="source">½âËøÀ´Ô´¡£</param>
+        /// <param name="scene">åœºæ™¯å®ä¾‹ã€‚</param>
+        /// <param name="addressableId">åœ°å€æ˜ å°„çš„å”¯ä¸€æ ‡è¯†ã€‚</param>
+        /// <param name="routeId">è·¯ç”± IDã€‚</param>
+        /// <param name="source">è§£é”æ¥æºã€‚</param>
         public static async FTask UnLockAddressable(Scene scene, long addressableId, long routeId, string source)
         {
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];

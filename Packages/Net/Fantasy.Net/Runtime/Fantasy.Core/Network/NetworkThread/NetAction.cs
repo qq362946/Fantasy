@@ -6,76 +6,76 @@ using System.IO;
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ²»Í¬ÀàÐÍµÄÍøÂç²Ù×÷¡£
+    /// ä¸åŒç±»åž‹çš„ç½‘ç»œæ“ä½œã€‚
     /// </summary>
     public enum NetActionType
     {
         /// <summary>
-        /// ÎÞ²Ù×÷¡£
+        /// æ— æ“ä½œã€‚
         /// </summary>
         None = 0,
         /// <summary>
-        /// ·¢ËÍÊý¾Ý¡£
+        /// å‘é€æ•°æ®ã€‚
         /// </summary>
         Send = 1,
         /// <summary>
-        /// ·¢ËÍÄÚ´æÁ÷Êý¾Ý¡£
+        /// å‘é€å†…å­˜æµæ•°æ®ã€‚
         /// </summary>
         SendMemoryStream = 2,
         /// <summary>
-        /// ÒÆ³ýÍ¨µÀ¡£
+        /// ç§»é™¤é€šé“ã€‚
         /// </summary>
         RemoveChannel = 3,
     }
 
     /// <summary>
-    /// ±íÊ¾Ò»¸öÍøÂç²Ù×÷£¬¿ÉÒÔÊÇ·¢ËÍÏûÏ¢¡¢ÒÆ³ýÍ¨µÀµÈ²Ù×÷¡£
+    /// è¡¨ç¤ºä¸€ä¸ªç½‘ç»œæ“ä½œï¼Œå¯ä»¥æ˜¯å‘é€æ¶ˆæ¯ã€ç§»é™¤é€šé“ç­‰æ“ä½œã€‚
     /// </summary>
     public struct NetAction : IDisposable
     {
         /// <summary>
-        /// ÓÃÓÚ·¢ËÍµÄ¶ÔÏó£¬¿ÉÄÜÊÇÏûÏ¢¶ÔÏó»òÆäËûÊý¾Ý¡£
+        /// ç”¨äºŽå‘é€çš„å¯¹è±¡ï¼Œå¯èƒ½æ˜¯æ¶ˆæ¯å¯¹è±¡æˆ–å…¶ä»–æ•°æ®ã€‚
         /// </summary>
         public object Obj;
         /// <summary>
-        /// Òª·¢ËÍµÄ RPC ID¡£
+        /// è¦å‘é€çš„ RPC IDã€‚
         /// </summary>
         public uint RpcId;
         /// <summary>
-        /// ¹ØÁªµÄÊµÌå ID¡£
+        /// å…³è”çš„å®žä½“ IDã€‚
         /// </summary>
         public long EntityId;
         /// <summary>
-        /// ¹ØÁªµÄÍøÂç ID¡£
+        /// å…³è”çš„ç½‘ç»œ IDã€‚
         /// </summary>
         public long NetworkId;
         /// <summary>
-        /// ¹ØÁªµÄÍ¨µÀ ID¡£
+        /// å…³è”çš„é€šé“ IDã€‚
         /// </summary>
         public uint ChannelId;
         /// <summary>
-        /// ¹ØÁªµÄÂ·ÓÉÀàÐÍ Op Code¡£
+        /// å…³è”çš„è·¯ç”±ç±»åž‹ Op Codeã€‚
         /// </summary>
         public long RouteTypeOpCode;
         /// <summary>
-        /// ÓÃÓÚ·¢ËÍµÄÄÚ´æÁ÷¡£
+        /// ç”¨äºŽå‘é€çš„å†…å­˜æµã€‚
         /// </summary>
         public MemoryStream MemoryStream;
         /// <summary>
-        /// ÍøÂç²Ù×÷µÄÀàÐÍ¡£
+        /// ç½‘ç»œæ“ä½œçš„ç±»åž‹ã€‚
         /// </summary>
         public NetActionType NetActionType;
 
         /// <summary>
-        /// ³õÊ¼»¯Ò»¸öÐÂµÄ NetAction ½á¹¹ÌåÊµÀý£¬ÓÃÓÚ·¢ËÍÄÚ´æÁ÷¡£
+        /// åˆå§‹åŒ–ä¸€ä¸ªæ–°çš„ NetAction ç»“æž„ä½“å®žä¾‹ï¼Œç”¨äºŽå‘é€å†…å­˜æµã€‚
         /// </summary>
-        /// <param name="networkId">¹ØÁªµÄÍøÂç ID¡£</param>
-        /// <param name="channelId">¹ØÁªµÄÍ¨µÀ ID¡£</param>
-        /// <param name="rpcId">Òª·¢ËÍµÄ RPC ID¡£</param>
-        /// <param name="routeTypeOpCode">¹ØÁªµÄÂ·ÓÉÀàÐÍ Op Code¡£</param>
-        /// <param name="entityId">¹ØÁªµÄÊµÌå ID¡£</param>
-        /// <param name="netActionType">ÍøÂç²Ù×÷µÄÀàÐÍ¡£</param>
-        /// <param name="memoryStream">Òª·¢ËÍµÄÄÚ´æÁ÷¡£</param>
+        /// <param name="networkId">å…³è”çš„ç½‘ç»œ IDã€‚</param>
+        /// <param name="channelId">å…³è”çš„é€šé“ IDã€‚</param>
+        /// <param name="rpcId">è¦å‘é€çš„ RPC IDã€‚</param>
+        /// <param name="routeTypeOpCode">å…³è”çš„è·¯ç”±ç±»åž‹ Op Codeã€‚</param>
+        /// <param name="entityId">å…³è”çš„å®žä½“ IDã€‚</param>
+        /// <param name="netActionType">ç½‘ç»œæ“ä½œçš„ç±»åž‹ã€‚</param>
+        /// <param name="memoryStream">è¦å‘é€çš„å†…å­˜æµã€‚</param>
         public NetAction(long networkId, uint channelId, uint rpcId, long routeTypeOpCode, long entityId, NetActionType netActionType, MemoryStream memoryStream)
         {
             Obj = null;
@@ -89,15 +89,15 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ³õÊ¼»¯Ò»¸öÐÂµÄ NetAction ½á¹¹ÌåÊµÀý£¬ÓÃÓÚ·¢ËÍ¶ÔÏó¡£
+        /// åˆå§‹åŒ–ä¸€ä¸ªæ–°çš„ NetAction ç»“æž„ä½“å®žä¾‹ï¼Œç”¨äºŽå‘é€å¯¹è±¡ã€‚
         /// </summary>
-        /// <param name="networkId">¹ØÁªµÄÍøÂç ID¡£</param>
-        /// <param name="channelId">¹ØÁªµÄÍ¨µÀ ID¡£</param>
-        /// <param name="rpcId">Òª·¢ËÍµÄ RPC ID¡£</param>
-        /// <param name="routeTypeOpCode">¹ØÁªµÄÂ·ÓÉÀàÐÍ Op Code¡£</param>
-        /// <param name="entityId">¹ØÁªµÄÊµÌå ID¡£</param>
-        /// <param name="netActionType">ÍøÂç²Ù×÷µÄÀàÐÍ¡£</param>
-        /// <param name="obj">Òª·¢ËÍµÄ¶ÔÏó¡£</param>
+        /// <param name="networkId">å…³è”çš„ç½‘ç»œ IDã€‚</param>
+        /// <param name="channelId">å…³è”çš„é€šé“ IDã€‚</param>
+        /// <param name="rpcId">è¦å‘é€çš„ RPC IDã€‚</param>
+        /// <param name="routeTypeOpCode">å…³è”çš„è·¯ç”±ç±»åž‹ Op Codeã€‚</param>
+        /// <param name="entityId">å…³è”çš„å®žä½“ IDã€‚</param>
+        /// <param name="netActionType">ç½‘ç»œæ“ä½œçš„ç±»åž‹ã€‚</param>
+        /// <param name="obj">è¦å‘é€çš„å¯¹è±¡ã€‚</param>
         public NetAction(long networkId, uint channelId, uint rpcId, long routeTypeOpCode, long entityId, NetActionType netActionType, object obj)
         {
             Obj = obj;
@@ -111,7 +111,7 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ÊÍ·Å×ÊÔ´²¢ÇåÀíµ±Ç°ÊµÀýµÄ×´Ì¬¡£
+        /// é‡Šæ”¾èµ„æºå¹¶æ¸…ç†å½“å‰å®žä¾‹çš„çŠ¶æ€ã€‚
         /// </summary>
         public void Dispose()
         {

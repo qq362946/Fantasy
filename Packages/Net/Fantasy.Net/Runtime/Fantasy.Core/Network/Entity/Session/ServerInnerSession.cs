@@ -2,16 +2,16 @@
 namespace Fantasy.Core.Network;
 
 /// <summary>
-/// ÍøÂç·şÎñÆ÷ÄÚ²¿»á»°¡£
+/// ç½‘ç»œæœåŠ¡å™¨å†…éƒ¨ä¼šè¯ã€‚
 /// </summary>
 public sealed class ServerInnerSession : Session
 {
     /// <summary>
-    /// ·¢ËÍÏûÏ¢µ½·şÎñÆ÷ÄÚ²¿¡£
+    /// å‘é€æ¶ˆæ¯åˆ°æœåŠ¡å™¨å†…éƒ¨ã€‚
     /// </summary>
-    /// <param name="message">Òª·¢ËÍµÄÏûÏ¢¡£</param>
-    /// <param name="rpcId">RPC ±êÊ¶·û¡£</param>
-    /// <param name="routeId">Â·ÓÉ±êÊ¶·û¡£</param>
+    /// <param name="message">è¦å‘é€çš„æ¶ˆæ¯ã€‚</param>
+    /// <param name="rpcId">RPC æ ‡è¯†ç¬¦ã€‚</param>
+    /// <param name="routeId">è·¯ç”±æ ‡è¯†ç¬¦ã€‚</param>
     public override void Send(object message, uint rpcId = 0, long routeId = 0)
     {
         if (IsDisposed)
@@ -23,11 +23,11 @@ public sealed class ServerInnerSession : Session
     }
 
     /// <summary>
-    /// ·¢ËÍÂ·ÓÉÏûÏ¢µ½·şÎñÆ÷ÄÚ²¿¡£
+    /// å‘é€è·¯ç”±æ¶ˆæ¯åˆ°æœåŠ¡å™¨å†…éƒ¨ã€‚
     /// </summary>
-    /// <param name="routeMessage">Òª·¢ËÍµÄÂ·ÓÉÏûÏ¢¡£</param>
-    /// <param name="rpcId">RPC ±êÊ¶·û¡£</param>
-    /// <param name="routeId">Â·ÓÉ±êÊ¶·û¡£</param>
+    /// <param name="routeMessage">è¦å‘é€çš„è·¯ç”±æ¶ˆæ¯ã€‚</param>
+    /// <param name="rpcId">RPC æ ‡è¯†ç¬¦ã€‚</param>
+    /// <param name="routeId">è·¯ç”±æ ‡è¯†ç¬¦ã€‚</param>
     public override void Send(IRouteMessage routeMessage, uint rpcId = 0, long routeId = 0)
     {
         if (IsDisposed)
@@ -39,23 +39,23 @@ public sealed class ServerInnerSession : Session
     }
 
     /// <summary>
-    /// ·¢ËÍÄÚ´æÁ÷µ½·şÎñÆ÷ÄÚ²¿£¨²»Ö§³Ö£©¡£
+    /// å‘é€å†…å­˜æµåˆ°æœåŠ¡å™¨å†…éƒ¨ï¼ˆä¸æ”¯æŒï¼‰ã€‚
     /// </summary>
-    /// <param name="memoryStream">Òª·¢ËÍµÄÄÚ´æÁ÷¡£</param>
-    /// <param name="rpcId">RPC ±êÊ¶·û¡£</param>
-    /// <param name="routeTypeOpCode">Â·ÓÉÀàĞÍºÍ²Ù×÷Âë¡£</param>
-    /// <param name="routeId">Â·ÓÉ±êÊ¶·û¡£</param>
+    /// <param name="memoryStream">è¦å‘é€çš„å†…å­˜æµã€‚</param>
+    /// <param name="rpcId">RPC æ ‡è¯†ç¬¦ã€‚</param>
+    /// <param name="routeTypeOpCode">è·¯ç”±ç±»å‹å’Œæ“ä½œç ã€‚</param>
+    /// <param name="routeId">è·¯ç”±æ ‡è¯†ç¬¦ã€‚</param>
     public override void Send(MemoryStream memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
     {
         throw new Exception("The use of this method is not supported");
     }
 
     /// <summary>
-    /// µ÷ÓÃÇëÇó²¢µÈ´ıÏìÓ¦£¨²»Ö§³Ö£©¡£
+    /// è°ƒç”¨è¯·æ±‚å¹¶ç­‰å¾…å“åº”ï¼ˆä¸æ”¯æŒï¼‰ã€‚
     /// </summary>
-    /// <param name="request">Òªµ÷ÓÃµÄÇëÇó¡£</param>
-    /// <param name="routeId">Â·ÓÉ±êÊ¶·û¡£</param>
-    /// <returns>Ò»¸ö´ú±íÒì²½²Ù×÷µÄÈÎÎñ£¬·µ»ØÏìÓ¦¡£</returns>
+    /// <param name="request">è¦è°ƒç”¨çš„è¯·æ±‚ã€‚</param>
+    /// <param name="routeId">è·¯ç”±æ ‡è¯†ç¬¦ã€‚</param>
+    /// <returns>ä¸€ä¸ªä»£è¡¨å¼‚æ­¥æ“ä½œçš„ä»»åŠ¡ï¼Œè¿”å›å“åº”ã€‚</returns>
     public override FTask<IResponse> Call(IRequest request, long routeId = 0)
     {
         throw new Exception("The use of this method is not supported");

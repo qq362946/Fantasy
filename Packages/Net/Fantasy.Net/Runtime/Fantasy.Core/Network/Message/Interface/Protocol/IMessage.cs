@@ -1,19 +1,19 @@
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ±íÊ¾Í¨ÓÃÏûÏ¢½Ó¿Ú¡£
+    /// è¡¨ç¤ºé€šç”¨æ¶ˆæ¯æ¥å£ã€‚
     /// </summary>
     public interface IMessage
     {
         /// <summary>
-        /// »ñÈ¡ÏûÏ¢µÄ²Ù×÷´úÂë¡£
+        /// è·å–æ¶ˆæ¯çš„æ“ä½œä»£ç ã€‚
         /// </summary>
-        /// <returns>²Ù×÷´úÂë¡£</returns>
+        /// <returns>æ“ä½œä»£ç ã€‚</returns>
         uint OpCode();
     }
 
     /// <summary>
-    /// ±íÊ¾ÇëÇóÏûÏ¢½Ó¿Ú¡£
+    /// è¡¨ç¤ºè¯·æ±‚æ¶ˆæ¯æ¥å£ã€‚
     /// </summary>
     public interface IRequest : IMessage
     {
@@ -21,12 +21,12 @@ namespace Fantasy.Core.Network
     }
 
     /// <summary>
-    /// ±íÊ¾ÏìÓ¦ÏûÏ¢½Ó¿Ú¡£
+    /// è¡¨ç¤ºå“åº”æ¶ˆæ¯æ¥å£ã€‚
     /// </summary>
     public interface IResponse : IMessage
     {
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃ´íÎó´úÂë¡£
+        /// è·å–æˆ–è®¾ç½®é”™è¯¯ä»£ç ã€‚
         /// </summary>
         uint ErrorCode { get; set; }
     }

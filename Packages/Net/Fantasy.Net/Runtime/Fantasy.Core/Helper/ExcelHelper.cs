@@ -4,27 +4,27 @@ using OfficeOpenXml;
 namespace Fantasy.Helper;
 
 /// <summary>
-/// Ìá¹©²Ù×÷ Excel ÎÄ¼şµÄ¸¨Öú·½·¨¡£
+/// æä¾›æ“ä½œ Excel æ–‡ä»¶çš„è¾…åŠ©æ–¹æ³•ã€‚
 /// </summary>
 public static class ExcelHelper
 {
     /// <summary>
-    /// ¼ÓÔØ Excel ÎÄ¼ş²¢·µ»Ø ExcelPackage ÊµÀı¡£
+    /// åŠ è½½ Excel æ–‡ä»¶å¹¶è¿”å› ExcelPackage å®ä¾‹ã€‚
     /// </summary>
-    /// <param name="name">Excel ÎÄ¼şµÄÂ·¾¶¡£</param>
-    /// <returns>ExcelPackage ÊµÀı¡£</returns>
+    /// <param name="name">Excel æ–‡ä»¶çš„è·¯å¾„ã€‚</param>
+    /// <returns>ExcelPackage å®ä¾‹ã€‚</returns>
     public static ExcelPackage LoadExcel(string name)
     {
         return new ExcelPackage(name);
     }
 
     /// <summary>
-    /// »ñÈ¡Ö¸¶¨¹¤×÷±íÖĞÖ¸¶¨ĞĞÁĞÎ»ÖÃµÄµ¥Ôª¸ñÖµ¡£
+    /// è·å–æŒ‡å®šå·¥ä½œè¡¨ä¸­æŒ‡å®šè¡Œåˆ—ä½ç½®çš„å•å…ƒæ ¼å€¼ã€‚
     /// </summary>
-    /// <param name="sheet">Excel ¹¤×÷±í¡£</param>
-    /// <param name="row">ĞĞË÷Òı¡£</param>
-    /// <param name="column">ÁĞË÷Òı¡£</param>
-    /// <returns>µ¥Ôª¸ñÖµ¡£</returns>
+    /// <param name="sheet">Excel å·¥ä½œè¡¨ã€‚</param>
+    /// <param name="row">è¡Œç´¢å¼•ã€‚</param>
+    /// <param name="column">åˆ—ç´¢å¼•ã€‚</param>
+    /// <returns>å•å…ƒæ ¼å€¼ã€‚</returns>
     public static string GetCellValue(this ExcelWorksheet sheet, int row, int column)
     {
         ExcelRange cell = sheet.Cells[row, column];

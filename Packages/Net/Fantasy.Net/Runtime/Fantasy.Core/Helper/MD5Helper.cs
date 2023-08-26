@@ -4,15 +4,15 @@ using System.Security.Cryptography;
 namespace Fantasy.Helper
 {
     /// <summary>
-    /// Ìá¹©¼ÆËã MD5 É¢ÁĞÖµµÄ¸¨Öú·½·¨¡£
+    /// æä¾›è®¡ç®— MD5 æ•£åˆ—å€¼çš„è¾…åŠ©æ–¹æ³•ã€‚
     /// </summary>
     public static class MD5Helper
     {
         /// <summary>
-        /// ¼ÆËãÖ¸¶¨ÎÄ¼şµÄ MD5 É¢ÁĞÖµ¡£
+        /// è®¡ç®—æŒ‡å®šæ–‡ä»¶çš„ MD5 æ•£åˆ—å€¼ã€‚
         /// </summary>
-        /// <param name="filePath">Òª¼ÆËãÉ¢ÁĞÖµµÄÎÄ¼şÂ·¾¶¡£</param>
-        /// <returns>±íÊ¾ÎÄ¼şµÄ MD5 É¢ÁĞÖµµÄ×Ö·û´®¡£</returns>
+        /// <param name="filePath">è¦è®¡ç®—æ•£åˆ—å€¼çš„æ–‡ä»¶è·¯å¾„ã€‚</param>
+        /// <returns>è¡¨ç¤ºæ–‡ä»¶çš„ MD5 æ•£åˆ—å€¼çš„å­—ç¬¦ä¸²ã€‚</returns>
         public static string FileMD5(string filePath)
         {
             using var file = new FileStream(filePath, FileMode.Open);
@@ -20,10 +20,10 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// ¼ÆËã¸ø¶¨ÎÄ¼şÁ÷µÄ MD5 É¢ÁĞÖµ¡£
+        /// è®¡ç®—ç»™å®šæ–‡ä»¶æµçš„ MD5 æ•£åˆ—å€¼ã€‚
         /// </summary>
-        /// <param name="fileStream">Òª¼ÆËãÉ¢ÁĞÖµµÄÎÄ¼şÁ÷¡£</param>
-        /// <returns>±íÊ¾ÎÄ¼şÁ÷µÄ MD5 É¢ÁĞÖµµÄ×Ö·û´®¡£</returns>
+        /// <param name="fileStream">è¦è®¡ç®—æ•£åˆ—å€¼çš„æ–‡ä»¶æµã€‚</param>
+        /// <returns>è¡¨ç¤ºæ–‡ä»¶æµçš„ MD5 æ•£åˆ—å€¼çš„å­—ç¬¦ä¸²ã€‚</returns>
         public static string FileMD5(FileStream fileStream)
         {
             var md5 = MD5.Create();
@@ -31,10 +31,10 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// ¼ÆËã¸ø¶¨×Ö½ÚÊı×éµÄ MD5 É¢ÁĞÖµ¡£
+        /// è®¡ç®—ç»™å®šå­—èŠ‚æ•°ç»„çš„ MD5 æ•£åˆ—å€¼ã€‚
         /// </summary>
-        /// <param name="bytes">Òª¼ÆËãÉ¢ÁĞÖµµÄ×Ö½ÚÊı×é¡£</param>
-        /// <returns>±íÊ¾×Ö½ÚÊı×éµÄ MD5 É¢ÁĞÖµµÄ×Ö·û´®¡£</returns>
+        /// <param name="bytes">è¦è®¡ç®—æ•£åˆ—å€¼çš„å­—èŠ‚æ•°ç»„ã€‚</param>
+        /// <returns>è¡¨ç¤ºå­—èŠ‚æ•°ç»„çš„ MD5 æ•£åˆ—å€¼çš„å­—ç¬¦ä¸²ã€‚</returns>
         public static string BytesMD5(byte[] bytes)
         {
             var md5 = MD5.Create();

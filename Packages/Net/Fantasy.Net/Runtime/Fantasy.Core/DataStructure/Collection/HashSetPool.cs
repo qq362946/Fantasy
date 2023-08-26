@@ -4,15 +4,15 @@ using System.Collections.Generic;
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// ¿ÉÊÍ·ÅµÄ¹şÏ£¼¯ºÏ¶ÔÏó³Ø¡£
+    /// å¯é‡Šæ”¾çš„å“ˆå¸Œé›†åˆå¯¹è±¡æ± ã€‚
     /// </summary>
-    /// <typeparam name="T">¹şÏ£¼¯ºÏÖĞÔªËØµÄÀàĞÍ¡£</typeparam>
+    /// <typeparam name="T">å“ˆå¸Œé›†åˆä¸­å…ƒç´ çš„ç±»å‹ã€‚</typeparam>
     public sealed class HashSetPool<T> : HashSet<T>, IDisposable
     {
         private bool _isDispose;
 
         /// <summary>
-        /// ÊÍ·ÅÊµÀıËùÕ¼ÓÃµÄ×ÊÔ´£¬²¢½«ÊµÀı·µ»Øµ½¶ÔÏó³ØÖĞ£¬ÒÔ±ãÖØÓÃ¡£
+        /// é‡Šæ”¾å®ä¾‹æ‰€å ç”¨çš„èµ„æºï¼Œå¹¶å°†å®ä¾‹è¿”å›åˆ°å¯¹è±¡æ± ä¸­ï¼Œä»¥ä¾¿é‡ç”¨ã€‚
         /// </summary>
         public void Dispose()
         {
@@ -27,9 +27,9 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸ö <see cref="HashSetPool{T}"/> ¹şÏ£¼¯ºÏ³ØµÄÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ª <see cref="HashSetPool{T}"/> å“ˆå¸Œé›†åˆæ± çš„å®ä¾‹ã€‚
         /// </summary>
-        /// <returns>´´½¨µÄÊµÀı¡£</returns>
+        /// <returns>åˆ›å»ºçš„å®ä¾‹ã€‚</returns>
         public static HashSetPool<T> Create()
         {
             var list = Pool<HashSetPool<T>>.Rent();
@@ -39,27 +39,27 @@ namespace Fantasy.DataStructure
     }
 
     /// <summary>
-    /// »ù±¾¹şÏ£¼¯ºÏ¶ÔÏó³Ø£¬Ëû×Ô³ÖÓĞÊµ¼ÊµÄ¹şÏ£¼¯ºÏ¡£
+    /// åŸºæœ¬å“ˆå¸Œé›†åˆå¯¹è±¡æ± ï¼Œä»–è‡ªæŒæœ‰å®é™…çš„å“ˆå¸Œé›†åˆã€‚
     /// </summary>
-    /// <typeparam name="T">¹şÏ£¼¯ºÏÖĞÔªËØµÄÀàĞÍ¡£</typeparam>
+    /// <typeparam name="T">å“ˆå¸Œé›†åˆä¸­å…ƒç´ çš„ç±»å‹ã€‚</typeparam>
     public sealed class HashSetBasePool<T> : IDisposable
     {
         /// <summary>
-        /// ´æ´¢Êµ¼ÊµÄ¹şÏ£¼¯ºÏ
+        /// å­˜å‚¨å®é™…çš„å“ˆå¸Œé›†åˆ
         /// </summary>
         public HashSet<T> Set = new HashSet<T>();
 
         /// <summary>
-        /// ´´½¨Ò»¸ö <see cref="HashSetBasePool{T}"/> »ù±¾¹şÏ£¼¯ºÏ¶ÔÏó³ØµÄÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ª <see cref="HashSetBasePool{T}"/> åŸºæœ¬å“ˆå¸Œé›†åˆå¯¹è±¡æ± çš„å®ä¾‹ã€‚
         /// </summary>
-        /// <returns>´´½¨µÄÊµÀı¡£</returns>
+        /// <returns>åˆ›å»ºçš„å®ä¾‹ã€‚</returns>
         public static HashSetBasePool<T> Create()
         {
             return Pool<HashSetBasePool<T>>.Rent();
         }
 
         /// <summary>
-        /// ÊÍ·ÅÊµÀıËùÕ¼ÓÃµÄ×ÊÔ´£¬²¢½«ÊµÀı·µ»Øµ½¶ÔÏó³ØÖĞ£¬ÒÔ±ãÖØÓÃ¡£
+        /// é‡Šæ”¾å®ä¾‹æ‰€å ç”¨çš„èµ„æºï¼Œå¹¶å°†å®ä¾‹è¿”å›åˆ°å¯¹è±¡æ± ä¸­ï¼Œä»¥ä¾¿é‡ç”¨ã€‚
         /// </summary>
         public void Dispose()
         {

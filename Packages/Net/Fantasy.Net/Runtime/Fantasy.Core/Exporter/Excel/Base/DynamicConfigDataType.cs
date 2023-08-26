@@ -5,37 +5,37 @@ using System.Text;
 namespace Fantasy.Core;
 
 /// <summary>
-/// ¶¯Ì¬ÅäÖÃÊý¾ÝÀàÐÍÀà£¬ÓÃÓÚ´æ´¢¶¯Ì¬ÅäÖÃÊý¾ÝµÄÏà¹ØÐÅÏ¢¡£
+/// åŠ¨æ€é…ç½®æ•°æ®ç±»åž‹ç±»ï¼Œç”¨äºŽå­˜å‚¨åŠ¨æ€é…ç½®æ•°æ®çš„ç›¸å…³ä¿¡æ¯ã€‚
 /// </summary>
 public class DynamicConfigDataType
 {
     /// <summary>
-    /// ÅäÖÃÊý¾Ý¶ÔÏó£¬¼Ì³Ð×Ô AProto »ùÀà¡£
+    /// é…ç½®æ•°æ®å¯¹è±¡ï¼Œç»§æ‰¿è‡ª AProto åŸºç±»ã€‚
     /// </summary>
     public AProto ConfigData;
 
     /// <summary>
-    /// ÅäÖÃÊý¾ÝÀàÐÍ¡£
+    /// é…ç½®æ•°æ®ç±»åž‹ã€‚
     /// </summary>
     public Type ConfigDataType;
 
     /// <summary>
-    /// ÅäÖÃÀàÐÍ¡£
+    /// é…ç½®ç±»åž‹ã€‚
     /// </summary>
     public Type ConfigType;
 
     /// <summary>
-    /// ·´Éä·½·¨ÐÅÏ¢£¬ÓÃÓÚµ÷ÓÃÌØ¶¨·½·¨¡£
+    /// åå°„æ–¹æ³•ä¿¡æ¯ï¼Œç”¨äºŽè°ƒç”¨ç‰¹å®šæ–¹æ³•ã€‚
     /// </summary>
     public MethodInfo Method;
 
     /// <summary>
-    /// ÅäÖÃÊý¾Ý¶ÔÏóÊµÀý¡£
+    /// é…ç½®æ•°æ®å¯¹è±¡å®žä¾‹ã€‚
     /// </summary>
     public object Obj;
 
     /// <summary>
-    /// ÓÃÓÚÉú³É JSON ¸ñÊ½Êý¾ÝµÄ×Ö·û´®¹¹½¨Æ÷¡£
+    /// ç”¨äºŽç”Ÿæˆ JSON æ ¼å¼æ•°æ®çš„å­—ç¬¦ä¸²æž„å»ºå™¨ã€‚
     /// </summary>
     public StringBuilder Json = new StringBuilder();
 }

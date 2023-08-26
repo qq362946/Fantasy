@@ -7,50 +7,50 @@ using System.Net;
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ³éÏóµÄÍøÂçÍ¨µÀ»ùÀà¡£
+    /// æŠ½è±¡çš„ç½‘ç»œé€šé“åŸºç±»ã€‚
     /// </summary>
     public abstract class ANetworkChannel
     {
         /// <summary>
-        /// »ñÈ¡Í¨µÀµÄÎ¨Ò»±êÊ¶ ID¡£
+        /// è·å–é€šé“çš„å”¯ä¸€æ ‡è¯† IDã€‚
         /// </summary>
         public uint Id { get; private set; }
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÍ¨µÀËùÊôµÄ³¡¾°¡£
+        /// è·å–æˆ–è®¾ç½®é€šé“æ‰€å±çš„åœºæ™¯ã€‚
         /// </summary>
         public Scene Scene { get; protected set; }
         /// <summary>
-        /// »ñÈ¡Í¨µÀËùÊôµÄÍøÂç ID¡£
+        /// è·å–é€šé“æ‰€å±çš„ç½‘ç»œ IDã€‚
         /// </summary>
         public long NetworkId { get; private set; }
         /// <summary>
-        /// »ñÈ¡Í¨µÀÊÇ·ñÒÑ¾­±»ÊÍ·Å¡£
+        /// è·å–é€šé“æ˜¯å¦å·²ç»è¢«é‡Šæ”¾ã€‚
         /// </summary>
         public bool IsDisposed { get; protected set; }
         /// <summary>
-        /// »ñÈ¡Í¨µÀµÄÔ¶³ÌÖÕ¶Ëµã¡£
+        /// è·å–é€šé“çš„è¿œç¨‹ç»ˆç«¯ç‚¹ã€‚
         /// </summary>
         public EndPoint RemoteEndPoint { get; protected set; }
         /// <summary>
-        /// »ñÈ¡Í¨µÀµÄÊı¾İ°ü½âÎöÆ÷¡£
+        /// è·å–é€šé“çš„æ•°æ®åŒ…è§£æå™¨ã€‚
         /// </summary>
         public APacketParser PacketParser { get; protected set; }
 
         /// <summary>
-        /// µ±Í¨µÀ±»ÊÍ·ÅÊ±´¥·¢µÄÊÂ¼ş¡£
+        /// å½“é€šé“è¢«é‡Šæ”¾æ—¶è§¦å‘çš„äº‹ä»¶ã€‚
         /// </summary>
         public abstract event Action OnDispose;
         /// <summary>
-        /// µ±Í¨µÀ½ÓÊÕµ½ÄÚ´æÁ÷Êı¾İ°üÊ±´¥·¢µÄÊÂ¼ş¡£
+        /// å½“é€šé“æ¥æ”¶åˆ°å†…å­˜æµæ•°æ®åŒ…æ—¶è§¦å‘çš„äº‹ä»¶ã€‚
         /// </summary>
         public abstract event Action<APackInfo> OnReceiveMemoryStream;
 
         /// <summary>
-        /// ³õÊ¼»¯³éÏóÍøÂçÍ¨µÀ»ùÀàµÄĞÂÊµÀı¡£
+        /// åˆå§‹åŒ–æŠ½è±¡ç½‘ç»œé€šé“åŸºç±»çš„æ–°å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="scene">Í¨µÀËùÊôµÄ³¡¾°¡£</param>
-        /// <param name="id">Í¨µÀµÄÎ¨Ò»±êÊ¶ ID¡£</param>
-        /// <param name="networkId">Í¨µÀËùÊôµÄÍøÂç ID¡£</param>
+        /// <param name="scene">é€šé“æ‰€å±çš„åœºæ™¯ã€‚</param>
+        /// <param name="id">é€šé“çš„å”¯ä¸€æ ‡è¯† IDã€‚</param>
+        /// <param name="networkId">é€šé“æ‰€å±çš„ç½‘ç»œ IDã€‚</param>
         protected ANetworkChannel(Scene scene, uint id, long networkId)
         {
             Id = id;
@@ -59,7 +59,7 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ÊÍ·ÅÍ¨µÀ×ÊÔ´¡£
+        /// é‡Šæ”¾é€šé“èµ„æºã€‚
         /// </summary>
         public virtual void Dispose()
         {

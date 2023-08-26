@@ -5,67 +5,67 @@ using System.Net;
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ³éÏó¿Í»§¶ËÍøÂç»ùÀà¡£
+    /// æŠ½è±¡å®¢æˆ·ç«¯ç½‘ç»œåŸºç±»ã€‚
     /// </summary>
     public abstract class AClientNetwork : ANetwork
     {
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÍ¨µÀID¡£
+        /// è·å–æˆ–è®¾ç½®é€šé“IDã€‚
         /// </summary>
         public uint ChannelId { get; protected set; }
 
         /// <summary>
-        /// ÔÚÍøÂçÁ¬½ÓÊÍ·ÅÊ±´¥·¢µÄÊÂ¼ş¡£
+        /// åœ¨ç½‘ç»œè¿æ¥é‡Šæ”¾æ—¶è§¦å‘çš„äº‹ä»¶ã€‚
         /// </summary>
         public abstract event Action OnDispose;
 
         /// <summary>
-        /// ÔÚÁ¬½ÓÊ§°ÜÊ±´¥·¢µÄÊÂ¼ş¡£
+        /// åœ¨è¿æ¥å¤±è´¥æ—¶è§¦å‘çš„äº‹ä»¶ã€‚
         /// </summary>
         public abstract event Action OnConnectFail;
 
         /// <summary>
-        /// ÔÚÁ¬½ÓÍê³ÉÊ±´¥·¢µÄÊÂ¼ş¡£
+        /// åœ¨è¿æ¥å®Œæˆæ—¶è§¦å‘çš„äº‹ä»¶ã€‚
         /// </summary>
         public abstract event Action OnConnectComplete;
 
         /// <summary>
-        /// ÔÚÁ¬½Ó¶Ï¿ªÊ±´¥·¢µÄÊÂ¼ş¡£
+        /// åœ¨è¿æ¥æ–­å¼€æ—¶è§¦å‘çš„äº‹ä»¶ã€‚
         /// </summary>
         public abstract event Action OnConnectDisconnect;
 
         /// <summary>
-        /// ÔÚÍ¨µÀID¸ü¸ÄÊ±´¥·¢µÄÊÂ¼ş¡£
+        /// åœ¨é€šé“IDæ›´æ”¹æ—¶è§¦å‘çš„äº‹ä»¶ã€‚
         /// </summary>
         public abstract event Action<uint> OnChangeChannelId;
 
         /// <summary>
-        /// ÔÚ½ÓÊÕµ½ÄÚ´æÁ÷Ê±´¥·¢µÄÊÂ¼ş¡£
+        /// åœ¨æ¥æ”¶åˆ°å†…å­˜æµæ—¶è§¦å‘çš„äº‹ä»¶ã€‚
         /// </summary>
         public abstract event Action<APackInfo> OnReceiveMemoryStream;
 
         /// <summary>
-        /// ³õÊ¼»¯³éÏó¿Í»§¶ËÍøÂç»ùÀàµÄĞÂÊµÀı¡£
+        /// åˆå§‹åŒ–æŠ½è±¡å®¢æˆ·ç«¯ç½‘ç»œåŸºç±»çš„æ–°å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="scene">³¡¾°¶ÔÏó¡£</param>
-        /// <param name="networkType">ÍøÂçÀàĞÍ¡£</param>
-        /// <param name="networkProtocolType">ÍøÂçĞ­ÒéÀàĞÍ¡£</param>
-        /// <param name="networkTarget">ÍøÂçÄ¿±êÀàĞÍ¡£</param>
+        /// <param name="scene">åœºæ™¯å¯¹è±¡ã€‚</param>
+        /// <param name="networkType">ç½‘ç»œç±»å‹ã€‚</param>
+        /// <param name="networkProtocolType">ç½‘ç»œåè®®ç±»å‹ã€‚</param>
+        /// <param name="networkTarget">ç½‘ç»œç›®æ ‡ç±»å‹ã€‚</param>
         protected AClientNetwork(Scene scene, NetworkType networkType, NetworkProtocolType networkProtocolType, NetworkTarget networkTarget) : base(scene, networkType, networkProtocolType, networkTarget) { }
 
         /// <summary>
-        /// Á¬½Óµ½Ô¶³ÌÖÕ¶Ë¡£
+        /// è¿æ¥åˆ°è¿œç¨‹ç»ˆç«¯ã€‚
         /// </summary>
-        /// <param name="remoteEndPoint">Ô¶³ÌÖÕ¶ËµÄ <see cref="IPEndPoint"/>¡£</param>
-        /// <param name="onConnectComplete">Á¬½Ó³É¹¦Ê±µÄ»Øµ÷¡£</param>
-        /// <param name="onConnectFail">Á¬½ÓÊ§°ÜÊ±µÄ»Øµ÷¡£</param>
-        /// <param name="onConnectDisconnect">Á¬½Ó¶Ï¿ªÊ±µÄ»Øµ÷¡£</param>
-        /// <param name="connectTimeout">Á¬½Ó³¬Ê±Ê±¼ä£¨ºÁÃë£©¡£</param>
-        /// <returns>Í¨µÀID¡£</returns>
+        /// <param name="remoteEndPoint">è¿œç¨‹ç»ˆç«¯çš„ <see cref="IPEndPoint"/>ã€‚</param>
+        /// <param name="onConnectComplete">è¿æ¥æˆåŠŸæ—¶çš„å›è°ƒã€‚</param>
+        /// <param name="onConnectFail">è¿æ¥å¤±è´¥æ—¶çš„å›è°ƒã€‚</param>
+        /// <param name="onConnectDisconnect">è¿æ¥æ–­å¼€æ—¶çš„å›è°ƒã€‚</param>
+        /// <param name="connectTimeout">è¿æ¥è¶…æ—¶æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰ã€‚</param>
+        /// <returns>é€šé“IDã€‚</returns>
         public abstract uint Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, int connectTimeout = 5000);
 
         /// <summary>
-        /// ÊÍ·ÅÍøÂç×ÊÔ´¡£
+        /// é‡Šæ”¾ç½‘ç»œèµ„æºã€‚
         /// </summary>
         public override void Dispose()
         {

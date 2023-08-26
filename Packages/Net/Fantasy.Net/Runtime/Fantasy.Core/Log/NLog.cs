@@ -4,131 +4,131 @@ using NLog;
 namespace Fantasy;
 
 /// <summary>
-/// Ê¹ÓÃ NLog ÊµÏÖµÄÈÕÖ¾¼ÇÂ¼Æ÷¡£
+/// ä½¿ç”¨ NLog å®ç°çš„æ—¥å¿—è®°å½•å™¨ã€‚
 /// </summary>
 public class NLog : ILog
 {
-    private readonly Logger _logger; // NLog ÈÕÖ¾¼ÇÂ¼Æ÷ÊµÀı
+    private readonly Logger _logger; // NLog æ—¥å¿—è®°å½•å™¨å®ä¾‹
 
     /// <summary>
-    /// ³õÊ¼»¯ NLog ÊµÀı¡£
+    /// åˆå§‹åŒ– NLog å®ä¾‹ã€‚
     /// </summary>
-    /// <param name="name">ÈÕÖ¾¼ÇÂ¼Æ÷µÄÃû³Æ¡£</param>
+    /// <param name="name">æ—¥å¿—è®°å½•å™¨çš„åç§°ã€‚</param>
     public NLog(string name)
     {
-        // »ñÈ¡Ö¸¶¨Ãû³ÆµÄ NLog ÈÕÖ¾¼ÇÂ¼Æ÷
+        // è·å–æŒ‡å®šåç§°çš„ NLog æ—¥å¿—è®°å½•å™¨
         _logger = LogManager.GetLogger(name);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼¸ú×Ù¼¶±ğµÄÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•è·Ÿè¸ªçº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
     public void Trace(string message)
     {
         _logger.Trace(message);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼¾¯¸æ¼¶±ğµÄÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•è­¦å‘Šçº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
     public void Warning(string message)
     {
         _logger.Warn(message);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼ĞÅÏ¢¼¶±ğµÄÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•ä¿¡æ¯çº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
     public void Info(string message)
     {
         _logger.Info(message);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼µ÷ÊÔ¼¶±ğµÄÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•è°ƒè¯•çº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
     public void Debug(string message)
     {
         _logger.Debug(message);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼´íÎó¼¶±ğµÄÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•é”™è¯¯çº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
     public void Error(string message)
     {
         _logger.Error(message);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼ÑÏÖØ´íÎó¼¶±ğµÄÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•ä¸¥é‡é”™è¯¯çº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
     public void Fatal(string message)
     {
         _logger.Fatal(message);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼¸ú×Ù¼¶±ğµÄ¸ñÊ½»¯ÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•è·Ÿè¸ªçº§åˆ«çš„æ ¼å¼åŒ–æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢Ä£°å¡£</param>
-    /// <param name="args">¸ñÊ½»¯²ÎÊı¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯æ¨¡æ¿ã€‚</param>
+    /// <param name="args">æ ¼å¼åŒ–å‚æ•°ã€‚</param>
     public void Trace(string message, params object[] args)
     {
         _logger.Trace(message, args);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼¾¯¸æ¼¶±ğµÄ¸ñÊ½»¯ÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•è­¦å‘Šçº§åˆ«çš„æ ¼å¼åŒ–æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢Ä£°å¡£</param>
-    /// <param name="args">¸ñÊ½»¯²ÎÊı¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯æ¨¡æ¿ã€‚</param>
+    /// <param name="args">æ ¼å¼åŒ–å‚æ•°ã€‚</param>
     public void Warning(string message, params object[] args)
     {
         _logger.Warn(message, args);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼ĞÅÏ¢¼¶±ğµÄ¸ñÊ½»¯ÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•ä¿¡æ¯çº§åˆ«çš„æ ¼å¼åŒ–æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢Ä£°å¡£</param>
-    /// <param name="args">¸ñÊ½»¯²ÎÊı¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯æ¨¡æ¿ã€‚</param>
+    /// <param name="args">æ ¼å¼åŒ–å‚æ•°ã€‚</param>
     public void Info(string message, params object[] args)
     {
         _logger.Info(message, args);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼µ÷ÊÔ¼¶±ğµÄ¸ñÊ½»¯ÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•è°ƒè¯•çº§åˆ«çš„æ ¼å¼åŒ–æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢Ä£°å¡£</param>
-    /// <param name="args">¸ñÊ½»¯²ÎÊı¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯æ¨¡æ¿ã€‚</param>
+    /// <param name="args">æ ¼å¼åŒ–å‚æ•°ã€‚</param>
     public void Debug(string message, params object[] args)
     {
         _logger.Debug(message, args);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼´íÎó¼¶±ğµÄ¸ñÊ½»¯ÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•é”™è¯¯çº§åˆ«çš„æ ¼å¼åŒ–æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢Ä£°å¡£</param>
-    /// <param name="args">¸ñÊ½»¯²ÎÊı¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯æ¨¡æ¿ã€‚</param>
+    /// <param name="args">æ ¼å¼åŒ–å‚æ•°ã€‚</param>
     public void Error(string message, params object[] args)
     {
         _logger.Error(message, args);
     }
 
     /// <summary>
-    /// ¼ÇÂ¼ÑÏÖØ´íÎó¼¶±ğµÄ¸ñÊ½»¯ÈÕÖ¾ÏûÏ¢¡£
+    /// è®°å½•ä¸¥é‡é”™è¯¯çº§åˆ«çš„æ ¼å¼åŒ–æ—¥å¿—æ¶ˆæ¯ã€‚
     /// </summary>
-    /// <param name="message">ÈÕÖ¾ÏûÏ¢Ä£°å¡£</param>
-    /// <param name="args">¸ñÊ½»¯²ÎÊı¡£</param>
+    /// <param name="message">æ—¥å¿—æ¶ˆæ¯æ¨¡æ¿ã€‚</param>
+    /// <param name="args">æ ¼å¼åŒ–å‚æ•°ã€‚</param>
     public void Fatal(string message, params object[] args)
     {
         _logger.Fatal(message, args);

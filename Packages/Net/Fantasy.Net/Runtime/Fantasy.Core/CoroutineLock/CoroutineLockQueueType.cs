@@ -4,35 +4,35 @@ using System.Collections.Generic;
 namespace Fantasy.Core
 {
     /// <summary>
-    /// Ö¸¶¨¼üµÄĞ­³ÌËø¶ÓÁĞÀàĞÍ£¬ÓÃÓÚ¹ÜÀí²»Í¬ÀàĞÍµÄĞ­³ÌËø¶ÓÁĞ¡£
+    /// æŒ‡å®šé”®çš„åç¨‹é”é˜Ÿåˆ—ç±»å‹ï¼Œç”¨äºç®¡ç†ä¸åŒç±»å‹çš„åç¨‹é”é˜Ÿåˆ—ã€‚
     /// </summary>
     public sealed class CoroutineLockQueueType
     {
         /// <summary>
-        /// »ñÈ¡Ğ­³ÌËø¶ÓÁĞÀàĞÍµÄÃû³Æ¡£
+        /// è·å–åç¨‹é”é˜Ÿåˆ—ç±»å‹çš„åç§°ã€‚
         /// </summary>
         public readonly string Name;
         private readonly Dictionary<long, CoroutineLockQueue> _coroutineLockQueues = new Dictionary<long, CoroutineLockQueue>();
 
-        // Ë½ÓĞ¹¹Ôìº¯Êı£¬·ÀÖ¹Íâ²¿ÊµÀı»¯
+        // ç§æœ‰æ„é€ å‡½æ•°ï¼Œé˜²æ­¢å¤–éƒ¨å®ä¾‹åŒ–
         private CoroutineLockQueueType() { }
 
         /// <summary>
-        /// ³õÊ¼»¯Ğ­³ÌËø¶ÓÁĞÀàĞÍµÄÊµÀı¡£
+        /// åˆå§‹åŒ–åç¨‹é”é˜Ÿåˆ—ç±»å‹çš„å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="name">Ğ­³ÌËø¶ÓÁĞÀàĞÍµÄÃû³Æ¡£</param>
+        /// <param name="name">åç¨‹é”é˜Ÿåˆ—ç±»å‹çš„åç§°ã€‚</param>
         public CoroutineLockQueueType(string name)
         {
             Name = name;
         }
 
         /// <summary>
-        /// ÇëÇóĞ­³ÌËø£¬»ñÈ¡Ö¸¶¨¼üµÄĞ­³ÌËø¡£
+        /// è¯·æ±‚åç¨‹é”ï¼Œè·å–æŒ‡å®šé”®çš„åç¨‹é”ã€‚
         /// </summary>
-        /// <param name="key">Ğ­³ÌËø¶ÓÁĞµÄ¼ü¡£</param>
-        /// <param name="tag">Ëø±êÊ¶¡£</param>
-        /// <param name="time">µÈ´ıÊ±¼ä¡£</param>
-        /// <returns>µÈ´ıĞ­³ÌËøµÄÈÎÎñ¡£</returns>
+        /// <param name="key">åç¨‹é”é˜Ÿåˆ—çš„é”®ã€‚</param>
+        /// <param name="tag">é”æ ‡è¯†ã€‚</param>
+        /// <param name="time">ç­‰å¾…æ—¶é—´ã€‚</param>
+        /// <returns>ç­‰å¾…åç¨‹é”çš„ä»»åŠ¡ã€‚</returns>
         public async FTask<WaitCoroutineLock> Lock(long key, string tag = null, int time = 10000)
         {
             if (_coroutineLockQueues.TryGetValue(key, out var coroutineLockQueue))
@@ -46,9 +46,9 @@ namespace Fantasy.Core
         }
 
         /// <summary>
-        /// ´ÓĞ­³ÌËø¶ÓÁĞÀàĞÍÖĞÒÆ³ıÖ¸¶¨¼üµÄĞ­³ÌËø¶ÓÁĞ¡£
+        /// ä»åç¨‹é”é˜Ÿåˆ—ç±»å‹ä¸­ç§»é™¤æŒ‡å®šé”®çš„åç¨‹é”é˜Ÿåˆ—ã€‚
         /// </summary>
-        /// <param name="key">ÒªÒÆ³ıµÄĞ­³ÌËø¶ÓÁĞµÄ¼ü¡£</param>
+        /// <param name="key">è¦ç§»é™¤çš„åç¨‹é”é˜Ÿåˆ—çš„é”®ã€‚</param>
         public void Remove(long key)
         {
             if (_coroutineLockQueues.Remove(key, out var coroutineLockQueue))

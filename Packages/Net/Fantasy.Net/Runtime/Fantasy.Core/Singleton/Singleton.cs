@@ -5,25 +5,25 @@ using System.Threading.Tasks;
 namespace Fantasy.Helper
 {
     /// <summary>
-    /// ³éÏóµÄµ¥Àı»ùÀà£¬¼Ì³Ğ×Ô <see cref="ISingleton"/> ½Ó¿Ú¡£
+    /// æŠ½è±¡çš„å•ä¾‹åŸºç±»ï¼Œç»§æ‰¿è‡ª <see cref="ISingleton"/> æ¥å£ã€‚
     /// </summary>
-    /// <typeparam name="T">µ¥ÀıÀàĞÍ¡£</typeparam>
+    /// <typeparam name="T">å•ä¾‹ç±»å‹ã€‚</typeparam>
     public abstract class Singleton<T> : ISingleton where T : ISingleton, new()
     {
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃµ¥ÀıÊÇ·ñÒÑ±»Ïú»Ù¡£
+        /// è·å–æˆ–è®¾ç½®å•ä¾‹æ˜¯å¦å·²è¢«é”€æ¯ã€‚
         /// </summary>
         public bool IsDisposed { get; set; }
 
         /// <summary>
-        /// »ñÈ¡µ¥ÀıµÄÊµÀı¡£
+        /// è·å–å•ä¾‹çš„å®ä¾‹ã€‚
         /// </summary>
         public static T Instance { get; private set; }
 
         /// <summary>
-        /// ×¢²áµ¥ÀıµÄ·½·¨¡£
+        /// æ³¨å†Œå•ä¾‹çš„æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="singleton">µ¥Àı¶ÔÏó¡£</param>
+        /// <param name="singleton">å•ä¾‹å¯¹è±¡ã€‚</param>
         private void RegisterSingleton(ISingleton singleton)
         {
             Instance = (T) singleton;
@@ -32,28 +32,28 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// ³õÊ¼»¯µ¥ÀıµÄ·½·¨¡£
+        /// åˆå§‹åŒ–å•ä¾‹çš„æ–¹æ³•ã€‚
         /// </summary>
-        /// <returns>±íÊ¾Òì²½²Ù×÷µÄÈÎÎñ¡£</returns>
+        /// <returns>è¡¨ç¤ºå¼‚æ­¥æ“ä½œçš„ä»»åŠ¡ã€‚</returns>
         public virtual Task Initialize()
         {
             return Task.CompletedTask;
         }
 
         /// <summary>
-        /// ÔÚ³ÌĞò¼¯¼ÓÔØÊ±Ö´ĞĞµÄ·½·¨¡£
+        /// åœ¨ç¨‹åºé›†åŠ è½½æ—¶æ‰§è¡Œçš„æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="assemblyName">³ÌĞò¼¯Ãû³Æ¡£</param>
+        /// <param name="assemblyName">ç¨‹åºé›†åç§°ã€‚</param>
         protected virtual void OnLoad(int assemblyName) { }
 
         /// <summary>
-        /// ÔÚ³ÌĞò¼¯Ğ¶ÔØÊ±Ö´ĞĞµÄ·½·¨¡£
+        /// åœ¨ç¨‹åºé›†å¸è½½æ—¶æ‰§è¡Œçš„æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="assemblyName">³ÌĞò¼¯Ãû³Æ¡£</param>
+        /// <param name="assemblyName">ç¨‹åºé›†åç§°ã€‚</param>
         protected virtual void OnUnLoad(int assemblyName) { }
 
         /// <summary>
-        /// ÊÍ·Åµ¥ÀıµÄ·½·¨¡£
+        /// é‡Šæ”¾å•ä¾‹çš„æ–¹æ³•ã€‚
         /// </summary>
         public virtual void Dispose()
         {

@@ -4,19 +4,19 @@ using System.Collections.Generic;
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// Ìá¹©¶Ô×ÖµäµÄÀ©Õ¹·½·¨¡£
+    /// æä¾›å¯¹å­—å…¸çš„æ‰©å±•æ–¹æ³•ã€‚
     /// </summary>
     public static class DictionaryExtensions
     {
         /// <summary>
-        /// ³¢ÊÔ´Ó×ÖµäÖĞÒÆ³ıÖ¸¶¨¼ü£¬²¢·µ»ØÏàÓ¦µÄÖµ¡£
+        /// å°è¯•ä»å­—å…¸ä¸­ç§»é™¤æŒ‡å®šé”®ï¼Œå¹¶è¿”å›ç›¸åº”çš„å€¼ã€‚
         /// </summary>
-        /// <typeparam name="T">×ÖµäÖĞ¼üµÄÀàĞÍ¡£</typeparam>
-        /// <typeparam name="TV">×ÖµäÖĞÖµµÄÀàĞÍ¡£</typeparam>
-        /// <param name="self">Òª²Ù×÷µÄ×ÖµäÊµÀı¡£</param>
-        /// <param name="key">ÒªÒÆ³ıµÄ¼ü¡£</param>
-        /// <param name="value">´Ó×ÖµäÖĞÒÆ³ıµÄÖµ£¨Èç¹û³É¹¦ÒÆ³ı£©¡£</param>
-        /// <returns>Èç¹û³É¹¦ÒÆ³ı¼üÖµ¶Ô£¬ÔòÎª true£»·ñÔòÎª false¡£</returns>
+        /// <typeparam name="T">å­—å…¸ä¸­é”®çš„ç±»å‹ã€‚</typeparam>
+        /// <typeparam name="TV">å­—å…¸ä¸­å€¼çš„ç±»å‹ã€‚</typeparam>
+        /// <param name="self">è¦æ“ä½œçš„å­—å…¸å®ä¾‹ã€‚</param>
+        /// <param name="key">è¦ç§»é™¤çš„é”®ã€‚</param>
+        /// <param name="value">ä»å­—å…¸ä¸­ç§»é™¤çš„å€¼ï¼ˆå¦‚æœæˆåŠŸç§»é™¤ï¼‰ã€‚</param>
+        /// <returns>å¦‚æœæˆåŠŸç§»é™¤é”®å€¼å¯¹ï¼Œåˆ™ä¸º trueï¼›å¦åˆ™ä¸º falseã€‚</returns>
         public static bool TryRemove<T, TV>(this IDictionary<T, TV> self, T key, out TV value)
         {
             if (!self.TryGetValue(key, out value))

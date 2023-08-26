@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace Fantasy.Helper
 {
     /// <summary>
-    /// ±íÊ¾Ò»¸öÔËĞĞÊ± ID µÄ½á¹¹¡£
+    /// è¡¨ç¤ºä¸€ä¸ªè¿è¡Œæ—¶ ID çš„ç»“æ„ã€‚
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct RuntimeIdStruct
@@ -12,14 +12,14 @@ namespace Fantasy.Helper
         // | time(32) | sequence(32)
         // +----------+------------+
 
-        private uint Time; // Ê±¼ä²¿·Ö
-        private uint Sequence; // ĞòÁĞºÅ²¿·Ö
+        private uint Time; // æ—¶é—´éƒ¨åˆ†
+        private uint Sequence; // åºåˆ—å·éƒ¨åˆ†
 
         /// <summary>
-        /// ³õÊ¼»¯Ò»¸öĞÂµÄÔËĞĞÊ± ID ½á¹¹¡£
+        /// åˆå§‹åŒ–ä¸€ä¸ªæ–°çš„è¿è¡Œæ—¶ ID ç»“æ„ã€‚
         /// </summary>
-        /// <param name="time">Ê±¼ä²¿·Ö¡£</param>
-        /// <param name="sequence">ĞòÁĞºÅ²¿·Ö¡£</param>
+        /// <param name="time">æ—¶é—´éƒ¨åˆ†ã€‚</param>
+        /// <param name="sequence">åºåˆ—å·éƒ¨åˆ†ã€‚</param>
         public RuntimeIdStruct(uint time, uint sequence)
         {
             Time = time;
@@ -27,9 +27,9 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// ½«ÔËĞĞÊ± ID ½á¹¹ÒşÊ½×ª»»Îª³¤ÕûĞÍ¡£
+        /// å°†è¿è¡Œæ—¶ ID ç»“æ„éšå¼è½¬æ¢ä¸ºé•¿æ•´å‹ã€‚
         /// </summary>
-        /// <param name="runtimeId">Òª×ª»»µÄÔËĞĞÊ± ID ½á¹¹¡£</param>
+        /// <param name="runtimeId">è¦è½¬æ¢çš„è¿è¡Œæ—¶ ID ç»“æ„ã€‚</param>
         public static implicit operator long(RuntimeIdStruct runtimeId)
         {
             ulong result = 0;
@@ -39,9 +39,9 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// ½«³¤ÕûĞÍÒşÊ½×ª»»ÎªÔËĞĞÊ± ID ½á¹¹¡£
+        /// å°†é•¿æ•´å‹éšå¼è½¬æ¢ä¸ºè¿è¡Œæ—¶ ID ç»“æ„ã€‚
         /// </summary>
-        /// <param name="id">Òª×ª»»µÄ³¤ÕûĞÍ ID¡£</param>
+        /// <param name="id">è¦è½¬æ¢çš„é•¿æ•´å‹ IDã€‚</param>
         public static implicit operator RuntimeIdStruct(long id)
         {
             var result = (ulong) id;

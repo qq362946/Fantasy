@@ -3,19 +3,19 @@ using System;
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ÔÚÉ¨Ãè¹ý³ÌÖÐ·¢ÉúµÄÒì³£¡£
+    /// åœ¨æ‰«æè¿‡ç¨‹ä¸­å‘ç”Ÿçš„å¼‚å¸¸ã€‚
     /// </summary>
     public class ScanException : Exception
     {
         /// <summary>
-        /// ³õÊ¼»¯ <see cref="ScanException"/> ÀàµÄÐÂÊµÀý¡£
+        /// åˆå§‹åŒ– <see cref="ScanException"/> ç±»çš„æ–°å®žä¾‹ã€‚
         /// </summary>
         public ScanException() { }
 
         /// <summary>
-        /// Ê¹ÓÃÖ¸¶¨µÄ´íÎóÏûÏ¢³õÊ¼»¯ <see cref="ScanException"/> ÀàµÄÐÂÊµÀý¡£
+        /// ä½¿ç”¨æŒ‡å®šçš„é”™è¯¯æ¶ˆæ¯åˆå§‹åŒ– <see cref="ScanException"/> ç±»çš„æ–°å®žä¾‹ã€‚
         /// </summary>
-        /// <param name="msg">´íÎóÏûÏ¢¡£</param>
+        /// <param name="msg">é”™è¯¯æ¶ˆæ¯ã€‚</param>
         public ScanException(string msg) : base(msg) { }
     }
 }

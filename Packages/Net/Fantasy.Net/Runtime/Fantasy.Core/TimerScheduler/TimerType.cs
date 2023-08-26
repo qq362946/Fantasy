@@ -1,7 +1,7 @@
 namespace Fantasy
 {
     /// <summary>
-    /// Ã¶¾Ù¶ÔÏóTimerType
+    /// æšä¸¾å¯¹è±¡TimerType
     /// </summary>
     public enum TimerType
     {
@@ -10,15 +10,15 @@ namespace Fantasy
         /// </summary>
         None,
         /// <summary>
-        /// Ò»´ÎµÈ´ı¶¨Ê±Æ÷
+        /// ä¸€æ¬¡ç­‰å¾…å®šæ—¶å™¨
         /// </summary>
         OnceWaitTimer,
         /// <summary>
-        /// Ò»´ÎĞÔ¶¨Ê±Æ÷
+        /// ä¸€æ¬¡æ€§å®šæ—¶å™¨
         /// </summary>
         OnceTimer,
         /// <summary>
-        /// ÖØ¸´¶¨Ê±Æ÷
+        /// é‡å¤å®šæ—¶å™¨
         /// </summary>
         RepeatedTimer
     }

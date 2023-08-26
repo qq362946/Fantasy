@@ -9,32 +9,32 @@ using Fantasy.Core.Network;
 namespace Fantasy
 {
     /// <summary>
-    /// Ò»¸öÓÃÓÚÏß³ÌÍ¬²½µÄÉÏÏÂÎÄ¡£
+    /// ä¸€ä¸ªç”¨äºçº¿ç¨‹åŒæ­¥çš„ä¸Šä¸‹æ–‡ã€‚
     /// </summary>
     public sealed class ThreadSynchronizationContext : SynchronizationContext
     {
         /// <summary>
-        /// »ñÈ¡Ïß³ÌµÄÎ¨Ò»±êÊ¶·û¡£
+        /// è·å–çº¿ç¨‹çš„å”¯ä¸€æ ‡è¯†ç¬¦ã€‚
         /// </summary>
         public readonly int ThreadId;
         private Action _actionHandler;
         private readonly ConcurrentQueue<Action> _queue = new();
         /// <summary>
-        /// »ñÈ¡Ö÷Ïß³ÌµÄÍ¬²½ÉÏÏÂÎÄÊµÀı¡£
+        /// è·å–ä¸»çº¿ç¨‹çš„åŒæ­¥ä¸Šä¸‹æ–‡å®ä¾‹ã€‚
         /// </summary>
         public static ThreadSynchronizationContext Main { get; } = new(Environment.CurrentManagedThreadId);
 
         /// <summary>
-        /// ³õÊ¼»¯ ThreadSynchronizationContext ÀàµÄĞÂÊµÀı¡£
+        /// åˆå§‹åŒ– ThreadSynchronizationContext ç±»çš„æ–°å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="threadId">Ïß³ÌµÄÎ¨Ò»±êÊ¶·û¡£</param>
+        /// <param name="threadId">çº¿ç¨‹çš„å”¯ä¸€æ ‡è¯†ç¬¦ã€‚</param>
         public ThreadSynchronizationContext(int threadId)
         {
             ThreadId = threadId;
         }
 
         /// <summary>
-        /// ¸üĞÂÍ¬²½ÉÏÏÂÎÄÖĞµÄ²Ù×÷¡£
+        /// æ›´æ–°åŒæ­¥ä¸Šä¸‹æ–‡ä¸­çš„æ“ä½œã€‚
         /// </summary>
         public void Update()
         {
@@ -52,19 +52,19 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ½«²Ù×÷ÅÅ¶ÓÒÔÔÚÍ¬²½ÉÏÏÂÎÄÖĞÒì²½Ö´ĞĞ¡£
+        /// å°†æ“ä½œæ’é˜Ÿä»¥åœ¨åŒæ­¥ä¸Šä¸‹æ–‡ä¸­å¼‚æ­¥æ‰§è¡Œã€‚
         /// </summary>
-        /// <param name="callback">ÒªÖ´ĞĞµÄ»Øµ÷·½·¨¡£</param>
-        /// <param name="state">´«µİ¸ø»Øµ÷·½·¨µÄ×´Ì¬¶ÔÏó¡£</param>
+        /// <param name="callback">è¦æ‰§è¡Œçš„å›è°ƒæ–¹æ³•ã€‚</param>
+        /// <param name="state">ä¼ é€’ç»™å›è°ƒæ–¹æ³•çš„çŠ¶æ€å¯¹è±¡ã€‚</param>
         public override void Post(SendOrPostCallback callback, object state)
         {
             Post(() => callback(state));
         }
 
         /// <summary>
-        /// ½«²Ù×÷ÅÅ¶ÓÒÔÔÚÍ¬²½ÉÏÏÂÎÄÖĞÒì²½Ö´ĞĞ¡£
+        /// å°†æ“ä½œæ’é˜Ÿä»¥åœ¨åŒæ­¥ä¸Šä¸‹æ–‡ä¸­å¼‚æ­¥æ‰§è¡Œã€‚
         /// </summary>
-        /// <param name="action">ÒªÖ´ĞĞµÄ²Ù×÷¡£</param>
+        /// <param name="action">è¦æ‰§è¡Œçš„æ“ä½œã€‚</param>
         public void Post(Action action)
         {
             _queue.Enqueue(action);

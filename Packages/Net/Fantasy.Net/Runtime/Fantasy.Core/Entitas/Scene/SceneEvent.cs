@@ -4,19 +4,19 @@ using Fantasy.Core.Network;
 namespace Fantasy
 {
     /// <summary>
-    /// ±íÊ¾µ±´´½¨ĞÂ³¡¾°Ê±Òı·¢µÄÊÂ¼şÊı¾İ½á¹¹¡£
+    /// è¡¨ç¤ºå½“åˆ›å»ºæ–°åœºæ™¯æ—¶å¼•å‘çš„äº‹ä»¶æ•°æ®ç»“æ„ã€‚
     /// </summary>
     public struct OnCreateScene
     {
         /// <summary>
-        /// »ñÈ¡ÓëÊÂ¼ş¹ØÁªµÄ³¡¾°ÊµÌå¡£
+        /// è·å–ä¸äº‹ä»¶å…³è”çš„åœºæ™¯å®ä½“ã€‚
         /// </summary>
         public readonly Scene Scene;
 
         /// <summary>
-        /// ³õÊ¼»¯Ò»¸öĞÂµÄ OnCreateScene ÊµÀı¡£
+        /// åˆå§‹åŒ–ä¸€ä¸ªæ–°çš„ OnCreateScene å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="scene">ÓëÊÂ¼ş¹ØÁªµÄ³¡¾°ÊµÌå¡£</param>
+        /// <param name="scene">ä¸äº‹ä»¶å…³è”çš„åœºæ™¯å®ä½“ã€‚</param>
         public OnCreateScene(Scene scene)
         {
             Scene = scene;

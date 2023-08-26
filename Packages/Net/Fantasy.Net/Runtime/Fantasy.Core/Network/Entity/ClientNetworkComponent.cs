@@ -6,24 +6,24 @@ using System.Net;
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ¿Í»§¶ËNetworkÍøÂç×é¼ş¡£
+    /// å®¢æˆ·ç«¯Networkç½‘ç»œç»„ä»¶ã€‚
     /// </summary>
     public sealed class ClientNetworkComponent : Entity
     {
         /// <summary>
-        /// »ñÈ¡¹ØÁªµÄ¿Í»§¶ËNetworkÍøÂçÊµÀı¡£
+        /// è·å–å…³è”çš„å®¢æˆ·ç«¯Networkç½‘ç»œå®ä¾‹ã€‚
         /// </summary>
         private AClientNetwork Network { get; set; }
         /// <summary>
-        /// »ñÈ¡Óë¿Í»§¶ËÍøÂç¹ØÁªµÄ»á»°¡£
+        /// è·å–ä¸å®¢æˆ·ç«¯ç½‘ç»œå…³è”çš„ä¼šè¯ã€‚
         /// </summary>
         public Session Session { get; private set; }
 
         /// <summary>
-        /// ³õÊ¼»¯¿Í»§¶ËÍøÂç×é¼ş¡£
+        /// åˆå§‹åŒ–å®¢æˆ·ç«¯ç½‘ç»œç»„ä»¶ã€‚
         /// </summary>
-        /// <param name="networkProtocolType">ÍøÂçĞ­ÒéÀàĞÍ¡£</param>
-        /// <param name="networkTarget">ÍøÂçÄ¿±ê¡£</param>
+        /// <param name="networkProtocolType">ç½‘ç»œåè®®ç±»å‹ã€‚</param>
+        /// <param name="networkTarget">ç½‘ç»œç›®æ ‡ã€‚</param>
         public void Initialize(NetworkProtocolType networkProtocolType, NetworkTarget networkTarget)
         {
             switch (networkProtocolType)
@@ -46,13 +46,13 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// Á¬½Óµ½Ö¸¶¨µÄÔ¶³ÌÖÕ¶Ë¡£
+        /// è¿æ¥åˆ°æŒ‡å®šçš„è¿œç¨‹ç»ˆç«¯ã€‚
         /// </summary>
-        /// <param name="remoteEndPoint">Ô¶³ÌÖÕ¶ËµÄIPµØÖ·ºÍ¶Ë¿Ú¡£</param>
-        /// <param name="onConnectComplete">Á¬½Ó³É¹¦Ê±µÄ»Øµ÷¡£</param>
-        /// <param name="onConnectFail">Á¬½ÓÊ§°ÜÊ±µÄ»Øµ÷¡£</param>
-        /// <param name="onConnectDisconnect">Á¬½Ó¶Ï¿ªÊ±µÄ»Øµ÷¡£</param>
-        /// <param name="connectTimeout">Á¬½Ó³¬Ê±Ê±¼ä£¨ºÁÃë£©¡£</param>
+        /// <param name="remoteEndPoint">è¿œç¨‹ç»ˆç«¯çš„IPåœ°å€å’Œç«¯å£ã€‚</param>
+        /// <param name="onConnectComplete">è¿æ¥æˆåŠŸæ—¶çš„å›è°ƒã€‚</param>
+        /// <param name="onConnectFail">è¿æ¥å¤±è´¥æ—¶çš„å›è°ƒã€‚</param>
+        /// <param name="onConnectDisconnect">è¿æ¥æ–­å¼€æ—¶çš„å›è°ƒã€‚</param>
+        /// <param name="connectTimeout">è¿æ¥è¶…æ—¶æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰ã€‚</param>
         public void Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, int connectTimeout = 5000)
         {
             if (Network == null || Network.IsDisposed)
@@ -65,7 +65,7 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ÊÍ·Å¿Í»§¶ËÍøÂç×é¼ş¼°¹ØÁªµÄ×ÊÔ´¡£
+        /// é‡Šæ”¾å®¢æˆ·ç«¯ç½‘ç»œç»„ä»¶åŠå…³è”çš„èµ„æºã€‚
         /// </summary>
         public override void Dispose()
         {

@@ -2,17 +2,17 @@
 namespace Fantasy.Core.Network;
 
 /// <summary>
-/// ÉùÃ÷Ò»¸ö sealed Àà I_AddressableUnLockHandler£¬¼Ì³Ğ×Ô RouteRPC Àà£¬²¢Ö¸¶¨·ºĞÍ²ÎÊı
+/// å£°æ˜ä¸€ä¸ª sealed ç±» I_AddressableUnLockHandlerï¼Œç»§æ‰¿è‡ª RouteRPC ç±»ï¼Œå¹¶æŒ‡å®šæ³›å‹å‚æ•°
 /// </summary>
 public sealed class I_AddressableUnLockHandler : RouteRPC<Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response>
 {
     /// <summary>
-    /// ÔÚÊÕµ½µØÖ·Ó³Éä½âËøÇëÇóÊ±Ö´ĞĞµÄÂß¼­¡£
+    /// åœ¨æ”¶åˆ°åœ°å€æ˜ å°„è§£é”è¯·æ±‚æ—¶æ‰§è¡Œçš„é€»è¾‘ã€‚
     /// </summary>
-    /// <param name="scene">µ±Ç°³¡¾°ÊµÀı¡£</param>
-    /// <param name="request">°üº¬ÇëÇóĞÅÏ¢µÄ I_AddressableUnLock_Request ÊµÀı¡£</param>
-    /// <param name="response">ÓÃÓÚ¹¹½¨ÏìÓ¦µÄ I_AddressableUnLock_Response ÊµÀı¡£</param>
-    /// <param name="reply">Ö´ĞĞÏìÓ¦µÄ»Øµ÷²Ù×÷¡£</param>
+    /// <param name="scene">å½“å‰åœºæ™¯å®ä¾‹ã€‚</param>
+    /// <param name="request">åŒ…å«è¯·æ±‚ä¿¡æ¯çš„ I_AddressableUnLock_Request å®ä¾‹ã€‚</param>
+    /// <param name="response">ç”¨äºæ„å»ºå“åº”çš„ I_AddressableUnLock_Response å®ä¾‹ã€‚</param>
+    /// <param name="reply">æ‰§è¡Œå“åº”çš„å›è°ƒæ“ä½œã€‚</param>
     protected override async FTask Run(Scene scene, I_AddressableUnLock_Request request, I_AddressableUnLock_Response response, Action reply)
     {
         scene.GetComponent<AddressableManageComponent>().UnLock(request.AddressableId, request.RouteId, request.Source);

@@ -4,19 +4,19 @@ using Fantasy.Helper;
 namespace Fantasy.Core.Network;
 
 /// <summary>
-/// ¶¨Ê±´¦ÀíÍøÂçÏûÏ¢³¬Ê±µÄÈÎÎñ¡£
+/// å®šæ—¶å¤„ç†ç½‘ç»œæ¶ˆæ¯è¶…æ—¶çš„ä»»åŠ¡ã€‚
 /// </summary>
 public sealed class OnNetworkMessageUpdateCheckTimeout : TimerHandler<MessageHelper.NetworkMessageUpdate>
 {
     /// <summary>
-    /// ´¦ÀíÍøÂçÏûÏ¢³¬Ê±µÄÂß¼­¡£
+    /// å¤„ç†ç½‘ç»œæ¶ˆæ¯è¶…æ—¶çš„é€»è¾‘ã€‚
     /// </summary>
-    /// <param name="self">¼ÆÊ±Æ÷»Øµ÷²ÎÊı£¬²»»á±»Ê¹ÓÃ¡£</param>
+    /// <param name="self">è®¡æ—¶å™¨å›è°ƒå‚æ•°ï¼Œä¸ä¼šè¢«ä½¿ç”¨ã€‚</param>
     public override void Handler(MessageHelper.NetworkMessageUpdate self)
     {
         var timeNow = TimeHelper.Now;
 
-        // ±éÀúÇëÇó»Øµ÷×Öµä£¬¼ì²éÊÇ·ñÓĞ³¬Ê±µÄÇëÇó£¬½«³¬Ê±ÇëÇóÌí¼Óµ½³¬Ê±ÏûÏ¢·¢ËÍÁĞ±íÖĞ¡£
+        // éå†è¯·æ±‚å›è°ƒå­—å…¸ï¼Œæ£€æŸ¥æ˜¯å¦æœ‰è¶…æ—¶çš„è¯·æ±‚ï¼Œå°†è¶…æ—¶è¯·æ±‚æ·»åŠ åˆ°è¶…æ—¶æ¶ˆæ¯å‘é€åˆ—è¡¨ä¸­ã€‚
         foreach (var (rpcId, value) in MessageHelper.RequestCallback)
         {
             if (timeNow < value.CreateTime + MessageHelper.Timeout)
@@ -27,13 +27,13 @@ public sealed class OnNetworkMessageUpdateCheckTimeout : TimerHandler<MessageHel
             MessageHelper.TimeoutRouteMessageSenders.Add(rpcId, value);
         }
 
-        // Èç¹ûÃ»ÓĞ³¬Ê±µÄÇëÇó£¬Ö±½Ó·µ»Ø¡£
+        // å¦‚æœæ²¡æœ‰è¶…æ—¶çš„è¯·æ±‚ï¼Œç›´æ¥è¿”å›ã€‚
         if (MessageHelper.TimeoutRouteMessageSenders.Count == 0)
         {
             return;
         }
 
-        // ´¦Àí³¬Ê±µÄÇëÇó£¬¸ù¾İÇëÇóÀàĞÍÉú³ÉÏàÓ¦µÄÏìÓ¦ÏûÏ¢£¬²¢½øĞĞ´¦Àí¡£
+        // å¤„ç†è¶…æ—¶çš„è¯·æ±‚ï¼Œæ ¹æ®è¯·æ±‚ç±»å‹ç”Ÿæˆç›¸åº”çš„å“åº”æ¶ˆæ¯ï¼Œå¹¶è¿›è¡Œå¤„ç†ã€‚
         foreach (var (rpcId, routeMessageSender) in MessageHelper.TimeoutRouteMessageSenders)
         {
             uint responseRpcId = 0;
@@ -44,7 +44,7 @@ public sealed class OnNetworkMessageUpdateCheckTimeout : TimerHandler<MessageHel
                 {
                     case IRouteMessage iRouteMessage:
                     {
-                        // TODO: ¸ù¾İÂ·ÓÉÏûÏ¢Éú³ÉÏìÓ¦£¬²¢½øĞĞ´¦Àí¡£
+                        // TODO: æ ¹æ®è·¯ç”±æ¶ˆæ¯ç”Ÿæˆå“åº”ï¼Œå¹¶è¿›è¡Œå¤„ç†ã€‚
                         // var routeResponse = RouteMessageDispatcher.CreateResponse(iRouteMessage, ErrorCode.ErrRouteTimeout);
                         // responseRpcId = routeResponse.RpcId;
                         // routeResponse.RpcId = routeMessageSender.RpcId;
@@ -53,7 +53,7 @@ public sealed class OnNetworkMessageUpdateCheckTimeout : TimerHandler<MessageHel
                     }
                     case IRequest iRequest:
                     {
-                        // ¸ù¾İÆÕÍ¨ÇëÇóÉú³ÉÏìÓ¦£¬²¢½øĞĞ´¦Àí¡£
+                        // æ ¹æ®æ™®é€šè¯·æ±‚ç”Ÿæˆå“åº”ï¼Œå¹¶è¿›è¡Œå¤„ç†ã€‚
                         var response = MessageDispatcherSystem.Instance.CreateResponse(iRequest, CoreErrorCode.ErrRpcFail);
                         responseRpcId = routeMessageSender.RpcId;
                         MessageHelper.ResponseHandler(responseRpcId, response);
@@ -62,7 +62,7 @@ public sealed class OnNetworkMessageUpdateCheckTimeout : TimerHandler<MessageHel
                     }
                     default:
                     {
-                        // ´¦Àí²»Ö§³ÖµÄÇëÇóÀàĞÍ¡£
+                        // å¤„ç†ä¸æ”¯æŒçš„è¯·æ±‚ç±»å‹ã€‚
                         Log.Error(routeMessageSender.Request != null
                             ? $"Unsupported protocol type {routeMessageSender.Request.GetType()} rpcId:{rpcId}"
                             : $"Unsupported protocol type:{routeMessageSender.MessageType.FullName} rpcId:{rpcId}");
@@ -78,7 +78,7 @@ public sealed class OnNetworkMessageUpdateCheckTimeout : TimerHandler<MessageHel
             }
         }
 
-        // Çå¿Õ³¬Ê±ÏûÏ¢·¢ËÍÁĞ±í¡£
+        // æ¸…ç©ºè¶…æ—¶æ¶ˆæ¯å‘é€åˆ—è¡¨ã€‚
         MessageHelper.TimeoutRouteMessageSenders.Clear();
     }
 }

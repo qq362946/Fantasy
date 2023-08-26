@@ -2,32 +2,32 @@
 namespace Fantasy.Core.DataBase;
 
 /// <summary>
-/// ±íÊ¾ÓÎÏ·ÊÀ½çµÄÅäÖÃĞÅÏ¢¡£
+/// è¡¨ç¤ºæ¸¸æˆä¸–ç•Œçš„é…ç½®ä¿¡æ¯ã€‚
 /// </summary>
 public class WorldConfigInfo
 {
     /// <summary>
-    /// »ñÈ¡»òÉèÖÃÓÎÏ·ÊÀ½çµÄÎ¨Ò»±êÊ¶¡£
+    /// è·å–æˆ–è®¾ç½®æ¸¸æˆä¸–ç•Œçš„å”¯ä¸€æ ‡è¯†ã€‚
     /// </summary>
     public uint Id { get; set; }
 
     /// <summary>
-    /// »ñÈ¡»òÉèÖÃÓÎÏ·ÊÀ½çµÄÃû³Æ¡£
+    /// è·å–æˆ–è®¾ç½®æ¸¸æˆä¸–ç•Œçš„åç§°ã€‚
     /// </summary>
     public string WorldName { get; set; }
 
     /// <summary>
-    /// »ñÈ¡»òÉèÖÃÓÎÏ·ÊÀ½çµÄÊı¾İ¿âÁ¬½Ó×Ö·û´®¡£
+    /// è·å–æˆ–è®¾ç½®æ¸¸æˆä¸–ç•Œçš„æ•°æ®åº“è¿æ¥å­—ç¬¦ä¸²ã€‚
     /// </summary>
     public string DbConnection { get; set; }
 
     /// <summary>
-    /// »ñÈ¡»òÉèÖÃÓÎÏ·ÊÀ½çµÄÊı¾İ¿âÃû³Æ¡£
+    /// è·å–æˆ–è®¾ç½®æ¸¸æˆä¸–ç•Œçš„æ•°æ®åº“åç§°ã€‚
     /// </summary>
     public string DbName { get; set; }
 
     /// <summary>
-    /// »ñÈ¡»òÉèÖÃÓÎÏ·ÊÀ½çµÄÊı¾İ¿âÀàĞÍ¡£
+    /// è·å–æˆ–è®¾ç½®æ¸¸æˆä¸–ç•Œçš„æ•°æ®åº“ç±»å‹ã€‚
     /// </summary>
     public string DbType { get; set; }
 }

@@ -3,42 +3,42 @@ namespace Fantasy.IO
     using System;
 
     /// <summary>
-    /// Ìá¹©ÓÃÓÚ¹ÜÀí¿É»ØÊÕÄÚ´æÁ÷µÄ·Ö²¿Àà¡£
+    /// æä¾›ç”¨äºç®¡ç†å¯å›æ”¶å†…å­˜æµçš„åˆ†éƒ¨ç±»ã€‚
     /// </summary>
     public sealed partial class RecyclableMemoryStreamManager
     {
         /// <summary>
-        /// ÓÃÓÚ <see cref="StreamCreated"/> ÊÂ¼şµÄ²ÎÊıÀà¡£
+        /// ç”¨äº <see cref="StreamCreated"/> äº‹ä»¶çš„å‚æ•°ç±»ã€‚
         /// </summary>
         public sealed class StreamCreatedEventArgs : EventArgs
         {
             /// <summary>
-            /// StreamÁ÷µÄÎ¨Ò» ID¡£
+            /// Streamæµçš„å”¯ä¸€ IDã€‚
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// ¿ÉÑ¡µÄÊÂ¼ş±êÇ©¡£
+            /// å¯é€‰çš„äº‹ä»¶æ ‡ç­¾ã€‚
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// ÇëÇóµÄÁ÷´óĞ¡¡£
+            /// è¯·æ±‚çš„æµå¤§å°ã€‚
             /// </summary>
             public long RequestedSize { get; }
 
             /// <summary>
-            /// Êµ¼ÊµÄÁ÷´óĞ¡¡£
+            /// å®é™…çš„æµå¤§å°ã€‚
             /// </summary>
             public long ActualSize { get; }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="StreamCreatedEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="StreamCreatedEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="guid">Á÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">Á÷µÄ±êÇ©¡£</param>
-            /// <param name="requestedSize">ÇëÇóµÄÁ÷´óĞ¡¡£</param>
-            /// <param name="actualSize">Êµ¼ÊµÄÁ÷´óĞ¡¡£</param>
+            /// <param name="guid">æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">æµçš„æ ‡ç­¾ã€‚</param>
+            /// <param name="requestedSize">è¯·æ±‚çš„æµå¤§å°ã€‚</param>
+            /// <param name="actualSize">å®é™…çš„æµå¤§å°ã€‚</param>
             public StreamCreatedEventArgs(Guid guid, string tag, long requestedSize, long actualSize)
             {
                 this.Id = guid;
@@ -49,42 +49,42 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Ìá¹©ÓÃÓÚ <see cref="StreamDisposed"/> ÊÂ¼şµÄ²ÎÊıÀà¡£
+        /// æä¾›ç”¨äº <see cref="StreamDisposed"/> äº‹ä»¶çš„å‚æ•°ç±»ã€‚
         /// </summary>
         public sealed class StreamDisposedEventArgs : EventArgs
         {
             /// <summary>
-            /// Á÷µÄÎ¨Ò» ID¡£
+            /// æµçš„å”¯ä¸€ IDã€‚
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// ¿ÉÑ¡µÄÊÂ¼ş±êÇ©¡£
+            /// å¯é€‰çš„äº‹ä»¶æ ‡ç­¾ã€‚
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// ·ÖÅäÁ÷µÄ¶ÑÕ»
+            /// åˆ†é…æµçš„å †æ ˆ
             /// </summary>
             public string AllocationStack { get; }
 
             /// <summary>
-            ///´¦ÖÃÁ÷µÄ¶ÑÕ»¡£
+            ///å¤„ç½®æµçš„å †æ ˆã€‚
             /// </summary>
             public string DisposeStack { get; }
 
             /// <summary>
-            /// Á÷µÄÉúÃüÖÜÆÚ¡£
+            /// æµçš„ç”Ÿå‘½å‘¨æœŸã€‚
             /// </summary>
             public TimeSpan Lifetime { get; }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="StreamDisposedEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="StreamDisposedEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="guid">Á÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">Á÷µÄ±êÇ©¡£</param>
-            /// <param name="allocationStack">Ô­Ê¼·ÖÅäµÄ¶ÑÕ»¡£</param>
-            /// <param name="disposeStack">´¦ÖÃ¶ÑÕ»¡£</param>
+            /// <param name="guid">æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">æµçš„æ ‡ç­¾ã€‚</param>
+            /// <param name="allocationStack">åŸå§‹åˆ†é…çš„å †æ ˆã€‚</param>
+            /// <param name="disposeStack">å¤„ç½®å †æ ˆã€‚</param>
             [Obsolete("Use another constructor override")]
             public StreamDisposedEventArgs(Guid guid, string tag, string allocationStack, string disposeStack)
                 :this(guid, tag, TimeSpan.Zero, allocationStack, disposeStack)
@@ -93,13 +93,13 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="StreamDisposedEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="StreamDisposedEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="guid">Á÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">Á÷µÄ±êÇ©¡£</param>
-            /// <param name="lifetime">Á÷µÄÉúÃüÖÜÆÚ¡£</param>
-            /// <param name="allocationStack">Ô­Ê¼·ÖÅäµÄ¶ÑÕ»¡£</param>
-            /// <param name="disposeStack">´¦ÖÃ¶ÑÕ»¡£</param>
+            /// <param name="guid">æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">æµçš„æ ‡ç­¾ã€‚</param>
+            /// <param name="lifetime">æµçš„ç”Ÿå‘½å‘¨æœŸã€‚</param>
+            /// <param name="allocationStack">åŸå§‹åˆ†é…çš„å †æ ˆã€‚</param>
+            /// <param name="disposeStack">å¤„ç½®å †æ ˆã€‚</param>
             public StreamDisposedEventArgs(Guid guid, string tag, TimeSpan lifetime, string allocationStack, string disposeStack)
             {
                 this.Id = guid;
@@ -111,43 +111,43 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Ìá¹©ÓÃÓÚ <see cref="StreamDoubleDisposed"/> ÊÂ¼şµÄ²ÎÊıÀà¡£
+        /// æä¾›ç”¨äº <see cref="StreamDoubleDisposed"/> äº‹ä»¶çš„å‚æ•°ç±»ã€‚
         /// </summary>
         public sealed class StreamDoubleDisposedEventArgs : EventArgs
         {
             /// <summary>
-            /// Á÷µÄÎ¨Ò» ID¡£
+            /// æµçš„å”¯ä¸€ IDã€‚
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// ¿ÉÑ¡µÄÊÂ¼ş±êÇ©¡£
+            /// å¯é€‰çš„äº‹ä»¶æ ‡ç­¾ã€‚
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// ·ÖÅäÁ÷µÄ¶ÑÕ»¡£
+            /// åˆ†é…æµçš„å †æ ˆã€‚
             /// </summary>
             public string AllocationStack { get; }
 
             /// <summary>
-            /// µÚÒ»¸ö´¦ÖÃ¶ÑÕ»¡£
+            /// ç¬¬ä¸€ä¸ªå¤„ç½®å †æ ˆã€‚
             /// </summary>
             public string DisposeStack1 { get; }
 
             /// <summary>
-            /// µÚ¶ş¸ö´¦ÖÃ¶ÑÕ»¡£
+            /// ç¬¬äºŒä¸ªå¤„ç½®å †æ ˆã€‚
             /// </summary>
             public string DisposeStack2 { get; }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="StreamDoubleDisposedEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="StreamDoubleDisposedEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="guid">Á÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">Á÷µÄ±êÇ©¡£</param>
-            /// <param name="allocationStack">Ô­Ê¼·ÖÅäµÄ¶ÑÕ»¡£</param>
-            /// <param name="disposeStack1">µÚÒ»¸ö´¦ÖÃ¶ÑÕ»¡£</param>
-            /// <param name="disposeStack2">µÚ¶ş¸ö´¦ÖÃ¶ÑÕ»¡£</param>
+            /// <param name="guid">æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">æµçš„æ ‡ç­¾ã€‚</param>
+            /// <param name="allocationStack">åŸå§‹åˆ†é…çš„å †æ ˆã€‚</param>
+            /// <param name="disposeStack1">ç¬¬ä¸€ä¸ªå¤„ç½®å †æ ˆã€‚</param>
+            /// <param name="disposeStack2">ç¬¬äºŒä¸ªå¤„ç½®å †æ ˆã€‚</param>
             public StreamDoubleDisposedEventArgs(Guid guid, string tag, string allocationStack, string disposeStack1, string disposeStack2)
             {
                 this.Id = guid;
@@ -159,31 +159,31 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Ìá¹©ÓÃÓÚ <see cref="StreamFinalized"/> ÊÂ¼şµÄ²ÎÊıÀà¡£
+        /// æä¾›ç”¨äº <see cref="StreamFinalized"/> äº‹ä»¶çš„å‚æ•°ç±»ã€‚
         /// </summary>
         public sealed class StreamFinalizedEventArgs : EventArgs
         {
             /// <summary>
-            /// Á÷µÄÎ¨Ò» ID¡£
+            /// æµçš„å”¯ä¸€ IDã€‚
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// ¿ÉÑ¡µÄÊÂ¼ş±êÇ©¡£
+            /// å¯é€‰çš„äº‹ä»¶æ ‡ç­¾ã€‚
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// ·ÖÅäÁ÷µÄ¶ÑÕ»¡£
+            /// åˆ†é…æµçš„å †æ ˆã€‚
             /// </summary>
             public string AllocationStack { get; }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="StreamFinalizedEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="StreamFinalizedEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="guid">Á÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">Á÷µÄ±êÇ©¡£</param>
-            /// <param name="allocationStack">Ô­Ê¼·ÖÅäµÄ¶ÑÕ»¡£</param>
+            /// <param name="guid">æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">æµçš„æ ‡ç­¾ã€‚</param>
+            /// <param name="allocationStack">åŸå§‹åˆ†é…çš„å †æ ˆã€‚</param>
             public StreamFinalizedEventArgs(Guid guid, string tag, string allocationStack)
             {
                 this.Id = guid;
@@ -193,37 +193,37 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Ìá¹©ÓÃÓÚ <see cref="StreamConvertedToArray"/> ÊÂ¼şµÄ²ÎÊıÀà¡£
+        /// æä¾›ç”¨äº <see cref="StreamConvertedToArray"/> äº‹ä»¶çš„å‚æ•°ç±»ã€‚
         /// </summary>
         public sealed class StreamConvertedToArrayEventArgs : EventArgs
         {
             /// <summary>
-            /// Á÷µÄÎ¨Ò» ID¡£
+            /// æµçš„å”¯ä¸€ IDã€‚
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// ¿ÉÑ¡µÄÊÂ¼ş±êÇ©¡£
+            /// å¯é€‰çš„äº‹ä»¶æ ‡ç­¾ã€‚
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// µ÷ÓÃ ToArray µÄ¶ÑÕ»¡£
+            /// è°ƒç”¨ ToArray çš„å †æ ˆã€‚
             /// </summary>
             public string Stack { get; }
 
             /// <summary>
-            /// ¶ÑÕ»µÄ³¤¶È¡£
+            /// å †æ ˆçš„é•¿åº¦ã€‚
             /// </summary>
             public long Length { get; }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="StreamConvertedToArrayEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="StreamConvertedToArrayEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="guid">Á÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">Á÷µÄ±êÇ©¡£</param>
-            /// <param name="stack">ToArray µ÷ÓÃµÄ¶ÑÕ»¡£</param>
-            /// <param name="length">Á÷µÄ³¤¶È¡£</param>
+            /// <param name="guid">æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">æµçš„æ ‡ç­¾ã€‚</param>
+            /// <param name="stack">ToArray è°ƒç”¨çš„å †æ ˆã€‚</param>
+            /// <param name="length">æµçš„é•¿åº¦ã€‚</param>
             public StreamConvertedToArrayEventArgs(Guid guid, string tag, string stack, long length)
             {
                 this.Id = guid;
@@ -234,43 +234,43 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Ìá¹©ÓÃÓÚ <see cref="StreamOverCapacity"/> ÊÂ¼şµÄ²ÎÊıÀà¡£
+        /// æä¾›ç”¨äº <see cref="StreamOverCapacity"/> äº‹ä»¶çš„å‚æ•°ç±»ã€‚
         /// </summary>
         public sealed class StreamOverCapacityEventArgs : EventArgs
         {
             /// <summary>
-            /// Á÷µÄÎ¨Ò» ID¡£
+            /// æµçš„å”¯ä¸€ IDã€‚
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// ¿ÉÑ¡µÄÊÂ¼ş±êÇ©¡£
+            /// å¯é€‰çš„äº‹ä»¶æ ‡ç­¾ã€‚
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// Ô­Ê¼·ÖÅä¶ÑÕ»¡£
+            /// åŸå§‹åˆ†é…å †æ ˆã€‚
             /// </summary>
             public string AllocationStack { get; }
 
             /// <summary>
-            /// ÇëÇóµÄÈİÁ¿¡£
+            /// è¯·æ±‚çš„å®¹é‡ã€‚
             /// </summary>
             public long RequestedCapacity { get; }
 
             /// <summary>
-            /// ×î´óÈİÁ¿¡£
+            /// æœ€å¤§å®¹é‡ã€‚
             /// </summary>
             public long MaximumCapacity { get; }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="StreamOverCapacityEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="StreamOverCapacityEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="guid">Á÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">Á÷µÄ±êÇ©¡£</param>
-            /// <param name="requestedCapacity">ÇëÇóµÄÈİÁ¿¡£</param>
-            /// <param name="maximumCapacity">¹ÜÀíÆ÷µÄ×î´óÁ÷ÈİÁ¿¡£</param>
-            /// <param name="allocationStack">Ô­Ê¼·ÖÅä¶ÑÕ»¡£</param>
+            /// <param name="guid">æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">æµçš„æ ‡ç­¾ã€‚</param>
+            /// <param name="requestedCapacity">è¯·æ±‚çš„å®¹é‡ã€‚</param>
+            /// <param name="maximumCapacity">ç®¡ç†å™¨çš„æœ€å¤§æµå®¹é‡ã€‚</param>
+            /// <param name="allocationStack">åŸå§‹åˆ†é…å †æ ˆã€‚</param>
             internal StreamOverCapacityEventArgs(Guid guid, string tag, long requestedCapacity, long maximumCapacity, string allocationStack)
             {
                 this.Id = guid;
@@ -282,19 +282,19 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Ìá¹©ÓÃÓÚ <see cref="BlockCreated"/> ÊÂ¼şµÄ²ÎÊıÀà¡£
+        /// æä¾›ç”¨äº <see cref="BlockCreated"/> äº‹ä»¶çš„å‚æ•°ç±»ã€‚
         /// </summary>
         public sealed class BlockCreatedEventArgs : EventArgs
         {
             /// <summary>
-            /// µ±Ç°´ÓĞ¡ĞÍ³ØÖĞÊ¹ÓÃµÄ×Ö½ÚÊı¡£
+            /// å½“å‰ä»å°å‹æ± ä¸­ä½¿ç”¨çš„å­—èŠ‚æ•°ã€‚
             /// </summary>
             public long SmallPoolInUse { get; }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="BlockCreatedEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="BlockCreatedEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="smallPoolInUse">µ±Ç°´ÓĞ¡ĞÍ³ØÖĞÊ¹ÓÃµÄ×Ö½ÚÊı¡£</param>
+            /// <param name="smallPoolInUse">å½“å‰ä»å°å‹æ± ä¸­ä½¿ç”¨çš„å­—èŠ‚æ•°ã€‚</param>
             internal BlockCreatedEventArgs(long smallPoolInUse)
             {
                 this.SmallPoolInUse = smallPoolInUse;
@@ -302,50 +302,50 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Ìá¹©ÓÃÓÚ <see cref="LargeBufferCreated"/> ÊÂ¼şµÄ²ÎÊıÀà¡£
+        /// æä¾›ç”¨äº <see cref="LargeBufferCreated"/> äº‹ä»¶çš„å‚æ•°ç±»ã€‚
         /// </summary>
         public sealed class LargeBufferCreatedEventArgs : EventArgs
         {
             /// <summary>
-            ///  Á÷µÄÎ¨Ò» ID¡£
+            ///  æµçš„å”¯ä¸€ IDã€‚
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// ¿ÉÑ¡µÄÊÂ¼ş±êÇ©¡£
+            /// å¯é€‰çš„äº‹ä»¶æ ‡ç­¾ã€‚
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// »º³åÇøÊÇ·ñÂú×ãÀ´×Ô³ØµÄĞèÇó¡£
+            /// ç¼“å†²åŒºæ˜¯å¦æ»¡è¶³æ¥è‡ªæ± çš„éœ€æ±‚ã€‚
             /// </summary>
             public bool Pooled { get; }
 
             /// <summary>
-            /// ËùĞèµÄ»º³åÇø´óĞ¡¡£
+            /// æ‰€éœ€çš„ç¼“å†²åŒºå¤§å°ã€‚
             /// </summary>
             public long RequiredSize { get; }
 
             /// <summary>
-            /// ´Ó´óĞÍ³ØÖĞµ±Ç°Ê¹ÓÃµÄ×Ö½ÚÊı¡£
+            /// ä»å¤§å‹æ± ä¸­å½“å‰ä½¿ç”¨çš„å­—èŠ‚æ•°ã€‚
             /// </summary>
             public long LargePoolInUse { get; }
 
             /// <summary>
-            /// Èç¹û»º³åÇøÎ´´Ó³ØÖĞÂú×ãĞèÇó£¬²¢ÇÒ <see cref="GenerateCallStacks"/> ÒÑ´ò¿ª£¬
-            /// Ôò°üº¬·ÖÅäÇëÇóµÄµ÷ÓÃ¶ÑÕ»¡£
+            /// å¦‚æœç¼“å†²åŒºæœªä»æ± ä¸­æ»¡è¶³éœ€æ±‚ï¼Œå¹¶ä¸” <see cref="GenerateCallStacks"/> å·²æ‰“å¼€ï¼Œ
+            /// åˆ™åŒ…å«åˆ†é…è¯·æ±‚çš„è°ƒç”¨å †æ ˆã€‚
             /// </summary>
             public string CallStack { get; }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="LargeBufferCreatedEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="LargeBufferCreatedEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="guid">Á÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">Á÷µÄ±êÇ©¡£</param>
-            /// <param name="requiredSize">ĞÂ»º³åÇøµÄËùĞè´óĞ¡¡£</param>
-            /// <param name="largePoolInUse">´Ó´óĞÍ³ØÖĞµ±Ç°Ê¹ÓÃµÄ×Ö½ÚÊı¡£</param>
-            /// <param name="pooled">»º³åÇøÊÇ·ñÂú×ãÀ´×Ô³ØµÄĞèÇó¡£</param>
-            /// <param name="callStack">·ÖÅäÇëÇóµÄµ÷ÓÃ¶ÑÕ»£¨Èç¹ûÎ´´Ó³ØÖĞÂú×ãĞèÇó²¢ÆôÓÃÁË <see cref="GenerateCallStacks"/>£©¡£</param>
+            /// <param name="guid">æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">æµçš„æ ‡ç­¾ã€‚</param>
+            /// <param name="requiredSize">æ–°ç¼“å†²åŒºçš„æ‰€éœ€å¤§å°ã€‚</param>
+            /// <param name="largePoolInUse">ä»å¤§å‹æ± ä¸­å½“å‰ä½¿ç”¨çš„å­—èŠ‚æ•°ã€‚</param>
+            /// <param name="pooled">ç¼“å†²åŒºæ˜¯å¦æ»¡è¶³æ¥è‡ªæ± çš„éœ€æ±‚ã€‚</param>
+            /// <param name="callStack">åˆ†é…è¯·æ±‚çš„è°ƒç”¨å †æ ˆï¼ˆå¦‚æœæœªä»æ± ä¸­æ»¡è¶³éœ€æ±‚å¹¶å¯ç”¨äº† <see cref="GenerateCallStacks"/>ï¼‰ã€‚</param>
             internal LargeBufferCreatedEventArgs(Guid guid, string tag, long requiredSize, long largePoolInUse, bool pooled, string callStack)
             {
                 this.RequiredSize = requiredSize;
@@ -358,37 +358,37 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Ìá¹©ÓÃÓÚ <see cref="BufferDiscarded"/> ÊÂ¼şµÄ²ÎÊıÀà¡£
+        /// æä¾›ç”¨äº <see cref="BufferDiscarded"/> äº‹ä»¶çš„å‚æ•°ç±»ã€‚
         /// </summary>
         public sealed class BufferDiscardedEventArgs : EventArgs
         {
             /// <summary>
-            /// Á÷µÄÎ¨Ò» ID¡£
+            /// æµçš„å”¯ä¸€ IDã€‚
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// ¿ÉÑ¡µÄÊÂ¼ş±êÇ©¡£
+            /// å¯é€‰çš„äº‹ä»¶æ ‡ç­¾ã€‚
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// »º³åÇøµÄÀàĞÍ¡£
+            /// ç¼“å†²åŒºçš„ç±»å‹ã€‚
             /// </summary>
             public Events.MemoryStreamBufferType BufferType { get; }
 
             /// <summary>
-            /// ¶ªÆú´Ë»º³åÇøµÄÔ­Òò¡£
+            /// ä¸¢å¼ƒæ­¤ç¼“å†²åŒºçš„åŸå› ã€‚
             /// </summary>
             public Events.MemoryStreamDiscardReason Reason { get; }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="BufferDiscardedEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="BufferDiscardedEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="guid">Á÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">Á÷µÄ±êÇ©¡£</param>
-            /// <param name="bufferType">ÕıÔÚ¶ªÆúµÄ»º³åÇøµÄÀàĞÍ¡£</param>
-            /// <param name="reason">¶ªÆú»º³åÇøµÄÔ­Òò¡£</param>
+            /// <param name="guid">æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">æµçš„æ ‡ç­¾ã€‚</param>
+            /// <param name="bufferType">æ­£åœ¨ä¸¢å¼ƒçš„ç¼“å†²åŒºçš„ç±»å‹ã€‚</param>
+            /// <param name="reason">ä¸¢å¼ƒç¼“å†²åŒºçš„åŸå› ã€‚</param>
             internal BufferDiscardedEventArgs(Guid guid, string tag, Events.MemoryStreamBufferType bufferType, Events.MemoryStreamDiscardReason reason)
             {
                 this.Id = guid;
@@ -399,19 +399,19 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Ìá¹©ÓÃÓÚ <see cref="StreamLength"/> ÊÂ¼şµÄ²ÎÊıÀà¡£
+        /// æä¾›ç”¨äº <see cref="StreamLength"/> äº‹ä»¶çš„å‚æ•°ç±»ã€‚
         /// </summary>
         public sealed class StreamLengthEventArgs : EventArgs
         {
             /// <summary>
-            /// Á÷µÄ³¤¶È¡£
+            /// æµçš„é•¿åº¦ã€‚
             /// </summary>
             public long Length { get; }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="StreamLengthEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="StreamLengthEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="length">Á÷µÄ³¤¶È¡£</param>
+            /// <param name="length">æµçš„é•¿åº¦ã€‚</param>
             public StreamLengthEventArgs(long length)
             {
                 this.Length = length;
@@ -419,37 +419,37 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Ìá¹©ÓÃÓÚ <see cref="UsageReport"/> ÊÂ¼şµÄ²ÎÊıÀà¡£
+        /// æä¾›ç”¨äº <see cref="UsageReport"/> äº‹ä»¶çš„å‚æ•°ç±»ã€‚
         /// </summary>
         public sealed class UsageReportEventArgs : EventArgs
         {
             /// <summary>
-            /// µ±Ç°ÕıÔÚÊ¹ÓÃµÄĞ¡ĞÍ³Ø×Ö½ÚÊı¡£
+            /// å½“å‰æ­£åœ¨ä½¿ç”¨çš„å°å‹æ± å­—èŠ‚æ•°ã€‚
             /// </summary>
             public long SmallPoolInUseBytes { get; }
 
             /// <summary>
-            /// µ±Ç°¿ÉÓÃµÄĞ¡ĞÍ³Ø×Ö½ÚÊı¡£
+            /// å½“å‰å¯ç”¨çš„å°å‹æ± å­—èŠ‚æ•°ã€‚
             /// </summary>
             public long SmallPoolFreeBytes { get; }
 
             /// <summary>
-            /// µ±Ç°ÕıÔÚÊ¹ÓÃµÄ´óĞÍ³Ø×Ö½ÚÊı¡£
+            /// å½“å‰æ­£åœ¨ä½¿ç”¨çš„å¤§å‹æ± å­—èŠ‚æ•°ã€‚
             /// </summary>
             public long LargePoolInUseBytes { get; }
 
             /// <summary>
-            /// µ±Ç°¿ÉÓÃµÄ´óĞÍ³Ø×Ö½ÚÊı¡£
+            /// å½“å‰å¯ç”¨çš„å¤§å‹æ± å­—èŠ‚æ•°ã€‚
             /// </summary>
             public long LargePoolFreeBytes { get; }
 
             /// <summary>
-            /// ³õÊ¼»¯ <see cref="UsageReportEventArgs"/> ÀàµÄĞÂÊµÀı¡£
+            /// åˆå§‹åŒ– <see cref="UsageReportEventArgs"/> ç±»çš„æ–°å®ä¾‹ã€‚
             /// </summary>
-            /// <param name="smallPoolInUseBytes">µ±Ç°ÕıÔÚÊ¹ÓÃµÄĞ¡ĞÍ³Ø×Ö½ÚÊı¡£</param>
-            /// <param name="smallPoolFreeBytes">µ±Ç°¿ÉÓÃµÄĞ¡ĞÍ³Ø×Ö½ÚÊı¡£</param>
-            /// <param name="largePoolInUseBytes">µ±Ç°ÕıÔÚÊ¹ÓÃµÄ´óĞÍ³Ø×Ö½ÚÊı¡£</param>
-            /// <param name="largePoolFreeBytes">µ±Ç°¿ÉÓÃµÄ´óĞÍ³Ø×Ö½ÚÊı¡£</param>
+            /// <param name="smallPoolInUseBytes">å½“å‰æ­£åœ¨ä½¿ç”¨çš„å°å‹æ± å­—èŠ‚æ•°ã€‚</param>
+            /// <param name="smallPoolFreeBytes">å½“å‰å¯ç”¨çš„å°å‹æ± å­—èŠ‚æ•°ã€‚</param>
+            /// <param name="largePoolInUseBytes">å½“å‰æ­£åœ¨ä½¿ç”¨çš„å¤§å‹æ± å­—èŠ‚æ•°ã€‚</param>
+            /// <param name="largePoolFreeBytes">å½“å‰å¯ç”¨çš„å¤§å‹æ± å­—èŠ‚æ•°ã€‚</param>
             public UsageReportEventArgs(
                 long smallPoolInUseBytes,
                 long smallPoolFreeBytes,

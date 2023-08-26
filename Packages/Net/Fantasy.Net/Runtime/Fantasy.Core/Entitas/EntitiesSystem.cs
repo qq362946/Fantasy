@@ -7,7 +7,7 @@ using Fantasy.Helper;
 namespace Fantasy
 {
     /// <summary>
-    /// ÊµÌåÏµÍ³¹ÜÀíÆ÷£¬ÓÃÓÚ¹ÜÀí¸÷ÖÖÊµÌåÏµÍ³µÄÉúÃüÖÜÆÚºÍ¸üĞÂ
+    /// å®ä½“ç³»ç»Ÿç®¡ç†å™¨ï¼Œç”¨äºç®¡ç†å„ç§å®ä½“ç³»ç»Ÿçš„ç”Ÿå‘½å‘¨æœŸå’Œæ›´æ–°
     /// </summary>
     public sealed class EntitiesSystem : Singleton<EntitiesSystem>, IUpdateSingleton
     {
@@ -20,9 +20,9 @@ namespace Fantasy
         private readonly Queue<long> _updateQueue = new Queue<long>();
 
         /// <summary>
-        /// µ±¼ÓÔØ³ÌĞò¼¯Ê±µÄ´¦Àí·½·¨£¬ÓÃÓÚ³õÊ¼»¯ÊµÌåÏµÍ³ÁĞ±í
+        /// å½“åŠ è½½ç¨‹åºé›†æ—¶çš„å¤„ç†æ–¹æ³•ï¼Œç”¨äºåˆå§‹åŒ–å®ä½“ç³»ç»Ÿåˆ—è¡¨
         /// </summary>
-        /// <param name="assemblyName">³ÌĞò¼¯Ãû³Æ</param>
+        /// <param name="assemblyName">ç¨‹åºé›†åç§°</param>
         protected override void OnLoad(int assemblyName)
         {
             foreach (var entitiesSystemType in AssemblyManager.ForEach(assemblyName, typeof(IEntitiesSystem)))
@@ -58,9 +58,9 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// µ±Ğ¶ÔØ³ÌĞò¼¯Ê±µÄ´¦Àí·½·¨£¬ÓÃÓÚÇåÀíÊµÌåÏµÍ³ÁĞ±í
+        /// å½“å¸è½½ç¨‹åºé›†æ—¶çš„å¤„ç†æ–¹æ³•ï¼Œç”¨äºæ¸…ç†å®ä½“ç³»ç»Ÿåˆ—è¡¨
         /// </summary>
-        /// <param name="assemblyName">³ÌĞò¼¯Ãû³Æ</param>
+        /// <param name="assemblyName">ç¨‹åºé›†åç§°</param>
         protected override void OnUnLoad(int assemblyName)
         {
             if (!_assemblyList.TryGetValue(assemblyName, out var assembly))
@@ -80,10 +80,10 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ´¥·¢ÊµÌåµÄ»½ĞÑ·½·¨
+        /// è§¦å‘å®ä½“çš„å”¤é†’æ–¹æ³•
         /// </summary>
-        /// <typeparam name="T">ÊµÌåÀàĞÍ</typeparam>
-        /// <param name="entity">ÊµÌå¶ÔÏó</param>
+        /// <typeparam name="T">å®ä½“ç±»å‹</typeparam>
+        /// <param name="entity">å®ä½“å¯¹è±¡</param>
         public void Awake<T>(T entity) where T : Entity
         {
             var type = entity.GetType();
@@ -104,10 +104,10 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ´¥·¢ÊµÌåµÄÏú»Ù·½·¨
+        /// è§¦å‘å®ä½“çš„é”€æ¯æ–¹æ³•
         /// </summary>
-        /// <typeparam name="T">ÊµÌåÀàĞÍ</typeparam>
-        /// <param name="entity">ÊµÌå¶ÔÏó</param>
+        /// <typeparam name="T">å®ä½“ç±»å‹</typeparam>
+        /// <param name="entity">å®ä½“å¯¹è±¡</param>
         public void Destroy<T>(T entity) where T : Entity
         {
             var type = entity.GetType();
@@ -128,10 +128,10 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ´¥·¢ÊµÌåµÄ·´ĞòÁĞ»¯·½·¨
+        /// è§¦å‘å®ä½“çš„ååºåˆ—åŒ–æ–¹æ³•
         /// </summary>
-        /// <typeparam name="T">ÊµÌåÀàĞÍ</typeparam>
-        /// <param name="entity">ÊµÌå¶ÔÏó</param>
+        /// <typeparam name="T">å®ä½“ç±»å‹</typeparam>
+        /// <param name="entity">å®ä½“å¯¹è±¡</param>
         public void Deserialize<T>(T entity) where T : Entity
         {
             var type = entity.GetType();
@@ -152,9 +152,9 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ½«ÊµÌå¼ÓÈë¸üĞÂ¶ÓÁĞ£¬×¼±¸½øĞĞ¸üĞÂ
+        /// å°†å®ä½“åŠ å…¥æ›´æ–°é˜Ÿåˆ—ï¼Œå‡†å¤‡è¿›è¡Œæ›´æ–°
         /// </summary>
-        /// <param name="entity">ÊµÌå¶ÔÏó</param>
+        /// <param name="entity">å®ä½“å¯¹è±¡</param>
         public void StartUpdate(Entity entity)
         {
             if (!_updateSystems.ContainsKey(entity.GetType()))
@@ -166,7 +166,7 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// Ö´ĞĞÊµÌåÏµÍ³µÄ¸üĞÂÂß¼­
+        /// æ‰§è¡Œå®ä½“ç³»ç»Ÿçš„æ›´æ–°é€»è¾‘
         /// </summary>
         public void Update()
         {
@@ -203,7 +203,7 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ÊÍ·ÅÊµÌåÏµÍ³¹ÜÀíÆ÷×ÊÔ´
+        /// é‡Šæ”¾å®ä½“ç³»ç»Ÿç®¡ç†å™¨èµ„æº
         /// </summary>
         public override void Dispose()
         {

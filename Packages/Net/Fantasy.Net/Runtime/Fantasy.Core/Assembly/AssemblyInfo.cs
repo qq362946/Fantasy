@@ -7,27 +7,27 @@ using Fantasy.DataStructure;
 namespace Fantasy.Helper
 {
     /// <summary>
-    /// AssemblyInfoÌá¹©ÓĞ¹Ø³ÌĞò¼¯ºÍÀàĞÍµÄĞÅÏ¢
+    /// AssemblyInfoæä¾›æœ‰å…³ç¨‹åºé›†å’Œç±»å‹çš„ä¿¡æ¯
     /// </summary>
     public sealed class AssemblyInfo
     {
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÓë´Ë³ÌĞò¼¯Ïà¹ØÁªµÄ <see cref="Assembly"/> ÊµÀı¡£
+        /// è·å–æˆ–è®¾ç½®ä¸æ­¤ç¨‹åºé›†ç›¸å…³è”çš„ <see cref="Assembly"/> å®ä¾‹ã€‚
         /// </summary>
         public Assembly Assembly { get; private set; }
         /// <summary>
-        /// ³ÌĞò¼¯ÀàĞÍ¼¯ºÏ£¬»ñÈ¡Ò»¸öÁĞ±í£¬°üº¬´Ó³ÌĞò¼¯¼ÓÔØµÄËùÓĞÀàĞÍ¡£
+        /// ç¨‹åºé›†ç±»å‹é›†åˆï¼Œè·å–ä¸€ä¸ªåˆ—è¡¨ï¼ŒåŒ…å«ä»ç¨‹åºé›†åŠ è½½çš„æ‰€æœ‰ç±»å‹ã€‚
         /// </summary>
         public readonly List<Type> AssemblyTypeList = new List<Type>();
         /// <summary>
-        /// ³ÌĞò¼¯ÀàĞÍ·Ö×é¼¯ºÏ£¬»ñÈ¡Ò»¸ö·Ö×éÁĞ±í£¬½«½Ó¿ÚÀàĞÍÓ³Éäµ½ÊµÏÖÕâĞ©½Ó¿ÚµÄÀàĞÍ¡£
+        /// ç¨‹åºé›†ç±»å‹åˆ†ç»„é›†åˆï¼Œè·å–ä¸€ä¸ªåˆ†ç»„åˆ—è¡¨ï¼Œå°†æ¥å£ç±»å‹æ˜ å°„åˆ°å®ç°è¿™äº›æ¥å£çš„ç±»å‹ã€‚
         /// </summary>
         public readonly OneToManyList<Type, Type> AssemblyTypeGroupList = new OneToManyList<Type, Type>();
 
         /// <summary>
-        /// ´ÓÖ¸¶¨µÄ³ÌĞò¼¯¼ÓÔØÀàĞÍĞÅÏ¢²¢½øĞĞ·ÖÀà¡£
+        /// ä»æŒ‡å®šçš„ç¨‹åºé›†åŠ è½½ç±»å‹ä¿¡æ¯å¹¶è¿›è¡Œåˆ†ç±»ã€‚
         /// </summary>
-        /// <param name="assembly">Òª¼ÓÔØĞÅÏ¢µÄ³ÌĞò¼¯¡£</param>
+        /// <param name="assembly">è¦åŠ è½½ä¿¡æ¯çš„ç¨‹åºé›†ã€‚</param>
         public void Load(Assembly assembly)
         {
             Assembly = assembly;
@@ -52,7 +52,7 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// Ğ¶ÔØ³ÌĞò¼¯µÄÀàĞÍĞÅÏ¢¡£
+        /// å¸è½½ç¨‹åºé›†çš„ç±»å‹ä¿¡æ¯ã€‚
         /// </summary>
         public void Unload()
         {

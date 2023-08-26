@@ -1,12 +1,12 @@
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ÍøÂç¸üĞÂµÄ½Ó¿Ú¡£
+    /// ç½‘ç»œæ›´æ–°çš„æ¥å£ã€‚
     /// </summary>
     public interface INetworkUpdate
     {
         /// <summary>
-        /// ÔÚÍøÂç¸üĞÂÊ±µ÷ÓÃµÄ·½·¨¡£
+        /// åœ¨ç½‘ç»œæ›´æ–°æ—¶è°ƒç”¨çš„æ–¹æ³•ã€‚
         /// </summary>
         void Update();
     }

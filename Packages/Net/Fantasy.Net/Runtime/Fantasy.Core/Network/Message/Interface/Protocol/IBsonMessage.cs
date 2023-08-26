@@ -1,7 +1,7 @@
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ±íÊ¾¿ÉÒÔĞòÁĞ»¯Îª BSON ¸ñÊ½µÄÏûÏ¢½Ó¿Ú¡£
+    /// è¡¨ç¤ºå¯ä»¥åºåˆ—åŒ–ä¸º BSON æ ¼å¼çš„æ¶ˆæ¯æ¥å£ã€‚
     /// </summary>
     public interface IBsonMessage : IMessage
     {
@@ -9,7 +9,7 @@ namespace Fantasy.Core.Network
     }
 
     /// <summary>
-    /// ±íÊ¾¿ÉÒÔĞòÁĞ»¯Îª BSON ¸ñÊ½µÄÇëÇóÏûÏ¢½Ó¿Ú¡£
+    /// è¡¨ç¤ºå¯ä»¥åºåˆ—åŒ–ä¸º BSON æ ¼å¼çš„è¯·æ±‚æ¶ˆæ¯æ¥å£ã€‚
     /// </summary>
     public interface IBsonRequest : IBsonMessage, IRequest
     {
@@ -17,7 +17,7 @@ namespace Fantasy.Core.Network
     }
 
     /// <summary>
-    /// ±íÊ¾¿ÉÒÔĞòÁĞ»¯Îª BSON ¸ñÊ½µÄÏìÓ¦ÏûÏ¢½Ó¿Ú¡£
+    /// è¡¨ç¤ºå¯ä»¥åºåˆ—åŒ–ä¸º BSON æ ¼å¼çš„å“åº”æ¶ˆæ¯æ¥å£ã€‚
     /// </summary>
     public interface IBsonResponse : IBsonMessage, IResponse
     {

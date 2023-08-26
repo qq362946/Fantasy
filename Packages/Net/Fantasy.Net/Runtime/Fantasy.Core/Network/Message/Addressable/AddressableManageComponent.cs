@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// µØÖ·Ó³Éä¹ÜÀí×é¼ş£¬ÓÃÓÚ¹ÜÀíµØÖ·Ó³ÉäºÍËø¶¨¡£
+    /// åœ°å€æ˜ å°„ç®¡ç†ç»„ä»¶ï¼Œç”¨äºç®¡ç†åœ°å€æ˜ å°„å’Œé”å®šã€‚
     /// </summary>
     public sealed class AddressableManageComponent : Entity
     {
@@ -13,11 +13,11 @@ namespace Fantasy.Core.Network
         private readonly CoroutineLockQueueType _addressableLock = new CoroutineLockQueueType("AddressableLock");
 
         /// <summary>
-        /// Ìí¼ÓµØÖ·Ó³Éä¡£
+        /// æ·»åŠ åœ°å€æ˜ å°„ã€‚
         /// </summary>
-        /// <param name="addressableId">µØÖ·Ó³ÉäµÄÎ¨Ò»±êÊ¶¡£</param>
-        /// <param name="routeId">Â·ÓÉ ID¡£</param>
-        /// <param name="isLock">ÊÇ·ñ½øĞĞËø¶¨¡£</param>
+        /// <param name="addressableId">åœ°å€æ˜ å°„çš„å”¯ä¸€æ ‡è¯†ã€‚</param>
+        /// <param name="routeId">è·¯ç”± IDã€‚</param>
+        /// <param name="isLock">æ˜¯å¦è¿›è¡Œé”å®šã€‚</param>
         public async FTask Add(long addressableId, long routeId, bool isLock)
         {
             WaitCoroutineLock waitCoroutineLock = null;
@@ -42,10 +42,10 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// »ñÈ¡µØÖ·Ó³ÉäµÄÂ·ÓÉ ID¡£
+        /// è·å–åœ°å€æ˜ å°„çš„è·¯ç”± IDã€‚
         /// </summary>
-        /// <param name="addressableId">µØÖ·Ó³ÉäµÄÎ¨Ò»±êÊ¶¡£</param>
-        /// <returns>µØÖ·Ó³ÉäµÄÂ·ÓÉ ID¡£</returns>
+        /// <param name="addressableId">åœ°å€æ˜ å°„çš„å”¯ä¸€æ ‡è¯†ã€‚</param>
+        /// <returns>åœ°å€æ˜ å°„çš„è·¯ç”± IDã€‚</returns>
         public async FTask<long> Get(long addressableId)
         {
             using (await _addressableLock.Lock(addressableId))
@@ -56,9 +56,9 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ÒÆ³ıµØÖ·Ó³Éä¡£
+        /// ç§»é™¤åœ°å€æ˜ å°„ã€‚
         /// </summary>
-        /// <param name="addressableId">µØÖ·Ó³ÉäµÄÎ¨Ò»±êÊ¶¡£</param>
+        /// <param name="addressableId">åœ°å€æ˜ å°„çš„å”¯ä¸€æ ‡è¯†ã€‚</param>
         public async FTask Remove(long addressableId)
         {
             using (await _addressableLock.Lock(addressableId))
@@ -69,9 +69,9 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// Ëø¶¨µØÖ·Ó³Éä¡£
+        /// é”å®šåœ°å€æ˜ å°„ã€‚
         /// </summary>
-        /// <param name="addressableId">µØÖ·Ó³ÉäµÄÎ¨Ò»±êÊ¶¡£</param>
+        /// <param name="addressableId">åœ°å€æ˜ å°„çš„å”¯ä¸€æ ‡è¯†ã€‚</param>
         public async FTask Lock(long addressableId)
         {
             var waitCoroutineLock = await _addressableLock.Lock(addressableId);
@@ -79,11 +79,11 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ½âËøµØÖ·Ó³Éä¡£
+        /// è§£é”åœ°å€æ˜ å°„ã€‚
         /// </summary>
-        /// <param name="addressableId">µØÖ·Ó³ÉäµÄÎ¨Ò»±êÊ¶¡£</param>
-        /// <param name="routeId">ĞÂµÄÂ·ÓÉ ID¡£</param>
-        /// <param name="source">½âËøÀ´Ô´¡£</param>
+        /// <param name="addressableId">åœ°å€æ˜ å°„çš„å”¯ä¸€æ ‡è¯†ã€‚</param>
+        /// <param name="routeId">æ–°çš„è·¯ç”± IDã€‚</param>
+        /// <param name="source">è§£é”æ¥æºã€‚</param>
         public void UnLock(long addressableId, long routeId, string source)
         {
             if (!_locks.Remove(addressableId, out var coroutineLock))

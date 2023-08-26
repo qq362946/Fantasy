@@ -7,19 +7,19 @@ using System.Collections.Generic;
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// Ìá¹©Ò»¸öË«ÏòÓ³Éä×Öµä¶ÔÏó³ØÀà£¬ÓÃÓÚË«Ïò¼üÖµ¶ÔÓ³Éä¡£
+    /// æä¾›ä¸€ä¸ªåŒå‘æ˜ å°„å­—å…¸å¯¹è±¡æ± ç±»ï¼Œç”¨äºåŒå‘é”®å€¼å¯¹æ˜ å°„ã€‚
     /// </summary>
-    /// <typeparam name="TKey">×ÖµäÖĞ¼üµÄÀàĞÍ¡£</typeparam>
-    /// <typeparam name="TValue">×ÖµäÖĞÖµµÄÀàĞÍ¡£</typeparam>
+    /// <typeparam name="TKey">å­—å…¸ä¸­é”®çš„ç±»å‹ã€‚</typeparam>
+    /// <typeparam name="TValue">å­—å…¸ä¸­å€¼çš„ç±»å‹ã€‚</typeparam>
     public class DoubleMapDictionaryPool<TKey, TValue> : DoubleMapDictionary<TKey, TValue>, IDisposable
         where TKey : notnull where TValue : notnull
     {
         private bool _isDispose;
 
         /// <summary>
-        /// ´´½¨Ò»¸öĞÂµÄ <see cref="DoubleMapDictionaryPool{TKey, TValue}"/> ÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ªæ–°çš„ <see cref="DoubleMapDictionaryPool{TKey, TValue}"/> å®ä¾‹ã€‚
         /// </summary>
-        /// <returns>ĞÂ´´½¨µÄÊµÀı¡£</returns>
+        /// <returns>æ–°åˆ›å»ºçš„å®ä¾‹ã€‚</returns>
         public static DoubleMapDictionaryPool<TKey, TValue> Create()
         {
             var a = Pool<DoubleMapDictionaryPool<TKey, TValue>>.Rent();
@@ -28,7 +28,7 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ÊÍ·ÅÊµÀıÕ¼ÓÃµÄ×ÊÔ´¡£
+        /// é‡Šæ”¾å®ä¾‹å ç”¨çš„èµ„æºã€‚
         /// </summary>
         public void Dispose()
         {
@@ -44,26 +44,26 @@ namespace Fantasy.DataStructure
     }
 
     /// <summary>
-    /// ¿ÉÒÔÊµÏÖË«ÏòÓ³ÉäµÄ×ÖµäÀà£¬ÓÃÓÚ½«¼üºÍÖµ½øĞĞË«ÏòÓ³Éä¡£
+    /// å¯ä»¥å®ç°åŒå‘æ˜ å°„çš„å­—å…¸ç±»ï¼Œç”¨äºå°†é”®å’Œå€¼è¿›è¡ŒåŒå‘æ˜ å°„ã€‚
     /// </summary>
-    /// <typeparam name="TK">¼üµÄÀàĞÍ£¬²»ÄÜÎª null¡£</typeparam>
-    /// <typeparam name="TV">ÖµµÄÀàĞÍ£¬²»ÄÜÎª null¡£</typeparam>
+    /// <typeparam name="TK">é”®çš„ç±»å‹ï¼Œä¸èƒ½ä¸º nullã€‚</typeparam>
+    /// <typeparam name="TV">å€¼çš„ç±»å‹ï¼Œä¸èƒ½ä¸º nullã€‚</typeparam>
     public class DoubleMapDictionary<TK, TV> where TK : notnull where TV : notnull
     {
         private readonly Dictionary<TK, TV> _kv = new Dictionary<TK, TV>();
         private readonly Dictionary<TV, TK> _vk = new Dictionary<TV, TK>();
 
         /// <summary>
-        /// ´´½¨Ò»¸öĞÂµÄ¿ÕµÄ <see cref="DoubleMapDictionary{TK, TV}"/> ÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ªæ–°çš„ç©ºçš„ <see cref="DoubleMapDictionary{TK, TV}"/> å®ä¾‹ã€‚
         /// </summary>
         public DoubleMapDictionary()
         {
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸öĞÂµÄ¾ßÓĞÖ¸¶¨³õÊ¼ÈİÁ¿µÄ <see cref="DoubleMapDictionary{TK, TV}"/> ÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ªæ–°çš„å…·æœ‰æŒ‡å®šåˆå§‹å®¹é‡çš„ <see cref="DoubleMapDictionary{TK, TV}"/> å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="capacity">³õÊ¼ÈİÁ¿¡£</param>
+        /// <param name="capacity">åˆå§‹å®¹é‡ã€‚</param>
         public DoubleMapDictionary(int capacity)
         {
             _kv = new Dictionary<TK, TV>(capacity);
@@ -71,19 +71,19 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// »ñÈ¡°üº¬×ÖµäÖĞËùÓĞ¼üµÄÁĞ±í¡£
+        /// è·å–åŒ…å«å­—å…¸ä¸­æ‰€æœ‰é”®çš„åˆ—è¡¨ã€‚
         /// </summary>
         public List<TK> Keys => new List<TK>(_kv.Keys);
 
         /// <summary>
-        /// »ñÈ¡°üº¬×ÖµäÖĞËùÓĞÖµµÄÁĞ±í¡£
+        /// è·å–åŒ…å«å­—å…¸ä¸­æ‰€æœ‰å€¼çš„åˆ—è¡¨ã€‚
         /// </summary>
         public List<TV> Values => new List<TV>(_vk.Keys);
 
         /// <summary>
-        /// ¶Ô×ÖµäÖĞµÄÃ¿¸ö¼üÖµ¶ÔÖ´ĞĞÖ¸¶¨µÄ²Ù×÷¡£
+        /// å¯¹å­—å…¸ä¸­çš„æ¯ä¸ªé”®å€¼å¯¹æ‰§è¡ŒæŒ‡å®šçš„æ“ä½œã€‚
         /// </summary>
-        /// <param name="action">ÒªÖ´ĞĞµÄ²Ù×÷¡£</param>
+        /// <param name="action">è¦æ‰§è¡Œçš„æ“ä½œã€‚</param>
         public void ForEach(Action<TK, TV> action)
         {
             if (action == null)
@@ -99,10 +99,10 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ½«Ö¸¶¨µÄ¼üÖµ¶ÔÌí¼Óµ½×ÖµäÖĞ¡£
+        /// å°†æŒ‡å®šçš„é”®å€¼å¯¹æ·»åŠ åˆ°å­—å…¸ä¸­ã€‚
         /// </summary>
-        /// <param name="key">ÒªÌí¼ÓµÄ¼ü¡£</param>
-        /// <param name="value">ÒªÌí¼ÓµÄÖµ¡£</param>
+        /// <param name="key">è¦æ·»åŠ çš„é”®ã€‚</param>
+        /// <param name="value">è¦æ·»åŠ çš„å€¼ã€‚</param>
         public void Add(TK key, TV value)
         {
             if (key == null || value == null || _kv.ContainsKey(key) || _vk.ContainsKey(value))
@@ -115,10 +115,10 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ¸ù¾İÖ¸¶¨µÄ¼ü»ñÈ¡ÏàÓ¦µÄÖµ¡£
+        /// æ ¹æ®æŒ‡å®šçš„é”®è·å–ç›¸åº”çš„å€¼ã€‚
         /// </summary>
-        /// <param name="key">Òª²éÕÒÖµµÄ¼ü¡£</param>
-        /// <returns>ÓëÖ¸¶¨¼ü¹ØÁªµÄÖµ£¬Èç¹ûÕÒ²»µ½¼ü£¬Ôò·µ»ØÄ¬ÈÏÖµ¡£</returns>
+        /// <param name="key">è¦æŸ¥æ‰¾å€¼çš„é”®ã€‚</param>
+        /// <returns>ä¸æŒ‡å®šé”®å…³è”çš„å€¼ï¼Œå¦‚æœæ‰¾ä¸åˆ°é”®ï¼Œåˆ™è¿”å›é»˜è®¤å€¼ã€‚</returns>
         public TV GetValueByKey(TK key)
         {
             if (key != null && _kv.ContainsKey(key))
@@ -130,11 +130,11 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ³¢ÊÔ¸ù¾İÖ¸¶¨µÄ¼ü»ñÈ¡ÏàÓ¦µÄÖµ¡£
+        /// å°è¯•æ ¹æ®æŒ‡å®šçš„é”®è·å–ç›¸åº”çš„å€¼ã€‚
         /// </summary>
-        /// <param name="key">Òª²éÕÒÖµµÄ¼ü¡£</param>
-        /// <param name="value">Èç¹ûÕÒµ½£¬ÔòÎªÓëÖ¸¶¨¼ü¹ØÁªµÄÖµ£»·ñÔòÎªÖµµÄÄ¬ÈÏÖµ¡£</param>
-        /// <returns>Èç¹ûÕÒµ½¼ü£¬ÔòÎª true£»·ñÔòÎª false¡£</returns>
+        /// <param name="key">è¦æŸ¥æ‰¾å€¼çš„é”®ã€‚</param>
+        /// <param name="value">å¦‚æœæ‰¾åˆ°ï¼Œåˆ™ä¸ºä¸æŒ‡å®šé”®å…³è”çš„å€¼ï¼›å¦åˆ™ä¸ºå€¼çš„é»˜è®¤å€¼ã€‚</param>
+        /// <returns>å¦‚æœæ‰¾åˆ°é”®ï¼Œåˆ™ä¸º trueï¼›å¦åˆ™ä¸º falseã€‚</returns>
         public bool TryGetValueByKey(TK key, out TV value)
         {
             var result = key != null && _kv.ContainsKey(key);
@@ -145,10 +145,10 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ¸ù¾İÖ¸¶¨µÄÖµ»ñÈ¡ÏàÓ¦µÄ¼ü¡£
+        /// æ ¹æ®æŒ‡å®šçš„å€¼è·å–ç›¸åº”çš„é”®ã€‚
         /// </summary>
-        /// <param name="value">Òª²éÕÒ¼üµÄÖµ¡£</param>
-        /// <returns>ÓëÖ¸¶¨Öµ¹ØÁªµÄ¼ü£¬Èç¹ûÕÒ²»µ½Öµ£¬Ôò·µ»ØÄ¬ÈÏ¼ü¡£</returns>
+        /// <param name="value">è¦æŸ¥æ‰¾é”®çš„å€¼ã€‚</param>
+        /// <returns>ä¸æŒ‡å®šå€¼å…³è”çš„é”®ï¼Œå¦‚æœæ‰¾ä¸åˆ°å€¼ï¼Œåˆ™è¿”å›é»˜è®¤é”®ã€‚</returns>
         public TK GetKeyByValue(TV value)
         {
             if (value != null && _vk.ContainsKey(value))
@@ -160,11 +160,11 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ³¢ÊÔ¸ù¾İÖ¸¶¨µÄÖµ»ñÈ¡ÏàÓ¦µÄ¼ü¡£
+        /// å°è¯•æ ¹æ®æŒ‡å®šçš„å€¼è·å–ç›¸åº”çš„é”®ã€‚
         /// </summary>
-        /// <param name="value">Òª²éÕÒ¼üµÄÖµ¡£</param>
-        /// <param name="key">Èç¹ûÕÒµ½£¬ÔòÎªÓëÖ¸¶¨Öµ¹ØÁªµÄ¼ü£»·ñÔòÎª¼üµÄÄ¬ÈÏÖµ¡£</param>
-        /// <returns>Èç¹ûÕÒµ½Öµ£¬ÔòÎª true£»·ñÔòÎª false¡£</returns>
+        /// <param name="value">è¦æŸ¥æ‰¾é”®çš„å€¼ã€‚</param>
+        /// <param name="key">å¦‚æœæ‰¾åˆ°ï¼Œåˆ™ä¸ºä¸æŒ‡å®šå€¼å…³è”çš„é”®ï¼›å¦åˆ™ä¸ºé”®çš„é»˜è®¤å€¼ã€‚</param>
+        /// <returns>å¦‚æœæ‰¾åˆ°å€¼ï¼Œåˆ™ä¸º trueï¼›å¦åˆ™ä¸º falseã€‚</returns>
         public bool TryGetKeyByValue(TV value, out TK key)
         {
             var result = value != null && _vk.ContainsKey(value);
@@ -175,9 +175,9 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ¸ù¾İÖ¸¶¨µÄ¼üÒÆ³ı¼üÖµ¶Ô¡£
+        /// æ ¹æ®æŒ‡å®šçš„é”®ç§»é™¤é”®å€¼å¯¹ã€‚
         /// </summary>
-        /// <param name="key">ÒªÒÆ³ıµÄ¼ü¡£</param>
+        /// <param name="key">è¦ç§»é™¤çš„é”®ã€‚</param>
         public void RemoveByKey(TK key)
         {
             if (key == null)
@@ -195,9 +195,9 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ¸ù¾İÖ¸¶¨µÄÖµÒÆ³ı¼üÖµ¶Ô¡£
+        /// æ ¹æ®æŒ‡å®šçš„å€¼ç§»é™¤é”®å€¼å¯¹ã€‚
         /// </summary>
-        /// <param name="value">ÒªÒÆ³ıµÄÖµ¡£</param>
+        /// <param name="value">è¦ç§»é™¤çš„å€¼ã€‚</param>
         public void RemoveByValue(TV value)
         {
             if (value == null)
@@ -215,7 +215,7 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// Çå¿Õ×ÖµäÖĞµÄËùÓĞ¼üÖµ¶Ô¡£
+        /// æ¸…ç©ºå­—å…¸ä¸­çš„æ‰€æœ‰é”®å€¼å¯¹ã€‚
         /// </summary>
         public void Clear()
         {
@@ -224,31 +224,31 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ÅĞ¶Ï×ÖµäÊÇ·ñ°üº¬Ö¸¶¨µÄ¼ü¡£
+        /// åˆ¤æ–­å­—å…¸æ˜¯å¦åŒ…å«æŒ‡å®šçš„é”®ã€‚
         /// </summary>
-        /// <param name="key">Òª¼ì²éµÄ¼ü¡£</param>
-        /// <returns>Èç¹û×Öµä°üº¬Ö¸¶¨µÄ¼ü£¬ÔòÎª true£»·ñÔòÎª false¡£</returns>
+        /// <param name="key">è¦æ£€æŸ¥çš„é”®ã€‚</param>
+        /// <returns>å¦‚æœå­—å…¸åŒ…å«æŒ‡å®šçš„é”®ï¼Œåˆ™ä¸º trueï¼›å¦åˆ™ä¸º falseã€‚</returns>
         public bool ContainsKey(TK key)
         {
             return key != null && _kv.ContainsKey(key);
         }
 
         /// <summary>
-        /// ÅĞ¶Ï×ÖµäÊÇ·ñ°üº¬Ö¸¶¨µÄÖµ¡£
+        /// åˆ¤æ–­å­—å…¸æ˜¯å¦åŒ…å«æŒ‡å®šçš„å€¼ã€‚
         /// </summary>
-        /// <param name="value">Òª¼ì²éµÄÖµ¡£</param>
-        /// <returns>Èç¹û×Öµä°üº¬Ö¸¶¨µÄÖµ£¬ÔòÎª true£»·ñÔòÎª false¡£</returns>
+        /// <param name="value">è¦æ£€æŸ¥çš„å€¼ã€‚</param>
+        /// <returns>å¦‚æœå­—å…¸åŒ…å«æŒ‡å®šçš„å€¼ï¼Œåˆ™ä¸º trueï¼›å¦åˆ™ä¸º falseã€‚</returns>
         public bool ContainsValue(TV value)
         {
             return value != null && _vk.ContainsKey(value);
         }
 
         /// <summary>
-        /// ÅĞ¶Ï×ÖµäÊÇ·ñ°üº¬Ö¸¶¨µÄ¼üÖµ¶Ô¡£
+        /// åˆ¤æ–­å­—å…¸æ˜¯å¦åŒ…å«æŒ‡å®šçš„é”®å€¼å¯¹ã€‚
         /// </summary>
-        /// <param name="key">Òª¼ì²éµÄ¼ü¡£</param>
-        /// <param name="value">Òª¼ì²éµÄÖµ¡£</param>
-        /// <returns>Èç¹û×Öµä°üº¬Ö¸¶¨µÄ¼üÖµ¶Ô£¬ÔòÎª true£»·ñÔòÎª false¡£</returns>
+        /// <param name="key">è¦æ£€æŸ¥çš„é”®ã€‚</param>
+        /// <param name="value">è¦æ£€æŸ¥çš„å€¼ã€‚</param>
+        /// <returns>å¦‚æœå­—å…¸åŒ…å«æŒ‡å®šçš„é”®å€¼å¯¹ï¼Œåˆ™ä¸º trueï¼›å¦åˆ™ä¸º falseã€‚</returns>
         public bool Contains(TK key, TV value)
         {
             if (key == null || value == null)

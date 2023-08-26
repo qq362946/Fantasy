@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Fantasy
 {
     /// <summary>
-    /// Ìá¹©ÈÕÖ¾¼ÇÂ¼¹¦ÄÜµÄ¾²Ì¬Àà¡£
+    /// æä¾›æ—¥å¿—è®°å½•åŠŸèƒ½çš„é™æ€ç±»ã€‚
     /// </summary>
     public static class Log
     {
@@ -20,9 +20,9 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ¼ÇÂ¼¸ú×Ù¼¶±ğµÄÈÕÖ¾ÏûÏ¢¡£
+        /// è®°å½•è·Ÿè¸ªçº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ã€‚
         /// </summary>
-        /// <param name="msg">ÈÕÖ¾ÏûÏ¢¡£</param>
+        /// <param name="msg">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
         public static void Trace(string msg)
         {
             var st = new StackTrace(1, true);
@@ -30,27 +30,27 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ¼ÇÂ¼µ÷ÊÔ¼¶±ğµÄÈÕÖ¾ÏûÏ¢¡£
+        /// è®°å½•è°ƒè¯•çº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ã€‚
         /// </summary>
-        /// <param name="msg">ÈÕÖ¾ÏûÏ¢¡£</param>
+        /// <param name="msg">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
         public static void Debug(string msg)
         {
             LogCore.Debug(msg);
         }
 
         /// <summary>
-        /// ¼ÇÂ¼ĞÅÏ¢¼¶±ğµÄÈÕÖ¾ÏûÏ¢¡£
+        /// è®°å½•ä¿¡æ¯çº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ã€‚
         /// </summary>
-        /// <param name="msg">ÈÕÖ¾ÏûÏ¢¡£</param>
+        /// <param name="msg">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
         public static void Info(string msg)
         {
             LogCore.Info(msg);
         }
 
         /// <summary>
-        /// ¼ÇÂ¼¸ú×Ù¼¶±ğµÄÈÕÖ¾ÏûÏ¢£¬²¢¸½´øµ÷ÓÃÕ»ĞÅÏ¢¡£
+        /// è®°å½•è·Ÿè¸ªçº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ï¼Œå¹¶é™„å¸¦è°ƒç”¨æ ˆä¿¡æ¯ã€‚
         /// </summary>
-        /// <param name="msg">ÈÕÖ¾ÏûÏ¢¡£</param>
+        /// <param name="msg">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
         public static void TraceInfo(string msg)
         {
             var st = new StackTrace(1, true);
@@ -58,18 +58,18 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ¼ÇÂ¼¾¯¸æ¼¶±ğµÄÈÕÖ¾ÏûÏ¢¡£
+        /// è®°å½•è­¦å‘Šçº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ã€‚
         /// </summary>
-        /// <param name="msg">ÈÕÖ¾ÏûÏ¢¡£</param>
+        /// <param name="msg">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
         public static void Warning(string msg)
         {
             LogCore.Warning(msg);
         }
 
         /// <summary>
-        /// ¼ÇÂ¼´íÎó¼¶±ğµÄÈÕÖ¾ÏûÏ¢£¬²¢¸½´øµ÷ÓÃÕ»ĞÅÏ¢¡£
+        /// è®°å½•é”™è¯¯çº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ï¼Œå¹¶é™„å¸¦è°ƒç”¨æ ˆä¿¡æ¯ã€‚
         /// </summary>
-        /// <param name="msg">ÈÕÖ¾ÏûÏ¢¡£</param>
+        /// <param name="msg">æ—¥å¿—æ¶ˆæ¯ã€‚</param>
         public static void Error(string msg)
         {
             var st = new StackTrace(1, true);
@@ -77,9 +77,9 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ¼ÇÂ¼Òì³£µÄ´íÎó¼¶±ğµÄÈÕÖ¾ÏûÏ¢£¬²¢¸½´øµ÷ÓÃÕ»ĞÅÏ¢¡£
+        /// è®°å½•å¼‚å¸¸çš„é”™è¯¯çº§åˆ«çš„æ—¥å¿—æ¶ˆæ¯ï¼Œå¹¶é™„å¸¦è°ƒç”¨æ ˆä¿¡æ¯ã€‚
         /// </summary>
-        /// <param name="e">Òì³£¶ÔÏó¡£</param>
+        /// <param name="e">å¼‚å¸¸å¯¹è±¡ã€‚</param>
         public static void Error(Exception e)
         {
             if (e.Data.Contains("StackTrace"))
@@ -92,10 +92,10 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ¼ÇÂ¼¸ú×Ù¼¶±ğµÄ¸ñÊ½»¯ÈÕÖ¾ÏûÏ¢£¬²¢¸½´øµ÷ÓÃÕ»ĞÅÏ¢¡£
+        /// è®°å½•è·Ÿè¸ªçº§åˆ«çš„æ ¼å¼åŒ–æ—¥å¿—æ¶ˆæ¯ï¼Œå¹¶é™„å¸¦è°ƒç”¨æ ˆä¿¡æ¯ã€‚
         /// </summary>
-        /// <param name="message">ÈÕÖ¾ÏûÏ¢Ä£°å¡£</param>
-        /// <param name="args">¸ñÊ½»¯²ÎÊı¡£</param>
+        /// <param name="message">æ—¥å¿—æ¶ˆæ¯æ¨¡æ¿ã€‚</param>
+        /// <param name="args">æ ¼å¼åŒ–å‚æ•°ã€‚</param>
         public static void Trace(string message, params object[] args)
         {
             var st = new StackTrace(1, true);
@@ -103,40 +103,40 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ¼ÇÂ¼¾¯¸æ¼¶±ğµÄ¸ñÊ½»¯ÈÕÖ¾ÏûÏ¢¡£
+        /// è®°å½•è­¦å‘Šçº§åˆ«çš„æ ¼å¼åŒ–æ—¥å¿—æ¶ˆæ¯ã€‚
         /// </summary>
-        /// <param name="message">ÈÕÖ¾ÏûÏ¢Ä£°å¡£</param>
-        /// <param name="args">¸ñÊ½»¯²ÎÊı¡£</param>
+        /// <param name="message">æ—¥å¿—æ¶ˆæ¯æ¨¡æ¿ã€‚</param>
+        /// <param name="args">æ ¼å¼åŒ–å‚æ•°ã€‚</param>
         public static void Warning(string message, params object[] args)
         {
             LogCore.Warning(string.Format(message, args));
         }
 
         /// <summary>
-        /// ¼ÇÂ¼ĞÅÏ¢¼¶±ğµÄ¸ñÊ½»¯ÈÕÖ¾ÏûÏ¢¡£
+        /// è®°å½•ä¿¡æ¯çº§åˆ«çš„æ ¼å¼åŒ–æ—¥å¿—æ¶ˆæ¯ã€‚
         /// </summary>
-        /// <param name="message">ÈÕÖ¾ÏûÏ¢Ä£°å¡£</param>
-        /// <param name="args">¸ñÊ½»¯²ÎÊı¡£</param>
+        /// <param name="message">æ—¥å¿—æ¶ˆæ¯æ¨¡æ¿ã€‚</param>
+        /// <param name="args">æ ¼å¼åŒ–å‚æ•°ã€‚</param>
         public static void Info(string message, params object[] args)
         {
             LogCore.Info(string.Format(message, args));
         }
 
         /// <summary>
-        /// ¼ÇÂ¼µ÷ÊÔ¼¶±ğµÄ¸ñÊ½»¯ÈÕÖ¾ÏûÏ¢¡£
+        /// è®°å½•è°ƒè¯•çº§åˆ«çš„æ ¼å¼åŒ–æ—¥å¿—æ¶ˆæ¯ã€‚
         /// </summary>
-        /// <param name="message">ÈÕÖ¾ÏûÏ¢Ä£°å¡£</param>
-        /// <param name="args">¸ñÊ½»¯²ÎÊı¡£</param>
+        /// <param name="message">æ—¥å¿—æ¶ˆæ¯æ¨¡æ¿ã€‚</param>
+        /// <param name="args">æ ¼å¼åŒ–å‚æ•°ã€‚</param>
         public static void Debug(string message, params object[] args)
         {
             LogCore.Debug(string.Format(message, args));
         }
 
         /// <summary>
-        /// ¼ÇÂ¼´íÎó¼¶±ğµÄ¸ñÊ½»¯ÈÕÖ¾ÏûÏ¢£¬²¢¸½´øµ÷ÓÃÕ»ĞÅÏ¢¡£
+        /// è®°å½•é”™è¯¯çº§åˆ«çš„æ ¼å¼åŒ–æ—¥å¿—æ¶ˆæ¯ï¼Œå¹¶é™„å¸¦è°ƒç”¨æ ˆä¿¡æ¯ã€‚
         /// </summary>
-        /// <param name="message">ÈÕÖ¾ÏûÏ¢Ä£°å¡£</param>
-        /// <param name="args">¸ñÊ½»¯²ÎÊı¡£</param>
+        /// <param name="message">æ—¥å¿—æ¶ˆæ¯æ¨¡æ¿ã€‚</param>
+        /// <param name="args">æ ¼å¼åŒ–å‚æ•°ã€‚</param>
         public static void Error(string message, params object[] args)
         {
             var st = new StackTrace(1, true);

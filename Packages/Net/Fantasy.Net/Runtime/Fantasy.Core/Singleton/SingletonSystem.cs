@@ -9,7 +9,7 @@ using Fantasy.DataStructure;
 namespace Fantasy.Helper
 {
     /// <summary>
-    /// µ¥Àı¹ÜÀíÏµÍ³£¬¸ºÔğ¹ÜÀíºÍµ÷¶ÈÊµÏÖ <see cref="ISingleton"/> ½Ó¿ÚµÄµ¥Àı¶ÔÏó¡£
+    /// å•ä¾‹ç®¡ç†ç³»ç»Ÿï¼Œè´Ÿè´£ç®¡ç†å’Œè°ƒåº¦å®ç° <see cref="ISingleton"/> æ¥å£çš„å•ä¾‹å¯¹è±¡ã€‚
     /// </summary>
     public static class SingletonSystem
     {
@@ -17,7 +17,7 @@ namespace Fantasy.Helper
         private static readonly OneToManyQueue<int, ISingleton> Singletons = new OneToManyQueue<int, ISingleton>();
 
         /// <summary>
-        /// ³õÊ¼»¯ SingletonSystem£¬¿ªÊ¼¼àÊÓ³ÌĞò¼¯¼ÓÔØºÍĞ¶ÔØÊÂ¼ş¡£
+        /// åˆå§‹åŒ– SingletonSystemï¼Œå¼€å§‹ç›‘è§†ç¨‹åºé›†åŠ è½½å’Œå¸è½½äº‹ä»¶ã€‚
         /// </summary>
         public static void Initialize()
         {
@@ -94,7 +94,7 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// ¸üĞÂ SingletonSystem ÖĞµÄËùÓĞ <see cref="IUpdateSingleton"/> µ¥Àı¶ÔÏó¡£
+        /// æ›´æ–° SingletonSystem ä¸­çš„æ‰€æœ‰ <see cref="IUpdateSingleton"/> å•ä¾‹å¯¹è±¡ã€‚
         /// </summary>
         public static void Update()
         {
@@ -123,7 +123,7 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// Ïú»Ù SingletonSystem£¬ÊÍ·ÅËùÓĞµ¥Àı×ÊÔ´²¢È¡Ïû¼àÊÓ³ÌĞò¼¯ÊÂ¼ş¡£
+        /// é”€æ¯ SingletonSystemï¼Œé‡Šæ”¾æ‰€æœ‰å•ä¾‹èµ„æºå¹¶å–æ¶ˆç›‘è§†ç¨‹åºé›†äº‹ä»¶ã€‚
         /// </summary>
         public static void Dispose()
         {

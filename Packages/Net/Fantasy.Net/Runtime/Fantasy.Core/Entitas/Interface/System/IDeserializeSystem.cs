@@ -3,35 +3,35 @@ using System;
 namespace Fantasy
 {
     /// <summary>
-    /// ��ʾһ�����ڷ����л���ϵͳ�ӿڣ���չ�� <see cref="IEntitiesSystem"/>��
+    /// 表示一个用于反序列化的系统接口，扩展自 <see cref="IEntitiesSystem"/>。
     /// </summary>
     public interface IDeserializeSystem : IEntitiesSystem { }
 
     /// <summary>
-    /// ��ʾһ�����ڷ����л��ض�����ʵ���ϵͳ�����࣬��չ�� <see cref="IDeserializeSystem"/>��
+    /// 表示一个用于反序列化特定类型实体的系统抽象类，扩展自 <see cref="IDeserializeSystem"/>。
     /// </summary>
-    /// <typeparam name="T">Ҫ�����л��� Entity ���͡�</typeparam>
+    /// <typeparam name="T">要反序列化的 Entity 类型。</typeparam>
     public abstract class DeserializeSystem<T> : IDeserializeSystem where T : Entity
     {
         /// <summary>
-        /// ��ȡ��ϵͳ���ڴ�����ʵ�����͡�
+        /// 获取此系统用于处理的实体类型。
         /// </summary>
-        /// <returns>ʵ�����͡�</returns>
+        /// <returns>实体类型。</returns>
         public Type EntitiesType() => typeof(T);
 
         /// <summary>
-        /// ����������ʵ�֣����ڷ����л�ָ����ʵ�塣
+        /// 在派生类中实现，用于反序列化指定的实体。
         /// </summary>
-        /// <param name="self">Ҫ�����л���ʵ�塣</param>
+        /// <param name="self">要反序列化的实体。</param>
         protected abstract void Deserialize(T self);
 
         /// <summary>
-        /// ����ʵ��ķ����л�������
+        /// 调用实体的反序列化方法。
         /// </summary>
-        /// <param name="self">Ҫ�����л���ʵ�塣</param>
+        /// <param name="self">要反序列化的实体。</param>
         public void Invoke(Entity self)
         {
-            // �������ʵ��ת��Ϊ�������Ͳ����÷����л�������
+            // 将传入的实体转换为泛型类型并调用反序列化方法。
             Deserialize((T) self);
         }
     }

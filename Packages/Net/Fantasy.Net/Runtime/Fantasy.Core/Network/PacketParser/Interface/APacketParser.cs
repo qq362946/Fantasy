@@ -7,24 +7,24 @@ using Fantasy.Helper;
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ³éÏóµÄ°ü½âÎöÆ÷»ùÀà£¬ÓÃÓÚ½âÎöÍøÂçÍ¨ĞÅÊı¾İ°ü¡£
+    /// æŠ½è±¡çš„åŒ…è§£æå™¨åŸºç±»ï¼Œç”¨äºè§£æç½‘ç»œé€šä¿¡æ•°æ®åŒ…ã€‚
     /// </summary>
     public abstract class APacketParser : IDisposable
     {
         /// <summary>
-        /// ÄÚ´æ³Ø£¬ÓÃÓÚ·ÖÅäÄÚ´æ¿é¡£
+        /// å†…å­˜æ± ï¼Œç”¨äºåˆ†é…å†…å­˜å—ã€‚
         /// </summary>
         protected MemoryPool<byte> MemoryPool;
         /// <summary>
-        /// »ñÈ¡Ò»¸öÖµ£¬±íÊ¾ÊÇ·ñÒÑ¾­±»ÊÍ·Å¡£
+        /// è·å–ä¸€ä¸ªå€¼ï¼Œè¡¨ç¤ºæ˜¯å¦å·²ç»è¢«é‡Šæ”¾ã€‚
         /// </summary>
         protected bool IsDisposed { get; private set; }
 
         /// <summary>
-        /// ¸ù¾İÍøÂçÄ¿±ê´´½¨ÏàÓ¦µÄ°ü½âÎöÆ÷ÊµÀı¡£
+        /// æ ¹æ®ç½‘ç»œç›®æ ‡åˆ›å»ºç›¸åº”çš„åŒ…è§£æå™¨å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="networkTarget">ÍøÂçÄ¿±ê£¬Ö¸Ê¾ÊÇÄÚ²¿ÍøÂçÍ¨ĞÅ»¹ÊÇÍâ²¿ÍøÂçÍ¨ĞÅ¡£</param>
-        /// <returns>´´½¨µÄ°ü½âÎöÆ÷ÊµÀı¡£</returns>
+        /// <param name="networkTarget">ç½‘ç»œç›®æ ‡ï¼ŒæŒ‡ç¤ºæ˜¯å†…éƒ¨ç½‘ç»œé€šä¿¡è¿˜æ˜¯å¤–éƒ¨ç½‘ç»œé€šä¿¡ã€‚</param>
+        /// <returns>åˆ›å»ºçš„åŒ…è§£æå™¨å®ä¾‹ã€‚</returns>
         public static APacketParser CreatePacketParser(NetworkTarget networkTarget)
         {
             switch (networkTarget)
@@ -49,21 +49,21 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ´ÓÑ­»·»º³åÇø½âÎöÊı¾İ°ü¡£
+        /// ä»å¾ªç¯ç¼“å†²åŒºè§£ææ•°æ®åŒ…ã€‚
         /// </summary>
-        /// <param name="buffer">Ñ­»·»º³åÇø¡£</param>
-        /// <param name="packInfo">½âÎöµÃµ½µÄÊı¾İ°üĞÅÏ¢¡£</param>
-        /// <returns>Èç¹û³É¹¦½âÎöÊı¾İ°ü£¬Ôò·µ»Ø true£»·ñÔò·µ»Ø false¡£</returns>
+        /// <param name="buffer">å¾ªç¯ç¼“å†²åŒºã€‚</param>
+        /// <param name="packInfo">è§£æå¾—åˆ°çš„æ•°æ®åŒ…ä¿¡æ¯ã€‚</param>
+        /// <returns>å¦‚æœæˆåŠŸè§£ææ•°æ®åŒ…ï¼Œåˆ™è¿”å› trueï¼›å¦åˆ™è¿”å› falseã€‚</returns>
         public abstract bool UnPack(CircularBuffer buffer, out APackInfo packInfo);
         /// <summary>
-        /// ´ÓÄÚ´æ¿é½âÎöÊı¾İ°ü¡£
+        /// ä»å†…å­˜å—è§£ææ•°æ®åŒ…ã€‚
         /// </summary>
-        /// <param name="memoryOwner">ÄÚ´æ¿éµÄËùÓĞÕß¡£</param>
-        /// <param name="packInfo">½âÎöµÃµ½µÄÊı¾İ°üĞÅÏ¢¡£</param>
-        /// <returns>Èç¹û³É¹¦½âÎöÊı¾İ°ü£¬Ôò·µ»Ø true£»·ñÔò·µ»Ø false¡£</returns>
+        /// <param name="memoryOwner">å†…å­˜å—çš„æ‰€æœ‰è€…ã€‚</param>
+        /// <param name="packInfo">è§£æå¾—åˆ°çš„æ•°æ®åŒ…ä¿¡æ¯ã€‚</param>
+        /// <returns>å¦‚æœæˆåŠŸè§£ææ•°æ®åŒ…ï¼Œåˆ™è¿”å› trueï¼›å¦åˆ™è¿”å› falseã€‚</returns>
         public abstract bool UnPack(IMemoryOwner<byte> memoryOwner, out APackInfo packInfo);
         /// <summary>
-        /// ÊÍ·Å×ÊÔ´£¬°üÀ¨ÄÚ´æ³ØµÈ¡£
+        /// é‡Šæ”¾èµ„æºï¼ŒåŒ…æ‹¬å†…å­˜æ± ç­‰ã€‚
         /// </summary>
         public virtual void Dispose()
         {

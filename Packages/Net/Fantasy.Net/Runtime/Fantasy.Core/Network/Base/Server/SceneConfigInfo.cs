@@ -1,57 +1,57 @@
 namespace Fantasy
 {
     /// <summary>
-    /// ����������Ϣ���ࡣ
+    /// 场景配置信息的类。
     /// </summary>
     public class SceneConfigInfo
     {
         /// <summary>
-        /// ��ȡ�����ó�����Ψһ��ʶ��
+        /// 获取或设置场景的唯一标识。
         /// </summary>
         public uint Id;
 
         /// <summary>
-        /// ��ȡ�����ó���ʵ���Ψһ��ʶ��
+        /// 获取或设置场景实体的唯一标识。
         /// </summary>
         public long EntityId;
 
         /// <summary>
-        /// ��ȡ�����ó������͡�
+        /// 获取或设置场景类型。
         /// </summary>
         public int SceneType;
 
         /// <summary>
-        /// ��ȡ�����ó��������͡�
+        /// 获取或设置场景子类型。
         /// </summary>
         public int SceneSubType;
 
         /// <summary>
-        /// ��ȡ�����ó������͵��ַ�����ʾ��
+        /// 获取或设置场景类型的字符串表示。
         /// </summary>
         public string SceneTypeStr;
 
         /// <summary>
-        /// ��ȡ�����ó��������͵��ַ�����ʾ��
+        /// 获取或设置场景子类型的字符串表示。
         /// </summary>
         public string SceneSubTypeStr;
 
         /// <summary>
-        /// ��ȡ�����÷��������õ�Ψһ��ʶ��
+        /// 获取或设置服务器配置的唯一标识。
         /// </summary>
         public uint ServerConfigId;
 
         /// <summary>
-        /// ��ȡ�����������Ψһ��ʶ��
+        /// 获取或设置世界的唯一标识。
         /// </summary>
         public uint WorldId;
 
         /// <summary>
-        /// ��ȡ�������ⲿ�˿ڡ�
+        /// 获取或设置外部端口。
         /// </summary>
         public int OuterPort;
 
         /// <summary>
-        /// ��ȡ����������Э�顣
+        /// 获取或设置网络协议。
         /// </summary>
         public string NetworkProtocol;
     }
