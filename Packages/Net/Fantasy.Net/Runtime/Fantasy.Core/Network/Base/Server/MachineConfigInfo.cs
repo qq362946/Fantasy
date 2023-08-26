@@ -2,28 +2,28 @@
 namespace Fantasy;
 
 /// <summary>
-/// »úÆ÷ÅäÖÃĞÅÏ¢µÄÀà¡£
+/// æœºå™¨é…ç½®ä¿¡æ¯çš„ç±»ã€‚
 /// </summary>
 public class MachineConfigInfo
 {
     /// <summary>
-    /// »ñÈ¡»òÉèÖÃ»úÆ÷µÄÎ¨Ò»±êÊ¶¡£
+    /// è·å–æˆ–è®¾ç½®æœºå™¨çš„å”¯ä¸€æ ‡è¯†ã€‚
     /// </summary>
     public uint Id;
     /// <summary>
-    /// »ñÈ¡»òÉèÖÃÍâ²¿IPµØÖ·¡£
+    /// è·å–æˆ–è®¾ç½®å¤–éƒ¨IPåœ°å€ã€‚
     /// </summary>
     public string OuterIP;
     /// <summary>
-    /// »ñÈ¡»òÉèÖÃÍâ²¿°ó¶¨IPµØÖ·¡£
+    /// è·å–æˆ–è®¾ç½®å¤–éƒ¨ç»‘å®šIPåœ°å€ã€‚
     /// </summary>
     public string OuterBindIP;
     /// <summary>
-    /// »ñÈ¡»òÉèÖÃÄÚ²¿°ó¶¨IPµØÖ·¡£
+    /// è·å–æˆ–è®¾ç½®å†…éƒ¨ç»‘å®šIPåœ°å€ã€‚
     /// </summary>
     public string InnerBindIP;
     /// <summary>
-    /// »ñÈ¡»òÉèÖÃ¹ÜÀí¶Ë¿Ú¡£
+    /// è·å–æˆ–è®¾ç½®ç®¡ç†ç«¯å£ã€‚
     /// </summary>
     public int ManagementPort;
 }

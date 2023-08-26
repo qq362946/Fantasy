@@ -4,50 +4,50 @@
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ±íÊ¾Â·ÓÉÏûÏ¢´¦ÀíÆ÷µÄ½Ó¿Ú£¬´¦ÀíÌØ¶¨ÀàĞÍµÄÂ·ÓÉÏûÏ¢¡£
+    /// è¡¨ç¤ºè·¯ç”±æ¶ˆæ¯å¤„ç†å™¨çš„æ¥å£ï¼Œå¤„ç†ç‰¹å®šç±»å‹çš„è·¯ç”±æ¶ˆæ¯ã€‚
     /// </summary>
     public interface IRouteMessageHandler
     {
         /// <summary>
-        /// »ñÈ¡´¦ÀíµÄÏûÏ¢ÀàĞÍ¡£
+        /// è·å–å¤„ç†çš„æ¶ˆæ¯ç±»å‹ã€‚
         /// </summary>
-        /// <returns>ÏûÏ¢ÀàĞÍ¡£</returns>
+        /// <returns>æ¶ˆæ¯ç±»å‹ã€‚</returns>
         public Type Type();
         /// <summary>
-        /// ´¦ÀíÂ·ÓÉÏûÏ¢µÄ·½·¨¡£
+        /// å¤„ç†è·¯ç”±æ¶ˆæ¯çš„æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="session">»á»°¶ÔÏó¡£</param>
-        /// <param name="entity">ÊµÌå¶ÔÏó¡£</param>
-        /// <param name="rpcId">RPC±êÊ¶¡£</param>
-        /// <param name="routeMessage">Òª´¦ÀíµÄÂ·ÓÉÏûÏ¢¡£</param>
-        /// <returns>Òì²½ÈÎÎñ¡£</returns>
+        /// <param name="session">ä¼šè¯å¯¹è±¡ã€‚</param>
+        /// <param name="entity">å®ä½“å¯¹è±¡ã€‚</param>
+        /// <param name="rpcId">RPCæ ‡è¯†ã€‚</param>
+        /// <param name="routeMessage">è¦å¤„ç†çš„è·¯ç”±æ¶ˆæ¯ã€‚</param>
+        /// <returns>å¼‚æ­¥ä»»åŠ¡ã€‚</returns>
         FTask Handle(Session session, Entity entity, uint rpcId, object routeMessage);
     }
 
     /// <summary>
-    /// ·ºĞÍÂ·ÓÉ»ùÀà£¬ÊµÏÖÁË <see cref="IRouteMessageHandler"/> ½Ó¿Ú£¬ÓÃÓÚ´¦ÀíÌØ¶¨ÊµÌåºÍÂ·ÓÉÏûÏ¢ÀàĞÍµÄÂ·ÓÉ¡£
+    /// æ³›å‹è·¯ç”±åŸºç±»ï¼Œå®ç°äº† <see cref="IRouteMessageHandler"/> æ¥å£ï¼Œç”¨äºå¤„ç†ç‰¹å®šå®ä½“å’Œè·¯ç”±æ¶ˆæ¯ç±»å‹çš„è·¯ç”±ã€‚
     /// </summary>
-    /// <typeparam name="TEntity">ÊµÌåÀàĞÍ¡£</typeparam>
-    /// <typeparam name="TMessage">Â·ÓÉÏûÏ¢ÀàĞÍ¡£</typeparam>
+    /// <typeparam name="TEntity">å®ä½“ç±»å‹ã€‚</typeparam>
+    /// <typeparam name="TMessage">è·¯ç”±æ¶ˆæ¯ç±»å‹ã€‚</typeparam>
     public abstract class Route<TEntity, TMessage> : IRouteMessageHandler where TEntity : Entity where TMessage : IRouteMessage
     {
         /// <summary>
-        /// »ñÈ¡´¦ÀíµÄÏûÏ¢ÀàĞÍ¡£
+        /// è·å–å¤„ç†çš„æ¶ˆæ¯ç±»å‹ã€‚
         /// </summary>
-        /// <returns>ÏûÏ¢ÀàĞÍ¡£</returns>
+        /// <returns>æ¶ˆæ¯ç±»å‹ã€‚</returns>
         public Type Type()
         {
             return typeof(TMessage);
         }
 
         /// <summary>
-        /// ´¦ÀíÂ·ÓÉÏûÏ¢µÄ·½·¨¡£
+        /// å¤„ç†è·¯ç”±æ¶ˆæ¯çš„æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="session">»á»°¶ÔÏó¡£</param>
-        /// <param name="entity">ÊµÌå¶ÔÏó¡£</param>
-        /// <param name="rpcId">RPC±êÊ¶¡£</param>
-        /// <param name="routeMessage">Òª´¦ÀíµÄÂ·ÓÉÏûÏ¢¡£</param>
-        /// <returns>Òì²½ÈÎÎñ¡£</returns>
+        /// <param name="session">ä¼šè¯å¯¹è±¡ã€‚</param>
+        /// <param name="entity">å®ä½“å¯¹è±¡ã€‚</param>
+        /// <param name="rpcId">RPCæ ‡è¯†ã€‚</param>
+        /// <param name="routeMessage">è¦å¤„ç†çš„è·¯ç”±æ¶ˆæ¯ã€‚</param>
+        /// <returns>å¼‚æ­¥ä»»åŠ¡ã€‚</returns>
         public async FTask Handle(Session session, Entity entity, uint rpcId, object routeMessage)
         {
             if (routeMessage is not TMessage ruteMessage)
@@ -78,39 +78,39 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ÔËĞĞÂ·ÓÉÏûÏ¢´¦ÀíÂß¼­¡£
+        /// è¿è¡Œè·¯ç”±æ¶ˆæ¯å¤„ç†é€»è¾‘ã€‚
         /// </summary>
-        /// <param name="entity">ÊµÌå¶ÔÏó¡£</param>
-        /// <param name="message">Òª´¦ÀíµÄÂ·ÓÉÏûÏ¢¡£</param>
-        /// <returns>Òì²½ÈÎÎñ¡£</returns>
+        /// <param name="entity">å®ä½“å¯¹è±¡ã€‚</param>
+        /// <param name="message">è¦å¤„ç†çš„è·¯ç”±æ¶ˆæ¯ã€‚</param>
+        /// <returns>å¼‚æ­¥ä»»åŠ¡ã€‚</returns>
         protected abstract FTask Run(TEntity entity, TMessage message);
     }
 
     /// <summary>
-    /// ·ºĞÍÂ·ÓÉRPC»ùÀà£¬ÊµÏÖÁË <see cref="IRouteMessageHandler"/> ½Ó¿Ú£¬ÓÃÓÚ´¦ÀíÇëÇóºÍÏìÓ¦ÀàĞÍµÄÂ·ÓÉ¡£
+    /// æ³›å‹è·¯ç”±RPCåŸºç±»ï¼Œå®ç°äº† <see cref="IRouteMessageHandler"/> æ¥å£ï¼Œç”¨äºå¤„ç†è¯·æ±‚å’Œå“åº”ç±»å‹çš„è·¯ç”±ã€‚
     /// </summary>
-    /// <typeparam name="TEntity">ÊµÌåÀàĞÍ¡£</typeparam>
-    /// <typeparam name="TRouteRequest">Â·ÓÉÇëÇóÀàĞÍ¡£</typeparam>
-    /// <typeparam name="TRouteResponse">Â·ÓÉÏìÓ¦ÀàĞÍ¡£</typeparam>
+    /// <typeparam name="TEntity">å®ä½“ç±»å‹ã€‚</typeparam>
+    /// <typeparam name="TRouteRequest">è·¯ç”±è¯·æ±‚ç±»å‹ã€‚</typeparam>
+    /// <typeparam name="TRouteResponse">è·¯ç”±å“åº”ç±»å‹ã€‚</typeparam>
     public abstract class RouteRPC<TEntity, TRouteRequest, TRouteResponse> : IRouteMessageHandler where TEntity : Entity where TRouteRequest : IRouteRequest where TRouteResponse : IRouteResponse
     {
         /// <summary>
-        /// »ñÈ¡´¦ÀíµÄÏûÏ¢ÀàĞÍ¡£
+        /// è·å–å¤„ç†çš„æ¶ˆæ¯ç±»å‹ã€‚
         /// </summary>
-        /// <returns>ÏûÏ¢ÀàĞÍ¡£</returns>
+        /// <returns>æ¶ˆæ¯ç±»å‹ã€‚</returns>
         public Type Type()
         {
             return typeof(TRouteRequest);
         }
 
         /// <summary>
-        /// ´¦ÀíÂ·ÓÉÏûÏ¢µÄ·½·¨¡£
+        /// å¤„ç†è·¯ç”±æ¶ˆæ¯çš„æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="session">»á»°¶ÔÏó¡£</param>
-        /// <param name="entity">ÊµÌå¶ÔÏó¡£</param>
-        /// <param name="rpcId">RPC±êÊ¶¡£</param>
-        /// <param name="routeMessage">Òª´¦ÀíµÄÂ·ÓÉÏûÏ¢¡£</param>
-        /// <returns>Òì²½ÈÎÎñ¡£</returns>
+        /// <param name="session">ä¼šè¯å¯¹è±¡ã€‚</param>
+        /// <param name="entity">å®ä½“å¯¹è±¡ã€‚</param>
+        /// <param name="rpcId">RPCæ ‡è¯†ã€‚</param>
+        /// <param name="routeMessage">è¦å¤„ç†çš„è·¯ç”±æ¶ˆæ¯ã€‚</param>
+        /// <returns>å¼‚æ­¥ä»»åŠ¡ã€‚</returns>
         public async FTask Handle(Session session, Entity entity, uint rpcId, object routeMessage)
         {
             if (routeMessage is not TRouteRequest tRouteRequest)
@@ -166,39 +166,39 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ÔËĞĞÂ·ÓÉÏûÏ¢´¦ÀíÂß¼­¡£
+        /// è¿è¡Œè·¯ç”±æ¶ˆæ¯å¤„ç†é€»è¾‘ã€‚
         /// </summary>
-        /// <param name="entity">ÊµÌå¶ÔÏó¡£</param>
-        /// <param name="request">ÇëÇóÂ·ÓÉÏûÏ¢¡£</param>
-        /// <param name="response">ÏìÓ¦Â·ÓÉÏûÏ¢¡£</param>
-        /// <param name="reply">·¢ËÍÏìÓ¦µÄ·½·¨¡£</param>
-        /// <returns>Òì²½ÈÎÎñ¡£</returns>
+        /// <param name="entity">å®ä½“å¯¹è±¡ã€‚</param>
+        /// <param name="request">è¯·æ±‚è·¯ç”±æ¶ˆæ¯ã€‚</param>
+        /// <param name="response">å“åº”è·¯ç”±æ¶ˆæ¯ã€‚</param>
+        /// <param name="reply">å‘é€å“åº”çš„æ–¹æ³•ã€‚</param>
+        /// <returns>å¼‚æ­¥ä»»åŠ¡ã€‚</returns>
         protected abstract FTask Run(TEntity entity, TRouteRequest request, TRouteResponse response, Action reply);
     }
 
     /// <summary>
-    /// ·ºĞÍ¿ÉÑ°Ö·Â·ÓÉ»ùÀà£¬ÊµÏÖÁË <see cref="IRouteMessageHandler"/> ½Ó¿Ú£¬ÓÃÓÚ´¦ÀíÌØ¶¨ÊµÌåºÍ¿ÉÑ°Ö·Â·ÓÉÏûÏ¢ÀàĞÍµÄÂ·ÓÉ¡£
+    /// æ³›å‹å¯å¯»å€è·¯ç”±åŸºç±»ï¼Œå®ç°äº† <see cref="IRouteMessageHandler"/> æ¥å£ï¼Œç”¨äºå¤„ç†ç‰¹å®šå®ä½“å’Œå¯å¯»å€è·¯ç”±æ¶ˆæ¯ç±»å‹çš„è·¯ç”±ã€‚
     /// </summary>
-    /// <typeparam name="TEntity">ÊµÌåÀàĞÍ¡£</typeparam>
-    /// <typeparam name="TMessage">¿ÉÑ°Ö·Â·ÓÉÏûÏ¢ÀàĞÍ¡£</typeparam>
+    /// <typeparam name="TEntity">å®ä½“ç±»å‹ã€‚</typeparam>
+    /// <typeparam name="TMessage">å¯å¯»å€è·¯ç”±æ¶ˆæ¯ç±»å‹ã€‚</typeparam>
     public abstract class Addressable<TEntity, TMessage> : IRouteMessageHandler where TEntity : Entity where TMessage : IAddressableRouteMessage
     {
         /// <summary>
-        /// »ñÈ¡ÏûÏ¢ÀàĞÍ¡£
+        /// è·å–æ¶ˆæ¯ç±»å‹ã€‚
         /// </summary>
-        /// <returns>ÏûÏ¢ÀàĞÍ¡£</returns>
+        /// <returns>æ¶ˆæ¯ç±»å‹ã€‚</returns>
         public Type Type()
         {
             return typeof(TMessage);
         }
 
         /// <summary>
-        /// ´¦Àí¿ÉÑ°Ö·Â·ÓÉÏûÏ¢¡£
+        /// å¤„ç†å¯å¯»å€è·¯ç”±æ¶ˆæ¯ã€‚
         /// </summary>
-        /// <param name="session">»á»°¡£</param>
-        /// <param name="entity">ÊµÌå¡£</param>
-        /// <param name="rpcId">RPC±êÊ¶¡£</param>
-        /// <param name="routeMessage">¿ÉÑ°Ö·Â·ÓÉÏûÏ¢¡£</param>
+        /// <param name="session">ä¼šè¯ã€‚</param>
+        /// <param name="entity">å®ä½“ã€‚</param>
+        /// <param name="rpcId">RPCæ ‡è¯†ã€‚</param>
+        /// <param name="routeMessage">å¯å¯»å€è·¯ç”±æ¶ˆæ¯ã€‚</param>
         public async FTask Handle(Session session, Entity entity, uint rpcId, object routeMessage)
         {
             if (routeMessage is not TMessage ruteMessage)
@@ -233,37 +233,37 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ÔËĞĞ´¦Àí¿ÉÑ°Ö·Â·ÓÉÏûÏ¢¡£
+        /// è¿è¡Œå¤„ç†å¯å¯»å€è·¯ç”±æ¶ˆæ¯ã€‚
         /// </summary>
-        /// <param name="entity">ÊµÌå¡£</param>
-        /// <param name="message">¿ÉÑ°Ö·Â·ÓÉÏûÏ¢¡£</param>
+        /// <param name="entity">å®ä½“ã€‚</param>
+        /// <param name="message">å¯å¯»å€è·¯ç”±æ¶ˆæ¯ã€‚</param>
         protected abstract FTask Run(TEntity entity, TMessage message);
     }
 
     /// <summary>
-    /// ·ºĞÍ¿ÉÑ°Ö·RPCÂ·ÓÉ»ùÀà£¬ÊµÏÖÁË <see cref="IRouteMessageHandler"/> ½Ó¿Ú£¬ÓÃÓÚ´¦ÀíÌØ¶¨ÊµÌåºÍ¿ÉÑ°Ö·RPCÂ·ÓÉÇëÇóÀàĞÍµÄÂ·ÓÉ¡£
+    /// æ³›å‹å¯å¯»å€RPCè·¯ç”±åŸºç±»ï¼Œå®ç°äº† <see cref="IRouteMessageHandler"/> æ¥å£ï¼Œç”¨äºå¤„ç†ç‰¹å®šå®ä½“å’Œå¯å¯»å€RPCè·¯ç”±è¯·æ±‚ç±»å‹çš„è·¯ç”±ã€‚
     /// </summary>
-    /// <typeparam name="TEntity">ÊµÌåÀàĞÍ¡£</typeparam>
-    /// <typeparam name="TRouteRequest">¿ÉÑ°Ö·RPCÂ·ÓÉÇëÇóÀàĞÍ¡£</typeparam>
-    /// <typeparam name="TRouteResponse">¿ÉÑ°Ö·RPCÂ·ÓÉÏìÓ¦ÀàĞÍ¡£</typeparam>
+    /// <typeparam name="TEntity">å®ä½“ç±»å‹ã€‚</typeparam>
+    /// <typeparam name="TRouteRequest">å¯å¯»å€RPCè·¯ç”±è¯·æ±‚ç±»å‹ã€‚</typeparam>
+    /// <typeparam name="TRouteResponse">å¯å¯»å€RPCè·¯ç”±å“åº”ç±»å‹ã€‚</typeparam>
     public abstract class AddressableRPC<TEntity, TRouteRequest, TRouteResponse> : IRouteMessageHandler where TEntity : Entity where TRouteRequest : IAddressableRouteRequest where TRouteResponse : IAddressableRouteResponse
     {
         /// <summary>
-        /// »ñÈ¡ÏûÏ¢ÀàĞÍ¡£
+        /// è·å–æ¶ˆæ¯ç±»å‹ã€‚
         /// </summary>
-        /// <returns>ÏûÏ¢ÀàĞÍ¡£</returns>
+        /// <returns>æ¶ˆæ¯ç±»å‹ã€‚</returns>
         public Type Type()
         {
             return typeof(TRouteRequest);
         }
 
         /// <summary>
-        /// ´¦Àí¿ÉÑ°Ö·RPCÂ·ÓÉÇëÇó¡£
+        /// å¤„ç†å¯å¯»å€RPCè·¯ç”±è¯·æ±‚ã€‚
         /// </summary>
-        /// <param name="session">»á»°¡£</param>
-        /// <param name="entity">ÊµÌå¡£</param>
-        /// <param name="rpcId">RPC±êÊ¶¡£</param>
-        /// <param name="routeMessage">¿ÉÑ°Ö·RPCÂ·ÓÉÇëÇó¡£</param>
+        /// <param name="session">ä¼šè¯ã€‚</param>
+        /// <param name="entity">å®ä½“ã€‚</param>
+        /// <param name="rpcId">RPCæ ‡è¯†ã€‚</param>
+        /// <param name="routeMessage">å¯å¯»å€RPCè·¯ç”±è¯·æ±‚ã€‚</param>
         public async FTask Handle(Session session, Entity entity, uint rpcId, object routeMessage)
         {
             if (routeMessage is not TRouteRequest tRouteRequest)
@@ -319,12 +319,12 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ÔËĞĞ´¦Àí¿ÉÑ°Ö·RPCÂ·ÓÉÇëÇó¡£
+        /// è¿è¡Œå¤„ç†å¯å¯»å€RPCè·¯ç”±è¯·æ±‚ã€‚
         /// </summary>
-        /// <param name="entity">ÊµÌå¡£</param>
-        /// <param name="request">¿ÉÑ°Ö·RPCÂ·ÓÉÇëÇó¡£</param>
-        /// <param name="response">¿ÉÑ°Ö·RPCÂ·ÓÉÏìÓ¦¡£</param>
-        /// <param name="reply">»Ø¸´²Ù×÷¡£</param>
+        /// <param name="entity">å®ä½“ã€‚</param>
+        /// <param name="request">å¯å¯»å€RPCè·¯ç”±è¯·æ±‚ã€‚</param>
+        /// <param name="response">å¯å¯»å€RPCè·¯ç”±å“åº”ã€‚</param>
+        /// <param name="reply">å›å¤æ“ä½œã€‚</param>
         protected abstract FTask Run(TEntity entity, TRouteRequest request, TRouteResponse response, Action reply);
     }
 }

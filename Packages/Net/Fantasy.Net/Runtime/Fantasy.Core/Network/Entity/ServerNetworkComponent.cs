@@ -6,21 +6,21 @@ using System.Net;
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ·şÎñ¶ËNetworkÍøÂç×é¼ş¡£
+    /// æœåŠ¡ç«¯Networkç½‘ç»œç»„ä»¶ã€‚
     /// </summary>
     public sealed class ServerNetworkComponent : Entity, INotSupportedPool
     {
         /// <summary>
-        /// »ñÈ¡¹ØÁªµÄ·şÎñ¶ËNetworkÍøÂçÊµÀı¡£
+        /// è·å–å…³è”çš„æœåŠ¡ç«¯Networkç½‘ç»œå®ä¾‹ã€‚
         /// </summary>
         public ANetwork Network { get; private set; }
 
         /// <summary>
-        /// ³õÊ¼»¯·şÎñ¶ËÍøÂç×é¼ş¡£
+        /// åˆå§‹åŒ–æœåŠ¡ç«¯ç½‘ç»œç»„ä»¶ã€‚
         /// </summary>
-        /// <param name="networkProtocolType">ÍøÂçĞ­ÒéÀàĞÍ¡£</param>
-        /// <param name="networkTarget">ÍøÂçÄ¿±ê¡£</param>
-        /// <param name="address">°ó¶¨µÄIPµØÖ·ºÍ¶Ë¿Ú¡£</param>
+        /// <param name="networkProtocolType">ç½‘ç»œåè®®ç±»å‹ã€‚</param>
+        /// <param name="networkTarget">ç½‘ç»œç›®æ ‡ã€‚</param>
+        /// <param name="address">ç»‘å®šçš„IPåœ°å€å’Œç«¯å£ã€‚</param>
         public void Initialize(NetworkProtocolType networkProtocolType, NetworkTarget networkTarget, IPEndPoint address)
         {
             switch (networkProtocolType)
@@ -45,7 +45,7 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ÊÍ·Å·şÎñ¶ËÍøÂç×é¼ş¼°¹ØÁªµÄ×ÊÔ´¡£
+        /// é‡Šæ”¾æœåŠ¡ç«¯ç½‘ç»œç»„ä»¶åŠå…³è”çš„èµ„æºã€‚
         /// </summary>
         public override void Dispose()
         {

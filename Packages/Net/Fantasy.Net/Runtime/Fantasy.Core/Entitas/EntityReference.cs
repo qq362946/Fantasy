@@ -1,18 +1,18 @@
-// ÒÔÏÂÖ¸ÁîÓÃÓÚ½ûÖ¹ ReSharper ¾¯¸æ£¬ÒÔ´¦Àí¿ÉÎª¿ÕÒıÓÃÀàĞÍµÄÇé¿ö¡£
-// ÔÚ´ËÇé¿öÏÂ£¬¿ÉÒÔ°²È«µØ½ûÓÃ¾¯¸æ£¬ÒòÎªÎÒÃÇ´¦ÀíµÄÊÇ·Ç¿ÉÎª¿ÕÀàĞÍ¡£
+// ä»¥ä¸‹æŒ‡ä»¤ç”¨äºç¦æ­¢ ReSharper è­¦å‘Šï¼Œä»¥å¤„ç†å¯ä¸ºç©ºå¼•ç”¨ç±»å‹çš„æƒ…å†µã€‚
+// åœ¨æ­¤æƒ…å†µä¸‹ï¼Œå¯ä»¥å®‰å…¨åœ°ç¦ç”¨è­¦å‘Šï¼Œå› ä¸ºæˆ‘ä»¬å¤„ç†çš„æ˜¯éå¯ä¸ºç©ºç±»å‹ã€‚
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 namespace Fantasy
 {
     /// <summary>
-    /// ÊµÌåÒıÓÃÖ»¶Á½á¹¹£¬ÓÃ×÷¶Ô Entity ÊµÀıµÄÒıÓÃ¡£
+    /// å®ä½“å¼•ç”¨åªè¯»ç»“æ„ï¼Œç”¨ä½œå¯¹ Entity å®ä¾‹çš„å¼•ç”¨ã€‚
     /// </summary>
-    /// <typeparam name="T">Entity µÄÀàĞÍ¡£</typeparam>
+    /// <typeparam name="T">Entity çš„ç±»å‹ã€‚</typeparam>
     public readonly struct EntityReference<T> where T : Entity
     {
         private readonly T _entity;
         private readonly long _runTimeId;
 
-        // ´Ó Entity ÊµÀı´´½¨ EntityReference µÄË½ÓĞ¹¹Ôìº¯Êı¡£
+        // ä» Entity å®ä¾‹åˆ›å»º EntityReference çš„ç§æœ‰æ„é€ å‡½æ•°ã€‚
         private EntityReference(T t)
         {
             _entity = t;
@@ -20,22 +20,22 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ÒşÊ½µØ½« Entity ÊµÀı×ª»»Îª EntityReference¡£
+        /// éšå¼åœ°å°† Entity å®ä¾‹è½¬æ¢ä¸º EntityReferenceã€‚
         /// </summary>
-        /// <param name="t">Òª×ª»»µÄ Entity ÊµÀı¡£</param>
-        /// <returns>ÒıÓÃÍ¬Ò» Entity µÄ EntityReference ÊµÀı¡£</returns>
+        /// <param name="t">è¦è½¬æ¢çš„ Entity å®ä¾‹ã€‚</param>
+        /// <returns>å¼•ç”¨åŒä¸€ Entity çš„ EntityReference å®ä¾‹ã€‚</returns>
         public static implicit operator EntityReference<T>(T t)
         {
             return new EntityReference<T>(t);
         }
 
         /// <summary>
-        /// ÒşÊ½µØ½« EntityReference ×ª»»»ØÔ­Ê¼µÄ Entity ÀàĞÍ¡£
+        /// éšå¼åœ°å°† EntityReference è½¬æ¢å›åŸå§‹çš„ Entity ç±»å‹ã€‚
         /// </summary>
-        /// <param name="v">Òª×ª»»µÄ EntityReference¡£</param>
+        /// <param name="v">è¦è½¬æ¢çš„ EntityReferenceã€‚</param>
         /// <returns>
-        /// Èç¹ûÔËĞĞÊ± ID Æ¥Åä£¬Ôò·µ»ØÔ­Ê¼µÄ Entity ÊµÀı£¬Èç¹û²»Æ¥ÅäÔò·µ»Ø null£¬
-        /// »òÕßÈç¹ûÒıÓÃÎª null£¬Ôò·µ»Ø null¡£
+        /// å¦‚æœè¿è¡Œæ—¶ ID åŒ¹é…ï¼Œåˆ™è¿”å›åŸå§‹çš„ Entity å®ä¾‹ï¼Œå¦‚æœä¸åŒ¹é…åˆ™è¿”å› nullï¼Œ
+        /// æˆ–è€…å¦‚æœå¼•ç”¨ä¸º nullï¼Œåˆ™è¿”å› nullã€‚
         /// </returns>
         public static implicit operator T(EntityReference<T> v)
         {

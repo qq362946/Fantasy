@@ -6,37 +6,37 @@ using Fantasy.Helper;
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ÍøÂçÏûÏ¢·¢ËÍÕßµÄÀà¡£
+    /// ç½‘ç»œæ¶ˆæ¯å‘é€è€…çš„ç±»ã€‚
     /// </summary>
     public sealed class MessageSender : IDisposable
     {
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃ RPC ID¡£
+        /// è·å–æˆ–è®¾ç½® RPC IDã€‚
         /// </summary>
         public uint RpcId { get; private set; }
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÂ·ÓÉ ID¡£
+        /// è·å–æˆ–è®¾ç½®è·¯ç”± IDã€‚
         /// </summary>
         public long RouteId { get; private set; }
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃ´´½¨Ê±¼ä¡£
+        /// è·å–æˆ–è®¾ç½®åˆ›å»ºæ—¶é—´ã€‚
         /// </summary>
         public long CreateTime { get; private set; }
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÏûÏ¢ÀàĞÍ¡£
+        /// è·å–æˆ–è®¾ç½®æ¶ˆæ¯ç±»å‹ã€‚
         /// </summary>
         public Type MessageType { get; private set; }
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÇëÇóÏûÏ¢¡£
+        /// è·å–æˆ–è®¾ç½®è¯·æ±‚æ¶ˆæ¯ã€‚
         /// </summary>
         public IMessage Request { get; private set; }
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÈÎÎñ¡£
+        /// è·å–æˆ–è®¾ç½®ä»»åŠ¡ã€‚
         /// </summary>
         public FTask<IResponse> Tcs { get; private set; }
 
         /// <summary>
-        /// ÊÍ·Å×ÊÔ´¡£
+        /// é‡Šæ”¾èµ„æºã€‚
         /// </summary>
         public void Dispose()
         {
@@ -50,12 +50,12 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸ö <see cref="MessageSender"/> ÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ª <see cref="MessageSender"/> å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="rpcId">RPC ID¡£</param>
-        /// <param name="requestType">ÇëÇóÏûÏ¢ÀàĞÍ¡£</param>
-        /// <param name="tcs">ÈÎÎñ¡£</param>
-        /// <returns>´´½¨µÄ <see cref="MessageSender"/> ÊµÀı¡£</returns>
+        /// <param name="rpcId">RPC IDã€‚</param>
+        /// <param name="requestType">è¯·æ±‚æ¶ˆæ¯ç±»å‹ã€‚</param>
+        /// <param name="tcs">ä»»åŠ¡ã€‚</param>
+        /// <returns>åˆ›å»ºçš„ <see cref="MessageSender"/> å®ä¾‹ã€‚</returns>
         public static MessageSender Create(uint rpcId, Type requestType, FTask<IResponse> tcs)
         {
             var routeMessageSender = Pool<MessageSender>.Rent();
@@ -67,12 +67,12 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸ö <see cref="MessageSender"/> ÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ª <see cref="MessageSender"/> å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="rpcId">RPC ID¡£</param>
-        /// <param name="request">ÇëÇóÏûÏ¢¡£</param>
-        /// <param name="tcs">ÈÎÎñ¡£</param>
-        /// <returns>´´½¨µÄ <see cref="MessageSender"/> ÊµÀı¡£</returns>
+        /// <param name="rpcId">RPC IDã€‚</param>
+        /// <param name="request">è¯·æ±‚æ¶ˆæ¯ã€‚</param>
+        /// <param name="tcs">ä»»åŠ¡ã€‚</param>
+        /// <returns>åˆ›å»ºçš„ <see cref="MessageSender"/> å®ä¾‹ã€‚</returns>
         public static MessageSender Create(uint rpcId, IRequest request, FTask<IResponse> tcs)
         {
             var routeMessageSender = Pool<MessageSender>.Rent();
@@ -84,13 +84,13 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸ö <see cref="MessageSender"/> ÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ª <see cref="MessageSender"/> å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="rpcId">RPC ID¡£</param>
-        /// <param name="routeId">Â·ÓÉ ID¡£</param>
-        /// <param name="request">Â·ÓÉÏûÏ¢ÇëÇó¡£</param>
-        /// <param name="tcs">ÈÎÎñ¡£</param>
-        /// <returns>´´½¨µÄ <see cref="MessageSender"/> ÊµÀı¡£</returns>
+        /// <param name="rpcId">RPC IDã€‚</param>
+        /// <param name="routeId">è·¯ç”± IDã€‚</param>
+        /// <param name="request">è·¯ç”±æ¶ˆæ¯è¯·æ±‚ã€‚</param>
+        /// <param name="tcs">ä»»åŠ¡ã€‚</param>
+        /// <returns>åˆ›å»ºçš„ <see cref="MessageSender"/> å®ä¾‹ã€‚</returns>
         public static MessageSender Create(uint rpcId, long routeId, IRouteMessage request, FTask<IResponse> tcs)
         {
             var routeMessageSender = Pool<MessageSender>.Rent();

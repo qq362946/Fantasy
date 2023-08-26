@@ -5,43 +5,43 @@ using Fantasy.Helper;
 namespace Fantasy.Core;
 
 /// <summary>
-/// ¸ºÔğ¼ì²é»á»°¿ÕÏĞ³¬Ê±µÄ×é¼ş¡£
+/// è´Ÿè´£æ£€æŸ¥ä¼šè¯ç©ºé—²è¶…æ—¶çš„ç»„ä»¶ã€‚
 /// </summary>
 public class SessionIdleCheckerComponent : Entity
 {
-    private long _timeOut;  // ¿ÕÏĞ³¬Ê±Ê±¼ä£¨ºÁÃë£©
-    private long _timerId;  // ¼ì²é¼ÆÊ±Æ÷µÄ ID
-    private long _selfRuntimeId;  // ÓÃÓÚÈ·±£×é¼şÍêÕûĞÔµÄ×ÔÉíÔËĞĞÊ± ID
-    private Session _session;  // ¶Ô»á»°¶ÔÏóµÄÒıÓÃ
+    private long _timeOut;  // ç©ºé—²è¶…æ—¶æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰
+    private long _timerId;  // æ£€æŸ¥è®¡æ—¶å™¨çš„ ID
+    private long _selfRuntimeId;  // ç”¨äºç¡®ä¿ç»„ä»¶å®Œæ•´æ€§çš„è‡ªèº«è¿è¡Œæ—¶ ID
+    private Session _session;  // å¯¹ä¼šè¯å¯¹è±¡çš„å¼•ç”¨
 
     /// <summary>
-    /// ÖØĞ´ Dispose ·½·¨ÒÔÊÍ·Å×ÊÔ´¡£
+    /// é‡å†™ Dispose æ–¹æ³•ä»¥é‡Šæ”¾èµ„æºã€‚
     /// </summary>
     public override void Dispose()
     {
-        Stop(); // Í£Ö¹¼ì²é¼ÆÊ±Æ÷
-        _timeOut = 0; // ÖØÖÃ¿ÕÏĞ³¬Ê±Ê±¼ä
-        _selfRuntimeId = 0; // ÖØÖÃ×ÔÉíÔËĞĞÊ± ID
-        _session = null; // Çå³ı»á»°ÒıÓÃ
+        Stop(); // åœæ­¢æ£€æŸ¥è®¡æ—¶å™¨
+        _timeOut = 0; // é‡ç½®ç©ºé—²è¶…æ—¶æ—¶é—´
+        _selfRuntimeId = 0; // é‡ç½®è‡ªèº«è¿è¡Œæ—¶ ID
+        _session = null; // æ¸…é™¤ä¼šè¯å¼•ç”¨
         base.Dispose();
     }
 
     /// <summary>
-    /// Ê¹ÓÃÖ¸¶¨µÄ¼ä¸ôºÍ¿ÕÏĞ³¬Ê±Ê±¼äÆô¶¯¿ÕÏĞ¼ì²é¹¦ÄÜ¡£
+    /// ä½¿ç”¨æŒ‡å®šçš„é—´éš”å’Œç©ºé—²è¶…æ—¶æ—¶é—´å¯åŠ¨ç©ºé—²æ£€æŸ¥åŠŸèƒ½ã€‚
     /// </summary>
-    /// <param name="interval">ÒÔºÁÃëÎªµ¥Î»µÄ¼ì²é¼ä¸ô¡£</param>
-    /// <param name="timeOut">ÒÔºÁÃëÎªµ¥Î»µÄ¿ÕÏĞ³¬Ê±Ê±¼ä¡£</param>
+    /// <param name="interval">ä»¥æ¯«ç§’ä¸ºå•ä½çš„æ£€æŸ¥é—´éš”ã€‚</param>
+    /// <param name="timeOut">ä»¥æ¯«ç§’ä¸ºå•ä½çš„ç©ºé—²è¶…æ—¶æ—¶é—´ã€‚</param>
     public void Start(int interval, int timeOut)
     {
         _timeOut = timeOut;
         _session = (Session)Parent;
         _selfRuntimeId = RuntimeId;
-        // °²ÅÅÖØ¸´¼ÆÊ±Æ÷£¬ÔÚÖ¸¶¨µÄ¼ä¸ôÄÚÖ´ĞĞ Check ·½·¨
+        // å®‰æ’é‡å¤è®¡æ—¶å™¨ï¼Œåœ¨æŒ‡å®šçš„é—´éš”å†…æ‰§è¡Œ Check æ–¹æ³•
         _timerId = TimerScheduler.Instance.Core.RepeatedTimer(interval, Check);
     }
 
     /// <summary>
-    /// Í£Ö¹¿ÕÏĞ¼ì²é¹¦ÄÜ¡£
+    /// åœæ­¢ç©ºé—²æ£€æŸ¥åŠŸèƒ½ã€‚
     /// </summary>
     public void Stop()
     {
@@ -54,7 +54,7 @@ public class SessionIdleCheckerComponent : Entity
     }
 
     /// <summary>
-    /// Ö´ĞĞ¿ÕÏĞ¼ì²é²Ù×÷¡£
+    /// æ‰§è¡Œç©ºé—²æ£€æŸ¥æ“ä½œã€‚
     /// </summary>
     private void Check()
     {

@@ -2,47 +2,47 @@
 namespace Fantasy.Core;
 
 /// <summary>
-/// ×Ô¶¨Òåµ¼³ö½Ó¿Ú
+/// è‡ªå®šä¹‰å¯¼å‡ºæ¥å£
 /// </summary>
 public interface ICustomExport
 {
     /// <summary>
-    /// Ö´ĞĞµ¼³ö²Ù×÷
+    /// æ‰§è¡Œå¯¼å‡ºæ“ä½œ
     /// </summary>
     void Run();
 }
 
 /// <summary>
-/// ³éÏó×Ô¶¨Òåµ¼³ö»ùÀà
+/// æŠ½è±¡è‡ªå®šä¹‰å¯¼å‡ºåŸºç±»
 /// </summary>
 public abstract class ACustomExport : ICustomExport
 {
     /// <summary>
-    /// ×Ô¶¨Òåµ¼³öÀàĞÍÃ¶¾Ù£º¿Í»§¶Ë¡¢·şÎñÆ÷
+    /// è‡ªå®šä¹‰å¯¼å‡ºç±»å‹æšä¸¾ï¼šå®¢æˆ·ç«¯ã€æœåŠ¡å™¨
     /// </summary>
     protected enum CustomExportType
     {
         /// <summary>
-        /// ¿Í»§¶Ë
+        /// å®¢æˆ·ç«¯
         /// </summary>
         Client,
         /// <summary>
-        /// ·şÎñÆ÷
+        /// æœåŠ¡å™¨
         /// </summary>
         Server
     }
 
     /// <summary>
-    /// Ö´ĞĞµ¼³ö²Ù×÷µÄ³éÏó·½·¨
+    /// æ‰§è¡Œå¯¼å‡ºæ“ä½œçš„æŠ½è±¡æ–¹æ³•
     /// </summary>
     public abstract void Run();
 
     /// <summary>
-    /// Ğ´ÈëÎÄ¼şÄÚÈİµ½Ö¸¶¨Î»ÖÃ
+    /// å†™å…¥æ–‡ä»¶å†…å®¹åˆ°æŒ‡å®šä½ç½®
     /// </summary>
-    /// <param name="fileName">ÎÄ¼şÃû</param>
-    /// <param name="fileContent">ÎÄ¼şÄÚÈİ</param>
-    /// <param name="customExportType">×Ô¶¨Òåµ¼³öÀàĞÍ</param>
+    /// <param name="fileName">æ–‡ä»¶å</param>
+    /// <param name="fileContent">æ–‡ä»¶å†…å®¹</param>
+    /// <param name="customExportType">è‡ªå®šä¹‰å¯¼å‡ºç±»å‹</param>
     protected void Write(string fileName, string fileContent, CustomExportType customExportType)
     {
         switch (customExportType)

@@ -2,27 +2,27 @@
 namespace Fantasy.Core;
 
 /// <summary>
-/// Excel±í¸ñÀà£¬ÓÃÓÚ´æ´¢±í¸ñµÄÃû³ÆºÍÁÐÐÅÏ¢¡£
+/// Excelè¡¨æ ¼ç±»ï¼Œç”¨äºŽå­˜å‚¨è¡¨æ ¼çš„åç§°å’Œåˆ—ä¿¡æ¯ã€‚
 /// </summary>
 public sealed class ExcelTable
 {
     /// <summary>
-    /// ±í¸ñµÄÃû³Æ¡£
+    /// è¡¨æ ¼çš„åç§°ã€‚
     /// </summary>
     public readonly string Name;
     /// <summary>
-    /// ¿Í»§¶ËÁÐÐÅÏ¢£¬Ê¹ÓÃÅÅÐò×Öµä´æ´¢ÁÐÃûºÍÁÐË÷ÒýÁÐ±í¡£
+    /// å®¢æˆ·ç«¯åˆ—ä¿¡æ¯ï¼Œä½¿ç”¨æŽ’åºå­—å…¸å­˜å‚¨åˆ—åå’Œåˆ—ç´¢å¼•åˆ—è¡¨ã€‚
     /// </summary>
     public readonly SortedDictionary<string, List<int>> ClientColInfos = new();
     /// <summary>
-    /// ·þÎñÆ÷¶ËÁÐÐÅÏ¢£¬Ê¹ÓÃÅÅÐò×Öµä´æ´¢ÁÐÃûºÍÁÐË÷ÒýÁÐ±í¡£
+    /// æœåŠ¡å™¨ç«¯åˆ—ä¿¡æ¯ï¼Œä½¿ç”¨æŽ’åºå­—å…¸å­˜å‚¨åˆ—åå’Œåˆ—ç´¢å¼•åˆ—è¡¨ã€‚
     /// </summary>
     public readonly SortedDictionary<string, List<int>> ServerColInfos = new();
 
     /// <summary>
-    /// ¹¹Ôìº¯Êý£¬³õÊ¼»¯Excel±í¸ñ¶ÔÏó²¢ÉèÖÃ±í¸ñÃû³Æ¡£
+    /// æž„é€ å‡½æ•°ï¼Œåˆå§‹åŒ–Excelè¡¨æ ¼å¯¹è±¡å¹¶è®¾ç½®è¡¨æ ¼åç§°ã€‚
     /// </summary>
-    /// <param name="name">±í¸ñÃû³Æ¡£</param>
+    /// <param name="name">è¡¨æ ¼åç§°ã€‚</param>
     public ExcelTable(string name)
     {
         Name = name;

@@ -9,87 +9,87 @@ using Fantasy.Helper;
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// ÏûÏ¢»º´æĞÅÏ¢½á¹¹¡£
+    /// æ¶ˆæ¯ç¼“å­˜ä¿¡æ¯ç»“æ„ã€‚
     /// </summary>
     public struct MessageCacheInfo
     {
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃ RPC ID¡£
+        /// è·å–æˆ–è®¾ç½® RPC IDã€‚
         /// </summary>
         public uint RpcId;
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÂ·ÓÉ ID¡£
+        /// è·å–æˆ–è®¾ç½®è·¯ç”± IDã€‚
         /// </summary>
         public long RouteId;
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÂ·ÓÉÀàĞÍÓë²Ù×÷Âë¡£
+        /// è·å–æˆ–è®¾ç½®è·¯ç”±ç±»å‹ä¸æ“ä½œç ã€‚
         /// </summary>
         public long RouteTypeOpCode;
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÏûÏ¢¶ÔÏó¡£
+        /// è·å–æˆ–è®¾ç½®æ¶ˆæ¯å¯¹è±¡ã€‚
         /// </summary>
         public object Message;
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÄÚ´æÁ÷¡£
+        /// è·å–æˆ–è®¾ç½®å†…å­˜æµã€‚
         /// </summary>
         public MemoryStream MemoryStream;
     }
 
     /// <summary>
-    /// ³éÏóÍøÂç»ùÀà¡£
+    /// æŠ½è±¡ç½‘ç»œåŸºç±»ã€‚
     /// </summary>
     public abstract class ANetwork : IDisposable
     {
         /// <summary>
-        /// »ñÈ¡ÍøÂçµÄÎ¨Ò»ID¡£
+        /// è·å–ç½‘ç»œçš„å”¯ä¸€IDã€‚
         /// </summary>
         public long Id { get; protected set; }
 
         /// <summary>
-        /// »ñÈ¡³¡¾°¶ÔÏó¡£
+        /// è·å–åœºæ™¯å¯¹è±¡ã€‚
         /// </summary>
         public Scene Scene { get; protected set; }
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÍøÂçÊÇ·ñÒÑ±»ÊÍ·Å¡£
+        /// è·å–æˆ–è®¾ç½®ç½‘ç»œæ˜¯å¦å·²è¢«é‡Šæ”¾ã€‚
         /// </summary>
         public bool IsDisposed { get; protected set; }
 
         /// <summary>
-        /// »ñÈ¡ÍøÂçÀàĞÍ¡£
+        /// è·å–ç½‘ç»œç±»å‹ã€‚
         /// </summary>
         public NetworkType NetworkType { get; private set; }
 
         /// <summary>
-        /// »ñÈ¡ÍøÂçÄ¿±êÀàĞÍ¡£
+        /// è·å–ç½‘ç»œç›®æ ‡ç±»å‹ã€‚
         /// </summary>
         public NetworkTarget NetworkTarget { get; private set; }
 
         /// <summary>
-        /// »ñÈ¡ÍøÂçĞ­ÒéÀàĞÍ¡£
+        /// è·å–ç½‘ç»œåè®®ç±»å‹ã€‚
         /// </summary>
         public NetworkProtocolType NetworkProtocolType { get; private set; }
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÍøÂçÏûÏ¢µ÷¶ÈÆ÷¡£
+        /// è·å–æˆ–è®¾ç½®ç½‘ç»œæ¶ˆæ¯è°ƒåº¦å™¨ã€‚
         /// </summary>
         public ANetworkMessageScheduler NetworkMessageScheduler { get; protected set; }
         /// <summary>
-        /// ´ò°üÏûÏ¢µÄÎ¯ÍĞ¡£
+        /// æ‰“åŒ…æ¶ˆæ¯çš„å§”æ‰˜ã€‚
         /// </summary>
         protected readonly Func<uint, long, long, MemoryStream, object, MemoryStream> Pack;
 
         /// <summary>
-        /// ³õÊ¼»¯³éÏóÍøÂç»ùÀàµÄĞÂÊµÀı¡£
+        /// åˆå§‹åŒ–æŠ½è±¡ç½‘ç»œåŸºç±»çš„æ–°å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="scene">³¡¾°¶ÔÏó¡£</param>
-        /// <param name="networkType">ÍøÂçÀàĞÍ¡£</param>
-        /// <param name="networkProtocolType">ÍøÂçĞ­ÒéÀàĞÍ¡£</param>
-        /// <param name="networkTarget">ÍøÂçÄ¿±êÀàĞÍ¡£</param>
+        /// <param name="scene">åœºæ™¯å¯¹è±¡ã€‚</param>
+        /// <param name="networkType">ç½‘ç»œç±»å‹ã€‚</param>
+        /// <param name="networkProtocolType">ç½‘ç»œåè®®ç±»å‹ã€‚</param>
+        /// <param name="networkTarget">ç½‘ç»œç›®æ ‡ç±»å‹ã€‚</param>
         protected ANetwork(Scene scene, NetworkType networkType, NetworkProtocolType networkProtocolType, NetworkTarget networkTarget)
         {
             Scene = scene;
@@ -123,25 +123,25 @@ namespace Fantasy.Core.Network
         }
 #if FANTASY_NET
         /// <summary>
-        /// ÄÚ²¿ÏûÏ¢´ò°ü·½·¨¡£
+        /// å†…éƒ¨æ¶ˆæ¯æ‰“åŒ…æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="rpcId">RPC ID¡£</param>
-        /// <param name="routeTypeOpCode">Â·ÓÉÀàĞÍÓë²Ù×÷Âë¡£</param>
-        /// <param name="routeId">Â·ÓÉ ID¡£</param>
-        /// <param name="memoryStream">ÄÚ´æÁ÷£¬ÓÃÓÚÏûÏ¢Êı¾İ¡£</param>
-        /// <param name="message">ÏûÏ¢¶ÔÏó¡£</param>
-        /// <returns>´ò°üºóµÄÄÚ´æÁ÷¡£</returns>
+        /// <param name="rpcId">RPC IDã€‚</param>
+        /// <param name="routeTypeOpCode">è·¯ç”±ç±»å‹ä¸æ“ä½œç ã€‚</param>
+        /// <param name="routeId">è·¯ç”± IDã€‚</param>
+        /// <param name="memoryStream">å†…å­˜æµï¼Œç”¨äºæ¶ˆæ¯æ•°æ®ã€‚</param>
+        /// <param name="message">æ¶ˆæ¯å¯¹è±¡ã€‚</param>
+        /// <returns>æ‰“åŒ…åçš„å†…å­˜æµã€‚</returns>
         private MemoryStream InnerPack(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
         {
 #if FANTASY_DEVELOP
-            // ¼ì²éÊÇ·ñÔÚÕıÈ·µÄÍøÂçÏß³ÌÖĞ
+            // æ£€æŸ¥æ˜¯å¦åœ¨æ­£ç¡®çš„ç½‘ç»œçº¿ç¨‹ä¸­
             if (NetworkThread.Instance.ManagedThreadId != Thread.CurrentThread.ManagedThreadId)
             {
                 Log.Error("not in NetworkThread!");
                 return null;
             }
 #endif
-            // ¸ù¾İÊÇ·ñÌá¹©ÄÚ´æÁ÷´ò°üÏûÏ¢
+            // æ ¹æ®æ˜¯å¦æä¾›å†…å­˜æµæ‰“åŒ…æ¶ˆæ¯
             return memoryStream == null
                 ? InnerPacketParser.Pack(rpcId, routeId, message)
                 : InnerPacketParser.Pack(rpcId, routeId, memoryStream);
@@ -149,60 +149,60 @@ namespace Fantasy.Core.Network
 #endif
 
         /// <summary>
-        /// Íâ²¿ÏûÏ¢´ò°ü·½·¨¡£
+        /// å¤–éƒ¨æ¶ˆæ¯æ‰“åŒ…æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="rpcId">RPC ID¡£</param>
-        /// <param name="routeTypeOpCode">Â·ÓÉÀàĞÍÓë²Ù×÷Âë¡£</param>
-        /// <param name="routeId">Â·ÓÉ ID¡£</param>
-        /// <param name="memoryStream">ÄÚ´æÁ÷£¬ÓÃÓÚÏûÏ¢Êı¾İ¡£</param>
-        /// <param name="message">ÏûÏ¢¶ÔÏó¡£</param>
-        /// <returns>´ò°üºóµÄÄÚ´æÁ÷¡£</returns>
+        /// <param name="rpcId">RPC IDã€‚</param>
+        /// <param name="routeTypeOpCode">è·¯ç”±ç±»å‹ä¸æ“ä½œç ã€‚</param>
+        /// <param name="routeId">è·¯ç”± IDã€‚</param>
+        /// <param name="memoryStream">å†…å­˜æµï¼Œç”¨äºæ¶ˆæ¯æ•°æ®ã€‚</param>
+        /// <param name="message">æ¶ˆæ¯å¯¹è±¡ã€‚</param>
+        /// <returns>æ‰“åŒ…åçš„å†…å­˜æµã€‚</returns>
         private MemoryStream OuterPack(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
         {
 #if FANTASY_DEVELOP
-            // ¼ì²éÊÇ·ñÔÚÕıÈ·µÄÍøÂçÏß³ÌÖĞ
+            // æ£€æŸ¥æ˜¯å¦åœ¨æ­£ç¡®çš„ç½‘ç»œçº¿ç¨‹ä¸­
             if (NetworkThread.Instance.ManagedThreadId != Thread.CurrentThread.ManagedThreadId)
             {
                 Log.Error("not in NetworkThread!");
                 return null;
             }
 #endif
-            // ¸ù¾İÊÇ·ñÌá¹©ÄÚ´æÁ÷´ò°üÏûÏ¢
+            // æ ¹æ®æ˜¯å¦æä¾›å†…å­˜æµæ‰“åŒ…æ¶ˆæ¯
             return memoryStream == null
                 ? OuterPacketParser.Pack(rpcId, routeTypeOpCode, message)
                 : OuterPacketParser.Pack(rpcId, routeTypeOpCode, memoryStream);
         }
 
         /// <summary>
-        /// ·¢ËÍÏûÏ¢¡£
+        /// å‘é€æ¶ˆæ¯ã€‚
         /// </summary>
-        /// <param name="channelId">Í¨µÀ ID¡£</param>
-        /// <param name="rpcId">RPC ID¡£</param>
-        /// <param name="routeTypeOpCode">Â·ÓÉÀàĞÍÓë²Ù×÷Âë¡£</param>
-        /// <param name="routeId">Â·ÓÉ ID¡£</param>
-        /// <param name="message">ÏûÏ¢¶ÔÏó¡£</param>
+        /// <param name="channelId">é€šé“ IDã€‚</param>
+        /// <param name="rpcId">RPC IDã€‚</param>
+        /// <param name="routeTypeOpCode">è·¯ç”±ç±»å‹ä¸æ“ä½œç ã€‚</param>
+        /// <param name="routeId">è·¯ç”± IDã€‚</param>
+        /// <param name="message">æ¶ˆæ¯å¯¹è±¡ã€‚</param>
         public abstract void Send(uint channelId, uint rpcId, long routeTypeOpCode, long routeId, object message);
         /// <summary>
-        /// ·¢ËÍÏûÏ¢¡£
+        /// å‘é€æ¶ˆæ¯ã€‚
         /// </summary>
-        /// <param name="channelId">Í¨µÀ ID¡£</param>
-        /// <param name="rpcId">RPC ID¡£</param>
-        /// <param name="routeTypeOpCode">Â·ÓÉÀàĞÍÓë²Ù×÷Âë¡£</param>
-        /// <param name="routeId">Â·ÓÉ ID¡£</param>
-        /// <param name="memoryStream">ÄÚ´æÁ÷£¬ÓÃÓÚÏûÏ¢Êı¾İ¡£</param>
+        /// <param name="channelId">é€šé“ IDã€‚</param>
+        /// <param name="rpcId">RPC IDã€‚</param>
+        /// <param name="routeTypeOpCode">è·¯ç”±ç±»å‹ä¸æ“ä½œç ã€‚</param>
+        /// <param name="routeId">è·¯ç”± IDã€‚</param>
+        /// <param name="memoryStream">å†…å­˜æµï¼Œç”¨äºæ¶ˆæ¯æ•°æ®ã€‚</param>
         public abstract void Send(uint channelId, uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream);
         /// <summary>
-        /// ÒÆ³ıÍ¨µÀ¡£
+        /// ç§»é™¤é€šé“ã€‚
         /// </summary>
-        /// <param name="channelId">Í¨µÀ ID¡£</param>
+        /// <param name="channelId">é€šé“ IDã€‚</param>
         public abstract void RemoveChannel(uint channelId);
 
         /// <summary>
-        /// ÊÍ·Å×ÊÔ´¡£
+        /// é‡Šæ”¾èµ„æºã€‚
         /// </summary>
         public virtual void Dispose()
         {
-            // ´ÓÍøÂçÏß³ÌÖĞÒÆ³ıÍøÂç¶ÔÏó
+            // ä»ç½‘ç»œçº¿ç¨‹ä¸­ç§»é™¤ç½‘ç»œå¯¹è±¡
             NetworkThread.Instance?.RemoveNetwork(Id);
 
             Id = 0;

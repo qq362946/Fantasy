@@ -4,17 +4,17 @@ using System.Collections.Generic;
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// ÊµÌå¶ÔÏóÁĞ±í£¬¼Ì³Ğ×Ô List&lt;T&gt;£¬²¢ÊµÏÖ IDisposable ½Ó¿Ú£¬ÓÃÓÚ´´½¨ºÍ¹ÜÀíÊµÌå¶ÔÏóµÄ¼¯ºÏ¡£
+    /// å®ä½“å¯¹è±¡åˆ—è¡¨ï¼Œç»§æ‰¿è‡ª List&lt;T&gt;ï¼Œå¹¶å®ç° IDisposable æ¥å£ï¼Œç”¨äºåˆ›å»ºå’Œç®¡ç†å®ä½“å¯¹è±¡çš„é›†åˆã€‚
     /// </summary>
-    /// <typeparam name="T">ÊµÌå¶ÔÏóµÄÀàĞÍ¡£</typeparam>
+    /// <typeparam name="T">å®ä½“å¯¹è±¡çš„ç±»å‹ã€‚</typeparam>
     public sealed class EntityList<T> : List<T>, IDisposable where T : IDisposable
     {
         private bool _isDispose;
 
         /// <summary>
-        /// ´´½¨Ò»¸ö <see cref="EntityList{T}"/> ÊµÌå¶ÔÏóÁĞ±íµÄÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ª <see cref="EntityList{T}"/> å®ä½“å¯¹è±¡åˆ—è¡¨çš„å®ä¾‹ã€‚
         /// </summary>
-        /// <returns>´´½¨µÄÊµÀı¡£</returns>
+        /// <returns>åˆ›å»ºçš„å®ä¾‹ã€‚</returns>
         public static EntityList<T> Create()
         {
             var list = Pool<EntityList<T>>.Rent();
@@ -23,21 +23,21 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// Çå¿ÕÁĞ±í£¬²¢ÊÍ·ÅËùÓĞÊµÌå¶ÔÏóµÄ×ÊÔ´¡£
+        /// æ¸…ç©ºåˆ—è¡¨ï¼Œå¹¶é‡Šæ”¾æ‰€æœ‰å®ä½“å¯¹è±¡çš„èµ„æºã€‚
         /// </summary>
         public new void Clear()
         {
-            // Öğ¸öÊÍ·ÅÊµÌå¶ÔÏóµÄ×ÊÔ´
+            // é€ä¸ªé‡Šæ”¾å®ä½“å¯¹è±¡çš„èµ„æº
             for (var i = 0; i < this.Count; i++)
             {
                 this[i].Dispose();
             }
-            // µ÷ÓÃ»ùÀàµÄ Clear ·½·¨£¬Çå¿ÕÁĞ±í
+            // è°ƒç”¨åŸºç±»çš„ Clear æ–¹æ³•ï¼Œæ¸…ç©ºåˆ—è¡¨
             base.Clear();
         }
 
         /// <summary>
-        /// Çå¿ÕÁĞ±í£¬µ«²»ÊÍ·ÅÊµÌå¶ÔÏóµÄ×ÊÔ´¡£
+        /// æ¸…ç©ºåˆ—è¡¨ï¼Œä½†ä¸é‡Šæ”¾å®ä½“å¯¹è±¡çš„èµ„æºã€‚
         /// </summary>
         public void ClearNotDispose()
         {
@@ -45,7 +45,7 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ÊÍ·ÅÊµÀıËùÕ¼ÓÃµÄ×ÊÔ´£¬²¢½«ÊµÀı·µ»Øµ½¶ÔÏó³ØÖĞ£¬ÒÔ±ãÖØÓÃ¡£
+        /// é‡Šæ”¾å®ä¾‹æ‰€å ç”¨çš„èµ„æºï¼Œå¹¶å°†å®ä¾‹è¿”å›åˆ°å¯¹è±¡æ± ä¸­ï¼Œä»¥ä¾¿é‡ç”¨ã€‚
         /// </summary>
         public void Dispose()
         {

@@ -8,17 +8,17 @@ using MongoDB.Bson.Serialization.Serializers;
 namespace Fantasy.Helper;
 
 /// <summary>
-/// Ìá¹©¶Ô½á¹¹ÌåÀàĞÍ½øĞĞ BSON ĞòÁĞ»¯ºÍ·´ĞòÁĞ»¯µÄ¸¨ÖúÀà¡£
+/// æä¾›å¯¹ç»“æ„ä½“ç±»å‹è¿›è¡Œ BSON åºåˆ—åŒ–å’Œååºåˆ—åŒ–çš„è¾…åŠ©ç±»ã€‚
 /// </summary>
-/// <typeparam name="TValue">ÒªĞòÁĞ»¯ºÍ·´ĞòÁĞ»¯µÄ½á¹¹ÌåÀàĞÍ¡£</typeparam>
+/// <typeparam name="TValue">è¦åºåˆ—åŒ–å’Œååºåˆ—åŒ–çš„ç»“æ„ä½“ç±»å‹ã€‚</typeparam>
 public class StructBsonSerialize<TValue> : StructSerializerBase<TValue> where TValue : struct
 {
     /// <summary>
-    /// ½«½á¹¹Ìå¶ÔÏóĞòÁĞ»¯Îª BSON Êı¾İ¡£
+    /// å°†ç»“æ„ä½“å¯¹è±¡åºåˆ—åŒ–ä¸º BSON æ•°æ®ã€‚
     /// </summary>
-    /// <param name="context">ĞòÁĞ»¯ÉÏÏÂÎÄ¡£</param>
-    /// <param name="args">ĞòÁĞ»¯²ÎÊı¡£</param>
-    /// <param name="value">ÒªĞòÁĞ»¯µÄ½á¹¹Ìå¶ÔÏó¡£</param>
+    /// <param name="context">åºåˆ—åŒ–ä¸Šä¸‹æ–‡ã€‚</param>
+    /// <param name="args">åºåˆ—åŒ–å‚æ•°ã€‚</param>
+    /// <param name="value">è¦åºåˆ—åŒ–çš„ç»“æ„ä½“å¯¹è±¡ã€‚</param>
     public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, TValue value)
     {
         var nominalType = args.NominalType;
@@ -38,11 +38,11 @@ public class StructBsonSerialize<TValue> : StructSerializerBase<TValue> where TV
     }
 
     /// <summary>
-    /// ½« BSON Êı¾İ·´ĞòÁĞ»¯Îª½á¹¹Ìå¶ÔÏó¡£
+    /// å°† BSON æ•°æ®ååºåˆ—åŒ–ä¸ºç»“æ„ä½“å¯¹è±¡ã€‚
     /// </summary>
-    /// <param name="context">·´ĞòÁĞ»¯ÉÏÏÂÎÄ¡£</param>
-    /// <param name="args">·´ĞòÁĞ»¯²ÎÊı¡£</param>
-    /// <returns>·´ĞòÁĞ»¯µÃµ½µÄ½á¹¹Ìå¶ÔÏó¡£</returns>
+    /// <param name="context">ååºåˆ—åŒ–ä¸Šä¸‹æ–‡ã€‚</param>
+    /// <param name="args">ååºåˆ—åŒ–å‚æ•°ã€‚</param>
+    /// <returns>ååºåˆ—åŒ–å¾—åˆ°çš„ç»“æ„ä½“å¯¹è±¡ã€‚</returns>
     public override TValue Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
         //boxing is required for SetValue to work

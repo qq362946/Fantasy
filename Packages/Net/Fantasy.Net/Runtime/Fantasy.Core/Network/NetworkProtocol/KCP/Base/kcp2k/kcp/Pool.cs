@@ -1,4 +1,4 @@
-﻿// Pool to avoid allocations (from libuv2k & Mirror)
+// Pool to avoid allocations (from libuv2k & Mirror)
 using System;
 using System.Collections.Generic;
 #pragma warning disable CS1591

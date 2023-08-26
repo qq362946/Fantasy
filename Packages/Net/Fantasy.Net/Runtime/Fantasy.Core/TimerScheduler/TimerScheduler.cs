@@ -5,22 +5,22 @@ using UnityEngine;
 namespace Fantasy
 {
     /// <summary>
-    /// ��ʱ���������࣬���ڹ�����ʱ������ĵ��ȡ�
+    /// 计时器调度器类，用于管理计时器任务的调度。
     /// </summary>
     public sealed class TimerScheduler : Singleton<TimerScheduler>, IUpdateSingleton
     {
         /// <summary>
-        /// ʹ��ϵͳʱ�䴴���ļ�ʱ�����ġ�
+        /// 使用系统时间创建的计时器核心。
         /// </summary>
         public readonly TimerSchedulerCore Core = new TimerSchedulerCore(() => TimeHelper.Now);
 #if FANTASY_UNITY
         /// <summary>
-        /// ʹ�� Unity ʱ�䴴���ļ�ʱ�����ġ�
+        /// 使用 Unity 时间创建的计时器核心。
         /// </summary>
         public readonly TimerSchedulerCore Unity = new TimerSchedulerCore(() => (long) (Time.time * 1000));
 #endif
         /// <summary>
-        /// ���¼�ʱ������
+        /// 更新计时器任务。
         /// </summary>
         public void Update()
         {

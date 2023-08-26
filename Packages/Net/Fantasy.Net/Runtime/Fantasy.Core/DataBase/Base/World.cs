@@ -2,31 +2,31 @@
 namespace Fantasy.Core.DataBase;
 
 /// <summary>
-/// ±íÊ¾Ò»¸öÓÎÏ·ÊÀ½ç¡£
+/// è¡¨ç¤ºä¸€ä¸ªæ¸¸æˆä¸–ç•Œã€‚
 /// </summary>
 public sealed class World
 {
     /// <summary>
-    /// »ñÈ¡ÓÎÏ·ÊÀ½çµÄÎ¨Ò»±êÊ¶¡£
+    /// è·å–æ¸¸æˆä¸–ç•Œçš„å”¯ä¸€æ ‡è¯†ã€‚
     /// </summary>
     public uint Id { get; private init; }
     /// <summary>
-    /// »ñÈ¡ÓÎÏ·ÊÀ½çµÄÊı¾İ¿â½Ó¿Ú¡£
+    /// è·å–æ¸¸æˆä¸–ç•Œçš„æ•°æ®åº“æ¥å£ã€‚
     /// </summary>
     public IDateBase DateBase { get; private init; }
     /// <summary>
-    /// »ñÈ¡ÓÎÏ·ÊÀ½çµÄÅäÖÃĞÅÏ¢¡£
+    /// è·å–æ¸¸æˆä¸–ç•Œçš„é…ç½®ä¿¡æ¯ã€‚
     /// </summary>
     public WorldConfigInfo Config => ConfigTableManage.WorldConfigInfo(Id);
     /// <summary>
-    /// ÓÃÓÚ´æ´¢ÒÑ´´½¨µÄÓÎÏ·ÊÀ½çÊµÀı
+    /// ç”¨äºå­˜å‚¨å·²åˆ›å»ºçš„æ¸¸æˆä¸–ç•Œå®ä¾‹
     /// </summary>
     private static readonly Dictionary<uint, World> Worlds = new();
 
     /// <summary>
-    /// Ê¹ÓÃÖ¸¶¨µÄÅäÖÃĞÅÏ¢´´½¨Ò»¸öÓÎÏ·ÊÀ½çÊµÀı¡£
+    /// ä½¿ç”¨æŒ‡å®šçš„é…ç½®ä¿¡æ¯åˆ›å»ºä¸€ä¸ªæ¸¸æˆä¸–ç•Œå®ä¾‹ã€‚
     /// </summary>
-    /// <param name="worldConfigInfo">ÓÎÏ·ÊÀ½çµÄÅäÖÃĞÅÏ¢¡£</param>
+    /// <param name="worldConfigInfo">æ¸¸æˆä¸–ç•Œçš„é…ç½®ä¿¡æ¯ã€‚</param>
     public World(WorldConfigInfo worldConfigInfo)
     {
         Id = worldConfigInfo.Id;
@@ -46,10 +46,10 @@ public sealed class World
     }
 
     /// <summary>
-    /// ´´½¨Ò»¸öÖ¸¶¨Î¨Ò»±êÊ¶µÄÓÎÏ·ÊÀ½çÊµÀı¡£
+    /// åˆ›å»ºä¸€ä¸ªæŒ‡å®šå”¯ä¸€æ ‡è¯†çš„æ¸¸æˆä¸–ç•Œå®ä¾‹ã€‚
     /// </summary>
-    /// <param name="id">ÓÎÏ·ÊÀ½çµÄÎ¨Ò»±êÊ¶¡£</param>
-    /// <returns>ÓÎÏ·ÊÀ½çÊµÀı¡£</returns>
+    /// <param name="id">æ¸¸æˆä¸–ç•Œçš„å”¯ä¸€æ ‡è¯†ã€‚</param>
+    /// <returns>æ¸¸æˆä¸–ç•Œå®ä¾‹ã€‚</returns>
     public static World Create(uint id)
     {
         if (Worlds.TryGetValue(id, out var world))

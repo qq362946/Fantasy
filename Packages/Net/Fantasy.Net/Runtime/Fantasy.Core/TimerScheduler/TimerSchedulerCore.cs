@@ -7,34 +7,34 @@ using Fantasy.Helper;
 namespace Fantasy
 {
     /// <summary>
-    /// ¼ÆÊ±Æ÷µ÷¶ÈºËĞÄÀà£¬Ìá¹©¼ÆÊ±Æ÷µÄºËĞÄ¹¦ÄÜ¡£
+    /// è®¡æ—¶å™¨è°ƒåº¦æ ¸å¿ƒç±»ï¼Œæä¾›è®¡æ—¶å™¨çš„æ ¸å¿ƒåŠŸèƒ½ã€‚
     /// </summary>
     public class TimerSchedulerCore
     {
-        private long _minTime; // ×îĞ¡Ê±¼ä
-        private readonly Func<long> _now; // »ñÈ¡µ±Ç°Ê±¼äµÄÎ¯ÍĞ
-        private readonly Queue<long> _timeOutTime = new(); // ³¬Ê±Ê±¼ä¶ÓÁĞ
-        private readonly Queue<long> _timeOutTimerIds = new(); // ³¬Ê±¼ÆÊ±Æ÷ID¶ÓÁĞ
-        private readonly Dictionary<long, TimerAction> _timers = new(); // ¼ÆÊ±Æ÷×Öµä£¬°´ID´æ´¢¼ÆÊ±Æ÷¶ÔÏó
-        private readonly SortedOneToManyList<long, long> _timeId = new(); // Ê±¼äÓë¼ÆÊ±Æ÷IDµÄÓĞĞòÒ»¶Ô¶àÁĞ±í
+        private long _minTime; // æœ€å°æ—¶é—´
+        private readonly Func<long> _now; // è·å–å½“å‰æ—¶é—´çš„å§”æ‰˜
+        private readonly Queue<long> _timeOutTime = new(); // è¶…æ—¶æ—¶é—´é˜Ÿåˆ—
+        private readonly Queue<long> _timeOutTimerIds = new(); // è¶…æ—¶è®¡æ—¶å™¨IDé˜Ÿåˆ—
+        private readonly Dictionary<long, TimerAction> _timers = new(); // è®¡æ—¶å™¨å­—å…¸ï¼ŒæŒ‰IDå­˜å‚¨è®¡æ—¶å™¨å¯¹è±¡
+        private readonly SortedOneToManyList<long, long> _timeId = new(); // æ—¶é—´ä¸è®¡æ—¶å™¨IDçš„æœ‰åºä¸€å¯¹å¤šåˆ—è¡¨
 
         /// <summary>
-        /// ¹¹Ôìº¯Êı£¬³õÊ¼»¯¼ÆÊ±Æ÷ºËĞÄ¡£
+        /// æ„é€ å‡½æ•°ï¼Œåˆå§‹åŒ–è®¡æ—¶å™¨æ ¸å¿ƒã€‚
         /// </summary>
-        /// <param name="now">»ñÈ¡µ±Ç°Ê±¼äµÄÎ¯ÍĞ¡£</param>
+        /// <param name="now">è·å–å½“å‰æ—¶é—´çš„å§”æ‰˜ã€‚</param>
         public TimerSchedulerCore(Func<long> now)
         {
             _now = now;
         }
 
         /// <summary>
-        /// ¸üĞÂ¼ÆÊ±Æ÷£¬¼ì²é²¢Ö´ĞĞ³¬Ê±µÄ¼ÆÊ±Æ÷ÈÎÎñ¡£
+        /// æ›´æ–°è®¡æ—¶å™¨ï¼Œæ£€æŸ¥å¹¶æ‰§è¡Œè¶…æ—¶çš„è®¡æ—¶å™¨ä»»åŠ¡ã€‚
         /// </summary>
         public void Update()
         {
             try
             {
-                var currentTime = _now(); // »ñÈ¡µ±Ç°Ê±¼ä
+                var currentTime = _now(); // è·å–å½“å‰æ—¶é—´
 
                 if (_timeId.Count == 0)
                 {
@@ -49,7 +49,7 @@ namespace Fantasy
                 _timeOutTime.Clear();
                 _timeOutTimerIds.Clear();
 
-                // ±éÀúÊ±¼äIDÁĞ±í£¬²éÕÒ³¬Ê±µÄ¼ÆÊ±Æ÷ÈÎÎñ
+                // éå†æ—¶é—´IDåˆ—è¡¨ï¼ŒæŸ¥æ‰¾è¶…æ—¶çš„è®¡æ—¶å™¨ä»»åŠ¡
                 foreach (var (key, _) in _timeId)
                 {
                     if (key > currentTime)
@@ -61,7 +61,7 @@ namespace Fantasy
                     _timeOutTime.Enqueue(key);
                 }
 
-                // ´¦Àí³¬Ê±µÄ¼ÆÊ±Æ÷ÈÎÎñ
+                // å¤„ç†è¶…æ—¶çš„è®¡æ—¶å™¨ä»»åŠ¡
                 while (_timeOutTime.TryDequeue(out var time))
                 {
                     foreach (var timerId in _timeId[time])
@@ -72,7 +72,7 @@ namespace Fantasy
                     _timeId.RemoveKey(time);
                 }
 
-                // Ö´ĞĞ³¬Ê±µÄ¼ÆÊ±Æ÷ÈÎÎñµÄ»Øµ÷²Ù×÷
+                // æ‰§è¡Œè¶…æ—¶çš„è®¡æ—¶å™¨ä»»åŠ¡çš„å›è°ƒæ“ä½œ
                 while (_timeOutTimerIds.TryDequeue(out var timerId))
                 {
                     if (!_timers.TryGetValue(timerId, out var timer))
@@ -82,7 +82,7 @@ namespace Fantasy
 
                     _timers.Remove(timer.Id);
 
-                    // ¸ù¾İ¼ÆÊ±Æ÷ÀàĞÍÖ´ĞĞ²»Í¬µÄ²Ù×÷
+                    // æ ¹æ®è®¡æ—¶å™¨ç±»å‹æ‰§è¡Œä¸åŒçš„æ“ä½œ
                     switch (timer.TimerType)
                     {
                         case TimerType.OnceWaitTimer:
@@ -141,31 +141,31 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// Òì²½µÈ´ıÒ»Ö¡Ê±¼ä¡£
+        /// å¼‚æ­¥ç­‰å¾…ä¸€å¸§æ—¶é—´ã€‚
         /// </summary>
-        /// <returns>µÈ´ıÊÇ·ñ³É¹¦¡£</returns>
+        /// <returns>ç­‰å¾…æ˜¯å¦æˆåŠŸã€‚</returns>
         public async FTask<bool> WaitFrameAsync()
         {
             return await WaitAsync(1);
         }
 
         /// <summary>
-        /// Òì²½µÈ´ıÖ¸¶¨Ê±¼ä¡£
+        /// å¼‚æ­¥ç­‰å¾…æŒ‡å®šæ—¶é—´ã€‚
         /// </summary>
-        /// <param name="time">µÈ´ıµÄÊ±¼ä³¤¶È¡£</param>
-        /// <param name="cancellationToken">¿ÉÑ¡µÄÈ¡ÏûÁîÅÆ¡£</param>
-        /// <returns>µÈ´ıÊÇ·ñ³É¹¦¡£</returns>
+        /// <param name="time">ç­‰å¾…çš„æ—¶é—´é•¿åº¦ã€‚</param>
+        /// <param name="cancellationToken">å¯é€‰çš„å–æ¶ˆä»¤ç‰Œã€‚</param>
+        /// <returns>ç­‰å¾…æ˜¯å¦æˆåŠŸã€‚</returns>
         public async FTask<bool> WaitAsync(long time, FCancellationToken cancellationToken = null)
         {
             return await WaitTillAsync(_now() + time, cancellationToken);
         }
 
         /// <summary>
-        /// Òì²½µÈ´ıÖ±µ½Ö¸¶¨Ê±¼ä¡£
+        /// å¼‚æ­¥ç­‰å¾…ç›´åˆ°æŒ‡å®šæ—¶é—´ã€‚
         /// </summary>
-        /// <param name="tillTime">µÈ´ıµÄÄ¿±êÊ±¼ä¡£</param>
-        /// <param name="cancellationToken">¿ÉÑ¡µÄÈ¡ÏûÁîÅÆ¡£</param>
-        /// <returns>µÈ´ıÊÇ·ñ³É¹¦¡£</returns>
+        /// <param name="tillTime">ç­‰å¾…çš„ç›®æ ‡æ—¶é—´ã€‚</param>
+        /// <param name="cancellationToken">å¯é€‰çš„å–æ¶ˆä»¤ç‰Œã€‚</param>
+        /// <returns>ç­‰å¾…æ˜¯å¦æˆåŠŸã€‚</returns>
         public async FTask<bool> WaitTillAsync(long tillTime, FCancellationToken cancellationToken = null)
         {
             if (_now() > tillTime)
@@ -179,7 +179,7 @@ namespace Fantasy
             timerAction.Callback = tcs;
             timerAction.TimerType = TimerType.OnceWaitTimer;
 
-            // ¶¨ÒåÈ¡Ïû²Ù×÷µÄ·½·¨
+            // å®šä¹‰å–æ¶ˆæ“ä½œçš„æ–¹æ³•
             void CancelActionVoid()
             {
                 if (!_timers.ContainsKey(timerId))
@@ -207,21 +207,21 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸öÔÚÏÂÒ»Ö¡Ö´ĞĞµÄ¼ÆÊ±Æ÷¡£
+        /// åˆ›å»ºä¸€ä¸ªåœ¨ä¸‹ä¸€å¸§æ‰§è¡Œçš„è®¡æ—¶å™¨ã€‚
         /// </summary>
-        /// <param name="action">¼ÆÊ±Æ÷»Øµ÷·½·¨¡£</param>
-        /// <returns>¼ÆÊ±Æ÷µÄ ID¡£</returns>
+        /// <param name="action">è®¡æ—¶å™¨å›è°ƒæ–¹æ³•ã€‚</param>
+        /// <returns>è®¡æ—¶å™¨çš„ IDã€‚</returns>
         public long NewFrameTimer(Action action)
         {
             return RepeatedTimer(100, action);
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸öÖØ¸´Ö´ĞĞµÄ¼ÆÊ±Æ÷¡£
+        /// åˆ›å»ºä¸€ä¸ªé‡å¤æ‰§è¡Œçš„è®¡æ—¶å™¨ã€‚
         /// </summary>
-        /// <param name="time">¼ÆÊ±Æ÷ÖØ¸´¼ä¸ôµÄÊ±¼ä¡£</param>
-        /// <param name="action">¼ÆÊ±Æ÷»Øµ÷·½·¨¡£</param>
-        /// <returns>¼ÆÊ±Æ÷µÄ ID¡£</returns>
+        /// <param name="time">è®¡æ—¶å™¨é‡å¤é—´éš”çš„æ—¶é—´ã€‚</param>
+        /// <param name="action">è®¡æ—¶å™¨å›è°ƒæ–¹æ³•ã€‚</param>
+        /// <returns>è®¡æ—¶å™¨çš„ IDã€‚</returns>
         public long RepeatedTimer(long time, Action action)
         {
             if (time <= 0)
@@ -239,12 +239,12 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸öÖØ¸´Ö´ĞĞµÄ¼ÆÊ±Æ÷£¬ÓÃÓÚ·¢²¼Ö¸¶¨ÀàĞÍµÄÊÂ¼ş¡£
+        /// åˆ›å»ºä¸€ä¸ªé‡å¤æ‰§è¡Œçš„è®¡æ—¶å™¨ï¼Œç”¨äºå‘å¸ƒæŒ‡å®šç±»å‹çš„äº‹ä»¶ã€‚
         /// </summary>
-        /// <typeparam name="T">ÊÂ¼şÀàĞÍ¡£</typeparam>
-        /// <param name="time">¼ÆÊ±Æ÷ÖØ¸´¼ä¸ôµÄÊ±¼ä¡£</param>
-        /// <param name="timerHandlerType">ÊÂ¼ş´¦ÀíÆ÷ÀàĞÍ¡£</param>
-        /// <returns>¼ÆÊ±Æ÷µÄ ID¡£</returns>
+        /// <typeparam name="T">äº‹ä»¶ç±»å‹ã€‚</typeparam>
+        /// <param name="time">è®¡æ—¶å™¨é‡å¤é—´éš”çš„æ—¶é—´ã€‚</param>
+        /// <param name="timerHandlerType">äº‹ä»¶å¤„ç†å™¨ç±»å‹ã€‚</param>
+        /// <returns>è®¡æ—¶å™¨çš„ IDã€‚</returns>
         public long RepeatedTimer<T>(long time, T timerHandlerType) where T : struct
         {
             void RepeatedTimerVoid()
@@ -256,23 +256,23 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸öÖ»Ö´ĞĞÒ»´ÎµÄ¼ÆÊ±Æ÷¡£
+        /// åˆ›å»ºä¸€ä¸ªåªæ‰§è¡Œä¸€æ¬¡çš„è®¡æ—¶å™¨ã€‚
         /// </summary>
-        /// <param name="time">¼ÆÊ±Æ÷Ö´ĞĞµÄÑÓ³ÙÊ±¼ä¡£</param>
-        /// <param name="action">¼ÆÊ±Æ÷»Øµ÷·½·¨¡£</param>
-        /// <returns>¼ÆÊ±Æ÷µÄ ID¡£</returns>
+        /// <param name="time">è®¡æ—¶å™¨æ‰§è¡Œçš„å»¶è¿Ÿæ—¶é—´ã€‚</param>
+        /// <param name="action">è®¡æ—¶å™¨å›è°ƒæ–¹æ³•ã€‚</param>
+        /// <returns>è®¡æ—¶å™¨çš„ IDã€‚</returns>
         public long OnceTimer(long time, Action action)
         {
             return OnceTillTimer(_now() + time, action);
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸öÖ»Ö´ĞĞÒ»´ÎµÄ¼ÆÊ±Æ÷£¬ÓÃÓÚ·¢²¼Ö¸¶¨ÀàĞÍµÄÊÂ¼ş¡£
+        /// åˆ›å»ºä¸€ä¸ªåªæ‰§è¡Œä¸€æ¬¡çš„è®¡æ—¶å™¨ï¼Œç”¨äºå‘å¸ƒæŒ‡å®šç±»å‹çš„äº‹ä»¶ã€‚
         /// </summary>
-        /// <typeparam name="T">ÊÂ¼şÀàĞÍ¡£</typeparam>
-        /// <param name="time">¼ÆÊ±Æ÷Ö´ĞĞµÄÑÓ³ÙÊ±¼ä¡£</param>
-        /// <param name="timerHandlerType">ÊÂ¼ş´¦ÀíÆ÷ÀàĞÍ¡£</param>
-        /// <returns>¼ÆÊ±Æ÷µÄ ID¡£</returns>
+        /// <typeparam name="T">äº‹ä»¶ç±»å‹ã€‚</typeparam>
+        /// <param name="time">è®¡æ—¶å™¨æ‰§è¡Œçš„å»¶è¿Ÿæ—¶é—´ã€‚</param>
+        /// <param name="timerHandlerType">äº‹ä»¶å¤„ç†å™¨ç±»å‹ã€‚</param>
+        /// <returns>è®¡æ—¶å™¨çš„ IDã€‚</returns>
         public long OnceTimer<T>(long time, T timerHandlerType) where T : struct
         {
             void OnceTimerVoid()
@@ -284,11 +284,11 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸öÖ»Ö´ĞĞÒ»´ÎµÄ¼ÆÊ±Æ÷£¬Ö±µ½Ö¸¶¨Ê±¼ä¡£
+        /// åˆ›å»ºä¸€ä¸ªåªæ‰§è¡Œä¸€æ¬¡çš„è®¡æ—¶å™¨ï¼Œç›´åˆ°æŒ‡å®šæ—¶é—´ã€‚
         /// </summary>
-        /// <param name="tillTime">¼ÆÊ±Æ÷Ö´ĞĞµÄÄ¿±êÊ±¼ä¡£</param>
-        /// <param name="action">¼ÆÊ±Æ÷»Øµ÷·½·¨¡£</param>
-        /// <returns>¼ÆÊ±Æ÷µÄ ID¡£</returns>
+        /// <param name="tillTime">è®¡æ—¶å™¨æ‰§è¡Œçš„ç›®æ ‡æ—¶é—´ã€‚</param>
+        /// <param name="action">è®¡æ—¶å™¨å›è°ƒæ–¹æ³•ã€‚</param>
+        /// <returns>è®¡æ—¶å™¨çš„ IDã€‚</returns>
         public long OnceTillTimer(long tillTime, Action action)
         {
             if (tillTime < _now())
@@ -304,12 +304,12 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸öÖ»Ö´ĞĞÒ»´ÎµÄ¼ÆÊ±Æ÷£¬Ö±µ½Ö¸¶¨Ê±¼ä£¬ÓÃÓÚ·¢²¼Ö¸¶¨ÀàĞÍµÄÊÂ¼ş¡£
+        /// åˆ›å»ºä¸€ä¸ªåªæ‰§è¡Œä¸€æ¬¡çš„è®¡æ—¶å™¨ï¼Œç›´åˆ°æŒ‡å®šæ—¶é—´ï¼Œç”¨äºå‘å¸ƒæŒ‡å®šç±»å‹çš„äº‹ä»¶ã€‚
         /// </summary>
-        /// <typeparam name="T">ÊÂ¼şÀàĞÍ¡£</typeparam>
-        /// <param name="tillTime">¼ÆÊ±Æ÷Ö´ĞĞµÄÄ¿±êÊ±¼ä¡£</param>
-        /// <param name="timerHandlerType">ÊÂ¼ş´¦ÀíÆ÷ÀàĞÍ¡£</param>
-        /// <returns>¼ÆÊ±Æ÷µÄ ID¡£</returns>
+        /// <typeparam name="T">äº‹ä»¶ç±»å‹ã€‚</typeparam>
+        /// <param name="tillTime">è®¡æ—¶å™¨æ‰§è¡Œçš„ç›®æ ‡æ—¶é—´ã€‚</param>
+        /// <param name="timerHandlerType">äº‹ä»¶å¤„ç†å™¨ç±»å‹ã€‚</param>
+        /// <returns>è®¡æ—¶å™¨çš„ IDã€‚</returns>
         public long OnceTillTimer<T>(long tillTime, T timerHandlerType) where T : struct
         {
             void OnceTillTimerVoid()
@@ -321,9 +321,9 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// Í¨¹ıÒıÓÃÒÆ³ı¼ÆÊ±Æ÷¡£
+        /// é€šè¿‡å¼•ç”¨ç§»é™¤è®¡æ—¶å™¨ã€‚
         /// </summary>
-        /// <param name="id">¼ÆÊ±Æ÷µÄ ID¡£</param>
+        /// <param name="id">è®¡æ—¶å™¨çš„ IDã€‚</param>
         public void RemoveByRef(ref long id)
         {
             Remove(id);
@@ -331,9 +331,9 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ÒÆ³ıÖ¸¶¨ ID µÄ¼ÆÊ±Æ÷¡£
+        /// ç§»é™¤æŒ‡å®š ID çš„è®¡æ—¶å™¨ã€‚
         /// </summary>
-        /// <param name="id">¼ÆÊ±Æ÷µÄ ID¡£</param>
+        /// <param name="id">è®¡æ—¶å™¨çš„ IDã€‚</param>
         public void Remove(long id)
         {
             if (id == 0 || !_timers.Remove(id, out var timer))

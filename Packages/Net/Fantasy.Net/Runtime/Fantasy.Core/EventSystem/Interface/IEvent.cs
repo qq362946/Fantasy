@@ -3,67 +3,67 @@ using System;
 namespace Fantasy
 {
     /// <summary>
-    /// ¶¨ÒåÊÂ¼şµÄ½Ó¿Ú¡£
+    /// å®šä¹‰äº‹ä»¶çš„æ¥å£ã€‚
     /// </summary>
     public interface IEvent
     {
         /// <summary>
-        /// »ñÈ¡ÊÂ¼şµÄÀàĞÍ¡£
+        /// è·å–äº‹ä»¶çš„ç±»å‹ã€‚
         /// </summary>
-        /// <returns>ÊÂ¼şµÄÀàĞÍ¡£</returns>
+        /// <returns>äº‹ä»¶çš„ç±»å‹ã€‚</returns>
         Type EventType();
         /// <summary>
-        /// µ÷ÓÃÊÂ¼ş´¦Àí·½·¨¡£
+        /// è°ƒç”¨äº‹ä»¶å¤„ç†æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="self">ÊÂ¼şµÄÊµÀı¡£</param>
+        /// <param name="self">äº‹ä»¶çš„å®ä¾‹ã€‚</param>
         void Invoke(object self);
     }
 
     /// <summary>
-    /// ¶¨ÒåÒì²½ÊÂ¼şµÄ½Ó¿Ú¡£
+    /// å®šä¹‰å¼‚æ­¥äº‹ä»¶çš„æ¥å£ã€‚
     /// </summary>
     public interface IAsyncEvent
     {
         /// <summary>
-        /// »ñÈ¡ÊÂ¼şµÄÀàĞÍ¡£
+        /// è·å–äº‹ä»¶çš„ç±»å‹ã€‚
         /// </summary>
-        /// <returns>ÊÂ¼şµÄÀàĞÍ¡£</returns>
+        /// <returns>äº‹ä»¶çš„ç±»å‹ã€‚</returns>
         Type EventType();
         /// <summary>
-        /// Òì²½µ÷ÓÃÊÂ¼ş´¦Àí·½·¨¡£
+        /// å¼‚æ­¥è°ƒç”¨äº‹ä»¶å¤„ç†æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="self">ÊÂ¼şµÄÊµÀı¡£</param>
-        /// <returns>±íÊ¾Òì²½²Ù×÷µÄÈÎÎñ¡£</returns>
+        /// <param name="self">äº‹ä»¶çš„å®ä¾‹ã€‚</param>
+        /// <returns>è¡¨ç¤ºå¼‚æ­¥æ“ä½œçš„ä»»åŠ¡ã€‚</returns>
         FTask InvokeAsync(object self);
     }
 
     /// <summary>
-    /// ÊÂ¼şÏµÍ³µÄ³éÏó»ùÀà¡£
+    /// äº‹ä»¶ç³»ç»Ÿçš„æŠ½è±¡åŸºç±»ã€‚
     /// </summary>
-    /// <typeparam name="T">ÊÂ¼şµÄÀàĞÍ¡£</typeparam>
+    /// <typeparam name="T">äº‹ä»¶çš„ç±»å‹ã€‚</typeparam>
     public abstract class EventSystem<T> : IEvent
     {
         private readonly Type _selfType = typeof(T);
 
         /// <summary>
-        /// »ñÈ¡ÊÂ¼şµÄÀàĞÍ¡£
+        /// è·å–äº‹ä»¶çš„ç±»å‹ã€‚
         /// </summary>
-        /// <returns>ÊÂ¼şµÄÀàĞÍ¡£</returns>
+        /// <returns>äº‹ä»¶çš„ç±»å‹ã€‚</returns>
         public Type EventType()
         {
             return _selfType;
         }
 
         /// <summary>
-        /// Í¬²½´¦ÀíÊÂ¼şµÄ·½·¨¡£
+        /// åŒæ­¥å¤„ç†äº‹ä»¶çš„æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="self">ÊÂ¼şµÄÊµÀı¡£</param>
+        /// <param name="self">äº‹ä»¶çš„å®ä¾‹ã€‚</param>
         public abstract void Handler(T self);
 
         /// <summary>
-        /// µ÷ÓÃÊÂ¼ş´¦Àí·½·¨¡£
+        /// è°ƒç”¨äº‹ä»¶å¤„ç†æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="self">ÊÂ¼şµÄÊµÀı¡£</param>
+        /// <param name="self">äº‹ä»¶çš„å®ä¾‹ã€‚</param>
         public void Invoke(object self)
         {
             try
@@ -78,34 +78,34 @@ namespace Fantasy
     }
 
     /// <summary>
-    /// Òì²½ÊÂ¼şÏµÍ³µÄ³éÏó»ùÀà¡£
+    /// å¼‚æ­¥äº‹ä»¶ç³»ç»Ÿçš„æŠ½è±¡åŸºç±»ã€‚
     /// </summary>
-    /// <typeparam name="T">ÊÂ¼şµÄÀàĞÍ¡£</typeparam>
+    /// <typeparam name="T">äº‹ä»¶çš„ç±»å‹ã€‚</typeparam>
     public abstract class AsyncEventSystem<T> : IAsyncEvent
     {
         private readonly Type _selfType = typeof(T);
 
         /// <summary>
-        /// »ñÈ¡ÊÂ¼şµÄÀàĞÍ¡£
+        /// è·å–äº‹ä»¶çš„ç±»å‹ã€‚
         /// </summary>
-        /// <returns>ÊÂ¼şµÄÀàĞÍ¡£</returns>
+        /// <returns>äº‹ä»¶çš„ç±»å‹ã€‚</returns>
         public Type EventType()
         {
             return _selfType;
         }
 
         /// <summary>
-        /// Òì²½´¦ÀíÊÂ¼şµÄ·½·¨¡£
+        /// å¼‚æ­¥å¤„ç†äº‹ä»¶çš„æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="self">ÊÂ¼şµÄÊµÀı¡£</param>
-        /// <returns>±íÊ¾Òì²½²Ù×÷µÄÈÎÎñ¡£</returns>
+        /// <param name="self">äº‹ä»¶çš„å®ä¾‹ã€‚</param>
+        /// <returns>è¡¨ç¤ºå¼‚æ­¥æ“ä½œçš„ä»»åŠ¡ã€‚</returns>
         public abstract FTask Handler(T self);
 
         /// <summary>
-        /// Òì²½µ÷ÓÃÊÂ¼ş´¦Àí·½·¨¡£
+        /// å¼‚æ­¥è°ƒç”¨äº‹ä»¶å¤„ç†æ–¹æ³•ã€‚
         /// </summary>
-        /// <param name="self">ÊÂ¼şµÄÊµÀı¡£</param>
-        /// <returns>±íÊ¾Òì²½²Ù×÷µÄÈÎÎñ¡£</returns>
+        /// <param name="self">äº‹ä»¶çš„å®ä¾‹ã€‚</param>
+        /// <returns>è¡¨ç¤ºå¼‚æ­¥æ“ä½œçš„ä»»åŠ¡ã€‚</returns>
         public async FTask InvokeAsync(object self)
         {
             try

@@ -21,7 +21,7 @@ namespace Fantasy
     }
 
     /// <summary>
-    /// ÊÂ¼şÏµÍ³Àà£¬ÓÃÓÚ¼ÓĞ¶ÔØ³ÌĞò¼¯£¬·¢²¼ºÍ¶©ÔÄÊÂ¼ş¡£
+    /// äº‹ä»¶ç³»ç»Ÿç±»ï¼Œç”¨äºåŠ å¸è½½ç¨‹åºé›†ï¼Œå‘å¸ƒå’Œè®¢é˜…äº‹ä»¶ã€‚
     /// </summary>
     public sealed class EventSystem : Singleton<EventSystem>
     {
@@ -32,9 +32,9 @@ namespace Fantasy
         private readonly OneToManyList<int, EventInfo> _assemblyAsyncEvents = new();
 
         /// <summary>
-        /// ÔÚ³ÌĞò¼¯¼ÓÔØÊ±£¬±éÀúÑ°ÕÒ²¢³õÊ¼»¯ÊÂ¼ş¡£
+        /// åœ¨ç¨‹åºé›†åŠ è½½æ—¶ï¼Œéå†å¯»æ‰¾å¹¶åˆå§‹åŒ–äº‹ä»¶ã€‚
         /// </summary>
-        /// <param name="assemblyName">³ÌĞò¼¯Ãû</param>
+        /// <param name="assemblyName">ç¨‹åºé›†å</param>
         protected override void OnLoad(int assemblyName)
         {
             foreach (var type in AssemblyManager.ForEach(assemblyName, typeof(IEvent)))
@@ -63,9 +63,9 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ÔÚ³ÌĞò¼¯Ğ¶ÔØÊ±£¬ÒÆ³ıÏà¹ØÊÂ¼ş¡£
+        /// åœ¨ç¨‹åºé›†å¸è½½æ—¶ï¼Œç§»é™¤ç›¸å…³äº‹ä»¶ã€‚
         /// </summary>
-        /// <param name="assemblyName">³ÌĞò¼¯Ãû</param>
+        /// <param name="assemblyName">ç¨‹åºé›†å</param>
         protected override void OnUnLoad(int assemblyName)
         {
             if (_assemblyEvents.TryGetValue(assemblyName, out var events))
@@ -90,10 +90,10 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ·¢²¼Ò»¸öÖµÀàĞÍµÄÊÂ¼şÊı¾İ¡£
+        /// å‘å¸ƒä¸€ä¸ªå€¼ç±»å‹çš„äº‹ä»¶æ•°æ®ã€‚
         /// </summary>
-        /// <typeparam name="TEventData">ÊÂ¼şÊı¾İÀàĞÍ£¨ÖµÀàĞÍ£©¡£</typeparam>
-        /// <param name="eventData">ÊÂ¼şÊı¾İÊµÀı¡£</param>
+        /// <typeparam name="TEventData">äº‹ä»¶æ•°æ®ç±»å‹ï¼ˆå€¼ç±»å‹ï¼‰ã€‚</typeparam>
+        /// <param name="eventData">äº‹ä»¶æ•°æ®å®ä¾‹ã€‚</param>
         public void Publish<TEventData>(TEventData eventData) where TEventData : struct
         {
             if (!_events.TryGetValue(eventData.GetType(), out var list))
@@ -115,11 +115,11 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ·¢²¼Ò»¸ö¼Ì³Ğ×Ô Entity µÄÊÂ¼şÊı¾İ¡£
+        /// å‘å¸ƒä¸€ä¸ªç»§æ‰¿è‡ª Entity çš„äº‹ä»¶æ•°æ®ã€‚
         /// </summary>
-        /// <typeparam name="TEventData">ÊÂ¼şÊı¾İÀàĞÍ£¨¼Ì³Ğ×Ô Entity£©¡£</typeparam>
-        /// <param name="eventData">ÊÂ¼şÊı¾İÊµÀı¡£</param>
-        /// <param name="isDisposed">ÊÇ·ñÊÍ·ÅÊÂ¼şÊı¾İ¡£</param>
+        /// <typeparam name="TEventData">äº‹ä»¶æ•°æ®ç±»å‹ï¼ˆç»§æ‰¿è‡ª Entityï¼‰ã€‚</typeparam>
+        /// <param name="eventData">äº‹ä»¶æ•°æ®å®ä¾‹ã€‚</param>
+        /// <param name="isDisposed">æ˜¯å¦é‡Šæ”¾äº‹ä»¶æ•°æ®ã€‚</param>
         public void Publish<TEventData>(TEventData eventData, bool isDisposed = true) where TEventData : Entity
         {
             if (!_events.TryGetValue(typeof(TEventData), out var list))
@@ -146,11 +146,11 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// Òì²½·¢²¼Ò»¸öÖµÀàĞÍµÄÊÂ¼şÊı¾İ¡£
+        /// å¼‚æ­¥å‘å¸ƒä¸€ä¸ªå€¼ç±»å‹çš„äº‹ä»¶æ•°æ®ã€‚
         /// </summary>
-        /// <typeparam name="TEventData">ÊÂ¼şÊı¾İÀàĞÍ£¨ÖµÀàĞÍ£©¡£</typeparam>
-        /// <param name="eventData">ÊÂ¼şÊı¾İÊµÀı¡£</param>
-        /// <returns>±íÊ¾Òì²½²Ù×÷µÄÈÎÎñ¡£</returns>
+        /// <typeparam name="TEventData">äº‹ä»¶æ•°æ®ç±»å‹ï¼ˆå€¼ç±»å‹ï¼‰ã€‚</typeparam>
+        /// <param name="eventData">äº‹ä»¶æ•°æ®å®ä¾‹ã€‚</param>
+        /// <returns>è¡¨ç¤ºå¼‚æ­¥æ“ä½œçš„ä»»åŠ¡ã€‚</returns>
         public async FTask PublishAsync<TEventData>(TEventData eventData) where TEventData : struct
         {
             if (!_asyncEvents.TryGetValue(eventData.GetType(), out var list))
@@ -169,12 +169,12 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// Òì²½·¢²¼Ò»¸ö¼Ì³Ğ×Ô Entity µÄÊÂ¼şÊı¾İ¡£
+        /// å¼‚æ­¥å‘å¸ƒä¸€ä¸ªç»§æ‰¿è‡ª Entity çš„äº‹ä»¶æ•°æ®ã€‚
         /// </summary>
-        /// <typeparam name="TEventData">ÊÂ¼şÊı¾İÀàĞÍ£¨¼Ì³Ğ×Ô Entity£©¡£</typeparam>
-        /// <param name="eventData">ÊÂ¼şÊı¾İÊµÀı¡£</param>
-        /// <param name="isDisposed">ÊÇ·ñÊÍ·ÅÊÂ¼şÊı¾İ¡£</param>
-        /// <returns>±íÊ¾Òì²½²Ù×÷µÄÈÎÎñ¡£</returns>
+        /// <typeparam name="TEventData">äº‹ä»¶æ•°æ®ç±»å‹ï¼ˆç»§æ‰¿è‡ª Entityï¼‰ã€‚</typeparam>
+        /// <param name="eventData">äº‹ä»¶æ•°æ®å®ä¾‹ã€‚</param>
+        /// <param name="isDisposed">æ˜¯å¦é‡Šæ”¾äº‹ä»¶æ•°æ®ã€‚</param>
+        /// <returns>è¡¨ç¤ºå¼‚æ­¥æ“ä½œçš„ä»»åŠ¡ã€‚</returns>
         public async FTask PublishAsync<TEventData>(TEventData eventData, bool isDisposed = true) where TEventData : Entity
         {
             if (!_asyncEvents.TryGetValue(eventData.GetType(), out var list))
@@ -198,7 +198,7 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ÇåÀí×ÊÔ´ºÍÊÂ¼ş¶©ÔÄ
+        /// æ¸…ç†èµ„æºå’Œäº‹ä»¶è®¢é˜…
         /// </summary>
         public override void Dispose()
         {

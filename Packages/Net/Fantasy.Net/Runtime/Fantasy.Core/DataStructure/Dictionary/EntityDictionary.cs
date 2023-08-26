@@ -4,18 +4,18 @@ using System.Collections.Generic;
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// Ìá¹©Ò»¸ö´ø×ÊÔ´ÊÍ·Å¹¦ÄÜµÄÊµÌå×ÖµäÀà£¬Ö§³ÖÊ¹ÓÃ¶ÔÏó³Ø¹ÜÀí¡£
+    /// æä¾›ä¸€ä¸ªå¸¦èµ„æºé‡Šæ”¾åŠŸèƒ½çš„å®ä½“å­—å…¸ç±»ï¼Œæ”¯æŒä½¿ç”¨å¯¹è±¡æ± ç®¡ç†ã€‚
     /// </summary>
-    /// <typeparam name="TM">×ÖµäÖĞ¼üµÄÀàĞÍ¡£</typeparam>
-    /// <typeparam name="TN">×ÖµäÖĞÖµµÄÀàĞÍ£¬±ØĞëÊµÏÖ IDisposable ½Ó¿Ú¡£</typeparam>
+    /// <typeparam name="TM">å­—å…¸ä¸­é”®çš„ç±»å‹ã€‚</typeparam>
+    /// <typeparam name="TN">å­—å…¸ä¸­å€¼çš„ç±»å‹ï¼Œå¿…é¡»å®ç° IDisposable æ¥å£ã€‚</typeparam>
     public sealed class EntityDictionary<TM, TN> : Dictionary<TM, TN>, IDisposable where TN : IDisposable where TM : notnull
     {
         private bool _isDispose;
 
         /// <summary>
-        /// ´´½¨Ò»¸öĞÂµÄ <see cref="EntityDictionary{TM, TN}"/> ÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ªæ–°çš„ <see cref="EntityDictionary{TM, TN}"/> å®ä¾‹ã€‚
         /// </summary>
-        /// <returns>ĞÂ´´½¨µÄÊµÀı¡£</returns>
+        /// <returns>æ–°åˆ›å»ºçš„å®ä¾‹ã€‚</returns>
         public static EntityDictionary<TM, TN> Create()
         {
             var entityDictionary = Pool<EntityDictionary<TM, TN>>.Rent();
@@ -24,7 +24,7 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// Çå¿Õ×ÖµäÖĞµÄËùÓĞ¼üÖµ¶Ô£¬²¢ÊÍ·ÅÖµµÄ×ÊÔ´¡£
+        /// æ¸…ç©ºå­—å…¸ä¸­çš„æ‰€æœ‰é”®å€¼å¯¹ï¼Œå¹¶é‡Šæ”¾å€¼çš„èµ„æºã€‚
         /// </summary>
         public new void Clear()
         {
@@ -37,7 +37,7 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// Çå¿Õ×ÖµäÖĞµÄËùÓĞ¼üÖµ¶Ô£¬µ«²»ÊÍ·ÅÖµµÄ×ÊÔ´¡£
+        /// æ¸…ç©ºå­—å…¸ä¸­çš„æ‰€æœ‰é”®å€¼å¯¹ï¼Œä½†ä¸é‡Šæ”¾å€¼çš„èµ„æºã€‚
         /// </summary>
         public void ClearNotDispose()
         {
@@ -45,7 +45,7 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ÊÍ·ÅÊµÀıÕ¼ÓÃµÄ×ÊÔ´¡£
+        /// é‡Šæ”¾å®ä¾‹å ç”¨çš„èµ„æºã€‚
         /// </summary>
         public void Dispose()
         {

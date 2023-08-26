@@ -4,15 +4,15 @@ using System.Collections.Generic;
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// ¿ÉÊÍ·ÅµÄÁĞ±í£¨List£©¶ÔÏó³Ø¡£
+    /// å¯é‡Šæ”¾çš„åˆ—è¡¨ï¼ˆListï¼‰å¯¹è±¡æ± ã€‚
     /// </summary>
-    /// <typeparam name="T">ÁĞ±íÖĞÔªËØµÄÀàĞÍ¡£</typeparam>
+    /// <typeparam name="T">åˆ—è¡¨ä¸­å…ƒç´ çš„ç±»å‹ã€‚</typeparam>
     public sealed class ListPool<T> : List<T>, IDisposable
     {
         private bool _isDispose;
 
         /// <summary>
-        /// ÊÍ·ÅÊµÀıËùÕ¼ÓÃµÄ×ÊÔ´£¬²¢½«ÊµÀı·µ»Øµ½¶ÔÏó³ØÖĞ£¬ÒÔ±ãÖØÓÃ¡£
+        /// é‡Šæ”¾å®ä¾‹æ‰€å ç”¨çš„èµ„æºï¼Œå¹¶å°†å®ä¾‹è¿”å›åˆ°å¯¹è±¡æ± ä¸­ï¼Œä»¥ä¾¿é‡ç”¨ã€‚
         /// </summary>
         public void Dispose()
         {
@@ -27,10 +27,10 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// Ê¹ÓÃÖ¸¶¨µÄÔªËØ´´½¨Ò»¸ö <see cref="ListPool{T}"/> ÁĞ±í£¨List£©¶ÔÏó³ØµÄÊµÀı¡£
+        /// ä½¿ç”¨æŒ‡å®šçš„å…ƒç´ åˆ›å»ºä¸€ä¸ª <see cref="ListPool{T}"/> åˆ—è¡¨ï¼ˆListï¼‰å¯¹è±¡æ± çš„å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="args">ÒªÌí¼Óµ½ÁĞ±íµÄÔªËØ¡£</param>
-        /// <returns>´´½¨µÄÊµÀı¡£</returns>
+        /// <param name="args">è¦æ·»åŠ åˆ°åˆ—è¡¨çš„å…ƒç´ ã€‚</param>
+        /// <returns>åˆ›å»ºçš„å®ä¾‹ã€‚</returns>
         public static ListPool<T> Create(params T[] args)
         {
             var list = Pool<ListPool<T>>.Rent();
@@ -40,10 +40,10 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// Ê¹ÓÃÖ¸¶¨µÄÁĞ±í´´½¨Ò»¸ö <see cref="ListPool{T}"/> ÁĞ±í£¨List£©¶ÔÏó³ØµÄÊµÀı¡£
+        /// ä½¿ç”¨æŒ‡å®šçš„åˆ—è¡¨åˆ›å»ºä¸€ä¸ª <see cref="ListPool{T}"/> åˆ—è¡¨ï¼ˆListï¼‰å¯¹è±¡æ± çš„å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="args">ÒªÌí¼Óµ½ÁĞ±íµÄÔªËØÁĞ±í¡£</param>
-        /// <returns>´´½¨µÄÊµÀı¡£</returns>
+        /// <param name="args">è¦æ·»åŠ åˆ°åˆ—è¡¨çš„å…ƒç´ åˆ—è¡¨ã€‚</param>
+        /// <returns>åˆ›å»ºçš„å®ä¾‹ã€‚</returns>
         public static ListPool<T> Create(List<T> args)
         {
             var list = Pool<ListPool<T>>.Rent();

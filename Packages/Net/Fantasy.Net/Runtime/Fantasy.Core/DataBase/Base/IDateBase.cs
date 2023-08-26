@@ -5,157 +5,157 @@ using System.Linq.Expressions;
 namespace Fantasy.Core.DataBase;
 
 /// <summary>
-/// ±íÊ¾ÓÃÓÚÖ´ĞĞ¸÷ÖÖÊı¾İ¿â²Ù×÷µÄÊı¾İ¿â½Ó¿Ú¡£
+/// è¡¨ç¤ºç”¨äºæ‰§è¡Œå„ç§æ•°æ®åº“æ“ä½œçš„æ•°æ®åº“æ¥å£ã€‚
 /// </summary>
 public interface IDateBase
 {
     /// <summary>
-    /// ¿ØÖÆÊı¾İ¿â·ÃÎÊ²¢·¢ĞÔµÄËø¶ÓÁĞÀàĞÍ¡£
+    /// æ§åˆ¶æ•°æ®åº“è®¿é—®å¹¶å‘æ€§çš„é”é˜Ÿåˆ—ç±»å‹ã€‚
     /// </summary>
     public static readonly CoroutineLockQueueType DataBaseLock = new CoroutineLockQueueType("DataBaseLock");
 
     /// <summary>
-    /// ³õÊ¼»¯Êı¾İ¿âÁ¬½Ó¡£
+    /// åˆå§‹åŒ–æ•°æ®åº“è¿æ¥ã€‚
     /// </summary>
     IDateBase Initialize(string connectionString, string dbName);
     /// <summary>
-    /// ÔÚÖ¸¶¨µÄ¼¯ºÏÖĞ¼ìË÷ÀàĞÍ <typeparamref name="T"/> µÄÊµÌåÊıÁ¿¡£
+    /// åœ¨æŒ‡å®šçš„é›†åˆä¸­æ£€ç´¢ç±»å‹ <typeparamref name="T"/> çš„å®ä½“æ•°é‡ã€‚
     /// </summary>
     FTask<long> Count<T>(string collection = null) where T : Entity;
     /// <summary>
-    /// ÔÚÖ¸¶¨µÄ¼¯ºÏÖĞ¼ìË÷Âú×ã¸ø¶¨É¸Ñ¡Ìõ¼şµÄÀàĞÍ <typeparamref name="T"/> µÄÊµÌåÊıÁ¿¡£
+    /// åœ¨æŒ‡å®šçš„é›†åˆä¸­æ£€ç´¢æ»¡è¶³ç»™å®šç­›é€‰æ¡ä»¶çš„ç±»å‹ <typeparamref name="T"/> çš„å®ä½“æ•°é‡ã€‚
     /// </summary>
     FTask<long> Count<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity;
     /// <summary>
-    /// ¼ì²éÖ¸¶¨¼¯ºÏÖĞÊÇ·ñ´æÔÚÀàĞÍ <typeparamref name="T"/> µÄÊµÌå¡£
+    /// æ£€æŸ¥æŒ‡å®šé›†åˆä¸­æ˜¯å¦å­˜åœ¨ç±»å‹ <typeparamref name="T"/> çš„å®ä½“ã€‚
     /// </summary>
     FTask<bool> Exist<T>(string collection = null) where T : Entity;
     /// <summary>
-    /// ¼ì²éÖ¸¶¨¼¯ºÏÖĞÊÇ·ñ´æÔÚÂú×ã¸ø¶¨É¸Ñ¡Ìõ¼şµÄÀàĞÍ <typeparamref name="T"/> µÄÊµÌå¡£
+    /// æ£€æŸ¥æŒ‡å®šé›†åˆä¸­æ˜¯å¦å­˜åœ¨æ»¡è¶³ç»™å®šç­›é€‰æ¡ä»¶çš„ç±»å‹ <typeparamref name="T"/> çš„å®ä½“ã€‚
     /// </summary>
     FTask<bool> Exist<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity;
     /// <summary>
-    /// ´ÓÖ¸¶¨¼¯ºÏÖĞ¼ìË÷Ö¸¶¨ ID µÄÀàĞÍ <typeparamref name="T"/> µÄÊµÌå£¬²»Ëø¶¨¡£
+    /// ä»æŒ‡å®šé›†åˆä¸­æ£€ç´¢æŒ‡å®š ID çš„ç±»å‹ <typeparamref name="T"/> çš„å®ä½“ï¼Œä¸é”å®šã€‚
     /// </summary>
     FTask<T> QueryNotLock<T>(long id, string collection = null) where T : Entity;
     /// <summary>
-    /// ´ÓÖ¸¶¨¼¯ºÏÖĞ¼ìË÷Ö¸¶¨ ID µÄÀàĞÍ <typeparamref name="T"/> µÄÊµÌå¡£
+    /// ä»æŒ‡å®šé›†åˆä¸­æ£€ç´¢æŒ‡å®š ID çš„ç±»å‹ <typeparamref name="T"/> çš„å®ä½“ã€‚
     /// </summary>
     FTask<T> Query<T>(long id, string collection = null) where T : Entity;
     /// <summary>
-    /// °´Ò³²éÑ¯Âú×ã¸ø¶¨É¸Ñ¡Ìõ¼şµÄÀàĞÍ <typeparamref name="T"/> µÄÊµÌåÊıÁ¿ºÍÈÕÆÚ¡£
+    /// æŒ‰é¡µæŸ¥è¯¢æ»¡è¶³ç»™å®šç­›é€‰æ¡ä»¶çš„ç±»å‹ <typeparamref name="T"/> çš„å®ä½“æ•°é‡å’Œæ—¥æœŸã€‚
     /// </summary>
     FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity;
     /// <summary>
-    /// °´Ò³²éÑ¯Âú×ã¸ø¶¨É¸Ñ¡Ìõ¼şµÄÀàĞÍ <typeparamref name="T"/> µÄÊµÌåÊıÁ¿ºÍÈÕÆÚ¡£
+    /// æŒ‰é¡µæŸ¥è¯¢æ»¡è¶³ç»™å®šç­›é€‰æ¡ä»¶çš„ç±»å‹ <typeparamref name="T"/> çš„å®ä½“æ•°é‡å’Œæ—¥æœŸã€‚
     /// </summary>
     FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity;
     /// <summary>
-    /// ·ÖÒ³²éÑ¯Ö¸¶¨¼¯ºÏÖĞÂú×ã¸ø¶¨É¸Ñ¡Ìõ¼şµÄÀàĞÍ <typeparamref name="T"/> µÄÊµÌåÁĞ±í¡£
+    /// åˆ†é¡µæŸ¥è¯¢æŒ‡å®šé›†åˆä¸­æ»¡è¶³ç»™å®šç­›é€‰æ¡ä»¶çš„ç±»å‹ <typeparamref name="T"/> çš„å®ä½“åˆ—è¡¨ã€‚
     /// </summary>
     FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity;
     /// <summary>
-    /// ·ÖÒ³²éÑ¯Ö¸¶¨¼¯ºÏÖĞÂú×ã¸ø¶¨É¸Ñ¡Ìõ¼şµÄÀàĞÍ <typeparamref name="T"/> µÄÊµÌåÁĞ±í£¬½ö·µ»ØÖ¸¶¨ÁĞµÄÊı¾İ¡£
+    /// åˆ†é¡µæŸ¥è¯¢æŒ‡å®šé›†åˆä¸­æ»¡è¶³ç»™å®šç­›é€‰æ¡ä»¶çš„ç±»å‹ <typeparamref name="T"/> çš„å®ä½“åˆ—è¡¨ï¼Œä»…è¿”å›æŒ‡å®šåˆ—çš„æ•°æ®ã€‚
     /// </summary>
     FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity;
     /// <summary>
-    /// ´ÓÖ¸¶¨¼¯ºÏÖĞ°´Ò³²éÑ¯Âú×ã¸ø¶¨É¸Ñ¡Ìõ¼şµÄÀàĞÍ <typeparamref name="T"/> µÄÊµÌåÁĞ±í£¬°´Ö¸¶¨×Ö¶ÎÅÅĞò¡£
+    /// ä»æŒ‡å®šé›†åˆä¸­æŒ‰é¡µæŸ¥è¯¢æ»¡è¶³ç»™å®šç­›é€‰æ¡ä»¶çš„ç±»å‹ <typeparamref name="T"/> çš„å®ä½“åˆ—è¡¨ï¼ŒæŒ‰æŒ‡å®šå­—æ®µæ’åºã€‚
     /// </summary>
     FTask<List<T>> QueryByPageOrderBy<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity;
     /// <summary>
-    /// ¼ìË÷Âú×ã¸ø¶¨É¸Ñ¡Ìõ¼şµÄÀàĞÍ <typeparamref name="T"/> µÄµÚÒ»¸öÊµÌå£¬´ÓÖ¸¶¨¼¯ºÏÖĞ¡£
+    /// æ£€ç´¢æ»¡è¶³ç»™å®šç­›é€‰æ¡ä»¶çš„ç±»å‹ <typeparamref name="T"/> çš„ç¬¬ä¸€ä¸ªå®ä½“ï¼Œä»æŒ‡å®šé›†åˆä¸­ã€‚
     /// </summary>
     FTask<T?> First<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity;
     /// <summary>
-    /// ²éÑ¯Ö¸¶¨¼¯ºÏÖĞÂú×ã¸ø¶¨ JSON ²éÑ¯×Ö·û´®µÄÀàĞÍ <typeparamref name="T"/> µÄµÚÒ»¸öÊµÌå£¬½ö·µ»ØÖ¸¶¨ÁĞµÄÊı¾İ¡£
+    /// æŸ¥è¯¢æŒ‡å®šé›†åˆä¸­æ»¡è¶³ç»™å®š JSON æŸ¥è¯¢å­—ç¬¦ä¸²çš„ç±»å‹ <typeparamref name="T"/> çš„ç¬¬ä¸€ä¸ªå®ä½“ï¼Œä»…è¿”å›æŒ‡å®šåˆ—çš„æ•°æ®ã€‚
     /// </summary>
     FTask<T> First<T>(string json, string[] cols, string collection = null) where T : Entity;
     /// <summary>
-    /// ´ÓÖ¸¶¨¼¯ºÏÖĞ°´Ò³²éÑ¯Âú×ã¸ø¶¨É¸Ñ¡Ìõ¼şµÄÀàĞÍ <typeparamref name="T"/> µÄÊµÌåÁĞ±í£¬°´Ö¸¶¨×Ö¶ÎÅÅĞò¡£
+    /// ä»æŒ‡å®šé›†åˆä¸­æŒ‰é¡µæŸ¥è¯¢æ»¡è¶³ç»™å®šç­›é€‰æ¡ä»¶çš„ç±»å‹ <typeparamref name="T"/> çš„å®ä½“åˆ—è¡¨ï¼ŒæŒ‰æŒ‡å®šå­—æ®µæ’åºã€‚
     /// </summary>
     FTask<List<T>> QueryOrderBy<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity;
     /// <summary>
-    /// ´ÓÖ¸¶¨¼¯ºÏÖĞ°´Ò³²éÑ¯Âú×ã¸ø¶¨É¸Ñ¡Ìõ¼şµÄÀàĞÍ <typeparamref name="T"/> µÄÊµÌåÁĞ±í¡£
+    /// ä»æŒ‡å®šé›†åˆä¸­æŒ‰é¡µæŸ¥è¯¢æ»¡è¶³ç»™å®šç­›é€‰æ¡ä»¶çš„ç±»å‹ <typeparamref name="T"/> çš„å®ä½“åˆ—è¡¨ã€‚
     /// </summary>
     FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity;
     /// <summary>
-    /// ²éÑ¯Ö¸¶¨ ID µÄ¶à¸ö¼¯ºÏ£¬½«½á¹û´æ´¢ÔÚ¸ø¶¨µÄÊµÌåÁĞ±íÖĞ¡£
+    /// æŸ¥è¯¢æŒ‡å®š ID çš„å¤šä¸ªé›†åˆï¼Œå°†ç»“æœå­˜å‚¨åœ¨ç»™å®šçš„å®ä½“åˆ—è¡¨ä¸­ã€‚
     /// </summary>
     FTask Query(long id, List<string> collectionNames, List<Entity> result);
     /// <summary>
-    /// ¸ù¾İ¸ø¶¨µÄ JSON ²éÑ¯×Ö·û´®²éÑ¯Ö¸¶¨¼¯ºÏÖĞµÄÀàĞÍ <typeparamref name="T"/> ÊµÌåÁĞ±í¡£
+    /// æ ¹æ®ç»™å®šçš„ JSON æŸ¥è¯¢å­—ç¬¦ä¸²æŸ¥è¯¢æŒ‡å®šé›†åˆä¸­çš„ç±»å‹ <typeparamref name="T"/> å®ä½“åˆ—è¡¨ã€‚
     /// </summary>
     FTask<List<T>> QueryJson<T>(string json, string collection = null) where T : Entity;
     /// <summary>
-    /// ¸ù¾İ¸ø¶¨µÄ JSON ²éÑ¯×Ö·û´®²éÑ¯Ö¸¶¨¼¯ºÏÖĞµÄÀàĞÍ <typeparamref name="T"/> ÊµÌåÁĞ±í£¬½ö·µ»ØÖ¸¶¨ÁĞµÄÊı¾İ¡£
+    /// æ ¹æ®ç»™å®šçš„ JSON æŸ¥è¯¢å­—ç¬¦ä¸²æŸ¥è¯¢æŒ‡å®šé›†åˆä¸­çš„ç±»å‹ <typeparamref name="T"/> å®ä½“åˆ—è¡¨ï¼Œä»…è¿”å›æŒ‡å®šåˆ—çš„æ•°æ®ã€‚
     /// </summary>
     FTask<List<T>> QueryJson<T>(string json, string[] cols, string collection = null) where T : Entity;
     /// <summary>
-    /// ¸ù¾İ¸ø¶¨µÄ JSON ²éÑ¯×Ö·û´®²éÑ¯Ö¸¶¨¼¯ºÏÖĞµÄÀàĞÍ <typeparamref name="T"/> ÊµÌåÁĞ±í£¬Í¨¹ıÖ¸¶¨µÄÈÎÎñ ID ½øĞĞ±êÊ¶¡£
+    /// æ ¹æ®ç»™å®šçš„ JSON æŸ¥è¯¢å­—ç¬¦ä¸²æŸ¥è¯¢æŒ‡å®šé›†åˆä¸­çš„ç±»å‹ <typeparamref name="T"/> å®ä½“åˆ—è¡¨ï¼Œé€šè¿‡æŒ‡å®šçš„ä»»åŠ¡ ID è¿›è¡Œæ ‡è¯†ã€‚
     /// </summary>
     FTask<List<T>> QueryJson<T>(long taskId, string json, string collection = null) where T : Entity;
     /// <summary>
-    /// ²éÑ¯Ö¸¶¨¼¯ºÏÖĞÂú×ã¸ø¶¨É¸Ñ¡Ìõ¼şµÄÀàĞÍ <typeparamref name="T"/> ÊµÌåÁĞ±í£¬½ö·µ»ØÖ¸¶¨ÁĞµÄÊı¾İ¡£
+    /// æŸ¥è¯¢æŒ‡å®šé›†åˆä¸­æ»¡è¶³ç»™å®šç­›é€‰æ¡ä»¶çš„ç±»å‹ <typeparamref name="T"/> å®ä½“åˆ—è¡¨ï¼Œä»…è¿”å›æŒ‡å®šåˆ—çš„æ•°æ®ã€‚
     /// </summary>
     FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string[] cols, string collection = null) where T : class;
     /// <summary>
-    /// ±£´æÀàĞÍ <typeparamref name="T"/> ÊµÌåµ½Ö¸¶¨¼¯ºÏÖĞ£¬Èç¹û¼¯ºÏ²»´æÔÚ½«×Ô¶¯´´½¨¡£
+    /// ä¿å­˜ç±»å‹ <typeparamref name="T"/> å®ä½“åˆ°æŒ‡å®šé›†åˆä¸­ï¼Œå¦‚æœé›†åˆä¸å­˜åœ¨å°†è‡ªåŠ¨åˆ›å»ºã€‚
     /// </summary>
     FTask Save<T>(T entity, string collection = null) where T : Entity, new();
     /// <summary>
-    /// ±£´æÒ»×éÊµÌåµ½Êı¾İ¿âÖĞ£¬¸ù¾İÊµÌåÁĞ±íµÄ ID ½øĞĞÇø·ÖºÍ´æ´¢¡£
+    /// ä¿å­˜ä¸€ç»„å®ä½“åˆ°æ•°æ®åº“ä¸­ï¼Œæ ¹æ®å®ä½“åˆ—è¡¨çš„ ID è¿›è¡ŒåŒºåˆ†å’Œå­˜å‚¨ã€‚
     /// </summary>
     FTask Save(long id, List<Entity> entities);
     /// <summary>
-    /// Í¨¹ıÊÂÎñ»á»°½«ÀàĞÍ <typeparamref name="T"/> ÊµÌå±£´æµ½Ö¸¶¨¼¯ºÏÖĞ£¬Èç¹û¼¯ºÏ²»´æÔÚ½«×Ô¶¯´´½¨¡£
+    /// é€šè¿‡äº‹åŠ¡ä¼šè¯å°†ç±»å‹ <typeparamref name="T"/> å®ä½“ä¿å­˜åˆ°æŒ‡å®šé›†åˆä¸­ï¼Œå¦‚æœé›†åˆä¸å­˜åœ¨å°†è‡ªåŠ¨åˆ›å»ºã€‚
     /// </summary>
     FTask Save<T>(object transactionSession, T entity, string collection = null) where T : Entity;
     /// <summary>
-    /// ÏòÖ¸¶¨¼¯ºÏÖĞ²åÈëÒ»¸öÀàĞÍ <typeparamref name="T"/> ÊµÌå£¬Èç¹û¼¯ºÏ²»´æÔÚ½«×Ô¶¯´´½¨¡£
+    /// å‘æŒ‡å®šé›†åˆä¸­æ’å…¥ä¸€ä¸ªç±»å‹ <typeparamref name="T"/> å®ä½“ï¼Œå¦‚æœé›†åˆä¸å­˜åœ¨å°†è‡ªåŠ¨åˆ›å»ºã€‚
     /// </summary>
     FTask Insert<T>(T entity, string collection = null) where T : Entity, new();
     /// <summary>
-    /// ÅúÁ¿²åÈëÒ»×éÀàĞÍ <typeparamref name="T"/> ÊµÌåµ½Ö¸¶¨¼¯ºÏÖĞ£¬Èç¹û¼¯ºÏ²»´æÔÚ½«×Ô¶¯´´½¨¡£
+    /// æ‰¹é‡æ’å…¥ä¸€ç»„ç±»å‹ <typeparamref name="T"/> å®ä½“åˆ°æŒ‡å®šé›†åˆä¸­ï¼Œå¦‚æœé›†åˆä¸å­˜åœ¨å°†è‡ªåŠ¨åˆ›å»ºã€‚
     /// </summary>
     FTask InsertBatch<T>(IEnumerable<T> list, string collection = null) where T : Entity, new();
     /// <summary>
-    /// Í¨¹ıÊÂÎñ»á»°£¬ÅúÁ¿²åÈëÒ»×éÀàĞÍ <typeparamref name="T"/> ÊµÌåµ½Ö¸¶¨¼¯ºÏÖĞ£¬Èç¹û¼¯ºÏ²»´æÔÚ½«×Ô¶¯´´½¨¡£
+    /// é€šè¿‡äº‹åŠ¡ä¼šè¯ï¼Œæ‰¹é‡æ’å…¥ä¸€ç»„ç±»å‹ <typeparamref name="T"/> å®ä½“åˆ°æŒ‡å®šé›†åˆä¸­ï¼Œå¦‚æœé›†åˆä¸å­˜åœ¨å°†è‡ªåŠ¨åˆ›å»ºã€‚
     /// </summary>
     FTask InsertBatch<T>(object transactionSession, IEnumerable<T> list, string collection = null) where T : Entity, new();
     /// <summary>
-    /// Í¨¹ıÊÂÎñ»á»°£¬¸ù¾İÖ¸¶¨µÄ ID ´ÓÊı¾İ¿âÖĞÉ¾³ıÖ¸¶¨ÀàĞÍ <typeparamref name="T"/> ÊµÌå¡£
+    /// é€šè¿‡äº‹åŠ¡ä¼šè¯ï¼Œæ ¹æ®æŒ‡å®šçš„ ID ä»æ•°æ®åº“ä¸­åˆ é™¤æŒ‡å®šç±»å‹ <typeparamref name="T"/> å®ä½“ã€‚
     /// </summary>
     FTask<long> Remove<T>(object transactionSession, long id, string collection = null) where T : Entity, new();
     /// <summary>
-    /// ¸ù¾İÖ¸¶¨µÄ ID ´ÓÊı¾İ¿âÖĞÉ¾³ıÖ¸¶¨ÀàĞÍ <typeparamref name="T"/> ÊµÌå¡£
+    /// æ ¹æ®æŒ‡å®šçš„ ID ä»æ•°æ®åº“ä¸­åˆ é™¤æŒ‡å®šç±»å‹ <typeparamref name="T"/> å®ä½“ã€‚
     /// </summary>
     FTask<long> Remove<T>(long id, string collection = null) where T : Entity, new();
     /// <summary>
-    /// Í¨¹ıÊÂÎñ»á»°£¬¸ù¾İ¸ø¶¨µÄÉ¸Ñ¡Ìõ¼şºÍ ID ´ÓÊı¾İ¿âÖĞÉ¾³ıÖ¸¶¨ÀàĞÍ <typeparamref name="T"/> ÊµÌå¡£
+    /// é€šè¿‡äº‹åŠ¡ä¼šè¯ï¼Œæ ¹æ®ç»™å®šçš„ç­›é€‰æ¡ä»¶å’Œ ID ä»æ•°æ®åº“ä¸­åˆ é™¤æŒ‡å®šç±»å‹ <typeparamref name="T"/> å®ä½“ã€‚
     /// </summary>
     FTask<long> Remove<T>(long id,object transactionSession, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new();
     /// <summary>
-    /// ¸ù¾İ¸ø¶¨µÄÉ¸Ñ¡Ìõ¼şºÍ ID ´ÓÊı¾İ¿âÖĞÉ¾³ıÖ¸¶¨ÀàĞÍ <typeparamref name="T"/> ÊµÌå¡£
+    /// æ ¹æ®ç»™å®šçš„ç­›é€‰æ¡ä»¶å’Œ ID ä»æ•°æ®åº“ä¸­åˆ é™¤æŒ‡å®šç±»å‹ <typeparamref name="T"/> å®ä½“ã€‚
     /// </summary>
     FTask<long> Remove<T>(long id, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new();
     /// <summary>
-    /// ¸ù¾İ¸ø¶¨µÄÉ¸Ñ¡Ìõ¼ş¼ÆËãÖ¸¶¨¼¯ºÏÖĞÀàĞÍ <typeparamref name="T"/> ÊµÌåÄ³¸öÊôĞÔµÄ×ÜºÍ¡£
+    /// æ ¹æ®ç»™å®šçš„ç­›é€‰æ¡ä»¶è®¡ç®—æŒ‡å®šé›†åˆä¸­ç±»å‹ <typeparamref name="T"/> å®ä½“æŸä¸ªå±æ€§çš„æ€»å’Œã€‚
     /// </summary>
     FTask<long> Sum<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> sumExpression, string collection = null) where T : Entity;
     /// <summary>
-    /// ÔÚÖ¸¶¨µÄ¼¯ºÏÖĞ´´½¨Ë÷Òı£¬ÒÔÌá¸ßÀàĞÍ <typeparamref name="T"/> ÊµÌåµÄ²éÑ¯ĞÔÄÜ¡£
+    /// åœ¨æŒ‡å®šçš„é›†åˆä¸­åˆ›å»ºç´¢å¼•ï¼Œä»¥æé«˜ç±»å‹ <typeparamref name="T"/> å®ä½“çš„æŸ¥è¯¢æ€§èƒ½ã€‚
     /// </summary>
     FTask CreateIndex<T>(string collection, params object[] keys) where T : Entity;
     /// <summary>
-    /// ÔÚÄ¬ÈÏ¼¯ºÏÖĞ´´½¨Ë÷Òı£¬ÒÔÌá¸ßÀàĞÍ <typeparamref name="T"/> ÊµÌåµÄ²éÑ¯ĞÔÄÜ¡£
+    /// åœ¨é»˜è®¤é›†åˆä¸­åˆ›å»ºç´¢å¼•ï¼Œä»¥æé«˜ç±»å‹ <typeparamref name="T"/> å®ä½“çš„æŸ¥è¯¢æ€§èƒ½ã€‚
     /// </summary>
     FTask CreateIndex<T>(params object[] keys) where T : Entity;
     /// <summary>
-    /// ´´½¨Ö¸¶¨ÀàĞÍ <typeparamref name="T"/> µÄÊı¾İ¿â£¬ÓÃÓÚ´æ´¢ÊµÌå¡£
+    /// åˆ›å»ºæŒ‡å®šç±»å‹ <typeparamref name="T"/> çš„æ•°æ®åº“ï¼Œç”¨äºå­˜å‚¨å®ä½“ã€‚
     /// </summary>
     FTask CreateDB<T>() where T : Entity;
     /// <summary>
-    /// ¸ù¾İÖ¸¶¨ÀàĞÍ´´½¨Êı¾İ¿â£¬ÓÃÓÚ´æ´¢ÊµÌå¡£
+    /// æ ¹æ®æŒ‡å®šç±»å‹åˆ›å»ºæ•°æ®åº“ï¼Œç”¨äºå­˜å‚¨å®ä½“ã€‚
     /// </summary>
     FTask CreateDB(Type type);
 }

@@ -9,44 +9,44 @@ using System.Collections.Generic;
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// ³éÏóµÄÌø±í»ùÀà£¬Ìá¹©Ìø±íµÄ»ù±¾¹¦ÄÜºÍ²Ù×÷¡£
+    /// æŠ½è±¡çš„è·³è¡¨åŸºç±»ï¼Œæä¾›è·³è¡¨çš„åŸºæœ¬åŠŸèƒ½å’Œæ“ä½œã€‚
     /// </summary>
-    /// <typeparam name="TValue">Ìø±íÖĞ´æ´¢µÄÖµµÄÀàĞÍ¡£</typeparam>
+    /// <typeparam name="TValue">è·³è¡¨ä¸­å­˜å‚¨çš„å€¼çš„ç±»å‹ã€‚</typeparam>
     public abstract class SkipTableBase<TValue> : IEnumerable<SkipTableNode<TValue>>
     {
         /// <summary>
-        /// Ìø±íµÄ×î´ó²ãÊı
+        /// è·³è¡¨çš„æœ€å¤§å±‚æ•°
         /// </summary>
         public readonly int MaxLayer;
         /// <summary>
-        /// Ìø±íµÄ¶¥²¿Í·½Úµã
+        /// è·³è¡¨çš„é¡¶éƒ¨å¤´èŠ‚ç‚¹
         /// </summary>
         public readonly SkipTableNode<TValue> TopHeader;
         /// <summary>
-        /// Ìø±íµÄµ×²¿Í·½Úµã
+        /// è·³è¡¨çš„åº•éƒ¨å¤´èŠ‚ç‚¹
         /// </summary>
         public SkipTableNode<TValue> BottomHeader;
         /// <summary>
-        /// Ìø±íÖĞ½ÚµãµÄÊıÁ¿£¬Ê¹ÓÃÁË Node ×ÖµäµÄ¼ÆÊı
+        /// è·³è¡¨ä¸­èŠ‚ç‚¹çš„æ•°é‡ï¼Œä½¿ç”¨äº† Node å­—å…¸çš„è®¡æ•°
         /// </summary>
         public int Count => Node.Count;
         /// <summary>
-        /// ÓÃÓÚÉú³ÉËæ»úÊıµÄËæ»úÊıÉú³ÉÆ÷
+        /// ç”¨äºç”Ÿæˆéšæœºæ•°çš„éšæœºæ•°ç”Ÿæˆå™¨
         /// </summary>
         protected readonly Random Random = new Random();
         /// <summary>
-        /// ´æ´¢Ìø±í½ÚµãµÄ×Öµä
+        /// å­˜å‚¨è·³è¡¨èŠ‚ç‚¹çš„å­—å…¸
         /// </summary>
         protected readonly Dictionary<long, SkipTableNode<TValue>> Node = new();
         /// <summary>
-        /// ÓÃÓÚ¸¨Öú·´Ïò²éÕÒµÄÕ»
+        /// ç”¨äºè¾…åŠ©åå‘æŸ¥æ‰¾çš„æ ˆ
         /// </summary>
         protected readonly Stack<SkipTableNode<TValue>> AntiFindStack = new Stack<SkipTableNode<TValue>>();
 
         /// <summary>
-        /// ³õÊ¼»¯Ò»¸öĞÂµÄÌø±íÊµÀı¡£
+        /// åˆå§‹åŒ–ä¸€ä¸ªæ–°çš„è·³è¡¨å®ä¾‹ã€‚
         /// </summary>
-        /// <param name="maxLayer">Ìø±íµÄ×î´ó²ãÊı£¬Ä¬ÈÏÎª 8¡£</param>
+        /// <param name="maxLayer">è·³è¡¨çš„æœ€å¤§å±‚æ•°ï¼Œé»˜è®¤ä¸º 8ã€‚</param>
         protected SkipTableBase(int maxLayer = 8)
         {
             MaxLayer = maxLayer;
@@ -62,16 +62,16 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// »ñÈ¡Ö¸¶¨¼üµÄ½ÚµãµÄÖµ£¬Èô²»´æÔÚÔò·µ»ØÄ¬ÈÏÖµ¡£
+        /// è·å–æŒ‡å®šé”®çš„èŠ‚ç‚¹çš„å€¼ï¼Œè‹¥ä¸å­˜åœ¨åˆ™è¿”å›é»˜è®¤å€¼ã€‚
         /// </summary>
-        /// <param name="key">Òª²éÕÒµÄ¼ü¡£</param>
+        /// <param name="key">è¦æŸ¥æ‰¾çš„é”®ã€‚</param>
         public TValue this[long key] => !TryGetValueByKey(key, out TValue value) ? default : value;
 
         /// <summary>
-        /// »ñÈ¡Ö¸¶¨¼üµÄ½ÚµãÔÚÌø±íÖĞµÄÅÅÃû¡£
+        /// è·å–æŒ‡å®šé”®çš„èŠ‚ç‚¹åœ¨è·³è¡¨ä¸­çš„æ’åã€‚
         /// </summary>
-        /// <param name="key">Òª²éÕÒµÄ¼ü¡£</param>
-        /// <returns>½ÚµãµÄÅÅÃû¡£</returns>
+        /// <param name="key">è¦æŸ¥æ‰¾çš„é”®ã€‚</param>
+        /// <returns>èŠ‚ç‚¹çš„æ’åã€‚</returns>
         public int GetRanking(long key)
         {
             if (!Node.TryGetValue(key, out var node))
@@ -83,10 +83,10 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// »ñÈ¡Ö¸¶¨¼üµÄ·´ÏòÅÅÃû£¬¼´ÔÚ±È¸Ã¼ü¸ü´óµÄ½ÚµãÖĞµÄÅÅÃû¡£
+        /// è·å–æŒ‡å®šé”®çš„åå‘æ’åï¼Œå³åœ¨æ¯”è¯¥é”®æ›´å¤§çš„èŠ‚ç‚¹ä¸­çš„æ’åã€‚
         /// </summary>
-        /// <param name="key">Òª²éÕÒµÄ¼ü¡£</param>
-        /// <returns>·´ÏòÅÅÃû¡£</returns>
+        /// <param name="key">è¦æŸ¥æ‰¾çš„é”®ã€‚</param>
+        /// <returns>åå‘æ’åã€‚</returns>
         public int GetAntiRanking(long key)
         {
             var ranking = GetRanking(key);
@@ -100,11 +100,11 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ³¢ÊÔÍ¨¹ı¼ü»ñÈ¡½ÚµãµÄÖµ¡£
+        /// å°è¯•é€šè¿‡é”®è·å–èŠ‚ç‚¹çš„å€¼ã€‚
         /// </summary>
-        /// <param name="key">Òª²éÕÒµÄ¼ü¡£</param>
-        /// <param name="value">»ñÈ¡µ½µÄ½ÚµãµÄÖµ£¬Èç¹û¼ü²»´æÔÚÔòÎªÄ¬ÈÏÖµ¡£</param>
-        /// <returns>ÊÇ·ñ³É¹¦»ñÈ¡½ÚµãµÄÖµ¡£</returns>
+        /// <param name="key">è¦æŸ¥æ‰¾çš„é”®ã€‚</param>
+        /// <param name="value">è·å–åˆ°çš„èŠ‚ç‚¹çš„å€¼ï¼Œå¦‚æœé”®ä¸å­˜åœ¨åˆ™ä¸ºé»˜è®¤å€¼ã€‚</param>
+        /// <returns>æ˜¯å¦æˆåŠŸè·å–èŠ‚ç‚¹çš„å€¼ã€‚</returns>
         public bool TryGetValueByKey(long key, out TValue value)
         {
             if (!Node.TryGetValue(key, out var node))
@@ -118,11 +118,11 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ³¢ÊÔÍ¨¹ı¼ü»ñÈ¡½Úµã¡£
+        /// å°è¯•é€šè¿‡é”®è·å–èŠ‚ç‚¹ã€‚
         /// </summary>
-        /// <param name="key">Òª²éÕÒµÄ¼ü¡£</param>
-        /// <param name="node">»ñÈ¡µ½µÄ½Úµã£¬Èç¹û¼ü²»´æÔÚÔòÎª <c>null</c>¡£</param>
-        /// <returns>ÊÇ·ñ³É¹¦»ñÈ¡½Úµã¡£</returns>
+        /// <param name="key">è¦æŸ¥æ‰¾çš„é”®ã€‚</param>
+        /// <param name="node">è·å–åˆ°çš„èŠ‚ç‚¹ï¼Œå¦‚æœé”®ä¸å­˜åœ¨åˆ™ä¸º <c>null</c>ã€‚</param>
+        /// <returns>æ˜¯å¦æˆåŠŸè·å–èŠ‚ç‚¹ã€‚</returns>
         public bool TryGetNodeByKey(long key, out SkipTableNode<TValue> node)
         {
             if (Node.TryGetValue(key, out node))
@@ -134,11 +134,11 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ÔÚÌø±íÖĞ²éÕÒ½Úµã£¬·µ»Ø´ÓÆğÊ¼Î»ÖÃµ½½áÊøÎ»ÖÃµÄ½ÚµãÁĞ±í¡£
+        /// åœ¨è·³è¡¨ä¸­æŸ¥æ‰¾èŠ‚ç‚¹ï¼Œè¿”å›ä»èµ·å§‹ä½ç½®åˆ°ç»“æŸä½ç½®çš„èŠ‚ç‚¹åˆ—è¡¨ã€‚
         /// </summary>
-        /// <param name="start">ÆğÊ¼Î»ÖÃµÄÅÅÃû¡£</param>
-        /// <param name="end">½áÊøÎ»ÖÃµÄÅÅÃû¡£</param>
-        /// <param name="list">ÓÃÓÚ´æ´¢½ÚµãÁĞ±íµÄ <see cref="ListPool{T}"/> ÊµÀı¡£</param>
+        /// <param name="start">èµ·å§‹ä½ç½®çš„æ’åã€‚</param>
+        /// <param name="end">ç»“æŸä½ç½®çš„æ’åã€‚</param>
+        /// <param name="list">ç”¨äºå­˜å‚¨èŠ‚ç‚¹åˆ—è¡¨çš„ <see cref="ListPool{T}"/> å®ä¾‹ã€‚</param>
         public void Find(int start, int end, ListPool<SkipTableNode<TValue>> list)
         {
             var cur = BottomHeader;
@@ -162,11 +162,11 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ÔÚÌø±íÖĞ½øĞĞ·´Ïò²éÕÒ½Úµã£¬·µ»Ø´Ó½áÊøÎ»ÖÃµ½ÆğÊ¼Î»ÖÃµÄ½ÚµãÁĞ±í¡£
+        /// åœ¨è·³è¡¨ä¸­è¿›è¡Œåå‘æŸ¥æ‰¾èŠ‚ç‚¹ï¼Œè¿”å›ä»ç»“æŸä½ç½®åˆ°èµ·å§‹ä½ç½®çš„èŠ‚ç‚¹åˆ—è¡¨ã€‚
         /// </summary>
-        /// <param name="start">½áÊøÎ»ÖÃµÄÅÅÃû¡£</param>
-        /// <param name="end">ÆğÊ¼Î»ÖÃµÄÅÅÃû¡£</param>
-        /// <param name="list">ÓÃÓÚ´æ´¢½ÚµãÁĞ±íµÄ <see cref="ListPool{T}"/> ÊµÀı¡£</param>
+        /// <param name="start">ç»“æŸä½ç½®çš„æ’åã€‚</param>
+        /// <param name="end">èµ·å§‹ä½ç½®çš„æ’åã€‚</param>
+        /// <param name="list">ç”¨äºå­˜å‚¨èŠ‚ç‚¹åˆ—è¡¨çš„ <see cref="ListPool{T}"/> å®ä¾‹ã€‚</param>
         public void AntiFind(int start, int end, ListPool<SkipTableNode<TValue>> list)
         {
             var cur = BottomHeader;
@@ -197,9 +197,9 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// »ñÈ¡Ìø±íÖĞ×îºóÒ»¸ö½ÚµãµÄÖµ¡£
+        /// è·å–è·³è¡¨ä¸­æœ€åä¸€ä¸ªèŠ‚ç‚¹çš„å€¼ã€‚
         /// </summary>
-        /// <returns>×îºóÒ»¸ö½ÚµãµÄÖµ¡£</returns>
+        /// <returns>æœ€åä¸€ä¸ªèŠ‚ç‚¹çš„å€¼ã€‚</returns>
         public TValue GetLastValue()
         {
             var cur = TopHeader;
@@ -221,10 +221,10 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ÒÆ³ıÌø±íÖĞÖ¸¶¨¼üµÄ½Úµã¡£
+        /// ç§»é™¤è·³è¡¨ä¸­æŒ‡å®šé”®çš„èŠ‚ç‚¹ã€‚
         /// </summary>
-        /// <param name="key">ÒªÒÆ³ıµÄ½ÚµãµÄ¼ü¡£</param>
-        /// <returns>ÒÆ³ıÊÇ·ñ³É¹¦¡£</returns>
+        /// <param name="key">è¦ç§»é™¤çš„èŠ‚ç‚¹çš„é”®ã€‚</param>
+        /// <returns>ç§»é™¤æ˜¯å¦æˆåŠŸã€‚</returns>
         public bool Remove(long key)
         {
             if (!Node.TryGetValue(key, out var node))
@@ -236,28 +236,28 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ÏòÌø±íÖĞÌí¼Ó½Úµã¡£
+        /// å‘è·³è¡¨ä¸­æ·»åŠ èŠ‚ç‚¹ã€‚
         /// </summary>
-        /// <param name="sortKey">½ÚµãµÄÅÅĞò¼ü¡£</param>
-        /// <param name="viceKey">½ÚµãµÄ¸±¼ü¡£</param>
-        /// <param name="key">½ÚµãµÄ¼ü¡£</param>
-        /// <param name="value">½ÚµãµÄÖµ¡£</param>
+        /// <param name="sortKey">èŠ‚ç‚¹çš„æ’åºé”®ã€‚</param>
+        /// <param name="viceKey">èŠ‚ç‚¹çš„å‰¯é”®ã€‚</param>
+        /// <param name="key">èŠ‚ç‚¹çš„é”®ã€‚</param>
+        /// <param name="value">èŠ‚ç‚¹çš„å€¼ã€‚</param>
         public abstract void Add(long sortKey, long viceKey, long key, TValue value);
 
         /// <summary>
-        /// ´ÓÌø±íÖĞÒÆ³ıÖ¸¶¨¼üµÄ½Úµã¡£
+        /// ä»è·³è¡¨ä¸­ç§»é™¤æŒ‡å®šé”®çš„èŠ‚ç‚¹ã€‚
         /// </summary>
-        /// <param name="sortKey">½ÚµãµÄÅÅĞò¼ü¡£</param>
-        /// <param name="viceKey">½ÚµãµÄ¸±¼ü¡£</param>
-        /// <param name="key">½ÚµãµÄ¼ü¡£</param>
-        /// <param name="value">±»ÒÆ³ıµÄ½ÚµãµÄÖµ¡£</param>
-        /// <returns>ÒÆ³ıÊÇ·ñ³É¹¦¡£</returns>
+        /// <param name="sortKey">èŠ‚ç‚¹çš„æ’åºé”®ã€‚</param>
+        /// <param name="viceKey">èŠ‚ç‚¹çš„å‰¯é”®ã€‚</param>
+        /// <param name="key">èŠ‚ç‚¹çš„é”®ã€‚</param>
+        /// <param name="value">è¢«ç§»é™¤çš„èŠ‚ç‚¹çš„å€¼ã€‚</param>
+        /// <returns>ç§»é™¤æ˜¯å¦æˆåŠŸã€‚</returns>
         public abstract bool Remove(long sortKey, long viceKey, long key, out TValue value);
 
         /// <summary>
-        /// ·µ»ØÒ»¸öÃ¶¾ÙÆ÷£¬ÓÃÓÚ±éÀúÌø±íÖĞµÄ½Úµã¡£
+        /// è¿”å›ä¸€ä¸ªæšä¸¾å™¨ï¼Œç”¨äºéå†è·³è¡¨ä¸­çš„èŠ‚ç‚¹ã€‚
         /// </summary>
-        /// <returns>Ò»¸ö¿ÉÓÃÓÚ±éÀúÌø±í½ÚµãµÄÃ¶¾ÙÆ÷¡£</returns>
+        /// <returns>ä¸€ä¸ªå¯ç”¨äºéå†è·³è¡¨èŠ‚ç‚¹çš„æšä¸¾å™¨ã€‚</returns>
         public IEnumerator<SkipTableNode<TValue>> GetEnumerator()
         {
             var cur = BottomHeader.Right;
@@ -269,9 +269,9 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ·µ»ØÒ»¸ö·Ç·ºĞÍÃ¶¾ÙÆ÷£¬ÓÃÓÚ±éÀúÌø±íÖĞµÄ½Úµã¡£
+        /// è¿”å›ä¸€ä¸ªéæ³›å‹æšä¸¾å™¨ï¼Œç”¨äºéå†è·³è¡¨ä¸­çš„èŠ‚ç‚¹ã€‚
         /// </summary>
-        /// <returns>Ò»¸ö·Ç·ºĞÍÃ¶¾ÙÆ÷£¬¿ÉÓÃÓÚ±éÀúÌø±í½Úµã¡£</returns>
+        /// <returns>ä¸€ä¸ªéæ³›å‹æšä¸¾å™¨ï¼Œå¯ç”¨äºéå†è·³è¡¨èŠ‚ç‚¹ã€‚</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

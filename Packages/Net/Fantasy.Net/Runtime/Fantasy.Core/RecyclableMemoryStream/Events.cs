@@ -26,58 +26,58 @@ namespace Fantasy.IO
     using System.Diagnostics.Tracing;
 
     /// <summary>
-    /// Ìá¹©ÓÃÓÚ¹ÜÀí¿É»ØÊÕÄÚ´æÁ÷µÄ¹¦ÄÜµÄ¹ÜÀíÆ÷Àà¡£´Ë¹ÜÀíÆ÷¸ºÔğ´´½¨ºÍ¹ÜÀíÄÚ´æÁ÷£¬²¢Ìá¹©ÁË¶ÔÄÚ´æ·ÖÅäºÍ»ØÊÕµÄÏ¸Á£¶È¿ØÖÆ£¬ÒÔ×î´ó³Ì¶ÈµØ¼õÉÙÄÚ´æ·ÖÅäºÍÀ¬»ø»ØÊÕµÄ¿ªÏú¡£
+    /// æä¾›ç”¨äºç®¡ç†å¯å›æ”¶å†…å­˜æµçš„åŠŸèƒ½çš„ç®¡ç†å™¨ç±»ã€‚æ­¤ç®¡ç†å™¨è´Ÿè´£åˆ›å»ºå’Œç®¡ç†å†…å­˜æµï¼Œå¹¶æä¾›äº†å¯¹å†…å­˜åˆ†é…å’Œå›æ”¶çš„ç»†ç²’åº¦æ§åˆ¶ï¼Œä»¥æœ€å¤§ç¨‹åº¦åœ°å‡å°‘å†…å­˜åˆ†é…å’Œåƒåœ¾å›æ”¶çš„å¼€é”€ã€‚
     /// </summary>
     public sealed partial class RecyclableMemoryStreamManager
     {
         /// <summary>
-        /// ÓÃÓÚ RecyclableMemoryStream µÄ ETW ÊÂ¼ş¡£
+        /// ç”¨äº RecyclableMemoryStream çš„ ETW äº‹ä»¶ã€‚
         /// </summary>
         [EventSource(Name = "Microsoft-IO-RecyclableMemoryStream", Guid = "{B80CD4E4-890E-468D-9CBA-90EB7C82DFC7}")]
         public sealed class Events : EventSource
         {
             /// <summary>
-            /// ¾²Ì¬ÈÕÖ¾¶ÔÏó£¬Í¨¹ıËüĞ´ÈëËùÓĞÊÂ¼ş¡£
+            /// é™æ€æ—¥å¿—å¯¹è±¡ï¼Œé€šè¿‡å®ƒå†™å…¥æ‰€æœ‰äº‹ä»¶ã€‚
             /// </summary>
             public static Events Writer = new();
 
             /// <summary>
-            /// »º³åÇøÀàĞÍÃ¶¾Ù¡£
+            /// ç¼“å†²åŒºç±»å‹æšä¸¾ã€‚
             /// </summary>
             public enum MemoryStreamBufferType
             {
                 /// <summary>
-                /// Ğ¡¿é»º³åÇø¡£
+                /// å°å—ç¼“å†²åŒºã€‚
                 /// </summary>
                 Small,
                 /// <summary>
-                /// ´ó³Ø»º³åÇø¡£
+                /// å¤§æ± ç¼“å†²åŒºã€‚
                 /// </summary>
                 Large
             }
 
             /// <summary>
-            /// ¶ªÆú»º³åÇøµÄ¿ÉÄÜÔ­ÒòÃ¶¾Ù¡£
+            /// ä¸¢å¼ƒç¼“å†²åŒºçš„å¯èƒ½åŸå› æšä¸¾ã€‚
             /// </summary>
             public enum MemoryStreamDiscardReason
             {
                 /// <summary>
-                /// »º³åÇøÌ«´ó£¬ÎŞ·¨ÖØĞÂ·ÅÈë³ØÖĞ¡£
+                /// ç¼“å†²åŒºå¤ªå¤§ï¼Œæ— æ³•é‡æ–°æ”¾å…¥æ± ä¸­ã€‚
                 /// </summary>
                 TooLarge,
                 /// <summary>
-                /// ³ØÖĞÓĞ×ã¹»µÄ¿ÕÏĞ×Ö½Ú¡£
+                /// æ± ä¸­æœ‰è¶³å¤Ÿçš„ç©ºé—²å­—èŠ‚ã€‚
                 /// </summary>
                 EnoughFree
             }
 
             /// <summary>
-            /// ÔÚ´´½¨Á÷¶ÔÏóÊ±¼ÇÂ¼µÄÊÂ¼ş¡£
+            /// åœ¨åˆ›å»ºæµå¯¹è±¡æ—¶è®°å½•çš„äº‹ä»¶ã€‚
             /// </summary>
-            /// <param name="guid">´ËÁ÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">ÁÙÊ± ID£¬Í¨³£±íÊ¾µ±Ç°Ê¹ÓÃÇé¿ö¡£</param>
-            /// <param name="requestedSize">Á÷µÄÇëÇó´óĞ¡¡£</param>
-            /// <param name="actualSize">´Ó³ØÖĞ·ÖÅä¸øÁ÷µÄÊµ¼Ê´óĞ¡¡£</param>
+            /// <param name="guid">æ­¤æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">ä¸´æ—¶ IDï¼Œé€šå¸¸è¡¨ç¤ºå½“å‰ä½¿ç”¨æƒ…å†µã€‚</param>
+            /// <param name="requestedSize">æµçš„è¯·æ±‚å¤§å°ã€‚</param>
+            /// <param name="actualSize">ä»æ± ä¸­åˆ†é…ç»™æµçš„å®é™…å¤§å°ã€‚</param>
             [Event(1, Level = EventLevel.Verbose, Version = 2)]
             public void MemoryStreamCreated(Guid guid, string tag, long requestedSize, long actualSize)
             {
@@ -88,13 +88,13 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// µ±Á÷±»ÊÍ·ÅÊ±¼ÇÂ¼µÄÊÂ¼ş¡£
+            /// å½“æµè¢«é‡Šæ”¾æ—¶è®°å½•çš„äº‹ä»¶ã€‚
             /// </summary>
-            /// <param name="guid">´ËÁ÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">ÁÙÊ± ID£¬Í¨³£±íÊ¾µ±Ç°Ê¹ÓÃÇé¿ö¡£</param>
-            /// <param name="lifetimeMs">Á÷µÄÉúÃüÖÜÆÚ£¨ºÁÃë£©¡£</param>
-            /// <param name="allocationStack">³õÊ¼·ÖÅäµÄµ÷ÓÃ¶ÑÕ»¡£</param>
-            /// <param name="disposeStack">ÊÍ·ÅµÄµ÷ÓÃ¶ÑÕ»¡£</param>
+            /// <param name="guid">æ­¤æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">ä¸´æ—¶ IDï¼Œé€šå¸¸è¡¨ç¤ºå½“å‰ä½¿ç”¨æƒ…å†µã€‚</param>
+            /// <param name="lifetimeMs">æµçš„ç”Ÿå‘½å‘¨æœŸï¼ˆæ¯«ç§’ï¼‰ã€‚</param>
+            /// <param name="allocationStack">åˆå§‹åˆ†é…çš„è°ƒç”¨å †æ ˆã€‚</param>
+            /// <param name="disposeStack">é‡Šæ”¾çš„è°ƒç”¨å †æ ˆã€‚</param>
             [Event(2, Level = EventLevel.Verbose, Version = 3)]
             public void MemoryStreamDisposed(Guid guid, string tag, long lifetimeMs, string allocationStack, string disposeStack)
             {
@@ -105,14 +105,14 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// µ±Á÷µÚ¶ş´Î±»ÊÍ·ÅÊ±¼ÇÂ¼µÄÊÂ¼ş¡£
+            /// å½“æµç¬¬äºŒæ¬¡è¢«é‡Šæ”¾æ—¶è®°å½•çš„äº‹ä»¶ã€‚
             /// </summary>
-            /// <param name="guid">´ËÁ÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">ÁÙÊ± ID£¬Í¨³£±íÊ¾µ±Ç°Ê¹ÓÃÇé¿ö¡£</param>
-            /// <param name="allocationStack">³õÊ¼·ÖÅäµÄµ÷ÓÃ¶ÑÕ»¡£</param>
-            /// <param name="disposeStack1">µÚÒ»´ÎÊÍ·ÅµÄµ÷ÓÃ¶ÑÕ»¡£</param>
-            /// <param name="disposeStack2">µÚ¶ş´ÎÊÍ·ÅµÄµ÷ÓÃ¶ÑÕ»¡£</param>
-            /// <remarks>×¢Òâ£ºÖ»ÓĞÔÚ RecyclableMemoryStreamManager.GenerateCallStacks Îª true Ê±£¬¶ÑÕ»²Å»á±»Ìî³ä¡£</remarks>
+            /// <param name="guid">æ­¤æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">ä¸´æ—¶ IDï¼Œé€šå¸¸è¡¨ç¤ºå½“å‰ä½¿ç”¨æƒ…å†µã€‚</param>
+            /// <param name="allocationStack">åˆå§‹åˆ†é…çš„è°ƒç”¨å †æ ˆã€‚</param>
+            /// <param name="disposeStack1">ç¬¬ä¸€æ¬¡é‡Šæ”¾çš„è°ƒç”¨å †æ ˆã€‚</param>
+            /// <param name="disposeStack2">ç¬¬äºŒæ¬¡é‡Šæ”¾çš„è°ƒç”¨å †æ ˆã€‚</param>
+            /// <remarks>æ³¨æ„ï¼šåªæœ‰åœ¨ RecyclableMemoryStreamManager.GenerateCallStacks ä¸º true æ—¶ï¼Œå †æ ˆæ‰ä¼šè¢«å¡«å……ã€‚</remarks>
             [Event(3, Level = EventLevel.Critical)]
             public void MemoryStreamDoubleDispose(Guid guid, string tag, string allocationStack, string disposeStack1,
                                                   string disposeStack2)
@@ -125,12 +125,12 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// µ±Á÷±»ÖÕ½áÊ±¼ÇÂ¼µÄÊÂ¼ş¡£
+            /// å½“æµè¢«ç»ˆç»“æ—¶è®°å½•çš„äº‹ä»¶ã€‚
             /// </summary>
-            /// <param name="guid">´ËÁ÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">ÁÙÊ± ID£¬Í¨³£±íÊ¾µ±Ç°Ê¹ÓÃÇé¿ö¡£</param>
-            /// <param name="allocationStack">³õÊ¼·ÖÅäµÄµ÷ÓÃ¶ÑÕ»¡£</param>
-            /// <remarks>×¢Òâ£ºÖ»ÓĞÔÚ RecyclableMemoryStreamManager.GenerateCallStacks Îª true Ê±£¬¶ÑÕ»²Å»á±»Ìî³ä¡£</remarks>
+            /// <param name="guid">æ­¤æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">ä¸´æ—¶ IDï¼Œé€šå¸¸è¡¨ç¤ºå½“å‰ä½¿ç”¨æƒ…å†µã€‚</param>
+            /// <param name="allocationStack">åˆå§‹åˆ†é…çš„è°ƒç”¨å †æ ˆã€‚</param>
+            /// <remarks>æ³¨æ„ï¼šåªæœ‰åœ¨ RecyclableMemoryStreamManager.GenerateCallStacks ä¸º true æ—¶ï¼Œå †æ ˆæ‰ä¼šè¢«å¡«å……ã€‚</remarks>
             [Event(4, Level = EventLevel.Error)]
             public void MemoryStreamFinalized(Guid guid, string tag, string allocationStack)
             {
@@ -141,13 +141,13 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// µ±Á÷µÄ ToArray ·½·¨±»µ÷ÓÃÊ±¼ÇÂ¼µÄÊÂ¼ş¡£
+            /// å½“æµçš„ ToArray æ–¹æ³•è¢«è°ƒç”¨æ—¶è®°å½•çš„äº‹ä»¶ã€‚
             /// </summary>
-            /// <param name="guid">´ËÁ÷µÄÎ¨Ò» ID¡£</param>
-            /// <param name="tag">ÁÙÊ± ID£¬Í¨³£±íÊ¾µ±Ç°Ê¹ÓÃÇé¿ö¡£</param>
-            /// <param name="stack">ToArray ·½·¨µÄµ÷ÓÃ¶ÑÕ»¡£</param>
-            /// <param name="size">Á÷µÄ³¤¶È¡£</param>
-            /// <remarks>×¢Òâ£ºÖ»ÓĞÔÚ RecyclableMemoryStreamManager.GenerateCallStacks Îª true Ê±£¬¶ÑÕ»²Å»á±»Ìî³ä¡£</remarks>
+            /// <param name="guid">æ­¤æµçš„å”¯ä¸€ IDã€‚</param>
+            /// <param name="tag">ä¸´æ—¶ IDï¼Œé€šå¸¸è¡¨ç¤ºå½“å‰ä½¿ç”¨æƒ…å†µã€‚</param>
+            /// <param name="stack">ToArray æ–¹æ³•çš„è°ƒç”¨å †æ ˆã€‚</param>
+            /// <param name="size">æµçš„é•¿åº¦ã€‚</param>
+            /// <remarks>æ³¨æ„ï¼šåªæœ‰åœ¨ RecyclableMemoryStreamManager.GenerateCallStacks ä¸º true æ—¶ï¼Œå †æ ˆæ‰ä¼šè¢«å¡«å……ã€‚</remarks>
             [Event(5, Level = EventLevel.Verbose, Version = 2)]
             public void MemoryStreamToArray(Guid guid, string tag, string stack, long size)
             {
@@ -158,11 +158,11 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// µ± RecyclableMemoryStreamManager ±»³õÊ¼»¯Ê±¼ÇÂ¼µÄÊÂ¼ş¡£
+            /// å½“ RecyclableMemoryStreamManager è¢«åˆå§‹åŒ–æ—¶è®°å½•çš„äº‹ä»¶ã€‚
             /// </summary>
-            /// <param name="blockSize">¿éµÄ´óĞ¡£¬ÒÔ×Ö½ÚÎªµ¥Î»¡£</param>
-            /// <param name="largeBufferMultiple">´ó»º³åÇøµÄ±¶Êı£¬ÒÔ×Ö½ÚÎªµ¥Î»¡£</param>
-            /// <param name="maximumBufferSize">×î´ó»º³åÇø´óĞ¡£¬ÒÔ×Ö½ÚÎªµ¥Î»¡£</param>
+            /// <param name="blockSize">å—çš„å¤§å°ï¼Œä»¥å­—èŠ‚ä¸ºå•ä½ã€‚</param>
+            /// <param name="largeBufferMultiple">å¤§ç¼“å†²åŒºçš„å€æ•°ï¼Œä»¥å­—èŠ‚ä¸ºå•ä½ã€‚</param>
+            /// <param name="maximumBufferSize">æœ€å¤§ç¼“å†²åŒºå¤§å°ï¼Œä»¥å­—èŠ‚ä¸ºå•ä½ã€‚</param>
             [Event(6, Level = EventLevel.Informational)]
             public void MemoryStreamManagerInitialized(int blockSize, int largeBufferMultiple, int maximumBufferSize)
             {
@@ -173,9 +173,9 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// µ±´´½¨ĞÂµÄ¿éÊ±¼ÇÂ¼µÄÊÂ¼ş¡£
+            /// å½“åˆ›å»ºæ–°çš„å—æ—¶è®°å½•çš„äº‹ä»¶ã€‚
             /// </summary>
-            /// <param name="smallPoolInUseBytes">µ±Ç°ÔÚĞ¡¿é³ØÖĞÊ¹ÓÃµÄ×Ö½ÚÊı¡£</param>
+            /// <param name="smallPoolInUseBytes">å½“å‰åœ¨å°å—æ± ä¸­ä½¿ç”¨çš„å­—èŠ‚æ•°ã€‚</param>
             [Event(7, Level = EventLevel.Warning, Version = 2)]
             public void MemoryStreamNewBlockCreated(long smallPoolInUseBytes)
             {
@@ -186,10 +186,10 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// µ±´´½¨ĞÂµÄ´ó»º³åÇøÊ±¼ÇÂ¼µÄÊÂ¼ş¡£
+            /// å½“åˆ›å»ºæ–°çš„å¤§ç¼“å†²åŒºæ—¶è®°å½•çš„äº‹ä»¶ã€‚
             /// </summary>
-            /// <param name="requiredSize">ÇëÇóµÄ´óĞ¡¡£</param>
-            /// <param name="largePoolInUseBytes">µ±Ç°ÔÚ´ó»º³åÇø³ØÖĞÊ¹ÓÃµÄ×Ö½ÚÊı¡£</param>
+            /// <param name="requiredSize">è¯·æ±‚çš„å¤§å°ã€‚</param>
+            /// <param name="largePoolInUseBytes">å½“å‰åœ¨å¤§ç¼“å†²åŒºæ± ä¸­ä½¿ç”¨çš„å­—èŠ‚æ•°ã€‚</param>
             [Event(8, Level = EventLevel.Warning, Version = 3)]
             public void MemoryStreamNewLargeBufferCreated(long requiredSize, long largePoolInUseBytes)
             {
@@ -200,13 +200,13 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// µ±´´½¨µÄ»º³åÇø¹ı´óÎŞ·¨·ÅÈë³ØÖĞÊ±¼ÇÂ¼µÄÊÂ¼ş¡£
+            /// å½“åˆ›å»ºçš„ç¼“å†²åŒºè¿‡å¤§æ— æ³•æ”¾å…¥æ± ä¸­æ—¶è®°å½•çš„äº‹ä»¶ã€‚
             /// </summary>
-            /// <param name="guid">Î¨Ò»µÄÁ÷ ID¡£</param>
-            /// <param name="tag">ÁÙÊ± ID£¬Í¨³£±íÊ¾µ±Ç°Ê¹ÓÃÇé¿ö¡£</param>
-            /// <param name="requiredSize">µ÷ÓÃÕßÇëÇóµÄ´óĞ¡¡£</param>
-            /// <param name="allocationStack">ÇëÇóÁ÷µÄµ÷ÓÃ¶ÑÕ»¡£</param>
-            /// <remarks>×¢Òâ£ºÖ»ÓĞÔÚ RecyclableMemoryStreamManager.GenerateCallStacks Îª true Ê±£¬¶ÑÕ»²Å»á±»Ìî³ä¡£</remarks>
+            /// <param name="guid">å”¯ä¸€çš„æµ IDã€‚</param>
+            /// <param name="tag">ä¸´æ—¶ IDï¼Œé€šå¸¸è¡¨ç¤ºå½“å‰ä½¿ç”¨æƒ…å†µã€‚</param>
+            /// <param name="requiredSize">è°ƒç”¨è€…è¯·æ±‚çš„å¤§å°ã€‚</param>
+            /// <param name="allocationStack">è¯·æ±‚æµçš„è°ƒç”¨å †æ ˆã€‚</param>
+            /// <remarks>æ³¨æ„ï¼šåªæœ‰åœ¨ RecyclableMemoryStreamManager.GenerateCallStacks ä¸º true æ—¶ï¼Œå †æ ˆæ‰ä¼šè¢«å¡«å……ã€‚</remarks>
             [Event(9, Level = EventLevel.Verbose, Version = 3)]
             public void MemoryStreamNonPooledLargeBufferCreated(Guid guid, string tag, long requiredSize, string allocationStack)
             {
@@ -217,18 +217,18 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// µ±»º³åÇø±»¶ªÆúÊ±¼ÇÂ¼µÄÊÂ¼ş£¨Ã»ÓĞ·Å»Ø³ØÖĞ£¬¶øÊÇ½»ÓÉ GC ÇåÀí£©¡£
+            /// å½“ç¼“å†²åŒºè¢«ä¸¢å¼ƒæ—¶è®°å½•çš„äº‹ä»¶ï¼ˆæ²¡æœ‰æ”¾å›æ± ä¸­ï¼Œè€Œæ˜¯äº¤ç”± GC æ¸…ç†ï¼‰ã€‚
             /// </summary>
-            /// <param name="guid">Î¨Ò»µÄÁ÷ ID¡£</param>
-            /// <param name="tag">ÁÙÊ± ID£¬Í¨³£±íÊ¾µ±Ç°Ê¹ÓÃÇé¿ö¡£</param>
-            /// <param name="bufferType">±»¶ªÆúµÄ»º³åÇøÀàĞÍ¡£</param>
-            /// <param name="reason">¶ªÆúÔ­Òò¡£</param>
-            /// <param name="smallBlocksFree">Ğ¡¿é³ØÖĞµÄ¿ÕÏĞ¿éÊı¡£</param>
-            /// <param name="smallPoolBytesFree">Ğ¡¿é³ØÖĞµÄ¿ÕÏĞ×Ö½ÚÊı¡£</param>
-            /// <param name="smallPoolBytesInUse">´ÓĞ¡¿é³ØÖĞÊ¹ÓÃµÄ×Ö½ÚÊı¡£</param>
-            /// <param name="largeBlocksFree">´ó»º³åÇø³ØÖĞµÄ¿ÕÏĞ¿éÊı¡£</param>
-            /// <param name="largePoolBytesFree">´ó»º³åÇø³ØÖĞµÄ¿ÕÏĞ×Ö½ÚÊı¡£</param>
-            /// <param name="largePoolBytesInUse">´Ó´ó»º³åÇø³ØÖĞÊ¹ÓÃµÄ×Ö½ÚÊı¡£</param>
+            /// <param name="guid">å”¯ä¸€çš„æµ IDã€‚</param>
+            /// <param name="tag">ä¸´æ—¶ IDï¼Œé€šå¸¸è¡¨ç¤ºå½“å‰ä½¿ç”¨æƒ…å†µã€‚</param>
+            /// <param name="bufferType">è¢«ä¸¢å¼ƒçš„ç¼“å†²åŒºç±»å‹ã€‚</param>
+            /// <param name="reason">ä¸¢å¼ƒåŸå› ã€‚</param>
+            /// <param name="smallBlocksFree">å°å—æ± ä¸­çš„ç©ºé—²å—æ•°ã€‚</param>
+            /// <param name="smallPoolBytesFree">å°å—æ± ä¸­çš„ç©ºé—²å­—èŠ‚æ•°ã€‚</param>
+            /// <param name="smallPoolBytesInUse">ä»å°å—æ± ä¸­ä½¿ç”¨çš„å­—èŠ‚æ•°ã€‚</param>
+            /// <param name="largeBlocksFree">å¤§ç¼“å†²åŒºæ± ä¸­çš„ç©ºé—²å—æ•°ã€‚</param>
+            /// <param name="largePoolBytesFree">å¤§ç¼“å†²åŒºæ± ä¸­çš„ç©ºé—²å­—èŠ‚æ•°ã€‚</param>
+            /// <param name="largePoolBytesInUse">ä»å¤§ç¼“å†²åŒºæ± ä¸­ä½¿ç”¨çš„å­—èŠ‚æ•°ã€‚</param>
             [Event(10, Level = EventLevel.Warning, Version = 2)]
             public void MemoryStreamDiscardBuffer(Guid guid, string tag, MemoryStreamBufferType bufferType,
                                                   MemoryStreamDiscardReason reason, long smallBlocksFree, long smallPoolBytesFree, long smallPoolBytesInUse, long largeBlocksFree, long largePoolBytesFree, long largePoolBytesInUse)
@@ -240,14 +240,14 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// µ±Á÷µÄÈİÁ¿³¬¹ı×î´óÖµÊ±¼ÇÂ¼µÄÊÂ¼ş¡£
+            /// å½“æµçš„å®¹é‡è¶…è¿‡æœ€å¤§å€¼æ—¶è®°å½•çš„äº‹ä»¶ã€‚
             /// </summary>
-            /// <param name="guid">Î¨Ò»µÄÁ÷ ID¡£</param>
-            /// <param name="requestedCapacity">ÇëÇóµÄÈİÁ¿¡£</param>
-            /// <param name="maxCapacity">×î´óÈİÁ¿£¬ÓÉ RecyclableMemoryStreamManager ÅäÖÃ¡£</param>
-            /// <param name="tag">ÁÙÊ± ID£¬Í¨³£±íÊ¾µ±Ç°Ê¹ÓÃÇé¿ö¡£</param>
-            /// <param name="allocationStack">ÈİÁ¿ÇëÇóµÄµ÷ÓÃ¶ÑÕ»¡£</param>
-            /// <remarks>×¢Òâ£ºÖ»ÓĞÔÚ RecyclableMemoryStreamManager.GenerateCallStacks Îª true Ê±£¬¶ÑÕ»²Å»á±»Ìî³ä¡£</remarks>
+            /// <param name="guid">å”¯ä¸€çš„æµ IDã€‚</param>
+            /// <param name="requestedCapacity">è¯·æ±‚çš„å®¹é‡ã€‚</param>
+            /// <param name="maxCapacity">æœ€å¤§å®¹é‡ï¼Œç”± RecyclableMemoryStreamManager é…ç½®ã€‚</param>
+            /// <param name="tag">ä¸´æ—¶ IDï¼Œé€šå¸¸è¡¨ç¤ºå½“å‰ä½¿ç”¨æƒ…å†µã€‚</param>
+            /// <param name="allocationStack">å®¹é‡è¯·æ±‚çš„è°ƒç”¨å †æ ˆã€‚</param>
+            /// <remarks>æ³¨æ„ï¼šåªæœ‰åœ¨ RecyclableMemoryStreamManager.GenerateCallStacks ä¸º true æ—¶ï¼Œå †æ ˆæ‰ä¼šè¢«å¡«å……ã€‚</remarks>
             [Event(11, Level = EventLevel.Error, Version = 3)]
             public void MemoryStreamOverCapacity(Guid guid, string tag, long requestedCapacity, long maxCapacity, string allocationStack)
             {

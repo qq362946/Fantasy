@@ -3,25 +3,25 @@ using System;
 namespace Fantasy.Helper
 {
     /// <summary>
-    /// Ìá¹©ÓÃÓÚÉú³É²»Í¬ÀàĞÍ ID µÄ¹¤³§Àà¡£
+    /// æä¾›ç”¨äºç”Ÿæˆä¸åŒç±»å‹ ID çš„å·¥å‚ç±»ã€‚
     /// </summary>
     public static class IdFactory
     {
-        // Ê±¼ä´Á¼ÆËãÏà¹Ø³£Á¿
+        // æ—¶é—´æˆ³è®¡ç®—ç›¸å…³å¸¸é‡
         private static readonly long Epoch1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000;
         private static readonly long Epoch2023 = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - Epoch1970;
         private static readonly long EpochThisYear = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - Epoch1970;
-        // ÔËĞĞÊ± ID Ïà¹Ø×Ö¶Î
+        // è¿è¡Œæ—¶ ID ç›¸å…³å­—æ®µ
         private static uint _lastRunTimeIdTime;
         private static uint _lastRunTimeIdSequence;
-        // ÊµÌå ID Ïà¹Ø×Ö¶Î
+        // å®ä½“ ID ç›¸å…³å­—æ®µ
         private static uint _lastEntityIdTime;
         private static uint _lastEntityIdSequence;
 
         /// <summary>
-        /// Éú³ÉÏÂÒ»¸öÔËĞĞÊ± ID¡£
+        /// ç”Ÿæˆä¸‹ä¸€ä¸ªè¿è¡Œæ—¶ IDã€‚
         /// </summary>
-        /// <returns>Éú³ÉµÄÔËĞĞÊ± ID¡£</returns>
+        /// <returns>ç”Ÿæˆçš„è¿è¡Œæ—¶ IDã€‚</returns>
         public static long NextRunTimeId()
         {
             var time = (uint) ((TimeHelper.Now - EpochThisYear) / 1000);
@@ -41,10 +41,10 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// Éú³ÉÏÂÒ»¸öÊµÌå ID¡£
+        /// ç”Ÿæˆä¸‹ä¸€ä¸ªå®ä½“ IDã€‚
         /// </summary>
-        /// <param name="locationId">Î»ÖÃ ID¡£</param>
-        /// <returns>Éú³ÉµÄÊµÌå ID¡£</returns>
+        /// <param name="locationId">ä½ç½® IDã€‚</param>
+        /// <returns>ç”Ÿæˆçš„å®ä½“ IDã€‚</returns>
         public static long NextEntityId(uint locationId)
         {
             var time = (uint)((TimeHelper.Now - Epoch2023) / 1000);
@@ -64,30 +64,30 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// »ñÈ¡ÊµÌå ID ¶ÔÓ¦µÄÂ·ÓÉ ID¡£
+        /// è·å–å®ä½“ ID å¯¹åº”çš„è·¯ç”± IDã€‚
         /// </summary>
-        /// <param name="entityId">ÊµÌå ID¡£</param>
-        /// <returns>Â·ÓÉ ID¡£</returns>
+        /// <param name="entityId">å®ä½“ IDã€‚</param>
+        /// <returns>è·¯ç”± IDã€‚</returns>
         public static uint GetRouteId(long entityId)
         {
             return (ushort)(entityId >> 16 & EntityIdStruct.MaskRouteId);
         }
 
         /// <summary>
-        /// »ñÈ¡ÊµÌå ID ¶ÔÓ¦µÄÓ¦ÓÃ ID¡£
+        /// è·å–å®ä½“ ID å¯¹åº”çš„åº”ç”¨ IDã€‚
         /// </summary>
-        /// <param name="entityId">ÊµÌå ID¡£</param>
-        /// <returns>Ó¦ÓÃ ID¡£</returns>
+        /// <param name="entityId">å®ä½“ IDã€‚</param>
+        /// <returns>åº”ç”¨ IDã€‚</returns>
         public static ushort GetAppId(long entityId)
         {
             return (ushort)(entityId >> 26 & RouteIdStruct.MaskAppId);
         }
 
         /// <summary>
-        /// »ñÈ¡ÊµÌå ID ¶ÔÓ¦µÄÊÀ½ç ID¡£
+        /// è·å–å®ä½“ ID å¯¹åº”çš„ä¸–ç•Œ IDã€‚
         /// </summary>
-        /// <param name="entityId">ÊµÌå ID¡£</param>
-        /// <returns>ÊÀ½ç ID¡£</returns>
+        /// <param name="entityId">å®ä½“ IDã€‚</param>
+        /// <returns>ä¸–ç•Œ IDã€‚</returns>
         public static int GetWordId(long entityId)
         {
             return (ushort)(entityId >> 16 & RouteIdStruct.MaskWordId);

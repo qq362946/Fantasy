@@ -4,16 +4,16 @@ using System.Collections.Generic;
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// Ìá¹©Ò»¸ö¿ÉÒÔÊ¹ÓÃ¶ÔÏó³Ø¹ÜÀíµÄ×ÖµäÀà¡£
+    /// æä¾›ä¸€ä¸ªå¯ä»¥ä½¿ç”¨å¯¹è±¡æ± ç®¡ç†çš„å­—å…¸ç±»ã€‚
     /// </summary>
-    /// <typeparam name="TM">×ÖµäÖĞ¼üµÄÀàĞÍ¡£</typeparam>
-    /// <typeparam name="TN">×ÖµäÖĞÖµµÄÀàĞÍ¡£</typeparam>
+    /// <typeparam name="TM">å­—å…¸ä¸­é”®çš„ç±»å‹ã€‚</typeparam>
+    /// <typeparam name="TN">å­—å…¸ä¸­å€¼çš„ç±»å‹ã€‚</typeparam>
     public sealed class DictionaryPool<TM, TN> : Dictionary<TM, TN>, IDisposable where TM : notnull
     {
         private bool _isDispose;
 
         /// <summary>
-        /// ÊÍ·ÅÊµÀıÕ¼ÓÃµÄ×ÊÔ´¡£
+        /// é‡Šæ”¾å®ä¾‹å ç”¨çš„èµ„æºã€‚
         /// </summary>
         public void Dispose()
         {
@@ -28,9 +28,9 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ´´½¨Ò»¸öĞÂµÄ <see cref="DictionaryPool{TM, TN}"/> ÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ªæ–°çš„ <see cref="DictionaryPool{TM, TN}"/> å®ä¾‹ã€‚
         /// </summary>
-        /// <returns>ĞÂ´´½¨µÄÊµÀı¡£</returns>
+        /// <returns>æ–°åˆ›å»ºçš„å®ä¾‹ã€‚</returns>
         public static DictionaryPool<TM, TN> Create()
         {
             var dictionary = Pool<DictionaryPool<TM, TN>>.Rent();

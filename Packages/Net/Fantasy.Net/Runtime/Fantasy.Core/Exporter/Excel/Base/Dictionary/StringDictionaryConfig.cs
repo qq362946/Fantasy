@@ -4,30 +4,30 @@ using ProtoBuf;
 namespace Fantasy.Core
 {
     /// <summary>
-    /// Ê¹ÓÃ ProtoBuf ĞòÁĞ»¯µÄ×Ö·û´®×ÖµäÅäÖÃÀà¡£
+    /// ä½¿ç”¨ ProtoBuf åºåˆ—åŒ–çš„å­—ç¬¦ä¸²å­—å…¸é…ç½®ç±»ã€‚
     /// </summary>
     [ProtoContract]
     public sealed class StringDictionaryConfig
     {
         /// <summary>
-        /// Ê¹ÓÃ ProtoBuf ĞòÁĞ»¯µÄ×Öµä¡£
+        /// ä½¿ç”¨ ProtoBuf åºåˆ—åŒ–çš„å­—å…¸ã€‚
         /// </summary>
         [ProtoMember(1, IsRequired = true)] 
         public Dictionary<int, string> Dic;
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÖ¸¶¨¼üµÄ×Ö·û´®Öµ¡£
+        /// è·å–æˆ–è®¾ç½®æŒ‡å®šé”®çš„å­—ç¬¦ä¸²å€¼ã€‚
         /// </summary>
-        /// <param name="key">¼ü¡£</param>
-        /// <returns>×Ö·û´®Öµ¡£</returns>
+        /// <param name="key">é”®ã€‚</param>
+        /// <returns>å­—ç¬¦ä¸²å€¼ã€‚</returns>
         public string this[int key] => GetValue(key);
 
         /// <summary>
-        /// ³¢ÊÔ»ñÈ¡Ö¸¶¨¼üµÄ×Ö·û´®Öµ¡£
+        /// å°è¯•è·å–æŒ‡å®šé”®çš„å­—ç¬¦ä¸²å€¼ã€‚
         /// </summary>
-        /// <param name="key">¼ü¡£</param>
-        /// <param name="value">»ñÈ¡µ½µÄ×Ö·û´®Öµ¡£</param>
-        /// <returns>Èç¹û³É¹¦»ñÈ¡µ½Öµ£¬Ôò·µ»Ø true£¬·ñÔò·µ»Ø false¡£</returns>
+        /// <param name="key">é”®ã€‚</param>
+        /// <param name="value">è·å–åˆ°çš„å­—ç¬¦ä¸²å€¼ã€‚</param>
+        /// <returns>å¦‚æœæˆåŠŸè·å–åˆ°å€¼ï¼Œåˆ™è¿”å› trueï¼Œå¦åˆ™è¿”å› falseã€‚</returns>
         public bool TryGetValue(int key, out string value)
         {
             value = default;

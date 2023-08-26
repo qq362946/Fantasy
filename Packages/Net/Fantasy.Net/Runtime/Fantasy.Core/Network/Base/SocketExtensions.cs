@@ -3,14 +3,14 @@ using System.Net.Sockets;
 namespace Fantasy.Core.Network
 {
     /// <summary>
-    /// Ìá¹©À©Õ¹·½·¨ÒÔ²Ù×÷ Socket »º³åÇø´óĞ¡¡£
+    /// æä¾›æ‰©å±•æ–¹æ³•ä»¥æ“ä½œ Socket ç¼“å†²åŒºå¤§å°ã€‚
     /// </summary>
     public static class SocketExtensions
     {
         /// <summary>
-        /// ½« Socket »º³åÇø´óĞ¡ÉèÖÃÎª²Ù×÷ÏµÍ³ÏŞÖÆ¡£
+        /// å°† Socket ç¼“å†²åŒºå¤§å°è®¾ç½®ä¸ºæ“ä½œç³»ç»Ÿé™åˆ¶ã€‚
         /// </summary>
-        /// <param name="socket">ÒªÉèÖÃ»º³åÇø´óĞ¡µÄ Socket¡£</param>
+        /// <param name="socket">è¦è®¾ç½®ç¼“å†²åŒºå¤§å°çš„ Socketã€‚</param>
         public static void SetSocketBufferToOsLimit(this Socket socket)
         {
             socket.SetReceiveBufferToOSLimit();
@@ -18,12 +18,12 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ½« Socket ½ÓÊÕ»º³åÇø´óĞ¡ÉèÖÃÎª²Ù×÷ÏµÍ³ÏŞÖÆ¡£
-        /// ³¢ÊÔÔö¼Ó½ÓÊÕ»º³åÇø´óĞ¡µÄ´ÎÊı = Ä¬ÈÏ + ×î´óÔö¼Ó 100 MB¡£
+        /// å°† Socket æ¥æ”¶ç¼“å†²åŒºå¤§å°è®¾ç½®ä¸ºæ“ä½œç³»ç»Ÿé™åˆ¶ã€‚
+        /// å°è¯•å¢åŠ æ¥æ”¶ç¼“å†²åŒºå¤§å°çš„æ¬¡æ•° = é»˜è®¤ + æœ€å¤§å¢åŠ  100 MBã€‚
         /// </summary>
-        /// <param name="socket">ÒªÉèÖÃ½ÓÊÕ»º³åÇø´óĞ¡µÄ Socket¡£</param>
-        /// <param name="stepSize">Ã¿´ÎÔö¼ÓµÄ²½³¤´óĞ¡¡£</param>
-        /// <param name="attempts">³¢ÊÔÔö¼Ó»º³åÇø´óĞ¡µÄ´ÎÊı¡£</param>
+        /// <param name="socket">è¦è®¾ç½®æ¥æ”¶ç¼“å†²åŒºå¤§å°çš„ Socketã€‚</param>
+        /// <param name="stepSize">æ¯æ¬¡å¢åŠ çš„æ­¥é•¿å¤§å°ã€‚</param>
+        /// <param name="attempts">å°è¯•å¢åŠ ç¼“å†²åŒºå¤§å°çš„æ¬¡æ•°ã€‚</param>
         public static void SetReceiveBufferToOSLimit(this Socket socket, int stepSize = 1024, int attempts = 100_000)
         {
             // setting a too large size throws a socket exception.
@@ -43,12 +43,12 @@ namespace Fantasy.Core.Network
         }
 
         /// <summary>
-        /// ½« Socket ·¢ËÍ»º³åÇø´óĞ¡ÉèÖÃÎª²Ù×÷ÏµÍ³ÏŞÖÆ¡£
-        /// ³¢ÊÔÔö¼Ó·¢ËÍ»º³åÇø´óĞ¡µÄ´ÎÊı = Ä¬ÈÏ + ×î´óÔö¼Ó 100 MB¡£
+        /// å°† Socket å‘é€ç¼“å†²åŒºå¤§å°è®¾ç½®ä¸ºæ“ä½œç³»ç»Ÿé™åˆ¶ã€‚
+        /// å°è¯•å¢åŠ å‘é€ç¼“å†²åŒºå¤§å°çš„æ¬¡æ•° = é»˜è®¤ + æœ€å¤§å¢åŠ  100 MBã€‚
         /// </summary>
-        /// <param name="socket">ÒªÉèÖÃ·¢ËÍ»º³åÇø´óĞ¡µÄ Socket¡£</param>
-        /// <param name="stepSize">Ã¿´ÎÔö¼ÓµÄ²½³¤´óĞ¡¡£</param>
-        /// <param name="attempts">³¢ÊÔÔö¼Ó»º³åÇø´óĞ¡µÄ´ÎÊı¡£</param>
+        /// <param name="socket">è¦è®¾ç½®å‘é€ç¼“å†²åŒºå¤§å°çš„ Socketã€‚</param>
+        /// <param name="stepSize">æ¯æ¬¡å¢åŠ çš„æ­¥é•¿å¤§å°ã€‚</param>
+        /// <param name="attempts">å°è¯•å¢åŠ ç¼“å†²åŒºå¤§å°çš„æ¬¡æ•°ã€‚</param>
         public static void SetSendBufferToOSLimit(this Socket socket, int stepSize = 1024, int attempts = 100_000)
         {
             // setting a too large size throws a socket exception.

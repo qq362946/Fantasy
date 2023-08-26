@@ -4,17 +4,17 @@ using System.Collections.Generic;
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// ¿ÉÖØÓÃµÄÁĞ±í£¬¼Ì³Ğ×Ô <see cref="List{T}"/> Àà¡£¸ÃÀàÖ§³ÖÍ¨¹ı¶ÔÏó³ØÖØÓÃÁĞ±íÊµÀı£¬ÒÔ¼õÉÙ¶ÔÏó·ÖÅäºÍÊÍ·ÅµÄ¿ªÏú¡£
+    /// å¯é‡ç”¨çš„åˆ—è¡¨ï¼Œç»§æ‰¿è‡ª <see cref="List{T}"/> ç±»ã€‚è¯¥ç±»æ”¯æŒé€šè¿‡å¯¹è±¡æ± é‡ç”¨åˆ—è¡¨å®ä¾‹ï¼Œä»¥å‡å°‘å¯¹è±¡åˆ†é…å’Œé‡Šæ”¾çš„å¼€é”€ã€‚
     /// </summary>
-    /// <typeparam name="T">ÁĞ±íÖĞÔªËØµÄÀàĞÍ¡£</typeparam>
+    /// <typeparam name="T">åˆ—è¡¨ä¸­å…ƒç´ çš„ç±»å‹ã€‚</typeparam>
     public sealed class ReuseList<T> : List<T>, IDisposable
     {
         private bool _isDispose;
 
         /// <summary>
-        /// ´´½¨Ò»¸ö <see cref="ReuseList{T}"/> ¿ÉÖØÓÃµÄÁĞ±íµÄÊµÀı¡£
+        /// åˆ›å»ºä¸€ä¸ª <see cref="ReuseList{T}"/> å¯é‡ç”¨çš„åˆ—è¡¨çš„å®ä¾‹ã€‚
         /// </summary>
-        /// <returns>´´½¨µÄÊµÀı¡£</returns>
+        /// <returns>åˆ›å»ºçš„å®ä¾‹ã€‚</returns>
         public static ReuseList<T> Create()
         {
             var list = Pool<ReuseList<T>>.Rent();
@@ -23,7 +23,7 @@ namespace Fantasy.DataStructure
         }
 
         /// <summary>
-        /// ÊÍ·Å¸ÃÊµÀıËùÕ¼ÓÃµÄ×ÊÔ´£¬²¢½«ÊµÀı·µ»Øµ½¶ÔÏó³ØÖĞ£¬ÒÔ±ãÖØÓÃ¡£
+        /// é‡Šæ”¾è¯¥å®ä¾‹æ‰€å ç”¨çš„èµ„æºï¼Œå¹¶å°†å®ä¾‹è¿”å›åˆ°å¯¹è±¡æ± ä¸­ï¼Œä»¥ä¾¿é‡ç”¨ã€‚
         /// </summary>
         public void Dispose()
         {

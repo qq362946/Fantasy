@@ -2,16 +2,16 @@
 namespace Fantasy;
 
 /// <summary>
-/// ¿ØÖÆÌ¨³ÌĞò¶¨ÒåÀàĞÍ
+/// æ§åˆ¶å°ç¨‹åºå®šä¹‰ç±»å‹
 /// </summary>
 public static class AppDefine
 {
     /// <summary>
-    /// ÃüÁîĞĞÑ¡Ïî
+    /// å‘½ä»¤è¡Œé€‰é¡¹
     /// </summary>
     public static CommandLineOptions Options;
     /// <summary>
-    /// App³ÌĞòId
+    /// Appç¨‹åºId
     /// </summary>
     public static uint AppId => Options.AppId;
 }

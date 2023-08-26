@@ -1,55 +1,55 @@
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// ��Ծ���ڵ㡣
+    /// 跳跃表节点。
     /// </summary>
-    /// <typeparam name="TValue">�ڵ��ֵ�����͡�</typeparam>
+    /// <typeparam name="TValue">节点的值的类型。</typeparam>
     public class SkipTableNode<TValue>
     {
         /// <summary>
-        /// �ڵ�����Ծ���е�������
+        /// 节点在跳跃表中的索引。
         /// </summary>
         public int Index;
         /// <summary>
-        /// �ڵ��������
+        /// 节点的主键。
         /// </summary>
         public long Key;
         /// <summary>
-        /// �ڵ���������
+        /// 节点的排序键。
         /// </summary>
         public long SortKey;
         /// <summary>
-        /// �ڵ�ĸ�����
+        /// 节点的副键。
         /// </summary>
         public long ViceKey;
         /// <summary>
-        /// �ڵ�洢��ֵ��
+        /// 节点存储的值。
         /// </summary>
         public TValue Value;
         /// <summary>
-        /// ָ�����ڵ�����á�
+        /// 指向左侧节点的引用。
         /// </summary>
         public SkipTableNode<TValue> Left;
         /// <summary>
-        /// ָ���Ҳ�ڵ�����á�
+        /// 指向右侧节点的引用。
         /// </summary>
         public SkipTableNode<TValue> Right;
         /// <summary>
-        /// ָ����һ��ڵ�����á�
+        /// 指向下一层节点的引用。
         /// </summary>
         public SkipTableNode<TValue> Down;
 
         /// <summary>
-        /// ��ʼ����Ծ���ڵ����ʵ����
+        /// 初始化跳跃表节点的新实例。
         /// </summary>
-        /// <param name="sortKey">�ڵ���������</param>
-        /// <param name="viceKey">�ڵ�ĸ�����</param>
-        /// <param name="key">�ڵ��������</param>
-        /// <param name="value">�ڵ�洢��ֵ��</param>
-        /// <param name="index">�ڵ�����Ծ���е�������</param>
-        /// <param name="l">ָ�����ڵ�����á�</param>
-        /// <param name="r">ָ���Ҳ�ڵ�����á�</param>
-        /// <param name="d">ָ����һ��ڵ�����á�</param>
+        /// <param name="sortKey">节点的排序键。</param>
+        /// <param name="viceKey">节点的副键。</param>
+        /// <param name="key">节点的主键。</param>
+        /// <param name="value">节点存储的值。</param>
+        /// <param name="index">节点在跳跃表中的索引。</param>
+        /// <param name="l">指向左侧节点的引用。</param>
+        /// <param name="r">指向右侧节点的引用。</param>
+        /// <param name="d">指向下一层节点的引用。</param>
         public SkipTableNode(long sortKey, long viceKey, long key, TValue value, int index,
             SkipTableNode<TValue> l,
             SkipTableNode<TValue> r,

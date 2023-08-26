@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 namespace Fantasy
 {
     /// <summary>
-    /// ÊµÌå»ùÀà£¬ÓÃÓÚÊµÌå´´½¨¡¢»ØÊÕ¡¢»ñÈ¡£¬ºÍ×é¼ş²Ù×÷
+    /// å®ä½“åŸºç±»ï¼Œç”¨äºå®ä½“åˆ›å»ºã€å›æ”¶ã€è·å–ï¼Œå’Œç»„ä»¶æ“ä½œ
     /// </summary>
     public abstract class Entity : IDisposable
     {
@@ -27,32 +27,32 @@ namespace Fantasy
         private static readonly OneToManyQueue<Type, Entity> Pool = new OneToManyQueue<Type, Entity>();
 
         /// <summary>
-        /// »ñÈ¡Ö¸¶¨ÔËĞĞÊ±IDµÄÊµÌå¶ÔÏó
+        /// è·å–æŒ‡å®šè¿è¡Œæ—¶IDçš„å®ä½“å¯¹è±¡
         /// </summary>
-        /// <param name="runTimeId">ÔËĞĞÊ±ID</param>
-        /// <returns>ÊµÌå¶ÔÏó</returns>
+        /// <param name="runTimeId">è¿è¡Œæ—¶ID</param>
+        /// <returns>å®ä½“å¯¹è±¡</returns>
         public static Entity GetEntity(long runTimeId)
         {
             return Entities.TryGetValue(runTimeId, out var entity) ? entity : null;
         }
 
         /// <summary>
-        /// ³¢ÊÔ»ñÈ¡Ö¸¶¨ÔËĞĞÊ±IDµÄÊµÌå¶ÔÏó
+        /// å°è¯•è·å–æŒ‡å®šè¿è¡Œæ—¶IDçš„å®ä½“å¯¹è±¡
         /// </summary>
-        /// <param name="runTimeId">ÔËĞĞÊ±ID</param>
-        /// <param name="entity">Êä³ö²ÎÊı£¬ÊµÌå¶ÔÏó</param>
-        /// <returns>ÊÇ·ñ»ñÈ¡³É¹¦</returns>
+        /// <param name="runTimeId">è¿è¡Œæ—¶ID</param>
+        /// <param name="entity">è¾“å‡ºå‚æ•°ï¼Œå®ä½“å¯¹è±¡</param>
+        /// <returns>æ˜¯å¦è·å–æˆåŠŸ</returns>
         public static bool TryGetEntity(long runTimeId, out Entity entity)
         {
             return Entities.TryGetValue(runTimeId, out entity);
         }
 
         /// <summary>
-        /// »ñÈ¡Ö¸¶¨ÔËĞĞÊ±IDµÄÊµÌå¶ÔÏó¡£
+        /// è·å–æŒ‡å®šè¿è¡Œæ—¶IDçš„å®ä½“å¯¹è±¡ã€‚
         /// </summary>
-        /// <typeparam name="T">ÊµÌåÀàĞÍ¡£</typeparam>
-        /// <param name="runTimeId">Òª»ñÈ¡µÄÊµÌåµÄÔËĞĞÊ±ID¡£</param>
-        /// <returns>ÕÒµ½µÄÊµÌå¶ÔÏó£¬Èç¹û²»´æÔÚÔò·µ»ØÄ¬ÈÏÖµ¡£</returns>
+        /// <typeparam name="T">å®ä½“ç±»å‹ã€‚</typeparam>
+        /// <param name="runTimeId">è¦è·å–çš„å®ä½“çš„è¿è¡Œæ—¶IDã€‚</param>
+        /// <returns>æ‰¾åˆ°çš„å®ä½“å¯¹è±¡ï¼Œå¦‚æœä¸å­˜åœ¨åˆ™è¿”å›é»˜è®¤å€¼ã€‚</returns>
         public static T GetEntity<T>(long runTimeId) where T : Entity, new()
         {
             if (!Entities.TryGetValue(runTimeId, out var entity))
@@ -64,12 +64,12 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ³¢ÊÔ»ñÈ¡Ö¸¶¨ÔËĞĞÊ±IDµÄÊµÌå¶ÔÏó¡£
+        /// å°è¯•è·å–æŒ‡å®šè¿è¡Œæ—¶IDçš„å®ä½“å¯¹è±¡ã€‚
         /// </summary>
-        /// <typeparam name="T">ÊµÌåÀàĞÍ¡£</typeparam>
-        /// <param name="runTimeId">Òª»ñÈ¡µÄÊµÌåµÄÔËĞĞÊ±ID¡£</param>
-        /// <param name="outEntity">Êä³ö²ÎÊı£¬ÕÒµ½µÄÊµÌå¶ÔÏó¡£</param>
-        /// <returns>Èç¹ûÕÒµ½ÊµÌå¶ÔÏóÔò·µ»Ø true£¬·ñÔò·µ»Ø false¡£</returns>
+        /// <typeparam name="T">å®ä½“ç±»å‹ã€‚</typeparam>
+        /// <param name="runTimeId">è¦è·å–çš„å®ä½“çš„è¿è¡Œæ—¶IDã€‚</param>
+        /// <param name="outEntity">è¾“å‡ºå‚æ•°ï¼Œæ‰¾åˆ°çš„å®ä½“å¯¹è±¡ã€‚</param>
+        /// <returns>å¦‚æœæ‰¾åˆ°å®ä½“å¯¹è±¡åˆ™è¿”å› trueï¼Œå¦åˆ™è¿”å› falseã€‚</returns>
         public static bool TryGetEntity<T>(long runTimeId, out T outEntity) where T : Entity, new()
         {
             if (!Entities.TryGetValue(runTimeId, out var entity))
@@ -121,12 +121,12 @@ namespace Fantasy
 
         #region Create
         /// <summary>
-        /// ÔÚÖ¸¶¨³¡¾°ÖĞ´´½¨Ò»¸öÊµÌå¶ÔÏó£¬²¢´¥·¢Ïà¹ØÊÂ¼ş£¨¿ÉÑ¡£©¡£
+        /// åœ¨æŒ‡å®šåœºæ™¯ä¸­åˆ›å»ºä¸€ä¸ªå®ä½“å¯¹è±¡ï¼Œå¹¶è§¦å‘ç›¸å…³äº‹ä»¶ï¼ˆå¯é€‰ï¼‰ã€‚
         /// </summary>
-        /// <typeparam name="T">ÊµÌåÀàĞÍ¡£</typeparam>
-        /// <param name="scene">Òª´´½¨ÊµÌåµÄ³¡¾°¡£</param>
-        /// <param name="isRunEvent">ÊÇ·ñ´¥·¢Ïà¹ØÊÂ¼ş¡£</param>
-        /// <returns>´´½¨µÄÊµÌå¶ÔÏó¡£</returns>
+        /// <typeparam name="T">å®ä½“ç±»å‹ã€‚</typeparam>
+        /// <param name="scene">è¦åˆ›å»ºå®ä½“çš„åœºæ™¯ã€‚</param>
+        /// <param name="isRunEvent">æ˜¯å¦è§¦å‘ç›¸å…³äº‹ä»¶ã€‚</param>
+        /// <returns>åˆ›å»ºçš„å®ä½“å¯¹è±¡ã€‚</returns>
         public static T Create<T>(Scene scene, bool isRunEvent = true) where T : Entity, new()
         {
             var entity = Create<T>(scene.LocationId, isRunEvent);
@@ -135,13 +135,13 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ÔÚÖ¸¶¨³¡¾°ÖĞ´´½¨Ò»¸ö¾ßÓĞÖ¸¶¨IDµÄÊµÌå¶ÔÏó£¬²¢´¥·¢Ïà¹ØÊÂ¼ş£¨¿ÉÑ¡£©¡£
+        /// åœ¨æŒ‡å®šåœºæ™¯ä¸­åˆ›å»ºä¸€ä¸ªå…·æœ‰æŒ‡å®šIDçš„å®ä½“å¯¹è±¡ï¼Œå¹¶è§¦å‘ç›¸å…³äº‹ä»¶ï¼ˆå¯é€‰ï¼‰ã€‚
         /// </summary>
-        /// <typeparam name="T">ÊµÌåÀàĞÍ¡£</typeparam>
-        /// <param name="scene">Òª´´½¨ÊµÌåµÄ³¡¾°¡£</param>
-        /// <param name="id">Òª·ÖÅä¸øÊµÌåµÄID¡£</param>
-        /// <param name="isRunEvent">ÊÇ·ñ´¥·¢Ïà¹ØÊÂ¼ş¡£</param>
-        /// <returns>´´½¨µÄÊµÌå¶ÔÏó¡£</returns>
+        /// <typeparam name="T">å®ä½“ç±»å‹ã€‚</typeparam>
+        /// <param name="scene">è¦åˆ›å»ºå®ä½“çš„åœºæ™¯ã€‚</param>
+        /// <param name="id">è¦åˆ†é…ç»™å®ä½“çš„IDã€‚</param>
+        /// <param name="isRunEvent">æ˜¯å¦è§¦å‘ç›¸å…³äº‹ä»¶ã€‚</param>
+        /// <returns>åˆ›å»ºçš„å®ä½“å¯¹è±¡ã€‚</returns>
         public static T Create<T>(Scene scene, long id, bool isRunEvent = true) where T : Entity, new()
         {
             var entity = Create<T>(id, scene.LocationId, isRunEvent);
@@ -169,26 +169,26 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ÔÚÖ¸¶¨Î»ÖÃ£¨locationId£©ÉÏ´´½¨Ò»¸ö¾ßÓĞÖ¸¶¨IDµÄÊµÌå¶ÔÏó£¬²¢´¥·¢Ïà¹ØÊÂ¼ş£¨¿ÉÑ¡£©¡£
+        /// åœ¨æŒ‡å®šä½ç½®ï¼ˆlocationIdï¼‰ä¸Šåˆ›å»ºä¸€ä¸ªå…·æœ‰æŒ‡å®šIDçš„å®ä½“å¯¹è±¡ï¼Œå¹¶è§¦å‘ç›¸å…³äº‹ä»¶ï¼ˆå¯é€‰ï¼‰ã€‚
         /// </summary>
-        /// <typeparam name="T">ÊµÌåÀàĞÍ¡£</typeparam>
-        /// <param name="id">Òª·ÖÅä¸øÊµÌåµÄID¡£</param>
-        /// <param name="locationId">ÊµÌåËùÔÚÎ»ÖÃµÄID¡£</param>
-        /// <param name="isRunEvent">ÊÇ·ñ´¥·¢Ïà¹ØÊÂ¼ş¡£</param>
-        /// <returns>´´½¨µÄÊµÌå¶ÔÏó¡£</returns>
+        /// <typeparam name="T">å®ä½“ç±»å‹ã€‚</typeparam>
+        /// <param name="id">è¦åˆ†é…ç»™å®ä½“çš„IDã€‚</param>
+        /// <param name="locationId">å®ä½“æ‰€åœ¨ä½ç½®çš„IDã€‚</param>
+        /// <param name="isRunEvent">æ˜¯å¦è§¦å‘ç›¸å…³äº‹ä»¶ã€‚</param>
+        /// <returns>åˆ›å»ºçš„å®ä½“å¯¹è±¡ã€‚</returns>
         protected static T Create<T>(long id, uint locationId, bool isRunEvent = true) where T : Entity, new()
         {
             return Create<T>(id, IdFactory.NextEntityId(locationId), isRunEvent);
         }
 
         /// <summary>
-        /// ÔÚÖ¸¶¨Î»ÖÃÖĞ´´½¨Ò»¸öÊµÌå¶ÔÏó£¬²¢¿ÉÑ¡ÔñÊÇ·ñÁ¢¼´´¥·¢ÊÂ¼ş¡£
+        /// åœ¨æŒ‡å®šä½ç½®ä¸­åˆ›å»ºä¸€ä¸ªå®ä½“å¯¹è±¡ï¼Œå¹¶å¯é€‰æ‹©æ˜¯å¦ç«‹å³è§¦å‘äº‹ä»¶ã€‚
         /// </summary>
-        /// <typeparam name="T">ÊµÌåÀàĞÍ¡£</typeparam>
-        /// <param name="id">Òª·ÖÅä¸øÊµÌåµÄID¡£</param>
-        /// <param name="runtimeId">Òª·ÖÅä¸øÊµÌåµÄÔËĞĞÊ±ID¡£</param>
-        /// <param name="isRunEvent">ÊÇ·ñÁ¢¼´´¥·¢ÊµÌåÊÂ¼ş¡£</param>
-        /// <returns>´´½¨µÄÊµÌå¶ÔÏó¡£</returns>
+        /// <typeparam name="T">å®ä½“ç±»å‹ã€‚</typeparam>
+        /// <param name="id">è¦åˆ†é…ç»™å®ä½“çš„IDã€‚</param>
+        /// <param name="runtimeId">è¦åˆ†é…ç»™å®ä½“çš„è¿è¡Œæ—¶IDã€‚</param>
+        /// <param name="isRunEvent">æ˜¯å¦ç«‹å³è§¦å‘å®ä½“äº‹ä»¶ã€‚</param>
+        /// <returns>åˆ›å»ºçš„å®ä½“å¯¹è±¡ã€‚</returns>
         protected static T Create<T>(long id, long runtimeId, bool isRunEvent = true) where T : Entity, new()
         {
             var entity = Rent<T>(typeof(T));
@@ -209,7 +209,7 @@ namespace Fantasy
 
         #region Members
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÊµÌåµÄÎ¨Ò»ID¡£
+        /// è·å–æˆ–è®¾ç½®å®ä½“çš„å”¯ä¸€IDã€‚
         /// </summary>
         [BsonId]
         [BsonElement]
@@ -218,14 +218,14 @@ namespace Fantasy
         public long Id { get; private set; }
 
         /// <summary>
-        /// »ñÈ¡ÊµÌåµÄÔËĞĞÊ±ID¡£
+        /// è·å–å®ä½“çš„è¿è¡Œæ—¶IDã€‚
         /// </summary>
         [BsonIgnore] 
         [IgnoreDataMember]
         public long RuntimeId { get; private set; }
 
         /// <summary>
-        /// »ñÈ¡Ò»¸öÖµ£¬±íÊ¾ÊµÌåÊÇ·ñÒÑ±»ÊÍ·Å¡£
+        /// è·å–ä¸€ä¸ªå€¼ï¼Œè¡¨ç¤ºå®ä½“æ˜¯å¦å·²è¢«é‡Šæ”¾ã€‚
         /// </summary>
         [BsonIgnore] 
         [JsonIgnore]
@@ -233,7 +233,7 @@ namespace Fantasy
         public bool IsDisposed => RuntimeId == 0;
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÊµÌåËùÊôµÄ³¡¾°¡£
+        /// è·å–æˆ–è®¾ç½®å®ä½“æ‰€å±çš„åœºæ™¯ã€‚
         /// </summary>
         [BsonIgnore]
         [JsonIgnore]
@@ -241,7 +241,7 @@ namespace Fantasy
         public Scene Scene { get; protected set; }
 
         /// <summary>
-        /// »ñÈ¡»òÉèÖÃÊµÌåµÄ¸¸ÊµÌå¡£
+        /// è·å–æˆ–è®¾ç½®å®ä½“çš„çˆ¶å®ä½“ã€‚
         /// </summary>
         [BsonIgnore] 
         [JsonIgnore]
@@ -272,10 +272,10 @@ namespace Fantasy
 
         #region AddComponent
         /// <summary>
-        /// ÔÚµ±Ç°ÊµÌåÉÏÌí¼ÓÒ»¸öÖ¸¶¨ÀàĞÍµÄ×é¼ş£¬²¢Á¢¼´´¥·¢×é¼şÊÂ¼ş¡£
+        /// åœ¨å½“å‰å®ä½“ä¸Šæ·»åŠ ä¸€ä¸ªæŒ‡å®šç±»å‹çš„ç»„ä»¶ï¼Œå¹¶ç«‹å³è§¦å‘ç»„ä»¶äº‹ä»¶ã€‚
         /// </summary>
-        /// <typeparam name="T">×é¼şÀàĞÍ¡£</typeparam>
-        /// <returns>´´½¨µÄ×é¼şÊµÌå¡£</returns>
+        /// <typeparam name="T">ç»„ä»¶ç±»å‹ã€‚</typeparam>
+        /// <returns>åˆ›å»ºçš„ç»„ä»¶å®ä½“ã€‚</returns>
         public T AddComponent<T>() where T : Entity, new()
         {
             var entity = Create<T>(Id, Scene.LocationId, false);
@@ -286,11 +286,11 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ÔÚµ±Ç°ÊµÌåÉÏÌí¼ÓÒ»¸öÖ¸¶¨ÀàĞÍµÄ×é¼ş£¬²¢Á¢¼´´¥·¢×é¼şÊÂ¼ş¡£
+        /// åœ¨å½“å‰å®ä½“ä¸Šæ·»åŠ ä¸€ä¸ªæŒ‡å®šç±»å‹çš„ç»„ä»¶ï¼Œå¹¶ç«‹å³è§¦å‘ç»„ä»¶äº‹ä»¶ã€‚
         /// </summary>
-        /// <typeparam name="T">×é¼şÀàĞÍ¡£</typeparam>
-        /// <param name="id">Òª·ÖÅä¸ø×é¼şµÄID¡£</param>
-        /// <returns>´´½¨µÄ×é¼şÊµÌå¡£</returns>
+        /// <typeparam name="T">ç»„ä»¶ç±»å‹ã€‚</typeparam>
+        /// <param name="id">è¦åˆ†é…ç»™ç»„ä»¶çš„IDã€‚</param>
+        /// <returns>åˆ›å»ºçš„ç»„ä»¶å®ä½“ã€‚</returns>
         public T AddComponent<T>(long id) where T : Entity, new()
         {
             var entity = Create<T>(id, Scene.LocationId, false);
@@ -301,9 +301,9 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ½«Ö¸¶¨µÄ×é¼şÌí¼Óµ½µ±Ç°ÊµÌå¡£
+        /// å°†æŒ‡å®šçš„ç»„ä»¶æ·»åŠ åˆ°å½“å‰å®ä½“ã€‚
         /// </summary>
-        /// <param name="component">ÒªÌí¼ÓµÄ×é¼ş¡£</param>
+        /// <param name="component">è¦æ·»åŠ çš„ç»„ä»¶ã€‚</param>
         public void AddComponent(Entity component)
         {
             if (this == component)
@@ -368,7 +368,7 @@ namespace Fantasy
 #if FANTASY_NET
         #region ForEach
         /// <summary>
-        /// »ñÈ¡Ò»¸ö IEnumerable£¬ÓÃÓÚ±éÀúµ±Ç°ÊµÌåÉÏËùÓĞÊµÏÖÁË ISupportedSingleCollection ½Ó¿ÚµÄ×é¼ş¡£
+        /// è·å–ä¸€ä¸ª IEnumerableï¼Œç”¨äºéå†å½“å‰å®ä½“ä¸Šæ‰€æœ‰å®ç°äº† ISupportedSingleCollection æ¥å£çš„ç»„ä»¶ã€‚
         /// </summary>
         public IEnumerable<Entity> ForEachSingleCollection
         {
@@ -387,7 +387,7 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// »ñÈ¡Ò»¸ö IEnumerable£¬ÓÃÓÚ±éÀúµ±Ç°ÊµÌåÉÏËùÓĞÊµÏÖÁË ISupportedSingleCollection »ò ISupportedTransfer ½Ó¿ÚµÄ×é¼ş¡£
+        /// è·å–ä¸€ä¸ª IEnumerableï¼Œç”¨äºéå†å½“å‰å®ä½“ä¸Šæ‰€æœ‰å®ç°äº† ISupportedSingleCollection æˆ– ISupportedTransfer æ¥å£çš„ç»„ä»¶ã€‚
         /// </summary>
         public IEnumerable<Entity> ForEachTransfer
         {
@@ -424,20 +424,20 @@ namespace Fantasy
 
         #region GetComponent
         /// <summary>
-        /// »ñÈ¡µ±Ç°ÊµÌåÉÏµÄÒ»¸öÖ¸¶¨ÀàĞÍµÄ×é¼şÊµÌå¡£
+        /// è·å–å½“å‰å®ä½“ä¸Šçš„ä¸€ä¸ªæŒ‡å®šç±»å‹çš„ç»„ä»¶å®ä½“ã€‚
         /// </summary>
-        /// <typeparam name="T">Òª»ñÈ¡µÄ×é¼şÀàĞÍ¡£</typeparam>
-        /// <returns>ÕÒµ½µÄ×é¼şÊµÌå£¬Èç¹û²»´æÔÚÔòÎª null¡£</returns>
+        /// <typeparam name="T">è¦è·å–çš„ç»„ä»¶ç±»å‹ã€‚</typeparam>
+        /// <returns>æ‰¾åˆ°çš„ç»„ä»¶å®ä½“ï¼Œå¦‚æœä¸å­˜åœ¨åˆ™ä¸º nullã€‚</returns>
         public T GetComponent<T>() where T : Entity, new()
         {
             return GetComponent(typeof(T)) as T;
         }
 
         /// <summary>
-        /// »ñÈ¡µ±Ç°ÊµÌåÉÏµÄÒ»¸öÖ¸¶¨ÀàĞÍµÄ×é¼şÊµÌå¡£
+        /// è·å–å½“å‰å®ä½“ä¸Šçš„ä¸€ä¸ªæŒ‡å®šç±»å‹çš„ç»„ä»¶å®ä½“ã€‚
         /// </summary>
-        /// <param name="componentType">Òª»ñÈ¡µÄ×é¼şÀàĞÍ¡£</param>
-        /// <returns>ÕÒµ½µÄ×é¼şÊµÌå£¬Èç¹û²»´æÔÚÔòÎª null¡£</returns>
+        /// <param name="componentType">è¦è·å–çš„ç»„ä»¶ç±»å‹ã€‚</param>
+        /// <returns>æ‰¾åˆ°çš„ç»„ä»¶å®ä½“ï¼Œå¦‚æœä¸å­˜åœ¨åˆ™ä¸º nullã€‚</returns>
         public Entity GetComponent(Type componentType)
         {
             if (_tree == null)
@@ -449,11 +449,11 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// »ñÈ¡µ±Ç°ÊµÌåÉÏµÄÒ»¸öÖ¸¶¨ÀàĞÍµÄ¶àÊµÌå×é¼ş¡£
+        /// è·å–å½“å‰å®ä½“ä¸Šçš„ä¸€ä¸ªæŒ‡å®šç±»å‹çš„å¤šå®ä½“ç»„ä»¶ã€‚
         /// </summary>
-        /// <typeparam name="T">Òª»ñÈ¡µÄ¶àÊµÌå×é¼şÀàĞÍ¡£</typeparam>
-        /// <param name="id">¶àÊµÌå×é¼şµÄID¡£</param>
-        /// <returns>ÕÒµ½µÄ¶àÊµÌå×é¼ş£¬Èç¹û²»´æÔÚÔòÎª null¡£</returns>
+        /// <typeparam name="T">è¦è·å–çš„å¤šå®ä½“ç»„ä»¶ç±»å‹ã€‚</typeparam>
+        /// <param name="id">å¤šå®ä½“ç»„ä»¶çš„IDã€‚</param>
+        /// <returns>æ‰¾åˆ°çš„å¤šå®ä½“ç»„ä»¶ï¼Œå¦‚æœä¸å­˜åœ¨åˆ™ä¸º nullã€‚</returns>
         public T GetComponent<T>(long id) where T : ISupportedMultiEntity, new()
         {
             if (_multi == null)
@@ -468,10 +468,10 @@ namespace Fantasy
 
         #region RemoveComponent
         /// <summary>
-        /// ´Óµ±Ç°ÊµÌåÉÏÒÆ³ıÒ»¸öÖ¸¶¨ÀàĞÍµÄ×é¼ş¡£
+        /// ä»å½“å‰å®ä½“ä¸Šç§»é™¤ä¸€ä¸ªæŒ‡å®šç±»å‹çš„ç»„ä»¶ã€‚
         /// </summary>
-        /// <typeparam name="T">ÒªÒÆ³ıµÄ×é¼şÀàĞÍ¡£</typeparam>
-        /// <param name="isDispose">ÊÇ·ñÍ¬Ê±ÊÍ·Å±»ÒÆ³ıµÄ×é¼ş¡£</param>
+        /// <typeparam name="T">è¦ç§»é™¤çš„ç»„ä»¶ç±»å‹ã€‚</typeparam>
+        /// <param name="isDispose">æ˜¯å¦åŒæ—¶é‡Šæ”¾è¢«ç§»é™¤çš„ç»„ä»¶ã€‚</param>
         public void RemoveComponent<T>(bool isDispose = true) where T : Entity, new()
         {
             if (_tree == null || !_tree.TryGetValue(typeof(T), out var component))
@@ -483,11 +483,11 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ´Óµ±Ç°ÊµÌåÉÏÒÆ³ıÒ»¸öÖ¸¶¨ÀàĞÍµÄ¶àÊµÌå×é¼ş¡£
+        /// ä»å½“å‰å®ä½“ä¸Šç§»é™¤ä¸€ä¸ªæŒ‡å®šç±»å‹çš„å¤šå®ä½“ç»„ä»¶ã€‚
         /// </summary>
-        /// <typeparam name="T">ÒªÒÆ³ıµÄ¶àÊµÌå×é¼şÀàĞÍ¡£</typeparam>
-        /// <param name="id">ÒªÒÆ³ıµÄ¶àÊµÌå×é¼şµÄID¡£</param>
-        /// <param name="isDispose">ÊÇ·ñÍ¬Ê±ÊÍ·Å±»ÒÆ³ıµÄ×é¼ş¡£</param>
+        /// <typeparam name="T">è¦ç§»é™¤çš„å¤šå®ä½“ç»„ä»¶ç±»å‹ã€‚</typeparam>
+        /// <param name="id">è¦ç§»é™¤çš„å¤šå®ä½“ç»„ä»¶çš„IDã€‚</param>
+        /// <param name="isDispose">æ˜¯å¦åŒæ—¶é‡Šæ”¾è¢«ç§»é™¤çš„ç»„ä»¶ã€‚</param>
         public void RemoveComponent<T>(long id, bool isDispose = true) where T : ISupportedMultiEntity, new()
         {
             if (_multi == null || !_multi.TryGetValue(id, out var component))
@@ -499,10 +499,10 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// ´Óµ±Ç°ÊµÌåÉÏÒÆ³ıÒ»¸öÖ¸¶¨µÄ×é¼şÊµÌå¡£
+        /// ä»å½“å‰å®ä½“ä¸Šç§»é™¤ä¸€ä¸ªæŒ‡å®šçš„ç»„ä»¶å®ä½“ã€‚
         /// </summary>
-        /// <param name="component">ÒªÒÆ³ıµÄ×é¼şÊµÌå¡£</param>
-        /// <param name="isDispose">ÊÇ·ñÍ¬Ê±ÊÍ·Å±»ÒÆ³ıµÄ×é¼ş¡£</param>
+        /// <param name="component">è¦ç§»é™¤çš„ç»„ä»¶å®ä½“ã€‚</param>
+        /// <param name="isDispose">æ˜¯å¦åŒæ—¶é‡Šæ”¾è¢«ç§»é™¤çš„ç»„ä»¶ã€‚</param>
         public void RemoveComponent(Entity component, bool isDispose = true)
         {
             if (this == component)
@@ -568,10 +568,10 @@ namespace Fantasy
 
         #region Deserialize
         /// <summary>
-        /// ´ÓĞòÁĞ»¯Êı¾İÖĞ»Ö¸´µ±Ç°ÊµÌåµÄ×´Ì¬£¬²¢½«ÆäÌí¼Óµ½Ö¸¶¨µÄ³¡¾°ÖĞ¡£
+        /// ä»åºåˆ—åŒ–æ•°æ®ä¸­æ¢å¤å½“å‰å®ä½“çš„çŠ¶æ€ï¼Œå¹¶å°†å…¶æ·»åŠ åˆ°æŒ‡å®šçš„åœºæ™¯ä¸­ã€‚
         /// </summary>
-        /// <param name="scene">ÒªÌí¼Óµ½µÄ³¡¾°¡£</param>
-        /// <param name="resetId">ÊÇ·ñÖØÖÃÊµÌåµÄID¡£</param>
+        /// <param name="scene">è¦æ·»åŠ åˆ°çš„åœºæ™¯ã€‚</param>
+        /// <param name="resetId">æ˜¯å¦é‡ç½®å®ä½“çš„IDã€‚</param>
         public void Deserialize(Scene scene, bool resetId = false)
         {
             if (RuntimeId != 0)
@@ -631,9 +631,9 @@ namespace Fantasy
 
         #region Clone
         /// <summary>
-        /// ¿ËÂ¡µ±Ç°ÊµÌå£¬²¢·µ»ØÒ»¸öĞÂµÄÊµÌå¶ÔÏó£¬ĞÂ¶ÔÏó½«¾ßÓĞÏàÍ¬µÄ×´Ì¬ºÍ×é¼ş¡£
+        /// å…‹éš†å½“å‰å®ä½“ï¼Œå¹¶è¿”å›ä¸€ä¸ªæ–°çš„å®ä½“å¯¹è±¡ï¼Œæ–°å¯¹è±¡å°†å…·æœ‰ç›¸åŒçš„çŠ¶æ€å’Œç»„ä»¶ã€‚
         /// </summary>
-        /// <returns>¿ËÂ¡Éú³ÉµÄÊµÌå¡£</returns>
+        /// <returns>å…‹éš†ç”Ÿæˆçš„å®ä½“ã€‚</returns>
         public Entity Clone()
         {
 #if FANTASY_NET
@@ -651,7 +651,7 @@ namespace Fantasy
 
         #region Dispose
         /// <summary>
-        /// ÊÍ·Åµ±Ç°ÊµÌå¼°ÆäËùÓĞ×é¼ş¡£Èç¹ûÊµÌåÒÑÊÍ·Å£¬Ôò²»Ö´ĞĞÈÎºÎ²Ù×÷¡£
+        /// é‡Šæ”¾å½“å‰å®ä½“åŠå…¶æ‰€æœ‰ç»„ä»¶ã€‚å¦‚æœå®ä½“å·²é‡Šæ”¾ï¼Œåˆ™ä¸æ‰§è¡Œä»»ä½•æ“ä½œã€‚
         /// </summary>
         public virtual void Dispose()
         {

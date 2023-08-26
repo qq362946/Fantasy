@@ -1,12 +1,12 @@
 namespace Fantasy.Helper
 {
     /// <summary>
-    /// ¶¨ÒåÒ»¸ö¿É¸üĞÂµÄµ¥Àı½Ó¿Ú£¬¼Ì³Ğ×Ô <see cref="ISingleton"/>¡£
+    /// å®šä¹‰ä¸€ä¸ªå¯æ›´æ–°çš„å•ä¾‹æ¥å£ï¼Œç»§æ‰¿è‡ª <see cref="ISingleton"/>ã€‚
     /// </summary>
     public interface IUpdateSingleton : ISingleton
     {
         /// <summary>
-        /// ¸üĞÂµ¥ÀıÊµÀıµÄ·½·¨¡£
+        /// æ›´æ–°å•ä¾‹å®ä¾‹çš„æ–¹æ³•ã€‚
         /// </summary>
         public abstract void Update();
     }
