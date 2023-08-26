@@ -25,56 +25,59 @@ namespace Fantasy.IO
     using System;
     using System.Diagnostics.Tracing;
 
+    /// <summary>
+    /// 提供用于管理可回收内存流的功能的管理器类。此管理器负责创建和管理内存流，并提供了对内存分配和回收的细粒度控制，以最大程度地减少内存分配和垃圾回收的开销。
+    /// </summary>
     public sealed partial class RecyclableMemoryStreamManager
     {
         /// <summary>
-        /// ETW events for RecyclableMemoryStream.
+        /// 用于 RecyclableMemoryStream 的 ETW 事件。
         /// </summary>
         [EventSource(Name = "Microsoft-IO-RecyclableMemoryStream", Guid = "{B80CD4E4-890E-468D-9CBA-90EB7C82DFC7}")]
         public sealed class Events : EventSource
         {
             /// <summary>
-            /// Static log object, through which all events are written.
+            /// 静态日志对象，通过它写入所有事件。
             /// </summary>
             public static Events Writer = new();
 
             /// <summary>
-            /// Type of buffer.
+            /// 缓冲区类型枚举。
             /// </summary>
             public enum MemoryStreamBufferType
             {
                 /// <summary>
-                /// Small block buffer.
+                /// 小块缓冲区。
                 /// </summary>
                 Small,
                 /// <summary>
-                /// Large pool buffer.
+                /// 大池缓冲区。
                 /// </summary>
                 Large
             }
 
             /// <summary>
-            /// The possible reasons for discarding a buffer.
+            /// 丢弃缓冲区的可能原因枚举。
             /// </summary>
             public enum MemoryStreamDiscardReason
             {
                 /// <summary>
-                /// Buffer was too large to be re-pooled.
+                /// 缓冲区太大，无法重新放入池中。
                 /// </summary>
                 TooLarge,
                 /// <summary>
-                /// There are enough free bytes in the pool.
+                /// 池中有足够的空闲字节。
                 /// </summary>
                 EnoughFree
             }
 
             /// <summary>
-            /// Logged when a stream object is created.
+            /// 在创建流对象时记录的事件。
             /// </summary>
-            /// <param name="guid">A unique ID for this stream.</param>
-            /// <param name="tag">A temporary ID for this stream, usually indicates current usage.</param>
-            /// <param name="requestedSize">Requested size of the stream.</param>
-            /// <param name="actualSize">Actual size given to the stream from the pool.</param>
+            /// <param name="guid">此流的唯一 ID。</param>
+            /// <param name="tag">临时 ID，通常表示当前使用情况。</param>
+            /// <param name="requestedSize">流的请求大小。</param>
+            /// <param name="actualSize">从池中分配给流的实际大小。</param>
             [Event(1, Level = EventLevel.Verbose, Version = 2)]
             public void MemoryStreamCreated(Guid guid, string tag, long requestedSize, long actualSize)
             {
@@ -85,13 +88,13 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// Logged when the stream is disposed.
+            /// 当流被释放时记录的事件。
             /// </summary>
-            /// <param name="guid">A unique ID for this stream.</param>
-            /// <param name="tag">A temporary ID for this stream, usually indicates current usage.</param>
-            /// <param name="lifetimeMs">Lifetime in milliseconds of the stream</param>
-            /// <param name="allocationStack">Call stack of initial allocation.</param>
-            /// <param name="disposeStack">Call stack of the dispose.</param>
+            /// <param name="guid">此流的唯一 ID。</param>
+            /// <param name="tag">临时 ID，通常表示当前使用情况。</param>
+            /// <param name="lifetimeMs">流的生命周期（毫秒）。</param>
+            /// <param name="allocationStack">初始分配的调用堆栈。</param>
+            /// <param name="disposeStack">释放的调用堆栈。</param>
             [Event(2, Level = EventLevel.Verbose, Version = 3)]
             public void MemoryStreamDisposed(Guid guid, string tag, long lifetimeMs, string allocationStack, string disposeStack)
             {
@@ -102,14 +105,14 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// Logged when the stream is disposed for the second time.
+            /// 当流第二次被释放时记录的事件。
             /// </summary>
-            /// <param name="guid">A unique ID for this stream.</param>
-            /// <param name="tag">A temporary ID for this stream, usually indicates current usage.</param>
-            /// <param name="allocationStack">Call stack of initial allocation.</param>
-            /// <param name="disposeStack1">Call stack of the first dispose.</param>
-            /// <param name="disposeStack2">Call stack of the second dispose.</param>
-            /// <remarks>Note: Stacks will only be populated if RecyclableMemoryStreamManager.GenerateCallStacks is true.</remarks>
+            /// <param name="guid">此流的唯一 ID。</param>
+            /// <param name="tag">临时 ID，通常表示当前使用情况。</param>
+            /// <param name="allocationStack">初始分配的调用堆栈。</param>
+            /// <param name="disposeStack1">第一次释放的调用堆栈。</param>
+            /// <param name="disposeStack2">第二次释放的调用堆栈。</param>
+            /// <remarks>注意：只有在 RecyclableMemoryStreamManager.GenerateCallStacks 为 true 时，堆栈才会被填充。</remarks>
             [Event(3, Level = EventLevel.Critical)]
             public void MemoryStreamDoubleDispose(Guid guid, string tag, string allocationStack, string disposeStack1,
                                                   string disposeStack2)
@@ -122,12 +125,12 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// Logged when a stream is finalized.
+            /// 当流被终结时记录的事件。
             /// </summary>
-            /// <param name="guid">A unique ID for this stream.</param>
-            /// <param name="tag">A temporary ID for this stream, usually indicates current usage.</param>
-            /// <param name="allocationStack">Call stack of initial allocation.</param>
-            /// <remarks>Note: Stacks will only be populated if RecyclableMemoryStreamManager.GenerateCallStacks is true.</remarks>
+            /// <param name="guid">此流的唯一 ID。</param>
+            /// <param name="tag">临时 ID，通常表示当前使用情况。</param>
+            /// <param name="allocationStack">初始分配的调用堆栈。</param>
+            /// <remarks>注意：只有在 RecyclableMemoryStreamManager.GenerateCallStacks 为 true 时，堆栈才会被填充。</remarks>
             [Event(4, Level = EventLevel.Error)]
             public void MemoryStreamFinalized(Guid guid, string tag, string allocationStack)
             {
@@ -138,13 +141,13 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// Logged when ToArray is called on a stream.
+            /// 当流的 ToArray 方法被调用时记录的事件。
             /// </summary>
-            /// <param name="guid">A unique ID for this stream.</param>
-            /// <param name="tag">A temporary ID for this stream, usually indicates current usage.</param>
-            /// <param name="stack">Call stack of the ToArray call.</param>
-            /// <param name="size">Length of stream.</param>
-            /// <remarks>Note: Stacks will only be populated if RecyclableMemoryStreamManager.GenerateCallStacks is true.</remarks>
+            /// <param name="guid">此流的唯一 ID。</param>
+            /// <param name="tag">临时 ID，通常表示当前使用情况。</param>
+            /// <param name="stack">ToArray 方法的调用堆栈。</param>
+            /// <param name="size">流的长度。</param>
+            /// <remarks>注意：只有在 RecyclableMemoryStreamManager.GenerateCallStacks 为 true 时，堆栈才会被填充。</remarks>
             [Event(5, Level = EventLevel.Verbose, Version = 2)]
             public void MemoryStreamToArray(Guid guid, string tag, string stack, long size)
             {
@@ -155,11 +158,11 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// Logged when the RecyclableMemoryStreamManager is initialized.
+            /// 当 RecyclableMemoryStreamManager 被初始化时记录的事件。
             /// </summary>
-            /// <param name="blockSize">Size of blocks, in bytes.</param>
-            /// <param name="largeBufferMultiple">Size of the large buffer multiple, in bytes.</param>
-            /// <param name="maximumBufferSize">Maximum buffer size, in bytes.</param>
+            /// <param name="blockSize">块的大小，以字节为单位。</param>
+            /// <param name="largeBufferMultiple">大缓冲区的倍数，以字节为单位。</param>
+            /// <param name="maximumBufferSize">最大缓冲区大小，以字节为单位。</param>
             [Event(6, Level = EventLevel.Informational)]
             public void MemoryStreamManagerInitialized(int blockSize, int largeBufferMultiple, int maximumBufferSize)
             {
@@ -170,9 +173,9 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// Logged when a new block is created.
+            /// 当创建新的块时记录的事件。
             /// </summary>
-            /// <param name="smallPoolInUseBytes">Number of bytes in the small pool currently in use.</param>
+            /// <param name="smallPoolInUseBytes">当前在小块池中使用的字节数。</param>
             [Event(7, Level = EventLevel.Warning, Version = 2)]
             public void MemoryStreamNewBlockCreated(long smallPoolInUseBytes)
             {
@@ -183,10 +186,10 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// Logged when a new large buffer is created.
+            /// 当创建新的大缓冲区时记录的事件。
             /// </summary>
-            /// <param name="requiredSize">Requested size.</param>
-            /// <param name="largePoolInUseBytes">Number of bytes in the large pool in use.</param>
+            /// <param name="requiredSize">请求的大小。</param>
+            /// <param name="largePoolInUseBytes">当前在大缓冲区池中使用的字节数。</param>
             [Event(8, Level = EventLevel.Warning, Version = 3)]
             public void MemoryStreamNewLargeBufferCreated(long requiredSize, long largePoolInUseBytes)
             {
@@ -197,13 +200,13 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// Logged when a buffer is created that is too large to pool.
+            /// 当创建的缓冲区过大无法放入池中时记录的事件。
             /// </summary>
-            /// <param name="guid">Unique stream ID.</param>
-            /// <param name="tag">A temporary ID for this stream, usually indicates current usage.</param>
-            /// <param name="requiredSize">Size requested by the caller.</param>
-            /// <param name="allocationStack">Call stack of the requested stream.</param>
-            /// <remarks>Note: Stacks will only be populated if RecyclableMemoryStreamManager.GenerateCallStacks is true.</remarks>
+            /// <param name="guid">唯一的流 ID。</param>
+            /// <param name="tag">临时 ID，通常表示当前使用情况。</param>
+            /// <param name="requiredSize">调用者请求的大小。</param>
+            /// <param name="allocationStack">请求流的调用堆栈。</param>
+            /// <remarks>注意：只有在 RecyclableMemoryStreamManager.GenerateCallStacks 为 true 时，堆栈才会被填充。</remarks>
             [Event(9, Level = EventLevel.Verbose, Version = 3)]
             public void MemoryStreamNonPooledLargeBufferCreated(Guid guid, string tag, long requiredSize, string allocationStack)
             {
@@ -214,18 +217,18 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// Logged when a buffer is discarded (not put back in the pool, but given to GC to clean up).
+            /// 当缓冲区被丢弃时记录的事件（没有放回池中，而是交由 GC 清理）。
             /// </summary>
-            /// <param name="guid">Unique stream ID.</param>
-            /// <param name="tag">A temporary ID for this stream, usually indicates current usage.</param>
-            /// <param name="bufferType">Type of the buffer being discarded.</param>
-            /// <param name="reason">Reason for the discard.</param>
-            /// <param name="smallBlocksFree">Number of free small pool blocks.</param>
-            /// <param name="smallPoolBytesFree">Bytes free in the small pool.</param>
-            /// <param name="smallPoolBytesInUse">Bytes in use from the small pool.</param>
-            /// <param name="largeBlocksFree">Number of free large pool blocks.</param>
-            /// <param name="largePoolBytesFree">Bytes free in the large pool.</param>
-            /// <param name="largePoolBytesInUse">Bytes in use from the large pool.</param>
+            /// <param name="guid">唯一的流 ID。</param>
+            /// <param name="tag">临时 ID，通常表示当前使用情况。</param>
+            /// <param name="bufferType">被丢弃的缓冲区类型。</param>
+            /// <param name="reason">丢弃原因。</param>
+            /// <param name="smallBlocksFree">小块池中的空闲块数。</param>
+            /// <param name="smallPoolBytesFree">小块池中的空闲字节数。</param>
+            /// <param name="smallPoolBytesInUse">从小块池中使用的字节数。</param>
+            /// <param name="largeBlocksFree">大缓冲区池中的空闲块数。</param>
+            /// <param name="largePoolBytesFree">大缓冲区池中的空闲字节数。</param>
+            /// <param name="largePoolBytesInUse">从大缓冲区池中使用的字节数。</param>
             [Event(10, Level = EventLevel.Warning, Version = 2)]
             public void MemoryStreamDiscardBuffer(Guid guid, string tag, MemoryStreamBufferType bufferType,
                                                   MemoryStreamDiscardReason reason, long smallBlocksFree, long smallPoolBytesFree, long smallPoolBytesInUse, long largeBlocksFree, long largePoolBytesFree, long largePoolBytesInUse)
@@ -237,14 +240,14 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// Logged when a stream grows beyond the maximum capacity.
+            /// 当流的容量超过最大值时记录的事件。
             /// </summary>
-            /// <param name="guid">Unique stream ID</param>
-            /// <param name="requestedCapacity">The requested capacity.</param>
-            /// <param name="maxCapacity">Maximum capacity, as configured by RecyclableMemoryStreamManager.</param>
-            /// <param name="tag">A temporary ID for this stream, usually indicates current usage.</param>
-            /// <param name="allocationStack">Call stack for the capacity request.</param>
-            /// <remarks>Note: Stacks will only be populated if RecyclableMemoryStreamManager.GenerateCallStacks is true.</remarks>
+            /// <param name="guid">唯一的流 ID。</param>
+            /// <param name="requestedCapacity">请求的容量。</param>
+            /// <param name="maxCapacity">最大容量，由 RecyclableMemoryStreamManager 配置。</param>
+            /// <param name="tag">临时 ID，通常表示当前使用情况。</param>
+            /// <param name="allocationStack">容量请求的调用堆栈。</param>
+            /// <remarks>注意：只有在 RecyclableMemoryStreamManager.GenerateCallStacks 为 true 时，堆栈才会被填充。</remarks>
             [Event(11, Level = EventLevel.Error, Version = 3)]
             public void MemoryStreamOverCapacity(Guid guid, string tag, long requestedCapacity, long maxCapacity, string allocationStack)
             {

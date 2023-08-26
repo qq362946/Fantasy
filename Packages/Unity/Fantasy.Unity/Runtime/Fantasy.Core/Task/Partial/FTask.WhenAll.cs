@@ -1,9 +1,16 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Fantasy
 {
+    /// <summary>
+    /// 提供用于异步任务操作的静态方法。
+    /// </summary>
     public partial class FTask
     {
+        /// <summary>
+        /// 等待所有任务完成的异步方法。
+        /// </summary>
+        /// <param name="tasks">要等待的任务列表。</param>
         public static async FTask WhenAll(List<FTask> tasks)
         {
             if (tasks.Count <= 0)
@@ -32,7 +39,11 @@ namespace Fantasy
                 }
             }
         }
-        
+
+        /// <summary>
+        /// 等待任意一个任务完成的异步方法。
+        /// </summary>
+        /// <param name="tasks">要等待的任务数组。</param>
         public static async FTask Any(params FTask[] tasks)
         {
             if (tasks == null || tasks.Length <= 0)
@@ -65,8 +76,15 @@ namespace Fantasy
         }
     }
 
+    /// <summary>
+    /// 提供用于异步任务操作的静态方法，支持泛型参数。
+    /// </summary>
     public partial class FTask<T>
     {
+        /// <summary>
+        /// 等待所有任务完成的异步方法。
+        /// </summary>
+        /// <param name="tasks">要等待的任务列表。</param>
         public static async FTask WhenAll(List<FTask<T>> tasks)
         {
             if (tasks.Count <= 0)
@@ -94,7 +112,11 @@ namespace Fantasy
                 }
             }
         }
-        
+
+        /// <summary>
+        /// 等待所有任务完成的异步方法。
+        /// </summary>
+        /// <param name="tasks">要等待的任务数组。</param>
         public static async FTask WhenAll(params FTask<T>[] tasks)
         {
             if (tasks == null || tasks.Length <= 0)
@@ -123,6 +145,10 @@ namespace Fantasy
             }
         }
 
+        /// <summary>
+        /// 等待任意一个任务完成的异步方法。
+        /// </summary>
+        /// <param name="tasks">要等待的任务数组。</param>
         public static async FTask WaitAny(params FTask<T>[] tasks)
         {
             if (tasks == null || tasks.Length <= 0)

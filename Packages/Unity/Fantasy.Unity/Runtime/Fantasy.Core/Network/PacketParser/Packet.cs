@@ -1,5 +1,8 @@
 namespace Fantasy.Core.Network
 {
+    /// <summary>
+    /// 提供关于消息包的常量定义。
+    /// </summary>
     public struct Packet
     {
         /// <summary>

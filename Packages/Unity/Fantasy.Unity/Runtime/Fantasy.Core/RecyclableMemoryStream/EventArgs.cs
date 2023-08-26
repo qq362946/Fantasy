@@ -2,40 +2,43 @@ namespace Fantasy.IO
 {
     using System;
 
+    /// <summary>
+    /// 提供用于管理可回收内存流的分部类。
+    /// </summary>
     public sealed partial class RecyclableMemoryStreamManager
     {
         /// <summary>
-        /// Arguments for the <see cref="StreamCreated"/> event.
+        /// 用于 <see cref="StreamCreated"/> 事件的参数类。
         /// </summary>
         public sealed class StreamCreatedEventArgs : EventArgs
         {
             /// <summary>
-            /// Unique ID for the stream.
+            /// Stream流的唯一 ID。
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// Optional Tag for the event.
+            /// 可选的事件标签。
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// Requested stream size.
+            /// 请求的流大小。
             /// </summary>
             public long RequestedSize { get; }
 
             /// <summary>
-            /// Actual stream size.
+            /// 实际的流大小。
             /// </summary>
             public long ActualSize { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="StreamCreatedEventArgs"/> class.
+            /// 初始化 <see cref="StreamCreatedEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="guid">Unique ID of the stream.</param>
-            /// <param name="tag">Tag of the stream.</param>
-            /// <param name="requestedSize">The requested stream size.</param>
-            /// <param name="actualSize">The actual stream size.</param>
+            /// <param name="guid">流的唯一 ID。</param>
+            /// <param name="tag">流的标签。</param>
+            /// <param name="requestedSize">请求的流大小。</param>
+            /// <param name="actualSize">实际的流大小。</param>
             public StreamCreatedEventArgs(Guid guid, string tag, long requestedSize, long actualSize)
             {
                 this.Id = guid;
@@ -46,42 +49,42 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Arguments for the <see cref="StreamDisposed"/> event.
+        /// 提供用于 <see cref="StreamDisposed"/> 事件的参数类。
         /// </summary>
         public sealed class StreamDisposedEventArgs : EventArgs
         {
             /// <summary>
-            /// Unique ID for the stream.
+            /// 流的唯一 ID。
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// Optional Tag for the event.
+            /// 可选的事件标签。
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// Stack where the stream was allocated.
+            /// 分配流的堆栈
             /// </summary>
             public string AllocationStack { get; }
 
             /// <summary>
-            /// Stack where stream was disposed.
+            ///处置流的堆栈。
             /// </summary>
             public string DisposeStack { get; }
 
             /// <summary>
-            /// Lifetime of the stream.
+            /// 流的生命周期。
             /// </summary>
             public TimeSpan Lifetime { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="StreamDisposedEventArgs"/> class.
+            /// 初始化 <see cref="StreamDisposedEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="guid">Unique ID of the stream.</param>
-            /// <param name="tag">Tag of the stream.</param>
-            /// <param name="allocationStack">Stack of original allocation.</param>
-            /// <param name="disposeStack">Dispose stack.</param>
+            /// <param name="guid">流的唯一 ID。</param>
+            /// <param name="tag">流的标签。</param>
+            /// <param name="allocationStack">原始分配的堆栈。</param>
+            /// <param name="disposeStack">处置堆栈。</param>
             [Obsolete("Use another constructor override")]
             public StreamDisposedEventArgs(Guid guid, string tag, string allocationStack, string disposeStack)
                 :this(guid, tag, TimeSpan.Zero, allocationStack, disposeStack)
@@ -90,13 +93,13 @@ namespace Fantasy.IO
             }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="StreamDisposedEventArgs"/> class.
+            /// 初始化 <see cref="StreamDisposedEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="guid">Unique ID of the stream.</param>
-            /// <param name="tag">Tag of the stream.</param>
-            /// <param name="lifetime">Lifetime of the stream</param>
-            /// <param name="allocationStack">Stack of original allocation.</param>
-            /// <param name="disposeStack">Dispose stack.</param>
+            /// <param name="guid">流的唯一 ID。</param>
+            /// <param name="tag">流的标签。</param>
+            /// <param name="lifetime">流的生命周期。</param>
+            /// <param name="allocationStack">原始分配的堆栈。</param>
+            /// <param name="disposeStack">处置堆栈。</param>
             public StreamDisposedEventArgs(Guid guid, string tag, TimeSpan lifetime, string allocationStack, string disposeStack)
             {
                 this.Id = guid;
@@ -108,43 +111,43 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Arguments for the <see cref="StreamDoubleDisposed"/> event.
+        /// 提供用于 <see cref="StreamDoubleDisposed"/> 事件的参数类。
         /// </summary>
         public sealed class StreamDoubleDisposedEventArgs : EventArgs
         {
             /// <summary>
-            /// Unique ID for the stream.
+            /// 流的唯一 ID。
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// Optional Tag for the event.
+            /// 可选的事件标签。
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// Stack where the stream was allocated.
+            /// 分配流的堆栈。
             /// </summary>
             public string AllocationStack { get; }
 
             /// <summary>
-            /// First dispose stack.
+            /// 第一个处置堆栈。
             /// </summary>
             public string DisposeStack1 { get; }
 
             /// <summary>
-            /// Second dispose stack.
+            /// 第二个处置堆栈。
             /// </summary>
             public string DisposeStack2 { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="StreamDoubleDisposedEventArgs"/> class.
+            /// 初始化 <see cref="StreamDoubleDisposedEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="guid">Unique ID of the stream.</param>
-            /// <param name="tag">Tag of the stream.</param>
-            /// <param name="allocationStack">Stack of original allocation.</param>
-            /// <param name="disposeStack1">First dispose stack.</param>
-            /// <param name="disposeStack2">Second dispose stack.</param>
+            /// <param name="guid">流的唯一 ID。</param>
+            /// <param name="tag">流的标签。</param>
+            /// <param name="allocationStack">原始分配的堆栈。</param>
+            /// <param name="disposeStack1">第一个处置堆栈。</param>
+            /// <param name="disposeStack2">第二个处置堆栈。</param>
             public StreamDoubleDisposedEventArgs(Guid guid, string tag, string allocationStack, string disposeStack1, string disposeStack2)
             {
                 this.Id = guid;
@@ -156,31 +159,31 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Arguments for the <see cref="StreamFinalized"/> event.
+        /// 提供用于 <see cref="StreamFinalized"/> 事件的参数类。
         /// </summary>
         public sealed class StreamFinalizedEventArgs : EventArgs
         {
             /// <summary>
-            /// Unique ID for the stream.
+            /// 流的唯一 ID。
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// Optional Tag for the event.
+            /// 可选的事件标签。
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// Stack where the stream was allocated.
+            /// 分配流的堆栈。
             /// </summary>
             public string AllocationStack { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="StreamFinalizedEventArgs"/> class.
+            /// 初始化 <see cref="StreamFinalizedEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="guid">Unique ID of the stream.</param>
-            /// <param name="tag">Tag of the stream.</param>
-            /// <param name="allocationStack">Stack of original allocation.</param>
+            /// <param name="guid">流的唯一 ID。</param>
+            /// <param name="tag">流的标签。</param>
+            /// <param name="allocationStack">原始分配的堆栈。</param>
             public StreamFinalizedEventArgs(Guid guid, string tag, string allocationStack)
             {
                 this.Id = guid;
@@ -190,37 +193,37 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Arguments for the <see cref="StreamConvertedToArray"/> event.
+        /// 提供用于 <see cref="StreamConvertedToArray"/> 事件的参数类。
         /// </summary>
         public sealed class StreamConvertedToArrayEventArgs : EventArgs
         {
             /// <summary>
-            /// Unique ID for the stream.
+            /// 流的唯一 ID。
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// Optional Tag for the event.
+            /// 可选的事件标签。
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// Stack where ToArray was called.
+            /// 调用 ToArray 的堆栈。
             /// </summary>
             public string Stack { get; }
 
             /// <summary>
-            /// Length of stack.
+            /// 堆栈的长度。
             /// </summary>
             public long Length { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="StreamConvertedToArrayEventArgs"/> class.
+            /// 初始化 <see cref="StreamConvertedToArrayEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="guid">Unique ID of the stream.</param>
-            /// <param name="tag">Tag of the stream.</param>
-            /// <param name="stack">Stack of ToArray call.</param>
-            /// <param name="length">Length of stream.</param>
+            /// <param name="guid">流的唯一 ID。</param>
+            /// <param name="tag">流的标签。</param>
+            /// <param name="stack">ToArray 调用的堆栈。</param>
+            /// <param name="length">流的长度。</param>
             public StreamConvertedToArrayEventArgs(Guid guid, string tag, string stack, long length)
             {
                 this.Id = guid;
@@ -231,43 +234,43 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Arguments for the <see cref="StreamOverCapacity"/> event.
+        /// 提供用于 <see cref="StreamOverCapacity"/> 事件的参数类。
         /// </summary>
         public sealed class StreamOverCapacityEventArgs : EventArgs
         {
             /// <summary>
-            /// Unique ID for the stream.
+            /// 流的唯一 ID。
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// Optional Tag for the event.
+            /// 可选的事件标签。
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// Original allocation stack.
+            /// 原始分配堆栈。
             /// </summary>
             public string AllocationStack { get; }
 
             /// <summary>
-            /// Requested capacity.
+            /// 请求的容量。
             /// </summary>
             public long RequestedCapacity { get; }
 
             /// <summary>
-            /// Maximum capacity.
+            /// 最大容量。
             /// </summary>
             public long MaximumCapacity { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="StreamOverCapacityEventArgs"/> class.
+            /// 初始化 <see cref="StreamOverCapacityEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="guid">Unique ID of the stream.</param>
-            /// <param name="tag">Tag of the stream.</param>
-            /// <param name="requestedCapacity">Requested capacity.</param>
-            /// <param name="maximumCapacity">Maximum stream capacity of the manager.</param>
-            /// <param name="allocationStack">Original allocation stack.</param>
+            /// <param name="guid">流的唯一 ID。</param>
+            /// <param name="tag">流的标签。</param>
+            /// <param name="requestedCapacity">请求的容量。</param>
+            /// <param name="maximumCapacity">管理器的最大流容量。</param>
+            /// <param name="allocationStack">原始分配堆栈。</param>
             internal StreamOverCapacityEventArgs(Guid guid, string tag, long requestedCapacity, long maximumCapacity, string allocationStack)
             {
                 this.Id = guid;
@@ -279,19 +282,19 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Arguments for the <see cref="BlockCreated"/> event.
+        /// 提供用于 <see cref="BlockCreated"/> 事件的参数类。
         /// </summary>
         public sealed class BlockCreatedEventArgs : EventArgs
         {
             /// <summary>
-            /// How many bytes are currently in use from the small pool.
+            /// 当前从小型池中使用的字节数。
             /// </summary>
             public long SmallPoolInUse { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="BlockCreatedEventArgs"/> class.
+            /// 初始化 <see cref="BlockCreatedEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="smallPoolInUse">Number of bytes currently in use from the small pool.</param>
+            /// <param name="smallPoolInUse">当前从小型池中使用的字节数。</param>
             internal BlockCreatedEventArgs(long smallPoolInUse)
             {
                 this.SmallPoolInUse = smallPoolInUse;
@@ -299,50 +302,50 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Arguments for the <see cref="LargeBufferCreated"/> events.
+        /// 提供用于 <see cref="LargeBufferCreated"/> 事件的参数类。
         /// </summary>
         public sealed class LargeBufferCreatedEventArgs : EventArgs
         {
             /// <summary>
-            /// Unique ID for the stream.
+            ///  流的唯一 ID。
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// Optional Tag for the event.
+            /// 可选的事件标签。
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// Whether the buffer was satisfied from the pool or not.
+            /// 缓冲区是否满足来自池的需求。
             /// </summary>
             public bool Pooled { get; }
 
             /// <summary>
-            /// Required buffer size.
+            /// 所需的缓冲区大小。
             /// </summary>
             public long RequiredSize { get; }
 
             /// <summary>
-            /// How many bytes are in use from the large pool.
+            /// 从大型池中当前使用的字节数。
             /// </summary>
             public long LargePoolInUse { get; }
 
             /// <summary>
-            /// If the buffer was not satisfied from the pool, and <see cref="GenerateCallStacks"/> is turned on, then.
-            /// this will contain the callstack of the allocation request.
+            /// 如果缓冲区未从池中满足需求，并且 <see cref="GenerateCallStacks"/> 已打开，
+            /// 则包含分配请求的调用堆栈。
             /// </summary>
             public string CallStack { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="LargeBufferCreatedEventArgs"/> class.
+            /// 初始化 <see cref="LargeBufferCreatedEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="guid">Unique ID of the stream.</param>
-            /// <param name="tag">Tag of the stream.</param>
-            /// <param name="requiredSize">Required size of the new buffer.</param>
-            /// <param name="largePoolInUse">How many bytes from the large pool are currently in use.</param>
-            /// <param name="pooled">Whether the buffer was satisfied from the pool or not.</param>
-            /// <param name="callStack">Callstack of the allocation, if it wasn't pooled.</param>
+            /// <param name="guid">流的唯一 ID。</param>
+            /// <param name="tag">流的标签。</param>
+            /// <param name="requiredSize">新缓冲区的所需大小。</param>
+            /// <param name="largePoolInUse">从大型池中当前使用的字节数。</param>
+            /// <param name="pooled">缓冲区是否满足来自池的需求。</param>
+            /// <param name="callStack">分配请求的调用堆栈（如果未从池中满足需求并启用了 <see cref="GenerateCallStacks"/>）。</param>
             internal LargeBufferCreatedEventArgs(Guid guid, string tag, long requiredSize, long largePoolInUse, bool pooled, string callStack)
             {
                 this.RequiredSize = requiredSize;
@@ -355,37 +358,37 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Arguments for the <see cref="BufferDiscarded"/> event.
+        /// 提供用于 <see cref="BufferDiscarded"/> 事件的参数类。
         /// </summary>
         public sealed class BufferDiscardedEventArgs : EventArgs
         {
             /// <summary>
-            /// Unique ID for the stream.
+            /// 流的唯一 ID。
             /// </summary>
             public Guid Id { get; }
 
             /// <summary>
-            /// Optional Tag for the event.
+            /// 可选的事件标签。
             /// </summary>
             public string Tag { get; }
 
             /// <summary>
-            /// Type of the buffer.
+            /// 缓冲区的类型。
             /// </summary>
             public Events.MemoryStreamBufferType BufferType { get; }
 
             /// <summary>
-            /// The reason this buffer was discarded.
+            /// 丢弃此缓冲区的原因。
             /// </summary>
             public Events.MemoryStreamDiscardReason Reason { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="BufferDiscardedEventArgs"/> class.
+            /// 初始化 <see cref="BufferDiscardedEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="guid">Unique ID of the stream.</param>
-            /// <param name="tag">Tag of the stream.</param>
-            /// <param name="bufferType">Type of buffer being discarded.</param>
-            /// <param name="reason">The reason for the discard.</param>
+            /// <param name="guid">流的唯一 ID。</param>
+            /// <param name="tag">流的标签。</param>
+            /// <param name="bufferType">正在丢弃的缓冲区的类型。</param>
+            /// <param name="reason">丢弃缓冲区的原因。</param>
             internal BufferDiscardedEventArgs(Guid guid, string tag, Events.MemoryStreamBufferType bufferType, Events.MemoryStreamDiscardReason reason)
             {
                 this.Id = guid;
@@ -396,19 +399,19 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Arguments for the <see cref="StreamLength"/> event.
+        /// 提供用于 <see cref="StreamLength"/> 事件的参数类。
         /// </summary>
         public sealed class StreamLengthEventArgs : EventArgs
         {
             /// <summary>
-            /// Length of the stream.
+            /// 流的长度。
             /// </summary>
             public long Length { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="StreamLengthEventArgs"/> class.
+            /// 初始化 <see cref="StreamLengthEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="length">Length of the strength.</param>
+            /// <param name="length">流的长度。</param>
             public StreamLengthEventArgs(long length)
             {
                 this.Length = length;
@@ -416,37 +419,37 @@ namespace Fantasy.IO
         }
 
         /// <summary>
-        /// Arguments for the <see cref="UsageReport"/> event.
+        /// 提供用于 <see cref="UsageReport"/> 事件的参数类。
         /// </summary>
         public sealed class UsageReportEventArgs : EventArgs
         {
             /// <summary>
-            /// Bytes from the small pool currently in use.
+            /// 当前正在使用的小型池字节数。
             /// </summary>
             public long SmallPoolInUseBytes { get; }
 
             /// <summary>
-            /// Bytes from the small pool currently available.
+            /// 当前可用的小型池字节数。
             /// </summary>
             public long SmallPoolFreeBytes { get; }
 
             /// <summary>
-            /// Bytes from the large pool currently in use.
+            /// 当前正在使用的大型池字节数。
             /// </summary>
             public long LargePoolInUseBytes { get; }
 
             /// <summary>
-            /// Bytes from the large pool currently available.
+            /// 当前可用的大型池字节数。
             /// </summary>
             public long LargePoolFreeBytes { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="UsageReportEventArgs"/> class.
+            /// 初始化 <see cref="UsageReportEventArgs"/> 类的新实例。
             /// </summary>
-            /// <param name="smallPoolInUseBytes">Bytes from the small pool currently in use.</param>
-            /// <param name="smallPoolFreeBytes">Bytes from the small pool currently available.</param>
-            /// <param name="largePoolInUseBytes">Bytes from the large pool currently in use.</param>
-            /// <param name="largePoolFreeBytes">Bytes from the large pool currently available.</param>
+            /// <param name="smallPoolInUseBytes">当前正在使用的小型池字节数。</param>
+            /// <param name="smallPoolFreeBytes">当前可用的小型池字节数。</param>
+            /// <param name="largePoolInUseBytes">当前正在使用的大型池字节数。</param>
+            /// <param name="largePoolFreeBytes">当前可用的大型池字节数。</param>
             public UsageReportEventArgs(
                 long smallPoolInUseBytes,
                 long smallPoolFreeBytes,

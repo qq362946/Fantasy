@@ -1023,7 +1023,6 @@ namespace Unity.Mathematics
         /// <summary>
         /// Extracts a float3x3 from the upper left 3x3 of a float4x4.
         /// </summary>
-        /// <param name="f4x4"><see cref="float4x4"/> to extract a float3x3 from.</param>
         /// <returns>Upper left 3x3 matrix as float3x3.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float3x3 float3x3(float4x4 f4x4)

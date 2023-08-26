@@ -1,23 +1,52 @@
 #if FANTASY_NET
 using System.Text;
 using Fantasy.Core.Network;
+using Fantasy.Helper;
 
 namespace Fantasy.Core;
 
+/// <summary>
+/// ProtoBuf操作码类型枚举
+/// </summary>
 public enum ProtoBufOpCodeType
 {
+    /// <summary>
+    /// 无
+    /// </summary>
     None = 0,
+    /// <summary>
+    /// 外部操作码类型
+    /// </summary>
     Outer = 1,
+    /// <summary>
+    /// 内部操作码类型
+    /// </summary>
     Inner = 2,
+    /// <summary>
+    /// 使用BSON的内部操作码类型
+    /// </summary>
     InnerBson = 3,
 }
 
+/// <summary>
+/// 操作码信息类
+/// </summary>
 public sealed class OpcodeInfo
 {
+    /// <summary>
+    /// 操作码
+    /// </summary>
     public uint Code;
+    /// <summary>
+    /// 名称
+    /// </summary>
     public string Name;
 }
 
+
+/// <summary>
+/// ProtoBuf导出器类
+/// </summary>
 public sealed class ProtoBufExporter
 {
     private uint _aMessage;
@@ -31,6 +60,9 @@ public sealed class ProtoBufExporter
     
     private readonly List<OpcodeInfo> _opcodes = new();
 
+    /// <summary>
+    /// 构造函数，用于初始化导出器
+    /// </summary>
     public ProtoBufExporter()
     {
         Console.OutputEncoding = Encoding.UTF8;
@@ -43,6 +75,21 @@ public sealed class ProtoBufExporter
         if (!Directory.Exists(Define.ProtoBufClientDirectory))
         {
             Directory.CreateDirectory(Define.ProtoBufClientDirectory);
+        }
+        
+        if (!Directory.Exists($"{Define.ProtoBufDirectory}Outer"))
+        {
+            Directory.CreateDirectory($"{Define.ProtoBufDirectory}Outer");
+        }
+        
+        if (!Directory.Exists($"{Define.ProtoBufDirectory}Inner"))
+        {
+            Directory.CreateDirectory($"{Define.ProtoBufDirectory}Inner");
+        }
+        
+        if (!Directory.Exists($"{Define.ProtoBufDirectory}InnerBosn"))
+        {
+            Directory.CreateDirectory($"{Define.ProtoBufDirectory}InnerBosn");
         }
 
         var tasks = new Task[2];
@@ -59,17 +106,12 @@ public sealed class ProtoBufExporter
 
     private async Task Start(ProtoBufOpCodeType opCodeType)
     {
-        var protoFile = "";
+        List<string> files = new List<string>();
         var opCodeName = "";
-        var parameter = "";
-        var className = "";
-        var isMsgHead = false;
         OpcodeInfo opcodeInfo = null;
-        string responseTypeStr = null;
-        string customRouteType = null;
         _opcodes.Clear();
         var file = new StringBuilder();
-        var saveDirectory = new Dictionary<string,string>();
+        var saveDirectory = new Dictionary<string, string>();
         
         switch (opCodeType)
         {
@@ -82,9 +124,11 @@ public sealed class ProtoBufExporter
                 _aRouteRequest = Opcode.OuterRouteRequest;
                 _aRouteResponse = Opcode.OuterRouteResponse;
                 opCodeName = "OuterOpcode";
-                protoFile = $"{Define.ProtoBufDirectory}OuterMessage.proto";
                 saveDirectory.Add(Define.ProtoBufServerDirectory, _serverTemplate);
                 saveDirectory.Add(Define.ProtoBufClientDirectory, _clientTemplate);
+                var protoBufFiles = FileHelper.GetDirectoryFile(
+                    $"{Define.ProtoBufDirectory}Outer", "*.proto", SearchOption.AllDirectories);
+                files.AddRange(protoBufFiles);
                 break;
             }
             case ProtoBufOpCodeType.Inner:
@@ -97,8 +141,10 @@ public sealed class ProtoBufExporter
                 _aRouteRequest = Opcode.InnerRouteRequest + 1000;
                 _aRouteResponse = Opcode.InnerRouteResponse + 1000;
                 opCodeName = "InnerOpcode";
-                protoFile = $"{Define.ProtoBufDirectory}InnerMessage.proto";
                 saveDirectory.Add(Define.ProtoBufServerDirectory, _serverTemplate);
+                var protoBufFiles = FileHelper.GetDirectoryFile(
+                    $"{Define.ProtoBufDirectory}Inner", "*.proto", SearchOption.AllDirectories);
+                files.AddRange(protoBufFiles);
                 break;
             }
             case ProtoBufOpCodeType.InnerBson:
@@ -111,204 +157,224 @@ public sealed class ProtoBufExporter
                 _aRouteRequest = Opcode.InnerBsonRouteRequest + 1000;
                 _aRouteResponse = Opcode.InnerBsonRouteResponse + 1000;
                 opCodeName = "InnerBsonOpcode";
-                protoFile = $"{Define.ProtoBufDirectory}InnerBsonMessage.proto";
                 saveDirectory.Add(Define.ProtoBufServerDirectory, _serverTemplate);
+                var protoBufFiles = FileHelper.GetDirectoryFile(
+                    $"{Define.ProtoBufDirectory}InnerBosn", "*.proto", SearchOption.AllDirectories);
+                files.AddRange(protoBufFiles);
                 break;
             }
         }
-        
-        var protoFileText = await File.ReadAllTextAsync(protoFile);
 
-        foreach (var line in protoFileText.Split('\n'))
+        #region GenerateProtoFiles
+        foreach (var filePath in files)
         {
-            var currentLine = line.Trim();
-
-            if (string.IsNullOrWhiteSpace(currentLine))
-            {
-                continue;
-            }
+            var parameter = "";
+            var className = "";
+            var isMsgHead = false;
+            string responseTypeStr = null;
+            string customRouteType = null;
             
-            if (currentLine.StartsWith("///"))
-            {
-                file.AppendFormat("	/// <summary>\r\n" + "	/// {0}\r\n" + "	/// </summary>\r\n", currentLine.TrimStart(new[] {'/', '/', '/'}));
-                continue;
-            }
+            var protoFileText = await File.ReadAllTextAsync(filePath);
 
-            if (currentLine.StartsWith("message"))
+            foreach (var line in protoFileText.Split('\n'))
             {
-                isMsgHead = true;
-                opcodeInfo = new OpcodeInfo();
-                file.AppendLine("\t[ProtoContract]");
-                className = currentLine.Split(Define.SplitChars, StringSplitOptions.RemoveEmptyEntries)[1];
-                var splits = currentLine.Split(new[] {"//"}, StringSplitOptions.RemoveEmptyEntries);
+                var currentLine = line.Trim();
 
-                if (splits.Length > 1)
+                if (string.IsNullOrWhiteSpace(currentLine))
                 {
-                    var parameterArray = currentLine.Split(new[] {"//"}, StringSplitOptions.RemoveEmptyEntries)[1].Trim().Split(',');
-                    parameter = parameterArray[0].Trim();
+                    continue;
+                }
 
-                    switch (parameterArray.Length)
+                if (currentLine.StartsWith("///"))
+                {
+                    file.AppendFormat("	/// <summary>\r\n" + "	/// {0}\r\n" + "	/// </summary>\r\n", currentLine.TrimStart(new[] { '/', '/', '/' }));
+                    continue;
+                }
+
+                if (currentLine.StartsWith("message"))
+                {
+                    isMsgHead = true;
+                    opcodeInfo = new OpcodeInfo();
+                    file.AppendLine("\t[ProtoContract]");
+                    className = currentLine.Split(Define.SplitChars, StringSplitOptions.RemoveEmptyEntries)[1];
+                    var splits = currentLine.Split(new[] { "//" }, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (splits.Length > 1)
                     {
-                        case 2:
-                            responseTypeStr = parameterArray[1].Trim();
-                            break;
-                        case 3:
+                        var parameterArray = currentLine.Split(new[] { "//" }, StringSplitOptions.RemoveEmptyEntries)[1].Trim().Split(',');
+                        parameter = parameterArray[0].Trim();
+
+                        switch (parameterArray.Length)
                         {
-                            customRouteType = parameterArray[1].Trim();
-
-                            if (parameterArray.Length == 3)
+                            case 2:
+                                if (parameter == "ICustomRouteMessage")
+                                {
+                                    customRouteType = parameterArray[1].Trim();
+                                    break;
+                                }
+                                responseTypeStr = parameterArray[1].Trim();
+                                break;
+                            case 3:
                             {
-                                responseTypeStr = parameterArray[2].Trim();
+                                customRouteType = parameterArray[1].Trim();
+
+                                if (parameterArray.Length == 3)
+                                {
+                                    responseTypeStr = parameterArray[2].Trim();
+                                }
+
+                                break;
                             }
-
-                            break;
                         }
-                    }
-                }
-                else
-                {
-                    parameter = "";
-                }
-                
-                file.Append(string.IsNullOrWhiteSpace(parameter)
-                    ? $"\tpublic partial class {className} : AProto"
-                    : $"\tpublic partial class {className} : AProto, {parameter}");
-                opcodeInfo.Name = className;
-                continue;
-            }
-            
-            if (!isMsgHead)
-            {
-                continue;
-            }
-
-            switch (currentLine)
-            {
-                case "{":
-                {
-                    file.AppendLine("\n\t{");
-            
-                    if (string.IsNullOrWhiteSpace(parameter) || parameter == "IMessage")
-                    {
-                        opcodeInfo.Code += ++_aMessage;
-                        file.AppendLine($"\t\tpublic uint OpCode() {{ return {opCodeName}.{className}; }}");
                     }
                     else
                     {
-                        if (responseTypeStr != null)
+                        parameter = "";
+                    }
+
+                    file.Append(string.IsNullOrWhiteSpace(parameter)
+                        ? $"\tpublic partial class {className} : AProto"
+                        : $"\tpublic partial class {className} : AProto, {parameter}");
+                    opcodeInfo.Name = className;
+                    continue;
+                }
+
+                if (!isMsgHead)
+                {
+                    continue;
+                }
+
+                switch (currentLine)
+                {
+                    case "{":
+                    {
+                        file.AppendLine("\n\t{");
+
+                        if (string.IsNullOrWhiteSpace(parameter) || parameter == "IMessage")
                         {
-                            file.AppendLine("\t\t[ProtoIgnore]");
-                            file.AppendLine($"\t\tpublic {responseTypeStr} ResponseType {{ get; set; }}");
-                            responseTypeStr = null;
+                            opcodeInfo.Code += ++_aMessage;
+                            file.AppendLine($"\t\tpublic uint OpCode() {{ return {opCodeName}.{className}; }}");
                         }
                         else
                         {
-                            if (parameter.Contains("RouteRequest"))
+                            if (responseTypeStr != null)
                             {
-                                Exporter.LogError($"{opcodeInfo.Name} 没指定ResponseType");
+                                file.AppendLine("\t\t[ProtoIgnore]");
+                                file.AppendLine($"\t\tpublic {responseTypeStr} ResponseType {{ get; set; }}");
+                                responseTypeStr = null;
                             }
-                        }
-
-                        file.AppendLine($"\t\tpublic uint OpCode() {{ return {opCodeName}.{className}; }}");
-                        
-                        if (customRouteType != null)
-                        {
-                            file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return (long)RouteType.{customRouteType}; }}");
-                            customRouteType = null;
-                        }
-                        else if (parameter is "IAddressableRouteRequest" or "IAddressableRouteMessage")
-                        {
-                            file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return CoreRouteType.Addressable; }}");
-                        }
-                        else if (parameter.EndsWith("BsonRouteMessage") || parameter.EndsWith("BsonRouteRequest"))
-                        {
-                            file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return CoreRouteType.BsonRoute; }}");
-                        }
-                        else if (parameter is "IRouteMessage" or "IRouteRequest")
-                        {
-                            file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return CoreRouteType.Route; }}");
-                        }
-
-                        switch (parameter)
-                        {
-                            case "IRequest":
-                            case "IBsonRequest":
+                            else
                             {
-                                opcodeInfo.Code += ++_aRequest;
-                                break;
-                            }
-                            case "IResponse":
-                            case "IBsonResponse":
-                            {
-                                opcodeInfo.Code += ++_aResponse;
-                                file.AppendLine("\t\t[ProtoMember(91, IsRequired = true)]");
-                                file.AppendLine("\t\tpublic uint ErrorCode { get; set; }");
-                                break;
-                            }
-                            default:
-                            {
-                                if (parameter.EndsWith("RouteMessage") || parameter == "IRouteMessage")
+                                if (parameter.Contains("RouteRequest"))
                                 {
-                                    opcodeInfo.Code += ++_aRouteMessage;
+                                    Exporter.LogError($"{opcodeInfo.Name} 没指定ResponseType");
                                 }
-                                else if (parameter.EndsWith("RouteRequest") || parameter == "IRouteRequest")
+                            }
+
+                            file.AppendLine($"\t\tpublic uint OpCode() {{ return {opCodeName}.{className}; }}");
+
+                            if (customRouteType != null)
+                            {
+                                file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return (long)RouteType.{customRouteType}; }}");
+                                customRouteType = null;
+                            }
+                            else if (parameter is "IAddressableRouteRequest" or "IAddressableRouteMessage")
+                            {
+                                file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return CoreRouteType.Addressable; }}");
+                            }
+                            else if (parameter.EndsWith("BsonRouteMessage") || parameter.EndsWith("BsonRouteRequest"))
+                            {
+                                file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return CoreRouteType.BsonRoute; }}");
+                            }
+                            else if (parameter is "IRouteMessage" or "IRouteRequest")
+                            {
+                                file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return CoreRouteType.Route; }}");
+                            }
+
+                            switch (parameter)
+                            {
+                                case "IRequest":
+                                case "IBsonRequest":
                                 {
-                                    opcodeInfo.Code += ++_aRouteRequest;
+                                    opcodeInfo.Code += ++_aRequest;
+                                    break;
                                 }
-                                else if (parameter.EndsWith("RouteResponse") || parameter == "IRouteResponse")
+                                case "IResponse":
+                                case "IBsonResponse":
                                 {
-                                    opcodeInfo.Code += ++_aRouteResponse;
+                                    opcodeInfo.Code += ++_aResponse;
                                     file.AppendLine("\t\t[ProtoMember(91, IsRequired = true)]");
                                     file.AppendLine("\t\tpublic uint ErrorCode { get; set; }");
+                                    break;
                                 }
+                                default:
+                                {
+                                    if (parameter.EndsWith("RouteMessage") || parameter == "IRouteMessage")
+                                    {
+                                        opcodeInfo.Code += ++_aRouteMessage;
+                                    }
+                                    else if (parameter.EndsWith("RouteRequest") || parameter == "IRouteRequest")
+                                    {
+                                        opcodeInfo.Code += ++_aRouteRequest;
+                                    }
+                                    else if (parameter.EndsWith("RouteResponse") || parameter == "IRouteResponse")
+                                    {
+                                        opcodeInfo.Code += ++_aRouteResponse;
+                                        file.AppendLine("\t\t[ProtoMember(91, IsRequired = true)]");
+                                        file.AppendLine("\t\tpublic uint ErrorCode { get; set; }");
+                                    }
 
-                                break;
+                                    break;
+                                }
                             }
                         }
-                    }
-                    
-                    _opcodes.Add(opcodeInfo);
-                    continue;
-                }
-                case "}":
-                {
-                    isMsgHead = false;
-                    file.AppendLine("\t}");
-                    continue;
-                }
-                case "":
-                {
-                    continue;
-                }
-            }
-            
-            if (currentLine.StartsWith("//"))
-            {
-                file.AppendFormat("\t\t///<summary>\r\n" + "\t\t/// {0}\r\n" + "\t\t///</summary>\r\n", currentLine.TrimStart('/', '/'));
-                continue;
-            }
-            
-            if (currentLine.StartsWith("repeated"))
-            {
-                Repeated(file, currentLine);
-            }
-            else
-            {
-                Members(file, currentLine);
-            }
-        }
-        
-        var csName = $"{Path.GetFileNameWithoutExtension(protoFile)}.cs";
-        
-        foreach (var (directory, template) in saveDirectory)
-        {
-            var csFile = Path.Combine(directory, csName);
-            var content = template.Replace("(Content)", file.ToString());
-            await File.WriteAllTextAsync(csFile, content);
-        }
 
-        file.Clear();
+                        _opcodes.Add(opcodeInfo);
+                        continue;
+                    }
+                    case "}":
+                    {
+                        isMsgHead = false;
+                        file.AppendLine("\t}");
+                        continue;
+                    }
+                    case "":
+                    {
+                        continue;
+                    }
+                }
+
+                if (currentLine.StartsWith("//"))
+                {
+                    file.AppendFormat("\t\t///<summary>\r\n" + "\t\t/// {0}\r\n" + "\t\t///</summary>\r\n", currentLine.TrimStart('/', '/'));
+                    continue;
+                }
+
+                if (currentLine.StartsWith("repeated"))
+                {
+                    Repeated(file, currentLine);
+                }
+                else
+                {
+                    Members(file, currentLine);
+                }
+            }
+
+            var csName = $"{Path.GetFileNameWithoutExtension(filePath)}.cs";
+
+            foreach (var (directory, template) in saveDirectory)
+            {
+                var csFile = Path.Combine(directory, csName);
+                var content = template.Replace("(Content)", file.ToString());
+                await File.WriteAllTextAsync(csFile, content);
+            }
+
+            file.Clear();
+        }
+        #endregion
         
+        #region GenerateOpCode
+        file.Clear();
         file.AppendLine("namespace Fantasy");
         file.AppendLine("{");
         file.AppendLine($"\tpublic static partial class {opCodeName}");
@@ -329,6 +395,7 @@ public sealed class ProtoBufExporter
             var csFile = Path.Combine(directory, $"{opCodeName}.cs");
             await File.WriteAllTextAsync(csFile, file.ToString());
         }
+        #endregion
     }
 
     private async Task RouteType()
@@ -446,7 +513,10 @@ public sealed class ProtoBufExporter
                 return "null";
         }
     }
-    
+
+    /// <summary>
+    /// 加载模板
+    /// </summary>
     private void LoadTemplate()
     {
         string[] lines = File.ReadAllLines(Define.ProtoBufTemplatePath, Encoding.UTF8);

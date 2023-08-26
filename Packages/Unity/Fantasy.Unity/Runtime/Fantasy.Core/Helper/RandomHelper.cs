@@ -6,6 +6,9 @@ using Fantasy.DataStructure;
 
 namespace Fantasy.Helper
 {
+    /// <summary>
+    /// 随机数操作助手类，提供各种随机数生成和操作方法。
+    /// </summary>
     public static class RandomHelper
     {
         private static readonly Random Random = new Random();
@@ -13,23 +16,39 @@ namespace Fantasy.Helper
         private static readonly byte[] Byte8 = new byte[8];
         private static readonly byte[] Byte2 = new byte[2];
 
+        /// <summary>
+        /// 生成一个随机的无符号 64 位整数。
+        /// </summary>
+        /// <returns>无符号 64 位整数。</returns>
         public static ulong RandUInt64()
         {
             Random.NextBytes(Byte8);
             return BitConverter.ToUInt64(Byte8, 0);
         }
 
+        /// <summary>
+        /// 生成一个随机的 64 位整数。
+        /// </summary>
+        /// <returns>64 位整数。</returns>
         public static long RandInt64()
         {
             Random.NextBytes(Byte8);
             return BitConverter.ToInt64(Byte8, 0);
         }
 
+        /// <summary>
+        /// 生成一个随机的无符号 32 位整数。
+        /// </summary>
+        /// <returns>无符号 32 位整数。</returns>
         public static uint RandUInt32()
         {
             return (uint) Random.Next();
         }
 
+        /// <summary>
+        /// 生成一个随机的无符号 16 位整数。
+        /// </summary>
+        /// <returns>无符号 16 位整数。</returns>
         public static ushort RandUInt16()
         {
             Random.NextBytes(Byte2);
@@ -37,36 +56,52 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// 获取lower与Upper之间的随机数,包含下限，不包含上限
+        /// 在指定范围内生成一个随机整数（包含下限，不包含上限）。
         /// </summary>
-        /// <param name="lower"></param>
-        /// <param name="upper"></param>
-        /// <returns></returns>
+        /// <param name="lower">下限。</param>
+        /// <param name="upper">上限。</param>
+        /// <returns>生成的随机整数。</returns>
         public static int RandomNumber(int lower, int upper)
         {
             return Random.Next(lower, upper);
         }
 
+        /// <summary>
+        /// 生成一个随机的布尔值。
+        /// </summary>
+        /// <returns>随机的布尔值。</returns>
         public static bool RandomBool()
         {
             return Random.Next(2) == 0;
         }
 
+        /// <summary>
+        /// 从数组中随机选择一个元素。
+        /// </summary>
+        /// <typeparam name="T">数组元素的类型。</typeparam>
+        /// <param name="array">要选择的数组。</param>
+        /// <returns>随机选择的数组元素。</returns>
         public static T RandomArray<T>(this T[] array)
         {
             return array[RandomNumber(0, array.Count() - 1)];
         }
 
+        /// <summary>
+        /// 从列表中随机选择一个元素。
+        /// </summary>
+        /// <typeparam name="T">列表元素的类型。</typeparam>
+        /// <param name="array">要选择的列表。</param>
+        /// <returns>随机选择的列表元素。</returns>
         public static T RandomArray<T>(this List<T> array)
         {
             return array[RandomNumber(0, array.Count() - 1)];
         }
 
         /// <summary>
-        /// 打乱数组
+        /// 打乱列表中元素的顺序。
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="arr">要打乱的数组</param>
+        /// <typeparam name="T">列表元素的类型。</typeparam>
+        /// <param name="arr">要打乱顺序的列表。</param>
         public static void BreakRank<T>(List<T> arr)
         {
             if (arr == null || arr.Count < 2)
@@ -81,6 +116,10 @@ namespace Fantasy.Helper
             }
         }
 
+        /// <summary>
+        /// 生成一个介于 0 和 1 之间的随机单精度浮点数。
+        /// </summary>
+        /// <returns>随机单精度浮点数。</returns>
         public static float RandFloat01()
         {
             var value = Random.NextDouble();
@@ -95,10 +134,10 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// 通过权重随机
+        /// 根据权重随机选择一个索引。
         /// </summary>
-        /// <param name="weights"></param>
-        /// <returns></returns>
+        /// <param name="weights">权重数组，每个元素表示相应索引的权重。</param>
+        /// <returns>随机选择的索引值。</returns>
         public static int RandomByWeight(int[] weights)
         {
             var sum = weights.Sum();
@@ -117,10 +156,10 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// 固定概率的随机、就是某数值上限里比出多少次
+        /// 根据固定概率随机选择一个索引，即某个数值上限内随机多少次。
         /// </summary>
-        /// <param name="args"></param>
-        /// <returns></returns>
+        /// <param name="args">概率数组，每个元素表示相应索引的概率。</param>
+        /// <returns>随机选择的索引值。</returns>
         public static int RandomByFixedProbability(int[] args)
         {
             var argCount = args.Length;
@@ -224,18 +263,23 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// 在4个Vector2点范围内随机出一个位置
+        /// 在指定的矩形区域内随机生成一个二维向量位置。
         /// </summary>
-        /// <param name="minX">X轴最小值</param>
-        /// <param name="maxX">X轴最大值</param>
-        /// <param name="minY">Y轴最小值</param>
-        /// <param name="maxY">Y轴最大值</param>
-        /// <returns></returns>
+        /// <param name="minX">X轴最小值。</param>
+        /// <param name="maxX">X轴最大值。</param>
+        /// <param name="minY">Y轴最小值。</param>
+        /// <param name="maxY">Y轴最大值。</param>
+        /// <returns>随机生成的二维向量位置。</returns>
         public static Vector2 NextVector2(float minX, float maxX, float minY, float maxY)
         {
             return new Vector2(NextFloat(minX, maxX), NextFloat(minY, maxY));
         }
 
+        /// <summary>
+        /// 生成指定长度的随机数字代码。
+        /// </summary>
+        /// <param name="len">数字代码的长度。</param>
+        /// <returns>生成的随机数字代码。</returns>
         public static string RandomNumberCode(int len = 6)
         {
             int num = 0;

@@ -19,7 +19,10 @@ namespace Fantasy
             Obj = obj;
         }
     }
-    
+
+    /// <summary>
+    /// 事件系统类，用于加卸载程序集，发布和订阅事件。
+    /// </summary>
     public sealed class EventSystem : Singleton<EventSystem>
     {
         private readonly OneToManyList<Type, IEvent> _events = new();
@@ -28,6 +31,10 @@ namespace Fantasy
         private readonly OneToManyList<int, EventInfo> _assemblyEvents = new();
         private readonly OneToManyList<int, EventInfo> _assemblyAsyncEvents = new();
 
+        /// <summary>
+        /// 在程序集加载时，遍历寻找并初始化事件。
+        /// </summary>
+        /// <param name="assemblyName">程序集名</param>
         protected override void OnLoad(int assemblyName)
         {
             foreach (var type in AssemblyManager.ForEach(assemblyName, typeof(IEvent)))
@@ -55,6 +62,10 @@ namespace Fantasy
             }
         }
 
+        /// <summary>
+        /// 在程序集卸载时，移除相关事件。
+        /// </summary>
+        /// <param name="assemblyName">程序集名</param>
         protected override void OnUnLoad(int assemblyName)
         {
             if (_assemblyEvents.TryGetValue(assemblyName, out var events))
@@ -78,6 +89,11 @@ namespace Fantasy
             }
         }
 
+        /// <summary>
+        /// 发布一个值类型的事件数据。
+        /// </summary>
+        /// <typeparam name="TEventData">事件数据类型（值类型）。</typeparam>
+        /// <param name="eventData">事件数据实例。</param>
         public void Publish<TEventData>(TEventData eventData) where TEventData : struct
         {
             if (!_events.TryGetValue(eventData.GetType(), out var list))
@@ -98,6 +114,12 @@ namespace Fantasy
             }
         }
 
+        /// <summary>
+        /// 发布一个继承自 Entity 的事件数据。
+        /// </summary>
+        /// <typeparam name="TEventData">事件数据类型（继承自 Entity）。</typeparam>
+        /// <param name="eventData">事件数据实例。</param>
+        /// <param name="isDisposed">是否释放事件数据。</param>
         public void Publish<TEventData>(TEventData eventData, bool isDisposed = true) where TEventData : Entity
         {
             if (!_events.TryGetValue(typeof(TEventData), out var list))
@@ -123,6 +145,12 @@ namespace Fantasy
             }
         }
 
+        /// <summary>
+        /// 异步发布一个值类型的事件数据。
+        /// </summary>
+        /// <typeparam name="TEventData">事件数据类型（值类型）。</typeparam>
+        /// <param name="eventData">事件数据实例。</param>
+        /// <returns>表示异步操作的任务。</returns>
         public async FTask PublishAsync<TEventData>(TEventData eventData) where TEventData : struct
         {
             if (!_asyncEvents.TryGetValue(eventData.GetType(), out var list))
@@ -139,7 +167,14 @@ namespace Fantasy
 
             await FTask.WhenAll(tasks);
         }
-        
+
+        /// <summary>
+        /// 异步发布一个继承自 Entity 的事件数据。
+        /// </summary>
+        /// <typeparam name="TEventData">事件数据类型（继承自 Entity）。</typeparam>
+        /// <param name="eventData">事件数据实例。</param>
+        /// <param name="isDisposed">是否释放事件数据。</param>
+        /// <returns>表示异步操作的任务。</returns>
         public async FTask PublishAsync<TEventData>(TEventData eventData, bool isDisposed = true) where TEventData : Entity
         {
             if (!_asyncEvents.TryGetValue(eventData.GetType(), out var list))
@@ -162,6 +197,9 @@ namespace Fantasy
             }
         }
 
+        /// <summary>
+        /// 清理资源和事件订阅
+        /// </summary>
         public override void Dispose()
         {
             _events.Clear();

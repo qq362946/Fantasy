@@ -207,6 +207,11 @@ public sealed class ProtoBufExporter
                         switch (parameterArray.Length)
                         {
                             case 2:
+                                if (parameter == "ICustomRouteMessage")
+                                {
+                                    customRouteType = parameterArray[1].Trim();
+                                    break;
+                                }
                                 responseTypeStr = parameterArray[1].Trim();
                                 break;
                             case 3:

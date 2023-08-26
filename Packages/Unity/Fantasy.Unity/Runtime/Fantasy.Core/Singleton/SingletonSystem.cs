@@ -8,11 +8,17 @@ using Fantasy.DataStructure;
 
 namespace Fantasy.Helper
 {
+    /// <summary>
+    /// 单例管理系统，负责管理和调度实现 <see cref="ISingleton"/> 接口的单例对象。
+    /// </summary>
     public static class SingletonSystem
     {
         private static readonly Queue<IUpdateSingleton> Updates = new Queue<IUpdateSingleton>();
         private static readonly OneToManyQueue<int, ISingleton> Singletons = new OneToManyQueue<int, ISingleton>();
 
+        /// <summary>
+        /// 初始化 SingletonSystem，开始监视程序集加载和卸载事件。
+        /// </summary>
         public static void Initialize()
         {
             AssemblyManager.OnLoadAssemblyEvent += Load;
@@ -87,6 +93,9 @@ namespace Fantasy.Helper
             // Log.Info($"assembly:{assemblyName} Unload Singleton count:{count}");
         }
 
+        /// <summary>
+        /// 更新 SingletonSystem 中的所有 <see cref="IUpdateSingleton"/> 单例对象。
+        /// </summary>
         public static void Update()
         {
             var updatesCount = Updates.Count;
@@ -113,6 +122,9 @@ namespace Fantasy.Helper
             }
         }
 
+        /// <summary>
+        /// 销毁 SingletonSystem，释放所有单例资源并取消监视程序集事件。
+        /// </summary>
         public static void Dispose()
         {
             foreach (var (_, singletons) in Singletons)

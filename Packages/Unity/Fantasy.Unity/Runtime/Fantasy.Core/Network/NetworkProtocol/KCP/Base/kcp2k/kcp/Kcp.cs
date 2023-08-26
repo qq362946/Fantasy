@@ -2,6 +2,7 @@
 // Kept as close to original as possible.
 using System;
 using System.Collections.Generic;
+#pragma warning disable CS1591
 
 namespace kcp2k
 {
