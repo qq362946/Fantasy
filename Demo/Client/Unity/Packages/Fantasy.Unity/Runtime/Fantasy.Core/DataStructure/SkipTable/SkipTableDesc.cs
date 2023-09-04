@@ -2,12 +2,24 @@
 namespace Fantasy.DataStructure
 {
     /// <summary>
-    /// 跳表降序版
+    /// 跳表降序版，用于存储降序排列的数据。
     /// </summary>
-    /// <typeparam name="TValue"></typeparam>
+    /// <typeparam name="TValue">存储的值的类型。</typeparam>
     public class SkipTableDesc<TValue> : SkipTableBase<TValue>
     {
+        /// <summary>
+        /// 初始化跳表降序版的新实例。
+        /// </summary>
+        /// <param name="maxLayer">跳表的最大层数，默认为 8。</param>
         public SkipTableDesc(int maxLayer = 8) : base(maxLayer) { }
+
+        /// <summary>
+        /// 向跳表中添加一个节点，根据降序规则进行插入。
+        /// </summary>
+        /// <param name="sortKey">排序主键。</param>
+        /// <param name="viceKey">副键。</param>
+        /// <param name="key">键。</param>
+        /// <param name="value">值。</param>
         public override void Add(long sortKey, long viceKey, long key, TValue value)
         {
             var rLevel = 1;
@@ -64,6 +76,15 @@ namespace Fantasy.DataStructure
                 cur = cur.Down;
             }
         }
+
+        /// <summary>
+        /// 从跳表中移除一个节点，根据降序规则进行移除。
+        /// </summary>
+        /// <param name="sortKey">排序主键。</param>
+        /// <param name="viceKey">副键。</param>
+        /// <param name="key">键。</param>
+        /// <param name="value">移除的节点值。</param>
+        /// <returns>如果成功移除节点，则返回 true，否则返回 false。</returns>
         public override bool Remove(long sortKey, long viceKey, long key, out TValue value)
         {
             value = default;

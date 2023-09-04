@@ -11,26 +11,62 @@ using Fantasy.DataStructure;
 
 namespace Fantasy.Core.Network
 {
+    /// <summary>
+    /// TCP客户端网络类，用于管理TCP客户端网络连接。
+    /// </summary>
     public sealed class TCPClientNetwork : AClientNetwork
     {
         #region 逻辑线程
 
         private bool _isInit;
         private long _connectTimeoutId;
+        /// <summary>
+        /// 在网络通道被销毁时触发的事件。
+        /// </summary>
         public override event Action OnDispose;
+        /// <summary>
+        /// 在连接失败时触发的事件。
+        /// </summary>
         public override event Action OnConnectFail;
+        /// <summary>
+        /// 在连接成功时触发的事件。
+        /// </summary>
         public override event Action OnConnectComplete;
+        /// <summary>
+        /// 在连接断开时触发的事件。
+        /// </summary>
         public override event Action OnConnectDisconnect;
+        /// <summary>
+        /// 在通道 ID 发生变化时触发的事件，参数为新的通道 ID。
+        /// </summary>
         public override event Action<uint> OnChangeChannelId = channelId => { };
+        /// <summary>
+        /// 在接收到内存流数据包时触发的事件，参数为解析后的数据包信息。
+        /// </summary>
         public override event Action<APackInfo> OnReceiveMemoryStream;
 
+        /// <summary>
+        /// 创建一个 TCP协议客户端网络实例。
+        /// </summary>
+        /// <param name="scene">所属场景。</param>
+        /// <param name="networkTarget">网络目标。</param>
         public TCPClientNetwork(Scene scene, NetworkTarget networkTarget) : base(scene, NetworkType.Client, NetworkProtocolType.TCP, networkTarget)
         {
             NetworkThread.Instance.AddNetwork(this);
         }
 
+        /// <summary>
+        /// 连接到远程服务器。
+        /// </summary>
+        /// <param name="remoteEndPoint">远程服务器的终端点。</param>
+        /// <param name="onConnectComplete">连接成功时的回调。</param>
+        /// <param name="onConnectFail">连接失败时的回调。</param>
+        /// <param name="onConnectDisconnect">连接断开时的回调。</param>
+        /// <param name="connectTimeout">连接超时时间，单位：毫秒。</param>
+        /// <returns>连接的通道ID。</returns>
         public override uint Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, int connectTimeout = 5000)
         {
+            // 如果已经初始化过一次，抛出异常，要求重新实例化
             if (_isInit)
             {
                 throw new NotSupportedException($"KCPClientNetwork Id:{Id} Has already been initialized. If you want to call Connect again, please re instantiate it.");
@@ -40,8 +76,11 @@ namespace Fantasy.Core.Network
             OnConnectFail = onConnectFail;
             OnConnectComplete = onConnectComplete;
             OnConnectDisconnect = onConnectDisconnect;
+
+            // 生成随机的 Channel ID
             ChannelId = 0xC0000000 | (uint) new Random().Next();
 
+            // 设置发送操作的委托
             _sendAction = (rpcId, routeTypeOpCode, routeId, memoryStream, message) =>
             {
                 if (IsDisposed)
@@ -58,41 +97,50 @@ namespace Fantasy.Core.Network
                     MemoryStream = memoryStream
                 });
             };
-            
+
+            // 创建数据包解析器
             _packetParser = APacketParser.CreatePacketParser(NetworkTarget);
-            
+
+            // 设置异步操作完成时的回调函数
             _outArgs.Completed += OnComplete;
             _innArgs.Completed += OnComplete;
 
+            // 设置连接超时定时器
             _connectTimeoutId = TimerScheduler.Instance.Core.OnceTimer(connectTimeout, () =>
             {
                 OnConnectFail?.Invoke();
                 Dispose();
             });
-            
+
+            // 将连接操作放入网络主线程的同步上下文中执行
             NetworkThread.Instance.SynchronizationContext.Post(() =>
             {
+                // 创建异步操作参数
                 var outArgs = new SocketAsyncEventArgs
                 {
                     RemoteEndPoint = remoteEndPoint
                 };
                 
                 outArgs.Completed += OnComplete;
-                
+
+                // 创建套接字并设置参数
                 _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) {NoDelay = true};
                 _socket.SetSocketBufferToOsLimit();
-
+                // 如果连接成功，直接返回；否则继续执行连接操作
                 if (_socket.ConnectAsync(outArgs))
                 {
                     return;
                 }
-
+                // 手动触发连接完成事件
                 OnNetworkConnectComplete(outArgs);
             });
 
             return ChannelId;
         }
 
+        /// <summary>
+        /// 释放资源并断开网络连接。
+        /// </summary>
         public override void Dispose()
         {
             if (IsDisposed)
@@ -140,16 +188,20 @@ namespace Fantasy.Core.Network
 
         #region 网络主线程
         
-        private Socket _socket;
-        private bool _isSending;
-        private APacketParser _packetParser;
-        private Action<uint, long, long, MemoryStream, object> _sendAction;
-        private readonly CircularBuffer _sendBuffer = new CircularBuffer();
-        private readonly CircularBuffer _receiveBuffer = new CircularBuffer();
-        private readonly SocketAsyncEventArgs _outArgs = new SocketAsyncEventArgs();
-        private readonly SocketAsyncEventArgs _innArgs = new SocketAsyncEventArgs();
-        private Queue<MessageCacheInfo> _messageCache = new Queue<MessageCacheInfo>();
+        private Socket _socket; // 用于通信的套接字。
+        private bool _isSending; // 表示是否正在发送数据。
+        private APacketParser _packetParser; // 数据包解析器。
+        private Action<uint, long, long, MemoryStream, object> _sendAction; // 发送数据的回调方法。
+        private readonly CircularBuffer _sendBuffer = new CircularBuffer(); // 发送数据的环形缓冲区。
+        private readonly CircularBuffer _receiveBuffer = new CircularBuffer(); // 接收数据的环形缓冲区。
+        private readonly SocketAsyncEventArgs _outArgs = new SocketAsyncEventArgs(); // 发送数据异步操作的参数。
+        private readonly SocketAsyncEventArgs _innArgs = new SocketAsyncEventArgs(); // 接收数据异步操作的参数。
+        private Queue<MessageCacheInfo> _messageCache = new Queue<MessageCacheInfo>(); // 数据消息缓存队列。
 
+        /// <summary>
+        /// 在网络连接成功时的回调方法。
+        /// </summary>
+        /// <param name="asyncEventArgs"></param>
         private void OnNetworkConnectComplete(SocketAsyncEventArgs asyncEventArgs)
         {
 #if FANTASY_DEVELOP
@@ -210,6 +262,14 @@ namespace Fantasy.Core.Network
             }
         }
 
+        /// <summary>
+        /// 发送数据到指定的网络通道。
+        /// </summary>
+        /// <param name="channelId">通道 ID。</param>
+        /// <param name="rpcId">RPC ID。</param>
+        /// <param name="routeTypeOpCode">路由类型和操作码。</param>
+        /// <param name="routeId">路由 ID。</param>
+        /// <param name="message">要发送的消息。</param>
         public override void Send(uint channelId, uint rpcId, long routeTypeOpCode, long routeId, object message)
         {
 #if FANTASY_DEVELOP
@@ -227,6 +287,14 @@ namespace Fantasy.Core.Network
             _sendAction(rpcId, routeTypeOpCode, routeId, null, message);
         }
 
+        /// <summary>
+        /// 发送数据到指定的网络通道。
+        /// </summary>
+        /// <param name="channelId">通道 ID。</param>
+        /// <param name="rpcId">RPC ID。</param>
+        /// <param name="routeTypeOpCode">路由类型和操作码。</param>
+        /// <param name="routeId">路由 ID。</param>
+        /// <param name="memoryStream">要发送的内存流。</param>
         public override void Send(uint channelId, uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream)
         {
 #if FANTASY_DEVELOP
@@ -475,7 +543,11 @@ namespace Fantasy.Core.Network
             ReceiveCompletedHandler(asyncEventArgs);
             Receive();
         }
-        
+
+        /// <summary>
+        /// 从网络中移除指定通道。
+        /// </summary>
+        /// <param name="channelId">要移除的通道 ID。</param>
         public override void RemoveChannel(uint channelId)
         {
             Dispose();

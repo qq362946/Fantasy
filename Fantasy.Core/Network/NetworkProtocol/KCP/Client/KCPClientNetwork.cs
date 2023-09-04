@@ -14,25 +14,59 @@ using kcp2k;
 
 namespace Fantasy.Core.Network
 {
+    /// <summary>
+    /// KCP协议客户端网络类，用于管理KCP客户端网络连接。
+    /// </summary>
     public sealed class KCPClientNetwork : AClientNetwork, INetworkUpdate
     {
         #region 逻辑线程
-
+        /// <summary>
+        /// 是否已初始化标志。
+        /// </summary>
         private bool _isInit;
+        /// <summary>
+        /// 连接超时计时器Id。
+        /// </summary>
         private long _connectTimeoutId;
+        /// <summary>
+        /// 当网络对象被销毁时触发的事件。
+        /// </summary>
         public override event Action OnDispose;
+        /// <summary>
+        /// 当连接失败时触发的事件。
+        /// </summary>
         public override event Action OnConnectFail;
+        /// <summary>
+        /// 当连接成功建立时触发的事件。
+        /// </summary>
         public override event Action OnConnectComplete;
+        /// <summary>
+        /// 当连接断开时触发的事件。
+        /// </summary>
         public override event Action OnConnectDisconnect;
+        /// <summary>
+        /// 当通道ID发生变化时触发的事件。
+        /// </summary>
         public override event Action<uint> OnChangeChannelId;
+        /// <summary>
+        /// 当接收到内存流数据时触发的事件。
+        /// </summary>
         public override event Action<APackInfo> OnReceiveMemoryStream;
 
+        /// <summary>
+        /// 构造函数，创建一个KCP协议客户端网络实例。
+        /// </summary>
+        /// <param name="scene">所属场景。</param>
+        /// <param name="networkTarget">网络目标类型。</param>
         public KCPClientNetwork(Scene scene, NetworkTarget networkTarget) : base(scene, NetworkType.Client, NetworkProtocolType.KCP, networkTarget)
         {
             _startTime = TimeHelper.Now;
             NetworkThread.Instance.AddNetwork(this);
         }
 
+        /// <summary>
+        /// 销毁网络连接。
+        /// </summary>
         public override void Dispose()
         {
             if (IsDisposed)
@@ -88,6 +122,16 @@ namespace Fantasy.Core.Network
             });
         }
 
+        /// <summary>
+        /// 连接到指定的远程终结点。
+        /// </summary>
+        /// <param name="remoteEndPoint">远程终结点。</param>
+        /// <param name="onConnectComplete">连接成功回调。</param>
+        /// <param name="onConnectFail">连接失败回调。</param>
+        /// <param name="onConnectDisconnect">连接断开回调。</param>
+        /// <param name="connectTimeout">连接超时时间（毫秒），默认为 5000 毫秒。</param>
+        /// <returns>新建的通道 ID。</returns>
+        /// <exception cref="NotSupportedException">如果已经初始化，则抛出该异常。</exception>
         public override uint Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, int connectTimeout = 5000)
         {
             if (_isInit)
@@ -287,7 +331,11 @@ namespace Fantasy.Core.Network
                 }
             }
         }
-        
+
+        /// <summary>
+        /// 发送数据。
+        /// </summary>
+        /// <param name="memoryStream">要发送的数据。</param>
         private void Send(MemoryStream memoryStream)
         {
 #if FANTASY_DEVELOP
@@ -313,6 +361,14 @@ namespace Fantasy.Core.Network
             AddToUpdate(0);
         }
 
+        /// <summary>
+        /// 发送数据到远程端点。
+        /// </summary>
+        /// <param name="channelId">通道 ID。</param>
+        /// <param name="rpcId">RPC ID。</param>
+        /// <param name="routeTypeOpCode">路由类型和操作码。</param>
+        /// <param name="entityId">实体 ID。</param>
+        /// <param name="memoryStream">要发送的数据。</param>
         public override void Send(uint channelId, uint rpcId, long routeTypeOpCode, long entityId, MemoryStream memoryStream)
         {
 #if FANTASY_DEVELOP
@@ -330,6 +386,14 @@ namespace Fantasy.Core.Network
             _sendAction(rpcId, routeTypeOpCode, entityId, memoryStream, null);
         }
 
+        /// <summary>
+        /// 发送数据到远程端点。
+        /// </summary>
+        /// <param name="channelId">通道 ID。</param>
+        /// <param name="rpcId">RPC ID。</param>
+        /// <param name="routeTypeOpCode">路由类型和操作码。</param>
+        /// <param name="entityId">实体 ID。</param>
+        /// <param name="message">要发送的消息对象。</param>
         public override void Send(uint channelId, uint rpcId, long routeTypeOpCode, long entityId, object message)
         {
 #if FANTASY_DEVELOP
@@ -447,7 +511,10 @@ namespace Fantasy.Core.Network
                 }
             }
         }
-        
+
+        /// <summary>
+        /// 更新网络连接状态和数据接收。
+        /// </summary>
         public void Update()
         {
             Receive();
@@ -477,6 +544,10 @@ namespace Fantasy.Core.Network
             }
         }
 
+        /// <summary>
+        /// 添加更新操作到更新列表。
+        /// </summary>
+        /// <param name="tillTime">操作的时间。</param>
         private void AddToUpdate(uint tillTime)
         {
 #if FANTASY_DEVELOP
@@ -500,6 +571,9 @@ namespace Fantasy.Core.Network
             _updateTimer.Add(tillTime);
         }
 
+        /// <summary>
+        /// 更新 KCP 连接状态。
+        /// </summary>
         private void KcpUpdate()
         {
 #if FANTASY_DEVELOP
@@ -523,16 +597,28 @@ namespace Fantasy.Core.Network
             AddToUpdate(_kcp.Check(nowTime));
         }
 
+        /// <summary>
+        /// 移除指定通道的网络连接。
+        /// </summary>
+        /// <param name="channelId">要移除的通道 ID。</param>
         public override void RemoveChannel(uint channelId)
         {
             Dispose();
         }
 
+        /// <summary>
+        /// 创建一个新的通道 ID。
+        /// </summary>
+        /// <returns>新的通道 ID。</returns>
         private uint CreateChannelId()
         {
             return 0xC0000000 | (uint) new Random().Next();
         }
 
+        /// <summary>
+        /// 发送指定的 KCP 消息头到远程端点。
+        /// </summary>
+        /// <param name="kcpHeader">要发送的 KCP 消息头。</param>
         private void SendHeader(KcpHeader kcpHeader)
         {
             if (_socket == null || !_socket.Connected)
@@ -545,7 +631,11 @@ namespace Fantasy.Core.Network
             buff.WriteTo(1, ChannelId);
             _socket.Send(buff, 5, SocketFlags.None);
         }
-        
+
+        /// <summary>
+        /// 清除连接超时计时器。
+        /// </summary>
+        /// <param name="connectTimeoutId">连接超时计时器 ID。</param>
         private void ClearConnectTimeout(ref long connectTimeoutId)
         {
             if (connectTimeoutId == 0)

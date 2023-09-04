@@ -5,23 +5,51 @@ using Fantasy.Helper;
 
 namespace Fantasy
 {
+    /// <summary>
+    /// 网络中的服务器。
+    /// </summary>
     public sealed class Server
     {
+        /// <summary>
+        /// 获取服务器的唯一标识符。
+        /// </summary>
         public uint Id { get; private set; }
+        /// <summary>
+        /// 获取与服务器关联的场景。
+        /// </summary>
         public Scene Scene { get; private set; }
+
+        // 存储与其他服务器建立的会话的字典。
         private readonly Dictionary<uint, ConnectInfo> _sessions = new Dictionary<uint, ConnectInfo>();
-        
+
+        /// <summary>
+        /// 与其他服务器建立的连接信息。
+        /// </summary>
         private sealed class ConnectInfo : IDisposable
         {
+            /// <summary>
+            /// 获取与连接信息关联的会话。
+            /// </summary>
             public Session Session;
+            /// <summary>
+            /// 获取与连接信息关联的网络组件。
+            /// </summary>
             public Entity NetworkComponent;
 
+            /// <summary>
+            /// 初始化 <see cref="ConnectInfo"/> 类的新实例。
+            /// </summary>
+            /// <param name="session">要关联的会话。</param>
+            /// <param name="networkComponent">要关联的网络组件。</param>
             public ConnectInfo(Session session, Entity networkComponent)
             {
                 Session = session;
                 NetworkComponent = networkComponent;
             }
 
+            /// <summary>
+            /// 释放连接信息所持有的资源。
+            /// </summary>
             public void Dispose()
             {
                 if (Session != null)
@@ -37,7 +65,12 @@ namespace Fantasy
                 }
             }
         }
-        
+
+        /// <summary>
+        /// 获取用于与指定目标服务器通信的会话。
+        /// </summary>
+        /// <param name="targetServerId">目标服务器的标识符。</param>
+        /// <returns>与目标服务器的会话。</returns>
         public Session GetSession(uint targetServerId)
         {
             if (_sessions.TryGetValue(targetServerId, out var connectInfo))
@@ -86,7 +119,11 @@ namespace Fantasy
             _sessions.Add(targetServerId, new ConnectInfo(clientNetworkComponent.Session, clientNetworkComponent));
             return clientNetworkComponent.Session;
         }
-        
+
+        /// <summary>
+        /// 移除与指定目标服务器关联的会话。
+        /// </summary>
+        /// <param name="targetServerId">目标服务器的标识符。</param>
         public void RemoveSession(uint targetServerId)
         {
             if (!_sessions.Remove(targetServerId, out var connectInfo))
@@ -98,9 +135,13 @@ namespace Fantasy
         }
 
         #region Static
-
+        // 存储已创建的服务器的字典。
         private static readonly Dictionary<uint, Server> Servers = new Dictionary<uint, Server>();
-        
+
+        /// <summary>
+        /// 创建并初始化具有指定服务器配置的服务器。
+        /// </summary>
+        /// <param name="serverConfigId">服务器配置的标识符。</param>
         public static async FTask Create(uint serverConfigId)
         {
             var serverConfigInfo = ConfigTableManage.ServerConfig(serverConfigId);
@@ -124,6 +165,15 @@ namespace Fantasy
             Log.Debug($"ServerId:{serverConfigId} is start complete");
         }
 
+        /// <summary>
+        /// 创建一个新的服务器实例或获取现有服务器实例。
+        /// </summary>
+        /// <param name="serverConfigId">要创建的服务器的配置标识符。</param>
+        /// <param name="innerBindIp">服务器的内部绑定 IP 地址。</param>
+        /// <param name="innerPort">服务器的内部端口。</param>
+        /// <param name="outerBindIp">服务器的外部绑定 IP 地址。</param>
+        /// <param name="sceneInfos">要创建的场景配置信息列表。</param>
+        /// <returns>创建或获取的服务器实例。</returns>
         public static async FTask<Server> Create(uint serverConfigId, string innerBindIp, int innerPort, string outerBindIp, List<SceneConfigInfo> sceneInfos)
         {
             if (Servers.TryGetValue(serverConfigId, out var server))
@@ -160,7 +210,12 @@ namespace Fantasy
             Servers.Add(serverConfigId, server);
             return server;
         }
-        
+
+        /// <summary>
+        /// 根据路由标识符获取服务器实例。
+        /// </summary>
+        /// <param name="routeId">服务器的路由标识符。</param>
+        /// <returns>找到的服务器实例，如果未找到则返回 null。</returns>
         public static Server Get(uint routeId)
         {
             return Servers.TryGetValue(routeId, out var server) ? server : null;

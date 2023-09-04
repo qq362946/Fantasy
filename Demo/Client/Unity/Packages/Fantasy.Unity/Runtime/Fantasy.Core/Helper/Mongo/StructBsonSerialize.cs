@@ -7,8 +7,18 @@ using MongoDB.Bson.Serialization.Serializers;
 
 namespace Fantasy.Helper;
 
+/// <summary>
+/// 提供对结构体类型进行 BSON 序列化和反序列化的辅助类。
+/// </summary>
+/// <typeparam name="TValue">要序列化和反序列化的结构体类型。</typeparam>
 public class StructBsonSerialize<TValue> : StructSerializerBase<TValue> where TValue : struct
 {
+    /// <summary>
+    /// 将结构体对象序列化为 BSON 数据。
+    /// </summary>
+    /// <param name="context">序列化上下文。</param>
+    /// <param name="args">序列化参数。</param>
+    /// <param name="value">要序列化的结构体对象。</param>
     public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, TValue value)
     {
         var nominalType = args.NominalType;
@@ -27,6 +37,12 @@ public class StructBsonSerialize<TValue> : StructSerializerBase<TValue> where TV
         bsonWriter.WriteEndDocument();
     }
 
+    /// <summary>
+    /// 将 BSON 数据反序列化为结构体对象。
+    /// </summary>
+    /// <param name="context">反序列化上下文。</param>
+    /// <param name="args">反序列化参数。</param>
+    /// <returns>反序列化得到的结构体对象。</returns>
     public override TValue Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
         //boxing is required for SetValue to work

@@ -10,10 +10,19 @@ using System.Net.Sockets;
 
 namespace Fantasy.Core.Network
 {
+    /// <summary>
+    /// 表示 TCP 协议服务端网络类。
+    /// </summary>
     public sealed class TCPServerNetwork : ANetwork
     {
         #region 逻辑线程
 
+        /// <summary>
+        /// 创建一个 TCP 协议服务端网络实例。
+        /// </summary>
+        /// <param name="scene">所属场景。</param>
+        /// <param name="networkTarget">网络目标。</param>
+        /// <param name="address">服务器绑定的地址和端口。</param>
         public TCPServerNetwork(Scene scene, NetworkTarget networkTarget, IPEndPoint address) : base(scene, NetworkType.Server, NetworkProtocolType.TCP, networkTarget)
         {
             _acceptAsync = new SocketAsyncEventArgs();
@@ -36,7 +45,10 @@ namespace Fantasy.Core.Network
                 AcceptAsync();
             });
         }
-        
+
+        /// <summary>
+        /// 释放<see cref="TCPServerNetwork"/>实例使用的所有资源。
+        /// </summary>
         public override void Dispose()
         {
             if (IsDisposed)
@@ -80,6 +92,14 @@ namespace Fantasy.Core.Network
         private SocketAsyncEventArgs _acceptAsync;
         private readonly Dictionary<long, TCPServerNetworkChannel> _connectionChannel = new Dictionary<long, TCPServerNetworkChannel>();
 
+        /// <summary>
+        /// 在指定通道上发送网络消息。
+        /// </summary>
+        /// <param name="channelId">要发送消息的通道ID。</param>
+        /// <param name="rpcId">RPC（远程过程调用）的ID。</param>
+        /// <param name="routeTypeOpCode">路由类型和操作码。</param>
+        /// <param name="routeId">路由ID。</param>
+        /// <param name="memoryStream"><see cref="MemoryStream"/> 包含消息数据。</param>
         public override void Send(uint channelId, uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream)
         {
 #if FANTASY_DEVELOP
@@ -89,15 +109,25 @@ namespace Fantasy.Core.Network
                 return;
             }
 #endif
+            // 检查指定的通道是否存在且未被释放
             if (!_connectionChannel.TryGetValue(channelId, out var channel) || channel.IsDisposed)
             {
                 return;
             }
 
+            // 打包消息并发送
             var sendMemoryStream = Pack(rpcId, routeTypeOpCode, routeId, memoryStream, null);
             channel.Send(sendMemoryStream);
         }
 
+        /// <summary>
+        /// 在指定通道上发送网络消息。
+        /// </summary>
+        /// <param name="channelId">要发送消息的通道ID。</param>
+        /// <param name="rpcId">RPC（远程过程调用）的ID。</param>
+        /// <param name="routeTypeOpCode">路由类型和操作码。</param>
+        /// <param name="routeId">路由ID。</param>
+        /// <param name="message">要发送的消息对象。</param>
         public override void Send(uint channelId, uint rpcId, long routeTypeOpCode, long routeId, object message)
         {
 #if FANTASY_DEVELOP
@@ -107,15 +137,20 @@ namespace Fantasy.Core.Network
                 return;
             }
 #endif
+            // 检查指定的通道是否存在且未被释放
             if (!_connectionChannel.TryGetValue(channelId, out var channel) || channel.IsDisposed)
             {
                 return;
             }
 
+            // 打包消息并发送
             var memoryStream = Pack(rpcId, routeTypeOpCode, routeId, null, message);
             channel.Send(memoryStream);
         }
 
+        /// <summary>
+        /// 异步接受客户端连接请求。
+        /// </summary>
         private void AcceptAsync()
         {
 #if FANTASY_DEVELOP
@@ -189,6 +224,10 @@ namespace Fantasy.Core.Network
             }
         }
 
+        /// <summary>
+        /// 从网络中移除指定的通道。
+        /// </summary>
+        /// <param name="channelId">要移除的通道的唯一标识。</param>
         public override void RemoveChannel(uint channelId)
         {
 #if FANTASY_DEVELOP

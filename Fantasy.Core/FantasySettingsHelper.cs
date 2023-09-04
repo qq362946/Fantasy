@@ -7,8 +7,14 @@ using Microsoft.Extensions.Configuration;
 
 namespace Fantasy.Core;
 
+/// <summary>
+/// FantasySettingsHelper 类用于加载和管理 Fantasy 系统的各项设置。
+/// </summary>
 public static class FantasySettingsHelper
 {
+    /// <summary>
+    /// 初始化 Fantasy 系统的各项设置。
+    /// </summary>
     public static void Initialize()
     {
         const string settingsName = "FantasySettings.json";
@@ -70,6 +76,8 @@ public static class FantasySettingsHelper
         Define.ServerCustomExportDirectory = FileHelper.GetFullPath(root["Export:ServerCustomExportDirectory:Value"]);
         // 客户端自定义导出代码
         Define.ClientCustomExportDirectory = FileHelper.GetFullPath(root["Export:ClientCustomExportDirectory:Value"]);
+        // SceneConfig.xlsx的位置
+        Define.SceneConfigPath = FileHelper.GetFullPath(root["Export:SceneConfigPath:Value"]);
         // 自定义导出代码存放的程序集
         Define.CustomExportAssembly = FileHelper.GetFullPath(root["Export:CustomExportAssembly:Value"]);
     }

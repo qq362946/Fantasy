@@ -16,12 +16,9 @@ public sealed class SceneTypeConfigToEnum : ACustomExport
     public override void Run()
     {
         // 获取场景配置表的完整路径
-        var fullPath = FileHelper.GetFullPath("../../../Config/Excel/Server/SceneConfig.xlsx");
-
-        using var excelPackage = ExcelHelper.LoadExcel(fullPath);
+        using var excelPackage = ExcelHelper.LoadExcel(Define.SceneConfigPath);
         var sceneType = new Dictionary<string, string>();
         var sceneSubType = new Dictionary<string, string>();
-
         // 获取场景类型配置工作表
         var sceneTypeConfig = excelPackage.Workbook.Worksheets["SceneTypeConfig"];
         // 遍历场景类型配置表的行
@@ -37,7 +34,6 @@ public sealed class SceneTypeConfigToEnum : ACustomExport
 
             sceneType.Add(sceneTypeId, sceneTypeStr);
         }
-
         // 获取场景子类型配置工作表
         var sceneSubTypeConfig = excelPackage.Workbook.Worksheets["SceneSubTypeConfig"];
         // 遍历场景子类型配置表的行 
@@ -53,7 +49,6 @@ public sealed class SceneTypeConfigToEnum : ACustomExport
 
             sceneSubType.Add(sceneSubTypeId, sceneSubTypeStr);
         }
-
         // 如果存在场景类型或场景子类型，执行导出操作
         if (sceneType.Count > 0 || sceneSubType.Count > 0)
         {

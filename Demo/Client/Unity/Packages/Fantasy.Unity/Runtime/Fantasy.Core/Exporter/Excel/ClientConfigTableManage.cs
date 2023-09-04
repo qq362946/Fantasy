@@ -6,16 +6,24 @@ using UnityEngine;
 
 namespace Fantasy.Core
 {
+    /// <summary>
+    /// 配置表管理器，用于加载和管理配置表数据。
+    /// </summary>
     public static class ConfigTableManage
     {
-        private static readonly string ConfigBundle = "Config".ToLower();
-        private static readonly Dictionary<string, AProto> ConfigDic = new ();
+        private static readonly string ConfigBundle = "Config".ToLower(); // 配置表资源包名称
+        private static readonly Dictionary<string, AProto> ConfigDic = new (); // 配置表数据字典，用于缓存已加载的配置表数据
 
         static ConfigTableManage()
         {
             AssetBundleHelper.LoadBundle(ConfigBundle);
         }
         
+        /// <summary>
+        /// 加载指定类型的配置表数据。
+        /// </summary>
+        /// <typeparam name="T">配置表数据类型。</typeparam>
+        /// <returns>加载的配置表数据。</returns>
         public static T Load<T>() where T : AProto
         {
             var dataConfig = typeof(T).Name;

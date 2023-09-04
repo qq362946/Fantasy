@@ -6,11 +6,17 @@ using Fantasy.Helper;
 
 namespace Fantasy.Hotfix;
 
+/// <summary>
+/// 单例集合管理器类，继承自 <see cref="Singleton{T}"/>。
+/// </summary>
 public class SingleCollection : Singleton<SingleCollection>
 {
     private readonly OneToManyHashSet<Type, string> _collection = new OneToManyHashSet<Type, string>();
     private readonly OneToManyList<int, SingleCollectionInfo> _assemblyCollections = new OneToManyList<int, SingleCollectionInfo>();
 
+    /// <summary>
+    /// 表示单例集合的信息类。
+    /// </summary>
     private sealed class SingleCollectionInfo
     {
         public readonly Type RootType;
@@ -22,7 +28,11 @@ public class SingleCollection : Singleton<SingleCollection>
             CollectionName = collectionName;
         }
     }
-    
+
+    /// <summary>
+    /// 在程序集加载时执行的方法。
+    /// </summary>
+    /// <param name="assemblyName">程序集名称。</param>
     protected override void OnLoad(int assemblyName)
     {
         foreach (var type in AssemblyManager.ForEach(assemblyName, typeof(ISupportedSingleCollection)))
@@ -43,6 +53,10 @@ public class SingleCollection : Singleton<SingleCollection>
         }
     }
 
+    /// <summary>
+    /// 在程序集卸载时执行的方法。
+    /// </summary>
+    /// <param name="assemblyName">程序集名称。</param>
     protected override void OnUnLoad(int assemblyName)
     {
         if (!_assemblyCollections.TryGetValue(assemblyName, out var types))
@@ -58,6 +72,11 @@ public class SingleCollection : Singleton<SingleCollection>
         _assemblyCollections.RemoveByKey(assemblyName);
     }
 
+    /// <summary>
+    /// 异步获取实体的集合数据。
+    /// </summary>
+    /// <param name="entity">实体对象。</param>
+    /// <returns>表示异步操作的任务。</returns>
     public async FTask GetCollections(Entity entity)
     {
         if (entity is not ISingleCollectionRoot)
@@ -84,6 +103,11 @@ public class SingleCollection : Singleton<SingleCollection>
         }
     }
 
+    /// <summary>
+    /// 异步保存实体的集合数据。
+    /// </summary>
+    /// <param name="entity">实体对象。</param>
+    /// <returns>表示异步操作的任务。</returns>
     public async FTask SaveCollections(Entity entity)
     {
         if (entity is not ISingleCollectionRoot)

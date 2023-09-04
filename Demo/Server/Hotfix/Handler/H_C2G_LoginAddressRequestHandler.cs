@@ -49,5 +49,6 @@ public class H_C2G_LoginAddressRequestHandler : MessageRPC<H_C2G_LoginAddressReq
         }
         // 3、可寻址消息组件、挂载了这个组件可以接收和发送Addressable消息
         session.AddComponent<AddressableRouteComponent>().SetAddressableId(loginAddressResponse.AddressableId);
+        Log.Debug("服务器注册Addressable成功");
     }
 }

@@ -9,13 +9,21 @@ using System.Runtime.InteropServices;
 
 namespace Fantasy.Helper
 {
+    /// <summary>
+    /// 提供网络操作相关的帮助方法。
+    /// </summary>
     public static class NetworkHelper
     {
+        /// <summary>
+        /// 获取本机所有网络适配器的IP地址。
+        /// </summary>
+        /// <returns>IP地址数组。</returns>
         public static string[] GetAddressIPs()
         {
             var list = new List<string>();
             foreach (var networkInterface in NetworkInterface.GetAllNetworkInterfaces())
             {
+                // 仅考虑以太网类型的网络适配器
                 if (networkInterface.NetworkInterfaceType != NetworkInterfaceType.Ethernet)
                 {
                     continue;
@@ -29,12 +37,23 @@ namespace Fantasy.Helper
     
             return list.ToArray();
         }
-        
+
+        /// <summary>
+        /// 将主机名和端口号转换为 <see cref="IPEndPoint"/> 实例。
+        /// </summary>
+        /// <param name="host">主机名。</param>
+        /// <param name="port">端口号。</param>
+        /// <returns><see cref="IPEndPoint"/> 实例。</returns>
         public static IPEndPoint ToIPEndPoint(string host, int port)
         {
             return new IPEndPoint(IPAddress.Parse(host), port);
         }
-        
+
+        /// <summary>
+        /// 将地址字符串转换为 <see cref="IPEndPoint"/> 实例。
+        /// </summary>
+        /// <param name="address">地址字符串，格式为 "主机名:端口号"。</param>
+        /// <returns><see cref="IPEndPoint"/> 实例。</returns>
         public static IPEndPoint ToIPEndPoint(string address)
         {
             var index = address.LastIndexOf(':');
@@ -43,12 +62,21 @@ namespace Fantasy.Helper
             var port = int.Parse(p);
             return ToIPEndPoint(host, port);
         }
-        
+
+        /// <summary>
+        /// 将 <see cref="IPEndPoint"/> 实例转换为字符串表示形式。
+        /// </summary>
+        /// <param name="self"><see cref="IPEndPoint"/> 实例。</param>
+        /// <returns>表示 <see cref="IPEndPoint"/> 的字符串。</returns>
         public static string IPEndPointToStr(this IPEndPoint self)
         {
             return $"{self.Address}:{self.Port}";
         }
-    
+
+        /// <summary>
+        /// 针对 Windows 平台设置UDP连接重置选项。
+        /// </summary>
+        /// <param name="socket">要设置选项的 <see cref="Socket"/> 实例。</param>
         public static void SetSioUdpConnReset(Socket socket)
         {
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))

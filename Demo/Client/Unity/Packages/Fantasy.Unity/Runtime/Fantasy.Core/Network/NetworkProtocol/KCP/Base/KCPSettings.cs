@@ -1,5 +1,5 @@
 using System;
-
+#pragma warning disable CS1591
 namespace Fantasy.Core.Network
 {
     public class KCPSettings

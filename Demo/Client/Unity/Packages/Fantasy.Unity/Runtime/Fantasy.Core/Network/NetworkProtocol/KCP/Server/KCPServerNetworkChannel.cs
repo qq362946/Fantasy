@@ -13,21 +13,58 @@ using kcp2k;
 
 namespace Fantasy.Core.Network
 {
+    /// <summary>
+    /// KCP 服务器网络通道类，负责管理基于 KCP 协议的网络通信。
+    /// </summary>
     public sealed class KCPServerNetworkChannel : ANetworkChannel
     {
         #region 网络主线程
-
+        /// <summary>
+        /// 最大发送窗口大小，用于控制流量。
+        /// </summary>
         private int _maxSndWnd;
+        /// <summary>
+        /// 原始发送缓冲区，用于构建发送的数据包。
+        /// </summary>
         private byte[] _rawSendBuffer;
+        /// <summary>
+        /// 连接创建时间（只读），用于记录连接建立的时间戳。
+        /// </summary>
         public readonly uint CreateTime;
+        /// <summary>
+        /// 套接字，用于网络通信。
+        /// </summary>
         private readonly Socket _socket;
+        /// <summary>
+        /// 更新函数，用于更新网络通道状态。
+        /// </summary>
         private Action<uint, uint> _addToUpdate;
+        /// <summary>
+        /// 内存池，用于管理内存分配和回收。
+        /// </summary>
         private MemoryPool<byte> _memoryPool;
+        /// <summary>
+        /// KCP协议实例，用于处理可靠的数据传输。
+        /// </summary>
         public Kcp Kcp { get; private set; }
-
+        /// <summary>
+        /// 当网络通道被释放时触发的事件。
+        /// </summary>
         public override event Action OnDispose;
+        /// <summary>
+        /// 当接收到内存流数据包时触发的事件。
+        /// </summary>
         public override event Action<APackInfo> OnReceiveMemoryStream;
 
+        /// <summary>
+        /// 构造函数，创建 KCP 服务器网络通道实例。
+        /// </summary>
+        /// <param name="scene">所属场景</param>
+        /// <param name="id">通道 ID</param>
+        /// <param name="networkId">网络 ID</param>
+        /// <param name="remoteEndPoint">远程终端点</param>
+        /// <param name="socket">套接字</param>
+        /// <param name="createTime">创建时间</param>
         public KCPServerNetworkChannel(Scene scene, uint id, long networkId, EndPoint remoteEndPoint, Socket socket, uint createTime) : base(scene, id, networkId)
         {
 #if FANTASY_DEVELOP
@@ -43,6 +80,9 @@ namespace Fantasy.Core.Network
             _memoryPool = MemoryPool<byte>.Shared;
         }
 
+        /// <summary>
+        /// 释放资源并断开连接。
+        /// </summary>
         public override void Dispose()
         {
 #if FANTASY_DEVELOP
@@ -73,6 +113,14 @@ namespace Fantasy.Core.Network
             base.Dispose();
         }
 
+        /// <summary>
+        /// 连接到客户端，并设置 KCP 参数。
+        /// </summary>
+        /// <param name="kcp">KCP 实例</param>
+        /// <param name="addToUpdate">添加到更新的方法</param>
+        /// <param name="maxSndWnd">最大发送窗口大小</param>
+        /// <param name="networkTarget">网络目标</param>
+        /// <param name="networkMessageScheduler">网络消息调度器</param>
         public void Connect(Kcp kcp, Action<uint, uint> addToUpdate, int maxSndWnd, NetworkTarget networkTarget, ANetworkMessageScheduler networkMessageScheduler)
         {
 #if FANTASY_DEVELOP
@@ -99,6 +147,10 @@ namespace Fantasy.Core.Network
             });
         }
 
+        /// <summary>
+        /// 发送数据到客户端。
+        /// </summary>
+        /// <param name="memoryStream">内存流</param>
         public void Send(MemoryStream memoryStream)
         {
 #if FANTASY_DEVELOP
@@ -130,6 +182,9 @@ namespace Fantasy.Core.Network
             _addToUpdate(0, Id);
         }
 
+        /// <summary>
+        /// 接收数据并进行处理。
+        /// </summary>
         public void Receive()
         {
 #if FANTASY_DEVELOP
@@ -199,6 +254,11 @@ namespace Fantasy.Core.Network
             }
         }
 
+        /// <summary>
+        /// 将数据发送到网络。
+        /// </summary>
+        /// <param name="bytes">字节数组</param>
+        /// <param name="count">发送的字节数</param>
         public void Output(byte[] bytes, int count)
         {
 #if FANTASY_DEVELOP

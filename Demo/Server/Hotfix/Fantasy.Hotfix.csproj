@@ -10,4 +10,8 @@
       <ProjectReference Include="..\..\..\Packages\Net\Fantasy.Net\Fantasy.Net.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Generate\CustomExport\" />
+    </ItemGroup>
+
 </Project>

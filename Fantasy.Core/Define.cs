@@ -1,27 +1,33 @@
 #if FANTASY_NET
 namespace Fantasy.Core;
 
+/// <summary>
+/// 定义包含 Fantasy 系统设置的静态类。
+/// </summary>
 public static class Define
 {
 #if FANTASY_NET
 
     #region ProtoBuf
 
+    /// <summary>
+    /// 用于拆分字符串的字符数组。
+    /// </summary>
     public static readonly char[] SplitChars = { ' ', '\t' };
     /// <summary>
-    /// ProtoBuf文件夹
+    /// ProtoBuf 文件夹的路径。
     /// </summary>
     public static string ProtoBufDirectory;
     /// <summary>
-    /// 服务端生成文件夹
+    /// 生成服务端代码的文件夹路径。
     /// </summary>
     public static string ProtoBufServerDirectory;
     /// <summary>
-    /// 客户端生成文件夹
+    /// 生成客户端代码的文件夹路径。
     /// </summary>
     public static string ProtoBufClientDirectory;
     /// <summary>
-    /// 代码模板路径
+    /// ProtoBuf 代码模板的路径。
     /// </summary>
     public static string ProtoBufTemplatePath;
 
@@ -30,11 +36,11 @@ public static class Define
     #region Excel
 
     /// <summary>
-    /// 配置文件根目录
+    /// Excel 配置文件的根目录。
     /// </summary>
     public static string ExcelProgramPath;
     /// <summary>
-    /// 版本文件Excel
+    /// 版本文件的 Excel 路径。
     /// </summary>
     public static string ExcelVersionFile;
     /// <summary>
@@ -70,24 +76,28 @@ public static class Define
     /// </summary>
     public static string ClientCustomExportDirectory;
     /// <summary>
+    /// SceneConfig.xlsx的位置
+    /// </summary>
+    public static string SceneConfigPath;
+    /// <summary>
     /// 自定义导出代码存放的程序集
     /// </summary>
     public static string CustomExportAssembly;
     /// <summary>
-    /// 导表支持的类型
+    /// 导表支持的数据类型集合。
     /// </summary>
     public static readonly HashSet<string> ColTypeSet = new HashSet<string>()
     {
         "", "0", "bool", "byte", "short", "ushort", "int", "uint", "long", "ulong", "float", "string",
         "IntDictionaryConfig", "StringDictionaryConfig",
-        "short[]", "int[]", "long[]", "float[]", "string[]","uint[]"
+        "short[]", "int[]", "long[]", "float[]", "string[]"
     };
     /// <summary>
-    /// Excel生成代码模板的位置
+    /// Excel 生成代码模板的位置
     /// </summary>
     public static string ExcelTemplatePath;
     /// <summary>
-    /// 代码模板
+    /// 获取或设置 Excel 代码模板的内容。
     /// </summary>
     public static string ExcelTemplate
     {
@@ -101,8 +111,13 @@ public static class Define
     #endregion
 
     #region Network
-
+    /// <summary>
+    /// 会话空闲检查间隔。
+    /// </summary>
     public static int SessionIdleCheckerInterval;
+    /// <summary>
+    /// 会话空闲检查超时时间。
+    /// </summary>
     public static int SessionIdleCheckerTimeout;
 
     #endregion

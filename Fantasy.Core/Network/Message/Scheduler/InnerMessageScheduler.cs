@@ -3,8 +3,17 @@
 
 namespace Fantasy.Core.Network
 {
+    /// <summary>
+    /// 提供了一个机制来调度和处理内部网络消息。
+    /// </summary>
     public sealed class InnerMessageScheduler : ANetworkMessageScheduler
     {
+        /// <summary>
+        /// 在FantasyNet环境下，处理外部消息的方法。
+        /// </summary>
+        /// <param name="session">网络会话。</param>
+        /// <param name="messageType">消息类型。</param>
+        /// <param name="packInfo">消息封包信息。</param>
         protected override async FTask Handler(Session session, Type messageType, APackInfo packInfo)
         {
             try
@@ -106,6 +115,16 @@ namespace Fantasy.Core.Network
             }
         }
 
+        /// <summary>
+        /// 在FantasyNet环境下，处理内部消息的方法。
+        /// </summary>
+        /// <param name="session">网络会话。</param>
+        /// <param name="rpcId">RPC请求ID。</param>
+        /// <param name="routeId">消息路由ID。</param>
+        /// <param name="protocolCode">协议码。</param>
+        /// <param name="routeTypeCode">路由类型码。</param>
+        /// <param name="messageType">消息类型。</param>
+        /// <param name="message">消息对象。</param>
         protected override async FTask InnerHandler(Session session, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, Type messageType, object message)
         {
             try

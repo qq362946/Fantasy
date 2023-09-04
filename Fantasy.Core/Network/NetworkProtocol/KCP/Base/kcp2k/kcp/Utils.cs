@@ -1,5 +1,5 @@
 using System.Runtime.CompilerServices;
-
+#pragma warning disable CS1591
 namespace kcp2k
 {
     public static partial class Utils

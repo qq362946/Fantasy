@@ -16,6 +16,9 @@ using Newtonsoft.Json;
 
 namespace Fantasy
 {
+    /// <summary>
+    /// 实体基类，用于实体创建、回收、获取，和组件操作
+    /// </summary>
     public abstract class Entity : IDisposable
     {
         #region Entities
@@ -23,16 +26,33 @@ namespace Fantasy
         private static readonly Dictionary<long, Entity> Entities = new Dictionary<long, Entity>();
         private static readonly OneToManyQueue<Type, Entity> Pool = new OneToManyQueue<Type, Entity>();
 
+        /// <summary>
+        /// 获取指定运行时ID的实体对象
+        /// </summary>
+        /// <param name="runTimeId">运行时ID</param>
+        /// <returns>实体对象</returns>
         public static Entity GetEntity(long runTimeId)
         {
             return Entities.TryGetValue(runTimeId, out var entity) ? entity : null;
         }
 
+        /// <summary>
+        /// 尝试获取指定运行时ID的实体对象
+        /// </summary>
+        /// <param name="runTimeId">运行时ID</param>
+        /// <param name="entity">输出参数，实体对象</param>
+        /// <returns>是否获取成功</returns>
         public static bool TryGetEntity(long runTimeId, out Entity entity)
         {
             return Entities.TryGetValue(runTimeId, out entity);
         }
 
+        /// <summary>
+        /// 获取指定运行时ID的实体对象。
+        /// </summary>
+        /// <typeparam name="T">实体类型。</typeparam>
+        /// <param name="runTimeId">要获取的实体的运行时ID。</param>
+        /// <returns>找到的实体对象，如果不存在则返回默认值。</returns>
         public static T GetEntity<T>(long runTimeId) where T : Entity, new()
         {
             if (!Entities.TryGetValue(runTimeId, out var entity))
@@ -43,6 +63,13 @@ namespace Fantasy
             return (T) entity;
         }
 
+        /// <summary>
+        /// 尝试获取指定运行时ID的实体对象。
+        /// </summary>
+        /// <typeparam name="T">实体类型。</typeparam>
+        /// <param name="runTimeId">要获取的实体的运行时ID。</param>
+        /// <param name="outEntity">输出参数，找到的实体对象。</param>
+        /// <returns>如果找到实体对象则返回 true，否则返回 false。</returns>
         public static bool TryGetEntity<T>(long runTimeId, out T outEntity) where T : Entity, new()
         {
             if (!Entities.TryGetValue(runTimeId, out var entity))
@@ -91,9 +118,15 @@ namespace Fantasy
         }
 
         #endregion
-        
-        #region Create
 
+        #region Create
+        /// <summary>
+        /// 在指定场景中创建一个实体对象，并触发相关事件（可选）。
+        /// </summary>
+        /// <typeparam name="T">实体类型。</typeparam>
+        /// <param name="scene">要创建实体的场景。</param>
+        /// <param name="isRunEvent">是否触发相关事件。</param>
+        /// <returns>创建的实体对象。</returns>
         public static T Create<T>(Scene scene, bool isRunEvent = true) where T : Entity, new()
         {
             var entity = Create<T>(scene.LocationId, isRunEvent);
@@ -101,6 +134,14 @@ namespace Fantasy
             return entity;
         }
 
+        /// <summary>
+        /// 在指定场景中创建一个具有指定ID的实体对象，并触发相关事件（可选）。
+        /// </summary>
+        /// <typeparam name="T">实体类型。</typeparam>
+        /// <param name="scene">要创建实体的场景。</param>
+        /// <param name="id">要分配给实体的ID。</param>
+        /// <param name="isRunEvent">是否触发相关事件。</param>
+        /// <returns>创建的实体对象。</returns>
         public static T Create<T>(Scene scene, long id, bool isRunEvent = true) where T : Entity, new()
         {
             var entity = Create<T>(id, scene.LocationId, isRunEvent);
@@ -127,11 +168,27 @@ namespace Fantasy
             return entity;
         }
 
+        /// <summary>
+        /// 在指定位置（locationId）上创建一个具有指定ID的实体对象，并触发相关事件（可选）。
+        /// </summary>
+        /// <typeparam name="T">实体类型。</typeparam>
+        /// <param name="id">要分配给实体的ID。</param>
+        /// <param name="locationId">实体所在位置的ID。</param>
+        /// <param name="isRunEvent">是否触发相关事件。</param>
+        /// <returns>创建的实体对象。</returns>
         protected static T Create<T>(long id, uint locationId, bool isRunEvent = true) where T : Entity, new()
         {
             return Create<T>(id, IdFactory.NextEntityId(locationId), isRunEvent);
         }
 
+        /// <summary>
+        /// 在指定位置中创建一个实体对象，并可选择是否立即触发事件。
+        /// </summary>
+        /// <typeparam name="T">实体类型。</typeparam>
+        /// <param name="id">要分配给实体的ID。</param>
+        /// <param name="runtimeId">要分配给实体的运行时ID。</param>
+        /// <param name="isRunEvent">是否立即触发实体事件。</param>
+        /// <returns>创建的实体对象。</returns>
         protected static T Create<T>(long id, long runtimeId, bool isRunEvent = true) where T : Entity, new()
         {
             var entity = Rent<T>(typeof(T));
@@ -149,29 +206,43 @@ namespace Fantasy
         }
 
         #endregion
-        
-        #region Members
 
+        #region Members
+        /// <summary>
+        /// 获取或设置实体的唯一ID。
+        /// </summary>
         [BsonId]
         [BsonElement]
         [BsonIgnoreIfDefault]
         [BsonDefaultValue(0L)]
         public long Id { get; private set; }
-        
+
+        /// <summary>
+        /// 获取实体的运行时ID。
+        /// </summary>
         [BsonIgnore] 
         [IgnoreDataMember]
         public long RuntimeId { get; private set; }
 
+        /// <summary>
+        /// 获取一个值，表示实体是否已被释放。
+        /// </summary>
         [BsonIgnore] 
         [JsonIgnore]
         [IgnoreDataMember] 
         public bool IsDisposed => RuntimeId == 0;
-        
+
+        /// <summary>
+        /// 获取或设置实体所属的场景。
+        /// </summary>
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
         public Scene Scene { get; protected set; }
-        
+
+        /// <summary>
+        /// 获取或设置实体的父实体。
+        /// </summary>
         [BsonIgnore] 
         [JsonIgnore]
         [IgnoreDataMember]
@@ -200,7 +271,11 @@ namespace Fantasy
         #endregion
 
         #region AddComponent
-
+        /// <summary>
+        /// 在当前实体上添加一个指定类型的组件，并立即触发组件事件。
+        /// </summary>
+        /// <typeparam name="T">组件类型。</typeparam>
+        /// <returns>创建的组件实体。</returns>
         public T AddComponent<T>() where T : Entity, new()
         {
             var entity = Create<T>(Id, Scene.LocationId, false);
@@ -210,6 +285,12 @@ namespace Fantasy
             return entity;
         }
 
+        /// <summary>
+        /// 在当前实体上添加一个指定类型的组件，并立即触发组件事件。
+        /// </summary>
+        /// <typeparam name="T">组件类型。</typeparam>
+        /// <param name="id">要分配给组件的ID。</param>
+        /// <returns>创建的组件实体。</returns>
         public T AddComponent<T>(long id) where T : Entity, new()
         {
             var entity = Create<T>(id, Scene.LocationId, false);
@@ -219,6 +300,10 @@ namespace Fantasy
             return entity;
         }
 
+        /// <summary>
+        /// 将指定的组件添加到当前实体。
+        /// </summary>
+        /// <param name="component">要添加的组件。</param>
         public void AddComponent(Entity component)
         {
             if (this == component)
@@ -277,12 +362,14 @@ namespace Fantasy
             component.Parent = this;
             component.Scene = Scene;
         }
-        
+
         #endregion
 
 #if FANTASY_NET
         #region ForEach
-
+        /// <summary>
+        /// 获取一个 IEnumerable，用于遍历当前实体上所有实现了 ISupportedSingleCollection 接口的组件。
+        /// </summary>
         public IEnumerable<Entity> ForEachSingleCollection
         {
             get
@@ -299,6 +386,9 @@ namespace Fantasy
             }
         }
 
+        /// <summary>
+        /// 获取一个 IEnumerable，用于遍历当前实体上所有实现了 ISupportedSingleCollection 或 ISupportedTransfer 接口的组件。
+        /// </summary>
         public IEnumerable<Entity> ForEachTransfer
         {
             get
@@ -333,17 +423,21 @@ namespace Fantasy
 #endif
 
         #region GetComponent
-
-        public T GetParent<T>() where T : Entity, new()
-        {
-            return (T)Parent;
-        }
-
+        /// <summary>
+        /// 获取当前实体上的一个指定类型的组件实体。
+        /// </summary>
+        /// <typeparam name="T">要获取的组件类型。</typeparam>
+        /// <returns>找到的组件实体，如果不存在则为 null。</returns>
         public T GetComponent<T>() where T : Entity, new()
         {
             return GetComponent(typeof(T)) as T;
         }
-        
+
+        /// <summary>
+        /// 获取当前实体上的一个指定类型的组件实体。
+        /// </summary>
+        /// <param name="componentType">要获取的组件类型。</param>
+        /// <returns>找到的组件实体，如果不存在则为 null。</returns>
         public Entity GetComponent(Type componentType)
         {
             if (_tree == null)
@@ -353,7 +447,13 @@ namespace Fantasy
 
             return _tree.TryGetValue(componentType, out var component) ? component : default;
         }
-        
+
+        /// <summary>
+        /// 获取当前实体上的一个指定类型的多实体组件。
+        /// </summary>
+        /// <typeparam name="T">要获取的多实体组件类型。</typeparam>
+        /// <param name="id">多实体组件的ID。</param>
+        /// <returns>找到的多实体组件，如果不存在则为 null。</returns>
         public T GetComponent<T>(long id) where T : ISupportedMultiEntity, new()
         {
             if (_multi == null)
@@ -367,7 +467,11 @@ namespace Fantasy
         #endregion
 
         #region RemoveComponent
-        
+        /// <summary>
+        /// 从当前实体上移除一个指定类型的组件。
+        /// </summary>
+        /// <typeparam name="T">要移除的组件类型。</typeparam>
+        /// <param name="isDispose">是否同时释放被移除的组件。</param>
         public void RemoveComponent<T>(bool isDispose = true) where T : Entity, new()
         {
             if (_tree == null || !_tree.TryGetValue(typeof(T), out var component))
@@ -378,6 +482,12 @@ namespace Fantasy
             RemoveComponent(component, isDispose);
         }
 
+        /// <summary>
+        /// 从当前实体上移除一个指定类型的多实体组件。
+        /// </summary>
+        /// <typeparam name="T">要移除的多实体组件类型。</typeparam>
+        /// <param name="id">要移除的多实体组件的ID。</param>
+        /// <param name="isDispose">是否同时释放被移除的组件。</param>
         public void RemoveComponent<T>(long id, bool isDispose = true) where T : ISupportedMultiEntity, new()
         {
             if (_multi == null || !_multi.TryGetValue(id, out var component))
@@ -388,6 +498,11 @@ namespace Fantasy
             RemoveComponent((Entity)component, isDispose);
         }
 
+        /// <summary>
+        /// 从当前实体上移除一个指定的组件实体。
+        /// </summary>
+        /// <param name="component">要移除的组件实体。</param>
+        /// <param name="isDispose">是否同时释放被移除的组件。</param>
         public void RemoveComponent(Entity component, bool isDispose = true)
         {
             if (this == component)
@@ -452,7 +567,11 @@ namespace Fantasy
         #endregion
 
         #region Deserialize
-
+        /// <summary>
+        /// 从序列化数据中恢复当前实体的状态，并将其添加到指定的场景中。
+        /// </summary>
+        /// <param name="scene">要添加到的场景。</param>
+        /// <param name="resetId">是否重置实体的ID。</param>
         public void Deserialize(Scene scene, bool resetId = false)
         {
             if (RuntimeId != 0)
@@ -511,7 +630,10 @@ namespace Fantasy
         #endregion
 
         #region Clone
-
+        /// <summary>
+        /// 克隆当前实体，并返回一个新的实体对象，新对象将具有相同的状态和组件。
+        /// </summary>
+        /// <returns>克隆生成的实体。</returns>
         public Entity Clone()
         {
 #if FANTASY_NET
@@ -528,7 +650,9 @@ namespace Fantasy
         #endregion
 
         #region Dispose
-
+        /// <summary>
+        /// 释放当前实体及其所有组件。如果实体已释放，则不执行任何操作。
+        /// </summary>
         public virtual void Dispose()
         {
             if (IsDisposed)

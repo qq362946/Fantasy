@@ -15,20 +15,27 @@ namespace Fantasy.Core;
 
 using TableDictionary = SortedDictionary<string, List<int>>;
 
+/// <summary>
+/// Excel 数据导出器，用于从 Excel 文件导出数据到二进制格式和生成 C# 类文件。
+/// </summary>
 public sealed class ExcelExporter
 {
-    private Dictionary<string, long> _versionDic;
-    private readonly Regex _regexName = new Regex("^[a-zA-Z][a-zA-Z0-9_]*$");
-    private readonly HashSet<string> _loadFiles = new HashSet<string> {".xlsx", ".xlsm", ".csv"};
-    private readonly OneToManyList<string, ExportInfo> _tables = new OneToManyList<string, ExportInfo>();
-    private readonly ConcurrentDictionary<string, ExcelTable> _excelTables = new ConcurrentDictionary<string, ExcelTable>();
-    private readonly ConcurrentDictionary<string, ExcelWorksheet> _worksheets = new ConcurrentDictionary<string, ExcelWorksheet>();
+    private Dictionary<string, long> _versionDic; // 存储 Excel 文件的版本信息。
+    private readonly Regex _regexName = new Regex("^[a-zA-Z][a-zA-Z0-9_]*$"); // 用于验证 Excel 表名的正则表达式。
+    private readonly HashSet<string> _loadFiles = new HashSet<string> {".xlsx", ".xlsm", ".csv"}; // 加载的支持文件扩展名。
+    private readonly OneToManyList<string, ExportInfo> _tables = new OneToManyList<string, ExportInfo>(); // 存储 Excel 表及其导出信息。
+    private readonly ConcurrentDictionary<string, ExcelTable> _excelTables = new ConcurrentDictionary<string, ExcelTable>(); // 存储解析后的 Excel 表。
+    private readonly ConcurrentDictionary<string, ExcelWorksheet> _worksheets = new ConcurrentDictionary<string, ExcelWorksheet>(); // 存储已加载的 Excel 工作表。
 
     static ExcelExporter()
     {
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
     }
-    
+
+    /// <summary>
+    /// 根据指定的 exportType 初始化 ExcelExporter 类的新实例。
+    /// </summary>
+    /// <param name="exportType">要执行的导出类型（AllExcel 或 AllExcelIncrement）。</param>
     public ExcelExporter(ExportType exportType)
     {
         var versionFilePath = Define.ExcelVersionFile;
@@ -569,6 +576,12 @@ public sealed class ExcelExporter
         }
     }
 
+    /// <summary>
+    /// 从 Excel 文件加载工作表并返回 ExcelWorksheet 对象。
+    /// </summary>
+    /// <param name="name">工作表的名称或文件路径。</param>
+    /// <param name="isAddToDic">是否将加载的工作表添加到缓存字典中。</param>
+    /// <returns>表示 Excel 工作表的 ExcelWorksheet 对象。</returns>
     public ExcelWorksheet LoadExcel(string name, bool isAddToDic)
     {
         if (_worksheets.TryGetValue(name, out var worksheet))
@@ -731,15 +744,6 @@ public sealed class ExcelExporter
                 if (value != "0")
                 {
                     propertyInfo.SetValue(config, value.Split(",").Select(d => Convert.ToSingle(d)).ToArray());
-                }
-
-                return;
-            }
-            case "uint[]":
-            {
-                if (value != "0")
-                {
-                    propertyInfo.SetValue(config, value.Split(",").Select(d => Convert.ToUInt32(d)).ToArray());
                 }
 
                 return;
