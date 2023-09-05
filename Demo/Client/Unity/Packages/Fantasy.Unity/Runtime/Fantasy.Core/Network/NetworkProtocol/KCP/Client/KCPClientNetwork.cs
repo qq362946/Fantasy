@@ -90,8 +90,7 @@ namespace Fantasy.Core.Network
                         ThreadSynchronizationContext.Main.Post(OnConnectDisconnect);
                     }
                     
-                    _socket.Disconnect(false);
-                    _socket.Close();
+                    _socket.Dispose();
                 }
 
                 _kcp = null;

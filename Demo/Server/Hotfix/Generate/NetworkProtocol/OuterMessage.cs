@@ -17,6 +17,16 @@ namespace Fantasy
 		public string Message { get; set; }
 	}
 	/// <summary>
+	///  发送一个消息到Gate服务器
+	/// </summary>
+	[ProtoContract]
+	public partial class H_C2G_Message123 : AProto, IMessage
+	{
+		public uint OpCode() { return OuterOpcode.H_C2G_Message123; }
+		[ProtoMember(1)]
+		public string Message { get; set; }
+	}
+	/// <summary>
 	///  发送一个RPC消息到Gate服务器
 	/// </summary>
 	[ProtoContract]

@@ -5,6 +5,11 @@ message H_C2G_Message // IMessage
 {
 	string Message = 1;	// 消息信息
 }
+/// 发送一个消息到Gate服务器
+message H_C2G_Message123 // IMessage
+{
+	string Message = 1;	// 消息信息
+}
 /// 发送一个RPC消息到Gate服务器
 message H_C2G_MessageRequest // IRequest,H_G2C_MessageResponse
 {

@@ -57,13 +57,13 @@ public sealed class ProtoBufExporter
     private uint _aRouteResponse;
     private string _serverTemplate;
     private string _clientTemplate;
-    
+    private readonly OpCodeCache _opCodeCache;
     private readonly List<OpcodeInfo> _opcodes = new();
 
     /// <summary>
     /// 构造函数，用于初始化导出器
     /// </summary>
-    public ProtoBufExporter()
+    public ProtoBufExporter(bool regenerateOpCodeCache)
     {
         Console.OutputEncoding = Encoding.UTF8;
         
@@ -92,6 +92,8 @@ public sealed class ProtoBufExporter
             Directory.CreateDirectory($"{Define.ProtoBufDirectory}InnerBosn");
         }
 
+        _opCodeCache = new OpCodeCache(regenerateOpCodeCache);
+
         var tasks = new Task[2];
         tasks[0] = Task.Run(RouteType);
         tasks[1] = Task.Run(async () =>
@@ -102,6 +104,7 @@ public sealed class ProtoBufExporter
             await Start(ProtoBufOpCodeType.InnerBson);
         });
         Task.WaitAll(tasks);
+        _opCodeCache.Save();
     }
 
     private async Task Start(ProtoBufOpCodeType opCodeType)
@@ -142,8 +145,7 @@ public sealed class ProtoBufExporter
                 _aRouteResponse = Opcode.InnerRouteResponse + 1000;
                 opCodeName = "InnerOpcode";
                 saveDirectory.Add(Define.ProtoBufServerDirectory, _serverTemplate);
-                var protoBufFiles = FileHelper.GetDirectoryFile(
-                    $"{Define.ProtoBufDirectory}Inner", "*.proto", SearchOption.AllDirectories);
+                var protoBufFiles = FileHelper.GetDirectoryFile($"{Define.ProtoBufDirectory}Inner", "*.proto", SearchOption.AllDirectories);
                 files.AddRange(protoBufFiles);
                 break;
             }
@@ -158,8 +160,7 @@ public sealed class ProtoBufExporter
                 _aRouteResponse = Opcode.InnerBsonRouteResponse + 1000;
                 opCodeName = "InnerBsonOpcode";
                 saveDirectory.Add(Define.ProtoBufServerDirectory, _serverTemplate);
-                var protoBufFiles = FileHelper.GetDirectoryFile(
-                    $"{Define.ProtoBufDirectory}InnerBosn", "*.proto", SearchOption.AllDirectories);
+                var protoBufFiles = FileHelper.GetDirectoryFile($"{Define.ProtoBufDirectory}InnerBosn", "*.proto", SearchOption.AllDirectories);
                 files.AddRange(protoBufFiles);
                 break;
             }
@@ -207,13 +208,16 @@ public sealed class ProtoBufExporter
                         switch (parameterArray.Length)
                         {
                             case 2:
+                            {
                                 if (parameter == "ICustomRouteMessage")
                                 {
                                     customRouteType = parameterArray[1].Trim();
                                     break;
                                 }
+                                
                                 responseTypeStr = parameterArray[1].Trim();
                                 break;
+                            }
                             case 3:
                             {
                                 customRouteType = parameterArray[1].Trim();
@@ -252,7 +256,7 @@ public sealed class ProtoBufExporter
 
                         if (string.IsNullOrWhiteSpace(parameter) || parameter == "IMessage")
                         {
-                            opcodeInfo.Code += ++_aMessage;
+                            opcodeInfo.Code = _opCodeCache.GetOpcodeCache(className, ref _aMessage);
                             file.AppendLine($"\t\tpublic uint OpCode() {{ return {opCodeName}.{className}; }}");
                         }
                         else
@@ -296,13 +300,13 @@ public sealed class ProtoBufExporter
                                 case "IRequest":
                                 case "IBsonRequest":
                                 {
-                                    opcodeInfo.Code += ++_aRequest;
+                                    opcodeInfo.Code = _opCodeCache.GetOpcodeCache(className, ref _aRequest);
                                     break;
                                 }
                                 case "IResponse":
                                 case "IBsonResponse":
                                 {
-                                    opcodeInfo.Code += ++_aResponse;
+                                    opcodeInfo.Code = _opCodeCache.GetOpcodeCache(className, ref _aResponse);
                                     file.AppendLine("\t\t[ProtoMember(91, IsRequired = true)]");
                                     file.AppendLine("\t\tpublic uint ErrorCode { get; set; }");
                                     break;
@@ -311,15 +315,15 @@ public sealed class ProtoBufExporter
                                 {
                                     if (parameter.EndsWith("RouteMessage") || parameter == "IRouteMessage")
                                     {
-                                        opcodeInfo.Code += ++_aRouteMessage;
+                                        opcodeInfo.Code  = _opCodeCache.GetOpcodeCache(className, ref _aRouteMessage);
                                     }
                                     else if (parameter.EndsWith("RouteRequest") || parameter == "IRouteRequest")
                                     {
-                                        opcodeInfo.Code += ++_aRouteRequest;
+                                        opcodeInfo.Code = _opCodeCache.GetOpcodeCache(className, ref _aRouteRequest);
                                     }
                                     else if (parameter.EndsWith("RouteResponse") || parameter == "IRouteResponse")
                                     {
-                                        opcodeInfo.Code += ++_aRouteResponse;
+                                        opcodeInfo.Code = _opCodeCache.GetOpcodeCache(className, ref _aRouteResponse);
                                         file.AppendLine("\t\t[ProtoMember(91, IsRequired = true)]");
                                         file.AppendLine("\t\tpublic uint ErrorCode { get; set; }");
                                     }
