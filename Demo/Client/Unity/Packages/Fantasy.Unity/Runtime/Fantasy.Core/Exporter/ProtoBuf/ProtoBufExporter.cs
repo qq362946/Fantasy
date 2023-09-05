@@ -220,13 +220,8 @@ public sealed class ProtoBufExporter
                             }
                             case 3:
                             {
-                                customRouteType = parameterArray[1].Trim();
-
-                                if (parameterArray.Length == 3)
-                                {
-                                    responseTypeStr = parameterArray[2].Trim();
-                                }
-
+                                responseTypeStr = parameterArray[1].Trim();
+                                customRouteType = parameterArray[2].Trim();
                                 break;
                             }
                         }

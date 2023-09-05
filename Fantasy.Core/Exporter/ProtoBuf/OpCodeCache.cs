@@ -1,3 +1,4 @@
+#if FANTASY_NET
 using Fantasy.Helper;
 
 namespace Fantasy.Core;
@@ -56,3 +57,4 @@ public class OpCodeCache
         return opCode;
     }
 }
+#endif
