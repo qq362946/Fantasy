@@ -37,7 +37,6 @@ namespace Fantasy.Core.Network
             recyclableMemoryStream.Write(MemoryOwner.Memory.Span.Slice(0, Packet.InnerPacketHeadLength + MessagePacketLength));
             // 将内存流的指针定位到起始位置
             recyclableMemoryStream.Seek(0, SeekOrigin.Begin);
-
             // 返回创建的内存流
             return recyclableMemoryStream;
         }

@@ -3,11 +3,11 @@ namespace Fantasy
 	public static partial class OuterOpcode
 	{
 		 public const int H_C2G_Message = 100000001;
-		 public const int H_C2G_Message123 = 100000004;
+		 public const int H_C2G_Message123 = 100000002;
 		 public const int H_C2G_MessageRequest = 110000001;
 		 public const int H_G2C_MessageResponse = 160000001;
-		 public const int H_C2G_PushMessageToClient = 100000002;
-		 public const int H_G2C_ReceiveMessageToServer = 100000003;
+		 public const int H_C2G_PushMessageToClient = 100000003;
+		 public const int H_G2C_ReceiveMessageToServer = 100000004;
 		 public const int H_C2G_LoginAddressRequest = 110000002;
 		 public const int H_G2C_LoginAddressResponse = 160000002;
 		 public const int H_C2M_Message = 190000001;

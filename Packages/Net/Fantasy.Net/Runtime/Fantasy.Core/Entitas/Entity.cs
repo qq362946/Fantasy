@@ -364,9 +364,9 @@ namespace Fantasy
         }
 
         #endregion
-
-#if FANTASY_NET
+        
         #region ForEach
+#if FANTASY_NET
         /// <summary>
         /// 获取一个 IEnumerable，用于遍历当前实体上所有实现了 ISupportedSingleCollection 接口的组件。
         /// </summary>
@@ -418,9 +418,42 @@ namespace Fantasy
                 }
             }
         }
+#endif
+        /// <summary>
+        /// 获取一个 IEnumerable，用于遍历当前实体上所有实现了ISupportedMultiEntity接口的组件。
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Entity> ForEachMultiEntity()
+        {
+            if (_multi == null)
+            {
+                yield break;
+            }
+            
+            foreach (var (_, supportedMultiEntity) in _multi)
+            {
+                yield return (Entity)supportedMultiEntity;
+            }
+        }
+        
+        /// <summary>
+        /// 获取一个 IEnumerable，用于遍历当前实体上挂载的普通组件。
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Entity> ForEachEntity()
+        {
+            if (_tree == null)
+            {
+                yield break;
+            }
+            
+            foreach (var (_, entity) in _tree)
+            {
+                yield return entity;
+            }
+        }
 
         #endregion
-#endif
 
         #region GetComponent
         /// <summary>
@@ -600,8 +633,8 @@ namespace Fantasy
                     foreach (var entity in _treeDb)
                     {
                         entity.Parent = this;
-                        entity.Deserialize(scene, resetId);
                         _tree.Add(entity.GetType(), entity);
+                        entity.Deserialize(scene, resetId);
                     }
                 }
 
