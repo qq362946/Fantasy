@@ -172,6 +172,7 @@ public sealed class ProtoBufExporter
             var parameter = "";
             var className = "";
             var isMsgHead = false;
+            var hasOpCode = false;
             string responseTypeStr = null;
             string customRouteType = null;
             
@@ -179,8 +180,6 @@ public sealed class ProtoBufExporter
 
             foreach (var line in protoFileText.Split('\n'))
             {
-                bool hadOpCode = true;
-                
                 var currentLine = line.Trim();
 
                 if (string.IsNullOrWhiteSpace(currentLine))
@@ -197,15 +196,19 @@ public sealed class ProtoBufExporter
                 if (currentLine.StartsWith("message"))
                 {
                     isMsgHead = true;
-                    opcodeInfo = new OpcodeInfo();
                     file.AppendLine("\t[ProtoContract]");
                     className = currentLine.Split(Define.SplitChars, StringSplitOptions.RemoveEmptyEntries)[1];
                     var splits = currentLine.Split(new[] { "//" }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (splits.Length > 1)
                     {
+                        hasOpCode = true;
                         var parameterArray = currentLine.Split(new[] { "//" }, StringSplitOptions.RemoveEmptyEntries)[1].Trim().Split(',');
                         parameter = parameterArray[0].Trim();
+                        opcodeInfo = new OpcodeInfo()
+                        {
+                            Name = className
+                        };
 
                         switch (parameterArray.Length)
                         {
@@ -231,12 +234,12 @@ public sealed class ProtoBufExporter
                     else
                     {
                         parameter = "";
+                        hasOpCode = false;
                     }
 
                     file.Append(string.IsNullOrWhiteSpace(parameter)
                         ? $"\tpublic partial class {className} : AProto"
                         : $"\tpublic partial class {className} : AProto, {parameter}");
-                    opcodeInfo.Name = className;
                     continue;
                 }
 
@@ -251,11 +254,7 @@ public sealed class ProtoBufExporter
                     {
                         file.AppendLine("\n\t{");
 
-                        if (string.IsNullOrWhiteSpace(parameter))
-                        {
-                            hadOpCode = false;
-                        }
-                        else if(parameter == "IMessage")
+                        if(parameter == "IMessage")
                         {
                             opcodeInfo.Code = _opCodeCache.GetOpcodeCache(className, ref _aMessage);
                             file.AppendLine($"\t\tpublic uint OpCode() {{ return {opCodeName}.{className}; }}");
@@ -276,7 +275,10 @@ public sealed class ProtoBufExporter
                                 }
                             }
 
-                            file.AppendLine($"\t\tpublic uint OpCode() {{ return {opCodeName}.{className}; }}");
+                            if (hasOpCode)
+                            {
+                                file.AppendLine($"\t\tpublic uint OpCode() {{ return {opCodeName}.{className}; }}");
+                            }
 
                             if (customRouteType != null)
                             {
@@ -334,7 +336,7 @@ public sealed class ProtoBufExporter
                             }
                         }
 
-                        if (hadOpCode)
+                        if (hasOpCode)
                         {
                             _opcodes.Add(opcodeInfo);
                         }
