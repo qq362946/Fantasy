@@ -79,9 +79,11 @@ namespace Fantasy.Core.Network
                         {
                             case null:
                             {
-                                var obj = packInfo.Deserialize(messageType);
-                                var response = MessageDispatcherSystem.Instance.CreateResponse((IRouteMessage)obj, CoreErrorCode.ErrNotFoundRoute);
-                                session.Send(response, packInfo.RpcId, packInfo.RouteId);
+                                // 执行到这里是说明Session已经断开了
+                                // 因为这里是其他服务器Send到外网的数据、所以不需要给发送端返回就可以
+                                // var obj = packInfo.Deserialize(messageType);
+                                // var response = MessageDispatcherSystem.Instance.CreateResponse((IRouteMessage)obj, CoreErrorCode.ErrNotFoundRoute);
+                                // session.Send(response, packInfo.RpcId, packInfo.RouteId);
                                 return;
                             }
                             case Session gateSession:
