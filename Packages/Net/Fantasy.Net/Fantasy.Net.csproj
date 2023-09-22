@@ -13,7 +13,7 @@
       <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-      <NoWarn>1701;1702;IL2121;CS8603;CS8602;CS8625;IL2121;CS8618;IL2121;CS8600;CS8604;CS8601;SYSLIB0023;CS8622</NoWarn>
+      <NoWarn>1701;1702;IL2121;CS8603;CS8602;CS8625;IL2121;CS8618;CS8600;CS8604;CS8601;SYSLIB0023;CS8622;IL2121</NoWarn>
       <WarningsAsErrors>;NU1605;SYSLIB0011;CS8618;CS8602;CS8625;CS8603;CS8600;CS8625;CS8600;</WarningsAsErrors>
     </PropertyGroup>
 
@@ -21,7 +21,7 @@
       <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-      <NoWarn>1701;1702;IL2121;CS8603;IL2121;CS8625;IL2121;CS8622;CS8602;CS8603;CS8600;CS8625;CS8600;;CS8604;CS8601;SYSLIB0023</NoWarn>
+      <NoWarn>1701;1702;IL2121;CS8603;CS8602;CS8625;IL2121;CS8618;CS8622;CS8600;CS8625;CS8604;CS8601;CS8632;SYSLIB0023</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
