@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.Net.csproj" />
+      <ProjectReference Include="..\..\..\Net\Fantasy.Net\Fantasy.Net.csproj" />
     </ItemGroup>
 
     <ItemGroup>
