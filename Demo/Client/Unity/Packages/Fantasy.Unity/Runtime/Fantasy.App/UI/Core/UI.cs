@@ -21,10 +21,10 @@ namespace Fantasy.Core
             }
             
             UnityEngine.Object.Destroy(GameObject);
-            AssetBundleHelper.UnloadBundle(AssetName);
+            AssetBundleHelper.UnloadBundle(BundleName);
             UIComponent.Instance.RemoveComponent(Id, false);
 
-            GameObject = null;
+            GameObject = null;            
             base.Dispose();
         }
 

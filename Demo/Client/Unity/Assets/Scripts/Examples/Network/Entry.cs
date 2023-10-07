@@ -124,7 +124,7 @@ public class Entry : MonoBehaviour
         // 所以发送一个消息告诉服务器、然后服务器在主动推送一个消息给客户端就可以了
         // 虽然这样看起来跟RPC消息很像、但原理是不一样的
         // 客户端怎么接收服务器发送的协议、您可以看下H_G2C_ReceiveMessageToServer这个类
-        
+        Log.Debug($"发送到到客户端时间:{TimeHelper.Now}");
         Scene.Session.Send(new H_C2G_PushMessageToClient()
         {
             Message = "请推送一个消息给我"
@@ -240,6 +240,7 @@ public class H_G2C_ReceiveMessageToServerHandler : Message<H_G2C_ReceiveMessageT
 {
     protected override async FTask Run(Session session, H_G2C_ReceiveMessageToServer message)
     {
+        Log.Debug($"收到服务器推送的消息时间:{TimeHelper.Now}");
         var networkEntryComponent = session.Scene.GetComponent<NetworkEntryComponent>();
         networkEntryComponent.Action($"收到服务器推送的消息 message:{message.Message}");
         await FTask.CompletedTask;
