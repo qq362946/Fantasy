@@ -50,7 +50,6 @@ public sealed class InnerPackInfo : APackInfo
     public override void Dispose()
     {
         base.Dispose();
-
         // 将当前的 InnerPackInfo 实例归还到对象池，以便重复利用
         Pool<InnerPackInfo>.Return(this);
     }
@@ -203,46 +202,36 @@ public sealed class InnerPacketParser : APacketParser
     public override bool UnPack(IMemoryOwner<byte> memoryOwner, out APackInfo packInfo)
     {
         packInfo = null;
-
-        try
+        // 将 IMemoryOwner<byte> 对象的内存资源转换为 Span<byte>
+        var memorySpan = memoryOwner.Memory.Span;
+        // 如果内存资源中的数据长度小于内部消息头的长度，无法解析
+        if (memorySpan.Length < Packet.InnerPacketHeadLength)
         {
-            // 将 IMemoryOwner<byte> 对象的内存资源转换为 Span<byte>
-            var memorySpan = memoryOwner.Memory.Span;
-
-            // 如果内存资源中的数据长度小于内部消息头的长度，无法解析
-            if (memorySpan.Length < Packet.InnerPacketHeadLength)
-            {
-                return false;
-            }
+            return false;
+        }
             
-            _messagePacketLength = BitConverter.ToInt32(memorySpan);
+        _messagePacketLength = BitConverter.ToInt32(memorySpan);
 
-            // 检查消息体长度是否超出限制
-            if (_messagePacketLength > Packet.PacketBodyMaxLength)
-            {
-                throw new ScanException($"The received information exceeds the maximum limit = {_messagePacketLength}");
-            }
-
-            // 创建内部数据包信息实例
-            packInfo = InnerPackInfo.Create(memoryOwner);
-            packInfo.MessagePacketLength = _messagePacketLength;
-            packInfo.ProtocolCode = BitConverter.ToUInt32(memorySpan[Packet.PacketLength..]);
-            packInfo.RpcId = BitConverter.ToUInt32(memorySpan[Packet.OuterPacketRpcIdLocation..]);
-            packInfo.RouteId = BitConverter.ToInt64(memorySpan[Packet.InnerPacketRouteRouteIdLocation..]);
-
-            // 如果内存资源中的数据长度小于消息体的长度，无法解析
-            if (memorySpan.Length < _messagePacketLength)
-            {
-                return false;
-            }
-
-            return _messagePacketLength >= 0;
-        }
-        catch (Exception e)
+        // 检查消息体长度是否超出限制
+        if (_messagePacketLength > Packet.PacketBodyMaxLength)
         {
-            Console.WriteLine(e);
-            throw;
+            throw new ScanException($"The received information exceeds the maximum limit = {_messagePacketLength}");
         }
+
+        // 创建内部数据包信息实例
+        packInfo = InnerPackInfo.Create(memoryOwner);
+        packInfo.MessagePacketLength = _messagePacketLength;
+        packInfo.ProtocolCode = BitConverter.ToUInt32(memorySpan[Packet.PacketLength..]);
+        packInfo.RpcId = BitConverter.ToUInt32(memorySpan[Packet.OuterPacketRpcIdLocation..]);
+        packInfo.RouteId = BitConverter.ToInt64(memorySpan[Packet.InnerPacketRouteRouteIdLocation..]);
+
+        // 如果内存资源中的数据长度小于消息体的长度，无法解析
+        if (memorySpan.Length < _messagePacketLength)
+        {
+            return false;
+        }
+
+        return _messagePacketLength >= 0;
     }
 
     /// <summary>
@@ -304,6 +293,11 @@ public sealed class InnerPacketParser : APacketParser
             // 获取数据对象的操作码并计算消息体的长度
             opCode = MessageDispatcherSystem.Instance.GetOpCode(message.GetType());
             packetBodyCount = (int)(memoryStream.Position - Packet.InnerPacketHeadLength);
+            // 如果消息是对象池的需要执行Dispose
+            if (message is IPoolMessage iPoolMessage)
+            {
+                iPoolMessage.Dispose();
+            }
         }
 
         // 检查消息体长度是否超出限制

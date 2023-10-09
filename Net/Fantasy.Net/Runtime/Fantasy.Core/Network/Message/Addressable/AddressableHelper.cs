@@ -72,6 +72,25 @@ namespace Fantasy.Core.Network
             Log.Error($"GetAddressable error is {response.ErrorCode} addressableId:{addressableId}");
             return 0;
         }
+        
+        /// <summary>
+        /// 移除指定地址映射。
+        /// </summary>
+        /// <param name="server">内部网络Server，可通过Scene.Server获得</param>
+        /// <param name="addressableId">地址映射的唯一标识</param>
+        public static async FTask RemoveAddressable(Server server, long addressableId)
+        {
+            var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
+            var response = await MessageHelper.CallInnerRoute(server, addressableScene.EntityId,
+                new I_AddressableRemove_Request
+                {
+                    AddressableId = addressableId
+                });
+            if (response.ErrorCode != 0)
+            {
+                Log.Error($"RemoveAddressable error is {response.ErrorCode}");
+            }
+        }
 
         /// <summary>
         /// 移除指定地址映射。

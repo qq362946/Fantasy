@@ -61,6 +61,7 @@ namespace Fantasy
                 return;
             }
             
+            base.Dispose();
             LocationId = 0;
 #if FANTASY_NET
             World = null;
@@ -77,7 +78,6 @@ namespace Fantasy
             }
 #endif
             Scenes.Remove(this);
-            base.Dispose();
         }
 
         /// <summary>

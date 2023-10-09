@@ -235,6 +235,11 @@ namespace Fantasy.Core.Network
                 ProtoBufHelper.ToStream(message, memoryStream);
                 opCode = MessageDispatcherSystem.Instance.GetOpCode(message.GetType());
                 packetBodyCount = (int)(memoryStream.Position - Packet.OuterPacketHeadLength);
+                // 如果消息是对象池的需要执行Dispose
+                if (message is IPoolMessage iPoolMessage)
+                {
+                    iPoolMessage.Dispose();
+                }
             }
 
             if (packetBodyCount > Packet.PacketBodyMaxLength)

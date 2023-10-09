@@ -18,7 +18,7 @@ namespace Fantasy.Core.Network
         {
             if (AddressableId != 0)
             {
-                AddressableHelper.RemoveAddressable(Scene, AddressableId).Coroutine();
+                AddressableHelper.RemoveAddressable(Scene.Server, AddressableId).Coroutine();
                 AddressableId = 0;
             }
             

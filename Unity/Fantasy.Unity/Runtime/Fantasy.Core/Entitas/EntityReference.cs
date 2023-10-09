@@ -7,14 +7,21 @@ namespace Fantasy
     /// 实体引用只读结构，用作对 Entity 实例的引用。
     /// </summary>
     /// <typeparam name="T">Entity 的类型。</typeparam>
-    public readonly struct EntityReference<T> where T : Entity
+    public struct EntityReference<T> where T : Entity
     {
-        private readonly T _entity;
+        private T _entity;
         private readonly long _runTimeId;
 
         // 从 Entity 实例创建 EntityReference 的私有构造函数。
         private EntityReference(T t)
         {
+            if (t == null)
+            {
+                _entity = null;
+                _runTimeId = 0;
+                return;
+            }
+            
             _entity = t;
             _runTimeId = t.RuntimeId;
         }
@@ -44,7 +51,12 @@ namespace Fantasy
                 return null;
             }
 
-            return v._entity.RuntimeId != v._runTimeId ? null : v._entity;
+            if (v._entity.RuntimeId != v._runTimeId)
+            {
+                v._entity = null;
+            }
+
+            return v._entity;
         }
     }
 }

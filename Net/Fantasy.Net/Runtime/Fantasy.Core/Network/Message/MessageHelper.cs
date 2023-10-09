@@ -141,6 +141,30 @@ public static class MessageHelper
         session.Send(request, rpcId, routeTypeOpCode, entityId);
         return await requestCallback;
     }
+    
+    /// <summary>
+    /// 异步调用内部路由，并传递路由消息。
+    /// </summary>
+    /// <param name="server">内部网络Server，可通过Scene.Server获得</param>
+    /// <param name="entityId">实体ID</param>
+    /// <param name="request">路由消息</param>
+    /// <returns></returns>
+    public static async FTask<IResponse> CallInnerRoute(Server server, long entityId, IRouteMessage request)
+    {
+        if (entityId == 0)
+        {
+            Log.Error($"CallInnerRoute appId == 0");
+            return null;
+        }
+        
+        EntityIdStruct entityIdStruct = entityId;
+        var rpcId = ++_rpcId;
+        var session = server.GetSession(entityIdStruct.LocationId);
+        var requestCallback = FTask<IResponse>.Create(false);
+        RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
+        session.Send(request, rpcId, entityId);
+        return await requestCallback;
+    }
 
     /// <summary>
     /// 异步调用内部路由，并传递路由消息。
