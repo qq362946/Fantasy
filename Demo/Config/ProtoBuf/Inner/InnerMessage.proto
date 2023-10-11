@@ -4,7 +4,6 @@ package Sining.Message;
 message I_G2M_LoginAddressRequest // IRouteRequest,I_M2G_LoginAddressResponse
 {
 	long AddressableId = 1;		// 用来关联Address的Id,一般是账号Id或UnitId这些不会变动的
-	long GateRouteId = 2;		// Gate的RouteIdId用于Map发送给客户端时需要	
 }
 message I_M2G_LoginAddressResponse // IRouteResponse
 {

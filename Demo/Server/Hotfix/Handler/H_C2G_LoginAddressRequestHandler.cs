@@ -40,7 +40,6 @@ public class H_C2G_LoginAddressRequestHandler : MessageRPC<H_C2G_LoginAddressReq
             new I_G2M_LoginAddressRequest()
             {
                 AddressableId = session.Id,
-                GateRouteId = session.RuntimeId,
             });
         if (loginAddressResponse.ErrorCode != 0)
         {
@@ -49,6 +48,13 @@ public class H_C2G_LoginAddressRequestHandler : MessageRPC<H_C2G_LoginAddressReq
         }
         // 3、可寻址消息组件、挂载了这个组件可以接收和发送Addressable消息
         session.AddComponent<AddressableRouteComponent>().SetAddressableId(loginAddressResponse.AddressableId);
+        // 4、关联客户端到map中、关联成功后可以在map直接发送消息到客户端中
+        // map中可以使用MessageHelper.SendToClient发送消息给客户端
+        if (!await MessageHelper.LinkClient(session, loginAddressResponse.AddressableId))
+        {
+            Log.Error($"连接Session到Map中发生错误");
+            return;
+        }
         Log.Debug("服务器注册Addressable成功");
     }
 }

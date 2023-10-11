@@ -18,8 +18,6 @@ namespace Fantasy
 		public long RouteTypeOpCode() { return CoreRouteType.Route; }
 		[ProtoMember(1)]
 		public long AddressableId { get; set; }
-		[ProtoMember(2)]
-		public long GateRouteId { get; set; }
 	}
 	[ProtoContract]
 	public partial class I_M2G_LoginAddressResponse : AProto, IRouteResponse

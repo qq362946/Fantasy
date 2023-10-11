@@ -1,4 +1,5 @@
 using Fantasy.Helper;
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8603
 
 #if FANTASY_NET
@@ -270,6 +271,70 @@ public static class MessageHelper
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// 连接Entity到目标进程、目标进程可以通过EntityType、发送消息给这个Entity
+    /// </summary>
+    /// <param name="entity">要进行连接的Entity</param>
+    /// <param name="addressableId">addressableId</param>
+    /// <param name="entityType">设置连接的Entity的EntityType</param>
+    /// <returns></returns>
+    public static async FTask<bool> Link(Entity entity, int entityType, long addressableId)
+    {
+        var response = (LinkEntity_Response)await CallAddressable(entity.Scene, addressableId,
+            new LinkEntity_Request()
+            {
+                EntityType = entityType, RuntimeId = entity.RuntimeId
+            });
+
+        if (response.ErrorCode == 0)
+        {
+            return true;
+        }
+
+        Log.Error($"Link error code:{response.ErrorCode}");
+        return false;
+    }
+
+    /// <summary>
+    /// 连接GateSession到目标进程中、连接成功后可以通过SendToClient给客户端发送消息
+    /// </summary>
+    /// <param name="session"></param>
+    /// <param name="addressableId"></param>
+    /// <returns></returns>
+    public static async FTask<bool> LinkClient(Session session, long addressableId)
+    {
+        var response = (LinkEntity_Response)await CallAddressable(session.Scene, addressableId,
+            new LinkEntity_Request()
+            {
+                LinkGateSessionRuntimeId = session.RuntimeId
+            });
+
+        if (response.ErrorCode == 0)
+        {
+            return true;
+        }
+
+        Log.Error($"Link error code:{response.ErrorCode}");
+        return false;
+    }
+
+    /// <summary>
+    /// 发送消息给客户端、如果是Gate进程请不要使用这个发送、请使用Session.Send发送。
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="message"></param>
+    public static void SendToClient(Entity entity, IRouteMessage message)
+    {
+        var linkEntityComponent = entity.GetComponent<LinkEntityComponent>();
+
+        if (linkEntityComponent == null)
+        {
+            Log.Error($"SendToClient not found  LinkEntityComponent or LinkEntityComponent.LinkGateSessionRuntimeId");
+        }
+
+        SendInnerRoute(entity.Scene, linkEntityComponent.LinkGateSessionRuntimeId, message);
     }
 
     /// <summary>

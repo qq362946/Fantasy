@@ -1,5 +1,6 @@
 using Fantasy.Core.Network;
 using ProtoBuf;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Fantasy
 {
@@ -265,9 +266,9 @@ namespace Fantasy
         /// <returns>操作代码。</returns>
         public uint OpCode() { return Opcode.AddressableLockRequest; }
         /// <summary>
-    /// 获取消息的路由类型操作代码。
-    /// </summary>
-    /// <returns>路由类型操作代码。</returns>
+        /// 获取消息的路由类型操作代码。
+        /// </summary>
+        /// <returns>路由类型操作代码。</returns>
         public long RouteTypeOpCode() { return 1; }
         /// <summary>
         /// 可寻址地址的标识。
@@ -343,6 +344,38 @@ namespace Fantasy
         /// <summary>
         /// 获取或设置错误代码。
         /// </summary>
+        [ProtoMember(91, IsRequired = true)]
+        public uint ErrorCode { get; set; }
+    }
+    
+    /// <summary>
+    /// 连接Entity到目标进程、目标进程可以通过EntityType、发送消息给这个Entity
+    /// </summary>
+    [ProtoContract]
+    public class LinkEntity_Request : AProto, IRouteRequest
+    {
+        public uint OpCode() { return Opcode.LinkEntityRequest; }
+        public long RouteTypeOpCode() { return 1; }
+        /// <summary>
+        /// EntityType
+        /// </summary>
+        [ProtoMember(1)]
+        public int EntityType { get; set; }
+        /// <summary>
+        /// RuntimeId。
+        /// </summary>
+        [ProtoMember(2)]
+        public long RuntimeId { get; set; }
+        /// <summary>
+        /// Gate服务器的Session.RuntimeId
+        /// </summary>
+        [ProtoMember(3)]
+        public long LinkGateSessionRuntimeId { get; set; }
+    }
+    [ProtoContract]
+    public partial class LinkEntity_Response : AProto, IRouteResponse
+    {
+        public uint OpCode() { return Opcode.LinkEntityResponse; }
         [ProtoMember(91, IsRequired = true)]
         public uint ErrorCode { get; set; }
     }
