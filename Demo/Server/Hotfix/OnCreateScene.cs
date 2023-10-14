@@ -27,6 +27,7 @@ public class OnCreateScene : AsyncEventSystem<Fantasy.OnCreateScene>
                 break;
             }
         }
+        
 
         await FTask.CompletedTask;
     }
