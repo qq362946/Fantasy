@@ -293,7 +293,7 @@ namespace Fantasy
         /// <returns>创建的组件实体。</returns>
         public T AddComponent<T>(long id) where T : Entity, new()
         {
-            var entity = Create<T>(Scene.LocationId, false);
+            var entity = Create<T>(id, Scene.LocationId, false);
             AddComponent(entity);
             EntitiesSystem.Instance.Awake(entity);
             EntitiesSystem.Instance.StartUpdate(entity);
