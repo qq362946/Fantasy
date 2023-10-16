@@ -33,11 +33,6 @@ namespace Fantasy
                 {
                     break;
                 }
-                case "Export":
-                {
-                    new Exporter().Start();
-                    return;
-                }
                 default:
                 {
                     throw new NotSupportedException($"AppType is {AppDefine.Options.AppType} Unrecognized!");

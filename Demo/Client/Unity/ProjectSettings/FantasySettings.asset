@@ -14,7 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoCopyAssembly: 1
   uiGenerateSavePath: Assets/Scripts/Model/Generate/UI
-  editorModel: 1
-  remoteUpdatePath: http://127.0.0.1
   hotUpdatePath: Assets/Bundles/HotUpdate/
   hotUpdateAssemblyDefinitions: []

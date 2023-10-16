@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.App", "App\Fantasy.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Hotfix", "Hotfix\Fantasy.Hotfix.csproj", "{8A63C258-07FD-45DC-BE10-45CE00A23811}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "..\..\Fantasy.Net\Fantasy.Net.csproj", "{54F37101-B54B-4DF8-814B-E2AF3FC53856}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "..\..\Fantasy.Net\Fantasy.Net.csproj", "{042F40B0-ACCB-4F4C-8D91-FBE354027CF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +20,10 @@ Global
 		{8A63C258-07FD-45DC-BE10-45CE00A23811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A63C258-07FD-45DC-BE10-45CE00A23811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A63C258-07FD-45DC-BE10-45CE00A23811}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54F37101-B54B-4DF8-814B-E2AF3FC53856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54F37101-B54B-4DF8-814B-E2AF3FC53856}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54F37101-B54B-4DF8-814B-E2AF3FC53856}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54F37101-B54B-4DF8-814B-E2AF3FC53856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{042F40B0-ACCB-4F4C-8D91-FBE354027CF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{042F40B0-ACCB-4F4C-8D91-FBE354027CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{042F40B0-ACCB-4F4C-8D91-FBE354027CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{042F40B0-ACCB-4F4C-8D91-FBE354027CF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

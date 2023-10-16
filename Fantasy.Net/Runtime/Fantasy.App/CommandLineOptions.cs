@@ -22,7 +22,7 @@ public class CommandLineOptions
     /// Game - 游戏服务器App
     /// Export - 导表App
     /// </summary>
-    [Option("AppType", Required = false, Default = null, HelpText = "Game,Export")]
+    [Option("AppType", Required = false, Default = null, HelpText = "Game")]
     public string AppType { get; set; }
 
     /// <summary>
@@ -32,13 +32,5 @@ public class CommandLineOptions
     /// </summary>
     [Option("Mode", Required = false, Default = "Release", HelpText = "Develop:所有Server都在一个进程中,Release:每个Server都在独立的进程中")]
     public string Mode { get; set; }
-
-#if FANTASY_NET
-    /// <summary>
-    /// 导表的类型，获取或设置导表的类型。
-    /// </summary>
-    [Option("ExcelExportType", Required = false, Default = ExportType.None, HelpText = "Increment,All")]
-    public ExportType ExportType { get; set; }
-#endif
 }
 #endif

@@ -6,13 +6,20 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.Net.csproj" />
-      <ProjectReference Include="..\..\..\Net\Fantasy.Net\Fantasy.Net.csproj" />
-    </ItemGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+    </PropertyGroup>
 
     <ItemGroup>
       <Folder Include="Generate\CustomExport\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.Net.csproj" />
     </ItemGroup>
 
 </Project>
