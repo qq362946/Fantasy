@@ -20,13 +20,13 @@ namespace (namespace)
         [ProtoIgnore]
         private readonly Dictionary<uint, (ConfigName)> _configs = new Dictionary<uint, (ConfigName)>();
         private static (ConfigName)Data _instance;
-#if FANTASY_NET || FANTASY_UNITY || FANTASY_DEVELOP
+
         public static (ConfigName)Data Instance
         {
             get { return _instance ??= ConfigTableManage.Load<(ConfigName)Data>(); } 
             private set => _instance = value;
         }
-#endif
+
         public (ConfigName) Get(uint id, bool check = true)
         {
             if (_configs.ContainsKey(id))
@@ -67,9 +67,7 @@ namespace (namespace)
         
         public void Dispose()
         {
-#if FANTASY_NET || FANTASY_UNITY || FANTASY_DEVELOP
             Instance = null;
-#endif
         }
     }
     

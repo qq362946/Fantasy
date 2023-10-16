@@ -20,13 +20,13 @@ namespace Fantasy
         [ProtoIgnore]
         private readonly Dictionary<uint, SceneConfig> _configs = new Dictionary<uint, SceneConfig>();
         private static SceneConfigData _instance;
-#if FANTASY_NET || FANTASY_UNITY || FANTASY_DEVELOP
+
         public static SceneConfigData Instance
         {
             get { return _instance ??= ConfigTableManage.Load<SceneConfigData>(); } 
             private set => _instance = value;
         }
-#endif
+
         public SceneConfig Get(uint id, bool check = true)
         {
             if (_configs.ContainsKey(id))
@@ -67,9 +67,7 @@ namespace Fantasy
         
         public void Dispose()
         {
-#if FANTASY_NET || FANTASY_UNITY || FANTASY_DEVELOP
             Instance = null;
-#endif
         }
     }
     

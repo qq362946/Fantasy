@@ -20,13 +20,13 @@ namespace Fantasy
         [ProtoIgnore]
         private readonly Dictionary<uint, MachineConfig> _configs = new Dictionary<uint, MachineConfig>();
         private static MachineConfigData _instance;
-#if FANTASY_NET || FANTASY_UNITY || FANTASY_DEVELOP
+
         public static MachineConfigData Instance
         {
             get { return _instance ??= ConfigTableManage.Load<MachineConfigData>(); } 
             private set => _instance = value;
         }
-#endif
+
         public MachineConfig Get(uint id, bool check = true)
         {
             if (_configs.ContainsKey(id))
@@ -67,9 +67,7 @@ namespace Fantasy
         
         public void Dispose()
         {
-#if FANTASY_NET || FANTASY_UNITY || FANTASY_DEVELOP
             Instance = null;
-#endif
         }
     }
     
