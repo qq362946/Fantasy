@@ -1,1 +1,16 @@
-Exporter.exe --ExportPlatform 3 --ProtoBufTemplatePath ../../../Demo/Config/Template/ProtoTemplate.txt --ProtoBufDirectory ../../../Demo/Config/ProtoBuf/ --ProtoBufServerDirectory ../../../Demo/Server/Hotfix/Generate/NetworkProtocol/ --ProtoBufClientDirectory ../../../Demo/Client/Unity/Assets/Scripts/Hotfix/Generate/NetworkProtocol/ --ExcelProgramPath ../../../Demo/Config/Excel/ --ExcelVersionFile ../../../Demo/Config/Excel/Version.txt --ExcelServerFileDirectory ../../../Demo/Server/Hotfix/Generate/ConfigTable/Entity/ --ExcelClientFileDirectory ../../../Demo/Client/Unity/Assets/Scripts/Hotfix/Generate/ConfigTable/Entity/ --ExcelServerBinaryDirectory ../../../Demo/Config/Binary/ --ExcelClientBinaryDirectory ../../../Demo/Client/Unity/Assets/Bundles/Config/ --ExcelServerJsonDirectory ../../../Demo/Config/Json/Server/ --ExcelClientJsonDirectory ../../../Demo/Config/Json/Client/ --ExcelTemplatePath ../../../Demo/Config/Template/ExcelTemplate.txt --ServerCustomExportDirectory ../../../Demo/Server/Hotfix/Generate/CustomExport/ --ClientCustomExportDirectory ../../../Demo/Client/Unity/Assets/Scripts/Hotfix/Generate/CustomExport
+Exporter.exe --ExportPlatform 3 ^
+--ProtoBufTemplatePath ../../../Config/Template/ProtoTemplate.txt ^
+--ProtoBufDirectory ../../../Config/ProtoBuf/ ^
+--ProtoBufServerDirectory ../../../Server/Hotfix/Generate/NetworkProtocol/ ^
+--ProtoBufClientDirectory ../../../Unity/Assets/Scripts/Hotfix/Generate/NetworkProtocol/ ^
+--ExcelProgramPath ../../../Config/Excel/ ^
+--ExcelVersionFile ../../../Config/Excel/Version.txt ^
+--ExcelServerFileDirectory ../../../Server/Hotfix/Generate/ConfigTable/Entity/ ^
+--ExcelClientFileDirectory ../../../Unity/Assets/Scripts/Hotfix/Generate/ConfigTable/Entity/ ^
+--ExcelServerBinaryDirectory ../../../Config/Binary/ ^
+--ExcelClientBinaryDirectory ../../../Unity/Assets/Bundles/Config/ ^
+--ExcelServerJsonDirectory ../../../Config/Json/Server/ ^
+--ExcelClientJsonDirectory ../../../Config/Json/Client/ ^
+--ExcelTemplatePath ../../../Config/Template/ExcelTemplate.txt ^
+--ServerCustomExportDirectory ../../../Server/Hotfix/Generate/CustomExport/ ^
+--ClientCustomExportDirectory ../../../Unity/Assets/Scripts/Hotfix/Generate/CustomExport
