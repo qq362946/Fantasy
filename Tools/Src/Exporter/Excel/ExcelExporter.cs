@@ -182,9 +182,6 @@ public sealed class ExcelExporter
         Parsing();
         ExportToBinary();
         File.WriteAllText(_versionFilePath, JsonConvert.SerializeObject(_versionDic));
-        // var sceneTypeConfigToEnum = new SceneTypeConfigToEnum();
-        // sceneTypeConfigToEnum.Init(this, Worksheets);
-        // sceneTypeConfigToEnum.Run();
         CustomExport();
     }
     
@@ -197,9 +194,17 @@ public sealed class ExcelExporter
         Assembly serverCustomAssembly = null;
         Assembly clientCustomAssembly = null;
         
-        // 清空自定义导出文件夹
+        if (!Directory.Exists($"{_excelProgramPath}CSharp"))
+        {
+            Directory.CreateDirectory($"{_excelProgramPath}CSharp");
+        }
+        
         if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
         {
+            if (Directory.Exists($"{_excelProgramPath}CSharp/Server"))
+            {
+                Directory.CreateDirectory($"{_excelProgramPath}CSharp/Server");
+            }
             serverCustomAssembly = DynamicAssembly.Load($"{_excelProgramPath}CSharp/Server");
             FileHelper.ClearDirectoryFile(ServerCustomExportDirectory);
             // 生成一个系统内置的自定义导出类
@@ -210,6 +215,10 @@ public sealed class ExcelExporter
     
         if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client))
         {
+            if (Directory.Exists($"{_excelProgramPath}CSharp/Client"))
+            {
+                Directory.CreateDirectory($"{_excelProgramPath}CSharp/Client");
+            }
             clientCustomAssembly = DynamicAssembly.Load($"{_excelProgramPath}CSharp/Client");
             FileHelper.ClearDirectoryFile(ClientCustomExportDirectory);
         }

@@ -1,4 +1,4 @@
-Exporter.exe --ExportPlatform 3 \
+./Exporter --ExportPlatform 3 \
 --ProtoBufTemplatePath ../../../Config/Template/ProtoTemplate.txt \
 --ProtoBufDirectory ../../../Config/ProtoBuf/ \
 --ProtoBufServerDirectory ../../../Server/Hotfix/Generate/NetworkProtocol/ \
