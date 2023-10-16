@@ -19,15 +19,13 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// 将文件复制到目标路径，如果目标目录不存在会自动创建目录。
+        /// 根据文件夹路径创建文件夹，如果文件夹不存在会自动创建文件夹。
         /// </summary>
-        /// <param name="sourceFile">源文件路径。</param>
-        /// <param name="destinationFile">目标文件路径。</param>
-        /// <param name="overwrite">是否覆盖已存在的目标文件。</param>
-        public static void Copy(string sourceFile, string destinationFile, bool overwrite)
+        /// <param name="directoryPath"></param>
+        public static void CreateDirectory(string directoryPath)
         {
-            var directoriesByFilePath = GetDirectoriesByFilePath(destinationFile);
-
+            var directoriesByFilePath = GetDirectoriesByFilePath(directoryPath);
+            
             foreach (var dir in directoriesByFilePath)
             {
                 if (Directory.Exists(dir))
@@ -37,7 +35,17 @@ namespace Fantasy.Helper
 
                 Directory.CreateDirectory(dir);
             }
+        }
 
+        /// <summary>
+        /// 将文件复制到目标路径，如果目标目录不存在会自动创建目录。
+        /// </summary>
+        /// <param name="sourceFile">源文件路径。</param>
+        /// <param name="destinationFile">目标文件路径。</param>
+        /// <param name="overwrite">是否覆盖已存在的目标文件。</param>
+        public static void Copy(string sourceFile, string destinationFile, bool overwrite)
+        {
+            CreateDirectory(destinationFile);
             File.Copy(sourceFile, destinationFile, overwrite);
         }
 

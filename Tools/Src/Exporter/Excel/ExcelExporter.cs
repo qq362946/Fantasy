@@ -559,7 +559,7 @@ public sealed class ExcelExporter
         {
             if (!Directory.Exists(exportPath))
             {
-                Directory.CreateDirectory(exportPath);
+                FileHelper.CreateDirectory(exportPath);
             }
 
             var content = template.Replace("(namespace)", "Fantasy")
