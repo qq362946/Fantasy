@@ -201,7 +201,7 @@ public sealed class ExcelExporter
         
         if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
         {
-            if (Directory.Exists($"{_excelProgramPath}CSharp/Server"))
+            if (!Directory.Exists($"{_excelProgramPath}CSharp/Server"))
             {
                 Directory.CreateDirectory($"{_excelProgramPath}CSharp/Server");
             }
@@ -215,7 +215,7 @@ public sealed class ExcelExporter
     
         if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client))
         {
-            if (Directory.Exists($"{_excelProgramPath}CSharp/Client"))
+            if (!Directory.Exists($"{_excelProgramPath}CSharp/Client"))
             {
                 Directory.CreateDirectory($"{_excelProgramPath}CSharp/Client");
             }

@@ -66,6 +66,11 @@ namespace Fantasy.Helper
                 directories.Add(dir);
             }
 
+            if (directories.Count == 0)
+            {
+                directories.Add(filePath);
+            }
+
             return directories;
         }
 
