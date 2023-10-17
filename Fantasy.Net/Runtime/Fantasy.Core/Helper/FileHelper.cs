@@ -54,24 +54,21 @@ namespace Fantasy.Helper
         /// </summary>
         /// <param name="filePath">文件路径。</param>
         /// <returns>文件夹路径列表。</returns>
-        public static List<string> GetDirectoriesByFilePath(string filePath)
+        public static IEnumerable<string> GetDirectoriesByFilePath(string filePath)
         {
             var dir = "";
-            var directories = new List<string>();
             var fileDirectories = filePath.Split('/');
 
             for (var i = 0; i < fileDirectories.Length - 1; i++)
             {
                 dir = $"{dir}{fileDirectories[i]}/";
-                directories.Add(dir);
+                yield return dir;
             }
 
-            if (directories.Count == 0)
+            if (fileDirectories.Length == 1)
             {
-                directories.Add(filePath);
+                yield return filePath;
             }
-
-            return directories;
         }
 
         /// <summary>
