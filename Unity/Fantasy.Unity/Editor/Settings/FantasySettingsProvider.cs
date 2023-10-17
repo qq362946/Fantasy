@@ -14,8 +14,6 @@ namespace Fantasy.Editor
         private SerializedObject _serializedObject;
         private SerializedProperty _autoCopyAssembly;
         private SerializedProperty _uiGenerateSavePath;
-        private SerializedProperty _editorModel;
-        private SerializedProperty _remoteUpdatePath;
         private SerializedProperty _hotUpdatePath;
         private SerializedProperty _hotUpdateAssemblyDefinitions;
         public FantasySettingsProvider() : base("Project/Fantasy Settings", SettingsScope.Project) { }
@@ -38,8 +36,6 @@ namespace Fantasy.Editor
             _serializedObject = new SerializedObject(FantasySettingsScriptableObject.Instance);
             _autoCopyAssembly = _serializedObject.FindProperty("autoCopyAssembly");
             _uiGenerateSavePath = _serializedObject.FindProperty("uiGenerateSavePath");
-            _editorModel = _serializedObject.FindProperty("editorModel");
-            _remoteUpdatePath = _serializedObject.FindProperty("remoteUpdatePath");
             _hotUpdatePath = _serializedObject.FindProperty("hotUpdatePath");
             _hotUpdateAssemblyDefinitions = _serializedObject.FindProperty("hotUpdateAssemblyDefinitions");
         }
@@ -58,8 +54,6 @@ namespace Fantasy.Editor
                 EditorGUI.BeginChangeCheck();
                 EditorGUILayout.PropertyField(_autoCopyAssembly);
                 EditorGUILayout.PropertyField(_uiGenerateSavePath);
-                EditorGUILayout.PropertyField(_editorModel);
-                EditorGUILayout.PropertyField(_remoteUpdatePath);
                 EditorGUILayout.PropertyField(_hotUpdatePath);
                 EditorGUILayout.PropertyField(_hotUpdateAssemblyDefinitions);
                 

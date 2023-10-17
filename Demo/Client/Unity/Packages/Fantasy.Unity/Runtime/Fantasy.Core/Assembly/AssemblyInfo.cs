@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Fantasy.DataStructure;
+// ReSharper disable CollectionNeverQueried.Global
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 namespace Fantasy.Helper
 {
@@ -23,7 +25,19 @@ namespace Fantasy.Helper
         /// 程序集类型分组集合，获取一个分组列表，将接口类型映射到实现这些接口的类型。
         /// </summary>
         public readonly OneToManyList<Type, Type> AssemblyTypeGroupList = new OneToManyList<Type, Type>();
-
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public AssemblyInfo() { }
+        /// <summary>
+        /// 构造函数、可以传递程序集
+        /// </summary>
+        /// <param name="assembly"></param>
+        public AssemblyInfo(Assembly assembly)
+        {
+            Load(assembly);
+        }
+        
         /// <summary>
         /// 从指定的程序集加载类型信息并进行分类。
         /// </summary>

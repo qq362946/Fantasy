@@ -13,6 +13,7 @@ namespace Fantasy.DataStructure
     {
         private bool _isDispose;
 
+#if FANTASY_NET || FANTASY_UNITY || FANTASY_DEVELOP
         /// <summary>
         /// 创建一个 <see cref="OneToManyListPool{TKey, TValue}"/> 一对多关系的列表池的实例。
         /// </summary>
@@ -23,7 +24,7 @@ namespace Fantasy.DataStructure
             list._isDispose = false;
             return list;
         }
-
+#endif
         /// <summary>
         /// 释放当前对象所占用的资源，并将对象回收到对象池中。
         /// </summary>
@@ -36,7 +37,9 @@ namespace Fantasy.DataStructure
 
             _isDispose = true;
             Clear();
+#if FANTASY_NET || FANTASY_UNITY || FANTASY_DEVELOP
             Pool<OneToManyListPool<TKey, TValue>>.Return(this);
+#endif
         }
     }
 

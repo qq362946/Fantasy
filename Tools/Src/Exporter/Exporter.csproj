@@ -30,6 +30,12 @@
       <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\DataStructure\Collection\OneToManyList.cs">
         <Link>Excel\Base\OneToManyList.cs</Link>
       </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Exporter\Excel\Dictionary\IntDictionaryConfig.cs">
+        <Link>Excel\Base\Dictionary\IntDictionaryConfig.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Exporter\Excel\Dictionary\StringDictionaryConfig.cs">
+        <Link>Excel\Base\Dictionary\StringDictionaryConfig.cs</Link>
+      </Compile>
       <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Exporter\Interface\IConfigTable.cs">
         <Link>Excel\Base\IConfigTable.cs</Link>
       </Compile>

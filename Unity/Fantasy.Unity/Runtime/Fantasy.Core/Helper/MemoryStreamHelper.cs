@@ -1,5 +1,9 @@
 using System.IO;
+#if FANTASY_UNITY || FANTASY_NET || FANTASY_DEVELOP
 using Fantasy.IO;
+#else
+using Microsoft.IO;
+#endif
 
 namespace Fantasy.Helper
 {
