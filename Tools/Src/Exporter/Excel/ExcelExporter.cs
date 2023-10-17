@@ -577,12 +577,12 @@ public sealed class ExcelExporter
         Assembly dynamicClientAssembly = null;
         var exportToBinaryTasks = new List<Task>();
         
-        if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
+        if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server) && Directory.Exists(_excelServerFileDirectory))
         {
             dynamicServerAssembly = DynamicAssembly.Load(_excelServerFileDirectory);
         }
 
-        if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client))
+        if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client) && Directory.Exists(_excelClientFileDirectory))
         {
             dynamicClientAssembly = DynamicAssembly.Load(_excelClientFileDirectory);
         }
