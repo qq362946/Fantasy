@@ -39,7 +39,7 @@ public class H_C2G_LoginAddressRequestHandler : MessageRPC<H_C2G_LoginAddressReq
             sceneEntityId,
             new I_G2M_LoginAddressRequest()
             {
-                AddressableId = session.Id,
+                AddressableId = session.RuntimeId,
             });
         if (loginAddressResponse.ErrorCode != 0)
         {
