@@ -7,6 +7,7 @@ using Fantasy;
 using Fantasy.DataStructure;
 using Fantasy.Exporter;
 using Fantasy.Helper;
+using Microsoft.CodeAnalysis;
 using Newtonsoft.Json;
 using OfficeOpenXml;
 using static System.String;
@@ -545,7 +546,25 @@ public sealed class ExcelExporter
 
                 var remarks = excelWorksheet.GetCellValue(4, colIndex);
 
-                fileBuilder.Append($"\n\t\t[ProtoMember({++index}, IsRequired  = true)]\n");
+                // 解决不同平台换行符不一致的问题
+                
+                switch (Environment.OSVersion.Platform)
+                {
+                    case PlatformID.Win32NT:
+                    case PlatformID.Win32S:
+                    case PlatformID.Win32Windows:
+                    case PlatformID.WinCE:
+                    {
+                        fileBuilder.Append($"\r\n\t\t[ProtoMember({++index}, IsRequired  = true)]\r\n");
+                        break;
+                    }
+                    default:
+                    {
+                        fileBuilder.Append($"\n\t\t[ProtoMember({++index}, IsRequired  = true)]\n");
+                        break;
+                    }
+                }
+                
                 fileBuilder.Append(
                     IsArray(colType,out var t)
                         ? $"\t\tpublic {colType} {colName} {{ get; set; }} = Array.Empty<{t}>(); // {remarks}"
