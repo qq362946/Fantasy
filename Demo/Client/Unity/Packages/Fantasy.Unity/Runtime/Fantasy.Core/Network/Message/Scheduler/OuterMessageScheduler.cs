@@ -55,7 +55,6 @@ namespace Fantasy.Core.Network
 
             try
             {
-                DisposePackInfo = false;
                 switch (packInfo.RouteTypeCode)
                 {
                     case CoreRouteType.Route:
@@ -84,7 +83,6 @@ namespace Fantasy.Core.Network
                                 {
                                     session.Send(response, packInfo.RpcId);
                                 }
-
                                 return;
                             }
                             case > Opcode.OuterRouteMessage:

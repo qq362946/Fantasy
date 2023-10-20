@@ -10,10 +10,6 @@ namespace Fantasy.Core.Network
     public abstract class ANetworkMessageScheduler
     {
         /// <summary>
-        /// 标识是否需要释放消息包信息。
-        /// </summary>
-        protected bool DisposePackInfo;
-        /// <summary>
         /// 用于回复Ping消息的响应实例。
         /// </summary>
         private readonly PingResponse _pingResponse = new PingResponse();
@@ -26,8 +22,8 @@ namespace Fantasy.Core.Network
         /// <returns>异步任务。</returns>
         public async FTask Scheduler(Session session, APackInfo packInfo)
         {
+            var disposePackInfo = true;
             Type messageType = null;
-            DisposePackInfo = true;
 
             try
             {
@@ -55,6 +51,7 @@ namespace Fantasy.Core.Network
                     case Opcode.PingResponse:
                     case >= Opcode.OuterRouteMessage:
                     {
+                        disposePackInfo = false;
                         await Handler(session, messageType, packInfo);
                         return;
                     }
@@ -92,7 +89,7 @@ namespace Fantasy.Core.Network
             }
             finally
             {
-                if (DisposePackInfo)
+                if (disposePackInfo)
                 {
                     NetworkThread.Instance.SynchronizationContext.Post(packInfo.Dispose);
                 }

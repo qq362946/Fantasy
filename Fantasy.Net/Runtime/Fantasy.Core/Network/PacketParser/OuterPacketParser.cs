@@ -47,7 +47,6 @@ namespace Fantasy.Core.Network
         public override void Dispose()
         {
             base.Dispose();
-
             // 将当前的 OuterPackInfo 实例归还到对象池，以便重复利用
             Pool<OuterPackInfo>.Return(this);
         }
@@ -189,7 +188,7 @@ namespace Fantasy.Core.Network
                 {
                     return false;
                 }
-
+                // Log.Debug($"ProtocolCode:{packInfo.ProtocolCode} RpcId:{packInfo.RpcId} RouteTypeCode:{packInfo.RouteTypeCode} MessagePacketLength:{packInfo.MessagePacketLength}");
                 return _messagePacketLength >= 0;
             }
             catch (Exception e)
