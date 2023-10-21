@@ -111,7 +111,7 @@ namespace Fantasy
 
             var ipEndPoint = NetworkHelper.ToIPEndPoint($"{machineConfigInfo.InnerBindIP}:{serverConfigInfo.InnerPort}");
             var clientNetworkComponent = Entity.Create<ClientNetworkComponent>(Scene);
-            clientNetworkComponent.Initialize(NetworkProtocolType.TCP, NetworkTarget.Inner);
+            clientNetworkComponent.Initialize(AppDefine.InnerNetwork, NetworkTarget.Inner);
             clientNetworkComponent.Connect(ipEndPoint, null, () =>
             {
                 Log.Error($"Unable to connect to the target server sourceServerId:{Id} targetServerId:{targetServerId}");
@@ -196,7 +196,7 @@ namespace Fantasy
             {
                 var address = NetworkHelper.ToIPEndPoint(innerBindIp, innerPort);
                 var serverNetworkComponent = server.Scene.AddComponent<ServerNetworkComponent>();
-                serverNetworkComponent.Initialize(NetworkProtocolType.TCP, NetworkTarget.Inner, address);
+                serverNetworkComponent.Initialize(AppDefine.InnerNetwork, NetworkTarget.Inner, address);
             }
 
             // 创建Server拥有所有的Scene

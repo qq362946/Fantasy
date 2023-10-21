@@ -1,5 +1,6 @@
 using CommandLine;
 using Fantasy.Core;
+using Fantasy.Core.Network;
 using Fantasy.Helper;
 using Microsoft.Extensions.Configuration;
 using NLog;
@@ -23,7 +24,11 @@ namespace Fantasy
             // 解析命令行参数
             Parser.Default.ParseArguments<CommandLineOptions>(Environment.GetCommandLineArgs())
                 .WithNotParsed(error => throw new Exception("Command line format error!"))
-                .WithParsed(option => AppDefine.Options = option);
+                .WithParsed(option =>
+                {
+                    AppDefine.Options = option;
+                    AppDefine.InnerNetwork = Enum.Parse<NetworkProtocolType>(option.InnerNetwork);
+                });
             // 加载配置
             FantasySettingsHelper.Initialize();
             // 检查启动参数

@@ -1,3 +1,5 @@
+using Fantasy.Core.Network;
+
 #pragma warning disable CS8618
 namespace Fantasy;
 
@@ -14,4 +16,8 @@ public static class AppDefine
     /// App程序Id
     /// </summary>
     public static uint AppId => Options.AppId;
+    /// <summary>
+    /// 内部网络通讯协议类型
+    /// </summary>
+    public static NetworkProtocolType InnerNetwork;
 }
