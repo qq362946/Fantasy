@@ -54,7 +54,7 @@ public sealed class ExcelExporter
     {
         "", "0", "bool", "byte", "short", "ushort", "int", "uint", "long", "ulong", "float", "string",
         "IntDictionaryConfig", "StringDictionaryConfig",
-        "short[]", "int[]", "long[]", "float[]", "string[]"
+        "short[]", "int[]", "long[]", "float[]", "string[]","uint[]"
     };
     static ExcelExporter()
     {
@@ -909,6 +909,14 @@ public sealed class ExcelExporter
                     propertyInfo.SetValue(config, value.Split(",").Select(d => Convert.ToInt32(d)).ToArray());
                 }
 
+                return;
+            }
+            case "uint[]":
+            {
+                if (value != "0")
+                {
+                    propertyInfo.SetValue(config, value.Split(",").Select(d => Convert.ToUInt32(d)).ToArray());
+                }
                 return;
             }
             case "long[]":
