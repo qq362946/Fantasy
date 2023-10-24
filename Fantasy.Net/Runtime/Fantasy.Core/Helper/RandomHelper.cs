@@ -83,7 +83,7 @@ namespace Fantasy.Helper
         /// <returns>随机选择的数组元素。</returns>
         public static T RandomArray<T>(this T[] array)
         {
-            return array[RandomNumber(0, array.Count() - 1)];
+            return array[RandomNumber(0, array.Count())];
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Fantasy.Helper
         /// <returns>随机选择的列表元素。</returns>
         public static T RandomArray<T>(this List<T> array)
         {
-            return array[RandomNumber(0, array.Count() - 1)];
+            return array[RandomNumber(0, array.Count())];
         }
 
         /// <summary>
