@@ -431,8 +431,8 @@ namespace Fantasy.Helper
             // 在Android平台上，由于StreamingAssets文件夹下的文件是压缩的，需要使用Unity的WWW类进行读取。
             // 在其他平台上，可以直接使用System.IO类进行读取。
             var filePath = $"{UnityEngine.Application.streamingAssetsPath}/{path}";
-#if UNITY_ANDROID
-            return await Download.Instance.DownloadByte($"file://{filePath}");
+#if !UNITY_ANDROID
+            return await new Download().DownloadByte($"file://{filePath}");
 #else
             return await File.ReadAllBytesAsync(filePath);
 #endif
