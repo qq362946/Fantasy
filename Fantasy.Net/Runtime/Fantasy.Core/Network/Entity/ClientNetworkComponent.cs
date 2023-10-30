@@ -61,7 +61,7 @@ namespace Fantasy.Core.Network
             }
             
             Network.Connect(remoteEndPoint, onConnectComplete, onConnectFail, onConnectDisconnect, connectTimeout);
-            Session = Session.Create(Network);
+            Session = Session.Create(Network, remoteEndPoint);
         }
 
         /// <summary>

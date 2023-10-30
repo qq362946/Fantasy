@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using Fantasy.Helper;
 #pragma warning disable CS8603
 #pragma warning disable CS8601
@@ -23,6 +24,10 @@ namespace Fantasy.Core.Network
         /// 获取通道的标识符。
         /// </summary>
         public uint ChannelId { get; private set; }
+        /// <summary>
+        /// 连接目标的终结点信息
+        /// </summary>
+        public IPEndPoint RemoteEndPoint { get; private set; }
         /// <summary>
         /// 获取最后一次接收数据的时间。
         /// </summary>
@@ -59,6 +64,7 @@ namespace Fantasy.Core.Network
             var session = Entity.Create<Session>(channel.Scene);
             session.ChannelId = channel.Id;
             session.NetworkId = channel.NetworkId;
+            session.RemoteEndPoint = channel.RemoteEndPoint as IPEndPoint;
             session.NetworkMessageScheduler = networkMessageScheduler;
             // 关联事件处理
             channel.OnDispose += session.Dispose;
@@ -80,8 +86,9 @@ namespace Fantasy.Core.Network
         /// 创建一个与客户端网络相关的会话并添加到会话字典中。
         /// </summary>
         /// <param name="network">与会话关联的客户端网络。</param>
+        /// <param name="remoteEndPoint">终结点信息</param>
         /// <returns>创建的会话实例。</returns>
-        public static Session Create(AClientNetwork network)
+        public static Session Create(AClientNetwork network, IPEndPoint remoteEndPoint)
         {
 #if FANTASY_DEVELOP
             // 检查是否在主线程中调用
@@ -94,6 +101,7 @@ namespace Fantasy.Core.Network
             var session = Entity.Create<Session>(network.Scene);
             session.ChannelId = network.ChannelId;
             session.NetworkId = network.Id;
+            session.RemoteEndPoint = remoteEndPoint;
             session.NetworkMessageScheduler = network.NetworkMessageScheduler;
             // 关联事件处理
             network.OnDispose += session.Dispose;
