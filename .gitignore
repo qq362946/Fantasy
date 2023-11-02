@@ -22,3 +22,4 @@ UserSettings/
 .vs
 .vscode
 *.DS_Store
+*.meta
