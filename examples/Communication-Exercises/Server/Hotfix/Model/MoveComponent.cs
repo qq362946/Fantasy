@@ -6,19 +6,6 @@ using UnityEngine;
 
 namespace BestGame;
 
-public class StartMoveEventHanlder : EventSystem<EventSystemStruct.StartMove>
-{
-    public override void Handler(EventSystemStruct.StartMove self)
-    {
-        var unit = self.Unit;
-        MoveSyncComponent moveSyncComponent = unit.GetComponent<MoveSyncComponent>();
-
-        // 可以加BroadcastWithAoi，略过...
-
-        moveSyncComponent.AddMessage(unit.Id, self.MoveInfo);
-    }
-}
-
 public class MoveComponent : Entity 
 {
     /// 测试练习，这里不在服务器上做位置的计算与寻路验证
@@ -47,7 +34,7 @@ public class MoveComponent : Entity
 
         // 发事件给移动同步组件，收集移动状态
         EventSystem.Instance.Publish(new EventSystemStruct.StartMove{
-            Unit = unit, MoveInfo = moveInfo
+            unit = unit, moveInfo = moveInfo
         });
 
         // 服务器上unit的位置移动计算
