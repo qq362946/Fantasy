@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.App", "App\Fantasy.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Hotfix", "Hotfix\Fantasy.Hotfix.csproj", "{8A63C258-07FD-45DC-BE10-45CE00A23811}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "..\..\Fantasy.Net\Fantasy.Net.csproj", "{54F37101-B54B-4DF8-814B-E2AF3FC53856}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "..\..\..\Fantasy.Net\Fantasy.Net.csproj", "{54F37101-B54B-4DF8-814B-E2AF3FC53856}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngine", "UnityEngine\UnityEngine.csproj", "{0D943D15-1B40-4970-9FAA-E4F66A1BD817}"
 EndProject
