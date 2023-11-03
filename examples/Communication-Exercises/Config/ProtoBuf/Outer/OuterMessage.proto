@@ -1,0 +1,99 @@
+syntax = "proto3";
+package Fantasy.Network.Message;
+
+/// 注册账号
+message C2R_RegisterRequest // IRequest,R2C_RegisterResponse
+{
+	string UserName = 1;
+	string Password = 2;
+}
+message R2C_RegisterResponse // IResponse
+{
+	string Message = 1;
+}
+/// 登录账号
+message C2R_LoginRequest // IRequest,R2C_LoginResponse
+{
+	string UserName = 1;
+	string Password = 2;
+}
+message R2C_LoginResponse // IResponse
+{
+	string Message = 1;
+}
+/// 登录网关
+message C2G_LoginGateRequest // IRequest,G2C_LoginGateResponse
+{
+	string Message = 1;
+}
+message G2C_LoginGateResponse // IResponse
+{
+	string Message = 1;
+}
+/// 创建角色
+message C2G_CreateCharacterRequest // IRequest,G2C_CreateCharacterResponse
+{
+	string Message = 1;
+}
+message G2C_CreateCharacterResponse // IResponse
+{
+	string Message = 1;
+	//Character Character = 2;
+}
+/// 进入地图
+message C2G_EnterMapRequest // IRequest,G2C_EnterMapResponse
+{
+	string Message = 1;
+	int64 CharacterId = 2;
+}
+message G2C_EnterMapResponse // IResponse
+{
+	string Message = 1;
+	//repeated Character Characters = 4;
+}
+/// 进入地图
+message G2M_CreateUnitRequest // IRouteRequest,M2G_CreateUnitResponse
+{
+	string Message = 1;
+	int64 PlayerId = 2;
+	int64 SessionRuntimeId = 3;
+}
+message M2G_CreateUnitResponse // IRouteResponse
+{
+	string Message = 1;
+	int64 AddressableId = 2;
+	//Unit Unit = 3;
+}
+
+/// 退出地图
+message C2M_ExitRequest // IAddressableRouteRequest,M2C_ExitResponse
+{
+	string Message = 1;
+} 
+message M2C_ExitResponse // IAddressableRouteResponse
+{
+	string Message = 1;
+}
+/// 位置对象
+message MoveInfo
+{
+	float X = 1;
+  	float Y = 2;
+  	float Z = 3;
+	float RotA = 4;
+	float RotB = 5;
+	float RotC = 6;
+	float RotW = 7;
+	int64 MoveEndTime = 8;
+}
+/// 移动操作
+message C2M_MoveMessage // IAddressableRouteMessage
+{
+	MoveInfo MoveInfo = 1;
+}
+/// 核心状态同步
+
+message M2C_MoveBroadcast // IAddressableRouteMessage
+{
+	repeated MoveInfo Moves = 1;
+}

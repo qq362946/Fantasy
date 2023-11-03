@@ -1,0 +1,1897 @@
+﻿<Project ToolsVersion="Current">
+  <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>Temp\obj\$(Configuration)\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
+  </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <ItemGroup>
+    <ProjectCapability Include="Unity" />
+  </ItemGroup>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>9.0</LangVersion>
+    <Configurations>Debug;Release</Configurations>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <RootNamespace></RootNamespace>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Fantasy.Unity</AssemblyName>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <BaseDirectory>.</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>UNITY_2022_3_6;UNITY_2022_3;UNITY_2022;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_INITIALIZES_MEMORY_MANAGER_EXPLICITLY;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;FANTASY_UNITY</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169;USG0001</NoWarn>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169;USG0001</NoWarn>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoStandardLibraries>true</NoStandardLibraries>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
+  </PropertyGroup>
+  <PropertyGroup>
+    <UnityProjectGenerator>Package</UnityProjectGenerator>
+    <UnityProjectGeneratorVersion>2.0.22</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorStyle>SDK</UnityProjectGeneratorStyle>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
+    <UnityVersion>2022.3.6f1</UnityVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="D:\Program Files\Unity\2022.3.6f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
+    <Analyzer Include="D:\Program Files\Unity\2022.3.6f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\EntityReference.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\EntityReference.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\FantasySettingsHelper.cs">
+      <Link>Runtime\Fantasy.Core\FantasySettingsHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\OneToManySortedDictionary.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\OneToManySortedDictionary.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Partial\FTask.Pool.cs">
+      <Link>Runtime\Fantasy.Core\Task\Partial\FTask.Pool.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableRouteComponent.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Addressable\AddressableRouteComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UI.cs">
+      <Link>Runtime\Fantasy.App\UI\Core\UI.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ConcurrentOneToManyQueue.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\ConcurrentOneToManyQueue.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ReflectedUriDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ReflectedUriDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\Dictionary\IntDictionaryConfig.cs">
+      <Link>Runtime\Fantasy.Core\Exporter\Excel\Dictionary\IntDictionaryConfig.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\PriorityQueue.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\PriorityQueue.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoEndpointBehavior.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoEndpointBehavior.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FTaskCompleted.cs">
+      <Link>Runtime\Fantasy.Core\Task\FTaskCompleted.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Dispatcher\MessageDispatcherSystem.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Dispatcher\MessageDispatcherSystem.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Partial\FTask.Factory.cs">
+      <Link>Runtime\Fantasy.Core\Task\Partial\FTask.Factory.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\EntityIdStruct.cs">
+      <Link>Runtime\Fantasy.Core\IdFactory\EntityIdStruct.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Exception\ScanException.cs">
+      <Link>Runtime\Fantasy.Core\Network\Exception\ScanException.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\ServerConfigTableManage.cs">
+      <Link>Runtime\Fantasy.Core\Exporter\Excel\ServerConfigTableManage.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IEntitiesSystem.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\System\IEntitiesSystem.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IBsonMessage.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IBsonMessage.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Helpers.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Helpers.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Kcp.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Kcp.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UInt16Serializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\UInt16Serializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerType.cs">
+      <Link>Runtime\Fantasy.Core\TimerScheduler\TimerType.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Utils.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Utils.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DateTimeSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\DateTimeSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\SubItemToken.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\SubItemToken.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Extend\ButtonExtend.cs">
+      <Link>Runtime\Fantasy.App\UI\Extend\ButtonExtend.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FCancellationToken.cs">
+      <Link>Runtime\Fantasy.Core\Task\FCancellationToken.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Compiler\Local.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Compiler\Local.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\SingleCollection\SingleCollection.cs">
+      <Link>Runtime\Fantasy.Core\SingleCollection\SingleCollection.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ReuseList.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\ReuseList.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\ServerNetworkComponent.cs">
+      <Link>Runtime\Fantasy.Core\Network\Entity\ServerNetworkComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\HashSetPool.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\HashSetPool.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedTransfer.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedTransfer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IUpdateSystem.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\System\IUpdateSystem.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedMultiEntity.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedMultiEntity.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UriDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\UriDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkThread\NetAction.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkThread\NetAction.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ByteSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ByteSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\ReuseDictionary.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\ReuseDictionary.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoBehaviorAttribute.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoBehaviorAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\RuntimeTypeModel.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\RuntimeTypeModel.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableDesc.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableDesc.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IProtoInputT.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\IProtoInputT.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerScheduler.cs">
+      <Link>Runtime\Fantasy.Core\TimerScheduler\TimerScheduler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Handler\IRouteMessageHandler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Interface\Handler\IRouteMessageHandler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\ByteHelper.cs">
+      <Link>Runtime\Fantasy.Core\Helper\ByteHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Partial\FTask.WhenAll.cs">
+      <Link>Runtime\Fantasy.Core\Task\Partial\FTask.WhenAll.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\OneToManyHashSet.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\OneToManyHashSet.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TypeSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\TypeSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Enum\NetworkProtocolType.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Enum\NetworkProtocolType.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedSingleCollection.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedSingleCollection.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\AssemblyInfo.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Builder\AsyncFVoidMethodBuilder.cs">
+      <Link>Runtime\Fantasy.Core\Task\Builder\AsyncFVoidMethodBuilder.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\EntityList.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\EntityList.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableManageComponent.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Addressable\AddressableManageComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\ProtoSyntax.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\ProtoSyntax.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\OuterPacketParser.cs">
+      <Link>Runtime\Fantasy.Core\Network\PacketParser\OuterPacketParser.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ParseableSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ParseableSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\OneToManyQueue.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\OneToManyQueue.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreIfNullAttribute.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreIfNullAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UIComponent.cs">
+      <Link>Runtime\Fantasy.App\UI\Core\UIComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\Download.cs">
+      <Link>Runtime\Fantasy.App\Fantasy.Download\Download.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IExtensible.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\IExtensible.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SurrogateSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\SurrogateSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Scene\SceneEvent.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Scene\SceneEvent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\AttributeMap.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\AttributeMap.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\GlobalSuppressions.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\GlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\RandomHelper.cs">
+      <Link>Runtime\Fantasy.Core\Helper\RandomHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableMessageComponent.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Addressable\AddressableMessageComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Interface\IConfigTable.cs">
+      <Link>Runtime\Fantasy.Core\Exporter\Interface\IConfigTable.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Handler\IMessageHandler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Interface\Handler\IMessageHandler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Helper\NetworkHelper.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Helper\NetworkHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\RuntimeIdStruct.cs">
+      <Link>Runtime\Fantasy.Core\IdFactory\RuntimeIdStruct.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DoubleSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\DoubleSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\SerializationContext.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\SerializationContext.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\AClientNetwork.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Interface\AClientNetwork.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Application.cs">
+      <Link>Runtime\Fantasy.App\Application.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\AudioHelper.cs">
+      <Link>Runtime\Fantasy.Core\Helper\AudioHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\DictionaryExtensions.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\DictionaryExtensions.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoreErrorCode.cs">
+      <Link>Runtime\Fantasy.Core\CoreErrorCode.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ProtoDecoratorBase.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ProtoDecoratorBase.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\CallbackAttributes.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\CallbackAttributes.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\MemberSpecifiedDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\MemberSpecifiedDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\SortedConcurrentOneToManyList.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\SortedConcurrentOneToManyList.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadSprite.cs">
+      <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadSprite.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\FieldDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\FieldDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ExtensibleUtil.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ExtensibleUtil.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\Interface\ISingleton.cs">
+      <Link>Runtime\Fantasy.Core\Singleton\Interface\ISingleton.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\ServerConfigInfo.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Server\ServerConfigInfo.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\CryptHelper.cs">
+      <Link>Runtime\Fantasy.Core\Helper\CryptHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTable.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTable.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Scheduler\INetworkMessageSchedulerHandler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Interface\Scheduler\INetworkMessageSchedulerHandler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\KCPSettings.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\KCPSettings.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadAudioClip.cs">
+      <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadAudioClip.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\TimeHelper.cs">
+      <Link>Runtime\Fantasy.Core\Helper\TimeHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\DictionaryPool.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\DictionaryPool.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Entry.cs">
+      <Link>Runtime\Fantasy.App\Entry.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleCheckStage.cs">
+      <Link>Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleCheckStage.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\CoreRouteType.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Scheduler\CoreRouteType.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreAttribute.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\MD5Helper.cs">
+      <Link>Runtime\Fantasy.Core\Helper\MD5Helper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableBase.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableBase.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Proto\ProtoBufHelper.cs">
+      <Link>Runtime\Fantasy.Core\Helper\Proto\ProtoBufHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\OnNetworkMessageUpdateCheckTimeout.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\OnNetworkMessageUpdateCheckTimeout.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\Dictionary\StringDictionaryConfig.cs">
+      <Link>Runtime\Fantasy.Core\Exporter\Excel\Dictionary\StringDictionaryConfig.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\Pool.cs">
+      <Link>Runtime\Fantasy.Core\Pool\Pool.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Server\TCPServerNetworkChannel.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Server\TCPServerNetworkChannel.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\MetaType.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\MetaType.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\CallbackSet.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\CallbackSet.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\Int64Serializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\Int64Serializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\AUnityDownload.cs">
+      <Link>Runtime\Fantasy.App\Fantasy.Download\AUnityDownload.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\SceneConfigInfo.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Server\SceneConfigInfo.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\Session\ServerInnerSession.cs">
+      <Link>Runtime\Fantasy.Core\Network\Entity\Session\ServerInnerSession.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DefaultValueDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\DefaultValueDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IDeserializeSystem.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\System\IDeserializeSystem.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\ANetworkChannel.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Interface\ANetworkChannel.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\InnerMessageScheduler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Scheduler\InnerMessageScheduler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\FileHelper.cs">
+      <Link>Runtime\Fantasy.Core\Helper\FileHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableAddHandler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableAddHandler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleUpdate.cs">
+      <Link>Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleUpdate.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\DoubleMapDictionary.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\DoubleMapDictionary.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\ConcurrentPool.cs">
+      <Link>Runtime\Fantasy.Core\Pool\ConcurrentPool.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\NetObjectSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\NetObjectSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\ILog.cs">
+      <Link>Runtime\Fantasy.Core\Log\ILog.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\Session\Session.cs">
+      <Link>Runtime\Fantasy.Core\Network\Entity\Session\Session.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Entity.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Entity.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\Base\WorldConfigInfo.cs">
+      <Link>Runtime\Fantasy.Core\DataBase\Base\WorldConfigInfo.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\Singleton.cs">
+      <Link>Runtime\Fantasy.Core\Singleton\Singleton.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\Base\IDateBase.cs">
+      <Link>Runtime\Fantasy.Core\DataBase\Base\IDateBase.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Assembly\AssemblyManager.cs">
+      <Link>Runtime\Fantasy.Core\Assembly\AssemblyManager.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoConverterAttribute.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ProtoConverterAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Server\KCPServerNetwork.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Server\KCPServerNetwork.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Enum\NetworkType.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Enum\NetworkType.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ListPool.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\ListPool.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\MapDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\MapDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeAddedEventArgs.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\TypeAddedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Modules\Session\SessionIdleCheckerComponent.cs">
+      <Link>Runtime\Fantasy.Core\Modules\Session\SessionIdleCheckerComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FTask.cs">
+      <Link>Runtime\Fantasy.Core\Task\FTask.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\UnityLog.cs">
+      <Link>Runtime\Fantasy.Core\Log\UnityLog.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FVoid.cs">
+      <Link>Runtime\Fantasy.Core\Task\FVoid.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TimeSpanSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\TimeSpanSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\ValueMember.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\ValueMember.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoException.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ProtoException.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\Int32Serializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\Int32Serializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\IProtoTypeSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\IProtoTypeSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\IdFactory.cs">
+      <Link>Runtime\Fantasy.Core\IdFactory\IdFactory.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\Interface\APackInfo.cs">
+      <Link>Runtime\Fantasy.Core\Network\PacketParser\Interface\APackInfo.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\NetObjectCache.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\NetObjectCache.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Builder\AsyncFTaskCompletedMethodBuilder.cs">
+      <Link>Runtime\Fantasy.Core\Task\Builder\AsyncFTaskCompletedMethodBuilder.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\BasicList.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\BasicList.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\FantasyUI.cs">
+      <Link>Runtime\Fantasy.App\UI\Core\FantasyUI.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\MemoryStreamHelper.cs">
+      <Link>Runtime\Fantasy.Core\Helper\MemoryStreamHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\INotSupportedPool.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\INotSupportedPool.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ISerializerProxy.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ISerializerProxy.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\SingletonSystem.cs">
+      <Link>Runtime\Fantasy.Core\Singleton\SingletonSystem.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkThread\NetworkThread.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkThread\NetworkThread.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\SocketExtensions.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\SocketExtensions.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\DataFormat.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\DataFormat.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\DiscriminatedUnion.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\DiscriminatedUnion.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableGetHandler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableGetHandler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\EventSystem\Interface\IEvent.cs">
+      <Link>Runtime\Fantasy.Core\EventSystem\Interface\IEvent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IRouteMessage.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IRouteMessage.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\PrefixStyle.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\PrefixStyle.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Server\TCPServerNetwork.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Server\TCPServerNetwork.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoMemberAttribute.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ProtoMemberAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\AwakeSystem.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\System\AwakeSystem.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UInt64Serializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\UInt64Serializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeModel.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\TypeModel.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\NullDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\NullDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableLockHandler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableLockHandler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IExtension.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\IExtension.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadText.cs">
+      <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadText.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Proto\AProto.cs">
+      <Link>Runtime\Fantasy.Core\Helper\Proto\AProto.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoroutineLock\CoroutineLockQueue.cs">
+      <Link>Runtime\Fantasy.Core\CoroutineLock\CoroutineLockQueue.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Server\KCPServerNetworkChannel.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Server\KCPServerNetworkChannel.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\MessageSender.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\MessageSender.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\SynchronizationContext\ThreadSynchronizationContext.cs">
+      <Link>Runtime\Fantasy.Core\SynchronizationContext\ThreadSynchronizationContext.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Pool.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Pool.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoOperationBehavior.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoOperationBehavior.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoIgnoreAttribute.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ProtoIgnoreAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\EntityDictionary.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\EntityDictionary.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\ANetwork.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Interface\ANetwork.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Audio\AudioManageComponent.cs">
+      <Link>Runtime\Fantasy.App\Audio\AudioManageComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\Packet.cs">
+      <Link>Runtime\Fantasy.Core\Network\PacketParser\Packet.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IMessage.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IMessage.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\IProtoSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\IProtoSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreIfDefaultAttribute.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreIfDefaultAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\PoolWithDisposable.cs">
+      <Link>Runtime\Fantasy.Core\Pool\PoolWithDisposable.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Modules\Session\SessionHeartbeatComponent.cs">
+      <Link>Runtime\Fantasy.Core\Modules\Session\SessionHeartbeatComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\RecyclableMemoryStream.cs">
+      <Link>Runtime\Fantasy.Core\RecyclableMemoryStream\RecyclableMemoryStream.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\JsonHelper.cs">
+      <Link>Runtime\Fantasy.Core\Helper\JsonHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleHelper.cs">
+      <Link>Runtime\Fantasy.App\AssetBundle\AssetBundleHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\EntitiesSystem.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\EntitiesSystem.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoroutineLock\CoroutineLockQueueType.cs">
+      <Link>Runtime\Fantasy.Core\CoroutineLock\CoroutineLockQueueType.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoWriter.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ProtoWriter.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Segment.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Segment.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\DiscriminatedUnion.Serializable.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\DiscriminatedUnion.Serializable.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\Base\World.cs">
+      <Link>Runtime\Fantasy.Core\DataBase\Base\World.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\AckItem.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\AckItem.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\BclHelpers.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\BclHelpers.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableHelper.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Addressable\AddressableHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UInt32Serializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\UInt32Serializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoEnumAttribute.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ProtoEnumAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonElementAttribute.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonElementAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Mongo\StructBsonSerialize.cs">
+      <Link>Runtime\Fantasy.Core\Helper\Mongo\StructBsonSerialize.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerSchedulerCore.cs">
+      <Link>Runtime\Fantasy.Core\TimerScheduler\TimerSchedulerCore.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\OuterMessageScheduler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Scheduler\OuterMessageScheduler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Compiler\CompilerContext.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Compiler\CompilerContext.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoroutineLock\WaitCoroutineLock.cs">
+      <Link>Runtime\Fantasy.Core\CoroutineLock\WaitCoroutineLock.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\SortedOneToManyHashSet.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\SortedOneToManyHashSet.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableUnLockHandler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableUnLockHandler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\Interface\APacketParser.cs">
+      <Link>Runtime\Fantasy.Core\Network\PacketParser\Interface\APacketParser.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\Int16Serializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\Int16Serializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\MessageHelper.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\MessageHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\SortedOneToManyList.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\SortedOneToManyList.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoBehaviorExtensionElement.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoBehaviorExtensionElement.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Builder\AsyncFTaskMethodBuilder.cs">
+      <Link>Runtime\Fantasy.Core\Task\Builder\AsyncFTaskMethodBuilder.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\Interface\IUpdateSingleton.cs">
+      <Link>Runtime\Fantasy.Core\Singleton\Interface\IUpdateSingleton.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\ClientConfigTableManage.cs">
+      <Link>Runtime\Fantasy.Core\Exporter\Excel\ClientConfigTableManage.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Define.cs">
+      <Link>Runtime\Fantasy.Core\Define.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\Interface\TimerHandler.cs">
+      <Link>Runtime\Fantasy.Core\TimerScheduler\Interface\TimerHandler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\BufferPool.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\BufferPool.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableRemoveHandler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableRemoveHandler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoContractAttribute.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ProtoContractAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableNode.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableNode.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DecimalSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\DecimalSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Audio\AudioComponent.cs">
+      <Link>Runtime\Fantasy.App\Audio\AudioComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleInfo.cs">
+      <Link>Runtime\Fantasy.App\AssetBundle\AssetBundleInfo.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadTexture.cs">
+      <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadTexture.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeModel.InputOutput.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\TypeModel.InputOutput.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\OneToManyDictionary.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\OneToManyDictionary.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UILayer.cs">
+      <Link>Runtime\Fantasy.App\UI\Core\UILayer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\BufferExtension.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\BufferExtension.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\Log.cs">
+      <Link>Runtime\Fantasy.Core\Log\Log.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Extensible.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Extensible.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\UpdateAssetBundle.cs">
+      <Link>Runtime\Fantasy.App\AssetBundle\UpdateAssetBundle.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Client\KCPClientNetwork.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Client\KCPClientNetwork.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\INetworkUpdate.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Interface\INetworkUpdate.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoIncludeAttribute.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ProtoIncludeAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ArrayDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ArrayDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoMapAttribute.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ProtoMapAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Client\TCPClientNetwork.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Client\TCPClientNetwork.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonDefaultValueAttribute.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonDefaultValueAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\ClientNetworkComponent.cs">
+      <Link>Runtime\Fantasy.Core\Network\Entity\ClientNetworkComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\KcpHeader.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\KcpHeader.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\KeyValuePairProxy.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\KeyValuePairProxy.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Enum\NetworkTarget.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Enum\NetworkTarget.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IPoolMessage.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IPoolMessage.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadAssetBundle.cs">
+      <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadAssetBundle.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ImmutableCollectionDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ImmutableCollectionDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\CompiledSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\CompiledSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SingleSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\SingleSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UILayerComponent.cs">
+      <Link>Runtime\Fantasy.App\UI\Core\UILayerComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\MachineConfigInfo.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Server\MachineConfigInfo.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\EventArgs.cs">
+      <Link>Runtime\Fantasy.Core\RecyclableMemoryStream\EventArgs.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Define.cs">
+      <Link>Runtime\Fantasy.App\Define.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\BooleanSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\BooleanSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIdAttribute.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIdAttribute.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Compiler\CompilerDelegates.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Compiler\CompilerDelegates.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Scheduler\ANetworkMessageScheduler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Interface\Scheduler\ANetworkMessageScheduler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\MongoDataBase.cs">
+      <Link>Runtime\Fantasy.Core\DataBase\MongoDataBase.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Assembly\AssemblyInfo.cs">
+      <Link>Runtime\Fantasy.Core\Assembly\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleVersionInfo.cs">
+      <Link>Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleVersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\GuidSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\GuidSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IProtoOutputT.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\IProtoOutputT.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\XmlProtoSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ServiceModel\XmlProtoSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Scene\Scene.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Scene\Scene.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerAction.cs">
+      <Link>Runtime\Fantasy.Core\TimerScheduler\TimerAction.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoReader.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ProtoReader.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ListDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ListDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedDataBase.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedDataBase.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Dispatcher\Response.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Dispatcher\Response.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\InnerPacketParser.cs">
+      <Link>Runtime\Fantasy.Core\Network\PacketParser\InnerPacketParser.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\CharSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\CharSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ImplicitFields.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\ImplicitFields.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\Events.cs">
+      <Link>Runtime\Fantasy.Core\RecyclableMemoryStream\Events.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Protocols\CoreMessageProtocols.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Protocols\CoreMessageProtocols.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\CircularBuffer.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\CircularBuffer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISingleCollectionRoot.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\ISingleCollectionRoot.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeFormatEventArgs.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\TypeFormatEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TagDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\TagDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SByteSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\SByteSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\PropertyDecorator.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\PropertyDecorator.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SystemTypeSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\SystemTypeSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\SubType.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Meta\SubType.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ConcurrentOneToManyList.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\ConcurrentOneToManyList.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\StringSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\StringSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Route\RouteComponent.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Route\RouteComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Modules\Route\LinkEntityComponent.cs">
+      <Link>Runtime\Fantasy.Core\Modules\Route\LinkEntityComponent.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\EnumSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\EnumSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Mongo\MongoHelper.cs">
+      <Link>Runtime\Fantasy.Core\Helper\Mongo\MongoHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IDestroySystem.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\System\IDestroySystem.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\RecyclableMemoryStreamManager.cs">
+      <Link>Runtime\Fantasy.Core\RecyclableMemoryStream\RecyclableMemoryStreamManager.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\EventSystem\EventSystem.cs">
+      <Link>Runtime\Fantasy.Core\EventSystem\EventSystem.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\WireType.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\WireType.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\RouteIdStruct.cs">
+      <Link>Runtime\Fantasy.Core\IdFactory\RouteIdStruct.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadByte.cs">
+      <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadByte.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Dispatcher\Opcode.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Dispatcher\Opcode.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\BlobSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\BlobSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\NLog.cs">
+      <Link>Runtime\Fantasy.Core\Log\NLog.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TupleSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\TupleSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SubItemSerializer.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\SubItemSerializer.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\ClientMessageScheduler.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Scheduler\ClientMessageScheduler.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\Server.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Server\Server.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\OneToManyList.cs">
+      <Link>Runtime\Fantasy.Core\DataStructure\Collection\OneToManyList.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\PoolCore.cs">
+      <Link>Runtime\Fantasy.Core\Pool\PoolCore.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\csc.rsp">
+      <Link>csc.rsp</Link>
+    </None>
+    <None Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\VERSION.txt">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\VERSION.txt</Link>
+    </None>
+    <None Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Fantasy.Unity.asmdef">
+      <Link>Fantasy.Unity.asmdef</Link>
+    </None>
+    <None Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\LICENSE.txt">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\LICENSE.txt</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.AIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.ARModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.AccessibilityModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.AndroidJNIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClothModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterInputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterRendererModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ContentLoadModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.ContentLoadModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.CrashReportingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.DSPGraphModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.DirectorModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GIModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.GIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.GameCenterModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.GridModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.HotReloadModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.JSONSerializeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.LocalizationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.PerformanceReportingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ProfilerModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.ProfilerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PropertiesModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.PropertiesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.ScreenCaptureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.SharedInternalsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.SpriteMaskModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.SpriteShapeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.StreamingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.SubstanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.SubsystemsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.TLSModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.TerrainModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreFontEngineModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreTextEngineModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.TilemapModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UIElementsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UmbraModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityConnectModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityCurlModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityCurlModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VFXModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.VFXModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.VRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.VehiclesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.VideoModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VirtualTexturingModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.VirtualTexturingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.WindModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.XRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.CoreModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.DeviceSimulatorModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.DeviceSimulatorModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.DiagnosticsModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.DiagnosticsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.EditorToolbarModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.EditorToolbarModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GraphViewModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.GraphViewModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.PresetsUIModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.PresetsUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.QuickSearchModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.QuickSearchModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SceneTemplateModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.SceneTemplateModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SceneViewModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.SceneViewModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TextCoreFontEngineModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.TextCoreFontEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TextCoreTextEngineModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.TextCoreTextEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIBuilderModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.UIBuilderModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIElementsModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.UIElementsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIElementsSamplesModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.UIElementsSamplesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UnityConnectModule">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.YamlDotNet">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="log4netPlastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.IonicZip">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.TextureAssets">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="unityplastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.AppContext">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.AppContext.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Buffers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.Concurrent">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.Concurrent.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.NonGeneric">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.NonGeneric.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.Specialized">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.Specialized.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.EventBasedAsync">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.EventBasedAsync.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Primitives">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.TypeConverter">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.TypeConverter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Console">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Console.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Common">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Data.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Contracts">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Contracts.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Debug">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Debug.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.FileVersionInfo">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.FileVersionInfo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Process">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Process.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.StackTrace.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.TextWriterTraceListener">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.TextWriterTraceListener.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tools">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Tools.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.TraceSource">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.TraceSource.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tracing">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Tracing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Drawing.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Dynamic.Runtime">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Dynamic.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Globalization.Calendars.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Globalization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Extensions">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Globalization.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.Compression.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.ZipFile">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.DriveInfo">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.DriveInfo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Watcher">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.Watcher.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.IsolatedStorage">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.IsolatedStorage.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.MemoryMappedFiles">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.MemoryMappedFiles.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Pipes">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.Pipes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.UnmanagedMemoryStream">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.UnmanagedMemoryStream.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.Expressions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Parallel">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.Parallel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Queryable">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.Queryable.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Memory.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Http.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.NameResolution">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.NameResolution.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.NetworkInformation">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.NetworkInformation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Ping">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Ping.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Primitives">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Requests">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Requests.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Security">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Security.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Sockets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebHeaderCollection">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.WebHeaderCollection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebSockets.Client">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.WebSockets.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebSockets">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.WebSockets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Numerics.Vectors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ObjectModel">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ObjectModel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.DispatchProxy">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.DispatchProxy.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Emit.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.ILGeneration">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Emit.ILGeneration.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.Lightweight">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Emit.Lightweight.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Extensions">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Primitives">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.Reader">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Resources.Reader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.ResourceManager">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Resources.ResourceManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.Writer">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Resources.Writer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.VisualC">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.CompilerServices.VisualC.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Handles">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Handles.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.InteropServices.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Numerics">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Numerics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Formatters.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Json">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Primitives">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Xml">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Xml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Claims">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Claims.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Csp">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Csp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Principal">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Principal.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.SecureString">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.SecureString.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.Encoding">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Text.Encoding.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.Encoding.Extensions">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Text.Encoding.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Text.RegularExpressions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Overlapped">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Overlapped.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Tasks.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Parallel">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Tasks.Parallel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Thread">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Thread.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.ThreadPool">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.ThreadPool.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Timer">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Timer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ValueTuple.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.ReaderWriter">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XDocument">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlDocument">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XmlDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlSerializer">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XmlSerializer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XPath.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XPath.XDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.WindowsRuntime">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\Extensions\2.0.0\System.Runtime.InteropServices.WindowsRuntime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\mscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.ComponentModel.Composition.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Drawing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.IO.Compression.FileSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Numerics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Runtime.Serialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.ServiceModel.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Transactions">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Transactions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Windows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Serialization">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  <ItemGroup>
+    <ProjectCapability Remove="LaunchProfiles" />
+    <ProjectCapability Remove="SharedProjectReferences" />
+    <ProjectCapability Remove="ReferenceManagerSharedProjects" />
+    <ProjectCapability Remove="ProjectReferences" />
+    <ProjectCapability Remove="ReferenceManagerProjects" />
+    <ProjectCapability Remove="COMReferences" />
+    <ProjectCapability Remove="ReferenceManagerCOM" />
+    <ProjectCapability Remove="AssemblyReferences" />
+    <ProjectCapability Remove="ReferenceManagerAssemblies" />
+  </ItemGroup>
+</Project>
