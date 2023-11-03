@@ -1,26 +1,21 @@
-﻿<Project ToolsVersion="Current">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
   <PropertyGroup>
-    <BaseIntermediateOutputPath>Temp\obj\$(Configuration)\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-  </PropertyGroup>
-  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
-  <ItemGroup>
-    <ProjectCapability Include="Unity" />
-  </ItemGroup>
-  <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <EnableDefaultItems>false</EnableDefaultItems>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9.0</LangVersion>
-    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
+    <ProjectGuid>{8BA55FD8-A9AC-F08B-E827-074457206988}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Fantasy.Unity</AssemblyName>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -44,962 +39,964 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <NoStandardLibraries>true</NoStandardLibraries>
-    <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
-    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
-    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
+    <NoStdLib>true</NoStdLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
+    <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <PropertyGroup>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.22</UnityProjectGeneratorVersion>
-    <UnityProjectGeneratorStyle>SDK</UnityProjectGeneratorStyle>
+    <UnityProjectGeneratorStyle>Legacy</UnityProjectGeneratorStyle>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2022.3.6f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="D:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="D:\Program Files\Unity\2022.3.6f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="D:\Program Files\Unity\2022.3.6f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\EntityReference.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\EntityReference.cs">
       <Link>Runtime\Fantasy.Core\Entitas\EntityReference.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\FantasySettingsHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\FantasySettingsHelper.cs">
       <Link>Runtime\Fantasy.Core\FantasySettingsHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\OneToManySortedDictionary.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\OneToManySortedDictionary.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\OneToManySortedDictionary.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Partial\FTask.Pool.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Partial\FTask.Pool.cs">
       <Link>Runtime\Fantasy.Core\Task\Partial\FTask.Pool.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableRouteComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableRouteComponent.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Addressable\AddressableRouteComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UI.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UI.cs">
       <Link>Runtime\Fantasy.App\UI\Core\UI.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ConcurrentOneToManyQueue.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ConcurrentOneToManyQueue.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\ConcurrentOneToManyQueue.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ReflectedUriDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ReflectedUriDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ReflectedUriDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\Dictionary\IntDictionaryConfig.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\Dictionary\IntDictionaryConfig.cs">
       <Link>Runtime\Fantasy.Core\Exporter\Excel\Dictionary\IntDictionaryConfig.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\PriorityQueue.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\PriorityQueue.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\PriorityQueue.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoEndpointBehavior.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoEndpointBehavior.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoEndpointBehavior.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FTaskCompleted.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FTaskCompleted.cs">
       <Link>Runtime\Fantasy.Core\Task\FTaskCompleted.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Dispatcher\MessageDispatcherSystem.cs">
-      <Link>Runtime\Fantasy.Core\Network\Message\Dispatcher\MessageDispatcherSystem.cs</Link>
-    </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Partial\FTask.Factory.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Partial\FTask.Factory.cs">
       <Link>Runtime\Fantasy.Core\Task\Partial\FTask.Factory.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\EntityIdStruct.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\EntityIdStruct.cs">
       <Link>Runtime\Fantasy.Core\IdFactory\EntityIdStruct.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Exception\ScanException.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Dispatcher\MessageDispatcherSystem.cs">
+      <Link>Runtime\Fantasy.Core\Network\Message\Dispatcher\MessageDispatcherSystem.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Exception\ScanException.cs">
       <Link>Runtime\Fantasy.Core\Network\Exception\ScanException.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\ServerConfigTableManage.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\ServerConfigTableManage.cs">
       <Link>Runtime\Fantasy.Core\Exporter\Excel\ServerConfigTableManage.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IEntitiesSystem.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IEntitiesSystem.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Interface\System\IEntitiesSystem.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IBsonMessage.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IBsonMessage.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IBsonMessage.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Helpers.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Helpers.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Helpers.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Kcp.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Kcp.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Kcp.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UInt16Serializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UInt16Serializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\UInt16Serializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerType.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerType.cs">
       <Link>Runtime\Fantasy.Core\TimerScheduler\TimerType.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Utils.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Utils.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Utils.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DateTimeSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DateTimeSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\DateTimeSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\SubItemToken.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\SubItemToken.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\SubItemToken.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Extend\ButtonExtend.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Extend\ButtonExtend.cs">
       <Link>Runtime\Fantasy.App\UI\Extend\ButtonExtend.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FCancellationToken.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FCancellationToken.cs">
       <Link>Runtime\Fantasy.Core\Task\FCancellationToken.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Compiler\Local.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Compiler\Local.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Compiler\Local.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\SingleCollection\SingleCollection.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\SingleCollection\SingleCollection.cs">
       <Link>Runtime\Fantasy.Core\SingleCollection\SingleCollection.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ReuseList.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ReuseList.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\ReuseList.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\ServerNetworkComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\ServerNetworkComponent.cs">
       <Link>Runtime\Fantasy.Core\Network\Entity\ServerNetworkComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\HashSetPool.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\HashSetPool.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\HashSetPool.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedTransfer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedTransfer.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedTransfer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IUpdateSystem.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IUpdateSystem.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Interface\System\IUpdateSystem.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedMultiEntity.cs">
-      <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedMultiEntity.cs</Link>
-    </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UriDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UriDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\UriDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkThread\NetAction.cs">
-      <Link>Runtime\Fantasy.Core\Network\NetworkThread\NetAction.cs</Link>
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedMultiEntity.cs">
+      <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedMultiEntity.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ByteSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ByteSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ByteSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\ReuseDictionary.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkThread\NetAction.cs">
+      <Link>Runtime\Fantasy.Core\Network\NetworkThread\NetAction.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\ReuseDictionary.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\ReuseDictionary.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoBehaviorAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoBehaviorAttribute.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoBehaviorAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\RuntimeTypeModel.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\RuntimeTypeModel.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\RuntimeTypeModel.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableDesc.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableDesc.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableDesc.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IProtoInputT.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IProtoInputT.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\IProtoInputT.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerScheduler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerScheduler.cs">
       <Link>Runtime\Fantasy.Core\TimerScheduler\TimerScheduler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Handler\IRouteMessageHandler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Handler\IRouteMessageHandler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Interface\Handler\IRouteMessageHandler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\ByteHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\ByteHelper.cs">
       <Link>Runtime\Fantasy.Core\Helper\ByteHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Partial\FTask.WhenAll.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Partial\FTask.WhenAll.cs">
       <Link>Runtime\Fantasy.Core\Task\Partial\FTask.WhenAll.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\OneToManyHashSet.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\OneToManyHashSet.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\OneToManyHashSet.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TypeSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TypeSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\TypeSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Enum\NetworkProtocolType.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Enum\NetworkProtocolType.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\Enum\NetworkProtocolType.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedSingleCollection.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedSingleCollection.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedSingleCollection.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\AssemblyInfo.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\AssemblyInfo.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Builder\AsyncFVoidMethodBuilder.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Builder\AsyncFVoidMethodBuilder.cs">
       <Link>Runtime\Fantasy.Core\Task\Builder\AsyncFVoidMethodBuilder.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\EntityList.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\EntityList.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\EntityList.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableManageComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableManageComponent.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Addressable\AddressableManageComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\ProtoSyntax.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\ProtoSyntax.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\ProtoSyntax.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\OuterPacketParser.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\OuterPacketParser.cs">
       <Link>Runtime\Fantasy.Core\Network\PacketParser\OuterPacketParser.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ParseableSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ParseableSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ParseableSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\OneToManyQueue.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\OneToManyQueue.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\OneToManyQueue.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreIfNullAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreIfNullAttribute.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreIfNullAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UIComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UIComponent.cs">
       <Link>Runtime\Fantasy.App\UI\Core\UIComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\Download.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\Download.cs">
       <Link>Runtime\Fantasy.App\Fantasy.Download\Download.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IExtensible.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IExtensible.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\IExtensible.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SurrogateSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SurrogateSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\SurrogateSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Scene\SceneEvent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Scene\SceneEvent.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Scene\SceneEvent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\AttributeMap.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\AttributeMap.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\AttributeMap.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\GlobalSuppressions.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\GlobalSuppressions.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\GlobalSuppressions.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\RandomHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\RandomHelper.cs">
       <Link>Runtime\Fantasy.Core\Helper\RandomHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableMessageComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableMessageComponent.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Addressable\AddressableMessageComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Interface\IConfigTable.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Interface\IConfigTable.cs">
       <Link>Runtime\Fantasy.Core\Exporter\Interface\IConfigTable.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Handler\IMessageHandler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Handler\IMessageHandler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Interface\Handler\IMessageHandler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Helper\NetworkHelper.cs">
-      <Link>Runtime\Fantasy.Core\Network\Base\Helper\NetworkHelper.cs</Link>
-    </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\RuntimeIdStruct.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\RuntimeIdStruct.cs">
       <Link>Runtime\Fantasy.Core\IdFactory\RuntimeIdStruct.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DoubleSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Helper\NetworkHelper.cs">
+      <Link>Runtime\Fantasy.Core\Network\Base\Helper\NetworkHelper.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DoubleSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\DoubleSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\SerializationContext.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\SerializationContext.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\SerializationContext.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\AClientNetwork.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\AClientNetwork.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\Interface\AClientNetwork.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Application.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Application.cs">
       <Link>Runtime\Fantasy.App\Application.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\AudioHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\AudioHelper.cs">
       <Link>Runtime\Fantasy.Core\Helper\AudioHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\DictionaryExtensions.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\DictionaryExtensions.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\DictionaryExtensions.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoreErrorCode.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoreErrorCode.cs">
       <Link>Runtime\Fantasy.Core\CoreErrorCode.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ProtoDecoratorBase.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ProtoDecoratorBase.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ProtoDecoratorBase.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\CallbackAttributes.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\CallbackAttributes.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\CallbackAttributes.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\MemberSpecifiedDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\MemberSpecifiedDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\MemberSpecifiedDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\SortedConcurrentOneToManyList.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\SortedConcurrentOneToManyList.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\SortedConcurrentOneToManyList.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadSprite.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadSprite.cs">
       <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadSprite.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\FieldDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\FieldDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\FieldDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ExtensibleUtil.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ExtensibleUtil.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ExtensibleUtil.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\Interface\ISingleton.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\Interface\ISingleton.cs">
       <Link>Runtime\Fantasy.Core\Singleton\Interface\ISingleton.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\ServerConfigInfo.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\ServerConfigInfo.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\Server\ServerConfigInfo.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\CryptHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\CryptHelper.cs">
       <Link>Runtime\Fantasy.Core\Helper\CryptHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTable.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTable.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTable.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Scheduler\INetworkMessageSchedulerHandler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Scheduler\INetworkMessageSchedulerHandler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Interface\Scheduler\INetworkMessageSchedulerHandler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\KCPSettings.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\KCPSettings.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\KCPSettings.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadAudioClip.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadAudioClip.cs">
       <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadAudioClip.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\TimeHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\TimeHelper.cs">
       <Link>Runtime\Fantasy.Core\Helper\TimeHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\DictionaryPool.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\DictionaryPool.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\DictionaryPool.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Entry.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Entry.cs">
       <Link>Runtime\Fantasy.App\Entry.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleCheckStage.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleCheckStage.cs">
       <Link>Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleCheckStage.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\CoreRouteType.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\CoreRouteType.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Scheduler\CoreRouteType.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreAttribute.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\MD5Helper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\MD5Helper.cs">
       <Link>Runtime\Fantasy.Core\Helper\MD5Helper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableBase.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableBase.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableBase.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Proto\ProtoBufHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Proto\ProtoBufHelper.cs">
       <Link>Runtime\Fantasy.Core\Helper\Proto\ProtoBufHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\OnNetworkMessageUpdateCheckTimeout.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\OnNetworkMessageUpdateCheckTimeout.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\OnNetworkMessageUpdateCheckTimeout.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\Dictionary\StringDictionaryConfig.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\Dictionary\StringDictionaryConfig.cs">
       <Link>Runtime\Fantasy.Core\Exporter\Excel\Dictionary\StringDictionaryConfig.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\Pool.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\Pool.cs">
       <Link>Runtime\Fantasy.Core\Pool\Pool.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Server\TCPServerNetworkChannel.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Server\TCPServerNetworkChannel.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Server\TCPServerNetworkChannel.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\MetaType.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\MetaType.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\MetaType.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\CallbackSet.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\CallbackSet.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\CallbackSet.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\Int64Serializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\Int64Serializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\Int64Serializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\AUnityDownload.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\AUnityDownload.cs">
       <Link>Runtime\Fantasy.App\Fantasy.Download\AUnityDownload.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\SceneConfigInfo.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\SceneConfigInfo.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\Server\SceneConfigInfo.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\Session\ServerInnerSession.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\Session\ServerInnerSession.cs">
       <Link>Runtime\Fantasy.Core\Network\Entity\Session\ServerInnerSession.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DefaultValueDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DefaultValueDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\DefaultValueDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IDeserializeSystem.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IDeserializeSystem.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Interface\System\IDeserializeSystem.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\ANetworkChannel.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\ANetworkChannel.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\Interface\ANetworkChannel.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\InnerMessageScheduler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\InnerMessageScheduler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Scheduler\InnerMessageScheduler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\FileHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\FileHelper.cs">
       <Link>Runtime\Fantasy.Core\Helper\FileHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableAddHandler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableAddHandler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableAddHandler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleUpdate.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleUpdate.cs">
       <Link>Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleUpdate.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\DoubleMapDictionary.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\DoubleMapDictionary.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\DoubleMapDictionary.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\ConcurrentPool.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\ConcurrentPool.cs">
       <Link>Runtime\Fantasy.Core\Pool\ConcurrentPool.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\NetObjectSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\NetObjectSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\NetObjectSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\ILog.cs">
-      <Link>Runtime\Fantasy.Core\Log\ILog.cs</Link>
-    </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\Session\Session.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\Session\Session.cs">
       <Link>Runtime\Fantasy.Core\Network\Entity\Session\Session.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Entity.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\ILog.cs">
+      <Link>Runtime\Fantasy.Core\Log\ILog.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Entity.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Entity.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\Base\WorldConfigInfo.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\Base\WorldConfigInfo.cs">
       <Link>Runtime\Fantasy.Core\DataBase\Base\WorldConfigInfo.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\Singleton.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\Singleton.cs">
       <Link>Runtime\Fantasy.Core\Singleton\Singleton.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\Base\IDateBase.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\Base\IDateBase.cs">
       <Link>Runtime\Fantasy.Core\DataBase\Base\IDateBase.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Assembly\AssemblyManager.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Assembly\AssemblyManager.cs">
       <Link>Runtime\Fantasy.Core\Assembly\AssemblyManager.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoConverterAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoConverterAttribute.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ProtoConverterAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Server\KCPServerNetwork.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Server\KCPServerNetwork.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Server\KCPServerNetwork.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Enum\NetworkType.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Enum\NetworkType.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\Enum\NetworkType.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ListPool.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ListPool.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\ListPool.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\MapDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\MapDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\MapDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeAddedEventArgs.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeAddedEventArgs.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\TypeAddedEventArgs.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Modules\Session\SessionIdleCheckerComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Modules\Session\SessionIdleCheckerComponent.cs">
       <Link>Runtime\Fantasy.Core\Modules\Session\SessionIdleCheckerComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FTask.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FTask.cs">
       <Link>Runtime\Fantasy.Core\Task\FTask.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\UnityLog.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\UnityLog.cs">
       <Link>Runtime\Fantasy.Core\Log\UnityLog.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FVoid.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\FVoid.cs">
       <Link>Runtime\Fantasy.Core\Task\FVoid.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TimeSpanSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TimeSpanSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\TimeSpanSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\ValueMember.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\ValueMember.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\ValueMember.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoException.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoException.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ProtoException.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\Int32Serializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\Int32Serializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\Int32Serializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\IProtoTypeSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\IProtoTypeSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\IProtoTypeSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\IdFactory.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\IdFactory.cs">
       <Link>Runtime\Fantasy.Core\IdFactory\IdFactory.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\Interface\APackInfo.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\Interface\APackInfo.cs">
       <Link>Runtime\Fantasy.Core\Network\PacketParser\Interface\APackInfo.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\NetObjectCache.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\NetObjectCache.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\NetObjectCache.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Builder\AsyncFTaskCompletedMethodBuilder.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Builder\AsyncFTaskCompletedMethodBuilder.cs">
       <Link>Runtime\Fantasy.Core\Task\Builder\AsyncFTaskCompletedMethodBuilder.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\BasicList.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\BasicList.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\BasicList.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\FantasyUI.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\FantasyUI.cs">
       <Link>Runtime\Fantasy.App\UI\Core\FantasyUI.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\MemoryStreamHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\MemoryStreamHelper.cs">
       <Link>Runtime\Fantasy.Core\Helper\MemoryStreamHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\INotSupportedPool.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\INotSupportedPool.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\INotSupportedPool.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ISerializerProxy.cs">
-      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ISerializerProxy.cs</Link>
-    </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\SingletonSystem.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\SingletonSystem.cs">
       <Link>Runtime\Fantasy.Core\Singleton\SingletonSystem.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkThread\NetworkThread.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ISerializerProxy.cs">
+      <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ISerializerProxy.cs</Link>
+    </Compile>
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkThread\NetworkThread.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkThread\NetworkThread.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\SocketExtensions.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\SocketExtensions.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\SocketExtensions.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\DataFormat.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\DataFormat.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\DataFormat.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\DiscriminatedUnion.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\DiscriminatedUnion.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\DiscriminatedUnion.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableGetHandler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableGetHandler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableGetHandler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\EventSystem\Interface\IEvent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\EventSystem\Interface\IEvent.cs">
       <Link>Runtime\Fantasy.Core\EventSystem\Interface\IEvent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IRouteMessage.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IRouteMessage.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IRouteMessage.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\PrefixStyle.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\PrefixStyle.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\PrefixStyle.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Server\TCPServerNetwork.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Server\TCPServerNetwork.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Server\TCPServerNetwork.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoMemberAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoMemberAttribute.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ProtoMemberAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\AwakeSystem.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\AwakeSystem.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Interface\System\AwakeSystem.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UInt64Serializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UInt64Serializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\UInt64Serializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeModel.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeModel.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\TypeModel.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\NullDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\NullDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\NullDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableLockHandler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableLockHandler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableLockHandler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IExtension.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IExtension.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\IExtension.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadText.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadText.cs">
       <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadText.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Proto\AProto.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Proto\AProto.cs">
       <Link>Runtime\Fantasy.Core\Helper\Proto\AProto.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoroutineLock\CoroutineLockQueue.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoroutineLock\CoroutineLockQueue.cs">
       <Link>Runtime\Fantasy.Core\CoroutineLock\CoroutineLockQueue.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Server\KCPServerNetworkChannel.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Server\KCPServerNetworkChannel.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Server\KCPServerNetworkChannel.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\MessageSender.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\MessageSender.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\MessageSender.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\SynchronizationContext\ThreadSynchronizationContext.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\SynchronizationContext\ThreadSynchronizationContext.cs">
       <Link>Runtime\Fantasy.Core\SynchronizationContext\ThreadSynchronizationContext.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Pool.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Pool.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Pool.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoOperationBehavior.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoOperationBehavior.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoOperationBehavior.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoIgnoreAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoIgnoreAttribute.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ProtoIgnoreAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\EntityDictionary.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\EntityDictionary.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\EntityDictionary.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\ANetwork.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\ANetwork.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\Interface\ANetwork.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Audio\AudioManageComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Audio\AudioManageComponent.cs">
       <Link>Runtime\Fantasy.App\Audio\AudioManageComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\Packet.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\Packet.cs">
       <Link>Runtime\Fantasy.Core\Network\PacketParser\Packet.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IMessage.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IMessage.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IMessage.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\IProtoSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\IProtoSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\IProtoSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreIfDefaultAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreIfDefaultAttribute.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIgnoreIfDefaultAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\PoolWithDisposable.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\PoolWithDisposable.cs">
       <Link>Runtime\Fantasy.Core\Pool\PoolWithDisposable.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Modules\Session\SessionHeartbeatComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Modules\Session\SessionHeartbeatComponent.cs">
       <Link>Runtime\Fantasy.Core\Modules\Session\SessionHeartbeatComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\RecyclableMemoryStream.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\RecyclableMemoryStream.cs">
       <Link>Runtime\Fantasy.Core\RecyclableMemoryStream\RecyclableMemoryStream.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\JsonHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\JsonHelper.cs">
       <Link>Runtime\Fantasy.Core\Helper\JsonHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleHelper.cs">
       <Link>Runtime\Fantasy.App\AssetBundle\AssetBundleHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\EntitiesSystem.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\EntitiesSystem.cs">
       <Link>Runtime\Fantasy.Core\Entitas\EntitiesSystem.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoroutineLock\CoroutineLockQueueType.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoroutineLock\CoroutineLockQueueType.cs">
       <Link>Runtime\Fantasy.Core\CoroutineLock\CoroutineLockQueueType.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoWriter.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoWriter.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ProtoWriter.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Segment.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Segment.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\Segment.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\DiscriminatedUnion.Serializable.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\DiscriminatedUnion.Serializable.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\DiscriminatedUnion.Serializable.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\Base\World.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\Base\World.cs">
       <Link>Runtime\Fantasy.Core\DataBase\Base\World.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\AckItem.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\AckItem.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\kcp\AckItem.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\BclHelpers.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\BclHelpers.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\BclHelpers.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\AddressableHelper.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Addressable\AddressableHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UInt32Serializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\UInt32Serializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\UInt32Serializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoEnumAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoEnumAttribute.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ProtoEnumAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonElementAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonElementAttribute.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonElementAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Mongo\StructBsonSerialize.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Mongo\StructBsonSerialize.cs">
       <Link>Runtime\Fantasy.Core\Helper\Mongo\StructBsonSerialize.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerSchedulerCore.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerSchedulerCore.cs">
       <Link>Runtime\Fantasy.Core\TimerScheduler\TimerSchedulerCore.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\OuterMessageScheduler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\OuterMessageScheduler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Scheduler\OuterMessageScheduler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Compiler\CompilerContext.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Compiler\CompilerContext.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Compiler\CompilerContext.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoroutineLock\WaitCoroutineLock.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\CoroutineLock\WaitCoroutineLock.cs">
       <Link>Runtime\Fantasy.Core\CoroutineLock\WaitCoroutineLock.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\SortedOneToManyHashSet.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\SortedOneToManyHashSet.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\SortedOneToManyHashSet.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableUnLockHandler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableUnLockHandler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableUnLockHandler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\Interface\APacketParser.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\Interface\APacketParser.cs">
       <Link>Runtime\Fantasy.Core\Network\PacketParser\Interface\APacketParser.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\Int16Serializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\Int16Serializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\Int16Serializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\MessageHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\MessageHelper.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\MessageHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\SortedOneToManyList.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\SortedOneToManyList.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\SortedOneToManyList.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoBehaviorExtensionElement.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoBehaviorExtensionElement.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ServiceModel\ProtoBehaviorExtensionElement.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Builder\AsyncFTaskMethodBuilder.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Task\Builder\AsyncFTaskMethodBuilder.cs">
       <Link>Runtime\Fantasy.Core\Task\Builder\AsyncFTaskMethodBuilder.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\Interface\IUpdateSingleton.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Singleton\Interface\IUpdateSingleton.cs">
       <Link>Runtime\Fantasy.Core\Singleton\Interface\IUpdateSingleton.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\ClientConfigTableManage.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Exporter\Excel\ClientConfigTableManage.cs">
       <Link>Runtime\Fantasy.Core\Exporter\Excel\ClientConfigTableManage.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Define.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Define.cs">
       <Link>Runtime\Fantasy.Core\Define.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\Interface\TimerHandler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\Interface\TimerHandler.cs">
       <Link>Runtime\Fantasy.Core\TimerScheduler\Interface\TimerHandler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\BufferPool.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\BufferPool.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\BufferPool.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableRemoveHandler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableRemoveHandler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Addressable\Handler\I_AddressableRemoveHandler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoContractAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoContractAttribute.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ProtoContractAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableNode.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableNode.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\SkipTable\SkipTableNode.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DecimalSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\DecimalSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\DecimalSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Audio\AudioComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Audio\AudioComponent.cs">
       <Link>Runtime\Fantasy.App\Audio\AudioComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleInfo.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleInfo.cs">
       <Link>Runtime\Fantasy.App\AssetBundle\AssetBundleInfo.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadTexture.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadTexture.cs">
       <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadTexture.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeModel.InputOutput.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeModel.InputOutput.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\TypeModel.InputOutput.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\OneToManyDictionary.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Dictionary\OneToManyDictionary.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Dictionary\OneToManyDictionary.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UILayer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UILayer.cs">
       <Link>Runtime\Fantasy.App\UI\Core\UILayer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\BufferExtension.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\BufferExtension.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\BufferExtension.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\Log.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\Log.cs">
       <Link>Runtime\Fantasy.Core\Log\Log.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Extensible.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Extensible.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Extensible.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\UpdateAssetBundle.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\UpdateAssetBundle.cs">
       <Link>Runtime\Fantasy.App\AssetBundle\UpdateAssetBundle.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Client\KCPClientNetwork.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Client\KCPClientNetwork.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Client\KCPClientNetwork.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\INetworkUpdate.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Interface\INetworkUpdate.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\Interface\INetworkUpdate.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoIncludeAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoIncludeAttribute.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ProtoIncludeAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ArrayDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ArrayDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ArrayDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoMapAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoMapAttribute.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ProtoMapAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Client\TCPClientNetwork.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Client\TCPClientNetwork.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\TCP\Client\TCPClientNetwork.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonDefaultValueAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonDefaultValueAttribute.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonDefaultValueAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\ClientNetworkComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Entity\ClientNetworkComponent.cs">
       <Link>Runtime\Fantasy.Core\Network\Entity\ClientNetworkComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\KcpHeader.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\KcpHeader.cs">
       <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\KcpHeader.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\KeyValuePairProxy.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\KeyValuePairProxy.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\KeyValuePairProxy.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Enum\NetworkTarget.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Enum\NetworkTarget.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\Enum\NetworkTarget.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IPoolMessage.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IPoolMessage.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Interface\Protocol\IPoolMessage.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadAssetBundle.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadAssetBundle.cs">
       <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadAssetBundle.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ImmutableCollectionDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ImmutableCollectionDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ImmutableCollectionDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\CompiledSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\CompiledSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\CompiledSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SingleSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SingleSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\SingleSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UILayerComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\UI\Core\UILayerComponent.cs">
       <Link>Runtime\Fantasy.App\UI\Core\UILayerComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\MachineConfigInfo.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\MachineConfigInfo.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\Server\MachineConfigInfo.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\EventArgs.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\EventArgs.cs">
       <Link>Runtime\Fantasy.Core\RecyclableMemoryStream\EventArgs.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Define.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Define.cs">
       <Link>Runtime\Fantasy.App\Define.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\BooleanSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\BooleanSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\BooleanSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIdAttribute.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIdAttribute.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Unity\Attributes\BsonIdAttribute.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Compiler\CompilerDelegates.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Compiler\CompilerDelegates.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Compiler\CompilerDelegates.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Scheduler\ANetworkMessageScheduler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Interface\Scheduler\ANetworkMessageScheduler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Interface\Scheduler\ANetworkMessageScheduler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\MongoDataBase.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataBase\MongoDataBase.cs">
       <Link>Runtime\Fantasy.Core\DataBase\MongoDataBase.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Assembly\AssemblyInfo.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Assembly\AssemblyInfo.cs">
       <Link>Runtime\Fantasy.Core\Assembly\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleVersionInfo.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleVersionInfo.cs">
       <Link>Runtime\Fantasy.App\AssetBundle\AssetBundleCheck\AssetBundleVersionInfo.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\GuidSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\GuidSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\GuidSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IProtoOutputT.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\IProtoOutputT.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\IProtoOutputT.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\XmlProtoSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ServiceModel\XmlProtoSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ServiceModel\XmlProtoSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Scene\Scene.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Scene\Scene.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Scene\Scene.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerAction.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\TimerScheduler\TimerAction.cs">
       <Link>Runtime\Fantasy.Core\TimerScheduler\TimerAction.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoReader.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ProtoReader.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ProtoReader.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ListDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\ListDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\ListDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedDataBase.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedDataBase.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\ISupportedDataBase.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Dispatcher\Response.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Dispatcher\Response.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Dispatcher\Response.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\InnerPacketParser.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\PacketParser\InnerPacketParser.cs">
       <Link>Runtime\Fantasy.Core\Network\PacketParser\InnerPacketParser.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\CharSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\CharSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\CharSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ImplicitFields.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\ImplicitFields.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\ImplicitFields.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\Events.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\Events.cs">
       <Link>Runtime\Fantasy.Core\RecyclableMemoryStream\Events.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Protocols\CoreMessageProtocols.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Protocols\CoreMessageProtocols.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Protocols\CoreMessageProtocols.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\CircularBuffer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\CircularBuffer.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\CircularBuffer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISingleCollectionRoot.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\Supported\ISingleCollectionRoot.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Interface\Supported\ISingleCollectionRoot.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeFormatEventArgs.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\TypeFormatEventArgs.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\TypeFormatEventArgs.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TagDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TagDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\TagDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SByteSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SByteSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\SByteSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\PropertyDecorator.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\PropertyDecorator.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\PropertyDecorator.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SystemTypeSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SystemTypeSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\SystemTypeSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\SubType.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Meta\SubType.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Meta\SubType.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ConcurrentOneToManyList.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\ConcurrentOneToManyList.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\ConcurrentOneToManyList.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\StringSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\StringSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\StringSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Route\RouteComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Route\RouteComponent.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Route\RouteComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Modules\Route\LinkEntityComponent.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Modules\Route\LinkEntityComponent.cs">
       <Link>Runtime\Fantasy.Core\Modules\Route\LinkEntityComponent.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\EnumSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\EnumSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\EnumSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Mongo\MongoHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Helper\Mongo\MongoHelper.cs">
       <Link>Runtime\Fantasy.Core\Helper\Mongo\MongoHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IDestroySystem.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Entitas\Interface\System\IDestroySystem.cs">
       <Link>Runtime\Fantasy.Core\Entitas\Interface\System\IDestroySystem.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\RecyclableMemoryStreamManager.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\RecyclableMemoryStream\RecyclableMemoryStreamManager.cs">
       <Link>Runtime\Fantasy.Core\RecyclableMemoryStream\RecyclableMemoryStreamManager.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\EventSystem\EventSystem.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\EventSystem\EventSystem.cs">
       <Link>Runtime\Fantasy.Core\EventSystem\EventSystem.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\WireType.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\WireType.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\WireType.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\RouteIdStruct.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\IdFactory\RouteIdStruct.cs">
       <Link>Runtime\Fantasy.Core\IdFactory\RouteIdStruct.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadByte.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Fantasy.Download\DownloadByte.cs">
       <Link>Runtime\Fantasy.App\Fantasy.Download\DownloadByte.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Dispatcher\Opcode.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Dispatcher\Opcode.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Dispatcher\Opcode.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\BlobSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\BlobSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\BlobSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\NLog.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Log\NLog.cs">
       <Link>Runtime\Fantasy.Core\Log\NLog.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TupleSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\TupleSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\TupleSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SubItemSerializer.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Protobuf-net\Serializers\SubItemSerializer.cs">
       <Link>Runtime\Fantasy.App\Protobuf-net\Serializers\SubItemSerializer.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\ClientMessageScheduler.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Message\Scheduler\ClientMessageScheduler.cs">
       <Link>Runtime\Fantasy.Core\Network\Message\Scheduler\ClientMessageScheduler.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\Server.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\Base\Server\Server.cs">
       <Link>Runtime\Fantasy.Core\Network\Base\Server\Server.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\OneToManyList.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\DataStructure\Collection\OneToManyList.cs">
       <Link>Runtime\Fantasy.Core\DataStructure\Collection\OneToManyList.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\PoolCore.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Pool\PoolCore.cs">
       <Link>Runtime\Fantasy.Core\Pool\PoolCore.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\csc.rsp">
+    <None Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\csc.rsp">
       <Link>csc.rsp</Link>
     </None>
-    <None Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\VERSION.txt">
-      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\VERSION.txt</Link>
+    <None Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\LICENSE.txt">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\LICENSE.txt</Link>
     </None>
-    <None Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Fantasy.Unity.asmdef">
+    <None Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Fantasy.Unity.asmdef">
       <Link>Fantasy.Unity.asmdef</Link>
     </None>
-    <None Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\LICENSE.txt">
-      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\LICENSE.txt</Link>
+    <None Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\VERSION.txt">
+      <Link>Runtime\Fantasy.Core\Network\NetworkProtocol\KCP\Base\kcp2k\VERSION.txt</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1882,16 +1879,13 @@
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
-  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
-  <ItemGroup>
-    <ProjectCapability Remove="LaunchProfiles" />
-    <ProjectCapability Remove="SharedProjectReferences" />
-    <ProjectCapability Remove="ReferenceManagerSharedProjects" />
-    <ProjectCapability Remove="ProjectReferences" />
-    <ProjectCapability Remove="ReferenceManagerProjects" />
-    <ProjectCapability Remove="COMReferences" />
-    <ProjectCapability Remove="ReferenceManagerCOM" />
-    <ProjectCapability Remove="AssemblyReferences" />
-    <ProjectCapability Remove="ReferenceManagerAssemblies" />
-  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

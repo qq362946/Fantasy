@@ -1,26 +1,21 @@
-﻿<Project ToolsVersion="Current">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
   <PropertyGroup>
-    <BaseIntermediateOutputPath>Temp\obj\$(Configuration)\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-  </PropertyGroup>
-  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
-  <ItemGroup>
-    <ProjectCapability Include="Unity" />
-  </ItemGroup>
-  <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <EnableDefaultItems>false</EnableDefaultItems>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9.0</LangVersion>
-    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
+    <ProjectGuid>{377D9EF0-110F-F585-9F5A-EA60C1261F78}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Fantasy.Editor</AssemblyName>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -44,103 +39,105 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <NoStandardLibraries>true</NoStandardLibraries>
-    <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
-    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
-    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
+    <NoStdLib>true</NoStdLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
+    <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <PropertyGroup>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.22</UnityProjectGeneratorVersion>
-    <UnityProjectGeneratorStyle>SDK</UnityProjectGeneratorStyle>
+    <UnityProjectGeneratorStyle>Legacy</UnityProjectGeneratorStyle>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2022.3.6f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="D:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="D:\Program Files\Unity\2022.3.6f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="D:\Program Files\Unity\2022.3.6f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleBuildTab.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleBuildTab.cs">
       <Link>Editor\AssetBundles-Browser\AssetBundleBuildTab.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleEditorHelper.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleEditorHelper.cs">
       <Link>Editor\AssetBundles-Browser\AssetBundleEditorHelper.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleDataSource\ABDataSourceProvider.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleDataSource\ABDataSourceProvider.cs">
       <Link>Editor\AssetBundles-Browser\AssetBundleDataSource\ABDataSourceProvider.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleModel\ABModelBundleInfo.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleModel\ABModelBundleInfo.cs">
       <Link>Editor\AssetBundles-Browser\AssetBundleModel\ABModelBundleInfo.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\Settings\FantasySettingsProvider.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\Settings\FantasySettingsProvider.cs">
       <Link>Editor\Settings\FantasySettingsProvider.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleDataSource\ABDataSource.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleDataSource\ABDataSource.cs">
       <Link>Editor\AssetBundles-Browser\AssetBundleDataSource\ABDataSource.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\Settings\FantasySettings.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\Settings\FantasySettings.cs">
       <Link>Editor\Settings\FantasySettings.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\Settings\ScriptableObjectSingleton.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\Settings\ScriptableObjectSingleton.cs">
       <Link>Editor\Settings\ScriptableObjectSingleton.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\MessageList.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\MessageList.cs">
       <Link>Editor\AssetBundles-Browser\MessageList.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleTree.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleTree.cs">
       <Link>Editor\AssetBundles-Browser\AssetBundleTree.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\Settings\FantasySettingsScriptableObject.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\Settings\FantasySettingsScriptableObject.cs">
       <Link>Editor\Settings\FantasySettingsScriptableObject.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\MessageSystem.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\MessageSystem.cs">
       <Link>Editor\AssetBundles-Browser\MessageSystem.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetListTree.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetListTree.cs">
       <Link>Editor\AssetBundles-Browser\AssetListTree.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleManageTab.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleManageTab.cs">
       <Link>Editor\AssetBundles-Browser\AssetBundleManageTab.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleDataSource\AssetDatabaseABDataSource.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleDataSource\AssetDatabaseABDataSource.cs">
       <Link>Editor\AssetBundles-Browser\AssetBundleDataSource\AssetDatabaseABDataSource.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\BundleDetailList.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\BundleDetailList.cs">
       <Link>Editor\AssetBundles-Browser\BundleDetailList.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleModel\ABModel.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleModel\ABModel.cs">
       <Link>Editor\AssetBundles-Browser\AssetBundleModel\ABModel.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\InspectTab\AssetBundleInspectTab.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\InspectTab\AssetBundleInspectTab.cs">
       <Link>Editor\AssetBundles-Browser\InspectTab\AssetBundleInspectTab.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\InspectTab\AssetBundleRecord.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\InspectTab\AssetBundleRecord.cs">
       <Link>Editor\AssetBundles-Browser\InspectTab\AssetBundleRecord.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\InspectTab\InspectTreeView.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\InspectTab\InspectTreeView.cs">
       <Link>Editor\AssetBundles-Browser\InspectTab\InspectTreeView.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleModel\ABModelAssetInfo.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleModel\ABModelAssetInfo.cs">
       <Link>Editor\AssetBundles-Browser\AssetBundleModel\ABModelAssetInfo.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\FantasyUI\FantasyUIEditor.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\FantasyUI\FantasyUIEditor.cs">
       <Link>Editor\FantasyUI\FantasyUIEditor.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleBrowserMain.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\AssetBundleBrowserMain.cs">
       <Link>Editor\AssetBundles-Browser\AssetBundleBrowserMain.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\AssetBundles-Browser\InspectTab\InspectSingleBundle.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\AssetBundles-Browser\InspectTab\InspectSingleBundle.cs">
       <Link>Editor\AssetBundles-Browser\InspectTab\InspectSingleBundle.cs</Link>
     </Compile>
-    <Compile Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\FantasyStartup.cs">
+    <Compile Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\FantasyStartup.cs">
       <Link>Editor\FantasyStartup.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="D:\Data\git\Fantasy\Unity\Fantasy.Unity\Editor\Fantasy.Editor.asmdef">
+    <None Include="D:\Data\git\Fantasy\Packages.Unity\Fantasy.Unity\Editor\Fantasy.Editor.asmdef">
       <Link>Editor\Fantasy.Editor.asmdef</Link>
     </None>
   </ItemGroup>
@@ -1047,18 +1044,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Fantasy.Unity.csproj" />
+    <ProjectReference Include="Fantasy.Unity.csproj">
+      <Project>{8BA55FD8-A9AC-F08B-E827-074457206988}</Project>
+      <Name>Fantasy.Unity</Name>
+    </ProjectReference>
   </ItemGroup>
-  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
-  <ItemGroup>
-    <ProjectCapability Remove="LaunchProfiles" />
-    <ProjectCapability Remove="SharedProjectReferences" />
-    <ProjectCapability Remove="ReferenceManagerSharedProjects" />
-    <ProjectCapability Remove="ProjectReferences" />
-    <ProjectCapability Remove="ReferenceManagerProjects" />
-    <ProjectCapability Remove="COMReferences" />
-    <ProjectCapability Remove="ReferenceManagerCOM" />
-    <ProjectCapability Remove="AssemblyReferences" />
-    <ProjectCapability Remove="ReferenceManagerAssemblies" />
-  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>
