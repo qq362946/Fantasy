@@ -1,18 +1,9 @@
 {
-<<<<<<< HEAD
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
     "App": {
-=======
-  "profiles": {
-    "Fantasy.App": {
->>>>>>> origin/main
       "commandName": "Project",
       "commandLineArgs": "--AppType Game --Mode Develop"
     }
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/main

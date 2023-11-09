@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -18,12 +18,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\Fantasy.Net\Fantasy.Net.csproj" />
-<<<<<<< HEAD:examples/Communication-Exercises/Server/App/App.csproj
       <ProjectReference Include="..\Hotfix\Hotfix.csproj" />
       <ProjectReference Include="..\UnityEngine\UnityEngine.csproj" />
-=======
-      <ProjectReference Include="..\Hotfix\Fantasy.Hotfix.csproj" />
->>>>>>> origin/main:examples/Communication-Exercises/Server/App/Fantasy.App.csproj
     </ItemGroup>
 
     <ItemGroup>
