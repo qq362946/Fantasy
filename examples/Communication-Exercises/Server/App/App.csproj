@@ -5,33 +5,31 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <PropertyGroup>
-      <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-      <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+        <RootNamespace>ConsoleApp1</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
       <OutputPath>../../Bin/App/</OutputPath>
     </PropertyGroup>
+
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <OutputPath>../../Bin/App/</OutputPath>
+      <OutputPath>../../Bin/App/</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.Net.csproj" />
-      <ProjectReference Include="..\Hotfix\Fantasy.Hotfix.csproj" />
+      <ProjectReference Include="..\..\..\..\Fantasy.Net\Fantasy.Net.csproj" />
+      <ProjectReference Include="..\Hotfix\Hotfix.csproj" />
+      <ProjectReference Include="..\UnityEngine\UnityEngine.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <None Update="FantasySettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
       <None Update="NLog.config">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="NLog.xsd">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="FantasySettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

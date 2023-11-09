@@ -267,6 +267,16 @@ namespace Fantasy
         [BsonIgnore] 
         [IgnoreDataMember] 
         private bool _isFromPool;
+        
+        /// <summary>
+        /// 获取当前实体的父实体。
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T GetParent<T>() where T : Entity, new()
+        {
+            return Parent as T;
+        }
 
         #endregion
 

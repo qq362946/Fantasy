@@ -19,7 +19,7 @@ public class CommandLineOptions
     /// <summary>
     /// App类型，获取或设置应用程序的类型。
     /// Game - 游戏服务器App
-    /// Export - 导表App
+    /// Robot - 机器人（暂未支持该功能）
     /// </summary>
     [Option("AppType", Required = true, Default = null, HelpText = "Game")]
     public string AppType { get; set; }

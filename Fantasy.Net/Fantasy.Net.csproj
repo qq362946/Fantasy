@@ -26,12 +26,14 @@
 
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
-      <PackageReference Include="EPPlus" Version="6.2.6" />
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
-      <PackageReference Include="MongoDB.Bson" Version="2.21.0" />
-      <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+      <PackageReference Include="MongoDB.Bson" Version="2.22.0" />
+      <PackageReference Include="MongoDB.Driver" Version="2.22.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="NLog" Version="5.2.3" />
+      <PackageReference Include="NLog" Version="5.2.5" />
       <PackageReference Include="protobuf-net" Version="3.2.26" />
     </ItemGroup>
 </Project>
