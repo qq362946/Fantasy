@@ -1,3 +1,4 @@
+using Exporter;
 using Fantasy.Helper;
 
 namespace Fantasy.Exporter;
@@ -10,7 +11,7 @@ public class OpCodeCache
     private readonly List<uint> _opCodes = new List<uint>();
     private readonly SortedDictionary<string, uint> _opcodeCache;
     private readonly SortedDictionary<string, uint> _saveOpCodeCache = new();
-    private readonly string _opcodeCachePath = $"{ExporterAges.Instance.ProtoBufDirectory}OpCode.Cache";
+    private readonly string _opcodeCachePath = $"{ExporterSettingsHelper.ProtoBufDirectory}OpCode.Cache";
 
     /// <summary>
     /// 构造函数，用于初始化网络协议操作码缓存

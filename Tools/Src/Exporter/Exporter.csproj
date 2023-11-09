@@ -17,7 +17,7 @@
 
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
-      <PackageReference Include="EPPlus" Version="6.2.10" />
+      <PackageReference Include="EPPlus" Version="7.0.0" />
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="protobuf-net" Version="3.2.26" />
@@ -60,6 +60,12 @@
       <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Network\Message\Dispatcher\Opcode.cs">
         <Link>ProtoBuf\Opcode.cs</Link>
       </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="ExporterSettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

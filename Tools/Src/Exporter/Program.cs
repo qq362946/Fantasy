@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using CommandLine;
+using Exporter;
 using Exporter.Excel;
 using Fantasy.Exporter;
 
@@ -9,6 +10,8 @@ try
     Parser.Default.ParseArguments<ExporterAges>(Environment.GetCommandLineArgs())
         .WithNotParsed(error => throw new Exception("Command line format error!"))
         .WithParsed(ages => ExporterAges.Instance = ages);
+    // 初始化配置
+    ExporterSettingsHelper.Initialize();
     // 加载配置
     Console.OutputEncoding = Encoding.UTF8;
     // 检查启动参数

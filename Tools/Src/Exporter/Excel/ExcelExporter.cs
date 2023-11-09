@@ -44,7 +44,7 @@ public sealed class ExcelExporter
     {
         get
         {
-            return _template ??= File.ReadAllText(ExporterAges.Instance.ExcelTemplatePath);
+            return _template ??= File.ReadAllText(ExporterSettingsHelper.ExcelTemplatePath);
         }
     }
     /// <summary>
@@ -67,26 +67,26 @@ public sealed class ExcelExporter
     /// <param name="exportType">要执行的导出类型（AllExcel 或 AllExcelIncrement）。</param>
     public ExcelExporter(ExportType exportType)
     {
-        if (ExporterAges.Instance.ExcelTemplatePath?.Trim() == "")
+        if (ExporterSettingsHelper.ExcelTemplatePath?.Trim() == "")
         {
             Log.Info($"ExcelTemplatePath Can not be empty!");
             return;
         }
         
-        if (ExporterAges.Instance.ExcelVersionFile == null || ExporterAges.Instance.ExcelVersionFile.Trim() == "")
+        if (ExporterSettingsHelper.ExcelVersionFile == null || ExporterSettingsHelper.ExcelVersionFile.Trim() == "")
         {
             Log.Info($"ExcelVersionFile Can not be empty!");
             return;
         }
         
-        if (ExporterAges.Instance.ExcelProgramPath == null || ExporterAges.Instance.ExcelProgramPath.Trim() == "")
+        if (ExporterSettingsHelper.ExcelProgramPath == null || ExporterSettingsHelper.ExcelProgramPath.Trim() == "")
         {
             Log.Info($"ExcelProgramPath Can not be empty!");
             return;
         }
         
-        _excelProgramPath = FileHelper.GetFullPath(ExporterAges.Instance.ExcelProgramPath);
-        _versionFilePath = FileHelper.GetFullPath(ExporterAges.Instance.ExcelVersionFile);
+        _excelProgramPath = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelProgramPath);
+        _versionFilePath = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelVersionFile);
         
         switch (exportType)
         {
@@ -103,75 +103,75 @@ public sealed class ExcelExporter
 
                 if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client))
                 {
-                    if (ExporterAges.Instance.ExcelClientBinaryDirectory == null ||
-                        ExporterAges.Instance.ExcelClientBinaryDirectory.Trim() == "")
+                    if (ExporterSettingsHelper.ExcelClientBinaryDirectory == null ||
+                        ExporterSettingsHelper.ExcelClientBinaryDirectory.Trim() == "")
                     {
                         Log.Info($"ExcelClientBinaryDirectory Can not be empty!");
                         return;
                     }
                     
-                    if (ExporterAges.Instance.ExcelClientJsonDirectory == null ||
-                        ExporterAges.Instance.ExcelClientJsonDirectory.Trim() == "")
+                    if (ExporterSettingsHelper.ExcelClientJsonDirectory == null ||
+                        ExporterSettingsHelper.ExcelClientJsonDirectory.Trim() == "")
                     {
                         Log.Info($"ExcelClientJsonDirectory Can not be empty!");
                         return;
                     }
                     
-                    if (ExporterAges.Instance.ExcelClientFileDirectory == null ||
-                        ExporterAges.Instance.ExcelClientFileDirectory.Trim() == "")
+                    if (ExporterSettingsHelper.ExcelClientFileDirectory == null ||
+                        ExporterSettingsHelper.ExcelClientFileDirectory.Trim() == "")
                     {
                         Log.Info($"ExcelServerFileDirectory Can not be empty!");
                         return;
                     }
                     
-                    if (ExporterAges.Instance.ClientCustomExportDirectory == null ||
-                        ExporterAges.Instance.ClientCustomExportDirectory.Trim() == "")
+                    if (ExporterSettingsHelper.ClientCustomExportDirectory == null ||
+                        ExporterSettingsHelper.ClientCustomExportDirectory.Trim() == "")
                     {
                         Log.Info($"ClientCustomExportDirectory Can not be empty!");
                         return;
                     }
 
-                    _excelClientJsonDirectory = FileHelper.GetFullPath(ExporterAges.Instance.ExcelClientJsonDirectory);
-                    _excelClientBinaryDirectory = FileHelper.GetFullPath(ExporterAges.Instance.ExcelClientBinaryDirectory);
-                    ClientCustomExportDirectory = FileHelper.GetFullPath(ExporterAges.Instance.ClientCustomExportDirectory);
-                    _excelClientFileDirectory = FileHelper.GetFullPath(ExporterAges.Instance.ExcelClientFileDirectory);
+                    _excelClientJsonDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelClientJsonDirectory);
+                    _excelClientBinaryDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelClientBinaryDirectory);
+                    ClientCustomExportDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ClientCustomExportDirectory);
+                    _excelClientFileDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelClientFileDirectory);
                     FileHelper.ClearDirectoryFile(_excelClientFileDirectory);
                 }
 
                 if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
                 {
-                    if (ExporterAges.Instance.ExcelServerFileDirectory == null ||
-                        ExporterAges.Instance.ExcelServerFileDirectory.Trim() == "")
+                    if (ExporterSettingsHelper.ExcelServerFileDirectory == null ||
+                        ExporterSettingsHelper.ExcelServerFileDirectory.Trim() == "")
                     {
                         Log.Info($"ExcelServerFileDirectory Can not be empty!");
                         return;
                     }
                     
-                    if (ExporterAges.Instance.ExcelServerJsonDirectory == null ||
-                        ExporterAges.Instance.ExcelServerJsonDirectory.Trim() == "")
+                    if (ExporterSettingsHelper.ExcelServerJsonDirectory == null ||
+                        ExporterSettingsHelper.ExcelServerJsonDirectory.Trim() == "")
                     {
                         Log.Info($"ExcelServerJsonDirectory Can not be empty!");
                         return;
                     }
                     
-                    if (ExporterAges.Instance.ExcelServerBinaryDirectory == null ||
-                        ExporterAges.Instance.ExcelServerBinaryDirectory.Trim() == "")
+                    if (ExporterSettingsHelper.ExcelServerBinaryDirectory == null ||
+                        ExporterSettingsHelper.ExcelServerBinaryDirectory.Trim() == "")
                     {
                         Log.Info($"ExcelServerBinaryDirectory Can not be empty!");
                         return;
                     }
 
-                    if (ExporterAges.Instance.ServerCustomExportDirectory == null ||
-                        ExporterAges.Instance.ServerCustomExportDirectory.Trim() == "")
+                    if (ExporterSettingsHelper.ServerCustomExportDirectory == null ||
+                        ExporterSettingsHelper.ServerCustomExportDirectory.Trim() == "")
                     {
                         Log.Info($"ServerCustomExportDirectory Can not be empty!");
                         return;
                     }
 
-                    _excelServerJsonDirectory = FileHelper.GetFullPath(ExporterAges.Instance.ExcelServerJsonDirectory);
-                    _excelServerBinaryDirectory = FileHelper.GetFullPath(ExporterAges.Instance.ExcelServerBinaryDirectory);
-                    ServerCustomExportDirectory = FileHelper.GetFullPath(ExporterAges.Instance.ServerCustomExportDirectory);
-                    _excelServerFileDirectory = FileHelper.GetFullPath(ExporterAges.Instance.ExcelServerFileDirectory);
+                    _excelServerJsonDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelServerJsonDirectory);
+                    _excelServerBinaryDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelServerBinaryDirectory);
+                    ServerCustomExportDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ServerCustomExportDirectory);
+                    _excelServerFileDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelServerFileDirectory);
                     FileHelper.ClearDirectoryFile(_excelServerFileDirectory);
                 }
                 

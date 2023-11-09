@@ -5,7 +5,7 @@ using Fantasy.Core.Network;
 #pragma warning disable CS8618
 
 namespace Fantasy
-{	
+{
 	[ProtoContract]
 	public partial class C2R_TestMessage : AProto, IMessage
 	{

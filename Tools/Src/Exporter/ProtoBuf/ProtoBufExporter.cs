@@ -1,4 +1,5 @@
 using System.Text;
+using Exporter;
 using Fantasy.Core.Network;
 using Fantasy.Helper;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -73,15 +74,15 @@ public sealed class ProtoBufExporter
     {
         Console.OutputEncoding = Encoding.UTF8;
 
-        if (ExporterAges.Instance.ProtoBufDirectory == null || ExporterAges.Instance.ProtoBufDirectory.Trim() == "")
+        if (ExporterSettingsHelper.ProtoBufDirectory == null || ExporterSettingsHelper.ProtoBufDirectory.Trim() == "")
         {
             Log.Info($"ProtoBufDirectory Can not be empty!");
             return;
         }
 
-        _protoBufDirectory = FileHelper.GetFullPath(ExporterAges.Instance.ProtoBufDirectory);
+        _protoBufDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ProtoBufDirectory);
         
-        if (ExporterAges.Instance.ProtoBufTemplatePath?.Trim() == "")
+        if (ExporterSettingsHelper.ProtoBufTemplatePath?.Trim() == "")
         {
             Log.Info($"ProtoBufTemplatePath Can not be empty!");
             return;
@@ -89,13 +90,13 @@ public sealed class ProtoBufExporter
         
         if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client))
         {
-            if (ExporterAges.Instance.ProtoBufClientDirectory?.Trim() == "")
+            if (ExporterSettingsHelper.ProtoBufClientDirectory?.Trim() == "")
             {
                 Log.Info($"ProtoBufClientDirectory Can not be empty!");
                 return;
             }
             
-            _protoBufClientDirectory = FileHelper.GetFullPath(ExporterAges.Instance.ProtoBufClientDirectory);
+            _protoBufClientDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ProtoBufClientDirectory);
             
             if (!Directory.Exists(_protoBufClientDirectory))
             {
@@ -105,13 +106,13 @@ public sealed class ProtoBufExporter
 
         if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
         {
-            if (ExporterAges.Instance.ProtoBufServerDirectory?.Trim() == "")
+            if (ExporterSettingsHelper.ProtoBufServerDirectory?.Trim() == "")
             {
                 Log.Info($"ProtoBufServerDirectory Can not be empty!");
                 return;
             }
             
-            _protoBufServerDirectory = FileHelper.GetFullPath(ExporterAges.Instance.ProtoBufServerDirectory);
+            _protoBufServerDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ProtoBufServerDirectory);
             
             if (!Directory.Exists(_protoBufServerDirectory))
             {
@@ -599,7 +600,7 @@ public sealed class ProtoBufExporter
     /// </summary>
     private void LoadTemplate()
     {
-        string[] lines = File.ReadAllLines(ExporterAges.Instance.ProtoBufTemplatePath, Encoding.UTF8);
+        string[] lines = File.ReadAllLines(ExporterSettingsHelper.ProtoBufTemplatePath, Encoding.UTF8);
 
         StringBuilder serverSb = new StringBuilder();
         StringBuilder clientSb = new StringBuilder();
