@@ -6,12 +6,12 @@ public class EventSystemStruct
 {
     public struct StartMove
     {
-        public Unit Unit;
-        public MoveInfo MoveInfo;
+        public Unit unit;
+        public MoveInfo moveInfo;
         public StartMove()
         {
-            Unit = null;
-            MoveInfo = null;
+            unit = null;
+            moveInfo = null;
         }
     }
 }
