@@ -36,6 +36,7 @@ public sealed class ExcelExporter
     private readonly OneToManyList<string, ExportInfo> _tables = new OneToManyList<string, ExportInfo>(); // 存储 Excel 表及其导出信息。
     private readonly ConcurrentDictionary<string, ExcelTable> _excelTables = new ConcurrentDictionary<string, ExcelTable>(); // 存储解析后的 Excel 表。
     public readonly ConcurrentDictionary<string, ExcelWorksheet> Worksheets = new ConcurrentDictionary<string, ExcelWorksheet>(); // 存储已加载的 Excel 工作表。
+    public readonly Dictionary<string, string> IgnoreTable = new Dictionary<string, string>(); // 存储以#开头的的表和路径
     private static string _template;
     /// <summary>
     /// 获取或设置 Excel 代码模板的内容。
@@ -299,11 +300,24 @@ public sealed class ExcelExporter
             var excelName = excelFile.Name.Substring(0, lastIndexOf);
             var path = fullName.Substring(0, fullName.Length - excelFile.Name.Length);
 
-            // 过滤#和~开头文件和文件夹带有#的所有文件
+            // 过滤~开头文件
+            
+            if (excelName.StartsWith("~", StringComparison.Ordinal))
+            {
+                continue;
+            }
 
-            if (excelName.StartsWith("#", StringComparison.Ordinal) ||
-                excelName.StartsWith("~", StringComparison.Ordinal) ||
-                path.Contains("#", StringComparison.Ordinal))
+            // 如果文件名以#开头，那么这个文件夹下的所有文件都不导出
+            
+            if (excelName.StartsWith("#", StringComparison.Ordinal))
+            {
+                IgnoreTable.Add(excelName, fullName);
+                continue;
+            }
+            
+            // 如果文件夹名包含#，那么这个文件夹下的所有文件都不导出
+
+            if (path.Contains("#", StringComparison.Ordinal))
             {
                 continue;
             }
@@ -776,6 +790,25 @@ public sealed class ExcelExporter
         {
             dynamicInfo.Json.AppendLine($"{json},");
         }
+    }
+
+    /// <summary>
+    /// 加载忽略表
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="excelPackage"></param>
+    /// <returns></returns>
+    public bool LoadIgnoreExcel(string name, out ExcelPackage excelPackage)
+    {
+        excelPackage = null;
+
+        if (!IgnoreTable.TryGetValue(name, out var path))
+        {
+            return false;
+        }
+
+        excelPackage = ExcelHelper.LoadExcel(path);
+        return true;
     }
 
     /// <summary>

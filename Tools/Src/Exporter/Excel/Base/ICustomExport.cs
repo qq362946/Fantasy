@@ -27,7 +27,7 @@ public interface ICustomExport
 /// </summary>
 public abstract class ACustomExport : ICustomExport
 {
-    private ExcelExporter _excelExporter;
+    protected ExcelExporter ExcelExporter;
     protected ConcurrentDictionary<string, ExcelWorksheet> Worksheets;
     
     /// <summary>
@@ -52,7 +52,7 @@ public abstract class ACustomExport : ICustomExport
     /// <param name="worksheets"></param>
     public void Init(ExcelExporter excelExporter, ConcurrentDictionary<string, ExcelWorksheet> worksheets)
     {
-        _excelExporter = excelExporter;
+        ExcelExporter = excelExporter;
         Worksheets = worksheets;
     }
 
@@ -73,24 +73,24 @@ public abstract class ACustomExport : ICustomExport
         {
             case CustomExportType.Client:
             {
-                if (!Directory.Exists(_excelExporter.ClientCustomExportDirectory))
+                if (!Directory.Exists(ExcelExporter.ClientCustomExportDirectory))
                 {
-                    Directory.CreateDirectory(_excelExporter.ClientCustomExportDirectory);
+                    Directory.CreateDirectory(ExcelExporter.ClientCustomExportDirectory);
                 }
                 
-                File.WriteAllText($"{_excelExporter.ClientCustomExportDirectory}/{fileName}", fileContent);
-                Log.Info($"导出客户端自定义文件：{_excelExporter.ClientCustomExportDirectory}/{fileName}");
+                File.WriteAllText($"{ExcelExporter.ClientCustomExportDirectory}/{fileName}", fileContent);
+                Log.Info($"导出客户端自定义文件：{ExcelExporter.ClientCustomExportDirectory}/{fileName}");
                 return;
             }
             case CustomExportType.Server:
             {
-                if (!Directory.Exists(_excelExporter.ServerCustomExportDirectory))
+                if (!Directory.Exists(ExcelExporter.ServerCustomExportDirectory))
                 {
-                    Directory.CreateDirectory(_excelExporter.ServerCustomExportDirectory);
+                    Directory.CreateDirectory(ExcelExporter.ServerCustomExportDirectory);
                 }
                 
-                File.WriteAllText($"{_excelExporter.ServerCustomExportDirectory}/{fileName}", fileContent);
-                Log.Info($"导出服务器自定义文件：{_excelExporter.ServerCustomExportDirectory}/{fileName}");
+                File.WriteAllText($"{ExcelExporter.ServerCustomExportDirectory}/{fileName}", fileContent);
+                Log.Info($"导出服务器自定义文件：{ExcelExporter.ServerCustomExportDirectory}/{fileName}");
                 return;
             }
         }
