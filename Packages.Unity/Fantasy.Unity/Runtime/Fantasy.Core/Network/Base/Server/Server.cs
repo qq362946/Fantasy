@@ -2,9 +2,28 @@
 using Fantasy.Core;
 using Fantasy.Core.Network;
 using Fantasy.Helper;
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
 namespace Fantasy
 {
+    /// <summary>
+    /// 当Server启动完成时触发。
+    /// </summary>
+    public struct OnServerStartComplete
+    {
+        /// <summary>
+        /// 获取启动完成的服务器。
+        /// </summary>
+        public readonly Server Server;
+        /// <summary>
+        /// 初始化一个新的 OnServerStartComplete 实例。
+        /// </summary>
+        /// <param name="server"></param>
+        public OnServerStartComplete(Server server)
+        {
+            Server = server;
+        }
+    }
     /// <summary>
     /// 网络中的服务器。
     /// </summary>
@@ -208,6 +227,7 @@ namespace Fantasy
             }
 
             Servers.Add(serverConfigId, server);
+            EventSystem.Instance.Publish(new OnServerStartComplete(server));
             return server;
         }
 
