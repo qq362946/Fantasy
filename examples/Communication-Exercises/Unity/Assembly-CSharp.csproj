@@ -737,8 +737,8 @@
      <Reference Include="Unity.VisualScripting.Core.Editor">
      <HintPath>/Users/sining/Code/Git/Fantasy/examples/Communication-Exercises/Unity/Library/ScriptAssemblies/Unity.VisualScripting.Core.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="UnityEngine.UI">
-     <HintPath>/Users/sining/Code/Git/Fantasy/examples/Communication-Exercises/Unity/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+     <Reference Include="Unity.Rider.Editor">
+     <HintPath>/Users/sining/Code/Git/Fantasy/examples/Communication-Exercises/Unity/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.State">
      <HintPath>/Users/sining/Code/Git/Fantasy/examples/Communication-Exercises/Unity/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
@@ -746,8 +746,8 @@
      <Reference Include="Unity.VSCode.Editor">
      <HintPath>/Users/sining/Code/Git/Fantasy/examples/Communication-Exercises/Unity/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>/Users/sining/Code/Git/Fantasy/examples/Communication-Exercises/Unity/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+     <Reference Include="UnityEngine.UI">
+     <HintPath>/Users/sining/Code/Git/Fantasy/examples/Communication-Exercises/Unity/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Flow">
      <HintPath>/Users/sining/Code/Git/Fantasy/examples/Communication-Exercises/Unity/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>

@@ -6,11 +6,6 @@ using Fantasy.Core.Network;
 
 namespace Fantasy
 {	
-	[ProtoContract]
-	public partial class C2R_TestMessage : AProto, IMessage
-	{
-		public uint OpCode() { return OuterOpcode.C2R_TestMessage; }
-	}
 	/// <summary>
 	///  注册账号
 	/// </summary>

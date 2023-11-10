@@ -159,7 +159,7 @@ public sealed class InnerPacketParser : APacketParser
             try
             {
                 // 如果缓冲区中的数据长度小于消息体的长度，无法解析
-                if (buffer.Length < _messagePacketLength)
+                if (_messagePacketLength < 0 || buffer.Length < _messagePacketLength)
                 {
                     return false;
                 }
@@ -169,7 +169,6 @@ public sealed class InnerPacketParser : APacketParser
                 var memoryOwner = MemoryPool.Rent(Packet.InnerPacketMaxLength);
                 // 创建内部数据包信息实例
                 packInfo = InnerPackInfo.Create(memoryOwner);
-
                 // 设置数据包信息的属性值
                 packInfo.RpcId = _rpcId;
                 packInfo.RouteId = _routeId;
@@ -217,6 +216,12 @@ public sealed class InnerPacketParser : APacketParser
         {
             throw new ScanException($"The received information exceeds the maximum limit = {_messagePacketLength}");
         }
+        
+        // 如果内存资源中的数据长度小于消息体的长度，无法解析
+        if (_messagePacketLength < 0 || memorySpan.Length < _messagePacketLength)
+        {
+            return false;
+        }
 
         // 创建内部数据包信息实例
         packInfo = InnerPackInfo.Create(memoryOwner);
@@ -224,14 +229,7 @@ public sealed class InnerPacketParser : APacketParser
         packInfo.ProtocolCode = BitConverter.ToUInt32(memorySpan[Packet.PacketLength..]);
         packInfo.RpcId = BitConverter.ToUInt32(memorySpan[Packet.OuterPacketRpcIdLocation..]);
         packInfo.RouteId = BitConverter.ToInt64(memorySpan[Packet.InnerPacketRouteRouteIdLocation..]);
-
-        // 如果内存资源中的数据长度小于消息体的长度，无法解析
-        if (memorySpan.Length < _messagePacketLength)
-        {
-            return false;
-        }
-
-        return _messagePacketLength >= 0;
+        return true;
     }
 
     /// <summary>

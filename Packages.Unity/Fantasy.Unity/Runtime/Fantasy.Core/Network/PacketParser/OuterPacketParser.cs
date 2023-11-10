@@ -122,11 +122,11 @@ namespace Fantasy.Core.Network
 
                 try
                 {
-                    if (buffer.Length < _messagePacketLength)
+                    if (_messagePacketLength < 0 || buffer.Length < _messagePacketLength)
                     {
                         return false;
                     }
-                
+
                     _isUnPackHead = true;
                     // 创建消息包
                     var memoryOwner = MemoryPool.Rent(Packet.OuterPacketMaxLength);
@@ -139,7 +139,7 @@ namespace Fantasy.Core.Network
                     buffer.Read(memoryOwner.Memory.Slice(Packet.OuterPacketHeadLength), _messagePacketLength);
                     // 写入消息头的信息到内存中
                     _messageHead.AsMemory().CopyTo(memoryOwner.Memory.Slice(0, Packet.OuterPacketHeadLength));
-                    return _messagePacketLength > 0;
+                    return true;
                 }
                 catch (Exception e)
                 {
@@ -178,18 +178,17 @@ namespace Fantasy.Core.Network
                     throw new ScanException($"The received information exceeds the maximum limit = {_messagePacketLength}");
                 }
 #endif
+                if (_messagePacketLength < 0 || memory.Length < _messagePacketLength)
+                {
+                    return false;
+                }
+
                 packInfo = OuterPackInfo.Create(memoryOwner);
                 packInfo.MessagePacketLength = _messagePacketLength;
                 packInfo.ProtocolCode = BitConverter.ToUInt32(memorySpan.Slice(Packet.PacketLength));
                 packInfo.RpcId = BitConverter.ToUInt32(memorySpan.Slice(Packet.OuterPacketRpcIdLocation));
                 packInfo.RouteTypeCode = BitConverter.ToUInt16(memorySpan.Slice(Packet.OuterPacketRouteTypeOpCodeLocation));
-
-                if (memory.Length < _messagePacketLength)
-                {
-                    return false;
-                }
-                // Log.Debug($"ProtocolCode:{packInfo.ProtocolCode} RpcId:{packInfo.RpcId} RouteTypeCode:{packInfo.RouteTypeCode} MessagePacketLength:{packInfo.MessagePacketLength}");
-                return _messagePacketLength >= 0;
+                return true;
             }
             catch (Exception e)
             {

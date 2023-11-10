@@ -1,10 +1,6 @@
 syntax = "proto3";
 package Fantasy.Network.Message;
 
-message C2R_TestMessage // IMessage
-{
-	
-}
 /// 注册账号
 message C2R_RegisterRequest // IRequest,R2C_RegisterResponse
 {

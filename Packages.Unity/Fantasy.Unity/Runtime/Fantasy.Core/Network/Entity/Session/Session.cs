@@ -193,7 +193,7 @@ namespace Fantasy.Core.Network
             if (networkId != 0 && channelId != 0)
             {
                 // 通过网络线程在主线程上异步移除通道
-                NetworkThread.Instance.SynchronizationContext.Post(() =>
+                NetworkThread.Instance?.SynchronizationContext.Post(() =>
                 {
                     NetworkThread.Instance?.RemoveChannel(networkId, channelId);
                 });

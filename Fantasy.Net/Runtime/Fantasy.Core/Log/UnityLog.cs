@@ -1,4 +1,3 @@
-using System;
 #if UNITY_EDITOR
 using System;
 using System.Reflection;
@@ -6,6 +5,8 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditorInternal;
+#else
+using System;
 #endif
 
 #if FANTASY_UNITY

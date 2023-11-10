@@ -2,7 +2,6 @@ namespace Fantasy
 {
 	public static partial class OuterOpcode
 	{
-		 public const int C2R_TestMessage = 100000001;
 		 public const int C2R_RegisterRequest = 110000001;
 		 public const int R2C_RegisterResponse = 160000001;
 		 public const int C2R_LoginRequest = 110000002;
