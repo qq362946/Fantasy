@@ -1,4 +1,7 @@
 using System;
+#if FANTASY_UNITY
+using UnityEngine;
+#endif
 
 namespace Fantasy.Helper
 {
@@ -41,6 +44,10 @@ namespace Fantasy.Helper
         /// 获取当前服务器时间的毫秒数，加上与服务器时间的偏差。
         /// </summary>
         public static long ServerNow => Now + TimeDiff;
+        /// <summary>
+        /// 获取当前Unity运行的总时间的毫秒数。
+        /// </summary>
+        public static long UnityNow => (long) (Time.time * 1000);
 #endif
         /// <summary>
         /// 将日期时间转换为毫秒数，从1970年1月1日开始计算。
