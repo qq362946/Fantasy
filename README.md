@@ -16,9 +16,9 @@ Hello Fantasy是一个.Net的分布式服务器框架Fantasy中自带的一个�
 ## Fantasy 功能介绍 后续更新中。
 
 ## 使用指南
-1.安装.NET 7.0 SDK    
-2.指定项目使用的.NET 7.0   
-  已安装有更高版本.NET SDK时，需要在Fantasy根目录下，添加 global.json 指定使用.NET 7.0   
+1.安装.NET 8.0 SDK    
+2.指定项目使用的.NET 8.0   
+  已安装有更高版本.NET SDK时，需要在Fantasy根目录下，添加 global.json 指定使用.NET 8.0   
 3.前后端项目导入框架Package  
 
 ## 交流与讨论：  
