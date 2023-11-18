@@ -223,7 +223,7 @@ namespace Fantasy.Core.Network
                             if (receiveLength != 5)
                             {
                                 break; // 数据长度异常，忽略处理
-                                }
+                            }
 
                             if (_pendingConnection.TryGetValue(channelId, out var channel))
                             {

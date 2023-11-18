@@ -227,7 +227,7 @@ namespace Fantasy
             }
 
             Servers.Add(serverConfigId, server);
-            EventSystem.Instance.Publish(new OnServerStartComplete(server));
+            await EventSystem.Instance.PublishAsync(new OnServerStartComplete(server));
             return server;
         }
 
