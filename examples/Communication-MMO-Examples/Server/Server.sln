@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.App", "App\Fantasy.App.csproj", "{A33F0C04-BD73-4479-977A-C168E3BC2646}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Hotfix", "Hotfix\Fantasy.Hotfix.csproj", "{8A63C258-07FD-45DC-BE10-45CE00A23811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "..\..\Fantasy.Net\Fantasy.Net.csproj", "{54F37101-B54B-4DF8-814B-E2AF3FC53856}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngine", "UnityEngine\UnityEngine.csproj", "{0D943D15-1B40-4970-9FAA-E4F66A1BD817}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A33F0C04-BD73-4479-977A-C168E3BC2646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A33F0C04-BD73-4479-977A-C168E3BC2646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A33F0C04-BD73-4479-977A-C168E3BC2646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A33F0C04-BD73-4479-977A-C168E3BC2646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A63C258-07FD-45DC-BE10-45CE00A23811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A63C258-07FD-45DC-BE10-45CE00A23811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A63C258-07FD-45DC-BE10-45CE00A23811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A63C258-07FD-45DC-BE10-45CE00A23811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54F37101-B54B-4DF8-814B-E2AF3FC53856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F37101-B54B-4DF8-814B-E2AF3FC53856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F37101-B54B-4DF8-814B-E2AF3FC53856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F37101-B54B-4DF8-814B-E2AF3FC53856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D943D15-1B40-4970-9FAA-E4F66A1BD817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D943D15-1B40-4970-9FAA-E4F66A1BD817}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D943D15-1B40-4970-9FAA-E4F66A1BD817}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D943D15-1B40-4970-9FAA-E4F66A1BD817}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal

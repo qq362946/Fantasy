@@ -1,0 +1,159 @@
+syntax = "proto3";
+package Fantasy.Network.Message;
+
+// 获取区服列表
+message C2R_GetZoneList // IRequest,R2C_GetZoneList
+{
+}
+message R2C_GetZoneList // IResponse
+{
+	repeated uint32 ZoneId = 1; // 区服Id
+	repeated string ZoneName = 2; // 区服名
+	repeated int32 ZoneState = 3; // 区服状态
+}
+
+/// 注册账号
+message C2R_RegisterRequest // IRequest,R2C_RegisterResponse
+{
+	string AuthName = 1;
+	string Pw = 2;
+	string Pw2 = 3; 
+	uint32 ZoneId = 4; // 网关appId
+	string Version = 5; // 版本号
+}
+message R2C_RegisterResponse // IResponse
+{
+}
+/// 登录账号
+message C2R_LoginRequest // IRequest,R2C_LoginResponse
+{
+	string AuthName = 1;
+	string Pw = 2;
+	string Version = 3;
+}
+message R2C_LoginResponse // IResponse
+{
+	string Message = 1;
+	string GateAddress = 2;
+	int32 GatePort = 3;
+	int64 Key = 4;
+}
+/// 登录网关
+message C2G_LoginGateRequest // IRequest,G2C_LoginGateResponse
+{
+	string AuthName = 1;
+	int64 Key = 2;
+}
+message G2C_LoginGateResponse // IResponse
+{
+}
+
+/// 创建角色 消息请求
+message C2G_RoleCreateRequest // IRequest,G2C_RoleCreateResponse
+{
+	int32 UnitConfigId = 1;
+	int32 Sex = 2;
+	string NickName = 3;
+	string Class = 4; // 职业
+}
+/// 创建角色 消息响应
+message G2C_RoleCreateResponse // IResponse
+{
+	RoleInfo RoleInfo = 1;
+}
+/// 删除角色 消息请求
+message C2G_RoleDeleteRequest // IRequest,G2C_RoleDeleteResponse
+{
+	int64 RoleId = 1;
+}
+/// 删除角色 消息响应
+message G2C_RoleDeleteResponse // IResponse
+{
+}
+/// 获取角色列列表 消息请求
+message C2G_RoleListRequest // IRequest,G2C_RoleListResponse
+{
+}
+/// 角色列表信息 消息响应
+message G2C_RoleListResponse // IResponse
+{
+	repeated RoleInfo Items = 1;
+}
+/// 角色列表子项信息
+message RoleInfo
+{
+	int32 UnitConfigId = 1;
+
+	int64 AccountId = 3;
+	//角色ID
+	int64 RoleId = 4;
+	//性别
+	int32 Sex = 5;
+	//昵称
+	string NickName = 6;
+	//年龄
+	int32 Level = 7;
+	int64 Experience = 8;
+	string Class = 9; // 职业
+	int32 LastMap = 10;
+	//repeated ItemInfo Equipments = 11;
+}
+
+/// 进入地图
+message C2G_EnterMapRequest // IRequest,G2C_EnterMapResponse
+{
+	int32 MapNum = 1;
+	int64 RoleId = 2;
+}
+message G2C_EnterMapResponse // IResponse
+{
+	string Message = 1;
+	//repeated Character Characters = 4;
+}
+
+/// 强制断开连接通知
+message G2C_ForceDisconnected // IMessage
+{
+	string Message = 1;
+}
+
+/// 退出地图
+message C2M_ExitRequest // IAddressableRouteRequest,M2C_ExitResponse
+{
+	string Message = 1;
+} 
+message M2C_ExitResponse // IAddressableRouteResponse
+{
+	string Message = 1;
+}
+/// 位置对象
+message MoveInfo
+{
+	float X = 1;
+  	float Y = 2;
+  	float Z = 3;
+	float RotA = 4;
+	float RotB = 5;
+	float RotC = 6;
+	float RotW = 7;
+	int64 MoveEndTime = 8;
+}
+/// 移动操作
+message C2M_MoveMessage // IAddressableRouteMessage
+{
+	MoveInfo MoveInfo = 1;
+}
+
+/// 核心状态同步
+message M2C_MoveBroadcast // IAddressableRouteMessage
+{
+	repeated MoveInfo Moves = 1;
+}
+message M2C_NoticeUnitAdd // IAddressableRouteMessage
+{
+	repeated RoleInfo RoleInfos = 1;
+}
+message M2C_NoticeUnitRemove // IAddressableRouteMessage
+{
+	int64 UnitId = 1;
+}
