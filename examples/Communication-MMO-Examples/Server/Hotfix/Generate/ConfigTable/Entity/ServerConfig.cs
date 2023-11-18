@@ -77,10 +77,12 @@ namespace Fantasy
 		[ProtoMember(1, IsRequired  = true)]
 		public uint Id { get; set; } // 路由Id
 		[ProtoMember(2, IsRequired  = true)]
-		public uint MachineId { get; set; } // 机器ID
+		public uint WordId { get; set; } // 世界Id
 		[ProtoMember(3, IsRequired  = true)]
-		public int InnerPort { get; set; } // 内网端口
+		public uint MachineId { get; set; } // 机器ID
 		[ProtoMember(4, IsRequired  = true)]
+		public int InnerPort { get; set; } // 内网端口
+		[ProtoMember(5, IsRequired  = true)]
 		public bool ReleaseMode { get; set; } // Release下运行        		     
     } 
 }   

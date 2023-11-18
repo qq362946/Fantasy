@@ -22,6 +22,12 @@ public static class SceneHelper
         return enityId;
     }
 
+    // 获取ServerConfig
+    public static ServerConfig GetServer(uint id)
+    {
+        return ServerConfigData.Instance.Get(id);
+    }
+
     // 获取Scene的外网地址
     public static string GetOutAddress(uint sceneId)
     {

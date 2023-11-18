@@ -77,9 +77,9 @@ namespace Fantasy
 		[ProtoMember(1, IsRequired  = true)]
 		public uint Id { get; set; } // ID
 		[ProtoMember(2, IsRequired  = true)]
-		public long EntityId { get; set; } // 路由Id
+		public long EntityId { get; set; } // 全局EntityId
 		[ProtoMember(3, IsRequired  = true)]
-		public uint ServerConfigId { get; set; } // ServerId
+		public uint ServerConfigId { get; set; } // 路由Id：ServerId
 		[ProtoMember(4, IsRequired  = true)]
 		public uint WorldId { get; set; } // 世界Id
 		[ProtoMember(5, IsRequired  = true)]

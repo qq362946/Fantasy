@@ -10,8 +10,9 @@ public class OnServerStartComplete : AsyncEventSystem<Fantasy.OnServerStartCompl
 {
     public override async FTask Handler(Fantasy.OnServerStartComplete self)
     {
+        var serverConfig = SceneHelper.GetServer(self.Server.Id);
         // mgr每区服只有1个，用List[0]取得
-        var mgrScene = SceneHelper.GetSceneByWorld(self.Server.Scene.World.Id,SceneType.Mgr)[0];
+        var mgrScene = SceneHelper.GetSceneByWorld(serverConfig.WordId,SceneType.Mgr)[0];
 
         // 给Mgr发消息
         MessageHelper.SendInnerRoute(self.Server.Scene,mgrScene.EntityId,new S2Mgr_ServerStartComplete{});
