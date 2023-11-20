@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Fantasy.App": {
+    "App": {
       "commandName": "Project",
       "commandLineArgs": "--AppType Game --Mode Develop"
     }
