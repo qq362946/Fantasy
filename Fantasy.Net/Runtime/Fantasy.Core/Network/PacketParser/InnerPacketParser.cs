@@ -89,6 +89,27 @@ public sealed class InnerPackInfo : APackInfo
             {
                 return ProtoBufHelper.FromMemory(messageType, memoryOwnerMemory);
             }
+            case >= Opcode.InnerBsonResponse:
+            {
+                return MongoHelper.Instance.Deserialize(memoryOwnerMemory, messageType);
+            }
+            case >= Opcode.InnerResponse:
+            {
+                return ProtoBufHelper.FromMemory(messageType, memoryOwnerMemory);
+            }
+            case >= Opcode.OuterResponse:
+            {
+                Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
+                return null;
+            }
+            case >= Opcode.InnerBsonMessage:
+            {
+                return MongoHelper.Instance.Deserialize(memoryOwnerMemory, messageType);
+            }
+            case >= Opcode.InnerMessage:
+            {
+                return ProtoBufHelper.FromMemory(messageType, memoryOwnerMemory);
+            }
             default:
             {
                 Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");

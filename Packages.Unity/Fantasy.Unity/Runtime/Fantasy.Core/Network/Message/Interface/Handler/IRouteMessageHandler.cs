@@ -73,7 +73,7 @@ namespace Fantasy.Core.Network
                     scene = entity.Scene;
                 }
                 
-                Log.Error($"SceneWorld:{session.Scene.World.Id} ServerConfigId:{scene.Server?.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
+                Log.Error($"SceneWorld:{session.Scene?.World?.Id} ServerConfigId:{scene.Server?.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
             }
         }
 

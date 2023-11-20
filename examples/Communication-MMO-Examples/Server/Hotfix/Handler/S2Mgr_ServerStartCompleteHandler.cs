@@ -21,6 +21,7 @@ public class S2Mgr_ServerStartCompleteHandler : Route<Scene,S2Mgr_ServerStartCom
             Log.Info("----------本区起服完成");
             foreach(var realm in realmList){
                 // 给Mgr发消息
+                Log.Debug($"realm.EntityId :{realm.EntityId}");
                 MessageHelper.SendInnerRoute(scene,realm.EntityId,new Mgr2R_MachineStartFinished{});
             }
         }

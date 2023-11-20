@@ -380,6 +380,9 @@ namespace Fantasy
         /// <summary>
         /// 获取一个 IEnumerable，用于遍历当前实体上所有实现了 ISupportedSingleCollection 接口的组件。
         /// </summary>
+        [BsonIgnore] 
+        [JsonIgnore]
+        [IgnoreDataMember] 
         public IEnumerable<Entity> ForEachSingleCollection
         {
             get
@@ -399,6 +402,9 @@ namespace Fantasy
         /// <summary>
         /// 获取一个 IEnumerable，用于遍历当前实体上所有实现了 ISupportedSingleCollection 或 ISupportedTransfer 接口的组件。
         /// </summary>
+        [BsonIgnore] 
+        [JsonIgnore]
+        [IgnoreDataMember] 
         public IEnumerable<Entity> ForEachTransfer
         {
             get
