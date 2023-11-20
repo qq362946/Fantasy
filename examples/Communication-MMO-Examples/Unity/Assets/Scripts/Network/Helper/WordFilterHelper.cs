@@ -35,7 +35,7 @@ namespace Fantasy{
         
         private static WordFilterNode _root = new WordFilterNode();
 
-        private static string special = "[]^-_*×―()~!＠@＃#$…&%￥—+=<>《》！?？:：•`·、。，；,.;/\'\"{}（）‘’“”丶";
+        // private static string special = "[]^-_*×―()~!＠@＃#$…&%￥—+=<>《》！?？:：•`·、。，；,.;/\'\"{}（）‘’“”丶";
 
         private static HashSet<char> _skipSet = new HashSet<char>();
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Fantasy;
 using Fantasy.Core.Network;
 using Fantasy.Helper;
@@ -33,16 +34,22 @@ public class Entry : MonoBehaviour,ISend
         // 装载后例如网络协议等一些框架提供的功能就可以使用了
         AssemblyManager.Load(AssemblyName.AssemblyCSharp, GetType().Assembly);
 
-        // 连接服务器
-        // 创建网络连接
-            // 外网访问的是SceneConfig配置文件中配置的Gate 20000端口,Realm 20001端口
+        // 根据cdn json文件取得realm服，练习直接写在这里
+        string json = "[{'ZoneId':1,'RealmAdress':'127.0.0.1:20001'},{'ZoneId':1,'RealmAdress':'127.0.0.1:20001'}]";
+        var realmAdress = JsonHelper.Deserialize<List<RealmInfo>>(json);
+        Log.Info(realmAdress[0].RealmAdress);
+
         // networkProtocolType:网络协议类型
             // 这里要使用与后端SceneConfig配置文件中配置的NetworkProtocolType类型一样才能建立连接
-        Realm.CreateSession("127.0.0.1:20001", NetworkProtocolType.KCP, OnRealmConnected, OnConnectFail, null);
+        Realm.CreateSession(realmAdress[0].RealmAdress, NetworkProtocolType.KCP, OnRealmConnected, OnConnectFail, null);
     }
 
     private async FTask RealmTest()
     {
+        // 获取区服表
+        R2C_GetZoneList zoneList = (R2C_GetZoneList) await Realm.Session.Call(new C2R_GetZoneList(){});
+        Log.Info(zoneList.ToJson());
+        
         // 请求realm验证
         R2C_RegisterResponse register = (R2C_RegisterResponse) await Realm.Session.Call(new C2R_RegisterRequest(){
             AuthName = "test",Pw = "123321",Pw2 = "123321", ZoneId = 1, Version = ConstValue.Version

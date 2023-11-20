@@ -7,6 +7,14 @@ using Fantasy.Core.Network;
 namespace Fantasy
 {
 	[ProtoContract]
+	public partial class RealmInfo : AProto
+	{
+		[ProtoMember(1)]
+		public int ZoneId { get; set; }
+		[ProtoMember(2)]
+		public string RealmAdress { get; set; }
+	}
+	[ProtoContract]
 	public partial class C2R_GetZoneList : AProto, IRequest
 	{
 		[ProtoIgnore]

@@ -9,6 +9,11 @@
         <DocumentationFile></DocumentationFile>
     </PropertyGroup>
 
+    <PropertyGroup>
+      <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+      <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    </PropertyGroup>
+
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
       <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
