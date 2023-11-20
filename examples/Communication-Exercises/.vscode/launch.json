@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Bin/App/BestGame.App.dll",
+            "program": "${workspaceFolder}/Bin/App/App.dll",
             "args": [
                 "--AppType","Game",
                 "--Mode","Develop"
