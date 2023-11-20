@@ -1,6 +1,13 @@
 syntax = "proto3";
 package Fantasy.Network.Message;
 
+// realmInfo
+message RealmInfo
+{
+	int32 ZoneId = 1;
+	string RealmAdress = 2;
+}
+
 // 获取区服列表
 message C2R_GetZoneList // IRequest,R2C_GetZoneList
 {

@@ -1,7 +1,7 @@
 {
     "Export": {
         "ExcelServerBinaryDirectory": {
-            "Value": "../../../Config/Binary/",
+            "Value": "../../Config/Binary/",
             "Comment": "Excel生成服务器二进制数据文件夹位置"
         }
     },

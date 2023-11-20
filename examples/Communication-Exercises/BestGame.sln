@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{A4C0A308-4C4F-4389-B4D4-8B4959275D8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "Server\App\App.csproj", "{20EDE2D3-87BE-46CA-ADC4-5383EB0FDBFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotfix", "Server\Hotfix\Hotfix.csproj", "{1924CB98-E46A-43D4-870A-0F7CF81C125B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{23C27F0D-8AD0-4924-B995-88FC45E739C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngine", "Server\Plugins\UnityEngine\UnityEngine.csproj", "{771C2CAA-D828-4549-B7A2-B59CE9AD34BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Unity\Assembly-CSharp.csproj", "{A9CAF515-1D6A-4123-9EEC-9114E9C6A206}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "..\..\Fantasy.Net\Fantasy.Net.csproj", "{D4AAF7BB-94C1-433C-99EB-E2C646C8D5B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20EDE2D3-87BE-46CA-ADC4-5383EB0FDBFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20EDE2D3-87BE-46CA-ADC4-5383EB0FDBFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20EDE2D3-87BE-46CA-ADC4-5383EB0FDBFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20EDE2D3-87BE-46CA-ADC4-5383EB0FDBFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1924CB98-E46A-43D4-870A-0F7CF81C125B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1924CB98-E46A-43D4-870A-0F7CF81C125B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1924CB98-E46A-43D4-870A-0F7CF81C125B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1924CB98-E46A-43D4-870A-0F7CF81C125B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{771C2CAA-D828-4549-B7A2-B59CE9AD34BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{771C2CAA-D828-4549-B7A2-B59CE9AD34BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{771C2CAA-D828-4549-B7A2-B59CE9AD34BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{771C2CAA-D828-4549-B7A2-B59CE9AD34BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9CAF515-1D6A-4123-9EEC-9114E9C6A206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9CAF515-1D6A-4123-9EEC-9114E9C6A206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9CAF515-1D6A-4123-9EEC-9114E9C6A206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9CAF515-1D6A-4123-9EEC-9114E9C6A206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4AAF7BB-94C1-433C-99EB-E2C646C8D5B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4AAF7BB-94C1-433C-99EB-E2C646C8D5B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4AAF7BB-94C1-433C-99EB-E2C646C8D5B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4AAF7BB-94C1-433C-99EB-E2C646C8D5B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{20EDE2D3-87BE-46CA-ADC4-5383EB0FDBFE} = {A4C0A308-4C4F-4389-B4D4-8B4959275D8C}
+		{1924CB98-E46A-43D4-870A-0F7CF81C125B} = {A4C0A308-4C4F-4389-B4D4-8B4959275D8C}
+		{23C27F0D-8AD0-4924-B995-88FC45E739C0} = {A4C0A308-4C4F-4389-B4D4-8B4959275D8C}
+		{771C2CAA-D828-4549-B7A2-B59CE9AD34BE} = {23C27F0D-8AD0-4924-B995-88FC45E739C0}
+	EndGlobalSection
+EndGlobal

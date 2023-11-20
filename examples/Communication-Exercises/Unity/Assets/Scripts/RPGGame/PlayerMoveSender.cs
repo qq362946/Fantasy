@@ -4,7 +4,6 @@ using Fantasy.Helper;
 
 public class PlayerMoveSender : MonoBehaviour
 {
-    private long lastSendTime = 0;
     private ISend sender;
 
     private long _timerId;

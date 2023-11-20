@@ -2,21 +2,22 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <Configurations>Debug;Release;ServerTest</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <LangVersion>10</LangVersion>
+        <LangVersion>default</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+      <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <OutputPath>../../Bin/App/</OutputPath>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
-
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <OutputPath>../../Bin/App/</OutputPath>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(Configuration)' == 'ServerTest' ">
-      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
 </Project>

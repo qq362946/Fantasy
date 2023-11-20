@@ -13,12 +13,14 @@ global.json
 HybridCLRData/
 AssetBundles/
 UserSettings/
-/Demo/Client/Unity/*.sln
-/Demo/Client/Unity/*.csproj
-/Demo/Client/Unity/*.blob
+# 忽略Packages.Unity包下的.meta
+Packages.Unity/**/*.meta
+
 
 # Other
 .idea
 .vs
 .vscode
 *.DS_Store
+# 不排除示例项目的.vscode
+!examples/**/.vscode
