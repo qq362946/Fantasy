@@ -506,7 +506,7 @@ namespace Fantasy.Helper
             }
 
             assetBundlePath = $"{Define.RemoteAssetBundlePath}/{bundleName}";
-            AssetBundlePathCache[assetBundlePath] = assetBundlePath;
+            AssetBundlePathCache[bundleName] = assetBundlePath;
             return assetBundlePath;
         }
 
