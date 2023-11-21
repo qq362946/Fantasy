@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     /// <summary>
     /// 提供字节操作辅助方法的静态类。

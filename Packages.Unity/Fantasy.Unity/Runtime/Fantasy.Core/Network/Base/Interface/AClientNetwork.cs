@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 抽象客户端网络基类。

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Fantasy.DataStructure
+namespace Fantasy
 {
     /// <summary>
     /// 实体对象列表，继承自 List&lt;T&gt;，并实现 IDisposable 接口，用于创建和管理实体对象的集合。

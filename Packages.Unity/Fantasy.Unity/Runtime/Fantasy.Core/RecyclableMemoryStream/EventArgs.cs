@@ -1,4 +1,4 @@
-namespace Fantasy.IO
+namespace Fantasy
 {
     using System;
 

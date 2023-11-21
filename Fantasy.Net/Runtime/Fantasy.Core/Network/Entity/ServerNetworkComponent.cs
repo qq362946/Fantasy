@@ -3,7 +3,7 @@ using System.Net;
 #pragma warning disable CS8625
 #pragma warning disable CS8618
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 服务端Network网络组件。

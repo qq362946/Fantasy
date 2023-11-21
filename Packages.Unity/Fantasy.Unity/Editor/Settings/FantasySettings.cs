@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace Fantasy.Core.Editor
+namespace Fantasy
 {
     public class FantasySettings
     {

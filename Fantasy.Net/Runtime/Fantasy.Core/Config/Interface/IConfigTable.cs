@@ -1,4 +1,4 @@
-namespace Fantasy.Core
+namespace Fantasy
 {
     /// <summary>
     /// 表示是一个配置文件

@@ -1,5 +1,5 @@
 #if FANTASY_NET
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 可寻址消息组件、挂载了这个组件可以接收Addressable消息

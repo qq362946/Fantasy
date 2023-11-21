@@ -1,8 +1,7 @@
 using System;
-using Fantasy.DataStructure;
 using UnityEngine;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     public enum AudioLayer
     {

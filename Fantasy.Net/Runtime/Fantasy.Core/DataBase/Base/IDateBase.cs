@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 #pragma warning disable CS8625
 
-namespace Fantasy.Core.DataBase;
+namespace Fantasy;
 
 /// <summary>
 /// 表示用于执行各种数据库操作的数据库接口。

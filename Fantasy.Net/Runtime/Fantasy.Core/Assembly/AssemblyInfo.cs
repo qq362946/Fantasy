@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Fantasy.DataStructure;
+
 // ReSharper disable CollectionNeverQueried.Global
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     /// <summary>
     /// AssemblyInfo提供有关程序集和类型的信息

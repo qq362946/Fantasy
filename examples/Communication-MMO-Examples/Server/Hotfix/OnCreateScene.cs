@@ -1,6 +1,5 @@
-using Fantasy.Core.Network;
+using Fantasy;
 using BestGame;
-namespace Fantasy.Hotfix;
 
 /// <summary>
 /// 当Scene创建时需要干什么
@@ -14,6 +13,9 @@ public class OnCreateScene : AsyncEventSystem<Fantasy.OnCreateScene>
         // 比如Address协议这里、我就是做了一个管理Address地址的一个组件挂在到Address这个Scene下面了
         // 比如Map下你需要一些自定义组件、你也可以在这里操作
         var scene = self.Scene;
+
+        scene.AddComponent<GuiderComponent>();
+
         switch (scene.SceneType)
         {
             case SceneType.Addressable:

@@ -1,13 +1,13 @@
 using System;
 using System.IO;
 using System.Net.Sockets;
-using Fantasy.DataStructure;
+
 // ReSharper disable InconsistentNaming
 #pragma warning disable CS8622
 #pragma warning disable CS8601
 #pragma warning disable CS8618
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// TCP 服务器网络通道，用于处理服务器与客户端之间的数据通信。

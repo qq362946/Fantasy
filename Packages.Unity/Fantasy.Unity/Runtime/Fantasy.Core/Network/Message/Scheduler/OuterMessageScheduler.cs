@@ -1,8 +1,7 @@
 using System;
-using Fantasy.IO;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 提供了一个机制来调度和处理外部网络消息。

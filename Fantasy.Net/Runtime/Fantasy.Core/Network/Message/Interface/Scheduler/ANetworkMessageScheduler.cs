@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using Fantasy.Helper;
 
-namespace Fantasy.Core.Network
+
+namespace Fantasy
 {
     /// <summary>
     /// 抽象网络消息调度器基类，用于处理网络消息的调度和处理逻辑。

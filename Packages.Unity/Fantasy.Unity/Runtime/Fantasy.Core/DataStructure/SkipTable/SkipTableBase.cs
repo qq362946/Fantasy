@@ -6,7 +6,7 @@ using System.Collections.Generic;
 #pragma warning disable CS8625
 #pragma warning disable CS8604
 
-namespace Fantasy.DataStructure
+namespace Fantasy
 {
     /// <summary>
     /// 抽象的跳表基类，提供跳表的基本功能和操作。

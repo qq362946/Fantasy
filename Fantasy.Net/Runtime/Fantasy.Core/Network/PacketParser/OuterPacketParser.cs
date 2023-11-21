@@ -1,11 +1,10 @@
 using System;
 using System.Buffers;
 using System.IO;
-using Fantasy.DataStructure;
-using Fantasy.Helper;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 用于解析外部网络消息的数据包信息。

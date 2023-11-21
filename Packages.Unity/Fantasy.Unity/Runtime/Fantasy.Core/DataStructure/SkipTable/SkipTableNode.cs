@@ -1,4 +1,4 @@
-namespace Fantasy.DataStructure
+namespace Fantasy
 {
     /// <summary>
     /// 跳跃表节点。

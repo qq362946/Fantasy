@@ -1,4 +1,4 @@
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 网络更新的接口。

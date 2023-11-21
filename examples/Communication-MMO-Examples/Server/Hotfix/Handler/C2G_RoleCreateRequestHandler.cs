@@ -1,8 +1,5 @@
 ﻿using System;
 using Fantasy;
-using Fantasy.Core;
-using Fantasy.Helper;
-using Fantasy.Core.Network;
 
 namespace BestGame
 {
@@ -36,7 +33,7 @@ namespace BestGame
             var sessionPlayer = session.GetComponent<SessionPlayerComponent>();
             var gateAccountManager = session.Scene.GetComponent<GateAccountManager>();
 
-            long accountId = sessionPlayer.playerId;
+            long accountId = sessionPlayer.gateAccount.Id;
             
             try
             {

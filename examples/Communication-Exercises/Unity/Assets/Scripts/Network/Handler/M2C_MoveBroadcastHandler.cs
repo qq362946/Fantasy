@@ -1,6 +1,4 @@
 using Fantasy;
-using Fantasy.Core.Network;
-using Fantasy.Helper;
 
 public class M2C_MoveBroadcastHandler : Message<M2C_MoveBroadcast>
 {

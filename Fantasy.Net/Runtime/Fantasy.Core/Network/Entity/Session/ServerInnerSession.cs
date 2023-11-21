@@ -1,5 +1,5 @@
 #if FANTASY_NET
-namespace Fantasy.Core.Network;
+namespace Fantasy;
 
 /// <summary>
 /// 网络服务器内部会话。

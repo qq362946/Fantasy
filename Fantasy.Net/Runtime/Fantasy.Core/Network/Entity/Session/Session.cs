@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using Fantasy.Helper;
+
 #pragma warning disable CS8603
 #pragma warning disable CS8601
 #pragma warning disable CS8618
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 网络会话的基类，用于管理网络通信。

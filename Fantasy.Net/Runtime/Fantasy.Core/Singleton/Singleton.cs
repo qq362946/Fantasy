@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 #pragma warning disable CS8601
 #pragma warning disable CS8618
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     /// <summary>
     /// 抽象的单例基类，继承自 <see cref="ISingleton"/> 接口。

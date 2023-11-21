@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     /// <summary>
     /// 指定键的协程锁队列类型，用于管理不同类型的协程锁队列。

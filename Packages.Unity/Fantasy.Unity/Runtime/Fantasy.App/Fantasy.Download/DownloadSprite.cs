@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     public sealed class DownloadSprite : AUnityDownload
     {

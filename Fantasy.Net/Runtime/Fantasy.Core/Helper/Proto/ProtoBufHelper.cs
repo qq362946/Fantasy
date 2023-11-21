@@ -5,7 +5,7 @@ using System.Reflection;
 using ProtoBuf;
 using ProtoBuf.Meta;
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     /// <summary>
     /// 提供ProtoBuf序列化和反序列化的帮助方法类。

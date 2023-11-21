@@ -1,6 +1,6 @@
 using System;
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     /// <summary>
     /// 提供用于生成不同类型 ID 的工厂类。

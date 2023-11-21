@@ -1,8 +1,6 @@
-using Fantasy.Core;
-using Fantasy.Core.DataBase;
 #pragma warning disable CS8603
 
-namespace Fantasy.Hotfix;
+namespace Fantasy;
 
 public static class ConfigTableHelper
 {

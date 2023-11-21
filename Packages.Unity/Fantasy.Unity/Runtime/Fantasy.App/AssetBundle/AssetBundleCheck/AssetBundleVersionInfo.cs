@@ -2,7 +2,7 @@
 using ProtoBuf;
 using System.Collections.Generic;
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     [ProtoContract]
     public sealed class AssetBundleVersion

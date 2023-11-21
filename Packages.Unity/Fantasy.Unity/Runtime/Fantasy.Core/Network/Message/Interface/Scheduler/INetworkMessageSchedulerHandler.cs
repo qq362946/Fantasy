@@ -1,7 +1,7 @@
 // using System;
 // using System.IO;
 //
-// namespace Fantasy.Core.Network
+// namespace Fantasy
 // {
 //     public enum NetworkMessageSchedulerHandlerType
 //     {

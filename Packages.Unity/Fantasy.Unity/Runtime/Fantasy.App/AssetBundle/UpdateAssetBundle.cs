@@ -2,8 +2,6 @@
 // using System.Collections.Generic;
 // using System.IO;
 // using System.Linq;
-// using Fantasy.Core;
-// using Fantasy.Helper;
 // using UnityEngine;
 //
 // namespace Fantasy

@@ -1,6 +1,3 @@
-using Fantasy.Core.Network;
-using Fantasy.Core;
-using Fantasy.Helper;
 using Fantasy;
 
 namespace BestGame;
@@ -28,12 +25,9 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
             return ErrorCode.H_C2G_EnterGame_Error01;
 
         var sessionPlayer = session.GetComponent<SessionPlayerComponent>();
+        var guider = session.Scene.GetComponent<GuiderComponent>();
         var gateAccount = sessionPlayer.gateAccount;
-        var accountId = sessionPlayer.playerId;
-
-        // 获取目标地图的mapScene
-        // 随机一个目录地图的mapScene，但不需要存库。缓存在gateAccount，维护周期内记住就行
-        var mapScene = gateAccount.GetMapScene(request.MapNum,session.Scene.World.Id);
+        var accountId = gateAccount.Id;
 
         // 正在进入游戏中 操作过于频繁
         if (sessionPlayer.EnterState == SessionState.Entering)
@@ -51,6 +45,7 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 
                 // 思考，此时gateAccount中是否肯定已有所有角色的缓存
                 var gateRole = gateAccount.GetRole(request.RoleId);
+                gateAccount.SelectRoleId = request.RoleId;
 
                 // 没有指定角色
                 if (gateRole == null)
@@ -65,9 +60,9 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 // 已经进入游戏、延迟下线中
                 if (sessionPlayer.EnterState == SessionState.Enter)
                 {
-                    // sessionPlayer.playerId = accountId = unitId
+                    // accountId = unitId
                     // 以unitId发IAddressableRouteMessage消息
-                    MessageHelper.SendAddressable(session.Scene, sessionPlayer.playerId,
+                    MessageHelper.SendAddressable(session.Scene, accountId,
                         new G2M_Return2MapMsg
                         {
                             MapNum = request.MapNum
@@ -78,9 +73,12 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 // 设置进入状态
                 sessionPlayer.EnterState = SessionState.Entering;
 
+                // 获取目标地图的mapScene
+                // 随机一个目录地图的mapScene，但不需要存库。缓存在gateAccount，维护周期内记住就行
+                var mapScene = gateAccount.GetMapScene(request.MapNum,session.Scene.World.Id);
+
                 // 地图传送或创建unit
-                bool inMap = gateRole.IsInMap();
-                if (inMap)
+                if (gateRole.IsInMap())
                 {
                     // 地图传送 ...
                 }
@@ -91,21 +89,24 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                     var result = (M2G_CreateUnitResponse)await MessageHelper.CallInnerRoute(session.Scene,mapScene.EntityId,
                         new G2M_CreateUnitRequest()
                         {
-                            PlayerId = sessionPlayer.playerId,
+                            PlayerId = accountId,
                             SessionRuntimeId = session.RuntimeId,
                             GateSceneRouteId = session.Scene.RuntimeId,
                             RoleInfo = gateRole.ToProto(),
                         });
 
                     // 缓存AddressableId
-                    if(result.ErrorCode == ErrorCode.Success)
-                        gateAccount.AddressableId = result.AddressableId;
-                    else
+                    if(result.ErrorCode != ErrorCode.Success)
                         return result.ErrorCode;
+                    
+                    gateAccount.AddressableId = result.AddressableId;
                 }
 
                 // SetRoleEnterMap
-                SetRoleEnterMap(session,gateRole,request.MapNum);
+                guider.SetRoleEnterMap(session,request.MapNum);
+
+                if (LoginHelper.CheckSessionValid(session, session.RuntimeId))
+                    sessionPlayer.EnterState = SessionState.Enter;
             }
             catch (Exception e)
             {
@@ -115,44 +116,13 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
             finally
             {
                 // Session有效，存在sessionPlayer且未进入游戏，设置状态为None
-                if (LoginHelper.CheckSessionValid(session, session.RuntimeId))
-                {
-                    if (sessionPlayer != null && sessionPlayer.EnterState != SessionState.Enter)
-                        sessionPlayer.EnterState = SessionState.None;
-                }
+                if (LoginHelper.CheckSessionValid(session, session.RuntimeId) && 
+                    sessionPlayer != null && sessionPlayer.EnterState != SessionState.Enter)
+                    sessionPlayer.EnterState = SessionState.None;
+                
             }
         }
 
         return ErrorCode.Success;
-    }
-
-    public void SetRoleEnterMap(Session session,Role gateRole,int mapNum)
-    {
-        var sessionPlayer = session.GetComponent<SessionPlayerComponent>();
-        var gateAccount = sessionPlayer.gateAccount;
-
-        // 记录最后进入角色时间
-        gateRole.LastEnterRoleTime = TimeHelper.Now;
-
-        // 记录最后进入的地图
-        gateRole.LastMap = mapNum;
-        // 设置在线状态
-        gateRole.State = RoleState.Online;
-        // 记录网关sessionId
-        gateRole.sessionRuntimeId = session.RuntimeId;
-
-        // 设置在线的角色ID
-        gateAccount.SelectRoleId = gateRole.Id;
-        
-        // Session有效才挂AddressableRouteComponent
-        if (LoginHelper.CheckSessionValid(session, session.RuntimeId))
-        {
-            // 设置进入状态
-            sessionPlayer.EnterState = SessionState.Enter;
-
-            // 挂寻址路由组件，session就可以收、转发路由消息了
-            // AddressableRouteComponent组件是只给session用的，SetAddressableId设置转发目标
-            session.AddComponent<AddressableRouteComponent>().SetAddressableId(gateAccount.AddressableId);
-        }
     }
 }

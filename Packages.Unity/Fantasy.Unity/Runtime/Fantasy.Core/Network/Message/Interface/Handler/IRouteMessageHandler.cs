@@ -1,7 +1,7 @@
 #if FANTASY_NET
 // ReSharper disable InconsistentNaming
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 表示路由消息处理器的接口，处理特定类型的路由消息。

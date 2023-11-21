@@ -8,8 +8,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using AssetBundleBrowser.AssetBundleDataSource;
 using Fantasy;
-using Fantasy.Helper;
-using Fantasy.Unity;
 using Debug = UnityEngine.Debug;
 
 namespace AssetBundleBrowser

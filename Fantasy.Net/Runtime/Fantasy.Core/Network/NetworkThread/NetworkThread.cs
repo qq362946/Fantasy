@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Fantasy.Helper;
+
 #pragma warning disable CS8625
 #pragma warning disable CS8618
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 网络线程管理器的单例类。负责处理网络相关操作、通信以及线程管理。

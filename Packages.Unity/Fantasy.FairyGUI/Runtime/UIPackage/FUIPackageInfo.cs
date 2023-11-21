@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using FairyGUI;
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     public sealed class FUIPackageInfo : IDisposable
     {

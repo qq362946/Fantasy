@@ -1,4 +1,4 @@
-namespace Fantasy.Core.Network
+namespace Fantasy
 #pragma warning disable CS1591
 {
     public enum KcpHeader : byte

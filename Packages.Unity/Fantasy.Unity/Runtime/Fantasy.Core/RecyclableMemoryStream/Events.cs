@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 // ---------------------------------------------------------------------
 
-namespace Fantasy.IO
+namespace Fantasy
 {
     using System;
     using System.Diagnostics.Tracing;

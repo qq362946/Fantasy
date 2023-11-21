@@ -1,5 +1,5 @@
 #if FANTASY_NET
-namespace Fantasy.Core.Network;
+namespace Fantasy;
 
 /// <summary>
 /// 自定义Route组件、如果要自定义Route协议必须使用这个组件

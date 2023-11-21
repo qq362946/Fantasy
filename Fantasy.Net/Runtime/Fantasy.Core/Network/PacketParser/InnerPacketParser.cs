@@ -1,13 +1,12 @@
 #if FANTASY_NET
 using System.Buffers;
-using Fantasy.DataStructure;
-using Fantasy.Helper;
+
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
-namespace Fantasy.Core.Network;
+namespace Fantasy;
 
 /// <summary>
 /// 用于处理内部网络数据包信息的类。
