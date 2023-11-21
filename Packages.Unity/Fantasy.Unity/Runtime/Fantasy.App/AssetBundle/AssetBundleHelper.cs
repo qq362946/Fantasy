@@ -3,13 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Fantasy.Core;
-using Fantasy.DataStructure;
-using Fantasy.Unity;
 using UnityEditor;
 using UnityEngine;
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     public static class AssetBundleHelper
     {

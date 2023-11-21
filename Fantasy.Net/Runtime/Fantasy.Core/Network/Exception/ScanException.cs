@@ -1,6 +1,6 @@
 using System;
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 在扫描过程中发生的异常。

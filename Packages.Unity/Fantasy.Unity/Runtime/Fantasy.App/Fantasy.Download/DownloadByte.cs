@@ -1,7 +1,7 @@
 #if FANTASY_UNITY
 using UnityEngine.Networking;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     public sealed class DownloadByte : AUnityDownload
     {

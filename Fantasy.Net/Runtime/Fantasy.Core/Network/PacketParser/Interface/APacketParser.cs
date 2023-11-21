@@ -1,10 +1,9 @@
 using System;
 using System.Buffers;
 using System.IO;
-using Fantasy.DataStructure;
-using Fantasy.Helper;
 
-namespace Fantasy.Core.Network
+
+namespace Fantasy
 {
     /// <summary>
     /// 抽象的包解析器基类，用于解析网络通信数据包。

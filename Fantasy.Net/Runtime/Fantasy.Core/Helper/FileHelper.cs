@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     /// <summary>
     /// 文件操作助手类，提供了各种文件操作方法。

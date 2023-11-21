@@ -1,6 +1,6 @@
 using System;
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 提供了一个用于客户端网络消息调度和处理的抽象基类。

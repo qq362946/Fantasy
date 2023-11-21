@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fantasy.DataStructure
+namespace Fantasy
 {
     /// <summary>
     /// 可回收的、一对多关系的列表池。

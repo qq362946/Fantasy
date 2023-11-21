@@ -6,13 +6,13 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Fantasy.Helper;
+
 using kcp2k;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable PossibleNullReferenceException
 // ReSharper disable InconsistentNaming
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// KCP协议客户端网络类，用于管理KCP客户端网络连接。

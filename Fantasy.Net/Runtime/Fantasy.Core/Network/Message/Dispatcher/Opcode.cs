@@ -1,5 +1,5 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 定义了各种消息操作码，用于标识不同类型的消息和请求。

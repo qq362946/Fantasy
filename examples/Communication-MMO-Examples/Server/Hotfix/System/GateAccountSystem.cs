@@ -1,6 +1,5 @@
 ﻿using Fantasy;
-using Fantasy.Core.Network;
-using Fantasy.Core.DataBase;
+
 namespace BestGame;
 
 public class GateAccountDestroySystem : DestroySystem<GateAccount>

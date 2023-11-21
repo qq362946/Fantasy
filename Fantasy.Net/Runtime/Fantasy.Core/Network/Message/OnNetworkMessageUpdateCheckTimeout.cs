@@ -1,7 +1,7 @@
 #if FANTASY_NET
-using Fantasy.Helper;
 
-namespace Fantasy.Core.Network;
+
+namespace Fantasy;
 
 /// <summary>
 /// 定时处理网络消息超时的任务。

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     public sealed class AudioComponent : Entity
     {

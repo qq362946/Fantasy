@@ -1,5 +1,5 @@
 #if FANTASY_NET
-namespace Fantasy.Core.Network;
+namespace Fantasy;
 
 /// <summary>
 /// 声明一个 sealed 类 I_AddressableGetHandler，继承自 RouteRPC 类，并指定泛型参数

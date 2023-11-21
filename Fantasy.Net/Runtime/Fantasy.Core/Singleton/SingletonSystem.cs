@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
-using Fantasy.DataStructure;
 
-namespace Fantasy.Helper
+
+namespace Fantasy
 {
     /// <summary>
     /// 单例管理系统，负责管理和调度实现 <see cref="ISingleton"/> 接口的单例对象。

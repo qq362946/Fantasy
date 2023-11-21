@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Fantasy.Core;
-using Fantasy.Helper;
 using UnityEngine;
 // ReSharper disable MethodHasAsyncOverload
 
-namespace Fantasy.Unity
+namespace Fantasy
 {
     public enum AssetBundleUpdateState
     {

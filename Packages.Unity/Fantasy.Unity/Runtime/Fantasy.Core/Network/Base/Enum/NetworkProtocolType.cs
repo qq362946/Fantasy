@@ -1,4 +1,4 @@
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 表示网络通信协议类型的枚举。

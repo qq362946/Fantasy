@@ -1,7 +1,6 @@
 using System.Text;
 using Exporter;
-using Fantasy.Core.Network;
-using Fantasy.Helper;
+using Fantasy;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.

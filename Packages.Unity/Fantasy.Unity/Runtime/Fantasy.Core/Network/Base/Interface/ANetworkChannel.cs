@@ -4,7 +4,7 @@ using System.Net;
 #pragma warning disable CS8625
 #pragma warning disable CS8618
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 抽象的网络通道基类。

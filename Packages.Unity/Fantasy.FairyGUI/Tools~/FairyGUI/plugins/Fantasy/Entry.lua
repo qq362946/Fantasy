@@ -23,7 +23,7 @@ function onPublish(handler)
         
         writer:writeln('using FairyGUI;')
         writer:writeln('using FairyGUI.Utils;')
-        writer:writeln('using Fantasy.Core;')
+        writer:writeln('using Fantasy;')
         writer:writeln()
         writer:writeln('namespace Fantasy')
         writer:startBlock()

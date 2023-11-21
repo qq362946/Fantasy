@@ -1,6 +1,5 @@
-using Fantasy.Core.Network;
+using Fantasy;
 using BestGame;
-namespace Fantasy.Hotfix;
 
 /// <summary>
 /// 当Scene创建时需要干什么

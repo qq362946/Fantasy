@@ -1,6 +1,6 @@
 #if FANTASY_NET
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 提供操作地址映射的辅助方法。

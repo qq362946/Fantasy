@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using Fantasy.Helper;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Fantasy.Editor
+namespace Fantasy
 {
     public class FantasySettingsProvider : SettingsProvider
     {

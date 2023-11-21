@@ -1,10 +1,10 @@
 #if FANTASY_UNITY
 using System;
 using System.Collections.Generic;
-using Fantasy.Helper;
+
 using UnityEngine;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     /// <summary>
     /// 配置表管理器，用于加载和管理配置表数据。

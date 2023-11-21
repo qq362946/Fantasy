@@ -1,8 +1,6 @@
 #if FANTASY_UNITY
-using Fantasy.Core.Network;
-using Fantasy.Helper;
 
-namespace Fantasy.Model
+namespace Fantasy
 {
     /// <summary>
     /// 负责管理会话心跳的组件。

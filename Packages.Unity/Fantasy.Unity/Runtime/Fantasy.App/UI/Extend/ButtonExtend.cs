@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     public class ButtonExtend : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {

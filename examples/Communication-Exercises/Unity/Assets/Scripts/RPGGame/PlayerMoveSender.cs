@@ -1,6 +1,5 @@
 using Fantasy;
 using UnityEngine;
-using Fantasy.Helper;
 
 public class PlayerMoveSender : MonoBehaviour
 {

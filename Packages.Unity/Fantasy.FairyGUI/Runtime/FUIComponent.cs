@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FairyGUI;
-using Fantasy.Core;
-using Fantasy.Helper;
+using Fantasy;
 using UnityEngine;
 
 namespace Fantasy.FairyGUI

@@ -1,9 +1,9 @@
 #if FANTASY_NET
-using Fantasy.Core.Network;
+
 // ReSharper disable CollectionNeverQueried.Global
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Fantasy.Core;
+namespace Fantasy;
 
 /// <summary>
 /// 连接其他进程实体地址管理组件

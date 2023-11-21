@@ -2,7 +2,7 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Fantasy.Editor
+namespace Fantasy
 {
     [ScriptableObjectPath("ProjectSettings/FantasySettings.asset")]
     public class FantasySettingsScriptableObject : ScriptableObjectSingleton<FantasySettingsScriptableObject>

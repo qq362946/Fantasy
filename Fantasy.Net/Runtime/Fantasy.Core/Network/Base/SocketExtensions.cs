@@ -1,6 +1,6 @@
 using System.Net.Sockets;
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 提供扩展方法以操作 Socket 缓冲区大小。

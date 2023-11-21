@@ -24,3 +24,5 @@ Packages.Unity/**/*.meta
 *.DS_Store
 # 不排除示例项目的.vscode
 !examples/**/.vscode
+!Tools/**/.vscode
+examples/**/Unity/.vscode

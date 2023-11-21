@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Fantasy.DataStructure
+namespace Fantasy
 {
     /// <summary>
     /// 一对多哈希集合（OneToManyHashSet）对象池。

@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     /// <summary>
     /// 表示一个运行时 ID 的结构。

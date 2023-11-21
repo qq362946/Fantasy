@@ -1,11 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Fantasy.Core.Network;
-using Fantasy.Helper;
-#if FANTASY_NET
-using Fantasy.Core;
-using Fantasy.Core.DataBase;
-#endif
+
 namespace Fantasy
 {
     /// <summary>

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Fantasy.DataStructure
+namespace Fantasy
 {
     /// <summary>
     /// 提供一个带资源释放功能的实体字典类，支持使用对象池管理。

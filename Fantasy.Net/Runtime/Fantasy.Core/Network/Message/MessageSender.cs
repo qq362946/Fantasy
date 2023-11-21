@@ -1,9 +1,9 @@
 using System;
-using Fantasy.Helper;
+
 #pragma warning disable CS8625
 #pragma warning disable CS8618
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 网络消息发送者的类。

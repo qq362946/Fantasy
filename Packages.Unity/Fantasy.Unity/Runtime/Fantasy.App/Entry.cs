@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using Fantasy.Helper;
 using UnityEngine;
 
 namespace Fantasy

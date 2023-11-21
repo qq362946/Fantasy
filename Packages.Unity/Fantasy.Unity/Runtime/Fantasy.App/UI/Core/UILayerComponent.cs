@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     public sealed class UILayerComponent : Entity
     {

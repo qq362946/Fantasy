@@ -1,5 +1,4 @@
 using Fantasy;
-using Fantasy.Core.Network;
 
 namespace BestGame;
 

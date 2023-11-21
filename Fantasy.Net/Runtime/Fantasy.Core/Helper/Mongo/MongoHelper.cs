@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.Serializers;
 using Unity.Mathematics;
 
-namespace Fantasy.Helper;
+namespace Fantasy;
 
 /// <summary>
 /// 提供与MongoDB数据序列化和反序列化相关的帮助方法。
@@ -254,7 +254,7 @@ public sealed class MongoHelper : Singleton<MongoHelper>
 #if FANTASY_UNITY
 using System;
 using System.IO;
-namespace Fantasy.Helper
+namespace Fantasy
 {
     public sealed class MongoHelper : Singleton<MongoHelper>
     {

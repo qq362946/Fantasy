@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using FairyGUI;
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     public static class FUIPackageHelper
     {

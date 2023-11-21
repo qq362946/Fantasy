@@ -1,7 +1,6 @@
 using System;
 using FairyGUI;
-using Fantasy.Core;
-using Fantasy.Helper;
+using Fantasy;
 
 namespace Fantasy.FairyGUI
 {

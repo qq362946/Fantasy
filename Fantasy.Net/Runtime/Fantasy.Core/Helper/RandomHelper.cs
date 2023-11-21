@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Fantasy.DataStructure;
 
-namespace Fantasy.Helper
+
+namespace Fantasy
 {
     /// <summary>
     /// 随机数操作助手类，提供各种随机数生成和操作方法。

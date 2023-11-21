@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 #pragma warning disable CS8601
 
-namespace Fantasy.DataStructure
+namespace Fantasy
 {
     /// <summary>
     /// 提供对字典的扩展方法。

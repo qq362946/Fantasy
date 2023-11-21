@@ -1,4 +1,4 @@
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 表示通用消息接口。

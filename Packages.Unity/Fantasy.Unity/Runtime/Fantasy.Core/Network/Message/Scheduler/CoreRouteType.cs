@@ -1,4 +1,4 @@
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 提供了一组框架内置的核心路由类型。

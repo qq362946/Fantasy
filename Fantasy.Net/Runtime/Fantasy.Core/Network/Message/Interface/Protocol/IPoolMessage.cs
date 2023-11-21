@@ -1,6 +1,6 @@
 using System;
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 继承这个的Message协议会在序列化后回收到对象池中

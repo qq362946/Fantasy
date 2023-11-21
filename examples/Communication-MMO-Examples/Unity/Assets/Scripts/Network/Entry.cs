@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Fantasy;
-using Fantasy.Core.Network;
-using Fantasy.Helper;
-using Fantasy.Model;
 using UnityEngine;
 
 using BestGame;
