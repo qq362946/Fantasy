@@ -1,10 +1,8 @@
 #if FANTASY_NET
-using Fantasy.Core.DataBase;
-using Fantasy.DataStructure;
-using Fantasy.Helper;
+
 // ReSharper disable SuspiciousTypeConversion.Global
 
-namespace Fantasy.Hotfix;
+namespace Fantasy;
 
 /// <summary>
 /// 单例集合管理器类，继承自 <see cref="Singleton{T}"/>。

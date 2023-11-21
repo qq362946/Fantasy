@@ -4,14 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using Fantasy.DataStructure;
-using Fantasy.Helper;
+
 using kcp2k;
 
 // ReSharper disable InconsistentNaming
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// KCP 服务端网络实现。

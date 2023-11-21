@@ -1,5 +1,5 @@
 
-namespace Fantasy.DataStructure
+namespace Fantasy
 {
     /// <summary>
     /// 跳表降序版，用于存储降序排列的数据。

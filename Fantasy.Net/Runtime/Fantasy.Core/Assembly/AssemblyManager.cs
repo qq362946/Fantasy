@@ -7,7 +7,7 @@ using System.Runtime.Loader;
 #endif
 #pragma warning disable CS8603
 #pragma warning disable CS8618
-namespace Fantasy.Helper
+namespace Fantasy
 {
     /// <summary>
     /// 管理程序集加载和卸载的帮助类。

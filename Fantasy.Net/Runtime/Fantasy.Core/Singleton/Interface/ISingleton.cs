@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
     /// <summary>
     /// 定义一个单例接口，表示可以被初始化并在销毁时进行处理。

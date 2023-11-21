@@ -1,4 +1,4 @@
-namespace Fantasy.Core
+namespace Fantasy
 {
     /// <summary>
     /// 定义 Fantasy 框架中的核心错误代码。

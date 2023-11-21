@@ -1,6 +1,6 @@
 #if FANTASY_UNITY
 using UnityEngine;
-namespace Fantasy.Helper
+namespace Fantasy
 {
     public sealed class AssetBundleInfo
     {

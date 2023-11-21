@@ -1,5 +1,5 @@
 #if FANTASY_NET
-namespace Fantasy.Core;
+namespace Fantasy;
 
 /// <summary>
 /// 定义包含 Fantasy 系统设置的静态类。

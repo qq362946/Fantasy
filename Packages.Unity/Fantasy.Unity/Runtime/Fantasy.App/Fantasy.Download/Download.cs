@@ -1,10 +1,9 @@
 #if FANTASY_UNITY
 using System.Collections.Generic;
 using System.Linq;
-using Fantasy.Helper;
 using UnityEngine;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     public sealed class Download
     {

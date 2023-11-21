@@ -2,7 +2,7 @@
 using System;
 using UnityEngine.Networking;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     public abstract class AUnityDownload : IDisposable
     {

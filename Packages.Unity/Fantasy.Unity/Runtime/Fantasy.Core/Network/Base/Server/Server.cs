@@ -1,7 +1,4 @@
 #if FANTASY_NET
-using Fantasy.Core;
-using Fantasy.Core.Network;
-using Fantasy.Helper;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
 namespace Fantasy

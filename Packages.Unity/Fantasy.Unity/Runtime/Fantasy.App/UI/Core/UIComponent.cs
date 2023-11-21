@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Fantasy.Helper;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     public class UIComponentAwakeSystem : AwakeSystem<UIComponent>
     {

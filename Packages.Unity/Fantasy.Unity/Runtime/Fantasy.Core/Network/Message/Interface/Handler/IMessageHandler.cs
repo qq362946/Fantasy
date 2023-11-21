@@ -2,7 +2,7 @@
 
 using System;
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 表示消息处理器的接口，处理特定类型的消息。

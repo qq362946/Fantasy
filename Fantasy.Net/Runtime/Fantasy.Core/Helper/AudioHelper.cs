@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-namespace Fantasy.Helper
+namespace Fantasy
 {
 	public static class AudioHelper
 	{

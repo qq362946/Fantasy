@@ -1,7 +1,7 @@
 using System;
-using Fantasy.Helper;
 
-namespace Fantasy.Core
+
+namespace Fantasy
 {
     /// <summary>
     /// 等待协程锁超时的数据结构

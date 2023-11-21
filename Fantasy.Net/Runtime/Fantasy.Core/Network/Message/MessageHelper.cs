@@ -1,9 +1,9 @@
-using Fantasy.Helper;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8603
 
 #if FANTASY_NET
-namespace Fantasy.Core.Network;
+namespace Fantasy;
 
 /// <summary>
 /// 消息辅助类，用于处理网络消息的发送和接收。

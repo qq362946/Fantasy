@@ -1,8 +1,7 @@
 #if FANTASY_NET
-using Fantasy.Core.DataBase;
-using Fantasy.Helper;
 
-namespace Fantasy.Core
+
+namespace Fantasy
 {
     /// <summary>
     /// 配置表管理器

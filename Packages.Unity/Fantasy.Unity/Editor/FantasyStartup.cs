@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Fantasy.Editor
+namespace Fantasy
 {
     [InitializeOnLoad]
     public static class FantasyStartup

@@ -1,8 +1,7 @@
 #if FANTASY_NET
-using Fantasy.Core.Network;
-using Fantasy.Helper;
 
-namespace Fantasy.Core;
+
+namespace Fantasy;
 
 /// <summary>
 /// 负责检查会话空闲超时的组件。

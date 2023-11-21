@@ -1,11 +1,11 @@
 #if FANTASY_NET
-using Fantasy.Helper;
+
 using Microsoft.Extensions.Configuration;
 #pragma warning disable CS8604
 #pragma warning disable CS8601
 #pragma warning disable CS8618
 
-namespace Fantasy.Core;
+namespace Fantasy;
 
 /// <summary>
 /// FantasySettingsHelper 类用于加载和管理 Fantasy 系统的各项设置。

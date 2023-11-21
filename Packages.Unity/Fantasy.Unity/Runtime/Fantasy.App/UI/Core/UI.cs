@@ -1,8 +1,7 @@
 using System;
-using Fantasy.Helper;
 using UnityEngine;
 
-namespace Fantasy.Core
+namespace Fantasy
 {
     public abstract class UI : Entity
     {

@@ -1,7 +1,5 @@
 using CommandLine;
-using Fantasy.Core;
-using Fantasy.Core.Network;
-using Fantasy.Helper;
+
 using Microsoft.Extensions.Configuration;
 using NLog;
 

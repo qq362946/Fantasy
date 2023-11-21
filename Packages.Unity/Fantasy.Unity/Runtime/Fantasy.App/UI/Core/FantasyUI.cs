@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 // ReSharper disable PossibleNullReferenceException
 
-namespace Fantasy.Core
+namespace Fantasy
 {
 	[Serializable]
 	public class FantasyUIData

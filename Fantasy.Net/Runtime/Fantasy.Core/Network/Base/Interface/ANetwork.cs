@@ -1,12 +1,12 @@
 using System;
 using System.Buffers;
 using System.IO;
-using Fantasy.Helper;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8625
 #pragma warning disable CS8618
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 消息缓存信息结构。

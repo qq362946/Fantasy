@@ -1,10 +1,10 @@
 #if FANTASY_NET
 using System.Linq.Expressions;
-using Fantasy.Helper;
+
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Fantasy.Core.DataBase;
+namespace Fantasy;
 
 /// <summary>
 /// 使用 MongoDB 数据库的实现。

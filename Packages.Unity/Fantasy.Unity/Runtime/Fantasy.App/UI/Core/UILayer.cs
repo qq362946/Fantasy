@@ -1,4 +1,4 @@
-namespace Fantasy.Core
+namespace Fantasy
 {
     public enum UILayer
     {

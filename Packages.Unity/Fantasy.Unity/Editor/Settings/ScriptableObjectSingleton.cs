@@ -6,7 +6,7 @@ using UnityEditorInternal;
 using UnityEngine;
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace Fantasy.Editor
+namespace Fantasy
 {
     public class ScriptableObjectSingleton<T> : ScriptableObject where T : ScriptableObject
     {

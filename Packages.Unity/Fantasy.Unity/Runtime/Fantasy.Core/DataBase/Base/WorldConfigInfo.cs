@@ -1,5 +1,5 @@
 #if FANTASY_NET
-namespace Fantasy.Core.DataBase;
+namespace Fantasy;
 
 /// <summary>
 /// 表示游戏世界的配置信息。

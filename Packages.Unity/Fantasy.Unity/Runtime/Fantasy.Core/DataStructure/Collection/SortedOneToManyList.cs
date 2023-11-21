@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 #pragma warning disable CS8603
 
-namespace Fantasy.DataStructure
+namespace Fantasy
 {
     /// <summary>
     /// 基于排序字典实现的一对多映射列表的对象池包装类，继承自 <see cref="SortedOneToManyList{TKey, TValue}"/> 类，

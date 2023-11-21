@@ -5,11 +5,11 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using Fantasy.DataStructure;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable InconsistentNaming
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// TCP客户端网络类，用于管理TCP客户端网络连接。

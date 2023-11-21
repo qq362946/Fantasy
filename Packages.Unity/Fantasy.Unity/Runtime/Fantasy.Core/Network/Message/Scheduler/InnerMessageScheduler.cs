@@ -1,7 +1,7 @@
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #if FANTASY_NET
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 提供了一个机制来调度和处理内部网络消息。

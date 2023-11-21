@@ -4,7 +4,7 @@ using HybridCLR.Editor.Commands;
 using UnityEditor;
 using UnityEngine;
 
-namespace Fantasy.Editor
+namespace Fantasy
 {
     [InitializeOnLoad]
     public static class Startup

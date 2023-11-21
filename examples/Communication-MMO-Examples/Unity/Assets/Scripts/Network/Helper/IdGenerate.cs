@@ -2,7 +2,6 @@
 using System.Net;
 using System.Threading.Tasks;
 using Fantasy;
-using Fantasy.Helper;
 
 namespace BestGame{
     public static class IdGenerate

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using Fantasy.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
-namespace Fantasy.Core.Editor
+namespace Fantasy
 {
     [CustomEditor(typeof(FantasyUI))]
     public class FantasyUIEditor : UnityEditor.Editor
@@ -210,7 +209,7 @@ namespace Fantasy.Core.Editor
 
             var sb = new StringBuilder();
 
-            sb.AppendLine("using Fantasy.Core;");
+            sb.AppendLine("using Fantasy;");
             sb.AppendLine("\nnamespace Fantasy\n{");
             sb.AppendLine($"\tpublic partial class {_fantasyUI.componentName} : UI\n\t{{");
             sb.AppendLine($"\t\tpublic override string AssetName {{ get; protected set; }} = \"{_fantasyUI.assetName}\";");

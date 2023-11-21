@@ -1,9 +1,9 @@
 using System;
 using System.Buffers;
 using System.IO;
-using Fantasy.Helper;
 
-namespace Fantasy.Core.Network
+
+namespace Fantasy
 {
     /// <summary>
     /// 抽象的数据包信息基类，用于存储解析得到的数据包信息。

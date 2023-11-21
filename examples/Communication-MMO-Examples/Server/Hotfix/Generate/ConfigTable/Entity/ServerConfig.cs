@@ -1,6 +1,6 @@
 using System;
 using ProtoBuf;
-using Fantasy.Core;
+using Fantasy;
 using System.Linq;
 using System.Collections.Generic;
 // ReSharper disable CollectionNeverUpdated.Global

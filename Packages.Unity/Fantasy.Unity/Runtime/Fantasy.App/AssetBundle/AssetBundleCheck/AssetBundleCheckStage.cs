@@ -1,4 +1,4 @@
-namespace Fantasy.Unity
+namespace Fantasy
 {
     public enum AssetBundleCheckStage
     {

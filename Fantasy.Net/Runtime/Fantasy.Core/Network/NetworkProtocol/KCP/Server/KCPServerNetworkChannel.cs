@@ -4,14 +4,13 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
-using Fantasy.DataStructure;
-using Fantasy.Helper;
+
 using kcp2k;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
 // ReSharper disable InconsistentNaming
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// KCP 服务器网络通道类，负责管理基于 KCP 协议的网络通信。

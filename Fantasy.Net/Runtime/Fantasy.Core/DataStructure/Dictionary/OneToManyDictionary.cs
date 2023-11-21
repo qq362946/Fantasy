@@ -4,7 +4,7 @@ using System.Linq;
 #pragma warning disable CS8603
 #pragma warning disable CS8601
 
-namespace Fantasy.DataStructure
+namespace Fantasy
 {
     /// <summary>
     /// 一对多映射关系的字典对象池。

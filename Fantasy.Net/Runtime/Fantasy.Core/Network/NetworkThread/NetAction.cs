@@ -3,7 +3,7 @@ using System.IO;
 #pragma warning disable CS8625
 #pragma warning disable CS8618
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 不同类型的网络操作。

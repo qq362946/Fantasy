@@ -1,6 +1,4 @@
 using Fantasy;
-using Fantasy.Core.DataBase;
-using Fantasy.Core;
 
 namespace BestGame;
 

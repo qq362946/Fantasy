@@ -1,6 +1,6 @@
 #if FANTASY_NET
 using System;
-using Fantasy.Core.Network;
+
 namespace Fantasy
 {
     /// <summary>

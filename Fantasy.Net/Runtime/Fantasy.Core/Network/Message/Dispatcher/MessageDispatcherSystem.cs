@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Fantasy.DataStructure;
-using Fantasy.Helper;
+
 using Type = System.Type;
 
 
 // ReSharper disable PossibleNullReferenceException
 
-namespace Fantasy.Core.Network
+namespace Fantasy
 {
     /// <summary>
     /// 用于存储消息处理器的信息，包括类型和对象实例。
