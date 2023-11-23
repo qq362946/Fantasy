@@ -47,37 +47,24 @@
   <ItemGroup>
      <Compile Include="Assets/AssemblyName.cs" />
      <Compile Include="Assets/Scripts/RPGGame/PlayerMoveSender.cs" />
-     <Compile Include="Assets/Unity-Logs-Viewer/Reporter/Test/Rotate.cs" />
      <Compile Include="Assets/Scripts/Network/MessageInfoHelper.cs" />
      <Compile Include="Assets/Scripts/Network/Handler/M2C_MoveBroadcastHandler.cs" />
-     <Compile Include="Assets/Unity-Logs-Viewer/Reporter/MultiKeyDictionary.cs" />
-     <Compile Include="Assets/Unity-Logs-Viewer/Reporter/Test/TestReporter.cs" />
      <Compile Include="Assets/Scripts/Network/Entry.cs" />
-     <Compile Include="Assets/Unity-Logs-Viewer/Reporter/ReporterGUI.cs" />
      <Compile Include="Assets/Scripts/Hotfix/Generate/NetworkProtocol/OuterMessage.cs" />
-     <Compile Include="Assets/Unity-Logs-Viewer/Reporter/ReporterMessageReceiver.cs" />
      <Compile Include="Assets/Scripts/Hotfix/Generate/NetworkProtocol/RouteType.cs" />
      <Compile Include="Assets/Scripts/Hotfix/Generate/NetworkProtocol/OuterOpcode.cs" />
-     <Compile Include="Assets/Unity-Logs-Viewer/Reporter/Reporter.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets/Scripts/RPGGame" />
-     <Folder Include="Assets/AssetBundles" />
      <Folder Include="Assets/Bundles/Unit" />
      <Folder Include="Assets/StreamingAssets" />
-     <Folder Include="Assets/Unity-Logs-Viewer/Reporter" />
-     <Folder Include="Assets/Unity-Logs-Viewer/Reporter/Images" />
-     <Folder Include="Assets/Unity-Logs-Viewer/ReporterDocumentation" />
      <Folder Include="Assets/Scripts/Network" />
-     <Folder Include="Assets/AssetBundles/StandaloneOSX" />
      <Folder Include="Assets/Scripts/Network/Handler" />
      <Folder Include="Assets/Bundles" />
      <Folder Include="Assets/Scenes" />
      <Folder Include="Assets/Scripts/Hotfix" />
      <Folder Include="Assets/Scripts" />
      <Folder Include="Assets/Scripts/Hotfix/Generate" />
-     <Folder Include="Assets/Unity-Logs-Viewer" />
      <Folder Include="Assets/Scripts/Hotfix/Generate/NetworkProtocol" />
-     <Folder Include="Assets/Unity-Logs-Viewer/Reporter/Test" />
      <Reference Include="UnityEngine">
      <HintPath>/Applications/Unity/Hub/Editor/2022.3.11f1c1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
      </Reference>

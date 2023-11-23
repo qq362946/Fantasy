@@ -26,28 +26,12 @@ public class Entry : MonoBehaviour,ISend
         // 把当前工程的程序集装载到框架中、这样框架才会正常的操作
         // 装载后例如网络协议等一些框架提供的功能就可以使用了
         AssemblyManager.Load(AssemblyName.AssemblyCSharp, GetType().Assembly);
-
         // 连接服务器
-        // ConnectServer();
-        Init().Coroutine();
-    }
-
-    private async FTask Init()
-    {
-        await AssetBundleHelper.Initialize();
-
-        await AssetBundleHelper.LoadBundleAsync("unit");
-
-        var asset = AssetBundleHelper.GetAsset<GameObject>("unit", "Cube");
-        
-        Object.Instantiate(asset);
+        ConnectServer();
     }
 
     private async FTask RealmTest()
     {
-        
-
-        
         // 请求realm验证
         R2C_RegisterResponse register = (R2C_RegisterResponse) await Realm.Session.Call(new C2R_RegisterRequest(){
             UserName = "test",Password = ""
