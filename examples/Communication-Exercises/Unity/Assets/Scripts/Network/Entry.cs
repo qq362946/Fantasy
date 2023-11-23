@@ -2,6 +2,7 @@ using System;
 using Fantasy;
 using UnityEngine;
 using BestGame;
+using Object = UnityEngine.Object;
 
 // 前端发送接口，方便在各unity的脚本中，调用建立session连接的脚本，向服务器发送请求与消息
 // 也可以把在前端创建Scene实例引用存入单例，你可以在各脚本能访问到Scene，就能向服务器发消息
@@ -22,17 +23,31 @@ public class Entry : MonoBehaviour,ISend
         // 框架初始化
         Realm = Fantasy.Entry.Initialize(); 
         Gate  = Scene.Create();
-
         // 把当前工程的程序集装载到框架中、这样框架才会正常的操作
         // 装载后例如网络协议等一些框架提供的功能就可以使用了
         AssemblyManager.Load(AssemblyName.AssemblyCSharp, GetType().Assembly);
 
         // 连接服务器
-        ConnectServer();
+        // ConnectServer();
+        Init().Coroutine();
+    }
+
+    private async FTask Init()
+    {
+        await AssetBundleHelper.Initialize();
+
+        await AssetBundleHelper.LoadBundleAsync("unit");
+
+        var asset = AssetBundleHelper.GetAsset<GameObject>("unit", "Cube");
+        
+        Object.Instantiate(asset);
     }
 
     private async FTask RealmTest()
     {
+        
+
+        
         // 请求realm验证
         R2C_RegisterResponse register = (R2C_RegisterResponse) await Realm.Session.Call(new C2R_RegisterRequest(){
             UserName = "test",Password = ""
