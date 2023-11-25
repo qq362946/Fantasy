@@ -1,6 +1,7 @@
 using System;
 using System.Buffers;
 using System.IO;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8625
 #pragma warning disable CS8618

@@ -292,6 +292,7 @@
      <Compile Include="/Users/sining/Code/Git/Fantasy/Packages.Unity/Fantasy.Unity/Runtime/Fantasy.Core/Entitas/Unity/Attributes/BsonDefaultValueAttribute.cs" />
      <Compile Include="/Users/sining/Code/Git/Fantasy/Packages.Unity/Fantasy.Unity/Runtime/Fantasy.Core/Network/Entity/ClientNetworkComponent.cs" />
      <Compile Include="/Users/sining/Code/Git/Fantasy/Packages.Unity/Fantasy.Unity/Runtime/Fantasy.Core/Network/NetworkProtocol/KCP/Base/KcpHeader.cs" />
+     <Compile Include="/Users/sining/Code/Git/Fantasy/Packages.Unity/Fantasy.Unity/Runtime/Fantasy.Core/Entitas/Interface/System/IFrameUpdateSystem.cs" />
      <Compile Include="/Users/sining/Code/Git/Fantasy/Packages.Unity/Fantasy.Unity/Runtime/Fantasy.App/Protobuf-net/KeyValuePairProxy.cs" />
      <Compile Include="/Users/sining/Code/Git/Fantasy/Packages.Unity/Fantasy.Unity/Runtime/Fantasy.Core/Network/Base/Enum/NetworkTarget.cs" />
      <Compile Include="/Users/sining/Code/Git/Fantasy/Packages.Unity/Fantasy.Unity/Runtime/Fantasy.Core/Network/Message/Interface/Protocol/IPoolMessage.cs" />

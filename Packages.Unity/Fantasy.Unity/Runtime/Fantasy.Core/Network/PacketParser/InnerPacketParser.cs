@@ -1,5 +1,6 @@
 #if FANTASY_NET
 using System.Buffers;
+
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 

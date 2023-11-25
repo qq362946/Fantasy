@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-
 namespace Fantasy
 {
     /// <summary>
@@ -15,8 +14,10 @@ namespace Fantasy
         private readonly Dictionary<Type, IUpdateSystem> _updateSystems = new();
         private readonly Dictionary<Type, IDestroySystem> _destroySystems = new();
         private readonly Dictionary<Type, IEntitiesSystem> _deserializeSystems = new();
+        private readonly Dictionary<Type, IFrameUpdateSystem> _frameUpdateSystem = new();
 
         private readonly Queue<long> _updateQueue = new Queue<long>();
+        private readonly Queue<long> _frameUpdateQueue = new Queue<long>();
 
         /// <summary>
         /// 当加载程序集时的处理方法，用于初始化实体系统列表
@@ -50,6 +51,11 @@ namespace Fantasy
                         _updateSystems.Add(iUpdateSystem.EntitiesType(), iUpdateSystem);
                         break;
                     }
+                    case IFrameUpdateSystem iFrameUpdateSystem:
+                    {
+                        _frameUpdateSystem.Add(iFrameUpdateSystem.EntitiesType(), iFrameUpdateSystem);
+                        break;
+                    }
                 }
 
                 _assemblyList.Add(assemblyName, entitiesSystemType);
@@ -75,6 +81,7 @@ namespace Fantasy
                 _updateSystems.Remove(type);
                 _destroySystems.Remove(type);
                 _deserializeSystems.Remove(type);
+                _frameUpdateSystem.Remove(type);
             }
         }
 
@@ -156,12 +163,55 @@ namespace Fantasy
         /// <param name="entity">实体对象</param>
         public void StartUpdate(Entity entity)
         {
-            if (!_updateSystems.ContainsKey(entity.GetType()))
+            var type = entity.GetType();
+            var entityRuntimeId = entity.RuntimeId;
+            
+            if (_updateSystems.ContainsKey(type))
             {
-                return;
+                _updateQueue.Enqueue(entityRuntimeId);
             }
+            
+            if (_frameUpdateSystem.ContainsKey(type))
+            {
+                _frameUpdateQueue.Enqueue(entityRuntimeId);
+            }
+        }
 
-            _updateQueue.Enqueue(entity.RuntimeId);
+        /// <summary>
+        /// 执行实体系统的帧更新逻辑
+        /// </summary>
+        public void FrameUpdate(int frameDeltaTime)
+        {
+            var count = _frameUpdateQueue.Count;
+
+            while (count-- > 0)
+            {
+                var runtimeId = _frameUpdateQueue.Dequeue();
+                var entity = Entity.GetEntity(runtimeId);
+                
+                if (entity == null || entity.IsDisposed)
+                {
+                    continue;
+                }
+                
+                var type = entity.GetType();
+
+                if (!_frameUpdateSystem.TryGetValue(type, out var frameUpdateSystem))
+                {
+                    continue;
+                }
+
+                _frameUpdateQueue.Enqueue(runtimeId);
+                
+                try
+                {
+                    frameUpdateSystem.Invoke(entity);
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"{type} Error {e}");
+                }
+            }
         }
 
         /// <summary>
@@ -206,11 +256,16 @@ namespace Fantasy
         /// </summary>
         public override void Dispose()
         {
+            _updateQueue.Clear();
+            _frameUpdateQueue.Clear();
+            
             _assemblyList.Clear();
             _awakeSystems.Clear();
             _updateSystems.Clear();
             _destroySystems.Clear();
             _deserializeSystems.Clear();
+            _frameUpdateSystem.Clear();
+            
             AssemblyManager.OnLoadAssemblyEvent -= OnLoad;
             AssemblyManager.OnUnLoadAssemblyEvent -= OnUnLoad;
             base.Dispose();
