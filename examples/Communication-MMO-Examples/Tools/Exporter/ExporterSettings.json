@@ -37,7 +37,7 @@
             "Comment": "Excel生成服务器二进制数据文件夹位置"
         },
         "ExcelClientBinaryDirectory": {
-            "Value": ".../../Unity/Assets/Bundles/Config/",
+            "Value": "../../Unity/Assets/Bundles/Config/",
             "Comment": "Excel生成在客户端的二进制数据文件夹位置"
         },
         "ExcelServerJsonDirectory": {

@@ -9,6 +9,9 @@ temp/
 DocFx/
 global.json
 
+# 项目素材
+ResLibrary/
+
 # Client-Unity
 HybridCLRData/
 AssetBundles/
