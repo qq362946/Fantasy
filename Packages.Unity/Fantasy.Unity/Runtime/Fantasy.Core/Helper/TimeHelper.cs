@@ -38,6 +38,10 @@ namespace Fantasy
         /// </summary>
         public static int FrameDeltaTime;
         /// <summary>
+        /// 获取当前帧与上一帧的时间间隔秒数
+        /// </summary>
+        public static float FrameDeltaTimeSeconds => FrameDeltaTime / 1000f;
+        /// <summary>
         /// 记录上一帧的总时间。
         /// </summary>
         public static long PreviousFrameTime;
