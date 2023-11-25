@@ -41,15 +41,15 @@ public static class AccountManagerSystem
                 uint world = kv.Key;
                 List<GateInfo> gateInfos = kv.Value;
 
-                if (self.ZoneDic.TryGetValue(world, out Zone authWorld))
+                if (self.ZoneDic.TryGetValue(world, out Zone zone))
                 {
-                    authWorld.Dispose();
+                    zone.Dispose();
                     self.ZoneDic.Remove(world);
                 }
 
-                authWorld = Entity.Create<Zone>(self.Scene);
-                self.ZoneDic.Add(world, authWorld);
-                authWorld.Gates.AddRange(gateInfos);
+                zone = Entity.Create<Zone>(self.Scene);
+                self.ZoneDic.Add(world, zone);
+                zone.Gates.AddRange(gateInfos);
 
                 Log.Info($"鉴权 连接 {world} Gate");
                 using (ListPool<FTask<IResponse>> rplist = ListPool<FTask<IResponse>>.Create())
@@ -68,8 +68,8 @@ public static class AccountManagerSystem
                 Log.Info($"鉴权 连接 {world} Gate 完成");
                 
                 // 设置Start状态
-                authWorld.ServerState = ServerState.Start;
-                authWorld.World = world;
+                zone.ServerState = ServerState.Start;
+                zone.World = world;
             }
             
             self.ZoneList.Clear();

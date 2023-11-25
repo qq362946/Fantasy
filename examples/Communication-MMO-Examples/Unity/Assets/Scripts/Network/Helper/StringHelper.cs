@@ -58,6 +58,17 @@ namespace Fantasy{
             return ErrorCode.Success;
         }
 
+        public static string OneBitNumberToChinese(string num){
+            string numStr = "123456789";
+            string chineseStr = "一二三四五六七八九";
+            string result = "";
+            int numIndex=numStr.IndexOf(num);
+            if(numIndex>-1){
+                result=chineseStr.Substring(numIndex,1);
+            }
+            return result;
+        }
+
         public static string ToChatStr(this string str)
         {
             if (string.IsNullOrEmpty(str))

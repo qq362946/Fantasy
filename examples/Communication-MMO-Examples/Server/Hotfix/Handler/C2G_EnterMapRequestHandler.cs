@@ -5,7 +5,7 @@ namespace BestGame;
 /// 验证绑定session，
 /// 返回地图或向地图请求创建unit，
 /// 设置网关角色进入地图状态SetRoleEnterMap
-/// 确定并将mapScene信息缓存在gateAccount
+/// gateAccount.GetMapScene将mapScene信息缓存在gateAccount
 public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_EnterMapResponse>
 {
     protected override async FTask Run(Session session, C2G_EnterMapRequest request, G2C_EnterMapResponse response, Action reply)
@@ -17,7 +17,7 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
     {
         if (request.RoleId == 0)
             return ErrorCode.H_C2G_EnterGame_ReqHandler_RoleIdIsZero;
-        
+        // 确认一下是登录过网关的，有绑定SessionPlayerComponent
         var err = LoginHelper.CheckSessionBindAccount(session);
 
         // 没有正常通过登录的流程
@@ -25,14 +25,14 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
             return ErrorCode.H_C2G_EnterGame_Error01;
 
         var sessionPlayer = session.GetComponent<SessionPlayerComponent>();
-        var guider = session.Scene.GetComponent<GuiderComponent>();
-        var gateAccount = sessionPlayer.gateAccount;
-        var accountId = gateAccount.Id;
 
         // 正在进入游戏中 操作过于频繁
         if (sessionPlayer.EnterState == SessionState.Entering)
             return ErrorCode.Error_EnterGameFast;
 
+        var guider = session.Scene.GetComponent<GuiderComponent>();
+        var gateAccount = sessionPlayer.gateAccount;
+        var accountId = gateAccount.Id;
 
         var _LockGateAccountLock = new CoroutineLockQueueType("LockGateAccountLock");
         using (await _LockGateAccountLock.Lock(accountId))
@@ -51,21 +51,22 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 if (gateRole == null)
                     return ErrorCode.H_C2G_EnterGame_NotFoundRole;
 
-                // role有另一个网关seesion信息，可能别处登录，可能掉线延迟下线中
+                // role有另一个网关seesion信息，他处登录
                 if (gateAccount.SelectRoleId != 0 && gateRole.sessionRuntimeId != session.RuntimeId)
                 {
-                    // 他处角色顶下线...
+                    // 他处角色顶下线
+                    // 主要是给他处客户端发消息，退出游戏，这里不写了
                 }
 
-                // 已经进入游戏、延迟下线中
+                // 在延迟掉线的有效时间内,就不重新创建unit了
                 if (sessionPlayer.EnterState == SessionState.Enter)
                 {
-                    // accountId = unitId
                     // 以unitId发IAddressableRouteMessage消息
                     MessageHelper.SendAddressable(session.Scene, accountId,
                         new G2M_Return2MapMsg
                         {
-                            MapNum = request.MapNum
+                            MapNum = request.MapNum,
+                            RoleInfo = gateRole.ToProto(),
                         });
                     return ErrorCode.Error_EnterGameAlreadyEnter;
                 }
@@ -102,11 +103,10 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                     gateAccount.AddressableId = result.AddressableId;
                 }
 
-                // SetRoleEnterMap
+                // 设置角色进入地图
                 guider.SetRoleEnterMap(session,request.MapNum);
 
-                if (LoginHelper.CheckSessionValid(session, session.RuntimeId))
-                    sessionPlayer.EnterState = SessionState.Enter;
+                sessionPlayer.EnterState = SessionState.Enter;
             }
             catch (Exception e)
             {

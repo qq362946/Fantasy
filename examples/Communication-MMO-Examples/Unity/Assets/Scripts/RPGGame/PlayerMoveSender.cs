@@ -1,16 +1,13 @@
 using Fantasy;
 using UnityEngine;
+using BestGame;
 
 public class PlayerMoveSender : MonoBehaviour
 {
-    private ISend sender;
-
     private long _timerId;
 
     void Start()
     {
-        sender = GameObject.Find("Network").GetComponent<ISend>();
-
         // 100毫秒发送一次，可设置为15-100之间，减少服务器处理数据密度
         // 可以增加逻辑，当角色完全不动时，停止发送
         _timerId = TimerScheduler.Instance.Unity.RepeatedTimer(100, () => RepeatedSend().Coroutine());
@@ -18,9 +15,10 @@ public class PlayerMoveSender : MonoBehaviour
 
     private async FTask RepeatedSend()
     {
-        sender.MoveSend(transform.position,transform.rotation);
-
-        await FTask.CompletedTask;
+        // 发送位置信息
+        await GameManager.sender.Send(new C2M_MoveMessage{
+            MoveInfo = MessageInfoHelper.MoveInfo(transform.position,transform.rotation)
+        });
     }
 
     void OnDestroy()

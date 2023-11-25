@@ -19,7 +19,7 @@
     <RootNamespace></RootNamespace>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>BestGame</AssemblyName>
     <TargetFramework>netstandard2.1</TargetFramework>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
@@ -59,24 +59,92 @@
     <UnityVersion>2022.3.6f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Users\roubin\.vscode\extensions\visualstudiotoolsforunity.vstuc-0.9.3\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="D:\Program Files\Unity\2022.3.6f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="D:\Program Files\Unity\2022.3.6f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AssemblyName.cs" />
+    <Compile Include="Assets\Scripts\GameSender.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\Utils\UIUtils.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\Base\CameraMMO.cs" />
+    <Compile Include="Assets\Scripts\Network\Interface\ISend.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\Base\Movement.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Pool\UIPanelPool.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\CharacterMovement.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\Pool\PoolType.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\_Extensions.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UIScene\AccountScene.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UIPanel\CreateRolePanel.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\Utils\UIDragAndDropable.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\Pool\Pool.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Base\Viewer\ClassViewer.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\Utils\ScrollPageTool .cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Base\Viewer\BaseViewer.cs" />
     <Compile Include="Assets\Scripts\RPGGame\PlayerMoveSender.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Pool\UnitPool.cs" />
     <Compile Include="Assets\Scripts\Network\Helper\IdGenerate.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\PopUp\FaceCamera.cs" />
     <Compile Include="Assets\Scripts\Network\Helper\ConstValue.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UIScene\MapScene.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UIPanel\RegisterPanel.cs" />
     <Compile Include="Assets\Scripts\Network\Handler\M2C_MoveBroadcastHandler.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\Pool\BasePool.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Base\StringManager.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\Optimizations\ScriptableNonAlloc.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UIPanel\ServerListPanel.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\PopUp\TextMeshFadeAlpha.cs" />
     <Compile Include="Assets\Scripts\Network\Helper\MessageInfoHelper.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\UIFacade.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Base\Location.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UI\ZoneSlot.cs" />
     <Compile Include="Assets\Scripts\Network\Entry.cs" />
     <Compile Include="Assets\Scripts\Hotfix\Generate\NetworkProtocol\OuterMessage.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UI\UITab.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\VirtualJoystick\Joystick.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Pool\UIPool.cs" />
     <Compile Include="Assets\Scripts\Network\Helper\TelephoneNumberVerifyHelper.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\CharacterInput\MobilePlayerInput.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\CharacterInput\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Hotfix\Generate\NetworkProtocol\RouteType.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UIScene\RoleScene.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UIPanel\SelectRolePanel.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\CharacterInput\Inputs.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\Utils\UIKeepInScreen.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UI\UIRoleNameSlot.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UI\UIRoleClassSlot.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\_Utils.cs" />
+    <Compile Include="Assets\Scripts\Network\Response\Response.cs" />
     <Compile Include="Assets\Scripts\Hotfix\Generate\NetworkProtocol\OuterOpcode.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\PopUp\DefaultVelocity.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\Tools\Oscillator.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\NetCharaMovement.cs" />
+    <Compile Include="Assets\Scripts\AssemblyName.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Pool\GamePool.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\Utils\UIWindow.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\Utils\UIShowToolTip.cs" />
     <Compile Include="Assets\Scripts\Network\Helper\ErrorCode.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\BasePanel.cs" />
     <Compile Include="Assets\Scripts\Network\Helper\StringHelper.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Base\UnitBase.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\PopUp\DestroyAfter.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\UIScene.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UIPanel\MapUIFramePanel.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Base\Viewer\RoleViewer.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UIPanel\LoginPanel.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\Tools\SpawnItem.cs" />
+    <Compile Include="Assets\Scripts\Network\Response\AccountResponse.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\Optimizations\BehaviourNonAlloc.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\Tools\DestroyByTime.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UI\ZoneTabSlot.cs" />
+    <Compile Include="Assets\Scripts\MicroFramework\UI\Utils\UIImageMouseoverColor.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\PlayerController\SwimmingController.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\UI\UIPanel\SettingPanel.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Base\Player.cs" />
     <Compile Include="Assets\Scripts\Network\Helper\WordFilterHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Scripts\BestGame.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -411,12 +479,48 @@
       <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.YamlDotNet">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="log4netPlastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.IonicZip">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.TextureAssets">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="unityplastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
@@ -907,88 +1011,24 @@
       <HintPath>D:\Program Files\Unity\2022.3.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Mathematics">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    <Reference Include="Fantasy.Editor">
+      <HintPath>Library\ScriptAssemblies\Fantasy.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Fantasy.Unity">
       <HintPath>Library\ScriptAssemblies\Fantasy.Unity.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Fantasy.Editor">
-      <HintPath>Library\ScriptAssemblies\Fantasy.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

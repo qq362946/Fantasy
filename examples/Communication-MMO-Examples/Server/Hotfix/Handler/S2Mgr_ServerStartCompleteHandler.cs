@@ -3,7 +3,7 @@ using Fantasy;
 namespace BestGame;
 
 /// <summary>
-/// 记录区服其它服务器起服完成数
+/// 计算、记录区服其它服务器起服完成数
 /// </summary>
 public class S2Mgr_ServerStartCompleteHandler : Route<Scene,S2Mgr_ServerStartComplete>
 {

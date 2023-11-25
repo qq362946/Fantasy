@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngine", "Server\Plugi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "..\..\Fantasy.Net\Fantasy.Net.csproj", "{CF9DC75E-3AD8-4DC1-8CE5-151419580DAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Unity\Assembly-CSharp.csproj", "{513F5CB5-D8E5-45E7-A602-ECE4A5C03AA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestGame", "Unity\BestGame.csproj", "{B9CF6784-1B36-4B34-AC32-F5678F8AC5F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +50,10 @@ Global
 		{F3E3F33B-F1B8-495D-8D2E-05F204048E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3E3F33B-F1B8-495D-8D2E-05F204048E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3E3F33B-F1B8-495D-8D2E-05F204048E75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9CF6784-1B36-4B34-AC32-F5678F8AC5F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9CF6784-1B36-4B34-AC32-F5678F8AC5F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9CF6784-1B36-4B34-AC32-F5678F8AC5F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9CF6784-1B36-4B34-AC32-F5678F8AC5F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C98432BB-0854-4CD1-8C09-65B1AD07C75E} = {B2FE9B98-F2AD-4667-83DE-FE4872938BD8}
