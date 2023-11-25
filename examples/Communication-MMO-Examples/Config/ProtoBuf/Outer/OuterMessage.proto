@@ -4,8 +4,10 @@ package Fantasy.Network.Message;
 // realmInfo
 message RealmInfo
 {
-	int32 ZoneId = 1;
-	string RealmAdress = 2;
+	int32 RegionId = 1;
+	int32 ZoneId = 2;
+	string ZoneName = 3;
+	string RealmAdress = 4;
 }
 
 // 获取区服列表
