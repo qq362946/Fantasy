@@ -1,4 +1,5 @@
 #if FANTASY_NET
+
 // ReSharper disable SuspiciousTypeConversion.Global
 
 namespace Fantasy;

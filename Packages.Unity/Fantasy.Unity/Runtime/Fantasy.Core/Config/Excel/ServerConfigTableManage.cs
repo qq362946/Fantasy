@@ -1,5 +1,6 @@
 #if FANTASY_NET
 
+
 namespace Fantasy
 {
     /// <summary>

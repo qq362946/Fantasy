@@ -1,6 +1,7 @@
 using System;
 using System.Buffers;
 using System.IO;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
 namespace Fantasy

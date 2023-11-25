@@ -14,27 +14,33 @@ namespace Fantasy
         /// 一小时的毫秒值。
         /// </summary>
         public const long Hour = 3600000;
-
         /// <summary>
         /// 一分钟的毫秒值。
         /// </summary>
         public const long Minute = 60000;
-
         /// <summary>
         /// 一天的毫秒值。
         /// </summary>
         public const long OneDay = 86400000;
-
         // 1970年1月1日的Ticks
         private const long Epoch = 621355968000000000L;
-
         private static readonly DateTime Dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
         /// <summary>
         /// 获取当前时间的毫秒数，从1970年1月1日开始计算。
         /// </summary>
         public static long Now => (DateTime.UtcNow.Ticks - Epoch) / 10000;
-
+        /// <summary>
+        /// 获取帧运行毫秒数。
+        /// </summary>
+        public static long TotalFrameTime;
+        /// <summary>
+        /// 获取当前帧与上一帧的时间间隔毫秒数。
+        /// </summary>
+        public static int FrameDeltaTime;
+        /// <summary>
+        /// 记录上一帧的总时间。
+        /// </summary>
+        public static long PreviousFrameTime;
 #if FANTASY_UNITY
         /// <summary>
         /// 与服务器时间的偏差。

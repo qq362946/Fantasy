@@ -1,5 +1,6 @@
 #if FANTASY_NET
 using System;
+
 namespace Fantasy
 {
     /// <summary>

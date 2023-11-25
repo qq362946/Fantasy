@@ -30,12 +30,19 @@ namespace Fantasy
             try
             {
                 // 安装包安装后首次运行时会检测StreamingAssets里的文件、如果有就拷贝到Persistent中
+                // 如果PersistentDataVersion没有就拷贝到Persistent中
                 
-                if (File.Exists(Define.StreamingAssetsVersion) && !File.Exists(Define.PersistentDataVersion))
+                if (!File.Exists(Define.PersistentDataVersion))
                 {
                     var versionBytes = await GetStreamingAssets(Define.VersionName);
+
+                    if (versionBytes == null)
+                    {
+                        return;
+                    }
+                   
                     var assetBundleVersionInfo = ProtoBufHelper.FromBytes<AssetBundleVersionInfo>(versionBytes);
-            
+                   
                     foreach (var assetBundleVersion in assetBundleVersionInfo.List)
                     {
                         // 获得persistentDataPath和StreamingAssets的路径
@@ -49,11 +56,12 @@ namespace Fantasy
                             await File.WriteAllBytesAsync(assetBundle, bytes);
                         }
                     }
-                
+                    
                     await File.WriteAllBytesAsync(Define.PersistentDataVersion, versionBytes);
-                    // 更新下AssetBundleManifest
-                    UpdateAssetBundleManifest();
                 }
+               
+                // 更新下AssetBundleManifest
+                UpdateAssetBundleManifest();
             }
             catch (Exception e)
             {
@@ -415,26 +423,28 @@ namespace Fantasy
 
         private static void UpdateAssetBundleManifest()
         {
-            if (!Define.IsEditor)
+            if (Define.IsEditor || _assetBundleManifestObject != null)
             {
-                LoadOneBundle(Define.AssetBundleManifestName);
-                _assetBundleManifestObject = GetAsset<AssetBundleManifest>(Define.AssetBundleManifestName, "AssetBundleManifest");
-                UnloadBundle(Define.AssetBundleManifestName, false);
+                return;
             }
+            
+            LoadOneBundle(Define.AssetBundleManifestName);
+            _assetBundleManifestObject = GetAsset<AssetBundleManifest>(Define.AssetBundleManifestName, "AssetBundleManifest");
+            UnloadBundle(Define.AssetBundleManifestName, false);
         }
 
-        private static async FTask<byte[]> GetStreamingAssets(string path)
+        private static async FTask<byte[]> GetStreamingAssets(string fileName)
         {
             // 在Android平台上，由于StreamingAssets文件夹下的文件是压缩的，需要使用Unity的WWW类进行读取。
             // 在其他平台上，可以直接使用System.IO类进行读取。
-            var filePath = $"{UnityEngine.Application.streamingAssetsPath}/{path}";
-#if !UNITY_ANDROID
-            return await new Download().DownloadByte($"file://{filePath}");
-#else
+            var filePath = Path.Combine(UnityEngine.Application.streamingAssetsPath, fileName);
+            if (filePath.Contains("://") || filePath.Contains(":///"))
+            {
+                return await new Download().DownloadByte(filePath);
+            }
             return await File.ReadAllBytesAsync(filePath);
-#endif
         }
-        
+
         public static void CreateDirectory(string filePath, string targetDirectory, bool isFile)
         {
             var directories = filePath.Split('/');
@@ -503,7 +513,7 @@ namespace Fantasy
             }
 
             assetBundlePath = $"{Define.RemoteAssetBundlePath}/{bundleName}";
-            AssetBundlePathCache[assetBundlePath] = assetBundlePath;
+            AssetBundlePathCache[bundleName] = assetBundlePath;
             return assetBundlePath;
         }
 
