@@ -86,7 +86,7 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public int MapNum { get; set; }
 		[ProtoMember(2)]
-		public long UnitId { get; set; }
+		public RoleInfo RoleInfo { get; set; }
 	}
 	[ProtoContract]
 	public partial class M2G_QuitMapMsg : AProto, IRouteMessage

@@ -43,7 +43,7 @@ message M2G_CreateUnitResponse // IRouteResponse
 message G2M_Return2MapMsg // IAddressableRouteMessage
 {
 	int32 MapNum = 1;
-	int64 UnitId = 2;
+	RoleInfo RoleInfo = 2;
 }
 
 // 通知网关退出地图

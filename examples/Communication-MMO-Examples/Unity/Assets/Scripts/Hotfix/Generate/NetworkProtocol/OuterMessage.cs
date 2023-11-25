@@ -10,8 +10,12 @@ namespace Fantasy
 	public partial class RealmInfo : AProto
 	{
 		[ProtoMember(1)]
-		public int ZoneId { get; set; }
+		public int RegionId { get; set; }
 		[ProtoMember(2)]
+		public int ZoneId { get; set; }
+		[ProtoMember(3)]
+		public string ZoneName { get; set; }
+		[ProtoMember(4)]
 		public string RealmAdress { get; set; }
 	}
 	[ProtoContract]
