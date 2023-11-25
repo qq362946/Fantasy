@@ -180,7 +180,7 @@ namespace Fantasy
         /// <summary>
         /// 执行实体系统的帧更新逻辑
         /// </summary>
-        public void FrameUpdate(int frameDeltaTime)
+        public void FrameUpdate()
         {
             var count = _frameUpdateQueue.Count;
 
