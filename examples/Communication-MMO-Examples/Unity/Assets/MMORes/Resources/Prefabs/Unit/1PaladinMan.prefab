@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitId: 0
+  configId: 12354
   ClassName: 1PaladinMan
   nickName: "\u5E7B\u60F3\u9A91\u58EB"
   inbattle: 0

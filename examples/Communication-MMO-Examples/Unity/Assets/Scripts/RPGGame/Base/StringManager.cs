@@ -30,7 +30,7 @@ public class StringManager
     public const string Registering = "正在注册中...";
     public const string AccountAlreayRegister = "注册失败,账号已存在！";
     public const string RegSuced = "注册成功";
-    public const string CharaCreating = "正在创建角色中...";
-    public const string CharaCreatFailed = "创建角色失败,角色已存在!";
+    public const string CreateRoleSuccess = "正在创建角色中...";
+    public const string CreateRoleFailed = "创建角色失败,角色已存在!";
     public const string RealmOvertime = "验证超时!";
 }

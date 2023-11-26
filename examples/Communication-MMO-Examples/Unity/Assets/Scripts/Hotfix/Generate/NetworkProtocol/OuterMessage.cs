@@ -121,11 +121,11 @@ namespace Fantasy
 	///  创建角色 消息请求
 	/// </summary>
 	[ProtoContract]
-	public partial class C2G_RoleCreateRequest : AProto, IRequest
+	public partial class C2G_CreateRoleRequest : AProto, IRequest
 	{
 		[ProtoIgnore]
-		public G2C_RoleCreateResponse ResponseType { get; set; }
-		public uint OpCode() { return OuterOpcode.C2G_RoleCreateRequest; }
+		public G2C_CreateRoleResponse ResponseType { get; set; }
+		public uint OpCode() { return OuterOpcode.C2G_CreateRoleRequest; }
 		[ProtoMember(1)]
 		public int UnitConfigId { get; set; }
 		[ProtoMember(2)]
@@ -139,9 +139,9 @@ namespace Fantasy
 	///  创建角色 消息响应
 	/// </summary>
 	[ProtoContract]
-	public partial class G2C_RoleCreateResponse : AProto, IResponse
+	public partial class G2C_CreateRoleResponse : AProto, IResponse
 	{
-		public uint OpCode() { return OuterOpcode.G2C_RoleCreateResponse; }
+		public uint OpCode() { return OuterOpcode.G2C_CreateRoleResponse; }
 		[ProtoMember(91, IsRequired = true)]
 		public uint ErrorCode { get; set; }
 		[ProtoMember(1)]
@@ -221,12 +221,25 @@ namespace Fantasy
 		///</summary>
 		[ProtoMember(7)]
 		public int Level { get; set; }
+		///<summary>
+		/// 创建时间
+		///</summary>
 		[ProtoMember(8)]
-		public long Experience { get; set; }
+		public long CreatedTime { get; set; }
+		///<summary>
+		/// 经验
+		///</summary>
 		[ProtoMember(9)]
-		public string Class { get; set; }
+		public long Experience { get; set; }
+		///<summary>
+		/// 职业
+		///</summary>
 		[ProtoMember(10)]
+		public string Class { get; set; }
+		[ProtoMember(11)]
 		public int LastMap { get; set; }
+		[ProtoMember(12)]
+		public MoveInfo LastMoveInfo { get; set; }
 		///<summary>
 		/// repeated ItemInfo Equipments = 11;
 		///</summary>
@@ -240,8 +253,6 @@ namespace Fantasy
 		[ProtoIgnore]
 		public G2C_EnterMapResponse ResponseType { get; set; }
 		public uint OpCode() { return OuterOpcode.C2G_EnterMapRequest; }
-		[ProtoMember(1)]
-		public int MapNum { get; set; }
 		[ProtoMember(2)]
 		public long RoleId { get; set; }
 	}
@@ -252,10 +263,9 @@ namespace Fantasy
 		[ProtoMember(91, IsRequired = true)]
 		public uint ErrorCode { get; set; }
 		[ProtoMember(1)]
-		public string Message { get; set; }
-		///<summary>
-		/// repeated Character Characters = 4;
-		///</summary>
+		public int MapNum { get; set; }
+		[ProtoMember(2)]
+		public MoveInfo LastMoveInfo { get; set; }
 	}
 	/// <summary>
 	///  强制断开连接通知

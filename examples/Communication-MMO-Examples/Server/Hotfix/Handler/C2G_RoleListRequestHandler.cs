@@ -34,6 +34,7 @@ namespace BestGame
                 {
                     response.Items.Add(role.ToProto());
                 }
+                // Log.Info($"GateAccount:{accountId} RoleList:{roles.ToJson()}");
             }
 
             return ErrorCode.Success;

@@ -9,6 +9,7 @@ public abstract class UnitBase : BehaviourNonAlloc
 {
     [Header("Entity Property")]
     public long UnitId;
+    public int configId;
     public string ClassName;
 
     public string nickName;

@@ -94,6 +94,8 @@
     <Compile Include="Assets\Scripts\RPGGame\UI\UIPanel\ServerListPanel.cs" />
     <Compile Include="Assets\Scripts\MicroFramework\UI\PopUp\TextMeshFadeAlpha.cs" />
     <Compile Include="Assets\Scripts\Network\Helper\MessageInfoHelper.cs" />
+    <Compile Include="Assets\Scripts\Network\Response\RoleResponse.cs" />
+    <Compile Include="Assets\Scripts\RPGGame\Base\Viewer\UnitViewer.cs" />
     <Compile Include="Assets\Scripts\MicroFramework\UI\UIFacade.cs" />
     <Compile Include="Assets\Scripts\RPGGame\Base\Location.cs" />
     <Compile Include="Assets\Scripts\RPGGame\UI\UI\ZoneSlot.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Assets\Scripts\MicroFramework\Optimizations\BehaviourNonAlloc.cs" />
     <Compile Include="Assets\Scripts\RPGGame\PlayerController\Tools\DestroyByTime.cs" />
     <Compile Include="Assets\Scripts\RPGGame\UI\UI\ZoneTabSlot.cs" />
+    <Compile Include="Assets\Scripts\Network\Handler\M2C_UnitHelperHandler.cs" />
     <Compile Include="Assets\Scripts\MicroFramework\UI\Utils\UIImageMouseoverColor.cs" />
     <Compile Include="Assets\Scripts\RPGGame\PlayerController\SwimmingController.cs" />
     <Compile Include="Assets\Scripts\RPGGame\UI\UIPanel\SettingPanel.cs" />
