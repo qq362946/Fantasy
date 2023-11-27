@@ -157,7 +157,7 @@ namespace Fantasy
             {
                 if (!assemblyInfo.AssemblyTypeGroupList.TryGetValue(findType, out var assemblyLoad))
                 {
-                    yield break;
+                    continue;
                 }
                 
                 foreach (var type in assemblyLoad)

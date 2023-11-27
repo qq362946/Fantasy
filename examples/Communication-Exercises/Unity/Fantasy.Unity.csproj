@@ -45,6 +45,12 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.11f1c1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="..\..\..\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Components\FantasyCollider2D.cs">
+       <Link>Fantasy.Unity\Runtime\Fantasy.App\Components\FantasyCollider2D.cs</Link>
+     </Compile>
+     <Compile Include="..\..\..\Packages.Unity\Fantasy.Unity\Runtime\Fantasy.App\Components\GameObjectReference.cs">
+       <Link>Fantasy.Unity\Runtime\Fantasy.App\Components\GameObjectReference.cs</Link>
+     </Compile>
      <Compile Include="/Users/sining/Code/Git/Fantasy/Packages.Unity/Fantasy.Unity/Runtime/Fantasy.Core/Entitas/EntityReference.cs" />
      <Compile Include="/Users/sining/Code/Git/Fantasy/Packages.Unity/Fantasy.Unity/Runtime/Fantasy.Core/FantasySettingsHelper.cs" />
      <Compile Include="/Users/sining/Code/Git/Fantasy/Packages.Unity/Fantasy.Unity/Runtime/Fantasy.Core/Config/Excel/ClientConfigTableManage.cs" />
