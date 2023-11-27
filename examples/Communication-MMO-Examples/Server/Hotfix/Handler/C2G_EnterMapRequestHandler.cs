@@ -44,12 +44,18 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                     return ErrorCode.Error_EnterGameGateNotFindAccountInfo;
                 
                 // 思考，此时gateAccount中是否肯定已有所有角色的缓存
+                    // 进入地图前肯定已经获取过角色列表，缓存了所有角色
                 var gateRole = gateAccount.GetRole(request.RoleId);
                 gateAccount.SelectRoleId = request.RoleId;
 
                 // 没有指定角色
                 if (gateRole == null)
                     return ErrorCode.H_C2G_EnterGame_NotFoundRole;
+
+                // 返回上次登录地图与位置，初次登录是角色职业默认地图与位置
+                var mapNum = gateRole.LastMap;
+                response.LastMoveInfo = gateRole.LastMoveInfo;
+                response.MapNum = mapNum;
 
                 // role有另一个网关seesion信息，他处登录
                 if (gateAccount.SelectRoleId != 0 && gateRole.sessionRuntimeId != session.RuntimeId)
@@ -65,7 +71,7 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                     MessageHelper.SendAddressable(session.Scene, accountId,
                         new G2M_Return2MapMsg
                         {
-                            MapNum = request.MapNum,
+                            MapNum = mapNum,
                             RoleInfo = gateRole.ToProto(),
                         });
                     return ErrorCode.Error_EnterGameAlreadyEnter;
@@ -76,7 +82,7 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
 
                 // 获取目标地图的mapScene
                 // 随机一个目录地图的mapScene，但不需要存库。缓存在gateAccount，维护周期内记住就行
-                var mapScene = gateAccount.GetMapScene(request.MapNum,session.Scene.World.Id);
+                var mapScene = gateAccount.GetMapScene(mapNum,session.Scene.World.Id);
 
                 // 地图传送或创建unit
                 if (gateRole.IsInMap())
@@ -104,7 +110,7 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 }
 
                 // 设置角色进入地图
-                guider.SetRoleEnterMap(session,request.MapNum);
+                guider.SetRoleEnterMap(session,mapNum);
 
                 sessionPlayer.EnterState = SessionState.Enter;
             }

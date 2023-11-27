@@ -116,6 +116,7 @@ public static class GateAccountSystem
             // 如果没有登录此地图的记录，随机选择一个地图配置
             var mapScene = SceneHelper.GetSceneRandom(SceneType.Map, zoneId);
             // 不用存库，在维护周期内在GateAccount记住此地图登录的是这个mapScene
+                // 这是指世界地图，不是副本。副本需要存库，因为副本是动态创建的，另外通常副本有专门的副本服务器。
             self.MapSceneIds.Add(mapNum, mapScene.Id);
             return mapScene;
         }

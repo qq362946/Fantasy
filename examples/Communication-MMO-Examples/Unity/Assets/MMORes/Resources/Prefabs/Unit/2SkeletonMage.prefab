@@ -391,6 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitId: 0
+  configId: 18754
   ClassName: 2SkeletonMage
   nickName: "\u9AB7\u9AC5\u6CD5\u5E08"
   inbattle: 0

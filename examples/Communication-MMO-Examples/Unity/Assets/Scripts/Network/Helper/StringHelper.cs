@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using UnityEngine;
 
 namespace Fantasy{
     public static class StringHelper
@@ -58,6 +59,37 @@ namespace Fantasy{
             return ErrorCode.Success;
         }
 
+        // 字符转坐标
+        public static Vector3 ParseCoordinates(string input)
+        {
+            string[] parts = input.Split(',');
+
+            if (parts.Length == 3 &&
+                float.TryParse(parts[0], out float x) &&
+                float.TryParse(parts[1], out float y) &&
+                float.TryParse(parts[2], out float z))
+            {
+                return new Vector3(x, y, z);
+            }
+            else return Vector3.zero;
+        }
+
+        public static Quaternion ParseRotation(string input)
+        {
+            string[] angles = input.Split(',');
+
+            if (angles.Length == 3 &&
+                float.TryParse(angles[0], out float x) &&
+                float.TryParse(angles[1], out float y) &&
+                float.TryParse(angles[2], out float z))
+            {
+                // 将欧拉角转换为 Quaternion
+                return Quaternion.Euler(x, y, z);
+            }
+            else return Quaternion.identity;
+        }
+
+        // 数字转中文
         public static string OneBitNumberToChinese(string num){
             string numStr = "123456789";
             string chineseStr = "一二三四五六七八九";

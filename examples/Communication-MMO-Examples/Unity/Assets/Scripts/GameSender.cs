@@ -33,7 +33,7 @@ public partial class GameManager : MonoBehaviour,ISend
             ]";
             
         zoneInfo = JsonHelper.Deserialize<List<RealmInfo>>(json);
-        defaultZone = selectZone = zoneInfo[0];
+        selectZone = defaultZone = zoneInfo[0];
     }
 
     public async FTask<IResponse> Register(IRequest request)

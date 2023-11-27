@@ -38,30 +38,54 @@ public class CreateRolePanel : BasePanel
             base.BackToPanel();
         });
 
-        btn_Submit.onClick.SetListener(() => {
+        btn_Submit.onClick.SetListener(async() => {
             string nickName = Regex.Replace(inputName.text, @"\s", "");
             if(nickName =="") return;
 
             Player player = classViewer.current.GetComponent<Player>();
 
             // >>process role 请求网络层创建角色
-            // GameManager.sender.CreateCharacter(nickName,player.ClassName);
+            await CreateRole(nickName,player.ClassName,player.configId);
         });
-    }
-
-    public async FTask CreateRole(string name,int role){
-        // >>process role 网络层请求创建角色
-        // 创建角色请求
-        var create = (G2C_RoleCreateResponse) await GameManager.sender.Call(new C2G_RoleCreateRequest(){
-            NickName = "roubin2",Sex = 1,Class = "Magic", UnitConfigId = 12012
-        });
-        Log.Info(create.RoleInfo.ToJson());
     }
 
     public override void EnterPanel()
     {
         base.EnterPanel();
+        // 默认预览职业与预览相机位置
+        mUIFacade.CamLocation(GameManager.Ins.location.create_camLoaction);
 
+        CreatePreview();
+    }
+
+    public override void ExitPanel()
+    {
+        base.ExitPanel();
+
+        // 移除动态内容
+        classViewer.ClearPreview();
+        uiTab?.ClearTablist();
+    }
+
+    public async FTask CreateRole(string name,string className,int configId = 0)
+    {
+        var response = (G2C_CreateRoleResponse) await GameManager.sender.Call(new C2G_CreateRoleRequest(){
+            NickName = name,Sex = 1,Class = className, UnitConfigId = configId
+        });
+
+        GameManager.response.CreateRoleResponse(response.ErrorCode);
+        Log.Info("创建角色成功:"+response.RoleInfo.ToJson());
+
+        if(response.ErrorCode ==ErrorCode.Success)
+        {
+            // >>process role 创建角色成功返回选角界面
+            await TimerScheduler.Instance.Core.WaitAsync(3000);
+            BackToPanel();
+        }
+    }
+
+    void CreatePreview()
+    {
         var classNames = classes.Select(player => player.ClassName).ToArray();
         
         // UITab组件创建职业列表
@@ -75,19 +99,9 @@ public class CreateRolePanel : BasePanel
             slot.image.sprite = classes[i].portraitIcon;
         }
 
-        // 默认预览职业与预览相机位置
-        mUIFacade.CamLocation(GameManager.Ins.location.create_camLoaction);
+        // 预览职业
         PreviewClass(classes[0].ClassName);
         uiTab.RefreshTab();
-    }
-
-    public override void ExitPanel()
-    {
-        base.ExitPanel();
-
-        // 移除动态内容
-        classViewer.ClearPreview();
-        uiTab.ClearTablist();
     }
 
     void PreviewClass(string className)

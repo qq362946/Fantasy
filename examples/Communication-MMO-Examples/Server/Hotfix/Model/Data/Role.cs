@@ -44,6 +44,8 @@ public class Role : Entity
 
     public int LastMap;
 
+    public MoveInfo LastMoveInfo;
+
     [BsonIgnore]
     public long sessionRuntimeId;
 
@@ -76,9 +78,11 @@ public static class RoleSystem
             Sex = role.Sex,
             NickName = role.NickName,
             Level = role.Level,
+            CreatedTime = role.CreatedTime,
             Experience = role.Experience,
             Class = role.Class,
             LastMap = role.LastMap,
+            LastMoveInfo = role.LastMoveInfo,
         };
 
         return proto;

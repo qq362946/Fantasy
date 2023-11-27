@@ -2313,6 +2313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitId: 0
+  configId: 35684
   ClassName: 3SkeletonWarrior
   nickName: "\u9AB7\u9AC5\u6218\u58EB"
   inbattle: 0

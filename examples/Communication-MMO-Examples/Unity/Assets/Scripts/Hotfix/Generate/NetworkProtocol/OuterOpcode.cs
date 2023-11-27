@@ -10,8 +10,8 @@ namespace Fantasy
 		 public const int R2C_LoginResponse = 160000003;
 		 public const int C2G_LoginGateRequest = 110000004;
 		 public const int G2C_LoginGateResponse = 160000004;
-		 public const int C2G_RoleCreateRequest = 110000005;
-		 public const int G2C_RoleCreateResponse = 160000005;
+		 public const int C2G_CreateRoleRequest = 110000005;
+		 public const int G2C_CreateRoleResponse = 160000005;
 		 public const int C2G_RoleDeleteRequest = 110000006;
 		 public const int G2C_RoleDeleteResponse = 160000006;
 		 public const int C2G_RoleListRequest = 110000007;

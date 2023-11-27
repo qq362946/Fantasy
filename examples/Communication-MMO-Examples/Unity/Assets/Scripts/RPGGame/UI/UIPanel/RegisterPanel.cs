@@ -38,7 +38,7 @@ public class RegisterPanel : BasePanel
 
         btn_back.onClick.SetListener(() => {
             // >>process account 从注册返回登录界面
-            base.BackToPanel();
+            BackToPanel();
         });
     }
 
@@ -52,6 +52,12 @@ public class RegisterPanel : BasePanel
 
         // 注册结果
         GameManager.response.RegisterResponse(register.ErrorCode);
+
+        if(register.ErrorCode == ErrorCode.Success){
+            // >>process account 注册成功返回登录界面
+            await TimerScheduler.Instance.Core.WaitAsync(3000);
+            BackToPanel();
+        }
     }
 
     public override void ResetPanel(){

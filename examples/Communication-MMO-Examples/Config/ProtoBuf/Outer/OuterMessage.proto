@@ -58,7 +58,7 @@ message G2C_LoginGateResponse // IResponse
 }
 
 /// 创建角色 消息请求
-message C2G_RoleCreateRequest // IRequest,G2C_RoleCreateResponse
+message C2G_CreateRoleRequest // IRequest,G2C_CreateRoleResponse
 {
 	int32 UnitConfigId = 1;
 	int32 Sex = 2;
@@ -66,7 +66,7 @@ message C2G_RoleCreateRequest // IRequest,G2C_RoleCreateResponse
 	string Class = 4; // 职业
 }
 /// 创建角色 消息响应
-message G2C_RoleCreateResponse // IResponse
+message G2C_CreateRoleResponse // IResponse
 {
 	RoleInfo RoleInfo = 1;
 }
@@ -92,7 +92,6 @@ message G2C_RoleListResponse // IResponse
 message RoleInfo
 {
 	int32 UnitConfigId = 1;
-
 	int64 AccountId = 3;
 	//角色ID
 	int64 RoleId = 4;
@@ -102,22 +101,26 @@ message RoleInfo
 	string NickName = 6;
 	//年龄
 	int32 Level = 7;
-	int64 Experience = 8;
-	string Class = 9; // 职业
-	int32 LastMap = 10;
+	//创建时间
+	int64 CreatedTime = 8;
+	//经验
+	int64 Experience = 9;
+	//职业
+	string Class = 10; 
+	int32 LastMap = 11;
+	MoveInfo LastMoveInfo = 12;
 	//repeated ItemInfo Equipments = 11;
 }
 
 /// 进入地图
 message C2G_EnterMapRequest // IRequest,G2C_EnterMapResponse
 {
-	int32 MapNum = 1;
 	int64 RoleId = 2;
 }
 message G2C_EnterMapResponse // IResponse
 {
-	string Message = 1;
-	//repeated Character Characters = 4;
+	int32 MapNum = 1;
+	MoveInfo LastMoveInfo = 2;
 }
 
 /// 强制断开连接通知
