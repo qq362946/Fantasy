@@ -27,14 +27,3 @@
 unity2022+
 .Net8.0
 
-----
-#### 运行与测试
-![](https://www.fantsida.com/assets/files/2023-11-27/1701072507-850846-qq20231127160215.png)
-
-![](https://www.fantsida.com/assets/files/2023-11-27/1701072514-181467-qq20231127160234.png)
-
-![](https://www.fantsida.com/assets/files/2023-11-27/1701072523-35605-qq20231127160321.png)
-
-![](https://www.fantsida.com/assets/files/2023-11-27/1701072529-405084-qq20231127160338.png)
-
-![](https://www.fantsida.com/assets/files/2023-11-27/1701072534-196206-qq20231127160414.png)
