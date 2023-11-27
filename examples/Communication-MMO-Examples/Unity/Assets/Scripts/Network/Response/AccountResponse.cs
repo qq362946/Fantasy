@@ -6,7 +6,7 @@ public partial class Response : MonoBehaviour
     RegisterPanel reg;
     LoginPanel login;
 
-    public async void RegisterResponse(uint Error)
+    public void RegisterResponse(uint Error)
     {
         if(reg ==null)
             reg = UIFacade.Instance.GetUIPanel(StringManager.RegisterPanel) as RegisterPanel;
@@ -28,10 +28,6 @@ public partial class Response : MonoBehaviour
         // >>process account 返回登录界面
         if(Error == ErrorCode.Success){
             reg.prompt.text = StringManager.RegSuced;
-
-            await TimerScheduler.Instance.Core.WaitAsync(3000);
-            
-            reg.BackToPanel();
         }     
     }
 
@@ -63,11 +59,7 @@ public partial class Response : MonoBehaviour
         
         // 登录帐号成功
         if(Error == ErrorCode.Success){
-            login.prompt.text = StringManager.LoginSuced;
-
-            // >>process role 从登录进入选角界面
-            UIFacade.Instance.EnterScene(new RoleScene());
-        }
-        
+            login.prompt.text = StringManager.LoginSuced; 
+        }   
     }
 }

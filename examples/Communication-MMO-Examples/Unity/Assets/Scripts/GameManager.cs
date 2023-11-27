@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Fantasy;
+using System.Linq;
 
 public partial class GameManager : MonoBehaviour
 {
@@ -35,13 +35,6 @@ public partial class GameManager : MonoBehaviour
         FindUnitPrefabs();
     }
 
-    private void Start()
-    {
-        // 职业与角色预览器初始
-        // roleViewer = gameObject.AddComponent<RoleViewer>();
-        // classViewer = gameObject.AddComponent<ClassViewer>();
-    }
-
     // 获取unit的角色预制体对象
     public void FindUnitPrefabs()
     {
@@ -52,14 +45,19 @@ public partial class GameManager : MonoBehaviour
 
     public List<T> FindUnitClasses<T>(GameObject[] prefabs)
     {
-        List<T> classes = new List<T>();
-        foreach (GameObject prefab in prefabs)
-        {
-            T entity = prefab.GetComponent<T>();
-            if (entity != null)
-                classes.Add(entity);
-        }
-        return classes;
+        return prefabs.Select(prefab => prefab.GetComponent<T>())
+            .Where(entity => entity != null)
+            .ToList();
+    }
+
+    // 添加角色unit到场景
+    public void AddUnit2Scene(string className,string roleId,Transform point)
+    {
+        var mapFrame = (MapUIFramePanel)UIFacade.Instance.GetUIPanel(StringManager.MapUIFramePanel);
+        var go = mapFrame.unitViewer.ViewUnit(className,roleId,point);
+
+        // CameraMMO激活，设置目标为本地玩家
+        UIFacade.Instance.SetMMOCamera(go.transform);
     }
 
     // 获取Unit
@@ -67,7 +65,6 @@ public partial class GameManager : MonoBehaviour
     {
         return Pool.Instance.Get(PoolType.Unit,prefabName,name);
     }
-    
 
     // 将Unit放回对象池
     public void PushUnit(string name, GameObject item)

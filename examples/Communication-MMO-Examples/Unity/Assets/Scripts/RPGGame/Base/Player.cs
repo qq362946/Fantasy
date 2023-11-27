@@ -5,7 +5,7 @@ using UnityEngine;
 public partial class Player : UnitBase
 {
     [Header("Player Property")]
-    public long CharaId;
+    public long RoleId;
     
     /// 绑定经验组件
     // [NonSerialized]

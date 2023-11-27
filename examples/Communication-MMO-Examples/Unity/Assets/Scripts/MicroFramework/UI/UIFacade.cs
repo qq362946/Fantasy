@@ -97,6 +97,18 @@ public class UIFacade : MonoBehaviour
         Camera.main.transform.rotation = location.rotation;
     }
 
+    public void SetMMOCamera(Transform target){
+        CameraMMO cameraMMO = Camera.main.GetComponent<CameraMMO>();
+        cameraMMO.enabled = true;
+        cameraMMO.target = target;
+    }
+
+    public void ReSetMMOCamera(){
+        CameraMMO cameraMMO = Camera.main.GetComponent<CameraMMO>();
+        cameraMMO.enabled = false;
+        cameraMMO.target = null;
+    }
+
     // 获取Panel
     public GameObject GetPanel(string prefabName,string name = null)
     {

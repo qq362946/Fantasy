@@ -36,9 +36,9 @@ public class LoginPanel : BasePanel
 
         // 异步事件
         btn_submit.onClick.SetListener(async () => {
-            // >> test
-            UIFacade.Instance.EnterScene(new RoleScene());
-            return;
+            // // >> test
+            // UIFacade.Instance.EnterScene(new RoleScene());
+            // return;
 
             // 前端验证
             if(account.text==""||password.text==""){
@@ -58,19 +58,17 @@ public class LoginPanel : BasePanel
 
     public async FTask Login(string name,string password)
     {
-        // >>process account 网络层判断登录
         var response = (R2C_LoginResponse) await GameManager.sender.Login(new C2R_LoginRequest(){
             AuthName = name,Pw = password, Version = ConstValue.Version
         });
 
         GameManager.response.LoginResponse(response.ErrorCode);
-        Log.Info(response.ErrorCode.ToJson());
-
         if(response.ErrorCode!=ErrorCode.Success)
             return;
 
         // 更新网关地址
         GameManager.Ins.gateAdress = response.GateAddress+":"+response.GatePort;
+        Log.Info("gateAdress: "+GameManager.Ins.gateAdress);
         
         // 登录帐号后连接网关
         await LoginGate(account.text,response.Key);
@@ -80,10 +78,15 @@ public class LoginPanel : BasePanel
     {
         // 登录网关
             // 登录网关后创建角色，或者加载角色列表，选择角色进入游戏地图
-        var loginGate = (G2C_LoginGateResponse) await GameManager.sender.Call(new C2G_LoginGateRequest(){
+        var response = (G2C_LoginGateResponse) await GameManager.sender.Call(new C2G_LoginGateRequest(){
             AuthName = account, Key = key,
         });
-        Log.Info(loginGate.ErrorCode.ToJson());
+
+        if(response.ErrorCode == ErrorCode.Success){
+            // 进入角色选择界面
+            // >>process role 从登录进入选角界面
+            UIFacade.Instance.EnterScene(new RoleScene());
+        }
     }
 
     public override void ResetPanel(){

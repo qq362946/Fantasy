@@ -1267,6 +1267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitId: 0
+  configId: 365478
   ClassName: ZArcher
   nickName: "\u5E7B\u60F3\u5F13\u7BAD\u624B"
   inbattle: 0

@@ -3112,6 +3112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitId: 0
+  configId: 12569
   ClassName: Mage
   nickName: "\u5E7B\u60F3\u9B54\u6CD5\u5E08"
   inbattle: 0

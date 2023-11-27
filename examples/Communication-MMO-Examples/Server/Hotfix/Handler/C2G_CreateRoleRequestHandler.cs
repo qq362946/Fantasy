@@ -6,9 +6,9 @@ namespace BestGame
     /// 检查角色性别，名字等
     /// 网关帐号有效，可创建角色数量
     /// 创建角色，存库
-    public class H_G2C_RoleCreateHandler : MessageRPC<C2G_RoleCreateRequest, G2C_RoleCreateResponse>
+    public class H_G2C_CreateRoleHandler : MessageRPC<C2G_CreateRoleRequest, G2C_CreateRoleResponse>
     {
-        protected override async FTask Run(Session session, C2G_RoleCreateRequest request, G2C_RoleCreateResponse response,
+        protected override async FTask Run(Session session, C2G_CreateRoleRequest request, G2C_CreateRoleResponse response,
             Action reply)
         {
             response.ErrorCode = await Check(session, request, response);
@@ -16,7 +16,7 @@ namespace BestGame
             await FTask.CompletedTask;
         }
 
-        private async FTask<uint> Check(Session session, C2G_RoleCreateRequest request, G2C_RoleCreateResponse response)
+        private async FTask<uint> Check(Session session, C2G_CreateRoleRequest request, G2C_CreateRoleResponse response)
         {
             var name = request.NickName?.Trim() ?? "";
             if (string.IsNullOrEmpty(name))
@@ -63,15 +63,19 @@ namespace BestGame
                     }
                     
                     // 创建新角色
+                    var configId = RoleHelper.GetConfigIdByClassName(request.Class);// 从unit配置表取得
+                    var moveInfo = RoleHelper.GetMoveInfoByUnitConfigId(configId);
                     Role role = Entity.Create<Role>(session.Scene);
-                    role.UnitConfigId = 12012; // 从unit配置表取得
+                    role.UnitConfigId = (int)configId;
+                    role.LastMoveInfo = moveInfo;
+                    role.LastMap = RoleHelper.GetMapNumByUnitConfigId(configId);
                     role.AccountId = accountId;
                     role.Sex = request.Sex;
                     role.NickName = name;
                     role.CreatedTime = TimeHelper.Now;
                     role.Level = 1;
                     role.Experience = 0;
-                    role.Class = ""; // 从unit配置表取得
+                    role.Class = request.Class; 
 
                     // 创建一个新角色并保存到数据库中。
                     await gateAccount.CreateRole(role);
