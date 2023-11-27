@@ -104,6 +104,7 @@ public class BasePool
         else
         {
             var prefab = Resources.Load<GameObject>(path); // 从文件夹中加载该资源
+            prefab.name = name;
             go = GameObject.Instantiate(prefab);
             factoryDict.Add(name, go); // 将得到的资源放入资源字典当中
         }

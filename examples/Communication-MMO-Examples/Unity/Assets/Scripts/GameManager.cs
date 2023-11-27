@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using PlatformCharacterController;
 
 public partial class GameManager : MonoBehaviour
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlatformCharacterController;
 [RequireComponent(typeof(AudioSource))]
-public class NetCharaMovement : Movement
+public class NetRoleMovement : Movement
 {
     private CharacterController _controller;
 

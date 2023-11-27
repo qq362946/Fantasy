@@ -121,6 +121,7 @@ message G2C_EnterMapResponse // IResponse
 {
 	int32 MapNum = 1;
 	MoveInfo LastMoveInfo = 2;
+	RoleInfo RoleInfo = 3;
 }
 
 /// 强制断开连接通知

@@ -24,6 +24,7 @@ public class RoleViewer : BaseViewer
             GameObject go =  base.TryPool(className,"RV"+roleId);
             go.transform.position = point.position;
             go.transform.rotation = point.rotation;
+            go.GetComponent<UnitBase>().ActiveController(point.position);
         }else Debug.LogError("no prefab found for class: " + className);
         
         return null;
