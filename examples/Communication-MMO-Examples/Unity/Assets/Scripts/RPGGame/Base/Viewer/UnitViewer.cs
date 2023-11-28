@@ -25,6 +25,7 @@ public class UnitViewer : BaseViewer
             GameObject go =  base.TryPool(className,"UV"+roleId);
             go.transform.position = point.position;
             go.transform.rotation = point.rotation;
+            go.GetComponent<UnitBase>().ActiveController(point.position);
             return go;
         }else Debug.LogError("no prefab found for class: " + className);
         

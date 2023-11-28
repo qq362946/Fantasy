@@ -79,7 +79,7 @@ public static class GateAccountSystem
         return self.GetRole(self.SelectRoleId);
     }
 
-    /// 根据网关session的SessionRumtimeId获取此session
+    /// 根据SessionRumtimeId获取网关session
     public static bool TryGeySession(this GateAccount self, out Session session)
     {
         session = default;

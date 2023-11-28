@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using PlatformCharacterController;
 
 //Player，NPC，Monster等的父对象类
 [RequireComponent(typeof(Animator))]
@@ -21,7 +22,7 @@ public abstract class UnitBase : BehaviourNonAlloc
     [NonSerialized]
     public AudioSource audioSource;
 
-    // [HideInInspector]public Movement movement;
+    [HideInInspector]public Movement movement;
 
     // // 角色等级
     // [HideInInspector]public Level level;
@@ -63,6 +64,57 @@ public abstract class UnitBase : BehaviourNonAlloc
         // abilitys = GetComponents<BaseAbility>();
 
         // 可选组件
-        
+        if (TryGetComponent(out Movement movement))
+            this.movement = movement;
+
+        OnInit();
     }
+
+    // 显示与隐藏相关
+    void OnEnable()
+    {
+        OnShow();
+    }
+
+    void OnDisable()
+    {
+        OnHide();
+    }
+
+    protected bool cached = false;
+    public virtual void OnInit()
+    {
+    }
+
+    public virtual void OnShow()
+    {
+    }
+
+    public virtual void OnHide()
+    {
+        EnableCharacter(false);
+    }
+
+    public void ActiveController(Vector3 position)
+    {
+        movement.SetPosition(position);
+        EnableCharacter(true);
+    }
+
+    public void EnableCharacter(bool enable)
+    {
+        GetComponent<CharacterController>().enabled = enable;
+        movement.enabled = enable;
+    }
+
+    void Update()
+    {
+        if(GameManager.Ins.IsConnect == true){
+            // 角色移动状态逻辑更新
+            UpdateStateLogic(); 
+        }
+    }
+
+    // 更新角色状态逻辑
+    public virtual void UpdateStateLogic(){}
 }

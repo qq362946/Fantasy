@@ -65,9 +65,12 @@ public class SelectRolePanel : BasePanel
 
     public async FTask EnterMap()
     {
-        var enter = (G2C_EnterMapResponse) await GameManager.sender.Call(new C2G_EnterMapRequest(){
+        var response = (G2C_EnterMapResponse) await GameManager.sender.Call(new C2G_EnterMapRequest(){
             RoleId = selectRoleId
         });
+
+        // 角色是以`UV+RoleId+职业类名`作为key缓存的,也作为go.name
+        Player.localName = "UV"+response.RoleInfo.RoleId+response.RoleInfo.Class;
         
         UIFacade.Instance.EnterScene(new MapScene());
     }
@@ -109,7 +112,8 @@ public class SelectRolePanel : BasePanel
     {
         selectRoleId = long.Parse(roleId);
         var prefab = roles.ToList().Find(p => p.RoleId == selectRoleId);
-        GameObject playerObj = roleViewer.ViewRole(prefab.Class,
+        
+        GameObject go = roleViewer.ViewRole(prefab.Class,
             roleId,GameManager.Ins.location.select_spawnLoaction);
     }
 

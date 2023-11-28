@@ -73,7 +73,7 @@ namespace Fantasy{
             }
             else return Vector3.zero;
         }
-
+        // 字符转四元数
         public static Quaternion ParseRotation(string input)
         {
             string[] angles = input.Split(',');

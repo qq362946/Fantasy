@@ -228,7 +228,7 @@ namespace PlatformCharacterController
             // SetRunningAnimation((Math.Abs(_horizontal) > 0 || Math.Abs(_vertical) > 0));
 
             // 刷新移动状态
-            state = UpdateState();
+            state = UpdateMoveState();
             // 刷新动画状态
             UpdateAnimations();
 
@@ -386,6 +386,7 @@ namespace PlatformCharacterController
             }
         }
 
+        // 更新动画控制器状态
         protected override void UpdateAnimations()
         {
             animator.SetBool("Running", Running());
@@ -396,7 +397,8 @@ namespace PlatformCharacterController
             animator.SetBool("Swimming", Swiming()); 
         }
 
-        protected override MoveState UpdateState()
+        // 更新角色移动状态
+        protected override MoveState UpdateMoveState()
         {
             if (EventDied())
                 return MoveState.DEAD;

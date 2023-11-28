@@ -52,7 +52,7 @@ namespace PlatformCharacterController
         { 
         }
 
-        protected virtual MoveState UpdateState()
+        protected virtual MoveState UpdateMoveState()
         {
             return MoveState.IDLE;   
         }

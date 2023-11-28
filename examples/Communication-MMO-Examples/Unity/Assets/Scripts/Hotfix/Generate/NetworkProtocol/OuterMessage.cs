@@ -266,6 +266,8 @@ namespace Fantasy
 		public int MapNum { get; set; }
 		[ProtoMember(2)]
 		public MoveInfo LastMoveInfo { get; set; }
+		[ProtoMember(3)]
+		public RoleInfo RoleInfo { get; set; }
 	}
 	/// <summary>
 	///  强制断开连接通知

@@ -23,6 +23,7 @@ public class ClassViewer : BaseViewer
             GameObject go =  base.TryPool(className,"CV");
             go.transform.position = point.position;
             go.transform.rotation = point.rotation;
+            go.GetComponent<UnitBase>().ActiveController(point.position);
         }else Debug.LogError("no prefab found for class: " + className);
 
         return null;
