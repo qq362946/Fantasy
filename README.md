@@ -4,7 +4,7 @@ Fantasy框架易于学习易于使用，只需要在服务端引用Fantasy.Net�
 目前提供了Unity前端应用参考，前端主要添加Packages中的Fantasy.Unity，也可以按需要添加Fantasy.FairyGUI,Fantasy.HybridCLR。  
 后续计划增加Fantasy Go版本，和Unreal前端应用参考。  
 <br/>
-[框架网站：](https://taikr.com/fantasy) https://taikr.com/fantasy  
+[框架网站：](https://www.fantsida.com/fantasy) https://www.fantsida.com/fantasy  
 <br/>
 
 ## Quick Start

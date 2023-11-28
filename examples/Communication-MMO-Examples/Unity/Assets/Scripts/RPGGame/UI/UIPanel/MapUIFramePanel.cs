@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
-/// 选角面板
+/// 地图场景框架面板
 /// </summary>
 public class MapUIFramePanel : BasePanel
 {

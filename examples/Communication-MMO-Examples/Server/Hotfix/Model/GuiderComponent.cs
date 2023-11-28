@@ -71,7 +71,7 @@ namespace BestGame
                 var sessionPlayer = session.GetComponent<SessionPlayerComponent>() 
                     ?? session.AddComponent<SessionPlayerComponent>();
                 
-                // sessionPlayer.playerId = accountId; gateAccount.Id即是accountId
+                // gateAccount.Id = accountId
                 sessionPlayer.gateAccount = gateAccount;
 
                 // gateAccount缓存登录状态，SessionRumtimeId

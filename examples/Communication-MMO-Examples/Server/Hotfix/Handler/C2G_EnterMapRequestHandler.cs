@@ -56,6 +56,9 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 var mapNum = gateRole.LastMap;
                 response.LastMoveInfo = gateRole.LastMoveInfo;
                 response.MapNum = mapNum;
+                // 返回角色信息,此次区别于M2C_NoticeUnitAdd,这里返回的是客户端本人角色信息
+                    // M2C_NoticeUnitAdd中也包括客户端本人角色信息
+                response.RoleInfo = gateRole.ToProto();
 
                 // role有另一个网关seesion信息，他处登录
                 if (gateAccount.SelectRoleId != 0 && gateRole.sessionRuntimeId != session.RuntimeId)
@@ -74,6 +77,12 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                             MapNum = mapNum,
                             RoleInfo = gateRole.ToProto(),
                         });
+                    
+                    // 返回目前unit的地图与位置，角色信息。用于客户端创建unit直接进入游戏
+                    // response.LastMoveInfo = gateRole.unit.LastMoveInfo;
+                    // response.MapNum = gateRole.unit.mapNum;
+                    // response.RoleInfo = gateRole.ToProto();
+
                     return ErrorCode.Error_EnterGameAlreadyEnter;
                 }
 
