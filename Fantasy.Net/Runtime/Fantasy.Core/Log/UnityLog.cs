@@ -87,10 +87,32 @@ namespace Fantasy
             {
                 return false;
             }
+
+            // 获取资源路径
+            string assetPath = AssetDatabase.GetAssetPath(instanceID);
+            
+            // 判断资源类型
+            if (!assetPath.EndsWith(".cs"))
+            {
+                return false;
+            }
+
+            bool autoFirstMatch = assetPath.Contains("Log.cs") ||
+                                   assetPath.Contains("UnityLog.cs");
+
             var stackTrace = GetStackTrace();
             if (!string.IsNullOrEmpty(stackTrace))
                                             
             {
+                if (!autoFirstMatch)
+                {
+                    var fullPath = UnityEngine.Application.dataPath.Substring(0, UnityEngine.Application.dataPath.LastIndexOf("Assets", StringComparison.Ordinal));
+                    fullPath = $"{fullPath}{assetPath}";
+                    // 跳转到目标代码的特定行
+                    InternalEditorUtility.OpenFileAtLineExternal(fullPath.Replace('/', '\\'), line);
+                    return true;
+                }
+
                 // 使用正则表达式匹配at的哪个脚本的哪一行
                 var matches = Regex.Match(stackTrace, @"\(at (.+)\)",
                     RegexOptions.IgnoreCase);
