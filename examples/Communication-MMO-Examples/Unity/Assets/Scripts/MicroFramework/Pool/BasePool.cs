@@ -14,15 +14,15 @@ public class BasePool
     /// <summary>
     /// 获取，从对象池中取出
     /// </summary>
-    public GameObject Get(string prefabName,string name = null)
+    public GameObject TryGet(string prefabName,string name = null)
     {
-        GameObject item = GetItemFromPool(prefabName,name);
+        GameObject item = TryGetFromPool(prefabName,name);
         if (item != null) item.SetActiveX(true);
         return item;
     }
-    public GameObject Get(string name,GameObject prefab)
+    public GameObject TryGet(string name,GameObject prefab)
     {
-        GameObject item = GetItemFromPool(name,prefab);
+        GameObject item = TryGetFromPool(name,prefab);
         if (item != null) item.SetActiveX(true);
         return item;
     }
@@ -49,7 +49,7 @@ public class BasePool
     /// <summary>
     /// 尝试从对象池中取得实例或创建实例
     /// </summary>
-    private GameObject GetItemFromPool(string prefabName,string name = null)
+    private GameObject TryGetFromPool(string prefabName,string name = null)
     {
         if (name == null) name = prefabName;
 
@@ -66,7 +66,7 @@ public class BasePool
         return objectPoolDict[name].Pop();
     }
 
-    private GameObject GetItemFromPool(string name,GameObject prefab)
+    private GameObject TryGetFromPool(string name,GameObject prefab)
     {
         GameObject item = null;
 
@@ -94,26 +94,21 @@ public class BasePool
     /// </summary>
     public GameObject GetResource(string prefabName,string name)
     {
-        GameObject go = null;
         string path = loadPath + prefabName;
 
         if (factoryDict.ContainsKey(name)) // 如果工厂中有该资源
-        {
-            go = factoryDict[name];
-        }
-        else
-        {
-            var prefab = Resources.Load<GameObject>(path); // 从文件夹中加载该资源
-            prefab.name = name;
-            go = GameObject.Instantiate(prefab);
-            factoryDict.Add(name, go); // 将得到的资源放入资源字典当中
-        }
+            return factoryDict[name];
+        
+        var prefab = Resources.Load<GameObject>(path); // 从文件夹中加载该资源
+        prefab.name = name;
 
+        GameObject go = GameObject.Instantiate(prefab);
+        go.name = name;
+        factoryDict.Add(name, go); // 将得到的资源放入资源字典当中
+        
         if (go == null) //异常处理
-        {
             Debug.LogError(string.Format("资源加载异常: {0}资源加载失败,加载路径为{1}", name, path));
-        }
-
+        
         return go;
     }
 }

@@ -60,7 +60,7 @@ namespace Fantasy
 		[ProtoMember(3)]
 		public long SessionRuntimeId { get; set; }
 		[ProtoMember(4)]
-		public long GateSceneRouteId { get; set; }
+		public long GateRouteId { get; set; }
 		[ProtoMember(5)]
 		public RoleInfo RoleInfo { get; set; }
 	}

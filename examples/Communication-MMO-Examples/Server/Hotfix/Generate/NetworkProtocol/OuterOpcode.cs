@@ -21,9 +21,10 @@ namespace Fantasy
 		 public const int G2C_ForceDisconnected = 100000001;
 		 public const int C2M_ExitRequest = 200000001;
 		 public const int M2C_ExitResponse = 250000001;
-		 public const int C2M_MoveMessage = 190000001;
-		 public const int M2C_MoveBroadcast = 190000002;
-		 public const int M2C_NoticeUnitAdd = 190000003;
-		 public const int M2C_NoticeUnitRemove = 190000004;
+		 public const int C2M_StartMoveMessage = 190000001;
+		 public const int C2M_StopMoveMessage = 190000002;
+		 public const int M2C_MoveBroadcast = 190000003;
+		 public const int M2C_UnitCreate = 190000004;
+		 public const int M2C_UnitRemove = 190000005;
 	}
 }

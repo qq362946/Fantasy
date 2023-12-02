@@ -43,6 +43,8 @@ public class OnCreateScene : AsyncEventSystem<Fantasy.OnCreateScene>
             {
                 // Unit管理组件
                 scene.AddComponent<UnitComponent>();
+                // 添加AOI组件
+                scene.AddComponent<AOIComponent>();
                 break;
             }
             case SceneType.Realm:

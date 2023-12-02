@@ -2,15 +2,25 @@ using Fantasy;
 
 namespace BestGame;
 
-public class StartMoveEventHanlder : EventSystem<EventSystemStruct.StartMove>
+public class StartMoveEventHanlder : EventSystem<StartMove>
 {
-    public override void Handler(EventSystemStruct.StartMove self)
+    public override void Handler(StartMove self)
     {
         var unit = self.Unit;
         MoveSyncComponent moveSyncComponent = unit.GetComponent<MoveSyncComponent>();
 
-        // 可以加BroadcastWithAoi，如果不是附近玩家就不添加到消息队列，略过...
-        moveSyncComponent.AddMessage(unit.Id, self.MoveInfo);
+        // BroadcastWithAoi,这条消息添加到附件能看到此unit的玩家的MoveSyncComponent消息队列中
+        void Action(Unit aoiUnit)
+        {
+            MoveSyncComponent moveSyncComponent = aoiUnit.GetComponent<MoveSyncComponent>();
+        
+            if (moveSyncComponent != null)
+            {
+                moveSyncComponent.AddMessage(unit.Id, self.MoveInfo);
+            }
+        }
+
+        AOIHelper.AoiLimitAction(unit, Action);
     }
 }
 
@@ -22,13 +32,14 @@ public class MoveSyncComponent : StateSync
     {
         Message.Moves.Clear();
 
-        /// 所有玩家，有状态变化的数据列表
+        /// 附件玩家，移动数据列表
         foreach (KeyValuePair<long, List<AProto>> dic in mDict)
             foreach (AProto info in dic.Value)
                 Message.Moves.Add((MoveInfo)info);
         
         /// 发送消息
-        SendMessage(Message);
+        if (Message.Moves.Count > 0)
+            SendMessage(Message);
     }
 }
 

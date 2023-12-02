@@ -9,9 +9,13 @@ public class G2M_CreateUnitRequestHandler : RouteRPC<Scene,G2M_CreateUnitRequest
         var unitManager = scene.GetComponent<UnitComponent>();
         // 1、用PlayerId创建一个Unit
         var unit = Entity.Create<Unit>(scene, request.PlayerId);
+        unit.UnitType = UnitType.Player;
         unit.SessionRuntimeId = request.SessionRuntimeId;
-        unit.GateSceneRouteId = request.GateSceneRouteId;
-        unit.moveInfo = MessageInfoHelper.MoveInfo(); //练习就给一个原点的默认位置，真实项目有地图配置文件的出生点位置，或者已经保存的玩家下线位置。
+        unit.GateRouteId = request.GateRouteId;
+        var moveInfo = request.RoleInfo.LastMoveInfo;
+        unit.Position = moveInfo.Position.ToVector3();
+        unit.Rotation = moveInfo.Rotation.ToQuaternion();
+        unit.RoleInfo = request.RoleInfo;
         unitManager.Add(unit);
 
         // 2、挂AddressableMessageComponent组件、让这个Unit支持Address（可被寻址）、并且会自动注册到网格中
@@ -20,15 +24,11 @@ public class G2M_CreateUnitRequestHandler : RouteRPC<Scene,G2M_CreateUnitRequest
         // 3、挂移动组件，状态同步组件
         unit.AddComponent<MoveComponent>();
         unit.AddComponent<MoveSyncComponent>();
-        unit.AddComponent<NoticeUnitSyncComponent>();
+
+        // 4、添加到AOI管理器中
+        AOIHelper.AddAOI(unit);
+
         response.AddressableId = unit.Id;
-
-        // 发事件给NoticeUnit同步组件
-        // 想想这里为什么要发事件给NoticeUnit同步组件,而不是在此处直接M2C发到客户端?
-        EventSystem.Instance.Publish(new EventSystemStruct.NoticeUnitAdd{
-            Unit = unit, RoleInfo = request.RoleInfo
-        });
-
         response.Message = "-->创建unit成功";
     }
 }

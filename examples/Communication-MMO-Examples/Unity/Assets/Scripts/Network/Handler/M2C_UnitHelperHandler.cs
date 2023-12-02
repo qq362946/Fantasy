@@ -3,27 +3,31 @@ using Fantasy;
 
 namespace BestGame
 {
-	public class M2C_CreateUnitsHandler : Message<M2C_NoticeUnitAdd>
+	public class M2C_UnitMoveHandler : Message<M2C_MoveBroadcast>
 	{
-		protected override async FTask Run(Session session, M2C_NoticeUnitAdd message)
+		protected override async FTask Run(Session session, M2C_MoveBroadcast message)
 		{
-			foreach (var unit in message.RoleInfos)
-			{
-				var temp = new GameObject();
-				temp.transform.position = MessageInfoHelper.Vector3(unit.LastMoveInfo);
-				temp.transform.rotation = MessageInfoHelper.Quaternion(unit.LastMoveInfo);
-				
-				GameManager.Ins.AddUnit2Scene(unit.Class,unit.RoleId.ToJson(),temp.transform);
-				GameObject.Destroy(temp);
-				
-			}
+			Sender.Ins.Recive(ReciveType.UnitMove,message);
+			Log.Info(message.Moves.ToJson());
+			
 			await FTask.CompletedTask;
 		}
 	}
 
-	public class M2C_RemvoeUnitsHandler : Message<M2C_NoticeUnitRemove>
+	public class M2C_CreateUnitsHandler : Message<M2C_UnitCreate>
 	{
-		protected override async FTask Run(Session session, M2C_NoticeUnitRemove message)
+		protected override async FTask Run(Session session, M2C_UnitCreate message)
+		{
+			Sender.Ins.Recive(ReciveType.CreateUnits,message);
+			Log.Info(message.UnitInfos.ToJson());
+			
+			await FTask.CompletedTask;
+		}
+	}
+
+	public class M2C_RemvoeUnitsHandler : Message<M2C_UnitRemove>
+	{
+		protected override async FTask Run(Session session, M2C_UnitRemove message)
 		{
 			
 			await FTask.CompletedTask;

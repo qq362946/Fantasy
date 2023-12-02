@@ -12,7 +12,7 @@ public class BasePanel : BehaviourNonAlloc
     protected virtual void Awake()
     {
         // 获得UIFacade
-        mUIFacade = UIFacade.Instance;
+        mUIFacade = UIFacade.Ins;
     }
 
     public virtual void InitPanel(){}

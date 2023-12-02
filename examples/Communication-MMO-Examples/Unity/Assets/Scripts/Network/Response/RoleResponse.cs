@@ -1,14 +1,14 @@
 using UnityEngine;
 using Fantasy;
 
-public partial class Response : MonoBehaviour
+public partial class Response : SingletonMono<Response>
 {
     CreateRolePanel create;
 
     public void CreateRoleResponse(uint Error)
     {
         if(create ==null)
-            create = UIFacade.Instance.GetUIPanel(StringManager.CreateRolePanel) as CreateRolePanel;
+            create = UIFacade.Ins.GetUIPanel(StringManager.CreateRolePanel) as CreateRolePanel;
 
 
         // 角色名已经存在

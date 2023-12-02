@@ -24,6 +24,8 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
         if (err != ErrorCode.Success)
             return ErrorCode.H_C2G_EnterGame_Error01;
 
+        var sessionRuntimeId = session.RuntimeId;
+
         var sessionPlayer = session.GetComponent<SessionPlayerComponent>();
 
         // 正在进入游戏中 操作过于频繁
@@ -56,12 +58,12 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 var mapNum = gateRole.LastMap;
                 response.LastMoveInfo = gateRole.LastMoveInfo;
                 response.MapNum = mapNum;
-                // 返回角色信息,此次区别于M2C_NoticeUnitAdd,这里返回的是客户端本人角色信息
-                    // M2C_NoticeUnitAdd中也包括客户端本人角色信息
+                
+                // 返回角色信息,这里返回的是客户端本人角色信息
                 response.RoleInfo = gateRole.ToProto();
 
                 // role有另一个网关seesion信息，他处登录
-                if (gateAccount.SelectRoleId != 0 && gateRole.sessionRuntimeId != session.RuntimeId)
+                if (gateAccount.SelectRoleId != 0 && gateRole.sessionRuntimeId != sessionRuntimeId)
                 {
                     // 他处角色顶下线
                     // 主要是给他处客户端发消息，退出游戏，这里不写了
@@ -106,8 +108,8 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                         new G2M_CreateUnitRequest()
                         {
                             PlayerId = accountId,
-                            SessionRuntimeId = session.RuntimeId,
-                            GateSceneRouteId = session.Scene.RuntimeId,
+                            SessionRuntimeId = sessionRuntimeId,
+                            GateRouteId = session.Scene.RuntimeId,
                             RoleInfo = gateRole.ToProto(),
                         });
 
@@ -119,7 +121,7 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 }
 
                 // 设置角色进入地图
-                guider.SetRoleEnterMap(session,mapNum);
+                guider.SetRoleEnterMap(session,mapNum,sessionRuntimeId);
 
                 sessionPlayer.EnterState = SessionState.Enter;
             }
@@ -131,7 +133,7 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
             finally
             {
                 // Session有效，存在sessionPlayer且未进入游戏，设置状态为None
-                if (LoginHelper.CheckSessionValid(session, session.RuntimeId) && 
+                if (LoginHelper.CheckSessionValid(session, sessionRuntimeId) && 
                     sessionPlayer != null && sessionPlayer.EnterState != SessionState.Enter)
                     sessionPlayer.EnterState = SessionState.None;
                 

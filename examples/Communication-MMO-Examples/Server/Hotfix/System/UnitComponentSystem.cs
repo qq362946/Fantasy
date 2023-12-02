@@ -17,17 +17,17 @@ public static class UnitComponentSystem
         if(delay>0)
         {
             // delay>0，unit准备掉线延迟下线
-            unit.unitState = UnitState.DelayOffline;
+            unit.unitState = OnlineState.DelayOffline;
 
             await TimerScheduler.Instance.Core.WaitAsync(delay);
 
             // 重连，unitState状态改变，unit终止下线
-            if(unit.unitState != UnitState.DelayOffline)
+            if(unit.unitState != OnlineState.DelayOffline)
                 return false;
         }
         
         // 发消息到网关，其它服，gateAccount更新角色信息
-        MessageHelper.SendInnerRoute(self.Scene,unit.GateSceneRouteId,new M2G_QuitMapMsg{
+        MessageHelper.SendInnerRoute(self.Scene,unit.GateRouteId,new M2G_QuitMapMsg{
             AccountId = unit.Id,
         });
 
@@ -40,7 +40,9 @@ public static class UnitComponentSystem
         // 移除unit组件
         unit.RemoveComponent<MoveComponent>();
         unit.RemoveComponent<MoveSyncComponent>();
-        unit.RemoveComponent<NoticeUnitSyncComponent>();
+
+        // 移除AOI管理器
+        AOIHelper.RemoveAOI(unit);
 
         // 移除AddressableMessageComponent
         await AddressableHelper.RemoveAddressable(unit.Scene, unit.Id);

@@ -29,7 +29,7 @@ message G2M_CreateUnitRequest // IRouteRequest,M2G_CreateUnitResponse
 	string Message = 1;
 	int64 PlayerId = 2;
 	int64 SessionRuntimeId = 3;
-	int64 GateSceneRouteId = 4;
+	int64 GateRouteId = 4;
 	RoleInfo RoleInfo = 5;
 }
 message M2G_CreateUnitResponse // IRouteResponse

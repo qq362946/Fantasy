@@ -86,13 +86,14 @@ message C2G_RoleListRequest // IRequest,G2C_RoleListResponse
 /// 角色列表信息 消息响应
 message G2C_RoleListResponse // IResponse
 {
-	repeated RoleInfo Items = 1;
+	repeated RoleInfo RoleInfos = 1;
 }
 /// 角色列表子项信息
 message RoleInfo
 {
 	int32 UnitConfigId = 1;
-	int64 AccountId = 3;
+	int64 AccountId = 2;
+	int32 UnitType = 3;
 	//角色ID
 	int64 RoleId = 4;
 	//性别
@@ -106,7 +107,7 @@ message RoleInfo
 	//经验
 	int64 Experience = 9;
 	//职业
-	string Class = 10; 
+	string ClassName = 10; 
 	int32 LastMap = 11;
 	MoveInfo LastMoveInfo = 12;
 	//repeated ItemInfo Equipments = 11;
@@ -142,31 +143,46 @@ message M2C_ExitResponse // IAddressableRouteResponse
 /// 位置对象
 message MoveInfo
 {
+	Position Position = 1;
+	Rotation Rotation = 2;
+	int64 RoleId = 4;
+	int32 MoveState = 5;
+	int64 MoveEndTime = 6;
+}
+message Position
+{
 	float X = 1;
   	float Y = 2;
   	float Z = 3;
-	float RotA = 4;
-	float RotB = 5;
-	float RotC = 6;
-	float RotW = 7;
-	int64 MoveEndTime = 8;
 }
+message Rotation
+{
+	float RotA = 1;
+	float RotB = 2;
+	float RotC = 3;
+	float RotW = 4;
+}
+        
 /// 移动操作
-message C2M_MoveMessage // IAddressableRouteMessage
+message C2M_StartMoveMessage // IAddressableRouteMessage
 {
 	MoveInfo MoveInfo = 1;
 }
+message C2M_StopMoveMessage // IAddressableRouteMessage
+{
+}
+
 
 /// 核心状态同步
 message M2C_MoveBroadcast // IAddressableRouteMessage
 {
 	repeated MoveInfo Moves = 1;
 }
-message M2C_NoticeUnitAdd // IAddressableRouteMessage
+message M2C_UnitCreate // IAddressableRouteMessage
 {
-	repeated RoleInfo RoleInfos = 1;
+	repeated RoleInfo UnitInfos = 1;
 }
-message M2C_NoticeUnitRemove // IAddressableRouteMessage
+message M2C_UnitRemove // IAddressableRouteMessage
 {
-	int64 UnitId = 1;
+	repeated int64 UnitIds = 1;
 }
