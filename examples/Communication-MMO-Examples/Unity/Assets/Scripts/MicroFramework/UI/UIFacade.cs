@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 
-public class UIFacade : MonoBehaviour
+public class UIFacade : Singleton<UIFacade>
 {
     // UI面板GameObject容器
     public Dictionary<string, GameObject> currentScenePanelGoDict;
@@ -11,27 +12,13 @@ public class UIFacade : MonoBehaviour
     public Transform canvas; // UIPanel放置的容器
 
     // 场景状态
-    public UIScene currentScene;
-    public UIScene lastScene;
+    public BaseScene currentScene;
+    public BaseScene lastScene;
     public BasePanel lastPanel = null;
 
-    private static UIFacade _instance = null;
-    public static UIFacade Instance
+    private new void Awake()
     {
-        get
-        {
-            if (_instance == null)
-            {
-                GameObject go = new GameObject("UIFacade");
-                _instance = go.AddComponent<UIFacade>();
-            }
-
-            return _instance;
-        }
-    } 
-
-    private void Awake()
-    {
+        base.Awake();
         // 初始UI容器
         currentScenePanelGoDict = new Dictionary<string, GameObject>();
         currentScenePanelDict = new Dictionary<string, BasePanel>();
@@ -41,7 +28,7 @@ public class UIFacade : MonoBehaviour
     }
 
     // 改变当前场景的状态
-    public void EnterScene(UIScene scene)
+    public void EnterScene(BaseScene scene)
     {
         scene.EnterScene();
         currentScene = scene;
@@ -112,7 +99,7 @@ public class UIFacade : MonoBehaviour
     // 获取Panel
     public GameObject GetPanel(string prefabName,string name = null)
     {
-        return Pool.Instance.Get(PoolType.UIPanel,prefabName,name);
+        return Pool.Instance.TryGet(PoolType.UIPanel,prefabName,name);
     }
 
     // 将Panel放回对象池
@@ -124,11 +111,11 @@ public class UIFacade : MonoBehaviour
     // 获取Panel
     public GameObject GetUI(string prefabName,string name = null)
     {
-        return Pool.Instance.Get(PoolType.UI,prefabName,name);
+        return Pool.Instance.TryGet(PoolType.UI,prefabName,name);
     }
     public GameObject GetUI(string name, GameObject prefab)
     {
-        return Pool.Instance.Get(PoolType.UI,name,prefab);
+        return Pool.Instance.TryGet(PoolType.UI,name,prefab);
     }
     
 

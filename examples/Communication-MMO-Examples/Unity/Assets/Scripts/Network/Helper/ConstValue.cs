@@ -32,6 +32,11 @@ namespace Fantasy
 		public const int CameraDistance = 89000; // 摄像机距离默认参数（小数，除以10000后使用）
 		public const int CameraHeight = 107300; // 摄像机高度默认参数（小数，除以10000后使用）
 		public const int CameraRotation = 2076600; // 摄像机角度默认参数（小数，除以10000后使用）
+
+		// # AOI相关
+		public const int CellUnitLen = 10000; // 格子单位长度
+		public const int CellSize = 10*CellUnitLen; // 单位格子视野(米)
+		public const int AoiSeeUnitsCount = 20; // 可视的玩家数量
 	}
 }
 

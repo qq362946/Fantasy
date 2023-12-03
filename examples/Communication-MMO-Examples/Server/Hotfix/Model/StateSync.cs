@@ -46,9 +46,12 @@ public class StateSync : Entity
     public void SendMessage(IMessage message)
     {
         var unit = (Unit)Parent;
-        /// 向玩家发送状态数据
-        MessageHelper.SendInnerRoute(unit.Scene,unit.SessionRuntimeId,
-            (IRouteMessage)message
-        );
+        
+        if(!unit.IsDisposed)
+            MessageHelper.SendInnerRoute(unit.Scene,unit.SessionRuntimeId,
+                (IRouteMessage)message
+            );
+        
+        mDict.Clear();
     }
 }

@@ -81,7 +81,7 @@ namespace BestGame
         }
 
         /// 设置角色进入地图
-        public void SetRoleEnterMap(Session session,int mapNum)
+        public void SetRoleEnterMap(Session session,int mapNum,long sessionRuntimeId)
         {
             
             var sessionPlayer = session.GetComponent<SessionPlayerComponent>();
@@ -96,10 +96,10 @@ namespace BestGame
             // 设置在线状态
             gateRole.State = RoleState.Online;
             // 记录网关sessionId
-            gateRole.sessionRuntimeId = session.RuntimeId;
+            gateRole.sessionRuntimeId = sessionRuntimeId;
             
             // Session有效才挂AddressableRouteComponent
-            if (LoginHelper.CheckSessionValid(session, session.RuntimeId))
+            if (LoginHelper.CheckSessionValid(session, sessionRuntimeId))
             {
                 // 挂寻址路由组件，session就可以收、转发路由消息了
                 // AddressableRouteComponent组件是只给session用的，SetAddressableId设置转发目标

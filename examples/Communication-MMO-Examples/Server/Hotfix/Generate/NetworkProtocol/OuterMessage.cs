@@ -189,7 +189,7 @@ namespace Fantasy
 		[ProtoMember(91, IsRequired = true)]
 		public uint ErrorCode { get; set; }
 		[ProtoMember(1)]
-		public List<RoleInfo> Items = new List<RoleInfo>();
+		public List<RoleInfo> RoleInfos = new List<RoleInfo>();
 	}
 	/// <summary>
 	///  角色列表子项信息
@@ -199,8 +199,10 @@ namespace Fantasy
 	{
 		[ProtoMember(1)]
 		public int UnitConfigId { get; set; }
-		[ProtoMember(3)]
+		[ProtoMember(2)]
 		public long AccountId { get; set; }
+		[ProtoMember(3)]
+		public int UnitType { get; set; }
 		///<summary>
 		/// 角色ID
 		///</summary>
@@ -235,7 +237,7 @@ namespace Fantasy
 		/// 职业
 		///</summary>
 		[ProtoMember(10)]
-		public string Class { get; set; }
+		public string ClassName { get; set; }
 		[ProtoMember(11)]
 		public int LastMap { get; set; }
 		[ProtoMember(12)]
@@ -308,32 +310,54 @@ namespace Fantasy
 	public partial class MoveInfo : AProto
 	{
 		[ProtoMember(1)]
+		public Position Position { get; set; }
+		[ProtoMember(2)]
+		public Rotation Rotation { get; set; }
+		[ProtoMember(4)]
+		public long RoleId { get; set; }
+		[ProtoMember(5)]
+		public int MoveState { get; set; }
+		[ProtoMember(6)]
+		public long MoveEndTime { get; set; }
+	}
+	[ProtoContract]
+	public partial class Position : AProto
+	{
+		[ProtoMember(1)]
 		public float X { get; set; }
 		[ProtoMember(2)]
 		public float Y { get; set; }
 		[ProtoMember(3)]
 		public float Z { get; set; }
-		[ProtoMember(4)]
+	}
+	[ProtoContract]
+	public partial class Rotation : AProto
+	{
+		[ProtoMember(1)]
 		public float RotA { get; set; }
-		[ProtoMember(5)]
+		[ProtoMember(2)]
 		public float RotB { get; set; }
-		[ProtoMember(6)]
+		[ProtoMember(3)]
 		public float RotC { get; set; }
-		[ProtoMember(7)]
+		[ProtoMember(4)]
 		public float RotW { get; set; }
-		[ProtoMember(8)]
-		public long MoveEndTime { get; set; }
 	}
 	/// <summary>
 	///  移动操作
 	/// </summary>
 	[ProtoContract]
-	public partial class C2M_MoveMessage : AProto, IAddressableRouteMessage
+	public partial class C2M_StartMoveMessage : AProto, IAddressableRouteMessage
 	{
-		public uint OpCode() { return OuterOpcode.C2M_MoveMessage; }
+		public uint OpCode() { return OuterOpcode.C2M_StartMoveMessage; }
 		public long RouteTypeOpCode() { return CoreRouteType.Addressable; }
 		[ProtoMember(1)]
 		public MoveInfo MoveInfo { get; set; }
+	}
+	[ProtoContract]
+	public partial class C2M_StopMoveMessage : AProto, IAddressableRouteMessage
+	{
+		public uint OpCode() { return OuterOpcode.C2M_StopMoveMessage; }
+		public long RouteTypeOpCode() { return CoreRouteType.Addressable; }
 	}
 	/// <summary>
 	///  核心状态同步
@@ -347,19 +371,19 @@ namespace Fantasy
 		public List<MoveInfo> Moves = new List<MoveInfo>();
 	}
 	[ProtoContract]
-	public partial class M2C_NoticeUnitAdd : AProto, IAddressableRouteMessage
+	public partial class M2C_UnitCreate : AProto, IAddressableRouteMessage
 	{
-		public uint OpCode() { return OuterOpcode.M2C_NoticeUnitAdd; }
+		public uint OpCode() { return OuterOpcode.M2C_UnitCreate; }
 		public long RouteTypeOpCode() { return CoreRouteType.Addressable; }
 		[ProtoMember(1)]
-		public List<RoleInfo> RoleInfos = new List<RoleInfo>();
+		public List<RoleInfo> UnitInfos = new List<RoleInfo>();
 	}
 	[ProtoContract]
-	public partial class M2C_NoticeUnitRemove : AProto, IAddressableRouteMessage
+	public partial class M2C_UnitRemove : AProto, IAddressableRouteMessage
 	{
-		public uint OpCode() { return OuterOpcode.M2C_NoticeUnitRemove; }
+		public uint OpCode() { return OuterOpcode.M2C_UnitRemove; }
 		public long RouteTypeOpCode() { return CoreRouteType.Addressable; }
 		[ProtoMember(1)]
-		public long UnitId { get; set; }
+		public List<long> UnitIds = new List<long>();
 	}
 }

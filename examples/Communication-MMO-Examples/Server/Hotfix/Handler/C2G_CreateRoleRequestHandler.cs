@@ -63,19 +63,20 @@ namespace BestGame
                     }
                     
                     // 创建新角色
-                    var configId = RoleHelper.GetConfigIdByClassName(request.Class);// 从unit配置表取得
-                    var moveInfo = RoleHelper.GetMoveInfoByUnitConfigId(configId);
+                    var configId = UnitHelper.GetConfigIdByClassName(request.Class);// 从unit配置表取得
+                    var moveInfo = UnitHelper.GetMoveInfoByUnitConfigId(configId);
                     Role role = Entity.Create<Role>(session.Scene);
+                    moveInfo.RoleId = role.Id;
                     role.UnitConfigId = (int)configId;
                     role.LastMoveInfo = moveInfo;
-                    role.LastMap = RoleHelper.GetMapNumByUnitConfigId(configId);
+                    role.LastMap = UnitHelper.GetMapNumByUnitConfigId(configId);
                     role.AccountId = accountId;
                     role.Sex = request.Sex;
                     role.NickName = name;
                     role.CreatedTime = TimeHelper.Now;
                     role.Level = 1;
                     role.Experience = 0;
-                    role.Class = request.Class; 
+                    role.ClassName = request.Class; 
 
                     // 创建一个新角色并保存到数据库中。
                     await gateAccount.CreateRole(role);

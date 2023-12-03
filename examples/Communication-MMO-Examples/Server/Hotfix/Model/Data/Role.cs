@@ -40,7 +40,7 @@ public class Role : Entity
 
     public long Experience;
 
-    public string Class; // 职业
+    public string ClassName; // 职业
 
     public int LastMap;
 
@@ -80,7 +80,7 @@ public static class RoleSystem
             Level = role.Level,
             CreatedTime = role.CreatedTime,
             Experience = role.Experience,
-            Class = role.Class,
+            ClassName = role.ClassName,
             LastMap = role.LastMap,
             LastMoveInfo = role.LastMoveInfo,
         };

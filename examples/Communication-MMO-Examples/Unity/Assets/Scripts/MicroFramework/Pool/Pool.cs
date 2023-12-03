@@ -17,34 +17,34 @@ public class Pool
     /// <summary>
     /// 获取，从对象池中取出
     /// </summary>
-    public GameObject Get(PoolType type, string prefabName, string name = null)
+    public GameObject TryGet(PoolType type, string prefabName, string name = null)
     {
         switch (type)
         {
             case PoolType.UIPanel:
-                return UIPanelPool.Instance.Get(prefabName,name);
+                return UIPanelPool.Instance.TryGet(prefabName,name);
             case PoolType.Game:
-                return GamePool.Instance.Get(prefabName,name);
+                return GamePool.Instance.TryGet(prefabName,name);
             case PoolType.UI:
-                return UIPool.Instance.Get(prefabName,name);
+                return UIPool.Instance.TryGet(prefabName,name);
             case PoolType.Unit:
-                return UnitPool.Instance.Get(prefabName,name);
+                return UnitPool.Instance.TryGet(prefabName,name);
             default:
                 throw new ArgumentOutOfRangeException("type", type, null);
         }
     }
-    public GameObject Get(PoolType type, string name, GameObject prefab)
+    public GameObject TryGet(PoolType type, string name, GameObject prefab)
     {
         switch (type)
         {
             case PoolType.UIPanel:
-                return UIPanelPool.Instance.Get(name,prefab);
+                return UIPanelPool.Instance.TryGet(name,prefab);
             case PoolType.Game:
-                return GamePool.Instance.Get(name,prefab);
+                return GamePool.Instance.TryGet(name,prefab);
             case PoolType.UI:
-                return UIPool.Instance.Get(name,prefab);
+                return UIPool.Instance.TryGet(name,prefab);
             case PoolType.Unit:
-                return UnitPool.Instance.Get(name,prefab);
+                return UnitPool.Instance.TryGet(name,prefab);
             default:
                 throw new ArgumentOutOfRangeException("type", type, null);
         }

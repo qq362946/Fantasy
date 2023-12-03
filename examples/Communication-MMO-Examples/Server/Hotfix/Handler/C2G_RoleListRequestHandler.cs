@@ -32,7 +32,7 @@ namespace BestGame
                 var roles = await gateAccount.GetRoles();
                 foreach (var (_, role) in roles) // (_, role) 是元组分解语法
                 {
-                    response.Items.Add(role.ToProto());
+                    response.RoleInfos.Add(role.ToProto());
                 }
                 // Log.Info($"GateAccount:{accountId} RoleList:{roles.ToJson()}");
             }

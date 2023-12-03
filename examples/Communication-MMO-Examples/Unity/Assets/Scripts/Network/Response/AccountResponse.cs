@@ -1,7 +1,7 @@
 using UnityEngine;
 using Fantasy;
 
-public partial class Response : MonoBehaviour
+public partial class Response : SingletonMono<Response>
 {
     RegisterPanel reg;
     LoginPanel login;
@@ -9,7 +9,7 @@ public partial class Response : MonoBehaviour
     public void RegisterResponse(uint Error)
     {
         if(reg ==null)
-            reg = UIFacade.Instance.GetUIPanel(StringManager.RegisterPanel) as RegisterPanel;
+            reg = UIFacade.Ins.GetUIPanel(StringManager.RegisterPanel) as RegisterPanel;
 
         // 密码长度不够
         if(Error == ErrorCode.Error_PwTooShort){
@@ -34,7 +34,7 @@ public partial class Response : MonoBehaviour
     public void LoginResponse(uint Error)
     {
         if(login ==null)
-            login = UIFacade.Instance.GetUIPanel(StringManager.LoginPanel) as LoginPanel;
+            login = UIFacade.Ins.GetUIPanel(StringManager.LoginPanel) as LoginPanel;
 
         if(Error == ErrorCode.Error_LoginAccountNotRegister)
         {
