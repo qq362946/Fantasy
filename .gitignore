@@ -11,6 +11,9 @@ global.json
 
 # 项目素材
 ResLibrary/
+# Unity项目文件
+examples/**/Unity/*.sln
+examples/**/Unity/*.csproj
 
 # Client-Unity
 HybridCLRData/
