@@ -65,8 +65,8 @@ public partial class Player : GameEntity
             
             GetInputs();
 
-            // if (!TryGetComponent(out PlayerMoveSender moveSender))
-            //     gameObject.AddComponent<PlayerMoveSender>();
+            if (!TryGetComponent(out PlayerMoveSender moveSender))
+                gameObject.AddComponent<PlayerMoveSender>();
         }else{
             if (TryGetComponent(out CharacterMovement cMovement))
                 Destroy(cMovement);

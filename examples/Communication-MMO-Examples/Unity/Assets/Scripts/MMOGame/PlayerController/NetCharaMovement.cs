@@ -24,6 +24,7 @@ public class NetCharaMovement : Movement
         MoveEndTime = moveInfo.MoveEndTime;
         TargetPos = moveInfo.Position.ToVector3();
         TargetRotation = moveInfo.Rotation.ToQuaternion();
+        Log.Info($"==> MoveTarget: {TargetPos}");
     }
 
     private void MoveUpdate()
@@ -38,6 +39,7 @@ public class NetCharaMovement : Movement
         
         Vector3 dir = (TargetPos - transform.position).normalized;
         transform.position += dir * RunningSpeed * Time.deltaTime;
+        transform.forward = dir;
     }
 
     void Update()

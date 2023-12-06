@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 namespace MicroCharacterController
 {
-    public partial class CharacterMovement : Movement
+    public partial class CharacterMovement
     {
         [Header("跳跃设置")]
         [Tooltip("Jump max elevation for the character.")]

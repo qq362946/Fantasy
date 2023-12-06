@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public partial class Location : MonoBehaviour
+public class Location : MonoBehaviour
 {
     public Transform create_camLoaction;
     public Transform create_spawnLoaction;

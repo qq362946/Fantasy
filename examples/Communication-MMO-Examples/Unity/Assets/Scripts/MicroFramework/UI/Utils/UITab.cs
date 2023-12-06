@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 
-public partial class UITab : MonoBehaviour
+public class UITab : MonoBehaviour
 {
     [HideInInspector]public string tabName;
     public Transform content; 

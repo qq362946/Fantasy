@@ -1,7 +1,7 @@
 using UnityEngine;
 using Fantasy;
 
-public partial class Response : SingletonMono<Response>
+public partial class Response
 {
     RegisterPanel reg;
     LoginPanel login;

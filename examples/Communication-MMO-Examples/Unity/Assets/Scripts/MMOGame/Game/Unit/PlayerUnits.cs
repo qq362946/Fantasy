@@ -10,8 +10,6 @@ public class PlayerUnits : BaseUnits
         base.Awake();
         unitViewer.isMulti = true;
 
-        ballViewer = GetComponent<BallViewer>() ?? gameObject.AddComponent<BallViewer>();
-
         Sender.Ins.RegisterMessageHandler(ReciveType.CreateUnits,AddUnit2Scene);
         Sender.Ins.RegisterMessageHandler(ReciveType.UnitMove,UnitMove);
     }
@@ -22,8 +20,6 @@ public class PlayerUnits : BaseUnits
         var messageInfo = message as M2C_MoveBroadcast;
         foreach (var moveInfo in messageInfo.Moves)
         {
-            if(GameManager.Ins.RoleId == moveInfo.RoleId) continue;
-            
             var go = GetUnit(moveInfo.RoleId);
             if(go == null) continue;
             var pos = moveInfo.Position.ToVector3();
@@ -42,10 +38,6 @@ public class PlayerUnits : BaseUnits
         var go = unitViewer.ViewUnit(roleInfo.ClassName,roleInfo.RoleId.ToString(),temp.transform);
         AddUnit(roleInfo.RoleId,go);
         GameObject.Destroy(temp);
-
-        // 添加ballViewer动态内容
-        var ball = ballViewer.ViewUnit(roleInfo.RoleId.ToString(),temp.transform);
-        ball.GetComponent<PreBall>().followRole = go.transform;
 
         // ==> 进入场景后，设置玩家组件
         go.GetComponent<GameEntity>().SetPlayerComponent();

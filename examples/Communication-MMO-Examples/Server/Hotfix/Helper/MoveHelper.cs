@@ -13,10 +13,10 @@ public static class MoveHelper
     /// <param name="speed"></param>
     /// <param name="target"></param>
     /// <param name="notice"></param>
-    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static async FTask<int> MoveToAsync(Unit unit, float speed, Vector3 target, NoticeClientType notice, FCancellationToken cancellationToken = null)
+    public static async FTask<int> MoveToAsync(Unit unit, float speed, MoveInfo moveInfo,NoticeClientType notice)
     {
+        var target = moveInfo.Position.ToVector3();
         if (target == Vector3.zero)
         {
             Log.Error($"{unit.UnitType} {unit.Id} 移动异常 {target}");
@@ -30,13 +30,7 @@ public static class MoveHelper
         }
 
         var moveComponent = unit.GetComponent<MoveComponent>();
-        var moveTo = await moveComponent.MoveTo(speed, target, notice, cancellationToken);
-
-        if (!moveTo)
-        {
-            // 移动中断要发送给客户端、客户端要提示一下
-            return 100002;
-        }
+        await moveComponent.MoveTo(speed, moveInfo, notice);
 
         return 0;
     }
@@ -55,6 +49,6 @@ public static class MoveHelper
             return;
         }
         
-        moveComponent.StopMove(notice);
+        // moveComponent.StopMove(notice);
     }
 }

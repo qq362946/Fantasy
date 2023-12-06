@@ -4,7 +4,7 @@ using System.Linq;
 using System;
 using MicroCharacterController;
 
-public partial class GameManager : SingletonMono<GameManager>
+public class GameManager : SingletonMono<GameManager>
 {
     public Location location;
 

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 namespace MicroCharacterController
 {
-    public partial class CharacterMovement : Movement
+    public partial class CharacterMovement
     {
         [Header("Platforms")]
         public Transform CurrentActivePlatform;

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 namespace MicroCharacterController
 {
-    public partial class CharacterMovement : Movement
+    public partial class CharacterMovement
     {
         [Header("喷气背包")] [Tooltip("玩家有喷气背包吗？")]
         public bool Jetpack = true;
