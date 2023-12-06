@@ -14,6 +14,7 @@ public static class DisconnectHelper
     
     public static async FTask Disconnect(this Session session, long delay = 1000)
     {
+        Log.Info($"Session {session.Scene.SceneType} Disconnect");
         // 设置离线原因
         var sessionPlayer = session.GetComponent<SessionPlayerComponent>();
         if (sessionPlayer != null){

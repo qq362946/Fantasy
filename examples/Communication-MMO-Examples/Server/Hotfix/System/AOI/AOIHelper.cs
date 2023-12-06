@@ -167,6 +167,12 @@ public static class AOIHelper
 
         var units = aoi.BeSeePlayers;
 
+        // 把自己也加进去
+        if (!units.ContainsKey(unit.Id))
+        {
+            units.Add(unit.Id, unit.GetComponent<AOIEntity>());
+        }
+
         bool notPlayer = unit.UnitType != UnitType.Player;
 
         foreach (var (_, aoiEntity) in units)

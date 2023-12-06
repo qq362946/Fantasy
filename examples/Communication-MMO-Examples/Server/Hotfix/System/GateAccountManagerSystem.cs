@@ -29,7 +29,8 @@ public static class GateAccountManagerSystem
         gateAccount.Dispose();
     }
 
-    public static void QuitMap(this GateAccountManager self, GateAccount gateAccount,bool quitGame=false)
+    // 退出游戏
+    public static void QuitGame(this GateAccountManager self, GateAccount gateAccount)
     {
         var gateRole = gateAccount.GetCurRole();
 
@@ -42,10 +43,10 @@ public static class GateAccountManagerSystem
         gateAccount.SaveRole(gateRole).Coroutine(); 
 
         // 同时退出网关
-        if (quitGame)
-            self.QuitGate(gateAccount);
+        self.QuitGate(gateAccount);
     }
 
+    // 退出网关
     public static void QuitGate(this GateAccountManager self, GateAccount gateAccount)
     {
         var gateRole = gateAccount.GetCurRole();

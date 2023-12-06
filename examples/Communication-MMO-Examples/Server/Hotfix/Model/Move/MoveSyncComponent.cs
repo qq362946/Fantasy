@@ -43,6 +43,14 @@ public class MoveSyncComponent : StateSync
     }
 }
 
+public class MoveSyncComponentAwakeSystem : AwakeSystem<MoveSyncComponent>
+{
+    protected override void Awake(MoveSyncComponent self)
+    {
+        self.Interval = 10;
+    }
+}
+
 public class MoveSyncDestroySystem : DestroySystem<MoveSyncComponent>
 {
     protected override void Destroy(MoveSyncComponent self)

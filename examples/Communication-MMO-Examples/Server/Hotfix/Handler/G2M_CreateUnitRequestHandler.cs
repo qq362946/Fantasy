@@ -6,7 +6,7 @@ public class G2M_CreateUnitRequestHandler : RouteRPC<Scene,G2M_CreateUnitRequest
 {
     protected override async FTask Run(Scene scene,G2M_CreateUnitRequest request, M2G_CreateUnitResponse response, Action reply)
     {
-        var unitManager = scene.GetComponent<UnitComponent>();
+        var unitManager = scene.GetComponent<UnitManager>();
         // 1、用PlayerId创建一个Unit
         var unit = Entity.Create<Unit>(scene, request.PlayerId);
         unit.UnitType = UnitType.Player;

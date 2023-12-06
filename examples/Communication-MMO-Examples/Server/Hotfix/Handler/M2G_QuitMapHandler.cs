@@ -15,7 +15,7 @@ public class M2G_QuitMapHandler : Route<Scene,M2G_QuitMapMsg>
             // 记录最后进入的地图
             gateRole.LastMap = message.MapNum;
             
-            gateAccountManager.QuitMap(gateAccount,message.QuitGame?true:false); 
+            gateAccountManager.QuitGame(gateAccount); 
 
             await AddressableHelper.RemoveAddressable(scene,gateAccount.AddressableId);
         }

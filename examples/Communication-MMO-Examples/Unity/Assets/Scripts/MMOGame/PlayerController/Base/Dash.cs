@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 namespace MicroCharacterController
 {
-    public partial class CharacterMovement : Movement
+    public partial class CharacterMovement
     {
         [Header("冲刺设置")]
         [Tooltip("玩家能够进行冲刺吗？")]

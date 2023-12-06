@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7945731789991649753}
   - component: {fileID: 1810535669055352999}
   - component: {fileID: 3889523437997563192}
+  - component: {fileID: 3287121157502616365}
   m_Layer: 11
   m_Name: RedBall
   m_TagString: Untagged
@@ -76,12 +77,13 @@ MonoBehaviour:
   PlayerInputs: {fileID: 3889523437997563192}
   sphere: {fileID: 8004182323172882206}
   controller: {fileID: 7945731789991649753}
+  _direction: {x: 0, y: 0, z: 0}
   Gravity: -30
   RunningSpeed: 10
   SlopeLimit: 45
   SlideFriction: 0.3
-  followRole: {fileID: 0}
   CanControl: 1
+  moveSender: {fileID: 0}
   MaxDownYVelocity: 15
   DragForce: {x: 8, y: 0, z: 8}
 --- !u!114 &3889523437997563192
@@ -96,6 +98,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf0c7910faadb3449be8b46dd47ffaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3287121157502616365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202534212714560025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda4c36c3ad60014584a1401f2a26e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 7945731789991649753}
+  followRole: {fileID: 0}
+  redBall: {fileID: 1810535669055352999}
 --- !u!1 &8004182323172882206
 GameObject:
   m_ObjectHideFlags: 0

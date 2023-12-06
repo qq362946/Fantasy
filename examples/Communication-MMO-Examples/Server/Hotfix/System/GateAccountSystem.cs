@@ -102,7 +102,6 @@ public static class GateAccountSystem
 
     public static IDateBase GetDB(this GateAccount self)
     {
-        Scene scene = new Scene();
         if (self.TryGeySession(out Session session))
             return session.Scene.World.DateBase;
         return null;

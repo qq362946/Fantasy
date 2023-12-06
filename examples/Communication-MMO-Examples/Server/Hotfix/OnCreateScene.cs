@@ -42,7 +42,7 @@ public class OnCreateScene : AsyncEventSystem<Fantasy.OnCreateScene>
             case SceneType.Map:
             {
                 // Unit管理组件
-                scene.AddComponent<UnitComponent>();
+                scene.AddComponent<UnitManager>();
                 // 添加AOI组件
                 scene.AddComponent<AOIComponent>();
                 break;

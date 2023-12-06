@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Fantasy;
 
-public partial class Sender : SingletonMono<Sender>
+public partial class Sender
 {
     // 使用字典存储不同消息类型对应的处理方法
     private Dictionary<ReciveType, MessageHandler> messageHandlers = new Dictionary<ReciveType, MessageHandler>();

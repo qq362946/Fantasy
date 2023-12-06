@@ -1,9 +1,33 @@
-using Fantasy;
-
-namespace BestGame;
+namespace Fantasy;
 
 public static class UnitHelper
 {
+
+
+    /// <summary>
+    /// 创建UnitInfo
+    /// </summary>
+    public static RoleInfo CreateUnitInfo(this Unit unit)
+    {
+        var info = unit.RoleInfo;
+        info.LastMoveInfo = new MoveInfo(){
+            Position = unit.Position.ToPosition(),
+            Rotation = unit.Rotation.ToRotation(),
+        };
+
+        return info;
+    }
+
+    public static void FromeCache(this Unit unit, Unit cache)
+    {
+        unit.UnitType = cache.UnitType;
+        unit.RoleInfo = cache.RoleInfo;
+        unit.Position = cache.Position;
+        unit.Rotation = cache.Rotation;
+        // 还有其它需要缓存的组件数据
+        // ...
+    }
+
     public static void NoticeUnitAdd(Unit unit, Unit enter)
     {
         var m2cUnitCreate = new M2C_UnitCreate();
