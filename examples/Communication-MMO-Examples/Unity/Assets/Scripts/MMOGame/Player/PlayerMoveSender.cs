@@ -14,14 +14,14 @@ public class PlayerMoveSender : MonoBehaviour
     private MoveInfo moveInfo = new MoveInfo();
     void Update()
     {
-        var movement = player.movement;
-        moveInfo.Position = movement.transform.position.ToPosition();
-        moveInfo.Rotation = movement.transform.rotation.ToRotation();
-        moveInfo.MoveState = (int)movement.state;
-        moveInfo.RoleId = GameManager.Ins.RoleId;
-
         if(TimeHelper.Now - lastSendTime > 100)
         {
+            CollectData();
+
+            if(moveInfo.MoveState.ToMoveState() == MoveState.JUMP){
+                Send();
+            }
+            
             lastSendTime = TimeHelper.Now;
 
             RepeatedSend();
@@ -37,13 +37,17 @@ public class PlayerMoveSender : MonoBehaviour
         var p = transform.position;
         var r = transform.rotation;
 
-        // 角色由动到不动时，再发送一次（要把不动的状态发出去），就不再发送
-        if (Vector3.Distance(lastPosition, p) <0.05f && Quaternion.Equals(lastRotation, r))
+        // 角色由动到不动时，额外再发送一次（要把不动的状态发出去）
+        var P1 = lastPosition.ToFixedVector3();
+        var P2 = p.ToFixedVector3();
+        var dislast = FixedVector3.Distance(P1,P2);
+        if (dislast <0.05f && Quaternion.Equals(lastRotation, r))
         {
+            // 有个小问题没解决，当角色遇障碍不动时，还输入键盘指令移动，如何发送消息
             if (!hasExtraSent)
             {
                 hasExtraSent = true;
-                Send();
+                SendStop(); 
             }
             return;
         }
@@ -57,7 +61,26 @@ public class PlayerMoveSender : MonoBehaviour
     private C2M_StartMoveMessage msg = new C2M_StartMoveMessage();
     private void Send(){
         msg.MoveInfo = moveInfo;
+        Log.Info($"==> Send: {msg.MoveInfo.Position.ToVector3()}");
+        
         // 发送位置信息
         Sender.Ins.Send(msg);
+    }
+    private void SendStop(){
+        CollectData(true);
+        msg.MoveInfo = moveInfo;
+
+        // 发送位置信息
+        Sender.Ins.Send(msg);
+    }
+
+    private void CollectData(bool isStop = false){
+        var movement = player.movement;
+        moveInfo.RoleId = GameManager.Ins.RoleId;
+        var p = transform.position.ToFixedVector3();
+        moveInfo.Position = p.ToVector3().ToPosition();
+        moveInfo.Rotation = transform.rotation.ToRotation();
+        moveInfo.MoveState = isStop?0:(int)movement.state;
+        moveInfo.Flag = IdGenerate.GenerateId();
     }
 }

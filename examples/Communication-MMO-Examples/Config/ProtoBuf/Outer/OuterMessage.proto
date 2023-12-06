@@ -147,7 +147,9 @@ message MoveInfo
 	Rotation Rotation = 2;
 	int64 RoleId = 4;
 	int32 MoveState = 5;
-	int64 MoveEndTime = 6;
+	int64 MoveStartTime = 6;
+	int64 MoveEndTime = 7;
+	int64 Flag = 8;
 }
 message Position
 {

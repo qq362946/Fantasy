@@ -165,11 +165,12 @@ namespace MicroCharacterController
             UpdatePlatform();
         }
 
-
         private void FixedUpdate()
         {
-            FixUpdateJetpack();
+            SetGroundedState();
 
+            FixUpdateJetpack();
+            
             // 获取相机位置的输入方向。
             _forward = _cameraTransform.TransformDirection(Vector3.forward);
             _forward.y = 0f;
@@ -224,12 +225,25 @@ namespace MicroCharacterController
             // ==> _velocity 垂直方向的移动
             if (controller.enabled)
                 Move(_velocity * Time.deltaTime);
-            
-            SetGroundedState();
+        }
+
+        private void CheckGroundStatus()
+        {
+    #if UNITY_EDITOR
+            // 在场景视图中可视化地面检测射线的辅助工具
+            Debug.DrawLine(
+                transform.position + (Vector3.up * 0.1f),
+                transform.position + Vector3.down * (controller.height / 2 + 0.2f),
+                Color.red
+            );
+    #endif
+            // 值得注意的是，在示例角色中，变换的位置位于中心
+            var grounded = Physics.Raycast(transform.position, Vector3.down, controller.height / 2 + 0.2f);
+            _isGrounded = grounded || controller.isGrounded;
         }
 
         // 更新角色移动状态
-        protected override MoveState UpdateMoveState()
+        protected MoveState UpdateMoveState()
         {
             if (EventDied())
                 return MoveState.DEAD;
@@ -252,11 +266,6 @@ namespace MicroCharacterController
         public override bool IsMoving()
         {
             return (Math.Abs(_horizontal) > 0 || Math.Abs(_vertical) > 0); 
-        }
-
-        public override bool IsGrounded()
-        {
-            return controller.isGrounded;
         }
 
         public override void Navigate(Vector3 destination, float stoppingDistance)
@@ -300,7 +309,7 @@ namespace MicroCharacterController
         }
         protected bool EventJumpRequested()
         {
-            return isGroundedWithinTolerance && _jump;
+            return _jump;
         }
         protected bool EventFalling()
         {

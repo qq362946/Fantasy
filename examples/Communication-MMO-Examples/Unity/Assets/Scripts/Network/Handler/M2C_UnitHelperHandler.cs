@@ -8,7 +8,7 @@ namespace BestGame
 		protected override async FTask Run(Session session, M2C_MoveBroadcast message)
 		{
 			Sender.Ins.Recive(ReciveType.UnitMove,message);
-			Log.Info(message.Moves.ToJson());
+			// Log.Info(message.Moves.ToJson());
 			
 			await FTask.CompletedTask;
 		}

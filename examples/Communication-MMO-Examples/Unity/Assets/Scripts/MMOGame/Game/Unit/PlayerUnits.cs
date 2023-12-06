@@ -22,7 +22,6 @@ public class PlayerUnits : BaseUnits
         {
             var go = GetUnit(moveInfo.RoleId);
             if(go == null) continue;
-            var pos = moveInfo.Position.ToVector3();
             go.GetComponent<Movement>().MoveTarget(moveInfo);
         }
     }

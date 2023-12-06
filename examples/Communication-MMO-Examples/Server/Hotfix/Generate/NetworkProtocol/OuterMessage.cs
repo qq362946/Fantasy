@@ -318,7 +318,11 @@ namespace Fantasy
 		[ProtoMember(5)]
 		public int MoveState { get; set; }
 		[ProtoMember(6)]
+		public long MoveStartTime { get; set; }
+		[ProtoMember(7)]
 		public long MoveEndTime { get; set; }
+		[ProtoMember(8)]
+		public long Flag { get; set; }
 	}
 	[ProtoContract]
 	public partial class Position : AProto
