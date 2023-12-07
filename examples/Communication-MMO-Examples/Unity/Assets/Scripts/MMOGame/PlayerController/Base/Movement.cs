@@ -50,30 +50,6 @@ namespace MicroCharacterController
         {
         }
 
-        public void CheckGroundStatus()
-        {
-            var height = _controller.bounds.size.y;
-        #if UNITY_EDITOR
-            // 辅助可视化场景视图中的地面检测射线
-            Debug.DrawLine(
-                transform.position + (Vector3.up * 0.1f),
-                transform.position + Vector3.down * (height / 2 + 0.2f),
-                Color.red
-            );
-        #endif
-            _isGrounded = IsGrounded();
-        }
-
-        // 是否着地,可以子类重写
-        public virtual bool IsGrounded()
-        {
-            var height = _controller.bounds.size.y;
-            // 还值得注意的是，transform position 位于中心还是脚部，这里是按在中心计算的
-            var grounded = Physics.Raycast(transform.position, Vector3.down, height / 2 + 0.2f);
-
-            return _isGrounded = grounded;
-        }
-
         // 是否移动,需要子类实现
         public virtual bool IsMoving()
         {
@@ -126,11 +102,6 @@ namespace MicroCharacterController
                 animator.SetBool("Swimming", Swiming());
                 
             }
-        }
-
-        protected virtual MoveState UpdateMoveState()
-        {
-            return MoveState.IDLE;   
         }
     }
 }

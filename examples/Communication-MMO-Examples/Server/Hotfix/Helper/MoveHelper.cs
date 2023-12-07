@@ -23,12 +23,6 @@ public static class MoveHelper
             return 100001;
         }
 
-        if (unit.Position == target)
-        {
-            // 起始点和目标点一致、就不需要移动了
-            return 0;
-        }
-
         var moveComponent = unit.GetComponent<MoveComponent>();
         await moveComponent.MoveTo(speed, moveInfo, notice);
 

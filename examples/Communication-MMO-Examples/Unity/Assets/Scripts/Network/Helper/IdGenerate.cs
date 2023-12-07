@@ -21,6 +21,14 @@ namespace BestGame{
             return (ZoneId * 100000000000 + time + ++value);
         }
 
+        public static long GenerateId()
+        {
+            long time = TimeHelper.Now / 1000;
+            //1540 2822 75   时间为10位数
+            //区号取第11位数
+            return (RandomHelper.RandUInt32() * 100000000000 + time + ++value);
+        }
+
         /// <summary>
         /// 查询账号所在区服,参数为1以上的整数
         /// </summary>
