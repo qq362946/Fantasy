@@ -8094,7 +8094,6 @@ GameObject:
   - component: {fileID: 3659902705087206719}
   - component: {fileID: -181297839467193819}
   - component: {fileID: 5440300039017392661}
-  - component: {fileID: 6777306854649812225}
   - component: {fileID: 7483366313173436697}
   m_Layer: 9
   m_Name: Mage
@@ -8266,57 +8265,6 @@ CharacterController:
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.79, z: 0}
---- !u!114 &6777306854649812225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8025812999803196927}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34f2aa4239ebc0b43bf931f175ee8358, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanControl: 0
-  state: 0
-  animator: {fileID: 0}
-  CanDash: 1
-  DashCooldown: 3
-  DashForce: 5
-  Jetpack: 1
-  JetPackMaxFuelCapacity: 90
-  JetPackFuel: 0
-  JetPackForce: 0
-  FuelConsumeSpeed: 0
-  HaveSlowFall: 0
-  SlowFallSpeed: 1.5
-  SlowFallForwardSpeed: 0.1
-  PushInFixedDirections: 0
-  PushPower: 2
-  DragForce: {x: 0, y: 0, z: 0}
-  HoldingObject: 0
-  LowZonePosition: {fileID: 9057844943833618179}
-  JumpEffect: {fileID: 1451354923681886, guid: d2c6feae2c3c4d74c8e1e3553d99644e, type: 3}
-  DashEffect: {fileID: 1451354923681886, guid: d2c6feae2c3c4d74c8e1e3553d99644e, type: 3}
-  JetPackObject: {fileID: 5017746313470685564}
-  SlowFallObject: {fileID: 2759060066586076891}
-  JumpHeight: 2
-  CanJump: 1
-  CanDoubleJump: 1
-  MaxDownYVelocity: 15
-  CurrentActivePlatform: {fileID: 0}
-  SlopeLimit: 45
-  SlideFriction: 0.3
-  Swimming: 0
-  canStandInWaterCheckLayers:
-    serializedVersion: 2
-    m_Bits: 2035
-  underwaterThreshold: 0.7
-  RunningSpeed: 5
-  minThreshold: 0.01
-  Gravity: -30
-  PlayerInputs: {fileID: 0}
 --- !u!114 &7483366313173436697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8333,13 +8281,14 @@ MonoBehaviour:
   ClassName: Mage
   nickName: "\u5E7B\u60F3\u9B54\u6CD5\u5E08"
   animator: {fileID: 0}
-  collider: {fileID: 0}
+  controlCollider: {fileID: 0}
   audioSource: {fileID: 0}
   movement: {fileID: 0}
   inbattle: 0
   _state: IDLE
   classIcon: {fileID: 21300000, guid: 815b9c9935d7ee347a40f4a2efbba997, type: 3}
   portraitIcon: {fileID: 21300000, guid: 815b9c9935d7ee347a40f4a2efbba997, type: 3}
+  isLocalPlayer: 0
   toolTip: "\u795E\u79D8\u7684\u6CD5\u5E08\u5BB6\u65CF\uFF0C\u5C55\u73B0\u51FA\u5BF9\u9B54\u6CD5\u7684\u5353\u8D8A\u5929\u8D4B\u3002\u5F53\u9ED1\u6697\u52BF\u529B\u5A01\u80C1\u5230\u5BB6\u56ED\u65F6\uFF0C\u6BC5\u7136\u51B3\u7136\u5730\u8E0F\u4E0A\u4E86\u5192\u9669\u4E4B\u8DEF\uFF0C\u5BFB\u627E\u529B\u91CF\u6765\u4FDD\u62A4\u81EA\u5DF1\u6240\u73CD\u89C6\u7684\u4E00\u5207\u3002\n\n   
     \u5F3A\u5927\u7684\u9B54\u6CD5\u529B\u91CF\uFF1A \u80FD\u591F\u64CD\u63A7\u5143\u7D20\u529B\u91CF\uFF0C\u4ECE\u800C\u91CA\u653E\u6BC1\u706D\u6027\u7684\u9B54\u6CD5\u653B\u51FB\u3002\r\n   
     \u667A\u6167\u4E0E\u5B66\u8BC6\uFF1A \u6DF1\u8C19\u9B54\u6CD5\u4E0D\u4EC5\u4EC5\u64C5\u957F\u6218\u6597\u9B54\u6CD5\uFF0C\u8FD8\u70ED\u8877\u4E8E\u7814\u7A76\u548C\u5B66\u4E60\u5404\u79CD\u53E4\u8001\u7684\u9B54\u6CD5\u77E5\u8BC6\u3002\r\n   

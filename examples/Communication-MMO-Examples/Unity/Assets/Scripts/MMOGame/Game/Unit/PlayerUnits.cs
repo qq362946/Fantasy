@@ -38,6 +38,9 @@ public class PlayerUnits : BaseUnits
         AddUnit(roleInfo.RoleId,go);
         GameObject.Destroy(temp);
 
+        // 设置Player.isLocalPlayer
+        go.GetComponent<Player>().isLocalPlayer = true;
+
         // ==> 进入场景后，设置玩家组件
         go.GetComponent<GameEntity>().SetPlayerComponent();
         go.GetComponent<GameEntity>().EnableController();

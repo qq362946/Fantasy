@@ -6,13 +6,13 @@ namespace MicroCharacterController
     public partial class CharacterMovement
     {
         [Header("跳跃设置")]
-        [Tooltip("Jump max elevation for the character.")]
+        [Tooltip("角色的最大跳跃高度。")]
         public float JumpHeight = 2f;
 
         [Tooltip("允许角色跳跃。")]
         public bool CanJump = true;
 
-        [Tooltip("允许角色在空中进行双重跳跃。")]
+        [Tooltip("允许双重跳跃。")]
         public bool CanDoubleJump = true;
         [Tooltip("玩家下落时的最大速度。")] [Range(0, 100)]
         public float MaxDownYVelocity = 15;
@@ -29,10 +29,7 @@ namespace MicroCharacterController
             }
 
             CurrentActivePlatform = null;
-            //removing parachute if active;
-            _slowFall = false;
-            SlowFallObject.SetActive(false);
-
+            
             //
             if (_isGrounded)
             {
@@ -41,24 +38,12 @@ namespace MicroCharacterController
                 _doubleJump = true;
                 _velocity.y = 0;
                 _velocity.y += Mathf.Sqrt(jumpHeight * -2f * Gravity);
-
-                //Instantiate jump effect
-                if (JumpEffect)
-                {
-                    Instantiate(JumpEffect, LowZonePosition.position, LowZonePosition.rotation);
-                }
             }
             else if (CanDoubleJump && _doubleJump)
             {
                 _doubleJump = false;
                 _velocity.y = 0;
                 _velocity.y += Mathf.Sqrt(jumpHeight * -2f * Gravity);
-
-                //Instantiate jump effect
-                if (JumpEffect)
-                {
-                    Instantiate(JumpEffect, LowZonePosition.position, LowZonePosition.rotation);
-                }
             }
         }
 

@@ -15,6 +15,15 @@ namespace MicroCharacterController
         public float Gravity = -30f;
         protected float _gravity;
 
+        [Header("滑动控制设置")]
+        [Tooltip("滑动的斜坡角度限制。")]
+        public float SlopeLimit = 45;
+
+        [Tooltip("滑动摩擦力。")] [Range(0.1f, 0.9f)]
+        public float SlideFriction = 0.3f;
+
+        private bool _isCorrectGrounded; // 过于陡峭的地面
+
         //Input.
         public Inputs PlayerInputs;
         private float _horizontal;
@@ -43,7 +52,6 @@ namespace MicroCharacterController
         private void Start()
         {
             _cameraTransform = Camera.main.transform;
-            _dashCooldown = DashCooldown;
             _gravity = Gravity;
         }
 
@@ -94,9 +102,6 @@ namespace MicroCharacterController
                 _horizontal = PlayerInputs.GetHorizontal();
                 _vertical = PlayerInputs.GetVertical();
                 _jump = PlayerInputs.Jump();
-                _dash = PlayerInputs.Dash();
-                _flyJetPack = PlayerInputs.JetPack();
-                _activeFall = PlayerInputs.Parachute();
             }
 
             // 反转控制
@@ -105,56 +110,18 @@ namespace MicroCharacterController
                 _horizontal *= -1;
                 _vertical *= -1;
                 _jump = PlayerInputs.Dash();
-                _dash = PlayerInputs.Jump();
             }
 
-            if (_jump && !HoldingObject)
+            if (_jump)
             {
                 Jump(JumpHeight);
             }
 
-            if (_dash && !HoldingObject)
-            {
-                Dash();
-            }
-
             // 如果玩家可以控制角色
-            if (CanControl)
-            {
-                // 喷气背包
-                if (Jetpack && _flyJetPack && JetPackFuel > 0 && !HoldingObject)
-                {
-                    // 如果慢落正在进行，则停用。
-                    if (_slowFall)
-                    {
-                        _slowFall = false;
-                        SlowFallObject.SetActive(false);
-                    }
-
-                    FlyByJetPack();
-                }
-
-                // 慢落
-                if (_activeFall)
-                {
-                    _slowFall = !_slowFall;
-                    _activeFall = false;
-                }
-            }
-            else
+            if (!CanControl)
             {
                 _horizontal = 0;
                 _vertical = 0;
-            }
-
-            // 冲刺冷却
-            if (DashCooldown > 0)
-            {
-                DashCooldown -= Time.fixedDeltaTime;
-            }
-            else
-            {
-                DashCooldown = 0;
             }
 
             // 刷新移动状态
@@ -168,8 +135,6 @@ namespace MicroCharacterController
         private void FixedUpdate()
         {
             SetGroundedState();
-
-            FixUpdateJetpack();
             
             // 获取相机位置的输入方向。
             _forward = _cameraTransform.TransformDirection(Vector3.forward);
@@ -198,9 +163,8 @@ namespace MicroCharacterController
             }
 
             _move.Normalize();
-            // 如果未激活慢落（这样可以避免改变下落速度），并且控制器已启用，则移动玩家。
             // ==> _move 水平方向的移动
-            if (!_slowFall && controller.enabled)
+            if (controller.enabled)
                 Move(Time.deltaTime * RunningSpeed * _move);
 
             // 检查是否正确着地。

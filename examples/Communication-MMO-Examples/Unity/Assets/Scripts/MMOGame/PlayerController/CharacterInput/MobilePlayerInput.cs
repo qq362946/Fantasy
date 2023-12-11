@@ -66,7 +66,7 @@ namespace MicroCharacterController
 
         public void MakeDash()
         {
-            MovementCharacterController.Dash();
+            //MovementCharacterController.Dash();
         }
 
         public void ActiveJetPack(bool active)

@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 6808905532257762408}
   - component: {fileID: 5775068066724987356}
   - component: {fileID: 7278159300029879499}
-  - component: {fileID: 8069597069611437651}
   - component: {fileID: -3524545028385232158}
   m_Layer: 9
   m_Name: 1PaladinMan
@@ -215,57 +214,6 @@ CharacterController:
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &8069597069611437651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276386409930554536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34f2aa4239ebc0b43bf931f175ee8358, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanControl: 0
-  state: 0
-  animator: {fileID: 0}
-  CanDash: 1
-  DashCooldown: 3
-  DashForce: 5
-  Jetpack: 1
-  JetPackMaxFuelCapacity: 90
-  JetPackFuel: 0
-  JetPackForce: 0
-  FuelConsumeSpeed: 0
-  HaveSlowFall: 0
-  SlowFallSpeed: 1.5
-  SlowFallForwardSpeed: 0.1
-  PushInFixedDirections: 0
-  PushPower: 2
-  DragForce: {x: 0, y: 0, z: 0}
-  HoldingObject: 0
-  LowZonePosition: {fileID: 1579298534574520772}
-  JumpEffect: {fileID: 1451354923681886, guid: d2c6feae2c3c4d74c8e1e3553d99644e, type: 3}
-  DashEffect: {fileID: 1451354923681886, guid: d2c6feae2c3c4d74c8e1e3553d99644e, type: 3}
-  JetPackObject: {fileID: 8733261785017231478}
-  SlowFallObject: {fileID: 4179683359948128294}
-  JumpHeight: 2
-  CanJump: 1
-  CanDoubleJump: 1
-  MaxDownYVelocity: 15
-  CurrentActivePlatform: {fileID: 0}
-  SlopeLimit: 45
-  SlideFriction: 0.3
-  Swimming: 0
-  canStandInWaterCheckLayers:
-    serializedVersion: 2
-    m_Bits: 2035
-  underwaterThreshold: 0.7
-  RunningSpeed: 5
-  minThreshold: 0.01
-  Gravity: -30
-  PlayerInputs: {fileID: 0}
 --- !u!114 &-3524545028385232158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,13 +230,14 @@ MonoBehaviour:
   ClassName: 1PaladinMan
   nickName: "\u5E7B\u60F3\u9A91\u58EB"
   animator: {fileID: 0}
-  collider: {fileID: 0}
+  controlCollider: {fileID: 0}
   audioSource: {fileID: 0}
   movement: {fileID: 0}
   inbattle: 0
   _state: IDLE
   classIcon: {fileID: 21300000, guid: 15fc1d5a369628c419bba86a4630a661, type: 3}
   portraitIcon: {fileID: 21300000, guid: 15fc1d5a369628c419bba86a4630a661, type: 3}
+  isLocalPlayer: 0
   toolTip: "\u5E74\u8F7B\u9A91\u58EB\uFF0C\u4ED6\u8EAB\u7740\u95EA\u8000\u7684\u94E0\u7532\uFF0C\u624B\u63E1\u5B9D\u5251\uFF0C\u662F\u738B\u56FD\u7684\u5B88\u62A4\u8005\u3002\u4F5C\u4E3A\u4E00\u540D\u771F\u6B63\u7684\u9A91\u58EB\uFF0C\u4E49\u65E0\u53CD\u987E\u5730\u8E0F\u4E0A\u4E86\u5F81\u7A0B\uFF0C\u4E0E\u90AA\u6076\u52BF\u529B\u6218\u6597\uFF0C\u4FDD\u536B\u738B\u56FD\u7684\u548C\u5E73\u3002\n\n   
     \u52C7\u6562\u7684\u5FC3\u810F\uFF1A \u6781\u5176\u52C7\u6562\u548C\u575A\u5B9A\u7684\u9A91\u58EB\uFF0C\u603B\u662F\u613F\u610F\u5192\u9669\u62EF\u6551\u65E0\u8F9C\u3002\r\n   
     \u7CBE\u6E5B\u7684\u5251\u672F\uFF1A \u7CBE\u901A\u5404\u79CD\u5251\u672F\u6280\u80FD\uFF0C\u80FD\u591F\u5728\u6218\u6597\u4E2D\u6E38\u5203\u6709\u4F59\u3002\r\n   
