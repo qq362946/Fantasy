@@ -21,6 +21,9 @@ namespace MicroCharacterController
         protected Vector3 _hitNormal;
         protected bool _isGrounded;
         protected bool isGroundedWithinTolerance => _isGrounded ;
+
+        [Tooltip("这是角色的阻力力，标准值为 (8, 0, 8)。")]
+        public Vector3 DragForce;
         
         protected void Awake(){
             animator = GetComponent<Animator>();

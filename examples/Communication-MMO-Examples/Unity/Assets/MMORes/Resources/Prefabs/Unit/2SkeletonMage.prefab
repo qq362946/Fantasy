@@ -271,7 +271,6 @@ GameObject:
   - component: {fileID: -8222396765133333960}
   - component: {fileID: 7408836975741556051}
   - component: {fileID: 6510928891807047227}
-  - component: {fileID: 3884191334407613208}
   m_Layer: 9
   m_Name: 2SkeletonMage
   m_TagString: Untagged
@@ -465,61 +464,11 @@ MonoBehaviour:
   _state: IDLE
   classIcon: {fileID: 21300000, guid: 03d89bc2de730b34f92578b8b53f852f, type: 3}
   portraitIcon: {fileID: 21300000, guid: 03d89bc2de730b34f92578b8b53f852f, type: 3}
+  isLocalPlayer: 0
   toolTip: "\u4F20\u5947\u7684\u6218\u58EB\uFF0C\u4E3A\u4E86\u4FDD\u536B\u5BB6\u56ED\u800C\u6218\u6597\uFF0C\u4F46\u5728\u4E00\u573A\u6FC0\u70C8\u7684\u6218\u5F79\u4E2D\u4E0D\u5E78\u9635\u4EA1\u3002\u7136\u800C\uFF0C\u4E00\u4F4D\u9ED1\u6697\u7684\u5DEB\u5E08\u5C06\u4ED6\u7684\u7075\u9B42\u53EC\u5524\u56DE\u6765\uFF0C\u5E76\u5C06\u4ED6\u53D8\u6210\u4E86\u4E0D\u6B7B\u6218\u58EB\u3002\n\n   
     \u575A\u97E7\u7684\u9AB7\u9AC5\u8EAB\u8EAF\uFF1A \u62E5\u6709\u575A\u56FA\u7684\u9AA8\u9ABC\u548C\u514D\u75AB\u5E38\u89C4\u4F24\u5BB3\u7684\u8EAB\u4F53\uFF0C\u662F\u4E00\u4F4D\u4E0D\u53EF\u52A8\u6447\u7684\u6218\u58EB\u3002\r\n   
     \u6B7B\u4EA1\u9886\u57DF\u638C\u63E1\uFF1A \u53EF\u4EE5\u53EC\u5524\u6B7B\u4EA1\u4E4B\u9886\u57DF\uFF0C\u4F7F\u9644\u8FD1\u7684\u654C\u4EBA\u611F\u5230\u6050\u60E7\uFF0C\u524A\u5F31\u4ED6\u4EEC\u7684\u610F\u5FD7\u548C\u62B5\u6297\u529B\u3002\r\n   
     \u4E0D\u6B7B\u6062\u590D\uFF1A \u5177\u5907\u81EA\u6211\u6CBB\u6108\u7684\u80FD\u529B\uFF0C\u5F53\u53D7\u5230\u81F4\u547D\u4F24\u5BB3\u65F6\uFF0C\u4ED6\u7684\u9AB7\u9AC5\u8EAB\u4F53\u4F1A\u81EA\u52A8\u6062\u590D\uFF0C\u7EE7\u7EED\u6218\u6597\u3002"
---- !u!114 &3884191334407613208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568256215643405038}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34f2aa4239ebc0b43bf931f175ee8358, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanControl: 0
-  state: 0
-  animator: {fileID: 0}
-  CanDash: 1
-  DashCooldown: 3
-  DashForce: 5
-  Jetpack: 1
-  JetPackMaxFuelCapacity: 90
-  JetPackFuel: 0
-  JetPackForce: 0
-  FuelConsumeSpeed: 0
-  HaveSlowFall: 0
-  SlowFallSpeed: 1.5
-  SlowFallForwardSpeed: 0.1
-  PushInFixedDirections: 0
-  PushPower: 2
-  DragForce: {x: 0, y: 0, z: 0}
-  HoldingObject: 0
-  LowZonePosition: {fileID: 4315081519203162106}
-  JumpEffect: {fileID: 1451354923681886, guid: d2c6feae2c3c4d74c8e1e3553d99644e, type: 3}
-  DashEffect: {fileID: 1451354923681886, guid: d2c6feae2c3c4d74c8e1e3553d99644e, type: 3}
-  JetPackObject: {fileID: 8048380387541064649}
-  SlowFallObject: {fileID: 553976520489200044}
-  JumpHeight: 2
-  CanJump: 1
-  CanDoubleJump: 1
-  MaxDownYVelocity: 15
-  CurrentActivePlatform: {fileID: 0}
-  SlopeLimit: 45
-  SlideFriction: 0.3
-  Swimming: 0
-  canStandInWaterCheckLayers:
-    serializedVersion: 2
-    m_Bits: 4083
-  underwaterThreshold: 0.7
-  RunningSpeed: 5
-  minThreshold: 0.01
-  Gravity: -30
-  PlayerInputs: {fileID: 0}
 --- !u!1 &591188955103503705
 GameObject:
   m_ObjectHideFlags: 0

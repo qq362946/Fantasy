@@ -78,21 +78,11 @@ public abstract class GameEntity : BehaviourNonAlloc
     }
 
     public virtual void OnShow()
-    {
-        if(movement)movement.enabled = true;
+    { 
     }
 
     public virtual void OnHide()
-    {
-        if(movement)movement.enabled = false;
-    }
-
-    void Update()
-    {
-        if(Sender.IsConnect){
-            // 角色移动状态逻辑更新
-            UpdateStateLogic(); 
-        }
+    {  
     }
 
     public virtual void SetPlayerComponent(){}
@@ -100,21 +90,11 @@ public abstract class GameEntity : BehaviourNonAlloc
 
     public virtual void EnableController(bool enable = true)
     {
-        if(movement)movement.EnableController(enable);
+        movement.EnableController(enable);
     }
 
     public virtual void CanControlMove(bool enable = true)
     {
-        if(movement)movement.CanControlMove(enable);
-    }
-
-    public virtual void GetInputs()
-    {
-        if(movement)movement.GetInputs();
-    }
-
-    // 更新角色状态逻辑
-    public virtual void UpdateStateLogic()
-    {
+        movement.CanControlMove(enable);
     }
 }
