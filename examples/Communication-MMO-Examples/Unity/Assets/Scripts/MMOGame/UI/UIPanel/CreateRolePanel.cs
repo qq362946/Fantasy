@@ -53,7 +53,7 @@ public class CreateRolePanel : BasePanel
     {
         base.EnterPanel();
         // 默认预览职业与预览相机位置
-        mUIFacade.CamLocation(GameManager.Ins.location.create_camLoaction);
+        GameFacade.Ins.CamLocation(GameManager.Ins.location.create_camLoaction);
 
         CreatePreview();
     }
@@ -63,7 +63,7 @@ public class CreateRolePanel : BasePanel
         base.ExitPanel();
 
         // 移除动态内容
-        classViewer.ClearPreview(PoolType.UIPanel);
+        classViewer.ClearPreview(PoolType.Unit);
         uiTab?.ClearTablist();
     }
 

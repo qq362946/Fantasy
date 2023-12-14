@@ -1,23 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AccountScene : BaseScene
 {
-    public AccountScene(){ 
-
-    }
-
     public override void EnterScene()
     {
+        base.EnterScene();
+        // 添加UIPanel
         mUIFacade.AddPanelToDict(StringManager.LoginPanel);
         mUIFacade.AddPanelToDict(StringManager.RegisterPanel);
         mUIFacade.AddPanelToDict(StringManager.ServerListPanel);
-        base.EnterScene();
+        mUIFacade.InitUIPanelDict();
+        
 
         // 打开LoginPanel
-        mUIFacade.GetUIPanel(StringManager.LoginPanel).EnterPanel();
-        mUIFacade.lastPanel = mUIFacade.GetUIPanel(StringManager.LoginPanel);
+        var loginPanel = mUIFacade.GetUIPanel(StringManager.LoginPanel);
+        loginPanel.EnterPanel();
+        mUIFacade.lastPanel = loginPanel;
+
+        // 打开登录注册界面,相机动画
         Camera.main.GetComponent<Animator>().enabled = true;
     }
 

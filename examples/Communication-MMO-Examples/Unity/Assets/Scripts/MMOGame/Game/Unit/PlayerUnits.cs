@@ -5,7 +5,6 @@ using BestGame;
 
 public class PlayerUnits : BaseUnits
 {
-    private BallViewer ballViewer;
     protected override void Awake() {
         base.Awake();
         unitViewer.isMulti = true;
@@ -46,7 +45,7 @@ public class PlayerUnits : BaseUnits
         go.GetComponent<GameEntity>().EnableController();
 
         // CameraMMO激活，设置目标为本地玩家
-        UIFacade.Ins.SetMMOCamera(go.transform); 
+        GameFacade.Ins.SetMMOCamera(go.transform); 
     }
 
     // 添加其它角色到场景

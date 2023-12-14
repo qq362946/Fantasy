@@ -22,7 +22,7 @@ public class MapUIFramePanel : BasePanel
     {
         base.ExitPanel();
         // 重置相机
-        mUIFacade.ReSetMMOCamera();
+        GameFacade.Ins.ReSetMMOCamera();
     }
 
     void Update(){

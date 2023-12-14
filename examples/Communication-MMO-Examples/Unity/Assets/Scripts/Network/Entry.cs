@@ -20,6 +20,4 @@ public class Entry : MonoBehaviour
         UIFacade.Ins.EnterScene(new AccountScene());
         UIFacade.Ins.lastScene = UIFacade.Ins.currentScene;
     }
-
-    
 }

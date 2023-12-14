@@ -1,26 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MapScene : BaseScene
+﻿public class MapScene : BaseScene
 {
-    public MapScene(){ 
-
-    }
-
     public override void EnterScene()
     {
+        base.EnterScene();
         // 添加UIPanel
         mUIFacade.AddPanelToDict(StringManager.MapUIFramePanel);
         mUIFacade.AddPanelToDict(StringManager.SettingPanel);
-        base.EnterScene();
+        mUIFacade.InitUIPanelDict();
+        
 
         // 打开MapUIFramePanel
-        mUIFacade.GetUIPanel(StringManager.MapUIFramePanel).EnterPanel();
-        mUIFacade.lastPanel = mUIFacade.GetUIPanel(StringManager.MapUIFramePanel);
+        var mapUIFramePanel = mUIFacade.GetUIPanel(StringManager.MapUIFramePanel);
+        mapUIFramePanel.EnterPanel();
+        mUIFacade.lastPanel = mapUIFramePanel;
 
         // playerUnits加入场景
-        GameFacade.playerUnits.EnterScene();
+        GameFacade.PlayerUnits.EnterScene();
         // NpcUnits加入场景
         GameFacade.NpcUnits.EnterScene();
         // MonsterUnits加入场景
@@ -32,7 +27,7 @@ public class MapScene : BaseScene
         base.ExitScene();
 
         // playerUnits退出场景
-        GameFacade.playerUnits.ExitScene();
+        GameFacade.PlayerUnits.ExitScene();
         // NpcUnits退出场景
         GameFacade.NpcUnits.ExitScene();
         // MonsterUnits退出场景
