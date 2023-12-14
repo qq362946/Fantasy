@@ -49,7 +49,7 @@ public class SelectRolePanel : BasePanel
     public override void EnterPanel()
     {
         base.EnterPanel();
-        mUIFacade.CamLocation(GameManager.Ins.location.select_camLocation);
+        GameFacade.Ins.CamLocation(GameManager.Ins.location.select_camLocation);
 
         // >>process role 网络层请求加载账号下创建的角色
         CallRoles().Coroutine(); 
@@ -72,7 +72,7 @@ public class SelectRolePanel : BasePanel
         UIFacade.Ins.EnterScene(new MapScene());
 
         // 创建本地玩家unit
-        GameFacade.playerUnits.AddLocalUnit2Scene(response.RoleInfo);
+        GameFacade.PlayerUnits.AddLocalUnit2Scene(response.RoleInfo);
     }
         
     public async FTask CallRoles()

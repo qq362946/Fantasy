@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
-using UnityEngine.UI;
 
 public class UIFacade : Singleton<UIFacade>
 {
     // UI面板GameObject容器
-    public Dictionary<string, GameObject> currentScenePanelGoDict;
+    private Dictionary<string, GameObject> currentScenePanelDict;
     //UIPanel对象容器(当前场景状态下的UIPanel脚本对象)
-    public Dictionary<string, BasePanel> currentScenePanelDict;
+    private Dictionary<string, BasePanel> currentScenePanelScriptDict;
     public Transform canvas; // UIPanel放置的容器
 
     // 场景状态
@@ -20,8 +18,8 @@ public class UIFacade : Singleton<UIFacade>
     {
         base.Awake();
         // 初始UI容器
-        currentScenePanelGoDict = new Dictionary<string, GameObject>();
-        currentScenePanelDict = new Dictionary<string, BasePanel>();
+        currentScenePanelDict = new Dictionary<string, GameObject>();
+        currentScenePanelScriptDict = new Dictionary<string, BasePanel>();
 
         // 获得Canvas
         canvas = GameObject.Find("Canvas").transform;
@@ -36,14 +34,13 @@ public class UIFacade : Singleton<UIFacade>
     
     // 获取UIPanel
     public BasePanel GetUIPanel(string pName){
-        return currentScenePanelDict[pName];
+        return currentScenePanelScriptDict[pName];
     }
 
     // 实例化当前场景下的UIPanel并存入字典
     public void InitUIPanelDict()
     {
-        
-        foreach (var item in currentScenePanelGoDict)
+        foreach (var item in currentScenePanelDict)
         {
             item.Value.transform.SetParent(canvas);
             item.Value.transform.localPosition = Vector3.zero;
@@ -55,7 +52,7 @@ public class UIFacade : Singleton<UIFacade>
                 Debug.LogWarning(string.Format("{0}上的IBasePanel脚本丢失!", item.Key));
             
             basePanel.InitPanel();  // UIPanel初始化UI
-            currentScenePanelDict.Add(item.Key, basePanel); // 将该场景下的UIPanel身上的Panel脚本添加进字典中
+            currentScenePanelScriptDict.Add(item.Key, basePanel); // 将该场景下的UIPanel身上的Panel脚本添加进字典中
             //Debug.Log(string.Format("UIPanel字典添加{0}成功", item.Key));
         }
     }
@@ -63,37 +60,19 @@ public class UIFacade : Singleton<UIFacade>
     // 将UIPanel添加进UIManager字典
     public void AddPanelToDict(string uIPanelName)
     {
-        currentScenePanelGoDict.Add(uIPanelName, GetPanel(uIPanelName));
-        //Debug.Log(mUIManager.currentScenePanelDict.Count);
+        currentScenePanelDict.Add(uIPanelName, GetPanel(uIPanelName));
     }
 
     // 清空UIPanel字典,并将所有UIPanel放回对象池
     public void ClearUIPanelDict()
     {
-        currentScenePanelDict.Clear();
+        currentScenePanelScriptDict.Clear();
 
-        foreach (var item in currentScenePanelGoDict)
+        foreach (var item in currentScenePanelDict)
         {
             PushPanel(item.Key, item.Value);
         }
-        currentScenePanelGoDict.Clear();
-    }
-
-    public void CamLocation(Transform location){
-        Camera.main.transform.position = location.position;
-        Camera.main.transform.rotation = location.rotation;
-    }
-
-    public void SetMMOCamera(Transform target){
-        CameraMMO cameraMMO = Camera.main.GetComponent<CameraMMO>();
-        cameraMMO.enabled = true;
-        cameraMMO.target = target;
-    }
-
-    public void ReSetMMOCamera(){
-        CameraMMO cameraMMO = Camera.main.GetComponent<CameraMMO>();
-        cameraMMO.enabled = false;
-        cameraMMO.target = null;
+        currentScenePanelDict.Clear();
     }
 
     // 获取Panel

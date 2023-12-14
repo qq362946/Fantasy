@@ -1,24 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class RoleScene : BaseScene
 {
-    public RoleScene(){
-
-    }
-
     public override void EnterScene()
     {
+        base.EnterScene();
+        // 添加UIPanel
         mUIFacade.AddPanelToDict(StringManager.SelectRolePanel);
         mUIFacade.AddPanelToDict(StringManager.CreateRolePanel);
-
-        
-        base.EnterScene();
+        mUIFacade.InitUIPanelDict();
         
         // 打开SelectRolePanel
-        mUIFacade.GetUIPanel(StringManager.SelectRolePanel).EnterPanel();
-        mUIFacade.lastPanel = mUIFacade.GetUIPanel(StringManager.SelectRolePanel);
+        var selectRolePanel = mUIFacade.GetUIPanel(StringManager.SelectRolePanel);
+        selectRolePanel.EnterPanel();
+        mUIFacade.lastPanel = selectRolePanel;
     }
 
 }

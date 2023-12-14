@@ -17,7 +17,6 @@ public class BaseScene
     public virtual void EnterScene()
     {
         mUIFacade.currentScene = this;
-        mUIFacade.InitUIPanelDict();
     }
 
     public virtual void ExitScene()
