@@ -1,6 +1,7 @@
 // ReSharper disable InconsistentNaming
 
 using System;
+using System.Collections.Generic;
 
 namespace Fantasy
 {
@@ -143,4 +144,74 @@ namespace Fantasy
         /// <returns>异步任务。</returns>
         protected abstract FTask Run(Session session, TRequest request, TResponse response, Action reply);
     }
+#if FANTASY_UNITY
+    public interface IMessageDelegateHandler
+    {
+        /// <summary>
+        /// 注册消息处理器。
+        /// </summary>
+        /// <param name="delegate"></param>
+        public void Register(object @delegate);
+        /// <summary>
+        /// 取消注册消息处理器。
+        /// </summary>
+        /// <param name="delegate"></param>
+        public int UnRegister(object @delegate);
+        /// <summary>
+        /// 处理消息的方法。
+        /// </summary>
+        /// <param name="session"></param>
+        /// <param name="message"></param>
+        public void Handle(Session session, object message);
+    }
+    public delegate FTask MessageDelegate<in T>(Session session, T msg) where T : IMessage;
+    public sealed class MessageDelegateHandler<T> : IMessageDelegateHandler, IDisposable where T : IMessage
+    {
+        private readonly List<MessageDelegate<T>> _delegates = new List<MessageDelegate<T>>();
+        
+        public Type Type()
+        {
+            return typeof(T);
+        }
+
+        public void Register(object @delegate)
+        {
+            var a = (MessageDelegate<T>)@delegate;
+            
+            if (_delegates.Contains(a))
+            {
+                Log.Error($"{typeof(T).Name} already register action delegateName:{a.Method.Name}");
+                return;
+            }
+
+            _delegates.Add(a);
+        }
+
+        public int UnRegister(object @delegate)
+        {
+            _delegates.Remove((MessageDelegate<T>)@delegate);
+            return _delegates.Count;
+        }
+
+        public void Handle(Session session, object message)
+        {
+            foreach (var registerDelegate in _delegates)
+            {
+                try
+                {
+                    registerDelegate(session, (T)message).Coroutine();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+            _delegates.Clear();
+        }
+    }
+#endif
 }

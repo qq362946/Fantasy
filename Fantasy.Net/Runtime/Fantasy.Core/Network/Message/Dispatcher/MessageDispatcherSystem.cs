@@ -2,9 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using Type = System.Type;
-
-
 // ReSharper disable PossibleNullReferenceException
 
 namespace Fantasy
@@ -36,14 +33,16 @@ namespace Fantasy
         private readonly DoubleMapDictionary<uint, Type> _networkProtocols = new DoubleMapDictionary<uint, Type>();
         // 存储消息类型与消息处理器之间的映射关系
         private readonly Dictionary<Type, IMessageHandler> _messageHandlers = new Dictionary<Type, IMessageHandler>();
-
         // 存储程序集名与响应类型之间的一对多关系
         private readonly OneToManyList<int, Type> _assemblyResponseTypes = new OneToManyList<int, Type>();
         // 存储程序集名与协议码之间的一对多关系
         private readonly OneToManyList<int, uint> _assemblyNetworkProtocols = new OneToManyList<int, uint>();
         // 存储程序集名与消息处理器信息之间的一对多关系
         private readonly OneToManyList<int, HandlerInfo<IMessageHandler>> _assemblyMessageHandlers = new OneToManyList<int, HandlerInfo<IMessageHandler>>();
-
+#if FANTASY_UNITY
+        // 存储消息类型与消息处理器之间的映射关系(手动注册的委托)
+        private readonly Dictionary<Type, IMessageDelegateHandler> _messageDelegateHandlers = new Dictionary<Type, IMessageDelegateHandler>();
+#endif
 #if FANTASY_NET
         // 存储消息类型与路由消息处理器之间的映射关系
         private readonly Dictionary<Type, IRouteMessageHandler> _routeMessageHandlers = new Dictionary<Type, IRouteMessageHandler>();
@@ -52,7 +51,7 @@ namespace Fantasy
 #endif
         // 用于同步接收路由消息的锁
         private static readonly CoroutineLockQueueType ReceiveRouteMessageLock = new CoroutineLockQueueType("ReceiveRouteMessageLock");
-
+        
         /// <summary>
         /// 在加载程序集时，用于解析并存储消息处理相关的信息。
         /// </summary>
@@ -169,7 +168,47 @@ namespace Fantasy
             }
 #endif
         }
+#if FANTASY_UNITY       
+        /// <summary>
+        /// 手动注册一个消息处理器。
+        /// </summary>
+        /// <param name="delegate"></param>
+        /// <typeparam name="T"></typeparam>
+        public void RegisterHandler<T>(MessageDelegate<T> @delegate) where T : IMessage
+        {
+            var type = typeof(T);
 
+            if (!_messageDelegateHandlers.TryGetValue(type, out var messageDelegate))
+            {
+                messageDelegate = new MessageDelegateHandler<T>();
+                _messageDelegateHandlers.Add(type,messageDelegate);
+            }
+
+            messageDelegate.Register(@delegate);
+        }
+
+        /// <summary>
+        /// 手动卸载一个消息处理器，必须是通过RegisterHandler方法注册的消息处理器。
+        /// </summary>
+        /// <param name="delegate"></param>
+        /// <typeparam name="T"></typeparam>
+        public void UnRegisterHandler<T>(MessageDelegate<T> @delegate) where T : IMessage
+        {
+            var type = typeof(T);
+            
+            if (!_messageDelegateHandlers.TryGetValue(type, out var messageDelegate))
+            {
+                return;
+            }
+
+            if (messageDelegate.UnRegister(@delegate) != 0)
+            {
+                return;
+            }
+            
+            _messageDelegateHandlers.Remove(type);
+        }
+#endif
         /// <summary>
         /// 处理普通消息，将消息分发给相应的消息处理器。
         /// </summary>
@@ -180,11 +219,19 @@ namespace Fantasy
         /// <param name="protocolCode">协议码</param>
         public void MessageHandler(Session session, Type type, object message, uint rpcId, uint protocolCode)
         {
+#if FANTASY_UNITY
+            if(_messageDelegateHandlers.TryGetValue(type,out var messageDelegateHandler))
+            {
+                messageDelegateHandler.Handle(session, message);
+                return;
+            }
+#endif
             if (!_messageHandlers.TryGetValue(type, out var messageHandler))
             {
                 Log.Warning($"Scene:{session.Scene.Id} Found Unhandled Message: {message.GetType()}");
                 return;
             }
+            
             // 调用消息处理器的Handle方法并启动协程执行处理逻辑
             messageHandler.Handle(session, rpcId, protocolCode, message).Coroutine();
         }

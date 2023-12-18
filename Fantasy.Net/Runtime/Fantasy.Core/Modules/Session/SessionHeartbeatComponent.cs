@@ -1,5 +1,4 @@
 #if FANTASY_UNITY
-using Fantasy
 
 namespace Fantasy
 {
