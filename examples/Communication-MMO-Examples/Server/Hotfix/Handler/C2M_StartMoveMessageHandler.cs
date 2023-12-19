@@ -10,10 +10,10 @@ public class C2M_StartMoveMessageHandler : Addressable<Unit,C2M_StartMoveMessage
         // 移动停止检测略...
   
         // 调用MoveComponent
-        var targetPos = message.MoveInfo.Position.ToVector3();
-        MoveHelper.MoveToAsync(unit,5, message.MoveInfo, NoticeClientType.Aoi).Coroutine();
+        // var targetPos = message.MoveInfo.Position.ToVector3();
         // Log.Info($"-->移动到{targetPos}");
-
+        MoveHelper.MoveToAsync(unit,5, message.MoveInfo, NoticeClientType.Aoi).Coroutine();
+        
         await FTask.CompletedTask;
     }
 }

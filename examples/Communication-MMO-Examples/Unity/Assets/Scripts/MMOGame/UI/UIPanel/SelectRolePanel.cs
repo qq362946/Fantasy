@@ -72,7 +72,7 @@ public class SelectRolePanel : BasePanel
         UIFacade.Ins.EnterScene(new MapScene());
 
         // 创建本地玩家unit
-        GameFacade.PlayerUnits.AddLocalUnit2Scene(response.RoleInfo);
+        GameManager.PlayerUnits.AddLocalUnit2Scene(response.RoleInfo);
     }
         
     public async FTask CallRoles()

@@ -9,7 +9,13 @@ public class PlayerUnits : BaseUnits
         base.Awake();
         unitViewer.isMulti = true;
 
+        
+    }
+
+    void Start()
+    {
         Sender.Ins.RegisterMessageHandler(ReciveType.CreateUnits,AddUnit2Scene);
+        Sender.Ins.RegisterMessageHandler(ReciveType.RemvoeUnits,RemoveUnitFromScene);
         Sender.Ins.RegisterMessageHandler(ReciveType.UnitMove,UnitMove);
     }
 
@@ -67,6 +73,20 @@ public class PlayerUnits : BaseUnits
             
             // ==> 进入场景后，设置玩家组件
             go.GetComponent<GameEntity>().SetPlayerComponent();
+        }
+    }
+
+    // 从场景移除角色
+    public void RemoveUnitFromScene(IAddressableRouteMessage message)
+    {
+        var messageInfo = message as M2C_UnitRemove;
+        foreach (var roleId in messageInfo.RoleIds)
+        {
+            var go = GetUnit(roleId);
+            if(go == null) continue;
+
+            unitViewer.Push(PoolType.Unit,roleId.ToString(),go);
+            RemoveUnit(roleId);
         }
     }
 
