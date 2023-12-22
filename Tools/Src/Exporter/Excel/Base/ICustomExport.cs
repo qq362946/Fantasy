@@ -19,7 +19,7 @@ public interface ICustomExport
     /// </summary>
     /// <param name="excelExporter"></param>
     /// <param name="worksheets"></param>
-    void Init(ExcelExporter excelExporter, ConcurrentDictionary<string, ExcelWorksheet> worksheets);
+    void Init(ExcelExporter excelExporter, ExcelWorksheets worksheets);
 }
 
 /// <summary>
@@ -28,7 +28,7 @@ public interface ICustomExport
 public abstract class ACustomExport : ICustomExport
 {
     protected ExcelExporter ExcelExporter;
-    protected ConcurrentDictionary<string, ExcelWorksheet> Worksheets;
+    protected ExcelWorksheets Worksheets;
     
     /// <summary>
     /// 自定义导出类型枚举：客户端、服务器
@@ -50,7 +50,7 @@ public abstract class ACustomExport : ICustomExport
     /// </summary>
     /// <param name="excelExporter"></param>
     /// <param name="worksheets"></param>
-    public void Init(ExcelExporter excelExporter, ConcurrentDictionary<string, ExcelWorksheet> worksheets)
+    public void Init(ExcelExporter excelExporter, ExcelWorksheets worksheets)
     {
         ExcelExporter = excelExporter;
         Worksheets = worksheets;

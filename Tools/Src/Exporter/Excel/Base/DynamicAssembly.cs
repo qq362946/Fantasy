@@ -62,7 +62,7 @@ public static class DynamicAssembly
             metadataReference = assemblyMetadata.GetReference();
             metadataReferenceList.Add(metadataReference);
         }
-            
+        
         // 添加ProtoEntity支持
 
         assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(AProto).Assembly.Location);

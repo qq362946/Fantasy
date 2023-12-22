@@ -16,8 +16,9 @@ using TableDictionary = SortedDictionary<string, List<int>>;
 /// <summary>
 /// Excel 数据导出器，用于从 Excel 文件导出数据到二进制格式和生成 C# 类文件。
 /// </summary>
-public sealed class ExcelExporter
+public sealed partial class ExcelExporter
 {
+    public ExportType ExportType;
     private readonly string _excelProgramPath;
     private readonly string _versionFilePath;
     private readonly string _excelClientFileDirectory;
@@ -28,9 +29,9 @@ public sealed class ExcelExporter
     private readonly string _excelClientBinaryDirectory;
     private readonly string _excelServerJsonDirectory;
     private readonly string _excelClientJsonDirectory;
-    private Dictionary<string, long> _versionDic; // 存储 Excel 文件的版本信息。
+    public VersionInfo VersionInfo; // 存储 Excel 文件的版本信息。
     private readonly Regex _regexName = new Regex("^[a-zA-Z][a-zA-Z0-9_]*$"); // 用于验证 Excel 表名的正则表达式。
-    private readonly HashSet<string> _loadFiles = new HashSet<string> {".xlsx", ".xlsm", ".csv"}; // 加载的支持文件扩展名。
+    private readonly HashSet<string> _loadFiles = [".xlsx", ".xlsm", ".csv"]; // 加载的支持文件扩展名。
     private readonly OneToManyList<string, ExportInfo> _tables = new OneToManyList<string, ExportInfo>(); // 存储 Excel 表及其导出信息。
     private readonly ConcurrentDictionary<string, ExcelTable> _excelTables = new ConcurrentDictionary<string, ExcelTable>(); // 存储解析后的 Excel 表。
     public readonly ConcurrentDictionary<string, ExcelWorksheet> Worksheets = new ConcurrentDictionary<string, ExcelWorksheet>(); // 存储已加载的 Excel 工作表。
@@ -49,12 +50,12 @@ public sealed class ExcelExporter
     /// <summary>
     /// 导表支持的数据类型集合。
     /// </summary>
-    public static readonly HashSet<string> ColTypeSet = new HashSet<string>()
-    {
+    public static readonly HashSet<string> ColTypeSet =
+    [
         "", "0", "bool", "byte", "short", "ushort", "int", "uint", "long", "ulong", "float", "string",
         "IntDictionaryConfig", "StringDictionaryConfig",
-        "short[]", "int[]", "long[]", "float[]", "string[]","uint[]"
-    };
+        "short[]", "int[]", "long[]", "float[]", "string[]", "uint[]"
+    ];
     static ExcelExporter()
     {
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -66,28 +67,104 @@ public sealed class ExcelExporter
     /// <param name="exportType">要执行的导出类型（AllExcel 或 AllExcelIncrement）。</param>
     public ExcelExporter(ExportType exportType)
     {
+        ExportType = exportType;
+        
         if (ExporterSettingsHelper.ExcelTemplatePath?.Trim() == "")
         {
             Log.Info($"ExcelTemplatePath Can not be empty!");
             return;
         }
-        
+
         if (ExporterSettingsHelper.ExcelVersionFile == null || ExporterSettingsHelper.ExcelVersionFile.Trim() == "")
         {
             Log.Info($"ExcelVersionFile Can not be empty!");
             return;
         }
-        
+
         if (ExporterSettingsHelper.ExcelProgramPath == null || ExporterSettingsHelper.ExcelProgramPath.Trim() == "")
         {
             Log.Info($"ExcelProgramPath Can not be empty!");
             return;
         }
-        
+
         _excelProgramPath = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelProgramPath);
         _versionFilePath = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelVersionFile);
-        
-        switch (exportType)
+
+        if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client))
+        {
+            if (ExporterSettingsHelper.ExcelClientBinaryDirectory == null ||
+                ExporterSettingsHelper.ExcelClientBinaryDirectory.Trim() == "")
+            {
+                Log.Info($"ExcelClientBinaryDirectory Can not be empty!");
+                return;
+            }
+
+            if (ExporterSettingsHelper.ExcelClientJsonDirectory == null ||
+                ExporterSettingsHelper.ExcelClientJsonDirectory.Trim() == "")
+            {
+                Log.Info($"ExcelClientJsonDirectory Can not be empty!");
+                return;
+            }
+
+            if (ExporterSettingsHelper.ExcelClientFileDirectory == null ||
+                ExporterSettingsHelper.ExcelClientFileDirectory.Trim() == "")
+            {
+                Log.Info($"ExcelServerFileDirectory Can not be empty!");
+                return;
+            }
+
+            if (ExporterSettingsHelper.ClientCustomExportDirectory == null ||
+                ExporterSettingsHelper.ClientCustomExportDirectory.Trim() == "")
+            {
+                Log.Info($"ClientCustomExportDirectory Can not be empty!");
+                return;
+            }
+
+            _excelClientJsonDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelClientJsonDirectory);
+            _excelClientBinaryDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelClientBinaryDirectory);
+            ClientCustomExportDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ClientCustomExportDirectory);
+            _excelClientFileDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelClientFileDirectory);
+            FileHelper.ClearDirectoryFile(_excelClientFileDirectory);
+        }
+
+        if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
+        {
+            if (ExporterSettingsHelper.ExcelServerFileDirectory == null ||
+                ExporterSettingsHelper.ExcelServerFileDirectory.Trim() == "")
+            {
+                Log.Info($"ExcelServerFileDirectory Can not be empty!");
+                return;
+            }
+
+            if (ExporterSettingsHelper.ExcelServerJsonDirectory == null ||
+                ExporterSettingsHelper.ExcelServerJsonDirectory.Trim() == "")
+            {
+                Log.Info($"ExcelServerJsonDirectory Can not be empty!");
+                return;
+            }
+
+            if (ExporterSettingsHelper.ExcelServerBinaryDirectory == null ||
+                ExporterSettingsHelper.ExcelServerBinaryDirectory.Trim() == "")
+            {
+                Log.Info($"ExcelServerBinaryDirectory Can not be empty!");
+                return;
+            }
+
+            if (ExporterSettingsHelper.ServerCustomExportDirectory == null ||
+                ExporterSettingsHelper.ServerCustomExportDirectory.Trim() == "")
+            {
+                Log.Info($"ServerCustomExportDirectory Can not be empty!");
+                return;
+            }
+
+            _excelServerJsonDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelServerJsonDirectory);
+            _excelServerBinaryDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelServerBinaryDirectory);
+            ServerCustomExportDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ServerCustomExportDirectory);
+            _excelServerFileDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelServerFileDirectory);
+            FileHelper.ClearDirectoryFile(_excelServerFileDirectory);
+        }
+
+        switch (ExportType)
         {
             case ExportType.AllExcelIncrement:
             {
@@ -100,80 +177,6 @@ public sealed class ExcelExporter
                     File.Delete(_versionFilePath);
                 }
 
-                if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client))
-                {
-                    if (ExporterSettingsHelper.ExcelClientBinaryDirectory == null ||
-                        ExporterSettingsHelper.ExcelClientBinaryDirectory.Trim() == "")
-                    {
-                        Log.Info($"ExcelClientBinaryDirectory Can not be empty!");
-                        return;
-                    }
-                    
-                    if (ExporterSettingsHelper.ExcelClientJsonDirectory == null ||
-                        ExporterSettingsHelper.ExcelClientJsonDirectory.Trim() == "")
-                    {
-                        Log.Info($"ExcelClientJsonDirectory Can not be empty!");
-                        return;
-                    }
-                    
-                    if (ExporterSettingsHelper.ExcelClientFileDirectory == null ||
-                        ExporterSettingsHelper.ExcelClientFileDirectory.Trim() == "")
-                    {
-                        Log.Info($"ExcelServerFileDirectory Can not be empty!");
-                        return;
-                    }
-                    
-                    if (ExporterSettingsHelper.ClientCustomExportDirectory == null ||
-                        ExporterSettingsHelper.ClientCustomExportDirectory.Trim() == "")
-                    {
-                        Log.Info($"ClientCustomExportDirectory Can not be empty!");
-                        return;
-                    }
-
-                    _excelClientJsonDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelClientJsonDirectory);
-                    _excelClientBinaryDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelClientBinaryDirectory);
-                    ClientCustomExportDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ClientCustomExportDirectory);
-                    _excelClientFileDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelClientFileDirectory);
-                    FileHelper.ClearDirectoryFile(_excelClientFileDirectory);
-                }
-
-                if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
-                {
-                    if (ExporterSettingsHelper.ExcelServerFileDirectory == null ||
-                        ExporterSettingsHelper.ExcelServerFileDirectory.Trim() == "")
-                    {
-                        Log.Info($"ExcelServerFileDirectory Can not be empty!");
-                        return;
-                    }
-                    
-                    if (ExporterSettingsHelper.ExcelServerJsonDirectory == null ||
-                        ExporterSettingsHelper.ExcelServerJsonDirectory.Trim() == "")
-                    {
-                        Log.Info($"ExcelServerJsonDirectory Can not be empty!");
-                        return;
-                    }
-                    
-                    if (ExporterSettingsHelper.ExcelServerBinaryDirectory == null ||
-                        ExporterSettingsHelper.ExcelServerBinaryDirectory.Trim() == "")
-                    {
-                        Log.Info($"ExcelServerBinaryDirectory Can not be empty!");
-                        return;
-                    }
-
-                    if (ExporterSettingsHelper.ServerCustomExportDirectory == null ||
-                        ExporterSettingsHelper.ServerCustomExportDirectory.Trim() == "")
-                    {
-                        Log.Info($"ServerCustomExportDirectory Can not be empty!");
-                        return;
-                    }
-
-                    _excelServerJsonDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelServerJsonDirectory);
-                    _excelServerBinaryDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelServerBinaryDirectory);
-                    ServerCustomExportDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ServerCustomExportDirectory);
-                    _excelServerFileDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelServerFileDirectory);
-                    FileHelper.ClearDirectoryFile(_excelServerFileDirectory);
-                }
-                
                 break;
             }
         }
@@ -181,13 +184,14 @@ public sealed class ExcelExporter
         Find();
         Parsing();
         ExportToBinary();
-        File.WriteAllText(_versionFilePath, JsonConvert.SerializeObject(_versionDic));
+        File.WriteAllText(_versionFilePath, JsonConvert.SerializeObject(VersionInfo));
         CustomExport();
     }
-    
+
     private void CustomExport()
     {
         var task = new List<Task>();
+        var excelWorksheets = new ExcelWorksheets(this);
         
         // 加载自定义导出程序集
         
@@ -209,7 +213,7 @@ public sealed class ExcelExporter
             FileHelper.ClearDirectoryFile(ServerCustomExportDirectory);
             // 生成一个系统内置的自定义导出类
             var sceneTypeConfigToEnum = new SceneTypeConfigToEnum();
-            sceneTypeConfigToEnum.Init(this, Worksheets);
+            sceneTypeConfigToEnum.Init(this, excelWorksheets);
             task.Add(Task.Run(sceneTypeConfigToEnum.Run));
         }
     
@@ -235,7 +239,7 @@ public sealed class ExcelExporter
                     
                     if (customExport != null)
                     {
-                        customExport.Init(this, Worksheets);
+                        customExport.Init(this, excelWorksheets);
                         task.Add(Task.Run(customExport.Run));
                     }
                 }
@@ -260,19 +264,11 @@ public sealed class ExcelExporter
     /// </summary>
     private void Find()
     {
-        if(File.Exists(_versionFilePath))
-        {
-            var versionJson = File.ReadAllText(_versionFilePath);
-            _versionDic = JsonConvert.DeserializeObject<Dictionary<string, long>>(versionJson);
-        }
-        else
-        {
-            _versionDic = new Dictionary<string, long>();
-        }
+        VersionInfo = File.Exists(_versionFilePath) ? JsonConvert.DeserializeObject<VersionInfo>(File.ReadAllText(_versionFilePath)) : new VersionInfo();
         
         var dir = new DirectoryInfo(_excelProgramPath);
         var excelFiles = dir.GetFiles("*", SearchOption.AllDirectories);
-
+        
         if (excelFiles.Length <= 0)
         {
             return;
@@ -326,10 +322,12 @@ public sealed class ExcelExporter
                 continue;
             }
 
-            _tables.Add(excelName.Split('_')[0], new ExportInfo()
+            var exportInfo = new ExportInfo()
             {
                 Name = excelName, FileInfo = excelFile
-            });
+            };
+            
+            _tables.Add(excelName.Split('_')[0], exportInfo);
         }
         
         var removeTables = new List<string>();
@@ -344,7 +342,7 @@ public sealed class ExcelExporter
 
                 if (!isNeedExport)
                 {
-                    if (_versionDic.TryGetValue(exportInfo.Name, out var lastWriteTime))
+                    if (VersionInfo.Tables.TryGetValue(exportInfo.Name, out var lastWriteTime))
                     {
                         isNeedExport = lastWriteTime != timer;
                     }
@@ -353,8 +351,8 @@ public sealed class ExcelExporter
                         isNeedExport = true;
                     }
                 }
-
-                _versionDic[exportInfo.Name] = timer;
+                
+                VersionInfo.Tables[exportInfo.Name] = timer;
             }
 
             if (!isNeedExport)
@@ -831,6 +829,7 @@ public sealed class ExcelExporter
             
             foreach (var workbookWorksheet in workbookWorksheets)
             {
+                VersionInfo.WorksheetNames.Add(workbookWorksheet.Name);
                 Worksheets.TryAdd(workbookWorksheet.Name, workbookWorksheet);
             }
         }
