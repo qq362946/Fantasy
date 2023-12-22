@@ -1,4 +1,5 @@
 using Fantasy;
+using MongoDB.Driver.Core.Operations;
 
 namespace BestGame;
 
@@ -29,7 +30,7 @@ public static class GateAccountManagerSystem
         gateAccount.Dispose();
     }
 
-    // 退出游戏
+    // 收到地图菜单操作消息，主动退出游戏
     public static void QuitGame(this GateAccountManager self, GateAccount gateAccount)
     {
         var gateRole = gateAccount.GetCurRole();
@@ -46,16 +47,17 @@ public static class GateAccountManagerSystem
         self.QuitGate(gateAccount);
     }
 
-    // 退出网关
-    public static void QuitGate(this GateAccountManager self, GateAccount gateAccount)
+    // 菜单操作主动退出网关，或者掉线强制退出网关
+    public static void QuitGate(this GateAccountManager self, GateAccount gateAccount,bool force = false)
     {
-        var gateRole = gateAccount.GetCurRole();
-
         // 不用从GateAccountManager清除gateAccount的，重置数据即可
         gateAccount.SessionRumtimeId = 0;
         gateAccount.LoginedGate = false;
 
         gateAccount.SelectRoleId = 0;
+
+        // 如果是掉线强制退出网关，已经dispose不用移除sessionPlayerComponent,寻址路由组件
+        if(force) return;
 
         // 断开session连接，移除sessionPlayerComponent,寻址路由组件
         if (gateAccount.TryGeySession(out Session session))

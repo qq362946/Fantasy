@@ -187,4 +187,5 @@ message M2C_UnitCreate // IAddressableRouteMessage
 message M2C_UnitRemove // IAddressableRouteMessage
 {
 	repeated int64 UnitIds = 1;
+	repeated int64 RoleIds = 2;
 }

@@ -29,7 +29,7 @@ namespace BestGame
 	{
 		protected override async FTask Run(Session session, M2C_UnitRemove message)
 		{
-			
+			Sender.Ins.Recive(ReciveType.RemvoeUnits,message);
 			await FTask.CompletedTask;
 		}
 	}

@@ -51,18 +51,18 @@ public static class UnitManagerSystem
         return self.Scene.World.DateBase;
     }
 
-    // 退出游戏
+    // 从地图下的菜单主动退出游戏
     public static async FTask QuitGame(this UnitManager self, Unit unit)
     {
+        await DoQuit(self,unit);
+
         // 发消息到网关，其它服，gateAccount更新角色信息
         MessageHelper.SendInnerRoute(self.Scene,unit.GateRouteId,new M2G_QuitMapMsg{
             AccountId = unit.RoleInfo.AccountId
         });
-
-        await DoQuit(self,unit);
     }
 
-    // 掉线退出地图
+    // 收到网关消息，掉线退出地图
     public static async FTask<bool> QuitMap(this UnitManager self, Unit unit,long delay=0)
     {
         if(delay>0)
@@ -87,8 +87,8 @@ public static class UnitManagerSystem
         // 聊天服务器下线,邮件服下线,帮会服下线！
         // ...
 
-        // 保存下线前的数据
-        self.SaveUnit(unit).Coroutine();
+        // 保存unit及其组件下线前的数据
+        // ...
 
         // 移除unit组件
         unit.RemoveComponent<MoveComponent>();

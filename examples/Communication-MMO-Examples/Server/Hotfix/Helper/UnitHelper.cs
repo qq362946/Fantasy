@@ -41,7 +41,7 @@ public static class UnitHelper
     public static void NoticeUnitRemove(Unit unit, Unit leave)
     {
         var removeUnits = new M2C_UnitRemove();
-        removeUnits.UnitIds.Add(leave.Id);
+        removeUnits.RoleIds.Add(leave.RoleInfo.RoleId);
         
         // 通知客户端有Unit离开视野
         MessageHelper.SendInnerRoute(unit.Scene, unit.SessionRuntimeId, removeUnits);

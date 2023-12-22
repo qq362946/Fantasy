@@ -73,7 +73,8 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 if (sessionPlayer.EnterState == SessionState.Enter)
                 {
                     // 以unitId发IAddressableRouteMessage消息
-                    MessageHelper.SendAddressable(session.Scene, accountId,
+                    // 以roleId创建的unit，roleId=unitId=AddressableId=playerId
+                    MessageHelper.SendAddressable(session.Scene, gateAccount.SelectRoleId,
                         new G2M_Return2MapMsg
                         {
                             MapNum = mapNum,
@@ -92,7 +93,7 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 sessionPlayer.EnterState = SessionState.Entering;
 
                 // 获取目标地图的mapScene
-                // 随机一个目录地图的mapScene，但不需要存库。缓存在gateAccount，维护周期内记住就行
+                // 随机一个目标地图的mapScene，但不需要存库。缓存在gateAccount，维护周期内记住就行
                 var mapScene = gateAccount.GetMapScene(mapNum,session.Scene.World.Id);
 
                 // 地图传送或创建unit
@@ -107,7 +108,8 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                     var result = (M2G_CreateUnitResponse)await MessageHelper.CallInnerRoute(session.Scene,mapScene.EntityId,
                         new G2M_CreateUnitRequest()
                         {
-                            PlayerId = accountId,
+                            // 以roldId创建unit
+                            PlayerId = gateAccount.SelectRoleId,
                             SessionRuntimeId = sessionRuntimeId,
                             GateRouteId = session.Scene.RuntimeId,
                             RoleInfo = gateRole.ToProto(),
