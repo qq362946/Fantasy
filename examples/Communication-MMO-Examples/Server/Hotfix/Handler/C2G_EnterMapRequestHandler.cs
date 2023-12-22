@@ -93,7 +93,7 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 sessionPlayer.EnterState = SessionState.Entering;
 
                 // 获取目标地图的mapScene
-                // 随机一个目录地图的mapScene，但不需要存库。缓存在gateAccount，维护周期内记住就行
+                // 随机一个目标地图的mapScene，但不需要存库。缓存在gateAccount，维护周期内记住就行
                 var mapScene = gateAccount.GetMapScene(mapNum,session.Scene.World.Id);
 
                 // 地图传送或创建unit

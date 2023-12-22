@@ -16,3 +16,26 @@ public enum SessionState
     Entering = 1, // 登陆中
     Enter = 2, // 进入游戏
 }
+
+public static class SessionPlayerComponentSystem
+{
+    public class SessionPlayerComponentDestroySystem: DestroySystem<SessionPlayerComponent>
+    {
+        protected override void Destroy(SessionPlayerComponent self)
+        {
+            var gateAccountManager = self.Scene.GetComponent<GateAccountManager>();
+            var gateAccount = self.gateAccount;
+            var gateRole = gateAccount.GetCurRole();
+
+            // 向map发送断线消息
+            var mapScene = gateAccount.GetMapScene(gateRole.LastMap,self.Scene.World.Id);
+            // MessageHelper.SendInnerRoute(self.Scene,mapScene.EntityId,new G2M_SessionDisconnectMsg{
+            //     UnitId = gateRole.Id
+            // });
+            Log.Debug($"SessionPlayerComponentDestroySystem Destroy {self.Id}");
+
+            // 强制退出网关
+            gateAccountManager.QuitGate(gateAccount,true);
+        }
+    }
+}
