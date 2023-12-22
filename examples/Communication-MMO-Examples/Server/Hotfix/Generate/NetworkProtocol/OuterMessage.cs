@@ -389,5 +389,7 @@ namespace Fantasy
 		public long RouteTypeOpCode() { return CoreRouteType.Addressable; }
 		[ProtoMember(1)]
 		public List<long> UnitIds = new List<long>();
+		[ProtoMember(2)]
+		public List<long> RoleIds = new List<long>();
 	}
 }

@@ -45,7 +45,8 @@ public partial class Player : GameEntity
             gameObject.AddComponent<PlayerMoveSender>();
             movement = gameObject.AddComponent<CharacterMovement>();
         }else{
-            movement = gameObject.AddComponent<NetCharaMovement>();
+            if (!TryGetComponent(out NetCharaMovement nMovement))
+                movement = gameObject.AddComponent<NetCharaMovement>();
         }
 
         CanControlMove();
