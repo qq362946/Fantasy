@@ -89,6 +89,12 @@ namespace Fantasy
 		public RoleInfo RoleInfo { get; set; }
 	}
 	[ProtoContract]
+	public partial class G2M_SessionDisconnectMsg : AProto, IAddressableRouteMessage
+	{
+		public uint OpCode() { return InnerOpcode.G2M_SessionDisconnectMsg; }
+		public long RouteTypeOpCode() { return CoreRouteType.Addressable; }
+	}
+	[ProtoContract]
 	public partial class M2G_QuitMapMsg : AProto, IRouteMessage
 	{
 		public uint OpCode() { return InnerOpcode.M2G_QuitMapMsg; }

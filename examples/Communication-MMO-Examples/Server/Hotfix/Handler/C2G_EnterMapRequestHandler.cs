@@ -25,7 +25,6 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
             return ErrorCode.H_C2G_EnterGame_Error01;
 
         var sessionRuntimeId = session.RuntimeId;
-
         var sessionPlayer = session.GetComponent<SessionPlayerComponent>();
 
         // 正在进入游戏中 操作过于频繁
@@ -66,10 +65,10 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 if (gateAccount.SelectRoleId != 0 && gateRole.sessionRuntimeId != sessionRuntimeId)
                 {
                     // 他处角色顶下线
-                    // 主要是给他处客户端发消息，退出游戏，这里不写了
+                    // 主要是给他处客户端发消息，退出游戏，略...
                 }
 
-                // 在延迟掉线的有效时间内,就不重新创建unit了
+                /// 在延迟掉线的有效时间内,就不重新创建unit了
                 if (sessionPlayer.EnterState == SessionState.Enter)
                 {
                     // 以unitId发IAddressableRouteMessage消息
@@ -81,10 +80,9 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                             RoleInfo = gateRole.ToProto(),
                         });
                     
-                    // 返回目前unit的地图与位置，角色信息。用于客户端创建unit直接进入游戏
-                    // response.LastMoveInfo = gateRole.unit.LastMoveInfo;
-                    // response.MapNum = gateRole.unit.mapNum;
-                    // response.RoleInfo = gateRole.ToProto();
+                    /// 设置角色进入地图
+                    guider.SetRoleEnterMap(session,mapNum,sessionRuntimeId);
+                    sessionPlayer.EnterState = SessionState.Enter;
 
                     return ErrorCode.Error_EnterGameAlreadyEnter;
                 }
@@ -92,11 +90,11 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                 // 设置进入状态
                 sessionPlayer.EnterState = SessionState.Entering;
 
+
+                /// 地图传送或创建unit
                 // 获取目标地图的mapScene
                 // 随机一个目标地图的mapScene，但不需要存库。缓存在gateAccount，维护周期内记住就行
                 var mapScene = gateAccount.GetMapScene(mapNum,session.Scene.World.Id);
-
-                // 地图传送或创建unit
                 if (gateRole.IsInMap())
                 {
                     // 地图传送 ...
@@ -122,9 +120,8 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
                     gateAccount.AddressableId = result.AddressableId;
                 }
 
-                // 设置角色进入地图
+                /// 设置角色进入地图
                 guider.SetRoleEnterMap(session,mapNum,sessionRuntimeId);
-
                 sessionPlayer.EnterState = SessionState.Enter;
             }
             catch (Exception e)

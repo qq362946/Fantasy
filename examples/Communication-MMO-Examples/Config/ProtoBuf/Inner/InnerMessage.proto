@@ -46,6 +46,11 @@ message G2M_Return2MapMsg // IAddressableRouteMessage
 	RoleInfo RoleInfo = 2;
 }
 
+// 通知map网关断开连接
+message G2M_SessionDisconnectMsg // IAddressableRouteMessage
+{
+}
+
 // 通知网关退出地图
 message M2G_QuitMapMsg // IRouteMessage
 {
@@ -53,6 +58,7 @@ message M2G_QuitMapMsg // IRouteMessage
 	int32 MapNum = 2;
 	bool QuitGame = 3;
 }
+
 message S2Mgr_ServerStartComplete // IRouteMessage
 {
 
