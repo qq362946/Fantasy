@@ -30,7 +30,7 @@ public static class GateAccountManagerSystem
         gateAccount.Dispose();
     }
 
-    // 收到地图菜单操作消息，主动退出游戏
+    // 收到地图菜单操作消息主动退出游戏，或者掉线退出游戏
     public static void QuitGame(this GateAccountManager self, GateAccount gateAccount)
     {
         var gateRole = gateAccount.GetCurRole();
@@ -47,7 +47,9 @@ public static class GateAccountManagerSystem
         self.QuitGate(gateAccount);
     }
 
-    // 菜单操作主动退出网关，或者掉线强制退出网关
+    // 菜单操作主动退出网关，或者掉线退出网关
+    // force: true掉线退出网关，false主动退出网关
+    // 重置gateAccount数据，和移除sessionPlayerComponent,寻址路由组件
     public static void QuitGate(this GateAccountManager self, GateAccount gateAccount,bool force = false)
     {
         // 不用从GateAccountManager清除gateAccount的，重置数据即可

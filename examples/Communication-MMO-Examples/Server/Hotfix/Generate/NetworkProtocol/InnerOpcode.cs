@@ -9,8 +9,9 @@ namespace Fantasy
 		 public const int G2M_CreateUnitRequest = 220001002;
 		 public const int M2G_CreateUnitResponse = 260001002;
 		 public const int G2M_Return2MapMsg = 210001001;
-		 public const int M2G_QuitMapMsg = 210001002;
-		 public const int S2Mgr_ServerStartComplete = 210001003;
-		 public const int Mgr2R_MachineStartFinished = 210001004;
+		 public const int G2M_SessionDisconnectMsg = 210001002;
+		 public const int M2G_QuitMapMsg = 210001003;
+		 public const int S2Mgr_ServerStartComplete = 210001004;
+		 public const int Mgr2R_MachineStartFinished = 210001005;
 	}
 }

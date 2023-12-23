@@ -27,15 +27,22 @@ public static class SessionPlayerComponentSystem
             var gateAccount = self.gateAccount;
             var gateRole = gateAccount.GetCurRole();
 
-            // 向map发送断线消息
-            var mapScene = gateAccount.GetMapScene(gateRole.LastMap,self.Scene.World.Id);
-            // MessageHelper.SendInnerRoute(self.Scene,mapScene.EntityId,new G2M_SessionDisconnectMsg{
-            //     UnitId = gateRole.Id
-            // });
-            Log.Debug($"SessionPlayerComponentDestroySystem Destroy {self.Id}");
+            // gateRole==null,说明还没选定角色进入地图，直接退出网关
+            if(gateRole != null)
+            {
+                // 向map发送断线消息
+                MessageHelper.SendAddressable(self.Scene,gateAccount.SelectRoleId,new G2M_SessionDisconnectMsg{});
 
-            // 强制退出网关
-            gateAccountManager.QuitGate(gateAccount,true);
+                // 退出网关，保存角色数据
+                gateAccountManager.QuitGame(gateAccount);
+            }
+            else
+            {
+                // 退出网关，只重置gateAccount数据
+                gateAccountManager.QuitGate(gateAccount,true);
+            }
+            
+            Log.Debug($"SessionPlayerComponentDestroySystem Destroy {self.Id}");
         }
     }
 }
