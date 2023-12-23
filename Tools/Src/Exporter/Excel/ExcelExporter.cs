@@ -124,7 +124,7 @@ public sealed partial class ExcelExporter
             _excelClientBinaryDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelClientBinaryDirectory);
             ClientCustomExportDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ClientCustomExportDirectory);
             _excelClientFileDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelClientFileDirectory);
-            FileHelper.ClearDirectoryFile(_excelClientFileDirectory);
+            // FileHelper.ClearDirectoryFile(_excelClientFileDirectory);
         }
 
         if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
@@ -161,7 +161,7 @@ public sealed partial class ExcelExporter
             _excelServerBinaryDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelServerBinaryDirectory);
             ServerCustomExportDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ServerCustomExportDirectory);
             _excelServerFileDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ExcelServerFileDirectory);
-            FileHelper.ClearDirectoryFile(_excelServerFileDirectory);
+            // FileHelper.ClearDirectoryFile(_excelServerFileDirectory);
         }
 
         switch (ExportType)
@@ -210,7 +210,7 @@ public sealed partial class ExcelExporter
                 Directory.CreateDirectory($"{_excelProgramPath}CSharp/Server");
             }
             serverCustomAssembly = DynamicAssembly.Load($"{_excelProgramPath}CSharp/Server");
-            FileHelper.ClearDirectoryFile(ServerCustomExportDirectory);
+            // FileHelper.ClearDirectoryFile(ServerCustomExportDirectory);
             // 生成一个系统内置的自定义导出类
             var sceneTypeConfigToEnum = new SceneTypeConfigToEnum();
             sceneTypeConfigToEnum.Init(this, excelWorksheets);
@@ -224,9 +224,9 @@ public sealed partial class ExcelExporter
                 Directory.CreateDirectory($"{_excelProgramPath}CSharp/Client");
             }
             clientCustomAssembly = DynamicAssembly.Load($"{_excelProgramPath}CSharp/Client");
-            FileHelper.ClearDirectoryFile(ClientCustomExportDirectory);
+            //FileHelper.ClearDirectoryFile(ClientCustomExportDirectory);
         }
-
+        
         void AddCustomExportTask(Assembly assembly)
         {
             var assemblyInfo = new AssemblyInfo(assembly);

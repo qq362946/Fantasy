@@ -284,7 +284,7 @@ namespace Fantasy
                 }
                 else
                 {
-                    Array.Copy(buffer, copyCount + offset, _lastBuffer, LastIndex, ChunkSize - LastIndex);
+                    Array.Copy(buffer, copyCount + offset, Last, LastIndex, ChunkSize - LastIndex);
                     copyCount += ChunkSize - LastIndex;
                     LastIndex = ChunkSize;
                 }

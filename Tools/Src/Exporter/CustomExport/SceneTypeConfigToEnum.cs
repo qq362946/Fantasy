@@ -18,7 +18,6 @@ public class SceneTypeConfigToEnum : ACustomExport
         // 获取场景配置表的完整路径
         if (!Worksheets.TryGetValue("SceneTypeConfig", out var sceneTypeConfig))
         {
-            Log.Info("not found SceneTypeConfig");
             return;
         }
         for (var row = 3; row <= sceneTypeConfig.Dimension.Rows; row++)
