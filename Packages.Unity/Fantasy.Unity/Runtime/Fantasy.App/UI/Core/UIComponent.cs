@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
@@ -122,7 +123,13 @@ namespace Fantasy
             Camera = cameraGameObject.AddComponent<Camera>();
             Camera.clearFlags = CameraClearFlags.Depth;
             Camera.cullingMask = LayerMask.GetMask("UI");
-            
+
+
+            #region URP模式下的UI相机设定与绑定到主相机
+            cameraGameObject.AddComponent<UniversalAdditionalCameraData>().renderType= CameraRenderType.Overlay;
+            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(Camera);
+            #endregion
+
             cameraGameObject.AddComponent<FlareLayer>();
 
             if (addAudioListener)
