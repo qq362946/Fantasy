@@ -42,7 +42,7 @@ public static class SessionPlayerComponentSystem
                 gateAccountManager.QuitGate(gateAccount,true);
             }
             
-            Log.Debug($"SessionPlayerComponentDestroySystem Destroy {self.Id}");
+            Log.Debug($"玩家断开网关,SessionPlayerComponent Destroy {self.Id}");
         }
     }
 }
