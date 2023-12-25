@@ -163,11 +163,7 @@ namespace Fantasy
 
             _connectTimeoutId = TimerScheduler.Instance.Core.OnceTimer(connectTimeout, () =>
             {
-                if (OnConnectFail == null)
-                {
-                    return;
-                }
-                OnConnectFail();
+                OnConnectFail?.Invoke();
                 Dispose();
             });
 
