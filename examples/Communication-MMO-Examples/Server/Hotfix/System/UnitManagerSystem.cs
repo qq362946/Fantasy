@@ -82,6 +82,9 @@ public static class UnitManagerSystem
         return true;
     }
 
+    /// <summary>
+    /// unit从地图移除,移除unit组件,AOI管理器移除unit,移除AddressableMessageComponent组件
+    /// </summary>
     public static async FTask DoQuit(this UnitManager self, Unit unit)
     {
         // 聊天服务器下线,邮件服下线,帮会服下线！
@@ -94,12 +97,17 @@ public static class UnitManagerSystem
         unit.RemoveComponent<MoveComponent>();
         unit.RemoveComponent<MoveSyncComponent>();
 
-        // 移除AOI管理器
+        // AOI管理器移除unit
         AOIHelper.RemoveAOI(unit);
 
-        // 移除AddressableMessageComponent
-        await AddressableHelper.RemoveAddressable(unit.Scene, unit.Id);
+        
+        // 通常不用手动调用RemoveAddressable，只有在传送时可以用
+        // 这里顺便举个例子，打开下面注释，会有两次RemoveAddressable
+        // await AddressableHelper.RemoveAddressable(unit.Scene, unit.Id);
+
+        // 移除AddressableMessageComponent组件
         unit.RemoveComponent<AddressableMessageComponent>();
         self.Remove(unit.Id);
+        await FTask.CompletedTask;
     }
 }

@@ -17,7 +17,7 @@ public class G2M_SessionDisconnectHandler : Addressable<Unit,G2M_SessionDisconne
         var hasQuit = await unitManager.QuitMap(unit,3000);
 
         if(!hasQuit){
-            // 地图延迟2分钟再下线期间，玩家重新登录回到地图了
+            // 在地图延迟2分钟下线期间，玩家重新登录回到地图了
             // ...
         }else{
             Log.Info($"玩家{unitId}已经退出地图");
