@@ -88,8 +88,68 @@
 类
 </h3>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AClientNetwork.html">AClientNetwork</a></dt>
+      <dd><p>抽象客户端网络基类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ANetwork.html">ANetwork</a></dt>
+      <dd><p>抽象网络基类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ANetworkChannel.html">ANetworkChannel</a></dt>
+      <dd><p>抽象的网络通道基类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ANetworkMessageScheduler.html">ANetworkMessageScheduler</a></dt>
+      <dd><p>抽象网络消息调度器基类，用于处理网络消息的调度和处理逻辑。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.APackInfo.html">APackInfo</a></dt>
+      <dd><p>抽象的数据包信息基类，用于存储解析得到的数据包信息。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.APacketParser.html">APacketParser</a></dt>
+      <dd><p>抽象的包解析器基类，用于解析网络通信数据包。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.AProto.html">AProto</a></dt>
       <dd><p>提供 ProtoBuf 序列化和反序列化支持的抽象基类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AddressableHelper.html">AddressableHelper</a></dt>
+      <dd><p>提供操作地址映射的辅助方法。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AddressableManageComponent.html">AddressableManageComponent</a></dt>
+      <dd><p>地址映射管理组件，用于管理地址映射和锁定。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AddressableMessageComponent.html">AddressableMessageComponent</a></dt>
+      <dd><p>可寻址消息组件、挂载了这个组件可以接收Addressable消息</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AddressableRPC-3.html">AddressableRPC&lt;TEntity, TRouteRequest, TRouteResponse&gt;</a></dt>
+      <dd><p>泛型可寻址RPC路由基类，实现了 <a class="xref" href="Fantasy.IRouteMessageHandler.html">IRouteMessageHandler</a> 接口，用于处理特定实体和可寻址RPC路由请求类型的路由。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AddressableRouteComponent.html">AddressableRouteComponent</a></dt>
+      <dd><p>可寻址路由消息组件，挂载了这个组件可以接收和发送 Addressable 消息。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Addressable-2.html">Addressable&lt;TEntity, TMessage&gt;</a></dt>
+      <dd><p>泛型可寻址路由基类，实现了 <a class="xref" href="Fantasy.IRouteMessageHandler.html">IRouteMessageHandler</a> 接口，用于处理特定实体和可寻址路由消息类型的路由。</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -103,6 +163,16 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AssemblyInfo.html">AssemblyInfo</a></dt>
+      <dd><p>AssemblyInfo提供有关程序集和类型的信息</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.AssemblyManager.html">AssemblyManager</a></dt>
+      <dd><p>管理程序集加载和卸载的帮助类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.AsyncEventSystem-1.html">AsyncEventSystem&lt;T&gt;</a></dt>
       <dd><p>异步事件系统的抽象基类。</p>
 </dd>
@@ -113,13 +183,93 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ByteHelper.html">ByteHelper</a></dt>
+      <dd><p>提供字节操作辅助方法的静态类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.CircularBuffer.html">CircularBuffer</a></dt>
+      <dd><p>自增式缓存类，继承自 Stream 和 IDisposable 接口。
+环形缓存具有自动扩充的特性，但不会收缩，适用于操作不过大的 IO 流。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ClientMessageScheduler.html">ClientMessageScheduler</a></dt>
+      <dd><p>提供了一个用于客户端网络消息调度和处理的抽象基类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ClientNetworkComponent.html">ClientNetworkComponent</a></dt>
+      <dd><p>客户端Network网络组件。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.CommandLineOptions.html">CommandLineOptions</a></dt>
       <dd><p>命令行选项类，用于解析命令行参数。</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ConcurrentOneToManyListPool-2.html">ConcurrentOneToManyListPool&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>并发的一对多列表池，用于维护具有相同键的多个值的关联关系，实现了 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> 接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ConcurrentOneToManyList-2.html">ConcurrentOneToManyList&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>并发的一对多列表，用于维护具有相同键的多个值的关联关系。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ConcurrentOneToManyQueuePool-2.html">ConcurrentOneToManyQueuePool&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>表示一个并发的一对多队列池，用于维护具有相同键的多个值的关联关系，实现了 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> 接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ConcurrentOneToManyQueue-2.html">ConcurrentOneToManyQueue&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>表示一个并发的一对多队列，用于维护具有相同键的多个值的关联关系。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.ConcurrentPool-1.html">ConcurrentPool&lt;T&gt;</a></dt>
       <dd><p>线程安全的静态通用对象池。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ConfigTableManage.html">ConfigTableManage</a></dt>
+      <dd><p>配置表管理器</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ConnectEntityHandler.html">ConnectEntityHandler</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.CoreErrorCode.html">CoreErrorCode</a></dt>
+      <dd><p>定义 Fantasy 框架中的核心错误代码。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.CoreRouteType.html">CoreRouteType</a></dt>
+      <dd><p>提供了一组框架内置的核心路由类型。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.CoroutineLockQueue.html">CoroutineLockQueue</a></dt>
+      <dd><p>协程锁队列，用于协程等待和释放锁的管理。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.CoroutineLockQueueType.html">CoroutineLockQueueType</a></dt>
+      <dd><p>指定键的协程锁队列类型，用于管理不同类型的协程锁队列。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.CryptHelper.html">CryptHelper</a></dt>
+      <dd><p>提供加密和解密相关的辅助方法。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Define.html">Define</a></dt>
+      <dd><p>定义包含 Fantasy 系统设置的静态类。</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -133,6 +283,26 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.DictionaryExtensions.html">DictionaryExtensions</a></dt>
+      <dd><p>提供对字典的扩展方法。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.DictionaryPool-2.html">DictionaryPool&lt;TM, TN&gt;</a></dt>
+      <dd><p>提供一个可以使用对象池管理的字典类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.DoubleMapDictionaryPool-2.html">DoubleMapDictionaryPool&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>提供一个双向映射字典对象池类，用于双向键值对映射。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.DoubleMapDictionary-2.html">DoubleMapDictionary&lt;TK, TV&gt;</a></dt>
+      <dd><p>可以实现双向映射的字典类，用于将键和值进行双向映射。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.EntitiesSystem.html">EntitiesSystem</a></dt>
       <dd><p>实体系统管理器，用于管理各种实体系统的生命周期和更新</p>
 </dd>
@@ -140,6 +310,16 @@
     <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.Entity.html">Entity</a></dt>
       <dd><p>实体基类，用于实体创建、回收、获取，和组件操作</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.EntityDictionary-2.html">EntityDictionary&lt;TM, TN&gt;</a></dt>
+      <dd><p>提供一个带资源释放功能的实体字典类，支持使用对象池管理。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.EntityList-1.html">EntityList&lt;T&gt;</a></dt>
+      <dd><p>实体对象列表，继承自 List&lt;T&gt;，并实现 IDisposable 接口，用于创建和管理实体对象的集合。</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -168,6 +348,41 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.FantasySettingsHelper.html">FantasySettingsHelper</a></dt>
+      <dd><p>FantasySettingsHelper 类用于加载和管理 Fantasy 系统的各项设置。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.FileHelper.html">FileHelper</a></dt>
+      <dd><p>文件操作助手类，提供了各种文件操作方法。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.FrameUpdateSystem-1.html">FrameUpdateSystem&lt;T&gt;</a></dt>
+      <dd><p>表示实体帧更新系统的抽象基类。继承此类可以定义特定类型实体的更新逻辑。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.HandlerInfo-1.html">HandlerInfo&lt;T&gt;</a></dt>
+      <dd><p>用于存储消息处理器的信息，包括类型和对象实例。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.HashSetBasePool-1.html">HashSetBasePool&lt;T&gt;</a></dt>
+      <dd><p>基本哈希集合对象池，他自持有实际的哈希集合。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.HashSetPool-1.html">HashSetPool&lt;T&gt;</a></dt>
+      <dd><p>可释放的哈希集合对象池。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableAddHandler.html">I_AddressableAddHandler</a></dt>
+      <dd><p>声明一个 sealed 类 I_AddressableAddHandler，继承自 RouteRPC 类，并指定泛型参数</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.I_AddressableAdd_Request.html">I_AddressableAdd_Request</a></dt>
       <dd><p>添加一个可寻址地址请求</p>
 </dd>
@@ -175,6 +390,11 @@
     <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.I_AddressableAdd_Response.html">I_AddressableAdd_Response</a></dt>
       <dd><p>添加一个可寻址地址响应</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableGetHandler.html">I_AddressableGetHandler</a></dt>
+      <dd><p>声明一个 sealed 类 I_AddressableGetHandler，继承自 RouteRPC 类，并指定泛型参数</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -188,6 +408,11 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableLockHandler.html">I_AddressableLockHandler</a></dt>
+      <dd><p>声明一个 sealed 类 I_AddressableLockHandler，继承自 RouteRPC 类，并指定泛型参数</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.I_AddressableLock_Request.html">I_AddressableLock_Request</a></dt>
       <dd><p>锁定一个可寻址请求。</p>
 </dd>
@@ -195,6 +420,11 @@
     <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.I_AddressableLock_Response.html">I_AddressableLock_Response</a></dt>
       <dd><p>锁定一个可寻址响应。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableRemoveHandler.html">I_AddressableRemoveHandler</a></dt>
+      <dd><p>声明一个 sealed 类 I_AddressableRemoveHandler，继承自 RouteRPC 类，并指定泛型参数</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -208,6 +438,11 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.I_AddressableUnLockHandler.html">I_AddressableUnLockHandler</a></dt>
+      <dd><p>声明一个 sealed 类 I_AddressableUnLockHandler，继承自 RouteRPC 类，并指定泛型参数</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.I_AddressableUnLock_Request.html">I_AddressableUnLock_Request</a></dt>
       <dd><p>解锁一个可寻址地址请求。</p>
 </dd>
@@ -218,8 +453,81 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IdFactory.html">IdFactory</a></dt>
+      <dd><p>提供用于生成不同类型 ID 的工厂类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.InnerMessageScheduler.html">InnerMessageScheduler</a></dt>
+      <dd><p>提供了一个机制来调度和处理内部网络消息。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.InnerPackInfo.html">InnerPackInfo</a></dt>
+      <dd><p>用于处理内部网络数据包信息的类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.InnerPacketParser.html">InnerPacketParser</a></dt>
+      <dd><p>用于解析内部网络数据包的类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IntDictionaryConfig.html">IntDictionaryConfig</a></dt>
+      <dd><p>使用 ProtoBuf 序列化的整数字典配置类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.JsonHelper.html">JsonHelper</a></dt>
+      <dd><p>提供操作 JSON 数据的辅助方法。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.KCPClientNetwork.html">KCPClientNetwork</a></dt>
+      <dd><p>KCP协议客户端网络类，用于管理KCP客户端网络连接。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.KCPServerNetwork.html">KCPServerNetwork</a></dt>
+      <dd><p>KCP 服务端网络实现。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.KCPServerNetworkChannel.html">KCPServerNetworkChannel</a></dt>
+      <dd><p>KCP 服务器网络通道类，负责管理基于 KCP 协议的网络通信。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.KCPSettings.html">KCPSettings</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.LinkEntityComponent.html">LinkEntityComponent</a></dt>
+      <dd><p>连接其他进程实体地址管理组件</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.LinkEntity_Request.html">LinkEntity_Request</a></dt>
+      <dd><p>连接Entity到目标进程、目标进程可以通过EntityType、发送消息给这个Entity</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.LinkEntity_Response.html">LinkEntity_Response</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ListPool-1.html">ListPool&lt;T&gt;</a></dt>
+      <dd><p>可释放的列表（List）对象池。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.Log.html">Log</a></dt>
       <dd><p>提供日志记录功能的静态类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.MD5Helper.html">MD5Helper</a></dt>
+      <dd><p>提供计算 MD5 散列值的辅助方法。</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -228,18 +536,148 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.MemoryStreamHelper.html">MemoryStreamHelper</a></dt>
+      <dd><p>提供获取可回收内存流的帮助方法。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.MessageDispatcherSystem.html">MessageDispatcherSystem</a></dt>
+      <dd><p>消息分发系统，负责管理消息和消息处理器之间的关系。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.MessageHelper.html">MessageHelper</a></dt>
+      <dd><p>消息辅助类，用于处理网络消息的发送和接收。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.MessageRPC-2.html">MessageRPC&lt;TRequest, TResponse&gt;</a></dt>
+      <dd><p>泛型消息RPC基类，实现了 <a class="xref" href="Fantasy.IMessageHandler.html">IMessageHandler</a> 接口，用于处理请求和响应类型的消息。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.MessageSender.html">MessageSender</a></dt>
+      <dd><p>网络消息发送者的类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Message-1.html">Message&lt;T&gt;</a></dt>
+      <dd><p>泛型消息基类，实现了 <a class="xref" href="Fantasy.IMessageHandler.html">IMessageHandler</a> 接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.MongoDataBase.html">MongoDataBase</a></dt>
+      <dd><p>使用 MongoDB 数据库的实现。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.MongoHelper.html">MongoHelper</a></dt>
+      <dd><p>提供与MongoDB数据序列化和反序列化相关的帮助方法。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.NLog.html">NLog</a></dt>
       <dd><p>使用 NLog 实现的日志记录器。</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.NetworkHelper.html">NetworkHelper</a></dt>
+      <dd><p>提供网络操作相关的帮助方法。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.NetworkThread.html">NetworkThread</a></dt>
+      <dd><p>网络线程管理器的单例类。负责处理网络相关操作、通信以及线程管理。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OnCoroutineLockTimeout.html">OnCoroutineLockTimeout</a></dt>
+      <dd><p>协程锁超时时的事件处理类，继承自 EventSystem&lt;CoroutineLockTimeout&gt;</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OnNetworkMessageUpdateCheckTimeout.html">OnNetworkMessageUpdateCheckTimeout</a></dt>
+      <dd><p>定时处理网络消息超时的任务。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OneToManyDictionaryPool-3.html">OneToManyDictionaryPool&lt;TKey, TValueKey, TValue&gt;</a></dt>
+      <dd><p>一对多映射关系的字典对象池。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OneToManyDictionary-3.html">OneToManyDictionary&lt;TKey, TValueKey, TValue&gt;</a></dt>
+      <dd><p>一对多映射关系的字典。每个键都对应一个内部字典，该内部字典将键值映射到相应的值。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OneToManyHashSetPool-2.html">OneToManyHashSetPool&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>一对多哈希集合（OneToManyHashSet）对象池。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OneToManyHashSet-2.html">OneToManyHashSet&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>一对多哈希集合（OneToManyHashSet），用于创建和管理键对应多个值的集合。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OneToManyListPool-2.html">OneToManyListPool&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>可回收的、一对多关系的列表池。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OneToManyList-2.html">OneToManyList&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>一对多关系的列表字典。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OneToManyQueuePool-2.html">OneToManyQueuePool&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>支持一对多关系的队列池，用于存储具有相同键的值的队列集合。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OneToManyQueue-2.html">OneToManyQueue&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>支持一对多关系的队列，用于存储具有相同键的值的队列集合。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OneToManySortedDictionaryPool-3.html">OneToManySortedDictionaryPool&lt;TKey, TSortedKey, TValue&gt;</a></dt>
+      <dd><p>一对多映射关系的排序字典对象池。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OneToManySortedDictionary-3.html">OneToManySortedDictionary&lt;TKey, TSortedKey, TValue&gt;</a></dt>
+      <dd><p>一对多映射关系的排序字典。每个外部键映射到一个内部排序字典，该内部排序字典将排序键映射到相应的值。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Opcode.html">Opcode</a></dt>
+      <dd><p>定义了各种消息操作码，用于标识不同类型的消息和请求。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OuterMessageScheduler.html">OuterMessageScheduler</a></dt>
+      <dd><p>提供了一个机制来调度和处理外部网络消息。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OuterPackInfo.html">OuterPackInfo</a></dt>
+      <dd><p>用于解析外部网络消息的数据包信息。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OuterPacketParser.html">OuterPacketParser</a></dt>
+      <dd><p>用于解析外部网络消息的数据包解析器。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.PingRequest.html">PingRequest</a></dt>
-      <dd><p>表示Ping请求消息的类，实现了 <a class="xref" href="Fantasy.Core.Network.IRequest.html">IRequest</a> 接口。</p>
+      <dd><p>表示Ping请求消息的类，实现了 <a class="xref" href="Fantasy.IRequest.html">IRequest</a> 接口。</p>
 </dd>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.PingResponse.html">PingResponse</a></dt>
-      <dd><p>表示Ping响应消息的类，实现了 <a class="xref" href="Fantasy.Core.Network.IResponse.html">IResponse</a> 接口。</p>
+      <dd><p>表示Ping响应消息的类，实现了 <a class="xref" href="Fantasy.IResponse.html">IResponse</a> 接口。</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -258,13 +696,124 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ProtoBufHelper.html">ProtoBufHelper</a></dt>
+      <dd><p>提供ProtoBuf序列化和反序列化的帮助方法类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RandomHelper.html">RandomHelper</a></dt>
+      <dd><p>随机数操作助手类，提供各种随机数生成和操作方法。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStream.html">RecyclableMemoryStream</a></dt>
+      <dd><p>MemoryStream implementation that deals with pooling and managing memory streams which use potentially large
+buffers.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
+      <dd><p>提供用于管理可回收内存流的分部类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.BlockCreatedEventArgs.html">RecyclableMemoryStreamManager.BlockCreatedEventArgs</a></dt>
+      <dd><p>提供用于 <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_BlockCreated">BlockCreated</a> 事件的参数类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.BufferDiscardedEventArgs.html">RecyclableMemoryStreamManager.BufferDiscardedEventArgs</a></dt>
+      <dd><p>提供用于 <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_BufferDiscarded">BufferDiscarded</a> 事件的参数类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.Events.html">RecyclableMemoryStreamManager.Events</a></dt>
+      <dd><p>用于 RecyclableMemoryStream 的 ETW 事件。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.LargeBufferCreatedEventArgs.html">RecyclableMemoryStreamManager.LargeBufferCreatedEventArgs</a></dt>
+      <dd><p>提供用于 <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_LargeBufferCreated">LargeBufferCreated</a> 事件的参数类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamConvertedToArrayEventArgs.html">RecyclableMemoryStreamManager.StreamConvertedToArrayEventArgs</a></dt>
+      <dd><p>提供用于 <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_StreamConvertedToArray">StreamConvertedToArray</a> 事件的参数类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamCreatedEventArgs.html">RecyclableMemoryStreamManager.StreamCreatedEventArgs</a></dt>
+      <dd><p>用于 <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_StreamCreated">StreamCreated</a> 事件的参数类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamDisposedEventArgs.html">RecyclableMemoryStreamManager.StreamDisposedEventArgs</a></dt>
+      <dd><p>提供用于 <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_StreamDisposed">StreamDisposed</a> 事件的参数类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamDoubleDisposedEventArgs.html">RecyclableMemoryStreamManager.StreamDoubleDisposedEventArgs</a></dt>
+      <dd><p>提供用于 <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_StreamDoubleDisposed">StreamDoubleDisposed</a> 事件的参数类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamFinalizedEventArgs.html">RecyclableMemoryStreamManager.StreamFinalizedEventArgs</a></dt>
+      <dd><p>提供用于 <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_StreamFinalized">StreamFinalized</a> 事件的参数类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamLengthEventArgs.html">RecyclableMemoryStreamManager.StreamLengthEventArgs</a></dt>
+      <dd><p>提供用于 <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_StreamLength">StreamLength</a> 事件的参数类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamOverCapacityEventArgs.html">RecyclableMemoryStreamManager.StreamOverCapacityEventArgs</a></dt>
+      <dd><p>提供用于 <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_StreamOverCapacity">StreamOverCapacity</a> 事件的参数类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.UsageReportEventArgs.html">RecyclableMemoryStreamManager.UsageReportEventArgs</a></dt>
+      <dd><p>提供用于 <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_UsageReport">UsageReport</a> 事件的参数类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.Response.html">Response</a></dt>
-      <dd><p>表示响应消息的基类，实现了 <a class="xref" href="Fantasy.Core.Network.IResponse.html">IResponse</a> 接口。</p>
+      <dd><p>表示响应消息的基类，实现了 <a class="xref" href="Fantasy.IResponse.html">IResponse</a> 接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ReuseDictionary-2.html">ReuseDictionary&lt;TM, TN&gt;</a></dt>
+      <dd><p>提供一个可以重用的字典类，支持使用对象池管理。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ReuseList-1.html">ReuseList&lt;T&gt;</a></dt>
+      <dd><p>可重用的列表，继承自 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a> 类。该类支持通过对象池重用列表实例，以减少对象分配和释放的开销。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RouteComponent.html">RouteComponent</a></dt>
+      <dd><p>自定义Route组件、如果要自定义Route协议必须使用这个组件</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RouteRPC-3.html">RouteRPC&lt;TEntity, TRouteRequest, TRouteResponse&gt;</a></dt>
+      <dd><p>泛型路由RPC基类，实现了 <a class="xref" href="Fantasy.IRouteMessageHandler.html">IRouteMessageHandler</a> 接口，用于处理请求和响应类型的路由。</p>
 </dd>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.RouteResponse.html">RouteResponse</a></dt>
-      <dd><p>表示路由响应消息的类，实现了 <a class="xref" href="Fantasy.Core.Network.IRouteResponse.html">IRouteResponse</a> 接口。</p>
+      <dd><p>表示路由响应消息的类，实现了 <a class="xref" href="Fantasy.IRouteResponse.html">IRouteResponse</a> 接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Route-2.html">Route&lt;TEntity, TMessage&gt;</a></dt>
+      <dd><p>泛型路由基类，实现了 <a class="xref" href="Fantasy.IRouteMessageHandler.html">IRouteMessageHandler</a> 接口，用于处理特定实体和路由消息类型的路由。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ScanException.html">ScanException</a></dt>
+      <dd><p>在扫描过程中发生的异常。</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -288,14 +837,140 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ServerInnerSession.html">ServerInnerSession</a></dt>
+      <dd><p>网络服务器内部会话。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ServerNetworkComponent.html">ServerNetworkComponent</a></dt>
+      <dd><p>服务端Network网络组件。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Session.html">Session</a></dt>
+      <dd><p>网络会话的基类，用于管理网络通信。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SessionIdleCheckerComponent.html">SessionIdleCheckerComponent</a></dt>
+      <dd><p>负责检查会话空闲超时的组件。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SingleCollection.html">SingleCollection</a></dt>
+      <dd><p>单例集合管理器类，继承自 <a class="xref" href="Fantasy.Singleton-1.html">Singleton&lt;T&gt;</a>。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.SingleCollectionAttribute.html">SingleCollectionAttribute</a></dt>
       <dd><p>表示用于指定实体的单一集合存储属性。此属性用于配合 <a class="xref" href="Fantasy.ISupportedSingleCollection.html">ISupportedSingleCollection</a> 接口使用，
 用于定义实体属于哪个父实体的子集合，以及在数据库中使用的集合名称。</p>
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SingletonSystem.html">SingletonSystem</a></dt>
+      <dd><p>单例管理系统，负责管理和调度实现 <a class="xref" href="Fantasy.ISingleton.html">ISingleton</a> 接口的单例对象。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Singleton-1.html">Singleton&lt;T&gt;</a></dt>
+      <dd><p>抽象的单例基类，继承自 <a class="xref" href="Fantasy.ISingleton.html">ISingleton</a> 接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SkipTableBase-1.html">SkipTableBase&lt;TValue&gt;</a></dt>
+      <dd><p>抽象的跳表基类，提供跳表的基本功能和操作。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SkipTableDesc-1.html">SkipTableDesc&lt;TValue&gt;</a></dt>
+      <dd><p>跳表降序版，用于存储降序排列的数据。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SkipTableNode-1.html">SkipTableNode&lt;TValue&gt;</a></dt>
+      <dd><p>跳跃表节点。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SkipTable-1.html">SkipTable&lt;TValue&gt;</a></dt>
+      <dd><p>跳表数据结构（升序版）</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SocketExtensions.html">SocketExtensions</a></dt>
+      <dd><p>提供扩展方法以操作 Socket 缓冲区大小。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SortedConcurrentOneToManyListPool-2.html">SortedConcurrentOneToManyListPool&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>基于排序字典和并发集合实现的一对多映射列表的对象池包装类，继承自 <a class="xref" href="Fantasy.SortedConcurrentOneToManyList-2.html">SortedConcurrentOneToManyList&lt;TKey, TValue&gt;</a> 类，
+同时实现了 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> 接口，以支持对象的重用和释放。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SortedConcurrentOneToManyList-2.html">SortedConcurrentOneToManyList&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>基于排序字典和并发集合实现的一多对映射列表类，继承自 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2">SortedDictionary&lt;TKey, TValue&gt;</a> 类，
+用于在多个值与一个键关联的情况下进行管理和存储。该类支持并发操作，适用于多线程环境。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SortedOneToManyHashSetPool-2.html">SortedOneToManyHashSetPool&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>基于排序字典实现的一对多关系的映射哈希集合的对象池包装类，将唯一键映射到多个值的哈希集合。
+同时实现了 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> 接口，以支持对象的重用和释放。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SortedOneToManyHashSet-2.html">SortedOneToManyHashSet&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>基于排序字典实现的一对多关系的映射哈希集合类，将唯一键映射到多个值的哈希集合。
+用于在多个值与一个键关联的情况下进行管理和存储。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SortedOneToManyListPool-2.html">SortedOneToManyListPool&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>基于排序字典实现的一对多映射列表的对象池包装类，继承自 <a class="xref" href="Fantasy.SortedOneToManyList-2.html">SortedOneToManyList&lt;TKey, TValue&gt;</a> 类，
+同时实现了 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> 接口，以支持对象的重用和释放。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.SortedOneToManyList-2.html">SortedOneToManyList&lt;TKey, TValue&gt;</a></dt>
+      <dd><p>基于排序字典实现的一对多关系的映射列表类，将唯一键映射到包含多个值的列表。
+用于在多个值与一个键关联的情况下进行管理和存储。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.StringDictionaryConfig.html">StringDictionaryConfig</a></dt>
+      <dd><p>使用 ProtoBuf 序列化的字符串字典配置类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.StructBsonSerialize-1.html">StructBsonSerialize&lt;TValue&gt;</a></dt>
+      <dd><p>提供对结构体类型进行 BSON 序列化和反序列化的辅助类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.TCPClientNetwork.html">TCPClientNetwork</a></dt>
+      <dd><p>TCP客户端网络类，用于管理TCP客户端网络连接。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.TCPServerNetwork.html">TCPServerNetwork</a></dt>
+      <dd><p>表示 TCP 协议服务端网络类。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.TCPServerNetworkChannel.html">TCPServerNetworkChannel</a></dt>
+      <dd><p>TCP 服务器网络通道，用于处理服务器与客户端之间的数据通信。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.ThreadSynchronizationContext.html">ThreadSynchronizationContext</a></dt>
       <dd><p>一个用于线程同步的上下文。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.TimeHelper.html">TimeHelper</a></dt>
+      <dd><p>提供与时间相关的帮助方法。</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -323,6 +998,21 @@
       <dd><p>表示实体更新系统的抽象基类。继承此类可以定义特定类型实体的更新逻辑。</p>
 </dd>
     </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.WaitCoroutineLock.html">WaitCoroutineLock</a></dt>
+      <dd><p>等待协程锁的类，实现了 IDisposable 接口</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.World.html">World</a></dt>
+      <dd><p>表示一个游戏世界。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.WorldConfigInfo.html">WorldConfigInfo</a></dt>
+      <dd><p>表示游戏世界的配置信息。</p>
+</dd>
+    </dl>
     <h3 id="structs">
 结构
 </h3>
@@ -342,6 +1032,16 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.CoroutineLockTimeout.html">CoroutineLockTimeout</a></dt>
+      <dd><p>等待协程锁超时的数据结构</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.EntityIdStruct.html">EntityIdStruct</a></dt>
+      <dd><p>实体的唯一标识符结构。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.EntityReference-1.html">EntityReference&lt;T&gt;</a></dt>
       <dd><p>实体引用只读结构，用作对 Entity 实例的引用。</p>
 </dd>
@@ -352,13 +1052,63 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.MessageCacheInfo.html">MessageCacheInfo</a></dt>
+      <dd><p>消息缓存信息结构。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.MessageHelper.NetworkMessageUpdate.html">MessageHelper.NetworkMessageUpdate</a></dt>
+      <dd><p>定时检查过期的Call消息事件。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.NetAction.html">NetAction</a></dt>
+      <dd><p>表示一个网络操作，可以是发送消息、移除通道等操作。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.OnCreateScene.html">OnCreateScene</a></dt>
       <dd><p>表示当创建新场景时引发的事件数据结构。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.OnServerStartComplete.html">OnServerStartComplete</a></dt>
+      <dd><p>当Server启动完成时触发。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.Packet.html">Packet</a></dt>
+      <dd><p>提供关于消息包的常量定义。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RouteIdStruct.html">RouteIdStruct</a></dt>
+      <dd><p>表示一个路由 ID 的结构。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RuntimeIdStruct.html">RuntimeIdStruct</a></dt>
+      <dd><p>表示一个运行时 ID 的结构。</p>
 </dd>
     </dl>
     <h3 id="interfaces">
 接口
 </h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IAddressableRouteMessage.html">IAddressableRouteMessage</a></dt>
+      <dd><p>表示可寻址协议的普通路由消息接口，继承自普通路由消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IAddressableRouteRequest.html">IAddressableRouteRequest</a></dt>
+      <dd><p>可寻址协议的普通路由请求接口，继承自可寻址协议的普通路由消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IAddressableRouteResponse.html">IAddressableRouteResponse</a></dt>
+      <dd><p>可寻址协议的普通路由响应接口，继承自普通路由响应接口。</p>
+</dd>
+    </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.IAsyncEvent.html">IAsyncEvent</a></dt>
       <dd><p>定义异步事件的接口。</p>
@@ -367,6 +1117,76 @@
     <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.IAwakeSystem.html">IAwakeSystem</a></dt>
       <dd><p>定义实体的唤醒系统接口。当需要在实体唤醒时执行特定的逻辑时，应实现此接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IBsonAddressableRouteMessage.html">IBsonAddressableRouteMessage</a></dt>
+      <dd><p>表示可寻址Bson协议的普通路由消息接口，继承自Bson消息和可寻址协议的普通路由消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IBsonAddressableRouteRequest.html">IBsonAddressableRouteRequest</a></dt>
+      <dd><p>可寻址Bson协议的普通路由请求接口，继承自可寻址Bson协议的普通路由消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IBsonAddressableRouteResponse.html">IBsonAddressableRouteResponse</a></dt>
+      <dd><p>可寻址Bson协议的普通路由响应接口，继承自Bson响应接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IBsonMessage.html">IBsonMessage</a></dt>
+      <dd><p>表示可以序列化为 BSON 格式的消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IBsonRequest.html">IBsonRequest</a></dt>
+      <dd><p>表示可以序列化为 BSON 格式的请求消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IBsonResponse.html">IBsonResponse</a></dt>
+      <dd><p>表示可以序列化为 BSON 格式的响应消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IBsonRouteMessage.html">IBsonRouteMessage</a></dt>
+      <dd><p>表示普通路由Bson消息的接口，继承自Bson消息和普通路由消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IBsonRouteRequest.html">IBsonRouteRequest</a></dt>
+      <dd><p>普通路由Bson请求接口，继承自普通路由Bson消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IBsonRouteResponse.html">IBsonRouteResponse</a></dt>
+      <dd><p>普通路由Bson响应接口，继承自Bson响应接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IConfigTable.html">IConfigTable</a></dt>
+      <dd><p>表示是一个配置文件</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ICustomRouteMessage.html">ICustomRouteMessage</a></dt>
+      <dd><p>表示自定义Route协议的普通路由消息接口，继承自普通路由消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ICustomRouteRequest.html">ICustomRouteRequest</a></dt>
+      <dd><p>自定义Route协议的普通路由请求接口，继承自自定义Route协议的普通路由消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ICustomRouteResponse.html">ICustomRouteResponse</a></dt>
+      <dd><p>自定义Route协议的普通路由响应接口，继承自普通路由响应接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IDateBase.html">IDateBase</a></dt>
+      <dd><p>表示用于执行各种数据库操作的数据库接口。</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -390,8 +1210,28 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IFrameUpdateSystem.html">IFrameUpdateSystem</a></dt>
+      <dd><p>定义实体帧更新系统的接口。实体帧更新系统用于管理特定类型的实体，在每次帧更新时执行与该类型实体相关的逻辑。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.ILog.html">ILog</a></dt>
       <dd><p>定义日志记录功能的接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IMessage.html">IMessage</a></dt>
+      <dd><p>表示通用消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IMessageHandler.html">IMessageHandler</a></dt>
+      <dd><p>表示消息处理器的接口，处理特定类型的消息。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.INetworkUpdate.html">INetworkUpdate</a></dt>
+      <dd><p>网络更新的接口。</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -400,8 +1240,49 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IPoolMessage.html">IPoolMessage</a></dt>
+      <dd><p>继承这个的Message协议会在序列化后回收到对象池中
+创建消息请使用Pool.Rent来创建消息、否则会造成内存泄露</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IRequest.html">IRequest</a></dt>
+      <dd><p>表示请求消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IResponse.html">IResponse</a></dt>
+      <dd><p>表示响应消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IRouteMessage.html">IRouteMessage</a></dt>
+      <dd><p>表示普通路由消息的接口，继承自请求接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IRouteMessageHandler.html">IRouteMessageHandler</a></dt>
+      <dd><p>表示路由消息处理器的接口，处理特定类型的路由消息。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IRouteRequest.html">IRouteRequest</a></dt>
+      <dd><p>普通路由请求接口，继承自普通路由消息接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IRouteResponse.html">IRouteResponse</a></dt>
+      <dd><p>普通路由响应接口，继承自响应接口。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.ISingleCollectionRoot.html">ISingleCollectionRoot</a></dt>
       <dd><p>Entity保存到数据库的时候会根据子组件设置分离存储特性分表存储在不同的集合表中</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.ISingleton.html">ISingleton</a></dt>
+      <dd><p>定义一个单例接口，表示可以被初始化并在销毁时进行处理。</p>
 </dd>
     </dl>
     <dl class="jumplist">
@@ -425,6 +1306,11 @@
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.IUpdateSingleton.html">IUpdateSingleton</a></dt>
+      <dd><p>定义一个可更新的单例接口，继承自 <a class="xref" href="Fantasy.ISingleton.html">ISingleton</a>。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.IUpdateSystem.html">IUpdateSystem</a></dt>
       <dd><p>定义实体更新系统的接口。实体更新系统用于管理特定类型的实体，在每次更新时执行与该类型实体相关的逻辑。</p>
 </dd>
@@ -432,6 +1318,40 @@
     <h3 id="enums">
 枚举
 </h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.KcpHeader.html">KcpHeader</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.NetActionType.html">NetActionType</a></dt>
+      <dd><p>不同类型的网络操作。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.NetworkProtocolType.html">NetworkProtocolType</a></dt>
+      <dd><p>表示网络通信协议类型的枚举。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.NetworkTarget.html">NetworkTarget</a></dt>
+      <dd><p>表示网络通信的目标类型的枚举。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.NetworkType.html">NetworkType</a></dt>
+      <dd><p>表示网络类型的枚举。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.Events.MemoryStreamBufferType.html">RecyclableMemoryStreamManager.Events.MemoryStreamBufferType</a></dt>
+      <dd><p>缓冲区类型枚举。</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Fantasy.RecyclableMemoryStreamManager.Events.MemoryStreamDiscardReason.html">RecyclableMemoryStreamManager.Events.MemoryStreamDiscardReason</a></dt>
+      <dd><p>丢弃缓冲区的可能原因枚举。</p>
+</dd>
+    </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="Fantasy.STaskStatus.html">STaskStatus</a></dt>
       <dd><p>表示异步任务的状态。</p>

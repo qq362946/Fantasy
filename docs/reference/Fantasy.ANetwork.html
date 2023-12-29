@@ -1,0 +1,651 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>ANetwork 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="ANetwork 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.ANetwork">
+
+
+
+  <h1 id="Fantasy_ANetwork" data-uid="Fantasy.ANetwork" class="text-break">
+    ANetwork 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>抽象网络基类。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class ANetwork : IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ANetwork</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>实现</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="Fantasy.AClientNetwork.html">AClientNetwork</a></div>
+      <div><a class="xref" href="Fantasy.KCPServerNetwork.html">KCPServerNetwork</a></div>
+      <div><a class="xref" href="Fantasy.TCPServerNetwork.html">TCPServerNetwork</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">构造函数
+</h2>
+
+
+  <a id="Fantasy_ANetwork__ctor_" data-uid="Fantasy.ANetwork.#ctor*"></a>
+
+  <h3 id="Fantasy_ANetwork__ctor_Fantasy_Scene_Fantasy_NetworkType_Fantasy_NetworkProtocolType_Fantasy_NetworkTarget_" data-uid="Fantasy.ANetwork.#ctor(Fantasy.Scene,Fantasy.NetworkType,Fantasy.NetworkProtocolType,Fantasy.NetworkTarget)">
+  ANetwork(Scene, NetworkType, NetworkProtocolType, NetworkTarget)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>初始化抽象网络基类的新实例。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ANetwork(Scene scene, NetworkType networkType, NetworkProtocolType networkProtocolType, NetworkTarget networkTarget)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Fantasy.Scene.html">Scene</a></dt>
+    <dd><p>场景对象。</p>
+</dd>
+    <dt><code>networkType</code> <a class="xref" href="Fantasy.NetworkType.html">NetworkType</a></dt>
+    <dd><p>网络类型。</p>
+</dd>
+    <dt><code>networkProtocolType</code> <a class="xref" href="Fantasy.NetworkProtocolType.html">NetworkProtocolType</a></dt>
+    <dd><p>网络协议类型。</p>
+</dd>
+    <dt><code>networkTarget</code> <a class="xref" href="Fantasy.NetworkTarget.html">NetworkTarget</a></dt>
+    <dd><p>网络目标类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">字段
+</h2>
+
+
+
+  <h3 id="Fantasy_ANetwork_Pack" data-uid="Fantasy.ANetwork.Pack">
+  Pack
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>打包消息的委托。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly Func&lt;uint, long, long, MemoryStream, object, MemoryStream&gt; Pack</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-6">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">属性
+</h2>
+
+
+  <a id="Fantasy_ANetwork_Id_" data-uid="Fantasy.ANetwork.Id*"></a>
+
+  <h3 id="Fantasy_ANetwork_Id" data-uid="Fantasy.ANetwork.Id">
+  Id
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取网络的唯一ID。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long Id { get; protected set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ANetwork_IsDisposed_" data-uid="Fantasy.ANetwork.IsDisposed*"></a>
+
+  <h3 id="Fantasy_ANetwork_IsDisposed" data-uid="Fantasy.ANetwork.IsDisposed">
+  IsDisposed
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取或设置网络是否已被释放。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsDisposed { get; protected set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ANetwork_NetworkMessageScheduler_" data-uid="Fantasy.ANetwork.NetworkMessageScheduler*"></a>
+
+  <h3 id="Fantasy_ANetwork_NetworkMessageScheduler" data-uid="Fantasy.ANetwork.NetworkMessageScheduler">
+  NetworkMessageScheduler
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取或设置网络消息调度器。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ANetworkMessageScheduler NetworkMessageScheduler { get; protected set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.ANetworkMessageScheduler.html">ANetworkMessageScheduler</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ANetwork_NetworkProtocolType_" data-uid="Fantasy.ANetwork.NetworkProtocolType*"></a>
+
+  <h3 id="Fantasy_ANetwork_NetworkProtocolType" data-uid="Fantasy.ANetwork.NetworkProtocolType">
+  NetworkProtocolType
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取网络协议类型。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NetworkProtocolType NetworkProtocolType { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.NetworkProtocolType.html">NetworkProtocolType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ANetwork_NetworkTarget_" data-uid="Fantasy.ANetwork.NetworkTarget*"></a>
+
+  <h3 id="Fantasy_ANetwork_NetworkTarget" data-uid="Fantasy.ANetwork.NetworkTarget">
+  NetworkTarget
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取网络目标类型。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NetworkTarget NetworkTarget { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.NetworkTarget.html">NetworkTarget</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ANetwork_NetworkType_" data-uid="Fantasy.ANetwork.NetworkType*"></a>
+
+  <h3 id="Fantasy_ANetwork_NetworkType" data-uid="Fantasy.ANetwork.NetworkType">
+  NetworkType
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取网络类型。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NetworkType NetworkType { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.NetworkType.html">NetworkType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ANetwork_Scene_" data-uid="Fantasy.ANetwork.Scene*"></a>
+
+  <h3 id="Fantasy_ANetwork_Scene" data-uid="Fantasy.ANetwork.Scene">
+  Scene
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取场景对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Scene Scene { get; protected set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.Scene.html">Scene</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_ANetwork_Dispose_" data-uid="Fantasy.ANetwork.Dispose*"></a>
+
+  <h3 id="Fantasy_ANetwork_Dispose" data-uid="Fantasy.ANetwork.Dispose">
+  Dispose()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>释放资源。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ANetwork_RemoveChannel_" data-uid="Fantasy.ANetwork.RemoveChannel*"></a>
+
+  <h3 id="Fantasy_ANetwork_RemoveChannel_System_UInt32_" data-uid="Fantasy.ANetwork.RemoveChannel(System.UInt32)">
+  RemoveChannel(uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>移除通道。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract void RemoveChannel(uint channelId)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>channelId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>通道 ID。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ANetwork_Send_" data-uid="Fantasy.ANetwork.Send*"></a>
+
+  <h3 id="Fantasy_ANetwork_Send_System_UInt32_System_UInt32_System_Int64_System_Int64_System_IO_MemoryStream_" data-uid="Fantasy.ANetwork.Send(System.UInt32,System.UInt32,System.Int64,System.Int64,System.IO.MemoryStream)">
+  Send(uint, uint, long, long, MemoryStream)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>发送消息。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract void Send(uint channelId, uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>channelId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>通道 ID。</p>
+</dd>
+    <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>RPC ID。</p>
+</dd>
+    <dt><code>routeTypeOpCode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由类型与操作码。</p>
+</dd>
+    <dt><code>routeId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由 ID。</p>
+</dd>
+    <dt><code>memoryStream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>内存流，用于消息数据。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ANetwork_Send_" data-uid="Fantasy.ANetwork.Send*"></a>
+
+  <h3 id="Fantasy_ANetwork_Send_System_UInt32_System_UInt32_System_Int64_System_Int64_System_Object_" data-uid="Fantasy.ANetwork.Send(System.UInt32,System.UInt32,System.Int64,System.Int64,System.Object)">
+  Send(uint, uint, long, long, object)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>发送消息。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract void Send(uint channelId, uint rpcId, long routeTypeOpCode, long routeId, object message)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>channelId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>通道 ID。</p>
+</dd>
+    <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>RPC ID。</p>
+</dd>
+    <dt><code>routeTypeOpCode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由类型与操作码。</p>
+</dd>
+    <dt><code>routeId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由 ID。</p>
+</dd>
+    <dt><code>message</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>消息对象。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

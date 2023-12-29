@@ -1,0 +1,1224 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Opcode 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Opcode 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.Opcode">
+
+
+
+  <h1 id="Fantasy_Opcode" data-uid="Fantasy.Opcode" class="text-break">
+    Opcode 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>定义了各种消息操作码，用于标识不同类型的消息和请求。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Opcode</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Opcode</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="fields">字段
+</h2>
+
+
+
+  <h3 id="Fantasy_Opcode_AddressableAddRequest" data-uid="Fantasy.Opcode.AddressableAddRequest">
+  AddressableAddRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>可寻址消息：添加请求操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint AddressableAddRequest = 220000001</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_AddressableAddResponse" data-uid="Fantasy.Opcode.AddressableAddResponse">
+  AddressableAddResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>可寻址消息：添加回复操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint AddressableAddResponse = 260000001</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_AddressableGetRequest" data-uid="Fantasy.Opcode.AddressableGetRequest">
+  AddressableGetRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>可寻址消息：获取请求操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint AddressableGetRequest = 220000002</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_AddressableGetResponse" data-uid="Fantasy.Opcode.AddressableGetResponse">
+  AddressableGetResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>可寻址消息：获取回复操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint AddressableGetResponse = 260000002</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_AddressableLockRequest" data-uid="Fantasy.Opcode.AddressableLockRequest">
+  AddressableLockRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>可寻址消息：锁定请求操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint AddressableLockRequest = 220000004</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_AddressableLockResponse" data-uid="Fantasy.Opcode.AddressableLockResponse">
+  AddressableLockResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>可寻址消息：锁定回复操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint AddressableLockResponse = 260000004</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_AddressableRemoveRequest" data-uid="Fantasy.Opcode.AddressableRemoveRequest">
+  AddressableRemoveRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>可寻址消息：移除请求操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint AddressableRemoveRequest = 220000003</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_AddressableRemoveResponse" data-uid="Fantasy.Opcode.AddressableRemoveResponse">
+  AddressableRemoveResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>可寻址消息：移除回复操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint AddressableRemoveResponse = 260000003</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_AddressableUnLockRequest" data-uid="Fantasy.Opcode.AddressableUnLockRequest">
+  AddressableUnLockRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>可寻址消息：解锁请求操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint AddressableUnLockRequest = 220000005</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_AddressableUnLockResponse" data-uid="Fantasy.Opcode.AddressableUnLockResponse">
+  AddressableUnLockResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>可寻址消息：解锁回复操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint AddressableUnLockResponse = 260000005</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_DefaultResponse" data-uid="Fantasy.Opcode.DefaultResponse">
+  DefaultResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>默认回复操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint DefaultResponse = 3</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_DefaultRouteResponse" data-uid="Fantasy.Opcode.DefaultRouteResponse">
+  DefaultRouteResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>默认的Route返回操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint DefaultRouteResponse = 260000007</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerBsonMessage" data-uid="Fantasy.Opcode.InnerBsonMessage">
+  InnerBsonMessage
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网Bson消息操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerBsonMessage = 140000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerBsonRequest" data-uid="Fantasy.Opcode.InnerBsonRequest">
+  InnerBsonRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网Bson请求操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerBsonRequest = 150000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerBsonResponse" data-uid="Fantasy.Opcode.InnerBsonResponse">
+  InnerBsonResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网Bson回复操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerBsonResponse = 180000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerBsonRouteMessage" data-uid="Fantasy.Opcode.InnerBsonRouteMessage">
+  InnerBsonRouteMessage
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网Bson路由消息操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerBsonRouteMessage = 230000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerBsonRouteRequest" data-uid="Fantasy.Opcode.InnerBsonRouteRequest">
+  InnerBsonRouteRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网Bson路由请求操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerBsonRouteRequest = 240000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerBsonRouteResponse" data-uid="Fantasy.Opcode.InnerBsonRouteResponse">
+  InnerBsonRouteResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网Bson路由回复操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerBsonRouteResponse = 270000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerMessage" data-uid="Fantasy.Opcode.InnerMessage">
+  InnerMessage
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网消息操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerMessage = 120000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerRequest" data-uid="Fantasy.Opcode.InnerRequest">
+  InnerRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网请求操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerRequest = 130000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerResponse" data-uid="Fantasy.Opcode.InnerResponse">
+  InnerResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网回复操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerResponse = 170000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerRouteMessage" data-uid="Fantasy.Opcode.InnerRouteMessage">
+  InnerRouteMessage
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网路由消息操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerRouteMessage = 210000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerRouteRequest" data-uid="Fantasy.Opcode.InnerRouteRequest">
+  InnerRouteRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网路由请求操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerRouteRequest = 220000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_InnerRouteResponse" data-uid="Fantasy.Opcode.InnerRouteResponse">
+  InnerRouteResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>内网路由回复操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint InnerRouteResponse = 260000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_LinkEntityRequest" data-uid="Fantasy.Opcode.LinkEntityRequest">
+  LinkEntityRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>连接Entity到目标进程、目标进程可以通过EntityType、发送消息给这个Entity</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint LinkEntityRequest = 220000006</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_LinkEntityResponse" data-uid="Fantasy.Opcode.LinkEntityResponse">
+  LinkEntityResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint LinkEntityResponse = 260000006</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_OuterMessage" data-uid="Fantasy.Opcode.OuterMessage">
+  OuterMessage
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>外网消息操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint OuterMessage = 100000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_OuterRequest" data-uid="Fantasy.Opcode.OuterRequest">
+  OuterRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>外网请求操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint OuterRequest = 110000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_OuterResponse" data-uid="Fantasy.Opcode.OuterResponse">
+  OuterResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>外网回复操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint OuterResponse = 160000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_OuterRouteMessage" data-uid="Fantasy.Opcode.OuterRouteMessage">
+  OuterRouteMessage
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>外网路由消息操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint OuterRouteMessage = 190000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_OuterRouteRequest" data-uid="Fantasy.Opcode.OuterRouteRequest">
+  OuterRouteRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>外网路由请求操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint OuterRouteRequest = 200000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_OuterRouteResponse" data-uid="Fantasy.Opcode.OuterRouteResponse">
+  OuterRouteResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>外网路由回复操作码的基准值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint OuterRouteResponse = 250000000</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_PingRequest" data-uid="Fantasy.Opcode.PingRequest">
+  PingRequest
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>心跳消息请求操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint PingRequest = 1</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_Opcode_PingResponse" data-uid="Fantasy.Opcode.PingResponse">
+  PingResponse
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>心跳消息回复操作码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const uint PingResponse = 2</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -90,8 +90,7 @@
   <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>消息分发系统，负责管理消息和消息处理器之间的关系。</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -207,8 +206,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>根据请求对象和错误码，创建普通响应消息。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -218,18 +216,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>iRequest</code> <a class="xref" href="Fantasy.Core.Network.IRequest.html">IRequest</a></dt>
-    <dd><p>请求对象</p>
-</dd>
+    <dd></dd>
     <dt><code>error</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
-    <dd><p>错误码</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="Fantasy.Core.Network.IResponse.html">IResponse</a></dt>
-    <dd><p>创建的普通响应消息</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -249,8 +244,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>根据路由请求对象和错误码，创建路由响应消息。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -260,18 +254,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>iRouteRequest</code> <a class="xref" href="Fantasy.Core.Network.IRouteRequest.html">IRouteRequest</a></dt>
-    <dd><p>路由请求对象</p>
-</dd>
+    <dd></dd>
     <dt><code>error</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
-    <dd><p>错误码</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="Fantasy.Core.Network.IRouteResponse.html">IRouteResponse</a></dt>
-    <dd><p>创建的路由响应消息</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -291,8 +282,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>根据请求类型和错误码，创建普通响应消息。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -302,18 +292,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>requestType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
-    <dd><p>请求类型</p>
-</dd>
+    <dd></dd>
     <dt><code>error</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
-    <dd><p>错误码</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="Fantasy.Core.Network.IResponse.html">IResponse</a></dt>
-    <dd><p>创建的普通响应消息</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -333,8 +320,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>创建一个空的路由响应消息。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -345,8 +331,7 @@
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="Fantasy.Core.Network.IRouteResponse.html">IRouteResponse</a></dt>
-    <dd><p>创建的路由响应消息</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -366,8 +351,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>处理失败时，向会话发送失败响应消息。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -377,17 +361,13 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>session</code> <a class="xref" href="Fantasy.Core.Network.Session.html">Session</a></dt>
-    <dd><p>会话对象</p>
-</dd>
+    <dd></dd>
     <dt><code>iRouteRequest</code> <a class="xref" href="Fantasy.Core.Network.IRouteRequest.html">IRouteRequest</a></dt>
-    <dd><p>路由请求对象</p>
-</dd>
+    <dd></dd>
     <dt><code>error</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
-    <dd><p>错误码</p>
-</dd>
+    <dd></dd>
     <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
-    <dd><p>RPC标识</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -408,8 +388,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>根据消息类型获取对应的OpCode。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -419,15 +398,13 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
-    <dd><p>消息类型</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
-    <dd><p>消息对应的OpCode</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -447,8 +424,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>根据OpCode获取对应的消息类型。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -458,15 +434,13 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>code</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
-    <dd><p>OpCode</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
-    <dd><p>OpCode对应的消息类型</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -486,8 +460,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>处理普通消息，将消息分发给相应的消息处理器。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -497,20 +470,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>session</code> <a class="xref" href="Fantasy.Core.Network.Session.html">Session</a></dt>
-    <dd><p>会话对象</p>
-</dd>
+    <dd></dd>
     <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
-    <dd><p>消息类型</p>
-</dd>
+    <dd></dd>
     <dt><code>message</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
-    <dd><p>消息对象</p>
-</dd>
+    <dd></dd>
     <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
-    <dd><p>RPC标识</p>
-</dd>
+    <dd></dd>
     <dt><code>protocolCode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
-    <dd><p>协议码</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -531,8 +499,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>在加载程序集时，用于解析并存储消息处理相关的信息。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -542,8 +509,7 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>assemblyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>要加载的程序集名称</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -564,8 +530,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>在卸载程序集时，清理相关的消息处理信息。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -575,8 +540,7 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>assemblyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>要卸载的程序集名称</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -597,8 +561,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>处理路由消息，将消息分发给相应的路由消息处理器。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -608,20 +571,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>session</code> <a class="xref" href="Fantasy.Core.Network.Session.html">Session</a></dt>
-    <dd><p>会话对象</p>
-</dd>
+    <dd></dd>
     <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
-    <dd><p>消息类型</p>
-</dd>
+    <dd></dd>
     <dt><code>entity</code> <a class="xref" href="Fantasy.Entity.html">Entity</a></dt>
-    <dd><p>实体对象</p>
-</dd>
+    <dd></dd>
     <dt><code>message</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
-    <dd><p>消息对象</p>
-</dd>
+    <dd></dd>
     <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
-    <dd><p>RPC标识</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>

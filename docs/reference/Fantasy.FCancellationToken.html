@@ -95,7 +95,7 @@
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class FCancellationToken</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class FCancellationToken : IDisposable</code></pre>
   </div>
 
 
@@ -109,6 +109,12 @@
     </dd>
   </dl>
 
+  <dl class="typelist implements">
+    <dt>实现</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
 
 
   <dl class="typelist derived">
@@ -138,7 +144,7 @@
     <dt>扩展方法</dt>
     <dd>
   <div>
-      <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
   </div>
   </dd></dl>
 
@@ -249,10 +255,42 @@
 
 
 
-  <a id="Fantasy_FCancellationToken_Cancel_" data-uid="Fantasy.FCancellationToken.Cancel*"></a>
+  <a id="Fantasy_FCancellationToken_Create_" data-uid="Fantasy.FCancellationToken.Create*"></a>
 
-  <h3 id="Fantasy_FCancellationToken_Cancel" data-uid="Fantasy.FCancellationToken.Cancel">
-  Cancel()
+  <h3 id="Fantasy_FCancellationToken_Create" data-uid="Fantasy.FCancellationToken.Create">
+  Create()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>创建一个取消标记。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FCancellationToken Create()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FCancellationToken.html">FCancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_FCancellationToken_Dispose_" data-uid="Fantasy.FCancellationToken.Dispose*"></a>
+
+  <h3 id="Fantasy_FCancellationToken_Dispose" data-uid="Fantasy.FCancellationToken.Dispose">
+  Dispose()
   
   </h3>
 
@@ -261,7 +299,7 @@
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Cancel()</code></pre>
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
   </div>
 
 

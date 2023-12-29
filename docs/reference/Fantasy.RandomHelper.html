@@ -1,0 +1,825 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>RandomHelper 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="RandomHelper 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.RandomHelper">
+
+
+
+  <h1 id="Fantasy_RandomHelper" data-uid="Fantasy.RandomHelper" class="text-break">
+    RandomHelper 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>随机数操作助手类，提供各种随机数生成和操作方法。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class RandomHelper</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">RandomHelper</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_RandomHelper_BreakRank_" data-uid="Fantasy.RandomHelper.BreakRank*"></a>
+
+  <h3 id="Fantasy_RandomHelper_BreakRank__1_System_Collections_Generic_List___0__" data-uid="Fantasy.RandomHelper.BreakRank``1(System.Collections.Generic.List{``0})">
+  BreakRank&lt;T&gt;(List&lt;T&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>打乱列表中元素的顺序。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void BreakRank&lt;T&gt;(List&lt;T&gt; arr)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>arr</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;</dt>
+    <dd><p>要打乱顺序的列表。</p>
+</dd>
+  </dl>
+
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>列表元素的类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_NextFloat_" data-uid="Fantasy.RandomHelper.NextFloat*"></a>
+
+  <h3 id="Fantasy_RandomHelper_NextFloat_System_Boolean_" data-uid="Fantasy.RandomHelper.NextFloat(System.Boolean)">
+  NextFloat(bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>返回随机数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float NextFloat(bool containNegative = false)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>containNegative</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>是否包含负数。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>返回一个随机的单精度浮点数。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_NextFloat_" data-uid="Fantasy.RandomHelper.NextFloat*"></a>
+
+  <h3 id="Fantasy_RandomHelper_NextFloat_System_Single_" data-uid="Fantasy.RandomHelper.NextFloat(System.Single)">
+  NextFloat(float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>返回一个小于所指定最大值的非负随机数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float NextFloat(float maxValue)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>maxValue</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>要生成的随机数的上限（随机数不能取该上限值）。 maxValue 必须大于或等于零。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>大于等于零且小于 maxValue 的单精度浮点数，即：返回值的范围通常包括零但不包括 maxValue。 不过，如果 maxValue 等于零，则返回 maxValue。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_NextFloat_" data-uid="Fantasy.RandomHelper.NextFloat*"></a>
+
+  <h3 id="Fantasy_RandomHelper_NextFloat_System_Single_System_Single_" data-uid="Fantasy.RandomHelper.NextFloat(System.Single,System.Single)">
+  NextFloat(float, float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>返回一个指定范围内的随机数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float NextFloat(float minValue, float maxValue)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>minValue</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>返回的随机数的下界（随机数可取该下界值）。</p>
+</dd>
+    <dt><code>maxValue</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>返回的随机数的上界（随机数不能取该上界值）。 maxValue 必须大于或等于 minValue。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>一个大于等于 minValue 且小于 maxValue 的单精度浮点数，即：返回的值范围包括 minValue 但不包括 maxValue。 如果 minValue 等于 maxValue，则返回 minValue。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_NextVector2_" data-uid="Fantasy.RandomHelper.NextVector2*"></a>
+
+  <h3 id="Fantasy_RandomHelper_NextVector2_System_Single_System_Single_System_Single_System_Single_" data-uid="Fantasy.RandomHelper.NextVector2(System.Single,System.Single,System.Single,System.Single)">
+  NextVector2(float, float, float, float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>在指定的矩形区域内随机生成一个二维向量位置。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector2 NextVector2(float minX, float maxX, float minY, float maxY)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>minX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>X轴最小值。</p>
+</dd>
+    <dt><code>maxX</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>X轴最大值。</p>
+</dd>
+    <dt><code>minY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>Y轴最小值。</p>
+</dd>
+    <dt><code>maxY</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>Y轴最大值。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector2">Vector2</a></dt>
+    <dd><p>随机生成的二维向量位置。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandFloat01_" data-uid="Fantasy.RandomHelper.RandFloat01*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandFloat01" data-uid="Fantasy.RandomHelper.RandFloat01">
+  RandFloat01()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>生成一个介于 0 和 1 之间的随机单精度浮点数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float RandFloat01()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>随机单精度浮点数。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandInt64_" data-uid="Fantasy.RandomHelper.RandInt64*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandInt64" data-uid="Fantasy.RandomHelper.RandInt64">
+  RandInt64()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>生成一个随机的 64 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static long RandInt64()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>64 位整数。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandUInt16_" data-uid="Fantasy.RandomHelper.RandUInt16*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandUInt16" data-uid="Fantasy.RandomHelper.RandUInt16">
+  RandUInt16()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>生成一个随机的无符号 16 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ushort RandUInt16()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint16">ushort</a></dt>
+    <dd><p>无符号 16 位整数。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandUInt32_" data-uid="Fantasy.RandomHelper.RandUInt32*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandUInt32" data-uid="Fantasy.RandomHelper.RandUInt32">
+  RandUInt32()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>生成一个随机的无符号 32 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static uint RandUInt32()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>无符号 32 位整数。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandUInt64_" data-uid="Fantasy.RandomHelper.RandUInt64*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandUInt64" data-uid="Fantasy.RandomHelper.RandUInt64">
+  RandUInt64()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>生成一个随机的无符号 64 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ulong RandUInt64()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></dt>
+    <dd><p>无符号 64 位整数。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandomArray_" data-uid="Fantasy.RandomHelper.RandomArray*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandomArray__1_System_Collections_Generic_List___0__" data-uid="Fantasy.RandomHelper.RandomArray``1(System.Collections.Generic.List{``0})">
+  RandomArray&lt;T&gt;(List&lt;T&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从列表中随机选择一个元素。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T RandomArray&lt;T&gt;(this List&lt;T&gt; array)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>array</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;</dt>
+    <dd><p>要选择的列表。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>随机选择的列表元素。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>列表元素的类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandomArray_" data-uid="Fantasy.RandomHelper.RandomArray*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandomArray__1___0___" data-uid="Fantasy.RandomHelper.RandomArray``1(``0[])">
+  RandomArray&lt;T&gt;(T[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从数组中随机选择一个元素。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T RandomArray&lt;T&gt;(this T[] array)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>array</code> T[]</dt>
+    <dd><p>要选择的数组。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>随机选择的数组元素。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>数组元素的类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandomBool_" data-uid="Fantasy.RandomHelper.RandomBool*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandomBool" data-uid="Fantasy.RandomHelper.RandomBool">
+  RandomBool()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>生成一个随机的布尔值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool RandomBool()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>随机的布尔值。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandomByFixedProbability_" data-uid="Fantasy.RandomHelper.RandomByFixedProbability*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandomByFixedProbability_System_Int32___" data-uid="Fantasy.RandomHelper.RandomByFixedProbability(System.Int32[])">
+  RandomByFixedProbability(int[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据固定概率随机选择一个索引，即某个数值上限内随机多少次。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int RandomByFixedProbability(int[] args)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>args</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>[]</dt>
+    <dd><p>概率数组，每个元素表示相应索引的概率。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>随机选择的索引值。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandomByWeight_" data-uid="Fantasy.RandomHelper.RandomByWeight*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandomByWeight_System_Int32___" data-uid="Fantasy.RandomHelper.RandomByWeight(System.Int32[])">
+  RandomByWeight(int[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据权重随机选择一个索引。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int RandomByWeight(int[] weights)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>weights</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>[]</dt>
+    <dd><p>权重数组，每个元素表示相应索引的权重。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>随机选择的索引值。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandomNumber_" data-uid="Fantasy.RandomHelper.RandomNumber*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandomNumber_System_Int32_System_Int32_" data-uid="Fantasy.RandomHelper.RandomNumber(System.Int32,System.Int32)">
+  RandomNumber(int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>在指定范围内生成一个随机整数（包含下限，不包含上限）。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int RandomNumber(int lower, int upper)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>lower</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>下限。</p>
+</dd>
+    <dt><code>upper</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>上限。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>生成的随机整数。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RandomHelper_RandomNumberCode_" data-uid="Fantasy.RandomHelper.RandomNumberCode*"></a>
+
+  <h3 id="Fantasy_RandomHelper_RandomNumberCode_System_Int32_" data-uid="Fantasy.RandomHelper.RandomNumberCode(System.Int32)">
+  RandomNumberCode(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>生成指定长度的随机数字代码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string RandomNumberCode(int len = 6)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>len</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>数字代码的长度。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>生成的随机数字代码。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

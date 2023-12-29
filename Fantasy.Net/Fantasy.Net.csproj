@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <RootNamespace>Fantasy.Server</RootNamespace>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <DocumentationFile></DocumentationFile>
+        <DocumentationFile>D:\Data\git\Fantasy\DocFx\Src\Fantasy.Net.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup>

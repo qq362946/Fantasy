@@ -1,0 +1,929 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>ByteHelper 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="ByteHelper 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.ByteHelper">
+
+
+
+  <h1 id="Fantasy_ByteHelper" data-uid="Fantasy.ByteHelper" class="text-break">
+    ByteHelper 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>提供字节操作辅助方法的静态类。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class ByteHelper</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ByteHelper</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_ByteHelper_MergeBytes_" data-uid="Fantasy.ByteHelper.MergeBytes*"></a>
+
+  <h3 id="Fantasy_ByteHelper_MergeBytes_System_Byte___System_Byte___" data-uid="Fantasy.ByteHelper.MergeBytes(System.Byte[],System.Byte[])">
+  MergeBytes(byte[], byte[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>合并两个字节数组。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] MergeBytes(byte[] bytes, byte[] otherBytes)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>第一个字节数组</p>
+</dd>
+    <dt><code>otherBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>第二个字节数组</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>合并后的字节数组</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ReadInt32_" data-uid="Fantasy.ByteHelper.ReadInt32*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ReadInt32_System_IO_FileStream_" data-uid="Fantasy.ByteHelper.ReadInt32(System.IO.FileStream)">
+  ReadInt32(FileStream)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从指定的文件流中读取一个 32 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int ReadInt32(FileStream stream)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filestream">FileStream</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ReadInt32_" data-uid="Fantasy.ByteHelper.ReadInt32*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ReadInt32_System_IO_MemoryStream_" data-uid="Fantasy.ByteHelper.ReadInt32(System.IO.MemoryStream)">
+  ReadInt32(MemoryStream)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从指定的内存流中读取一个 32 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int ReadInt32(MemoryStream stream)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ReadInt64_" data-uid="Fantasy.ByteHelper.ReadInt64*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ReadInt64_System_IO_FileStream_" data-uid="Fantasy.ByteHelper.ReadInt64(System.IO.FileStream)">
+  ReadInt64(FileStream)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从指定的文件流中读取一个 64 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static long ReadInt64(FileStream stream)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filestream">FileStream</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ReadInt64_" data-uid="Fantasy.ByteHelper.ReadInt64*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ReadInt64_System_IO_MemoryStream_" data-uid="Fantasy.ByteHelper.ReadInt64(System.IO.MemoryStream)">
+  ReadInt64(MemoryStream)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从指定的内存流中读取一个 64 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static long ReadInt64(MemoryStream stream)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ToHex_" data-uid="Fantasy.ByteHelper.ToHex*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ToHex_System_Byte_" data-uid="Fantasy.ByteHelper.ToHex(System.Byte)">
+  ToHex(byte)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节转换为十六进制字符串表示。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToHex(this byte b)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>b</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ToHex_" data-uid="Fantasy.ByteHelper.ToHex*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ToHex_System_Byte___" data-uid="Fantasy.ByteHelper.ToHex(System.Byte[])">
+  ToHex(byte[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数组转换为十六进制字符串表示。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToHex(this byte[] bytes)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ToHex_" data-uid="Fantasy.ByteHelper.ToHex*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ToHex_System_Byte___System_Int32_System_Int32_" data-uid="Fantasy.ByteHelper.ToHex(System.Byte[],System.Int32,System.Int32)">
+  ToHex(byte[], int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数组的指定范围按十六进制格式转换为字符串表示。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToHex(this byte[] bytes, int offset, int count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ToHex_" data-uid="Fantasy.ByteHelper.ToHex*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ToHex_System_Byte___System_String_" data-uid="Fantasy.ByteHelper.ToHex(System.Byte[],System.String)">
+  ToHex(byte[], string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数组按指定格式转换为十六进制字符串表示。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToHex(this byte[] bytes, string format)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>format</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ToReadableSpeed_" data-uid="Fantasy.ByteHelper.ToReadableSpeed*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ToReadableSpeed_System_Int64_" data-uid="Fantasy.ByteHelper.ToReadableSpeed(System.Int64)">
+  ToReadableSpeed(long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数转换为可读的速度表示。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToReadableSpeed(this long byteCount)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>byteCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>字节数</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>可读的速度表示</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ToReadableSpeed_" data-uid="Fantasy.ByteHelper.ToReadableSpeed*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ToReadableSpeed_System_UInt64_" data-uid="Fantasy.ByteHelper.ToReadableSpeed(System.UInt64)">
+  ToReadableSpeed(ulong)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数转换为可读的速度表示。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToReadableSpeed(this ulong byteCount)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>byteCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></dt>
+    <dd><p>字节数</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>可读的速度表示</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ToStr_" data-uid="Fantasy.ByteHelper.ToStr*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ToStr_System_Byte___" data-uid="Fantasy.ByteHelper.ToStr(System.Byte[])">
+  ToStr(byte[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数组转换为默认编码的字符串表示。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToStr(this byte[] bytes)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_ToStr_" data-uid="Fantasy.ByteHelper.ToStr*"></a>
+
+  <h3 id="Fantasy_ByteHelper_ToStr_System_Byte___System_Int32_System_Int32_" data-uid="Fantasy.ByteHelper.ToStr(System.Byte[],System.Int32,System.Int32)">
+  ToStr(byte[], int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数组的指定范围按默认编码转换为字符串表示。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ToStr(this byte[] bytes, int index, int count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>index</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_Utf8ToStr_" data-uid="Fantasy.ByteHelper.Utf8ToStr*"></a>
+
+  <h3 id="Fantasy_ByteHelper_Utf8ToStr_System_Byte___" data-uid="Fantasy.ByteHelper.Utf8ToStr(System.Byte[])">
+  Utf8ToStr(byte[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数组转换为 UTF-8 编码的字符串表示。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string Utf8ToStr(this byte[] bytes)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_Utf8ToStr_" data-uid="Fantasy.ByteHelper.Utf8ToStr*"></a>
+
+  <h3 id="Fantasy_ByteHelper_Utf8ToStr_System_Byte___System_Int32_System_Int32_" data-uid="Fantasy.ByteHelper.Utf8ToStr(System.Byte[],System.Int32,System.Int32)">
+  Utf8ToStr(byte[], int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数组的指定范围按 UTF-8 编码转换为字符串表示。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string Utf8ToStr(this byte[] bytes, int index, int count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>index</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_WriteTo_" data-uid="Fantasy.ByteHelper.WriteTo*"></a>
+
+  <h3 id="Fantasy_ByteHelper_WriteTo_System_Byte___System_Int32_System_Byte_" data-uid="Fantasy.ByteHelper.WriteTo(System.Byte[],System.Int32,System.Byte)">
+  WriteTo(byte[], int, byte)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节写入字节数组的指定偏移位置。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WriteTo(this byte[] bytes, int offset, byte num)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>num</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_WriteTo_" data-uid="Fantasy.ByteHelper.WriteTo*"></a>
+
+  <h3 id="Fantasy_ByteHelper_WriteTo_System_Byte___System_Int32_System_Int16_" data-uid="Fantasy.ByteHelper.WriteTo(System.Byte[],System.Int32,System.Int16)">
+  WriteTo(byte[], int, short)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将有符号短整数写入字节数组的指定偏移位置。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WriteTo(this byte[] bytes, int offset, short num)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>num</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int16">short</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_WriteTo_" data-uid="Fantasy.ByteHelper.WriteTo*"></a>
+
+  <h3 id="Fantasy_ByteHelper_WriteTo_System_Byte___System_Int32_System_Int32_" data-uid="Fantasy.ByteHelper.WriteTo(System.Byte[],System.Int32,System.Int32)">
+  WriteTo(byte[], int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将有符号整数写入字节数组的指定偏移位置。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WriteTo(this byte[] bytes, int offset, int num)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>num</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_WriteTo_" data-uid="Fantasy.ByteHelper.WriteTo*"></a>
+
+  <h3 id="Fantasy_ByteHelper_WriteTo_System_Byte___System_Int32_System_UInt16_" data-uid="Fantasy.ByteHelper.WriteTo(System.Byte[],System.Int32,System.UInt16)">
+  WriteTo(byte[], int, ushort)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将无符号短整数写入字节数组的指定偏移位置。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WriteTo(this byte[] bytes, int offset, ushort num)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>num</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint16">ushort</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ByteHelper_WriteTo_" data-uid="Fantasy.ByteHelper.WriteTo*"></a>
+
+  <h3 id="Fantasy_ByteHelper_WriteTo_System_Byte___System_Int32_System_UInt32_" data-uid="Fantasy.ByteHelper.WriteTo(System.Byte[],System.Int32,System.UInt32)">
+  WriteTo(byte[], int, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将无符号整数写入字节数组的指定偏移位置。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WriteTo(this byte[] bytes, int offset, uint num)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>num</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

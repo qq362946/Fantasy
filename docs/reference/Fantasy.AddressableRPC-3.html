@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>AddressableRPC&lt;TEntity, TRouteRequest, TRouteResponse&gt; 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="AddressableRPC&lt;TEntity, TRouteRequest, TRouteResponse&gt; 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.AddressableRPC`3">
+
+
+
+  <h1 id="Fantasy_AddressableRPC_3" data-uid="Fantasy.AddressableRPC`3" class="text-break">
+    AddressableRPC&lt;TEntity, TRouteRequest, TRouteResponse&gt; 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>泛型可寻址RPC路由基类，实现了 <a class="xref" href="Fantasy.IRouteMessageHandler.html">IRouteMessageHandler</a> 接口，用于处理特定实体和可寻址RPC路由请求类型的路由。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class AddressableRPC&lt;TEntity, TRouteRequest, TRouteResponse&gt; : IRouteMessageHandler where TEntity : Entity where TRouteRequest : IAddressableRouteRequest where TRouteResponse : IAddressableRouteResponse</code></pre>
+  </div>
+
+
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>TEntity</code></dt>
+    <dd><p>实体类型。</p>
+</dd>
+    <dt><code>TRouteRequest</code></dt>
+    <dd><p>可寻址RPC路由请求类型。</p>
+</dd>
+    <dt><code>TRouteResponse</code></dt>
+    <dd><p>可寻址RPC路由响应类型。</p>
+</dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">AddressableRPC&lt;TEntity, TRouteRequest, TRouteResponse&gt;</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>实现</dt>
+    <dd>
+      <div><a class="xref" href="Fantasy.IRouteMessageHandler.html">IRouteMessageHandler</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">构造函数
+</h2>
+
+
+  <a id="Fantasy_AddressableRPC_3__ctor_" data-uid="Fantasy.AddressableRPC`3.#ctor*"></a>
+
+  <h3 id="Fantasy_AddressableRPC_3__ctor" data-uid="Fantasy.AddressableRPC`3.#ctor">
+  AddressableRPC()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AddressableRPC()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_AddressableRPC_3_Handle_" data-uid="Fantasy.AddressableRPC`3.Handle*"></a>
+
+  <h3 id="Fantasy_AddressableRPC_3_Handle_Fantasy_Session_Fantasy_Entity_System_UInt32_System_Object_" data-uid="Fantasy.AddressableRPC`3.Handle(Fantasy.Session,Fantasy.Entity,System.UInt32,System.Object)">
+  Handle(Session, Entity, uint, object)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>处理可寻址RPC路由请求。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FTask Handle(Session session, Entity entity, uint rpcId, object routeMessage)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>session</code> <a class="xref" href="Fantasy.Session.html">Session</a></dt>
+    <dd><p>会话。</p>
+</dd>
+    <dt><code>entity</code> <a class="xref" href="Fantasy.Entity.html">Entity</a></dt>
+    <dd><p>实体。</p>
+</dd>
+    <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>RPC标识。</p>
+</dd>
+    <dt><code>routeMessage</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>可寻址RPC路由请求。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_AddressableRPC_3_Run_" data-uid="Fantasy.AddressableRPC`3.Run*"></a>
+
+  <h3 id="Fantasy_AddressableRPC_3_Run__0__1__2_System_Action_" data-uid="Fantasy.AddressableRPC`3.Run(`0,`1,`2,System.Action)">
+  Run(TEntity, TRouteRequest, TRouteResponse, Action)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>运行处理可寻址RPC路由请求。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract FTask Run(TEntity entity, TRouteRequest request, TRouteResponse response, Action reply)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>entity</code> <span class="xref">TEntity</span></dt>
+    <dd><p>实体。</p>
+</dd>
+    <dt><code>request</code> <span class="xref">TRouteRequest</span></dt>
+    <dd><p>可寻址RPC路由请求。</p>
+</dd>
+    <dt><code>response</code> <span class="xref">TRouteResponse</span></dt>
+    <dd><p>可寻址RPC路由响应。</p>
+</dd>
+    <dt><code>reply</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a></dt>
+    <dd><p>回复操作。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_AddressableRPC_3_Type_" data-uid="Fantasy.AddressableRPC`3.Type*"></a>
+
+  <h3 id="Fantasy_AddressableRPC_3_Type" data-uid="Fantasy.AddressableRPC`3.Type">
+  Type()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取消息类型。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Type Type()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>消息类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

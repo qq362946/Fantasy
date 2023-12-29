@@ -90,8 +90,7 @@
   <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>用于 RecyclableMemoryStream 的 ETW 事件。</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -269,8 +268,7 @@ public sealed class RecyclableMemoryStreamManager.Events : EventSource, IDisposa
   
   </h3>
 
-  <div class="markdown level1 summary"><p>静态日志对象，通过它写入所有事件。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -305,8 +303,7 @@ public sealed class RecyclableMemoryStreamManager.Events : EventSource, IDisposa
   
   </h3>
 
-  <div class="markdown level1 summary"><p>在创建流对象时记录的事件。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -317,17 +314,13 @@ public void MemoryStreamCreated(Guid guid, string tag, long requestedSize, long 
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>guid</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>此流的唯一 ID。</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>临时 ID，通常表示当前使用情况。</p>
-</dd>
+    <dd></dd>
     <dt><code>requestedSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>流的请求大小。</p>
-</dd>
+    <dd></dd>
     <dt><code>actualSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>从池中分配给流的实际大小。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -348,8 +341,7 @@ public void MemoryStreamCreated(Guid guid, string tag, long requestedSize, long 
   
   </h3>
 
-  <div class="markdown level1 summary"><p>当缓冲区被丢弃时记录的事件（没有放回池中，而是交由 GC 清理）。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -360,35 +352,25 @@ public void MemoryStreamDiscardBuffer(Guid guid, string tag, RecyclableMemoryStr
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>guid</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>唯一的流 ID。</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>临时 ID，通常表示当前使用情况。</p>
-</dd>
+    <dd></dd>
     <dt><code>bufferType</code> <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.Events.html">Events</a>.<a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.Events.MemoryStreamBufferType.html">MemoryStreamBufferType</a></dt>
-    <dd><p>被丢弃的缓冲区类型。</p>
-</dd>
+    <dd></dd>
     <dt><code>reason</code> <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.Events.html">Events</a>.<a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.Events.MemoryStreamDiscardReason.html">MemoryStreamDiscardReason</a></dt>
-    <dd><p>丢弃原因。</p>
-</dd>
+    <dd></dd>
     <dt><code>smallBlocksFree</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>小块池中的空闲块数。</p>
-</dd>
+    <dd></dd>
     <dt><code>smallPoolBytesFree</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>小块池中的空闲字节数。</p>
-</dd>
+    <dd></dd>
     <dt><code>smallPoolBytesInUse</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>从小块池中使用的字节数。</p>
-</dd>
+    <dd></dd>
     <dt><code>largeBlocksFree</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>大缓冲区池中的空闲块数。</p>
-</dd>
+    <dd></dd>
     <dt><code>largePoolBytesFree</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>大缓冲区池中的空闲字节数。</p>
-</dd>
+    <dd></dd>
     <dt><code>largePoolBytesInUse</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>从大缓冲区池中使用的字节数。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -409,8 +391,7 @@ public void MemoryStreamDiscardBuffer(Guid guid, string tag, RecyclableMemoryStr
   
   </h3>
 
-  <div class="markdown level1 summary"><p>当流被释放时记录的事件。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -421,20 +402,15 @@ public void MemoryStreamDisposed(Guid guid, string tag, long lifetimeMs, string 
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>guid</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>此流的唯一 ID。</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>临时 ID，通常表示当前使用情况。</p>
-</dd>
+    <dd></dd>
     <dt><code>lifetimeMs</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>流的生命周期（毫秒）。</p>
-</dd>
+    <dd></dd>
     <dt><code>allocationStack</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>初始分配的调用堆栈。</p>
-</dd>
+    <dd></dd>
     <dt><code>disposeStack</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>释放的调用堆栈。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -455,8 +431,7 @@ public void MemoryStreamDisposed(Guid guid, string tag, long lifetimeMs, string 
   
   </h3>
 
-  <div class="markdown level1 summary"><p>当流第二次被释放时记录的事件。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -467,20 +442,15 @@ public void MemoryStreamDoubleDispose(Guid guid, string tag, string allocationSt
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>guid</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>此流的唯一 ID。</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>临时 ID，通常表示当前使用情况。</p>
-</dd>
+    <dd></dd>
     <dt><code>allocationStack</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>初始分配的调用堆栈。</p>
-</dd>
+    <dd></dd>
     <dt><code>disposeStack1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>第一次释放的调用堆栈。</p>
-</dd>
+    <dd></dd>
     <dt><code>disposeStack2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>第二次释放的调用堆栈。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -490,9 +460,6 @@ public void MemoryStreamDoubleDispose(Guid guid, string tag, string allocationSt
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_Events_MemoryStreamDoubleDispose_System_Guid_System_String_System_String_System_String_System_String__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>注意：只有在 RecyclableMemoryStreamManager.GenerateCallStacks 为 true 时，堆栈才会被填充。</p>
-</div>
 
 
 
@@ -504,8 +471,7 @@ public void MemoryStreamDoubleDispose(Guid guid, string tag, string allocationSt
   
   </h3>
 
-  <div class="markdown level1 summary"><p>当流被终结时记录的事件。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -516,14 +482,11 @@ public void MemoryStreamFinalized(Guid guid, string tag, string allocationStack)
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>guid</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>此流的唯一 ID。</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>临时 ID，通常表示当前使用情况。</p>
-</dd>
+    <dd></dd>
     <dt><code>allocationStack</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>初始分配的调用堆栈。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -533,9 +496,6 @@ public void MemoryStreamFinalized(Guid guid, string tag, string allocationStack)
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_Events_MemoryStreamFinalized_System_Guid_System_String_System_String__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>注意：只有在 RecyclableMemoryStreamManager.GenerateCallStacks 为 true 时，堆栈才会被填充。</p>
-</div>
 
 
 
@@ -547,8 +507,7 @@ public void MemoryStreamFinalized(Guid guid, string tag, string allocationStack)
   
   </h3>
 
-  <div class="markdown level1 summary"><p>当 RecyclableMemoryStreamManager 被初始化时记录的事件。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -559,14 +518,11 @@ public void MemoryStreamManagerInitialized(int blockSize, int largeBufferMultipl
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>blockSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>块的大小，以字节为单位。</p>
-</dd>
+    <dd></dd>
     <dt><code>largeBufferMultiple</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>大缓冲区的倍数，以字节为单位。</p>
-</dd>
+    <dd></dd>
     <dt><code>maximumBufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>最大缓冲区大小，以字节为单位。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -587,8 +543,7 @@ public void MemoryStreamManagerInitialized(int blockSize, int largeBufferMultipl
   
   </h3>
 
-  <div class="markdown level1 summary"><p>当创建新的块时记录的事件。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -599,8 +554,7 @@ public void MemoryStreamNewBlockCreated(long smallPoolInUseBytes)</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>smallPoolInUseBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>当前在小块池中使用的字节数。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -621,8 +575,7 @@ public void MemoryStreamNewBlockCreated(long smallPoolInUseBytes)</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>当创建新的大缓冲区时记录的事件。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -633,11 +586,9 @@ public void MemoryStreamNewLargeBufferCreated(long requiredSize, long largePoolI
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>请求的大小。</p>
-</dd>
+    <dd></dd>
     <dt><code>largePoolInUseBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>当前在大缓冲区池中使用的字节数。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -658,8 +609,7 @@ public void MemoryStreamNewLargeBufferCreated(long requiredSize, long largePoolI
   
   </h3>
 
-  <div class="markdown level1 summary"><p>当创建的缓冲区过大无法放入池中时记录的事件。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -670,17 +620,13 @@ public void MemoryStreamNonPooledLargeBufferCreated(Guid guid, string tag, long 
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>guid</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>唯一的流 ID。</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>临时 ID，通常表示当前使用情况。</p>
-</dd>
+    <dd></dd>
     <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>调用者请求的大小。</p>
-</dd>
+    <dd></dd>
     <dt><code>allocationStack</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>请求流的调用堆栈。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -690,9 +636,6 @@ public void MemoryStreamNonPooledLargeBufferCreated(Guid guid, string tag, long 
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_Events_MemoryStreamNonPooledLargeBufferCreated_System_Guid_System_String_System_Int64_System_String__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>注意：只有在 RecyclableMemoryStreamManager.GenerateCallStacks 为 true 时，堆栈才会被填充。</p>
-</div>
 
 
 
@@ -704,8 +647,7 @@ public void MemoryStreamNonPooledLargeBufferCreated(Guid guid, string tag, long 
   
   </h3>
 
-  <div class="markdown level1 summary"><p>当流的容量超过最大值时记录的事件。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -716,20 +658,15 @@ public void MemoryStreamOverCapacity(Guid guid, string tag, long requestedCapaci
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>guid</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>唯一的流 ID。</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>临时 ID，通常表示当前使用情况。</p>
-</dd>
+    <dd></dd>
     <dt><code>requestedCapacity</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>请求的容量。</p>
-</dd>
+    <dd></dd>
     <dt><code>maxCapacity</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>最大容量，由 RecyclableMemoryStreamManager 配置。</p>
-</dd>
+    <dd></dd>
     <dt><code>allocationStack</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>容量请求的调用堆栈。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -739,9 +676,6 @@ public void MemoryStreamOverCapacity(Guid guid, string tag, long requestedCapaci
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_Events_MemoryStreamOverCapacity_System_Guid_System_String_System_Int64_System_Int64_System_String__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>注意：只有在 RecyclableMemoryStreamManager.GenerateCallStacks 为 true 时，堆栈才会被填充。</p>
-</div>
 
 
 
@@ -753,8 +687,7 @@ public void MemoryStreamOverCapacity(Guid guid, string tag, long requestedCapaci
   
   </h3>
 
-  <div class="markdown level1 summary"><p>当流的 ToArray 方法被调用时记录的事件。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -765,17 +698,13 @@ public void MemoryStreamToArray(Guid guid, string tag, string stack, long size)<
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>guid</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>此流的唯一 ID。</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>临时 ID，通常表示当前使用情况。</p>
-</dd>
+    <dd></dd>
     <dt><code>stack</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>ToArray 方法的调用堆栈。</p>
-</dd>
+    <dd></dd>
     <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>流的长度。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -785,9 +714,6 @@ public void MemoryStreamToArray(Guid guid, string tag, string stack, long size)<
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_Events_MemoryStreamToArray_System_Guid_System_String_System_String_System_Int64__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>注意：只有在 RecyclableMemoryStreamManager.GenerateCallStacks 为 true 时，堆栈才会被填充。</p>
-</div>
 
 
 
