@@ -94,6 +94,8 @@ namespace Fantasy
     /// <typeparam name="TRouteResponse">路由响应类型。</typeparam>
     public abstract class RouteRPC<TEntity, TRouteRequest, TRouteResponse> : IRouteMessageHandler where TEntity : Entity where TRouteRequest : IRouteRequest where TRouteResponse : IRouteResponse
     {
+        private readonly Func<TRouteResponse> _creator = EmitHelper.CreateDefaultConstructor<TRouteResponse>();
+        
         /// <summary>
         /// 获取处理的消息类型。
         /// </summary>
@@ -126,7 +128,7 @@ namespace Fantasy
             }
             
             var isReply = false;
-            var response = Activator.CreateInstance<TRouteResponse>();
+            var response = _creator();
             
             void Reply()
             {
@@ -248,6 +250,8 @@ namespace Fantasy
     /// <typeparam name="TRouteResponse">可寻址RPC路由响应类型。</typeparam>
     public abstract class AddressableRPC<TEntity, TRouteRequest, TRouteResponse> : IRouteMessageHandler where TEntity : Entity where TRouteRequest : IAddressableRouteRequest where TRouteResponse : IAddressableRouteResponse
     {
+        private readonly Func<TRouteResponse> _creator = EmitHelper.CreateDefaultConstructor<TRouteResponse>();
+        
         /// <summary>
         /// 获取消息类型。
         /// </summary>
@@ -279,7 +283,7 @@ namespace Fantasy
             }
             
             var isReply = false;
-            var response = Activator.CreateInstance<TRouteResponse>();
+            var response = _creator();
             
             void Reply()
             {
