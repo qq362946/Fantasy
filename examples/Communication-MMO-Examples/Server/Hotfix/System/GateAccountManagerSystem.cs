@@ -52,10 +52,9 @@ public static class GateAccountManagerSystem
     // 重置gateAccount数据，和移除sessionPlayerComponent,寻址路由组件
     public static void QuitGate(this GateAccountManager self, GateAccount gateAccount,bool force = false)
     {
-        // 不用从GateAccountManager清除gateAccount的，重置数据即可
+        // 不用从GateAccountManager清除gateAccount的，重置gateAccount数据即可
         gateAccount.SessionRumtimeId = 0;
         gateAccount.LoginedGate = false;
-
         gateAccount.SelectRoleId = 0;
 
         // 如果是掉线强制退出网关，已经dispose不用移除sessionPlayerComponent,寻址路由组件
