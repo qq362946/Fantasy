@@ -74,6 +74,8 @@ namespace Fantasy
     /// </summary>
     public abstract class MessageRPC<TRequest, TResponse> : IMessageHandler where TRequest : IRequest where TResponse : IResponse
     {
+        private readonly Func<TResponse> _creator = EmitHelper.CreateDefaultConstructor<TResponse>();
+        
         /// <summary>
         /// 获取处理的消息类型。
         /// </summary>
@@ -99,7 +101,7 @@ namespace Fantasy
                 return;
             }
             
-            var response = Activator.CreateInstance<TResponse>();
+            var response = _creator();
             var isReply = false;
 
             void Reply()
