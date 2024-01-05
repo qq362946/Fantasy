@@ -38,7 +38,7 @@ namespace Fantasy
             UIComponent.LayerDictionary[(int)layer].Add(this);
         }
         
-        public T AddComponent<T>(UILayer layer = UILayer.BaseRoot) where T : UI, new()
+        public T AddComponent<T>(UILayer layer = UILayer.None) where T : UI, new()
         {
             var uiComponent = UIComponent.Instance.Create<T>(layer, false);
             AddComponent(uiComponent);
@@ -47,7 +47,7 @@ namespace Fantasy
             return uiComponent;
         }
 
-        public async FTask<T> AddComponentAsync<T>(UILayer layer = UILayer.BaseRoot) where T : UI, new()
+        public async FTask<T> AddComponentAsync<T>(UILayer layer = UILayer.None) where T : UI, new()
         {
             var uiComponent = await UIComponent.Instance.CreateAsync<T>(layer, false);
             AddComponent(uiComponent);
