@@ -156,7 +156,9 @@ namespace Fantasy
                     canvas.renderMode = RenderMode.ScreenSpaceCamera;
                     canvas.worldCamera = Camera;
                     canvas.sortingOrder = i;
+#if UNITY_2022_1_OR_NEWER
                     canvas.vertexColorAlwaysGammaSpace = true;
+#endif
                     var canvasScaler = layer.AddComponent<CanvasScaler>();
                     canvasScaler.uiScaleMode = scaleMode;
                     canvasScaler.screenMatchMode = screenMatchMode;
@@ -175,7 +177,7 @@ namespace Fantasy
 
         #region Create
 
-        public async FTask<T> CreateAsync<T>(UILayer layer = UILayer.BaseRoot, bool isRunEvent = true) where T : UI, new()
+        public async FTask<T> CreateAsync<T>(UILayer layer = UILayer.None, bool isRunEvent = true) where T : UI, new()
         {
             var ui = Create<T>(Scene, false);
 
@@ -193,7 +195,7 @@ namespace Fantasy
                 // 实例化GameObject
                 ui.GameObject = Object.Instantiate(gameObject);
                 // 设置UI的Layer
-                ui.SetLayer(layer);
+                ui.SetLayer(layer == UILayer.None ? ui.Layer : layer);
                 // 执行初始化
                 ui.Initialize();
                 
@@ -215,10 +217,10 @@ namespace Fantasy
             return ui;
         }
 
-        public T Create<T>(UILayer layer = UILayer.BaseRoot, bool isRunEvent = true) where T : UI, new()
+        public T Create<T>(UILayer layer = UILayer.None, bool isRunEvent = true) where T : UI, new()
         {
             var ui = Create<T>(Scene, false);
-
+            
             try
             {
                 if (string.IsNullOrEmpty(ui.AssetName) || string.IsNullOrEmpty(ui.BundleName))
@@ -233,7 +235,7 @@ namespace Fantasy
                 // 实例化GameObject
                 ui.GameObject = Object.Instantiate(gameObject);
                 // 设置UI的Layer
-                ui.SetLayer(layer);
+                ui.SetLayer(layer == UILayer.None ? ui.Layer : layer);
                 // 执行初始化
                 ui.Initialize();
                 
@@ -260,7 +262,7 @@ namespace Fantasy
 
         #region Component
 
-        public T AddComponent<T>(UILayer layer = UILayer.BaseRoot) where T : UI, new()
+        public T AddComponent<T>(UILayer layer = UILayer.None) where T : UI, new()
         {
             var uiComponent = Create<T>(layer, false);
             AddComponent(uiComponent);
@@ -269,7 +271,7 @@ namespace Fantasy
             return uiComponent;
         }
 
-        public async FTask<T> AddComponentAsync<T>(UILayer layer = UILayer.BaseRoot) where T : UI, new()
+        public async FTask<T> AddComponentAsync<T>(UILayer layer = UILayer.None) where T : UI, new()
         {
             var uiComponent = await CreateAsync<T>(layer, false);
             AddComponent(uiComponent);

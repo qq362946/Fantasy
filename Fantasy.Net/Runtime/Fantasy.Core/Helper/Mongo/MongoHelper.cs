@@ -76,6 +76,11 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <returns>反序列化后的对象。</returns>
     public object Deserialize(Memory<byte> memory, Type type)
     {
+        if (memory.Length == 0)
+        {
+            return Activator.CreateInstance(type);
+        }
+        
         using var stream = MemoryStreamHelper.GetRecyclableMemoryStream();
         stream.Write(memory.Span);
         stream.Seek(0, SeekOrigin.Begin);
@@ -90,6 +95,11 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <returns>反序列化后的对象。</returns>
     public object Deserialize<T>(Span<byte> span)
     {
+        if (span.Length == 0)
+        {
+            return Activator.CreateInstance(typeof(T));
+        }
+        
         using var stream = MemoryStreamHelper.GetRecyclableMemoryStream();
         stream.Write(span);
         stream.Seek(0, SeekOrigin.Begin);
@@ -104,6 +114,11 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <returns>反序列化后的对象。</returns>
     public object Deserialize<T>(Memory<byte> memory)
     {
+        if (memory.Length == 0)
+        {
+            return Activator.CreateInstance(typeof(T));
+        }
+        
         using var stream = MemoryStreamHelper.GetRecyclableMemoryStream();
         stream.Seek(0, SeekOrigin.Begin);
         return BsonSerializer.Deserialize<T>(stream);
@@ -117,6 +132,11 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <returns>反序列化后的对象。</returns>
     public T Deserialize<T>(byte[] bytes)
     {
+        if (bytes.Length == 0)
+        {
+            return (T)Activator.CreateInstance(typeof(T));
+        }
+        
         return BsonSerializer.Deserialize<T>(bytes);
     }
 
@@ -128,7 +148,7 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <returns>反序列化后的对象。</returns>
     public object Deserialize(byte[] bytes, Type type)
     {
-        return BsonSerializer.Deserialize(bytes, type);
+        return bytes.Length == 0 ? Activator.CreateInstance(type) : BsonSerializer.Deserialize(bytes, type);
     }
 
     /// <summary>
@@ -139,7 +159,7 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <returns>反序列化后的对象。</returns>
     public object Deserialize(byte[] bytes, string type)
     {
-        return BsonSerializer.Deserialize(bytes, Type.GetType(type));
+        return bytes.Length == 0 ? Activator.CreateInstance(Type.GetType(type)) : BsonSerializer.Deserialize(bytes, Type.GetType(type));
     }
 
     /// <summary>
@@ -150,6 +170,11 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <returns>反序列化后的对象。</returns>
     public T Deserialize<T>(Stream stream)
     {
+        if (stream.Length == 0)
+        {
+            return (T)Activator.CreateInstance(typeof(T));
+        }
+        
         return BsonSerializer.Deserialize<T>(stream);
     }
 
@@ -161,7 +186,7 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <returns>反序列化后的对象。</returns>
     public object Deserialize(Stream stream, Type type)
     {
-        return BsonSerializer.Deserialize(stream, type);
+        return stream.Length == 0 ? Activator.CreateInstance(type) : BsonSerializer.Deserialize(stream, type);
     }
 
     /// <summary>
@@ -172,7 +197,7 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <returns>反序列化后的对象。</returns>
     public object DeserializeFrom(Type type, MemoryStream stream)
     {
-        return Deserialize(stream, type);
+        return stream.Length == 0 ? Activator.CreateInstance(type) : Deserialize(stream, type);
     }
 
     /// <summary>
@@ -196,7 +221,14 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <returns>反序列化后的对象。</returns>
     public T DeserializeFrom<T>(byte[] bytes, int index, int count)
     {
-        return BsonSerializer.Deserialize<T>(bytes.AsMemory(index, count).ToArray());
+        var asMemory = bytes.AsMemory(index, count);
+
+        if (asMemory.Length == 0)
+        {
+            return (T)Activator.CreateInstance(typeof(T));
+        }
+        
+        return BsonSerializer.Deserialize<T>(asMemory.ToArray());
     }
 
     /// <summary>
