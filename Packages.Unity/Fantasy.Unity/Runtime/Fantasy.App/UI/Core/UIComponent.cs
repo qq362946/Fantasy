@@ -156,9 +156,7 @@ namespace Fantasy
                     canvas.renderMode = RenderMode.ScreenSpaceCamera;
                     canvas.worldCamera = Camera;
                     canvas.sortingOrder = i;
-#if UNITY_2022_1_OR_NEWER
                     canvas.vertexColorAlwaysGammaSpace = true;
-#endif
                     var canvasScaler = layer.AddComponent<CanvasScaler>();
                     canvasScaler.uiScaleMode = scaleMode;
                     canvasScaler.screenMatchMode = screenMatchMode;
