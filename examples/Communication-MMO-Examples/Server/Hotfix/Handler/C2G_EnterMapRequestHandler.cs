@@ -8,6 +8,8 @@ namespace BestGame;
 /// gateAccount.GetMapScene将mapScene信息缓存在gateAccount
 public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_EnterMapResponse>
 {
+    private static readonly CoroutineLockQueueType LockGateAccountLock = new CoroutineLockQueueType("LockGateAccountLock");
+    
     protected override async FTask Run(Session session, C2G_EnterMapRequest request, G2C_EnterMapResponse response, Action reply)
     {
         response.ErrorCode = await Check(session, request, response);
@@ -35,8 +37,8 @@ public class C2G_EnterMapRequestHandler : MessageRPC<C2G_EnterMapRequest,G2C_Ent
         var gateAccount = sessionPlayer.gateAccount;
         var accountId = gateAccount.Id;
 
-        var _LockGateAccountLock = new CoroutineLockQueueType("LockGateAccountLock");
-        using (await _LockGateAccountLock.Lock(accountId))
+        
+        using (await LockGateAccountLock.Lock(accountId))
         {
             try
             {
