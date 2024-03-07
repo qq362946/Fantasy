@@ -512,6 +512,24 @@ namespace Fantasy
             return _multi.TryGetValue(id, out var entity) ? (T) entity : default;
         }
 
+        /// <summary>
+        /// 获取当前实体上的一个指定类型的组件实体。
+        /// </summary>
+        /// <param name="isNullAdd">如果没有查找到就创建一个新的并返回</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T GetComponent<T>(bool isNullAdd) where T : Entity, new()
+        {
+            var component = GetComponent<T>();
+            
+            if (component == null && isNullAdd)
+            {
+                return AddComponent<T>();
+            }
+
+            return component;
+        }
+
         #endregion
 
         #region RemoveComponent

@@ -124,7 +124,8 @@ public class SingleCollection : Singleton<SingleCollection>
             
             collections.Add(treeEntity);
         }
-
+        
+        collections.Add(entity);
         await entity.Scene.World.DateBase.Save(entity.Id, collections);
     }
 }
