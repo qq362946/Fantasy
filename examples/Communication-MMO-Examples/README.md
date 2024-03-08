@@ -7,15 +7,19 @@
 5. 用unity引擎打开前端项目后，导入Communication-MMO-ResLibrary.unitypackage
 6. 服务端用vs或vs code、rider运行Server解决方案
    也可以直接在命令行CD到 \Communication-MMO-Examples\Server\Bin\App目录下，执行命令运行
-   `dotnet Fantasy.App.dll --AppType Game --Mode Develop`
+   `dotnet App.dll --AppType Game --Mode Develop`
 7. 在Unity引擎中打开Init场景，Play运行测试
+  
+----
+### 详细的环境配置与运行指南
+https://www.fantsida.com/d/137
 
 ----
 #### 更新概要
 目前更新到角色进入地图场景
-1. 退出地图，退出网关逻辑待更新
-2. 角色移动控制，移动状态同步待更新
-3. 服务端Aoi待更新
+1. 退出地图，退出网关逻辑（已更新）
+2. 角色移动控制，移动状态同步（已更新）
+3. 服务端Aoi（已更新）
 4. MapConfig，地图刷怪巡逻待更新
 5. 简单的技能系统，攻击技能与buff待更新
 6. 聊天频道与chat服务器待更新

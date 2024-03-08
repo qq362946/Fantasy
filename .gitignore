@@ -14,6 +14,7 @@ ResLibrary/
 # Unity项目文件
 examples/**/Unity/*.sln
 examples/**/Unity/*.csproj
+examples/**/Unity/.vsconfig
 
 # Client-Unity
 HybridCLRData/
