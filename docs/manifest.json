@@ -61,6 +61,9 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "docs/index.md",
       "output": {
@@ -290,10 +293,130 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.AClientNetwork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.AClientNetwork.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ANetwork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ANetwork.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ANetworkChannel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ANetworkChannel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ANetworkMessageScheduler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ANetworkMessageScheduler.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.APackInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.APackInfo.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.APacketParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.APacketParser.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.AProto.yml",
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.AProto.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.Addressable-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.Addressable-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.AddressableHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.AddressableHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.AddressableManageComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.AddressableManageComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.AddressableMessageComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.AddressableMessageComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.AddressableRPC-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.AddressableRPC-3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.AddressableRouteComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.AddressableRouteComponent.html"
         }
       },
       "version": ""
@@ -314,6 +437,26 @@
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.Application.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.AssemblyInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.AssemblyInfo.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.AssemblyManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.AssemblyManager.html"
         }
       },
       "version": ""
@@ -370,6 +513,46 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ByteHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ByteHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.CircularBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.CircularBuffer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ClientMessageScheduler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ClientMessageScheduler.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ClientNetworkComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ClientNetworkComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.CommandLineOptions.yml",
       "output": {
         ".html": {
@@ -380,10 +563,70 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ConcurrentOneToManyList-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ConcurrentOneToManyList-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ConcurrentOneToManyListPool-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ConcurrentOneToManyListPool-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ConcurrentOneToManyQueue-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ConcurrentOneToManyQueue-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ConcurrentOneToManyQueuePool-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ConcurrentOneToManyQueuePool-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.ConcurrentPool-1.yml",
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.ConcurrentPool-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ConfigTableManage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ConfigTableManage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ConnectEntityHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ConnectEntityHandler.html"
         }
       },
       "version": ""
@@ -1550,6 +1793,66 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.CoreErrorCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.CoreErrorCode.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.CoreRouteType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.CoreRouteType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.CoroutineLockQueue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.CoroutineLockQueue.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.CoroutineLockQueueType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.CoroutineLockQueueType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.CoroutineLockTimeout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.CoroutineLockTimeout.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.CryptHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.CryptHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.CustomExport.SceneTypeConfigToEnum.yml",
       "output": {
         ".html": {
@@ -1940,6 +2243,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.Define.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.Define.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.DeserializeSystem-1.yml",
       "output": {
         ".html": {
@@ -1960,6 +2273,46 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.DictionaryExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.DictionaryExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.DictionaryPool-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.DictionaryPool-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.DoubleMapDictionary-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.DoubleMapDictionary-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.DoubleMapDictionaryPool-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.DoubleMapDictionaryPool-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.EntitiesSystem.yml",
       "output": {
         ".html": {
@@ -1974,6 +2327,36 @@
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.Entity.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.EntityDictionary-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.EntityDictionary-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.EntityIdStruct.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.EntityIdStruct.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.EntityList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.EntityList-1.html"
         }
       },
       "version": ""
@@ -2044,6 +2427,66 @@
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.FTaskCompleted.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.FantasySettingsHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.FantasySettingsHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.FileHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.FileHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.FrameUpdateSystem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.FrameUpdateSystem-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.HandlerInfo-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.HandlerInfo-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.HashSetBasePool-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.HashSetBasePool-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.HashSetPool-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.HashSetPool-1.html"
         }
       },
       "version": ""
@@ -2310,6 +2753,36 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IAddressableRouteMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IAddressableRouteMessage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IAddressableRouteRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IAddressableRouteRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IAddressableRouteResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IAddressableRouteResponse.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.IAsyncEvent.yml",
       "output": {
         ".html": {
@@ -2324,6 +2797,146 @@
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.IAwakeSystem.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IBsonAddressableRouteMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IBsonAddressableRouteMessage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IBsonAddressableRouteRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IBsonAddressableRouteRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IBsonAddressableRouteResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IBsonAddressableRouteResponse.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IBsonMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IBsonMessage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IBsonRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IBsonRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IBsonResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IBsonResponse.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IBsonRouteMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IBsonRouteMessage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IBsonRouteRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IBsonRouteRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IBsonRouteResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IBsonRouteResponse.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IConfigTable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IConfigTable.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ICustomRouteMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ICustomRouteMessage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ICustomRouteRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ICustomRouteRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ICustomRouteResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ICustomRouteResponse.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IDateBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IDateBase.html"
         }
       },
       "version": ""
@@ -2370,10 +2983,50 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IFrameUpdateSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IFrameUpdateSystem.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.ILog.yml",
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.ILog.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IMessage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IMessageHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IMessageHandler.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.INetworkUpdate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.INetworkUpdate.html"
         }
       },
       "version": ""
@@ -2560,10 +3213,90 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IPoolMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IPoolMessage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IResponse.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IRouteMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IRouteMessage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IRouteMessageHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IRouteMessageHandler.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IRouteRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IRouteRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IRouteResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IRouteResponse.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.ISingleCollectionRoot.yml",
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.ISingleCollectionRoot.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ISingleton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ISingleton.html"
         }
       },
       "version": ""
@@ -2610,10 +3343,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IUpdateSingleton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IUpdateSingleton.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.IUpdateSystem.yml",
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.IUpdateSystem.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.I_AddressableAddHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.I_AddressableAddHandler.html"
         }
       },
       "version": ""
@@ -2640,6 +3393,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.I_AddressableGetHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.I_AddressableGetHandler.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.I_AddressableGet_Request.yml",
       "output": {
         ".html": {
@@ -2654,6 +3417,16 @@
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.I_AddressableGet_Response.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.I_AddressableLockHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.I_AddressableLockHandler.html"
         }
       },
       "version": ""
@@ -2680,6 +3453,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.I_AddressableRemoveHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.I_AddressableRemoveHandler.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.I_AddressableRemove_Request.yml",
       "output": {
         ".html": {
@@ -2694,6 +3477,16 @@
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.I_AddressableRemove_Response.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.I_AddressableUnLockHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.I_AddressableUnLockHandler.html"
         }
       },
       "version": ""
@@ -2720,10 +3513,170 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IdFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IdFactory.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.InnerMessageScheduler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.InnerMessageScheduler.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.InnerPackInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.InnerPackInfo.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.InnerPacketParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.InnerPacketParser.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.IntDictionaryConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.IntDictionaryConfig.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.JsonHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.JsonHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.KCPClientNetwork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.KCPClientNetwork.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.KCPServerNetwork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.KCPServerNetwork.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.KCPServerNetworkChannel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.KCPServerNetworkChannel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.KCPSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.KCPSettings.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.KcpHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.KcpHeader.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.LinkEntityComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.LinkEntityComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.LinkEntity_Request.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.LinkEntity_Request.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.LinkEntity_Response.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.LinkEntity_Response.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ListPool-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ListPool-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.Log.yml",
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.Log.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.MD5Helper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.MD5Helper.html"
         }
       },
       "version": ""
@@ -2740,6 +3693,106 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.MemoryStreamHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.MemoryStreamHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.Message-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.Message-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.MessageCacheInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.MessageCacheInfo.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.MessageDispatcherSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.MessageDispatcherSystem.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.MessageHelper.NetworkMessageUpdate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.MessageHelper.NetworkMessageUpdate.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.MessageHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.MessageHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.MessageRPC-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.MessageRPC-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.MessageSender.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.MessageSender.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.MongoDataBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.MongoDataBase.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.MongoHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.MongoHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.NLog.yml",
       "output": {
         ".html": {
@@ -2750,10 +3803,260 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.NetAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.NetAction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.NetActionType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.NetActionType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.NetworkHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.NetworkHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.NetworkProtocolType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.NetworkProtocolType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.NetworkTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.NetworkTarget.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.NetworkThread.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.NetworkThread.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.NetworkType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.NetworkType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OnCoroutineLockTimeout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OnCoroutineLockTimeout.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.OnCreateScene.yml",
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.OnCreateScene.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OnNetworkMessageUpdateCheckTimeout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OnNetworkMessageUpdateCheckTimeout.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OnServerStartComplete.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OnServerStartComplete.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OneToManyDictionary-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OneToManyDictionary-3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OneToManyDictionaryPool-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OneToManyDictionaryPool-3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OneToManyHashSet-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OneToManyHashSet-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OneToManyHashSetPool-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OneToManyHashSetPool-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OneToManyList-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OneToManyList-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OneToManyListPool-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OneToManyListPool-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OneToManyQueue-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OneToManyQueue-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OneToManyQueuePool-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OneToManyQueuePool-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OneToManySortedDictionary-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OneToManySortedDictionary-3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OneToManySortedDictionaryPool-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OneToManySortedDictionaryPool-3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.Opcode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.Opcode.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OuterMessageScheduler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OuterMessageScheduler.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OuterPackInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OuterPackInfo.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.OuterPacketParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.OuterPacketParser.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.Packet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.Packet.html"
         }
       },
       "version": ""
@@ -2810,10 +4113,250 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ProtoBufHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ProtoBufHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RandomHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RandomHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStream.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.BlockCreatedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.BlockCreatedEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.BufferDiscardedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.BufferDiscardedEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.Events.MemoryStreamBufferType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.Events.MemoryStreamBufferType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.Events.MemoryStreamDiscardReason.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.Events.MemoryStreamDiscardReason.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.Events.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.Events.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.LargeBufferCreatedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.LargeBufferCreatedEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamConvertedToArrayEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamConvertedToArrayEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamCreatedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamCreatedEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamDisposedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamDisposedEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamDoubleDisposedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamDoubleDisposedEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamFinalizedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamFinalizedEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamLengthEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamLengthEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamOverCapacityEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.StreamOverCapacityEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.UsageReportEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.UsageReportEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RecyclableMemoryStreamManager.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.Response.yml",
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.Response.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ReuseDictionary-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ReuseDictionary-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ReuseList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ReuseList-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.Route-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.Route-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RouteComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RouteComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RouteIdStruct.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RouteIdStruct.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RouteRPC-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RouteRPC-3.html"
         }
       },
       "version": ""
@@ -2830,10 +4373,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.RuntimeIdStruct.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.RuntimeIdStruct.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.STaskStatus.yml",
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.STaskStatus.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ScanException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ScanException.html"
         }
       },
       "version": ""
@@ -2880,6 +4443,56 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ServerInnerSession.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ServerInnerSession.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.ServerNetworkComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.ServerNetworkComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.Session.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.Session.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SessionIdleCheckerComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SessionIdleCheckerComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SingleCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SingleCollection.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.SingleCollectionAttribute.yml",
       "output": {
         ".html": {
@@ -2890,10 +4503,200 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.Singleton-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.Singleton-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SingletonSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SingletonSystem.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SkipTable-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SkipTable-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SkipTableBase-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SkipTableBase-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SkipTableDesc-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SkipTableDesc-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SkipTableNode-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SkipTableNode-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SocketExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SocketExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SortedConcurrentOneToManyList-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SortedConcurrentOneToManyList-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SortedConcurrentOneToManyListPool-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SortedConcurrentOneToManyListPool-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SortedOneToManyHashSet-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SortedOneToManyHashSet-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SortedOneToManyHashSetPool-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SortedOneToManyHashSetPool-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SortedOneToManyList-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SortedOneToManyList-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.SortedOneToManyListPool-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.SortedOneToManyListPool-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.StringDictionaryConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.StringDictionaryConfig.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.StructBsonSerialize-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.StructBsonSerialize-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.TCPClientNetwork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.TCPClientNetwork.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.TCPServerNetwork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.TCPServerNetwork.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.TCPServerNetworkChannel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.TCPServerNetworkChannel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "reference/Fantasy.ThreadSynchronizationContext.yml",
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.ThreadSynchronizationContext.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.TimeHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.TimeHelper.html"
         }
       },
       "version": ""
@@ -2954,6 +4757,36 @@
       "output": {
         ".html": {
           "relative_path": "reference/Fantasy.UpdateSystem-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.WaitCoroutineLock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.WaitCoroutineLock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.World.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.World.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "reference/Fantasy.WorldConfigInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "reference/Fantasy.WorldConfigInfo.html"
         }
       },
       "version": ""

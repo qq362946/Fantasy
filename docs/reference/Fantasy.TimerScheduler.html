@@ -105,7 +105,7 @@
     <dt>继承</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><a class="xref" href="Fantasy.Helper.Singleton-1.html">Singleton</a>&lt;<a class="xref" href="Fantasy.TimerScheduler.html">TimerScheduler</a>&gt;</div>
+      <div><a class="xref" href="Fantasy.Singleton-1.html">Singleton</a>&lt;<a class="xref" href="Fantasy.TimerScheduler.html">TimerScheduler</a>&gt;</div>
       <div><span class="xref">TimerScheduler</span></div>
     </dd>
   </dl>
@@ -113,8 +113,8 @@
   <dl class="typelist implements">
     <dt>实现</dt>
     <dd>
-      <div><a class="xref" href="Fantasy.Helper.IUpdateSingleton.html">IUpdateSingleton</a></div>
-      <div><a class="xref" href="Fantasy.Helper.ISingleton.html">ISingleton</a></div>
+      <div><a class="xref" href="Fantasy.IUpdateSingleton.html">IUpdateSingleton</a></div>
+      <div><a class="xref" href="Fantasy.ISingleton.html">ISingleton</a></div>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
     </dd>
   </dl>
@@ -124,16 +124,13 @@
     <dt>继承成员</dt>
     <dd>
     <div>
-      <a class="xref" href="Fantasy.Helper.Singleton-1.html#Fantasy_Helper_Singleton_1_Initialize">Singleton&lt;TimerScheduler&gt;.Initialize()</a>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_Dispose">Singleton&lt;TimerScheduler&gt;.Dispose()</a>
     </div>
     <div>
-      <a class="xref" href="Fantasy.Helper.Singleton-1.html#Fantasy_Helper_Singleton_1_Dispose">Singleton&lt;TimerScheduler&gt;.Dispose()</a>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_IsDisposed">Singleton&lt;TimerScheduler&gt;.IsDisposed</a>
     </div>
     <div>
-      <a class="xref" href="Fantasy.Helper.Singleton-1.html#Fantasy_Helper_Singleton_1_IsDisposed">Singleton&lt;TimerScheduler&gt;.IsDisposed</a>
-    </div>
-    <div>
-      <a class="xref" href="Fantasy.Helper.Singleton-1.html#Fantasy_Helper_Singleton_1_Instance">Singleton&lt;TimerScheduler&gt;.Instance</a>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_Instance">Singleton&lt;TimerScheduler&gt;.Instance</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
@@ -159,7 +156,7 @@
     <dt>扩展方法</dt>
     <dd>
   <div>
-      <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
   </div>
   </dd></dl>
 
@@ -232,8 +229,130 @@
 
 
 
+
+  <h3 id="Fantasy_TimerScheduler_Frame" data-uid="Fantasy.TimerScheduler.Frame">
+  Frame
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>使用帧运行总时间创建的计时器核心。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly TimerSchedulerCore Frame</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.TimerSchedulerCore.html">TimerSchedulerCore</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
   <h2 class="section" id="methods">方法
 </h2>
+
+
+  <a id="Fantasy_TimerScheduler_FrameUpdate_" data-uid="Fantasy.TimerScheduler.FrameUpdate*"></a>
+
+  <h3 id="Fantasy_TimerScheduler_FrameUpdate" data-uid="Fantasy.TimerScheduler.FrameUpdate">
+  FrameUpdate()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>更新帧计时器任务。自动根据TimeHelper.Now计算帧间隔时间。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void FrameUpdate()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_TimerScheduler_FrameUpdate_" data-uid="Fantasy.TimerScheduler.FrameUpdate*"></a>
+
+  <h3 id="Fantasy_TimerScheduler_FrameUpdate_System_Int32_" data-uid="Fantasy.TimerScheduler.FrameUpdate(System.Int32)">
+  FrameUpdate(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>手动更新帧计时器任务。需要自己计算帧间隔时间。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void FrameUpdate(int frameDeltaTime)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>frameDeltaTime</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_TimerScheduler_Initialize_" data-uid="Fantasy.TimerScheduler.Initialize*"></a>
+
+  <h3 id="Fantasy_TimerScheduler_Initialize" data-uid="Fantasy.TimerScheduler.Initialize">
+  Initialize()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>初始化计时器调度器。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Task Initialize()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
 
 
   <a id="Fantasy_TimerScheduler_Update_" data-uid="Fantasy.TimerScheduler.Update*"></a>

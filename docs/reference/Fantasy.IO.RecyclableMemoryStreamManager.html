@@ -90,8 +90,7 @@
   <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>提供用于管理可回收内存流的分部类。</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -144,17 +143,6 @@
 
 
 
-  <h2 id="Fantasy_IO_RecyclableMemoryStreamManager_remarks">备注</h2>
-  <div class="markdown level0 remarks"> <p>
- There are two pools managed in here. The small pool contains same-sized buffers that are handed to streams
- as they write more data.
-</p>
-<p>
- For scenarios that need to call <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_GetBuffer">GetBuffer()</a>, the large pool contains buffers of various sizes, all
- multiples/exponentials of <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html#Fantasy_IO_RecyclableMemoryStreamManager_LargeBufferMultiple">LargeBufferMultiple</a> (1 MB by default). They are split by size to avoid overly-wasteful buffer
- usage. There should be far fewer 8 MB buffers than 1 MB buffers, for example.
- </p>
-</div>
 
 
   <h2 class="section" id="constructors">构造函数
@@ -168,8 +156,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes the memory manager with the default block/buffer specifications. This pool may have unbounded growth unless you modify <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html#Fantasy_IO_RecyclableMemoryStreamManager_MaximumFreeSmallPoolBytes">MaximumFreeSmallPoolBytes</a> and <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html#Fantasy_IO_RecyclableMemoryStreamManager_MaximumFreeLargePoolBytes">MaximumFreeLargePoolBytes</a>.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -195,8 +182,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes the memory manager with the given block requiredSize. This pool may have unbounded growth unless you modify <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html#Fantasy_IO_RecyclableMemoryStreamManager_MaximumFreeSmallPoolBytes">MaximumFreeSmallPoolBytes</a> and <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html#Fantasy_IO_RecyclableMemoryStreamManager_MaximumFreeLargePoolBytes">MaximumFreeLargePoolBytes</a>.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -206,14 +192,11 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>blockSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Size of each block that is pooled. Must be &gt; 0.</p>
-</dd>
+    <dd></dd>
     <dt><code>largeBufferMultiple</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Each large buffer will be a multiple of this value.</p>
-</dd>
+    <dd></dd>
     <dt><code>maximumBufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Buffers larger than this are not pooled</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -224,17 +207,6 @@
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">blockSize</code> is not a positive number,
-or <code class="paramref">largeBufferMultiple</code> is not a positive number,
-or <code class="paramref">maximumBufferSize</code> is less than <code class="paramref">blockSize</code>.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
-    <dd><p><code class="paramref">maximumBufferSize</code> is not a multiple of <code class="paramref">largeBufferMultiple</code>.</p>
-</dd>
-  </dl>
 
 
 
@@ -245,8 +217,7 @@ or <code class="paramref">maximumBufferSize</code> is less than <code class="par
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes the memory manager with the given block requiredSize. This pool may have unbounded growth unless you modify <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html#Fantasy_IO_RecyclableMemoryStreamManager_MaximumFreeSmallPoolBytes">MaximumFreeSmallPoolBytes</a> and <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html#Fantasy_IO_RecyclableMemoryStreamManager_MaximumFreeLargePoolBytes">MaximumFreeLargePoolBytes</a>.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -256,17 +227,13 @@ or <code class="paramref">maximumBufferSize</code> is less than <code class="par
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>blockSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Size of each block that is pooled. Must be &gt; 0.</p>
-</dd>
+    <dd></dd>
     <dt><code>largeBufferMultiple</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Each large buffer will be a multiple/exponential of this value.</p>
-</dd>
+    <dd></dd>
     <dt><code>maximumBufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Buffers larger than this are not pooled</p>
-</dd>
+    <dd></dd>
     <dt><code>useExponentialLargeBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>Switch to exponential large buffer allocation strategy</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -277,17 +244,6 @@ or <code class="paramref">maximumBufferSize</code> is less than <code class="par
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">blockSize</code> is not a positive number,
-or <code class="paramref">largeBufferMultiple</code> is not a positive number,
-or <code class="paramref">maximumBufferSize</code> is less than <code class="paramref">blockSize</code>.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
-    <dd><p><code class="paramref">maximumBufferSize</code> is not a multiple/exponential of <code class="paramref">largeBufferMultiple</code>.</p>
-</dd>
-  </dl>
 
 
 
@@ -298,8 +254,7 @@ or <code class="paramref">maximumBufferSize</code> is less than <code class="par
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes the memory manager with the given block requiredSize.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -309,23 +264,17 @@ or <code class="paramref">maximumBufferSize</code> is less than <code class="par
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>blockSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Size of each block that is pooled. Must be &gt; 0.</p>
-</dd>
+    <dd></dd>
     <dt><code>largeBufferMultiple</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Each large buffer will be a multiple/exponential of this value.</p>
-</dd>
+    <dd></dd>
     <dt><code>maximumBufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Buffers larger than this are not pooled.</p>
-</dd>
+    <dd></dd>
     <dt><code>useExponentialLargeBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>Switch to exponential large buffer allocation strategy.</p>
-</dd>
+    <dd></dd>
     <dt><code>maximumSmallPoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Maximum number of bytes to keep available in the small pool before future buffers get dropped for garbage collection.</p>
-</dd>
+    <dd></dd>
     <dt><code>maximumLargePoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Maximum number of bytes to keep available in the large pool before future buffers get dropped for garbage collection.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -336,19 +285,6 @@ or <code class="paramref">maximumBufferSize</code> is less than <code class="par
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">blockSize</code> is not a positive number,
-or <code class="paramref">largeBufferMultiple</code> is not a positive number,
-or <code class="paramref">maximumBufferSize</code> is less than <code class="paramref">blockSize</code>,
-or <code class="paramref">maximumSmallPoolFreeBytes</code> is negative,
-or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
-    <dd><p><code class="paramref">maximumBufferSize</code> is not a multiple/exponential of <code class="paramref">largeBufferMultiple</code>.</p>
-</dd>
-  </dl>
 
 
 
@@ -359,8 +295,7 @@ or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes the memory manager with the given block requiredSize.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -370,20 +305,15 @@ or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>blockSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Size of each block that is pooled. Must be &gt; 0.</p>
-</dd>
+    <dd></dd>
     <dt><code>largeBufferMultiple</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Each large buffer will be a multiple of this value.</p>
-</dd>
+    <dd></dd>
     <dt><code>maximumBufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Buffers larger than this are not pooled</p>
-</dd>
+    <dd></dd>
     <dt><code>maximumSmallPoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Maximum number of bytes to keep available in the small pool before future buffers get dropped for garbage collection</p>
-</dd>
+    <dd></dd>
     <dt><code>maximumLargePoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Maximum number of bytes to keep available in the large pool before future buffers get dropped for garbage collection</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -394,19 +324,6 @@ or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">blockSize</code> is not a positive number,
-or <code class="paramref">largeBufferMultiple</code> is not a positive number,
-or <code class="paramref">maximumBufferSize</code> is less than <code class="paramref">blockSize</code>,
-or <code class="paramref">maximumSmallPoolFreeBytes</code> is negative,
-or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
-    <dd><p><code class="paramref">maximumBufferSize</code> is not a multiple of <code class="paramref">largeBufferMultiple</code>.</p>
-</dd>
-  </dl>
 
 
 
@@ -417,8 +334,7 @@ or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes the memory manager with the default block/buffer specifications and maximum free bytes specifications.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -428,11 +344,9 @@ or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>maximumSmallPoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Maximum number of bytes to keep available in the small pool before future buffers get dropped for garbage collection</p>
-</dd>
+    <dd></dd>
     <dt><code>maximumLargePoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Maximum number of bytes to keep available in the large pool before future buffers get dropped for garbage collection</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -443,12 +357,6 @@ or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">maximumSmallPoolFreeBytes</code> is negative, or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
-</dd>
-  </dl>
 
 
 
@@ -462,8 +370,7 @@ or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Default block size, in bytes.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -493,8 +400,7 @@ or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Default large buffer multiple, in bytes.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -524,8 +430,7 @@ or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Default maximum buffer size, in bytes.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -560,8 +465,7 @@ or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Whether dirty buffers can be immediately returned to the buffer pool.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -581,17 +485,6 @@ or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_AggressiveBufferReturn_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>
-When <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_GetBuffer">GetBuffer()</a> is called on a stream and creates a single large buffer, if this setting is enabled, the other blocks will be returned
-to the buffer pool immediately.
-</p>
-<p>
-Note when enabling this setting that the user is responsible for ensuring that any buffer previously
-retrieved from a stream which is subsequently modified is not used after modification (as it may no longer
-be valid).
-</p>
-</div>
 
 
 
@@ -603,8 +496,7 @@ be valid).
   
   </h3>
 
-  <div class="markdown level1 summary"><p>The size of each block. It must be set at creation and cannot be changed.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -635,9 +527,7 @@ be valid).
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Whether to save callstacks for stream allocations. This can help in debugging.
-It should NEVER be turned on generally in production.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -668,8 +558,7 @@ It should NEVER be turned on generally in production.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>All buffers are multiples/exponentials of this number. It must be set at creation and cannot be changed.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -700,8 +589,7 @@ It should NEVER be turned on generally in production.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>How many buffers are in the large pool.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -732,8 +620,7 @@ It should NEVER be turned on generally in production.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Number of bytes in large pool not currently in use.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -764,8 +651,7 @@ It should NEVER be turned on generally in production.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Number of bytes currently in use by streams from the large pool.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -796,8 +682,7 @@ It should NEVER be turned on generally in production.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Gets the maximum buffer size.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -817,10 +702,6 @@ It should NEVER be turned on generally in production.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_MaximumBufferSize_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>Any buffer that is returned to the pool that is larger than this will be
-discarded and garbage collected.</p>
-</div>
 
 
 
@@ -832,9 +713,7 @@ discarded and garbage collected.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>How many bytes of large free buffers to allow before we start dropping
-those returned to us.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -854,9 +733,6 @@ those returned to us.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_MaximumFreeLargePoolBytes_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The default value is 0, meaning the pool is unbounded.</p>
-</div>
 
 
 
@@ -868,9 +744,7 @@ those returned to us.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>How many bytes of small free blocks to allow before we start dropping
-those returned to us.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -890,9 +764,6 @@ those returned to us.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_MaximumFreeSmallPoolBytes_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The default value is 0, meaning the pool is unbounded.</p>
-</div>
 
 
 
@@ -904,9 +775,7 @@ those returned to us.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Maximum stream capacity in bytes. Attempts to set a larger capacity will
-result in an exception.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -926,9 +795,6 @@ result in an exception.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_MaximumStreamCapacity_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>A value of 0 indicates no limit.</p>
-</div>
 
 
 
@@ -940,8 +806,7 @@ result in an exception.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>How many blocks are in the small pool.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -972,8 +837,7 @@ result in an exception.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Number of bytes in small pool not currently in use.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1004,8 +868,7 @@ result in an exception.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Number of bytes currently in use by stream from the small pool.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1036,8 +899,7 @@ result in an exception.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Causes an exception to be thrown if <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_ToArray">ToArray()</a> is ever called.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1057,10 +919,6 @@ result in an exception.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_ThrowExceptionOnToArray_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>Calling <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_ToArray">ToArray()</a> defeats the purpose of a pooled buffer. Use this property to discover code that is calling <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_ToArray">ToArray()</a>. If this is
-set and <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_ToArray">ToArray()</a> is called, a <code>NotSupportedException</code> will be thrown.</p>
-</div>
 
 
 
@@ -1072,8 +930,7 @@ set and <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Use exponential large buffer allocation strategy. It must be set at creation and cannot be changed.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1104,8 +961,7 @@ set and <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Use multiple large buffer allocation strategy. It must be set at creation and cannot be changed.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1140,8 +996,7 @@ set and <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with no tag and a default initial capacity.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1152,8 +1007,7 @@ set and <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1173,9 +1027,7 @@ set and <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the contents copied from the provided
-buffer. The provided buffer is not wrapped or used after construction.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1185,15 +1037,13 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
-    <dd><p>The byte buffer to copy data from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1202,9 +1052,6 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_Byte____remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
-</div>
 
 
 
@@ -1216,8 +1063,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with no tag and a default initial capacity.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1227,15 +1073,13 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1255,8 +1099,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and a default initial capacity.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1266,18 +1109,15 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1297,9 +1137,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
-buffer. The provided buffer is not wrapped or used after construction.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1309,27 +1147,21 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
-    <dd><p>The byte buffer to copy data from.</p>
-</dd>
+    <dd></dd>
     <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The offset from the start of the buffer to copy from.</p>
-</dd>
+    <dd></dd>
     <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The number of bytes to copy from the buffer.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1338,9 +1170,6 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Byte___System_Int32_System_Int32__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
-</div>
 
 
 
@@ -1352,8 +1181,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1363,21 +1191,17 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The minimum desired capacity for the stream.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1397,9 +1221,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity, possibly using
-a single contiguous underlying buffer.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1409,24 +1231,19 @@ a single contiguous underlying buffer.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The minimum desired capacity for the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>asContiguousBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>Whether to attempt to use a single contiguous buffer.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1435,12 +1252,6 @@ a single contiguous underlying buffer.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Int32_System_Boolean__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>Retrieving a <code>MemoryStream</code> which provides a single contiguous buffer can be useful in situations
-where the initial size is known and it is desirable to avoid copying data between the smaller underlying
-buffers to a single large one. This is most helpful when you know that you will always call <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_GetBuffer">GetBuffer()</a>
-on the underlying stream.</p>
-</div>
 
 
 
@@ -1452,8 +1263,7 @@ on the underlying stream.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1463,21 +1273,17 @@ on the underlying stream.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>The minimum desired capacity for the stream.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1497,9 +1303,7 @@ on the underlying stream.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity, possibly using
-a single contiguous underlying buffer.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1509,24 +1313,19 @@ a single contiguous underlying buffer.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>The minimum desired capacity for the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>asContiguousBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>Whether to attempt to use a single contiguous buffer.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1535,12 +1334,6 @@ a single contiguous underlying buffer.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Int64_System_Boolean__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>Retrieving a <code>MemoryStream</code> which provides a single contiguous buffer can be useful in situations
-where the initial size is known and it is desirable to avoid copying data between the smaller underlying
-buffers to a single large one. This is most helpful when you know that you will always call <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_GetBuffer">GetBuffer()</a>
-on the underlying stream.</p>
-</div>
 
 
 
@@ -1552,9 +1345,7 @@ on the underlying stream.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
-buffer. The provided buffer is not wrapped or used after construction.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1565,21 +1356,17 @@ public MemoryStream GetStream(Guid id, string tag, Memory&lt;byte&gt; buffer)</c
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>The byte buffer to copy data from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1588,9 +1375,6 @@ public MemoryStream GetStream(Guid id, string tag, Memory&lt;byte&gt; buffer)</c
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Memory_System_Byte___remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
-</div>
 
 
 
@@ -1602,9 +1386,7 @@ public MemoryStream GetStream(Guid id, string tag, Memory&lt;byte&gt; buffer)</c
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
-buffer. The provided buffer is not wrapped or used after construction.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1614,21 +1396,17 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>The byte buffer to copy data from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1637,9 +1415,6 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_ReadOnlySpan_System_Byte___remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
-</div>
 
 
 
@@ -1651,9 +1426,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the contents copied from the provided
-buffer. The provided buffer is not wrapped or used after construction.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1664,15 +1437,13 @@ public MemoryStream GetStream(Memory&lt;byte&gt; buffer)</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>The byte buffer to copy data from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1681,9 +1452,6 @@ public MemoryStream GetStream(Memory&lt;byte&gt; buffer)</code></pre>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_Memory_System_Byte___remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
-</div>
 
 
 
@@ -1695,9 +1463,7 @@ public MemoryStream GetStream(Memory&lt;byte&gt; buffer)</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the contents copied from the provided
-buffer. The provided buffer is not wrapped or used after construction.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1707,15 +1473,13 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>The byte buffer to copy data from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1724,9 +1488,6 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_ReadOnlySpan_System_Byte___remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
-</div>
 
 
 
@@ -1738,8 +1499,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and a default initial capacity.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1749,15 +1509,13 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1777,9 +1535,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
-buffer. The provided buffer is not wrapped or used after construction.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1789,24 +1545,19 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
-    <dd><p>The byte buffer to copy data from.</p>
-</dd>
+    <dd></dd>
     <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The offset from the start of the buffer to copy from.</p>
-</dd>
+    <dd></dd>
     <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The number of bytes to copy from the buffer.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1815,9 +1566,6 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_String_System_Byte___System_Int32_System_Int32__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
-</div>
 
 
 
@@ -1829,8 +1577,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1840,18 +1587,15 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The minimum desired capacity for the stream.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1871,9 +1615,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity, possibly using
-a single contiguous underlying buffer.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1883,21 +1625,17 @@ a single contiguous underlying buffer.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The minimum desired capacity for the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>asContiguousBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>Whether to attempt to use a single contiguous buffer.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1906,12 +1644,6 @@ a single contiguous underlying buffer.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_String_System_Int32_System_Boolean__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>Retrieving a MemoryStream which provides a single contiguous buffer can be useful in situations
-where the initial size is known and it is desirable to avoid copying data between the smaller underlying
-buffers to a single large one. This is most helpful when you know that you will always call <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_GetBuffer">GetBuffer()</a>
-on the underlying stream.</p>
-</div>
 
 
 
@@ -1923,9 +1655,7 @@ on the underlying stream.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity, possibly using
-a single contiguous underlying buffer.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1935,21 +1665,17 @@ a single contiguous underlying buffer.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>The minimum desired capacity for the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>asContiguousBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>Whether to attempt to use a single contiguous buffer.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1958,12 +1684,6 @@ a single contiguous underlying buffer.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_String_System_Int64_System_Boolean__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>Retrieving a MemoryStream which provides a single contiguous buffer can be useful in situations
-where the initial size is known and it is desirable to avoid copying data between the smaller underlying
-buffers to a single large one. This is most helpful when you know that you will always call <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_GetBuffer">GetBuffer()</a>
-on the underlying stream.</p>
-</div>
 
 
 
@@ -1975,9 +1695,7 @@ on the underlying stream.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
-buffer. The provided buffer is not wrapped or used after construction.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1988,18 +1706,15 @@ public MemoryStream GetStream(string tag, Memory&lt;byte&gt; buffer)</code></pre
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>The byte buffer to copy data from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -2008,9 +1723,6 @@ public MemoryStream GetStream(string tag, Memory&lt;byte&gt; buffer)</code></pre
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_String_System_Memory_System_Byte___remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
-</div>
 
 
 
@@ -2022,9 +1734,7 @@ public MemoryStream GetStream(string tag, Memory&lt;byte&gt; buffer)</code></pre
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
-buffer. The provided buffer is not wrapped or used after construction.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2034,18 +1744,15 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A tag which can be used to track the source of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>The byte buffer to copy data from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
-    <dd><p>A <code>MemoryStream</code>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -2054,9 +1761,6 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStreamManager_GetStream_System_String_System_ReadOnlySpan_System_Byte___remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
-</div>
 
 
 
@@ -2071,8 +1775,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Triggered when a new block is created.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2102,8 +1805,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Triggered when a buffer of either type is discarded, along with the reason for the discard.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2133,8 +1835,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Triggered when a new large buffer is created.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2164,8 +1865,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Triggered when a user converts a stream to array.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2195,8 +1895,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Triggered when a new stream is created.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2226,8 +1925,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Triggered when a stream is disposed.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2257,8 +1955,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Triggered when a stream is disposed of twice (an error).</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2288,8 +1985,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Triggered when a stream is finalized.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2319,8 +2015,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Triggered when a stream is disposed to report the stream's length.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2350,8 +2045,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Triggered when a stream is requested to expand beyond the maximum length specified by the responsible RecyclableMemoryStreamManager.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2381,8 +2075,7 @@ buffer. The provided buffer is not wrapped or used after construction.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Periodically triggered to report usage statistics.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">

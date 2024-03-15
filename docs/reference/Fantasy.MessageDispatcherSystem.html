@@ -1,0 +1,665 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>MessageDispatcherSystem 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="MessageDispatcherSystem 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.MessageDispatcherSystem">
+
+
+
+  <h1 id="Fantasy_MessageDispatcherSystem" data-uid="Fantasy.MessageDispatcherSystem" class="text-break">
+    MessageDispatcherSystem 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>消息分发系统，负责管理消息和消息处理器之间的关系。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class MessageDispatcherSystem : Singleton&lt;MessageDispatcherSystem&gt;, ISingleton, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Fantasy.Singleton-1.html">Singleton</a>&lt;<a class="xref" href="Fantasy.MessageDispatcherSystem.html">MessageDispatcherSystem</a>&gt;</div>
+      <div><span class="xref">MessageDispatcherSystem</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>实现</dt>
+    <dd>
+      <div><a class="xref" href="Fantasy.ISingleton.html">ISingleton</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_Initialize">Singleton&lt;MessageDispatcherSystem&gt;.Initialize()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_Dispose">Singleton&lt;MessageDispatcherSystem&gt;.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_IsDisposed">Singleton&lt;MessageDispatcherSystem&gt;.IsDisposed</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_Instance">Singleton&lt;MessageDispatcherSystem&gt;.Instance</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">构造函数
+</h2>
+
+
+  <a id="Fantasy_MessageDispatcherSystem__ctor_" data-uid="Fantasy.MessageDispatcherSystem.#ctor*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem__ctor" data-uid="Fantasy.MessageDispatcherSystem.#ctor">
+  MessageDispatcherSystem()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MessageDispatcherSystem()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_MessageDispatcherSystem_CreateResponse_" data-uid="Fantasy.MessageDispatcherSystem.CreateResponse*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem_CreateResponse_Fantasy_IRequest_System_UInt32_" data-uid="Fantasy.MessageDispatcherSystem.CreateResponse(Fantasy.IRequest,System.UInt32)">
+  CreateResponse(IRequest, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据请求对象和错误码，创建普通响应消息。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResponse CreateResponse(IRequest iRequest, uint error)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>iRequest</code> <a class="xref" href="Fantasy.IRequest.html">IRequest</a></dt>
+    <dd><p>请求对象</p>
+</dd>
+    <dt><code>error</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>错误码</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.IResponse.html">IResponse</a></dt>
+    <dd><p>创建的普通响应消息</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MessageDispatcherSystem_CreateResponse_" data-uid="Fantasy.MessageDispatcherSystem.CreateResponse*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem_CreateResponse_Fantasy_IRouteRequest_System_UInt32_" data-uid="Fantasy.MessageDispatcherSystem.CreateResponse(Fantasy.IRouteRequest,System.UInt32)">
+  CreateResponse(IRouteRequest, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据路由请求对象和错误码，创建路由响应消息。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRouteResponse CreateResponse(IRouteRequest iRouteRequest, uint error)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>iRouteRequest</code> <a class="xref" href="Fantasy.IRouteRequest.html">IRouteRequest</a></dt>
+    <dd><p>路由请求对象</p>
+</dd>
+    <dt><code>error</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>错误码</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.IRouteResponse.html">IRouteResponse</a></dt>
+    <dd><p>创建的路由响应消息</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MessageDispatcherSystem_CreateResponse_" data-uid="Fantasy.MessageDispatcherSystem.CreateResponse*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem_CreateResponse_System_Type_System_UInt32_" data-uid="Fantasy.MessageDispatcherSystem.CreateResponse(System.Type,System.UInt32)">
+  CreateResponse(Type, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据请求类型和错误码，创建普通响应消息。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResponse CreateResponse(Type requestType, uint error)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>requestType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>请求类型</p>
+</dd>
+    <dt><code>error</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>错误码</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.IResponse.html">IResponse</a></dt>
+    <dd><p>创建的普通响应消息</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MessageDispatcherSystem_CreateRouteResponse_" data-uid="Fantasy.MessageDispatcherSystem.CreateRouteResponse*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem_CreateRouteResponse" data-uid="Fantasy.MessageDispatcherSystem.CreateRouteResponse">
+  CreateRouteResponse()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>创建一个空的路由响应消息。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRouteResponse CreateRouteResponse()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.IRouteResponse.html">IRouteResponse</a></dt>
+    <dd><p>创建的路由响应消息</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MessageDispatcherSystem_FailResponse_" data-uid="Fantasy.MessageDispatcherSystem.FailResponse*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem_FailResponse_Fantasy_Session_Fantasy_IRouteRequest_System_UInt32_System_UInt32_" data-uid="Fantasy.MessageDispatcherSystem.FailResponse(Fantasy.Session,Fantasy.IRouteRequest,System.UInt32,System.UInt32)">
+  FailResponse(Session, IRouteRequest, uint, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>处理失败时，向会话发送失败响应消息。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void FailResponse(Session session, IRouteRequest iRouteRequest, uint error, uint rpcId)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>session</code> <a class="xref" href="Fantasy.Session.html">Session</a></dt>
+    <dd><p>会话对象</p>
+</dd>
+    <dt><code>iRouteRequest</code> <a class="xref" href="Fantasy.IRouteRequest.html">IRouteRequest</a></dt>
+    <dd><p>路由请求对象</p>
+</dd>
+    <dt><code>error</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>错误码</p>
+</dd>
+    <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>RPC标识</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MessageDispatcherSystem_GetOpCode_" data-uid="Fantasy.MessageDispatcherSystem.GetOpCode*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem_GetOpCode_System_Type_" data-uid="Fantasy.MessageDispatcherSystem.GetOpCode(System.Type)">
+  GetOpCode(Type)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据消息类型获取对应的OpCode。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public uint GetOpCode(Type type)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>消息类型</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>消息对应的OpCode</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MessageDispatcherSystem_GetOpCodeType_" data-uid="Fantasy.MessageDispatcherSystem.GetOpCodeType*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem_GetOpCodeType_System_UInt32_" data-uid="Fantasy.MessageDispatcherSystem.GetOpCodeType(System.UInt32)">
+  GetOpCodeType(uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据OpCode获取对应的消息类型。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Type GetOpCodeType(uint code)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>code</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>OpCode</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>OpCode对应的消息类型</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MessageDispatcherSystem_MessageHandler_" data-uid="Fantasy.MessageDispatcherSystem.MessageHandler*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem_MessageHandler_Fantasy_Session_System_Type_System_Object_System_UInt32_System_UInt32_" data-uid="Fantasy.MessageDispatcherSystem.MessageHandler(Fantasy.Session,System.Type,System.Object,System.UInt32,System.UInt32)">
+  MessageHandler(Session, Type, object, uint, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>处理普通消息，将消息分发给相应的消息处理器。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MessageHandler(Session session, Type type, object message, uint rpcId, uint protocolCode)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>session</code> <a class="xref" href="Fantasy.Session.html">Session</a></dt>
+    <dd><p>会话对象</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>消息类型</p>
+</dd>
+    <dt><code>message</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>消息对象</p>
+</dd>
+    <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>RPC标识</p>
+</dd>
+    <dt><code>protocolCode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>协议码</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MessageDispatcherSystem_OnLoad_" data-uid="Fantasy.MessageDispatcherSystem.OnLoad*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem_OnLoad_System_Int32_" data-uid="Fantasy.MessageDispatcherSystem.OnLoad(System.Int32)">
+  OnLoad(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>在加载程序集时，用于解析并存储消息处理相关的信息。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnLoad(int assemblyName)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>assemblyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>要加载的程序集名称</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MessageDispatcherSystem_OnUnLoad_" data-uid="Fantasy.MessageDispatcherSystem.OnUnLoad*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem_OnUnLoad_System_Int32_" data-uid="Fantasy.MessageDispatcherSystem.OnUnLoad(System.Int32)">
+  OnUnLoad(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>在卸载程序集时，清理相关的消息处理信息。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnUnLoad(int assemblyName)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>assemblyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>要卸载的程序集名称</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MessageDispatcherSystem_RouteMessageHandler_" data-uid="Fantasy.MessageDispatcherSystem.RouteMessageHandler*"></a>
+
+  <h3 id="Fantasy_MessageDispatcherSystem_RouteMessageHandler_Fantasy_Session_System_Type_Fantasy_Entity_System_Object_System_UInt32_" data-uid="Fantasy.MessageDispatcherSystem.RouteMessageHandler(Fantasy.Session,System.Type,Fantasy.Entity,System.Object,System.UInt32)">
+  RouteMessageHandler(Session, Type, Entity, object, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>处理路由消息，将消息分发给相应的路由消息处理器。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FTask RouteMessageHandler(Session session, Type type, Entity entity, object message, uint rpcId)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>session</code> <a class="xref" href="Fantasy.Session.html">Session</a></dt>
+    <dd><p>会话对象</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>消息类型</p>
+</dd>
+    <dt><code>entity</code> <a class="xref" href="Fantasy.Entity.html">Entity</a></dt>
+    <dd><p>实体对象</p>
+</dd>
+    <dt><code>message</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>消息对象</p>
+</dd>
+    <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>RPC标识</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

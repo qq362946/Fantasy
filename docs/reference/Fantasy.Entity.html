@@ -119,15 +119,16 @@
   <dl class="typelist derived">
     <dt>Derived</dt>
     <dd>
-      <div><a class="xref" href="Fantasy.Core.Network.AddressableManageComponent.html">AddressableManageComponent</a></div>
-      <div><a class="xref" href="Fantasy.Core.Network.AddressableMessageComponent.html">AddressableMessageComponent</a></div>
-      <div><a class="xref" href="Fantasy.Core.Network.AddressableRouteComponent.html">AddressableRouteComponent</a></div>
-      <div><a class="xref" href="Fantasy.Core.Network.ClientNetworkComponent.html">ClientNetworkComponent</a></div>
-      <div><a class="xref" href="Fantasy.Core.Network.RouteComponent.html">RouteComponent</a></div>
-      <div><a class="xref" href="Fantasy.Core.Network.ServerNetworkComponent.html">ServerNetworkComponent</a></div>
-      <div><a class="xref" href="Fantasy.Core.Network.Session.html">Session</a></div>
-      <div><a class="xref" href="Fantasy.Core.SessionIdleCheckerComponent.html">SessionIdleCheckerComponent</a></div>
+      <div><a class="xref" href="Fantasy.AddressableManageComponent.html">AddressableManageComponent</a></div>
+      <div><a class="xref" href="Fantasy.AddressableMessageComponent.html">AddressableMessageComponent</a></div>
+      <div><a class="xref" href="Fantasy.AddressableRouteComponent.html">AddressableRouteComponent</a></div>
+      <div><a class="xref" href="Fantasy.ClientNetworkComponent.html">ClientNetworkComponent</a></div>
+      <div><a class="xref" href="Fantasy.LinkEntityComponent.html">LinkEntityComponent</a></div>
+      <div><a class="xref" href="Fantasy.RouteComponent.html">RouteComponent</a></div>
       <div><a class="xref" href="Fantasy.Scene.html">Scene</a></div>
+      <div><a class="xref" href="Fantasy.ServerNetworkComponent.html">ServerNetworkComponent</a></div>
+      <div><a class="xref" href="Fantasy.Session.html">Session</a></div>
+      <div><a class="xref" href="Fantasy.SessionIdleCheckerComponent.html">SessionIdleCheckerComponent</a></div>
     </dd>
   </dl>
 
@@ -161,7 +162,7 @@
     <dt>扩展方法</dt>
     <dd>
   <div>
-      <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
   </div>
   </dd></dl>
 
@@ -215,7 +216,8 @@
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerable&lt;Entity&gt; ForEachSingleCollection { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">[IgnoreDataMember]
+public IEnumerable&lt;Entity&gt; ForEachSingleCollection { get; }</code></pre>
   </div>
 
 
@@ -247,7 +249,8 @@
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerable&lt;Entity&gt; ForEachTransfer { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">[IgnoreDataMember]
+public IEnumerable&lt;Entity&gt; ForEachTransfer { get; }</code></pre>
   </div>
 
 
@@ -849,6 +852,70 @@ public Scene Scene { get; protected set; }</code></pre>
 
 
 
+  <a id="Fantasy_Entity_ForEachEntity_" data-uid="Fantasy.Entity.ForEachEntity*"></a>
+
+  <h3 id="Fantasy_Entity_ForEachEntity" data-uid="Fantasy.Entity.ForEachEntity">
+  ForEachEntity()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取一个 IEnumerable，用于遍历当前实体上挂载的普通组件。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;Entity&gt; ForEachEntity()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Fantasy.Entity.html">Entity</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_Entity_ForEachMultiEntity_" data-uid="Fantasy.Entity.ForEachMultiEntity*"></a>
+
+  <h3 id="Fantasy_Entity_ForEachMultiEntity" data-uid="Fantasy.Entity.ForEachMultiEntity">
+  ForEachMultiEntity()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取一个 IEnumerable，用于遍历当前实体上所有实现了ISupportedMultiEntity接口的组件。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;Entity&gt; ForEachMultiEntity()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Fantasy.Entity.html">Entity</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Fantasy_Entity_GetComponent_" data-uid="Fantasy.Entity.GetComponent*"></a>
 
   <h3 id="Fantasy_Entity_GetComponent_System_Type_" data-uid="Fantasy.Entity.GetComponent(System.Type)">
@@ -1045,6 +1112,43 @@ public Scene Scene { get; protected set; }</code></pre>
     <dt><code>T</code></dt>
     <dd><p>实体类型。</p>
 </dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_Entity_GetParent_" data-uid="Fantasy.Entity.GetParent*"></a>
+
+  <h3 id="Fantasy_Entity_GetParent__1" data-uid="Fantasy.Entity.GetParent``1">
+  GetParent&lt;T&gt;()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取当前实体的父实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T GetParent&lt;T&gt;() where T : Entity, new()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
   </dl>
 
 

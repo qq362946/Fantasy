@@ -12,11 +12,11 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <OutputPath>../../Bin/App/</OutputPath>
+        <OutputPath>../../../Bin/App/</OutputPath>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <OutputPath>../../Bin/App/</OutputPath>
+        <OutputPath>../../../Bin/App/</OutputPath>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 

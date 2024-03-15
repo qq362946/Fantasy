@@ -1,0 +1,491 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>SortedOneToManyHashSet&lt;TKey, TValue&gt; 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="SortedOneToManyHashSet&lt;TKey, TValue&gt; 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.SortedOneToManyHashSet`2">
+
+
+
+  <h1 id="Fantasy_SortedOneToManyHashSet_2" data-uid="Fantasy.SortedOneToManyHashSet`2" class="text-break">
+    SortedOneToManyHashSet&lt;TKey, TValue&gt; 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>基于排序字典实现的一对多关系的映射哈希集合类，将唯一键映射到多个值的哈希集合。
+用于在多个值与一个键关联的情况下进行管理和存储。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SortedOneToManyHashSet&lt;TKey, TValue&gt; : SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;, IDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;, ICollection&lt;KeyValuePair&lt;TKey, HashSet&lt;TValue&gt;&gt;&gt;, IDictionary, ICollection, IReadOnlyDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;, IReadOnlyCollection&lt;KeyValuePair&lt;TKey, HashSet&lt;TValue&gt;&gt;&gt;, IEnumerable&lt;KeyValuePair&lt;TKey, HashSet&lt;TValue&gt;&gt;&gt;, IEnumerable where TKey : notnull</code></pre>
+  </div>
+
+
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>TKey</code></dt>
+    <dd><p>字典中键的类型。</p>
+</dd>
+    <dt><code>TValue</code></dt>
+    <dd><p>集合中值的类型。</p>
+</dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2">SortedDictionary</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;</div>
+      <div><span class="xref">SortedOneToManyHashSet&lt;TKey, TValue&gt;</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>实现</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.idictionary">IDictionary</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.icollection">ICollection</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;TValue&gt;&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="Fantasy.SortedOneToManyHashSetPool-2.html">SortedOneToManyHashSetPool&lt;TKey, TValue&gt;</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.add">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Add(TKey, HashSet&lt;TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.clear">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Clear()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.containskey">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.ContainsKey(TKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.containsvalue">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.ContainsValue(HashSet&lt;TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.copyto">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.CopyTo(KeyValuePair&lt;TKey, HashSet&lt;TValue&gt;&gt;[], int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.getenumerator">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.GetEnumerator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.remove">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Remove(TKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.trygetvalue">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.TryGetValue(TKey, out HashSet&lt;TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.item">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.this[TKey]</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.count">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Count</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.comparer">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Comparer</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.keys">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Keys</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2.values">SortedDictionary&lt;TKey, HashSet&lt;TValue&gt;&gt;.Values</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Fantasy.DictionaryExtensions.html#Fantasy_DictionaryExtensions_TryRemove__2_System_Collections_Generic_IDictionary___0___1____0___1__">DictionaryExtensions.TryRemove&lt;T, TV&gt;(IDictionary&lt;T, TV&gt;, T, out TV)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">构造函数
+</h2>
+
+
+  <a id="Fantasy_SortedOneToManyHashSet_2__ctor_" data-uid="Fantasy.SortedOneToManyHashSet`2.#ctor*"></a>
+
+  <h3 id="Fantasy_SortedOneToManyHashSet_2__ctor" data-uid="Fantasy.SortedOneToManyHashSet`2.#ctor">
+  SortedOneToManyHashSet()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>创建一个新的 <a class="xref" href="Fantasy.SortedOneToManyHashSet-2.html">SortedOneToManyHashSet&lt;TKey, TValue&gt;</a> 实例。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortedOneToManyHashSet()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_SortedOneToManyHashSet_2__ctor_" data-uid="Fantasy.SortedOneToManyHashSet`2.#ctor*"></a>
+
+  <h3 id="Fantasy_SortedOneToManyHashSet_2__ctor_System_Int32_" data-uid="Fantasy.SortedOneToManyHashSet`2.#ctor(System.Int32)">
+  SortedOneToManyHashSet(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>创建一个新的 <a class="xref" href="Fantasy.SortedOneToManyHashSet-2.html">SortedOneToManyHashSet&lt;TKey, TValue&gt;</a> 实例，设置最大缓存数量</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortedOneToManyHashSet(int recyclingLimit)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>recyclingLimit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>1:防止数据量过大、所以超过recyclingLimit的数据还是走GC.
+2:设置成0不控制数量，全部缓存</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_SortedOneToManyHashSet_2_Add_" data-uid="Fantasy.SortedOneToManyHashSet`2.Add*"></a>
+
+  <h3 id="Fantasy_SortedOneToManyHashSet_2_Add__0__1_" data-uid="Fantasy.SortedOneToManyHashSet`2.Add(`0,`1)">
+  Add(TKey, TValue)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将指定值添加到给定键关联的哈希集合中。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Add(TKey key, TValue value)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>要添加值的键。</p>
+</dd>
+    <dt><code>value</code> <span class="xref">TValue</span></dt>
+    <dd><p>要添加的值。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_SortedOneToManyHashSet_2_Clear_" data-uid="Fantasy.SortedOneToManyHashSet`2.Clear*"></a>
+
+  <h3 id="Fantasy_SortedOneToManyHashSet_2_Clear" data-uid="Fantasy.SortedOneToManyHashSet`2.Clear">
+  Clear()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>重写 Clear 方法，清空字典并清空回收队列。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void Clear()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_SortedOneToManyHashSet_2_Contains_" data-uid="Fantasy.SortedOneToManyHashSet`2.Contains*"></a>
+
+  <h3 id="Fantasy_SortedOneToManyHashSet_2_Contains__0__1_" data-uid="Fantasy.SortedOneToManyHashSet`2.Contains(`0,`1)">
+  Contains(TKey, TValue)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>判断哈希集合中是否包含指定的键值对。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Contains(TKey key, TValue value)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>要查找的键。</p>
+</dd>
+    <dt><code>value</code> <span class="xref">TValue</span></dt>
+    <dd><p>要查找的值。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>如果键值对存在，则为 true；否则为 false。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_SortedOneToManyHashSet_2_RemoveKey_" data-uid="Fantasy.SortedOneToManyHashSet`2.RemoveKey*"></a>
+
+  <h3 id="Fantasy_SortedOneToManyHashSet_2_RemoveKey__0_" data-uid="Fantasy.SortedOneToManyHashSet`2.RemoveKey(`0)">
+  RemoveKey(TKey)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从字典中移除指定键以及关联的哈希集合，并将集合进行回收。
+如果键不存在于映射列表中，则不执行任何操作。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveKey(TKey key)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>要移除的键。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_SortedOneToManyHashSet_2_RemoveValue_" data-uid="Fantasy.SortedOneToManyHashSet`2.RemoveValue*"></a>
+
+  <h3 id="Fantasy_SortedOneToManyHashSet_2_RemoveValue__0__1_" data-uid="Fantasy.SortedOneToManyHashSet`2.RemoveValue(`0,`1)">
+  RemoveValue(TKey, TValue)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从指定键关联的哈希集合中移除特定值。
+如果哈希集合不存在或值不存在于集合中，则不执行任何操作。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveValue(TKey key, TValue value)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>要移除值的键。</p>
+</dd>
+    <dt><code>value</code> <span class="xref">TValue</span></dt>
+    <dd><p>要移除的值。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -90,9 +90,7 @@
   <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>基于排序字典实现的一对多关系的映射列表类，将唯一键映射到包含多个值的列表。
-用于在多个值与一个键关联的情况下进行管理和存储。</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -104,11 +102,9 @@
   <h4 class="section">类型参数</h4>
   <dl class="parameters">
     <dt><code>TKey</code></dt>
-    <dd><p>字典中键的类型。</p>
-</dd>
+    <dd></dd>
     <dt><code>TValue</code></dt>
-    <dd><p>列表中值的类型。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <dl class="typelist inheritance">
@@ -232,8 +228,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>创建一个新的 <a class="xref" href="Fantasy.DataStructure.SortedOneToManyList-2.html">SortedOneToManyList&lt;TKey, TValue&gt;</a> 实例。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -259,8 +254,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>创建一个新的 <a class="xref" href="Fantasy.DataStructure.SortedOneToManyList-2.html">SortedOneToManyList&lt;TKey, TValue&gt;</a> 实例，设置最大缓存数量</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -270,9 +264,7 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>recyclingLimit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>1:防止数据量过大、所以超过recyclingLimit的数据还是走GC.
-2:设置成0不控制数量，全部缓存</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -297,8 +289,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>将指定值添加到给定键关联的列表中。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -308,11 +299,9 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要添加值的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>value</code> <span class="xref">TValue</span></dt>
-    <dd><p>要添加的值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -333,8 +322,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>重写 Clear 方法，清空字典并清空回收队列。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -360,8 +348,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>判断列表中是否包含指定的键值对。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -371,18 +358,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要查找的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>value</code> <span class="xref">TValue</span></dt>
-    <dd><p>要查找的值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果键值对存在，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -402,8 +386,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>获取指定键关联的列表中的第一个值。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -413,15 +396,13 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要查找值的键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><span class="xref">TValue</span></dt>
-    <dd><p>指定键关联的列表中的第一个值，如果列表为空则返回默认值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -441,8 +422,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>从字典中移除指定键以及关联的列表，并将列表进行回收。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -452,8 +432,7 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要移除的键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -474,8 +453,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>从指定键关联的列表中移除特定值。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -485,11 +463,9 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要移除值的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>value</code> <span class="xref">TValue</span></dt>
-    <dd><p>要移除的值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 

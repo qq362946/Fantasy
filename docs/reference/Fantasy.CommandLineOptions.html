@@ -141,7 +141,7 @@
     <dt>扩展方法</dt>
     <dd>
   <div>
-      <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
   </div>
   </dd></dl>
 
@@ -224,7 +224,7 @@
 
   <div class="markdown level1 summary"><p>App类型，获取或设置应用程序的类型。
 Game - 游戏服务器App
-Export - 导表App</p>
+Robot - 机器人（暂未支持该功能）</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -249,19 +249,21 @@ Export - 导表App</p>
 
 
 
-  <a id="Fantasy_CommandLineOptions_ExportType_" data-uid="Fantasy.CommandLineOptions.ExportType*"></a>
+  <a id="Fantasy_CommandLineOptions_InnerNetwork_" data-uid="Fantasy.CommandLineOptions.InnerNetwork*"></a>
 
-  <h3 id="Fantasy_CommandLineOptions_ExportType" data-uid="Fantasy.CommandLineOptions.ExportType">
-  ExportType
+  <h3 id="Fantasy_CommandLineOptions_InnerNetwork" data-uid="Fantasy.CommandLineOptions.InnerNetwork">
+  InnerNetwork
   
   </h3>
 
-  <div class="markdown level1 summary"><p>导表的类型，获取或设置导表的类型。</p>
+  <div class="markdown level1 summary"><p>服务器内部网络协议
+TCP - 服务器内部之间通讯使用TCP协议
+KCP - 服务器内部之间通讯使用KCP协议</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ExportType ExportType { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string InnerNetwork { get; set; }</code></pre>
   </div>
 
 
@@ -270,7 +272,7 @@ Export - 导表App</p>
 
   <h4 class="section">属性值</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="Fantasy.Core.ExportType.html">ExportType</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd></dd>
   </dl>
 

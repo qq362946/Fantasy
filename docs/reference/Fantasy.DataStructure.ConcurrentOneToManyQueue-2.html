@@ -90,8 +90,7 @@
   <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>表示一个并发的一对多队列，用于维护具有相同键的多个值的关联关系。</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -103,11 +102,9 @@
   <h4 class="section">类型参数</h4>
   <dl class="parameters">
     <dt><code>TKey</code></dt>
-    <dd><p>关键字的类型，不能为空。</p>
-</dd>
+    <dd></dd>
     <dt><code>TValue</code></dt>
-    <dd><p>值的类型。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <dl class="typelist inheritance">
@@ -255,8 +252,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>设置最大缓存数量</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -266,9 +262,7 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>recyclingLimit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>1:防止数据量过大、所以超过recyclingLimit的数据还是走GC.
-2:设置成0不控制数量，全部缓存</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -293,8 +287,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>清空当前类的数据，包括从基类继承的键值对字典中的数据以及自定义的队列池。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -320,8 +313,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>判断指定键的队列是否包含指定值。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -331,18 +323,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要搜索的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>value</code> <span class="xref">TValue</span></dt>
-    <dd><p>要搜索的值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果队列包含值，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -362,8 +351,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>从指定键的队列中出队并返回一个值。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -373,15 +361,13 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要出队的键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><span class="xref">TValue</span></dt>
-    <dd><p>出队的值，如果队列为空则为默认值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -401,8 +387,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>向指定键的队列中添加一个值。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -412,11 +397,9 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要添加值的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>value</code> <span class="xref">TValue</span></dt>
-    <dd><p>要添加的值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -437,8 +420,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>从字典中移除指定键以及其关联的队列。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -448,8 +430,7 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要移除的键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -470,8 +451,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>尝试从指定键的队列中出队一个值。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -481,18 +461,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要出队的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>value</code> <span class="xref">TValue</span></dt>
-    <dd><p>出队的值，如果队列为空则为默认值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果成功出队，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
