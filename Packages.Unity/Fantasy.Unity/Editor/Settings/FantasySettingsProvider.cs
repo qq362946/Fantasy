@@ -15,6 +15,8 @@ namespace Fantasy
         private SerializedProperty _uiGenerateSavePath;
         private SerializedProperty _hotUpdatePath;
         private SerializedProperty _hotUpdateAssemblyDefinitions;
+        private SerializedProperty _fantasyUIAutoRefFunction;
+        private SerializedProperty _fantasyUIAutoRefSettings;
         public FantasySettingsProvider() : base("Project/Fantasy Settings", SettingsScope.Project) { }
 
         public override void OnActivate(string searchContext, VisualElement rootElement)
@@ -37,6 +39,8 @@ namespace Fantasy
             _uiGenerateSavePath = _serializedObject.FindProperty("uiGenerateSavePath");
             _hotUpdatePath = _serializedObject.FindProperty("hotUpdatePath");
             _hotUpdateAssemblyDefinitions = _serializedObject.FindProperty("hotUpdateAssemblyDefinitions");
+            _fantasyUIAutoRefFunction = _serializedObject.FindProperty("fantasyUIAutoRefFunction");
+            _fantasyUIAutoRefSettings = _serializedObject.FindProperty("fantasyUIAutoRefSettings");
         }
 
         public override void OnGUI(string searchContext)
@@ -48,18 +52,21 @@ namespace Fantasy
 
             using (CreateSettingsWindowGUIScope())
             {
-                _serializedObject.Update();
+                _serializedObject!.Update();
                 
                 EditorGUI.BeginChangeCheck();
                 EditorGUILayout.PropertyField(_autoCopyAssembly);
                 EditorGUILayout.PropertyField(_uiGenerateSavePath);
                 EditorGUILayout.PropertyField(_hotUpdatePath);
                 EditorGUILayout.PropertyField(_hotUpdateAssemblyDefinitions);
+                EditorGUILayout.PropertyField(_fantasyUIAutoRefFunction);
+                EditorGUILayout.PropertyField(_fantasyUIAutoRefSettings);
                 
                 if (EditorGUI.EndChangeCheck())
                 {
                     _serializedObject.ApplyModifiedProperties();
                     FantasySettingsScriptableObject.Save();
+                    EditorApplication.RepaintHierarchyWindow();
                 }
                 
                 base.OnGUI(searchContext);
