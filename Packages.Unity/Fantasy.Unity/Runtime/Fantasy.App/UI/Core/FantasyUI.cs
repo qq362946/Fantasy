@@ -11,7 +11,7 @@ namespace Fantasy
 	public class FantasyUIData
 	{
 		public string key;
-		public UnityEngine.Object gameObject;
+		public Object gameObject;
 	}
 	
 	public class FantasyUIDataComparer : IComparer<FantasyUIData>
@@ -38,7 +38,7 @@ namespace Fantasy
 
 		public Object GetReference(string key)
 		{
-			return _referenceDic.TryGetValue(key, out var obj) ? obj : null;
+			return _referenceDic.GetValueOrDefault(key);
 		}
 
 		public void OnAfterDeserialize()
