@@ -61,7 +61,13 @@ public class KCPServerNetworkChannel : ANetworkServerChannel
         {
             return;
         }
+        
+        IsDisposed = true;
+        InnerDispose();
+    }
 
+    private void InnerDispose()
+    {
         if (_kcpServerNetwork.NetworkThread != Thread.CurrentThread)
         {
             _kcpServerNetwork.NetworkThreadSynchronizationContext.Post(Dispose);

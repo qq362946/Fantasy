@@ -65,11 +65,12 @@ public class SessionIdleCheckerComponent : Entity
     /// </summary>
     private void Check()
     {
-        if (_selfRuntimeId != RuntimeId)
+        if (_selfRuntimeId != RuntimeId || IsDisposed || _session == null)
         {
             Stop();
+            return;
         }
-        
+
         var timeNow = TimeHelper.Now;
         
         if (timeNow - _session.LastReceiveTime < _timeOut)
