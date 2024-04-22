@@ -1,9 +1,0 @@
-{"List":[
-{"Id":1,"EntityId":17247043584,"ServerConfigId":1025,"WorldId":1,"SceneType":"Authentication","SceneSubType":"Authentication1","NetworkProtocol":"KCP","OuterPort":20000},
-{"Id":2,"EntityId":35769090048,"ServerConfigId":21505,"WorldId":1,"SceneType":"Addressable","SceneSubType":"Addressable1","NetworkProtocol":null,"OuterPort":0},
-{"Id":3,"EntityId":53620047872,"ServerConfigId":31745,"WorldId":1,"SceneType":"Gate","SceneSubType":"Gate1","NetworkProtocol":"KCP","OuterPort":21000},
-{"Id":4,"EntityId":74155360256,"ServerConfigId":82945,"WorldId":1,"SceneType":"Map","SceneSubType":"Map1","NetworkProtocol":null,"OuterPort":0},
-{"Id":5,"EntityId":92274753536,"ServerConfigId":97281,"WorldId":1,"SceneType":"CopyDispatcher","SceneSubType":"CopyDispatcher","NetworkProtocol":null,"OuterPort":0},
-{"Id":6,"EntityId":109521731584,"ServerConfigId":98305,"WorldId":1,"SceneType":"CopyManager","SceneSubType":"CopyManager","NetworkProtocol":null,"OuterPort":0},
-{"Id":7,"EntityId":120259084288,"ServerConfigId":0,"WorldId":0,"SceneType":"Copy","SceneSubType":"Copy","NetworkProtocol":null,"OuterPort":0}
-]}

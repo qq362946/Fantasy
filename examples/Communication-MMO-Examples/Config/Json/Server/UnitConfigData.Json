@@ -1,7 +1,0 @@
-{"List":[
-{"Id":1000,"NickName":"幻想骑士","ClassName":"1PaladinMan","MapNum":12314,"Position":"467.94,8.74,367.72","Angle":"0,0,0"},
-{"Id":1001,"NickName":"骷髅法师","ClassName":"2SkeletonMage","MapNum":12314,"Position":"339.01,9.18,370.99","Angle":"0,0,0"},
-{"Id":1002,"NickName":"骷髅战士","ClassName":"3SkeletonWarrior","MapNum":12314,"Position":"349.97,18.89,341.90","Angle":"0,0,0"},
-{"Id":1003,"NickName":"幻想魔法师","ClassName":"Mage","MapNum":12314,"Position":"316.62,8.75,372.85","Angle":"0,0,0"},
-{"Id":1004,"NickName":"幻想弓箭手","ClassName":"ZArcher","MapNum":12314,"Position":"320.64,30.38,297.43","Angle":"0,90,0"}
-]}

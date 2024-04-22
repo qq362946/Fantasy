@@ -31,40 +31,55 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Assembly\AssemblyInfo.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Assembly\AssemblyInfo.cs">
         <Link>Excel\Base\AssemblyInfo.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\DataStructure\Collection\OneToManyList.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\DataStructure\Collection\OneToManyListPool.cs">
         <Link>Excel\Base\OneToManyList.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Config\Excel\Dictionary\IntDictionaryConfig.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\ConfigTable\Dictionary\IntDictionaryConfig.cs">
         <Link>Excel\Base\Dictionary\IntDictionaryConfig.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Config\Excel\Dictionary\StringDictionaryConfig.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\ConfigTable\Dictionary\StringDictionaryConfig.cs">
         <Link>Excel\Base\Dictionary\StringDictionaryConfig.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Config\Interface\IConfigTable.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Pool\Interface\IPool.cs">
+        <Link>Excel\Base\IPool.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\RecyclableMemoryStream\EventArgs.cs">
+        <Link>Excel\Base\RecyclableMemoryStream\EventArgs.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\RecyclableMemoryStream\Events.cs">
+        <Link>Excel\Base\RecyclableMemoryStream\Events.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\RecyclableMemoryStream\RecyclableMemoryStream.cs">
+        <Link>Excel\Base\RecyclableMemoryStream\RecyclableMemoryStream.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\RecyclableMemoryStream\RecyclableMemoryStreamManager.cs">
+        <Link>Excel\Base\RecyclableMemoryStream\RecyclableMemoryStreamManager.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\ConfigTable\IConfigTable.cs">
         <Link>Excel\Base\IConfigTable.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Helper\FileHelper.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\FileHelper.cs">
         <Link>Core\Helper\FileHelper.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Helper\JsonHelper.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\JsonHelper.cs">
         <Link>Core\Helper\JsonHelper.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Helper\MemoryStreamHelper.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\MemoryStreamHelper.cs">
         <Link>Excel\Base\MemoryStreamHelper.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Helper\Proto\AProto.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\ProtoBuf\AProto.cs">
         <Link>Excel\Base\AProto.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Helper\Proto\ProtoBufHelper.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\ProtoBuf\ProtoBuffHelper.cs">
         <Link>Excel\Base\ProtoBufHelper.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Helper\TimeHelper.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\TimeHelper.cs">
         <Link>Excel\Base\TimeHelper.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Runtime\Fantasy.Core\Network\Message\Dispatcher\Opcode.cs">
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Network\Opcode.cs">
         <Link>ProtoBuf\Opcode.cs</Link>
       </Compile>
     </ItemGroup>

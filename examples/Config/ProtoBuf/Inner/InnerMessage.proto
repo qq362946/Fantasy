@@ -1,0 +1,14 @@
+syntax = "proto3";
+package Sining.Message;
+message TestServerRequest // IRequest,TestServerResponse
+{
+	
+}
+message TestServerResponse // IResponse
+{
+
+}
+message TestServerMessage // IMessage
+{
+
+}

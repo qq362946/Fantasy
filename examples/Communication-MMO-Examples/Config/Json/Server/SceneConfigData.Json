@@ -1,8 +1,0 @@
-{"List":[
-{"Id":1,"EntityId":17247043584,"ServerConfigId":1025,"WorldId":1,"SceneType":"Mgr","SceneSubType":"Mgr","NetworkProtocol":"KCP","OuterPort":0},
-{"Id":2,"EntityId":34494021632,"ServerConfigId":2049,"WorldId":1,"SceneType":"Gate","SceneSubType":"Gate","NetworkProtocol":"KCP","OuterPort":20000},
-{"Id":3,"EntityId":51740999680,"ServerConfigId":3073,"WorldId":1,"SceneType":"Addressable","SceneSubType":"Addressable","NetworkProtocol":null,"OuterPort":0},
-{"Id":4,"EntityId":68987977728,"ServerConfigId":4097,"WorldId":1,"SceneType":"Map","SceneSubType":"Map","NetworkProtocol":null,"OuterPort":0},
-{"Id":5,"EntityId":86234955776,"ServerConfigId":5121,"WorldId":1,"SceneType":"Chat","SceneSubType":"Chat","NetworkProtocol":null,"OuterPort":0},
-{"Id":6,"EntityId":103481933824,"ServerConfigId":6145,"WorldId":1,"SceneType":"Realm","SceneSubType":"Realm","NetworkProtocol":"KCP","OuterPort":20001}
-]}

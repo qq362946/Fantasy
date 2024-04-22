@@ -6,7 +6,6 @@ namespace Exporter;
 
 public static class ExporterSettingsHelper
 {
-    public static string ProtoBufTemplatePath { get; private set; }
     public static string? ProtoBufDirectory { get; private set; }
     public static string ProtoBufServerDirectory { get; private set; }
     public static string ProtoBufClientDirectory { get; private set; }
@@ -18,7 +17,6 @@ public static class ExporterSettingsHelper
     public static string? ExcelClientBinaryDirectory { get; private set; }
     public static string? ExcelServerJsonDirectory { get; private set; }
     public static string? ExcelClientJsonDirectory { get; private set; }
-    public static string ExcelTemplatePath { get; private set; }
     public static string? ServerCustomExportDirectory { get; private set; }
     public static string? ClientCustomExportDirectory { get; private set; }
     
@@ -33,7 +31,6 @@ public static class ExporterSettingsHelper
         }
 
         var root = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(settingsName).Build();
-        ProtoBufTemplatePath = FileHelper.GetFullPath(root["Export:ProtoBufTemplatePath:Value"]);
         ProtoBufDirectory = FileHelper.GetFullPath(root["Export:ProtoBufDirectory:Value"]);
         ProtoBufServerDirectory = FileHelper.GetFullPath(root["Export:ProtoBufServerDirectory:Value"]);
         ProtoBufClientDirectory = FileHelper.GetFullPath(root["Export:ProtoBufClientDirectory:Value"]);
@@ -45,7 +42,6 @@ public static class ExporterSettingsHelper
         ExcelClientBinaryDirectory = FileHelper.GetFullPath(root["Export:ExcelClientBinaryDirectory:Value"]);
         ExcelServerJsonDirectory = FileHelper.GetFullPath(root["Export:ExcelServerJsonDirectory:Value"]);
         ExcelClientJsonDirectory = FileHelper.GetFullPath(root["Export:ExcelClientJsonDirectory:Value"]);
-        ExcelTemplatePath = FileHelper.GetFullPath(root["Export:ExcelTemplatePath:Value"]);
         ServerCustomExportDirectory = FileHelper.GetFullPath(root["Export:ServerCustomExportDirectory:Value"]);
         ClientCustomExportDirectory = FileHelper.GetFullPath(root["Export:ClientCustomExportDirectory:Value"]);
     }

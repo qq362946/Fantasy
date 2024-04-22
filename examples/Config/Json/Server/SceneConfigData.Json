@@ -1,0 +1,4 @@
+{"List":[
+{"Id":1,"EntityId":17247043584,"ServerConfigId":1025,"WorldConfigId":1,"SceneRuntimeType":"MainThread","SceneTypeString":"Authentication","NetworkProtocol":"KCP","OuterPort":20000,"SceneType":1},
+{"Id":2,"EntityId":34494021632,"ServerConfigId":2049,"WorldConfigId":1,"SceneRuntimeType":"MainThread","SceneTypeString":"Gate","NetworkProtocol":"KCP","OuterPort":20001,"SceneType":3}
+]}

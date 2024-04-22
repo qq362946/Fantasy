@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "App": {
-      "commandName": "Project",
-      "commandLineArgs": "--AppType Game --Mode Develop"
-    }
-  }
-}

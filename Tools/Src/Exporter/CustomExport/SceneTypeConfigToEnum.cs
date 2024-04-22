@@ -14,7 +14,6 @@ public class SceneTypeConfigToEnum : ACustomExport
     public override void Run()
     {
         var sceneType = new Dictionary<string, string>();
-        var sceneSubType = new Dictionary<string, string>();
         // 获取场景配置表的完整路径
         if (!Worksheets.TryGetValue("SceneTypeConfig", out var sceneTypeConfig))
         {
@@ -32,33 +31,14 @@ public class SceneTypeConfigToEnum : ACustomExport
 
             sceneType.Add(sceneTypeId, sceneTypeStr);
         }
-        // 获取场景配置表的完整路径
-        if (!Worksheets.TryGetValue("SceneSubTypeConfig", out var sceneSubTypeConfig))
-        {
-            Log.Info("not found SceneSubTypeConfig");
-            return;
-        }
-        // 遍历场景子类型配置表的行 
-        for (var row = 3; row <= sceneSubTypeConfig.Dimension.Rows; row++)
-        {
-            var sceneSubTypeId = sceneSubTypeConfig.GetCellValue(row, 1);
-            var sceneSubTypeStr = sceneSubTypeConfig.GetCellValue(row, 2);
-
-            if (string.IsNullOrEmpty(sceneSubTypeId) || string.IsNullOrEmpty(sceneSubTypeStr))
-            {
-                continue;
-            }
-
-            sceneSubType.Add(sceneSubTypeId, sceneSubTypeStr);
-        }
         // 如果存在场景类型或场景子类型，执行导出操作
-        if (sceneType.Count > 0 || sceneSubType.Count > 0)
+        if (sceneType.Count > 0)
         {
-            Write(CustomExportType.Server, sceneType, sceneSubType);
+            Write(CustomExportType.Server, sceneType);
         }
     }
 
-    private void Write(CustomExportType customExportType, Dictionary<string, string> sceneTypes, Dictionary<string, string> sceneSubType)
+    private void Write(CustomExportType customExportType, Dictionary<string, string> sceneTypes)
     {
         var strBuilder = new StringBuilder();
         var dicBuilder = new StringBuilder();
@@ -75,22 +55,6 @@ public class SceneTypeConfigToEnum : ACustomExport
             strBuilder.AppendLine($"\t\tpublic const int {sceneTypeStr} = {sceneTypeId};");
         }
         // 添加场景类型字典尾部，合并到主字符串构建器中
-        dicBuilder.AppendLine("\t\t};");
-        strBuilder.Append(dicBuilder);
-        strBuilder.AppendLine("\t}\n");
-        // 生成场景子类型的静态类
-        strBuilder.AppendLine("\t// 生成器自动生成，请不要手动编辑。");
-        strBuilder.AppendLine("\tpublic static class SceneSubType\n\t{");
-        // 清空字典构建器，用于生成场景子类型的字典项
-        dicBuilder.Clear();
-        dicBuilder.AppendLine("\n\t\tpublic static readonly Dictionary<string, int> SceneSubTypeDic = new Dictionary<string, int>()\n\t\t{");
-        // 遍历场景子类型字典，生成场景子类型的常量和字典项
-        foreach (var (sceneSubTypeId, sceneSubTypeStr) in sceneSubType)
-        {
-            dicBuilder.AppendLine($"\t\t\t{{ \"{sceneSubTypeStr}\", {sceneSubTypeId} }},");
-            strBuilder.AppendLine($"\t\tpublic const int {sceneSubTypeStr} = {sceneSubTypeId};");
-        }
-        // 添加场景子类型字典尾部，合并到主字符串构建器中
         dicBuilder.AppendLine("\t\t};");
         strBuilder.Append(dicBuilder);
         strBuilder.AppendLine("\t}\n}");

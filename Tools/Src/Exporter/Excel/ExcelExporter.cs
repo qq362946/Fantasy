@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using System.Runtime.Loader;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using Fantasy;
@@ -36,17 +37,6 @@ public sealed partial class ExcelExporter
     private readonly ConcurrentDictionary<string, ExcelTable> _excelTables = new ConcurrentDictionary<string, ExcelTable>(); // 存储解析后的 Excel 表。
     public readonly ConcurrentDictionary<string, ExcelWorksheet> Worksheets = new ConcurrentDictionary<string, ExcelWorksheet>(); // 存储已加载的 Excel 工作表。
     public readonly Dictionary<string, string> IgnoreTable = new Dictionary<string, string>(); // 存储以#开头的的表和路径
-    private static string _template;
-    /// <summary>
-    /// 获取或设置 Excel 代码模板的内容。
-    /// </summary>
-    private static string ExcelTemplate
-    {
-        get
-        {
-            return _template ??= File.ReadAllText(ExporterSettingsHelper.ExcelTemplatePath);
-        }
-    }
     /// <summary>
     /// 导表支持的数据类型集合。
     /// </summary>
@@ -55,6 +45,13 @@ public sealed partial class ExcelExporter
         "", "0", "bool", "byte", "short", "ushort", "int", "uint", "long", "ulong", "float", "string",
         "IntDictionaryConfig", "StringDictionaryConfig",
         "short[]", "int[]", "long[]", "float[]", "string[]", "uint[]"
+    ];
+    /// <summary>
+    /// 导出完成后自动删除的配置表代码文件。
+    /// </summary>
+    private static readonly HashSet<string> RemoveConfigSet =
+    [
+        "WorldConfig.cs", "ServerConfig.cs", "SceneConfig.cs", "MachineConfig.cs"
     ];
     static ExcelExporter()
     {
@@ -68,12 +65,6 @@ public sealed partial class ExcelExporter
     public ExcelExporter(ExportType exportType)
     {
         ExportType = exportType;
-        
-        if (ExporterSettingsHelper.ExcelTemplatePath?.Trim() == "")
-        {
-            Log.Info($"ExcelTemplatePath Can not be empty!");
-            return;
-        }
 
         if (ExporterSettingsHelper.ExcelVersionFile == null || ExporterSettingsHelper.ExcelVersionFile.Trim() == "")
         {
@@ -186,6 +177,26 @@ public sealed partial class ExcelExporter
         ExportToBinary();
         File.WriteAllText(_versionFilePath, JsonConvert.SerializeObject(VersionInfo));
         CustomExport();
+        // RemoveConfigCS();
+    }
+
+    private static void RemoveConfigCS()
+    {
+        foreach (var removeConfigFile in RemoveConfigSet)
+        {
+            var serverFile = Path.Combine(ExporterSettingsHelper.ExcelServerFileDirectory, removeConfigFile);
+            var clientFile = Path.Combine(ExporterSettingsHelper.ExcelClientFileDirectory, removeConfigFile);
+            
+            if (File.Exists(serverFile))
+            {
+                File.Delete(serverFile);
+            }
+        
+            if (File.Exists(clientFile))
+            {
+                File.Delete(clientFile);
+            }
+        }
     }
 
     private void CustomExport()
@@ -227,9 +238,22 @@ public sealed partial class ExcelExporter
             //FileHelper.ClearDirectoryFile(ClientCustomExportDirectory);
         }
         
+        long AssemblyIdentity(Assembly assembly)
+        {
+            var assemblyName = assembly.GetName();
+            var name = assemblyName.Name;
+            var version = assemblyName.Version.ToString();
+            var culture = assemblyName.CultureInfo?.Name ?? "neutral";
+            var publicKeyToken = BitConverter.ToString(assemblyName.GetPublicKeyToken()).Replace("-", string.Empty);
+            var assemblyIdentity = $"{name}|{version}|{culture}|{publicKeyToken}";
+            var hashBytes = SHA256.HashData(Encoding.UTF8.GetBytes(assemblyIdentity));
+            return BitConverter.ToInt64(hashBytes, 0);
+        }
+        
         void AddCustomExportTask(Assembly assembly)
         {
-            var assemblyInfo = new AssemblyInfo(assembly);
+            var assemblyIdentity = AssemblyIdentity(assembly);
+            var assemblyInfo = new AssemblyInfo(assemblyIdentity, assembly);
             
             if (assemblyInfo.AssemblyTypeGroupList.TryGetValue(typeof(ICustomExport), out var customExportList))
             {
@@ -582,7 +606,7 @@ public sealed partial class ExcelExporter
             }
         }
 
-        var template = ExcelTemplate;
+        var template = ExcelTemplate.Template;
         
         if (fileBuilder.Length > 0)
         {
@@ -689,7 +713,7 @@ public sealed partial class ExcelExporter
 
                 if (serverDynamicInfo?.ConfigData != null)
                 {
-                    var bytes = ProtoBufHelper.ToBytes(serverDynamicInfo.ConfigData);
+                    var bytes = ProtoBuffHelper.ToBytes(serverDynamicInfo.ConfigData);
                     
                     if (!Directory.Exists(_excelServerBinaryDirectory))
                     {
@@ -709,7 +733,7 @@ public sealed partial class ExcelExporter
                 
                 if (clientDynamicInfo?.ConfigData != null)
                 {
-                    var bytes = ProtoBufHelper.ToBytes(clientDynamicInfo.ConfigData);
+                    var bytes = ProtoBuffHelper.ToBytes(clientDynamicInfo.ConfigData);
                     
                     if (!Directory.Exists(_excelClientBinaryDirectory))
                     {

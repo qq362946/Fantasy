@@ -81,12 +81,6 @@ public sealed class ProtoBufExporter
 
         _protoBufDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.ProtoBufDirectory);
         
-        if (ExporterSettingsHelper.ProtoBufTemplatePath?.Trim() == "")
-        {
-            Log.Info($"ProtoBufTemplatePath Can not be empty!");
-            return;
-        }
-        
         if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client))
         {
             if (ExporterSettingsHelper.ProtoBufClientDirectory?.Trim() == "")
@@ -107,7 +101,7 @@ public sealed class ProtoBufExporter
         {
             if (ExporterSettingsHelper.ProtoBufServerDirectory?.Trim() == "")
             {
-                Log.Info($"ProtoBufServerDirectory Can not be empty!");
+                Log.Info($"ProtoBuffServerDirectory Can not be empty!");
                 return;
             }
             
@@ -125,7 +119,7 @@ public sealed class ProtoBufExporter
                 Directory.CreateDirectory(_protoBufDirectoryInner);
             }
 
-            _protoBufDirectoryInnerBson = $"{_protoBufDirectory}InnerBosn";
+            _protoBufDirectoryInnerBson = $"{_protoBufDirectory}InnerBson";
             
             if (!Directory.Exists(_protoBufDirectoryInnerBson))
             {
@@ -599,7 +593,7 @@ public sealed class ProtoBufExporter
     /// </summary>
     private void LoadTemplate()
     {
-        string[] lines = File.ReadAllLines(ExporterSettingsHelper.ProtoBufTemplatePath, Encoding.UTF8);
+        string[] lines = ProtoBuffTemplate.Template.Split(["\r\n", "\n"], StringSplitOptions.None);
 
         StringBuilder serverSb = new StringBuilder();
         StringBuilder clientSb = new StringBuilder();
