@@ -13,7 +13,7 @@ public class NewBehaviourScript : MonoBehaviour
     
     async FTask StartAsync()
     {
-        var scene = await Fantasy.Entry.Initialize();
+        var scene = await Fantasy.Entry.Initialize(GetType().Assembly);
         var session = scene.Connect("127.0.0.1:20000", NetworkProtocolType.KCP, () =>
         {
             Log.Debug("连接成功");
