@@ -1,0 +1,1786 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>IDateBase 接口
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="IDateBase 接口
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.IDateBase">
+
+
+
+  <h1 id="Fantasy_IDateBase" data-uid="Fantasy.IDateBase" class="text-break">
+    IDateBase 接口
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>表示用于执行各种数据库操作的数据库接口。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IDateBase</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="fields">字段
+</h2>
+
+
+
+  <h3 id="Fantasy_IDateBase_DataBaseLock" data-uid="Fantasy.IDateBase.DataBaseLock">
+  DataBaseLock
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>控制数据库访问并发性的锁队列类型。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly CoroutineLockQueueType DataBaseLock</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.CoroutineLockQueueType.html">CoroutineLockQueueType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_IDateBase_Count_" data-uid="Fantasy.IDateBase.Count*"></a>
+
+  <h3 id="Fantasy_IDateBase_Count__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.IDateBase.Count``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+  Count&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>在指定的集合中检索满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体数量。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Count&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Count_" data-uid="Fantasy.IDateBase.Count*"></a>
+
+  <h3 id="Fantasy_IDateBase_Count__1_System_String_" data-uid="Fantasy.IDateBase.Count``1(System.String)">
+  Count&lt;T&gt;(string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>在指定的集合中检索类型 <code class="typeparamref">T</code> 的实体数量。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Count&lt;T&gt;(string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_CreateDB_" data-uid="Fantasy.IDateBase.CreateDB*"></a>
+
+  <h3 id="Fantasy_IDateBase_CreateDB_System_Type_" data-uid="Fantasy.IDateBase.CreateDB(System.Type)">
+  CreateDB(Type)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据指定类型创建数据库，用于存储实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask CreateDB(Type type)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_CreateDB_" data-uid="Fantasy.IDateBase.CreateDB*"></a>
+
+  <h3 id="Fantasy_IDateBase_CreateDB__1" data-uid="Fantasy.IDateBase.CreateDB``1">
+  CreateDB&lt;T&gt;()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>创建指定类型 <code class="typeparamref">T</code> 的数据库，用于存储实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask CreateDB&lt;T&gt;() where T : Entity</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_CreateIndex_" data-uid="Fantasy.IDateBase.CreateIndex*"></a>
+
+  <h3 id="Fantasy_IDateBase_CreateIndex__1_System_Object___" data-uid="Fantasy.IDateBase.CreateIndex``1(System.Object[])">
+  CreateIndex&lt;T&gt;(params object[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>在默认集合中创建索引，以提高类型 <code class="typeparamref">T</code> 实体的查询性能。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask CreateIndex&lt;T&gt;(params object[] keys) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>keys</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_CreateIndex_" data-uid="Fantasy.IDateBase.CreateIndex*"></a>
+
+  <h3 id="Fantasy_IDateBase_CreateIndex__1_System_String_System_Object___" data-uid="Fantasy.IDateBase.CreateIndex``1(System.String,System.Object[])">
+  CreateIndex&lt;T&gt;(string, params object[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>在指定的集合中创建索引，以提高类型 <code class="typeparamref">T</code> 实体的查询性能。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask CreateIndex&lt;T&gt;(string collection, params object[] keys) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>keys</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Exist_" data-uid="Fantasy.IDateBase.Exist*"></a>
+
+  <h3 id="Fantasy_IDateBase_Exist__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.IDateBase.Exist``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+  Exist&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>检查指定集合中是否存在满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;bool&gt; Exist&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Exist_" data-uid="Fantasy.IDateBase.Exist*"></a>
+
+  <h3 id="Fantasy_IDateBase_Exist__1_System_String_" data-uid="Fantasy.IDateBase.Exist``1(System.String)">
+  Exist&lt;T&gt;(string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>检查指定集合中是否存在类型 <code class="typeparamref">T</code> 的实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;bool&gt; Exist&lt;T&gt;(string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_First_" data-uid="Fantasy.IDateBase.First*"></a>
+
+  <h3 id="Fantasy_IDateBase_First__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.IDateBase.First``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+  First&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>检索满足给定筛选条件的类型 <code class="typeparamref">T</code> 的第一个实体，从指定集合中。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;T?&gt; First&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_First_" data-uid="Fantasy.IDateBase.First*"></a>
+
+  <h3 id="Fantasy_IDateBase_First__1_System_String_System_String___System_String_" data-uid="Fantasy.IDateBase.First``1(System.String,System.String[],System.String)">
+  First&lt;T&gt;(string, string[], string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>查询指定集合中满足给定 JSON 查询字符串的类型 <code class="typeparamref">T</code> 的第一个实体，仅返回指定列的数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;T&gt; First&lt;T&gt;(string json, string[] cols, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>json</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cols</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Initialize_" data-uid="Fantasy.IDateBase.Initialize*"></a>
+
+  <h3 id="Fantasy_IDateBase_Initialize_System_String_System_String_" data-uid="Fantasy.IDateBase.Initialize(System.String,System.String)">
+  Initialize(string, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>初始化数据库连接。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IDateBase Initialize(string connectionString, string dbName)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>connectionString</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>dbName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.IDateBase.html">IDateBase</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_InsertBatch_" data-uid="Fantasy.IDateBase.InsertBatch*"></a>
+
+  <h3 id="Fantasy_IDateBase_InsertBatch__1_System_Collections_Generic_IEnumerable___0__System_String_" data-uid="Fantasy.IDateBase.InsertBatch``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+  InsertBatch&lt;T&gt;(IEnumerable&lt;T&gt;, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>批量插入一组类型 <code class="typeparamref">T</code> 实体到指定集合中，如果集合不存在将自动创建。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask InsertBatch&lt;T&gt;(IEnumerable&lt;T&gt; list, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>list</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_InsertBatch_" data-uid="Fantasy.IDateBase.InsertBatch*"></a>
+
+  <h3 id="Fantasy_IDateBase_InsertBatch__1_System_Object_System_Collections_Generic_IEnumerable___0__System_String_" data-uid="Fantasy.IDateBase.InsertBatch``1(System.Object,System.Collections.Generic.IEnumerable{``0},System.String)">
+  InsertBatch&lt;T&gt;(object, IEnumerable&lt;T&gt;, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>通过事务会话，批量插入一组类型 <code class="typeparamref">T</code> 实体到指定集合中，如果集合不存在将自动创建。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask InsertBatch&lt;T&gt;(object transactionSession, IEnumerable&lt;T&gt; list, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>transactionSession</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+    <dt><code>list</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Insert_" data-uid="Fantasy.IDateBase.Insert*"></a>
+
+  <h3 id="Fantasy_IDateBase_Insert__1___0_System_String_" data-uid="Fantasy.IDateBase.Insert``1(``0,System.String)">
+  Insert&lt;T&gt;(T, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>向指定集合中插入一个类型 <code class="typeparamref">T</code> 实体，如果集合不存在将自动创建。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask Insert&lt;T&gt;(T entity, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>entity</code> <span class="xref">T</span></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Query_" data-uid="Fantasy.IDateBase.Query*"></a>
+
+  <h3 id="Fantasy_IDateBase_Query_System_Int64_System_Collections_Generic_List_System_String__System_Collections_Generic_List_Fantasy_Entity__" data-uid="Fantasy.IDateBase.Query(System.Int64,System.Collections.Generic.List{System.String},System.Collections.Generic.List{Fantasy.Entity})">
+  Query(long, List&lt;string&gt;, List&lt;Entity&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>查询指定 ID 的多个集合，将结果存储在给定的实体列表中。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask Query(long id, List&lt;string&gt; collectionNames, List&lt;Entity&gt; result)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>collectionNames</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>result</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Fantasy.Entity.html">Entity</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_QueryByPageOrderBy_" data-uid="Fantasy.IDateBase.QueryByPageOrderBy*"></a>
+
+  <h3 id="Fantasy_IDateBase_QueryByPageOrderBy__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Boolean_System_String_" data-uid="Fantasy.IDateBase.QueryByPageOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)">
+  QueryByPageOrderBy&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, int, int, Expression&lt;Func&lt;T, object&gt;&gt;, bool, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从指定集合中按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表，按指定字段排序。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryByPageOrderBy&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, int pageIndex, int pageSize, Expression&lt;Func&lt;T, object&gt;&gt; orderByExpression, bool isAsc = true, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>pageIndex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>pageSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>orderByExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>isAsc</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_QueryByPage_" data-uid="Fantasy.IDateBase.QueryByPage*"></a>
+
+  <h3 id="Fantasy_IDateBase_QueryByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String_" data-uid="Fantasy.IDateBase.QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)">
+  QueryByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, int, int, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>分页查询指定集合中满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, int pageIndex, int pageSize, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>pageIndex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>pageSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_QueryByPage_" data-uid="Fantasy.IDateBase.QueryByPage*"></a>
+
+  <h3 id="Fantasy_IDateBase_QueryByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String___System_String_" data-uid="Fantasy.IDateBase.QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)">
+  QueryByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, int, int, string[], string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>分页查询指定集合中满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表，仅返回指定列的数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>pageIndex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>pageSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>cols</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_QueryCountAndDatesByPage_" data-uid="Fantasy.IDateBase.QueryCountAndDatesByPage*"></a>
+
+  <h3 id="Fantasy_IDateBase_QueryCountAndDatesByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String_" data-uid="Fantasy.IDateBase.QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)">
+  QueryCountAndDatesByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, int, int, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体数量和日期。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;(int count, List&lt;T&gt; dates)&gt; QueryCountAndDatesByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, int pageIndex, int pageSize, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>pageIndex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>pageSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;(<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.count">count</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt; <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.dates">dates</a>)&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_QueryCountAndDatesByPage_" data-uid="Fantasy.IDateBase.QueryCountAndDatesByPage*"></a>
+
+  <h3 id="Fantasy_IDateBase_QueryCountAndDatesByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String___System_String_" data-uid="Fantasy.IDateBase.QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)">
+  QueryCountAndDatesByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, int, int, string[], string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体数量和日期。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;(int count, List&lt;T&gt; dates)&gt; QueryCountAndDatesByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>pageIndex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>pageSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>cols</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;(<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.count">count</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt; <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.dates">dates</a>)&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_QueryJson_" data-uid="Fantasy.IDateBase.QueryJson*"></a>
+
+  <h3 id="Fantasy_IDateBase_QueryJson__1_System_Int64_System_String_System_String_" data-uid="Fantasy.IDateBase.QueryJson``1(System.Int64,System.String,System.String)">
+  QueryJson&lt;T&gt;(long, string, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据给定的 JSON 查询字符串查询指定集合中的类型 <code class="typeparamref">T</code> 实体列表，通过指定的任务 ID 进行标识。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryJson&lt;T&gt;(long taskId, string json, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>taskId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>json</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_QueryJson_" data-uid="Fantasy.IDateBase.QueryJson*"></a>
+
+  <h3 id="Fantasy_IDateBase_QueryJson__1_System_String_System_String_" data-uid="Fantasy.IDateBase.QueryJson``1(System.String,System.String)">
+  QueryJson&lt;T&gt;(string, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据给定的 JSON 查询字符串查询指定集合中的类型 <code class="typeparamref">T</code> 实体列表。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryJson&lt;T&gt;(string json, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>json</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_QueryJson_" data-uid="Fantasy.IDateBase.QueryJson*"></a>
+
+  <h3 id="Fantasy_IDateBase_QueryJson__1_System_String_System_String___System_String_" data-uid="Fantasy.IDateBase.QueryJson``1(System.String,System.String[],System.String)">
+  QueryJson&lt;T&gt;(string, string[], string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据给定的 JSON 查询字符串查询指定集合中的类型 <code class="typeparamref">T</code> 实体列表，仅返回指定列的数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryJson&lt;T&gt;(string json, string[] cols, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>json</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cols</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_QueryNotLock_" data-uid="Fantasy.IDateBase.QueryNotLock*"></a>
+
+  <h3 id="Fantasy_IDateBase_QueryNotLock__1_System_Int64_System_String_" data-uid="Fantasy.IDateBase.QueryNotLock``1(System.Int64,System.String)">
+  QueryNotLock&lt;T&gt;(long, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从指定集合中检索指定 ID 的类型 <code class="typeparamref">T</code> 的实体，不锁定。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;T&gt; QueryNotLock&lt;T&gt;(long id, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_QueryOrderBy_" data-uid="Fantasy.IDateBase.QueryOrderBy*"></a>
+
+  <h3 id="Fantasy_IDateBase_QueryOrderBy__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Boolean_System_String_" data-uid="Fantasy.IDateBase.QueryOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)">
+  QueryOrderBy&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, Expression&lt;Func&lt;T, object&gt;&gt;, bool, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从指定集合中按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表，按指定字段排序。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryOrderBy&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, Expression&lt;Func&lt;T, object&gt;&gt; orderByExpression, bool isAsc = true, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>orderByExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>isAsc</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Query_" data-uid="Fantasy.IDateBase.Query*"></a>
+
+  <h3 id="Fantasy_IDateBase_Query__1_System_Int64_System_String_" data-uid="Fantasy.IDateBase.Query``1(System.Int64,System.String)">
+  Query&lt;T&gt;(long, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从指定集合中检索指定 ID 的类型 <code class="typeparamref">T</code> 的实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;T&gt; Query&lt;T&gt;(long id, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Query_" data-uid="Fantasy.IDateBase.Query*"></a>
+
+  <h3 id="Fantasy_IDateBase_Query__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.IDateBase.Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+  Query&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从指定集合中按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; Query&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Query_" data-uid="Fantasy.IDateBase.Query*"></a>
+
+  <h3 id="Fantasy_IDateBase_Query__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String___System_String_" data-uid="Fantasy.IDateBase.Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String[],System.String)">
+  Query&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, string[], string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>查询指定集合中满足给定筛选条件的类型 <code class="typeparamref">T</code> 实体列表，仅返回指定列的数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; Query&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, string[] cols, string collection = null) where T : class</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cols</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Remove_" data-uid="Fantasy.IDateBase.Remove*"></a>
+
+  <h3 id="Fantasy_IDateBase_Remove__1_System_Int64_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.IDateBase.Remove``1(System.Int64,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+  Remove&lt;T&gt;(long, Expression&lt;Func&lt;T, bool&gt;&gt;, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据给定的筛选条件和 ID 从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Remove&lt;T&gt;(long id, Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Remove_" data-uid="Fantasy.IDateBase.Remove*"></a>
+
+  <h3 id="Fantasy_IDateBase_Remove__1_System_Int64_System_Object_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.IDateBase.Remove``1(System.Int64,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">
+  Remove&lt;T&gt;(long, object, Expression&lt;Func&lt;T, bool&gt;&gt;, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>通过事务会话，根据给定的筛选条件和 ID 从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Remove&lt;T&gt;(long id, object transactionSession, Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>transactionSession</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Remove_" data-uid="Fantasy.IDateBase.Remove*"></a>
+
+  <h3 id="Fantasy_IDateBase_Remove__1_System_Int64_System_String_" data-uid="Fantasy.IDateBase.Remove``1(System.Int64,System.String)">
+  Remove&lt;T&gt;(long, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据指定的 ID 从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Remove&lt;T&gt;(long id, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Remove_" data-uid="Fantasy.IDateBase.Remove*"></a>
+
+  <h3 id="Fantasy_IDateBase_Remove__1_System_Object_System_Int64_System_String_" data-uid="Fantasy.IDateBase.Remove``1(System.Object,System.Int64,System.String)">
+  Remove&lt;T&gt;(object, long, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>通过事务会话，根据指定的 ID 从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Remove&lt;T&gt;(object transactionSession, long id, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>transactionSession</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Save_" data-uid="Fantasy.IDateBase.Save*"></a>
+
+  <h3 id="Fantasy_IDateBase_Save_System_Int64_System_Collections_Generic_List_Fantasy_Entity__" data-uid="Fantasy.IDateBase.Save(System.Int64,System.Collections.Generic.List{Fantasy.Entity})">
+  Save(long, List&lt;Entity&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>保存一组实体到数据库中，根据实体列表的 ID 进行区分和存储。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask Save(long id, List&lt;Entity&gt; entities)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>entities</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Fantasy.Entity.html">Entity</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Save_" data-uid="Fantasy.IDateBase.Save*"></a>
+
+  <h3 id="Fantasy_IDateBase_Save__1_System_Object___0_System_String_" data-uid="Fantasy.IDateBase.Save``1(System.Object,``0,System.String)">
+  Save&lt;T&gt;(object, T, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>通过事务会话将类型 <code class="typeparamref">T</code> 实体保存到指定集合中，如果集合不存在将自动创建。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask Save&lt;T&gt;(object transactionSession, T entity, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>transactionSession</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+    <dt><code>entity</code> <span class="xref">T</span></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Save_" data-uid="Fantasy.IDateBase.Save*"></a>
+
+  <h3 id="Fantasy_IDateBase_Save__1___0_System_String_" data-uid="Fantasy.IDateBase.Save``1(``0,System.String)">
+  Save&lt;T&gt;(T, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>保存类型 <code class="typeparamref">T</code> 实体到指定集合中，如果集合不存在将自动创建。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask Save&lt;T&gt;(T entity, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>entity</code> <span class="xref">T</span></dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_IDateBase_Sum_" data-uid="Fantasy.IDateBase.Sum*"></a>
+
+  <h3 id="Fantasy_IDateBase_Sum__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Linq_Expressions_Expression_System_Func___0_System_Object___System_String_" data-uid="Fantasy.IDateBase.Sum``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.String)">
+  Sum&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, Expression&lt;Func&lt;T, object&gt;&gt;, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>根据给定的筛选条件计算指定集合中类型 <code class="typeparamref">T</code> 实体某个属性的总和。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Sum&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, Expression&lt;Func&lt;T, object&gt;&gt; sumExpression, string collection = null) where T : Entity</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>sumExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>collection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

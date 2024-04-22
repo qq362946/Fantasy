@@ -1,0 +1,548 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>NetworkThread 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="NetworkThread 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.NetworkThread">
+
+
+
+  <h1 id="Fantasy_NetworkThread" data-uid="Fantasy.NetworkThread" class="text-break">
+    NetworkThread 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>网络线程管理器的单例类。负责处理网络相关操作、通信以及线程管理。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class NetworkThread : Singleton&lt;NetworkThread&gt;, ISingleton, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Fantasy.Singleton-1.html">Singleton</a>&lt;<a class="xref" href="Fantasy.NetworkThread.html">NetworkThread</a>&gt;</div>
+      <div><span class="xref">NetworkThread</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>实现</dt>
+    <dd>
+      <div><a class="xref" href="Fantasy.ISingleton.html">ISingleton</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_IsDisposed">Singleton&lt;NetworkThread&gt;.IsDisposed</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_Instance">Singleton&lt;NetworkThread&gt;.Instance</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">构造函数
+</h2>
+
+
+  <a id="Fantasy_NetworkThread__ctor_" data-uid="Fantasy.NetworkThread.#ctor*"></a>
+
+  <h3 id="Fantasy_NetworkThread__ctor" data-uid="Fantasy.NetworkThread.#ctor">
+  NetworkThread()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NetworkThread()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">字段
+</h2>
+
+
+
+  <h3 id="Fantasy_NetworkThread_SynchronizationContext" data-uid="Fantasy.NetworkThread.SynchronizationContext">
+  SynchronizationContext
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>线程同步上下文对象，用于在多线程环境中进行线程间的同步和通信。
+在网络线程中，通过设置和使用该上下文对象，可以实现线程安全的操作和数据传递。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ThreadSynchronizationContext SynchronizationContext</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.ThreadSynchronizationContext.html">ThreadSynchronizationContext</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">属性
+</h2>
+
+
+  <a id="Fantasy_NetworkThread_ManagedThreadId_" data-uid="Fantasy.NetworkThread.ManagedThreadId*"></a>
+
+  <h3 id="Fantasy_NetworkThread_ManagedThreadId" data-uid="Fantasy.NetworkThread.ManagedThreadId">
+  ManagedThreadId
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取当前逻辑线程的线程 ID。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int ManagedThreadId { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_NetworkThread_AddNetwork_" data-uid="Fantasy.NetworkThread.AddNetwork*"></a>
+
+  <h3 id="Fantasy_NetworkThread_AddNetwork_Fantasy_ANetwork_" data-uid="Fantasy.NetworkThread.AddNetwork(Fantasy.ANetwork)">
+  AddNetwork(ANetwork)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>添加网络对象到网络线程管理。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddNetwork(ANetwork aNetwork)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>aNetwork</code> <a class="xref" href="Fantasy.ANetwork.html">ANetwork</a></dt>
+    <dd><p>要添加的网络对象。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_NetworkThread_Dispose_" data-uid="Fantasy.NetworkThread.Dispose*"></a>
+
+  <h3 id="Fantasy_NetworkThread_Dispose" data-uid="Fantasy.NetworkThread.Dispose">
+  Dispose()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>释放对象所占用的资源，并执行必要的清理操作。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_NetworkThread_Initialize_" data-uid="Fantasy.NetworkThread.Initialize*"></a>
+
+  <h3 id="Fantasy_NetworkThread_Initialize" data-uid="Fantasy.NetworkThread.Initialize">
+  Initialize()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>初始化网络线程管理器，创建逻辑线程并启动。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Task Initialize()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_NetworkThread_RemoveChannel_" data-uid="Fantasy.NetworkThread.RemoveChannel*"></a>
+
+  <h3 id="Fantasy_NetworkThread_RemoveChannel_System_Int64_System_UInt32_" data-uid="Fantasy.NetworkThread.RemoveChannel(System.Int64,System.UInt32)">
+  RemoveChannel(long, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>移除指定网络通道。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveChannel(long networkId, uint channelId)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>networkId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>网络通道的 ID。</p>
+</dd>
+    <dt><code>channelId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>通道 ID。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_NetworkThread_RemoveNetwork_" data-uid="Fantasy.NetworkThread.RemoveNetwork*"></a>
+
+  <h3 id="Fantasy_NetworkThread_RemoveNetwork_System_Int64_" data-uid="Fantasy.NetworkThread.RemoveNetwork(System.Int64)">
+  RemoveNetwork(long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从网络线程管理中移除网络对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveNetwork(long networkId)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>networkId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>要移除的网络对象的 ID。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_NetworkThread_Send_" data-uid="Fantasy.NetworkThread.Send*"></a>
+
+  <h3 id="Fantasy_NetworkThread_Send_System_Int64_System_UInt32_System_UInt32_System_Int64_System_Int64_System_Object_" data-uid="Fantasy.NetworkThread.Send(System.Int64,System.UInt32,System.UInt32,System.Int64,System.Int64,System.Object)">
+  Send(long, uint, uint, long, long, object)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>向指定的网络通道发送消息。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Send(long networkId, uint channelId, uint rpcId, long routeTypeOpCode, long entityId, object message)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>networkId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>网络通道的 ID。</p>
+</dd>
+    <dt><code>channelId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>通道 ID。</p>
+</dd>
+    <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>RPC ID。</p>
+</dd>
+    <dt><code>routeTypeOpCode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由类型操作码。</p>
+</dd>
+    <dt><code>entityId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>实体 ID。</p>
+</dd>
+    <dt><code>message</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>要发送的消息对象。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_NetworkThread_SendStream_" data-uid="Fantasy.NetworkThread.SendStream*"></a>
+
+  <h3 id="Fantasy_NetworkThread_SendStream_System_Int64_System_UInt32_System_UInt32_System_Int64_System_Int64_System_IO_MemoryStream_" data-uid="Fantasy.NetworkThread.SendStream(System.Int64,System.UInt32,System.UInt32,System.Int64,System.Int64,System.IO.MemoryStream)">
+  SendStream(long, uint, uint, long, long, MemoryStream)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>向指定的网络通道发送内存流。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SendStream(long networkId, uint channelId, uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>networkId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>网络通道的 ID。</p>
+</dd>
+    <dt><code>channelId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>通道 ID。</p>
+</dd>
+    <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>RPC ID。</p>
+</dd>
+    <dt><code>routeTypeOpCode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由类型操作码。</p>
+</dd>
+    <dt><code>routeId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由 ID。</p>
+</dd>
+    <dt><code>memoryStream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>要发送的内存流。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

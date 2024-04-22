@@ -1,0 +1,2449 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>RecyclableMemoryStream 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="RecyclableMemoryStream 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.RecyclableMemoryStream">
+
+
+
+  <h1 id="Fantasy_RecyclableMemoryStream" data-uid="Fantasy.RecyclableMemoryStream" class="text-break">
+    RecyclableMemoryStream 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>MemoryStream implementation that deals with pooling and managing memory streams which use potentially large
+buffers.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class RecyclableMemoryStream : MemoryStream, IDisposable, IAsyncDisposable, IBufferWriter&lt;byte&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.marshalbyrefobject">MarshalByRefObject</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></div>
+      <div><span class="xref">RecyclableMemoryStream</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>实现</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1">IBufferWriter</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream.flush">MemoryStream.Flush()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream.flushasync">MemoryStream.FlushAsync(CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream.readasync#system-io-memorystream-readasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)">MemoryStream.ReadAsync(byte[], int, int, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream.readasync#system-io-memorystream-readasync(system-memory((system-byte))-system-threading-cancellationtoken)">MemoryStream.ReadAsync(Memory&lt;byte&gt;, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream.writeasync#system-io-memorystream-writeasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)">MemoryStream.WriteAsync(byte[], int, int, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream.writeasync#system-io-memorystream-writeasync(system-readonlymemory((system-byte))-system-threading-cancellationtoken)">MemoryStream.WriteAsync(ReadOnlyMemory&lt;byte&gt;, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.null">Stream.Null</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.copyto#system-io-stream-copyto(system-io-stream)">Stream.CopyTo(Stream)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream)">Stream.CopyToAsync(Stream)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream-system-int32)">Stream.CopyToAsync(Stream, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream-system-threading-cancellationtoken)">Stream.CopyToAsync(Stream, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.dispose#system-io-stream-dispose">Stream.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.disposeasync">Stream.DisposeAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.flushasync#system-io-stream-flushasync">Stream.FlushAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.beginread">Stream.BeginRead(byte[], int, int, AsyncCallback, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.endread">Stream.EndRead(IAsyncResult)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readasync#system-io-stream-readasync(system-byte()-system-int32-system-int32)">Stream.ReadAsync(byte[], int, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readexactlyasync#system-io-stream-readexactlyasync(system-memory((system-byte))-system-threading-cancellationtoken)">Stream.ReadExactlyAsync(Memory&lt;byte&gt;, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readexactlyasync#system-io-stream-readexactlyasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)">Stream.ReadExactlyAsync(byte[], int, int, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readatleastasync">Stream.ReadAtLeastAsync(Memory&lt;byte&gt;, int, bool, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.beginwrite">Stream.BeginWrite(byte[], int, int, AsyncCallback, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.endwrite">Stream.EndWrite(IAsyncResult)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.writeasync#system-io-stream-writeasync(system-byte()-system-int32-system-int32)">Stream.WriteAsync(byte[], int, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readexactly#system-io-stream-readexactly(system-span((system-byte)))">Stream.ReadExactly(Span&lt;byte&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readexactly#system-io-stream-readexactly(system-byte()-system-int32-system-int32)">Stream.ReadExactly(byte[], int, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readatleast">Stream.ReadAtLeast(Span&lt;byte&gt;, int, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.synchronized">Stream.Synchronized(Stream)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readtimeout">Stream.ReadTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.writetimeout">Stream.WriteTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.marshalbyrefobject.getlifetimeservice">MarshalByRefObject.GetLifetimeService()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.marshalbyrefobject.initializelifetimeservice">MarshalByRefObject.InitializeLifetimeService()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  </dd></dl>
+
+
+
+  <h2 id="Fantasy_RecyclableMemoryStream_remarks">备注</h2>
+  <div class="markdown level0 remarks"><p>This class works in tandem with the <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a> to supply <code>MemoryStream</code>-derived
+objects to callers, while avoiding these specific problems:</p>
+<ol><li><span class="term">LOH allocations</span>Since all large buffers are pooled, they will never incur a Gen2 GC</li><li><span class="term">Memory waste</span>A standard memory stream doubles its size when it runs out of room. This
+leads to continual memory growth as each stream approaches the maximum allowed size.</li><li><span class="term">Memory copying</span>Each time a <code>MemoryStream</code> grows, all the bytes are copied into new buffers.
+This implementation only copies the bytes when <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_GetBuffer">GetBuffer()</a> is called.</li><li><span class="term">Memory fragmentation</span>By using homogeneous buffer sizes, it ensures that blocks of memory
+can be easily reused.
+</li></ol>
+<p>
+The stream is implemented on top of a series of uniformly-sized blocks. As the stream's length grows,
+additional blocks are retrieved from the memory manager. It is these blocks that are pooled, not the stream
+object itself.
+</p>
+<p>
+The biggest wrinkle in this implementation is when <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_GetBuffer">GetBuffer()</a> is called. This requires a single
+contiguous buffer. If only a single block is in use, then that block is returned. If multiple blocks
+are in use, we retrieve a larger buffer from the memory manager. These large buffers are also pooled,
+split by size--they are multiples/exponentials of a chunk size (1 MB by default).
+</p>
+<p>
+Once a large buffer is assigned to the stream the small blocks are NEVER again used for this stream. All operations take place on the
+large buffer. The large buffer can be replaced by a larger buffer from the pool as needed. All blocks and large buffers
+are maintained in the stream until the stream is disposed (unless AggressiveBufferReturn is enabled in the stream manager).
+</p>
+<p>
+A further wrinkle is what happens when the stream is longer than the maximum allowable array length under .NET. This is allowed
+when only blocks are in use, and only the Read/Write APIs are used. Once a stream grows to this size, any attempt to convert it
+to a single buffer will result in an exception. Similarly, if a stream is already converted to use a single larger buffer, then
+it cannot grow beyond the limits of the maximum allowable array size.
+</p>
+<p>
+Any method that modifies the stream has the potential to throw an <code>OutOfMemoryException</code>, either because
+the stream is beyond the limits set in <code>RecyclableStreamManager</code>, or it would result in a buffer larger than
+the maximum array size supported by .NET.
+</p>
+</div>
+
+
+  <h2 class="section" id="constructors">构造函数
+</h2>
+
+
+  <a id="Fantasy_RecyclableMemoryStream__ctor_" data-uid="Fantasy.RecyclableMemoryStream.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream__ctor_Fantasy_RecyclableMemoryStreamManager_" data-uid="Fantasy.RecyclableMemoryStream.#ctor(Fantasy.RecyclableMemoryStreamManager)">
+  RecyclableMemoryStream(RecyclableMemoryStreamManager)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>memoryManager</code> <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
+    <dd><p>The memory manager.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream__ctor_" data-uid="Fantasy.RecyclableMemoryStream.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream__ctor_Fantasy_RecyclableMemoryStreamManager_System_Guid_" data-uid="Fantasy.RecyclableMemoryStream.#ctor(Fantasy.RecyclableMemoryStreamManager,System.Guid)">
+  RecyclableMemoryStream(RecyclableMemoryStreamManager, Guid)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, Guid id)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>memoryManager</code> <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
+    <dd><p>The memory manager.</p>
+</dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream__ctor_" data-uid="Fantasy.RecyclableMemoryStream.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream__ctor_Fantasy_RecyclableMemoryStreamManager_System_Guid_System_String_" data-uid="Fantasy.RecyclableMemoryStream.#ctor(Fantasy.RecyclableMemoryStreamManager,System.Guid,System.String)">
+  RecyclableMemoryStream(RecyclableMemoryStreamManager, Guid, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, Guid id, string tag)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>memoryManager</code> <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
+    <dd><p>The memory manager.</p>
+</dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream__ctor_" data-uid="Fantasy.RecyclableMemoryStream.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream__ctor_Fantasy_RecyclableMemoryStreamManager_System_Guid_System_String_System_Int32_" data-uid="Fantasy.RecyclableMemoryStream.#ctor(Fantasy.RecyclableMemoryStreamManager,System.Guid,System.String,System.Int32)">
+  RecyclableMemoryStream(RecyclableMemoryStreamManager, Guid, string, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, Guid id, string tag, int requestedSize)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>memoryManager</code> <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
+    <dd><p>The memory manager.</p>
+</dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
+</dd>
+    <dt><code>requestedSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The initial requested size to prevent future allocations.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream__ctor_" data-uid="Fantasy.RecyclableMemoryStream.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream__ctor_Fantasy_RecyclableMemoryStreamManager_System_Guid_System_String_System_Int64_" data-uid="Fantasy.RecyclableMemoryStream.#ctor(Fantasy.RecyclableMemoryStreamManager,System.Guid,System.String,System.Int64)">
+  RecyclableMemoryStream(RecyclableMemoryStreamManager, Guid, string, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, Guid id, string tag, long requestedSize)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>memoryManager</code> <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
+    <dd><p>The memory manager</p>
+</dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
+</dd>
+    <dt><code>requestedSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The initial requested size to prevent future allocations.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream__ctor_" data-uid="Fantasy.RecyclableMemoryStream.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream__ctor_Fantasy_RecyclableMemoryStreamManager_System_String_" data-uid="Fantasy.RecyclableMemoryStream.#ctor(Fantasy.RecyclableMemoryStreamManager,System.String)">
+  RecyclableMemoryStream(RecyclableMemoryStreamManager, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, string tag)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>memoryManager</code> <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
+    <dd><p>The memory manager.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream__ctor_" data-uid="Fantasy.RecyclableMemoryStream.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream__ctor_Fantasy_RecyclableMemoryStreamManager_System_String_System_Int32_" data-uid="Fantasy.RecyclableMemoryStream.#ctor(Fantasy.RecyclableMemoryStreamManager,System.String,System.Int32)">
+  RecyclableMemoryStream(RecyclableMemoryStreamManager, string, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, string tag, int requestedSize)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>memoryManager</code> <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
+    <dd><p>The memory manager</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
+</dd>
+    <dt><code>requestedSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The initial requested size to prevent future allocations.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream__ctor_" data-uid="Fantasy.RecyclableMemoryStream.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream__ctor_Fantasy_RecyclableMemoryStreamManager_System_String_System_Int64_" data-uid="Fantasy.RecyclableMemoryStream.#ctor(Fantasy.RecyclableMemoryStreamManager,System.String,System.Int64)">
+  RecyclableMemoryStream(RecyclableMemoryStreamManager, string, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStream(RecyclableMemoryStreamManager memoryManager, string tag, long requestedSize)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>memoryManager</code> <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
+    <dd><p>The memory manager.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
+</dd>
+    <dt><code>requestedSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The initial requested size to prevent future allocations.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">属性
+</h2>
+
+
+  <a id="Fantasy_RecyclableMemoryStream_CanRead_" data-uid="Fantasy.RecyclableMemoryStream.CanRead*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_CanRead" data-uid="Fantasy.RecyclableMemoryStream.CanRead">
+  CanRead
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Whether the stream can currently read.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool CanRead { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_CanSeek_" data-uid="Fantasy.RecyclableMemoryStream.CanSeek*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_CanSeek" data-uid="Fantasy.RecyclableMemoryStream.CanSeek">
+  CanSeek
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Whether the stream can currently seek.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool CanSeek { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_CanTimeout_" data-uid="Fantasy.RecyclableMemoryStream.CanTimeout*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_CanTimeout" data-uid="Fantasy.RecyclableMemoryStream.CanTimeout">
+  CanTimeout
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Always false.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool CanTimeout { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_CanWrite_" data-uid="Fantasy.RecyclableMemoryStream.CanWrite*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_CanWrite" data-uid="Fantasy.RecyclableMemoryStream.CanWrite">
+  CanWrite
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Whether the stream can currently write.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool CanWrite { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Capacity_" data-uid="Fantasy.RecyclableMemoryStream.Capacity*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Capacity" data-uid="Fantasy.RecyclableMemoryStream.Capacity">
+  Capacity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the capacity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int Capacity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_Capacity_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>
+Capacity is always in multiples of the memory manager's block size, unless
+the large buffer is in use. Capacity never decreases during a stream's lifetime.
+Explicitly setting the capacity to a lower value than the current value will have no effect.
+This is because the buffers are all pooled by chunks and there's little reason to
+allow stream truncation.
+</p>
+<p>
+Writing past the current capacity will cause <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_Capacity">Capacity</a> to automatically increase, until MaximumStreamCapacity is reached.
+</p>
+<p>
+If the capacity is larger than <code>int.MaxValue</code>, then <code>InvalidOperationException</code> will be thrown. If you anticipate using
+larger streams, use the <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_Capacity64">Capacity64</a> property instead.
+</p>
+</div>
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Capacity is larger than int.MaxValue.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Capacity64_" data-uid="Fantasy.RecyclableMemoryStream.Capacity64*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Capacity64" data-uid="Fantasy.RecyclableMemoryStream.Capacity64">
+  Capacity64
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a 64-bit version of capacity, for streams larger than <code>int.MaxValue</code> in length.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long Capacity64 { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Length_" data-uid="Fantasy.RecyclableMemoryStream.Length*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Length" data-uid="Fantasy.RecyclableMemoryStream.Length">
+  Length
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the number of bytes written to this stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override long Length { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_Length_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>If the buffer has already been converted to a large buffer, then the maximum length is limited by the maximum allowed array length in .NET.</p>
+</div>
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Position_" data-uid="Fantasy.RecyclableMemoryStream.Position*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Position" data-uid="Fantasy.RecyclableMemoryStream.Position">
+  Position
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the current position in the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override long Position { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_Position_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>If the buffer has already been converted to a large buffer, then the maximum length (and thus position) is limited by the maximum allowed array length in .NET.</p>
+</div>
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p>A negative value was passed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Stream is in large-buffer mode, but an attempt was made to set the position past the maximum allowed array length.</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Advance_" data-uid="Fantasy.RecyclableMemoryStream.Advance*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Advance_System_Int32_" data-uid="Fantasy.RecyclableMemoryStream.Advance(System.Int32)">
+  Advance(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Notifies the stream that <code class="paramref">count</code> bytes were written to the buffer returned by <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_GetMemory_System_Int32_">GetMemory(int)</a> or <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_GetSpan_System_Int32_">GetSpan(int)</a>.
+Seeks forward by <code class="paramref">count</code> bytes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Advance(int count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>How many bytes to advance.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_Advance_System_Int32__remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>You must request a new buffer after calling Advance to continue writing more data and cannot write to a previously acquired buffer.</p>
+</div>
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">count</code> is negative.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p><code class="paramref">count</code> is larger than the size of the previously requested buffer.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Close_" data-uid="Fantasy.RecyclableMemoryStream.Close*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Close" data-uid="Fantasy.RecyclableMemoryStream.Close">
+  Close()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Equivalent to <code>Dispose</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Close()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_CopyTo_" data-uid="Fantasy.RecyclableMemoryStream.CopyTo*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_CopyTo_System_IO_Stream_System_Int32_" data-uid="Fantasy.RecyclableMemoryStream.CopyTo(System.IO.Stream,System.Int32)">
+  CopyTo(Stream, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void CopyTo(Stream destination, int bufferSize)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>destination</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd></dd>
+    <dt><code>bufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_CopyToAsync_" data-uid="Fantasy.RecyclableMemoryStream.CopyToAsync*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_CopyToAsync_System_IO_Stream_System_Int32_System_Threading_CancellationToken_" data-uid="Fantasy.RecyclableMemoryStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
+  CopyToAsync(Stream, int, CancellationToken)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously reads all the bytes from the current position in this stream and writes them to another stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>destination</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>The stream to which the contents of the current stream will be copied.</p>
+</dd>
+    <dt><code>bufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>This parameter is ignored.</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>The token to monitor for cancellation requests.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd><p>A task that represents the asynchronous copy operation.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_CopyToAsync_System_IO_Stream_System_Int32_System_Threading_CancellationToken__remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>Similarly to <code>MemoryStream</code>'s behavior, <code>CopyToAsync</code> will adjust the source stream's position by the number of bytes written to the destination stream, as a Read would do.</p>
+</div>
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p><code class="paramref">destination</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Either the current stream or the destination stream is disposed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p>The current stream does not support reading, or the destination stream does not support writing.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Dispose_" data-uid="Fantasy.RecyclableMemoryStream.Dispose*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Dispose_System_Boolean_" data-uid="Fantasy.RecyclableMemoryStream.Dispose(System.Boolean)">
+  Dispose(bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the memory used by this stream back to the pool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Dispose(bool disposing)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>disposing</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether we're disposing (true), or being called by the finalizer (false).</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Finalize_" data-uid="Fantasy.RecyclableMemoryStream.Finalize*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Finalize" data-uid="Fantasy.RecyclableMemoryStream.Finalize">
+  ~RecyclableMemoryStream()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The finalizer will be called when a stream is not disposed properly.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ~RecyclableMemoryStream()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_Finalize_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>Failing to dispose indicates a bug in the code using streams. Care should be taken to properly account for stream lifetime.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_GetBuffer_" data-uid="Fantasy.RecyclableMemoryStream.GetBuffer*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_GetBuffer" data-uid="Fantasy.RecyclableMemoryStream.GetBuffer">
+  GetBuffer()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a single buffer containing the contents of the stream.
+The buffer may be longer than the stream length.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override byte[] GetBuffer()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>A byte[] buffer.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_GetBuffer_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>IMPORTANT: Doing a <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_Write_System_Byte___System_Int32_System_Int32_">Write(byte[], int, int)</a> after calling <code>GetBuffer</code> invalidates the buffer. The old buffer is held onto
+until <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_Dispose_System_Boolean_">Dispose(bool)</a> is called, but the next time <code>GetBuffer</code> is called, a new buffer from the pool will be required.</p>
+</div>
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.outofmemoryexception">OutOfMemoryException</a></dt>
+    <dd><p>stream is too large for a contiguous buffer.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_GetMemory_" data-uid="Fantasy.RecyclableMemoryStream.GetMemory*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_GetMemory_System_Int32_" data-uid="Fantasy.RecyclableMemoryStream.GetMemory(System.Int32)">
+  GetMemory(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Memory&lt;byte&gt; GetMemory(int sizeHint = 0)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>sizeHint</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_GetMemory_System_Int32__remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>IMPORTANT: Calling Write(), GetBuffer(), TryGetBuffer(), Seek(), GetLength(), Advance(),
+or setting Position after calling GetMemory() invalidates the memory.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_GetReadOnlySequence_" data-uid="Fantasy.RecyclableMemoryStream.GetReadOnlySequence*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_GetReadOnlySequence" data-uid="Fantasy.RecyclableMemoryStream.GetReadOnlySequence">
+  GetReadOnlySequence()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a sequence containing the contents of the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReadOnlySequence&lt;byte&gt; GetReadOnlySequence()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.buffers.readonlysequence-1">ReadOnlySequence</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>A ReadOnlySequence of bytes.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_GetReadOnlySequence_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>IMPORTANT: Calling Write(), GetMemory(), GetSpan(), Dispose(), or Close() after calling GetReadOnlySequence() invalidates the sequence.</p>
+</div>
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_GetSpan_" data-uid="Fantasy.RecyclableMemoryStream.GetSpan*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_GetSpan_System_Int32_" data-uid="Fantasy.RecyclableMemoryStream.GetSpan(System.Int32)">
+  GetSpan(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Span&lt;byte&gt; GetSpan(int sizeHint = 0)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>sizeHint</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_GetSpan_System_Int32__remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>IMPORTANT: Calling Write(), GetBuffer(), TryGetBuffer(), Seek(), GetLength(), Advance(),
+or setting Position after calling GetSpan() invalidates the span.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Read_" data-uid="Fantasy.RecyclableMemoryStream.Read*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Read_System_Byte___System_Int32_System_Int32_" data-uid="Fantasy.RecyclableMemoryStream.Read(System.Byte[],System.Int32,System.Int32)">
+  Read(byte[], int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads from the current position into the provided buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int Read(byte[] buffer, int offset, int count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>Destination buffer.</p>
+</dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Offset into buffer at which to start placing the read bytes.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Number of bytes to read.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes read.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p>buffer is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p>offset or count is less than 0.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>offset subtracted from the buffer length is less than count.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Read_" data-uid="Fantasy.RecyclableMemoryStream.Read*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Read_System_Span_System_Byte__" data-uid="Fantasy.RecyclableMemoryStream.Read(System.Span{System.Byte})">
+  Read(Span&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads from the current position into the provided buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int Read(Span&lt;byte&gt; buffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>Destination buffer.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes read.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_ReadByte_" data-uid="Fantasy.RecyclableMemoryStream.ReadByte*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_ReadByte" data-uid="Fantasy.RecyclableMemoryStream.ReadByte">
+  ReadByte()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a single byte from the current position in the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int ReadByte()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The byte at the current position, or -1 if the position is at the end of the stream.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_SafeRead_" data-uid="Fantasy.RecyclableMemoryStream.SafeRead*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_SafeRead_System_Byte___System_Int32_System_Int32_System_Int32__" data-uid="Fantasy.RecyclableMemoryStream.SafeRead(System.Byte[],System.Int32,System.Int32,System.Int32@)">
+  SafeRead(byte[], int, int, ref int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads from the specified position into the provided buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int SafeRead(byte[] buffer, int offset, int count, ref int streamPosition)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>Destination buffer.</p>
+</dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Offset into buffer at which to start placing the read bytes.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Number of bytes to read.</p>
+</dd>
+    <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Position in the stream to start reading from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes read.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p><code class="paramref">buffer</code> is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">offset</code> or <code class="paramref">count</code> is less than 0.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p><code class="paramref">offset</code> subtracted from the buffer length is less than <code class="paramref">count</code>.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Stream position is beyond <code>int.MaxValue</code>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_SafeRead_" data-uid="Fantasy.RecyclableMemoryStream.SafeRead*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_SafeRead_System_Byte___System_Int32_System_Int32_System_Int64__" data-uid="Fantasy.RecyclableMemoryStream.SafeRead(System.Byte[],System.Int32,System.Int32,System.Int64@)">
+  SafeRead(byte[], int, int, ref long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads from the specified position into the provided buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int SafeRead(byte[] buffer, int offset, int count, ref long streamPosition)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>Destination buffer.</p>
+</dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Offset into buffer at which to start placing the read bytes.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Number of bytes to read.</p>
+</dd>
+    <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Position in the stream to start reading from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes read.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p><code class="paramref">buffer</code> is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">offset</code> or <code class="paramref">count</code> is less than 0.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p><code class="paramref">offset</code> subtracted from the buffer length is less than <code class="paramref">count</code>.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_SafeRead_" data-uid="Fantasy.RecyclableMemoryStream.SafeRead*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_SafeRead_System_Span_System_Byte__System_Int32__" data-uid="Fantasy.RecyclableMemoryStream.SafeRead(System.Span{System.Byte},System.Int32@)">
+  SafeRead(Span&lt;byte&gt;, ref int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads from the specified position into the provided buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int SafeRead(Span&lt;byte&gt; buffer, ref int streamPosition)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>Destination buffer.</p>
+</dd>
+    <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Position in the stream to start reading from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes read.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Stream position is beyond <code>int.MaxValue</code>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_SafeRead_" data-uid="Fantasy.RecyclableMemoryStream.SafeRead*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_SafeRead_System_Span_System_Byte__System_Int64__" data-uid="Fantasy.RecyclableMemoryStream.SafeRead(System.Span{System.Byte},System.Int64@)">
+  SafeRead(Span&lt;byte&gt;, ref long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads from the specified position into the provided buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int SafeRead(Span&lt;byte&gt; buffer, ref long streamPosition)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>Destination buffer.</p>
+</dd>
+    <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Position in the stream to start reading from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes read.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_SafeReadByte_" data-uid="Fantasy.RecyclableMemoryStream.SafeReadByte*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_SafeReadByte_System_Int32__" data-uid="Fantasy.RecyclableMemoryStream.SafeReadByte(System.Int32@)">
+  SafeReadByte(ref int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a single byte from the specified position in the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int SafeReadByte(ref int streamPosition)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The position in the stream to read from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The byte at the current position, or -1 if the position is at the end of the stream.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Stream position is beyond <code>int.MaxValue</code>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_SafeReadByte_" data-uid="Fantasy.RecyclableMemoryStream.SafeReadByte*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_SafeReadByte_System_Int64__" data-uid="Fantasy.RecyclableMemoryStream.SafeReadByte(System.Int64@)">
+  SafeReadByte(ref long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a single byte from the specified position in the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int SafeReadByte(ref long streamPosition)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The position in the stream to read from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The byte at the current position, or -1 if the position is at the end of the stream.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Seek_" data-uid="Fantasy.RecyclableMemoryStream.Seek*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Seek_System_Int64_System_IO_SeekOrigin_" data-uid="Fantasy.RecyclableMemoryStream.Seek(System.Int64,System.IO.SeekOrigin)">
+  Seek(long, SeekOrigin)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the position to the offset from the seek location.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override long Seek(long offset, SeekOrigin loc)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>How many bytes to move.</p>
+</dd>
+    <dt><code>loc</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.seekorigin">SeekOrigin</a></dt>
+    <dd><p>From where.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The new position.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">offset</code> is larger than <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_MaximumStreamCapacity">MaximumStreamCapacity</a>.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>Invalid seek origin.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
+    <dd><p>Attempt to set negative position.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_SetLength_" data-uid="Fantasy.RecyclableMemoryStream.SetLength*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_SetLength_System_Int64_" data-uid="Fantasy.RecyclableMemoryStream.SetLength(System.Int64)">
+  SetLength(long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets the length of the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void SetLength(long value)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p>value is negative or larger than <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_MaximumStreamCapacity">MaximumStreamCapacity</a>.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_ToArray_" data-uid="Fantasy.RecyclableMemoryStream.ToArray*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_ToArray" data-uid="Fantasy.RecyclableMemoryStream.ToArray">
+  ToArray()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a new array with a copy of the buffer's contents. You should almost certainly be using <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_GetBuffer">GetBuffer()</a> combined with the <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_Length">Length</a> to
+access the bytes in this stream. Calling <code>ToArray</code> will destroy the benefits of pooled buffers, but it is included
+for the sake of completeness.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method has degraded performance vs. GetBuffer and should be avoided.&quot;)]
+public override byte[] ToArray()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p>The current <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>object disallows <code>ToArray</code> calls.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.outofmemoryexception">OutOfMemoryException</a></dt>
+    <dd><p>The length of the stream is too long for a contiguous array.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_ToString_" data-uid="Fantasy.RecyclableMemoryStream.ToString*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_ToString" data-uid="Fantasy.RecyclableMemoryStream.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a useful string for debugging. This should not normally be called in actual production code.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_TryGetBuffer_" data-uid="Fantasy.RecyclableMemoryStream.TryGetBuffer*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_TryGetBuffer_System_ArraySegment_System_Byte___" data-uid="Fantasy.RecyclableMemoryStream.TryGetBuffer(System.ArraySegment{System.Byte}@)">
+  TryGetBuffer(out ArraySegment&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns an <code>ArraySegment</code> that wraps a single buffer containing the contents of the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool TryGetBuffer(out ArraySegment&lt;byte&gt; buffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.arraysegment-1">ArraySegment</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>An <code>ArraySegment</code> containing a reference to the underlying bytes.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if a buffer can be returned; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Write_" data-uid="Fantasy.RecyclableMemoryStream.Write*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Write_System_Byte___System_Int32_System_Int32_" data-uid="Fantasy.RecyclableMemoryStream.Write(System.Byte[],System.Int32,System.Int32)">
+  Write(byte[], int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes the buffer to the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Write(byte[] buffer, int offset, int count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>Source buffer.</p>
+</dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Start position.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Number of bytes to write.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p>buffer is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p>offset or count is negative.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>buffer.Length - offset is not less than count.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_Write_" data-uid="Fantasy.RecyclableMemoryStream.Write*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_Write_System_ReadOnlySpan_System_Byte__" data-uid="Fantasy.RecyclableMemoryStream.Write(System.ReadOnlySpan{System.Byte})">
+  Write(ReadOnlySpan&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes the buffer to the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Write(ReadOnlySpan&lt;byte&gt; source)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>Source buffer.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p>buffer is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_WriteByte_" data-uid="Fantasy.RecyclableMemoryStream.WriteByte*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_WriteByte_System_Byte_" data-uid="Fantasy.RecyclableMemoryStream.WriteByte(System.Byte)">
+  WriteByte(byte)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes a single byte to the current position in the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void WriteByte(byte value)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd><p>byte value to write.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_WriteTo_" data-uid="Fantasy.RecyclableMemoryStream.WriteTo*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_WriteTo_System_Byte___" data-uid="Fantasy.RecyclableMemoryStream.WriteTo(System.Byte[])">
+  WriteTo(byte[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes bytes from the current stream to a destination <code>byte</code> array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteTo(byte[] buffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>Target buffer.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_WriteTo_System_Byte____remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The entire stream is written to the target array.</p>
+</div>
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p><code class="paramref">buffer</code>&gt; is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_WriteTo_" data-uid="Fantasy.RecyclableMemoryStream.WriteTo*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_WriteTo_System_Byte___System_Int64_System_Int64_" data-uid="Fantasy.RecyclableMemoryStream.WriteTo(System.Byte[],System.Int64,System.Int64)">
+  WriteTo(byte[], long, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes bytes from the current stream to a destination <code>byte</code> array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteTo(byte[] buffer, long offset, long count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>Target buffer.</p>
+</dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Offset in the source stream, from which to start.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Number of bytes to write.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p><code class="paramref">buffer</code>&gt; is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">offset</code> is less than 0, or <code class="paramref">offset</code> + <code class="paramref">count</code> is beyond this stream's length.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_WriteTo_" data-uid="Fantasy.RecyclableMemoryStream.WriteTo*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_WriteTo_System_Byte___System_Int64_System_Int64_System_Int32_" data-uid="Fantasy.RecyclableMemoryStream.WriteTo(System.Byte[],System.Int64,System.Int64,System.Int32)">
+  WriteTo(byte[], long, long, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes bytes from the current stream to a destination <code>byte</code> array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteTo(byte[] buffer, long offset, long count, int targetOffset)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>Target buffer.</p>
+</dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Offset in the source stream, from which to start.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Number of bytes to write.</p>
+</dd>
+    <dt><code>targetOffset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Offset in the target byte array to start writing</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p><code>buffer</code> is null</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">offset</code> is less than 0, or <code class="paramref">offset</code> + <code class="paramref">count</code> is beyond this stream's length.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">targetOffset</code> is less than 0, or <code class="paramref">targetOffset</code> + <code class="paramref">count</code> is beyond the target <code class="paramref">buffer</code>'s length.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_WriteTo_" data-uid="Fantasy.RecyclableMemoryStream.WriteTo*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_WriteTo_System_IO_Stream_" data-uid="Fantasy.RecyclableMemoryStream.WriteTo(System.IO.Stream)">
+  WriteTo(Stream)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Synchronously writes this stream's bytes to the argument stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void WriteTo(Stream stream)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>Destination stream.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStream_WriteTo_System_IO_Stream__remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>Important: This does a synchronous write, which may not be desired in some situations.</p>
+</div>
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p><code class="paramref">stream</code> is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_WriteTo_" data-uid="Fantasy.RecyclableMemoryStream.WriteTo*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_WriteTo_System_IO_Stream_System_Int32_System_Int32_" data-uid="Fantasy.RecyclableMemoryStream.WriteTo(System.IO.Stream,System.Int32,System.Int32)">
+  WriteTo(Stream, int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Synchronously writes this stream's bytes, starting at offset, for count bytes, to the argument stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteTo(Stream stream, int offset, int count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>Destination stream.</p>
+</dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Offset in source.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Number of bytes to write.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p><code class="paramref">stream</code> is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">offset</code> is less than 0, or <code class="paramref">offset</code> + <code class="paramref">count</code> is beyond  this <code class="paramref">stream</code>'s length.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStream_WriteTo_" data-uid="Fantasy.RecyclableMemoryStream.WriteTo*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStream_WriteTo_System_IO_Stream_System_Int64_System_Int64_" data-uid="Fantasy.RecyclableMemoryStream.WriteTo(System.IO.Stream,System.Int64,System.Int64)">
+  WriteTo(Stream, long, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Synchronously writes this stream's bytes, starting at offset, for count bytes, to the argument stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteTo(Stream stream, long offset, long count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>Destination stream.</p>
+</dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Offset in source.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Number of bytes to write.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p><code class="paramref">stream</code> is null.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">offset</code> is less than 0, or <code class="paramref">offset</code> + <code class="paramref">count</code> is beyond  this <code class="paramref">stream</code>'s length.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>Object has been disposed.</p>
+</dd>
+  </dl>
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

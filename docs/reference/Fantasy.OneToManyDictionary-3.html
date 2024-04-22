@@ -1,0 +1,645 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>OneToManyDictionary&lt;TKey, TValueKey, TValue&gt; 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="OneToManyDictionary&lt;TKey, TValueKey, TValue&gt; 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.OneToManyDictionary`3">
+
+
+
+  <h1 id="Fantasy_OneToManyDictionary_3" data-uid="Fantasy.OneToManyDictionary`3" class="text-break">
+    OneToManyDictionary&lt;TKey, TValueKey, TValue&gt; 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>一对多映射关系的字典。每个键都对应一个内部字典，该内部字典将键值映射到相应的值。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class OneToManyDictionary&lt;TKey, TValueKey, TValue&gt; : Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;, IDictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;, ICollection&lt;KeyValuePair&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;&gt;, IDictionary, ICollection, IReadOnlyDictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;, IReadOnlyCollection&lt;KeyValuePair&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;&gt;, IEnumerable&lt;KeyValuePair&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;&gt;, IEnumerable, ISerializable, IDeserializationCallback where TKey : notnull where TValueKey : notnull</code></pre>
+  </div>
+
+
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>TKey</code></dt>
+    <dd><p>外部字典中的键类型。</p>
+</dd>
+    <dt><code>TValueKey</code></dt>
+    <dd><p>内部字典中的键类型。</p>
+</dd>
+    <dt><code>TValue</code></dt>
+    <dd><p>内部字典中的值类型。</p>
+</dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TValueKey, TValue&gt;&gt;</div>
+      <div><span class="xref">OneToManyDictionary&lt;TKey, TValueKey, TValue&gt;</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>实现</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TValueKey, TValue&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TValueKey, TValue&gt;&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.idictionary">IDictionary</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.icollection">ICollection</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TValueKey, TValue&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TValueKey, TValue&gt;&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TValueKey, TValue&gt;&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable">ISerializable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.ideserializationcallback">IDeserializationCallback</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="Fantasy.OneToManyDictionaryPool-3.html">OneToManyDictionaryPool&lt;TKey, TValueKey, TValue&gt;</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.add">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.Add(TKey, Dictionary&lt;TValueKey, TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.clear">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.Clear()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.containskey">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.ContainsKey(TKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.containsvalue">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.ContainsValue(Dictionary&lt;TValueKey, TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.getenumerator">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.GetEnumerator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.ondeserialization">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.OnDeserialization(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.remove#system-collections-generic-dictionary-2-remove(-0)">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.Remove(TKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.remove#system-collections-generic-dictionary-2-remove(-0-1@)">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.Remove(TKey, out Dictionary&lt;TValueKey, TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.trygetvalue">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.TryGetValue(TKey, out Dictionary&lt;TValueKey, TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.tryadd">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.TryAdd(TKey, Dictionary&lt;TValueKey, TValue&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.ensurecapacity">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.EnsureCapacity(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.trimexcess#system-collections-generic-dictionary-2-trimexcess">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.TrimExcess()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.trimexcess#system-collections-generic-dictionary-2-trimexcess(system-int32)">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.TrimExcess(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.comparer">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.Comparer</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.count">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.Count</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.keys">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.Keys</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.values">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.Values</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.item">Dictionary&lt;TKey, Dictionary&lt;TValueKey, TValue&gt;&gt;.this[TKey]</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Fantasy.DictionaryExtensions.html#Fantasy_DictionaryExtensions_TryRemove__2_System_Collections_Generic_IDictionary___0___1____0___1__">DictionaryExtensions.TryRemove&lt;T, TV&gt;(IDictionary&lt;T, TV&gt;, T, out TV)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">构造函数
+</h2>
+
+
+  <a id="Fantasy_OneToManyDictionary_3__ctor_" data-uid="Fantasy.OneToManyDictionary`3.#ctor*"></a>
+
+  <h3 id="Fantasy_OneToManyDictionary_3__ctor" data-uid="Fantasy.OneToManyDictionary`3.#ctor">
+  OneToManyDictionary()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>创建一个新的 <a class="xref" href="Fantasy.OneToManyDictionary-3.html">OneToManyDictionary&lt;TKey, TValueKey, TValue&gt;</a> 实例。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OneToManyDictionary()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_OneToManyDictionary_3__ctor_" data-uid="Fantasy.OneToManyDictionary`3.#ctor*"></a>
+
+  <h3 id="Fantasy_OneToManyDictionary_3__ctor_System_Int32_" data-uid="Fantasy.OneToManyDictionary`3.#ctor(System.Int32)">
+  OneToManyDictionary(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>创建一个新的 <a class="xref" href="Fantasy.OneToManyDictionary-3.html">OneToManyDictionary&lt;TKey, TValueKey, TValue&gt;</a> 实例，并指定最大缓存数量。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OneToManyDictionary(int recyclingLimit = 0)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>recyclingLimit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>1:防止数据量过大、所以超过recyclingLimit的数据还是走GC.
+2:设置成0不控制数量，全部缓存</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_OneToManyDictionary_3_Add_" data-uid="Fantasy.OneToManyDictionary`3.Add*"></a>
+
+  <h3 id="Fantasy_OneToManyDictionary_3_Add__0__1__2_" data-uid="Fantasy.OneToManyDictionary`3.Add(`0,`1,`2)">
+  Add(TKey, TValueKey, TValue)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>向字典中添加指定的键值对。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Add(TKey key, TValueKey valueKey, TValue value)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>要添加键值对的键。</p>
+</dd>
+    <dt><code>valueKey</code> <span class="xref">TValueKey</span></dt>
+    <dd><p>要添加键值对的内部字典键。</p>
+</dd>
+    <dt><code>value</code> <span class="xref">TValue</span></dt>
+    <dd><p>要添加的值。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_OneToManyDictionary_3_Clear_" data-uid="Fantasy.OneToManyDictionary`3.Clear*"></a>
+
+  <h3 id="Fantasy_OneToManyDictionary_3_Clear" data-uid="Fantasy.OneToManyDictionary`3.Clear">
+  Clear()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>清空字典中的所有键值对，并将不再使用的内部字典实例放回对象池中。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Clear()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_OneToManyDictionary_3_Contains_" data-uid="Fantasy.OneToManyDictionary`3.Contains*"></a>
+
+  <h3 id="Fantasy_OneToManyDictionary_3_Contains__0__1_" data-uid="Fantasy.OneToManyDictionary`3.Contains(`0,`1)">
+  Contains(TKey, TValueKey)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>检查是否包含指定的键值对。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Contains(TKey key, TValueKey valueKey)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>外部字典中的键。</p>
+</dd>
+    <dt><code>valueKey</code> <span class="xref">TValueKey</span></dt>
+    <dd><p>内部字典中的键。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>如果包含指定的键值对，则为 true；否则为 false。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_OneToManyDictionary_3_First_" data-uid="Fantasy.OneToManyDictionary`3.First*"></a>
+
+  <h3 id="Fantasy_OneToManyDictionary_3_First__0_" data-uid="Fantasy.OneToManyDictionary`3.First(`0)">
+  First(TKey)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取指定键的第一个值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TValue First(TKey key)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>要获取第一个值的键。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TValue</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_OneToManyDictionary_3_Remove_" data-uid="Fantasy.OneToManyDictionary`3.Remove*"></a>
+
+  <h3 id="Fantasy_OneToManyDictionary_3_Remove__0__1_" data-uid="Fantasy.OneToManyDictionary`3.Remove(`0,`1)">
+  Remove(TKey, TValueKey)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从字典中移除指定的键值对。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Remove(TKey key, TValueKey valueKey)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>要移除键值对的键。</p>
+</dd>
+    <dt><code>valueKey</code> <span class="xref">TValueKey</span></dt>
+    <dd><p>要移除键值对的内部字典键。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>如果成功移除键值对，则为 true；否则为 false。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_OneToManyDictionary_3_Remove_" data-uid="Fantasy.OneToManyDictionary`3.Remove*"></a>
+
+  <h3 id="Fantasy_OneToManyDictionary_3_Remove__0__1__2__" data-uid="Fantasy.OneToManyDictionary`3.Remove(`0,`1,`2@)">
+  Remove(TKey, TValueKey, out TValue)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>从字典中移除指定的键值对。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Remove(TKey key, TValueKey valueKey, out TValue value)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>要移除键值对的键。</p>
+</dd>
+    <dt><code>valueKey</code> <span class="xref">TValueKey</span></dt>
+    <dd><p>要移除键值对的内部字典键。</p>
+</dd>
+    <dt><code>value</code> <span class="xref">TValue</span></dt>
+    <dd><p>如果成功移除键值对，则为移除的值；否则为默认值。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>如果成功移除键值对，则为 true；否则为 false。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_OneToManyDictionary_3_RemoveKey_" data-uid="Fantasy.OneToManyDictionary`3.RemoveKey*"></a>
+
+  <h3 id="Fantasy_OneToManyDictionary_3_RemoveKey__0_" data-uid="Fantasy.OneToManyDictionary`3.RemoveKey(`0)">
+  RemoveKey(TKey)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>移除字典中的指定键及其相关的所有键值对。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveKey(TKey key)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>要移除的键。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_OneToManyDictionary_3_TryGetValue_" data-uid="Fantasy.OneToManyDictionary`3.TryGetValue*"></a>
+
+  <h3 id="Fantasy_OneToManyDictionary_3_TryGetValue__0__1__2__" data-uid="Fantasy.OneToManyDictionary`3.TryGetValue(`0,`1,`2@)">
+  TryGetValue(TKey, TValueKey, out TValue)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>尝试获取指定键值对的值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetValue(TKey key, TValueKey valueKey, out TValue value)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TKey</span></dt>
+    <dd><p>外部字典中的键。</p>
+</dd>
+    <dt><code>valueKey</code> <span class="xref">TValueKey</span></dt>
+    <dd><p>内部字典中的键。</p>
+</dd>
+    <dt><code>value</code> <span class="xref">TValue</span></dt>
+    <dd><p>获取的值，如果操作成功，则为值；否则为默认值。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>如果操作成功，则为 true；否则为 false。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

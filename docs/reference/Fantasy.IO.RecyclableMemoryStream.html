@@ -90,9 +90,7 @@
   <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>MemoryStream implementation that deals with pooling and managing memory streams which use potentially large
-buffers.</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -246,42 +244,6 @@ buffers.</p>
 
 
 
-  <h2 id="Fantasy_IO_RecyclableMemoryStream_remarks">备注</h2>
-  <div class="markdown level0 remarks"><p>This class works in tandem with the <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a> to supply <code>MemoryStream</code>-derived
-objects to callers, while avoiding these specific problems:</p>
-<ol><li><span class="term">LOH allocations</span>Since all large buffers are pooled, they will never incur a Gen2 GC</li><li><span class="term">Memory waste</span>A standard memory stream doubles its size when it runs out of room. This
-leads to continual memory growth as each stream approaches the maximum allowed size.</li><li><span class="term">Memory copying</span>Each time a <code>MemoryStream</code> grows, all the bytes are copied into new buffers.
-This implementation only copies the bytes when <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_GetBuffer">GetBuffer()</a> is called.</li><li><span class="term">Memory fragmentation</span>By using homogeneous buffer sizes, it ensures that blocks of memory
-can be easily reused.
-</li></ol>
-<p>
-The stream is implemented on top of a series of uniformly-sized blocks. As the stream's length grows,
-additional blocks are retrieved from the memory manager. It is these blocks that are pooled, not the stream
-object itself.
-</p>
-<p>
-The biggest wrinkle in this implementation is when <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_GetBuffer">GetBuffer()</a> is called. This requires a single
-contiguous buffer. If only a single block is in use, then that block is returned. If multiple blocks
-are in use, we retrieve a larger buffer from the memory manager. These large buffers are also pooled,
-split by size--they are multiples/exponentials of a chunk size (1 MB by default).
-</p>
-<p>
-Once a large buffer is assigned to the stream the small blocks are NEVER again used for this stream. All operations take place on the
-large buffer. The large buffer can be replaced by a larger buffer from the pool as needed. All blocks and large buffers
-are maintained in the stream until the stream is disposed (unless AggressiveBufferReturn is enabled in the stream manager).
-</p>
-<p>
-A further wrinkle is what happens when the stream is longer than the maximum allowable array length under .NET. This is allowed
-when only blocks are in use, and only the Read/Write APIs are used. Once a stream grows to this size, any attempt to convert it
-to a single buffer will result in an exception. Similarly, if a stream is already converted to use a single larger buffer, then
-it cannot grow beyond the limits of the maximum allowable array size.
-</p>
-<p>
-Any method that modifies the stream has the potential to throw an <code>OutOfMemoryException</code>, either because
-the stream is beyond the limits set in <code>RecyclableStreamManager</code>, or it would result in a buffer larger than
-the maximum array size supported by .NET.
-</p>
-</div>
 
 
   <h2 class="section" id="constructors">构造函数
@@ -295,8 +257,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -306,8 +267,7 @@ the maximum array size supported by .NET.
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>memoryManager</code> <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
-    <dd><p>The memory manager.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -328,8 +288,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -339,11 +298,9 @@ the maximum array size supported by .NET.
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>memoryManager</code> <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
-    <dd><p>The memory manager.</p>
-</dd>
+    <dd></dd>
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -364,8 +321,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -375,14 +331,11 @@ the maximum array size supported by .NET.
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>memoryManager</code> <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
-    <dd><p>The memory manager.</p>
-</dd>
+    <dd></dd>
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -403,8 +356,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -414,17 +366,13 @@ the maximum array size supported by .NET.
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>memoryManager</code> <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
-    <dd><p>The memory manager.</p>
-</dd>
+    <dd></dd>
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
-</dd>
+    <dd></dd>
     <dt><code>requestedSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The initial requested size to prevent future allocations.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -445,8 +393,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -456,17 +403,13 @@ the maximum array size supported by .NET.
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>memoryManager</code> <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
-    <dd><p>The memory manager</p>
-</dd>
+    <dd></dd>
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
-    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
-</dd>
+    <dd></dd>
     <dt><code>requestedSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>The initial requested size to prevent future allocations.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -487,8 +430,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -498,11 +440,9 @@ the maximum array size supported by .NET.
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>memoryManager</code> <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
-    <dd><p>The memory manager.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -523,8 +463,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -534,14 +473,11 @@ the maximum array size supported by .NET.
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>memoryManager</code> <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
-    <dd><p>The memory manager</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
-</dd>
+    <dd></dd>
     <dt><code>requestedSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The initial requested size to prevent future allocations.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -562,8 +498,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html">RecyclableMemoryStream</a> class.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -573,14 +508,11 @@ the maximum array size supported by .NET.
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>memoryManager</code> <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a></dt>
-    <dd><p>The memory manager.</p>
-</dd>
+    <dd></dd>
     <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>A string identifying this stream for logging and debugging purposes.</p>
-</dd>
+    <dd></dd>
     <dt><code>requestedSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>The initial requested size to prevent future allocations.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -605,8 +537,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Whether the stream can currently read.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -637,8 +568,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Whether the stream can currently seek.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -669,8 +599,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Always false.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -701,8 +630,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Whether the stream can currently write.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -733,8 +661,7 @@ the maximum array size supported by .NET.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Gets or sets the capacity.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -754,32 +681,7 @@ the maximum array size supported by .NET.
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_Capacity_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>
-Capacity is always in multiples of the memory manager's block size, unless
-the large buffer is in use. Capacity never decreases during a stream's lifetime.
-Explicitly setting the capacity to a lower value than the current value will have no effect.
-This is because the buffers are all pooled by chunks and there's little reason to
-allow stream truncation.
-</p>
-<p>
-Writing past the current capacity will cause <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_Capacity">Capacity</a> to automatically increase, until MaximumStreamCapacity is reached.
-</p>
-<p>
-If the capacity is larger than <code>int.MaxValue</code>, then <code>InvalidOperationException</code> will be thrown. If you anticipate using
-larger streams, use the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_Capacity64">Capacity64</a> property instead.
-</p>
-</div>
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
-    <dd><p>Capacity is larger than int.MaxValue.</p>
-</dd>
-  </dl>
 
 
 
@@ -790,8 +692,7 @@ larger streams, use the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Returns a 64-bit version of capacity, for streams larger than <code>int.MaxValue</code> in length.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -822,8 +723,7 @@ larger streams, use the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Gets the number of bytes written to this stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -843,16 +743,7 @@ larger streams, use the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_Length_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>If the buffer has already been converted to a large buffer, then the maximum length is limited by the maximum allowed array length in .NET.</p>
-</div>
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -863,8 +754,7 @@ larger streams, use the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Gets the current position in the stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -884,22 +774,7 @@ larger streams, use the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_Position_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>If the buffer has already been converted to a large buffer, then the maximum length (and thus position) is limited by the maximum allowed array length in .NET.</p>
-</div>
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p>A negative value was passed.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
-    <dd><p>Stream is in large-buffer mode, but an attempt was made to set the position past the maximum allowed array length.</p>
-</dd>
-  </dl>
 
 
 
@@ -914,9 +789,7 @@ larger streams, use the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Notifies the stream that <code class="paramref">count</code> bytes were written to the buffer returned by <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_GetMemory_System_Int32_">GetMemory(int)</a> or <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_GetSpan_System_Int32_">GetSpan(int)</a>.
-Seeks forward by <code class="paramref">count</code> bytes.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -926,8 +799,7 @@ Seeks forward by <code class="paramref">count</code> bytes.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>How many bytes to advance.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -937,22 +809,7 @@ Seeks forward by <code class="paramref">count</code> bytes.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_Advance_System_Int32__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>You must request a new buffer after calling Advance to continue writing more data and cannot write to a previously acquired buffer.</p>
-</div>
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">count</code> is negative.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
-    <dd><p><code class="paramref">count</code> is larger than the size of the previously requested buffer.</p>
-</dd>
-  </dl>
 
 
 
@@ -963,8 +820,7 @@ Seeks forward by <code class="paramref">count</code> bytes.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Equivalent to <code>Dispose</code>.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1023,8 +879,7 @@ Seeks forward by <code class="paramref">count</code> bytes.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Asynchronously reads all the bytes from the current position in this stream and writes them to another stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1034,21 +889,17 @@ Seeks forward by <code class="paramref">count</code> bytes.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>destination</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
-    <dd><p>The stream to which the contents of the current stream will be copied.</p>
-</dd>
+    <dd></dd>
     <dt><code>bufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>This parameter is ignored.</p>
-</dd>
+    <dd></dd>
     <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
-    <dd><p>The token to monitor for cancellation requests.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
-    <dd><p>A task that represents the asynchronous copy operation.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1057,22 +908,7 @@ Seeks forward by <code class="paramref">count</code> bytes.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_CopyToAsync_System_IO_Stream_System_Int32_System_Threading_CancellationToken__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>Similarly to <code>MemoryStream</code>'s behavior, <code>CopyToAsync</code> will adjust the source stream's position by the number of bytes written to the destination stream, as a Read would do.</p>
-</div>
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p><code class="paramref">destination</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Either the current stream or the destination stream is disposed.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
-    <dd><p>The current stream does not support reading, or the destination stream does not support writing.</p>
-</dd>
-  </dl>
 
 
 
@@ -1083,8 +919,7 @@ Seeks forward by <code class="paramref">count</code> bytes.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Returns the memory used by this stream back to the pool.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1094,8 +929,7 @@ Seeks forward by <code class="paramref">count</code> bytes.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>disposing</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>Whether we're disposing (true), or being called by the finalizer (false).</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1116,8 +950,7 @@ Seeks forward by <code class="paramref">count</code> bytes.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>The finalizer will be called when a stream is not disposed properly.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1132,9 +965,6 @@ Seeks forward by <code class="paramref">count</code> bytes.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_Finalize_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>Failing to dispose indicates a bug in the code using streams. Care should be taken to properly account for stream lifetime.</p>
-</div>
 
 
 
@@ -1146,9 +976,7 @@ Seeks forward by <code class="paramref">count</code> bytes.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Returns a single buffer containing the contents of the stream.
-The buffer may be longer than the stream length.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1159,8 +987,7 @@ The buffer may be longer than the stream length.</p>
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
-    <dd><p>A byte[] buffer.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1169,20 +996,7 @@ The buffer may be longer than the stream length.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_GetBuffer_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>IMPORTANT: Doing a <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_Write_System_Byte___System_Int32_System_Int32_">Write(byte[], int, int)</a> after calling <code>GetBuffer</code> invalidates the buffer. The old buffer is held onto
-until <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_Dispose_System_Boolean_">Dispose(bool)</a> is called, but the next time <code>GetBuffer</code> is called, a new buffer from the pool will be required.</p>
-</div>
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.outofmemoryexception">OutOfMemoryException</a></dt>
-    <dd><p>stream is too large for a contiguous buffer.</p>
-</dd>
-  </dl>
 
 
 
@@ -1218,10 +1032,6 @@ until <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_Re
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_GetMemory_System_Int32__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>IMPORTANT: Calling Write(), GetBuffer(), TryGetBuffer(), Seek(), GetLength(), Advance(),
-or setting Position after calling GetMemory() invalidates the memory.</p>
-</div>
 
 
 
@@ -1233,8 +1043,7 @@ or setting Position after calling GetMemory() invalidates the memory.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Returns a sequence containing the contents of the stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1245,8 +1054,7 @@ or setting Position after calling GetMemory() invalidates the memory.</p>
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.buffers.readonlysequence-1">ReadOnlySequence</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>A ReadOnlySequence of bytes.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1255,16 +1063,7 @@ or setting Position after calling GetMemory() invalidates the memory.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_GetReadOnlySequence_remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>IMPORTANT: Calling Write(), GetMemory(), GetSpan(), Dispose(), or Close() after calling GetReadOnlySequence() invalidates the sequence.</p>
-</div>
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -1300,10 +1099,6 @@ or setting Position after calling GetMemory() invalidates the memory.</p>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_GetSpan_System_Int32__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>IMPORTANT: Calling Write(), GetBuffer(), TryGetBuffer(), Seek(), GetLength(), Advance(),
-or setting Position after calling GetSpan() invalidates the span.</p>
-</div>
 
 
 
@@ -1315,8 +1110,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Reads from the current position into the provided buffer.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1326,21 +1120,17 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
-    <dd><p>Destination buffer.</p>
-</dd>
+    <dd></dd>
     <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Offset into buffer at which to start placing the read bytes.</p>
-</dd>
+    <dd></dd>
     <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Number of bytes to read.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The number of bytes read.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1350,21 +1140,6 @@ or setting Position after calling GetSpan() invalidates the span.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p>buffer is null.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p>offset or count is less than 0.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
-    <dd><p>offset subtracted from the buffer length is less than count.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -1375,8 +1150,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Reads from the current position into the provided buffer.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1386,15 +1160,13 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>Destination buffer.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The number of bytes read.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1404,12 +1176,6 @@ or setting Position after calling GetSpan() invalidates the span.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -1420,8 +1186,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Reads a single byte from the current position in the stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1432,8 +1197,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The byte at the current position, or -1 if the position is at the end of the stream.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1443,12 +1207,6 @@ or setting Position after calling GetSpan() invalidates the span.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -1459,8 +1217,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Reads from the specified position into the provided buffer.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1470,24 +1227,19 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
-    <dd><p>Destination buffer.</p>
-</dd>
+    <dd></dd>
     <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Offset into buffer at which to start placing the read bytes.</p>
-</dd>
+    <dd></dd>
     <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Number of bytes to read.</p>
-</dd>
+    <dd></dd>
     <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Position in the stream to start reading from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The number of bytes read.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1497,24 +1249,6 @@ or setting Position after calling GetSpan() invalidates the span.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p><code class="paramref">buffer</code> is null.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">offset</code> or <code class="paramref">count</code> is less than 0.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
-    <dd><p><code class="paramref">offset</code> subtracted from the buffer length is less than <code class="paramref">count</code>.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
-    <dd><p>Stream position is beyond <code>int.MaxValue</code>.</p>
-</dd>
-  </dl>
 
 
 
@@ -1525,8 +1259,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Reads from the specified position into the provided buffer.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1536,24 +1269,19 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
-    <dd><p>Destination buffer.</p>
-</dd>
+    <dd></dd>
     <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Offset into buffer at which to start placing the read bytes.</p>
-</dd>
+    <dd></dd>
     <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Number of bytes to read.</p>
-</dd>
+    <dd></dd>
     <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Position in the stream to start reading from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The number of bytes read.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1563,21 +1291,6 @@ or setting Position after calling GetSpan() invalidates the span.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p><code class="paramref">buffer</code> is null.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">offset</code> or <code class="paramref">count</code> is less than 0.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
-    <dd><p><code class="paramref">offset</code> subtracted from the buffer length is less than <code class="paramref">count</code>.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -1588,8 +1301,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Reads from the specified position into the provided buffer.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1599,18 +1311,15 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>Destination buffer.</p>
-</dd>
+    <dd></dd>
     <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Position in the stream to start reading from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The number of bytes read.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1620,15 +1329,6 @@ or setting Position after calling GetSpan() invalidates the span.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
-    <dd><p>Stream position is beyond <code>int.MaxValue</code>.</p>
-</dd>
-  </dl>
 
 
 
@@ -1639,8 +1339,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Reads from the specified position into the provided buffer.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1650,18 +1349,15 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>Destination buffer.</p>
-</dd>
+    <dd></dd>
     <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Position in the stream to start reading from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The number of bytes read.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1671,12 +1367,6 @@ or setting Position after calling GetSpan() invalidates the span.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -1687,8 +1377,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Reads a single byte from the specified position in the stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1698,15 +1387,13 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The position in the stream to read from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The byte at the current position, or -1 if the position is at the end of the stream.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1716,15 +1403,6 @@ or setting Position after calling GetSpan() invalidates the span.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
-    <dd><p>Stream position is beyond <code>int.MaxValue</code>.</p>
-</dd>
-  </dl>
 
 
 
@@ -1735,8 +1413,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Reads a single byte from the specified position in the stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1746,15 +1423,13 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>streamPosition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>The position in the stream to read from.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>The byte at the current position, or -1 if the position is at the end of the stream.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1764,12 +1439,6 @@ or setting Position after calling GetSpan() invalidates the span.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -1780,8 +1449,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Sets the position to the offset from the seek location.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1791,18 +1459,15 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>How many bytes to move.</p>
-</dd>
+    <dd></dd>
     <dt><code>loc</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.seekorigin">SeekOrigin</a></dt>
-    <dd><p>From where.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>The new position.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1812,21 +1477,6 @@ or setting Position after calling GetSpan() invalidates the span.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">offset</code> is larger than <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html#Fantasy_IO_RecyclableMemoryStreamManager_MaximumStreamCapacity">MaximumStreamCapacity</a>.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
-    <dd><p>Invalid seek origin.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></dt>
-    <dd><p>Attempt to set negative position.</p>
-</dd>
-  </dl>
 
 
 
@@ -1837,8 +1487,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Sets the length of the stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1859,15 +1508,6 @@ or setting Position after calling GetSpan() invalidates the span.</p>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p>value is negative or larger than <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html#Fantasy_IO_RecyclableMemoryStreamManager_MaximumStreamCapacity">MaximumStreamCapacity</a>.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -1878,10 +1518,7 @@ or setting Position after calling GetSpan() invalidates the span.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Returns a new array with a copy of the buffer's contents. You should almost certainly be using <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_GetBuffer">GetBuffer()</a> combined with the <a class="xref" href="Fantasy.IO.RecyclableMemoryStream.html#Fantasy_IO_RecyclableMemoryStream_Length">Length</a> to
-access the bytes in this stream. Calling <code>ToArray</code> will destroy the benefits of pooled buffers, but it is included
-for the sake of completeness.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1903,18 +1540,6 @@ public override byte[] ToArray()</code></pre>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
-    <dd><p>The current <a class="xref" href="Fantasy.IO.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>object disallows <code>ToArray</code> calls.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.outofmemoryexception">OutOfMemoryException</a></dt>
-    <dd><p>The length of the stream is too long for a contiguous array.</p>
-</dd>
-  </dl>
 
 
 
@@ -1925,8 +1550,7 @@ public override byte[] ToArray()</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Returns a useful string for debugging. This should not normally be called in actual production code.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1957,8 +1581,7 @@ public override byte[] ToArray()</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Returns an <code>ArraySegment</code> that wraps a single buffer containing the contents of the stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -1968,15 +1591,13 @@ public override byte[] ToArray()</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.arraysegment-1">ArraySegment</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>An <code>ArraySegment</code> containing a reference to the underlying bytes.</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>Returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if a buffer can be returned; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -1996,8 +1617,7 @@ public override byte[] ToArray()</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Writes the buffer to the stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2007,14 +1627,11 @@ public override byte[] ToArray()</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
-    <dd><p>Source buffer.</p>
-</dd>
+    <dd></dd>
     <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Start position.</p>
-</dd>
+    <dd></dd>
     <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Number of bytes to write.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -2025,21 +1642,6 @@ public override byte[] ToArray()</code></pre>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p>buffer is null.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p>offset or count is negative.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
-    <dd><p>buffer.Length - offset is not less than count.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -2050,8 +1652,7 @@ public override byte[] ToArray()</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Writes the buffer to the stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2061,8 +1662,7 @@ public override byte[] ToArray()</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
-    <dd><p>Source buffer.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -2073,15 +1673,6 @@ public override byte[] ToArray()</code></pre>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p>buffer is null.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -2092,8 +1683,7 @@ public override byte[] ToArray()</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Writes a single byte to the current position in the stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2103,8 +1693,7 @@ public override byte[] ToArray()</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
-    <dd><p>byte value to write.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -2115,12 +1704,6 @@ public override byte[] ToArray()</code></pre>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -2131,8 +1714,7 @@ public override byte[] ToArray()</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Writes bytes from the current stream to a destination <code>byte</code> array.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2142,8 +1724,7 @@ public override byte[] ToArray()</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
-    <dd><p>Target buffer.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -2153,19 +1734,7 @@ public override byte[] ToArray()</code></pre>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_WriteTo_System_Byte____remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>The entire stream is written to the target array.</p>
-</div>
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p><code class="paramref">buffer</code>&gt; is null.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -2176,8 +1745,7 @@ public override byte[] ToArray()</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Writes bytes from the current stream to a destination <code>byte</code> array.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2187,14 +1755,11 @@ public override byte[] ToArray()</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
-    <dd><p>Target buffer.</p>
-</dd>
+    <dd></dd>
     <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Offset in the source stream, from which to start.</p>
-</dd>
+    <dd></dd>
     <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Number of bytes to write.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -2205,18 +1770,6 @@ public override byte[] ToArray()</code></pre>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p><code class="paramref">buffer</code>&gt; is null.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">offset</code> is less than 0, or <code class="paramref">offset</code> + <code class="paramref">count</code> is beyond this stream's length.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -2227,8 +1780,7 @@ public override byte[] ToArray()</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Writes bytes from the current stream to a destination <code>byte</code> array.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2238,17 +1790,13 @@ public override byte[] ToArray()</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
-    <dd><p>Target buffer.</p>
-</dd>
+    <dd></dd>
     <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Offset in the source stream, from which to start.</p>
-</dd>
+    <dd></dd>
     <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Number of bytes to write.</p>
-</dd>
+    <dd></dd>
     <dt><code>targetOffset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Offset in the target byte array to start writing</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -2259,21 +1807,6 @@ public override byte[] ToArray()</code></pre>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p><code>buffer</code> is null</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">offset</code> is less than 0, or <code class="paramref">offset</code> + <code class="paramref">count</code> is beyond this stream's length.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">targetOffset</code> is less than 0, or <code class="paramref">targetOffset</code> + <code class="paramref">count</code> is beyond the target <code class="paramref">buffer</code>'s length.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -2284,8 +1817,7 @@ public override byte[] ToArray()</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Synchronously writes this stream's bytes to the argument stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2295,8 +1827,7 @@ public override byte[] ToArray()</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
-    <dd><p>Destination stream.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -2306,19 +1837,7 @@ public override byte[] ToArray()</code></pre>
 
 
 
-  <h4 class="section" id="Fantasy_IO_RecyclableMemoryStream_WriteTo_System_IO_Stream__remarks">备注</h4>
-  <div class="markdown level1 remarks"><p>Important: This does a synchronous write, which may not be desired in some situations.</p>
-</div>
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p><code class="paramref">stream</code> is null.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -2329,8 +1848,7 @@ public override byte[] ToArray()</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Synchronously writes this stream's bytes, starting at offset, for count bytes, to the argument stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2340,14 +1858,11 @@ public override byte[] ToArray()</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
-    <dd><p>Destination stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Offset in source.</p>
-</dd>
+    <dd></dd>
     <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Number of bytes to write.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -2358,18 +1873,6 @@ public override byte[] ToArray()</code></pre>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p><code class="paramref">stream</code> is null.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">offset</code> is less than 0, or <code class="paramref">offset</code> + <code class="paramref">count</code> is beyond  this <code class="paramref">stream</code>'s length.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 
@@ -2380,8 +1883,7 @@ public override byte[] ToArray()</code></pre>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Synchronously writes this stream's bytes, starting at offset, for count bytes, to the argument stream.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -2391,14 +1893,11 @@ public override byte[] ToArray()</code></pre>
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
-    <dd><p>Destination stream.</p>
-</dd>
+    <dd></dd>
     <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Offset in source.</p>
-</dd>
+    <dd></dd>
     <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
-    <dd><p>Number of bytes to write.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -2409,18 +1908,6 @@ public override byte[] ToArray()</code></pre>
 
 
 
-  <h4 class="section">异常</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
-    <dd><p><code class="paramref">stream</code> is null.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
-    <dd><p><code class="paramref">offset</code> is less than 0, or <code class="paramref">offset</code> + <code class="paramref">count</code> is beyond  this <code class="paramref">stream</code>'s length.</p>
-</dd>
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
-    <dd><p>Object has been disposed.</p>
-</dd>
-  </dl>
 
 
 

@@ -1,0 +1,430 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>AddressableHelper 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="AddressableHelper 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.AddressableHelper">
+
+
+
+  <h1 id="Fantasy_AddressableHelper" data-uid="Fantasy.AddressableHelper" class="text-break">
+    AddressableHelper 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>提供操作地址映射的辅助方法。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class AddressableHelper</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">AddressableHelper</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_AddressableHelper_AddAddressable_" data-uid="Fantasy.AddressableHelper.AddAddressable*"></a>
+
+  <h3 id="Fantasy_AddressableHelper_AddAddressable_Fantasy_Scene_System_Int64_System_Int64_System_Boolean_" data-uid="Fantasy.AddressableHelper.AddAddressable(Fantasy.Scene,System.Int64,System.Int64,System.Boolean)">
+  AddAddressable(Scene, long, long, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>添加地址映射并返回操作结果。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FTask AddAddressable(Scene scene, long addressableId, long routeId, bool isLock = true)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Fantasy.Scene.html">Scene</a></dt>
+    <dd><p>场景实例。</p>
+</dd>
+    <dt><code>addressableId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>地址映射的唯一标识。</p>
+</dd>
+    <dt><code>routeId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由 ID。</p>
+</dd>
+    <dt><code>isLock</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>是否锁定。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_AddressableHelper_GetAddressableRouteId_" data-uid="Fantasy.AddressableHelper.GetAddressableRouteId*"></a>
+
+  <h3 id="Fantasy_AddressableHelper_GetAddressableRouteId_Fantasy_Scene_System_Int64_" data-uid="Fantasy.AddressableHelper.GetAddressableRouteId(Fantasy.Scene,System.Int64)">
+  GetAddressableRouteId(Scene, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>获取地址映射的路由 ID。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FTask&lt;long&gt; GetAddressableRouteId(Scene scene, long addressableId)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Fantasy.Scene.html">Scene</a></dt>
+    <dd><p>场景实例。</p>
+</dd>
+    <dt><code>addressableId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>地址映射的唯一标识。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</dt>
+    <dd><p>地址映射的路由 ID。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_AddressableHelper_LockAddressable_" data-uid="Fantasy.AddressableHelper.LockAddressable*"></a>
+
+  <h3 id="Fantasy_AddressableHelper_LockAddressable_Fantasy_Scene_System_Int64_" data-uid="Fantasy.AddressableHelper.LockAddressable(Fantasy.Scene,System.Int64)">
+  LockAddressable(Scene, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>锁定指定地址映射。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FTask LockAddressable(Scene scene, long addressableId)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Fantasy.Scene.html">Scene</a></dt>
+    <dd><p>场景实例。</p>
+</dd>
+    <dt><code>addressableId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>地址映射的唯一标识。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_AddressableHelper_RemoveAddressable_" data-uid="Fantasy.AddressableHelper.RemoveAddressable*"></a>
+
+  <h3 id="Fantasy_AddressableHelper_RemoveAddressable_Fantasy_Scene_System_Int64_" data-uid="Fantasy.AddressableHelper.RemoveAddressable(Fantasy.Scene,System.Int64)">
+  RemoveAddressable(Scene, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>移除指定地址映射。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FTask RemoveAddressable(Scene scene, long addressableId)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Fantasy.Scene.html">Scene</a></dt>
+    <dd><p>场景实例。</p>
+</dd>
+    <dt><code>addressableId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>地址映射的唯一标识。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_AddressableHelper_RemoveAddressable_" data-uid="Fantasy.AddressableHelper.RemoveAddressable*"></a>
+
+  <h3 id="Fantasy_AddressableHelper_RemoveAddressable_Fantasy_Server_System_Int64_" data-uid="Fantasy.AddressableHelper.RemoveAddressable(Fantasy.Server,System.Int64)">
+  RemoveAddressable(Server, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>移除指定地址映射。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FTask RemoveAddressable(Server server, long addressableId)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>server</code> <a class="xref" href="Fantasy.Server.html">Server</a></dt>
+    <dd><p>内部网络Server，可通过Scene.Server获得</p>
+</dd>
+    <dt><code>addressableId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>地址映射的唯一标识</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_AddressableHelper_UnLockAddressable_" data-uid="Fantasy.AddressableHelper.UnLockAddressable*"></a>
+
+  <h3 id="Fantasy_AddressableHelper_UnLockAddressable_Fantasy_Scene_System_Int64_System_Int64_System_String_" data-uid="Fantasy.AddressableHelper.UnLockAddressable(Fantasy.Scene,System.Int64,System.Int64,System.String)">
+  UnLockAddressable(Scene, long, long, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>解锁指定地址映射。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FTask UnLockAddressable(Scene scene, long addressableId, long routeId, string source)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Fantasy.Scene.html">Scene</a></dt>
+    <dd><p>场景实例。</p>
+</dd>
+    <dt><code>addressableId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>地址映射的唯一标识。</p>
+</dd>
+    <dt><code>routeId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由 ID。</p>
+</dd>
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>解锁来源。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask.html">FTask</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,497 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>ServerInnerSession 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="ServerInnerSession 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.ServerInnerSession">
+
+
+
+  <h1 id="Fantasy_ServerInnerSession" data-uid="Fantasy.ServerInnerSession" class="text-break">
+    ServerInnerSession 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>网络服务器内部会话。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class ServerInnerSession : Session, INotSupportedPool, ISupportedMultiEntity, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Fantasy.Entity.html">Entity</a></div>
+      <div><a class="xref" href="Fantasy.Session.html">Session</a></div>
+      <div><span class="xref">ServerInnerSession</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>实现</dt>
+    <dd>
+      <div><a class="xref" href="Fantasy.INotSupportedPool.html">INotSupportedPool</a></div>
+      <div><a class="xref" href="Fantasy.ISupportedMultiEntity.html">ISupportedMultiEntity</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_Sessions">Session.Sessions</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_RequestCallback">Session.RequestCallback</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_Create_Fantasy_ANetworkMessageScheduler_Fantasy_ANetworkChannel_Fantasy_NetworkTarget_">Session.Create(ANetworkMessageScheduler, ANetworkChannel, NetworkTarget)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_Create_Fantasy_AClientNetwork_System_Net_IPEndPoint_">Session.Create(AClientNetwork, IPEndPoint)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_Create_Fantasy_ANetwork_">Session.Create(ANetwork)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_CreateServerInner_Fantasy_Scene_">Session.CreateServerInner(Scene)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_TryGet_System_Int64_Fantasy_Session__">Session.TryGet(long, out Session)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_Dispose">Session.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_NetworkId">Session.NetworkId</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_ChannelId">Session.ChannelId</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_RemoteEndPoint">Session.RemoteEndPoint</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_LastReceiveTime">Session.LastReceiveTime</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Session.html#Fantasy_Session_NetworkMessageScheduler">Session.NetworkMessageScheduler</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_GetEntity_System_Int64_">Entity.GetEntity(long)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_TryGetEntity_System_Int64_Fantasy_Entity__">Entity.TryGetEntity(long, out Entity)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_GetEntity__1_System_Int64_">Entity.GetEntity&lt;T&gt;(long)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_TryGetEntity__1_System_Int64___0__">Entity.TryGetEntity&lt;T&gt;(long, out T)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_Create__1_Fantasy_Scene_System_Boolean_">Entity.Create&lt;T&gt;(Scene, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_Create__1_Fantasy_Scene_System_Int64_System_Boolean_">Entity.Create&lt;T&gt;(Scene, long, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_GetParent__1">Entity.GetParent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_AddComponent__1">Entity.AddComponent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_AddComponent__1_System_Int64_">Entity.AddComponent&lt;T&gt;(long)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_AddComponent_Fantasy_Entity_">Entity.AddComponent(Entity)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_ForEachMultiEntity">Entity.ForEachMultiEntity()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_ForEachEntity">Entity.ForEachEntity()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_GetComponent__1">Entity.GetComponent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_GetComponent_System_Type_">Entity.GetComponent(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_GetComponent__1_System_Int64_">Entity.GetComponent&lt;T&gt;(long)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_RemoveComponent__1_System_Boolean_">Entity.RemoveComponent&lt;T&gt;(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_RemoveComponent__1_System_Int64_System_Boolean_">Entity.RemoveComponent&lt;T&gt;(long, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_RemoveComponent_Fantasy_Entity_System_Boolean_">Entity.RemoveComponent(Entity, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_Deserialize_Fantasy_Scene_System_Boolean_">Entity.Deserialize(Scene, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_Clone">Entity.Clone()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_Id">Entity.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_RuntimeId">Entity.RuntimeId</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_IsDisposed">Entity.IsDisposed</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_Scene">Entity.Scene</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_Parent">Entity.Parent</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_ForEachSingleCollection">Entity.ForEachSingleCollection</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entity.html#Fantasy_Entity_ForEachTransfer">Entity.ForEachTransfer</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">构造函数
+</h2>
+
+
+  <a id="Fantasy_ServerInnerSession__ctor_" data-uid="Fantasy.ServerInnerSession.#ctor*"></a>
+
+  <h3 id="Fantasy_ServerInnerSession__ctor" data-uid="Fantasy.ServerInnerSession.#ctor">
+  ServerInnerSession()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ServerInnerSession()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_ServerInnerSession_Call_" data-uid="Fantasy.ServerInnerSession.Call*"></a>
+
+  <h3 id="Fantasy_ServerInnerSession_Call_Fantasy_IRequest_System_Int64_" data-uid="Fantasy.ServerInnerSession.Call(Fantasy.IRequest,System.Int64)">
+  Call(IRequest, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>调用请求并等待响应（不支持）。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override FTask&lt;IResponse&gt; Call(IRequest request, long routeId = 0)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Fantasy.IRequest.html">IRequest</a></dt>
+    <dd><p>要调用的请求。</p>
+</dd>
+    <dt><code>routeId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由标识符。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Fantasy.FTask-1.html">FTask</a>&lt;<a class="xref" href="Fantasy.IResponse.html">IResponse</a>&gt;</dt>
+    <dd><p>一个代表异步操作的任务，返回响应。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ServerInnerSession_Send_" data-uid="Fantasy.ServerInnerSession.Send*"></a>
+
+  <h3 id="Fantasy_ServerInnerSession_Send_Fantasy_IRouteMessage_System_UInt32_System_Int64_" data-uid="Fantasy.ServerInnerSession.Send(Fantasy.IRouteMessage,System.UInt32,System.Int64)">
+  Send(IRouteMessage, uint, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>发送路由消息到服务器内部。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Send(IRouteMessage routeMessage, uint rpcId = 0, long routeId = 0)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>routeMessage</code> <a class="xref" href="Fantasy.IRouteMessage.html">IRouteMessage</a></dt>
+    <dd><p>要发送的路由消息。</p>
+</dd>
+    <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>RPC 标识符。</p>
+</dd>
+    <dt><code>routeId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由标识符。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ServerInnerSession_Send_" data-uid="Fantasy.ServerInnerSession.Send*"></a>
+
+  <h3 id="Fantasy_ServerInnerSession_Send_System_IO_MemoryStream_System_UInt32_System_Int64_System_Int64_" data-uid="Fantasy.ServerInnerSession.Send(System.IO.MemoryStream,System.UInt32,System.Int64,System.Int64)">
+  Send(MemoryStream, uint, long, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>发送内存流到服务器内部（不支持）。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Send(MemoryStream memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>memoryStream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>要发送的内存流。</p>
+</dd>
+    <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>RPC 标识符。</p>
+</dd>
+    <dt><code>routeTypeOpCode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由类型和操作码。</p>
+</dd>
+    <dt><code>routeId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由标识符。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_ServerInnerSession_Send_" data-uid="Fantasy.ServerInnerSession.Send*"></a>
+
+  <h3 id="Fantasy_ServerInnerSession_Send_System_Object_System_UInt32_System_Int64_" data-uid="Fantasy.ServerInnerSession.Send(System.Object,System.UInt32,System.Int64)">
+  Send(object, uint, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>发送消息到服务器内部。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Send(object message, uint rpcId = 0, long routeId = 0)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>message</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>要发送的消息。</p>
+</dd>
+    <dt><code>rpcId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>RPC 标识符。</p>
+</dd>
+    <dt><code>routeId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>路由标识符。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

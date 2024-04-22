@@ -1,0 +1,2431 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>RecyclableMemoryStreamManager 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="RecyclableMemoryStreamManager 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.RecyclableMemoryStreamManager">
+
+
+
+  <h1 id="Fantasy_RecyclableMemoryStreamManager" data-uid="Fantasy.RecyclableMemoryStreamManager" class="text-break">
+    RecyclableMemoryStreamManager 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>提供用于管理可回收内存流的分部类。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class RecyclableMemoryStreamManager</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">RecyclableMemoryStreamManager</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  </dd></dl>
+
+
+
+  <h2 id="Fantasy_RecyclableMemoryStreamManager_remarks">备注</h2>
+  <div class="markdown level0 remarks"> <p>
+ There are two pools managed in here. The small pool contains same-sized buffers that are handed to streams
+ as they write more data.
+</p>
+<p>
+ For scenarios that need to call <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_GetBuffer">GetBuffer()</a>, the large pool contains buffers of various sizes, all
+ multiples/exponentials of <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_LargeBufferMultiple">LargeBufferMultiple</a> (1 MB by default). They are split by size to avoid overly-wasteful buffer
+ usage. There should be far fewer 8 MB buffers than 1 MB buffers, for example.
+ </p>
+</div>
+
+
+  <h2 class="section" id="constructors">构造函数
+</h2>
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager__ctor_" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager__ctor" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor">
+  RecyclableMemoryStreamManager()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes the memory manager with the default block/buffer specifications. This pool may have unbounded growth unless you modify <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_MaximumFreeSmallPoolBytes">MaximumFreeSmallPoolBytes</a> and <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_MaximumFreeLargePoolBytes">MaximumFreeLargePoolBytes</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStreamManager()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager__ctor_" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager__ctor_System_Int32_System_Int32_System_Int32_" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor(System.Int32,System.Int32,System.Int32)">
+  RecyclableMemoryStreamManager(int, int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes the memory manager with the given block requiredSize. This pool may have unbounded growth unless you modify <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_MaximumFreeSmallPoolBytes">MaximumFreeSmallPoolBytes</a> and <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_MaximumFreeLargePoolBytes">MaximumFreeLargePoolBytes</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStreamManager(int blockSize, int largeBufferMultiple, int maximumBufferSize)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>blockSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Size of each block that is pooled. Must be &gt; 0.</p>
+</dd>
+    <dt><code>largeBufferMultiple</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Each large buffer will be a multiple of this value.</p>
+</dd>
+    <dt><code>maximumBufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Buffers larger than this are not pooled</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">blockSize</code> is not a positive number,
+or <code class="paramref">largeBufferMultiple</code> is not a positive number,
+or <code class="paramref">maximumBufferSize</code> is less than <code class="paramref">blockSize</code>.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p><code class="paramref">maximumBufferSize</code> is not a multiple of <code class="paramref">largeBufferMultiple</code>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager__ctor_" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager__ctor_System_Int32_System_Int32_System_Int32_System_Boolean_" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor(System.Int32,System.Int32,System.Int32,System.Boolean)">
+  RecyclableMemoryStreamManager(int, int, int, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes the memory manager with the given block requiredSize. This pool may have unbounded growth unless you modify <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_MaximumFreeSmallPoolBytes">MaximumFreeSmallPoolBytes</a> and <a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html#Fantasy_RecyclableMemoryStreamManager_MaximumFreeLargePoolBytes">MaximumFreeLargePoolBytes</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStreamManager(int blockSize, int largeBufferMultiple, int maximumBufferSize, bool useExponentialLargeBuffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>blockSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Size of each block that is pooled. Must be &gt; 0.</p>
+</dd>
+    <dt><code>largeBufferMultiple</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Each large buffer will be a multiple/exponential of this value.</p>
+</dd>
+    <dt><code>maximumBufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Buffers larger than this are not pooled</p>
+</dd>
+    <dt><code>useExponentialLargeBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Switch to exponential large buffer allocation strategy</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">blockSize</code> is not a positive number,
+or <code class="paramref">largeBufferMultiple</code> is not a positive number,
+or <code class="paramref">maximumBufferSize</code> is less than <code class="paramref">blockSize</code>.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p><code class="paramref">maximumBufferSize</code> is not a multiple/exponential of <code class="paramref">largeBufferMultiple</code>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager__ctor_" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager__ctor_System_Int32_System_Int32_System_Int32_System_Boolean_System_Int64_System_Int64_" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor(System.Int32,System.Int32,System.Int32,System.Boolean,System.Int64,System.Int64)">
+  RecyclableMemoryStreamManager(int, int, int, bool, long, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes the memory manager with the given block requiredSize.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStreamManager(int blockSize, int largeBufferMultiple, int maximumBufferSize, bool useExponentialLargeBuffer, long maximumSmallPoolFreeBytes, long maximumLargePoolFreeBytes)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>blockSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Size of each block that is pooled. Must be &gt; 0.</p>
+</dd>
+    <dt><code>largeBufferMultiple</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Each large buffer will be a multiple/exponential of this value.</p>
+</dd>
+    <dt><code>maximumBufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Buffers larger than this are not pooled.</p>
+</dd>
+    <dt><code>useExponentialLargeBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Switch to exponential large buffer allocation strategy.</p>
+</dd>
+    <dt><code>maximumSmallPoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Maximum number of bytes to keep available in the small pool before future buffers get dropped for garbage collection.</p>
+</dd>
+    <dt><code>maximumLargePoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Maximum number of bytes to keep available in the large pool before future buffers get dropped for garbage collection.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">blockSize</code> is not a positive number,
+or <code class="paramref">largeBufferMultiple</code> is not a positive number,
+or <code class="paramref">maximumBufferSize</code> is less than <code class="paramref">blockSize</code>,
+or <code class="paramref">maximumSmallPoolFreeBytes</code> is negative,
+or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p><code class="paramref">maximumBufferSize</code> is not a multiple/exponential of <code class="paramref">largeBufferMultiple</code>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager__ctor_" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager__ctor_System_Int32_System_Int32_System_Int32_System_Int64_System_Int64_" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor(System.Int32,System.Int32,System.Int32,System.Int64,System.Int64)">
+  RecyclableMemoryStreamManager(int, int, int, long, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes the memory manager with the given block requiredSize.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStreamManager(int blockSize, int largeBufferMultiple, int maximumBufferSize, long maximumSmallPoolFreeBytes, long maximumLargePoolFreeBytes)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>blockSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Size of each block that is pooled. Must be &gt; 0.</p>
+</dd>
+    <dt><code>largeBufferMultiple</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Each large buffer will be a multiple of this value.</p>
+</dd>
+    <dt><code>maximumBufferSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Buffers larger than this are not pooled</p>
+</dd>
+    <dt><code>maximumSmallPoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Maximum number of bytes to keep available in the small pool before future buffers get dropped for garbage collection</p>
+</dd>
+    <dt><code>maximumLargePoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Maximum number of bytes to keep available in the large pool before future buffers get dropped for garbage collection</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">blockSize</code> is not a positive number,
+or <code class="paramref">largeBufferMultiple</code> is not a positive number,
+or <code class="paramref">maximumBufferSize</code> is less than <code class="paramref">blockSize</code>,
+or <code class="paramref">maximumSmallPoolFreeBytes</code> is negative,
+or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p><code class="paramref">maximumBufferSize</code> is not a multiple of <code class="paramref">largeBufferMultiple</code>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager__ctor_" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager__ctor_System_Int64_System_Int64_" data-uid="Fantasy.RecyclableMemoryStreamManager.#ctor(System.Int64,System.Int64)">
+  RecyclableMemoryStreamManager(long, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes the memory manager with the default block/buffer specifications and maximum free bytes specifications.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecyclableMemoryStreamManager(long maximumSmallPoolFreeBytes, long maximumLargePoolFreeBytes)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>maximumSmallPoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Maximum number of bytes to keep available in the small pool before future buffers get dropped for garbage collection</p>
+</dd>
+    <dt><code>maximumLargePoolFreeBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>Maximum number of bytes to keep available in the large pool before future buffers get dropped for garbage collection</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">异常</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">maximumSmallPoolFreeBytes</code> is negative, or <code class="paramref">maximumLargePoolFreeBytes</code> is negative.</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="fields">字段
+</h2>
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_DefaultBlockSize" data-uid="Fantasy.RecyclableMemoryStreamManager.DefaultBlockSize">
+  DefaultBlockSize
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Default block size, in bytes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DefaultBlockSize = 131072</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_DefaultLargeBufferMultiple" data-uid="Fantasy.RecyclableMemoryStreamManager.DefaultLargeBufferMultiple">
+  DefaultLargeBufferMultiple
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Default large buffer multiple, in bytes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DefaultLargeBufferMultiple = 1048576</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_DefaultMaximumBufferSize" data-uid="Fantasy.RecyclableMemoryStreamManager.DefaultMaximumBufferSize">
+  DefaultMaximumBufferSize
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Default maximum buffer size, in bytes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DefaultMaximumBufferSize = 134217728</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">字段值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">属性
+</h2>
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_AggressiveBufferReturn_" data-uid="Fantasy.RecyclableMemoryStreamManager.AggressiveBufferReturn*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_AggressiveBufferReturn" data-uid="Fantasy.RecyclableMemoryStreamManager.AggressiveBufferReturn">
+  AggressiveBufferReturn
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Whether dirty buffers can be immediately returned to the buffer pool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AggressiveBufferReturn { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_AggressiveBufferReturn_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>
+When <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_GetBuffer">GetBuffer()</a> is called on a stream and creates a single large buffer, if this setting is enabled, the other blocks will be returned
+to the buffer pool immediately.
+</p>
+<p>
+Note when enabling this setting that the user is responsible for ensuring that any buffer previously
+retrieved from a stream which is subsequently modified is not used after modification (as it may no longer
+be valid).
+</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_BlockSize_" data-uid="Fantasy.RecyclableMemoryStreamManager.BlockSize*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_BlockSize" data-uid="Fantasy.RecyclableMemoryStreamManager.BlockSize">
+  BlockSize
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The size of each block. It must be set at creation and cannot be changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int BlockSize { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GenerateCallStacks_" data-uid="Fantasy.RecyclableMemoryStreamManager.GenerateCallStacks*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GenerateCallStacks" data-uid="Fantasy.RecyclableMemoryStreamManager.GenerateCallStacks">
+  GenerateCallStacks
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Whether to save callstacks for stream allocations. This can help in debugging.
+It should NEVER be turned on generally in production.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool GenerateCallStacks { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_LargeBufferMultiple_" data-uid="Fantasy.RecyclableMemoryStreamManager.LargeBufferMultiple*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_LargeBufferMultiple" data-uid="Fantasy.RecyclableMemoryStreamManager.LargeBufferMultiple">
+  LargeBufferMultiple
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>All buffers are multiples/exponentials of this number. It must be set at creation and cannot be changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int LargeBufferMultiple { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_LargeBuffersFree_" data-uid="Fantasy.RecyclableMemoryStreamManager.LargeBuffersFree*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_LargeBuffersFree" data-uid="Fantasy.RecyclableMemoryStreamManager.LargeBuffersFree">
+  LargeBuffersFree
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>How many buffers are in the large pool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long LargeBuffersFree { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_LargePoolFreeSize_" data-uid="Fantasy.RecyclableMemoryStreamManager.LargePoolFreeSize*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_LargePoolFreeSize" data-uid="Fantasy.RecyclableMemoryStreamManager.LargePoolFreeSize">
+  LargePoolFreeSize
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Number of bytes in large pool not currently in use.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long LargePoolFreeSize { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_LargePoolInUseSize_" data-uid="Fantasy.RecyclableMemoryStreamManager.LargePoolInUseSize*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_LargePoolInUseSize" data-uid="Fantasy.RecyclableMemoryStreamManager.LargePoolInUseSize">
+  LargePoolInUseSize
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Number of bytes currently in use by streams from the large pool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long LargePoolInUseSize { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_MaximumBufferSize_" data-uid="Fantasy.RecyclableMemoryStreamManager.MaximumBufferSize*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_MaximumBufferSize" data-uid="Fantasy.RecyclableMemoryStreamManager.MaximumBufferSize">
+  MaximumBufferSize
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the maximum buffer size.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaximumBufferSize { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_MaximumBufferSize_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>Any buffer that is returned to the pool that is larger than this will be
+discarded and garbage collected.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_MaximumFreeLargePoolBytes_" data-uid="Fantasy.RecyclableMemoryStreamManager.MaximumFreeLargePoolBytes*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_MaximumFreeLargePoolBytes" data-uid="Fantasy.RecyclableMemoryStreamManager.MaximumFreeLargePoolBytes">
+  MaximumFreeLargePoolBytes
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>How many bytes of large free buffers to allow before we start dropping
+those returned to us.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MaximumFreeLargePoolBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_MaximumFreeLargePoolBytes_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The default value is 0, meaning the pool is unbounded.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_MaximumFreeSmallPoolBytes_" data-uid="Fantasy.RecyclableMemoryStreamManager.MaximumFreeSmallPoolBytes*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_MaximumFreeSmallPoolBytes" data-uid="Fantasy.RecyclableMemoryStreamManager.MaximumFreeSmallPoolBytes">
+  MaximumFreeSmallPoolBytes
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>How many bytes of small free blocks to allow before we start dropping
+those returned to us.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MaximumFreeSmallPoolBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_MaximumFreeSmallPoolBytes_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The default value is 0, meaning the pool is unbounded.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_MaximumStreamCapacity_" data-uid="Fantasy.RecyclableMemoryStreamManager.MaximumStreamCapacity*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_MaximumStreamCapacity" data-uid="Fantasy.RecyclableMemoryStreamManager.MaximumStreamCapacity">
+  MaximumStreamCapacity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Maximum stream capacity in bytes. Attempts to set a larger capacity will
+result in an exception.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MaximumStreamCapacity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_MaximumStreamCapacity_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>A value of 0 indicates no limit.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_SmallBlocksFree_" data-uid="Fantasy.RecyclableMemoryStreamManager.SmallBlocksFree*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_SmallBlocksFree" data-uid="Fantasy.RecyclableMemoryStreamManager.SmallBlocksFree">
+  SmallBlocksFree
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>How many blocks are in the small pool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long SmallBlocksFree { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_SmallPoolFreeSize_" data-uid="Fantasy.RecyclableMemoryStreamManager.SmallPoolFreeSize*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_SmallPoolFreeSize" data-uid="Fantasy.RecyclableMemoryStreamManager.SmallPoolFreeSize">
+  SmallPoolFreeSize
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Number of bytes in small pool not currently in use.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long SmallPoolFreeSize { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_SmallPoolInUseSize_" data-uid="Fantasy.RecyclableMemoryStreamManager.SmallPoolInUseSize*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_SmallPoolInUseSize" data-uid="Fantasy.RecyclableMemoryStreamManager.SmallPoolInUseSize">
+  SmallPoolInUseSize
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Number of bytes currently in use by stream from the small pool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long SmallPoolInUseSize { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_ThrowExceptionOnToArray_" data-uid="Fantasy.RecyclableMemoryStreamManager.ThrowExceptionOnToArray*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_ThrowExceptionOnToArray" data-uid="Fantasy.RecyclableMemoryStreamManager.ThrowExceptionOnToArray">
+  ThrowExceptionOnToArray
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Causes an exception to be thrown if <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_ToArray">ToArray()</a> is ever called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ThrowExceptionOnToArray { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_ThrowExceptionOnToArray_remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>Calling <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_ToArray">ToArray()</a> defeats the purpose of a pooled buffer. Use this property to discover code that is calling <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_ToArray">ToArray()</a>. If this is
+set and <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_ToArray">ToArray()</a> is called, a <code>NotSupportedException</code> will be thrown.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_UseExponentialLargeBuffer_" data-uid="Fantasy.RecyclableMemoryStreamManager.UseExponentialLargeBuffer*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_UseExponentialLargeBuffer" data-uid="Fantasy.RecyclableMemoryStreamManager.UseExponentialLargeBuffer">
+  UseExponentialLargeBuffer
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Use exponential large buffer allocation strategy. It must be set at creation and cannot be changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseExponentialLargeBuffer { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_UseMultipleLargeBuffer_" data-uid="Fantasy.RecyclableMemoryStreamManager.UseMultipleLargeBuffer*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_UseMultipleLargeBuffer" data-uid="Fantasy.RecyclableMemoryStreamManager.UseMultipleLargeBuffer">
+  UseMultipleLargeBuffer
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Use multiple large buffer allocation strategy. It must be set at creation and cannot be changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseMultipleLargeBuffer { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">属性值</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream">
+  GetStream()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with no tag and a default initial capacity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream()</code></pre>
+  </div>
+
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Byte___" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.Byte[])">
+  GetStream(byte[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the contents copied from the provided
+buffer. The provided buffer is not wrapped or used after construction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(byte[] buffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte buffer to copy data from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Byte____remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.Guid)">
+  GetStream(Guid)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with no tag and a default initial capacity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(Guid id)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.Guid,System.String)">
+  GetStream(Guid, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and a default initial capacity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(Guid id, string tag)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Byte___System_Int32_System_Int32_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.Guid,System.String,System.Byte[],System.Int32,System.Int32)">
+  GetStream(Guid, string, byte[], int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
+buffer. The provided buffer is not wrapped or used after construction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(Guid id, string tag, byte[] buffer, int offset, int count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte buffer to copy data from.</p>
+</dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The offset from the start of the buffer to copy from.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes to copy from the buffer.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Byte___System_Int32_System_Int32__remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Int32_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.Guid,System.String,System.Int32)">
+  GetStream(Guid, string, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(Guid id, string tag, int requiredSize)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The minimum desired capacity for the stream.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Int32_System_Boolean_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.Guid,System.String,System.Int32,System.Boolean)">
+  GetStream(Guid, string, int, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity, possibly using
+a single contiguous underlying buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(Guid id, string tag, int requiredSize, bool asContiguousBuffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The minimum desired capacity for the stream.</p>
+</dd>
+    <dt><code>asContiguousBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether to attempt to use a single contiguous buffer.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Int32_System_Boolean__remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>Retrieving a <code>MemoryStream</code> which provides a single contiguous buffer can be useful in situations
+where the initial size is known and it is desirable to avoid copying data between the smaller underlying
+buffers to a single large one. This is most helpful when you know that you will always call <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_GetBuffer">GetBuffer()</a>
+on the underlying stream.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Int64_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.Guid,System.String,System.Int64)">
+  GetStream(Guid, string, long)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(Guid id, string tag, long requiredSize)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The minimum desired capacity for the stream.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Int64_System_Boolean_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.Guid,System.String,System.Int64,System.Boolean)">
+  GetStream(Guid, string, long, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity, possibly using
+a single contiguous underlying buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(Guid id, string tag, long requiredSize, bool asContiguousBuffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The minimum desired capacity for the stream.</p>
+</dd>
+    <dt><code>asContiguousBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether to attempt to use a single contiguous buffer.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Int64_System_Boolean__remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>Retrieving a <code>MemoryStream</code> which provides a single contiguous buffer can be useful in situations
+where the initial size is known and it is desirable to avoid copying data between the smaller underlying
+buffers to a single large one. This is most helpful when you know that you will always call <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_GetBuffer">GetBuffer()</a>
+on the underlying stream.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Memory_System_Byte__" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.Guid,System.String,System.Memory{System.Byte})">
+  GetStream(Guid, string, Memory&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
+buffer. The provided buffer is not wrapped or used after construction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use the ReadOnlySpan&lt;byte&gt; version of this method instead.&quot;)]
+public MemoryStream GetStream(Guid id, string tag, Memory&lt;byte&gt; buffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>The byte buffer to copy data from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_Memory_System_Byte___remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_ReadOnlySpan_System_Byte__" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.Guid,System.String,System.ReadOnlySpan{System.Byte})">
+  GetStream(Guid, string, ReadOnlySpan&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
+buffer. The provided buffer is not wrapped or used after construction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(Guid id, string tag, ReadOnlySpan&lt;byte&gt; buffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>A unique identifier which can be used to trace usages of the stream.</p>
+</dd>
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>The byte buffer to copy data from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Guid_System_String_System_ReadOnlySpan_System_Byte___remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Memory_System_Byte__" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.Memory{System.Byte})">
+  GetStream(Memory&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the contents copied from the provided
+buffer. The provided buffer is not wrapped or used after construction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use the ReadOnlySpan&lt;byte&gt; version of this method instead.&quot;)]
+public MemoryStream GetStream(Memory&lt;byte&gt; buffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>The byte buffer to copy data from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_Memory_System_Byte___remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_ReadOnlySpan_System_Byte__" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.ReadOnlySpan{System.Byte})">
+  GetStream(ReadOnlySpan&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the contents copied from the provided
+buffer. The provided buffer is not wrapped or used after construction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(ReadOnlySpan&lt;byte&gt; buffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>The byte buffer to copy data from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_ReadOnlySpan_System_Byte___remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.String)">
+  GetStream(string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and a default initial capacity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(string tag)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_System_Byte___System_Int32_System_Int32_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.String,System.Byte[],System.Int32,System.Int32)">
+  GetStream(string, byte[], int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
+buffer. The provided buffer is not wrapped or used after construction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(string tag, byte[] buffer, int offset, int count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>The byte buffer to copy data from.</p>
+</dd>
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The offset from the start of the buffer to copy from.</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of bytes to copy from the buffer.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_System_Byte___System_Int32_System_Int32__remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_System_Int32_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.String,System.Int32)">
+  GetStream(string, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(string tag, int requiredSize)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The minimum desired capacity for the stream.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_System_Int32_System_Boolean_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.String,System.Int32,System.Boolean)">
+  GetStream(string, int, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity, possibly using
+a single contiguous underlying buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(string tag, int requiredSize, bool asContiguousBuffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The minimum desired capacity for the stream.</p>
+</dd>
+    <dt><code>asContiguousBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether to attempt to use a single contiguous buffer.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_System_Int32_System_Boolean__remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>Retrieving a MemoryStream which provides a single contiguous buffer can be useful in situations
+where the initial size is known and it is desirable to avoid copying data between the smaller underlying
+buffers to a single large one. This is most helpful when you know that you will always call <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_GetBuffer">GetBuffer()</a>
+on the underlying stream.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_System_Int64_System_Boolean_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.String,System.Int64,System.Boolean)">
+  GetStream(string, long, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and at least the given capacity, possibly using
+a single contiguous underlying buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(string tag, long requiredSize, bool asContiguousBuffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>requiredSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The minimum desired capacity for the stream.</p>
+</dd>
+    <dt><code>asContiguousBuffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether to attempt to use a single contiguous buffer.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_System_Int64_System_Boolean__remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>Retrieving a MemoryStream which provides a single contiguous buffer can be useful in situations
+where the initial size is known and it is desirable to avoid copying data between the smaller underlying
+buffers to a single large one. This is most helpful when you know that you will always call <a class="xref" href="Fantasy.RecyclableMemoryStream.html#Fantasy_RecyclableMemoryStream_GetBuffer">GetBuffer()</a>
+on the underlying stream.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_System_Memory_System_Byte__" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.String,System.Memory{System.Byte})">
+  GetStream(string, Memory&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
+buffer. The provided buffer is not wrapped or used after construction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use the ReadOnlySpan&lt;byte&gt; version of this method instead.&quot;)]
+public MemoryStream GetStream(string tag, Memory&lt;byte&gt; buffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>The byte buffer to copy data from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_System_Memory_System_Byte___remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
+</div>
+
+
+
+
+  <a id="Fantasy_RecyclableMemoryStreamManager_GetStream_" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream*"></a>
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_System_ReadOnlySpan_System_Byte__" data-uid="Fantasy.RecyclableMemoryStreamManager.GetStream(System.String,System.ReadOnlySpan{System.Byte})">
+  GetStream(string, ReadOnlySpan&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Retrieve a new <code>MemoryStream</code> object with the given tag and with contents copied from the provided
+buffer. The provided buffer is not wrapped or used after construction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryStream GetStream(string tag, ReadOnlySpan&lt;byte&gt; buffer)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A tag which can be used to track the source of the stream.</p>
+</dd>
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>The byte buffer to copy data from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>A <code>MemoryStream</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Fantasy_RecyclableMemoryStreamManager_GetStream_System_String_System_ReadOnlySpan_System_Byte___remarks">备注</h4>
+  <div class="markdown level1 remarks"><p>The new stream's position is set to the beginning of the stream when returned.</p>
+</div>
+
+
+
+
+  <h2 class="section" id="events">事件
+</h2>
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_BlockCreated" data-uid="Fantasy.RecyclableMemoryStreamManager.BlockCreated">
+  BlockCreated
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Triggered when a new block is created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;RecyclableMemoryStreamManager.BlockCreatedEventArgs&gt; BlockCreated</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">事件类型</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.BlockCreatedEventArgs.html">BlockCreatedEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_BufferDiscarded" data-uid="Fantasy.RecyclableMemoryStreamManager.BufferDiscarded">
+  BufferDiscarded
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Triggered when a buffer of either type is discarded, along with the reason for the discard.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;RecyclableMemoryStreamManager.BufferDiscardedEventArgs&gt; BufferDiscarded</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">事件类型</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.BufferDiscardedEventArgs.html">BufferDiscardedEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_LargeBufferCreated" data-uid="Fantasy.RecyclableMemoryStreamManager.LargeBufferCreated">
+  LargeBufferCreated
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Triggered when a new large buffer is created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;RecyclableMemoryStreamManager.LargeBufferCreatedEventArgs&gt; LargeBufferCreated</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">事件类型</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.LargeBufferCreatedEventArgs.html">LargeBufferCreatedEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_StreamConvertedToArray" data-uid="Fantasy.RecyclableMemoryStreamManager.StreamConvertedToArray">
+  StreamConvertedToArray
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Triggered when a user converts a stream to array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;RecyclableMemoryStreamManager.StreamConvertedToArrayEventArgs&gt; StreamConvertedToArray</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">事件类型</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamConvertedToArrayEventArgs.html">StreamConvertedToArrayEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_StreamCreated" data-uid="Fantasy.RecyclableMemoryStreamManager.StreamCreated">
+  StreamCreated
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Triggered when a new stream is created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;RecyclableMemoryStreamManager.StreamCreatedEventArgs&gt; StreamCreated</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">事件类型</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamCreatedEventArgs.html">StreamCreatedEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_StreamDisposed" data-uid="Fantasy.RecyclableMemoryStreamManager.StreamDisposed">
+  StreamDisposed
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Triggered when a stream is disposed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;RecyclableMemoryStreamManager.StreamDisposedEventArgs&gt; StreamDisposed</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">事件类型</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamDisposedEventArgs.html">StreamDisposedEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_StreamDoubleDisposed" data-uid="Fantasy.RecyclableMemoryStreamManager.StreamDoubleDisposed">
+  StreamDoubleDisposed
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Triggered when a stream is disposed of twice (an error).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;RecyclableMemoryStreamManager.StreamDoubleDisposedEventArgs&gt; StreamDoubleDisposed</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">事件类型</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamDoubleDisposedEventArgs.html">StreamDoubleDisposedEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_StreamFinalized" data-uid="Fantasy.RecyclableMemoryStreamManager.StreamFinalized">
+  StreamFinalized
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Triggered when a stream is finalized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;RecyclableMemoryStreamManager.StreamFinalizedEventArgs&gt; StreamFinalized</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">事件类型</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamFinalizedEventArgs.html">StreamFinalizedEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_StreamLength" data-uid="Fantasy.RecyclableMemoryStreamManager.StreamLength">
+  StreamLength
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Triggered when a stream is disposed to report the stream's length.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;RecyclableMemoryStreamManager.StreamLengthEventArgs&gt; StreamLength</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">事件类型</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamLengthEventArgs.html">StreamLengthEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_StreamOverCapacity" data-uid="Fantasy.RecyclableMemoryStreamManager.StreamOverCapacity">
+  StreamOverCapacity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Triggered when a stream is requested to expand beyond the maximum length specified by the responsible RecyclableMemoryStreamManager.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;RecyclableMemoryStreamManager.StreamOverCapacityEventArgs&gt; StreamOverCapacity</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">事件类型</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.StreamOverCapacityEventArgs.html">StreamOverCapacityEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Fantasy_RecyclableMemoryStreamManager_UsageReport" data-uid="Fantasy.RecyclableMemoryStreamManager.UsageReport">
+  UsageReport
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Periodically triggered to report usage statistics.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;RecyclableMemoryStreamManager.UsageReportEventArgs&gt; UsageReport</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">事件类型</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.html">RecyclableMemoryStreamManager</a>.<a class="xref" href="Fantasy.RecyclableMemoryStreamManager.UsageReportEventArgs.html">UsageReportEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

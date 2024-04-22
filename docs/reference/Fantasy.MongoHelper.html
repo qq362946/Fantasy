@@ -1,0 +1,960 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>MongoHelper 类
+ | Fantasy.Net API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="MongoHelper 类
+ | Fantasy.Net API Reference ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Fantasy.Net">
+            Fantasy.Net
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="搜索" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Fantasy.MongoHelper">
+
+
+
+  <h1 id="Fantasy_MongoHelper" data-uid="Fantasy.MongoHelper" class="text-break">
+    MongoHelper 类
+  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>命名空间</dt><dd><a class="xref" href="Fantasy.html">Fantasy</a></dd></dl>
+  <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>提供与MongoDB数据序列化和反序列化相关的帮助方法。</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class MongoHelper : Singleton&lt;MongoHelper&gt;, ISingleton, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>继承</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Fantasy.Singleton-1.html">Singleton</a>&lt;<a class="xref" href="Fantasy.MongoHelper.html">MongoHelper</a>&gt;</div>
+      <div><span class="xref">MongoHelper</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>实现</dt>
+    <dd>
+      <div><a class="xref" href="Fantasy.ISingleton.html">ISingleton</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>继承成员</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_Initialize">Singleton&lt;MongoHelper&gt;.Initialize()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_Dispose">Singleton&lt;MongoHelper&gt;.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_IsDisposed">Singleton&lt;MongoHelper&gt;.IsDisposed</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Singleton-1.html#Fantasy_Singleton_1_Instance">Singleton&lt;MongoHelper&gt;.Instance</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>扩展方法</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Fantasy.JsonHelper.html#Fantasy_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">构造函数
+</h2>
+
+
+  <a id="Fantasy_MongoHelper__ctor_" data-uid="Fantasy.MongoHelper.#ctor*"></a>
+
+  <h3 id="Fantasy_MongoHelper__ctor" data-uid="Fantasy.MongoHelper.#ctor">
+  MongoHelper()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MongoHelper()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">方法
+</h2>
+
+
+  <a id="Fantasy_MongoHelper_Clone_" data-uid="Fantasy.MongoHelper.Clone*"></a>
+
+  <h3 id="Fantasy_MongoHelper_Clone__1___0_" data-uid="Fantasy.MongoHelper.Clone``1(``0)">
+  Clone&lt;T&gt;(T)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>克隆一个对象，通过序列化和反序列化的方式实现。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Clone&lt;T&gt;(T t)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>t</code> <span class="xref">T</span></dt>
+    <dd><p>要克隆的对象。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>克隆后的对象。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>要克隆的对象类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_Deserialize_" data-uid="Fantasy.MongoHelper.Deserialize*"></a>
+
+  <h3 id="Fantasy_MongoHelper_Deserialize_System_Byte___System_String_" data-uid="Fantasy.MongoHelper.Deserialize(System.Byte[],System.String)">
+  Deserialize(byte[], string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数组反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Deserialize(byte[] bytes, string type)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>要反序列化的字节数组。</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>要反序列化的目标类型的类型名字符串。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_Deserialize_" data-uid="Fantasy.MongoHelper.Deserialize*"></a>
+
+  <h3 id="Fantasy_MongoHelper_Deserialize_System_Byte___System_Type_" data-uid="Fantasy.MongoHelper.Deserialize(System.Byte[],System.Type)">
+  Deserialize(byte[], Type)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数组反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Deserialize(byte[] bytes, Type type)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>要反序列化的字节数组。</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>要反序列化的目标类型。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_Deserialize_" data-uid="Fantasy.MongoHelper.Deserialize*"></a>
+
+  <h3 id="Fantasy_MongoHelper_Deserialize_System_IO_Stream_System_Type_" data-uid="Fantasy.MongoHelper.Deserialize(System.IO.Stream,System.Type)">
+  Deserialize(Stream, Type)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将输入流中的数据反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Deserialize(Stream stream, Type type)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>输入流。</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>要反序列化的目标类型。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_Deserialize_" data-uid="Fantasy.MongoHelper.Deserialize*"></a>
+
+  <h3 id="Fantasy_MongoHelper_Deserialize_System_Memory_System_Byte__System_Type_" data-uid="Fantasy.MongoHelper.Deserialize(System.Memory{System.Byte},System.Type)">
+  Deserialize(Memory&lt;byte&gt;, Type)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数据反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Deserialize(Memory&lt;byte&gt; memory, Type type)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>memory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>要反序列化的字节数据。</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>要反序列化的目标类型。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_Deserialize_" data-uid="Fantasy.MongoHelper.Deserialize*"></a>
+
+  <h3 id="Fantasy_MongoHelper_Deserialize_System_Span_System_Byte__System_Type_" data-uid="Fantasy.MongoHelper.Deserialize(System.Span{System.Byte},System.Type)">
+  Deserialize(Span&lt;byte&gt;, Type)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数据反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Deserialize(Span&lt;byte&gt; span, Type type)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>span</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>要反序列化的字节数据。</p>
+</dd>
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>要反序列化的目标类型。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_DeserializeFrom_" data-uid="Fantasy.MongoHelper.DeserializeFrom*"></a>
+
+  <h3 id="Fantasy_MongoHelper_DeserializeFrom_System_Type_System_IO_MemoryStream_" data-uid="Fantasy.MongoHelper.DeserializeFrom(System.Type,System.IO.MemoryStream)">
+  DeserializeFrom(Type, MemoryStream)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将内存流中的数据反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object DeserializeFrom(Type type, MemoryStream stream)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>type</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>要反序列化的目标类型。</p>
+</dd>
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>内存流。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_DeserializeFrom_" data-uid="Fantasy.MongoHelper.DeserializeFrom*"></a>
+
+  <h3 id="Fantasy_MongoHelper_DeserializeFrom__1_System_Byte___System_Int32_System_Int32_" data-uid="Fantasy.MongoHelper.DeserializeFrom``1(System.Byte[],System.Int32,System.Int32)">
+  DeserializeFrom&lt;T&gt;(byte[], int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数组中指定范围的数据反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T DeserializeFrom&lt;T&gt;(byte[] bytes, int index, int count)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>字节数组。</p>
+</dd>
+    <dt><code>index</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>开始索引。</p>
+</dd>
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>数据长度。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>要反序列化的目标类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_DeserializeFrom_" data-uid="Fantasy.MongoHelper.DeserializeFrom*"></a>
+
+  <h3 id="Fantasy_MongoHelper_DeserializeFrom__1_System_IO_MemoryStream_" data-uid="Fantasy.MongoHelper.DeserializeFrom``1(System.IO.MemoryStream)">
+  DeserializeFrom&lt;T&gt;(MemoryStream)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将内存流中的数据反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T DeserializeFrom&lt;T&gt;(MemoryStream stream)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>内存流。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>要反序列化的目标类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_Deserialize_" data-uid="Fantasy.MongoHelper.Deserialize*"></a>
+
+  <h3 id="Fantasy_MongoHelper_Deserialize__1_System_Byte___" data-uid="Fantasy.MongoHelper.Deserialize``1(System.Byte[])">
+  Deserialize&lt;T&gt;(byte[])
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数组反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Deserialize&lt;T&gt;(byte[] bytes)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>bytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>要反序列化的字节数组。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>要反序列化的目标类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_Deserialize_" data-uid="Fantasy.MongoHelper.Deserialize*"></a>
+
+  <h3 id="Fantasy_MongoHelper_Deserialize__1_System_IO_Stream_" data-uid="Fantasy.MongoHelper.Deserialize``1(System.IO.Stream)">
+  Deserialize&lt;T&gt;(Stream)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将输入流中的数据反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Deserialize&lt;T&gt;(Stream stream)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>输入流。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>要反序列化的目标类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_Deserialize_" data-uid="Fantasy.MongoHelper.Deserialize*"></a>
+
+  <h3 id="Fantasy_MongoHelper_Deserialize__1_System_Memory_System_Byte__" data-uid="Fantasy.MongoHelper.Deserialize``1(System.Memory{System.Byte})">
+  Deserialize&lt;T&gt;(Memory&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数据反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Deserialize&lt;T&gt;(Memory&lt;byte&gt; memory)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>memory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>要反序列化的字节数据。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>要反序列化的目标类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_Deserialize_" data-uid="Fantasy.MongoHelper.Deserialize*"></a>
+
+  <h3 id="Fantasy_MongoHelper_Deserialize__1_System_Span_System_Byte__" data-uid="Fantasy.MongoHelper.Deserialize``1(System.Span{System.Byte})">
+  Deserialize&lt;T&gt;(Span&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将字节数据反序列化为指定类型的对象。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Deserialize&lt;T&gt;(Span&lt;byte&gt; span)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>span</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>要反序列化的字节数据。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>反序列化后的对象。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>要反序列化的目标类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_OnLoad_" data-uid="Fantasy.MongoHelper.OnLoad*"></a>
+
+  <h3 id="Fantasy_MongoHelper_OnLoad_System_Int32_" data-uid="Fantasy.MongoHelper.OnLoad(System.Int32)">
+  OnLoad(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>在装载程序集时执行的方法，用于注册实体类型到BsonClassMap。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnLoad(int assemblyName)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>assemblyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>要注册的程序集名称。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_SerializeTo_" data-uid="Fantasy.MongoHelper.SerializeTo*"></a>
+
+  <h3 id="Fantasy_MongoHelper_SerializeTo__1___0_" data-uid="Fantasy.MongoHelper.SerializeTo``1(``0)">
+  SerializeTo&lt;T&gt;(T)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将对象序列化为字节数组。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] SerializeTo&lt;T&gt;(T t)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>t</code> <span class="xref">T</span></dt>
+    <dd><p>要序列化的对象。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">返回</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>序列化后的字节数组。</p>
+</dd>
+  </dl>
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>要序列化的对象类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_SerializeTo_" data-uid="Fantasy.MongoHelper.SerializeTo*"></a>
+
+  <h3 id="Fantasy_MongoHelper_SerializeTo__1___0_System_IO_MemoryStream_" data-uid="Fantasy.MongoHelper.SerializeTo``1(``0,System.IO.MemoryStream)">
+  SerializeTo&lt;T&gt;(T, MemoryStream)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将对象序列化并写入到指定的内存流中。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SerializeTo&lt;T&gt;(T t, MemoryStream stream)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>t</code> <span class="xref">T</span></dt>
+    <dd><p>要序列化的对象。</p>
+</dd>
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.memorystream">MemoryStream</a></dt>
+    <dd><p>要写入的内存流。</p>
+</dd>
+  </dl>
+
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>要序列化的对象类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Fantasy_MongoHelper_SerializeTo_" data-uid="Fantasy.MongoHelper.SerializeTo*"></a>
+
+  <h3 id="Fantasy_MongoHelper_SerializeTo__1___0_System_Memory_System_Byte__" data-uid="Fantasy.MongoHelper.SerializeTo``1(``0,System.Memory{System.Byte})">
+  SerializeTo&lt;T&gt;(T, Memory&lt;byte&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>将对象序列化并写入到内存中。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SerializeTo&lt;T&gt;(T t, Memory&lt;byte&gt; memory)</code></pre>
+  </div>
+
+  <h4 class="section">参数</h4>
+  <dl class="parameters">
+    <dt><code>t</code> <span class="xref">T</span></dt>
+    <dd><p>要序列化的对象。</p>
+</dd>
+    <dt><code>memory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>要写入的内存。</p>
+</dd>
+  </dl>
+
+
+  <h4 class="section">类型参数</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>要序列化的对象类型。</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

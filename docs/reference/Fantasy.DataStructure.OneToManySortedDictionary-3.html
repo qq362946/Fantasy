@@ -90,8 +90,7 @@
   <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>一对多映射关系的排序字典。每个外部键映射到一个内部排序字典，该内部排序字典将排序键映射到相应的值。</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -103,14 +102,11 @@
   <h4 class="section">类型参数</h4>
   <dl class="parameters">
     <dt><code>TKey</code></dt>
-    <dd><p>外部字典中的键类型。</p>
-</dd>
+    <dd></dd>
     <dt><code>TSortedKey</code></dt>
-    <dd><p>内部字典中的排序键类型。</p>
-</dd>
+    <dd></dd>
     <dt><code>TValue</code></dt>
-    <dd><p>内部字典中的值类型。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <dl class="typelist inheritance">
@@ -254,8 +250,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>创建一个新的 <a class="xref" href="Fantasy.DataStructure.OneToManySortedDictionary-3.html">OneToManySortedDictionary&lt;TKey, TSortedKey, TValue&gt;</a> 实例。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -281,8 +276,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>创建一个新的 <a class="xref" href="Fantasy.DataStructure.OneToManySortedDictionary-3.html">OneToManySortedDictionary&lt;TKey, TSortedKey, TValue&gt;</a> 实例。设置最大缓存数量</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -292,9 +286,7 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>recyclingLimit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>1:防止数据量过大、所以超过recyclingLimit的数据还是走GC.
-2:设置成0不控制数量，全部缓存</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -319,8 +311,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>向字典中添加一个值，关联到指定的外部键和排序键。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -330,14 +321,11 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要关联值的外部键。</p>
-</dd>
+    <dd></dd>
     <dt><code>sortedKey</code> <span class="xref">TSortedKey</span></dt>
-    <dd><p>要关联值的排序键。</p>
-</dd>
+    <dd></dd>
     <dt><code>value</code> <span class="xref">TValue</span></dt>
-    <dd><p>要添加的值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -358,8 +346,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>清空字典以及内部排序字典缓存队列，释放所有资源。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -385,8 +372,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>检查字典是否包含指定的外部键。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -396,15 +382,13 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要检查的外部键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果字典包含指定的外部键，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -424,8 +408,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>检查字典是否包含指定的外部键和排序键。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -435,18 +418,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要检查的外部键。</p>
-</dd>
+    <dd></dd>
     <dt><code>sortedKey</code> <span class="xref">TSortedKey</span></dt>
-    <dd><p>要检查的排序键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果字典包含指定的外部键和排序键，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -466,8 +446,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>从字典中移除指定外部键及其关联的所有值。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -477,15 +456,13 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要移除的外部键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果成功移除外部键及其关联的所有值，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -505,8 +482,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>从字典中移除指定外部键和排序键关联的值。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -516,18 +492,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要移除值的外部键。</p>
-</dd>
+    <dd></dd>
     <dt><code>sortedKey</code> <span class="xref">TSortedKey</span></dt>
-    <dd><p>要移除值的排序键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果成功移除值，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -547,8 +520,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>尝试从字典中获取指定外部键对应的内部排序字典。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -558,18 +530,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要获取内部排序字典的外部键。</p>
-</dd>
+    <dd></dd>
     <dt><code>dic</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2">SortedDictionary</a>&lt;TSortedKey, TValue&gt;</dt>
-    <dd><p>获取到的内部排序字典，如果找不到则为 null。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果找到内部排序字典，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -589,8 +558,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>尝试从字典中获取指定外部键和排序键对应的值。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -600,21 +568,17 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要获取值的外部键。</p>
-</dd>
+    <dd></dd>
     <dt><code>sortedKey</code> <span class="xref">TSortedKey</span></dt>
-    <dd><p>要获取值的排序键。</p>
-</dd>
+    <dd></dd>
     <dt><code>value</code> <span class="xref">TValue</span></dt>
-    <dd><p>获取到的值，如果找不到则为 default。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果找到值，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 

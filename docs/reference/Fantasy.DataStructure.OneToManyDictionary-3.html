@@ -90,8 +90,7 @@
   <dl><dt>程序集</dt><dd>Fantasy.Net.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>一对多映射关系的字典。每个键都对应一个内部字典，该内部字典将键值映射到相应的值。</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -103,14 +102,11 @@
   <h4 class="section">类型参数</h4>
   <dl class="parameters">
     <dt><code>TKey</code></dt>
-    <dd><p>外部字典中的键类型。</p>
-</dd>
+    <dd></dd>
     <dt><code>TValueKey</code></dt>
-    <dd><p>内部字典中的键类型。</p>
-</dd>
+    <dd></dd>
     <dt><code>TValue</code></dt>
-    <dd><p>内部字典中的值类型。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <dl class="typelist inheritance">
@@ -254,8 +250,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>创建一个新的 <a class="xref" href="Fantasy.DataStructure.OneToManyDictionary-3.html">OneToManyDictionary&lt;TKey, TValueKey, TValue&gt;</a> 实例。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -281,8 +276,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>创建一个新的 <a class="xref" href="Fantasy.DataStructure.OneToManyDictionary-3.html">OneToManyDictionary&lt;TKey, TValueKey, TValue&gt;</a> 实例，并指定最大缓存数量。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -292,9 +286,7 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>recyclingLimit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>1:防止数据量过大、所以超过recyclingLimit的数据还是走GC.
-2:设置成0不控制数量，全部缓存</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -319,8 +311,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>向字典中添加指定的键值对。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -330,14 +321,11 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要添加键值对的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>valueKey</code> <span class="xref">TValueKey</span></dt>
-    <dd><p>要添加键值对的内部字典键。</p>
-</dd>
+    <dd></dd>
     <dt><code>value</code> <span class="xref">TValue</span></dt>
-    <dd><p>要添加的值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -358,8 +346,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>清空字典中的所有键值对，并将不再使用的内部字典实例放回对象池中。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -385,8 +372,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>检查是否包含指定的键值对。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -396,18 +382,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>外部字典中的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>valueKey</code> <span class="xref">TValueKey</span></dt>
-    <dd><p>内部字典中的键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果包含指定的键值对，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -427,8 +410,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>获取指定键的第一个值。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -438,8 +420,7 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要获取第一个值的键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
@@ -465,8 +446,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>从字典中移除指定的键值对。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -476,18 +456,15 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要移除键值对的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>valueKey</code> <span class="xref">TValueKey</span></dt>
-    <dd><p>要移除键值对的内部字典键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果成功移除键值对，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -507,8 +484,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>从字典中移除指定的键值对。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -518,21 +494,17 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要移除键值对的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>valueKey</code> <span class="xref">TValueKey</span></dt>
-    <dd><p>要移除键值对的内部字典键。</p>
-</dd>
+    <dd></dd>
     <dt><code>value</code> <span class="xref">TValue</span></dt>
-    <dd><p>如果成功移除键值对，则为移除的值；否则为默认值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果成功移除键值对，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -552,8 +524,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>移除字典中的指定键及其相关的所有键值对。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -563,8 +534,7 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>要移除的键。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -585,8 +555,7 @@
   
   </h3>
 
-  <div class="markdown level1 summary"><p>尝试获取指定键值对的值。</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -596,21 +565,17 @@
   <h4 class="section">参数</h4>
   <dl class="parameters">
     <dt><code>key</code> <span class="xref">TKey</span></dt>
-    <dd><p>外部字典中的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>valueKey</code> <span class="xref">TValueKey</span></dt>
-    <dd><p>内部字典中的键。</p>
-</dd>
+    <dd></dd>
     <dt><code>value</code> <span class="xref">TValue</span></dt>
-    <dd><p>获取的值，如果操作成功，则为值；否则为默认值。</p>
-</dd>
+    <dd></dd>
   </dl>
 
   <h4 class="section">返回</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>如果操作成功，则为 true；否则为 false。</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
