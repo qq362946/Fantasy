@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.fantasy.ui": "file:/Users/sining/Code/Git/Fantasy/Fantasy.Unity/Fantasy.UI",
     "com.fantasy.unity": "file:../../../../Fantasy.Unity/Fantasy.Unity",
     "com.unity.collab-proxy": "2.3.1",
     "com.unity.feature.development": "1.0.2",

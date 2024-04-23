@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "com.fantasy.ui": {
+      "version": "file:/Users/sining/Code/Git/Fantasy/Fantasy.Unity/Fantasy.UI",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+      }
+    },
     "com.fantasy.unity": {
       "version": "file:../../../../Fantasy.Unity/Fantasy.Unity",
       "depth": 0,
