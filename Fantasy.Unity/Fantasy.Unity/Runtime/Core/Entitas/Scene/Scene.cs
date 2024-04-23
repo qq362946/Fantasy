@@ -195,14 +195,14 @@ namespace Fantasy
             newScene.ProcessId = server.Id;
             newScene.SceneConfigId = sceneConfigId;
             newScene.SchedulerId = sceneSchedulerId;
+            await newScene.Initialize(scene);
             
             if (worldId != 0)
             {
                 // 有可能不需要数据库、所以这里默认0的情况下就不创建数据库了
-                // scene.World = World.Create(worldId);
+                scene.World = World.Create(newScene, worldId);
             }
             
-            await newScene.Initialize(scene);
             Scenes.TryAdd(sceneSchedulerId, newScene);
 
             if (!string.IsNullOrEmpty(outerBindIp) && outerPort != 0)
@@ -280,10 +280,10 @@ namespace Fantasy
         /// 获取或设置场景类型。
         /// </summary>
         public int SceneType { get; private set; }
-        // /// <summary>
-        // /// 获取或设置所属世界。
-        // /// </summary>
-        // public World? World { get; private set; }
+        /// <summary>
+        /// 获取或设置所属世界。
+        /// </summary>
+        public World? World { get; private set; }
         /// <summary>
         /// 获取或设置所属服务器。
         /// </summary>

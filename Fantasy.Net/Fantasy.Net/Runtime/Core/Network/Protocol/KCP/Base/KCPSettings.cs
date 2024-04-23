@@ -23,7 +23,7 @@ namespace Fantasy
                     settings.Mtu = 470;
                     settings.SendWindowSize = 256;
                     settings.ReceiveWindowSize = 256;
-                    settings.MaxSendWindowSize = 256 * 2;
+                    settings.MaxSendWindowSize = 1024 * 1024;
                     break;
                 }
                 case NetworkTarget.Inner:
@@ -36,7 +36,7 @@ namespace Fantasy
                     settings.Mtu = 1400;
                     settings.SendWindowSize = 1024;
                     settings.ReceiveWindowSize = 1024;
-                    settings.MaxSendWindowSize = 1024 * 2;
+                    settings.MaxSendWindowSize = 1024 * 1024;
                     break;
                 }
                 default:
