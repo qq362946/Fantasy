@@ -3,15 +3,15 @@
 // using Amazon.Runtime.Internal;
 // using Fantasy;
 // using ProtoBuf;
-//
+
 // namespace Hotfix;
-//
+
 // [ProtoContract]
 // public class TestModel
 // {
-//     
+    
 // }
-//
+
 // public class OnServerStartComplete_Test : AsyncEventSystem<OnServerStartComplete>
 // {
 //     public override async FTask Handler(OnServerStartComplete self)
@@ -33,12 +33,12 @@
 //             // Log.Debug("22222222");
 //             List<FTask> list = new List<FTask>(100000);
 //             var sceneNetworkMessagingComponent = self.Server.Scene.NetworkMessagingComponent;
-//             
+            
 //             async FTask Call()
 //             {
 //                 await sceneNetworkMessagingComponent.CallInnerServer(1025, new TestServerRequest());
 //             }
-//             
+            
 //             for (int j = 0; j < 1000000000; ++j)
 //             {
 //                 list.Clear();
@@ -46,7 +46,7 @@
 //                 {
 //                     list.Add(Call());
 //                 }
-//                 
+                
 //                 await FTask.WhenAll(list);
 //             }
 //         }
