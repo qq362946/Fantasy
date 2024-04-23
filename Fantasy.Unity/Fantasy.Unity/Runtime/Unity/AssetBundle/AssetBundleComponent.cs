@@ -446,7 +446,7 @@ namespace Fantasy
 #endif
         }
         
-        public void CreateDirectory(string filePath, string targetDirectory, bool isFile)
+        public static void CreateDirectory(string filePath, string targetDirectory, bool isFile)
         {
             var directories = filePath.Split('/');
 
@@ -472,7 +472,7 @@ namespace Fantasy
             }
         }
         
-        public byte[] CalculateMD5(string directoryPath, bool includeManifest)
+        public static byte[] CalculateMD5(string directoryPath, bool includeManifest)
         {
             var substrNameIndex = directoryPath.Length + 1;
             var assetBundleVersionInfoList = new AssetBundleVersionInfo();
@@ -493,7 +493,7 @@ namespace Fantasy
             return ProtoBuffHelper.ToBytes(assetBundleVersionInfoList);
         }
         
-        private AssetBundleVersion GetAssetBundleVersion(string filePath, int substrNameIndex)
+        private static AssetBundleVersion GetAssetBundleVersion(string filePath, int substrNameIndex)
         {
             var fileInfo = new FileInfo(filePath);
             using var file = fileInfo.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
