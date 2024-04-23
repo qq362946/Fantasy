@@ -11,6 +11,7 @@ namespace Fantasy
     {
         private bool _isSending;
         private readonly Socket _socket;
+        private readonly TCPServerNetwork _network;
         private readonly CircularBuffer _sendBuffer = new CircularBuffer();
         private readonly CircularBuffer _receiveBuffer = new CircularBuffer();
         private readonly SocketAsyncEventArgs _outArgs = new SocketAsyncEventArgs();
@@ -20,6 +21,7 @@ namespace Fantasy
         {
             _socket = socket;
             _socket.NoDelay = true;
+            _network = (TCPServerNetwork)network;
             _innArgs.Completed += OnComplete;
             _outArgs.Completed += OnComplete;
             Receive();
@@ -44,6 +46,7 @@ namespace Fantasy
             _innArgs.Dispose();
             _sendBuffer.Dispose();
             _receiveBuffer.Dispose();
+            _network.RemoveChannel(Id);
             base.Dispose();
         }
 
