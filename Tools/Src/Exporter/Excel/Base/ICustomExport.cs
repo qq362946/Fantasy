@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Fantasy;
 using Fantasy.Exporter;
 using OfficeOpenXml;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -60,6 +61,46 @@ public abstract class ACustomExport : ICustomExport
     /// 执行导出操作的抽象方法
     /// </summary>
     public abstract void Run();
+
+    /// <summary>
+    /// 写入文件内容到指定位置
+    /// </summary>
+    /// <param name="fileName">文件名</param>
+    /// <param name="fileContent">文件内容</param>
+    /// <param name="filePath">相对的导出的目录</param>
+    /// <param name="customExportType">自定义导出类型</param>
+    protected void Write(string fileName, string fileContent, string filePath, CustomExportType customExportType)
+    {
+        if (filePath == null)
+        {
+            Log.Error($" {nameof(filePath)} is null");
+            return;
+        }
+        
+        filePath = FileHelper.GetFullPath(filePath);
+        
+        if (!Directory.Exists(filePath))
+        {
+            FileHelper.CreateDirectory(filePath);
+        }
+        
+        var combine = Path.Combine(filePath, fileName);
+        File.WriteAllText(combine, fileContent);
+        
+        switch (customExportType)
+        {
+            case CustomExportType.Client:
+            {
+                Log.Info($"导出客户端自定义文件：{filePath}/{fileName}");
+                return;
+            }
+            case CustomExportType.Server:
+            {
+                Log.Info($"导出服务器自定义文件：{filePath}/{fileName}");
+                return;
+            }
+        }
+    }
 
     /// <summary>
     /// 写入文件内容到指定位置

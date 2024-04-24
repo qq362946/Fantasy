@@ -203,39 +203,29 @@ public sealed partial class ExcelExporter
     {
         var task = new List<Task>();
         var excelWorksheets = new ExcelWorksheets(this);
-        
-        // 加载自定义导出程序集
-        
-        Assembly serverCustomAssembly = null;
-        Assembly clientCustomAssembly = null;
-        
-        if (!Directory.Exists($"{_excelProgramPath}CSharp"))
+        var customConfigure = $"{_excelProgramPath}Custom.txt";
+
+        if (!File.Exists(customConfigure))
         {
-            Directory.CreateDirectory($"{_excelProgramPath}CSharp");
+            using var streamWriter = File.CreateText(customConfigure);
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("// 自定义导出配置文件,用于配置自定义导出自定义程序的路径");
+            streamWriter.Write(stringBuilder);
+            return;
         }
+
+        var lineNumber = 0;
+        var oneDynamicAssembly = new OneDynamicAssembly();
+        using var reader = new StreamReader(customConfigure);
         
-        if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
+        while (reader.ReadLine() is { } lineStr)
         {
-            if (!Directory.Exists($"{_excelProgramPath}CSharp/Server"))
+            if (++lineNumber == 1 || string.IsNullOrEmpty(lineStr) || lineStr.StartsWith("#"))
             {
-                Directory.CreateDirectory($"{_excelProgramPath}CSharp/Server");
+                continue;
             }
-            serverCustomAssembly = DynamicAssembly.Load($"{_excelProgramPath}CSharp/Server");
-            // FileHelper.ClearDirectoryFile(ServerCustomExportDirectory);
-            // 生成一个系统内置的自定义导出类
-            var sceneTypeConfigToEnum = new SceneTypeConfigToEnum();
-            sceneTypeConfigToEnum.Init(this, excelWorksheets);
-            task.Add(Task.Run(sceneTypeConfigToEnum.Run));
-        }
-    
-        if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client))
-        {
-            if (!Directory.Exists($"{_excelProgramPath}CSharp/Client"))
-            {
-                Directory.CreateDirectory($"{_excelProgramPath}CSharp/Client");
-            }
-            clientCustomAssembly = DynamicAssembly.Load($"{_excelProgramPath}CSharp/Client");
-            //FileHelper.ClearDirectoryFile(ClientCustomExportDirectory);
+            
+            oneDynamicAssembly.Load(FileHelper.GetFullPath(lineStr));
         }
         
         long AssemblyIdentity(Assembly assembly)
@@ -254,32 +244,33 @@ public sealed partial class ExcelExporter
         {
             var assemblyIdentity = AssemblyIdentity(assembly);
             var assemblyInfo = new AssemblyInfo(assemblyIdentity, assembly);
+            assemblyInfo.Load(assembly);
             
-            if (assemblyInfo.AssemblyTypeGroupList.TryGetValue(typeof(ICustomExport), out var customExportList))
+            if (!assemblyInfo.AssemblyTypeGroupList.TryGetValue(typeof(ICustomExport), out var customExportList))
             {
-                foreach (var type in customExportList)
+                return;
+            }
+                
+            foreach (var type in customExportList)
+            {
+                var customExport = (ICustomExport)Activator.CreateInstance(type);
+                   
+                if (customExport != null)
                 {
-                    var customExport = (ICustomExport)Activator.CreateInstance(type);
-                    
-                    if (customExport != null)
-                    {
-                        customExport.Init(this, excelWorksheets);
-                        task.Add(Task.Run(customExport.Run));
-                    }
+                    customExport.Init(this, excelWorksheets);
+                    task.Add(Task.Run(customExport.Run));
                 }
             }
         }
         
-        if (serverCustomAssembly != null)
-        {
-            AddCustomExportTask(serverCustomAssembly);
-        }
-        
-        if (clientCustomAssembly != null)
-        {
-            AddCustomExportTask(clientCustomAssembly);
-        }
-        
+        // 生成一个系统内置的自定义导出类
+        var sceneTypeConfigToEnum = new SceneTypeConfigToEnum();
+        sceneTypeConfigToEnum.Init(this, excelWorksheets);
+        task.Add(Task.Run(sceneTypeConfigToEnum.Run));
+        // task.Add(Task.Run(constValueToConst.Run));
+        // 加载自定义导出程序集
+        AddCustomExportTask(oneDynamicAssembly.Assembly);
+        // 执行自定义导出任务
         Task.WaitAll(task.ToArray());
     }
     

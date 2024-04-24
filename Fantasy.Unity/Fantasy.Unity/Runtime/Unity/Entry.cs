@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace Fantasy
 {
+    public struct OnAppStart
+    {
+        public Scene Scene;
+    }
+    
     public class Entry : MonoBehaviour
     {
         public static Scene Scene { get; private set; }

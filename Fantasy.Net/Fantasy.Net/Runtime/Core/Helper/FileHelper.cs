@@ -24,6 +24,11 @@ namespace Fantasy
         /// <param name="directoryPath"></param>
         public static void CreateDirectory(string directoryPath)
         {
+            if (directoryPath.LastIndexOf('/') != directoryPath.Length - 1)
+            {
+                directoryPath += "/";
+            }
+            
             var directoriesByFilePath = GetDirectoriesByFilePath(directoryPath);
             
             foreach (var dir in directoriesByFilePath)
