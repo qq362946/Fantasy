@@ -262,6 +262,11 @@ namespace Fantasy
 
         #region Component
 
+        public T AddComponent<T>() where T : Entity, new()
+        {
+            return base.AddComponent<T>();
+        }
+
         public T AddComponent<T>(UILayer layer = UILayer.None) where T : UI, new()
         {
             var uiComponent = Create<T>(layer);
