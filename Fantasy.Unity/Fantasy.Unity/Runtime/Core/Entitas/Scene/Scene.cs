@@ -124,7 +124,6 @@ namespace Fantasy
             newScene.Initialize(scene).Coroutine();
             Scenes.TryAdd(sceneSchedulerId, newScene);
             SetScheduler(newScene, sceneSchedulerId, sceneRuntimeType);
-
             return newScene;
         }
 

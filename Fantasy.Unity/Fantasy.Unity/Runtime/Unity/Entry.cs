@@ -23,6 +23,8 @@ namespace Fantasy
             // 框架需要一个Scene来驱动、所以要创建一个Scene、后面所有的框架都会在这个Scene下
             // 也就是把这个Scene给卸载掉、框架的东西都会清除掉
             Scene = Scene.Create();
+            // 初始化配置表
+            ConfigTableHelper.Instance.Init();
             return Scene;
         }
 
