@@ -262,23 +262,18 @@ namespace Fantasy
 
         #region Component
 
-        public T AddComponent<T>() where T : Entity, new()
+        public T AddUI<T>(UILayer layer = UILayer.None) where T : UI, new()
         {
-            return base.AddComponent<T>();
-        }
-
-        public T AddComponent<T>(UILayer layer = UILayer.None) where T : UI, new()
-        {
-            var uiComponent = Create<T>(layer);
+            var uiComponent = Create<T>(layer, false);
             AddComponent(uiComponent);
             Scene.EntityComponent.Awake(uiComponent);
             Scene.EntityComponent.StartUpdate(uiComponent);
             return uiComponent;
         }
 
-        public async FTask<T> AddComponentAsync<T>(UILayer layer = UILayer.None) where T : UI, new()
+        public async FTask<T> AddUIAsync<T>(UILayer layer = UILayer.None) where T : UI, new()
         {
-            var uiComponent = await CreateAsync<T>(layer);
+            var uiComponent = await CreateAsync<T>(layer, false);
             AddComponent(uiComponent);
             Scene.EntityComponent.Awake(uiComponent);
             Scene.EntityComponent.StartUpdate(uiComponent);
