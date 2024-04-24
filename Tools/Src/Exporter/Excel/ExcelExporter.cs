@@ -209,7 +209,7 @@ public sealed partial class ExcelExporter
         {
             using var streamWriter = File.CreateText(customConfigure);
             var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine("// 自定义导出配置文件,用于配置自定义导出自定义程序的路径");
+            stringBuilder.AppendLine("// 自定义导出配置文件,用于配置自定义导出自定义程序的路径,每行一个路径,路径是导表应用的相对路径。如:../../Config/Custom/1.cs");
             streamWriter.Write(stringBuilder);
             return;
         }
