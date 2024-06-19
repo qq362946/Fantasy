@@ -17,7 +17,7 @@ namespace AssetBundleBrowser
             
             foreach (var directoryInfo in directoryInfos)
             {
-                var assetPath = directoryInfo.FullName.Replace(UnityEngine.Application.dataPath, "Assets");
+                var assetPath = directoryInfo.FullName.Replace('\\','/').Replace(UnityEngine.Application.dataPath, "Assets");
                 var assetImporter = AssetImporter.GetAtPath(assetPath);
                 assetImporter.assetBundleName = directoryInfo.Name.ToLower();
             }

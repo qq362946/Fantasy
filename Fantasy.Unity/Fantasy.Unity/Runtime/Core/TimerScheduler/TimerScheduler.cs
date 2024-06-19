@@ -230,7 +230,12 @@ namespace Fantasy
         /// <returns></returns>
         public long OnceTimer(long time, Action action)
         {
-            return OnceTillTimer(_now() + time, action);
+            var now = _now();
+            
+            var timerId = GetId;
+            var timerAction = new TimerAction(TimerType.OnceTimer, now, time, action);
+            AddTimer(timerId, ref timerAction);
+            return timerId;
         }
         
         /// <summary>
@@ -249,7 +254,7 @@ namespace Fantasy
             }
 
             var timerId = GetId;
-            var timerAction = new TimerAction(TimerType.OnceTimer, now, tillTime, action);
+            var timerAction = new TimerAction(TimerType.OnceTimer, now, tillTime - now, action);
             AddTimer(timerId, ref timerAction);
             return timerId;
         }

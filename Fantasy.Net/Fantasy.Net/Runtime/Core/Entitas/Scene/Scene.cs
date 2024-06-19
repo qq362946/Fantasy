@@ -15,7 +15,27 @@ namespace Fantasy
         public const string MultiThread = "MultiThread";
         public const string ThreadPool = "ThreadPool";
     }
-    
+#if FANTASY_NET
+    /// <summary>
+    /// 表示当创建新场景时引发的事件数据结构。
+    /// </summary>
+    public struct OnCreateScene
+    {
+        /// <summary>
+        /// 获取与事件关联的场景实体。
+        /// </summary>
+        public readonly Scene Scene;
+
+        /// <summary>
+        /// 初始化一个新的 OnCreateScene 实例。
+        /// </summary>
+        /// <param name="scene"></param>
+        public OnCreateScene(Scene scene)
+        {
+            Scene = scene;
+        }
+    }
+#endif    
     /// <summary>
     /// 表示一个场景实体，用于创建与管理特定的游戏场景信息。
     /// </summary>
@@ -217,6 +237,11 @@ namespace Fantasy
             if (sceneConfigId != 0)
             {
                 Log.Debug($"ServerConfigId:{server.Id} SceneConfigId:{sceneConfigId} RouteId:{entityId} SceneRuntimeType:{sceneRuntimeType} is start complete");
+            }
+            
+            if (sceneType > 0)
+            {
+                await EventSystem.Instance.PublishAsync(new OnCreateScene(newScene));
             }
 
             return newScene;
