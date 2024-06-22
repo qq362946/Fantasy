@@ -112,7 +112,7 @@ namespace Fantasy
                     LockId = lockId, WaitCoroutineLock = waitCoroutineLock
                 });
             }
-
+            
             return waitCoroutineLock;
         }
 
@@ -130,16 +130,15 @@ namespace Fantasy
 
             var singleThreadPool = CoroutineLockQueue.CoroutineLockComponent.Scene.Pool;
             
-            LockId = 0;
-            Tcs = null;
-            Tag = null;
-            CoroutineLockQueue = null;
-            
             if (_timerId != 0)
             {
                 CoroutineLockQueue.CoroutineLockComponent.Scene.TimerComponent.Core.Remove(ref _timerId);
             }
             
+            LockId = 0;
+            Tcs = null;
+            Tag = null;
+            CoroutineLockQueue = null;
             singleThreadPool.Return(this);
         }
     }

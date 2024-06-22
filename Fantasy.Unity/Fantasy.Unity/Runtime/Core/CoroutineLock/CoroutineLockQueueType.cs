@@ -48,16 +48,24 @@ namespace Fantasy
         /// <param name="tag">锁标识。</param>
         /// <param name="time">等待时间。</param>
         /// <returns>等待协程锁的任务。</returns>
-        public async FTask<WaitCoroutineLock> Lock(long coroutineLockQueueKey, string tag = null, int time = 30000)
+        public async FTask<WaitCoroutineLock> Lock(long coroutineLockQueueKey, string tag = null, int time = 4000)
         {
             if (_coroutineLockQueues.TryGetValue(coroutineLockQueueKey, out var coroutineLockQueue))
             {
                 return await coroutineLockQueue.Lock(tag, time);
             }
-
+            
             coroutineLockQueue = CoroutineLockQueue.Create(CoroutineLockComponent, _coroutineLockType, coroutineLockQueueKey);
             _coroutineLockQueues.Add(coroutineLockQueueKey, coroutineLockQueue);
-            return WaitCoroutineLock.Create(coroutineLockQueue, tag, time);
+            return coroutineLockQueue.CreateWaitCoroutineLock(tag, time);
+            
+            // if (_coroutineLockQueues.TryGetValue(coroutineLockQueueKey, out var coroutineLockQueue))
+            // {
+            //     return await coroutineLockQueue.Lock(tag, time);
+            // }
+            //
+            //
+            // return WaitCoroutineLock.Create(coroutineLockQueue, tag, time);
         }
 
         /// <summary>
