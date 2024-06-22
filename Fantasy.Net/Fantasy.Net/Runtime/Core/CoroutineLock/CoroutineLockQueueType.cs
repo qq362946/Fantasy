@@ -9,6 +9,7 @@ namespace Fantasy
     /// </summary>
     public sealed class CoroutineLockQueueType : IDisposable
     {
+        public bool AutoRelease;
         private long _coroutineLockType;
         private CoroutineLockComponent CoroutineLockComponent { get; set; }
         
@@ -17,6 +18,7 @@ namespace Fantasy
         public void Dispose()
         {
             var singleThreadPool = CoroutineLockComponent.Scene.Pool;
+            AutoRelease = false;
             CoroutineLockComponent = null;
             
             foreach (var (_, coroutineLockQueue) in _coroutineLockQueues)
@@ -48,7 +50,7 @@ namespace Fantasy
         /// <param name="tag">锁标识。</param>
         /// <param name="time">等待时间。</param>
         /// <returns>等待协程锁的任务。</returns>
-        public async FTask<WaitCoroutineLock> Lock(long coroutineLockQueueKey, string tag = null, int time = 4000)
+        public async FTask<WaitCoroutineLock> Lock(long coroutineLockQueueKey, string tag = null, int time = 30000)
         {
             if (_coroutineLockQueues.TryGetValue(coroutineLockQueueKey, out var coroutineLockQueue))
             {

@@ -32,6 +32,7 @@ namespace Fantasy
 
         /// <summary>
         /// 创建一个新的协程锁
+        /// 使用这个方法创建的协程锁，需要手动释放CoroutineLockQueueType。
         /// </summary>
         /// <param name="coroutineLockType"></param>
         /// <returns></returns>
@@ -43,6 +44,7 @@ namespace Fantasy
             }
             
             coroutineLockQueueType = CoroutineLockQueueType.Create(this, coroutineLockType);
+            coroutineLockQueueType.AutoRelease = false;
             _coroutineLockQueueTypes.Add(coroutineLockType, coroutineLockQueueType);
             return coroutineLockQueueType;
         }
@@ -50,6 +52,7 @@ namespace Fantasy
         /// <summary>
         /// 请求一个协程锁,使用这个方法要注意coroutineLockType的值，不要重复。
         /// 如果保证不了请先使用CoroutineLockComponent.Create创建一个新的协程锁。然后再用Lock传递进去。
+        /// 使用这个方法创建的协程锁，会自动释放CoroutineLockQueueType。
         /// </summary>
         /// <param name="coroutineLockType">锁类型</param>
         /// <param name="coroutineLockQueueKey">锁队列Id</param>
@@ -67,6 +70,7 @@ namespace Fantasy
             }
 
             coroutineLockQueueType = CoroutineLockQueueType.Create(this, coroutineLockType);
+            coroutineLockQueueType.AutoRelease = true;
             _coroutineLockQueueTypes.Add(coroutineLockType, coroutineLockQueueType);
             return await coroutineLockQueueType.Lock(coroutineLockQueueKey, tag, time);
         }
@@ -105,13 +109,17 @@ namespace Fantasy
                 {
                     return;
                 }
-
+                
                 if (!coroutineLockQueueType.Release(coroutineLockQueueKey))
                 {
                     return;
                 }
-                
-                _coroutineLockQueueTypes.Remove(coroutineLockType);
+
+                if (coroutineLockQueueType.AutoRelease)
+                {
+                    coroutineLockQueueType.Dispose();
+                    _coroutineLockQueueTypes.Remove(coroutineLockType);
+                }
             });
         }
     }

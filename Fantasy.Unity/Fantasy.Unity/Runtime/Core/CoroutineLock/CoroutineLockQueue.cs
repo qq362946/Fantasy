@@ -113,7 +113,7 @@ namespace Fantasy
                 waitCoroutineLock.SetResult();
                 break;
             }
-
+Log.Debug($"_waitCoroutineLocks.Count:{_waitCoroutineLocks.Count}");
             if (_waitCoroutineLocks.Count != 0)
             {
                 return false;
