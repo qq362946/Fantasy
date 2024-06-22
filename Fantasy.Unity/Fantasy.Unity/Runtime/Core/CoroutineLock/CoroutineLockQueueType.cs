@@ -58,14 +58,6 @@ namespace Fantasy
             coroutineLockQueue = CoroutineLockQueue.Create(CoroutineLockComponent, _coroutineLockType, coroutineLockQueueKey);
             _coroutineLockQueues.Add(coroutineLockQueueKey, coroutineLockQueue);
             return coroutineLockQueue.CreateWaitCoroutineLock(tag, time);
-            
-            // if (_coroutineLockQueues.TryGetValue(coroutineLockQueueKey, out var coroutineLockQueue))
-            // {
-            //     return await coroutineLockQueue.Lock(tag, time);
-            // }
-            //
-            //
-            // return WaitCoroutineLock.Create(coroutineLockQueue, tag, time);
         }
 
         /// <summary>
