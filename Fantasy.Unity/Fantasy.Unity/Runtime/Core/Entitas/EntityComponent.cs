@@ -59,38 +59,49 @@ namespace Fantasy
         {
             foreach (var entitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(IEntitiesSystem)))
             {
+                Type entitiesType = null;
                 var entity = Activator.CreateInstance(entitiesSystemType);
 
                 switch (entity)
                 {
                     case IAwakeSystem iAwakeSystem:
                     {
-                        _awakeSystems.Add(iAwakeSystem.EntitiesType(), iAwakeSystem);
+                        entitiesType = iAwakeSystem.EntitiesType();
+                        _awakeSystems.Add(entitiesType, iAwakeSystem);
                         break;
                     }
                     case IDestroySystem iDestroySystem:
                     {
-                        _destroySystems.Add(iDestroySystem.EntitiesType(), iDestroySystem);
+                        entitiesType = iDestroySystem.EntitiesType();
+                        _destroySystems.Add(entitiesType, iDestroySystem);
                         break;
                     }
                     case IDeserializeSystem iDeserializeSystem:
                     {
-                        _deserializeSystems.Add(iDeserializeSystem.EntitiesType(), iDeserializeSystem);
+                        entitiesType = iDeserializeSystem.EntitiesType();
+                        _deserializeSystems.Add(entitiesType, iDeserializeSystem);
                         break;
                     }
                     case IUpdateSystem iUpdateSystem:
                     {
-                        _updateSystems.Add(iUpdateSystem.EntitiesType(), iUpdateSystem);
+                        entitiesType = iUpdateSystem.EntitiesType();
+                        _updateSystems.Add(entitiesType, iUpdateSystem);
                         break;
                     }
                     case IFrameUpdateSystem iFrameUpdateSystem:
                     {
-                        _frameUpdateSystem.Add(iFrameUpdateSystem.EntitiesType(), iFrameUpdateSystem);
+                        entitiesType = iFrameUpdateSystem.EntitiesType();
+                        _frameUpdateSystem.Add(entitiesType, iFrameUpdateSystem);
                         break;
+                    }
+                    default:
+                    {
+                        Log.Error($"IEntitiesSystem not support type {entitiesSystemType}");
+                        return;
                     }
                 }
 
-                _assemblyList.Add(assemblyIdentity, entitiesSystemType);
+                _assemblyList.Add(assemblyIdentity, entitiesType);
             }
         }
 
@@ -100,8 +111,7 @@ namespace Fantasy
             {
                 return;
             }
-
-            _assemblyList.RemoveByKey(assemblyIdentity);
+            
             foreach (var type in assembly)
             {
                 _awakeSystems.Remove(type);
@@ -110,6 +120,8 @@ namespace Fantasy
                 _deserializeSystems.Remove(type);
                 _frameUpdateSystem.Remove(type);
             }
+            
+            _assemblyList.RemoveByKey(assemblyIdentity);
         }
 
         #endregion
