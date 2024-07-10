@@ -70,11 +70,12 @@ namespace Fantasy
         /// <summary>
         /// 从内存块解析数据包。
         /// </summary>
-        /// <param name="memoryStream">内存块的所有者。</param>
+        /// <param name="buffer">需要解包的buffer。</param>
+        /// <param name="count">解包的总长度。</param>
         /// <param name="packInfo">解析得到的数据包信息。</param>
         /// <returns>如果成功解析数据包，则返回 true；否则返回 false。</returns>
-        public abstract bool UnPack(MemoryStream memoryStream, out APackInfo packInfo);
-
+        public abstract bool UnPack(byte[] buffer, ref int count, out APackInfo packInfo);
+        
         /// <summary>
         /// 消息打包。
         /// </summary>

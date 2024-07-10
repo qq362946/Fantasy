@@ -11,6 +11,8 @@ namespace Fantasy
 		[ProtoIgnore]
 		public TestServerResponse ResponseType { get; set; }
 		public uint OpCode() { return InnerOpcode.TestServerRequest; }
+		[ProtoMember(1)]
+		public int Id { get; set; } = 1;
 	}
 	[ProtoContract]
 	public partial class TestServerResponse : AProto, IResponse

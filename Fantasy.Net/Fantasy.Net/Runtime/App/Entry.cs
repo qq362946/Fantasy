@@ -71,8 +71,8 @@ public static class Entry
         InitializeServer().Coroutine();
         while (true)
         {
-            Thread.Yield();
             ThreadScheduler.Update();
+            Thread.Yield();
         }
     }
 

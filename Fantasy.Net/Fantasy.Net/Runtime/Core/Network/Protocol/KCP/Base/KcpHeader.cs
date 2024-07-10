@@ -7,9 +7,7 @@ namespace Fantasy
         RequestConnection = 0x01,
         WaitConfirmConnection = 0x02,
         ConfirmConnection = 0x03,
-        // InnerHandshake = 0x03,
         RepeatChannelId = 0x04,
-        // ConfirmHandshake = 0x05,
         ReceiveData = 0x06,
         Disconnect = 0x07
     }

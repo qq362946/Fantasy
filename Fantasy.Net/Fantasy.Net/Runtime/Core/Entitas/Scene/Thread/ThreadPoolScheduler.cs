@@ -53,7 +53,7 @@ namespace Fantasy
 
                 if (!_queue.TryDequeue(out var sceneThreadId))
                 {
-                    Thread.Sleep(1);
+                    Thread.Yield();
                     continue;
                 }
 

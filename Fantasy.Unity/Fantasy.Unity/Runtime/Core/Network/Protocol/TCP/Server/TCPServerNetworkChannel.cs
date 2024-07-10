@@ -65,10 +65,6 @@ namespace Fantasy
         {
             _sendBuffer.Write(memoryStream);
             
-            // 因为memoryStream对象池出来的、所以需要手动回收下
-            
-            memoryStream.Dispose();
-            
             if (_isSending)
             {
                 return;

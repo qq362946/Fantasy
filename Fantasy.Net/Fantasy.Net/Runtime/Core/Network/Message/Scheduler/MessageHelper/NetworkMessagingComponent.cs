@@ -188,7 +188,7 @@ namespace Fantasy
             var rpcId = ++_rpcId;
             var session = Server.GetSession(entityIdStruct.ProcessId);
             var requestCallback = FTask<IResponse>.Create(false);
-            RequestCallback.Add(rpcId, MessageSender.Create(Scene, rpcId, requestType, requestCallback));
+            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, requestType, requestCallback));
             session.Send(request, rpcId, routeTypeOpCode, entityId);
             return await requestCallback;
         }
@@ -211,7 +211,7 @@ namespace Fantasy
             var rpcId = ++_rpcId;
             var session = Server.GetSession(entityIdStruct.ProcessId);
             var requestCallback = FTask<IResponse>.Create(false);
-            RequestCallback.Add(rpcId, MessageSender.Create(Scene, rpcId, request, requestCallback));
+            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
             session.Send(request, rpcId, entityId);
             return await requestCallback;
         }
@@ -227,7 +227,7 @@ namespace Fantasy
             var rpcId = ++_rpcId;
             var session = Server.GetSession(targetServerId);
             var requestCallback = FTask<IResponse>.Create(false);
-            RequestCallback.Add(rpcId, MessageSender.Create(Scene, rpcId, request, requestCallback));
+            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
             session.Send(request, rpcId);
             return await requestCallback;
         }

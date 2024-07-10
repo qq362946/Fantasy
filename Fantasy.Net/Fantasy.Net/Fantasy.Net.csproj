@@ -13,6 +13,7 @@
       <WarningsAsErrors>;NU1605;SYSLIB0011;CS8618;CS8602;CS8625;CS8603;CS8600;CS8625;CS8600;;SYSLIB0011</WarningsAsErrors>
       <NoWarn>1701;1702;IL2121;CS8603;CS8602;CS8625;IL2121;CS8618;CS8600;CS8604;CS8601;SYSLIB0023;CS8622;IL2121</NoWarn>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <DebugType>portable</DebugType>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -22,10 +23,10 @@
 
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
-      <PackageReference Include="MongoDB.Bson" Version="2.24.0" />
-      <PackageReference Include="MongoDB.Driver" Version="2.24.0" />
+      <PackageReference Include="MongoDB.Bson" Version="2.27.0" />
+      <PackageReference Include="MongoDB.Driver" Version="2.27.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="NLog" Version="5.2.8" />
+      <PackageReference Include="NLog" Version="5.3.2" />
       <PackageReference Include="protobuf-net" Version="3.2.30" />
     </ItemGroup>
 

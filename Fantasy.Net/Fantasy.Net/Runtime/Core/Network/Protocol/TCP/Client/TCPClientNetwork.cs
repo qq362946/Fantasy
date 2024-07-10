@@ -45,8 +45,7 @@ namespace Fantasy
     public sealed class TCPClientNetwork : AClientNetwork
     {
         #region 跟随Scene线程
-
-        private bool _isInit;
+        
         private bool _connectionSuccessful;
         private long _connectTimeoutId;
         private Socket _socket; // 用于通信的套接字。
@@ -58,18 +57,9 @@ namespace Fantasy
         private readonly SocketAsyncEventArgs _innArgs = new SocketAsyncEventArgs(); // 接收数据异步操作的参数。
         private Queue<MessageQueue> _messageCache = new Queue<MessageQueue>(); // 数据消息缓存队列。
         
-        /// <summary>
-        /// 在连接失败时触发的事件。
-        /// </summary>
-        public override event Action OnConnectFail;
-        /// <summary>
-        /// 在连接成功时触发的事件。
-        /// </summary>
-        public override event Action OnConnectComplete;
-        /// <summary>
-        /// 在连接断开时触发的事件。
-        /// </summary>
-        public override event Action OnConnectDisconnect;
+        private Action OnConnectFail;
+        private Action OnConnectComplete;
+        private Action OnConnectDisconnect;
 
         /// <summary>
         /// 创建一个 TCP协议客户端网络实例。
@@ -98,12 +88,12 @@ namespace Fantasy
         {
             // 如果已经初始化过一次，抛出异常，要求重新实例化
             
-            if (_isInit)
+            if (IsInit)
             {
-                throw new NotSupportedException($"KCPClientNetwork Id:{Id} Has already been initialized. If you want to call Connect again, please re instantiate it.");
+                throw new NotSupportedException($"TCPClientNetwork Id:{Id} Has already been initialized. If you want to call Connect again, please re instantiate it.");
             }
             
-            _isInit = true;
+            IsInit = true;
             OnConnectFail = onConnectFail;
             OnConnectComplete = onConnectComplete;
             OnConnectDisconnect = onConnectDisconnect;
@@ -422,7 +412,6 @@ namespace Fantasy
             ClearConnectTimeout();
 
             ChannelId = 0;
-            _isInit = false;
             _connectionSuccessful = false;
             _packetParser = null;
             _isSending = false;

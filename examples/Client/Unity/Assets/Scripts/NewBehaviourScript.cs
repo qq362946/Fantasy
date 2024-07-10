@@ -26,7 +26,6 @@ public class NewBehaviourScript : MonoBehaviour
         });
 
         var response = (A2C_TestResponse)await session.Call(new C2A_TestRequest());
-        Log.Debug("发送成功");
     }
 
     // Update is called once per frame

@@ -40,15 +40,15 @@ namespace Fantasy
         /// <returns>创建的 <see cref="MemoryStream"/> 实例。</returns>
         public override MemoryStream CreateMemoryStream()
         {
-            // 创建可回收的内存流，用于存储消息数据
-            var recyclableMemoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
-            // 将内存资源中的消息数据写入内存流
-            // 写入从内存起始位置到消息头长度+消息体长度的数据
-            recyclableMemoryStream.Write(MemoryStream.GetBuffer().AsSpan().Slice(0, Packet.InnerPacketHeadLength + MessagePacketLength));
+            // // 创建可回收的内存流，用于存储消息数据
+            // var recyclableMemoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
+            // // 将内存资源中的消息数据写入内存流
+            // // 写入从内存起始位置到消息头长度+消息体长度的数据
+            // recyclableMemoryStream.Write(MemoryStream.GetBuffer().AsSpan().Slice(0, Packet.InnerPacketHeadLength + MessagePacketLength));
             // 将内存流的指针定位到起始位置
-            recyclableMemoryStream.Seek(0, SeekOrigin.Begin);
+            MemoryStream.Seek(0, SeekOrigin.Begin);
             // 返回创建的内存流
-            return recyclableMemoryStream;
+            return MemoryStream;
         }
 
         /// <summary>
@@ -58,12 +58,10 @@ namespace Fantasy
         /// <returns>反序列化后的消息类型实例。</returns>
         public override object Deserialize(Type messageType)
         {
-            // 获取内存资源的引用
-            var memoryOwnerMemory = MemoryStream.GetBuffer().AsMemory();
-            // 获取消息体数据的切片
-            var memory = memoryOwnerMemory.Slice(Packet.OuterPacketHeadLength, MessagePacketLength);
-            // 使用 ProtoBufHelper 解析内存中的消息数据为指定的消息类型
-            return ProtoBuffHelper.FromMemory(messageType, memory);
+            MemoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
+            var @object = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+            MemoryStream.Seek(0, SeekOrigin.Begin);
+            return @object;
         }
     }
 
@@ -125,18 +123,15 @@ namespace Fantasy
                     
                     _isUnPackHead = true;
                     // 创建消息包
-                    var memoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
-                    memoryStream.SetLength(Packet.OuterPacketHeadLength + _messagePacketLength);
-                    var memoryOwner = memoryStream.GetBuffer().AsMemory();
+                    var memoryStream = new MemoryStream(_messagePacketLength);
+                    // 写入消息体的信息到内存中
+                    buffer.Read(memoryStream, _messagePacketLength);
                     packInfo = OuterPackInfo.Create(memoryStream);
                     packInfo.RpcId = _rpcId;
                     packInfo.ProtocolCode = _protocolCode;
                     packInfo.RouteTypeCode = _routeTypeCode;
                     packInfo.MessagePacketLength = _messagePacketLength;
-                    // 写入消息体的信息到内存中
-                    buffer.Read(memoryOwner.Slice(Packet.OuterPacketHeadLength), _messagePacketLength);
-                    // 写入消息头的信息到内存中
-                    _messageHead.AsMemory().CopyTo(memoryOwner.Slice(0, Packet.OuterPacketHeadLength));
+                    memoryStream.Seek(0, SeekOrigin.Begin);
                     return true;
                 }
                 catch (Exception e)
@@ -153,39 +148,42 @@ namespace Fantasy
         /// <summary>
         /// 从内存中解析数据包。
         /// </summary>
-        /// <param name="memoryStream">内存块所有者。</param>
-        /// <param name="packInfo">解析后的数据包信息。</param>
+        /// <param name="buffer">需要解包的buffer。</param>
+        /// <param name="count">解包的总长度。</param>
+        /// <param name="packInfo">解析得到的数据包信息。</param>
         /// <returns>如果成功解析数据包，则返回 true；否则返回 false。</returns>
-        public override bool UnPack(MemoryStream memoryStream, out APackInfo packInfo)
+        public override bool UnPack(byte[] buffer, ref int count, out APackInfo packInfo)
         {
             packInfo = null;
-            var memory = memoryStream.GetBuffer().AsMemory();
 
             try
             {
-                if (memory.Length < Packet.OuterPacketHeadLength)
+                if (count < Packet.OuterPacketHeadLength)
                 {
                     return false;
                 }
 
-                var memorySpan = memory.Span;
-                _messagePacketLength = BitConverter.ToInt32(memorySpan);
+                _messagePacketLength = BitConverter.ToInt32(buffer);
 #if FANTASY_NET
                 if (_messagePacketLength > Packet.PacketBodyMaxLength)
                 {
-                    throw new ScanException($"The received information exceeds the maximum limit = {_messagePacketLength}");
+                    throw new ScanException(
+                        $"The received information exceeds the maximum limit = {_messagePacketLength}");
                 }
 #endif
-                if (_messagePacketLength < 0 || memory.Length < _messagePacketLength)
+                if (_messagePacketLength < 0 || count < _messagePacketLength)
                 {
                     return false;
                 }
 
-                packInfo = OuterPackInfo.Create(memoryStream);
+                var newMemoryStream = new MemoryStream(count);
+                newMemoryStream.Write(buffer, 0, count);
+                packInfo = OuterPackInfo.Create(newMemoryStream);
                 packInfo.MessagePacketLength = _messagePacketLength;
-                packInfo.ProtocolCode = BitConverter.ToUInt32(memorySpan.Slice(Packet.PacketLength));
-                packInfo.RpcId = BitConverter.ToUInt32(memorySpan.Slice(Packet.OuterPacketRpcIdLocation));
-                packInfo.RouteTypeCode = BitConverter.ToUInt16(memorySpan.Slice(Packet.OuterPacketRouteTypeOpCodeLocation));
+                packInfo.ProtocolCode = BitConverter.ToUInt32(buffer, Packet.PacketLength);
+                packInfo.RpcId = BitConverter.ToUInt32(buffer, Packet.OuterPacketRpcIdLocation);
+                packInfo.RouteTypeCode = BitConverter.ToUInt16(buffer, Packet.OuterPacketRouteTypeOpCodeLocation);
+                newMemoryStream.Seek(0, SeekOrigin.Begin);
                 return true;
             }
             catch (Exception e)
@@ -234,7 +232,7 @@ namespace Fantasy
         {
             var opCode = Opcode.PingRequest;
             var packetBodyCount = 0;
-            var memoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
+            var memoryStream = new MemoryStream();
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
 
             if (message != null)

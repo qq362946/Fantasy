@@ -287,7 +287,7 @@ namespace Fantasy
         /// <param name="buffer"></param>
         /// <exception cref="ArgumentException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void GetBytes(this uint value, byte[] buffer)
+        public static void GetBytes(ref this uint value, byte[] buffer)
         {
             if (buffer.Length < 4)
             {

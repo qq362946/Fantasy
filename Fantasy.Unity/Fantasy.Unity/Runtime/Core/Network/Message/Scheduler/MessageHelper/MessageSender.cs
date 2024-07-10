@@ -8,12 +8,8 @@ namespace Fantasy
     /// <summary>
     /// 网络消息发送者的类。
     /// </summary>
-    public sealed class MessageSender : IDisposable
+    public struct MessageSender : IDisposable
     {
-        /// <summary>
-        /// 获取或设置场景。
-        /// </summary>
-        public Scene Scene { get; private set; }
         /// <summary>
         /// 获取或设置 RPC ID。
         /// </summary>
@@ -50,25 +46,20 @@ namespace Fantasy
             Tcs = null;
             Request = null;
             MessageType = null;
-            var singleThreadPool = Scene.Pool;
-            Scene = null;
-            singleThreadPool.Return(this);
         }
 
         /// <summary>
         /// 创建一个 <see cref="MessageSender"/> 实例。
         /// </summary>
-        /// <param name="scene"></param>
         /// <param name="rpcId">RPC ID。</param>
         /// <param name="requestType">请求消息类型。</param>
         /// <param name="tcs">任务。</param>
         /// <returns>创建的 <see cref="MessageSender"/> 实例。</returns>
-        public static MessageSender Create(Scene scene, uint rpcId, Type requestType, FTask<IResponse> tcs)
+        public static MessageSender Create(uint rpcId, Type requestType, FTask<IResponse> tcs)
         {
-            var routeMessageSender = scene.Pool.Rent<MessageSender>();
+            var routeMessageSender = new MessageSender();
             routeMessageSender.Tcs = tcs;
             routeMessageSender.RpcId = rpcId;
-            routeMessageSender.Scene = scene;
             routeMessageSender.MessageType = requestType;
             routeMessageSender.CreateTime = TimeHelper.Now;
             return routeMessageSender;
@@ -77,17 +68,15 @@ namespace Fantasy
         /// <summary>
         /// 创建一个 <see cref="MessageSender"/> 实例。
         /// </summary>
-        /// <param name="scene"></param>
         /// <param name="rpcId">RPC ID。</param>
         /// <param name="request">请求消息。</param>
         /// <param name="tcs">任务。</param>
         /// <returns>创建的 <see cref="MessageSender"/> 实例。</returns>
-        public static MessageSender Create(Scene scene, uint rpcId, IRequest request, FTask<IResponse> tcs)
+        public static MessageSender Create(uint rpcId, IRequest request, FTask<IResponse> tcs)
         {
-            var routeMessageSender = scene.Pool.Rent<MessageSender>();
+            var routeMessageSender = new MessageSender();
             routeMessageSender.Tcs = tcs;
             routeMessageSender.RpcId = rpcId;
-            routeMessageSender.Scene = scene;
             routeMessageSender.Request = request;
             routeMessageSender.CreateTime = TimeHelper.Now;
             return routeMessageSender;
@@ -96,18 +85,16 @@ namespace Fantasy
         /// <summary>
         /// 创建一个 <see cref="MessageSender"/> 实例。
         /// </summary>
-        /// <param name="scene"></param>
         /// <param name="rpcId">RPC ID。</param>
         /// <param name="routeId">路由 ID。</param>
         /// <param name="request">路由消息请求。</param>
         /// <param name="tcs">任务。</param>
         /// <returns>创建的 <see cref="MessageSender"/> 实例。</returns>
-        public static MessageSender Create(Scene scene, uint rpcId, long routeId, IRouteMessage request, FTask<IResponse> tcs)
+        public static MessageSender Create(uint rpcId, long routeId, IRouteMessage request, FTask<IResponse> tcs)
         {
-            var routeMessageSender = scene.Pool.Rent<MessageSender>();
+            var routeMessageSender = new MessageSender();
             routeMessageSender.Tcs = tcs;
             routeMessageSender.RpcId = rpcId;
-            routeMessageSender.Scene = scene;
             routeMessageSender.RouteId = routeId;
             routeMessageSender.Request = request;
             routeMessageSender.CreateTime = TimeHelper.Now;

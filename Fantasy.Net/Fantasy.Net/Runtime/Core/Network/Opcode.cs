@@ -9,7 +9,7 @@ namespace Fantasy
         /// <summary>
         /// 外网消息操作码的基准值。
         /// </summary>
-        public const uint OuterMessage = 100000000;
+        public const uint OuterMessage = 100000000; 
         /// <summary>
         /// 外网请求操作码的基准值。
         /// </summary>

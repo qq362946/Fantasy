@@ -43,16 +43,10 @@ public sealed class InnerPackInfo : APackInfo
     /// <returns>创建的 <see cref="MemoryStream"/> 实例。</returns>
     public override MemoryStream CreateMemoryStream()
     {
-        // 创建可回收的内存流，用于存储消息数据
-        var recyclableMemoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
-        // 将内存资源中的消息数据写入内存流
-        // 写入从内存起始位置到消息头长度+消息体长度的数据
-        var asSpan = MemoryStream.GetBuffer().AsSpan();
-        recyclableMemoryStream.Write(asSpan.Slice(0, Packet.InnerPacketHeadLength + MessagePacketLength));
         // 将内存流的指针定位到起始位置
-        recyclableMemoryStream.Seek(0, SeekOrigin.Begin);
+        MemoryStream.Seek(0, SeekOrigin.Begin);
         // 返回创建的内存流
-        return recyclableMemoryStream;
+        return MemoryStream;
     }
 
     /// <summary>
@@ -66,61 +60,72 @@ public sealed class InnerPackInfo : APackInfo
         {
             Log.Debug($"Deserialize  { IsDisposed}");
         }
-        // 获取内存资源的引用
-        var memoryOwnerMemory = MemoryStream.GetBuffer().AsMemory();
-        // 获取消息体数据的切片
-        memoryOwnerMemory = memoryOwnerMemory.Slice(Packet.InnerPacketHeadLength, MessagePacketLength);
-        
+
+        object obj = null;
+        MemoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
         switch (ProtocolCode)
         {
             case >= Opcode.InnerBsonRouteResponse:
             {
-                return MongoHelper.Instance.Deserialize(memoryOwnerMemory, messageType);
+                obj = MongoHelper.Instance.Deserialize(MemoryStream, messageType);
+                break;
             }
             case >= Opcode.InnerRouteResponse:
             {
-                return ProtoBuffHelper.FromMemory(messageType, memoryOwnerMemory);
+                obj = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+                break;
             }
             case >= Opcode.OuterRouteResponse:
             {
-                return ProtoBuffHelper.FromMemory(messageType, memoryOwnerMemory);
+                obj = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+                break;
             }
             case >= Opcode.InnerBsonRouteMessage:
             {
-                return MongoHelper.Instance.Deserialize(memoryOwnerMemory, messageType);
+                obj = MongoHelper.Instance.Deserialize(MemoryStream, messageType);
+                break;
             }
             case >= Opcode.InnerRouteMessage:
             case >= Opcode.OuterRouteMessage:
             {
-                return ProtoBuffHelper.FromMemory(messageType, memoryOwnerMemory);
+                obj = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+                break;
             }
             case >= Opcode.InnerBsonResponse:
             {
-                return MongoHelper.Instance.Deserialize(memoryOwnerMemory, messageType);
+                obj = MongoHelper.Instance.Deserialize(MemoryStream, messageType);
+                break;
             }
             case >= Opcode.InnerResponse:
             {
-                return ProtoBuffHelper.FromMemory(messageType, memoryOwnerMemory);
+                obj = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+                break;
             }
             case >= Opcode.OuterResponse:
             {
+                MemoryStream.Seek(0, SeekOrigin.Begin);
                 Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
                 return null;
             }
             case >= Opcode.InnerBsonMessage:
             {
-                return MongoHelper.Instance.Deserialize(memoryOwnerMemory, messageType);
+                obj = MongoHelper.Instance.Deserialize(MemoryStream, messageType);
+                break;
             }
             case >= Opcode.InnerMessage:
             {
-                return ProtoBuffHelper.FromMemory(messageType, memoryOwnerMemory);
+                obj = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+                break;
             }
             default:
             {
+                MemoryStream.Seek(0, SeekOrigin.Begin);
                 Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
                 return null;
             }
         }
+        MemoryStream.Seek(0, SeekOrigin.Begin);
+        return obj;
     }
 }
 
@@ -188,9 +193,9 @@ public sealed class InnerPacketParser : APacketParser
                 
                 _isUnPackHead = true;
                 // 创建消息包
-                var memoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
-                memoryStream.SetLength(Packet.InnerPacketHeadLength + _messagePacketLength);
-                var asMemory = memoryStream.GetBuffer().AsMemory();
+                var memoryStream = new MemoryStream(_messagePacketLength);
+                // 写入消息体的信息到内存中
+                buffer.Read(memoryStream, _messagePacketLength);
                 // 创建内部数据包信息实例
                 packInfo = InnerPackInfo.Create(memoryStream);
                 // 设置数据包信息的属性值
@@ -198,10 +203,6 @@ public sealed class InnerPacketParser : APacketParser
                 packInfo.RouteId = _routeId;
                 packInfo.ProtocolCode = _protocolCode;
                 packInfo.MessagePacketLength = _messagePacketLength;
-                // 写入消息体的信息到内存中
-                buffer.Read(asMemory.Slice(Packet.InnerPacketHeadLength), _messagePacketLength);
-                // 写入消息头的信息到内存中
-                _messageHead.AsMemory().CopyTo( asMemory.Slice(0, Packet.InnerPacketHeadLength));
                 return true;
             }
             catch (Exception e)
@@ -219,40 +220,42 @@ public sealed class InnerPacketParser : APacketParser
     /// <summary>
     /// 尝试从内存资源中解析数据为一个内部数据包信息。
     /// </summary>
-    /// <param name="memoryStream">包含数据的内存资源。</param>
-    /// <param name="packInfo">解析后的内部数据包信息。</param>
+    /// <param name="buffer">需要解包的buffer。</param>
+    /// <param name="count">解包的总长度。</param>
+    /// <param name="packInfo">解析得到的数据包信息。</param>
     /// <returns>如果成功解析并获取内部数据包信息，则返回 true，否则返回 false。</returns>
-    public override bool UnPack(MemoryStream memoryStream, out APackInfo packInfo)
+    public override bool UnPack(byte[] buffer, ref int count, out APackInfo packInfo)
     {
         packInfo = null;
-        // 将 memoryStream 对象的内存资源转换为 Span<byte>
-        var memorySpan = memoryStream.GetBuffer().AsSpan();
         // 如果内存资源中的数据长度小于内部消息头的长度，无法解析
-        if (memorySpan.Length < Packet.InnerPacketHeadLength)
+        if (count < Packet.InnerPacketHeadLength)
         {
             return false;
         }
-            
-        _messagePacketLength = BitConverter.ToInt32(memorySpan);
+        
+        _messagePacketLength = BitConverter.ToInt32(buffer);
 
         // 检查消息体长度是否超出限制
         if (_messagePacketLength > Packet.PacketBodyMaxLength)
         {
             throw new ScanException($"The received information exceeds the maximum limit = {_messagePacketLength}");
         }
-        
+
         // 如果内存资源中的数据长度小于消息体的长度，无法解析
-        if (_messagePacketLength < 0 || memorySpan.Length < _messagePacketLength)
+        if (_messagePacketLength < 0 || count < _messagePacketLength)
         {
             return false;
         }
 
         // 创建内部数据包信息实例
-        packInfo = InnerPackInfo.Create(memoryStream);
+        var newMemoryStream = new MemoryStream(count);
+        newMemoryStream.Write(buffer, 0, count);
+        packInfo = InnerPackInfo.Create(newMemoryStream);
         packInfo.MessagePacketLength = _messagePacketLength;
-        packInfo.ProtocolCode = BitConverter.ToUInt32(memorySpan[Packet.PacketLength..]);
-        packInfo.RpcId = BitConverter.ToUInt32(memorySpan[Packet.OuterPacketRpcIdLocation..]);
-        packInfo.RouteId = BitConverter.ToInt64(memorySpan[Packet.InnerPacketRouteRouteIdLocation..]);
+        packInfo.ProtocolCode = BitConverter.ToUInt32(buffer, Packet.PacketLength);
+        packInfo.RpcId = BitConverter.ToUInt32(buffer, Packet.OuterPacketRpcIdLocation);
+        packInfo.RouteId = BitConverter.ToInt64(buffer, Packet.InnerPacketRouteRouteIdLocation);
+        newMemoryStream.Seek(0, SeekOrigin.Begin);
         return true;
     }
 
@@ -319,7 +322,7 @@ public sealed class InnerPacketParser : APacketParser
         var opCode = Opcode.PingRequest;
         var packetBodyCount = 0;
         // 创建可回收的内存流
-        var memoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
+        var memoryStream = new MemoryStream();
         // 将写入位置设置为消息体的起始位置
         memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
@@ -384,7 +387,7 @@ public sealed class InnerPacketParser : APacketParser
         var opCode = Opcode.PingRequest;
         var packetBodyCount = 0;
         // 创建可回收的内存流
-        var memoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
+        var memoryStream = new MemoryStream();
         // 将写入位置设置为消息体的起始位置
         memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 

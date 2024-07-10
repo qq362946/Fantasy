@@ -6,6 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DebugType>portable</DebugType>
+    </PropertyGroup>
+
     <ItemGroup>
       <Folder Include="Generate\ConfigTable\Entity\" />
     </ItemGroup>

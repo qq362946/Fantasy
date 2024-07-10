@@ -86,15 +86,12 @@ namespace Fantasy
                             {
                                 // 执行到这里是说明Session已经断开了
                                 // 因为这里是其他服务器Send到外网的数据、所以不需要给发送端返回就可以
-                                // var obj = packInfo.Deserialize(messageType);
-                                // var response = MessageDispatcherSystem.Instance.CreateResponse((IRouteMessage)obj, CoreErrorCode.ErrNotFoundRoute);
-                                // session.Send(response, packInfo.RpcId, packInfo.RouteId);
                                 return;
                             }
                             case Session gateSession:
                             {
                                 // 这里如果是Session只可能是Gate的Session、如果是的话、肯定是转发Address消息
-                                gateSession.Send(packInfo.CreateMemoryStream(), packInfo.RpcId);
+                                gateSession.Send(packInfo.MemoryStream, packInfo.RpcId);
                                 return;
                             }
                             default:

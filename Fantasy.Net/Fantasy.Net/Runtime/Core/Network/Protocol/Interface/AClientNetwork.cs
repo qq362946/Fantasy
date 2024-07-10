@@ -11,11 +11,9 @@ namespace Fantasy
     /// </summary>
     public abstract class AClientNetwork : ANetwork, INetworkChannel
     {
+        protected bool IsInit;
         public uint ChannelId { get; protected set; }
         public Session Session { get; protected set; }
-        public abstract event Action OnConnectFail;
-        public abstract event Action OnConnectComplete;
-        public abstract event Action OnConnectDisconnect;
         protected AClientNetwork(Scene scene, NetworkType networkType, NetworkProtocolType networkProtocolType, NetworkTarget networkTarget) : base(scene, networkType, networkProtocolType, networkTarget) { }
         public abstract Session Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, int connectTimeout = 5000);
         public abstract void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message);
@@ -24,6 +22,7 @@ namespace Fantasy
         public override void Dispose()
         {
             ChannelId = 0;
+            IsInit = false;
             
             if (Session != null)
             {

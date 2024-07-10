@@ -45,7 +45,8 @@ namespace Fantasy
                 if (File.Exists(AppDefine.StreamingAssetsVersion) && !File.Exists(AppDefine.PersistentDataVersion))
                 {
                     var versionBytes = await GetStreamingAssets(AppDefine.VersionName);
-                    var assetBundleVersionInfo = ProtoBuffHelper.FromBytes<AssetBundleVersionInfo>(versionBytes);
+                    var assetBundleVersionInfo = ProtoBuffHelper.FromBytes<AssetBundleVersionInfo>(versionBytes,
+                        0, versionBytes.Length);
             
                     foreach (var assetBundleVersion in assetBundleVersionInfo.List)
                     {

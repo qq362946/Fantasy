@@ -58,76 +58,6 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     }
 
     /// <summary>
-    /// 将字节数据反序列化为指定类型的对象。
-    /// </summary>
-    /// <param name="span">要反序列化的字节数据。</param>
-    /// <param name="type">要反序列化的目标类型。</param>
-    /// <returns>反序列化后的对象。</returns>
-    public object Deserialize(Span<byte> span, Type type)
-    {
-        using var stream = MemoryStreamHelper.GetRecyclableMemoryStream();
-        stream.Write(span);
-        stream.Seek(0, SeekOrigin.Begin);
-        return BsonSerializer.Deserialize(stream, type);
-    }
-
-    /// <summary>
-    /// 将字节数据反序列化为指定类型的对象。
-    /// </summary>
-    /// <param name="memory">要反序列化的字节数据。</param>
-    /// <param name="type">要反序列化的目标类型。</param>
-    /// <returns>反序列化后的对象。</returns>
-    public object Deserialize(Memory<byte> memory, Type type)
-    {
-        if (memory.Length == 0)
-        {
-            return Activator.CreateInstance(type);
-        }
-        
-        using var stream = MemoryStreamHelper.GetRecyclableMemoryStream();
-        stream.Write(memory.Span);
-        stream.Seek(0, SeekOrigin.Begin);
-        return BsonSerializer.Deserialize(stream, type);
-    }
-
-    /// <summary>
-    /// 将字节数据反序列化为指定类型的对象。
-    /// </summary>
-    /// <typeparam name="T">要反序列化的目标类型。</typeparam>
-    /// <param name="span">要反序列化的字节数据。</param>
-    /// <returns>反序列化后的对象。</returns>
-    public object Deserialize<T>(Span<byte> span)
-    {
-        if (span.Length == 0)
-        {
-            return Activator.CreateInstance(typeof(T));
-        }
-        
-        using var stream = MemoryStreamHelper.GetRecyclableMemoryStream();
-        stream.Write(span);
-        stream.Seek(0, SeekOrigin.Begin);
-        return BsonSerializer.Deserialize<T>(stream);
-    }
-
-    /// <summary>
-    /// 将字节数据反序列化为指定类型的对象。
-    /// </summary>
-    /// <typeparam name="T">要反序列化的目标类型。</typeparam>
-    /// <param name="memory">要反序列化的字节数据。</param>
-    /// <returns>反序列化后的对象。</returns>
-    public object Deserialize<T>(Memory<byte> memory)
-    {
-        if (memory.Length == 0)
-        {
-            return Activator.CreateInstance(typeof(T));
-        }
-        
-        using var stream = MemoryStreamHelper.GetRecyclableMemoryStream();
-        stream.Seek(0, SeekOrigin.Begin);
-        return BsonSerializer.Deserialize<T>(stream);
-    }
-
-    /// <summary>
     /// 将字节数组反序列化为指定类型的对象。
     /// </summary>
     /// <typeparam name="T">要反序列化的目标类型。</typeparam>
@@ -248,19 +178,6 @@ public sealed class MongoHelper : Singleton<MongoHelper>
         }
         
         return t.ToBson();
-    }
-
-    /// <summary>
-    /// 将对象序列化并写入到内存中。
-    /// </summary>
-    /// <typeparam name="T">要序列化的对象类型。</typeparam>
-    /// <param name="t">要序列化的对象。</param>
-    /// <param name="memory">要写入的内存。</param>
-    public void SerializeTo<T>(T t, Memory<byte> memory)
-    {
-        using var memoryStream = MemoryStreamHelper.GetRecyclableMemoryStream();
-        SerializeTo(t, memoryStream);
-        memoryStream.GetBuffer().AsMemory().CopyTo(memory);
     }
 
     /// <summary>

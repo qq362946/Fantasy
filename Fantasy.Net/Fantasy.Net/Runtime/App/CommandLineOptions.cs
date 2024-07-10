@@ -34,7 +34,7 @@ public class CommandLineOptions
     /// TCP - 服务器内部之间通讯使用TCP协议
     /// KCP - 服务器内部之间通讯使用KCP协议
     /// </summary>
-    [Option('n',"InnerNetwork", Required = false, Default = "TCP", HelpText = "TCP、KCP")]
+    [Option('n',"InnerNetwork", Required = false, Default = "KCP", HelpText = "TCP、KCP")]
     public string InnerNetwork { get; set; }
     /// <summary>
     /// 配置表文件夹路径。

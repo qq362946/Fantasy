@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // ReSharper disable InconsistentNaming
@@ -14,6 +15,43 @@ namespace Fantasy
     /// </summary>
     public static class NetworkHelper
     {
+        /// <summary>
+        /// 克隆一个IPEndPoint
+        /// </summary>
+        /// <param name="endPoint"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IPEndPoint Clone(this EndPoint endPoint)
+        {
+            var ip = (IPEndPoint)endPoint;
+            return new IPEndPoint(ip.Address, ip.Port);
+        }
+        
+        /// <summary>
+        /// 比较两个IPEndPoint是否相等
+        /// </summary>
+        /// <param name="endPoint"></param>
+        /// <param name="ipEndPoint"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IPEndPointEquals(this EndPoint endPoint, IPEndPoint ipEndPoint)
+        {
+            var ip = (IPEndPoint)endPoint;
+            return ip.Address.Equals(ipEndPoint.Address) && ip.Port == ipEndPoint.Port;
+        }
+        
+        /// <summary>
+        /// 比较两个IPEndPoint是否相等
+        /// </summary>
+        /// <param name="endPoint"></param>
+        /// <param name="ipEndPoint"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IPEndPointEquals(this IPEndPoint endPoint, IPEndPoint ipEndPoint)
+        {
+            return endPoint.Address.Equals(ipEndPoint.Address) && endPoint.Port == ipEndPoint.Port;
+        }
+        
         /// <summary>
         /// 获取本机所有网络适配器的IP地址。
         /// </summary>

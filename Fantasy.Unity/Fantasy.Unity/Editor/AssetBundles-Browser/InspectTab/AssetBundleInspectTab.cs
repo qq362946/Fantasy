@@ -216,10 +216,6 @@ namespace AssetBundleBrowser
                 List<AssetBundleRecord> records = new List<AssetBundleRecord>(m_loadedAssetBundles.Values);
                 foreach (AssetBundleRecord record in records)
                 {
-                    if (!record.bundle)
-                    {
-                        continue;
-                    }
                     record.bundle.Unload(true);
                 }
 

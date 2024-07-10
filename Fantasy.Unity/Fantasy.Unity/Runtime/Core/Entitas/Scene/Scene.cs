@@ -224,15 +224,14 @@ namespace Fantasy
             }
             
             Scenes.TryAdd(sceneSchedulerId, newScene);
-
+            SetScheduler(newScene, sceneSchedulerId, sceneRuntimeType);
+            
             if (!string.IsNullOrEmpty(outerBindIp) && outerPort != 0)
             {
                 var networkProtocolType = Enum.Parse<NetworkProtocolType>(networkProtocol);
                 var address = NetworkHelper.ToIPEndPoint(outerBindIp, outerPort);
-                newScene.Network = NetworkProtocolFactory.CreateServer(server.Scene, networkProtocolType, NetworkTarget.Outer, address);
+                newScene.Network = NetworkProtocolFactory.CreateServer(newScene, networkProtocolType, NetworkTarget.Outer, address);
             }
-
-            SetScheduler(newScene, sceneSchedulerId, sceneRuntimeType);
 
             if (sceneConfigId != 0)
             {
