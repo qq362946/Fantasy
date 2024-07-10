@@ -441,7 +441,7 @@ namespace Fantasy
             // 在其他平台上，可以直接使用System.IO类进行读取。
             var filePath = $"{UnityEngine.Application.streamingAssetsPath}/{path}";
 #if UNITY_ANDROID
-            return await Download.Instance.DownloadByte($"file://{filePath}");
+            return await Download.Create(Scene).DownloadByte($"file://{filePath}");
 #else
             return await File.ReadAllBytesAsync(filePath);
 #endif
