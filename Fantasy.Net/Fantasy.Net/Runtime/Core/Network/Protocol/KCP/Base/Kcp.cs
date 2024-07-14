@@ -11,6 +11,7 @@ using static KCP.IKCP;
 // ReSharper disable IdentifierTypo
 // ReSharper disable GrammarMistakeInComment
 // ReSharper disable PossibleNullReferenceException
+// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
 
 namespace KCP
 {
@@ -25,7 +26,7 @@ namespace KCP
         private IKCPCB* _kcp;
 
         /// <summary>
-        ///     Output function pointer
+        ///     Output function
         /// </summary>
         private KcpCallback _output;
 
@@ -264,6 +265,11 @@ namespace KCP
         public int StreamMode => _kcp->stream;
 
         /// <summary>
+        ///     Output function pointer
+        /// </summary>
+        public KcpCallback Output => _output;
+
+        /// <summary>
         ///     Dispose
         /// </summary>
         public void Dispose()
@@ -272,6 +278,8 @@ namespace KCP
                 return;
             ikcp_release(_kcp);
             _kcp = null;
+            _output = null;
+            _buffer = null;
             GC.SuppressFinalize(this);
         }
 
