@@ -14,6 +14,10 @@ namespace Fantasy
         private SerializedProperty _uiGenerateSavePath;
         private SerializedProperty _fantasyUIAutoRefFunction;
         private SerializedProperty _fantasyUIAutoRefSettings;
+        private SerializedProperty _autoRefRule;
+        private SerializedProperty _splitChar;
+        private SerializedProperty _formatCodeTool;
+        
         public FantasyUISettingsProvider() : base("Project/FantasyUI Settings", SettingsScope.Project) { }
 
         public override void OnActivate(string searchContext, VisualElement rootElement)
@@ -35,6 +39,9 @@ namespace Fantasy
             _uiGenerateSavePath = _serializedObject.FindProperty("uiGenerateSavePath");
             _fantasyUIAutoRefFunction = _serializedObject.FindProperty("fantasyUIAutoRefFunction");
             _fantasyUIAutoRefSettings = _serializedObject.FindProperty("fantasyUIAutoRefSettings");
+            _autoRefRule = _serializedObject.FindProperty("autoRefRule");
+            _splitChar = _serializedObject.FindProperty("splitChar");
+            _formatCodeTool = _serializedObject.FindProperty("formatCodeTool");
         }
 
         public override void OnGUI(string searchContext)
@@ -52,6 +59,9 @@ namespace Fantasy
                 EditorGUILayout.PropertyField(_uiGenerateSavePath);
                 EditorGUILayout.PropertyField(_fantasyUIAutoRefFunction);
                 EditorGUILayout.PropertyField(_fantasyUIAutoRefSettings);
+                EditorGUILayout.PropertyField(_autoRefRule);
+                EditorGUILayout.PropertyField(_splitChar);
+                EditorGUILayout.PropertyField(_formatCodeTool);
                 
                 if (EditorGUI.EndChangeCheck())
                 {

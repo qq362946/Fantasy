@@ -2,9 +2,9 @@
 {
     public class FantasyUIRef : FantasyRef
     {
+        public UILayer uiLayer = UILayer.BaseRoot;
         public string assetName;
         public string bundleName;
-
-        public UILayer uiLayer = UILayer.BaseRoot;
+        public bool isWidget;
     }
 }

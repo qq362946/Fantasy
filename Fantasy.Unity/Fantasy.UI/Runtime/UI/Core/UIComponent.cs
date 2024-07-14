@@ -179,7 +179,7 @@ namespace Fantasy
 
         public async FTask<T> CreateAsync<T>(UILayer layer = UILayer.None, bool isRunEvent = true) where T : UI, new()
         {
-            var ui = Create<T>(Scene, true);
+            var ui = Create<T>(Scene, true, false);
 
             try
             {
@@ -219,7 +219,8 @@ namespace Fantasy
 
         public T Create<T>(UILayer layer = UILayer.None, bool isRunEvent = true) where T : UI, new()
         {
-            var ui = Create<T>(Scene, true);
+            var ui = Create<T>(Scene, true, false);
+            
             
             try
             {

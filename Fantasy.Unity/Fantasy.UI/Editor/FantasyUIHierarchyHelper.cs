@@ -8,9 +8,7 @@ namespace Fantasy
 {
     public static class FantasyUIHierarchyHelper
     {
-        private static readonly Dictionary<int, FantasyRef> IsReference = new();
         private static readonly Dictionary<int, bool> FantasyRefs = new();
-        private static readonly Dictionary<int, FantasyRef> NotReference = new();
         private static readonly HashSet<int> RemoveFlag = new();
 
         private static Dictionary<string, string> NameComponentNameMap => FantasyUISettingsScriptableObject.Instance.FantasyUIAutoRefSettings;
@@ -20,6 +18,7 @@ namespace Fantasy
         [InitializeOnLoadMethod]
         public static void DrawFantasyUIMark()
         {
+            OnHierarchyChanged();
             EditorApplication.hierarchyChanged += OnHierarchyChanged;
             EditorApplication.hierarchyWindowItemOnGUI += OnHierarchyItemOnGUI;
         }
@@ -35,7 +34,7 @@ namespace Fantasy
             {
                 return;
             }
-
+            
             FantasyRef[] fantasyUIs = null;
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
             if (prefabStage != null)
@@ -44,46 +43,19 @@ namespace Fantasy
             }
 
             fantasyUIs ??= Object.FindObjectsByType<FantasyRef>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            IsReference.Clear();
-            NotReference.Clear();
             foreach (var (key, _) in FantasyRefs)
             {
                 RemoveFlag.Add(key);
             }
-
             foreach (var c in fantasyUIs)
             {
                 var gameObjectInstanceID = c.gameObject.GetInstanceID();
                 FantasyRefs.TryAdd(gameObjectInstanceID, false);
                 RemoveFlag.Remove(gameObjectInstanceID);
             }
-
             foreach (var remove in RemoveFlag)
             {
-                FantasyRefs.TryRemove(remove, out _);
-            }
-
-            foreach (var (key, value) in FantasyRefs)
-            {
-                if (!value)
-                    continue;
-                var gameObject = (GameObject)EditorUtility.InstanceIDToObject(key);
-                var c = gameObject.GetComponent<FantasyRef>();
-                c.list.ForEach(o =>
-                {
-                    var instanceID = (o.gameObject as Component)?.gameObject.GetInstanceID() ?? o.gameObject.GetInstanceID();
-                    IsReference.Add(instanceID, c);
-                });
-
-                var transformList = c.GetComponentsInChildren<Transform>(true);
-                foreach (var t in transformList)
-                {
-                    var instanceID = t.gameObject.GetInstanceID();
-                    if (t != c.transform && !IsReference.ContainsKey(instanceID))
-                    {
-                        NotReference.TryAdd(instanceID, c);
-                    }
-                }
+                FantasyRefs.Remove(remove, out _);
             }
         }
 
@@ -102,113 +74,15 @@ namespace Fantasy
                 if (!gameObject)
                     return;
                 var c = gameObject.GetComponent<FantasyRef>();
-                Rect r = new Rect(selectionRect.xMax - 60, selectionRect.y, 40, selectionRect.height);
-                if (c is FantasyUIRef)
+                Rect r = new Rect(selectionRect.xMax - 100, selectionRect.y, 50, selectionRect.height);
+                if (c is FantasyUIRef fr)
                 {
-                    GUI.Label(r, "UI", Style);
+                    GUI.Label(r, fr.isWidget ? "Widget" : "Window", Style);
                 }
-                else
+                else if(c is not null)
                 {
-                    GUI.Label(r, c.isUI ? "SubUI" : "Ref", Style);
+                    GUI.Label(r, "Ref", Style);
                 }
-
-                r.x -= 20;
-                r.width = 10;
-                FantasyRefs[instanceID] = GUI.Toggle(r, value, GUIContent.none);
-
-                if (FantasyRefs[instanceID] && FantasyRefs[instanceID] != value)
-                {
-                    int? target = null;
-                    foreach (var (key, b) in FantasyRefs)
-                    {
-                        if (b && key != instanceID) target = key;
-                    }
-
-                    if (target != null)
-                        FantasyRefs[(int)target] = false;
-                }
-
-                if (FantasyRefs[instanceID] != value)
-                    RefreshHierarchy();
-            }
-
-            if (IsReference.TryGetValue(instanceID, out var fantasyRef))
-            {
-                Rect r = new Rect(selectionRect.xMax - 60, selectionRect.y, 45, selectionRect.height);
-                GUI.backgroundColor = Color.red;
-                if (GUI.Button(r, "移除"))
-                {
-                    var gameObject = EditorUtility.InstanceIDToObject(instanceID);
-                    var list = gameObject.name.Split('_', 2);
-                    if (list.Length > 0)
-                    {
-                        var first = list[0];
-                        if (NameComponentNameMap.TryGetValue(first, out var componentNameStr))
-                        {
-                            var componentNameList = componentNameStr.Split(',');
-                            Component component = null;
-                            foreach (var componentName in componentNameList)
-                            {
-                                if (component)
-                                    break;
-                                component = (gameObject as GameObject)?.GetComponent(componentName);
-                            }
-
-                            gameObject = component ? component : gameObject;
-                        }
-                    }
-
-                    var targetInstanceId = gameObject.GetInstanceID();
-                    var idx = fantasyRef.list.FindIndex(data => data.gameObject.GetInstanceID() == targetInstanceId);
-                    if (idx >= 0 && idx < fantasyRef.list.Count)
-                    {
-                        fantasyRef.list.RemoveAt(idx);
-                        EditorUtility.SetDirty(fantasyRef);
-                    }
-
-                    RefreshHierarchy();
-                }
-
-                GUI.backgroundColor = Color.white;
-            }
-
-            if (NotReference.TryGetValue(instanceID, out fantasyRef))
-            {
-                Rect r = new Rect(selectionRect.xMax - 60, selectionRect.y, 45, selectionRect.height);
-                GUI.backgroundColor = Color.blue;
-                if (GUI.Button(r, "引用"))
-                {
-                    var gameObject = EditorUtility.InstanceIDToObject(instanceID);
-                    var list = gameObject.name.Split('_', 2);
-                    if (list.Length > 0)
-                    {
-                        var first = list[0];
-                        if (NameComponentNameMap.TryGetValue(first, out var componentNameStr))
-                        {
-                            componentNameStr = componentNameStr.Replace(" ", "");
-                            var componentNameList = componentNameStr.Split(',');
-                            Component component = null;
-                            foreach (var componentName in componentNameList)
-                            {
-                                if (component)
-                                    break;
-                                component = (gameObject as GameObject)?.GetComponent(componentName);
-                            }
-
-                            gameObject = component ? component : gameObject;
-                        }
-                    }
-
-                    fantasyRef.list.Add(new FantasyUIData()
-                    {
-                        key = gameObject.name,
-                        gameObject = gameObject,
-                    });
-                    EditorUtility.SetDirty(fantasyRef);
-                    RefreshHierarchy();
-                }
-
-                GUI.backgroundColor = Color.white;
             }
         }
 
@@ -227,57 +101,25 @@ namespace Fantasy
 
             var fantasyScrollView = false;
 
-            // if (gameObject.TryGetComponent<FantasyGridScrollView>(out var gridScrollView))
-            // {
-            //     fantasyScrollView = true;
-            //     if (!gridScrollView.scrollRect || !gridScrollView.contentSizeFitter || !gridScrollView.gridLayoutGroup || !gridScrollView.itemTemplate)
-            //     {
-            //         EditorGUI.LabelField(r, new GUIContent(warnIcon));
-            //     }
-            //     else
-            //     {
-            //         EditorGUI.LabelField(r, new GUIContent(scrollIcon));
-            //     }
-            // }
-
-            // if (gameObject.TryGetComponent<FantasyVerticalScrollView>(out var verticalScrollView))
-            // {
-            //     fantasyScrollView = true;
-            //     if (!verticalScrollView.scrollRect || !verticalScrollView.contentSizeFitter || !verticalScrollView.verticalLayoutGroup || !verticalScrollView.itemTemplate)
-            //     {
-            //         EditorGUI.LabelField(r, new GUIContent(warnIcon));
-            //     }
-            //     else
-            //     {
-            //         EditorGUI.LabelField(r, new GUIContent(scrollIcon));
-            //     }
-            // }
-
-            // if (gameObject.TryGetComponent<FantasyHorizontalScrollView>(out var horizontalScrollView))
-            // {
-            //     fantasyScrollView = true;
-            //     if (!horizontalScrollView.scrollRect || !horizontalScrollView.contentSizeFitter || !horizontalScrollView.horizontalLayoutGroup || !horizontalScrollView.itemTemplate)
-            //     {
-            //         EditorGUI.LabelField(r, new GUIContent(warnIcon));
-            //     }
-            //     else
-            //     {
-            //         EditorGUI.LabelField(r, new GUIContent(scrollIcon));
-            //     }
-            // }
-
-            var list = gameObject.name.Split('_', 2);
-            var canRecognize = list.Length > 0 && NameComponentNameMap.ContainsKey(list[0]);
+            var list = FantasyAutoRefRuleHelper.GetRefInfoByName(gameObject.name);
+            var canRecognize = !string.IsNullOrEmpty(list[0]) && NameComponentNameMap.ContainsKey(list[0]);
 
             if (!canRecognize) return;
             var componentNames = NameComponentNameMap[list[0]];
             if (string.IsNullOrEmpty(componentNames)) return;
             var componentNameList = componentNames.Replace(" ", "").Split(",");
             Component component = null;
+            string curComponentName = null;
             foreach (var componentName in componentNameList)
             {
+                if (componentName == "GameObject")
+                {
+                    EditorGUI.LabelField(r, new GUIContent(EditorGUIUtility.IconContent("d_GameObject Icon")));   
+                    return;
+                }
                 component = gameObject.GetComponent(componentName);
-                if(component)
+                curComponentName = componentName;
+                if (component)
                     break;
             }
 
@@ -332,7 +174,7 @@ namespace Fantasy
                     break;
             }
 
-            switch (componentNames)
+            switch (curComponentName)
             {
                 case "TextMeshProUGUI":
                     EditorGUI.LabelField(r, new GUIContent(EditorGUIUtility.IconContent("d_Text Icon")));

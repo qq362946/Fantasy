@@ -92,7 +92,7 @@ namespace Fantasy
             CoroutineLockComponent = null;
             MessageDispatcherComponent = null;
             NetworkMessagingComponent = null;
-            Network.Dispose();
+            Network?.Dispose();
             Network = null;
 #if FANTASY_UNITY
             AssetBundleComponent = null;

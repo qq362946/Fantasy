@@ -10,21 +10,30 @@ namespace AssetBundleBrowser
     public static class AssetBundleEditorHelper
     {
         [MenuItem("Fantasy/AssetBundle/SetUIName")]
-        static void SetAllName()
+        public static void SetAllName()
         {
             var dir = new DirectoryInfo("Assets/Bundles/UI");
             var directoryInfos = dir.GetDirectories();
-            
+
             foreach (var directoryInfo in directoryInfos)
             {
-                var assetPath = directoryInfo.FullName.Replace(UnityEngine.Application.dataPath, "Assets");
-                var assetImporter = AssetImporter.GetAtPath(assetPath);
-                assetImporter.assetBundleName = directoryInfo.Name.ToLower();
+                var subDirInfos = directoryInfo.GetDirectories();
+                foreach (var subDirInfo in subDirInfos)
+                {
+                    var assetPath = subDirInfo.FullName.Replace("\\", "/").Replace(UnityEngine.Application.dataPath, "Assets");
+                    var assetImporter = AssetImporter.GetAtPath(assetPath);
+                    var bundleName = subDirInfo.FullName.Replace("\\", "/").Replace($"{Application.dataPath}/Bundles/", "");
+                    var files = subDirInfo.GetFiles();
+                    assetImporter.assetBundleName = files.Length > 0 ? bundleName.ToLower() : default;
+                }
             }
+            AssetDatabase.RemoveUnusedAssetBundleNames();
             
+            AssetDatabase.Refresh();
+
             Debug.Log($"UI文件夹所有AssetBundleName设置完成 共:{directoryInfos.Length}个");
         }
-        
+
         [MenuItem("Fantasy/AssetBundle/SetABName")]
         [MenuItem("Assets/SetABName", false, priority = 0)]
         static void SetName(MenuCommand menuCommand)
@@ -48,7 +57,7 @@ namespace AssetBundleBrowser
             {
                 return;
             }
-            
+
             var assetBundleRootPath = GetAssetBundleRootPath(assetGUIDs[0]);
 
             if (string.IsNullOrEmpty(assetBundleRootPath))
@@ -70,11 +79,12 @@ namespace AssetBundleBrowser
                     Fantasy.FileHelper.CopyDirectory(assetPath, target, true);
                     continue;
                 }
+
                 // 拷贝文件
                 AssetBundleComponent.CreateDirectory(substring, UnityEngine.Application.streamingAssetsPath, true);
                 File.Copy(assetPath, target, true);
             }
-            
+
             // 拷贝AssetBundleManifest
             File.Copy($"{assetBundleRootPath}/Fantasy", $"{UnityEngine.Application.streamingAssetsPath}/Fantasy", true);
             // 重新计算下MD5

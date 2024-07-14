@@ -32,8 +32,7 @@ namespace Fantasy
                 _fantasyRef.componentName = _fantasyRef.gameObject.name;
             }
 
-            _fantasyRef.isUI = EditorGUILayout.Toggle(new GUIContent("Is UI", "生成时是否继承SubUI"), _fantasyRef.isUI);
-            _fantasyRef.moduleName = EditorGUILayout.TextField(new GUIContent("Module Name", "模块名，如果不为空，则生成时会生成对应名称的文件夹和命名空间"), _fantasyRef.moduleName);
+            _fantasyRef.nameSpaceName = EditorGUILayout.TextField(new GUIContent("Namespace Name", "命名空间名，如果不为空，则生成时会生成对应名称的文件夹和命名空间"), _fantasyRef.nameSpaceName);
             EditorGUILayout.Space();
             _fantasyRef.componentName = EditorGUILayout.TextField("Component Name", _fantasyRef.componentName);
 
@@ -156,13 +155,15 @@ namespace Fantasy
                 return;
             }
 
-            bool isUI = _fantasyRef.isUI;
-            bool hasModule = !string.IsNullOrEmpty(_fantasyRef.moduleName);
-            generatePath = hasModule ? $"{generatePath}/Module/{_fantasyRef.moduleName}" : $"{generatePath}/SubUI";
 
-            if (!isUI && !hasModule)
+            bool hasModule = !string.IsNullOrEmpty(_fantasyRef.nameSpaceName);
+
+
+            generatePath = hasModule ? $"{generatePath}/Module/{_fantasyRef.nameSpaceName}" : $"{generatePath}/SubUI";
+
+            if (!hasModule)
             {
-                EditorUtility.DisplayDialog("Generate Code", $"If FantasyRef is not a UI, then it should have a moduleName!", "OK");
+                EditorUtility.DisplayDialog("Generate Code", $"FantasyRef should have a moduleName!", "OK");
                 return;
             }
 
@@ -188,18 +189,18 @@ namespace Fantasy
             var sb = new StringBuilder();
 
             sb.AppendLine("using Fantasy;");
-            sb.AppendLine(hasModule ? $"\nnamespace Fantasy.{_fantasyRef.moduleName}\n{{" : "\nnamespace Fantasy\n{");
-            sb.AppendLine($"\tpublic partial class {_fantasyRef.componentName} : {(isUI ? "SubUI" : "Entity")}\n\t{{");
+            sb.AppendLine(hasModule ? $"\nnamespace Fantasy.{_fantasyRef.nameSpaceName.Replace('/', '.')}\n{{" : "\nnamespace Fantasy\n{");
+            sb.AppendLine($"\tpublic partial class {_fantasyRef.componentName} : Entity\n\t{{");
 
-            if (!isUI)
-                sb.AppendLine($"\t\tpublic GameObject GameObject;");
+            sb.AppendLine($"\t\tpublic GameObject GameObject;");
 
             foreach (var property in propertyStr)
             {
                 sb.AppendLine(property);
             }
 
-            sb.AppendLine($"\n\t\tpublic{(isUI ? " override" : "")} void Initialize()\n\t\t{{");
+            sb.AppendLine($"\n\t\tpublic void Initialize(GameObject gameObject)\n\t\t{{");
+            sb.AppendLine("\t\t\tGameObject = fantasyRef.gameObject;");
             sb.AppendLine("\t\t\tvar referenceComponent = GameObject.GetComponent<FantasyRef>();");
 
             foreach (var str in createStr)
@@ -215,7 +216,6 @@ namespace Fantasy
             using var entityStreamWriter = new StreamWriter(combinePath);
             entityStreamWriter.Write(sb.ToString());
             AssetDatabase.Refresh();
-            Log.Debug($"代码生成位置:{combinePath}");
         }
     }
 }

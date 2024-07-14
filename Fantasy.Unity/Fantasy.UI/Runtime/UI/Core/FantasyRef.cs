@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Fantasy
 {
     public class FantasyRef : MonoBehaviour, ISerializationCallbackReceiver
     {
-        public bool isUI = true;
-        public string moduleName;
-        
+        public string nameSpaceName;
         public string componentName;
         
         public List<FantasyUIData> list = new();

@@ -30,12 +30,14 @@ namespace Fantasy
                 _fantasyUIRef.componentName = _fantasyUIRef.gameObject.name;
             }
 
-            _fantasyUIRef.moduleName = EditorGUILayout.TextField(new GUIContent("Module Name", "模块名，如果不为空，则生成时会生成对应名称的文件夹和命名空间"), _fantasyUIRef.moduleName);
+            _fantasyUIRef.isWidget = EditorGUILayout.Toggle(new GUIContent("Is Widget", "是否为控件ui"), _fantasyUIRef.isWidget);
+            _fantasyUIRef.nameSpaceName = EditorGUILayout.TextField(new GUIContent("Namespace Name", "命名空间名，如果不为空，则生成时会生成对应名称的文件夹和命名空间"), _fantasyUIRef.nameSpaceName);
 
-            _fantasyUIRef.componentName = EditorGUILayout.TextField("Component Name", _fantasyUIRef.componentName);
-            _fantasyUIRef.assetName = EditorGUILayout.TextField("AssetName", _fantasyUIRef.assetName);
-            _fantasyUIRef.bundleName = EditorGUILayout.TextField("BundleName", _fantasyUIRef.bundleName);
-            _fantasyUIRef.uiLayer = (UILayer)EditorGUILayout.EnumPopup("UILayer", _fantasyUIRef.uiLayer);
+            _fantasyUIRef.componentName = EditorGUILayout.TextField(new GUIContent("Component Name", "生成的脚本名"), _fantasyUIRef.componentName);
+            _fantasyUIRef.bundleName = EditorGUILayout.TextField(new GUIContent("BundleName", "所在的AB包名"), _fantasyUIRef.bundleName);
+            _fantasyUIRef.assetName = EditorGUILayout.TextField(new GUIContent("AssetName", "AB包中预制体的名资源名"), _fantasyUIRef.assetName);
+            if (!_fantasyUIRef.isWidget)
+                _fantasyUIRef.uiLayer = (UILayer)EditorGUILayout.EnumPopup(new GUIContent("UILayer", "生成UI时的节点位置"), _fantasyUIRef.uiLayer);
             EditorGUILayout.Space();
 
             GUILayout.BeginHorizontal();
@@ -152,6 +154,7 @@ namespace Fantasy
         private void Generate(SerializedProperty dataProperty)
         {
             var generatePath = FantasyUISettingsScriptableObject.Instance.uiGenerateSavePath;
+            var isWidget = _fantasyUIRef.isWidget;
 
             if (string.IsNullOrEmpty(_fantasyUIRef.assetName))
             {
@@ -165,14 +168,20 @@ namespace Fantasy
                 return;
             }
 
-            if (_fantasyUIRef.uiLayer == UILayer.None)
+            if (!isWidget && _fantasyUIRef.uiLayer == UILayer.None)
             {
                 EditorUtility.DisplayDialog("Generate Code", $"UILayer is None", "OK");
                 return;
             }
 
-            bool hasModule = !string.IsNullOrEmpty(_fantasyUIRef.moduleName);
-            generatePath = hasModule ? $"{generatePath}/Module/{_fantasyUIRef.moduleName}" : $"{generatePath}/Entity";
+            if (string.IsNullOrEmpty(generatePath))
+            {
+                EditorUtility.DisplayDialog("Generate Code", $"UI Generate Save Path is null, please set it in FantasyUISettings", "OK");
+                return;
+            }
+
+            bool hasModule = !string.IsNullOrEmpty(_fantasyUIRef.nameSpaceName);
+            generatePath = hasModule ? $"{generatePath}/Module/{_fantasyUIRef.nameSpaceName}" : $"{generatePath}/Entity";
 
             if (!Directory.Exists(generatePath))
             {
@@ -195,11 +204,12 @@ namespace Fantasy
             var sb = new StringBuilder();
 
             sb.AppendLine("using Fantasy;");
-            sb.AppendLine(hasModule ? $"\nnamespace Fantasy.{_fantasyUIRef.moduleName}\n{{" : "\nnamespace Fantasy\n{");
-            sb.AppendLine($"\tpublic partial class {_fantasyUIRef.componentName} : UI\n\t{{");
+            sb.AppendLine(hasModule ? $"\nnamespace Fantasy.{_fantasyUIRef.nameSpaceName.Replace('/', '.')}\n{{" : "\nnamespace Fantasy\n{");
+            sb.AppendLine(isWidget ? $"\tpublic partial class {_fantasyUIRef.componentName} : SubUI\n\t{{" : $"\tpublic partial class {_fantasyUIRef.componentName} : UI\n\t{{");
             sb.AppendLine($"\t\tpublic override string AssetName {{ get; protected set; }} = \"{_fantasyUIRef.assetName}\";");
             sb.AppendLine($"\t\tpublic override string BundleName {{ get; protected set; }} = \"{_fantasyUIRef.bundleName.ToLower()}\";");
-            sb.AppendLine($"\t\tpublic override UILayer Layer {{ get; protected set; }} = UILayer.{_fantasyUIRef.uiLayer.ToString()};\n");
+            if (!isWidget)
+                sb.AppendLine($"\t\tpublic override UILayer Layer {{ get; protected set; }} = UILayer.{_fantasyUIRef.uiLayer.ToString()};\n");
 
             foreach (var property in propertyStr)
             {
@@ -222,7 +232,6 @@ namespace Fantasy
             using var entityStreamWriter = new StreamWriter(combinePath);
             entityStreamWriter.Write(sb.ToString());
             AssetDatabase.Refresh();
-            Log.Debug($"代码生成位置:{combinePath}");
         }
     }
 }
