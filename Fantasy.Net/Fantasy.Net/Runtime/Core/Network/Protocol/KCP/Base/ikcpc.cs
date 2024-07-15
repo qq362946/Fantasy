@@ -1,7 +1,4 @@
-﻿#if UNITY_2021_3_OR_NEWER || GODOT
-using System;
-#endif
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using static KCP.IQUEUEHEAD;
 using static KCP.KCPBASIC;
@@ -18,40 +15,26 @@ namespace KCP
 {
     internal static unsafe class IKCP
     {
-        private static void memcpy(void* dest, void* src, int n)
-        {
-#if UNITY_ANDROID || GODOT_ANDROID
-            Unsafe.CopyBlockUnaligned(dest, src, (uint)n);
-#else
-            Unsafe.CopyBlock(dest, src, (uint)n);
-#endif
-        }
+        private static void memcpy(void* dest, void* src, int n) => Unsafe.CopyBlock(dest, src, (uint)n);
 
-        private static void memcpy(void* dest, void* src, uint n)
-        {
-#if UNITY_ANDROID || GODOT_ANDROID
-            Unsafe.CopyBlockUnaligned(dest, src, n);
-#else
-            Unsafe.CopyBlock(dest, src, n);
-#endif
-        }
+        private static void memcpy(void* dest, void* src, uint n) => Unsafe.CopyBlock(dest, src, n);
 
         private static void* malloc(nint size) =>
-#if !UNITY_2021_3_OR_NEWER
+#if !UNITY_2021_3_OR_NEWER || NET6_0_OR_GREATER
             NativeMemory.Alloc((nuint)size);
 #else
             (void*)Marshal.AllocHGlobal(size);
 #endif
 
         private static void* malloc(nuint size) =>
-#if !UNITY_2021_3_OR_NEWER
+#if !UNITY_2021_3_OR_NEWER || NET6_0_OR_GREATER
             NativeMemory.Alloc(size);
 #else
             (void*)Marshal.AllocHGlobal((nint)size);
 #endif
 
         private static void free(void* ptr) =>
-#if !UNITY_2021_3_OR_NEWER
+#if !UNITY_2021_3_OR_NEWER || NET6_0_OR_GREATER
             NativeMemory.Free(ptr);
 #else
             Marshal.FreeHGlobal((nint)ptr);
@@ -151,8 +134,6 @@ namespace KCP
         public static IKCPCB* ikcp_create(uint conv, ref byte[] buffer)
         {
             var kcp = (IKCPCB*)ikcp_malloc(sizeof(IKCPCB));
-            if (kcp == null)
-                return null;
             kcp->conv = conv;
             kcp->snd_una = 0;
             kcp->snd_nxt = 0;
@@ -168,7 +149,7 @@ namespace KCP
             kcp->mtu = MTU_DEF;
             kcp->mss = kcp->mtu - OVERHEAD;
             kcp->stream = 0;
-            buffer = new byte[(kcp->mtu + OVERHEAD) * 3];
+            buffer = new byte[REVERSED_HEAD + (kcp->mtu + OVERHEAD) * 3];
             iqueue_init(&kcp->snd_queue);
             iqueue_init(&kcp->rcv_queue);
             iqueue_init(&kcp->snd_buf);
@@ -362,8 +343,6 @@ namespace KCP
                         var capacity = (int)kcp->mss - (int)old->len;
                         var extend = len < capacity ? len : capacity;
                         seg = ikcp_segment_new(kcp, (int)old->len + extend);
-                        if (seg == null)
-                            return -2;
                         iqueue_add_tail(&seg->node, &kcp->snd_queue);
                         memcpy(seg->data, old->data, old->len);
                         if (buffer != null)
@@ -391,8 +370,8 @@ namespace KCP
                 else
                 {
                     count = (int)((len + kcp->mss - 1) / kcp->mss);
-                    if (count > FRG_LIMIT || count >= (int)kcp->rcv_wnd)
-                        return -2;
+                    if (count >= (int)kcp->rcv_wnd)
+                        return sent > 0 ? sent : -2;
                     if (count == 0)
                         count = 1;
                 }
@@ -402,8 +381,6 @@ namespace KCP
                 {
                     var size = len > (int)kcp->mss ? (int)kcp->mss : len;
                     seg = ikcp_segment_new(kcp, size);
-                    if (seg == null)
-                        return -2;
                     if (buffer != null && len > 0)
                         memcpy(seg->data, buffer, size);
                     seg->len = (uint)size;
@@ -438,8 +415,6 @@ namespace KCP
                 {
                     var size = len > (int)kcp->mss ? (int)kcp->mss : len;
                     seg = ikcp_segment_new(kcp, size);
-                    if (seg == null)
-                        return -2;
                     if (buffer != null && len > 0)
                         memcpy(seg->data, buffer, size);
                     seg->len = (uint)size;
@@ -565,8 +540,6 @@ namespace KCP
             {
                 var newblock = newsize <= 8 ? 8 : _iceilpow2_(newsize);
                 var acklist = (uint*)ikcp_malloc(newblock << 3);
-                if (acklist == null)
-                    goto abort;
                 if (kcp->acklist != null)
                 {
                     uint x;
@@ -588,8 +561,6 @@ namespace KCP
             ptr[1] = ts;
             kcp->ackcount++;
             return 0;
-            abort:
-            return -1;
         }
 
         private static void ikcp_ack_get(IKCPCB* kcp, int p, uint* sn, uint* ts)
@@ -1188,7 +1159,7 @@ namespace KCP
                 return 0;
             if (mtu < (int)OVERHEAD)
                 return -1;
-            buffer = new byte[(mtu + OVERHEAD) * 3];
+            buffer = new byte[REVERSED_HEAD + (mtu + OVERHEAD) * 3];
             kcp->mtu = (uint)mtu;
             kcp->mss = kcp->mtu - OVERHEAD;
             return 0;
