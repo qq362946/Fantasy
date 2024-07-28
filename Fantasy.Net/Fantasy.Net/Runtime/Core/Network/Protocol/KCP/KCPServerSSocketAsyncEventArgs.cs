@@ -39,7 +39,7 @@ namespace Fantasy
             ChannelId = channelId;
             _kcpServerSocket = kcpServerSocket;
             IPEndPoint = ipEndPoint;
-            Kcp = new Kcp(channelId, KcpSpanCallback);
+            Kcp = new Kcp(KcpSpanCallback);
             Kcp.SetNoDelay(1, 5, 2, 1);
             Kcp.SetWindowSize(kcpServerSocket.Settings.SendWindowSize, kcpServerSocket.Settings.ReceiveWindowSize);
             Kcp.SetMtu(kcpServerSocket.Settings.Mtu);

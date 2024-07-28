@@ -44,18 +44,9 @@ namespace KCP
         ///     Structure
         /// </summary>
         /// <param name="output">Output</param>
-        public Kcp(KcpCallback output) : this(0, output)
+        public Kcp(KcpCallback output)
         {
-        }
-
-        /// <summary>
-        ///     Structure
-        /// </summary>
-        /// <param name="conv">ConversationId</param>
-        /// <param name="output">Output</param>
-        public Kcp(uint conv, KcpCallback output)
-        {
-            _kcp = ikcp_create(conv, ref _buffer);
+            _kcp = ikcp_create(ref _buffer);
             _output = output;
         }
 
@@ -63,11 +54,6 @@ namespace KCP
         ///     Set
         /// </summary>
         public bool IsSet => _kcp != null;
-
-        /// <summary>
-        ///     Conversation id
-        /// </summary>
-        public uint ConversationId => _kcp->conv;
 
         /// <summary>
         ///     Maximum transmission unit

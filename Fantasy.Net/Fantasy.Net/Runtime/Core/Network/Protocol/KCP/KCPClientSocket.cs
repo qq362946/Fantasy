@@ -157,7 +157,7 @@ namespace Fantasy
 
                                 ClearConnectTimeout();
                                 SendHeader(KcpHeader.ConfirmConnection);
-                                _kcp = new Kcp(ChannelId, KcpSpanCallback);
+                                _kcp = new Kcp(KcpSpanCallback);
                                 _kcp.SetNoDelay(1, 5, 2, 1);
                                 _kcp.SetWindowSize(_kcpSettings.SendWindowSize, _kcpSettings.ReceiveWindowSize);
                                 _kcp.SetMtu(_kcpSettings.Mtu);
