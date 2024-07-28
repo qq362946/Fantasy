@@ -131,10 +131,9 @@ namespace KCP
             output(data, ref size);
         }
 
-        public static IKCPCB* ikcp_create(uint conv, ref byte[] buffer)
+        public static IKCPCB* ikcp_create(ref byte[] buffer)
         {
             var kcp = (IKCPCB*)ikcp_malloc(sizeof(IKCPCB));
-            kcp->conv = conv;
             kcp->snd_una = 0;
             kcp->snd_nxt = 0;
             kcp->rcv_nxt = 0;
@@ -533,7 +532,7 @@ namespace KCP
             }
         }
 
-        private static int ikcp_ack_push(IKCPCB* kcp, uint sn, uint ts)
+        private static void ikcp_ack_push(IKCPCB* kcp, uint sn, uint ts)
         {
             var newsize = kcp->ackcount + 1;
             if (newsize > kcp->ackblock)
@@ -560,7 +559,6 @@ namespace KCP
             ptr[0] = sn;
             ptr[1] = ts;
             kcp->ackcount++;
-            return 0;
         }
 
         private static void ikcp_ack_get(IKCPCB* kcp, int p, uint* sn, uint* ts)
@@ -634,14 +632,11 @@ namespace KCP
             var flag = 0;
             while (true)
             {
-                uint ts, sn, len, una, conv;
+                uint ts, sn, len, una;
                 ushort wnd;
                 byte cmd, frg;
                 if (size < (int)OVERHEAD)
                     break;
-                data = ikcp_decode32u(data, &conv);
-                if (conv != kcp->conv)
-                    return -1;
                 data = ikcp_decode8u(data, &cmd);
                 data = ikcp_decode8u(data, &frg);
                 data = ikcp_decode16u(data, &wnd);
@@ -690,12 +685,10 @@ namespace KCP
                 {
                     if (_itimediff(sn, kcp->rcv_nxt + kcp->rcv_wnd) < 0)
                     {
-                        if (ikcp_ack_push(kcp, sn, ts) != 0)
-                            return -4;
+                        ikcp_ack_push(kcp, sn, ts);
                         if (_itimediff(sn, kcp->rcv_nxt) >= 0)
                         {
                             var seg = ikcp_segment_new(kcp, (int)len);
-                            seg->conv = conv;
                             seg->cmd = cmd;
                             seg->frg = frg;
                             seg->wnd = wnd;
@@ -756,7 +749,6 @@ namespace KCP
 
         private static byte* ikcp_encode_seg(byte* ptr, IKCPSEG* seg)
         {
-            ptr = ikcp_encode32u(ptr, seg->conv);
             ptr = ikcp_encode8u(ptr, (byte)seg->cmd);
             ptr = ikcp_encode8u(ptr, (byte)seg->frg);
             ptr = ikcp_encode16u(ptr, (ushort)seg->wnd);
@@ -787,7 +779,6 @@ namespace KCP
                 var change = 0;
                 var lost = 0;
                 IKCPSEG seg;
-                seg.conv = kcp->conv;
                 seg.cmd = CMD_ACK;
                 seg.frg = 0;
                 seg.wnd = (uint)ikcp_wnd_unused(kcp);
@@ -876,7 +867,6 @@ namespace KCP
                     iqueue_add_tail(&newseg->node, &kcp->snd_buf);
                     kcp->nsnd_que--;
                     kcp->nsnd_buf++;
-                    newseg->conv = kcp->conv;
                     newseg->cmd = CMD_PUSH;
                     newseg->wnd = seg.wnd;
                     newseg->ts = current;
