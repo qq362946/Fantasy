@@ -1,4 +1,4 @@
-![Logo](Book/FantasyLogo.png)
+![Logo](Book/Logo.png)
 <p align="center">
   <strong>专注游戏服务器框架<strong>
     <br>
