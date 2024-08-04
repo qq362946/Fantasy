@@ -1,4 +1,4 @@
-#if FANTASY_KCPUNSAFE
+﻿#if FANTASY_KCPUNSAFE
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using static KCP.IQUEUEHEAD;
