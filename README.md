@@ -7,7 +7,6 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/qq362946/Fantasy)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/qq362946/Fantasy)
 ![GitHub Created At](https://img.shields.io/github/created-at/qq362946/Fantasy)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/qq362946/Fantasy/total)
 # Fantasy
 #### 框架支持TCP\KCP\WebSocket（支持Unity发布成H5）三种网络协议，采用的Protobuf做为消息的序列化方案。
 #### 对于需要一套上手快、高性能、可扩展、分布式的全平台商业级解决方案的开发团队或个人来说是一个很好的选择。
