@@ -1,6 +1,4 @@
-<p align="center">
-    <img src="Books/Logo.png" alt="logo" width="384" height="384">
-</p>
+![Logo](Book/Logo.png)
 # Fantasy高性能服务器框架
 Fantasy服务器框架源于ETServer框架，但Fantasy极为简洁，基于Fantasy开发的服务端程序，可用于游戏服务器，物联网服务器，应用程序服务器等。
 Fantasy框架易于学习易于使用，只需要在服务端引用Fantasy.Net即可。  
