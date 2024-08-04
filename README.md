@@ -1,3 +1,27 @@
+![Logo](Book/Logo.png)
+<p align="center">
+  <strong>专注游戏服务器框架<strong>
+    <br>
+    <br>
+  <a style="text-decoration:none">
+    <img src="https://img.shields.io/badge/Unity%20Ver-2021.3.141f1++-blue.svg?style=flat-square" alt="status" />
+  </a>
+  <a style="text-decoration:none">
+    <img src="https://img.shields.io/github/license/qq362946/Fantasy" alt="license" />
+  </a>
+  <a style="text-decoration:none">
+    <img src="https://img.shields.io/github/last-commit/qq362946/Fantasy" alt="last" />
+  </a>
+  <a style="text-decoration:none">
+    <img src="https://img.shields.io/github/issues/qq362946/Fantasy" alt="issue" />
+  </a>
+  <a style="text-decoration:none">
+    <img src="https://img.shields.io/github/languages/top/qq362946/Fantasy" alt="topLanguage" />
+  </a>
+  <br>
+  
+  <br>
+</p>
 # Fantasy高性能服务器框架
 Fantasy服务器框架源于ETServer框架，但Fantasy极为简洁，基于Fantasy开发的服务端程序，可用于游戏服务器，物联网服务器，应用程序服务器等。
 Fantasy框架易于学习易于使用，只需要在服务端引用Fantasy.Net即可。  
