@@ -1,6 +1,9 @@
 using System;
 using System.Buffers;
 using System.IO;
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Fantasy
 {
@@ -9,91 +12,26 @@ namespace Fantasy
     /// </summary>
     public abstract class APacketParser : IDisposable
     {
-        /// <summary>
-        /// 当前Scene。
-        /// </summary>
-        protected Scene Scene;
-        /// <summary>
-        /// 获取一个值，表示是否已经被释放。
-        /// </summary>
+        internal Scene Scene;
+        internal ANetwork Network;
+        internal MessageDispatcherComponent MessageDispatcherComponent;
+        protected readonly byte[] BodyBuffer = new byte[sizeof(int)];
+        protected readonly byte[] RpcIdBuffer = new byte[sizeof(uint)];
+        protected readonly byte[] OpCodeBuffer = new byte[sizeof(uint)];
+        protected readonly byte[] RouteIdBuffer = new byte[sizeof(long)];
+        protected readonly byte[] PackRouteTypeOpCode = new byte[sizeof(long)];
         protected bool IsDisposed { get; private set; }
-        /// <summary>
-        /// 消息分发组件。
-        /// </summary>
-        protected MessageDispatcherComponent MessageDispatcherComponent;
-
-        /// <summary>
-        /// 根据网络目标创建相应的包解析器实例。
-        /// </summary>
-        /// <param name="scene">当前Scene</param>
-        /// <param name="networkTarget">网络目标，指示是内部网络通信还是外部网络通信。</param>
-        /// <returns>创建的包解析器实例。</returns>
-        public static APacketParser CreatePacketParser(Scene scene, NetworkTarget networkTarget)
-        {
-            var messageDispatcherComponent = scene.MessageDispatcherComponent;
-            
-            switch (networkTarget)
-            {
-                case NetworkTarget.Inner:
-                {
-#if FANTASY_NET
-                    var innerPacketParser = new InnerPacketParser();
-                    innerPacketParser.Scene = scene;
-                    innerPacketParser.MessageDispatcherComponent = messageDispatcherComponent;
-                    return innerPacketParser;
-#else
-                    throw new NotSupportedException($"PacketParserHelper Create NotSupport {networkTarget}");
-#endif
-                }
-                case NetworkTarget.Outer:
-                {
-                    var outerPacketParser = new OuterPacketParser();
-                    outerPacketParser.Scene = scene;
-                    outerPacketParser.MessageDispatcherComponent = messageDispatcherComponent;
-                    return outerPacketParser;
-                }
-                default:
-                {
-                    throw new NotSupportedException($"PacketParserHelper Create NotSupport {networkTarget}");
-                }
-            }
-        }
-
-        /// <summary>
-        /// 从循环缓冲区解析数据包。
-        /// </summary>
-        /// <param name="buffer">循环缓冲区。</param>
-        /// <param name="packInfo">解析得到的数据包信息。</param>
-        /// <returns>如果成功解析数据包，则返回 true；否则返回 false。</returns>
-        public abstract bool UnPack(CircularBuffer buffer, out APackInfo packInfo);
-
-        /// <summary>
-        /// 从内存块解析数据包。
-        /// </summary>
-        /// <param name="buffer">需要解包的buffer。</param>
-        /// <param name="count">解包的总长度。</param>
-        /// <param name="packInfo">解析得到的数据包信息。</param>
-        /// <returns>如果成功解析数据包，则返回 true；否则返回 false。</returns>
-        public abstract bool UnPack(byte[] buffer, ref int count, out APackInfo packInfo);
-        
-        /// <summary>
-        /// 消息打包。
-        /// </summary>
-        /// <param name="rpcId">RPC ID。</param>
-        /// <param name="routeTypeOpCode">路由类型与操作码。</param>
-        /// <param name="routeId">路由 ID。</param>
-        /// <param name="memoryStream">内存流，用于消息数据。</param>
-        /// <param name="message">消息对象。</param>
-        /// <returns>打包后的内存流。</returns>
-        public abstract MemoryStream Pack(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message);
-        /// <summary>
-        /// 释放资源，包括内存池等。
-        /// </summary>
+        public abstract MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStream memoryStream, object message);
         public virtual void Dispose()
         {
             IsDisposed = true;
             Scene = null;
             MessageDispatcherComponent = null;
+            Array.Clear(BodyBuffer, 0, BodyBuffer.Length);
+            Array.Clear(RpcIdBuffer, 0, RpcIdBuffer.Length);
+            Array.Clear(OpCodeBuffer, 0, OpCodeBuffer.Length);
+            Array.Clear(RouteIdBuffer, 0, OpCodeBuffer.Length);
+            Array.Clear(PackRouteTypeOpCode, 0, PackRouteTypeOpCode.Length);
         }
     }
 }

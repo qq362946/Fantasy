@@ -1,284 +1,248 @@
-using System.Net.Sockets;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-
 #if FANTASY_NET
-namespace Fantasy
+using System.Buffers;
+using System.IO.Pipelines;
+using System.Net.Sockets;
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+
+#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
+
+namespace Fantasy;
+public sealed class TCPServerNetworkChannel : ANetworkServerChannel
 {
-    /// <summary>
-    /// TCP 服务器网络通道，用于处理服务器与客户端之间的数据通信。
-    /// </summary>
-    public sealed class TCPServerNetworkChannel : ANetworkServerChannel
+    private bool _isInnerDispose;
+    private readonly Socket _socket;
+    private readonly ANetwork _network;
+    private readonly Pipe _pipe = new Pipe();
+    private readonly ReadOnlyMemoryPacketParser _packetParser;
+    private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+    
+    public TCPServerNetworkChannel(ANetwork network, Socket socket, uint id) : base(network, id, socket.RemoteEndPoint)
     {
-        private bool _isSending;
-        private readonly Socket _socket;
-        private readonly TCPServerNetwork _network;
-        private readonly CircularBuffer _sendBuffer = new CircularBuffer();
-        private readonly CircularBuffer _receiveBuffer = new CircularBuffer();
-        private readonly SocketAsyncEventArgs _outArgs = new SocketAsyncEventArgs();
-        private readonly SocketAsyncEventArgs _innArgs = new SocketAsyncEventArgs();
-
-        public TCPServerNetworkChannel(ANetwork network, Socket socket, uint id) : base(network, id, socket.RemoteEndPoint)
+        _socket = socket;
+        _network = network;
+        _socket.NoDelay = true;
+        _packetParser = PacketParserFactory.CreateServerReadOnlyMemoryPacket(network);
+        ReadPipeDataAsync().Coroutine();
+        ReceiveSocketAsync().Coroutine();
+    }
+    
+    public override void Dispose()
+    {
+        if (IsDisposed || _isInnerDispose)
         {
-            _socket = socket;
-            _socket.NoDelay = true;
-            _network = (TCPServerNetwork)network;
-            _innArgs.Completed += OnComplete;
-            _outArgs.Completed += OnComplete;
-            Receive();
+            return;
         }
 
-        public override void Dispose()
+        _isInnerDispose = true;
+        _network.RemoveChannel(Id);
+        if (_cancellationTokenSource.IsCancellationRequested)
         {
-            if (IsDisposed)
+            try
             {
-                return;
+                _cancellationTokenSource.Cancel();
             }
-            
-            _isSending = false;
-            
-            if (_socket.Connected)
+            catch (OperationCanceledException)
             {
-                _socket.Disconnect(true);
-                _socket.Close();
-            }
-            
-            _outArgs.Dispose();
-            _innArgs.Dispose();
-            _sendBuffer.Dispose();
-            _receiveBuffer.Dispose();
-            _network.RemoveChannel(Id);
-            base.Dispose();
-        }
-
-        #region Send
-
-        public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
-        {
-            Send(PacketParser.Pack(rpcId, routeTypeOpCode, routeId, memoryStream, message));
-        }
-
-        /// <summary>
-        /// 向通道发送内存流数据。
-        /// </summary>
-        /// <param name="memoryStream">待发送的内存流。</param>
-        public override void Send(MemoryStream memoryStream)
-        {
-            _sendBuffer.Write(memoryStream);
-            
-            if (_isSending)
-            {
-                return;
-            }
-            
-            Send();
-        }
-
-        private void Send()
-        {
-            if (_isSending || IsDisposed)
-            {
-                return;
-            }
-
-            while(true)
-            {
-                try
-                {
-                    if (IsDisposed)
-                    {
-                        return;
-                    }
-                    
-                    if (_sendBuffer.Length == 0)
-                    {
-                        _isSending = false;
-                        return;
-                    }
-                    
-                    _isSending = true;
-                    
-                    var sendSize = CircularBuffer.ChunkSize - _sendBuffer.FirstIndex;
-                    
-                    if (sendSize > _sendBuffer.Length)
-                    {
-                        sendSize = (int) _sendBuffer.Length;
-                    }
-
-                    _outArgs.SetBuffer(_sendBuffer.First, _sendBuffer.FirstIndex, sendSize);
-                    
-                    if (_socket.SendAsync(_outArgs))
-                    {
-                        return;
-                    }
-                    
-                    SendCompletedHandler(_outArgs);
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e);
-                }
+                // 通常情况下，此处的异常可以忽略
             }
         }
-
-        private void SendCompletedHandler(SocketAsyncEventArgs asyncEventArgs)
-        {
-            if (asyncEventArgs.SocketError != SocketError.Success || asyncEventArgs.BytesTransferred == 0)
-            {
-                return;
-            }
-            
-            _sendBuffer.FirstIndex += asyncEventArgs.BytesTransferred;
-        
-            if (_sendBuffer.FirstIndex == CircularBuffer.ChunkSize)
-            {
-                _sendBuffer.FirstIndex = 0;
-                _sendBuffer.RemoveFirst();
-            }
-        }
-
-        private void OnSendComplete(SocketAsyncEventArgs asyncEventArgs)
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-            
-            _isSending = false;
-            SendCompletedHandler(asyncEventArgs);
-
-            if (_sendBuffer.Length > 0)
-            {
-                Send();
-            }
-        }
-
-        #endregion
-
-        #region Receive
-
-        /// <summary>
-        /// 开始接收数据。
-        /// </summary>
-        private void Receive()
-        {
-            while (true)
-            {
-                try
-                {
-                    if (IsDisposed)
-                    {
-                        return;
-                    }
-                    
-                    var size = CircularBuffer.ChunkSize - _receiveBuffer.LastIndex;
-                    _innArgs.SetBuffer(_receiveBuffer.Last, _receiveBuffer.LastIndex, size);
+        base.Dispose();
                 
-                    if (_socket.ReceiveAsync(_innArgs))
-                    {
-                        return;
-                    }
-
-                    ReceiveCompletedHandler(_innArgs);
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e);
-                }
-            }
-        }
-        
-        private void ReceiveCompletedHandler(SocketAsyncEventArgs asyncEventArgs)
+        if (_socket.Connected)
         {
-            if (asyncEventArgs.SocketError != SocketError.Success)
-            {
-                return;
-            }
+            _socket.Disconnect(true);
+            _socket.Close();
+        }
             
-            if (asyncEventArgs.BytesTransferred == 0)
+        _packetParser.Dispose();
+    }
+
+    #region ReceiveSocket
+
+    private async FTask ReceiveSocketAsync()
+    {
+        while (!_cancellationTokenSource.IsCancellationRequested)
+        {
+            try
+            {
+                var memory = _pipe.Writer.GetMemory(8192);
+                var count = await _socket.ReceiveAsync(memory, SocketFlags.None, _cancellationTokenSource.Token);
+                _pipe.Writer.Advance(count);
+                await _pipe.Writer.FlushAsync();
+            }
+            catch (SocketException)
             {
                 Dispose();
-                return;
+                break;
             }
-           
-            _receiveBuffer.LastIndex += asyncEventArgs.BytesTransferred;
+            catch (OperationCanceledException)
+            {
+                break;
+            }
+            catch (ObjectDisposedException)
+            {
+                Dispose();
+                break;
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Unexpected exception: {ex.Message}");
+            }
+        }
+
+        await _pipe.Writer.CompleteAsync();
+    }
+
+    #endregion
+    
+    #region ReceivePipeData
+
+    private async FTask ReadPipeDataAsync()
+    {
+        var pipeReader = _pipe.Reader;
+        while (!_cancellationTokenSource.IsCancellationRequested)
+        {
+            ReadResult result = default;
             
-            if (_receiveBuffer.LastIndex >= CircularBuffer.ChunkSize)
+            try
             {
-                _receiveBuffer.AddLast();
-                _receiveBuffer.LastIndex = 0;
+                result = await pipeReader.ReadAsync(_cancellationTokenSource.Token);
             }
-
-            while (true)
+            catch (OperationCanceledException)
             {
-                try
-                {
-                    if (IsDisposed)
-                    {
-                        return;
-                    }
-
-                    if (!PacketParser.UnPack(_receiveBuffer, out var packInfo))
-                    {
-                        break;
-                    }
-                    
-                    Session.Receive(packInfo);
-                }
-                catch (ScanException e)
-                {
-                    Log.Debug($"RemoteAddress:{RemoteEndPoint} \n{e}");
-                    Dispose();
-                }
-                catch (Exception e)
-                {
-                    Log.Error($"RemoteAddress:{RemoteEndPoint} \n{e}");
-                    Dispose();
-                }
+               // 出现这个异常表示取消了_cancellationTokenSource。一般Channel断开会取消。
+               break;
             }
+            
+            var buffer = result.Buffer;
+            var consumed = buffer.Start;
+            var examined = buffer.End;
+            
+            while (TryReadMessage(ref buffer, out var message))
+            {
+                ReceiveData(ref message);
+                consumed = buffer.Start;
+            }
+            
+            if (result.IsCompleted)
+            {
+                break;
+            }
+            
+            pipeReader.AdvanceTo(consumed, examined);
+        }
+
+        await pipeReader.CompleteAsync();
+    }
+
+    private bool TryReadMessage(ref ReadOnlySequence<byte> buffer, out ReadOnlyMemory<byte> message)
+    {
+        if (buffer.Length == 0)
+        {
+            message = default;
+            return false;
         }
         
-        private void OnReceiveComplete(SocketAsyncEventArgs asyncEventArgs)
+        message = buffer.First;
+        
+        if (message.Length == 0)
         {
-            ReceiveCompletedHandler(asyncEventArgs);
-            Receive();
+            message = default;
+            return false;
+        }
+        
+        buffer = buffer.Slice(message.Length);
+        return true;
+    }
+
+    private void ReceiveData(ref ReadOnlyMemory<byte> buffer)
+    {
+        try
+        {
+            while (_packetParser.UnPack(ref buffer, out var packInfo))
+            {
+                if (_cancellationTokenSource.IsCancellationRequested)
+                {
+                    return;
+                }
+                
+                Session.Receive(packInfo);
+            }
+        }
+        catch (ScanException e)
+        {
+            Log.Warning($"RemoteAddress:{RemoteEndPoint} \n{e}");
+            Dispose();
+        }
+        catch (Exception e)
+        {
+            Log.Error($"RemoteAddress:{RemoteEndPoint} \n{e}");
+            Dispose();
+        }
+    }
+
+    #endregion
+
+    #region Send
+
+    public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
+    {
+        Send(_packetParser.Pack(ref rpcId, ref routeTypeOpCode, ref routeId, memoryStream, message)).Coroutine();
+    }
+
+    private async FTask Send(MemoryStream memoryStream)
+    {
+        try
+        {
+            await _socket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Length), SocketFlags.None);
+        }
+        catch (SocketException)
+        {
+            // 一般发生在地方Socket断开时出现，所以也额可以忽略。
+            Dispose();
+        }
+        catch (OperationCanceledException)
+        {
+            // 取消操作，可以忽略这个异常。这个属于正常逻辑
+        }
+        catch (Exception e)
+        {
+            Log.Error(e);
+        }
+        finally
+        {
+            _network.ReturnMemoryStream(memoryStream);
+        }
+    }
+
+    private void OnSendCompleted(object sender, SocketAsyncEventArgs e)
+    {
+        if (_cancellationTokenSource.IsCancellationRequested)
+        {
+            return;
         }
 
-        #endregion
-
-        #region 网络线程（由Socket底层产生的线程）
-
-        private void OnComplete(object sender, SocketAsyncEventArgs asyncEventArgs)
+        switch (e.LastOperation)
         {
-            if (IsDisposed)
+            case SocketAsyncOperation.Send:
             {
+                var eUserToken = (MemoryStream)e.UserToken;
+                Scene.ThreadSynchronizationContext.Post(() =>
+                {
+                    _network.ReturnMemoryStream(eUserToken);
+                });
                 return;
             }
- 
-            switch (asyncEventArgs.LastOperation)
+            case SocketAsyncOperation.Disconnect:
             {
-                case SocketAsyncOperation.Receive:
-                {
-                    ChannelSynchronizationContext.Post(() => OnReceiveComplete(asyncEventArgs));
-                    return;
-                }
-                case SocketAsyncOperation.Send:
-                {
-                    ChannelSynchronizationContext.Post(() => OnSendComplete(asyncEventArgs));
-                    return;
-                }
-                case SocketAsyncOperation.Disconnect:
-                {
-                    ChannelSynchronizationContext.Post(Dispose);
-                    return;
-                }
-                default:
-                {
-                    throw new Exception($"Socket Error: {asyncEventArgs.LastOperation}");
-                }
+                Scene.ThreadSynchronizationContext.Post(Dispose);
+                return;
             }
         }
-
-        #endregion
     }
+
+    #endregion
 }
 #endif

@@ -23,7 +23,11 @@ namespace Fantasy
         /// <returns>创建的实例。</returns>
         public static OneToManyQueuePool<TKey, TValue> Create()
         {
+#if FANTASY_WEBGL
+            var a = Pool<OneToManyQueuePool<TKey, TValue>>.Rent();
+#else
             var a = MultiThreadPool.Rent<OneToManyQueuePool<TKey, TValue>>();
+#endif
             a._isDispose = false;
             a.IsPool = true;
             return a;
@@ -41,7 +45,11 @@ namespace Fantasy
 
             _isDispose = true;
             Clear();
+#if FANTASY_WEBGL
+            Pool<OneToManyQueuePool<TKey, TValue>>.Return(this);
+#else
             MultiThreadPool.Return(this);
+#endif
         }
     }
 

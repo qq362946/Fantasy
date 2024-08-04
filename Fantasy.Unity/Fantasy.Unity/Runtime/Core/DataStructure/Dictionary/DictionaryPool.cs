@@ -28,7 +28,11 @@ namespace Fantasy
 
             _isDispose = true;
             Clear();
+#if FANTASY_WEBGL
+            Pool<DictionaryPool<TM, TN>>.Return(this);
+#else
             MultiThreadPool.Return(this);
+#endif
         }
 
         /// <summary>
@@ -37,7 +41,11 @@ namespace Fantasy
         /// <returns>新创建的实例。</returns>
         public static DictionaryPool<TM, TN> Create()
         {
+#if FANTASY_WEBGL
+            var dictionary = Pool<DictionaryPool<TM, TN>>.Rent();
+#else
             var dictionary = MultiThreadPool.Rent<DictionaryPool<TM, TN>>();
+#endif
             dictionary._isDispose = false;
             dictionary.IsPool = true;
             return dictionary;

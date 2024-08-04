@@ -74,7 +74,7 @@ namespace Fantasy
                     scene = entity.Scene;
                 }
                 
-                Log.Error($"SceneConfigId:{session.Scene.SceneConfigId} ServerConfigId:{scene.Server?.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
+                Log.Error($"SceneConfigId:{session.Scene.SceneConfigId} ProcessConfigId:{scene.Process.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
             }
         }
 
@@ -93,10 +93,8 @@ namespace Fantasy
     /// <typeparam name="TEntity">实体类型。</typeparam>
     /// <typeparam name="TRouteRequest">路由请求类型。</typeparam>
     /// <typeparam name="TRouteResponse">路由响应类型。</typeparam>
-    public abstract class RouteRPC<TEntity, TRouteRequest, TRouteResponse> : IRouteMessageHandler where TEntity : Entity where TRouteRequest : IRouteRequest where TRouteResponse : IRouteResponse
+    public abstract class RouteRPC<TEntity, TRouteRequest, TRouteResponse> : IRouteMessageHandler where TEntity : Entity where TRouteRequest : IRouteRequest where TRouteResponse : IRouteResponse, new()
     {
-        private readonly Func<TRouteResponse> _creator = EmitHelper.CreateDefaultConstructor<TRouteResponse>();
-        
         /// <summary>
         /// 获取处理的消息类型。
         /// </summary>
@@ -129,7 +127,7 @@ namespace Fantasy
             }
             
             var isReply = false;
-            var response = _creator();
+            var response = new TRouteResponse();
             
             void Reply()
             {
@@ -159,7 +157,7 @@ namespace Fantasy
                     scene = entity.Scene;
                 }
                 
-                Log.Error($"SceneConfigId:{session.Scene.SceneConfigId} ServerConfigId:{scene.Server?.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
+                Log.Error($"SceneConfigId:{session.Scene.SceneConfigId} ProcessConfigId:{scene.Process.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
                 response.ErrorCode = InnerErrorCode.ErrRpcFail;
             }
             finally
@@ -227,7 +225,7 @@ namespace Fantasy
                     scene = entity.Scene;
                 }
                 
-                Log.Error($"SceneConfigId:{session.Scene.SceneConfigId} ServerConfigId:{scene.Server?.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
+                Log.Error($"SceneConfigId:{session.Scene.SceneConfigId} ProcessConfigId:{scene.Process.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
             }
             finally
             {
@@ -249,10 +247,8 @@ namespace Fantasy
     /// <typeparam name="TEntity">实体类型。</typeparam>
     /// <typeparam name="TRouteRequest">可寻址RPC路由请求类型。</typeparam>
     /// <typeparam name="TRouteResponse">可寻址RPC路由响应类型。</typeparam>
-    public abstract class AddressableRPC<TEntity, TRouteRequest, TRouteResponse> : IRouteMessageHandler where TEntity : Entity where TRouteRequest : IAddressableRouteRequest where TRouteResponse : IAddressableRouteResponse
+    public abstract class AddressableRPC<TEntity, TRouteRequest, TRouteResponse> : IRouteMessageHandler where TEntity : Entity where TRouteRequest : IAddressableRouteRequest where TRouteResponse : IAddressableRouteResponse, new()
     {
-        private readonly Func<TRouteResponse> _creator = EmitHelper.CreateDefaultConstructor<TRouteResponse>();
-        
         /// <summary>
         /// 获取消息类型。
         /// </summary>
@@ -284,7 +280,7 @@ namespace Fantasy
             }
             
             var isReply = false;
-            var response = _creator();
+            var response = new TRouteResponse();
             
             void Reply()
             {
@@ -314,7 +310,7 @@ namespace Fantasy
                     scene = entity.Scene;
                 }
                 
-                Log.Error($"SceneConfigId:{session.Scene.SceneConfigId} ServerConfigId:{scene.Server?.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
+                Log.Error($"SceneConfigId:{session.Scene.SceneConfigId} ProcessConfigId:{scene.Process.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
                 response.ErrorCode = InnerErrorCode.ErrRpcFail;
             }
             finally

@@ -1,7 +1,9 @@
+#if !FANTASY_WEBGL
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+#pragma warning disable CS8603 // Possible null reference return.
 
 namespace Fantasy
 {
@@ -175,3 +177,4 @@ namespace Fantasy
         }
     }
 }
+#endif

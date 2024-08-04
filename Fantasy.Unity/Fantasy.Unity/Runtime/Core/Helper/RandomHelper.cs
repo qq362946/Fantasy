@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-
 namespace Fantasy
 {
     /// <summary>
@@ -12,7 +11,6 @@ namespace Fantasy
     public static class RandomHelper
     {
         private static readonly Random Random = new Random();
-
         private static readonly byte[] Byte8 = new byte[8];
         private static readonly byte[] Byte2 = new byte[2];
 

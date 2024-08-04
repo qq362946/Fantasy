@@ -7,7 +7,7 @@ namespace Fantasy
     public static class AddressableHelper
     {
         // 声明一个私有静态只读列表 AddressableScenes，用于存储地址映射的场景配置信息
-        private static readonly List<SceneConfig> AddressableScenes = new List<SceneConfig>();
+        private static readonly List<AddressableScene> AddressableScenes = new List<AddressableScene>();
 
         static AddressableHelper()
         {
@@ -16,7 +16,7 @@ namespace Fantasy
             {
                 if (sceneConfig.SceneTypeString == "Addressable")
                 {
-                    AddressableScenes.Add(sceneConfig);
+                    AddressableScenes.Add(new AddressableScene(sceneConfig));
                 }
             }
         }
@@ -33,7 +33,7 @@ namespace Fantasy
             // 获取指定索引的地址映射场景配置信息
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
             // 调用内部路由方法，发送添加地址映射的请求并等待响应
-            var response = await scene.NetworkMessagingComponent.CallInnerRoute(addressableScene.EntityId,
+            var response = await scene.NetworkMessagingComponent.CallInnerRoute(addressableScene.RunTimeId,
                 new I_AddressableAdd_Request
                 {
                     AddressableId = addressableId, RouteId = routeId, IsLock = isLock
@@ -55,7 +55,7 @@ namespace Fantasy
             // 获取指定索引的地址映射场景配置信息
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
             // 调用内部路由方法，发送获取地址映射路由 ID 的请求并等待响应
-            var response = (I_AddressableGet_Response) await scene.NetworkMessagingComponent.CallInnerRoute(addressableScene.EntityId,
+            var response = (I_AddressableGet_Response) await scene.NetworkMessagingComponent.CallInnerRoute(addressableScene.RunTimeId,
                 new I_AddressableGet_Request
                 {
                     AddressableId = addressableId
@@ -78,7 +78,7 @@ namespace Fantasy
         public static async FTask RemoveAddressable(Scene scene, long addressableId)
         {
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
-            var response = await scene.NetworkMessagingComponent.CallInnerRoute(addressableScene.EntityId,
+            var response = await scene.NetworkMessagingComponent.CallInnerRoute(addressableScene.RunTimeId,
                 new I_AddressableRemove_Request
                 {
                     AddressableId = addressableId
@@ -98,7 +98,7 @@ namespace Fantasy
         public static async FTask LockAddressable(Scene scene, long addressableId)
         {
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
-            var response = await scene.NetworkMessagingComponent.CallInnerRoute(addressableScene.EntityId,
+            var response = await scene.NetworkMessagingComponent.CallInnerRoute(addressableScene.RunTimeId,
                 new I_AddressableLock_Request
                 {
                     AddressableId = addressableId
@@ -120,7 +120,7 @@ namespace Fantasy
         public static async FTask UnLockAddressable(Scene scene, long addressableId, long routeId, string source)
         {
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
-            var response = await scene.NetworkMessagingComponent.CallInnerRoute(addressableScene.EntityId,
+            var response = await scene.NetworkMessagingComponent.CallInnerRoute(addressableScene.RunTimeId,
                 new I_AddressableUnLock_Request
                 {
                     AddressableId = addressableId,

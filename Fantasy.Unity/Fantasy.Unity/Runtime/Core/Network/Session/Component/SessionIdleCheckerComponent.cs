@@ -1,3 +1,5 @@
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #if FANTASY_NET
 namespace Fantasy;
@@ -42,9 +44,9 @@ public class SessionIdleCheckerComponent : Entity
     {
         _timeOut = timeOut;
         _session = (Session)Parent;
-        _selfRuntimeId = RuntimeId;
+        _selfRuntimeId = RunTimeId;
         // 安排重复计时器，在指定的间隔内执行 Check 方法
-        _timerId = TimerComponent.Core.RepeatedTimer(interval, Check);
+        _timerId = TimerComponent.Net.RepeatedTimer(interval, Check);
     }
 
     /// <summary>
@@ -57,7 +59,7 @@ public class SessionIdleCheckerComponent : Entity
             return;
         }
 
-        TimerComponent.Core.Remove(ref _timerId);
+        TimerComponent.Net.Remove(ref _timerId);
     }
 
     /// <summary>
@@ -65,7 +67,7 @@ public class SessionIdleCheckerComponent : Entity
     /// </summary>
     private void Check()
     {
-        if (_selfRuntimeId != RuntimeId || IsDisposed || _session == null)
+        if (_selfRuntimeId != RunTimeId || IsDisposed || _session == null)
         {
             Stop();
             return;

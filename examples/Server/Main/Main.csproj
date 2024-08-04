@@ -8,17 +8,17 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <OutputPath>../../Bin/Debug</OutputPath>
-      <DebugType>portable</DebugType>
+      <OutputPath>../../Bin/Debug/</OutputPath>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <OutputPath>../../Bin/Release</OutputPath>
+      <OutputPath>../../Bin/Release/</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.Net\Fantasy.Net.csproj" />
+      <ProjectReference Include="..\Entity\Entity.csproj" />
       <ProjectReference Include="..\Hotfix\Hotfix.csproj" />
-      <ProjectReference Include="..\Model\Model.csproj" />
     </ItemGroup>
 
     <ItemGroup>

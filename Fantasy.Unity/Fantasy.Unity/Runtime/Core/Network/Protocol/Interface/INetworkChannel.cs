@@ -9,6 +9,5 @@ namespace Fantasy
         public Session Session { get;}
         public bool IsDisposed { get;}
         public void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message);
-        public void Send(MemoryStream memoryStream);
     }
 }

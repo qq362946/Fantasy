@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-#if FANTASY_NET
-using System.Runtime.Loader;
-// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-#endif
+#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8603
 #pragma warning disable CS8618
 namespace Fantasy
@@ -18,9 +15,13 @@ namespace Fantasy
     /// </summary>
     public static class AssemblySystem
     {
+#if FANTASY_WEBGL
+        private static readonly List<IAssembly> AssemblySystems = new List<IAssembly>();
+        private static readonly Dictionary<long, AssemblyInfo> AssemblyList = new Dictionary<long, AssemblyInfo>();
+#else
         private static readonly ConcurrentBag<IAssembly> AssemblySystems = new ConcurrentBag<IAssembly>();
         private static readonly ConcurrentDictionary<long, AssemblyInfo> AssemblyList = new ConcurrentDictionary<long, AssemblyInfo>();
-        
+#endif
         /// <summary>
         /// 初始化 AssemblySystem。
         /// </summary>
@@ -39,7 +40,6 @@ namespace Fantasy
         /// <param name="assembly">要加载的程序集。</param>
         public static void LoadAssembly(Assembly assembly)
         {
-            var tasks = new List<Task>();
             var assemblyIdentity = AssemblyIdentity(assembly);
                 
             if (AssemblyList.TryGetValue(assemblyIdentity, out var assemblyInfo))
@@ -47,7 +47,7 @@ namespace Fantasy
                 assemblyInfo.Unload();
                 foreach (var assemblySystem in AssemblySystems)
                 {
-                    tasks.Add(assemblySystem.ReLoad(assemblyIdentity));
+                    assemblySystem.ReLoad(assemblyIdentity);
                 }
             }
             else
@@ -56,19 +56,11 @@ namespace Fantasy
                 AssemblyList.TryAdd(assemblyIdentity, assemblyInfo);
                 foreach (var assemblySystem in AssemblySystems)
                 {
-                    tasks.Add(assemblySystem.Load(assemblyIdentity));
+                    assemblySystem.Load(assemblyIdentity);
                 }
             }
             
-            // 加载新的程序集
             assemblyInfo.Load(assembly);
-
-            if (tasks.Count <= 0)
-            {
-                return;
-            }
-                    
-            Task.WaitAll(tasks.ToArray());
         }
 
         /// <summary>
@@ -85,19 +77,17 @@ namespace Fantasy
             }
             
             assemblyInfo.Unload();
-            var tasks = new List<Task>();
             foreach (var assemblySystem in AssemblySystems)
             {
-                tasks.Add(assemblySystem.OnUnLoad(assemblyIdentity));
+                assemblySystem.OnUnLoad(assemblyIdentity);
             }
-            Task.WaitAll(tasks.ToArray());
         }
         
         /// <summary>
         /// 将AssemblySystem接口的object注册到程序集管理中心
         /// </summary>
         /// <param name="obj"></param>
-        public static async Task Register(object obj)
+        public static async FTask Register(object obj)
         {
             if (obj is not IAssembly assemblySystem)
             {
@@ -122,16 +112,19 @@ namespace Fantasy
             {
                 return;
             }
-            
+#if FANTASY_WEBGL
+            AssemblySystems.Remove(assemblySystem);
+#else
             while (AssemblySystems.TryTake(out var removeAssemblySystem))
             {
                 if (removeAssemblySystem == assemblySystem)
                 {
                     continue;
                 }
-                
+
                 AssemblySystems.Add(removeAssemblySystem);
             }
+#endif
         }
 
         /// <summary>

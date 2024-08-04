@@ -1,5 +1,6 @@
 
 using ProtoBuf;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Fantasy
@@ -16,7 +17,7 @@ namespace Fantasy
         /// <returns>操作代码。</returns>
         public uint OpCode()
         {
-            return Opcode.DefaultResponse;
+            return Fantasy.OpCode.DefaultResponse;
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Fantasy
         /// <returns>操作代码。</returns>
         public uint OpCode()
         {
-            return Opcode.DefaultRouteResponse;
+            return Fantasy.OpCode.DefaultRouteResponse;
         }
         /// <summary>
         /// 获取或设置RPC标识。
@@ -64,7 +65,7 @@ namespace Fantasy
         /// <returns>操作代码。</returns>
         public uint OpCode()
         {
-            return Opcode.PingRequest;
+            return Fantasy.OpCode.PingRequest;
         }
         /// <summary>
         /// 获取或设置Ping响应类型。
@@ -87,7 +88,7 @@ namespace Fantasy
         /// <returns>操作代码。</returns>
         public uint OpCode()
         {
-            return Opcode.PingResponse;
+            return Fantasy.OpCode.PingResponse;
         }
         /// <summary>
         /// 获取或设置RPC标识。
@@ -117,7 +118,7 @@ namespace Fantasy
         /// 获取消息的操作代码。
         /// </summary>
         /// <returns>操作代码。</returns>
-        public uint OpCode() { return Opcode.AddressableAddRequest; }
+        public uint OpCode() { return Fantasy.OpCode.AddressableAddRequest; }
         /// <summary>
         /// 获取消息的路由类型操作代码。
         /// </summary>
@@ -149,7 +150,7 @@ namespace Fantasy
         /// 获取消息的操作代码。
         /// </summary>
         /// <returns>操作代码。</returns>
-        public uint OpCode() { return Opcode.AddressableAddResponse; }
+        public uint OpCode() { return Fantasy.OpCode.AddressableAddResponse; }
         /// <summary>
         /// 错误代码。
         /// </summary>
@@ -171,7 +172,7 @@ namespace Fantasy
         /// 获取消息的操作代码。
         /// </summary>
         /// <returns>操作代码。</returns>
-        public uint OpCode() { return Opcode.AddressableGetRequest; }
+        public uint OpCode() { return Fantasy.OpCode.AddressableGetRequest; }
         /// <summary>
         /// 获取消息的路由类型操作代码。
         /// </summary>
@@ -193,7 +194,7 @@ namespace Fantasy
         /// 获取消息的操作代码。
         /// </summary>
         /// <returns>操作代码。</returns>
-        public uint OpCode() { return Opcode.AddressableGetResponse; }
+        public uint OpCode() { return Fantasy.OpCode.AddressableGetResponse; }
         /// <summary>
         /// 错误代码。
         /// </summary>
@@ -220,7 +221,7 @@ namespace Fantasy
         /// 获取消息的操作代码。
         /// </summary>
         /// <returns>操作代码。</returns>
-        public uint OpCode() { return Opcode.AddressableRemoveRequest; }
+        public uint OpCode() { return Fantasy.OpCode.AddressableRemoveRequest; }
         /// <summary>
         /// 获取消息的路由类型操作代码。
         /// </summary>
@@ -242,7 +243,7 @@ namespace Fantasy
         /// 获取消息的操作代码。
         /// </summary>
         /// <returns>操作代码。</returns>
-        public uint OpCode() { return Opcode.AddressableRemoveResponse; }
+        public uint OpCode() { return Fantasy.OpCode.AddressableRemoveResponse; }
         /// <summary>
         /// 错误代码。
         /// </summary>
@@ -264,7 +265,7 @@ namespace Fantasy
         /// 获取消息的操作代码。
         /// </summary>
         /// <returns>操作代码。</returns>
-        public uint OpCode() { return Opcode.AddressableLockRequest; }
+        public uint OpCode() { return Fantasy.OpCode.AddressableLockRequest; }
         /// <summary>
         /// 获取消息的路由类型操作代码。
         /// </summary>
@@ -286,7 +287,7 @@ namespace Fantasy
         /// 获取消息的操作代码。
         /// </summary>
         /// <returns>操作代码。</returns>
-        public uint OpCode() { return Opcode.AddressableLockResponse; }
+        public uint OpCode() { return Fantasy.OpCode.AddressableLockResponse; }
         /// <summary>
         /// 获取或设置错误代码。
         /// </summary>
@@ -308,7 +309,7 @@ namespace Fantasy
         /// 获取消息的操作代码。
         /// </summary>
         /// <returns>操作代码。</returns>
-        public uint OpCode() { return Opcode.AddressableUnLockRequest; }
+        public uint OpCode() { return Fantasy.OpCode.AddressableUnLockRequest; }
         /// <summary>
         /// 获取消息的路由类型操作代码。
         /// </summary>
@@ -340,7 +341,7 @@ namespace Fantasy
         /// 获取消息的操作代码。
         /// </summary>
         /// <returns>操作代码。</returns>
-        public uint OpCode() { return Opcode.AddressableUnLockResponse; }
+        public uint OpCode() { return Fantasy.OpCode.AddressableUnLockResponse; }
         /// <summary>
         /// 获取或设置错误代码。
         /// </summary>
@@ -354,7 +355,7 @@ namespace Fantasy
     [ProtoContract]
     public class LinkEntity_Request : AProto, IRouteRequest
     {
-        public uint OpCode() { return Opcode.LinkEntityRequest; }
+        public uint OpCode() { return Fantasy.OpCode.LinkEntityRequest; }
         public long RouteTypeOpCode() { return 1; }
         /// <summary>
         /// EntityType
@@ -375,7 +376,7 @@ namespace Fantasy
     [ProtoContract]
     public partial class LinkEntity_Response : AProto, IRouteResponse
     {
-        public uint OpCode() { return Opcode.LinkEntityResponse; }
+        public uint OpCode() { return Fantasy.OpCode.LinkEntityResponse; }
         [ProtoMember(91, IsRequired = true)]
         public uint ErrorCode { get; set; }
     }

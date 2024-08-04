@@ -68,7 +68,7 @@ namespace Fantasy
         public void Start(int interval)
         {
             Session = (Session)Parent;
-            SelfRunTimeId = RuntimeId;
+            SelfRunTimeId = RunTimeId;
             TimerId = TimerComponent.Unity.RepeatedTimer(interval, () => RepeatedSend().Coroutine());
         }
 
@@ -91,7 +91,7 @@ namespace Fantasy
         /// <returns>表示进行中操作的异步任务。</returns>
         private async FTask RepeatedSend()
         {
-            if (SelfRunTimeId != RuntimeId)
+            if (SelfRunTimeId != RunTimeId)
             {
                 Stop();
             }

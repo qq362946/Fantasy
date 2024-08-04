@@ -9,10 +9,7 @@ namespace Fantasy
 #if FANTASY_UNITY
     public sealed class ClientMessageScheduler : ANetworkMessageScheduler
     {
-        public ClientMessageScheduler(Scene scene) : base(scene.MessageDispatcherComponent, scene.NetworkMessagingComponent)
-        {
-            
-        }
+        public ClientMessageScheduler(Scene scene) : base(scene) { }
         
         /// <summary>
         /// 处理客户端外部消息的方法。
@@ -26,27 +23,26 @@ namespace Fantasy
             {
                 switch (packInfo.ProtocolCode)
                 {
-                    case > Opcode.InnerRouteResponse:
+                    case > OpCode.InnerRouteResponse:
                     {
                         throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode} messageType:{messageType}");
                     }
-                    case Opcode.PingResponse:
-                    case > Opcode.OuterRouteResponse:
+                    case OpCode.PingResponse:
+                    case > OpCode.OuterRouteResponse:
                     {
                         // 这个一般是客户端Session.Call发送时使用的、目前这个逻辑只有Unity客户端时使用
                         var aResponse = (IResponse)packInfo.Deserialize(messageType);
 
-                        if (!session.RequestCallback.TryGetValue(packInfo.RpcId, out var action))
+                        if (!session.RequestCallback.Remove(packInfo.RpcId, out var action))
                         {
                             Log.Error($"not found rpc {packInfo.RpcId}, response message: {aResponse.GetType().Name}");
                             return;
                         }
 
-                        session.RequestCallback.Remove(packInfo.RpcId);
                         action.SetResult(aResponse);
                         return;
                     }
-                    case < Opcode.OuterRouteRequest:
+                    case < OpCode.OuterRouteRequest:
                     {
                         var message = packInfo.Deserialize(messageType);
                         MessageDispatcherComponent.MessageHandler(session, messageType, message, packInfo.RpcId, packInfo.ProtocolCode);
@@ -67,20 +63,12 @@ namespace Fantasy
             await FTask.CompletedTask;
             throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode} messageType:{messageType}");
         }
-
-        protected override FTask InnerHandler(Session session, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, Type messageType, object message)
-        {
-            throw new NotImplementedException();
-        }
     }
 #endif
 #if FANTASY_NET
     public sealed class ClientMessageScheduler : ANetworkMessageScheduler
     {
-        public ClientMessageScheduler(Scene scene) : base(scene.MessageDispatcherComponent, scene.NetworkMessagingComponent)
-        {
-            
-        }
+        public ClientMessageScheduler(Scene scene) : base(scene) { }
         
         /// <summary>
         /// 处理客户端外部消息的方法。
@@ -93,19 +81,9 @@ namespace Fantasy
             throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode} messageType:{messageType}");
         }
 
-        /// <summary>
-        /// 处理客户端内部消息的方法。
-        /// </summary>
-        /// <param name="session">客户端会话。</param>
-        /// <param name="rpcId">远程过程调用ID。</param>
-        /// <param name="routeId">路由ID。</param>
-        /// <param name="protocolCode">协议编码。</param>
-        /// <param name="routeTypeCode">路由类型编码。</param>
-        /// <param name="messageType">消息类型。</param>
-        /// <param name="message">消息实例。</param>
-        protected override FTask InnerHandler(Session session, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, Type messageType, object message)
+        public override FTask InnerScheduler(Session session, Type messageType, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, object message)
         {
-            throw new NotSupportedException($"Received unsupported message protocolCode:{protocolCode} messageType:{messageType}");
+            throw new NotImplementedException();
         }
     }
 #endif

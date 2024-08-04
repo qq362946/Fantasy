@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 
 namespace Fantasy
 {
@@ -12,16 +11,16 @@ namespace Fantasy
         /// 程序集加载时调用
         /// </summary>
         /// <param name="assemblyIdentity">程序集标识</param>
-        public Task Load(long assemblyIdentity);
+        public FTask Load(long assemblyIdentity);
         /// <summary>
         /// 程序集重新加载的时候调用
         /// </summary>
         /// <param name="assemblyIdentity">程序集标识</param>
-        public Task ReLoad(long assemblyIdentity);
+        public FTask ReLoad(long assemblyIdentity);
         /// <summary>
         /// 卸载的时候调用
         /// </summary>
         /// <param name="assemblyIdentity">程序集标识</param>
-        public Task OnUnLoad(long assemblyIdentity);
+        public FTask OnUnLoad(long assemblyIdentity);
     }
 }

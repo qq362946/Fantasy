@@ -1,14 +1,22 @@
 syntax = "proto3";
 package Sining.Message;
-message TestServerRequest // IRequest,TestServerResponse
+message I_G2A_TestMessage // IRouteMessage
+{
+	string Name = 1;
+}
+message I_G2A_TestRequest // IRouteRequest,I_A2G_TestResponse
+{
+	string Name = 1;
+}
+message I_A2G_TestResponse // IRouteResponse
+{
+	string Name = 1;
+}
+message I_G2A_PingRequest // IRouteRequest,I_A2G_PingResponse
+{
+
+}
+message I_A2G_PingResponse // IRouteResponse
 {
 	
-}
-message TestServerResponse // IResponse
-{
-
-}
-message TestServerMessage // IMessage
-{
-
 }

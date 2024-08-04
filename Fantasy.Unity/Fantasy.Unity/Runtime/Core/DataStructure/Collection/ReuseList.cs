@@ -21,7 +21,11 @@ namespace Fantasy
         /// <returns>创建的实例。</returns>
         public static ReuseList<T> Create()
         {
+#if FANTASY_WEBGL
+            var list = Pool<ReuseList<T>>.Rent();
+#else
             var list = MultiThreadPool.Rent<ReuseList<T>>();
+#endif
             list._isDispose = false;
             list.IsPool = true;
             return list;
@@ -39,7 +43,11 @@ namespace Fantasy
 
             _isDispose = true;
             Clear();
+#if FANTASY_WEBGL
+            Pool<ReuseList<T>>.Return(this);
+#else
             MultiThreadPool.Return(this);
+#endif
         }
     }
 }

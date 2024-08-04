@@ -1,6 +1,7 @@
 #if FANTASY_NET
 using System.IO;
 using System.Net;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Fantasy
@@ -27,22 +28,12 @@ namespace Fantasy
         /// 获取通道是否已经被释放。
         /// </summary>
         public bool IsDisposed { get; protected set; }
-        /// <summary>
-        /// 获取通道的数据包解析器。
-        /// </summary>
-        public APacketParser PacketParser { get; protected set; }
-        /// <summary>
-        /// 通道关联的线程同步上下文。
-        /// </summary>
-        public readonly ThreadSynchronizationContext ChannelSynchronizationContext;
 
         protected ANetworkServerChannel(ANetwork network, uint id, EndPoint remoteEndPoint)
         {
             Id = id;
             Scene = network.Scene;
             RemoteEndPoint = remoteEndPoint;
-            ChannelSynchronizationContext = network.ThreadSynchronizationContext;
-            PacketParser = APacketParser.CreatePacketParser(network.Scene, network.NetworkTarget);
             Session = Session.Create(network.NetworkMessageScheduler, this, network.NetworkTarget);
         }
 
@@ -57,7 +48,6 @@ namespace Fantasy
         }
         
         public abstract void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message);
-        public abstract void Send(MemoryStream memoryStream);
     }
 }
 #endif

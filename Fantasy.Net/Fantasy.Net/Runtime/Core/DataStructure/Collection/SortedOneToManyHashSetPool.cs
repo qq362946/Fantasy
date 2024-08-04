@@ -23,7 +23,11 @@ namespace Fantasy
         /// <returns>新创建的实例。</returns>
         public static SortedOneToManyHashSetPool<TKey, TValue> Create()
         {
+#if FANTASY_WEBGL
+            var a = Pool<SortedOneToManyHashSetPool<TKey, TValue>>.Rent();
+#else
             var a = MultiThreadPool.Rent<SortedOneToManyHashSetPool<TKey, TValue>>();
+#endif
             a._isDispose = false;
             a.IsPool = true;
             return a;
@@ -41,7 +45,11 @@ namespace Fantasy
 
             _isDispose = true;
             Clear();
+#if FANTASY_WEBGL
+            Pool<SortedOneToManyHashSetPool<TKey, TValue>>.Return(this);
+#else
             MultiThreadPool.Return(this);
+#endif
         }
     }
 
@@ -59,9 +67,7 @@ namespace Fantasy
         /// <summary>
         /// 创建一个新的 <see cref="SortedOneToManyHashSet{TKey, TValue}"/> 实例。
         /// </summary>
-        public SortedOneToManyHashSet()
-        {
-        }
+        public SortedOneToManyHashSet() { }
 
         /// <summary>
         /// 创建一个新的 <see cref="SortedOneToManyHashSet{TKey, TValue}"/> 实例，设置最大缓存数量

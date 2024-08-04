@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8603
 #pragma warning disable CS8601
 #pragma warning disable CS8618
@@ -17,7 +19,12 @@ namespace Fantasy
     /// </summary>
     public class Session : Entity, ISupportedMultiEntity
     {
-        private uint _rpcId;
+        internal uint RpcId;
+        
+        /// <summary>
+        /// 获取最后一次接收数据的时间。
+        /// </summary>
+        internal long LastReceiveTime;
         /// <summary>
         /// 获取或设置网络通道。
         /// </summary>
@@ -26,10 +33,6 @@ namespace Fantasy
         /// 连接目标的终结点信息。
         /// </summary>
         public IPEndPoint RemoteEndPoint { get; private set; }
-        /// <summary>
-        /// 获取最后一次接收数据的时间。
-        /// </summary>
-        public long LastReceiveTime { get; private set; }
         /// <summary>
         /// 获取用于网络消息调度的实例。
         /// </summary>
@@ -43,16 +46,9 @@ namespace Fantasy
         /// </summary>
         public event Action OnDispose;
 #if FANTASY_NET       
-        /// <summary>
-        /// 创建一个会话并添加到会话字典中。
-        /// </summary>
-        /// <param name="networkMessageScheduler">用于网络消息调度的实例。</param>
-        /// <param name="channel">与会话关联的通道。</param>
-        /// <param name="networkTarget">网络目标。</param>
         public static Session Create(ANetworkMessageScheduler networkMessageScheduler, ANetworkServerChannel channel, NetworkTarget networkTarget)
         {
-            // 创建会话实例
-            var session = Entity.Create<Session>(channel.Scene,false);
+            var session = Entity.Create<Session>(channel.Scene, false, false);
             session.Channel = channel;
             session.NetworkMessageScheduler = networkMessageScheduler;
             session.RemoteEndPoint = channel.RemoteEndPoint as IPEndPoint;
@@ -61,8 +57,8 @@ namespace Fantasy
             // 在外部网络目标下，添加会话空闲检查组件
             if (networkTarget == NetworkTarget.Outer)
             {
-                var interval = AppDefine.SessionIdleCheckerInterval;
-                var timeOut = AppDefine.SessionIdleCheckerTimeout;
+                var interval = ProcessDefine.SessionIdleCheckerInterval;
+                var timeOut = ProcessDefine.SessionIdleCheckerTimeout;
                 session.AddComponent<SessionIdleCheckerComponent>().Start(interval, timeOut);
             }
             return session;
@@ -77,7 +73,7 @@ namespace Fantasy
         public static Session Create(AClientNetwork network, IPEndPoint remoteEndPoint)
         {
             // 创建会话实例
-            var session = Entity.Create<Session>(network.Scene, false);
+            var session = Entity.Create<Session>(network.Scene, false, false);
             session.Channel = network;
             session.RemoteEndPoint = remoteEndPoint;
             session.OnDispose = network.Dispose;
@@ -85,16 +81,10 @@ namespace Fantasy
             return session;
         }
 #if FANTASY_NET
-        /// <summary>
-        /// 创建一个与服务器网络相关的会话并添加到会话字典中。
-        /// </summary>
-        /// <param name="network">与会话关联的服务器网络。</param>
-        /// <returns>创建的会话实例。</returns>
-        public static ServerInnerSession Create(ANetwork network)
+        public static ServerInnerSession CreateInnerSession(Scene scene)
         {
-            var session = Entity.Create<ServerInnerSession>(network.Scene, false);
-            session.OnDispose = network.Dispose;
-            session.NetworkMessageScheduler = network.NetworkMessageScheduler;
+            var session = Entity.Create<ServerInnerSession>(scene, false, false);
+            session.NetworkMessageScheduler = new InnerMessageScheduler(scene);
             return session;
         }
 #endif
@@ -109,7 +99,7 @@ namespace Fantasy
                 return;
             }
             
-            _rpcId = 0;
+            RpcId = 0;
             LastReceiveTime = 0;
             Channel = null;
             RemoteEndPoint = null;
@@ -132,7 +122,7 @@ namespace Fantasy
         /// <param name="message">要发送的消息。</param>
         /// <param name="rpcId">RPC 标识符。</param>
         /// <param name="routeId">路由标识符。</param>
-        public virtual void Send(object message, uint rpcId = 0, long routeId = 0)
+        public virtual void Send<T>(T message, uint rpcId = 0, long routeId = 0) where T : IMessage
         {
             if (IsDisposed)
             {
@@ -190,28 +180,27 @@ namespace Fantasy
 
             // 创建用于等待响应的任务
             var requestCallback = FTask<IResponse>.Create();
-            
-            unchecked
+            var rpcId = ++RpcId; // 增加RPC标识符
+            RequestCallback.Add(rpcId, requestCallback); // 将任务添加到回调字典中
+#if FANTASY_NET
+            if (request is IRouteMessage iRouteMessage)
             {
-                var rpcId = ++_rpcId; // 增加RPC标识符
-                RequestCallback.Add(rpcId, requestCallback); // 将任务添加到回调字典中
-
-                if (request is IRouteMessage iRouteMessage)
-                {
-                    // 如果请求是路由消息类型，则通过路由消息发送请求
-                    Send(iRouteMessage, rpcId, routeId);
-                }
-                else
-                {
-                    // 否则通过普通消息发送请求
-                    Send(request, rpcId, routeId);
-                }
+                // 如果请求是路由消息类型，则通过路由消息发送请求
+                Send(iRouteMessage, rpcId, routeId);
             }
+            else
+            {
+                // 否则通过普通消息发送请求
+                Send(request, rpcId, routeId);
+            }
+#else
+                Send(request, rpcId, routeId);
+#endif
 
             // 返回任务以等待响应
             return requestCallback;
         }
-
+        
         /// <summary>
         /// 接收到网络流数据。
         /// </summary>

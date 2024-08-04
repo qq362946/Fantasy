@@ -5,11 +5,7 @@ namespace Fantasy
     /// </summary>
     public class InnerErrorCode
     {
-        private InnerErrorCode()
-        {
-            
-        }
-        
+        private InnerErrorCode() { }
         /// <summary>
         /// 表示 Rpc 消息发送失败的错误代码。
         /// </summary>

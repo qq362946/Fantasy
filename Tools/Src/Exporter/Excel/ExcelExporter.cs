@@ -51,7 +51,7 @@ public sealed partial class ExcelExporter
     /// </summary>
     private static readonly HashSet<string> RemoveConfigSet =
     [
-        "WorldConfig.cs", "ServerConfig.cs", "SceneConfig.cs", "MachineConfig.cs"
+        "WorldConfig.cs", "ServerConfig.cs", "SceneConfig.cs", "MachineConfig.cs", "ProcessConfig.cs"
     ];
     static ExcelExporter()
     {
@@ -120,29 +120,25 @@ public sealed partial class ExcelExporter
 
         if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
         {
-            if (ExporterSettingsHelper.ExcelServerFileDirectory == null ||
-                ExporterSettingsHelper.ExcelServerFileDirectory.Trim() == "")
+            if (ExporterSettingsHelper.ExcelServerFileDirectory == null || ExporterSettingsHelper.ExcelServerFileDirectory.Trim() == "")
             {
                 Log.Info($"ExcelServerFileDirectory Can not be empty!");
                 return;
             }
 
-            if (ExporterSettingsHelper.ExcelServerJsonDirectory == null ||
-                ExporterSettingsHelper.ExcelServerJsonDirectory.Trim() == "")
+            if (ExporterSettingsHelper.ExcelServerJsonDirectory == null || ExporterSettingsHelper.ExcelServerJsonDirectory.Trim() == "")
             {
                 Log.Info($"ExcelServerJsonDirectory Can not be empty!");
                 return;
             }
 
-            if (ExporterSettingsHelper.ExcelServerBinaryDirectory == null ||
-                ExporterSettingsHelper.ExcelServerBinaryDirectory.Trim() == "")
+            if (ExporterSettingsHelper.ExcelServerBinaryDirectory == null || ExporterSettingsHelper.ExcelServerBinaryDirectory.Trim() == "")
             {
                 Log.Info($"ExcelServerBinaryDirectory Can not be empty!");
                 return;
             }
 
-            if (ExporterSettingsHelper.ServerCustomExportDirectory == null ||
-                ExporterSettingsHelper.ServerCustomExportDirectory.Trim() == "")
+            if (ExporterSettingsHelper.ServerCustomExportDirectory == null || ExporterSettingsHelper.ServerCustomExportDirectory.Trim() == "")
             {
                 Log.Info($"ServerCustomExportDirectory Can not be empty!");
                 return;
@@ -177,7 +173,7 @@ public sealed partial class ExcelExporter
         ExportToBinary();
         File.WriteAllText(_versionFilePath, JsonConvert.SerializeObject(VersionInfo));
         CustomExport();
-        // RemoveConfigCS();
+        RemoveConfigCS();
     }
 
     private static void RemoveConfigCS()

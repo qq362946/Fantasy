@@ -25,7 +25,11 @@ namespace Fantasy
         /// <returns>新创建的实例。</returns>
         public static SortedOneToManyListPool<TKey, TValue> Create()
         {
+#if FANTASY_WEBGL
+            var a = Pool<SortedOneToManyListPool<TKey, TValue>>.Rent();
+#else
             var a = MultiThreadPool.Rent<SortedOneToManyListPool<TKey, TValue>>();
+#endif
             a._isDispose = false;
             a.IsPool = true;
             return a;
@@ -43,7 +47,11 @@ namespace Fantasy
 
             _isDispose = true;
             Clear();
+#if FANTASY_WEBGL
+            Pool<SortedOneToManyListPool<TKey, TValue>>.Return(this);
+#else
             MultiThreadPool.Return(this);
+#endif
         }
     }
 

@@ -27,7 +27,11 @@ namespace Fantasy
 
             _isDispose = true;
             Clear();
+#if FANTASY_WEBGL
+            Pool<HashSetPool<T>>.Return(this);
+#else
             MultiThreadPool.Return(this);
+#endif
         }
 
         /// <summary>
@@ -36,10 +40,17 @@ namespace Fantasy
         /// <returns>创建的实例。</returns>
         public static HashSetPool<T> Create()
         {
+#if FANTASY_WEBGL
+            var list = Pool<HashSetPool<T>>.Rent();
+            list._isDispose = false;
+            list.IsPool = true;
+            return list;
+#else
             var list = MultiThreadPool.Rent<HashSetPool<T>>();
             list._isDispose = false;
             list.IsPool = true;
             return list;
+#endif
         }
     }
 
@@ -65,9 +76,15 @@ namespace Fantasy
         /// <returns>创建的实例。</returns>
         public static HashSetBasePool<T> Create()
         {
+#if FANTASY_WEBGL
+            var hashSetBasePool = Pool<HashSetBasePool<T>>.Rent();
+            hashSetBasePool.IsPool = true;
+            return hashSetBasePool;
+#else
             var hashSetBasePool = MultiThreadPool.Rent<HashSetBasePool<T>>();
             hashSetBasePool.IsPool = true;
             return hashSetBasePool;
+#endif
         }
 
         /// <summary>
@@ -76,7 +93,11 @@ namespace Fantasy
         public void Dispose()
         {
             Set.Clear();
+#if FANTASY_WEBGL
+            Pool<HashSetBasePool<T>>.Return(this);
+#else
             MultiThreadPool.Return(this);
+#endif
         }
     }
 }

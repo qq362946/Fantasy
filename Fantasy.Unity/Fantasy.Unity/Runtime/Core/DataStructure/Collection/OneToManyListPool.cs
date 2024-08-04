@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8603 // Possible null reference return.
 
 namespace Fantasy
 {
@@ -17,19 +19,22 @@ namespace Fantasy
         public bool IsPool { get; set; }
         private bool _isDispose;
 
-#if FANTASY_NET || FANTASY_UNITY || FANTASY_DEVELOP
         /// <summary>
         /// 创建一个 <see cref="OneToManyListPool{TKey, TValue}"/> 一对多关系的列表池的实例。
         /// </summary>
         /// <returns>创建的实例。</returns>
         public static OneToManyListPool<TKey, TValue> Create()
         {
+#if FANTASY_WEBGL || FANTASY_EXPORTER
+            var list = Pool<OneToManyListPool<TKey, TValue>>.Rent();
+#else
             var list = MultiThreadPool.Rent<OneToManyListPool<TKey, TValue>>();
+#endif
             list._isDispose = false;
             list.IsPool = true;
             return list;
         }
-#endif
+
         /// <summary>
         /// 释放当前对象所占用的资源，并将对象回收到对象池中。
         /// </summary>
@@ -42,7 +47,9 @@ namespace Fantasy
 
             _isDispose = true;
             Clear();
-#if FANTASY_NET || FANTASY_UNITY || FANTASY_DEVELOP
+#if FANTASY_WEBGL || FANTASY_EXPORTER
+            Pool<OneToManyListPool<TKey, TValue>>.Return(this);
+#else
             MultiThreadPool.Return(this);
 #endif
         }

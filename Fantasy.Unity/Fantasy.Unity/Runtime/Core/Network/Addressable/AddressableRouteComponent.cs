@@ -1,3 +1,7 @@
+#pragma warning disable CS8603 // Possible null reference return.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #if FANTASY_NET
 namespace Fantasy;
@@ -46,7 +50,7 @@ public sealed class AddressableRouteComponent : Entity
     /// <summary>
     /// 用于管理 Addressable 路由消息的锁队列。
     /// </summary>
-    public CoroutineLockQueueType AddressableRouteLock;
+    public CoroutineLock AddressableRouteLock;
     /// <summary>
     /// 任务调度器组件。
     /// </summary>
@@ -95,11 +99,11 @@ public sealed class AddressableRouteComponent : Entity
         }
 
         var failCount = 0; // 用于计算失败尝试次数
-        var runtimeId = RuntimeId; // 保存当前运行时 ID，用于判断是否超时
+        var runtimeId = RunTimeId; // 保存当前运行时 ID，用于判断是否超时
         IResponse iRouteResponse = null;
 
         // 使用锁来确保同一时间只有一个线程可以访问 AddressableId 和 _routeId
-        using (await AddressableRouteLock.Lock(AddressableId, "AddressableRouteComponent Call MemoryStream"))
+        using (await AddressableRouteLock.Wait(AddressableId, "AddressableRouteComponent Call MemoryStream"))
         {
             while (!IsDisposed)
             {
@@ -116,7 +120,7 @@ public sealed class AddressableRouteComponent : Entity
                 iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, routeTypeOpCode, requestType, request);
 
                 // 如果当前运行时 ID 不等于保存的运行时 ID，说明超时
-                if (runtimeId != RuntimeId)
+                if (runtimeId != RunTimeId)
                 {
                     iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
                 }
@@ -135,9 +139,9 @@ public sealed class AddressableRouteComponent : Entity
                             return iRouteResponse;
                         }
 
-                        await TimerComponent.Core.WaitAsync(500);
+                        await TimerComponent.Net.WaitAsync(500);
 
-                        if (runtimeId != RuntimeId)
+                        if (runtimeId != RunTimeId)
                         {
                             iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
                         }
@@ -168,9 +172,9 @@ public sealed class AddressableRouteComponent : Entity
         }
 
         var failCount = 0;
-        var runtimeId = RuntimeId;
+        var runtimeId = RunTimeId;
 
-        using (await AddressableRouteLock.Lock(AddressableId,"AddressableRouteComponent Call"))
+        using (await AddressableRouteLock.Wait(AddressableId,"AddressableRouteComponent Call"))
         {
             while (true)
             {
@@ -186,7 +190,7 @@ public sealed class AddressableRouteComponent : Entity
 
                 var iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, request);
 
-                if (runtimeId != RuntimeId)
+                if (runtimeId != RunTimeId)
                 {
                     iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
                 }
@@ -201,9 +205,9 @@ public sealed class AddressableRouteComponent : Entity
                             return iRouteResponse;
                         }
 
-                        await TimerComponent.Core.WaitAsync(500);
+                        await TimerComponent.Net.WaitAsync(500);
 
-                        if (runtimeId != RuntimeId)
+                        if (runtimeId != RunTimeId)
                         {
                             iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
                         }

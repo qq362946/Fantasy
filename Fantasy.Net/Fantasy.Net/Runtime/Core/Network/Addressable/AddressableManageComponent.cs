@@ -1,6 +1,9 @@
 #if FANTASY_NET
 using System;
 using System.Collections.Generic;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy
@@ -31,7 +34,7 @@ namespace Fantasy
 
     public sealed class AddressableManageComponent : Entity
     {
-        public CoroutineLockQueueType AddressableLock;
+        public CoroutineLock AddressableLock;
         public readonly Dictionary<long, long> Addressable = new();
         public readonly Dictionary<long, WaitCoroutineLock> Locks = new();
         
@@ -49,7 +52,7 @@ namespace Fantasy
             {
                 if (isLock)
                 {
-                    waitCoroutineLock = await AddressableLock.Lock(addressableId);
+                    waitCoroutineLock = await AddressableLock.Wait(addressableId);
                 }
                 
                 Addressable[addressableId] = routeId;
@@ -72,7 +75,7 @@ namespace Fantasy
         /// <returns>地址映射的路由 ID。</returns>
         public async FTask<long> Get(long addressableId)
         {
-            using (await AddressableLock.Lock(addressableId))
+            using (await AddressableLock.Wait(addressableId))
             {
                 Addressable.TryGetValue(addressableId, out var routeId);
                 return routeId;
@@ -85,7 +88,7 @@ namespace Fantasy
         /// <param name="addressableId">地址映射的唯一标识。</param>
         public async FTask Remove(long addressableId)
         {
-            using (await AddressableLock.Lock(addressableId))
+            using (await AddressableLock.Wait(addressableId))
             {
                 Addressable.Remove(addressableId);
                 Log.Debug($"Addressable Remove addressableId: {addressableId} _addressable:{Addressable.Count}");
@@ -98,7 +101,7 @@ namespace Fantasy
         /// <param name="addressableId">地址映射的唯一标识。</param>
         public async FTask Lock(long addressableId)
         {
-            var waitCoroutineLock = await AddressableLock.Lock(addressableId);
+            var waitCoroutineLock = await AddressableLock.Wait(addressableId);
             Locks.Add(addressableId, waitCoroutineLock);
         }
 

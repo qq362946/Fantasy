@@ -45,7 +45,7 @@ namespace Fantasy
 #if FANTASY_DEVELOP
             Log.Debug($"AddressableMessageComponent Register addressableId:{AddressableId} RouteId:{Parent.RuntimeId}");
 #endif
-            return AddressableHelper.AddAddressable(Scene, AddressableId, Parent.RuntimeId, isLock);
+            return AddressableHelper.AddAddressable(Scene, AddressableId, Parent.RunTimeId, isLock);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Fantasy
 #if FANTASY_DEVELOP
             Log.Debug($"AddressableMessageComponent UnLock {Parent.Id} {Parent.RuntimeId}");
 #endif
-            return AddressableHelper.UnLockAddressable(Scene, Parent.Id, Parent.RuntimeId, source);
+            return AddressableHelper.UnLockAddressable(Scene, Parent.Id, Parent.RunTimeId, source);
         }
     }
 }

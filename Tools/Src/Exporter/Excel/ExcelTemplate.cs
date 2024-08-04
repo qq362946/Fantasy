@@ -8,6 +8,7 @@ public static class ExcelTemplate
                                              using Fantasy;
                                              using System.Linq;
                                              using System.Collections.Generic;
+                                             using System.Collections.Concurrent;
                                              // ReSharper disable CollectionNeverUpdated.Global
                                              // ReSharper disable UnusedAutoPropertyAccessor.Global
                                              #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -23,13 +24,18 @@ public static class ExcelTemplate
                                                  {
                                                      [ProtoMember(1)]
                                                      public List<(ConfigName)> List { get; set; } = new List<(ConfigName)>();
+                                             #if FANTASY_NET
+                                                     [ProtoIgnore]
+                                                     private readonly ConcurrentDictionary<uint, (ConfigName)> _configs = new ConcurrentDictionary<uint, (ConfigName)>();
+                                             #else 
                                                      [ProtoIgnore]
                                                      private readonly Dictionary<uint, (ConfigName)> _configs = new Dictionary<uint, (ConfigName)>();
+                                             #endif
                                                      private static (ConfigName)Data _instance;
                                              
                                                      public static (ConfigName)Data Instance
                                                      {
-                                                         get { return _instance ??= ConfigTableHelper.Instance.Load<(ConfigName)Data>(); } 
+                                                         get { return _instance ??= ConfigTableHelper.Load<(ConfigName)Data>(); } 
                                                          private set => _instance = value;
                                                      }
                                              
@@ -61,10 +67,13 @@ public static class ExcelTemplate
                                                      }
                                                      public override void AfterDeserialization()
                                                      {
-                                                         for (var i = 0; i < List.Count; i++)
+                                                         foreach (var config in List)
                                                          {
-                                                             (ConfigName) config = List[i];
+                                             #if FANTASY_NET
+                                                             _configs.TryAdd(config.Id, config);
+                                             #else
                                                              _configs.Add(config.Id, config);
+                                             #endif
                                                              config.AfterDeserialization();
                                                          }
                                                  

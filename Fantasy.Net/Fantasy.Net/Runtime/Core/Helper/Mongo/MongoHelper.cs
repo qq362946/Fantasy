@@ -1,21 +1,18 @@
 #if FANTASY_NET
 using System.ComponentModel;
-using System.Reflection;
 using MongoDB.Bson;
 using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.Serializers;
+#pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Fantasy;
 
-/// <summary>
-/// 提供与MongoDB数据序列化和反序列化相关的帮助方法。
-/// </summary>
-public sealed class MongoHelper : Singleton<MongoHelper>
+public static class MongoHelper
 {
-    private readonly HashSet<long> LookupClassMap = new HashSet<long>();
+    private static readonly HashSet<long> LookupClassMap = new HashSet<long>();
     
     static MongoHelper()
     {
@@ -29,7 +26,7 @@ public sealed class MongoHelper : Singleton<MongoHelper>
         BsonSerializer.RegisterSerializer(new ObjectSerializer(x => true));
     }
 
-    public override async Task Load(long assemblyIdentity)
+    public static void Initialize()
     {
         // BsonClassMap.LookupClassMap方法用于检索给定类的映射信息，
         // 但MongoDB的C#驱动程序并没有提供直接的方法来卸载已注册的类映射。
@@ -37,24 +34,16 @@ public sealed class MongoHelper : Singleton<MongoHelper>
         // 为了避免重复注册，这里使用HashSet<long>来记录已注册的程序集。
         // 但这也有一个问题、就是有可能热更程序集的时候添加了新的class，但是HashSet<long>中没有记录，导致无法注册。
         // 从而导致这个class无法正常序列化和反序列化。
-        
-        if (!LookupClassMap.Add(assemblyIdentity))
-        {
-            return;
-        }
 
-        await Task.Run(() =>
+        foreach (var type in AssemblySystem.ForEach())
         {
-            foreach (var type in AssemblySystem.ForEach(assemblyIdentity))
+            if (type.IsInterface || type.IsAbstract || type.IsGenericType || !typeof(Entity).IsAssignableFrom(type))
             {
-                if (type.IsInterface || type.IsAbstract || type.IsGenericType || !typeof(Entity).IsAssignableFrom(type))
-                {
-                    continue;
-                }
-                
-                BsonClassMap.LookupClassMap(type);
+                continue;
             }
-        });
+                
+            BsonClassMap.LookupClassMap(type);
+        }
     }
 
     /// <summary>
@@ -63,13 +52,8 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <typeparam name="T">要反序列化的目标类型。</typeparam>
     /// <param name="bytes">要反序列化的字节数组。</param>
     /// <returns>反序列化后的对象。</returns>
-    public T Deserialize<T>(byte[] bytes)
+    public static T Deserialize<T>(byte[] bytes)
     {
-        if (bytes.Length == 0)
-        {
-            return (T)Activator.CreateInstance(typeof(T));
-        }
-        
         return BsonSerializer.Deserialize<T>(bytes);
     }
 
@@ -79,9 +63,9 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <param name="bytes">要反序列化的字节数组。</param>
     /// <param name="type">要反序列化的目标类型。</param>
     /// <returns>反序列化后的对象。</returns>
-    public object Deserialize(byte[] bytes, Type type)
+    public static object Deserialize(byte[] bytes, Type type)
     {
-        return bytes.Length == 0 ? Activator.CreateInstance(type) : BsonSerializer.Deserialize(bytes, type);
+        return BsonSerializer.Deserialize(bytes, type);
     }
 
     /// <summary>
@@ -90,9 +74,9 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <param name="bytes">要反序列化的字节数组。</param>
     /// <param name="type">要反序列化的目标类型的类型名字符串。</param>
     /// <returns>反序列化后的对象。</returns>
-    public object Deserialize(byte[] bytes, string type)
+    public static object Deserialize(byte[] bytes, string type)
     {
-        return bytes.Length == 0 ? Activator.CreateInstance(Type.GetType(type)) : BsonSerializer.Deserialize(bytes, Type.GetType(type));
+        return BsonSerializer.Deserialize(bytes, Type.GetType(type));
     }
 
     /// <summary>
@@ -101,13 +85,8 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <typeparam name="T">要反序列化的目标类型。</typeparam>
     /// <param name="stream">输入流。</param>
     /// <returns>反序列化后的对象。</returns>
-    public T Deserialize<T>(Stream stream)
+    public static T Deserialize<T>(Stream stream) where T : new()
     {
-        if (stream.Length == 0)
-        {
-            return (T)Activator.CreateInstance(typeof(T));
-        }
-        
         return BsonSerializer.Deserialize<T>(stream);
     }
 
@@ -117,9 +96,9 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <param name="stream">输入流。</param>
     /// <param name="type">要反序列化的目标类型。</param>
     /// <returns>反序列化后的对象。</returns>
-    public object Deserialize(Stream stream, Type type)
+    public static object Deserialize(Stream stream, Type type)
     {
-        return stream.Length == 0 ? Activator.CreateInstance(type) : BsonSerializer.Deserialize(stream, type);
+        return BsonSerializer.Deserialize(stream, type);
     }
 
     /// <summary>
@@ -128,9 +107,9 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <param name="type">要反序列化的目标类型。</param>
     /// <param name="stream">内存流。</param>
     /// <returns>反序列化后的对象。</returns>
-    public object DeserializeFrom(Type type, MemoryStream stream)
+    public static object DeserializeFrom(Type type, MemoryStream stream)
     {
-        return stream.Length == 0 ? Activator.CreateInstance(type) : Deserialize(stream, type);
+        return BsonSerializer.Deserialize(stream, type);
     }
 
     /// <summary>
@@ -139,30 +118,26 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <typeparam name="T">要反序列化的目标类型。</typeparam>
     /// <param name="stream">内存流。</param>
     /// <returns>反序列化后的对象。</returns>
-    public T DeserializeFrom<T>(MemoryStream stream)
+    public static T DeserializeFrom<T>(MemoryStream stream) where T : new()
     {
         return Deserialize<T>(stream);
     }
 
-    /// <summary>
-    /// 将字节数组中指定范围的数据反序列化为指定类型的对象。
-    /// </summary>
-    /// <typeparam name="T">要反序列化的目标类型。</typeparam>
-    /// <param name="bytes">字节数组。</param>
-    /// <param name="index">开始索引。</param>
-    /// <param name="count">数据长度。</param>
-    /// <returns>反序列化后的对象。</returns>
-    public T DeserializeFrom<T>(byte[] bytes, int index, int count)
-    {
-        var asMemory = bytes.AsMemory(index, count);
-
-        if (asMemory.Length == 0)
-        {
-            return (T)Activator.CreateInstance(typeof(T));
-        }
-        
-        return BsonSerializer.Deserialize<T>(asMemory.ToArray());
-    }
+    // /// <summary>
+    // /// 将字节数组中指定范围的数据反序列化为指定类型的对象。
+    // /// </summary>
+    // /// <typeparam name="T">要反序列化的目标类型。</typeparam>
+    // /// <param name="bytes">字节数组。</param>
+    // /// <param name="index">开始索引。</param>
+    // /// <param name="count">数据长度。</param>
+    // /// <returns>反序列化后的对象。</returns>
+    // public T DeserializeFrom<T>(byte[] bytes, int index, int count) where T : new()
+    // {
+    //     var asMemory = bytes.AsMemory(index, count);
+    //     
+    //     
+    //     return BsonSerializer.Deserialize<T>(asMemory.ToArray());
+    // }
 
     /// <summary>
     /// 将对象序列化为字节数组。
@@ -170,7 +145,7 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <typeparam name="T">要序列化的对象类型。</typeparam>
     /// <param name="t">要序列化的对象。</param>
     /// <returns>序列化后的字节数组。</returns>
-    public byte[] SerializeTo<T>(T t)
+    public static byte[] SerializeTo<T>(T t)
     {
         if (t is ISupportInitialize supportInitialize)
         {
@@ -186,7 +161,7 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <typeparam name="T">要序列化的对象类型。</typeparam>
     /// <param name="t">要序列化的对象。</param>
     /// <param name="stream">要写入的内存流。</param>
-    public void SerializeTo<T>(T t, MemoryStream stream)
+    public static void SerializeTo<T>(T t, MemoryStream stream)
     {
         if (t is ISupportInitialize supportInitialize)
         {
@@ -207,23 +182,9 @@ public sealed class MongoHelper : Singleton<MongoHelper>
     /// <typeparam name="T">要克隆的对象类型。</typeparam>
     /// <param name="t">要克隆的对象。</param>
     /// <returns>克隆后的对象。</returns>
-    public T Clone<T>(T t)
+    public static T Clone<T>(T t)
     {
         return Deserialize<T>(SerializeTo(t));
-    }
-}
-#endif
-#if FANTASY_UNITY
-using System;
-using System.IO;
-namespace Fantasy
-{
-    public sealed class MongoHelper : Singleton<MongoHelper>
-    {
-        public object DeserializeFrom(Type type, MemoryStream stream)
-        {
-            return null;
-        }
     }
 }
 #endif

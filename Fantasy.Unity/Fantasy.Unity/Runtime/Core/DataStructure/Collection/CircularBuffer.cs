@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 namespace Fantasy
 {
@@ -8,7 +10,6 @@ namespace Fantasy
     /// 1、环大小8192，溢出的会自动增加环的大小。
     /// 2、每个块都是一个环形缓存，当溢出的时候会自动添加到下一个环中。
     /// 3、当读取完成后用过的环会放在缓存中，不会销毁掉。
-
     /// <summary>
     /// 自增式缓存类，继承自 Stream 和 IDisposable 接口。
     /// 环形缓存具有自动扩充的特性，但不会收缩，适用于操作不过大的 IO 流。

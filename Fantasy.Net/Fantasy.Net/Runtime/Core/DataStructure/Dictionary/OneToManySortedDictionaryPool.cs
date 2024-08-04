@@ -24,7 +24,11 @@ namespace Fantasy
         /// <returns>新创建的 OneToManySortedDictionaryPool 实例。</returns>
         public static OneToManySortedDictionaryPool<TKey, TSortedKey, TValue> Create()
         {
+#if FANTASY_WEBGL
+            var a = Pool<OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>>.Rent();
+#else
             var a = MultiThreadPool.Rent<OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>>();
+#endif
             a._isDispose = false;
             a.IsPool = true;
             return a;
@@ -42,7 +46,11 @@ namespace Fantasy
 
             _isDispose = true;
             Clear();
+#if FANTASY_WEBGL
+            Pool<OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>>.Return(this);
+#else
             MultiThreadPool.Return(this);
+#endif
         }
     }
 
@@ -59,15 +67,12 @@ namespace Fantasy
         /// 缓存队列的回收限制
         private readonly int _recyclingLimit = 120;
         /// 缓存队列，用于存储已回收的内部排序字典
-        private readonly Queue<SortedDictionary<TSortedKey, TValue>> _queue =
-            new Queue<SortedDictionary<TSortedKey, TValue>>();
+        private readonly Queue<SortedDictionary<TSortedKey, TValue>> _queue = new Queue<SortedDictionary<TSortedKey, TValue>>();
 
         /// <summary>
         /// 创建一个新的 <see cref="OneToManySortedDictionary{TKey, TSortedKey, TValue}"/> 实例。
         /// </summary>
-        protected OneToManySortedDictionary()
-        {
-        }
+        protected OneToManySortedDictionary() { }
 
         /// <summary>
         /// 创建一个新的 <see cref="OneToManySortedDictionary{TKey, TSortedKey, TValue}"/> 实例。设置最大缓存数量

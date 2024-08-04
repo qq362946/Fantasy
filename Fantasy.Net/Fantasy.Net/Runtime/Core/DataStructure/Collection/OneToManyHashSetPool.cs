@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 
 namespace Fantasy
 {
@@ -22,7 +23,11 @@ namespace Fantasy
         /// <returns>创建的实例。</returns>
         public static OneToManyHashSetPool<TKey, TValue> Create()
         {
+#if FANTASY_WEBGL
+            var a = Pool<OneToManyHashSetPool<TKey, TValue>>.Rent();
+#else
             var a = MultiThreadPool.Rent<OneToManyHashSetPool<TKey, TValue>>();
+#endif
             a._isDispose = false;
             a.IsPool = true;
             return a;
@@ -40,7 +45,11 @@ namespace Fantasy
 
             _isDispose = true;
             Clear();
+#if FANTASY_WEBGL
+            Pool<OneToManyHashSetPool<TKey, TValue>>.Return(this);
+#else
             MultiThreadPool.Return(this);
+#endif
         }
     }
 
@@ -61,9 +70,7 @@ namespace Fantasy
         /// <summary>
         /// 初始化 <see cref="OneToManyHashSet{TKey, TValue}"/> 类的新实例。
         /// </summary>
-        public OneToManyHashSet()
-        {
-        }
+        public OneToManyHashSet() { }
 
         /// <summary>
         /// 设置最大缓存数量

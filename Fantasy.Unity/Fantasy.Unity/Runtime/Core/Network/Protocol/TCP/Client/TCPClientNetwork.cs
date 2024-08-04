@@ -1,379 +1,316 @@
+#if !FANTASY_WEBGL
 using System;
 using System.Buffers;
-using System.Collections.Generic;
 using System.IO;
-using System.Net;
+using System.IO.Pipelines;
 using System.Net.Sockets;
 using System.Threading;
-// ReSharper disable ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-// ReSharper disable InconsistentNaming
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
 
 namespace Fantasy
 {
-    /// <summary>
-    /// 消息缓存信息结构。
-    /// </summary>
-    public struct MessageQueue
-    {
-        /// <summary>
-        /// 获取或设置 RPC ID。
-        /// </summary>
-        public uint RpcId;
-        /// <summary>
-        /// 获取或设置路由 ID。
-        /// </summary>
-        public long RouteId;
-        /// <summary>
-        /// 获取或设置路由类型与操作码。
-        /// </summary>
-        public long RouteTypeOpCode;
-        /// <summary>
-        /// 获取或设置消息对象。
-        /// </summary>
-        public object Message;
-        /// <summary>
-        /// 获取或设置内存流。
-        /// </summary>
-        public MemoryStream MemoryStream;
-    }
-    
-    /// <summary>
-    /// TCP客户端网络类，用于管理TCP客户端网络连接。
-    /// </summary>
     public sealed class TCPClientNetwork : AClientNetwork
     {
-        #region 跟随Scene线程
-        
-        private bool _connectionSuccessful;
+        private Socket _socket;
+        private bool _isInnerDispose;
         private long _connectTimeoutId;
-        private Socket _socket; // 用于通信的套接字。
-        private bool _isSending; // 表示是否正在发送数据。
-        private APacketParser _packetParser; // 数据包解析器。
-        private readonly CircularBuffer _sendBuffer = new CircularBuffer(); // 发送数据的环形缓冲区。
-        private readonly CircularBuffer _receiveBuffer = new CircularBuffer(); // 接收数据的环形缓冲区。
-        private readonly SocketAsyncEventArgs _outArgs = new SocketAsyncEventArgs(); // 发送数据异步操作的参数。
-        private readonly SocketAsyncEventArgs _innArgs = new SocketAsyncEventArgs(); // 接收数据异步操作的参数。
-        private Queue<MessageQueue> _messageCache = new Queue<MessageQueue>(); // 数据消息缓存队列。
+        private readonly Pipe _pipe = new Pipe();
+        private ReadOnlyMemoryPacketParser _packetParser;
+        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         
-        private Action OnConnectFail;
-        private Action OnConnectComplete;
-        private Action OnConnectDisconnect;
+        private Action _onConnectFail;
+        private Action _onConnectComplete;
+        private Action _onConnectDisconnect;
+        
+        public uint ChannelId { get; private set; }
 
-        /// <summary>
-        /// 创建一个 TCP协议客户端网络实例。
-        /// </summary>
-        /// <param name="scene">所属场景。</param>
-        /// <param name="networkTarget">网络目标。</param>
-        public TCPClientNetwork(Scene scene, NetworkTarget networkTarget) : base(scene, NetworkType.Client, NetworkProtocolType.TCP, networkTarget)
+        public void Initialize(NetworkTarget networkTarget)
         {
-            // 设置异步操作完成时的回调函数
-            _outArgs.Completed += OnComplete;
-            _innArgs.Completed += OnComplete;
-            // 创建数据包解析器
-            _packetParser = APacketParser.CreatePacketParser(scene, NetworkTarget);
+            base.Initialize(NetworkType.Client, NetworkProtocolType.TCP, networkTarget);
+        }
+        
+        public override void Dispose()
+        {
+            if (IsDisposed || _isInnerDispose)
+            {
+                return;
+            }
+
+            base.Dispose();
+            _isInnerDispose = true;
+            ClearConnectTimeout();
+            
+            if (_cancellationTokenSource.IsCancellationRequested)
+            {
+                try
+                {
+                    _cancellationTokenSource.Cancel();
+                }
+                catch (OperationCanceledException)
+                {
+                    // 通常情况下，此处的异常可以忽略
+                }
+            }
+            
+            _onConnectDisconnect?.Invoke();
+            
+            if (_socket.Connected)
+            {
+                _socket.Disconnect(true);
+                _socket.Close();
+            }
+            
+            _packetParser?.Dispose();
+            ChannelId = 0;
         }
 
         /// <summary>
         /// 连接到远程服务器。
         /// </summary>
-        /// <param name="remoteEndPoint">远程服务器的终端点。</param>
+        /// <param name="remoteAddress">远程服务器的终端点。</param>
         /// <param name="onConnectComplete">连接成功时的回调。</param>
         /// <param name="onConnectFail">连接失败时的回调。</param>
         /// <param name="onConnectDisconnect">连接断开时的回调。</param>
+        /// <param name="isHttps"></param>
         /// <param name="connectTimeout">连接超时时间，单位：毫秒。</param>
-        /// <returns>连接的通道ID。</returns>
-        public override Session Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, int connectTimeout = 5000)
+        /// <returns>连接的会话。</returns>
+        public override Session Connect(string remoteAddress, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000)
         {
             // 如果已经初始化过一次，抛出异常，要求重新实例化
             
             if (IsInit)
             {
-                throw new NotSupportedException($"TCPClientNetwork Id:{Id} Has already been initialized. If you want to call Connect again, please re instantiate it.");
+                throw new NotSupportedException("TCPClientNetwork Has already been initialized. If you want to call Connect again, please re instantiate it.");
             }
             
             IsInit = true;
-            OnConnectFail = onConnectFail;
-            OnConnectComplete = onConnectComplete;
-            OnConnectDisconnect = onConnectDisconnect;
+            _onConnectFail = onConnectFail;
+            _onConnectComplete = onConnectComplete;
+            _onConnectDisconnect = onConnectDisconnect;
             // 设置连接超时定时器
-            _connectTimeoutId = Scene.TimerComponent.Core.OnceTimer(connectTimeout, () =>
+            _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () =>
             {
-                OnConnectFail?.Invoke();
+                _onConnectFail?.Invoke();
                 Dispose();
             });
-            // 创建异步操作参数
+            _packetParser = PacketParserFactory.CreateClientReadOnlyMemoryPacket(this);
+            var remoteEndPoint = NetworkHelper.GetIPEndPoint(remoteAddress);
+            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _socket.NoDelay = true;
+            _socket.SetSocketBufferToOsLimit();
             var outArgs = new SocketAsyncEventArgs
             {
                 RemoteEndPoint = remoteEndPoint
             };
-            outArgs.Completed += OnComplete;
-            // 创建套接字并设置参数
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            _socket.NoDelay = true;
-            _socket.SetSocketBufferToOsLimit();
-            // 如果连接成功，直接返回；否则继续执行连接操作
+            outArgs.Completed += OnConnectSocketCompleted;
             if (!_socket.ConnectAsync(outArgs))
             {
-                // 手动触发连接完成事件
-                OnNetworkConnectComplete(outArgs);
+                OnReceiveSocketComplete();
             }
-            // 创建一个新的Session对象
             Session = Session.Create(this, remoteEndPoint);
             return Session;
         }
 
-        /// <summary>
-        /// 在网络连接成功时的回调方法。
-        /// </summary>
-        /// <param name="asyncEventArgs"></param>
-        private void OnNetworkConnectComplete(SocketAsyncEventArgs asyncEventArgs)
+        private void OnConnectSocketCompleted(object sender, SocketAsyncEventArgs asyncEventArgs)
         {
-            if (IsDisposed)
+            if (_cancellationTokenSource.IsCancellationRequested)
             {
                 return;
             }
-            
-            if (asyncEventArgs.SocketError != SocketError.Success)
+
+            if (asyncEventArgs.LastOperation == SocketAsyncOperation.Connect)
             {
-                Log.Error($"Unable to connect to the target server asyncEventArgs:{asyncEventArgs.SocketError}");
-                
-                OnConnectFail?.Invoke();
-                Dispose();
-                return;
+                if (asyncEventArgs.SocketError == SocketError.Success)
+                {
+                    Scene.ThreadSynchronizationContext.Post(() => OnReceiveSocketComplete());
+                }
+                else
+                {
+                    Scene.ThreadSynchronizationContext.Post(() =>
+                    {
+                        _onConnectFail?.Invoke();
+                        Dispose();
+                    });
+                }
             }
-            // 发送缓存中的消息
-            while (_messageCache.TryDequeue(out var messageQueue))
-            {
-                var stream = _packetParser.Pack(
-                    messageQueue.RpcId, messageQueue.RouteTypeOpCode, messageQueue.RouteId,
-                    messageQueue.MemoryStream, messageQueue.Message);
-                Send(stream);
-            }
-            _connectionSuccessful = true;
-            ClearConnectTimeout();
-            OnConnectComplete?.Invoke();
-            Receive();
         }
+        
+        private void OnReceiveSocketComplete()
+        {
+            ClearConnectTimeout();
+            _onConnectComplete?.Invoke();
+            ReadPipeDataAsync().Coroutine();
+            ReceiveSocketAsync().Coroutine();
+        }
+        
+        #region ReceiveSocket
+
+        private async FTask ReceiveSocketAsync()
+        {
+            while (!_cancellationTokenSource.IsCancellationRequested)
+            {
+                try
+                {
+                    var memory = _pipe.Writer.GetMemory(8192);
+                    var count = await _socket.ReceiveAsync(memory, SocketFlags.None, _cancellationTokenSource.Token);
+                    _pipe.Writer.Advance(count);
+                    await _pipe.Writer.FlushAsync();
+                }
+                catch (SocketException)
+                {
+                    Dispose();
+                    break;
+                }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
+                catch (ObjectDisposedException)
+                {
+                    Dispose();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"Unexpected exception: {ex.Message}");
+                }
+            }
+
+            await _pipe.Writer.CompleteAsync();
+        }
+
+        #endregion
+        
+        #region ReceivePipeData
+
+        private async FTask ReadPipeDataAsync()
+        {
+            var pipeReader = _pipe.Reader;
+            while (!_cancellationTokenSource.IsCancellationRequested)
+            {
+                ReadResult result = default;
+            
+                try
+                {
+                    result = await pipeReader.ReadAsync(_cancellationTokenSource.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                    // 出现这个异常表示取消了_cancellationTokenSource。一般Channel断开会取消。
+                    break;
+                }
+                
+                var buffer = result.Buffer;
+                var consumed = buffer.Start;
+                var examined = buffer.End;
+            
+                while (TryReadMessage(ref buffer, out var message))
+                {
+                    ReceiveData(ref message);
+                    consumed = buffer.Start;
+                }
+            
+                if (result.IsCompleted)
+                {
+                    break;
+                }
+            
+                pipeReader.AdvanceTo(consumed, examined);
+            }
+
+            await pipeReader.CompleteAsync();
+        }
+
+        private bool TryReadMessage(ref ReadOnlySequence<byte> buffer, out ReadOnlyMemory<byte> message)
+        {
+            if (buffer.Length == 0)
+            {
+                message = default;
+                return false;
+            }
+        
+            message = buffer.First;
+        
+            if (message.Length == 0)
+            {
+                message = default;
+                return false;
+            }
+        
+            buffer = buffer.Slice(message.Length);
+            return true;
+        }
+
+        private void ReceiveData(ref ReadOnlyMemory<byte> buffer)
+        {
+            try
+            {
+                while (_packetParser.UnPack(ref buffer, out var packInfo))
+                {
+                    if (_cancellationTokenSource.IsCancellationRequested)
+                    {
+                        return;
+                    }
+                    Session.Receive(packInfo);
+                }
+            }
+            catch (ScanException e)
+            {
+                Log.Warning(e.Message);
+                Dispose();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+                Dispose();
+            }
+        }
+
+        #endregion
 
         #region Send
 
         public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
         {
-            if (IsDisposed)
-            {
-                return;
-            }
-            
-            // 在连接没有创建完成之前，需要将消息放进队列中，等待连接成功后再发送
-
-            if (!_connectionSuccessful)
-            {
-                _messageCache.Enqueue(new MessageQueue()
-                {
-                    RpcId = rpcId,
-                    RouteId = routeId,
-                    RouteTypeOpCode = routeTypeOpCode,
-                    Message = message,
-                    MemoryStream = memoryStream
-                });
-                
-                return;
-            }
-            
-            Send(_packetParser.Pack(rpcId, routeTypeOpCode, routeId, memoryStream, message));
+            Send(_packetParser.Pack(ref rpcId, ref routeTypeOpCode, ref routeId, memoryStream, message)).Coroutine();
         }
 
-        public override void Send(MemoryStream memoryStream)
+        private async FTask Send(MemoryStream memoryStream)
         {
-            _sendBuffer.Write(memoryStream);
-            
-            // 因为memoryStream对象池出来的、所以需要手动回收下
-            
-            memoryStream.Dispose();
-            
-            if (_isSending)
+            try
             {
-                return;
-            }
-            
-            Send();
-        }
-        
-        private void Send()
-        {
-            if (_isSending || IsDisposed)
-            {
-                return;
-            }
+                await _socket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Length), SocketFlags.None);
 
-            for (;;)
-            {
-                try
-                {
-                    if (_sendBuffer.Length == 0)
-                    {
-                        _isSending = false;
-                        return;
-                    }
-                    
-                    _isSending = true;
-                    
-                    var sendSize = CircularBuffer.ChunkSize - _sendBuffer.FirstIndex;
-                    
-                    if (sendSize > _sendBuffer.Length)
-                    {
-                        sendSize = (int) _sendBuffer.Length;
-                    }
-
-                    _outArgs.SetBuffer(_sendBuffer.First, _sendBuffer.FirstIndex, sendSize);
-                    
-                    if (_socket.SendAsync(_outArgs))
-                    {
-                        return;
-                    }
-                    
-                    SendCompletedHandler(_outArgs);
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e);
-                }
             }
-        }
-        
-        private void SendCompletedHandler(SocketAsyncEventArgs asyncEventArgs)
-        {
-            if (asyncEventArgs.SocketError != SocketError.Success || asyncEventArgs.BytesTransferred == 0)
+            catch (SocketException)
             {
-                return;
-            }
-            
-            _sendBuffer.FirstIndex += asyncEventArgs.BytesTransferred;
-        
-            if (_sendBuffer.FirstIndex == CircularBuffer.ChunkSize)
-            {
-                _sendBuffer.FirstIndex = 0;
-                _sendBuffer.RemoveFirst();
-            }
-        }
-        
-        private void OnSendComplete(SocketAsyncEventArgs asyncEventArgs)
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-            
-            _isSending = false;
-            SendCompletedHandler(asyncEventArgs);
-            
-            if (_sendBuffer.Length > 0)
-            {
-                Send();
-            }
-        }
-
-        #endregion
-
-        #region Receive
-
-        private void Receive()
-        {
-            while (true)
-            {
-                try
-                {
-                    if (IsDisposed)
-                    {
-                        return;
-                    }
-                    
-                    var size = CircularBuffer.ChunkSize - _receiveBuffer.LastIndex;
-                    _innArgs.SetBuffer(_receiveBuffer.Last, _receiveBuffer.LastIndex, size);
-                    
-                    if (_socket.ReceiveAsync(_innArgs))
-                    {
-                        return;
-                    }
-                    
-                    ReceiveCompletedHandler(_innArgs);
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e);
-                }
-            }
-        }
-        
-        private void ReceiveCompletedHandler(SocketAsyncEventArgs asyncEventArgs)
-        {
-            if (asyncEventArgs.SocketError != SocketError.Success)
-            {
-                return;
-            }
-
-            if (asyncEventArgs.BytesTransferred == 0)
-            {
+                // 一般发生在地方Socket断开时出现，所以也额可以忽略。
                 Dispose();
-                return;
             }
-            
-            _receiveBuffer.LastIndex += asyncEventArgs.BytesTransferred;
-                
-            if (_receiveBuffer.LastIndex >= CircularBuffer.ChunkSize)
+            catch (OperationCanceledException)
             {
-                _receiveBuffer.AddLast();
-                _receiveBuffer.LastIndex = 0;
+                // 取消操作，可以忽略这个异常。这个属于正常逻辑
             }
-            
-            while (true)
+            catch (Exception e)
             {
-                try
-                {
-                    if (IsDisposed)
-                    {
-                        return;
-                    }
-
-                    if (!_packetParser.UnPack(_receiveBuffer, out var packInfo))
-                    {
-                        break;
-                    }
-
-                    Session.Receive(packInfo);
-                }
-                catch (ScanException e)
-                {
-                    Log.Warning($"{e}");
-                    Dispose();
-                }
-                catch (Exception e)
-                {
-                    Log.Error($"{e}");
-                    Dispose();
-                }
+                Log.Error(e);
             }
-        }
-        
-        private void OnReceiveComplete(SocketAsyncEventArgs asyncEventArgs)
-        {
-            ReceiveCompletedHandler(asyncEventArgs);
-            Receive();
+            finally
+            {
+                ReturnMemoryStream(memoryStream);
+            }
         }
 
         #endregion
         
-        /// <summary>
-        /// 从网络中移除指定通道。
-        /// </summary>
-        /// <param name="channelId">要移除的通道 ID。</param>
         public override void RemoveChannel(uint channelId)
         {
             Dispose();
         }
-
+        
         private void ClearConnectTimeout()
         {
             if (_connectTimeoutId == 0)
@@ -381,86 +318,8 @@ namespace Fantasy
                 return;
             }
 
-            Scene.TimerComponent.Core.Remove(ref _connectTimeoutId);
+            Scene.TimerComponent.Net.Remove(ref _connectTimeoutId);
         }
-        
-        /// <summary>
-        /// 释放资源并断开网络连接。
-        /// </summary>
-        public override void Dispose()
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-            
-            IsDisposed = true;
-            
-            if (_socket.Connected)
-            {
-                OnConnectDisconnect?.Invoke();
-                _socket.Disconnect(true);
-                _socket.Close();
-            }
-
-            _outArgs?.Dispose();
-            _innArgs?.Dispose();
-            _sendBuffer?.Dispose();
-            _receiveBuffer?.Dispose();
-            _packetParser?.Dispose();
-            
-            ClearConnectTimeout();
-
-            ChannelId = 0;
-            _connectionSuccessful = false;
-            _packetParser = null;
-            _isSending = false;
-
-            if (_messageCache != null)
-            {
-                _messageCache.Clear();
-                _messageCache = null;
-            }
-
-            base.Dispose();
-        }
-        
-        #endregion
-        
-        #region 网络线程（由Socket底层产生的线程）
-
-        private void OnComplete(object sender, SocketAsyncEventArgs asyncEventArgs)
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-
-            switch (asyncEventArgs.LastOperation)
-            {
-                case SocketAsyncOperation.Connect:
-                {
-                    ThreadSynchronizationContext.Post(() => OnNetworkConnectComplete(asyncEventArgs));
-                    break;
-                }
-                case SocketAsyncOperation.Receive:
-                {
-                    ThreadSynchronizationContext.Post(() => OnReceiveComplete(asyncEventArgs));
-                    break;
-                }
-                case SocketAsyncOperation.Send:
-                {
-                    ThreadSynchronizationContext.Post(() => OnSendComplete(asyncEventArgs));
-                    break;
-                }
-                case SocketAsyncOperation.Disconnect:
-                {
-                    ThreadSynchronizationContext.Post(Dispose);
-                    break;
-                }
-            }
-        }
-
-        #endregion
     }
 }
+#endif

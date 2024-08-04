@@ -1,36 +1,29 @@
 using System;
 using System.IO;
 // ReSharper disable UnassignedField.Global
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 
 namespace Fantasy
 {
-    /// <summary>
-    /// 抽象网络消息调度器基类，用于处理网络消息的调度和处理逻辑。
-    /// </summary>
     public abstract class ANetworkMessageScheduler
     {
-        /// <summary>
-        /// 消息分发组件。
-        /// </summary>
-        protected MessageDispatcherComponent MessageDispatcherComponent;
-        /// <summary>
-        /// 消息发送组件。
-        /// </summary>
-        protected NetworkMessagingComponent NetworkMessagingComponent;
-        /// <summary>
-        /// 用于回复Ping消息的响应实例。
-        /// </summary>
+        protected readonly Scene Scene;
+#if FANTASY_NET
+        protected readonly Process Process;
+#endif
+        protected readonly MessageDispatcherComponent MessageDispatcherComponent;
+        protected readonly NetworkMessagingComponent NetworkMessagingComponent;
+       
         private readonly PingResponse _pingResponse = new PingResponse();
 
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="messageDispatcherComponent">消息分发组件。</param>
-        /// <param name="networkMessagingComponent">消息发送组件。</param>
-        protected ANetworkMessageScheduler(MessageDispatcherComponent messageDispatcherComponent, NetworkMessagingComponent networkMessagingComponent)
+        protected ANetworkMessageScheduler(Scene scene)
         {
-            MessageDispatcherComponent = messageDispatcherComponent;
-            NetworkMessagingComponent = networkMessagingComponent;
+            Scene = scene;
+#if FANTASY_NET
+            Process = scene.Process;
+#endif
+            MessageDispatcherComponent = scene.MessageDispatcherComponent;
+            NetworkMessagingComponent = scene.NetworkMessagingComponent;
         }
 
         /// <summary>
@@ -51,9 +44,10 @@ namespace Fantasy
                     return;
                 }
 
-                if (packInfo.ProtocolCode == Opcode.PingRequest)
+                if (packInfo.ProtocolCode == OpCode.PingRequest)
                 {
                     _pingResponse.Now = TimeHelper.Now;
+                    session.LastReceiveTime = _pingResponse.Now;
                     session.Send(_pingResponse, packInfo.RpcId);
                     return;
                 }
@@ -67,14 +61,14 @@ namespace Fantasy
 
                 switch (packInfo.ProtocolCode)
                 {
-                    case Opcode.PingResponse:
-                    case >= Opcode.OuterRouteMessage:
+                    case OpCode.PingResponse:
+                    case >= OpCode.OuterRouteMessage:
                     {
                         disposePackInfo = false;
                         await Handler(session, messageType, packInfo);
                         return;
                     }
-                    case < Opcode.OuterResponse:
+                    case < OpCode.OuterResponse:
                     {
                         var message = packInfo.Deserialize(messageType);
                         MessageDispatcherComponent.MessageHandler(session, messageType, message, packInfo.RpcId, packInfo.ProtocolCode);
@@ -116,74 +110,9 @@ namespace Fantasy
             }
         }
 
-        /// <summary>
-        /// 内部调度网络消息的方法。
-        /// </summary>
-        /// <param name="session">会话对象。</param>
-        /// <param name="rpcId">RPC标识。</param>
-        /// <param name="routeId">路由标识。</param>
-        /// <param name="protocolCode">协议代码。</param>
-        /// <param name="routeTypeCode">路由类型代码。</param>
-        /// <param name="message">要处理的消息对象。</param>
-        /// <returns>异步任务。</returns>
-        public async FTask InnerScheduler(Session session, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, object message)
-        {
-            var messageType = message.GetType();
-            
-            try
-            {
-                if (session.IsDisposed)
-                {
-                    return;
-                }
-
-                switch (protocolCode)
-                {
-                    case >= Opcode.OuterRouteMessage:
-                    {
-                        await InnerHandler(session, rpcId, routeId, protocolCode, routeTypeCode, messageType, message);
-                        return;
-                    }
-                    case < Opcode.OuterResponse:
-                    {
-                        MessageDispatcherComponent.MessageHandler(session, messageType, message, rpcId, protocolCode);
-                        return;
-                    }
-                    default:
-                    {
-#if FANTASY_NET
-                        // 服务器之间发送消息因为走的是MessageHelper、所以接收消息的回调也应该放到MessageHelper里处理
-                        // MessageHelper.ResponseHandler(rpcId, (IResponse)message);
-#endif
-                        return;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error($"NetworkMessageScheduler error messageProtocolCode:{protocolCode} messageType:{messageType} SessionId {session.Id} IsDispose {session.IsDisposed} {e}");
-            }
-        }
-
-        /// <summary>
-        /// 处理外部网络消息的抽象方法。
-        /// </summary>
-        /// <param name="session">会话对象。</param>
-        /// <param name="messageType">消息类型。</param>
-        /// <param name="packInfo">消息包信息。</param>
-        /// <returns>异步任务。</returns>
         protected abstract FTask Handler(Session session, Type messageType, APackInfo packInfo);
-        /// <summary>
-        /// 处理内部网络消息的抽象方法。
-        /// </summary>
-        /// <param name="session">会话对象。</param>
-        /// <param name="rpcId">RPC标识。</param>
-        /// <param name="routeId">路由标识。</param>
-        /// <param name="protocolCode">协议代码。</param>
-        /// <param name="routeTypeCode">路由类型代码。</param>
-        /// <param name="messageType">消息类型。</param>
-        /// <param name="message">要处理的消息对象。</param>
-        /// <returns>异步任务。</returns>
-        protected abstract FTask InnerHandler(Session session, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, Type messageType, object message);
+#if FANTASY_NET
+        public abstract FTask InnerScheduler(Session session, Type messageType, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, object message);
+#endif
     }
 }

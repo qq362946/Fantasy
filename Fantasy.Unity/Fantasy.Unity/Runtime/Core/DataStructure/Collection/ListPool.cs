@@ -28,7 +28,11 @@ namespace Fantasy
 
             _isDispose = true;
             Clear();
+#if FANTASY_WEBGL
+            Pool<ListPool<T>>.Return(this);
+#else
             MultiThreadPool.Return(this);
+#endif
         }
 
         /// <summary>
@@ -38,15 +42,19 @@ namespace Fantasy
         /// <returns>创建的实例。</returns>
         public static ListPool<T> Create(params T[] args)
         {
+#if FANTASY_WEBGL
+            var list = Pool<ListPool<T>>.Rent();
+#else
             var list = MultiThreadPool.Rent<ListPool<T>>();
+#endif
             list._isDispose = false;
             list.IsPool = true;
-            
+
             if (args != null)
             {
                 list.AddRange(args);
             }
-            
+
             return list;
         }
 
@@ -57,15 +65,19 @@ namespace Fantasy
         /// <returns>创建的实例。</returns>
         public static ListPool<T> Create(List<T> args)
         {
+#if FANTASY_WEBGL
+            var list = Pool<ListPool<T>>.Rent();
+#else
             var list = MultiThreadPool.Rent<ListPool<T>>();
+#endif
             list._isDispose = false;
             list.IsPool = true;
-            
+
             if (args != null)
             {
                 list.AddRange(args);
             }
-            
+
             return list;
         }
     }

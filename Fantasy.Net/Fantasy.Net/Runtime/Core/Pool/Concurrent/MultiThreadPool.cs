@@ -1,6 +1,8 @@
+#if !FANTASY_WEBGL
 using System;
 using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
+#pragma warning disable CS8603 // Possible null reference return.
 
 namespace Fantasy
 {
@@ -9,54 +11,27 @@ namespace Fantasy
     /// </summary>
     public static class MultiThreadPool
     {
-        private static readonly Func<Type, MultiThreadPoolQueue> Func = type => new MultiThreadPoolQueue(type, 2000);
         private static readonly ConcurrentDictionary<Type, MultiThreadPoolQueue> ObjectPools = new ConcurrentDictionary<Type, MultiThreadPoolQueue>();
-        
-        /// <summary>
-        /// 从对象池中获取一个对象实例。如果池为空，则创建一个新的对象。
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static T Rent<T>() where T : class
+
+        public static T Rent<T>() where T : IPool, new()
         {
-            return Rent(typeof(T)) as T;
-        }
-        
-        /// <summary>
-        /// 从对象池中获取一个对象实例。如果池为空，则创建一个新的对象。
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static object Rent(Type type)
-        {
-            return typeof(IPool).IsAssignableFrom(type) ? GetPool(type).Rent() : Activator.CreateInstance(type);
+            return ObjectPools.GetOrAdd(typeof(T), t => new MultiThreadPoolQueue(2000, () => new T())).Rent<T>();
         }
 
-        /// <summary>
-        /// 将对象实例返回到对象池中。
-        /// </summary>
-        /// <param name="obj"></param>
-        public static void Return(object obj)
+        public static IPool Rent(Type type)
         {
-            if (obj is IPool iPool)
+            return ObjectPools.GetOrAdd(type, t => new MultiThreadPoolQueue(2000, CreateInstance.CreateIPool(type))).Rent();
+        }
+
+        public static void Return<T>(T obj) where T : IPool, new()
+        {
+            if (!obj.IsPool)
             {
-                if (iPool.IsPool)
-                {
-                    return;
-                }
-
-                iPool.IsPool = true;
+                return;
             }
-        
-            var type = obj.GetType();
-            var pool = GetPool(type);
-            pool.Return(obj);
-        }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static MultiThreadPoolQueue GetPool(Type type)
-        {
-            return ObjectPools.GetOrAdd(type, Func);
+            ObjectPools.GetOrAdd(typeof(T), t => new MultiThreadPoolQueue(2000, () => new T())).Return(obj);
         }
     }
 }
+#endif

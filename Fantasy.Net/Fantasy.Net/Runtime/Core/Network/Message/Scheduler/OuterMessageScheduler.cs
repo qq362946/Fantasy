@@ -11,10 +11,7 @@ namespace Fantasy
 #if FANTASY_UNITY
     public sealed class OuterMessageScheduler : ANetworkMessageScheduler
     {
-        public OuterMessageScheduler(Scene scene) : base(scene.MessageDispatcherComponent, scene.NetworkMessagingComponent)
-        {
-            
-        }
+        public OuterMessageScheduler(Scene scene) : base(scene) { }
         
         /// <summary>
         /// 在Unity环境下，处理外部消息的方法。
@@ -26,30 +23,12 @@ namespace Fantasy
         {
             throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode} messageType:{messageType}");
         }
-
-        /// <summary>
-        /// 在Unity环境下，处理内部消息的方法。
-        /// </summary>
-        /// <param name="session">网络会话。</param>
-        /// <param name="rpcId">RPC请求ID。</param>
-        /// <param name="routeId">消息路由ID。</param>
-        /// <param name="protocolCode">协议码。</param>
-        /// <param name="routeTypeCode">路由类型码。</param>
-        /// <param name="messageType">消息类型。</param>
-        /// <param name="message">消息对象。</param>
-        protected override FTask InnerHandler(Session session, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, Type messageType, object message)
-        {
-            throw new NotImplementedException();
-        }
     }
 #endif
 #if FANTASY_NET
     public sealed class OuterMessageScheduler : ANetworkMessageScheduler
     {
-        public OuterMessageScheduler(Scene scene) : base(scene.MessageDispatcherComponent, scene.NetworkMessagingComponent)
-        {
-            
-        }
+        public OuterMessageScheduler(Scene scene) : base(scene) { }
         
         /// <summary>
         /// 在FantasyNet环境下，处理外部消息的方法。
@@ -59,8 +38,7 @@ namespace Fantasy
         /// <param name="packInfo">消息封包信息。</param>
         protected override async FTask Handler(Session session, Type messageType, APackInfo packInfo)
         {
-            await FTask.CompletedTask;
-            if (packInfo.ProtocolCode >= Opcode.InnerRouteMessage)
+            if (packInfo.ProtocolCode >= OpCode.InnerRouteMessage)
             {
                 throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode} messageType:{messageType}");
             }
@@ -86,20 +64,20 @@ namespace Fantasy
                         
                         switch (packInfo.ProtocolCode)
                         {
-                            case > Opcode.OuterRouteRequest:
+                            case > OpCode.OuterRouteRequest:
                             {
-                                var runtimeId = session.RuntimeId;
-                                var response = await addressableRouteComponent.Call(packInfo.RouteTypeCode, messageType, packInfo.CreateMemoryStream());
+                                var runtimeId = session.RunTimeId;
+                                var response = await addressableRouteComponent.Call(packInfo.RouteTypeCode, messageType, packInfo.MemoryStream);
                                 // session可能已经断开了，所以这里需要判断
-                                if (session.RuntimeId == runtimeId)
+                                if (session.RunTimeId == runtimeId)
                                 {
                                     session.Send(response, packInfo.RpcId);
                                 }
                                 return;
                             }
-                            case > Opcode.OuterRouteMessage:
+                            case > OpCode.OuterRouteMessage:
                             {
-                                addressableRouteComponent.Send(packInfo.RouteTypeCode, messageType, packInfo.CreateMemoryStream());
+                                addressableRouteComponent.Send(packInfo.RouteTypeCode, messageType, packInfo.MemoryStream);
                                 return;
                             }
                         }
@@ -124,21 +102,20 @@ namespace Fantasy
                         
                         switch (packInfo.ProtocolCode)
                         {
-                            case > Opcode.OuterRouteRequest:
+                            case > OpCode.OuterRouteRequest:
                             {
-                                var runtimeId = session.RuntimeId;
-                                var response = await NetworkMessagingComponent.CallInnerRoute(routeId, packInfo.RouteTypeCode, messageType, packInfo.CreateMemoryStream());
+                                var runtimeId = session.RunTimeId;
+                                var response = await NetworkMessagingComponent.CallInnerRoute(routeId, packInfo.RouteTypeCode, messageType, packInfo.MemoryStream);
                                 // session可能已经断开了，所以这里需要判断
-                                if (session.RuntimeId == runtimeId)
+                                if (session.RunTimeId == runtimeId)
                                 {
                                     session.Send(response, packInfo.RpcId);
                                 }
-                        
                                 return;
                             }
-                            case > Opcode.OuterRouteMessage:
+                            case > OpCode.OuterRouteMessage:
                             {
-                                NetworkMessagingComponent.SendInnerRoute(routeId, packInfo.RouteTypeCode, packInfo.CreateMemoryStream());
+                                NetworkMessagingComponent.SendInnerRoute(routeId, packInfo.RouteTypeCode, packInfo.MemoryStream);
                                 return;
                             }
                         }
@@ -160,19 +137,9 @@ namespace Fantasy
             throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode} messageType:{messageType}");
         }
 
-        /// <summary>
-        /// 在FantasyNet环境下，处理内部消息的方法。
-        /// </summary>
-        /// <param name="session">网络会话。</param>
-        /// <param name="rpcId">RPC请求ID。</param>
-        /// <param name="routeId">消息路由ID。</param>
-        /// <param name="protocolCode">协议码。</param>
-        /// <param name="routeTypeCode">路由类型码。</param>
-        /// <param name="messageType">消息类型。</param>
-        /// <param name="message">消息对象。</param>
-        protected override FTask InnerHandler(Session session, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, Type messageType, object message)
+        public override FTask InnerScheduler(Session session, Type messageType, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, object message)
         {
-            throw new NotSupportedException($"OuterMessageScheduler NotSupported InnerHandler");
+            throw new NotImplementedException();
         }
     }
 #endif

@@ -1,1 +1,1 @@
-{"A2C_TestResponse":160000001,"C2A_TestRequest":110000001,"TestServerMessage":120001001,"TestServerRequest":130001001,"TestServerResponse":170001001}
+{"A2C_TestResponse":160000001,"C2A_TestMessage":100000001,"C2A_TestRequest":110000001,"I_A2G_PingResponse":260001002,"I_A2G_TestResponse":260001001,"I_G2A_PingRequest":220001002,"I_G2A_TestMessage":210001001,"I_G2A_TestRequest":220001001}

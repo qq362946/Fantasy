@@ -1,12 +1,11 @@
 using System;
-using System.Buffers;
 using System.IO;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Fantasy
 {
-    /// <summary>
-    /// 抽象的数据包信息基类，用于存储解析得到的数据包信息。
-    /// </summary>
     public abstract class APackInfo : IDisposable
     {
         /// <summary>
@@ -32,22 +31,17 @@ namespace Fantasy
         /// <summary>
         /// 内存块的所有者，用于存储数据包的内存数据。
         /// </summary>
-        public MemoryStream MemoryStream;
+        public MemoryStream MemoryStream { get; protected set; }
+        /// <summary>
+        /// 所属于的Network
+        /// </summary>
+        protected ANetwork Network;
         /// <summary>
         /// 获取一个值，表示是否已经被释放。
         /// </summary>
         public bool IsDisposed;
-        /// <summary>
-        /// 根据指定类型反序列化消息体。
-        /// </summary>
-        /// <param name="messageType">要反序列化成的类型。</param>
-        /// <returns>反序列化得到的消息体。</returns>
         public abstract object Deserialize(Type messageType);
-        /// <summary>
-        /// 创建用于写入数据包消息体的内存流。
-        /// </summary>
-        /// <returns>创建的内存流。</returns>
-        public abstract MemoryStream CreateMemoryStream();
+        public abstract MemoryStream RentMemoryStream(int size = 0);
         /// <summary>
         /// 释放资源，包括内存块等。
         /// </summary>
@@ -63,9 +57,10 @@ namespace Fantasy
             ProtocolCode = 0;
             RouteTypeCode = 0;
             MessagePacketLength = 0;
-            MemoryStream.Dispose();
+            Network.ReturnMemoryStream(MemoryStream);
             MemoryStream = null;
             IsDisposed = true;
+            Network = null;
         }
     }
 }

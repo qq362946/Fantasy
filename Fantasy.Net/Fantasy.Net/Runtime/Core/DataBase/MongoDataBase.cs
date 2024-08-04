@@ -3,6 +3,8 @@ using System.Linq.Expressions;
 
 using MongoDB.Bson;
 using MongoDB.Driver;
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 namespace Fantasy;
 
@@ -16,7 +18,7 @@ public sealed class MongoDataBase : IDateBase
     private string _connectionString;
     private MongoClient _mongoClient;
     private IMongoDatabase _mongoDatabase;
-    private CoroutineLockQueueType _dataBaseLock;
+    private CoroutineLock _dataBaseLock;
     private readonly HashSet<string> _collections = new HashSet<string>();
 
     /// <summary>
@@ -159,7 +161,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>查询到的文档。</returns>
     public async FTask<T> Query<T>(long id, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(id))
+        using (await _dataBaseLock.Wait(id))
         {
             var cursor = await GetCollection<T>(collection).FindAsync(d => d.Id == id);
             var v = await cursor.FirstOrDefaultAsync();
@@ -178,7 +180,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的文档数量和日期列表。</returns>
     public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             var count = await Count(filter);
             var dates = await QueryByPage(filter, pageIndex, pageSize, collection);
@@ -198,7 +200,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的文档数量和日期列表。</returns>
     public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             var count = await Count(filter);
 
@@ -219,7 +221,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的文档列表。</returns>
     public async FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             return await GetCollection<T>(collection).Find(filter).Skip((pageIndex - 1) * pageSize)
                 .Limit(pageSize)
@@ -239,7 +241,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的文档列表。</returns>
     public async FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             var projection = Builders<T>.Projection.Include("");
 
@@ -266,7 +268,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的文档列表。</returns>
     public async FTask<List<T>> QueryByPageOrderBy<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             if (isAsc)
             {
@@ -288,7 +290,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的第一个文档，如果未找到则为 null。</returns>
     public async FTask<T?> First<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             var cursor = await GetCollection<T>(collection).FindAsync(filter);
 
@@ -306,7 +308,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的第一个文档。</returns>
     public async FTask<T> First<T>(string json, string[] cols, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             var projection = Builders<T>.Projection.Include("");
             
@@ -336,7 +338,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的文档列表。</returns>
     public async FTask<List<T>> QueryOrderBy<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             if (isAsc)
             {
@@ -357,7 +359,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的文档列表。</returns>
     public async FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             var cursor = await GetCollection<T>(collection).FindAsync(filter);
             var v = await cursor.ToListAsync();
@@ -373,7 +375,7 @@ public sealed class MongoDataBase : IDateBase
     /// <param name="result">查询结果存储列表。</param>
     public async FTask Query(long id, List<string> collectionNames, List<Entity> result)
     {
-        using (await _dataBaseLock.Lock(id))
+        using (await _dataBaseLock.Wait(id))
         {
             if (collectionNames == null || collectionNames.Count == 0)
             {
@@ -405,7 +407,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的文档列表。</returns>
     public async FTask<List<T>> QueryJson<T>(string json, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
             var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition);
@@ -424,7 +426,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的文档列表。</returns>
     public async FTask<List<T>> QueryJson<T>(string json, string[] cols, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             var projection = Builders<T>.Projection.Include("");
             
@@ -453,7 +455,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的文档列表。</returns>
     public async FTask<List<T>> QueryJson<T>(long taskId, string json, string collection = null) where T : Entity
     {
-        using (await _dataBaseLock.Lock(taskId))
+        using (await _dataBaseLock.Wait(taskId))
         {
             FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
             var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition);
@@ -472,7 +474,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>满足条件的文档列表。</returns>
     public async FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string[] cols, string collection = null) where T : class
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             var projection = Builders<T>.Projection.Include(cols[0]);
 
@@ -503,9 +505,9 @@ public sealed class MongoDataBase : IDateBase
             return;
         }
 
-        var clone = MongoHelper.Instance.Clone(entity);
+        var clone = MongoHelper.Clone(entity);
         
-        using (await _dataBaseLock.Lock(clone.Id))
+        using (await _dataBaseLock.Wait(clone.Id))
         {
             await GetCollection(collection ?? clone.GetType().Name).ReplaceOneAsync(
                 (IClientSessionHandle) transactionSession, d => d.Id == clone.Id, clone,
@@ -528,9 +530,9 @@ public sealed class MongoDataBase : IDateBase
             return;
         }
 
-        var clone = MongoHelper.Instance.Clone(entity);
+        var clone = MongoHelper.Clone(entity);
 
-        using (await _dataBaseLock.Lock(clone.Id))
+        using (await _dataBaseLock.Wait(clone.Id))
         {
             await GetCollection(collection ?? clone.GetType().Name).ReplaceOneAsync(d => d.Id == clone.Id, clone,
                 new ReplaceOptions {IsUpsert = true});
@@ -552,9 +554,9 @@ public sealed class MongoDataBase : IDateBase
             return;
         }
 
-        var clone = MongoHelper.Instance.Clone(entity);
+        var clone = MongoHelper.Clone(entity);
 
-        using (await _dataBaseLock.Lock(clone.Id))
+        using (await _dataBaseLock.Wait(clone.Id))
         {
             await GetCollection(collection ?? clone.GetType().Name).ReplaceOneAsync(d => d.Id == clone.Id, clone, new ReplaceOptions {IsUpsert = true});
         }
@@ -573,9 +575,9 @@ public sealed class MongoDataBase : IDateBase
             return;
         }
 
-        var clones = MongoHelper.Instance.Clone(entities);
+        var clones = MongoHelper.Clone(entities);
 
-        using (await _dataBaseLock.Lock(id))
+        using (await _dataBaseLock.Wait(id))
         {
             foreach (Entity clone in clones)
             {
@@ -613,7 +615,7 @@ public sealed class MongoDataBase : IDateBase
     /// <param name="collection">集合名称。</param>
     public async FTask InsertBatch<T>(IEnumerable<T> list, string collection = null) where T : Entity, new()
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             await GetCollection<T>(collection ?? typeof(T).Name).InsertManyAsync(list);
         }
@@ -627,7 +629,7 @@ public sealed class MongoDataBase : IDateBase
     /// <param name="collection">集合名称。</param>
     public async FTask InsertBatch<T>(object transactionSession, IEnumerable<T> list, string collection = null) where T : Entity, new()
     {
-        using (await _dataBaseLock.Lock(RandomHelper.RandInt64()))
+        using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
         {
             await GetCollection<T>(collection ?? typeof(T).Name).InsertManyAsync((IClientSessionHandle) transactionSession, list);
         }
@@ -646,7 +648,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>删除的实体数量。</returns>
     public async FTask<long> Remove<T>(object transactionSession, long id, string collection = null) where T : Entity, new()
     {
-        using (await _dataBaseLock.Lock(id))
+        using (await _dataBaseLock.Wait(id))
         {
             var result = await GetCollection<T>(collection).DeleteOneAsync((IClientSessionHandle) transactionSession, d => d.Id == id);
             return result.DeletedCount;
@@ -661,7 +663,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>删除的实体数量。</returns>
     public async FTask<long> Remove<T>(long id, string collection = null) where T : Entity, new()
     {
-        using (await _dataBaseLock.Lock(id))
+        using (await _dataBaseLock.Wait(id))
         {
             var result = await GetCollection<T>(collection).DeleteOneAsync(d => d.Id == id);
             return result.DeletedCount;
@@ -678,7 +680,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>删除的实体数量。</returns>
     public async FTask<long> Remove<T>(long id, object transactionSession, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new()
     {
-        using (await _dataBaseLock.Lock(id))
+        using (await _dataBaseLock.Wait(id))
         {
             var result = await GetCollection<T>(collection).DeleteManyAsync((IClientSessionHandle) transactionSession, filter);
             return result.DeletedCount;
@@ -694,7 +696,7 @@ public sealed class MongoDataBase : IDateBase
     /// <returns>删除的实体数量。</returns>
     public async FTask<long> Remove<T>(long id, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new()
     {
-        using (await _dataBaseLock.Lock(id))
+        using (await _dataBaseLock.Wait(id))
         {
             var result = await GetCollection<T>(collection).DeleteManyAsync(filter);
             return result.DeletedCount;

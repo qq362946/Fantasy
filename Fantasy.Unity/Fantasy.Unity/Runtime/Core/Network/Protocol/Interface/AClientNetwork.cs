@@ -1,7 +1,8 @@
 using System;
 using System.IO;
-using System.Net;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Fantasy
@@ -12,21 +13,20 @@ namespace Fantasy
     public abstract class AClientNetwork : ANetwork, INetworkChannel
     {
         protected bool IsInit;
-        public uint ChannelId { get; protected set; }
         public Session Session { get; protected set; }
-        protected AClientNetwork(Scene scene, NetworkType networkType, NetworkProtocolType networkProtocolType, NetworkTarget networkTarget) : base(scene, networkType, networkProtocolType, networkTarget) { }
-        public abstract Session Connect(IPEndPoint remoteEndPoint, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, int connectTimeout = 5000);
+        public abstract Session Connect(string remoteAddress, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000);
         public abstract void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message);
-
-        public abstract void Send(MemoryStream memoryStream);
         public override void Dispose()
         {
-            ChannelId = 0;
             IsInit = false;
             
             if (Session != null)
             {
-                Session.Dispose();
+                if (Session.IsDisposed)
+                {
+                    Session.Dispose();
+                }
+                
                 Session = null;
             }
             

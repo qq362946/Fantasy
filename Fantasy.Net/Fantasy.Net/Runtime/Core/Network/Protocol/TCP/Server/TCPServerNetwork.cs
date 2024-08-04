@@ -1,131 +1,146 @@
 #if FANTASY_NET
 using System.Net;
 using System.Net.Sockets;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace Fantasy
+// ReSharper disable GCSuppressFinalizeForTypeWithoutDestructor
+#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+namespace Fantasy;
+
+public sealed class TCPServerNetwork : ANetwork
 {
-    /// <summary>
-    /// 表示 TCP 协议服务端网络类。
-    /// </summary>
-    public class TCPServerNetwork : ANetwork
+    private Random _random;
+    private Socket _socket;
+    private SocketAsyncEventArgs _acceptAsync;
+    private readonly Dictionary<uint, INetworkChannel> _connectionChannel = new Dictionary<uint, INetworkChannel>();
+
+    public void Initialize(NetworkTarget networkTarget, IPEndPoint address)
     {
-        private readonly Random _random;
-        private readonly Socket _socket;
-        private readonly SocketAsyncEventArgs _acceptAsync;
-        private readonly Dictionary<uint, INetworkChannel> _connectionChannel = new Dictionary<uint, INetworkChannel>();
+        base.Initialize(NetworkType.Server, NetworkProtocolType.TCP, networkTarget);
+        _random = new Random();
+        _acceptAsync = new SocketAsyncEventArgs();
+        _socket = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+        _socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, false);
         
-        #region 跟随Scene或者Server所在的线程执行
-
-        public TCPServerNetwork(Scene scene, NetworkTarget networkTarget, IPEndPoint address) : base(scene, NetworkType.Server, NetworkProtocolType.TCP, networkTarget)
+        if (address.AddressFamily == AddressFamily.InterNetworkV6)
         {
-            _random = new Random();
-            _acceptAsync = new SocketAsyncEventArgs();
-            _socket = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            _socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, false);
+            _socket.SetSocketOption(SocketOptionLevel.IPv6, SocketOptionName.IPv6Only, false);
+        }
+        
+        _socket.Bind(address);
+        _socket.Listen(int.MaxValue);
+        _socket.SetSocketBufferToOsLimit();
+        Log.Info($"SceneConfigId = {Scene.SceneConfigId} TCPServer Listen {address}");
+        _acceptAsync.Completed += OnCompleted;
+        AcceptAsync();
+    }
+    
+    public override void Dispose()
+    {
+        if (IsDisposed)
+        {
+            return;
+        }
+        
+        foreach (var networkChannel in _connectionChannel.Values.ToArray())
+        {
+            networkChannel.Dispose();
+        }
+        _connectionChannel.Clear();
+        _random = null;
+        _socket.Dispose();
+        _socket = null;
+        _acceptAsync.Dispose();
+        _acceptAsync = null;
+        GC.SuppressFinalize(this);
+        base.Dispose();
+    }
+    
+    private void AcceptAsync()
+    {
+        _acceptAsync.AcceptSocket = null;
 
-            if (address.AddressFamily == AddressFamily.InterNetworkV6)
+        if (_socket.AcceptAsync(_acceptAsync))
+        {
+            return;
+        }
+
+        OnAcceptComplete(_acceptAsync);
+    }
+    
+    private void OnAcceptComplete(SocketAsyncEventArgs asyncEventArgs)
+    {
+        if (asyncEventArgs.AcceptSocket == null)
+        {
+            return;
+        }
+
+        if (asyncEventArgs.SocketError != SocketError.Success)
+        {
+            Log.Error($"Socket Accept Error: {_acceptAsync.SocketError}");
+            return;
+        }
+
+        try
+        {
+            uint channelId;
+            do
             {
-                _socket.SetSocketOption(SocketOptionLevel.IPv6, SocketOptionName.IPv6Only, false);
-            }
+                channelId = 0xC0000000 | (uint)_random.Next();
+            } while (_connectionChannel.ContainsKey(channelId));
 
-            _socket.Bind(address);
-            _socket.Listen(int.MaxValue);
-            _socket.SetSocketBufferToOsLimit();
-            _acceptAsync.Completed += OnCompleted;
+            _connectionChannel.Add(channelId, new TCPServerNetworkChannel(this, asyncEventArgs.AcceptSocket, channelId));
+        }
+        catch (Exception e)
+        {
+            Log.Error(e);
+        }
+        finally
+        {
             AcceptAsync();
         }
-
-        /// <summary>
-        /// 异步接受客户端连接请求。
-        /// </summary>
-        private void AcceptAsync()
-        {
-            _acceptAsync.AcceptSocket = null;
-
-            if (_socket.AcceptAsync(_acceptAsync))
-            {
-                return;
-            }
-
-            OnAcceptComplete(_acceptAsync);
-        }
-        
-        private void OnAcceptComplete(SocketAsyncEventArgs asyncEventArgs)
-        {
-            if (asyncEventArgs.AcceptSocket == null)
-            {
-                return;
-            }
-
-            if (asyncEventArgs.SocketError != SocketError.Success)
-            {
-                Log.Error($"Socket Accept Error: {_acceptAsync.SocketError}");
-                return;
-            }
-
-            try
-            {
-                var channelId = 0xC0000000 | (uint) _random.Next();
-
-                while (_connectionChannel.ContainsKey(channelId))
-                {
-                    channelId = 0xC0000000 | (uint) _random.Next();
-                }
-
-                _connectionChannel.Add(channelId, new TCPServerNetworkChannel(this, asyncEventArgs.AcceptSocket, channelId));
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-            finally
-            {
-                AcceptAsync();
-            }
-        }
-        
-        public override void RemoveChannel(uint channelId)
-        {
-            if (IsDisposed || !_connectionChannel.Remove(channelId, out var channel))
-            {
-                return;
-            }
-#if FANTASY_DEVELOP
-            Log.Debug($"TCPServerNetwork _connectionChannel:{_connectionChannel.Count}");
-#endif
-            if (channel.IsDisposed)
-            {
-                return;
-            }
-
-            channel.Dispose();
-        }
-
-        #endregion
-
-        #region 网络线程（由Socket底层产生的线程）
-
-        private void OnCompleted(object sender, SocketAsyncEventArgs asyncEventArgs)
-        {
-            switch (asyncEventArgs.LastOperation)
-            {
-                case SocketAsyncOperation.Accept:
-                {
-                    ThreadSynchronizationContext.Post(() =>
-                    {
-                        OnAcceptComplete(asyncEventArgs);
-                    });
-                    
-                    break;
-                }
-                default:
-                {
-                    throw new Exception($"Socket Accept Error: {asyncEventArgs.LastOperation}");
-                }
-            }
-        }
-
-        #endregion
     }
+    
+    public override void RemoveChannel(uint channelId)
+    {
+        if (IsDisposed || !_connectionChannel.Remove(channelId, out var channel))
+        {
+            return;
+        }
+
+        if (channel.IsDisposed)
+        {
+            return;
+        }
+
+        channel.Dispose();
+    }
+    
+    #region 网络线程（由Socket底层产生的线程）
+
+    private void OnCompleted(object sender, SocketAsyncEventArgs asyncEventArgs)
+    {
+        switch (asyncEventArgs.LastOperation)
+        {
+            case SocketAsyncOperation.Accept:
+            {
+                Scene.ThreadSynchronizationContext.Post(() =>
+                {
+                    OnAcceptComplete(asyncEventArgs);
+                });
+                    
+                break;
+            }
+            default:
+            {
+                throw new Exception($"Socket Accept Error: {asyncEventArgs.LastOperation}");
+            }
+        }
+    }
+
+    #endregion
 }
 #endif
+
+

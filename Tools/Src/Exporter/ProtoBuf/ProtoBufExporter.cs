@@ -168,12 +168,12 @@ public sealed class ProtoBufExporter
         {
             case ProtoBufOpCodeType.Outer:
             {
-                _aMessage = Opcode.OuterMessage;
-                _aRequest = Opcode.OuterRequest;
-                _aResponse = Opcode.OuterResponse;
-                _aRouteMessage = Opcode.OuterRouteMessage;
-                _aRouteRequest = Opcode.OuterRouteRequest;
-                _aRouteResponse = Opcode.OuterRouteResponse;
+                _aMessage = OpCode.OuterMessage;
+                _aRequest = OpCode.OuterRequest;
+                _aResponse = OpCode.OuterResponse;
+                _aRouteMessage = OpCode.OuterRouteMessage;
+                _aRouteRequest = OpCode.OuterRouteRequest;
+                _aRouteResponse = OpCode.OuterRouteResponse;
                 opCodeName = "OuterOpcode";
                 
                 if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
@@ -193,12 +193,12 @@ public sealed class ProtoBufExporter
             case ProtoBufOpCodeType.Inner:
             {
                 // 预留1000个协议号给框架内部协议用
-                _aMessage = Opcode.InnerMessage + 1000;
-                _aRequest = Opcode.InnerRequest + 1000;
-                _aResponse = Opcode.InnerResponse + 1000;
-                _aRouteMessage = Opcode.InnerRouteMessage + 1000;
-                _aRouteRequest = Opcode.InnerRouteRequest + 1000;
-                _aRouteResponse = Opcode.InnerRouteResponse + 1000;
+                _aMessage = OpCode.InnerMessage + 1000;
+                _aRequest = OpCode.InnerRequest + 1000;
+                _aResponse = OpCode.InnerResponse + 1000;
+                _aRouteMessage = OpCode.InnerRouteMessage + 1000;
+                _aRouteRequest = OpCode.InnerRouteRequest + 1000;
+                _aRouteResponse = OpCode.InnerRouteResponse + 1000;
                 opCodeName = "InnerOpcode";
                 saveDirectory.Add(_protoBufServerDirectory, _serverTemplate);
                 var protoBufFiles = FileHelper.GetDirectoryFile(_protoBufDirectoryInner, "*.proto", SearchOption.AllDirectories);
@@ -208,12 +208,12 @@ public sealed class ProtoBufExporter
             case ProtoBufOpCodeType.InnerBson:
             {
                 // 预留1000个协议号给框架内部协议用
-                _aMessage = Opcode.InnerBsonMessage + 1000;
-                _aRequest = Opcode.InnerBsonRequest + 1000;
-                _aResponse = Opcode.InnerBsonResponse + 1000;
-                _aRouteMessage = Opcode.InnerBsonRouteMessage + 1000;
-                _aRouteRequest = Opcode.InnerBsonRouteRequest + 1000;
-                _aRouteResponse = Opcode.InnerBsonRouteResponse + 1000;
+                _aMessage = OpCode.InnerBsonMessage + 1000;
+                _aRequest = OpCode.InnerBsonRequest + 1000;
+                _aResponse = OpCode.InnerBsonResponse + 1000;
+                _aRouteMessage = OpCode.InnerBsonRouteMessage + 1000;
+                _aRouteRequest = OpCode.InnerBsonRouteRequest + 1000;
+                _aRouteResponse = OpCode.InnerBsonRouteResponse + 1000;
                 opCodeName = "InnerBsonOpcode";
                 saveDirectory.Add(_protoBufServerDirectory, _serverTemplate);
                 var protoBufFiles = FileHelper.GetDirectoryFile(_protoBufDirectoryInnerBson, "*.proto", SearchOption.AllDirectories);
@@ -343,15 +343,15 @@ public sealed class ProtoBufExporter
                             }
                             else if (parameter is "IAddressableRouteRequest" or "IAddressableRouteMessage")
                             {
-                                file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return CoreRouteType.Addressable; }}");
+                                file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return InnerRouteType.Addressable; }}");
                             }
                             else if (parameter.EndsWith("BsonRouteMessage") || parameter.EndsWith("BsonRouteRequest"))
                             {
-                                file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return CoreRouteType.BsonRoute; }}");
+                                file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return InnerRouteType.BsonRoute; }}");
                             }
                             else if (parameter is "IRouteMessage" or "IRouteRequest")
                             {
-                                file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return CoreRouteType.Route; }}");
+                                file.AppendLine($"\t\tpublic long RouteTypeOpCode() {{ return InnerRouteType.Route; }}");
                             }
 
                             switch (parameter)

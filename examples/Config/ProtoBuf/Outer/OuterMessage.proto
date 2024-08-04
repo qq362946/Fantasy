@@ -1,5 +1,9 @@
 syntax = "proto3";
 package Fantasy.Network.Message;
+message C2A_TestMessage // IMessage
+{
+	
+}
 message C2A_TestRequest // IRequest,A2C_TestResponse
 {
 

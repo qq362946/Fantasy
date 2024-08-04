@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy
@@ -49,19 +52,26 @@ namespace Fantasy
         // 存储程序集名与路由消息处理器信息之间的一对多关系
         private readonly OneToManyList<long, HandlerInfo<IRouteMessageHandler>> _assemblyRouteMessageHandlers = new OneToManyList<long, HandlerInfo<IRouteMessageHandler>>();
 #endif
-        private CoroutineLockQueueType _receiveRouteMessageLock;
+        private CoroutineLock _receiveRouteMessageLock;
         
         #region Initialize
 
-        public async FTask Initialize()
+        public async FTask<MessageDispatcherComponent> Initialize()
         {
             _receiveRouteMessageLock = Scene.CoroutineLockComponent.Create(GetType().TypeHandle.Value.ToInt64());
             await AssemblySystem.Register(this);
+            return this;
         }
-        public async Task Load(long assemblyIdentity)
+
+        public async FTask Load(long assemblyIdentity)
         {
-            LoadInner(assemblyIdentity);
-            await Task.CompletedTask;
+            var tcs = FTask.Create(false);
+            Scene.ThreadSynchronizationContext.Post(() =>
+            {
+                LoadInner(assemblyIdentity);
+                tcs.SetResult();
+            });
+            await tcs;
         }
 
         private void LoadInner(long assemblyIdentity)
@@ -125,25 +135,27 @@ namespace Fantasy
 #endif
         }
 
-        public async Task ReLoad(long assemblyIdentity)
+        public async FTask ReLoad(long assemblyIdentity)
         {
+            var tcs = FTask.Create(false);
             Scene.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 LoadInner(assemblyIdentity);
+                tcs.SetResult();
             });
-            
-            await Task.CompletedTask;
+            await tcs;
         }
 
-        public async Task OnUnLoad(long assemblyIdentity)
+        public async FTask OnUnLoad(long assemblyIdentity)
         {
+            var tcs = FTask.Create(false);
             Scene.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
+                tcs.SetResult();
             });
-            
-            await Task.CompletedTask;
+            await tcs;
         }
 
         private void OnUnLoadInner(long assemblyIdentity)
@@ -289,8 +301,8 @@ namespace Fantasy
                 return;
             }
             
-            var runtimeId = entity.RuntimeId;
-            var sessionRuntimeId = session.RuntimeId;
+            var runtimeId = entity.RunTimeId;
+            var sessionRuntimeId = session.RunTimeId;
 
             if (entity is Scene)
             {
@@ -300,14 +312,14 @@ namespace Fantasy
             }
             
             // 使用协程锁来确保多线程安全
-            using (await _receiveRouteMessageLock.Lock(runtimeId))
+            using (await _receiveRouteMessageLock.Wait(runtimeId))
             {
-                if (sessionRuntimeId != session.RuntimeId)
+                if (sessionRuntimeId != session.RunTimeId)
                 {
                     return;
                 }
                 
-                if (runtimeId != entity.RuntimeId)
+                if (runtimeId != entity.RunTimeId)
                 {
                     if (message is IRouteRequest request)
                     {

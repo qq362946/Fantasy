@@ -22,18 +22,14 @@ public class StructBsonSerialize<TValue> : StructSerializerBase<TValue> where TV
     public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, TValue value)
     {
         var nominalType = args.NominalType;
-
         var bsonWriter = context.Writer;
-
         bsonWriter.WriteStartDocument();
-
         var fields = nominalType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         foreach (var field in fields)
         {
             bsonWriter.WriteName(field.Name);
             BsonSerializer.Serialize(bsonWriter, field.FieldType, field.GetValue(value));
         }
-
         bsonWriter.WriteEndDocument();
     }
 
@@ -49,9 +45,7 @@ public class StructBsonSerialize<TValue> : StructSerializerBase<TValue> where TV
         object obj = new TValue();
         var actualType = args.NominalType;
         var bsonReader = context.Reader;
-
         bsonReader.ReadStartDocument();
-
         while (bsonReader.ReadBsonType() != BsonType.EndOfDocument)
         {
             var name = bsonReader.ReadName(Utf8NameDecoder.Instance);
@@ -64,9 +58,7 @@ public class StructBsonSerialize<TValue> : StructSerializerBase<TValue> where TV
                 field.SetValue(obj, value);
             }
         }
-
         bsonReader.ReadEndDocument();
-
         return (TValue) obj;
     }
 }

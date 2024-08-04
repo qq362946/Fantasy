@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+#pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy
 {
@@ -19,12 +22,12 @@ namespace Fantasy
         protected override void Awake(NetworkMessagingComponent self)
         {
             var selfScene = self.Scene;
-            self.Server = selfScene.Server;
+            self.Process = selfScene.Process;
             self.TimerComponent = selfScene.TimerComponent;
             self.MessageDispatcherComponent = selfScene.MessageDispatcherComponent;
             self.AddressableRouteMessageLock = selfScene.CoroutineLockComponent.Create(self.GetType().TypeHandle.Value.ToInt64());
 
-            self.TimerId = self.TimerComponent.Core.RepeatedTimer(10000, new NetworkMessageUpdate()
+            self.TimerId = self.TimerComponent.Net.RepeatedTimer(10000, new NetworkMessageUpdate()
             {
                 NetworkMessagingComponent = self
             });
@@ -37,7 +40,7 @@ namespace Fantasy
         {
             if (self.TimerId != 0)
             {
-                self.TimerComponent.Core.Remove(ref self.TimerId);
+                self.TimerComponent.Net.Remove(ref self.TimerId);
             }
             
             foreach (var (rpcId, messageSender) in self.RequestCallback.ToDictionary())
@@ -49,7 +52,7 @@ namespace Fantasy
             
             self.RequestCallback.Clear();
             self.TimeoutRouteMessageSenders.Clear();
-            self.Server = null;
+            self.Process = null;
             self.TimerComponent = null;
             self.MessageDispatcherComponent = null;
             self.AddressableRouteMessageLock = null;
@@ -73,11 +76,11 @@ namespace Fantasy
         /// <summary>
         /// Address消息所需的锁队列。
         /// </summary>
-        public CoroutineLockQueueType AddressableRouteMessageLock;
+        public CoroutineLock AddressableRouteMessageLock;
         /// <summary>
         /// 缓存一下方便后面使用。
         /// </summary>
-        public Server Server;
+        public Process Process;
         public TimerComponent TimerComponent;
         public MessageDispatcherComponent MessageDispatcherComponent;
         /// <summary>
@@ -88,16 +91,6 @@ namespace Fantasy
         /// 存储超时路由消息发送者的字典。
         /// </summary>
         public readonly Dictionary<uint, MessageSender> TimeoutRouteMessageSenders = new();
-        
-        /// <summary>
-        /// 将消息发送给内部服务器。
-        /// </summary>
-        /// <param name="targetServerId">目标服务器ID</param>
-        /// <param name="message">消息</param>
-        public void SendInnerServer(uint targetServerId, IMessage message)
-        {
-            Server.GetSession(targetServerId).Send(message);
-        }
 
         /// <summary>
         /// 将消息发送给内部路由。
@@ -112,9 +105,7 @@ namespace Fantasy
                 return;
             }
 
-            EntityIdStruct entityIdStruct = entityId;
-            var session = Server.GetSession(entityIdStruct.ProcessId);
-            session.Send(message, 0, entityId);
+            Scene.GetSession(entityId).Send(message, 0, entityId);
         }
 
         /// <summary>
@@ -131,9 +122,7 @@ namespace Fantasy
                 return;
             }
 
-            EntityIdStruct entityIdStruct = entityId;
-            var session = Server.GetSession(entityIdStruct.ProcessId);
-            session.Send(memoryStream, 0, routeTypeOpCode, entityId);
+            Scene.GetSession(entityId).Send(memoryStream, 0, routeTypeOpCode, entityId);
         }
 
         /// <summary>
@@ -183,13 +172,21 @@ namespace Fantasy
                 Log.Error($"CallInnerRoute appId == 0");
                 return null;
             }
-
-            EntityIdStruct entityIdStruct = entityId;
+            
             var rpcId = ++_rpcId;
-            var session = Server.GetSession(entityIdStruct.ProcessId);
+            var session = Scene.GetSession(entityId);
             var requestCallback = FTask<IResponse>.Create(false);
             RequestCallback.Add(rpcId, MessageSender.Create(rpcId, requestType, requestCallback));
             session.Send(request, rpcId, routeTypeOpCode, entityId);
+            return await requestCallback;
+        }
+
+        public async FTask<IResponse> CallInnerRouteBySession(Session session, long entityId,IRouteMessage request)
+        {
+            var rpcId = ++_rpcId;
+            var requestCallback = FTask<IResponse>.Create(false);
+            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
+            session.Send(request, rpcId, entityId);
             return await requestCallback;
         }
 
@@ -203,32 +200,15 @@ namespace Fantasy
         {
             if (entityId == 0)
             {
-                Log.Error($"CallInnerRoute appId == 0");
+                Log.Error($"CallInnerRoute entityId == 0");
                 return null;
             }
-
-            EntityIdStruct entityIdStruct = entityId;
+            
             var rpcId = ++_rpcId;
-            var session = Server.GetSession(entityIdStruct.ProcessId);
+            var session = Scene.GetSession(entityId);
             var requestCallback = FTask<IResponse>.Create(false);
             RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
             session.Send(request, rpcId, entityId);
-            return await requestCallback;
-        }
-
-        /// <summary>
-        /// 异步调用内部服务器路由，并传递请求消息。
-        /// </summary>
-        /// <param name="targetServerId">目标服务器ID</param>
-        /// <param name="request">请求消息</param>
-        /// <returns>异步任务，返回响应</returns>
-        public async FTask<IResponse> CallInnerServer(uint targetServerId, IRequest request)
-        {
-            var rpcId = ++_rpcId;
-            var session = Server.GetSession(targetServerId);
-            var requestCallback = FTask<IResponse>.Create(false);
-            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
-            session.Send(request, rpcId);
             return await requestCallback;
         }
 
@@ -243,7 +223,7 @@ namespace Fantasy
             var failCount = 0;
 
             // 使用可寻址消息锁，确保并发请求的同步
-            using (await AddressableRouteMessageLock.Lock(addressableId, "CallAddressable"))
+            using (await AddressableRouteMessageLock.Wait(addressableId, "CallAddressable"))
             {
                 var addressableRouteId = await AddressableHelper.GetAddressableRouteId(Scene, addressableId);
 
@@ -278,7 +258,7 @@ namespace Fantasy
                             }
 
                             // 等待一段时间后重试
-                            await TimerComponent.Core.WaitAsync(500);
+                            await TimerComponent.Net.WaitAsync(500);
                             addressableRouteId = 0;
                             continue;
                         }
@@ -308,7 +288,7 @@ namespace Fantasy
         {
             if (!RequestCallback.Remove(rpcId, out var routeMessageSender))
             {
-                throw new Exception($"not found rpc, response.RpcId:{rpcId} response message: {response.GetType().Name} Server:{Scene.Server.Id} Scene:{Scene.SceneConfigId}");
+                throw new Exception($"not found rpc, response.RpcId:{rpcId} response message: {response.GetType().Name} Process:{Scene.Process.Id} Scene:{Scene.SceneConfigId}");
             }
 
             ResponseHandler(routeMessageSender, response);
@@ -345,15 +325,16 @@ namespace Fantasy
             {
                 switch (messageSender.Request)
                 {
-                    case IRouteMessage iRouteMessage:
-                    {
-                        // TODO: 根据路由消息生成响应，并进行处理。
-                        // var routeResponse = RouteMessageDispatcher.CreateResponse(iRouteMessage, ErrorCode.ErrRouteTimeout);
-                        // responseRpcId = routeResponse.RpcId;
-                        // routeResponse.RpcId = routeMessageSender.RpcId;
-                        // MessageHelper.ResponseHandler(routeResponse);
-                        break;
-                    }
+                    // case IRouteMessage iRouteMessage:
+                    // {
+                    //     Log.Error("NetworkMessagingComponent ReturnMessageSender 根据路由消息生成响应，并进行处理,没有实现呢！");
+                    //     // // TODO: 根据路由消息生成响应，并进行处理。
+                    //     // var routeResponse = MessageDispatcherComponent.CreateResponse(iRouteMessage, InnerErrorCode.ErrRouteTimeout);
+                    //     // responseRpcId = routeResponse.RpcId;
+                    //     // routeResponse.RpcId = routeMessageSender.RpcId;
+                    //     // MessageHelper.ResponseHandler(routeResponse);
+                    //     break;
+                    // }
                     case IRequest iRequest:
                     {
                         // 根据普通请求生成响应，并进行处理。

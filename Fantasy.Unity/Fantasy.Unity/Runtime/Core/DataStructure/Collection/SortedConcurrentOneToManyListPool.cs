@@ -1,3 +1,4 @@
+#if !FANTASY_WEBGL
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -205,3 +206,4 @@ namespace Fantasy
         }
     }
 }
+#endif

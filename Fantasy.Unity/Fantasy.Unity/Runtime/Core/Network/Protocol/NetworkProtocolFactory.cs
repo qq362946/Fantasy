@@ -7,17 +7,30 @@ namespace Fantasy
     public static class NetworkProtocolFactory
     {
 #if FANTASY_NET
-        public static ANetwork CreateServer(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget, IPEndPoint address)
+        public static ANetwork CreateServer(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget, string bindIp, int port, bool isHttps = false)
         {
             switch (protocolType)
             {
                 case NetworkProtocolType.TCP:
                 {
-                    return new TCPServerNetwork(scene, networkTarget, address);
+                    var network = Entity.Create<TCPServerNetwork>(scene, false, false);
+                    var address = NetworkHelper.ToIPEndPoint(bindIp, port);
+                    network.Initialize(networkTarget, address);
+                    return network;
                 }
                 case NetworkProtocolType.KCP:
                 {
-                    return new KCPServerNetwork(scene, networkTarget, address);
+                    var network = Entity.Create<KCPServerNetwork>(scene, false, true);
+                    var address = NetworkHelper.ToIPEndPoint(bindIp, port);
+                    network.Initialize(networkTarget, address);
+                    return network;
+                }
+                case NetworkProtocolType.WebSocket:
+                {
+                    var network = Entity.Create<WebSocketServerNetwork>(scene, false, true);
+                    var urls = isHttps ? new [] { $"https://{bindIp}:{port}/" } : new [] { $"http://{bindIp}:{port}/" };
+                    network.Initialize(networkTarget, urls);
+                    return network;
                 }
                 default:
                 {
@@ -28,21 +41,38 @@ namespace Fantasy
 #endif
         public static AClientNetwork CreateClient(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget)
         {
+#if !FANTASY_WEBGL
             switch (protocolType)
             {
                 case NetworkProtocolType.TCP:
                 {
-                    return new TCPClientNetwork(scene, networkTarget);
+                    var network = Entity.Create<TCPClientNetwork>(scene, false, false);
+                    network.Initialize(networkTarget);
+                    return network;
                 }
                 case NetworkProtocolType.KCP:
                 {
-                    return new KCPClientNetwork(scene, networkTarget);
+                    var network = Entity.Create<KCPClientNetwork>(scene, false, true);
+                    network.Initialize(networkTarget);
+                    return network;
+                }
+                case NetworkProtocolType.WebSocket:
+                {
+                    var network = Entity.Create<WebSocketClientNetwork>(scene, false, true);
+                    network.Initialize(networkTarget);
+                    return network;
                 }
                 default:
                 {
                     throw new NotSupportedException($"Unsupported NetworkProtocolType:{protocolType}");
                 }
             }
+#else
+            // Webgl平台只能用这个协议。
+            var network = Entity.Create<WebSocketClientNetwork>(scene, false, true);
+            network.Initialize(networkTarget);
+            return network;
+#endif
         }
     }
 }

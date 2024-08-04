@@ -3,12 +3,9 @@ using Fantasy;
 
 namespace Fantasy;
 
-public class ConfigTableHelper
+public static class ConfigTableHelper
 {
-    private static ConfigTableHelper _instance;
-    public static ConfigTableHelper Instance => _instance ??= new ConfigTableHelper();
-    
-    public T Load<T>() where T : AProto
+    public static T Load<T>() where T : AProto
     {
         return default;
     }

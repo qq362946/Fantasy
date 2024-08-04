@@ -1,3 +1,4 @@
+#if !FANTASY_WEBGL
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -5,6 +6,7 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+#pragma warning disable CS8603 // Possible null reference return.
 
 // ReSharper disable InconsistentNaming
 
@@ -15,6 +17,44 @@ namespace Fantasy
     /// </summary>
     public static class NetworkHelper
     {
+        /// <summary>
+        /// 根据字符串获取一个IPEndPoint
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IPEndPoint GetIPEndPoint(string address)
+        {
+            try
+            {
+                var addressSplit = address.Split(':');
+                if (addressSplit.Length != 2)
+                {
+                    throw new FormatException("Invalid format");
+                }
+
+                var ipString = addressSplit[0];
+                var portString = addressSplit[1];
+
+                if (!IPAddress.TryParse(ipString, out var ipAddress))
+                {
+                    throw new FormatException("Invalid IP address");
+                }
+
+                if (!int.TryParse(portString, out var port) || port < 0 || port > 65535)
+                {
+                    throw new FormatException("Invalid port number");
+                }
+
+                return new IPEndPoint(ipAddress, port);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error parsing IP and Port:{e.Message}");
+                return null;
+            }
+        }
+        
         /// <summary>
         /// 克隆一个IPEndPoint
         /// </summary>
@@ -51,7 +91,209 @@ namespace Fantasy
         {
             return endPoint.Address.Equals(ipEndPoint.Address) && endPoint.Port == ipEndPoint.Port;
         }
-        
+
+#if !FANTASY_WEBGL
+        /// <summary>
+        /// 将SocketAddress写入到Byte[]中
+        /// </summary>
+        /// <param name="socketAddress"></param>
+        /// <param name="buffer"></param>
+        /// <param name="offset"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe void SocketAddressToByte(this SocketAddress socketAddress, byte[] buffer, int offset)
+        {
+            if (socketAddress == null)
+            {
+                throw new ArgumentNullException(nameof(socketAddress), "The SocketAddress cannot be null.");
+            }
+            
+            if (buffer == null)
+            {
+                throw new ArgumentNullException(nameof(buffer), "The buffer cannot be null.");
+            }
+
+            if (buffer.Length < socketAddress.Size + offset + 8)
+            {
+                throw new ArgumentException("The buffer length is insufficient. It must be at least the size of the SocketAddress plus 8 bytes.", nameof(buffer));
+            }
+            
+            fixed (byte* pBuffer = buffer)
+            {
+                var pOffsetBuffer = pBuffer + offset;
+                var addressFamilyValue = (int)socketAddress.Family;
+                var socketAddressSizeValue = socketAddress.Size;
+                Buffer.MemoryCopy(&addressFamilyValue, pOffsetBuffer, buffer.Length - offset, sizeof(int));
+                Buffer.MemoryCopy(&socketAddressSizeValue, pOffsetBuffer + 4, buffer.Length - offset -4, sizeof(int));
+                for (var i = 0; i < socketAddress.Size - 2; i++)
+                {
+                    pOffsetBuffer[8 + i] = socketAddress[i + 2];
+                }
+            }
+        }
+
+        /// <summary>
+        /// 将byre[]转换为SocketAddress
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="offset"></param>
+        /// <param name="socketAddress"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe int ByteToSocketAddress(byte[] buffer, int offset, out SocketAddress socketAddress)
+        {
+            if (buffer == null)
+            {
+                throw new ArgumentNullException(nameof(buffer), "The buffer cannot be null.");
+            }
+            
+            if (buffer.Length < 8)
+            {
+                throw new ArgumentException("Buffer length is insufficient. It must be at least 8 bytes.", nameof(buffer));
+            }
+            
+            try
+            {
+                fixed (byte* pBuffer = buffer)
+                {
+                    var pOffsetBuffer = pBuffer + offset;
+                    var addressFamily = (AddressFamily)Marshal.ReadInt32((IntPtr)pOffsetBuffer);
+                    var socketAddressSize = Marshal.ReadInt32((IntPtr)(pOffsetBuffer + 4));
+
+                    if (buffer.Length < offset + 8 + socketAddressSize)
+                    {
+                        throw new ArgumentException("Buffer length is insufficient for the given SocketAddress size.", nameof(buffer));
+                    }
+
+                    socketAddress = new SocketAddress(addressFamily, socketAddressSize);
+                    
+                    for (var i = 0; i < socketAddressSize - 2; i++)
+                    {
+                        socketAddress[i + 2] = *(pOffsetBuffer + 8 + i);
+                    }
+
+                    return 8 + offset + socketAddressSize;
+                }
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new InvalidOperationException("An argument provided to the method is null.", ex);
+            }
+            catch (ArgumentException ex)
+            {
+                throw new InvalidOperationException("An argument provided to the method is invalid.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("An unexpected error occurred while processing the buffer.", ex);
+            }
+        }
+
+        /// <summary>
+        /// 将ReadOnlyMemory转换为SocketAddress
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="offset"></param>
+        /// <param name="socketAddress"></param>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe int ByteToSocketAddress(ReadOnlyMemory<byte> buffer, int offset, out SocketAddress socketAddress)
+        {
+            if (buffer.Length < 8)
+            {
+                throw new ArgumentException("Buffer length is insufficient. It must be at least 8 bytes.", nameof(buffer));
+            }
+
+            try
+            {
+                fixed (byte* pBuffer = buffer.Span)
+                {
+                    var pOffsetBuffer = pBuffer + offset;
+                    var addressFamily = (AddressFamily)Marshal.ReadInt32((IntPtr)pOffsetBuffer);
+                    var socketAddressSize = Marshal.ReadInt32((IntPtr)(pOffsetBuffer + 4));
+
+                    if (buffer.Length < offset + 8 + socketAddressSize)
+                    {
+                        throw new ArgumentException("Buffer length is insufficient for the given SocketAddress size.", nameof(buffer));
+                    }
+
+                    socketAddress = new SocketAddress(addressFamily, socketAddressSize);
+                    
+                    for (var i = 0; i < socketAddressSize - 2; i++)
+                    {
+                        socketAddress[i + 2] = *(pOffsetBuffer + 8 + i);
+                    }
+
+                    return 8 + offset + socketAddressSize;
+                }
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new InvalidOperationException("An argument provided to the method is null.", ex);
+            }
+            catch (ArgumentException ex)
+            {
+                throw new InvalidOperationException("An argument provided to the method is invalid.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("An unexpected error occurred while processing the buffer.", ex);
+            }
+        }
+
+        /// <summary>
+        /// 根据SocketAddress获得IPEndPoint
+        /// </summary>
+        /// <param name="socketAddress"></param>
+        /// <returns></returns>
+        /// <exception cref="NotSupportedException"></exception>
+        public static unsafe IPEndPoint GetIPEndPoint(this SocketAddress socketAddress)
+        {
+            switch (socketAddress.Family)
+            {
+                case AddressFamily.InterNetwork:
+                {
+                    var ipBytes = new byte[4];
+                    for (var i = 0; i < 4; i++)
+                    {
+                        ipBytes[i] = socketAddress[4 + i];
+                    }
+                    var port = (socketAddress[2] << 8) + socketAddress[3];
+                    var ip = new IPAddress(ipBytes);
+                    return new IPEndPoint(ip, port);
+                }
+                case AddressFamily.InterNetworkV6:
+                {
+                    var ipBytes = new byte[16];
+                    Span<byte> socketAddressSpan = stackalloc byte[28];
+                    
+                    for (var i = 0; i < 28; i++)
+                    {
+                        socketAddressSpan[i] = socketAddress[i];
+                    }
+                    
+                    fixed (byte* pSocketAddress = socketAddressSpan)
+                    {
+                        for (var i = 0; i < 16; i++)
+                        {
+                            ipBytes[i] = *(pSocketAddress + 8 + i);
+                        }
+                        
+                        var port = (*(pSocketAddress + 2) << 8) + *(pSocketAddress + 3);
+                        var scopeId = Marshal.ReadInt64((IntPtr)(pSocketAddress + 24));
+                        var ip = new IPAddress(ipBytes, scopeId);
+                        return new IPEndPoint(ip, port);
+                    }
+                }
+                default:
+                {
+                    throw new NotSupportedException("Address family not supported.");
+                }
+            }
+        }
+#endif
         /// <summary>
         /// 获取本机所有网络适配器的IP地址。
         /// </summary>
@@ -198,3 +440,4 @@ namespace Fantasy
         }
     }
 }
+#endif

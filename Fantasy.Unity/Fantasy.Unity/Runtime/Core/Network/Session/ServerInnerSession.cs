@@ -12,14 +12,14 @@ public sealed class ServerInnerSession : Session
     /// <param name="message">要发送的消息。</param>
     /// <param name="rpcId">RPC 标识符。</param>
     /// <param name="routeId">路由标识符。</param>
-    public override void Send(object message, uint rpcId = 0, long routeId = 0)
+    public override void Send<T>(T message, uint rpcId = 0, long routeId = 0)
     {
         if (IsDisposed)
         {
             return;
         }
-        
-        NetworkMessageScheduler.InnerScheduler(this, rpcId, routeId, ((IMessage)message).OpCode(), 0, message).Coroutine();
+
+        NetworkMessageScheduler.InnerScheduler(this, typeof(T), rpcId, routeId, message.OpCode(), 0, message).Coroutine();
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ public sealed class ServerInnerSession : Session
             return;
         }
 
-        NetworkMessageScheduler.InnerScheduler(this, rpcId, routeId, routeMessage.OpCode(), routeMessage.RouteTypeOpCode(), routeMessage).Coroutine();
+        NetworkMessageScheduler.InnerScheduler(this, routeMessage.GetType(), rpcId, routeId, routeMessage.OpCode(), routeMessage.RouteTypeOpCode(), routeMessage).Coroutine();
     }
 
     /// <summary>
