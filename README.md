@@ -1,50 +1,34 @@
+# Fantasy
 ![Logo](Book/Logo.png)
-<p align="center">
-  <strong>专注游戏服务器框架<strong>
-    <br>
-    <br>
-  <a style="text-decoration:none">
-    <img src="https://img.shields.io/badge/Unity%20Ver-2021.3.141f1++-blue.svg?style=flat-square" alt="status" />
-  </a>
-  <a style="text-decoration:none">
-    <img src="https://img.shields.io/github/license/qq362946/Fantasy" alt="license" />
-  </a>
-  <a style="text-decoration:none">
-    <img src="https://img.shields.io/github/last-commit/qq362946/Fantasy" alt="last" />
-  </a>
-  <a style="text-decoration:none">
-    <img src="https://img.shields.io/github/issues/qq362946/Fantasy" alt="issue" />
-  </a>
-  <a style="text-decoration:none">
-    <img src="https://img.shields.io/github/languages/top/qq362946/Fantasy" alt="topLanguage" />
-  </a>
-  <br>
-  
-  <br>
-</p>
-# Fantasy高性能服务器框架
-Fantasy服务器框架源于ETServer框架，但Fantasy极为简洁，基于Fantasy开发的服务端程序，可用于游戏服务器，物联网服务器，应用程序服务器等。
-Fantasy框架易于学习易于使用，只需要在服务端引用Fantasy.Net即可。  
-目前提供了Unity前端应用参考，前端主要添加Packages中的Fantasy.Unity，也可以按需要添加Fantasy.FairyGUI,Fantasy.HybridCLR。  
-后续计划增加Fantasy Go版本，和Unreal前端应用参考。  
-<br/>
-[框架网站：](https://www.fantsida.com/fantasy) https://www.fantsida.com/fantasy  
-<br/>
-
-## Quick Start
-#### ▷ Hello Fantasy项目及视频课程
-Hello Fantasy是一个.Net的分布式服务器框架Fantasy中自带的一个简单实践demo项目，旨在帮助开发者应用Fantasy框架构建网络游戏或网络通信项目时，快速导入框架package，实现基本的服务端部署，也能快速通过简单的代码了解基本的消息通信。它提供了一组工具和组件，用于处理游戏世界中的各种实体、逻辑和交互。  
-[课程学习地址：](https://www.taikr.com/course/1455) https://www.taikr.com/course/1455  
-也可以在b站免费学习，待上传更新地址...
-
-## Fantasy 功能介绍 后续更新中。
-
-## 使用指南
-1.安装.NET 8.0 SDK    
-2.指定项目使用的.NET 8.0   
-  已安装有更高版本.NET SDK时，需要在Fantasy根目录下，添加 global.json 指定使用.NET 8.0   
-3.前后端项目导入框架Package  
-
+![Unity Ver](https://img.shields.io/badge/Unity%20Ver-2021.3.20++-blue.svg?style=flat-square)
+![GitHub License](https://img.shields.io/github/license/qq362946/Fantasy)
+![GitHub last commit](https://img.shields.io/github/last-commit/qq362946/Fantasy)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/qq362946/Fantasy)
+![GitHub top language](https://img.shields.io/github/languages/top/qq362946/Fantasy)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/qq362946/Fantasy)
+![GitHub Created At](https://img.shields.io/github/created-at/qq362946/Fantasy)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/qq362946/Fantasy/total)
+# Fantasy
+#### 框架支持TCP\KCP\WebSocket（支持Unity发布成H5）三种网络协议，采用的Protobuf做为消息的序列化方案。
+#### 对于需要一套上手快、高性能、可扩展、分布式的全平台商业级解决方案的开发团队或个人来说是一个很好的选择。
+## 文档（持续更新中）
+* [01_快速上手](Books/0-介绍.md)
+* [02_服务器配置](Books/0-介绍.md)
+* [03_定义网络协议](Books/0-介绍.md)
+* [04_导出工具配置](Books/0-介绍.md)
+* [05_普通网络协议](Books/0-介绍.md)
+* [06_可寻址网络协议](Books/0-介绍.md)
+* [07_ECS系统](Books/0-介绍.md)
+* [08_事件系统](Books/0-介绍.md)
+* [09_协程锁](Books/0-介绍.md)
+* [10_任务调度器](Books/0-介绍.md)
+* [11_数据库的操作](Books/0-介绍.md)
+* [12_Assembly系统](Books/0-介绍.md)
+* [13_配置表系统](Books/0-介绍.md)
+* [14_服务器热重载](Books/0-介绍.md)
+## 优质开源项目推荐
+#### <a href="https://github.com/egametang/ET"><strong>ET</strong></a> - ET框架是一整套完善的游戏开发框架。
+#### <a href="https://github.com/ALEXTANGXIAO/TEngine"><strong>TEngine</strong></a> - TEngine是一个简单(新手友好开箱即用)且强大的Unity框架全平台解决方案。
 ## 交流与讨论：  
 [学习交流网站：](http://www.taikr.com) http://www.taikr.com  
 __讨论QQ群 : Fantasy服务器开发交流群 656091376 __
