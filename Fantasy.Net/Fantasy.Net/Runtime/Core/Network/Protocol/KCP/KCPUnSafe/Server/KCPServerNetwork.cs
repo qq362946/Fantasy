@@ -85,7 +85,7 @@ public sealed class KCPServerNetwork : ANetwork
             return;
         }
         
-        if (_cancellationTokenSource.IsCancellationRequested)
+        if (!_cancellationTokenSource.IsCancellationRequested)
         {
             try
             {

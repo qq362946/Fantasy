@@ -18,7 +18,6 @@ public class NormalMessage : MonoBehaviour
         ConnectButton.onClick.RemoveAllListeners();
         ConnectButton.onClick.AddListener(() =>
         {
-            ConnectButton.interactable = false;
             OnConnectButtonClick().Coroutine();
         });
         
@@ -36,6 +35,7 @@ public class NormalMessage : MonoBehaviour
 
     private async FTask OnConnectButtonClick()
     {
+        ConnectButton.interactable = false;
         _scene = await Fantasy.Entry.Initialize(GetType().Assembly);
         _session = _scene.Connect(
             "127.0.0.1:20000",

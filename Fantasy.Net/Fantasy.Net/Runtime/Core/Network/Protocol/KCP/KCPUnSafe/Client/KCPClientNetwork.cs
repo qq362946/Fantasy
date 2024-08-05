@@ -50,7 +50,9 @@ namespace Fantasy
         private readonly Queue<MemoryStream> _messageCache = new Queue<MemoryStream>();
         private readonly SocketAsyncEventArgs _connectEventArgs = new SocketAsyncEventArgs();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        
+#if FANTASY_UNITY
+        private readonly EndPoint _ipEndPoint = new IPEndPoint(IPAddress.Any, 0);
+#endif
         private event Action OnConnectFail;
         private event Action OnConnectComplete;
         private event Action OnConnectDisconnect;
@@ -90,7 +92,7 @@ namespace Fantasy
             base.Dispose();
             ClearConnectTimeout();
             
-            if (_cancellationTokenSource.IsCancellationRequested)
+            if (!_cancellationTokenSource.IsCancellationRequested)
             {
                 try
                 {
@@ -206,9 +208,16 @@ namespace Fantasy
                 try
                 {
                     var memory = _pipe.Writer.GetMemory(8192);
-                    var count = await _socket.ReceiveAsync(memory, SocketFlags.None, _cancellationTokenSource.Token);
-                    _pipe.Writer.Advance(count);
+#if FANTASY_UNITY
+                    MemoryMarshal.TryGetArray(memory, out ArraySegment<byte> arraySegment);
+                    var result = await _socket.ReceiveFromAsync(arraySegment, SocketFlags.None, _ipEndPoint);
+                    _pipe.Writer.Advance(result.ReceivedBytes);
                     await _pipe.Writer.FlushAsync();
+#else
+                    var result = await _socket.ReceiveAsync(memory, SocketFlags.None, _cancellationTokenSource.Token);
+                    _pipe.Writer.Advance(result);
+                    await _pipe.Writer.FlushAsync();
+#endif
                 }
                 catch (SocketException)
                 {
@@ -232,7 +241,7 @@ namespace Fantasy
 
             await _pipe.Writer.CompleteAsync();
         }
-
+        
         #endregion
 
         #region ReceivePipeData

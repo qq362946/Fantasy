@@ -34,7 +34,7 @@ public sealed class WebSocketClientNetwork : AClientNetwork
         }
 
         _isInnerDispose = true;
-        if (_cancellationTokenSource.IsCancellationRequested)
+        if (!_cancellationTokenSource.IsCancellationRequested)
         {
             try
             {

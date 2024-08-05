@@ -43,7 +43,7 @@ namespace Fantasy
             _isInnerDispose = true;
             ClearConnectTimeout();
             
-            if (_cancellationTokenSource.IsCancellationRequested)
+            if (!_cancellationTokenSource.IsCancellationRequested)
             {
                 try
                 {
