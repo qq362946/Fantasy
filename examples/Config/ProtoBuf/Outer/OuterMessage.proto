@@ -1,14 +1,22 @@
 syntax = "proto3";
 package Fantasy.Network.Message;
-message C2A_TestMessage // IMessage
+message C2G_TestMessage // IMessage
 {
-	
+	string Tag = 1;
 }
-message C2A_TestRequest // IRequest,A2C_TestResponse
+message C2G_TestRequest // IRequest,G2C_TestResponse
+{
+	string Tag = 1;
+}
+message G2C_TestResponse // IResponse
+{
+	string Tag = 1;
+}
+message C2G_CreateAddressableRequest // IRequest,G2C_CreateAddressableResponse
 {
 
 }
-message A2C_TestResponse // IResponse
+message G2C_CreateAddressableResponse // IResponse
 {
 
 }

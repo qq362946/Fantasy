@@ -32,7 +32,7 @@ namespace Fantasy
         #region Members
 #if FANTASY_NET
         public int SceneType { get; private set; }
-        public World? World { get; private set; }
+        public World World { get; private set; }
         public Process Process { get; private set; }
         public uint SceneConfigId { get; private set; }
         internal ANetwork InnerNetwork { get; private set; }
@@ -66,7 +66,9 @@ namespace Fantasy
         public CoroutineLockComponent CoroutineLockComponent { get; private set; }
         public MessageDispatcherComponent MessageDispatcherComponent { get; private set; }
         public NetworkMessagingComponent NetworkMessagingComponent { get; private set; }
-
+#if FANTASY_NET
+        public SingleCollectionComponent SingleCollectionComponent { get; private set; }
+#endif
         #endregion
 
         #region Initialize
@@ -82,6 +84,9 @@ namespace Fantasy
             CoroutineLockComponent = AddComponent<CoroutineLockComponent>(false).Initialize();
             MessageDispatcherComponent = await AddComponent<MessageDispatcherComponent>(false).Initialize();
             NetworkMessagingComponent = AddComponent<NetworkMessagingComponent>(false);
+#if FANTASY_NET
+            SingleCollectionComponent = await AddComponent<SingleCollectionComponent>(false).Initialize();
+#endif
         }
 
         private void Initialize(Scene scene) 
@@ -96,6 +101,9 @@ namespace Fantasy
             CoroutineLockComponent = scene.CoroutineLockComponent;
             MessageDispatcherComponent = scene.MessageDispatcherComponent;
             NetworkMessagingComponent = scene.NetworkMessagingComponent;
+#if FANTASY_NET
+            SingleCollectionComponent = scene.SingleCollectionComponent;
+#endif
         }
 
         public override void Dispose()
@@ -209,7 +217,7 @@ namespace Fantasy
             
             if (sceneConfig.WorldConfigId != 0)
             {
-                // scene.World = World.Create(scene, (byte)sceneConfig.WorldConfigId);
+                scene.World = World.Create(scene, (byte)sceneConfig.WorldConfigId);
             }
 
             if (sceneConfig.InnerPort != 0)
@@ -355,13 +363,13 @@ namespace Fantasy
                 _innerSessionIs.Remove(sceneId);
             }
 
-            // if (Scene.Process.IsProcess(ref sceneId))
-            // {
-            //     // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
-            //     var innerSession = Session.CreateInnerSession(Scene);
-            //     _innerSessionIs.Add(sceneId, new InnerSessionInfo(innerSession, null));
-            //     return innerSession;
-            // }
+            if (Scene.Process.IsProcess(ref sceneId))
+            {
+                // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
+                var innerSession = Session.CreateInnerSession(Scene);
+                _innerSessionIs.Add(sceneId, new InnerSessionInfo(innerSession, null));
+                return innerSession;
+            }
 
             if (!SceneConfigData.Instance.TryGet(sceneId, out var sceneConfig))
             {

@@ -11,4 +11,10 @@
       <ProjectReference Include="..\Entity\Entity.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Benchmark\" />
+      <Folder Include="Inner\" />
+      <Folder Include="Outer\NormalMessage\" />
+    </ItemGroup>
+
 </Project>

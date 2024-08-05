@@ -10,7 +10,7 @@ namespace Fantasy
     public class LinkXmlGenerator
     {
         // 在Unity编辑器中运行该方法来生成link.xml文件
-        [UnityEditor.MenuItem("Tools/Generate link.xml")]
+        [UnityEditor.MenuItem("Fantasy/Generate link.xml")]
         public static void GenerateLinkXml()
         {
             using (var writer = new StreamWriter("Assets/link.xml"))

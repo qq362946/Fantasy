@@ -116,11 +116,8 @@ namespace Fantasy
         
         private void AddTimer(long timerId, ref TimerAction timer)
         {
-            Log.Debug("AddTimer 1");
             var tillTime = timer.StartTime + timer.TriggerTime;
-            Log.Debug("AddTimer 2");
             _timeId.Add(tillTime, timerId);
-            Log.Debug("AddTimer 3");
             _timerActions.Add(timerId, timer);
 
             if (tillTime < _minTime)

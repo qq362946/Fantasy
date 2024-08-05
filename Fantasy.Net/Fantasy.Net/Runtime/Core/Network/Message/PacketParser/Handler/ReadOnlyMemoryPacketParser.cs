@@ -215,8 +215,7 @@ namespace Fantasy
                     // 在当前buffer中拿到包头的数据
                     var outerPacketHeadLength = Packet.OuterPacketHeadLength - MessageHeadOffset;
                     var copyLength = Math.Min(bufferLength, outerPacketHeadLength);
-                    Buffer.MemoryCopy(bufferPtr + Offset, messagePtr + MessageHeadOffset, outerPacketHeadLength,
-                        copyLength);
+                    Buffer.MemoryCopy(bufferPtr + Offset, messagePtr + MessageHeadOffset, outerPacketHeadLength, copyLength);
                     Offset += copyLength;
                     MessageHeadOffset += copyLength;
                     // 检查是否有完整包头
@@ -227,13 +226,11 @@ namespace Fantasy
                         // 检查消息体长度是否超出限制
                         if (MessagePacketLength > Packet.PacketBodyMaxLength)
                         {
-                            throw new ScanException(
-                                $"The received information exceeds the maximum limit = {MessagePacketLength}");
+                            throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
                         }
 
                         PackInfo = OuterPackInfo.Create(Network);
-                        var memoryStream =
-                            PackInfo.RentMemoryStream(Packet.OuterPacketHeadLength + MessagePacketLength);
+                        var memoryStream = PackInfo.RentMemoryStream(Packet.OuterPacketHeadLength + MessagePacketLength);
                         PackInfo.MessagePacketLength = MessagePacketLength;
                         PackInfo.ProtocolCode = *(uint*)(messagePtr + Packet.PacketLength);
                         PackInfo.RpcId = *(uint*)(messagePtr + Packet.OuterPacketRpcIdLocation);

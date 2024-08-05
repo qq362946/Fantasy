@@ -6,22 +6,28 @@ using Fantasy.Core.Network;
 namespace Fantasy
 {
 	[ProtoContract]
-	public partial class C2A_TestMessage : AProto, IMessage
+	public partial class C2G_TestMessage : AProto, IMessage
 	{
-		public uint OpCode() { return OuterOpcode.C2A_TestMessage; }
+		public uint OpCode() { return OuterOpcode.C2G_TestMessage; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class C2A_TestRequest : AProto, IRequest
+	public partial class C2G_TestRequest : AProto, IRequest
 	{
 		[ProtoIgnore]
-		public A2C_TestResponse ResponseType { get; set; }
-		public uint OpCode() { return OuterOpcode.C2A_TestRequest; }
+		public G2C_TestResponse ResponseType { get; set; }
+		public uint OpCode() { return OuterOpcode.C2G_TestRequest; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class A2C_TestResponse : AProto, IResponse
+	public partial class G2C_TestResponse : AProto, IResponse
 	{
-		public uint OpCode() { return OuterOpcode.A2C_TestResponse; }
+		public uint OpCode() { return OuterOpcode.G2C_TestResponse; }
 		[ProtoMember(91, IsRequired = true)]
 		public uint ErrorCode { get; set; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
 	}
 }

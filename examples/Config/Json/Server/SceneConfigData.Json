@@ -1,4 +1,4 @@
 {"List":[
-{"Id":1001,"ProcessConfigId":1,"WorldConfigId":1,"SceneRuntimeType":"MultiThread","SceneTypeString":"Authentication","NetworkProtocol":"KCP","OuterPort":20000,"InnerPort":11001,"SceneType":1},
-{"Id":1002,"ProcessConfigId":1,"WorldConfigId":1,"SceneRuntimeType":"MultiThread","SceneTypeString":"Gate","NetworkProtocol":"KCP","OuterPort":20001,"InnerPort":11002,"SceneType":3}
+{"Id":1001,"ProcessConfigId":1,"WorldConfigId":1,"SceneRuntimeType":"MultiThread","SceneTypeString":"Addressable","NetworkProtocol":null,"OuterPort":0,"InnerPort":11001,"SceneType":2},
+{"Id":1002,"ProcessConfigId":1,"WorldConfigId":1,"SceneRuntimeType":"MultiThread","SceneTypeString":"Gate","NetworkProtocol":"KCP","OuterPort":20000,"InnerPort":11002,"SceneType":3}
 ]}
