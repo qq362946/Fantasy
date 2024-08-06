@@ -31,7 +31,7 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
         }
         
         _isInnerDispose = true;
-        if (_cancellationTokenSource.IsCancellationRequested)
+        if (!_cancellationTokenSource.IsCancellationRequested)
         {
             try
             {

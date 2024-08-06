@@ -109,7 +109,6 @@ namespace Fantasy
             
             if (_socket.Connected)
             {
-                _socket.Disconnect(false);
                 _socket.Close();
             }
             
@@ -139,6 +138,7 @@ namespace Fantasy
             _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () => { OnConnectFail?.Invoke(); });
             _connectEventArgs.RemoteEndPoint = _remoteAddress;
             _socket = new Socket(_remoteAddress.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
+            _socket.Blocking = false;
             _socket.SetSocketBufferToOsLimit();
             _socket.SetSioUdpConnReset();
             _socket.Bind(new IPEndPoint(IPAddress.Any, 0));

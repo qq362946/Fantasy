@@ -65,6 +65,7 @@ public sealed class KCPServerNetwork : ANetwork
         Settings = KCPSettings.Create(networkTarget);
         base.Initialize(NetworkType.Server, NetworkProtocolType.KCP, networkTarget);
         _socket = new Socket(address.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
+        _socket.Blocking = false;
         _socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, false);
         if (address.AddressFamily == AddressFamily.InterNetworkV6)
         {

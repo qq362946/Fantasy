@@ -37,7 +37,7 @@ public sealed class TCPServerNetworkChannel : ANetworkServerChannel
 
         _isInnerDispose = true;
         _network.RemoveChannel(Id);
-        if (_cancellationTokenSource.IsCancellationRequested)
+        if (!_cancellationTokenSource.IsCancellationRequested)
         {
             try
             {

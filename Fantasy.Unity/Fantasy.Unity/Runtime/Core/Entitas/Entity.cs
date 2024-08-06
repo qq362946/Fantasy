@@ -121,7 +121,7 @@ namespace Fantasy
             return entity;
         }
 
-        public void AddComponent<T>(T component) where T : Entity, new()
+        public void AddComponent<T>(T component) where T : Entity
         {
             if (this == component)
             {

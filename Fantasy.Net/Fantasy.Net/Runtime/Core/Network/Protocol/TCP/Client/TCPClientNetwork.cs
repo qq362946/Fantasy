@@ -59,7 +59,6 @@ namespace Fantasy
             
             if (_socket.Connected)
             {
-                _socket.Disconnect(true);
                 _socket.Close();
             }
             

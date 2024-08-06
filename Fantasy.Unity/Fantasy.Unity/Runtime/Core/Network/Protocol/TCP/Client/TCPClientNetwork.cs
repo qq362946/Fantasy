@@ -43,7 +43,7 @@ namespace Fantasy
             _isInnerDispose = true;
             ClearConnectTimeout();
             
-            if (_cancellationTokenSource.IsCancellationRequested)
+            if (!_cancellationTokenSource.IsCancellationRequested)
             {
                 try
                 {
@@ -59,7 +59,6 @@ namespace Fantasy
             
             if (_socket.Connected)
             {
-                _socket.Disconnect(true);
                 _socket.Close();
             }
             
