@@ -52,7 +52,7 @@ namespace Fantasy
             }
             else
             {
-                assemblyInfo = new AssemblyInfo(assemblyIdentity, assembly);
+                assemblyInfo = new AssemblyInfo(assemblyIdentity);
                 AssemblyList.TryAdd(assemblyIdentity, assemblyInfo);
                 foreach (var assemblySystem in AssemblySystems)
                 {

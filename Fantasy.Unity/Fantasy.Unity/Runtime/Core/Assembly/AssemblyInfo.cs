@@ -34,8 +34,7 @@ namespace Fantasy
         /// 初始化 <see cref="AssemblyInfo"/> 类的新实例。
         /// </summary>
         /// <param name="assemblyIdentity"></param>
-        /// <param name="assembly"></param>
-        public AssemblyInfo(long assemblyIdentity, Assembly assembly)
+        public AssemblyInfo(long assemblyIdentity)
         {
             AssemblyIdentity = assemblyIdentity;
         }

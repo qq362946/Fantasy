@@ -15,7 +15,7 @@ namespace Fantasy
         private int _poolCount;
         private readonly int _maxCapacity;
         public int Count => _poolQueue.Count;
-        private readonly Queue<IPool> _poolQueue = new Queue<IPool>();
+        private readonly OneToManyQueue<Type, IPool> _poolQueue = new OneToManyQueue<Type, IPool>();
         private readonly Dictionary<Type, Func<IPool>> _typeCheckCache = new Dictionary<Type, Func<IPool>>();
 
         protected PoolCore(int maxCapacity)
@@ -25,12 +25,12 @@ namespace Fantasy
 
         public T Rent<T>() where T : IPool, new()
         {
-            if (_poolQueue.Count == 0)
+            if (!_poolQueue.TryGetValue(typeof(T), out var queue))
             {
                 return new T();
             }
 
-            var dequeue = _poolQueue.Dequeue();
+            var dequeue = queue.Dequeue();
             dequeue.IsPool = true;
             _poolCount--;
             return (T)dequeue;
@@ -51,14 +51,14 @@ namespace Fantasy
                 }
             }
 
-            if (_poolQueue.Count == 0)
+            if (!_poolQueue.TryGetValue(type, out var queue))
             {
                 var instance = createInstance();
                 instance.IsPool = true;
                 return instance;
             }
-            
-            var dequeue = _poolQueue.Dequeue();
+
+            var dequeue = queue.Dequeue();
             dequeue.IsPool = true;
             _poolCount--;
             return dequeue;
@@ -82,7 +82,7 @@ namespace Fantasy
             }
 
             obj.IsPool = false;
-            _poolQueue.Enqueue(obj);
+            _poolQueue.Enqueue(typeof(T), obj);
         }
 
         public virtual void Dispose()

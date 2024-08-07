@@ -1,5 +1,6 @@
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Fantasy
 {
@@ -8,6 +9,8 @@ namespace Fantasy
     /// </summary>
     public static class EncryptHelper
     {
+        private static readonly SHA256 _sha256Hash = SHA256.Create();
+        
         /// <summary>
         /// 计算指定字节数组的Sha256。
         /// </summary>
@@ -55,6 +58,17 @@ namespace Fantasy
             var md5 = MD5.Create();
             bytes = md5.ComputeHash(bytes);
             return bytes.ToHex("x2");
+        }
+
+        /// <summary>
+        /// 根据字符串计算一个Hash值
+        /// </summary>
+        /// <param name="rawData"></param>
+        /// <returns></returns>
+        public static int ComputeSha256HashAsInt(string rawData)
+        {
+            var bytes = _sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+            return (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3];
         }
     }
 }
