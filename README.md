@@ -11,7 +11,7 @@
 #### 框架支持TCP\KCP\WebSocket（支持Unity发布成H5）三种网络协议，采用的Protobuf做为消息的序列化方案。
 #### 对于需要一套上手快、高性能、可扩展、分布式的全平台商业级解决方案的开发团队或个人来说是一个很好的选择。
 ## 文档（持续更新中）
-* [01_快速上手](Books/1-GetStartedQuickly.md)
+* [01_快速上手](Book/1-GetStartedQuickly.md)
 * [02_服务器配置](Books/0-介绍.md)
 * [03_定义网络协议](Books/0-介绍.md)
 * [04_导出工具配置](Books/0-介绍.md)
