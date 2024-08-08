@@ -27,7 +27,7 @@ Fantasy服务器是分布式的服务器，所以需要四个配置表配合来�
   - Id : Scene的Id，这个Id有一些规则需要遵守
     - Id不能小于当前WorldConfigId \* 1000 +1。
     - Id不能大于当前WorldConfigId \* 1000 +255。
-    - d必须在1和2条件之间。
+    - Id必须在1和2条件之间。
   - ProcessConfigId:进程Id,关联ProcessConfig.xlsx文件，用来表示这个Process有多少个Scene。
   - WorldConfigId:关联WorldConfig.xlsx表，用于表示这个Scene属于哪个世界。
   - SceneRuntimeType : 用于配置Scene在框架中运行的方式。
