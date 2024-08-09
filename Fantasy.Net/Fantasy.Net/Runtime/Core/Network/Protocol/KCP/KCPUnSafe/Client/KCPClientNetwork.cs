@@ -39,7 +39,6 @@ namespace Fantasy
         private bool _isInnerDispose;
         private long _connectTimeoutId;
         private IPEndPoint _remoteAddress;
-        private SocketAddress _socketAddress;
         private BufferPacketParser _packetParser;
         private readonly Pipe _pipe = new Pipe();
         private readonly byte[] _sendBuff = new byte[5];
@@ -191,7 +190,6 @@ namespace Fantasy
 
         private void OnReceiveSocketComplete()
         {
-            _socketAddress = _socket.LocalEndPoint.Serialize();
             SendRequestConnection();
             ReadPipeDataAsync().Coroutine();
             ReceiveSocketAsync().Coroutine();
