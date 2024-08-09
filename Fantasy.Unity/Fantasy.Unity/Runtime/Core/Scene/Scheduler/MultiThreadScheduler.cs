@@ -94,7 +94,7 @@ namespace Fantasy
                 }
                 finally
                 {
-                    Thread.Yield();
+                    Thread.Sleep(1);
                 }
             }
         }

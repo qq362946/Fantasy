@@ -126,7 +126,7 @@ namespace Fantasy
                     }
                     
                     _queue.Add(scene);
-                    Thread.Yield();
+                    Thread.Sleep(1);
                 }
                 else
                 {

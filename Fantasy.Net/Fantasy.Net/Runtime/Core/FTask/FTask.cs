@@ -208,6 +208,7 @@ namespace Fantasy
         private ExceptionDispatchInfo _exception;
         private STaskStatus _status;
         private T _value;
+        public object UserToKen;
 
         /// <summary>
         /// 获取一个值，表示异步任务是否已经完成。

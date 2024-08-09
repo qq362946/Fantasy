@@ -119,7 +119,7 @@ namespace Fantasy
             {
                 return;
             }
-
+            
             if (asyncEventArgs.LastOperation == SocketAsyncOperation.Connect)
             {
                 if (asyncEventArgs.SocketError == SocketError.Success)

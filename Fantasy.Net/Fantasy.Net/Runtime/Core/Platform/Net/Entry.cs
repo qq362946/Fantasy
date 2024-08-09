@@ -74,7 +74,7 @@ public static class Entry
         while (true)
         {
             ThreadScheduler.Update();
-            Thread.Yield();
+            Thread.Sleep(1);
         }
     }
 
