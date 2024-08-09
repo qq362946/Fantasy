@@ -34,11 +34,11 @@ Fantasy服务器是分布式的服务器，所以需要四个配置表配合来�
     - MainThread:设置Scene在当前进程的主线程中运行、如果多个Scene在同一个ProcessConfigId下，表示这些Scene都是在同一个主线程中运行。如果想提升效率可以配置多个进程（也就是Process）分别对应多个Scene，这样设置就是多进程单线程的配置方法。
     - MultiThread:设置Scene为一个单独的线程执行、但需要注意的情况下，如果设置了ThreadPool最好其他Scene不要设置为MultiThread了，因为资源抢占的问题，如果这个Scene不是一个长时间运行的可以不用考虑这个。
     - ThreadPool:根据当前服务器的CPU核心数创建线程，Scene会在这些线程中运行，这样的好处的避免了线程过多而出现的资源竞争的问题，这种配置非常适用于单服务器有多个进程的时候，改为一个进程多个Scene。
- - SceneTypeString:用来表示这个Scene是什么类型。这个可以在SceneConfig.xlsx的SceneTypeConfig工作簿进程配置。
- - NetworkProtocol:用于表示当前Scene对客户端的网络协议。
+  - SceneTypeString:用来表示这个Scene是什么类型。这个可以在SceneConfig.xlsx的SceneTypeConfig工作簿进程配置。
+  - NetworkProtocol:用于表示当前Scene对客户端的网络协议。
    - KCP : 一个UDP的可靠协议。
    - TCP : 标准的TCP协议。
    - WebSocket : 一般用于WebGL平台使用。
-- OuterPort:用来表示监听的外网连接的端口号，这里不填写或填0.表示不会建立监听，也就是不会接收到外网发送的消息。
-- InnerPort:用来表示监听的内部网络连接的端口号，这里不填写或填0.表示不会建立监听，也就是不会接受内部网络发送的消息。
-- SceneType:根据SceneTypeString列的值使用公式自动生成的，不需要手动修改。如果要修改在SceneTypeString列选择就可以了。
+  - OuterPort:用来表示监听的外网连接的端口号，这里不填写或填0.表示不会建立监听，也就是不会接收到外网发送的消息。
+  - InnerPort:用来表示监听的内部网络连接的端口号，这里不填写或填0.表示不会建立监听，也就是不会接受内部网络发送的消息。
+  - SceneType:根据SceneTypeString列的值使用公式自动生成的，不需要手动修改。如果要修改在SceneTypeString列选择就可以了。
