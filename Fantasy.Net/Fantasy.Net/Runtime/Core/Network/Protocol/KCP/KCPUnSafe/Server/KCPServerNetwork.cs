@@ -72,6 +72,7 @@ public sealed class KCPServerNetwork : ANetwork
         {
             _socket.SetSocketOption(SocketOptionLevel.IPv6, SocketOptionName.IPv6Only, false);
         }
+        _socket.Blocking = false;
         _socket.Bind(address);
         _socket.SetSocketBufferToOsLimit();
         _socket.SetSioUdpConnReset();
@@ -541,7 +542,7 @@ public sealed class KCPServerNetwork : ANetwork
     {
         try
         {
-            _socket.SendTo(new ArraySegment<byte>(buffer,offset,count), SocketFlags.None, endPoint);
+            _socket.SendTo(new ArraySegment<byte>(buffer, offset, count), SocketFlags.None, endPoint);
         }
         catch (ArgumentException ex)
         {
