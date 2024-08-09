@@ -13,7 +13,7 @@
 ## 文档（持续更新中）
 * [01_快速上手](Book/1-GetStartedQuickly.md)
 * [02_服务器配置](Book/2-ServerConfiguration.md)
-* [03_定义网络协议](Books/0-介绍.md)
+* [03_定义网络协议](Book/3.1-NetworkProtocolConfiguration.md)
 * [04_导出工具配置](Books/0-介绍.md)
 * [05_普通网络协议](Books/0-介绍.md)
 * [06_可寻址网络协议](Books/0-介绍.md)
