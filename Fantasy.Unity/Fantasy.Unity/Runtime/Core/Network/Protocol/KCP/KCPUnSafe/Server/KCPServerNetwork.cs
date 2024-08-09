@@ -49,6 +49,7 @@ public sealed class KCPServerNetwork : ANetwork
     private readonly Queue<uint> _pendingTimeOutTime = new Queue<uint>();
     private readonly HashSet<uint> _updateChannels = new HashSet<uint>();
     private readonly Queue<uint> _updateTimeOutTime = new Queue<uint>();
+    private readonly Queue<IPEndPoint> _endPoint = new Queue<IPEndPoint>();
     private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
     private readonly SortedOneToManyHashSet<uint, uint> _updateTimer = new SortedOneToManyHashSet<uint, uint>();
     private readonly Dictionary<uint, PendingConnection> _pendingConnection = new Dictionary<uint, PendingConnection>();
@@ -119,13 +120,28 @@ public sealed class KCPServerNetwork : ANetwork
 
     private async FTask ReceiveSocketAsync()
     {
+        EndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+        
         while (!_cancellationTokenSource.IsCancellationRequested)
         {
             try
             {
                 var memory = _pipe.Writer.GetMemory(8192);
-                var count = await _socket.ReceiveAsync(memory, SocketFlags.None, _cancellationTokenSource.Token);
-                _pipe.Writer.Advance(count);
+                var socketReceiveFromResult = await _socket.ReceiveFromAsync(memory, SocketFlags.None, remoteEndPoint, _cancellationTokenSource.Token);
+                var receivedBytes = socketReceiveFromResult.ReceivedBytes;
+                if (receivedBytes == 5)
+                {
+                    switch ((KcpHeader)memory.Span[0])
+                    {
+                        case KcpHeader.RequestConnection:
+                        case KcpHeader.ConfirmConnection:
+                        {
+                            _endPoint.Enqueue(socketReceiveFromResult.RemoteEndPoint.Clone());
+                            break;
+                        }
+                    }
+                }
+                _pipe.Writer.Advance(receivedBytes);
                 await _pipe.Writer.FlushAsync();
             }
             catch (SocketException ex)
@@ -239,17 +255,7 @@ public sealed class KCPServerNetwork : ANetwork
             // 客户端请求建立KCP连接
             case KcpHeader.RequestConnection:
             {
-                IPEndPoint ipEndPoint = null;
-                
-                try
-                {
-                    _ = NetworkHelper.ByteToSocketAddress(buffer, 0, out var socketAddress);
-                    ipEndPoint = socketAddress.GetIPEndPoint();
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e);
-                }
+                _endPoint.TryDequeue(out var ipEndPoint);
                 
                 if (_pendingConnection.TryGetValue(channelId, out var pendingConnection))
                 {
@@ -267,14 +273,13 @@ public sealed class KCPServerNetwork : ANetwork
                     break;
                 }
                 
-                AddPendingConnection(ref channelId, ipEndPoint.Clone());
+                AddPendingConnection(ref channelId, ipEndPoint);
                 break;
             }
             // 客户端确认建立KCP连接
             case KcpHeader.ConfirmConnection:
             {
-                _ = NetworkHelper.ByteToSocketAddress(buffer, 0, out var socketAddress);
-                var ipEndPoint = socketAddress.GetIPEndPoint();
+                _endPoint.TryDequeue(out var ipEndPoint);
                 if (!ConfirmPendingConnection(ref channelId, ipEndPoint))
                 {
                     break;

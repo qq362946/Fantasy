@@ -30,4 +30,18 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
+	[ProtoContract]
+	public partial class C2G_CreateAddressableRequest : AProto, IRequest
+	{
+		[ProtoIgnore]
+		public G2C_CreateAddressableResponse ResponseType { get; set; }
+		public uint OpCode() { return OuterOpcode.C2G_CreateAddressableRequest; }
+	}
+	[ProtoContract]
+	public partial class G2C_CreateAddressableResponse : AProto, IResponse
+	{
+		public uint OpCode() { return OuterOpcode.G2C_CreateAddressableResponse; }
+		[ProtoMember(91, IsRequired = true)]
+		public uint ErrorCode { get; set; }
+	}
 }

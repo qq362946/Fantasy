@@ -1,2 +1,10 @@
 syntax = "proto3";
 package Sining.Message;
+message G2A_TestRequest // IRouteRequest,G2A_TestResponse
+{
+
+}
+message G2A_TestResponse // IRouteResponse
+{
+	
+}

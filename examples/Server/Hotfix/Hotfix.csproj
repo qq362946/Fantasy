@@ -13,7 +13,6 @@
 
     <ItemGroup>
       <Folder Include="Benchmark\" />
-      <Folder Include="Inner\" />
       <Folder Include="Outer\NormalMessage\" />
     </ItemGroup>
 

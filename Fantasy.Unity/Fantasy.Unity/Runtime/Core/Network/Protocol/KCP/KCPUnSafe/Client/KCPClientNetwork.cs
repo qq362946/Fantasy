@@ -42,7 +42,7 @@ namespace Fantasy
         private SocketAddress _socketAddress;
         private BufferPacketParser _packetParser;
         private readonly Pipe _pipe = new Pipe();
-        private readonly byte[] _sendBuff = new byte[41];
+        private readonly byte[] _sendBuff = new byte[5];
         private readonly byte[] _receiveBuffer = new byte[Packet.PacketBodyMaxLength + 20];
         private readonly byte[] _channelIdBytes = new byte[sizeof(uint)];
         private readonly Queue<uint> _updateTimeOutTime = new Queue<uint>();
@@ -548,13 +548,15 @@ namespace Fantasy
             try
             {
                 fixed (byte* p = _sendBuff)
-                fixed (byte* cid = _channelIdBytes)
                 {
-                    *p = KcpHeaderRequestConnection;
-                    Buffer.MemoryCopy(cid, p + 1, _sendBuff.Length - 1, _channelIdBytes.Length);
+                    p[0] = KcpHeaderRequestConnection;
+                    p[1] = _channelIdBytes[0];
+                    p[2] = _channelIdBytes[1];
+                    p[3] = _channelIdBytes[2];
+                    p[4] = _channelIdBytes[3];
                 }
                 
-                SendAsync(_sendBuff, 0, SetSocketAddressToSendBuff());
+                SendAsync(_sendBuff, 0, 5);
             }
             catch (Exception e)
             {
@@ -567,13 +569,15 @@ namespace Fantasy
             try
             {
                 fixed (byte* p = _sendBuff)
-                fixed (byte* cid = _channelIdBytes)
                 {
-                    *p = KcpHeaderConfirmConnection;
-                    Buffer.MemoryCopy(cid, p + 1, _sendBuff.Length - 1, _channelIdBytes.Length);
+                    p[0] = KcpHeaderConfirmConnection;
+                    p[1] = _channelIdBytes[0];
+                    p[2] = _channelIdBytes[1];
+                    p[3] = _channelIdBytes[2];
+                    p[4] = _channelIdBytes[3];
                 }
-                
-                SendAsync(_sendBuff, 0, SetSocketAddressToSendBuff());
+
+                SendAsync(_sendBuff, 0, 5);
             }
             catch (Exception e)
             {
@@ -586,10 +590,12 @@ namespace Fantasy
             try
             {
                 fixed (byte* p = _sendBuff)
-                fixed (byte* cid = _channelIdBytes)
                 {
-                    *p = KcpHeaderDisconnect;
-                    Buffer.MemoryCopy(cid, p + 1, _sendBuff.Length - 1, _channelIdBytes.Length);
+                    p[0] = KcpHeaderDisconnect;
+                    p[1] = _channelIdBytes[0];
+                    p[2] = _channelIdBytes[1];
+                    p[3] = _channelIdBytes[2];
+                    p[4] = _channelIdBytes[3];
                 }
                 
                 SendAsync(_sendBuff, 0, 5);
@@ -598,34 +604,6 @@ namespace Fantasy
             {
                 Log.Error(e);
             }
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private int SetSocketAddressToSendBuff()
-        {
-            var count = 0;
-            switch (_socketAddress.Family)
-            {
-                case AddressFamily.InterNetwork:
-                {
-                    // 16 (IPv4地址) + 5 (头) + 8 (附加数据)
-                    count = 29;
-                    break;
-                }
-                case AddressFamily.InterNetworkV6:
-                {
-                    // 28 (IPv6地址) + 5 (头) + 8 (附加数据)
-                    count = 41;
-                    break;
-                }
-                default:
-                {
-                    throw new NotSupportedException("Unsupported address family");
-                }
-            }
-
-            _socketAddress.SocketAddressToByte(_sendBuff, 5);
-            return count;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
