@@ -8,7 +8,7 @@ namespace Fantasy
     {
         public static GameObject FantasyObjectGameObject { get; private set; }
         // 这个方法将在游戏启动时自动调用
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void OnRuntimeMethodLoad()
         {
             FantasyObjectGameObject = new GameObject("Fantasy.Net");

@@ -3,6 +3,16 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy;
 
+public sealed partial class SceneConfig
+{
+    public long RouteId { get; private set; }
+    protected override void EndInit()
+    {
+        RouteId = new RuntimeIdStruct(0, Id, (byte)WorldConfigId, 0);
+        base.EndInit();
+    }
+}
+
 public sealed partial class SceneConfigData
 {
     private readonly OneToManyList<int, SceneConfig> _sceneConfigBySceneType = new OneToManyList<int, SceneConfig>();

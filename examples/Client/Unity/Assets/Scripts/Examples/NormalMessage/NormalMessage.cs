@@ -79,10 +79,7 @@ public class NormalMessage : MonoBehaviour
     {
         SendMessageButton.interactable = false;
         // 发送一个消息给服务器
-        _session.Send(new C2G_TestMessage()
-        {
-            Tag = "Hello C2G_TestMessage"
-        });
+        _session.Send(new C2G_TestMessage() { Tag = "Hello C2G_TestMessage" });
         SendMessageButton.interactable = true;
     }
 
