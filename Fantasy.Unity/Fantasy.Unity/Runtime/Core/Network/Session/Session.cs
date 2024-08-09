@@ -122,7 +122,7 @@ namespace Fantasy
         /// <param name="message">要发送的消息。</param>
         /// <param name="rpcId">RPC 标识符。</param>
         /// <param name="routeId">路由标识符。</param>
-        public virtual void Send<T>(T message, uint rpcId = 0, long routeId = 0) where T : IMessage
+        public virtual void Send(IMessage message, uint rpcId = 0, long routeId = 0)
         {
             if (IsDisposed)
             {
@@ -168,36 +168,40 @@ namespace Fantasy
         /// <summary>
         /// 调用请求并等待响应。
         /// </summary>
-        /// <param name="request">要调用的请求。</param>
-        /// <param name="routeId">路由标识符。</param>
-        /// <returns>一个代表异步操作的任务，返回响应。</returns>
+        /// <param name="request"></param>
+        /// <param name="routeId"></param>
+        /// <returns></returns>
+        public virtual FTask<IResponse> Call(IRouteRequest request, long routeId = 0)
+        {
+            if (IsDisposed)
+            {
+                return null;
+            }
+            
+            var requestCallback = FTask<IResponse>.Create();
+            var rpcId = ++RpcId; 
+            RequestCallback.Add(rpcId, requestCallback);
+            Send(request, rpcId, routeId);
+            return requestCallback;
+        }
+
+        /// <summary>
+        /// 调用请求并等待响应。
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="routeId"></param>
+        /// <returns></returns>
         public virtual FTask<IResponse> Call(IRequest request, long routeId = 0)
         {
             if (IsDisposed)
             {
                 return null;
             }
-
-            // 创建用于等待响应的任务
+            
             var requestCallback = FTask<IResponse>.Create();
-            var rpcId = ++RpcId; // 增加RPC标识符
-            RequestCallback.Add(rpcId, requestCallback); // 将任务添加到回调字典中
-#if FANTASY_NET
-            if (request is IRouteMessage iRouteMessage)
-            {
-                // 如果请求是路由消息类型，则通过路由消息发送请求
-                Send(iRouteMessage, rpcId, routeId);
-            }
-            else
-            {
-                // 否则通过普通消息发送请求
-                Send(request, rpcId, routeId);
-            }
-#else
-                Send(request, rpcId, routeId);
-#endif
-
-            // 返回任务以等待响应
+            var rpcId = ++RpcId; 
+            RequestCallback.Add(rpcId, requestCallback);
+            Send(request, rpcId, routeId);
             return requestCallback;
         }
         

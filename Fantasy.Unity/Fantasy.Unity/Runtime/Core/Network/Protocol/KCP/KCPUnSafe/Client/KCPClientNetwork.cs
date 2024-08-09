@@ -172,10 +172,7 @@ namespace Fantasy
             {
                 if (asyncEventArgs.SocketError == SocketError.Success)
                 {
-                    Scene.ThreadSynchronizationContext.Post(() =>
-                    {
-                        OnReceiveSocketComplete();
-                    });
+                    Scene.ThreadSynchronizationContext.Post(OnReceiveSocketComplete);
                 }
                 else
                 {
