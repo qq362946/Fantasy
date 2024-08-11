@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -16,7 +16,10 @@ namespace Fantasy
             using (var writer = new StreamWriter("Assets/link.xml"))
             {
                 writer.WriteLine("<linker>");
-                GenerateLinkXml(writer, "Assembly-CSharp", "Assets/link.xml");
+                foreach (var assembly in FantasySettingsScriptableObject.Instance.LinkXmlAssemblies)
+                {
+                    GenerateLinkXml(writer, assembly, "Assets/link.xml");
+                }
                 GenerateLinkXml(writer, "Fantasy.Unity", "Assets/link.xml");
                 writer.WriteLine("</linker>");
             }
