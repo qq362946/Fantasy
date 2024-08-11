@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -14,6 +14,7 @@ namespace Fantasy
         private SerializedProperty _autoCopyAssembly;
         private SerializedProperty _hotUpdatePath;
         private SerializedProperty _hotUpdateAssemblyDefinitions;
+        private SerializedProperty _linkXmlAssemblies;
         public FantasySettingsProvider() : base("Project/Fantasy Settings", SettingsScope.Project) { }
 
         public override void OnActivate(string searchContext, VisualElement rootElement)
@@ -35,6 +36,7 @@ namespace Fantasy
             _autoCopyAssembly = _serializedObject.FindProperty("autoCopyAssembly");
             _hotUpdatePath = _serializedObject.FindProperty("hotUpdatePath");
             _hotUpdateAssemblyDefinitions = _serializedObject.FindProperty("hotUpdateAssemblyDefinitions");
+            _linkXmlAssemblies = _serializedObject.FindProperty("LinkXmlAssemblies");
         }
 
         public override void OnGUI(string searchContext)
@@ -52,6 +54,7 @@ namespace Fantasy
                 EditorGUILayout.PropertyField(_autoCopyAssembly);
                 EditorGUILayout.PropertyField(_hotUpdatePath);
                 EditorGUILayout.PropertyField(_hotUpdateAssemblyDefinitions);
+                EditorGUILayout.PropertyField(_linkXmlAssemblies);
                 
                 if (EditorGUI.EndChangeCheck())
                 {
