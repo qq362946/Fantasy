@@ -8,3 +8,11 @@ message G2A_TestResponse // IRouteResponse
 {
 	
 }
+message G2M_RequestAddressableId // IRouteRequest,M2G_ResponseAddressableId
+{
+
+}
+message M2G_ResponseAddressableId // IRouteResponse
+{
+	int64 AddressableId = 1;	// Map服务器返回的AddressableId
+}

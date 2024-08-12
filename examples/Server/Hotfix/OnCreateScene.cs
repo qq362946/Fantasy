@@ -11,29 +11,34 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         {
             case SceneType.Addressable:
             {
+                scene.AddComponent<AddressableManageComponent>();
                 _addressableSceneRunTimeId = scene.RunTimeId;
                 // Log.Debug($"_addressableSceneRunTimeId={_addressableSceneRunTimeId}");
                 break;
             }
+            case SceneType.Map:
+            {
+                break;
+            }
             case SceneType.Gate:
             {
-                var tasks = new List<FTask>(1000);
-                var session = scene.GetSession(_addressableSceneRunTimeId);
-                var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
-                
-                async FTask Call()
-                {
-                    await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,new G2A_TestRequest());
-                }
-                for (int i = 0; i < 100000000000; i++)
-                {
-                    tasks.Clear();
-                    for (int j = 0; j < tasks.Capacity; ++j)
-                    {
-                        tasks.Add(Call());
-                    }
-                    await FTask.WaitAll(tasks);
-                }
+                // var tasks = new List<FTask>(1000);
+                // var session = scene.GetSession(_addressableSceneRunTimeId);
+                // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
+                //
+                // async FTask Call()
+                // {
+                //     await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,new G2A_TestRequest());
+                // }
+                // for (int i = 0; i < 100000000000; i++)
+                // {
+                //     tasks.Clear();
+                //     for (int j = 0; j < tasks.Capacity; ++j)
+                //     {
+                //         tasks.Add(Call());
+                //     }
+                //     await FTask.WaitAll(tasks);
+                // }
                 break;
             }
         }

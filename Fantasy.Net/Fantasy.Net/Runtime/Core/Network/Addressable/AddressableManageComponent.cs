@@ -56,7 +56,9 @@ namespace Fantasy
                 }
                 
                 Addressable[addressableId] = routeId;
+#if FANTASY_DEVELOP
                 Log.Debug($"AddressableManageComponent Add addressableId:{addressableId} routeId:{routeId}");
+#endif
             }
             catch (Exception e)
             {
@@ -91,7 +93,9 @@ namespace Fantasy
             using (await AddressableLock.Wait(addressableId))
             {
                 Addressable.Remove(addressableId);
+#if FANTASY_DEVELOP
                 Log.Debug($"Addressable Remove addressableId: {addressableId} _addressable:{Addressable.Count}");
+#endif
             }
         }
 
@@ -127,7 +131,9 @@ namespace Fantasy
             }
 
             coroutineLock.Dispose();
+#if FANTASY_DEVELOP
             Log.Debug($"Addressable UnLock key: {addressableId} oldAddressableId : {oldAddressableId} routeId: {routeId}  Source:{source}");
+#endif
         }
     }
 }

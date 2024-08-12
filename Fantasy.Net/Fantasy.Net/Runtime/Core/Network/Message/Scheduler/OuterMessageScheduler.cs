@@ -77,7 +77,7 @@ namespace Fantasy
                             }
                             case > OpCode.OuterRouteMessage:
                             {
-                                addressableRouteComponent.Send(packInfo.RouteTypeCode, messageType, packInfo.MemoryStream);
+                                await addressableRouteComponent.Send(packInfo.RouteTypeCode, messageType, packInfo.MemoryStream);
                                 return;
                             }
                         }
