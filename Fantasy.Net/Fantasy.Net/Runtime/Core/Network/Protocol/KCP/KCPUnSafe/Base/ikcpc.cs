@@ -1,6 +1,7 @@
 ﻿#if FANTASY_KCPUNSAFE
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Fantasy;
 using static KCP.IQUEUEHEAD;
 using static KCP.KCPBASIC;
 
@@ -1103,6 +1104,24 @@ namespace KCP
 
         public static void ikcp_update(IKCPCB* kcp, uint current, KcpCallback output, byte[] bytes)
         {
+            if (kcp == null)
+            {
+                Log.Error("kcp is null");
+                return;
+            }
+
+            if (output == null)
+            {
+                Log.Error("output is null");
+                return;
+            }
+            
+            if (bytes == null)
+            {
+                Log.Error("bytes is null");
+                return;
+            }
+            
             kcp->current = current;
             if (kcp->updated == 0)
             {

@@ -131,9 +131,8 @@ namespace Fantasy
         /// 异步等待指定时间。
         /// </summary>
         /// <param name="time">等待的时间长度。</param>
-        /// <param name="cancellationToken">可选的取消令牌。</param>
         /// <returns>等待是否成功。</returns>
-        public async FTask WaitAsync(long time, FCancellationToken cancellationToken = null)
+        public async FTask WaitAsync(long time)
         {
             if (time <= 0)
             {
@@ -145,7 +144,7 @@ namespace Fantasy
             var tcs = FTask.Create();
             var timerAction = new TimerAction(TimerType.OnceWaitTimer, now, time, tcs);
             AddTimer(timerId, ref timerAction);
-            // 定义取消操作的方法
+            
             void CancelActionVoid()
             {
                 if (Remove(timerId))
@@ -153,6 +152,8 @@ namespace Fantasy
                     tcs.SetResult();
                 }
             }
+
+            var cancellationToken = await FTask.GetUserTokenAsync<FCancellationToken>();
             
             try
             {
@@ -169,9 +170,8 @@ namespace Fantasy
         /// 异步等待直到指定时间。
         /// </summary>
         /// <param name="tillTime">等待的目标时间。</param>
-        /// <param name="cancellationToken">可选的取消令牌。</param>
         /// <returns>等待是否成功。</returns>
-        public async FTask WaitTillAsync(long tillTime, FCancellationToken cancellationToken = null)
+        public async FTask WaitTillAsync(long tillTime)
         {
             var now = Now();
 
@@ -194,6 +194,8 @@ namespace Fantasy
                 }
             }
             
+            var cancellationToken = await FTask.GetUserTokenAsync<FCancellationToken>();
+            
             try
             {
                 cancellationToken?.Add(CancelActionVoid);
@@ -209,12 +211,12 @@ namespace Fantasy
         /// 异步等待一帧时间。
         /// </summary>
         /// <returns>等待是否成功。</returns>
-        public FTask WaitFrameAsync(FCancellationToken cancellationToken = null)
+        public FTask WaitFrameAsync()
         {
 #if FANTASY_NET
-            return WaitAsync(100, cancellationToken);
+            return WaitAsync(100);
 #else
-            return WaitAsync(0, cancellationToken);
+            return WaitAsync(0);
 #endif
         }
 
