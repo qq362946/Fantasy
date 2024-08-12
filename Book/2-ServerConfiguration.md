@@ -4,26 +4,22 @@ Fantasy服务器是分布式的服务器，所以需要四个配置表配合来�
 
 在Fantasy/Examples/Config/Excel/Server下，分别有ProcessConfig.xlsx、WorldConfig.xlsx、MachineConfig.xlsx、SceneConfig.xlsx四个配置文件。
 
-- ProcessConfig.xlsx:用来配置服务器有多少个进程。
-
+## ProcessConfig.xlsx:用来配置服务器有多少个进程。
   - Id : 进程的Id，不可以重复。
   - MachineId : 配置所在服务器的ID，配合MachineConfig.xlsx使用。
   - ReleaseMode : 为预留选项，暂时没有任何用处，但不要删除。
-- MachineConfig.xlsx:用来配置服务器的信息，比如服务器的IP地址和内部通讯的地址。
-
+## MachineConfig.xlsx:用来配置服务器的信息，比如服务器的IP地址和内部通讯的地址。
   - Id : 配置的Id，不可以重复。
   - OuterIP : 外网的IP地址，主要用于客户端连接服务器使用。
   - OuterBindIP : 外网绑定IP，服务器的网络需要绑定一个IP地址，这个地址是给服务器SOCKET绑定地址用的。
   - InnerBindIP : 内网绑定IP，服务器之间相互通讯的一个地址。
-- WorldConfig.xlsx:用来配置服务器的世界，也可以理解为游戏的区
-  
+## WorldConfig.xlsx:用来配置服务器的世界，也可以理解为游戏的区
   - WorldName : 世界的名称，方便查看是什么世界，比如一区、二区。
   - DbConnection : 每个区都有一个数据库，这个用来配置数据库的连接字符串。
   - DbName : 数据库名称。
   - DbType : 数据库类型，目前仅支持MongoDB。
   - IsGameWorld : 这个是预留字段，暂时没有用处，但不要删除。
-- SceneConfig.xlsx:用来配置Scene的服务器。
-  
+## SceneConfig.xlsx:用来配置Scene的服务器。
   - Id : Scene的Id，这个Id有一些规则需要遵守
     - Id不能小于当前WorldConfigId \* 1000 +1。
     - Id不能大于当前WorldConfigId \* 1000 +255。
