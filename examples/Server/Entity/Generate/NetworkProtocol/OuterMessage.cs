@@ -52,4 +52,23 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
+	[ProtoContract]
+	public partial class C2M_TestRequest : AProto, IAddressableRouteRequest
+	{
+		[ProtoIgnore]
+		public M2C_TestResponse ResponseType { get; set; }
+		public uint OpCode() { return OuterOpcode.C2M_TestRequest; }
+		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
+	[ProtoContract]
+	public partial class M2C_TestResponse : AProto, IAddressableRouteResponse
+	{
+		public uint OpCode() { return OuterOpcode.M2C_TestResponse; }
+		[ProtoMember(91, IsRequired = true)]
+		public uint ErrorCode { get; set; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
 }

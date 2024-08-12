@@ -24,3 +24,11 @@ message C2M_TestMessage // IAddressableRouteMessage
 {
 	string Tag = 1;
 }
+message C2M_TestRequest // IAddressableRouteRequest,M2C_TestResponse
+{
+	string Tag = 1;
+}
+message M2C_TestResponse // IAddressableRouteResponse
+{
+	string Tag = 1;
+}
