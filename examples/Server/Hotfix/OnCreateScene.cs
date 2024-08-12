@@ -11,8 +11,13 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         {
             case SceneType.Addressable:
             {
+                scene.AddComponent<AddressableManageComponent>();
                 _addressableSceneRunTimeId = scene.RunTimeId;
                 // Log.Debug($"_addressableSceneRunTimeId={_addressableSceneRunTimeId}");
+                break;
+            }
+            case SceneType.Map:
+            {
                 break;
             }
             case SceneType.Gate:
@@ -20,7 +25,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
                 // var tasks = new List<FTask>(1000);
                 // var session = scene.GetSession(_addressableSceneRunTimeId);
                 // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
-                // session.Call(new G2A_TestRequest());
+                //
                 // async FTask Call()
                 // {
                 //     await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,new G2A_TestRequest());
@@ -32,7 +37,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
                 //     {
                 //         tasks.Add(Call());
                 //     }
-                //     await FTask.WhenAll(tasks);
+                //     await FTask.WaitAll(tasks);
                 // }
                 break;
             }

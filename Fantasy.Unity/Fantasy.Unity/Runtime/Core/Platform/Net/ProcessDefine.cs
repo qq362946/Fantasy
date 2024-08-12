@@ -8,7 +8,7 @@ public sealed class CommandLineOptions
     /// <summary>
     /// 进程Id，获取或设置进程的唯一标识符。
     /// </summary>
-    [Option("ProcessIdId", Required = false, Default = (uint)0, HelpText = "Enter an ProcessIdId such as 1")]
+    [Option("pid", Required = false, Default = (uint)0, HelpText = "Enter an ProcessIdId such as 1")]
     public uint ProcessId { get; set; }
     /// <summary>
     /// Process类型，获取或设置应用程序的类型。
@@ -30,7 +30,7 @@ public sealed class CommandLineOptions
     /// KCP - 服务器内部之间通讯使用KCP协议
     /// WebSocket - 服务器内部之间通讯使用WebSocket协议(不推荐、TCP或KCP)
     /// </summary>
-    [Option('n', "InnerNetwork", Required = false, Default = "KCP", HelpText = "TCP、KCP、WebSocket")]
+    [Option('n', "InnerNetwork", Required = false, Default = "TCP", HelpText = "TCP、KCP、WebSocket")]
     public string InnerNetwork { get; set; }
     /// <summary>
     /// 配置表文件夹路径。

@@ -232,7 +232,6 @@ namespace Fantasy
                 var networkProtocolType = Enum.Parse<NetworkProtocolType>(sceneConfig.NetworkProtocol);
                 scene.OuterNetwork = NetworkProtocolFactory.CreateServer(scene, networkProtocolType, NetworkTarget.Outer, machineConfig.OuterBindIP, sceneConfig.OuterPort);
             }
-
             process.AddScene(scene);
             scene.ThreadSynchronizationContext.Post(() => scene.EventComponent.PublishAsync(new OnCreateScene(scene)).Coroutine());
             return scene;
@@ -363,13 +362,13 @@ namespace Fantasy
                 _innerSessionIs.Remove(sceneId);
             }
 
-            if (Scene.Process.IsProcess(ref sceneId))
-            {
-                // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
-                var innerSession = Session.CreateInnerSession(Scene);
-                _innerSessionIs.Add(sceneId, new InnerSessionInfo(innerSession, null));
-                return innerSession;
-            }
+            // if (Scene.Process.IsProcess(ref sceneId))
+            // {
+            //     // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
+            //     var innerSession = Session.CreateInnerSession(Scene);
+            //     _innerSessionIs.Add(sceneId, new InnerSessionInfo(innerSession, null));
+            //     return innerSession;
+            // }
 
             if (!SceneConfigData.Instance.TryGet(sceneId, out var sceneConfig))
             {

@@ -20,4 +20,21 @@ namespace Fantasy
 		[ProtoMember(91, IsRequired = true)]
 		public uint ErrorCode { get; set; }
 	}
+	[ProtoContract]
+	public partial class G2M_RequestAddressableId : AProto, IRouteRequest
+	{
+		[ProtoIgnore]
+		public M2G_ResponseAddressableId ResponseType { get; set; }
+		public uint OpCode() { return InnerOpcode.G2M_RequestAddressableId; }
+		public long RouteTypeOpCode() { return InnerRouteType.Route; }
+	}
+	[ProtoContract]
+	public partial class M2G_ResponseAddressableId : AProto, IRouteResponse
+	{
+		public uint OpCode() { return InnerOpcode.M2G_ResponseAddressableId; }
+		[ProtoMember(91, IsRequired = true)]
+		public uint ErrorCode { get; set; }
+		[ProtoMember(1)]
+		public long AddressableId { get; set; }
+	}
 }

@@ -201,7 +201,7 @@ namespace Fantasy
                 tasks.Add(@event.InvokeAsync(eventData));
             }
 
-            await FTask.WhenAll(tasks);
+            await FTask.WaitAll(tasks);
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace Fantasy
                 tasks.Add(@event.InvokeAsync(eventData));
             }
 
-            await FTask.WhenAll(tasks);
+            await FTask.WaitAll(tasks);
 
             if (isDisposed)
             {

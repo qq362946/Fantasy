@@ -46,7 +46,6 @@ public sealed class AddressableRouteComponent : Entity
     /// 可寻址路由消息组件的地址映射 ID，只可在类内部设置，外部只可读取
     /// </summary>
     public long AddressableId;
-    
     /// <summary>
     /// 用于管理 Addressable 路由消息的锁队列。
     /// </summary>
@@ -68,7 +67,7 @@ public sealed class AddressableRouteComponent : Entity
     /// 发送可寻址路由消息。
     /// </summary>
     /// <param name="message">可寻址路由消息。</param>
-    public void Send(IAddressableRouteMessage message)
+    internal void Send(IAddressableRouteMessage message)
     {
         Call(message).Coroutine();
     }
@@ -79,9 +78,9 @@ public sealed class AddressableRouteComponent : Entity
     /// <param name="routeTypeOpCode">路由类型操作码。</param>
     /// <param name="requestType">请求类型。</param>
     /// <param name="message">消息数据。</param>
-    public void Send(long routeTypeOpCode, Type requestType, MemoryStream message)
+    internal async FTask Send(long routeTypeOpCode, Type requestType, MemoryStream message)
     {
-        Call(routeTypeOpCode, requestType, message).Coroutine();
+        await Call(routeTypeOpCode, requestType, message);
     }
     
     /// <summary>
@@ -90,7 +89,7 @@ public sealed class AddressableRouteComponent : Entity
     /// <param name="routeTypeOpCode">路由类型操作码。</param>
     /// <param name="requestType">请求类型。</param>
     /// <param name="request">请求数据。</param>
-    public async FTask<IResponse> Call(long routeTypeOpCode, Type requestType, MemoryStream request)
+    internal async FTask<IResponse> Call(long routeTypeOpCode, Type requestType, MemoryStream request)
     {
         // 如果组件已被释放，则创建一个带有错误代码的响应，表示路由未找到
         if (IsDisposed)
@@ -164,7 +163,7 @@ public sealed class AddressableRouteComponent : Entity
     /// 调用可寻址路由消息并等待响应。
     /// </summary>
     /// <param name="request">可寻址路由请求。</param>
-    public async FTask<IResponse> Call(IAddressableRouteMessage request)
+    private async FTask<IResponse> Call(IAddressableRouteMessage request)
     {
         if (IsDisposed)
         {
