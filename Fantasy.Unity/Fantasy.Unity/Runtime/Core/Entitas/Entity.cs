@@ -190,11 +190,21 @@ namespace Fantasy
 
         public T GetComponent<T>() where T : Entity, new()
         {
+            if (_tree == null)
+            {
+                return null;
+            }
+            
             return _tree.TryGetValue(typeof(T).TypeHandle.Value.ToInt64(), out var component) ? (T)component : null;
         }
 
         public Entity GetComponent(Type type)
         {
+            if (_tree == null)
+            {
+                return null;
+            }
+            
             return _tree.TryGetValue(type.TypeHandle.Value.ToInt64(), out var component) ? component : null;
         }
 

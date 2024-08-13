@@ -37,7 +37,7 @@ namespace Fantasy
         public uint SceneConfigId { get; private set; }
         internal ANetwork InnerNetwork { get; private set; }
         internal ANetwork OuterNetwork { get; private set; }
-        private readonly Dictionary<uint, InnerSessionInfo> _innerSessionIs = new Dictionary<uint, InnerSessionInfo>();
+        private readonly Dictionary<uint, ProcessSessionInfo> _processSessionInfos = new Dictionary<uint, ProcessSessionInfo>();
 #endif
         public ThreadSynchronizationContext ThreadSynchronizationContext { get; private set; }
         private readonly Dictionary<long, Entity> _entities = new Dictionary<long, Entity>();
@@ -109,11 +109,11 @@ namespace Fantasy
         public override void Dispose()
         {
 #if FANTASY_NET
-            foreach (var (_, innerSession) in _innerSessionIs)
+            foreach (var (_, innerSession) in _processSessionInfos)
             {
                 innerSession.Dispose();
             }
-            _innerSessionIs.Clear();
+            _processSessionInfos.Clear();
 #endif
 #if FANTASY_UNITY
             Session = null;
@@ -232,7 +232,8 @@ namespace Fantasy
                 var networkProtocolType = Enum.Parse<NetworkProtocolType>(sceneConfig.NetworkProtocol);
                 scene.OuterNetwork = NetworkProtocolFactory.CreateServer(scene, networkProtocolType, NetworkTarget.Outer, machineConfig.OuterBindIP, sceneConfig.OuterPort);
             }
-            process.AddScene(scene);
+            Process.AddScene(scene);
+            process.AddSceneToProcess(scene);
             scene.ThreadSynchronizationContext.Post(() => scene.EventComponent.PublishAsync(new OnCreateScene(scene)).Coroutine());
             return scene;
         }
@@ -252,7 +253,9 @@ namespace Fantasy
             scene.AddEntity(scene);
             await SetScheduler(scene, parentScene, SceneRuntimeType.ThreadPool);
             
-            parentScene.Process.AddScene(scene);
+            Process.AddScene(scene);
+            parentScene.Process.AddSceneToProcess(scene);
+            
             scene.ThreadSynchronizationContext.Post(() => OnEvent().Coroutine());
             return scene;
             async FTask OnEvent()
@@ -352,23 +355,23 @@ namespace Fantasy
         {
             var sceneId = RuntimeIdFactory.GetSceneId(ref runTimeId);
 
-            if (_innerSessionIs.TryGetValue(sceneId, out var innerSessionInfo))
+            if (_processSessionInfos.TryGetValue(sceneId, out var processSessionInfo))
             {
-                if (!innerSessionInfo.Session.IsDisposed)
+                if (!processSessionInfo.Session.IsDisposed)
                 {
-                    return innerSessionInfo.Session;
+                    return processSessionInfo.Session;
                 }
 
-                _innerSessionIs.Remove(sceneId);
+                _processSessionInfos.Remove(sceneId);
             }
 
-            // if (Scene.Process.IsProcess(ref sceneId))
-            // {
-            //     // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
-            //     var innerSession = Session.CreateInnerSession(Scene);
-            //     _innerSessionIs.Add(sceneId, new InnerSessionInfo(innerSession, null));
-            //     return innerSession;
-            // }
+            if (Scene.Process.IsProcess(ref sceneId))
+            {
+                // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
+                var processSession = Session.CreateInnerSession(Scene);
+                _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
+                return processSession;
+            }
 
             if (!SceneConfigData.Instance.TryGet(sceneId, out var sceneConfig))
             {
@@ -391,7 +394,7 @@ namespace Fantasy
             {
                 Log.Error($"Unable to connect to the target server sourceServerId:{Scene.Process.Id} targetServerId:{sceneConfig.ProcessConfigId}");
             }, null, false);
-            _innerSessionIs.Add(sceneId, new InnerSessionInfo(session, client));
+            _processSessionInfos.Add(sceneId, new ProcessSessionInfo(session, client));
             return session;
         }
 #endif

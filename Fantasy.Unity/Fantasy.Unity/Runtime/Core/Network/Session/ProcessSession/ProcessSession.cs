@@ -1,10 +1,11 @@
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #if FANTASY_NET
 namespace Fantasy;
 
 /// <summary>
 /// 网络服务器内部会话。
 /// </summary>
-public sealed class ServerInnerSession : Session
+public sealed class ProcessSession : Session
 {
     /// <summary>
     /// 发送消息到服务器内部。
@@ -19,7 +20,7 @@ public sealed class ServerInnerSession : Session
             return;
         }
 
-        NetworkMessageScheduler.InnerScheduler(this, message.GetType(), rpcId, routeId, message.OpCode(), 0, message).Coroutine();
+        this.Scheduler(message.GetType(), rpcId, routeId, message.OpCode(), message).Coroutine();
     }
 
     /// <summary>
@@ -34,28 +35,35 @@ public sealed class ServerInnerSession : Session
         {
             return;
         }
-
-        NetworkMessageScheduler.InnerScheduler(this, routeMessage.GetType(), rpcId, routeId, routeMessage.OpCode(), routeMessage.RouteTypeOpCode(), routeMessage).Coroutine();
+        
+        this.Scheduler(routeMessage.GetType(), rpcId, routeId, routeMessage.OpCode(), routeMessage).Coroutine();
     }
 
-    /// <summary>
-    /// 发送内存流到服务器内部（不支持）。
-    /// </summary>
-    /// <param name="memoryStream">要发送的内存流。</param>
-    /// <param name="rpcId">RPC 标识符。</param>
-    /// <param name="routeTypeOpCode">路由类型和操作码。</param>
-    /// <param name="routeId">路由标识符。</param>
+    public override async FTask Send(uint rpcId, long routeId, Type messageType, APackInfo packInfo)
+    {
+        if (IsDisposed)
+        {
+            return;
+        }
+
+        await this.Scheduler(messageType, rpcId, routeId, packInfo);
+    }
+
+    public override async FTask Send(ProcessPackInfo packInfo, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
+    {
+        await this.Scheduler(packInfo.MessageType, rpcId, routeId, packInfo);
+    }
+
     public override void Send(MemoryStream memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
     {
         throw new Exception("The use of this method is not supported");
     }
 
-    /// <summary>
-    /// 调用请求并等待响应（不支持）。
-    /// </summary>
-    /// <param name="request">要调用的请求。</param>
-    /// <param name="routeId">路由标识符。</param>
-    /// <returns>一个代表异步操作的任务，返回响应。</returns>
+    public override FTask<IResponse> Call(IRouteRequest request, long routeId = 0)
+    {
+        throw new Exception("The use of this method is not supported");
+    }
+
     public override FTask<IResponse> Call(IRequest request, long routeId = 0)
     {
         throw new Exception("The use of this method is not supported");

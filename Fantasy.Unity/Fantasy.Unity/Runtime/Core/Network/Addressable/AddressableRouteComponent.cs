@@ -38,70 +38,34 @@ public class AddressableRouteComponentDestroySystem : DestroySystem<AddressableR
 /// </summary>
 public sealed class AddressableRouteComponent : Entity
 {
-    /// <summary>
-    /// 用于存储当前可寻址路由消息的路由 ID
-    /// </summary>
     public long RouteId;
-    /// <summary>
-    /// 可寻址路由消息组件的地址映射 ID，只可在类内部设置，外部只可读取
-    /// </summary>
     public long AddressableId;
-    /// <summary>
-    /// 用于管理 Addressable 路由消息的锁队列。
-    /// </summary>
     public CoroutineLock AddressableRouteLock;
-    /// <summary>
-    /// 任务调度器组件。
-    /// </summary>
     public TimerComponent TimerComponent;
-    /// <summary>
-    /// 网络消息组件。
-    /// </summary>
     public NetworkMessagingComponent NetworkMessagingComponent;
-    /// <summary>
-    /// 网络消息分发组件。
-    /// </summary>
     public MessageDispatcherComponent MessageDispatcherComponent;
     
-    /// <summary>
-    /// 发送可寻址路由消息。
-    /// </summary>
-    /// <param name="message">可寻址路由消息。</param>
     internal void Send(IAddressableRouteMessage message)
     {
         Call(message).Coroutine();
     }
     
-    /// <summary>
-    /// 发送可寻址路由消息。
-    /// </summary>
-    /// <param name="routeTypeOpCode">路由类型操作码。</param>
-    /// <param name="requestType">请求类型。</param>
-    /// <param name="message">消息数据。</param>
-    internal async FTask Send(long routeTypeOpCode, Type requestType, MemoryStream message)
+    internal async FTask Send(Type requestType, APackInfo packInfo)
     {
-        await Call(routeTypeOpCode, requestType, message);
+        await Call(requestType, packInfo);
     }
-    
-    /// <summary>
-    /// 调用可寻址路由消息并等待响应。
-    /// </summary>
-    /// <param name="routeTypeOpCode">路由类型操作码。</param>
-    /// <param name="requestType">请求类型。</param>
-    /// <param name="request">请求数据。</param>
-    internal async FTask<IResponse> Call(long routeTypeOpCode, Type requestType, MemoryStream request)
+
+    internal async FTask<IResponse> Call(Type requestType, APackInfo packInfo)
     {
-        // 如果组件已被释放，则创建一个带有错误代码的响应，表示路由未找到
         if (IsDisposed)
         {
             return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoute);
         }
 
-        var failCount = 0; // 用于计算失败尝试次数
-        var runtimeId = RunTimeId; // 保存当前运行时 ID，用于判断是否超时
+        var failCount = 0;
+        var runtimeId = RunTimeId;
         IResponse iRouteResponse = null;
 
-        // 使用锁来确保同一时间只有一个线程可以访问 AddressableId 和 _routeId
         using (await AddressableRouteLock.Wait(AddressableId, "AddressableRouteComponent Call MemoryStream"))
         {
             while (!IsDisposed)
@@ -116,9 +80,8 @@ public sealed class AddressableRouteComponent : Entity
                     return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoute);
                 }
 
-                iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, routeTypeOpCode, requestType, request);
+                iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, requestType, packInfo);
 
-                // 如果当前运行时 ID 不等于保存的运行时 ID，说明超时
                 if (runtimeId != RunTimeId)
                 {
                     iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
@@ -145,8 +108,8 @@ public sealed class AddressableRouteComponent : Entity
                             iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
                         }
 
-                        RouteId = 0; // 重置路由 ID，以便下次重新获取
-                        continue; // 继续下一次循环，重试发送消息
+                        RouteId = 0;
+                        continue;
                     }
                     default:
                     {
@@ -158,7 +121,7 @@ public sealed class AddressableRouteComponent : Entity
 
         return iRouteResponse;
     }
-    
+
     /// <summary>
     /// 调用可寻址路由消息并等待响应。
     /// </summary>

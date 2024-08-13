@@ -8,34 +8,72 @@ public sealed class Process : IDisposable
 {
     public readonly uint Id;
     public readonly uint MachineId;
-    private readonly ConcurrentBag<uint> _processScenes = new ConcurrentBag<uint>();
-    private readonly ConcurrentDictionary<uint, Scene> _scenes = new ConcurrentDictionary<uint, Scene>();
+    private readonly ConcurrentDictionary<uint, Scene> _processScenes = new ConcurrentDictionary<uint, Scene>();
+    private static readonly ConcurrentDictionary<uint, Scene> Scenes = new ConcurrentDictionary<uint, Scene>();
     private Process() {}
     private Process(uint id, uint machineId)
     {
         Id = id;
         MachineId = machineId;
     }
+    
+    public bool IsProcess(ref long routeId)
+    {
+        var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+        return _processScenes.ContainsKey(sceneId);
+    }
+    
+    public bool IsProcess(ref uint sceneId)
+    {
+        return _processScenes.ContainsKey(sceneId);
+    }
+
+    public void AddSceneToProcess(Scene scene)
+    {
+        _processScenes.TryAdd(scene.SceneConfigId, scene);
+    }
+
+    public void RemoveSceneToProcess(Scene scene, bool isDispose)
+    {
+        _processScenes.Remove(scene.SceneConfigId, out _);
+
+        if (isDispose)
+        {
+            scene.Dispose();
+        }
+    }
+    
+    public bool TryGetSceneToProcess(long routeId, out Scene scene)
+    {
+        var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+        return _processScenes.TryGetValue(sceneId, out scene);
+    }
+
+    public bool TryGetSceneToProcess(uint sceneId, out Scene scene)
+    {
+        return _processScenes.TryGetValue(sceneId, out scene);
+    }
 
     public void Dispose()
     {
-        if (!_scenes.IsEmpty)
+        if (_processScenes.IsEmpty)
         {
-            var sceneQueue = new Queue<Scene>();
-
-            foreach (var (_, scene) in _scenes)
-            {
-                sceneQueue.Enqueue(scene);
-            }
-
-            while (sceneQueue.TryDequeue(out var removeScene))
-            {
-                removeScene.Dispose();
-            }
-
-            _processScenes.Clear();
-            _scenes.Clear();
+            return;
         }
+        
+        var sceneQueue = new Queue<Scene>();
+            
+        foreach (var (_, scene) in _processScenes)
+        {
+            sceneQueue.Enqueue(scene);
+        }
+
+        while (sceneQueue.TryDequeue(out var removeScene))
+        {
+            removeScene.Dispose();
+        }
+
+        _processScenes.Clear();
     }
 
     public static async FTask<Process?> Create(uint processConfigId)
@@ -58,36 +96,36 @@ public sealed class Process : IDisposable
         foreach (var sceneConfig in sceneConfigs)
         {
             await Scene.Create(process, machineConfig, sceneConfig);
-            process._processScenes.Add(sceneConfig.Id);
         }
 
         Log.Info($"Process:{processConfigId} Startup Complete SceneCount:{sceneConfigs.Count}");
         return process;
     }
 
-    public void AddScene(Scene scene)
+    public static void AddScene(Scene scene)
     {
-        _scenes.TryAdd(scene.SceneConfigId, scene);
+        Scenes.TryAdd(scene.SceneConfigId, scene);
     }
 
-    public void RemoveScene(Scene scene, bool isDispose)
+    public static void RemoveScene(Scene scene, bool isDispose)
     {
-        _scenes.Remove(scene.SceneConfigId, out _);
+        Scenes.Remove(scene.SceneConfigId, out _);
 
         if (isDispose)
         {
             scene.Dispose();
         }
     }
-
-    public bool TryGetScene(uint sceneId, out Scene scene)
+    
+    public static bool TryGetScene(long routeId, out Scene scene)
     {
-        return _scenes.TryGetValue(sceneId, out scene);
+        var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+        return Scenes.TryGetValue(sceneId, out scene);
     }
 
-    public bool IsProcess(ref uint sceneId)
+    public static bool TryGetScene(uint sceneId, out Scene scene)
     {
-        return _processScenes.Contains(sceneId);
+        return Scenes.TryGetValue(sceneId, out scene);
     }
 }
 #endif
