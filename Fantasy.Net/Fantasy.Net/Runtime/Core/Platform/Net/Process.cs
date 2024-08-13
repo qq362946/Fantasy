@@ -101,6 +101,11 @@ public sealed class Process : IDisposable
         Log.Info($"Process:{processConfigId} Startup Complete SceneCount:{sceneConfigs.Count}");
         return process;
     }
+    
+    public bool IsInAppliaction(ref uint sceneId)
+    {
+        return _processScenes.ContainsKey(sceneId);
+    }
 
     public static void AddScene(Scene scene)
     {
