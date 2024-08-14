@@ -76,11 +76,12 @@ namespace Fantasy
                 return;
             }
 
-            if (++_poolCount > _maxCapacity)
+            if (_poolCount > _maxCapacity)
             {
                 return;
             }
-
+            
+            _poolCount++;
             obj.IsPool = false;
             _poolQueue.Enqueue(typeof(T), obj);
         }
@@ -133,11 +134,12 @@ namespace Fantasy
                 return;
             }
 
-            if (++_poolCount > _maxCapacity)
+            if (_poolCount > _maxCapacity)
             {
                 return;
             }
 
+            _poolCount++;
             item.IsPool = false;
             _poolQueue.Enqueue(item);
         }

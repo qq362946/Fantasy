@@ -365,7 +365,7 @@ namespace Fantasy
                 _processSessionInfos.Remove(sceneId);
             }
 
-            if (Scene.Process.IsProcess(ref sceneId))
+            if (Process.IsInAppliaction(ref sceneId))
             {
                 // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
                 var processSession = Session.CreateInnerSession(Scene);
