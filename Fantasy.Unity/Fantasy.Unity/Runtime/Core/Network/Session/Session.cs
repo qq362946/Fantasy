@@ -19,31 +19,12 @@ namespace Fantasy
     /// </summary>
     public class Session : Entity, ISupportedMultiEntity
     {
-        internal uint RpcId;
-        
-        /// <summary>
-        /// 获取最后一次接收数据的时间。
-        /// </summary>
+        private uint _rpcId;
         internal long LastReceiveTime;
-        /// <summary>
-        /// 获取或设置网络通道。
-        /// </summary>
         public INetworkChannel Channel { get; private set; }
-        /// <summary>
-        /// 连接目标的终结点信息。
-        /// </summary>
         public IPEndPoint RemoteEndPoint { get; private set; }
-        /// <summary>
-        /// 获取用于网络消息调度的实例。
-        /// </summary>
         public ANetworkMessageScheduler NetworkMessageScheduler { get; private set;}
-        /// <summary>
-        /// 存储请求回调的字典。
-        /// </summary>
         public readonly Dictionary<long, FTask<IResponse>> RequestCallback = new();
-        /// <summary>
-        /// 在网络连接释放时触发的事件。
-        /// </summary>
         public event Action OnDispose;
 #if FANTASY_NET       
         public static Session Create(ANetworkMessageScheduler networkMessageScheduler, ANetworkServerChannel channel, NetworkTarget networkTarget)
@@ -64,12 +45,6 @@ namespace Fantasy
             return session;
         }
 #endif
-        /// <summary>
-        /// 创建一个与客户端网络相关的会话并添加到会话字典中。
-        /// </summary>
-        /// <param name="network">与会话关联的客户端网络。</param>
-        /// <param name="remoteEndPoint">终结点信息</param>
-        /// <returns>创建的会话实例。</returns>
         public static Session Create(AClientNetwork network, IPEndPoint remoteEndPoint)
         {
             // 创建会话实例
@@ -81,17 +56,49 @@ namespace Fantasy
             return session;
         }
 #if FANTASY_NET
-        public static ServerInnerSession CreateInnerSession(Scene scene)
+        public static ProcessSession CreateInnerSession(Scene scene)
         {
-            var session = Entity.Create<ServerInnerSession>(scene, false, false);
+            var session = Entity.Create<ProcessSession>(scene, false, false);
             session.NetworkMessageScheduler = new InnerMessageScheduler(scene);
             return session;
         }
-#endif
 
-        /// <summary>
-        /// 释放会话所持有的资源。
-        /// </summary>
+        public virtual async FTask Send(uint rpcId, long routeId, Type messageType, APackInfo packInfo)
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            Channel.Send(rpcId, packInfo.RouteTypeCode, routeId, packInfo.MemoryStream, null);
+            await FTask.CompletedTask;
+        }
+
+        public virtual async FTask Send(ProcessPackInfo packInfo, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            using (packInfo)
+            {
+                Channel.Send(rpcId, routeTypeOpCode, routeId, packInfo.MemoryStream, null);
+            }
+            
+            await FTask.CompletedTask;
+        }
+
+        public virtual void Send(MemoryStream memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            Channel.Send(rpcId, routeTypeOpCode, routeId, memoryStream, null);
+        }
+#endif
         public override void Dispose()
         {
             if (IsDisposed)
@@ -99,7 +106,7 @@ namespace Fantasy
                 return;
             }
             
-            RpcId = 0;
+            _rpcId = 0;
             LastReceiveTime = 0;
             Channel = null;
             RemoteEndPoint = null;
@@ -115,13 +122,7 @@ namespace Fantasy
             RequestCallback.Clear();
             OnDispose?.Invoke();
         }
-
-        /// <summary>
-        /// 发送消息到会话。
-        /// </summary>
-        /// <param name="message">要发送的消息。</param>
-        /// <param name="rpcId">RPC 标识符。</param>
-        /// <param name="routeId">路由标识符。</param>
+        
         public virtual void Send(IMessage message, uint rpcId = 0, long routeId = 0)
         {
             if (IsDisposed)
@@ -131,13 +132,7 @@ namespace Fantasy
             
             Channel.Send(rpcId, 0, routeId, null, message);
         }
-
-        /// <summary>
-        /// 发送路由消息到会话。
-        /// </summary>
-        /// <param name="routeMessage">要发送的路由消息。</param>
-        /// <param name="rpcId">RPC 标识符。</param>
-        /// <param name="routeId">路由标识符。</param>
+        
         public virtual void Send(IRouteMessage routeMessage, uint rpcId = 0, long routeId = 0)
         {
             if (IsDisposed)
@@ -147,30 +142,7 @@ namespace Fantasy
 
             Channel.Send(rpcId, routeMessage.RouteTypeOpCode(), routeId, null, routeMessage);
         }
-
-        /// <summary>
-        /// 发送内存流到会话。
-        /// </summary>
-        /// <param name="memoryStream">要发送的内存流。</param>
-        /// <param name="rpcId">RPC 标识符。</param>
-        /// <param name="routeTypeOpCode">路由类型和操作码。</param>
-        /// <param name="routeId">路由标识符。</param>
-        public virtual void Send(MemoryStream memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-
-            Channel.Send(rpcId, routeTypeOpCode, routeId, memoryStream, null);
-        }
-
-        /// <summary>
-        /// 调用请求并等待响应。
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="routeId"></param>
-        /// <returns></returns>
+        
         public virtual FTask<IResponse> Call(IRouteRequest request, long routeId = 0)
         {
             if (IsDisposed)
@@ -179,18 +151,12 @@ namespace Fantasy
             }
             
             var requestCallback = FTask<IResponse>.Create();
-            var rpcId = ++RpcId; 
+            var rpcId = ++_rpcId; 
             RequestCallback.Add(rpcId, requestCallback);
             Send(request, rpcId, routeId);
             return requestCallback;
         }
-
-        /// <summary>
-        /// 调用请求并等待响应。
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="routeId"></param>
-        /// <returns></returns>
+        
         public virtual FTask<IResponse> Call(IRequest request, long routeId = 0)
         {
             if (IsDisposed)
@@ -199,16 +165,12 @@ namespace Fantasy
             }
             
             var requestCallback = FTask<IResponse>.Create();
-            var rpcId = ++RpcId; 
+            var rpcId = ++_rpcId; 
             RequestCallback.Add(rpcId, requestCallback);
             Send(request, rpcId, routeId);
             return requestCallback;
         }
         
-        /// <summary>
-        /// 接收到网络流数据。
-        /// </summary>
-        /// <param name="packInfo"></param>
         public void Receive(APackInfo packInfo)
         {
             if (IsDisposed)

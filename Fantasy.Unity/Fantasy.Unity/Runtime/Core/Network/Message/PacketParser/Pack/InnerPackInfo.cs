@@ -10,6 +10,10 @@ public sealed class InnerPackInfo : APackInfo
 
     public override void Dispose()
     {
+        if (IsDisposed)
+        {
+            return;
+        }
         var network = Network;
         base.Dispose();
         network.ReturnInnerPackInfo(this);

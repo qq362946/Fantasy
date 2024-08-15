@@ -58,11 +58,12 @@ namespace Fantasy
                 return;
             }
 
-            if (++_poolCount > _maxCapacity)
+            if (_poolCount > _maxCapacity)
             {
                 return;
             }
 
+            _poolCount++;
             t.IsPool = true;
             _poolQueue.Enqueue(t);
             t.Dispose();
@@ -81,12 +82,13 @@ namespace Fantasy
                 return;
             }
             
-            if (++_poolCount > _maxCapacity)
+            if (_poolCount > _maxCapacity)
             {
                 return;
             }
 
             reset(t);
+            _poolCount++;
             t.IsPool = false;
             _poolQueue.Enqueue(t);
             t.Dispose();

@@ -11,13 +11,7 @@ namespace Fantasy
     {
         public ClientMessageScheduler(Scene scene) : base(scene) { }
         
-        /// <summary>
-        /// 处理客户端外部消息的方法。
-        /// </summary>
-        /// <param name="session">客户端会话。</param>
-        /// <param name="messageType">消息类型。</param>
-        /// <param name="packInfo">消息包信息。</param>
-        protected override async FTask Handler(Session session, Type messageType, APackInfo packInfo)
+        protected override async FTask Handler(Session session, APackInfo packInfo)
         {
             try
             {
@@ -25,11 +19,16 @@ namespace Fantasy
                 {
                     case > OpCode.InnerRouteResponse:
                     {
-                        throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode} messageType:{messageType}");
+                        throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode}");
                     }
                     case OpCode.PingResponse:
                     case > OpCode.OuterRouteResponse:
                     {
+                        var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+                        if (messageType == null)
+                        {
+                            throw new Exception($"可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
                         // 这个一般是客户端Session.Call发送时使用的、目前这个逻辑只有Unity客户端时使用
                         var aResponse = (IResponse)packInfo.Deserialize(messageType);
 
@@ -44,6 +43,11 @@ namespace Fantasy
                     }
                     case < OpCode.OuterRouteRequest:
                     {
+                        var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+                        if (messageType == null)
+                        {
+                            throw new Exception($"可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
                         var message = packInfo.Deserialize(messageType);
                         MessageDispatcherComponent.MessageHandler(session, messageType, message, packInfo.RpcId, packInfo.ProtocolCode);
                         return;
@@ -61,29 +65,16 @@ namespace Fantasy
             }
 
             await FTask.CompletedTask;
-            throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode} messageType:{messageType}");
+            throw new NotSupportedException($"ClientMessageScheduler Received unsupported message protocolCode:{packInfo.ProtocolCode}");
         }
     }
 #endif
 #if FANTASY_NET
-    public sealed class ClientMessageScheduler : ANetworkMessageScheduler
+    public sealed class ClientMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
     {
-        public ClientMessageScheduler(Scene scene) : base(scene) { }
-        
-        /// <summary>
-        /// 处理客户端外部消息的方法。
-        /// </summary>
-        /// <param name="session">客户端会话。</param>
-        /// <param name="messageType">消息类型。</param>
-        /// <param name="packInfo">消息包信息。</param>
-        protected override FTask Handler(Session session, Type messageType, APackInfo packInfo)
+        protected override FTask Handler(Session session, APackInfo packInfo)
         {
-            throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode} messageType:{messageType}");
-        }
-
-        public override FTask InnerScheduler(Session session, Type messageType, uint rpcId, long routeId, uint protocolCode, long routeTypeCode, object message)
-        {
-            throw new NotImplementedException();
+            throw new NotSupportedException($"ClientMessageScheduler Received unsupported message protocolCode:{packInfo.ProtocolCode}");
         }
     }
 #endif

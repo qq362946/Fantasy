@@ -78,9 +78,9 @@ namespace Fantasy
                 return memoryStream;
             }
 
-            return  new MemoryStream(size);
+            return new MemoryStream(size);
         }
-        
+
         public void ReturnMemoryStream(MemoryStream memoryStream)
         {
             if (memoryStream.Capacity > 1024)

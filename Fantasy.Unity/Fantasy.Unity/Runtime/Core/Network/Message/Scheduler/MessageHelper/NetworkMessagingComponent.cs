@@ -76,77 +76,78 @@ namespace Fantasy
 
             Scene.GetSession(entityId).Send(message, 0, entityId);
         }
-        
-        public void SendInnerRoute(long entityId, long routeTypeOpCode, MemoryStream memoryStream)
+
+        internal async FTask SendInnerRoute(long routeId, Type messageType, APackInfo packInfo)
         {
-            if (entityId == 0)
+            if (routeId == 0)
             {
-                Log.Error($"SendInnerRoute appId == 0");
+                Log.Error($"SendInnerRoute routeId == 0");
                 return;
             }
 
-            Scene.GetSession(entityId).Send(memoryStream, 0, routeTypeOpCode, entityId);
+            await Scene.GetSession(routeId).Send(0, routeId, messageType, packInfo);
         }
         
-        public void SendInnerRoute(ICollection<long> routeIdCollection, IRouteMessage message)
+        public async FTask SendInnerRoute(ICollection<long> routeIdCollection, IRouteMessage message)
         {
             if (routeIdCollection.Count <= 0)
             {
-                Log.Error($"SendInnerRoute routeId.Count <= 0");
+                Log.Error("SendInnerRoute routeIdCollection.Count <= 0");
                 return;
             }
 
             var routeTypeOpCode = message.RouteTypeOpCode();
-            using var memoryStream = InnerPacketParser.MessagePack(Scene, 0, 0, message);
+            using var processPackInfo = ProcessPackInfo.Create(Scene, message, routeIdCollection.Count);
             foreach (var routeId in routeIdCollection)
             {
-                SendInnerRoute(routeId, routeTypeOpCode, InnerPacketParser.MessagePack(0, routeId, memoryStream));
+                processPackInfo.Set(0, routeId);
+                await Scene.GetSession(routeId).Send(processPackInfo, 0, routeTypeOpCode, routeId);
             }
         }
         
-        public void SendAddressable(long addressableId, IRouteMessage message)
+        public async FTask SendAddressable(long addressableId, IRouteMessage message)
         {
-            CallAddressable(addressableId, message).Coroutine();
+            await CallAddressable(addressableId, message);
         }
-        
-        public async FTask<IResponse> CallInnerRoute(long entityId, long routeTypeOpCode, Type requestType, MemoryStream request)
+
+        internal async FTask<IResponse> CallInnerRoute(long routeId, Type requestType, APackInfo packInfo)
         {
-            if (entityId == 0)
+            if (routeId == 0)
             {
-                Log.Error($"CallInnerRoute appId == 0");
+                Log.Error($"CallInnerRoute routeId == 0");
                 return null;
             }
             
             var rpcId = ++_rpcId;
-            var session = Scene.GetSession(entityId);
+            var session = Scene.GetSession(routeId);
             var requestCallback = FTask<IResponse>.Create(false);
             RequestCallback.Add(rpcId, MessageSender.Create(rpcId, requestType, requestCallback));
-            session.Send(request, rpcId, routeTypeOpCode, entityId);
+            await session.Send(rpcId, routeId, requestType, packInfo);
             return await requestCallback;
         }
 
-        public async FTask<IResponse> CallInnerRouteBySession(Session session, long entityId,IRouteMessage request)
+        public async FTask<IResponse> CallInnerRouteBySession(Session session, long routeId, IRouteMessage request)
         {
             var rpcId = ++_rpcId;
             var requestCallback = FTask<IResponse>.Create(false);
             RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
-            session.Send(request, rpcId, entityId);
+            session.Send(request, rpcId, routeId);
             return await requestCallback;
         }
-        
-        public async FTask<IResponse> CallInnerRoute(long entityId, IRouteMessage request)
+
+        public async FTask<IResponse> CallInnerRoute(long routeId, IRouteMessage request)
         {
-            if (entityId == 0)
+            if (routeId == 0)
             {
-                Log.Error($"CallInnerRoute entityId == 0");
+                Log.Error($"CallInnerRoute routeId == 0");
                 return null;
             }
             
             var rpcId = ++_rpcId;
-            var session = Scene.GetSession(entityId);
+            var session = Scene.GetSession(routeId);
             var requestCallback = FTask<IResponse>.Create(false);
             RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
-            session.Send(request, rpcId, entityId);
+            session.Send(request, rpcId, routeId);
             return await requestCallback;
         }
         
@@ -236,7 +237,7 @@ namespace Fantasy
                 {
                     case IRouteMessage iRouteMessage:
                     {
-                        // Log.Error("NetworkMessagingComponent ReturnMessageSender 根据路由消息生成响应，并进行处理,没有实现呢！");
+                        // IRouteMessage是个特殊的RPC协议、这里不处理就可以了。
                         // var routeResponse = MessageDispatcherComponent.CreateResponse(iRouteMessage, InnerErrorCode.ErrRouteTimeout);
                         // responseRpcId = routeResponse.RpcId;
                         // routeResponse.RpcId = routeMessageSender.RpcId;

@@ -8,6 +8,10 @@ namespace Fantasy
     {
         public override void Dispose()
         {
+            if (IsDisposed)
+            {
+                return;
+            }
             var network = Network;
             base.Dispose();
             network.ReturnOuterPackInfo(this);
