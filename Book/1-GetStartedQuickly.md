@@ -17,7 +17,7 @@
 ### 6.如果是开发WebGL要再加一个FANTASY_WEBGL预编译指令，如果不是WebGL开发不要加这个指令。
 ## 服务器导入Fantasy
 ### 1.在服务器的解决方案中添加下载到本地的Fantasy.Net工程。
-### 2.在启动的工程里，添加NLog.xsd和NLog.config文件并且设置为每次编译都复制到输出目录，这两个文件在Fantasy/Examples/Server/Main目录里可以找到。
+### 2.在启动的工程里，添加NLog.xsd和NLog.config文件并且都设置为每次编译都复制到输出目录（vs:右键这个文件点击属性->有个复制到出目录,rider:右键这个文件点击Properties->Copy to output directory设置为Copy always），这两个文件在Fantasy/Examples/Server/Main目录里可以找到。
 ### 3.在启动工程里引用添加的Fantasy.Net工程。
 ## 客户端初始化Fantasy
 ``` csharp
