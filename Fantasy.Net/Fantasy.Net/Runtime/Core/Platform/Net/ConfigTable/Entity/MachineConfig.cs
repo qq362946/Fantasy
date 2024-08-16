@@ -1,5 +1,9 @@
 #if FANTASY_NET
-using ProtoBuf;
+using System;
+using MessagePack;
+using Fantasy;
+using System.Linq;
+using System.Collections.Generic;
 using System.Collections.Concurrent;
 // ReSharper disable CollectionNeverUpdated.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
@@ -11,16 +15,16 @@ using System.Collections.Concurrent;
 
 namespace Fantasy
 {
-    [ProtoContract]
-    public sealed partial class MachineConfigData :  AProto, IConfigTable, IDisposable
+    [MessagePackObject]
+    public sealed partial class MachineConfigData : ASerialize, IConfigTable
     {
-        [ProtoMember(1)]
+        [Key(0)]
         public List<MachineConfig> List { get; set; } = new List<MachineConfig>();
 #if FANTASY_NET
-        [ProtoIgnore]
+        [IgnoreMember]
         private readonly ConcurrentDictionary<uint, MachineConfig> _configs = new ConcurrentDictionary<uint, MachineConfig>();
 #else 
-        [ProtoIgnore]
+        [IgnoreMember]
         private readonly Dictionary<uint, MachineConfig> _configs = new Dictionary<uint, MachineConfig>();
 #endif
         private static MachineConfigData _instance;
@@ -69,26 +73,26 @@ namespace Fantasy
                 config.AfterDeserialization();
             }
     
-            base.AfterDeserialization();
+            EndInit();
         }
         
-        public void Dispose()
+        public override void Dispose()
         {
             Instance = null;
         }
     }
     
-    [ProtoContract]
-    public sealed partial class MachineConfig : AProto
+    [MessagePackObject]
+    public sealed partial class MachineConfig : ASerialize
     {
-		[ProtoMember(1, IsRequired  = true)]
+		[Key(0)]
 		public uint Id { get; set; } // Id
-		[ProtoMember(2, IsRequired  = true)]
+		[Key(1)]
 		public string OuterIP { get; set; } // 外网IP
-		[ProtoMember(3, IsRequired  = true)]
+		[Key(2)]
 		public string OuterBindIP { get; set; } // 外网绑定IP
-		[ProtoMember(4, IsRequired  = true)]
-		public string InnerBindIP { get; set; } // 内网绑定IP        		     
+		[Key(3)]
+		public string InnerBindIP { get; set; } // 内网绑定IP  
     } 
 }  
 #endif

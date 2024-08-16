@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
+using MessagePack;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
@@ -17,10 +19,7 @@ namespace Fantasy
         protected int MessagePacketLength;
         protected bool IsUnPackHead = true;
         protected readonly byte[] MessageHead = new byte[20];
-
-        public ReadOnlyMemoryPacketParser()
-        {
-        }
+        public ReadOnlyMemoryPacketParser() { }
 
         public abstract bool UnPack(ref ReadOnlyMemory<byte> buffer, out APackInfo packInfo);
 
@@ -45,7 +44,14 @@ namespace Fantasy
             packInfo = null;
             var readOnlySpan = buffer.Span;
             var bufferLength = buffer.Length - Offset;
-
+            
+            if (bufferLength == 0)
+            {
+                // 没有剩余的数据需要处理、等待下一个包再处理。
+                Offset = 0;
+                return false;
+            }
+            
             if (IsUnPackHead)
             {
                 fixed (byte* bufferPtr = readOnlySpan)
@@ -54,8 +60,7 @@ namespace Fantasy
                     // 在当前buffer中拿到包头的数据
                     var innerPacketHeadLength = Packet.InnerPacketHeadLength - MessageHeadOffset;
                     var copyLength = Math.Min(bufferLength, innerPacketHeadLength);
-                    Buffer.MemoryCopy(bufferPtr + Offset, messagePtr + MessageHeadOffset, innerPacketHeadLength,
-                        copyLength);
+                    Buffer.MemoryCopy(bufferPtr + Offset, messagePtr + MessageHeadOffset, innerPacketHeadLength, copyLength);
                     Offset += copyLength;
                     MessageHeadOffset += copyLength;
                     // 检查是否有完整包头
@@ -66,14 +71,11 @@ namespace Fantasy
                         // 检查消息体长度是否超出限制
                         if (MessagePacketLength > Packet.PacketBodyMaxLength)
                         {
-
-                            throw new ScanException(
-                                $"The received information exceeds the maximum limit = {MessagePacketLength}");
+                            throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
                         }
 
                         PackInfo = InnerPackInfo.Create(Network);
-                        var memoryStream =
-                            PackInfo.RentMemoryStream(Packet.InnerPacketHeadLength + MessagePacketLength);
+                        var memoryStream = PackInfo.RentMemoryStream(Packet.InnerPacketHeadLength + MessagePacketLength);
                         PackInfo.RpcId = *(uint*)(messagePtr + Packet.InnerPacketRpcIdLocation);
                         PackInfo.ProtocolCode = *(uint*)(messagePtr + Packet.PacketLength);
                         PackInfo.RouteId = *(long*)(messagePtr + Packet.InnerPacketRouteRouteIdLocation);
@@ -89,16 +91,6 @@ namespace Fantasy
                         return false;
                     }
                 }
-            }
-
-            if (MessagePacketLength == -1)
-            {
-                // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
-                // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
-                packInfo = PackInfo;
-                PackInfo = null;
-                IsUnPackHead = true;
-                return true;
             }
 
             if (bufferLength == 0)
@@ -124,13 +116,11 @@ namespace Fantasy
                 MessageBodyOffset = 0;
                 return true;
             }
-
             Offset = 0;
             return false;
         }
 
-        public override MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId,
-            MemoryStream memoryStream, object message)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStreamBuffer memoryStream, object message)
         {
             return memoryStream == null
                 ? Pack(ref rpcId, ref routeId, message)
@@ -138,7 +128,7 @@ namespace Fantasy
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStream Pack(ref uint rpcId, ref long routeId, MemoryStream memoryStream)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream)
         {
             memoryStream.Seek(Packet.InnerPacketRpcIdLocation, SeekOrigin.Begin);
             rpcId.GetBytes(RpcIdBuffer);
@@ -150,8 +140,9 @@ namespace Fantasy
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStream Pack(ref uint rpcId, ref long routeId, object message)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, object message)
         {
+            var messageType = message.GetType();
             var memoryStream = Network.RentMemoryStream();
             memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
@@ -159,29 +150,22 @@ namespace Fantasy
             {
                 case IBsonMessage:
                 {
-                    MongoHelper.SerializeTo(message, memoryStream);
+                    BsonPackHelper.Serialize(messageType, message, memoryStream);
                     break;
                 }
                 default:
                 {
-                    ProtoBuffHelper.ToStream(message, memoryStream);
+                    MessagePackHelper.Serialize(messageType, message, memoryStream);
                     break;
                 }
             }
 
-            var opCode = Scene.MessageDispatcherComponent.GetOpCode(message.GetType());
-            var packetBodyCount = (int)(memoryStream.Position - Packet.InnerPacketHeadLength);
-
-            if (packetBodyCount == 0)
-            {
-                // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
-                // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
-                packetBodyCount = -1;
-            }
-
-            // 检查消息体长度是否超出限制
+            var opCode = Scene.MessageDispatcherComponent.GetOpCode(messageType);
+            var packetBodyCount = (int)(memoryStream.Length - Packet.InnerPacketHeadLength);
+            
             if (packetBodyCount > Packet.PacketBodyMaxLength)
             {
+                // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
 
@@ -206,7 +190,14 @@ namespace Fantasy
             packInfo = null;
             var readOnlySpan = buffer.Span;
             var bufferLength = buffer.Length - Offset;
-
+            
+            if (bufferLength == 0)
+            {
+                // 没有剩余的数据需要处理、等待下一个包再处理。
+                Offset = 0;
+                return false;
+            }
+            
             if (IsUnPackHead)
             {
                 fixed (byte* bufferPtr = readOnlySpan)
@@ -248,23 +239,12 @@ namespace Fantasy
                 }
             }
 
-            if (MessagePacketLength == -1)
-            {
-                // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
-                // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
-                packInfo = PackInfo;
-                PackInfo = null;
-                IsUnPackHead = true;
-                return true;
-            }
-
             if (bufferLength == 0)
             {
                 // 没有剩余的数据需要处理、等待下一个包再处理。
                 Offset = 0;
                 return false;
             }
-
             // 处理包消息体
             var outerPacketBodyLength = MessagePacketLength - MessageBodyOffset;
             var copyBodyLength = Math.Min(bufferLength, outerPacketBodyLength);
@@ -286,8 +266,7 @@ namespace Fantasy
             return false;
         }
 
-        public override MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId,
-            MemoryStream memoryStream, object message)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStreamBuffer memoryStream, object message)
         {
             return memoryStream == null
                 ? Pack(ref rpcId, ref routeTypeOpCode, message)
@@ -295,7 +274,7 @@ namespace Fantasy
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, MemoryStream memoryStream)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, MemoryStreamBuffer memoryStream)
         {
             memoryStream.Seek(Packet.OuterPacketRpcIdLocation, SeekOrigin.Begin);
             rpcId.GetBytes(RpcIdBuffer);
@@ -307,24 +286,18 @@ namespace Fantasy
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, object message)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, object message)
         {
+            var messageType = message.GetType();
             var memoryStream = Network.RentMemoryStream();
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
-            ProtoBuffHelper.ToStream(message, memoryStream);
-            var opCode = Scene.MessageDispatcherComponent.GetOpCode(message.GetType());
-            var packetBodyCount = (int)(memoryStream.Position - Packet.OuterPacketHeadLength);
-
-            if (packetBodyCount == 0)
-            {
-                // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
-                // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
-                packetBodyCount = -1;
-            }
-
-            // 检查消息体长度是否超出限制
+            MessagePackHelper.Serialize(messageType, message, memoryStream);
+            var opCode = Scene.MessageDispatcherComponent.GetOpCode(messageType);
+            var packetBodyCount = (int)(memoryStream.Length - Packet.OuterPacketHeadLength);
+            
             if (packetBodyCount > Packet.PacketBodyMaxLength)
             {
+                // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
 

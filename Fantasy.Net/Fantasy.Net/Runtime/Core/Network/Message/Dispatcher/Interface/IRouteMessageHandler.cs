@@ -93,7 +93,7 @@ namespace Fantasy
     /// <typeparam name="TEntity">实体类型。</typeparam>
     /// <typeparam name="TRouteRequest">路由请求类型。</typeparam>
     /// <typeparam name="TRouteResponse">路由响应类型。</typeparam>
-    public abstract class RouteRPC<TEntity, TRouteRequest, TRouteResponse> : IRouteMessageHandler where TEntity : Entity where TRouteRequest : IRouteRequest where TRouteResponse : IRouteResponse, new()
+    public abstract class RouteRPC<TEntity, TRouteRequest, TRouteResponse> : IRouteMessageHandler where TEntity : Entity where TRouteRequest : IRouteRequest where TRouteResponse : AMessage, IRouteResponse, new()
     {
         /// <summary>
         /// 获取处理的消息类型。

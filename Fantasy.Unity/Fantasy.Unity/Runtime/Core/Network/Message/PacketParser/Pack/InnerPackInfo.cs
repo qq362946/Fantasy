@@ -27,7 +27,7 @@ public sealed class InnerPackInfo : APackInfo
         return innerPackInfo;
     }
 
-    public override MemoryStream RentMemoryStream(int size = 0)
+    public override MemoryStreamBuffer RentMemoryStream(int size = 0)
     {
         if (MemoryStream == null)
         {
@@ -64,38 +64,38 @@ public sealed class InnerPackInfo : APackInfo
         {
             case >= OpCode.InnerBsonRouteResponse:
             {
-                obj = MongoHelper.Deserialize(MemoryStream, messageType);
+                obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
                 break;
             }
             case >= OpCode.InnerRouteResponse:
             {
-                obj = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
                 break;
             }
             case >= OpCode.OuterRouteResponse:
             {
-                obj = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
                 break;
             }
             case >= OpCode.InnerBsonRouteMessage:
             {
-                obj = MongoHelper.Deserialize(MemoryStream, messageType);
+                obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
                 break;
             }
             case >= OpCode.InnerRouteMessage:
             case >= OpCode.OuterRouteMessage:
             {
-                obj = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
                 break;
             }
             case >= OpCode.InnerBsonResponse:
             {
-                obj = MongoHelper.Deserialize(MemoryStream, messageType);
+                obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
                 break;
             }
             case >= OpCode.InnerResponse:
             {
-                obj = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
                 break;
             }
             case >= OpCode.OuterResponse:
@@ -106,12 +106,12 @@ public sealed class InnerPackInfo : APackInfo
             }
             case >= OpCode.InnerBsonMessage:
             {
-                obj = MongoHelper.Deserialize(MemoryStream, messageType);
+                obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
                 break;
             }
             case >= OpCode.InnerMessage:
             {
-                obj = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
                 break;
             }
             default:

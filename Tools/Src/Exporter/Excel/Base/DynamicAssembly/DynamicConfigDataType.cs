@@ -12,7 +12,7 @@ public class DynamicConfigDataType
     /// <summary>
     /// 配置数据对象，继承自 AProto 基类。
     /// </summary>
-    public AProto ConfigData;
+    public object ConfigData;
     /// <summary>
     /// 配置数据类型。
     /// </summary>

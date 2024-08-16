@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+#pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy
@@ -38,12 +39,14 @@ namespace Fantasy
     public sealed class EntityComponent : Entity, ISceneUpdate, IAssembly
     {
         private readonly OneToManyList<long, Type> _assemblyList = new();
+        private readonly OneToManyList<long, Type> _assemblyHashCodes = new();
         private readonly Dictionary<Type, IAwakeSystem> _awakeSystems = new();
         private readonly Dictionary<Type, IUpdateSystem> _updateSystems = new();
         private readonly Dictionary<Type, IDestroySystem> _destroySystems = new();
         private readonly Dictionary<Type, IEntitiesSystem> _deserializeSystems = new();
         private readonly Dictionary<Type, IFrameUpdateSystem> _frameUpdateSystem = new();
-
+        
+        private readonly Dictionary<Type, long> _hashCodes = new Dictionary<Type, long>();
         private readonly Queue<UpdateQueueStruct> _updateQueue = new Queue<UpdateQueueStruct>();
         private readonly Queue<FrameUpdateQueueStruct> _frameUpdateQueue = new Queue<FrameUpdateQueueStruct>();
 
@@ -92,6 +95,12 @@ namespace Fantasy
 
         private void LoadInner(long assemblyIdentity)
         {
+            foreach (var entityType in AssemblySystem.ForEach(assemblyIdentity, typeof(IEntity)))
+            {
+                _hashCodes.Add(entityType,HashCodeHelper.ComputeHash64(entityType.FullName));
+                _assemblyHashCodes.Add(assemblyIdentity, entityType);
+            }
+            
             foreach (var entitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(IEntitiesSystem)))
             {
                 Type entitiesType = null;
@@ -142,6 +151,16 @@ namespace Fantasy
 
         private void OnUnLoadInner(long assemblyIdentity)
         {
+            if (_assemblyHashCodes.TryGetValue(assemblyIdentity, out var entityType))
+            {
+                foreach (var type in entityType)
+                {
+                    _hashCodes.Remove(type);
+                }
+
+                _assemblyHashCodes.RemoveByKey(assemblyIdentity);
+            }
+
             if (!_assemblyList.TryGetValue(assemblyIdentity, out var assembly))
             {
                 return;
@@ -213,6 +232,27 @@ namespace Fantasy
                 Log.Error($"{typeof(T).FullName} Awake Error {e}");
             }
         }
+        
+        /// <summary>
+        /// 触发实体的销毁方法
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        public void Destroy(Entity entity)
+        {
+            if (!_destroySystems.TryGetValue(entity.GetType(), out var system))
+            {
+                return;
+            }
+
+            try
+            {
+                system.Invoke(entity);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"{entity.GetType().FullName} Destroy Error {e}");
+            }
+        }
 
         /// <summary>
         /// 触发实体的销毁方法
@@ -233,6 +273,27 @@ namespace Fantasy
             catch (Exception e)
             {
                 Log.Error($"{typeof(T).FullName} Destroy Error {e}");
+            }
+        }
+        
+        /// <summary>
+        /// 触发实体的反序列化方法
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        public void Deserialize(Entity entity) 
+        {
+            if (!_deserializeSystems.TryGetValue(entity.GetType(), out var system))
+            {
+                return;
+            }
+
+            try
+            {
+                system.Invoke(entity);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"{entity.GetType().FullName} Deserialize Error {e}");
             }
         }
 
@@ -355,6 +416,11 @@ namespace Fantasy
         }
 
         #endregion
+
+        public long GetHashCode(Type type)
+        {
+            return _hashCodes[type];
+        }
 
         /// <summary>
         /// 释放实体系统管理器资源

@@ -1,74 +1,147 @@
-using ProtoBuf;
+using MessagePack;
 using System.Collections.Generic;
 using Fantasy.Core.Network;
 #pragma warning disable CS8618
 
 namespace Fantasy
 {
-	[ProtoContract]
-	public partial class C2G_TestMessage : AProto, IMessage
+	[MessagePackObject]
+	public partial class C2G_TestMessage : AMessage, IMessage
 	{
+		public static C2G_TestMessage Create(Scene scene)
+		{
+			return (C2G_TestMessage)scene.MessagePoolComponent.Rent(typeof(C2G_TestMessage));
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+			base.Dispose();
+		}
 		public uint OpCode() { return OuterOpcode.C2G_TestMessage; }
-		[ProtoMember(1)]
+		[Key(0)]
 		public string Tag { get; set; }
 	}
-	[ProtoContract]
-	public partial class C2G_TestRequest : AProto, IRequest
+	[MessagePackObject]
+	public partial class C2G_TestRequest : AMessage, IRequest
 	{
-		[ProtoIgnore]
+		public static C2G_TestRequest Create(Scene scene)
+		{
+			return (C2G_TestRequest)scene.MessagePoolComponent.Rent(typeof(C2G_TestRequest));
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+			base.Dispose();
+		}
+		[IgnoreMember]
 		public G2C_TestResponse ResponseType { get; set; }
 		public uint OpCode() { return OuterOpcode.C2G_TestRequest; }
-		[ProtoMember(1)]
+		[Key(0)]
 		public string Tag { get; set; }
 	}
-	[ProtoContract]
-	public partial class G2C_TestResponse : AProto, IResponse
+	[MessagePackObject]
+	public partial class G2C_TestResponse : AMessage, IResponse
 	{
+		public static G2C_TestResponse Create(Scene scene)
+		{
+			return (G2C_TestResponse)scene.MessagePoolComponent.Rent(typeof(G2C_TestResponse));
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+			Tag = default;
+			base.Dispose();
+		}
 		public uint OpCode() { return OuterOpcode.G2C_TestResponse; }
-		[ProtoMember(91, IsRequired = true)]
-		public uint ErrorCode { get; set; }
-		[ProtoMember(1)]
+		[Key(0)]
 		public string Tag { get; set; }
+		[Key(1)]
+		public uint ErrorCode { get; set; }
 	}
-	[ProtoContract]
-	public partial class C2G_CreateAddressableRequest : AProto, IRequest
+	[MessagePackObject]
+	public partial class C2G_CreateAddressableRequest : AMessage, IRequest
 	{
-		[ProtoIgnore]
+		public static C2G_CreateAddressableRequest Create(Scene scene)
+		{
+			return (C2G_CreateAddressableRequest)scene.MessagePoolComponent.Rent(typeof(C2G_CreateAddressableRequest));
+		}
+		public override void Dispose()
+		{
+			base.Dispose();
+		}
+		[IgnoreMember]
 		public G2C_CreateAddressableResponse ResponseType { get; set; }
 		public uint OpCode() { return OuterOpcode.C2G_CreateAddressableRequest; }
 	}
-	[ProtoContract]
-	public partial class G2C_CreateAddressableResponse : AProto, IResponse
+	[MessagePackObject]
+	public partial class G2C_CreateAddressableResponse : AMessage, IResponse
 	{
+		public static G2C_CreateAddressableResponse Create(Scene scene)
+		{
+			return (G2C_CreateAddressableResponse)scene.MessagePoolComponent.Rent(typeof(G2C_CreateAddressableResponse));
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+			base.Dispose();
+		}
 		public uint OpCode() { return OuterOpcode.G2C_CreateAddressableResponse; }
-		[ProtoMember(91, IsRequired = true)]
+		[Key(0)]
 		public uint ErrorCode { get; set; }
 	}
-	[ProtoContract]
-	public partial class C2M_TestMessage : AProto, IAddressableRouteMessage
+	[MessagePackObject]
+	public partial class C2M_TestMessage : AMessage, IAddressableRouteMessage
 	{
+		public static C2M_TestMessage Create(Scene scene)
+		{
+			return (C2M_TestMessage)scene.MessagePoolComponent.Rent(typeof(C2M_TestMessage));
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+			base.Dispose();
+		}
 		public uint OpCode() { return OuterOpcode.C2M_TestMessage; }
 		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
-		[ProtoMember(1)]
+		[Key(0)]
 		public string Tag { get; set; }
 	}
-	[ProtoContract]
-	public partial class C2M_TestRequest : AProto, IAddressableRouteRequest
+	[MessagePackObject]
+	public partial class C2M_TestRequest : AMessage, IAddressableRouteRequest
 	{
-		[ProtoIgnore]
+		public static C2M_TestRequest Create(Scene scene)
+		{
+			return (C2M_TestRequest)scene.MessagePoolComponent.Rent(typeof(C2M_TestRequest));
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+			base.Dispose();
+		}
+		[IgnoreMember]
 		public M2C_TestResponse ResponseType { get; set; }
 		public uint OpCode() { return OuterOpcode.C2M_TestRequest; }
 		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
-		[ProtoMember(1)]
+		[Key(0)]
 		public string Tag { get; set; }
 	}
-	[ProtoContract]
-	public partial class M2C_TestResponse : AProto, IAddressableRouteResponse
+	[MessagePackObject]
+	public partial class M2C_TestResponse : AMessage, IAddressableRouteResponse
 	{
+		public static M2C_TestResponse Create(Scene scene)
+		{
+			return (M2C_TestResponse)scene.MessagePoolComponent.Rent(typeof(M2C_TestResponse));
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+			Tag = default;
+			base.Dispose();
+		}
 		public uint OpCode() { return OuterOpcode.M2C_TestResponse; }
-		[ProtoMember(91, IsRequired = true)]
-		public uint ErrorCode { get; set; }
-		[ProtoMember(1)]
+		[Key(0)]
 		public string Tag { get; set; }
+		[Key(1)]
+		public uint ErrorCode { get; set; }
 	}
 }

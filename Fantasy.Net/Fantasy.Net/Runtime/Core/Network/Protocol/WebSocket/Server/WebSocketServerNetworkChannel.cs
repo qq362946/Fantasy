@@ -193,12 +193,12 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
 
     #region Send
 
-    public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
+    public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
     {
         SendAsync(_packetParser.Pack(ref rpcId, ref routeTypeOpCode, ref routeId, memoryStream, message)).Coroutine();
     }
 
-    private async FTask SendAsync(MemoryStream memoryStream)
+    private async FTask SendAsync(MemoryStreamBuffer memoryStream)
     {
         await _webSocket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Length), WebSocketMessageType.Binary, true, _cancellationTokenSource.Token);
         _network.ReturnMemoryStream(memoryStream);

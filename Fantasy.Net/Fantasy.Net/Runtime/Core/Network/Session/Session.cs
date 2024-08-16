@@ -89,7 +89,7 @@ namespace Fantasy
             await FTask.CompletedTask;
         }
 
-        public virtual void Send(MemoryStream memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
+        public virtual void Send(MemoryStreamBuffer memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
         {
             if (IsDisposed)
             {

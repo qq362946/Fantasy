@@ -10,24 +10,18 @@ public static class OuterBufferPacketParserHelper
     private static readonly byte[] StaticPackRouteTypeOpCode = new byte[sizeof(long)];
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MemoryStream Pack(Scene scene, uint rpcId, long routeTypeOpCode, object message)
+    public static MemoryStreamBuffer Pack(Scene scene, uint rpcId, long routeTypeOpCode, object message)
     {
-        var memoryStream = new MemoryStream();
+        var messageType = message.GetType();
+        var memoryStream = new MemoryStreamBuffer();
         memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
-        ProtoBuffHelper.ToStream(message, memoryStream);
-        var opCode = scene.MessageDispatcherComponent.GetOpCode(message.GetType());
-        var packetBodyCount = (int)(memoryStream.Position - Packet.OuterPacketHeadLength);
-
-        if (packetBodyCount == 0)
-        {
-            // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
-            // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
-            packetBodyCount = -1;
-        }
-
-        // 检查消息体长度是否超出限制
+        MessagePackHelper.Serialize(messageType, message, memoryStream);
+        var opCode = scene.MessageDispatcherComponent.GetOpCode(messageType);
+        var packetBodyCount = (int)(memoryStream.Length - Packet.OuterPacketHeadLength);
+        
         if (packetBodyCount > Packet.PacketBodyMaxLength)
         {
+            // 检查消息体长度是否超出限制
             throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
         }
 

@@ -109,7 +109,7 @@ public class KCPServerNetworkChannel : ANetworkServerChannel
         }
     }
     
-    public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
+    public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
     {
         if (IsDisposed)
         {

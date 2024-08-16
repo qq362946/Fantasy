@@ -72,7 +72,7 @@ namespace Fantasy
     /// <summary>
     /// 泛型消息RPC基类，实现了 <see cref="IMessageHandler"/> 接口，用于处理请求和响应类型的消息。
     /// </summary>
-    public abstract class MessageRPC<TRequest, TResponse> : IMessageHandler where TRequest : IRequest where TResponse : IResponse, new()
+    public abstract class MessageRPC<TRequest, TResponse> : IMessageHandler where TRequest : IRequest where TResponse : AMessage, IResponse, new()
     {
         /// <summary>
         /// 获取处理的消息类型。

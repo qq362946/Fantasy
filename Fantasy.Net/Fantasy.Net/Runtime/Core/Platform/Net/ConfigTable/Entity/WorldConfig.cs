@@ -1,5 +1,9 @@
 #if FANTASY_NET
-using ProtoBuf;
+using System;
+using MessagePack;
+using Fantasy;
+using System.Linq;
+using System.Collections.Generic;
 using System.Collections.Concurrent;
 // ReSharper disable CollectionNeverUpdated.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
@@ -11,16 +15,16 @@ using System.Collections.Concurrent;
 
 namespace Fantasy
 {
-    [ProtoContract]
-    public sealed partial class WorldConfigData :  AProto, IConfigTable, IDisposable
+    [MessagePackObject]
+    public sealed partial class WorldConfigData : ASerialize, IConfigTable
     {
-        [ProtoMember(1)]
+        [Key(0)]
         public List<WorldConfig> List { get; set; } = new List<WorldConfig>();
 #if FANTASY_NET
-        [ProtoIgnore]
+        [IgnoreMember]
         private readonly ConcurrentDictionary<uint, WorldConfig> _configs = new ConcurrentDictionary<uint, WorldConfig>();
 #else 
-        [ProtoIgnore]
+        [IgnoreMember]
         private readonly Dictionary<uint, WorldConfig> _configs = new Dictionary<uint, WorldConfig>();
 #endif
         private static WorldConfigData _instance;
@@ -69,30 +73,30 @@ namespace Fantasy
                 config.AfterDeserialization();
             }
     
-            base.AfterDeserialization();
+            EndInit();
         }
         
-        public void Dispose()
+        public override void Dispose()
         {
             Instance = null;
         }
     }
     
-    [ProtoContract]
-    public sealed partial class WorldConfig : AProto
+    [MessagePackObject]
+    public sealed partial class WorldConfig : ASerialize
     {
-		[ProtoMember(1, IsRequired  = true)]
+		[Key(0)]
 		public uint Id { get; set; } // Id
-		[ProtoMember(2, IsRequired  = true)]
+		[Key(1)]
 		public string WorldName { get; set; } // 名称
-		[ProtoMember(3, IsRequired  = true)]
+		[Key(2)]
 		public string DbConnection { get; set; } // 连接字符串
-		[ProtoMember(4, IsRequired  = true)]
+		[Key(3)]
 		public string DbName { get; set; } // 数据库名称
-		[ProtoMember(5, IsRequired  = true)]
+		[Key(4)]
 		public string DbType { get; set; } // 数据库类型
-		[ProtoMember(6, IsRequired  = true)]
-		public bool IsGameWorld { get; set; } // 是否游戏服        		     
+		[Key(5)]
+		public bool IsGameWorld { get; set; } // 是否游戏服  
     } 
-} 
+}  
 #endif

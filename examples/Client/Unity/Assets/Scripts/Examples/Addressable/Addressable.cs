@@ -66,7 +66,7 @@ public class Addressable : MonoBehaviour
     private void OnConnectComplete()
     {
         Text.text = "连接成功";
-        _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
+        // _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
         ConnectAddressable.interactable = false;
     }
 

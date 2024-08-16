@@ -78,7 +78,7 @@ public sealed class KCPServerNetwork : ANetwork
         _socket.SetSioUdpConnReset();
         ReadPipeDataAsync().Coroutine();
         ReceiveSocketAsync().Coroutine();
-        Log.Info($"SceneConfigId = {Scene.SceneConfigId} KCPServer Listen {address}");
+        Log.Info($"SceneConfigId = {Scene.SceneConfigId} networkTarget = {networkTarget.ToString()} KCPServer Listen {address}");
     }
     
     public override void Dispose()

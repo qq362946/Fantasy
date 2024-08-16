@@ -21,7 +21,7 @@ namespace Fantasy
         protected readonly byte[] RouteIdBuffer = new byte[sizeof(long)];
         protected readonly byte[] PackRouteTypeOpCode = new byte[sizeof(long)];
         protected bool IsDisposed { get; private set; }
-        public abstract MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStream memoryStream, object message);
+        public abstract MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStreamBuffer memoryStream, object message);
         public virtual void Dispose()
         {
             IsDisposed = true;

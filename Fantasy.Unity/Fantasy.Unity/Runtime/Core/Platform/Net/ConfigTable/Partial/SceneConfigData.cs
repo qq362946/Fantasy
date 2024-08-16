@@ -1,12 +1,14 @@
 #if FANTASY_NET
+using MessagePack;
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy;
 
 public sealed partial class SceneConfig
 {
+    [IgnoreMember]
     public long RouteId { get; private set; }
-    protected override void EndInit()
+    public override void EndInit()
     {
         RouteId = new RuntimeIdStruct(0, Id, (byte)WorldConfigId, 0);
         base.EndInit();
@@ -15,10 +17,12 @@ public sealed partial class SceneConfig
 
 public sealed partial class SceneConfigData
 {
+    [IgnoreMember]
     private readonly OneToManyList<int, SceneConfig> _sceneConfigBySceneType = new OneToManyList<int, SceneConfig>();
+    [IgnoreMember]
     private readonly OneToManyList<uint, SceneConfig> _sceneConfigByProcess = new OneToManyList<uint, SceneConfig>();
     
-    protected override void EndInit()
+    public override void EndInit()
     {
         _sceneConfigByProcess.Clear();
         

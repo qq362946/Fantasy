@@ -5,7 +5,7 @@ namespace Fantasy;
 
 public static class ConfigTableHelper
 {
-    public static T Load<T>() where T : AProto
+    public static T Load<T>() where T : ASerialize
     {
         return default;
     }

@@ -187,12 +187,12 @@ public sealed class TCPServerNetworkChannel : ANetworkServerChannel
 
     #region Send
 
-    public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
+    public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
     {
         Send(_packetParser.Pack(ref rpcId, ref routeTypeOpCode, ref routeId, memoryStream, message)).Coroutine();
     }
 
-    private async FTask Send(MemoryStream memoryStream)
+    private async FTask Send(MemoryStreamBuffer memoryStream)
     {
         try
         {
@@ -228,7 +228,7 @@ public sealed class TCPServerNetworkChannel : ANetworkServerChannel
         {
             case SocketAsyncOperation.Send:
             {
-                var eUserToken = (MemoryStream)e.UserToken;
+                var eUserToken = (MemoryStreamBuffer)e.UserToken;
                 Scene.ThreadSynchronizationContext.Post(() =>
                 {
                     _network.ReturnMemoryStream(eUserToken);

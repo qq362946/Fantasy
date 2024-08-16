@@ -4,7 +4,7 @@ public static class ExcelTemplate
 {
     public static readonly string Template = """
                                              using System;
-                                             using ProtoBuf;
+                                             using MessagePack;
                                              using Fantasy;
                                              using System.Linq;
                                              using System.Collections.Generic;
@@ -19,16 +19,16 @@ public static class ExcelTemplate
                                              
                                              namespace (namespace)
                                              {
-                                                 [ProtoContract]
-                                                 public sealed partial class (ConfigName)Data :  AProto, IConfigTable, IDisposable
+                                                 [MessagePackObject]
+                                                 public sealed partial class (ConfigName)Data : ASerialize, IConfigTable
                                                  {
-                                                     [ProtoMember(1)]
+                                                     [Key(0)]
                                                      public List<(ConfigName)> List { get; set; } = new List<(ConfigName)>();
                                              #if FANTASY_NET
-                                                     [ProtoIgnore]
+                                                     [IgnoreMember]
                                                      private readonly ConcurrentDictionary<uint, (ConfigName)> _configs = new ConcurrentDictionary<uint, (ConfigName)>();
                                              #else 
-                                                     [ProtoIgnore]
+                                                     [IgnoreMember]
                                                      private readonly Dictionary<uint, (ConfigName)> _configs = new Dictionary<uint, (ConfigName)>();
                                              #endif
                                                      private static (ConfigName)Data _instance;
@@ -77,18 +77,18 @@ public static class ExcelTemplate
                                                              config.AfterDeserialization();
                                                          }
                                                  
-                                                         base.AfterDeserialization();
+                                                         EndInit();
                                                      }
                                                      
-                                                     public void Dispose()
+                                                     public override void Dispose()
                                                      {
                                                          Instance = null;
                                                      }
                                                  }
                                                  
-                                                 [ProtoContract]
-                                                 public sealed partial class (ConfigName) : AProto
-                                                 {(Fields)        		     
+                                                 [MessagePackObject]
+                                                 public sealed partial class (ConfigName) : ASerialize
+                                                 {(Fields)  
                                                  } 
                                              }  
                                              """;

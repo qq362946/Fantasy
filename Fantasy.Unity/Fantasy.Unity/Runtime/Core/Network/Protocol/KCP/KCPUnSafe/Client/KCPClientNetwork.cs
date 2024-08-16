@@ -46,8 +46,8 @@ namespace Fantasy
         private readonly byte[] _channelIdBytes = new byte[sizeof(uint)];
         private readonly Queue<uint> _updateTimeOutTime = new Queue<uint>();
         private readonly SortedSet<uint> _updateTimer = new SortedSet<uint>();
-        private readonly Queue<MemoryStream> _messageCache = new Queue<MemoryStream>();
         private readonly SocketAsyncEventArgs _connectEventArgs = new SocketAsyncEventArgs();
+        private readonly Queue<MemoryStreamBuffer> _messageCache = new Queue<MemoryStreamBuffer>();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 #if FANTASY_UNITY
         private readonly EndPoint _ipEndPoint = new IPEndPoint(IPAddress.Any, 0);
@@ -505,7 +505,7 @@ namespace Fantasy
         private const byte KcpHeaderRequestConnection = (byte)KcpHeader.RequestConnection;
         private const byte KcpHeaderConfirmConnection = (byte)KcpHeader.ConfirmConnection;
 
-        public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
+        public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
         {
             if (_cancellationTokenSource.IsCancellationRequested)
             {
@@ -523,7 +523,7 @@ namespace Fantasy
             SendMemoryStream(buffer);
         }
 
-        private void SendMemoryStream(MemoryStream memoryStream)
+        private void SendMemoryStream(MemoryStreamBuffer memoryStream)
         {
             if (_kcp.WaitSendCount > _maxSndWnd)
             {

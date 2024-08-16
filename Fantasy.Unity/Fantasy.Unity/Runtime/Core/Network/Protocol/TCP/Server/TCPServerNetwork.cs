@@ -31,7 +31,7 @@ public sealed class TCPServerNetwork : ANetwork
         _socket.Bind(address);
         _socket.Listen(int.MaxValue);
         _socket.SetSocketBufferToOsLimit();
-        Log.Info($"SceneConfigId = {Scene.SceneConfigId} TCPServer Listen {address}");
+        Log.Info($"SceneConfigId = {Scene.SceneConfigId} networkTarget = {networkTarget.ToString()} TCPServer Listen {address}");
         _acceptAsync.Completed += OnCompleted;
         AcceptAsync();
     }

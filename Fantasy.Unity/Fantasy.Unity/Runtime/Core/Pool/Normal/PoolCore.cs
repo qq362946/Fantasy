@@ -38,21 +38,21 @@ namespace Fantasy
 
         public IPool Rent(Type type)
         {
-            if (!_typeCheckCache.TryGetValue(type, out var createInstance))
-            {
-                if (!typeof(IPool).IsAssignableFrom(type))
-                {
-                    throw new NotSupportedException($"{this.GetType().FullName} Type:{type.FullName} must inherit from IPool");
-                }
-                else
-                {
-                    createInstance = CreateInstance.CreateIPool(type);
-                    _typeCheckCache[type] = createInstance;
-                }
-            }
-
             if (!_poolQueue.TryGetValue(type, out var queue))
             {
+                if (!_typeCheckCache.TryGetValue(type, out var createInstance))
+                {
+                    if (!typeof(IPool).IsAssignableFrom(type))
+                    {
+                        throw new NotSupportedException($"{this.GetType().FullName} Type:{type.FullName} must inherit from IPool");
+                    }
+                    else
+                    {
+                        createInstance = CreateInstance.CreateIPool(type);
+                        _typeCheckCache[type] = createInstance;
+                    }
+                }
+                
                 var instance = createInstance();
                 instance.IsPool = true;
                 return instance;
@@ -64,7 +64,7 @@ namespace Fantasy
             return dequeue;
         }
 
-        public void Return<T>(T obj) where T : class, IPool
+        public void Return(Type type, IPool obj)
         {
             if (obj == null)
             {
@@ -76,20 +76,21 @@ namespace Fantasy
                 return;
             }
 
-            if (_poolCount > _maxCapacity)
+            if (_poolCount >= _maxCapacity)
             {
                 return;
             }
-            
+
             _poolCount++;
             obj.IsPool = false;
-            _poolQueue.Enqueue(typeof(T), obj);
+            _poolQueue.Enqueue(type, obj);
         }
 
         public virtual void Dispose()
         {
             _poolCount = 0;
             _poolQueue.Clear();
+            _typeCheckCache.Clear();
         }
     }
 
@@ -134,7 +135,7 @@ namespace Fantasy
                 return;
             }
 
-            if (_poolCount > _maxCapacity)
+            if (_poolCount >= _maxCapacity)
             {
                 return;
             }

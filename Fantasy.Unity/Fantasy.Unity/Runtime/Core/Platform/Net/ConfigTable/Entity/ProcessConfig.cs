@@ -1,5 +1,9 @@
 #if FANTASY_NET
-using ProtoBuf;
+using System;
+using MessagePack;
+using Fantasy;
+using System.Linq;
+using System.Collections.Generic;
 using System.Collections.Concurrent;
 // ReSharper disable CollectionNeverUpdated.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
@@ -11,16 +15,16 @@ using System.Collections.Concurrent;
 
 namespace Fantasy
 {
-    [ProtoContract]
-    public sealed partial class ProcessConfigData :  AProto, IConfigTable, IDisposable
+    [MessagePackObject]
+    public sealed partial class ProcessConfigData : ASerialize, IConfigTable
     {
-        [ProtoMember(1)]
+        [Key(0)]
         public List<ProcessConfig> List { get; set; } = new List<ProcessConfig>();
 #if FANTASY_NET
-        [ProtoIgnore]
+        [IgnoreMember]
         private readonly ConcurrentDictionary<uint, ProcessConfig> _configs = new ConcurrentDictionary<uint, ProcessConfig>();
 #else 
-        [ProtoIgnore]
+        [IgnoreMember]
         private readonly Dictionary<uint, ProcessConfig> _configs = new Dictionary<uint, ProcessConfig>();
 #endif
         private static ProcessConfigData _instance;
@@ -69,24 +73,24 @@ namespace Fantasy
                 config.AfterDeserialization();
             }
     
-            base.AfterDeserialization();
+            EndInit();
         }
         
-        public void Dispose()
+        public override void Dispose()
         {
             Instance = null;
         }
     }
     
-    [ProtoContract]
-    public sealed partial class ProcessConfig : AProto
+    [MessagePackObject]
+    public sealed partial class ProcessConfig : ASerialize
     {
-		[ProtoMember(1, IsRequired  = true)]
+		[Key(0)]
 		public uint Id { get; set; } // 进程Id
-		[ProtoMember(2, IsRequired  = true)]
+		[Key(1)]
 		public uint MachineId { get; set; } // 机器ID
-		[ProtoMember(3, IsRequired  = true)]
-		public bool ReleaseMode { get; set; } // Release下运行        		     
+		[Key(2)]
+		public bool ReleaseMode { get; set; } // Release下运行  
     } 
 }  
 #endif

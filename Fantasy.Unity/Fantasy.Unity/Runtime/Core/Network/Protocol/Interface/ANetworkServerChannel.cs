@@ -47,7 +47,7 @@ namespace Fantasy
             }
         }
         
-        public abstract void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message);
+        public abstract void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message);
     }
 }
 #endif
