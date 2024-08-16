@@ -1,10 +1,5 @@
 ﻿namespace Fantasy;
 
-public class TestComponent1 : Entity
-{
-    
-}
-
 public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 {
     private static long _addressableSceneRunTimeId;
