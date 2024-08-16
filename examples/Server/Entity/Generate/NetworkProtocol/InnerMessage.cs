@@ -18,11 +18,13 @@ namespace Fantasy
 	{
 		public static G2A_TestRequest Create(Scene scene)
 		{
-			return (G2A_TestRequest)scene.MessagePoolComponent.Rent(typeof(G2A_TestRequest));
+			return scene.MessagePoolComponent.Rent<G2A_TestRequest>();
 		}
 		public override void Dispose()
 		{
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2A_TestRequest>(this);
+#endif
 		}
 		[IgnoreMember]
 		public G2A_TestResponse ResponseType { get; set; }
@@ -34,12 +36,14 @@ namespace Fantasy
 	{
 		public static G2A_TestResponse Create(Scene scene)
 		{
-			return (G2A_TestResponse)scene.MessagePoolComponent.Rent(typeof(G2A_TestResponse));
+			return scene.MessagePoolComponent.Rent<G2A_TestResponse>();
 		}
 		public override void Dispose()
 		{
 			ErrorCode = default;
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2A_TestResponse>(this);
+#endif
 		}
 		public uint OpCode() { return InnerOpcode.G2A_TestResponse; }
 		[Key(0)]
@@ -50,11 +54,13 @@ namespace Fantasy
 	{
 		public static G2M_RequestAddressableId Create(Scene scene)
 		{
-			return (G2M_RequestAddressableId)scene.MessagePoolComponent.Rent(typeof(G2M_RequestAddressableId));
+			return scene.MessagePoolComponent.Rent<G2M_RequestAddressableId>();
 		}
 		public override void Dispose()
 		{
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2M_RequestAddressableId>(this);
+#endif
 		}
 		[IgnoreMember]
 		public M2G_ResponseAddressableId ResponseType { get; set; }
@@ -66,13 +72,15 @@ namespace Fantasy
 	{
 		public static M2G_ResponseAddressableId Create(Scene scene)
 		{
-			return (M2G_ResponseAddressableId)scene.MessagePoolComponent.Rent(typeof(M2G_ResponseAddressableId));
+			return scene.MessagePoolComponent.Rent<M2G_ResponseAddressableId>();
 		}
 		public override void Dispose()
 		{
 			ErrorCode = default;
 			AddressableId = default;
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<M2G_ResponseAddressableId>(this);
+#endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_ResponseAddressableId; }
 		[Key(0)]

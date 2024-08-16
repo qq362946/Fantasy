@@ -22,11 +22,5 @@ namespace Fantasy
 #endif
         [IgnoreMember]
         public bool IsPool { get; set; }
-        public override void Dispose()
-        {
-#if FANTASY_NET || FANTASY_UNITY
-            Scene.MessagePoolComponent.Return(this);
-#endif
-        }
     }
 }

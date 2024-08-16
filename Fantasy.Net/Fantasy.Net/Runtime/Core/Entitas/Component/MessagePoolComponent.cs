@@ -26,15 +26,25 @@ namespace Fantasy
             base.Dispose();
         }
 
-        public T Rent<T>() where T : AMessage
+        public T Rent<T>() where T : AMessage, new()
         {
-            return (T)Rent(typeof(T));
+            if (!_poolQueue.TryDequeue(typeof(T), out var queue))
+            {
+                var instance = new T();
+                instance.Scene = Scene;
+                instance.IsPool = true;
+                return instance;
+            }
+
+            queue.IsPool = true;
+            _poolCount--;
+            return (T)queue;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public AMessage Rent(Type type)
         {
-            if (!_poolQueue.TryGetValue(type, out var queue))
+            if (!_poolQueue.TryDequeue(type, out var queue))
             {
                 if (!_typeCheckCache.TryGetValue(type, out var createInstance))
                 {
@@ -54,11 +64,10 @@ namespace Fantasy
                 instance.IsPool = true;
                 return instance;
             }
-
-            var dequeue = queue.Dequeue();
-            dequeue.IsPool = true;
+            
+            queue.IsPool = true;
             _poolCount--;
-            return dequeue;
+            return queue;
         }
 
         public void Return(AMessage obj)

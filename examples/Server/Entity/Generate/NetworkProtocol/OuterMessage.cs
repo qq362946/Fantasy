@@ -18,12 +18,14 @@ namespace Fantasy
 	{
 		public static C2G_TestMessage Create(Scene scene)
 		{
-			return (C2G_TestMessage)scene.MessagePoolComponent.Rent(typeof(C2G_TestMessage));
+			return scene.MessagePoolComponent.Rent<C2G_TestMessage>();
 		}
 		public override void Dispose()
 		{
 			Tag = default;
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<C2G_TestMessage>(this);
+#endif
 		}
 		public uint OpCode() { return OuterOpcode.C2G_TestMessage; }
 		[Key(0)]
@@ -34,12 +36,14 @@ namespace Fantasy
 	{
 		public static C2G_TestRequest Create(Scene scene)
 		{
-			return (C2G_TestRequest)scene.MessagePoolComponent.Rent(typeof(C2G_TestRequest));
+			return scene.MessagePoolComponent.Rent<C2G_TestRequest>();
 		}
 		public override void Dispose()
 		{
 			Tag = default;
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<C2G_TestRequest>(this);
+#endif
 		}
 		[IgnoreMember]
 		public G2C_TestResponse ResponseType { get; set; }
@@ -52,13 +56,15 @@ namespace Fantasy
 	{
 		public static G2C_TestResponse Create(Scene scene)
 		{
-			return (G2C_TestResponse)scene.MessagePoolComponent.Rent(typeof(G2C_TestResponse));
+			return scene.MessagePoolComponent.Rent<G2C_TestResponse>();
 		}
 		public override void Dispose()
 		{
 			ErrorCode = default;
 			Tag = default;
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2C_TestResponse>(this);
+#endif
 		}
 		public uint OpCode() { return OuterOpcode.G2C_TestResponse; }
 		[Key(0)]
@@ -71,11 +77,13 @@ namespace Fantasy
 	{
 		public static C2G_CreateAddressableRequest Create(Scene scene)
 		{
-			return (C2G_CreateAddressableRequest)scene.MessagePoolComponent.Rent(typeof(C2G_CreateAddressableRequest));
+			return scene.MessagePoolComponent.Rent<C2G_CreateAddressableRequest>();
 		}
 		public override void Dispose()
 		{
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<C2G_CreateAddressableRequest>(this);
+#endif
 		}
 		[IgnoreMember]
 		public G2C_CreateAddressableResponse ResponseType { get; set; }
@@ -86,12 +94,14 @@ namespace Fantasy
 	{
 		public static G2C_CreateAddressableResponse Create(Scene scene)
 		{
-			return (G2C_CreateAddressableResponse)scene.MessagePoolComponent.Rent(typeof(G2C_CreateAddressableResponse));
+			return scene.MessagePoolComponent.Rent<G2C_CreateAddressableResponse>();
 		}
 		public override void Dispose()
 		{
 			ErrorCode = default;
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2C_CreateAddressableResponse>(this);
+#endif
 		}
 		public uint OpCode() { return OuterOpcode.G2C_CreateAddressableResponse; }
 		[Key(0)]
@@ -102,12 +112,14 @@ namespace Fantasy
 	{
 		public static C2M_TestMessage Create(Scene scene)
 		{
-			return (C2M_TestMessage)scene.MessagePoolComponent.Rent(typeof(C2M_TestMessage));
+			return scene.MessagePoolComponent.Rent<C2M_TestMessage>();
 		}
 		public override void Dispose()
 		{
 			Tag = default;
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<C2M_TestMessage>(this);
+#endif
 		}
 		public uint OpCode() { return OuterOpcode.C2M_TestMessage; }
 		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
@@ -119,12 +131,14 @@ namespace Fantasy
 	{
 		public static C2M_TestRequest Create(Scene scene)
 		{
-			return (C2M_TestRequest)scene.MessagePoolComponent.Rent(typeof(C2M_TestRequest));
+			return scene.MessagePoolComponent.Rent<C2M_TestRequest>();
 		}
 		public override void Dispose()
 		{
 			Tag = default;
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<C2M_TestRequest>(this);
+#endif
 		}
 		[IgnoreMember]
 		public M2C_TestResponse ResponseType { get; set; }
@@ -138,13 +152,15 @@ namespace Fantasy
 	{
 		public static M2C_TestResponse Create(Scene scene)
 		{
-			return (M2C_TestResponse)scene.MessagePoolComponent.Rent(typeof(M2C_TestResponse));
+			return scene.MessagePoolComponent.Rent<M2C_TestResponse>();
 		}
 		public override void Dispose()
 		{
 			ErrorCode = default;
 			Tag = default;
-			base.Dispose();
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<M2C_TestResponse>(this);
+#endif
 		}
 		public uint OpCode() { return OuterOpcode.M2C_TestResponse; }
 		[Key(0)]

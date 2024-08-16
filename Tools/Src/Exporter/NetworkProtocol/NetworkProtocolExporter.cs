@@ -314,10 +314,10 @@ public sealed class NetworkProtocolExporter
                     {
                         messageStr.AppendLine("\n\t{");
                         messageStr.AppendLine($"\t\tpublic static {className} Create(Scene scene)");
-                        messageStr.AppendLine($"\t\t{{\n\t\t\treturn ({className})scene.MessagePoolComponent.Rent(typeof({className}));\n\t\t}}");
+                        messageStr.AppendLine($"\t\t{{\n\t\t\treturn scene.MessagePoolComponent.Rent<{className}>();\n\t\t}}");
                         messageStr.AppendLine($"\t\tpublic override void Dispose()");
                         messageStr.AppendLine($"\t\t{{");
-                        messageStr.AppendLine($"<<<<Dispose>>>\t\t\tbase.Dispose();");
+                        messageStr.AppendLine($"<<<<Dispose>>>#if FANTASY_NET || FANTASY_UNITY\n\t\t\tScene.MessagePoolComponent.Return<{className}>(this);\n#endif");
                         messageStr.AppendLine($"\t\t}}");
 
                         if(parameter == "IMessage")
