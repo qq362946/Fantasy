@@ -7,6 +7,7 @@ using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.Serializers;
+#pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 
@@ -67,84 +68,118 @@ namespace Fantasy
         }
 
         #endregion
-        
+
         public static T Deserialize<T>(byte[] bytes)
         {
-            return BsonSerializer.Deserialize<T>(bytes);
+            var @object = BsonSerializer.Deserialize<T>(bytes);
+            if (@object is ASerialize aSerialize)
+            {
+                aSerialize.AfterDeserialization();
+            }
+            return @object;
         }
 
         public static T Deserialize<T>(MemoryStreamBuffer buffer)
         {
-            return BsonSerializer.Deserialize<T>(buffer);
+            var @object = BsonSerializer.Deserialize<T>(buffer);
+            if (@object is ASerialize aSerialize)
+            {
+                aSerialize.AfterDeserialization();
+            }
+            return @object;
         }
     
         public static object Deserialize(Type type, byte[] bytes)
         {
-            return BsonSerializer.Deserialize(bytes, type);
+            var @object = BsonSerializer.Deserialize(bytes, type);
+            if (@object is ASerialize aSerialize)
+            {
+                aSerialize.AfterDeserialization();
+            }
+            return @object;
         }
     
         public static object Deserialize(Type type, MemoryStreamBuffer buffer)
         {
-            return BsonSerializer.Deserialize(buffer, type);
+            var @object = BsonSerializer.Deserialize(buffer, type);
+            if (@object is ASerialize aSerialize)
+            {
+                aSerialize.AfterDeserialization();
+            }
+            return @object;
         }
 
         public static unsafe T Deserialize<T>(byte[] bytes, int index, int count)
         {
+            T @object;
+            
             fixed (byte* ptr = &bytes[index])
             {
                 using var stream = new UnmanagedMemoryStream(ptr, count);
-                return BsonSerializer.Deserialize<T>(stream);
+                @object = BsonSerializer.Deserialize<T>(stream);
             }
+
+            if (@object is ASerialize aSerialize)
+            {
+                aSerialize.AfterDeserialization();
+            }
+
+            return @object;
         }
 
         public static unsafe object Deserialize(Type type, byte[] bytes, int index, int count)
         {
+            object @object;
+            
             fixed (byte* ptr = &bytes[index])
             {
                 using var stream = new UnmanagedMemoryStream(ptr, count);
-                return BsonSerializer.Deserialize(stream, type);
+                @object = BsonSerializer.Deserialize(stream, type);
             }
+            
+            if (@object is ASerialize aSerialize)
+            {
+                aSerialize.AfterDeserialization();
+            }
+
+            return @object;
         }
 
         public static void Serialize<T>(T @object, MemoryStreamBuffer buffer)
         {
-            if (@object is ISupportInitialize supportInitialize)
+            if (@object is ASerialize aSerialize)
             {
-                supportInitialize.BeginInit();
+                aSerialize.BeginInit();
             }
-
             using IBsonWriter bsonWriter = new BsonBinaryWriter(buffer, BsonBinaryWriterSettings.Defaults);
             BsonSerializer.Serialize(bsonWriter, @object);
         }
 
         public static void Serialize(Type type, object @object, MemoryStreamBuffer buffer)
         {
-            if (@object is ISupportInitialize supportInitialize)
+            if (@object is ASerialize aSerialize)
             {
-                supportInitialize.BeginInit();
+                aSerialize.BeginInit();
             }
-
             using IBsonWriter bsonWriter = new BsonBinaryWriter(buffer, BsonBinaryWriterSettings.Defaults);
             BsonSerializer.Serialize(bsonWriter, type, @object);
         }
 
         public static byte[] Serialize(object @object)
         {
-            if (@object is ISupportInitialize supportInitialize)
+            if (@object is ASerialize aSerialize)
             {
-                supportInitialize.BeginInit();
+                aSerialize.BeginInit();
             }
-            
             return @object.ToBson(@object.GetType());
         }
     
         public static byte[] Serialize<T>(T @object)
         {
-            if (@object is ISupportInitialize supportInitialize)
+            if (@object is ASerialize aSerialize)
             {
-                supportInitialize.BeginInit();
+                aSerialize.BeginInit();
             }
-            
             return @object.ToBson<T>();
         }
     

@@ -6,11 +6,6 @@ using System.Runtime.CompilerServices;
 
 namespace Fantasy
 {
-    public sealed class MessagePool : PoolCore
-    {
-        public MessagePool(int maxCapacity) : base(maxCapacity) { }
-    }
-
     public sealed class MessagePoolComponent : Entity
     {
         private int _poolCount;
