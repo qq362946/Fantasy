@@ -1,6 +1,8 @@
 // ReSharper disable SwapViaDeconstruction
 // ReSharper disable UseIndexFromEndExpression
 // ReSharper disable ConvertToPrimaryConstructor
+using System;
+using System.Collections.Generic;
 #pragma warning disable CS8601 // Possible null reference assignment.
 namespace Fantasy
 {

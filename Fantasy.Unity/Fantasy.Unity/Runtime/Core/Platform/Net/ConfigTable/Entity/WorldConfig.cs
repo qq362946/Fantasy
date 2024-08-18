@@ -90,13 +90,11 @@ namespace Fantasy
 		[Key(1)]
 		public string WorldName { get; set; } // 名称
 		[Key(2)]
-		public string DbConnection { get; set; } // 连接字符串
+		public string DbConnection { get; set; } // 数据库连接字符串
 		[Key(3)]
 		public string DbName { get; set; } // 数据库名称
 		[Key(4)]
-		public string DbType { get; set; } // 数据库类型
-		[Key(5)]
-		public bool IsGameWorld { get; set; } // 是否游戏服  
+		public string DbType { get; set; } // 数据库类型  
     } 
 }  
 #endif

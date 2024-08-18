@@ -27,6 +27,7 @@
       <PackageReference Include="EPPlus" Version="7.0.0" />
       <PackageReference Include="MessagePack" Version="2.5.172" />
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
+      <PackageReference Include="MongoDB.Bson" Version="2.28.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 

@@ -90,7 +90,7 @@ namespace Fantasy
 		[Key(1)]
 		public uint MachineId { get; set; } // 机器ID
 		[Key(2)]
-		public bool ReleaseMode { get; set; } // Release下运行  
+		public uint StartupGroup { get; set; } // 启动组  
     } 
 }  
 #endif

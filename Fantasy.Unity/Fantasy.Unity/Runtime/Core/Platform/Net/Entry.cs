@@ -78,6 +78,16 @@ public static class Entry
 
     private static async FTask StartProcess()
     {
+        if (ProcessDefine.Options.StartupGroup != 0)
+        {
+            foreach (var processConfig in ProcessConfigData.Instance.ForEachByStartupGroup((uint)ProcessDefine.Options.StartupGroup))
+            {
+                await Process.Create(processConfig.Id);
+            }
+
+            return;
+        }
+        
         switch (ProcessDefine.Options.Mode)
         {
             case "Develop":

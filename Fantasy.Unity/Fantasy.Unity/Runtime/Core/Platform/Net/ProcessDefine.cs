@@ -30,7 +30,7 @@ public sealed class CommandLineOptions
     /// KCP - 服务器内部之间通讯使用KCP协议
     /// WebSocket - 服务器内部之间通讯使用WebSocket协议(不推荐、TCP或KCP)
     /// </summary>
-    [Option('n', "InnerNetwork", Required = false, Default = "KCP", HelpText = "TCP、KCP、WebSocket")]
+    [Option('n', "InnerNetwork", Required = false, Default = "TCP", HelpText = "TCP、KCP、WebSocket")]
     public string InnerNetwork { get; set; }
     /// <summary>
     /// 配置表文件夹路径。
@@ -47,6 +47,11 @@ public sealed class CommandLineOptions
     /// </summary>
     [Option('i', "SessionIdleCheckerInterval", Required = false, Default = 5000, HelpText = "Session idle check interval")]
     public int SessionIdleCheckerInterval { get; set; }
+    /// <summary>
+    /// 启动组。
+    /// </summary>
+    [Option('g', "StartupGroup", Required = false, Default = 0, HelpText = "Used to start a group of Process")]
+    public int StartupGroup { get; set; }
 }
 
 /// <summary>
