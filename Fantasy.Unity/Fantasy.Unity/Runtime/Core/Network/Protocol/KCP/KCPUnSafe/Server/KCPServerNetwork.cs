@@ -44,14 +44,15 @@ public sealed class KCPServerNetwork : ANetwork
     private long _startTime;
     private uint _updateMinTime;
     private uint _pendingMinTime;
+    private bool _allowWraparound = true;
     private readonly Pipe _pipe = new Pipe();
     private readonly byte[] _sendBuff = new byte[5];
-    private readonly Queue<uint> _pendingTimeOutTime = new Queue<uint>();
+    private readonly List<uint> _pendingTimeOutTime = new List<uint>();
     private readonly HashSet<uint> _updateChannels = new HashSet<uint>();
-    private readonly Queue<uint> _updateTimeOutTime = new Queue<uint>();
+    private readonly List<uint> _updateTimeOutTime = new List<uint>();
     private readonly Queue<IPEndPoint> _endPoint = new Queue<IPEndPoint>();
     private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-    private readonly SortedOneToManyHashSet<uint, uint> _updateTimer = new SortedOneToManyHashSet<uint, uint>();
+    private readonly SortedOneToManyList<uint, uint> _updateTimer = new SortedOneToManyList<uint, uint>();
     private readonly Dictionary<uint, PendingConnection> _pendingConnection = new Dictionary<uint, PendingConnection>();
     private readonly SortedOneToManyList<uint, uint> _pendingConnectionTimeOut = new SortedOneToManyList<uint, uint>();
     private readonly Dictionary<uint, KCPServerNetworkChannel> _connectionChannel = new Dictionary<uint, KCPServerNetworkChannel>();
@@ -319,94 +320,106 @@ public sealed class KCPServerNetwork : ANetwork
     public void Update()
     {
         var timeNow = TimeNow;
-        CheckUpdateChannel(timeNow);
-        ClearPendingConnection(timeNow);
+        _allowWraparound = timeNow < _updateMinTime;
+        CheckUpdateTimerOut(ref timeNow);
+        UpdateChannel(ref timeNow);
+        PendingTimerOut(ref timeNow);
+        _allowWraparound = true;
     }
-    
-    private void CheckUpdateChannel(uint nowTime)
-    {
-        try
-        {
-            if(nowTime >= _updateMinTime && _updateTimer.Count > 0)
-            {
-                foreach (var (timeId,channelList) in _updateTimer)
-                {
-                    if (timeId > nowTime)
-                    {
-                        _updateMinTime = timeId;
-                        break;
-                    }
-                
-                    foreach (var channelId in channelList)
-                    {
-                        _updateChannels.Add(channelId);
-                    }
-            
-                    _updateTimeOutTime.Enqueue(timeId);
-                }
-            
-                while (_updateTimeOutTime.TryDequeue(out var time))
-                {
-                    _updateTimer.RemoveKey(time);
-                }
-            }
 
-            if (_updateChannels.Count == 0)
-            {
-                return;
-            }
-            
-            foreach (var channelId in _updateChannels)
-            {
-                if (!_connectionChannel.TryGetValue(channelId, out var channel))
-                {
-                    continue;
-                }
-
-                if (channel.IsDisposed)
-                {
-                    _connectionChannel.Remove(channelId);
-                    continue;
-                }
-                
-                channel.Kcp.Update(nowTime);
-                AddUpdateChannel(channelId, channel.Kcp.Check(nowTime));
-            }
-            
-            _updateChannels.Clear();
-        }
-        catch (Exception e)
-        {
-            Log.Error(e);
-        }
-    }
-    
-    private void ClearPendingConnection(uint now)
+    private void CheckUpdateTimerOut(ref uint nowTime)
     {
-        if (now < _pendingMinTime || _pendingConnection.Count == 0 || _pendingConnectionTimeOut.Count == 0)
+        if (_updateTimer.Count == 0)
         {
             return;
         }
 
-        foreach (var (time, pendingList) in _pendingConnectionTimeOut)
+        if (IsTimeGreaterThan(_updateMinTime, nowTime))
         {
-            if (time > now)
+            return;
+        }
+        
+        _updateTimeOutTime.Clear();
+
+        foreach (var kv in _updateTimer)
+        {
+            var timeId = kv.Key;
+            
+            if (IsTimeGreaterThan(timeId, nowTime))
             {
-                _pendingMinTime = time;
+                _updateMinTime = timeId;
                 break;
             }
-                
-            foreach (var channelId in pendingList)
+            
+            _updateTimeOutTime.Add(timeId);
+        }
+        
+        foreach (var timeId in _updateTimeOutTime)
+        {
+            foreach (var channelId in _updateTimer[timeId])
+            {
+                _updateChannels.Add(channelId);
+            }
+            _updateTimer.RemoveKey(timeId);
+        }
+    }
+    
+    private void UpdateChannel(ref uint timeNow)
+    {
+        foreach (var channelId in _updateChannels)
+        {
+            if (!_connectionChannel.TryGetValue(channelId, out var channel))
+            {
+                continue;
+            }
+
+            if (channel.IsDisposed)
+            {
+                _connectionChannel.Remove(channelId);
+                continue;
+            }
+
+            channel.Kcp.Update(timeNow);
+            AddUpdateChannel(channelId, channel.Kcp.Check(timeNow));
+        }
+        
+        _updateChannels.Clear();
+    }
+
+    private void PendingTimerOut(ref uint timeNow)
+    {
+        if (_pendingConnectionTimeOut.Count == 0)
+        {
+            return;
+        }
+
+        if (IsTimeGreaterThan(_pendingMinTime, timeNow))
+        {
+            return;
+        }
+        
+        _pendingTimeOutTime.Clear();
+        
+        foreach (var kv in _pendingConnectionTimeOut)
+        {
+            var timeId = kv.Key;
+            
+            if (IsTimeGreaterThan(timeId, timeNow))
+            {
+                _pendingMinTime = timeId;
+            }
+            
+            _pendingTimeOutTime.Add(timeId);
+        }
+        
+        foreach (var timeId in _pendingTimeOutTime)
+        {
+            foreach (var channelId in _pendingConnectionTimeOut[timeId])
             {
                 _pendingConnection.Remove(channelId);
             }
-                
-            _pendingTimeOutTime.Enqueue(time);
-        }
-
-        while (_pendingTimeOutTime.TryDequeue(out var timeOutId))
-        {
-            _pendingConnectionTimeOut.RemoveKey(timeOutId);
+            
+            _pendingConnectionTimeOut.RemoveKey(timeId);
         }
     }
     
@@ -417,13 +430,28 @@ public sealed class KCPServerNetwork : ANetwork
             _updateChannels.Add(channelId);
             return;
         }
-
-        if (tillTime < _updateMinTime || _updateMinTime == 0)
+        
+        if (IsTimeGreaterThan(_updateMinTime, tillTime))
         {
             _updateMinTime = tillTime;
         }
 
         _updateTimer.Add(tillTime, channelId);
+    }
+    
+    private const uint HalfMaxUint = uint.MaxValue / 2;
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private bool IsTimeGreaterThan(uint timeId, uint nowTime)
+    {
+        if (!_allowWraparound)
+        {
+            return timeId > nowTime;
+        }
+        var diff = timeId - nowTime;
+        // 如果 diff 的值在 [0, HalfMaxUint] 范围内，说明 timeId 是在 nowTime 之后或相等。
+        // 如果 diff 的值在 (HalfMaxUint, uint.MaxValue] 范围内，说明 timeId 是在 nowTime 之前（时间回绕的情况）。
+        return diff < HalfMaxUint || diff == HalfMaxUint;
     }
     
     #endregion
@@ -435,11 +463,11 @@ public sealed class KCPServerNetwork : ANetwork
         var now = TimeNow;
         var pendingConnection = new PendingConnection(channelId, ipEndPoint, now);
 
-        if (pendingConnection.TimeOutId < _pendingMinTime || _pendingMinTime == 0)
+        if (IsTimeGreaterThan(_pendingMinTime, pendingConnection.TimeOutId) || _pendingMinTime == 0)
         {
             _pendingMinTime = pendingConnection.TimeOutId;
         }
-            
+
         _pendingConnection.Add(channelId, pendingConnection);
         _pendingConnectionTimeOut.Add(pendingConnection.TimeOutId, channelId);
         SendWaitConfirmConnection(ref channelId, ipEndPoint);
