@@ -407,6 +407,7 @@ public sealed class KCPServerNetwork : ANetwork
             if (IsTimeGreaterThan(timeId, timeNow))
             {
                 _pendingMinTime = timeId;
+                break;
             }
             
             _pendingTimeOutTime.Add(timeId);
