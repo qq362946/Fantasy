@@ -27,6 +27,7 @@ namespace Fantasy
     
     public class Entry : MonoBehaviour
     {
+        private static bool _isInit;
         public static Scene Scene { get; private set; }
         /// <summary>
         /// 初始化框架
@@ -36,10 +37,14 @@ namespace Fantasy
             Scene?.Dispose();
             // 初始化程序集管理系统
             AssemblySystem.Initialize(assemblies);
+            if (!_isInit)
+            {
 #if FANTASY_WEBGL
-            ThreadSynchronizationContext.Initialize();
+                ThreadSynchronizationContext.Initialize();
 #endif
-            FantasyObject.FantasyObjectGameObject.AddComponent<Entry>();
+                _isInit = true;
+                FantasyObject.FantasyObjectGameObject.AddComponent<Entry>();
+            }
             Scene = await Scene.Create(SceneRuntimeType.MainThread);
             await Scene.EventComponent.PublishAsync(new OnFantasyInit()
             {
@@ -61,6 +66,7 @@ namespace Fantasy
                 Scene?.Dispose();
                 Scene = null;
             }
+            _isInit = false;
         }
     }
 }

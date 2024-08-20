@@ -222,14 +222,7 @@ namespace Fantasy
         /// <returns></returns>
         private static long AssemblyIdentity(Assembly assembly)
         {
-            var assemblyName = assembly.GetName();
-            var name = assemblyName.Name;
-            var version = assemblyName.Version.ToString();
-            var culture = assemblyName.CultureInfo?.Name ?? "neutral";
-            var publicKeyToken = BitConverter.ToString(assemblyName.GetPublicKeyToken()).Replace("-", string.Empty);
-            var assemblyIdentity = $"{name}|{version}|{culture}|{publicKeyToken}";
-            var hashBytes = EncryptHelper.ComputeSha256Hash(Encoding.UTF8.GetBytes(assemblyIdentity));
-            return BitConverter.ToInt64(hashBytes, 0);
+            return HashCodeHelper.ComputeHash64(assembly.GetName().Name);
         }
 
         /// <summary>
