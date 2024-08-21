@@ -13,13 +13,13 @@ namespace Fantasy
     {
         private static readonly object Lock = new object();
         // 配置表数据缓存字典
-        private static readonly Dictionary<string, AProto> ConfigDic = new ();
+        private static readonly Dictionary<string, ASerialize> ConfigDic = new ();
         /// <summary>
         /// 加载配置表数据
         /// </summary>
         /// <typeparam name="T">配置表类型</typeparam>
         /// <returns>配置表数据</returns>
-        public static T Load<T>() where T : AProto
+        public static T Load<T>() where T : ASerialize
         {
             lock (Lock)
             {
@@ -34,8 +34,7 @@ namespace Fantasy
 
                     var configFile = GetConfigPath(dataConfig);
                     var bytes = File.ReadAllBytes(configFile);
-                    var data = (T)ProtoBuffHelper.FromBytes(typeof(T), bytes, 0, bytes.Length);
-                    data.AfterDeserialization();
+                    var data = MessagePackHelper.Deserialize<T>(bytes, 0, bytes.Length);
                     ConfigDic[dataConfig] = data;
                     return data;
                 }

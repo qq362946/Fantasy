@@ -13,11 +13,11 @@ namespace Fantasy
         public uint ProtocolCode;
         public long RouteTypeCode;
         public int MessagePacketLength;
-        public MemoryStream MemoryStream { get; protected set; }
+        public MemoryStreamBuffer MemoryStream { get; protected set; }
         protected ANetwork Network;
         public bool IsDisposed;
         public abstract object Deserialize(Type messageType);
-        public abstract MemoryStream RentMemoryStream(int size = 0);
+        public abstract MemoryStreamBuffer RentMemoryStream(int size = 0);
         public virtual void Dispose()
         {
             if (IsDisposed)

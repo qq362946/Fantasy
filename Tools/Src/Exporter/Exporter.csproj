@@ -25,9 +25,10 @@
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
       <PackageReference Include="EPPlus" Version="7.0.0" />
+      <PackageReference Include="MessagePack" Version="2.5.172" />
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
+      <PackageReference Include="MongoDB.Bson" Version="2.28.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="protobuf-net" Version="3.2.26" />
     </ItemGroup>
 
     <ItemGroup>
@@ -55,12 +56,6 @@
       <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\JsonHelper.cs">
         <Link>Core\Helper\JsonHelper.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\ProtoBuf\IProto.cs">
-        <Link>Excel\Base\IProto.cs</Link>
-      </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\ProtoBuf\ProtoBuffHelper.cs">
-        <Link>Excel\Base\ProtoBufHelper.cs</Link>
-      </Compile>
       <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\TimeHelper.cs">
         <Link>Excel\Base\TimeHelper.cs</Link>
       </Compile>
@@ -69,6 +64,15 @@
       </Compile>
       <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Pool\Normal\Pool.cs">
         <Link>Excel\Base\Pool.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\ASerialize.cs">
+        <Link>Excel\Base\ASerialize.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\MemoryStreamBuffer.cs">
+        <Link>Excel\Base\MemoryStreamBuffer.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\MessagePack\MessagePackHelper.cs">
+        <Link>Excel\Base\MessagePackHelper.cs</Link>
       </Compile>
     </ItemGroup>
 

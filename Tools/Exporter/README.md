@@ -1,13 +1,13 @@
 # 安装
-1. 安装.net 7 或更高的版本的SDK.
+1. 安装.net 8 或更高的版本的SDK.
 # 配置
 导表工具分为客户端和服务器两部分、所以会有很多导出路径需要配置下。
 在当前目录中有ExporterSettings.json文件，通过这里可以配置各项的导出路径，具体如下:
 
-- ProtoBufTemplatePath ：ProtoBuf生成代码模版的文件位置
-- ProtoBufDirectory ：ProtoBuf文件所在的文件夹位置
-- ProtoBufServerDirectory ：ProtoBuf生成到服务端的文件夹位置
-- ProtoBufClientDirectory ：ProtoBuf生成到客户端的文件夹位置
+- NetworkProtocolTemplatePath ：ProtoBuf生成代码模版的文件位置
+- NetworkProtocolDirectory ：ProtoBuf文件所在的文件夹位置
+- NetworkProtocolServerDirectory ：ProtoBuf生成到服务端的文件夹位置
+- NetworkProtocolClientDirectory ：ProtoBuf生成到客户端的文件夹位置
 - ExcelProgramPath ：Excel文件夹的根目录
 - ExcelVersionFile ：Excel的Version文件位置、这个文件用于记录每次导出对比是否需要再次导出的文件
 - ExcelServerFileDirectory ：Excel生成的代码文件、在服务端文件夹位置
@@ -16,7 +16,6 @@
 - ExcelClientBinaryDirectory ：Excel生成在客户端的二进制数据文件夹位置
 - ExcelServerJsonDirectory ：Excel生成在服务端的Json数据文件夹位置
 - ExcelClientJsonDirectory ：Excel生成在客户端的Json数据文件夹位置
-- ExcelTemplatePath ：Excel生成代码模版的文件位置
 - ServerCustomExportDirectory ：Excel在服务端生成自定义代码的文件夹位置
 - ClientCustomExportDirectory ：Excel在客户端端生成自定义代码的文件夹位置
 
@@ -41,11 +40,11 @@ Mac、Linux平台下在命令行下执行./Run.sh
 
 选择上述的操作有、您需要再次选择需要导出的类型、比如是导出协议、还是Excel配置表。
 
-1. 导出网络协议（ProtoBuf） 
+1. 导出网络协议 
 
    // 导出网络协议、不重新生成的协议号、如果有新的协议会再旧的协议下基础上生成、适合已经发布到线上的环境。
 
-2. 导出网络协议并重新生成OpCode（ProtoBuf）
+2. 导出网络协议并重新生成OpCode
 
    // 导出网络协议、并重新生成协议号、如果不是线上环境建议使用该选项。
 

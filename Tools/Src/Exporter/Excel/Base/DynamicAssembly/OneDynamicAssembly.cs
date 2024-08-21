@@ -3,7 +3,6 @@ using Fantasy;
 using Fantasy.Exporter;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using ProtoBuf;
 
 namespace Exporter.Excel;
 
@@ -35,17 +34,17 @@ public class OneDynamicAssembly
                 {
                     continue;
                 }
-
+                
                 assemblyMetadata = AssemblyMetadata.CreateFromFile(domainAssembly.Location);
                 metadataReference = assemblyMetadata.GetReference();
                 metadataReferenceList.Add(metadataReference);
             }
             // 添加ProtoEntity支持
-            assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(AProto).Assembly.Location);
+            assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(ASerialize).Assembly.Location);
             metadataReference = assemblyMetadata.GetReference();
             metadataReferenceList.Add(metadataReference);
-            // 添加ProtoBuf.net支持
-            assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(ProtoMemberAttribute).Assembly.Location);
+            // 添加MessagePack支持
+            assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(MessagePack.MessagePackObjectAttribute).Assembly.Location);
             metadataReference = assemblyMetadata.GetReference();
             metadataReferenceList.Add(metadataReference);
             CSharpCompilation compilation = CSharpCompilation.Create(assemblyName, _syntaxTreeList, metadataReferenceList, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));

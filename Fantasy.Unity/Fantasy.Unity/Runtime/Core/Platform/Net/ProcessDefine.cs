@@ -47,6 +47,11 @@ public sealed class CommandLineOptions
     /// </summary>
     [Option('i', "SessionIdleCheckerInterval", Required = false, Default = 5000, HelpText = "Session idle check interval")]
     public int SessionIdleCheckerInterval { get; set; }
+    /// <summary>
+    /// 启动组。
+    /// </summary>
+    [Option('g', "StartupGroup", Required = false, Default = 0, HelpText = "Used to start a group of Process")]
+    public int StartupGroup { get; set; }
 }
 
 /// <summary>

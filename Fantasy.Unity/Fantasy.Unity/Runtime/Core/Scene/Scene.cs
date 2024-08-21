@@ -63,6 +63,7 @@ namespace Fantasy
         public TimerComponent TimerComponent { get; private set; }
         public EventComponent EventComponent { get; private set; }
         public EntityComponent EntityComponent { get; private set; }
+        public MessagePoolComponent MessagePoolComponent { get; private set; }
         public CoroutineLockComponent CoroutineLockComponent { get; private set; }
         public MessageDispatcherComponent MessageDispatcherComponent { get; private set; }
         public NetworkMessagingComponent NetworkMessagingComponent { get; private set; }
@@ -79,6 +80,7 @@ namespace Fantasy
             EntityListPool = new EntityListPool<Entity>();
             EntitySortedDictionaryPool = new EntitySortedDictionaryPool<long, Entity>();
             SceneUpdate = EntityComponent = await Create<EntityComponent>(this, false, false).Initialize();
+            MessagePoolComponent = AddComponent<MessagePoolComponent>(false);
             EventComponent = await AddComponent<EventComponent>(false).Initialize();
             TimerComponent = AddComponent<TimerComponent>(false).Initialize();
             CoroutineLockComponent = AddComponent<CoroutineLockComponent>(false).Initialize();
@@ -98,6 +100,7 @@ namespace Fantasy
             TimerComponent = scene.TimerComponent;
             EventComponent = scene.EventComponent;
             EntityComponent = scene.EntityComponent;
+            MessagePoolComponent = scene.MessagePoolComponent;
             CoroutineLockComponent = scene.CoroutineLockComponent;
             MessageDispatcherComponent = scene.MessageDispatcherComponent;
             NetworkMessagingComponent = scene.NetworkMessagingComponent;
@@ -122,6 +125,7 @@ namespace Fantasy
             UnityNetwork?.Dispose();
 #endif
             EventComponent.Dispose();
+            MessagePoolComponent.Dispose();
             EntityPool.Dispose();
             EntityListPool.Dispose();
             EntitySortedDictionaryPool.Dispose();

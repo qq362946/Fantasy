@@ -19,11 +19,11 @@
 
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
+      <PackageReference Include="MessagePack" Version="2.5.172" />
       <PackageReference Include="MongoDB.Bson" Version="2.28.0" />
       <PackageReference Include="MongoDB.Driver" Version="2.28.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="NLog" Version="5.3.2" />
-      <PackageReference Include="protobuf-net" Version="3.2.30" />
       <PackageReference Include="System.IO.Pipelines" Version="8.0.0" />
     </ItemGroup>
 

@@ -239,7 +239,7 @@ public sealed partial class ExcelExporter
         void AddCustomExportTask(Assembly assembly)
         {
             var assemblyIdentity = AssemblyIdentity(assembly);
-            var assemblyInfo = new AssemblyInfo(assemblyIdentity, assembly);
+            var assemblyInfo = new AssemblyInfo(assemblyIdentity);
             assemblyInfo.Load(assembly);
             
             if (!assemblyInfo.AssemblyTypeGroupList.TryGetValue(typeof(ICustomExport), out var customExportList))
@@ -576,12 +576,12 @@ public sealed partial class ExcelExporter
                     case PlatformID.Win32Windows:
                     case PlatformID.WinCE:
                     {
-                        fileBuilder.Append($"\r\n\t\t[ProtoMember({++index}, IsRequired  = true)]\r\n");
+                        fileBuilder.Append($"\r\n\t\t[Key({index++})]\r\n");
                         break;
                     }
                     default:
                     {
-                        fileBuilder.Append($"\n\t\t[ProtoMember({++index}, IsRequired  = true)]\n");
+                        fileBuilder.Append($"\n\t\t[Key({index++})]\n");
                         break;
                     }
                 }
@@ -700,7 +700,7 @@ public sealed partial class ExcelExporter
 
                 if (serverDynamicInfo?.ConfigData != null)
                 {
-                    var bytes = ProtoBuffHelper.ToBytes(serverDynamicInfo.ConfigData);
+                    var bytes = MessagePackHelper.Serialize(serverDynamicInfo.ConfigData);
                     
                     if (!Directory.Exists(_excelServerBinaryDirectory))
                     {
@@ -711,6 +711,10 @@ public sealed partial class ExcelExporter
 
                     if (serverDynamicInfo.Json.Length > 0)
                     {
+                        if (!Directory.Exists(_excelServerJsonDirectory))
+                        {
+                            Directory.CreateDirectory(_excelServerJsonDirectory);
+                        }
                         using var sw = new StreamWriter(Path.Combine(_excelServerJsonDirectory, $"{csName}Data.Json"));
                         sw.WriteLine("{\"List\":[");
                         sw.Write(serverDynamicInfo.Json.ToString());
@@ -720,7 +724,7 @@ public sealed partial class ExcelExporter
                 
                 if (clientDynamicInfo?.ConfigData != null)
                 {
-                    var bytes = ProtoBuffHelper.ToBytes(clientDynamicInfo.ConfigData);
+                    var bytes = MessagePackHelper.Serialize(clientDynamicInfo.ConfigData);
                     
                     if (!Directory.Exists(_excelClientBinaryDirectory))
                     {
@@ -731,6 +735,10 @@ public sealed partial class ExcelExporter
                 
                     if (clientDynamicInfo.Json.Length > 0)
                     {
+                        if (!Directory.Exists(_excelClientJsonDirectory))
+                        {
+                            Directory.CreateDirectory(_excelClientJsonDirectory);
+                        }
                         using var sw = new StreamWriter(Path.Combine(_excelClientJsonDirectory, $"{csName}Data.Json"));
                         sw.WriteLine("{\"List\":[");
                         sw.Write(clientDynamicInfo.Json.ToString());
@@ -849,7 +857,7 @@ public sealed partial class ExcelExporter
         return workbookWorksheets[0];
     }
 
-    private void SetNewValue(PropertyInfo propertyInfo, AProto config, string type, string value)
+    private void SetNewValue(PropertyInfo propertyInfo, object config, string type, string value)
     {
         if (IsNullOrWhiteSpace(value))
         {

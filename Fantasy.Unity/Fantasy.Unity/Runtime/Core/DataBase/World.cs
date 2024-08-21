@@ -1,3 +1,4 @@
+#pragma warning disable CS8603 // Possible null reference return.
 #if FANTASY_NET
 namespace Fantasy;
 
@@ -58,6 +59,16 @@ public sealed class World
         if (Worlds.TryGetValue(id, out var world))
         {
             return world;
+        }
+
+        if (!WorldConfigData.Instance.TryGet(id, out var worldConfigData))
+        {
+            return null;
+        }
+
+        if (string.IsNullOrEmpty(worldConfigData.DbConnection))
+        {
+            return null;
         }
 
         world = new World(scene, id);

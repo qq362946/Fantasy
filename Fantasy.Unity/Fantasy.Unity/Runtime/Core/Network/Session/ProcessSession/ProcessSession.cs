@@ -54,7 +54,7 @@ public sealed class ProcessSession : Session
         await this.Scheduler(packInfo.MessageType, rpcId, routeId, packInfo);
     }
 
-    public override void Send(MemoryStream memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
+    public override void Send(MemoryStreamBuffer memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
     {
         throw new Exception("The use of this method is not supported");
     }

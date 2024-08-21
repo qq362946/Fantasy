@@ -16,8 +16,8 @@ try
     Console.OutputEncoding = Encoding.UTF8;
     // 检查启动参数
     Log.Info("请输入你想要做的操作:");
-    Log.Info("1:导出网络协议（ProtoBuf）");
-    Log.Info("2:导出网络协议并重新生成OpCode（ProtoBuf）");
+    Log.Info("1:导出网络协议");
+    Log.Info("2:导出网络协议并重新生成OpCode");
     Log.Info("3:增量导出Excel（包含常量枚举）");
     Log.Info("4:全量导出Excel（包含常量枚举）");
     // 获取用户输入
@@ -38,12 +38,12 @@ try
     {
         case ExportType.ProtoBuf:
         {
-            _ = new ProtoBufExporter(false);
+            _ = new NetworkProtocolExporter(false);
             break;
         }
         case ExportType.ProtoBufAndOpCodeCache:
         {
-            _ = new ProtoBufExporter(true);
+            _ = new NetworkProtocolExporter(true);
             break;
         }
         case ExportType.AllExcel:

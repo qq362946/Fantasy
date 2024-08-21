@@ -272,12 +272,12 @@ namespace Fantasy
 
         #region Send
 
-        public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
+        public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
         {
             Send(_packetParser.Pack(ref rpcId, ref routeTypeOpCode, ref routeId, memoryStream, message)).Coroutine();
         }
 
-        private async FTask Send(MemoryStream memoryStream)
+        private async FTask Send(MemoryStreamBuffer memoryStream)
         {
             try
             {

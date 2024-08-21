@@ -38,6 +38,15 @@ namespace Fantasy
             il.Emit(OpCodes.Ret);
             return (Func<object>)dynamicMethod.CreateDelegate(typeof(Func<object>));
         }
+        
+        public static Func<AMessage> CreateMessage(Type type)
+        {
+            var dynamicMethod = new DynamicMethod($"CreateInstance_{type.Name}", type, Type.EmptyTypes, true);
+            var il = dynamicMethod.GetILGenerator();
+            il.Emit(OpCodes.Newobj, type.GetConstructor(Type.EmptyTypes));
+            il.Emit(OpCodes.Ret);
+            return (Func<AMessage>)dynamicMethod.CreateDelegate(typeof(Func<AMessage>));
+        }
     }
     
     // public static class CreateInstance

@@ -224,7 +224,7 @@ namespace Fantasy
                 {
                     Return();
                     
-                    if (_exception != null)
+                    if (_exception == null)
                     {
                         return default;
                     }

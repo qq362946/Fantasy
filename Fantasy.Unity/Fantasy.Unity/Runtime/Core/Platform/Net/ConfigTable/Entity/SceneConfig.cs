@@ -1,5 +1,9 @@
 #if FANTASY_NET
-using ProtoBuf;
+using System;
+using MessagePack;
+using Fantasy;
+using System.Linq;
+using System.Collections.Generic;
 using System.Collections.Concurrent;
 // ReSharper disable CollectionNeverUpdated.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
@@ -11,16 +15,16 @@ using System.Collections.Concurrent;
 
 namespace Fantasy
 {
-    [ProtoContract]
-    public sealed partial class SceneConfigData :  AProto, IConfigTable, IDisposable
+    [MessagePackObject]
+    public sealed partial class SceneConfigData : ASerialize, IConfigTable
     {
-        [ProtoMember(1)]
+        [Key(0)]
         public List<SceneConfig> List { get; set; } = new List<SceneConfig>();
 #if FANTASY_NET
-        [ProtoIgnore]
+        [IgnoreMember]
         private readonly ConcurrentDictionary<uint, SceneConfig> _configs = new ConcurrentDictionary<uint, SceneConfig>();
 #else 
-        [ProtoIgnore]
+        [IgnoreMember]
         private readonly Dictionary<uint, SceneConfig> _configs = new Dictionary<uint, SceneConfig>();
 #endif
         private static SceneConfigData _instance;
@@ -69,36 +73,36 @@ namespace Fantasy
                 config.AfterDeserialization();
             }
     
-            base.AfterDeserialization();
+            EndInit();
         }
         
-        public void Dispose()
+        public override void Dispose()
         {
             Instance = null;
         }
     }
     
-    [ProtoContract]
-    public sealed partial class SceneConfig : AProto
+    [MessagePackObject]
+    public sealed partial class SceneConfig : ASerialize
     {
-		[ProtoMember(1, IsRequired  = true)]
+		[Key(0)]
 		public uint Id { get; set; } // ID
-		[ProtoMember(2, IsRequired  = true)]
+		[Key(1)]
 		public uint ProcessConfigId { get; set; } // 进程Id
-		[ProtoMember(3, IsRequired  = true)]
+		[Key(2)]
 		public uint WorldConfigId { get; set; } // 世界Id
-		[ProtoMember(4, IsRequired  = true)]
+		[Key(3)]
 		public string SceneRuntimeType { get; set; } // Scene运行类型
-		[ProtoMember(5, IsRequired  = true)]
+		[Key(4)]
 		public string SceneTypeString { get; set; } // Scene类型
-		[ProtoMember(6, IsRequired  = true)]
+		[Key(5)]
 		public string NetworkProtocol { get; set; } // 协议类型
-		[ProtoMember(7, IsRequired  = true)]
+		[Key(6)]
 		public int OuterPort { get; set; } // 外网端口
-		[ProtoMember(8, IsRequired  = true)]
+		[Key(7)]
 		public int InnerPort { get; set; } // 内网端口
-		[ProtoMember(9, IsRequired  = true)]
-		public int SceneType { get; set; } // Scene类型        		     
+		[Key(8)]
+		public int SceneType { get; set; } // Scene类型  
     } 
 }  
 #endif

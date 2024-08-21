@@ -34,7 +34,7 @@ namespace Fantasy
             session.NetworkMessageScheduler = networkMessageScheduler;
             session.RemoteEndPoint = channel.RemoteEndPoint as IPEndPoint;
             session.OnDispose = channel.Dispose;
-
+            session.LastReceiveTime = TimeHelper.Now;
             // 在外部网络目标下，添加会话空闲检查组件
             if (networkTarget == NetworkTarget.Outer)
             {
@@ -53,6 +53,7 @@ namespace Fantasy
             session.RemoteEndPoint = remoteEndPoint;
             session.OnDispose = network.Dispose;
             session.NetworkMessageScheduler = network.NetworkMessageScheduler;
+            session.LastReceiveTime = TimeHelper.Now;
             return session;
         }
 #if FANTASY_NET
@@ -89,7 +90,7 @@ namespace Fantasy
             await FTask.CompletedTask;
         }
 
-        public virtual void Send(MemoryStream memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
+        public virtual void Send(MemoryStreamBuffer memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
         {
             if (IsDisposed)
             {

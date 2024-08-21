@@ -14,7 +14,7 @@ namespace Fantasy
     {
         private const int MaxMemoryStreamSize = 1024;
         private Queue<OuterPackInfo> _outerPackInfoPool;
-        private readonly Queue<MemoryStream> _memoryStreamPool = new Queue<MemoryStream>();
+        private readonly Queue<MemoryStreamBuffer> _memoryStreamPool = new Queue<MemoryStreamBuffer>();
         
         public NetworkType NetworkType { get; private set; }
         public NetworkTarget NetworkTarget { get; private set; }
@@ -55,11 +55,11 @@ namespace Fantasy
         
         public abstract void RemoveChannel(uint channelId);
 
-        public MemoryStream RentMemoryStream(int size = 0)
+        public MemoryStreamBuffer RentMemoryStream(int size = 0)
         {
             if (size > MaxMemoryStreamSize)
             {
-                return new MemoryStream(size);
+                return new MemoryStreamBuffer(size);
             }
 
             if (size < MaxMemoryStreamSize)
@@ -69,7 +69,7 @@ namespace Fantasy
 
             if (_memoryStreamPool.Count == 0)
             {
-                return new MemoryStream(size);
+                return new MemoryStreamBuffer(size);
             }
 
             if (_memoryStreamPool.TryDequeue(out var memoryStream))
@@ -78,12 +78,12 @@ namespace Fantasy
                 return memoryStream;
             }
 
-            return new MemoryStream(size);
+            return new MemoryStreamBuffer(size);
         }
 
-        public void ReturnMemoryStream(MemoryStream memoryStream)
+        public void ReturnMemoryStream(MemoryStreamBuffer memoryStreamBuffer)
         {
-            if (memoryStream.Capacity > 1024)
+            if (memoryStreamBuffer.Capacity > 1024)
             {
                 return;
             }
@@ -95,10 +95,10 @@ namespace Fantasy
                 return;
             }
 
-            memoryStream.Seek(0, SeekOrigin.Begin);
-            memoryStream.SetLength(0);
-            memoryStream.Position = 0;
-            _memoryStreamPool.Enqueue(memoryStream);
+            memoryStreamBuffer.Seek(0, SeekOrigin.Begin);
+            memoryStreamBuffer.SetLength(0);
+            memoryStreamBuffer.Position = 0;
+            _memoryStreamPool.Enqueue(memoryStreamBuffer);
         }
 
         public OuterPackInfo RentOuterPackInfo()

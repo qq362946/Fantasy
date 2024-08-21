@@ -16,7 +16,7 @@ namespace Fantasy
         private bool _isConnected;
         private long _connectTimeoutId;
         private BufferPacketParser _packetParser; 
-        private readonly Queue<MemoryStream> _messageCache = new Queue<MemoryStream>();
+        private readonly Queue<MemoryStreamBuffer> _messageCache = new Queue<MemoryStreamBuffer>();
         
         private Action _onConnectFail;
         private Action _onConnectComplete;
@@ -132,7 +132,7 @@ namespace Fantasy
 
         #region Send
 
-        public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
+        public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
         {
             if (IsDisposed)
             {
@@ -150,7 +150,7 @@ namespace Fantasy
             Send(buffer);
         }
         
-        private void Send(MemoryStream memoryStream)
+        private void Send(MemoryStreamBuffer memoryStream)
         {
             _webSocket.SendAsync(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
 #if !UNITY_EDITOR && UNITY_WEBGL

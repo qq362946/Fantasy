@@ -1,3 +1,4 @@
+// ReSharper disable MemberCanBePrivate.Global
 #if FANTASY_UNITY
 
 namespace Fantasy
@@ -9,54 +10,29 @@ namespace Fantasy
             self.TimerComponent = self.Scene.TimerComponent;
         }
     }
-    
-    public class SessionHeartbeatComponentDestroySystem : DestroySystem<SessionHeartbeatComponent>
-    {
-        protected override void Destroy(SessionHeartbeatComponent self)
-        {
-            self.Stop();
-            self.SelfRunTimeId = 0;
-            self.Session = null;
-            self.TimerComponent = null;
-        }
-    }
 
     /// <summary>
     /// 负责管理会话心跳的组件。
     /// </summary>
     public class SessionHeartbeatComponent : Entity
     {
-        /// <summary>
-        /// 心跳间隔计时器的 ID
-        /// </summary>
-        public long TimerId;   
-        /// <summary>
-        /// 用于确保组件完整性的自身运行时 ID
-        /// </summary>
+        public int TimeOut;
+        public long TimerId;  
+        public long LastTime;
         public long SelfRunTimeId;
-        /// <summary>
-        /// 对会话对象的引用
-        /// </summary>
+        public long TimeOutTimerId;
         public Session Session;
-        /// <summary>
-        /// 临时保存计时器组件的引用
-        /// </summary>
         public TimerComponent TimerComponent; 
-        private readonly PingRequest _pingRequest = new PingRequest(); // 心跳的 Ping 请求对象
+        private readonly PingRequest _pingRequest = new PingRequest(); 
         
-        /// <summary>
-        /// 获取当前的 Ping 值。
-        /// </summary>
         public int Ping { get; private set; }
-
-        /// <summary>
-        /// 重写 Dispose 方法以释放资源。
-        /// </summary>
+        
         public override void Dispose()
         {
             Stop();
             Ping = 0;
             Session = null;
+            TimeOut = 0;
             SelfRunTimeId = 0;
             base.Dispose();
         }
@@ -65,11 +41,31 @@ namespace Fantasy
         /// 使用指定的间隔启动心跳功能。
         /// </summary>
         /// <param name="interval">以毫秒为单位的心跳请求发送间隔。</param>
-        public void Start(int interval)
+        /// <param name="timeOut">设置与服务器的通信超时时间，如果超过这个时间限制，将自动断开会话(Session)。</param>
+        /// <param name="timeOutInterval">用于检测与服务器连接超时频率。</param>
+        public void Start(int interval, int timeOut = 2000, int timeOutInterval = 3000)
         {
+            TimeOut = timeOut;
             Session = (Session)Parent;
             SelfRunTimeId = RunTimeId;
+            LastTime = TimeHelper.Now;
             TimerId = TimerComponent.Unity.RepeatedTimer(interval, () => RepeatedSend().Coroutine());
+            TimeOutTimerId = TimerComponent.Unity.RepeatedTimer(timeOutInterval, CheckTimeOut);
+        }
+
+        private void CheckTimeOut()
+        {
+            if (TimeHelper.Now - LastTime < TimeOut)
+            {
+                return;
+            }
+
+            if (SelfRunTimeId != Session.RunTimeId)
+            {
+                return;
+            }
+            
+            Session.Dispose();
         }
 
         /// <summary>
@@ -77,12 +73,15 @@ namespace Fantasy
         /// </summary>
         public void Stop()
         {
-            if (TimerId == 0)
+            if (TimerId != 0)
             {
-                return; // 如果计时器 ID 为 0，则计时器未激活，直接返回
+                TimerComponent?.Unity.Remove(ref TimerId);
             }
             
-            TimerComponent?.Unity.Remove(ref TimerId);
+            if (TimeOutTimerId != 0)
+            {
+                TimerComponent?.Unity.Remove(ref TimeOutTimerId);
+            }
         }
 
         /// <summary>
@@ -97,6 +96,7 @@ namespace Fantasy
             }
             
             var requestTime = TimeHelper.Now;
+            
             var pingResponse = (PingResponse)await Session.Call(_pingRequest);
 
             if (pingResponse.ErrorCode != 0)
@@ -104,7 +104,8 @@ namespace Fantasy
                 return;
             }
             
-            var responseTime = TimeHelper.Now; // 记录接收心跳响应的时间
+            var responseTime = TimeHelper.Now;
+            LastTime = responseTime;
             Ping = (int)(responseTime - requestTime) / 2;
             TimeHelper.TimeDiff = pingResponse.Now + Ping - responseTime;
         }

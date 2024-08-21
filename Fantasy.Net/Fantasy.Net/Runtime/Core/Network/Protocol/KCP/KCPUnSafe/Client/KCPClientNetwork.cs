@@ -35,19 +35,20 @@ namespace Fantasy
         private uint _channelId;
         private bool _isConnected;
         private bool _isDisconnect;
-        private long _updateMinTime;
+        private uint _updateMinTime;
         private bool _isInnerDispose;
         private long _connectTimeoutId;
+        private bool _allowWraparound = true;
         private IPEndPoint _remoteAddress;
         private BufferPacketParser _packetParser;
         private readonly Pipe _pipe = new Pipe();
         private readonly byte[] _sendBuff = new byte[5];
         private readonly byte[] _receiveBuffer = new byte[Packet.PacketBodyMaxLength + 20];
         private readonly byte[] _channelIdBytes = new byte[sizeof(uint)];
-        private readonly Queue<uint> _updateTimeOutTime = new Queue<uint>();
+        private readonly List<uint> _updateTimeOutTime = new List<uint>();
         private readonly SortedSet<uint> _updateTimer = new SortedSet<uint>();
-        private readonly Queue<MemoryStream> _messageCache = new Queue<MemoryStream>();
         private readonly SocketAsyncEventArgs _connectEventArgs = new SocketAsyncEventArgs();
+        private readonly Queue<MemoryStreamBuffer> _messageCache = new Queue<MemoryStreamBuffer>();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 #if FANTASY_UNITY
         private readonly EndPoint _ipEndPoint = new IPEndPoint(IPAddress.Any, 0);
@@ -435,33 +436,31 @@ namespace Fantasy
         public void CheckUpdate()
         {
             var nowTime = TimeNow;
+            _allowWraparound = nowTime < _updateMinTime;
 
-            try
+            if (IsTimeGreaterThan(nowTime, _updateMinTime) && _updateTimer.Count > 0)
             {
-                if (nowTime >= _updateMinTime && _updateTimer.Count > 0)
+                foreach (var timeId in _updateTimer)
                 {
-                    foreach (var timeId in _updateTimer)
+                    if (IsTimeGreaterThan(timeId, nowTime))
                     {
-                        if (timeId > nowTime)
-                        {
-                            _updateMinTime = timeId;
-                            break;
-                        }
-
-                        _updateTimeOutTime.Enqueue(timeId);
+                        _updateMinTime = timeId;
+                        break;
                     }
 
-                    while (_updateTimeOutTime.TryDequeue(out var timeId))
-                    {
-                        KcpUpdate();
-                        _updateTimer.Remove(timeId);
-                    }
+                    _updateTimeOutTime.Add(timeId);
                 }
+
+                foreach (var timeId in _updateTimeOutTime)
+                {
+                    _updateTimer.Remove(timeId);
+                    KcpUpdate();
+                }
+                
+                _updateTimeOutTime.Clear();
             }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
+
+            _allowWraparound = true;
         }
         
         private void AddToUpdate(uint tillTime)
@@ -471,8 +470,8 @@ namespace Fantasy
                 KcpUpdate();
                 return;
             }
-        
-            if (tillTime < _updateMinTime || _updateMinTime == 0)
+
+            if (IsTimeGreaterThan(_updateMinTime, tillTime) || _updateMinTime == 0)
             {
                 _updateMinTime = tillTime;
             }
@@ -495,6 +494,21 @@ namespace Fantasy
                 
             AddToUpdate(_kcp.Check(nowTime));
         }
+        
+        private const uint HalfMaxUint = uint.MaxValue / 2;
+    
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private bool IsTimeGreaterThan(uint timeId, uint nowTime)
+        {
+            if (!_allowWraparound)
+            {
+                return timeId > nowTime;
+            }
+            var diff = timeId - nowTime;
+            // 如果 diff 的值在 [0, HalfMaxUint] 范围内，说明 timeId 是在 nowTime 之后或相等。
+            // 如果 diff 的值在 (HalfMaxUint, uint.MaxValue] 范围内，说明 timeId 是在 nowTime 之前（时间回绕的情况）。
+            return diff < HalfMaxUint || diff == HalfMaxUint;
+        }
 
         #endregion
 
@@ -505,7 +519,7 @@ namespace Fantasy
         private const byte KcpHeaderRequestConnection = (byte)KcpHeader.RequestConnection;
         private const byte KcpHeaderConfirmConnection = (byte)KcpHeader.ConfirmConnection;
 
-        public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStream memoryStream, object message)
+        public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
         {
             if (_cancellationTokenSource.IsCancellationRequested)
             {
@@ -523,7 +537,7 @@ namespace Fantasy
             SendMemoryStream(buffer);
         }
 
-        private void SendMemoryStream(MemoryStream memoryStream)
+        private void SendMemoryStream(MemoryStreamBuffer memoryStream)
         {
             if (_kcp.WaitSendCount > _maxSndWnd)
             {

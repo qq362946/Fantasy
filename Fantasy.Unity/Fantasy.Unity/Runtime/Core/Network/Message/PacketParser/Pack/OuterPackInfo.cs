@@ -25,7 +25,7 @@ namespace Fantasy
             return outerPackInfo;
         }
 
-        public override MemoryStream RentMemoryStream(int size = 0)
+        public override MemoryStreamBuffer RentMemoryStream(int size = 0)
         {
             if (MemoryStream == null)
             {
@@ -48,7 +48,7 @@ namespace Fantasy
             }
 
             MemoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
-            var @object = ProtoBuffHelper.FromStream(messageType, MemoryStream);
+            var @object = MessagePackHelper.Deserialize(messageType, MemoryStream);
             MemoryStream.Seek(0, SeekOrigin.Begin);
             return @object;
         }

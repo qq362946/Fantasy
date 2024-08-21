@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using MessagePack;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
@@ -17,7 +18,8 @@ using Newtonsoft.Json;
 
 namespace Fantasy
 {
-    public abstract class Entity: IDisposable, IPool
+    public interface IEntity : IDisposable, IPool { }
+    public abstract class Entity : IEntity
     {
         #region Members
         /// <summary>
@@ -26,6 +28,7 @@ namespace Fantasy
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMember]
         public bool IsPool { get; set; }
         [BsonId]
         [BsonElement]
@@ -34,25 +37,34 @@ namespace Fantasy
         public long Id { get; protected set; }
         [BsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMember]
         public long RunTimeId { get; protected set; }
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMember]
         public bool IsDisposed => RunTimeId == 0;
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMember]
         public Scene Scene { get; protected set; }
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
+        [IgnoreMember]
         public Entity Parent { get; protected set; }
+        [BsonIgnore]
+        [JsonIgnore]
+        [IgnoreDataMember]
+        [IgnoreMember]
+        public Type Type { get; protected set; }
 #if FANTASY_NET
         [BsonElement("t")] [BsonIgnoreIfNull] private EntityList<Entity> _treeDb;
         [BsonElement("m")] [BsonIgnoreIfNull] private EntityList<Entity> _multiDb;
 #endif
-        [BsonIgnore] [IgnoreDataMember] private EntitySortedDictionary<long, Entity> _tree;
-        [BsonIgnore] [IgnoreDataMember] private EntitySortedDictionary<long, Entity> _multi;
+        [BsonIgnore] [IgnoreDataMember] [IgnoreMember] private EntitySortedDictionary<long, Entity> _tree;
+        [BsonIgnore] [IgnoreDataMember] [IgnoreMember] private EntitySortedDictionary<long, Entity> _multi;
         
         public T GetParent<T>() where T : Entity, new()
         {
@@ -67,6 +79,7 @@ namespace Fantasy
         {
             var entity = isPool ? scene.EntityPool.Rent<T>() : new T();
             entity.Scene = scene;
+            entity.Type = typeof(T);
             entity.IsPool = isPool;
             entity.Id = scene.EntityIdFactory.Create;
             entity.RunTimeId = scene.RuntimeIdFactory.Create;
@@ -85,6 +98,7 @@ namespace Fantasy
         {
             var entity = isPool ? scene.EntityPool.Rent<T>() : new T();
             entity.Scene = scene;
+            entity.Type = typeof(T);
             entity.IsPool = isPool;
             entity.Id = id;
             entity.RunTimeId = scene.RuntimeIdFactory.Create;
@@ -121,7 +135,7 @@ namespace Fantasy
             return entity;
         }
 
-        public void AddComponent<T>(T component) where T : Entity
+        public void AddComponent(Entity component)
         {
             if (this == component)
             {
@@ -131,7 +145,78 @@ namespace Fantasy
 
             if (component.IsDisposed)
             {
-                Log.Error($"component is Disposed {component.GetType().FullName}");
+                Log.Error($"component is Disposed {component.Type.FullName}");
+                return;
+            }
+
+            var type = component.Type;
+            component.Parent?.RemoveComponent(component, false);
+
+            if (component is ISupportedMultiEntity)
+            {
+                _multi ??= Scene.EntitySortedDictionaryPool.Rent();
+                _multi.Add(component.Id, component);
+#if FANTASY_NET
+                if (component is ISupportedDataBase)
+                {
+                    _multiDb ??= Scene.EntityListPool.Rent();
+                    _multiDb.Add(component);
+                }
+#endif
+            }
+            else
+            {
+#if FANTASY_NET
+                if (component is ISupportedSingleCollection && component.Id != Id)
+                {
+                    Log.Error($"component type :{type.FullName} for implementing ISupportedSingleCollection, it is required that the Id must be the same as the parent");
+                }
+#endif
+                var typeHashCode = Scene.EntityComponent.GetHashCode(type);;
+                
+                if (_tree == null)
+                {
+                    _tree = Scene.EntitySortedDictionaryPool.Rent();
+                }
+                else if (_tree.ContainsKey(typeHashCode))
+                {
+                    Log.Error($"type:{type.FullName} If you want to add multiple components of the same type, please implement IMultiEntity");
+                    return;
+                }
+                
+                _tree.Add(typeHashCode, component);
+#if FANTASY_NET
+                if (component is ISupportedDataBase)
+                {
+                    _treeDb ??= Scene.EntityListPool.Rent();
+                    _treeDb.Add(component);
+                } 
+#endif
+            }
+            
+            component.Parent = this;
+            component.Scene = Scene;
+        }
+
+        public void AddComponent<T>(T component) where T : Entity
+        {
+            var type = typeof(T);
+
+            if (type == typeof(Entity))
+            {
+                Log.Error("Cannot add a generic Entity type as a component. Specify a more specific type.");
+                return;
+            }
+            
+            if (this == component)
+            {
+                Log.Error("Cannot add oneself to one's own components");
+                return;
+            }
+
+            if (component.IsDisposed)
+            {
+                Log.Error($"component is Disposed {type.FullName}");
                 return;
             }
             
@@ -154,11 +239,10 @@ namespace Fantasy
 #if FANTASY_NET
                 if (SupportedSingleCollectionChecker<T>.IsSupported && component.Id != Id)
                 {
-                    Log.Error($"component type :{component.GetType().FullName} for implementing ISupportedSingleCollection, it is required that the Id must be the same as the parent");
+                    Log.Error($"component type :{type.FullName} for implementing ISupportedSingleCollection, it is required that the Id must be the same as the parent");
                 }
 #endif
-                var type = typeof(T);
-                var typeHashCode = type.TypeHandle.Value.ToInt64();
+                var typeHashCode = Scene.EntityComponent.GetHashCode(type);
                 
                 if (_tree == null)
                 {
@@ -195,7 +279,8 @@ namespace Fantasy
                 return null;
             }
             
-            return _tree.TryGetValue(typeof(T).TypeHandle.Value.ToInt64(), out var component) ? (T)component : null;
+            var typeHashCode = Scene.EntityComponent.GetHashCode(typeof(T));
+            return _tree.TryGetValue(typeHashCode, out var component) ? (T)component : null;
         }
 
         public Entity GetComponent(Type type)
@@ -205,7 +290,8 @@ namespace Fantasy
                 return null;
             }
             
-            return _tree.TryGetValue(type.TypeHandle.Value.ToInt64(), out var component) ? component : null;
+            var typeHashCode = Scene.EntityComponent.GetHashCode(type);
+            return _tree.TryGetValue(typeHashCode, out var component) ? component : null;
         }
 
         public T GetComponent<T>(long id) where T : Entity, ISupportedMultiEntity, new()
@@ -240,7 +326,7 @@ namespace Fantasy
             }
             
             var type = typeof(T);
-            var typeHashCode = type.TypeHandle.Value.ToInt64();
+            var typeHashCode = Scene.EntityComponent.GetHashCode(type);
             if (!_tree.TryGetValue(typeHashCode, out var component))
             {
                 return;
@@ -306,13 +392,87 @@ namespace Fantasy
             }
         }
 
-        public void RemoveComponent<T>(T component, bool isDispose = true) where T : Entity
+        public void RemoveComponent(Entity component, bool isDispose = true)
         {
             if (this == component)
             {
                 return;
             }
             
+            if (component is ISupportedMultiEntity)
+            {
+                if (_multi != null)
+                {
+                    if (!_multi.ContainsKey(component.Id))
+                    {
+                        return;
+                    }
+#if FANTASY_NET
+                    if (component is ISupportedDataBase)
+                    {
+                        _multiDb.Remove(component);
+                        if (_multiDb.Count == 0)
+                        {
+                            Scene.EntityListPool.Return(_multiDb);
+                            _multiDb = null;
+                        }
+                    }
+#endif
+                    _multi.Remove(component.Id);
+                    if (_multi.Count == 0)
+                    {
+                        Scene.EntitySortedDictionaryPool.Return(_multi);
+                        _multi = null;
+                    }
+                }
+            }
+            else if (_tree != null)
+            {
+                var typeHashCode = Scene.EntityComponent.GetHashCode(component.Type);
+                if (!_tree.ContainsKey(typeHashCode))
+                {
+                    return;
+                }
+#if FANTASY_NET
+                if (_treeDb != null && component is ISupportedDataBase)
+                {
+                    _treeDb.Remove(component);
+
+                    if (_treeDb.Count == 0)
+                    {
+                        Scene.EntityListPool.Return(_treeDb);
+                        _treeDb = null;
+                    }
+                }
+#endif
+                _tree.Remove(typeHashCode);
+
+                if (_tree.Count == 0)
+                {
+                    Scene.EntitySortedDictionaryPool.Return(_tree);
+                    _tree = null;
+                }
+            }
+            
+            if (isDispose)
+            {
+                component.Dispose();
+            }
+        }
+
+        public void RemoveComponent<T>(T component, bool isDispose = true) where T : Entity
+        {
+            if (this == component)
+            {
+                return;
+            }
+
+            if (typeof(T) == typeof(Entity))
+            {
+                Log.Error("Cannot remove a generic Entity type as a component. Specify a more specific type.");
+                return;
+            }
+
             if (SupportedMultiEntityChecker<T>.IsSupported)
             {
                 if (_multi != null)
@@ -342,7 +502,7 @@ namespace Fantasy
             }
             else if (_tree != null)
             {
-                var typeHashCode = typeof(T).TypeHandle.Value.ToInt64();
+                var typeHashCode = Scene.EntityComponent.GetHashCode(typeof(T));
                 if (!_tree.ContainsKey(typeHashCode))
                 {
                     return;
@@ -388,6 +548,7 @@ namespace Fantasy
             try
             {
                 Scene = scene;
+                Type = GetType();
                 RunTimeId = Scene.RuntimeIdFactory.Create;
                 if (resetId)
                 {
@@ -400,7 +561,7 @@ namespace Fantasy
                     foreach (var entity in _treeDb)
                     {
                         entity.Parent = this;
-                        var typeHashCode = entity.GetType().TypeHandle.Value.ToInt64();
+                        var typeHashCode = Scene.EntityComponent.GetHashCode(Type);
                         _tree.Add(typeHashCode, entity);
                         entity.Deserialize(scene, resetId);
                     }
@@ -527,11 +688,11 @@ namespace Fantasy
         public Entity Clone()
         {
 #if FANTASY_NET
-            var entity = MongoHelper.Clone(this);
+            var entity = BsonPackHelper.Clone(this);
             entity.Deserialize(Scene, true);
             return entity;
 #elif FANTASY_UNITY
-            var entity = ProtoBuffHelper.Clone(this);
+            var entity = MessagePackHelper.Clone(this);
             entity.Deserialize(Scene, true);
             return entity;
 #endif
@@ -611,8 +772,10 @@ namespace Fantasy
 
             if (IsPool)
             {
-                scene.EntityPool.Return(this);
+                scene.EntityPool.Return(Type, this);
             }
+
+            Type = null;
         }
 
         #endregion

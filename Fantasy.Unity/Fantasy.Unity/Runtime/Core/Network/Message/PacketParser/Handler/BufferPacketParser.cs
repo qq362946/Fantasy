@@ -71,13 +71,13 @@ namespace Fantasy
             return true;
         }
         
-        public override MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStream memoryStream, object message)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStreamBuffer memoryStream, object message)
         {
             return memoryStream == null ? Pack(ref rpcId, ref routeId, message) : Pack(ref rpcId, ref routeId, memoryStream);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStream Pack(ref uint rpcId, ref long routeId, MemoryStream memoryStream)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream)
         {
             memoryStream.Seek(Packet.InnerPacketRpcIdLocation, SeekOrigin.Begin);
             rpcId.GetBytes(RpcIdBuffer);
@@ -89,8 +89,9 @@ namespace Fantasy
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStream Pack(ref uint rpcId, ref long routeId, object message)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, object message)
         {
+            var messageType = message.GetType();
             var memoryStream = Network.RentMemoryStream();
             memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
@@ -98,29 +99,22 @@ namespace Fantasy
             {
                 case IBsonMessage:
                 {
-                    MongoHelper.SerializeTo(message, memoryStream);
+                    BsonPackHelper.Serialize(messageType, message, memoryStream);
                     break;
                 }
                 default:
                 {
-                    ProtoBuffHelper.ToStream(message, memoryStream);
+                    MessagePackHelper.Serialize(messageType, message, memoryStream);
                     break;
                 }
             }
 
-            var opCode = Scene.MessageDispatcherComponent.GetOpCode(message.GetType());
-            var packetBodyCount = (int)(memoryStream.Position - Packet.InnerPacketHeadLength);
+            var opCode = Scene.MessageDispatcherComponent.GetOpCode(messageType);
+            var packetBodyCount = (int)(memoryStream.Length - Packet.InnerPacketHeadLength);
             
-            if (packetBodyCount == 0)
-            {
-                // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
-                // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
-                packetBodyCount = -1;
-            }
-
-            // 检查消息体长度是否超出限制
             if (packetBodyCount > Packet.PacketBodyMaxLength)
             {
+                // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
             
@@ -180,13 +174,13 @@ namespace Fantasy
             return true;
         }
         
-        public override MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStream memoryStream, object message)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStreamBuffer memoryStream, object message)
         {
             return memoryStream == null ? Pack(ref rpcId, ref routeTypeOpCode, message) : Pack(ref rpcId, ref routeTypeOpCode, memoryStream);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, MemoryStream memoryStream)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, MemoryStreamBuffer memoryStream)
         {
             memoryStream.Seek(Packet.OuterPacketRpcIdLocation, SeekOrigin.Begin);
             rpcId.GetBytes(RpcIdBuffer);
@@ -198,27 +192,21 @@ namespace Fantasy
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, object message)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, object message)
         {
+            var messageType = message.GetType();
             var memoryStream = Network.RentMemoryStream();
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
-            ProtoBuffHelper.ToStream(message, memoryStream);
-            var opCode = Scene.MessageDispatcherComponent.GetOpCode(message.GetType());
-            var packetBodyCount = (int)(memoryStream.Position - Packet.OuterPacketHeadLength);
-
-            if (packetBodyCount == 0)
-            {
-                // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
-                // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
-                packetBodyCount = -1;
-            }
-
-            // 检查消息体长度是否超出限制
+            MessagePackHelper.Serialize(messageType, message, memoryStream);
+            var opCode = Scene.MessageDispatcherComponent.GetOpCode(messageType);
+            var packetBodyCount = (int)(memoryStream.Length - Packet.OuterPacketHeadLength);
+            
             if (packetBodyCount > Packet.PacketBodyMaxLength)
             {
+                // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
-
+            
             rpcId.GetBytes(RpcIdBuffer);
             opCode.GetBytes(OpCodeBuffer);
             packetBodyCount.GetBytes(BodyBuffer);
@@ -272,13 +260,13 @@ namespace Fantasy
             return true;
         }
         
-        public override MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStream memoryStream, object message)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStreamBuffer memoryStream, object message)
         {
             return memoryStream == null ? Pack(ref rpcId, ref routeTypeOpCode, message) : Pack(ref rpcId, ref routeTypeOpCode, memoryStream);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, MemoryStream memoryStream)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, MemoryStreamBuffer memoryStream)
         {
             memoryStream.Seek(Packet.OuterPacketRpcIdLocation, SeekOrigin.Begin);
             rpcId.GetBytes(RpcIdBuffer);
@@ -290,24 +278,18 @@ namespace Fantasy
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStream Pack(ref uint rpcId, ref long routeTypeOpCode, object message)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, object message)
         {
+            var messageType = message.GetType();
             var memoryStream = Network.RentMemoryStream();
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
-            ProtoBuffHelper.ToStream(message, memoryStream);
-            var opCode = Scene.MessageDispatcherComponent.GetOpCode(message.GetType());
-            var packetBodyCount = (int)(memoryStream.Position - Packet.OuterPacketHeadLength);
-
-            if (packetBodyCount == 0)
-            {
-                // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
-                // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
-                packetBodyCount = -1;
-            }
-
-            // 检查消息体长度是否超出限制
+            MessagePackHelper.Serialize(messageType, message, memoryStream);
+            var opCode = Scene.MessageDispatcherComponent.GetOpCode(messageType);
+            var packetBodyCount = (int)(memoryStream.Length - Packet.OuterPacketHeadLength);
+            
             if (packetBodyCount > Packet.PacketBodyMaxLength)
             {
+                // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
 

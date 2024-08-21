@@ -505,7 +505,7 @@ public sealed class MongoDataBase : IDateBase
             return;
         }
 
-        var clone = MongoHelper.Clone(entity);
+        var clone = BsonPackHelper.Clone(entity);
         
         using (await _dataBaseLock.Wait(clone.Id))
         {
@@ -530,7 +530,7 @@ public sealed class MongoDataBase : IDateBase
             return;
         }
 
-        var clone = MongoHelper.Clone(entity);
+        var clone = BsonPackHelper.Clone(entity);
 
         using (await _dataBaseLock.Wait(clone.Id))
         {
@@ -554,7 +554,7 @@ public sealed class MongoDataBase : IDateBase
             return;
         }
 
-        var clone = MongoHelper.Clone(entity);
+        var clone = BsonPackHelper.Clone(entity);
 
         using (await _dataBaseLock.Wait(clone.Id))
         {
@@ -575,7 +575,7 @@ public sealed class MongoDataBase : IDateBase
             return;
         }
 
-        var clones = MongoHelper.Clone(entities);
+        var clones = BsonPackHelper.Clone(entities);
 
         using (await _dataBaseLock.Wait(id))
         {

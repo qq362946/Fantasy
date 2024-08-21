@@ -58,7 +58,7 @@ namespace Fantasy
                 return;
             }
 
-            if (_poolCount > _maxCapacity)
+            if (_poolCount >= _maxCapacity)
             {
                 return;
             }
@@ -82,7 +82,7 @@ namespace Fantasy
                 return;
             }
             
-            if (_poolCount > _maxCapacity)
+            if (_poolCount >= _maxCapacity)
             {
                 return;
             }

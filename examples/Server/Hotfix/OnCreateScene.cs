@@ -3,6 +3,12 @@
 public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 {
     private static long _addressableSceneRunTimeId;
+
+    /// <summary>
+    /// Handles the OnCreateScene event.
+    /// </summary>
+    /// <param name="self">The OnCreateScene object.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public override async FTask Handler(OnCreateScene self)
     {
         var scene = self.Scene;
@@ -11,25 +17,28 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         {
             case SceneType.Addressable:
             {
-                scene.AddComponent<AddressableManageComponent>();
+                scene.AddComponent<AddressableManageComponent>(); 
                 _addressableSceneRunTimeId = scene.RunTimeId;
-                // Log.Debug($"_addressableSceneRunTimeId={_addressableSceneRunTimeId}");
                 break;
             }
             case SceneType.Map:
             {
                 break;
             }
-            case SceneType.Gate:
+            case SceneType.Gate: 
             {
-                // var tasks = new List<FTask>(1000);
+                // var tasks = new List<FTask>(2000);
                 // var session = scene.GetSession(_addressableSceneRunTimeId);
                 // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
+                // var g2ATestRequest = new G2A_TestRequest();
                 //
                 // async FTask Call()
                 // {
-                //     await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,new G2A_TestRequest());
+                //     await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,g2ATestRequest);
                 // }
+                //
+                // // Call().Coroutine();
+                //
                 // for (int i = 0; i < 100000000000; i++)
                 // {
                 //     tasks.Clear();

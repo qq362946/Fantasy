@@ -3,7 +3,6 @@ using Fantasy;
 using Fantasy.Exporter;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using ProtoBuf;
 
 namespace Exporter.Excel;
 
@@ -65,13 +64,13 @@ public static class DynamicAssembly
         
         // 添加ProtoEntity支持
 
-        assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(AProto).Assembly.Location);
+        assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(ASerialize).Assembly.Location);
         metadataReference = assemblyMetadata.GetReference();
         metadataReferenceList.Add(metadataReference);
 
-        // 添加ProtoBuf.net支持
-
-        assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(ProtoMemberAttribute).Assembly.Location);
+        // 添加MessagePack支持
+        
+        assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(MessagePack.MessagePackObjectAttribute).Assembly.Location);
         metadataReference = assemblyMetadata.GetReference();
         metadataReferenceList.Add(metadataReference);
 
@@ -151,9 +150,9 @@ public static class DynamicAssembly
     /// </summary>
     /// <param name="configType">动态类型。</param>
     /// <returns>动态实例。</returns>
-    public static AProto CreateInstance(Type configType)
+    public static object CreateInstance(Type configType)
     {
-        var config = (AProto) Activator.CreateInstance(configType);
+        var config = Activator.CreateInstance(configType);
         
         if (config == null)
         {

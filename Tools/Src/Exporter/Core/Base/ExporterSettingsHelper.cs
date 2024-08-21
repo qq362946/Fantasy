@@ -6,9 +6,9 @@ namespace Exporter;
 
 public static class ExporterSettingsHelper
 {
-    public static string? ProtoBufDirectory { get; private set; }
-    public static string ProtoBufServerDirectory { get; private set; }
-    public static string ProtoBufClientDirectory { get; private set; }
+    public static string? NetworkProtocolDirectory { get; private set; }
+    public static string NetworkProtocolServerDirectory { get; private set; }
+    public static string NetworkProtocolClientDirectory { get; private set; }
     public static string? ExcelProgramPath { get; private set; }
     public static string? ExcelVersionFile { get; private set; }
     public static string? ExcelServerFileDirectory { get; private set; }
@@ -31,9 +31,9 @@ public static class ExporterSettingsHelper
         }
 
         var root = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(settingsName).Build();
-        ProtoBufDirectory = FileHelper.GetFullPath(root["Export:ProtoBufDirectory:Value"]);
-        ProtoBufServerDirectory = FileHelper.GetFullPath(root["Export:ProtoBufServerDirectory:Value"]);
-        ProtoBufClientDirectory = FileHelper.GetFullPath(root["Export:ProtoBufClientDirectory:Value"]);
+        NetworkProtocolDirectory = FileHelper.GetFullPath(root["Export:NetworkProtocolDirectory:Value"]);
+        NetworkProtocolServerDirectory = FileHelper.GetFullPath(root["Export:NetworkProtocolServerDirectory:Value"]);
+        NetworkProtocolClientDirectory = FileHelper.GetFullPath(root["Export:NetworkProtocolClientDirectory:Value"]);
         ExcelProgramPath = FileHelper.GetFullPath(root["Export:ExcelProgramPath:Value"]);
         ExcelVersionFile = FileHelper.GetFullPath(root["Export:ExcelVersionFile:Value"]);
         ExcelServerFileDirectory = FileHelper.GetFullPath(root["Export:ExcelServerFileDirectory:Value"]);
