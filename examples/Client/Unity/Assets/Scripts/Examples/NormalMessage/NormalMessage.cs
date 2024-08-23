@@ -45,7 +45,7 @@ public class NormalMessage : MonoBehaviour
             OnConnectDisconnect,
             false, 5000);
     }
-    
+
     private void OnConnectComplete()
     {
         Text.text = "连接成功";

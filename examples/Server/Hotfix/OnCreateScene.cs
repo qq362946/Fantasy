@@ -25,7 +25,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             {
                 break;
             }
-            case SceneType.Gate: 
+            case SceneType.Gate:
             {
                 // var tasks = new List<FTask>(2000);
                 // var session = scene.GetSession(_addressableSceneRunTimeId);
