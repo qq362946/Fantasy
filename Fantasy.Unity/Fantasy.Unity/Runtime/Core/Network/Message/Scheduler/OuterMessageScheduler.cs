@@ -125,12 +125,13 @@ namespace Fantasy
                         {
                             using (packInfo)
                             {
+                                var rpcId = packInfo.RpcId;
                                 var runtimeId = session.RunTimeId;
                                 var response = await NetworkMessagingComponent.CallInnerRoute(routeId, messageType, packInfo);
                                 // session可能已经断开了，所以这里需要判断
                                 if (session.RunTimeId == runtimeId)
                                 {
-                                    session.Send(response, packInfo.RpcId);
+                                    session.Send(response, rpcId);
                                 }
                             }
 
