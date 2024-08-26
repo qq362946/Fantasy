@@ -32,3 +32,26 @@ message M2C_TestResponse // IAddressableRouteResponse
 {
 	string Tag = 1;
 }
+/// 通知Gate服务器创建一个Chat的Route连接
+message C2G_CreateChatRouteRequest // IRequest,G2C_CreateChatRouteResponse
+{
+
+}
+message G2C_CreateChatRouteResponse // IResponse
+{
+
+}
+/// 发送一个Route消息给Chat
+message C2Chat_TestMessage // ICustomRouteMessage,ChatRoute
+{
+	string Tag = 1;
+}
+/// 发送一个RPCRoute消息给Chat
+message C2Chat_TestMessageRequest // ICustomRouteRequest,Chat2C_TestMessageResponse,ChatRoute
+{
+	string Tag = 1;
+}
+message Chat2C_TestMessageResponse // ICustomRouteResponse
+{
+	string Tag = 1;
+}

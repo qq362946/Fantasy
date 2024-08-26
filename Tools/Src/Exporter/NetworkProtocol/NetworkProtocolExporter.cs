@@ -489,7 +489,7 @@ public sealed class NetworkProtocolExporter
         var routeTypeFile = $"{_networkProtocolDirectory}RouteType.Config";
         var protoFileText = await File.ReadAllTextAsync(routeTypeFile);
         var routeTypeFileSb = new StringBuilder();
-        routeTypeFileSb.AppendLine("namespace Fantasy.Core.Network\n{");
+        routeTypeFileSb.AppendLine("namespace Fantasy\n{");
         routeTypeFileSb.AppendLine("\t// Route协议定义(需要定义1000以上、因为1000以内的框架预留)\t");
         routeTypeFileSb.AppendLine("\tpublic enum RouteType : long\n\t{");
 

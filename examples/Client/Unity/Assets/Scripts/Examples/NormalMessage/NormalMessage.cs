@@ -33,6 +33,7 @@ public class NormalMessage : MonoBehaviour
 
     #region Connect
 
+    private long timerId;
     private async FTask OnConnectButtonClick()
     {
         ConnectButton.interactable = false;
