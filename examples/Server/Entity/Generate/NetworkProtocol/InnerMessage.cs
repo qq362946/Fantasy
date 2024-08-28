@@ -88,4 +88,49 @@ namespace Fantasy
 		[Key(1)]
 		public uint ErrorCode { get; set; }
 	}
+	/// <summary>
+	///  通知Chat服务器创建一个RouteId
+	/// </summary>
+	[MessagePackObject]
+	public partial class G2Chat_CreateRouteRequest : AMessage, IRouteRequest
+	{
+		public static G2Chat_CreateRouteRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2Chat_CreateRouteRequest>();
+		}
+		public override void Dispose()
+		{
+			GateRouteId = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2Chat_CreateRouteRequest>(this);
+#endif
+		}
+		[IgnoreMember]
+		public Chat2G_CreateRouteResponse ResponseType { get; set; }
+		public uint OpCode() { return InnerOpcode.G2Chat_CreateRouteRequest; }
+		public long RouteTypeOpCode() { return InnerRouteType.Route; }
+		[Key(0)]
+		public long GateRouteId { get; set; }
+	}
+	[MessagePackObject]
+	public partial class Chat2G_CreateRouteResponse : AMessage, IRouteResponse
+	{
+		public static Chat2G_CreateRouteResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<Chat2G_CreateRouteResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+			ChatRouteId = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<Chat2G_CreateRouteResponse>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.Chat2G_CreateRouteResponse; }
+		[Key(0)]
+		public long ChatRouteId { get; set; }
+		[Key(1)]
+		public uint ErrorCode { get; set; }
+	}
 }

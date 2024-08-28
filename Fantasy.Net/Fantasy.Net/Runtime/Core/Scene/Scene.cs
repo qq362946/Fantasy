@@ -238,7 +238,16 @@ namespace Fantasy
             }
             Process.AddScene(scene);
             process.AddSceneToProcess(scene);
-            scene.ThreadSynchronizationContext.Post(() => scene.EventComponent.PublishAsync(new OnCreateScene(scene)).Coroutine());
+            scene.ThreadSynchronizationContext.Post(() =>
+            {
+                if (sceneConfig.SceneTypeString == "Addressable")
+                {
+                    // 如果是AddressableScene,自动添加上AddressableManageComponent。
+                    scene.AddComponent<AddressableManageComponent>(); 
+                }
+                
+                scene.EventComponent.PublishAsync(new OnCreateScene(scene)).Coroutine();
+            });
             return scene;
         }
 
