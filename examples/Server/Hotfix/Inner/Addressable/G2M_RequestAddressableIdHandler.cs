@@ -6,8 +6,13 @@ public sealed class G2M_RequestAddressableIdHandler : RouteRPC<Scene, G2M_Reques
     {
         // 1、因为是测试代码，所以默认每次请求这个协议我都创建一个新的Unit来做Addressable。
         var unit = Entity.Create<Unit>(scene, false, true);
+        unit.ClientID = request.ClientID;
+        unit.RoomID=request.RoomId;
+        scene.GetComponent<LogicMgr>().EnterRoom(unit);
         // 2、给Unit添加AddressableMessageComponent组件，并执行Register()，向AddressableScene注册自己当前的位置。
         await unit.AddComponent<AddressableMessageComponent>().Register();
+        Log.Debug($"新建玩家:ClientID:{unit.ClientID},AddressID:{unit.Id}");
+
         // 3、返回给Gate服务器AddressableId
         response.AddressableId = unit.Id;
         await FTask.CompletedTask;

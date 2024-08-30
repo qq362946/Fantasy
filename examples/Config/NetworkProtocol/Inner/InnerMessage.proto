@@ -10,9 +10,58 @@ message G2A_TestResponse // IRouteResponse
 }
 message G2M_RequestAddressableId // IRouteRequest,M2G_ResponseAddressableId
 {
-
+	int64 ClientID = 1;
+	int64 RoomId = 2;
 }
 message M2G_ResponseAddressableId // IRouteResponse
 {
 	int64 AddressableId = 1;	// Map服务器返回的AddressableId
+}
+message M2G_CreateNetworkObjectId // IRouteMessage
+{
+	int64 ClientID = 1;
+	InitData data = 2;
+	bool Authority = 3;//true时为创造者
+}
+message G2M_RemoveClient // IRouteMessage
+{
+	int64 ClientID = 1;
+}
+message M2G_SyncTransform // IRouteMessage
+{
+	int64 ClientID = 1;
+	int64 NetworkObjectID = 2;
+	TransformData Transform = 3;
+}
+message M2G_DeleteNetworkObj // IRouteMessage
+{
+	int64 NetworkObjectID = 1;
+	int64 ClientID = 2;
+}
+message M2G_SyncSprite // IRouteMessage
+{
+	int64 NetworkObjectID = 1;
+	string SpriteName = 2;
+	int64 ClientID = 3;
+}
+message M2G_StartGame // IRouteMessage
+{
+	int64 ClientID = 1;
+
+}
+message M2G_Hurt // IAddressableRouteMessage
+{
+	int64 NetworkObjectID = 1;
+	int64 Value = 2;
+	int64 ClientID = 3;
+}
+message M2G_GameOver // IAddressableRouteMessage
+{
+	int64 WinnerClientID = 1;
+	int64 ClientID = 2;
+}
+message M2G_ExitRoom // IAddressableRouteMessage
+{
+	int64 ClientID = 1;
+	int64 ExitClientId = 2;
 }

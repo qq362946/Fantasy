@@ -97,7 +97,7 @@ public static class ProcessScheduler
             }
             default:
             {
-                throw new NotSupportedException($"SessionInnerScheduler Received unsupported message protocolCode:{protocolCode} messageType:{messageType}");
+                throw new NotSupportedException($"SessionInnerScheduler Received unsupported message protocolCode:{protocolCode} messageType:{messageType} IsDisposed:{packInfo.IsDisposed}");
             }
         }
     }

@@ -14,7 +14,7 @@ message G2C_TestResponse // IResponse
 }
 message C2G_CreateAddressableRequest // IRequest,G2C_CreateAddressableResponse
 {
-
+	int64 RoomId = 1;
 }
 message G2C_CreateAddressableResponse // IResponse
 {
@@ -31,4 +31,134 @@ message C2M_TestRequest // IAddressableRouteRequest,M2C_TestResponse
 message M2C_TestResponse // IAddressableRouteResponse
 {
 	string Tag = 1;
+}
+message C2M_RequestInit // IAddressableRouteRequest,M2C_ResponseInit
+{
+
+}
+message V3
+{
+	float x = 1;
+	float y = 2;
+	float z = 3;
+}
+message V4
+{
+	float x = 1;
+	float y = 2;
+	float z = 3;
+	float w = 4;
+}
+message TransformData
+{
+	V3 position = 1;
+	V4 quaternion = 2;
+	V3 scale = 3;
+	bool active = 4;
+}
+message InitData
+{
+	int64 NetworkObjectID = 1;
+	int64 PrefabID = 2;//预制体的ID
+	repeated int64 NetworkScriptsID = 3;//预制体身上的脚本ID
+	TransformData Transform = 4;
+	int64 ClientID = 5;//属于哪个玩家
+}
+message M2C_ResponseInit // IAddressableRouteResponse
+{
+	repeated InitData initData = 1;
+	int64 ClientID = 2;
+	int64 SortID =3;//房间内的ID
+}
+
+message C2M_RequestNetworkObjectId // IAddressableRouteRequest,M2C_ResponseNetworkObjectId
+{
+	int64 PrefabID = 1;//预制体的ID
+	repeated int64 NetworkScriptsID = 2;//预制体身上的脚本ID
+	TransformData Transform = 3;
+}
+message M2C_ResponseNetworkObjectId // IAddressableRouteResponse
+{
+	int64 AddressableId = 1;	// Map服务器返回的ObjectID,返回给客户端
+	bool Authority = 2;//true时为创造者
+	int64 ClientID = 3;
+}
+message C2M_SyncTransform // IAddressableRouteMessage
+{
+	int64 NetworkObjectID = 1;
+	TransformData Transform = 2;
+}
+message G2C_CreateNetworkObjectId // IMessage
+{
+	InitData data = 1;
+	bool Authority = 2;//true时为创造者
+}
+
+message G2C_SyncTransform // IMessage
+{
+	int64 NetworkObjectID = 1;
+	TransformData Transform = 2;
+}
+message G2C_DeleteNetworkObj // IMessage
+{
+	int64 NetworkObjectID = 1;
+}
+message C2M_DeleteNetworkObj // IAddressableRouteMessage
+{
+	int64 NetworkObjectID = 1;
+}
+message G2C_SyncSprite // IMessage
+{
+	int64 NetworkObjectID = 1;
+	string SpriteName = 2;
+}
+message C2M_SyncSprite // IAddressableRouteMessage
+{
+	int64 NetworkObjectID = 1;
+	string SpriteName = 2;
+}
+
+//排队等待
+message C2G_LobbyRequest // IRequest,G2C_LobbyResponse
+{
+	int64 StatusCode = 1;//状态码，1是申请，2是中断
+}
+message G2C_LobbyResponse // IResponse
+{
+	
+}
+//等待结束，进入游戏
+message G2C_LobbyFinishMessage // IMessage
+{
+	int64 roomID = 1;
+}
+//开启游戏
+message G2C_StartGame // IMessage
+{
+
+}
+
+
+
+message G2C_Hurt // IMessage
+{
+	int64 NetworkObjectID = 1;
+	int64 Value = 2;
+}
+message C2M_Hurt // IAddressableRouteMessage
+{
+	int64 NetworkObjectID = 1;
+	int64 Value = 2;
+}
+message G2C_GameOver // IMessage
+{
+	int64 WinnerClientID = 1;
+}
+message C2M_ExitRoom // IAddressableRouteMessage
+{
+
+}
+message G2C_ExitRoom // IMessage
+{
+	int64 ClientID = 1;
 }

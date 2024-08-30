@@ -19,14 +19,17 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             {
                 scene.AddComponent<AddressableManageComponent>(); 
                 _addressableSceneRunTimeId = scene.RunTimeId;
-                break;
+                    scene.AddComponent<LogicMgr>();
+                    break;
             }
             case SceneType.Map:
             {
+                    scene.AddComponent<LogicMgr>();
                 break;
             }
             case SceneType.Gate: 
             {
+                    scene.AddComponent<Lobby>();
                 // var tasks = new List<FTask>(2000);
                 // var session = scene.GetSession(_addressableSceneRunTimeId);
                 // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
