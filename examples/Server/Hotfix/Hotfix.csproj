@@ -13,7 +13,6 @@
 
     <ItemGroup>
       <Folder Include="Benchmark\" />
-      <Folder Include="Outer\NormalMessage\" />
     </ItemGroup>
 
 </Project>

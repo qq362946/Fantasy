@@ -13,9 +13,10 @@ public sealed class C2G_CreateAddressableRequestHandler : MessageRPC<C2G_CreateA
         // 2、使用Scene.NetworkMessagingComponent.CallInnerRoute方法跟Gate服务器进行通讯。
         // CallInnerRoute方法跟Gate服务器进行通讯需要提供一个runTimeId，这个Id在sceneConfig.RouteId可以获取到。
         // 第二个参数是需要发送网络协议，这个协议在Fantasy/Examples/Config/ProtoBuf里的InnerBson或Inner文件定义。
-        var responseAddressableId = (M2G_ResponseAddressableId)await scene.NetworkMessagingComponent.CallInnerRoute(sceneConfig.RouteId, new G2M_RequestAddressableId());
+        var responseAddressableId = (M2G_ResponseAddressableId)await scene.NetworkMessagingComponent.CallInnerRoute(sceneConfig.RouteId, new G2M_RequestAddressableId() {ClientID=session.RunTimeId });
         // 3、给session添加一个AddressableRouteComponent组件，这个组件很重要、能否转发Addressable协议主要是通过这个。
-        var addressableRouteComponent = session.AddComponent<AddressableRouteComponent>();
+        var addressableRouteComponent = session.GetOrAddComponent<AddressableRouteComponent>();
+        session.GetOrAddComponent<DisconnectComponent>().ClientId=session.RunTimeId;
         // 4、拿到MapScene返回的AddressableId赋值给addressableRouteComponent.AddressableId。
         addressableRouteComponent.AddressableId = responseAddressableId.AddressableId;
     }
