@@ -114,6 +114,11 @@ public abstract class ACustomExport : ICustomExport
         {
             case CustomExportType.Client:
             {
+                if (string.IsNullOrEmpty(ExcelExporter.ClientCustomExportDirectory))
+                {
+                    return;
+                }
+                
                 if (!Directory.Exists(ExcelExporter.ClientCustomExportDirectory))
                 {
                     Directory.CreateDirectory(ExcelExporter.ClientCustomExportDirectory);
@@ -125,6 +130,11 @@ public abstract class ACustomExport : ICustomExport
             }
             case CustomExportType.Server:
             {
+                if (string.IsNullOrEmpty(ExcelExporter.ServerCustomExportDirectory))
+                {
+                    return;
+                }
+                
                 if (!Directory.Exists(ExcelExporter.ServerCustomExportDirectory))
                 {
                     Directory.CreateDirectory(ExcelExporter.ServerCustomExportDirectory);

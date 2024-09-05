@@ -1,8 +1,9 @@
 #if FANTASY_NET
 using System;
-using MessagePack;
+using ProtoBuf;
 using Fantasy;
 using System.Linq;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 // ReSharper disable CollectionNeverUpdated.Global
@@ -15,19 +16,19 @@ using System.Collections.Concurrent;
 
 namespace Fantasy
 {
-    [MessagePackObject]
-    public sealed partial class ProcessConfigData : ASerialize, IConfigTable
+    [ProtoContract]
+    public sealed partial class ProcessConfigData : ASerialize, IConfigTable, IProto
     {
-        [Key(0)]
+        [ProtoMember(1)]
         public List<ProcessConfig> List { get; set; } = new List<ProcessConfig>();
 #if FANTASY_NET
-        [IgnoreMember]
+        [ProtoIgnore]
         private readonly ConcurrentDictionary<uint, ProcessConfig> _configs = new ConcurrentDictionary<uint, ProcessConfig>();
 #else 
-        [IgnoreMember]
+        [ProtoIgnore]
         private readonly Dictionary<uint, ProcessConfig> _configs = new Dictionary<uint, ProcessConfig>();
 #endif
-        private static ProcessConfigData _instance;
+        private static ProcessConfigData _instance = null;
 
         public static ProcessConfigData Instance
         {
@@ -82,14 +83,14 @@ namespace Fantasy
         }
     }
     
-    [MessagePackObject]
-    public sealed partial class ProcessConfig : ASerialize
+    [ProtoContract]
+    public sealed partial class ProcessConfig : ASerialize, IProto
     {
-		[Key(0)]
+		[ProtoMember(1)]
 		public uint Id { get; set; } // 进程Id
-		[Key(1)]
+		[ProtoMember(2)]
 		public uint MachineId { get; set; } // 机器ID
-		[Key(2)]
+		[ProtoMember(3)]
 		public uint StartupGroup { get; set; } // 启动组  
     } 
 }  

@@ -187,9 +187,9 @@ public sealed class TCPServerNetworkChannel : ANetworkServerChannel
 
     #region Send
 
-    public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
+    public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
     {
-        Send(_packetParser.Pack(ref rpcId, ref routeTypeOpCode, ref routeId, memoryStream, message)).Coroutine();
+        Send(_packetParser.Pack(ref rpcId, ref routeId, memoryStream, message)).Coroutine();
     }
 
     private async FTask Send(MemoryStreamBuffer memoryStream)

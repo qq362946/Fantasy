@@ -1,8 +1,9 @@
 #if FANTASY_NET
 using System;
-using MessagePack;
+using ProtoBuf;
 using Fantasy;
 using System.Linq;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 // ReSharper disable CollectionNeverUpdated.Global
@@ -15,19 +16,19 @@ using System.Collections.Concurrent;
 
 namespace Fantasy
 {
-    [MessagePackObject]
-    public sealed partial class SceneConfigData : ASerialize, IConfigTable
+    [ProtoContract]
+    public sealed partial class SceneConfigData : ASerialize, IConfigTable, IProto
     {
-        [Key(0)]
+        [ProtoMember(1)]
         public List<SceneConfig> List { get; set; } = new List<SceneConfig>();
 #if FANTASY_NET
-        [IgnoreMember]
+        [ProtoIgnore]
         private readonly ConcurrentDictionary<uint, SceneConfig> _configs = new ConcurrentDictionary<uint, SceneConfig>();
 #else 
-        [IgnoreMember]
+        [ProtoIgnore]
         private readonly Dictionary<uint, SceneConfig> _configs = new Dictionary<uint, SceneConfig>();
 #endif
-        private static SceneConfigData _instance;
+        private static SceneConfigData _instance = null;
 
         public static SceneConfigData Instance
         {
@@ -82,27 +83,27 @@ namespace Fantasy
         }
     }
     
-    [MessagePackObject]
-    public sealed partial class SceneConfig : ASerialize
+    [ProtoContract]
+    public sealed partial class SceneConfig : ASerialize, IProto
     {
-		[Key(0)]
+		[ProtoMember(1)]
 		public uint Id { get; set; } // ID
-		[Key(1)]
+		[ProtoMember(2)]
 		public uint ProcessConfigId { get; set; } // 进程Id
-		[Key(2)]
+		[ProtoMember(3)]
 		public uint WorldConfigId { get; set; } // 世界Id
-		[Key(3)]
+		[ProtoMember(4)]
 		public string SceneRuntimeType { get; set; } // Scene运行类型
-		[Key(4)]
+		[ProtoMember(5)]
 		public string SceneTypeString { get; set; } // Scene类型
-		[Key(5)]
+		[ProtoMember(6)]
 		public string NetworkProtocol { get; set; } // 协议类型
-		[Key(6)]
+		[ProtoMember(7)]
 		public int OuterPort { get; set; } // 外网端口
-		[Key(7)]
+		[ProtoMember(8)]
 		public int InnerPort { get; set; } // 内网端口
-		[Key(8)]
+		[ProtoMember(9)]
 		public int SceneType { get; set; } // Scene类型  
     } 
-}  
+} 
 #endif

@@ -262,9 +262,9 @@ public sealed class WebSocketClientNetwork : AClientNetwork
 
     #region Send
 
-    public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
+    public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
     {
-        SendAsync(_packetParser.Pack(ref rpcId, ref routeTypeOpCode, ref routeId, memoryStream, message)).Coroutine();
+        SendAsync(_packetParser.Pack(ref rpcId, ref routeId, memoryStream, message)).Coroutine();
     }
 
     private async FTask SendAsync(MemoryStreamBuffer memoryStream)

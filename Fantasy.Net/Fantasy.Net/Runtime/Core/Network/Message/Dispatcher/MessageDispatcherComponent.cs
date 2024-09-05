@@ -30,26 +30,20 @@ namespace Fantasy
     public sealed class MessageDispatcherComponent : Entity, IAssembly
     {
         public long AssemblyIdentity { get; set; }
-        // 存储消息类型与响应类型之间的映射关系
         private readonly Dictionary<Type, Type> _responseTypes = new Dictionary<Type, Type>();
-        // 存储协议码与消息类型之间的双向映射关系
         private readonly DoubleMapDictionary<uint, Type> _networkProtocols = new DoubleMapDictionary<uint, Type>();
-        // 存储消息类型与消息处理器之间的映射关系
         private readonly Dictionary<Type, IMessageHandler> _messageHandlers = new Dictionary<Type, IMessageHandler>();
-        // 存储程序集名与响应类型之间的一对多关系
         private readonly OneToManyList<long, Type> _assemblyResponseTypes = new OneToManyList<long, Type>();
-        // 存储程序集名与协议码之间的一对多关系
         private readonly OneToManyList<long, uint> _assemblyNetworkProtocols = new OneToManyList<long, uint>();
-        // 存储程序集名与消息处理器信息之间的一对多关系
         private readonly OneToManyList<long, HandlerInfo<IMessageHandler>> _assemblyMessageHandlers = new OneToManyList<long, HandlerInfo<IMessageHandler>>();
 #if FANTASY_UNITY
-        // 存储消息类型与消息处理器之间的映射关系(手动注册的委托)
+
         private readonly Dictionary<Type, IMessageDelegateHandler> _messageDelegateHandlers = new Dictionary<Type, IMessageDelegateHandler>();
 #endif
 #if FANTASY_NET
-        // 存储消息类型与路由消息处理器之间的映射关系
+        private readonly Dictionary<long, int> _customRouteMap = new Dictionary<long, int>();
+        private readonly OneToManyList<long, long> _assemblyCustomRouteMap = new OneToManyList<long, long>();
         private readonly Dictionary<Type, IRouteMessageHandler> _routeMessageHandlers = new Dictionary<Type, IRouteMessageHandler>();
-        // 存储程序集名与路由消息处理器信息之间的一对多关系
         private readonly OneToManyList<long, HandlerInfo<IRouteMessageHandler>> _assemblyRouteMessageHandlers = new OneToManyList<long, HandlerInfo<IRouteMessageHandler>>();
 #endif
         private CoroutineLock _receiveRouteMessageLock;
@@ -132,6 +126,20 @@ namespace Fantasy
                     Obj = obj, Type = key
                 });
             }
+
+            foreach (var type in AssemblySystem.ForEach(assemblyIdentity, typeof(ICustomRoute)))
+            {
+                var obj = (ICustomRoute) Activator.CreateInstance(type);
+                
+                if (obj == null)
+                {
+                    throw new Exception($"message handle {type.Name} is null");
+                }
+
+                var opCode = obj.OpCode();
+                _customRouteMap[opCode] = obj.RouteType;
+                _assemblyCustomRouteMap.Add(assemblyIdentity, opCode);
+            }
 #endif
         }
 
@@ -189,7 +197,7 @@ namespace Fantasy
                     _messageHandlers.Remove(removeMessageHandler.Type);
                 }
 
-                _assemblyMessageHandlers.Remove(assemblyIdentity);
+                _assemblyMessageHandlers.RemoveByKey(assemblyIdentity);
             }
 
             // 如果编译符号FANTASY_NET存在，移除程序集对应的路由消息处理器信息
@@ -201,7 +209,17 @@ namespace Fantasy
                     _routeMessageHandlers.Remove(removeRouteMessageHandler.Type);
                 }
 
-                _assemblyRouteMessageHandlers.Remove(assemblyIdentity);
+                _assemblyRouteMessageHandlers.RemoveByKey(assemblyIdentity);
+            }
+
+            if (_assemblyCustomRouteMap.TryGetValue(assemblyIdentity, out var removeCustomRouteMap))
+            {
+                foreach (var removeCustom in removeCustomRouteMap)
+                {
+                    _customRouteMap.Remove(removeCustom);
+                }
+
+                _assemblyCustomRouteMap.RemoveByKey(assemblyIdentity);
             }
 #endif
         }
@@ -295,7 +313,7 @@ namespace Fantasy
 
                 if (message is IRouteRequest request)
                 {
-                    FailResponse(session, request, InnerErrorCode.ErrEntityNotFound, rpcId);
+                    FailRouteResponse(session, request.GetType(), InnerErrorCode.ErrEntityNotFound, rpcId);
                 }
 
                 return;
@@ -323,7 +341,7 @@ namespace Fantasy
                 {
                     if (message is IRouteRequest request)
                     {
-                        FailResponse(session, request, InnerErrorCode.ErrEntityNotFound, rpcId);
+                        FailRouteResponse(session, request.GetType(), InnerErrorCode.ErrEntityNotFound, rpcId);
                     }
                 
                     return;
@@ -332,36 +350,19 @@ namespace Fantasy
                 await routeMessageHandler.Handle(session, entity, rpcId, message);
             }
         }
-#endif
-        /// <summary>
-        /// 处理失败时，向会话发送失败响应消息。
-        /// </summary>
-        /// <param name="session">会话对象</param>
-        /// <param name="iRouteRequest">路由请求对象</param>
-        /// <param name="error">错误码</param>
-        /// <param name="rpcId">RPC标识</param>
-        public void FailResponse(Session session, IRouteRequest iRouteRequest, uint error, uint rpcId)
+
+        internal bool GetCustomRouteType(long protocolCode,out int routeType)
         {
-            var response = CreateResponse(iRouteRequest, error);
+            return _customRouteMap.TryGetValue(protocolCode, out routeType);
+        }
+#endif
+        internal void FailRouteResponse(Session session, Type requestType, uint error, uint rpcId)
+        {
+            var response = CreateRouteResponse(requestType, error);
             session.Send(response, rpcId);
         }
         
-        /// <summary>
-        /// 创建一个空的路由响应消息。
-        /// </summary>
-        /// <returns>创建的路由响应消息</returns>
-        public IRouteResponse CreateRouteResponse()
-        {
-            return new RouteResponse();
-        }
-        
-        /// <summary>
-        /// 根据请求类型和错误码，创建普通响应消息。
-        /// </summary>
-        /// <param name="requestType">请求类型</param>
-        /// <param name="error">错误码</param>
-        /// <returns>创建的普通响应消息</returns>
-        public IResponse CreateResponse(Type requestType, uint error)
+        internal IResponse CreateResponse(Type requestType, uint error)
         {
             IResponse response;
 
@@ -378,40 +379,11 @@ namespace Fantasy
             return response;
         }
         
-        /// <summary>
-        /// 根据请求对象和错误码，创建普通响应消息。
-        /// </summary>
-        /// <param name="iRequest">请求对象</param>
-        /// <param name="error">错误码</param>
-        /// <returns>创建的普通响应消息</returns>
-        public IResponse CreateResponse(IRequest iRequest, uint error)
-        {
-            IResponse response;
-
-            if (_responseTypes.TryGetValue(iRequest.GetType(), out var responseType))
-            {
-                response = (IResponse) Activator.CreateInstance(responseType);
-            }
-            else
-            {
-                response = new Response();
-            }
-
-            response.ErrorCode = error;
-            return response;
-        }
-        
-        /// <summary>
-        /// 根据路由请求对象和错误码，创建路由响应消息。
-        /// </summary>
-        /// <param name="iRouteRequest">路由请求对象</param>
-        /// <param name="error">错误码</param>
-        /// <returns>创建的路由响应消息</returns>
-        public IRouteResponse CreateResponse(IRouteRequest iRouteRequest, uint error)
+        internal IRouteResponse CreateRouteResponse(Type requestType, uint error)
         {
             IRouteResponse response;
 
-            if (_responseTypes.TryGetValue(iRouteRequest.GetType(), out var responseType))
+            if (_responseTypes.TryGetValue(requestType, out var responseType))
             {
                 response = (IRouteResponse) Activator.CreateInstance(responseType);
             }

@@ -2,6 +2,7 @@
 using CommandLine;
 using Exporter;
 using Exporter.Excel;
+using Fantasy;
 using Fantasy.Exporter;
 
 try
@@ -16,10 +17,9 @@ try
     Console.OutputEncoding = Encoding.UTF8;
     // 检查启动参数
     Log.Info("请输入你想要做的操作:");
-    Log.Info("1:导出网络协议");
-    Log.Info("2:导出网络协议并重新生成OpCode");
-    Log.Info("3:增量导出Excel（包含常量枚举）");
-    Log.Info("4:全量导出Excel（包含常量枚举）");
+    Log.Info("1:导出网络协议到C#文件");
+    Log.Info("2:增量导出Excel（包含常量枚举）");
+    Log.Info("3:全量导出Excel（包含常量枚举）");
     // 获取用户输入
     var keyChar = Console.ReadKey().KeyChar;
     // 判断用户输入
@@ -29,7 +29,6 @@ try
         Log.Error("无法识别的导出类型请，输入正确的操作类型。");
         return;
     }
-
     // 转换用户输入    
     Log.Info("");
     var exportType = (ExportType)key;
@@ -38,12 +37,7 @@ try
     {
         case ExportType.ProtoBuf:
         {
-            _ = new NetworkProtocolExporter(false);
-            break;
-        }
-        case ExportType.ProtoBufAndOpCodeCache:
-        {
-            _ = new NetworkProtocolExporter(true);
+            _ = new ProtocolExporter();
             break;
         }
         case ExportType.AllExcel:

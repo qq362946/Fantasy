@@ -519,14 +519,14 @@ namespace Fantasy
         private const byte KcpHeaderRequestConnection = (byte)KcpHeader.RequestConnection;
         private const byte KcpHeaderConfirmConnection = (byte)KcpHeader.ConfirmConnection;
 
-        public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
+        public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
         {
             if (_cancellationTokenSource.IsCancellationRequested)
             {
                 return;
             }
             
-            var buffer = _packetParser.Pack(ref rpcId, ref routeTypeOpCode, ref routeId, memoryStream, message);
+            var buffer = _packetParser.Pack(ref rpcId, ref routeId, memoryStream, message);
 
             if (!_isConnected)
             {

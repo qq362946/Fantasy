@@ -126,13 +126,13 @@ public interface IDateBase
     /// </summary>
     FTask<long> Remove<T>(long id, string collection = null) where T : Entity, new();
     /// <summary>
-    /// 通过事务会话，根据给定的筛选条件和 ID 从数据库中删除指定类型 <typeparamref name="T"/> 实体。
+    /// 通过事务会话，根据给定的筛选条件从数据库中删除指定类型 <typeparamref name="T"/> 实体。
     /// </summary>
-    FTask<long> Remove<T>(long id,object transactionSession, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new();
+    FTask<long> Remove<T>(long coroutineLockQueueKey,object transactionSession, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new();
     /// <summary>
-    /// 根据给定的筛选条件和 ID 从数据库中删除指定类型 <typeparamref name="T"/> 实体。
+    /// 根据给定的筛选条件从数据库中删除指定类型 <typeparamref name="T"/> 实体。
     /// </summary>
-    FTask<long> Remove<T>(long id, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new();
+    FTask<long> Remove<T>(long coroutineLockQueueKey, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new();
     /// <summary>
     /// 根据给定的筛选条件计算指定集合中类型 <typeparamref name="T"/> 实体某个属性的总和。
     /// </summary>

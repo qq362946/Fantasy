@@ -3,6 +3,7 @@ using Fantasy;
 using Fantasy.Exporter;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using ProtoBuf;
 
 namespace Exporter.Excel;
 
@@ -11,42 +12,14 @@ namespace Exporter.Excel;
 /// </summary>
 public static class DynamicAssembly
 {
-    /// <summary>
-    /// 加载指定路径下的动态程序集。
-    /// </summary>
-    /// <param name="path">程序集文件路径。</param>
-    /// <returns>加载的动态程序集。</returns>
-    public static Assembly Load(string path)
+    private static void MetadataReference(out string assemblyName, out List<MetadataReference> metadataReferenceList)
     {
-        var fileList = new List<string>();
-
-        // 找到所有需要加载的CS文件
-
-        foreach (string file in Directory.GetFiles(path))
-        {
-            if (Path.GetExtension(file) != ".cs")
-            {
-                continue;
-            }
-
-            fileList.Add(file);
-        }
-
-        var syntaxTreeList = new List<SyntaxTree>();
-
-        foreach (var file in fileList)
-        {
-            using var fileStream = new StreamReader(file);
-            var cSharp = CSharpSyntaxTree.ParseText(fileStream.ReadToEnd());
-            syntaxTreeList.Add(cSharp);
-        }
-
         AssemblyMetadata assemblyMetadata;
         MetadataReference metadataReference;
         var currentDomain = AppDomain.CurrentDomain;
-        var assemblyName = Path.GetRandomFileName();
+        assemblyName = Path.GetRandomFileName();
         var assemblyArray = currentDomain.GetAssemblies();
-        var metadataReferenceList = new List<MetadataReference>();
+        metadataReferenceList = new List<MetadataReference>();
 
         // 注册引用
 
@@ -62,22 +35,53 @@ public static class DynamicAssembly
             metadataReferenceList.Add(metadataReference);
         }
         
-        // 添加ProtoEntity支持
+        // 添加Proto支持
+        
+        assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(ProtoMemberAttribute).Assembly.Location);
+        metadataReference = assemblyMetadata.GetReference();
+        metadataReferenceList.Add(metadataReference);
+        
+        // 添加Fantasy支持
 
         assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(ASerialize).Assembly.Location);
         metadataReference = assemblyMetadata.GetReference();
         metadataReferenceList.Add(metadataReference);
-
-        // 添加MessagePack支持
+    }
+    
+    /// <summary>
+    /// 加载指定路径下的动态程序集。
+    /// </summary>
+    /// <param name="path">程序集文件路径。</param>
+    /// <returns>加载的动态程序集。</returns>
+    public static Assembly Load(string path)
+    {
+        var fileList = new List<string>();
         
-        assemblyMetadata = AssemblyMetadata.CreateFromFile(typeof(MessagePack.MessagePackObjectAttribute).Assembly.Location);
-        metadataReference = assemblyMetadata.GetReference();
-        metadataReferenceList.Add(metadataReference);
-
-        CSharpCompilation compilation = CSharpCompilation.Create(assemblyName, syntaxTreeList, metadataReferenceList, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
-
+        // 找到所有需要加载的CS文件
+        
+        foreach (string file in Directory.GetFiles(path))
+        {
+            if (Path.GetExtension(file) != ".cs")
+            {
+                continue;
+            }
+        
+            fileList.Add(file);
+        }
+        
+        var syntaxTreeList = new List<SyntaxTree>();
+        
+        foreach (var file in fileList)
+        {
+            using var fileStream = new StreamReader(file);
+            var cSharp = CSharpSyntaxTree.ParseText(fileStream.ReadToEnd());
+            syntaxTreeList.Add(cSharp);
+        }
+        
+        // 注册程序集
+        MetadataReference(out var assemblyName, out var metadataReferenceList);
+        var compilation = CSharpCompilation.Create(assemblyName, syntaxTreeList, metadataReferenceList, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
         using var ms = new MemoryStream();
-
         var result = compilation.Emit(ms);
         if (!result.Success)
         {
@@ -85,7 +89,7 @@ public static class DynamicAssembly
             {
                 Log.Error(resultDiagnostic.GetMessage());
             }
-
+        
             throw new Exception("failures");
         }
 
@@ -106,8 +110,9 @@ public static class DynamicAssembly
             ConfigDataType = GetConfigType(dynamicAssembly, $"{tableName}Data"),
             ConfigType = GetConfigType(dynamicAssembly, $"{tableName}")
         };
-
+        
         dynamicConfigDataType.ConfigData = CreateInstance(dynamicConfigDataType.ConfigDataType);
+       
         var listPropertyType = dynamicConfigDataType.ConfigDataType.GetProperty("List");
 
         if (listPropertyType == null)

@@ -64,18 +64,17 @@ namespace Fantasy
             return session;
         }
 
-        public virtual async FTask Send(uint rpcId, long routeId, Type messageType, APackInfo packInfo)
+        public virtual void Send(uint rpcId, long routeId, Type messageType, APackInfo packInfo)
         {
             if (IsDisposed)
             {
                 return;
             }
 
-            Channel.Send(rpcId, packInfo.RouteTypeCode, routeId, packInfo.MemoryStream, null);
-            await FTask.CompletedTask;
+            Channel.Send(rpcId, routeId, packInfo.MemoryStream, null);
         }
 
-        public virtual async FTask Send(ProcessPackInfo packInfo, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
+        public virtual void Send(ProcessPackInfo packInfo, uint rpcId = 0, long routeId = 0)
         {
             if (IsDisposed)
             {
@@ -84,20 +83,18 @@ namespace Fantasy
 
             using (packInfo)
             {
-                Channel.Send(rpcId, routeTypeOpCode, routeId, packInfo.MemoryStream, null);
+                Channel.Send(rpcId, routeId, packInfo.MemoryStream, null);
             }
-            
-            await FTask.CompletedTask;
         }
 
-        public virtual void Send(MemoryStreamBuffer memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
+        public virtual void Send(MemoryStreamBuffer memoryStream, uint rpcId = 0, long routeId = 0)
         {
             if (IsDisposed)
             {
                 return;
             }
 
-            Channel.Send(rpcId, routeTypeOpCode, routeId, memoryStream, null);
+            Channel.Send(rpcId, routeId, memoryStream, null);
         }
 #endif
         public override void Dispose()
@@ -131,7 +128,7 @@ namespace Fantasy
                 return;
             }
             
-            Channel.Send(rpcId, 0, routeId, null, message);
+            Channel.Send(rpcId, routeId, null, message);
         }
         
         public virtual void Send(IRouteMessage routeMessage, uint rpcId = 0, long routeId = 0)
@@ -141,7 +138,7 @@ namespace Fantasy
                 return;
             }
 
-            Channel.Send(rpcId, routeMessage.RouteTypeOpCode(), routeId, null, routeMessage);
+            Channel.Send(rpcId, routeId, null, routeMessage);
         }
         
         public virtual FTask<IResponse> Call(IRouteRequest request, long routeId = 0)
@@ -171,7 +168,7 @@ namespace Fantasy
             Send(request, rpcId, routeId);
             return requestCallback;
         }
-        
+
         public void Receive(APackInfo packInfo)
         {
             if (IsDisposed)
@@ -183,7 +180,7 @@ namespace Fantasy
 
             try
             {
-                NetworkMessageScheduler.Scheduler(this, packInfo).Coroutine();
+                NetworkMessageScheduler.Scheduler(this, packInfo);
             }
             catch (Exception e)
             {

@@ -1,10 +1,11 @@
-using MessagePack;
+using ProtoBuf;
+using MemoryPack;
 using System.Collections.Generic;
 #pragma warning disable CS8618
 
 namespace Fantasy
 {
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class C2G_TestMessage : AMessage, IMessage
 	{
 		public static C2G_TestMessage Create(Scene scene)
@@ -19,10 +20,10 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.C2G_TestMessage; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
-	[MessagePackObject]
+	[MemoryPackable]
 	public partial class C2G_TestRequest : AMessage, IRequest
 	{
 		public static C2G_TestRequest Create(Scene scene)
@@ -36,13 +37,13 @@ namespace Fantasy
 			Scene.MessagePoolComponent.Return<C2G_TestRequest>(this);
 #endif
 		}
-		[IgnoreMember]
+		[MemoryPackIgnore]
 		public G2C_TestResponse ResponseType { get; set; }
 		public uint OpCode() { return OuterOpcode.C2G_TestRequest; }
-		[Key(0)]
+		[MemoryPackOrder(0)]
 		public string Tag { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class G2C_TestResponse : AMessage, IResponse
 	{
 		public static G2C_TestResponse Create(Scene scene)
@@ -58,12 +59,12 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.G2C_TestResponse; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public string Tag { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public uint ErrorCode { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class C2G_CreateAddressableRequest : AMessage, IRequest
 	{
 		public static C2G_CreateAddressableRequest Create(Scene scene)
@@ -76,11 +77,11 @@ namespace Fantasy
 			Scene.MessagePoolComponent.Return<C2G_CreateAddressableRequest>(this);
 #endif
 		}
-		[IgnoreMember]
+		[ProtoIgnore]
 		public G2C_CreateAddressableResponse ResponseType { get; set; }
 		public uint OpCode() { return OuterOpcode.C2G_CreateAddressableRequest; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class G2C_CreateAddressableResponse : AMessage, IResponse
 	{
 		public static G2C_CreateAddressableResponse Create(Scene scene)
@@ -95,10 +96,10 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.G2C_CreateAddressableResponse; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public uint ErrorCode { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class C2M_TestMessage : AMessage, IAddressableRouteMessage
 	{
 		public static C2M_TestMessage Create(Scene scene)
@@ -113,11 +114,10 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.C2M_TestMessage; }
-		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class C2M_TestRequest : AMessage, IAddressableRouteRequest
 	{
 		public static C2M_TestRequest Create(Scene scene)
@@ -131,14 +131,13 @@ namespace Fantasy
 			Scene.MessagePoolComponent.Return<C2M_TestRequest>(this);
 #endif
 		}
-		[IgnoreMember]
+		[ProtoIgnore]
 		public M2C_TestResponse ResponseType { get; set; }
 		public uint OpCode() { return OuterOpcode.C2M_TestRequest; }
-		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class M2C_TestResponse : AMessage, IAddressableRouteResponse
 	{
 		public static M2C_TestResponse Create(Scene scene)
@@ -154,15 +153,15 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.M2C_TestResponse; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public string Tag { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public uint ErrorCode { get; set; }
 	}
 	/// <summary>
 	///  通知Gate服务器创建一个Chat的Route连接
 	/// </summary>
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class C2G_CreateChatRouteRequest : AMessage, IRequest
 	{
 		public static C2G_CreateChatRouteRequest Create(Scene scene)
@@ -175,11 +174,11 @@ namespace Fantasy
 			Scene.MessagePoolComponent.Return<C2G_CreateChatRouteRequest>(this);
 #endif
 		}
-		[IgnoreMember]
+		[ProtoIgnore]
 		public G2C_CreateChatRouteResponse ResponseType { get; set; }
 		public uint OpCode() { return OuterOpcode.C2G_CreateChatRouteRequest; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class G2C_CreateChatRouteResponse : AMessage, IResponse
 	{
 		public static G2C_CreateChatRouteResponse Create(Scene scene)
@@ -194,13 +193,13 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.G2C_CreateChatRouteResponse; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public uint ErrorCode { get; set; }
 	}
 	/// <summary>
 	///  发送一个Route消息给Chat
 	/// </summary>
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class C2Chat_TestMessage : AMessage, ICustomRouteMessage
 	{
 		public static C2Chat_TestMessage Create(Scene scene)
@@ -215,14 +214,15 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.C2Chat_TestMessage; }
-		public long RouteTypeOpCode() { return (long)RouteType.ChatRoute; }
-		[Key(0)]
+		[ProtoIgnore]
+		public int RouteType => Fantasy.RouteType.ChatRoute;
+		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
 	/// <summary>
 	///  发送一个RPCRoute消息给Chat
 	/// </summary>
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class C2Chat_TestMessageRequest : AMessage, ICustomRouteRequest
 	{
 		public static C2Chat_TestMessageRequest Create(Scene scene)
@@ -236,14 +236,15 @@ namespace Fantasy
 			Scene.MessagePoolComponent.Return<C2Chat_TestMessageRequest>(this);
 #endif
 		}
-		[IgnoreMember]
+		[ProtoIgnore]
 		public Chat2C_TestMessageResponse ResponseType { get; set; }
 		public uint OpCode() { return OuterOpcode.C2Chat_TestMessageRequest; }
-		public long RouteTypeOpCode() { return (long)RouteType.ChatRoute; }
-		[Key(0)]
+		[ProtoIgnore]
+		public int RouteType => Fantasy.RouteType.ChatRoute;
+		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class Chat2C_TestMessageResponse : AMessage, ICustomRouteResponse
 	{
 		public static Chat2C_TestMessageResponse Create(Scene scene)
@@ -259,9 +260,9 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.Chat2C_TestMessageResponse; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public string Tag { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public uint ErrorCode { get; set; }
 	}
 }

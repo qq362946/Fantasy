@@ -17,9 +17,15 @@ namespace KCP
 {
     internal static unsafe class IKCP
     {
-        private static void memcpy(void* dest, void* src, int n) => Unsafe.CopyBlock(dest, src, (uint)n);
+        private static void memcpy(void* dest, void* src, int n)
+        {
+            Unsafe.CopyBlockUnaligned(dest, src, (uint)n);
+        }
 
-        private static void memcpy(void* dest, void* src, uint n) => Unsafe.CopyBlock(dest, src, n);
+        private static void memcpy(void* dest, void* src, uint n)
+        {
+            Unsafe.CopyBlockUnaligned(dest, src, n);
+        }
 
         private static void* malloc(nint size) =>
 #if !UNITY_2021_3_OR_NEWER || NET6_0_OR_GREATER

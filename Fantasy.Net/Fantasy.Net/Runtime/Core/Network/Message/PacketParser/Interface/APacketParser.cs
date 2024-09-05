@@ -19,9 +19,8 @@ namespace Fantasy
         protected readonly byte[] RpcIdBuffer = new byte[sizeof(uint)];
         protected readonly byte[] OpCodeBuffer = new byte[sizeof(uint)];
         protected readonly byte[] RouteIdBuffer = new byte[sizeof(long)];
-        protected readonly byte[] PackRouteTypeOpCode = new byte[sizeof(long)];
         protected bool IsDisposed { get; private set; }
-        public abstract MemoryStreamBuffer Pack(ref uint rpcId, ref long routeTypeOpCode, ref long routeId, MemoryStreamBuffer memoryStream, object message);
+        public abstract MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message);
         public virtual void Dispose()
         {
             IsDisposed = true;
@@ -31,7 +30,6 @@ namespace Fantasy
             Array.Clear(RpcIdBuffer, 0, RpcIdBuffer.Length);
             Array.Clear(OpCodeBuffer, 0, OpCodeBuffer.Length);
             Array.Clear(RouteIdBuffer, 0, OpCodeBuffer.Length);
-            Array.Clear(PackRouteTypeOpCode, 0, PackRouteTypeOpCode.Length);
         }
     }
 }

@@ -1,5 +1,7 @@
-using MessagePack;
+using ProtoBuf;
+using MemoryPack;
 using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
 using Fantasy;
 // ReSharper disable InconsistentNaming
 // ReSharper disable RedundantUsingDirective
@@ -13,7 +15,7 @@ using Fantasy;
 
 namespace Fantasy
 {	
-	[MessagePackObject]
+	[MemoryPackable]
 	public partial class G2A_TestRequest : AMessage, IRouteRequest
 	{
 		public static G2A_TestRequest Create(Scene scene)
@@ -26,12 +28,11 @@ namespace Fantasy
 			Scene.MessagePoolComponent.Return<G2A_TestRequest>(this);
 #endif
 		}
-		[IgnoreMember]
+		[MemoryPackIgnore]
 		public G2A_TestResponse ResponseType { get; set; }
 		public uint OpCode() { return InnerOpcode.G2A_TestRequest; }
-		public long RouteTypeOpCode() { return InnerRouteType.Route; }
 	}
-	[MessagePackObject]
+	[MemoryPackable]
 	public partial class G2A_TestResponse : AMessage, IRouteResponse
 	{
 		public static G2A_TestResponse Create(Scene scene)
@@ -46,10 +47,10 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.G2A_TestResponse; }
-		[Key(0)]
+		[MemoryPackOrder(0)]
 		public uint ErrorCode { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class G2M_RequestAddressableId : AMessage, IRouteRequest
 	{
 		public static G2M_RequestAddressableId Create(Scene scene)
@@ -62,12 +63,11 @@ namespace Fantasy
 			Scene.MessagePoolComponent.Return<G2M_RequestAddressableId>(this);
 #endif
 		}
-		[IgnoreMember]
+		[ProtoIgnore]
 		public M2G_ResponseAddressableId ResponseType { get; set; }
 		public uint OpCode() { return InnerOpcode.G2M_RequestAddressableId; }
-		public long RouteTypeOpCode() { return InnerRouteType.Route; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class M2G_ResponseAddressableId : AMessage, IRouteResponse
 	{
 		public static M2G_ResponseAddressableId Create(Scene scene)
@@ -83,15 +83,15 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_ResponseAddressableId; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long AddressableId { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public uint ErrorCode { get; set; }
 	}
 	/// <summary>
 	///  通知Chat服务器创建一个RouteId
 	/// </summary>
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class G2Chat_CreateRouteRequest : AMessage, IRouteRequest
 	{
 		public static G2Chat_CreateRouteRequest Create(Scene scene)
@@ -105,14 +105,13 @@ namespace Fantasy
 			Scene.MessagePoolComponent.Return<G2Chat_CreateRouteRequest>(this);
 #endif
 		}
-		[IgnoreMember]
+		[ProtoIgnore]
 		public Chat2G_CreateRouteResponse ResponseType { get; set; }
 		public uint OpCode() { return InnerOpcode.G2Chat_CreateRouteRequest; }
-		public long RouteTypeOpCode() { return InnerRouteType.Route; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long GateRouteId { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class Chat2G_CreateRouteResponse : AMessage, IRouteResponse
 	{
 		public static Chat2G_CreateRouteResponse Create(Scene scene)
@@ -128,9 +127,9 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.Chat2G_CreateRouteResponse; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long ChatRouteId { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public uint ErrorCode { get; set; }
 	}
 }
