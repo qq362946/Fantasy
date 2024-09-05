@@ -30,6 +30,5 @@
 #### <a href="https://github.com/egametang/ET"><strong>ET</strong></a> - ET框架是一整套完善的游戏开发框架。
 #### <a href="https://github.com/ALEXTANGXIAO/TEngine"><strong>TEngine</strong></a> - TEngine是一个简单(新手友好开箱即用)且强大的Unity框架全平台解决方案。
 ## 交流与讨论：  
-#### <a href="https://github.com/egametang/ET"><strong>泰课教育</strong></a> - 一个专注游戏领取的教育平台。
-__讨论QQ群 : Fantasy服务器开发交流群 656091376 __
+__讨论QQ群 : Fantasy服务器开发交流群 569888673 __
 
