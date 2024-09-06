@@ -1,0 +1,279 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Timer.TimerType
+  commentId: T:Fantasy.Timer.TimerType
+  id: TimerType
+  parent: Fantasy.Timer
+  children:
+  - Fantasy.Timer.TimerType.None
+  - Fantasy.Timer.TimerType.OnceTimer
+  - Fantasy.Timer.TimerType.OnceWaitTimer
+  - Fantasy.Timer.TimerType.RepeatedTimer
+  langs:
+  - csharp
+  - vb
+  name: TimerType
+  nameWithType: TimerType
+  fullName: Fantasy.Timer.TimerType
+  type: Enum
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerType.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TimerType
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerType.cs
+    startLine: 5
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 枚举对象TimerType
+  example: []
+  syntax:
+    content: public enum TimerType
+    content.vb: Public Enum TimerType
+  extensionMethods:
+  - Fantasy.Timer.TimerType.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Timer.TimerType.None
+  commentId: F:Fantasy.Timer.TimerType.None
+  id: None
+  parent: Fantasy.Timer.TimerType
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: TimerType.None
+  fullName: Fantasy.Timer.TimerType.None
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerType.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: None
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerType.cs
+    startLine: 10
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: None
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Fantasy.Timer.TimerType
+- uid: Fantasy.Timer.TimerType.OnceWaitTimer
+  commentId: F:Fantasy.Timer.TimerType.OnceWaitTimer
+  id: OnceWaitTimer
+  parent: Fantasy.Timer.TimerType
+  langs:
+  - csharp
+  - vb
+  name: OnceWaitTimer
+  nameWithType: TimerType.OnceWaitTimer
+  fullName: Fantasy.Timer.TimerType.OnceWaitTimer
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerType.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OnceWaitTimer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerType.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 一次等待定时器
+  example: []
+  syntax:
+    content: OnceWaitTimer = 1
+    return:
+      type: Fantasy.Timer.TimerType
+- uid: Fantasy.Timer.TimerType.OnceTimer
+  commentId: F:Fantasy.Timer.TimerType.OnceTimer
+  id: OnceTimer
+  parent: Fantasy.Timer.TimerType
+  langs:
+  - csharp
+  - vb
+  name: OnceTimer
+  nameWithType: TimerType.OnceTimer
+  fullName: Fantasy.Timer.TimerType.OnceTimer
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerType.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OnceTimer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerType.cs
+    startLine: 18
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 一次性定时器
+  example: []
+  syntax:
+    content: OnceTimer = 2
+    return:
+      type: Fantasy.Timer.TimerType
+- uid: Fantasy.Timer.TimerType.RepeatedTimer
+  commentId: F:Fantasy.Timer.TimerType.RepeatedTimer
+  id: RepeatedTimer
+  parent: Fantasy.Timer.TimerType
+  langs:
+  - csharp
+  - vb
+  name: RepeatedTimer
+  nameWithType: TimerType.RepeatedTimer
+  fullName: Fantasy.Timer.TimerType.RepeatedTimer
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerType.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RepeatedTimer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerType.cs
+    startLine: 22
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 重复定时器
+  example: []
+  syntax:
+    content: RepeatedTimer = 3
+    return:
+      type: Fantasy.Timer.TimerType
+references:
+- uid: Fantasy.Timer
+  commentId: N:Fantasy.Timer
+  href: Fantasy.html
+  name: Fantasy.Timer
+  nameWithType: Fantasy.Timer
+  fullName: Fantasy.Timer
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Timer
+    name: Timer
+    href: Fantasy.Timer.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Timer
+    name: Timer
+    href: Fantasy.Timer.html
+- uid: Fantasy.Timer.TimerType.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<TimerType>(TimerType)
+  nameWithType: JsonHelper.ToJson<TimerType>(TimerType)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Timer.TimerType>(Fantasy.Timer.TimerType)
+  nameWithType.vb: JsonHelper.ToJson(Of TimerType)(TimerType)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Timer.TimerType)(Fantasy.Timer.TimerType)
+  name.vb: ToJson(Of TimerType)(TimerType)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Timer.TimerType)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Timer.TimerType
+    name: TimerType
+    href: Fantasy.Timer.TimerType.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Timer.TimerType
+    name: TimerType
+    href: Fantasy.Timer.TimerType.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Timer.TimerType)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Timer.TimerType
+    name: TimerType
+    href: Fantasy.Timer.TimerType.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Timer.TimerType
+    name: TimerType
+    href: Fantasy.Timer.TimerType.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Timer.TimerType
+  commentId: T:Fantasy.Timer.TimerType
+  parent: Fantasy.Timer
+  href: Fantasy.Timer.TimerType.html
+  name: TimerType
+  nameWithType: TimerType
+  fullName: Fantasy.Timer.TimerType

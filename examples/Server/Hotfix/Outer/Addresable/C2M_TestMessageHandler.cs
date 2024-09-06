@@ -1,3 +1,6 @@
+using Fantasy.Async;
+using Fantasy.Network.Interface;
+
 namespace Fantasy;
 
 public sealed class C2M_TestMessageHandler : Addressable<Unit, C2M_TestMessage>

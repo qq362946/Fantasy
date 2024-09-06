@@ -6,6 +6,9 @@ using System.Linq;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using Fantasy.ConfigTable;
+using Fantasy.Serialize;
+
 // ReSharper disable CollectionNeverUpdated.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -14,7 +17,7 @@ using System.Collections.Concurrent;
 #pragma warning disable CS8625
 #pragma warning disable CS8603
 
-namespace Fantasy
+namespace Fantasy.Platform.Net
 {
     [ProtoContract]
     public sealed partial class MachineConfigData : ASerialize, IConfigTable, IProto

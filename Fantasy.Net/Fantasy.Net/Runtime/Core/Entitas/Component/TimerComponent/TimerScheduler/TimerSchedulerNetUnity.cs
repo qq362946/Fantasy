@@ -1,8 +1,11 @@
 #if FANTASY_UNITY
 using System;
 using System.Collections.Generic;
+using Fantasy.Async;
+using Fantasy.DataStructure.Collection;
+using Fantasy.Helper;
 using UnityEngine;
-namespace Fantasy
+namespace Fantasy.Timer
 {
     public sealed class TimerSchedulerNetUnity
     {

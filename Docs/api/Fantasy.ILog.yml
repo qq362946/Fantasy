@@ -1,0 +1,586 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.ILog
+  commentId: T:Fantasy.ILog
+  id: ILog
+  parent: Fantasy
+  children:
+  - Fantasy.ILog.Debug(System.String)
+  - Fantasy.ILog.Debug(System.String,System.Object[])
+  - Fantasy.ILog.Error(System.String)
+  - Fantasy.ILog.Error(System.String,System.Object[])
+  - Fantasy.ILog.Info(System.String)
+  - Fantasy.ILog.Info(System.String,System.Object[])
+  - Fantasy.ILog.Trace(System.String)
+  - Fantasy.ILog.Trace(System.String,System.Object[])
+  - Fantasy.ILog.Warning(System.String)
+  - Fantasy.ILog.Warning(System.String,System.Object[])
+  langs:
+  - csharp
+  - vb
+  name: ILog
+  nameWithType: ILog
+  fullName: Fantasy.ILog
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ILog
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+    startLine: 5
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 定义日志记录功能的接口。
+  example: []
+  syntax:
+    content: public interface ILog
+    content.vb: Public Interface ILog
+  extensionMethods:
+  - Fantasy.ILog.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.ILog.Trace(System.String)
+  commentId: M:Fantasy.ILog.Trace(System.String)
+  id: Trace(System.String)
+  parent: Fantasy.ILog
+  langs:
+  - csharp
+  - vb
+  name: Trace(string)
+  nameWithType: ILog.Trace(string)
+  fullName: Fantasy.ILog.Trace(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Trace
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+    startLine: 11
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录跟踪级别的日志消息。
+  example: []
+  syntax:
+    content: void Trace(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息。
+    content.vb: Sub Trace(message As String)
+  overload: Fantasy.ILog.Trace*
+  nameWithType.vb: ILog.Trace(String)
+  fullName.vb: Fantasy.ILog.Trace(String)
+  name.vb: Trace(String)
+- uid: Fantasy.ILog.Warning(System.String)
+  commentId: M:Fantasy.ILog.Warning(System.String)
+  id: Warning(System.String)
+  parent: Fantasy.ILog
+  langs:
+  - csharp
+  - vb
+  name: Warning(string)
+  nameWithType: ILog.Warning(string)
+  fullName: Fantasy.ILog.Warning(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Warning
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+    startLine: 16
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录警告级别的日志消息。
+  example: []
+  syntax:
+    content: void Warning(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息。
+    content.vb: Sub Warning(message As String)
+  overload: Fantasy.ILog.Warning*
+  nameWithType.vb: ILog.Warning(String)
+  fullName.vb: Fantasy.ILog.Warning(String)
+  name.vb: Warning(String)
+- uid: Fantasy.ILog.Info(System.String)
+  commentId: M:Fantasy.ILog.Info(System.String)
+  id: Info(System.String)
+  parent: Fantasy.ILog
+  langs:
+  - csharp
+  - vb
+  name: Info(string)
+  nameWithType: ILog.Info(string)
+  fullName: Fantasy.ILog.Info(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Info
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+    startLine: 21
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录信息级别的日志消息。
+  example: []
+  syntax:
+    content: void Info(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息。
+    content.vb: Sub Info(message As String)
+  overload: Fantasy.ILog.Info*
+  nameWithType.vb: ILog.Info(String)
+  fullName.vb: Fantasy.ILog.Info(String)
+  name.vb: Info(String)
+- uid: Fantasy.ILog.Debug(System.String)
+  commentId: M:Fantasy.ILog.Debug(System.String)
+  id: Debug(System.String)
+  parent: Fantasy.ILog
+  langs:
+  - csharp
+  - vb
+  name: Debug(string)
+  nameWithType: ILog.Debug(string)
+  fullName: Fantasy.ILog.Debug(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Debug
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+    startLine: 26
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录调试级别的日志消息。
+  example: []
+  syntax:
+    content: void Debug(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息。
+    content.vb: Sub Debug(message As String)
+  overload: Fantasy.ILog.Debug*
+  nameWithType.vb: ILog.Debug(String)
+  fullName.vb: Fantasy.ILog.Debug(String)
+  name.vb: Debug(String)
+- uid: Fantasy.ILog.Error(System.String)
+  commentId: M:Fantasy.ILog.Error(System.String)
+  id: Error(System.String)
+  parent: Fantasy.ILog
+  langs:
+  - csharp
+  - vb
+  name: Error(string)
+  nameWithType: ILog.Error(string)
+  fullName: Fantasy.ILog.Error(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Error
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+    startLine: 31
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录错误级别的日志消息。
+  example: []
+  syntax:
+    content: void Error(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息。
+    content.vb: Sub [Error](message As String)
+  overload: Fantasy.ILog.Error*
+  nameWithType.vb: ILog.Error(String)
+  fullName.vb: Fantasy.ILog.Error(String)
+  name.vb: Error(String)
+- uid: Fantasy.ILog.Trace(System.String,System.Object[])
+  commentId: M:Fantasy.ILog.Trace(System.String,System.Object[])
+  id: Trace(System.String,System.Object[])
+  parent: Fantasy.ILog
+  langs:
+  - csharp
+  - vb
+  name: Trace(string, params object[])
+  nameWithType: ILog.Trace(string, params object[])
+  fullName: Fantasy.ILog.Trace(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Trace
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+    startLine: 37
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录跟踪级别的格式化日志消息。
+  example: []
+  syntax:
+    content: void Trace(string message, params object[] args)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息模板。
+    - id: args
+      type: System.Object[]
+      description: 格式化参数。
+    content.vb: Sub Trace(message As String, ParamArray args As Object())
+  overload: Fantasy.ILog.Trace*
+  nameWithType.vb: ILog.Trace(String, ParamArray Object())
+  fullName.vb: Fantasy.ILog.Trace(String, ParamArray Object())
+  name.vb: Trace(String, ParamArray Object())
+- uid: Fantasy.ILog.Warning(System.String,System.Object[])
+  commentId: M:Fantasy.ILog.Warning(System.String,System.Object[])
+  id: Warning(System.String,System.Object[])
+  parent: Fantasy.ILog
+  langs:
+  - csharp
+  - vb
+  name: Warning(string, params object[])
+  nameWithType: ILog.Warning(string, params object[])
+  fullName: Fantasy.ILog.Warning(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Warning
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+    startLine: 43
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录警告级别的格式化日志消息。
+  example: []
+  syntax:
+    content: void Warning(string message, params object[] args)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息模板。
+    - id: args
+      type: System.Object[]
+      description: 格式化参数。
+    content.vb: Sub Warning(message As String, ParamArray args As Object())
+  overload: Fantasy.ILog.Warning*
+  nameWithType.vb: ILog.Warning(String, ParamArray Object())
+  fullName.vb: Fantasy.ILog.Warning(String, ParamArray Object())
+  name.vb: Warning(String, ParamArray Object())
+- uid: Fantasy.ILog.Info(System.String,System.Object[])
+  commentId: M:Fantasy.ILog.Info(System.String,System.Object[])
+  id: Info(System.String,System.Object[])
+  parent: Fantasy.ILog
+  langs:
+  - csharp
+  - vb
+  name: Info(string, params object[])
+  nameWithType: ILog.Info(string, params object[])
+  fullName: Fantasy.ILog.Info(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Info
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+    startLine: 49
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录信息级别的格式化日志消息。
+  example: []
+  syntax:
+    content: void Info(string message, params object[] args)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息模板。
+    - id: args
+      type: System.Object[]
+      description: 格式化参数。
+    content.vb: Sub Info(message As String, ParamArray args As Object())
+  overload: Fantasy.ILog.Info*
+  nameWithType.vb: ILog.Info(String, ParamArray Object())
+  fullName.vb: Fantasy.ILog.Info(String, ParamArray Object())
+  name.vb: Info(String, ParamArray Object())
+- uid: Fantasy.ILog.Debug(System.String,System.Object[])
+  commentId: M:Fantasy.ILog.Debug(System.String,System.Object[])
+  id: Debug(System.String,System.Object[])
+  parent: Fantasy.ILog
+  langs:
+  - csharp
+  - vb
+  name: Debug(string, params object[])
+  nameWithType: ILog.Debug(string, params object[])
+  fullName: Fantasy.ILog.Debug(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Debug
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+    startLine: 55
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录调试级别的格式化日志消息。
+  example: []
+  syntax:
+    content: void Debug(string message, params object[] args)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息模板。
+    - id: args
+      type: System.Object[]
+      description: 格式化参数。
+    content.vb: Sub Debug(message As String, ParamArray args As Object())
+  overload: Fantasy.ILog.Debug*
+  nameWithType.vb: ILog.Debug(String, ParamArray Object())
+  fullName.vb: Fantasy.ILog.Debug(String, ParamArray Object())
+  name.vb: Debug(String, ParamArray Object())
+- uid: Fantasy.ILog.Error(System.String,System.Object[])
+  commentId: M:Fantasy.ILog.Error(System.String,System.Object[])
+  id: Error(System.String,System.Object[])
+  parent: Fantasy.ILog
+  langs:
+  - csharp
+  - vb
+  name: Error(string, params object[])
+  nameWithType: ILog.Error(string, params object[])
+  fullName: Fantasy.ILog.Error(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Error
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/Interface/ILog.cs
+    startLine: 61
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录错误级别的格式化日志消息。
+  example: []
+  syntax:
+    content: void Error(string message, params object[] args)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息模板。
+    - id: args
+      type: System.Object[]
+      description: 格式化参数。
+    content.vb: Sub [Error](message As String, ParamArray args As Object())
+  overload: Fantasy.ILog.Error*
+  nameWithType.vb: ILog.Error(String, ParamArray Object())
+  fullName.vb: Fantasy.ILog.Error(String, ParamArray Object())
+  name.vb: Error(String, ParamArray Object())
+references:
+- uid: Fantasy
+  commentId: N:Fantasy
+  href: Fantasy.html
+  name: Fantasy
+  nameWithType: Fantasy
+  fullName: Fantasy
+- uid: Fantasy.ILog.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<ILog>(ILog)
+  nameWithType: JsonHelper.ToJson<ILog>(ILog)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.ILog>(Fantasy.ILog)
+  nameWithType.vb: JsonHelper.ToJson(Of ILog)(ILog)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.ILog)(Fantasy.ILog)
+  name.vb: ToJson(Of ILog)(ILog)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.ILog)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.ILog
+    name: ILog
+    href: Fantasy.ILog.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.ILog
+    name: ILog
+    href: Fantasy.ILog.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.ILog)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.ILog
+    name: ILog
+    href: Fantasy.ILog.html
+  - name: )
+  - name: (
+  - uid: Fantasy.ILog
+    name: ILog
+    href: Fantasy.ILog.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.ILog.Trace*
+  commentId: Overload:Fantasy.ILog.Trace
+  href: Fantasy.ILog.html#Fantasy_ILog_Trace_System_String_
+  name: Trace
+  nameWithType: ILog.Trace
+  fullName: Fantasy.ILog.Trace
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.ILog.Warning*
+  commentId: Overload:Fantasy.ILog.Warning
+  href: Fantasy.ILog.html#Fantasy_ILog_Warning_System_String_
+  name: Warning
+  nameWithType: ILog.Warning
+  fullName: Fantasy.ILog.Warning
+- uid: Fantasy.ILog.Info*
+  commentId: Overload:Fantasy.ILog.Info
+  href: Fantasy.ILog.html#Fantasy_ILog_Info_System_String_
+  name: Info
+  nameWithType: ILog.Info
+  fullName: Fantasy.ILog.Info
+- uid: Fantasy.ILog.Debug*
+  commentId: Overload:Fantasy.ILog.Debug
+  href: Fantasy.ILog.html#Fantasy_ILog_Debug_System_String_
+  name: Debug
+  nameWithType: ILog.Debug
+  fullName: Fantasy.ILog.Debug
+- uid: Fantasy.ILog.Error*
+  commentId: Overload:Fantasy.ILog.Error
+  href: Fantasy.ILog.html#Fantasy_ILog_Error_System_String_
+  name: Error
+  nameWithType: ILog.Error
+  fullName: Fantasy.ILog.Error
+- uid: System.Object[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object[]
+  nameWithType: object[]
+  fullName: object[]
+  nameWithType.vb: Object()
+  fullName.vb: Object()
+  name.vb: Object()
+  spec.csharp:
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: (
+  - name: )

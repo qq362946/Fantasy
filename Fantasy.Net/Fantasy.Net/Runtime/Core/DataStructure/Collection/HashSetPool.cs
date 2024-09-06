@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Fantasy.Pool;
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Collection
 {
     /// <summary>
     /// 可释放的哈希集合对象池。

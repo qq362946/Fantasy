@@ -1,0 +1,579 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Helper.TimeHelper
+  commentId: T:Fantasy.Helper.TimeHelper
+  id: TimeHelper
+  parent: Fantasy.Helper
+  children:
+  - Fantasy.Helper.TimeHelper.Hour
+  - Fantasy.Helper.TimeHelper.Minute
+  - Fantasy.Helper.TimeHelper.Now
+  - Fantasy.Helper.TimeHelper.OneDay
+  - Fantasy.Helper.TimeHelper.Transition(System.DateTime)
+  - Fantasy.Helper.TimeHelper.Transition(System.Int64)
+  - Fantasy.Helper.TimeHelper.TransitionLocal(System.Int64)
+  langs:
+  - csharp
+  - vb
+  name: TimeHelper
+  nameWithType: TimeHelper
+  fullName: Fantasy.Helper.TimeHelper
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TimeHelper
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+    startLine: 10
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 提供与时间相关的帮助方法。
+  example: []
+  syntax:
+    content: public static class TimeHelper
+    content.vb: Public Module TimeHelper
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Fantasy.Helper.TimeHelper.Hour
+  commentId: F:Fantasy.Helper.TimeHelper.Hour
+  id: Hour
+  parent: Fantasy.Helper.TimeHelper
+  langs:
+  - csharp
+  - vb
+  name: Hour
+  nameWithType: TimeHelper.Hour
+  fullName: Fantasy.Helper.TimeHelper.Hour
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Hour
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+    startLine: 15
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 一小时的毫秒值。
+  example: []
+  syntax:
+    content: public const long Hour = 3600000
+    return:
+      type: System.Int64
+    content.vb: Public Const Hour As Long = 3600000
+- uid: Fantasy.Helper.TimeHelper.Minute
+  commentId: F:Fantasy.Helper.TimeHelper.Minute
+  id: Minute
+  parent: Fantasy.Helper.TimeHelper
+  langs:
+  - csharp
+  - vb
+  name: Minute
+  nameWithType: TimeHelper.Minute
+  fullName: Fantasy.Helper.TimeHelper.Minute
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Minute
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+    startLine: 19
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 一分钟的毫秒值。
+  example: []
+  syntax:
+    content: public const long Minute = 60000
+    return:
+      type: System.Int64
+    content.vb: Public Const Minute As Long = 60000
+- uid: Fantasy.Helper.TimeHelper.OneDay
+  commentId: F:Fantasy.Helper.TimeHelper.OneDay
+  id: OneDay
+  parent: Fantasy.Helper.TimeHelper
+  langs:
+  - csharp
+  - vb
+  name: OneDay
+  nameWithType: TimeHelper.OneDay
+  fullName: Fantasy.Helper.TimeHelper.OneDay
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OneDay
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+    startLine: 23
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 一天的毫秒值。
+  example: []
+  syntax:
+    content: public const long OneDay = 86400000
+    return:
+      type: System.Int64
+    content.vb: Public Const OneDay As Long = 86400000
+- uid: Fantasy.Helper.TimeHelper.Now
+  commentId: P:Fantasy.Helper.TimeHelper.Now
+  id: Now
+  parent: Fantasy.Helper.TimeHelper
+  langs:
+  - csharp
+  - vb
+  name: Now
+  nameWithType: TimeHelper.Now
+  fullName: Fantasy.Helper.TimeHelper.Now
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Now
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+    startLine: 30
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 获取当前时间的毫秒数，从1970年1月1日开始计算。
+  example: []
+  syntax:
+    content: public static long Now { get; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Shared ReadOnly Property Now As Long
+  overload: Fantasy.Helper.TimeHelper.Now*
+- uid: Fantasy.Helper.TimeHelper.Transition(System.DateTime)
+  commentId: M:Fantasy.Helper.TimeHelper.Transition(System.DateTime)
+  id: Transition(System.DateTime)
+  parent: Fantasy.Helper.TimeHelper
+  langs:
+  - csharp
+  - vb
+  name: Transition(DateTime)
+  nameWithType: TimeHelper.Transition(DateTime)
+  fullName: Fantasy.Helper.TimeHelper.Transition(System.DateTime)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Transition
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+    startLine: 50
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 将日期时间转换为毫秒数，从1970年1月1日开始计算。
+  example: []
+  syntax:
+    content: public static long Transition(DateTime d)
+    parameters:
+    - id: d
+      type: System.DateTime
+      description: 要转换的日期时间。
+    return:
+      type: System.Int64
+      description: 转换后的毫秒数。
+    content.vb: Public Shared Function Transition(d As Date) As Long
+  overload: Fantasy.Helper.TimeHelper.Transition*
+  nameWithType.vb: TimeHelper.Transition(Date)
+  fullName.vb: Fantasy.Helper.TimeHelper.Transition(Date)
+  name.vb: Transition(Date)
+- uid: Fantasy.Helper.TimeHelper.Transition(System.Int64)
+  commentId: M:Fantasy.Helper.TimeHelper.Transition(System.Int64)
+  id: Transition(System.Int64)
+  parent: Fantasy.Helper.TimeHelper
+  langs:
+  - csharp
+  - vb
+  name: Transition(long)
+  nameWithType: TimeHelper.Transition(long)
+  fullName: Fantasy.Helper.TimeHelper.Transition(long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Transition
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+    startLine: 60
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 将毫秒数转换为日期时间。
+  example: []
+  syntax:
+    content: public static DateTime Transition(long timeStamp)
+    parameters:
+    - id: timeStamp
+      type: System.Int64
+      description: 要转换的毫秒数。
+    return:
+      type: System.DateTime
+      description: 转换后的日期时间。
+    content.vb: Public Shared Function Transition(timeStamp As Long) As Date
+  overload: Fantasy.Helper.TimeHelper.Transition*
+  nameWithType.vb: TimeHelper.Transition(Long)
+  fullName.vb: Fantasy.Helper.TimeHelper.Transition(Long)
+  name.vb: Transition(Long)
+- uid: Fantasy.Helper.TimeHelper.TransitionLocal(System.Int64)
+  commentId: M:Fantasy.Helper.TimeHelper.TransitionLocal(System.Int64)
+  id: TransitionLocal(System.Int64)
+  parent: Fantasy.Helper.TimeHelper
+  langs:
+  - csharp
+  - vb
+  name: TransitionLocal(long)
+  nameWithType: TimeHelper.TransitionLocal(long)
+  fullName: Fantasy.Helper.TimeHelper.TransitionLocal(long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TransitionLocal
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/TimeHelper.cs
+    startLine: 70
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 将毫秒数转换为本地时间的日期时间。
+  example: []
+  syntax:
+    content: public static DateTime TransitionLocal(long timeStamp)
+    parameters:
+    - id: timeStamp
+      type: System.Int64
+      description: 要转换的毫秒数。
+    return:
+      type: System.DateTime
+      description: 转换后的本地时间的日期时间。
+    content.vb: Public Shared Function TransitionLocal(timeStamp As Long) As Date
+  overload: Fantasy.Helper.TimeHelper.TransitionLocal*
+  nameWithType.vb: TimeHelper.TransitionLocal(Long)
+  fullName.vb: Fantasy.Helper.TimeHelper.TransitionLocal(Long)
+  name.vb: TransitionLocal(Long)
+references:
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.Helper.TimeHelper.Now*
+  commentId: Overload:Fantasy.Helper.TimeHelper.Now
+  href: Fantasy.Helper.TimeHelper.html#Fantasy_Helper_TimeHelper_Now
+  name: Now
+  nameWithType: TimeHelper.Now
+  fullName: Fantasy.Helper.TimeHelper.Now
+- uid: Fantasy.Helper.TimeHelper.Transition*
+  commentId: Overload:Fantasy.Helper.TimeHelper.Transition
+  href: Fantasy.Helper.TimeHelper.html#Fantasy_Helper_TimeHelper_Transition_System_DateTime_
+  name: Transition
+  nameWithType: TimeHelper.Transition
+  fullName: Fantasy.Helper.TimeHelper.Transition
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date
+- uid: Fantasy.Helper.TimeHelper.TransitionLocal*
+  commentId: Overload:Fantasy.Helper.TimeHelper.TransitionLocal
+  href: Fantasy.Helper.TimeHelper.html#Fantasy_Helper_TimeHelper_TransitionLocal_System_Int64_
+  name: TransitionLocal
+  nameWithType: TimeHelper.TransitionLocal
+  fullName: Fantasy.Helper.TimeHelper.TransitionLocal

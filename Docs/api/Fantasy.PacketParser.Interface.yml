@@ -1,0 +1,63 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.PacketParser.Interface
+  commentId: N:Fantasy.PacketParser.Interface
+  id: Interface
+  parent: Fantasy.PacketParser
+  children:
+  - Fantasy.PacketParser.Interface.APackInfo
+  - Fantasy.PacketParser.Interface.APacketParser
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.PacketParser.Interface
+  nameWithType: Fantasy.PacketParser.Interface
+  fullName: Fantasy.PacketParser.Interface
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.PacketParser.Interface.APackInfo
+  commentId: T:Fantasy.PacketParser.Interface.APackInfo
+  parent: Fantasy.PacketParser.Interface
+  href: Fantasy.PacketParser.Interface.APackInfo.html
+  name: APackInfo
+  nameWithType: APackInfo
+  fullName: Fantasy.PacketParser.Interface.APackInfo
+- uid: Fantasy.PacketParser.Interface.APacketParser
+  commentId: T:Fantasy.PacketParser.Interface.APacketParser
+  parent: Fantasy.PacketParser.Interface
+  href: Fantasy.PacketParser.Interface.APacketParser.html
+  name: APacketParser
+  nameWithType: APacketParser
+  fullName: Fantasy.PacketParser.Interface.APacketParser
+- uid: Fantasy.PacketParser.Interface
+  commentId: N:Fantasy.PacketParser.Interface
+  href: Fantasy.html
+  name: Fantasy.PacketParser.Interface
+  nameWithType: Fantasy.PacketParser.Interface
+  fullName: Fantasy.PacketParser.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+  - name: .
+  - uid: Fantasy.PacketParser.Interface
+    name: Interface
+    href: Fantasy.PacketParser.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+  - name: .
+  - uid: Fantasy.PacketParser.Interface
+    name: Interface
+    href: Fantasy.PacketParser.Interface.html

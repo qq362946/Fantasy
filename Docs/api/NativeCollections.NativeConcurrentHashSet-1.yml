@@ -1,0 +1,1578 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeConcurrentHashSet`1
+  commentId: T:NativeCollections.NativeConcurrentHashSet`1
+  id: NativeConcurrentHashSet`1
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeConcurrentHashSet`1.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)
+  - NativeCollections.NativeConcurrentHashSet`1.Add(`0@)
+  - NativeCollections.NativeConcurrentHashSet`1.Clear
+  - NativeCollections.NativeConcurrentHashSet`1.Contains(`0@)
+  - NativeCollections.NativeConcurrentHashSet`1.Count
+  - NativeCollections.NativeConcurrentHashSet`1.Dispose
+  - NativeCollections.NativeConcurrentHashSet`1.Empty
+  - NativeCollections.NativeConcurrentHashSet`1.Equals(NativeCollections.NativeConcurrentHashSet{`0})
+  - NativeCollections.NativeConcurrentHashSet`1.Equals(System.Object)
+  - NativeCollections.NativeConcurrentHashSet`1.GetEnumerator
+  - NativeCollections.NativeConcurrentHashSet`1.GetHashCode
+  - NativeCollections.NativeConcurrentHashSet`1.IsCreated
+  - NativeCollections.NativeConcurrentHashSet`1.IsEmpty
+  - NativeCollections.NativeConcurrentHashSet`1.Remove(`0@)
+  - NativeCollections.NativeConcurrentHashSet`1.ToString
+  - NativeCollections.NativeConcurrentHashSet`1.TryGetValue(`0@,`0@)
+  - NativeCollections.NativeConcurrentHashSet`1.op_Equality(NativeCollections.NativeConcurrentHashSet{`0},NativeCollections.NativeConcurrentHashSet{`0})
+  - NativeCollections.NativeConcurrentHashSet`1.op_Inequality(NativeCollections.NativeConcurrentHashSet{`0},NativeCollections.NativeConcurrentHashSet{`0})
+  langs:
+  - csharp
+  - vb
+  name: NativeConcurrentHashSet<T>
+  nameWithType: NativeConcurrentHashSet<T>
+  fullName: NativeCollections.NativeConcurrentHashSet<T>
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeConcurrentHashSet
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 28
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: >-
+    Native concurrentHashSet
+
+    (Slower than ConcurrentHashSet)
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeConcurrentHashSet<T> : IDisposable, IEquatable<NativeConcurrentHashSet<T>> where T : unmanaged, IEquatable<T>
+    typeParameters:
+    - id: T
+      description: Type
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeConcurrentHashSet(Of T As {Structure, IEquatable(Of T)}) Implements IDisposable, IEquatable(Of NativeConcurrentHashSet(Of T))
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeConcurrentHashSet`1}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeConcurrentHashSet`1.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+  nameWithType.vb: NativeConcurrentHashSet(Of T)
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T)
+  name.vb: NativeConcurrentHashSet(Of T)
+- uid: NativeCollections.NativeConcurrentHashSet`1.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)
+  id: '#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)'
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: NativeConcurrentHashSet(int, int, int, int, bool)
+  nameWithType: NativeConcurrentHashSet<T>.NativeConcurrentHashSet(int, int, int, int, bool)
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.NativeConcurrentHashSet(int, int, int, int, bool)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 76
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeConcurrentHashSet(int size, int maxFreeSlabs, int concurrencyLevel, int capacity, bool growLockArray)
+    parameters:
+    - id: size
+      type: System.Int32
+      description: Size
+    - id: maxFreeSlabs
+      type: System.Int32
+      description: Max free slabs
+    - id: concurrencyLevel
+      type: System.Int32
+      description: Concurrency level
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    - id: growLockArray
+      type: System.Boolean
+      description: Grow lock array
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(size As Integer, maxFreeSlabs As Integer, concurrencyLevel As Integer, capacity As Integer, growLockArray As Boolean)
+  overload: NativeCollections.NativeConcurrentHashSet`1.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentHashSet(Of T).New(Integer, Integer, Integer, Integer, Boolean)
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).New(Integer, Integer, Integer, Integer, Boolean)
+  name.vb: New(Integer, Integer, Integer, Integer, Boolean)
+- uid: NativeCollections.NativeConcurrentHashSet`1.IsCreated
+  commentId: P:NativeCollections.NativeConcurrentHashSet`1.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeConcurrentHashSet<T>.IsCreated
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 102
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeConcurrentHashSet`1.IsCreated*
+  nameWithType.vb: NativeConcurrentHashSet(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).IsCreated
+- uid: NativeCollections.NativeConcurrentHashSet`1.IsEmpty
+  commentId: P:NativeCollections.NativeConcurrentHashSet`1.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativeConcurrentHashSet<T>.IsEmpty
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 107
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativeConcurrentHashSet`1.IsEmpty*
+  nameWithType.vb: NativeConcurrentHashSet(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).IsEmpty
+- uid: NativeCollections.NativeConcurrentHashSet`1.Count
+  commentId: P:NativeCollections.NativeConcurrentHashSet`1.Count
+  id: Count
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: NativeConcurrentHashSet<T>.Count
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 130
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Count
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: NativeCollections.NativeConcurrentHashSet`1.Count*
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Count
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Count
+- uid: NativeCollections.NativeConcurrentHashSet`1.Equals(NativeCollections.NativeConcurrentHashSet{`0})
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.Equals(NativeCollections.NativeConcurrentHashSet{`0})
+  id: Equals(NativeCollections.NativeConcurrentHashSet{`0})
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeConcurrentHashSet<T>)
+  nameWithType: NativeConcurrentHashSet<T>.Equals(NativeConcurrentHashSet<T>)
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Equals(NativeCollections.NativeConcurrentHashSet<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 153
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeConcurrentHashSet<T> other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeConcurrentHashSet`1
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeConcurrentHashSet(Of T)) As Boolean
+  overload: NativeCollections.NativeConcurrentHashSet`1.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeConcurrentHashSet`1}.Equals(NativeCollections.NativeConcurrentHashSet{{T}})
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Equals(NativeConcurrentHashSet(Of T))
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Equals(NativeCollections.NativeConcurrentHashSet(Of T))
+  name.vb: Equals(NativeConcurrentHashSet(Of T))
+- uid: NativeCollections.NativeConcurrentHashSet`1.Equals(System.Object)
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeConcurrentHashSet<T>.Equals(object?)
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 160
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeConcurrentHashSet`1.Equals*
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Equals(Object)
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeConcurrentHashSet`1.GetHashCode
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeConcurrentHashSet<T>.GetHashCode()
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 166
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeConcurrentHashSet`1.GetHashCode*
+  nameWithType.vb: NativeConcurrentHashSet(Of T).GetHashCode()
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).GetHashCode()
+- uid: NativeCollections.NativeConcurrentHashSet`1.ToString
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.ToString
+  id: ToString
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeConcurrentHashSet<T>.ToString()
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 172
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeConcurrentHashSet`1.ToString*
+  nameWithType.vb: NativeConcurrentHashSet(Of T).ToString()
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).ToString()
+- uid: NativeCollections.NativeConcurrentHashSet`1.op_Equality(NativeCollections.NativeConcurrentHashSet{`0},NativeCollections.NativeConcurrentHashSet{`0})
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.op_Equality(NativeCollections.NativeConcurrentHashSet{`0},NativeCollections.NativeConcurrentHashSet{`0})
+  id: op_Equality(NativeCollections.NativeConcurrentHashSet{`0},NativeCollections.NativeConcurrentHashSet{`0})
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeConcurrentHashSet<T>, NativeConcurrentHashSet<T>)
+  nameWithType: NativeConcurrentHashSet<T>.operator ==(NativeConcurrentHashSet<T>, NativeConcurrentHashSet<T>)
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.operator ==(NativeCollections.NativeConcurrentHashSet<T>, NativeCollections.NativeConcurrentHashSet<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 180
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeConcurrentHashSet<T> left, NativeConcurrentHashSet<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeConcurrentHashSet`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeConcurrentHashSet`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeConcurrentHashSet(Of T), right As NativeConcurrentHashSet(Of T)) As Boolean
+  overload: NativeCollections.NativeConcurrentHashSet`1.op_Equality*
+  nameWithType.vb: NativeConcurrentHashSet(Of T).=(NativeConcurrentHashSet(Of T), NativeConcurrentHashSet(Of T))
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).=(NativeCollections.NativeConcurrentHashSet(Of T), NativeCollections.NativeConcurrentHashSet(Of T))
+  name.vb: =(NativeConcurrentHashSet(Of T), NativeConcurrentHashSet(Of T))
+- uid: NativeCollections.NativeConcurrentHashSet`1.op_Inequality(NativeCollections.NativeConcurrentHashSet{`0},NativeCollections.NativeConcurrentHashSet{`0})
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.op_Inequality(NativeCollections.NativeConcurrentHashSet{`0},NativeCollections.NativeConcurrentHashSet{`0})
+  id: op_Inequality(NativeCollections.NativeConcurrentHashSet{`0},NativeCollections.NativeConcurrentHashSet{`0})
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeConcurrentHashSet<T>, NativeConcurrentHashSet<T>)
+  nameWithType: NativeConcurrentHashSet<T>.operator !=(NativeConcurrentHashSet<T>, NativeConcurrentHashSet<T>)
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.operator !=(NativeCollections.NativeConcurrentHashSet<T>, NativeCollections.NativeConcurrentHashSet<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 188
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeConcurrentHashSet<T> left, NativeConcurrentHashSet<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeConcurrentHashSet`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeConcurrentHashSet`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeConcurrentHashSet(Of T), right As NativeConcurrentHashSet(Of T)) As Boolean
+  overload: NativeCollections.NativeConcurrentHashSet`1.op_Inequality*
+  nameWithType.vb: NativeConcurrentHashSet(Of T).<>(NativeConcurrentHashSet(Of T), NativeConcurrentHashSet(Of T))
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).<>(NativeCollections.NativeConcurrentHashSet(Of T), NativeCollections.NativeConcurrentHashSet(Of T))
+  name.vb: <>(NativeConcurrentHashSet(Of T), NativeConcurrentHashSet(Of T))
+- uid: NativeCollections.NativeConcurrentHashSet`1.Dispose
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeConcurrentHashSet<T>.Dispose()
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 193
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeConcurrentHashSet`1.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Dispose()
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Dispose()
+- uid: NativeCollections.NativeConcurrentHashSet`1.Clear
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.Clear
+  id: Clear
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: NativeConcurrentHashSet<T>.Clear()
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Clear()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clear
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 207
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Clear
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Clear()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Clear()
+  overload: NativeCollections.NativeConcurrentHashSet`1.Clear*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Clear()
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Clear()
+- uid: NativeCollections.NativeConcurrentHashSet`1.Add(`0@)
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.Add(`0@)
+  id: Add(`0@)
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Add(in T)
+  nameWithType: NativeConcurrentHashSet<T>.Add(in T)
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Add(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Add
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 253
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Add
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Add(in T key)
+    parameters:
+    - id: key
+      type: '{T}'
+      description: Key
+    return:
+      type: System.Boolean
+      description: Added
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Add(key As T) As Boolean
+  overload: NativeCollections.NativeConcurrentHashSet`1.Add*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Add(T)
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Add(T)
+  name.vb: Add(T)
+- uid: NativeCollections.NativeConcurrentHashSet`1.Remove(`0@)
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.Remove(`0@)
+  id: Remove(`0@)
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Remove(in T)
+  nameWithType: NativeConcurrentHashSet<T>.Remove(in T)
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Remove(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 261
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Remove
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Remove(in T key)
+    parameters:
+    - id: key
+      type: '{T}'
+      description: Key
+    return:
+      type: System.Boolean
+      description: Removed
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Remove(key As T) As Boolean
+  overload: NativeCollections.NativeConcurrentHashSet`1.Remove*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Remove(T)
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Remove(T)
+  name.vb: Remove(T)
+- uid: NativeCollections.NativeConcurrentHashSet`1.Contains(`0@)
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.Contains(`0@)
+  id: Contains(`0@)
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Contains(in T)
+  nameWithType: NativeConcurrentHashSet<T>.Contains(in T)
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Contains(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Contains
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 322
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Contains key
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Contains(in T key)
+    parameters:
+    - id: key
+      type: '{T}'
+      description: Key
+    return:
+      type: System.Boolean
+      description: Contains key
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Contains(key As T) As Boolean
+  overload: NativeCollections.NativeConcurrentHashSet`1.Contains*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Contains(T)
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Contains(T)
+  name.vb: Contains(T)
+- uid: NativeCollections.NativeConcurrentHashSet`1.TryGetValue(`0@,`0@)
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.TryGetValue(`0@,`0@)
+  id: TryGetValue(`0@,`0@)
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: TryGetValue(in T, out T)
+  nameWithType: NativeConcurrentHashSet<T>.TryGetValue(in T, out T)
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.TryGetValue(in T, out T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryGetValue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 342
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try to get the actual value
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryGetValue(in T equalValue, out T actualValue)
+    parameters:
+    - id: equalValue
+      type: '{T}'
+      description: Equal value
+    - id: actualValue
+      type: '{T}'
+      description: Actual value
+    return:
+      type: System.Boolean
+      description: Got
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryGetValue(equalValue As T, actualValue As T) As Boolean
+  overload: NativeCollections.NativeConcurrentHashSet`1.TryGetValue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentHashSet(Of T).TryGetValue(T, T)
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).TryGetValue(T, T)
+  name.vb: TryGetValue(T, T)
+- uid: NativeCollections.NativeConcurrentHashSet`1.Empty
+  commentId: P:NativeCollections.NativeConcurrentHashSet`1.Empty
+  id: Empty
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeConcurrentHashSet<T>.Empty
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 717
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeConcurrentHashSet<T> Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeConcurrentHashSet`1
+    content.vb: Public Shared ReadOnly Property Empty As NativeConcurrentHashSet(Of T)
+  overload: NativeCollections.NativeConcurrentHashSet`1.Empty*
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Empty
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Empty
+- uid: NativeCollections.NativeConcurrentHashSet`1.GetEnumerator
+  commentId: M:NativeCollections.NativeConcurrentHashSet`1.GetEnumerator
+  id: GetEnumerator
+  parent: NativeCollections.NativeConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: NativeConcurrentHashSet<T>.GetEnumerator()
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetEnumerator
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentHashSet.cs
+    startLine: 723
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get enumerator
+  example: []
+  syntax:
+    content: public NativeConcurrentHashSet<T>.Enumerator GetEnumerator()
+    return:
+      type: NativeCollections.NativeConcurrentHashSet`1.Enumerator
+      description: Enumerator
+    content.vb: Public Function GetEnumerator() As NativeConcurrentHashSet(Of T).Enumerator
+  overload: NativeCollections.NativeConcurrentHashSet`1.GetEnumerator*
+  nameWithType.vb: NativeConcurrentHashSet(Of T).GetEnumerator()
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).GetEnumerator()
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeConcurrentHashSet`1}
+  commentId: T:System.IEquatable{NativeCollections.NativeConcurrentHashSet`1}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeConcurrentHashSet<T>>
+  nameWithType: IEquatable<NativeConcurrentHashSet<T>>
+  fullName: System.IEquatable<NativeCollections.NativeConcurrentHashSet<T>>
+  nameWithType.vb: IEquatable(Of NativeConcurrentHashSet(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeConcurrentHashSet(Of T))
+  name.vb: IEquatable(Of NativeConcurrentHashSet(Of T))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeConcurrentHashSet`1.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeConcurrentHashSet<T>>(NativeConcurrentHashSet<T>)
+  nameWithType: JsonHelper.ToJson<NativeConcurrentHashSet<T>>(NativeConcurrentHashSet<T>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeConcurrentHashSet<T>>(NativeCollections.NativeConcurrentHashSet<T>)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeConcurrentHashSet(Of T))(NativeConcurrentHashSet(Of T))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeConcurrentHashSet(Of T))(NativeCollections.NativeConcurrentHashSet(Of T))
+  name.vb: ToJson(Of NativeConcurrentHashSet(Of T))(NativeConcurrentHashSet(Of T))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeConcurrentHashSet{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeConcurrentHashSet{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeConcurrentHashSet`1.#ctor*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.#ctor
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1__ctor_System_Int32_System_Int32_System_Int32_System_Int32_System_Boolean_
+  name: NativeConcurrentHashSet
+  nameWithType: NativeConcurrentHashSet<T>.NativeConcurrentHashSet
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.NativeConcurrentHashSet
+  nameWithType.vb: NativeConcurrentHashSet(Of T).New
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeConcurrentHashSet`1.IsCreated*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.IsCreated
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_IsCreated
+  name: IsCreated
+  nameWithType: NativeConcurrentHashSet<T>.IsCreated
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.IsCreated
+  nameWithType.vb: NativeConcurrentHashSet(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).IsCreated
+- uid: NativeCollections.NativeConcurrentHashSet`1.IsEmpty*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.IsEmpty
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_IsEmpty
+  name: IsEmpty
+  nameWithType: NativeConcurrentHashSet<T>.IsEmpty
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.IsEmpty
+  nameWithType.vb: NativeConcurrentHashSet(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).IsEmpty
+- uid: NativeCollections.NativeConcurrentHashSet`1.Count*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.Count
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_Count
+  name: Count
+  nameWithType: NativeConcurrentHashSet<T>.Count
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Count
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Count
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Count
+- uid: NativeCollections.NativeConcurrentHashSet`1.Equals*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.Equals
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_Equals_NativeCollections_NativeConcurrentHashSet__0__
+  name: Equals
+  nameWithType: NativeConcurrentHashSet<T>.Equals
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Equals
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Equals
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Equals
+- uid: System.IEquatable{NativeCollections.NativeConcurrentHashSet`1}.Equals(NativeCollections.NativeConcurrentHashSet{{T}})
+  commentId: M:System.IEquatable{NativeCollections.NativeConcurrentHashSet`1}.Equals(NativeCollections.NativeConcurrentHashSet{`0})
+  parent: System.IEquatable{NativeCollections.NativeConcurrentHashSet`1}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeConcurrentHashSet<T>)
+  nameWithType: IEquatable<NativeConcurrentHashSet<T>>.Equals(NativeConcurrentHashSet<T>)
+  fullName: System.IEquatable<NativeCollections.NativeConcurrentHashSet<T>>.Equals(NativeCollections.NativeConcurrentHashSet<T>)
+  nameWithType.vb: IEquatable(Of NativeConcurrentHashSet(Of T)).Equals(NativeConcurrentHashSet(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeConcurrentHashSet(Of T)).Equals(NativeCollections.NativeConcurrentHashSet(Of T))
+  name.vb: Equals(NativeConcurrentHashSet(Of T))
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeConcurrentHashSet`1}.Equals(NativeCollections.NativeConcurrentHashSet{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeConcurrentHashSet`1}.Equals(NativeCollections.NativeConcurrentHashSet{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: NativeCollections.NativeConcurrentHashSet`1
+  commentId: T:NativeCollections.NativeConcurrentHashSet`1
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentHashSet-1.html
+  name: NativeConcurrentHashSet<T>
+  nameWithType: NativeConcurrentHashSet<T>
+  fullName: NativeCollections.NativeConcurrentHashSet<T>
+  nameWithType.vb: NativeConcurrentHashSet(Of T)
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T)
+  name.vb: NativeConcurrentHashSet(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentHashSet`1.GetHashCode*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.GetHashCode
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeConcurrentHashSet<T>.GetHashCode
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.GetHashCode
+  nameWithType.vb: NativeConcurrentHashSet(Of T).GetHashCode
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentHashSet`1.ToString*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.ToString
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_ToString
+  name: ToString
+  nameWithType: NativeConcurrentHashSet<T>.ToString
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.ToString
+  nameWithType.vb: NativeConcurrentHashSet(Of T).ToString
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeConcurrentHashSet`1.op_Equality*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.op_Equality
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_op_Equality_NativeCollections_NativeConcurrentHashSet__0__NativeCollections_NativeConcurrentHashSet__0__
+  name: operator ==
+  nameWithType: NativeConcurrentHashSet<T>.operator ==
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.operator ==
+  nameWithType.vb: NativeConcurrentHashSet(Of T).=
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentHashSet`1.op_Equality*
+    name: ==
+    href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_op_Equality_NativeCollections_NativeConcurrentHashSet__0__NativeCollections_NativeConcurrentHashSet__0__
+- uid: NativeCollections.NativeConcurrentHashSet`1.op_Inequality*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.op_Inequality
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_op_Inequality_NativeCollections_NativeConcurrentHashSet__0__NativeCollections_NativeConcurrentHashSet__0__
+  name: operator !=
+  nameWithType: NativeConcurrentHashSet<T>.operator !=
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.operator !=
+  nameWithType.vb: NativeConcurrentHashSet(Of T).<>
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentHashSet`1.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_op_Inequality_NativeCollections_NativeConcurrentHashSet__0__NativeCollections_NativeConcurrentHashSet__0__
+- uid: NativeCollections.NativeConcurrentHashSet`1.Dispose*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.Dispose
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_Dispose
+  name: Dispose
+  nameWithType: NativeConcurrentHashSet<T>.Dispose
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Dispose
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Dispose
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentHashSet`1.Clear*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.Clear
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_Clear
+  name: Clear
+  nameWithType: NativeConcurrentHashSet<T>.Clear
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Clear
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Clear
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Clear
+- uid: NativeCollections.NativeConcurrentHashSet`1.Add*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.Add
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_Add__0__
+  name: Add
+  nameWithType: NativeConcurrentHashSet<T>.Add
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Add
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Add
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Add
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: NativeCollections.NativeConcurrentHashSet`1.Remove*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.Remove
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_Remove__0__
+  name: Remove
+  nameWithType: NativeConcurrentHashSet<T>.Remove
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Remove
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Remove
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Remove
+- uid: NativeCollections.NativeConcurrentHashSet`1.Contains*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.Contains
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_Contains__0__
+  name: Contains
+  nameWithType: NativeConcurrentHashSet<T>.Contains
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Contains
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Contains
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Contains
+- uid: NativeCollections.NativeConcurrentHashSet`1.TryGetValue*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.TryGetValue
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_TryGetValue__0___0__
+  name: TryGetValue
+  nameWithType: NativeConcurrentHashSet<T>.TryGetValue
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.TryGetValue
+  nameWithType.vb: NativeConcurrentHashSet(Of T).TryGetValue
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).TryGetValue
+- uid: NativeCollections.NativeConcurrentHashSet`1.Empty*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.Empty
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_Empty
+  name: Empty
+  nameWithType: NativeConcurrentHashSet<T>.Empty
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Empty
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Empty
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Empty
+- uid: NativeCollections.NativeConcurrentHashSet`1.GetEnumerator*
+  commentId: Overload:NativeCollections.NativeConcurrentHashSet`1.GetEnumerator
+  href: NativeCollections.NativeConcurrentHashSet-1.html#NativeCollections_NativeConcurrentHashSet_1_GetEnumerator
+  name: GetEnumerator
+  nameWithType: NativeConcurrentHashSet<T>.GetEnumerator
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.GetEnumerator
+  nameWithType.vb: NativeConcurrentHashSet(Of T).GetEnumerator
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).GetEnumerator
+- uid: NativeCollections.NativeConcurrentHashSet`1.Enumerator
+  commentId: T:NativeCollections.NativeConcurrentHashSet`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentHashSet-1.html
+  name: NativeConcurrentHashSet<T>.Enumerator
+  nameWithType: NativeConcurrentHashSet<T>.Enumerator
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Enumerator
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Enumerator
+  name.vb: NativeConcurrentHashSet(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeConcurrentHashSet`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentHashSet-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeConcurrentHashSet`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentHashSet-1.Enumerator.html

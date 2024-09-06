@@ -1,0 +1,883 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Pool.PoolWithDisposable`1
+  commentId: T:Fantasy.Pool.PoolWithDisposable`1
+  id: PoolWithDisposable`1
+  parent: Fantasy.Pool
+  children:
+  - Fantasy.Pool.PoolWithDisposable`1.#ctor(System.Int32)
+  - Fantasy.Pool.PoolWithDisposable`1.Count
+  - Fantasy.Pool.PoolWithDisposable`1.Dispose
+  - Fantasy.Pool.PoolWithDisposable`1.Rent
+  - Fantasy.Pool.PoolWithDisposable`1.Rent(System.Func{`0})
+  - Fantasy.Pool.PoolWithDisposable`1.Return(`0)
+  - Fantasy.Pool.PoolWithDisposable`1.Return(`0,System.Action{`0})
+  langs:
+  - csharp
+  - vb
+  name: PoolWithDisposable<T>
+  nameWithType: PoolWithDisposable<T>
+  fullName: Fantasy.Pool.PoolWithDisposable<T>
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: PoolWithDisposable
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+    startLine: 10
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Pool
+  summary: 静态通用对象池，用于存储实现了 IDisposable 接口的对象。
+  example: []
+  syntax:
+    content: 'public abstract class PoolWithDisposable<T> : IDisposable where T : IPool, IDisposable, new()'
+    typeParameters:
+    - id: T
+      description: 要存储在对象池中的对象类型，必须实现 IDisposable 接口。
+    content.vb: Public MustInherit Class PoolWithDisposable(Of T As {IPool, IDisposable, New}) Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Pool.PoolWithDisposable`1.Fantasy.Helper.JsonHelper.ToJson``1
+  nameWithType.vb: PoolWithDisposable(Of T)
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T)
+  name.vb: PoolWithDisposable(Of T)
+- uid: Fantasy.Pool.PoolWithDisposable`1.Count
+  commentId: P:Fantasy.Pool.PoolWithDisposable`1.Count
+  id: Count
+  parent: Fantasy.Pool.PoolWithDisposable`1
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: PoolWithDisposable<T>.Count
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+    startLine: 18
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Pool
+  summary: 池子里可用的数量
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: Fantasy.Pool.PoolWithDisposable`1.Count*
+  nameWithType.vb: PoolWithDisposable(Of T).Count
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).Count
+- uid: Fantasy.Pool.PoolWithDisposable`1.#ctor(System.Int32)
+  commentId: M:Fantasy.Pool.PoolWithDisposable`1.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: Fantasy.Pool.PoolWithDisposable`1
+  langs:
+  - csharp
+  - vb
+  name: PoolWithDisposable(int)
+  nameWithType: PoolWithDisposable<T>.PoolWithDisposable(int)
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.PoolWithDisposable(int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+    startLine: 24
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Pool
+  summary: 构造函数
+  example: []
+  syntax:
+    content: protected PoolWithDisposable(int maxCapacity)
+    parameters:
+    - id: maxCapacity
+      type: System.Int32
+      description: 初始的容量
+    content.vb: Protected Sub New(maxCapacity As Integer)
+  overload: Fantasy.Pool.PoolWithDisposable`1.#ctor*
+  nameWithType.vb: PoolWithDisposable(Of T).New(Integer)
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).New(Integer)
+  name.vb: New(Integer)
+- uid: Fantasy.Pool.PoolWithDisposable`1.Rent
+  commentId: M:Fantasy.Pool.PoolWithDisposable`1.Rent
+  id: Rent
+  parent: Fantasy.Pool.PoolWithDisposable`1
+  langs:
+  - csharp
+  - vb
+  name: Rent()
+  nameWithType: PoolWithDisposable<T>.Rent()
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.Rent()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Rent
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+    startLine: 33
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Pool
+  summary: 租借
+  example: []
+  syntax:
+    content: public T Rent()
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: Public Function Rent() As T
+  overload: Fantasy.Pool.PoolWithDisposable`1.Rent*
+  nameWithType.vb: PoolWithDisposable(Of T).Rent()
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).Rent()
+- uid: Fantasy.Pool.PoolWithDisposable`1.Rent(System.Func{`0})
+  commentId: M:Fantasy.Pool.PoolWithDisposable`1.Rent(System.Func{`0})
+  id: Rent(System.Func{`0})
+  parent: Fantasy.Pool.PoolWithDisposable`1
+  langs:
+  - csharp
+  - vb
+  name: Rent(Func<T>)
+  nameWithType: PoolWithDisposable<T>.Rent(Func<T>)
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.Rent(System.Func<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Rent
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+    startLine: 51
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Pool
+  summary: 租借
+  example: []
+  syntax:
+    content: public T Rent(Func<T> generator)
+    parameters:
+    - id: generator
+      type: System.Func{{T}}
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: Public Function Rent(generator As Func(Of T)) As T
+  overload: Fantasy.Pool.PoolWithDisposable`1.Rent*
+  nameWithType.vb: PoolWithDisposable(Of T).Rent(Func(Of T))
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).Rent(System.Func(Of T))
+  name.vb: Rent(Func(Of T))
+- uid: Fantasy.Pool.PoolWithDisposable`1.Return(`0)
+  commentId: M:Fantasy.Pool.PoolWithDisposable`1.Return(`0)
+  id: Return(`0)
+  parent: Fantasy.Pool.PoolWithDisposable`1
+  langs:
+  - csharp
+  - vb
+  name: Return(T)
+  nameWithType: PoolWithDisposable<T>.Return(T)
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.Return(T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Return
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+    startLine: 68
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Pool
+  summary: 返还
+  example: []
+  syntax:
+    content: public void Return(T t)
+    parameters:
+    - id: t
+      type: '{T}'
+      description: ''
+    content.vb: Public Sub [Return](t As T)
+  overload: Fantasy.Pool.PoolWithDisposable`1.Return*
+  nameWithType.vb: PoolWithDisposable(Of T).Return(T)
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).Return(T)
+- uid: Fantasy.Pool.PoolWithDisposable`1.Return(`0,System.Action{`0})
+  commentId: M:Fantasy.Pool.PoolWithDisposable`1.Return(`0,System.Action{`0})
+  id: Return(`0,System.Action{`0})
+  parent: Fantasy.Pool.PoolWithDisposable`1
+  langs:
+  - csharp
+  - vb
+  name: Return(T, Action<T>)
+  nameWithType: PoolWithDisposable<T>.Return(T, Action<T>)
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.Return(T, System.Action<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Return
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+    startLine: 96
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Pool
+  summary: 返还
+  example: []
+  syntax:
+    content: public void Return(T t, Action<T> reset)
+    parameters:
+    - id: t
+      type: '{T}'
+      description: ''
+    - id: reset
+      type: System.Action{{T}}
+      description: ''
+    content.vb: Public Sub [Return](t As T, reset As Action(Of T))
+  overload: Fantasy.Pool.PoolWithDisposable`1.Return*
+  nameWithType.vb: PoolWithDisposable(Of T).Return(T, Action(Of T))
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).Return(T, System.Action(Of T))
+  name.vb: Return(T, Action(Of T))
+- uid: Fantasy.Pool.PoolWithDisposable`1.Dispose
+  commentId: M:Fantasy.Pool.PoolWithDisposable`1.Dispose
+  id: Dispose
+  parent: Fantasy.Pool.PoolWithDisposable`1
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: PoolWithDisposable<T>.Dispose()
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Normal/PoolWithDisposable.cs
+    startLine: 124
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Pool
+  summary: 销毁方法
+  example: []
+  syntax:
+    content: public virtual void Dispose()
+    content.vb: Public Overridable Sub Dispose()
+  overload: Fantasy.Pool.PoolWithDisposable`1.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  nameWithType.vb: PoolWithDisposable(Of T).Dispose()
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).Dispose()
+references:
+- uid: Fantasy.Pool
+  commentId: N:Fantasy.Pool
+  href: Fantasy.html
+  name: Fantasy.Pool
+  nameWithType: Fantasy.Pool
+  fullName: Fantasy.Pool
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Pool
+    name: Pool
+    href: Fantasy.Pool.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Pool
+    name: Pool
+    href: Fantasy.Pool.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Pool.PoolWithDisposable`1.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<PoolWithDisposable<T>>(PoolWithDisposable<T>)
+  nameWithType: JsonHelper.ToJson<PoolWithDisposable<T>>(PoolWithDisposable<T>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Pool.PoolWithDisposable<T>>(Fantasy.Pool.PoolWithDisposable<T>)
+  nameWithType.vb: JsonHelper.ToJson(Of PoolWithDisposable(Of T))(PoolWithDisposable(Of T))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Pool.PoolWithDisposable(Of T))(Fantasy.Pool.PoolWithDisposable(Of T))
+  name.vb: ToJson(Of PoolWithDisposable(Of T))(PoolWithDisposable(Of T))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Pool.PoolWithDisposable{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Pool.PoolWithDisposable`1
+    name: PoolWithDisposable
+    href: Fantasy.Pool.PoolWithDisposable-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Pool.PoolWithDisposable`1
+    name: PoolWithDisposable
+    href: Fantasy.Pool.PoolWithDisposable-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Pool.PoolWithDisposable{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Pool.PoolWithDisposable`1
+    name: PoolWithDisposable
+    href: Fantasy.Pool.PoolWithDisposable-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: (
+  - uid: Fantasy.Pool.PoolWithDisposable`1
+    name: PoolWithDisposable
+    href: Fantasy.Pool.PoolWithDisposable-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Pool.PoolWithDisposable`1.Count*
+  commentId: Overload:Fantasy.Pool.PoolWithDisposable`1.Count
+  href: Fantasy.Pool.PoolWithDisposable-1.html#Fantasy_Pool_PoolWithDisposable_1_Count
+  name: Count
+  nameWithType: PoolWithDisposable<T>.Count
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.Count
+  nameWithType.vb: PoolWithDisposable(Of T).Count
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).Count
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Fantasy.Pool.PoolWithDisposable`1.#ctor*
+  commentId: Overload:Fantasy.Pool.PoolWithDisposable`1.#ctor
+  href: Fantasy.Pool.PoolWithDisposable-1.html#Fantasy_Pool_PoolWithDisposable_1__ctor_System_Int32_
+  name: PoolWithDisposable
+  nameWithType: PoolWithDisposable<T>.PoolWithDisposable
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.PoolWithDisposable
+  nameWithType.vb: PoolWithDisposable(Of T).New
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).New
+  name.vb: New
+- uid: Fantasy.Pool.PoolWithDisposable`1.Rent*
+  commentId: Overload:Fantasy.Pool.PoolWithDisposable`1.Rent
+  href: Fantasy.Pool.PoolWithDisposable-1.html#Fantasy_Pool_PoolWithDisposable_1_Rent
+  name: Rent
+  nameWithType: PoolWithDisposable<T>.Rent
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.Rent
+  nameWithType.vb: PoolWithDisposable(Of T).Rent
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).Rent
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.Func{{T}}
+  commentId: T:System.Func{`0}
+  parent: System
+  definition: System.Func`1
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
+  name: Func<T>
+  nameWithType: Func<T>
+  fullName: System.Func<T>
+  nameWithType.vb: Func(Of T)
+  fullName.vb: System.Func(Of T)
+  name.vb: Func(Of T)
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Func`1
+  commentId: T:System.Func`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
+  name: Func<TResult>
+  nameWithType: Func<TResult>
+  fullName: System.Func<TResult>
+  nameWithType.vb: Func(Of TResult)
+  fullName.vb: System.Func(Of TResult)
+  name.vb: Func(Of TResult)
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Fantasy.Pool.PoolWithDisposable`1.Return*
+  commentId: Overload:Fantasy.Pool.PoolWithDisposable`1.Return
+  href: Fantasy.Pool.PoolWithDisposable-1.html#Fantasy_Pool_PoolWithDisposable_1_Return__0_
+  name: Return
+  nameWithType: PoolWithDisposable<T>.Return
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.Return
+  nameWithType.vb: PoolWithDisposable(Of T).Return
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).Return
+- uid: System.Action{{T}}
+  commentId: T:System.Action{`0}
+  parent: System
+  definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Pool.PoolWithDisposable`1.Dispose*
+  commentId: Overload:Fantasy.Pool.PoolWithDisposable`1.Dispose
+  href: Fantasy.Pool.PoolWithDisposable-1.html#Fantasy_Pool_PoolWithDisposable_1_Dispose
+  name: Dispose
+  nameWithType: PoolWithDisposable<T>.Dispose
+  fullName: Fantasy.Pool.PoolWithDisposable<T>.Dispose
+  nameWithType.vb: PoolWithDisposable(Of T).Dispose
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T).Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )

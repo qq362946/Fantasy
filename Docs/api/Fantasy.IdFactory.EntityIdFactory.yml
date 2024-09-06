@@ -1,0 +1,648 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.IdFactory.EntityIdFactory
+  commentId: T:Fantasy.IdFactory.EntityIdFactory
+  id: EntityIdFactory
+  parent: Fantasy.IdFactory
+  children:
+  - Fantasy.IdFactory.EntityIdFactory.#ctor(System.UInt32,System.Byte)
+  - Fantasy.IdFactory.EntityIdFactory.Create
+  - Fantasy.IdFactory.EntityIdFactory.GetSceneId(System.Int64@)
+  - Fantasy.IdFactory.EntityIdFactory.GetTime(System.Int64@)
+  - Fantasy.IdFactory.EntityIdFactory.GetWorldId(System.Int64@)
+  langs:
+  - csharp
+  - vb
+  name: EntityIdFactory
+  nameWithType: EntityIdFactory
+  fullName: Fantasy.IdFactory.EntityIdFactory
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: EntityIdFactory
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 72
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public sealed class EntityIdFactory
+    content.vb: Public NotInheritable Class EntityIdFactory
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.IdFactory.EntityIdFactory.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.IdFactory.EntityIdFactory.#ctor(System.UInt32,System.Byte)
+  commentId: M:Fantasy.IdFactory.EntityIdFactory.#ctor(System.UInt32,System.Byte)
+  id: '#ctor(System.UInt32,System.Byte)'
+  parent: Fantasy.IdFactory.EntityIdFactory
+  langs:
+  - csharp
+  - vb
+  name: EntityIdFactory(uint, byte)
+  nameWithType: EntityIdFactory.EntityIdFactory(uint, byte)
+  fullName: Fantasy.IdFactory.EntityIdFactory.EntityIdFactory(uint, byte)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 84
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public EntityIdFactory(uint sceneId, byte worldId)
+    parameters:
+    - id: sceneId
+      type: System.UInt32
+    - id: worldId
+      type: System.Byte
+    content.vb: Public Sub New(sceneId As UInteger, worldId As Byte)
+  overload: Fantasy.IdFactory.EntityIdFactory.#ctor*
+  nameWithType.vb: EntityIdFactory.New(UInteger, Byte)
+  fullName.vb: Fantasy.IdFactory.EntityIdFactory.New(UInteger, Byte)
+  name.vb: New(UInteger, Byte)
+- uid: Fantasy.IdFactory.EntityIdFactory.Create
+  commentId: P:Fantasy.IdFactory.EntityIdFactory.Create
+  id: Create
+  parent: Fantasy.IdFactory.EntityIdFactory
+  langs:
+  - csharp
+  - vb
+  name: Create
+  nameWithType: EntityIdFactory.Create
+  fullName: Fantasy.IdFactory.EntityIdFactory.Create
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Create
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 105
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public long Create { get; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public ReadOnly Property Create As Long
+  overload: Fantasy.IdFactory.EntityIdFactory.Create*
+- uid: Fantasy.IdFactory.EntityIdFactory.GetTime(System.Int64@)
+  commentId: M:Fantasy.IdFactory.EntityIdFactory.GetTime(System.Int64@)
+  id: GetTime(System.Int64@)
+  parent: Fantasy.IdFactory.EntityIdFactory
+  langs:
+  - csharp
+  - vb
+  name: GetTime(ref long)
+  nameWithType: EntityIdFactory.GetTime(ref long)
+  fullName: Fantasy.IdFactory.EntityIdFactory.GetTime(ref long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetTime
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 126
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static uint GetTime(ref long entityId)
+    parameters:
+    - id: entityId
+      type: System.Int64
+    return:
+      type: System.UInt32
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Function GetTime(entityId As Long) As UInteger
+  overload: Fantasy.IdFactory.EntityIdFactory.GetTime*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: EntityIdFactory.GetTime(Long)
+  fullName.vb: Fantasy.IdFactory.EntityIdFactory.GetTime(Long)
+  name.vb: GetTime(Long)
+- uid: Fantasy.IdFactory.EntityIdFactory.GetSceneId(System.Int64@)
+  commentId: M:Fantasy.IdFactory.EntityIdFactory.GetSceneId(System.Int64@)
+  id: GetSceneId(System.Int64@)
+  parent: Fantasy.IdFactory.EntityIdFactory
+  langs:
+  - csharp
+  - vb
+  name: GetSceneId(ref long)
+  nameWithType: EntityIdFactory.GetSceneId(ref long)
+  fullName: Fantasy.IdFactory.EntityIdFactory.GetSceneId(ref long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetSceneId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 133
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static uint GetSceneId(ref long entityId)
+    parameters:
+    - id: entityId
+      type: System.Int64
+    return:
+      type: System.UInt32
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Function GetSceneId(entityId As Long) As UInteger
+  overload: Fantasy.IdFactory.EntityIdFactory.GetSceneId*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: EntityIdFactory.GetSceneId(Long)
+  fullName.vb: Fantasy.IdFactory.EntityIdFactory.GetSceneId(Long)
+  name.vb: GetSceneId(Long)
+- uid: Fantasy.IdFactory.EntityIdFactory.GetWorldId(System.Int64@)
+  commentId: M:Fantasy.IdFactory.EntityIdFactory.GetWorldId(System.Int64@)
+  id: GetWorldId(System.Int64@)
+  parent: Fantasy.IdFactory.EntityIdFactory
+  langs:
+  - csharp
+  - vb
+  name: GetWorldId(ref long)
+  nameWithType: EntityIdFactory.GetWorldId(ref long)
+  fullName: Fantasy.IdFactory.EntityIdFactory.GetWorldId(ref long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetWorldId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 142
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static byte GetWorldId(ref long entityId)
+    parameters:
+    - id: entityId
+      type: System.Int64
+    return:
+      type: System.Byte
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Function GetWorldId(entityId As Long) As Byte
+  overload: Fantasy.IdFactory.EntityIdFactory.GetWorldId*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: EntityIdFactory.GetWorldId(Long)
+  fullName.vb: Fantasy.IdFactory.EntityIdFactory.GetWorldId(Long)
+  name.vb: GetWorldId(Long)
+references:
+- uid: Fantasy.IdFactory
+  commentId: N:Fantasy.IdFactory
+  href: Fantasy.html
+  name: Fantasy.IdFactory
+  nameWithType: Fantasy.IdFactory
+  fullName: Fantasy.IdFactory
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.IdFactory
+    name: IdFactory
+    href: Fantasy.IdFactory.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.IdFactory
+    name: IdFactory
+    href: Fantasy.IdFactory.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.IdFactory.EntityIdFactory.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<EntityIdFactory>(EntityIdFactory)
+  nameWithType: JsonHelper.ToJson<EntityIdFactory>(EntityIdFactory)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.IdFactory.EntityIdFactory>(Fantasy.IdFactory.EntityIdFactory)
+  nameWithType.vb: JsonHelper.ToJson(Of EntityIdFactory)(EntityIdFactory)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.IdFactory.EntityIdFactory)(Fantasy.IdFactory.EntityIdFactory)
+  name.vb: ToJson(Of EntityIdFactory)(EntityIdFactory)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.IdFactory.EntityIdFactory)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.IdFactory.EntityIdFactory
+    name: EntityIdFactory
+    href: Fantasy.IdFactory.EntityIdFactory.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.IdFactory.EntityIdFactory
+    name: EntityIdFactory
+    href: Fantasy.IdFactory.EntityIdFactory.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.IdFactory.EntityIdFactory)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.IdFactory.EntityIdFactory
+    name: EntityIdFactory
+    href: Fantasy.IdFactory.EntityIdFactory.html
+  - name: )
+  - name: (
+  - uid: Fantasy.IdFactory.EntityIdFactory
+    name: EntityIdFactory
+    href: Fantasy.IdFactory.EntityIdFactory.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.IdFactory.EntityIdFactory.#ctor*
+  commentId: Overload:Fantasy.IdFactory.EntityIdFactory.#ctor
+  href: Fantasy.IdFactory.EntityIdFactory.html#Fantasy_IdFactory_EntityIdFactory__ctor_System_UInt32_System_Byte_
+  name: EntityIdFactory
+  nameWithType: EntityIdFactory.EntityIdFactory
+  fullName: Fantasy.IdFactory.EntityIdFactory.EntityIdFactory
+  nameWithType.vb: EntityIdFactory.New
+  fullName.vb: Fantasy.IdFactory.EntityIdFactory.New
+  name.vb: New
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: System.Byte
+  commentId: T:System.Byte
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte
+  nameWithType: byte
+  fullName: byte
+  nameWithType.vb: Byte
+  fullName.vb: Byte
+  name.vb: Byte
+- uid: Fantasy.IdFactory.EntityIdFactory.Create*
+  commentId: Overload:Fantasy.IdFactory.EntityIdFactory.Create
+  href: Fantasy.IdFactory.EntityIdFactory.html#Fantasy_IdFactory_EntityIdFactory_Create
+  name: Create
+  nameWithType: EntityIdFactory.Create
+  fullName: Fantasy.IdFactory.EntityIdFactory.Create
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.IdFactory.EntityIdFactory.GetTime*
+  commentId: Overload:Fantasy.IdFactory.EntityIdFactory.GetTime
+  href: Fantasy.IdFactory.EntityIdFactory.html#Fantasy_IdFactory_EntityIdFactory_GetTime_System_Int64__
+  name: GetTime
+  nameWithType: EntityIdFactory.GetTime
+  fullName: Fantasy.IdFactory.EntityIdFactory.GetTime
+- uid: Fantasy.IdFactory.EntityIdFactory.GetSceneId*
+  commentId: Overload:Fantasy.IdFactory.EntityIdFactory.GetSceneId
+  href: Fantasy.IdFactory.EntityIdFactory.html#Fantasy_IdFactory_EntityIdFactory_GetSceneId_System_Int64__
+  name: GetSceneId
+  nameWithType: EntityIdFactory.GetSceneId
+  fullName: Fantasy.IdFactory.EntityIdFactory.GetSceneId
+- uid: Fantasy.IdFactory.EntityIdFactory.GetWorldId*
+  commentId: Overload:Fantasy.IdFactory.EntityIdFactory.GetWorldId
+  href: Fantasy.IdFactory.EntityIdFactory.html#Fantasy_IdFactory_EntityIdFactory_GetWorldId_System_Int64__
+  name: GetWorldId
+  nameWithType: EntityIdFactory.GetWorldId
+  fullName: Fantasy.IdFactory.EntityIdFactory.GetWorldId

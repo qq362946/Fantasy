@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using Fantasy.Entitas.Interface;
+using Fantasy.Pool;
+using Fantasy.Serialize;
 using MemoryPack;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
@@ -16,9 +19,15 @@ using Newtonsoft.Json;
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-namespace Fantasy
+namespace Fantasy.Entitas
 {
+    /// <summary>
+    /// 用来表示一个Entity
+    /// </summary>
     public interface IEntity : IDisposable, IPool { }
+    /// <summary>
+    /// Entity的抽象类，任何Entity必须继承这个接口才可以使用
+    /// </summary>
     public abstract class Entity : IEntity
     {
         #region Members
@@ -30,30 +39,48 @@ namespace Fantasy
         [IgnoreDataMember]
         [MemoryPackIgnore]
         public bool IsPool { get; set; }
+        /// <summary>
+        /// 实体的Id
+        /// </summary>
         [BsonId]
         [BsonElement]
         [BsonIgnoreIfDefault]
         [BsonDefaultValue(0L)]
         public long Id { get; protected set; }
+        /// <summary>
+        /// 实体的RunTimeId，其他系统可以通过这个Id发送Route消息，这个Id也可以理解为RouteId
+        /// </summary>
         [BsonIgnore]
         [IgnoreDataMember]
         [MemoryPackIgnore]
         public long RunTimeId { get; protected set; }
+        /// <summary>
+        /// 当前实体是否已经被销毁
+        /// </summary>
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
         [MemoryPackIgnore]
         public bool IsDisposed => RunTimeId == 0;
+        /// <summary>
+        /// 当前实体所归属的Scene
+        /// </summary>
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
         [MemoryPackIgnore]
         public Scene Scene { get; protected set; }
+        /// <summary>
+        /// 实体的父实体
+        /// </summary>
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
         [MemoryPackIgnore]
         public Entity Parent { get; protected set; }
+        /// <summary>
+        /// 实体的真实Type
+        /// </summary>
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
@@ -66,6 +93,11 @@ namespace Fantasy
         [BsonIgnore] [IgnoreDataMember] [MemoryPackIgnore] private EntitySortedDictionary<long, Entity> _tree;
         [BsonIgnore] [IgnoreDataMember] [MemoryPackIgnore] private EntitySortedDictionary<long, Entity> _multi;
         
+        /// <summary>
+        /// 获得父Entity
+        /// </summary>
+        /// <typeparam name="T">父实体的泛型类型</typeparam>
+        /// <returns></returns>
         public T GetParent<T>() where T : Entity, new()
         {
             return Parent as T;
@@ -75,6 +107,14 @@ namespace Fantasy
 
         #region Create
         
+        /// <summary>
+        /// 创建一个实体
+        /// </summary>
+        /// <param name="scene">所属的Scene</param>
+        /// <param name="isPool">是否从对象池创建，如果选择的是，销毁的时候同样会进入对象池</param>
+        /// <param name="isRunEvent">是否执行实体事件</param>
+        /// <typeparam name="T">要创建的实体泛型类型</typeparam>
+        /// <returns></returns>
         public static T Create<T>(Scene scene, bool isPool, bool isRunEvent) where T : Entity, new()
         {
             var entity = isPool ? scene.EntityPool.Rent<T>() : new T();
@@ -94,6 +134,15 @@ namespace Fantasy
             return entity;
         }
 
+        /// <summary>
+        /// 创建一个实体
+        /// </summary>
+        /// <param name="scene">所属的Scene</param>
+        /// <param name="id">指定实体的Id</param>
+        /// <param name="isPool">是否从对象池创建，如果选择的是，销毁的时候同样会进入对象池</param>
+        /// <param name="isRunEvent">是否执行实体事件</param>
+        /// <typeparam name="T">要创建的实体泛型类型</typeparam>
+        /// <returns></returns>
         public static T Create<T>(Scene scene, long id, bool isPool, bool isRunEvent) where T : Entity, new()
         {
             var entity = isPool ? scene.EntityPool.Rent<T>() : new T();
@@ -117,6 +166,12 @@ namespace Fantasy
         
         #region AddComponent
 
+        /// <summary>
+        /// 添加一个组件到当前实体上
+        /// </summary>
+        /// <param name="isPool">是否从对象池里创建</param>
+        /// <typeparam name="T">要添加组件的泛型类型</typeparam>
+        /// <returns>返回添加到实体上组件的实例</returns>
         public T AddComponent<T>(bool isPool = true) where T : Entity, new()
         {
             var entity = Create<T>(Scene, Id, isPool, false);
@@ -126,6 +181,13 @@ namespace Fantasy
             return entity;
         }
 
+        /// <summary>
+        /// 添加一个组件到当前实体上
+        /// </summary>
+        /// <param name="id">要添加组件的Id</param>
+        /// <param name="isPool">是否从对象池里创建</param>
+        /// <typeparam name="T">要添加组件的泛型类型</typeparam>
+        /// <returns>返回添加到实体上组件的实例</returns>
         public T AddComponent<T>(long id, bool isPool = true) where T : Entity, new()
         {
             var entity = Create<T>(Scene, id, isPool, false);
@@ -135,6 +197,10 @@ namespace Fantasy
             return entity;
         }
 
+        /// <summary>
+        /// 添加一个组件到当前实体上
+        /// </summary>
+        /// <param name="component">要添加的实体实例</param>
         public void AddComponent(Entity component)
         {
             if (this == component)
@@ -198,6 +264,11 @@ namespace Fantasy
             component.Scene = Scene;
         }
 
+        /// <summary>
+        /// 添加一个组件到当前实体上
+        /// </summary>
+        /// <param name="component">要添加的实体实例</param>
+        /// <typeparam name="T">要添加组件的泛型类型</typeparam>
         public void AddComponent<T>(T component) where T : Entity
         {
             var type = typeof(T);
@@ -272,6 +343,11 @@ namespace Fantasy
 
         #region GetComponent
 
+        /// <summary>
+        /// 当前实体上查找一个字实体
+        /// </summary>
+        /// <typeparam name="T">要查找实体泛型类型</typeparam>
+        /// <returns>查找的实体实例</returns>
         public T GetComponent<T>() where T : Entity, new()
         {
             if (_tree == null)
@@ -283,6 +359,11 @@ namespace Fantasy
             return _tree.TryGetValue(typeHashCode, out var component) ? (T)component : null;
         }
 
+        /// <summary>
+        /// 当前实体上查找一个字实体
+        /// </summary>
+        /// <param name="type">要查找实体类型</param>
+        /// <returns>查找的实体实例</returns>
         public Entity GetComponent(Type type)
         {
             if (_tree == null)
@@ -294,6 +375,12 @@ namespace Fantasy
             return _tree.TryGetValue(typeHashCode, out var component) ? component : null;
         }
 
+        /// <summary>
+        /// 当前实体上查找一个字实体
+        /// </summary>
+        /// <param name="id">要查找实体的Id</param>
+        /// <typeparam name="T">要查找实体泛型类型</typeparam>
+        /// <returns>查找的实体实例</returns>
         public T GetComponent<T>(long id) where T : Entity, ISupportedMultiEntity, new()
         {
             if (_multi == null)
@@ -304,6 +391,12 @@ namespace Fantasy
             return _multi.TryGetValue(id, out var entity) ? (T)entity : default;
         }
 
+        /// <summary>
+        /// 当前实体上查找一个字实体，如果没有就创建一个新的并添加到当前实体上
+        /// </summary>
+        /// <param name="isPool">是否从对象池创建</param>
+        /// <typeparam name="T">要查找或添加实体泛型类型</typeparam>
+        /// <returns>查找的实体实例</returns>
         public T GetOrAddComponent<T>(bool isPool = true) where T : Entity, new()
         {
             return GetComponent<T>() ?? AddComponent<T>(isPool);
@@ -313,6 +406,12 @@ namespace Fantasy
 
         #region RemoveComponent
 
+        /// <summary>
+        /// 当前实体下删除一个实体
+        /// </summary>
+        /// <param name="isDispose">是否执行删除实体的Dispose方法</param>
+        /// <typeparam name="T">实体的泛型类型</typeparam>
+        /// <exception cref="NotSupportedException"></exception>
         public void RemoveComponent<T>(bool isDispose = true) where T : Entity, new()
         {
             if (SupportedMultiEntityChecker<T>.IsSupported)
@@ -357,6 +456,12 @@ namespace Fantasy
             }
         }
 
+        /// <summary>
+        /// 当前实体下删除一个实体
+        /// </summary>
+        /// <param name="id">要删除的实体Id</param>
+        /// <param name="isDispose">是否执行删除实体的Dispose方法</param>
+        /// <typeparam name="T">实体的泛型类型</typeparam>
         public void RemoveComponent<T>(long id, bool isDispose = true) where T : Entity, ISupportedMultiEntity, new()
         {
             if (_multi == null)
@@ -392,6 +497,11 @@ namespace Fantasy
             }
         }
 
+        /// <summary>
+        /// 当前实体下删除一个实体
+        /// </summary>
+        /// <param name="component">要删除的实体实例</param>
+        /// <param name="isDispose">是否执行删除实体的Dispose方法</param>
         public void RemoveComponent(Entity component, bool isDispose = true)
         {
             if (this == component)
@@ -460,6 +570,12 @@ namespace Fantasy
             }
         }
 
+        /// <summary>
+        /// 当前实体下删除一个实体
+        /// </summary>
+        /// <param name="component">要删除的实体实例</param>
+        /// <param name="isDispose">是否执行删除实体的Dispose方法</param>
+        /// <typeparam name="T">实体的泛型类型</typeparam>
         public void RemoveComponent<T>(T component, bool isDispose = true) where T : Entity
         {
             if (this == component)
@@ -538,6 +654,12 @@ namespace Fantasy
 
         #region Deserialize
 
+        /// <summary>
+        /// 反序列化当前实体，因为在数据库加载过来的或通过协议传送过来的实体并没有跟当前Scene做关联。
+        /// 所以必须要执行一下这个反序列化的方法才可以使用。
+        /// </summary>
+        /// <param name="scene">Scene</param>
+        /// <param name="resetId">是否是重新生成实体的Id,如果是数据库加载过来的一般是不需要的</param>
         public void Deserialize(Scene scene, bool resetId = false)
         {
             if (RunTimeId != 0)
@@ -594,9 +716,13 @@ namespace Fantasy
 
         #region ForEach
 #if FANTASY_NET
+        /// <summary>
+        /// 查询当前实体下支持数据库分表存储实体
+        /// </summary>
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
+        [MemoryPackIgnore]
         public IEnumerable<Entity> ForEachSingleCollection
         {
             get
@@ -612,9 +738,13 @@ namespace Fantasy
                 }
             }
         }
+        /// <summary>
+        /// 查询当前实体下支持传送实体
+        /// </summary>
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
+        [MemoryPackIgnore]
         public IEnumerable<Entity> ForEachTransfer
         {
             get
@@ -645,9 +775,13 @@ namespace Fantasy
             }
         }
 #endif
+        /// <summary>
+        /// 查询当前实体下的实现了ISupportedMultiEntity接口的实体
+        /// </summary>
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
+        [MemoryPackIgnore]
         public IEnumerable<Entity> ForEachMultiEntity
         {
             get
@@ -663,9 +797,13 @@ namespace Fantasy
                 }
             }
         }
+        /// <summary>
+        /// 查找当前实体下的所有实体，不包括实现ISupportedMultiEntity接口的实体
+        /// </summary>
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
+        [MemoryPackIgnore]
         public IEnumerable<Entity> ForEachEntity
         {
             get
@@ -685,6 +823,10 @@ namespace Fantasy
 
         #region Clone
 
+        /// <summary>
+        /// 克隆一个实体
+        /// </summary>
+        /// <returns></returns>
         public Entity Clone()
         {
 #if FANTASY_NET
@@ -702,6 +844,9 @@ namespace Fantasy
 
         #region Dispose
 
+        /// <summary>
+        /// 销毁当前实体，销毁后会自动销毁当前实体下的所有实体。
+        /// </summary>
         public virtual void Dispose()
         {
             if (IsDisposed)

@@ -1,0 +1,1441 @@
+### YamlMime:ManagedReference
+items:
+- uid: KCP.KCPBASIC
+  commentId: T:KCP.KCPBASIC
+  id: KCPBASIC
+  parent: KCP
+  children:
+  - KCP.KCPBASIC.ACK_FAST
+  - KCP.KCPBASIC.ASK_SEND
+  - KCP.KCPBASIC.ASK_TELL
+  - KCP.KCPBASIC.CMD_ACK
+  - KCP.KCPBASIC.CMD_PUSH
+  - KCP.KCPBASIC.CMD_WASK
+  - KCP.KCPBASIC.CMD_WINS
+  - KCP.KCPBASIC.DEADLINK
+  - KCP.KCPBASIC.FASTACK_LIMIT
+  - KCP.KCPBASIC.FASTACK_MIN
+  - KCP.KCPBASIC.FRG_LIMIT
+  - KCP.KCPBASIC.INPUT
+  - KCP.KCPBASIC.INTERVAL
+  - KCP.KCPBASIC.INTERVAL_LIMIT
+  - KCP.KCPBASIC.INTERVAL_MIN
+  - KCP.KCPBASIC.IN_ACK
+  - KCP.KCPBASIC.IN_DATA
+  - KCP.KCPBASIC.IN_PROBE
+  - KCP.KCPBASIC.IN_WINS
+  - KCP.KCPBASIC.MTU_DEF
+  - KCP.KCPBASIC.NODELAY_LIMIT
+  - KCP.KCPBASIC.NODELAY_MIN
+  - KCP.KCPBASIC.OUTPUT
+  - KCP.KCPBASIC.OUT_ACK
+  - KCP.KCPBASIC.OUT_DATA
+  - KCP.KCPBASIC.OUT_PROBE
+  - KCP.KCPBASIC.OUT_WINS
+  - KCP.KCPBASIC.OVERHEAD
+  - KCP.KCPBASIC.PROBE_INIT
+  - KCP.KCPBASIC.PROBE_LIMIT
+  - KCP.KCPBASIC.RECV
+  - KCP.KCPBASIC.REVERSED_HEAD
+  - KCP.KCPBASIC.RTO_DEF
+  - KCP.KCPBASIC.RTO_MAX
+  - KCP.KCPBASIC.RTO_MIN
+  - KCP.KCPBASIC.RTO_NDL
+  - KCP.KCPBASIC.SEND
+  - KCP.KCPBASIC.THRESH_INIT
+  - KCP.KCPBASIC.THRESH_MIN
+  - KCP.KCPBASIC.WND_RCV
+  - KCP.KCPBASIC.WND_SND
+  langs:
+  - csharp
+  - vb
+  name: KCPBASIC
+  nameWithType: KCPBASIC
+  fullName: KCP.KCPBASIC
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: KCPBASIC
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 113
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public static class KCPBASIC
+    content.vb: Public Module KCPBASIC
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: KCP.KCPBASIC.RTO_NDL
+  commentId: F:KCP.KCPBASIC.RTO_NDL
+  id: RTO_NDL
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: RTO_NDL
+  nameWithType: KCPBASIC.RTO_NDL
+  fullName: KCP.KCPBASIC.RTO_NDL
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RTO_NDL
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 115
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint RTO_NDL = 30
+    return:
+      type: System.UInt32
+    content.vb: Public Const RTO_NDL As UInteger = 30
+- uid: KCP.KCPBASIC.RTO_MIN
+  commentId: F:KCP.KCPBASIC.RTO_MIN
+  id: RTO_MIN
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: RTO_MIN
+  nameWithType: KCPBASIC.RTO_MIN
+  fullName: KCP.KCPBASIC.RTO_MIN
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RTO_MIN
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 116
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint RTO_MIN = 100
+    return:
+      type: System.UInt32
+    content.vb: Public Const RTO_MIN As UInteger = 100
+- uid: KCP.KCPBASIC.RTO_DEF
+  commentId: F:KCP.KCPBASIC.RTO_DEF
+  id: RTO_DEF
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: RTO_DEF
+  nameWithType: KCPBASIC.RTO_DEF
+  fullName: KCP.KCPBASIC.RTO_DEF
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RTO_DEF
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 117
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint RTO_DEF = 200
+    return:
+      type: System.UInt32
+    content.vb: Public Const RTO_DEF As UInteger = 200
+- uid: KCP.KCPBASIC.RTO_MAX
+  commentId: F:KCP.KCPBASIC.RTO_MAX
+  id: RTO_MAX
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: RTO_MAX
+  nameWithType: KCPBASIC.RTO_MAX
+  fullName: KCP.KCPBASIC.RTO_MAX
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RTO_MAX
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 118
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint RTO_MAX = 60000
+    return:
+      type: System.UInt32
+    content.vb: Public Const RTO_MAX As UInteger = 60000
+- uid: KCP.KCPBASIC.CMD_PUSH
+  commentId: F:KCP.KCPBASIC.CMD_PUSH
+  id: CMD_PUSH
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: CMD_PUSH
+  nameWithType: KCPBASIC.CMD_PUSH
+  fullName: KCP.KCPBASIC.CMD_PUSH
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CMD_PUSH
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 119
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint CMD_PUSH = 81
+    return:
+      type: System.UInt32
+    content.vb: Public Const CMD_PUSH As UInteger = 81
+- uid: KCP.KCPBASIC.CMD_ACK
+  commentId: F:KCP.KCPBASIC.CMD_ACK
+  id: CMD_ACK
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: CMD_ACK
+  nameWithType: KCPBASIC.CMD_ACK
+  fullName: KCP.KCPBASIC.CMD_ACK
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CMD_ACK
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 120
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint CMD_ACK = 82
+    return:
+      type: System.UInt32
+    content.vb: Public Const CMD_ACK As UInteger = 82
+- uid: KCP.KCPBASIC.CMD_WASK
+  commentId: F:KCP.KCPBASIC.CMD_WASK
+  id: CMD_WASK
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: CMD_WASK
+  nameWithType: KCPBASIC.CMD_WASK
+  fullName: KCP.KCPBASIC.CMD_WASK
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CMD_WASK
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 121
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint CMD_WASK = 83
+    return:
+      type: System.UInt32
+    content.vb: Public Const CMD_WASK As UInteger = 83
+- uid: KCP.KCPBASIC.CMD_WINS
+  commentId: F:KCP.KCPBASIC.CMD_WINS
+  id: CMD_WINS
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: CMD_WINS
+  nameWithType: KCPBASIC.CMD_WINS
+  fullName: KCP.KCPBASIC.CMD_WINS
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CMD_WINS
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 122
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint CMD_WINS = 84
+    return:
+      type: System.UInt32
+    content.vb: Public Const CMD_WINS As UInteger = 84
+- uid: KCP.KCPBASIC.ASK_SEND
+  commentId: F:KCP.KCPBASIC.ASK_SEND
+  id: ASK_SEND
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: ASK_SEND
+  nameWithType: KCPBASIC.ASK_SEND
+  fullName: KCP.KCPBASIC.ASK_SEND
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ASK_SEND
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 123
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint ASK_SEND = 1
+    return:
+      type: System.UInt32
+    content.vb: Public Const ASK_SEND As UInteger = 1
+- uid: KCP.KCPBASIC.ASK_TELL
+  commentId: F:KCP.KCPBASIC.ASK_TELL
+  id: ASK_TELL
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: ASK_TELL
+  nameWithType: KCPBASIC.ASK_TELL
+  fullName: KCP.KCPBASIC.ASK_TELL
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ASK_TELL
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 124
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint ASK_TELL = 2
+    return:
+      type: System.UInt32
+    content.vb: Public Const ASK_TELL As UInteger = 2
+- uid: KCP.KCPBASIC.WND_SND
+  commentId: F:KCP.KCPBASIC.WND_SND
+  id: WND_SND
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: WND_SND
+  nameWithType: KCPBASIC.WND_SND
+  fullName: KCP.KCPBASIC.WND_SND
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WND_SND
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 125
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint WND_SND = 32
+    return:
+      type: System.UInt32
+    content.vb: Public Const WND_SND As UInteger = 32
+- uid: KCP.KCPBASIC.WND_RCV
+  commentId: F:KCP.KCPBASIC.WND_RCV
+  id: WND_RCV
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: WND_RCV
+  nameWithType: KCPBASIC.WND_RCV
+  fullName: KCP.KCPBASIC.WND_RCV
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WND_RCV
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 126
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint WND_RCV = 128
+    return:
+      type: System.UInt32
+    content.vb: Public Const WND_RCV As UInteger = 128
+- uid: KCP.KCPBASIC.MTU_DEF
+  commentId: F:KCP.KCPBASIC.MTU_DEF
+  id: MTU_DEF
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: MTU_DEF
+  nameWithType: KCPBASIC.MTU_DEF
+  fullName: KCP.KCPBASIC.MTU_DEF
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MTU_DEF
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 127
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint MTU_DEF = 1400
+    return:
+      type: System.UInt32
+    content.vb: Public Const MTU_DEF As UInteger = 1400
+- uid: KCP.KCPBASIC.ACK_FAST
+  commentId: F:KCP.KCPBASIC.ACK_FAST
+  id: ACK_FAST
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: ACK_FAST
+  nameWithType: KCPBASIC.ACK_FAST
+  fullName: KCP.KCPBASIC.ACK_FAST
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ACK_FAST
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 128
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint ACK_FAST = 3
+    return:
+      type: System.UInt32
+    content.vb: Public Const ACK_FAST As UInteger = 3
+- uid: KCP.KCPBASIC.INTERVAL
+  commentId: F:KCP.KCPBASIC.INTERVAL
+  id: INTERVAL
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: INTERVAL
+  nameWithType: KCPBASIC.INTERVAL
+  fullName: KCP.KCPBASIC.INTERVAL
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: INTERVAL
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 129
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint INTERVAL = 100
+    return:
+      type: System.UInt32
+    content.vb: Public Const INTERVAL As UInteger = 100
+- uid: KCP.KCPBASIC.INTERVAL_MIN
+  commentId: F:KCP.KCPBASIC.INTERVAL_MIN
+  id: INTERVAL_MIN
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: INTERVAL_MIN
+  nameWithType: KCPBASIC.INTERVAL_MIN
+  fullName: KCP.KCPBASIC.INTERVAL_MIN
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: INTERVAL_MIN
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 130
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint INTERVAL_MIN = 1
+    return:
+      type: System.UInt32
+    content.vb: Public Const INTERVAL_MIN As UInteger = 1
+- uid: KCP.KCPBASIC.INTERVAL_LIMIT
+  commentId: F:KCP.KCPBASIC.INTERVAL_LIMIT
+  id: INTERVAL_LIMIT
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: INTERVAL_LIMIT
+  nameWithType: KCPBASIC.INTERVAL_LIMIT
+  fullName: KCP.KCPBASIC.INTERVAL_LIMIT
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: INTERVAL_LIMIT
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 131
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint INTERVAL_LIMIT = 5000
+    return:
+      type: System.UInt32
+    content.vb: Public Const INTERVAL_LIMIT As UInteger = 5000
+- uid: KCP.KCPBASIC.OVERHEAD
+  commentId: F:KCP.KCPBASIC.OVERHEAD
+  id: OVERHEAD
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: OVERHEAD
+  nameWithType: KCPBASIC.OVERHEAD
+  fullName: KCP.KCPBASIC.OVERHEAD
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OVERHEAD
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 132
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint OVERHEAD = 24
+    return:
+      type: System.UInt32
+    content.vb: Public Const OVERHEAD As UInteger = 24
+- uid: KCP.KCPBASIC.DEADLINK
+  commentId: F:KCP.KCPBASIC.DEADLINK
+  id: DEADLINK
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: DEADLINK
+  nameWithType: KCPBASIC.DEADLINK
+  fullName: KCP.KCPBASIC.DEADLINK
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: DEADLINK
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 133
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint DEADLINK = 20
+    return:
+      type: System.UInt32
+    content.vb: Public Const DEADLINK As UInteger = 20
+- uid: KCP.KCPBASIC.THRESH_INIT
+  commentId: F:KCP.KCPBASIC.THRESH_INIT
+  id: THRESH_INIT
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: THRESH_INIT
+  nameWithType: KCPBASIC.THRESH_INIT
+  fullName: KCP.KCPBASIC.THRESH_INIT
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: THRESH_INIT
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 134
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint THRESH_INIT = 2
+    return:
+      type: System.UInt32
+    content.vb: Public Const THRESH_INIT As UInteger = 2
+- uid: KCP.KCPBASIC.THRESH_MIN
+  commentId: F:KCP.KCPBASIC.THRESH_MIN
+  id: THRESH_MIN
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: THRESH_MIN
+  nameWithType: KCPBASIC.THRESH_MIN
+  fullName: KCP.KCPBASIC.THRESH_MIN
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: THRESH_MIN
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 135
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint THRESH_MIN = 2
+    return:
+      type: System.UInt32
+    content.vb: Public Const THRESH_MIN As UInteger = 2
+- uid: KCP.KCPBASIC.PROBE_INIT
+  commentId: F:KCP.KCPBASIC.PROBE_INIT
+  id: PROBE_INIT
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: PROBE_INIT
+  nameWithType: KCPBASIC.PROBE_INIT
+  fullName: KCP.KCPBASIC.PROBE_INIT
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: PROBE_INIT
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 136
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint PROBE_INIT = 7000
+    return:
+      type: System.UInt32
+    content.vb: Public Const PROBE_INIT As UInteger = 7000
+- uid: KCP.KCPBASIC.PROBE_LIMIT
+  commentId: F:KCP.KCPBASIC.PROBE_LIMIT
+  id: PROBE_LIMIT
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: PROBE_LIMIT
+  nameWithType: KCPBASIC.PROBE_LIMIT
+  fullName: KCP.KCPBASIC.PROBE_LIMIT
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: PROBE_LIMIT
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 137
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint PROBE_LIMIT = 120000
+    return:
+      type: System.UInt32
+    content.vb: Public Const PROBE_LIMIT As UInteger = 120000
+- uid: KCP.KCPBASIC.FRG_LIMIT
+  commentId: F:KCP.KCPBASIC.FRG_LIMIT
+  id: FRG_LIMIT
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: FRG_LIMIT
+  nameWithType: KCPBASIC.FRG_LIMIT
+  fullName: KCP.KCPBASIC.FRG_LIMIT
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FRG_LIMIT
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 138
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint FRG_LIMIT = 255
+    return:
+      type: System.UInt32
+    content.vb: Public Const FRG_LIMIT As UInteger = 255
+- uid: KCP.KCPBASIC.NODELAY_MIN
+  commentId: F:KCP.KCPBASIC.NODELAY_MIN
+  id: NODELAY_MIN
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: NODELAY_MIN
+  nameWithType: KCPBASIC.NODELAY_MIN
+  fullName: KCP.KCPBASIC.NODELAY_MIN
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NODELAY_MIN
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 139
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint NODELAY_MIN = 0
+    return:
+      type: System.UInt32
+    content.vb: Public Const NODELAY_MIN As UInteger = 0
+- uid: KCP.KCPBASIC.NODELAY_LIMIT
+  commentId: F:KCP.KCPBASIC.NODELAY_LIMIT
+  id: NODELAY_LIMIT
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: NODELAY_LIMIT
+  nameWithType: KCPBASIC.NODELAY_LIMIT
+  fullName: KCP.KCPBASIC.NODELAY_LIMIT
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NODELAY_LIMIT
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 140
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint NODELAY_LIMIT = 2
+    return:
+      type: System.UInt32
+    content.vb: Public Const NODELAY_LIMIT As UInteger = 2
+- uid: KCP.KCPBASIC.FASTACK_MIN
+  commentId: F:KCP.KCPBASIC.FASTACK_MIN
+  id: FASTACK_MIN
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: FASTACK_MIN
+  nameWithType: KCPBASIC.FASTACK_MIN
+  fullName: KCP.KCPBASIC.FASTACK_MIN
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FASTACK_MIN
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 141
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint FASTACK_MIN = 0
+    return:
+      type: System.UInt32
+    content.vb: Public Const FASTACK_MIN As UInteger = 0
+- uid: KCP.KCPBASIC.FASTACK_LIMIT
+  commentId: F:KCP.KCPBASIC.FASTACK_LIMIT
+  id: FASTACK_LIMIT
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: FASTACK_LIMIT
+  nameWithType: KCPBASIC.FASTACK_LIMIT
+  fullName: KCP.KCPBASIC.FASTACK_LIMIT
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FASTACK_LIMIT
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 142
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint FASTACK_LIMIT = 5
+    return:
+      type: System.UInt32
+    content.vb: Public Const FASTACK_LIMIT As UInteger = 5
+- uid: KCP.KCPBASIC.OUTPUT
+  commentId: F:KCP.KCPBASIC.OUTPUT
+  id: OUTPUT
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: OUTPUT
+  nameWithType: KCPBASIC.OUTPUT
+  fullName: KCP.KCPBASIC.OUTPUT
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OUTPUT
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 143
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint OUTPUT = 1
+    return:
+      type: System.UInt32
+    content.vb: Public Const OUTPUT As UInteger = 1
+- uid: KCP.KCPBASIC.INPUT
+  commentId: F:KCP.KCPBASIC.INPUT
+  id: INPUT
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: INPUT
+  nameWithType: KCPBASIC.INPUT
+  fullName: KCP.KCPBASIC.INPUT
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: INPUT
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 144
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint INPUT = 2
+    return:
+      type: System.UInt32
+    content.vb: Public Const INPUT As UInteger = 2
+- uid: KCP.KCPBASIC.SEND
+  commentId: F:KCP.KCPBASIC.SEND
+  id: SEND
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: SEND
+  nameWithType: KCPBASIC.SEND
+  fullName: KCP.KCPBASIC.SEND
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SEND
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 145
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint SEND = 4
+    return:
+      type: System.UInt32
+    content.vb: Public Const SEND As UInteger = 4
+- uid: KCP.KCPBASIC.RECV
+  commentId: F:KCP.KCPBASIC.RECV
+  id: RECV
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: RECV
+  nameWithType: KCPBASIC.RECV
+  fullName: KCP.KCPBASIC.RECV
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RECV
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 146
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint RECV = 8
+    return:
+      type: System.UInt32
+    content.vb: Public Const RECV As UInteger = 8
+- uid: KCP.KCPBASIC.IN_DATA
+  commentId: F:KCP.KCPBASIC.IN_DATA
+  id: IN_DATA
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: IN_DATA
+  nameWithType: KCPBASIC.IN_DATA
+  fullName: KCP.KCPBASIC.IN_DATA
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IN_DATA
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 147
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint IN_DATA = 16
+    return:
+      type: System.UInt32
+    content.vb: Public Const IN_DATA As UInteger = 16
+- uid: KCP.KCPBASIC.IN_ACK
+  commentId: F:KCP.KCPBASIC.IN_ACK
+  id: IN_ACK
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: IN_ACK
+  nameWithType: KCPBASIC.IN_ACK
+  fullName: KCP.KCPBASIC.IN_ACK
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IN_ACK
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 148
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint IN_ACK = 32
+    return:
+      type: System.UInt32
+    content.vb: Public Const IN_ACK As UInteger = 32
+- uid: KCP.KCPBASIC.IN_PROBE
+  commentId: F:KCP.KCPBASIC.IN_PROBE
+  id: IN_PROBE
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: IN_PROBE
+  nameWithType: KCPBASIC.IN_PROBE
+  fullName: KCP.KCPBASIC.IN_PROBE
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IN_PROBE
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 149
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint IN_PROBE = 64
+    return:
+      type: System.UInt32
+    content.vb: Public Const IN_PROBE As UInteger = 64
+- uid: KCP.KCPBASIC.IN_WINS
+  commentId: F:KCP.KCPBASIC.IN_WINS
+  id: IN_WINS
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: IN_WINS
+  nameWithType: KCPBASIC.IN_WINS
+  fullName: KCP.KCPBASIC.IN_WINS
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IN_WINS
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 150
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint IN_WINS = 128
+    return:
+      type: System.UInt32
+    content.vb: Public Const IN_WINS As UInteger = 128
+- uid: KCP.KCPBASIC.OUT_DATA
+  commentId: F:KCP.KCPBASIC.OUT_DATA
+  id: OUT_DATA
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: OUT_DATA
+  nameWithType: KCPBASIC.OUT_DATA
+  fullName: KCP.KCPBASIC.OUT_DATA
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OUT_DATA
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 151
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint OUT_DATA = 256
+    return:
+      type: System.UInt32
+    content.vb: Public Const OUT_DATA As UInteger = 256
+- uid: KCP.KCPBASIC.OUT_ACK
+  commentId: F:KCP.KCPBASIC.OUT_ACK
+  id: OUT_ACK
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: OUT_ACK
+  nameWithType: KCPBASIC.OUT_ACK
+  fullName: KCP.KCPBASIC.OUT_ACK
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OUT_ACK
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 152
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint OUT_ACK = 512
+    return:
+      type: System.UInt32
+    content.vb: Public Const OUT_ACK As UInteger = 512
+- uid: KCP.KCPBASIC.OUT_PROBE
+  commentId: F:KCP.KCPBASIC.OUT_PROBE
+  id: OUT_PROBE
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: OUT_PROBE
+  nameWithType: KCPBASIC.OUT_PROBE
+  fullName: KCP.KCPBASIC.OUT_PROBE
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OUT_PROBE
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 153
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint OUT_PROBE = 1024
+    return:
+      type: System.UInt32
+    content.vb: Public Const OUT_PROBE As UInteger = 1024
+- uid: KCP.KCPBASIC.OUT_WINS
+  commentId: F:KCP.KCPBASIC.OUT_WINS
+  id: OUT_WINS
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: OUT_WINS
+  nameWithType: KCPBASIC.OUT_WINS
+  fullName: KCP.KCPBASIC.OUT_WINS
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OUT_WINS
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 154
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint OUT_WINS = 2048
+    return:
+      type: System.UInt32
+    content.vb: Public Const OUT_WINS As UInteger = 2048
+- uid: KCP.KCPBASIC.REVERSED_HEAD
+  commentId: F:KCP.KCPBASIC.REVERSED_HEAD
+  id: REVERSED_HEAD
+  parent: KCP.KCPBASIC
+  langs:
+  - csharp
+  - vb
+  name: REVERSED_HEAD
+  nameWithType: KCPBASIC.REVERSED_HEAD
+  fullName: KCP.KCPBASIC.REVERSED_HEAD
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: REVERSED_HEAD
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 157
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public const uint REVERSED_HEAD = 5
+    return:
+      type: System.UInt32
+    content.vb: Public Const REVERSED_HEAD As UInteger = 5
+references:
+- uid: KCP
+  commentId: N:KCP
+  href: KCP.html
+  name: KCP
+  nameWithType: KCP
+  fullName: KCP
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger

@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Fantasy.DataStructure.Collection 命名空间
+ | Fantasy </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Fantasy.DataStructure.Collection 命名空间
+ | Fantasy ">
+    
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="Fantasy">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="搜索" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">搜索结果 <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="首页" data-prev="上一页" data-next="下一页" data-last="尾页"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">显示/隐藏目录</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Fantasy.DataStructure.Collection">
+
+  <h1 id="Fantasy_DataStructure_Collection" data-uid="Fantasy.DataStructure.Collection" class="text-break">Fantasy.DataStructure.Collection 命名空间
+</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+类
+</h3>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.CircularBuffer.html">CircularBuffer</a></h4>
+      <section><p>自增式缓存类，继承自 Stream 和 IDisposable 接口。
+环形缓存具有自动扩充的特性，但不会收缩，适用于操作不过大的 IO 流。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool-2.html">ConcurrentOneToManyListPool&lt;TKey, TValue&gt;</a></h4>
+      <section><p>并发的一对多列表池，用于维护具有相同键的多个值的关联关系，实现了 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> 接口。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.ConcurrentOneToManyList-2.html">ConcurrentOneToManyList&lt;TKey, TValue&gt;</a></h4>
+      <section><p>并发的一对多列表，用于维护具有相同键的多个值的关联关系。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool-2.html">ConcurrentOneToManyQueuePool&lt;TKey, TValue&gt;</a></h4>
+      <section><p>表示一个并发的一对多队列池，用于维护具有相同键的多个值的关联关系，实现了 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> 接口。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue-2.html">ConcurrentOneToManyQueue&lt;TKey, TValue&gt;</a></h4>
+      <section><p>表示一个并发的一对多队列，用于维护具有相同键的多个值的关联关系。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.HashSetBasePool-1.html">HashSetBasePool&lt;T&gt;</a></h4>
+      <section><p>基本哈希集合对象池，他自持有实际的哈希集合。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.HashSetPool-1.html">HashSetPool&lt;T&gt;</a></h4>
+      <section><p>可释放的哈希集合对象池。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.ListPool-1.html">ListPool&lt;T&gt;</a></h4>
+      <section><p>可释放的列表（List）对象池。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.OneToManyHashSetPool-2.html">OneToManyHashSetPool&lt;TKey, TValue&gt;</a></h4>
+      <section><p>一对多哈希集合（OneToManyHashSet）对象池。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.OneToManyHashSet-2.html">OneToManyHashSet&lt;TKey, TValue&gt;</a></h4>
+      <section><p>一对多哈希集合（OneToManyHashSet），用于创建和管理键对应多个值的集合。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.OneToManyListPool-2.html">OneToManyListPool&lt;TKey, TValue&gt;</a></h4>
+      <section><p>可回收的、一对多关系的列表池。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.OneToManyList-2.html">OneToManyList&lt;TKey, TValue&gt;</a></h4>
+      <section><p>一对多关系的列表字典。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.OneToManyQueuePool-2.html">OneToManyQueuePool&lt;TKey, TValue&gt;</a></h4>
+      <section><p>支持一对多关系的队列池，用于存储具有相同键的值的队列集合。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.OneToManyQueue-2.html">OneToManyQueue&lt;TKey, TValue&gt;</a></h4>
+      <section><p>支持一对多关系的队列，用于存储具有相同键的值的队列集合。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.ReuseList-1.html">ReuseList&lt;T&gt;</a></h4>
+      <section><p>可重用的列表，继承自 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a> 类。该类支持通过对象池重用列表实例，以减少对象分配和释放的开销。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool-2.html">SortedConcurrentOneToManyListPool&lt;TKey, TValue&gt;</a></h4>
+      <section><p>基于排序字典和并发集合实现的一对多映射列表的对象池包装类，继承自 <a class="xref" href="Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList-2.html">SortedConcurrentOneToManyList&lt;TKey, TValue&gt;</a> 类，
+同时实现了 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> 接口，以支持对象的重用和释放。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList-2.html">SortedConcurrentOneToManyList&lt;TKey, TValue&gt;</a></h4>
+      <section><p>基于排序字典和并发集合实现的一多对映射列表类，继承自 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2">SortedDictionary&lt;TKey, TValue&gt;</a> 类，
+用于在多个值与一个键关联的情况下进行管理和存储。该类支持并发操作，适用于多线程环境。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool-2.html">SortedOneToManyHashSetPool&lt;TKey, TValue&gt;</a></h4>
+      <section><p>基于排序字典实现的一对多关系的映射哈希集合的对象池包装类，将唯一键映射到多个值的哈希集合。
+同时实现了 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> 接口，以支持对象的重用和释放。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.SortedOneToManyHashSet-2.html">SortedOneToManyHashSet&lt;TKey, TValue&gt;</a></h4>
+      <section><p>基于排序字典实现的一对多关系的映射哈希集合类，将唯一键映射到多个值的哈希集合。
+用于在多个值与一个键关联的情况下进行管理和存储。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.SortedOneToManyListPool-2.html">SortedOneToManyListPool&lt;TKey, TValue&gt;</a></h4>
+      <section><p>基于排序字典实现的一对多映射列表的对象池包装类，继承自 <a class="xref" href="Fantasy.DataStructure.Collection.SortedOneToManyList-2.html">SortedOneToManyList&lt;TKey, TValue&gt;</a> 类，
+同时实现了 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> 接口，以支持对象的重用和释放。</p>
+</section>
+      <h4><a class="xref" href="Fantasy.DataStructure.Collection.SortedOneToManyList-2.html">SortedOneToManyList&lt;TKey, TValue&gt;</a></h4>
+      <section><p>基于排序字典实现的一对多关系的映射列表类，将唯一键映射到包含多个值的列表。
+用于在多个值与一个键关联的情况下进行管理和存储。</p>
+</section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>本文内容</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

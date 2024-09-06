@@ -1,0 +1,126 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Platform.Net
+  commentId: N:Fantasy.Platform.Net
+  id: Net
+  parent: Fantasy.Platform
+  children:
+  - Fantasy.Platform.Net.Entry
+  - Fantasy.Platform.Net.MachineConfig
+  - Fantasy.Platform.Net.MachineConfigData
+  - Fantasy.Platform.Net.Process
+  - Fantasy.Platform.Net.ProcessConfig
+  - Fantasy.Platform.Net.ProcessConfigData
+  - Fantasy.Platform.Net.SceneConfig
+  - Fantasy.Platform.Net.SceneConfigData
+  - Fantasy.Platform.Net.WorldConfig
+  - Fantasy.Platform.Net.WorldConfigData
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Platform.Net
+  nameWithType: Fantasy.Platform.Net
+  fullName: Fantasy.Platform.Net
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Platform.Net.Entry
+  commentId: T:Fantasy.Platform.Net.Entry
+  href: Fantasy.Platform.Net.Entry.html
+  name: Entry
+  nameWithType: Entry
+  fullName: Fantasy.Platform.Net.Entry
+- uid: Fantasy.Platform.Net.MachineConfig
+  commentId: T:Fantasy.Platform.Net.MachineConfig
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.MachineConfig.html
+  name: MachineConfig
+  nameWithType: MachineConfig
+  fullName: Fantasy.Platform.Net.MachineConfig
+- uid: Fantasy.Platform.Net.MachineConfigData
+  commentId: T:Fantasy.Platform.Net.MachineConfigData
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.MachineConfigData.html
+  name: MachineConfigData
+  nameWithType: MachineConfigData
+  fullName: Fantasy.Platform.Net.MachineConfigData
+- uid: Fantasy.Platform.Net.Process
+  commentId: T:Fantasy.Platform.Net.Process
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.Process.html
+  name: Process
+  nameWithType: Process
+  fullName: Fantasy.Platform.Net.Process
+- uid: Fantasy.Platform.Net.ProcessConfig
+  commentId: T:Fantasy.Platform.Net.ProcessConfig
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.ProcessConfig.html
+  name: ProcessConfig
+  nameWithType: ProcessConfig
+  fullName: Fantasy.Platform.Net.ProcessConfig
+- uid: Fantasy.Platform.Net.ProcessConfigData
+  commentId: T:Fantasy.Platform.Net.ProcessConfigData
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.ProcessConfigData.html
+  name: ProcessConfigData
+  nameWithType: ProcessConfigData
+  fullName: Fantasy.Platform.Net.ProcessConfigData
+- uid: Fantasy.Platform.Net.SceneConfig
+  commentId: T:Fantasy.Platform.Net.SceneConfig
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.SceneConfig.html
+  name: SceneConfig
+  nameWithType: SceneConfig
+  fullName: Fantasy.Platform.Net.SceneConfig
+- uid: Fantasy.Platform.Net.SceneConfigData
+  commentId: T:Fantasy.Platform.Net.SceneConfigData
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.SceneConfigData.html
+  name: SceneConfigData
+  nameWithType: SceneConfigData
+  fullName: Fantasy.Platform.Net.SceneConfigData
+- uid: Fantasy.Platform.Net.WorldConfig
+  commentId: T:Fantasy.Platform.Net.WorldConfig
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.WorldConfig.html
+  name: WorldConfig
+  nameWithType: WorldConfig
+  fullName: Fantasy.Platform.Net.WorldConfig
+- uid: Fantasy.Platform.Net.WorldConfigData
+  commentId: T:Fantasy.Platform.Net.WorldConfigData
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.WorldConfigData.html
+  name: WorldConfigData
+  nameWithType: WorldConfigData
+  fullName: Fantasy.Platform.Net.WorldConfigData
+- uid: Fantasy.Platform.Net
+  commentId: N:Fantasy.Platform.Net
+  href: Fantasy.html
+  name: Fantasy.Platform.Net
+  nameWithType: Fantasy.Platform.Net
+  fullName: Fantasy.Platform.Net
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Fantasy;
+using Fantasy.Async;
 using NativeCollections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,7 +42,7 @@ public class CoroutineLock : MonoBehaviour
 
     private async FTask StartAsync()
     {
-        _scene = await Fantasy.Entry.Initialize(GetType().Assembly);
+        _scene = await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
         Button1.interactable = false;
         Button2.interactable = true;
         Button3.interactable = true;

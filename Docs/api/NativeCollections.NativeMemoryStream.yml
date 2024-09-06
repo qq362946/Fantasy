@@ -1,0 +1,2487 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeMemoryStream
+  commentId: T:NativeCollections.NativeMemoryStream
+  id: NativeMemoryStream
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeMemoryStream.#ctor(System.Int32)
+  - NativeCollections.NativeMemoryStream.AsReadOnlySpan
+  - NativeCollections.NativeMemoryStream.AsReadOnlySpan(System.Int32)
+  - NativeCollections.NativeMemoryStream.AsReadOnlySpan(System.Int32,System.Int32)
+  - NativeCollections.NativeMemoryStream.AsSpan
+  - NativeCollections.NativeMemoryStream.AsSpan(System.Int32)
+  - NativeCollections.NativeMemoryStream.AsSpan(System.Int32,System.Int32)
+  - NativeCollections.NativeMemoryStream.CanRead
+  - NativeCollections.NativeMemoryStream.CanSeek
+  - NativeCollections.NativeMemoryStream.CanWrite
+  - NativeCollections.NativeMemoryStream.Capacity
+  - NativeCollections.NativeMemoryStream.Dispose
+  - NativeCollections.NativeMemoryStream.Empty
+  - NativeCollections.NativeMemoryStream.Equals(NativeCollections.NativeMemoryStream)
+  - NativeCollections.NativeMemoryStream.Equals(System.Object)
+  - NativeCollections.NativeMemoryStream.GetBuffer
+  - NativeCollections.NativeMemoryStream.GetHashCode
+  - NativeCollections.NativeMemoryStream.IsCreated
+  - NativeCollections.NativeMemoryStream.IsEmpty
+  - NativeCollections.NativeMemoryStream.Item(System.Int32)
+  - NativeCollections.NativeMemoryStream.Item(System.UInt32)
+  - NativeCollections.NativeMemoryStream.Length
+  - NativeCollections.NativeMemoryStream.Position
+  - NativeCollections.NativeMemoryStream.Read(System.Byte*,System.Int32,System.Int32)
+  - NativeCollections.NativeMemoryStream.Read(System.Span{System.Byte})
+  - NativeCollections.NativeMemoryStream.ReadByte
+  - NativeCollections.NativeMemoryStream.Seek(System.Int32,System.IO.SeekOrigin)
+  - NativeCollections.NativeMemoryStream.SetLength(System.Int32)
+  - NativeCollections.NativeMemoryStream.ToString
+  - NativeCollections.NativeMemoryStream.Write(System.Byte*,System.Int32,System.Int32)
+  - NativeCollections.NativeMemoryStream.Write(System.ReadOnlySpan{System.Byte})
+  - NativeCollections.NativeMemoryStream.WriteByte(System.Byte)
+  - NativeCollections.NativeMemoryStream.op_Equality(NativeCollections.NativeMemoryStream,NativeCollections.NativeMemoryStream)
+  - NativeCollections.NativeMemoryStream.op_Implicit(NativeCollections.NativeMemoryStream)~System.ReadOnlySpan{System.Byte}
+  - NativeCollections.NativeMemoryStream.op_Implicit(NativeCollections.NativeMemoryStream)~System.Span{System.Byte}
+  - NativeCollections.NativeMemoryStream.op_Inequality(NativeCollections.NativeMemoryStream,NativeCollections.NativeMemoryStream)
+  langs:
+  - csharp
+  - vb
+  name: NativeMemoryStream
+  nameWithType: NativeMemoryStream
+  fullName: NativeCollections.NativeMemoryStream
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeMemoryStream
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 22
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native memory stream
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public struct NativeMemoryStream : IDisposable, IEquatable<NativeMemoryStream>
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeMemoryStream Implements IDisposable, IEquatable(Of NativeMemoryStream)
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeMemoryStream}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeMemoryStream.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+- uid: NativeCollections.NativeMemoryStream.#ctor(System.Int32)
+  commentId: M:NativeCollections.NativeMemoryStream.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: NativeMemoryStream(int)
+  nameWithType: NativeMemoryStream.NativeMemoryStream(int)
+  fullName: NativeCollections.NativeMemoryStream.NativeMemoryStream(int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 61
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeMemoryStream(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(capacity As Integer)
+  overload: NativeCollections.NativeMemoryStream.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.New(Integer)
+  fullName.vb: NativeCollections.NativeMemoryStream.New(Integer)
+  name.vb: New(Integer)
+- uid: NativeCollections.NativeMemoryStream.IsCreated
+  commentId: P:NativeCollections.NativeMemoryStream.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeMemoryStream.IsCreated
+  fullName: NativeCollections.NativeMemoryStream.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 78
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeMemoryStream.IsCreated*
+- uid: NativeCollections.NativeMemoryStream.IsEmpty
+  commentId: P:NativeCollections.NativeMemoryStream.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativeMemoryStream.IsEmpty
+  fullName: NativeCollections.NativeMemoryStream.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 83
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is empty
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativeMemoryStream.IsEmpty*
+- uid: NativeCollections.NativeMemoryStream.Item(System.Int32)
+  commentId: P:NativeCollections.NativeMemoryStream.Item(System.Int32)
+  id: Item(System.Int32)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: this[int]
+  nameWithType: NativeMemoryStream.this[int]
+  fullName: NativeCollections.NativeMemoryStream.this[int]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 89
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get reference
+  example: []
+  syntax:
+    content: public ref byte this[int index] { get; }
+    parameters:
+    - id: index
+      type: System.Int32
+      description: Index
+    return:
+      type: System.Byte
+    content.vb: Public ReadOnly Default ByRef Property this[](index As Integer) As Byte
+  overload: NativeCollections.NativeMemoryStream.Item*
+  nameWithType.vb: NativeMemoryStream.this[](Integer)
+  fullName.vb: NativeCollections.NativeMemoryStream.this[](Integer)
+  name.vb: this[](Integer)
+- uid: NativeCollections.NativeMemoryStream.Item(System.UInt32)
+  commentId: P:NativeCollections.NativeMemoryStream.Item(System.UInt32)
+  id: Item(System.UInt32)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: this[uint]
+  nameWithType: NativeMemoryStream.this[uint]
+  fullName: NativeCollections.NativeMemoryStream.this[uint]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 99
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get reference
+  example: []
+  syntax:
+    content: public ref byte this[uint index] { get; }
+    parameters:
+    - id: index
+      type: System.UInt32
+      description: Index
+    return:
+      type: System.Byte
+    content.vb: Public ReadOnly Default ByRef Property this[](index As UInteger) As Byte
+  overload: NativeCollections.NativeMemoryStream.Item*
+  nameWithType.vb: NativeMemoryStream.this[](UInteger)
+  fullName.vb: NativeCollections.NativeMemoryStream.this[](UInteger)
+  name.vb: this[](UInteger)
+- uid: NativeCollections.NativeMemoryStream.CanRead
+  commentId: P:NativeCollections.NativeMemoryStream.CanRead
+  id: CanRead
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: CanRead
+  nameWithType: NativeMemoryStream.CanRead
+  fullName: NativeCollections.NativeMemoryStream.CanRead
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CanRead
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 108
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Can read
+  example: []
+  syntax:
+    content: public bool CanRead { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property CanRead As Boolean
+  overload: NativeCollections.NativeMemoryStream.CanRead*
+- uid: NativeCollections.NativeMemoryStream.CanSeek
+  commentId: P:NativeCollections.NativeMemoryStream.CanSeek
+  id: CanSeek
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: CanSeek
+  nameWithType: NativeMemoryStream.CanSeek
+  fullName: NativeCollections.NativeMemoryStream.CanSeek
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CanSeek
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 113
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Can seek
+  example: []
+  syntax:
+    content: public bool CanSeek { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property CanSeek As Boolean
+  overload: NativeCollections.NativeMemoryStream.CanSeek*
+- uid: NativeCollections.NativeMemoryStream.CanWrite
+  commentId: P:NativeCollections.NativeMemoryStream.CanWrite
+  id: CanWrite
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: CanWrite
+  nameWithType: NativeMemoryStream.CanWrite
+  fullName: NativeCollections.NativeMemoryStream.CanWrite
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CanWrite
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 118
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Can write
+  example: []
+  syntax:
+    content: public bool CanWrite { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property CanWrite As Boolean
+  overload: NativeCollections.NativeMemoryStream.CanWrite*
+- uid: NativeCollections.NativeMemoryStream.Length
+  commentId: P:NativeCollections.NativeMemoryStream.Length
+  id: Length
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Length
+  nameWithType: NativeMemoryStream.Length
+  fullName: NativeCollections.NativeMemoryStream.Length
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Length
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 123
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Length
+  example: []
+  syntax:
+    content: public int Length { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Length As Integer
+  overload: NativeCollections.NativeMemoryStream.Length*
+- uid: NativeCollections.NativeMemoryStream.Position
+  commentId: P:NativeCollections.NativeMemoryStream.Position
+  id: Position
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Position
+  nameWithType: NativeMemoryStream.Position
+  fullName: NativeCollections.NativeMemoryStream.Position
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Position
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 136
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Position
+  example: []
+  syntax:
+    content: public int Position { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Position As Integer
+  overload: NativeCollections.NativeMemoryStream.Position*
+- uid: NativeCollections.NativeMemoryStream.Capacity
+  commentId: P:NativeCollections.NativeMemoryStream.Capacity
+  id: Capacity
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Capacity
+  nameWithType: NativeMemoryStream.Capacity
+  fullName: NativeCollections.NativeMemoryStream.Capacity
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Capacity
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 157
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Capacity
+  example: []
+  syntax:
+    content: public int Capacity { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Capacity As Integer
+  overload: NativeCollections.NativeMemoryStream.Capacity*
+- uid: NativeCollections.NativeMemoryStream.Equals(NativeCollections.NativeMemoryStream)
+  commentId: M:NativeCollections.NativeMemoryStream.Equals(NativeCollections.NativeMemoryStream)
+  id: Equals(NativeCollections.NativeMemoryStream)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeMemoryStream)
+  nameWithType: NativeMemoryStream.Equals(NativeMemoryStream)
+  fullName: NativeCollections.NativeMemoryStream.Equals(NativeCollections.NativeMemoryStream)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 197
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeMemoryStream other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeMemoryStream
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeMemoryStream) As Boolean
+  overload: NativeCollections.NativeMemoryStream.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeMemoryStream}.Equals(NativeCollections.NativeMemoryStream)
+- uid: NativeCollections.NativeMemoryStream.Equals(System.Object)
+  commentId: M:NativeCollections.NativeMemoryStream.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeMemoryStream.Equals(object?)
+  fullName: NativeCollections.NativeMemoryStream.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 204
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeMemoryStream.Equals*
+  nameWithType.vb: NativeMemoryStream.Equals(Object)
+  fullName.vb: NativeCollections.NativeMemoryStream.Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeMemoryStream.GetHashCode
+  commentId: M:NativeCollections.NativeMemoryStream.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeMemoryStream.GetHashCode()
+  fullName: NativeCollections.NativeMemoryStream.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 210
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeMemoryStream.GetHashCode*
+- uid: NativeCollections.NativeMemoryStream.ToString
+  commentId: M:NativeCollections.NativeMemoryStream.ToString
+  id: ToString
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeMemoryStream.ToString()
+  fullName: NativeCollections.NativeMemoryStream.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 216
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeMemoryStream.ToString*
+- uid: NativeCollections.NativeMemoryStream.op_Implicit(NativeCollections.NativeMemoryStream)~System.Span{System.Byte}
+  commentId: M:NativeCollections.NativeMemoryStream.op_Implicit(NativeCollections.NativeMemoryStream)~System.Span{System.Byte}
+  id: op_Implicit(NativeCollections.NativeMemoryStream)~System.Span{System.Byte}
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: implicit operator Span<byte>(NativeMemoryStream)
+  nameWithType: NativeMemoryStream.implicit operator Span<byte>(NativeMemoryStream)
+  fullName: NativeCollections.NativeMemoryStream.implicit operator System.Span<byte>(NativeCollections.NativeMemoryStream)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Implicit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 222
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static implicit operator Span<byte>(NativeMemoryStream nativeList)
+    parameters:
+    - id: nativeList
+      type: NativeCollections.NativeMemoryStream
+    return:
+      type: System.Span{System.Byte}
+      description: Span
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Widening Operator CType(nativeList As NativeMemoryStream) As Span(Of Byte)
+  overload: NativeCollections.NativeMemoryStream.op_Implicit*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.CType(NativeMemoryStream)
+  fullName.vb: NativeCollections.NativeMemoryStream.CType(NativeCollections.NativeMemoryStream)
+  name.vb: CType(NativeMemoryStream)
+- uid: NativeCollections.NativeMemoryStream.op_Implicit(NativeCollections.NativeMemoryStream)~System.ReadOnlySpan{System.Byte}
+  commentId: M:NativeCollections.NativeMemoryStream.op_Implicit(NativeCollections.NativeMemoryStream)~System.ReadOnlySpan{System.Byte}
+  id: op_Implicit(NativeCollections.NativeMemoryStream)~System.ReadOnlySpan{System.Byte}
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: implicit operator ReadOnlySpan<byte>(NativeMemoryStream)
+  nameWithType: NativeMemoryStream.implicit operator ReadOnlySpan<byte>(NativeMemoryStream)
+  fullName: NativeCollections.NativeMemoryStream.implicit operator System.ReadOnlySpan<byte>(NativeCollections.NativeMemoryStream)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Implicit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 229
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As readOnly span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static implicit operator ReadOnlySpan<byte>(NativeMemoryStream nativeList)
+    parameters:
+    - id: nativeList
+      type: NativeCollections.NativeMemoryStream
+    return:
+      type: System.ReadOnlySpan{System.Byte}
+      description: ReadOnlySpan
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Widening Operator CType(nativeList As NativeMemoryStream) As ReadOnlySpan(Of Byte)
+  overload: NativeCollections.NativeMemoryStream.op_Implicit*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.CType(NativeMemoryStream)
+  fullName.vb: NativeCollections.NativeMemoryStream.CType(NativeCollections.NativeMemoryStream)
+  name.vb: CType(NativeMemoryStream)
+- uid: NativeCollections.NativeMemoryStream.op_Equality(NativeCollections.NativeMemoryStream,NativeCollections.NativeMemoryStream)
+  commentId: M:NativeCollections.NativeMemoryStream.op_Equality(NativeCollections.NativeMemoryStream,NativeCollections.NativeMemoryStream)
+  id: op_Equality(NativeCollections.NativeMemoryStream,NativeCollections.NativeMemoryStream)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeMemoryStream, NativeMemoryStream)
+  nameWithType: NativeMemoryStream.operator ==(NativeMemoryStream, NativeMemoryStream)
+  fullName: NativeCollections.NativeMemoryStream.operator ==(NativeCollections.NativeMemoryStream, NativeCollections.NativeMemoryStream)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 238
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeMemoryStream left, NativeMemoryStream right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeMemoryStream
+      description: Left
+    - id: right
+      type: NativeCollections.NativeMemoryStream
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeMemoryStream, right As NativeMemoryStream) As Boolean
+  overload: NativeCollections.NativeMemoryStream.op_Equality*
+  nameWithType.vb: NativeMemoryStream.=(NativeMemoryStream, NativeMemoryStream)
+  fullName.vb: NativeCollections.NativeMemoryStream.=(NativeCollections.NativeMemoryStream, NativeCollections.NativeMemoryStream)
+  name.vb: =(NativeMemoryStream, NativeMemoryStream)
+- uid: NativeCollections.NativeMemoryStream.op_Inequality(NativeCollections.NativeMemoryStream,NativeCollections.NativeMemoryStream)
+  commentId: M:NativeCollections.NativeMemoryStream.op_Inequality(NativeCollections.NativeMemoryStream,NativeCollections.NativeMemoryStream)
+  id: op_Inequality(NativeCollections.NativeMemoryStream,NativeCollections.NativeMemoryStream)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeMemoryStream, NativeMemoryStream)
+  nameWithType: NativeMemoryStream.operator !=(NativeMemoryStream, NativeMemoryStream)
+  fullName: NativeCollections.NativeMemoryStream.operator !=(NativeCollections.NativeMemoryStream, NativeCollections.NativeMemoryStream)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 246
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeMemoryStream left, NativeMemoryStream right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeMemoryStream
+      description: Left
+    - id: right
+      type: NativeCollections.NativeMemoryStream
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeMemoryStream, right As NativeMemoryStream) As Boolean
+  overload: NativeCollections.NativeMemoryStream.op_Inequality*
+  nameWithType.vb: NativeMemoryStream.<>(NativeMemoryStream, NativeMemoryStream)
+  fullName.vb: NativeCollections.NativeMemoryStream.<>(NativeCollections.NativeMemoryStream, NativeCollections.NativeMemoryStream)
+  name.vb: <>(NativeMemoryStream, NativeMemoryStream)
+- uid: NativeCollections.NativeMemoryStream.Dispose
+  commentId: M:NativeCollections.NativeMemoryStream.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeMemoryStream.Dispose()
+  fullName: NativeCollections.NativeMemoryStream.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 251
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeMemoryStream.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMemoryStream.AsSpan
+  commentId: M:NativeCollections.NativeMemoryStream.AsSpan
+  id: AsSpan
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: AsSpan()
+  nameWithType: NativeMemoryStream.AsSpan()
+  fullName: NativeCollections.NativeMemoryStream.AsSpan()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsSpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 264
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public Span<byte> AsSpan()
+    return:
+      type: System.Span{System.Byte}
+      description: Span
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsSpan() As Span(Of Byte)
+  overload: NativeCollections.NativeMemoryStream.AsSpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMemoryStream.AsSpan(System.Int32)
+  commentId: M:NativeCollections.NativeMemoryStream.AsSpan(System.Int32)
+  id: AsSpan(System.Int32)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: AsSpan(int)
+  nameWithType: NativeMemoryStream.AsSpan(int)
+  fullName: NativeCollections.NativeMemoryStream.AsSpan(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsSpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 272
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public Span<byte> AsSpan(int length)
+    parameters:
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Span{System.Byte}
+      description: Span
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsSpan(length As Integer) As Span(Of Byte)
+  overload: NativeCollections.NativeMemoryStream.AsSpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.AsSpan(Integer)
+  fullName.vb: NativeCollections.NativeMemoryStream.AsSpan(Integer)
+  name.vb: AsSpan(Integer)
+- uid: NativeCollections.NativeMemoryStream.AsSpan(System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeMemoryStream.AsSpan(System.Int32,System.Int32)
+  id: AsSpan(System.Int32,System.Int32)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: AsSpan(int, int)
+  nameWithType: NativeMemoryStream.AsSpan(int, int)
+  fullName: NativeCollections.NativeMemoryStream.AsSpan(int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsSpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 281
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public Span<byte> AsSpan(int start, int length)
+    parameters:
+    - id: start
+      type: System.Int32
+      description: Start
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Span{System.Byte}
+      description: Span
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsSpan(start As Integer, length As Integer) As Span(Of Byte)
+  overload: NativeCollections.NativeMemoryStream.AsSpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.AsSpan(Integer, Integer)
+  fullName.vb: NativeCollections.NativeMemoryStream.AsSpan(Integer, Integer)
+  name.vb: AsSpan(Integer, Integer)
+- uid: NativeCollections.NativeMemoryStream.AsReadOnlySpan
+  commentId: M:NativeCollections.NativeMemoryStream.AsReadOnlySpan
+  id: AsReadOnlySpan
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: AsReadOnlySpan()
+  nameWithType: NativeMemoryStream.AsReadOnlySpan()
+  fullName: NativeCollections.NativeMemoryStream.AsReadOnlySpan()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsReadOnlySpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 288
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As readOnly span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public ReadOnlySpan<byte> AsReadOnlySpan()
+    return:
+      type: System.ReadOnlySpan{System.Byte}
+      description: ReadOnlySpan
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsReadOnlySpan() As ReadOnlySpan(Of Byte)
+  overload: NativeCollections.NativeMemoryStream.AsReadOnlySpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMemoryStream.AsReadOnlySpan(System.Int32)
+  commentId: M:NativeCollections.NativeMemoryStream.AsReadOnlySpan(System.Int32)
+  id: AsReadOnlySpan(System.Int32)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: AsReadOnlySpan(int)
+  nameWithType: NativeMemoryStream.AsReadOnlySpan(int)
+  fullName: NativeCollections.NativeMemoryStream.AsReadOnlySpan(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsReadOnlySpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 296
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As readOnly span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public ReadOnlySpan<byte> AsReadOnlySpan(int length)
+    parameters:
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.ReadOnlySpan{System.Byte}
+      description: ReadOnlySpan
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsReadOnlySpan(length As Integer) As ReadOnlySpan(Of Byte)
+  overload: NativeCollections.NativeMemoryStream.AsReadOnlySpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.AsReadOnlySpan(Integer)
+  fullName.vb: NativeCollections.NativeMemoryStream.AsReadOnlySpan(Integer)
+  name.vb: AsReadOnlySpan(Integer)
+- uid: NativeCollections.NativeMemoryStream.AsReadOnlySpan(System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeMemoryStream.AsReadOnlySpan(System.Int32,System.Int32)
+  id: AsReadOnlySpan(System.Int32,System.Int32)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: AsReadOnlySpan(int, int)
+  nameWithType: NativeMemoryStream.AsReadOnlySpan(int, int)
+  fullName: NativeCollections.NativeMemoryStream.AsReadOnlySpan(int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsReadOnlySpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 305
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As readOnly span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public ReadOnlySpan<byte> AsReadOnlySpan(int start, int length)
+    parameters:
+    - id: start
+      type: System.Int32
+      description: Start
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.ReadOnlySpan{System.Byte}
+      description: ReadOnlySpan
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsReadOnlySpan(start As Integer, length As Integer) As ReadOnlySpan(Of Byte)
+  overload: NativeCollections.NativeMemoryStream.AsReadOnlySpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.AsReadOnlySpan(Integer, Integer)
+  fullName.vb: NativeCollections.NativeMemoryStream.AsReadOnlySpan(Integer, Integer)
+  name.vb: AsReadOnlySpan(Integer, Integer)
+- uid: NativeCollections.NativeMemoryStream.GetBuffer
+  commentId: M:NativeCollections.NativeMemoryStream.GetBuffer
+  id: GetBuffer
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: GetBuffer()
+  nameWithType: NativeMemoryStream.GetBuffer()
+  fullName: NativeCollections.NativeMemoryStream.GetBuffer()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetBuffer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 312
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get buffer
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public byte* GetBuffer()
+    return:
+      type: System.Byte*
+      description: Buffer
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function GetBuffer() As Byte*
+  overload: NativeCollections.NativeMemoryStream.GetBuffer*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMemoryStream.Seek(System.Int32,System.IO.SeekOrigin)
+  commentId: M:NativeCollections.NativeMemoryStream.Seek(System.Int32,System.IO.SeekOrigin)
+  id: Seek(System.Int32,System.IO.SeekOrigin)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Seek(int, SeekOrigin)
+  nameWithType: NativeMemoryStream.Seek(int, SeekOrigin)
+  fullName: NativeCollections.NativeMemoryStream.Seek(int, System.IO.SeekOrigin)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Seek
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 321
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Seek
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int Seek(int offset, SeekOrigin loc)
+    parameters:
+    - id: offset
+      type: System.Int32
+      description: Offset
+    - id: loc
+      type: System.IO.SeekOrigin
+      description: Seek origin
+    return:
+      type: System.Int32
+      description: Position
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Seek(offset As Integer, loc As SeekOrigin) As Integer
+  overload: NativeCollections.NativeMemoryStream.Seek*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.Seek(Integer, SeekOrigin)
+  fullName.vb: NativeCollections.NativeMemoryStream.Seek(Integer, System.IO.SeekOrigin)
+  name.vb: Seek(Integer, SeekOrigin)
+- uid: NativeCollections.NativeMemoryStream.SetLength(System.Int32)
+  commentId: M:NativeCollections.NativeMemoryStream.SetLength(System.Int32)
+  id: SetLength(System.Int32)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: SetLength(int)
+  nameWithType: NativeMemoryStream.SetLength(int)
+  fullName: NativeCollections.NativeMemoryStream.SetLength(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetLength
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 363
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Set length
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void SetLength(int length)
+    parameters:
+    - id: length
+      type: System.Int32
+      description: Length
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub SetLength(length As Integer)
+  overload: NativeCollections.NativeMemoryStream.SetLength*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.SetLength(Integer)
+  fullName.vb: NativeCollections.NativeMemoryStream.SetLength(Integer)
+  name.vb: SetLength(Integer)
+- uid: NativeCollections.NativeMemoryStream.Read(System.Byte*,System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeMemoryStream.Read(System.Byte*,System.Int32,System.Int32)
+  id: Read(System.Byte*,System.Int32,System.Int32)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Read(byte*, int, int)
+  nameWithType: NativeMemoryStream.Read(byte*, int, int)
+  fullName: NativeCollections.NativeMemoryStream.Read(byte*, int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Read
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 384
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Read
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int Read(byte* buffer, int offset, int count)
+    parameters:
+    - id: buffer
+      type: System.Byte*
+      description: Buffer
+    - id: offset
+      type: System.Int32
+      description: Offset
+    - id: count
+      type: System.Int32
+      description: Count
+    return:
+      type: System.Int32
+      description: Bytes
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Read(buffer As Byte*, offset As Integer, count As Integer) As Integer
+  overload: NativeCollections.NativeMemoryStream.Read*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.Read(Byte*, Integer, Integer)
+  fullName.vb: NativeCollections.NativeMemoryStream.Read(Byte*, Integer, Integer)
+  name.vb: Read(Byte*, Integer, Integer)
+- uid: NativeCollections.NativeMemoryStream.Read(System.Span{System.Byte})
+  commentId: M:NativeCollections.NativeMemoryStream.Read(System.Span{System.Byte})
+  id: Read(System.Span{System.Byte})
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Read(Span<byte>)
+  nameWithType: NativeMemoryStream.Read(Span<byte>)
+  fullName: NativeCollections.NativeMemoryStream.Read(System.Span<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Read
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 413
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Read
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int Read(Span<byte> buffer)
+    parameters:
+    - id: buffer
+      type: System.Span{System.Byte}
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Bytes
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Read(buffer As Span(Of Byte)) As Integer
+  overload: NativeCollections.NativeMemoryStream.Read*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.Read(Span(Of Byte))
+  fullName.vb: NativeCollections.NativeMemoryStream.Read(System.Span(Of Byte))
+  name.vb: Read(Span(Of Byte))
+- uid: NativeCollections.NativeMemoryStream.ReadByte
+  commentId: M:NativeCollections.NativeMemoryStream.ReadByte
+  id: ReadByte
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: ReadByte()
+  nameWithType: NativeMemoryStream.ReadByte()
+  fullName: NativeCollections.NativeMemoryStream.ReadByte()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ReadByte
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 430
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Read
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int ReadByte()
+    return:
+      type: System.Int32
+      description: Byte
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function ReadByte() As Integer
+  overload: NativeCollections.NativeMemoryStream.ReadByte*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMemoryStream.Write(System.Byte*,System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeMemoryStream.Write(System.Byte*,System.Int32,System.Int32)
+  id: Write(System.Byte*,System.Int32,System.Int32)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Write(byte*, int, int)
+  nameWithType: NativeMemoryStream.Write(byte*, int, int)
+  fullName: NativeCollections.NativeMemoryStream.Write(byte*, int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Write
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 443
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Write
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Write(byte* buffer, int offset, int count)
+    parameters:
+    - id: buffer
+      type: System.Byte*
+      description: Buffer
+    - id: offset
+      type: System.Int32
+      description: Offset
+    - id: count
+      type: System.Int32
+      description: Count
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Write(buffer As Byte*, offset As Integer, count As Integer)
+  overload: NativeCollections.NativeMemoryStream.Write*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.Write(Byte*, Integer, Integer)
+  fullName.vb: NativeCollections.NativeMemoryStream.Write(Byte*, Integer, Integer)
+  name.vb: Write(Byte*, Integer, Integer)
+- uid: NativeCollections.NativeMemoryStream.Write(System.ReadOnlySpan{System.Byte})
+  commentId: M:NativeCollections.NativeMemoryStream.Write(System.ReadOnlySpan{System.Byte})
+  id: Write(System.ReadOnlySpan{System.Byte})
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Write(ReadOnlySpan<byte>)
+  nameWithType: NativeMemoryStream.Write(ReadOnlySpan<byte>)
+  fullName: NativeCollections.NativeMemoryStream.Write(System.ReadOnlySpan<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Write
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 483
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Write
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Write(ReadOnlySpan<byte> buffer)
+    parameters:
+    - id: buffer
+      type: System.ReadOnlySpan{System.Byte}
+      description: Buffer
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Write(buffer As ReadOnlySpan(Of Byte))
+  overload: NativeCollections.NativeMemoryStream.Write*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.Write(ReadOnlySpan(Of Byte))
+  fullName.vb: NativeCollections.NativeMemoryStream.Write(System.ReadOnlySpan(Of Byte))
+  name.vb: Write(ReadOnlySpan(Of Byte))
+- uid: NativeCollections.NativeMemoryStream.WriteByte(System.Byte)
+  commentId: M:NativeCollections.NativeMemoryStream.WriteByte(System.Byte)
+  id: WriteByte(System.Byte)
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: WriteByte(byte)
+  nameWithType: NativeMemoryStream.WriteByte(byte)
+  fullName: NativeCollections.NativeMemoryStream.WriteByte(byte)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WriteByte
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 513
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Write
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void WriteByte(byte value)
+    parameters:
+    - id: value
+      type: System.Byte
+      description: Byte
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub WriteByte(value As Byte)
+  overload: NativeCollections.NativeMemoryStream.WriteByte*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryStream.WriteByte(Byte)
+  fullName.vb: NativeCollections.NativeMemoryStream.WriteByte(Byte)
+  name.vb: WriteByte(Byte)
+- uid: NativeCollections.NativeMemoryStream.Empty
+  commentId: P:NativeCollections.NativeMemoryStream.Empty
+  id: Empty
+  parent: NativeCollections.NativeMemoryStream
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeMemoryStream.Empty
+  fullName: NativeCollections.NativeMemoryStream.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryStream.cs
+    startLine: 573
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeMemoryStream Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeMemoryStream
+    content.vb: Public Shared ReadOnly Property Empty As NativeMemoryStream
+  overload: NativeCollections.NativeMemoryStream.Empty*
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeMemoryStream}
+  commentId: T:System.IEquatable{NativeCollections.NativeMemoryStream}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeMemoryStream>
+  nameWithType: IEquatable<NativeMemoryStream>
+  fullName: System.IEquatable<NativeCollections.NativeMemoryStream>
+  nameWithType.vb: IEquatable(Of NativeMemoryStream)
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeMemoryStream)
+  name.vb: IEquatable(Of NativeMemoryStream)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeMemoryStream
+    name: NativeMemoryStream
+    href: NativeCollections.NativeMemoryStream.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeMemoryStream
+    name: NativeMemoryStream
+    href: NativeCollections.NativeMemoryStream.html
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeMemoryStream.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeMemoryStream>(NativeMemoryStream)
+  nameWithType: JsonHelper.ToJson<NativeMemoryStream>(NativeMemoryStream)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeMemoryStream>(NativeCollections.NativeMemoryStream)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeMemoryStream)(NativeMemoryStream)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeMemoryStream)(NativeCollections.NativeMemoryStream)
+  name.vb: ToJson(Of NativeMemoryStream)(NativeMemoryStream)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeMemoryStream)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeMemoryStream
+    name: NativeMemoryStream
+    href: NativeCollections.NativeMemoryStream.html
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeMemoryStream
+    name: NativeMemoryStream
+    href: NativeCollections.NativeMemoryStream.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeMemoryStream)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeMemoryStream
+    name: NativeMemoryStream
+    href: NativeCollections.NativeMemoryStream.html
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeMemoryStream
+    name: NativeMemoryStream
+    href: NativeCollections.NativeMemoryStream.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeMemoryStream.#ctor*
+  commentId: Overload:NativeCollections.NativeMemoryStream.#ctor
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream__ctor_System_Int32_
+  name: NativeMemoryStream
+  nameWithType: NativeMemoryStream.NativeMemoryStream
+  fullName: NativeCollections.NativeMemoryStream.NativeMemoryStream
+  nameWithType.vb: NativeMemoryStream.New
+  fullName.vb: NativeCollections.NativeMemoryStream.New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativeMemoryStream.IsCreated*
+  commentId: Overload:NativeCollections.NativeMemoryStream.IsCreated
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_IsCreated
+  name: IsCreated
+  nameWithType: NativeMemoryStream.IsCreated
+  fullName: NativeCollections.NativeMemoryStream.IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeMemoryStream.IsEmpty*
+  commentId: Overload:NativeCollections.NativeMemoryStream.IsEmpty
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_IsEmpty
+  name: IsEmpty
+  nameWithType: NativeMemoryStream.IsEmpty
+  fullName: NativeCollections.NativeMemoryStream.IsEmpty
+- uid: NativeCollections.NativeMemoryStream.Item*
+  commentId: Overload:NativeCollections.NativeMemoryStream.Item
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_Item_System_Int32_
+  name: this
+  nameWithType: NativeMemoryStream.this
+  fullName: NativeCollections.NativeMemoryStream.this
+  nameWithType.vb: NativeMemoryStream.this[]
+  fullName.vb: NativeCollections.NativeMemoryStream.this[]
+  name.vb: this[]
+- uid: System.Byte
+  commentId: T:System.Byte
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte
+  nameWithType: byte
+  fullName: byte
+  nameWithType.vb: Byte
+  fullName.vb: Byte
+  name.vb: Byte
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: NativeCollections.NativeMemoryStream.CanRead*
+  commentId: Overload:NativeCollections.NativeMemoryStream.CanRead
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_CanRead
+  name: CanRead
+  nameWithType: NativeMemoryStream.CanRead
+  fullName: NativeCollections.NativeMemoryStream.CanRead
+- uid: NativeCollections.NativeMemoryStream.CanSeek*
+  commentId: Overload:NativeCollections.NativeMemoryStream.CanSeek
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_CanSeek
+  name: CanSeek
+  nameWithType: NativeMemoryStream.CanSeek
+  fullName: NativeCollections.NativeMemoryStream.CanSeek
+- uid: NativeCollections.NativeMemoryStream.CanWrite*
+  commentId: Overload:NativeCollections.NativeMemoryStream.CanWrite
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_CanWrite
+  name: CanWrite
+  nameWithType: NativeMemoryStream.CanWrite
+  fullName: NativeCollections.NativeMemoryStream.CanWrite
+- uid: NativeCollections.NativeMemoryStream.Length*
+  commentId: Overload:NativeCollections.NativeMemoryStream.Length
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_Length
+  name: Length
+  nameWithType: NativeMemoryStream.Length
+  fullName: NativeCollections.NativeMemoryStream.Length
+- uid: NativeCollections.NativeMemoryStream.Position*
+  commentId: Overload:NativeCollections.NativeMemoryStream.Position
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_Position
+  name: Position
+  nameWithType: NativeMemoryStream.Position
+  fullName: NativeCollections.NativeMemoryStream.Position
+- uid: NativeCollections.NativeMemoryStream.Capacity*
+  commentId: Overload:NativeCollections.NativeMemoryStream.Capacity
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_Capacity
+  name: Capacity
+  nameWithType: NativeMemoryStream.Capacity
+  fullName: NativeCollections.NativeMemoryStream.Capacity
+- uid: NativeCollections.NativeMemoryStream.Equals*
+  commentId: Overload:NativeCollections.NativeMemoryStream.Equals
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_Equals_NativeCollections_NativeMemoryStream_
+  name: Equals
+  nameWithType: NativeMemoryStream.Equals
+  fullName: NativeCollections.NativeMemoryStream.Equals
+- uid: System.IEquatable{NativeCollections.NativeMemoryStream}.Equals(NativeCollections.NativeMemoryStream)
+  commentId: M:System.IEquatable{NativeCollections.NativeMemoryStream}.Equals(NativeCollections.NativeMemoryStream)
+  parent: System.IEquatable{NativeCollections.NativeMemoryStream}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeMemoryStream)
+  nameWithType: IEquatable<NativeMemoryStream>.Equals(NativeMemoryStream)
+  fullName: System.IEquatable<NativeCollections.NativeMemoryStream>.Equals(NativeCollections.NativeMemoryStream)
+  nameWithType.vb: IEquatable(Of NativeMemoryStream).Equals(NativeMemoryStream)
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeMemoryStream).Equals(NativeCollections.NativeMemoryStream)
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeMemoryStream}.Equals(NativeCollections.NativeMemoryStream)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeMemoryStream
+    name: NativeMemoryStream
+    href: NativeCollections.NativeMemoryStream.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeMemoryStream}.Equals(NativeCollections.NativeMemoryStream)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeMemoryStream
+    name: NativeMemoryStream
+    href: NativeCollections.NativeMemoryStream.html
+  - name: )
+- uid: NativeCollections.NativeMemoryStream
+  commentId: T:NativeCollections.NativeMemoryStream
+  parent: NativeCollections
+  href: NativeCollections.NativeMemoryStream.html
+  name: NativeMemoryStream
+  nameWithType: NativeMemoryStream
+  fullName: NativeCollections.NativeMemoryStream
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMemoryStream.GetHashCode*
+  commentId: Overload:NativeCollections.NativeMemoryStream.GetHashCode
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeMemoryStream.GetHashCode
+  fullName: NativeCollections.NativeMemoryStream.GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMemoryStream.ToString*
+  commentId: Overload:NativeCollections.NativeMemoryStream.ToString
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_ToString
+  name: ToString
+  nameWithType: NativeMemoryStream.ToString
+  fullName: NativeCollections.NativeMemoryStream.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeMemoryStream.op_Implicit*
+  commentId: Overload:NativeCollections.NativeMemoryStream.op_Implicit
+  name: implicit operator
+  nameWithType: NativeMemoryStream.implicit operator
+  fullName: NativeCollections.NativeMemoryStream.implicit operator
+  nameWithType.vb: NativeMemoryStream.CType
+  fullName.vb: NativeCollections.NativeMemoryStream.CType
+  name.vb: CType
+  spec.csharp:
+  - name: implicit
+  - name: " "
+  - name: operator
+- uid: System.Span{System.Byte}
+  commentId: T:System.Span{System.Byte}
+  parent: System
+  definition: System.Span`1
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<byte>
+  nameWithType: Span<byte>
+  fullName: System.Span<byte>
+  nameWithType.vb: Span(Of Byte)
+  fullName.vb: System.Span(Of Byte)
+  name.vb: Span(Of Byte)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.Span`1
+  commentId: T:System.Span`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<T>
+  nameWithType: Span<T>
+  fullName: System.Span<T>
+  nameWithType.vb: Span(Of T)
+  fullName.vb: System.Span(Of T)
+  name.vb: Span(Of T)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.ReadOnlySpan{System.Byte}
+  commentId: T:System.ReadOnlySpan{System.Byte}
+  parent: System
+  definition: System.ReadOnlySpan`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<byte>
+  nameWithType: ReadOnlySpan<byte>
+  fullName: System.ReadOnlySpan<byte>
+  nameWithType.vb: ReadOnlySpan(Of Byte)
+  fullName.vb: System.ReadOnlySpan(Of Byte)
+  name.vb: ReadOnlySpan(Of Byte)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.ReadOnlySpan`1
+  commentId: T:System.ReadOnlySpan`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<T>
+  nameWithType: ReadOnlySpan<T>
+  fullName: System.ReadOnlySpan<T>
+  nameWithType.vb: ReadOnlySpan(Of T)
+  fullName.vb: System.ReadOnlySpan(Of T)
+  name.vb: ReadOnlySpan(Of T)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeMemoryStream.op_Equality*
+  commentId: Overload:NativeCollections.NativeMemoryStream.op_Equality
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_op_Equality_NativeCollections_NativeMemoryStream_NativeCollections_NativeMemoryStream_
+  name: operator ==
+  nameWithType: NativeMemoryStream.operator ==
+  fullName: NativeCollections.NativeMemoryStream.operator ==
+  nameWithType.vb: NativeMemoryStream.=
+  fullName.vb: NativeCollections.NativeMemoryStream.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeMemoryStream.op_Equality*
+    name: ==
+    href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_op_Equality_NativeCollections_NativeMemoryStream_NativeCollections_NativeMemoryStream_
+- uid: NativeCollections.NativeMemoryStream.op_Inequality*
+  commentId: Overload:NativeCollections.NativeMemoryStream.op_Inequality
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_op_Inequality_NativeCollections_NativeMemoryStream_NativeCollections_NativeMemoryStream_
+  name: operator !=
+  nameWithType: NativeMemoryStream.operator !=
+  fullName: NativeCollections.NativeMemoryStream.operator !=
+  nameWithType.vb: NativeMemoryStream.<>
+  fullName.vb: NativeCollections.NativeMemoryStream.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeMemoryStream.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_op_Inequality_NativeCollections_NativeMemoryStream_NativeCollections_NativeMemoryStream_
+- uid: NativeCollections.NativeMemoryStream.Dispose*
+  commentId: Overload:NativeCollections.NativeMemoryStream.Dispose
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_Dispose
+  name: Dispose
+  nameWithType: NativeMemoryStream.Dispose
+  fullName: NativeCollections.NativeMemoryStream.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMemoryStream.AsSpan*
+  commentId: Overload:NativeCollections.NativeMemoryStream.AsSpan
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_AsSpan
+  name: AsSpan
+  nameWithType: NativeMemoryStream.AsSpan
+  fullName: NativeCollections.NativeMemoryStream.AsSpan
+- uid: NativeCollections.NativeMemoryStream.AsReadOnlySpan*
+  commentId: Overload:NativeCollections.NativeMemoryStream.AsReadOnlySpan
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_AsReadOnlySpan
+  name: AsReadOnlySpan
+  nameWithType: NativeMemoryStream.AsReadOnlySpan
+  fullName: NativeCollections.NativeMemoryStream.AsReadOnlySpan
+- uid: NativeCollections.NativeMemoryStream.GetBuffer*
+  commentId: Overload:NativeCollections.NativeMemoryStream.GetBuffer
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_GetBuffer
+  name: GetBuffer
+  nameWithType: NativeMemoryStream.GetBuffer
+  fullName: NativeCollections.NativeMemoryStream.GetBuffer
+- uid: System.Byte*
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte*
+  nameWithType: byte*
+  fullName: byte*
+  nameWithType.vb: Byte*
+  fullName.vb: Byte*
+  name.vb: Byte*
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '*'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '*'
+- uid: NativeCollections.NativeMemoryStream.Seek*
+  commentId: Overload:NativeCollections.NativeMemoryStream.Seek
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_Seek_System_Int32_System_IO_SeekOrigin_
+  name: Seek
+  nameWithType: NativeMemoryStream.Seek
+  fullName: NativeCollections.NativeMemoryStream.Seek
+- uid: System.IO.SeekOrigin
+  commentId: T:System.IO.SeekOrigin
+  parent: System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.seekorigin
+  name: SeekOrigin
+  nameWithType: SeekOrigin
+  fullName: System.IO.SeekOrigin
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+- uid: NativeCollections.NativeMemoryStream.SetLength*
+  commentId: Overload:NativeCollections.NativeMemoryStream.SetLength
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_SetLength_System_Int32_
+  name: SetLength
+  nameWithType: NativeMemoryStream.SetLength
+  fullName: NativeCollections.NativeMemoryStream.SetLength
+- uid: NativeCollections.NativeMemoryStream.Read*
+  commentId: Overload:NativeCollections.NativeMemoryStream.Read
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_Read_System_Byte__System_Int32_System_Int32_
+  name: Read
+  nameWithType: NativeMemoryStream.Read
+  fullName: NativeCollections.NativeMemoryStream.Read
+- uid: NativeCollections.NativeMemoryStream.ReadByte*
+  commentId: Overload:NativeCollections.NativeMemoryStream.ReadByte
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_ReadByte
+  name: ReadByte
+  nameWithType: NativeMemoryStream.ReadByte
+  fullName: NativeCollections.NativeMemoryStream.ReadByte
+- uid: NativeCollections.NativeMemoryStream.Write*
+  commentId: Overload:NativeCollections.NativeMemoryStream.Write
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_Write_System_Byte__System_Int32_System_Int32_
+  name: Write
+  nameWithType: NativeMemoryStream.Write
+  fullName: NativeCollections.NativeMemoryStream.Write
+- uid: NativeCollections.NativeMemoryStream.WriteByte*
+  commentId: Overload:NativeCollections.NativeMemoryStream.WriteByte
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_WriteByte_System_Byte_
+  name: WriteByte
+  nameWithType: NativeMemoryStream.WriteByte
+  fullName: NativeCollections.NativeMemoryStream.WriteByte
+- uid: NativeCollections.NativeMemoryStream.Empty*
+  commentId: Overload:NativeCollections.NativeMemoryStream.Empty
+  href: NativeCollections.NativeMemoryStream.html#NativeCollections_NativeMemoryStream_Empty
+  name: Empty
+  nameWithType: NativeMemoryStream.Empty
+  fullName: NativeCollections.NativeMemoryStream.Empty

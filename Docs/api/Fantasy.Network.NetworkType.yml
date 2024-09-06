@@ -1,0 +1,250 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.NetworkType
+  commentId: T:Fantasy.Network.NetworkType
+  id: NetworkType
+  parent: Fantasy.Network
+  children:
+  - Fantasy.Network.NetworkType.Client
+  - Fantasy.Network.NetworkType.None
+  - Fantasy.Network.NetworkType.Server
+  langs:
+  - csharp
+  - vb
+  name: NetworkType
+  nameWithType: NetworkType
+  fullName: Fantasy.Network.NetworkType
+  type: Enum
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/NetworkProtocolType.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NetworkType
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/NetworkProtocolType.cs
+    startLine: 5
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  summary: 网络服务器类型
+  example: []
+  syntax:
+    content: public enum NetworkType
+    content.vb: Public Enum NetworkType
+  extensionMethods:
+  - Fantasy.Network.NetworkType.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.NetworkType.None
+  commentId: F:Fantasy.Network.NetworkType.None
+  id: None
+  parent: Fantasy.Network.NetworkType
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: NetworkType.None
+  fullName: Fantasy.Network.NetworkType.None
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/NetworkProtocolType.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: None
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/NetworkProtocolType.cs
+    startLine: 10
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  summary: 默认
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Fantasy.Network.NetworkType
+- uid: Fantasy.Network.NetworkType.Client
+  commentId: F:Fantasy.Network.NetworkType.Client
+  id: Client
+  parent: Fantasy.Network.NetworkType
+  langs:
+  - csharp
+  - vb
+  name: Client
+  nameWithType: NetworkType.Client
+  fullName: Fantasy.Network.NetworkType.Client
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/NetworkProtocolType.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Client
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/NetworkProtocolType.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  summary: 客户端网络
+  example: []
+  syntax:
+    content: Client = 1
+    return:
+      type: Fantasy.Network.NetworkType
+- uid: Fantasy.Network.NetworkType.Server
+  commentId: F:Fantasy.Network.NetworkType.Server
+  id: Server
+  parent: Fantasy.Network.NetworkType
+  langs:
+  - csharp
+  - vb
+  name: Server
+  nameWithType: NetworkType.Server
+  fullName: Fantasy.Network.NetworkType.Server
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/NetworkProtocolType.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Server
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/NetworkProtocolType.cs
+    startLine: 19
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  summary: 服务器网络
+  example: []
+  syntax:
+    content: Server = 2
+    return:
+      type: Fantasy.Network.NetworkType
+references:
+- uid: Fantasy.Network
+  commentId: N:Fantasy.Network
+  href: Fantasy.html
+  name: Fantasy.Network
+  nameWithType: Fantasy.Network
+  fullName: Fantasy.Network
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+- uid: Fantasy.Network.NetworkType.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NetworkType>(NetworkType)
+  nameWithType: JsonHelper.ToJson<NetworkType>(NetworkType)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.NetworkType>(Fantasy.Network.NetworkType)
+  nameWithType.vb: JsonHelper.ToJson(Of NetworkType)(NetworkType)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.NetworkType)(Fantasy.Network.NetworkType)
+  name.vb: ToJson(Of NetworkType)(NetworkType)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.NetworkType)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.NetworkType
+    name: NetworkType
+    href: Fantasy.Network.NetworkType.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.NetworkType
+    name: NetworkType
+    href: Fantasy.Network.NetworkType.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.NetworkType)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.NetworkType
+    name: NetworkType
+    href: Fantasy.Network.NetworkType.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.NetworkType
+    name: NetworkType
+    href: Fantasy.Network.NetworkType.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Network.NetworkType
+  commentId: T:Fantasy.Network.NetworkType
+  parent: Fantasy.Network
+  href: Fantasy.Network.NetworkType.html
+  name: NetworkType
+  nameWithType: NetworkType
+  fullName: Fantasy.Network.NetworkType

@@ -1,0 +1,927 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.Route.I_AddressableUnLockHandler
+  commentId: T:Fantasy.Network.Route.I_AddressableUnLockHandler
+  id: I_AddressableUnLockHandler
+  parent: Fantasy.Network.Route
+  children:
+  - Fantasy.Network.Route.I_AddressableUnLockHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response,System.Action)
+  langs:
+  - csharp
+  - vb
+  name: I_AddressableUnLockHandler
+  nameWithType: I_AddressableUnLockHandler
+  fullName: Fantasy.Network.Route.I_AddressableUnLockHandler
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/Handler/I_AddressableUnLockHandler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: I_AddressableUnLockHandler
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/Handler/I_AddressableUnLockHandler.cs
+    startLine: 10
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Route
+  summary: 声明一个 sealed 类 I_AddressableUnLockHandler，继承自 RouteRPC 类，并指定泛型参数
+  example: []
+  syntax:
+    content: 'public sealed class I_AddressableUnLockHandler : RouteRPC<Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response>, IRouteMessageHandler'
+    content.vb: Public NotInheritable Class I_AddressableUnLockHandler Inherits RouteRPC(Of Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response) Implements IRouteMessageHandler
+  inheritance:
+  - System.Object
+  - Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}
+  implements:
+  - Fantasy.Network.Interface.IRouteMessageHandler
+  inheritedMembers:
+  - Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Type
+  - Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Network.Route.I_AddressableUnLockHandler.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.Route.I_AddressableUnLockHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response,System.Action)
+  commentId: M:Fantasy.Network.Route.I_AddressableUnLockHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response,System.Action)
+  id: Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response,System.Action)
+  parent: Fantasy.Network.Route.I_AddressableUnLockHandler
+  langs:
+  - csharp
+  - vb
+  name: Run(Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response, Action)
+  nameWithType: I_AddressableUnLockHandler.Run(Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response, Action)
+  fullName: Fantasy.Network.Route.I_AddressableUnLockHandler.Run(Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response, System.Action)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/Handler/I_AddressableUnLockHandler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Run
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/Handler/I_AddressableUnLockHandler.cs
+    startLine: 19
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Route
+  summary: 在收到地址映射解锁请求时执行的逻辑。
+  example: []
+  syntax:
+    content: protected override FTask Run(Scene scene, I_AddressableUnLock_Request request, I_AddressableUnLock_Response response, Action reply)
+    parameters:
+    - id: scene
+      type: Fantasy.Scene
+      description: 当前场景实例。
+    - id: request
+      type: Fantasy.InnerMessage.I_AddressableUnLock_Request
+      description: 包含请求信息的 I_AddressableUnLock_Request 实例。
+    - id: response
+      type: Fantasy.InnerMessage.I_AddressableUnLock_Response
+      description: 用于构建响应的 I_AddressableUnLock_Response 实例。
+    - id: reply
+      type: System.Action
+      description: 执行响应的回调操作。
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Protected Overrides Function Run(scene As Scene, request As I_AddressableUnLock_Request, response As I_AddressableUnLock_Response, reply As Action) As FTask
+  overridden: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response,System.Action)
+  overload: Fantasy.Network.Route.I_AddressableUnLockHandler.Run*
+references:
+- uid: Fantasy.Network.Route
+  commentId: N:Fantasy.Network.Route
+  href: Fantasy.html
+  name: Fantasy.Network.Route
+  nameWithType: Fantasy.Network.Route
+  fullName: Fantasy.Network.Route
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Route
+    name: Route
+    href: Fantasy.Network.Route.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Route
+    name: Route
+    href: Fantasy.Network.Route.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}
+  commentId: T:Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}
+  parent: Fantasy.Network.Interface
+  definition: Fantasy.Network.Interface.RouteRPC`3
+  href: Fantasy.Network.Interface.RouteRPC-3.html
+  name: RouteRPC<Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response>
+  nameWithType: RouteRPC<Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response>
+  fullName: Fantasy.Network.Interface.RouteRPC<Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response>
+  nameWithType.vb: RouteRPC(Of Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response)
+  fullName.vb: Fantasy.Network.Interface.RouteRPC(Of Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response)
+  name.vb: RouteRPC(Of Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.RouteRPC`3
+    name: RouteRPC
+    href: Fantasy.Network.Interface.RouteRPC-3.html
+  - name: <
+  - uid: Fantasy.Scene
+    name: Scene
+    href: Fantasy.Scene.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.InnerMessage.I_AddressableUnLock_Request
+    name: I_AddressableUnLock_Request
+    href: Fantasy.InnerMessage.I_AddressableUnLock_Request.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.InnerMessage.I_AddressableUnLock_Response
+    name: I_AddressableUnLock_Response
+    href: Fantasy.InnerMessage.I_AddressableUnLock_Response.html
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Network.Interface.RouteRPC`3
+    name: RouteRPC
+    href: Fantasy.Network.Interface.RouteRPC-3.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Scene
+    name: Scene
+    href: Fantasy.Scene.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.InnerMessage.I_AddressableUnLock_Request
+    name: I_AddressableUnLock_Request
+    href: Fantasy.InnerMessage.I_AddressableUnLock_Request.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.InnerMessage.I_AddressableUnLock_Response
+    name: I_AddressableUnLock_Response
+    href: Fantasy.InnerMessage.I_AddressableUnLock_Response.html
+  - name: )
+- uid: Fantasy.Network.Interface.IRouteMessageHandler
+  commentId: T:Fantasy.Network.Interface.IRouteMessageHandler
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IRouteMessageHandler.html
+  name: IRouteMessageHandler
+  nameWithType: IRouteMessageHandler
+  fullName: Fantasy.Network.Interface.IRouteMessageHandler
+- uid: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Type
+  commentId: M:Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Type
+  parent: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}
+  definition: Fantasy.Network.Interface.RouteRPC`3.Type
+  href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Type
+  name: Type()
+  nameWithType: RouteRPC<Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response>.Type()
+  fullName: Fantasy.Network.Interface.RouteRPC<Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response>.Type()
+  nameWithType.vb: RouteRPC(Of Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response).Type()
+  fullName.vb: Fantasy.Network.Interface.RouteRPC(Of Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response).Type()
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Type
+    name: Type
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Type
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Type
+    name: Type
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Type
+  - name: (
+  - name: )
+- uid: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+  commentId: M:Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+  parent: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}
+  definition: Fantasy.Network.Interface.RouteRPC`3.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+  href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Handle_Fantasy_Network_Session_Fantasy_Entitas_Entity_System_UInt32_System_Object_
+  name: Handle(Session, Entity, uint, object)
+  nameWithType: RouteRPC<Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response>.Handle(Session, Entity, uint, object)
+  fullName: Fantasy.Network.Interface.RouteRPC<Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response>.Handle(Fantasy.Network.Session, Fantasy.Entitas.Entity, uint, object)
+  nameWithType.vb: RouteRPC(Of Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response).Handle(Session, Entity, UInteger, Object)
+  fullName.vb: Fantasy.Network.Interface.RouteRPC(Of Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response).Handle(Fantasy.Network.Session, Fantasy.Entitas.Entity, UInteger, Object)
+  name.vb: Handle(Session, Entity, UInteger, Object)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+    name: Handle
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Handle_Fantasy_Network_Session_Fantasy_Entitas_Entity_System_UInt32_System_Object_
+  - name: (
+  - uid: Fantasy.Network.Session
+    name: Session
+    href: Fantasy.Network.Session.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: uint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+    name: Handle
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Handle_Fantasy_Network_Session_Fantasy_Entitas_Entity_System_UInt32_System_Object_
+  - name: (
+  - uid: Fantasy.Network.Session
+    name: Session
+    href: Fantasy.Network.Session.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: UInteger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Network.Route.I_AddressableUnLockHandler.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<I_AddressableUnLockHandler>(I_AddressableUnLockHandler)
+  nameWithType: JsonHelper.ToJson<I_AddressableUnLockHandler>(I_AddressableUnLockHandler)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.Route.I_AddressableUnLockHandler>(Fantasy.Network.Route.I_AddressableUnLockHandler)
+  nameWithType.vb: JsonHelper.ToJson(Of I_AddressableUnLockHandler)(I_AddressableUnLockHandler)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.Route.I_AddressableUnLockHandler)(Fantasy.Network.Route.I_AddressableUnLockHandler)
+  name.vb: ToJson(Of I_AddressableUnLockHandler)(I_AddressableUnLockHandler)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Route.I_AddressableUnLockHandler)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.Route.I_AddressableUnLockHandler
+    name: I_AddressableUnLockHandler
+    href: Fantasy.Network.Route.I_AddressableUnLockHandler.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.Route.I_AddressableUnLockHandler
+    name: I_AddressableUnLockHandler
+    href: Fantasy.Network.Route.I_AddressableUnLockHandler.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Route.I_AddressableUnLockHandler)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.Route.I_AddressableUnLockHandler
+    name: I_AddressableUnLockHandler
+    href: Fantasy.Network.Route.I_AddressableUnLockHandler.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.Route.I_AddressableUnLockHandler
+    name: I_AddressableUnLockHandler
+    href: Fantasy.Network.Route.I_AddressableUnLockHandler.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Network.Interface.RouteRPC`3
+  commentId: T:Fantasy.Network.Interface.RouteRPC`3
+  href: Fantasy.Network.Interface.RouteRPC-3.html
+  name: RouteRPC<TEntity, TRouteRequest, TRouteResponse>
+  nameWithType: RouteRPC<TEntity, TRouteRequest, TRouteResponse>
+  fullName: Fantasy.Network.Interface.RouteRPC<TEntity, TRouteRequest, TRouteResponse>
+  nameWithType.vb: RouteRPC(Of TEntity, TRouteRequest, TRouteResponse)
+  fullName.vb: Fantasy.Network.Interface.RouteRPC(Of TEntity, TRouteRequest, TRouteResponse)
+  name.vb: RouteRPC(Of TEntity, TRouteRequest, TRouteResponse)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.RouteRPC`3
+    name: RouteRPC
+    href: Fantasy.Network.Interface.RouteRPC-3.html
+  - name: <
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TRouteRequest
+  - name: ','
+  - name: " "
+  - name: TRouteResponse
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Network.Interface.RouteRPC`3
+    name: RouteRPC
+    href: Fantasy.Network.Interface.RouteRPC-3.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TRouteRequest
+  - name: ','
+  - name: " "
+  - name: TRouteResponse
+  - name: )
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  href: Fantasy.html
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+- uid: Fantasy.Network.Interface.RouteRPC`3.Type
+  commentId: M:Fantasy.Network.Interface.RouteRPC`3.Type
+  href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Type
+  name: Type()
+  nameWithType: RouteRPC<TEntity, TRouteRequest, TRouteResponse>.Type()
+  fullName: Fantasy.Network.Interface.RouteRPC<TEntity, TRouteRequest, TRouteResponse>.Type()
+  nameWithType.vb: RouteRPC(Of TEntity, TRouteRequest, TRouteResponse).Type()
+  fullName.vb: Fantasy.Network.Interface.RouteRPC(Of TEntity, TRouteRequest, TRouteResponse).Type()
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.RouteRPC`3.Type
+    name: Type
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Type
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.RouteRPC`3.Type
+    name: Type
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Type
+  - name: (
+  - name: )
+- uid: Fantasy.Network.Interface.RouteRPC`3.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+  commentId: M:Fantasy.Network.Interface.RouteRPC`3.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+  isExternal: true
+  href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Handle_Fantasy_Network_Session_Fantasy_Entitas_Entity_System_UInt32_System_Object_
+  name: Handle(Session, Entity, uint, object)
+  nameWithType: RouteRPC<TEntity, TRouteRequest, TRouteResponse>.Handle(Session, Entity, uint, object)
+  fullName: Fantasy.Network.Interface.RouteRPC<TEntity, TRouteRequest, TRouteResponse>.Handle(Fantasy.Network.Session, Fantasy.Entitas.Entity, uint, object)
+  nameWithType.vb: RouteRPC(Of TEntity, TRouteRequest, TRouteResponse).Handle(Session, Entity, UInteger, Object)
+  fullName.vb: Fantasy.Network.Interface.RouteRPC(Of TEntity, TRouteRequest, TRouteResponse).Handle(Fantasy.Network.Session, Fantasy.Entitas.Entity, UInteger, Object)
+  name.vb: Handle(Session, Entity, UInteger, Object)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.RouteRPC`3.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+    name: Handle
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Handle_Fantasy_Network_Session_Fantasy_Entitas_Entity_System_UInt32_System_Object_
+  - name: (
+  - uid: Fantasy.Network.Session
+    name: Session
+    href: Fantasy.Network.Session.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: uint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.RouteRPC`3.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+    name: Handle
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Handle_Fantasy_Network_Session_Fantasy_Entitas_Entity_System_UInt32_System_Object_
+  - name: (
+  - uid: Fantasy.Network.Session
+    name: Session
+    href: Fantasy.Network.Session.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: UInteger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response,System.Action)
+  commentId: M:Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response,System.Action)
+  parent: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}
+  definition: Fantasy.Network.Interface.RouteRPC`3.Run(`0,`1,`2,System.Action)
+  href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Run__0__1__2_System_Action_
+  name: Run(Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response, Action)
+  nameWithType: RouteRPC<Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response>.Run(Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response, Action)
+  fullName: Fantasy.Network.Interface.RouteRPC<Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response>.Run(Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response, System.Action)
+  nameWithType.vb: RouteRPC(Of Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response).Run(Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response, Action)
+  fullName.vb: Fantasy.Network.Interface.RouteRPC(Of Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response).Run(Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response, System.Action)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response,System.Action)
+    name: Run
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Run__0__1__2_System_Action_
+  - name: (
+  - uid: Fantasy.Scene
+    name: Scene
+    href: Fantasy.Scene.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.InnerMessage.I_AddressableUnLock_Request
+    name: I_AddressableUnLock_Request
+    href: Fantasy.InnerMessage.I_AddressableUnLock_Request.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.InnerMessage.I_AddressableUnLock_Response
+    name: I_AddressableUnLock_Response
+    href: Fantasy.InnerMessage.I_AddressableUnLock_Response.html
+  - name: ','
+  - name: " "
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.RouteRPC{Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response}.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response,System.Action)
+    name: Run
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Run__0__1__2_System_Action_
+  - name: (
+  - uid: Fantasy.Scene
+    name: Scene
+    href: Fantasy.Scene.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.InnerMessage.I_AddressableUnLock_Request
+    name: I_AddressableUnLock_Request
+    href: Fantasy.InnerMessage.I_AddressableUnLock_Request.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.InnerMessage.I_AddressableUnLock_Response
+    name: I_AddressableUnLock_Response
+    href: Fantasy.InnerMessage.I_AddressableUnLock_Response.html
+  - name: ','
+  - name: " "
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: )
+- uid: Fantasy.Network.Route.I_AddressableUnLockHandler.Run*
+  commentId: Overload:Fantasy.Network.Route.I_AddressableUnLockHandler.Run
+  href: Fantasy.Network.Route.I_AddressableUnLockHandler.html#Fantasy_Network_Route_I_AddressableUnLockHandler_Run_Fantasy_Scene_Fantasy_InnerMessage_I_AddressableUnLock_Request_Fantasy_InnerMessage_I_AddressableUnLock_Response_System_Action_
+  name: Run
+  nameWithType: I_AddressableUnLockHandler.Run
+  fullName: Fantasy.Network.Route.I_AddressableUnLockHandler.Run
+- uid: Fantasy.Scene
+  commentId: T:Fantasy.Scene
+  parent: Fantasy
+  href: Fantasy.Scene.html
+  name: Scene
+  nameWithType: Scene
+  fullName: Fantasy.Scene
+- uid: Fantasy.InnerMessage.I_AddressableUnLock_Request
+  commentId: T:Fantasy.InnerMessage.I_AddressableUnLock_Request
+  parent: Fantasy.InnerMessage
+  href: Fantasy.InnerMessage.I_AddressableUnLock_Request.html
+  name: I_AddressableUnLock_Request
+  nameWithType: I_AddressableUnLock_Request
+  fullName: Fantasy.InnerMessage.I_AddressableUnLock_Request
+- uid: Fantasy.InnerMessage.I_AddressableUnLock_Response
+  commentId: T:Fantasy.InnerMessage.I_AddressableUnLock_Response
+  parent: Fantasy.InnerMessage
+  href: Fantasy.InnerMessage.I_AddressableUnLock_Response.html
+  name: I_AddressableUnLock_Response
+  nameWithType: I_AddressableUnLock_Response
+  fullName: Fantasy.InnerMessage.I_AddressableUnLock_Response
+- uid: System.Action
+  commentId: T:System.Action
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action
+  name: Action
+  nameWithType: Action
+  fullName: System.Action
+- uid: Fantasy.Async.FTask
+  commentId: T:Fantasy.Async.FTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask.html
+  name: FTask
+  nameWithType: FTask
+  fullName: Fantasy.Async.FTask
+- uid: Fantasy.Network.Interface.RouteRPC`3.Run(`0,`1,`2,System.Action)
+  commentId: M:Fantasy.Network.Interface.RouteRPC`3.Run(`0,`1,`2,System.Action)
+  isExternal: true
+  href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Run__0__1__2_System_Action_
+  name: Run(TEntity, TRouteRequest, TRouteResponse, Action)
+  nameWithType: RouteRPC<TEntity, TRouteRequest, TRouteResponse>.Run(TEntity, TRouteRequest, TRouteResponse, Action)
+  fullName: Fantasy.Network.Interface.RouteRPC<TEntity, TRouteRequest, TRouteResponse>.Run(TEntity, TRouteRequest, TRouteResponse, System.Action)
+  nameWithType.vb: RouteRPC(Of TEntity, TRouteRequest, TRouteResponse).Run(TEntity, TRouteRequest, TRouteResponse, Action)
+  fullName.vb: Fantasy.Network.Interface.RouteRPC(Of TEntity, TRouteRequest, TRouteResponse).Run(TEntity, TRouteRequest, TRouteResponse, System.Action)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.RouteRPC`3.Run(`0,`1,`2,System.Action)
+    name: Run
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Run__0__1__2_System_Action_
+  - name: (
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TRouteRequest
+  - name: ','
+  - name: " "
+  - name: TRouteResponse
+  - name: ','
+  - name: " "
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.RouteRPC`3.Run(`0,`1,`2,System.Action)
+    name: Run
+    href: Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Run__0__1__2_System_Action_
+  - name: (
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TRouteRequest
+  - name: ','
+  - name: " "
+  - name: TRouteResponse
+  - name: ','
+  - name: " "
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: )
+- uid: Fantasy
+  commentId: N:Fantasy
+  href: Fantasy.html
+  name: Fantasy
+  nameWithType: Fantasy
+  fullName: Fantasy
+- uid: Fantasy.InnerMessage
+  commentId: N:Fantasy.InnerMessage
+  href: Fantasy.html
+  name: Fantasy.InnerMessage
+  nameWithType: Fantasy.InnerMessage
+  fullName: Fantasy.InnerMessage
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.InnerMessage
+    name: InnerMessage
+    href: Fantasy.InnerMessage.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.InnerMessage
+    name: InnerMessage
+    href: Fantasy.InnerMessage.html
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html

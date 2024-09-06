@@ -1,0 +1,416 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.Interface.INetworkChannel
+  commentId: T:Fantasy.Network.Interface.INetworkChannel
+  id: INetworkChannel
+  parent: Fantasy.Network.Interface
+  children:
+  - Fantasy.Network.Interface.INetworkChannel.IsDisposed
+  - Fantasy.Network.Interface.INetworkChannel.Send(System.UInt32,System.Int64,Fantasy.Serialize.MemoryStreamBuffer,Fantasy.Network.Interface.IMessage)
+  - Fantasy.Network.Interface.INetworkChannel.Session
+  langs:
+  - csharp
+  - vb
+  name: INetworkChannel
+  nameWithType: INetworkChannel
+  fullName: Fantasy.Network.Interface.INetworkChannel
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/INetworkChannel.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: INetworkChannel
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/INetworkChannel.cs
+    startLine: 7
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  syntax:
+    content: 'public interface INetworkChannel : IDisposable'
+    content.vb: Public Interface INetworkChannel Inherits IDisposable
+  inheritedMembers:
+  - System.IDisposable.Dispose
+  extensionMethods:
+  - Fantasy.Network.Interface.INetworkChannel.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.Interface.INetworkChannel.Session
+  commentId: P:Fantasy.Network.Interface.INetworkChannel.Session
+  id: Session
+  parent: Fantasy.Network.Interface.INetworkChannel
+  langs:
+  - csharp
+  - vb
+  name: Session
+  nameWithType: INetworkChannel.Session
+  fullName: Fantasy.Network.Interface.INetworkChannel.Session
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/INetworkChannel.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Session
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/INetworkChannel.cs
+    startLine: 9
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  syntax:
+    content: Session Session { get; }
+    parameters: []
+    return:
+      type: Fantasy.Network.Session
+    content.vb: ReadOnly Property Session As Session
+  overload: Fantasy.Network.Interface.INetworkChannel.Session*
+- uid: Fantasy.Network.Interface.INetworkChannel.IsDisposed
+  commentId: P:Fantasy.Network.Interface.INetworkChannel.IsDisposed
+  id: IsDisposed
+  parent: Fantasy.Network.Interface.INetworkChannel
+  langs:
+  - csharp
+  - vb
+  name: IsDisposed
+  nameWithType: INetworkChannel.IsDisposed
+  fullName: Fantasy.Network.Interface.INetworkChannel.IsDisposed
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/INetworkChannel.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsDisposed
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/INetworkChannel.cs
+    startLine: 10
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  syntax:
+    content: bool IsDisposed { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: ReadOnly Property IsDisposed As Boolean
+  overload: Fantasy.Network.Interface.INetworkChannel.IsDisposed*
+- uid: Fantasy.Network.Interface.INetworkChannel.Send(System.UInt32,System.Int64,Fantasy.Serialize.MemoryStreamBuffer,Fantasy.Network.Interface.IMessage)
+  commentId: M:Fantasy.Network.Interface.INetworkChannel.Send(System.UInt32,System.Int64,Fantasy.Serialize.MemoryStreamBuffer,Fantasy.Network.Interface.IMessage)
+  id: Send(System.UInt32,System.Int64,Fantasy.Serialize.MemoryStreamBuffer,Fantasy.Network.Interface.IMessage)
+  parent: Fantasy.Network.Interface.INetworkChannel
+  langs:
+  - csharp
+  - vb
+  name: Send(uint, long, MemoryStreamBuffer, IMessage)
+  nameWithType: INetworkChannel.Send(uint, long, MemoryStreamBuffer, IMessage)
+  fullName: Fantasy.Network.Interface.INetworkChannel.Send(uint, long, Fantasy.Serialize.MemoryStreamBuffer, Fantasy.Network.Interface.IMessage)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/INetworkChannel.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Send
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/INetworkChannel.cs
+    startLine: 11
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  syntax:
+    content: void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
+    parameters:
+    - id: rpcId
+      type: System.UInt32
+    - id: routeId
+      type: System.Int64
+    - id: memoryStream
+      type: Fantasy.Serialize.MemoryStreamBuffer
+    - id: message
+      type: Fantasy.Network.Interface.IMessage
+    content.vb: Sub Send(rpcId As UInteger, routeId As Long, memoryStream As MemoryStreamBuffer, message As IMessage)
+  overload: Fantasy.Network.Interface.INetworkChannel.Send*
+  nameWithType.vb: INetworkChannel.Send(UInteger, Long, MemoryStreamBuffer, IMessage)
+  fullName.vb: Fantasy.Network.Interface.INetworkChannel.Send(UInteger, Long, Fantasy.Serialize.MemoryStreamBuffer, Fantasy.Network.Interface.IMessage)
+  name.vb: Send(UInteger, Long, MemoryStreamBuffer, IMessage)
+references:
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  href: Fantasy.html
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: Fantasy.Network.Interface.INetworkChannel.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<INetworkChannel>(INetworkChannel)
+  nameWithType: JsonHelper.ToJson<INetworkChannel>(INetworkChannel)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.Interface.INetworkChannel>(Fantasy.Network.Interface.INetworkChannel)
+  nameWithType.vb: JsonHelper.ToJson(Of INetworkChannel)(INetworkChannel)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.Interface.INetworkChannel)(Fantasy.Network.Interface.INetworkChannel)
+  name.vb: ToJson(Of INetworkChannel)(INetworkChannel)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Interface.INetworkChannel)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.Interface.INetworkChannel
+    name: INetworkChannel
+    href: Fantasy.Network.Interface.INetworkChannel.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.Interface.INetworkChannel
+    name: INetworkChannel
+    href: Fantasy.Network.Interface.INetworkChannel.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Interface.INetworkChannel)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.Interface.INetworkChannel
+    name: INetworkChannel
+    href: Fantasy.Network.Interface.INetworkChannel.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.Interface.INetworkChannel
+    name: INetworkChannel
+    href: Fantasy.Network.Interface.INetworkChannel.html
+  - name: )
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Network.Interface.INetworkChannel.Session*
+  commentId: Overload:Fantasy.Network.Interface.INetworkChannel.Session
+  href: Fantasy.Network.Interface.INetworkChannel.html#Fantasy_Network_Interface_INetworkChannel_Session
+  name: Session
+  nameWithType: INetworkChannel.Session
+  fullName: Fantasy.Network.Interface.INetworkChannel.Session
+- uid: Fantasy.Network.Session
+  commentId: T:Fantasy.Network.Session
+  parent: Fantasy.Network
+  href: Fantasy.Network.Session.html
+  name: Session
+  nameWithType: Session
+  fullName: Fantasy.Network.Session
+- uid: Fantasy.Network
+  commentId: N:Fantasy.Network
+  href: Fantasy.html
+  name: Fantasy.Network
+  nameWithType: Fantasy.Network
+  fullName: Fantasy.Network
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+- uid: Fantasy.Network.Interface.INetworkChannel.IsDisposed*
+  commentId: Overload:Fantasy.Network.Interface.INetworkChannel.IsDisposed
+  href: Fantasy.Network.Interface.INetworkChannel.html#Fantasy_Network_Interface_INetworkChannel_IsDisposed
+  name: IsDisposed
+  nameWithType: INetworkChannel.IsDisposed
+  fullName: Fantasy.Network.Interface.INetworkChannel.IsDisposed
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Fantasy.Network.Interface.INetworkChannel.Send*
+  commentId: Overload:Fantasy.Network.Interface.INetworkChannel.Send
+  href: Fantasy.Network.Interface.INetworkChannel.html#Fantasy_Network_Interface_INetworkChannel_Send_System_UInt32_System_Int64_Fantasy_Serialize_MemoryStreamBuffer_Fantasy_Network_Interface_IMessage_
+  name: Send
+  nameWithType: INetworkChannel.Send
+  fullName: Fantasy.Network.Interface.INetworkChannel.Send
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.Serialize.MemoryStreamBuffer
+  commentId: T:Fantasy.Serialize.MemoryStreamBuffer
+  parent: Fantasy.Serialize
+  href: Fantasy.Serialize.MemoryStreamBuffer.html
+  name: MemoryStreamBuffer
+  nameWithType: MemoryStreamBuffer
+  fullName: Fantasy.Serialize.MemoryStreamBuffer
+- uid: Fantasy.Network.Interface.IMessage
+  commentId: T:Fantasy.Network.Interface.IMessage
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IMessage.html
+  name: IMessage
+  nameWithType: IMessage
+  fullName: Fantasy.Network.Interface.IMessage
+- uid: Fantasy.Serialize
+  commentId: N:Fantasy.Serialize
+  href: Fantasy.html
+  name: Fantasy.Serialize
+  nameWithType: Fantasy.Serialize
+  fullName: Fantasy.Serialize
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html

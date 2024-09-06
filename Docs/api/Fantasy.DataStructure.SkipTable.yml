@@ -1,0 +1,152 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.DataStructure.SkipTable
+  commentId: N:Fantasy.DataStructure.SkipTable
+  id: SkipTable
+  parent: Fantasy.DataStructure
+  children:
+  - Fantasy.DataStructure.SkipTable.SkipTableBase`1
+  - Fantasy.DataStructure.SkipTable.SkipTableDesc`1
+  - Fantasy.DataStructure.SkipTable.SkipTableNode`1
+  - Fantasy.DataStructure.SkipTable.SkipTable`1
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.DataStructure.SkipTable
+  nameWithType: Fantasy.DataStructure.SkipTable
+  fullName: Fantasy.DataStructure.SkipTable
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.DataStructure.SkipTable.SkipTableBase`1
+  commentId: T:Fantasy.DataStructure.SkipTable.SkipTableBase`1
+  href: Fantasy.DataStructure.SkipTable.SkipTableBase-1.html
+  name: SkipTableBase<TValue>
+  nameWithType: SkipTableBase<TValue>
+  fullName: Fantasy.DataStructure.SkipTable.SkipTableBase<TValue>
+  nameWithType.vb: SkipTableBase(Of TValue)
+  fullName.vb: Fantasy.DataStructure.SkipTable.SkipTableBase(Of TValue)
+  name.vb: SkipTableBase(Of TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.SkipTable.SkipTableBase`1
+    name: SkipTableBase
+    href: Fantasy.DataStructure.SkipTable.SkipTableBase-1.html
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.SkipTable.SkipTableBase`1
+    name: SkipTableBase
+    href: Fantasy.DataStructure.SkipTable.SkipTableBase-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.SkipTable.SkipTableDesc`1
+  commentId: T:Fantasy.DataStructure.SkipTable.SkipTableDesc`1
+  href: Fantasy.DataStructure.SkipTable.SkipTableDesc-1.html
+  name: SkipTableDesc<TValue>
+  nameWithType: SkipTableDesc<TValue>
+  fullName: Fantasy.DataStructure.SkipTable.SkipTableDesc<TValue>
+  nameWithType.vb: SkipTableDesc(Of TValue)
+  fullName.vb: Fantasy.DataStructure.SkipTable.SkipTableDesc(Of TValue)
+  name.vb: SkipTableDesc(Of TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.SkipTable.SkipTableDesc`1
+    name: SkipTableDesc
+    href: Fantasy.DataStructure.SkipTable.SkipTableDesc-1.html
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.SkipTable.SkipTableDesc`1
+    name: SkipTableDesc
+    href: Fantasy.DataStructure.SkipTable.SkipTableDesc-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.SkipTable.SkipTableNode`1
+  commentId: T:Fantasy.DataStructure.SkipTable.SkipTableNode`1
+  parent: Fantasy.DataStructure.SkipTable
+  href: Fantasy.DataStructure.SkipTable.SkipTableNode-1.html
+  name: SkipTableNode<TValue>
+  nameWithType: SkipTableNode<TValue>
+  fullName: Fantasy.DataStructure.SkipTable.SkipTableNode<TValue>
+  nameWithType.vb: SkipTableNode(Of TValue)
+  fullName.vb: Fantasy.DataStructure.SkipTable.SkipTableNode(Of TValue)
+  name.vb: SkipTableNode(Of TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.SkipTable.SkipTableNode`1
+    name: SkipTableNode
+    href: Fantasy.DataStructure.SkipTable.SkipTableNode-1.html
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.SkipTable.SkipTableNode`1
+    name: SkipTableNode
+    href: Fantasy.DataStructure.SkipTable.SkipTableNode-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.SkipTable.SkipTable`1
+  commentId: T:Fantasy.DataStructure.SkipTable.SkipTable`1
+  href: Fantasy.DataStructure.SkipTable.SkipTable-1.html
+  name: SkipTable<TValue>
+  nameWithType: SkipTable<TValue>
+  fullName: Fantasy.DataStructure.SkipTable.SkipTable<TValue>
+  nameWithType.vb: SkipTable(Of TValue)
+  fullName.vb: Fantasy.DataStructure.SkipTable.SkipTable(Of TValue)
+  name.vb: SkipTable(Of TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.SkipTable.SkipTable`1
+    name: SkipTable
+    href: Fantasy.DataStructure.SkipTable.SkipTable-1.html
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.SkipTable.SkipTable`1
+    name: SkipTable
+    href: Fantasy.DataStructure.SkipTable.SkipTable-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.SkipTable
+  commentId: N:Fantasy.DataStructure.SkipTable
+  href: Fantasy.html
+  name: Fantasy.DataStructure.SkipTable
+  nameWithType: Fantasy.DataStructure.SkipTable
+  fullName: Fantasy.DataStructure.SkipTable
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.SkipTable
+    name: SkipTable
+    href: Fantasy.DataStructure.SkipTable.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.SkipTable
+    name: SkipTable
+    href: Fantasy.DataStructure.SkipTable.html

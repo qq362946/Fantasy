@@ -1,0 +1,114 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.KCP
+  commentId: N:Fantasy.Network.KCP
+  id: KCP
+  parent: Fantasy.Network
+  children:
+  - Fantasy.Network.KCP.KCPClientNetwork
+  - Fantasy.Network.KCP.KCPClientNetworkUpdateSystem
+  - Fantasy.Network.KCP.KCPFactory
+  - Fantasy.Network.KCP.KCPServerNetwork
+  - Fantasy.Network.KCP.KCPServerNetworkChannel
+  - Fantasy.Network.KCP.KCPServerNetworkUpdateSystem
+  - Fantasy.Network.KCP.KCPSettings
+  - Fantasy.Network.KCP.KcpHeader
+  - Fantasy.Network.KCP.PendingConnection
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Network.KCP
+  nameWithType: Fantasy.Network.KCP
+  fullName: Fantasy.Network.KCP
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Network.KCP.KCPClientNetwork
+  commentId: T:Fantasy.Network.KCP.KCPClientNetwork
+  parent: Fantasy.Network.KCP
+  href: Fantasy.Network.KCP.KCPClientNetwork.html
+  name: KCPClientNetwork
+  nameWithType: KCPClientNetwork
+  fullName: Fantasy.Network.KCP.KCPClientNetwork
+- uid: Fantasy.Network.KCP.KCPClientNetworkUpdateSystem
+  commentId: T:Fantasy.Network.KCP.KCPClientNetworkUpdateSystem
+  href: Fantasy.Network.KCP.KCPClientNetworkUpdateSystem.html
+  name: KCPClientNetworkUpdateSystem
+  nameWithType: KCPClientNetworkUpdateSystem
+  fullName: Fantasy.Network.KCP.KCPClientNetworkUpdateSystem
+- uid: Fantasy.Network.KCP.KCPFactory
+  commentId: T:Fantasy.Network.KCP.KCPFactory
+  href: Fantasy.Network.KCP.KCPFactory.html
+  name: KCPFactory
+  nameWithType: KCPFactory
+  fullName: Fantasy.Network.KCP.KCPFactory
+- uid: Fantasy.Network.KCP.KCPServerNetwork
+  commentId: T:Fantasy.Network.KCP.KCPServerNetwork
+  parent: Fantasy.Network.KCP
+  href: Fantasy.Network.KCP.KCPServerNetwork.html
+  name: KCPServerNetwork
+  nameWithType: KCPServerNetwork
+  fullName: Fantasy.Network.KCP.KCPServerNetwork
+- uid: Fantasy.Network.KCP.KCPServerNetworkChannel
+  commentId: T:Fantasy.Network.KCP.KCPServerNetworkChannel
+  href: Fantasy.Network.KCP.KCPServerNetworkChannel.html
+  name: KCPServerNetworkChannel
+  nameWithType: KCPServerNetworkChannel
+  fullName: Fantasy.Network.KCP.KCPServerNetworkChannel
+- uid: Fantasy.Network.KCP.KCPServerNetworkUpdateSystem
+  commentId: T:Fantasy.Network.KCP.KCPServerNetworkUpdateSystem
+  href: Fantasy.Network.KCP.KCPServerNetworkUpdateSystem.html
+  name: KCPServerNetworkUpdateSystem
+  nameWithType: KCPServerNetworkUpdateSystem
+  fullName: Fantasy.Network.KCP.KCPServerNetworkUpdateSystem
+- uid: Fantasy.Network.KCP.KCPSettings
+  commentId: T:Fantasy.Network.KCP.KCPSettings
+  parent: Fantasy.Network.KCP
+  href: Fantasy.Network.KCP.KCPSettings.html
+  name: KCPSettings
+  nameWithType: KCPSettings
+  fullName: Fantasy.Network.KCP.KCPSettings
+- uid: Fantasy.Network.KCP.KcpHeader
+  commentId: T:Fantasy.Network.KCP.KcpHeader
+  parent: Fantasy.Network.KCP
+  href: Fantasy.Network.KCP.KcpHeader.html
+  name: KcpHeader
+  nameWithType: KcpHeader
+  fullName: Fantasy.Network.KCP.KcpHeader
+- uid: Fantasy.Network.KCP.PendingConnection
+  commentId: T:Fantasy.Network.KCP.PendingConnection
+  href: Fantasy.Network.KCP.PendingConnection.html
+  name: PendingConnection
+  nameWithType: PendingConnection
+  fullName: Fantasy.Network.KCP.PendingConnection
+- uid: Fantasy.Network.KCP
+  commentId: N:Fantasy.Network.KCP
+  href: Fantasy.html
+  name: Fantasy.Network.KCP
+  nameWithType: Fantasy.Network.KCP
+  fullName: Fantasy.Network.KCP
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.KCP
+    name: KCP
+    href: Fantasy.Network.KCP.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.KCP
+    name: KCP
+    href: Fantasy.Network.KCP.html

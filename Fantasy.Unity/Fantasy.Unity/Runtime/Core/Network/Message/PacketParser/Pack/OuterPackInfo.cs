@@ -1,10 +1,16 @@
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 using System;
 using System.IO;
+using Fantasy.Network;
+using Fantasy.Network.Interface;
+using Fantasy.PacketParser.Interface;
+using Fantasy.Serialize;
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-namespace Fantasy
+namespace Fantasy.PacketParser
 {
     public sealed class OuterPackInfo : APackInfo
     {

@@ -3,6 +3,9 @@ using MemoryPack;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using Fantasy;
+using Fantasy.Network.Interface;
+using Fantasy.Serialize;
+
 // ReSharper disable InconsistentNaming
 // ReSharper disable RedundantUsingDirective
 // ReSharper disable RedundantOverriddenMember

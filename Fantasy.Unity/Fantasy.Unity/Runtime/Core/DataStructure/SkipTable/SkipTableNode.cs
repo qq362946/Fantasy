@@ -1,4 +1,4 @@
-namespace Fantasy
+namespace Fantasy.DataStructure.SkipTable
 {
     /// <summary>
     /// 跳跃表节点。

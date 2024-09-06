@@ -1,0 +1,195 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  id: Async
+  parent: Fantasy
+  children:
+  - Fantasy.Async.AsyncFTaskCompletedMethodBuilder
+  - Fantasy.Async.AsyncFTaskMethodBuilder
+  - Fantasy.Async.AsyncFTaskMethodBuilder`1
+  - Fantasy.Async.CoroutineLock
+  - Fantasy.Async.CoroutineLockComponent
+  - Fantasy.Async.CoroutineLockPool
+  - Fantasy.Async.FCancellationToken
+  - Fantasy.Async.FCancellationTokenExtension
+  - Fantasy.Async.FTask
+  - Fantasy.Async.FTaskCompleted
+  - Fantasy.Async.FTaskType
+  - Fantasy.Async.FTask`1
+  - Fantasy.Async.IFTask
+  - Fantasy.Async.STaskStatus
+  - Fantasy.Async.WaitCoroutineLock
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Async.AsyncFTaskCompletedMethodBuilder
+  commentId: T:Fantasy.Async.AsyncFTaskCompletedMethodBuilder
+  parent: Fantasy.Async
+  href: Fantasy.Async.AsyncFTaskCompletedMethodBuilder.html
+  name: AsyncFTaskCompletedMethodBuilder
+  nameWithType: AsyncFTaskCompletedMethodBuilder
+  fullName: Fantasy.Async.AsyncFTaskCompletedMethodBuilder
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder
+  commentId: T:Fantasy.Async.AsyncFTaskMethodBuilder
+  parent: Fantasy.Async
+  href: Fantasy.Async.AsyncFTaskMethodBuilder.html
+  name: AsyncFTaskMethodBuilder
+  nameWithType: AsyncFTaskMethodBuilder
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder`1
+  commentId: T:Fantasy.Async.AsyncFTaskMethodBuilder`1
+  parent: Fantasy.Async
+  href: Fantasy.Async.AsyncFTaskMethodBuilder-1.html
+  name: AsyncFTaskMethodBuilder<T>
+  nameWithType: AsyncFTaskMethodBuilder<T>
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder<T>
+  nameWithType.vb: AsyncFTaskMethodBuilder(Of T)
+  fullName.vb: Fantasy.Async.AsyncFTaskMethodBuilder(Of T)
+  name.vb: AsyncFTaskMethodBuilder(Of T)
+  spec.csharp:
+  - uid: Fantasy.Async.AsyncFTaskMethodBuilder`1
+    name: AsyncFTaskMethodBuilder
+    href: Fantasy.Async.AsyncFTaskMethodBuilder-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.AsyncFTaskMethodBuilder`1
+    name: AsyncFTaskMethodBuilder
+    href: Fantasy.Async.AsyncFTaskMethodBuilder-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Async.CoroutineLock
+  commentId: T:Fantasy.Async.CoroutineLock
+  parent: Fantasy.Async
+  href: Fantasy.Async.CoroutineLock.html
+  name: CoroutineLock
+  nameWithType: CoroutineLock
+  fullName: Fantasy.Async.CoroutineLock
+- uid: Fantasy.Async.CoroutineLockComponent
+  commentId: T:Fantasy.Async.CoroutineLockComponent
+  parent: Fantasy.Async
+  href: Fantasy.Async.CoroutineLockComponent.html
+  name: CoroutineLockComponent
+  nameWithType: CoroutineLockComponent
+  fullName: Fantasy.Async.CoroutineLockComponent
+- uid: Fantasy.Async.CoroutineLockPool
+  commentId: T:Fantasy.Async.CoroutineLockPool
+  href: Fantasy.Async.CoroutineLockPool.html
+  name: CoroutineLockPool
+  nameWithType: CoroutineLockPool
+  fullName: Fantasy.Async.CoroutineLockPool
+- uid: Fantasy.Async.FCancellationToken
+  commentId: T:Fantasy.Async.FCancellationToken
+  parent: Fantasy.Async
+  href: Fantasy.Async.FCancellationToken.html
+  name: FCancellationToken
+  nameWithType: FCancellationToken
+  fullName: Fantasy.Async.FCancellationToken
+- uid: Fantasy.Async.FCancellationTokenExtension
+  commentId: T:Fantasy.Async.FCancellationTokenExtension
+  parent: Fantasy.Async
+  href: Fantasy.Async.FCancellationTokenExtension.html
+  name: FCancellationTokenExtension
+  nameWithType: FCancellationTokenExtension
+  fullName: Fantasy.Async.FCancellationTokenExtension
+- uid: Fantasy.Async.FTask
+  commentId: T:Fantasy.Async.FTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask.html
+  name: FTask
+  nameWithType: FTask
+  fullName: Fantasy.Async.FTask
+- uid: Fantasy.Async.FTaskCompleted
+  commentId: T:Fantasy.Async.FTaskCompleted
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTaskCompleted.html
+  name: FTaskCompleted
+  nameWithType: FTaskCompleted
+  fullName: Fantasy.Async.FTaskCompleted
+- uid: Fantasy.Async.FTaskType
+  commentId: T:Fantasy.Async.FTaskType
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTaskType.html
+  name: FTaskType
+  nameWithType: FTaskType
+  fullName: Fantasy.Async.FTaskType
+- uid: Fantasy.Async.FTask`1
+  commentId: T:Fantasy.Async.FTask`1
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<T>
+  nameWithType: FTask<T>
+  fullName: Fantasy.Async.FTask<T>
+  nameWithType.vb: FTask(Of T)
+  fullName.vb: Fantasy.Async.FTask(Of T)
+  name.vb: FTask(Of T)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Async.IFTask
+  commentId: T:Fantasy.Async.IFTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.IFTask.html
+  name: IFTask
+  nameWithType: IFTask
+  fullName: Fantasy.Async.IFTask
+- uid: Fantasy.Async.STaskStatus
+  commentId: T:Fantasy.Async.STaskStatus
+  parent: Fantasy.Async
+  href: Fantasy.Async.STaskStatus.html
+  name: STaskStatus
+  nameWithType: STaskStatus
+  fullName: Fantasy.Async.STaskStatus
+- uid: Fantasy.Async.WaitCoroutineLock
+  commentId: T:Fantasy.Async.WaitCoroutineLock
+  href: Fantasy.Async.WaitCoroutineLock.html
+  name: WaitCoroutineLock
+  nameWithType: WaitCoroutineLock
+  fullName: Fantasy.Async.WaitCoroutineLock
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html

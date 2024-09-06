@@ -1,0 +1,700 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+  commentId: T:Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+  id: AddressableManageComponentAwakeSystem
+  parent: Fantasy.Network.Route
+  children:
+  - Fantasy.Network.Route.AddressableManageComponentAwakeSystem.Awake(Fantasy.Network.Route.AddressableManageComponent)
+  langs:
+  - csharp
+  - vb
+  name: AddressableManageComponentAwakeSystem
+  nameWithType: AddressableManageComponentAwakeSystem
+  fullName: Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableManageComponent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AddressableManageComponentAwakeSystem
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableManageComponent.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Route
+  syntax:
+    content: 'public class AddressableManageComponentAwakeSystem : AwakeSystem<AddressableManageComponent>, IEntitiesSystem'
+    content.vb: Public Class AddressableManageComponentAwakeSystem Inherits AwakeSystem(Of AddressableManageComponent) Implements IEntitiesSystem
+  inheritance:
+  - System.Object
+  - Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}
+  implements:
+  - Fantasy.Entitas.Interface.IEntitiesSystem
+  inheritedMembers:
+  - Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.EntitiesType
+  - Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.Invoke(Fantasy.Entitas.Entity)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Network.Route.AddressableManageComponentAwakeSystem.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.Awake(Fantasy.Network.Route.AddressableManageComponent)
+  commentId: M:Fantasy.Network.Route.AddressableManageComponentAwakeSystem.Awake(Fantasy.Network.Route.AddressableManageComponent)
+  id: Awake(Fantasy.Network.Route.AddressableManageComponent)
+  parent: Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+  langs:
+  - csharp
+  - vb
+  name: Awake(AddressableManageComponent)
+  nameWithType: AddressableManageComponentAwakeSystem.Awake(AddressableManageComponent)
+  fullName: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.Awake(Fantasy.Network.Route.AddressableManageComponent)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableManageComponent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Awake
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableManageComponent.cs
+    startLine: 16
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Route
+  summary: 事件的抽象方法，需要自己实现这个方法
+  example: []
+  syntax:
+    content: protected override void Awake(AddressableManageComponent self)
+    parameters:
+    - id: self
+      type: Fantasy.Network.Route.AddressableManageComponent
+      description: 触发事件的实体实例
+    content.vb: Protected Overrides Sub Awake(self As AddressableManageComponent)
+  overridden: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.Awake(Fantasy.Network.Route.AddressableManageComponent)
+  overload: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.Awake*
+references:
+- uid: Fantasy.Network.Route
+  commentId: N:Fantasy.Network.Route
+  href: Fantasy.html
+  name: Fantasy.Network.Route
+  nameWithType: Fantasy.Network.Route
+  fullName: Fantasy.Network.Route
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Route
+    name: Route
+    href: Fantasy.Network.Route.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Route
+    name: Route
+    href: Fantasy.Network.Route.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}
+  commentId: T:Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}
+  parent: Fantasy.Entitas.Interface
+  definition: Fantasy.Entitas.Interface.AwakeSystem`1
+  href: Fantasy.Entitas.Interface.AwakeSystem-1.html
+  name: AwakeSystem<AddressableManageComponent>
+  nameWithType: AwakeSystem<AddressableManageComponent>
+  fullName: Fantasy.Entitas.Interface.AwakeSystem<Fantasy.Network.Route.AddressableManageComponent>
+  nameWithType.vb: AwakeSystem(Of AddressableManageComponent)
+  fullName.vb: Fantasy.Entitas.Interface.AwakeSystem(Of Fantasy.Network.Route.AddressableManageComponent)
+  name.vb: AwakeSystem(Of AddressableManageComponent)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1
+    name: AwakeSystem
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html
+  - name: <
+  - uid: Fantasy.Network.Route.AddressableManageComponent
+    name: AddressableManageComponent
+    href: Fantasy.Network.Route.AddressableManageComponent.html
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1
+    name: AwakeSystem
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.Route.AddressableManageComponent
+    name: AddressableManageComponent
+    href: Fantasy.Network.Route.AddressableManageComponent.html
+  - name: )
+- uid: Fantasy.Entitas.Interface.IEntitiesSystem
+  commentId: T:Fantasy.Entitas.Interface.IEntitiesSystem
+  parent: Fantasy.Entitas.Interface
+  href: Fantasy.Entitas.Interface.IEntitiesSystem.html
+  name: IEntitiesSystem
+  nameWithType: IEntitiesSystem
+  fullName: Fantasy.Entitas.Interface.IEntitiesSystem
+- uid: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.EntitiesType
+  commentId: M:Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.EntitiesType
+  parent: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}
+  definition: Fantasy.Entitas.Interface.AwakeSystem`1.EntitiesType
+  href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_EntitiesType
+  name: EntitiesType()
+  nameWithType: AwakeSystem<AddressableManageComponent>.EntitiesType()
+  fullName: Fantasy.Entitas.Interface.AwakeSystem<Fantasy.Network.Route.AddressableManageComponent>.EntitiesType()
+  nameWithType.vb: AwakeSystem(Of AddressableManageComponent).EntitiesType()
+  fullName.vb: Fantasy.Entitas.Interface.AwakeSystem(Of Fantasy.Network.Route.AddressableManageComponent).EntitiesType()
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.EntitiesType
+    name: EntitiesType
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_EntitiesType
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.EntitiesType
+    name: EntitiesType
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_EntitiesType
+  - name: (
+  - name: )
+- uid: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.Invoke(Fantasy.Entitas.Entity)
+  commentId: M:Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.Invoke(Fantasy.Entitas.Entity)
+  parent: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}
+  definition: Fantasy.Entitas.Interface.AwakeSystem`1.Invoke(Fantasy.Entitas.Entity)
+  href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Invoke_Fantasy_Entitas_Entity_
+  name: Invoke(Entity)
+  nameWithType: AwakeSystem<AddressableManageComponent>.Invoke(Entity)
+  fullName: Fantasy.Entitas.Interface.AwakeSystem<Fantasy.Network.Route.AddressableManageComponent>.Invoke(Fantasy.Entitas.Entity)
+  nameWithType.vb: AwakeSystem(Of AddressableManageComponent).Invoke(Entity)
+  fullName.vb: Fantasy.Entitas.Interface.AwakeSystem(Of Fantasy.Network.Route.AddressableManageComponent).Invoke(Fantasy.Entitas.Entity)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.Invoke(Fantasy.Entitas.Entity)
+    name: Invoke
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Invoke_Fantasy_Entitas_Entity_
+  - name: (
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.Invoke(Fantasy.Entitas.Entity)
+    name: Invoke
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Invoke_Fantasy_Entitas_Entity_
+  - name: (
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<AddressableManageComponentAwakeSystem>(AddressableManageComponentAwakeSystem)
+  nameWithType: JsonHelper.ToJson<AddressableManageComponentAwakeSystem>(AddressableManageComponentAwakeSystem)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.Route.AddressableManageComponentAwakeSystem>(Fantasy.Network.Route.AddressableManageComponentAwakeSystem)
+  nameWithType.vb: JsonHelper.ToJson(Of AddressableManageComponentAwakeSystem)(AddressableManageComponentAwakeSystem)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.Route.AddressableManageComponentAwakeSystem)(Fantasy.Network.Route.AddressableManageComponentAwakeSystem)
+  name.vb: ToJson(Of AddressableManageComponentAwakeSystem)(AddressableManageComponentAwakeSystem)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Route.AddressableManageComponentAwakeSystem)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+    name: AddressableManageComponentAwakeSystem
+    href: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+    name: AddressableManageComponentAwakeSystem
+    href: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Route.AddressableManageComponentAwakeSystem)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+    name: AddressableManageComponentAwakeSystem
+    href: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+    name: AddressableManageComponentAwakeSystem
+    href: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Entitas.Interface.AwakeSystem`1
+  commentId: T:Fantasy.Entitas.Interface.AwakeSystem`1
+  href: Fantasy.Entitas.Interface.AwakeSystem-1.html
+  name: AwakeSystem<T>
+  nameWithType: AwakeSystem<T>
+  fullName: Fantasy.Entitas.Interface.AwakeSystem<T>
+  nameWithType.vb: AwakeSystem(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.AwakeSystem(Of T)
+  name.vb: AwakeSystem(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1
+    name: AwakeSystem
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1
+    name: AwakeSystem
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.Interface
+  commentId: N:Fantasy.Entitas.Interface
+  href: Fantasy.html
+  name: Fantasy.Entitas.Interface
+  nameWithType: Fantasy.Entitas.Interface
+  fullName: Fantasy.Entitas.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  - name: .
+  - uid: Fantasy.Entitas.Interface
+    name: Interface
+    href: Fantasy.Entitas.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  - name: .
+  - uid: Fantasy.Entitas.Interface
+    name: Interface
+    href: Fantasy.Entitas.Interface.html
+- uid: Fantasy.Entitas.Interface.AwakeSystem`1.EntitiesType
+  commentId: M:Fantasy.Entitas.Interface.AwakeSystem`1.EntitiesType
+  href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_EntitiesType
+  name: EntitiesType()
+  nameWithType: AwakeSystem<T>.EntitiesType()
+  fullName: Fantasy.Entitas.Interface.AwakeSystem<T>.EntitiesType()
+  nameWithType.vb: AwakeSystem(Of T).EntitiesType()
+  fullName.vb: Fantasy.Entitas.Interface.AwakeSystem(Of T).EntitiesType()
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1.EntitiesType
+    name: EntitiesType
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_EntitiesType
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1.EntitiesType
+    name: EntitiesType
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_EntitiesType
+  - name: (
+  - name: )
+- uid: Fantasy.Entitas.Interface.AwakeSystem`1.Invoke(Fantasy.Entitas.Entity)
+  commentId: M:Fantasy.Entitas.Interface.AwakeSystem`1.Invoke(Fantasy.Entitas.Entity)
+  href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Invoke_Fantasy_Entitas_Entity_
+  name: Invoke(Entity)
+  nameWithType: AwakeSystem<T>.Invoke(Entity)
+  fullName: Fantasy.Entitas.Interface.AwakeSystem<T>.Invoke(Fantasy.Entitas.Entity)
+  nameWithType.vb: AwakeSystem(Of T).Invoke(Entity)
+  fullName.vb: Fantasy.Entitas.Interface.AwakeSystem(Of T).Invoke(Fantasy.Entitas.Entity)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1.Invoke(Fantasy.Entitas.Entity)
+    name: Invoke
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Invoke_Fantasy_Entitas_Entity_
+  - name: (
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1.Invoke(Fantasy.Entitas.Entity)
+    name: Invoke
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Invoke_Fantasy_Entitas_Entity_
+  - name: (
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.Awake(Fantasy.Network.Route.AddressableManageComponent)
+  commentId: M:Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.Awake(Fantasy.Network.Route.AddressableManageComponent)
+  parent: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}
+  definition: Fantasy.Entitas.Interface.AwakeSystem`1.Awake(`0)
+  href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Awake__0_
+  name: Awake(AddressableManageComponent)
+  nameWithType: AwakeSystem<AddressableManageComponent>.Awake(AddressableManageComponent)
+  fullName: Fantasy.Entitas.Interface.AwakeSystem<Fantasy.Network.Route.AddressableManageComponent>.Awake(Fantasy.Network.Route.AddressableManageComponent)
+  nameWithType.vb: AwakeSystem(Of AddressableManageComponent).Awake(AddressableManageComponent)
+  fullName.vb: Fantasy.Entitas.Interface.AwakeSystem(Of Fantasy.Network.Route.AddressableManageComponent).Awake(Fantasy.Network.Route.AddressableManageComponent)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.Awake(Fantasy.Network.Route.AddressableManageComponent)
+    name: Awake
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Awake__0_
+  - name: (
+  - uid: Fantasy.Network.Route.AddressableManageComponent
+    name: AddressableManageComponent
+    href: Fantasy.Network.Route.AddressableManageComponent.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem{Fantasy.Network.Route.AddressableManageComponent}.Awake(Fantasy.Network.Route.AddressableManageComponent)
+    name: Awake
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Awake__0_
+  - name: (
+  - uid: Fantasy.Network.Route.AddressableManageComponent
+    name: AddressableManageComponent
+    href: Fantasy.Network.Route.AddressableManageComponent.html
+  - name: )
+- uid: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.Awake*
+  commentId: Overload:Fantasy.Network.Route.AddressableManageComponentAwakeSystem.Awake
+  href: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.html#Fantasy_Network_Route_AddressableManageComponentAwakeSystem_Awake_Fantasy_Network_Route_AddressableManageComponent_
+  name: Awake
+  nameWithType: AddressableManageComponentAwakeSystem.Awake
+  fullName: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.Awake
+- uid: Fantasy.Network.Route.AddressableManageComponent
+  commentId: T:Fantasy.Network.Route.AddressableManageComponent
+  parent: Fantasy.Network.Route
+  href: Fantasy.Network.Route.AddressableManageComponent.html
+  name: AddressableManageComponent
+  nameWithType: AddressableManageComponent
+  fullName: Fantasy.Network.Route.AddressableManageComponent
+- uid: Fantasy.Entitas.Interface.AwakeSystem`1.Awake(`0)
+  commentId: M:Fantasy.Entitas.Interface.AwakeSystem`1.Awake(`0)
+  href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Awake__0_
+  name: Awake(T)
+  nameWithType: AwakeSystem<T>.Awake(T)
+  fullName: Fantasy.Entitas.Interface.AwakeSystem<T>.Awake(T)
+  nameWithType.vb: AwakeSystem(Of T).Awake(T)
+  fullName.vb: Fantasy.Entitas.Interface.AwakeSystem(Of T).Awake(T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1.Awake(`0)
+    name: Awake
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Awake__0_
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1.Awake(`0)
+    name: Awake
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html#Fantasy_Entitas_Interface_AwakeSystem_1_Awake__0_
+  - name: (
+  - name: T
+  - name: )

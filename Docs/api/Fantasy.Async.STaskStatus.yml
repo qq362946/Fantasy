@@ -1,0 +1,242 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Async.STaskStatus
+  commentId: T:Fantasy.Async.STaskStatus
+  id: STaskStatus
+  parent: Fantasy.Async
+  children:
+  - Fantasy.Async.STaskStatus.Faulted
+  - Fantasy.Async.STaskStatus.Pending
+  - Fantasy.Async.STaskStatus.Succeeded
+  langs:
+  - csharp
+  - vb
+  name: STaskStatus
+  nameWithType: STaskStatus
+  fullName: Fantasy.Async.STaskStatus
+  type: Enum
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: STaskStatus
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 15
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: 'public enum STaskStatus : byte'
+    content.vb: Public Enum STaskStatus As Byte
+  extensionMethods:
+  - Fantasy.Async.STaskStatus.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Async.STaskStatus.Pending
+  commentId: F:Fantasy.Async.STaskStatus.Pending
+  id: Pending
+  parent: Fantasy.Async.STaskStatus
+  langs:
+  - csharp
+  - vb
+  name: Pending
+  nameWithType: STaskStatus.Pending
+  fullName: Fantasy.Async.STaskStatus.Pending
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Pending
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 17
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: Pending = 0
+    return:
+      type: Fantasy.Async.STaskStatus
+- uid: Fantasy.Async.STaskStatus.Succeeded
+  commentId: F:Fantasy.Async.STaskStatus.Succeeded
+  id: Succeeded
+  parent: Fantasy.Async.STaskStatus
+  langs:
+  - csharp
+  - vb
+  name: Succeeded
+  nameWithType: STaskStatus.Succeeded
+  fullName: Fantasy.Async.STaskStatus.Succeeded
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Succeeded
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 18
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: Succeeded = 1
+    return:
+      type: Fantasy.Async.STaskStatus
+- uid: Fantasy.Async.STaskStatus.Faulted
+  commentId: F:Fantasy.Async.STaskStatus.Faulted
+  id: Faulted
+  parent: Fantasy.Async.STaskStatus
+  langs:
+  - csharp
+  - vb
+  name: Faulted
+  nameWithType: STaskStatus.Faulted
+  fullName: Fantasy.Async.STaskStatus.Faulted
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Faulted
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 19
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: Faulted = 2
+    return:
+      type: Fantasy.Async.STaskStatus
+references:
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+- uid: Fantasy.Async.STaskStatus.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<STaskStatus>(STaskStatus)
+  nameWithType: JsonHelper.ToJson<STaskStatus>(STaskStatus)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Async.STaskStatus>(Fantasy.Async.STaskStatus)
+  nameWithType.vb: JsonHelper.ToJson(Of STaskStatus)(STaskStatus)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Async.STaskStatus)(Fantasy.Async.STaskStatus)
+  name.vb: ToJson(Of STaskStatus)(STaskStatus)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Async.STaskStatus)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Async.STaskStatus
+    name: STaskStatus
+    href: Fantasy.Async.STaskStatus.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Async.STaskStatus
+    name: STaskStatus
+    href: Fantasy.Async.STaskStatus.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Async.STaskStatus)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Async.STaskStatus
+    name: STaskStatus
+    href: Fantasy.Async.STaskStatus.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Async.STaskStatus
+    name: STaskStatus
+    href: Fantasy.Async.STaskStatus.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Async.STaskStatus
+  commentId: T:Fantasy.Async.STaskStatus
+  parent: Fantasy.Async
+  href: Fantasy.Async.STaskStatus.html
+  name: STaskStatus
+  nameWithType: STaskStatus
+  fullName: Fantasy.Async.STaskStatus

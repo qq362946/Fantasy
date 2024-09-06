@@ -1,0 +1,61 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Assembly
+  commentId: N:Fantasy.Assembly
+  id: Assembly
+  parent: Fantasy
+  children:
+  - Fantasy.Assembly.AssemblyInfo
+  - Fantasy.Assembly.AssemblySystem
+  - Fantasy.Assembly.IAssembly
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Assembly
+  nameWithType: Fantasy.Assembly
+  fullName: Fantasy.Assembly
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Assembly.AssemblyInfo
+  commentId: T:Fantasy.Assembly.AssemblyInfo
+  href: Fantasy.Assembly.AssemblyInfo.html
+  name: AssemblyInfo
+  nameWithType: AssemblyInfo
+  fullName: Fantasy.Assembly.AssemblyInfo
+- uid: Fantasy.Assembly.AssemblySystem
+  commentId: T:Fantasy.Assembly.AssemblySystem
+  href: Fantasy.Assembly.AssemblySystem.html
+  name: AssemblySystem
+  nameWithType: AssemblySystem
+  fullName: Fantasy.Assembly.AssemblySystem
+- uid: Fantasy.Assembly.IAssembly
+  commentId: T:Fantasy.Assembly.IAssembly
+  parent: Fantasy.Assembly
+  href: Fantasy.Assembly.IAssembly.html
+  name: IAssembly
+  nameWithType: IAssembly
+  fullName: Fantasy.Assembly.IAssembly
+- uid: Fantasy.Assembly
+  commentId: N:Fantasy.Assembly
+  href: Fantasy.html
+  name: Fantasy.Assembly
+  nameWithType: Fantasy.Assembly
+  fullName: Fantasy.Assembly
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Assembly
+    name: Assembly
+    href: Fantasy.Assembly.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Assembly
+    name: Assembly
+    href: Fantasy.Assembly.html

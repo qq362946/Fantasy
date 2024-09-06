@@ -9,15 +9,22 @@ using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
+using Fantasy.Async;
+using Fantasy.Entitas.Interface;
+using Fantasy.Helper;
+using Fantasy.Network.Interface;
+using Fantasy.PacketParser;
+using Fantasy.Serialize;
 using KCP;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable PossibleNullReferenceException
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 #pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-namespace Fantasy
+namespace Fantasy.Network.KCP
 {
     public sealed class KCPClientNetworkUpdateSystem : UpdateSystem<KCPClientNetwork>
     {

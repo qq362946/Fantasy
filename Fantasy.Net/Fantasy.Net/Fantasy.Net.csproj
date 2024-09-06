@@ -10,6 +10,7 @@
       <DefineConstants>TRACE;FANTASY_NET;FANTASY_KCPUNSAFE</DefineConstants>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <DocumentationFile>bin\Debug\net8.0\Fantasy.Net.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -29,7 +30,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Runtime\Core\Entitas\Pool\" />
       <Folder Include="Runtime\Core\Network\Protocol\KCP\KCPUnSafe\" />
     </ItemGroup>
 

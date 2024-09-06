@@ -1,0 +1,38 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.WebSocket
+  commentId: N:Fantasy.Network.WebSocket
+  id: WebSocket
+  parent: Fantasy.Network
+  children:
+  - Fantasy.Network.WebSocket.WebSocketClientNetwork
+  - Fantasy.Network.WebSocket.WebSocketServerNetwork
+  - Fantasy.Network.WebSocket.WebSocketServerNetworkChannel
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Network.WebSocket
+  nameWithType: Fantasy.Network.WebSocket
+  fullName: Fantasy.Network.WebSocket
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Network.WebSocket.WebSocketClientNetwork
+  commentId: T:Fantasy.Network.WebSocket.WebSocketClientNetwork
+  href: Fantasy.Network.WebSocket.WebSocketClientNetwork.html
+  name: WebSocketClientNetwork
+  nameWithType: WebSocketClientNetwork
+  fullName: Fantasy.Network.WebSocket.WebSocketClientNetwork
+- uid: Fantasy.Network.WebSocket.WebSocketServerNetwork
+  commentId: T:Fantasy.Network.WebSocket.WebSocketServerNetwork
+  href: Fantasy.Network.WebSocket.WebSocketServerNetwork.html
+  name: WebSocketServerNetwork
+  nameWithType: WebSocketServerNetwork
+  fullName: Fantasy.Network.WebSocket.WebSocketServerNetwork
+- uid: Fantasy.Network.WebSocket.WebSocketServerNetworkChannel
+  commentId: T:Fantasy.Network.WebSocket.WebSocketServerNetworkChannel
+  href: Fantasy.Network.WebSocket.WebSocketServerNetworkChannel.html
+  name: WebSocketServerNetworkChannel
+  nameWithType: WebSocketServerNetworkChannel
+  fullName: Fantasy.Network.WebSocket.WebSocketServerNetworkChannel

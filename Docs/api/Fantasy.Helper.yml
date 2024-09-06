@@ -1,0 +1,119 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  id: Helper
+  parent: Fantasy
+  children:
+  - Fantasy.Helper.ByteHelper
+  - Fantasy.Helper.EncryptHelper
+  - Fantasy.Helper.FileHelper
+  - Fantasy.Helper.HashCodeHelper
+  - Fantasy.Helper.JsonHelper
+  - Fantasy.Helper.NetworkHelper
+  - Fantasy.Helper.RandomHelper
+  - Fantasy.Helper.SocketHelper
+  - Fantasy.Helper.TimeHelper
+  - Fantasy.Helper.WebSocketHelper
+  - Fantasy.Helper.WinPeriod
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Helper.ByteHelper
+  commentId: T:Fantasy.Helper.ByteHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.ByteHelper.html
+  name: ByteHelper
+  nameWithType: ByteHelper
+  fullName: Fantasy.Helper.ByteHelper
+- uid: Fantasy.Helper.EncryptHelper
+  commentId: T:Fantasy.Helper.EncryptHelper
+  href: Fantasy.Helper.EncryptHelper.html
+  name: EncryptHelper
+  nameWithType: EncryptHelper
+  fullName: Fantasy.Helper.EncryptHelper
+- uid: Fantasy.Helper.FileHelper
+  commentId: T:Fantasy.Helper.FileHelper
+  href: Fantasy.Helper.FileHelper.html
+  name: FileHelper
+  nameWithType: FileHelper
+  fullName: Fantasy.Helper.FileHelper
+- uid: Fantasy.Helper.HashCodeHelper
+  commentId: T:Fantasy.Helper.HashCodeHelper
+  href: Fantasy.Helper.HashCodeHelper.html
+  name: HashCodeHelper
+  nameWithType: HashCodeHelper
+  fullName: Fantasy.Helper.HashCodeHelper
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper.NetworkHelper
+  commentId: T:Fantasy.Helper.NetworkHelper
+  href: Fantasy.Helper.NetworkHelper.html
+  name: NetworkHelper
+  nameWithType: NetworkHelper
+  fullName: Fantasy.Helper.NetworkHelper
+- uid: Fantasy.Helper.RandomHelper
+  commentId: T:Fantasy.Helper.RandomHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.RandomHelper.html
+  name: RandomHelper
+  nameWithType: RandomHelper
+  fullName: Fantasy.Helper.RandomHelper
+- uid: Fantasy.Helper.SocketHelper
+  commentId: T:Fantasy.Helper.SocketHelper
+  href: Fantasy.Helper.SocketHelper.html
+  name: SocketHelper
+  nameWithType: SocketHelper
+  fullName: Fantasy.Helper.SocketHelper
+- uid: Fantasy.Helper.TimeHelper
+  commentId: T:Fantasy.Helper.TimeHelper
+  href: Fantasy.Helper.TimeHelper.html
+  name: TimeHelper
+  nameWithType: TimeHelper
+  fullName: Fantasy.Helper.TimeHelper
+- uid: Fantasy.Helper.WebSocketHelper
+  commentId: T:Fantasy.Helper.WebSocketHelper
+  href: Fantasy.Helper.WebSocketHelper.html
+  name: WebSocketHelper
+  nameWithType: WebSocketHelper
+  fullName: Fantasy.Helper.WebSocketHelper
+- uid: Fantasy.Helper.WinPeriod
+  commentId: T:Fantasy.Helper.WinPeriod
+  href: Fantasy.Helper.WinPeriod.html
+  name: WinPeriod
+  nameWithType: WinPeriod
+  fullName: Fantasy.Helper.WinPeriod
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html

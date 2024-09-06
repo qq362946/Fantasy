@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
-namespace Fantasy
+namespace Fantasy.Pool
 {
     /// <summary>
     /// 静态通用对象池，用于存储实现了 IDisposable 接口的对象。
@@ -13,13 +13,24 @@ namespace Fantasy
         private int _poolCount;
         private readonly int _maxCapacity;
         private readonly Queue<T> _poolQueue = new Queue<T>();
+        /// <summary>
+        /// 池子里可用的数量
+        /// </summary>
         public int Count => _poolQueue.Count;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="maxCapacity">初始的容量</param>
         protected PoolWithDisposable(int maxCapacity)
         {
             _maxCapacity = maxCapacity;
         }
         
+        /// <summary>
+        /// 租借
+        /// </summary>
+        /// <returns></returns>
         public T Rent()
         {
             if (_poolQueue.Count == 0)
@@ -33,6 +44,11 @@ namespace Fantasy
             return dequeue;
         }
         
+        /// <summary>
+        /// 租借
+        /// </summary>
+        /// <param name="generator"></param>
+        /// <returns></returns>
         public T Rent(Func<T> generator)
         {
             if (_poolQueue.Count == 0)
@@ -46,6 +62,10 @@ namespace Fantasy
             return dequeue;
         }
         
+        /// <summary>
+        /// 返还
+        /// </summary>
+        /// <param name="t"></param>
         public void Return(T t)
         {
             if (t == null)
@@ -69,6 +89,11 @@ namespace Fantasy
             t.Dispose();
         }
         
+        /// <summary>
+        /// 返还
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="reset"></param>
         public void Return(T t, Action<T> reset)
         {
             if (t == null)
@@ -94,6 +119,9 @@ namespace Fantasy
             t.Dispose();
         }
         
+        /// <summary>
+        /// 销毁方法
+        /// </summary>
         public virtual void Dispose()
         {
             _poolCount = 0;

@@ -1,0 +1,92 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Scheduler
+  commentId: N:Fantasy.Scheduler
+  id: Scheduler
+  parent: Fantasy
+  children:
+  - Fantasy.Scheduler.ANetworkMessageScheduler
+  - Fantasy.Scheduler.MessageSender
+  - Fantasy.Scheduler.NetworkMessageUpdate
+  - Fantasy.Scheduler.NetworkMessagingComponent
+  - Fantasy.Scheduler.NetworkMessagingComponentAwakeSystem
+  - Fantasy.Scheduler.NetworkMessagingComponentDestroySystem
+  - Fantasy.Scheduler.OnNetworkMessageUpdateCheckTimeout
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Scheduler
+  nameWithType: Fantasy.Scheduler
+  fullName: Fantasy.Scheduler
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Scheduler.ANetworkMessageScheduler
+  commentId: T:Fantasy.Scheduler.ANetworkMessageScheduler
+  parent: Fantasy.Scheduler
+  href: Fantasy.Scheduler.ANetworkMessageScheduler.html
+  name: ANetworkMessageScheduler
+  nameWithType: ANetworkMessageScheduler
+  fullName: Fantasy.Scheduler.ANetworkMessageScheduler
+- uid: Fantasy.Scheduler.MessageSender
+  commentId: T:Fantasy.Scheduler.MessageSender
+  parent: Fantasy.Scheduler
+  href: Fantasy.Scheduler.MessageSender.html
+  name: MessageSender
+  nameWithType: MessageSender
+  fullName: Fantasy.Scheduler.MessageSender
+- uid: Fantasy.Scheduler.NetworkMessageUpdate
+  commentId: T:Fantasy.Scheduler.NetworkMessageUpdate
+  parent: Fantasy.Scheduler
+  href: Fantasy.Scheduler.NetworkMessageUpdate.html
+  name: NetworkMessageUpdate
+  nameWithType: NetworkMessageUpdate
+  fullName: Fantasy.Scheduler.NetworkMessageUpdate
+- uid: Fantasy.Scheduler.NetworkMessagingComponent
+  commentId: T:Fantasy.Scheduler.NetworkMessagingComponent
+  parent: Fantasy.Scheduler
+  href: Fantasy.Scheduler.NetworkMessagingComponent.html
+  name: NetworkMessagingComponent
+  nameWithType: NetworkMessagingComponent
+  fullName: Fantasy.Scheduler.NetworkMessagingComponent
+- uid: Fantasy.Scheduler.NetworkMessagingComponentAwakeSystem
+  commentId: T:Fantasy.Scheduler.NetworkMessagingComponentAwakeSystem
+  href: Fantasy.Scheduler.NetworkMessagingComponentAwakeSystem.html
+  name: NetworkMessagingComponentAwakeSystem
+  nameWithType: NetworkMessagingComponentAwakeSystem
+  fullName: Fantasy.Scheduler.NetworkMessagingComponentAwakeSystem
+- uid: Fantasy.Scheduler.NetworkMessagingComponentDestroySystem
+  commentId: T:Fantasy.Scheduler.NetworkMessagingComponentDestroySystem
+  href: Fantasy.Scheduler.NetworkMessagingComponentDestroySystem.html
+  name: NetworkMessagingComponentDestroySystem
+  nameWithType: NetworkMessagingComponentDestroySystem
+  fullName: Fantasy.Scheduler.NetworkMessagingComponentDestroySystem
+- uid: Fantasy.Scheduler.OnNetworkMessageUpdateCheckTimeout
+  commentId: T:Fantasy.Scheduler.OnNetworkMessageUpdateCheckTimeout
+  href: Fantasy.Scheduler.OnNetworkMessageUpdateCheckTimeout.html
+  name: OnNetworkMessageUpdateCheckTimeout
+  nameWithType: OnNetworkMessageUpdateCheckTimeout
+  fullName: Fantasy.Scheduler.OnNetworkMessageUpdateCheckTimeout
+- uid: Fantasy.Scheduler
+  commentId: N:Fantasy.Scheduler
+  href: Fantasy.html
+  name: Fantasy.Scheduler
+  nameWithType: Fantasy.Scheduler
+  fullName: Fantasy.Scheduler
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Scheduler
+    name: Scheduler
+    href: Fantasy.Scheduler.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Scheduler
+    name: Scheduler
+    href: Fantasy.Scheduler.html

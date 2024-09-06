@@ -27,7 +27,7 @@ namespace Fantasy
 
         private static void GenerateLinkXml(StreamWriter writer, string assemblyName, string outputPath)
         {
-            var assembly = Assembly.Load(assemblyName);
+            var assembly = System.Reflection.Assembly.Load(assemblyName);
             var types = assembly.GetTypes();
             writer.WriteLine($"  <assembly fullname=\"{assembly.GetName().Name}\">");
             foreach (var type in types)

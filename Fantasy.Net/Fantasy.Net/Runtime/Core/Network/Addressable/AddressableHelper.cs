@@ -1,5 +1,8 @@
 #if FANTASY_NET
-namespace Fantasy
+using Fantasy.Async;
+using Fantasy.InnerMessage;
+using Fantasy.Platform.Net;
+namespace Fantasy.Network.Route
 {
     /// <summary>
     /// 提供操作地址映射的辅助方法。

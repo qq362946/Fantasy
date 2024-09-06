@@ -1,0 +1,103 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Timer
+  commentId: N:Fantasy.Timer
+  id: Timer
+  parent: Fantasy
+  children:
+  - Fantasy.Timer.TimerAction
+  - Fantasy.Timer.TimerComponent
+  - Fantasy.Timer.TimerComponentUpdateSystem
+  - Fantasy.Timer.TimerHandler`1
+  - Fantasy.Timer.TimerSchedulerNet
+  - Fantasy.Timer.TimerType
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Timer
+  nameWithType: Fantasy.Timer
+  fullName: Fantasy.Timer
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Timer.TimerAction
+  commentId: T:Fantasy.Timer.TimerAction
+  href: Fantasy.Timer.TimerAction.html
+  name: TimerAction
+  nameWithType: TimerAction
+  fullName: Fantasy.Timer.TimerAction
+- uid: Fantasy.Timer.TimerComponent
+  commentId: T:Fantasy.Timer.TimerComponent
+  parent: Fantasy.Timer
+  href: Fantasy.Timer.TimerComponent.html
+  name: TimerComponent
+  nameWithType: TimerComponent
+  fullName: Fantasy.Timer.TimerComponent
+- uid: Fantasy.Timer.TimerComponentUpdateSystem
+  commentId: T:Fantasy.Timer.TimerComponentUpdateSystem
+  href: Fantasy.Timer.TimerComponentUpdateSystem.html
+  name: TimerComponentUpdateSystem
+  nameWithType: TimerComponentUpdateSystem
+  fullName: Fantasy.Timer.TimerComponentUpdateSystem
+- uid: Fantasy.Timer.TimerHandler`1
+  commentId: T:Fantasy.Timer.TimerHandler`1
+  href: Fantasy.Timer.TimerHandler-1.html
+  name: TimerHandler<T>
+  nameWithType: TimerHandler<T>
+  fullName: Fantasy.Timer.TimerHandler<T>
+  nameWithType.vb: TimerHandler(Of T)
+  fullName.vb: Fantasy.Timer.TimerHandler(Of T)
+  name.vb: TimerHandler(Of T)
+  spec.csharp:
+  - uid: Fantasy.Timer.TimerHandler`1
+    name: TimerHandler
+    href: Fantasy.Timer.TimerHandler-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Timer.TimerHandler`1
+    name: TimerHandler
+    href: Fantasy.Timer.TimerHandler-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Timer.TimerSchedulerNet
+  commentId: T:Fantasy.Timer.TimerSchedulerNet
+  parent: Fantasy.Timer
+  href: Fantasy.Timer.TimerSchedulerNet.html
+  name: TimerSchedulerNet
+  nameWithType: TimerSchedulerNet
+  fullName: Fantasy.Timer.TimerSchedulerNet
+- uid: Fantasy.Timer.TimerType
+  commentId: T:Fantasy.Timer.TimerType
+  parent: Fantasy.Timer
+  href: Fantasy.Timer.TimerType.html
+  name: TimerType
+  nameWithType: TimerType
+  fullName: Fantasy.Timer.TimerType
+- uid: Fantasy.Timer
+  commentId: N:Fantasy.Timer
+  href: Fantasy.html
+  name: Fantasy.Timer
+  nameWithType: Fantasy.Timer
+  fullName: Fantasy.Timer
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Timer
+    name: Timer
+    href: Fantasy.Timer.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Timer
+    name: Timer
+    href: Fantasy.Timer.html

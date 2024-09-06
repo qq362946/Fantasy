@@ -3,13 +3,19 @@ using System.Buffers;
 using System.IO.Pipelines;
 using System.Net;
 using System.Net.WebSockets;
-namespace Fantasy;
+using Fantasy.Async;
+using Fantasy.Network.Interface;
+using Fantasy.PacketParser;
+using Fantasy.Serialize;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
+namespace Fantasy.Network.WebSocket;
 
 public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
 {
     private bool _isInnerDispose;
     private readonly Pipe _pipe = new Pipe();
-    private readonly WebSocket _webSocket;
+    private readonly System.Net.WebSockets.WebSocket _webSocket;
     private readonly WebSocketServerNetwork _network;
     private readonly ReadOnlyMemoryPacketParser _packetParser;
     private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();

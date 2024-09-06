@@ -1,0 +1,84 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Platform.Unity
+  commentId: N:Fantasy.Platform.Unity
+  id: Unity
+  parent: Fantasy.Platform
+  children:
+  - Fantasy.Platform.Unity.Entry
+  - Fantasy.Platform.Unity.FantasyObject
+  - Fantasy.Platform.Unity.GameObject
+  - Fantasy.Platform.Unity.MonoBehaviour
+  - Fantasy.Platform.Unity.OnFantasyInit
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Platform.Unity
+  nameWithType: Fantasy.Platform.Unity
+  fullName: Fantasy.Platform.Unity
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Platform.Unity.Entry
+  commentId: T:Fantasy.Platform.Unity.Entry
+  href: Fantasy.Platform.Unity.Entry.html
+  name: Entry
+  nameWithType: Entry
+  fullName: Fantasy.Platform.Unity.Entry
+- uid: Fantasy.Platform.Unity.FantasyObject
+  commentId: T:Fantasy.Platform.Unity.FantasyObject
+  href: Fantasy.Platform.Unity.FantasyObject.html
+  name: FantasyObject
+  nameWithType: FantasyObject
+  fullName: Fantasy.Platform.Unity.FantasyObject
+- uid: Fantasy.Platform.Unity.GameObject
+  commentId: T:Fantasy.Platform.Unity.GameObject
+  parent: Fantasy.Platform.Unity
+  href: Fantasy.Platform.Unity.GameObject.html
+  name: GameObject
+  nameWithType: GameObject
+  fullName: Fantasy.Platform.Unity.GameObject
+- uid: Fantasy.Platform.Unity.MonoBehaviour
+  commentId: T:Fantasy.Platform.Unity.MonoBehaviour
+  parent: Fantasy.Platform.Unity
+  href: Fantasy.Platform.Unity.MonoBehaviour.html
+  name: MonoBehaviour
+  nameWithType: MonoBehaviour
+  fullName: Fantasy.Platform.Unity.MonoBehaviour
+- uid: Fantasy.Platform.Unity.OnFantasyInit
+  commentId: T:Fantasy.Platform.Unity.OnFantasyInit
+  href: Fantasy.Platform.Unity.OnFantasyInit.html
+  name: OnFantasyInit
+  nameWithType: OnFantasyInit
+  fullName: Fantasy.Platform.Unity.OnFantasyInit
+- uid: Fantasy.Platform.Unity
+  commentId: N:Fantasy.Platform.Unity
+  href: Fantasy.html
+  name: Fantasy.Platform.Unity
+  nameWithType: Fantasy.Platform.Unity
+  fullName: Fantasy.Platform.Unity
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Unity
+    name: Unity
+    href: Fantasy.Platform.Unity.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Unity
+    name: Unity
+    href: Fantasy.Platform.Unity.html

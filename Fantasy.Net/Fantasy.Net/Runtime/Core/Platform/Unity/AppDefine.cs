@@ -1,5 +1,5 @@
 #if FANTASY_UNITY
-namespace Fantasy
+namespace Fantasy.Platform.Unity
 {
     public static class AppDefine
     {

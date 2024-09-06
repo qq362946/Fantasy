@@ -1,0 +1,880 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Serialize.BsonPackHelper
+  commentId: T:Fantasy.Serialize.BsonPackHelper
+  id: BsonPackHelper
+  parent: Fantasy.Serialize
+  children:
+  - Fantasy.Serialize.BsonPackHelper.Clone``1(``0)
+  - Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  - Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,System.Byte[])
+  - Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
+  - Fantasy.Serialize.BsonPackHelper.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  - Fantasy.Serialize.BsonPackHelper.Deserialize``1(System.Byte[])
+  - Fantasy.Serialize.BsonPackHelper.Deserialize``1(System.Byte[],System.Int32,System.Int32)
+  - Fantasy.Serialize.BsonPackHelper.Initialize
+  - Fantasy.Serialize.BsonPackHelper.Serialize(System.Object)
+  - Fantasy.Serialize.BsonPackHelper.Serialize(System.Type,System.Object,Fantasy.Serialize.MemoryStreamBuffer)
+  - Fantasy.Serialize.BsonPackHelper.Serialize``1(``0)
+  - Fantasy.Serialize.BsonPackHelper.Serialize``1(``0,Fantasy.Serialize.MemoryStreamBuffer)
+  langs:
+  - csharp
+  - vb
+  name: BsonPackHelper
+  nameWithType: BsonPackHelper
+  fullName: Fantasy.Serialize.BsonPackHelper
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: BsonPackHelper
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 20
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: BSON帮助方法
+  example: []
+  syntax:
+    content: public static class BsonPackHelper
+    content.vb: Public Module BsonPackHelper
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Fantasy.Serialize.BsonPackHelper.Initialize
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Initialize
+  id: Initialize
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Initialize()
+  nameWithType: BsonPackHelper.Initialize()
+  fullName: Fantasy.Serialize.BsonPackHelper.Initialize()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Initialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 27
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 初始化
+  example: []
+  syntax:
+    content: public static void Initialize()
+    content.vb: Public Shared Sub Initialize()
+  overload: Fantasy.Serialize.BsonPackHelper.Initialize*
+- uid: Fantasy.Serialize.BsonPackHelper.Deserialize``1(System.Byte[])
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Deserialize``1(System.Byte[])
+  id: Deserialize``1(System.Byte[])
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Deserialize<T>(byte[])
+  nameWithType: BsonPackHelper.Deserialize<T>(byte[])
+  fullName: Fantasy.Serialize.BsonPackHelper.Deserialize<T>(byte[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 85
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: public static T Deserialize<T>(byte[] bytes)
+    parameters:
+    - id: bytes
+      type: System.Byte[]
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: Public Shared Function Deserialize(Of T)(bytes As Byte()) As T
+  overload: Fantasy.Serialize.BsonPackHelper.Deserialize*
+  nameWithType.vb: BsonPackHelper.Deserialize(Of T)(Byte())
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Deserialize(Of T)(Byte())
+  name.vb: Deserialize(Of T)(Byte())
+- uid: Fantasy.Serialize.BsonPackHelper.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  id: Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Deserialize<T>(MemoryStreamBuffer)
+  nameWithType: BsonPackHelper.Deserialize<T>(MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.BsonPackHelper.Deserialize<T>(Fantasy.Serialize.MemoryStreamBuffer)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 101
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: public static T Deserialize<T>(MemoryStreamBuffer buffer)
+    parameters:
+    - id: buffer
+      type: Fantasy.Serialize.MemoryStreamBuffer
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: Public Shared Function Deserialize(Of T)(buffer As MemoryStreamBuffer) As T
+  overload: Fantasy.Serialize.BsonPackHelper.Deserialize*
+  nameWithType.vb: BsonPackHelper.Deserialize(Of T)(MemoryStreamBuffer)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Deserialize(Of T)(Fantasy.Serialize.MemoryStreamBuffer)
+  name.vb: Deserialize(Of T)(MemoryStreamBuffer)
+- uid: Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,System.Byte[])
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,System.Byte[])
+  id: Deserialize(System.Type,System.Byte[])
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(Type, byte[])
+  nameWithType: BsonPackHelper.Deserialize(Type, byte[])
+  fullName: Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type, byte[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 117
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: public static object Deserialize(Type type, byte[] bytes)
+    parameters:
+    - id: type
+      type: System.Type
+      description: ''
+    - id: bytes
+      type: System.Byte[]
+      description: ''
+    return:
+      type: System.Object
+      description: ''
+    content.vb: Public Shared Function Deserialize(type As Type, bytes As Byte()) As Object
+  overload: Fantasy.Serialize.BsonPackHelper.Deserialize*
+  nameWithType.vb: BsonPackHelper.Deserialize(Type, Byte())
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type, Byte())
+  name.vb: Deserialize(Type, Byte())
+- uid: Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  id: Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(Type, MemoryStreamBuffer)
+  nameWithType: BsonPackHelper.Deserialize(Type, MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type, Fantasy.Serialize.MemoryStreamBuffer)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 133
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: public static object Deserialize(Type type, MemoryStreamBuffer buffer)
+    parameters:
+    - id: type
+      type: System.Type
+      description: ''
+    - id: buffer
+      type: Fantasy.Serialize.MemoryStreamBuffer
+      description: ''
+    return:
+      type: System.Object
+      description: ''
+    content.vb: Public Shared Function Deserialize(type As Type, buffer As MemoryStreamBuffer) As Object
+  overload: Fantasy.Serialize.BsonPackHelper.Deserialize*
+- uid: Fantasy.Serialize.BsonPackHelper.Deserialize``1(System.Byte[],System.Int32,System.Int32)
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Deserialize``1(System.Byte[],System.Int32,System.Int32)
+  id: Deserialize``1(System.Byte[],System.Int32,System.Int32)
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Deserialize<T>(byte[], int, int)
+  nameWithType: BsonPackHelper.Deserialize<T>(byte[], int, int)
+  fullName: Fantasy.Serialize.BsonPackHelper.Deserialize<T>(byte[], int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 151
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: public static T Deserialize<T>(byte[] bytes, int index, int count)
+    parameters:
+    - id: bytes
+      type: System.Byte[]
+      description: ''
+    - id: index
+      type: System.Int32
+      description: ''
+    - id: count
+      type: System.Int32
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: Public Shared Function Deserialize(Of T)(bytes As Byte(), index As Integer, count As Integer) As T
+  overload: Fantasy.Serialize.BsonPackHelper.Deserialize*
+  nameWithType.vb: BsonPackHelper.Deserialize(Of T)(Byte(), Integer, Integer)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Deserialize(Of T)(Byte(), Integer, Integer)
+  name.vb: Deserialize(Of T)(Byte(), Integer, Integer)
+- uid: Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
+  id: Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(Type, byte[], int, int)
+  nameWithType: BsonPackHelper.Deserialize(Type, byte[], int, int)
+  fullName: Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type, byte[], int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 177
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: public static object Deserialize(Type type, byte[] bytes, int index, int count)
+    parameters:
+    - id: type
+      type: System.Type
+      description: ''
+    - id: bytes
+      type: System.Byte[]
+      description: ''
+    - id: index
+      type: System.Int32
+      description: ''
+    - id: count
+      type: System.Int32
+      description: ''
+    return:
+      type: System.Object
+      description: ''
+    content.vb: Public Shared Function Deserialize(type As Type, bytes As Byte(), index As Integer, count As Integer) As Object
+  overload: Fantasy.Serialize.BsonPackHelper.Deserialize*
+  nameWithType.vb: BsonPackHelper.Deserialize(Type, Byte(), Integer, Integer)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type, Byte(), Integer, Integer)
+  name.vb: Deserialize(Type, Byte(), Integer, Integer)
+- uid: Fantasy.Serialize.BsonPackHelper.Serialize``1(``0,Fantasy.Serialize.MemoryStreamBuffer)
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Serialize``1(``0,Fantasy.Serialize.MemoryStreamBuffer)
+  id: Serialize``1(``0,Fantasy.Serialize.MemoryStreamBuffer)
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Serialize<T>(T, MemoryStreamBuffer)
+  nameWithType: BsonPackHelper.Serialize<T>(T, MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.BsonPackHelper.Serialize<T>(T, Fantasy.Serialize.MemoryStreamBuffer)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Serialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 201
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 序列化
+  example: []
+  syntax:
+    content: public static void Serialize<T>(T @object, MemoryStreamBuffer buffer)
+    parameters:
+    - id: object
+      type: '{T}'
+      description: ''
+    - id: buffer
+      type: Fantasy.Serialize.MemoryStreamBuffer
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    content.vb: Public Shared Sub Serialize(Of T)([object] As T, buffer As MemoryStreamBuffer)
+  overload: Fantasy.Serialize.BsonPackHelper.Serialize*
+  nameWithType.vb: BsonPackHelper.Serialize(Of T)(T, MemoryStreamBuffer)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Serialize(Of T)(T, Fantasy.Serialize.MemoryStreamBuffer)
+  name.vb: Serialize(Of T)(T, MemoryStreamBuffer)
+- uid: Fantasy.Serialize.BsonPackHelper.Serialize(System.Type,System.Object,Fantasy.Serialize.MemoryStreamBuffer)
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Serialize(System.Type,System.Object,Fantasy.Serialize.MemoryStreamBuffer)
+  id: Serialize(System.Type,System.Object,Fantasy.Serialize.MemoryStreamBuffer)
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Serialize(Type, object, MemoryStreamBuffer)
+  nameWithType: BsonPackHelper.Serialize(Type, object, MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.BsonPackHelper.Serialize(System.Type, object, Fantasy.Serialize.MemoryStreamBuffer)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Serialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 217
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 序列化
+  example: []
+  syntax:
+    content: public static void Serialize(Type type, object @object, MemoryStreamBuffer buffer)
+    parameters:
+    - id: type
+      type: System.Type
+      description: ''
+    - id: object
+      type: System.Object
+      description: ''
+    - id: buffer
+      type: Fantasy.Serialize.MemoryStreamBuffer
+      description: ''
+    content.vb: Public Shared Sub Serialize(type As Type, [object] As Object, buffer As MemoryStreamBuffer)
+  overload: Fantasy.Serialize.BsonPackHelper.Serialize*
+  nameWithType.vb: BsonPackHelper.Serialize(Type, Object, MemoryStreamBuffer)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Serialize(System.Type, Object, Fantasy.Serialize.MemoryStreamBuffer)
+  name.vb: Serialize(Type, Object, MemoryStreamBuffer)
+- uid: Fantasy.Serialize.BsonPackHelper.Serialize(System.Object)
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Serialize(System.Object)
+  id: Serialize(System.Object)
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Serialize(object)
+  nameWithType: BsonPackHelper.Serialize(object)
+  fullName: Fantasy.Serialize.BsonPackHelper.Serialize(object)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Serialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 232
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 序列化
+  example: []
+  syntax:
+    content: public static byte[] Serialize(object @object)
+    parameters:
+    - id: object
+      type: System.Object
+      description: ''
+    return:
+      type: System.Byte[]
+      description: ''
+    content.vb: Public Shared Function Serialize([object] As Object) As Byte()
+  overload: Fantasy.Serialize.BsonPackHelper.Serialize*
+  nameWithType.vb: BsonPackHelper.Serialize(Object)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Serialize(Object)
+  name.vb: Serialize(Object)
+- uid: Fantasy.Serialize.BsonPackHelper.Serialize``1(``0)
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Serialize``1(``0)
+  id: Serialize``1(``0)
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Serialize<T>(T)
+  nameWithType: BsonPackHelper.Serialize<T>(T)
+  fullName: Fantasy.Serialize.BsonPackHelper.Serialize<T>(T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Serialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 247
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 序列化
+  example: []
+  syntax:
+    content: public static byte[] Serialize<T>(T @object)
+    parameters:
+    - id: object
+      type: '{T}'
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: System.Byte[]
+      description: ''
+    content.vb: Public Shared Function Serialize(Of T)([object] As T) As Byte()
+  overload: Fantasy.Serialize.BsonPackHelper.Serialize*
+  nameWithType.vb: BsonPackHelper.Serialize(Of T)(T)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Serialize(Of T)(T)
+  name.vb: Serialize(Of T)(T)
+- uid: Fantasy.Serialize.BsonPackHelper.Clone``1(``0)
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Clone``1(``0)
+  id: Clone``1(``0)
+  parent: Fantasy.Serialize.BsonPackHelper
+  langs:
+  - csharp
+  - vb
+  name: Clone<T>(T)
+  nameWithType: BsonPackHelper.Clone<T>(T)
+  fullName: Fantasy.Serialize.BsonPackHelper.Clone<T>(T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clone
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs
+    startLine: 262
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 克隆
+  example: []
+  syntax:
+    content: public static T Clone<T>(T t)
+    parameters:
+    - id: t
+      type: '{T}'
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: Public Shared Function Clone(Of T)(t As T) As T
+  overload: Fantasy.Serialize.BsonPackHelper.Clone*
+  nameWithType.vb: BsonPackHelper.Clone(Of T)(T)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Clone(Of T)(T)
+  name.vb: Clone(Of T)(T)
+references:
+- uid: Fantasy.Serialize
+  commentId: N:Fantasy.Serialize
+  href: Fantasy.html
+  name: Fantasy.Serialize
+  nameWithType: Fantasy.Serialize
+  fullName: Fantasy.Serialize
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Serialize.BsonPackHelper.Initialize*
+  commentId: Overload:Fantasy.Serialize.BsonPackHelper.Initialize
+  href: Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Initialize
+  name: Initialize
+  nameWithType: BsonPackHelper.Initialize
+  fullName: Fantasy.Serialize.BsonPackHelper.Initialize
+- uid: Fantasy.Serialize.BsonPackHelper.Deserialize*
+  commentId: Overload:Fantasy.Serialize.BsonPackHelper.Deserialize
+  href: Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Deserialize__1_System_Byte___
+  name: Deserialize
+  nameWithType: BsonPackHelper.Deserialize
+  fullName: Fantasy.Serialize.BsonPackHelper.Deserialize
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Fantasy.Serialize.MemoryStreamBuffer
+  commentId: T:Fantasy.Serialize.MemoryStreamBuffer
+  parent: Fantasy.Serialize
+  href: Fantasy.Serialize.MemoryStreamBuffer.html
+  name: MemoryStreamBuffer
+  nameWithType: MemoryStreamBuffer
+  fullName: Fantasy.Serialize.MemoryStreamBuffer
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Fantasy.Serialize.BsonPackHelper.Serialize*
+  commentId: Overload:Fantasy.Serialize.BsonPackHelper.Serialize
+  href: Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Serialize__1___0_Fantasy_Serialize_MemoryStreamBuffer_
+  name: Serialize
+  nameWithType: BsonPackHelper.Serialize
+  fullName: Fantasy.Serialize.BsonPackHelper.Serialize
+- uid: Fantasy.Serialize.BsonPackHelper.Clone*
+  commentId: Overload:Fantasy.Serialize.BsonPackHelper.Clone
+  href: Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Clone__1___0_
+  name: Clone
+  nameWithType: BsonPackHelper.Clone
+  fullName: Fantasy.Serialize.BsonPackHelper.Clone

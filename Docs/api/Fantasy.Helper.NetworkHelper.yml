@@ -1,0 +1,1377 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Helper.NetworkHelper
+  commentId: T:Fantasy.Helper.NetworkHelper
+  id: NetworkHelper
+  parent: Fantasy.Helper
+  children:
+  - Fantasy.Helper.NetworkHelper.ByteToSocketAddress(System.Byte[],System.Int32,System.Net.SocketAddress@)
+  - Fantasy.Helper.NetworkHelper.ByteToSocketAddress(System.ReadOnlyMemory{System.Byte},System.Int32,System.Net.SocketAddress@)
+  - Fantasy.Helper.NetworkHelper.Clone(System.Net.EndPoint)
+  - Fantasy.Helper.NetworkHelper.GetAddressIPs
+  - Fantasy.Helper.NetworkHelper.GetIPEndPoint(System.Net.SocketAddress)
+  - Fantasy.Helper.NetworkHelper.GetIPEndPoint(System.String)
+  - Fantasy.Helper.NetworkHelper.IPEndPointEquals(System.Net.EndPoint,System.Net.IPEndPoint)
+  - Fantasy.Helper.NetworkHelper.IPEndPointEquals(System.Net.IPEndPoint,System.Net.IPEndPoint)
+  - Fantasy.Helper.NetworkHelper.IPEndPointToStr(System.Net.IPEndPoint)
+  - Fantasy.Helper.NetworkHelper.SetReceiveBufferToOSLimit(System.Net.Sockets.Socket,System.Int32,System.Int32)
+  - Fantasy.Helper.NetworkHelper.SetSendBufferToOSLimit(System.Net.Sockets.Socket,System.Int32,System.Int32)
+  - Fantasy.Helper.NetworkHelper.SetSioUdpConnReset(System.Net.Sockets.Socket)
+  - Fantasy.Helper.NetworkHelper.SetSocketBufferToOsLimit(System.Net.Sockets.Socket)
+  - Fantasy.Helper.NetworkHelper.SocketAddressToByte(System.Net.SocketAddress,System.Byte[],System.Int32)
+  - Fantasy.Helper.NetworkHelper.ToIPEndPoint(System.String)
+  - Fantasy.Helper.NetworkHelper.ToIPEndPoint(System.String,System.Int32)
+  langs:
+  - csharp
+  - vb
+  name: NetworkHelper
+  nameWithType: NetworkHelper
+  fullName: Fantasy.Helper.NetworkHelper
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NetworkHelper
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 17
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 提供网络操作相关的帮助方法。
+  example: []
+  syntax:
+    content: public static class NetworkHelper
+    content.vb: Public Module NetworkHelper
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Fantasy.Helper.NetworkHelper.GetIPEndPoint(System.String)
+  commentId: M:Fantasy.Helper.NetworkHelper.GetIPEndPoint(System.String)
+  id: GetIPEndPoint(System.String)
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: GetIPEndPoint(string)
+  nameWithType: NetworkHelper.GetIPEndPoint(string)
+  fullName: Fantasy.Helper.NetworkHelper.GetIPEndPoint(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetIPEndPoint
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 24
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 根据字符串获取一个IPEndPoint
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static IPEndPoint GetIPEndPoint(string address)
+    parameters:
+    - id: address
+      type: System.String
+      description: ''
+    return:
+      type: System.Net.IPEndPoint
+      description: ''
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Function GetIPEndPoint(address As String) As IPEndPoint
+  overload: Fantasy.Helper.NetworkHelper.GetIPEndPoint*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NetworkHelper.GetIPEndPoint(String)
+  fullName.vb: Fantasy.Helper.NetworkHelper.GetIPEndPoint(String)
+  name.vb: GetIPEndPoint(String)
+- uid: Fantasy.Helper.NetworkHelper.Clone(System.Net.EndPoint)
+  commentId: M:Fantasy.Helper.NetworkHelper.Clone(System.Net.EndPoint)
+  id: Clone(System.Net.EndPoint)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: Clone(EndPoint)
+  nameWithType: NetworkHelper.Clone(EndPoint)
+  fullName: Fantasy.Helper.NetworkHelper.Clone(System.Net.EndPoint)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clone
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 62
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 克隆一个IPEndPoint
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static IPEndPoint Clone(this EndPoint endPoint)
+    parameters:
+    - id: endPoint
+      type: System.Net.EndPoint
+      description: ''
+    return:
+      type: System.Net.IPEndPoint
+      description: ''
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Function Clone(endPoint As EndPoint) As IPEndPoint
+  overload: Fantasy.Helper.NetworkHelper.Clone*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Helper.NetworkHelper.IPEndPointEquals(System.Net.EndPoint,System.Net.IPEndPoint)
+  commentId: M:Fantasy.Helper.NetworkHelper.IPEndPointEquals(System.Net.EndPoint,System.Net.IPEndPoint)
+  id: IPEndPointEquals(System.Net.EndPoint,System.Net.IPEndPoint)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: IPEndPointEquals(EndPoint, IPEndPoint)
+  nameWithType: NetworkHelper.IPEndPointEquals(EndPoint, IPEndPoint)
+  fullName: Fantasy.Helper.NetworkHelper.IPEndPointEquals(System.Net.EndPoint, System.Net.IPEndPoint)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IPEndPointEquals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 75
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 比较两个IPEndPoint是否相等
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static bool IPEndPointEquals(this EndPoint endPoint, IPEndPoint ipEndPoint)
+    parameters:
+    - id: endPoint
+      type: System.Net.EndPoint
+      description: ''
+    - id: ipEndPoint
+      type: System.Net.IPEndPoint
+      description: ''
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Function IPEndPointEquals(endPoint As EndPoint, ipEndPoint As IPEndPoint) As Boolean
+  overload: Fantasy.Helper.NetworkHelper.IPEndPointEquals*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Helper.NetworkHelper.IPEndPointEquals(System.Net.IPEndPoint,System.Net.IPEndPoint)
+  commentId: M:Fantasy.Helper.NetworkHelper.IPEndPointEquals(System.Net.IPEndPoint,System.Net.IPEndPoint)
+  id: IPEndPointEquals(System.Net.IPEndPoint,System.Net.IPEndPoint)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: IPEndPointEquals(IPEndPoint, IPEndPoint)
+  nameWithType: NetworkHelper.IPEndPointEquals(IPEndPoint, IPEndPoint)
+  fullName: Fantasy.Helper.NetworkHelper.IPEndPointEquals(System.Net.IPEndPoint, System.Net.IPEndPoint)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IPEndPointEquals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 88
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 比较两个IPEndPoint是否相等
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static bool IPEndPointEquals(this IPEndPoint endPoint, IPEndPoint ipEndPoint)
+    parameters:
+    - id: endPoint
+      type: System.Net.IPEndPoint
+      description: ''
+    - id: ipEndPoint
+      type: System.Net.IPEndPoint
+      description: ''
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Function IPEndPointEquals(endPoint As IPEndPoint, ipEndPoint As IPEndPoint) As Boolean
+  overload: Fantasy.Helper.NetworkHelper.IPEndPointEquals*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Helper.NetworkHelper.SocketAddressToByte(System.Net.SocketAddress,System.Byte[],System.Int32)
+  commentId: M:Fantasy.Helper.NetworkHelper.SocketAddressToByte(System.Net.SocketAddress,System.Byte[],System.Int32)
+  id: SocketAddressToByte(System.Net.SocketAddress,System.Byte[],System.Int32)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: SocketAddressToByte(SocketAddress, byte[], int)
+  nameWithType: NetworkHelper.SocketAddressToByte(SocketAddress, byte[], int)
+  fullName: Fantasy.Helper.NetworkHelper.SocketAddressToByte(System.Net.SocketAddress, byte[], int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SocketAddressToByte
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 101
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 将SocketAddress写入到Byte[]中
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static void SocketAddressToByte(this SocketAddress socketAddress, byte[] buffer, int offset)
+    parameters:
+    - id: socketAddress
+      type: System.Net.SocketAddress
+      description: ''
+    - id: buffer
+      type: System.Byte[]
+      description: ''
+    - id: offset
+      type: System.Int32
+      description: ''
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Sub SocketAddressToByte(socketAddress As SocketAddress, buffer As Byte(), offset As Integer)
+  overload: Fantasy.Helper.NetworkHelper.SocketAddressToByte*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NetworkHelper.SocketAddressToByte(SocketAddress, Byte(), Integer)
+  fullName.vb: Fantasy.Helper.NetworkHelper.SocketAddressToByte(System.Net.SocketAddress, Byte(), Integer)
+  name.vb: SocketAddressToByte(SocketAddress, Byte(), Integer)
+- uid: Fantasy.Helper.NetworkHelper.ByteToSocketAddress(System.Byte[],System.Int32,System.Net.SocketAddress@)
+  commentId: M:Fantasy.Helper.NetworkHelper.ByteToSocketAddress(System.Byte[],System.Int32,System.Net.SocketAddress@)
+  id: ByteToSocketAddress(System.Byte[],System.Int32,System.Net.SocketAddress@)
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: ByteToSocketAddress(byte[], int, out SocketAddress)
+  nameWithType: NetworkHelper.ByteToSocketAddress(byte[], int, out SocketAddress)
+  fullName: Fantasy.Helper.NetworkHelper.ByteToSocketAddress(byte[], int, out System.Net.SocketAddress)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ByteToSocketAddress
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 142
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 将byre[]转换为SocketAddress
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static int ByteToSocketAddress(byte[] buffer, int offset, out SocketAddress socketAddress)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+      description: ''
+    - id: offset
+      type: System.Int32
+      description: ''
+    - id: socketAddress
+      type: System.Net.SocketAddress
+      description: ''
+    return:
+      type: System.Int32
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Function ByteToSocketAddress(buffer As Byte(), offset As Integer, socketAddress As SocketAddress) As Integer
+  overload: Fantasy.Helper.NetworkHelper.ByteToSocketAddress*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: ''
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: ''
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: ''
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NetworkHelper.ByteToSocketAddress(Byte(), Integer, SocketAddress)
+  fullName.vb: Fantasy.Helper.NetworkHelper.ByteToSocketAddress(Byte(), Integer, System.Net.SocketAddress)
+  name.vb: ByteToSocketAddress(Byte(), Integer, SocketAddress)
+- uid: Fantasy.Helper.NetworkHelper.ByteToSocketAddress(System.ReadOnlyMemory{System.Byte},System.Int32,System.Net.SocketAddress@)
+  commentId: M:Fantasy.Helper.NetworkHelper.ByteToSocketAddress(System.ReadOnlyMemory{System.Byte},System.Int32,System.Net.SocketAddress@)
+  id: ByteToSocketAddress(System.ReadOnlyMemory{System.Byte},System.Int32,System.Net.SocketAddress@)
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: ByteToSocketAddress(ReadOnlyMemory<byte>, int, out SocketAddress)
+  nameWithType: NetworkHelper.ByteToSocketAddress(ReadOnlyMemory<byte>, int, out SocketAddress)
+  fullName: Fantasy.Helper.NetworkHelper.ByteToSocketAddress(System.ReadOnlyMemory<byte>, int, out System.Net.SocketAddress)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ByteToSocketAddress
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 200
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 将ReadOnlyMemory转换为SocketAddress
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static int ByteToSocketAddress(ReadOnlyMemory<byte> buffer, int offset, out SocketAddress socketAddress)
+    parameters:
+    - id: buffer
+      type: System.ReadOnlyMemory{System.Byte}
+      description: ''
+    - id: offset
+      type: System.Int32
+      description: ''
+    - id: socketAddress
+      type: System.Net.SocketAddress
+      description: ''
+    return:
+      type: System.Int32
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Function ByteToSocketAddress(buffer As ReadOnlyMemory(Of Byte), offset As Integer, socketAddress As SocketAddress) As Integer
+  overload: Fantasy.Helper.NetworkHelper.ByteToSocketAddress*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: ''
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: ''
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NetworkHelper.ByteToSocketAddress(ReadOnlyMemory(Of Byte), Integer, SocketAddress)
+  fullName.vb: Fantasy.Helper.NetworkHelper.ByteToSocketAddress(System.ReadOnlyMemory(Of Byte), Integer, System.Net.SocketAddress)
+  name.vb: ByteToSocketAddress(ReadOnlyMemory(Of Byte), Integer, SocketAddress)
+- uid: Fantasy.Helper.NetworkHelper.GetIPEndPoint(System.Net.SocketAddress)
+  commentId: M:Fantasy.Helper.NetworkHelper.GetIPEndPoint(System.Net.SocketAddress)
+  id: GetIPEndPoint(System.Net.SocketAddress)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: GetIPEndPoint(SocketAddress)
+  nameWithType: NetworkHelper.GetIPEndPoint(SocketAddress)
+  fullName: Fantasy.Helper.NetworkHelper.GetIPEndPoint(System.Net.SocketAddress)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetIPEndPoint
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 251
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 根据SocketAddress获得IPEndPoint
+  example: []
+  syntax:
+    content: public static IPEndPoint GetIPEndPoint(this SocketAddress socketAddress)
+    parameters:
+    - id: socketAddress
+      type: System.Net.SocketAddress
+      description: ''
+    return:
+      type: System.Net.IPEndPoint
+      description: ''
+    content.vb: Public Shared Function GetIPEndPoint(socketAddress As SocketAddress) As IPEndPoint
+  overload: Fantasy.Helper.NetworkHelper.GetIPEndPoint*
+  exceptions:
+  - type: System.NotSupportedException
+    commentId: T:System.NotSupportedException
+    description: ''
+- uid: Fantasy.Helper.NetworkHelper.GetAddressIPs
+  commentId: M:Fantasy.Helper.NetworkHelper.GetAddressIPs
+  id: GetAddressIPs
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: GetAddressIPs()
+  nameWithType: NetworkHelper.GetAddressIPs()
+  fullName: Fantasy.Helper.NetworkHelper.GetAddressIPs()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetAddressIPs
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 300
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 获取本机所有网络适配器的IP地址。
+  example: []
+  syntax:
+    content: public static string[] GetAddressIPs()
+    return:
+      type: System.String[]
+      description: IP地址数组。
+    content.vb: Public Shared Function GetAddressIPs() As String()
+  overload: Fantasy.Helper.NetworkHelper.GetAddressIPs*
+- uid: Fantasy.Helper.NetworkHelper.ToIPEndPoint(System.String,System.Int32)
+  commentId: M:Fantasy.Helper.NetworkHelper.ToIPEndPoint(System.String,System.Int32)
+  id: ToIPEndPoint(System.String,System.Int32)
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: ToIPEndPoint(string, int)
+  nameWithType: NetworkHelper.ToIPEndPoint(string, int)
+  fullName: Fantasy.Helper.NetworkHelper.ToIPEndPoint(string, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToIPEndPoint
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 326
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 将主机名和端口号转换为 <xref href="System.Net.IPEndPoint" data-throw-if-not-resolved="false"></xref> 实例。
+  example: []
+  syntax:
+    content: public static IPEndPoint ToIPEndPoint(string host, int port)
+    parameters:
+    - id: host
+      type: System.String
+      description: 主机名。
+    - id: port
+      type: System.Int32
+      description: 端口号。
+    return:
+      type: System.Net.IPEndPoint
+      description: <xref href="System.Net.IPEndPoint" data-throw-if-not-resolved="false"></xref> 实例。
+    content.vb: Public Shared Function ToIPEndPoint(host As String, port As Integer) As IPEndPoint
+  overload: Fantasy.Helper.NetworkHelper.ToIPEndPoint*
+  nameWithType.vb: NetworkHelper.ToIPEndPoint(String, Integer)
+  fullName.vb: Fantasy.Helper.NetworkHelper.ToIPEndPoint(String, Integer)
+  name.vb: ToIPEndPoint(String, Integer)
+- uid: Fantasy.Helper.NetworkHelper.ToIPEndPoint(System.String)
+  commentId: M:Fantasy.Helper.NetworkHelper.ToIPEndPoint(System.String)
+  id: ToIPEndPoint(System.String)
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: ToIPEndPoint(string)
+  nameWithType: NetworkHelper.ToIPEndPoint(string)
+  fullName: Fantasy.Helper.NetworkHelper.ToIPEndPoint(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToIPEndPoint
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 336
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 将地址字符串转换为 <xref href="System.Net.IPEndPoint" data-throw-if-not-resolved="false"></xref> 实例。
+  example: []
+  syntax:
+    content: public static IPEndPoint ToIPEndPoint(string address)
+    parameters:
+    - id: address
+      type: System.String
+      description: 地址字符串，格式为 "主机名:端口号"。
+    return:
+      type: System.Net.IPEndPoint
+      description: <xref href="System.Net.IPEndPoint" data-throw-if-not-resolved="false"></xref> 实例。
+    content.vb: Public Shared Function ToIPEndPoint(address As String) As IPEndPoint
+  overload: Fantasy.Helper.NetworkHelper.ToIPEndPoint*
+  nameWithType.vb: NetworkHelper.ToIPEndPoint(String)
+  fullName.vb: Fantasy.Helper.NetworkHelper.ToIPEndPoint(String)
+  name.vb: ToIPEndPoint(String)
+- uid: Fantasy.Helper.NetworkHelper.IPEndPointToStr(System.Net.IPEndPoint)
+  commentId: M:Fantasy.Helper.NetworkHelper.IPEndPointToStr(System.Net.IPEndPoint)
+  id: IPEndPointToStr(System.Net.IPEndPoint)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: IPEndPointToStr(IPEndPoint)
+  nameWithType: NetworkHelper.IPEndPointToStr(IPEndPoint)
+  fullName: Fantasy.Helper.NetworkHelper.IPEndPointToStr(System.Net.IPEndPoint)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IPEndPointToStr
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 350
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 将 <xref href="System.Net.IPEndPoint" data-throw-if-not-resolved="false"></xref> 实例转换为字符串表示形式。
+  example: []
+  syntax:
+    content: public static string IPEndPointToStr(this IPEndPoint self)
+    parameters:
+    - id: self
+      type: System.Net.IPEndPoint
+      description: <xref href="System.Net.IPEndPoint" data-throw-if-not-resolved="false"></xref> 实例。
+    return:
+      type: System.String
+      description: 表示 <xref href="System.Net.IPEndPoint" data-throw-if-not-resolved="false"></xref> 的字符串。
+    content.vb: Public Shared Function IPEndPointToStr(self As IPEndPoint) As String
+  overload: Fantasy.Helper.NetworkHelper.IPEndPointToStr*
+- uid: Fantasy.Helper.NetworkHelper.SetSioUdpConnReset(System.Net.Sockets.Socket)
+  commentId: M:Fantasy.Helper.NetworkHelper.SetSioUdpConnReset(System.Net.Sockets.Socket)
+  id: SetSioUdpConnReset(System.Net.Sockets.Socket)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: SetSioUdpConnReset(Socket)
+  nameWithType: NetworkHelper.SetSioUdpConnReset(Socket)
+  fullName: Fantasy.Helper.NetworkHelper.SetSioUdpConnReset(System.Net.Sockets.Socket)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetSioUdpConnReset
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 359
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 针对 Windows 平台设置UDP连接重置选项。
+  example: []
+  syntax:
+    content: public static void SetSioUdpConnReset(this Socket socket)
+    parameters:
+    - id: socket
+      type: System.Net.Sockets.Socket
+      description: 要设置选项的 <xref href="System.Net.Sockets.Socket" data-throw-if-not-resolved="false"></xref> 实例。
+    content.vb: Public Shared Sub SetSioUdpConnReset(socket As Socket)
+  overload: Fantasy.Helper.NetworkHelper.SetSioUdpConnReset*
+- uid: Fantasy.Helper.NetworkHelper.SetSocketBufferToOsLimit(System.Net.Sockets.Socket)
+  commentId: M:Fantasy.Helper.NetworkHelper.SetSocketBufferToOsLimit(System.Net.Sockets.Socket)
+  id: SetSocketBufferToOsLimit(System.Net.Sockets.Socket)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: SetSocketBufferToOsLimit(Socket)
+  nameWithType: NetworkHelper.SetSocketBufferToOsLimit(Socket)
+  fullName: Fantasy.Helper.NetworkHelper.SetSocketBufferToOsLimit(System.Net.Sockets.Socket)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetSocketBufferToOsLimit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 385
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 将 Socket 缓冲区大小设置为操作系统限制。
+  example: []
+  syntax:
+    content: public static void SetSocketBufferToOsLimit(this Socket socket)
+    parameters:
+    - id: socket
+      type: System.Net.Sockets.Socket
+      description: 要设置缓冲区大小的 Socket。
+    content.vb: Public Shared Sub SetSocketBufferToOsLimit(socket As Socket)
+  overload: Fantasy.Helper.NetworkHelper.SetSocketBufferToOsLimit*
+- uid: Fantasy.Helper.NetworkHelper.SetReceiveBufferToOSLimit(System.Net.Sockets.Socket,System.Int32,System.Int32)
+  commentId: M:Fantasy.Helper.NetworkHelper.SetReceiveBufferToOSLimit(System.Net.Sockets.Socket,System.Int32,System.Int32)
+  id: SetReceiveBufferToOSLimit(System.Net.Sockets.Socket,System.Int32,System.Int32)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: SetReceiveBufferToOSLimit(Socket, int, int)
+  nameWithType: NetworkHelper.SetReceiveBufferToOSLimit(Socket, int, int)
+  fullName: Fantasy.Helper.NetworkHelper.SetReceiveBufferToOSLimit(System.Net.Sockets.Socket, int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetReceiveBufferToOSLimit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 398
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: >-
+    将 Socket 接收缓冲区大小设置为操作系统限制。
+
+    尝试增加接收缓冲区大小的次数 = 默认 + 最大增加 100 MB。
+  example: []
+  syntax:
+    content: public static void SetReceiveBufferToOSLimit(this Socket socket, int stepSize = 1024, int attempts = 100000)
+    parameters:
+    - id: socket
+      type: System.Net.Sockets.Socket
+      description: 要设置接收缓冲区大小的 Socket。
+    - id: stepSize
+      type: System.Int32
+      description: 每次增加的步长大小。
+    - id: attempts
+      type: System.Int32
+      description: 尝试增加缓冲区大小的次数。
+    content.vb: Public Shared Sub SetReceiveBufferToOSLimit(socket As Socket, stepSize As Integer = 1024, attempts As Integer = 100000)
+  overload: Fantasy.Helper.NetworkHelper.SetReceiveBufferToOSLimit*
+  nameWithType.vb: NetworkHelper.SetReceiveBufferToOSLimit(Socket, Integer, Integer)
+  fullName.vb: Fantasy.Helper.NetworkHelper.SetReceiveBufferToOSLimit(System.Net.Sockets.Socket, Integer, Integer)
+  name.vb: SetReceiveBufferToOSLimit(Socket, Integer, Integer)
+- uid: Fantasy.Helper.NetworkHelper.SetSendBufferToOSLimit(System.Net.Sockets.Socket,System.Int32,System.Int32)
+  commentId: M:Fantasy.Helper.NetworkHelper.SetSendBufferToOSLimit(System.Net.Sockets.Socket,System.Int32,System.Int32)
+  id: SetSendBufferToOSLimit(System.Net.Sockets.Socket,System.Int32,System.Int32)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.NetworkHelper
+  langs:
+  - csharp
+  - vb
+  name: SetSendBufferToOSLimit(Socket, int, int)
+  nameWithType: NetworkHelper.SetSendBufferToOSLimit(Socket, int, int)
+  fullName: Fantasy.Helper.NetworkHelper.SetSendBufferToOSLimit(System.Net.Sockets.Socket, int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetSendBufferToOSLimit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/NetworkHelper.cs
+    startLine: 423
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: >-
+    将 Socket 发送缓冲区大小设置为操作系统限制。
+
+    尝试增加发送缓冲区大小的次数 = 默认 + 最大增加 100 MB。
+  example: []
+  syntax:
+    content: public static void SetSendBufferToOSLimit(this Socket socket, int stepSize = 1024, int attempts = 100000)
+    parameters:
+    - id: socket
+      type: System.Net.Sockets.Socket
+      description: 要设置发送缓冲区大小的 Socket。
+    - id: stepSize
+      type: System.Int32
+      description: 每次增加的步长大小。
+    - id: attempts
+      type: System.Int32
+      description: 尝试增加缓冲区大小的次数。
+    content.vb: Public Shared Sub SetSendBufferToOSLimit(socket As Socket, stepSize As Integer = 1024, attempts As Integer = 100000)
+  overload: Fantasy.Helper.NetworkHelper.SetSendBufferToOSLimit*
+  nameWithType.vb: NetworkHelper.SetSendBufferToOSLimit(Socket, Integer, Integer)
+  fullName.vb: Fantasy.Helper.NetworkHelper.SetSendBufferToOSLimit(System.Net.Sockets.Socket, Integer, Integer)
+  name.vb: SetSendBufferToOSLimit(Socket, Integer, Integer)
+references:
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.NetworkHelper.GetIPEndPoint*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.GetIPEndPoint
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_GetIPEndPoint_System_String_
+  name: GetIPEndPoint
+  nameWithType: NetworkHelper.GetIPEndPoint
+  fullName: Fantasy.Helper.NetworkHelper.GetIPEndPoint
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Net.IPEndPoint
+  commentId: T:System.Net.IPEndPoint
+  parent: System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.ipendpoint
+  name: IPEndPoint
+  nameWithType: IPEndPoint
+  fullName: System.Net.IPEndPoint
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+- uid: Fantasy.Helper.NetworkHelper.Clone*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.Clone
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_Clone_System_Net_EndPoint_
+  name: Clone
+  nameWithType: NetworkHelper.Clone
+  fullName: Fantasy.Helper.NetworkHelper.Clone
+- uid: System.Net.EndPoint
+  commentId: T:System.Net.EndPoint
+  parent: System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.endpoint
+  name: EndPoint
+  nameWithType: EndPoint
+  fullName: System.Net.EndPoint
+- uid: Fantasy.Helper.NetworkHelper.IPEndPointEquals*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.IPEndPointEquals
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_IPEndPointEquals_System_Net_EndPoint_System_Net_IPEndPoint_
+  name: IPEndPointEquals
+  nameWithType: NetworkHelper.IPEndPointEquals
+  fullName: Fantasy.Helper.NetworkHelper.IPEndPointEquals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Fantasy.Helper.NetworkHelper.SocketAddressToByte*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.SocketAddressToByte
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_SocketAddressToByte_System_Net_SocketAddress_System_Byte___System_Int32_
+  name: SocketAddressToByte
+  nameWithType: NetworkHelper.SocketAddressToByte
+  fullName: Fantasy.Helper.NetworkHelper.SocketAddressToByte
+- uid: System.Net.SocketAddress
+  commentId: T:System.Net.SocketAddress
+  parent: System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.socketaddress
+  name: SocketAddress
+  nameWithType: SocketAddress
+  fullName: System.Net.SocketAddress
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+  name: ArgumentNullException
+  nameWithType: ArgumentNullException
+  fullName: System.ArgumentNullException
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentexception
+  name: ArgumentException
+  nameWithType: ArgumentException
+  fullName: System.ArgumentException
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.invalidoperationexception
+  name: InvalidOperationException
+  nameWithType: InvalidOperationException
+  fullName: System.InvalidOperationException
+- uid: Fantasy.Helper.NetworkHelper.ByteToSocketAddress*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.ByteToSocketAddress
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_ByteToSocketAddress_System_Byte___System_Int32_System_Net_SocketAddress__
+  name: ByteToSocketAddress
+  nameWithType: NetworkHelper.ByteToSocketAddress
+  fullName: Fantasy.Helper.NetworkHelper.ByteToSocketAddress
+- uid: System.ReadOnlyMemory{System.Byte}
+  commentId: T:System.ReadOnlyMemory{System.Byte}
+  parent: System
+  definition: System.ReadOnlyMemory`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  name: ReadOnlyMemory<byte>
+  nameWithType: ReadOnlyMemory<byte>
+  fullName: System.ReadOnlyMemory<byte>
+  nameWithType.vb: ReadOnlyMemory(Of Byte)
+  fullName.vb: System.ReadOnlyMemory(Of Byte)
+  name.vb: ReadOnlyMemory(Of Byte)
+  spec.csharp:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.ReadOnlyMemory`1
+  commentId: T:System.ReadOnlyMemory`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  name: ReadOnlyMemory<T>
+  nameWithType: ReadOnlyMemory<T>
+  fullName: System.ReadOnlyMemory<T>
+  nameWithType.vb: ReadOnlyMemory(Of T)
+  fullName.vb: System.ReadOnlyMemory(Of T)
+  name.vb: ReadOnlyMemory(Of T)
+  spec.csharp:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.NotSupportedException
+  commentId: T:System.NotSupportedException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.notsupportedexception
+  name: NotSupportedException
+  nameWithType: NotSupportedException
+  fullName: System.NotSupportedException
+- uid: Fantasy.Helper.NetworkHelper.GetAddressIPs*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.GetAddressIPs
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_GetAddressIPs
+  name: GetAddressIPs
+  nameWithType: NetworkHelper.GetAddressIPs
+  fullName: Fantasy.Helper.NetworkHelper.GetAddressIPs
+- uid: System.String[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
+  nameWithType.vb: String()
+  fullName.vb: String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+- uid: Fantasy.Helper.NetworkHelper.ToIPEndPoint*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.ToIPEndPoint
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_ToIPEndPoint_System_String_System_Int32_
+  name: ToIPEndPoint
+  nameWithType: NetworkHelper.ToIPEndPoint
+  fullName: Fantasy.Helper.NetworkHelper.ToIPEndPoint
+- uid: Fantasy.Helper.NetworkHelper.IPEndPointToStr*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.IPEndPointToStr
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_IPEndPointToStr_System_Net_IPEndPoint_
+  name: IPEndPointToStr
+  nameWithType: NetworkHelper.IPEndPointToStr
+  fullName: Fantasy.Helper.NetworkHelper.IPEndPointToStr
+- uid: System.Net.Sockets.Socket
+  commentId: T:System.Net.Sockets.Socket
+  parent: System.Net.Sockets
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.sockets.socket
+  name: Socket
+  nameWithType: Socket
+  fullName: System.Net.Sockets.Socket
+- uid: Fantasy.Helper.NetworkHelper.SetSioUdpConnReset*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.SetSioUdpConnReset
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_SetSioUdpConnReset_System_Net_Sockets_Socket_
+  name: SetSioUdpConnReset
+  nameWithType: NetworkHelper.SetSioUdpConnReset
+  fullName: Fantasy.Helper.NetworkHelper.SetSioUdpConnReset
+- uid: System.Net.Sockets
+  commentId: N:System.Net.Sockets
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net.Sockets
+  nameWithType: System.Net.Sockets
+  fullName: System.Net.Sockets
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Sockets
+    name: Sockets
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.sockets
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Sockets
+    name: Sockets
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.sockets
+- uid: Fantasy.Helper.NetworkHelper.SetSocketBufferToOsLimit*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.SetSocketBufferToOsLimit
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_SetSocketBufferToOsLimit_System_Net_Sockets_Socket_
+  name: SetSocketBufferToOsLimit
+  nameWithType: NetworkHelper.SetSocketBufferToOsLimit
+  fullName: Fantasy.Helper.NetworkHelper.SetSocketBufferToOsLimit
+- uid: Fantasy.Helper.NetworkHelper.SetReceiveBufferToOSLimit*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.SetReceiveBufferToOSLimit
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_SetReceiveBufferToOSLimit_System_Net_Sockets_Socket_System_Int32_System_Int32_
+  name: SetReceiveBufferToOSLimit
+  nameWithType: NetworkHelper.SetReceiveBufferToOSLimit
+  fullName: Fantasy.Helper.NetworkHelper.SetReceiveBufferToOSLimit
+- uid: Fantasy.Helper.NetworkHelper.SetSendBufferToOSLimit*
+  commentId: Overload:Fantasy.Helper.NetworkHelper.SetSendBufferToOSLimit
+  href: Fantasy.Helper.NetworkHelper.html#Fantasy_Helper_NetworkHelper_SetSendBufferToOSLimit_System_Net_Sockets_Socket_System_Int32_System_Int32_
+  name: SetSendBufferToOSLimit
+  nameWithType: NetworkHelper.SetSendBufferToOSLimit
+  fullName: Fantasy.Helper.NetworkHelper.SetSendBufferToOSLimit

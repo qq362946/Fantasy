@@ -5,7 +5,7 @@ using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
 #pragma warning disable CS8603 // Possible null reference return.
 
-namespace Fantasy
+namespace Fantasy.Async
 {
     [StructLayout(LayoutKind.Auto)]
     internal struct AsyncFVoidMethodBuilder

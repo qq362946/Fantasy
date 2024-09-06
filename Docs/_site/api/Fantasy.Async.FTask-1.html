@@ -1,0 +1,684 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>FTask&lt;T&gt; 类
+ | Fantasy </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="FTask&lt;T&gt; 类
+ | Fantasy ">
+    
+    <meta name="description" content="一个异步任务">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="Fantasy">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="搜索" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">搜索结果 <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="首页" data-prev="上一页" data-next="下一页" data-last="尾页"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">显示/隐藏目录</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Fantasy.Async.FTask`1">
+
+
+
+  <h1 id="Fantasy_Async_FTask_1" data-uid="Fantasy.Async.FTask`1" class="text-break">FTask&lt;T&gt; 类
+</h1>
+  <div class="markdown level0 summary"><p>一个异步任务</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>继承</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">FTask&lt;T&gt;</span></div>
+  </div>
+  <div class="implements">
+    <h5>实现</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.icriticalnotifycompletion">ICriticalNotifyCompletion</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.inotifycompletion">INotifyCompletion</a></div>
+    <div><a class="xref" href="Fantasy.Async.IFTask.html">IFTask</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>继承成员</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>命名空间</strong>: <a class="xref" href="Fantasy.html">Fantasy</a>.<a class="xref" href="Fantasy.Async.html">Async</a></h6>
+  <h6><strong>程序集</strong>: Fantasy.Net.dll</h6>
+  <h5 id="Fantasy_Async_FTask_1_syntax">语法</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[AsyncMethodBuilder(typeof(AsyncFTaskMethodBuilder&lt;&gt;))]
+public sealed class FTask&lt;T&gt; : ICriticalNotifyCompletion, INotifyCompletion, IFTask</code></pre>
+  </div>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>任务的泛型类型</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">属性
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_FTaskType.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.FTaskType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L168">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_FTaskType_" data-uid="Fantasy.Async.FTask`1.FTaskType*"></a>
+  <h4 id="Fantasy_Async_FTask_1_FTaskType" data-uid="Fantasy.Async.FTask`1.FTaskType">FTaskType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FTaskType FTaskType { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTaskType.html">FTaskType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_IsCompleted.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.IsCompleted%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L170">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_IsCompleted_" data-uid="Fantasy.Async.FTask`1.IsCompleted*"></a>
+  <h4 id="Fantasy_Async_FTask_1_IsCompleted" data-uid="Fantasy.Async.FTask`1.IsCompleted">IsCompleted</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsCompleted { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_UserToKen.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.UserToKen%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L169">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_UserToKen_" data-uid="Fantasy.Async.FTask`1.UserToKen*"></a>
+  <h4 id="Fantasy_Async_FTask_1_UserToKen" data-uid="Fantasy.Async.FTask`1.UserToKen">UserToKen</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object UserToKen { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">方法
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_Coroutine.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.Coroutine%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L188">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_Coroutine_" data-uid="Fantasy.Async.FTask`1.Coroutine*"></a>
+  <h4 id="Fantasy_Async_FTask_1_Coroutine" data-uid="Fantasy.Async.FTask`1.Coroutine">Coroutine()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[DebuggerHidden]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public void Coroutine()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_Coroutine_System_Object_.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.Coroutine(System.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L196">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_Coroutine_" data-uid="Fantasy.Async.FTask`1.Coroutine*"></a>
+  <h4 id="Fantasy_Async_FTask_1_Coroutine_System_Object_" data-uid="Fantasy.Async.FTask`1.Coroutine(System.Object)">Coroutine(object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[DebuggerHidden]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public void Coroutine(object userToken)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">userToken</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_Create_System_Boolean_.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.Create(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/FTask.Extension/FTask.Factory.cs/#L88">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_Create_" data-uid="Fantasy.Async.FTask`1.Create*"></a>
+  <h4 id="Fantasy_Async_FTask_1_Create_System_Boolean_" data-uid="Fantasy.Async.FTask`1.Create(System.Boolean)">Create(bool)</h4>
+  <div class="markdown level1 summary"><p>创建一个任务</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[DebuggerHidden]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public static FTask&lt;T&gt; Create(bool isPool = true)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">isPool</span></td>
+        <td><p>是否从对象池中创建</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_GetAwaiter.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.GetAwaiter%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L177">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_GetAwaiter_" data-uid="Fantasy.Async.FTask`1.GetAwaiter*"></a>
+  <h4 id="Fantasy_Async_FTask_1_GetAwaiter" data-uid="Fantasy.Async.FTask`1.GetAwaiter">GetAwaiter()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[DebuggerHidden]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public FTask&lt;T&gt; GetAwaiter()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_GetResult.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.GetResult%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L212">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_GetResult_" data-uid="Fantasy.Async.FTask`1.GetResult*"></a>
+  <h4 id="Fantasy_Async_FTask_1_GetResult" data-uid="Fantasy.Async.FTask`1.GetResult">GetResult()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[DebuggerHidden]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public T GetResult()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_OnCompleted_System_Action_.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.OnCompleted(System.Action)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L267">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_OnCompleted_" data-uid="Fantasy.Async.FTask`1.OnCompleted*"></a>
+  <h4 id="Fantasy_Async_FTask_1_OnCompleted_System_Action_" data-uid="Fantasy.Async.FTask`1.OnCompleted(System.Action)">OnCompleted(Action)</h4>
+  <div class="markdown level1 summary"><p>Schedules the continuation action that's invoked when the instance completes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[DebuggerHidden]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public void OnCompleted(Action action)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a></td>
+        <td><span class="parametername">action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">异常</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>条件</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <code class="paramref">continuation</code> argument is null (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_SetException_System_Exception_.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.SetException(System.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L287">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_SetException_" data-uid="Fantasy.Async.FTask`1.SetException*"></a>
+  <h4 id="Fantasy_Async_FTask_1_SetException_System_Exception_" data-uid="Fantasy.Async.FTask`1.SetException(System.Exception)">SetException(Exception)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[DebuggerHidden]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public void SetException(Exception exception)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><span class="parametername">exception</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_SetResult__0_.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.SetResult(%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L245">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_SetResult_" data-uid="Fantasy.Async.FTask`1.SetResult*"></a>
+  <h4 id="Fantasy_Async_FTask_1_SetResult__0_" data-uid="Fantasy.Async.FTask`1.SetResult(`0)">SetResult(T)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[DebuggerHidden]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public void SetResult(T value)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_SetUserToKen_System_Object_.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.SetUserToKen(System.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L204">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_SetUserToKen_" data-uid="Fantasy.Async.FTask`1.SetUserToKen*"></a>
+  <h4 id="Fantasy_Async_FTask_1_SetUserToKen_System_Object_" data-uid="Fantasy.Async.FTask`1.SetUserToKen(System.Object)">SetUserToKen(object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[DebuggerHidden]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public FTask&lt;T&gt; SetUserToKen(object userToken)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">userToken</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1_UnsafeOnCompleted_System_Action_.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601.UnsafeOnCompleted(System.Action)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L274">查看源代码</a>
+  </span>
+  <a id="Fantasy_Async_FTask_1_UnsafeOnCompleted_" data-uid="Fantasy.Async.FTask`1.UnsafeOnCompleted*"></a>
+  <h4 id="Fantasy_Async_FTask_1_UnsafeOnCompleted_System_Action_" data-uid="Fantasy.Async.FTask`1.UnsafeOnCompleted(System.Action)">UnsafeOnCompleted(Action)</h4>
+  <div class="markdown level1 summary"><p>Schedules the continuation action that's invoked when the instance completes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[DebuggerHidden]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public void UnsafeOnCompleted(Action action)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a></td>
+        <td><span class="parametername">action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">异常</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>条件</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <code class="paramref">continuation</code> argument is null (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">实现</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.icriticalnotifycompletion">ICriticalNotifyCompletion</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.inotifycompletion">INotifyCompletion</a>
+  </div>
+  <div>
+      <a class="xref" href="Fantasy.Async.IFTask.html">IFTask</a>
+  </div>
+  <h3 id="extensionmethods">扩展方法</h3>
+  <div>
+      <a class="xref" href="Fantasy.Async.FCancellationTokenExtension.html#Fantasy_Async_FCancellationTokenExtension_AddToCancellationToken__1_Fantasy_Async_FTask___0__Fantasy_Async_FCancellationToken_">FCancellationTokenExtension.AddToCancellationToken&lt;T&gt;(FTask&lt;T&gt;, FCancellationToken)</a>
+  </div>
+  <div>
+      <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Async_FTask_1.md&amp;value=---%0Auid%3A%20Fantasy.Async.FTask%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs/#L161" class="contribution-link">查看源代码</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>本文内容</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

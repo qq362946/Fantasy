@@ -1,0 +1,4090 @@
+### YamlMime:ManagedReference
+items:
+- uid: KCP.Kcp
+  commentId: T:KCP.Kcp
+  id: Kcp
+  parent: KCP
+  children:
+  - KCP.Kcp.#ctor(KCP.KcpCallback)
+  - KCP.Kcp.#ctor(System.UInt32,KCP.KcpCallback)
+  - KCP.Kcp.AckBlock
+  - KCP.Kcp.AckCount
+  - KCP.Kcp.AckList
+  - KCP.Kcp.Buffer
+  - KCP.Kcp.Check(System.UInt32)
+  - KCP.Kcp.CongestionWindowSize
+  - KCP.Kcp.ConversationId
+  - KCP.Kcp.Current
+  - KCP.Kcp.Dispose
+  - KCP.Kcp.FastResend
+  - KCP.Kcp.FastResendLimit
+  - KCP.Kcp.Finalize
+  - KCP.Kcp.Flush
+  - KCP.Kcp.Increment
+  - KCP.Kcp.Input(System.ArraySegment{System.Byte})
+  - KCP.Kcp.Input(System.Byte*,System.Int32)
+  - KCP.Kcp.Input(System.Byte*,System.Int32,System.Int32)
+  - KCP.Kcp.Input(System.Byte[])
+  - KCP.Kcp.Input(System.Byte[],System.Int32)
+  - KCP.Kcp.Input(System.Byte[],System.Int32,System.Int32)
+  - KCP.Kcp.Input(System.ReadOnlyMemory{System.Byte})
+  - KCP.Kcp.Input(System.ReadOnlySpan{System.Byte})
+  - KCP.Kcp.Interval
+  - KCP.Kcp.IsSet
+  - KCP.Kcp.MaximumSegmentSize
+  - KCP.Kcp.MaximumTransmissionUnit
+  - KCP.Kcp.NoCongestionWindow
+  - KCP.Kcp.NoDelay
+  - KCP.Kcp.Output
+  - KCP.Kcp.PeekSize
+  - KCP.Kcp.Probe
+  - KCP.Kcp.ProbeWait
+  - KCP.Kcp.Receive(System.ArraySegment{System.Byte})
+  - KCP.Kcp.Receive(System.Byte*,System.Int32)
+  - KCP.Kcp.Receive(System.Byte*,System.Int32,System.Int32)
+  - KCP.Kcp.Receive(System.Byte[])
+  - KCP.Kcp.Receive(System.Byte[],System.Int32)
+  - KCP.Kcp.Receive(System.Byte[],System.Int32,System.Int32)
+  - KCP.Kcp.Receive(System.Memory{System.Byte})
+  - KCP.Kcp.Receive(System.Span{System.Byte})
+  - KCP.Kcp.ReceiveBufferCount
+  - KCP.Kcp.ReceiveNext
+  - KCP.Kcp.ReceiveQueueCount
+  - KCP.Kcp.ReceiveWindowSize
+  - KCP.Kcp.RemoteWindowSize
+  - KCP.Kcp.RxMinrto
+  - KCP.Kcp.RxRto
+  - KCP.Kcp.RxRttval
+  - KCP.Kcp.RxSrtt
+  - KCP.Kcp.Send(System.ArraySegment{System.Byte})
+  - KCP.Kcp.Send(System.Byte*,System.Int32)
+  - KCP.Kcp.Send(System.Byte*,System.Int32,System.Int32)
+  - KCP.Kcp.Send(System.Byte[])
+  - KCP.Kcp.Send(System.Byte[],System.Int32)
+  - KCP.Kcp.Send(System.Byte[],System.Int32,System.Int32)
+  - KCP.Kcp.Send(System.ReadOnlyMemory{System.Byte})
+  - KCP.Kcp.Send(System.ReadOnlySpan{System.Byte})
+  - KCP.Kcp.SendBufferCount
+  - KCP.Kcp.SendNext
+  - KCP.Kcp.SendQueueCount
+  - KCP.Kcp.SendUna
+  - KCP.Kcp.SendWindowSize
+  - KCP.Kcp.SetFastResendLimit(System.Int32)
+  - KCP.Kcp.SetInterval(System.Int32)
+  - KCP.Kcp.SetMinrto(System.Int32)
+  - KCP.Kcp.SetMtu(System.Int32)
+  - KCP.Kcp.SetNoDelay(System.Int32,System.Int32,System.Int32,System.Int32)
+  - KCP.Kcp.SetOutput(KCP.KcpCallback)
+  - KCP.Kcp.SetStreamMode(System.Int32)
+  - KCP.Kcp.SetWindowSize(System.Int32,System.Int32)
+  - KCP.Kcp.SlowStartThreshold
+  - KCP.Kcp.State
+  - KCP.Kcp.StreamMode
+  - KCP.Kcp.TimestampFlush
+  - KCP.Kcp.TimestampProbe
+  - KCP.Kcp.Transmissions
+  - KCP.Kcp.Update(System.UInt32)
+  - KCP.Kcp.Updated
+  - KCP.Kcp.WaitReceiveCount
+  - KCP.Kcp.WaitSendCount
+  langs:
+  - csharp
+  - vb
+  name: Kcp
+  nameWithType: Kcp
+  fullName: KCP.Kcp
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Kcp
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 21
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Kcp
+  example: []
+  syntax:
+    content: 'public sealed class Kcp : IDisposable'
+    content.vb: Public NotInheritable Class Kcp Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - KCP.Kcp.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: KCP.Kcp.#ctor(KCP.KcpCallback)
+  commentId: M:KCP.Kcp.#ctor(KCP.KcpCallback)
+  id: '#ctor(KCP.KcpCallback)'
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Kcp(KcpCallback)
+  nameWithType: Kcp.Kcp(KcpCallback)
+  fullName: KCP.Kcp.Kcp(KCP.KcpCallback)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 47
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Structure
+  example: []
+  syntax:
+    content: public Kcp(KcpCallback output)
+    parameters:
+    - id: output
+      type: KCP.KcpCallback
+      description: Output
+    content.vb: Public Sub New(output As KcpCallback)
+  overload: KCP.Kcp.#ctor*
+  nameWithType.vb: Kcp.New(KcpCallback)
+  fullName.vb: KCP.Kcp.New(KCP.KcpCallback)
+  name.vb: New(KcpCallback)
+- uid: KCP.Kcp.#ctor(System.UInt32,KCP.KcpCallback)
+  commentId: M:KCP.Kcp.#ctor(System.UInt32,KCP.KcpCallback)
+  id: '#ctor(System.UInt32,KCP.KcpCallback)'
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Kcp(uint, KcpCallback)
+  nameWithType: Kcp.Kcp(uint, KcpCallback)
+  fullName: KCP.Kcp.Kcp(uint, KCP.KcpCallback)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 56
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Structure
+  example: []
+  syntax:
+    content: public Kcp(uint conv, KcpCallback output)
+    parameters:
+    - id: conv
+      type: System.UInt32
+      description: ConversationId
+    - id: output
+      type: KCP.KcpCallback
+      description: Output
+    content.vb: Public Sub New(conv As UInteger, output As KcpCallback)
+  overload: KCP.Kcp.#ctor*
+  nameWithType.vb: Kcp.New(UInteger, KcpCallback)
+  fullName.vb: KCP.Kcp.New(UInteger, KCP.KcpCallback)
+  name.vb: New(UInteger, KcpCallback)
+- uid: KCP.Kcp.IsSet
+  commentId: P:KCP.Kcp.IsSet
+  id: IsSet
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: IsSet
+  nameWithType: Kcp.IsSet
+  fullName: KCP.Kcp.IsSet
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsSet
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 65
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Set
+  example: []
+  syntax:
+    content: public bool IsSet { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsSet As Boolean
+  overload: KCP.Kcp.IsSet*
+- uid: KCP.Kcp.ConversationId
+  commentId: P:KCP.Kcp.ConversationId
+  id: ConversationId
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: ConversationId
+  nameWithType: Kcp.ConversationId
+  fullName: KCP.Kcp.ConversationId
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ConversationId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 70
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Conversation id
+  example: []
+  syntax:
+    content: public uint ConversationId { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property ConversationId As UInteger
+  overload: KCP.Kcp.ConversationId*
+- uid: KCP.Kcp.MaximumTransmissionUnit
+  commentId: P:KCP.Kcp.MaximumTransmissionUnit
+  id: MaximumTransmissionUnit
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: MaximumTransmissionUnit
+  nameWithType: Kcp.MaximumTransmissionUnit
+  fullName: KCP.Kcp.MaximumTransmissionUnit
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MaximumTransmissionUnit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 75
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Maximum transmission unit
+  example: []
+  syntax:
+    content: public uint MaximumTransmissionUnit { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property MaximumTransmissionUnit As UInteger
+  overload: KCP.Kcp.MaximumTransmissionUnit*
+- uid: KCP.Kcp.MaximumSegmentSize
+  commentId: P:KCP.Kcp.MaximumSegmentSize
+  id: MaximumSegmentSize
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: MaximumSegmentSize
+  nameWithType: Kcp.MaximumSegmentSize
+  fullName: KCP.Kcp.MaximumSegmentSize
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MaximumSegmentSize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 80
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Maximum segment size
+  example: []
+  syntax:
+    content: public uint MaximumSegmentSize { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property MaximumSegmentSize As UInteger
+  overload: KCP.Kcp.MaximumSegmentSize*
+- uid: KCP.Kcp.State
+  commentId: P:KCP.Kcp.State
+  id: State
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: State
+  nameWithType: Kcp.State
+  fullName: KCP.Kcp.State
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: State
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 85
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Connection state
+  example: []
+  syntax:
+    content: public int State { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property State As Integer
+  overload: KCP.Kcp.State*
+- uid: KCP.Kcp.SendUna
+  commentId: P:KCP.Kcp.SendUna
+  id: SendUna
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SendUna
+  nameWithType: Kcp.SendUna
+  fullName: KCP.Kcp.SendUna
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SendUna
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 90
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: The sequence number of the first unacknowledged packet
+  example: []
+  syntax:
+    content: public uint SendUna { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property SendUna As UInteger
+  overload: KCP.Kcp.SendUna*
+- uid: KCP.Kcp.SendNext
+  commentId: P:KCP.Kcp.SendNext
+  id: SendNext
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SendNext
+  nameWithType: Kcp.SendNext
+  fullName: KCP.Kcp.SendNext
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SendNext
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 95
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: The sequence number for the next packet to be sent
+  example: []
+  syntax:
+    content: public uint SendNext { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property SendNext As UInteger
+  overload: KCP.Kcp.SendNext*
+- uid: KCP.Kcp.ReceiveNext
+  commentId: P:KCP.Kcp.ReceiveNext
+  id: ReceiveNext
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: ReceiveNext
+  nameWithType: Kcp.ReceiveNext
+  fullName: KCP.Kcp.ReceiveNext
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ReceiveNext
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 100
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: The sequence number for the next packet expected to be received
+  example: []
+  syntax:
+    content: public uint ReceiveNext { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property ReceiveNext As UInteger
+  overload: KCP.Kcp.ReceiveNext*
+- uid: KCP.Kcp.SlowStartThreshold
+  commentId: P:KCP.Kcp.SlowStartThreshold
+  id: SlowStartThreshold
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SlowStartThreshold
+  nameWithType: Kcp.SlowStartThreshold
+  fullName: KCP.Kcp.SlowStartThreshold
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SlowStartThreshold
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 105
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Slow start threshold for congestion control
+  example: []
+  syntax:
+    content: public uint SlowStartThreshold { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property SlowStartThreshold As UInteger
+  overload: KCP.Kcp.SlowStartThreshold*
+- uid: KCP.Kcp.RxRttval
+  commentId: P:KCP.Kcp.RxRttval
+  id: RxRttval
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: RxRttval
+  nameWithType: Kcp.RxRttval
+  fullName: KCP.Kcp.RxRttval
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RxRttval
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 110
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Round-trip time variance
+  example: []
+  syntax:
+    content: public int RxRttval { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property RxRttval As Integer
+  overload: KCP.Kcp.RxRttval*
+- uid: KCP.Kcp.RxSrtt
+  commentId: P:KCP.Kcp.RxSrtt
+  id: RxSrtt
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: RxSrtt
+  nameWithType: Kcp.RxSrtt
+  fullName: KCP.Kcp.RxSrtt
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RxSrtt
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 115
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Smoothed round-trip time
+  example: []
+  syntax:
+    content: public int RxSrtt { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property RxSrtt As Integer
+  overload: KCP.Kcp.RxSrtt*
+- uid: KCP.Kcp.RxRto
+  commentId: P:KCP.Kcp.RxRto
+  id: RxRto
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: RxRto
+  nameWithType: Kcp.RxRto
+  fullName: KCP.Kcp.RxRto
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RxRto
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 120
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Retransmission timeout
+  example: []
+  syntax:
+    content: public int RxRto { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property RxRto As Integer
+  overload: KCP.Kcp.RxRto*
+- uid: KCP.Kcp.RxMinrto
+  commentId: P:KCP.Kcp.RxMinrto
+  id: RxMinrto
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: RxMinrto
+  nameWithType: Kcp.RxMinrto
+  fullName: KCP.Kcp.RxMinrto
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RxMinrto
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 125
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Minimum retransmission timeout
+  example: []
+  syntax:
+    content: public int RxMinrto { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property RxMinrto As Integer
+  overload: KCP.Kcp.RxMinrto*
+- uid: KCP.Kcp.SendWindowSize
+  commentId: P:KCP.Kcp.SendWindowSize
+  id: SendWindowSize
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SendWindowSize
+  nameWithType: Kcp.SendWindowSize
+  fullName: KCP.Kcp.SendWindowSize
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SendWindowSize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 130
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Send window size
+  example: []
+  syntax:
+    content: public uint SendWindowSize { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property SendWindowSize As UInteger
+  overload: KCP.Kcp.SendWindowSize*
+- uid: KCP.Kcp.ReceiveWindowSize
+  commentId: P:KCP.Kcp.ReceiveWindowSize
+  id: ReceiveWindowSize
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: ReceiveWindowSize
+  nameWithType: Kcp.ReceiveWindowSize
+  fullName: KCP.Kcp.ReceiveWindowSize
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ReceiveWindowSize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 135
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Receive window size
+  example: []
+  syntax:
+    content: public uint ReceiveWindowSize { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property ReceiveWindowSize As UInteger
+  overload: KCP.Kcp.ReceiveWindowSize*
+- uid: KCP.Kcp.RemoteWindowSize
+  commentId: P:KCP.Kcp.RemoteWindowSize
+  id: RemoteWindowSize
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: RemoteWindowSize
+  nameWithType: Kcp.RemoteWindowSize
+  fullName: KCP.Kcp.RemoteWindowSize
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RemoteWindowSize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 140
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Remote window size
+  example: []
+  syntax:
+    content: public uint RemoteWindowSize { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property RemoteWindowSize As UInteger
+  overload: KCP.Kcp.RemoteWindowSize*
+- uid: KCP.Kcp.CongestionWindowSize
+  commentId: P:KCP.Kcp.CongestionWindowSize
+  id: CongestionWindowSize
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: CongestionWindowSize
+  nameWithType: Kcp.CongestionWindowSize
+  fullName: KCP.Kcp.CongestionWindowSize
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CongestionWindowSize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 145
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Congestion window size
+  example: []
+  syntax:
+    content: public uint CongestionWindowSize { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property CongestionWindowSize As UInteger
+  overload: KCP.Kcp.CongestionWindowSize*
+- uid: KCP.Kcp.Probe
+  commentId: P:KCP.Kcp.Probe
+  id: Probe
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Probe
+  nameWithType: Kcp.Probe
+  fullName: KCP.Kcp.Probe
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Probe
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 150
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Probe variable for fast recovery
+  example: []
+  syntax:
+    content: public uint Probe { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property Probe As UInteger
+  overload: KCP.Kcp.Probe*
+- uid: KCP.Kcp.Current
+  commentId: P:KCP.Kcp.Current
+  id: Current
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Current
+  nameWithType: Kcp.Current
+  fullName: KCP.Kcp.Current
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Current
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 155
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Current timestamp
+  example: []
+  syntax:
+    content: public uint Current { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property Current As UInteger
+  overload: KCP.Kcp.Current*
+- uid: KCP.Kcp.Interval
+  commentId: P:KCP.Kcp.Interval
+  id: Interval
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Interval
+  nameWithType: Kcp.Interval
+  fullName: KCP.Kcp.Interval
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Interval
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 160
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Flush interval
+  example: []
+  syntax:
+    content: public uint Interval { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property Interval As UInteger
+  overload: KCP.Kcp.Interval*
+- uid: KCP.Kcp.TimestampFlush
+  commentId: P:KCP.Kcp.TimestampFlush
+  id: TimestampFlush
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: TimestampFlush
+  nameWithType: Kcp.TimestampFlush
+  fullName: KCP.Kcp.TimestampFlush
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TimestampFlush
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 165
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Timestamp for the next flush
+  example: []
+  syntax:
+    content: public uint TimestampFlush { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property TimestampFlush As UInteger
+  overload: KCP.Kcp.TimestampFlush*
+- uid: KCP.Kcp.Transmissions
+  commentId: P:KCP.Kcp.Transmissions
+  id: Transmissions
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Transmissions
+  nameWithType: Kcp.Transmissions
+  fullName: KCP.Kcp.Transmissions
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Transmissions
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 170
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Number of retransmissions
+  example: []
+  syntax:
+    content: public uint Transmissions { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property Transmissions As UInteger
+  overload: KCP.Kcp.Transmissions*
+- uid: KCP.Kcp.ReceiveBufferCount
+  commentId: P:KCP.Kcp.ReceiveBufferCount
+  id: ReceiveBufferCount
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: ReceiveBufferCount
+  nameWithType: Kcp.ReceiveBufferCount
+  fullName: KCP.Kcp.ReceiveBufferCount
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ReceiveBufferCount
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 175
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Number of packets in the receive buffer
+  example: []
+  syntax:
+    content: public uint ReceiveBufferCount { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property ReceiveBufferCount As UInteger
+  overload: KCP.Kcp.ReceiveBufferCount*
+- uid: KCP.Kcp.ReceiveQueueCount
+  commentId: P:KCP.Kcp.ReceiveQueueCount
+  id: ReceiveQueueCount
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: ReceiveQueueCount
+  nameWithType: Kcp.ReceiveQueueCount
+  fullName: KCP.Kcp.ReceiveQueueCount
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ReceiveQueueCount
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 180
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Number of packets in the receive queue
+  example: []
+  syntax:
+    content: public uint ReceiveQueueCount { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property ReceiveQueueCount As UInteger
+  overload: KCP.Kcp.ReceiveQueueCount*
+- uid: KCP.Kcp.WaitReceiveCount
+  commentId: P:KCP.Kcp.WaitReceiveCount
+  id: WaitReceiveCount
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: WaitReceiveCount
+  nameWithType: Kcp.WaitReceiveCount
+  fullName: KCP.Kcp.WaitReceiveCount
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WaitReceiveCount
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 185
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Number of packets wait to receive
+  example: []
+  syntax:
+    content: public uint WaitReceiveCount { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property WaitReceiveCount As UInteger
+  overload: KCP.Kcp.WaitReceiveCount*
+- uid: KCP.Kcp.SendBufferCount
+  commentId: P:KCP.Kcp.SendBufferCount
+  id: SendBufferCount
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SendBufferCount
+  nameWithType: Kcp.SendBufferCount
+  fullName: KCP.Kcp.SendBufferCount
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SendBufferCount
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 190
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Number of packets in the send buffer
+  example: []
+  syntax:
+    content: public uint SendBufferCount { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property SendBufferCount As UInteger
+  overload: KCP.Kcp.SendBufferCount*
+- uid: KCP.Kcp.SendQueueCount
+  commentId: P:KCP.Kcp.SendQueueCount
+  id: SendQueueCount
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SendQueueCount
+  nameWithType: Kcp.SendQueueCount
+  fullName: KCP.Kcp.SendQueueCount
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SendQueueCount
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 195
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Number of packets in the send queue
+  example: []
+  syntax:
+    content: public uint SendQueueCount { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property SendQueueCount As UInteger
+  overload: KCP.Kcp.SendQueueCount*
+- uid: KCP.Kcp.WaitSendCount
+  commentId: P:KCP.Kcp.WaitSendCount
+  id: WaitSendCount
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: WaitSendCount
+  nameWithType: Kcp.WaitSendCount
+  fullName: KCP.Kcp.WaitSendCount
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WaitSendCount
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 200
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Number of packets wait to send
+  example: []
+  syntax:
+    content: public uint WaitSendCount { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property WaitSendCount As UInteger
+  overload: KCP.Kcp.WaitSendCount*
+- uid: KCP.Kcp.NoDelay
+  commentId: P:KCP.Kcp.NoDelay
+  id: NoDelay
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: NoDelay
+  nameWithType: Kcp.NoDelay
+  fullName: KCP.Kcp.NoDelay
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NoDelay
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 205
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Whether Nagle's algorithm is disabled
+  example: []
+  syntax:
+    content: public uint NoDelay { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property NoDelay As UInteger
+  overload: KCP.Kcp.NoDelay*
+- uid: KCP.Kcp.Updated
+  commentId: P:KCP.Kcp.Updated
+  id: Updated
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Updated
+  nameWithType: Kcp.Updated
+  fullName: KCP.Kcp.Updated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Updated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 210
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Whether the KCP connection has been updated
+  example: []
+  syntax:
+    content: public uint Updated { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property Updated As UInteger
+  overload: KCP.Kcp.Updated*
+- uid: KCP.Kcp.TimestampProbe
+  commentId: P:KCP.Kcp.TimestampProbe
+  id: TimestampProbe
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: TimestampProbe
+  nameWithType: Kcp.TimestampProbe
+  fullName: KCP.Kcp.TimestampProbe
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TimestampProbe
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 215
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Timestamp for the next probe
+  example: []
+  syntax:
+    content: public uint TimestampProbe { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property TimestampProbe As UInteger
+  overload: KCP.Kcp.TimestampProbe*
+- uid: KCP.Kcp.ProbeWait
+  commentId: P:KCP.Kcp.ProbeWait
+  id: ProbeWait
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: ProbeWait
+  nameWithType: Kcp.ProbeWait
+  fullName: KCP.Kcp.ProbeWait
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ProbeWait
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 220
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Probe wait time
+  example: []
+  syntax:
+    content: public uint ProbeWait { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property ProbeWait As UInteger
+  overload: KCP.Kcp.ProbeWait*
+- uid: KCP.Kcp.Increment
+  commentId: P:KCP.Kcp.Increment
+  id: Increment
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Increment
+  nameWithType: Kcp.Increment
+  fullName: KCP.Kcp.Increment
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Increment
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 225
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Incremental increase
+  example: []
+  syntax:
+    content: public uint Increment { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property Increment As UInteger
+  overload: KCP.Kcp.Increment*
+- uid: KCP.Kcp.AckList
+  commentId: P:KCP.Kcp.AckList
+  id: AckList
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: AckList
+  nameWithType: Kcp.AckList
+  fullName: KCP.Kcp.AckList
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AckList
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 230
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Pointer to the acknowledge list
+  example: []
+  syntax:
+    content: public uint* AckList { get; }
+    parameters: []
+    return:
+      type: System.UInt32*
+    content.vb: Public ReadOnly Property AckList As UInteger*
+  overload: KCP.Kcp.AckList*
+- uid: KCP.Kcp.AckCount
+  commentId: P:KCP.Kcp.AckCount
+  id: AckCount
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: AckCount
+  nameWithType: Kcp.AckCount
+  fullName: KCP.Kcp.AckCount
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AckCount
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 235
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Count of acknowledges
+  example: []
+  syntax:
+    content: public uint AckCount { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property AckCount As UInteger
+  overload: KCP.Kcp.AckCount*
+- uid: KCP.Kcp.AckBlock
+  commentId: P:KCP.Kcp.AckBlock
+  id: AckBlock
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: AckBlock
+  nameWithType: Kcp.AckBlock
+  fullName: KCP.Kcp.AckBlock
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AckBlock
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 240
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Number of acknowledge blocks
+  example: []
+  syntax:
+    content: public uint AckBlock { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property AckBlock As UInteger
+  overload: KCP.Kcp.AckBlock*
+- uid: KCP.Kcp.Buffer
+  commentId: P:KCP.Kcp.Buffer
+  id: Buffer
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Buffer
+  nameWithType: Kcp.Buffer
+  fullName: KCP.Kcp.Buffer
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Buffer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 245
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Buffer
+  example: []
+  syntax:
+    content: public byte[] Buffer { get; }
+    parameters: []
+    return:
+      type: System.Byte[]
+    content.vb: Public ReadOnly Property Buffer As Byte()
+  overload: KCP.Kcp.Buffer*
+- uid: KCP.Kcp.FastResend
+  commentId: P:KCP.Kcp.FastResend
+  id: FastResend
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: FastResend
+  nameWithType: Kcp.FastResend
+  fullName: KCP.Kcp.FastResend
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FastResend
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 250
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Fast resend trigger count
+  example: []
+  syntax:
+    content: public int FastResend { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property FastResend As Integer
+  overload: KCP.Kcp.FastResend*
+- uid: KCP.Kcp.FastResendLimit
+  commentId: P:KCP.Kcp.FastResendLimit
+  id: FastResendLimit
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: FastResendLimit
+  nameWithType: Kcp.FastResendLimit
+  fullName: KCP.Kcp.FastResendLimit
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FastResendLimit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 255
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Fast resend limit
+  example: []
+  syntax:
+    content: public int FastResendLimit { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property FastResendLimit As Integer
+  overload: KCP.Kcp.FastResendLimit*
+- uid: KCP.Kcp.NoCongestionWindow
+  commentId: P:KCP.Kcp.NoCongestionWindow
+  id: NoCongestionWindow
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: NoCongestionWindow
+  nameWithType: Kcp.NoCongestionWindow
+  fullName: KCP.Kcp.NoCongestionWindow
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NoCongestionWindow
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 260
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Whether congestion control is disabled
+  example: []
+  syntax:
+    content: public int NoCongestionWindow { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property NoCongestionWindow As Integer
+  overload: KCP.Kcp.NoCongestionWindow*
+- uid: KCP.Kcp.StreamMode
+  commentId: P:KCP.Kcp.StreamMode
+  id: StreamMode
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: StreamMode
+  nameWithType: Kcp.StreamMode
+  fullName: KCP.Kcp.StreamMode
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: StreamMode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 265
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Whether stream mode is enabled
+  example: []
+  syntax:
+    content: public int StreamMode { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property StreamMode As Integer
+  overload: KCP.Kcp.StreamMode*
+- uid: KCP.Kcp.Output
+  commentId: P:KCP.Kcp.Output
+  id: Output
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Output
+  nameWithType: Kcp.Output
+  fullName: KCP.Kcp.Output
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Output
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 270
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Output function pointer
+  example: []
+  syntax:
+    content: public KcpCallback Output { get; }
+    parameters: []
+    return:
+      type: KCP.KcpCallback
+    content.vb: Public ReadOnly Property Output As KcpCallback
+  overload: KCP.Kcp.Output*
+- uid: KCP.Kcp.Dispose
+  commentId: M:KCP.Kcp.Dispose
+  id: Dispose
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: Kcp.Dispose()
+  fullName: KCP.Kcp.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 275
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Dispose
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: KCP.Kcp.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+- uid: KCP.Kcp.SetOutput(KCP.KcpCallback)
+  commentId: M:KCP.Kcp.SetOutput(KCP.KcpCallback)
+  id: SetOutput(KCP.KcpCallback)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SetOutput(KcpCallback)
+  nameWithType: Kcp.SetOutput(KcpCallback)
+  fullName: KCP.Kcp.SetOutput(KCP.KcpCallback)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetOutput
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 290
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Set output
+  example: []
+  syntax:
+    content: public void SetOutput(KcpCallback output)
+    parameters:
+    - id: output
+      type: KCP.KcpCallback
+      description: Output
+    content.vb: Public Sub SetOutput(output As KcpCallback)
+  overload: KCP.Kcp.SetOutput*
+- uid: KCP.Kcp.Finalize
+  commentId: M:KCP.Kcp.Finalize
+  id: Finalize
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: ~Kcp()
+  nameWithType: Kcp.~Kcp()
+  fullName: KCP.Kcp.~Kcp()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Finalize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 295
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Destructure
+  example: []
+  syntax:
+    content: protected ~Kcp()
+    content.vb: 'Protected '
+  overload: KCP.Kcp.Finalize*
+  nameWithType.vb: ''
+  fullName.vb: ''
+  name.vb: ''
+- uid: KCP.Kcp.Send(System.Byte[])
+  commentId: M:KCP.Kcp.Send(System.Byte[])
+  id: Send(System.Byte[])
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Send(byte[])
+  nameWithType: Kcp.Send(byte[])
+  fullName: KCP.Kcp.Send(byte[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Send
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 302
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Send
+  example: []
+  syntax:
+    content: public int Send(byte[] buffer)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Sent bytes
+    content.vb: Public Function Send(buffer As Byte()) As Integer
+  overload: KCP.Kcp.Send*
+  nameWithType.vb: Kcp.Send(Byte())
+  fullName.vb: KCP.Kcp.Send(Byte())
+  name.vb: Send(Byte())
+- uid: KCP.Kcp.Send(System.Byte[],System.Int32)
+  commentId: M:KCP.Kcp.Send(System.Byte[],System.Int32)
+  id: Send(System.Byte[],System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Send(byte[], int)
+  nameWithType: Kcp.Send(byte[], int)
+  fullName: KCP.Kcp.Send(byte[], int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Send
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 314
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Send
+  example: []
+  syntax:
+    content: public int Send(byte[] buffer, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+      description: Buffer
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Sent bytes
+    content.vb: Public Function Send(buffer As Byte(), length As Integer) As Integer
+  overload: KCP.Kcp.Send*
+  nameWithType.vb: Kcp.Send(Byte(), Integer)
+  fullName.vb: KCP.Kcp.Send(Byte(), Integer)
+  name.vb: Send(Byte(), Integer)
+- uid: KCP.Kcp.Send(System.Byte[],System.Int32,System.Int32)
+  commentId: M:KCP.Kcp.Send(System.Byte[],System.Int32,System.Int32)
+  id: Send(System.Byte[],System.Int32,System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Send(byte[], int, int)
+  nameWithType: Kcp.Send(byte[], int, int)
+  fullName: KCP.Kcp.Send(byte[], int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Send
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 327
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Send
+  example: []
+  syntax:
+    content: public int Send(byte[] buffer, int offset, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+      description: Buffer
+    - id: offset
+      type: System.Int32
+      description: Offset
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Sent bytes
+    content.vb: Public Function Send(buffer As Byte(), offset As Integer, length As Integer) As Integer
+  overload: KCP.Kcp.Send*
+  nameWithType.vb: Kcp.Send(Byte(), Integer, Integer)
+  fullName.vb: KCP.Kcp.Send(Byte(), Integer, Integer)
+  name.vb: Send(Byte(), Integer, Integer)
+- uid: KCP.Kcp.Send(System.ReadOnlySpan{System.Byte})
+  commentId: M:KCP.Kcp.Send(System.ReadOnlySpan{System.Byte})
+  id: Send(System.ReadOnlySpan{System.Byte})
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Send(ReadOnlySpan<byte>)
+  nameWithType: Kcp.Send(ReadOnlySpan<byte>)
+  fullName: KCP.Kcp.Send(System.ReadOnlySpan<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Send
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 338
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Send
+  example: []
+  syntax:
+    content: public int Send(ReadOnlySpan<byte> buffer)
+    parameters:
+    - id: buffer
+      type: System.ReadOnlySpan{System.Byte}
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Sent bytes
+    content.vb: Public Function Send(buffer As ReadOnlySpan(Of Byte)) As Integer
+  overload: KCP.Kcp.Send*
+  nameWithType.vb: Kcp.Send(ReadOnlySpan(Of Byte))
+  fullName.vb: KCP.Kcp.Send(System.ReadOnlySpan(Of Byte))
+  name.vb: Send(ReadOnlySpan(Of Byte))
+- uid: KCP.Kcp.Send(System.ReadOnlyMemory{System.Byte})
+  commentId: M:KCP.Kcp.Send(System.ReadOnlyMemory{System.Byte})
+  id: Send(System.ReadOnlyMemory{System.Byte})
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Send(ReadOnlyMemory<byte>)
+  nameWithType: Kcp.Send(ReadOnlyMemory<byte>)
+  fullName: KCP.Kcp.Send(System.ReadOnlyMemory<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Send
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 349
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Send
+  example: []
+  syntax:
+    content: public int Send(ReadOnlyMemory<byte> buffer)
+    parameters:
+    - id: buffer
+      type: System.ReadOnlyMemory{System.Byte}
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Sent bytes
+    content.vb: Public Function Send(buffer As ReadOnlyMemory(Of Byte)) As Integer
+  overload: KCP.Kcp.Send*
+  nameWithType.vb: Kcp.Send(ReadOnlyMemory(Of Byte))
+  fullName.vb: KCP.Kcp.Send(System.ReadOnlyMemory(Of Byte))
+  name.vb: Send(ReadOnlyMemory(Of Byte))
+- uid: KCP.Kcp.Send(System.ArraySegment{System.Byte})
+  commentId: M:KCP.Kcp.Send(System.ArraySegment{System.Byte})
+  id: Send(System.ArraySegment{System.Byte})
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Send(ArraySegment<byte>)
+  nameWithType: Kcp.Send(ArraySegment<byte>)
+  fullName: KCP.Kcp.Send(System.ArraySegment<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Send
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 360
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Send
+  example: []
+  syntax:
+    content: public int Send(ArraySegment<byte> buffer)
+    parameters:
+    - id: buffer
+      type: System.ArraySegment{System.Byte}
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Sent bytes
+    content.vb: Public Function Send(buffer As ArraySegment(Of Byte)) As Integer
+  overload: KCP.Kcp.Send*
+  nameWithType.vb: Kcp.Send(ArraySegment(Of Byte))
+  fullName.vb: KCP.Kcp.Send(System.ArraySegment(Of Byte))
+  name.vb: Send(ArraySegment(Of Byte))
+- uid: KCP.Kcp.Send(System.Byte*,System.Int32)
+  commentId: M:KCP.Kcp.Send(System.Byte*,System.Int32)
+  id: Send(System.Byte*,System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Send(byte*, int)
+  nameWithType: Kcp.Send(byte*, int)
+  fullName: KCP.Kcp.Send(byte*, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Send
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 372
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Send
+  example: []
+  syntax:
+    content: public int Send(byte* buffer, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte*
+      description: Buffer
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Sent bytes
+    content.vb: Public Function Send(buffer As Byte*, length As Integer) As Integer
+  overload: KCP.Kcp.Send*
+  nameWithType.vb: Kcp.Send(Byte*, Integer)
+  fullName.vb: KCP.Kcp.Send(Byte*, Integer)
+  name.vb: Send(Byte*, Integer)
+- uid: KCP.Kcp.Send(System.Byte*,System.Int32,System.Int32)
+  commentId: M:KCP.Kcp.Send(System.Byte*,System.Int32,System.Int32)
+  id: Send(System.Byte*,System.Int32,System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Send(byte*, int, int)
+  nameWithType: Kcp.Send(byte*, int, int)
+  fullName: KCP.Kcp.Send(byte*, int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Send
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 381
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Send
+  example: []
+  syntax:
+    content: public int Send(byte* buffer, int offset, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte*
+      description: Buffer
+    - id: offset
+      type: System.Int32
+      description: Offset
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Sent bytes
+    content.vb: Public Function Send(buffer As Byte*, offset As Integer, length As Integer) As Integer
+  overload: KCP.Kcp.Send*
+  nameWithType.vb: Kcp.Send(Byte*, Integer, Integer)
+  fullName.vb: KCP.Kcp.Send(Byte*, Integer, Integer)
+  name.vb: Send(Byte*, Integer, Integer)
+- uid: KCP.Kcp.Input(System.Byte[])
+  commentId: M:KCP.Kcp.Input(System.Byte[])
+  id: Input(System.Byte[])
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Input(byte[])
+  nameWithType: Kcp.Input(byte[])
+  fullName: KCP.Kcp.Input(byte[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Input
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 388
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Input
+  example: []
+  syntax:
+    content: public int Input(byte[] buffer)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Input bytes
+    content.vb: Public Function Input(buffer As Byte()) As Integer
+  overload: KCP.Kcp.Input*
+  nameWithType.vb: Kcp.Input(Byte())
+  fullName.vb: KCP.Kcp.Input(Byte())
+  name.vb: Input(Byte())
+- uid: KCP.Kcp.Input(System.Byte[],System.Int32)
+  commentId: M:KCP.Kcp.Input(System.Byte[],System.Int32)
+  id: Input(System.Byte[],System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Input(byte[], int)
+  nameWithType: Kcp.Input(byte[], int)
+  fullName: KCP.Kcp.Input(byte[], int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Input
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 400
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Input
+  example: []
+  syntax:
+    content: public int Input(byte[] buffer, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+      description: Buffer
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Input bytes
+    content.vb: Public Function Input(buffer As Byte(), length As Integer) As Integer
+  overload: KCP.Kcp.Input*
+  nameWithType.vb: Kcp.Input(Byte(), Integer)
+  fullName.vb: KCP.Kcp.Input(Byte(), Integer)
+  name.vb: Input(Byte(), Integer)
+- uid: KCP.Kcp.Input(System.Byte[],System.Int32,System.Int32)
+  commentId: M:KCP.Kcp.Input(System.Byte[],System.Int32,System.Int32)
+  id: Input(System.Byte[],System.Int32,System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Input(byte[], int, int)
+  nameWithType: Kcp.Input(byte[], int, int)
+  fullName: KCP.Kcp.Input(byte[], int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Input
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 413
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Input
+  example: []
+  syntax:
+    content: public int Input(byte[] buffer, int offset, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+      description: Buffer
+    - id: offset
+      type: System.Int32
+      description: Offset
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Input bytes
+    content.vb: Public Function Input(buffer As Byte(), offset As Integer, length As Integer) As Integer
+  overload: KCP.Kcp.Input*
+  nameWithType.vb: Kcp.Input(Byte(), Integer, Integer)
+  fullName.vb: KCP.Kcp.Input(Byte(), Integer, Integer)
+  name.vb: Input(Byte(), Integer, Integer)
+- uid: KCP.Kcp.Input(System.ReadOnlySpan{System.Byte})
+  commentId: M:KCP.Kcp.Input(System.ReadOnlySpan{System.Byte})
+  id: Input(System.ReadOnlySpan{System.Byte})
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Input(ReadOnlySpan<byte>)
+  nameWithType: Kcp.Input(ReadOnlySpan<byte>)
+  fullName: KCP.Kcp.Input(System.ReadOnlySpan<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Input
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 424
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Input
+  example: []
+  syntax:
+    content: public int Input(ReadOnlySpan<byte> buffer)
+    parameters:
+    - id: buffer
+      type: System.ReadOnlySpan{System.Byte}
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Input bytes
+    content.vb: Public Function Input(buffer As ReadOnlySpan(Of Byte)) As Integer
+  overload: KCP.Kcp.Input*
+  nameWithType.vb: Kcp.Input(ReadOnlySpan(Of Byte))
+  fullName.vb: KCP.Kcp.Input(System.ReadOnlySpan(Of Byte))
+  name.vb: Input(ReadOnlySpan(Of Byte))
+- uid: KCP.Kcp.Input(System.ReadOnlyMemory{System.Byte})
+  commentId: M:KCP.Kcp.Input(System.ReadOnlyMemory{System.Byte})
+  id: Input(System.ReadOnlyMemory{System.Byte})
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Input(ReadOnlyMemory<byte>)
+  nameWithType: Kcp.Input(ReadOnlyMemory<byte>)
+  fullName: KCP.Kcp.Input(System.ReadOnlyMemory<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Input
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 435
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Input
+  example: []
+  syntax:
+    content: public int Input(ReadOnlyMemory<byte> buffer)
+    parameters:
+    - id: buffer
+      type: System.ReadOnlyMemory{System.Byte}
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Input bytes
+    content.vb: Public Function Input(buffer As ReadOnlyMemory(Of Byte)) As Integer
+  overload: KCP.Kcp.Input*
+  nameWithType.vb: Kcp.Input(ReadOnlyMemory(Of Byte))
+  fullName.vb: KCP.Kcp.Input(System.ReadOnlyMemory(Of Byte))
+  name.vb: Input(ReadOnlyMemory(Of Byte))
+- uid: KCP.Kcp.Input(System.ArraySegment{System.Byte})
+  commentId: M:KCP.Kcp.Input(System.ArraySegment{System.Byte})
+  id: Input(System.ArraySegment{System.Byte})
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Input(ArraySegment<byte>)
+  nameWithType: Kcp.Input(ArraySegment<byte>)
+  fullName: KCP.Kcp.Input(System.ArraySegment<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Input
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 446
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Input
+  example: []
+  syntax:
+    content: public int Input(ArraySegment<byte> buffer)
+    parameters:
+    - id: buffer
+      type: System.ArraySegment{System.Byte}
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Input bytes
+    content.vb: Public Function Input(buffer As ArraySegment(Of Byte)) As Integer
+  overload: KCP.Kcp.Input*
+  nameWithType.vb: Kcp.Input(ArraySegment(Of Byte))
+  fullName.vb: KCP.Kcp.Input(System.ArraySegment(Of Byte))
+  name.vb: Input(ArraySegment(Of Byte))
+- uid: KCP.Kcp.Input(System.Byte*,System.Int32)
+  commentId: M:KCP.Kcp.Input(System.Byte*,System.Int32)
+  id: Input(System.Byte*,System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Input(byte*, int)
+  nameWithType: Kcp.Input(byte*, int)
+  fullName: KCP.Kcp.Input(byte*, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Input
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 458
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Input
+  example: []
+  syntax:
+    content: public int Input(byte* buffer, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte*
+      description: Buffer
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Input bytes
+    content.vb: Public Function Input(buffer As Byte*, length As Integer) As Integer
+  overload: KCP.Kcp.Input*
+  nameWithType.vb: Kcp.Input(Byte*, Integer)
+  fullName.vb: KCP.Kcp.Input(Byte*, Integer)
+  name.vb: Input(Byte*, Integer)
+- uid: KCP.Kcp.Input(System.Byte*,System.Int32,System.Int32)
+  commentId: M:KCP.Kcp.Input(System.Byte*,System.Int32,System.Int32)
+  id: Input(System.Byte*,System.Int32,System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Input(byte*, int, int)
+  nameWithType: Kcp.Input(byte*, int, int)
+  fullName: KCP.Kcp.Input(byte*, int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Input
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 467
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Input
+  example: []
+  syntax:
+    content: public int Input(byte* buffer, int offset, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte*
+      description: Buffer
+    - id: offset
+      type: System.Int32
+      description: Offset
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Input bytes
+    content.vb: Public Function Input(buffer As Byte*, offset As Integer, length As Integer) As Integer
+  overload: KCP.Kcp.Input*
+  nameWithType.vb: Kcp.Input(Byte*, Integer, Integer)
+  fullName.vb: KCP.Kcp.Input(Byte*, Integer, Integer)
+  name.vb: Input(Byte*, Integer, Integer)
+- uid: KCP.Kcp.PeekSize
+  commentId: M:KCP.Kcp.PeekSize
+  id: PeekSize
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: PeekSize()
+  nameWithType: Kcp.PeekSize()
+  fullName: KCP.Kcp.PeekSize()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: PeekSize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 473
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Peek size
+  example: []
+  syntax:
+    content: public int PeekSize()
+    return:
+      type: System.Int32
+      description: Peeked size
+    content.vb: Public Function PeekSize() As Integer
+  overload: KCP.Kcp.PeekSize*
+- uid: KCP.Kcp.Receive(System.Byte[])
+  commentId: M:KCP.Kcp.Receive(System.Byte[])
+  id: Receive(System.Byte[])
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Receive(byte[])
+  nameWithType: Kcp.Receive(byte[])
+  fullName: KCP.Kcp.Receive(byte[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Receive
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 480
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Receive
+  example: []
+  syntax:
+    content: public int Receive(byte[] buffer)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Received bytes
+    content.vb: Public Function Receive(buffer As Byte()) As Integer
+  overload: KCP.Kcp.Receive*
+  nameWithType.vb: Kcp.Receive(Byte())
+  fullName.vb: KCP.Kcp.Receive(Byte())
+  name.vb: Receive(Byte())
+- uid: KCP.Kcp.Receive(System.Byte[],System.Int32)
+  commentId: M:KCP.Kcp.Receive(System.Byte[],System.Int32)
+  id: Receive(System.Byte[],System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Receive(byte[], int)
+  nameWithType: Kcp.Receive(byte[], int)
+  fullName: KCP.Kcp.Receive(byte[], int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Receive
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 492
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Receive
+  example: []
+  syntax:
+    content: public int Receive(byte[] buffer, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+      description: Buffer
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Received bytes
+    content.vb: Public Function Receive(buffer As Byte(), length As Integer) As Integer
+  overload: KCP.Kcp.Receive*
+  nameWithType.vb: Kcp.Receive(Byte(), Integer)
+  fullName.vb: KCP.Kcp.Receive(Byte(), Integer)
+  name.vb: Receive(Byte(), Integer)
+- uid: KCP.Kcp.Receive(System.Byte[],System.Int32,System.Int32)
+  commentId: M:KCP.Kcp.Receive(System.Byte[],System.Int32,System.Int32)
+  id: Receive(System.Byte[],System.Int32,System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Receive(byte[], int, int)
+  nameWithType: Kcp.Receive(byte[], int, int)
+  fullName: KCP.Kcp.Receive(byte[], int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Receive
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 505
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Receive
+  example: []
+  syntax:
+    content: public int Receive(byte[] buffer, int offset, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+      description: Buffer
+    - id: offset
+      type: System.Int32
+      description: Offset
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Received bytes
+    content.vb: Public Function Receive(buffer As Byte(), offset As Integer, length As Integer) As Integer
+  overload: KCP.Kcp.Receive*
+  nameWithType.vb: Kcp.Receive(Byte(), Integer, Integer)
+  fullName.vb: KCP.Kcp.Receive(Byte(), Integer, Integer)
+  name.vb: Receive(Byte(), Integer, Integer)
+- uid: KCP.Kcp.Receive(System.Span{System.Byte})
+  commentId: M:KCP.Kcp.Receive(System.Span{System.Byte})
+  id: Receive(System.Span{System.Byte})
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Receive(Span<byte>)
+  nameWithType: Kcp.Receive(Span<byte>)
+  fullName: KCP.Kcp.Receive(System.Span<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Receive
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 516
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Receive
+  example: []
+  syntax:
+    content: public int Receive(Span<byte> buffer)
+    parameters:
+    - id: buffer
+      type: System.Span{System.Byte}
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Received bytes
+    content.vb: Public Function Receive(buffer As Span(Of Byte)) As Integer
+  overload: KCP.Kcp.Receive*
+  nameWithType.vb: Kcp.Receive(Span(Of Byte))
+  fullName.vb: KCP.Kcp.Receive(System.Span(Of Byte))
+  name.vb: Receive(Span(Of Byte))
+- uid: KCP.Kcp.Receive(System.Memory{System.Byte})
+  commentId: M:KCP.Kcp.Receive(System.Memory{System.Byte})
+  id: Receive(System.Memory{System.Byte})
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Receive(Memory<byte>)
+  nameWithType: Kcp.Receive(Memory<byte>)
+  fullName: KCP.Kcp.Receive(System.Memory<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Receive
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 527
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Receive
+  example: []
+  syntax:
+    content: public int Receive(Memory<byte> buffer)
+    parameters:
+    - id: buffer
+      type: System.Memory{System.Byte}
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Received bytes
+    content.vb: Public Function Receive(buffer As Memory(Of Byte)) As Integer
+  overload: KCP.Kcp.Receive*
+  nameWithType.vb: Kcp.Receive(Memory(Of Byte))
+  fullName.vb: KCP.Kcp.Receive(System.Memory(Of Byte))
+  name.vb: Receive(Memory(Of Byte))
+- uid: KCP.Kcp.Receive(System.ArraySegment{System.Byte})
+  commentId: M:KCP.Kcp.Receive(System.ArraySegment{System.Byte})
+  id: Receive(System.ArraySegment{System.Byte})
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Receive(ArraySegment<byte>)
+  nameWithType: Kcp.Receive(ArraySegment<byte>)
+  fullName: KCP.Kcp.Receive(System.ArraySegment<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Receive
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 538
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Receive
+  example: []
+  syntax:
+    content: public int Receive(ArraySegment<byte> buffer)
+    parameters:
+    - id: buffer
+      type: System.ArraySegment{System.Byte}
+      description: Buffer
+    return:
+      type: System.Int32
+      description: Received bytes
+    content.vb: Public Function Receive(buffer As ArraySegment(Of Byte)) As Integer
+  overload: KCP.Kcp.Receive*
+  nameWithType.vb: Kcp.Receive(ArraySegment(Of Byte))
+  fullName.vb: KCP.Kcp.Receive(System.ArraySegment(Of Byte))
+  name.vb: Receive(ArraySegment(Of Byte))
+- uid: KCP.Kcp.Receive(System.Byte*,System.Int32)
+  commentId: M:KCP.Kcp.Receive(System.Byte*,System.Int32)
+  id: Receive(System.Byte*,System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Receive(byte*, int)
+  nameWithType: Kcp.Receive(byte*, int)
+  fullName: KCP.Kcp.Receive(byte*, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Receive
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 550
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Receive
+  example: []
+  syntax:
+    content: public int Receive(byte* buffer, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte*
+      description: Buffer
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Received bytes
+    content.vb: Public Function Receive(buffer As Byte*, length As Integer) As Integer
+  overload: KCP.Kcp.Receive*
+  nameWithType.vb: Kcp.Receive(Byte*, Integer)
+  fullName.vb: KCP.Kcp.Receive(Byte*, Integer)
+  name.vb: Receive(Byte*, Integer)
+- uid: KCP.Kcp.Receive(System.Byte*,System.Int32,System.Int32)
+  commentId: M:KCP.Kcp.Receive(System.Byte*,System.Int32,System.Int32)
+  id: Receive(System.Byte*,System.Int32,System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Receive(byte*, int, int)
+  nameWithType: Kcp.Receive(byte*, int, int)
+  fullName: KCP.Kcp.Receive(byte*, int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Receive
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 559
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Receive
+  example: []
+  syntax:
+    content: public int Receive(byte* buffer, int offset, int length)
+    parameters:
+    - id: buffer
+      type: System.Byte*
+      description: Buffer
+    - id: offset
+      type: System.Int32
+      description: Offset
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Int32
+      description: Received bytes
+    content.vb: Public Function Receive(buffer As Byte*, offset As Integer, length As Integer) As Integer
+  overload: KCP.Kcp.Receive*
+  nameWithType.vb: Kcp.Receive(Byte*, Integer, Integer)
+  fullName.vb: KCP.Kcp.Receive(Byte*, Integer, Integer)
+  name.vb: Receive(Byte*, Integer, Integer)
+- uid: KCP.Kcp.Update(System.UInt32)
+  commentId: M:KCP.Kcp.Update(System.UInt32)
+  id: Update(System.UInt32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Update(uint)
+  nameWithType: Kcp.Update(uint)
+  fullName: KCP.Kcp.Update(uint)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Update
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 565
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Update
+  example: []
+  syntax:
+    content: public void Update(uint current)
+    parameters:
+    - id: current
+      type: System.UInt32
+      description: Timestamp
+    content.vb: Public Sub Update(current As UInteger)
+  overload: KCP.Kcp.Update*
+  nameWithType.vb: Kcp.Update(UInteger)
+  fullName.vb: KCP.Kcp.Update(UInteger)
+  name.vb: Update(UInteger)
+- uid: KCP.Kcp.Check(System.UInt32)
+  commentId: M:KCP.Kcp.Check(System.UInt32)
+  id: Check(System.UInt32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Check(uint)
+  nameWithType: Kcp.Check(uint)
+  fullName: KCP.Kcp.Check(uint)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Check
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 572
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Check
+  example: []
+  syntax:
+    content: public uint Check(uint current)
+    parameters:
+    - id: current
+      type: System.UInt32
+      description: Timestamp
+    return:
+      type: System.UInt32
+      description: Next flush timestamp
+    content.vb: Public Function Check(current As UInteger) As UInteger
+  overload: KCP.Kcp.Check*
+  nameWithType.vb: Kcp.Check(UInteger)
+  fullName.vb: KCP.Kcp.Check(UInteger)
+  name.vb: Check(UInteger)
+- uid: KCP.Kcp.Flush
+  commentId: M:KCP.Kcp.Flush
+  id: Flush
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: Flush()
+  nameWithType: Kcp.Flush()
+  fullName: KCP.Kcp.Flush()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Flush
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 577
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Flush
+  example: []
+  syntax:
+    content: public void Flush()
+    content.vb: Public Sub Flush()
+  overload: KCP.Kcp.Flush*
+- uid: KCP.Kcp.SetMtu(System.Int32)
+  commentId: M:KCP.Kcp.SetMtu(System.Int32)
+  id: SetMtu(System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SetMtu(int)
+  nameWithType: Kcp.SetMtu(int)
+  fullName: KCP.Kcp.SetMtu(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetMtu
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 584
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Set maximum transmission unit
+  example: []
+  syntax:
+    content: public int SetMtu(int mtu)
+    parameters:
+    - id: mtu
+      type: System.Int32
+      description: Maximum transmission unit
+    return:
+      type: System.Int32
+      description: Set
+    content.vb: Public Function SetMtu(mtu As Integer) As Integer
+  overload: KCP.Kcp.SetMtu*
+  nameWithType.vb: Kcp.SetMtu(Integer)
+  fullName.vb: KCP.Kcp.SetMtu(Integer)
+  name.vb: SetMtu(Integer)
+- uid: KCP.Kcp.SetInterval(System.Int32)
+  commentId: M:KCP.Kcp.SetInterval(System.Int32)
+  id: SetInterval(System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SetInterval(int)
+  nameWithType: Kcp.SetInterval(int)
+  fullName: KCP.Kcp.SetInterval(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetInterval
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 590
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Set flush interval
+  example: []
+  syntax:
+    content: public void SetInterval(int interval)
+    parameters:
+    - id: interval
+      type: System.Int32
+      description: Flush interval
+    content.vb: Public Sub SetInterval(interval As Integer)
+  overload: KCP.Kcp.SetInterval*
+  nameWithType.vb: Kcp.SetInterval(Integer)
+  fullName.vb: KCP.Kcp.SetInterval(Integer)
+  name.vb: SetInterval(Integer)
+- uid: KCP.Kcp.SetNoDelay(System.Int32,System.Int32,System.Int32,System.Int32)
+  commentId: M:KCP.Kcp.SetNoDelay(System.Int32,System.Int32,System.Int32,System.Int32)
+  id: SetNoDelay(System.Int32,System.Int32,System.Int32,System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SetNoDelay(int, int, int, int)
+  nameWithType: Kcp.SetNoDelay(int, int, int, int)
+  fullName: KCP.Kcp.SetNoDelay(int, int, int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetNoDelay
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 599
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Set no delay
+  example: []
+  syntax:
+    content: public void SetNoDelay(int nodelay, int interval, int resend, int nc)
+    parameters:
+    - id: nodelay
+      type: System.Int32
+      description: Whether Nagle's algorithm is disabled
+    - id: interval
+      type: System.Int32
+      description: Flush interval
+    - id: resend
+      type: System.Int32
+      description: Fast resend trigger count
+    - id: nc
+      type: System.Int32
+      description: No congestion window
+    content.vb: Public Sub SetNoDelay(nodelay As Integer, interval As Integer, resend As Integer, nc As Integer)
+  overload: KCP.Kcp.SetNoDelay*
+  nameWithType.vb: Kcp.SetNoDelay(Integer, Integer, Integer, Integer)
+  fullName.vb: KCP.Kcp.SetNoDelay(Integer, Integer, Integer, Integer)
+  name.vb: SetNoDelay(Integer, Integer, Integer, Integer)
+- uid: KCP.Kcp.SetWindowSize(System.Int32,System.Int32)
+  commentId: M:KCP.Kcp.SetWindowSize(System.Int32,System.Int32)
+  id: SetWindowSize(System.Int32,System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SetWindowSize(int, int)
+  nameWithType: Kcp.SetWindowSize(int, int)
+  fullName: KCP.Kcp.SetWindowSize(int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetWindowSize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 606
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Set window size
+  example: []
+  syntax:
+    content: public void SetWindowSize(int sndwnd, int rcvwnd)
+    parameters:
+    - id: sndwnd
+      type: System.Int32
+      description: Send window size
+    - id: rcvwnd
+      type: System.Int32
+      description: Receive window size
+    content.vb: Public Sub SetWindowSize(sndwnd As Integer, rcvwnd As Integer)
+  overload: KCP.Kcp.SetWindowSize*
+  nameWithType.vb: Kcp.SetWindowSize(Integer, Integer)
+  fullName.vb: KCP.Kcp.SetWindowSize(Integer, Integer)
+  name.vb: SetWindowSize(Integer, Integer)
+- uid: KCP.Kcp.SetFastResendLimit(System.Int32)
+  commentId: M:KCP.Kcp.SetFastResendLimit(System.Int32)
+  id: SetFastResendLimit(System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SetFastResendLimit(int)
+  nameWithType: Kcp.SetFastResendLimit(int)
+  fullName: KCP.Kcp.SetFastResendLimit(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetFastResendLimit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 612
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Set fast resend limit
+  example: []
+  syntax:
+    content: public void SetFastResendLimit(int fastlimit)
+    parameters:
+    - id: fastlimit
+      type: System.Int32
+      description: Fast resend limit
+    content.vb: Public Sub SetFastResendLimit(fastlimit As Integer)
+  overload: KCP.Kcp.SetFastResendLimit*
+  nameWithType.vb: Kcp.SetFastResendLimit(Integer)
+  fullName.vb: KCP.Kcp.SetFastResendLimit(Integer)
+  name.vb: SetFastResendLimit(Integer)
+- uid: KCP.Kcp.SetStreamMode(System.Int32)
+  commentId: M:KCP.Kcp.SetStreamMode(System.Int32)
+  id: SetStreamMode(System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SetStreamMode(int)
+  nameWithType: Kcp.SetStreamMode(int)
+  fullName: KCP.Kcp.SetStreamMode(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetStreamMode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 618
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Set whether stream mode is enabled
+  example: []
+  syntax:
+    content: public void SetStreamMode(int stream)
+    parameters:
+    - id: stream
+      type: System.Int32
+      description: Whether stream mode is enabled
+    content.vb: Public Sub SetStreamMode(stream As Integer)
+  overload: KCP.Kcp.SetStreamMode*
+  nameWithType.vb: Kcp.SetStreamMode(Integer)
+  fullName.vb: KCP.Kcp.SetStreamMode(Integer)
+  name.vb: SetStreamMode(Integer)
+- uid: KCP.Kcp.SetMinrto(System.Int32)
+  commentId: M:KCP.Kcp.SetMinrto(System.Int32)
+  id: SetMinrto(System.Int32)
+  parent: KCP.Kcp
+  langs:
+  - csharp
+  - vb
+  name: SetMinrto(int)
+  nameWithType: Kcp.SetMinrto(int)
+  fullName: KCP.Kcp.SetMinrto(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetMinrto
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/Kcp.cs
+    startLine: 624
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  summary: Set minimum retransmission timeout
+  example: []
+  syntax:
+    content: public void SetMinrto(int minrto)
+    parameters:
+    - id: minrto
+      type: System.Int32
+      description: Minimum retransmission timeout
+    content.vb: Public Sub SetMinrto(minrto As Integer)
+  overload: KCP.Kcp.SetMinrto*
+  nameWithType.vb: Kcp.SetMinrto(Integer)
+  fullName.vb: KCP.Kcp.SetMinrto(Integer)
+  name.vb: SetMinrto(Integer)
+references:
+- uid: KCP
+  commentId: N:KCP
+  href: KCP.html
+  name: KCP
+  nameWithType: KCP
+  fullName: KCP
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: KCP.Kcp.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<Kcp>(Kcp)
+  nameWithType: JsonHelper.ToJson<Kcp>(Kcp)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<KCP.Kcp>(KCP.Kcp)
+  nameWithType.vb: JsonHelper.ToJson(Of Kcp)(Kcp)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of KCP.Kcp)(KCP.Kcp)
+  name.vb: ToJson(Of Kcp)(Kcp)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(KCP.Kcp)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: KCP.Kcp
+    name: Kcp
+    href: KCP.Kcp.html
+  - name: '>'
+  - name: (
+  - uid: KCP.Kcp
+    name: Kcp
+    href: KCP.Kcp.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(KCP.Kcp)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: KCP.Kcp
+    name: Kcp
+    href: KCP.Kcp.html
+  - name: )
+  - name: (
+  - uid: KCP.Kcp
+    name: Kcp
+    href: KCP.Kcp.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: KCP.Kcp.#ctor*
+  commentId: Overload:KCP.Kcp.#ctor
+  href: KCP.Kcp.html#KCP_Kcp__ctor_KCP_KcpCallback_
+  name: Kcp
+  nameWithType: Kcp.Kcp
+  fullName: KCP.Kcp.Kcp
+  nameWithType.vb: Kcp.New
+  fullName.vb: KCP.Kcp.New
+  name.vb: New
+- uid: KCP.KcpCallback
+  commentId: T:KCP.KcpCallback
+  parent: KCP
+  href: KCP.KcpCallback.html
+  name: KcpCallback
+  nameWithType: KcpCallback
+  fullName: KCP.KcpCallback
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: KCP.Kcp.IsSet*
+  commentId: Overload:KCP.Kcp.IsSet
+  href: KCP.Kcp.html#KCP_Kcp_IsSet
+  name: IsSet
+  nameWithType: Kcp.IsSet
+  fullName: KCP.Kcp.IsSet
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: KCP.Kcp.ConversationId*
+  commentId: Overload:KCP.Kcp.ConversationId
+  href: KCP.Kcp.html#KCP_Kcp_ConversationId
+  name: ConversationId
+  nameWithType: Kcp.ConversationId
+  fullName: KCP.Kcp.ConversationId
+- uid: KCP.Kcp.MaximumTransmissionUnit*
+  commentId: Overload:KCP.Kcp.MaximumTransmissionUnit
+  href: KCP.Kcp.html#KCP_Kcp_MaximumTransmissionUnit
+  name: MaximumTransmissionUnit
+  nameWithType: Kcp.MaximumTransmissionUnit
+  fullName: KCP.Kcp.MaximumTransmissionUnit
+- uid: KCP.Kcp.MaximumSegmentSize*
+  commentId: Overload:KCP.Kcp.MaximumSegmentSize
+  href: KCP.Kcp.html#KCP_Kcp_MaximumSegmentSize
+  name: MaximumSegmentSize
+  nameWithType: Kcp.MaximumSegmentSize
+  fullName: KCP.Kcp.MaximumSegmentSize
+- uid: KCP.Kcp.State*
+  commentId: Overload:KCP.Kcp.State
+  href: KCP.Kcp.html#KCP_Kcp_State
+  name: State
+  nameWithType: Kcp.State
+  fullName: KCP.Kcp.State
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: KCP.Kcp.SendUna*
+  commentId: Overload:KCP.Kcp.SendUna
+  href: KCP.Kcp.html#KCP_Kcp_SendUna
+  name: SendUna
+  nameWithType: Kcp.SendUna
+  fullName: KCP.Kcp.SendUna
+- uid: KCP.Kcp.SendNext*
+  commentId: Overload:KCP.Kcp.SendNext
+  href: KCP.Kcp.html#KCP_Kcp_SendNext
+  name: SendNext
+  nameWithType: Kcp.SendNext
+  fullName: KCP.Kcp.SendNext
+- uid: KCP.Kcp.ReceiveNext*
+  commentId: Overload:KCP.Kcp.ReceiveNext
+  href: KCP.Kcp.html#KCP_Kcp_ReceiveNext
+  name: ReceiveNext
+  nameWithType: Kcp.ReceiveNext
+  fullName: KCP.Kcp.ReceiveNext
+- uid: KCP.Kcp.SlowStartThreshold*
+  commentId: Overload:KCP.Kcp.SlowStartThreshold
+  href: KCP.Kcp.html#KCP_Kcp_SlowStartThreshold
+  name: SlowStartThreshold
+  nameWithType: Kcp.SlowStartThreshold
+  fullName: KCP.Kcp.SlowStartThreshold
+- uid: KCP.Kcp.RxRttval*
+  commentId: Overload:KCP.Kcp.RxRttval
+  href: KCP.Kcp.html#KCP_Kcp_RxRttval
+  name: RxRttval
+  nameWithType: Kcp.RxRttval
+  fullName: KCP.Kcp.RxRttval
+- uid: KCP.Kcp.RxSrtt*
+  commentId: Overload:KCP.Kcp.RxSrtt
+  href: KCP.Kcp.html#KCP_Kcp_RxSrtt
+  name: RxSrtt
+  nameWithType: Kcp.RxSrtt
+  fullName: KCP.Kcp.RxSrtt
+- uid: KCP.Kcp.RxRto*
+  commentId: Overload:KCP.Kcp.RxRto
+  href: KCP.Kcp.html#KCP_Kcp_RxRto
+  name: RxRto
+  nameWithType: Kcp.RxRto
+  fullName: KCP.Kcp.RxRto
+- uid: KCP.Kcp.RxMinrto*
+  commentId: Overload:KCP.Kcp.RxMinrto
+  href: KCP.Kcp.html#KCP_Kcp_RxMinrto
+  name: RxMinrto
+  nameWithType: Kcp.RxMinrto
+  fullName: KCP.Kcp.RxMinrto
+- uid: KCP.Kcp.SendWindowSize*
+  commentId: Overload:KCP.Kcp.SendWindowSize
+  href: KCP.Kcp.html#KCP_Kcp_SendWindowSize
+  name: SendWindowSize
+  nameWithType: Kcp.SendWindowSize
+  fullName: KCP.Kcp.SendWindowSize
+- uid: KCP.Kcp.ReceiveWindowSize*
+  commentId: Overload:KCP.Kcp.ReceiveWindowSize
+  href: KCP.Kcp.html#KCP_Kcp_ReceiveWindowSize
+  name: ReceiveWindowSize
+  nameWithType: Kcp.ReceiveWindowSize
+  fullName: KCP.Kcp.ReceiveWindowSize
+- uid: KCP.Kcp.RemoteWindowSize*
+  commentId: Overload:KCP.Kcp.RemoteWindowSize
+  href: KCP.Kcp.html#KCP_Kcp_RemoteWindowSize
+  name: RemoteWindowSize
+  nameWithType: Kcp.RemoteWindowSize
+  fullName: KCP.Kcp.RemoteWindowSize
+- uid: KCP.Kcp.CongestionWindowSize*
+  commentId: Overload:KCP.Kcp.CongestionWindowSize
+  href: KCP.Kcp.html#KCP_Kcp_CongestionWindowSize
+  name: CongestionWindowSize
+  nameWithType: Kcp.CongestionWindowSize
+  fullName: KCP.Kcp.CongestionWindowSize
+- uid: KCP.Kcp.Probe*
+  commentId: Overload:KCP.Kcp.Probe
+  href: KCP.Kcp.html#KCP_Kcp_Probe
+  name: Probe
+  nameWithType: Kcp.Probe
+  fullName: KCP.Kcp.Probe
+- uid: KCP.Kcp.Current*
+  commentId: Overload:KCP.Kcp.Current
+  href: KCP.Kcp.html#KCP_Kcp_Current
+  name: Current
+  nameWithType: Kcp.Current
+  fullName: KCP.Kcp.Current
+- uid: KCP.Kcp.Interval*
+  commentId: Overload:KCP.Kcp.Interval
+  href: KCP.Kcp.html#KCP_Kcp_Interval
+  name: Interval
+  nameWithType: Kcp.Interval
+  fullName: KCP.Kcp.Interval
+- uid: KCP.Kcp.TimestampFlush*
+  commentId: Overload:KCP.Kcp.TimestampFlush
+  href: KCP.Kcp.html#KCP_Kcp_TimestampFlush
+  name: TimestampFlush
+  nameWithType: Kcp.TimestampFlush
+  fullName: KCP.Kcp.TimestampFlush
+- uid: KCP.Kcp.Transmissions*
+  commentId: Overload:KCP.Kcp.Transmissions
+  href: KCP.Kcp.html#KCP_Kcp_Transmissions
+  name: Transmissions
+  nameWithType: Kcp.Transmissions
+  fullName: KCP.Kcp.Transmissions
+- uid: KCP.Kcp.ReceiveBufferCount*
+  commentId: Overload:KCP.Kcp.ReceiveBufferCount
+  href: KCP.Kcp.html#KCP_Kcp_ReceiveBufferCount
+  name: ReceiveBufferCount
+  nameWithType: Kcp.ReceiveBufferCount
+  fullName: KCP.Kcp.ReceiveBufferCount
+- uid: KCP.Kcp.ReceiveQueueCount*
+  commentId: Overload:KCP.Kcp.ReceiveQueueCount
+  href: KCP.Kcp.html#KCP_Kcp_ReceiveQueueCount
+  name: ReceiveQueueCount
+  nameWithType: Kcp.ReceiveQueueCount
+  fullName: KCP.Kcp.ReceiveQueueCount
+- uid: KCP.Kcp.WaitReceiveCount*
+  commentId: Overload:KCP.Kcp.WaitReceiveCount
+  href: KCP.Kcp.html#KCP_Kcp_WaitReceiveCount
+  name: WaitReceiveCount
+  nameWithType: Kcp.WaitReceiveCount
+  fullName: KCP.Kcp.WaitReceiveCount
+- uid: KCP.Kcp.SendBufferCount*
+  commentId: Overload:KCP.Kcp.SendBufferCount
+  href: KCP.Kcp.html#KCP_Kcp_SendBufferCount
+  name: SendBufferCount
+  nameWithType: Kcp.SendBufferCount
+  fullName: KCP.Kcp.SendBufferCount
+- uid: KCP.Kcp.SendQueueCount*
+  commentId: Overload:KCP.Kcp.SendQueueCount
+  href: KCP.Kcp.html#KCP_Kcp_SendQueueCount
+  name: SendQueueCount
+  nameWithType: Kcp.SendQueueCount
+  fullName: KCP.Kcp.SendQueueCount
+- uid: KCP.Kcp.WaitSendCount*
+  commentId: Overload:KCP.Kcp.WaitSendCount
+  href: KCP.Kcp.html#KCP_Kcp_WaitSendCount
+  name: WaitSendCount
+  nameWithType: Kcp.WaitSendCount
+  fullName: KCP.Kcp.WaitSendCount
+- uid: KCP.Kcp.NoDelay*
+  commentId: Overload:KCP.Kcp.NoDelay
+  href: KCP.Kcp.html#KCP_Kcp_NoDelay
+  name: NoDelay
+  nameWithType: Kcp.NoDelay
+  fullName: KCP.Kcp.NoDelay
+- uid: KCP.Kcp.Updated*
+  commentId: Overload:KCP.Kcp.Updated
+  href: KCP.Kcp.html#KCP_Kcp_Updated
+  name: Updated
+  nameWithType: Kcp.Updated
+  fullName: KCP.Kcp.Updated
+- uid: KCP.Kcp.TimestampProbe*
+  commentId: Overload:KCP.Kcp.TimestampProbe
+  href: KCP.Kcp.html#KCP_Kcp_TimestampProbe
+  name: TimestampProbe
+  nameWithType: Kcp.TimestampProbe
+  fullName: KCP.Kcp.TimestampProbe
+- uid: KCP.Kcp.ProbeWait*
+  commentId: Overload:KCP.Kcp.ProbeWait
+  href: KCP.Kcp.html#KCP_Kcp_ProbeWait
+  name: ProbeWait
+  nameWithType: Kcp.ProbeWait
+  fullName: KCP.Kcp.ProbeWait
+- uid: KCP.Kcp.Increment*
+  commentId: Overload:KCP.Kcp.Increment
+  href: KCP.Kcp.html#KCP_Kcp_Increment
+  name: Increment
+  nameWithType: Kcp.Increment
+  fullName: KCP.Kcp.Increment
+- uid: KCP.Kcp.AckList*
+  commentId: Overload:KCP.Kcp.AckList
+  href: KCP.Kcp.html#KCP_Kcp_AckList
+  name: AckList
+  nameWithType: Kcp.AckList
+  fullName: KCP.Kcp.AckList
+- uid: System.UInt32*
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint*
+  nameWithType: uint*
+  fullName: uint*
+  nameWithType.vb: UInteger*
+  fullName.vb: UInteger*
+  name.vb: UInteger*
+  spec.csharp:
+  - uid: System.UInt32
+    name: uint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: '*'
+  spec.vb:
+  - uid: System.UInt32
+    name: UInteger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: '*'
+- uid: KCP.Kcp.AckCount*
+  commentId: Overload:KCP.Kcp.AckCount
+  href: KCP.Kcp.html#KCP_Kcp_AckCount
+  name: AckCount
+  nameWithType: Kcp.AckCount
+  fullName: KCP.Kcp.AckCount
+- uid: KCP.Kcp.AckBlock*
+  commentId: Overload:KCP.Kcp.AckBlock
+  href: KCP.Kcp.html#KCP_Kcp_AckBlock
+  name: AckBlock
+  nameWithType: Kcp.AckBlock
+  fullName: KCP.Kcp.AckBlock
+- uid: KCP.Kcp.Buffer*
+  commentId: Overload:KCP.Kcp.Buffer
+  href: KCP.Kcp.html#KCP_Kcp_Buffer
+  name: Buffer
+  nameWithType: Kcp.Buffer
+  fullName: KCP.Kcp.Buffer
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: KCP.Kcp.FastResend*
+  commentId: Overload:KCP.Kcp.FastResend
+  href: KCP.Kcp.html#KCP_Kcp_FastResend
+  name: FastResend
+  nameWithType: Kcp.FastResend
+  fullName: KCP.Kcp.FastResend
+- uid: KCP.Kcp.FastResendLimit*
+  commentId: Overload:KCP.Kcp.FastResendLimit
+  href: KCP.Kcp.html#KCP_Kcp_FastResendLimit
+  name: FastResendLimit
+  nameWithType: Kcp.FastResendLimit
+  fullName: KCP.Kcp.FastResendLimit
+- uid: KCP.Kcp.NoCongestionWindow*
+  commentId: Overload:KCP.Kcp.NoCongestionWindow
+  href: KCP.Kcp.html#KCP_Kcp_NoCongestionWindow
+  name: NoCongestionWindow
+  nameWithType: Kcp.NoCongestionWindow
+  fullName: KCP.Kcp.NoCongestionWindow
+- uid: KCP.Kcp.StreamMode*
+  commentId: Overload:KCP.Kcp.StreamMode
+  href: KCP.Kcp.html#KCP_Kcp_StreamMode
+  name: StreamMode
+  nameWithType: Kcp.StreamMode
+  fullName: KCP.Kcp.StreamMode
+- uid: KCP.Kcp.Output*
+  commentId: Overload:KCP.Kcp.Output
+  href: KCP.Kcp.html#KCP_Kcp_Output
+  name: Output
+  nameWithType: Kcp.Output
+  fullName: KCP.Kcp.Output
+- uid: KCP.Kcp.Dispose*
+  commentId: Overload:KCP.Kcp.Dispose
+  href: KCP.Kcp.html#KCP_Kcp_Dispose
+  name: Dispose
+  nameWithType: Kcp.Dispose
+  fullName: KCP.Kcp.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: KCP.Kcp.SetOutput*
+  commentId: Overload:KCP.Kcp.SetOutput
+  href: KCP.Kcp.html#KCP_Kcp_SetOutput_KCP_KcpCallback_
+  name: SetOutput
+  nameWithType: Kcp.SetOutput
+  fullName: KCP.Kcp.SetOutput
+- uid: KCP.Kcp.Finalize*
+  commentId: Overload:KCP.Kcp.Finalize
+  href: KCP.Kcp.html#KCP_Kcp_Finalize
+  name: ~Kcp
+  nameWithType: Kcp.~Kcp
+  fullName: KCP.Kcp.~Kcp
+  spec.csharp:
+  - name: "~"
+  - uid: KCP.Kcp.Finalize*
+    name: Kcp
+    href: KCP.Kcp.html#KCP_Kcp_Finalize
+- uid: KCP.Kcp.Send*
+  commentId: Overload:KCP.Kcp.Send
+  href: KCP.Kcp.html#KCP_Kcp_Send_System_Byte___
+  name: Send
+  nameWithType: Kcp.Send
+  fullName: KCP.Kcp.Send
+- uid: System.ReadOnlySpan{System.Byte}
+  commentId: T:System.ReadOnlySpan{System.Byte}
+  parent: System
+  definition: System.ReadOnlySpan`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<byte>
+  nameWithType: ReadOnlySpan<byte>
+  fullName: System.ReadOnlySpan<byte>
+  nameWithType.vb: ReadOnlySpan(Of Byte)
+  fullName.vb: System.ReadOnlySpan(Of Byte)
+  name.vb: ReadOnlySpan(Of Byte)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.ReadOnlySpan`1
+  commentId: T:System.ReadOnlySpan`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<T>
+  nameWithType: ReadOnlySpan<T>
+  fullName: System.ReadOnlySpan<T>
+  nameWithType.vb: ReadOnlySpan(Of T)
+  fullName.vb: System.ReadOnlySpan(Of T)
+  name.vb: ReadOnlySpan(Of T)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.ReadOnlyMemory{System.Byte}
+  commentId: T:System.ReadOnlyMemory{System.Byte}
+  parent: System
+  definition: System.ReadOnlyMemory`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  name: ReadOnlyMemory<byte>
+  nameWithType: ReadOnlyMemory<byte>
+  fullName: System.ReadOnlyMemory<byte>
+  nameWithType.vb: ReadOnlyMemory(Of Byte)
+  fullName.vb: System.ReadOnlyMemory(Of Byte)
+  name.vb: ReadOnlyMemory(Of Byte)
+  spec.csharp:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.ReadOnlyMemory`1
+  commentId: T:System.ReadOnlyMemory`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  name: ReadOnlyMemory<T>
+  nameWithType: ReadOnlyMemory<T>
+  fullName: System.ReadOnlyMemory<T>
+  nameWithType.vb: ReadOnlyMemory(Of T)
+  fullName.vb: System.ReadOnlyMemory(Of T)
+  name.vb: ReadOnlyMemory(Of T)
+  spec.csharp:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.ArraySegment{System.Byte}
+  commentId: T:System.ArraySegment{System.Byte}
+  parent: System
+  definition: System.ArraySegment`1
+  href: https://learn.microsoft.com/dotnet/api/system.arraysegment-1
+  name: ArraySegment<byte>
+  nameWithType: ArraySegment<byte>
+  fullName: System.ArraySegment<byte>
+  nameWithType.vb: ArraySegment(Of Byte)
+  fullName.vb: System.ArraySegment(Of Byte)
+  name.vb: ArraySegment(Of Byte)
+  spec.csharp:
+  - uid: System.ArraySegment`1
+    name: ArraySegment
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.arraysegment-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.ArraySegment`1
+    name: ArraySegment
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.arraysegment-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.ArraySegment`1
+  commentId: T:System.ArraySegment`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.arraysegment-1
+  name: ArraySegment<T>
+  nameWithType: ArraySegment<T>
+  fullName: System.ArraySegment<T>
+  nameWithType.vb: ArraySegment(Of T)
+  fullName.vb: System.ArraySegment(Of T)
+  name.vb: ArraySegment(Of T)
+  spec.csharp:
+  - uid: System.ArraySegment`1
+    name: ArraySegment
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.arraysegment-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.ArraySegment`1
+    name: ArraySegment
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.arraysegment-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Byte*
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte*
+  nameWithType: byte*
+  fullName: byte*
+  nameWithType.vb: Byte*
+  fullName.vb: Byte*
+  name.vb: Byte*
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '*'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '*'
+- uid: KCP.Kcp.Input*
+  commentId: Overload:KCP.Kcp.Input
+  href: KCP.Kcp.html#KCP_Kcp_Input_System_Byte___
+  name: Input
+  nameWithType: Kcp.Input
+  fullName: KCP.Kcp.Input
+- uid: KCP.Kcp.PeekSize*
+  commentId: Overload:KCP.Kcp.PeekSize
+  href: KCP.Kcp.html#KCP_Kcp_PeekSize
+  name: PeekSize
+  nameWithType: Kcp.PeekSize
+  fullName: KCP.Kcp.PeekSize
+- uid: KCP.Kcp.Receive*
+  commentId: Overload:KCP.Kcp.Receive
+  href: KCP.Kcp.html#KCP_Kcp_Receive_System_Byte___
+  name: Receive
+  nameWithType: Kcp.Receive
+  fullName: KCP.Kcp.Receive
+- uid: System.Span{System.Byte}
+  commentId: T:System.Span{System.Byte}
+  parent: System
+  definition: System.Span`1
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<byte>
+  nameWithType: Span<byte>
+  fullName: System.Span<byte>
+  nameWithType.vb: Span(Of Byte)
+  fullName.vb: System.Span(Of Byte)
+  name.vb: Span(Of Byte)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.Span`1
+  commentId: T:System.Span`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<T>
+  nameWithType: Span<T>
+  fullName: System.Span<T>
+  nameWithType.vb: Span(Of T)
+  fullName.vb: System.Span(Of T)
+  name.vb: Span(Of T)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Memory{System.Byte}
+  commentId: T:System.Memory{System.Byte}
+  parent: System
+  definition: System.Memory`1
+  href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  name: Memory<byte>
+  nameWithType: Memory<byte>
+  fullName: System.Memory<byte>
+  nameWithType.vb: Memory(Of Byte)
+  fullName.vb: System.Memory(Of Byte)
+  name.vb: Memory(Of Byte)
+  spec.csharp:
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.Memory`1
+  commentId: T:System.Memory`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  name: Memory<T>
+  nameWithType: Memory<T>
+  fullName: System.Memory<T>
+  nameWithType.vb: Memory(Of T)
+  fullName.vb: System.Memory(Of T)
+  name.vb: Memory(Of T)
+  spec.csharp:
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: KCP.Kcp.Update*
+  commentId: Overload:KCP.Kcp.Update
+  href: KCP.Kcp.html#KCP_Kcp_Update_System_UInt32_
+  name: Update
+  nameWithType: Kcp.Update
+  fullName: KCP.Kcp.Update
+- uid: KCP.Kcp.Check*
+  commentId: Overload:KCP.Kcp.Check
+  href: KCP.Kcp.html#KCP_Kcp_Check_System_UInt32_
+  name: Check
+  nameWithType: Kcp.Check
+  fullName: KCP.Kcp.Check
+- uid: KCP.Kcp.Flush*
+  commentId: Overload:KCP.Kcp.Flush
+  href: KCP.Kcp.html#KCP_Kcp_Flush
+  name: Flush
+  nameWithType: Kcp.Flush
+  fullName: KCP.Kcp.Flush
+- uid: KCP.Kcp.SetMtu*
+  commentId: Overload:KCP.Kcp.SetMtu
+  href: KCP.Kcp.html#KCP_Kcp_SetMtu_System_Int32_
+  name: SetMtu
+  nameWithType: Kcp.SetMtu
+  fullName: KCP.Kcp.SetMtu
+- uid: KCP.Kcp.SetInterval*
+  commentId: Overload:KCP.Kcp.SetInterval
+  href: KCP.Kcp.html#KCP_Kcp_SetInterval_System_Int32_
+  name: SetInterval
+  nameWithType: Kcp.SetInterval
+  fullName: KCP.Kcp.SetInterval
+- uid: KCP.Kcp.SetNoDelay*
+  commentId: Overload:KCP.Kcp.SetNoDelay
+  href: KCP.Kcp.html#KCP_Kcp_SetNoDelay_System_Int32_System_Int32_System_Int32_System_Int32_
+  name: SetNoDelay
+  nameWithType: Kcp.SetNoDelay
+  fullName: KCP.Kcp.SetNoDelay
+- uid: KCP.Kcp.SetWindowSize*
+  commentId: Overload:KCP.Kcp.SetWindowSize
+  href: KCP.Kcp.html#KCP_Kcp_SetWindowSize_System_Int32_System_Int32_
+  name: SetWindowSize
+  nameWithType: Kcp.SetWindowSize
+  fullName: KCP.Kcp.SetWindowSize
+- uid: KCP.Kcp.SetFastResendLimit*
+  commentId: Overload:KCP.Kcp.SetFastResendLimit
+  href: KCP.Kcp.html#KCP_Kcp_SetFastResendLimit_System_Int32_
+  name: SetFastResendLimit
+  nameWithType: Kcp.SetFastResendLimit
+  fullName: KCP.Kcp.SetFastResendLimit
+- uid: KCP.Kcp.SetStreamMode*
+  commentId: Overload:KCP.Kcp.SetStreamMode
+  href: KCP.Kcp.html#KCP_Kcp_SetStreamMode_System_Int32_
+  name: SetStreamMode
+  nameWithType: Kcp.SetStreamMode
+  fullName: KCP.Kcp.SetStreamMode
+- uid: KCP.Kcp.SetMinrto*
+  commentId: Overload:KCP.Kcp.SetMinrto
+  href: KCP.Kcp.html#KCP_Kcp_SetMinrto_System_Int32_
+  name: SetMinrto
+  nameWithType: Kcp.SetMinrto
+  fullName: KCP.Kcp.SetMinrto

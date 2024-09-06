@@ -1,0 +1,974 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>RandomHelper 类
+ | Fantasy </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="RandomHelper 类
+ | Fantasy ">
+    
+    <meta name="description" content="随机数操作助手类，提供各种随机数生成和操作方法。">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="Fantasy">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="搜索" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">搜索结果 <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="首页" data-prev="上一页" data-next="下一页" data-last="尾页"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">显示/隐藏目录</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Fantasy.Helper.RandomHelper">
+
+
+
+  <h1 id="Fantasy_Helper_RandomHelper" data-uid="Fantasy.Helper.RandomHelper" class="text-break">RandomHelper 类
+</h1>
+  <div class="markdown level0 summary"><p>随机数操作助手类，提供各种随机数生成和操作方法。</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>继承</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">RandomHelper</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>继承成员</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>命名空间</strong>: <a class="xref" href="Fantasy.html">Fantasy</a>.<a class="xref" href="Fantasy.Helper.html">Helper</a></h6>
+  <h6><strong>程序集</strong>: Fantasy.Net.dll</h6>
+  <h5 id="Fantasy_Helper_RandomHelper_syntax">语法</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class RandomHelper</code></pre>
+  </div>
+  <h3 id="methods">方法
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_BreakRank__1_System_Collections_Generic_List___0__.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.BreakRank%60%601(System.Collections.Generic.List%7B%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L103">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_BreakRank_" data-uid="Fantasy.Helper.RandomHelper.BreakRank*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_BreakRank__1_System_Collections_Generic_List___0__" data-uid="Fantasy.Helper.RandomHelper.BreakRank``1(System.Collections.Generic.List{``0})">BreakRank&lt;T&gt;(List&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"><p>打乱列表中元素的顺序。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void BreakRank&lt;T&gt;(List&lt;T&gt; arr)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;</td>
+        <td><span class="parametername">arr</span></td>
+        <td><p>要打乱顺序的列表。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>列表元素的类型。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_NextFloat_System_Boolean_.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.NextFloat(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L180">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_NextFloat_" data-uid="Fantasy.Helper.RandomHelper.NextFloat*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_NextFloat_System_Boolean_" data-uid="Fantasy.Helper.RandomHelper.NextFloat(System.Boolean)">NextFloat(bool)</h4>
+  <div class="markdown level1 summary"><p>返回随机数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float NextFloat(bool containNegative = false)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">containNegative</span></td>
+        <td><p>是否包含负数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><p>返回一个随机的单精度浮点数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_NextFloat_System_Single_.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.NextFloat(System.Single)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L209">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_NextFloat_" data-uid="Fantasy.Helper.RandomHelper.NextFloat*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_NextFloat_System_Single_" data-uid="Fantasy.Helper.RandomHelper.NextFloat(System.Single)">NextFloat(float)</h4>
+  <div class="markdown level1 summary"><p>返回一个小于所指定最大值的非负随机数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float NextFloat(float maxValue)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><span class="parametername">maxValue</span></td>
+        <td><p>要生成的随机数的上限（随机数不能取该上限值）。 maxValue 必须大于或等于零。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><p>大于等于零且小于 maxValue 的单精度浮点数，即：返回值的范围通常包括零但不包括 maxValue。 不过，如果 maxValue 等于零，则返回 maxValue。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_NextFloat_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.NextFloat(System.Single%2CSystem.Single)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L239">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_NextFloat_" data-uid="Fantasy.Helper.RandomHelper.NextFloat*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_NextFloat_System_Single_System_Single_" data-uid="Fantasy.Helper.RandomHelper.NextFloat(System.Single,System.Single)">NextFloat(float, float)</h4>
+  <div class="markdown level1 summary"><p>返回一个指定范围内的随机数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float NextFloat(float minValue, float maxValue)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><span class="parametername">minValue</span></td>
+        <td><p>返回的随机数的下界（随机数可取该下界值）。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><span class="parametername">maxValue</span></td>
+        <td><p>返回的随机数的上界（随机数不能取该上界值）。 maxValue 必须大于或等于 minValue。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><p>一个大于等于 minValue 且小于 maxValue 的单精度浮点数，即：返回的值范围包括 minValue 但不包括 maxValue。 如果 minValue 等于 maxValue，则返回 minValue。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_NextVector2_System_Single_System_Single_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.NextVector2(System.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L271">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_NextVector2_" data-uid="Fantasy.Helper.RandomHelper.NextVector2*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_NextVector2_System_Single_System_Single_System_Single_System_Single_" data-uid="Fantasy.Helper.RandomHelper.NextVector2(System.Single,System.Single,System.Single,System.Single)">NextVector2(float, float, float, float)</h4>
+  <div class="markdown level1 summary"><p>在指定的矩形区域内随机生成一个二维向量位置。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector2 NextVector2(float minX, float maxX, float minY, float maxY)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><span class="parametername">minX</span></td>
+        <td><p>X轴最小值。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><span class="parametername">maxX</span></td>
+        <td><p>X轴最大值。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><span class="parametername">minY</span></td>
+        <td><p>Y轴最小值。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><span class="parametername">maxY</span></td>
+        <td><p>Y轴最大值。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector2">Vector2</a></td>
+        <td><p>随机生成的二维向量位置。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandFloat01.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandFloat01%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L121">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandFloat01_" data-uid="Fantasy.Helper.RandomHelper.RandFloat01*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandFloat01" data-uid="Fantasy.Helper.RandomHelper.RandFloat01">RandFloat01()</h4>
+  <div class="markdown level1 summary"><p>生成一个介于 0 和 1 之间的随机单精度浮点数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static float RandFloat01()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><p>随机单精度浮点数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandInt64.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandInt64%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L31">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandInt64_" data-uid="Fantasy.Helper.RandomHelper.RandInt64*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandInt64" data-uid="Fantasy.Helper.RandomHelper.RandInt64">RandInt64()</h4>
+  <div class="markdown level1 summary"><p>生成一个随机的 64 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static long RandInt64()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><p>64 位整数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandUInt16.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandUInt16%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L50">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandUInt16_" data-uid="Fantasy.Helper.RandomHelper.RandUInt16*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandUInt16" data-uid="Fantasy.Helper.RandomHelper.RandUInt16">RandUInt16()</h4>
+  <div class="markdown level1 summary"><p>生成一个随机的无符号 16 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ushort RandUInt16()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint16">ushort</a></td>
+        <td><p>无符号 16 位整数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandUInt32.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandUInt32%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L41">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandUInt32_" data-uid="Fantasy.Helper.RandomHelper.RandUInt32*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandUInt32" data-uid="Fantasy.Helper.RandomHelper.RandUInt32">RandUInt32()</h4>
+  <div class="markdown level1 summary"><p>生成一个随机的无符号 32 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static uint RandUInt32()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><p>无符号 32 位整数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandUInt64.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandUInt64%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L21">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandUInt64_" data-uid="Fantasy.Helper.RandomHelper.RandUInt64*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandUInt64" data-uid="Fantasy.Helper.RandomHelper.RandUInt64">RandUInt64()</h4>
+  <div class="markdown level1 summary"><p>生成一个随机的无符号 64 位整数。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ulong RandUInt64()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><p>无符号 64 位整数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandomArray__1_System_Collections_Generic_List___0__.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandomArray%60%601(System.Collections.Generic.List%7B%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L93">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandomArray_" data-uid="Fantasy.Helper.RandomHelper.RandomArray*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandomArray__1_System_Collections_Generic_List___0__" data-uid="Fantasy.Helper.RandomHelper.RandomArray``1(System.Collections.Generic.List{``0})">RandomArray&lt;T&gt;(List&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"><p>从列表中随机选择一个元素。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T RandomArray&lt;T&gt;(this List&lt;T&gt; array)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;</td>
+        <td><span class="parametername">array</span></td>
+        <td><p>要选择的列表。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>随机选择的列表元素。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>列表元素的类型。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandomArray__1___0___.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandomArray%60%601(%60%600%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L82">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandomArray_" data-uid="Fantasy.Helper.RandomHelper.RandomArray*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandomArray__1___0___" data-uid="Fantasy.Helper.RandomHelper.RandomArray``1(``0[])">RandomArray&lt;T&gt;(T[])</h4>
+  <div class="markdown level1 summary"><p>从数组中随机选择一个元素。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T RandomArray&lt;T&gt;(this T[] array)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>T[]</td>
+        <td><span class="parametername">array</span></td>
+        <td><p>要选择的数组。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>随机选择的数组元素。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>数组元素的类型。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandomBool.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandomBool%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L71">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandomBool_" data-uid="Fantasy.Helper.RandomHelper.RandomBool*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandomBool" data-uid="Fantasy.Helper.RandomHelper.RandomBool">RandomBool()</h4>
+  <div class="markdown level1 summary"><p>生成一个随机的布尔值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool RandomBool()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>随机的布尔值。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandomByFixedProbability_System_Int32___.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandomByFixedProbability(System.Int32%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L161">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandomByFixedProbability_" data-uid="Fantasy.Helper.RandomHelper.RandomByFixedProbability*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandomByFixedProbability_System_Int32___" data-uid="Fantasy.Helper.RandomHelper.RandomByFixedProbability(System.Int32[])">RandomByFixedProbability(int[])</h4>
+  <div class="markdown level1 summary"><p>根据固定概率随机选择一个索引，即某个数值上限内随机多少次。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int RandomByFixedProbability(int[] args)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>[]</td>
+        <td><span class="parametername">args</span></td>
+        <td><p>概率数组，每个元素表示相应索引的概率。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>随机选择的索引值。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandomByWeight_System_Int32___.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandomByWeight(System.Int32%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L139">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandomByWeight_" data-uid="Fantasy.Helper.RandomHelper.RandomByWeight*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandomByWeight_System_Int32___" data-uid="Fantasy.Helper.RandomHelper.RandomByWeight(System.Int32[])">RandomByWeight(int[])</h4>
+  <div class="markdown level1 summary"><p>根据权重随机选择一个索引。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int RandomByWeight(int[] weights)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>[]</td>
+        <td><span class="parametername">weights</span></td>
+        <td><p>权重数组，每个元素表示相应索引的权重。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>随机选择的索引值。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandomNumber_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandomNumber(System.Int32%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L62">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandomNumber_" data-uid="Fantasy.Helper.RandomHelper.RandomNumber*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandomNumber_System_Int32_System_Int32_" data-uid="Fantasy.Helper.RandomHelper.RandomNumber(System.Int32,System.Int32)">RandomNumber(int, int)</h4>
+  <div class="markdown level1 summary"><p>在指定范围内生成一个随机整数（包含下限，不包含上限）。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int RandomNumber(int lower, int upper)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">lower</span></td>
+        <td><p>下限。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">upper</span></td>
+        <td><p>上限。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>生成的随机整数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper_RandomNumberCode_System_Int32_.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper.RandomNumberCode(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L281">查看源代码</a>
+  </span>
+  <a id="Fantasy_Helper_RandomHelper_RandomNumberCode_" data-uid="Fantasy.Helper.RandomHelper.RandomNumberCode*"></a>
+  <h4 id="Fantasy_Helper_RandomHelper_RandomNumberCode_System_Int32_" data-uid="Fantasy.Helper.RandomHelper.RandomNumberCode(System.Int32)">RandomNumberCode(int)</h4>
+  <div class="markdown level1 summary"><p>生成指定长度的随机数字代码。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string RandomNumberCode(int len = 6)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">len</span></td>
+        <td><p>数字代码的长度。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>生成的随机数字代码。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Helper_RandomHelper.md&amp;value=---%0Auid%3A%20Fantasy.Helper.RandomHelper%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs/#L11" class="contribution-link">查看源代码</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>本文内容</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

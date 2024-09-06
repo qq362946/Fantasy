@@ -1,0 +1,143 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Entitas
+  commentId: N:Fantasy.Entitas
+  id: Entitas
+  parent: Fantasy
+  children:
+  - Fantasy.Entitas.Entity
+  - Fantasy.Entitas.EntityComponent
+  - Fantasy.Entitas.EntityReference`1
+  - Fantasy.Entitas.FrameUpdateQueueStruct
+  - Fantasy.Entitas.IEntity
+  - Fantasy.Entitas.Interface
+  - Fantasy.Entitas.MessagePoolComponent
+  - Fantasy.Entitas.UpdateQueueStruct
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Entitas
+  nameWithType: Fantasy.Entitas
+  fullName: Fantasy.Entitas
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Entitas.Interface
+  commentId: N:Fantasy.Entitas.Interface
+  href: Fantasy.html
+  name: Fantasy.Entitas.Interface
+  nameWithType: Fantasy.Entitas.Interface
+  fullName: Fantasy.Entitas.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  - name: .
+  - uid: Fantasy.Entitas.Interface
+    name: Interface
+    href: Fantasy.Entitas.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  - name: .
+  - uid: Fantasy.Entitas.Interface
+    name: Interface
+    href: Fantasy.Entitas.Interface.html
+- uid: Fantasy.Entitas.Entity
+  commentId: T:Fantasy.Entitas.Entity
+  parent: Fantasy.Entitas
+  href: Fantasy.Entitas.Entity.html
+  name: Entity
+  nameWithType: Entity
+  fullName: Fantasy.Entitas.Entity
+- uid: Fantasy.Entitas.EntityComponent
+  commentId: T:Fantasy.Entitas.EntityComponent
+  parent: Fantasy.Entitas
+  href: Fantasy.Entitas.EntityComponent.html
+  name: EntityComponent
+  nameWithType: EntityComponent
+  fullName: Fantasy.Entitas.EntityComponent
+- uid: Fantasy.Entitas.EntityReference`1
+  commentId: T:Fantasy.Entitas.EntityReference`1
+  parent: Fantasy.Entitas
+  href: Fantasy.Entitas.EntityReference-1.html
+  name: EntityReference<T>
+  nameWithType: EntityReference<T>
+  fullName: Fantasy.Entitas.EntityReference<T>
+  nameWithType.vb: EntityReference(Of T)
+  fullName.vb: Fantasy.Entitas.EntityReference(Of T)
+  name.vb: EntityReference(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.EntityReference`1
+    name: EntityReference
+    href: Fantasy.Entitas.EntityReference-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.EntityReference`1
+    name: EntityReference
+    href: Fantasy.Entitas.EntityReference-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.FrameUpdateQueueStruct
+  commentId: T:Fantasy.Entitas.FrameUpdateQueueStruct
+  href: Fantasy.Entitas.FrameUpdateQueueStruct.html
+  name: FrameUpdateQueueStruct
+  nameWithType: FrameUpdateQueueStruct
+  fullName: Fantasy.Entitas.FrameUpdateQueueStruct
+- uid: Fantasy.Entitas.IEntity
+  commentId: T:Fantasy.Entitas.IEntity
+  parent: Fantasy.Entitas
+  href: Fantasy.Entitas.IEntity.html
+  name: IEntity
+  nameWithType: IEntity
+  fullName: Fantasy.Entitas.IEntity
+- uid: Fantasy.Entitas.MessagePoolComponent
+  commentId: T:Fantasy.Entitas.MessagePoolComponent
+  parent: Fantasy.Entitas
+  href: Fantasy.Entitas.MessagePoolComponent.html
+  name: MessagePoolComponent
+  nameWithType: MessagePoolComponent
+  fullName: Fantasy.Entitas.MessagePoolComponent
+- uid: Fantasy.Entitas.UpdateQueueStruct
+  commentId: T:Fantasy.Entitas.UpdateQueueStruct
+  href: Fantasy.Entitas.UpdateQueueStruct.html
+  name: UpdateQueueStruct
+  nameWithType: UpdateQueueStruct
+  fullName: Fantasy.Entitas.UpdateQueueStruct
+- uid: Fantasy.Entitas
+  commentId: N:Fantasy.Entitas
+  href: Fantasy.html
+  name: Fantasy.Entitas
+  nameWithType: Fantasy.Entitas
+  fullName: Fantasy.Entitas
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html

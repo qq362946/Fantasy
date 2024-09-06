@@ -1,0 +1,513 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Entitas.FrameUpdateQueueStruct
+  commentId: T:Fantasy.Entitas.FrameUpdateQueueStruct
+  id: FrameUpdateQueueStruct
+  parent: Fantasy.Entitas
+  children:
+  - Fantasy.Entitas.FrameUpdateQueueStruct.#ctor(System.Type,System.Int64)
+  - Fantasy.Entitas.FrameUpdateQueueStruct.RunTimeId
+  - Fantasy.Entitas.FrameUpdateQueueStruct.Type
+  langs:
+  - csharp
+  - vb
+  name: FrameUpdateQueueStruct
+  nameWithType: FrameUpdateQueueStruct
+  fullName: Fantasy.Entitas.FrameUpdateQueueStruct
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EntityComponent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FrameUpdateQueueStruct
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EntityComponent.cs
+    startLine: 29
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Entitas
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential, Pack = 1)]
+
+      public struct FrameUpdateQueueStruct
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential, Pack:=1)>
+
+      Public Structure FrameUpdateQueueStruct
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - Fantasy.Entitas.FrameUpdateQueueStruct.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+    namedArguments:
+    - name: Pack
+      type: System.Int32
+      value: 1
+- uid: Fantasy.Entitas.FrameUpdateQueueStruct.Type
+  commentId: F:Fantasy.Entitas.FrameUpdateQueueStruct.Type
+  id: Type
+  parent: Fantasy.Entitas.FrameUpdateQueueStruct
+  langs:
+  - csharp
+  - vb
+  name: Type
+  nameWithType: FrameUpdateQueueStruct.Type
+  fullName: Fantasy.Entitas.FrameUpdateQueueStruct.Type
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EntityComponent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Type
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EntityComponent.cs
+    startLine: 32
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Entitas
+  syntax:
+    content: public readonly Type Type
+    return:
+      type: System.Type
+    content.vb: Public ReadOnly Type As Type
+- uid: Fantasy.Entitas.FrameUpdateQueueStruct.RunTimeId
+  commentId: F:Fantasy.Entitas.FrameUpdateQueueStruct.RunTimeId
+  id: RunTimeId
+  parent: Fantasy.Entitas.FrameUpdateQueueStruct
+  langs:
+  - csharp
+  - vb
+  name: RunTimeId
+  nameWithType: FrameUpdateQueueStruct.RunTimeId
+  fullName: Fantasy.Entitas.FrameUpdateQueueStruct.RunTimeId
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EntityComponent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RunTimeId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EntityComponent.cs
+    startLine: 33
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Entitas
+  syntax:
+    content: public readonly long RunTimeId
+    return:
+      type: System.Int64
+    content.vb: Public ReadOnly RunTimeId As Long
+- uid: Fantasy.Entitas.FrameUpdateQueueStruct.#ctor(System.Type,System.Int64)
+  commentId: M:Fantasy.Entitas.FrameUpdateQueueStruct.#ctor(System.Type,System.Int64)
+  id: '#ctor(System.Type,System.Int64)'
+  parent: Fantasy.Entitas.FrameUpdateQueueStruct
+  langs:
+  - csharp
+  - vb
+  name: FrameUpdateQueueStruct(Type, long)
+  nameWithType: FrameUpdateQueueStruct.FrameUpdateQueueStruct(Type, long)
+  fullName: Fantasy.Entitas.FrameUpdateQueueStruct.FrameUpdateQueueStruct(System.Type, long)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EntityComponent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EntityComponent.cs
+    startLine: 35
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Entitas
+  syntax:
+    content: public FrameUpdateQueueStruct(Type type, long runTimeId)
+    parameters:
+    - id: type
+      type: System.Type
+    - id: runTimeId
+      type: System.Int64
+    content.vb: Public Sub New(type As Type, runTimeId As Long)
+  overload: Fantasy.Entitas.FrameUpdateQueueStruct.#ctor*
+  nameWithType.vb: FrameUpdateQueueStruct.New(Type, Long)
+  fullName.vb: Fantasy.Entitas.FrameUpdateQueueStruct.New(System.Type, Long)
+  name.vb: New(Type, Long)
+references:
+- uid: Fantasy.Entitas
+  commentId: N:Fantasy.Entitas
+  href: Fantasy.html
+  name: Fantasy.Entitas
+  nameWithType: Fantasy.Entitas
+  fullName: Fantasy.Entitas
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.Entitas.FrameUpdateQueueStruct.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<FrameUpdateQueueStruct>(FrameUpdateQueueStruct)
+  nameWithType: JsonHelper.ToJson<FrameUpdateQueueStruct>(FrameUpdateQueueStruct)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Entitas.FrameUpdateQueueStruct>(Fantasy.Entitas.FrameUpdateQueueStruct)
+  nameWithType.vb: JsonHelper.ToJson(Of FrameUpdateQueueStruct)(FrameUpdateQueueStruct)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Entitas.FrameUpdateQueueStruct)(Fantasy.Entitas.FrameUpdateQueueStruct)
+  name.vb: ToJson(Of FrameUpdateQueueStruct)(FrameUpdateQueueStruct)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Entitas.FrameUpdateQueueStruct)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Entitas.FrameUpdateQueueStruct
+    name: FrameUpdateQueueStruct
+    href: Fantasy.Entitas.FrameUpdateQueueStruct.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Entitas.FrameUpdateQueueStruct
+    name: FrameUpdateQueueStruct
+    href: Fantasy.Entitas.FrameUpdateQueueStruct.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Entitas.FrameUpdateQueueStruct)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Entitas.FrameUpdateQueueStruct
+    name: FrameUpdateQueueStruct
+    href: Fantasy.Entitas.FrameUpdateQueueStruct.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Entitas.FrameUpdateQueueStruct
+    name: FrameUpdateQueueStruct
+    href: Fantasy.Entitas.FrameUpdateQueueStruct.html
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.Entitas.FrameUpdateQueueStruct.#ctor*
+  commentId: Overload:Fantasy.Entitas.FrameUpdateQueueStruct.#ctor
+  href: Fantasy.Entitas.FrameUpdateQueueStruct.html#Fantasy_Entitas_FrameUpdateQueueStruct__ctor_System_Type_System_Int64_
+  name: FrameUpdateQueueStruct
+  nameWithType: FrameUpdateQueueStruct.FrameUpdateQueueStruct
+  fullName: Fantasy.Entitas.FrameUpdateQueueStruct.FrameUpdateQueueStruct
+  nameWithType.vb: FrameUpdateQueueStruct.New
+  fullName.vb: Fantasy.Entitas.FrameUpdateQueueStruct.New
+  name.vb: New

@@ -1,0 +1,2019 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeSortedDictionary`2
+  commentId: T:NativeCollections.NativeSortedDictionary`2
+  id: NativeSortedDictionary`2
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeSortedDictionary`2.#ctor(System.Int32,System.Int32)
+  - NativeCollections.NativeSortedDictionary`2.Add(`0@,`1@)
+  - NativeCollections.NativeSortedDictionary`2.Clear
+  - NativeCollections.NativeSortedDictionary`2.ContainsKey(`0@)
+  - NativeCollections.NativeSortedDictionary`2.Count
+  - NativeCollections.NativeSortedDictionary`2.Dispose
+  - NativeCollections.NativeSortedDictionary`2.Empty
+  - NativeCollections.NativeSortedDictionary`2.Equals(NativeCollections.NativeSortedDictionary{`0,`1})
+  - NativeCollections.NativeSortedDictionary`2.Equals(System.Object)
+  - NativeCollections.NativeSortedDictionary`2.GetEnumerator
+  - NativeCollections.NativeSortedDictionary`2.GetHashCode
+  - NativeCollections.NativeSortedDictionary`2.IsCreated
+  - NativeCollections.NativeSortedDictionary`2.IsEmpty
+  - NativeCollections.NativeSortedDictionary`2.Item(`0@)
+  - NativeCollections.NativeSortedDictionary`2.Keys
+  - NativeCollections.NativeSortedDictionary`2.Max
+  - NativeCollections.NativeSortedDictionary`2.Min
+  - NativeCollections.NativeSortedDictionary`2.Remove(`0@)
+  - NativeCollections.NativeSortedDictionary`2.Remove(`0@,`1@)
+  - NativeCollections.NativeSortedDictionary`2.ToString
+  - NativeCollections.NativeSortedDictionary`2.TryGetValue(`0@,`1@)
+  - NativeCollections.NativeSortedDictionary`2.Values
+  - NativeCollections.NativeSortedDictionary`2.op_Equality(NativeCollections.NativeSortedDictionary{`0,`1},NativeCollections.NativeSortedDictionary{`0,`1})
+  - NativeCollections.NativeSortedDictionary`2.op_Inequality(NativeCollections.NativeSortedDictionary{`0,`1},NativeCollections.NativeSortedDictionary{`0,`1})
+  langs:
+  - csharp
+  - vb
+  name: NativeSortedDictionary<TKey, TValue>
+  nameWithType: NativeSortedDictionary<TKey, TValue>
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeSortedDictionary
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 26
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native dictionary
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeSortedDictionary<TKey, TValue> : IDisposable, IEquatable<NativeSortedDictionary<TKey, TValue>> where TKey : unmanaged, IComparable<TKey> where TValue : unmanaged
+    typeParameters:
+    - id: TKey
+      description: Type
+    - id: TValue
+      description: Type
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeSortedDictionary(Of TKey As {Structure, IComparable(Of TKey)}, TValue As Structure) Implements IDisposable, IEquatable(Of NativeSortedDictionary(Of TKey, TValue))
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeSortedDictionary`2}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeSortedDictionary`2.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue)
+  name.vb: NativeSortedDictionary(Of TKey, TValue)
+- uid: NativeCollections.NativeSortedDictionary`2.Keys
+  commentId: P:NativeCollections.NativeSortedDictionary`2.Keys
+  id: Keys
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Keys
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Keys
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Keys
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Keys
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 74
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Keys
+  example: []
+  syntax:
+    content: public NativeSortedDictionary<TKey, TValue>.KeyCollection Keys { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeSortedDictionary`2.KeyCollection
+    content.vb: Public ReadOnly Property Keys As NativeSortedDictionary(Of TKey, TValue).KeyCollection
+  overload: NativeCollections.NativeSortedDictionary`2.Keys*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Keys
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Keys
+- uid: NativeCollections.NativeSortedDictionary`2.Values
+  commentId: P:NativeCollections.NativeSortedDictionary`2.Values
+  id: Values
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Values
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Values
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Values
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Values
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 79
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Values
+  example: []
+  syntax:
+    content: public NativeSortedDictionary<TKey, TValue>.ValueCollection Values { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeSortedDictionary`2.ValueCollection
+    content.vb: Public ReadOnly Property Values As NativeSortedDictionary(Of TKey, TValue).ValueCollection
+  overload: NativeCollections.NativeSortedDictionary`2.Values*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Values
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Values
+- uid: NativeCollections.NativeSortedDictionary`2.#ctor(System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeSortedDictionary`2.#ctor(System.Int32,System.Int32)
+  id: '#ctor(System.Int32,System.Int32)'
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: NativeSortedDictionary(int, int)
+  nameWithType: NativeSortedDictionary<TKey, TValue>.NativeSortedDictionary(int, int)
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.NativeSortedDictionary(int, int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 86
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: public NativeSortedDictionary(int size, int maxFreeSlabs)
+    parameters:
+    - id: size
+      type: System.Int32
+      description: MemoryPool size
+    - id: maxFreeSlabs
+      type: System.Int32
+      description: MemoryPool maxFreeSlabs
+    content.vb: Public Sub New(size As Integer, maxFreeSlabs As Integer)
+  overload: NativeCollections.NativeSortedDictionary`2.#ctor*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).New(Integer, Integer)
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).New(Integer, Integer)
+  name.vb: New(Integer, Integer)
+- uid: NativeCollections.NativeSortedDictionary`2.IsCreated
+  commentId: P:NativeCollections.NativeSortedDictionary`2.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeSortedDictionary<TKey, TValue>.IsCreated
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 101
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeSortedDictionary`2.IsCreated*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).IsCreated
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).IsCreated
+- uid: NativeCollections.NativeSortedDictionary`2.IsEmpty
+  commentId: P:NativeCollections.NativeSortedDictionary`2.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativeSortedDictionary<TKey, TValue>.IsEmpty
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 106
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is empty
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativeSortedDictionary`2.IsEmpty*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).IsEmpty
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).IsEmpty
+- uid: NativeCollections.NativeSortedDictionary`2.Count
+  commentId: P:NativeCollections.NativeSortedDictionary`2.Count
+  id: Count
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Count
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 111
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Count
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: NativeCollections.NativeSortedDictionary`2.Count*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Count
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Count
+- uid: NativeCollections.NativeSortedDictionary`2.Min
+  commentId: P:NativeCollections.NativeSortedDictionary`2.Min
+  id: Min
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Min
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Min
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Min
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Min
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 116
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Min
+  example: []
+  syntax:
+    content: public KeyValuePair<TKey, TValue>? Min { get; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Collections.Generic.KeyValuePair{{TKey},{TValue}}}
+    content.vb: Public ReadOnly Property Min As KeyValuePair(Of TKey, TValue)?
+  overload: NativeCollections.NativeSortedDictionary`2.Min*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Min
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Min
+- uid: NativeCollections.NativeSortedDictionary`2.Max
+  commentId: P:NativeCollections.NativeSortedDictionary`2.Max
+  id: Max
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Max
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Max
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Max
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Max
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 132
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Max
+  example: []
+  syntax:
+    content: public KeyValuePair<TKey, TValue>? Max { get; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Collections.Generic.KeyValuePair{{TKey},{TValue}}}
+    content.vb: Public ReadOnly Property Max As KeyValuePair(Of TKey, TValue)?
+  overload: NativeCollections.NativeSortedDictionary`2.Max*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Max
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Max
+- uid: NativeCollections.NativeSortedDictionary`2.Item(`0@)
+  commentId: P:NativeCollections.NativeSortedDictionary`2.Item(`0@)
+  id: Item(`0@)
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: this[TKey]
+  nameWithType: NativeSortedDictionary<TKey, TValue>.this[TKey]
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.this[TKey]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 149
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get or set value
+  example: []
+  syntax:
+    content: public TValue this[in TKey key] { get; set; }
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    return:
+      type: '{TValue}'
+    content.vb: Public Default Property this[](key As TKey) As TValue
+  overload: NativeCollections.NativeSortedDictionary`2.Item*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).this[](TKey)
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).this[](TKey)
+  name.vb: this[](TKey)
+- uid: NativeCollections.NativeSortedDictionary`2.Equals(NativeCollections.NativeSortedDictionary{`0,`1})
+  commentId: M:NativeCollections.NativeSortedDictionary`2.Equals(NativeCollections.NativeSortedDictionary{`0,`1})
+  id: Equals(NativeCollections.NativeSortedDictionary{`0,`1})
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeSortedDictionary<TKey, TValue>)
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Equals(NativeSortedDictionary<TKey, TValue>)
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Equals(NativeCollections.NativeSortedDictionary<TKey, TValue>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 179
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeSortedDictionary<TKey, TValue> other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeSortedDictionary`2
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeSortedDictionary(Of TKey, TValue)) As Boolean
+  overload: NativeCollections.NativeSortedDictionary`2.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeSortedDictionary`2}.Equals(NativeCollections.NativeSortedDictionary{{TKey},{TValue}})
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Equals(NativeSortedDictionary(Of TKey, TValue))
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Equals(NativeCollections.NativeSortedDictionary(Of TKey, TValue))
+  name.vb: Equals(NativeSortedDictionary(Of TKey, TValue))
+- uid: NativeCollections.NativeSortedDictionary`2.Equals(System.Object)
+  commentId: M:NativeCollections.NativeSortedDictionary`2.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Equals(object?)
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 186
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeSortedDictionary`2.Equals*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Equals(Object)
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeSortedDictionary`2.GetHashCode
+  commentId: M:NativeCollections.NativeSortedDictionary`2.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeSortedDictionary<TKey, TValue>.GetHashCode()
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 192
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeSortedDictionary`2.GetHashCode*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).GetHashCode()
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).GetHashCode()
+- uid: NativeCollections.NativeSortedDictionary`2.ToString
+  commentId: M:NativeCollections.NativeSortedDictionary`2.ToString
+  id: ToString
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ToString()
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 198
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeSortedDictionary`2.ToString*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ToString()
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ToString()
+- uid: NativeCollections.NativeSortedDictionary`2.op_Equality(NativeCollections.NativeSortedDictionary{`0,`1},NativeCollections.NativeSortedDictionary{`0,`1})
+  commentId: M:NativeCollections.NativeSortedDictionary`2.op_Equality(NativeCollections.NativeSortedDictionary{`0,`1},NativeCollections.NativeSortedDictionary{`0,`1})
+  id: op_Equality(NativeCollections.NativeSortedDictionary{`0,`1},NativeCollections.NativeSortedDictionary{`0,`1})
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeSortedDictionary<TKey, TValue>, NativeSortedDictionary<TKey, TValue>)
+  nameWithType: NativeSortedDictionary<TKey, TValue>.operator ==(NativeSortedDictionary<TKey, TValue>, NativeSortedDictionary<TKey, TValue>)
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.operator ==(NativeCollections.NativeSortedDictionary<TKey, TValue>, NativeCollections.NativeSortedDictionary<TKey, TValue>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 206
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeSortedDictionary<TKey, TValue> left, NativeSortedDictionary<TKey, TValue> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeSortedDictionary`2
+      description: Left
+    - id: right
+      type: NativeCollections.NativeSortedDictionary`2
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeSortedDictionary(Of TKey, TValue), right As NativeSortedDictionary(Of TKey, TValue)) As Boolean
+  overload: NativeCollections.NativeSortedDictionary`2.op_Equality*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).=(NativeSortedDictionary(Of TKey, TValue), NativeSortedDictionary(Of TKey, TValue))
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).=(NativeCollections.NativeSortedDictionary(Of TKey, TValue), NativeCollections.NativeSortedDictionary(Of TKey, TValue))
+  name.vb: =(NativeSortedDictionary(Of TKey, TValue), NativeSortedDictionary(Of TKey, TValue))
+- uid: NativeCollections.NativeSortedDictionary`2.op_Inequality(NativeCollections.NativeSortedDictionary{`0,`1},NativeCollections.NativeSortedDictionary{`0,`1})
+  commentId: M:NativeCollections.NativeSortedDictionary`2.op_Inequality(NativeCollections.NativeSortedDictionary{`0,`1},NativeCollections.NativeSortedDictionary{`0,`1})
+  id: op_Inequality(NativeCollections.NativeSortedDictionary{`0,`1},NativeCollections.NativeSortedDictionary{`0,`1})
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeSortedDictionary<TKey, TValue>, NativeSortedDictionary<TKey, TValue>)
+  nameWithType: NativeSortedDictionary<TKey, TValue>.operator !=(NativeSortedDictionary<TKey, TValue>, NativeSortedDictionary<TKey, TValue>)
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.operator !=(NativeCollections.NativeSortedDictionary<TKey, TValue>, NativeCollections.NativeSortedDictionary<TKey, TValue>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 214
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeSortedDictionary<TKey, TValue> left, NativeSortedDictionary<TKey, TValue> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeSortedDictionary`2
+      description: Left
+    - id: right
+      type: NativeCollections.NativeSortedDictionary`2
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeSortedDictionary(Of TKey, TValue), right As NativeSortedDictionary(Of TKey, TValue)) As Boolean
+  overload: NativeCollections.NativeSortedDictionary`2.op_Inequality*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).<>(NativeSortedDictionary(Of TKey, TValue), NativeSortedDictionary(Of TKey, TValue))
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).<>(NativeCollections.NativeSortedDictionary(Of TKey, TValue), NativeCollections.NativeSortedDictionary(Of TKey, TValue))
+  name.vb: <>(NativeSortedDictionary(Of TKey, TValue), NativeSortedDictionary(Of TKey, TValue))
+- uid: NativeCollections.NativeSortedDictionary`2.Dispose
+  commentId: M:NativeCollections.NativeSortedDictionary`2.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Dispose()
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 219
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeSortedDictionary`2.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Dispose()
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Dispose()
+- uid: NativeCollections.NativeSortedDictionary`2.Clear
+  commentId: M:NativeCollections.NativeSortedDictionary`2.Clear
+  id: Clear
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Clear()
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Clear()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clear
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 231
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Clear
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Clear()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Clear()
+  overload: NativeCollections.NativeSortedDictionary`2.Clear*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Clear()
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Clear()
+- uid: NativeCollections.NativeSortedDictionary`2.Add(`0@,`1@)
+  commentId: M:NativeCollections.NativeSortedDictionary`2.Add(`0@,`1@)
+  id: Add(`0@,`1@)
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Add(in TKey, in TValue)
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Add(in TKey, in TValue)
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Add(in TKey, in TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Add
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 262
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Add
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Add(in TKey key, in TValue value)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    - id: value
+      type: '{TValue}'
+      description: Value
+    return:
+      type: System.Boolean
+      description: Added
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Add(key As TKey, value As TValue) As Boolean
+  overload: NativeCollections.NativeSortedDictionary`2.Add*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Add(TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Add(TKey, TValue)
+  name.vb: Add(TKey, TValue)
+- uid: NativeCollections.NativeSortedDictionary`2.Remove(`0@)
+  commentId: M:NativeCollections.NativeSortedDictionary`2.Remove(`0@)
+  id: Remove(`0@)
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Remove(in TKey)
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Remove(in TKey)
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Remove(in TKey)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 328
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Remove
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Remove(in TKey key)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    return:
+      type: System.Boolean
+      description: Removed
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Remove(key As TKey) As Boolean
+  overload: NativeCollections.NativeSortedDictionary`2.Remove*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Remove(TKey)
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Remove(TKey)
+  name.vb: Remove(TKey)
+- uid: NativeCollections.NativeSortedDictionary`2.Remove(`0@,`1@)
+  commentId: M:NativeCollections.NativeSortedDictionary`2.Remove(`0@,`1@)
+  id: Remove(`0@,`1@)
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Remove(in TKey, out TValue)
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Remove(in TKey, out TValue)
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Remove(in TKey, out TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 414
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Remove
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Remove(in TKey key, out TValue value)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    - id: value
+      type: '{TValue}'
+      description: Value
+    return:
+      type: System.Boolean
+      description: Removed
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Remove(key As TKey, value As TValue) As Boolean
+  overload: NativeCollections.NativeSortedDictionary`2.Remove*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Remove(TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Remove(TKey, TValue)
+  name.vb: Remove(TKey, TValue)
+- uid: NativeCollections.NativeSortedDictionary`2.ContainsKey(`0@)
+  commentId: M:NativeCollections.NativeSortedDictionary`2.ContainsKey(`0@)
+  id: ContainsKey(`0@)
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: ContainsKey(in TKey)
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ContainsKey(in TKey)
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ContainsKey(in TKey)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ContainsKey
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 508
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Contains key
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool ContainsKey(in TKey key)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    return:
+      type: System.Boolean
+      description: Contains key
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function ContainsKey(key As TKey) As Boolean
+  overload: NativeCollections.NativeSortedDictionary`2.ContainsKey*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ContainsKey(TKey)
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ContainsKey(TKey)
+  name.vb: ContainsKey(TKey)
+- uid: NativeCollections.NativeSortedDictionary`2.TryGetValue(`0@,`1@)
+  commentId: M:NativeCollections.NativeSortedDictionary`2.TryGetValue(`0@,`1@)
+  id: TryGetValue(`0@,`1@)
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: TryGetValue(in TKey, out TValue)
+  nameWithType: NativeSortedDictionary<TKey, TValue>.TryGetValue(in TKey, out TValue)
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.TryGetValue(in TKey, out TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryGetValue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 517
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try to get the actual value
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryGetValue(in TKey key, out TValue value)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    - id: value
+      type: '{TValue}'
+      description: Value
+    return:
+      type: System.Boolean
+      description: Got
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryGetValue(key As TKey, value As TValue) As Boolean
+  overload: NativeCollections.NativeSortedDictionary`2.TryGetValue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).TryGetValue(TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).TryGetValue(TKey, TValue)
+  name.vb: TryGetValue(TKey, TValue)
+- uid: NativeCollections.NativeSortedDictionary`2.Empty
+  commentId: P:NativeCollections.NativeSortedDictionary`2.Empty
+  id: Empty
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Empty
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 900
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeSortedDictionary<TKey, TValue> Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeSortedDictionary`2
+    content.vb: Public Shared ReadOnly Property Empty As NativeSortedDictionary(Of TKey, TValue)
+  overload: NativeCollections.NativeSortedDictionary`2.Empty*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Empty
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Empty
+- uid: NativeCollections.NativeSortedDictionary`2.GetEnumerator
+  commentId: M:NativeCollections.NativeSortedDictionary`2.GetEnumerator
+  id: GetEnumerator
+  parent: NativeCollections.NativeSortedDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: NativeSortedDictionary<TKey, TValue>.GetEnumerator()
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetEnumerator
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 906
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get enumerator
+  example: []
+  syntax:
+    content: public NativeSortedDictionary<TKey, TValue>.Enumerator GetEnumerator()
+    return:
+      type: NativeCollections.NativeSortedDictionary`2.Enumerator
+      description: Enumerator
+    content.vb: Public Function GetEnumerator() As NativeSortedDictionary(Of TKey, TValue).Enumerator
+  overload: NativeCollections.NativeSortedDictionary`2.GetEnumerator*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).GetEnumerator()
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).GetEnumerator()
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeSortedDictionary`2}
+  commentId: T:System.IEquatable{NativeCollections.NativeSortedDictionary`2}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeSortedDictionary<TKey, TValue>>
+  nameWithType: IEquatable<NativeSortedDictionary<TKey, TValue>>
+  fullName: System.IEquatable<NativeCollections.NativeSortedDictionary<TKey, TValue>>
+  nameWithType.vb: IEquatable(Of NativeSortedDictionary(Of TKey, TValue))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeSortedDictionary(Of TKey, TValue))
+  name.vb: IEquatable(Of NativeSortedDictionary(Of TKey, TValue))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeSortedDictionary`2.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeSortedDictionary<TKey, TValue>>(NativeSortedDictionary<TKey, TValue>)
+  nameWithType: JsonHelper.ToJson<NativeSortedDictionary<TKey, TValue>>(NativeSortedDictionary<TKey, TValue>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeSortedDictionary<TKey, TValue>>(NativeCollections.NativeSortedDictionary<TKey, TValue>)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeSortedDictionary(Of TKey, TValue))(NativeSortedDictionary(Of TKey, TValue))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeSortedDictionary(Of TKey, TValue))(NativeCollections.NativeSortedDictionary(Of TKey, TValue))
+  name.vb: ToJson(Of NativeSortedDictionary(Of TKey, TValue))(NativeSortedDictionary(Of TKey, TValue))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeSortedDictionary{`0,`1})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeSortedDictionary{`0,`1})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeSortedDictionary`2.Keys*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Keys
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Keys
+  name: Keys
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Keys
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Keys
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Keys
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Keys
+- uid: NativeCollections.NativeSortedDictionary`2.KeyCollection
+  commentId: T:NativeCollections.NativeSortedDictionary`2.KeyCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedDictionary-2.html
+  name: NativeSortedDictionary<TKey, TValue>.KeyCollection
+  nameWithType: NativeSortedDictionary<TKey, TValue>.KeyCollection
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.KeyCollection
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).KeyCollection
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).KeyCollection
+  name.vb: NativeSortedDictionary(Of TKey, TValue).KeyCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedDictionary-2.KeyCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedDictionary-2.KeyCollection.html
+- uid: NativeCollections.NativeSortedDictionary`2.Values*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Values
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Values
+  name: Values
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Values
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Values
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Values
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Values
+- uid: NativeCollections.NativeSortedDictionary`2.ValueCollection
+  commentId: T:NativeCollections.NativeSortedDictionary`2.ValueCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedDictionary-2.html
+  name: NativeSortedDictionary<TKey, TValue>.ValueCollection
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ValueCollection
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection
+  name.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.html
+- uid: NativeCollections.NativeSortedDictionary`2.#ctor*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.#ctor
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2__ctor_System_Int32_System_Int32_
+  name: NativeSortedDictionary
+  nameWithType: NativeSortedDictionary<TKey, TValue>.NativeSortedDictionary
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.NativeSortedDictionary
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).New
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativeSortedDictionary`2.IsCreated*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.IsCreated
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_IsCreated
+  name: IsCreated
+  nameWithType: NativeSortedDictionary<TKey, TValue>.IsCreated
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.IsCreated
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).IsCreated
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeSortedDictionary`2.IsEmpty*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.IsEmpty
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_IsEmpty
+  name: IsEmpty
+  nameWithType: NativeSortedDictionary<TKey, TValue>.IsEmpty
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.IsEmpty
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).IsEmpty
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).IsEmpty
+- uid: NativeCollections.NativeSortedDictionary`2.Count*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Count
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Count
+  name: Count
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Count
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Count
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Count
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Count
+- uid: NativeCollections.NativeSortedDictionary`2.Min*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Min
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Min
+  name: Min
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Min
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Min
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Min
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Min
+- uid: System.Nullable{System.Collections.Generic.KeyValuePair{{TKey},{TValue}}}
+  commentId: T:System.Nullable{System.Collections.Generic.KeyValuePair{`0,`1}}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  name: KeyValuePair<TKey, TValue>?
+  nameWithType: KeyValuePair<TKey, TValue>?
+  fullName: System.Collections.Generic.KeyValuePair<TKey, TValue>?
+  nameWithType.vb: KeyValuePair(Of TKey, TValue)?
+  fullName.vb: System.Collections.Generic.KeyValuePair(Of TKey, TValue)?
+  name.vb: KeyValuePair(Of TKey, TValue)?
+  spec.csharp:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: '?'
+  spec.vb:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeSortedDictionary`2.Max*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Max
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Max
+  name: Max
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Max
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Max
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Max
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Max
+- uid: NativeCollections.NativeSortedDictionary`2.Item*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Item
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Item__0__
+  name: this
+  nameWithType: NativeSortedDictionary<TKey, TValue>.this
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.this
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).this[]
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).this[]
+  name.vb: this[]
+- uid: '{TKey}'
+  commentId: '!:TKey'
+  definition: TKey
+  name: TKey
+  nameWithType: TKey
+  fullName: TKey
+- uid: '{TValue}'
+  commentId: '!:TValue'
+  definition: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: TKey
+  name: TKey
+  nameWithType: TKey
+  fullName: TKey
+- uid: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: NativeCollections.NativeSortedDictionary`2.Equals*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Equals
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Equals_NativeCollections_NativeSortedDictionary__0__1__
+  name: Equals
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Equals
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Equals
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Equals
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Equals
+- uid: System.IEquatable{NativeCollections.NativeSortedDictionary`2}.Equals(NativeCollections.NativeSortedDictionary{{TKey},{TValue}})
+  commentId: M:System.IEquatable{NativeCollections.NativeSortedDictionary`2}.Equals(NativeCollections.NativeSortedDictionary{`0,`1})
+  parent: System.IEquatable{NativeCollections.NativeSortedDictionary`2}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeSortedDictionary<TKey, TValue>)
+  nameWithType: IEquatable<NativeSortedDictionary<TKey, TValue>>.Equals(NativeSortedDictionary<TKey, TValue>)
+  fullName: System.IEquatable<NativeCollections.NativeSortedDictionary<TKey, TValue>>.Equals(NativeCollections.NativeSortedDictionary<TKey, TValue>)
+  nameWithType.vb: IEquatable(Of NativeSortedDictionary(Of TKey, TValue)).Equals(NativeSortedDictionary(Of TKey, TValue))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeSortedDictionary(Of TKey, TValue)).Equals(NativeCollections.NativeSortedDictionary(Of TKey, TValue))
+  name.vb: Equals(NativeSortedDictionary(Of TKey, TValue))
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeSortedDictionary`2}.Equals(NativeCollections.NativeSortedDictionary{`0,`1})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeSortedDictionary`2}.Equals(NativeCollections.NativeSortedDictionary{`0,`1})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+- uid: NativeCollections.NativeSortedDictionary`2
+  commentId: T:NativeCollections.NativeSortedDictionary`2
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedDictionary-2.html
+  name: NativeSortedDictionary<TKey, TValue>
+  nameWithType: NativeSortedDictionary<TKey, TValue>
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue)
+  name.vb: NativeSortedDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeSortedDictionary`2.GetHashCode*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.GetHashCode
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeSortedDictionary<TKey, TValue>.GetHashCode
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.GetHashCode
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).GetHashCode
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeSortedDictionary`2.ToString*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.ToString
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_ToString
+  name: ToString
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ToString
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ToString
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ToString
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeSortedDictionary`2.op_Equality*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.op_Equality
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_op_Equality_NativeCollections_NativeSortedDictionary__0__1__NativeCollections_NativeSortedDictionary__0__1__
+  name: operator ==
+  nameWithType: NativeSortedDictionary<TKey, TValue>.operator ==
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.operator ==
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).=
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeSortedDictionary`2.op_Equality*
+    name: ==
+    href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_op_Equality_NativeCollections_NativeSortedDictionary__0__1__NativeCollections_NativeSortedDictionary__0__1__
+- uid: NativeCollections.NativeSortedDictionary`2.op_Inequality*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.op_Inequality
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_op_Inequality_NativeCollections_NativeSortedDictionary__0__1__NativeCollections_NativeSortedDictionary__0__1__
+  name: operator !=
+  nameWithType: NativeSortedDictionary<TKey, TValue>.operator !=
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.operator !=
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).<>
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeSortedDictionary`2.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_op_Inequality_NativeCollections_NativeSortedDictionary__0__1__NativeCollections_NativeSortedDictionary__0__1__
+- uid: NativeCollections.NativeSortedDictionary`2.Dispose*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Dispose
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Dispose
+  name: Dispose
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Dispose
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Dispose
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Dispose
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeSortedDictionary`2.Clear*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Clear
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Clear
+  name: Clear
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Clear
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Clear
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Clear
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Clear
+- uid: NativeCollections.NativeSortedDictionary`2.Add*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Add
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Add__0___1__
+  name: Add
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Add
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Add
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Add
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Add
+- uid: NativeCollections.NativeSortedDictionary`2.Remove*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Remove
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Remove__0__
+  name: Remove
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Remove
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Remove
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Remove
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Remove
+- uid: NativeCollections.NativeSortedDictionary`2.ContainsKey*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.ContainsKey
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_ContainsKey__0__
+  name: ContainsKey
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ContainsKey
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ContainsKey
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ContainsKey
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ContainsKey
+- uid: NativeCollections.NativeSortedDictionary`2.TryGetValue*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.TryGetValue
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_TryGetValue__0___1__
+  name: TryGetValue
+  nameWithType: NativeSortedDictionary<TKey, TValue>.TryGetValue
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.TryGetValue
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).TryGetValue
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).TryGetValue
+- uid: NativeCollections.NativeSortedDictionary`2.Empty*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.Empty
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_Empty
+  name: Empty
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Empty
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Empty
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Empty
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Empty
+- uid: NativeCollections.NativeSortedDictionary`2.GetEnumerator*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.GetEnumerator
+  href: NativeCollections.NativeSortedDictionary-2.html#NativeCollections_NativeSortedDictionary_2_GetEnumerator
+  name: GetEnumerator
+  nameWithType: NativeSortedDictionary<TKey, TValue>.GetEnumerator
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.GetEnumerator
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).GetEnumerator
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).GetEnumerator
+- uid: NativeCollections.NativeSortedDictionary`2.Enumerator
+  commentId: T:NativeCollections.NativeSortedDictionary`2.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedDictionary-2.html
+  name: NativeSortedDictionary<TKey, TValue>.Enumerator
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Enumerator
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Enumerator
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Enumerator
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Enumerator
+  name.vb: NativeSortedDictionary(Of TKey, TValue).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.Enumerator.html

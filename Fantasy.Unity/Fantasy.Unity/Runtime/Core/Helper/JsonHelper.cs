@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 #pragma warning disable CS8603
 
-namespace Fantasy
+namespace Fantasy.Helper
 {
     /// <summary>
     /// 提供操作 JSON 数据的辅助方法。

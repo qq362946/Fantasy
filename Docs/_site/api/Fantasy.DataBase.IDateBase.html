@@ -1,0 +1,2636 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>IDateBase 接口
+ | Fantasy </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="IDateBase 接口
+ | Fantasy ">
+    
+    <meta name="description" content="表示用于执行各种数据库操作的数据库接口。">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="Fantasy">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="搜索" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">搜索结果 <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="首页" data-prev="上一页" data-next="下一页" data-last="尾页"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">显示/隐藏目录</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Fantasy.DataBase.IDateBase">
+
+
+
+  <h1 id="Fantasy_DataBase_IDateBase" data-uid="Fantasy.DataBase.IDateBase" class="text-break">IDateBase 接口
+</h1>
+  <div class="markdown level0 summary"><p>表示用于执行各种数据库操作的数据库接口。</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>命名空间</strong>: <a class="xref" href="Fantasy.html">Fantasy</a>.<a class="xref" href="Fantasy.DataBase.html">DataBase</a></h6>
+  <h6><strong>程序集</strong>: Fantasy.Net.dll</h6>
+  <h5 id="Fantasy_DataBase_IDateBase_syntax">语法</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IDateBase</code></pre>
+  </div>
+  <h3 id="methods">方法
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Count__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Count%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L26">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Count_" data-uid="Fantasy.DataBase.IDateBase.Count*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Count__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.DataBase.IDateBase.Count``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">Count&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>在指定的集合中检索满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体数量。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Count&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Count__1_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Count%60%601(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L22">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Count_" data-uid="Fantasy.DataBase.IDateBase.Count*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Count__1_System_String_" data-uid="Fantasy.DataBase.IDateBase.Count``1(System.String)">Count&lt;T&gt;(string)</h4>
+  <div class="markdown level1 summary"><p>在指定的集合中检索类型 <code class="typeparamref">T</code> 的实体数量。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Count&lt;T&gt;(string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_CreateDB_System_Type_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.CreateDB(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L158">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_CreateDB_" data-uid="Fantasy.DataBase.IDateBase.CreateDB*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_CreateDB_System_Type_" data-uid="Fantasy.DataBase.IDateBase.CreateDB(System.Type)">CreateDB(Type)</h4>
+  <div class="markdown level1 summary"><p>根据指定类型创建数据库，用于存储实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask CreateDB(Type type)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_CreateDB__1.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.CreateDB%60%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L154">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_CreateDB_" data-uid="Fantasy.DataBase.IDateBase.CreateDB*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_CreateDB__1" data-uid="Fantasy.DataBase.IDateBase.CreateDB``1">CreateDB&lt;T&gt;()</h4>
+  <div class="markdown level1 summary"><p>创建指定类型 <code class="typeparamref">T</code> 的数据库，用于存储实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask CreateDB&lt;T&gt;() where T : Entity</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_CreateIndex__1_System_Object___.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.CreateIndex%60%601(System.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L150">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_CreateIndex_" data-uid="Fantasy.DataBase.IDateBase.CreateIndex*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_CreateIndex__1_System_Object___" data-uid="Fantasy.DataBase.IDateBase.CreateIndex``1(System.Object[])">CreateIndex&lt;T&gt;(params object[])</h4>
+  <div class="markdown level1 summary"><p>在默认集合中创建索引，以提高类型 <code class="typeparamref">T</code> 实体的查询性能。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask CreateIndex&lt;T&gt;(params object[] keys) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">keys</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_CreateIndex__1_System_String_System_Object___.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.CreateIndex%60%601(System.String%2CSystem.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L146">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_CreateIndex_" data-uid="Fantasy.DataBase.IDateBase.CreateIndex*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_CreateIndex__1_System_String_System_Object___" data-uid="Fantasy.DataBase.IDateBase.CreateIndex``1(System.String,System.Object[])">CreateIndex&lt;T&gt;(string, params object[])</h4>
+  <div class="markdown level1 summary"><p>在指定的集合中创建索引，以提高类型 <code class="typeparamref">T</code> 实体的查询性能。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask CreateIndex&lt;T&gt;(string collection, params object[] keys) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">keys</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Exist__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Exist%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L34">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Exist_" data-uid="Fantasy.DataBase.IDateBase.Exist*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Exist__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.DataBase.IDateBase.Exist``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">Exist&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>检查指定集合中是否存在满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;bool&gt; Exist&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Exist__1_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Exist%60%601(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L30">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Exist_" data-uid="Fantasy.DataBase.IDateBase.Exist*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Exist__1_System_String_" data-uid="Fantasy.DataBase.IDateBase.Exist``1(System.String)">Exist&lt;T&gt;(string)</h4>
+  <div class="markdown level1 summary"><p>检查指定集合中是否存在类型 <code class="typeparamref">T</code> 的实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;bool&gt; Exist&lt;T&gt;(string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_First__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.First%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L66">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_First_" data-uid="Fantasy.DataBase.IDateBase.First*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_First__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.DataBase.IDateBase.First``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">First&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>检索满足给定筛选条件的类型 <code class="typeparamref">T</code> 的第一个实体，从指定集合中。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;T?&gt; First&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_First__1_System_String_System_String___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.First%60%601(System.String%2CSystem.String%5B%5D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L70">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_First_" data-uid="Fantasy.DataBase.IDateBase.First*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_First__1_System_String_System_String___System_String_" data-uid="Fantasy.DataBase.IDateBase.First``1(System.String,System.String[],System.String)">First&lt;T&gt;(string, string[], string)</h4>
+  <div class="markdown level1 summary"><p>查询指定集合中满足给定 JSON 查询字符串的类型 <code class="typeparamref">T</code> 的第一个实体，仅返回指定列的数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;T&gt; First&lt;T&gt;(string json, string[] cols, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">json</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">cols</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Initialize_Fantasy_Scene_System_String_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Initialize(Fantasy.Scene%2CSystem.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L18">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Initialize_" data-uid="Fantasy.DataBase.IDateBase.Initialize*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Initialize_Fantasy_Scene_System_String_System_String_" data-uid="Fantasy.DataBase.IDateBase.Initialize(Fantasy.Scene,System.String,System.String)">Initialize(Scene, string, string)</h4>
+  <div class="markdown level1 summary"><p>初始化数据库连接。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IDateBase Initialize(Scene scene, string connectionString, string dbName)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Scene.html">Scene</a></td>
+        <td><span class="parametername">scene</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">connectionString</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">dbName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.DataBase.IDateBase.html">IDateBase</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_InsertBatch__1_System_Collections_Generic_IEnumerable___0__System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.InsertBatch%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L118">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_InsertBatch_" data-uid="Fantasy.DataBase.IDateBase.InsertBatch*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_InsertBatch__1_System_Collections_Generic_IEnumerable___0__System_String_" data-uid="Fantasy.DataBase.IDateBase.InsertBatch``1(System.Collections.Generic.IEnumerable{``0},System.String)">InsertBatch&lt;T&gt;(IEnumerable&lt;T&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>批量插入一组类型 <code class="typeparamref">T</code> 实体到指定集合中，如果集合不存在将自动创建。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask InsertBatch&lt;T&gt;(IEnumerable&lt;T&gt; list, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">list</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_InsertBatch__1_System_Object_System_Collections_Generic_IEnumerable___0__System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.InsertBatch%60%601(System.Object%2CSystem.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L122">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_InsertBatch_" data-uid="Fantasy.DataBase.IDateBase.InsertBatch*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_InsertBatch__1_System_Object_System_Collections_Generic_IEnumerable___0__System_String_" data-uid="Fantasy.DataBase.IDateBase.InsertBatch``1(System.Object,System.Collections.Generic.IEnumerable{``0},System.String)">InsertBatch&lt;T&gt;(object, IEnumerable&lt;T&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>通过事务会话，批量插入一组类型 <code class="typeparamref">T</code> 实体到指定集合中，如果集合不存在将自动创建。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask InsertBatch&lt;T&gt;(object transactionSession, IEnumerable&lt;T&gt; list, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">transactionSession</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">list</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Insert__1___0_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Insert%60%601(%60%600%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L114">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Insert_" data-uid="Fantasy.DataBase.IDateBase.Insert*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Insert__1___0_System_String_" data-uid="Fantasy.DataBase.IDateBase.Insert``1(``0,System.String)">Insert&lt;T&gt;(T, string)</h4>
+  <div class="markdown level1 summary"><p>向指定集合中插入一个类型 <code class="typeparamref">T</code> 实体，如果集合不存在将自动创建。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask Insert&lt;T&gt;(T entity, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Query_System_Int64_System_Collections_Generic_List_System_String__System_Collections_Generic_List_Fantasy_Entitas_Entity__.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Query(System.Int64%2CSystem.Collections.Generic.List%7BSystem.String%7D%2CSystem.Collections.Generic.List%7BFantasy.Entitas.Entity%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L82">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Query_" data-uid="Fantasy.DataBase.IDateBase.Query*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Query_System_Int64_System_Collections_Generic_List_System_String__System_Collections_Generic_List_Fantasy_Entitas_Entity__" data-uid="Fantasy.DataBase.IDateBase.Query(System.Int64,System.Collections.Generic.List{System.String},System.Collections.Generic.List{Fantasy.Entitas.Entity})">Query(long, List&lt;string&gt;, List&lt;Entity&gt;)</h4>
+  <div class="markdown level1 summary"><p>查询指定 ID 的多个集合，将结果存储在给定的实体列表中。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask Query(long id, List&lt;string&gt; collectionNames, List&lt;Entity&gt; result)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">collectionNames</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Fantasy.Entitas.Entity.html">Entity</a>&gt;</td>
+        <td><span class="parametername">result</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_QueryByPageOrderBy__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Boolean_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.QueryByPageOrderBy%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.Int32%2CSystem.Int32%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D%2CSystem.Boolean%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L62">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_QueryByPageOrderBy_" data-uid="Fantasy.DataBase.IDateBase.QueryByPageOrderBy*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_QueryByPageOrderBy__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Boolean_System_String_" data-uid="Fantasy.DataBase.IDateBase.QueryByPageOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)">QueryByPageOrderBy&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, int, int, Expression&lt;Func&lt;T, object&gt;&gt;, bool, string)</h4>
+  <div class="markdown level1 summary"><p>从指定集合中按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表，按指定字段排序。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryByPageOrderBy&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, int pageIndex, int pageSize, Expression&lt;Func&lt;T, object&gt;&gt; orderByExpression, bool isAsc = true, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">pageIndex</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">pageSize</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
+        <td><span class="parametername">orderByExpression</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">isAsc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_QueryByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.QueryByPage%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.Int32%2CSystem.Int32%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L54">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_QueryByPage_" data-uid="Fantasy.DataBase.IDateBase.QueryByPage*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_QueryByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String_" data-uid="Fantasy.DataBase.IDateBase.QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)">QueryByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, int, int, string)</h4>
+  <div class="markdown level1 summary"><p>分页查询指定集合中满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, int pageIndex, int pageSize, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">pageIndex</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">pageSize</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_QueryByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.QueryByPage%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.Int32%2CSystem.Int32%2CSystem.String%5B%5D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L58">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_QueryByPage_" data-uid="Fantasy.DataBase.IDateBase.QueryByPage*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_QueryByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String___System_String_" data-uid="Fantasy.DataBase.IDateBase.QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)">QueryByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, int, int, string[], string)</h4>
+  <div class="markdown level1 summary"><p>分页查询指定集合中满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表，仅返回指定列的数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">pageIndex</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">pageSize</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">cols</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_QueryCountAndDatesByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.Int32%2CSystem.Int32%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L46">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_QueryCountAndDatesByPage_" data-uid="Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_QueryCountAndDatesByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String_" data-uid="Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)">QueryCountAndDatesByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, int, int, string)</h4>
+  <div class="markdown level1 summary"><p>按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体数量和日期。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;(int count, List&lt;T&gt; dates)&gt; QueryCountAndDatesByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, int pageIndex, int pageSize, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">pageIndex</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">pageSize</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;(<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.count">count</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt; <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.dates">dates</a>)&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_QueryCountAndDatesByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.Int32%2CSystem.Int32%2CSystem.String%5B%5D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L50">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_QueryCountAndDatesByPage_" data-uid="Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_QueryCountAndDatesByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String___System_String_" data-uid="Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)">QueryCountAndDatesByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, int, int, string[], string)</h4>
+  <div class="markdown level1 summary"><p>按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体数量和日期。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;(int count, List&lt;T&gt; dates)&gt; QueryCountAndDatesByPage&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">pageIndex</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">pageSize</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">cols</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;(<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.count">count</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt; <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.dates">dates</a>)&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_QueryJson__1_System_Int64_System_String_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.QueryJson%60%601(System.Int64%2CSystem.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L94">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_QueryJson_" data-uid="Fantasy.DataBase.IDateBase.QueryJson*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_QueryJson__1_System_Int64_System_String_System_String_" data-uid="Fantasy.DataBase.IDateBase.QueryJson``1(System.Int64,System.String,System.String)">QueryJson&lt;T&gt;(long, string, string)</h4>
+  <div class="markdown level1 summary"><p>根据给定的 JSON 查询字符串查询指定集合中的类型 <code class="typeparamref">T</code> 实体列表，通过指定的任务 ID 进行标识。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryJson&lt;T&gt;(long taskId, string json, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">taskId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">json</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_QueryJson__1_System_String_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.QueryJson%60%601(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L86">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_QueryJson_" data-uid="Fantasy.DataBase.IDateBase.QueryJson*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_QueryJson__1_System_String_System_String_" data-uid="Fantasy.DataBase.IDateBase.QueryJson``1(System.String,System.String)">QueryJson&lt;T&gt;(string, string)</h4>
+  <div class="markdown level1 summary"><p>根据给定的 JSON 查询字符串查询指定集合中的类型 <code class="typeparamref">T</code> 实体列表。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryJson&lt;T&gt;(string json, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">json</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_QueryJson__1_System_String_System_String___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.QueryJson%60%601(System.String%2CSystem.String%5B%5D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L90">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_QueryJson_" data-uid="Fantasy.DataBase.IDateBase.QueryJson*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_QueryJson__1_System_String_System_String___System_String_" data-uid="Fantasy.DataBase.IDateBase.QueryJson``1(System.String,System.String[],System.String)">QueryJson&lt;T&gt;(string, string[], string)</h4>
+  <div class="markdown level1 summary"><p>根据给定的 JSON 查询字符串查询指定集合中的类型 <code class="typeparamref">T</code> 实体列表，仅返回指定列的数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryJson&lt;T&gt;(string json, string[] cols, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">json</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">cols</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_QueryNotLock__1_System_Int64_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.QueryNotLock%60%601(System.Int64%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L38">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_QueryNotLock_" data-uid="Fantasy.DataBase.IDateBase.QueryNotLock*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_QueryNotLock__1_System_Int64_System_String_" data-uid="Fantasy.DataBase.IDateBase.QueryNotLock``1(System.Int64,System.String)">QueryNotLock&lt;T&gt;(long, string)</h4>
+  <div class="markdown level1 summary"><p>从指定集合中检索指定 ID 的类型 <code class="typeparamref">T</code> 的实体，不锁定。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;T&gt; QueryNotLock&lt;T&gt;(long id, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_QueryOrderBy__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Boolean_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.QueryOrderBy%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D%2CSystem.Boolean%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L74">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_QueryOrderBy_" data-uid="Fantasy.DataBase.IDateBase.QueryOrderBy*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_QueryOrderBy__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Boolean_System_String_" data-uid="Fantasy.DataBase.IDateBase.QueryOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)">QueryOrderBy&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, Expression&lt;Func&lt;T, object&gt;&gt;, bool, string)</h4>
+  <div class="markdown level1 summary"><p>从指定集合中按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表，按指定字段排序。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; QueryOrderBy&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, Expression&lt;Func&lt;T, object&gt;&gt; orderByExpression, bool isAsc = true, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
+        <td><span class="parametername">orderByExpression</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">isAsc</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Query__1_System_Int64_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Query%60%601(System.Int64%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L42">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Query_" data-uid="Fantasy.DataBase.IDateBase.Query*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Query__1_System_Int64_System_String_" data-uid="Fantasy.DataBase.IDateBase.Query``1(System.Int64,System.String)">Query&lt;T&gt;(long, string)</h4>
+  <div class="markdown level1 summary"><p>从指定集合中检索指定 ID 的类型 <code class="typeparamref">T</code> 的实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;T&gt; Query&lt;T&gt;(long id, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Query__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Query%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L78">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Query_" data-uid="Fantasy.DataBase.IDateBase.Query*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Query__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.DataBase.IDateBase.Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">Query&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>从指定集合中按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; Query&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Query__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Query%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.String%5B%5D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L98">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Query_" data-uid="Fantasy.DataBase.IDateBase.Query*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Query__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String___System_String_" data-uid="Fantasy.DataBase.IDateBase.Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String[],System.String)">Query&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, string[], string)</h4>
+  <div class="markdown level1 summary"><p>查询指定集合中满足给定筛选条件的类型 <code class="typeparamref">T</code> 实体列表，仅返回指定列的数据。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;List&lt;T&gt;&gt; Query&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, string[] cols, string collection = null) where T : class</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">cols</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Remove__1_System_Int64_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Remove%60%601(System.Int64%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L138">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Remove_" data-uid="Fantasy.DataBase.IDateBase.Remove*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Remove__1_System_Int64_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">Remove&lt;T&gt;(long, Expression&lt;Func&lt;T, bool&gt;&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>根据给定的筛选条件从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Remove&lt;T&gt;(long coroutineLockQueueKey, Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">coroutineLockQueueKey</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Remove__1_System_Int64_System_Object_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Remove%60%601(System.Int64%2CSystem.Object%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L134">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Remove_" data-uid="Fantasy.DataBase.IDateBase.Remove*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Remove__1_System_Int64_System_Object_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_" data-uid="Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)">Remove&lt;T&gt;(long, object, Expression&lt;Func&lt;T, bool&gt;&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>通过事务会话，根据给定的筛选条件从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Remove&lt;T&gt;(long coroutineLockQueueKey, object transactionSession, Expression&lt;Func&lt;T, bool&gt;&gt; filter, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">coroutineLockQueueKey</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">transactionSession</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Remove__1_System_Int64_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Remove%60%601(System.Int64%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L130">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Remove_" data-uid="Fantasy.DataBase.IDateBase.Remove*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Remove__1_System_Int64_System_String_" data-uid="Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.String)">Remove&lt;T&gt;(long, string)</h4>
+  <div class="markdown level1 summary"><p>根据指定的 ID 从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Remove&lt;T&gt;(long id, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Remove__1_System_Object_System_Int64_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Remove%60%601(System.Object%2CSystem.Int64%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L126">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Remove_" data-uid="Fantasy.DataBase.IDateBase.Remove*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Remove__1_System_Object_System_Int64_System_String_" data-uid="Fantasy.DataBase.IDateBase.Remove``1(System.Object,System.Int64,System.String)">Remove&lt;T&gt;(object, long, string)</h4>
+  <div class="markdown level1 summary"><p>通过事务会话，根据指定的 ID 从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Remove&lt;T&gt;(object transactionSession, long id, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">transactionSession</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Save_System_Int64_System_Collections_Generic_List_Fantasy_Entitas_Entity__.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Save(System.Int64%2CSystem.Collections.Generic.List%7BFantasy.Entitas.Entity%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L106">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Save_" data-uid="Fantasy.DataBase.IDateBase.Save*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Save_System_Int64_System_Collections_Generic_List_Fantasy_Entitas_Entity__" data-uid="Fantasy.DataBase.IDateBase.Save(System.Int64,System.Collections.Generic.List{Fantasy.Entitas.Entity})">Save(long, List&lt;Entity&gt;)</h4>
+  <div class="markdown level1 summary"><p>保存一组实体到数据库中，根据实体列表的 ID 进行区分和存储。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask Save(long id, List&lt;Entity&gt; entities)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Fantasy.Entitas.Entity.html">Entity</a>&gt;</td>
+        <td><span class="parametername">entities</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Save__1_System_Object___0_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Save%60%601(System.Object%2C%60%600%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L110">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Save_" data-uid="Fantasy.DataBase.IDateBase.Save*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Save__1_System_Object___0_System_String_" data-uid="Fantasy.DataBase.IDateBase.Save``1(System.Object,``0,System.String)">Save&lt;T&gt;(object, T, string)</h4>
+  <div class="markdown level1 summary"><p>通过事务会话将类型 <code class="typeparamref">T</code> 实体保存到指定集合中，如果集合不存在将自动创建。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask Save&lt;T&gt;(object transactionSession, T entity, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">transactionSession</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Save__1___0_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Save%60%601(%60%600%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L102">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Save_" data-uid="Fantasy.DataBase.IDateBase.Save*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Save__1___0_System_String_" data-uid="Fantasy.DataBase.IDateBase.Save``1(``0,System.String)">Save&lt;T&gt;(T, string)</h4>
+  <div class="markdown level1 summary"><p>保存类型 <code class="typeparamref">T</code> 实体到指定集合中，如果集合不存在将自动创建。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask Save&lt;T&gt;(T entity, string collection = null) where T : Entity, new()</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">entity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase_Sum__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Linq_Expressions_Expression_System_Func___0_System_Object___System_String_.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase.Sum%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L142">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataBase_IDateBase_Sum_" data-uid="Fantasy.DataBase.IDateBase.Sum*"></a>
+  <h4 id="Fantasy_DataBase_IDateBase_Sum__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Linq_Expressions_Expression_System_Func___0_System_Object___System_String_" data-uid="Fantasy.DataBase.IDateBase.Sum``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.String)">Sum&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt;, Expression&lt;Func&lt;T, object&gt;&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>根据给定的筛选条件计算指定集合中类型 <code class="typeparamref">T</code> 实体某个属性的总和。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FTask&lt;long&gt; Sum&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; filter, Expression&lt;Func&lt;T, object&gt;&gt; sumExpression, string collection = null) where T : Entity</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</td>
+        <td><span class="parametername">filter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
+        <td><span class="parametername">sumExpression</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Async.FTask-1.html">FTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">扩展方法</h3>
+  <div>
+      <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataBase_IDateBase.md&amp;value=---%0Auid%3A%20Fantasy.DataBase.IDateBase%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs/#L13" class="contribution-link">查看源代码</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>本文内容</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 using System;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Fantasy
+namespace Fantasy.Entitas.Interface
 {
     /// <summary>
     /// 支持再一个组件里添加多个同类型组件

@@ -1,0 +1,961 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Platform.Net.WorldConfigData
+  commentId: T:Fantasy.Platform.Net.WorldConfigData
+  id: WorldConfigData
+  parent: Fantasy.Platform.Net
+  children:
+  - Fantasy.Platform.Net.WorldConfigData.AfterDeserialization
+  - Fantasy.Platform.Net.WorldConfigData.Dispose
+  - Fantasy.Platform.Net.WorldConfigData.Get(System.UInt32,System.Boolean)
+  - Fantasy.Platform.Net.WorldConfigData.Instance
+  - Fantasy.Platform.Net.WorldConfigData.List
+  - Fantasy.Platform.Net.WorldConfigData.TryGet(System.UInt32,Fantasy.Platform.Net.WorldConfig@)
+  langs:
+  - csharp
+  - vb
+  name: WorldConfigData
+  nameWithType: WorldConfigData
+  fullName: Fantasy.Platform.Net.WorldConfigData
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WorldConfigData
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+    startLine: 21
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Platform.Net
+  syntax:
+    content: >-
+      [ProtoContract]
+
+      public sealed class WorldConfigData : ASerialize, ISupportInitialize, IDisposable, IConfigTable, IProto
+    content.vb: >-
+      <ProtoContract>
+
+      Public NotInheritable Class WorldConfigData Inherits ASerialize Implements ISupportInitialize, IDisposable, IConfigTable, IProto
+  inheritance:
+  - System.Object
+  - Fantasy.Serialize.ASerialize
+  implements:
+  - System.ComponentModel.ISupportInitialize
+  - System.IDisposable
+  - Fantasy.ConfigTable.IConfigTable
+  - Fantasy.Serialize.IProto
+  inheritedMembers:
+  - Fantasy.Serialize.ASerialize.BeginInit
+  - Fantasy.Serialize.ASerialize.EndInit
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Platform.Net.WorldConfigData.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: ProtoBuf.ProtoContractAttribute
+    ctor: ProtoBuf.ProtoContractAttribute.#ctor
+    arguments: []
+- uid: Fantasy.Platform.Net.WorldConfigData.List
+  commentId: P:Fantasy.Platform.Net.WorldConfigData.List
+  id: List
+  parent: Fantasy.Platform.Net.WorldConfigData
+  langs:
+  - csharp
+  - vb
+  name: List
+  nameWithType: WorldConfigData.List
+  fullName: Fantasy.Platform.Net.WorldConfigData.List
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: List
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+    startLine: 24
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Platform.Net
+  syntax:
+    content: >-
+      [ProtoMember(1)]
+
+      public List<WorldConfig> List { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Fantasy.Platform.Net.WorldConfig}
+    content.vb: >-
+      <ProtoMember(1)>
+
+      Public Property List As List(Of WorldConfig)
+  overload: Fantasy.Platform.Net.WorldConfigData.List*
+  attributes:
+  - type: ProtoBuf.ProtoMemberAttribute
+    ctor: ProtoBuf.ProtoMemberAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 1
+- uid: Fantasy.Platform.Net.WorldConfigData.Instance
+  commentId: P:Fantasy.Platform.Net.WorldConfigData.Instance
+  id: Instance
+  parent: Fantasy.Platform.Net.WorldConfigData
+  langs:
+  - csharp
+  - vb
+  name: Instance
+  nameWithType: WorldConfigData.Instance
+  fullName: Fantasy.Platform.Net.WorldConfigData.Instance
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Instance
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+    startLine: 35
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Platform.Net
+  syntax:
+    content: public static WorldConfigData Instance { get; }
+    parameters: []
+    return:
+      type: Fantasy.Platform.Net.WorldConfigData
+    content.vb: Public Shared Property Instance As WorldConfigData
+  overload: Fantasy.Platform.Net.WorldConfigData.Instance*
+- uid: Fantasy.Platform.Net.WorldConfigData.Get(System.UInt32,System.Boolean)
+  commentId: M:Fantasy.Platform.Net.WorldConfigData.Get(System.UInt32,System.Boolean)
+  id: Get(System.UInt32,System.Boolean)
+  parent: Fantasy.Platform.Net.WorldConfigData
+  langs:
+  - csharp
+  - vb
+  name: Get(uint, bool)
+  nameWithType: WorldConfigData.Get(uint, bool)
+  fullName: Fantasy.Platform.Net.WorldConfigData.Get(uint, bool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Get
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+    startLine: 41
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Platform.Net
+  syntax:
+    content: public WorldConfig Get(uint id, bool check = true)
+    parameters:
+    - id: id
+      type: System.UInt32
+    - id: check
+      type: System.Boolean
+    return:
+      type: Fantasy.Platform.Net.WorldConfig
+    content.vb: Public Function [Get](id As UInteger, check As Boolean = True) As WorldConfig
+  overload: Fantasy.Platform.Net.WorldConfigData.Get*
+  nameWithType.vb: WorldConfigData.Get(UInteger, Boolean)
+  fullName.vb: Fantasy.Platform.Net.WorldConfigData.Get(UInteger, Boolean)
+  name.vb: Get(UInteger, Boolean)
+- uid: Fantasy.Platform.Net.WorldConfigData.TryGet(System.UInt32,Fantasy.Platform.Net.WorldConfig@)
+  commentId: M:Fantasy.Platform.Net.WorldConfigData.TryGet(System.UInt32,Fantasy.Platform.Net.WorldConfig@)
+  id: TryGet(System.UInt32,Fantasy.Platform.Net.WorldConfig@)
+  parent: Fantasy.Platform.Net.WorldConfigData
+  langs:
+  - csharp
+  - vb
+  name: TryGet(uint, out WorldConfig)
+  nameWithType: WorldConfigData.TryGet(uint, out WorldConfig)
+  fullName: Fantasy.Platform.Net.WorldConfigData.TryGet(uint, out Fantasy.Platform.Net.WorldConfig)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryGet
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+    startLine: 55
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Platform.Net
+  syntax:
+    content: public bool TryGet(uint id, out WorldConfig config)
+    parameters:
+    - id: id
+      type: System.UInt32
+    - id: config
+      type: Fantasy.Platform.Net.WorldConfig
+    return:
+      type: System.Boolean
+    content.vb: Public Function TryGet(id As UInteger, config As WorldConfig) As Boolean
+  overload: Fantasy.Platform.Net.WorldConfigData.TryGet*
+  nameWithType.vb: WorldConfigData.TryGet(UInteger, WorldConfig)
+  fullName.vb: Fantasy.Platform.Net.WorldConfigData.TryGet(UInteger, Fantasy.Platform.Net.WorldConfig)
+  name.vb: TryGet(UInteger, WorldConfig)
+- uid: Fantasy.Platform.Net.WorldConfigData.AfterDeserialization
+  commentId: M:Fantasy.Platform.Net.WorldConfigData.AfterDeserialization
+  id: AfterDeserialization
+  parent: Fantasy.Platform.Net.WorldConfigData
+  langs:
+  - csharp
+  - vb
+  name: AfterDeserialization()
+  nameWithType: WorldConfigData.AfterDeserialization()
+  fullName: Fantasy.Platform.Net.WorldConfigData.AfterDeserialization()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AfterDeserialization
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+    startLine: 67
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Platform.Net
+  example: []
+  syntax:
+    content: public override void AfterDeserialization()
+    content.vb: Public Overrides Sub AfterDeserialization()
+  overridden: Fantasy.Serialize.ASerialize.AfterDeserialization
+  overload: Fantasy.Platform.Net.WorldConfigData.AfterDeserialization*
+- uid: Fantasy.Platform.Net.WorldConfigData.Dispose
+  commentId: M:Fantasy.Platform.Net.WorldConfigData.Dispose
+  id: Dispose
+  parent: Fantasy.Platform.Net.WorldConfigData
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: WorldConfigData.Dispose()
+  fullName: Fantasy.Platform.Net.WorldConfigData.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/WorldConfig.cs
+    startLine: 82
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Platform.Net
+  summary: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  example: []
+  syntax:
+    content: public override void Dispose()
+    content.vb: Public Overrides Sub Dispose()
+  overridden: Fantasy.Serialize.ASerialize.Dispose
+  overload: Fantasy.Platform.Net.WorldConfigData.Dispose*
+references:
+- uid: Fantasy.Platform.Net
+  commentId: N:Fantasy.Platform.Net
+  href: Fantasy.html
+  name: Fantasy.Platform.Net
+  nameWithType: Fantasy.Platform.Net
+  fullName: Fantasy.Platform.Net
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Serialize.ASerialize
+  commentId: T:Fantasy.Serialize.ASerialize
+  parent: Fantasy.Serialize
+  href: Fantasy.Serialize.ASerialize.html
+  name: ASerialize
+  nameWithType: ASerialize
+  fullName: Fantasy.Serialize.ASerialize
+- uid: System.ComponentModel.ISupportInitialize
+  commentId: T:System.ComponentModel.ISupportInitialize
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.isupportinitialize
+  name: ISupportInitialize
+  nameWithType: ISupportInitialize
+  fullName: System.ComponentModel.ISupportInitialize
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Fantasy.ConfigTable.IConfigTable
+  commentId: T:Fantasy.ConfigTable.IConfigTable
+  parent: Fantasy.ConfigTable
+  href: Fantasy.ConfigTable.IConfigTable.html
+  name: IConfigTable
+  nameWithType: IConfigTable
+  fullName: Fantasy.ConfigTable.IConfigTable
+- uid: Fantasy.Serialize.IProto
+  commentId: T:Fantasy.Serialize.IProto
+  parent: Fantasy.Serialize
+  href: Fantasy.Serialize.IProto.html
+  name: IProto
+  nameWithType: IProto
+  fullName: Fantasy.Serialize.IProto
+- uid: Fantasy.Serialize.ASerialize.BeginInit
+  commentId: M:Fantasy.Serialize.ASerialize.BeginInit
+  parent: Fantasy.Serialize.ASerialize
+  href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_BeginInit
+  name: BeginInit()
+  nameWithType: ASerialize.BeginInit()
+  fullName: Fantasy.Serialize.ASerialize.BeginInit()
+  spec.csharp:
+  - uid: Fantasy.Serialize.ASerialize.BeginInit
+    name: BeginInit
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_BeginInit
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.ASerialize.BeginInit
+    name: BeginInit
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_BeginInit
+  - name: (
+  - name: )
+- uid: Fantasy.Serialize.ASerialize.EndInit
+  commentId: M:Fantasy.Serialize.ASerialize.EndInit
+  parent: Fantasy.Serialize.ASerialize
+  href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_EndInit
+  name: EndInit()
+  nameWithType: ASerialize.EndInit()
+  fullName: Fantasy.Serialize.ASerialize.EndInit()
+  spec.csharp:
+  - uid: Fantasy.Serialize.ASerialize.EndInit
+    name: EndInit
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_EndInit
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.ASerialize.EndInit
+    name: EndInit
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_EndInit
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Platform.Net.WorldConfigData.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<WorldConfigData>(WorldConfigData)
+  nameWithType: JsonHelper.ToJson<WorldConfigData>(WorldConfigData)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Platform.Net.WorldConfigData>(Fantasy.Platform.Net.WorldConfigData)
+  nameWithType.vb: JsonHelper.ToJson(Of WorldConfigData)(WorldConfigData)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Platform.Net.WorldConfigData)(Fantasy.Platform.Net.WorldConfigData)
+  name.vb: ToJson(Of WorldConfigData)(WorldConfigData)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Platform.Net.WorldConfigData)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Platform.Net.WorldConfigData
+    name: WorldConfigData
+    href: Fantasy.Platform.Net.WorldConfigData.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Platform.Net.WorldConfigData
+    name: WorldConfigData
+    href: Fantasy.Platform.Net.WorldConfigData.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Platform.Net.WorldConfigData)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Platform.Net.WorldConfigData
+    name: WorldConfigData
+    href: Fantasy.Platform.Net.WorldConfigData.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Platform.Net.WorldConfigData
+    name: WorldConfigData
+    href: Fantasy.Platform.Net.WorldConfigData.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Serialize
+  commentId: N:Fantasy.Serialize
+  href: Fantasy.html
+  name: Fantasy.Serialize
+  nameWithType: Fantasy.Serialize
+  fullName: Fantasy.Serialize
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: Fantasy.ConfigTable
+  commentId: N:Fantasy.ConfigTable
+  href: Fantasy.html
+  name: Fantasy.ConfigTable
+  nameWithType: Fantasy.ConfigTable
+  fullName: Fantasy.ConfigTable
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.ConfigTable
+    name: ConfigTable
+    href: Fantasy.ConfigTable.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.ConfigTable
+    name: ConfigTable
+    href: Fantasy.ConfigTable.html
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Platform.Net.WorldConfigData.List*
+  commentId: Overload:Fantasy.Platform.Net.WorldConfigData.List
+  href: Fantasy.Platform.Net.WorldConfigData.html#Fantasy_Platform_Net_WorldConfigData_List
+  name: List
+  nameWithType: WorldConfigData.List
+  fullName: Fantasy.Platform.Net.WorldConfigData.List
+- uid: System.Collections.Generic.List{Fantasy.Platform.Net.WorldConfig}
+  commentId: T:System.Collections.Generic.List{Fantasy.Platform.Net.WorldConfig}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<WorldConfig>
+  nameWithType: List<WorldConfig>
+  fullName: System.Collections.Generic.List<Fantasy.Platform.Net.WorldConfig>
+  nameWithType.vb: List(Of WorldConfig)
+  fullName.vb: System.Collections.Generic.List(Of Fantasy.Platform.Net.WorldConfig)
+  name.vb: List(Of WorldConfig)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: Fantasy.Platform.Net.WorldConfig
+    name: WorldConfig
+    href: Fantasy.Platform.Net.WorldConfig.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Platform.Net.WorldConfig
+    name: WorldConfig
+    href: Fantasy.Platform.Net.WorldConfig.html
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Fantasy.Platform.Net.WorldConfigData.Instance*
+  commentId: Overload:Fantasy.Platform.Net.WorldConfigData.Instance
+  href: Fantasy.Platform.Net.WorldConfigData.html#Fantasy_Platform_Net_WorldConfigData_Instance
+  name: Instance
+  nameWithType: WorldConfigData.Instance
+  fullName: Fantasy.Platform.Net.WorldConfigData.Instance
+- uid: Fantasy.Platform.Net.WorldConfigData
+  commentId: T:Fantasy.Platform.Net.WorldConfigData
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.WorldConfigData.html
+  name: WorldConfigData
+  nameWithType: WorldConfigData
+  fullName: Fantasy.Platform.Net.WorldConfigData
+- uid: Fantasy.Platform.Net.WorldConfigData.Get*
+  commentId: Overload:Fantasy.Platform.Net.WorldConfigData.Get
+  href: Fantasy.Platform.Net.WorldConfigData.html#Fantasy_Platform_Net_WorldConfigData_Get_System_UInt32_System_Boolean_
+  name: Get
+  nameWithType: WorldConfigData.Get
+  fullName: Fantasy.Platform.Net.WorldConfigData.Get
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Fantasy.Platform.Net.WorldConfig
+  commentId: T:Fantasy.Platform.Net.WorldConfig
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.WorldConfig.html
+  name: WorldConfig
+  nameWithType: WorldConfig
+  fullName: Fantasy.Platform.Net.WorldConfig
+- uid: Fantasy.Platform.Net.WorldConfigData.TryGet*
+  commentId: Overload:Fantasy.Platform.Net.WorldConfigData.TryGet
+  href: Fantasy.Platform.Net.WorldConfigData.html#Fantasy_Platform_Net_WorldConfigData_TryGet_System_UInt32_Fantasy_Platform_Net_WorldConfig__
+  name: TryGet
+  nameWithType: WorldConfigData.TryGet
+  fullName: Fantasy.Platform.Net.WorldConfigData.TryGet
+- uid: Fantasy.Serialize.ASerialize.AfterDeserialization
+  commentId: M:Fantasy.Serialize.ASerialize.AfterDeserialization
+  parent: Fantasy.Serialize.ASerialize
+  href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_AfterDeserialization
+  name: AfterDeserialization()
+  nameWithType: ASerialize.AfterDeserialization()
+  fullName: Fantasy.Serialize.ASerialize.AfterDeserialization()
+  spec.csharp:
+  - uid: Fantasy.Serialize.ASerialize.AfterDeserialization
+    name: AfterDeserialization
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_AfterDeserialization
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.ASerialize.AfterDeserialization
+    name: AfterDeserialization
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_AfterDeserialization
+  - name: (
+  - name: )
+- uid: Fantasy.Platform.Net.WorldConfigData.AfterDeserialization*
+  commentId: Overload:Fantasy.Platform.Net.WorldConfigData.AfterDeserialization
+  href: Fantasy.Platform.Net.WorldConfigData.html#Fantasy_Platform_Net_WorldConfigData_AfterDeserialization
+  name: AfterDeserialization
+  nameWithType: WorldConfigData.AfterDeserialization
+  fullName: Fantasy.Platform.Net.WorldConfigData.AfterDeserialization
+- uid: Fantasy.Serialize.ASerialize.Dispose
+  commentId: M:Fantasy.Serialize.ASerialize.Dispose
+  parent: Fantasy.Serialize.ASerialize
+  href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_Dispose
+  name: Dispose()
+  nameWithType: ASerialize.Dispose()
+  fullName: Fantasy.Serialize.ASerialize.Dispose()
+  spec.csharp:
+  - uid: Fantasy.Serialize.ASerialize.Dispose
+    name: Dispose
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_Dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.ASerialize.Dispose
+    name: Dispose
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_Dispose
+  - name: (
+  - name: )
+- uid: Fantasy.Platform.Net.WorldConfigData.Dispose*
+  commentId: Overload:Fantasy.Platform.Net.WorldConfigData.Dispose
+  href: Fantasy.Platform.Net.WorldConfigData.html#Fantasy_Platform_Net_WorldConfigData_Dispose
+  name: Dispose
+  nameWithType: WorldConfigData.Dispose
+  fullName: Fantasy.Platform.Net.WorldConfigData.Dispose

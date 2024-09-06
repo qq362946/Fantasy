@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using Fantasy.Entitas;
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 
-namespace Fantasy
+namespace Fantasy.Async
 {
     /// <summary>
     /// 协程锁组件
@@ -11,12 +13,10 @@ namespace Fantasy
     {
         private long _lockId;
         private CoroutineLockPool _coroutineLockPool;
-        
-        public WaitCoroutineLockPool WaitCoroutineLockPool { get; private set; }
-        public CoroutineLockQueuePool CoroutineLockQueuePool { get; private set; }
+        internal WaitCoroutineLockPool WaitCoroutineLockPool { get; private set; }
+        internal CoroutineLockQueuePool CoroutineLockQueuePool { get; private set; }
         private readonly Dictionary<long, CoroutineLock> _coroutineLocks = new Dictionary<long, CoroutineLock>();
-
-        public CoroutineLockComponent Initialize()
+        internal CoroutineLockComponent Initialize()
         {
             _coroutineLockPool = new CoroutineLockPool();
             CoroutineLockQueuePool = new CoroutineLockQueuePool();
@@ -24,9 +24,11 @@ namespace Fantasy
             return this;
         }
         
-        public long LockId => ++_lockId;
+        internal long LockId => ++_lockId;
         
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public override void Dispose()
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             if (IsDisposed)
             {

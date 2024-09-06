@@ -1,0 +1,1874 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeStack`1
+  commentId: T:NativeCollections.NativeStack`1
+  id: NativeStack`1
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeStack`1.#ctor(System.Int32)
+  - NativeCollections.NativeStack`1.Clear
+  - NativeCollections.NativeStack`1.Count
+  - NativeCollections.NativeStack`1.Dispose
+  - NativeCollections.NativeStack`1.Empty
+  - NativeCollections.NativeStack`1.EnsureCapacity(System.Int32)
+  - NativeCollections.NativeStack`1.Equals(NativeCollections.NativeStack{`0})
+  - NativeCollections.NativeStack`1.Equals(System.Object)
+  - NativeCollections.NativeStack`1.GetEnumerator
+  - NativeCollections.NativeStack`1.GetHashCode
+  - NativeCollections.NativeStack`1.IsCreated
+  - NativeCollections.NativeStack`1.IsEmpty
+  - NativeCollections.NativeStack`1.Item(System.Int32)
+  - NativeCollections.NativeStack`1.Item(System.UInt32)
+  - NativeCollections.NativeStack`1.Peek
+  - NativeCollections.NativeStack`1.Pop
+  - NativeCollections.NativeStack`1.Push(`0@)
+  - NativeCollections.NativeStack`1.ToString
+  - NativeCollections.NativeStack`1.TrimExcess
+  - NativeCollections.NativeStack`1.TryPeek(`0@)
+  - NativeCollections.NativeStack`1.TryPop(`0@)
+  - NativeCollections.NativeStack`1.TryPush(`0@)
+  - NativeCollections.NativeStack`1.op_Equality(NativeCollections.NativeStack{`0},NativeCollections.NativeStack{`0})
+  - NativeCollections.NativeStack`1.op_Inequality(NativeCollections.NativeStack{`0},NativeCollections.NativeStack{`0})
+  langs:
+  - csharp
+  - vb
+  name: NativeStack<T>
+  nameWithType: NativeStack<T>
+  fullName: NativeCollections.NativeStack<T>
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeStack
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 22
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native stack
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeStack<T> : IDisposable, IEquatable<NativeStack<T>> where T : unmanaged
+    typeParameters:
+    - id: T
+      description: Type
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeStack(Of T As Structure) Implements IDisposable, IEquatable(Of NativeStack(Of T))
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeStack`1}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeStack`1.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+  nameWithType.vb: NativeStack(Of T)
+  fullName.vb: NativeCollections.NativeStack(Of T)
+  name.vb: NativeStack(Of T)
+- uid: NativeCollections.NativeStack`1.#ctor(System.Int32)
+  commentId: M:NativeCollections.NativeStack`1.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: NativeStack(int)
+  nameWithType: NativeStack<T>.NativeStack(int)
+  fullName: NativeCollections.NativeStack<T>.NativeStack(int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 61
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeStack(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(capacity As Integer)
+  overload: NativeCollections.NativeStack`1.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeStack(Of T).New(Integer)
+  fullName.vb: NativeCollections.NativeStack(Of T).New(Integer)
+  name.vb: New(Integer)
+- uid: NativeCollections.NativeStack`1.IsCreated
+  commentId: P:NativeCollections.NativeStack`1.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeStack<T>.IsCreated
+  fullName: NativeCollections.NativeStack<T>.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 78
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeStack`1.IsCreated*
+  nameWithType.vb: NativeStack(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeStack(Of T).IsCreated
+- uid: NativeCollections.NativeStack`1.IsEmpty
+  commentId: P:NativeCollections.NativeStack`1.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativeStack<T>.IsEmpty
+  fullName: NativeCollections.NativeStack<T>.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 83
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is empty
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativeStack`1.IsEmpty*
+  nameWithType.vb: NativeStack(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeStack(Of T).IsEmpty
+- uid: NativeCollections.NativeStack`1.Item(System.Int32)
+  commentId: P:NativeCollections.NativeStack`1.Item(System.Int32)
+  id: Item(System.Int32)
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: this[int]
+  nameWithType: NativeStack<T>.this[int]
+  fullName: NativeCollections.NativeStack<T>.this[int]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 89
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get reference
+  example: []
+  syntax:
+    content: public ref T this[int index] { get; }
+    parameters:
+    - id: index
+      type: System.Int32
+      description: Index
+    return:
+      type: '{T}'
+    content.vb: Public ReadOnly Default ByRef Property this[](index As Integer) As T
+  overload: NativeCollections.NativeStack`1.Item*
+  nameWithType.vb: NativeStack(Of T).this[](Integer)
+  fullName.vb: NativeCollections.NativeStack(Of T).this[](Integer)
+  name.vb: this[](Integer)
+- uid: NativeCollections.NativeStack`1.Item(System.UInt32)
+  commentId: P:NativeCollections.NativeStack`1.Item(System.UInt32)
+  id: Item(System.UInt32)
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: this[uint]
+  nameWithType: NativeStack<T>.this[uint]
+  fullName: NativeCollections.NativeStack<T>.this[uint]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 99
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get reference
+  example: []
+  syntax:
+    content: public ref T this[uint index] { get; }
+    parameters:
+    - id: index
+      type: System.UInt32
+      description: Index
+    return:
+      type: '{T}'
+    content.vb: Public ReadOnly Default ByRef Property this[](index As UInteger) As T
+  overload: NativeCollections.NativeStack`1.Item*
+  nameWithType.vb: NativeStack(Of T).this[](UInteger)
+  fullName.vb: NativeCollections.NativeStack(Of T).this[](UInteger)
+  name.vb: this[](UInteger)
+- uid: NativeCollections.NativeStack`1.Count
+  commentId: P:NativeCollections.NativeStack`1.Count
+  id: Count
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: NativeStack<T>.Count
+  fullName: NativeCollections.NativeStack<T>.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 108
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Count
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: NativeCollections.NativeStack`1.Count*
+  nameWithType.vb: NativeStack(Of T).Count
+  fullName.vb: NativeCollections.NativeStack(Of T).Count
+- uid: NativeCollections.NativeStack`1.Equals(NativeCollections.NativeStack{`0})
+  commentId: M:NativeCollections.NativeStack`1.Equals(NativeCollections.NativeStack{`0})
+  id: Equals(NativeCollections.NativeStack{`0})
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeStack<T>)
+  nameWithType: NativeStack<T>.Equals(NativeStack<T>)
+  fullName: NativeCollections.NativeStack<T>.Equals(NativeCollections.NativeStack<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 115
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeStack<T> other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeStack`1
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeStack(Of T)) As Boolean
+  overload: NativeCollections.NativeStack`1.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeStack`1}.Equals(NativeCollections.NativeStack{{T}})
+  nameWithType.vb: NativeStack(Of T).Equals(NativeStack(Of T))
+  fullName.vb: NativeCollections.NativeStack(Of T).Equals(NativeCollections.NativeStack(Of T))
+  name.vb: Equals(NativeStack(Of T))
+- uid: NativeCollections.NativeStack`1.Equals(System.Object)
+  commentId: M:NativeCollections.NativeStack`1.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeStack<T>.Equals(object?)
+  fullName: NativeCollections.NativeStack<T>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 122
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeStack`1.Equals*
+  nameWithType.vb: NativeStack(Of T).Equals(Object)
+  fullName.vb: NativeCollections.NativeStack(Of T).Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeStack`1.GetHashCode
+  commentId: M:NativeCollections.NativeStack`1.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeStack<T>.GetHashCode()
+  fullName: NativeCollections.NativeStack<T>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 128
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeStack`1.GetHashCode*
+  nameWithType.vb: NativeStack(Of T).GetHashCode()
+  fullName.vb: NativeCollections.NativeStack(Of T).GetHashCode()
+- uid: NativeCollections.NativeStack`1.ToString
+  commentId: M:NativeCollections.NativeStack`1.ToString
+  id: ToString
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeStack<T>.ToString()
+  fullName: NativeCollections.NativeStack<T>.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 134
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeStack`1.ToString*
+  nameWithType.vb: NativeStack(Of T).ToString()
+  fullName.vb: NativeCollections.NativeStack(Of T).ToString()
+- uid: NativeCollections.NativeStack`1.op_Equality(NativeCollections.NativeStack{`0},NativeCollections.NativeStack{`0})
+  commentId: M:NativeCollections.NativeStack`1.op_Equality(NativeCollections.NativeStack{`0},NativeCollections.NativeStack{`0})
+  id: op_Equality(NativeCollections.NativeStack{`0},NativeCollections.NativeStack{`0})
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeStack<T>, NativeStack<T>)
+  nameWithType: NativeStack<T>.operator ==(NativeStack<T>, NativeStack<T>)
+  fullName: NativeCollections.NativeStack<T>.operator ==(NativeCollections.NativeStack<T>, NativeCollections.NativeStack<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 142
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeStack<T> left, NativeStack<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeStack`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeStack`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeStack(Of T), right As NativeStack(Of T)) As Boolean
+  overload: NativeCollections.NativeStack`1.op_Equality*
+  nameWithType.vb: NativeStack(Of T).=(NativeStack(Of T), NativeStack(Of T))
+  fullName.vb: NativeCollections.NativeStack(Of T).=(NativeCollections.NativeStack(Of T), NativeCollections.NativeStack(Of T))
+  name.vb: =(NativeStack(Of T), NativeStack(Of T))
+- uid: NativeCollections.NativeStack`1.op_Inequality(NativeCollections.NativeStack{`0},NativeCollections.NativeStack{`0})
+  commentId: M:NativeCollections.NativeStack`1.op_Inequality(NativeCollections.NativeStack{`0},NativeCollections.NativeStack{`0})
+  id: op_Inequality(NativeCollections.NativeStack{`0},NativeCollections.NativeStack{`0})
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeStack<T>, NativeStack<T>)
+  nameWithType: NativeStack<T>.operator !=(NativeStack<T>, NativeStack<T>)
+  fullName: NativeCollections.NativeStack<T>.operator !=(NativeCollections.NativeStack<T>, NativeCollections.NativeStack<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 150
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeStack<T> left, NativeStack<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeStack`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeStack`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeStack(Of T), right As NativeStack(Of T)) As Boolean
+  overload: NativeCollections.NativeStack`1.op_Inequality*
+  nameWithType.vb: NativeStack(Of T).<>(NativeStack(Of T), NativeStack(Of T))
+  fullName.vb: NativeCollections.NativeStack(Of T).<>(NativeCollections.NativeStack(Of T), NativeCollections.NativeStack(Of T))
+  name.vb: <>(NativeStack(Of T), NativeStack(Of T))
+- uid: NativeCollections.NativeStack`1.Dispose
+  commentId: M:NativeCollections.NativeStack`1.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeStack<T>.Dispose()
+  fullName: NativeCollections.NativeStack<T>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 155
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeStack`1.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeStack(Of T).Dispose()
+  fullName.vb: NativeCollections.NativeStack(Of T).Dispose()
+- uid: NativeCollections.NativeStack`1.Clear
+  commentId: M:NativeCollections.NativeStack`1.Clear
+  id: Clear
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: NativeStack<T>.Clear()
+  fullName: NativeCollections.NativeStack<T>.Clear()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clear
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 167
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Clear
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Clear()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Clear()
+  overload: NativeCollections.NativeStack`1.Clear*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeStack(Of T).Clear()
+  fullName.vb: NativeCollections.NativeStack(Of T).Clear()
+- uid: NativeCollections.NativeStack`1.Push(`0@)
+  commentId: M:NativeCollections.NativeStack`1.Push(`0@)
+  id: Push(`0@)
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: Push(in T)
+  nameWithType: NativeStack<T>.Push(in T)
+  fullName: NativeCollections.NativeStack<T>.Push(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Push
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 178
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Push
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Push(in T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Push(item As T)
+  overload: NativeCollections.NativeStack`1.Push*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeStack(Of T).Push(T)
+  fullName.vb: NativeCollections.NativeStack(Of T).Push(T)
+  name.vb: Push(T)
+- uid: NativeCollections.NativeStack`1.TryPush(`0@)
+  commentId: M:NativeCollections.NativeStack`1.TryPush(`0@)
+  id: TryPush(`0@)
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: TryPush(in T)
+  nameWithType: NativeStack<T>.TryPush(in T)
+  fullName: NativeCollections.NativeStack<T>.TryPush(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryPush
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 202
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try push
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryPush(in T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    return:
+      type: System.Boolean
+      description: Pushed
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryPush(item As T) As Boolean
+  overload: NativeCollections.NativeStack`1.TryPush*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeStack(Of T).TryPush(T)
+  fullName.vb: NativeCollections.NativeStack(Of T).TryPush(T)
+  name.vb: TryPush(T)
+- uid: NativeCollections.NativeStack`1.Pop
+  commentId: M:NativeCollections.NativeStack`1.Pop
+  id: Pop
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: Pop()
+  nameWithType: NativeStack<T>.Pop()
+  fullName: NativeCollections.NativeStack<T>.Pop()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Pop
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 221
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Pop
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public T Pop()
+    return:
+      type: '{T}'
+      description: Item
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Pop() As T
+  overload: NativeCollections.NativeStack`1.Pop*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeStack(Of T).Pop()
+  fullName.vb: NativeCollections.NativeStack(Of T).Pop()
+- uid: NativeCollections.NativeStack`1.TryPop(`0@)
+  commentId: M:NativeCollections.NativeStack`1.TryPop(`0@)
+  id: TryPop(`0@)
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: TryPop(out T)
+  nameWithType: NativeStack<T>.TryPop(out T)
+  fullName: NativeCollections.NativeStack<T>.TryPop(out T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryPop
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 238
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try pop
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryPop(out T result)
+    parameters:
+    - id: result
+      type: '{T}'
+      description: Item
+    return:
+      type: System.Boolean
+      description: Popped
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryPop(result As T) As Boolean
+  overload: NativeCollections.NativeStack`1.TryPop*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeStack(Of T).TryPop(T)
+  fullName.vb: NativeCollections.NativeStack(Of T).TryPop(T)
+  name.vb: TryPop(T)
+- uid: NativeCollections.NativeStack`1.Peek
+  commentId: M:NativeCollections.NativeStack`1.Peek
+  id: Peek
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: Peek()
+  nameWithType: NativeStack<T>.Peek()
+  fullName: NativeCollections.NativeStack<T>.Peek()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Peek
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 258
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Peek
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public T Peek()
+    return:
+      type: '{T}'
+      description: Item
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Peek() As T
+  overload: NativeCollections.NativeStack`1.Peek*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeStack(Of T).Peek()
+  fullName.vb: NativeCollections.NativeStack(Of T).Peek()
+- uid: NativeCollections.NativeStack`1.TryPeek(`0@)
+  commentId: M:NativeCollections.NativeStack`1.TryPeek(`0@)
+  id: TryPeek(`0@)
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: TryPeek(out T)
+  nameWithType: NativeStack<T>.TryPeek(out T)
+  fullName: NativeCollections.NativeStack<T>.TryPeek(out T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryPeek
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 270
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try peek
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryPeek(out T result)
+    parameters:
+    - id: result
+      type: '{T}'
+      description: Item
+    return:
+      type: System.Boolean
+      description: Peeked
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryPeek(result As T) As Boolean
+  overload: NativeCollections.NativeStack`1.TryPeek*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeStack(Of T).TryPeek(T)
+  fullName.vb: NativeCollections.NativeStack(Of T).TryPeek(T)
+  name.vb: TryPeek(T)
+- uid: NativeCollections.NativeStack`1.EnsureCapacity(System.Int32)
+  commentId: M:NativeCollections.NativeStack`1.EnsureCapacity(System.Int32)
+  id: EnsureCapacity(System.Int32)
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: EnsureCapacity(int)
+  nameWithType: NativeStack<T>.EnsureCapacity(int)
+  fullName: NativeCollections.NativeStack<T>.EnsureCapacity(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: EnsureCapacity
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 289
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Ensure capacity
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int EnsureCapacity(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    return:
+      type: System.Int32
+      description: New capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function EnsureCapacity(capacity As Integer) As Integer
+  overload: NativeCollections.NativeStack`1.EnsureCapacity*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeStack(Of T).EnsureCapacity(Integer)
+  fullName.vb: NativeCollections.NativeStack(Of T).EnsureCapacity(Integer)
+  name.vb: EnsureCapacity(Integer)
+- uid: NativeCollections.NativeStack`1.TrimExcess
+  commentId: M:NativeCollections.NativeStack`1.TrimExcess
+  id: TrimExcess
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: TrimExcess()
+  nameWithType: NativeStack<T>.TrimExcess()
+  fullName: NativeCollections.NativeStack<T>.TrimExcess()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TrimExcess
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 303
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Trim excess
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int TrimExcess()
+    return:
+      type: System.Int32
+      description: New capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TrimExcess() As Integer
+  overload: NativeCollections.NativeStack`1.TrimExcess*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeStack(Of T).TrimExcess()
+  fullName.vb: NativeCollections.NativeStack(Of T).TrimExcess()
+- uid: NativeCollections.NativeStack`1.Empty
+  commentId: P:NativeCollections.NativeStack`1.Empty
+  id: Empty
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeStack<T>.Empty
+  fullName: NativeCollections.NativeStack<T>.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 347
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeStack<T> Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeStack`1
+    content.vb: Public Shared ReadOnly Property Empty As NativeStack(Of T)
+  overload: NativeCollections.NativeStack`1.Empty*
+  nameWithType.vb: NativeStack(Of T).Empty
+  fullName.vb: NativeCollections.NativeStack(Of T).Empty
+- uid: NativeCollections.NativeStack`1.GetEnumerator
+  commentId: M:NativeCollections.NativeStack`1.GetEnumerator
+  id: GetEnumerator
+  parent: NativeCollections.NativeStack`1
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: NativeStack<T>.GetEnumerator()
+  fullName: NativeCollections.NativeStack<T>.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetEnumerator
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeStack.cs
+    startLine: 353
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get enumerator
+  example: []
+  syntax:
+    content: public NativeStack<T>.Enumerator GetEnumerator()
+    return:
+      type: NativeCollections.NativeStack`1.Enumerator
+      description: Enumerator
+    content.vb: Public Function GetEnumerator() As NativeStack(Of T).Enumerator
+  overload: NativeCollections.NativeStack`1.GetEnumerator*
+  nameWithType.vb: NativeStack(Of T).GetEnumerator()
+  fullName.vb: NativeCollections.NativeStack(Of T).GetEnumerator()
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeStack`1}
+  commentId: T:System.IEquatable{NativeCollections.NativeStack`1}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeStack<T>>
+  nameWithType: IEquatable<NativeStack<T>>
+  fullName: System.IEquatable<NativeCollections.NativeStack<T>>
+  nameWithType.vb: IEquatable(Of NativeStack(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeStack(Of T))
+  name.vb: IEquatable(Of NativeStack(Of T))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeStack`1.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeStack<T>>(NativeStack<T>)
+  nameWithType: JsonHelper.ToJson<NativeStack<T>>(NativeStack<T>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeStack<T>>(NativeCollections.NativeStack<T>)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeStack(Of T))(NativeStack(Of T))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeStack(Of T))(NativeCollections.NativeStack(Of T))
+  name.vb: ToJson(Of NativeStack(Of T))(NativeStack(Of T))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeStack{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeStack{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeStack`1.#ctor*
+  commentId: Overload:NativeCollections.NativeStack`1.#ctor
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1__ctor_System_Int32_
+  name: NativeStack
+  nameWithType: NativeStack<T>.NativeStack
+  fullName: NativeCollections.NativeStack<T>.NativeStack
+  nameWithType.vb: NativeStack(Of T).New
+  fullName.vb: NativeCollections.NativeStack(Of T).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativeStack`1.IsCreated*
+  commentId: Overload:NativeCollections.NativeStack`1.IsCreated
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_IsCreated
+  name: IsCreated
+  nameWithType: NativeStack<T>.IsCreated
+  fullName: NativeCollections.NativeStack<T>.IsCreated
+  nameWithType.vb: NativeStack(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeStack(Of T).IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeStack`1.IsEmpty*
+  commentId: Overload:NativeCollections.NativeStack`1.IsEmpty
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_IsEmpty
+  name: IsEmpty
+  nameWithType: NativeStack<T>.IsEmpty
+  fullName: NativeCollections.NativeStack<T>.IsEmpty
+  nameWithType.vb: NativeStack(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeStack(Of T).IsEmpty
+- uid: NativeCollections.NativeStack`1.Item*
+  commentId: Overload:NativeCollections.NativeStack`1.Item
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_Item_System_Int32_
+  name: this
+  nameWithType: NativeStack<T>.this
+  fullName: NativeCollections.NativeStack<T>.this
+  nameWithType.vb: NativeStack(Of T).this[]
+  fullName.vb: NativeCollections.NativeStack(Of T).this[]
+  name.vb: this[]
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: NativeCollections.NativeStack`1.Count*
+  commentId: Overload:NativeCollections.NativeStack`1.Count
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_Count
+  name: Count
+  nameWithType: NativeStack<T>.Count
+  fullName: NativeCollections.NativeStack<T>.Count
+  nameWithType.vb: NativeStack(Of T).Count
+  fullName.vb: NativeCollections.NativeStack(Of T).Count
+- uid: NativeCollections.NativeStack`1.Equals*
+  commentId: Overload:NativeCollections.NativeStack`1.Equals
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_Equals_NativeCollections_NativeStack__0__
+  name: Equals
+  nameWithType: NativeStack<T>.Equals
+  fullName: NativeCollections.NativeStack<T>.Equals
+  nameWithType.vb: NativeStack(Of T).Equals
+  fullName.vb: NativeCollections.NativeStack(Of T).Equals
+- uid: System.IEquatable{NativeCollections.NativeStack`1}.Equals(NativeCollections.NativeStack{{T}})
+  commentId: M:System.IEquatable{NativeCollections.NativeStack`1}.Equals(NativeCollections.NativeStack{`0})
+  parent: System.IEquatable{NativeCollections.NativeStack`1}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeStack<T>)
+  nameWithType: IEquatable<NativeStack<T>>.Equals(NativeStack<T>)
+  fullName: System.IEquatable<NativeCollections.NativeStack<T>>.Equals(NativeCollections.NativeStack<T>)
+  nameWithType.vb: IEquatable(Of NativeStack(Of T)).Equals(NativeStack(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeStack(Of T)).Equals(NativeCollections.NativeStack(Of T))
+  name.vb: Equals(NativeStack(Of T))
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeStack`1}.Equals(NativeCollections.NativeStack{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeStack`1}.Equals(NativeCollections.NativeStack{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: NativeCollections.NativeStack`1
+  commentId: T:NativeCollections.NativeStack`1
+  parent: NativeCollections
+  href: NativeCollections.NativeStack-1.html
+  name: NativeStack<T>
+  nameWithType: NativeStack<T>
+  fullName: NativeCollections.NativeStack<T>
+  nameWithType.vb: NativeStack(Of T)
+  fullName.vb: NativeCollections.NativeStack(Of T)
+  name.vb: NativeStack(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeStack`1.GetHashCode*
+  commentId: Overload:NativeCollections.NativeStack`1.GetHashCode
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeStack<T>.GetHashCode
+  fullName: NativeCollections.NativeStack<T>.GetHashCode
+  nameWithType.vb: NativeStack(Of T).GetHashCode
+  fullName.vb: NativeCollections.NativeStack(Of T).GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeStack`1.ToString*
+  commentId: Overload:NativeCollections.NativeStack`1.ToString
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_ToString
+  name: ToString
+  nameWithType: NativeStack<T>.ToString
+  fullName: NativeCollections.NativeStack<T>.ToString
+  nameWithType.vb: NativeStack(Of T).ToString
+  fullName.vb: NativeCollections.NativeStack(Of T).ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeStack`1.op_Equality*
+  commentId: Overload:NativeCollections.NativeStack`1.op_Equality
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_op_Equality_NativeCollections_NativeStack__0__NativeCollections_NativeStack__0__
+  name: operator ==
+  nameWithType: NativeStack<T>.operator ==
+  fullName: NativeCollections.NativeStack<T>.operator ==
+  nameWithType.vb: NativeStack(Of T).=
+  fullName.vb: NativeCollections.NativeStack(Of T).=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeStack`1.op_Equality*
+    name: ==
+    href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_op_Equality_NativeCollections_NativeStack__0__NativeCollections_NativeStack__0__
+- uid: NativeCollections.NativeStack`1.op_Inequality*
+  commentId: Overload:NativeCollections.NativeStack`1.op_Inequality
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_op_Inequality_NativeCollections_NativeStack__0__NativeCollections_NativeStack__0__
+  name: operator !=
+  nameWithType: NativeStack<T>.operator !=
+  fullName: NativeCollections.NativeStack<T>.operator !=
+  nameWithType.vb: NativeStack(Of T).<>
+  fullName.vb: NativeCollections.NativeStack(Of T).<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeStack`1.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_op_Inequality_NativeCollections_NativeStack__0__NativeCollections_NativeStack__0__
+- uid: NativeCollections.NativeStack`1.Dispose*
+  commentId: Overload:NativeCollections.NativeStack`1.Dispose
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_Dispose
+  name: Dispose
+  nameWithType: NativeStack<T>.Dispose
+  fullName: NativeCollections.NativeStack<T>.Dispose
+  nameWithType.vb: NativeStack(Of T).Dispose
+  fullName.vb: NativeCollections.NativeStack(Of T).Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeStack`1.Clear*
+  commentId: Overload:NativeCollections.NativeStack`1.Clear
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_Clear
+  name: Clear
+  nameWithType: NativeStack<T>.Clear
+  fullName: NativeCollections.NativeStack<T>.Clear
+  nameWithType.vb: NativeStack(Of T).Clear
+  fullName.vb: NativeCollections.NativeStack(Of T).Clear
+- uid: NativeCollections.NativeStack`1.Push*
+  commentId: Overload:NativeCollections.NativeStack`1.Push
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_Push__0__
+  name: Push
+  nameWithType: NativeStack<T>.Push
+  fullName: NativeCollections.NativeStack<T>.Push
+  nameWithType.vb: NativeStack(Of T).Push
+  fullName.vb: NativeCollections.NativeStack(Of T).Push
+- uid: NativeCollections.NativeStack`1.TryPush*
+  commentId: Overload:NativeCollections.NativeStack`1.TryPush
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_TryPush__0__
+  name: TryPush
+  nameWithType: NativeStack<T>.TryPush
+  fullName: NativeCollections.NativeStack<T>.TryPush
+  nameWithType.vb: NativeStack(Of T).TryPush
+  fullName.vb: NativeCollections.NativeStack(Of T).TryPush
+- uid: NativeCollections.NativeStack`1.Pop*
+  commentId: Overload:NativeCollections.NativeStack`1.Pop
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_Pop
+  name: Pop
+  nameWithType: NativeStack<T>.Pop
+  fullName: NativeCollections.NativeStack<T>.Pop
+  nameWithType.vb: NativeStack(Of T).Pop
+  fullName.vb: NativeCollections.NativeStack(Of T).Pop
+- uid: NativeCollections.NativeStack`1.TryPop*
+  commentId: Overload:NativeCollections.NativeStack`1.TryPop
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_TryPop__0__
+  name: TryPop
+  nameWithType: NativeStack<T>.TryPop
+  fullName: NativeCollections.NativeStack<T>.TryPop
+  nameWithType.vb: NativeStack(Of T).TryPop
+  fullName.vb: NativeCollections.NativeStack(Of T).TryPop
+- uid: NativeCollections.NativeStack`1.Peek*
+  commentId: Overload:NativeCollections.NativeStack`1.Peek
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_Peek
+  name: Peek
+  nameWithType: NativeStack<T>.Peek
+  fullName: NativeCollections.NativeStack<T>.Peek
+  nameWithType.vb: NativeStack(Of T).Peek
+  fullName.vb: NativeCollections.NativeStack(Of T).Peek
+- uid: NativeCollections.NativeStack`1.TryPeek*
+  commentId: Overload:NativeCollections.NativeStack`1.TryPeek
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_TryPeek__0__
+  name: TryPeek
+  nameWithType: NativeStack<T>.TryPeek
+  fullName: NativeCollections.NativeStack<T>.TryPeek
+  nameWithType.vb: NativeStack(Of T).TryPeek
+  fullName.vb: NativeCollections.NativeStack(Of T).TryPeek
+- uid: NativeCollections.NativeStack`1.EnsureCapacity*
+  commentId: Overload:NativeCollections.NativeStack`1.EnsureCapacity
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_EnsureCapacity_System_Int32_
+  name: EnsureCapacity
+  nameWithType: NativeStack<T>.EnsureCapacity
+  fullName: NativeCollections.NativeStack<T>.EnsureCapacity
+  nameWithType.vb: NativeStack(Of T).EnsureCapacity
+  fullName.vb: NativeCollections.NativeStack(Of T).EnsureCapacity
+- uid: NativeCollections.NativeStack`1.TrimExcess*
+  commentId: Overload:NativeCollections.NativeStack`1.TrimExcess
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_TrimExcess
+  name: TrimExcess
+  nameWithType: NativeStack<T>.TrimExcess
+  fullName: NativeCollections.NativeStack<T>.TrimExcess
+  nameWithType.vb: NativeStack(Of T).TrimExcess
+  fullName.vb: NativeCollections.NativeStack(Of T).TrimExcess
+- uid: NativeCollections.NativeStack`1.Empty*
+  commentId: Overload:NativeCollections.NativeStack`1.Empty
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_Empty
+  name: Empty
+  nameWithType: NativeStack<T>.Empty
+  fullName: NativeCollections.NativeStack<T>.Empty
+  nameWithType.vb: NativeStack(Of T).Empty
+  fullName.vb: NativeCollections.NativeStack(Of T).Empty
+- uid: NativeCollections.NativeStack`1.GetEnumerator*
+  commentId: Overload:NativeCollections.NativeStack`1.GetEnumerator
+  href: NativeCollections.NativeStack-1.html#NativeCollections_NativeStack_1_GetEnumerator
+  name: GetEnumerator
+  nameWithType: NativeStack<T>.GetEnumerator
+  fullName: NativeCollections.NativeStack<T>.GetEnumerator
+  nameWithType.vb: NativeStack(Of T).GetEnumerator
+  fullName.vb: NativeCollections.NativeStack(Of T).GetEnumerator
+- uid: NativeCollections.NativeStack`1.Enumerator
+  commentId: T:NativeCollections.NativeStack`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeStack-1.html
+  name: NativeStack<T>.Enumerator
+  nameWithType: NativeStack<T>.Enumerator
+  fullName: NativeCollections.NativeStack<T>.Enumerator
+  nameWithType.vb: NativeStack(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeStack(Of T).Enumerator
+  name.vb: NativeStack(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeStack`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeStack-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeStack`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeStack-1.Enumerator.html

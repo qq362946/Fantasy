@@ -2,7 +2,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Fantasy
+namespace Fantasy.Helper
 {
     /// <summary>
     /// 提供计算 MD5 散列值的辅助方法。

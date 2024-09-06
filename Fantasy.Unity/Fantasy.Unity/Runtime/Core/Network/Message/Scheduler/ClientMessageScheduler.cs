@@ -1,7 +1,11 @@
 using System;
+using Fantasy.Network;
+using Fantasy.Network.Interface;
+using Fantasy.PacketParser.Interface;
+
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Fantasy
+namespace Fantasy.Scheduler
 {
     /// <summary>
     /// 提供了一个用于客户端网络消息调度和处理的抽象基类。
@@ -76,7 +80,7 @@ namespace Fantasy
     }
 #endif
 #if FANTASY_NET
-    public sealed class ClientMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
+    internal sealed class ClientMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
     {
         public override void Scheduler(Session session, APackInfo packInfo)
         {

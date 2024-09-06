@@ -2,8 +2,11 @@
 
 using System;
 using System.Collections.Generic;
+using Fantasy.Async;
+using Fantasy.Network;
+using Fantasy.Serialize;
 
-namespace Fantasy
+namespace Fantasy.Network.Interface
 {
     /// <summary>
     /// 表示消息处理器的接口，处理特定类型的消息。

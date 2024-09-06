@@ -1,9 +1,12 @@
 using System;
+using Fantasy.Event;
+using Fantasy.Pool;
+
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-namespace Fantasy
+namespace Fantasy.Async
 {
-    public sealed class WaitCoroutineLockPool : PoolCore<WaitCoroutineLock>
+    internal sealed class WaitCoroutineLockPool : PoolCore<WaitCoroutineLock>
     {
         private readonly Scene _scene;
         private readonly CoroutineLockComponent _coroutineLockComponent;
@@ -57,8 +60,14 @@ namespace Fantasy
         }
     }
 
+    /// <summary>
+    /// 一个协程锁的实例，用户可以用过这个手动释放锁
+    /// </summary>
     public sealed class WaitCoroutineLock : IPool, IDisposable
     {
+        /// <summary>
+        /// 显示是否是从对象池中创建
+        /// </summary>
         public bool IsPool { get; set; }
         internal string Tag { get; private set; }
         internal long LockId { get; private set; }
@@ -78,7 +87,9 @@ namespace Fantasy
             CoroutineLockQueueKey = coroutineLockQueueKey;
             _waitCoroutineLockPool = waitCoroutineLockPool;
         }
-
+        /// <summary>
+        /// 释放协程锁
+        /// </summary>
         public void Dispose()
         {
             if (LockId == 0)

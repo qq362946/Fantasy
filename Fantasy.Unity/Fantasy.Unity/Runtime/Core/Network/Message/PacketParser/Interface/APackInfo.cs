@@ -1,15 +1,19 @@
 using System;
 using System.IO;
+using Fantasy.Network;
+using Fantasy.Network.Interface;
+using Fantasy.Serialize;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Fantasy
+namespace Fantasy.PacketParser.Interface
 {
     public abstract class APackInfo : IDisposable
     {
-        protected ANetwork Network;
+        internal ANetwork Network;
         
         public uint RpcId;
         public long RouteId;

@@ -1,0 +1,220 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.Interface.IMessage
+  commentId: T:Fantasy.Network.Interface.IMessage
+  id: IMessage
+  parent: Fantasy.Network.Interface
+  children:
+  - Fantasy.Network.Interface.IMessage.OpCode
+  langs:
+  - csharp
+  - vb
+  name: IMessage
+  nameWithType: IMessage
+  fullName: Fantasy.Network.Interface.IMessage
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/IMessage.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IMessage
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/IMessage.cs
+    startLine: 8
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  summary: 表示通用消息接口。
+  example: []
+  syntax:
+    content: public interface IMessage
+    content.vb: Public Interface IMessage
+  extensionMethods:
+  - Fantasy.Network.Interface.IMessage.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.Interface.IMessage.OpCode
+  commentId: M:Fantasy.Network.Interface.IMessage.OpCode
+  id: OpCode
+  parent: Fantasy.Network.Interface.IMessage
+  langs:
+  - csharp
+  - vb
+  name: OpCode()
+  nameWithType: IMessage.OpCode()
+  fullName: Fantasy.Network.Interface.IMessage.OpCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/IMessage.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OpCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/IMessage.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  summary: 获取消息的操作代码。
+  example: []
+  syntax:
+    content: uint OpCode()
+    return:
+      type: System.UInt32
+      description: 操作代码。
+    content.vb: Function OpCode() As UInteger
+  overload: Fantasy.Network.Interface.IMessage.OpCode*
+references:
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  href: Fantasy.html
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+- uid: Fantasy.Network.Interface.IMessage.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<IMessage>(IMessage)
+  nameWithType: JsonHelper.ToJson<IMessage>(IMessage)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.Interface.IMessage>(Fantasy.Network.Interface.IMessage)
+  nameWithType.vb: JsonHelper.ToJson(Of IMessage)(IMessage)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.Interface.IMessage)(Fantasy.Network.Interface.IMessage)
+  name.vb: ToJson(Of IMessage)(IMessage)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Interface.IMessage)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.Interface.IMessage
+    name: IMessage
+    href: Fantasy.Network.Interface.IMessage.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.Interface.IMessage
+    name: IMessage
+    href: Fantasy.Network.Interface.IMessage.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Interface.IMessage)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.Interface.IMessage
+    name: IMessage
+    href: Fantasy.Network.Interface.IMessage.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.Interface.IMessage
+    name: IMessage
+    href: Fantasy.Network.Interface.IMessage.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Network.Interface.IMessage.OpCode*
+  commentId: Overload:Fantasy.Network.Interface.IMessage.OpCode
+  href: Fantasy.Network.Interface.IMessage.html#Fantasy_Network_Interface_IMessage_OpCode
+  name: OpCode
+  nameWithType: IMessage.OpCode
+  fullName: Fantasy.Network.Interface.IMessage.OpCode
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System

@@ -1,11 +1,14 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #if FANTASY_NET
 using System.Net;
+using Fantasy.Async;
+using Fantasy.Network.Interface;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable PossibleMultipleEnumeration
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-namespace Fantasy;
+namespace Fantasy.Network.WebSocket;
 
 public class WebSocketServerNetwork : ANetwork
 {

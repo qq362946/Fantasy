@@ -1,12 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Fantasy.Assembly;
+using Fantasy.Async;
+using Fantasy.DataStructure.Collection;
+using Fantasy.DataStructure.Dictionary;
+using Fantasy.Entitas;
+using Fantasy.InnerMessage;
+using Fantasy.Network;
+
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace Fantasy
+namespace Fantasy.Network.Interface
 {
     /// <summary>
     /// 用于存储消息处理器的信息，包括类型和对象实例。

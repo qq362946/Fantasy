@@ -1,0 +1,682 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.DataStructure.Collection
+  commentId: N:Fantasy.DataStructure.Collection
+  id: Collection
+  parent: Fantasy.DataStructure
+  children:
+  - Fantasy.DataStructure.Collection.CircularBuffer
+  - Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2
+  - Fantasy.DataStructure.Collection.ConcurrentOneToManyList`2
+  - Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2
+  - Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue`2
+  - Fantasy.DataStructure.Collection.HashSetBasePool`1
+  - Fantasy.DataStructure.Collection.HashSetPool`1
+  - Fantasy.DataStructure.Collection.ListPool`1
+  - Fantasy.DataStructure.Collection.OneToManyHashSetPool`2
+  - Fantasy.DataStructure.Collection.OneToManyHashSet`2
+  - Fantasy.DataStructure.Collection.OneToManyListPool`2
+  - Fantasy.DataStructure.Collection.OneToManyList`2
+  - Fantasy.DataStructure.Collection.OneToManyQueuePool`2
+  - Fantasy.DataStructure.Collection.OneToManyQueue`2
+  - Fantasy.DataStructure.Collection.ReuseList`1
+  - Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2
+  - Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList`2
+  - Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2
+  - Fantasy.DataStructure.Collection.SortedOneToManyHashSet`2
+  - Fantasy.DataStructure.Collection.SortedOneToManyListPool`2
+  - Fantasy.DataStructure.Collection.SortedOneToManyList`2
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.DataStructure.Collection
+  nameWithType: Fantasy.DataStructure.Collection
+  fullName: Fantasy.DataStructure.Collection
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.DataStructure.Collection.CircularBuffer
+  commentId: T:Fantasy.DataStructure.Collection.CircularBuffer
+  href: Fantasy.DataStructure.Collection.CircularBuffer.html
+  name: CircularBuffer
+  nameWithType: CircularBuffer
+  fullName: Fantasy.DataStructure.Collection.CircularBuffer
+- uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2
+  commentId: T:Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool-2.html
+  name: ConcurrentOneToManyListPool<TKey, TValue>
+  nameWithType: ConcurrentOneToManyListPool<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool<TKey, TValue>
+  nameWithType.vb: ConcurrentOneToManyListPool(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool(Of TKey, TValue)
+  name.vb: ConcurrentOneToManyListPool(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2
+    name: ConcurrentOneToManyListPool
+    href: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2
+    name: ConcurrentOneToManyListPool
+    href: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyList`2
+  commentId: T:Fantasy.DataStructure.Collection.ConcurrentOneToManyList`2
+  href: Fantasy.DataStructure.Collection.ConcurrentOneToManyList-2.html
+  name: ConcurrentOneToManyList<TKey, TValue>
+  nameWithType: ConcurrentOneToManyList<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyList<TKey, TValue>
+  nameWithType.vb: ConcurrentOneToManyList(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyList(Of TKey, TValue)
+  name.vb: ConcurrentOneToManyList(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyList`2
+    name: ConcurrentOneToManyList
+    href: Fantasy.DataStructure.Collection.ConcurrentOneToManyList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyList`2
+    name: ConcurrentOneToManyList
+    href: Fantasy.DataStructure.Collection.ConcurrentOneToManyList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2
+  commentId: T:Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool-2.html
+  name: ConcurrentOneToManyQueuePool<TKey, TValue>
+  nameWithType: ConcurrentOneToManyQueuePool<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool<TKey, TValue>
+  nameWithType.vb: ConcurrentOneToManyQueuePool(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool(Of TKey, TValue)
+  name.vb: ConcurrentOneToManyQueuePool(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2
+    name: ConcurrentOneToManyQueuePool
+    href: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2
+    name: ConcurrentOneToManyQueuePool
+    href: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue`2
+  commentId: T:Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue`2
+  href: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue-2.html
+  name: ConcurrentOneToManyQueue<TKey, TValue>
+  nameWithType: ConcurrentOneToManyQueue<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue<TKey, TValue>
+  nameWithType.vb: ConcurrentOneToManyQueue(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue(Of TKey, TValue)
+  name.vb: ConcurrentOneToManyQueue(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue`2
+    name: ConcurrentOneToManyQueue
+    href: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue`2
+    name: ConcurrentOneToManyQueue
+    href: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.HashSetBasePool`1
+  commentId: T:Fantasy.DataStructure.Collection.HashSetBasePool`1
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.HashSetBasePool-1.html
+  name: HashSetBasePool<T>
+  nameWithType: HashSetBasePool<T>
+  fullName: Fantasy.DataStructure.Collection.HashSetBasePool<T>
+  nameWithType.vb: HashSetBasePool(Of T)
+  fullName.vb: Fantasy.DataStructure.Collection.HashSetBasePool(Of T)
+  name.vb: HashSetBasePool(Of T)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.HashSetBasePool`1
+    name: HashSetBasePool
+    href: Fantasy.DataStructure.Collection.HashSetBasePool-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.HashSetBasePool`1
+    name: HashSetBasePool
+    href: Fantasy.DataStructure.Collection.HashSetBasePool-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.DataStructure.Collection.HashSetPool`1
+  commentId: T:Fantasy.DataStructure.Collection.HashSetPool`1
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.HashSetPool-1.html
+  name: HashSetPool<T>
+  nameWithType: HashSetPool<T>
+  fullName: Fantasy.DataStructure.Collection.HashSetPool<T>
+  nameWithType.vb: HashSetPool(Of T)
+  fullName.vb: Fantasy.DataStructure.Collection.HashSetPool(Of T)
+  name.vb: HashSetPool(Of T)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.HashSetPool`1
+    name: HashSetPool
+    href: Fantasy.DataStructure.Collection.HashSetPool-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.HashSetPool`1
+    name: HashSetPool
+    href: Fantasy.DataStructure.Collection.HashSetPool-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.DataStructure.Collection.ListPool`1
+  commentId: T:Fantasy.DataStructure.Collection.ListPool`1
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.ListPool-1.html
+  name: ListPool<T>
+  nameWithType: ListPool<T>
+  fullName: Fantasy.DataStructure.Collection.ListPool<T>
+  nameWithType.vb: ListPool(Of T)
+  fullName.vb: Fantasy.DataStructure.Collection.ListPool(Of T)
+  name.vb: ListPool(Of T)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.ListPool`1
+    name: ListPool
+    href: Fantasy.DataStructure.Collection.ListPool-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.ListPool`1
+    name: ListPool
+    href: Fantasy.DataStructure.Collection.ListPool-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.DataStructure.Collection.OneToManyHashSetPool`2
+  commentId: T:Fantasy.DataStructure.Collection.OneToManyHashSetPool`2
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.OneToManyHashSetPool-2.html
+  name: OneToManyHashSetPool<TKey, TValue>
+  nameWithType: OneToManyHashSetPool<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.OneToManyHashSetPool<TKey, TValue>
+  nameWithType.vb: OneToManyHashSetPool(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyHashSetPool(Of TKey, TValue)
+  name.vb: OneToManyHashSetPool(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.OneToManyHashSetPool`2
+    name: OneToManyHashSetPool
+    href: Fantasy.DataStructure.Collection.OneToManyHashSetPool-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.OneToManyHashSetPool`2
+    name: OneToManyHashSetPool
+    href: Fantasy.DataStructure.Collection.OneToManyHashSetPool-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.OneToManyHashSet`2
+  commentId: T:Fantasy.DataStructure.Collection.OneToManyHashSet`2
+  href: Fantasy.DataStructure.Collection.OneToManyHashSet-2.html
+  name: OneToManyHashSet<TKey, TValue>
+  nameWithType: OneToManyHashSet<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.OneToManyHashSet<TKey, TValue>
+  nameWithType.vb: OneToManyHashSet(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyHashSet(Of TKey, TValue)
+  name.vb: OneToManyHashSet(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.OneToManyHashSet`2
+    name: OneToManyHashSet
+    href: Fantasy.DataStructure.Collection.OneToManyHashSet-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.OneToManyHashSet`2
+    name: OneToManyHashSet
+    href: Fantasy.DataStructure.Collection.OneToManyHashSet-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.OneToManyListPool`2
+  commentId: T:Fantasy.DataStructure.Collection.OneToManyListPool`2
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.OneToManyListPool-2.html
+  name: OneToManyListPool<TKey, TValue>
+  nameWithType: OneToManyListPool<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.OneToManyListPool<TKey, TValue>
+  nameWithType.vb: OneToManyListPool(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyListPool(Of TKey, TValue)
+  name.vb: OneToManyListPool(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.OneToManyListPool`2
+    name: OneToManyListPool
+    href: Fantasy.DataStructure.Collection.OneToManyListPool-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.OneToManyListPool`2
+    name: OneToManyListPool
+    href: Fantasy.DataStructure.Collection.OneToManyListPool-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.OneToManyList`2
+  commentId: T:Fantasy.DataStructure.Collection.OneToManyList`2
+  href: Fantasy.DataStructure.Collection.OneToManyList-2.html
+  name: OneToManyList<TKey, TValue>
+  nameWithType: OneToManyList<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.OneToManyList<TKey, TValue>
+  nameWithType.vb: OneToManyList(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyList(Of TKey, TValue)
+  name.vb: OneToManyList(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.OneToManyList`2
+    name: OneToManyList
+    href: Fantasy.DataStructure.Collection.OneToManyList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.OneToManyList`2
+    name: OneToManyList
+    href: Fantasy.DataStructure.Collection.OneToManyList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.OneToManyQueuePool`2
+  commentId: T:Fantasy.DataStructure.Collection.OneToManyQueuePool`2
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.OneToManyQueuePool-2.html
+  name: OneToManyQueuePool<TKey, TValue>
+  nameWithType: OneToManyQueuePool<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.OneToManyQueuePool<TKey, TValue>
+  nameWithType.vb: OneToManyQueuePool(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyQueuePool(Of TKey, TValue)
+  name.vb: OneToManyQueuePool(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.OneToManyQueuePool`2
+    name: OneToManyQueuePool
+    href: Fantasy.DataStructure.Collection.OneToManyQueuePool-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.OneToManyQueuePool`2
+    name: OneToManyQueuePool
+    href: Fantasy.DataStructure.Collection.OneToManyQueuePool-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.OneToManyQueue`2
+  commentId: T:Fantasy.DataStructure.Collection.OneToManyQueue`2
+  href: Fantasy.DataStructure.Collection.OneToManyQueue-2.html
+  name: OneToManyQueue<TKey, TValue>
+  nameWithType: OneToManyQueue<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.OneToManyQueue<TKey, TValue>
+  nameWithType.vb: OneToManyQueue(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyQueue(Of TKey, TValue)
+  name.vb: OneToManyQueue(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.OneToManyQueue`2
+    name: OneToManyQueue
+    href: Fantasy.DataStructure.Collection.OneToManyQueue-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.OneToManyQueue`2
+    name: OneToManyQueue
+    href: Fantasy.DataStructure.Collection.OneToManyQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.ReuseList`1
+  commentId: T:Fantasy.DataStructure.Collection.ReuseList`1
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.ReuseList-1.html
+  name: ReuseList<T>
+  nameWithType: ReuseList<T>
+  fullName: Fantasy.DataStructure.Collection.ReuseList<T>
+  nameWithType.vb: ReuseList(Of T)
+  fullName.vb: Fantasy.DataStructure.Collection.ReuseList(Of T)
+  name.vb: ReuseList(Of T)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.ReuseList`1
+    name: ReuseList
+    href: Fantasy.DataStructure.Collection.ReuseList-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.ReuseList`1
+    name: ReuseList
+    href: Fantasy.DataStructure.Collection.ReuseList-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2
+  commentId: T:Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool-2.html
+  name: SortedConcurrentOneToManyListPool<TKey, TValue>
+  nameWithType: SortedConcurrentOneToManyListPool<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool<TKey, TValue>
+  nameWithType.vb: SortedConcurrentOneToManyListPool(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool(Of TKey, TValue)
+  name.vb: SortedConcurrentOneToManyListPool(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2
+    name: SortedConcurrentOneToManyListPool
+    href: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2
+    name: SortedConcurrentOneToManyListPool
+    href: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList`2
+  commentId: T:Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList`2
+  href: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList-2.html
+  name: SortedConcurrentOneToManyList<TKey, TValue>
+  nameWithType: SortedConcurrentOneToManyList<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList<TKey, TValue>
+  nameWithType.vb: SortedConcurrentOneToManyList(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList(Of TKey, TValue)
+  name.vb: SortedConcurrentOneToManyList(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList`2
+    name: SortedConcurrentOneToManyList
+    href: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList`2
+    name: SortedConcurrentOneToManyList
+    href: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2
+  commentId: T:Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool-2.html
+  name: SortedOneToManyHashSetPool<TKey, TValue>
+  nameWithType: SortedOneToManyHashSetPool<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool<TKey, TValue>
+  nameWithType.vb: SortedOneToManyHashSetPool(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool(Of TKey, TValue)
+  name.vb: SortedOneToManyHashSetPool(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2
+    name: SortedOneToManyHashSetPool
+    href: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2
+    name: SortedOneToManyHashSetPool
+    href: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.SortedOneToManyHashSet`2
+  commentId: T:Fantasy.DataStructure.Collection.SortedOneToManyHashSet`2
+  href: Fantasy.DataStructure.Collection.SortedOneToManyHashSet-2.html
+  name: SortedOneToManyHashSet<TKey, TValue>
+  nameWithType: SortedOneToManyHashSet<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.SortedOneToManyHashSet<TKey, TValue>
+  nameWithType.vb: SortedOneToManyHashSet(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyHashSet(Of TKey, TValue)
+  name.vb: SortedOneToManyHashSet(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.SortedOneToManyHashSet`2
+    name: SortedOneToManyHashSet
+    href: Fantasy.DataStructure.Collection.SortedOneToManyHashSet-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.SortedOneToManyHashSet`2
+    name: SortedOneToManyHashSet
+    href: Fantasy.DataStructure.Collection.SortedOneToManyHashSet-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.SortedOneToManyListPool`2
+  commentId: T:Fantasy.DataStructure.Collection.SortedOneToManyListPool`2
+  parent: Fantasy.DataStructure.Collection
+  href: Fantasy.DataStructure.Collection.SortedOneToManyListPool-2.html
+  name: SortedOneToManyListPool<TKey, TValue>
+  nameWithType: SortedOneToManyListPool<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.SortedOneToManyListPool<TKey, TValue>
+  nameWithType.vb: SortedOneToManyListPool(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyListPool(Of TKey, TValue)
+  name.vb: SortedOneToManyListPool(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.SortedOneToManyListPool`2
+    name: SortedOneToManyListPool
+    href: Fantasy.DataStructure.Collection.SortedOneToManyListPool-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.SortedOneToManyListPool`2
+    name: SortedOneToManyListPool
+    href: Fantasy.DataStructure.Collection.SortedOneToManyListPool-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection.SortedOneToManyList`2
+  commentId: T:Fantasy.DataStructure.Collection.SortedOneToManyList`2
+  href: Fantasy.DataStructure.Collection.SortedOneToManyList-2.html
+  name: SortedOneToManyList<TKey, TValue>
+  nameWithType: SortedOneToManyList<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.SortedOneToManyList<TKey, TValue>
+  nameWithType.vb: SortedOneToManyList(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyList(Of TKey, TValue)
+  name.vb: SortedOneToManyList(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.SortedOneToManyList`2
+    name: SortedOneToManyList
+    href: Fantasy.DataStructure.Collection.SortedOneToManyList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.SortedOneToManyList`2
+    name: SortedOneToManyList
+    href: Fantasy.DataStructure.Collection.SortedOneToManyList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection
+  commentId: N:Fantasy.DataStructure.Collection
+  href: Fantasy.html
+  name: Fantasy.DataStructure.Collection
+  nameWithType: Fantasy.DataStructure.Collection
+  fullName: Fantasy.DataStructure.Collection
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.Collection
+    name: Collection
+    href: Fantasy.DataStructure.Collection.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.Collection
+    name: Collection
+    href: Fantasy.DataStructure.Collection.html

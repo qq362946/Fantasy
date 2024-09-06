@@ -1,8 +1,10 @@
 #if FANTASY_NET
+using Fantasy.DataStructure.Collection;
+using Fantasy.IdFactory;
 using MemoryPack;
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace Fantasy;
+namespace Fantasy.Platform.Net;
 
 public sealed partial class SceneConfig
 {

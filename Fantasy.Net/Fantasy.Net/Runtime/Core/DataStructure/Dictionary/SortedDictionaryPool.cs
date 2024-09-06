@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Fantasy.Pool;
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Dictionary
 {
     /// <summary>
     /// 提供一个可以使用对象池管理的排序字典类。

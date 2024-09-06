@@ -1,15 +1,17 @@
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 using System.Collections.Generic;
+using Fantasy.Pool;
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-namespace Fantasy
+namespace Fantasy.Async
 {
-    public sealed class CoroutineLockQueuePool : PoolCore<CoroutineLockQueue>
+    internal sealed class CoroutineLockQueuePool : PoolCore<CoroutineLockQueue>
     {
         public CoroutineLockQueuePool() : base(2000) { }
     }
     
-    public sealed class CoroutineLockQueue : Queue<WaitCoroutineLock>, IPool
+    internal sealed class CoroutineLockQueue : Queue<WaitCoroutineLock>, IPool
     {
         public bool IsPool { get; set; }
     }

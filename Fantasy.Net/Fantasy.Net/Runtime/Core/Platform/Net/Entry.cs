@@ -1,9 +1,14 @@
 #if FANTASY_NET
 using System.Reflection;
 using CommandLine;
+using Fantasy.Assembly;
+using Fantasy.Async;
+using Fantasy.Helper;
+using Fantasy.Network;
+using Fantasy.Serialize;
 using NLog;
 
-namespace Fantasy;
+namespace Fantasy.Platform.Net;
 
 /// <summary>
 /// Fantasy.Net 应用程序入口
@@ -16,7 +21,7 @@ public static class Entry
     /// 启动Fantasy.Net
     /// </summary>
     /// <param name="assemblies"></param>
-    public static async FTask Start(params Assembly[] assemblies)
+    public static async FTask Start(params System.Reflection.Assembly[] assemblies)
     {
         // 解析命令行参数
         Parser.Default.ParseArguments<CommandLineOptions>(Environment.GetCommandLineArgs())

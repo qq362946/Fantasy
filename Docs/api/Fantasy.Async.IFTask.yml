@@ -1,0 +1,251 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Async.IFTask
+  commentId: T:Fantasy.Async.IFTask
+  id: IFTask
+  parent: Fantasy.Async
+  children:
+  - Fantasy.Async.IFTask.FTaskType
+  - Fantasy.Async.IFTask.UserToKen
+  langs:
+  - csharp
+  - vb
+  name: IFTask
+  nameWithType: IFTask
+  fullName: Fantasy.Async.IFTask
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Interface/IFTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IFTask
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Interface/IFTask.cs
+    startLine: 3
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: public interface IFTask
+    content.vb: Public Interface IFTask
+  extensionMethods:
+  - Fantasy.Async.IFTask.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Async.IFTask.FTaskType
+  commentId: P:Fantasy.Async.IFTask.FTaskType
+  id: FTaskType
+  parent: Fantasy.Async.IFTask
+  langs:
+  - csharp
+  - vb
+  name: FTaskType
+  nameWithType: IFTask.FTaskType
+  fullName: Fantasy.Async.IFTask.FTaskType
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Interface/IFTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FTaskType
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Interface/IFTask.cs
+    startLine: 5
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: FTaskType FTaskType { get; set; }
+    parameters: []
+    return:
+      type: Fantasy.Async.FTaskType
+    content.vb: Property FTaskType As FTaskType
+  overload: Fantasy.Async.IFTask.FTaskType*
+- uid: Fantasy.Async.IFTask.UserToKen
+  commentId: P:Fantasy.Async.IFTask.UserToKen
+  id: UserToKen
+  parent: Fantasy.Async.IFTask
+  langs:
+  - csharp
+  - vb
+  name: UserToKen
+  nameWithType: IFTask.UserToKen
+  fullName: Fantasy.Async.IFTask.UserToKen
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Interface/IFTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: UserToKen
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Interface/IFTask.cs
+    startLine: 6
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: object UserToKen { get; set; }
+    parameters: []
+    return:
+      type: System.Object
+    content.vb: Property UserToKen As Object
+  overload: Fantasy.Async.IFTask.UserToKen*
+references:
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+- uid: Fantasy.Async.IFTask.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<IFTask>(IFTask)
+  nameWithType: JsonHelper.ToJson<IFTask>(IFTask)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Async.IFTask>(Fantasy.Async.IFTask)
+  nameWithType.vb: JsonHelper.ToJson(Of IFTask)(IFTask)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Async.IFTask)(Fantasy.Async.IFTask)
+  name.vb: ToJson(Of IFTask)(IFTask)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Async.IFTask)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Async.IFTask
+    name: IFTask
+    href: Fantasy.Async.IFTask.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Async.IFTask
+    name: IFTask
+    href: Fantasy.Async.IFTask.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Async.IFTask)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Async.IFTask
+    name: IFTask
+    href: Fantasy.Async.IFTask.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Async.IFTask
+    name: IFTask
+    href: Fantasy.Async.IFTask.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Async.IFTask.FTaskType*
+  commentId: Overload:Fantasy.Async.IFTask.FTaskType
+  href: Fantasy.Async.IFTask.html#Fantasy_Async_IFTask_FTaskType
+  name: FTaskType
+  nameWithType: IFTask.FTaskType
+  fullName: Fantasy.Async.IFTask.FTaskType
+- uid: Fantasy.Async.FTaskType
+  commentId: T:Fantasy.Async.FTaskType
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTaskType.html
+  name: FTaskType
+  nameWithType: FTaskType
+  fullName: Fantasy.Async.FTaskType
+- uid: Fantasy.Async.IFTask.UserToKen*
+  commentId: Overload:Fantasy.Async.IFTask.UserToKen
+  href: Fantasy.Async.IFTask.html#Fantasy_Async_IFTask_UserToKen
+  name: UserToKen
+  nameWithType: IFTask.UserToKen
+  fullName: Fantasy.Async.IFTask.UserToKen
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System

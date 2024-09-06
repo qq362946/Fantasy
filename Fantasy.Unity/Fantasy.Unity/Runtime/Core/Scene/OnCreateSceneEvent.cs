@@ -1,6 +1,9 @@
 #if FANTASY_NET
 namespace Fantasy;
 
+/// <summary>
+/// 当Scene创建完成后发送的事件参数
+/// </summary>
 public struct OnCreateScene
 {
     /// <summary>

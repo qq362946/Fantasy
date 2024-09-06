@@ -2,9 +2,12 @@ using System.Collections.Generic;
 #if FANTASY_UNITY || FANTASY_NET || !FANTASY_WEBGL
 using System.Threading;
 #endif
+#if FANTASY_NET
+using Fantasy.Platform.Net;
+#endif
 namespace Fantasy
 {
-    public sealed class MainScheduler : ISceneScheduler
+    internal sealed class MainScheduler : ISceneScheduler
     {
         private readonly Queue<Scene> _queue = new Queue<Scene>();
         public readonly ThreadSynchronizationContext ThreadSynchronizationContext;

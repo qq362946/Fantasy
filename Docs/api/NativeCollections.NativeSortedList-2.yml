@@ -1,0 +1,1846 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeSortedList`2
+  commentId: T:NativeCollections.NativeSortedList`2
+  id: NativeSortedList`2
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeSortedList`2.#ctor(System.Int32)
+  - NativeCollections.NativeSortedList`2.Add(`0@,`1@)
+  - NativeCollections.NativeSortedList`2.Capacity
+  - NativeCollections.NativeSortedList`2.Clear
+  - NativeCollections.NativeSortedList`2.ContainsKey(`0@)
+  - NativeCollections.NativeSortedList`2.Count
+  - NativeCollections.NativeSortedList`2.Dispose
+  - NativeCollections.NativeSortedList`2.Empty
+  - NativeCollections.NativeSortedList`2.EnsureCapacity(System.Int32)
+  - NativeCollections.NativeSortedList`2.Equals(NativeCollections.NativeSortedList{`0,`1})
+  - NativeCollections.NativeSortedList`2.Equals(System.Object)
+  - NativeCollections.NativeSortedList`2.GetEnumerator
+  - NativeCollections.NativeSortedList`2.GetHashCode
+  - NativeCollections.NativeSortedList`2.IsCreated
+  - NativeCollections.NativeSortedList`2.IsEmpty
+  - NativeCollections.NativeSortedList`2.Item(`0)
+  - NativeCollections.NativeSortedList`2.Keys
+  - NativeCollections.NativeSortedList`2.Remove(`0@)
+  - NativeCollections.NativeSortedList`2.Remove(`0@,`1@)
+  - NativeCollections.NativeSortedList`2.ToString
+  - NativeCollections.NativeSortedList`2.TrimExcess
+  - NativeCollections.NativeSortedList`2.TryGetValue(`0@,`1@)
+  - NativeCollections.NativeSortedList`2.Values
+  - NativeCollections.NativeSortedList`2.op_Equality(NativeCollections.NativeSortedList{`0,`1},NativeCollections.NativeSortedList{`0,`1})
+  - NativeCollections.NativeSortedList`2.op_Inequality(NativeCollections.NativeSortedList{`0,`1},NativeCollections.NativeSortedList{`0,`1})
+  langs:
+  - csharp
+  - vb
+  name: NativeSortedList<TKey, TValue>
+  nameWithType: NativeSortedList<TKey, TValue>
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeSortedList
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 24
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native sortedList
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeSortedList<TKey, TValue> where TKey : unmanaged, IComparable<TKey> where TValue : unmanaged
+    typeParameters:
+    - id: TKey
+      description: Type
+    - id: TValue
+      description: Type
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeSortedList(Of TKey As {Structure, IComparable(Of TKey)}, TValue As Structure)
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeSortedList`2.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+  nameWithType.vb: NativeSortedList(Of TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue)
+  name.vb: NativeSortedList(Of TKey, TValue)
+- uid: NativeCollections.NativeSortedList`2.Keys
+  commentId: P:NativeCollections.NativeSortedList`2.Keys
+  id: Keys
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Keys
+  nameWithType: NativeSortedList<TKey, TValue>.Keys
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Keys
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Keys
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 77
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Keys
+  example: []
+  syntax:
+    content: public NativeSortedList<TKey, TValue>.KeyCollection Keys { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeSortedList`2.KeyCollection
+    content.vb: Public ReadOnly Property Keys As NativeSortedList(Of TKey, TValue).KeyCollection
+  overload: NativeCollections.NativeSortedList`2.Keys*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Keys
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Keys
+- uid: NativeCollections.NativeSortedList`2.Values
+  commentId: P:NativeCollections.NativeSortedList`2.Values
+  id: Values
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Values
+  nameWithType: NativeSortedList<TKey, TValue>.Values
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Values
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Values
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 82
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Values
+  example: []
+  syntax:
+    content: public NativeSortedList<TKey, TValue>.ValueCollection Values { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeSortedList`2.ValueCollection
+    content.vb: Public ReadOnly Property Values As NativeSortedList(Of TKey, TValue).ValueCollection
+  overload: NativeCollections.NativeSortedList`2.Values*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Values
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Values
+- uid: NativeCollections.NativeSortedList`2.#ctor(System.Int32)
+  commentId: M:NativeCollections.NativeSortedList`2.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: NativeSortedList(int)
+  nameWithType: NativeSortedList<TKey, TValue>.NativeSortedList(int)
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.NativeSortedList(int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 88
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeSortedList(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(capacity As Integer)
+  overload: NativeCollections.NativeSortedList`2.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).New(Integer)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).New(Integer)
+  name.vb: New(Integer)
+- uid: NativeCollections.NativeSortedList`2.IsCreated
+  commentId: P:NativeCollections.NativeSortedList`2.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeSortedList<TKey, TValue>.IsCreated
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 108
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeSortedList`2.IsCreated*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).IsCreated
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).IsCreated
+- uid: NativeCollections.NativeSortedList`2.IsEmpty
+  commentId: P:NativeCollections.NativeSortedList`2.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativeSortedList<TKey, TValue>.IsEmpty
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 113
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is empty
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativeSortedList`2.IsEmpty*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).IsEmpty
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).IsEmpty
+- uid: NativeCollections.NativeSortedList`2.Item(`0)
+  commentId: P:NativeCollections.NativeSortedList`2.Item(`0)
+  id: Item(`0)
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: this[TKey]
+  nameWithType: NativeSortedList<TKey, TValue>.this[TKey]
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.this[TKey]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 119
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get or set value
+  example: []
+  syntax:
+    content: public TValue this[TKey key] { get; set; }
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    return:
+      type: '{TValue}'
+    content.vb: Public Default Property this[](key As TKey) As TValue
+  overload: NativeCollections.NativeSortedList`2.Item*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).this[](TKey)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).this[](TKey)
+  name.vb: this[](TKey)
+- uid: NativeCollections.NativeSortedList`2.Count
+  commentId: P:NativeCollections.NativeSortedList`2.Count
+  id: Count
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: NativeSortedList<TKey, TValue>.Count
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 146
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Count
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: NativeCollections.NativeSortedList`2.Count*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Count
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Count
+- uid: NativeCollections.NativeSortedList`2.Capacity
+  commentId: P:NativeCollections.NativeSortedList`2.Capacity
+  id: Capacity
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Capacity
+  nameWithType: NativeSortedList<TKey, TValue>.Capacity
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Capacity
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Capacity
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 151
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Capacity
+  example: []
+  syntax:
+    content: public int Capacity { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Capacity As Integer
+  overload: NativeCollections.NativeSortedList`2.Capacity*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Capacity
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Capacity
+- uid: NativeCollections.NativeSortedList`2.Equals(NativeCollections.NativeSortedList{`0,`1})
+  commentId: M:NativeCollections.NativeSortedList`2.Equals(NativeCollections.NativeSortedList{`0,`1})
+  id: Equals(NativeCollections.NativeSortedList{`0,`1})
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeSortedList<TKey, TValue>)
+  nameWithType: NativeSortedList<TKey, TValue>.Equals(NativeSortedList<TKey, TValue>)
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Equals(NativeCollections.NativeSortedList<TKey, TValue>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 195
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeSortedList<TKey, TValue> other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeSortedList`2
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeSortedList(Of TKey, TValue)) As Boolean
+  overload: NativeCollections.NativeSortedList`2.Equals*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Equals(NativeSortedList(Of TKey, TValue))
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Equals(NativeCollections.NativeSortedList(Of TKey, TValue))
+  name.vb: Equals(NativeSortedList(Of TKey, TValue))
+- uid: NativeCollections.NativeSortedList`2.Equals(System.Object)
+  commentId: M:NativeCollections.NativeSortedList`2.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeSortedList<TKey, TValue>.Equals(object?)
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 202
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeSortedList`2.Equals*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Equals(Object)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeSortedList`2.GetHashCode
+  commentId: M:NativeCollections.NativeSortedList`2.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeSortedList<TKey, TValue>.GetHashCode()
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 208
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeSortedList`2.GetHashCode*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).GetHashCode()
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).GetHashCode()
+- uid: NativeCollections.NativeSortedList`2.ToString
+  commentId: M:NativeCollections.NativeSortedList`2.ToString
+  id: ToString
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeSortedList<TKey, TValue>.ToString()
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 214
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeSortedList`2.ToString*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).ToString()
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).ToString()
+- uid: NativeCollections.NativeSortedList`2.op_Equality(NativeCollections.NativeSortedList{`0,`1},NativeCollections.NativeSortedList{`0,`1})
+  commentId: M:NativeCollections.NativeSortedList`2.op_Equality(NativeCollections.NativeSortedList{`0,`1},NativeCollections.NativeSortedList{`0,`1})
+  id: op_Equality(NativeCollections.NativeSortedList{`0,`1},NativeCollections.NativeSortedList{`0,`1})
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeSortedList<TKey, TValue>, NativeSortedList<TKey, TValue>)
+  nameWithType: NativeSortedList<TKey, TValue>.operator ==(NativeSortedList<TKey, TValue>, NativeSortedList<TKey, TValue>)
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.operator ==(NativeCollections.NativeSortedList<TKey, TValue>, NativeCollections.NativeSortedList<TKey, TValue>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 222
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeSortedList<TKey, TValue> left, NativeSortedList<TKey, TValue> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeSortedList`2
+      description: Left
+    - id: right
+      type: NativeCollections.NativeSortedList`2
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeSortedList(Of TKey, TValue), right As NativeSortedList(Of TKey, TValue)) As Boolean
+  overload: NativeCollections.NativeSortedList`2.op_Equality*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).=(NativeSortedList(Of TKey, TValue), NativeSortedList(Of TKey, TValue))
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).=(NativeCollections.NativeSortedList(Of TKey, TValue), NativeCollections.NativeSortedList(Of TKey, TValue))
+  name.vb: =(NativeSortedList(Of TKey, TValue), NativeSortedList(Of TKey, TValue))
+- uid: NativeCollections.NativeSortedList`2.op_Inequality(NativeCollections.NativeSortedList{`0,`1},NativeCollections.NativeSortedList{`0,`1})
+  commentId: M:NativeCollections.NativeSortedList`2.op_Inequality(NativeCollections.NativeSortedList{`0,`1},NativeCollections.NativeSortedList{`0,`1})
+  id: op_Inequality(NativeCollections.NativeSortedList{`0,`1},NativeCollections.NativeSortedList{`0,`1})
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeSortedList<TKey, TValue>, NativeSortedList<TKey, TValue>)
+  nameWithType: NativeSortedList<TKey, TValue>.operator !=(NativeSortedList<TKey, TValue>, NativeSortedList<TKey, TValue>)
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.operator !=(NativeCollections.NativeSortedList<TKey, TValue>, NativeCollections.NativeSortedList<TKey, TValue>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 230
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeSortedList<TKey, TValue> left, NativeSortedList<TKey, TValue> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeSortedList`2
+      description: Left
+    - id: right
+      type: NativeCollections.NativeSortedList`2
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeSortedList(Of TKey, TValue), right As NativeSortedList(Of TKey, TValue)) As Boolean
+  overload: NativeCollections.NativeSortedList`2.op_Inequality*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).<>(NativeSortedList(Of TKey, TValue), NativeSortedList(Of TKey, TValue))
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).<>(NativeCollections.NativeSortedList(Of TKey, TValue), NativeCollections.NativeSortedList(Of TKey, TValue))
+  name.vb: <>(NativeSortedList(Of TKey, TValue), NativeSortedList(Of TKey, TValue))
+- uid: NativeCollections.NativeSortedList`2.Dispose
+  commentId: M:NativeCollections.NativeSortedList`2.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeSortedList<TKey, TValue>.Dispose()
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 235
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeSortedList`2.Dispose*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Dispose()
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Dispose()
+- uid: NativeCollections.NativeSortedList`2.Clear
+  commentId: M:NativeCollections.NativeSortedList`2.Clear
+  id: Clear
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: NativeSortedList<TKey, TValue>.Clear()
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Clear()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clear
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 248
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Clear
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Clear()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Clear()
+  overload: NativeCollections.NativeSortedList`2.Clear*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Clear()
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Clear()
+- uid: NativeCollections.NativeSortedList`2.Add(`0@,`1@)
+  commentId: M:NativeCollections.NativeSortedList`2.Add(`0@,`1@)
+  id: Add(`0@,`1@)
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Add(in TKey, in TValue)
+  nameWithType: NativeSortedList<TKey, TValue>.Add(in TKey, in TValue)
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Add(in TKey, in TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Add
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 260
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Add
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Add(in TKey key, in TValue value)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    - id: value
+      type: '{TValue}'
+      description: Value
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Add(key As TKey, value As TValue)
+  overload: NativeCollections.NativeSortedList`2.Add*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Add(TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Add(TKey, TValue)
+  name.vb: Add(TKey, TValue)
+- uid: NativeCollections.NativeSortedList`2.Remove(`0@)
+  commentId: M:NativeCollections.NativeSortedList`2.Remove(`0@)
+  id: Remove(`0@)
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Remove(in TKey)
+  nameWithType: NativeSortedList<TKey, TValue>.Remove(in TKey)
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Remove(in TKey)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 274
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Remove
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Remove(in TKey key)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    return:
+      type: System.Boolean
+      description: Removed
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Remove(key As TKey) As Boolean
+  overload: NativeCollections.NativeSortedList`2.Remove*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Remove(TKey)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Remove(TKey)
+  name.vb: Remove(TKey)
+- uid: NativeCollections.NativeSortedList`2.Remove(`0@,`1@)
+  commentId: M:NativeCollections.NativeSortedList`2.Remove(`0@,`1@)
+  id: Remove(`0@,`1@)
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Remove(in TKey, out TValue)
+  nameWithType: NativeSortedList<TKey, TValue>.Remove(in TKey, out TValue)
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Remove(in TKey, out TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 300
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Remove
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Remove(in TKey key, out TValue value)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    - id: value
+      type: '{TValue}'
+      description: Value
+    return:
+      type: System.Boolean
+      description: Removed
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Remove(key As TKey, value As TValue) As Boolean
+  overload: NativeCollections.NativeSortedList`2.Remove*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Remove(TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Remove(TKey, TValue)
+  name.vb: Remove(TKey, TValue)
+- uid: NativeCollections.NativeSortedList`2.ContainsKey(`0@)
+  commentId: M:NativeCollections.NativeSortedList`2.ContainsKey(`0@)
+  id: ContainsKey(`0@)
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: ContainsKey(in TKey)
+  nameWithType: NativeSortedList<TKey, TValue>.ContainsKey(in TKey)
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.ContainsKey(in TKey)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ContainsKey
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 327
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Contains key
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool ContainsKey(in TKey key)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    return:
+      type: System.Boolean
+      description: Contains key
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function ContainsKey(key As TKey) As Boolean
+  overload: NativeCollections.NativeSortedList`2.ContainsKey*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).ContainsKey(TKey)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).ContainsKey(TKey)
+  name.vb: ContainsKey(TKey)
+- uid: NativeCollections.NativeSortedList`2.TryGetValue(`0@,`1@)
+  commentId: M:NativeCollections.NativeSortedList`2.TryGetValue(`0@,`1@)
+  id: TryGetValue(`0@,`1@)
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: TryGetValue(in TKey, out TValue)
+  nameWithType: NativeSortedList<TKey, TValue>.TryGetValue(in TKey, out TValue)
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.TryGetValue(in TKey, out TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryGetValue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 336
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try to get the value
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryGetValue(in TKey key, out TValue value)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    - id: value
+      type: '{TValue}'
+      description: Value
+    return:
+      type: System.Boolean
+      description: Got
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryGetValue(key As TKey, value As TValue) As Boolean
+  overload: NativeCollections.NativeSortedList`2.TryGetValue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).TryGetValue(TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).TryGetValue(TKey, TValue)
+  name.vb: TryGetValue(TKey, TValue)
+- uid: NativeCollections.NativeSortedList`2.EnsureCapacity(System.Int32)
+  commentId: M:NativeCollections.NativeSortedList`2.EnsureCapacity(System.Int32)
+  id: EnsureCapacity(System.Int32)
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: EnsureCapacity(int)
+  nameWithType: NativeSortedList<TKey, TValue>.EnsureCapacity(int)
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.EnsureCapacity(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: EnsureCapacity
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 355
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Ensure capacity
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void EnsureCapacity(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub EnsureCapacity(capacity As Integer)
+  overload: NativeCollections.NativeSortedList`2.EnsureCapacity*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).EnsureCapacity(Integer)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).EnsureCapacity(Integer)
+  name.vb: EnsureCapacity(Integer)
+- uid: NativeCollections.NativeSortedList`2.TrimExcess
+  commentId: M:NativeCollections.NativeSortedList`2.TrimExcess
+  id: TrimExcess
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: TrimExcess()
+  nameWithType: NativeSortedList<TKey, TValue>.TrimExcess()
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.TrimExcess()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TrimExcess
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 375
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Trim excess
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int TrimExcess()
+    return:
+      type: System.Int32
+      description: New capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TrimExcess() As Integer
+  overload: NativeCollections.NativeSortedList`2.TrimExcess*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).TrimExcess()
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).TrimExcess()
+- uid: NativeCollections.NativeSortedList`2.Empty
+  commentId: P:NativeCollections.NativeSortedList`2.Empty
+  id: Empty
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeSortedList<TKey, TValue>.Empty
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 437
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeSortedList<TKey, TValue> Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeSortedList`2
+    content.vb: Public Shared ReadOnly Property Empty As NativeSortedList(Of TKey, TValue)
+  overload: NativeCollections.NativeSortedList`2.Empty*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Empty
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Empty
+- uid: NativeCollections.NativeSortedList`2.GetEnumerator
+  commentId: M:NativeCollections.NativeSortedList`2.GetEnumerator
+  id: GetEnumerator
+  parent: NativeCollections.NativeSortedList`2
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: NativeSortedList<TKey, TValue>.GetEnumerator()
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetEnumerator
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedList.cs
+    startLine: 443
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get enumerator
+  example: []
+  syntax:
+    content: public NativeSortedList<TKey, TValue>.Enumerator GetEnumerator()
+    return:
+      type: NativeCollections.NativeSortedList`2.Enumerator
+      description: Enumerator
+    content.vb: Public Function GetEnumerator() As NativeSortedList(Of TKey, TValue).Enumerator
+  overload: NativeCollections.NativeSortedList`2.GetEnumerator*
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).GetEnumerator()
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).GetEnumerator()
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeSortedList`2.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeSortedList<TKey, TValue>>(NativeSortedList<TKey, TValue>)
+  nameWithType: JsonHelper.ToJson<NativeSortedList<TKey, TValue>>(NativeSortedList<TKey, TValue>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeSortedList<TKey, TValue>>(NativeCollections.NativeSortedList<TKey, TValue>)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeSortedList(Of TKey, TValue))(NativeSortedList(Of TKey, TValue))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeSortedList(Of TKey, TValue))(NativeCollections.NativeSortedList(Of TKey, TValue))
+  name.vb: ToJson(Of NativeSortedList(Of TKey, TValue))(NativeSortedList(Of TKey, TValue))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeSortedList{`0,`1})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeSortedList{`0,`1})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeSortedList`2.Keys*
+  commentId: Overload:NativeCollections.NativeSortedList`2.Keys
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_Keys
+  name: Keys
+  nameWithType: NativeSortedList<TKey, TValue>.Keys
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Keys
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Keys
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Keys
+- uid: NativeCollections.NativeSortedList`2.KeyCollection
+  commentId: T:NativeCollections.NativeSortedList`2.KeyCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedList-2.html
+  name: NativeSortedList<TKey, TValue>.KeyCollection
+  nameWithType: NativeSortedList<TKey, TValue>.KeyCollection
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.KeyCollection
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).KeyCollection
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).KeyCollection
+  name.vb: NativeSortedList(Of TKey, TValue).KeyCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedList-2.KeyCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedList-2.KeyCollection.html
+- uid: NativeCollections.NativeSortedList`2.Values*
+  commentId: Overload:NativeCollections.NativeSortedList`2.Values
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_Values
+  name: Values
+  nameWithType: NativeSortedList<TKey, TValue>.Values
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Values
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Values
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Values
+- uid: NativeCollections.NativeSortedList`2.ValueCollection
+  commentId: T:NativeCollections.NativeSortedList`2.ValueCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedList-2.html
+  name: NativeSortedList<TKey, TValue>.ValueCollection
+  nameWithType: NativeSortedList<TKey, TValue>.ValueCollection
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.ValueCollection
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).ValueCollection
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).ValueCollection
+  name.vb: NativeSortedList(Of TKey, TValue).ValueCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedList-2.ValueCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedList-2.ValueCollection.html
+- uid: NativeCollections.NativeSortedList`2.#ctor*
+  commentId: Overload:NativeCollections.NativeSortedList`2.#ctor
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2__ctor_System_Int32_
+  name: NativeSortedList
+  nameWithType: NativeSortedList<TKey, TValue>.NativeSortedList
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.NativeSortedList
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).New
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativeSortedList`2.IsCreated*
+  commentId: Overload:NativeCollections.NativeSortedList`2.IsCreated
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_IsCreated
+  name: IsCreated
+  nameWithType: NativeSortedList<TKey, TValue>.IsCreated
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.IsCreated
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).IsCreated
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeSortedList`2.IsEmpty*
+  commentId: Overload:NativeCollections.NativeSortedList`2.IsEmpty
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_IsEmpty
+  name: IsEmpty
+  nameWithType: NativeSortedList<TKey, TValue>.IsEmpty
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.IsEmpty
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).IsEmpty
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).IsEmpty
+- uid: NativeCollections.NativeSortedList`2.Item*
+  commentId: Overload:NativeCollections.NativeSortedList`2.Item
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_Item__0_
+  name: this
+  nameWithType: NativeSortedList<TKey, TValue>.this
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.this
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).this[]
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).this[]
+  name.vb: this[]
+- uid: '{TKey}'
+  commentId: '!:TKey'
+  definition: TKey
+  name: TKey
+  nameWithType: TKey
+  fullName: TKey
+- uid: '{TValue}'
+  commentId: '!:TValue'
+  definition: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: TKey
+  name: TKey
+  nameWithType: TKey
+  fullName: TKey
+- uid: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: NativeCollections.NativeSortedList`2.Count*
+  commentId: Overload:NativeCollections.NativeSortedList`2.Count
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_Count
+  name: Count
+  nameWithType: NativeSortedList<TKey, TValue>.Count
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Count
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Count
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Count
+- uid: NativeCollections.NativeSortedList`2.Capacity*
+  commentId: Overload:NativeCollections.NativeSortedList`2.Capacity
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_Capacity
+  name: Capacity
+  nameWithType: NativeSortedList<TKey, TValue>.Capacity
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Capacity
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Capacity
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Capacity
+- uid: NativeCollections.NativeSortedList`2.Equals*
+  commentId: Overload:NativeCollections.NativeSortedList`2.Equals
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_Equals_NativeCollections_NativeSortedList__0__1__
+  name: Equals
+  nameWithType: NativeSortedList<TKey, TValue>.Equals
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Equals
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Equals
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Equals
+- uid: NativeCollections.NativeSortedList`2
+  commentId: T:NativeCollections.NativeSortedList`2
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedList-2.html
+  name: NativeSortedList<TKey, TValue>
+  nameWithType: NativeSortedList<TKey, TValue>
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>
+  nameWithType.vb: NativeSortedList(Of TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue)
+  name.vb: NativeSortedList(Of TKey, TValue)
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeSortedList`2.GetHashCode*
+  commentId: Overload:NativeCollections.NativeSortedList`2.GetHashCode
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeSortedList<TKey, TValue>.GetHashCode
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.GetHashCode
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).GetHashCode
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeSortedList`2.ToString*
+  commentId: Overload:NativeCollections.NativeSortedList`2.ToString
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_ToString
+  name: ToString
+  nameWithType: NativeSortedList<TKey, TValue>.ToString
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.ToString
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).ToString
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeSortedList`2.op_Equality*
+  commentId: Overload:NativeCollections.NativeSortedList`2.op_Equality
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_op_Equality_NativeCollections_NativeSortedList__0__1__NativeCollections_NativeSortedList__0__1__
+  name: operator ==
+  nameWithType: NativeSortedList<TKey, TValue>.operator ==
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.operator ==
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).=
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeSortedList`2.op_Equality*
+    name: ==
+    href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_op_Equality_NativeCollections_NativeSortedList__0__1__NativeCollections_NativeSortedList__0__1__
+- uid: NativeCollections.NativeSortedList`2.op_Inequality*
+  commentId: Overload:NativeCollections.NativeSortedList`2.op_Inequality
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_op_Inequality_NativeCollections_NativeSortedList__0__1__NativeCollections_NativeSortedList__0__1__
+  name: operator !=
+  nameWithType: NativeSortedList<TKey, TValue>.operator !=
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.operator !=
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).<>
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeSortedList`2.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_op_Inequality_NativeCollections_NativeSortedList__0__1__NativeCollections_NativeSortedList__0__1__
+- uid: NativeCollections.NativeSortedList`2.Dispose*
+  commentId: Overload:NativeCollections.NativeSortedList`2.Dispose
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_Dispose
+  name: Dispose
+  nameWithType: NativeSortedList<TKey, TValue>.Dispose
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Dispose
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Dispose
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Dispose
+- uid: NativeCollections.NativeSortedList`2.Clear*
+  commentId: Overload:NativeCollections.NativeSortedList`2.Clear
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_Clear
+  name: Clear
+  nameWithType: NativeSortedList<TKey, TValue>.Clear
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Clear
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Clear
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Clear
+- uid: NativeCollections.NativeSortedList`2.Add*
+  commentId: Overload:NativeCollections.NativeSortedList`2.Add
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_Add__0___1__
+  name: Add
+  nameWithType: NativeSortedList<TKey, TValue>.Add
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Add
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Add
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Add
+- uid: NativeCollections.NativeSortedList`2.Remove*
+  commentId: Overload:NativeCollections.NativeSortedList`2.Remove
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_Remove__0__
+  name: Remove
+  nameWithType: NativeSortedList<TKey, TValue>.Remove
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Remove
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Remove
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Remove
+- uid: NativeCollections.NativeSortedList`2.ContainsKey*
+  commentId: Overload:NativeCollections.NativeSortedList`2.ContainsKey
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_ContainsKey__0__
+  name: ContainsKey
+  nameWithType: NativeSortedList<TKey, TValue>.ContainsKey
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.ContainsKey
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).ContainsKey
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).ContainsKey
+- uid: NativeCollections.NativeSortedList`2.TryGetValue*
+  commentId: Overload:NativeCollections.NativeSortedList`2.TryGetValue
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_TryGetValue__0___1__
+  name: TryGetValue
+  nameWithType: NativeSortedList<TKey, TValue>.TryGetValue
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.TryGetValue
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).TryGetValue
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).TryGetValue
+- uid: NativeCollections.NativeSortedList`2.EnsureCapacity*
+  commentId: Overload:NativeCollections.NativeSortedList`2.EnsureCapacity
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_EnsureCapacity_System_Int32_
+  name: EnsureCapacity
+  nameWithType: NativeSortedList<TKey, TValue>.EnsureCapacity
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.EnsureCapacity
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).EnsureCapacity
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).EnsureCapacity
+- uid: NativeCollections.NativeSortedList`2.TrimExcess*
+  commentId: Overload:NativeCollections.NativeSortedList`2.TrimExcess
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_TrimExcess
+  name: TrimExcess
+  nameWithType: NativeSortedList<TKey, TValue>.TrimExcess
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.TrimExcess
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).TrimExcess
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).TrimExcess
+- uid: NativeCollections.NativeSortedList`2.Empty*
+  commentId: Overload:NativeCollections.NativeSortedList`2.Empty
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_Empty
+  name: Empty
+  nameWithType: NativeSortedList<TKey, TValue>.Empty
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Empty
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Empty
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Empty
+- uid: NativeCollections.NativeSortedList`2.GetEnumerator*
+  commentId: Overload:NativeCollections.NativeSortedList`2.GetEnumerator
+  href: NativeCollections.NativeSortedList-2.html#NativeCollections_NativeSortedList_2_GetEnumerator
+  name: GetEnumerator
+  nameWithType: NativeSortedList<TKey, TValue>.GetEnumerator
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.GetEnumerator
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).GetEnumerator
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).GetEnumerator
+- uid: NativeCollections.NativeSortedList`2.Enumerator
+  commentId: T:NativeCollections.NativeSortedList`2.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedList-2.html
+  name: NativeSortedList<TKey, TValue>.Enumerator
+  nameWithType: NativeSortedList<TKey, TValue>.Enumerator
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Enumerator
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Enumerator
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Enumerator
+  name.vb: NativeSortedList(Of TKey, TValue).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedList-2.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedList-2.Enumerator.html

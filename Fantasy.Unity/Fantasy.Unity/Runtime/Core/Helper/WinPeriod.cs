@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace Fantasy
+namespace Fantasy.Helper
 {
     /// <summary>
     /// 精度设置

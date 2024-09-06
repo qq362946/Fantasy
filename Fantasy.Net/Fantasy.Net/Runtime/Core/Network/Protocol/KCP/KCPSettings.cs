@@ -8,7 +8,7 @@ using kcp2k;
 #endif
 
 #pragma warning disable CS1591
-namespace Fantasy
+namespace Fantasy.Network.KCP
 {
     public class KCPSettings
     {
@@ -69,7 +69,6 @@ namespace Fantasy
 
     public static class KCPFactory
     {
-#if FANTASY_KCPUNSAFE
         public static Kcp Create(NetworkTarget networkTarget, uint conv, KcpCallback output, out KCPSettings kcpSettings)
         {
             var kcp = new Kcp(conv, output);
@@ -90,27 +89,6 @@ namespace Fantasy
             kcp.SetMinrto(30);
             return kcp;
         }
-#endif
-#if FANTASY_KCP2K
-        public static Kcp Create(NetworkTarget networkTarget, uint conv, KcpCallback output, out KCPSettings kcpSettings)
-        {
-            var kcp = new Kcp(conv, output);
-            kcpSettings = KCPSettings.Create(networkTarget);
-            kcp.SetNoDelay(1, 5, 2, true);
-            kcp.SetWindowSize(kcpSettings.SendWindowSize, kcpSettings.ReceiveWindowSize);
-            kcp.SetMtu((uint)kcpSettings.Mtu);
-            return kcp;
-        }
-        
-        public static Kcp Create(KCPSettings kcpSettings, uint conv, KcpCallback output)
-        {
-            var kcp = new Kcp(conv, output);
-            kcp.SetNoDelay(1, 5, 2, true);
-            kcp.SetWindowSize(kcpSettings.SendWindowSize, kcpSettings.ReceiveWindowSize);
-            kcp.SetMtu((uint)kcpSettings.Mtu);
-            return kcp;
-        }
-#endif
     }
 }
 #endif

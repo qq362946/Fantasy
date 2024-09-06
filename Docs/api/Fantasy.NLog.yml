@@ -1,0 +1,1391 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.NLog
+  commentId: T:Fantasy.NLog
+  id: NLog
+  parent: Fantasy
+  children:
+  - Fantasy.NLog.#ctor(System.String)
+  - Fantasy.NLog.Debug(System.String)
+  - Fantasy.NLog.Debug(System.String,System.Object[])
+  - Fantasy.NLog.Error(System.String)
+  - Fantasy.NLog.Error(System.String,System.Object[])
+  - Fantasy.NLog.Fatal(System.String)
+  - Fantasy.NLog.Fatal(System.String,System.Object[])
+  - Fantasy.NLog.Info(System.String)
+  - Fantasy.NLog.Info(System.String,System.Object[])
+  - Fantasy.NLog.Trace(System.String)
+  - Fantasy.NLog.Trace(System.String,System.Object[])
+  - Fantasy.NLog.Warning(System.String)
+  - Fantasy.NLog.Warning(System.String,System.Object[])
+  langs:
+  - csharp
+  - vb
+  name: NLog
+  nameWithType: NLog
+  fullName: Fantasy.NLog
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NLog
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 8
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 使用 NLog 实现的日志记录器。
+  example: []
+  syntax:
+    content: 'public class NLog : ILog'
+    content.vb: Public Class NLog Implements ILog
+  inheritance:
+  - System.Object
+  implements:
+  - Fantasy.ILog
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.NLog.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.NLog.#ctor(System.String)
+  commentId: M:Fantasy.NLog.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: NLog(string)
+  nameWithType: NLog.NLog(string)
+  fullName: Fantasy.NLog.NLog(string)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 16
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 初始化 NLog 实例。
+  example: []
+  syntax:
+    content: public NLog(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: 日志记录器的名称。
+    content.vb: Public Sub New(name As String)
+  overload: Fantasy.NLog.#ctor*
+  nameWithType.vb: NLog.New(String)
+  fullName.vb: Fantasy.NLog.New(String)
+  name.vb: New(String)
+- uid: Fantasy.NLog.Trace(System.String)
+  commentId: M:Fantasy.NLog.Trace(System.String)
+  id: Trace(System.String)
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Trace(string)
+  nameWithType: NLog.Trace(string)
+  fullName: Fantasy.NLog.Trace(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Trace
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 26
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录跟踪级别的日志消息。
+  example: []
+  syntax:
+    content: public void Trace(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息。
+    content.vb: Public Sub Trace(message As String)
+  overload: Fantasy.NLog.Trace*
+  implements:
+  - Fantasy.ILog.Trace(System.String)
+  nameWithType.vb: NLog.Trace(String)
+  fullName.vb: Fantasy.NLog.Trace(String)
+  name.vb: Trace(String)
+- uid: Fantasy.NLog.Warning(System.String)
+  commentId: M:Fantasy.NLog.Warning(System.String)
+  id: Warning(System.String)
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Warning(string)
+  nameWithType: NLog.Warning(string)
+  fullName: Fantasy.NLog.Warning(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Warning
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 35
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录警告级别的日志消息。
+  example: []
+  syntax:
+    content: public void Warning(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息。
+    content.vb: Public Sub Warning(message As String)
+  overload: Fantasy.NLog.Warning*
+  implements:
+  - Fantasy.ILog.Warning(System.String)
+  nameWithType.vb: NLog.Warning(String)
+  fullName.vb: Fantasy.NLog.Warning(String)
+  name.vb: Warning(String)
+- uid: Fantasy.NLog.Info(System.String)
+  commentId: M:Fantasy.NLog.Info(System.String)
+  id: Info(System.String)
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Info(string)
+  nameWithType: NLog.Info(string)
+  fullName: Fantasy.NLog.Info(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Info
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 44
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录信息级别的日志消息。
+  example: []
+  syntax:
+    content: public void Info(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息。
+    content.vb: Public Sub Info(message As String)
+  overload: Fantasy.NLog.Info*
+  implements:
+  - Fantasy.ILog.Info(System.String)
+  nameWithType.vb: NLog.Info(String)
+  fullName.vb: Fantasy.NLog.Info(String)
+  name.vb: Info(String)
+- uid: Fantasy.NLog.Debug(System.String)
+  commentId: M:Fantasy.NLog.Debug(System.String)
+  id: Debug(System.String)
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Debug(string)
+  nameWithType: NLog.Debug(string)
+  fullName: Fantasy.NLog.Debug(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Debug
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 53
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录调试级别的日志消息。
+  example: []
+  syntax:
+    content: public void Debug(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息。
+    content.vb: Public Sub Debug(message As String)
+  overload: Fantasy.NLog.Debug*
+  implements:
+  - Fantasy.ILog.Debug(System.String)
+  nameWithType.vb: NLog.Debug(String)
+  fullName.vb: Fantasy.NLog.Debug(String)
+  name.vb: Debug(String)
+- uid: Fantasy.NLog.Error(System.String)
+  commentId: M:Fantasy.NLog.Error(System.String)
+  id: Error(System.String)
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Error(string)
+  nameWithType: NLog.Error(string)
+  fullName: Fantasy.NLog.Error(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Error
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 62
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录错误级别的日志消息。
+  example: []
+  syntax:
+    content: public void Error(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息。
+    content.vb: Public Sub [Error](message As String)
+  overload: Fantasy.NLog.Error*
+  implements:
+  - Fantasy.ILog.Error(System.String)
+  nameWithType.vb: NLog.Error(String)
+  fullName.vb: Fantasy.NLog.Error(String)
+  name.vb: Error(String)
+- uid: Fantasy.NLog.Fatal(System.String)
+  commentId: M:Fantasy.NLog.Fatal(System.String)
+  id: Fatal(System.String)
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Fatal(string)
+  nameWithType: NLog.Fatal(string)
+  fullName: Fantasy.NLog.Fatal(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Fatal
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 71
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录严重错误级别的日志消息。
+  example: []
+  syntax:
+    content: public void Fatal(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息。
+    content.vb: Public Sub Fatal(message As String)
+  overload: Fantasy.NLog.Fatal*
+  nameWithType.vb: NLog.Fatal(String)
+  fullName.vb: Fantasy.NLog.Fatal(String)
+  name.vb: Fatal(String)
+- uid: Fantasy.NLog.Trace(System.String,System.Object[])
+  commentId: M:Fantasy.NLog.Trace(System.String,System.Object[])
+  id: Trace(System.String,System.Object[])
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Trace(string, params object[])
+  nameWithType: NLog.Trace(string, params object[])
+  fullName: Fantasy.NLog.Trace(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Trace
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 81
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录跟踪级别的格式化日志消息。
+  example: []
+  syntax:
+    content: public void Trace(string message, params object[] args)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息模板。
+    - id: args
+      type: System.Object[]
+      description: 格式化参数。
+    content.vb: Public Sub Trace(message As String, ParamArray args As Object())
+  overload: Fantasy.NLog.Trace*
+  implements:
+  - Fantasy.ILog.Trace(System.String,System.Object[])
+  nameWithType.vb: NLog.Trace(String, ParamArray Object())
+  fullName.vb: Fantasy.NLog.Trace(String, ParamArray Object())
+  name.vb: Trace(String, ParamArray Object())
+- uid: Fantasy.NLog.Warning(System.String,System.Object[])
+  commentId: M:Fantasy.NLog.Warning(System.String,System.Object[])
+  id: Warning(System.String,System.Object[])
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Warning(string, params object[])
+  nameWithType: NLog.Warning(string, params object[])
+  fullName: Fantasy.NLog.Warning(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Warning
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 91
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录警告级别的格式化日志消息。
+  example: []
+  syntax:
+    content: public void Warning(string message, params object[] args)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息模板。
+    - id: args
+      type: System.Object[]
+      description: 格式化参数。
+    content.vb: Public Sub Warning(message As String, ParamArray args As Object())
+  overload: Fantasy.NLog.Warning*
+  implements:
+  - Fantasy.ILog.Warning(System.String,System.Object[])
+  nameWithType.vb: NLog.Warning(String, ParamArray Object())
+  fullName.vb: Fantasy.NLog.Warning(String, ParamArray Object())
+  name.vb: Warning(String, ParamArray Object())
+- uid: Fantasy.NLog.Info(System.String,System.Object[])
+  commentId: M:Fantasy.NLog.Info(System.String,System.Object[])
+  id: Info(System.String,System.Object[])
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Info(string, params object[])
+  nameWithType: NLog.Info(string, params object[])
+  fullName: Fantasy.NLog.Info(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Info
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 101
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录信息级别的格式化日志消息。
+  example: []
+  syntax:
+    content: public void Info(string message, params object[] args)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息模板。
+    - id: args
+      type: System.Object[]
+      description: 格式化参数。
+    content.vb: Public Sub Info(message As String, ParamArray args As Object())
+  overload: Fantasy.NLog.Info*
+  implements:
+  - Fantasy.ILog.Info(System.String,System.Object[])
+  nameWithType.vb: NLog.Info(String, ParamArray Object())
+  fullName.vb: Fantasy.NLog.Info(String, ParamArray Object())
+  name.vb: Info(String, ParamArray Object())
+- uid: Fantasy.NLog.Debug(System.String,System.Object[])
+  commentId: M:Fantasy.NLog.Debug(System.String,System.Object[])
+  id: Debug(System.String,System.Object[])
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Debug(string, params object[])
+  nameWithType: NLog.Debug(string, params object[])
+  fullName: Fantasy.NLog.Debug(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Debug
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 111
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录调试级别的格式化日志消息。
+  example: []
+  syntax:
+    content: public void Debug(string message, params object[] args)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息模板。
+    - id: args
+      type: System.Object[]
+      description: 格式化参数。
+    content.vb: Public Sub Debug(message As String, ParamArray args As Object())
+  overload: Fantasy.NLog.Debug*
+  implements:
+  - Fantasy.ILog.Debug(System.String,System.Object[])
+  nameWithType.vb: NLog.Debug(String, ParamArray Object())
+  fullName.vb: Fantasy.NLog.Debug(String, ParamArray Object())
+  name.vb: Debug(String, ParamArray Object())
+- uid: Fantasy.NLog.Error(System.String,System.Object[])
+  commentId: M:Fantasy.NLog.Error(System.String,System.Object[])
+  id: Error(System.String,System.Object[])
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Error(string, params object[])
+  nameWithType: NLog.Error(string, params object[])
+  fullName: Fantasy.NLog.Error(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Error
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 121
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录错误级别的格式化日志消息。
+  example: []
+  syntax:
+    content: public void Error(string message, params object[] args)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息模板。
+    - id: args
+      type: System.Object[]
+      description: 格式化参数。
+    content.vb: Public Sub [Error](message As String, ParamArray args As Object())
+  overload: Fantasy.NLog.Error*
+  implements:
+  - Fantasy.ILog.Error(System.String,System.Object[])
+  nameWithType.vb: NLog.Error(String, ParamArray Object())
+  fullName.vb: Fantasy.NLog.Error(String, ParamArray Object())
+  name.vb: Error(String, ParamArray Object())
+- uid: Fantasy.NLog.Fatal(System.String,System.Object[])
+  commentId: M:Fantasy.NLog.Fatal(System.String,System.Object[])
+  id: Fatal(System.String,System.Object[])
+  parent: Fantasy.NLog
+  langs:
+  - csharp
+  - vb
+  name: Fatal(string, params object[])
+  nameWithType: NLog.Fatal(string, params object[])
+  fullName: Fantasy.NLog.Fatal(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Fatal
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Log/NLog.cs
+    startLine: 131
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 记录严重错误级别的格式化日志消息。
+  example: []
+  syntax:
+    content: public void Fatal(string message, params object[] args)
+    parameters:
+    - id: message
+      type: System.String
+      description: 日志消息模板。
+    - id: args
+      type: System.Object[]
+      description: 格式化参数。
+    content.vb: Public Sub Fatal(message As String, ParamArray args As Object())
+  overload: Fantasy.NLog.Fatal*
+  nameWithType.vb: NLog.Fatal(String, ParamArray Object())
+  fullName.vb: Fantasy.NLog.Fatal(String, ParamArray Object())
+  name.vb: Fatal(String, ParamArray Object())
+references:
+- uid: Fantasy
+  commentId: N:Fantasy
+  href: Fantasy.html
+  name: Fantasy
+  nameWithType: Fantasy
+  fullName: Fantasy
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.ILog
+  commentId: T:Fantasy.ILog
+  parent: Fantasy
+  href: Fantasy.ILog.html
+  name: ILog
+  nameWithType: ILog
+  fullName: Fantasy.ILog
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.NLog.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NLog>(NLog)
+  nameWithType: JsonHelper.ToJson<NLog>(NLog)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.NLog>(Fantasy.NLog)
+  nameWithType.vb: JsonHelper.ToJson(Of NLog)(NLog)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.NLog)(Fantasy.NLog)
+  name.vb: ToJson(Of NLog)(NLog)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.NLog)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.NLog
+    name: NLog
+    href: Fantasy.NLog.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.NLog
+    name: NLog
+    href: Fantasy.NLog.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.NLog)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.NLog
+    name: NLog
+    href: Fantasy.NLog.html
+  - name: )
+  - name: (
+  - uid: Fantasy.NLog
+    name: NLog
+    href: Fantasy.NLog.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.NLog.#ctor*
+  commentId: Overload:Fantasy.NLog.#ctor
+  href: Fantasy.NLog.html#Fantasy_NLog__ctor_System_String_
+  name: NLog
+  nameWithType: NLog.NLog
+  fullName: Fantasy.NLog.NLog
+  nameWithType.vb: NLog.New
+  fullName.vb: Fantasy.NLog.New
+  name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Fantasy.NLog.Trace*
+  commentId: Overload:Fantasy.NLog.Trace
+  href: Fantasy.NLog.html#Fantasy_NLog_Trace_System_String_
+  name: Trace
+  nameWithType: NLog.Trace
+  fullName: Fantasy.NLog.Trace
+- uid: Fantasy.ILog.Trace(System.String)
+  commentId: M:Fantasy.ILog.Trace(System.String)
+  parent: Fantasy.ILog
+  isExternal: true
+  href: Fantasy.ILog.html#Fantasy_ILog_Trace_System_String_
+  name: Trace(string)
+  nameWithType: ILog.Trace(string)
+  fullName: Fantasy.ILog.Trace(string)
+  nameWithType.vb: ILog.Trace(String)
+  fullName.vb: Fantasy.ILog.Trace(String)
+  name.vb: Trace(String)
+  spec.csharp:
+  - uid: Fantasy.ILog.Trace(System.String)
+    name: Trace
+    href: Fantasy.ILog.html#Fantasy_ILog_Trace_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Fantasy.ILog.Trace(System.String)
+    name: Trace
+    href: Fantasy.ILog.html#Fantasy_ILog_Trace_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Fantasy.NLog.Warning*
+  commentId: Overload:Fantasy.NLog.Warning
+  href: Fantasy.NLog.html#Fantasy_NLog_Warning_System_String_
+  name: Warning
+  nameWithType: NLog.Warning
+  fullName: Fantasy.NLog.Warning
+- uid: Fantasy.ILog.Warning(System.String)
+  commentId: M:Fantasy.ILog.Warning(System.String)
+  parent: Fantasy.ILog
+  isExternal: true
+  href: Fantasy.ILog.html#Fantasy_ILog_Warning_System_String_
+  name: Warning(string)
+  nameWithType: ILog.Warning(string)
+  fullName: Fantasy.ILog.Warning(string)
+  nameWithType.vb: ILog.Warning(String)
+  fullName.vb: Fantasy.ILog.Warning(String)
+  name.vb: Warning(String)
+  spec.csharp:
+  - uid: Fantasy.ILog.Warning(System.String)
+    name: Warning
+    href: Fantasy.ILog.html#Fantasy_ILog_Warning_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Fantasy.ILog.Warning(System.String)
+    name: Warning
+    href: Fantasy.ILog.html#Fantasy_ILog_Warning_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Fantasy.NLog.Info*
+  commentId: Overload:Fantasy.NLog.Info
+  href: Fantasy.NLog.html#Fantasy_NLog_Info_System_String_
+  name: Info
+  nameWithType: NLog.Info
+  fullName: Fantasy.NLog.Info
+- uid: Fantasy.ILog.Info(System.String)
+  commentId: M:Fantasy.ILog.Info(System.String)
+  parent: Fantasy.ILog
+  isExternal: true
+  href: Fantasy.ILog.html#Fantasy_ILog_Info_System_String_
+  name: Info(string)
+  nameWithType: ILog.Info(string)
+  fullName: Fantasy.ILog.Info(string)
+  nameWithType.vb: ILog.Info(String)
+  fullName.vb: Fantasy.ILog.Info(String)
+  name.vb: Info(String)
+  spec.csharp:
+  - uid: Fantasy.ILog.Info(System.String)
+    name: Info
+    href: Fantasy.ILog.html#Fantasy_ILog_Info_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Fantasy.ILog.Info(System.String)
+    name: Info
+    href: Fantasy.ILog.html#Fantasy_ILog_Info_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Fantasy.NLog.Debug*
+  commentId: Overload:Fantasy.NLog.Debug
+  href: Fantasy.NLog.html#Fantasy_NLog_Debug_System_String_
+  name: Debug
+  nameWithType: NLog.Debug
+  fullName: Fantasy.NLog.Debug
+- uid: Fantasy.ILog.Debug(System.String)
+  commentId: M:Fantasy.ILog.Debug(System.String)
+  parent: Fantasy.ILog
+  isExternal: true
+  href: Fantasy.ILog.html#Fantasy_ILog_Debug_System_String_
+  name: Debug(string)
+  nameWithType: ILog.Debug(string)
+  fullName: Fantasy.ILog.Debug(string)
+  nameWithType.vb: ILog.Debug(String)
+  fullName.vb: Fantasy.ILog.Debug(String)
+  name.vb: Debug(String)
+  spec.csharp:
+  - uid: Fantasy.ILog.Debug(System.String)
+    name: Debug
+    href: Fantasy.ILog.html#Fantasy_ILog_Debug_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Fantasy.ILog.Debug(System.String)
+    name: Debug
+    href: Fantasy.ILog.html#Fantasy_ILog_Debug_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Fantasy.NLog.Error*
+  commentId: Overload:Fantasy.NLog.Error
+  href: Fantasy.NLog.html#Fantasy_NLog_Error_System_String_
+  name: Error
+  nameWithType: NLog.Error
+  fullName: Fantasy.NLog.Error
+- uid: Fantasy.ILog.Error(System.String)
+  commentId: M:Fantasy.ILog.Error(System.String)
+  parent: Fantasy.ILog
+  isExternal: true
+  href: Fantasy.ILog.html#Fantasy_ILog_Error_System_String_
+  name: Error(string)
+  nameWithType: ILog.Error(string)
+  fullName: Fantasy.ILog.Error(string)
+  nameWithType.vb: ILog.Error(String)
+  fullName.vb: Fantasy.ILog.Error(String)
+  name.vb: Error(String)
+  spec.csharp:
+  - uid: Fantasy.ILog.Error(System.String)
+    name: Error
+    href: Fantasy.ILog.html#Fantasy_ILog_Error_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Fantasy.ILog.Error(System.String)
+    name: Error
+    href: Fantasy.ILog.html#Fantasy_ILog_Error_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Fantasy.NLog.Fatal*
+  commentId: Overload:Fantasy.NLog.Fatal
+  href: Fantasy.NLog.html#Fantasy_NLog_Fatal_System_String_
+  name: Fatal
+  nameWithType: NLog.Fatal
+  fullName: Fantasy.NLog.Fatal
+- uid: Fantasy.ILog.Trace(System.String,System.Object[])
+  commentId: M:Fantasy.ILog.Trace(System.String,System.Object[])
+  parent: Fantasy.ILog
+  isExternal: true
+  href: Fantasy.ILog.html#Fantasy_ILog_Trace_System_String_System_Object___
+  name: Trace(string, params object[])
+  nameWithType: ILog.Trace(string, params object[])
+  fullName: Fantasy.ILog.Trace(string, params object[])
+  nameWithType.vb: ILog.Trace(String, ParamArray Object())
+  fullName.vb: Fantasy.ILog.Trace(String, ParamArray Object())
+  name.vb: Trace(String, ParamArray Object())
+  spec.csharp:
+  - uid: Fantasy.ILog.Trace(System.String,System.Object[])
+    name: Trace
+    href: Fantasy.ILog.html#Fantasy_ILog_Trace_System_String_System_Object___
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: params
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.ILog.Trace(System.String,System.Object[])
+    name: Trace
+    href: Fantasy.ILog.html#Fantasy_ILog_Trace_System_String_System_Object___
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: ParamArray
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: (
+  - name: )
+  - name: )
+- uid: System.Object[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object[]
+  nameWithType: object[]
+  fullName: object[]
+  nameWithType.vb: Object()
+  fullName.vb: Object()
+  name.vb: Object()
+  spec.csharp:
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: (
+  - name: )
+- uid: Fantasy.ILog.Warning(System.String,System.Object[])
+  commentId: M:Fantasy.ILog.Warning(System.String,System.Object[])
+  parent: Fantasy.ILog
+  isExternal: true
+  href: Fantasy.ILog.html#Fantasy_ILog_Warning_System_String_System_Object___
+  name: Warning(string, params object[])
+  nameWithType: ILog.Warning(string, params object[])
+  fullName: Fantasy.ILog.Warning(string, params object[])
+  nameWithType.vb: ILog.Warning(String, ParamArray Object())
+  fullName.vb: Fantasy.ILog.Warning(String, ParamArray Object())
+  name.vb: Warning(String, ParamArray Object())
+  spec.csharp:
+  - uid: Fantasy.ILog.Warning(System.String,System.Object[])
+    name: Warning
+    href: Fantasy.ILog.html#Fantasy_ILog_Warning_System_String_System_Object___
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: params
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.ILog.Warning(System.String,System.Object[])
+    name: Warning
+    href: Fantasy.ILog.html#Fantasy_ILog_Warning_System_String_System_Object___
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: ParamArray
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: (
+  - name: )
+  - name: )
+- uid: Fantasy.ILog.Info(System.String,System.Object[])
+  commentId: M:Fantasy.ILog.Info(System.String,System.Object[])
+  parent: Fantasy.ILog
+  isExternal: true
+  href: Fantasy.ILog.html#Fantasy_ILog_Info_System_String_System_Object___
+  name: Info(string, params object[])
+  nameWithType: ILog.Info(string, params object[])
+  fullName: Fantasy.ILog.Info(string, params object[])
+  nameWithType.vb: ILog.Info(String, ParamArray Object())
+  fullName.vb: Fantasy.ILog.Info(String, ParamArray Object())
+  name.vb: Info(String, ParamArray Object())
+  spec.csharp:
+  - uid: Fantasy.ILog.Info(System.String,System.Object[])
+    name: Info
+    href: Fantasy.ILog.html#Fantasy_ILog_Info_System_String_System_Object___
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: params
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.ILog.Info(System.String,System.Object[])
+    name: Info
+    href: Fantasy.ILog.html#Fantasy_ILog_Info_System_String_System_Object___
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: ParamArray
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: (
+  - name: )
+  - name: )
+- uid: Fantasy.ILog.Debug(System.String,System.Object[])
+  commentId: M:Fantasy.ILog.Debug(System.String,System.Object[])
+  parent: Fantasy.ILog
+  isExternal: true
+  href: Fantasy.ILog.html#Fantasy_ILog_Debug_System_String_System_Object___
+  name: Debug(string, params object[])
+  nameWithType: ILog.Debug(string, params object[])
+  fullName: Fantasy.ILog.Debug(string, params object[])
+  nameWithType.vb: ILog.Debug(String, ParamArray Object())
+  fullName.vb: Fantasy.ILog.Debug(String, ParamArray Object())
+  name.vb: Debug(String, ParamArray Object())
+  spec.csharp:
+  - uid: Fantasy.ILog.Debug(System.String,System.Object[])
+    name: Debug
+    href: Fantasy.ILog.html#Fantasy_ILog_Debug_System_String_System_Object___
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: params
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.ILog.Debug(System.String,System.Object[])
+    name: Debug
+    href: Fantasy.ILog.html#Fantasy_ILog_Debug_System_String_System_Object___
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: ParamArray
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: (
+  - name: )
+  - name: )
+- uid: Fantasy.ILog.Error(System.String,System.Object[])
+  commentId: M:Fantasy.ILog.Error(System.String,System.Object[])
+  parent: Fantasy.ILog
+  isExternal: true
+  href: Fantasy.ILog.html#Fantasy_ILog_Error_System_String_System_Object___
+  name: Error(string, params object[])
+  nameWithType: ILog.Error(string, params object[])
+  fullName: Fantasy.ILog.Error(string, params object[])
+  nameWithType.vb: ILog.Error(String, ParamArray Object())
+  fullName.vb: Fantasy.ILog.Error(String, ParamArray Object())
+  name.vb: Error(String, ParamArray Object())
+  spec.csharp:
+  - uid: Fantasy.ILog.Error(System.String,System.Object[])
+    name: Error
+    href: Fantasy.ILog.html#Fantasy_ILog_Error_System_String_System_Object___
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: params
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.ILog.Error(System.String,System.Object[])
+    name: Error
+    href: Fantasy.ILog.html#Fantasy_ILog_Error_System_String_System_Object___
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: ParamArray
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: (
+  - name: )
+  - name: )

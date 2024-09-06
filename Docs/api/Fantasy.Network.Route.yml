@@ -1,0 +1,155 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.Route
+  commentId: N:Fantasy.Network.Route
+  id: Route
+  parent: Fantasy.Network
+  children:
+  - Fantasy.Network.Route.AddressableHelper
+  - Fantasy.Network.Route.AddressableManageComponent
+  - Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+  - Fantasy.Network.Route.AddressableManageComponentDestroySystem
+  - Fantasy.Network.Route.AddressableMessageComponent
+  - Fantasy.Network.Route.AddressableMessageComponentDestroySystem
+  - Fantasy.Network.Route.AddressableRouteComponent
+  - Fantasy.Network.Route.AddressableRouteComponentAwakeSystem
+  - Fantasy.Network.Route.AddressableRouteComponentDestroySystem
+  - Fantasy.Network.Route.AddressableScene
+  - Fantasy.Network.Route.I_AddressableAddHandler
+  - Fantasy.Network.Route.I_AddressableGetHandler
+  - Fantasy.Network.Route.I_AddressableLockHandler
+  - Fantasy.Network.Route.I_AddressableRemoveHandler
+  - Fantasy.Network.Route.I_AddressableUnLockHandler
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Network.Route
+  nameWithType: Fantasy.Network.Route
+  fullName: Fantasy.Network.Route
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Network.Route.AddressableHelper
+  commentId: T:Fantasy.Network.Route.AddressableHelper
+  href: Fantasy.Network.Route.AddressableHelper.html
+  name: AddressableHelper
+  nameWithType: AddressableHelper
+  fullName: Fantasy.Network.Route.AddressableHelper
+- uid: Fantasy.Network.Route.AddressableManageComponent
+  commentId: T:Fantasy.Network.Route.AddressableManageComponent
+  parent: Fantasy.Network.Route
+  href: Fantasy.Network.Route.AddressableManageComponent.html
+  name: AddressableManageComponent
+  nameWithType: AddressableManageComponent
+  fullName: Fantasy.Network.Route.AddressableManageComponent
+- uid: Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+  commentId: T:Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+  href: Fantasy.Network.Route.AddressableManageComponentAwakeSystem.html
+  name: AddressableManageComponentAwakeSystem
+  nameWithType: AddressableManageComponentAwakeSystem
+  fullName: Fantasy.Network.Route.AddressableManageComponentAwakeSystem
+- uid: Fantasy.Network.Route.AddressableManageComponentDestroySystem
+  commentId: T:Fantasy.Network.Route.AddressableManageComponentDestroySystem
+  href: Fantasy.Network.Route.AddressableManageComponentDestroySystem.html
+  name: AddressableManageComponentDestroySystem
+  nameWithType: AddressableManageComponentDestroySystem
+  fullName: Fantasy.Network.Route.AddressableManageComponentDestroySystem
+- uid: Fantasy.Network.Route.AddressableMessageComponent
+  commentId: T:Fantasy.Network.Route.AddressableMessageComponent
+  parent: Fantasy.Network.Route
+  href: Fantasy.Network.Route.AddressableMessageComponent.html
+  name: AddressableMessageComponent
+  nameWithType: AddressableMessageComponent
+  fullName: Fantasy.Network.Route.AddressableMessageComponent
+- uid: Fantasy.Network.Route.AddressableMessageComponentDestroySystem
+  commentId: T:Fantasy.Network.Route.AddressableMessageComponentDestroySystem
+  href: Fantasy.Network.Route.AddressableMessageComponentDestroySystem.html
+  name: AddressableMessageComponentDestroySystem
+  nameWithType: AddressableMessageComponentDestroySystem
+  fullName: Fantasy.Network.Route.AddressableMessageComponentDestroySystem
+- uid: Fantasy.Network.Route.AddressableRouteComponent
+  commentId: T:Fantasy.Network.Route.AddressableRouteComponent
+  parent: Fantasy.Network.Route
+  href: Fantasy.Network.Route.AddressableRouteComponent.html
+  name: AddressableRouteComponent
+  nameWithType: AddressableRouteComponent
+  fullName: Fantasy.Network.Route.AddressableRouteComponent
+- uid: Fantasy.Network.Route.AddressableRouteComponentAwakeSystem
+  commentId: T:Fantasy.Network.Route.AddressableRouteComponentAwakeSystem
+  href: Fantasy.Network.Route.AddressableRouteComponentAwakeSystem.html
+  name: AddressableRouteComponentAwakeSystem
+  nameWithType: AddressableRouteComponentAwakeSystem
+  fullName: Fantasy.Network.Route.AddressableRouteComponentAwakeSystem
+- uid: Fantasy.Network.Route.AddressableRouteComponentDestroySystem
+  commentId: T:Fantasy.Network.Route.AddressableRouteComponentDestroySystem
+  href: Fantasy.Network.Route.AddressableRouteComponentDestroySystem.html
+  name: AddressableRouteComponentDestroySystem
+  nameWithType: AddressableRouteComponentDestroySystem
+  fullName: Fantasy.Network.Route.AddressableRouteComponentDestroySystem
+- uid: Fantasy.Network.Route.AddressableScene
+  commentId: T:Fantasy.Network.Route.AddressableScene
+  href: Fantasy.Network.Route.AddressableScene.html
+  name: AddressableScene
+  nameWithType: AddressableScene
+  fullName: Fantasy.Network.Route.AddressableScene
+- uid: Fantasy.Network.Route.I_AddressableAddHandler
+  commentId: T:Fantasy.Network.Route.I_AddressableAddHandler
+  href: Fantasy.Network.Route.I_AddressableAddHandler.html
+  name: I_AddressableAddHandler
+  nameWithType: I_AddressableAddHandler
+  fullName: Fantasy.Network.Route.I_AddressableAddHandler
+- uid: Fantasy.Network.Route.I_AddressableGetHandler
+  commentId: T:Fantasy.Network.Route.I_AddressableGetHandler
+  href: Fantasy.Network.Route.I_AddressableGetHandler.html
+  name: I_AddressableGetHandler
+  nameWithType: I_AddressableGetHandler
+  fullName: Fantasy.Network.Route.I_AddressableGetHandler
+- uid: Fantasy.Network.Route.I_AddressableLockHandler
+  commentId: T:Fantasy.Network.Route.I_AddressableLockHandler
+  href: Fantasy.Network.Route.I_AddressableLockHandler.html
+  name: I_AddressableLockHandler
+  nameWithType: I_AddressableLockHandler
+  fullName: Fantasy.Network.Route.I_AddressableLockHandler
+- uid: Fantasy.Network.Route.I_AddressableRemoveHandler
+  commentId: T:Fantasy.Network.Route.I_AddressableRemoveHandler
+  href: Fantasy.Network.Route.I_AddressableRemoveHandler.html
+  name: I_AddressableRemoveHandler
+  nameWithType: I_AddressableRemoveHandler
+  fullName: Fantasy.Network.Route.I_AddressableRemoveHandler
+- uid: Fantasy.Network.Route.I_AddressableUnLockHandler
+  commentId: T:Fantasy.Network.Route.I_AddressableUnLockHandler
+  href: Fantasy.Network.Route.I_AddressableUnLockHandler.html
+  name: I_AddressableUnLockHandler
+  nameWithType: I_AddressableUnLockHandler
+  fullName: Fantasy.Network.Route.I_AddressableUnLockHandler
+- uid: Fantasy.Network.Route
+  commentId: N:Fantasy.Network.Route
+  href: Fantasy.html
+  name: Fantasy.Network.Route
+  nameWithType: Fantasy.Network.Route
+  fullName: Fantasy.Network.Route
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Route
+    name: Route
+    href: Fantasy.Network.Route.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Route
+    name: Route
+    href: Fantasy.Network.Route.html

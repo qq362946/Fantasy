@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Fantasy
+namespace Fantasy.Helper
 {
     /// <summary>
     /// 提供字节操作辅助方法的静态类。

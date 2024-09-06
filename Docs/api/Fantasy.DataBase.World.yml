@@ -1,0 +1,663 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.DataBase.World
+  commentId: T:Fantasy.DataBase.World
+  id: World
+  parent: Fantasy.DataBase
+  children:
+  - Fantasy.DataBase.World.#ctor(Fantasy.Scene,System.Byte)
+  - Fantasy.DataBase.World.Config
+  - Fantasy.DataBase.World.Create(Fantasy.Scene,System.Byte)
+  - Fantasy.DataBase.World.DateBase
+  - Fantasy.DataBase.World.Id
+  langs:
+  - csharp
+  - vb
+  name: World
+  nameWithType: World
+  fullName: Fantasy.DataBase.World
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: World
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+    startLine: 9
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 表示一个游戏世界。
+  example: []
+  syntax:
+    content: public sealed class World
+    content.vb: Public NotInheritable Class World
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.DataBase.World.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.DataBase.World.Id
+  commentId: P:Fantasy.DataBase.World.Id
+  id: Id
+  parent: Fantasy.DataBase.World
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: World.Id
+  fullName: Fantasy.DataBase.World.Id
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Id
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 获取游戏世界的唯一标识。
+  example: []
+  syntax:
+    content: public byte Id { get; }
+    parameters: []
+    return:
+      type: System.Byte
+    content.vb: Public Property Id As Byte
+  overload: Fantasy.DataBase.World.Id*
+- uid: Fantasy.DataBase.World.DateBase
+  commentId: P:Fantasy.DataBase.World.DateBase
+  id: DateBase
+  parent: Fantasy.DataBase.World
+  langs:
+  - csharp
+  - vb
+  name: DateBase
+  nameWithType: World.DateBase
+  fullName: Fantasy.DataBase.World.DateBase
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: DateBase
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+    startLine: 18
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 获取游戏世界的数据库接口。
+  example: []
+  syntax:
+    content: public IDateBase DateBase { get; }
+    parameters: []
+    return:
+      type: Fantasy.DataBase.IDateBase
+    content.vb: Public Property DateBase As IDateBase
+  overload: Fantasy.DataBase.World.DateBase*
+- uid: Fantasy.DataBase.World.Config
+  commentId: P:Fantasy.DataBase.World.Config
+  id: Config
+  parent: Fantasy.DataBase.World
+  langs:
+  - csharp
+  - vb
+  name: Config
+  nameWithType: World.Config
+  fullName: Fantasy.DataBase.World.Config
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Config
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+    startLine: 22
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 获取游戏世界的配置信息。
+  example: []
+  syntax:
+    content: public WorldConfig Config { get; }
+    parameters: []
+    return:
+      type: Fantasy.Platform.Net.WorldConfig
+    content.vb: Public ReadOnly Property Config As WorldConfig
+  overload: Fantasy.DataBase.World.Config*
+- uid: Fantasy.DataBase.World.#ctor(Fantasy.Scene,System.Byte)
+  commentId: M:Fantasy.DataBase.World.#ctor(Fantasy.Scene,System.Byte)
+  id: '#ctor(Fantasy.Scene,System.Byte)'
+  parent: Fantasy.DataBase.World
+  langs:
+  - csharp
+  - vb
+  name: World(Scene, byte)
+  nameWithType: World.World(Scene, byte)
+  fullName: Fantasy.DataBase.World.World(Fantasy.Scene, byte)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+    startLine: 33
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 使用指定的配置信息创建一个游戏世界实例。
+  example: []
+  syntax:
+    content: public World(Scene scene, byte worldConfigId)
+    parameters:
+    - id: scene
+      type: Fantasy.Scene
+      description: ''
+    - id: worldConfigId
+      type: System.Byte
+      description: ''
+    content.vb: Public Sub New(scene As Scene, worldConfigId As Byte)
+  overload: Fantasy.DataBase.World.#ctor*
+  nameWithType.vb: World.New(Scene, Byte)
+  fullName.vb: Fantasy.DataBase.World.New(Fantasy.Scene, Byte)
+  name.vb: New(Scene, Byte)
+- uid: Fantasy.DataBase.World.Create(Fantasy.Scene,System.Byte)
+  commentId: M:Fantasy.DataBase.World.Create(Fantasy.Scene,System.Byte)
+  id: Create(Fantasy.Scene,System.Byte)
+  parent: Fantasy.DataBase.World
+  langs:
+  - csharp
+  - vb
+  name: Create(Scene, byte)
+  nameWithType: World.Create(Scene, byte)
+  fullName: Fantasy.DataBase.World.Create(Fantasy.Scene, byte)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Create
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/World.cs
+    startLine: 58
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 创建一个指定唯一标识的游戏世界实例。
+  example: []
+  syntax:
+    content: public static World Create(Scene scene, byte id)
+    parameters:
+    - id: scene
+      type: Fantasy.Scene
+      description: ''
+    - id: id
+      type: System.Byte
+      description: 游戏世界的唯一标识。
+    return:
+      type: Fantasy.DataBase.World
+      description: 游戏世界实例。
+    content.vb: Public Shared Function Create(scene As Scene, id As Byte) As World
+  overload: Fantasy.DataBase.World.Create*
+  nameWithType.vb: World.Create(Scene, Byte)
+  fullName.vb: Fantasy.DataBase.World.Create(Fantasy.Scene, Byte)
+  name.vb: Create(Scene, Byte)
+references:
+- uid: Fantasy.DataBase
+  commentId: N:Fantasy.DataBase
+  href: Fantasy.html
+  name: Fantasy.DataBase
+  nameWithType: Fantasy.DataBase
+  fullName: Fantasy.DataBase
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataBase
+    name: DataBase
+    href: Fantasy.DataBase.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataBase
+    name: DataBase
+    href: Fantasy.DataBase.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.DataBase.World.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<World>(World)
+  nameWithType: JsonHelper.ToJson<World>(World)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.DataBase.World>(Fantasy.DataBase.World)
+  nameWithType.vb: JsonHelper.ToJson(Of World)(World)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.DataBase.World)(Fantasy.DataBase.World)
+  name.vb: ToJson(Of World)(World)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.DataBase.World)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.DataBase.World
+    name: World
+    href: Fantasy.DataBase.World.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.DataBase.World
+    name: World
+    href: Fantasy.DataBase.World.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.DataBase.World)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.DataBase.World
+    name: World
+    href: Fantasy.DataBase.World.html
+  - name: )
+  - name: (
+  - uid: Fantasy.DataBase.World
+    name: World
+    href: Fantasy.DataBase.World.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.DataBase.World.Id*
+  commentId: Overload:Fantasy.DataBase.World.Id
+  href: Fantasy.DataBase.World.html#Fantasy_DataBase_World_Id
+  name: Id
+  nameWithType: World.Id
+  fullName: Fantasy.DataBase.World.Id
+- uid: System.Byte
+  commentId: T:System.Byte
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte
+  nameWithType: byte
+  fullName: byte
+  nameWithType.vb: Byte
+  fullName.vb: Byte
+  name.vb: Byte
+- uid: Fantasy.DataBase.World.DateBase*
+  commentId: Overload:Fantasy.DataBase.World.DateBase
+  href: Fantasy.DataBase.World.html#Fantasy_DataBase_World_DateBase
+  name: DateBase
+  nameWithType: World.DateBase
+  fullName: Fantasy.DataBase.World.DateBase
+- uid: Fantasy.DataBase.IDateBase
+  commentId: T:Fantasy.DataBase.IDateBase
+  parent: Fantasy.DataBase
+  href: Fantasy.DataBase.IDateBase.html
+  name: IDateBase
+  nameWithType: IDateBase
+  fullName: Fantasy.DataBase.IDateBase
+- uid: Fantasy.DataBase.World.Config*
+  commentId: Overload:Fantasy.DataBase.World.Config
+  href: Fantasy.DataBase.World.html#Fantasy_DataBase_World_Config
+  name: Config
+  nameWithType: World.Config
+  fullName: Fantasy.DataBase.World.Config
+- uid: Fantasy.Platform.Net.WorldConfig
+  commentId: T:Fantasy.Platform.Net.WorldConfig
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.WorldConfig.html
+  name: WorldConfig
+  nameWithType: WorldConfig
+  fullName: Fantasy.Platform.Net.WorldConfig
+- uid: Fantasy.Platform.Net
+  commentId: N:Fantasy.Platform.Net
+  href: Fantasy.html
+  name: Fantasy.Platform.Net
+  nameWithType: Fantasy.Platform.Net
+  fullName: Fantasy.Platform.Net
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html
+- uid: Fantasy.DataBase.World.#ctor*
+  commentId: Overload:Fantasy.DataBase.World.#ctor
+  href: Fantasy.DataBase.World.html#Fantasy_DataBase_World__ctor_Fantasy_Scene_System_Byte_
+  name: World
+  nameWithType: World.World
+  fullName: Fantasy.DataBase.World.World
+  nameWithType.vb: World.New
+  fullName.vb: Fantasy.DataBase.World.New
+  name.vb: New
+- uid: Fantasy.Scene
+  commentId: T:Fantasy.Scene
+  parent: Fantasy
+  href: Fantasy.Scene.html
+  name: Scene
+  nameWithType: Scene
+  fullName: Fantasy.Scene
+- uid: Fantasy
+  commentId: N:Fantasy
+  href: Fantasy.html
+  name: Fantasy
+  nameWithType: Fantasy
+  fullName: Fantasy
+- uid: Fantasy.DataBase.World.Create*
+  commentId: Overload:Fantasy.DataBase.World.Create
+  href: Fantasy.DataBase.World.html#Fantasy_DataBase_World_Create_Fantasy_Scene_System_Byte_
+  name: Create
+  nameWithType: World.Create
+  fullName: Fantasy.DataBase.World.Create
+- uid: Fantasy.DataBase.World
+  commentId: T:Fantasy.DataBase.World
+  parent: Fantasy.DataBase
+  href: Fantasy.DataBase.World.html
+  name: World
+  nameWithType: World
+  fullName: Fantasy.DataBase.World

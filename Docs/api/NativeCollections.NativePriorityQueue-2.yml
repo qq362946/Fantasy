@@ -1,0 +1,2227 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativePriorityQueue`2
+  commentId: T:NativeCollections.NativePriorityQueue`2
+  id: NativePriorityQueue`2
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativePriorityQueue`2.#ctor(System.Int32)
+  - NativeCollections.NativePriorityQueue`2.Clear
+  - NativeCollections.NativePriorityQueue`2.Count
+  - NativeCollections.NativePriorityQueue`2.Dequeue
+  - NativeCollections.NativePriorityQueue`2.DequeueEnqueue(`0@,`1@)
+  - NativeCollections.NativePriorityQueue`2.Dispose
+  - NativeCollections.NativePriorityQueue`2.Empty
+  - NativeCollections.NativePriorityQueue`2.Enqueue(`0@,`1@)
+  - NativeCollections.NativePriorityQueue`2.EnqueueDequeue(`0@,`1@)
+  - NativeCollections.NativePriorityQueue`2.EnsureCapacity(System.Int32)
+  - NativeCollections.NativePriorityQueue`2.Equals(NativeCollections.NativePriorityQueue{`0,`1})
+  - NativeCollections.NativePriorityQueue`2.Equals(System.Object)
+  - NativeCollections.NativePriorityQueue`2.GetHashCode
+  - NativeCollections.NativePriorityQueue`2.IsCreated
+  - NativeCollections.NativePriorityQueue`2.IsEmpty
+  - NativeCollections.NativePriorityQueue`2.Item(System.Int32)
+  - NativeCollections.NativePriorityQueue`2.Peek
+  - NativeCollections.NativePriorityQueue`2.ToString
+  - NativeCollections.NativePriorityQueue`2.TrimExcess
+  - NativeCollections.NativePriorityQueue`2.TryDequeue(`0@)
+  - NativeCollections.NativePriorityQueue`2.TryDequeue(`0@,`1@)
+  - NativeCollections.NativePriorityQueue`2.TryDequeueEnqueue(`0@,`1@,`0@)
+  - NativeCollections.NativePriorityQueue`2.TryEnqueue(`0@,`1@)
+  - NativeCollections.NativePriorityQueue`2.TryEnqueueDequeue(`0@,`1@,`0@)
+  - NativeCollections.NativePriorityQueue`2.TryPeek(`0@,`1@)
+  - NativeCollections.NativePriorityQueue`2.UnorderedItems
+  - NativeCollections.NativePriorityQueue`2.op_Equality(NativeCollections.NativePriorityQueue{`0,`1},NativeCollections.NativePriorityQueue{`0,`1})
+  - NativeCollections.NativePriorityQueue`2.op_Inequality(NativeCollections.NativePriorityQueue{`0,`1},NativeCollections.NativePriorityQueue{`0,`1})
+  langs:
+  - csharp
+  - vb
+  name: NativePriorityQueue<TElement, TPriority>
+  nameWithType: NativePriorityQueue<TElement, TPriority>
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativePriorityQueue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 23
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native priorityQueue
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativePriorityQueue<TElement, TPriority> : IDisposable, IEquatable<NativePriorityQueue<TElement, TPriority>> where TElement : unmanaged where TPriority : unmanaged, IComparable<TPriority>
+    typeParameters:
+    - id: TElement
+      description: Type
+    - id: TPriority
+      description: Type
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativePriorityQueue(Of TElement As Structure, TPriority As {Structure, IComparable(Of TPriority)}) Implements IDisposable, IEquatable(Of NativePriorityQueue(Of TElement, TPriority))
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativePriorityQueue`2}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativePriorityQueue`2.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority)
+  name.vb: NativePriorityQueue(Of TElement, TPriority)
+- uid: NativeCollections.NativePriorityQueue`2.#ctor(System.Int32)
+  commentId: M:NativeCollections.NativePriorityQueue`2.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: NativePriorityQueue(int)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.NativePriorityQueue(int)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.NativePriorityQueue(int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 67
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativePriorityQueue(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(capacity As Integer)
+  overload: NativeCollections.NativePriorityQueue`2.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).New(Integer)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).New(Integer)
+  name.vb: New(Integer)
+- uid: NativeCollections.NativePriorityQueue`2.IsCreated
+  commentId: P:NativeCollections.NativePriorityQueue`2.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativePriorityQueue<TElement, TPriority>.IsCreated
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 85
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativePriorityQueue`2.IsCreated*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).IsCreated
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).IsCreated
+- uid: NativeCollections.NativePriorityQueue`2.IsEmpty
+  commentId: P:NativeCollections.NativePriorityQueue`2.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativePriorityQueue<TElement, TPriority>.IsEmpty
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 90
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is empty
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativePriorityQueue`2.IsEmpty*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).IsEmpty
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).IsEmpty
+- uid: NativeCollections.NativePriorityQueue`2.Item(System.Int32)
+  commentId: P:NativeCollections.NativePriorityQueue`2.Item(System.Int32)
+  id: Item(System.Int32)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: this[int]
+  nameWithType: NativePriorityQueue<TElement, TPriority>.this[int]
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.this[int]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 96
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get reference
+  example: []
+  syntax:
+    content: public (TElement Element, TPriority Priority) this[int index] { get; }
+    parameters:
+    - id: index
+      type: System.Int32
+      description: Index
+    return:
+      type: System.ValueTuple{{TElement},{TPriority}}
+    content.vb: Public ReadOnly Default Property this[](index As Integer) As (Element As TElement, Priority As TPriority)
+  overload: NativeCollections.NativePriorityQueue`2.Item*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).this[](Integer)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).this[](Integer)
+  name.vb: this[](Integer)
+- uid: NativeCollections.NativePriorityQueue`2.Count
+  commentId: P:NativeCollections.NativePriorityQueue`2.Count
+  id: Count
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Count
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 105
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Count
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: NativeCollections.NativePriorityQueue`2.Count*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Count
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Count
+- uid: NativeCollections.NativePriorityQueue`2.UnorderedItems
+  commentId: P:NativeCollections.NativePriorityQueue`2.UnorderedItems
+  id: UnorderedItems
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: UnorderedItems
+  nameWithType: NativePriorityQueue<TElement, TPriority>.UnorderedItems
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.UnorderedItems
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: UnorderedItems
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 110
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Unordered items
+  example: []
+  syntax:
+    content: public NativePriorityQueue<TElement, TPriority>.UnorderedItemsCollection UnorderedItems { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+    content.vb: Public ReadOnly Property UnorderedItems As NativePriorityQueue(Of TElement, TPriority).UnorderedItemsCollection
+  overload: NativeCollections.NativePriorityQueue`2.UnorderedItems*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).UnorderedItems
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).UnorderedItems
+- uid: NativeCollections.NativePriorityQueue`2.Equals(NativeCollections.NativePriorityQueue{`0,`1})
+  commentId: M:NativeCollections.NativePriorityQueue`2.Equals(NativeCollections.NativePriorityQueue{`0,`1})
+  id: Equals(NativeCollections.NativePriorityQueue{`0,`1})
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativePriorityQueue<TElement, TPriority>)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Equals(NativePriorityQueue<TElement, TPriority>)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Equals(NativeCollections.NativePriorityQueue<TElement, TPriority>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 117
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativePriorityQueue<TElement, TPriority> other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativePriorityQueue`2
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativePriorityQueue(Of TElement, TPriority)) As Boolean
+  overload: NativeCollections.NativePriorityQueue`2.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativePriorityQueue`2}.Equals(NativeCollections.NativePriorityQueue{{TElement},{TPriority}})
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Equals(NativePriorityQueue(Of TElement, TPriority))
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Equals(NativeCollections.NativePriorityQueue(Of TElement, TPriority))
+  name.vb: Equals(NativePriorityQueue(Of TElement, TPriority))
+- uid: NativeCollections.NativePriorityQueue`2.Equals(System.Object)
+  commentId: M:NativeCollections.NativePriorityQueue`2.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Equals(object?)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 124
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativePriorityQueue`2.Equals*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Equals(Object)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativePriorityQueue`2.GetHashCode
+  commentId: M:NativeCollections.NativePriorityQueue`2.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativePriorityQueue<TElement, TPriority>.GetHashCode()
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 130
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativePriorityQueue`2.GetHashCode*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).GetHashCode()
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).GetHashCode()
+- uid: NativeCollections.NativePriorityQueue`2.ToString
+  commentId: M:NativeCollections.NativePriorityQueue`2.ToString
+  id: ToString
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativePriorityQueue<TElement, TPriority>.ToString()
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 136
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativePriorityQueue`2.ToString*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).ToString()
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).ToString()
+- uid: NativeCollections.NativePriorityQueue`2.op_Equality(NativeCollections.NativePriorityQueue{`0,`1},NativeCollections.NativePriorityQueue{`0,`1})
+  commentId: M:NativeCollections.NativePriorityQueue`2.op_Equality(NativeCollections.NativePriorityQueue{`0,`1},NativeCollections.NativePriorityQueue{`0,`1})
+  id: op_Equality(NativeCollections.NativePriorityQueue{`0,`1},NativeCollections.NativePriorityQueue{`0,`1})
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativePriorityQueue<TElement, TPriority>, NativePriorityQueue<TElement, TPriority>)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.operator ==(NativePriorityQueue<TElement, TPriority>, NativePriorityQueue<TElement, TPriority>)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.operator ==(NativeCollections.NativePriorityQueue<TElement, TPriority>, NativeCollections.NativePriorityQueue<TElement, TPriority>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 144
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativePriorityQueue<TElement, TPriority> left, NativePriorityQueue<TElement, TPriority> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativePriorityQueue`2
+      description: Left
+    - id: right
+      type: NativeCollections.NativePriorityQueue`2
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativePriorityQueue(Of TElement, TPriority), right As NativePriorityQueue(Of TElement, TPriority)) As Boolean
+  overload: NativeCollections.NativePriorityQueue`2.op_Equality*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).=(NativePriorityQueue(Of TElement, TPriority), NativePriorityQueue(Of TElement, TPriority))
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).=(NativeCollections.NativePriorityQueue(Of TElement, TPriority), NativeCollections.NativePriorityQueue(Of TElement, TPriority))
+  name.vb: =(NativePriorityQueue(Of TElement, TPriority), NativePriorityQueue(Of TElement, TPriority))
+- uid: NativeCollections.NativePriorityQueue`2.op_Inequality(NativeCollections.NativePriorityQueue{`0,`1},NativeCollections.NativePriorityQueue{`0,`1})
+  commentId: M:NativeCollections.NativePriorityQueue`2.op_Inequality(NativeCollections.NativePriorityQueue{`0,`1},NativeCollections.NativePriorityQueue{`0,`1})
+  id: op_Inequality(NativeCollections.NativePriorityQueue{`0,`1},NativeCollections.NativePriorityQueue{`0,`1})
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativePriorityQueue<TElement, TPriority>, NativePriorityQueue<TElement, TPriority>)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.operator !=(NativePriorityQueue<TElement, TPriority>, NativePriorityQueue<TElement, TPriority>)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.operator !=(NativeCollections.NativePriorityQueue<TElement, TPriority>, NativeCollections.NativePriorityQueue<TElement, TPriority>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 152
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativePriorityQueue<TElement, TPriority> left, NativePriorityQueue<TElement, TPriority> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativePriorityQueue`2
+      description: Left
+    - id: right
+      type: NativeCollections.NativePriorityQueue`2
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativePriorityQueue(Of TElement, TPriority), right As NativePriorityQueue(Of TElement, TPriority)) As Boolean
+  overload: NativeCollections.NativePriorityQueue`2.op_Inequality*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).<>(NativePriorityQueue(Of TElement, TPriority), NativePriorityQueue(Of TElement, TPriority))
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).<>(NativeCollections.NativePriorityQueue(Of TElement, TPriority), NativeCollections.NativePriorityQueue(Of TElement, TPriority))
+  name.vb: <>(NativePriorityQueue(Of TElement, TPriority), NativePriorityQueue(Of TElement, TPriority))
+- uid: NativeCollections.NativePriorityQueue`2.Dispose
+  commentId: M:NativeCollections.NativePriorityQueue`2.Dispose
+  id: Dispose
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Dispose()
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 157
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativePriorityQueue`2.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Dispose()
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Dispose()
+- uid: NativeCollections.NativePriorityQueue`2.Clear
+  commentId: M:NativeCollections.NativePriorityQueue`2.Clear
+  id: Clear
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Clear()
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Clear()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clear
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 169
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Clear
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Clear()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Clear()
+  overload: NativeCollections.NativePriorityQueue`2.Clear*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Clear()
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Clear()
+- uid: NativeCollections.NativePriorityQueue`2.Enqueue(`0@,`1@)
+  commentId: M:NativeCollections.NativePriorityQueue`2.Enqueue(`0@,`1@)
+  id: Enqueue(`0@,`1@)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Enqueue(in TElement, in TPriority)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Enqueue(in TElement, in TPriority)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Enqueue(in TElement, in TPriority)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Enqueue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 181
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Enqueue
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Enqueue(in TElement element, in TPriority priority)
+    parameters:
+    - id: element
+      type: '{TElement}'
+      description: Element
+    - id: priority
+      type: '{TPriority}'
+      description: Priority
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Enqueue(element As TElement, priority As TPriority)
+  overload: NativeCollections.NativePriorityQueue`2.Enqueue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Enqueue(TElement, TPriority)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Enqueue(TElement, TPriority)
+  name.vb: Enqueue(TElement, TPriority)
+- uid: NativeCollections.NativePriorityQueue`2.TryEnqueue(`0@,`1@)
+  commentId: M:NativeCollections.NativePriorityQueue`2.TryEnqueue(`0@,`1@)
+  id: TryEnqueue(`0@,`1@)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: TryEnqueue(in TElement, in TPriority)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TryEnqueue(in TElement, in TPriority)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TryEnqueue(in TElement, in TPriority)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryEnqueue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 198
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try enqueue
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryEnqueue(in TElement element, in TPriority priority)
+    parameters:
+    - id: element
+      type: '{TElement}'
+      description: Element
+    - id: priority
+      type: '{TPriority}'
+      description: Priority
+    return:
+      type: System.Boolean
+      description: Enqueued
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryEnqueue(element As TElement, priority As TPriority) As Boolean
+  overload: NativeCollections.NativePriorityQueue`2.TryEnqueue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TryEnqueue(TElement, TPriority)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TryEnqueue(TElement, TPriority)
+  name.vb: TryEnqueue(TElement, TPriority)
+- uid: NativeCollections.NativePriorityQueue`2.EnqueueDequeue(`0@,`1@)
+  commentId: M:NativeCollections.NativePriorityQueue`2.EnqueueDequeue(`0@,`1@)
+  id: EnqueueDequeue(`0@,`1@)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: EnqueueDequeue(in TElement, in TPriority)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.EnqueueDequeue(in TElement, in TPriority)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.EnqueueDequeue(in TElement, in TPriority)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: EnqueueDequeue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 219
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Enqueue dequeue
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public TElement EnqueueDequeue(in TElement element, in TPriority priority)
+    parameters:
+    - id: element
+      type: '{TElement}'
+      description: Element
+    - id: priority
+      type: '{TPriority}'
+      description: Priority
+    return:
+      type: '{TElement}'
+      description: Element
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function EnqueueDequeue(element As TElement, priority As TPriority) As TElement
+  overload: NativeCollections.NativePriorityQueue`2.EnqueueDequeue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).EnqueueDequeue(TElement, TPriority)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).EnqueueDequeue(TElement, TPriority)
+  name.vb: EnqueueDequeue(TElement, TPriority)
+- uid: NativeCollections.NativePriorityQueue`2.TryEnqueueDequeue(`0@,`1@,`0@)
+  commentId: M:NativeCollections.NativePriorityQueue`2.TryEnqueueDequeue(`0@,`1@,`0@)
+  id: TryEnqueueDequeue(`0@,`1@,`0@)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: TryEnqueueDequeue(in TElement, in TPriority, out TElement)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TryEnqueueDequeue(in TElement, in TPriority, out TElement)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TryEnqueueDequeue(in TElement, in TPriority, out TElement)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryEnqueueDequeue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 243
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try enqueue dequeue
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryEnqueueDequeue(in TElement element, in TPriority priority, out TElement result)
+    parameters:
+    - id: element
+      type: '{TElement}'
+      description: Element
+    - id: priority
+      type: '{TPriority}'
+      description: Priority
+    - id: result
+      type: '{TElement}'
+      description: Element
+    return:
+      type: System.Boolean
+      description: Enqueued
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryEnqueueDequeue(element As TElement, priority As TPriority, result As TElement) As Boolean
+  overload: NativeCollections.NativePriorityQueue`2.TryEnqueueDequeue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TryEnqueueDequeue(TElement, TPriority, TElement)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TryEnqueueDequeue(TElement, TPriority, TElement)
+  name.vb: TryEnqueueDequeue(TElement, TPriority, TElement)
+- uid: NativeCollections.NativePriorityQueue`2.Dequeue
+  commentId: M:NativeCollections.NativePriorityQueue`2.Dequeue
+  id: Dequeue
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Dequeue()
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Dequeue()
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Dequeue()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dequeue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 266
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dequeue
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public TElement Dequeue()
+    return:
+      type: '{TElement}'
+      description: Item
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Dequeue() As TElement
+  overload: NativeCollections.NativePriorityQueue`2.Dequeue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Dequeue()
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Dequeue()
+- uid: NativeCollections.NativePriorityQueue`2.TryDequeue(`0@)
+  commentId: M:NativeCollections.NativePriorityQueue`2.TryDequeue(`0@)
+  id: TryDequeue(`0@)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: TryDequeue(out TElement)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TryDequeue(out TElement)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TryDequeue(out TElement)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryDequeue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 281
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try dequeue
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryDequeue(out TElement element)
+    parameters:
+    - id: element
+      type: '{TElement}'
+      description: Element
+    return:
+      type: System.Boolean
+      description: Dequeued
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryDequeue(element As TElement) As Boolean
+  overload: NativeCollections.NativePriorityQueue`2.TryDequeue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TryDequeue(TElement)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TryDequeue(TElement)
+  name.vb: TryDequeue(TElement)
+- uid: NativeCollections.NativePriorityQueue`2.TryDequeue(`0@,`1@)
+  commentId: M:NativeCollections.NativePriorityQueue`2.TryDequeue(`0@,`1@)
+  id: TryDequeue(`0@,`1@)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: TryDequeue(out TElement, out TPriority)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TryDequeue(out TElement, out TPriority)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TryDequeue(out TElement, out TPriority)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryDequeue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 302
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try dequeue
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryDequeue(out TElement element, out TPriority priority)
+    parameters:
+    - id: element
+      type: '{TElement}'
+      description: Element
+    - id: priority
+      type: '{TPriority}'
+      description: Priority
+    return:
+      type: System.Boolean
+      description: Dequeued
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryDequeue(element As TElement, priority As TPriority) As Boolean
+  overload: NativeCollections.NativePriorityQueue`2.TryDequeue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TryDequeue(TElement, TPriority)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TryDequeue(TElement, TPriority)
+  name.vb: TryDequeue(TElement, TPriority)
+- uid: NativeCollections.NativePriorityQueue`2.DequeueEnqueue(`0@,`1@)
+  commentId: M:NativeCollections.NativePriorityQueue`2.DequeueEnqueue(`0@,`1@)
+  id: DequeueEnqueue(`0@,`1@)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: DequeueEnqueue(in TElement, in TPriority)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.DequeueEnqueue(in TElement, in TPriority)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.DequeueEnqueue(in TElement, in TPriority)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: DequeueEnqueue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 325
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dequeue enqueue
+  example: []
+  syntax:
+    content: public TElement DequeueEnqueue(in TElement element, in TPriority priority)
+    parameters:
+    - id: element
+      type: '{TElement}'
+      description: Element
+    - id: priority
+      type: '{TPriority}'
+      description: Priority
+    return:
+      type: '{TElement}'
+      description: Element
+    content.vb: Public Function DequeueEnqueue(element As TElement, priority As TPriority) As TElement
+  overload: NativeCollections.NativePriorityQueue`2.DequeueEnqueue*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).DequeueEnqueue(TElement, TPriority)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).DequeueEnqueue(TElement, TPriority)
+  name.vb: DequeueEnqueue(TElement, TPriority)
+- uid: NativeCollections.NativePriorityQueue`2.TryDequeueEnqueue(`0@,`1@,`0@)
+  commentId: M:NativeCollections.NativePriorityQueue`2.TryDequeueEnqueue(`0@,`1@,`0@)
+  id: TryDequeueEnqueue(`0@,`1@,`0@)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: TryDequeueEnqueue(in TElement, in TPriority, out TElement)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TryDequeueEnqueue(in TElement, in TPriority, out TElement)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TryDequeueEnqueue(in TElement, in TPriority, out TElement)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryDequeueEnqueue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 345
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try dequeue enqueue
+  example: []
+  syntax:
+    content: public bool TryDequeueEnqueue(in TElement element, in TPriority priority, out TElement result)
+    parameters:
+    - id: element
+      type: '{TElement}'
+      description: Element
+    - id: priority
+      type: '{TPriority}'
+      description: Priority
+    - id: result
+      type: '{TElement}'
+      description: Element
+    return:
+      type: System.Boolean
+      description: Dequeued
+    content.vb: Public Function TryDequeueEnqueue(element As TElement, priority As TPriority, result As TElement) As Boolean
+  overload: NativeCollections.NativePriorityQueue`2.TryDequeueEnqueue*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TryDequeueEnqueue(TElement, TPriority, TElement)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TryDequeueEnqueue(TElement, TPriority, TElement)
+  name.vb: TryDequeueEnqueue(TElement, TPriority, TElement)
+- uid: NativeCollections.NativePriorityQueue`2.Peek
+  commentId: M:NativeCollections.NativePriorityQueue`2.Peek
+  id: Peek
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Peek()
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Peek()
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Peek()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Peek
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 367
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Peek
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public TElement Peek()
+    return:
+      type: '{TElement}'
+      description: Item
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Peek() As TElement
+  overload: NativeCollections.NativePriorityQueue`2.Peek*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Peek()
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Peek()
+- uid: NativeCollections.NativePriorityQueue`2.TryPeek(`0@,`1@)
+  commentId: M:NativeCollections.NativePriorityQueue`2.TryPeek(`0@,`1@)
+  id: TryPeek(`0@,`1@)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: TryPeek(out TElement, out TPriority)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TryPeek(out TElement, out TPriority)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TryPeek(out TElement, out TPriority)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryPeek
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 376
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try peek
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryPeek(out TElement element, out TPriority priority)
+    parameters:
+    - id: element
+      type: '{TElement}'
+      description: Element
+    - id: priority
+      type: '{TPriority}'
+      description: Priority
+    return:
+      type: System.Boolean
+      description: Peeked
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryPeek(element As TElement, priority As TPriority) As Boolean
+  overload: NativeCollections.NativePriorityQueue`2.TryPeek*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TryPeek(TElement, TPriority)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TryPeek(TElement, TPriority)
+  name.vb: TryPeek(TElement, TPriority)
+- uid: NativeCollections.NativePriorityQueue`2.EnsureCapacity(System.Int32)
+  commentId: M:NativeCollections.NativePriorityQueue`2.EnsureCapacity(System.Int32)
+  id: EnsureCapacity(System.Int32)
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: EnsureCapacity(int)
+  nameWithType: NativePriorityQueue<TElement, TPriority>.EnsureCapacity(int)
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.EnsureCapacity(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: EnsureCapacity
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 397
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Ensure capacity
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int EnsureCapacity(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    return:
+      type: System.Int32
+      description: New capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function EnsureCapacity(capacity As Integer) As Integer
+  overload: NativeCollections.NativePriorityQueue`2.EnsureCapacity*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).EnsureCapacity(Integer)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).EnsureCapacity(Integer)
+  name.vb: EnsureCapacity(Integer)
+- uid: NativeCollections.NativePriorityQueue`2.TrimExcess
+  commentId: M:NativeCollections.NativePriorityQueue`2.TrimExcess
+  id: TrimExcess
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: TrimExcess()
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TrimExcess()
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TrimExcess()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TrimExcess
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 415
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Trim excess
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void TrimExcess()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub TrimExcess()
+  overload: NativeCollections.NativePriorityQueue`2.TrimExcess*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TrimExcess()
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TrimExcess()
+- uid: NativeCollections.NativePriorityQueue`2.Empty
+  commentId: P:NativeCollections.NativePriorityQueue`2.Empty
+  id: Empty
+  parent: NativeCollections.NativePriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Empty
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativePriorityQueue.cs
+    startLine: 526
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativePriorityQueue<TElement, TPriority> Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativePriorityQueue`2
+    content.vb: Public Shared ReadOnly Property Empty As NativePriorityQueue(Of TElement, TPriority)
+  overload: NativeCollections.NativePriorityQueue`2.Empty*
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Empty
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Empty
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativePriorityQueue`2}
+  commentId: T:System.IEquatable{NativeCollections.NativePriorityQueue`2}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativePriorityQueue<TElement, TPriority>>
+  nameWithType: IEquatable<NativePriorityQueue<TElement, TPriority>>
+  fullName: System.IEquatable<NativeCollections.NativePriorityQueue<TElement, TPriority>>
+  nameWithType.vb: IEquatable(Of NativePriorityQueue(Of TElement, TPriority))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativePriorityQueue(Of TElement, TPriority))
+  name.vb: IEquatable(Of NativePriorityQueue(Of TElement, TPriority))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativePriorityQueue`2.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativePriorityQueue<TElement, TPriority>>(NativePriorityQueue<TElement, TPriority>)
+  nameWithType: JsonHelper.ToJson<NativePriorityQueue<TElement, TPriority>>(NativePriorityQueue<TElement, TPriority>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativePriorityQueue<TElement, TPriority>>(NativeCollections.NativePriorityQueue<TElement, TPriority>)
+  nameWithType.vb: JsonHelper.ToJson(Of NativePriorityQueue(Of TElement, TPriority))(NativePriorityQueue(Of TElement, TPriority))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativePriorityQueue(Of TElement, TPriority))(NativeCollections.NativePriorityQueue(Of TElement, TPriority))
+  name.vb: ToJson(Of NativePriorityQueue(Of TElement, TPriority))(NativePriorityQueue(Of TElement, TPriority))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativePriorityQueue{`0,`1})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativePriorityQueue{`0,`1})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativePriorityQueue`2.#ctor*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.#ctor
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2__ctor_System_Int32_
+  name: NativePriorityQueue
+  nameWithType: NativePriorityQueue<TElement, TPriority>.NativePriorityQueue
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.NativePriorityQueue
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).New
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativePriorityQueue`2.IsCreated*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.IsCreated
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_IsCreated
+  name: IsCreated
+  nameWithType: NativePriorityQueue<TElement, TPriority>.IsCreated
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.IsCreated
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).IsCreated
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativePriorityQueue`2.IsEmpty*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.IsEmpty
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_IsEmpty
+  name: IsEmpty
+  nameWithType: NativePriorityQueue<TElement, TPriority>.IsEmpty
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.IsEmpty
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).IsEmpty
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).IsEmpty
+- uid: NativeCollections.NativePriorityQueue`2.Item*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.Item
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_Item_System_Int32_
+  name: this
+  nameWithType: NativePriorityQueue<TElement, TPriority>.this
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.this
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).this[]
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).this[]
+  name.vb: this[]
+- uid: System.ValueTuple{{TElement},{TPriority}}
+  commentId: T:System.ValueTuple{`0,`1}
+  parent: System
+  definition: System.ValueTuple`2
+  href: https://learn.microsoft.com/dotnet/api/system.valuetuple--0,-1-.element
+  name: (TElement Element, TPriority Priority)
+  nameWithType: (TElement Element, TPriority Priority)
+  fullName: (TElement Element, TPriority Priority)
+  nameWithType.vb: (Element As TElement, Priority As TPriority)
+  fullName.vb: (Element As TElement, Priority As TPriority)
+  name.vb: (Element As TElement, Priority As TPriority)
+  spec.csharp:
+  - name: (
+  - name: TElement
+  - name: " "
+  - uid: System.ValueTuple{`0,`1}.Element
+    name: Element
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple--0,-1-.element
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: " "
+  - uid: System.ValueTuple{`0,`1}.Priority
+    name: Priority
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple--0,-1-.priority
+  - name: )
+  spec.vb:
+  - name: (
+  - uid: System.ValueTuple{`0,`1}.Element
+    name: Element
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple--0,-1-.element
+  - name: " "
+  - name: As
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - uid: System.ValueTuple{`0,`1}.Priority
+    name: Priority
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple--0,-1-.priority
+  - name: " "
+  - name: As
+  - name: " "
+  - name: TPriority
+  - name: )
+- uid: System.ValueTuple`2
+  commentId: T:System.ValueTuple`2
+  name: (T1, T2)
+  nameWithType: (T1, T2)
+  fullName: (T1, T2)
+  spec.csharp:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+  spec.vb:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+- uid: NativeCollections.NativePriorityQueue`2.Count*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.Count
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_Count
+  name: Count
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Count
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Count
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Count
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Count
+- uid: NativeCollections.NativePriorityQueue`2.UnorderedItems*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.UnorderedItems
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_UnorderedItems
+  name: UnorderedItems
+  nameWithType: NativePriorityQueue<TElement, TPriority>.UnorderedItems
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.UnorderedItems
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).UnorderedItems
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).UnorderedItems
+- uid: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+  commentId: T:NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+  parent: NativeCollections
+  href: NativeCollections.NativePriorityQueue-2.html
+  name: NativePriorityQueue<TElement, TPriority>.UnorderedItemsCollection
+  nameWithType: NativePriorityQueue<TElement, TPriority>.UnorderedItemsCollection
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.UnorderedItemsCollection
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).UnorderedItemsCollection
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).UnorderedItemsCollection
+  name.vb: NativePriorityQueue(Of TElement, TPriority).UnorderedItemsCollection
+  spec.csharp:
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+    name: UnorderedItemsCollection
+    href: NativeCollections.NativePriorityQueue-2.UnorderedItemsCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+    name: UnorderedItemsCollection
+    href: NativeCollections.NativePriorityQueue-2.UnorderedItemsCollection.html
+- uid: NativeCollections.NativePriorityQueue`2.Equals*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.Equals
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_Equals_NativeCollections_NativePriorityQueue__0__1__
+  name: Equals
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Equals
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Equals
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Equals
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Equals
+- uid: System.IEquatable{NativeCollections.NativePriorityQueue`2}.Equals(NativeCollections.NativePriorityQueue{{TElement},{TPriority}})
+  commentId: M:System.IEquatable{NativeCollections.NativePriorityQueue`2}.Equals(NativeCollections.NativePriorityQueue{`0,`1})
+  parent: System.IEquatable{NativeCollections.NativePriorityQueue`2}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativePriorityQueue<TElement, TPriority>)
+  nameWithType: IEquatable<NativePriorityQueue<TElement, TPriority>>.Equals(NativePriorityQueue<TElement, TPriority>)
+  fullName: System.IEquatable<NativeCollections.NativePriorityQueue<TElement, TPriority>>.Equals(NativeCollections.NativePriorityQueue<TElement, TPriority>)
+  nameWithType.vb: IEquatable(Of NativePriorityQueue(Of TElement, TPriority)).Equals(NativePriorityQueue(Of TElement, TPriority))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativePriorityQueue(Of TElement, TPriority)).Equals(NativeCollections.NativePriorityQueue(Of TElement, TPriority))
+  name.vb: Equals(NativePriorityQueue(Of TElement, TPriority))
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativePriorityQueue`2}.Equals(NativeCollections.NativePriorityQueue{`0,`1})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativePriorityQueue`2}.Equals(NativeCollections.NativePriorityQueue{`0,`1})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )
+  - name: )
+- uid: NativeCollections.NativePriorityQueue`2
+  commentId: T:NativeCollections.NativePriorityQueue`2
+  parent: NativeCollections
+  href: NativeCollections.NativePriorityQueue-2.html
+  name: NativePriorityQueue<TElement, TPriority>
+  nameWithType: NativePriorityQueue<TElement, TPriority>
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority)
+  name.vb: NativePriorityQueue(Of TElement, TPriority)
+  spec.csharp:
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativePriorityQueue`2.GetHashCode*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.GetHashCode
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_GetHashCode
+  name: GetHashCode
+  nameWithType: NativePriorityQueue<TElement, TPriority>.GetHashCode
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.GetHashCode
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).GetHashCode
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativePriorityQueue`2.ToString*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.ToString
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_ToString
+  name: ToString
+  nameWithType: NativePriorityQueue<TElement, TPriority>.ToString
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.ToString
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).ToString
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativePriorityQueue`2.op_Equality*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.op_Equality
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_op_Equality_NativeCollections_NativePriorityQueue__0__1__NativeCollections_NativePriorityQueue__0__1__
+  name: operator ==
+  nameWithType: NativePriorityQueue<TElement, TPriority>.operator ==
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.operator ==
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).=
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativePriorityQueue`2.op_Equality*
+    name: ==
+    href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_op_Equality_NativeCollections_NativePriorityQueue__0__1__NativeCollections_NativePriorityQueue__0__1__
+- uid: NativeCollections.NativePriorityQueue`2.op_Inequality*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.op_Inequality
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_op_Inequality_NativeCollections_NativePriorityQueue__0__1__NativeCollections_NativePriorityQueue__0__1__
+  name: operator !=
+  nameWithType: NativePriorityQueue<TElement, TPriority>.operator !=
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.operator !=
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).<>
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativePriorityQueue`2.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_op_Inequality_NativeCollections_NativePriorityQueue__0__1__NativeCollections_NativePriorityQueue__0__1__
+- uid: NativeCollections.NativePriorityQueue`2.Dispose*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.Dispose
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_Dispose
+  name: Dispose
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Dispose
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Dispose
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Dispose
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativePriorityQueue`2.Clear*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.Clear
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_Clear
+  name: Clear
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Clear
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Clear
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Clear
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Clear
+- uid: NativeCollections.NativePriorityQueue`2.Enqueue*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.Enqueue
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_Enqueue__0___1__
+  name: Enqueue
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Enqueue
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Enqueue
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Enqueue
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Enqueue
+- uid: '{TElement}'
+  commentId: '!:TElement'
+  definition: TElement
+  name: TElement
+  nameWithType: TElement
+  fullName: TElement
+- uid: '{TPriority}'
+  commentId: '!:TPriority'
+  definition: TPriority
+  name: TPriority
+  nameWithType: TPriority
+  fullName: TPriority
+- uid: TElement
+  name: TElement
+  nameWithType: TElement
+  fullName: TElement
+- uid: TPriority
+  name: TPriority
+  nameWithType: TPriority
+  fullName: TPriority
+- uid: NativeCollections.NativePriorityQueue`2.TryEnqueue*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.TryEnqueue
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_TryEnqueue__0___1__
+  name: TryEnqueue
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TryEnqueue
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TryEnqueue
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TryEnqueue
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TryEnqueue
+- uid: NativeCollections.NativePriorityQueue`2.EnqueueDequeue*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.EnqueueDequeue
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_EnqueueDequeue__0___1__
+  name: EnqueueDequeue
+  nameWithType: NativePriorityQueue<TElement, TPriority>.EnqueueDequeue
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.EnqueueDequeue
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).EnqueueDequeue
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).EnqueueDequeue
+- uid: NativeCollections.NativePriorityQueue`2.TryEnqueueDequeue*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.TryEnqueueDequeue
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_TryEnqueueDequeue__0___1___0__
+  name: TryEnqueueDequeue
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TryEnqueueDequeue
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TryEnqueueDequeue
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TryEnqueueDequeue
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TryEnqueueDequeue
+- uid: NativeCollections.NativePriorityQueue`2.Dequeue*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.Dequeue
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_Dequeue
+  name: Dequeue
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Dequeue
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Dequeue
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Dequeue
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Dequeue
+- uid: NativeCollections.NativePriorityQueue`2.TryDequeue*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.TryDequeue
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_TryDequeue__0__
+  name: TryDequeue
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TryDequeue
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TryDequeue
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TryDequeue
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TryDequeue
+- uid: NativeCollections.NativePriorityQueue`2.DequeueEnqueue*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.DequeueEnqueue
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_DequeueEnqueue__0___1__
+  name: DequeueEnqueue
+  nameWithType: NativePriorityQueue<TElement, TPriority>.DequeueEnqueue
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.DequeueEnqueue
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).DequeueEnqueue
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).DequeueEnqueue
+- uid: NativeCollections.NativePriorityQueue`2.TryDequeueEnqueue*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.TryDequeueEnqueue
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_TryDequeueEnqueue__0___1___0__
+  name: TryDequeueEnqueue
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TryDequeueEnqueue
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TryDequeueEnqueue
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TryDequeueEnqueue
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TryDequeueEnqueue
+- uid: NativeCollections.NativePriorityQueue`2.Peek*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.Peek
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_Peek
+  name: Peek
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Peek
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Peek
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Peek
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Peek
+- uid: NativeCollections.NativePriorityQueue`2.TryPeek*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.TryPeek
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_TryPeek__0___1__
+  name: TryPeek
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TryPeek
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TryPeek
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TryPeek
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TryPeek
+- uid: NativeCollections.NativePriorityQueue`2.EnsureCapacity*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.EnsureCapacity
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_EnsureCapacity_System_Int32_
+  name: EnsureCapacity
+  nameWithType: NativePriorityQueue<TElement, TPriority>.EnsureCapacity
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.EnsureCapacity
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).EnsureCapacity
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).EnsureCapacity
+- uid: NativeCollections.NativePriorityQueue`2.TrimExcess*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.TrimExcess
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_TrimExcess
+  name: TrimExcess
+  nameWithType: NativePriorityQueue<TElement, TPriority>.TrimExcess
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.TrimExcess
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).TrimExcess
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).TrimExcess
+- uid: NativeCollections.NativePriorityQueue`2.Empty*
+  commentId: Overload:NativeCollections.NativePriorityQueue`2.Empty
+  href: NativeCollections.NativePriorityQueue-2.html#NativeCollections_NativePriorityQueue_2_Empty
+  name: Empty
+  nameWithType: NativePriorityQueue<TElement, TPriority>.Empty
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.Empty
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).Empty
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).Empty

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 #pragma warning disable CS8601 // Possible null reference assignment.
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Dictionary
 {
     /// <summary>
     /// 提供对字典的扩展方法。

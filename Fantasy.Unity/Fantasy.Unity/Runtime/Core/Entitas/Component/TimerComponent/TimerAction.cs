@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 #pragma warning disable CS8625
 #pragma warning disable CS8618
 
-namespace Fantasy
+namespace Fantasy.Timer
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct TimerAction

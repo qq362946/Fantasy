@@ -26,7 +26,7 @@ namespace Fantasy
         }
     }
     
-    public sealed class MultiThreadScheduler : ISceneScheduler
+    internal sealed class MultiThreadScheduler : ISceneScheduler
     {
         private bool _isDisposed;
         private readonly ConcurrentDictionary<long, MultiThreadStruct> _threads = new ConcurrentDictionary<long, MultiThreadStruct>();

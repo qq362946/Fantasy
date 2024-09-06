@@ -1,7 +1,8 @@
 // ReSharper disable ConvertToPrimaryConstructor
 // ReSharper disable SwapViaDeconstruction
 // ReSharper disable InconsistentNaming
-namespace Fantasy
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+namespace Fantasy.DataStructure.PriorityQueue
 {
     public struct PriorityQueueItemUint<T>
     {

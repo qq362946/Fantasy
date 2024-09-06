@@ -7,12 +7,12 @@ using System.Threading;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8603 // Possible null reference return.
 
-namespace Fantasy
+namespace Fantasy.Pool
 {
     /// <summary>
     /// 线程安全的对象池。
     /// </summary>
-    public class MultiThreadPoolQueue
+    internal class MultiThreadPoolQueue
     {
         private int _poolCount;
         private readonly int _maxCapacity;

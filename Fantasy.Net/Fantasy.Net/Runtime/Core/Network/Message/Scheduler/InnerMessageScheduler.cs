@@ -1,13 +1,18 @@
 #if FANTASY_NET
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 using System.Runtime.CompilerServices;
+using Fantasy.Network;
+using Fantasy.Network.Interface;
+using Fantasy.PacketParser;
+using Fantasy.PacketParser.Interface;
+
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace Fantasy
+namespace Fantasy.Scheduler
 {
     /// <summary>
     /// 提供了一个机制来调度和处理内部网络消息。
     /// </summary>
-    public sealed class InnerMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
+    internal sealed class InnerMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
     {
         public override void Scheduler(Session session, APackInfo packInfo)
         {

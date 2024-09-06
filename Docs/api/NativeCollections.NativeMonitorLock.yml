@@ -1,0 +1,2036 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeMonitorLock
+  commentId: T:NativeCollections.NativeMonitorLock
+  id: NativeMonitorLock
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeMonitorLock.#ctor(System.Object)
+  - NativeCollections.NativeMonitorLock.#ctor(System.Object,System.Runtime.InteropServices.GCHandleType)
+  - NativeCollections.NativeMonitorLock.#ctor(System.Runtime.InteropServices.GCHandleType)
+  - NativeCollections.NativeMonitorLock.Dispose
+  - NativeCollections.NativeMonitorLock.Empty
+  - NativeCollections.NativeMonitorLock.Enter
+  - NativeCollections.NativeMonitorLock.Enter(System.Boolean@)
+  - NativeCollections.NativeMonitorLock.Equals(NativeCollections.NativeMonitorLock)
+  - NativeCollections.NativeMonitorLock.Equals(System.Object)
+  - NativeCollections.NativeMonitorLock.Exit
+  - NativeCollections.NativeMonitorLock.GetHashCode
+  - NativeCollections.NativeMonitorLock.IsCreated
+  - NativeCollections.NativeMonitorLock.IsEntered
+  - NativeCollections.NativeMonitorLock.Pulse
+  - NativeCollections.NativeMonitorLock.PulseAll
+  - NativeCollections.NativeMonitorLock.ToString
+  - NativeCollections.NativeMonitorLock.TryEnter
+  - NativeCollections.NativeMonitorLock.TryEnter(System.Boolean@)
+  - NativeCollections.NativeMonitorLock.TryEnter(System.Int32)
+  - NativeCollections.NativeMonitorLock.TryEnter(System.Int32,System.Boolean@)
+  - NativeCollections.NativeMonitorLock.TryEnter(System.TimeSpan)
+  - NativeCollections.NativeMonitorLock.TryEnter(System.TimeSpan,System.Boolean@)
+  - NativeCollections.NativeMonitorLock.Wait
+  - NativeCollections.NativeMonitorLock.Wait(System.Int32)
+  - NativeCollections.NativeMonitorLock.Wait(System.Int32,System.Boolean)
+  - NativeCollections.NativeMonitorLock.Wait(System.TimeSpan)
+  - NativeCollections.NativeMonitorLock.Wait(System.TimeSpan,System.Boolean)
+  - NativeCollections.NativeMonitorLock.op_Equality(NativeCollections.NativeMonitorLock,NativeCollections.NativeMonitorLock)
+  - NativeCollections.NativeMonitorLock.op_Inequality(NativeCollections.NativeMonitorLock,NativeCollections.NativeMonitorLock)
+  langs:
+  - csharp
+  - vb
+  name: NativeMonitorLock
+  nameWithType: NativeMonitorLock
+  fullName: NativeCollections.NativeMonitorLock
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeMonitorLock
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 27
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native monitorLock
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public struct NativeMonitorLock : IDisposable, IEquatable<NativeMonitorLock>
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeMonitorLock Implements IDisposable, IEquatable(Of NativeMonitorLock)
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeMonitorLock}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeMonitorLock.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+- uid: NativeCollections.NativeMonitorLock.#ctor(System.Object)
+  commentId: M:NativeCollections.NativeMonitorLock.#ctor(System.Object)
+  id: '#ctor(System.Object)'
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: NativeMonitorLock(object)
+  nameWithType: NativeMonitorLock.NativeMonitorLock(object)
+  fullName: NativeCollections.NativeMonitorLock.NativeMonitorLock(object)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 39
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeMonitorLock(object value)
+    parameters:
+    - id: value
+      type: System.Object
+      description: Value
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(value As Object)
+  overload: NativeCollections.NativeMonitorLock.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMonitorLock.New(Object)
+  fullName.vb: NativeCollections.NativeMonitorLock.New(Object)
+  name.vb: New(Object)
+- uid: NativeCollections.NativeMonitorLock.#ctor(System.Object,System.Runtime.InteropServices.GCHandleType)
+  commentId: M:NativeCollections.NativeMonitorLock.#ctor(System.Object,System.Runtime.InteropServices.GCHandleType)
+  id: '#ctor(System.Object,System.Runtime.InteropServices.GCHandleType)'
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: NativeMonitorLock(object, GCHandleType)
+  nameWithType: NativeMonitorLock.NativeMonitorLock(object, GCHandleType)
+  fullName: NativeCollections.NativeMonitorLock.NativeMonitorLock(object, System.Runtime.InteropServices.GCHandleType)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 47
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeMonitorLock(object value, GCHandleType type)
+    parameters:
+    - id: value
+      type: System.Object
+      description: Value
+    - id: type
+      type: System.Runtime.InteropServices.GCHandleType
+      description: GCHandle type
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(value As Object, type As GCHandleType)
+  overload: NativeCollections.NativeMonitorLock.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMonitorLock.New(Object, GCHandleType)
+  fullName.vb: NativeCollections.NativeMonitorLock.New(Object, System.Runtime.InteropServices.GCHandleType)
+  name.vb: New(Object, GCHandleType)
+- uid: NativeCollections.NativeMonitorLock.#ctor(System.Runtime.InteropServices.GCHandleType)
+  commentId: M:NativeCollections.NativeMonitorLock.#ctor(System.Runtime.InteropServices.GCHandleType)
+  id: '#ctor(System.Runtime.InteropServices.GCHandleType)'
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: NativeMonitorLock(GCHandleType)
+  nameWithType: NativeMonitorLock.NativeMonitorLock(GCHandleType)
+  fullName: NativeCollections.NativeMonitorLock.NativeMonitorLock(System.Runtime.InteropServices.GCHandleType)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 54
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeMonitorLock(GCHandleType type)
+    parameters:
+    - id: type
+      type: System.Runtime.InteropServices.GCHandleType
+      description: GCHandle type
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(type As GCHandleType)
+  overload: NativeCollections.NativeMonitorLock.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMonitorLock.New(GCHandleType)
+  fullName.vb: NativeCollections.NativeMonitorLock.New(System.Runtime.InteropServices.GCHandleType)
+  name.vb: New(GCHandleType)
+- uid: NativeCollections.NativeMonitorLock.IsCreated
+  commentId: P:NativeCollections.NativeMonitorLock.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeMonitorLock.IsCreated
+  fullName: NativeCollections.NativeMonitorLock.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 60
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeMonitorLock.IsCreated*
+- uid: NativeCollections.NativeMonitorLock.Equals(NativeCollections.NativeMonitorLock)
+  commentId: M:NativeCollections.NativeMonitorLock.Equals(NativeCollections.NativeMonitorLock)
+  id: Equals(NativeCollections.NativeMonitorLock)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeMonitorLock)
+  nameWithType: NativeMonitorLock.Equals(NativeMonitorLock)
+  fullName: NativeCollections.NativeMonitorLock.Equals(NativeCollections.NativeMonitorLock)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 67
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeMonitorLock other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeMonitorLock
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeMonitorLock) As Boolean
+  overload: NativeCollections.NativeMonitorLock.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeMonitorLock}.Equals(NativeCollections.NativeMonitorLock)
+- uid: NativeCollections.NativeMonitorLock.Equals(System.Object)
+  commentId: M:NativeCollections.NativeMonitorLock.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeMonitorLock.Equals(object?)
+  fullName: NativeCollections.NativeMonitorLock.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 74
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeMonitorLock.Equals*
+  nameWithType.vb: NativeMonitorLock.Equals(Object)
+  fullName.vb: NativeCollections.NativeMonitorLock.Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeMonitorLock.GetHashCode
+  commentId: M:NativeCollections.NativeMonitorLock.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeMonitorLock.GetHashCode()
+  fullName: NativeCollections.NativeMonitorLock.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 80
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeMonitorLock.GetHashCode*
+- uid: NativeCollections.NativeMonitorLock.ToString
+  commentId: M:NativeCollections.NativeMonitorLock.ToString
+  id: ToString
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeMonitorLock.ToString()
+  fullName: NativeCollections.NativeMonitorLock.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 86
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeMonitorLock.ToString*
+- uid: NativeCollections.NativeMonitorLock.op_Equality(NativeCollections.NativeMonitorLock,NativeCollections.NativeMonitorLock)
+  commentId: M:NativeCollections.NativeMonitorLock.op_Equality(NativeCollections.NativeMonitorLock,NativeCollections.NativeMonitorLock)
+  id: op_Equality(NativeCollections.NativeMonitorLock,NativeCollections.NativeMonitorLock)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeMonitorLock, NativeMonitorLock)
+  nameWithType: NativeMonitorLock.operator ==(NativeMonitorLock, NativeMonitorLock)
+  fullName: NativeCollections.NativeMonitorLock.operator ==(NativeCollections.NativeMonitorLock, NativeCollections.NativeMonitorLock)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 94
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeMonitorLock left, NativeMonitorLock right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeMonitorLock
+      description: Left
+    - id: right
+      type: NativeCollections.NativeMonitorLock
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeMonitorLock, right As NativeMonitorLock) As Boolean
+  overload: NativeCollections.NativeMonitorLock.op_Equality*
+  nameWithType.vb: NativeMonitorLock.=(NativeMonitorLock, NativeMonitorLock)
+  fullName.vb: NativeCollections.NativeMonitorLock.=(NativeCollections.NativeMonitorLock, NativeCollections.NativeMonitorLock)
+  name.vb: =(NativeMonitorLock, NativeMonitorLock)
+- uid: NativeCollections.NativeMonitorLock.op_Inequality(NativeCollections.NativeMonitorLock,NativeCollections.NativeMonitorLock)
+  commentId: M:NativeCollections.NativeMonitorLock.op_Inequality(NativeCollections.NativeMonitorLock,NativeCollections.NativeMonitorLock)
+  id: op_Inequality(NativeCollections.NativeMonitorLock,NativeCollections.NativeMonitorLock)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeMonitorLock, NativeMonitorLock)
+  nameWithType: NativeMonitorLock.operator !=(NativeMonitorLock, NativeMonitorLock)
+  fullName: NativeCollections.NativeMonitorLock.operator !=(NativeCollections.NativeMonitorLock, NativeCollections.NativeMonitorLock)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 102
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeMonitorLock left, NativeMonitorLock right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeMonitorLock
+      description: Left
+    - id: right
+      type: NativeCollections.NativeMonitorLock
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeMonitorLock, right As NativeMonitorLock) As Boolean
+  overload: NativeCollections.NativeMonitorLock.op_Inequality*
+  nameWithType.vb: NativeMonitorLock.<>(NativeMonitorLock, NativeMonitorLock)
+  fullName.vb: NativeCollections.NativeMonitorLock.<>(NativeCollections.NativeMonitorLock, NativeCollections.NativeMonitorLock)
+  name.vb: <>(NativeMonitorLock, NativeMonitorLock)
+- uid: NativeCollections.NativeMonitorLock.Dispose
+  commentId: M:NativeCollections.NativeMonitorLock.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeMonitorLock.Dispose()
+  fullName: NativeCollections.NativeMonitorLock.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 107
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeMonitorLock.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMonitorLock.Enter
+  commentId: M:NativeCollections.NativeMonitorLock.Enter
+  id: Enter
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Enter()
+  nameWithType: NativeMonitorLock.Enter()
+  fullName: NativeCollections.NativeMonitorLock.Enter()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Enter
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 118
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Enter
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Enter()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Enter()
+  overload: NativeCollections.NativeMonitorLock.Enter*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMonitorLock.Enter(System.Boolean@)
+  commentId: M:NativeCollections.NativeMonitorLock.Enter(System.Boolean@)
+  id: Enter(System.Boolean@)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Enter(ref bool)
+  nameWithType: NativeMonitorLock.Enter(ref bool)
+  fullName: NativeCollections.NativeMonitorLock.Enter(ref bool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Enter
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 124
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Enter
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Enter(ref bool lockTaken)
+    parameters:
+    - id: lockTaken
+      type: System.Boolean
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Enter(lockTaken As Boolean)
+  overload: NativeCollections.NativeMonitorLock.Enter*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMonitorLock.Enter(Boolean)
+  fullName.vb: NativeCollections.NativeMonitorLock.Enter(Boolean)
+  name.vb: Enter(Boolean)
+- uid: NativeCollections.NativeMonitorLock.TryEnter
+  commentId: M:NativeCollections.NativeMonitorLock.TryEnter
+  id: TryEnter
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: TryEnter()
+  nameWithType: NativeMonitorLock.TryEnter()
+  fullName: NativeCollections.NativeMonitorLock.TryEnter()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryEnter
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 130
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Enter
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryEnter()
+    return:
+      type: System.Boolean
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryEnter() As Boolean
+  overload: NativeCollections.NativeMonitorLock.TryEnter*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMonitorLock.TryEnter(System.Boolean@)
+  commentId: M:NativeCollections.NativeMonitorLock.TryEnter(System.Boolean@)
+  id: TryEnter(System.Boolean@)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: TryEnter(ref bool)
+  nameWithType: NativeMonitorLock.TryEnter(ref bool)
+  fullName: NativeCollections.NativeMonitorLock.TryEnter(ref bool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryEnter
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 136
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Enter
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void TryEnter(ref bool lockTaken)
+    parameters:
+    - id: lockTaken
+      type: System.Boolean
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub TryEnter(lockTaken As Boolean)
+  overload: NativeCollections.NativeMonitorLock.TryEnter*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMonitorLock.TryEnter(Boolean)
+  fullName.vb: NativeCollections.NativeMonitorLock.TryEnter(Boolean)
+  name.vb: TryEnter(Boolean)
+- uid: NativeCollections.NativeMonitorLock.TryEnter(System.Int32)
+  commentId: M:NativeCollections.NativeMonitorLock.TryEnter(System.Int32)
+  id: TryEnter(System.Int32)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: TryEnter(int)
+  nameWithType: NativeMonitorLock.TryEnter(int)
+  fullName: NativeCollections.NativeMonitorLock.TryEnter(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryEnter
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 142
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Enter
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryEnter(int millisecondsTimeout)
+    parameters:
+    - id: millisecondsTimeout
+      type: System.Int32
+    return:
+      type: System.Boolean
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryEnter(millisecondsTimeout As Integer) As Boolean
+  overload: NativeCollections.NativeMonitorLock.TryEnter*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMonitorLock.TryEnter(Integer)
+  fullName.vb: NativeCollections.NativeMonitorLock.TryEnter(Integer)
+  name.vb: TryEnter(Integer)
+- uid: NativeCollections.NativeMonitorLock.TryEnter(System.Int32,System.Boolean@)
+  commentId: M:NativeCollections.NativeMonitorLock.TryEnter(System.Int32,System.Boolean@)
+  id: TryEnter(System.Int32,System.Boolean@)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: TryEnter(int, ref bool)
+  nameWithType: NativeMonitorLock.TryEnter(int, ref bool)
+  fullName: NativeCollections.NativeMonitorLock.TryEnter(int, ref bool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryEnter
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 148
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Enter
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void TryEnter(int millisecondsTimeout, ref bool lockTaken)
+    parameters:
+    - id: millisecondsTimeout
+      type: System.Int32
+    - id: lockTaken
+      type: System.Boolean
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub TryEnter(millisecondsTimeout As Integer, lockTaken As Boolean)
+  overload: NativeCollections.NativeMonitorLock.TryEnter*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMonitorLock.TryEnter(Integer, Boolean)
+  fullName.vb: NativeCollections.NativeMonitorLock.TryEnter(Integer, Boolean)
+  name.vb: TryEnter(Integer, Boolean)
+- uid: NativeCollections.NativeMonitorLock.IsEntered
+  commentId: M:NativeCollections.NativeMonitorLock.IsEntered
+  id: IsEntered
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: IsEntered()
+  nameWithType: NativeMonitorLock.IsEntered()
+  fullName: NativeCollections.NativeMonitorLock.IsEntered()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEntered
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 154
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is entered
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool IsEntered()
+    return:
+      type: System.Boolean
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function IsEntered() As Boolean
+  overload: NativeCollections.NativeMonitorLock.IsEntered*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMonitorLock.Wait(System.Int32)
+  commentId: M:NativeCollections.NativeMonitorLock.Wait(System.Int32)
+  id: Wait(System.Int32)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Wait(int)
+  nameWithType: NativeMonitorLock.Wait(int)
+  fullName: NativeCollections.NativeMonitorLock.Wait(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Wait
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 161
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Wait
+  example: []
+  syntax:
+    content: >-
+      [UnsupportedOSPlatform("browser")]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Wait(int millisecondsTimeout)
+    parameters:
+    - id: millisecondsTimeout
+      type: System.Int32
+    return:
+      type: System.Boolean
+    content.vb: >-
+      <UnsupportedOSPlatform("browser")>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Wait(millisecondsTimeout As Integer) As Boolean
+  overload: NativeCollections.NativeMonitorLock.Wait*
+  attributes:
+  - type: System.Runtime.Versioning.UnsupportedOSPlatformAttribute
+    ctor: System.Runtime.Versioning.UnsupportedOSPlatformAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: browser
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMonitorLock.Wait(Integer)
+  fullName.vb: NativeCollections.NativeMonitorLock.Wait(Integer)
+  name.vb: Wait(Integer)
+- uid: NativeCollections.NativeMonitorLock.Pulse
+  commentId: M:NativeCollections.NativeMonitorLock.Pulse
+  id: Pulse
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Pulse()
+  nameWithType: NativeMonitorLock.Pulse()
+  fullName: NativeCollections.NativeMonitorLock.Pulse()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Pulse
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 169
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Pulse
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Pulse()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Pulse()
+  overload: NativeCollections.NativeMonitorLock.Pulse*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMonitorLock.PulseAll
+  commentId: M:NativeCollections.NativeMonitorLock.PulseAll
+  id: PulseAll
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: PulseAll()
+  nameWithType: NativeMonitorLock.PulseAll()
+  fullName: NativeCollections.NativeMonitorLock.PulseAll()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: PulseAll
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 175
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Pulse all
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void PulseAll()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub PulseAll()
+  overload: NativeCollections.NativeMonitorLock.PulseAll*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMonitorLock.TryEnter(System.TimeSpan)
+  commentId: M:NativeCollections.NativeMonitorLock.TryEnter(System.TimeSpan)
+  id: TryEnter(System.TimeSpan)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: TryEnter(TimeSpan)
+  nameWithType: NativeMonitorLock.TryEnter(TimeSpan)
+  fullName: NativeCollections.NativeMonitorLock.TryEnter(System.TimeSpan)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryEnter
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 181
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try enter
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryEnter(TimeSpan timeout)
+    parameters:
+    - id: timeout
+      type: System.TimeSpan
+    return:
+      type: System.Boolean
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryEnter(timeout As TimeSpan) As Boolean
+  overload: NativeCollections.NativeMonitorLock.TryEnter*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMonitorLock.TryEnter(System.TimeSpan,System.Boolean@)
+  commentId: M:NativeCollections.NativeMonitorLock.TryEnter(System.TimeSpan,System.Boolean@)
+  id: TryEnter(System.TimeSpan,System.Boolean@)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: TryEnter(TimeSpan, ref bool)
+  nameWithType: NativeMonitorLock.TryEnter(TimeSpan, ref bool)
+  fullName: NativeCollections.NativeMonitorLock.TryEnter(System.TimeSpan, ref bool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryEnter
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 187
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try enter
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void TryEnter(TimeSpan timeout, ref bool lockTaken)
+    parameters:
+    - id: timeout
+      type: System.TimeSpan
+    - id: lockTaken
+      type: System.Boolean
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub TryEnter(timeout As TimeSpan, lockTaken As Boolean)
+  overload: NativeCollections.NativeMonitorLock.TryEnter*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMonitorLock.TryEnter(TimeSpan, Boolean)
+  fullName.vb: NativeCollections.NativeMonitorLock.TryEnter(System.TimeSpan, Boolean)
+  name.vb: TryEnter(TimeSpan, Boolean)
+- uid: NativeCollections.NativeMonitorLock.Wait(System.TimeSpan)
+  commentId: M:NativeCollections.NativeMonitorLock.Wait(System.TimeSpan)
+  id: Wait(System.TimeSpan)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Wait(TimeSpan)
+  nameWithType: NativeMonitorLock.Wait(TimeSpan)
+  fullName: NativeCollections.NativeMonitorLock.Wait(System.TimeSpan)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Wait
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 194
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Wait
+  example: []
+  syntax:
+    content: >-
+      [UnsupportedOSPlatform("browser")]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Wait(TimeSpan timeout)
+    parameters:
+    - id: timeout
+      type: System.TimeSpan
+    return:
+      type: System.Boolean
+    content.vb: >-
+      <UnsupportedOSPlatform("browser")>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Wait(timeout As TimeSpan) As Boolean
+  overload: NativeCollections.NativeMonitorLock.Wait*
+  attributes:
+  - type: System.Runtime.Versioning.UnsupportedOSPlatformAttribute
+    ctor: System.Runtime.Versioning.UnsupportedOSPlatformAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: browser
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMonitorLock.Wait
+  commentId: M:NativeCollections.NativeMonitorLock.Wait
+  id: Wait
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Wait()
+  nameWithType: NativeMonitorLock.Wait()
+  fullName: NativeCollections.NativeMonitorLock.Wait()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Wait
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 203
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Wait
+  example: []
+  syntax:
+    content: >-
+      [UnsupportedOSPlatform("browser")]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Wait()
+    return:
+      type: System.Boolean
+    content.vb: >-
+      <UnsupportedOSPlatform("browser")>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Wait() As Boolean
+  overload: NativeCollections.NativeMonitorLock.Wait*
+  attributes:
+  - type: System.Runtime.Versioning.UnsupportedOSPlatformAttribute
+    ctor: System.Runtime.Versioning.UnsupportedOSPlatformAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: browser
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMonitorLock.Wait(System.Int32,System.Boolean)
+  commentId: M:NativeCollections.NativeMonitorLock.Wait(System.Int32,System.Boolean)
+  id: Wait(System.Int32,System.Boolean)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Wait(int, bool)
+  nameWithType: NativeMonitorLock.Wait(int, bool)
+  fullName: NativeCollections.NativeMonitorLock.Wait(int, bool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Wait
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 212
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Wait
+  example: []
+  syntax:
+    content: >-
+      [UnsupportedOSPlatform("browser")]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Wait(int millisecondsTimeout, bool exitContext)
+    parameters:
+    - id: millisecondsTimeout
+      type: System.Int32
+    - id: exitContext
+      type: System.Boolean
+    return:
+      type: System.Boolean
+    content.vb: >-
+      <UnsupportedOSPlatform("browser")>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Wait(millisecondsTimeout As Integer, exitContext As Boolean) As Boolean
+  overload: NativeCollections.NativeMonitorLock.Wait*
+  attributes:
+  - type: System.Runtime.Versioning.UnsupportedOSPlatformAttribute
+    ctor: System.Runtime.Versioning.UnsupportedOSPlatformAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: browser
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMonitorLock.Wait(Integer, Boolean)
+  fullName.vb: NativeCollections.NativeMonitorLock.Wait(Integer, Boolean)
+  name.vb: Wait(Integer, Boolean)
+- uid: NativeCollections.NativeMonitorLock.Wait(System.TimeSpan,System.Boolean)
+  commentId: M:NativeCollections.NativeMonitorLock.Wait(System.TimeSpan,System.Boolean)
+  id: Wait(System.TimeSpan,System.Boolean)
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Wait(TimeSpan, bool)
+  nameWithType: NativeMonitorLock.Wait(TimeSpan, bool)
+  fullName: NativeCollections.NativeMonitorLock.Wait(System.TimeSpan, bool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Wait
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 221
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Wait
+  example: []
+  syntax:
+    content: >-
+      [UnsupportedOSPlatform("browser")]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Wait(TimeSpan timeout, bool exitContext)
+    parameters:
+    - id: timeout
+      type: System.TimeSpan
+    - id: exitContext
+      type: System.Boolean
+    return:
+      type: System.Boolean
+    content.vb: >-
+      <UnsupportedOSPlatform("browser")>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Wait(timeout As TimeSpan, exitContext As Boolean) As Boolean
+  overload: NativeCollections.NativeMonitorLock.Wait*
+  attributes:
+  - type: System.Runtime.Versioning.UnsupportedOSPlatformAttribute
+    ctor: System.Runtime.Versioning.UnsupportedOSPlatformAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: browser
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMonitorLock.Wait(TimeSpan, Boolean)
+  fullName.vb: NativeCollections.NativeMonitorLock.Wait(System.TimeSpan, Boolean)
+  name.vb: Wait(TimeSpan, Boolean)
+- uid: NativeCollections.NativeMonitorLock.Exit
+  commentId: M:NativeCollections.NativeMonitorLock.Exit
+  id: Exit
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Exit()
+  nameWithType: NativeMonitorLock.Exit()
+  fullName: NativeCollections.NativeMonitorLock.Exit()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Exit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 229
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Exit
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Exit()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub [Exit]()
+  overload: NativeCollections.NativeMonitorLock.Exit*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMonitorLock.Empty
+  commentId: P:NativeCollections.NativeMonitorLock.Empty
+  id: Empty
+  parent: NativeCollections.NativeMonitorLock
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeMonitorLock.Empty
+  fullName: NativeCollections.NativeMonitorLock.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMonitorLock.cs
+    startLine: 235
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeMonitorLock Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeMonitorLock
+    content.vb: Public Shared ReadOnly Property Empty As NativeMonitorLock
+  overload: NativeCollections.NativeMonitorLock.Empty*
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeMonitorLock}
+  commentId: T:System.IEquatable{NativeCollections.NativeMonitorLock}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeMonitorLock>
+  nameWithType: IEquatable<NativeMonitorLock>
+  fullName: System.IEquatable<NativeCollections.NativeMonitorLock>
+  nameWithType.vb: IEquatable(Of NativeMonitorLock)
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeMonitorLock)
+  name.vb: IEquatable(Of NativeMonitorLock)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeMonitorLock
+    name: NativeMonitorLock
+    href: NativeCollections.NativeMonitorLock.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeMonitorLock
+    name: NativeMonitorLock
+    href: NativeCollections.NativeMonitorLock.html
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeMonitorLock.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeMonitorLock>(NativeMonitorLock)
+  nameWithType: JsonHelper.ToJson<NativeMonitorLock>(NativeMonitorLock)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeMonitorLock>(NativeCollections.NativeMonitorLock)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeMonitorLock)(NativeMonitorLock)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeMonitorLock)(NativeCollections.NativeMonitorLock)
+  name.vb: ToJson(Of NativeMonitorLock)(NativeMonitorLock)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeMonitorLock)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeMonitorLock
+    name: NativeMonitorLock
+    href: NativeCollections.NativeMonitorLock.html
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeMonitorLock
+    name: NativeMonitorLock
+    href: NativeCollections.NativeMonitorLock.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeMonitorLock)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeMonitorLock
+    name: NativeMonitorLock
+    href: NativeCollections.NativeMonitorLock.html
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeMonitorLock
+    name: NativeMonitorLock
+    href: NativeCollections.NativeMonitorLock.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeMonitorLock.#ctor*
+  commentId: Overload:NativeCollections.NativeMonitorLock.#ctor
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock__ctor_System_Object_
+  name: NativeMonitorLock
+  nameWithType: NativeMonitorLock.NativeMonitorLock
+  fullName: NativeCollections.NativeMonitorLock.NativeMonitorLock
+  nameWithType.vb: NativeMonitorLock.New
+  fullName.vb: NativeCollections.NativeMonitorLock.New
+  name.vb: New
+- uid: System.Runtime.InteropServices.GCHandleType
+  commentId: T:System.Runtime.InteropServices.GCHandleType
+  parent: System.Runtime.InteropServices
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.gchandletype
+  name: GCHandleType
+  nameWithType: GCHandleType
+  fullName: System.Runtime.InteropServices.GCHandleType
+- uid: System.Runtime.InteropServices
+  commentId: N:System.Runtime.InteropServices
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Runtime.InteropServices
+  nameWithType: System.Runtime.InteropServices
+  fullName: System.Runtime.InteropServices
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Runtime
+    name: Runtime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime
+  - name: .
+  - uid: System.Runtime.InteropServices
+    name: InteropServices
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.interopservices
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Runtime
+    name: Runtime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime
+  - name: .
+  - uid: System.Runtime.InteropServices
+    name: InteropServices
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.interopservices
+- uid: NativeCollections.NativeMonitorLock.IsCreated*
+  commentId: Overload:NativeCollections.NativeMonitorLock.IsCreated
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_IsCreated
+  name: IsCreated
+  nameWithType: NativeMonitorLock.IsCreated
+  fullName: NativeCollections.NativeMonitorLock.IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeMonitorLock.Equals*
+  commentId: Overload:NativeCollections.NativeMonitorLock.Equals
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_Equals_NativeCollections_NativeMonitorLock_
+  name: Equals
+  nameWithType: NativeMonitorLock.Equals
+  fullName: NativeCollections.NativeMonitorLock.Equals
+- uid: System.IEquatable{NativeCollections.NativeMonitorLock}.Equals(NativeCollections.NativeMonitorLock)
+  commentId: M:System.IEquatable{NativeCollections.NativeMonitorLock}.Equals(NativeCollections.NativeMonitorLock)
+  parent: System.IEquatable{NativeCollections.NativeMonitorLock}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeMonitorLock)
+  nameWithType: IEquatable<NativeMonitorLock>.Equals(NativeMonitorLock)
+  fullName: System.IEquatable<NativeCollections.NativeMonitorLock>.Equals(NativeCollections.NativeMonitorLock)
+  nameWithType.vb: IEquatable(Of NativeMonitorLock).Equals(NativeMonitorLock)
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeMonitorLock).Equals(NativeCollections.NativeMonitorLock)
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeMonitorLock}.Equals(NativeCollections.NativeMonitorLock)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeMonitorLock
+    name: NativeMonitorLock
+    href: NativeCollections.NativeMonitorLock.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeMonitorLock}.Equals(NativeCollections.NativeMonitorLock)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeMonitorLock
+    name: NativeMonitorLock
+    href: NativeCollections.NativeMonitorLock.html
+  - name: )
+- uid: NativeCollections.NativeMonitorLock
+  commentId: T:NativeCollections.NativeMonitorLock
+  parent: NativeCollections
+  href: NativeCollections.NativeMonitorLock.html
+  name: NativeMonitorLock
+  nameWithType: NativeMonitorLock
+  fullName: NativeCollections.NativeMonitorLock
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMonitorLock.GetHashCode*
+  commentId: Overload:NativeCollections.NativeMonitorLock.GetHashCode
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeMonitorLock.GetHashCode
+  fullName: NativeCollections.NativeMonitorLock.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMonitorLock.ToString*
+  commentId: Overload:NativeCollections.NativeMonitorLock.ToString
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_ToString
+  name: ToString
+  nameWithType: NativeMonitorLock.ToString
+  fullName: NativeCollections.NativeMonitorLock.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeMonitorLock.op_Equality*
+  commentId: Overload:NativeCollections.NativeMonitorLock.op_Equality
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_op_Equality_NativeCollections_NativeMonitorLock_NativeCollections_NativeMonitorLock_
+  name: operator ==
+  nameWithType: NativeMonitorLock.operator ==
+  fullName: NativeCollections.NativeMonitorLock.operator ==
+  nameWithType.vb: NativeMonitorLock.=
+  fullName.vb: NativeCollections.NativeMonitorLock.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeMonitorLock.op_Equality*
+    name: ==
+    href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_op_Equality_NativeCollections_NativeMonitorLock_NativeCollections_NativeMonitorLock_
+- uid: NativeCollections.NativeMonitorLock.op_Inequality*
+  commentId: Overload:NativeCollections.NativeMonitorLock.op_Inequality
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_op_Inequality_NativeCollections_NativeMonitorLock_NativeCollections_NativeMonitorLock_
+  name: operator !=
+  nameWithType: NativeMonitorLock.operator !=
+  fullName: NativeCollections.NativeMonitorLock.operator !=
+  nameWithType.vb: NativeMonitorLock.<>
+  fullName.vb: NativeCollections.NativeMonitorLock.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeMonitorLock.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_op_Inequality_NativeCollections_NativeMonitorLock_NativeCollections_NativeMonitorLock_
+- uid: NativeCollections.NativeMonitorLock.Dispose*
+  commentId: Overload:NativeCollections.NativeMonitorLock.Dispose
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_Dispose
+  name: Dispose
+  nameWithType: NativeMonitorLock.Dispose
+  fullName: NativeCollections.NativeMonitorLock.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMonitorLock.Enter*
+  commentId: Overload:NativeCollections.NativeMonitorLock.Enter
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_Enter
+  name: Enter
+  nameWithType: NativeMonitorLock.Enter
+  fullName: NativeCollections.NativeMonitorLock.Enter
+- uid: NativeCollections.NativeMonitorLock.TryEnter*
+  commentId: Overload:NativeCollections.NativeMonitorLock.TryEnter
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_TryEnter
+  name: TryEnter
+  nameWithType: NativeMonitorLock.TryEnter
+  fullName: NativeCollections.NativeMonitorLock.TryEnter
+- uid: NativeCollections.NativeMonitorLock.IsEntered*
+  commentId: Overload:NativeCollections.NativeMonitorLock.IsEntered
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_IsEntered
+  name: IsEntered
+  nameWithType: NativeMonitorLock.IsEntered
+  fullName: NativeCollections.NativeMonitorLock.IsEntered
+- uid: NativeCollections.NativeMonitorLock.Wait*
+  commentId: Overload:NativeCollections.NativeMonitorLock.Wait
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_Wait_System_Int32_
+  name: Wait
+  nameWithType: NativeMonitorLock.Wait
+  fullName: NativeCollections.NativeMonitorLock.Wait
+- uid: NativeCollections.NativeMonitorLock.Pulse*
+  commentId: Overload:NativeCollections.NativeMonitorLock.Pulse
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_Pulse
+  name: Pulse
+  nameWithType: NativeMonitorLock.Pulse
+  fullName: NativeCollections.NativeMonitorLock.Pulse
+- uid: NativeCollections.NativeMonitorLock.PulseAll*
+  commentId: Overload:NativeCollections.NativeMonitorLock.PulseAll
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_PulseAll
+  name: PulseAll
+  nameWithType: NativeMonitorLock.PulseAll
+  fullName: NativeCollections.NativeMonitorLock.PulseAll
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.timespan
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: NativeCollections.NativeMonitorLock.Exit*
+  commentId: Overload:NativeCollections.NativeMonitorLock.Exit
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_Exit
+  name: Exit
+  nameWithType: NativeMonitorLock.Exit
+  fullName: NativeCollections.NativeMonitorLock.Exit
+- uid: NativeCollections.NativeMonitorLock.Empty*
+  commentId: Overload:NativeCollections.NativeMonitorLock.Empty
+  href: NativeCollections.NativeMonitorLock.html#NativeCollections_NativeMonitorLock_Empty
+  name: Empty
+  nameWithType: NativeMonitorLock.Empty
+  fullName: NativeCollections.NativeMonitorLock.Empty

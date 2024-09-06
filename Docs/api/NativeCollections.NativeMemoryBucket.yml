@@ -1,0 +1,1338 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeMemoryBucket
+  commentId: T:NativeCollections.NativeMemoryBucket
+  id: NativeMemoryBucket
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeMemoryBucket.#ctor(System.Int32,System.Int32)
+  - NativeCollections.NativeMemoryBucket.Count
+  - NativeCollections.NativeMemoryBucket.Dispose
+  - NativeCollections.NativeMemoryBucket.Empty
+  - NativeCollections.NativeMemoryBucket.Equals(NativeCollections.NativeMemoryBucket)
+  - NativeCollections.NativeMemoryBucket.Equals(System.Object)
+  - NativeCollections.NativeMemoryBucket.GetHashCode
+  - NativeCollections.NativeMemoryBucket.IsCreated
+  - NativeCollections.NativeMemoryBucket.IsEmpty
+  - NativeCollections.NativeMemoryBucket.IsFull
+  - NativeCollections.NativeMemoryBucket.Length
+  - NativeCollections.NativeMemoryBucket.Rent
+  - NativeCollections.NativeMemoryBucket.Return(System.Void*)
+  - NativeCollections.NativeMemoryBucket.Size
+  - NativeCollections.NativeMemoryBucket.ToString
+  - NativeCollections.NativeMemoryBucket.op_Equality(NativeCollections.NativeMemoryBucket,NativeCollections.NativeMemoryBucket)
+  - NativeCollections.NativeMemoryBucket.op_Inequality(NativeCollections.NativeMemoryBucket,NativeCollections.NativeMemoryBucket)
+  langs:
+  - csharp
+  - vb
+  name: NativeMemoryBucket
+  nameWithType: NativeMemoryBucket
+  fullName: NativeCollections.NativeMemoryBucket
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeMemoryBucket
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 21
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native memory bucket
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeMemoryBucket : IDisposable, IEquatable<NativeMemoryBucket>
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeMemoryBucket Implements IDisposable, IEquatable(Of NativeMemoryBucket)
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeMemoryBucket}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeMemoryBucket.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+- uid: NativeCollections.NativeMemoryBucket.#ctor(System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeMemoryBucket.#ctor(System.Int32,System.Int32)
+  id: '#ctor(System.Int32,System.Int32)'
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: NativeMemoryBucket(int, int)
+  nameWithType: NativeMemoryBucket.NativeMemoryBucket(int, int)
+  fullName: NativeCollections.NativeMemoryBucket.NativeMemoryBucket(int, int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 66
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeMemoryBucket(int size, int length)
+    parameters:
+    - id: size
+      type: System.Int32
+      description: Size
+    - id: length
+      type: System.Int32
+      description: Length
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(size As Integer, length As Integer)
+  overload: NativeCollections.NativeMemoryBucket.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryBucket.New(Integer, Integer)
+  fullName.vb: NativeCollections.NativeMemoryBucket.New(Integer, Integer)
+  name.vb: New(Integer, Integer)
+- uid: NativeCollections.NativeMemoryBucket.IsCreated
+  commentId: P:NativeCollections.NativeMemoryBucket.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeMemoryBucket.IsCreated
+  fullName: NativeCollections.NativeMemoryBucket.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 84
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeMemoryBucket.IsCreated*
+- uid: NativeCollections.NativeMemoryBucket.IsEmpty
+  commentId: P:NativeCollections.NativeMemoryBucket.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativeMemoryBucket.IsEmpty
+  fullName: NativeCollections.NativeMemoryBucket.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 89
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is empty
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativeMemoryBucket.IsEmpty*
+- uid: NativeCollections.NativeMemoryBucket.IsFull
+  commentId: P:NativeCollections.NativeMemoryBucket.IsFull
+  id: IsFull
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: IsFull
+  nameWithType: NativeMemoryBucket.IsFull
+  fullName: NativeCollections.NativeMemoryBucket.IsFull
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsFull
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 94
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is full
+  example: []
+  syntax:
+    content: public bool IsFull { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsFull As Boolean
+  overload: NativeCollections.NativeMemoryBucket.IsFull*
+- uid: NativeCollections.NativeMemoryBucket.Size
+  commentId: P:NativeCollections.NativeMemoryBucket.Size
+  id: Size
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: Size
+  nameWithType: NativeMemoryBucket.Size
+  fullName: NativeCollections.NativeMemoryBucket.Size
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Size
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 99
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Size
+  example: []
+  syntax:
+    content: public int Size { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Size As Integer
+  overload: NativeCollections.NativeMemoryBucket.Size*
+- uid: NativeCollections.NativeMemoryBucket.Length
+  commentId: P:NativeCollections.NativeMemoryBucket.Length
+  id: Length
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: Length
+  nameWithType: NativeMemoryBucket.Length
+  fullName: NativeCollections.NativeMemoryBucket.Length
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Length
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 104
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Length
+  example: []
+  syntax:
+    content: public int Length { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Length As Integer
+  overload: NativeCollections.NativeMemoryBucket.Length*
+- uid: NativeCollections.NativeMemoryBucket.Count
+  commentId: P:NativeCollections.NativeMemoryBucket.Count
+  id: Count
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: NativeMemoryBucket.Count
+  fullName: NativeCollections.NativeMemoryBucket.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 109
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Count
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: NativeCollections.NativeMemoryBucket.Count*
+- uid: NativeCollections.NativeMemoryBucket.Equals(NativeCollections.NativeMemoryBucket)
+  commentId: M:NativeCollections.NativeMemoryBucket.Equals(NativeCollections.NativeMemoryBucket)
+  id: Equals(NativeCollections.NativeMemoryBucket)
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeMemoryBucket)
+  nameWithType: NativeMemoryBucket.Equals(NativeMemoryBucket)
+  fullName: NativeCollections.NativeMemoryBucket.Equals(NativeCollections.NativeMemoryBucket)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 116
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeMemoryBucket other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeMemoryBucket
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeMemoryBucket) As Boolean
+  overload: NativeCollections.NativeMemoryBucket.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeMemoryBucket}.Equals(NativeCollections.NativeMemoryBucket)
+- uid: NativeCollections.NativeMemoryBucket.Equals(System.Object)
+  commentId: M:NativeCollections.NativeMemoryBucket.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeMemoryBucket.Equals(object?)
+  fullName: NativeCollections.NativeMemoryBucket.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 123
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeMemoryBucket.Equals*
+  nameWithType.vb: NativeMemoryBucket.Equals(Object)
+  fullName.vb: NativeCollections.NativeMemoryBucket.Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeMemoryBucket.GetHashCode
+  commentId: M:NativeCollections.NativeMemoryBucket.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeMemoryBucket.GetHashCode()
+  fullName: NativeCollections.NativeMemoryBucket.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 129
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeMemoryBucket.GetHashCode*
+- uid: NativeCollections.NativeMemoryBucket.ToString
+  commentId: M:NativeCollections.NativeMemoryBucket.ToString
+  id: ToString
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeMemoryBucket.ToString()
+  fullName: NativeCollections.NativeMemoryBucket.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 135
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeMemoryBucket.ToString*
+- uid: NativeCollections.NativeMemoryBucket.op_Equality(NativeCollections.NativeMemoryBucket,NativeCollections.NativeMemoryBucket)
+  commentId: M:NativeCollections.NativeMemoryBucket.op_Equality(NativeCollections.NativeMemoryBucket,NativeCollections.NativeMemoryBucket)
+  id: op_Equality(NativeCollections.NativeMemoryBucket,NativeCollections.NativeMemoryBucket)
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeMemoryBucket, NativeMemoryBucket)
+  nameWithType: NativeMemoryBucket.operator ==(NativeMemoryBucket, NativeMemoryBucket)
+  fullName: NativeCollections.NativeMemoryBucket.operator ==(NativeCollections.NativeMemoryBucket, NativeCollections.NativeMemoryBucket)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 143
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeMemoryBucket left, NativeMemoryBucket right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeMemoryBucket
+      description: Left
+    - id: right
+      type: NativeCollections.NativeMemoryBucket
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeMemoryBucket, right As NativeMemoryBucket) As Boolean
+  overload: NativeCollections.NativeMemoryBucket.op_Equality*
+  nameWithType.vb: NativeMemoryBucket.=(NativeMemoryBucket, NativeMemoryBucket)
+  fullName.vb: NativeCollections.NativeMemoryBucket.=(NativeCollections.NativeMemoryBucket, NativeCollections.NativeMemoryBucket)
+  name.vb: =(NativeMemoryBucket, NativeMemoryBucket)
+- uid: NativeCollections.NativeMemoryBucket.op_Inequality(NativeCollections.NativeMemoryBucket,NativeCollections.NativeMemoryBucket)
+  commentId: M:NativeCollections.NativeMemoryBucket.op_Inequality(NativeCollections.NativeMemoryBucket,NativeCollections.NativeMemoryBucket)
+  id: op_Inequality(NativeCollections.NativeMemoryBucket,NativeCollections.NativeMemoryBucket)
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeMemoryBucket, NativeMemoryBucket)
+  nameWithType: NativeMemoryBucket.operator !=(NativeMemoryBucket, NativeMemoryBucket)
+  fullName: NativeCollections.NativeMemoryBucket.operator !=(NativeCollections.NativeMemoryBucket, NativeCollections.NativeMemoryBucket)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 151
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeMemoryBucket left, NativeMemoryBucket right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeMemoryBucket
+      description: Left
+    - id: right
+      type: NativeCollections.NativeMemoryBucket
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeMemoryBucket, right As NativeMemoryBucket) As Boolean
+  overload: NativeCollections.NativeMemoryBucket.op_Inequality*
+  nameWithType.vb: NativeMemoryBucket.<>(NativeMemoryBucket, NativeMemoryBucket)
+  fullName.vb: NativeCollections.NativeMemoryBucket.<>(NativeCollections.NativeMemoryBucket, NativeCollections.NativeMemoryBucket)
+  name.vb: <>(NativeMemoryBucket, NativeMemoryBucket)
+- uid: NativeCollections.NativeMemoryBucket.Dispose
+  commentId: M:NativeCollections.NativeMemoryBucket.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeMemoryBucket.Dispose()
+  fullName: NativeCollections.NativeMemoryBucket.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 156
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeMemoryBucket.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMemoryBucket.Rent
+  commentId: M:NativeCollections.NativeMemoryBucket.Rent
+  id: Rent
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: Rent()
+  nameWithType: NativeMemoryBucket.Rent()
+  fullName: NativeCollections.NativeMemoryBucket.Rent()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Rent
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 170
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Rent buffer
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void* Rent()
+    return:
+      type: System.Void*
+      description: Buffer
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Rent() As Void*
+  overload: NativeCollections.NativeMemoryBucket.Rent*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMemoryBucket.Return(System.Void*)
+  commentId: M:NativeCollections.NativeMemoryBucket.Return(System.Void*)
+  id: Return(System.Void*)
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: Return(void*)
+  nameWithType: NativeMemoryBucket.Return(void*)
+  fullName: NativeCollections.NativeMemoryBucket.Return(void*)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Return
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 189
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Return buffer
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Return(void* ptr)
+    parameters:
+    - id: ptr
+      type: System.Void*
+      description: Pointer
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub [Return](ptr As Void*)
+  overload: NativeCollections.NativeMemoryBucket.Return*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryBucket.Return(Void*)
+  fullName.vb: NativeCollections.NativeMemoryBucket.Return(Void*)
+  name.vb: Return(Void*)
+- uid: NativeCollections.NativeMemoryBucket.Empty
+  commentId: P:NativeCollections.NativeMemoryBucket.Empty
+  id: Empty
+  parent: NativeCollections.NativeMemoryBucket
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeMemoryBucket.Empty
+  fullName: NativeCollections.NativeMemoryBucket.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryBucket.cs
+    startLine: 201
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeMemoryBucket Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeMemoryBucket
+    content.vb: Public Shared ReadOnly Property Empty As NativeMemoryBucket
+  overload: NativeCollections.NativeMemoryBucket.Empty*
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeMemoryBucket}
+  commentId: T:System.IEquatable{NativeCollections.NativeMemoryBucket}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeMemoryBucket>
+  nameWithType: IEquatable<NativeMemoryBucket>
+  fullName: System.IEquatable<NativeCollections.NativeMemoryBucket>
+  nameWithType.vb: IEquatable(Of NativeMemoryBucket)
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeMemoryBucket)
+  name.vb: IEquatable(Of NativeMemoryBucket)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeMemoryBucket
+    name: NativeMemoryBucket
+    href: NativeCollections.NativeMemoryBucket.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeMemoryBucket
+    name: NativeMemoryBucket
+    href: NativeCollections.NativeMemoryBucket.html
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeMemoryBucket.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeMemoryBucket>(NativeMemoryBucket)
+  nameWithType: JsonHelper.ToJson<NativeMemoryBucket>(NativeMemoryBucket)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeMemoryBucket>(NativeCollections.NativeMemoryBucket)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeMemoryBucket)(NativeMemoryBucket)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeMemoryBucket)(NativeCollections.NativeMemoryBucket)
+  name.vb: ToJson(Of NativeMemoryBucket)(NativeMemoryBucket)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeMemoryBucket)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeMemoryBucket
+    name: NativeMemoryBucket
+    href: NativeCollections.NativeMemoryBucket.html
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeMemoryBucket
+    name: NativeMemoryBucket
+    href: NativeCollections.NativeMemoryBucket.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeMemoryBucket)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeMemoryBucket
+    name: NativeMemoryBucket
+    href: NativeCollections.NativeMemoryBucket.html
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeMemoryBucket
+    name: NativeMemoryBucket
+    href: NativeCollections.NativeMemoryBucket.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeMemoryBucket.#ctor*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.#ctor
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket__ctor_System_Int32_System_Int32_
+  name: NativeMemoryBucket
+  nameWithType: NativeMemoryBucket.NativeMemoryBucket
+  fullName: NativeCollections.NativeMemoryBucket.NativeMemoryBucket
+  nameWithType.vb: NativeMemoryBucket.New
+  fullName.vb: NativeCollections.NativeMemoryBucket.New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativeMemoryBucket.IsCreated*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.IsCreated
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_IsCreated
+  name: IsCreated
+  nameWithType: NativeMemoryBucket.IsCreated
+  fullName: NativeCollections.NativeMemoryBucket.IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeMemoryBucket.IsEmpty*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.IsEmpty
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_IsEmpty
+  name: IsEmpty
+  nameWithType: NativeMemoryBucket.IsEmpty
+  fullName: NativeCollections.NativeMemoryBucket.IsEmpty
+- uid: NativeCollections.NativeMemoryBucket.IsFull*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.IsFull
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_IsFull
+  name: IsFull
+  nameWithType: NativeMemoryBucket.IsFull
+  fullName: NativeCollections.NativeMemoryBucket.IsFull
+- uid: NativeCollections.NativeMemoryBucket.Size*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.Size
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_Size
+  name: Size
+  nameWithType: NativeMemoryBucket.Size
+  fullName: NativeCollections.NativeMemoryBucket.Size
+- uid: NativeCollections.NativeMemoryBucket.Length*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.Length
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_Length
+  name: Length
+  nameWithType: NativeMemoryBucket.Length
+  fullName: NativeCollections.NativeMemoryBucket.Length
+- uid: NativeCollections.NativeMemoryBucket.Count*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.Count
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_Count
+  name: Count
+  nameWithType: NativeMemoryBucket.Count
+  fullName: NativeCollections.NativeMemoryBucket.Count
+- uid: NativeCollections.NativeMemoryBucket.Equals*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.Equals
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_Equals_NativeCollections_NativeMemoryBucket_
+  name: Equals
+  nameWithType: NativeMemoryBucket.Equals
+  fullName: NativeCollections.NativeMemoryBucket.Equals
+- uid: System.IEquatable{NativeCollections.NativeMemoryBucket}.Equals(NativeCollections.NativeMemoryBucket)
+  commentId: M:System.IEquatable{NativeCollections.NativeMemoryBucket}.Equals(NativeCollections.NativeMemoryBucket)
+  parent: System.IEquatable{NativeCollections.NativeMemoryBucket}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeMemoryBucket)
+  nameWithType: IEquatable<NativeMemoryBucket>.Equals(NativeMemoryBucket)
+  fullName: System.IEquatable<NativeCollections.NativeMemoryBucket>.Equals(NativeCollections.NativeMemoryBucket)
+  nameWithType.vb: IEquatable(Of NativeMemoryBucket).Equals(NativeMemoryBucket)
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeMemoryBucket).Equals(NativeCollections.NativeMemoryBucket)
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeMemoryBucket}.Equals(NativeCollections.NativeMemoryBucket)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeMemoryBucket
+    name: NativeMemoryBucket
+    href: NativeCollections.NativeMemoryBucket.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeMemoryBucket}.Equals(NativeCollections.NativeMemoryBucket)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeMemoryBucket
+    name: NativeMemoryBucket
+    href: NativeCollections.NativeMemoryBucket.html
+  - name: )
+- uid: NativeCollections.NativeMemoryBucket
+  commentId: T:NativeCollections.NativeMemoryBucket
+  parent: NativeCollections
+  href: NativeCollections.NativeMemoryBucket.html
+  name: NativeMemoryBucket
+  nameWithType: NativeMemoryBucket
+  fullName: NativeCollections.NativeMemoryBucket
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMemoryBucket.GetHashCode*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.GetHashCode
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeMemoryBucket.GetHashCode
+  fullName: NativeCollections.NativeMemoryBucket.GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMemoryBucket.ToString*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.ToString
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_ToString
+  name: ToString
+  nameWithType: NativeMemoryBucket.ToString
+  fullName: NativeCollections.NativeMemoryBucket.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeMemoryBucket.op_Equality*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.op_Equality
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_op_Equality_NativeCollections_NativeMemoryBucket_NativeCollections_NativeMemoryBucket_
+  name: operator ==
+  nameWithType: NativeMemoryBucket.operator ==
+  fullName: NativeCollections.NativeMemoryBucket.operator ==
+  nameWithType.vb: NativeMemoryBucket.=
+  fullName.vb: NativeCollections.NativeMemoryBucket.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeMemoryBucket.op_Equality*
+    name: ==
+    href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_op_Equality_NativeCollections_NativeMemoryBucket_NativeCollections_NativeMemoryBucket_
+- uid: NativeCollections.NativeMemoryBucket.op_Inequality*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.op_Inequality
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_op_Inequality_NativeCollections_NativeMemoryBucket_NativeCollections_NativeMemoryBucket_
+  name: operator !=
+  nameWithType: NativeMemoryBucket.operator !=
+  fullName: NativeCollections.NativeMemoryBucket.operator !=
+  nameWithType.vb: NativeMemoryBucket.<>
+  fullName.vb: NativeCollections.NativeMemoryBucket.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeMemoryBucket.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_op_Inequality_NativeCollections_NativeMemoryBucket_NativeCollections_NativeMemoryBucket_
+- uid: NativeCollections.NativeMemoryBucket.Dispose*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.Dispose
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_Dispose
+  name: Dispose
+  nameWithType: NativeMemoryBucket.Dispose
+  fullName: NativeCollections.NativeMemoryBucket.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMemoryBucket.Rent*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.Rent
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_Rent
+  name: Rent
+  nameWithType: NativeMemoryBucket.Rent
+  fullName: NativeCollections.NativeMemoryBucket.Rent
+- uid: System.Void*
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.void
+  name: void*
+  nameWithType: void*
+  fullName: void*
+  nameWithType.vb: Void*
+  fullName.vb: Void*
+  name.vb: Void*
+  spec.csharp:
+  - uid: System.Void
+    name: void
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.void
+  - name: '*'
+  spec.vb:
+  - uid: System.Void
+    name: Void
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.void
+  - name: '*'
+- uid: NativeCollections.NativeMemoryBucket.Return*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.Return
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_Return_System_Void__
+  name: Return
+  nameWithType: NativeMemoryBucket.Return
+  fullName: NativeCollections.NativeMemoryBucket.Return
+- uid: NativeCollections.NativeMemoryBucket.Empty*
+  commentId: Overload:NativeCollections.NativeMemoryBucket.Empty
+  href: NativeCollections.NativeMemoryBucket.html#NativeCollections_NativeMemoryBucket_Empty
+  name: Empty
+  nameWithType: NativeMemoryBucket.Empty
+  fullName: NativeCollections.NativeMemoryBucket.Empty

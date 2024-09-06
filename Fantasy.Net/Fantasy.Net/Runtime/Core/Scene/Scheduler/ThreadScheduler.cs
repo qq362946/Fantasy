@@ -2,10 +2,22 @@
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 namespace Fantasy
 {
-    public static class ThreadScheduler
+    /// <summary>
+    /// 线程调度器
+    /// </summary>
+    internal static class ThreadScheduler
     {
+        /// <summary>
+        /// 主线程调度器
+        /// </summary>
         public static MainScheduler MainScheduler { get; private set; }
+        /// <summary>
+        /// 多线程调度器，根据当前CPU核心数量创建的固定线程。
+        /// </summary>
         public static ISceneScheduler MultiThreadScheduler { get; private set; }
+        /// <summary>
+        /// 线程池调度器
+        /// </summary>
         public static ISceneScheduler ThreadPoolScheduler { get; private set; }
 
         static ThreadScheduler()
@@ -13,17 +25,17 @@ namespace Fantasy
             MainScheduler = new MainScheduler();
         }
         
-        public static void Update()
+        internal static void Update()
         {
             MainScheduler.Update();
         }
 
-        public static void AddMainScheduler(Scene scene)
+        internal static void AddMainScheduler(Scene scene)
         {
             MainScheduler.Add(scene);
         }
 
-        public static void AddToMultiThreadScheduler(Scene scene)
+        internal static void AddToMultiThreadScheduler(Scene scene)
         {
             if (MultiThreadScheduler == null)
             {
@@ -37,7 +49,7 @@ namespace Fantasy
             MultiThreadScheduler.Add(scene);
         }
 
-        public static void AddToThreadPoolScheduler(Scene scene)
+        internal static void AddToThreadPoolScheduler(Scene scene)
         {
             if (ThreadPoolScheduler == null)
             {

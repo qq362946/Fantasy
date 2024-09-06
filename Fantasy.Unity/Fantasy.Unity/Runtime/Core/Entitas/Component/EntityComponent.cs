@@ -2,10 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Fantasy.Assembly;
+using Fantasy.Async;
+using Fantasy.DataStructure.Collection;
+using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
+using Fantasy.Helper;
+
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace Fantasy
+namespace Fantasy.Entitas
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct UpdateQueueStruct
@@ -97,7 +104,7 @@ namespace Fantasy
         {
             foreach (var entityType in AssemblySystem.ForEach(assemblyIdentity, typeof(IEntity)))
             {
-                _hashCodes.Add(entityType,HashCodeHelper.ComputeHash64(entityType.FullName));
+                _hashCodes.Add(entityType, HashCodeHelper.ComputeHash64(entityType.FullName));
                 _assemblyHashCodes.Add(assemblyIdentity, entityType);
             }
             

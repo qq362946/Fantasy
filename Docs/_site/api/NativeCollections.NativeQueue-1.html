@@ -1,0 +1,1135 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>NativeQueue&lt;T&gt; 结构
+ | Fantasy </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="NativeQueue&lt;T&gt; 结构
+ | Fantasy ">
+    
+    <meta name="description" content="Native queue">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="Fantasy">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="搜索" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">搜索结果 <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="首页" data-prev="上一页" data-next="下一页" data-last="尾页"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">显示/隐藏目录</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="NativeCollections.NativeQueue`1">
+
+
+
+  <h1 id="NativeCollections_NativeQueue_1" data-uid="NativeCollections.NativeQueue`1" class="text-break">NativeQueue&lt;T&gt; 结构
+</h1>
+  <div class="markdown level0 summary"><p>Native queue</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="implements">
+    <h5>实现</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="NativeCollections.NativeQueue-1.html">NativeQueue</a>&lt;T&gt;&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>继承成员</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>命名空间</strong>: <a class="xref" href="NativeCollections.html">NativeCollections</a></h6>
+  <h6><strong>程序集</strong>: Fantasy.Net.dll</h6>
+  <h5 id="NativeCollections_NativeQueue_1_syntax">语法</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[StructLayout(LayoutKind.Sequential)]
+public readonly struct NativeQueue&lt;T&gt; : IDisposable, IEquatable&lt;NativeQueue&lt;T&gt;&gt; where T : unmanaged</code></pre>
+  </div>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>Type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">构造函数
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1__ctor_System_Int32_.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.%23ctor(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L72">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1__ctor_" data-uid="NativeCollections.NativeQueue`1.#ctor*"></a>
+  <h4 id="NativeCollections_NativeQueue_1__ctor_System_Int32_" data-uid="NativeCollections.NativeQueue`1.#ctor(System.Int32)">NativeQueue(int)</h4>
+  <div class="markdown level1 summary"><p>Structure</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public NativeQueue(int capacity)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">capacity</span></td>
+        <td><p>Capacity</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">属性
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_Count.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.Count%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L121">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_Count_" data-uid="NativeCollections.NativeQueue`1.Count*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_Count" data-uid="NativeCollections.NativeQueue`1.Count">Count</h4>
+  <div class="markdown level1 summary"><p>Count</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Count { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_Empty.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.Empty%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L376">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_Empty_" data-uid="NativeCollections.NativeQueue`1.Empty*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_Empty" data-uid="NativeCollections.NativeQueue`1.Empty">Empty</h4>
+  <div class="markdown level1 summary"><p>Empty</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static NativeQueue&lt;T&gt; Empty { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="NativeCollections.NativeQueue-1.html">NativeQueue</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_IsCreated.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.IsCreated%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L91">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_IsCreated_" data-uid="NativeCollections.NativeQueue`1.IsCreated*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_IsCreated" data-uid="NativeCollections.NativeQueue`1.IsCreated">IsCreated</h4>
+  <div class="markdown level1 summary"><p>Is created</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsCreated { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_IsEmpty.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.IsEmpty%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L96">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_IsEmpty_" data-uid="NativeCollections.NativeQueue`1.IsEmpty*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_IsEmpty" data-uid="NativeCollections.NativeQueue`1.IsEmpty">IsEmpty</h4>
+  <div class="markdown level1 summary"><p>Is empty</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsEmpty { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_Item_System_Int32_.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.Item(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L102">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_Item_" data-uid="NativeCollections.NativeQueue`1.Item*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_Item_System_Int32_" data-uid="NativeCollections.NativeQueue`1.Item(System.Int32)">this[int]</h4>
+  <div class="markdown level1 summary"><p>Get reference</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ref T this[int index] { get; }</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>Index</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_Item_System_UInt32_.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.Item(System.UInt32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L112">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_Item_" data-uid="NativeCollections.NativeQueue`1.Item*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_Item_System_UInt32_" data-uid="NativeCollections.NativeQueue`1.Item(System.UInt32)">this[uint]</h4>
+  <div class="markdown level1 summary"><p>Get reference</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ref T this[uint index] { get; }</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>Index</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">方法
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_Clear.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.Clear%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L180">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_Clear_" data-uid="NativeCollections.NativeQueue`1.Clear*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_Clear" data-uid="NativeCollections.NativeQueue`1.Clear">Clear()</h4>
+  <div class="markdown level1 summary"><p>Clear</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public void Clear()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_Dequeue.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.Dequeue%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L228">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_Dequeue_" data-uid="NativeCollections.NativeQueue`1.Dequeue*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_Dequeue" data-uid="NativeCollections.NativeQueue`1.Dequeue">Dequeue()</h4>
+  <div class="markdown level1 summary"><p>Dequeue</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public T Dequeue()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>Item</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_Dispose.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.Dispose%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L168">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_Dispose_" data-uid="NativeCollections.NativeQueue`1.Dispose*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_Dispose" data-uid="NativeCollections.NativeQueue`1.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Dispose</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_Enqueue__0__.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.Enqueue(%600%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L193">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_Enqueue_" data-uid="NativeCollections.NativeQueue`1.Enqueue*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_Enqueue__0__" data-uid="NativeCollections.NativeQueue`1.Enqueue(`0@)">Enqueue(in T)</h4>
+  <div class="markdown level1 summary"><p>Enqueue</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public void Enqueue(in T item)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">item</span></td>
+        <td><p>Item</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_EnsureCapacity_System_Int32_.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.EnsureCapacity(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L291">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_EnsureCapacity_" data-uid="NativeCollections.NativeQueue`1.EnsureCapacity*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_EnsureCapacity_System_Int32_" data-uid="NativeCollections.NativeQueue`1.EnsureCapacity(System.Int32)">EnsureCapacity(int)</h4>
+  <div class="markdown level1 summary"><p>Ensure capacity</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public int EnsureCapacity(int capacity)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">capacity</span></td>
+        <td><p>Capacity</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>New capacity</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_Equals_NativeCollections_NativeQueue__0__.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.Equals(NativeCollections.NativeQueue%7B%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L128">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_Equals_" data-uid="NativeCollections.NativeQueue`1.Equals*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_Equals_NativeCollections_NativeQueue__0__" data-uid="NativeCollections.NativeQueue`1.Equals(NativeCollections.NativeQueue{`0})">Equals(NativeQueue&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Equals</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(NativeQueue&lt;T&gt; other)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="NativeCollections.NativeQueue-1.html">NativeQueue</a>&lt;T&gt;</td>
+        <td><span class="parametername">other</span></td>
+        <td><p>Other</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>Equals</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_Equals_System_Object_.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.Equals(System.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L135">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_Equals_" data-uid="NativeCollections.NativeQueue`1.Equals*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_Equals_System_Object_" data-uid="NativeCollections.NativeQueue`1.Equals(System.Object)">Equals(object?)</h4>
+  <div class="markdown level1 summary"><p>Equals</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object? obj)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>Equals</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">重写</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_GetEnumerator.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.GetEnumerator%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L382">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_GetEnumerator_" data-uid="NativeCollections.NativeQueue`1.GetEnumerator*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_GetEnumerator" data-uid="NativeCollections.NativeQueue`1.GetEnumerator">GetEnumerator()</h4>
+  <div class="markdown level1 summary"><p>Get enumerator</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeQueue&lt;T&gt;.Enumerator GetEnumerator()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="NativeCollections.NativeQueue-1.html">NativeQueue</a>&lt;T&gt;.<a class="xref" href="NativeCollections.NativeQueue-1.Enumerator.html">Enumerator</a></td>
+        <td><p>Enumerator</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_GetHashCode.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.GetHashCode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L141">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_GetHashCode_" data-uid="NativeCollections.NativeQueue`1.GetHashCode*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_GetHashCode" data-uid="NativeCollections.NativeQueue`1.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Get hashCode</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>HashCode</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">重写</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_Peek.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.Peek%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L265">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_Peek_" data-uid="NativeCollections.NativeQueue`1.Peek*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_Peek" data-uid="NativeCollections.NativeQueue`1.Peek">Peek()</h4>
+  <div class="markdown level1 summary"><p>Peek</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public T Peek()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>Item</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_ToString.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.ToString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L147">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_ToString_" data-uid="NativeCollections.NativeQueue`1.ToString*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_ToString" data-uid="NativeCollections.NativeQueue`1.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>To string</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>String</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">重写</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_TrimExcess.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.TrimExcess%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L305">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_TrimExcess_" data-uid="NativeCollections.NativeQueue`1.TrimExcess*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_TrimExcess" data-uid="NativeCollections.NativeQueue`1.TrimExcess">TrimExcess()</h4>
+  <div class="markdown level1 summary"><p>Trim excess</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public int TrimExcess()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>New capacity</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_TryDequeue__0__.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.TryDequeue(%600%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L245">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_TryDequeue_" data-uid="NativeCollections.NativeQueue`1.TryDequeue*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_TryDequeue__0__" data-uid="NativeCollections.NativeQueue`1.TryDequeue(`0@)">TryDequeue(out T)</h4>
+  <div class="markdown level1 summary"><p>Try dequeue</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public bool TryDequeue(out T result)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">result</span></td>
+        <td><p>Item</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>Dequeued</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_TryEnqueue__0__.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.TryEnqueue(%600%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L209">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_TryEnqueue_" data-uid="NativeCollections.NativeQueue`1.TryEnqueue*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_TryEnqueue__0__" data-uid="NativeCollections.NativeQueue`1.TryEnqueue(`0@)">TryEnqueue(in T)</h4>
+  <div class="markdown level1 summary"><p>Try enqueue</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public bool TryEnqueue(in T item)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">item</span></td>
+        <td><p>Item</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>Enqueued</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_TryPeek__0__.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.TryPeek(%600%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L273">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_TryPeek_" data-uid="NativeCollections.NativeQueue`1.TryPeek*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_TryPeek__0__" data-uid="NativeCollections.NativeQueue`1.TryPeek(`0@)">TryPeek(out T)</h4>
+  <div class="markdown level1 summary"><p>Try peek</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MethodImpl(MethodImplOptions.AggressiveInlining)]
+public bool TryPeek(out T result)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">result</span></td>
+        <td><p>Item</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>Peeked</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">运算符
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_op_Equality_NativeCollections_NativeQueue__0__NativeCollections_NativeQueue__0__.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.op_Equality(NativeCollections.NativeQueue%7B%600%7D%2CNativeCollections.NativeQueue%7B%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L155">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_op_Equality_" data-uid="NativeCollections.NativeQueue`1.op_Equality*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_op_Equality_NativeCollections_NativeQueue__0__NativeCollections_NativeQueue__0__" data-uid="NativeCollections.NativeQueue`1.op_Equality(NativeCollections.NativeQueue{`0},NativeCollections.NativeQueue{`0})">operator ==(NativeQueue&lt;T&gt;, NativeQueue&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Equals</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(NativeQueue&lt;T&gt; left, NativeQueue&lt;T&gt; right)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="NativeCollections.NativeQueue-1.html">NativeQueue</a>&lt;T&gt;</td>
+        <td><span class="parametername">left</span></td>
+        <td><p>Left</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="NativeCollections.NativeQueue-1.html">NativeQueue</a>&lt;T&gt;</td>
+        <td><span class="parametername">right</span></td>
+        <td><p>Right</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>Equals</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1_op_Inequality_NativeCollections_NativeQueue__0__NativeCollections_NativeQueue__0__.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601.op_Inequality(NativeCollections.NativeQueue%7B%600%7D%2CNativeCollections.NativeQueue%7B%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L163">查看源代码</a>
+  </span>
+  <a id="NativeCollections_NativeQueue_1_op_Inequality_" data-uid="NativeCollections.NativeQueue`1.op_Inequality*"></a>
+  <h4 id="NativeCollections_NativeQueue_1_op_Inequality_NativeCollections_NativeQueue__0__NativeCollections_NativeQueue__0__" data-uid="NativeCollections.NativeQueue`1.op_Inequality(NativeCollections.NativeQueue{`0},NativeCollections.NativeQueue{`0})">operator !=(NativeQueue&lt;T&gt;, NativeQueue&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Not equals</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(NativeQueue&lt;T&gt; left, NativeQueue&lt;T&gt; right)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="NativeCollections.NativeQueue-1.html">NativeQueue</a>&lt;T&gt;</td>
+        <td><span class="parametername">left</span></td>
+        <td><p>Left</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="NativeCollections.NativeQueue-1.html">NativeQueue</a>&lt;T&gt;</td>
+        <td><span class="parametername">right</span></td>
+        <td><p>Right</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>Not equals</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">实现</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable&lt;T&gt;</a>
+  </div>
+  <h3 id="extensionmethods">扩展方法</h3>
+  <div>
+      <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=NativeCollections_NativeQueue_1.md&amp;value=---%0Auid%3A%20NativeCollections.NativeQueue%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs/#L23" class="contribution-link">查看源代码</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>本文内容</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

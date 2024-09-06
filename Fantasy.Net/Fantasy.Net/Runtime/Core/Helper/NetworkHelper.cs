@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable InconsistentNaming
 
-namespace Fantasy
+namespace Fantasy.Helper
 {
     /// <summary>
     /// 提供网络操作相关的帮助方法。

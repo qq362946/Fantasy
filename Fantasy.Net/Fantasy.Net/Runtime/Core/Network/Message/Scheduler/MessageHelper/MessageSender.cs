@@ -1,9 +1,12 @@
 using System;
+using Fantasy.Async;
+using Fantasy.Helper;
+using Fantasy.Network.Interface;
 
 #pragma warning disable CS8625
 #pragma warning disable CS8618
 
-namespace Fantasy
+namespace Fantasy.Scheduler
 {
     /// <summary>
     /// 网络消息发送者的类。

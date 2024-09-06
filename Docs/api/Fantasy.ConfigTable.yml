@@ -1,0 +1,68 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.ConfigTable
+  commentId: N:Fantasy.ConfigTable
+  id: ConfigTable
+  parent: Fantasy
+  children:
+  - Fantasy.ConfigTable.ConfigTableHelper
+  - Fantasy.ConfigTable.IConfigTable
+  - Fantasy.ConfigTable.IntDictionaryConfig
+  - Fantasy.ConfigTable.StringDictionaryConfig
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.ConfigTable
+  nameWithType: Fantasy.ConfigTable
+  fullName: Fantasy.ConfigTable
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.ConfigTable.ConfigTableHelper
+  commentId: T:Fantasy.ConfigTable.ConfigTableHelper
+  href: Fantasy.ConfigTable.ConfigTableHelper.html
+  name: ConfigTableHelper
+  nameWithType: ConfigTableHelper
+  fullName: Fantasy.ConfigTable.ConfigTableHelper
+- uid: Fantasy.ConfigTable.IConfigTable
+  commentId: T:Fantasy.ConfigTable.IConfigTable
+  parent: Fantasy.ConfigTable
+  href: Fantasy.ConfigTable.IConfigTable.html
+  name: IConfigTable
+  nameWithType: IConfigTable
+  fullName: Fantasy.ConfigTable.IConfigTable
+- uid: Fantasy.ConfigTable.IntDictionaryConfig
+  commentId: T:Fantasy.ConfigTable.IntDictionaryConfig
+  href: Fantasy.ConfigTable.IntDictionaryConfig.html
+  name: IntDictionaryConfig
+  nameWithType: IntDictionaryConfig
+  fullName: Fantasy.ConfigTable.IntDictionaryConfig
+- uid: Fantasy.ConfigTable.StringDictionaryConfig
+  commentId: T:Fantasy.ConfigTable.StringDictionaryConfig
+  href: Fantasy.ConfigTable.StringDictionaryConfig.html
+  name: StringDictionaryConfig
+  nameWithType: StringDictionaryConfig
+  fullName: Fantasy.ConfigTable.StringDictionaryConfig
+- uid: Fantasy.ConfigTable
+  commentId: N:Fantasy.ConfigTable
+  href: Fantasy.html
+  name: Fantasy.ConfigTable
+  nameWithType: Fantasy.ConfigTable
+  fullName: Fantasy.ConfigTable
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.ConfigTable
+    name: ConfigTable
+    href: Fantasy.ConfigTable.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.ConfigTable
+    name: ConfigTable
+    href: Fantasy.ConfigTable.html

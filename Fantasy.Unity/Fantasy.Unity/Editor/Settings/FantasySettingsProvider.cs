@@ -66,7 +66,7 @@ namespace Fantasy
 
         private IDisposable CreateSettingsWindowGUIScope()
         {
-            var unityEditorAssembly = Assembly.GetAssembly(typeof(EditorWindow));
+            var unityEditorAssembly = System.Reflection.Assembly.GetAssembly(typeof(EditorWindow));
             var type = unityEditorAssembly.GetType("UnityEditor.SettingsWindow+GUIScope");
             return Activator.CreateInstance(type) as IDisposable;
         }

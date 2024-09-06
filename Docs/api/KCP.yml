@@ -1,0 +1,45 @@
+### YamlMime:ManagedReference
+items:
+- uid: KCP
+  commentId: N:KCP
+  id: KCP
+  children:
+  - KCP.KCPBASIC
+  - KCP.Kcp
+  - KCP.KcpCallback
+  langs:
+  - csharp
+  - vb
+  name: KCP
+  nameWithType: KCP
+  fullName: KCP
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: KCP.KCPBASIC
+  commentId: T:KCP.KCPBASIC
+  href: KCP.KCPBASIC.html
+  name: KCPBASIC
+  nameWithType: KCPBASIC
+  fullName: KCP.KCPBASIC
+- uid: KCP.Kcp
+  commentId: T:KCP.Kcp
+  parent: KCP
+  href: KCP.Kcp.html
+  name: Kcp
+  nameWithType: Kcp
+  fullName: KCP.Kcp
+- uid: KCP.KcpCallback
+  commentId: T:KCP.KcpCallback
+  parent: KCP
+  href: KCP.KcpCallback.html
+  name: KcpCallback
+  nameWithType: KcpCallback
+  fullName: KCP.KcpCallback
+- uid: KCP
+  commentId: N:KCP
+  href: KCP.html
+  name: KCP
+  nameWithType: KCP
+  fullName: KCP

@@ -1,5 +1,7 @@
+using Fantasy.Entitas;
+
 #if FANTASY_NET
-namespace Fantasy;
+namespace Fantasy.Network;
 
 /// <summary>
 /// 自定义Route组件、如果要自定义Route协议必须使用这个组件

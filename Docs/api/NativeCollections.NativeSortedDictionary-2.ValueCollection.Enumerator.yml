@@ -1,0 +1,569 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+  commentId: T:NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+  id: NativeSortedDictionary`2.ValueCollection.Enumerator
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Current
+  - NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Dispose
+  - NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.MoveNext
+  langs:
+  - csharp
+  - vb
+  name: NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Enumerator
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 1152
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Enumerator
+  example: []
+  syntax:
+    content: 'public struct NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator : IDisposable'
+    content.vb: Public Structure NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator Implements IDisposable
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Fantasy.Helper.JsonHelper.ToJson``1
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator
+  name.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator
+- uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.MoveNext
+  commentId: M:NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.MoveNext
+  id: MoveNext
+  parent: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+  langs:
+  - csharp
+  - vb
+  name: MoveNext()
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.MoveNext()
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.MoveNext()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MoveNext
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 1204
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Move next
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool MoveNext()
+    return:
+      type: System.Boolean
+      description: Moved
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function MoveNext() As Boolean
+  overload: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.MoveNext*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.MoveNext()
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.MoveNext()
+- uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Current
+  commentId: P:NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Current
+  id: Current
+  parent: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+  langs:
+  - csharp
+  - vb
+  name: Current
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.Current
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.Current
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Current
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 1232
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Current
+  example: []
+  syntax:
+    content: public TValue Current { get; }
+    parameters: []
+    return:
+      type: '{TValue}'
+    content.vb: Public ReadOnly Property Current As TValue
+  overload: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Current*
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.Current
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.Current
+- uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Dispose
+  commentId: M:NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.Dispose()
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeSortedDictionary.cs
+    startLine: 1241
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.Dispose()
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.Dispose()
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<Enumerator>(Enumerator)
+  nameWithType: JsonHelper.ToJson<NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator>(NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator>(NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator)(NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator)(NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator)
+  name.vb: ToJson(Of Enumerator)(Enumerator)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeSortedDictionary{`0,`1}.ValueCollection.Enumerator)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.Enumerator.html
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.Enumerator.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeSortedDictionary{`0,`1}.ValueCollection.Enumerator)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.Enumerator.html
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.Enumerator.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.MoveNext*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.MoveNext
+  href: NativeCollections.NativeSortedDictionary-2.ValueCollection.Enumerator.html#NativeCollections_NativeSortedDictionary_2_ValueCollection_Enumerator_MoveNext
+  name: MoveNext
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.MoveNext
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.MoveNext
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.MoveNext
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.MoveNext
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Current*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Current
+  href: NativeCollections.NativeSortedDictionary-2.ValueCollection.Enumerator.html#NativeCollections_NativeSortedDictionary_2_ValueCollection_Enumerator_Current
+  name: Current
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.Current
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.Current
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.Current
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.Current
+- uid: '{TValue}'
+  commentId: '!:TValue'
+  definition: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Dispose*
+  commentId: Overload:NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator.Dispose
+  href: NativeCollections.NativeSortedDictionary-2.ValueCollection.Enumerator.html#NativeCollections_NativeSortedDictionary_2_ValueCollection_Enumerator_Dispose
+  name: Dispose
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.Dispose
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator.Dispose
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.Dispose
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )

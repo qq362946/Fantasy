@@ -1,0 +1,1072 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Timer.TimerSchedulerNet
+  commentId: T:Fantasy.Timer.TimerSchedulerNet
+  id: TimerSchedulerNet
+  parent: Fantasy.Timer
+  children:
+  - Fantasy.Timer.TimerSchedulerNet.#ctor(Fantasy.Scene)
+  - Fantasy.Timer.TimerSchedulerNet.FrameTimer(System.Action)
+  - Fantasy.Timer.TimerSchedulerNet.OnceTillTimer(System.Int64,System.Action)
+  - Fantasy.Timer.TimerSchedulerNet.OnceTillTimer``1(System.Int64,``0)
+  - Fantasy.Timer.TimerSchedulerNet.OnceTimer(System.Int64,System.Action)
+  - Fantasy.Timer.TimerSchedulerNet.OnceTimer``1(System.Int64,``0)
+  - Fantasy.Timer.TimerSchedulerNet.Remove(System.Int64)
+  - Fantasy.Timer.TimerSchedulerNet.Remove(System.Int64@)
+  - Fantasy.Timer.TimerSchedulerNet.RepeatedTimer(System.Int64,System.Action)
+  - Fantasy.Timer.TimerSchedulerNet.RepeatedTimer``1(System.Int64,``0)
+  - Fantasy.Timer.TimerSchedulerNet.Update
+  - Fantasy.Timer.TimerSchedulerNet.WaitAsync(System.Int64)
+  - Fantasy.Timer.TimerSchedulerNet.WaitFrameAsync
+  - Fantasy.Timer.TimerSchedulerNet.WaitTillAsync(System.Int64)
+  langs:
+  - csharp
+  - vb
+  name: TimerSchedulerNet
+  nameWithType: TimerSchedulerNet
+  fullName: Fantasy.Timer.TimerSchedulerNet
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TimerSchedulerNet
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 基于系统事件的任务调度系统
+  example: []
+  syntax:
+    content: public sealed class TimerSchedulerNet
+    content.vb: Public NotInheritable Class TimerSchedulerNet
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Timer.TimerSchedulerNet.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Timer.TimerSchedulerNet.#ctor(Fantasy.Scene)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.#ctor(Fantasy.Scene)
+  id: '#ctor(Fantasy.Scene)'
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: TimerSchedulerNet(Scene)
+  nameWithType: TimerSchedulerNet.TimerSchedulerNet(Scene)
+  fullName: Fantasy.Timer.TimerSchedulerNet.TimerSchedulerNet(Fantasy.Scene)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 28
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 构造函数
+  example: []
+  syntax:
+    content: public TimerSchedulerNet(Scene scene)
+    parameters:
+    - id: scene
+      type: Fantasy.Scene
+      description: 当前的Scene
+    content.vb: Public Sub New(scene As Scene)
+  overload: Fantasy.Timer.TimerSchedulerNet.#ctor*
+  nameWithType.vb: TimerSchedulerNet.New(Scene)
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.New(Fantasy.Scene)
+  name.vb: New(Scene)
+- uid: Fantasy.Timer.TimerSchedulerNet.Update
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.Update
+  id: Update
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: Update()
+  nameWithType: TimerSchedulerNet.Update()
+  fullName: Fantasy.Timer.TimerSchedulerNet.Update()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Update
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 41
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 驱动方法，只有调用这个方法任务系统才会正常运转。
+  example: []
+  syntax:
+    content: public void Update()
+    content.vb: Public Sub Update()
+  overload: Fantasy.Timer.TimerSchedulerNet.Update*
+- uid: Fantasy.Timer.TimerSchedulerNet.WaitAsync(System.Int64)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.WaitAsync(System.Int64)
+  id: WaitAsync(System.Int64)
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: WaitAsync(long)
+  nameWithType: TimerSchedulerNet.WaitAsync(long)
+  fullName: Fantasy.Timer.TimerSchedulerNet.WaitAsync(long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WaitAsync
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 147
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 异步等待指定时间。
+  example: []
+  syntax:
+    content: public FTask WaitAsync(long time)
+    parameters:
+    - id: time
+      type: System.Int64
+      description: 等待的时间长度。
+    return:
+      type: Fantasy.Async.FTask
+      description: 等待是否成功。
+    content.vb: Public Function WaitAsync(time As Long) As FTask
+  overload: Fantasy.Timer.TimerSchedulerNet.WaitAsync*
+  nameWithType.vb: TimerSchedulerNet.WaitAsync(Long)
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.WaitAsync(Long)
+  name.vb: WaitAsync(Long)
+- uid: Fantasy.Timer.TimerSchedulerNet.WaitTillAsync(System.Int64)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.WaitTillAsync(System.Int64)
+  id: WaitTillAsync(System.Int64)
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: WaitTillAsync(long)
+  nameWithType: TimerSchedulerNet.WaitTillAsync(long)
+  fullName: Fantasy.Timer.TimerSchedulerNet.WaitTillAsync(long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WaitTillAsync
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 186
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 异步等待直到指定时间。
+  example: []
+  syntax:
+    content: public FTask WaitTillAsync(long tillTime)
+    parameters:
+    - id: tillTime
+      type: System.Int64
+      description: 等待的目标时间。
+    return:
+      type: Fantasy.Async.FTask
+      description: 等待是否成功。
+    content.vb: Public Function WaitTillAsync(tillTime As Long) As FTask
+  overload: Fantasy.Timer.TimerSchedulerNet.WaitTillAsync*
+  nameWithType.vb: TimerSchedulerNet.WaitTillAsync(Long)
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.WaitTillAsync(Long)
+  name.vb: WaitTillAsync(Long)
+- uid: Fantasy.Timer.TimerSchedulerNet.WaitFrameAsync
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.WaitFrameAsync
+  id: WaitFrameAsync
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: WaitFrameAsync()
+  nameWithType: TimerSchedulerNet.WaitFrameAsync()
+  fullName: Fantasy.Timer.TimerSchedulerNet.WaitFrameAsync()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WaitFrameAsync
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 226
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 异步等待一帧时间。
+  example: []
+  syntax:
+    content: public FTask WaitFrameAsync()
+    return:
+      type: Fantasy.Async.FTask
+      description: 等待是否成功。
+    content.vb: Public Function WaitFrameAsync() As FTask
+  overload: Fantasy.Timer.TimerSchedulerNet.WaitFrameAsync*
+- uid: Fantasy.Timer.TimerSchedulerNet.OnceTimer(System.Int64,System.Action)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.OnceTimer(System.Int64,System.Action)
+  id: OnceTimer(System.Int64,System.Action)
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: OnceTimer(long, Action)
+  nameWithType: TimerSchedulerNet.OnceTimer(long, Action)
+  fullName: Fantasy.Timer.TimerSchedulerNet.OnceTimer(long, System.Action)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OnceTimer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 241
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 创建一个只执行一次的计时器，直到指定时间
+  example: []
+  syntax:
+    content: public long OnceTimer(long time, Action action)
+    parameters:
+    - id: time
+      type: System.Int64
+      description: 计时器执行的目标时间。
+    - id: action
+      type: System.Action
+      description: 计时器回调方法。
+    return:
+      type: System.Int64
+      description: ''
+    content.vb: Public Function OnceTimer(time As Long, action As Action) As Long
+  overload: Fantasy.Timer.TimerSchedulerNet.OnceTimer*
+  nameWithType.vb: TimerSchedulerNet.OnceTimer(Long, Action)
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.OnceTimer(Long, System.Action)
+  name.vb: OnceTimer(Long, Action)
+- uid: Fantasy.Timer.TimerSchedulerNet.OnceTillTimer(System.Int64,System.Action)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.OnceTillTimer(System.Int64,System.Action)
+  id: OnceTillTimer(System.Int64,System.Action)
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: OnceTillTimer(long, Action)
+  nameWithType: TimerSchedulerNet.OnceTillTimer(long, Action)
+  fullName: Fantasy.Timer.TimerSchedulerNet.OnceTillTimer(long, System.Action)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OnceTillTimer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 256
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 创建一个只执行一次的计时器，直到指定时间。
+  example: []
+  syntax:
+    content: public long OnceTillTimer(long tillTime, Action action)
+    parameters:
+    - id: tillTime
+      type: System.Int64
+      description: 计时器执行的目标时间。
+    - id: action
+      type: System.Action
+      description: 计时器回调方法。
+    return:
+      type: System.Int64
+      description: 计时器的 ID。
+    content.vb: Public Function OnceTillTimer(tillTime As Long, action As Action) As Long
+  overload: Fantasy.Timer.TimerSchedulerNet.OnceTillTimer*
+  nameWithType.vb: TimerSchedulerNet.OnceTillTimer(Long, Action)
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.OnceTillTimer(Long, System.Action)
+  name.vb: OnceTillTimer(Long, Action)
+- uid: Fantasy.Timer.TimerSchedulerNet.OnceTimer``1(System.Int64,``0)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.OnceTimer``1(System.Int64,``0)
+  id: OnceTimer``1(System.Int64,``0)
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: OnceTimer<T>(long, T)
+  nameWithType: TimerSchedulerNet.OnceTimer<T>(long, T)
+  fullName: Fantasy.Timer.TimerSchedulerNet.OnceTimer<T>(long, T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OnceTimer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 278
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 创建一个只执行一次的计时器，用于发布指定类型的事件。
+  example: []
+  syntax:
+    content: 'public long OnceTimer<T>(long time, T timerHandlerType) where T : struct'
+    parameters:
+    - id: time
+      type: System.Int64
+      description: 计时器执行的延迟时间。
+    - id: timerHandlerType
+      type: '{T}'
+      description: 事件处理器类型。
+    typeParameters:
+    - id: T
+      description: 事件类型。
+    return:
+      type: System.Int64
+      description: 计时器的 ID。
+    content.vb: Public Function OnceTimer(Of T As Structure)(time As Long, timerHandlerType As T) As Long
+  overload: Fantasy.Timer.TimerSchedulerNet.OnceTimer*
+  nameWithType.vb: TimerSchedulerNet.OnceTimer(Of T)(Long, T)
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.OnceTimer(Of T)(Long, T)
+  name.vb: OnceTimer(Of T)(Long, T)
+- uid: Fantasy.Timer.TimerSchedulerNet.OnceTillTimer``1(System.Int64,``0)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.OnceTillTimer``1(System.Int64,``0)
+  id: OnceTillTimer``1(System.Int64,``0)
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: OnceTillTimer<T>(long, T)
+  nameWithType: TimerSchedulerNet.OnceTillTimer<T>(long, T)
+  fullName: Fantasy.Timer.TimerSchedulerNet.OnceTillTimer<T>(long, T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OnceTillTimer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 295
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 创建一个只执行一次的计时器，直到指定时间，用于发布指定类型的事件。
+  example: []
+  syntax:
+    content: 'public long OnceTillTimer<T>(long tillTime, T timerHandlerType) where T : struct'
+    parameters:
+    - id: tillTime
+      type: System.Int64
+      description: 计时器执行的目标时间。
+    - id: timerHandlerType
+      type: '{T}'
+      description: 事件处理器类型。
+    typeParameters:
+    - id: T
+      description: 事件类型。
+    return:
+      type: System.Int64
+      description: 计时器的 ID。
+    content.vb: Public Function OnceTillTimer(Of T As Structure)(tillTime As Long, timerHandlerType As T) As Long
+  overload: Fantasy.Timer.TimerSchedulerNet.OnceTillTimer*
+  nameWithType.vb: TimerSchedulerNet.OnceTillTimer(Of T)(Long, T)
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.OnceTillTimer(Of T)(Long, T)
+  name.vb: OnceTillTimer(Of T)(Long, T)
+- uid: Fantasy.Timer.TimerSchedulerNet.FrameTimer(System.Action)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.FrameTimer(System.Action)
+  id: FrameTimer(System.Action)
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: FrameTimer(Action)
+  nameWithType: TimerSchedulerNet.FrameTimer(Action)
+  fullName: Fantasy.Timer.TimerSchedulerNet.FrameTimer(System.Action)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FrameTimer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 310
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 创建一个帧任务
+  example: []
+  syntax:
+    content: public long FrameTimer(Action action)
+    parameters:
+    - id: action
+      type: System.Action
+      description: ''
+    return:
+      type: System.Int64
+      description: ''
+    content.vb: Public Function FrameTimer(action As Action) As Long
+  overload: Fantasy.Timer.TimerSchedulerNet.FrameTimer*
+- uid: Fantasy.Timer.TimerSchedulerNet.RepeatedTimer(System.Int64,System.Action)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.RepeatedTimer(System.Int64,System.Action)
+  id: RepeatedTimer(System.Int64,System.Action)
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: RepeatedTimer(long, Action)
+  nameWithType: TimerSchedulerNet.RepeatedTimer(long, Action)
+  fullName: Fantasy.Timer.TimerSchedulerNet.RepeatedTimer(long, System.Action)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RepeatedTimer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 325
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 创建一个重复执行的计时器。
+  example: []
+  syntax:
+    content: public long RepeatedTimer(long time, Action action)
+    parameters:
+    - id: time
+      type: System.Int64
+      description: 计时器重复间隔的时间。
+    - id: action
+      type: System.Action
+      description: 计时器回调方法。
+    return:
+      type: System.Int64
+      description: 计时器的 ID。
+    content.vb: Public Function RepeatedTimer(time As Long, action As Action) As Long
+  overload: Fantasy.Timer.TimerSchedulerNet.RepeatedTimer*
+  nameWithType.vb: TimerSchedulerNet.RepeatedTimer(Long, Action)
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.RepeatedTimer(Long, System.Action)
+  name.vb: RepeatedTimer(Long, Action)
+- uid: Fantasy.Timer.TimerSchedulerNet.RepeatedTimer``1(System.Int64,``0)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.RepeatedTimer``1(System.Int64,``0)
+  id: RepeatedTimer``1(System.Int64,``0)
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: RepeatedTimer<T>(long, T)
+  nameWithType: TimerSchedulerNet.RepeatedTimer<T>(long, T)
+  fullName: Fantasy.Timer.TimerSchedulerNet.RepeatedTimer<T>(long, T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RepeatedTimer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 343
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 创建一个重复执行的计时器，用于发布指定类型的事件。
+  example: []
+  syntax:
+    content: 'public long RepeatedTimer<T>(long time, T timerHandlerType) where T : struct'
+    parameters:
+    - id: time
+      type: System.Int64
+      description: 计时器重复间隔的时间。
+    - id: timerHandlerType
+      type: '{T}'
+      description: 事件处理器类型。
+    typeParameters:
+    - id: T
+      description: 事件类型。
+    return:
+      type: System.Int64
+      description: 计时器的 ID。
+    content.vb: Public Function RepeatedTimer(Of T As Structure)(time As Long, timerHandlerType As T) As Long
+  overload: Fantasy.Timer.TimerSchedulerNet.RepeatedTimer*
+  nameWithType.vb: TimerSchedulerNet.RepeatedTimer(Of T)(Long, T)
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.RepeatedTimer(Of T)(Long, T)
+  name.vb: RepeatedTimer(Of T)(Long, T)
+- uid: Fantasy.Timer.TimerSchedulerNet.Remove(System.Int64@)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.Remove(System.Int64@)
+  id: Remove(System.Int64@)
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: Remove(ref long)
+  nameWithType: TimerSchedulerNet.Remove(ref long)
+  fullName: Fantasy.Timer.TimerSchedulerNet.Remove(ref long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 367
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 移除指定 ID 的计时器。
+  example: []
+  syntax:
+    content: public bool Remove(ref long timerId)
+    parameters:
+    - id: timerId
+      type: System.Int64
+      description: ''
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Public Function Remove(timerId As Long) As Boolean
+  overload: Fantasy.Timer.TimerSchedulerNet.Remove*
+  nameWithType.vb: TimerSchedulerNet.Remove(Long)
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.Remove(Long)
+  name.vb: Remove(Long)
+- uid: Fantasy.Timer.TimerSchedulerNet.Remove(System.Int64)
+  commentId: M:Fantasy.Timer.TimerSchedulerNet.Remove(System.Int64)
+  id: Remove(System.Int64)
+  parent: Fantasy.Timer.TimerSchedulerNet
+  langs:
+  - csharp
+  - vb
+  name: Remove(long)
+  nameWithType: TimerSchedulerNet.Remove(long)
+  fullName: Fantasy.Timer.TimerSchedulerNet.Remove(long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerScheduler/TimerSchedulerNet.cs
+    startLine: 378
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  summary: 移除指定 ID 的计时器。
+  example: []
+  syntax:
+    content: public bool Remove(long timerId)
+    parameters:
+    - id: timerId
+      type: System.Int64
+      description: 计时器的 ID。
+    return:
+      type: System.Boolean
+    content.vb: Public Function Remove(timerId As Long) As Boolean
+  overload: Fantasy.Timer.TimerSchedulerNet.Remove*
+  nameWithType.vb: TimerSchedulerNet.Remove(Long)
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.Remove(Long)
+  name.vb: Remove(Long)
+references:
+- uid: Fantasy.Timer
+  commentId: N:Fantasy.Timer
+  href: Fantasy.html
+  name: Fantasy.Timer
+  nameWithType: Fantasy.Timer
+  fullName: Fantasy.Timer
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Timer
+    name: Timer
+    href: Fantasy.Timer.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Timer
+    name: Timer
+    href: Fantasy.Timer.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Timer.TimerSchedulerNet.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<TimerSchedulerNet>(TimerSchedulerNet)
+  nameWithType: JsonHelper.ToJson<TimerSchedulerNet>(TimerSchedulerNet)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Timer.TimerSchedulerNet>(Fantasy.Timer.TimerSchedulerNet)
+  nameWithType.vb: JsonHelper.ToJson(Of TimerSchedulerNet)(TimerSchedulerNet)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Timer.TimerSchedulerNet)(Fantasy.Timer.TimerSchedulerNet)
+  name.vb: ToJson(Of TimerSchedulerNet)(TimerSchedulerNet)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Timer.TimerSchedulerNet)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Timer.TimerSchedulerNet
+    name: TimerSchedulerNet
+    href: Fantasy.Timer.TimerSchedulerNet.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Timer.TimerSchedulerNet
+    name: TimerSchedulerNet
+    href: Fantasy.Timer.TimerSchedulerNet.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Timer.TimerSchedulerNet)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Timer.TimerSchedulerNet
+    name: TimerSchedulerNet
+    href: Fantasy.Timer.TimerSchedulerNet.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Timer.TimerSchedulerNet
+    name: TimerSchedulerNet
+    href: Fantasy.Timer.TimerSchedulerNet.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Timer.TimerSchedulerNet.#ctor*
+  commentId: Overload:Fantasy.Timer.TimerSchedulerNet.#ctor
+  href: Fantasy.Timer.TimerSchedulerNet.html#Fantasy_Timer_TimerSchedulerNet__ctor_Fantasy_Scene_
+  name: TimerSchedulerNet
+  nameWithType: TimerSchedulerNet.TimerSchedulerNet
+  fullName: Fantasy.Timer.TimerSchedulerNet.TimerSchedulerNet
+  nameWithType.vb: TimerSchedulerNet.New
+  fullName.vb: Fantasy.Timer.TimerSchedulerNet.New
+  name.vb: New
+- uid: Fantasy.Scene
+  commentId: T:Fantasy.Scene
+  parent: Fantasy
+  href: Fantasy.Scene.html
+  name: Scene
+  nameWithType: Scene
+  fullName: Fantasy.Scene
+- uid: Fantasy
+  commentId: N:Fantasy
+  href: Fantasy.html
+  name: Fantasy
+  nameWithType: Fantasy
+  fullName: Fantasy
+- uid: Fantasy.Timer.TimerSchedulerNet.Update*
+  commentId: Overload:Fantasy.Timer.TimerSchedulerNet.Update
+  href: Fantasy.Timer.TimerSchedulerNet.html#Fantasy_Timer_TimerSchedulerNet_Update
+  name: Update
+  nameWithType: TimerSchedulerNet.Update
+  fullName: Fantasy.Timer.TimerSchedulerNet.Update
+- uid: Fantasy.Timer.TimerSchedulerNet.WaitAsync*
+  commentId: Overload:Fantasy.Timer.TimerSchedulerNet.WaitAsync
+  href: Fantasy.Timer.TimerSchedulerNet.html#Fantasy_Timer_TimerSchedulerNet_WaitAsync_System_Int64_
+  name: WaitAsync
+  nameWithType: TimerSchedulerNet.WaitAsync
+  fullName: Fantasy.Timer.TimerSchedulerNet.WaitAsync
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.Async.FTask
+  commentId: T:Fantasy.Async.FTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask.html
+  name: FTask
+  nameWithType: FTask
+  fullName: Fantasy.Async.FTask
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+- uid: Fantasy.Timer.TimerSchedulerNet.WaitTillAsync*
+  commentId: Overload:Fantasy.Timer.TimerSchedulerNet.WaitTillAsync
+  href: Fantasy.Timer.TimerSchedulerNet.html#Fantasy_Timer_TimerSchedulerNet_WaitTillAsync_System_Int64_
+  name: WaitTillAsync
+  nameWithType: TimerSchedulerNet.WaitTillAsync
+  fullName: Fantasy.Timer.TimerSchedulerNet.WaitTillAsync
+- uid: Fantasy.Timer.TimerSchedulerNet.WaitFrameAsync*
+  commentId: Overload:Fantasy.Timer.TimerSchedulerNet.WaitFrameAsync
+  href: Fantasy.Timer.TimerSchedulerNet.html#Fantasy_Timer_TimerSchedulerNet_WaitFrameAsync
+  name: WaitFrameAsync
+  nameWithType: TimerSchedulerNet.WaitFrameAsync
+  fullName: Fantasy.Timer.TimerSchedulerNet.WaitFrameAsync
+- uid: Fantasy.Timer.TimerSchedulerNet.OnceTimer*
+  commentId: Overload:Fantasy.Timer.TimerSchedulerNet.OnceTimer
+  href: Fantasy.Timer.TimerSchedulerNet.html#Fantasy_Timer_TimerSchedulerNet_OnceTimer_System_Int64_System_Action_
+  name: OnceTimer
+  nameWithType: TimerSchedulerNet.OnceTimer
+  fullName: Fantasy.Timer.TimerSchedulerNet.OnceTimer
+- uid: System.Action
+  commentId: T:System.Action
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action
+  name: Action
+  nameWithType: Action
+  fullName: System.Action
+- uid: Fantasy.Timer.TimerSchedulerNet.OnceTillTimer*
+  commentId: Overload:Fantasy.Timer.TimerSchedulerNet.OnceTillTimer
+  href: Fantasy.Timer.TimerSchedulerNet.html#Fantasy_Timer_TimerSchedulerNet_OnceTillTimer_System_Int64_System_Action_
+  name: OnceTillTimer
+  nameWithType: TimerSchedulerNet.OnceTillTimer
+  fullName: Fantasy.Timer.TimerSchedulerNet.OnceTillTimer
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Fantasy.Timer.TimerSchedulerNet.FrameTimer*
+  commentId: Overload:Fantasy.Timer.TimerSchedulerNet.FrameTimer
+  href: Fantasy.Timer.TimerSchedulerNet.html#Fantasy_Timer_TimerSchedulerNet_FrameTimer_System_Action_
+  name: FrameTimer
+  nameWithType: TimerSchedulerNet.FrameTimer
+  fullName: Fantasy.Timer.TimerSchedulerNet.FrameTimer
+- uid: Fantasy.Timer.TimerSchedulerNet.RepeatedTimer*
+  commentId: Overload:Fantasy.Timer.TimerSchedulerNet.RepeatedTimer
+  href: Fantasy.Timer.TimerSchedulerNet.html#Fantasy_Timer_TimerSchedulerNet_RepeatedTimer_System_Int64_System_Action_
+  name: RepeatedTimer
+  nameWithType: TimerSchedulerNet.RepeatedTimer
+  fullName: Fantasy.Timer.TimerSchedulerNet.RepeatedTimer
+- uid: Fantasy.Timer.TimerSchedulerNet.Remove*
+  commentId: Overload:Fantasy.Timer.TimerSchedulerNet.Remove
+  href: Fantasy.Timer.TimerSchedulerNet.html#Fantasy_Timer_TimerSchedulerNet_Remove_System_Int64__
+  name: Remove
+  nameWithType: TimerSchedulerNet.Remove
+  fullName: Fantasy.Timer.TimerSchedulerNet.Remove
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean

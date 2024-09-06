@@ -1,6 +1,14 @@
+using Fantasy.Async;
+using Fantasy.Network.Interface;
+using Fantasy.PacketParser;
+using Fantasy.PacketParser.Interface;
+using Fantasy.Scheduler;
+using Fantasy.Serialize;
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #if FANTASY_NET
-namespace Fantasy;
+namespace Fantasy.Network;
 
 /// <summary>
 /// 网络服务器内部会话。

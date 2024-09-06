@@ -1,0 +1,262 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Event.IEvent
+  commentId: T:Fantasy.Event.IEvent
+  id: IEvent
+  parent: Fantasy.Event
+  children:
+  - Fantasy.Event.IEvent.EventType
+  - Fantasy.Event.IEvent.Invoke(System.Object)
+  langs:
+  - csharp
+  - vb
+  name: IEvent
+  nameWithType: IEvent
+  fullName: Fantasy.Event.IEvent
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IEvent
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+    startLine: 8
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Event
+  summary: 事件的接口
+  example: []
+  syntax:
+    content: public interface IEvent
+    content.vb: Public Interface IEvent
+  extensionMethods:
+  - Fantasy.Event.IEvent.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Event.IEvent.EventType
+  commentId: M:Fantasy.Event.IEvent.EventType
+  id: EventType
+  parent: Fantasy.Event.IEvent
+  langs:
+  - csharp
+  - vb
+  name: EventType()
+  nameWithType: IEvent.EventType()
+  fullName: Fantasy.Event.IEvent.EventType()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: EventType
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Event
+  summary: 用于指定事件的Type
+  example: []
+  syntax:
+    content: Type EventType()
+    return:
+      type: System.Type
+      description: ''
+    content.vb: Function EventType() As Type
+  overload: Fantasy.Event.IEvent.EventType*
+- uid: Fantasy.Event.IEvent.Invoke(System.Object)
+  commentId: M:Fantasy.Event.IEvent.Invoke(System.Object)
+  id: Invoke(System.Object)
+  parent: Fantasy.Event.IEvent
+  langs:
+  - csharp
+  - vb
+  name: Invoke(object)
+  nameWithType: IEvent.Invoke(object)
+  fullName: Fantasy.Event.IEvent.Invoke(object)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Invoke
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+    startLine: 19
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Event
+  summary: 时间内部使用的入口
+  example: []
+  syntax:
+    content: void Invoke(object self)
+    parameters:
+    - id: self
+      type: System.Object
+      description: ''
+    content.vb: Sub Invoke(self As Object)
+  overload: Fantasy.Event.IEvent.Invoke*
+  nameWithType.vb: IEvent.Invoke(Object)
+  fullName.vb: Fantasy.Event.IEvent.Invoke(Object)
+  name.vb: Invoke(Object)
+references:
+- uid: Fantasy.Event
+  commentId: N:Fantasy.Event
+  href: Fantasy.html
+  name: Fantasy.Event
+  nameWithType: Fantasy.Event
+  fullName: Fantasy.Event
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Event
+    name: Event
+    href: Fantasy.Event.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Event
+    name: Event
+    href: Fantasy.Event.html
+- uid: Fantasy.Event.IEvent.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<IEvent>(IEvent)
+  nameWithType: JsonHelper.ToJson<IEvent>(IEvent)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Event.IEvent>(Fantasy.Event.IEvent)
+  nameWithType.vb: JsonHelper.ToJson(Of IEvent)(IEvent)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Event.IEvent)(Fantasy.Event.IEvent)
+  name.vb: ToJson(Of IEvent)(IEvent)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Event.IEvent)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Event.IEvent
+    name: IEvent
+    href: Fantasy.Event.IEvent.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Event.IEvent
+    name: IEvent
+    href: Fantasy.Event.IEvent.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Event.IEvent)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Event.IEvent
+    name: IEvent
+    href: Fantasy.Event.IEvent.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Event.IEvent
+    name: IEvent
+    href: Fantasy.Event.IEvent.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Event.IEvent.EventType*
+  commentId: Overload:Fantasy.Event.IEvent.EventType
+  href: Fantasy.Event.IEvent.html#Fantasy_Event_IEvent_EventType
+  name: EventType
+  nameWithType: IEvent.EventType
+  fullName: Fantasy.Event.IEvent.EventType
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Event.IEvent.Invoke*
+  commentId: Overload:Fantasy.Event.IEvent.Invoke
+  href: Fantasy.Event.IEvent.html#Fantasy_Event_IEvent_Invoke_System_Object_
+  name: Invoke
+  nameWithType: IEvent.Invoke
+  fullName: Fantasy.Event.IEvent.Invoke
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object

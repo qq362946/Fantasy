@@ -1,0 +1,137 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.PacketParser
+  commentId: N:Fantasy.PacketParser
+  id: PacketParser
+  parent: Fantasy
+  children:
+  - Fantasy.PacketParser.BufferPacketParser
+  - Fantasy.PacketParser.InnerBufferPacketParser
+  - Fantasy.PacketParser.InnerPackInfo
+  - Fantasy.PacketParser.Interface
+  - Fantasy.PacketParser.OuterBufferPacketParser
+  - Fantasy.PacketParser.OuterBufferPacketParserHelper
+  - Fantasy.PacketParser.OuterPackInfo
+  - Fantasy.PacketParser.OuterWebglBufferPacketParser
+  - Fantasy.PacketParser.Packet
+  - Fantasy.PacketParser.ProcessPackInfo
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.PacketParser
+  nameWithType: Fantasy.PacketParser
+  fullName: Fantasy.PacketParser
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.PacketParser.Interface
+  commentId: N:Fantasy.PacketParser.Interface
+  href: Fantasy.html
+  name: Fantasy.PacketParser.Interface
+  nameWithType: Fantasy.PacketParser.Interface
+  fullName: Fantasy.PacketParser.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+  - name: .
+  - uid: Fantasy.PacketParser.Interface
+    name: Interface
+    href: Fantasy.PacketParser.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+  - name: .
+  - uid: Fantasy.PacketParser.Interface
+    name: Interface
+    href: Fantasy.PacketParser.Interface.html
+- uid: Fantasy.PacketParser.BufferPacketParser
+  commentId: T:Fantasy.PacketParser.BufferPacketParser
+  parent: Fantasy.PacketParser
+  href: Fantasy.PacketParser.BufferPacketParser.html
+  name: BufferPacketParser
+  nameWithType: BufferPacketParser
+  fullName: Fantasy.PacketParser.BufferPacketParser
+- uid: Fantasy.PacketParser.InnerBufferPacketParser
+  commentId: T:Fantasy.PacketParser.InnerBufferPacketParser
+  href: Fantasy.PacketParser.InnerBufferPacketParser.html
+  name: InnerBufferPacketParser
+  nameWithType: InnerBufferPacketParser
+  fullName: Fantasy.PacketParser.InnerBufferPacketParser
+- uid: Fantasy.PacketParser.InnerPackInfo
+  commentId: T:Fantasy.PacketParser.InnerPackInfo
+  parent: Fantasy.PacketParser
+  href: Fantasy.PacketParser.InnerPackInfo.html
+  name: InnerPackInfo
+  nameWithType: InnerPackInfo
+  fullName: Fantasy.PacketParser.InnerPackInfo
+- uid: Fantasy.PacketParser.OuterBufferPacketParser
+  commentId: T:Fantasy.PacketParser.OuterBufferPacketParser
+  href: Fantasy.PacketParser.OuterBufferPacketParser.html
+  name: OuterBufferPacketParser
+  nameWithType: OuterBufferPacketParser
+  fullName: Fantasy.PacketParser.OuterBufferPacketParser
+- uid: Fantasy.PacketParser.OuterBufferPacketParserHelper
+  commentId: T:Fantasy.PacketParser.OuterBufferPacketParserHelper
+  href: Fantasy.PacketParser.OuterBufferPacketParserHelper.html
+  name: OuterBufferPacketParserHelper
+  nameWithType: OuterBufferPacketParserHelper
+  fullName: Fantasy.PacketParser.OuterBufferPacketParserHelper
+- uid: Fantasy.PacketParser.OuterPackInfo
+  commentId: T:Fantasy.PacketParser.OuterPackInfo
+  parent: Fantasy.PacketParser
+  href: Fantasy.PacketParser.OuterPackInfo.html
+  name: OuterPackInfo
+  nameWithType: OuterPackInfo
+  fullName: Fantasy.PacketParser.OuterPackInfo
+- uid: Fantasy.PacketParser.OuterWebglBufferPacketParser
+  commentId: T:Fantasy.PacketParser.OuterWebglBufferPacketParser
+  href: Fantasy.PacketParser.OuterWebglBufferPacketParser.html
+  name: OuterWebglBufferPacketParser
+  nameWithType: OuterWebglBufferPacketParser
+  fullName: Fantasy.PacketParser.OuterWebglBufferPacketParser
+- uid: Fantasy.PacketParser.Packet
+  commentId: T:Fantasy.PacketParser.Packet
+  href: Fantasy.PacketParser.Packet.html
+  name: Packet
+  nameWithType: Packet
+  fullName: Fantasy.PacketParser.Packet
+- uid: Fantasy.PacketParser.ProcessPackInfo
+  commentId: T:Fantasy.PacketParser.ProcessPackInfo
+  parent: Fantasy.PacketParser
+  href: Fantasy.PacketParser.ProcessPackInfo.html
+  name: ProcessPackInfo
+  nameWithType: ProcessPackInfo
+  fullName: Fantasy.PacketParser.ProcessPackInfo
+- uid: Fantasy.PacketParser
+  commentId: N:Fantasy.PacketParser
+  href: Fantasy.html
+  name: Fantasy.PacketParser
+  nameWithType: Fantasy.PacketParser
+  fullName: Fantasy.PacketParser
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html

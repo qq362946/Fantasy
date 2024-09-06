@@ -1,0 +1,3024 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeList`1
+  commentId: T:NativeCollections.NativeList`1
+  id: NativeList`1
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeList`1.#ctor(System.Int32)
+  - NativeCollections.NativeList`1.Add(`0@)
+  - NativeCollections.NativeList`1.AddRange(NativeCollections.NativeList{`0}@)
+  - NativeCollections.NativeList`1.AsReadOnlySpan
+  - NativeCollections.NativeList`1.AsReadOnlySpan(System.Int32)
+  - NativeCollections.NativeList`1.AsReadOnlySpan(System.Int32,System.Int32)
+  - NativeCollections.NativeList`1.AsSpan
+  - NativeCollections.NativeList`1.AsSpan(System.Int32)
+  - NativeCollections.NativeList`1.AsSpan(System.Int32,System.Int32)
+  - NativeCollections.NativeList`1.Capacity
+  - NativeCollections.NativeList`1.Clear
+  - NativeCollections.NativeList`1.Contains(`0@)
+  - NativeCollections.NativeList`1.Count
+  - NativeCollections.NativeList`1.Dispose
+  - NativeCollections.NativeList`1.Empty
+  - NativeCollections.NativeList`1.EnsureCapacity(System.Int32)
+  - NativeCollections.NativeList`1.Equals(NativeCollections.NativeList{`0})
+  - NativeCollections.NativeList`1.Equals(System.Object)
+  - NativeCollections.NativeList`1.GetEnumerator
+  - NativeCollections.NativeList`1.GetHashCode
+  - NativeCollections.NativeList`1.IndexOf(`0@)
+  - NativeCollections.NativeList`1.IndexOf(`0@,System.Int32)
+  - NativeCollections.NativeList`1.IndexOf(`0@,System.Int32,System.Int32)
+  - NativeCollections.NativeList`1.Insert(System.Int32,`0@)
+  - NativeCollections.NativeList`1.InsertRange(System.Int32,NativeCollections.NativeList{`0}@)
+  - NativeCollections.NativeList`1.IsCreated
+  - NativeCollections.NativeList`1.IsEmpty
+  - NativeCollections.NativeList`1.Item(System.Int32)
+  - NativeCollections.NativeList`1.Item(System.UInt32)
+  - NativeCollections.NativeList`1.LastIndexOf(`0@)
+  - NativeCollections.NativeList`1.LastIndexOf(`0@,System.Int32)
+  - NativeCollections.NativeList`1.LastIndexOf(`0@,System.Int32,System.Int32)
+  - NativeCollections.NativeList`1.Remove(`0@)
+  - NativeCollections.NativeList`1.RemoveAt(System.Int32)
+  - NativeCollections.NativeList`1.RemoveRange(System.Int32,System.Int32)
+  - NativeCollections.NativeList`1.Reverse
+  - NativeCollections.NativeList`1.Reverse(System.Int32,System.Int32)
+  - NativeCollections.NativeList`1.ToString
+  - NativeCollections.NativeList`1.TrimExcess
+  - NativeCollections.NativeList`1.op_Equality(NativeCollections.NativeList{`0},NativeCollections.NativeList{`0})
+  - NativeCollections.NativeList`1.op_Implicit(NativeCollections.NativeList{`0})~System.ReadOnlySpan{`0}
+  - NativeCollections.NativeList`1.op_Implicit(NativeCollections.NativeList{`0})~System.Span{`0}
+  - NativeCollections.NativeList`1.op_Inequality(NativeCollections.NativeList{`0},NativeCollections.NativeList{`0})
+  langs:
+  - csharp
+  - vb
+  name: NativeList<T>
+  nameWithType: NativeList<T>
+  fullName: NativeCollections.NativeList<T>
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeList
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 22
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native list
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeList<T> : IDisposable, IEquatable<NativeList<T>> where T : unmanaged, IEquatable<T>
+    typeParameters:
+    - id: T
+      description: Type
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeList(Of T As {Structure, IEquatable(Of T)}) Implements IDisposable, IEquatable(Of NativeList(Of T))
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeList`1}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeList`1.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+  nameWithType.vb: NativeList(Of T)
+  fullName.vb: NativeCollections.NativeList(Of T)
+  name.vb: NativeList(Of T)
+- uid: NativeCollections.NativeList`1.#ctor(System.Int32)
+  commentId: M:NativeCollections.NativeList`1.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: NativeList(int)
+  nameWithType: NativeList<T>.NativeList(int)
+  fullName: NativeCollections.NativeList<T>.NativeList(int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 61
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeList(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(capacity As Integer)
+  overload: NativeCollections.NativeList`1.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).New(Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).New(Integer)
+  name.vb: New(Integer)
+- uid: NativeCollections.NativeList`1.IsCreated
+  commentId: P:NativeCollections.NativeList`1.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeList<T>.IsCreated
+  fullName: NativeCollections.NativeList<T>.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 78
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeList`1.IsCreated*
+  nameWithType.vb: NativeList(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeList(Of T).IsCreated
+- uid: NativeCollections.NativeList`1.IsEmpty
+  commentId: P:NativeCollections.NativeList`1.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativeList<T>.IsEmpty
+  fullName: NativeCollections.NativeList<T>.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 83
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is empty
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativeList`1.IsEmpty*
+  nameWithType.vb: NativeList(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeList(Of T).IsEmpty
+- uid: NativeCollections.NativeList`1.Item(System.Int32)
+  commentId: P:NativeCollections.NativeList`1.Item(System.Int32)
+  id: Item(System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: this[int]
+  nameWithType: NativeList<T>.this[int]
+  fullName: NativeCollections.NativeList<T>.this[int]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 89
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get or set value
+  example: []
+  syntax:
+    content: public ref T this[int index] { get; }
+    parameters:
+    - id: index
+      type: System.Int32
+      description: Index
+    return:
+      type: '{T}'
+    content.vb: Public ReadOnly Default ByRef Property this[](index As Integer) As T
+  overload: NativeCollections.NativeList`1.Item*
+  nameWithType.vb: NativeList(Of T).this[](Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).this[](Integer)
+  name.vb: this[](Integer)
+- uid: NativeCollections.NativeList`1.Item(System.UInt32)
+  commentId: P:NativeCollections.NativeList`1.Item(System.UInt32)
+  id: Item(System.UInt32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: this[uint]
+  nameWithType: NativeList<T>.this[uint]
+  fullName: NativeCollections.NativeList<T>.this[uint]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 99
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get or set value
+  example: []
+  syntax:
+    content: public ref T this[uint index] { get; }
+    parameters:
+    - id: index
+      type: System.UInt32
+      description: Index
+    return:
+      type: '{T}'
+    content.vb: Public ReadOnly Default ByRef Property this[](index As UInteger) As T
+  overload: NativeCollections.NativeList`1.Item*
+  nameWithType.vb: NativeList(Of T).this[](UInteger)
+  fullName.vb: NativeCollections.NativeList(Of T).this[](UInteger)
+  name.vb: this[](UInteger)
+- uid: NativeCollections.NativeList`1.Count
+  commentId: P:NativeCollections.NativeList`1.Count
+  id: Count
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: NativeList<T>.Count
+  fullName: NativeCollections.NativeList<T>.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 108
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Count
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: NativeCollections.NativeList`1.Count*
+  nameWithType.vb: NativeList(Of T).Count
+  fullName.vb: NativeCollections.NativeList(Of T).Count
+- uid: NativeCollections.NativeList`1.Capacity
+  commentId: P:NativeCollections.NativeList`1.Capacity
+  id: Capacity
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Capacity
+  nameWithType: NativeList<T>.Capacity
+  fullName: NativeCollections.NativeList<T>.Capacity
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Capacity
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 113
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Capacity
+  example: []
+  syntax:
+    content: public int Capacity { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Capacity As Integer
+  overload: NativeCollections.NativeList`1.Capacity*
+  nameWithType.vb: NativeList(Of T).Capacity
+  fullName.vb: NativeCollections.NativeList(Of T).Capacity
+- uid: NativeCollections.NativeList`1.Equals(NativeCollections.NativeList{`0})
+  commentId: M:NativeCollections.NativeList`1.Equals(NativeCollections.NativeList{`0})
+  id: Equals(NativeCollections.NativeList{`0})
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeList<T>)
+  nameWithType: NativeList<T>.Equals(NativeList<T>)
+  fullName: NativeCollections.NativeList<T>.Equals(NativeCollections.NativeList<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 148
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeList<T> other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeList`1
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeList(Of T)) As Boolean
+  overload: NativeCollections.NativeList`1.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeList`1}.Equals(NativeCollections.NativeList{{T}})
+  nameWithType.vb: NativeList(Of T).Equals(NativeList(Of T))
+  fullName.vb: NativeCollections.NativeList(Of T).Equals(NativeCollections.NativeList(Of T))
+  name.vb: Equals(NativeList(Of T))
+- uid: NativeCollections.NativeList`1.Equals(System.Object)
+  commentId: M:NativeCollections.NativeList`1.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeList<T>.Equals(object?)
+  fullName: NativeCollections.NativeList<T>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 155
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeList`1.Equals*
+  nameWithType.vb: NativeList(Of T).Equals(Object)
+  fullName.vb: NativeCollections.NativeList(Of T).Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeList`1.GetHashCode
+  commentId: M:NativeCollections.NativeList`1.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeList<T>.GetHashCode()
+  fullName: NativeCollections.NativeList<T>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 161
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeList`1.GetHashCode*
+  nameWithType.vb: NativeList(Of T).GetHashCode()
+  fullName.vb: NativeCollections.NativeList(Of T).GetHashCode()
+- uid: NativeCollections.NativeList`1.ToString
+  commentId: M:NativeCollections.NativeList`1.ToString
+  id: ToString
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeList<T>.ToString()
+  fullName: NativeCollections.NativeList<T>.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 167
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeList`1.ToString*
+  nameWithType.vb: NativeList(Of T).ToString()
+  fullName.vb: NativeCollections.NativeList(Of T).ToString()
+- uid: NativeCollections.NativeList`1.op_Implicit(NativeCollections.NativeList{`0})~System.Span{`0}
+  commentId: M:NativeCollections.NativeList`1.op_Implicit(NativeCollections.NativeList{`0})~System.Span{`0}
+  id: op_Implicit(NativeCollections.NativeList{`0})~System.Span{`0}
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: implicit operator Span<T>(NativeList<T>)
+  nameWithType: NativeList<T>.implicit operator Span<T>(NativeList<T>)
+  fullName: NativeCollections.NativeList<T>.implicit operator System.Span<T>(NativeCollections.NativeList<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Implicit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 173
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static implicit operator Span<T>(NativeList<T> nativeList)
+    parameters:
+    - id: nativeList
+      type: NativeCollections.NativeList`1
+    return:
+      type: System.Span{{T}}
+      description: Span
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Widening Operator CType(nativeList As NativeList(Of T)) As Span(Of T)
+  overload: NativeCollections.NativeList`1.op_Implicit*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).CType(NativeList(Of T))
+  fullName.vb: NativeCollections.NativeList(Of T).CType(NativeCollections.NativeList(Of T))
+  name.vb: CType(NativeList(Of T))
+- uid: NativeCollections.NativeList`1.op_Implicit(NativeCollections.NativeList{`0})~System.ReadOnlySpan{`0}
+  commentId: M:NativeCollections.NativeList`1.op_Implicit(NativeCollections.NativeList{`0})~System.ReadOnlySpan{`0}
+  id: op_Implicit(NativeCollections.NativeList{`0})~System.ReadOnlySpan{`0}
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: implicit operator ReadOnlySpan<T>(NativeList<T>)
+  nameWithType: NativeList<T>.implicit operator ReadOnlySpan<T>(NativeList<T>)
+  fullName: NativeCollections.NativeList<T>.implicit operator System.ReadOnlySpan<T>(NativeCollections.NativeList<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Implicit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 180
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As readOnly span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static implicit operator ReadOnlySpan<T>(NativeList<T> nativeList)
+    parameters:
+    - id: nativeList
+      type: NativeCollections.NativeList`1
+    return:
+      type: System.ReadOnlySpan{{T}}
+      description: ReadOnlySpan
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Widening Operator CType(nativeList As NativeList(Of T)) As ReadOnlySpan(Of T)
+  overload: NativeCollections.NativeList`1.op_Implicit*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).CType(NativeList(Of T))
+  fullName.vb: NativeCollections.NativeList(Of T).CType(NativeCollections.NativeList(Of T))
+  name.vb: CType(NativeList(Of T))
+- uid: NativeCollections.NativeList`1.op_Equality(NativeCollections.NativeList{`0},NativeCollections.NativeList{`0})
+  commentId: M:NativeCollections.NativeList`1.op_Equality(NativeCollections.NativeList{`0},NativeCollections.NativeList{`0})
+  id: op_Equality(NativeCollections.NativeList{`0},NativeCollections.NativeList{`0})
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeList<T>, NativeList<T>)
+  nameWithType: NativeList<T>.operator ==(NativeList<T>, NativeList<T>)
+  fullName: NativeCollections.NativeList<T>.operator ==(NativeCollections.NativeList<T>, NativeCollections.NativeList<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 189
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeList<T> left, NativeList<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeList`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeList`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeList(Of T), right As NativeList(Of T)) As Boolean
+  overload: NativeCollections.NativeList`1.op_Equality*
+  nameWithType.vb: NativeList(Of T).=(NativeList(Of T), NativeList(Of T))
+  fullName.vb: NativeCollections.NativeList(Of T).=(NativeCollections.NativeList(Of T), NativeCollections.NativeList(Of T))
+  name.vb: =(NativeList(Of T), NativeList(Of T))
+- uid: NativeCollections.NativeList`1.op_Inequality(NativeCollections.NativeList{`0},NativeCollections.NativeList{`0})
+  commentId: M:NativeCollections.NativeList`1.op_Inequality(NativeCollections.NativeList{`0},NativeCollections.NativeList{`0})
+  id: op_Inequality(NativeCollections.NativeList{`0},NativeCollections.NativeList{`0})
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeList<T>, NativeList<T>)
+  nameWithType: NativeList<T>.operator !=(NativeList<T>, NativeList<T>)
+  fullName: NativeCollections.NativeList<T>.operator !=(NativeCollections.NativeList<T>, NativeCollections.NativeList<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 197
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeList<T> left, NativeList<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeList`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeList`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeList(Of T), right As NativeList(Of T)) As Boolean
+  overload: NativeCollections.NativeList`1.op_Inequality*
+  nameWithType.vb: NativeList(Of T).<>(NativeList(Of T), NativeList(Of T))
+  fullName.vb: NativeCollections.NativeList(Of T).<>(NativeCollections.NativeList(Of T), NativeCollections.NativeList(Of T))
+  name.vb: <>(NativeList(Of T), NativeList(Of T))
+- uid: NativeCollections.NativeList`1.Dispose
+  commentId: M:NativeCollections.NativeList`1.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeList<T>.Dispose()
+  fullName: NativeCollections.NativeList<T>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 202
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeList`1.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).Dispose()
+  fullName.vb: NativeCollections.NativeList(Of T).Dispose()
+- uid: NativeCollections.NativeList`1.AsSpan
+  commentId: M:NativeCollections.NativeList`1.AsSpan
+  id: AsSpan
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: AsSpan()
+  nameWithType: NativeList<T>.AsSpan()
+  fullName: NativeCollections.NativeList<T>.AsSpan()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsSpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 215
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public Span<T> AsSpan()
+    return:
+      type: System.Span{{T}}
+      description: Span
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsSpan() As Span(Of T)
+  overload: NativeCollections.NativeList`1.AsSpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).AsSpan()
+  fullName.vb: NativeCollections.NativeList(Of T).AsSpan()
+- uid: NativeCollections.NativeList`1.AsSpan(System.Int32)
+  commentId: M:NativeCollections.NativeList`1.AsSpan(System.Int32)
+  id: AsSpan(System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: AsSpan(int)
+  nameWithType: NativeList<T>.AsSpan(int)
+  fullName: NativeCollections.NativeList<T>.AsSpan(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsSpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 223
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public Span<T> AsSpan(int length)
+    parameters:
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Span{{T}}
+      description: Span
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsSpan(length As Integer) As Span(Of T)
+  overload: NativeCollections.NativeList`1.AsSpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).AsSpan(Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).AsSpan(Integer)
+  name.vb: AsSpan(Integer)
+- uid: NativeCollections.NativeList`1.AsSpan(System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeList`1.AsSpan(System.Int32,System.Int32)
+  id: AsSpan(System.Int32,System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: AsSpan(int, int)
+  nameWithType: NativeList<T>.AsSpan(int, int)
+  fullName: NativeCollections.NativeList<T>.AsSpan(int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsSpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 232
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public Span<T> AsSpan(int start, int length)
+    parameters:
+    - id: start
+      type: System.Int32
+      description: Start
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.Span{{T}}
+      description: Span
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsSpan(start As Integer, length As Integer) As Span(Of T)
+  overload: NativeCollections.NativeList`1.AsSpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).AsSpan(Integer, Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).AsSpan(Integer, Integer)
+  name.vb: AsSpan(Integer, Integer)
+- uid: NativeCollections.NativeList`1.AsReadOnlySpan
+  commentId: M:NativeCollections.NativeList`1.AsReadOnlySpan
+  id: AsReadOnlySpan
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: AsReadOnlySpan()
+  nameWithType: NativeList<T>.AsReadOnlySpan()
+  fullName: NativeCollections.NativeList<T>.AsReadOnlySpan()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsReadOnlySpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 239
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As readOnly span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public ReadOnlySpan<T> AsReadOnlySpan()
+    return:
+      type: System.ReadOnlySpan{{T}}
+      description: ReadOnlySpan
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsReadOnlySpan() As ReadOnlySpan(Of T)
+  overload: NativeCollections.NativeList`1.AsReadOnlySpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).AsReadOnlySpan()
+  fullName.vb: NativeCollections.NativeList(Of T).AsReadOnlySpan()
+- uid: NativeCollections.NativeList`1.AsReadOnlySpan(System.Int32)
+  commentId: M:NativeCollections.NativeList`1.AsReadOnlySpan(System.Int32)
+  id: AsReadOnlySpan(System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: AsReadOnlySpan(int)
+  nameWithType: NativeList<T>.AsReadOnlySpan(int)
+  fullName: NativeCollections.NativeList<T>.AsReadOnlySpan(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsReadOnlySpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 247
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As readOnly span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public ReadOnlySpan<T> AsReadOnlySpan(int length)
+    parameters:
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.ReadOnlySpan{{T}}
+      description: ReadOnlySpan
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsReadOnlySpan(length As Integer) As ReadOnlySpan(Of T)
+  overload: NativeCollections.NativeList`1.AsReadOnlySpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).AsReadOnlySpan(Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).AsReadOnlySpan(Integer)
+  name.vb: AsReadOnlySpan(Integer)
+- uid: NativeCollections.NativeList`1.AsReadOnlySpan(System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeList`1.AsReadOnlySpan(System.Int32,System.Int32)
+  id: AsReadOnlySpan(System.Int32,System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: AsReadOnlySpan(int, int)
+  nameWithType: NativeList<T>.AsReadOnlySpan(int, int)
+  fullName: NativeCollections.NativeList<T>.AsReadOnlySpan(int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsReadOnlySpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 256
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: As readOnly span
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public ReadOnlySpan<T> AsReadOnlySpan(int start, int length)
+    parameters:
+    - id: start
+      type: System.Int32
+      description: Start
+    - id: length
+      type: System.Int32
+      description: Length
+    return:
+      type: System.ReadOnlySpan{{T}}
+      description: ReadOnlySpan
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function AsReadOnlySpan(start As Integer, length As Integer) As ReadOnlySpan(Of T)
+  overload: NativeCollections.NativeList`1.AsReadOnlySpan*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).AsReadOnlySpan(Integer, Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).AsReadOnlySpan(Integer, Integer)
+  name.vb: AsReadOnlySpan(Integer, Integer)
+- uid: NativeCollections.NativeList`1.Clear
+  commentId: M:NativeCollections.NativeList`1.Clear
+  id: Clear
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: NativeList<T>.Clear()
+  fullName: NativeCollections.NativeList<T>.Clear()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clear
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 262
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Clear
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Clear()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Clear()
+  overload: NativeCollections.NativeList`1.Clear*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).Clear()
+  fullName.vb: NativeCollections.NativeList(Of T).Clear()
+- uid: NativeCollections.NativeList`1.Add(`0@)
+  commentId: M:NativeCollections.NativeList`1.Add(`0@)
+  id: Add(`0@)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Add(in T)
+  nameWithType: NativeList<T>.Add(in T)
+  fullName: NativeCollections.NativeList<T>.Add(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Add
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 273
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Add
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Add(in T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Add(item As T)
+  overload: NativeCollections.NativeList`1.Add*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).Add(T)
+  fullName.vb: NativeCollections.NativeList(Of T).Add(T)
+  name.vb: Add(T)
+- uid: NativeCollections.NativeList`1.AddRange(NativeCollections.NativeList{`0}@)
+  commentId: M:NativeCollections.NativeList`1.AddRange(NativeCollections.NativeList{`0}@)
+  id: AddRange(NativeCollections.NativeList{`0}@)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: AddRange(in NativeList<T>)
+  nameWithType: NativeList<T>.AddRange(in NativeList<T>)
+  fullName: NativeCollections.NativeList<T>.AddRange(in NativeCollections.NativeList<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AddRange
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 295
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Add range
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void AddRange(in NativeList<T> collection)
+    parameters:
+    - id: collection
+      type: NativeCollections.NativeList`1
+      description: Collection
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub AddRange(collection As NativeList(Of T))
+  overload: NativeCollections.NativeList`1.AddRange*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).AddRange(NativeList(Of T))
+  fullName.vb: NativeCollections.NativeList(Of T).AddRange(NativeCollections.NativeList(Of T))
+  name.vb: AddRange(NativeList(Of T))
+- uid: NativeCollections.NativeList`1.Insert(System.Int32,`0@)
+  commentId: M:NativeCollections.NativeList`1.Insert(System.Int32,`0@)
+  id: Insert(System.Int32,`0@)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Insert(int, in T)
+  nameWithType: NativeList<T>.Insert(int, in T)
+  fullName: NativeCollections.NativeList<T>.Insert(int, in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Insert
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 314
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Insert
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Insert(int index, in T item)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: Index
+    - id: item
+      type: '{T}'
+      description: Item
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Insert(index As Integer, item As T)
+  overload: NativeCollections.NativeList`1.Insert*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).Insert(Integer, T)
+  fullName.vb: NativeCollections.NativeList(Of T).Insert(Integer, T)
+  name.vb: Insert(Integer, T)
+- uid: NativeCollections.NativeList`1.InsertRange(System.Int32,NativeCollections.NativeList{`0}@)
+  commentId: M:NativeCollections.NativeList`1.InsertRange(System.Int32,NativeCollections.NativeList{`0}@)
+  id: InsertRange(System.Int32,NativeCollections.NativeList{`0}@)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: InsertRange(int, in NativeList<T>)
+  nameWithType: NativeList<T>.InsertRange(int, in NativeList<T>)
+  fullName: NativeCollections.NativeList<T>.InsertRange(int, in NativeCollections.NativeList<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: InsertRange
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 333
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Insert
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void InsertRange(int index, in NativeList<T> collection)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: Index
+    - id: collection
+      type: NativeCollections.NativeList`1
+      description: Collection
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub InsertRange(index As Integer, collection As NativeList(Of T))
+  overload: NativeCollections.NativeList`1.InsertRange*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).InsertRange(Integer, NativeList(Of T))
+  fullName.vb: NativeCollections.NativeList(Of T).InsertRange(Integer, NativeCollections.NativeList(Of T))
+  name.vb: InsertRange(Integer, NativeList(Of T))
+- uid: NativeCollections.NativeList`1.Remove(`0@)
+  commentId: M:NativeCollections.NativeList`1.Remove(`0@)
+  id: Remove(`0@)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Remove(in T)
+  nameWithType: NativeList<T>.Remove(in T)
+  fullName: NativeCollections.NativeList<T>.Remove(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 365
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Remove
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Remove(in T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    return:
+      type: System.Boolean
+      description: Removed
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Remove(item As T) As Boolean
+  overload: NativeCollections.NativeList`1.Remove*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).Remove(T)
+  fullName.vb: NativeCollections.NativeList(Of T).Remove(T)
+  name.vb: Remove(T)
+- uid: NativeCollections.NativeList`1.RemoveAt(System.Int32)
+  commentId: M:NativeCollections.NativeList`1.RemoveAt(System.Int32)
+  id: RemoveAt(System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: RemoveAt(int)
+  nameWithType: NativeList<T>.RemoveAt(int)
+  fullName: NativeCollections.NativeList<T>.RemoveAt(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RemoveAt
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 382
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Remove at
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void RemoveAt(int index)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: Index
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub RemoveAt(index As Integer)
+  overload: NativeCollections.NativeList`1.RemoveAt*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).RemoveAt(Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).RemoveAt(Integer)
+  name.vb: RemoveAt(Integer)
+- uid: NativeCollections.NativeList`1.RemoveRange(System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeList`1.RemoveRange(System.Int32,System.Int32)
+  id: RemoveRange(System.Int32,System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: RemoveRange(int, int)
+  nameWithType: NativeList<T>.RemoveRange(int, int)
+  fullName: NativeCollections.NativeList<T>.RemoveRange(int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RemoveRange
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 398
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Remove range
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void RemoveRange(int index, int count)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: Index
+    - id: count
+      type: System.Int32
+      description: Count
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub RemoveRange(index As Integer, count As Integer)
+  overload: NativeCollections.NativeList`1.RemoveRange*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).RemoveRange(Integer, Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).RemoveRange(Integer, Integer)
+  name.vb: RemoveRange(Integer, Integer)
+- uid: NativeCollections.NativeList`1.Reverse
+  commentId: M:NativeCollections.NativeList`1.Reverse
+  id: Reverse
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Reverse()
+  nameWithType: NativeList<T>.Reverse()
+  fullName: NativeCollections.NativeList<T>.Reverse()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Reverse
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 420
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Reverse
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Reverse()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Reverse()
+  overload: NativeCollections.NativeList`1.Reverse*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).Reverse()
+  fullName.vb: NativeCollections.NativeList(Of T).Reverse()
+- uid: NativeCollections.NativeList`1.Reverse(System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeList`1.Reverse(System.Int32,System.Int32)
+  id: Reverse(System.Int32,System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Reverse(int, int)
+  nameWithType: NativeList<T>.Reverse(int, int)
+  fullName: NativeCollections.NativeList<T>.Reverse(int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Reverse
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 433
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Reverse
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Reverse(int index, int count)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: Index
+    - id: count
+      type: System.Int32
+      description: Count
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Reverse(index As Integer, count As Integer)
+  overload: NativeCollections.NativeList`1.Reverse*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).Reverse(Integer, Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).Reverse(Integer, Integer)
+  name.vb: Reverse(Integer, Integer)
+- uid: NativeCollections.NativeList`1.Contains(`0@)
+  commentId: M:NativeCollections.NativeList`1.Contains(`0@)
+  id: Contains(`0@)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Contains(in T)
+  nameWithType: NativeList<T>.Contains(in T)
+  fullName: NativeCollections.NativeList<T>.Contains(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Contains
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 453
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Contains
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool Contains(in T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    return:
+      type: System.Boolean
+      description: Contains
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Contains(item As T) As Boolean
+  overload: NativeCollections.NativeList`1.Contains*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).Contains(T)
+  fullName.vb: NativeCollections.NativeList(Of T).Contains(T)
+  name.vb: Contains(T)
+- uid: NativeCollections.NativeList`1.EnsureCapacity(System.Int32)
+  commentId: M:NativeCollections.NativeList`1.EnsureCapacity(System.Int32)
+  id: EnsureCapacity(System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: EnsureCapacity(int)
+  nameWithType: NativeList<T>.EnsureCapacity(int)
+  fullName: NativeCollections.NativeList<T>.EnsureCapacity(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: EnsureCapacity
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 461
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Ensure capacity
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int EnsureCapacity(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    return:
+      type: System.Int32
+      description: New capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function EnsureCapacity(capacity As Integer) As Integer
+  overload: NativeCollections.NativeList`1.EnsureCapacity*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).EnsureCapacity(Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).EnsureCapacity(Integer)
+  name.vb: EnsureCapacity(Integer)
+- uid: NativeCollections.NativeList`1.TrimExcess
+  commentId: M:NativeCollections.NativeList`1.TrimExcess
+  id: TrimExcess
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: TrimExcess()
+  nameWithType: NativeList<T>.TrimExcess()
+  fullName: NativeCollections.NativeList<T>.TrimExcess()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TrimExcess
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 475
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Trim excess
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int TrimExcess()
+    return:
+      type: System.Int32
+      description: New capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TrimExcess() As Integer
+  overload: NativeCollections.NativeList`1.TrimExcess*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).TrimExcess()
+  fullName.vb: NativeCollections.NativeList(Of T).TrimExcess()
+- uid: NativeCollections.NativeList`1.IndexOf(`0@)
+  commentId: M:NativeCollections.NativeList`1.IndexOf(`0@)
+  id: IndexOf(`0@)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: IndexOf(in T)
+  nameWithType: NativeList<T>.IndexOf(in T)
+  fullName: NativeCollections.NativeList<T>.IndexOf(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IndexOf
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 506
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Index of
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int IndexOf(in T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    return:
+      type: System.Int32
+      description: Index
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function IndexOf(item As T) As Integer
+  overload: NativeCollections.NativeList`1.IndexOf*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).IndexOf(T)
+  fullName.vb: NativeCollections.NativeList(Of T).IndexOf(T)
+  name.vb: IndexOf(T)
+- uid: NativeCollections.NativeList`1.IndexOf(`0@,System.Int32)
+  commentId: M:NativeCollections.NativeList`1.IndexOf(`0@,System.Int32)
+  id: IndexOf(`0@,System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: IndexOf(in T, int)
+  nameWithType: NativeList<T>.IndexOf(in T, int)
+  fullName: NativeCollections.NativeList<T>.IndexOf(in T, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IndexOf
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 515
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Index of
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int IndexOf(in T item, int index)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    - id: index
+      type: System.Int32
+      description: Index
+    return:
+      type: System.Int32
+      description: Index
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function IndexOf(item As T, index As Integer) As Integer
+  overload: NativeCollections.NativeList`1.IndexOf*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).IndexOf(T, Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).IndexOf(T, Integer)
+  name.vb: IndexOf(T, Integer)
+- uid: NativeCollections.NativeList`1.IndexOf(`0@,System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeList`1.IndexOf(`0@,System.Int32,System.Int32)
+  id: IndexOf(`0@,System.Int32,System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: IndexOf(in T, int, int)
+  nameWithType: NativeList<T>.IndexOf(in T, int, int)
+  fullName: NativeCollections.NativeList<T>.IndexOf(in T, int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IndexOf
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 534
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Index of
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int IndexOf(in T item, int index, int count)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    - id: index
+      type: System.Int32
+      description: Index
+    - id: count
+      type: System.Int32
+      description: Count
+    return:
+      type: System.Int32
+      description: Index
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function IndexOf(item As T, index As Integer, count As Integer) As Integer
+  overload: NativeCollections.NativeList`1.IndexOf*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).IndexOf(T, Integer, Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).IndexOf(T, Integer, Integer)
+  name.vb: IndexOf(T, Integer, Integer)
+- uid: NativeCollections.NativeList`1.LastIndexOf(`0@)
+  commentId: M:NativeCollections.NativeList`1.LastIndexOf(`0@)
+  id: LastIndexOf(`0@)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: LastIndexOf(in T)
+  nameWithType: NativeList<T>.LastIndexOf(in T)
+  fullName: NativeCollections.NativeList<T>.LastIndexOf(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: LastIndexOf
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 555
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Last index of
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int LastIndexOf(in T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    return:
+      type: System.Int32
+      description: Index
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function LastIndexOf(item As T) As Integer
+  overload: NativeCollections.NativeList`1.LastIndexOf*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).LastIndexOf(T)
+  fullName.vb: NativeCollections.NativeList(Of T).LastIndexOf(T)
+  name.vb: LastIndexOf(T)
+- uid: NativeCollections.NativeList`1.LastIndexOf(`0@,System.Int32)
+  commentId: M:NativeCollections.NativeList`1.LastIndexOf(`0@,System.Int32)
+  id: LastIndexOf(`0@,System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: LastIndexOf(in T, int)
+  nameWithType: NativeList<T>.LastIndexOf(in T, int)
+  fullName: NativeCollections.NativeList<T>.LastIndexOf(in T, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: LastIndexOf
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 564
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Last index of
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int LastIndexOf(in T item, int index)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    - id: index
+      type: System.Int32
+      description: Index
+    return:
+      type: System.Int32
+      description: Index
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function LastIndexOf(item As T, index As Integer) As Integer
+  overload: NativeCollections.NativeList`1.LastIndexOf*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).LastIndexOf(T, Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).LastIndexOf(T, Integer)
+  name.vb: LastIndexOf(T, Integer)
+- uid: NativeCollections.NativeList`1.LastIndexOf(`0@,System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeList`1.LastIndexOf(`0@,System.Int32,System.Int32)
+  id: LastIndexOf(`0@,System.Int32,System.Int32)
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: LastIndexOf(in T, int, int)
+  nameWithType: NativeList<T>.LastIndexOf(in T, int, int)
+  fullName: NativeCollections.NativeList<T>.LastIndexOf(in T, int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: LastIndexOf
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 583
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Last index of
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int LastIndexOf(in T item, int index, int count)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    - id: index
+      type: System.Int32
+      description: Index
+    - id: count
+      type: System.Int32
+      description: Count
+    return:
+      type: System.Int32
+      description: Index
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function LastIndexOf(item As T, index As Integer, count As Integer) As Integer
+  overload: NativeCollections.NativeList`1.LastIndexOf*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeList(Of T).LastIndexOf(T, Integer, Integer)
+  fullName.vb: NativeCollections.NativeList(Of T).LastIndexOf(T, Integer, Integer)
+  name.vb: LastIndexOf(T, Integer, Integer)
+- uid: NativeCollections.NativeList`1.Empty
+  commentId: P:NativeCollections.NativeList`1.Empty
+  id: Empty
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeList<T>.Empty
+  fullName: NativeCollections.NativeList<T>.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 602
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeList<T> Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeList`1
+    content.vb: Public Shared ReadOnly Property Empty As NativeList(Of T)
+  overload: NativeCollections.NativeList`1.Empty*
+  nameWithType.vb: NativeList(Of T).Empty
+  fullName.vb: NativeCollections.NativeList(Of T).Empty
+- uid: NativeCollections.NativeList`1.GetEnumerator
+  commentId: M:NativeCollections.NativeList`1.GetEnumerator
+  id: GetEnumerator
+  parent: NativeCollections.NativeList`1
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: NativeList<T>.GetEnumerator()
+  fullName: NativeCollections.NativeList<T>.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetEnumerator
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeList.cs
+    startLine: 608
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get enumerator
+  example: []
+  syntax:
+    content: public NativeList<T>.Enumerator GetEnumerator()
+    return:
+      type: NativeCollections.NativeList`1.Enumerator
+      description: Enumerator
+    content.vb: Public Function GetEnumerator() As NativeList(Of T).Enumerator
+  overload: NativeCollections.NativeList`1.GetEnumerator*
+  nameWithType.vb: NativeList(Of T).GetEnumerator()
+  fullName.vb: NativeCollections.NativeList(Of T).GetEnumerator()
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeList`1}
+  commentId: T:System.IEquatable{NativeCollections.NativeList`1}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeList<T>>
+  nameWithType: IEquatable<NativeList<T>>
+  fullName: System.IEquatable<NativeCollections.NativeList<T>>
+  nameWithType.vb: IEquatable(Of NativeList(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeList(Of T))
+  name.vb: IEquatable(Of NativeList(Of T))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeList`1.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeList<T>>(NativeList<T>)
+  nameWithType: JsonHelper.ToJson<NativeList<T>>(NativeList<T>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeList<T>>(NativeCollections.NativeList<T>)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeList(Of T))(NativeList(Of T))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeList(Of T))(NativeCollections.NativeList(Of T))
+  name.vb: ToJson(Of NativeList(Of T))(NativeList(Of T))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeList{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeList{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeList`1.#ctor*
+  commentId: Overload:NativeCollections.NativeList`1.#ctor
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1__ctor_System_Int32_
+  name: NativeList
+  nameWithType: NativeList<T>.NativeList
+  fullName: NativeCollections.NativeList<T>.NativeList
+  nameWithType.vb: NativeList(Of T).New
+  fullName.vb: NativeCollections.NativeList(Of T).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativeList`1.IsCreated*
+  commentId: Overload:NativeCollections.NativeList`1.IsCreated
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_IsCreated
+  name: IsCreated
+  nameWithType: NativeList<T>.IsCreated
+  fullName: NativeCollections.NativeList<T>.IsCreated
+  nameWithType.vb: NativeList(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeList(Of T).IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeList`1.IsEmpty*
+  commentId: Overload:NativeCollections.NativeList`1.IsEmpty
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_IsEmpty
+  name: IsEmpty
+  nameWithType: NativeList<T>.IsEmpty
+  fullName: NativeCollections.NativeList<T>.IsEmpty
+  nameWithType.vb: NativeList(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeList(Of T).IsEmpty
+- uid: NativeCollections.NativeList`1.Item*
+  commentId: Overload:NativeCollections.NativeList`1.Item
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Item_System_Int32_
+  name: this
+  nameWithType: NativeList<T>.this
+  fullName: NativeCollections.NativeList<T>.this
+  nameWithType.vb: NativeList(Of T).this[]
+  fullName.vb: NativeCollections.NativeList(Of T).this[]
+  name.vb: this[]
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: NativeCollections.NativeList`1.Count*
+  commentId: Overload:NativeCollections.NativeList`1.Count
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Count
+  name: Count
+  nameWithType: NativeList<T>.Count
+  fullName: NativeCollections.NativeList<T>.Count
+  nameWithType.vb: NativeList(Of T).Count
+  fullName.vb: NativeCollections.NativeList(Of T).Count
+- uid: NativeCollections.NativeList`1.Capacity*
+  commentId: Overload:NativeCollections.NativeList`1.Capacity
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Capacity
+  name: Capacity
+  nameWithType: NativeList<T>.Capacity
+  fullName: NativeCollections.NativeList<T>.Capacity
+  nameWithType.vb: NativeList(Of T).Capacity
+  fullName.vb: NativeCollections.NativeList(Of T).Capacity
+- uid: NativeCollections.NativeList`1.Equals*
+  commentId: Overload:NativeCollections.NativeList`1.Equals
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Equals_NativeCollections_NativeList__0__
+  name: Equals
+  nameWithType: NativeList<T>.Equals
+  fullName: NativeCollections.NativeList<T>.Equals
+  nameWithType.vb: NativeList(Of T).Equals
+  fullName.vb: NativeCollections.NativeList(Of T).Equals
+- uid: System.IEquatable{NativeCollections.NativeList`1}.Equals(NativeCollections.NativeList{{T}})
+  commentId: M:System.IEquatable{NativeCollections.NativeList`1}.Equals(NativeCollections.NativeList{`0})
+  parent: System.IEquatable{NativeCollections.NativeList`1}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeList<T>)
+  nameWithType: IEquatable<NativeList<T>>.Equals(NativeList<T>)
+  fullName: System.IEquatable<NativeCollections.NativeList<T>>.Equals(NativeCollections.NativeList<T>)
+  nameWithType.vb: IEquatable(Of NativeList(Of T)).Equals(NativeList(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeList(Of T)).Equals(NativeCollections.NativeList(Of T))
+  name.vb: Equals(NativeList(Of T))
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeList`1}.Equals(NativeCollections.NativeList{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeList`1}.Equals(NativeCollections.NativeList{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: NativeCollections.NativeList`1
+  commentId: T:NativeCollections.NativeList`1
+  parent: NativeCollections
+  href: NativeCollections.NativeList-1.html
+  name: NativeList<T>
+  nameWithType: NativeList<T>
+  fullName: NativeCollections.NativeList<T>
+  nameWithType.vb: NativeList(Of T)
+  fullName.vb: NativeCollections.NativeList(Of T)
+  name.vb: NativeList(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeList`1.GetHashCode*
+  commentId: Overload:NativeCollections.NativeList`1.GetHashCode
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeList<T>.GetHashCode
+  fullName: NativeCollections.NativeList<T>.GetHashCode
+  nameWithType.vb: NativeList(Of T).GetHashCode
+  fullName.vb: NativeCollections.NativeList(Of T).GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeList`1.ToString*
+  commentId: Overload:NativeCollections.NativeList`1.ToString
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_ToString
+  name: ToString
+  nameWithType: NativeList<T>.ToString
+  fullName: NativeCollections.NativeList<T>.ToString
+  nameWithType.vb: NativeList(Of T).ToString
+  fullName.vb: NativeCollections.NativeList(Of T).ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeList`1.op_Implicit*
+  commentId: Overload:NativeCollections.NativeList`1.op_Implicit
+  name: implicit operator
+  nameWithType: NativeList<T>.implicit operator
+  fullName: NativeCollections.NativeList<T>.implicit operator
+  nameWithType.vb: NativeList(Of T).CType
+  fullName.vb: NativeCollections.NativeList(Of T).CType
+  name.vb: CType
+  spec.csharp:
+  - name: implicit
+  - name: " "
+  - name: operator
+- uid: System.Span{{T}}
+  commentId: T:System.Span{`0}
+  parent: System
+  definition: System.Span`1
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<T>
+  nameWithType: Span<T>
+  fullName: System.Span<T>
+  nameWithType.vb: Span(Of T)
+  fullName.vb: System.Span(Of T)
+  name.vb: Span(Of T)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Span`1
+  commentId: T:System.Span`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<T>
+  nameWithType: Span<T>
+  fullName: System.Span<T>
+  nameWithType.vb: Span(Of T)
+  fullName.vb: System.Span(Of T)
+  name.vb: Span(Of T)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.ReadOnlySpan{{T}}
+  commentId: T:System.ReadOnlySpan{`0}
+  parent: System
+  definition: System.ReadOnlySpan`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<T>
+  nameWithType: ReadOnlySpan<T>
+  fullName: System.ReadOnlySpan<T>
+  nameWithType.vb: ReadOnlySpan(Of T)
+  fullName.vb: System.ReadOnlySpan(Of T)
+  name.vb: ReadOnlySpan(Of T)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.ReadOnlySpan`1
+  commentId: T:System.ReadOnlySpan`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<T>
+  nameWithType: ReadOnlySpan<T>
+  fullName: System.ReadOnlySpan<T>
+  nameWithType.vb: ReadOnlySpan(Of T)
+  fullName.vb: System.ReadOnlySpan(Of T)
+  name.vb: ReadOnlySpan(Of T)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeList`1.op_Equality*
+  commentId: Overload:NativeCollections.NativeList`1.op_Equality
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_op_Equality_NativeCollections_NativeList__0__NativeCollections_NativeList__0__
+  name: operator ==
+  nameWithType: NativeList<T>.operator ==
+  fullName: NativeCollections.NativeList<T>.operator ==
+  nameWithType.vb: NativeList(Of T).=
+  fullName.vb: NativeCollections.NativeList(Of T).=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeList`1.op_Equality*
+    name: ==
+    href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_op_Equality_NativeCollections_NativeList__0__NativeCollections_NativeList__0__
+- uid: NativeCollections.NativeList`1.op_Inequality*
+  commentId: Overload:NativeCollections.NativeList`1.op_Inequality
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_op_Inequality_NativeCollections_NativeList__0__NativeCollections_NativeList__0__
+  name: operator !=
+  nameWithType: NativeList<T>.operator !=
+  fullName: NativeCollections.NativeList<T>.operator !=
+  nameWithType.vb: NativeList(Of T).<>
+  fullName.vb: NativeCollections.NativeList(Of T).<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeList`1.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_op_Inequality_NativeCollections_NativeList__0__NativeCollections_NativeList__0__
+- uid: NativeCollections.NativeList`1.Dispose*
+  commentId: Overload:NativeCollections.NativeList`1.Dispose
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Dispose
+  name: Dispose
+  nameWithType: NativeList<T>.Dispose
+  fullName: NativeCollections.NativeList<T>.Dispose
+  nameWithType.vb: NativeList(Of T).Dispose
+  fullName.vb: NativeCollections.NativeList(Of T).Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeList`1.AsSpan*
+  commentId: Overload:NativeCollections.NativeList`1.AsSpan
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_AsSpan
+  name: AsSpan
+  nameWithType: NativeList<T>.AsSpan
+  fullName: NativeCollections.NativeList<T>.AsSpan
+  nameWithType.vb: NativeList(Of T).AsSpan
+  fullName.vb: NativeCollections.NativeList(Of T).AsSpan
+- uid: NativeCollections.NativeList`1.AsReadOnlySpan*
+  commentId: Overload:NativeCollections.NativeList`1.AsReadOnlySpan
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_AsReadOnlySpan
+  name: AsReadOnlySpan
+  nameWithType: NativeList<T>.AsReadOnlySpan
+  fullName: NativeCollections.NativeList<T>.AsReadOnlySpan
+  nameWithType.vb: NativeList(Of T).AsReadOnlySpan
+  fullName.vb: NativeCollections.NativeList(Of T).AsReadOnlySpan
+- uid: NativeCollections.NativeList`1.Clear*
+  commentId: Overload:NativeCollections.NativeList`1.Clear
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Clear
+  name: Clear
+  nameWithType: NativeList<T>.Clear
+  fullName: NativeCollections.NativeList<T>.Clear
+  nameWithType.vb: NativeList(Of T).Clear
+  fullName.vb: NativeCollections.NativeList(Of T).Clear
+- uid: NativeCollections.NativeList`1.Add*
+  commentId: Overload:NativeCollections.NativeList`1.Add
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Add__0__
+  name: Add
+  nameWithType: NativeList<T>.Add
+  fullName: NativeCollections.NativeList<T>.Add
+  nameWithType.vb: NativeList(Of T).Add
+  fullName.vb: NativeCollections.NativeList(Of T).Add
+- uid: NativeCollections.NativeList`1.AddRange*
+  commentId: Overload:NativeCollections.NativeList`1.AddRange
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_AddRange_NativeCollections_NativeList__0___
+  name: AddRange
+  nameWithType: NativeList<T>.AddRange
+  fullName: NativeCollections.NativeList<T>.AddRange
+  nameWithType.vb: NativeList(Of T).AddRange
+  fullName.vb: NativeCollections.NativeList(Of T).AddRange
+- uid: NativeCollections.NativeList`1.Insert*
+  commentId: Overload:NativeCollections.NativeList`1.Insert
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Insert_System_Int32__0__
+  name: Insert
+  nameWithType: NativeList<T>.Insert
+  fullName: NativeCollections.NativeList<T>.Insert
+  nameWithType.vb: NativeList(Of T).Insert
+  fullName.vb: NativeCollections.NativeList(Of T).Insert
+- uid: NativeCollections.NativeList`1.InsertRange*
+  commentId: Overload:NativeCollections.NativeList`1.InsertRange
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_InsertRange_System_Int32_NativeCollections_NativeList__0___
+  name: InsertRange
+  nameWithType: NativeList<T>.InsertRange
+  fullName: NativeCollections.NativeList<T>.InsertRange
+  nameWithType.vb: NativeList(Of T).InsertRange
+  fullName.vb: NativeCollections.NativeList(Of T).InsertRange
+- uid: NativeCollections.NativeList`1.Remove*
+  commentId: Overload:NativeCollections.NativeList`1.Remove
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Remove__0__
+  name: Remove
+  nameWithType: NativeList<T>.Remove
+  fullName: NativeCollections.NativeList<T>.Remove
+  nameWithType.vb: NativeList(Of T).Remove
+  fullName.vb: NativeCollections.NativeList(Of T).Remove
+- uid: NativeCollections.NativeList`1.RemoveAt*
+  commentId: Overload:NativeCollections.NativeList`1.RemoveAt
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_RemoveAt_System_Int32_
+  name: RemoveAt
+  nameWithType: NativeList<T>.RemoveAt
+  fullName: NativeCollections.NativeList<T>.RemoveAt
+  nameWithType.vb: NativeList(Of T).RemoveAt
+  fullName.vb: NativeCollections.NativeList(Of T).RemoveAt
+- uid: NativeCollections.NativeList`1.RemoveRange*
+  commentId: Overload:NativeCollections.NativeList`1.RemoveRange
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_RemoveRange_System_Int32_System_Int32_
+  name: RemoveRange
+  nameWithType: NativeList<T>.RemoveRange
+  fullName: NativeCollections.NativeList<T>.RemoveRange
+  nameWithType.vb: NativeList(Of T).RemoveRange
+  fullName.vb: NativeCollections.NativeList(Of T).RemoveRange
+- uid: NativeCollections.NativeList`1.Reverse*
+  commentId: Overload:NativeCollections.NativeList`1.Reverse
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Reverse
+  name: Reverse
+  nameWithType: NativeList<T>.Reverse
+  fullName: NativeCollections.NativeList<T>.Reverse
+  nameWithType.vb: NativeList(Of T).Reverse
+  fullName.vb: NativeCollections.NativeList(Of T).Reverse
+- uid: NativeCollections.NativeList`1.Contains*
+  commentId: Overload:NativeCollections.NativeList`1.Contains
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Contains__0__
+  name: Contains
+  nameWithType: NativeList<T>.Contains
+  fullName: NativeCollections.NativeList<T>.Contains
+  nameWithType.vb: NativeList(Of T).Contains
+  fullName.vb: NativeCollections.NativeList(Of T).Contains
+- uid: NativeCollections.NativeList`1.EnsureCapacity*
+  commentId: Overload:NativeCollections.NativeList`1.EnsureCapacity
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_EnsureCapacity_System_Int32_
+  name: EnsureCapacity
+  nameWithType: NativeList<T>.EnsureCapacity
+  fullName: NativeCollections.NativeList<T>.EnsureCapacity
+  nameWithType.vb: NativeList(Of T).EnsureCapacity
+  fullName.vb: NativeCollections.NativeList(Of T).EnsureCapacity
+- uid: NativeCollections.NativeList`1.TrimExcess*
+  commentId: Overload:NativeCollections.NativeList`1.TrimExcess
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_TrimExcess
+  name: TrimExcess
+  nameWithType: NativeList<T>.TrimExcess
+  fullName: NativeCollections.NativeList<T>.TrimExcess
+  nameWithType.vb: NativeList(Of T).TrimExcess
+  fullName.vb: NativeCollections.NativeList(Of T).TrimExcess
+- uid: NativeCollections.NativeList`1.IndexOf*
+  commentId: Overload:NativeCollections.NativeList`1.IndexOf
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_IndexOf__0__
+  name: IndexOf
+  nameWithType: NativeList<T>.IndexOf
+  fullName: NativeCollections.NativeList<T>.IndexOf
+  nameWithType.vb: NativeList(Of T).IndexOf
+  fullName.vb: NativeCollections.NativeList(Of T).IndexOf
+- uid: NativeCollections.NativeList`1.LastIndexOf*
+  commentId: Overload:NativeCollections.NativeList`1.LastIndexOf
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_LastIndexOf__0__
+  name: LastIndexOf
+  nameWithType: NativeList<T>.LastIndexOf
+  fullName: NativeCollections.NativeList<T>.LastIndexOf
+  nameWithType.vb: NativeList(Of T).LastIndexOf
+  fullName.vb: NativeCollections.NativeList(Of T).LastIndexOf
+- uid: NativeCollections.NativeList`1.Empty*
+  commentId: Overload:NativeCollections.NativeList`1.Empty
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_Empty
+  name: Empty
+  nameWithType: NativeList<T>.Empty
+  fullName: NativeCollections.NativeList<T>.Empty
+  nameWithType.vb: NativeList(Of T).Empty
+  fullName.vb: NativeCollections.NativeList(Of T).Empty
+- uid: NativeCollections.NativeList`1.GetEnumerator*
+  commentId: Overload:NativeCollections.NativeList`1.GetEnumerator
+  href: NativeCollections.NativeList-1.html#NativeCollections_NativeList_1_GetEnumerator
+  name: GetEnumerator
+  nameWithType: NativeList<T>.GetEnumerator
+  fullName: NativeCollections.NativeList<T>.GetEnumerator
+  nameWithType.vb: NativeList(Of T).GetEnumerator
+  fullName.vb: NativeCollections.NativeList(Of T).GetEnumerator
+- uid: NativeCollections.NativeList`1.Enumerator
+  commentId: T:NativeCollections.NativeList`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeList-1.html
+  name: NativeList<T>.Enumerator
+  nameWithType: NativeList<T>.Enumerator
+  fullName: NativeCollections.NativeList<T>.Enumerator
+  nameWithType.vb: NativeList(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeList(Of T).Enumerator
+  name.vb: NativeList(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeList`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeList-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeList`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeList-1.Enumerator.html

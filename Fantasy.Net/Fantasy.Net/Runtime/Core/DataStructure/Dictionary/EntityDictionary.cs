@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Fantasy.Pool;
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Dictionary
 {
     /// <summary>
     /// 提供一个带资源释放功能的实体字典类，支持使用对象池管理。

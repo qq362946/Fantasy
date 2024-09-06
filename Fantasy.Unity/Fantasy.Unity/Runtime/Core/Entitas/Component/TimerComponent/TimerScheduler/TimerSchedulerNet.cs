@@ -1,10 +1,17 @@
 using System;
 using System.Collections.Generic;
+using Fantasy.Async;
+using Fantasy.DataStructure.Collection;
+using Fantasy.Helper;
+
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 
-namespace Fantasy
+namespace Fantasy.Timer
 {
+    /// <summary>
+    /// 基于系统事件的任务调度系统
+    /// </summary>
     public sealed class TimerSchedulerNet
     {
         private readonly Scene _scene;
@@ -15,6 +22,10 @@ namespace Fantasy
         private readonly Dictionary<long, TimerAction> _timerActions = new Dictionary<long, TimerAction>();
         private readonly SortedOneToManyList<long, long> _timeId = new(); // 时间与计时器ID的有序一对多列表
         private long GetId => ++_idGenerator;
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="scene">当前的Scene</param>
         public TimerSchedulerNet(Scene scene)
         {
             _scene = scene;
@@ -25,6 +36,9 @@ namespace Fantasy
             return TimeHelper.Now;
         }
         
+        /// <summary>
+        /// 驱动方法，只有调用这个方法任务系统才会正常运转。
+        /// </summary>
         public void Update()
         {
             if (_timeId.Count == 0)

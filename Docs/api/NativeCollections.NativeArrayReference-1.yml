@@ -1,0 +1,1622 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeArrayReference`1
+  commentId: T:NativeCollections.NativeArrayReference`1
+  id: NativeArrayReference`1
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeArrayReference`1.#ctor(System.Int32)
+  - NativeCollections.NativeArrayReference`1.#ctor(System.Int32,System.Runtime.InteropServices.GCHandleType)
+  - NativeCollections.NativeArrayReference`1.#ctor(`0[])
+  - NativeCollections.NativeArrayReference`1.#ctor(`0[],System.Runtime.InteropServices.GCHandleType)
+  - NativeCollections.NativeArrayReference`1.Array
+  - NativeCollections.NativeArrayReference`1.Dispose
+  - NativeCollections.NativeArrayReference`1.Empty
+  - NativeCollections.NativeArrayReference`1.Equals(NativeCollections.NativeArrayReference{`0})
+  - NativeCollections.NativeArrayReference`1.Equals(System.Object)
+  - NativeCollections.NativeArrayReference`1.GetEnumerator
+  - NativeCollections.NativeArrayReference`1.GetHashCode
+  - NativeCollections.NativeArrayReference`1.IsCreated
+  - NativeCollections.NativeArrayReference`1.IsEmpty
+  - NativeCollections.NativeArrayReference`1.Item(System.Int32)
+  - NativeCollections.NativeArrayReference`1.Item(System.UInt32)
+  - NativeCollections.NativeArrayReference`1.Length
+  - NativeCollections.NativeArrayReference`1.ToString
+  - NativeCollections.NativeArrayReference`1.op_Equality(NativeCollections.NativeArrayReference{`0},NativeCollections.NativeArrayReference{`0})
+  - NativeCollections.NativeArrayReference`1.op_Inequality(NativeCollections.NativeArrayReference{`0},NativeCollections.NativeArrayReference{`0})
+  langs:
+  - csharp
+  - vb
+  name: NativeArrayReference<T>
+  nameWithType: NativeArrayReference<T>
+  fullName: NativeCollections.NativeArrayReference<T>
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeArrayReference
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 25
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native array reference
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public struct NativeArrayReference<T> : IDisposable, IEquatable<NativeArrayReference<T>>
+    typeParameters:
+    - id: T
+      description: Type
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeArrayReference(Of T) Implements IDisposable, IEquatable(Of NativeArrayReference(Of T))
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeArrayReference`1}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeArrayReference`1.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+  nameWithType.vb: NativeArrayReference(Of T)
+  fullName.vb: NativeCollections.NativeArrayReference(Of T)
+  name.vb: NativeArrayReference(Of T)
+- uid: NativeCollections.NativeArrayReference`1.#ctor(System.Int32)
+  commentId: M:NativeCollections.NativeArrayReference`1.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: NativeArrayReference(int)
+  nameWithType: NativeArrayReference<T>.NativeArrayReference(int)
+  fullName: NativeCollections.NativeArrayReference<T>.NativeArrayReference(int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 42
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeArrayReference(int length)
+    parameters:
+    - id: length
+      type: System.Int32
+      description: Length
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(length As Integer)
+  overload: NativeCollections.NativeArrayReference`1.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayReference(Of T).New(Integer)
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).New(Integer)
+  name.vb: New(Integer)
+- uid: NativeCollections.NativeArrayReference`1.#ctor(System.Int32,System.Runtime.InteropServices.GCHandleType)
+  commentId: M:NativeCollections.NativeArrayReference`1.#ctor(System.Int32,System.Runtime.InteropServices.GCHandleType)
+  id: '#ctor(System.Int32,System.Runtime.InteropServices.GCHandleType)'
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: NativeArrayReference(int, GCHandleType)
+  nameWithType: NativeArrayReference<T>.NativeArrayReference(int, GCHandleType)
+  fullName: NativeCollections.NativeArrayReference<T>.NativeArrayReference(int, System.Runtime.InteropServices.GCHandleType)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 56
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeArrayReference(int length, GCHandleType type)
+    parameters:
+    - id: length
+      type: System.Int32
+      description: Length
+    - id: type
+      type: System.Runtime.InteropServices.GCHandleType
+      description: GCHandle type
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(length As Integer, type As GCHandleType)
+  overload: NativeCollections.NativeArrayReference`1.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayReference(Of T).New(Integer, GCHandleType)
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).New(Integer, System.Runtime.InteropServices.GCHandleType)
+  name.vb: New(Integer, GCHandleType)
+- uid: NativeCollections.NativeArrayReference`1.#ctor(`0[])
+  commentId: M:NativeCollections.NativeArrayReference`1.#ctor(`0[])
+  id: '#ctor(`0[])'
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: NativeArrayReference(T[])
+  nameWithType: NativeArrayReference<T>.NativeArrayReference(T[])
+  fullName: NativeCollections.NativeArrayReference<T>.NativeArrayReference(T[])
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 69
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeArrayReference(T[] array)
+    parameters:
+    - id: array
+      type: '{T}[]'
+      description: Array
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(array As T())
+  overload: NativeCollections.NativeArrayReference`1.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayReference(Of T).New(T())
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).New(T())
+  name.vb: New(T())
+- uid: NativeCollections.NativeArrayReference`1.#ctor(`0[],System.Runtime.InteropServices.GCHandleType)
+  commentId: M:NativeCollections.NativeArrayReference`1.#ctor(`0[],System.Runtime.InteropServices.GCHandleType)
+  id: '#ctor(`0[],System.Runtime.InteropServices.GCHandleType)'
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: NativeArrayReference(T[], GCHandleType)
+  nameWithType: NativeArrayReference<T>.NativeArrayReference(T[], GCHandleType)
+  fullName: NativeCollections.NativeArrayReference<T>.NativeArrayReference(T[], System.Runtime.InteropServices.GCHandleType)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 83
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeArrayReference(T[] array, GCHandleType type)
+    parameters:
+    - id: array
+      type: '{T}[]'
+      description: Array
+    - id: type
+      type: System.Runtime.InteropServices.GCHandleType
+      description: GCHandle type
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(array As T(), type As GCHandleType)
+  overload: NativeCollections.NativeArrayReference`1.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayReference(Of T).New(T(), GCHandleType)
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).New(T(), System.Runtime.InteropServices.GCHandleType)
+  name.vb: New(T(), GCHandleType)
+- uid: NativeCollections.NativeArrayReference`1.IsCreated
+  commentId: P:NativeCollections.NativeArrayReference`1.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeArrayReference<T>.IsCreated
+  fullName: NativeCollections.NativeArrayReference<T>.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 95
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeArrayReference`1.IsCreated*
+  nameWithType.vb: NativeArrayReference(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).IsCreated
+- uid: NativeCollections.NativeArrayReference`1.IsEmpty
+  commentId: P:NativeCollections.NativeArrayReference`1.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativeArrayReference<T>.IsEmpty
+  fullName: NativeCollections.NativeArrayReference<T>.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 100
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is empty
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativeArrayReference`1.IsEmpty*
+  nameWithType.vb: NativeArrayReference(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).IsEmpty
+- uid: NativeCollections.NativeArrayReference`1.Item(System.Int32)
+  commentId: P:NativeCollections.NativeArrayReference`1.Item(System.Int32)
+  id: Item(System.Int32)
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: this[int]
+  nameWithType: NativeArrayReference<T>.this[int]
+  fullName: NativeCollections.NativeArrayReference<T>.this[int]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 106
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get reference
+  example: []
+  syntax:
+    content: public ref T this[int index] { get; }
+    parameters:
+    - id: index
+      type: System.Int32
+      description: Index
+    return:
+      type: '{T}'
+    content.vb: Public ReadOnly Default ByRef Property this[](index As Integer) As T
+  overload: NativeCollections.NativeArrayReference`1.Item*
+  nameWithType.vb: NativeArrayReference(Of T).this[](Integer)
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).this[](Integer)
+  name.vb: this[](Integer)
+- uid: NativeCollections.NativeArrayReference`1.Item(System.UInt32)
+  commentId: P:NativeCollections.NativeArrayReference`1.Item(System.UInt32)
+  id: Item(System.UInt32)
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: this[uint]
+  nameWithType: NativeArrayReference<T>.this[uint]
+  fullName: NativeCollections.NativeArrayReference<T>.this[uint]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 116
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get reference
+  example: []
+  syntax:
+    content: public ref T this[uint index] { get; }
+    parameters:
+    - id: index
+      type: System.UInt32
+      description: Index
+    return:
+      type: '{T}'
+    content.vb: Public ReadOnly Default ByRef Property this[](index As UInteger) As T
+  overload: NativeCollections.NativeArrayReference`1.Item*
+  nameWithType.vb: NativeArrayReference(Of T).this[](UInteger)
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).this[](UInteger)
+  name.vb: this[](UInteger)
+- uid: NativeCollections.NativeArrayReference`1.Array
+  commentId: P:NativeCollections.NativeArrayReference`1.Array
+  id: Array
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: Array
+  nameWithType: NativeArrayReference<T>.Array
+  fullName: NativeCollections.NativeArrayReference<T>.Array
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Array
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 125
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Array
+  example: []
+  syntax:
+    content: public T[] Array { get; }
+    parameters: []
+    return:
+      type: '{T}[]'
+    content.vb: Public ReadOnly Property Array As T()
+  overload: NativeCollections.NativeArrayReference`1.Array*
+  nameWithType.vb: NativeArrayReference(Of T).Array
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Array
+- uid: NativeCollections.NativeArrayReference`1.Length
+  commentId: P:NativeCollections.NativeArrayReference`1.Length
+  id: Length
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: Length
+  nameWithType: NativeArrayReference<T>.Length
+  fullName: NativeCollections.NativeArrayReference<T>.Length
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Length
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 134
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Length
+  example: []
+  syntax:
+    content: public int Length { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Length As Integer
+  overload: NativeCollections.NativeArrayReference`1.Length*
+  nameWithType.vb: NativeArrayReference(Of T).Length
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Length
+- uid: NativeCollections.NativeArrayReference`1.Equals(NativeCollections.NativeArrayReference{`0})
+  commentId: M:NativeCollections.NativeArrayReference`1.Equals(NativeCollections.NativeArrayReference{`0})
+  id: Equals(NativeCollections.NativeArrayReference{`0})
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeArrayReference<T>)
+  nameWithType: NativeArrayReference<T>.Equals(NativeArrayReference<T>)
+  fullName: NativeCollections.NativeArrayReference<T>.Equals(NativeCollections.NativeArrayReference<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 141
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeArrayReference<T> other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeArrayReference`1
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeArrayReference(Of T)) As Boolean
+  overload: NativeCollections.NativeArrayReference`1.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeArrayReference`1}.Equals(NativeCollections.NativeArrayReference{{T}})
+  nameWithType.vb: NativeArrayReference(Of T).Equals(NativeArrayReference(Of T))
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Equals(NativeCollections.NativeArrayReference(Of T))
+  name.vb: Equals(NativeArrayReference(Of T))
+- uid: NativeCollections.NativeArrayReference`1.Equals(System.Object)
+  commentId: M:NativeCollections.NativeArrayReference`1.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeArrayReference<T>.Equals(object?)
+  fullName: NativeCollections.NativeArrayReference<T>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 148
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeArrayReference`1.Equals*
+  nameWithType.vb: NativeArrayReference(Of T).Equals(Object)
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeArrayReference`1.GetHashCode
+  commentId: M:NativeCollections.NativeArrayReference`1.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeArrayReference<T>.GetHashCode()
+  fullName: NativeCollections.NativeArrayReference<T>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 154
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeArrayReference`1.GetHashCode*
+  nameWithType.vb: NativeArrayReference(Of T).GetHashCode()
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).GetHashCode()
+- uid: NativeCollections.NativeArrayReference`1.ToString
+  commentId: M:NativeCollections.NativeArrayReference`1.ToString
+  id: ToString
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeArrayReference<T>.ToString()
+  fullName: NativeCollections.NativeArrayReference<T>.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 160
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeArrayReference`1.ToString*
+  nameWithType.vb: NativeArrayReference(Of T).ToString()
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).ToString()
+- uid: NativeCollections.NativeArrayReference`1.op_Equality(NativeCollections.NativeArrayReference{`0},NativeCollections.NativeArrayReference{`0})
+  commentId: M:NativeCollections.NativeArrayReference`1.op_Equality(NativeCollections.NativeArrayReference{`0},NativeCollections.NativeArrayReference{`0})
+  id: op_Equality(NativeCollections.NativeArrayReference{`0},NativeCollections.NativeArrayReference{`0})
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeArrayReference<T>, NativeArrayReference<T>)
+  nameWithType: NativeArrayReference<T>.operator ==(NativeArrayReference<T>, NativeArrayReference<T>)
+  fullName: NativeCollections.NativeArrayReference<T>.operator ==(NativeCollections.NativeArrayReference<T>, NativeCollections.NativeArrayReference<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 168
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeArrayReference<T> left, NativeArrayReference<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeArrayReference`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeArrayReference`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeArrayReference(Of T), right As NativeArrayReference(Of T)) As Boolean
+  overload: NativeCollections.NativeArrayReference`1.op_Equality*
+  nameWithType.vb: NativeArrayReference(Of T).=(NativeArrayReference(Of T), NativeArrayReference(Of T))
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).=(NativeCollections.NativeArrayReference(Of T), NativeCollections.NativeArrayReference(Of T))
+  name.vb: =(NativeArrayReference(Of T), NativeArrayReference(Of T))
+- uid: NativeCollections.NativeArrayReference`1.op_Inequality(NativeCollections.NativeArrayReference{`0},NativeCollections.NativeArrayReference{`0})
+  commentId: M:NativeCollections.NativeArrayReference`1.op_Inequality(NativeCollections.NativeArrayReference{`0},NativeCollections.NativeArrayReference{`0})
+  id: op_Inequality(NativeCollections.NativeArrayReference{`0},NativeCollections.NativeArrayReference{`0})
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeArrayReference<T>, NativeArrayReference<T>)
+  nameWithType: NativeArrayReference<T>.operator !=(NativeArrayReference<T>, NativeArrayReference<T>)
+  fullName: NativeCollections.NativeArrayReference<T>.operator !=(NativeCollections.NativeArrayReference<T>, NativeCollections.NativeArrayReference<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 176
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeArrayReference<T> left, NativeArrayReference<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeArrayReference`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeArrayReference`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeArrayReference(Of T), right As NativeArrayReference(Of T)) As Boolean
+  overload: NativeCollections.NativeArrayReference`1.op_Inequality*
+  nameWithType.vb: NativeArrayReference(Of T).<>(NativeArrayReference(Of T), NativeArrayReference(Of T))
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).<>(NativeCollections.NativeArrayReference(Of T), NativeCollections.NativeArrayReference(Of T))
+  name.vb: <>(NativeArrayReference(Of T), NativeArrayReference(Of T))
+- uid: NativeCollections.NativeArrayReference`1.Dispose
+  commentId: M:NativeCollections.NativeArrayReference`1.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeArrayReference<T>.Dispose()
+  fullName: NativeCollections.NativeArrayReference<T>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 181
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeArrayReference`1.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayReference(Of T).Dispose()
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Dispose()
+- uid: NativeCollections.NativeArrayReference`1.Empty
+  commentId: P:NativeCollections.NativeArrayReference`1.Empty
+  id: Empty
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeArrayReference<T>.Empty
+  fullName: NativeCollections.NativeArrayReference<T>.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 192
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeArrayReference<T> Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeArrayReference`1
+    content.vb: Public Shared ReadOnly Property Empty As NativeArrayReference(Of T)
+  overload: NativeCollections.NativeArrayReference`1.Empty*
+  nameWithType.vb: NativeArrayReference(Of T).Empty
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Empty
+- uid: NativeCollections.NativeArrayReference`1.GetEnumerator
+  commentId: M:NativeCollections.NativeArrayReference`1.GetEnumerator
+  id: GetEnumerator
+  parent: NativeCollections.NativeArrayReference`1
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: NativeArrayReference<T>.GetEnumerator()
+  fullName: NativeCollections.NativeArrayReference<T>.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetEnumerator
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayReference.cs
+    startLine: 198
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get enumerator
+  example: []
+  syntax:
+    content: public NativeArrayReference<T>.Enumerator GetEnumerator()
+    return:
+      type: NativeCollections.NativeArrayReference`1.Enumerator
+      description: Enumerator
+    content.vb: Public Function GetEnumerator() As NativeArrayReference(Of T).Enumerator
+  overload: NativeCollections.NativeArrayReference`1.GetEnumerator*
+  nameWithType.vb: NativeArrayReference(Of T).GetEnumerator()
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).GetEnumerator()
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeArrayReference`1}
+  commentId: T:System.IEquatable{NativeCollections.NativeArrayReference`1}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeArrayReference<T>>
+  nameWithType: IEquatable<NativeArrayReference<T>>
+  fullName: System.IEquatable<NativeCollections.NativeArrayReference<T>>
+  nameWithType.vb: IEquatable(Of NativeArrayReference(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeArrayReference(Of T))
+  name.vb: IEquatable(Of NativeArrayReference(Of T))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeArrayReference`1.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeArrayReference<T>>(NativeArrayReference<T>)
+  nameWithType: JsonHelper.ToJson<NativeArrayReference<T>>(NativeArrayReference<T>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeArrayReference<T>>(NativeCollections.NativeArrayReference<T>)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeArrayReference(Of T))(NativeArrayReference(Of T))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeArrayReference(Of T))(NativeCollections.NativeArrayReference(Of T))
+  name.vb: ToJson(Of NativeArrayReference(Of T))(NativeArrayReference(Of T))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeArrayReference{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeArrayReference{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeArrayReference`1.#ctor*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.#ctor
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1__ctor_System_Int32_
+  name: NativeArrayReference
+  nameWithType: NativeArrayReference<T>.NativeArrayReference
+  fullName: NativeCollections.NativeArrayReference<T>.NativeArrayReference
+  nameWithType.vb: NativeArrayReference(Of T).New
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Runtime.InteropServices.GCHandleType
+  commentId: T:System.Runtime.InteropServices.GCHandleType
+  parent: System.Runtime.InteropServices
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.gchandletype
+  name: GCHandleType
+  nameWithType: GCHandleType
+  fullName: System.Runtime.InteropServices.GCHandleType
+- uid: System.Runtime.InteropServices
+  commentId: N:System.Runtime.InteropServices
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Runtime.InteropServices
+  nameWithType: System.Runtime.InteropServices
+  fullName: System.Runtime.InteropServices
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Runtime
+    name: Runtime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime
+  - name: .
+  - uid: System.Runtime.InteropServices
+    name: InteropServices
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.interopservices
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Runtime
+    name: Runtime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime
+  - name: .
+  - uid: System.Runtime.InteropServices
+    name: InteropServices
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.interopservices
+- uid: '{T}[]'
+  isExternal: true
+  name: T[]
+  nameWithType: T[]
+  fullName: T[]
+  nameWithType.vb: T()
+  fullName.vb: T()
+  name.vb: T()
+  spec.csharp:
+  - name: T
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - name: T
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeArrayReference`1.IsCreated*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.IsCreated
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_IsCreated
+  name: IsCreated
+  nameWithType: NativeArrayReference<T>.IsCreated
+  fullName: NativeCollections.NativeArrayReference<T>.IsCreated
+  nameWithType.vb: NativeArrayReference(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeArrayReference`1.IsEmpty*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.IsEmpty
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_IsEmpty
+  name: IsEmpty
+  nameWithType: NativeArrayReference<T>.IsEmpty
+  fullName: NativeCollections.NativeArrayReference<T>.IsEmpty
+  nameWithType.vb: NativeArrayReference(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).IsEmpty
+- uid: NativeCollections.NativeArrayReference`1.Item*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.Item
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_Item_System_Int32_
+  name: this
+  nameWithType: NativeArrayReference<T>.this
+  fullName: NativeCollections.NativeArrayReference<T>.this
+  nameWithType.vb: NativeArrayReference(Of T).this[]
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).this[]
+  name.vb: this[]
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: NativeCollections.NativeArrayReference`1.Array*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.Array
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_Array
+  name: Array
+  nameWithType: NativeArrayReference<T>.Array
+  fullName: NativeCollections.NativeArrayReference<T>.Array
+  nameWithType.vb: NativeArrayReference(Of T).Array
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Array
+- uid: NativeCollections.NativeArrayReference`1.Length*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.Length
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_Length
+  name: Length
+  nameWithType: NativeArrayReference<T>.Length
+  fullName: NativeCollections.NativeArrayReference<T>.Length
+  nameWithType.vb: NativeArrayReference(Of T).Length
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Length
+- uid: NativeCollections.NativeArrayReference`1.Equals*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.Equals
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_Equals_NativeCollections_NativeArrayReference__0__
+  name: Equals
+  nameWithType: NativeArrayReference<T>.Equals
+  fullName: NativeCollections.NativeArrayReference<T>.Equals
+  nameWithType.vb: NativeArrayReference(Of T).Equals
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Equals
+- uid: System.IEquatable{NativeCollections.NativeArrayReference`1}.Equals(NativeCollections.NativeArrayReference{{T}})
+  commentId: M:System.IEquatable{NativeCollections.NativeArrayReference`1}.Equals(NativeCollections.NativeArrayReference{`0})
+  parent: System.IEquatable{NativeCollections.NativeArrayReference`1}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeArrayReference<T>)
+  nameWithType: IEquatable<NativeArrayReference<T>>.Equals(NativeArrayReference<T>)
+  fullName: System.IEquatable<NativeCollections.NativeArrayReference<T>>.Equals(NativeCollections.NativeArrayReference<T>)
+  nameWithType.vb: IEquatable(Of NativeArrayReference(Of T)).Equals(NativeArrayReference(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeArrayReference(Of T)).Equals(NativeCollections.NativeArrayReference(Of T))
+  name.vb: Equals(NativeArrayReference(Of T))
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeArrayReference`1}.Equals(NativeCollections.NativeArrayReference{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeArrayReference`1}.Equals(NativeCollections.NativeArrayReference{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: NativeCollections.NativeArrayReference`1
+  commentId: T:NativeCollections.NativeArrayReference`1
+  parent: NativeCollections
+  href: NativeCollections.NativeArrayReference-1.html
+  name: NativeArrayReference<T>
+  nameWithType: NativeArrayReference<T>
+  fullName: NativeCollections.NativeArrayReference<T>
+  nameWithType.vb: NativeArrayReference(Of T)
+  fullName.vb: NativeCollections.NativeArrayReference(Of T)
+  name.vb: NativeArrayReference(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeArrayReference`1.GetHashCode*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.GetHashCode
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeArrayReference<T>.GetHashCode
+  fullName: NativeCollections.NativeArrayReference<T>.GetHashCode
+  nameWithType.vb: NativeArrayReference(Of T).GetHashCode
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeArrayReference`1.ToString*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.ToString
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_ToString
+  name: ToString
+  nameWithType: NativeArrayReference<T>.ToString
+  fullName: NativeCollections.NativeArrayReference<T>.ToString
+  nameWithType.vb: NativeArrayReference(Of T).ToString
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeArrayReference`1.op_Equality*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.op_Equality
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_op_Equality_NativeCollections_NativeArrayReference__0__NativeCollections_NativeArrayReference__0__
+  name: operator ==
+  nameWithType: NativeArrayReference<T>.operator ==
+  fullName: NativeCollections.NativeArrayReference<T>.operator ==
+  nameWithType.vb: NativeArrayReference(Of T).=
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeArrayReference`1.op_Equality*
+    name: ==
+    href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_op_Equality_NativeCollections_NativeArrayReference__0__NativeCollections_NativeArrayReference__0__
+- uid: NativeCollections.NativeArrayReference`1.op_Inequality*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.op_Inequality
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_op_Inequality_NativeCollections_NativeArrayReference__0__NativeCollections_NativeArrayReference__0__
+  name: operator !=
+  nameWithType: NativeArrayReference<T>.operator !=
+  fullName: NativeCollections.NativeArrayReference<T>.operator !=
+  nameWithType.vb: NativeArrayReference(Of T).<>
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeArrayReference`1.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_op_Inequality_NativeCollections_NativeArrayReference__0__NativeCollections_NativeArrayReference__0__
+- uid: NativeCollections.NativeArrayReference`1.Dispose*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.Dispose
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_Dispose
+  name: Dispose
+  nameWithType: NativeArrayReference<T>.Dispose
+  fullName: NativeCollections.NativeArrayReference<T>.Dispose
+  nameWithType.vb: NativeArrayReference(Of T).Dispose
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeArrayReference`1.Empty*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.Empty
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_Empty
+  name: Empty
+  nameWithType: NativeArrayReference<T>.Empty
+  fullName: NativeCollections.NativeArrayReference<T>.Empty
+  nameWithType.vb: NativeArrayReference(Of T).Empty
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Empty
+- uid: NativeCollections.NativeArrayReference`1.GetEnumerator*
+  commentId: Overload:NativeCollections.NativeArrayReference`1.GetEnumerator
+  href: NativeCollections.NativeArrayReference-1.html#NativeCollections_NativeArrayReference_1_GetEnumerator
+  name: GetEnumerator
+  nameWithType: NativeArrayReference<T>.GetEnumerator
+  fullName: NativeCollections.NativeArrayReference<T>.GetEnumerator
+  nameWithType.vb: NativeArrayReference(Of T).GetEnumerator
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).GetEnumerator
+- uid: NativeCollections.NativeArrayReference`1.Enumerator
+  commentId: T:NativeCollections.NativeArrayReference`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeArrayReference-1.html
+  name: NativeArrayReference<T>.Enumerator
+  nameWithType: NativeArrayReference<T>.Enumerator
+  fullName: NativeCollections.NativeArrayReference<T>.Enumerator
+  nameWithType.vb: NativeArrayReference(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Enumerator
+  name.vb: NativeArrayReference(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeArrayReference`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeArrayReference-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeArrayReference`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeArrayReference-1.Enumerator.html

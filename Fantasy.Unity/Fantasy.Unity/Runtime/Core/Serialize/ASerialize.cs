@@ -1,17 +1,19 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
+using Fantasy.Pool;
 #if FANTASY_NET || FANTASY_UNITY
 using MemoryPack;
 #endif
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using ProtoBuf;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-namespace Fantasy
+namespace Fantasy.Serialize
 {
     public abstract class ASerialize : ISupportInitialize, IDisposable
     {

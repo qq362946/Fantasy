@@ -7,7 +7,7 @@ using System.Threading;
 #pragma warning disable CS8604 // Possible null reference argument.
 namespace Fantasy
 {
-    public sealed class ThreadPoolScheduler : ISceneScheduler
+    internal sealed class ThreadPoolScheduler : ISceneScheduler
     {
         private bool _isDisposed;
         private readonly List<Thread> _threads;

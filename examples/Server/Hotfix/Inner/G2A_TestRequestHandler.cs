@@ -1,3 +1,6 @@
+using Fantasy.Async;
+using Fantasy.Network.Interface;
+
 namespace Fantasy;
 
 public class G2A_TestRequestHandler : RouteRPC<Scene, G2A_TestRequest, G2A_TestResponse>
