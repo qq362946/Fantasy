@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using MessagePack;
+using ProtoBuf;
+
 // ReSharper disable CheckNamespace
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 namespace Fantasy
 {
-    [MessagePackObject]
-    public class IntDictionaryConfig
+    [ProtoContract]
+    public partial class IntDictionaryConfig
     {
-        [Key(0)] 
         public Dictionary<int, int> Dic;
         public int this[int key] => GetValue(key);
         public bool TryGetValue(int key, out int value)

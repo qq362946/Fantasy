@@ -9,68 +9,108 @@ namespace Fantasy
     /// </summary>
     public sealed class InnerMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
     {
-        protected override async FTask Handler(Session session, APackInfo packInfo)
+        public override void Scheduler(Session session, APackInfo packInfo)
         {
-            var packInfoProtocolCode = packInfo.ProtocolCode;
+            var protocol = packInfo.OpCodeIdStruct.Protocol;
             
-            switch (packInfo.ProtocolCode)
+            switch (protocol)
             {
-                case >= OpCode.InnerBsonRouteResponse:
-                case >= OpCode.InnerRouteResponse:
-                case >= OpCode.OuterRouteResponse: // 如果Gate服务器、需要转发Addressable协议、所以这里有可能会接收到该类型协议。
+                case OpCodeType.InnerMessage:
+                case OpCodeType.InnerRequest:
                 {
-                    var messageType = MessageDispatcherComponent.GetOpCodeType(packInfoProtocolCode);
-
-                    if (messageType == null)
+                    var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+                    
+                    try
+                    {
+                        if (messageType == null)
+                        {
+                            throw new Exception($"可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+                        
+                        var message = packInfo.Deserialize(messageType);
+                        MessageDispatcherComponent.MessageHandler(session, messageType, message, packInfo.RpcId, packInfo.ProtocolCode);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error($"ANetworkMessageScheduler OuterResponse error messageProtocolCode:{packInfo.ProtocolCode} messageType:{messageType} SessionId {session.Id} IsDispose {session.IsDisposed} {e}");
+                    }
+                    finally
                     {
                         packInfo.Dispose();
-                        throw new Exception($"InnerMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfoProtocolCode}");
-                    }
-
-                    using (packInfo)
-                    {
-                        var rpcId = packInfo.RpcId;
-                        var response = (IResponse)packInfo.Deserialize(messageType);
-                        NetworkMessagingComponent.ResponseHandler(rpcId, response);
                     }
                     
                     return;
                 }
-                case > OpCode.InnerBsonRouteMessage:
+                case OpCodeType.InnerResponse:
+                case OpCodeType.InnerRouteResponse:
+                case OpCodeType.InnerAddressableResponse:
+                case OpCodeType.OuterAddressableResponse:
+                case OpCodeType.OuterCustomRouteResponse:
                 {
-                    var messageType = MessageDispatcherComponent.GetOpCodeType(packInfoProtocolCode);
-
-                    if (messageType == null)
-                    {
-                        packInfo.Dispose();
-                        throw new Exception($"InnerMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfoProtocolCode}");
-                    }
-
                     using (packInfo)
                     {
-                        RouteMessageHandler(session, messageType, packInfo, OpCode.InnerBsonRouteRequest);
+                        var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+                        
+                        if (messageType == null)
+                        {
+                            throw new Exception($"可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+                        
+                        NetworkMessagingComponent.ResponseHandler(packInfo.RpcId, (IResponse)packInfo.Deserialize(messageType));
                     }
                     
                     return;
                 }
-                case > OpCode.InnerRouteMessage:
+                case OpCodeType.InnerRouteMessage:
+                case OpCodeType.InnerAddressableMessage:
                 {
-                    var messageType = MessageDispatcherComponent.GetOpCodeType(packInfoProtocolCode);
-
-                    if (messageType == null)
-                    {
-                        packInfo.Dispose();
-                        throw new Exception($"InnerMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfoProtocolCode}");
-                    }
-
                     using (packInfo)
                     {
-                        RouteMessageHandler(session, messageType, packInfo, OpCode.InnerRouteRequest);
+                        var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+
+                        if (messageType == null)
+                        {
+                            throw new Exception($"InnerMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+
+                        if (!Scene.TryGetEntity(packInfo.RouteId, out var entity))
+                        {
+                            throw new Exception($"The Entity associated with RouteId = {packInfo.RouteId} was not found! messageType = {messageType.FullName}");
+                        }
+
+                        var obj = packInfo.Deserialize(messageType);
+                        Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId).Coroutine();
                     }
-                    
+
                     return;
                 }
-                case > OpCode.OuterRouteMessage:
+                case OpCodeType.InnerRouteRequest:
+                case OpCodeType.InnerAddressableRequest:
+                {
+                    using (packInfo)
+                    {
+                        var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+
+                        if (messageType == null)
+                        {
+                            throw new Exception($"InnerMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+
+                        if (!Scene.TryGetEntity(packInfo.RouteId, out var entity))
+                        {
+                            Scene.MessageDispatcherComponent.FailRouteResponse(session, messageType, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
+                        }
+
+                        var obj = packInfo.Deserialize(messageType);
+                        Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId).Coroutine();
+                    }
+
+                    return;
+                }
+                case OpCodeType.OuterCustomRouteRequest:
+                case OpCodeType.OuterAddressableRequest:
+                case OpCodeType.OuterAddressableMessage:
+                case OpCodeType.OuterCustomRouteMessage:
                 {
                     var entity = Scene.GetEntity(packInfo.RouteId);
 
@@ -78,15 +118,46 @@ namespace Fantasy
                     {
                         case null:
                         {
-                            // 执行到这里是说明Session已经断开了
-                            // 因为这里是其他服务器Send到外网的数据、所以不需要给发送端返回就可以
-                            return;
+                            // 执行到这里有两种情况:
+                            using (packInfo)
+                            {
+                                switch (Scene.SceneConfig.SceneTypeString)
+                                {
+                                    case "Gate":
+                                    {
+                                        // 1、当前是Gate进行，需要转发消息给客户端，但当前这个Session已经断开了。
+                                        // 这种情况不需要做任何处理。
+                                        return;
+                                    }
+                                    default:
+                                    {
+                                        // 2、当前是其他Scene、消息通过Gate发送到这个Scene上面，但这个Scene上面没有这个Entity。
+                                        // 因为这个是Gate转发消息到这个Scene的，如果没有找到Entity要返回错误给Gate。
+                                        // 出现这个情况一定要打印日志，因为出现这个问题肯定是上层逻辑导致的，不应该出现这样的问题。
+                                        var packInfoRouteId = packInfo.RouteId;
+                                        var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+                            
+                                        switch (protocol)
+                                        {
+                                            case OpCodeType.OuterCustomRouteRequest:
+                                            case OpCodeType.OuterAddressableRequest:
+                                            case OpCodeType.OuterAddressableMessage:
+                                            {
+                                                Scene.MessageDispatcherComponent.FailRouteResponse(session, messageType, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
+                                                break;
+                                            }
+                                        }
+                                        
+                                        throw new Exception($"The Entity associated with RouteId = {packInfoRouteId} was not found! messageType = {messageType.FullName}");
+                                    }
+                                }
+                            }
                         }
                         case Session gateSession:
                         {
                             using (packInfo)
                             {
-                                // 这里如果是Session只可能是Gate的Session、如果是的话、肯定是转发Address消息
+                                // 这里如果是Session只可能是Gate的Session、如果是的话、肯定是转发消息
                                 gateSession.Send(packInfo.MemoryStream, packInfo.RpcId);
                             }
                             
@@ -94,18 +165,17 @@ namespace Fantasy
                         }
                         default:
                         {
-                            var messageType = MessageDispatcherComponent.GetOpCodeType(packInfoProtocolCode);
-
-                            if (messageType == null)
-                            {
-                                packInfo.Dispose();
-                                throw new Exception($"InnerMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfoProtocolCode}");
-                            }
-
                             using (packInfo)
                             {
+                                var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+
+                                if (messageType == null)
+                                {
+                                    throw new Exception($"InnerMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                                }
+                            
                                 var obj = packInfo.Deserialize(messageType);
-                                await MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId);
+                                Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId).Coroutine();
                             }
                             
                             return;
@@ -114,28 +184,11 @@ namespace Fantasy
                 }
                 default:
                 {
-                    throw new NotSupportedException($"InnerMessageScheduler Received unsupported message protocolCode:{packInfoProtocolCode}");
+                    var infoProtocolCode = packInfo.ProtocolCode;
+                    packInfo.Dispose();
+                    throw new NotSupportedException($"InnerMessageScheduler Received unsupported message protocolCode:{infoProtocolCode}");
                 }
             }
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void RouteMessageHandler(Session session, Type messageType, APackInfo packInfo, uint protocolCode)
-        {
-            var obj = packInfo.Deserialize(messageType);
-            var entity = Scene.GetEntity(packInfo.RouteId);
-
-            if (entity == null)
-            {
-                if (packInfo.ProtocolCode > protocolCode)
-                {
-                    Scene.MessageDispatcherComponent.FailResponse(session, (IRouteRequest)obj, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
-                }
-
-                return;
-            }
-
-            Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId).Coroutine();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using MessagePack;
+using ProtoBuf;
+
 // ReSharper disable CheckNamespace
 // ReSharper disable CollectionNeverUpdated.Global
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -7,10 +8,9 @@ using MessagePack;
 #pragma warning disable CS8603 // Possible null reference return.
 namespace Fantasy
 {
-    [MessagePackObject]
-    public sealed class StringDictionaryConfig
+    [ProtoContract]
+    public sealed partial class StringDictionaryConfig
     {
-        [Key(0)]
         public Dictionary<int, string> Dic;
         public string this[int key] => GetValue(key);
         public bool TryGetValue(int key, out string value)

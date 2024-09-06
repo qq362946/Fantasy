@@ -26,10 +26,6 @@ namespace Fantasy
         /// </summary>
         public const int RpcIdLength = sizeof(uint);
         /// <summary>
-        /// RouteTypeOpCode在消息头占用的长度
-        /// </summary>
-        public const int RouteTypeOpCodeLength = sizeof(long);
-        /// <summary>
         /// OuterRPCId所在的位置
         /// </summary>
         public const int OuterPacketRpcIdLocation = PacketLength + ProtocolCodeLength;
@@ -38,17 +34,13 @@ namespace Fantasy
         /// </summary>
         public const int InnerPacketRpcIdLocation = PacketLength + ProtocolCodeLength;
         /// <summary>
-        /// RouteTypeOpCode所在的位置
-        /// </summary>
-        public const int OuterPacketRouteTypeOpCodeLocation = OuterPacketRpcIdLocation + RpcIdLength;
-        /// <summary>
         /// RouteId所在的位置
         /// </summary>
         public const int InnerPacketRouteRouteIdLocation = PacketLength + ProtocolCodeLength + RpcIdLength;
         /// <summary>
-        /// 外网消息头长度（消息体长度在消息头占用的长度 + 协议编号在消息头占用的长度 + RPCId长度 + RouteTypeOpCode长度）
+        /// 外网消息头长度（消息体长度在消息头占用的长度 + 协议编号在消息头占用的长度 + RPCId长度 + RouteId长度）
         /// </summary>
-        public const int OuterPacketHeadLength = PacketLength + ProtocolCodeLength + RpcIdLength + RouteTypeOpCodeLength;
+        public const int OuterPacketHeadLength = PacketLength + ProtocolCodeLength + RpcIdLength + PacketRouteIdLength;
         /// <summary>
         /// 内网消息头长度（消息体长度在消息头占用的长度 + 协议编号在消息头占用的长度 + RPCId长度 + RouteId长度）
         /// </summary>

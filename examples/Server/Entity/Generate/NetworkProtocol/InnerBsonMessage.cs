@@ -1,4 +1,4 @@
-using MessagePack;
+using ProtoBuf;
 using System.Collections.Generic;
 using Fantasy;
 // ReSharper disable InconsistentNaming

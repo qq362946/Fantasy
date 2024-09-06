@@ -34,7 +34,7 @@ namespace Fantasy
 
                     var configFile = GetConfigPath(dataConfig);
                     var bytes = File.ReadAllBytes(configFile);
-                    var data = MessagePackHelper.Deserialize<T>(bytes, 0, bytes.Length);
+                    var data = ProtoBufPackHelper.Deserialize<T>(bytes);
                     ConfigDic[dataConfig] = data;
                     return data;
                 }

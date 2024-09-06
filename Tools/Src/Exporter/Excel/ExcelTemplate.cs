@@ -4,9 +4,10 @@ public static class ExcelTemplate
 {
     public static readonly string Template = """
                                              using System;
-                                             using MessagePack;
+                                             using ProtoBuf;
                                              using Fantasy;
                                              using System.Linq;
+                                             using System.Reflection;
                                              using System.Collections.Generic;
                                              using System.Collections.Concurrent;
                                              // ReSharper disable CollectionNeverUpdated.Global
@@ -19,19 +20,19 @@ public static class ExcelTemplate
                                              
                                              namespace (namespace)
                                              {
-                                                 [MessagePackObject]
-                                                 public sealed partial class (ConfigName)Data : ASerialize, IConfigTable
+                                                 [ProtoContract]
+                                                 public sealed partial class (ConfigName)Data : ASerialize, IConfigTable, IProto
                                                  {
-                                                     [Key(0)]
+                                                     [ProtoMember(1)]
                                                      public List<(ConfigName)> List { get; set; } = new List<(ConfigName)>();
                                              #if FANTASY_NET
-                                                     [IgnoreMember]
+                                                     [ProtoIgnore]
                                                      private readonly ConcurrentDictionary<uint, (ConfigName)> _configs = new ConcurrentDictionary<uint, (ConfigName)>();
                                              #else 
-                                                     [IgnoreMember]
+                                                     [ProtoIgnore]
                                                      private readonly Dictionary<uint, (ConfigName)> _configs = new Dictionary<uint, (ConfigName)>();
                                              #endif
-                                                     private static (ConfigName)Data _instance;
+                                                     private static (ConfigName)Data _instance = null;
                                              
                                                      public static (ConfigName)Data Instance
                                                      {
@@ -86,8 +87,8 @@ public static class ExcelTemplate
                                                      }
                                                  }
                                                  
-                                                 [MessagePackObject]
-                                                 public sealed partial class (ConfigName) : ASerialize
+                                                 [ProtoContract]
+                                                 public sealed partial class (ConfigName) : ASerialize, IProto
                                                  {(Fields)  
                                                  } 
                                              }  

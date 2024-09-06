@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.CodeAnalysis.Analyzers</id>
+    <version>3.3.4</version>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <developmentDependency>true</developmentDependency>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>Icon.png</icon>
+    <projectUrl>https://github.com/dotnet/roslyn-analyzers</projectUrl>
+    <description>Analyzers for consumers of Microsoft.CodeAnalysis NuGet package, i.e. extensions and applications built on top of .NET Compiler Platform (Roslyn). This package is included as a development dependency of Microsoft.CodeAnalysis NuGet package and does not need to be installed separately if you are referencing Microsoft.CodeAnalysis NuGet package.</description>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>Roslyn CodeAnalysis Compiler CSharp VB VisualBasic Diagnostic Analyzers Syntax Semantics</tags>
+    <serviceable>true</serviceable>
+    <repository type="git" url="https://github.com/dotnet/roslyn-analyzers" commit="22ea6422f85b05ca0793cc3b76375487be407f5d" />
+  </metadata>
+</package>

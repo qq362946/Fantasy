@@ -132,14 +132,14 @@ namespace Fantasy
 
         #region Send
 
-        public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
+        public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
         {
             if (IsDisposed)
             {
                 return;
             }
             
-            var buffer = _packetParser.Pack(ref rpcId, ref routeTypeOpCode, ref routeId, memoryStream, message);
+            var buffer = _packetParser.Pack(ref rpcId, ref routeId, memoryStream, message);
             
             if (!_isConnected)
             {
@@ -156,7 +156,6 @@ namespace Fantasy
 #if !UNITY_EDITOR && UNITY_WEBGL
             ReturnMemoryStream(memoryStream);
 #endif
-            
         }
 
         #endregion

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+#pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -37,6 +38,7 @@ namespace Fantasy
         public uint SceneConfigId { get; private set; }
         internal ANetwork InnerNetwork { get; private set; }
         internal ANetwork OuterNetwork { get; private set; }
+        internal SceneConfig SceneConfig => SceneConfigData.Instance.Get(SceneConfigId);
         private readonly Dictionary<uint, ProcessSessionInfo> _processSessionInfos = new Dictionary<uint, ProcessSessionInfo>();
 #endif
         public ThreadSynchronizationContext ThreadSynchronizationContext { get; private set; }
@@ -111,6 +113,10 @@ namespace Fantasy
 
         public override void Dispose()
         {
+            if (IsDisposed)
+            {
+                return;
+            }
 #if FANTASY_NET
             foreach (var (_, innerSession) in _processSessionInfos)
             {
@@ -238,7 +244,16 @@ namespace Fantasy
             }
             Process.AddScene(scene);
             process.AddSceneToProcess(scene);
-            scene.ThreadSynchronizationContext.Post(() => scene.EventComponent.PublishAsync(new OnCreateScene(scene)).Coroutine());
+            scene.ThreadSynchronizationContext.Post(() =>
+            {
+                if (sceneConfig.SceneTypeString == "Addressable")
+                {
+                    // 如果是AddressableScene,自动添加上AddressableManageComponent。
+                    scene.AddComponent<AddressableManageComponent>(); 
+                }
+                
+                scene.EventComponent.PublishAsync(new OnCreateScene(scene)).Coroutine();
+            });
             return scene;
         }
 
@@ -321,6 +336,11 @@ namespace Fantasy
         public Entity GetEntity(long runTimeId)
         {
             return _entities.TryGetValue(runTimeId, out var entity) ? entity : null;
+        }
+
+        public bool TryGetEntity(long runTimeId, out Entity entity)
+        {
+            return _entities.TryGetValue(runTimeId, out entity);
         }
 
         public T GetEntity<T>(long runTimeId) where T : Entity

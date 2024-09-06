@@ -109,7 +109,7 @@ public class KCPServerNetworkChannel : ANetworkServerChannel
         }
     }
     
-    public override void Send(uint rpcId, long routeTypeOpCode, long routeId, MemoryStreamBuffer memoryStream, object message)
+    public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
     {
         if (IsDisposed)
         {
@@ -124,7 +124,7 @@ public class KCPServerNetworkChannel : ANetworkServerChannel
             return;
         }
 
-        var buffer = _packetParser.Pack(ref rpcId, ref routeTypeOpCode, ref routeId, memoryStream, message);
+        var buffer = _packetParser.Pack(ref rpcId, ref routeId, memoryStream, message);
         Kcp.Send(buffer.GetBuffer(), 0, (int)buffer.Length);
         _kcpServerNetwork.ReturnMemoryStream(buffer);
         _kcpServerNetwork.AddUpdateChannel(ChannelId, 0);

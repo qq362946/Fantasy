@@ -1,8 +1,9 @@
 #if FANTASY_NET
 using System;
-using MessagePack;
+using ProtoBuf;
 using Fantasy;
 using System.Linq;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 // ReSharper disable CollectionNeverUpdated.Global
@@ -15,19 +16,19 @@ using System.Collections.Concurrent;
 
 namespace Fantasy
 {
-    [MessagePackObject]
-    public sealed partial class WorldConfigData : ASerialize, IConfigTable
+    [ProtoContract]
+    public sealed partial class WorldConfigData : ASerialize, IConfigTable, IProto
     {
-        [Key(0)]
+        [ProtoMember(1)]
         public List<WorldConfig> List { get; set; } = new List<WorldConfig>();
 #if FANTASY_NET
-        [IgnoreMember]
+        [ProtoIgnore]
         private readonly ConcurrentDictionary<uint, WorldConfig> _configs = new ConcurrentDictionary<uint, WorldConfig>();
 #else 
-        [IgnoreMember]
+        [ProtoIgnore]
         private readonly Dictionary<uint, WorldConfig> _configs = new Dictionary<uint, WorldConfig>();
 #endif
-        private static WorldConfigData _instance;
+        private static WorldConfigData _instance = null;
 
         public static WorldConfigData Instance
         {
@@ -82,18 +83,18 @@ namespace Fantasy
         }
     }
     
-    [MessagePackObject]
-    public sealed partial class WorldConfig : ASerialize
+    [ProtoContract]
+    public sealed partial class WorldConfig : ASerialize, IProto
     {
-		[Key(0)]
+		[ProtoMember(1)]
 		public uint Id { get; set; } // Id
-		[Key(1)]
+		[ProtoMember(2)]
 		public string WorldName { get; set; } // 名称
-		[Key(2)]
+		[ProtoMember(3)]
 		public string DbConnection { get; set; } // 数据库连接字符串
-		[Key(3)]
+		[ProtoMember(4)]
 		public string DbName { get; set; } // 数据库名称
-		[Key(4)]
+		[ProtoMember(5)]
 		public string DbType { get; set; } // 数据库类型  
     } 
 }  

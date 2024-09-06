@@ -1,12 +1,12 @@
 #if FANTASY_NET
-using MessagePack;
+using MemoryPack;
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy;
 
 public sealed partial class SceneConfig
 {
-    [IgnoreMember]
+    [MemoryPackIgnore]
     public long RouteId { get; private set; }
     public override void EndInit()
     {
@@ -17,9 +17,9 @@ public sealed partial class SceneConfig
 
 public sealed partial class SceneConfigData
 {
-    [IgnoreMember]
+    [MemoryPackIgnore]
     private readonly OneToManyList<int, SceneConfig> _sceneConfigBySceneType = new OneToManyList<int, SceneConfig>();
-    [IgnoreMember]
+    [MemoryPackIgnore]
     private readonly OneToManyList<uint, SceneConfig> _sceneConfigByProcess = new OneToManyList<uint, SceneConfig>();
     
     public override void EndInit()

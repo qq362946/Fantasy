@@ -19,7 +19,7 @@ namespace Fantasy
         /// <param name="session">网络会话。</param>
         /// <param name="messageType">消息类型。</param>
         /// <param name="packInfo">消息封包信息。</param>
-        protected override FTask Handler(Session session, APackInfo packInfo)
+        public override void Scheduler(Session session, APackInfo packInfo)
         {
             throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode}");
         }
@@ -28,132 +28,247 @@ namespace Fantasy
 #if FANTASY_NET
     public sealed class OuterMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
     {
-        protected override async FTask Handler(Session session, APackInfo packInfo)
+        private readonly PingResponse _pingResponse = new PingResponse();
+        public override void Scheduler(Session session, APackInfo packInfo)
         {
-            var packInfoProtocolCode = packInfo.ProtocolCode;
+            HandlerAsync(session, packInfo).Coroutine();
+        }
 
-            if (packInfo.ProtocolCode >= OpCode.InnerRouteMessage)
+        private async FTask HandlerAsync(Session session, APackInfo packInfo)
+        {
+            if (session.IsDisposed)
             {
-                packInfo.Dispose();
-                throw new NotSupportedException($"OuterMessageScheduler Received unsupported message protocolCode:{packInfoProtocolCode}");
+                return;
             }
-
-            switch (packInfo.RouteTypeCode)
+            
+            switch (packInfo.OpCodeIdStruct.Protocol)
             {
-                case InnerRouteType.Route:
-                case InnerRouteType.BsonRoute:
+                case OpCodeType.OuterPingRequest:
                 {
-                    break;
-                }
-                case InnerRouteType.Addressable:
-                {
-                    var messageType = MessageDispatcherComponent.GetOpCodeType(packInfoProtocolCode);
-
-                    if (messageType == null)
+                    // 注意心跳目前只有外网才才会有、内网之间不需要心跳。
+                
+                    session.LastReceiveTime = _pingResponse.Now = TimeHelper.Now;
+                
+                    using (packInfo)
                     {
-                        packInfo.Dispose();
-                        throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfoProtocolCode}");
+                        session.Send(_pingResponse, packInfo.RpcId);
                     }
-
-                    var addressableRouteComponent = session.GetComponent<AddressableRouteComponent>();
-
-                    if (addressableRouteComponent == null)
-                    {
-                        packInfo.Dispose();
-                        Log.Error("OuterMessageScheduler error session does not have an AddressableRouteComponent component");
-                        return;
-                    }
-
-                    switch (packInfoProtocolCode)
-                    {
-                        case > OpCode.OuterRouteRequest:
-                        {
-                            using (packInfo)
-                            {
-                                var rpcId = packInfo.RpcId;
-                                var runtimeId = session.RunTimeId;
-                                var response = await addressableRouteComponent.Call(messageType, packInfo);
-                                // session可能已经断开了，所以这里需要判断
-                                if (session.RunTimeId == runtimeId)
-                                {
-                                    session.Send(response, rpcId);
-                                }
-                            }
-                            return;
-                        }
-                        case > OpCode.OuterRouteMessage:
-                        {
-                            using (packInfo)
-                            {
-                                await addressableRouteComponent.Send(messageType, packInfo);
-                            }
-                            return;
-                        }
-                    }
-
+                
                     return;
                 }
-                case > InnerRouteType.CustomRouteType:
+                case OpCodeType.OuterMessage:
+                case OpCodeType.OuterRequest:
                 {
-                    var messageType = MessageDispatcherComponent.GetOpCodeType(packInfoProtocolCode);
-
-                    if (messageType == null)
+                    var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+                    
+                    try
+                    {
+                        if (messageType == null)
+                        {
+                            throw new Exception($"可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+                        
+                        var message = packInfo.Deserialize(messageType);
+                        MessageDispatcherComponent.MessageHandler(session, messageType, message, packInfo.RpcId, packInfo.ProtocolCode);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error($"ANetworkMessageScheduler OuterResponse error messageProtocolCode:{packInfo.ProtocolCode} messageType:{messageType} SessionId {session.Id} IsDispose {session.IsDisposed} {e}");
+                    }
+                    finally
                     {
                         packInfo.Dispose();
-                        throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfoProtocolCode}");
                     }
                     
-                    var routeComponent = session.GetComponent<RouteComponent>();
-
-                    if (routeComponent == null)
+                    return;
+                }
+                case OpCodeType.OuterResponse:
+                {
+                    using (packInfo)
                     {
-                        packInfo.Dispose();
-                        Log.Error("OuterMessageScheduler CustomRouteType session does not have an routeComponent component");
-                        return;
-                    }
-
-                    if (!routeComponent.TryGetRouteId(packInfo.RouteTypeCode, out var routeId))
-                    {
-                        packInfo.Dispose();
-                        Log.Error($"OuterMessageScheduler RouteComponent cannot find RouteId with RouteTypeCode {packInfo.RouteTypeCode}");
-                        return;
-                    }
-
-                    switch (packInfo.ProtocolCode)
-                    {
-                        case > OpCode.OuterRouteRequest:
+                        var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+                    
+                        if (messageType == null)
                         {
-                            using (packInfo)
-                            {
-                                var rpcId = packInfo.RpcId;
-                                var runtimeId = session.RunTimeId;
-                                var response = await NetworkMessagingComponent.CallInnerRoute(routeId, messageType, packInfo);
-                                // session可能已经断开了，所以这里需要判断
-                                if (session.RunTimeId == runtimeId)
-                                {
-                                    session.Send(response, rpcId);
-                                }
-                            }
-
-                            return;
+                            throw new Exception($"可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
-                        case > OpCode.OuterRouteMessage:
+                    
+                        NetworkMessagingComponent.ResponseHandler(packInfo.RpcId, (IResponse)packInfo.Deserialize(messageType));
+                    }
+                    
+                    return;
+                }
+                case OpCodeType.OuterAddressableMessage:
+                {
+                    var packInfoPackInfoId = packInfo.PackInfoId;
+                    
+                    try
+                    {
+                        var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+
+                        if (messageType == null)
                         {
-                            using (packInfo)
-                            {
-                                await NetworkMessagingComponent.SendInnerRoute(routeId, messageType, packInfo);
-                            }
-                            
-                            return;
+                            throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+
+                        var addressableRouteComponent = session.GetComponent<AddressableRouteComponent>();
+
+                        if (addressableRouteComponent == null)
+                        {
+                            throw new Exception("OuterMessageScheduler error session does not have an AddressableRouteComponent component");
+                        }
+
+                        
+                        await addressableRouteComponent.Send(messageType, packInfo);
+                    }
+                    finally
+                    {
+                        if (packInfo.PackInfoId == packInfoPackInfoId)
+                        {
+                            packInfo.Dispose();
                         }
                     }
 
                     return;
                 }
-            }
+                case OpCodeType.OuterAddressableRequest:
+                {
+                    var packInfoPackInfoId = packInfo.PackInfoId;
+                    
+                    try
+                    {
+                        var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
 
-            packInfo.Dispose();
-            throw new NotSupportedException($"OuterMessageScheduler Received unsupported message protocolCode:{packInfoProtocolCode}");
+                        if (messageType == null)
+                        {
+                            throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+
+                        var addressableRouteComponent = session.GetComponent<AddressableRouteComponent>();
+
+                        if (addressableRouteComponent == null)
+                        {
+                            throw new Exception("OuterMessageScheduler error session does not have an AddressableRouteComponent component");
+                        }
+                    
+                        var rpcId = packInfo.RpcId;
+                        var runtimeId = session.RunTimeId;
+                        var response = await addressableRouteComponent.Call(messageType, packInfo);
+                        // session可能已经断开了，所以这里需要判断
+                        if (session.RunTimeId == runtimeId)
+                        {
+                            session.Send(response, rpcId);
+                        }
+                    }
+                    finally
+                    {
+                        if (packInfo.PackInfoId == packInfoPackInfoId)
+                        {
+                            packInfo.Dispose();
+                        }
+                    }
+                    
+                    return;
+                }
+                case OpCodeType.OuterCustomRouteMessage:
+                {
+                    var packInfoProtocolCode = packInfo.ProtocolCode;
+                    var packInfoPackInfoId = packInfo.PackInfoId;
+
+                    try
+                    {
+                        if (!MessageDispatcherComponent.GetCustomRouteType(packInfoProtocolCode, out var routeType))
+                        {
+                            throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+
+                        var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+
+                        if (messageType == null)
+                        {
+                            throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+                    
+                        var routeComponent = session.GetComponent<RouteComponent>();
+
+                        if (routeComponent == null)
+                        {
+                            throw new Exception("OuterMessageScheduler CustomRouteType session does not have an routeComponent component");
+                        }
+
+                        if (!routeComponent.TryGetRouteId(routeType, out var routeId))
+                        {
+                            throw new Exception($"OuterMessageScheduler RouteComponent cannot find RouteId with RouteType {routeType}");
+                        }
+                    
+                        NetworkMessagingComponent.SendInnerRoute(routeId, messageType, packInfo);
+                    }
+                    finally
+                    {
+                        if (packInfo.PackInfoId == packInfoPackInfoId)
+                        {
+                            packInfo.Dispose();
+                        }
+                    }
+                    
+                    return;
+                }
+                case OpCodeType.OuterCustomRouteRequest:
+                {
+                    var packInfoProtocolCode = packInfo.ProtocolCode;
+                    var packInfoPackInfoId = packInfo.PackInfoId;
+
+                    try
+                    {
+                        if (!MessageDispatcherComponent.GetCustomRouteType(packInfoProtocolCode, out var routeType))
+                        {
+                            throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+                        
+                        var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
+
+                        if (messageType == null)
+                        {
+                            throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+                    
+                        var routeComponent = session.GetComponent<RouteComponent>();
+
+                        if (routeComponent == null)
+                        {
+                            throw new Exception("OuterMessageScheduler CustomRouteType session does not have an routeComponent component");
+                        }
+
+                        if (!routeComponent.TryGetRouteId(routeType, out var routeId))
+                        {
+                            throw new Exception($"OuterMessageScheduler RouteComponent cannot find RouteId with RouteType {routeType}");
+                        }
+                    
+                        var rpcId = packInfo.RpcId;
+                        var runtimeId = session.RunTimeId;
+                        var response = await NetworkMessagingComponent.CallInnerRoute(routeId, messageType, packInfo);
+                        // session可能已经断开了，所以这里需要判断
+                        if (session.RunTimeId == runtimeId)
+                        {
+                            session.Send(response, rpcId);
+                        }
+                    }
+                    finally
+                    {
+                        if (packInfo.PackInfoId == packInfoPackInfoId)
+                        {
+                            packInfo.Dispose();
+                        }
+                    }
+
+                    return;
+                }
+                default:
+                {
+                    packInfo.Dispose();
+                    throw new NotSupportedException($"OuterMessageScheduler Received unsupported message protocolCode:{packInfo.ProtocolCode}");
+                }
+            }
         }
     }
 #endif

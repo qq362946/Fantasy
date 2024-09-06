@@ -1,9 +1,13 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
-using MessagePack;
+#if FANTASY_NET || FANTASY_UNITY
+using MemoryPack;
+#endif
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
+using ProtoBuf;
+
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -23,13 +27,17 @@ namespace Fantasy
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreMember]
+        [ProtoIgnore]
+        [MemoryPackIgnore]
         public Scene Scene { get; set; }
 #endif
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreMember]
+        [ProtoIgnore]
+#if FANTASY_NET || FANTASY_UNITY
+        [MemoryPackIgnore]
+#endif
         public bool IsPool { get; set; }
     }
 }

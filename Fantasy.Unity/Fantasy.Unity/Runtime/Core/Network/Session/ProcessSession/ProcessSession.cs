@@ -20,7 +20,7 @@ public sealed class ProcessSession : Session
             return;
         }
 
-        this.Scheduler(message.GetType(), rpcId, routeId, message.OpCode(), message).Coroutine();
+        this.Scheduler(message.GetType(), rpcId, routeId, message.OpCode(), message);
     }
 
     /// <summary>
@@ -36,25 +36,25 @@ public sealed class ProcessSession : Session
             return;
         }
         
-        this.Scheduler(routeMessage.GetType(), rpcId, routeId, routeMessage.OpCode(), routeMessage).Coroutine();
+        this.Scheduler(routeMessage.GetType(), rpcId, routeId, routeMessage.OpCode(), routeMessage);
     }
 
-    public override async FTask Send(uint rpcId, long routeId, Type messageType, APackInfo packInfo)
+    public override void Send(uint rpcId, long routeId, Type messageType, APackInfo packInfo)
     {
         if (IsDisposed)
         {
             return;
         }
 
-        await this.Scheduler(messageType, rpcId, routeId, packInfo);
+        this.Scheduler(messageType, rpcId, routeId, packInfo);
     }
 
-    public override async FTask Send(ProcessPackInfo packInfo, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
+    public override void Send(ProcessPackInfo packInfo, uint rpcId = 0, long routeId = 0)
     {
-        await this.Scheduler(packInfo.MessageType, rpcId, routeId, packInfo);
+        this.Scheduler(packInfo.MessageType, rpcId, routeId, packInfo);
     }
 
-    public override void Send(MemoryStreamBuffer memoryStream, uint rpcId = 0, long routeTypeOpCode = 0, long routeId = 0)
+    public override void Send(MemoryStreamBuffer memoryStream, uint rpcId = 0, long routeId = 0)
     {
         throw new Exception("The use of this method is not supported");
     }

@@ -130,7 +130,7 @@ public sealed class AddressableRouteComponent : Entity
     {
         if (IsDisposed)
         {
-            return MessageDispatcherComponent.CreateResponse(request, InnerErrorCode.ErrNotFoundRoute);
+            return MessageDispatcherComponent.CreateResponse(request.GetType(), InnerErrorCode.ErrNotFoundRoute);
         }
 
         var failCount = 0;
@@ -147,7 +147,7 @@ public sealed class AddressableRouteComponent : Entity
 
                 if (RouteId == 0)
                 {
-                    return MessageDispatcherComponent.CreateResponse(request, InnerErrorCode.ErrNotFoundRoute);
+                    return MessageDispatcherComponent.CreateResponse(request.GetType(), InnerErrorCode.ErrNotFoundRoute);
                 }
 
                 var iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, request);

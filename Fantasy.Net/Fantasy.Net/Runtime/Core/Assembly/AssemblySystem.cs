@@ -230,9 +230,9 @@ namespace Fantasy
         /// </summary>
         public static void Dispose()
         {
-            foreach (var (_, assemblyInfo) in AssemblyList)
+            foreach (var (_, assemblyInfo) in AssemblyList.ToArray())
             {
-                assemblyInfo.Unload();
+                UnLoadAssembly(assemblyInfo.Assembly);
             }
             
             AssemblyList.Clear();

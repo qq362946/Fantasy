@@ -60,58 +60,21 @@ public sealed class InnerPackInfo : APackInfo
             return createInstance();
         }
 
-        switch (ProtocolCode)
+        switch (OpCodeIdStruct.OpCodeProtocolType)
         {
-            case >= OpCode.InnerBsonRouteResponse:
+            case OpCodeProtocolType.ProtoBuf:
+            {
+                obj = ProtoBufPackHelper.Deserialize(messageType, MemoryStream);
+                break;
+            }
+            case OpCodeProtocolType.MemoryPack:
+            {
+                obj = MemoryPackHelper.Deserialize(messageType, MemoryStream);
+                break;
+            }
+            case OpCodeProtocolType.Bson:
             {
                 obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerRouteResponse:
-            {
-                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.OuterRouteResponse:
-            {
-                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerBsonRouteMessage:
-            {
-                obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerRouteMessage:
-            case >= OpCode.OuterRouteMessage:
-            {
-                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerBsonResponse:
-            {
-                obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerResponse:
-            {
-                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.OuterResponse:
-            {
-                MemoryStream.Seek(0, SeekOrigin.Begin);
-                Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
-                return null;
-            }
-            case >= OpCode.InnerBsonMessage:
-            {
-                obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerMessage:
-            {
-                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
                 break;
             }
             default:

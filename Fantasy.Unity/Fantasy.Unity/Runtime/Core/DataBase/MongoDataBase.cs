@@ -673,14 +673,14 @@ public sealed class MongoDataBase : IDateBase
     /// 根据ID和筛选条件删除多个实体对象（加锁）。
     /// </summary>
     /// <typeparam name="T">实体类型。</typeparam>
-    /// <param name="id">要删除的实体的ID。</param>
+    /// <param name="coroutineLockQueueKey">异步锁Id。</param>
     /// <param name="transactionSession">事务会话对象。</param>
     /// <param name="filter">筛选条件。</param>
     /// <param name="collection">集合名称。</param>
     /// <returns>删除的实体数量。</returns>
-    public async FTask<long> Remove<T>(long id, object transactionSession, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new()
+    public async FTask<long> Remove<T>(long coroutineLockQueueKey, object transactionSession, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new()
     {
-        using (await _dataBaseLock.Wait(id))
+        using (await _dataBaseLock.Wait(coroutineLockQueueKey))
         {
             var result = await GetCollection<T>(collection).DeleteManyAsync((IClientSessionHandle) transactionSession, filter);
             return result.DeletedCount;
@@ -690,13 +690,13 @@ public sealed class MongoDataBase : IDateBase
     /// 根据ID和筛选条件删除多个实体对象（加锁）。
     /// </summary>
     /// <typeparam name="T">实体类型。</typeparam>
-    /// <param name="id">要删除的实体的ID。</param>
+    /// <param name="coroutineLockQueueKey">异步锁Id。</param>
     /// <param name="filter">筛选条件。</param>
     /// <param name="collection">集合名称。</param>
     /// <returns>删除的实体数量。</returns>
-    public async FTask<long> Remove<T>(long id, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new()
+    public async FTask<long> Remove<T>(long coroutineLockQueueKey, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new()
     {
-        using (await _dataBaseLock.Wait(id))
+        using (await _dataBaseLock.Wait(coroutineLockQueueKey))
         {
             var result = await GetCollection<T>(collection).DeleteManyAsync(filter);
             return result.DeletedCount;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-using MessagePack;
+using MemoryPack;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
@@ -28,7 +28,7 @@ namespace Fantasy
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreMember]
+        [MemoryPackIgnore]
         public bool IsPool { get; set; }
         [BsonId]
         [BsonElement]
@@ -37,34 +37,34 @@ namespace Fantasy
         public long Id { get; protected set; }
         [BsonIgnore]
         [IgnoreDataMember]
-        [IgnoreMember]
+        [MemoryPackIgnore]
         public long RunTimeId { get; protected set; }
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreMember]
+        [MemoryPackIgnore]
         public bool IsDisposed => RunTimeId == 0;
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreMember]
+        [MemoryPackIgnore]
         public Scene Scene { get; protected set; }
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreMember]
+        [MemoryPackIgnore]
         public Entity Parent { get; protected set; }
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [IgnoreMember]
+        [MemoryPackIgnore]
         public Type Type { get; protected set; }
 #if FANTASY_NET
         [BsonElement("t")] [BsonIgnoreIfNull] private EntityList<Entity> _treeDb;
         [BsonElement("m")] [BsonIgnoreIfNull] private EntityList<Entity> _multiDb;
 #endif
-        [BsonIgnore] [IgnoreDataMember] [IgnoreMember] private EntitySortedDictionary<long, Entity> _tree;
-        [BsonIgnore] [IgnoreDataMember] [IgnoreMember] private EntitySortedDictionary<long, Entity> _multi;
+        [BsonIgnore] [IgnoreDataMember] [MemoryPackIgnore] private EntitySortedDictionary<long, Entity> _tree;
+        [BsonIgnore] [IgnoreDataMember] [MemoryPackIgnore] private EntitySortedDictionary<long, Entity> _multi;
         
         public T GetParent<T>() where T : Entity, new()
         {
@@ -692,7 +692,7 @@ namespace Fantasy
             entity.Deserialize(Scene, true);
             return entity;
 #elif FANTASY_UNITY
-            var entity = MessagePackHelper.Clone(this);
+            var entity = MemoryPackHelper.Clone(this);
             entity.Deserialize(Scene, true);
             return entity;
 #endif

@@ -9,14 +9,25 @@ namespace Fantasy
 {
     public abstract class APackInfo : IDisposable
     {
+        protected ANetwork Network;
+        
         public uint RpcId;
         public long RouteId;
-        public uint ProtocolCode;
-        public long RouteTypeCode;
-        public int MessagePacketLength;
-        public MemoryStreamBuffer MemoryStream { get; protected set; }
-        protected ANetwork Network;
+        public long PackInfoId;
         public bool IsDisposed;
+        private uint _protocolCode;
+        
+        public uint ProtocolCode
+        {
+            get => _protocolCode;
+            set
+            {
+                _protocolCode = value;
+                OpCodeIdStruct = value;
+            }
+        }
+        public OpCodeIdStruct OpCodeIdStruct { get; private set; }
+        public MemoryStreamBuffer MemoryStream { get; protected set; }
         public abstract object Deserialize(Type messageType);
         public abstract MemoryStreamBuffer RentMemoryStream(int size = 0);
         public virtual void Dispose()
@@ -28,9 +39,10 @@ namespace Fantasy
             
             RpcId = 0;
             RouteId = 0;
+            PackInfoId = 0;
             ProtocolCode = 0;
-            RouteTypeCode = 0;
-            MessagePacketLength = 0;
+            _protocolCode = 0;
+            OpCodeIdStruct = default;
             
             if (MemoryStream != null)
             {

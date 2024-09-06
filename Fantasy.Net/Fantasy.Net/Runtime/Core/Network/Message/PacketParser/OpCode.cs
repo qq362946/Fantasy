@@ -1,144 +1,104 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy
 {
-    /// <summary>
-    /// 定义了各种消息操作码，用于标识不同类型的消息和请求。
-    /// </summary>
+    public struct OpCodeIdStruct
+    {
+        // OpCodeIdStruct:5 + 4 + 23 = 32
+        // +---------------------------+---------------------------------+-----------------------------+
+        // |  OpCodeType(5) 最多31种类型 | Protocol(4) 最多15种不同的网络协议 | Index(23) 最多8388607个协议  |
+        // +---------------------------+---------------------------------+-----------------------------+
+        public uint OpCodeProtocolType { get; private set; }
+        public uint Protocol { get; private set; }
+        public uint Index { get; private set; }
+        
+        public OpCodeIdStruct(uint opCodeProtocolType, uint protocol, uint index)
+        {
+            OpCodeProtocolType = opCodeProtocolType;
+            Protocol = protocol;
+            Index = index;
+        }
+
+        public static implicit operator uint(OpCodeIdStruct opCodeIdStruct)
+        {
+            var result = opCodeIdStruct.Index;
+            result |= opCodeIdStruct.OpCodeProtocolType << 23;
+            result |= opCodeIdStruct.Protocol << 27;
+            return result;
+        }
+
+        public static implicit operator OpCodeIdStruct(uint opCodeId)
+        {
+            var opCodeIdStruct = new OpCodeIdStruct()
+            {
+                Index = opCodeId & 0x7FFFFF
+            };
+            opCodeId >>= 23;
+            opCodeIdStruct.OpCodeProtocolType = opCodeId & 0xF;
+            opCodeId >>= 4;
+            opCodeIdStruct.Protocol = opCodeId & 0x1F;
+            return opCodeIdStruct;
+        }
+    }
+
+    public static class OpCodeProtocolType
+    {
+        public const uint Bson = 1; 
+        public const uint MemoryPack = 2; 
+        public const uint ProtoBuf = 3; 
+    }
+
+    public static class OpCodeType
+    {
+        public const uint OuterMessage = 1; 
+        public const uint OuterRequest = 2;
+        public const uint OuterResponse = 3;
+        
+        public const uint InnerMessage  = 4;
+        public const uint InnerRequest  = 5;
+        public const uint InnerResponse = 6;
+        
+        public const uint InnerRouteMessage = 7;
+        public const uint InnerRouteRequest = 8;
+        public const uint InnerRouteResponse = 9;
+        
+        public const uint OuterAddressableMessage = 10;
+        public const uint OuterAddressableRequest = 11;
+        public const uint OuterAddressableResponse = 12;
+        
+        public const uint InnerAddressableMessage = 13;
+        public const uint InnerAddressableRequest = 14;
+        public const uint InnerAddressableResponse = 15;
+        
+        public const uint OuterCustomRouteMessage = 16;
+        public const uint OuterCustomRouteRequest = 17;
+        public const uint OuterCustomRouteResponse = 18;
+        
+        public const uint OuterPingRequest = 19;
+        public const uint OuterPingResponse = 20;
+    }
+
     public static class OpCode
     {
-        /// <summary>
-        /// 外网消息操作码的基准值。
-        /// </summary>
-        public const uint OuterMessage = 100000000; 
-        /// <summary>
-        /// 外网请求操作码的基准值。
-        /// </summary>
-        public const uint OuterRequest = 110000000;
-        /// <summary>
-        /// 内网消息操作码的基准值。
-        /// </summary>
-        public const uint InnerMessage = 120000000;
-        /// <summary>
-        /// 内网请求操作码的基准值。
-        /// </summary>
-        public const uint InnerRequest = 130000000;
-        /// <summary>
-        /// 内网Bson消息操作码的基准值。
-        /// </summary>
-        public const uint InnerBsonMessage = 140000000;
-        /// <summary>
-        /// 内网Bson请求操作码的基准值。
-        /// </summary>
-        public const uint InnerBsonRequest = 150000000;
-        /// <summary>
-        /// 外网回复操作码的基准值。
-        /// </summary>
-        public const uint OuterResponse = 160000000;
-        /// <summary>
-        /// 内网回复操作码的基准值。
-        /// </summary>
-        public const uint InnerResponse = 170000000;
-        /// <summary>
-        /// 内网Bson回复操作码的基准值。
-        /// </summary>
-        public const uint InnerBsonResponse = 180000000;
-        /// <summary>
-        /// 外网路由消息操作码的基准值。
-        /// </summary>
-        public const uint OuterRouteMessage = 190000000;
-        /// <summary>
-        /// 外网路由请求操作码的基准值。
-        /// </summary>
-        public const uint OuterRouteRequest = 200000000;
-        /// <summary>
-        /// 内网路由消息操作码的基准值。
-        /// </summary>
-        public const uint InnerRouteMessage = 210000000;
-        /// <summary>
-        /// 内网路由请求操作码的基准值。
-        /// </summary>
-        public const uint InnerRouteRequest = 220000000;
-        /// <summary>
-        /// 内网Bson路由消息操作码的基准值。
-        /// </summary>
-        public const uint InnerBsonRouteMessage = 230000000;
-        /// <summary>
-        /// 内网Bson路由请求操作码的基准值。
-        /// </summary>
-        public const uint InnerBsonRouteRequest = 240000000;
-        /// <summary>
-        /// 外网路由回复操作码的基准值。
-        /// </summary>
-        public const uint OuterRouteResponse = 250000000;
-        /// <summary>
-        /// 内网路由回复操作码的基准值。
-        /// </summary>
-        public const uint InnerRouteResponse = 260000000;
-        /// <summary>
-        /// 内网Bson路由回复操作码的基准值。
-        /// </summary>
-        public const uint InnerBsonRouteResponse = 270000000;
-        /// <summary>
-        /// 心跳消息请求操作码。
-        /// </summary>
-        public const uint PingRequest = 1;
-        /// <summary>
-        /// 心跳消息回复操作码。
-        /// </summary>
-        public const uint PingResponse = 2;
-        /// <summary>
-        /// 默认回复操作码。
-        /// </summary>
-        public const uint DefaultResponse = 3;
-        /// <summary>
-        /// 可寻址消息：添加请求操作码。
-        /// </summary>
-        public const uint AddressableAddRequest = InnerRouteRequest + 1;
-        /// <summary>
-        /// 可寻址消息：添加回复操作码。
-        /// </summary>
-        public const uint AddressableAddResponse = InnerRouteResponse + 1;
-        /// <summary>
-        /// 可寻址消息：获取请求操作码。
-        /// </summary>
-        public const uint AddressableGetRequest = InnerRouteRequest + 2;
-        /// <summary>
-        /// 可寻址消息：获取回复操作码。
-        /// </summary>
-        public const uint AddressableGetResponse = InnerRouteResponse + 2;
-        /// <summary>
-        /// 可寻址消息：移除请求操作码。
-        /// </summary>
-        public const uint AddressableRemoveRequest = InnerRouteRequest + 3;
-        /// <summary>
-        /// 可寻址消息：移除回复操作码。
-        /// </summary>
-        public const uint AddressableRemoveResponse = InnerRouteResponse + 3;
-        /// <summary>
-        /// 可寻址消息：锁定请求操作码。
-        /// </summary>
-        public const uint AddressableLockRequest = InnerRouteRequest + 4;
-        /// <summary>
-        /// 可寻址消息：锁定回复操作码。
-        /// </summary>
-        public const uint AddressableLockResponse = InnerRouteResponse + 4;
-        /// <summary>
-        /// 可寻址消息：解锁请求操作码。
-        /// </summary>
-        public const uint AddressableUnLockRequest = InnerRouteRequest + 5;
-        /// <summary>
-        /// 可寻址消息：解锁回复操作码。
-        /// </summary>
-        public const uint AddressableUnLockResponse = InnerRouteResponse + 5;
-        /// <summary>
-        /// 连接Entity到目标进程、目标进程可以通过EntityType、发送消息给这个Entity
-        /// </summary>
-        public const uint LinkEntityRequest = InnerRouteRequest + 6;
-        public const uint LinkEntityResponse = InnerRouteResponse + 6;
-        /// <summary>
-        /// 默认的Route返回操作码。
-        /// </summary>
-        public const uint DefaultRouteResponse = InnerRouteResponse + 7;
+        public static readonly uint PingRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.OuterPingRequest, 1);
+        public static readonly uint PingResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.OuterPingResponse, 1);
+        public static readonly uint DefaultResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerResponse, 1);
+        public static readonly uint DefaultRouteResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 7);
+        public static readonly uint AddressableAddRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 1);
+        public static readonly uint AddressableAddResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 1);
+        public static readonly uint AddressableGetRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 2);
+        public static readonly uint AddressableGetResponse = Create(OpCodeProtocolType.MemoryPack,OpCodeType.InnerRouteResponse,2);
+        public static readonly uint AddressableRemoveRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 3);
+        public static readonly uint AddressableRemoveResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 3);
+        public static readonly uint AddressableLockRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 4);
+        public static readonly uint AddressableLockResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 4);
+        public static readonly uint AddressableUnLockRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 5);
+        public static readonly uint AddressableUnLockResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 5);
+        public static readonly uint LinkEntityRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 6);
+        public static readonly uint LinkEntityResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 6);
         
+        public static uint Create(uint opCodeProtocolType, uint protocol, uint index)
+        {
+            return new OpCodeIdStruct(opCodeProtocolType, protocol, index);
+        }
     }
 }

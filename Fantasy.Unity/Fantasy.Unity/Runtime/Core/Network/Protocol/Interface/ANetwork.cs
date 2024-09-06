@@ -12,7 +12,9 @@ namespace Fantasy
     /// </summary>
     public abstract class ANetwork : Entity
     {
-        private const int MaxMemoryStreamSize = 1024;
+        private const int MaxMemoryStreamSize = 2048;
+        
+        private long _outerPackInfoId;
         private Queue<OuterPackInfo> _outerPackInfoPool;
         private readonly Queue<MemoryStreamBuffer> _memoryStreamPool = new Queue<MemoryStreamBuffer>();
         
@@ -74,7 +76,6 @@ namespace Fantasy
 
             if (_memoryStreamPool.TryDequeue(out var memoryStream))
             {
-                memoryStream.SetLength(0);
                 return memoryStream;
             }
 
@@ -83,39 +84,49 @@ namespace Fantasy
 
         public void ReturnMemoryStream(MemoryStreamBuffer memoryStreamBuffer)
         {
-            if (memoryStreamBuffer.Capacity > 1024)
+            if (memoryStreamBuffer.Capacity > MaxMemoryStreamSize)
             {
                 return;
             }
             
-            if (_memoryStreamPool.Count > 256)
+            if (_memoryStreamPool.Count > 512)
             {
                 // 设置该值只能是内网或服务器转发的时候可能在连接之前发送的数据过多的情况下可以修改。
                 // 设置过大会导致内存占用过大，所以要谨慎设置。
                 return;
             }
-
-            memoryStreamBuffer.Seek(0, SeekOrigin.Begin);
+            
             memoryStreamBuffer.SetLength(0);
-            memoryStreamBuffer.Position = 0;
             _memoryStreamPool.Enqueue(memoryStreamBuffer);
         }
-
+        
         public OuterPackInfo RentOuterPackInfo()
         {
             if (_outerPackInfoPool.Count == 0)
             {
-                return new OuterPackInfo();
+                return new OuterPackInfo()
+                {
+                    PackInfoId = ++_outerPackInfoId
+                };
             }
 
-            return _outerPackInfoPool.TryDequeue(out var packInfo) ? packInfo : new OuterPackInfo();
+            if (!_outerPackInfoPool.TryDequeue(out var outerPackInfo))
+            {
+                return new OuterPackInfo()
+                {
+                    PackInfoId = ++_outerPackInfoId
+                };
+            }
+            
+            outerPackInfo.PackInfoId = ++_outerPackInfoId;
+            return outerPackInfo;
         }
 
         public void ReturnOuterPackInfo(OuterPackInfo outerPackInfo)
         {
-            if (_outerPackInfoPool.Count > 256)
+            if (_outerPackInfoPool.Count > 512)
             {
-                // 池子里最多缓存256个、其实这样设置有点多了、其实用不了256个。
+                // 池子里最多缓存256个、其实这样设置有点多了、其实用不了512个。
                 // 反而设置越大内存会占用越多。
                 return;
             }
@@ -123,15 +134,28 @@ namespace Fantasy
             _outerPackInfoPool.Enqueue(outerPackInfo);
         }
 #if FANTASY_NET
+        private long _innerPackInfoId;
         private Queue<InnerPackInfo> _innerPackInfoPool;
         public InnerPackInfo RentInnerPackInfo()
         {
             if (_innerPackInfoPool.Count == 0)
             {
-                return new InnerPackInfo();
+                return new InnerPackInfo()
+                {
+                    PackInfoId = ++_innerPackInfoId
+                };
             }
 
-            return _innerPackInfoPool.TryDequeue(out var packInfo) ? packInfo : new InnerPackInfo();
+            if (!_innerPackInfoPool.TryDequeue(out var innerPackInfo))
+            {
+                return new InnerPackInfo()
+                {
+                    PackInfoId = ++_innerPackInfoId
+                };
+            }
+                
+            innerPackInfo.PackInfoId = ++_innerPackInfoId;
+            return innerPackInfo;
         }
 
         public void ReturnInnerPackInfo(InnerPackInfo innerPackInfo)

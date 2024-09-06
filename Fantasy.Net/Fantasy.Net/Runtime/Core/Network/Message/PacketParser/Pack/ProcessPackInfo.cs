@@ -44,18 +44,24 @@ public sealed class ProcessPackInfo : APackInfo
         packInfo.MessageType = typeof(T);
         packInfo.IsDisposed = false;
         var memoryStream = new MemoryStreamBuffer();
+        OpCodeIdStruct opCodeIdStruct = message.OpCode();
         memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
-        switch (message)
+        switch (opCodeIdStruct.OpCodeProtocolType)
         {
-            case IBsonMessage:
+            case OpCodeProtocolType.Bson:
             {
                 BsonPackHelper.Serialize<T>(message, memoryStream);
                 break;
             }
-            default:
+            case OpCodeProtocolType.MemoryPack:
             {
-                MessagePackHelper.Serialize<T>(message, memoryStream);
+                ProtoBufPackHelper.Serialize<T>(message, memoryStream);
+                break;
+            }
+            case OpCodeProtocolType.ProtoBuf:
+            {
+                MemoryPackHelper.Serialize<T>(message, memoryStream);
                 break;
             }
         }
@@ -137,58 +143,21 @@ public sealed class ProcessPackInfo : APackInfo
             return createInstance();
         }
 
-        switch (ProtocolCode)
+        switch (OpCodeIdStruct.OpCodeProtocolType)
         {
-            case >= OpCode.InnerBsonRouteResponse:
+            case OpCodeProtocolType.ProtoBuf:
+            {
+                obj = ProtoBufPackHelper.Deserialize(messageType, MemoryStream);
+                break;
+            }
+            case OpCodeProtocolType.MemoryPack:
+            {
+                obj = MemoryPackHelper.Deserialize(messageType, MemoryStream);
+                break;
+            }
+            case OpCodeProtocolType.Bson:
             {
                 obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerRouteResponse:
-            {
-                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.OuterRouteResponse:
-            {
-                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerBsonRouteMessage:
-            {
-                obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerRouteMessage:
-            case >= OpCode.OuterRouteMessage:
-            {
-                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerBsonResponse:
-            {
-                obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerResponse:
-            {
-                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.OuterResponse:
-            {
-                MemoryStream.Seek(0, SeekOrigin.Begin);
-                Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
-                return null;
-            }
-            case >= OpCode.InnerBsonMessage:
-            {
-                obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
-                break;
-            }
-            case >= OpCode.InnerMessage:
-            {
-                obj = MessagePackHelper.Deserialize(messageType, MemoryStream);
                 break;
             }
             default:

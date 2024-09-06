@@ -9,8 +9,8 @@ namespace Fantasy.Exporter;
 public class OpCodeCache
 {
     private readonly List<uint> _opCodes = new List<uint>();
-    private readonly SortedDictionary<string, uint> _opcodeCache;
-    private readonly SortedDictionary<string, uint> _saveOpCodeCache = new();
+    private readonly Dictionary<string, uint> _opcodeCache;
+    private readonly Dictionary<string, uint> _saveOpCodeCache = new();
     private readonly string _opcodeCachePath = $"{ExporterSettingsHelper.NetworkProtocolDirectory}OpCode.Cache";
 
     /// <summary>
@@ -21,12 +21,12 @@ public class OpCodeCache
         if (File.Exists(_opcodeCachePath) && !regenerate)
         {
             var readAllText = File.ReadAllText(_opcodeCachePath);
-            _opcodeCache = readAllText.Deserialize<SortedDictionary<string, uint>>();
+            _opcodeCache = readAllText.Deserialize<Dictionary<string, uint>>();
             _opCodes.AddRange(_opcodeCache.Values);
         }
         else
         {
-            _opcodeCache = new SortedDictionary<string, uint>();
+            _opcodeCache = new Dictionary<string, uint>();
         }
     }
 
@@ -48,7 +48,10 @@ public class OpCodeCache
     {
         if (!_opcodeCache.TryGetValue(className, out var opCode))
         {
-            while (_opCodes.Contains(++opcode)) { }
+            while (_opCodes.Contains(++opcode))
+            {
+                
+            }
             opCode = opcode;
             _opCodes.Add(opCode);
         }

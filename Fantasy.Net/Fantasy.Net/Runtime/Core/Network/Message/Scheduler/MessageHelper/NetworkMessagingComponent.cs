@@ -77,7 +77,7 @@ namespace Fantasy
             Scene.GetSession(entityId).Send(message, 0, entityId);
         }
 
-        internal async FTask SendInnerRoute(long routeId, Type messageType, APackInfo packInfo)
+        internal void SendInnerRoute(long routeId, Type messageType, APackInfo packInfo)
         {
             if (routeId == 0)
             {
@@ -85,23 +85,22 @@ namespace Fantasy
                 return;
             }
 
-            await Scene.GetSession(routeId).Send(0, routeId, messageType, packInfo);
+            Scene.GetSession(routeId).Send(0, routeId, messageType, packInfo);
         }
         
-        public async FTask SendInnerRoute(ICollection<long> routeIdCollection, IRouteMessage message)
+        public void SendInnerRoute(ICollection<long> routeIdCollection, IRouteMessage message)
         {
             if (routeIdCollection.Count <= 0)
             {
                 Log.Error("SendInnerRoute routeIdCollection.Count <= 0");
                 return;
             }
-
-            var routeTypeOpCode = message.RouteTypeOpCode();
+            
             using var processPackInfo = ProcessPackInfo.Create(Scene, message, routeIdCollection.Count);
             foreach (var routeId in routeIdCollection)
             {
                 processPackInfo.Set(0, routeId);
-                await Scene.GetSession(routeId).Send(processPackInfo, 0, routeTypeOpCode, routeId);
+                Scene.GetSession(routeId).Send(processPackInfo, 0, routeId);
             }
         }
         
@@ -122,7 +121,7 @@ namespace Fantasy
             var session = Scene.GetSession(routeId);
             var requestCallback = FTask<IResponse>.Create(false);
             RequestCallback.Add(rpcId, MessageSender.Create(rpcId, requestType, requestCallback));
-            await session.Send(rpcId, routeId, requestType, packInfo);
+            session.Send(rpcId, routeId, requestType, packInfo);
             return await requestCallback;
         }
 
@@ -168,7 +167,7 @@ namespace Fantasy
                     
                     if (addressableRouteId == 0)
                     {
-                        return MessageDispatcherComponent.CreateResponse(request, InnerErrorCode.ErrNotFoundRoute);
+                        return MessageDispatcherComponent.CreateResponse(request.GetType(), InnerErrorCode.ErrNotFoundRoute);
                     }
                     
                     var iRouteResponse = await CallInnerRoute(addressableRouteId, request);
@@ -238,14 +237,11 @@ namespace Fantasy
                     case IRouteMessage iRouteMessage:
                     {
                         // IRouteMessage是个特殊的RPC协议、这里不处理就可以了。
-                        // var routeResponse = MessageDispatcherComponent.CreateResponse(iRouteMessage, InnerErrorCode.ErrRouteTimeout);
-                        // responseRpcId = routeResponse.RpcId;
-                        // routeResponse.RpcId = routeMessageSender.RpcId;
                         break;
                     }
                     case IRequest iRequest:
                     {
-                        var response = MessageDispatcherComponent.CreateResponse(iRequest, InnerErrorCode.ErrRpcFail);
+                        var response = MessageDispatcherComponent.CreateResponse(iRequest.GetType(), InnerErrorCode.ErrRpcFail);
                         var responseRpcId = messageSender.RpcId;
                         ResponseHandler(responseRpcId, response);
                         Log.Warning($"timeout rpcId:{rpcId} responseRpcId:{responseRpcId} {iRequest.ToJson()}");

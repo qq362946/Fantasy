@@ -1,6 +1,8 @@
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 using System;
 using System.IO;
+#pragma warning disable CS8603 // Possible null reference return.
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 namespace Fantasy
 {
@@ -45,12 +47,35 @@ namespace Fantasy
             if (MemoryStream == null)
             {
                 Log.Debug("Deserialize MemoryStream is null");
+                return null;
             }
 
             MemoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
-            var @object = MessagePackHelper.Deserialize(messageType, MemoryStream);
+            
+            object obj = null;
+            
+            switch (OpCodeIdStruct.OpCodeProtocolType)
+            {
+                case OpCodeProtocolType.ProtoBuf:
+                {
+                    obj = ProtoBufPackHelper.Deserialize(messageType, MemoryStream);
+                    break;
+                }
+                case OpCodeProtocolType.MemoryPack:
+                {
+                    obj = MemoryPackHelper.Deserialize(messageType, MemoryStream);
+                    break;
+                }
+                default:
+                {
+                    MemoryStream.Seek(0, SeekOrigin.Begin);
+                    Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
+                    return null;
+                }
+            }
+            
             MemoryStream.Seek(0, SeekOrigin.Begin);
-            return @object;
+            return obj;
         }
     }
 }

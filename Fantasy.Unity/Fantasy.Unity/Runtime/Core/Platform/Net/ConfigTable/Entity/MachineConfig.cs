@@ -1,8 +1,9 @@
 #if FANTASY_NET
 using System;
-using MessagePack;
+using ProtoBuf;
 using Fantasy;
 using System.Linq;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 // ReSharper disable CollectionNeverUpdated.Global
@@ -15,19 +16,19 @@ using System.Collections.Concurrent;
 
 namespace Fantasy
 {
-    [MessagePackObject]
-    public sealed partial class MachineConfigData : ASerialize, IConfigTable
+    [ProtoContract]
+    public sealed partial class MachineConfigData : ASerialize, IConfigTable, IProto
     {
-        [Key(0)]
+        [ProtoMember(1)]
         public List<MachineConfig> List { get; set; } = new List<MachineConfig>();
 #if FANTASY_NET
-        [IgnoreMember]
+        [ProtoIgnore]
         private readonly ConcurrentDictionary<uint, MachineConfig> _configs = new ConcurrentDictionary<uint, MachineConfig>();
 #else 
-        [IgnoreMember]
+        [ProtoIgnore]
         private readonly Dictionary<uint, MachineConfig> _configs = new Dictionary<uint, MachineConfig>();
 #endif
-        private static MachineConfigData _instance;
+        private static MachineConfigData _instance = null;
 
         public static MachineConfigData Instance
         {
@@ -82,16 +83,16 @@ namespace Fantasy
         }
     }
     
-    [MessagePackObject]
-    public sealed partial class MachineConfig : ASerialize
+    [ProtoContract]
+    public sealed partial class MachineConfig : ASerialize, IProto
     {
-		[Key(0)]
+		[ProtoMember(1)]
 		public uint Id { get; set; } // Id
-		[Key(1)]
+		[ProtoMember(2)]
 		public string OuterIP { get; set; } // 外网IP
-		[Key(2)]
+		[ProtoMember(3)]
 		public string OuterBindIP { get; set; } // 外网绑定IP
-		[Key(3)]
+		[ProtoMember(4)]
 		public string InnerBindIP { get; set; } // 内网绑定IP  
     } 
 }  
