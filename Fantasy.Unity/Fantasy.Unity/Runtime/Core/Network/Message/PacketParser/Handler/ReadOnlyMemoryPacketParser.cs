@@ -2,15 +2,23 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Fantasy.Helper;
+using Fantasy.Network;
+using Fantasy.Network.Interface;
+using Fantasy.PacketParser.Interface;
+using Fantasy.Serialize;
 
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 
-namespace Fantasy
+namespace Fantasy.PacketParser
 {
-    public abstract class ReadOnlyMemoryPacketParser : APacketParser
+    internal abstract class ReadOnlyMemoryPacketParser : APacketParser
     {
+        /// <summary>
+        /// 一个网络消息包
+        /// </summary>
         protected APackInfo PackInfo;
 
         protected int Offset;
@@ -37,7 +45,7 @@ namespace Fantasy
     }
 
 #if FANTASY_NET
-    public sealed class InnerReadOnlyMemoryPacketParser : ReadOnlyMemoryPacketParser
+    internal sealed class InnerReadOnlyMemoryPacketParser : ReadOnlyMemoryPacketParser
     {
         public override unsafe bool UnPack(ref ReadOnlyMemory<byte> buffer, out APackInfo packInfo)
         {
@@ -137,7 +145,7 @@ namespace Fantasy
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream)
         {
             memoryStream.Seek(Packet.InnerPacketRpcIdLocation, SeekOrigin.Begin);
             rpcId.GetBytes(RpcIdBuffer);
@@ -210,7 +218,7 @@ namespace Fantasy
         }
     }
 #endif
-    public sealed class OuterReadOnlyMemoryPacketParser : ReadOnlyMemoryPacketParser
+    internal sealed class OuterReadOnlyMemoryPacketParser : ReadOnlyMemoryPacketParser
     {
         public override unsafe bool UnPack(ref ReadOnlyMemory<byte> buffer, out APackInfo packInfo)
         {

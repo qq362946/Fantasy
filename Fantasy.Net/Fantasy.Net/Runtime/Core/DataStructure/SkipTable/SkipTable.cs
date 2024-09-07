@@ -4,7 +4,7 @@
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-namespace Fantasy
+namespace Fantasy.DataStructure.SkipTable
 {
     /// <summary>
     /// 跳表数据结构（升序版）

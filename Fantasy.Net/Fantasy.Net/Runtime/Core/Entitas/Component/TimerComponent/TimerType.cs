@@ -1,4 +1,4 @@
-namespace Fantasy
+namespace Fantasy.Timer
 {
     /// <summary>
     /// 枚举对象TimerType

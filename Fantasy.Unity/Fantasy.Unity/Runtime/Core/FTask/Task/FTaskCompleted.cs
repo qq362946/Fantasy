@@ -2,8 +2,9 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Fantasy
+namespace Fantasy.Async
 {
     [StructLayout(LayoutKind.Auto)]
     [AsyncMethodBuilder(typeof(AsyncFTaskCompletedMethodBuilder))]

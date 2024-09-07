@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using Fantasy.Async;
+using Fantasy.Helper;
+
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8603
 #pragma warning disable CS8618
-namespace Fantasy
+namespace Fantasy.Assembly
 {
     /// <summary>
     /// 管理程序集加载和卸载的帮助类。
@@ -25,7 +28,7 @@ namespace Fantasy
         /// <summary>
         /// 初始化 AssemblySystem。
         /// </summary>
-        public static void Initialize(params Assembly[] assemblies)
+        public static void Initialize(params System.Reflection.Assembly[] assemblies)
         {
             LoadAssembly(typeof(AssemblySystem).Assembly);
             foreach (var assembly in assemblies)
@@ -38,7 +41,7 @@ namespace Fantasy
         /// 加载指定的程序集，并触发相应的事件。
         /// </summary>
         /// <param name="assembly">要加载的程序集。</param>
-        public static void LoadAssembly(Assembly assembly)
+        public static void LoadAssembly(System.Reflection.Assembly assembly)
         {
             var assemblyIdentity = AssemblyIdentity(assembly);
                 
@@ -67,7 +70,7 @@ namespace Fantasy
         /// 卸载程序集
         /// </summary>
         /// <param name="assembly"></param>
-        public static void UnLoadAssembly(Assembly assembly)
+        public static void UnLoadAssembly(System.Reflection.Assembly assembly)
         {
             var assemblyIdentity = AssemblyIdentity(assembly);
             
@@ -210,7 +213,7 @@ namespace Fantasy
         /// </summary>
         /// <param name="assemblyIdentity">程序集名称。</param>
         /// <returns>指定程序集的实例，如果未加载则返回 null。</returns>
-        public static Assembly GetAssembly(long assemblyIdentity)
+        public static System.Reflection.Assembly GetAssembly(long assemblyIdentity)
         {
             return !AssemblyList.TryGetValue(assemblyIdentity, out var assemblyInfo) ? null : assemblyInfo.Assembly;
         }
@@ -220,7 +223,7 @@ namespace Fantasy
         /// </summary>
         /// <param name="assembly"></param>
         /// <returns></returns>
-        private static long AssemblyIdentity(Assembly assembly)
+        private static long AssemblyIdentity(System.Reflection.Assembly assembly)
         {
             return HashCodeHelper.ComputeHash64(assembly.GetName().Name);
         }

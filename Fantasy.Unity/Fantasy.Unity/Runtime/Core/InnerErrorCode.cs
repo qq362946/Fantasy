@@ -1,4 +1,4 @@
-namespace Fantasy
+namespace Fantasy.Network
 {
     /// <summary>
     /// 定义 Fantasy 框架中的内部错误代码。

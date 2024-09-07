@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 #endif
 
-namespace Fantasy
+namespace Fantasy.Helper
 {
     /// <summary>
     /// 提供与时间相关的帮助方法。

@@ -1,11 +1,11 @@
 namespace Fantasy
 {
-    public interface ISceneUpdate
+    internal interface ISceneUpdate
     {
         void Update();
     }
 
-    public sealed class EmptySceneUpdate : ISceneUpdate
+    internal sealed class EmptySceneUpdate : ISceneUpdate
     {
         public void Update()
         {

@@ -1,0 +1,713 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Platform.Net.ProcessConfig
+  commentId: T:Fantasy.Platform.Net.ProcessConfig
+  id: ProcessConfig
+  parent: Fantasy.Platform.Net
+  children:
+  - Fantasy.Platform.Net.ProcessConfig.Id
+  - Fantasy.Platform.Net.ProcessConfig.MachineId
+  - Fantasy.Platform.Net.ProcessConfig.StartupGroup
+  langs:
+  - csharp
+  - vb
+  name: ProcessConfig
+  nameWithType: ProcessConfig
+  fullName: Fantasy.Platform.Net.ProcessConfig
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/ProcessConfig.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ProcessConfig
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/ProcessConfig.cs
+    startLine: 88
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Platform.Net
+  syntax:
+    content: >-
+      [ProtoContract]
+
+      public sealed class ProcessConfig : ASerialize, ISupportInitialize, IDisposable, IProto
+    content.vb: >-
+      <ProtoContract>
+
+      Public NotInheritable Class ProcessConfig Inherits ASerialize Implements ISupportInitialize, IDisposable, IProto
+  inheritance:
+  - System.Object
+  - Fantasy.Serialize.ASerialize
+  implements:
+  - System.ComponentModel.ISupportInitialize
+  - System.IDisposable
+  - Fantasy.Serialize.IProto
+  inheritedMembers:
+  - Fantasy.Serialize.ASerialize.Dispose
+  - Fantasy.Serialize.ASerialize.BeginInit
+  - Fantasy.Serialize.ASerialize.EndInit
+  - Fantasy.Serialize.ASerialize.AfterDeserialization
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Platform.Net.ProcessConfig.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: ProtoBuf.ProtoContractAttribute
+    ctor: ProtoBuf.ProtoContractAttribute.#ctor
+    arguments: []
+- uid: Fantasy.Platform.Net.ProcessConfig.Id
+  commentId: P:Fantasy.Platform.Net.ProcessConfig.Id
+  id: Id
+  parent: Fantasy.Platform.Net.ProcessConfig
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: ProcessConfig.Id
+  fullName: Fantasy.Platform.Net.ProcessConfig.Id
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/ProcessConfig.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Id
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/ProcessConfig.cs
+    startLine: 91
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Platform.Net
+  syntax:
+    content: >-
+      [ProtoMember(1)]
+
+      public uint Id { get; set; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: >-
+      <ProtoMember(1)>
+
+      Public Property Id As UInteger
+  overload: Fantasy.Platform.Net.ProcessConfig.Id*
+  attributes:
+  - type: ProtoBuf.ProtoMemberAttribute
+    ctor: ProtoBuf.ProtoMemberAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 1
+- uid: Fantasy.Platform.Net.ProcessConfig.MachineId
+  commentId: P:Fantasy.Platform.Net.ProcessConfig.MachineId
+  id: MachineId
+  parent: Fantasy.Platform.Net.ProcessConfig
+  langs:
+  - csharp
+  - vb
+  name: MachineId
+  nameWithType: ProcessConfig.MachineId
+  fullName: Fantasy.Platform.Net.ProcessConfig.MachineId
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/ProcessConfig.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MachineId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/ProcessConfig.cs
+    startLine: 93
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Platform.Net
+  syntax:
+    content: >-
+      [ProtoMember(2)]
+
+      public uint MachineId { get; set; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: >-
+      <ProtoMember(2)>
+
+      Public Property MachineId As UInteger
+  overload: Fantasy.Platform.Net.ProcessConfig.MachineId*
+  attributes:
+  - type: ProtoBuf.ProtoMemberAttribute
+    ctor: ProtoBuf.ProtoMemberAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 2
+- uid: Fantasy.Platform.Net.ProcessConfig.StartupGroup
+  commentId: P:Fantasy.Platform.Net.ProcessConfig.StartupGroup
+  id: StartupGroup
+  parent: Fantasy.Platform.Net.ProcessConfig
+  langs:
+  - csharp
+  - vb
+  name: StartupGroup
+  nameWithType: ProcessConfig.StartupGroup
+  fullName: Fantasy.Platform.Net.ProcessConfig.StartupGroup
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/ProcessConfig.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: StartupGroup
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ConfigTable/Entity/ProcessConfig.cs
+    startLine: 95
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Platform.Net
+  syntax:
+    content: >-
+      [ProtoMember(3)]
+
+      public uint StartupGroup { get; set; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: >-
+      <ProtoMember(3)>
+
+      Public Property StartupGroup As UInteger
+  overload: Fantasy.Platform.Net.ProcessConfig.StartupGroup*
+  attributes:
+  - type: ProtoBuf.ProtoMemberAttribute
+    ctor: ProtoBuf.ProtoMemberAttribute.#ctor(System.Int32)
+    arguments:
+    - type: System.Int32
+      value: 3
+references:
+- uid: Fantasy.Platform.Net
+  commentId: N:Fantasy.Platform.Net
+  href: Fantasy.html
+  name: Fantasy.Platform.Net
+  nameWithType: Fantasy.Platform.Net
+  fullName: Fantasy.Platform.Net
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Serialize.ASerialize
+  commentId: T:Fantasy.Serialize.ASerialize
+  parent: Fantasy.Serialize
+  href: Fantasy.Serialize.ASerialize.html
+  name: ASerialize
+  nameWithType: ASerialize
+  fullName: Fantasy.Serialize.ASerialize
+- uid: System.ComponentModel.ISupportInitialize
+  commentId: T:System.ComponentModel.ISupportInitialize
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.isupportinitialize
+  name: ISupportInitialize
+  nameWithType: ISupportInitialize
+  fullName: System.ComponentModel.ISupportInitialize
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Fantasy.Serialize.IProto
+  commentId: T:Fantasy.Serialize.IProto
+  parent: Fantasy.Serialize
+  href: Fantasy.Serialize.IProto.html
+  name: IProto
+  nameWithType: IProto
+  fullName: Fantasy.Serialize.IProto
+- uid: Fantasy.Serialize.ASerialize.Dispose
+  commentId: M:Fantasy.Serialize.ASerialize.Dispose
+  parent: Fantasy.Serialize.ASerialize
+  href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_Dispose
+  name: Dispose()
+  nameWithType: ASerialize.Dispose()
+  fullName: Fantasy.Serialize.ASerialize.Dispose()
+  spec.csharp:
+  - uid: Fantasy.Serialize.ASerialize.Dispose
+    name: Dispose
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_Dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.ASerialize.Dispose
+    name: Dispose
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_Dispose
+  - name: (
+  - name: )
+- uid: Fantasy.Serialize.ASerialize.BeginInit
+  commentId: M:Fantasy.Serialize.ASerialize.BeginInit
+  parent: Fantasy.Serialize.ASerialize
+  href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_BeginInit
+  name: BeginInit()
+  nameWithType: ASerialize.BeginInit()
+  fullName: Fantasy.Serialize.ASerialize.BeginInit()
+  spec.csharp:
+  - uid: Fantasy.Serialize.ASerialize.BeginInit
+    name: BeginInit
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_BeginInit
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.ASerialize.BeginInit
+    name: BeginInit
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_BeginInit
+  - name: (
+  - name: )
+- uid: Fantasy.Serialize.ASerialize.EndInit
+  commentId: M:Fantasy.Serialize.ASerialize.EndInit
+  parent: Fantasy.Serialize.ASerialize
+  href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_EndInit
+  name: EndInit()
+  nameWithType: ASerialize.EndInit()
+  fullName: Fantasy.Serialize.ASerialize.EndInit()
+  spec.csharp:
+  - uid: Fantasy.Serialize.ASerialize.EndInit
+    name: EndInit
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_EndInit
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.ASerialize.EndInit
+    name: EndInit
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_EndInit
+  - name: (
+  - name: )
+- uid: Fantasy.Serialize.ASerialize.AfterDeserialization
+  commentId: M:Fantasy.Serialize.ASerialize.AfterDeserialization
+  parent: Fantasy.Serialize.ASerialize
+  href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_AfterDeserialization
+  name: AfterDeserialization()
+  nameWithType: ASerialize.AfterDeserialization()
+  fullName: Fantasy.Serialize.ASerialize.AfterDeserialization()
+  spec.csharp:
+  - uid: Fantasy.Serialize.ASerialize.AfterDeserialization
+    name: AfterDeserialization
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_AfterDeserialization
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.ASerialize.AfterDeserialization
+    name: AfterDeserialization
+    href: Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_AfterDeserialization
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Platform.Net.ProcessConfig.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<ProcessConfig>(ProcessConfig)
+  nameWithType: JsonHelper.ToJson<ProcessConfig>(ProcessConfig)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Platform.Net.ProcessConfig>(Fantasy.Platform.Net.ProcessConfig)
+  nameWithType.vb: JsonHelper.ToJson(Of ProcessConfig)(ProcessConfig)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Platform.Net.ProcessConfig)(Fantasy.Platform.Net.ProcessConfig)
+  name.vb: ToJson(Of ProcessConfig)(ProcessConfig)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Platform.Net.ProcessConfig)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Platform.Net.ProcessConfig
+    name: ProcessConfig
+    href: Fantasy.Platform.Net.ProcessConfig.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Platform.Net.ProcessConfig
+    name: ProcessConfig
+    href: Fantasy.Platform.Net.ProcessConfig.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Platform.Net.ProcessConfig)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Platform.Net.ProcessConfig
+    name: ProcessConfig
+    href: Fantasy.Platform.Net.ProcessConfig.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Platform.Net.ProcessConfig
+    name: ProcessConfig
+    href: Fantasy.Platform.Net.ProcessConfig.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Serialize
+  commentId: N:Fantasy.Serialize
+  href: Fantasy.html
+  name: Fantasy.Serialize
+  nameWithType: Fantasy.Serialize
+  fullName: Fantasy.Serialize
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Platform.Net.ProcessConfig.Id*
+  commentId: Overload:Fantasy.Platform.Net.ProcessConfig.Id
+  href: Fantasy.Platform.Net.ProcessConfig.html#Fantasy_Platform_Net_ProcessConfig_Id
+  name: Id
+  nameWithType: ProcessConfig.Id
+  fullName: Fantasy.Platform.Net.ProcessConfig.Id
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: Fantasy.Platform.Net.ProcessConfig.MachineId*
+  commentId: Overload:Fantasy.Platform.Net.ProcessConfig.MachineId
+  href: Fantasy.Platform.Net.ProcessConfig.html#Fantasy_Platform_Net_ProcessConfig_MachineId
+  name: MachineId
+  nameWithType: ProcessConfig.MachineId
+  fullName: Fantasy.Platform.Net.ProcessConfig.MachineId
+- uid: Fantasy.Platform.Net.ProcessConfig.StartupGroup*
+  commentId: Overload:Fantasy.Platform.Net.ProcessConfig.StartupGroup
+  href: Fantasy.Platform.Net.ProcessConfig.html#Fantasy_Platform_Net_ProcessConfig_StartupGroup
+  name: StartupGroup
+  nameWithType: ProcessConfig.StartupGroup
+  fullName: Fantasy.Platform.Net.ProcessConfig.StartupGroup

@@ -1,0 +1,115 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Event
+  commentId: N:Fantasy.Event
+  id: Event
+  parent: Fantasy
+  children:
+  - Fantasy.Event.AsyncEventSystem`1
+  - Fantasy.Event.EventComponent
+  - Fantasy.Event.EventSystem`1
+  - Fantasy.Event.IAsyncEvent
+  - Fantasy.Event.IEvent
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Event
+  nameWithType: Fantasy.Event
+  fullName: Fantasy.Event
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Event.AsyncEventSystem`1
+  commentId: T:Fantasy.Event.AsyncEventSystem`1
+  href: Fantasy.Event.AsyncEventSystem-1.html
+  name: AsyncEventSystem<T>
+  nameWithType: AsyncEventSystem<T>
+  fullName: Fantasy.Event.AsyncEventSystem<T>
+  nameWithType.vb: AsyncEventSystem(Of T)
+  fullName.vb: Fantasy.Event.AsyncEventSystem(Of T)
+  name.vb: AsyncEventSystem(Of T)
+  spec.csharp:
+  - uid: Fantasy.Event.AsyncEventSystem`1
+    name: AsyncEventSystem
+    href: Fantasy.Event.AsyncEventSystem-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Event.AsyncEventSystem`1
+    name: AsyncEventSystem
+    href: Fantasy.Event.AsyncEventSystem-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Event.EventComponent
+  commentId: T:Fantasy.Event.EventComponent
+  parent: Fantasy.Event
+  href: Fantasy.Event.EventComponent.html
+  name: EventComponent
+  nameWithType: EventComponent
+  fullName: Fantasy.Event.EventComponent
+- uid: Fantasy.Event.EventSystem`1
+  commentId: T:Fantasy.Event.EventSystem`1
+  href: Fantasy.Event.EventSystem-1.html
+  name: EventSystem<T>
+  nameWithType: EventSystem<T>
+  fullName: Fantasy.Event.EventSystem<T>
+  nameWithType.vb: EventSystem(Of T)
+  fullName.vb: Fantasy.Event.EventSystem(Of T)
+  name.vb: EventSystem(Of T)
+  spec.csharp:
+  - uid: Fantasy.Event.EventSystem`1
+    name: EventSystem
+    href: Fantasy.Event.EventSystem-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Event.EventSystem`1
+    name: EventSystem
+    href: Fantasy.Event.EventSystem-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Event.IAsyncEvent
+  commentId: T:Fantasy.Event.IAsyncEvent
+  parent: Fantasy.Event
+  href: Fantasy.Event.IAsyncEvent.html
+  name: IAsyncEvent
+  nameWithType: IAsyncEvent
+  fullName: Fantasy.Event.IAsyncEvent
+- uid: Fantasy.Event.IEvent
+  commentId: T:Fantasy.Event.IEvent
+  parent: Fantasy.Event
+  href: Fantasy.Event.IEvent.html
+  name: IEvent
+  nameWithType: IEvent
+  fullName: Fantasy.Event.IEvent
+- uid: Fantasy.Event
+  commentId: N:Fantasy.Event
+  href: Fantasy.html
+  name: Fantasy.Event
+  nameWithType: Fantasy.Event
+  fullName: Fantasy.Event
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Event
+    name: Event
+    href: Fantasy.Event.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Event
+    name: Event
+    href: Fantasy.Event.html

@@ -1,0 +1,74 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Platform
+  id: Platform
+  parent: Fantasy
+  children:
+  - Fantasy.Platform.Net
+  - Fantasy.Platform.Unity
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Platform
+  type: Namespace
+references:
+- uid: Fantasy.Platform.Net
+  commentId: N:Fantasy.Platform.Net
+  href: Fantasy.html
+  name: Fantasy.Platform.Net
+  nameWithType: Fantasy.Platform.Net
+  fullName: Fantasy.Platform.Net
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html
+- uid: Fantasy.Platform.Unity
+  commentId: N:Fantasy.Platform.Unity
+  href: Fantasy.html
+  name: Fantasy.Platform.Unity
+  nameWithType: Fantasy.Platform.Unity
+  fullName: Fantasy.Platform.Unity
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Unity
+    name: Unity
+    href: Fantasy.Platform.Unity.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Unity
+    name: Unity
+    href: Fantasy.Platform.Unity.html

@@ -1,0 +1,358 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.KCP.KcpHeader
+  commentId: T:Fantasy.Network.KCP.KcpHeader
+  id: KcpHeader
+  parent: Fantasy.Network.KCP
+  children:
+  - Fantasy.Network.KCP.KcpHeader.ConfirmConnection
+  - Fantasy.Network.KCP.KcpHeader.Disconnect
+  - Fantasy.Network.KCP.KcpHeader.None
+  - Fantasy.Network.KCP.KcpHeader.ReceiveData
+  - Fantasy.Network.KCP.KcpHeader.RepeatChannelId
+  - Fantasy.Network.KCP.KcpHeader.RequestConnection
+  - Fantasy.Network.KCP.KcpHeader.WaitConfirmConnection
+  langs:
+  - csharp
+  - vb
+  name: KcpHeader
+  nameWithType: KcpHeader
+  fullName: Fantasy.Network.KCP.KcpHeader
+  type: Enum
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: KcpHeader
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+    startLine: 3
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: 'public enum KcpHeader : byte'
+    content.vb: Public Enum KcpHeader As Byte
+  extensionMethods:
+  - Fantasy.Network.KCP.KcpHeader.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.KCP.KcpHeader.None
+  commentId: F:Fantasy.Network.KCP.KcpHeader.None
+  id: None
+  parent: Fantasy.Network.KCP.KcpHeader
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: KcpHeader.None
+  fullName: Fantasy.Network.KCP.KcpHeader.None
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: None
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+    startLine: 5
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: None = 0
+    return:
+      type: Fantasy.Network.KCP.KcpHeader
+- uid: Fantasy.Network.KCP.KcpHeader.RequestConnection
+  commentId: F:Fantasy.Network.KCP.KcpHeader.RequestConnection
+  id: RequestConnection
+  parent: Fantasy.Network.KCP.KcpHeader
+  langs:
+  - csharp
+  - vb
+  name: RequestConnection
+  nameWithType: KcpHeader.RequestConnection
+  fullName: Fantasy.Network.KCP.KcpHeader.RequestConnection
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RequestConnection
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+    startLine: 6
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: RequestConnection = 1
+    return:
+      type: Fantasy.Network.KCP.KcpHeader
+- uid: Fantasy.Network.KCP.KcpHeader.WaitConfirmConnection
+  commentId: F:Fantasy.Network.KCP.KcpHeader.WaitConfirmConnection
+  id: WaitConfirmConnection
+  parent: Fantasy.Network.KCP.KcpHeader
+  langs:
+  - csharp
+  - vb
+  name: WaitConfirmConnection
+  nameWithType: KcpHeader.WaitConfirmConnection
+  fullName: Fantasy.Network.KCP.KcpHeader.WaitConfirmConnection
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WaitConfirmConnection
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+    startLine: 7
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: WaitConfirmConnection = 2
+    return:
+      type: Fantasy.Network.KCP.KcpHeader
+- uid: Fantasy.Network.KCP.KcpHeader.ConfirmConnection
+  commentId: F:Fantasy.Network.KCP.KcpHeader.ConfirmConnection
+  id: ConfirmConnection
+  parent: Fantasy.Network.KCP.KcpHeader
+  langs:
+  - csharp
+  - vb
+  name: ConfirmConnection
+  nameWithType: KcpHeader.ConfirmConnection
+  fullName: Fantasy.Network.KCP.KcpHeader.ConfirmConnection
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ConfirmConnection
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+    startLine: 8
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: ConfirmConnection = 3
+    return:
+      type: Fantasy.Network.KCP.KcpHeader
+- uid: Fantasy.Network.KCP.KcpHeader.RepeatChannelId
+  commentId: F:Fantasy.Network.KCP.KcpHeader.RepeatChannelId
+  id: RepeatChannelId
+  parent: Fantasy.Network.KCP.KcpHeader
+  langs:
+  - csharp
+  - vb
+  name: RepeatChannelId
+  nameWithType: KcpHeader.RepeatChannelId
+  fullName: Fantasy.Network.KCP.KcpHeader.RepeatChannelId
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RepeatChannelId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+    startLine: 9
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: RepeatChannelId = 4
+    return:
+      type: Fantasy.Network.KCP.KcpHeader
+- uid: Fantasy.Network.KCP.KcpHeader.ReceiveData
+  commentId: F:Fantasy.Network.KCP.KcpHeader.ReceiveData
+  id: ReceiveData
+  parent: Fantasy.Network.KCP.KcpHeader
+  langs:
+  - csharp
+  - vb
+  name: ReceiveData
+  nameWithType: KcpHeader.ReceiveData
+  fullName: Fantasy.Network.KCP.KcpHeader.ReceiveData
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ReceiveData
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+    startLine: 10
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: ReceiveData = 6
+    return:
+      type: Fantasy.Network.KCP.KcpHeader
+- uid: Fantasy.Network.KCP.KcpHeader.Disconnect
+  commentId: F:Fantasy.Network.KCP.KcpHeader.Disconnect
+  id: Disconnect
+  parent: Fantasy.Network.KCP.KcpHeader
+  langs:
+  - csharp
+  - vb
+  name: Disconnect
+  nameWithType: KcpHeader.Disconnect
+  fullName: Fantasy.Network.KCP.KcpHeader.Disconnect
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Disconnect
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KcpHeader.cs
+    startLine: 11
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: Disconnect = 7
+    return:
+      type: Fantasy.Network.KCP.KcpHeader
+references:
+- uid: Fantasy.Network.KCP
+  commentId: N:Fantasy.Network.KCP
+  href: Fantasy.html
+  name: Fantasy.Network.KCP
+  nameWithType: Fantasy.Network.KCP
+  fullName: Fantasy.Network.KCP
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.KCP
+    name: KCP
+    href: Fantasy.Network.KCP.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.KCP
+    name: KCP
+    href: Fantasy.Network.KCP.html
+- uid: Fantasy.Network.KCP.KcpHeader.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<KcpHeader>(KcpHeader)
+  nameWithType: JsonHelper.ToJson<KcpHeader>(KcpHeader)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.KCP.KcpHeader>(Fantasy.Network.KCP.KcpHeader)
+  nameWithType.vb: JsonHelper.ToJson(Of KcpHeader)(KcpHeader)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.KCP.KcpHeader)(Fantasy.Network.KCP.KcpHeader)
+  name.vb: ToJson(Of KcpHeader)(KcpHeader)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.KCP.KcpHeader)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.KCP.KcpHeader
+    name: KcpHeader
+    href: Fantasy.Network.KCP.KcpHeader.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.KCP.KcpHeader
+    name: KcpHeader
+    href: Fantasy.Network.KCP.KcpHeader.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.KCP.KcpHeader)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.KCP.KcpHeader
+    name: KcpHeader
+    href: Fantasy.Network.KCP.KcpHeader.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.KCP.KcpHeader
+    name: KcpHeader
+    href: Fantasy.Network.KCP.KcpHeader.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Network.KCP.KcpHeader
+  commentId: T:Fantasy.Network.KCP.KcpHeader
+  parent: Fantasy.Network.KCP
+  href: Fantasy.Network.KCP.KcpHeader.html
+  name: KcpHeader
+  nameWithType: KcpHeader
+  fullName: Fantasy.Network.KCP.KcpHeader

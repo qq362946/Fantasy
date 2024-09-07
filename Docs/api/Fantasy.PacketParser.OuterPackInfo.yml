@@ -1,0 +1,810 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.PacketParser.OuterPackInfo
+  commentId: T:Fantasy.PacketParser.OuterPackInfo
+  id: OuterPackInfo
+  parent: Fantasy.PacketParser
+  children:
+  - Fantasy.PacketParser.OuterPackInfo.Create(Fantasy.Network.Interface.ANetwork)
+  - Fantasy.PacketParser.OuterPackInfo.Deserialize(System.Type)
+  - Fantasy.PacketParser.OuterPackInfo.Dispose
+  - Fantasy.PacketParser.OuterPackInfo.RentMemoryStream(System.Int32)
+  langs:
+  - csharp
+  - vb
+  name: OuterPackInfo
+  nameWithType: OuterPackInfo
+  fullName: Fantasy.PacketParser.OuterPackInfo
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/OuterPackInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OuterPackInfo
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/OuterPackInfo.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  syntax:
+    content: 'public sealed class OuterPackInfo : APackInfo, IDisposable'
+    content.vb: Public NotInheritable Class OuterPackInfo Inherits APackInfo Implements IDisposable
+  inheritance:
+  - System.Object
+  - Fantasy.PacketParser.Interface.APackInfo
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - Fantasy.PacketParser.Interface.APackInfo.RpcId
+  - Fantasy.PacketParser.Interface.APackInfo.RouteId
+  - Fantasy.PacketParser.Interface.APackInfo.PackInfoId
+  - Fantasy.PacketParser.Interface.APackInfo.IsDisposed
+  - Fantasy.PacketParser.Interface.APackInfo.ProtocolCode
+  - Fantasy.PacketParser.Interface.APackInfo.OpCodeIdStruct
+  - Fantasy.PacketParser.Interface.APackInfo.MemoryStream
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.PacketParser.OuterPackInfo.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.PacketParser.OuterPackInfo.Dispose
+  commentId: M:Fantasy.PacketParser.OuterPackInfo.Dispose
+  id: Dispose
+  parent: Fantasy.PacketParser.OuterPackInfo
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: OuterPackInfo.Dispose()
+  fullName: Fantasy.PacketParser.OuterPackInfo.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/OuterPackInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/OuterPackInfo.cs
+    startLine: 16
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  example: []
+  syntax:
+    content: public override void Dispose()
+    content.vb: Public Overrides Sub Dispose()
+  overridden: Fantasy.PacketParser.Interface.APackInfo.Dispose
+  overload: Fantasy.PacketParser.OuterPackInfo.Dispose*
+- uid: Fantasy.PacketParser.OuterPackInfo.Create(Fantasy.Network.Interface.ANetwork)
+  commentId: M:Fantasy.PacketParser.OuterPackInfo.Create(Fantasy.Network.Interface.ANetwork)
+  id: Create(Fantasy.Network.Interface.ANetwork)
+  parent: Fantasy.PacketParser.OuterPackInfo
+  langs:
+  - csharp
+  - vb
+  name: Create(ANetwork)
+  nameWithType: OuterPackInfo.Create(ANetwork)
+  fullName: Fantasy.PacketParser.OuterPackInfo.Create(Fantasy.Network.Interface.ANetwork)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/OuterPackInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Create
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/OuterPackInfo.cs
+    startLine: 27
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  syntax:
+    content: public static OuterPackInfo Create(ANetwork network)
+    parameters:
+    - id: network
+      type: Fantasy.Network.Interface.ANetwork
+    return:
+      type: Fantasy.PacketParser.OuterPackInfo
+    content.vb: Public Shared Function Create(network As ANetwork) As OuterPackInfo
+  overload: Fantasy.PacketParser.OuterPackInfo.Create*
+- uid: Fantasy.PacketParser.OuterPackInfo.RentMemoryStream(System.Int32)
+  commentId: M:Fantasy.PacketParser.OuterPackInfo.RentMemoryStream(System.Int32)
+  id: RentMemoryStream(System.Int32)
+  parent: Fantasy.PacketParser.OuterPackInfo
+  langs:
+  - csharp
+  - vb
+  name: RentMemoryStream(int)
+  nameWithType: OuterPackInfo.RentMemoryStream(int)
+  fullName: Fantasy.PacketParser.OuterPackInfo.RentMemoryStream(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/OuterPackInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RentMemoryStream
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/OuterPackInfo.cs
+    startLine: 35
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  example: []
+  syntax:
+    content: public override MemoryStreamBuffer RentMemoryStream(int size = 0)
+    parameters:
+    - id: size
+      type: System.Int32
+    return:
+      type: Fantasy.Serialize.MemoryStreamBuffer
+    content.vb: Public Overrides Function RentMemoryStream(size As Integer = 0) As MemoryStreamBuffer
+  overridden: Fantasy.PacketParser.Interface.APackInfo.RentMemoryStream(System.Int32)
+  overload: Fantasy.PacketParser.OuterPackInfo.RentMemoryStream*
+  nameWithType.vb: OuterPackInfo.RentMemoryStream(Integer)
+  fullName.vb: Fantasy.PacketParser.OuterPackInfo.RentMemoryStream(Integer)
+  name.vb: RentMemoryStream(Integer)
+- uid: Fantasy.PacketParser.OuterPackInfo.Deserialize(System.Type)
+  commentId: M:Fantasy.PacketParser.OuterPackInfo.Deserialize(System.Type)
+  id: Deserialize(System.Type)
+  parent: Fantasy.PacketParser.OuterPackInfo
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(Type)
+  nameWithType: OuterPackInfo.Deserialize(Type)
+  fullName: Fantasy.PacketParser.OuterPackInfo.Deserialize(System.Type)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/OuterPackInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/OuterPackInfo.cs
+    startLine: 50
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: 将消息数据从内存反序列化为指定的消息类型实例。
+  example: []
+  syntax:
+    content: public override object Deserialize(Type messageType)
+    parameters:
+    - id: messageType
+      type: System.Type
+      description: 目标消息类型。
+    return:
+      type: System.Object
+      description: 反序列化后的消息类型实例。
+    content.vb: Public Overrides Function Deserialize(messageType As Type) As Object
+  overridden: Fantasy.PacketParser.Interface.APackInfo.Deserialize(System.Type)
+  overload: Fantasy.PacketParser.OuterPackInfo.Deserialize*
+references:
+- uid: Fantasy.PacketParser
+  commentId: N:Fantasy.PacketParser
+  href: Fantasy.html
+  name: Fantasy.PacketParser
+  nameWithType: Fantasy.PacketParser
+  fullName: Fantasy.PacketParser
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.PacketParser.Interface.APackInfo
+  commentId: T:Fantasy.PacketParser.Interface.APackInfo
+  parent: Fantasy.PacketParser.Interface
+  href: Fantasy.PacketParser.Interface.APackInfo.html
+  name: APackInfo
+  nameWithType: APackInfo
+  fullName: Fantasy.PacketParser.Interface.APackInfo
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Fantasy.PacketParser.Interface.APackInfo.RpcId
+  commentId: F:Fantasy.PacketParser.Interface.APackInfo.RpcId
+  parent: Fantasy.PacketParser.Interface.APackInfo
+  href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_RpcId
+  name: RpcId
+  nameWithType: APackInfo.RpcId
+  fullName: Fantasy.PacketParser.Interface.APackInfo.RpcId
+- uid: Fantasy.PacketParser.Interface.APackInfo.RouteId
+  commentId: F:Fantasy.PacketParser.Interface.APackInfo.RouteId
+  parent: Fantasy.PacketParser.Interface.APackInfo
+  href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_RouteId
+  name: RouteId
+  nameWithType: APackInfo.RouteId
+  fullName: Fantasy.PacketParser.Interface.APackInfo.RouteId
+- uid: Fantasy.PacketParser.Interface.APackInfo.PackInfoId
+  commentId: F:Fantasy.PacketParser.Interface.APackInfo.PackInfoId
+  parent: Fantasy.PacketParser.Interface.APackInfo
+  href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_PackInfoId
+  name: PackInfoId
+  nameWithType: APackInfo.PackInfoId
+  fullName: Fantasy.PacketParser.Interface.APackInfo.PackInfoId
+- uid: Fantasy.PacketParser.Interface.APackInfo.IsDisposed
+  commentId: F:Fantasy.PacketParser.Interface.APackInfo.IsDisposed
+  parent: Fantasy.PacketParser.Interface.APackInfo
+  href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_IsDisposed
+  name: IsDisposed
+  nameWithType: APackInfo.IsDisposed
+  fullName: Fantasy.PacketParser.Interface.APackInfo.IsDisposed
+- uid: Fantasy.PacketParser.Interface.APackInfo.ProtocolCode
+  commentId: P:Fantasy.PacketParser.Interface.APackInfo.ProtocolCode
+  parent: Fantasy.PacketParser.Interface.APackInfo
+  href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_ProtocolCode
+  name: ProtocolCode
+  nameWithType: APackInfo.ProtocolCode
+  fullName: Fantasy.PacketParser.Interface.APackInfo.ProtocolCode
+- uid: Fantasy.PacketParser.Interface.APackInfo.OpCodeIdStruct
+  commentId: P:Fantasy.PacketParser.Interface.APackInfo.OpCodeIdStruct
+  parent: Fantasy.PacketParser.Interface.APackInfo
+  href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_OpCodeIdStruct
+  name: OpCodeIdStruct
+  nameWithType: APackInfo.OpCodeIdStruct
+  fullName: Fantasy.PacketParser.Interface.APackInfo.OpCodeIdStruct
+- uid: Fantasy.PacketParser.Interface.APackInfo.MemoryStream
+  commentId: P:Fantasy.PacketParser.Interface.APackInfo.MemoryStream
+  parent: Fantasy.PacketParser.Interface.APackInfo
+  href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_MemoryStream
+  name: MemoryStream
+  nameWithType: APackInfo.MemoryStream
+  fullName: Fantasy.PacketParser.Interface.APackInfo.MemoryStream
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.PacketParser.OuterPackInfo.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<OuterPackInfo>(OuterPackInfo)
+  nameWithType: JsonHelper.ToJson<OuterPackInfo>(OuterPackInfo)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.PacketParser.OuterPackInfo>(Fantasy.PacketParser.OuterPackInfo)
+  nameWithType.vb: JsonHelper.ToJson(Of OuterPackInfo)(OuterPackInfo)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.PacketParser.OuterPackInfo)(Fantasy.PacketParser.OuterPackInfo)
+  name.vb: ToJson(Of OuterPackInfo)(OuterPackInfo)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.PacketParser.OuterPackInfo)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.PacketParser.OuterPackInfo
+    name: OuterPackInfo
+    href: Fantasy.PacketParser.OuterPackInfo.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.PacketParser.OuterPackInfo
+    name: OuterPackInfo
+    href: Fantasy.PacketParser.OuterPackInfo.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.PacketParser.OuterPackInfo)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.PacketParser.OuterPackInfo
+    name: OuterPackInfo
+    href: Fantasy.PacketParser.OuterPackInfo.html
+  - name: )
+  - name: (
+  - uid: Fantasy.PacketParser.OuterPackInfo
+    name: OuterPackInfo
+    href: Fantasy.PacketParser.OuterPackInfo.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.PacketParser.Interface
+  commentId: N:Fantasy.PacketParser.Interface
+  href: Fantasy.html
+  name: Fantasy.PacketParser.Interface
+  nameWithType: Fantasy.PacketParser.Interface
+  fullName: Fantasy.PacketParser.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+  - name: .
+  - uid: Fantasy.PacketParser.Interface
+    name: Interface
+    href: Fantasy.PacketParser.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+  - name: .
+  - uid: Fantasy.PacketParser.Interface
+    name: Interface
+    href: Fantasy.PacketParser.Interface.html
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.PacketParser.Interface.APackInfo.Dispose
+  commentId: M:Fantasy.PacketParser.Interface.APackInfo.Dispose
+  parent: Fantasy.PacketParser.Interface.APackInfo
+  href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_Dispose
+  name: Dispose()
+  nameWithType: APackInfo.Dispose()
+  fullName: Fantasy.PacketParser.Interface.APackInfo.Dispose()
+  spec.csharp:
+  - uid: Fantasy.PacketParser.Interface.APackInfo.Dispose
+    name: Dispose
+    href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_Dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.PacketParser.Interface.APackInfo.Dispose
+    name: Dispose
+    href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_Dispose
+  - name: (
+  - name: )
+- uid: Fantasy.PacketParser.OuterPackInfo.Dispose*
+  commentId: Overload:Fantasy.PacketParser.OuterPackInfo.Dispose
+  href: Fantasy.PacketParser.OuterPackInfo.html#Fantasy_PacketParser_OuterPackInfo_Dispose
+  name: Dispose
+  nameWithType: OuterPackInfo.Dispose
+  fullName: Fantasy.PacketParser.OuterPackInfo.Dispose
+- uid: Fantasy.PacketParser.OuterPackInfo.Create*
+  commentId: Overload:Fantasy.PacketParser.OuterPackInfo.Create
+  href: Fantasy.PacketParser.OuterPackInfo.html#Fantasy_PacketParser_OuterPackInfo_Create_Fantasy_Network_Interface_ANetwork_
+  name: Create
+  nameWithType: OuterPackInfo.Create
+  fullName: Fantasy.PacketParser.OuterPackInfo.Create
+- uid: Fantasy.Network.Interface.ANetwork
+  commentId: T:Fantasy.Network.Interface.ANetwork
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.ANetwork.html
+  name: ANetwork
+  nameWithType: ANetwork
+  fullName: Fantasy.Network.Interface.ANetwork
+- uid: Fantasy.PacketParser.OuterPackInfo
+  commentId: T:Fantasy.PacketParser.OuterPackInfo
+  parent: Fantasy.PacketParser
+  href: Fantasy.PacketParser.OuterPackInfo.html
+  name: OuterPackInfo
+  nameWithType: OuterPackInfo
+  fullName: Fantasy.PacketParser.OuterPackInfo
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  href: Fantasy.html
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+- uid: Fantasy.PacketParser.Interface.APackInfo.RentMemoryStream(System.Int32)
+  commentId: M:Fantasy.PacketParser.Interface.APackInfo.RentMemoryStream(System.Int32)
+  parent: Fantasy.PacketParser.Interface.APackInfo
+  isExternal: true
+  href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_RentMemoryStream_System_Int32_
+  name: RentMemoryStream(int)
+  nameWithType: APackInfo.RentMemoryStream(int)
+  fullName: Fantasy.PacketParser.Interface.APackInfo.RentMemoryStream(int)
+  nameWithType.vb: APackInfo.RentMemoryStream(Integer)
+  fullName.vb: Fantasy.PacketParser.Interface.APackInfo.RentMemoryStream(Integer)
+  name.vb: RentMemoryStream(Integer)
+  spec.csharp:
+  - uid: Fantasy.PacketParser.Interface.APackInfo.RentMemoryStream(System.Int32)
+    name: RentMemoryStream
+    href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_RentMemoryStream_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Fantasy.PacketParser.Interface.APackInfo.RentMemoryStream(System.Int32)
+    name: RentMemoryStream
+    href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_RentMemoryStream_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Fantasy.PacketParser.OuterPackInfo.RentMemoryStream*
+  commentId: Overload:Fantasy.PacketParser.OuterPackInfo.RentMemoryStream
+  href: Fantasy.PacketParser.OuterPackInfo.html#Fantasy_PacketParser_OuterPackInfo_RentMemoryStream_System_Int32_
+  name: RentMemoryStream
+  nameWithType: OuterPackInfo.RentMemoryStream
+  fullName: Fantasy.PacketParser.OuterPackInfo.RentMemoryStream
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Fantasy.Serialize.MemoryStreamBuffer
+  commentId: T:Fantasy.Serialize.MemoryStreamBuffer
+  parent: Fantasy.Serialize
+  href: Fantasy.Serialize.MemoryStreamBuffer.html
+  name: MemoryStreamBuffer
+  nameWithType: MemoryStreamBuffer
+  fullName: Fantasy.Serialize.MemoryStreamBuffer
+- uid: Fantasy.Serialize
+  commentId: N:Fantasy.Serialize
+  href: Fantasy.html
+  name: Fantasy.Serialize
+  nameWithType: Fantasy.Serialize
+  fullName: Fantasy.Serialize
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+- uid: Fantasy.PacketParser.Interface.APackInfo.Deserialize(System.Type)
+  commentId: M:Fantasy.PacketParser.Interface.APackInfo.Deserialize(System.Type)
+  parent: Fantasy.PacketParser.Interface.APackInfo
+  isExternal: true
+  href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_Deserialize_System_Type_
+  name: Deserialize(Type)
+  nameWithType: APackInfo.Deserialize(Type)
+  fullName: Fantasy.PacketParser.Interface.APackInfo.Deserialize(System.Type)
+  spec.csharp:
+  - uid: Fantasy.PacketParser.Interface.APackInfo.Deserialize(System.Type)
+    name: Deserialize
+    href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_Deserialize_System_Type_
+  - name: (
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: )
+  spec.vb:
+  - uid: Fantasy.PacketParser.Interface.APackInfo.Deserialize(System.Type)
+    name: Deserialize
+    href: Fantasy.PacketParser.Interface.APackInfo.html#Fantasy_PacketParser_Interface_APackInfo_Deserialize_System_Type_
+  - name: (
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: )
+- uid: Fantasy.PacketParser.OuterPackInfo.Deserialize*
+  commentId: Overload:Fantasy.PacketParser.OuterPackInfo.Deserialize
+  href: Fantasy.PacketParser.OuterPackInfo.html#Fantasy_PacketParser_OuterPackInfo_Deserialize_System_Type_
+  name: Deserialize
+  nameWithType: OuterPackInfo.Deserialize
+  fullName: Fantasy.PacketParser.OuterPackInfo.Deserialize
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type

@@ -1,0 +1,988 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Scheduler.MessageSender
+  commentId: T:Fantasy.Scheduler.MessageSender
+  id: MessageSender
+  parent: Fantasy.Scheduler
+  children:
+  - Fantasy.Scheduler.MessageSender.Create(System.UInt32,Fantasy.Network.Interface.IRequest,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  - Fantasy.Scheduler.MessageSender.Create(System.UInt32,System.Int64,Fantasy.Network.Interface.IRouteMessage,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  - Fantasy.Scheduler.MessageSender.Create(System.UInt32,System.Type,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  - Fantasy.Scheduler.MessageSender.CreateTime
+  - Fantasy.Scheduler.MessageSender.Dispose
+  - Fantasy.Scheduler.MessageSender.MessageType
+  - Fantasy.Scheduler.MessageSender.Request
+  - Fantasy.Scheduler.MessageSender.RouteId
+  - Fantasy.Scheduler.MessageSender.RpcId
+  - Fantasy.Scheduler.MessageSender.Tcs
+  langs:
+  - csharp
+  - vb
+  name: MessageSender
+  nameWithType: MessageSender
+  fullName: Fantasy.Scheduler.MessageSender
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MessageSender
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+    startLine: 13
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  summary: 网络消息发送者的类。
+  example: []
+  syntax:
+    content: 'public struct MessageSender : IDisposable'
+    content.vb: Public Structure MessageSender Implements IDisposable
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - Fantasy.Scheduler.MessageSender.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Scheduler.MessageSender.RpcId
+  commentId: P:Fantasy.Scheduler.MessageSender.RpcId
+  id: RpcId
+  parent: Fantasy.Scheduler.MessageSender
+  langs:
+  - csharp
+  - vb
+  name: RpcId
+  nameWithType: MessageSender.RpcId
+  fullName: Fantasy.Scheduler.MessageSender.RpcId
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RpcId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+    startLine: 18
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  summary: 获取或设置 RPC ID。
+  example: []
+  syntax:
+    content: public readonly uint RpcId { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public Property RpcId As UInteger
+  overload: Fantasy.Scheduler.MessageSender.RpcId*
+- uid: Fantasy.Scheduler.MessageSender.RouteId
+  commentId: P:Fantasy.Scheduler.MessageSender.RouteId
+  id: RouteId
+  parent: Fantasy.Scheduler.MessageSender
+  langs:
+  - csharp
+  - vb
+  name: RouteId
+  nameWithType: MessageSender.RouteId
+  fullName: Fantasy.Scheduler.MessageSender.RouteId
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RouteId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+    startLine: 22
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  summary: 获取或设置路由 ID。
+  example: []
+  syntax:
+    content: public readonly long RouteId { get; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Property RouteId As Long
+  overload: Fantasy.Scheduler.MessageSender.RouteId*
+- uid: Fantasy.Scheduler.MessageSender.CreateTime
+  commentId: P:Fantasy.Scheduler.MessageSender.CreateTime
+  id: CreateTime
+  parent: Fantasy.Scheduler.MessageSender
+  langs:
+  - csharp
+  - vb
+  name: CreateTime
+  nameWithType: MessageSender.CreateTime
+  fullName: Fantasy.Scheduler.MessageSender.CreateTime
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CreateTime
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+    startLine: 26
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  summary: 获取或设置创建时间。
+  example: []
+  syntax:
+    content: public readonly long CreateTime { get; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Property CreateTime As Long
+  overload: Fantasy.Scheduler.MessageSender.CreateTime*
+- uid: Fantasy.Scheduler.MessageSender.MessageType
+  commentId: P:Fantasy.Scheduler.MessageSender.MessageType
+  id: MessageType
+  parent: Fantasy.Scheduler.MessageSender
+  langs:
+  - csharp
+  - vb
+  name: MessageType
+  nameWithType: MessageSender.MessageType
+  fullName: Fantasy.Scheduler.MessageSender.MessageType
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MessageType
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+    startLine: 30
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  summary: 获取或设置消息类型。
+  example: []
+  syntax:
+    content: public readonly Type MessageType { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: Public Property MessageType As Type
+  overload: Fantasy.Scheduler.MessageSender.MessageType*
+- uid: Fantasy.Scheduler.MessageSender.Request
+  commentId: P:Fantasy.Scheduler.MessageSender.Request
+  id: Request
+  parent: Fantasy.Scheduler.MessageSender
+  langs:
+  - csharp
+  - vb
+  name: Request
+  nameWithType: MessageSender.Request
+  fullName: Fantasy.Scheduler.MessageSender.Request
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Request
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+    startLine: 34
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  summary: 获取或设置请求消息。
+  example: []
+  syntax:
+    content: public readonly IMessage Request { get; }
+    parameters: []
+    return:
+      type: Fantasy.Network.Interface.IMessage
+    content.vb: Public Property Request As IMessage
+  overload: Fantasy.Scheduler.MessageSender.Request*
+- uid: Fantasy.Scheduler.MessageSender.Tcs
+  commentId: P:Fantasy.Scheduler.MessageSender.Tcs
+  id: Tcs
+  parent: Fantasy.Scheduler.MessageSender
+  langs:
+  - csharp
+  - vb
+  name: Tcs
+  nameWithType: MessageSender.Tcs
+  fullName: Fantasy.Scheduler.MessageSender.Tcs
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Tcs
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+    startLine: 38
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  summary: 获取或设置任务。
+  example: []
+  syntax:
+    content: public readonly FTask<IResponse> Tcs { get; }
+    parameters: []
+    return:
+      type: Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse}
+    content.vb: Public Property Tcs As FTask(Of IResponse)
+  overload: Fantasy.Scheduler.MessageSender.Tcs*
+- uid: Fantasy.Scheduler.MessageSender.Dispose
+  commentId: M:Fantasy.Scheduler.MessageSender.Dispose
+  id: Dispose
+  parent: Fantasy.Scheduler.MessageSender
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: MessageSender.Dispose()
+  fullName: Fantasy.Scheduler.MessageSender.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+    startLine: 43
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  summary: 释放资源。
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: Fantasy.Scheduler.MessageSender.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+- uid: Fantasy.Scheduler.MessageSender.Create(System.UInt32,System.Type,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  commentId: M:Fantasy.Scheduler.MessageSender.Create(System.UInt32,System.Type,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  id: Create(System.UInt32,System.Type,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  parent: Fantasy.Scheduler.MessageSender
+  langs:
+  - csharp
+  - vb
+  name: Create(uint, Type, FTask<IResponse>)
+  nameWithType: MessageSender.Create(uint, Type, FTask<IResponse>)
+  fullName: Fantasy.Scheduler.MessageSender.Create(uint, System.Type, Fantasy.Async.FTask<Fantasy.Network.Interface.IResponse>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Create
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+    startLine: 60
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  summary: 创建一个 <xref href="Fantasy.Scheduler.MessageSender" data-throw-if-not-resolved="false"></xref> 实例。
+  example: []
+  syntax:
+    content: public static MessageSender Create(uint rpcId, Type requestType, FTask<IResponse> tcs)
+    parameters:
+    - id: rpcId
+      type: System.UInt32
+      description: RPC ID。
+    - id: requestType
+      type: System.Type
+      description: 请求消息类型。
+    - id: tcs
+      type: Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse}
+      description: 任务。
+    return:
+      type: Fantasy.Scheduler.MessageSender
+      description: 创建的 <xref href="Fantasy.Scheduler.MessageSender" data-throw-if-not-resolved="false"></xref> 实例。
+    content.vb: Public Shared Function Create(rpcId As UInteger, requestType As Type, tcs As FTask(Of IResponse)) As MessageSender
+  overload: Fantasy.Scheduler.MessageSender.Create*
+  nameWithType.vb: MessageSender.Create(UInteger, Type, FTask(Of IResponse))
+  fullName.vb: Fantasy.Scheduler.MessageSender.Create(UInteger, System.Type, Fantasy.Async.FTask(Of Fantasy.Network.Interface.IResponse))
+  name.vb: Create(UInteger, Type, FTask(Of IResponse))
+- uid: Fantasy.Scheduler.MessageSender.Create(System.UInt32,Fantasy.Network.Interface.IRequest,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  commentId: M:Fantasy.Scheduler.MessageSender.Create(System.UInt32,Fantasy.Network.Interface.IRequest,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  id: Create(System.UInt32,Fantasy.Network.Interface.IRequest,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  parent: Fantasy.Scheduler.MessageSender
+  langs:
+  - csharp
+  - vb
+  name: Create(uint, IRequest, FTask<IResponse>)
+  nameWithType: MessageSender.Create(uint, IRequest, FTask<IResponse>)
+  fullName: Fantasy.Scheduler.MessageSender.Create(uint, Fantasy.Network.Interface.IRequest, Fantasy.Async.FTask<Fantasy.Network.Interface.IResponse>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Create
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+    startLine: 77
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  summary: 创建一个 <xref href="Fantasy.Scheduler.MessageSender" data-throw-if-not-resolved="false"></xref> 实例。
+  example: []
+  syntax:
+    content: public static MessageSender Create(uint rpcId, IRequest request, FTask<IResponse> tcs)
+    parameters:
+    - id: rpcId
+      type: System.UInt32
+      description: RPC ID。
+    - id: request
+      type: Fantasy.Network.Interface.IRequest
+      description: 请求消息。
+    - id: tcs
+      type: Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse}
+      description: 任务。
+    return:
+      type: Fantasy.Scheduler.MessageSender
+      description: 创建的 <xref href="Fantasy.Scheduler.MessageSender" data-throw-if-not-resolved="false"></xref> 实例。
+    content.vb: Public Shared Function Create(rpcId As UInteger, request As IRequest, tcs As FTask(Of IResponse)) As MessageSender
+  overload: Fantasy.Scheduler.MessageSender.Create*
+  nameWithType.vb: MessageSender.Create(UInteger, IRequest, FTask(Of IResponse))
+  fullName.vb: Fantasy.Scheduler.MessageSender.Create(UInteger, Fantasy.Network.Interface.IRequest, Fantasy.Async.FTask(Of Fantasy.Network.Interface.IResponse))
+  name.vb: Create(UInteger, IRequest, FTask(Of IResponse))
+- uid: Fantasy.Scheduler.MessageSender.Create(System.UInt32,System.Int64,Fantasy.Network.Interface.IRouteMessage,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  commentId: M:Fantasy.Scheduler.MessageSender.Create(System.UInt32,System.Int64,Fantasy.Network.Interface.IRouteMessage,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  id: Create(System.UInt32,System.Int64,Fantasy.Network.Interface.IRouteMessage,Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse})
+  parent: Fantasy.Scheduler.MessageSender
+  langs:
+  - csharp
+  - vb
+  name: Create(uint, long, IRouteMessage, FTask<IResponse>)
+  nameWithType: MessageSender.Create(uint, long, IRouteMessage, FTask<IResponse>)
+  fullName: Fantasy.Scheduler.MessageSender.Create(uint, long, Fantasy.Network.Interface.IRouteMessage, Fantasy.Async.FTask<Fantasy.Network.Interface.IResponse>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Create
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/MessageSender.cs
+    startLine: 95
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  summary: 创建一个 <xref href="Fantasy.Scheduler.MessageSender" data-throw-if-not-resolved="false"></xref> 实例。
+  example: []
+  syntax:
+    content: public static MessageSender Create(uint rpcId, long routeId, IRouteMessage request, FTask<IResponse> tcs)
+    parameters:
+    - id: rpcId
+      type: System.UInt32
+      description: RPC ID。
+    - id: routeId
+      type: System.Int64
+      description: 路由 ID。
+    - id: request
+      type: Fantasy.Network.Interface.IRouteMessage
+      description: 路由消息请求。
+    - id: tcs
+      type: Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse}
+      description: 任务。
+    return:
+      type: Fantasy.Scheduler.MessageSender
+      description: 创建的 <xref href="Fantasy.Scheduler.MessageSender" data-throw-if-not-resolved="false"></xref> 实例。
+    content.vb: Public Shared Function Create(rpcId As UInteger, routeId As Long, request As IRouteMessage, tcs As FTask(Of IResponse)) As MessageSender
+  overload: Fantasy.Scheduler.MessageSender.Create*
+  nameWithType.vb: MessageSender.Create(UInteger, Long, IRouteMessage, FTask(Of IResponse))
+  fullName.vb: Fantasy.Scheduler.MessageSender.Create(UInteger, Long, Fantasy.Network.Interface.IRouteMessage, Fantasy.Async.FTask(Of Fantasy.Network.Interface.IResponse))
+  name.vb: Create(UInteger, Long, IRouteMessage, FTask(Of IResponse))
+references:
+- uid: Fantasy.Scheduler
+  commentId: N:Fantasy.Scheduler
+  href: Fantasy.html
+  name: Fantasy.Scheduler
+  nameWithType: Fantasy.Scheduler
+  fullName: Fantasy.Scheduler
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Scheduler
+    name: Scheduler
+    href: Fantasy.Scheduler.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Scheduler
+    name: Scheduler
+    href: Fantasy.Scheduler.html
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.Scheduler.MessageSender.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<MessageSender>(MessageSender)
+  nameWithType: JsonHelper.ToJson<MessageSender>(MessageSender)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Scheduler.MessageSender>(Fantasy.Scheduler.MessageSender)
+  nameWithType.vb: JsonHelper.ToJson(Of MessageSender)(MessageSender)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Scheduler.MessageSender)(Fantasy.Scheduler.MessageSender)
+  name.vb: ToJson(Of MessageSender)(MessageSender)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Scheduler.MessageSender)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Scheduler.MessageSender
+    name: MessageSender
+    href: Fantasy.Scheduler.MessageSender.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Scheduler.MessageSender
+    name: MessageSender
+    href: Fantasy.Scheduler.MessageSender.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Scheduler.MessageSender)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Scheduler.MessageSender
+    name: MessageSender
+    href: Fantasy.Scheduler.MessageSender.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Scheduler.MessageSender
+    name: MessageSender
+    href: Fantasy.Scheduler.MessageSender.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Scheduler.MessageSender.RpcId*
+  commentId: Overload:Fantasy.Scheduler.MessageSender.RpcId
+  href: Fantasy.Scheduler.MessageSender.html#Fantasy_Scheduler_MessageSender_RpcId
+  name: RpcId
+  nameWithType: MessageSender.RpcId
+  fullName: Fantasy.Scheduler.MessageSender.RpcId
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: Fantasy.Scheduler.MessageSender.RouteId*
+  commentId: Overload:Fantasy.Scheduler.MessageSender.RouteId
+  href: Fantasy.Scheduler.MessageSender.html#Fantasy_Scheduler_MessageSender_RouteId
+  name: RouteId
+  nameWithType: MessageSender.RouteId
+  fullName: Fantasy.Scheduler.MessageSender.RouteId
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.Scheduler.MessageSender.CreateTime*
+  commentId: Overload:Fantasy.Scheduler.MessageSender.CreateTime
+  href: Fantasy.Scheduler.MessageSender.html#Fantasy_Scheduler_MessageSender_CreateTime
+  name: CreateTime
+  nameWithType: MessageSender.CreateTime
+  fullName: Fantasy.Scheduler.MessageSender.CreateTime
+- uid: Fantasy.Scheduler.MessageSender.MessageType*
+  commentId: Overload:Fantasy.Scheduler.MessageSender.MessageType
+  href: Fantasy.Scheduler.MessageSender.html#Fantasy_Scheduler_MessageSender_MessageType
+  name: MessageType
+  nameWithType: MessageSender.MessageType
+  fullName: Fantasy.Scheduler.MessageSender.MessageType
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Fantasy.Scheduler.MessageSender.Request*
+  commentId: Overload:Fantasy.Scheduler.MessageSender.Request
+  href: Fantasy.Scheduler.MessageSender.html#Fantasy_Scheduler_MessageSender_Request
+  name: Request
+  nameWithType: MessageSender.Request
+  fullName: Fantasy.Scheduler.MessageSender.Request
+- uid: Fantasy.Network.Interface.IMessage
+  commentId: T:Fantasy.Network.Interface.IMessage
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IMessage.html
+  name: IMessage
+  nameWithType: IMessage
+  fullName: Fantasy.Network.Interface.IMessage
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  href: Fantasy.html
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+- uid: Fantasy.Scheduler.MessageSender.Tcs*
+  commentId: Overload:Fantasy.Scheduler.MessageSender.Tcs
+  href: Fantasy.Scheduler.MessageSender.html#Fantasy_Scheduler_MessageSender_Tcs
+  name: Tcs
+  nameWithType: MessageSender.Tcs
+  fullName: Fantasy.Scheduler.MessageSender.Tcs
+- uid: Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse}
+  commentId: T:Fantasy.Async.FTask{Fantasy.Network.Interface.IResponse}
+  parent: Fantasy.Async
+  definition: Fantasy.Async.FTask`1
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<IResponse>
+  nameWithType: FTask<IResponse>
+  fullName: Fantasy.Async.FTask<Fantasy.Network.Interface.IResponse>
+  nameWithType.vb: FTask(Of IResponse)
+  fullName.vb: Fantasy.Async.FTask(Of Fantasy.Network.Interface.IResponse)
+  name.vb: FTask(Of IResponse)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - uid: Fantasy.Network.Interface.IResponse
+    name: IResponse
+    href: Fantasy.Network.Interface.IResponse.html
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.Interface.IResponse
+    name: IResponse
+    href: Fantasy.Network.Interface.IResponse.html
+  - name: )
+- uid: Fantasy.Async.FTask`1
+  commentId: T:Fantasy.Async.FTask`1
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<T>
+  nameWithType: FTask<T>
+  fullName: Fantasy.Async.FTask<T>
+  nameWithType.vb: FTask(Of T)
+  fullName.vb: Fantasy.Async.FTask(Of T)
+  name.vb: FTask(Of T)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+- uid: Fantasy.Scheduler.MessageSender.Dispose*
+  commentId: Overload:Fantasy.Scheduler.MessageSender.Dispose
+  href: Fantasy.Scheduler.MessageSender.html#Fantasy_Scheduler_MessageSender_Dispose
+  name: Dispose
+  nameWithType: MessageSender.Dispose
+  fullName: Fantasy.Scheduler.MessageSender.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: Fantasy.Scheduler.MessageSender
+  commentId: T:Fantasy.Scheduler.MessageSender
+  parent: Fantasy.Scheduler
+  href: Fantasy.Scheduler.MessageSender.html
+  name: MessageSender
+  nameWithType: MessageSender
+  fullName: Fantasy.Scheduler.MessageSender
+- uid: Fantasy.Scheduler.MessageSender.Create*
+  commentId: Overload:Fantasy.Scheduler.MessageSender.Create
+  href: Fantasy.Scheduler.MessageSender.html#Fantasy_Scheduler_MessageSender_Create_System_UInt32_System_Type_Fantasy_Async_FTask_Fantasy_Network_Interface_IResponse__
+  name: Create
+  nameWithType: MessageSender.Create
+  fullName: Fantasy.Scheduler.MessageSender.Create
+- uid: Fantasy.Network.Interface.IRequest
+  commentId: T:Fantasy.Network.Interface.IRequest
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IRequest.html
+  name: IRequest
+  nameWithType: IRequest
+  fullName: Fantasy.Network.Interface.IRequest
+- uid: Fantasy.Network.Interface.IRouteMessage
+  commentId: T:Fantasy.Network.Interface.IRouteMessage
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IRouteMessage.html
+  name: IRouteMessage
+  nameWithType: IRouteMessage
+  fullName: Fantasy.Network.Interface.IRouteMessage

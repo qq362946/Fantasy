@@ -1,6 +1,9 @@
 #if FANTASY_NET
 using System.ComponentModel;
-namespace Fantasy;
+using Fantasy.Entitas;
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+namespace Fantasy.Serialize;
 
 public static class SupportInitializeChecker<T> where T : Entity
 {

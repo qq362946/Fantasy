@@ -1,0 +1,1369 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeConcurrentStack`1
+  commentId: T:NativeCollections.NativeConcurrentStack`1
+  id: NativeConcurrentStack`1
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeConcurrentStack`1.#ctor(System.Int32,System.Int32)
+  - NativeCollections.NativeConcurrentStack`1.Clear
+  - NativeCollections.NativeConcurrentStack`1.Count
+  - NativeCollections.NativeConcurrentStack`1.Dispose
+  - NativeCollections.NativeConcurrentStack`1.Empty
+  - NativeCollections.NativeConcurrentStack`1.Equals(NativeCollections.NativeConcurrentStack{`0})
+  - NativeCollections.NativeConcurrentStack`1.Equals(System.Object)
+  - NativeCollections.NativeConcurrentStack`1.GetHashCode
+  - NativeCollections.NativeConcurrentStack`1.IsCreated
+  - NativeCollections.NativeConcurrentStack`1.IsEmpty
+  - NativeCollections.NativeConcurrentStack`1.Push(`0@)
+  - NativeCollections.NativeConcurrentStack`1.ToString
+  - NativeCollections.NativeConcurrentStack`1.TryPop(`0@)
+  - NativeCollections.NativeConcurrentStack`1.op_Equality(NativeCollections.NativeConcurrentStack{`0},NativeCollections.NativeConcurrentStack{`0})
+  - NativeCollections.NativeConcurrentStack`1.op_Inequality(NativeCollections.NativeConcurrentStack{`0},NativeCollections.NativeConcurrentStack{`0})
+  langs:
+  - csharp
+  - vb
+  name: NativeConcurrentStack<T>
+  nameWithType: NativeConcurrentStack<T>
+  fullName: NativeCollections.NativeConcurrentStack<T>
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeConcurrentStack
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 28
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: >-
+    Native concurrentStack
+
+    (Slower than ConcurrentStack, disable Enumerator, try peek, push/pop range either)
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeConcurrentStack<T> : IDisposable, IEquatable<NativeConcurrentStack<T>> where T : unmanaged
+    typeParameters:
+    - id: T
+      description: Type
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeConcurrentStack(Of T As Structure) Implements IDisposable, IEquatable(Of NativeConcurrentStack(Of T))
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeConcurrentStack`1}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeConcurrentStack`1.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+  nameWithType.vb: NativeConcurrentStack(Of T)
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T)
+  name.vb: NativeConcurrentStack(Of T)
+- uid: NativeCollections.NativeConcurrentStack`1.#ctor(System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeConcurrentStack`1.#ctor(System.Int32,System.Int32)
+  id: '#ctor(System.Int32,System.Int32)'
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: NativeConcurrentStack(int, int)
+  nameWithType: NativeConcurrentStack<T>.NativeConcurrentStack(int, int)
+  fullName: NativeCollections.NativeConcurrentStack<T>.NativeConcurrentStack(int, int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 63
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeConcurrentStack(int size, int maxFreeSlabs)
+    parameters:
+    - id: size
+      type: System.Int32
+      description: Size
+    - id: maxFreeSlabs
+      type: System.Int32
+      description: Max free slabs
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(size As Integer, maxFreeSlabs As Integer)
+  overload: NativeCollections.NativeConcurrentStack`1.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentStack(Of T).New(Integer, Integer)
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).New(Integer, Integer)
+  name.vb: New(Integer, Integer)
+- uid: NativeCollections.NativeConcurrentStack`1.IsCreated
+  commentId: P:NativeCollections.NativeConcurrentStack`1.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeConcurrentStack<T>.IsCreated
+  fullName: NativeCollections.NativeConcurrentStack<T>.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 76
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeConcurrentStack`1.IsCreated*
+  nameWithType.vb: NativeConcurrentStack(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).IsCreated
+- uid: NativeCollections.NativeConcurrentStack`1.IsEmpty
+  commentId: P:NativeCollections.NativeConcurrentStack`1.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativeConcurrentStack<T>.IsEmpty
+  fullName: NativeCollections.NativeConcurrentStack<T>.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 81
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: IsEmpty
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativeConcurrentStack`1.IsEmpty*
+  nameWithType.vb: NativeConcurrentStack(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).IsEmpty
+- uid: NativeCollections.NativeConcurrentStack`1.Count
+  commentId: P:NativeCollections.NativeConcurrentStack`1.Count
+  id: Count
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: NativeConcurrentStack<T>.Count
+  fullName: NativeCollections.NativeConcurrentStack<T>.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 86
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Count
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: NativeCollections.NativeConcurrentStack`1.Count*
+  nameWithType.vb: NativeConcurrentStack(Of T).Count
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Count
+- uid: NativeCollections.NativeConcurrentStack`1.Equals(NativeCollections.NativeConcurrentStack{`0})
+  commentId: M:NativeCollections.NativeConcurrentStack`1.Equals(NativeCollections.NativeConcurrentStack{`0})
+  id: Equals(NativeCollections.NativeConcurrentStack{`0})
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeConcurrentStack<T>)
+  nameWithType: NativeConcurrentStack<T>.Equals(NativeConcurrentStack<T>)
+  fullName: NativeCollections.NativeConcurrentStack<T>.Equals(NativeCollections.NativeConcurrentStack<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 103
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeConcurrentStack<T> other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeConcurrentStack`1
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeConcurrentStack(Of T)) As Boolean
+  overload: NativeCollections.NativeConcurrentStack`1.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeConcurrentStack`1}.Equals(NativeCollections.NativeConcurrentStack{{T}})
+  nameWithType.vb: NativeConcurrentStack(Of T).Equals(NativeConcurrentStack(Of T))
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Equals(NativeCollections.NativeConcurrentStack(Of T))
+  name.vb: Equals(NativeConcurrentStack(Of T))
+- uid: NativeCollections.NativeConcurrentStack`1.Equals(System.Object)
+  commentId: M:NativeCollections.NativeConcurrentStack`1.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeConcurrentStack<T>.Equals(object?)
+  fullName: NativeCollections.NativeConcurrentStack<T>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 110
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeConcurrentStack`1.Equals*
+  nameWithType.vb: NativeConcurrentStack(Of T).Equals(Object)
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeConcurrentStack`1.GetHashCode
+  commentId: M:NativeCollections.NativeConcurrentStack`1.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeConcurrentStack<T>.GetHashCode()
+  fullName: NativeCollections.NativeConcurrentStack<T>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 116
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeConcurrentStack`1.GetHashCode*
+  nameWithType.vb: NativeConcurrentStack(Of T).GetHashCode()
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).GetHashCode()
+- uid: NativeCollections.NativeConcurrentStack`1.ToString
+  commentId: M:NativeCollections.NativeConcurrentStack`1.ToString
+  id: ToString
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeConcurrentStack<T>.ToString()
+  fullName: NativeCollections.NativeConcurrentStack<T>.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 122
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeConcurrentStack`1.ToString*
+  nameWithType.vb: NativeConcurrentStack(Of T).ToString()
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).ToString()
+- uid: NativeCollections.NativeConcurrentStack`1.op_Equality(NativeCollections.NativeConcurrentStack{`0},NativeCollections.NativeConcurrentStack{`0})
+  commentId: M:NativeCollections.NativeConcurrentStack`1.op_Equality(NativeCollections.NativeConcurrentStack{`0},NativeCollections.NativeConcurrentStack{`0})
+  id: op_Equality(NativeCollections.NativeConcurrentStack{`0},NativeCollections.NativeConcurrentStack{`0})
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeConcurrentStack<T>, NativeConcurrentStack<T>)
+  nameWithType: NativeConcurrentStack<T>.operator ==(NativeConcurrentStack<T>, NativeConcurrentStack<T>)
+  fullName: NativeCollections.NativeConcurrentStack<T>.operator ==(NativeCollections.NativeConcurrentStack<T>, NativeCollections.NativeConcurrentStack<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 130
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeConcurrentStack<T> left, NativeConcurrentStack<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeConcurrentStack`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeConcurrentStack`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeConcurrentStack(Of T), right As NativeConcurrentStack(Of T)) As Boolean
+  overload: NativeCollections.NativeConcurrentStack`1.op_Equality*
+  nameWithType.vb: NativeConcurrentStack(Of T).=(NativeConcurrentStack(Of T), NativeConcurrentStack(Of T))
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).=(NativeCollections.NativeConcurrentStack(Of T), NativeCollections.NativeConcurrentStack(Of T))
+  name.vb: =(NativeConcurrentStack(Of T), NativeConcurrentStack(Of T))
+- uid: NativeCollections.NativeConcurrentStack`1.op_Inequality(NativeCollections.NativeConcurrentStack{`0},NativeCollections.NativeConcurrentStack{`0})
+  commentId: M:NativeCollections.NativeConcurrentStack`1.op_Inequality(NativeCollections.NativeConcurrentStack{`0},NativeCollections.NativeConcurrentStack{`0})
+  id: op_Inequality(NativeCollections.NativeConcurrentStack{`0},NativeCollections.NativeConcurrentStack{`0})
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeConcurrentStack<T>, NativeConcurrentStack<T>)
+  nameWithType: NativeConcurrentStack<T>.operator !=(NativeConcurrentStack<T>, NativeConcurrentStack<T>)
+  fullName: NativeCollections.NativeConcurrentStack<T>.operator !=(NativeCollections.NativeConcurrentStack<T>, NativeCollections.NativeConcurrentStack<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 138
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeConcurrentStack<T> left, NativeConcurrentStack<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeConcurrentStack`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeConcurrentStack`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeConcurrentStack(Of T), right As NativeConcurrentStack(Of T)) As Boolean
+  overload: NativeCollections.NativeConcurrentStack`1.op_Inequality*
+  nameWithType.vb: NativeConcurrentStack(Of T).<>(NativeConcurrentStack(Of T), NativeConcurrentStack(Of T))
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).<>(NativeCollections.NativeConcurrentStack(Of T), NativeCollections.NativeConcurrentStack(Of T))
+  name.vb: <>(NativeConcurrentStack(Of T), NativeConcurrentStack(Of T))
+- uid: NativeCollections.NativeConcurrentStack`1.Dispose
+  commentId: M:NativeCollections.NativeConcurrentStack`1.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeConcurrentStack<T>.Dispose()
+  fullName: NativeCollections.NativeConcurrentStack<T>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 143
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeConcurrentStack`1.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentStack(Of T).Dispose()
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Dispose()
+- uid: NativeCollections.NativeConcurrentStack`1.Clear
+  commentId: M:NativeCollections.NativeConcurrentStack`1.Clear
+  id: Clear
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: NativeConcurrentStack<T>.Clear()
+  fullName: NativeCollections.NativeConcurrentStack<T>.Clear()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clear
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 156
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Clear
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Clear()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Clear()
+  overload: NativeCollections.NativeConcurrentStack`1.Clear*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentStack(Of T).Clear()
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Clear()
+- uid: NativeCollections.NativeConcurrentStack`1.Push(`0@)
+  commentId: M:NativeCollections.NativeConcurrentStack`1.Push(`0@)
+  id: Push(`0@)
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: Push(in T)
+  nameWithType: NativeConcurrentStack<T>.Push(in T)
+  fullName: NativeCollections.NativeConcurrentStack<T>.Push(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Push
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 180
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Push
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Push(in T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Push(item As T)
+  overload: NativeCollections.NativeConcurrentStack`1.Push*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentStack(Of T).Push(T)
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Push(T)
+  name.vb: Push(T)
+- uid: NativeCollections.NativeConcurrentStack`1.TryPop(`0@)
+  commentId: M:NativeCollections.NativeConcurrentStack`1.TryPop(`0@)
+  id: TryPop(`0@)
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: TryPop(out T)
+  nameWithType: NativeConcurrentStack<T>.TryPop(out T)
+  fullName: NativeCollections.NativeConcurrentStack<T>.TryPop(out T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryPop
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 227
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try pop
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryPop(out T result)
+    parameters:
+    - id: result
+      type: '{T}'
+      description: Item
+    return:
+      type: System.Boolean
+      description: Popped
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryPop(result As T) As Boolean
+  overload: NativeCollections.NativeConcurrentStack`1.TryPop*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentStack(Of T).TryPop(T)
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).TryPop(T)
+  name.vb: TryPop(T)
+- uid: NativeCollections.NativeConcurrentStack`1.Empty
+  commentId: P:NativeCollections.NativeConcurrentStack`1.Empty
+  id: Empty
+  parent: NativeCollections.NativeConcurrentStack`1
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeConcurrentStack<T>.Empty
+  fullName: NativeCollections.NativeConcurrentStack<T>.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentStack.cs
+    startLine: 323
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeConcurrentStack<T> Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeConcurrentStack`1
+    content.vb: Public Shared ReadOnly Property Empty As NativeConcurrentStack(Of T)
+  overload: NativeCollections.NativeConcurrentStack`1.Empty*
+  nameWithType.vb: NativeConcurrentStack(Of T).Empty
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Empty
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeConcurrentStack`1}
+  commentId: T:System.IEquatable{NativeCollections.NativeConcurrentStack`1}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeConcurrentStack<T>>
+  nameWithType: IEquatable<NativeConcurrentStack<T>>
+  fullName: System.IEquatable<NativeCollections.NativeConcurrentStack<T>>
+  nameWithType.vb: IEquatable(Of NativeConcurrentStack(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeConcurrentStack(Of T))
+  name.vb: IEquatable(Of NativeConcurrentStack(Of T))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeConcurrentStack`1.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeConcurrentStack<T>>(NativeConcurrentStack<T>)
+  nameWithType: JsonHelper.ToJson<NativeConcurrentStack<T>>(NativeConcurrentStack<T>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeConcurrentStack<T>>(NativeCollections.NativeConcurrentStack<T>)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeConcurrentStack(Of T))(NativeConcurrentStack(Of T))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeConcurrentStack(Of T))(NativeCollections.NativeConcurrentStack(Of T))
+  name.vb: ToJson(Of NativeConcurrentStack(Of T))(NativeConcurrentStack(Of T))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeConcurrentStack{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeConcurrentStack{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeConcurrentStack`1.#ctor*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.#ctor
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1__ctor_System_Int32_System_Int32_
+  name: NativeConcurrentStack
+  nameWithType: NativeConcurrentStack<T>.NativeConcurrentStack
+  fullName: NativeCollections.NativeConcurrentStack<T>.NativeConcurrentStack
+  nameWithType.vb: NativeConcurrentStack(Of T).New
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativeConcurrentStack`1.IsCreated*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.IsCreated
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_IsCreated
+  name: IsCreated
+  nameWithType: NativeConcurrentStack<T>.IsCreated
+  fullName: NativeCollections.NativeConcurrentStack<T>.IsCreated
+  nameWithType.vb: NativeConcurrentStack(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeConcurrentStack`1.IsEmpty*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.IsEmpty
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_IsEmpty
+  name: IsEmpty
+  nameWithType: NativeConcurrentStack<T>.IsEmpty
+  fullName: NativeCollections.NativeConcurrentStack<T>.IsEmpty
+  nameWithType.vb: NativeConcurrentStack(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).IsEmpty
+- uid: NativeCollections.NativeConcurrentStack`1.Count*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.Count
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_Count
+  name: Count
+  nameWithType: NativeConcurrentStack<T>.Count
+  fullName: NativeCollections.NativeConcurrentStack<T>.Count
+  nameWithType.vb: NativeConcurrentStack(Of T).Count
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Count
+- uid: NativeCollections.NativeConcurrentStack`1.Equals*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.Equals
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_Equals_NativeCollections_NativeConcurrentStack__0__
+  name: Equals
+  nameWithType: NativeConcurrentStack<T>.Equals
+  fullName: NativeCollections.NativeConcurrentStack<T>.Equals
+  nameWithType.vb: NativeConcurrentStack(Of T).Equals
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Equals
+- uid: System.IEquatable{NativeCollections.NativeConcurrentStack`1}.Equals(NativeCollections.NativeConcurrentStack{{T}})
+  commentId: M:System.IEquatable{NativeCollections.NativeConcurrentStack`1}.Equals(NativeCollections.NativeConcurrentStack{`0})
+  parent: System.IEquatable{NativeCollections.NativeConcurrentStack`1}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeConcurrentStack<T>)
+  nameWithType: IEquatable<NativeConcurrentStack<T>>.Equals(NativeConcurrentStack<T>)
+  fullName: System.IEquatable<NativeCollections.NativeConcurrentStack<T>>.Equals(NativeCollections.NativeConcurrentStack<T>)
+  nameWithType.vb: IEquatable(Of NativeConcurrentStack(Of T)).Equals(NativeConcurrentStack(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeConcurrentStack(Of T)).Equals(NativeCollections.NativeConcurrentStack(Of T))
+  name.vb: Equals(NativeConcurrentStack(Of T))
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeConcurrentStack`1}.Equals(NativeCollections.NativeConcurrentStack{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeConcurrentStack`1}.Equals(NativeCollections.NativeConcurrentStack{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: NativeCollections.NativeConcurrentStack`1
+  commentId: T:NativeCollections.NativeConcurrentStack`1
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentStack-1.html
+  name: NativeConcurrentStack<T>
+  nameWithType: NativeConcurrentStack<T>
+  fullName: NativeCollections.NativeConcurrentStack<T>
+  nameWithType.vb: NativeConcurrentStack(Of T)
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T)
+  name.vb: NativeConcurrentStack(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentStack`1.GetHashCode*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.GetHashCode
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeConcurrentStack<T>.GetHashCode
+  fullName: NativeCollections.NativeConcurrentStack<T>.GetHashCode
+  nameWithType.vb: NativeConcurrentStack(Of T).GetHashCode
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentStack`1.ToString*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.ToString
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_ToString
+  name: ToString
+  nameWithType: NativeConcurrentStack<T>.ToString
+  fullName: NativeCollections.NativeConcurrentStack<T>.ToString
+  nameWithType.vb: NativeConcurrentStack(Of T).ToString
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeConcurrentStack`1.op_Equality*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.op_Equality
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_op_Equality_NativeCollections_NativeConcurrentStack__0__NativeCollections_NativeConcurrentStack__0__
+  name: operator ==
+  nameWithType: NativeConcurrentStack<T>.operator ==
+  fullName: NativeCollections.NativeConcurrentStack<T>.operator ==
+  nameWithType.vb: NativeConcurrentStack(Of T).=
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentStack`1.op_Equality*
+    name: ==
+    href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_op_Equality_NativeCollections_NativeConcurrentStack__0__NativeCollections_NativeConcurrentStack__0__
+- uid: NativeCollections.NativeConcurrentStack`1.op_Inequality*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.op_Inequality
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_op_Inequality_NativeCollections_NativeConcurrentStack__0__NativeCollections_NativeConcurrentStack__0__
+  name: operator !=
+  nameWithType: NativeConcurrentStack<T>.operator !=
+  fullName: NativeCollections.NativeConcurrentStack<T>.operator !=
+  nameWithType.vb: NativeConcurrentStack(Of T).<>
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentStack`1.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_op_Inequality_NativeCollections_NativeConcurrentStack__0__NativeCollections_NativeConcurrentStack__0__
+- uid: NativeCollections.NativeConcurrentStack`1.Dispose*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.Dispose
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_Dispose
+  name: Dispose
+  nameWithType: NativeConcurrentStack<T>.Dispose
+  fullName: NativeCollections.NativeConcurrentStack<T>.Dispose
+  nameWithType.vb: NativeConcurrentStack(Of T).Dispose
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentStack`1.Clear*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.Clear
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_Clear
+  name: Clear
+  nameWithType: NativeConcurrentStack<T>.Clear
+  fullName: NativeCollections.NativeConcurrentStack<T>.Clear
+  nameWithType.vb: NativeConcurrentStack(Of T).Clear
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Clear
+- uid: NativeCollections.NativeConcurrentStack`1.Push*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.Push
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_Push__0__
+  name: Push
+  nameWithType: NativeConcurrentStack<T>.Push
+  fullName: NativeCollections.NativeConcurrentStack<T>.Push
+  nameWithType.vb: NativeConcurrentStack(Of T).Push
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Push
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: NativeCollections.NativeConcurrentStack`1.TryPop*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.TryPop
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_TryPop__0__
+  name: TryPop
+  nameWithType: NativeConcurrentStack<T>.TryPop
+  fullName: NativeCollections.NativeConcurrentStack<T>.TryPop
+  nameWithType.vb: NativeConcurrentStack(Of T).TryPop
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).TryPop
+- uid: NativeCollections.NativeConcurrentStack`1.Empty*
+  commentId: Overload:NativeCollections.NativeConcurrentStack`1.Empty
+  href: NativeCollections.NativeConcurrentStack-1.html#NativeCollections_NativeConcurrentStack_1_Empty
+  name: Empty
+  nameWithType: NativeConcurrentStack<T>.Empty
+  fullName: NativeCollections.NativeConcurrentStack<T>.Empty
+  nameWithType.vb: NativeConcurrentStack(Of T).Empty
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T).Empty

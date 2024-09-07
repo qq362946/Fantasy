@@ -1,8 +1,9 @@
 using System;
 using System.IO;
+using Fantasy.Serialize;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace Fantasy
+namespace Fantasy.Network.Interface
 {
     public interface INetworkChannel : IDisposable
     {

@@ -1,0 +1,654 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Async.CoroutineLockPool
+  commentId: T:Fantasy.Async.CoroutineLockPool
+  id: CoroutineLockPool
+  parent: Fantasy.Async
+  children:
+  - Fantasy.Async.CoroutineLockPool.#ctor
+  langs:
+  - csharp
+  - vb
+  name: CoroutineLockPool
+  nameWithType: CoroutineLockPool
+  fullName: Fantasy.Async.CoroutineLockPool
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/CoroutineLock/CoroutineLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CoroutineLockPool
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/CoroutineLock/CoroutineLock.cs
+    startLine: 11
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  summary: 协程锁专用的对象池
+  example: []
+  syntax:
+    content: 'public sealed class CoroutineLockPool : PoolCore<CoroutineLock>'
+    content.vb: Public NotInheritable Class CoroutineLockPool Inherits PoolCore(Of CoroutineLock)
+  inheritance:
+  - System.Object
+  - Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}
+  inheritedMembers:
+  - Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Count
+  - Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Rent
+  - Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Return(Fantasy.Async.CoroutineLock)
+  - Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Dispose
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Async.CoroutineLockPool.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Async.CoroutineLockPool.#ctor
+  commentId: M:Fantasy.Async.CoroutineLockPool.#ctor
+  id: '#ctor'
+  parent: Fantasy.Async.CoroutineLockPool
+  langs:
+  - csharp
+  - vb
+  name: CoroutineLockPool()
+  nameWithType: CoroutineLockPool.CoroutineLockPool()
+  fullName: Fantasy.Async.CoroutineLockPool.CoroutineLockPool()
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/CoroutineLock/CoroutineLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/CoroutineLock/CoroutineLock.cs
+    startLine: 16
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  summary: 协程锁专用的对象池的构造函数
+  example: []
+  syntax:
+    content: public CoroutineLockPool()
+    content.vb: Public Sub New()
+  overload: Fantasy.Async.CoroutineLockPool.#ctor*
+  nameWithType.vb: CoroutineLockPool.New()
+  fullName.vb: Fantasy.Async.CoroutineLockPool.New()
+  name.vb: New()
+references:
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}
+  commentId: T:Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}
+  parent: Fantasy.Pool
+  definition: Fantasy.Pool.PoolCore`1
+  href: Fantasy.Pool.PoolCore-1.html
+  name: PoolCore<CoroutineLock>
+  nameWithType: PoolCore<CoroutineLock>
+  fullName: Fantasy.Pool.PoolCore<Fantasy.Async.CoroutineLock>
+  nameWithType.vb: PoolCore(Of CoroutineLock)
+  fullName.vb: Fantasy.Pool.PoolCore(Of Fantasy.Async.CoroutineLock)
+  name.vb: PoolCore(Of CoroutineLock)
+  spec.csharp:
+  - uid: Fantasy.Pool.PoolCore`1
+    name: PoolCore
+    href: Fantasy.Pool.PoolCore-1.html
+  - name: <
+  - uid: Fantasy.Async.CoroutineLock
+    name: CoroutineLock
+    href: Fantasy.Async.CoroutineLock.html
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Pool.PoolCore`1
+    name: PoolCore
+    href: Fantasy.Pool.PoolCore-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Async.CoroutineLock
+    name: CoroutineLock
+    href: Fantasy.Async.CoroutineLock.html
+  - name: )
+- uid: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Count
+  commentId: P:Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Count
+  parent: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}
+  definition: Fantasy.Pool.PoolCore`1.Count
+  href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Count
+  name: Count
+  nameWithType: PoolCore<CoroutineLock>.Count
+  fullName: Fantasy.Pool.PoolCore<Fantasy.Async.CoroutineLock>.Count
+  nameWithType.vb: PoolCore(Of CoroutineLock).Count
+  fullName.vb: Fantasy.Pool.PoolCore(Of Fantasy.Async.CoroutineLock).Count
+- uid: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Rent
+  commentId: M:Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Rent
+  parent: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}
+  definition: Fantasy.Pool.PoolCore`1.Rent
+  href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Rent
+  name: Rent()
+  nameWithType: PoolCore<CoroutineLock>.Rent()
+  fullName: Fantasy.Pool.PoolCore<Fantasy.Async.CoroutineLock>.Rent()
+  nameWithType.vb: PoolCore(Of CoroutineLock).Rent()
+  fullName.vb: Fantasy.Pool.PoolCore(Of Fantasy.Async.CoroutineLock).Rent()
+  spec.csharp:
+  - uid: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Rent
+    name: Rent
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Rent
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Rent
+    name: Rent
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Rent
+  - name: (
+  - name: )
+- uid: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Return(Fantasy.Async.CoroutineLock)
+  commentId: M:Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Return(Fantasy.Async.CoroutineLock)
+  parent: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}
+  definition: Fantasy.Pool.PoolCore`1.Return(`0)
+  href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Return__0_
+  name: Return(CoroutineLock)
+  nameWithType: PoolCore<CoroutineLock>.Return(CoroutineLock)
+  fullName: Fantasy.Pool.PoolCore<Fantasy.Async.CoroutineLock>.Return(Fantasy.Async.CoroutineLock)
+  nameWithType.vb: PoolCore(Of CoroutineLock).Return(CoroutineLock)
+  fullName.vb: Fantasy.Pool.PoolCore(Of Fantasy.Async.CoroutineLock).Return(Fantasy.Async.CoroutineLock)
+  spec.csharp:
+  - uid: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Return(Fantasy.Async.CoroutineLock)
+    name: Return
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Return__0_
+  - name: (
+  - uid: Fantasy.Async.CoroutineLock
+    name: CoroutineLock
+    href: Fantasy.Async.CoroutineLock.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Return(Fantasy.Async.CoroutineLock)
+    name: Return
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Return__0_
+  - name: (
+  - uid: Fantasy.Async.CoroutineLock
+    name: CoroutineLock
+    href: Fantasy.Async.CoroutineLock.html
+  - name: )
+- uid: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Dispose
+  commentId: M:Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Dispose
+  parent: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}
+  definition: Fantasy.Pool.PoolCore`1.Dispose
+  href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Dispose
+  name: Dispose()
+  nameWithType: PoolCore<CoroutineLock>.Dispose()
+  fullName: Fantasy.Pool.PoolCore<Fantasy.Async.CoroutineLock>.Dispose()
+  nameWithType.vb: PoolCore(Of CoroutineLock).Dispose()
+  fullName.vb: Fantasy.Pool.PoolCore(Of Fantasy.Async.CoroutineLock).Dispose()
+  spec.csharp:
+  - uid: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Dispose
+    name: Dispose
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Pool.PoolCore{Fantasy.Async.CoroutineLock}.Dispose
+    name: Dispose
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Dispose
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Async.CoroutineLockPool.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<CoroutineLockPool>(CoroutineLockPool)
+  nameWithType: JsonHelper.ToJson<CoroutineLockPool>(CoroutineLockPool)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Async.CoroutineLockPool>(Fantasy.Async.CoroutineLockPool)
+  nameWithType.vb: JsonHelper.ToJson(Of CoroutineLockPool)(CoroutineLockPool)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Async.CoroutineLockPool)(Fantasy.Async.CoroutineLockPool)
+  name.vb: ToJson(Of CoroutineLockPool)(CoroutineLockPool)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Async.CoroutineLockPool)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Async.CoroutineLockPool
+    name: CoroutineLockPool
+    href: Fantasy.Async.CoroutineLockPool.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Async.CoroutineLockPool
+    name: CoroutineLockPool
+    href: Fantasy.Async.CoroutineLockPool.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Async.CoroutineLockPool)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Async.CoroutineLockPool
+    name: CoroutineLockPool
+    href: Fantasy.Async.CoroutineLockPool.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Async.CoroutineLockPool
+    name: CoroutineLockPool
+    href: Fantasy.Async.CoroutineLockPool.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Pool.PoolCore`1
+  commentId: T:Fantasy.Pool.PoolCore`1
+  href: Fantasy.Pool.PoolCore-1.html
+  name: PoolCore<T>
+  nameWithType: PoolCore<T>
+  fullName: Fantasy.Pool.PoolCore<T>
+  nameWithType.vb: PoolCore(Of T)
+  fullName.vb: Fantasy.Pool.PoolCore(Of T)
+  name.vb: PoolCore(Of T)
+  spec.csharp:
+  - uid: Fantasy.Pool.PoolCore`1
+    name: PoolCore
+    href: Fantasy.Pool.PoolCore-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Pool.PoolCore`1
+    name: PoolCore
+    href: Fantasy.Pool.PoolCore-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Pool
+  commentId: N:Fantasy.Pool
+  href: Fantasy.html
+  name: Fantasy.Pool
+  nameWithType: Fantasy.Pool
+  fullName: Fantasy.Pool
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Pool
+    name: Pool
+    href: Fantasy.Pool.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Pool
+    name: Pool
+    href: Fantasy.Pool.html
+- uid: Fantasy.Pool.PoolCore`1.Count
+  commentId: P:Fantasy.Pool.PoolCore`1.Count
+  href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Count
+  name: Count
+  nameWithType: PoolCore<T>.Count
+  fullName: Fantasy.Pool.PoolCore<T>.Count
+  nameWithType.vb: PoolCore(Of T).Count
+  fullName.vb: Fantasy.Pool.PoolCore(Of T).Count
+- uid: Fantasy.Pool.PoolCore`1.Rent
+  commentId: M:Fantasy.Pool.PoolCore`1.Rent
+  href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Rent
+  name: Rent()
+  nameWithType: PoolCore<T>.Rent()
+  fullName: Fantasy.Pool.PoolCore<T>.Rent()
+  nameWithType.vb: PoolCore(Of T).Rent()
+  fullName.vb: Fantasy.Pool.PoolCore(Of T).Rent()
+  spec.csharp:
+  - uid: Fantasy.Pool.PoolCore`1.Rent
+    name: Rent
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Rent
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Pool.PoolCore`1.Rent
+    name: Rent
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Rent
+  - name: (
+  - name: )
+- uid: Fantasy.Pool.PoolCore`1.Return(`0)
+  commentId: M:Fantasy.Pool.PoolCore`1.Return(`0)
+  href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Return__0_
+  name: Return(T)
+  nameWithType: PoolCore<T>.Return(T)
+  fullName: Fantasy.Pool.PoolCore<T>.Return(T)
+  nameWithType.vb: PoolCore(Of T).Return(T)
+  fullName.vb: Fantasy.Pool.PoolCore(Of T).Return(T)
+  spec.csharp:
+  - uid: Fantasy.Pool.PoolCore`1.Return(`0)
+    name: Return
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Return__0_
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Pool.PoolCore`1.Return(`0)
+    name: Return
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Return__0_
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Pool.PoolCore`1.Dispose
+  commentId: M:Fantasy.Pool.PoolCore`1.Dispose
+  href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Dispose
+  name: Dispose()
+  nameWithType: PoolCore<T>.Dispose()
+  fullName: Fantasy.Pool.PoolCore<T>.Dispose()
+  nameWithType.vb: PoolCore(Of T).Dispose()
+  fullName.vb: Fantasy.Pool.PoolCore(Of T).Dispose()
+  spec.csharp:
+  - uid: Fantasy.Pool.PoolCore`1.Dispose
+    name: Dispose
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Pool.PoolCore`1.Dispose
+    name: Dispose
+    href: Fantasy.Pool.PoolCore-1.html#Fantasy_Pool_PoolCore_1_Dispose
+  - name: (
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Async.CoroutineLockPool.#ctor*
+  commentId: Overload:Fantasy.Async.CoroutineLockPool.#ctor
+  href: Fantasy.Async.CoroutineLockPool.html#Fantasy_Async_CoroutineLockPool__ctor
+  name: CoroutineLockPool
+  nameWithType: CoroutineLockPool.CoroutineLockPool
+  fullName: Fantasy.Async.CoroutineLockPool.CoroutineLockPool
+  nameWithType.vb: CoroutineLockPool.New
+  fullName.vb: Fantasy.Async.CoroutineLockPool.New
+  name.vb: New

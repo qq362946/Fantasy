@@ -1,11 +1,16 @@
 #if FANTASY_NET
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-
 using System.Runtime.CompilerServices;
+using Fantasy.IdFactory;
+using Fantasy.Network;
+using Fantasy.Network.Interface;
+using Fantasy.PacketParser;
+using Fantasy.PacketParser.Interface;
+using Fantasy.Platform.Net;
 
-namespace Fantasy;
+namespace Fantasy.Scheduler;
 
-public static class ProcessScheduler
+internal static class ProcessScheduler
 {
     public static void Scheduler(this ProcessSession session, Type messageType, uint rpcId, long routeId, APackInfo packInfo)
     {

@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Fantasy.Pool;
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Collection
 {
     /// <summary>
     /// 可重用的列表，继承自 <see cref="List{T}"/> 类。该类支持通过对象池重用列表实例，以减少对象分配和释放的开销。

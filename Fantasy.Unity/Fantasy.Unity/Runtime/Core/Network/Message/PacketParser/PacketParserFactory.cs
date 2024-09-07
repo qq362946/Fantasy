@@ -1,14 +1,19 @@
 using System;
+using Fantasy.Network;
+using Fantasy.Network.Interface;
+using Fantasy.PacketParser.Interface;
+
 // ReSharper disable PossibleNullReferenceException
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8603 // Possible null reference return.
-namespace Fantasy
+namespace Fantasy.PacketParser
 {
-    public static class PacketParserFactory
+    internal static class PacketParserFactory
     {
 #if FANTASY_NET
-        public static ReadOnlyMemoryPacketParser CreateServerReadOnlyMemoryPacket(ANetwork network)
+        internal static ReadOnlyMemoryPacketParser CreateServerReadOnlyMemoryPacket(ANetwork network)
         {
             ReadOnlyMemoryPacketParser readOnlyMemoryPacketParser = null;
             
@@ -56,7 +61,7 @@ namespace Fantasy
             return bufferPacketParser;
         }
 #endif
-        public static ReadOnlyMemoryPacketParser CreateClientReadOnlyMemoryPacket(ANetwork network)
+        internal static ReadOnlyMemoryPacketParser CreateClientReadOnlyMemoryPacket(ANetwork network)
         {
             ReadOnlyMemoryPacketParser readOnlyMemoryPacketParser = null;
 

@@ -3,10 +3,16 @@
 // ReSharper disable ConvertToPrimaryConstructor
 using System;
 using System.Collections.Generic;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 #pragma warning disable CS8601 // Possible null reference assignment.
-namespace Fantasy
+namespace Fantasy.DataStructure.PriorityQueue
 {
+    /// <summary>
+    /// 优先队列
+    /// </summary>
+    /// <typeparam name="TElement">节点数据</typeparam>
+    /// <typeparam name="TPriority">排序的类型、</typeparam>
     public sealed class PriorityQueue<TElement, TPriority> where TPriority : IComparable<TPriority>
     {
         private readonly List<PriorityQueueItem<TElement, TPriority>> _heap;

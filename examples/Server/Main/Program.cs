@@ -1,1 +1,1 @@
-﻿await Fantasy.Entry.Start(Fantasy.AssemblyHelper.Assemblies);
+﻿await Fantasy.Platform.Net.Entry.Start(Fantasy.AssemblyHelper.Assemblies);

@@ -1,0 +1,3492 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Serialize.MemoryStreamBuffer
+  commentId: T:Fantasy.Serialize.MemoryStreamBuffer
+  id: MemoryStreamBuffer
+  parent: Fantasy.Serialize
+  children:
+  - Fantasy.Serialize.MemoryStreamBuffer.#ctor
+  - Fantasy.Serialize.MemoryStreamBuffer.#ctor(System.Byte[])
+  - Fantasy.Serialize.MemoryStreamBuffer.#ctor(System.Int32)
+  - Fantasy.Serialize.MemoryStreamBuffer.Advance(System.Int32)
+  - Fantasy.Serialize.MemoryStreamBuffer.GetMemory(System.Int32)
+  - Fantasy.Serialize.MemoryStreamBuffer.GetSpan(System.Int32)
+  langs:
+  - csharp
+  - vb
+  name: MemoryStreamBuffer
+  nameWithType: MemoryStreamBuffer
+  fullName: Fantasy.Serialize.MemoryStreamBuffer
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MemoryStreamBuffer
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+    startLine: 7
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  syntax:
+    content: 'public sealed class MemoryStreamBuffer : MemoryStream, IAsyncDisposable, IDisposable, IBufferWriter<byte>'
+    content.vb: Public NotInheritable Class MemoryStreamBuffer Inherits MemoryStream Implements IAsyncDisposable, IDisposable, IBufferWriter(Of Byte)
+  inheritance:
+  - System.Object
+  - System.MarshalByRefObject
+  - System.IO.Stream
+  - System.IO.MemoryStream
+  implements:
+  - System.IAsyncDisposable
+  - System.IDisposable
+  - System.Buffers.IBufferWriter{System.Byte}
+  inheritedMembers:
+  - System.IO.MemoryStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
+  - System.IO.MemoryStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
+  - System.IO.MemoryStream.CopyTo(System.IO.Stream,System.Int32)
+  - System.IO.MemoryStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)
+  - System.IO.MemoryStream.EndRead(System.IAsyncResult)
+  - System.IO.MemoryStream.EndWrite(System.IAsyncResult)
+  - System.IO.MemoryStream.Flush
+  - System.IO.MemoryStream.FlushAsync(System.Threading.CancellationToken)
+  - System.IO.MemoryStream.GetBuffer
+  - System.IO.MemoryStream.Read(System.Byte[],System.Int32,System.Int32)
+  - System.IO.MemoryStream.Read(System.Span{System.Byte})
+  - System.IO.MemoryStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+  - System.IO.MemoryStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+  - System.IO.MemoryStream.ReadByte
+  - System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)
+  - System.IO.MemoryStream.SetLength(System.Int64)
+  - System.IO.MemoryStream.ToArray
+  - System.IO.MemoryStream.TryGetBuffer(System.ArraySegment{System.Byte}@)
+  - System.IO.MemoryStream.Write(System.Byte[],System.Int32,System.Int32)
+  - System.IO.MemoryStream.Write(System.ReadOnlySpan{System.Byte})
+  - System.IO.MemoryStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+  - System.IO.MemoryStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+  - System.IO.MemoryStream.WriteByte(System.Byte)
+  - System.IO.MemoryStream.WriteTo(System.IO.Stream)
+  - System.IO.MemoryStream.CanRead
+  - System.IO.MemoryStream.CanSeek
+  - System.IO.MemoryStream.CanWrite
+  - System.IO.MemoryStream.Capacity
+  - System.IO.MemoryStream.Length
+  - System.IO.MemoryStream.Position
+  - System.IO.Stream.Null
+  - System.IO.Stream.Close
+  - System.IO.Stream.CopyTo(System.IO.Stream)
+  - System.IO.Stream.CopyToAsync(System.IO.Stream)
+  - System.IO.Stream.CopyToAsync(System.IO.Stream,System.Int32)
+  - System.IO.Stream.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
+  - System.IO.Stream.Dispose
+  - System.IO.Stream.DisposeAsync
+  - System.IO.Stream.FlushAsync
+  - System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)
+  - System.IO.Stream.ReadAtLeast(System.Span{System.Byte},System.Int32,System.Boolean)
+  - System.IO.Stream.ReadAtLeastAsync(System.Memory{System.Byte},System.Int32,System.Boolean,System.Threading.CancellationToken)
+  - System.IO.Stream.ReadExactly(System.Byte[],System.Int32,System.Int32)
+  - System.IO.Stream.ReadExactly(System.Span{System.Byte})
+  - System.IO.Stream.ReadExactlyAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+  - System.IO.Stream.ReadExactlyAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+  - System.IO.Stream.Synchronized(System.IO.Stream)
+  - System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)
+  - System.IO.Stream.CanTimeout
+  - System.IO.Stream.ReadTimeout
+  - System.IO.Stream.WriteTimeout
+  - System.MarshalByRefObject.GetLifetimeService
+  - System.MarshalByRefObject.InitializeLifetimeService
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Serialize.MemoryStreamBuffer.Fantasy.Helper.JsonHelper.ToJson``1
+  - System.IO.MemoryStream.Fantasy.Helper.ByteHelper.WriteBytes(System.Int32)
+  - System.IO.MemoryStream.Fantasy.Helper.ByteHelper.WriteBytes(System.Int64)
+  - System.IO.MemoryStream.Fantasy.Helper.ByteHelper.WriteBytes(System.UInt32)
+- uid: Fantasy.Serialize.MemoryStreamBuffer.#ctor
+  commentId: M:Fantasy.Serialize.MemoryStreamBuffer.#ctor
+  id: '#ctor'
+  parent: Fantasy.Serialize.MemoryStreamBuffer
+  langs:
+  - csharp
+  - vb
+  name: MemoryStreamBuffer()
+  nameWithType: MemoryStreamBuffer.MemoryStreamBuffer()
+  fullName: Fantasy.Serialize.MemoryStreamBuffer.MemoryStreamBuffer()
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+    startLine: 9
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  syntax:
+    content: public MemoryStreamBuffer()
+    content.vb: Public Sub New()
+  overload: Fantasy.Serialize.MemoryStreamBuffer.#ctor*
+  nameWithType.vb: MemoryStreamBuffer.New()
+  fullName.vb: Fantasy.Serialize.MemoryStreamBuffer.New()
+  name.vb: New()
+- uid: Fantasy.Serialize.MemoryStreamBuffer.#ctor(System.Int32)
+  commentId: M:Fantasy.Serialize.MemoryStreamBuffer.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: Fantasy.Serialize.MemoryStreamBuffer
+  langs:
+  - csharp
+  - vb
+  name: MemoryStreamBuffer(int)
+  nameWithType: MemoryStreamBuffer.MemoryStreamBuffer(int)
+  fullName: Fantasy.Serialize.MemoryStreamBuffer.MemoryStreamBuffer(int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+    startLine: 10
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  syntax:
+    content: public MemoryStreamBuffer(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+    content.vb: Public Sub New(capacity As Integer)
+  overload: Fantasy.Serialize.MemoryStreamBuffer.#ctor*
+  nameWithType.vb: MemoryStreamBuffer.New(Integer)
+  fullName.vb: Fantasy.Serialize.MemoryStreamBuffer.New(Integer)
+  name.vb: New(Integer)
+- uid: Fantasy.Serialize.MemoryStreamBuffer.#ctor(System.Byte[])
+  commentId: M:Fantasy.Serialize.MemoryStreamBuffer.#ctor(System.Byte[])
+  id: '#ctor(System.Byte[])'
+  parent: Fantasy.Serialize.MemoryStreamBuffer
+  langs:
+  - csharp
+  - vb
+  name: MemoryStreamBuffer(byte[])
+  nameWithType: MemoryStreamBuffer.MemoryStreamBuffer(byte[])
+  fullName: Fantasy.Serialize.MemoryStreamBuffer.MemoryStreamBuffer(byte[])
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+    startLine: 11
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  syntax:
+    content: public MemoryStreamBuffer(byte[] buffer)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+    content.vb: Public Sub New(buffer As Byte())
+  overload: Fantasy.Serialize.MemoryStreamBuffer.#ctor*
+  nameWithType.vb: MemoryStreamBuffer.New(Byte())
+  fullName.vb: Fantasy.Serialize.MemoryStreamBuffer.New(Byte())
+  name.vb: New(Byte())
+- uid: Fantasy.Serialize.MemoryStreamBuffer.Advance(System.Int32)
+  commentId: M:Fantasy.Serialize.MemoryStreamBuffer.Advance(System.Int32)
+  id: Advance(System.Int32)
+  parent: Fantasy.Serialize.MemoryStreamBuffer
+  langs:
+  - csharp
+  - vb
+  name: Advance(int)
+  nameWithType: MemoryStreamBuffer.Advance(int)
+  fullName: Fantasy.Serialize.MemoryStreamBuffer.Advance(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Advance
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+    startLine: 13
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: Notifies the <xref href="System.Buffers.IBufferWriter%601" data-throw-if-not-resolved="false"></xref> that <code class="paramref">count</code> data items were written to the output <xref href="System.Span%601" data-throw-if-not-resolved="false"></xref> or <xref href="System.Memory%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public void Advance(int count)
+    parameters:
+    - id: count
+      type: System.Int32
+      description: The number of data items written to the <xref href="System.Span%601" data-throw-if-not-resolved="false"></xref> or <xref href="System.Memory%601" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub Advance(count As Integer)
+  overload: Fantasy.Serialize.MemoryStreamBuffer.Advance*
+  implements:
+  - System.Buffers.IBufferWriter{System.Byte}.Advance(System.Int32)
+  nameWithType.vb: MemoryStreamBuffer.Advance(Integer)
+  fullName.vb: Fantasy.Serialize.MemoryStreamBuffer.Advance(Integer)
+  name.vb: Advance(Integer)
+- uid: Fantasy.Serialize.MemoryStreamBuffer.GetMemory(System.Int32)
+  commentId: M:Fantasy.Serialize.MemoryStreamBuffer.GetMemory(System.Int32)
+  id: GetMemory(System.Int32)
+  parent: Fantasy.Serialize.MemoryStreamBuffer
+  langs:
+  - csharp
+  - vb
+  name: GetMemory(int)
+  nameWithType: MemoryStreamBuffer.GetMemory(int)
+  fullName: Fantasy.Serialize.MemoryStreamBuffer.GetMemory(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetMemory
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+    startLine: 28
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: Returns a <xref href="System.Memory%601" data-throw-if-not-resolved="false"></xref> to write to that is at least the requested size (specified by <code class="paramref">sizeHint</code>).
+  example: []
+  syntax:
+    content: public Memory<byte> GetMemory(int sizeHint = 0)
+    parameters:
+    - id: sizeHint
+      type: System.Int32
+      description: The minimum length of the returned <xref href="System.Memory%601" data-throw-if-not-resolved="false"></xref>. If 0, a non-empty buffer is returned.
+    return:
+      type: System.Memory{System.Byte}
+      description: A <xref href="System.Memory%601" data-throw-if-not-resolved="false"></xref> of at least the size <code class="paramref">sizeHint</code>. If <code class="paramref">sizeHint</code> is 0, returns a non-empty buffer.
+    content.vb: Public Function GetMemory(sizeHint As Integer = 0) As Memory(Of Byte)
+  overload: Fantasy.Serialize.MemoryStreamBuffer.GetMemory*
+  exceptions:
+  - type: System.OutOfMemoryException
+    commentId: T:System.OutOfMemoryException
+    description: The requested buffer size is not available.
+  implements:
+  - System.Buffers.IBufferWriter{System.Byte}.GetMemory(System.Int32)
+  nameWithType.vb: MemoryStreamBuffer.GetMemory(Integer)
+  fullName.vb: Fantasy.Serialize.MemoryStreamBuffer.GetMemory(Integer)
+  name.vb: GetMemory(Integer)
+- uid: Fantasy.Serialize.MemoryStreamBuffer.GetSpan(System.Int32)
+  commentId: M:Fantasy.Serialize.MemoryStreamBuffer.GetSpan(System.Int32)
+  id: GetSpan(System.Int32)
+  parent: Fantasy.Serialize.MemoryStreamBuffer
+  langs:
+  - csharp
+  - vb
+  name: GetSpan(int)
+  nameWithType: MemoryStreamBuffer.GetSpan(int)
+  fullName: Fantasy.Serialize.MemoryStreamBuffer.GetSpan(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetSpan
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/MemoryStreamBuffer.cs
+    startLine: 43
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: Returns a <xref href="System.Span%601" data-throw-if-not-resolved="false"></xref> to write to that is at least the requested size (specified by <code class="paramref">sizeHint</code>).
+  example: []
+  syntax:
+    content: public Span<byte> GetSpan(int sizeHint = 0)
+    parameters:
+    - id: sizeHint
+      type: System.Int32
+      description: The minimum length of the returned <xref href="System.Span%601" data-throw-if-not-resolved="false"></xref>. If 0, a non-empty buffer is returned.
+    return:
+      type: System.Span{System.Byte}
+      description: A <xref href="System.Span%601" data-throw-if-not-resolved="false"></xref> of at least the size <code class="paramref">sizeHint</code>. If <code class="paramref">sizeHint</code> is 0, returns a non-empty buffer.
+    content.vb: Public Function GetSpan(sizeHint As Integer = 0) As Span(Of Byte)
+  overload: Fantasy.Serialize.MemoryStreamBuffer.GetSpan*
+  implements:
+  - System.Buffers.IBufferWriter{System.Byte}.GetSpan(System.Int32)
+  nameWithType.vb: MemoryStreamBuffer.GetSpan(Integer)
+  fullName.vb: Fantasy.Serialize.MemoryStreamBuffer.GetSpan(Integer)
+  name.vb: GetSpan(Integer)
+references:
+- uid: Fantasy.Serialize
+  commentId: N:Fantasy.Serialize
+  href: Fantasy.html
+  name: Fantasy.Serialize
+  nameWithType: Fantasy.Serialize
+  fullName: Fantasy.Serialize
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.MarshalByRefObject
+  commentId: T:System.MarshalByRefObject
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.marshalbyrefobject
+  name: MarshalByRefObject
+  nameWithType: MarshalByRefObject
+  fullName: System.MarshalByRefObject
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: System.IO.MemoryStream
+  commentId: T:System.IO.MemoryStream
+  parent: System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  name: MemoryStream
+  nameWithType: MemoryStream
+  fullName: System.IO.MemoryStream
+- uid: System.IAsyncDisposable
+  commentId: T:System.IAsyncDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iasyncdisposable
+  name: IAsyncDisposable
+  nameWithType: IAsyncDisposable
+  fullName: System.IAsyncDisposable
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Buffers.IBufferWriter{System.Byte}
+  commentId: T:System.Buffers.IBufferWriter{System.Byte}
+  parent: System.Buffers
+  definition: System.Buffers.IBufferWriter`1
+  href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  name: IBufferWriter<byte>
+  nameWithType: IBufferWriter<byte>
+  fullName: System.Buffers.IBufferWriter<byte>
+  nameWithType.vb: IBufferWriter(Of Byte)
+  fullName.vb: System.Buffers.IBufferWriter(Of Byte)
+  name.vb: IBufferWriter(Of Byte)
+  spec.csharp:
+  - uid: System.Buffers.IBufferWriter`1
+    name: IBufferWriter
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.Buffers.IBufferWriter`1
+    name: IBufferWriter
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.IO.MemoryStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
+  commentId: M:System.IO.MemoryStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.beginread
+  name: BeginRead(byte[], int, int, AsyncCallback, object)
+  nameWithType: MemoryStream.BeginRead(byte[], int, int, AsyncCallback, object)
+  fullName: System.IO.MemoryStream.BeginRead(byte[], int, int, System.AsyncCallback, object)
+  nameWithType.vb: MemoryStream.BeginRead(Byte(), Integer, Integer, AsyncCallback, Object)
+  fullName.vb: System.IO.MemoryStream.BeginRead(Byte(), Integer, Integer, System.AsyncCallback, Object)
+  name.vb: BeginRead(Byte(), Integer, Integer, AsyncCallback, Object)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
+    name: BeginRead
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.beginread
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.AsyncCallback
+    name: AsyncCallback
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.asynccallback
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
+    name: BeginRead
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.beginread
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.AsyncCallback
+    name: AsyncCallback
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.asynccallback
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IO.MemoryStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
+  commentId: M:System.IO.MemoryStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.beginwrite
+  name: BeginWrite(byte[], int, int, AsyncCallback, object)
+  nameWithType: MemoryStream.BeginWrite(byte[], int, int, AsyncCallback, object)
+  fullName: System.IO.MemoryStream.BeginWrite(byte[], int, int, System.AsyncCallback, object)
+  nameWithType.vb: MemoryStream.BeginWrite(Byte(), Integer, Integer, AsyncCallback, Object)
+  fullName.vb: System.IO.MemoryStream.BeginWrite(Byte(), Integer, Integer, System.AsyncCallback, Object)
+  name.vb: BeginWrite(Byte(), Integer, Integer, AsyncCallback, Object)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
+    name: BeginWrite
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.beginwrite
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.AsyncCallback
+    name: AsyncCallback
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.asynccallback
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
+    name: BeginWrite
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.beginwrite
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.AsyncCallback
+    name: AsyncCallback
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.asynccallback
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IO.MemoryStream.CopyTo(System.IO.Stream,System.Int32)
+  commentId: M:System.IO.MemoryStream.CopyTo(System.IO.Stream,System.Int32)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.copyto
+  name: CopyTo(Stream, int)
+  nameWithType: MemoryStream.CopyTo(Stream, int)
+  fullName: System.IO.MemoryStream.CopyTo(System.IO.Stream, int)
+  nameWithType.vb: MemoryStream.CopyTo(Stream, Integer)
+  fullName.vb: System.IO.MemoryStream.CopyTo(System.IO.Stream, Integer)
+  name.vb: CopyTo(Stream, Integer)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.CopyTo(System.IO.Stream,System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.copyto
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.CopyTo(System.IO.Stream,System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.copyto
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.IO.MemoryStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)
+  commentId: M:System.IO.MemoryStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.copytoasync
+  name: CopyToAsync(Stream, int, CancellationToken)
+  nameWithType: MemoryStream.CopyToAsync(Stream, int, CancellationToken)
+  fullName: System.IO.MemoryStream.CopyToAsync(System.IO.Stream, int, System.Threading.CancellationToken)
+  nameWithType.vb: MemoryStream.CopyToAsync(Stream, Integer, CancellationToken)
+  fullName.vb: System.IO.MemoryStream.CopyToAsync(System.IO.Stream, Integer, System.Threading.CancellationToken)
+  name.vb: CopyToAsync(Stream, Integer, CancellationToken)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)
+    name: CopyToAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.copytoasync
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)
+    name: CopyToAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.copytoasync
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.IO.MemoryStream.EndRead(System.IAsyncResult)
+  commentId: M:System.IO.MemoryStream.EndRead(System.IAsyncResult)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.endread
+  name: EndRead(IAsyncResult)
+  nameWithType: MemoryStream.EndRead(IAsyncResult)
+  fullName: System.IO.MemoryStream.EndRead(System.IAsyncResult)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.EndRead(System.IAsyncResult)
+    name: EndRead
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.endread
+  - name: (
+  - uid: System.IAsyncResult
+    name: IAsyncResult
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iasyncresult
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.EndRead(System.IAsyncResult)
+    name: EndRead
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.endread
+  - name: (
+  - uid: System.IAsyncResult
+    name: IAsyncResult
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iasyncresult
+  - name: )
+- uid: System.IO.MemoryStream.EndWrite(System.IAsyncResult)
+  commentId: M:System.IO.MemoryStream.EndWrite(System.IAsyncResult)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.endwrite
+  name: EndWrite(IAsyncResult)
+  nameWithType: MemoryStream.EndWrite(IAsyncResult)
+  fullName: System.IO.MemoryStream.EndWrite(System.IAsyncResult)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.EndWrite(System.IAsyncResult)
+    name: EndWrite
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.endwrite
+  - name: (
+  - uid: System.IAsyncResult
+    name: IAsyncResult
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iasyncresult
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.EndWrite(System.IAsyncResult)
+    name: EndWrite
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.endwrite
+  - name: (
+  - uid: System.IAsyncResult
+    name: IAsyncResult
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iasyncresult
+  - name: )
+- uid: System.IO.MemoryStream.Flush
+  commentId: M:System.IO.MemoryStream.Flush
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.flush
+  name: Flush()
+  nameWithType: MemoryStream.Flush()
+  fullName: System.IO.MemoryStream.Flush()
+  spec.csharp:
+  - uid: System.IO.MemoryStream.Flush
+    name: Flush
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.flush
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.Flush
+    name: Flush
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.flush
+  - name: (
+  - name: )
+- uid: System.IO.MemoryStream.FlushAsync(System.Threading.CancellationToken)
+  commentId: M:System.IO.MemoryStream.FlushAsync(System.Threading.CancellationToken)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.flushasync
+  name: FlushAsync(CancellationToken)
+  nameWithType: MemoryStream.FlushAsync(CancellationToken)
+  fullName: System.IO.MemoryStream.FlushAsync(System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.FlushAsync(System.Threading.CancellationToken)
+    name: FlushAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.flushasync
+  - name: (
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.FlushAsync(System.Threading.CancellationToken)
+    name: FlushAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.flushasync
+  - name: (
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.IO.MemoryStream.GetBuffer
+  commentId: M:System.IO.MemoryStream.GetBuffer
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.getbuffer
+  name: GetBuffer()
+  nameWithType: MemoryStream.GetBuffer()
+  fullName: System.IO.MemoryStream.GetBuffer()
+  spec.csharp:
+  - uid: System.IO.MemoryStream.GetBuffer
+    name: GetBuffer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.getbuffer
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.GetBuffer
+    name: GetBuffer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.getbuffer
+  - name: (
+  - name: )
+- uid: System.IO.MemoryStream.Read(System.Byte[],System.Int32,System.Int32)
+  commentId: M:System.IO.MemoryStream.Read(System.Byte[],System.Int32,System.Int32)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.read#system-io-memorystream-read(system-byte()-system-int32-system-int32)
+  name: Read(byte[], int, int)
+  nameWithType: MemoryStream.Read(byte[], int, int)
+  fullName: System.IO.MemoryStream.Read(byte[], int, int)
+  nameWithType.vb: MemoryStream.Read(Byte(), Integer, Integer)
+  fullName.vb: System.IO.MemoryStream.Read(Byte(), Integer, Integer)
+  name.vb: Read(Byte(), Integer, Integer)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.Read(System.Byte[],System.Int32,System.Int32)
+    name: Read
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.read#system-io-memorystream-read(system-byte()-system-int32-system-int32)
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.Read(System.Byte[],System.Int32,System.Int32)
+    name: Read
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.read#system-io-memorystream-read(system-byte()-system-int32-system-int32)
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.IO.MemoryStream.Read(System.Span{System.Byte})
+  commentId: M:System.IO.MemoryStream.Read(System.Span{System.Byte})
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.read#system-io-memorystream-read(system-span((system-byte)))
+  name: Read(Span<byte>)
+  nameWithType: MemoryStream.Read(Span<byte>)
+  fullName: System.IO.MemoryStream.Read(System.Span<byte>)
+  nameWithType.vb: MemoryStream.Read(Span(Of Byte))
+  fullName.vb: System.IO.MemoryStream.Read(System.Span(Of Byte))
+  name.vb: Read(Span(Of Byte))
+  spec.csharp:
+  - uid: System.IO.MemoryStream.Read(System.Span{System.Byte})
+    name: Read
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.read#system-io-memorystream-read(system-span((system-byte)))
+  - name: (
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.Read(System.Span{System.Byte})
+    name: Read
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.read#system-io-memorystream-read(system-span((system-byte)))
+  - name: (
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: )
+- uid: System.IO.MemoryStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+  commentId: M:System.IO.MemoryStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.readasync#system-io-memorystream-readasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)
+  name: ReadAsync(byte[], int, int, CancellationToken)
+  nameWithType: MemoryStream.ReadAsync(byte[], int, int, CancellationToken)
+  fullName: System.IO.MemoryStream.ReadAsync(byte[], int, int, System.Threading.CancellationToken)
+  nameWithType.vb: MemoryStream.ReadAsync(Byte(), Integer, Integer, CancellationToken)
+  fullName.vb: System.IO.MemoryStream.ReadAsync(Byte(), Integer, Integer, System.Threading.CancellationToken)
+  name.vb: ReadAsync(Byte(), Integer, Integer, CancellationToken)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+    name: ReadAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.readasync#system-io-memorystream-readasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+    name: ReadAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.readasync#system-io-memorystream-readasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.IO.MemoryStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+  commentId: M:System.IO.MemoryStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.readasync#system-io-memorystream-readasync(system-memory((system-byte))-system-threading-cancellationtoken)
+  name: ReadAsync(Memory<byte>, CancellationToken)
+  nameWithType: MemoryStream.ReadAsync(Memory<byte>, CancellationToken)
+  fullName: System.IO.MemoryStream.ReadAsync(System.Memory<byte>, System.Threading.CancellationToken)
+  nameWithType.vb: MemoryStream.ReadAsync(Memory(Of Byte), CancellationToken)
+  fullName.vb: System.IO.MemoryStream.ReadAsync(System.Memory(Of Byte), System.Threading.CancellationToken)
+  name.vb: ReadAsync(Memory(Of Byte), CancellationToken)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+    name: ReadAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.readasync#system-io-memorystream-readasync(system-memory((system-byte))-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+    name: ReadAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.readasync#system-io-memorystream-readasync(system-memory((system-byte))-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.IO.MemoryStream.ReadByte
+  commentId: M:System.IO.MemoryStream.ReadByte
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.readbyte
+  name: ReadByte()
+  nameWithType: MemoryStream.ReadByte()
+  fullName: System.IO.MemoryStream.ReadByte()
+  spec.csharp:
+  - uid: System.IO.MemoryStream.ReadByte
+    name: ReadByte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.readbyte
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.ReadByte
+    name: ReadByte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.readbyte
+  - name: (
+  - name: )
+- uid: System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)
+  commentId: M:System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.seek
+  name: Seek(long, SeekOrigin)
+  nameWithType: MemoryStream.Seek(long, SeekOrigin)
+  fullName: System.IO.MemoryStream.Seek(long, System.IO.SeekOrigin)
+  nameWithType.vb: MemoryStream.Seek(Long, SeekOrigin)
+  fullName.vb: System.IO.MemoryStream.Seek(Long, System.IO.SeekOrigin)
+  name.vb: Seek(Long, SeekOrigin)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)
+    name: Seek
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.seek
+  - name: (
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: ','
+  - name: " "
+  - uid: System.IO.SeekOrigin
+    name: SeekOrigin
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.seekorigin
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)
+    name: Seek
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.seek
+  - name: (
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: ','
+  - name: " "
+  - uid: System.IO.SeekOrigin
+    name: SeekOrigin
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.seekorigin
+  - name: )
+- uid: System.IO.MemoryStream.SetLength(System.Int64)
+  commentId: M:System.IO.MemoryStream.SetLength(System.Int64)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.setlength
+  name: SetLength(long)
+  nameWithType: MemoryStream.SetLength(long)
+  fullName: System.IO.MemoryStream.SetLength(long)
+  nameWithType.vb: MemoryStream.SetLength(Long)
+  fullName.vb: System.IO.MemoryStream.SetLength(Long)
+  name.vb: SetLength(Long)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.SetLength(System.Int64)
+    name: SetLength
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.setlength
+  - name: (
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.SetLength(System.Int64)
+    name: SetLength
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.setlength
+  - name: (
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+- uid: System.IO.MemoryStream.ToArray
+  commentId: M:System.IO.MemoryStream.ToArray
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.toarray
+  name: ToArray()
+  nameWithType: MemoryStream.ToArray()
+  fullName: System.IO.MemoryStream.ToArray()
+  spec.csharp:
+  - uid: System.IO.MemoryStream.ToArray
+    name: ToArray
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.toarray
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.ToArray
+    name: ToArray
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.toarray
+  - name: (
+  - name: )
+- uid: System.IO.MemoryStream.TryGetBuffer(System.ArraySegment{System.Byte}@)
+  commentId: M:System.IO.MemoryStream.TryGetBuffer(System.ArraySegment{System.Byte}@)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.trygetbuffer
+  name: TryGetBuffer(out ArraySegment<byte>)
+  nameWithType: MemoryStream.TryGetBuffer(out ArraySegment<byte>)
+  fullName: System.IO.MemoryStream.TryGetBuffer(out System.ArraySegment<byte>)
+  nameWithType.vb: MemoryStream.TryGetBuffer(ArraySegment(Of Byte))
+  fullName.vb: System.IO.MemoryStream.TryGetBuffer(System.ArraySegment(Of Byte))
+  name.vb: TryGetBuffer(ArraySegment(Of Byte))
+  spec.csharp:
+  - uid: System.IO.MemoryStream.TryGetBuffer(System.ArraySegment{System.Byte}@)
+    name: TryGetBuffer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.trygetbuffer
+  - name: (
+  - name: out
+  - name: " "
+  - uid: System.ArraySegment`1
+    name: ArraySegment
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.arraysegment-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.TryGetBuffer(System.ArraySegment{System.Byte}@)
+    name: TryGetBuffer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.trygetbuffer
+  - name: (
+  - uid: System.ArraySegment`1
+    name: ArraySegment
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.arraysegment-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: )
+- uid: System.IO.MemoryStream.Write(System.Byte[],System.Int32,System.Int32)
+  commentId: M:System.IO.MemoryStream.Write(System.Byte[],System.Int32,System.Int32)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.write#system-io-memorystream-write(system-byte()-system-int32-system-int32)
+  name: Write(byte[], int, int)
+  nameWithType: MemoryStream.Write(byte[], int, int)
+  fullName: System.IO.MemoryStream.Write(byte[], int, int)
+  nameWithType.vb: MemoryStream.Write(Byte(), Integer, Integer)
+  fullName.vb: System.IO.MemoryStream.Write(Byte(), Integer, Integer)
+  name.vb: Write(Byte(), Integer, Integer)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.Write(System.Byte[],System.Int32,System.Int32)
+    name: Write
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.write#system-io-memorystream-write(system-byte()-system-int32-system-int32)
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.Write(System.Byte[],System.Int32,System.Int32)
+    name: Write
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.write#system-io-memorystream-write(system-byte()-system-int32-system-int32)
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.IO.MemoryStream.Write(System.ReadOnlySpan{System.Byte})
+  commentId: M:System.IO.MemoryStream.Write(System.ReadOnlySpan{System.Byte})
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.write#system-io-memorystream-write(system-readonlyspan((system-byte)))
+  name: Write(ReadOnlySpan<byte>)
+  nameWithType: MemoryStream.Write(ReadOnlySpan<byte>)
+  fullName: System.IO.MemoryStream.Write(System.ReadOnlySpan<byte>)
+  nameWithType.vb: MemoryStream.Write(ReadOnlySpan(Of Byte))
+  fullName.vb: System.IO.MemoryStream.Write(System.ReadOnlySpan(Of Byte))
+  name.vb: Write(ReadOnlySpan(Of Byte))
+  spec.csharp:
+  - uid: System.IO.MemoryStream.Write(System.ReadOnlySpan{System.Byte})
+    name: Write
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.write#system-io-memorystream-write(system-readonlyspan((system-byte)))
+  - name: (
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.Write(System.ReadOnlySpan{System.Byte})
+    name: Write
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.write#system-io-memorystream-write(system-readonlyspan((system-byte)))
+  - name: (
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: )
+- uid: System.IO.MemoryStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+  commentId: M:System.IO.MemoryStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writeasync#system-io-memorystream-writeasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)
+  name: WriteAsync(byte[], int, int, CancellationToken)
+  nameWithType: MemoryStream.WriteAsync(byte[], int, int, CancellationToken)
+  fullName: System.IO.MemoryStream.WriteAsync(byte[], int, int, System.Threading.CancellationToken)
+  nameWithType.vb: MemoryStream.WriteAsync(Byte(), Integer, Integer, CancellationToken)
+  fullName.vb: System.IO.MemoryStream.WriteAsync(Byte(), Integer, Integer, System.Threading.CancellationToken)
+  name.vb: WriteAsync(Byte(), Integer, Integer, CancellationToken)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+    name: WriteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writeasync#system-io-memorystream-writeasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+    name: WriteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writeasync#system-io-memorystream-writeasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.IO.MemoryStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+  commentId: M:System.IO.MemoryStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writeasync#system-io-memorystream-writeasync(system-readonlymemory((system-byte))-system-threading-cancellationtoken)
+  name: WriteAsync(ReadOnlyMemory<byte>, CancellationToken)
+  nameWithType: MemoryStream.WriteAsync(ReadOnlyMemory<byte>, CancellationToken)
+  fullName: System.IO.MemoryStream.WriteAsync(System.ReadOnlyMemory<byte>, System.Threading.CancellationToken)
+  nameWithType.vb: MemoryStream.WriteAsync(ReadOnlyMemory(Of Byte), CancellationToken)
+  fullName.vb: System.IO.MemoryStream.WriteAsync(System.ReadOnlyMemory(Of Byte), System.Threading.CancellationToken)
+  name.vb: WriteAsync(ReadOnlyMemory(Of Byte), CancellationToken)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+    name: WriteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writeasync#system-io-memorystream-writeasync(system-readonlymemory((system-byte))-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+    name: WriteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writeasync#system-io-memorystream-writeasync(system-readonlymemory((system-byte))-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.IO.MemoryStream.WriteByte(System.Byte)
+  commentId: M:System.IO.MemoryStream.WriteByte(System.Byte)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writebyte
+  name: WriteByte(byte)
+  nameWithType: MemoryStream.WriteByte(byte)
+  fullName: System.IO.MemoryStream.WriteByte(byte)
+  nameWithType.vb: MemoryStream.WriteByte(Byte)
+  fullName.vb: System.IO.MemoryStream.WriteByte(Byte)
+  name.vb: WriteByte(Byte)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.WriteByte(System.Byte)
+    name: WriteByte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writebyte
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.WriteByte(System.Byte)
+    name: WriteByte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writebyte
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.IO.MemoryStream.WriteTo(System.IO.Stream)
+  commentId: M:System.IO.MemoryStream.WriteTo(System.IO.Stream)
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writeto
+  name: WriteTo(Stream)
+  nameWithType: MemoryStream.WriteTo(Stream)
+  fullName: System.IO.MemoryStream.WriteTo(System.IO.Stream)
+  spec.csharp:
+  - uid: System.IO.MemoryStream.WriteTo(System.IO.Stream)
+    name: WriteTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writeto
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+  spec.vb:
+  - uid: System.IO.MemoryStream.WriteTo(System.IO.Stream)
+    name: WriteTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.writeto
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+- uid: System.IO.MemoryStream.CanRead
+  commentId: P:System.IO.MemoryStream.CanRead
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.canread
+  name: CanRead
+  nameWithType: MemoryStream.CanRead
+  fullName: System.IO.MemoryStream.CanRead
+- uid: System.IO.MemoryStream.CanSeek
+  commentId: P:System.IO.MemoryStream.CanSeek
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.canseek
+  name: CanSeek
+  nameWithType: MemoryStream.CanSeek
+  fullName: System.IO.MemoryStream.CanSeek
+- uid: System.IO.MemoryStream.CanWrite
+  commentId: P:System.IO.MemoryStream.CanWrite
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.canwrite
+  name: CanWrite
+  nameWithType: MemoryStream.CanWrite
+  fullName: System.IO.MemoryStream.CanWrite
+- uid: System.IO.MemoryStream.Capacity
+  commentId: P:System.IO.MemoryStream.Capacity
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.capacity
+  name: Capacity
+  nameWithType: MemoryStream.Capacity
+  fullName: System.IO.MemoryStream.Capacity
+- uid: System.IO.MemoryStream.Length
+  commentId: P:System.IO.MemoryStream.Length
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.length
+  name: Length
+  nameWithType: MemoryStream.Length
+  fullName: System.IO.MemoryStream.Length
+- uid: System.IO.MemoryStream.Position
+  commentId: P:System.IO.MemoryStream.Position
+  parent: System.IO.MemoryStream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream.position
+  name: Position
+  nameWithType: MemoryStream.Position
+  fullName: System.IO.MemoryStream.Position
+- uid: System.IO.Stream.Null
+  commentId: F:System.IO.Stream.Null
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.null
+  name: "Null"
+  nameWithType: Stream.Null
+  fullName: System.IO.Stream.Null
+- uid: System.IO.Stream.Close
+  commentId: M:System.IO.Stream.Close
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.close
+  name: Close()
+  nameWithType: Stream.Close()
+  fullName: System.IO.Stream.Close()
+  spec.csharp:
+  - uid: System.IO.Stream.Close
+    name: Close
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.close
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.Close
+    name: Close
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.close
+  - name: (
+  - name: )
+- uid: System.IO.Stream.CopyTo(System.IO.Stream)
+  commentId: M:System.IO.Stream.CopyTo(System.IO.Stream)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.copyto#system-io-stream-copyto(system-io-stream)
+  name: CopyTo(Stream)
+  nameWithType: Stream.CopyTo(Stream)
+  fullName: System.IO.Stream.CopyTo(System.IO.Stream)
+  spec.csharp:
+  - uid: System.IO.Stream.CopyTo(System.IO.Stream)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.copyto#system-io-stream-copyto(system-io-stream)
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.CopyTo(System.IO.Stream)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.copyto#system-io-stream-copyto(system-io-stream)
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+- uid: System.IO.Stream.CopyToAsync(System.IO.Stream)
+  commentId: M:System.IO.Stream.CopyToAsync(System.IO.Stream)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream)
+  name: CopyToAsync(Stream)
+  nameWithType: Stream.CopyToAsync(Stream)
+  fullName: System.IO.Stream.CopyToAsync(System.IO.Stream)
+  spec.csharp:
+  - uid: System.IO.Stream.CopyToAsync(System.IO.Stream)
+    name: CopyToAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream)
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.CopyToAsync(System.IO.Stream)
+    name: CopyToAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream)
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+- uid: System.IO.Stream.CopyToAsync(System.IO.Stream,System.Int32)
+  commentId: M:System.IO.Stream.CopyToAsync(System.IO.Stream,System.Int32)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream-system-int32)
+  name: CopyToAsync(Stream, int)
+  nameWithType: Stream.CopyToAsync(Stream, int)
+  fullName: System.IO.Stream.CopyToAsync(System.IO.Stream, int)
+  nameWithType.vb: Stream.CopyToAsync(Stream, Integer)
+  fullName.vb: System.IO.Stream.CopyToAsync(System.IO.Stream, Integer)
+  name.vb: CopyToAsync(Stream, Integer)
+  spec.csharp:
+  - uid: System.IO.Stream.CopyToAsync(System.IO.Stream,System.Int32)
+    name: CopyToAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream-system-int32)
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.CopyToAsync(System.IO.Stream,System.Int32)
+    name: CopyToAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream-system-int32)
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.IO.Stream.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
+  commentId: M:System.IO.Stream.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream-system-threading-cancellationtoken)
+  name: CopyToAsync(Stream, CancellationToken)
+  nameWithType: Stream.CopyToAsync(Stream, CancellationToken)
+  fullName: System.IO.Stream.CopyToAsync(System.IO.Stream, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: System.IO.Stream.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
+    name: CopyToAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
+    name: CopyToAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.IO.Stream.Dispose
+  commentId: M:System.IO.Stream.Dispose
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.dispose#system-io-stream-dispose
+  name: Dispose()
+  nameWithType: Stream.Dispose()
+  fullName: System.IO.Stream.Dispose()
+  spec.csharp:
+  - uid: System.IO.Stream.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.dispose#system-io-stream-dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.dispose#system-io-stream-dispose
+  - name: (
+  - name: )
+- uid: System.IO.Stream.DisposeAsync
+  commentId: M:System.IO.Stream.DisposeAsync
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.disposeasync
+  name: DisposeAsync()
+  nameWithType: Stream.DisposeAsync()
+  fullName: System.IO.Stream.DisposeAsync()
+  spec.csharp:
+  - uid: System.IO.Stream.DisposeAsync
+    name: DisposeAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.disposeasync
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.DisposeAsync
+    name: DisposeAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.disposeasync
+  - name: (
+  - name: )
+- uid: System.IO.Stream.FlushAsync
+  commentId: M:System.IO.Stream.FlushAsync
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.flushasync#system-io-stream-flushasync
+  name: FlushAsync()
+  nameWithType: Stream.FlushAsync()
+  fullName: System.IO.Stream.FlushAsync()
+  spec.csharp:
+  - uid: System.IO.Stream.FlushAsync
+    name: FlushAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.flushasync#system-io-stream-flushasync
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.FlushAsync
+    name: FlushAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.flushasync#system-io-stream-flushasync
+  - name: (
+  - name: )
+- uid: System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)
+  commentId: M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.readasync#system-io-stream-readasync(system-byte()-system-int32-system-int32)
+  name: ReadAsync(byte[], int, int)
+  nameWithType: Stream.ReadAsync(byte[], int, int)
+  fullName: System.IO.Stream.ReadAsync(byte[], int, int)
+  nameWithType.vb: Stream.ReadAsync(Byte(), Integer, Integer)
+  fullName.vb: System.IO.Stream.ReadAsync(Byte(), Integer, Integer)
+  name.vb: ReadAsync(Byte(), Integer, Integer)
+  spec.csharp:
+  - uid: System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)
+    name: ReadAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readasync#system-io-stream-readasync(system-byte()-system-int32-system-int32)
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)
+    name: ReadAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readasync#system-io-stream-readasync(system-byte()-system-int32-system-int32)
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.IO.Stream.ReadAtLeast(System.Span{System.Byte},System.Int32,System.Boolean)
+  commentId: M:System.IO.Stream.ReadAtLeast(System.Span{System.Byte},System.Int32,System.Boolean)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.readatleast
+  name: ReadAtLeast(Span<byte>, int, bool)
+  nameWithType: Stream.ReadAtLeast(Span<byte>, int, bool)
+  fullName: System.IO.Stream.ReadAtLeast(System.Span<byte>, int, bool)
+  nameWithType.vb: Stream.ReadAtLeast(Span(Of Byte), Integer, Boolean)
+  fullName.vb: System.IO.Stream.ReadAtLeast(System.Span(Of Byte), Integer, Boolean)
+  name.vb: ReadAtLeast(Span(Of Byte), Integer, Boolean)
+  spec.csharp:
+  - uid: System.IO.Stream.ReadAtLeast(System.Span{System.Byte},System.Int32,System.Boolean)
+    name: ReadAtLeast
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readatleast
+  - name: (
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.ReadAtLeast(System.Span{System.Byte},System.Int32,System.Boolean)
+    name: ReadAtLeast
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readatleast
+  - name: (
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.IO.Stream.ReadAtLeastAsync(System.Memory{System.Byte},System.Int32,System.Boolean,System.Threading.CancellationToken)
+  commentId: M:System.IO.Stream.ReadAtLeastAsync(System.Memory{System.Byte},System.Int32,System.Boolean,System.Threading.CancellationToken)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.readatleastasync
+  name: ReadAtLeastAsync(Memory<byte>, int, bool, CancellationToken)
+  nameWithType: Stream.ReadAtLeastAsync(Memory<byte>, int, bool, CancellationToken)
+  fullName: System.IO.Stream.ReadAtLeastAsync(System.Memory<byte>, int, bool, System.Threading.CancellationToken)
+  nameWithType.vb: Stream.ReadAtLeastAsync(Memory(Of Byte), Integer, Boolean, CancellationToken)
+  fullName.vb: System.IO.Stream.ReadAtLeastAsync(System.Memory(Of Byte), Integer, Boolean, System.Threading.CancellationToken)
+  name.vb: ReadAtLeastAsync(Memory(Of Byte), Integer, Boolean, CancellationToken)
+  spec.csharp:
+  - uid: System.IO.Stream.ReadAtLeastAsync(System.Memory{System.Byte},System.Int32,System.Boolean,System.Threading.CancellationToken)
+    name: ReadAtLeastAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readatleastasync
+  - name: (
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.ReadAtLeastAsync(System.Memory{System.Byte},System.Int32,System.Boolean,System.Threading.CancellationToken)
+    name: ReadAtLeastAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readatleastasync
+  - name: (
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.IO.Stream.ReadExactly(System.Byte[],System.Int32,System.Int32)
+  commentId: M:System.IO.Stream.ReadExactly(System.Byte[],System.Int32,System.Int32)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactly#system-io-stream-readexactly(system-byte()-system-int32-system-int32)
+  name: ReadExactly(byte[], int, int)
+  nameWithType: Stream.ReadExactly(byte[], int, int)
+  fullName: System.IO.Stream.ReadExactly(byte[], int, int)
+  nameWithType.vb: Stream.ReadExactly(Byte(), Integer, Integer)
+  fullName.vb: System.IO.Stream.ReadExactly(Byte(), Integer, Integer)
+  name.vb: ReadExactly(Byte(), Integer, Integer)
+  spec.csharp:
+  - uid: System.IO.Stream.ReadExactly(System.Byte[],System.Int32,System.Int32)
+    name: ReadExactly
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactly#system-io-stream-readexactly(system-byte()-system-int32-system-int32)
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.ReadExactly(System.Byte[],System.Int32,System.Int32)
+    name: ReadExactly
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactly#system-io-stream-readexactly(system-byte()-system-int32-system-int32)
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.IO.Stream.ReadExactly(System.Span{System.Byte})
+  commentId: M:System.IO.Stream.ReadExactly(System.Span{System.Byte})
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactly#system-io-stream-readexactly(system-span((system-byte)))
+  name: ReadExactly(Span<byte>)
+  nameWithType: Stream.ReadExactly(Span<byte>)
+  fullName: System.IO.Stream.ReadExactly(System.Span<byte>)
+  nameWithType.vb: Stream.ReadExactly(Span(Of Byte))
+  fullName.vb: System.IO.Stream.ReadExactly(System.Span(Of Byte))
+  name.vb: ReadExactly(Span(Of Byte))
+  spec.csharp:
+  - uid: System.IO.Stream.ReadExactly(System.Span{System.Byte})
+    name: ReadExactly
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactly#system-io-stream-readexactly(system-span((system-byte)))
+  - name: (
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.ReadExactly(System.Span{System.Byte})
+    name: ReadExactly
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactly#system-io-stream-readexactly(system-span((system-byte)))
+  - name: (
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: )
+- uid: System.IO.Stream.ReadExactlyAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+  commentId: M:System.IO.Stream.ReadExactlyAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactlyasync#system-io-stream-readexactlyasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)
+  name: ReadExactlyAsync(byte[], int, int, CancellationToken)
+  nameWithType: Stream.ReadExactlyAsync(byte[], int, int, CancellationToken)
+  fullName: System.IO.Stream.ReadExactlyAsync(byte[], int, int, System.Threading.CancellationToken)
+  nameWithType.vb: Stream.ReadExactlyAsync(Byte(), Integer, Integer, CancellationToken)
+  fullName.vb: System.IO.Stream.ReadExactlyAsync(Byte(), Integer, Integer, System.Threading.CancellationToken)
+  name.vb: ReadExactlyAsync(Byte(), Integer, Integer, CancellationToken)
+  spec.csharp:
+  - uid: System.IO.Stream.ReadExactlyAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+    name: ReadExactlyAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactlyasync#system-io-stream-readexactlyasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.ReadExactlyAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
+    name: ReadExactlyAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactlyasync#system-io-stream-readexactlyasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.IO.Stream.ReadExactlyAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+  commentId: M:System.IO.Stream.ReadExactlyAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactlyasync#system-io-stream-readexactlyasync(system-memory((system-byte))-system-threading-cancellationtoken)
+  name: ReadExactlyAsync(Memory<byte>, CancellationToken)
+  nameWithType: Stream.ReadExactlyAsync(Memory<byte>, CancellationToken)
+  fullName: System.IO.Stream.ReadExactlyAsync(System.Memory<byte>, System.Threading.CancellationToken)
+  nameWithType.vb: Stream.ReadExactlyAsync(Memory(Of Byte), CancellationToken)
+  fullName.vb: System.IO.Stream.ReadExactlyAsync(System.Memory(Of Byte), System.Threading.CancellationToken)
+  name.vb: ReadExactlyAsync(Memory(Of Byte), CancellationToken)
+  spec.csharp:
+  - uid: System.IO.Stream.ReadExactlyAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+    name: ReadExactlyAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactlyasync#system-io-stream-readexactlyasync(system-memory((system-byte))-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.ReadExactlyAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+    name: ReadExactlyAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.readexactlyasync#system-io-stream-readexactlyasync(system-memory((system-byte))-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.IO.Stream.Synchronized(System.IO.Stream)
+  commentId: M:System.IO.Stream.Synchronized(System.IO.Stream)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.synchronized
+  name: Synchronized(Stream)
+  nameWithType: Stream.Synchronized(Stream)
+  fullName: System.IO.Stream.Synchronized(System.IO.Stream)
+  spec.csharp:
+  - uid: System.IO.Stream.Synchronized(System.IO.Stream)
+    name: Synchronized
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.synchronized
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.Synchronized(System.IO.Stream)
+    name: Synchronized
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.synchronized
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+- uid: System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)
+  commentId: M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.writeasync#system-io-stream-writeasync(system-byte()-system-int32-system-int32)
+  name: WriteAsync(byte[], int, int)
+  nameWithType: Stream.WriteAsync(byte[], int, int)
+  fullName: System.IO.Stream.WriteAsync(byte[], int, int)
+  nameWithType.vb: Stream.WriteAsync(Byte(), Integer, Integer)
+  fullName.vb: System.IO.Stream.WriteAsync(Byte(), Integer, Integer)
+  name.vb: WriteAsync(Byte(), Integer, Integer)
+  spec.csharp:
+  - uid: System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)
+    name: WriteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.writeasync#system-io-stream-writeasync(system-byte()-system-int32-system-int32)
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)
+    name: WriteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream.writeasync#system-io-stream-writeasync(system-byte()-system-int32-system-int32)
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.IO.Stream.CanTimeout
+  commentId: P:System.IO.Stream.CanTimeout
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.cantimeout
+  name: CanTimeout
+  nameWithType: Stream.CanTimeout
+  fullName: System.IO.Stream.CanTimeout
+- uid: System.IO.Stream.ReadTimeout
+  commentId: P:System.IO.Stream.ReadTimeout
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.readtimeout
+  name: ReadTimeout
+  nameWithType: Stream.ReadTimeout
+  fullName: System.IO.Stream.ReadTimeout
+- uid: System.IO.Stream.WriteTimeout
+  commentId: P:System.IO.Stream.WriteTimeout
+  parent: System.IO.Stream
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream.writetimeout
+  name: WriteTimeout
+  nameWithType: Stream.WriteTimeout
+  fullName: System.IO.Stream.WriteTimeout
+- uid: System.MarshalByRefObject.GetLifetimeService
+  commentId: M:System.MarshalByRefObject.GetLifetimeService
+  parent: System.MarshalByRefObject
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.marshalbyrefobject.getlifetimeservice
+  name: GetLifetimeService()
+  nameWithType: MarshalByRefObject.GetLifetimeService()
+  fullName: System.MarshalByRefObject.GetLifetimeService()
+  spec.csharp:
+  - uid: System.MarshalByRefObject.GetLifetimeService
+    name: GetLifetimeService
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.marshalbyrefobject.getlifetimeservice
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.MarshalByRefObject.GetLifetimeService
+    name: GetLifetimeService
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.marshalbyrefobject.getlifetimeservice
+  - name: (
+  - name: )
+- uid: System.MarshalByRefObject.InitializeLifetimeService
+  commentId: M:System.MarshalByRefObject.InitializeLifetimeService
+  parent: System.MarshalByRefObject
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.marshalbyrefobject.initializelifetimeservice
+  name: InitializeLifetimeService()
+  nameWithType: MarshalByRefObject.InitializeLifetimeService()
+  fullName: System.MarshalByRefObject.InitializeLifetimeService()
+  spec.csharp:
+  - uid: System.MarshalByRefObject.InitializeLifetimeService
+    name: InitializeLifetimeService
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.marshalbyrefobject.initializelifetimeservice
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.MarshalByRefObject.InitializeLifetimeService
+    name: InitializeLifetimeService
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.marshalbyrefobject.initializelifetimeservice
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Serialize.MemoryStreamBuffer.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<MemoryStreamBuffer>(MemoryStreamBuffer)
+  nameWithType: JsonHelper.ToJson<MemoryStreamBuffer>(MemoryStreamBuffer)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Serialize.MemoryStreamBuffer>(Fantasy.Serialize.MemoryStreamBuffer)
+  nameWithType.vb: JsonHelper.ToJson(Of MemoryStreamBuffer)(MemoryStreamBuffer)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Serialize.MemoryStreamBuffer)(Fantasy.Serialize.MemoryStreamBuffer)
+  name.vb: ToJson(Of MemoryStreamBuffer)(MemoryStreamBuffer)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Serialize.MemoryStreamBuffer)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Serialize.MemoryStreamBuffer
+    name: MemoryStreamBuffer
+    href: Fantasy.Serialize.MemoryStreamBuffer.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Serialize.MemoryStreamBuffer
+    name: MemoryStreamBuffer
+    href: Fantasy.Serialize.MemoryStreamBuffer.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Serialize.MemoryStreamBuffer)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Serialize.MemoryStreamBuffer
+    name: MemoryStreamBuffer
+    href: Fantasy.Serialize.MemoryStreamBuffer.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Serialize.MemoryStreamBuffer
+    name: MemoryStreamBuffer
+    href: Fantasy.Serialize.MemoryStreamBuffer.html
+  - name: )
+- uid: System.IO.MemoryStream.Fantasy.Helper.ByteHelper.WriteBytes(System.Int32)
+  commentId: M:Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int32)
+  parent: Fantasy.Helper.ByteHelper
+  definition: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int32)
+  href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int32_
+  name: WriteBytes(MemoryStream, int)
+  nameWithType: ByteHelper.WriteBytes(MemoryStream, int)
+  fullName: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, int)
+  nameWithType.vb: ByteHelper.WriteBytes(MemoryStream, Integer)
+  fullName.vb: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, Integer)
+  name.vb: WriteBytes(MemoryStream, Integer)
+  spec.csharp:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int32)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int32_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int32)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int32_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.IO.MemoryStream.Fantasy.Helper.ByteHelper.WriteBytes(System.Int64)
+  commentId: M:Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int64)
+  parent: Fantasy.Helper.ByteHelper
+  definition: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int64)
+  href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int64_
+  name: WriteBytes(MemoryStream, long)
+  nameWithType: ByteHelper.WriteBytes(MemoryStream, long)
+  fullName: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, long)
+  nameWithType.vb: ByteHelper.WriteBytes(MemoryStream, Long)
+  fullName.vb: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, Long)
+  name.vb: WriteBytes(MemoryStream, Long)
+  spec.csharp:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int64)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int64_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int64)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int64_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+- uid: System.IO.MemoryStream.Fantasy.Helper.ByteHelper.WriteBytes(System.UInt32)
+  commentId: M:Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.UInt32)
+  parent: Fantasy.Helper.ByteHelper
+  definition: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.UInt32)
+  href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_UInt32_
+  name: WriteBytes(MemoryStream, uint)
+  nameWithType: ByteHelper.WriteBytes(MemoryStream, uint)
+  fullName: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, uint)
+  nameWithType.vb: ByteHelper.WriteBytes(MemoryStream, UInteger)
+  fullName.vb: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, UInteger)
+  name.vb: WriteBytes(MemoryStream, UInteger)
+  spec.csharp:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.UInt32)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_UInt32_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: uint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.UInt32)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_UInt32_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: UInteger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+- uid: System.Buffers.IBufferWriter`1
+  commentId: T:System.Buffers.IBufferWriter`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  name: IBufferWriter<T>
+  nameWithType: IBufferWriter<T>
+  fullName: System.Buffers.IBufferWriter<T>
+  nameWithType.vb: IBufferWriter(Of T)
+  fullName.vb: System.Buffers.IBufferWriter(Of T)
+  name.vb: IBufferWriter(Of T)
+  spec.csharp:
+  - uid: System.Buffers.IBufferWriter`1
+    name: IBufferWriter
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Buffers.IBufferWriter`1
+    name: IBufferWriter
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Buffers
+  commentId: N:System.Buffers
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Buffers
+  nameWithType: System.Buffers
+  fullName: System.Buffers
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Buffers
+    name: Buffers
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Buffers
+    name: Buffers
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int32)
+  commentId: M:Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int32)
+  isExternal: true
+  href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int32_
+  name: WriteBytes(MemoryStream, int)
+  nameWithType: ByteHelper.WriteBytes(MemoryStream, int)
+  fullName: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, int)
+  nameWithType.vb: ByteHelper.WriteBytes(MemoryStream, Integer)
+  fullName.vb: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, Integer)
+  name.vb: WriteBytes(MemoryStream, Integer)
+  spec.csharp:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int32)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int32_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int32)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int32_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Fantasy.Helper.ByteHelper
+  commentId: T:Fantasy.Helper.ByteHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.ByteHelper.html
+  name: ByteHelper
+  nameWithType: ByteHelper
+  fullName: Fantasy.Helper.ByteHelper
+- uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int64)
+  commentId: M:Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int64)
+  isExternal: true
+  href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int64_
+  name: WriteBytes(MemoryStream, long)
+  nameWithType: ByteHelper.WriteBytes(MemoryStream, long)
+  fullName: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, long)
+  nameWithType.vb: ByteHelper.WriteBytes(MemoryStream, Long)
+  fullName.vb: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, Long)
+  name.vb: WriteBytes(MemoryStream, Long)
+  spec.csharp:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int64)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int64_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.Int64)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_Int64_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+- uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.UInt32)
+  commentId: M:Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.UInt32)
+  isExternal: true
+  href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_UInt32_
+  name: WriteBytes(MemoryStream, uint)
+  nameWithType: ByteHelper.WriteBytes(MemoryStream, uint)
+  fullName: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, uint)
+  nameWithType.vb: ByteHelper.WriteBytes(MemoryStream, UInteger)
+  fullName.vb: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream, UInteger)
+  name.vb: WriteBytes(MemoryStream, UInteger)
+  spec.csharp:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.UInt32)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_UInt32_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: uint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.ByteHelper.WriteBytes(System.IO.MemoryStream,System.UInt32)
+    name: WriteBytes
+    href: Fantasy.Helper.ByteHelper.html#Fantasy_Helper_ByteHelper_WriteBytes_System_IO_MemoryStream_System_UInt32_
+  - name: (
+  - uid: System.IO.MemoryStream
+    name: MemoryStream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: UInteger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: )
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Serialize.MemoryStreamBuffer.#ctor*
+  commentId: Overload:Fantasy.Serialize.MemoryStreamBuffer.#ctor
+  href: Fantasy.Serialize.MemoryStreamBuffer.html#Fantasy_Serialize_MemoryStreamBuffer__ctor
+  name: MemoryStreamBuffer
+  nameWithType: MemoryStreamBuffer.MemoryStreamBuffer
+  fullName: Fantasy.Serialize.MemoryStreamBuffer.MemoryStreamBuffer
+  nameWithType.vb: MemoryStreamBuffer.New
+  fullName.vb: Fantasy.Serialize.MemoryStreamBuffer.New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: System.Span`1
+  commentId: T:System.Span`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<T>
+  nameWithType: Span<T>
+  fullName: System.Span<T>
+  nameWithType.vb: Span(Of T)
+  fullName.vb: System.Span(Of T)
+  name.vb: Span(Of T)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Memory`1
+  commentId: T:System.Memory`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  name: Memory<T>
+  nameWithType: Memory<T>
+  fullName: System.Memory<T>
+  nameWithType.vb: Memory(Of T)
+  fullName.vb: System.Memory(Of T)
+  name.vb: Memory(Of T)
+  spec.csharp:
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Serialize.MemoryStreamBuffer.Advance*
+  commentId: Overload:Fantasy.Serialize.MemoryStreamBuffer.Advance
+  href: Fantasy.Serialize.MemoryStreamBuffer.html#Fantasy_Serialize_MemoryStreamBuffer_Advance_System_Int32_
+  name: Advance
+  nameWithType: MemoryStreamBuffer.Advance
+  fullName: Fantasy.Serialize.MemoryStreamBuffer.Advance
+- uid: System.Buffers.IBufferWriter{System.Byte}.Advance(System.Int32)
+  commentId: M:System.Buffers.IBufferWriter{System.Byte}.Advance(System.Int32)
+  parent: System.Buffers.IBufferWriter{System.Byte}
+  definition: System.Buffers.IBufferWriter`1.Advance(System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.advance
+  name: Advance(int)
+  nameWithType: IBufferWriter<byte>.Advance(int)
+  fullName: System.Buffers.IBufferWriter<byte>.Advance(int)
+  nameWithType.vb: IBufferWriter(Of Byte).Advance(Integer)
+  fullName.vb: System.Buffers.IBufferWriter(Of Byte).Advance(Integer)
+  name.vb: Advance(Integer)
+  spec.csharp:
+  - uid: System.Buffers.IBufferWriter{System.Byte}.Advance(System.Int32)
+    name: Advance
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.advance
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Buffers.IBufferWriter{System.Byte}.Advance(System.Int32)
+    name: Advance
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.advance
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Buffers.IBufferWriter`1.Advance(System.Int32)
+  commentId: M:System.Buffers.IBufferWriter`1.Advance(System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.advance
+  name: Advance(int)
+  nameWithType: IBufferWriter<T>.Advance(int)
+  fullName: System.Buffers.IBufferWriter<T>.Advance(int)
+  nameWithType.vb: IBufferWriter(Of T).Advance(Integer)
+  fullName.vb: System.Buffers.IBufferWriter(Of T).Advance(Integer)
+  name.vb: Advance(Integer)
+  spec.csharp:
+  - uid: System.Buffers.IBufferWriter`1.Advance(System.Int32)
+    name: Advance
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.advance
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Buffers.IBufferWriter`1.Advance(System.Int32)
+    name: Advance
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.advance
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.OutOfMemoryException
+  commentId: T:System.OutOfMemoryException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.outofmemoryexception
+  name: OutOfMemoryException
+  nameWithType: OutOfMemoryException
+  fullName: System.OutOfMemoryException
+- uid: Fantasy.Serialize.MemoryStreamBuffer.GetMemory*
+  commentId: Overload:Fantasy.Serialize.MemoryStreamBuffer.GetMemory
+  href: Fantasy.Serialize.MemoryStreamBuffer.html#Fantasy_Serialize_MemoryStreamBuffer_GetMemory_System_Int32_
+  name: GetMemory
+  nameWithType: MemoryStreamBuffer.GetMemory
+  fullName: Fantasy.Serialize.MemoryStreamBuffer.GetMemory
+- uid: System.Buffers.IBufferWriter{System.Byte}.GetMemory(System.Int32)
+  commentId: M:System.Buffers.IBufferWriter{System.Byte}.GetMemory(System.Int32)
+  parent: System.Buffers.IBufferWriter{System.Byte}
+  definition: System.Buffers.IBufferWriter`1.GetMemory(System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getmemory
+  name: GetMemory(int)
+  nameWithType: IBufferWriter<byte>.GetMemory(int)
+  fullName: System.Buffers.IBufferWriter<byte>.GetMemory(int)
+  nameWithType.vb: IBufferWriter(Of Byte).GetMemory(Integer)
+  fullName.vb: System.Buffers.IBufferWriter(Of Byte).GetMemory(Integer)
+  name.vb: GetMemory(Integer)
+  spec.csharp:
+  - uid: System.Buffers.IBufferWriter{System.Byte}.GetMemory(System.Int32)
+    name: GetMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getmemory
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Buffers.IBufferWriter{System.Byte}.GetMemory(System.Int32)
+    name: GetMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getmemory
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Memory{System.Byte}
+  commentId: T:System.Memory{System.Byte}
+  parent: System
+  definition: System.Memory`1
+  href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  name: Memory<byte>
+  nameWithType: Memory<byte>
+  fullName: System.Memory<byte>
+  nameWithType.vb: Memory(Of Byte)
+  fullName.vb: System.Memory(Of Byte)
+  name.vb: Memory(Of Byte)
+  spec.csharp:
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.Buffers.IBufferWriter`1.GetMemory(System.Int32)
+  commentId: M:System.Buffers.IBufferWriter`1.GetMemory(System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getmemory
+  name: GetMemory(int)
+  nameWithType: IBufferWriter<T>.GetMemory(int)
+  fullName: System.Buffers.IBufferWriter<T>.GetMemory(int)
+  nameWithType.vb: IBufferWriter(Of T).GetMemory(Integer)
+  fullName.vb: System.Buffers.IBufferWriter(Of T).GetMemory(Integer)
+  name.vb: GetMemory(Integer)
+  spec.csharp:
+  - uid: System.Buffers.IBufferWriter`1.GetMemory(System.Int32)
+    name: GetMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getmemory
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Buffers.IBufferWriter`1.GetMemory(System.Int32)
+    name: GetMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getmemory
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Fantasy.Serialize.MemoryStreamBuffer.GetSpan*
+  commentId: Overload:Fantasy.Serialize.MemoryStreamBuffer.GetSpan
+  href: Fantasy.Serialize.MemoryStreamBuffer.html#Fantasy_Serialize_MemoryStreamBuffer_GetSpan_System_Int32_
+  name: GetSpan
+  nameWithType: MemoryStreamBuffer.GetSpan
+  fullName: Fantasy.Serialize.MemoryStreamBuffer.GetSpan
+- uid: System.Buffers.IBufferWriter{System.Byte}.GetSpan(System.Int32)
+  commentId: M:System.Buffers.IBufferWriter{System.Byte}.GetSpan(System.Int32)
+  parent: System.Buffers.IBufferWriter{System.Byte}
+  definition: System.Buffers.IBufferWriter`1.GetSpan(System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getspan
+  name: GetSpan(int)
+  nameWithType: IBufferWriter<byte>.GetSpan(int)
+  fullName: System.Buffers.IBufferWriter<byte>.GetSpan(int)
+  nameWithType.vb: IBufferWriter(Of Byte).GetSpan(Integer)
+  fullName.vb: System.Buffers.IBufferWriter(Of Byte).GetSpan(Integer)
+  name.vb: GetSpan(Integer)
+  spec.csharp:
+  - uid: System.Buffers.IBufferWriter{System.Byte}.GetSpan(System.Int32)
+    name: GetSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getspan
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Buffers.IBufferWriter{System.Byte}.GetSpan(System.Int32)
+    name: GetSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getspan
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Span{System.Byte}
+  commentId: T:System.Span{System.Byte}
+  parent: System
+  definition: System.Span`1
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<byte>
+  nameWithType: Span<byte>
+  fullName: System.Span<byte>
+  nameWithType.vb: Span(Of Byte)
+  fullName.vb: System.Span(Of Byte)
+  name.vb: Span(Of Byte)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.Buffers.IBufferWriter`1.GetSpan(System.Int32)
+  commentId: M:System.Buffers.IBufferWriter`1.GetSpan(System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getspan
+  name: GetSpan(int)
+  nameWithType: IBufferWriter<T>.GetSpan(int)
+  fullName: System.Buffers.IBufferWriter<T>.GetSpan(int)
+  nameWithType.vb: IBufferWriter(Of T).GetSpan(Integer)
+  fullName.vb: System.Buffers.IBufferWriter(Of T).GetSpan(Integer)
+  name.vb: GetSpan(Integer)
+  spec.csharp:
+  - uid: System.Buffers.IBufferWriter`1.GetSpan(System.Int32)
+    name: GetSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getspan
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Buffers.IBufferWriter`1.GetSpan(System.Int32)
+    name: GetSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1.getspan
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )

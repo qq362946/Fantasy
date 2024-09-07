@@ -1,12 +1,16 @@
 #if FANTASY_NET
 using System;
 using System.Collections.Generic;
+using Fantasy.Async;
+using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace Fantasy
+namespace Fantasy.Network.Route
 {
     public class AddressableManageComponentAwakeSystem : AwakeSystem<AddressableManageComponent>
     {

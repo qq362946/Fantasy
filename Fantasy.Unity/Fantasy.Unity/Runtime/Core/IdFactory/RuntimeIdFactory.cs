@@ -1,8 +1,11 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Fantasy.Helper;
 
-namespace Fantasy
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
+namespace Fantasy.IdFactory
 {
     /// <summary>
     /// 表示一个运行时的ID。

@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using ProtoBuf;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 // ReSharper disable CheckNamespace
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-namespace Fantasy
+namespace Fantasy.ConfigTable
 {
     [ProtoContract]
     public partial class IntDictionaryConfig

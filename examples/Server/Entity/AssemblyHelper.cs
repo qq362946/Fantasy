@@ -8,23 +8,23 @@ namespace Fantasy
         private const string HotfixDll = "Hotfix";
         private static AssemblyLoadContext? _assemblyLoadContext = null;
         
-        public static Assembly[] Assemblies
+        public static System.Reflection.Assembly[] Assemblies
         {
             get
             {
-                var assemblies = new Assembly[2];
+                var assemblies = new System.Reflection.Assembly[2];
                 assemblies[0] = LoadEntityAssembly();
                 assemblies[1] = LoadHotfixAssembly();
                 return assemblies;
             }
         }
         
-        private static Assembly LoadEntityAssembly()
+        private static System.Reflection.Assembly LoadEntityAssembly()
         {
             return typeof(AssemblyHelper).Assembly;
         }
         
-        private static Assembly LoadHotfixAssembly()
+        private static System.Reflection.Assembly LoadHotfixAssembly()
         {
             if (_assemblyLoadContext != null)
             {

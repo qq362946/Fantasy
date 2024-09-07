@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Fantasy.Pool;
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Collection
 {
     /// <summary>
     /// 基于排序字典实现的一对多关系的映射哈希集合的对象池包装类，将唯一键映射到多个值的哈希集合。

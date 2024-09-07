@@ -1,189 +1,202 @@
+using Fantasy.Async;
+using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
+using Fantasy.Network.Interface;
+using Fantasy.PacketParser.Interface;
+using Fantasy.Scheduler;
+using Fantasy.Timer;
+
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #if FANTASY_NET
-namespace Fantasy;
-
-public class AddressableRouteComponentAwakeSystem : AwakeSystem<AddressableRouteComponent>
+namespace Fantasy.Network.Route
 {
-    protected override void Awake(AddressableRouteComponent self)
+    public class AddressableRouteComponentAwakeSystem : AwakeSystem<AddressableRouteComponent>
     {
-        var selfScene = self.Scene;
-        self.TimerComponent = selfScene.TimerComponent;
-        self.NetworkMessagingComponent = selfScene.NetworkMessagingComponent;
-        self.MessageDispatcherComponent = selfScene.MessageDispatcherComponent;
-        self.AddressableRouteLock = selfScene.CoroutineLockComponent.Create(self.GetType().TypeHandle.Value.ToInt64());
-    }
-}
-
-public class AddressableRouteComponentDestroySystem : DestroySystem<AddressableRouteComponent>
-{
-    protected override void Destroy(AddressableRouteComponent self)
-    {
-        self.AddressableRouteLock.Dispose();
-
-        self.RouteId = 0;
-        self.AddressableId = 0;
-        self.TimerComponent = null;
-        self.AddressableRouteLock = null;
-        self.NetworkMessagingComponent = null;
-        self.MessageDispatcherComponent = null;
-    }
-}
-
-/// <summary>
-/// 可寻址路由消息组件，挂载了这个组件可以接收和发送 Addressable 消息。
-/// </summary>
-public sealed class AddressableRouteComponent : Entity
-{
-    public long RouteId;
-    public long AddressableId;
-    public CoroutineLock AddressableRouteLock;
-    public TimerComponent TimerComponent;
-    public NetworkMessagingComponent NetworkMessagingComponent;
-    public MessageDispatcherComponent MessageDispatcherComponent;
-    
-    internal void Send(IAddressableRouteMessage message)
-    {
-        Call(message).Coroutine();
-    }
-    
-    internal async FTask Send(Type requestType, APackInfo packInfo)
-    {
-        await Call(requestType, packInfo);
-    }
-
-    internal async FTask<IResponse> Call(Type requestType, APackInfo packInfo)
-    {
-        if (IsDisposed)
+        protected override void Awake(AddressableRouteComponent self)
         {
-            return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoute);
+            var selfScene = self.Scene;
+            self.TimerComponent = selfScene.TimerComponent;
+            self.NetworkMessagingComponent = selfScene.NetworkMessagingComponent;
+            self.MessageDispatcherComponent = selfScene.MessageDispatcherComponent;
+            self.AddressableRouteLock =
+                selfScene.CoroutineLockComponent.Create(self.GetType().TypeHandle.Value.ToInt64());
         }
+    }
 
-        var failCount = 0;
-        var runtimeId = RunTimeId;
-        IResponse iRouteResponse = null;
-
-        using (await AddressableRouteLock.Wait(AddressableId, "AddressableRouteComponent Call MemoryStream"))
+    public class AddressableRouteComponentDestroySystem : DestroySystem<AddressableRouteComponent>
+    {
+        protected override void Destroy(AddressableRouteComponent self)
         {
-            while (!IsDisposed)
-            {
-                if (RouteId == 0)
-                {
-                    RouteId = await AddressableHelper.GetAddressableRouteId(Scene, AddressableId);
-                }
+            self.AddressableRouteLock.Dispose();
 
-                if (RouteId == 0)
-                {
-                    return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoute);
-                }
-
-                iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, requestType, packInfo);
-
-                if (runtimeId != RunTimeId)
-                {
-                    iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
-                }
-
-                switch (iRouteResponse.ErrorCode)
-                {
-                    case InnerErrorCode.ErrRouteTimeout:
-                    {
-                        return iRouteResponse;
-                    }
-                    case InnerErrorCode.ErrNotFoundRoute:
-                    {
-                        if (++failCount > 20)
-                        {
-                            Log.Error($"AddressableComponent.Call failCount > 20 route send message fail, routeId: {RouteId} AddressableRouteComponent:{Id}");
-                            return iRouteResponse;
-                        }
-
-                        await TimerComponent.Net.WaitAsync(500);
-
-                        if (runtimeId != RunTimeId)
-                        {
-                            iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
-                        }
-
-                        RouteId = 0;
-                        continue;
-                    }
-                    default:
-                    {
-                        return iRouteResponse; // 对于其他情况，直接返回响应，无需额外处理
-                    }
-                }
-            }
+            self.RouteId = 0;
+            self.AddressableId = 0;
+            self.TimerComponent = null;
+            self.AddressableRouteLock = null;
+            self.NetworkMessagingComponent = null;
+            self.MessageDispatcherComponent = null;
         }
-
-        return iRouteResponse;
     }
 
     /// <summary>
-    /// 调用可寻址路由消息并等待响应。
+    /// 可寻址路由消息组件，挂载了这个组件可以接收和发送 Addressable 消息。
     /// </summary>
-    /// <param name="request">可寻址路由请求。</param>
-    private async FTask<IResponse> Call(IAddressableRouteMessage request)
+    public sealed class AddressableRouteComponent : Entity
     {
-        if (IsDisposed)
+        public long RouteId;
+        public long AddressableId;
+        public CoroutineLock AddressableRouteLock;
+        public TimerComponent TimerComponent;
+        public NetworkMessagingComponent NetworkMessagingComponent;
+        public MessageDispatcherComponent MessageDispatcherComponent;
+
+        internal void Send(IAddressableRouteMessage message)
         {
-            return MessageDispatcherComponent.CreateResponse(request.GetType(), InnerErrorCode.ErrNotFoundRoute);
+            Call(message).Coroutine();
         }
 
-        var failCount = 0;
-        var runtimeId = RunTimeId;
-
-        using (await AddressableRouteLock.Wait(AddressableId,"AddressableRouteComponent Call"))
+        internal async FTask Send(Type requestType, APackInfo packInfo)
         {
-            while (true)
+            await Call(requestType, packInfo);
+        }
+
+        internal async FTask<IResponse> Call(Type requestType, APackInfo packInfo)
+        {
+            if (IsDisposed)
             {
-                if (RouteId == 0)
-                {
-                    RouteId = await AddressableHelper.GetAddressableRouteId(Scene, AddressableId);
-                }
+                return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoute);
+            }
 
-                if (RouteId == 0)
-                {
-                    return MessageDispatcherComponent.CreateResponse(request.GetType(), InnerErrorCode.ErrNotFoundRoute);
-                }
+            var failCount = 0;
+            var runtimeId = RunTimeId;
+            IResponse iRouteResponse = null;
 
-                var iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, request);
-
-                if (runtimeId != RunTimeId)
+            using (await AddressableRouteLock.Wait(AddressableId, "AddressableRouteComponent Call MemoryStream"))
+            {
+                while (!IsDisposed)
                 {
-                    iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
-                }
-
-                switch (iRouteResponse.ErrorCode)
-                {
-                    case InnerErrorCode.ErrNotFoundRoute:
+                    if (RouteId == 0)
                     {
-                        if (++failCount > 20)
+                        RouteId = await AddressableHelper.GetAddressableRouteId(Scene, AddressableId);
+                    }
+
+                    if (RouteId == 0)
+                    {
+                        return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoute);
+                    }
+
+                    iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, requestType, packInfo);
+
+                    if (runtimeId != RunTimeId)
+                    {
+                        iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
+                    }
+
+                    switch (iRouteResponse.ErrorCode)
+                    {
+                        case InnerErrorCode.ErrRouteTimeout:
                         {
-                            Log.Error($"AddressableRouteComponent.Call failCount > 20 route send message fail, routeId: {RouteId} AddressableRouteComponent:{Id}");
                             return iRouteResponse;
                         }
-
-                        await TimerComponent.Net.WaitAsync(500);
-
-                        if (runtimeId != RunTimeId)
+                        case InnerErrorCode.ErrNotFoundRoute:
                         {
-                            iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
-                        }
+                            if (++failCount > 20)
+                            {
+                                Log.Error(
+                                    $"AddressableComponent.Call failCount > 20 route send message fail, routeId: {RouteId} AddressableRouteComponent:{Id}");
+                                return iRouteResponse;
+                            }
 
-                        RouteId = 0;
-                        continue;
+                            await TimerComponent.Net.WaitAsync(500);
+
+                            if (runtimeId != RunTimeId)
+                            {
+                                iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
+                            }
+
+                            RouteId = 0;
+                            continue;
+                        }
+                        default:
+                        {
+                            return iRouteResponse; // 对于其他情况，直接返回响应，无需额外处理
+                        }
                     }
-                    case InnerErrorCode.ErrRouteTimeout:
+                }
+            }
+
+            return iRouteResponse;
+        }
+
+        /// <summary>
+        /// 调用可寻址路由消息并等待响应。
+        /// </summary>
+        /// <param name="request">可寻址路由请求。</param>
+        private async FTask<IResponse> Call(IAddressableRouteMessage request)
+        {
+            if (IsDisposed)
+            {
+                return MessageDispatcherComponent.CreateResponse(request.GetType(), InnerErrorCode.ErrNotFoundRoute);
+            }
+
+            var failCount = 0;
+            var runtimeId = RunTimeId;
+
+            using (await AddressableRouteLock.Wait(AddressableId, "AddressableRouteComponent Call"))
+            {
+                while (true)
+                {
+                    if (RouteId == 0)
                     {
-                        return iRouteResponse;
+                        RouteId = await AddressableHelper.GetAddressableRouteId(Scene, AddressableId);
                     }
-                    default:
+
+                    if (RouteId == 0)
                     {
-                        return iRouteResponse;
+                        return MessageDispatcherComponent.CreateResponse(request.GetType(),
+                            InnerErrorCode.ErrNotFoundRoute);
+                    }
+
+                    var iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, request);
+
+                    if (runtimeId != RunTimeId)
+                    {
+                        iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
+                    }
+
+                    switch (iRouteResponse.ErrorCode)
+                    {
+                        case InnerErrorCode.ErrNotFoundRoute:
+                        {
+                            if (++failCount > 20)
+                            {
+                                Log.Error(
+                                    $"AddressableRouteComponent.Call failCount > 20 route send message fail, routeId: {RouteId} AddressableRouteComponent:{Id}");
+                                return iRouteResponse;
+                            }
+
+                            await TimerComponent.Net.WaitAsync(500);
+
+                            if (runtimeId != RunTimeId)
+                            {
+                                iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
+                            }
+
+                            RouteId = 0;
+                            continue;
+                        }
+                        case InnerErrorCode.ErrRouteTimeout:
+                        {
+                            return iRouteResponse;
+                        }
+                        default:
+                        {
+                            return iRouteResponse;
+                        }
                     }
                 }
             }

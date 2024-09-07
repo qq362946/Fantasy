@@ -2,9 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Fantasy.Platform.Net;
+using Fantasy.Serialize;
+
 // ReSharper disable SuspiciousTypeConversion.Global
 
-namespace Fantasy
+namespace Fantasy.ConfigTable
 {
     /// <summary>
     /// 配置表帮助类

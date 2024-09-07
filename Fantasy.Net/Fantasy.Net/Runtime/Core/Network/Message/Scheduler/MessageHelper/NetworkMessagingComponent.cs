@@ -1,13 +1,25 @@
+using Fantasy.Entitas;
+#if FANTASY_NET
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Fantasy.Async;
+using Fantasy.Entitas.Interface;
+using Fantasy.Helper;
+using Fantasy.Network;
+using Fantasy.Network.Interface;
+using Fantasy.Network.Route;
+using Fantasy.PacketParser;
+using Fantasy.PacketParser.Interface;
+using Fantasy.Timer;
+#endif
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace Fantasy
+namespace Fantasy.Scheduler
 {
 #if FANTASY_NET
     public struct NetworkMessageUpdate
@@ -66,15 +78,15 @@ namespace Fantasy
         public readonly SortedDictionary<uint, MessageSender> RequestCallback = new();
         public readonly Dictionary<uint, MessageSender> TimeoutRouteMessageSenders = new();
         
-        public void SendInnerRoute(long entityId, IRouteMessage message)
+        public void SendInnerRoute(long routeId, IRouteMessage message)
         {
-            if (entityId == 0)
+            if (routeId == 0)
             {
                 Log.Error($"SendInnerRoute appId == 0");
                 return;
             }
 
-            Scene.GetSession(entityId).Send(message, 0, entityId);
+            Scene.GetSession(routeId).Send(message, 0, routeId);
         }
 
         internal void SendInnerRoute(long routeId, Type messageType, APackInfo packInfo)

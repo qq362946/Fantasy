@@ -1,4 +1,4 @@
-namespace Fantasy
+namespace Fantasy.PacketParser
 {
     /// <summary>
     /// 提供关于消息包的常量定义。

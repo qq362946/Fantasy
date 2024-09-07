@@ -2,10 +2,15 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using Fantasy.Entitas;
+using Fantasy.PacketParser;
+using Fantasy.Scheduler;
+using Fantasy.Serialize;
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Fantasy
+namespace Fantasy.Network.Interface
 {
     /// <summary>
     /// 抽象网络基类。

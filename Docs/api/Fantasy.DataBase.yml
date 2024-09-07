@@ -1,0 +1,62 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.DataBase
+  commentId: N:Fantasy.DataBase
+  id: DataBase
+  parent: Fantasy
+  children:
+  - Fantasy.DataBase.IDateBase
+  - Fantasy.DataBase.MongoDataBase
+  - Fantasy.DataBase.World
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.DataBase
+  nameWithType: Fantasy.DataBase
+  fullName: Fantasy.DataBase
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.DataBase.IDateBase
+  commentId: T:Fantasy.DataBase.IDateBase
+  parent: Fantasy.DataBase
+  href: Fantasy.DataBase.IDateBase.html
+  name: IDateBase
+  nameWithType: IDateBase
+  fullName: Fantasy.DataBase.IDateBase
+- uid: Fantasy.DataBase.MongoDataBase
+  commentId: T:Fantasy.DataBase.MongoDataBase
+  href: Fantasy.DataBase.MongoDataBase.html
+  name: MongoDataBase
+  nameWithType: MongoDataBase
+  fullName: Fantasy.DataBase.MongoDataBase
+- uid: Fantasy.DataBase.World
+  commentId: T:Fantasy.DataBase.World
+  parent: Fantasy.DataBase
+  href: Fantasy.DataBase.World.html
+  name: World
+  nameWithType: World
+  fullName: Fantasy.DataBase.World
+- uid: Fantasy.DataBase
+  commentId: N:Fantasy.DataBase
+  href: Fantasy.html
+  name: Fantasy.DataBase
+  nameWithType: Fantasy.DataBase
+  fullName: Fantasy.DataBase
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataBase
+    name: DataBase
+    href: Fantasy.DataBase.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataBase
+    name: DataBase
+    href: Fantasy.DataBase.html

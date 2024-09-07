@@ -1,0 +1,350 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Event.IAsyncEvent
+  commentId: T:Fantasy.Event.IAsyncEvent
+  id: IAsyncEvent
+  parent: Fantasy.Event
+  children:
+  - Fantasy.Event.IAsyncEvent.EventType
+  - Fantasy.Event.IAsyncEvent.InvokeAsync(System.Object)
+  langs:
+  - csharp
+  - vb
+  name: IAsyncEvent
+  nameWithType: IAsyncEvent
+  fullName: Fantasy.Event.IAsyncEvent
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IAsyncEvent
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+    startLine: 25
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Event
+  summary: 异步事件的接口
+  example: []
+  syntax:
+    content: public interface IAsyncEvent
+    content.vb: Public Interface IAsyncEvent
+  extensionMethods:
+  - Fantasy.Event.IAsyncEvent.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Event.IAsyncEvent.EventType
+  commentId: M:Fantasy.Event.IAsyncEvent.EventType
+  id: EventType
+  parent: Fantasy.Event.IAsyncEvent
+  langs:
+  - csharp
+  - vb
+  name: EventType()
+  nameWithType: IAsyncEvent.EventType()
+  fullName: Fantasy.Event.IAsyncEvent.EventType()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: EventType
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+    startLine: 31
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Event
+  summary: <xref href="Fantasy.Event.IEvent.EventType" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: Type EventType()
+    return:
+      type: System.Type
+      description: ''
+    content.vb: Function EventType() As Type
+  overload: Fantasy.Event.IAsyncEvent.EventType*
+- uid: Fantasy.Event.IAsyncEvent.InvokeAsync(System.Object)
+  commentId: M:Fantasy.Event.IAsyncEvent.InvokeAsync(System.Object)
+  id: InvokeAsync(System.Object)
+  parent: Fantasy.Event.IAsyncEvent
+  langs:
+  - csharp
+  - vb
+  name: InvokeAsync(object)
+  nameWithType: IAsyncEvent.InvokeAsync(object)
+  fullName: Fantasy.Event.IAsyncEvent.InvokeAsync(object)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: InvokeAsync
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/EventComponent/Interface/IEvent.cs
+    startLine: 36
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Event
+  summary: <xref href="Fantasy.Event.IEvent.Invoke(System.Object)" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: FTask InvokeAsync(object self)
+    parameters:
+    - id: self
+      type: System.Object
+    return:
+      type: Fantasy.Async.FTask
+      description: ''
+    content.vb: Function InvokeAsync(self As Object) As FTask
+  overload: Fantasy.Event.IAsyncEvent.InvokeAsync*
+  nameWithType.vb: IAsyncEvent.InvokeAsync(Object)
+  fullName.vb: Fantasy.Event.IAsyncEvent.InvokeAsync(Object)
+  name.vb: InvokeAsync(Object)
+references:
+- uid: Fantasy.Event
+  commentId: N:Fantasy.Event
+  href: Fantasy.html
+  name: Fantasy.Event
+  nameWithType: Fantasy.Event
+  fullName: Fantasy.Event
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Event
+    name: Event
+    href: Fantasy.Event.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Event
+    name: Event
+    href: Fantasy.Event.html
+- uid: Fantasy.Event.IAsyncEvent.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<IAsyncEvent>(IAsyncEvent)
+  nameWithType: JsonHelper.ToJson<IAsyncEvent>(IAsyncEvent)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Event.IAsyncEvent>(Fantasy.Event.IAsyncEvent)
+  nameWithType.vb: JsonHelper.ToJson(Of IAsyncEvent)(IAsyncEvent)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Event.IAsyncEvent)(Fantasy.Event.IAsyncEvent)
+  name.vb: ToJson(Of IAsyncEvent)(IAsyncEvent)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Event.IAsyncEvent)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Event.IAsyncEvent
+    name: IAsyncEvent
+    href: Fantasy.Event.IAsyncEvent.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Event.IAsyncEvent
+    name: IAsyncEvent
+    href: Fantasy.Event.IAsyncEvent.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Event.IAsyncEvent)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Event.IAsyncEvent
+    name: IAsyncEvent
+    href: Fantasy.Event.IAsyncEvent.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Event.IAsyncEvent
+    name: IAsyncEvent
+    href: Fantasy.Event.IAsyncEvent.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Event.IEvent.EventType
+  commentId: M:Fantasy.Event.IEvent.EventType
+  parent: Fantasy.Event.IEvent
+  href: Fantasy.Event.IEvent.html#Fantasy_Event_IEvent_EventType
+  name: EventType()
+  nameWithType: IEvent.EventType()
+  fullName: Fantasy.Event.IEvent.EventType()
+  spec.csharp:
+  - uid: Fantasy.Event.IEvent.EventType
+    name: EventType
+    href: Fantasy.Event.IEvent.html#Fantasy_Event_IEvent_EventType
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Event.IEvent.EventType
+    name: EventType
+    href: Fantasy.Event.IEvent.html#Fantasy_Event_IEvent_EventType
+  - name: (
+  - name: )
+- uid: Fantasy.Event.IAsyncEvent.EventType*
+  commentId: Overload:Fantasy.Event.IAsyncEvent.EventType
+  href: Fantasy.Event.IAsyncEvent.html#Fantasy_Event_IAsyncEvent_EventType
+  name: EventType
+  nameWithType: IAsyncEvent.EventType
+  fullName: Fantasy.Event.IAsyncEvent.EventType
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Fantasy.Event.IEvent
+  commentId: T:Fantasy.Event.IEvent
+  parent: Fantasy.Event
+  href: Fantasy.Event.IEvent.html
+  name: IEvent
+  nameWithType: IEvent
+  fullName: Fantasy.Event.IEvent
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Event.IEvent.Invoke(System.Object)
+  commentId: M:Fantasy.Event.IEvent.Invoke(System.Object)
+  parent: Fantasy.Event.IEvent
+  isExternal: true
+  href: Fantasy.Event.IEvent.html#Fantasy_Event_IEvent_Invoke_System_Object_
+  name: Invoke(object)
+  nameWithType: IEvent.Invoke(object)
+  fullName: Fantasy.Event.IEvent.Invoke(object)
+  nameWithType.vb: IEvent.Invoke(Object)
+  fullName.vb: Fantasy.Event.IEvent.Invoke(Object)
+  name.vb: Invoke(Object)
+  spec.csharp:
+  - uid: Fantasy.Event.IEvent.Invoke(System.Object)
+    name: Invoke
+    href: Fantasy.Event.IEvent.html#Fantasy_Event_IEvent_Invoke_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Event.IEvent.Invoke(System.Object)
+    name: Invoke
+    href: Fantasy.Event.IEvent.html#Fantasy_Event_IEvent_Invoke_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.Event.IAsyncEvent.InvokeAsync*
+  commentId: Overload:Fantasy.Event.IAsyncEvent.InvokeAsync
+  href: Fantasy.Event.IAsyncEvent.html#Fantasy_Event_IAsyncEvent_InvokeAsync_System_Object_
+  name: InvokeAsync
+  nameWithType: IAsyncEvent.InvokeAsync
+  fullName: Fantasy.Event.IAsyncEvent.InvokeAsync
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Async.FTask
+  commentId: T:Fantasy.Async.FTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask.html
+  name: FTask
+  nameWithType: FTask
+  fullName: Fantasy.Async.FTask
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html

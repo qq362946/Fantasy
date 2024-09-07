@@ -1,0 +1,602 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Timer.TimerAction
+  commentId: T:Fantasy.Timer.TimerAction
+  id: TimerAction
+  parent: Fantasy.Timer
+  children:
+  - Fantasy.Timer.TimerAction.#ctor(System.Int64,Fantasy.Timer.TimerType,System.Int64,System.Int64,System.Object)
+  - Fantasy.Timer.TimerAction.Callback
+  - Fantasy.Timer.TimerAction.StartTime
+  - Fantasy.Timer.TimerAction.TimerId
+  - Fantasy.Timer.TimerAction.TimerType
+  - Fantasy.Timer.TimerAction.TriggerTime
+  langs:
+  - csharp
+  - vb
+  name: TimerAction
+  nameWithType: TimerAction
+  fullName: Fantasy.Timer.TimerAction
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TimerAction
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+    startLine: 9
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential, Pack = 1)]
+
+      public struct TimerAction
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential, Pack:=1)>
+
+      Public Structure TimerAction
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - Fantasy.Timer.TimerAction.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+    namedArguments:
+    - name: Pack
+      type: System.Int32
+      value: 1
+- uid: Fantasy.Timer.TimerAction.TimerId
+  commentId: F:Fantasy.Timer.TimerAction.TimerId
+  id: TimerId
+  parent: Fantasy.Timer.TimerAction
+  langs:
+  - csharp
+  - vb
+  name: TimerId
+  nameWithType: TimerAction.TimerId
+  fullName: Fantasy.Timer.TimerAction.TimerId
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TimerId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+    startLine: 12
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  syntax:
+    content: public long TimerId
+    return:
+      type: System.Int64
+    content.vb: Public TimerId As Long
+- uid: Fantasy.Timer.TimerAction.StartTime
+  commentId: F:Fantasy.Timer.TimerAction.StartTime
+  id: StartTime
+  parent: Fantasy.Timer.TimerAction
+  langs:
+  - csharp
+  - vb
+  name: StartTime
+  nameWithType: TimerAction.StartTime
+  fullName: Fantasy.Timer.TimerAction.StartTime
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: StartTime
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+    startLine: 13
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  syntax:
+    content: public long StartTime
+    return:
+      type: System.Int64
+    content.vb: Public StartTime As Long
+- uid: Fantasy.Timer.TimerAction.TriggerTime
+  commentId: F:Fantasy.Timer.TimerAction.TriggerTime
+  id: TriggerTime
+  parent: Fantasy.Timer.TimerAction
+  langs:
+  - csharp
+  - vb
+  name: TriggerTime
+  nameWithType: TimerAction.TriggerTime
+  fullName: Fantasy.Timer.TimerAction.TriggerTime
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TriggerTime
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  syntax:
+    content: public long TriggerTime
+    return:
+      type: System.Int64
+    content.vb: Public TriggerTime As Long
+- uid: Fantasy.Timer.TimerAction.Callback
+  commentId: F:Fantasy.Timer.TimerAction.Callback
+  id: Callback
+  parent: Fantasy.Timer.TimerAction
+  langs:
+  - csharp
+  - vb
+  name: Callback
+  nameWithType: TimerAction.Callback
+  fullName: Fantasy.Timer.TimerAction.Callback
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Callback
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+    startLine: 15
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  syntax:
+    content: public readonly object Callback
+    return:
+      type: System.Object
+    content.vb: Public ReadOnly Callback As Object
+- uid: Fantasy.Timer.TimerAction.TimerType
+  commentId: F:Fantasy.Timer.TimerAction.TimerType
+  id: TimerType
+  parent: Fantasy.Timer.TimerAction
+  langs:
+  - csharp
+  - vb
+  name: TimerType
+  nameWithType: TimerAction.TimerType
+  fullName: Fantasy.Timer.TimerAction.TimerType
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TimerType
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+    startLine: 16
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  syntax:
+    content: public readonly TimerType TimerType
+    return:
+      type: Fantasy.Timer.TimerType
+    content.vb: Public ReadOnly TimerType As TimerType
+- uid: Fantasy.Timer.TimerAction.#ctor(System.Int64,Fantasy.Timer.TimerType,System.Int64,System.Int64,System.Object)
+  commentId: M:Fantasy.Timer.TimerAction.#ctor(System.Int64,Fantasy.Timer.TimerType,System.Int64,System.Int64,System.Object)
+  id: '#ctor(System.Int64,Fantasy.Timer.TimerType,System.Int64,System.Int64,System.Object)'
+  parent: Fantasy.Timer.TimerAction
+  langs:
+  - csharp
+  - vb
+  name: TimerAction(long, TimerType, long, long, object)
+  nameWithType: TimerAction.TimerAction(long, TimerType, long, long, object)
+  fullName: Fantasy.Timer.TimerAction.TimerAction(long, Fantasy.Timer.TimerType, long, long, object)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Component/TimerComponent/TimerAction.cs
+    startLine: 17
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Timer
+  syntax:
+    content: public TimerAction(long timerId, TimerType timerType, long startTime, long triggerTime, object callback)
+    parameters:
+    - id: timerId
+      type: System.Int64
+    - id: timerType
+      type: Fantasy.Timer.TimerType
+    - id: startTime
+      type: System.Int64
+    - id: triggerTime
+      type: System.Int64
+    - id: callback
+      type: System.Object
+    content.vb: Public Sub New(timerId As Long, timerType As TimerType, startTime As Long, triggerTime As Long, callback As Object)
+  overload: Fantasy.Timer.TimerAction.#ctor*
+  nameWithType.vb: TimerAction.New(Long, TimerType, Long, Long, Object)
+  fullName.vb: Fantasy.Timer.TimerAction.New(Long, Fantasy.Timer.TimerType, Long, Long, Object)
+  name.vb: New(Long, TimerType, Long, Long, Object)
+references:
+- uid: Fantasy.Timer
+  commentId: N:Fantasy.Timer
+  href: Fantasy.html
+  name: Fantasy.Timer
+  nameWithType: Fantasy.Timer
+  fullName: Fantasy.Timer
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Timer
+    name: Timer
+    href: Fantasy.Timer.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Timer
+    name: Timer
+    href: Fantasy.Timer.html
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.Timer.TimerAction.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<TimerAction>(TimerAction)
+  nameWithType: JsonHelper.ToJson<TimerAction>(TimerAction)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Timer.TimerAction>(Fantasy.Timer.TimerAction)
+  nameWithType.vb: JsonHelper.ToJson(Of TimerAction)(TimerAction)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Timer.TimerAction)(Fantasy.Timer.TimerAction)
+  name.vb: ToJson(Of TimerAction)(TimerAction)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Timer.TimerAction)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Timer.TimerAction
+    name: TimerAction
+    href: Fantasy.Timer.TimerAction.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Timer.TimerAction
+    name: TimerAction
+    href: Fantasy.Timer.TimerAction.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Timer.TimerAction)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Timer.TimerAction
+    name: TimerAction
+    href: Fantasy.Timer.TimerAction.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Timer.TimerAction
+    name: TimerAction
+    href: Fantasy.Timer.TimerAction.html
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.Timer.TimerType
+  commentId: T:Fantasy.Timer.TimerType
+  parent: Fantasy.Timer
+  href: Fantasy.Timer.TimerType.html
+  name: TimerType
+  nameWithType: TimerType
+  fullName: Fantasy.Timer.TimerType
+- uid: Fantasy.Timer.TimerAction.#ctor*
+  commentId: Overload:Fantasy.Timer.TimerAction.#ctor
+  href: Fantasy.Timer.TimerAction.html#Fantasy_Timer_TimerAction__ctor_System_Int64_Fantasy_Timer_TimerType_System_Int64_System_Int64_System_Object_
+  name: TimerAction
+  nameWithType: TimerAction.TimerAction
+  fullName: Fantasy.Timer.TimerAction.TimerAction
+  nameWithType.vb: TimerAction.New
+  fullName.vb: Fantasy.Timer.TimerAction.New
+  name.vb: New

@@ -1,0 +1,828 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.IdFactory.EntityIdStruct
+  commentId: T:Fantasy.IdFactory.EntityIdStruct
+  id: EntityIdStruct
+  parent: Fantasy.IdFactory
+  children:
+  - Fantasy.IdFactory.EntityIdStruct.#ctor(System.UInt32,System.UInt32,System.Byte,System.UInt32)
+  - Fantasy.IdFactory.EntityIdStruct.MaskSceneId
+  - Fantasy.IdFactory.EntityIdStruct.MaskSequence
+  - Fantasy.IdFactory.EntityIdStruct.MaskTime
+  - Fantasy.IdFactory.EntityIdStruct.MaskWordId
+  - Fantasy.IdFactory.EntityIdStruct.SceneId
+  - Fantasy.IdFactory.EntityIdStruct.Sequence
+  - Fantasy.IdFactory.EntityIdStruct.Time
+  - Fantasy.IdFactory.EntityIdStruct.WordId
+  - Fantasy.IdFactory.EntityIdStruct.op_Implicit(Fantasy.IdFactory.EntityIdStruct)~System.Int64
+  - Fantasy.IdFactory.EntityIdStruct.op_Implicit(System.Int64)~Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: EntityIdStruct
+  nameWithType: EntityIdStruct
+  fullName: Fantasy.IdFactory.EntityIdStruct
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: EntityIdStruct
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 12
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  summary: 表示一个唯一实体的ID。
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential, Pack = 1)]
+
+      public struct EntityIdStruct
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential, Pack:=1)>
+
+      Public Structure EntityIdStruct
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - Fantasy.IdFactory.EntityIdStruct.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+    namedArguments:
+    - name: Pack
+      type: System.Int32
+      value: 1
+- uid: Fantasy.IdFactory.EntityIdStruct.Time
+  commentId: P:Fantasy.IdFactory.EntityIdStruct.Time
+  id: Time
+  parent: Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: Time
+  nameWithType: EntityIdStruct.Time
+  fullName: Fantasy.IdFactory.EntityIdStruct.Time
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Time
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 19
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public readonly uint Time { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public Property Time As UInteger
+  overload: Fantasy.IdFactory.EntityIdStruct.Time*
+- uid: Fantasy.IdFactory.EntityIdStruct.SceneId
+  commentId: P:Fantasy.IdFactory.EntityIdStruct.SceneId
+  id: SceneId
+  parent: Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: SceneId
+  nameWithType: EntityIdStruct.SceneId
+  fullName: Fantasy.IdFactory.EntityIdStruct.SceneId
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SceneId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 20
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public readonly uint SceneId { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public Property SceneId As UInteger
+  overload: Fantasy.IdFactory.EntityIdStruct.SceneId*
+- uid: Fantasy.IdFactory.EntityIdStruct.WordId
+  commentId: P:Fantasy.IdFactory.EntityIdStruct.WordId
+  id: WordId
+  parent: Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: WordId
+  nameWithType: EntityIdStruct.WordId
+  fullName: Fantasy.IdFactory.EntityIdStruct.WordId
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WordId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 21
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public readonly byte WordId { get; }
+    parameters: []
+    return:
+      type: System.Byte
+    content.vb: Public Property WordId As Byte
+  overload: Fantasy.IdFactory.EntityIdStruct.WordId*
+- uid: Fantasy.IdFactory.EntityIdStruct.Sequence
+  commentId: P:Fantasy.IdFactory.EntityIdStruct.Sequence
+  id: Sequence
+  parent: Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: Sequence
+  nameWithType: EntityIdStruct.Sequence
+  fullName: Fantasy.IdFactory.EntityIdStruct.Sequence
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Sequence
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 22
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public readonly uint Sequence { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public Property Sequence As UInteger
+  overload: Fantasy.IdFactory.EntityIdStruct.Sequence*
+- uid: Fantasy.IdFactory.EntityIdStruct.MaskSequence
+  commentId: F:Fantasy.IdFactory.EntityIdStruct.MaskSequence
+  id: MaskSequence
+  parent: Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: MaskSequence
+  nameWithType: EntityIdStruct.MaskSequence
+  fullName: Fantasy.IdFactory.EntityIdStruct.MaskSequence
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MaskSequence
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 24
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public const uint MaskSequence = 262143
+    return:
+      type: System.UInt32
+    content.vb: Public Const MaskSequence As UInteger = 262143
+- uid: Fantasy.IdFactory.EntityIdStruct.MaskSceneId
+  commentId: F:Fantasy.IdFactory.EntityIdStruct.MaskSceneId
+  id: MaskSceneId
+  parent: Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: MaskSceneId
+  nameWithType: EntityIdStruct.MaskSceneId
+  fullName: Fantasy.IdFactory.EntityIdStruct.MaskSceneId
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MaskSceneId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 25
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public const uint MaskSceneId = 255
+    return:
+      type: System.UInt32
+    content.vb: Public Const MaskSceneId As UInteger = 255
+- uid: Fantasy.IdFactory.EntityIdStruct.MaskWordId
+  commentId: F:Fantasy.IdFactory.EntityIdStruct.MaskWordId
+  id: MaskWordId
+  parent: Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: MaskWordId
+  nameWithType: EntityIdStruct.MaskWordId
+  fullName: Fantasy.IdFactory.EntityIdStruct.MaskWordId
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MaskWordId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 26
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public const uint MaskWordId = 255
+    return:
+      type: System.UInt32
+    content.vb: Public Const MaskWordId As UInteger = 255
+- uid: Fantasy.IdFactory.EntityIdStruct.MaskTime
+  commentId: F:Fantasy.IdFactory.EntityIdStruct.MaskTime
+  id: MaskTime
+  parent: Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: MaskTime
+  nameWithType: EntityIdStruct.MaskTime
+  fullName: Fantasy.IdFactory.EntityIdStruct.MaskTime
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MaskTime
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 27
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public const uint MaskTime = 1073741823
+    return:
+      type: System.UInt32
+    content.vb: Public Const MaskTime As UInteger = 1073741823
+- uid: Fantasy.IdFactory.EntityIdStruct.#ctor(System.UInt32,System.UInt32,System.Byte,System.UInt32)
+  commentId: M:Fantasy.IdFactory.EntityIdStruct.#ctor(System.UInt32,System.UInt32,System.Byte,System.UInt32)
+  id: '#ctor(System.UInt32,System.UInt32,System.Byte,System.UInt32)'
+  parent: Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: EntityIdStruct(uint, uint, byte, uint)
+  nameWithType: EntityIdStruct.EntityIdStruct(uint, uint, byte, uint)
+  fullName: Fantasy.IdFactory.EntityIdStruct.EntityIdStruct(uint, uint, byte, uint)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 36
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  summary: RuntimeIdStruct（如果超过下面参数的设定该ID会失效）。
+  example: []
+  syntax:
+    content: public EntityIdStruct(uint time, uint sceneId, byte wordId, uint sequence)
+    parameters:
+    - id: time
+      type: System.UInt32
+      description: time不能超过1073741823
+    - id: sceneId
+      type: System.UInt32
+      description: sceneId不能超过255
+    - id: wordId
+      type: System.Byte
+      description: wordId不能超过255
+    - id: sequence
+      type: System.UInt32
+      description: sequence不能超过262143
+    content.vb: Public Sub New(time As UInteger, sceneId As UInteger, wordId As Byte, sequence As UInteger)
+  overload: Fantasy.IdFactory.EntityIdStruct.#ctor*
+  nameWithType.vb: EntityIdStruct.New(UInteger, UInteger, Byte, UInteger)
+  fullName.vb: Fantasy.IdFactory.EntityIdStruct.New(UInteger, UInteger, Byte, UInteger)
+  name.vb: New(UInteger, UInteger, Byte, UInteger)
+- uid: Fantasy.IdFactory.EntityIdStruct.op_Implicit(Fantasy.IdFactory.EntityIdStruct)~System.Int64
+  commentId: M:Fantasy.IdFactory.EntityIdStruct.op_Implicit(Fantasy.IdFactory.EntityIdStruct)~System.Int64
+  id: op_Implicit(Fantasy.IdFactory.EntityIdStruct)~System.Int64
+  parent: Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: implicit operator long(EntityIdStruct)
+  nameWithType: EntityIdStruct.implicit operator long(EntityIdStruct)
+  fullName: Fantasy.IdFactory.EntityIdStruct.implicit operator long(Fantasy.IdFactory.EntityIdStruct)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Implicit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 45
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public static implicit operator long(EntityIdStruct entityIdStruct)
+    parameters:
+    - id: entityIdStruct
+      type: Fantasy.IdFactory.EntityIdStruct
+    return:
+      type: System.Int64
+    content.vb: Public Shared Widening Operator CType(entityIdStruct As EntityIdStruct) As Long
+  overload: Fantasy.IdFactory.EntityIdStruct.op_Implicit*
+  nameWithType.vb: EntityIdStruct.CType(EntityIdStruct)
+  fullName.vb: Fantasy.IdFactory.EntityIdStruct.CType(Fantasy.IdFactory.EntityIdStruct)
+  name.vb: CType(EntityIdStruct)
+- uid: Fantasy.IdFactory.EntityIdStruct.op_Implicit(System.Int64)~Fantasy.IdFactory.EntityIdStruct
+  commentId: M:Fantasy.IdFactory.EntityIdStruct.op_Implicit(System.Int64)~Fantasy.IdFactory.EntityIdStruct
+  id: op_Implicit(System.Int64)~Fantasy.IdFactory.EntityIdStruct
+  parent: Fantasy.IdFactory.EntityIdStruct
+  langs:
+  - csharp
+  - vb
+  name: implicit operator EntityIdStruct(long)
+  nameWithType: EntityIdStruct.implicit operator EntityIdStruct(long)
+  fullName: Fantasy.IdFactory.EntityIdStruct.implicit operator Fantasy.IdFactory.EntityIdStruct(long)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Implicit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/IdFactory/EntityIdFactory.cs
+    startLine: 55
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.IdFactory
+  syntax:
+    content: public static implicit operator EntityIdStruct(long entityId)
+    parameters:
+    - id: entityId
+      type: System.Int64
+    return:
+      type: Fantasy.IdFactory.EntityIdStruct
+    content.vb: Public Shared Widening Operator CType(entityId As Long) As EntityIdStruct
+  overload: Fantasy.IdFactory.EntityIdStruct.op_Implicit*
+  nameWithType.vb: EntityIdStruct.CType(Long)
+  fullName.vb: Fantasy.IdFactory.EntityIdStruct.CType(Long)
+  name.vb: CType(Long)
+references:
+- uid: Fantasy.IdFactory
+  commentId: N:Fantasy.IdFactory
+  href: Fantasy.html
+  name: Fantasy.IdFactory
+  nameWithType: Fantasy.IdFactory
+  fullName: Fantasy.IdFactory
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.IdFactory
+    name: IdFactory
+    href: Fantasy.IdFactory.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.IdFactory
+    name: IdFactory
+    href: Fantasy.IdFactory.html
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.IdFactory.EntityIdStruct.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<EntityIdStruct>(EntityIdStruct)
+  nameWithType: JsonHelper.ToJson<EntityIdStruct>(EntityIdStruct)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.IdFactory.EntityIdStruct>(Fantasy.IdFactory.EntityIdStruct)
+  nameWithType.vb: JsonHelper.ToJson(Of EntityIdStruct)(EntityIdStruct)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.IdFactory.EntityIdStruct)(Fantasy.IdFactory.EntityIdStruct)
+  name.vb: ToJson(Of EntityIdStruct)(EntityIdStruct)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.IdFactory.EntityIdStruct)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.IdFactory.EntityIdStruct
+    name: EntityIdStruct
+    href: Fantasy.IdFactory.EntityIdStruct.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.IdFactory.EntityIdStruct
+    name: EntityIdStruct
+    href: Fantasy.IdFactory.EntityIdStruct.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.IdFactory.EntityIdStruct)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.IdFactory.EntityIdStruct
+    name: EntityIdStruct
+    href: Fantasy.IdFactory.EntityIdStruct.html
+  - name: )
+  - name: (
+  - uid: Fantasy.IdFactory.EntityIdStruct
+    name: EntityIdStruct
+    href: Fantasy.IdFactory.EntityIdStruct.html
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.IdFactory.EntityIdStruct.Time*
+  commentId: Overload:Fantasy.IdFactory.EntityIdStruct.Time
+  href: Fantasy.IdFactory.EntityIdStruct.html#Fantasy_IdFactory_EntityIdStruct_Time
+  name: Time
+  nameWithType: EntityIdStruct.Time
+  fullName: Fantasy.IdFactory.EntityIdStruct.Time
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: Fantasy.IdFactory.EntityIdStruct.SceneId*
+  commentId: Overload:Fantasy.IdFactory.EntityIdStruct.SceneId
+  href: Fantasy.IdFactory.EntityIdStruct.html#Fantasy_IdFactory_EntityIdStruct_SceneId
+  name: SceneId
+  nameWithType: EntityIdStruct.SceneId
+  fullName: Fantasy.IdFactory.EntityIdStruct.SceneId
+- uid: Fantasy.IdFactory.EntityIdStruct.WordId*
+  commentId: Overload:Fantasy.IdFactory.EntityIdStruct.WordId
+  href: Fantasy.IdFactory.EntityIdStruct.html#Fantasy_IdFactory_EntityIdStruct_WordId
+  name: WordId
+  nameWithType: EntityIdStruct.WordId
+  fullName: Fantasy.IdFactory.EntityIdStruct.WordId
+- uid: System.Byte
+  commentId: T:System.Byte
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte
+  nameWithType: byte
+  fullName: byte
+  nameWithType.vb: Byte
+  fullName.vb: Byte
+  name.vb: Byte
+- uid: Fantasy.IdFactory.EntityIdStruct.Sequence*
+  commentId: Overload:Fantasy.IdFactory.EntityIdStruct.Sequence
+  href: Fantasy.IdFactory.EntityIdStruct.html#Fantasy_IdFactory_EntityIdStruct_Sequence
+  name: Sequence
+  nameWithType: EntityIdStruct.Sequence
+  fullName: Fantasy.IdFactory.EntityIdStruct.Sequence
+- uid: Fantasy.IdFactory.EntityIdStruct.#ctor*
+  commentId: Overload:Fantasy.IdFactory.EntityIdStruct.#ctor
+  href: Fantasy.IdFactory.EntityIdStruct.html#Fantasy_IdFactory_EntityIdStruct__ctor_System_UInt32_System_UInt32_System_Byte_System_UInt32_
+  name: EntityIdStruct
+  nameWithType: EntityIdStruct.EntityIdStruct
+  fullName: Fantasy.IdFactory.EntityIdStruct.EntityIdStruct
+  nameWithType.vb: EntityIdStruct.New
+  fullName.vb: Fantasy.IdFactory.EntityIdStruct.New
+  name.vb: New
+- uid: Fantasy.IdFactory.EntityIdStruct.op_Implicit*
+  commentId: Overload:Fantasy.IdFactory.EntityIdStruct.op_Implicit
+  name: implicit operator
+  nameWithType: EntityIdStruct.implicit operator
+  fullName: Fantasy.IdFactory.EntityIdStruct.implicit operator
+  nameWithType.vb: EntityIdStruct.CType
+  fullName.vb: Fantasy.IdFactory.EntityIdStruct.CType
+  name.vb: CType
+  spec.csharp:
+  - name: implicit
+  - name: " "
+  - name: operator
+- uid: Fantasy.IdFactory.EntityIdStruct
+  commentId: T:Fantasy.IdFactory.EntityIdStruct
+  parent: Fantasy.IdFactory
+  href: Fantasy.IdFactory.EntityIdStruct.html
+  name: EntityIdStruct
+  nameWithType: EntityIdStruct
+  fullName: Fantasy.IdFactory.EntityIdStruct
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long

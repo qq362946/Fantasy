@@ -1,4 +1,6 @@
 using Fantasy;
+using Fantasy.Async;
+using Fantasy.Network;
 using UnityEngine;
 
 public class ConnectToServer : MonoBehaviour
@@ -18,9 +20,7 @@ public class ConnectToServer : MonoBehaviour
         // 因为生成的网络协议在当前程序集里，如果不装载就无法正常通过Fantasy发送协议到服务器中。
         // 初始化完成后会返回一个Scene,Fantasy的所有功能都在这个Scene下面。
         // 如果只使用网络部分、只需要找一个地方保存这个Scene供其他地方调用就可以了。
-        _scene = await Fantasy.Entry.Initialize(GetType().Assembly);
-        Fantasy.Entry.Scene.Dispose();
-        await Fantasy.Entry.Initialize(GetType().Assembly);
+        _scene = await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
         return;
         // 2:
         // 使用Scene.Connect连接到目标服务器

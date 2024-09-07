@@ -1,6 +1,9 @@
 using ProtoBuf;
 using MemoryPack;
 using System.Collections.Generic;
+using Fantasy.Network.Interface;
+using Fantasy.Serialize;
+
 #pragma warning disable CS8618
 
 namespace Fantasy

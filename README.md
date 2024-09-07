@@ -1,5 +1,5 @@
 # Fantasy
-![Logo](Book/Logo.png)
+![Logo](Docs/Logo.png)
 ![Unity Ver](https://img.shields.io/badge/Unity%20Ver-2021.3.14++-blue.svg?style=flat-square)
 ![GitHub License](https://img.shields.io/github/license/qq362946/Fantasy)
 ![GitHub last commit](https://img.shields.io/github/last-commit/qq362946/Fantasy)
@@ -8,24 +8,37 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/qq362946/Fantasy)
 ![GitHub Created At](https://img.shields.io/github/created-at/qq362946/Fantasy)
 # Fantasy
-#### 框架支持TCP\KCP\WebSocket（支持Unity发布成H5）三种网络协议，采用的Protobuf做为消息的序列化方案。
-#### 对于需要一套上手快、高性能、可扩展、分布式的全平台商业级解决方案的开发团队或个人来说是一个很好的选择。
-## 文档（持续更新中）
-* [01_快速上手](Book/1-GetStartedQuickly.md)
-* [02_服务器配置](Book/2-ServerConfiguration.md)
-* [03.1_定义网络协议](Book/3.1-NetworkProtocolConfiguration.md)
-* [03.2_使用网络协议](Book/3.2-UseNetworkProtocol.md)
-* [04_导出工具配置](Books/0-介绍.md)
-* [05_普通网络协议](Books/0-介绍.md)
-* [06_可寻址网络协议](Books/0-介绍.md)
-* [07_ECS系统](Books/0-介绍.md)
-* [08_事件系统](Books/0-介绍.md)
-* [09_协程锁](Books/0-介绍.md)
-* [10_任务调度器](Books/0-介绍.md)
-* [11_数据库的操作](Books/0-介绍.md)
-* [12_Assembly系统](Books/0-介绍.md)
-* [13_配置表系统](Books/0-介绍.md)
-* [14_服务器热重载](Books/0-介绍.md)
+#### 框架支持TCP\KCP\WebSocket（支持Unity发布成H5）三种网络协议，采用的Protobuf/MemoryPack/Bson做为消息的序列化方案。
+#### Fantasy是基于.NET的高性能网络开发框架，支持主流协议，前后端分离，适合需要快速上手、可扩展、分布式全平台商业级解决方案的开发团队或个人。它旨在提供易用工具，同时保证系统的高性能和扩展性。
+## 导航
+* [Fantasy介绍网站](https://www.code-fantasy.com/)
+* [Fantasy的API文档](https://www.code-fantasy.com/doc/api/Fantasy.html)
+## 快速上手
+* 01.快速入门
+  * [1.1.获得Fantasy](https://www.code-fantasy.com/top/download-fantasy/)
+  * [1.2.安装Fantasy](https://www.code-fantasy.com/top/creating-your-app/)
+  * [1.3.Fantasy的网络](https://www.code-fantasy.com/top/use-network/)
+  * [1.4.Fantasy的配置文件](https://www.code-fantasy.com/top/config-file/)
+  * [1.5.Fantasy的命令行参数](https://www.code-fantasy.com/top/command-line-parameter/)
+  * [1.6.Fantasy的导表工具](https://www.code-fantasy.com/top/guidance/)
+  * [1.7.如何升级到最新版](https://www.code-fantasy.com/top/upgrade/)
+* 02.网络通信
+  * [2.1.客户端服务器之间发送消息](https://www.code-fantasy.com/network/session/)
+  * [2.2.服务器之间发送消息](https://www.code-fantasy.com/network/networkmessagingomponent/)
+  * [2.3.定义通信协议](https://www.code-fantasy.com/network/network-protocols/)
+  * [2.4.Route通信协议](https://www.code-fantasy.com/network/network-route/)
+  * [2.5.Addressable通信协议](https://www.code-fantasy.com/network/network-addressable/)
+* 03.系统组件
+  * [3.1.ECS系统](https://www.code-fantasy.com/core/ecs/)
+  * [3.2.事件系统](https://www.code-fantasy.com/core/event/)
+  * [3.3.任务系统](https://www.code-fantasy.com/core/task/)
+  * [3.4.异步协程锁](https://www.code-fantasy.com/core/lock/)
+  * [3.5.数据库](https://www.code-fantasy.com/core/db/)
+* [更新日志](https://www.code-fantasy.com/changelog/)
+* [API文档](https://www.code-fantasy.com/doc/api/Fantasy.html)
+* [常见问题](https://www.code-fantasy.com/question/)
+
+
 ## 优质开源项目推荐
 #### <a href="https://github.com/egametang/ET"><strong>ET</strong></a> - ET框架是一整套完善的游戏开发框架。
 #### <a href="https://github.com/ALEXTANGXIAO/TEngine"><strong>TEngine</strong></a> - TEngine是一个简单(新手友好开箱即用)且强大的Unity框架全平台解决方案。

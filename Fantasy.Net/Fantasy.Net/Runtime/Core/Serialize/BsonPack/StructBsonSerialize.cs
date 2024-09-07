@@ -5,7 +5,7 @@ using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 
-namespace Fantasy;
+namespace Fantasy.Serialize;
 
 /// <summary>
 /// 提供对结构体类型进行 BSON 序列化和反序列化的辅助类。

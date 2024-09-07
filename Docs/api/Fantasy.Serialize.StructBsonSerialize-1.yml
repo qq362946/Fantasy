@@ -1,0 +1,1229 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Serialize.StructBsonSerialize`1
+  commentId: T:Fantasy.Serialize.StructBsonSerialize`1
+  id: StructBsonSerialize`1
+  parent: Fantasy.Serialize
+  children:
+  - Fantasy.Serialize.StructBsonSerialize`1.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  - Fantasy.Serialize.StructBsonSerialize`1.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+  langs:
+  - csharp
+  - vb
+  name: StructBsonSerialize<TValue>
+  nameWithType: StructBsonSerialize<TValue>
+  fullName: Fantasy.Serialize.StructBsonSerialize<TValue>
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/StructBsonSerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: StructBsonSerialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/StructBsonSerialize.cs
+    startLine: 13
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 提供对结构体类型进行 BSON 序列化和反序列化的辅助类。
+  example: []
+  syntax:
+    content: 'public class StructBsonSerialize<TValue> : StructSerializerBase<TValue>, IBsonSerializer<TValue>, IBsonSerializer where TValue : struct'
+    typeParameters:
+    - id: TValue
+      description: 要序列化和反序列化的结构体类型。
+    content.vb: Public Class StructBsonSerialize(Of TValue As Structure) Inherits StructSerializerBase(Of TValue) Implements IBsonSerializer(Of TValue), IBsonSerializer
+  inheritance:
+  - System.Object
+  - MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}
+  - MongoDB.Bson.Serialization.Serializers.StructSerializerBase{{TValue}}
+  implements:
+  - MongoDB.Bson.Serialization.IBsonSerializer{{TValue}}
+  - MongoDB.Bson.Serialization.IBsonSerializer
+  inheritedMembers:
+  - MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.Equals(System.Object)
+  - MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.GetHashCode
+  - MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.CreateCannotBeDeserializedException
+  - MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.CreateCannotBeSerializedException
+  - MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+  - MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader,MongoDB.Bson.BsonType)
+  - MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.ValueType
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Serialize.StructBsonSerialize`1.Fantasy.Helper.JsonHelper.ToJson``1
+  nameWithType.vb: StructBsonSerialize(Of TValue)
+  fullName.vb: Fantasy.Serialize.StructBsonSerialize(Of TValue)
+  name.vb: StructBsonSerialize(Of TValue)
+- uid: Fantasy.Serialize.StructBsonSerialize`1.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+  commentId: M:Fantasy.Serialize.StructBsonSerialize`1.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+  id: Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+  parent: Fantasy.Serialize.StructBsonSerialize`1
+  langs:
+  - csharp
+  - vb
+  name: Serialize(BsonSerializationContext, BsonSerializationArgs, TValue)
+  nameWithType: StructBsonSerialize<TValue>.Serialize(BsonSerializationContext, BsonSerializationArgs, TValue)
+  fullName: Fantasy.Serialize.StructBsonSerialize<TValue>.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext, MongoDB.Bson.Serialization.BsonSerializationArgs, TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/StructBsonSerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Serialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/StructBsonSerialize.cs
+    startLine: 21
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 将结构体对象序列化为 BSON 数据。
+  example: []
+  syntax:
+    content: public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, TValue value)
+    parameters:
+    - id: context
+      type: MongoDB.Bson.Serialization.BsonSerializationContext
+      description: 序列化上下文。
+    - id: args
+      type: MongoDB.Bson.Serialization.BsonSerializationArgs
+      description: 序列化参数。
+    - id: value
+      type: '{TValue}'
+      description: 要序列化的结构体对象。
+    content.vb: Public Overrides Sub Serialize(context As BsonSerializationContext, args As BsonSerializationArgs, value As TValue)
+  overridden: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,{TValue})
+  overload: Fantasy.Serialize.StructBsonSerialize`1.Serialize*
+  nameWithType.vb: StructBsonSerialize(Of TValue).Serialize(BsonSerializationContext, BsonSerializationArgs, TValue)
+  fullName.vb: Fantasy.Serialize.StructBsonSerialize(Of TValue).Serialize(MongoDB.Bson.Serialization.BsonSerializationContext, MongoDB.Bson.Serialization.BsonSerializationArgs, TValue)
+- uid: Fantasy.Serialize.StructBsonSerialize`1.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  commentId: M:Fantasy.Serialize.StructBsonSerialize`1.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  id: Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  parent: Fantasy.Serialize.StructBsonSerialize`1
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(BsonDeserializationContext, BsonDeserializationArgs)
+  nameWithType: StructBsonSerialize<TValue>.Deserialize(BsonDeserializationContext, BsonDeserializationArgs)
+  fullName: Fantasy.Serialize.StructBsonSerialize<TValue>.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext, MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/StructBsonSerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/StructBsonSerialize.cs
+    startLine: 41
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 将 BSON 数据反序列化为结构体对象。
+  example: []
+  syntax:
+    content: public override TValue Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+    parameters:
+    - id: context
+      type: MongoDB.Bson.Serialization.BsonDeserializationContext
+      description: 反序列化上下文。
+    - id: args
+      type: MongoDB.Bson.Serialization.BsonDeserializationArgs
+      description: 反序列化参数。
+    return:
+      type: '{TValue}'
+      description: 反序列化得到的结构体对象。
+    content.vb: Public Overrides Function Deserialize(context As BsonDeserializationContext, args As BsonDeserializationArgs) As TValue
+  overridden: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  overload: Fantasy.Serialize.StructBsonSerialize`1.Deserialize*
+  nameWithType.vb: StructBsonSerialize(Of TValue).Deserialize(BsonDeserializationContext, BsonDeserializationArgs)
+  fullName.vb: Fantasy.Serialize.StructBsonSerialize(Of TValue).Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext, MongoDB.Bson.Serialization.BsonDeserializationArgs)
+references:
+- uid: Fantasy.Serialize
+  commentId: N:Fantasy.Serialize
+  href: Fantasy.html
+  name: Fantasy.Serialize
+  nameWithType: Fantasy.Serialize
+  fullName: Fantasy.Serialize
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}
+  commentId: T:MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}
+  parent: MongoDB.Bson.Serialization.Serializers
+  definition: MongoDB.Bson.Serialization.Serializers.SerializerBase`1
+  name: SerializerBase<TValue>
+  nameWithType: SerializerBase<TValue>
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>
+  nameWithType.vb: SerializerBase(Of TValue)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue)
+  name.vb: SerializerBase(Of TValue)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1
+    name: SerializerBase
+    isExternal: true
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1
+    name: SerializerBase
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.StructSerializerBase{{TValue}}
+  commentId: T:MongoDB.Bson.Serialization.Serializers.StructSerializerBase{`0}
+  parent: MongoDB.Bson.Serialization.Serializers
+  definition: MongoDB.Bson.Serialization.Serializers.StructSerializerBase`1
+  name: StructSerializerBase<TValue>
+  nameWithType: StructSerializerBase<TValue>
+  fullName: MongoDB.Bson.Serialization.Serializers.StructSerializerBase<TValue>
+  nameWithType.vb: StructSerializerBase(Of TValue)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.StructSerializerBase(Of TValue)
+  name.vb: StructSerializerBase(Of TValue)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.StructSerializerBase`1
+    name: StructSerializerBase
+    isExternal: true
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.StructSerializerBase`1
+    name: StructSerializerBase
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: MongoDB.Bson.Serialization.IBsonSerializer{{TValue}}
+  commentId: T:MongoDB.Bson.Serialization.IBsonSerializer{`0}
+  parent: MongoDB.Bson.Serialization
+  definition: MongoDB.Bson.Serialization.IBsonSerializer`1
+  name: IBsonSerializer<TValue>
+  nameWithType: IBsonSerializer<TValue>
+  fullName: MongoDB.Bson.Serialization.IBsonSerializer<TValue>
+  nameWithType.vb: IBsonSerializer(Of TValue)
+  fullName.vb: MongoDB.Bson.Serialization.IBsonSerializer(Of TValue)
+  name.vb: IBsonSerializer(Of TValue)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.IBsonSerializer`1
+    name: IBsonSerializer
+    isExternal: true
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.IBsonSerializer`1
+    name: IBsonSerializer
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: MongoDB.Bson.Serialization.IBsonSerializer
+  commentId: T:MongoDB.Bson.Serialization.IBsonSerializer
+  parent: MongoDB.Bson.Serialization
+  isExternal: true
+  name: IBsonSerializer
+  nameWithType: IBsonSerializer
+  fullName: MongoDB.Bson.Serialization.IBsonSerializer
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.Equals(System.Object)
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.Equals(System.Object)
+  parent: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}
+  definition: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: Equals(object)
+  nameWithType: SerializerBase<TValue>.Equals(object)
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.Equals(object)
+  nameWithType.vb: SerializerBase(Of TValue).Equals(Object)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.Equals(System.Object)
+    name: Equals
+    isExternal: true
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.Equals(System.Object)
+    name: Equals
+    isExternal: true
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.GetHashCode
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.GetHashCode
+  parent: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}
+  definition: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.GetHashCode
+  name: GetHashCode()
+  nameWithType: SerializerBase<TValue>.GetHashCode()
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.GetHashCode()
+  nameWithType.vb: SerializerBase(Of TValue).GetHashCode()
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).GetHashCode()
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.GetHashCode
+    name: GetHashCode
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.GetHashCode
+    name: GetHashCode
+    isExternal: true
+  - name: (
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.CreateCannotBeDeserializedException
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.CreateCannotBeDeserializedException
+  parent: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}
+  definition: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotBeDeserializedException
+  name: CreateCannotBeDeserializedException()
+  nameWithType: SerializerBase<TValue>.CreateCannotBeDeserializedException()
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.CreateCannotBeDeserializedException()
+  nameWithType.vb: SerializerBase(Of TValue).CreateCannotBeDeserializedException()
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).CreateCannotBeDeserializedException()
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.CreateCannotBeDeserializedException
+    name: CreateCannotBeDeserializedException
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.CreateCannotBeDeserializedException
+    name: CreateCannotBeDeserializedException
+    isExternal: true
+  - name: (
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.CreateCannotBeSerializedException
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.CreateCannotBeSerializedException
+  parent: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}
+  definition: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotBeSerializedException
+  name: CreateCannotBeSerializedException()
+  nameWithType: SerializerBase<TValue>.CreateCannotBeSerializedException()
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.CreateCannotBeSerializedException()
+  nameWithType.vb: SerializerBase(Of TValue).CreateCannotBeSerializedException()
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).CreateCannotBeSerializedException()
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.CreateCannotBeSerializedException
+    name: CreateCannotBeSerializedException
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.CreateCannotBeSerializedException
+    name: CreateCannotBeSerializedException
+    isExternal: true
+  - name: (
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+  parent: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}
+  definition: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+  name: CreateCannotDeserializeFromBsonTypeException(BsonType)
+  nameWithType: SerializerBase<TValue>.CreateCannotDeserializeFromBsonTypeException(BsonType)
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+  nameWithType.vb: SerializerBase(Of TValue).CreateCannotDeserializeFromBsonTypeException(BsonType)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+    name: CreateCannotDeserializeFromBsonTypeException
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.BsonType
+    name: BsonType
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+    name: CreateCannotDeserializeFromBsonTypeException
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.BsonType
+    name: BsonType
+    isExternal: true
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader,MongoDB.Bson.BsonType)
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader,MongoDB.Bson.BsonType)
+  parent: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}
+  definition: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader,MongoDB.Bson.BsonType)
+  name: EnsureBsonTypeEquals(IBsonReader, BsonType)
+  nameWithType: SerializerBase<TValue>.EnsureBsonTypeEquals(IBsonReader, BsonType)
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader, MongoDB.Bson.BsonType)
+  nameWithType.vb: SerializerBase(Of TValue).EnsureBsonTypeEquals(IBsonReader, BsonType)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader, MongoDB.Bson.BsonType)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader,MongoDB.Bson.BsonType)
+    name: EnsureBsonTypeEquals
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.IO.IBsonReader
+    name: IBsonReader
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.BsonType
+    name: BsonType
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader,MongoDB.Bson.BsonType)
+    name: EnsureBsonTypeEquals
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.IO.IBsonReader
+    name: IBsonReader
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.BsonType
+    name: BsonType
+    isExternal: true
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.ValueType
+  commentId: P:MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.ValueType
+  parent: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}
+  definition: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.ValueType
+  name: ValueType
+  nameWithType: SerializerBase<TValue>.ValueType
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.ValueType
+  nameWithType.vb: SerializerBase(Of TValue).ValueType
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).ValueType
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Serialize.StructBsonSerialize`1.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<StructBsonSerialize<TValue>>(StructBsonSerialize<TValue>)
+  nameWithType: JsonHelper.ToJson<StructBsonSerialize<TValue>>(StructBsonSerialize<TValue>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Serialize.StructBsonSerialize<TValue>>(Fantasy.Serialize.StructBsonSerialize<TValue>)
+  nameWithType.vb: JsonHelper.ToJson(Of StructBsonSerialize(Of TValue))(StructBsonSerialize(Of TValue))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Serialize.StructBsonSerialize(Of TValue))(Fantasy.Serialize.StructBsonSerialize(Of TValue))
+  name.vb: ToJson(Of StructBsonSerialize(Of TValue))(StructBsonSerialize(Of TValue))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Serialize.StructBsonSerialize{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Serialize.StructBsonSerialize`1
+    name: StructBsonSerialize
+    href: Fantasy.Serialize.StructBsonSerialize-1.html
+  - name: <
+  - name: TValue
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Serialize.StructBsonSerialize`1
+    name: StructBsonSerialize
+    href: Fantasy.Serialize.StructBsonSerialize-1.html
+  - name: <
+  - name: TValue
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Serialize.StructBsonSerialize{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Serialize.StructBsonSerialize`1
+    name: StructBsonSerialize
+    href: Fantasy.Serialize.StructBsonSerialize-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+  - name: (
+  - uid: Fantasy.Serialize.StructBsonSerialize`1
+    name: StructBsonSerialize
+    href: Fantasy.Serialize.StructBsonSerialize-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1
+  commentId: T:MongoDB.Bson.Serialization.Serializers.SerializerBase`1
+  isExternal: true
+  name: SerializerBase<TValue>
+  nameWithType: SerializerBase<TValue>
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>
+  nameWithType.vb: SerializerBase(Of TValue)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue)
+  name.vb: SerializerBase(Of TValue)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1
+    name: SerializerBase
+    isExternal: true
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1
+    name: SerializerBase
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers
+  commentId: N:MongoDB.Bson.Serialization.Serializers
+  isExternal: true
+  name: MongoDB.Bson.Serialization.Serializers
+  nameWithType: MongoDB.Bson.Serialization.Serializers
+  fullName: MongoDB.Bson.Serialization.Serializers
+  spec.csharp:
+  - uid: MongoDB
+    name: MongoDB
+    isExternal: true
+  - name: .
+  - uid: MongoDB.Bson
+    name: Bson
+    isExternal: true
+  - name: .
+  - uid: MongoDB.Bson.Serialization
+    name: Serialization
+    isExternal: true
+  - name: .
+  - uid: MongoDB.Bson.Serialization.Serializers
+    name: Serializers
+    isExternal: true
+  spec.vb:
+  - uid: MongoDB
+    name: MongoDB
+    isExternal: true
+  - name: .
+  - uid: MongoDB.Bson
+    name: Bson
+    isExternal: true
+  - name: .
+  - uid: MongoDB.Bson.Serialization
+    name: Serialization
+    isExternal: true
+  - name: .
+  - uid: MongoDB.Bson.Serialization.Serializers
+    name: Serializers
+    isExternal: true
+- uid: MongoDB.Bson.Serialization.Serializers.StructSerializerBase`1
+  commentId: T:MongoDB.Bson.Serialization.Serializers.StructSerializerBase`1
+  isExternal: true
+  name: StructSerializerBase<TValue>
+  nameWithType: StructSerializerBase<TValue>
+  fullName: MongoDB.Bson.Serialization.Serializers.StructSerializerBase<TValue>
+  nameWithType.vb: StructSerializerBase(Of TValue)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.StructSerializerBase(Of TValue)
+  name.vb: StructSerializerBase(Of TValue)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.StructSerializerBase`1
+    name: StructSerializerBase
+    isExternal: true
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.StructSerializerBase`1
+    name: StructSerializerBase
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: MongoDB.Bson.Serialization.IBsonSerializer`1
+  commentId: T:MongoDB.Bson.Serialization.IBsonSerializer`1
+  isExternal: true
+  name: IBsonSerializer<TValue>
+  nameWithType: IBsonSerializer<TValue>
+  fullName: MongoDB.Bson.Serialization.IBsonSerializer<TValue>
+  nameWithType.vb: IBsonSerializer(Of TValue)
+  fullName.vb: MongoDB.Bson.Serialization.IBsonSerializer(Of TValue)
+  name.vb: IBsonSerializer(Of TValue)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.IBsonSerializer`1
+    name: IBsonSerializer
+    isExternal: true
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.IBsonSerializer`1
+    name: IBsonSerializer
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: MongoDB.Bson.Serialization
+  commentId: N:MongoDB.Bson.Serialization
+  isExternal: true
+  name: MongoDB.Bson.Serialization
+  nameWithType: MongoDB.Bson.Serialization
+  fullName: MongoDB.Bson.Serialization
+  spec.csharp:
+  - uid: MongoDB
+    name: MongoDB
+    isExternal: true
+  - name: .
+  - uid: MongoDB.Bson
+    name: Bson
+    isExternal: true
+  - name: .
+  - uid: MongoDB.Bson.Serialization
+    name: Serialization
+    isExternal: true
+  spec.vb:
+  - uid: MongoDB
+    name: MongoDB
+    isExternal: true
+  - name: .
+  - uid: MongoDB.Bson
+    name: Bson
+    isExternal: true
+  - name: .
+  - uid: MongoDB.Bson.Serialization
+    name: Serialization
+    isExternal: true
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Equals(System.Object)
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Equals(System.Object)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: Equals(object)
+  nameWithType: SerializerBase<TValue>.Equals(object)
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.Equals(object)
+  nameWithType.vb: SerializerBase(Of TValue).Equals(Object)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Equals(System.Object)
+    name: Equals
+    isExternal: true
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Equals(System.Object)
+    name: Equals
+    isExternal: true
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.GetHashCode
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase`1.GetHashCode
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: SerializerBase<TValue>.GetHashCode()
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.GetHashCode()
+  nameWithType.vb: SerializerBase(Of TValue).GetHashCode()
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).GetHashCode()
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.GetHashCode
+    name: GetHashCode
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.GetHashCode
+    name: GetHashCode
+    isExternal: true
+  - name: (
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotBeDeserializedException
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotBeDeserializedException
+  isExternal: true
+  name: CreateCannotBeDeserializedException()
+  nameWithType: SerializerBase<TValue>.CreateCannotBeDeserializedException()
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.CreateCannotBeDeserializedException()
+  nameWithType.vb: SerializerBase(Of TValue).CreateCannotBeDeserializedException()
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).CreateCannotBeDeserializedException()
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotBeDeserializedException
+    name: CreateCannotBeDeserializedException
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotBeDeserializedException
+    name: CreateCannotBeDeserializedException
+    isExternal: true
+  - name: (
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotBeSerializedException
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotBeSerializedException
+  isExternal: true
+  name: CreateCannotBeSerializedException()
+  nameWithType: SerializerBase<TValue>.CreateCannotBeSerializedException()
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.CreateCannotBeSerializedException()
+  nameWithType.vb: SerializerBase(Of TValue).CreateCannotBeSerializedException()
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).CreateCannotBeSerializedException()
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotBeSerializedException
+    name: CreateCannotBeSerializedException
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotBeSerializedException
+    name: CreateCannotBeSerializedException
+    isExternal: true
+  - name: (
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+  isExternal: true
+  name: CreateCannotDeserializeFromBsonTypeException(BsonType)
+  nameWithType: SerializerBase<TValue>.CreateCannotDeserializeFromBsonTypeException(BsonType)
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+  nameWithType.vb: SerializerBase(Of TValue).CreateCannotDeserializeFromBsonTypeException(BsonType)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+    name: CreateCannotDeserializeFromBsonTypeException
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.BsonType
+    name: BsonType
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.CreateCannotDeserializeFromBsonTypeException(MongoDB.Bson.BsonType)
+    name: CreateCannotDeserializeFromBsonTypeException
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.BsonType
+    name: BsonType
+    isExternal: true
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader,MongoDB.Bson.BsonType)
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase`1.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader,MongoDB.Bson.BsonType)
+  isExternal: true
+  name: EnsureBsonTypeEquals(IBsonReader, BsonType)
+  nameWithType: SerializerBase<TValue>.EnsureBsonTypeEquals(IBsonReader, BsonType)
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader, MongoDB.Bson.BsonType)
+  nameWithType.vb: SerializerBase(Of TValue).EnsureBsonTypeEquals(IBsonReader, BsonType)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader, MongoDB.Bson.BsonType)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader,MongoDB.Bson.BsonType)
+    name: EnsureBsonTypeEquals
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.IO.IBsonReader
+    name: IBsonReader
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.BsonType
+    name: BsonType
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.EnsureBsonTypeEquals(MongoDB.Bson.IO.IBsonReader,MongoDB.Bson.BsonType)
+    name: EnsureBsonTypeEquals
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.IO.IBsonReader
+    name: IBsonReader
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.BsonType
+    name: BsonType
+    isExternal: true
+  - name: )
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.ValueType
+  commentId: P:MongoDB.Bson.Serialization.Serializers.SerializerBase`1.ValueType
+  isExternal: true
+  name: ValueType
+  nameWithType: SerializerBase<TValue>.ValueType
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.ValueType
+  nameWithType.vb: SerializerBase(Of TValue).ValueType
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).ValueType
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,{TValue})
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+  parent: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}
+  definition: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+  name: Serialize(BsonSerializationContext, BsonSerializationArgs, TValue)
+  nameWithType: SerializerBase<TValue>.Serialize(BsonSerializationContext, BsonSerializationArgs, TValue)
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext, MongoDB.Bson.Serialization.BsonSerializationArgs, TValue)
+  nameWithType.vb: SerializerBase(Of TValue).Serialize(BsonSerializationContext, BsonSerializationArgs, TValue)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).Serialize(MongoDB.Bson.Serialization.BsonSerializationContext, MongoDB.Bson.Serialization.BsonSerializationArgs, TValue)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+    name: Serialize
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.Serialization.BsonSerializationContext
+    name: BsonSerializationContext
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.Serialization.BsonSerializationArgs
+    name: BsonSerializationArgs
+    isExternal: true
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+    name: Serialize
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.Serialization.BsonSerializationContext
+    name: BsonSerializationContext
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.Serialization.BsonSerializationArgs
+    name: BsonSerializationArgs
+    isExternal: true
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.Serialize.StructBsonSerialize`1.Serialize*
+  commentId: Overload:Fantasy.Serialize.StructBsonSerialize`1.Serialize
+  href: Fantasy.Serialize.StructBsonSerialize-1.html#Fantasy_Serialize_StructBsonSerialize_1_Serialize_MongoDB_Bson_Serialization_BsonSerializationContext_MongoDB_Bson_Serialization_BsonSerializationArgs__0_
+  name: Serialize
+  nameWithType: StructBsonSerialize<TValue>.Serialize
+  fullName: Fantasy.Serialize.StructBsonSerialize<TValue>.Serialize
+  nameWithType.vb: StructBsonSerialize(Of TValue).Serialize
+  fullName.vb: Fantasy.Serialize.StructBsonSerialize(Of TValue).Serialize
+- uid: MongoDB.Bson.Serialization.BsonSerializationContext
+  commentId: T:MongoDB.Bson.Serialization.BsonSerializationContext
+  parent: MongoDB.Bson.Serialization
+  isExternal: true
+  name: BsonSerializationContext
+  nameWithType: BsonSerializationContext
+  fullName: MongoDB.Bson.Serialization.BsonSerializationContext
+- uid: MongoDB.Bson.Serialization.BsonSerializationArgs
+  commentId: T:MongoDB.Bson.Serialization.BsonSerializationArgs
+  parent: MongoDB.Bson.Serialization
+  isExternal: true
+  name: BsonSerializationArgs
+  nameWithType: BsonSerializationArgs
+  fullName: MongoDB.Bson.Serialization.BsonSerializationArgs
+- uid: '{TValue}'
+  commentId: '!:TValue'
+  definition: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+  isExternal: true
+  name: Serialize(BsonSerializationContext, BsonSerializationArgs, TValue)
+  nameWithType: SerializerBase<TValue>.Serialize(BsonSerializationContext, BsonSerializationArgs, TValue)
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext, MongoDB.Bson.Serialization.BsonSerializationArgs, TValue)
+  nameWithType.vb: SerializerBase(Of TValue).Serialize(BsonSerializationContext, BsonSerializationArgs, TValue)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).Serialize(MongoDB.Bson.Serialization.BsonSerializationContext, MongoDB.Bson.Serialization.BsonSerializationArgs, TValue)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+    name: Serialize
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.Serialization.BsonSerializationContext
+    name: BsonSerializationContext
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.Serialization.BsonSerializationArgs
+    name: BsonSerializationArgs
+    isExternal: true
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Serialize(MongoDB.Bson.Serialization.BsonSerializationContext,MongoDB.Bson.Serialization.BsonSerializationArgs,`0)
+    name: Serialize
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.Serialization.BsonSerializationContext
+    name: BsonSerializationContext
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.Serialization.BsonSerializationArgs
+    name: BsonSerializationArgs
+    isExternal: true
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  parent: MongoDB.Bson.Serialization.Serializers.SerializerBase{{TValue}}
+  definition: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  name: Deserialize(BsonDeserializationContext, BsonDeserializationArgs)
+  nameWithType: SerializerBase<TValue>.Deserialize(BsonDeserializationContext, BsonDeserializationArgs)
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext, MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  nameWithType.vb: SerializerBase(Of TValue).Deserialize(BsonDeserializationContext, BsonDeserializationArgs)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext, MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+    name: Deserialize
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.Serialization.BsonDeserializationContext
+    name: BsonDeserializationContext
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.Serialization.BsonDeserializationArgs
+    name: BsonDeserializationArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase{`0}.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+    name: Deserialize
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.Serialization.BsonDeserializationContext
+    name: BsonDeserializationContext
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.Serialization.BsonDeserializationArgs
+    name: BsonDeserializationArgs
+    isExternal: true
+  - name: )
+- uid: Fantasy.Serialize.StructBsonSerialize`1.Deserialize*
+  commentId: Overload:Fantasy.Serialize.StructBsonSerialize`1.Deserialize
+  href: Fantasy.Serialize.StructBsonSerialize-1.html#Fantasy_Serialize_StructBsonSerialize_1_Deserialize_MongoDB_Bson_Serialization_BsonDeserializationContext_MongoDB_Bson_Serialization_BsonDeserializationArgs_
+  name: Deserialize
+  nameWithType: StructBsonSerialize<TValue>.Deserialize
+  fullName: Fantasy.Serialize.StructBsonSerialize<TValue>.Deserialize
+  nameWithType.vb: StructBsonSerialize(Of TValue).Deserialize
+  fullName.vb: Fantasy.Serialize.StructBsonSerialize(Of TValue).Deserialize
+- uid: MongoDB.Bson.Serialization.BsonDeserializationContext
+  commentId: T:MongoDB.Bson.Serialization.BsonDeserializationContext
+  parent: MongoDB.Bson.Serialization
+  isExternal: true
+  name: BsonDeserializationContext
+  nameWithType: BsonDeserializationContext
+  fullName: MongoDB.Bson.Serialization.BsonDeserializationContext
+- uid: MongoDB.Bson.Serialization.BsonDeserializationArgs
+  commentId: T:MongoDB.Bson.Serialization.BsonDeserializationArgs
+  parent: MongoDB.Bson.Serialization
+  isExternal: true
+  name: BsonDeserializationArgs
+  nameWithType: BsonDeserializationArgs
+  fullName: MongoDB.Bson.Serialization.BsonDeserializationArgs
+- uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  commentId: M:MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  isExternal: true
+  name: Deserialize(BsonDeserializationContext, BsonDeserializationArgs)
+  nameWithType: SerializerBase<TValue>.Deserialize(BsonDeserializationContext, BsonDeserializationArgs)
+  fullName: MongoDB.Bson.Serialization.Serializers.SerializerBase<TValue>.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext, MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  nameWithType.vb: SerializerBase(Of TValue).Deserialize(BsonDeserializationContext, BsonDeserializationArgs)
+  fullName.vb: MongoDB.Bson.Serialization.Serializers.SerializerBase(Of TValue).Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext, MongoDB.Bson.Serialization.BsonDeserializationArgs)
+  spec.csharp:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+    name: Deserialize
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.Serialization.BsonDeserializationContext
+    name: BsonDeserializationContext
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.Serialization.BsonDeserializationArgs
+    name: BsonDeserializationArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: MongoDB.Bson.Serialization.Serializers.SerializerBase`1.Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext,MongoDB.Bson.Serialization.BsonDeserializationArgs)
+    name: Deserialize
+    isExternal: true
+  - name: (
+  - uid: MongoDB.Bson.Serialization.BsonDeserializationContext
+    name: BsonDeserializationContext
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: MongoDB.Bson.Serialization.BsonDeserializationArgs
+    name: BsonDeserializationArgs
+    isExternal: true
+  - name: )

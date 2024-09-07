@@ -1,0 +1,889 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Assembly.AssemblyInfo
+  commentId: T:Fantasy.Assembly.AssemblyInfo
+  id: AssemblyInfo
+  parent: Fantasy.Assembly
+  children:
+  - Fantasy.Assembly.AssemblyInfo.#ctor(System.Int64)
+  - Fantasy.Assembly.AssemblyInfo.Assembly
+  - Fantasy.Assembly.AssemblyInfo.AssemblyIdentity
+  - Fantasy.Assembly.AssemblyInfo.AssemblyTypeGroupList
+  - Fantasy.Assembly.AssemblyInfo.AssemblyTypeList
+  - Fantasy.Assembly.AssemblyInfo.Load(System.Reflection.Assembly)
+  - Fantasy.Assembly.AssemblyInfo.Unload
+  langs:
+  - csharp
+  - vb
+  name: AssemblyInfo
+  nameWithType: AssemblyInfo
+  fullName: Fantasy.Assembly.AssemblyInfo
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AssemblyInfo
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: AssemblyInfo提供有关程序集和类型的信息
+  example: []
+  syntax:
+    content: public sealed class AssemblyInfo
+    content.vb: Public NotInheritable Class AssemblyInfo
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Assembly.AssemblyInfo.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Assembly.AssemblyInfo.AssemblyIdentity
+  commentId: F:Fantasy.Assembly.AssemblyInfo.AssemblyIdentity
+  id: AssemblyIdentity
+  parent: Fantasy.Assembly.AssemblyInfo
+  langs:
+  - csharp
+  - vb
+  name: AssemblyIdentity
+  nameWithType: AssemblyInfo.AssemblyIdentity
+  fullName: Fantasy.Assembly.AssemblyInfo.AssemblyIdentity
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AssemblyIdentity
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+    startLine: 19
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 唯一标识
+  example: []
+  syntax:
+    content: public readonly long AssemblyIdentity
+    return:
+      type: System.Int64
+    content.vb: Public ReadOnly AssemblyIdentity As Long
+- uid: Fantasy.Assembly.AssemblyInfo.Assembly
+  commentId: P:Fantasy.Assembly.AssemblyInfo.Assembly
+  id: Assembly
+  parent: Fantasy.Assembly.AssemblyInfo
+  langs:
+  - csharp
+  - vb
+  name: Assembly
+  nameWithType: AssemblyInfo.Assembly
+  fullName: Fantasy.Assembly.AssemblyInfo.Assembly
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Assembly
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+    startLine: 23
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 获取或设置与此程序集相关联的 <xref href="Fantasy.Assembly.AssemblyInfo.Assembly" data-throw-if-not-resolved="false"></xref> 实例。
+  example: []
+  syntax:
+    content: public Assembly Assembly { get; }
+    parameters: []
+    return:
+      type: System.Reflection.Assembly
+    content.vb: Public Property Assembly As Assembly
+  overload: Fantasy.Assembly.AssemblyInfo.Assembly*
+- uid: Fantasy.Assembly.AssemblyInfo.AssemblyTypeList
+  commentId: F:Fantasy.Assembly.AssemblyInfo.AssemblyTypeList
+  id: AssemblyTypeList
+  parent: Fantasy.Assembly.AssemblyInfo
+  langs:
+  - csharp
+  - vb
+  name: AssemblyTypeList
+  nameWithType: AssemblyInfo.AssemblyTypeList
+  fullName: Fantasy.Assembly.AssemblyInfo.AssemblyTypeList
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AssemblyTypeList
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+    startLine: 27
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 程序集类型集合，获取一个列表，包含从程序集加载的所有类型。
+  example: []
+  syntax:
+    content: public readonly List<Type> AssemblyTypeList
+    return:
+      type: System.Collections.Generic.List{System.Type}
+    content.vb: Public ReadOnly AssemblyTypeList As List(Of Type)
+- uid: Fantasy.Assembly.AssemblyInfo.AssemblyTypeGroupList
+  commentId: F:Fantasy.Assembly.AssemblyInfo.AssemblyTypeGroupList
+  id: AssemblyTypeGroupList
+  parent: Fantasy.Assembly.AssemblyInfo
+  langs:
+  - csharp
+  - vb
+  name: AssemblyTypeGroupList
+  nameWithType: AssemblyInfo.AssemblyTypeGroupList
+  fullName: Fantasy.Assembly.AssemblyInfo.AssemblyTypeGroupList
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AssemblyTypeGroupList
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+    startLine: 31
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 程序集类型分组集合，获取一个分组列表，将接口类型映射到实现这些接口的类型。
+  example: []
+  syntax:
+    content: public readonly OneToManyList<Type, Type> AssemblyTypeGroupList
+    return:
+      type: Fantasy.DataStructure.Collection.OneToManyList{System.Type,System.Type}
+    content.vb: Public ReadOnly AssemblyTypeGroupList As OneToManyList(Of Type, Type)
+- uid: Fantasy.Assembly.AssemblyInfo.#ctor(System.Int64)
+  commentId: M:Fantasy.Assembly.AssemblyInfo.#ctor(System.Int64)
+  id: '#ctor(System.Int64)'
+  parent: Fantasy.Assembly.AssemblyInfo
+  langs:
+  - csharp
+  - vb
+  name: AssemblyInfo(long)
+  nameWithType: AssemblyInfo.AssemblyInfo(long)
+  fullName: Fantasy.Assembly.AssemblyInfo.AssemblyInfo(long)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+    startLine: 37
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 初始化 <xref href="Fantasy.Assembly.AssemblyInfo" data-throw-if-not-resolved="false"></xref> 类的新实例。
+  example: []
+  syntax:
+    content: public AssemblyInfo(long assemblyIdentity)
+    parameters:
+    - id: assemblyIdentity
+      type: System.Int64
+      description: ''
+    content.vb: Public Sub New(assemblyIdentity As Long)
+  overload: Fantasy.Assembly.AssemblyInfo.#ctor*
+  nameWithType.vb: AssemblyInfo.New(Long)
+  fullName.vb: Fantasy.Assembly.AssemblyInfo.New(Long)
+  name.vb: New(Long)
+- uid: Fantasy.Assembly.AssemblyInfo.Load(System.Reflection.Assembly)
+  commentId: M:Fantasy.Assembly.AssemblyInfo.Load(System.Reflection.Assembly)
+  id: Load(System.Reflection.Assembly)
+  parent: Fantasy.Assembly.AssemblyInfo
+  langs:
+  - csharp
+  - vb
+  name: Load(Assembly)
+  nameWithType: AssemblyInfo.Load(Assembly)
+  fullName: Fantasy.Assembly.AssemblyInfo.Load(System.Reflection.Assembly)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Load
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+    startLine: 46
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 从指定的程序集加载类型信息并进行分类。
+  example: []
+  syntax:
+    content: public void Load(Assembly assembly)
+    parameters:
+    - id: assembly
+      type: System.Reflection.Assembly
+      description: 要加载信息的程序集。
+    content.vb: Public Sub Load(assembly As Assembly)
+  overload: Fantasy.Assembly.AssemblyInfo.Load*
+- uid: Fantasy.Assembly.AssemblyInfo.Unload
+  commentId: M:Fantasy.Assembly.AssemblyInfo.Unload
+  id: Unload
+  parent: Fantasy.Assembly.AssemblyInfo
+  langs:
+  - csharp
+  - vb
+  name: Unload()
+  nameWithType: AssemblyInfo.Unload()
+  fullName: Fantasy.Assembly.AssemblyInfo.Unload()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Unload
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblyInfo.cs
+    startLine: 72
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 卸载程序集的类型信息。
+  example: []
+  syntax:
+    content: public void Unload()
+    content.vb: Public Sub Unload()
+  overload: Fantasy.Assembly.AssemblyInfo.Unload*
+references:
+- uid: Fantasy.Assembly
+  commentId: N:Fantasy.Assembly
+  href: Fantasy.html
+  name: Fantasy.Assembly
+  nameWithType: Fantasy.Assembly
+  fullName: Fantasy.Assembly
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Assembly
+    name: Assembly
+    href: Fantasy.Assembly.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Assembly
+    name: Assembly
+    href: Fantasy.Assembly.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Assembly.AssemblyInfo.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<AssemblyInfo>(AssemblyInfo)
+  nameWithType: JsonHelper.ToJson<AssemblyInfo>(AssemblyInfo)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Assembly.AssemblyInfo>(Fantasy.Assembly.AssemblyInfo)
+  nameWithType.vb: JsonHelper.ToJson(Of AssemblyInfo)(AssemblyInfo)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Assembly.AssemblyInfo)(Fantasy.Assembly.AssemblyInfo)
+  name.vb: ToJson(Of AssemblyInfo)(AssemblyInfo)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Assembly.AssemblyInfo)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Assembly.AssemblyInfo
+    name: AssemblyInfo
+    href: Fantasy.Assembly.AssemblyInfo.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Assembly.AssemblyInfo
+    name: AssemblyInfo
+    href: Fantasy.Assembly.AssemblyInfo.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Assembly.AssemblyInfo)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Assembly.AssemblyInfo
+    name: AssemblyInfo
+    href: Fantasy.Assembly.AssemblyInfo.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Assembly.AssemblyInfo
+    name: AssemblyInfo
+    href: Fantasy.Assembly.AssemblyInfo.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.Assembly.AssemblyInfo.Assembly
+  commentId: P:Fantasy.Assembly.AssemblyInfo.Assembly
+  href: Fantasy.Assembly.AssemblyInfo.html#Fantasy_Assembly_AssemblyInfo_Assembly
+  name: Assembly
+  nameWithType: AssemblyInfo.Assembly
+  fullName: Fantasy.Assembly.AssemblyInfo.Assembly
+- uid: Fantasy.Assembly.AssemblyInfo.Assembly*
+  commentId: Overload:Fantasy.Assembly.AssemblyInfo.Assembly
+  href: Fantasy.Assembly.AssemblyInfo.html#Fantasy_Assembly_AssemblyInfo_Assembly
+  name: Assembly
+  nameWithType: AssemblyInfo.Assembly
+  fullName: Fantasy.Assembly.AssemblyInfo.Assembly
+- uid: System.Reflection.Assembly
+  commentId: T:System.Reflection.Assembly
+  parent: System.Reflection
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.reflection.assembly
+  name: Assembly
+  nameWithType: Assembly
+  fullName: System.Reflection.Assembly
+- uid: System.Reflection
+  commentId: N:System.Reflection
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Reflection
+  nameWithType: System.Reflection
+  fullName: System.Reflection
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Reflection
+    name: Reflection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.reflection
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Reflection
+    name: Reflection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.reflection
+- uid: System.Collections.Generic.List{System.Type}
+  commentId: T:System.Collections.Generic.List{System.Type}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<Type>
+  nameWithType: List<Type>
+  fullName: System.Collections.Generic.List<System.Type>
+  nameWithType.vb: List(Of Type)
+  fullName.vb: System.Collections.Generic.List(Of System.Type)
+  name.vb: List(Of Type)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Fantasy.DataStructure.Collection.OneToManyList{System.Type,System.Type}
+  commentId: T:Fantasy.DataStructure.Collection.OneToManyList{System.Type,System.Type}
+  parent: Fantasy.DataStructure.Collection
+  definition: Fantasy.DataStructure.Collection.OneToManyList`2
+  href: Fantasy.DataStructure.Collection.OneToManyList-2.html
+  name: OneToManyList<Type, Type>
+  nameWithType: OneToManyList<Type, Type>
+  fullName: Fantasy.DataStructure.Collection.OneToManyList<System.Type, System.Type>
+  nameWithType.vb: OneToManyList(Of Type, Type)
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyList(Of System.Type, System.Type)
+  name.vb: OneToManyList(Of Type, Type)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.OneToManyList`2
+    name: OneToManyList
+    href: Fantasy.DataStructure.Collection.OneToManyList-2.html
+  - name: <
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.OneToManyList`2
+    name: OneToManyList
+    href: Fantasy.DataStructure.Collection.OneToManyList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: )
+- uid: Fantasy.DataStructure.Collection.OneToManyList`2
+  commentId: T:Fantasy.DataStructure.Collection.OneToManyList`2
+  href: Fantasy.DataStructure.Collection.OneToManyList-2.html
+  name: OneToManyList<TKey, TValue>
+  nameWithType: OneToManyList<TKey, TValue>
+  fullName: Fantasy.DataStructure.Collection.OneToManyList<TKey, TValue>
+  nameWithType.vb: OneToManyList(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyList(Of TKey, TValue)
+  name.vb: OneToManyList(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Collection.OneToManyList`2
+    name: OneToManyList
+    href: Fantasy.DataStructure.Collection.OneToManyList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Collection.OneToManyList`2
+    name: OneToManyList
+    href: Fantasy.DataStructure.Collection.OneToManyList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Collection
+  commentId: N:Fantasy.DataStructure.Collection
+  href: Fantasy.html
+  name: Fantasy.DataStructure.Collection
+  nameWithType: Fantasy.DataStructure.Collection
+  fullName: Fantasy.DataStructure.Collection
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.Collection
+    name: Collection
+    href: Fantasy.DataStructure.Collection.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.Collection
+    name: Collection
+    href: Fantasy.DataStructure.Collection.html
+- uid: Fantasy.Assembly.AssemblyInfo
+  commentId: T:Fantasy.Assembly.AssemblyInfo
+  href: Fantasy.Assembly.AssemblyInfo.html
+  name: AssemblyInfo
+  nameWithType: AssemblyInfo
+  fullName: Fantasy.Assembly.AssemblyInfo
+- uid: Fantasy.Assembly.AssemblyInfo.#ctor*
+  commentId: Overload:Fantasy.Assembly.AssemblyInfo.#ctor
+  href: Fantasy.Assembly.AssemblyInfo.html#Fantasy_Assembly_AssemblyInfo__ctor_System_Int64_
+  name: AssemblyInfo
+  nameWithType: AssemblyInfo.AssemblyInfo
+  fullName: Fantasy.Assembly.AssemblyInfo.AssemblyInfo
+  nameWithType.vb: AssemblyInfo.New
+  fullName.vb: Fantasy.Assembly.AssemblyInfo.New
+  name.vb: New
+- uid: Fantasy.Assembly.AssemblyInfo.Load*
+  commentId: Overload:Fantasy.Assembly.AssemblyInfo.Load
+  href: Fantasy.Assembly.AssemblyInfo.html#Fantasy_Assembly_AssemblyInfo_Load_System_Reflection_Assembly_
+  name: Load
+  nameWithType: AssemblyInfo.Load
+  fullName: Fantasy.Assembly.AssemblyInfo.Load
+- uid: Fantasy.Assembly.AssemblyInfo.Unload*
+  commentId: Overload:Fantasy.Assembly.AssemblyInfo.Unload
+  href: Fantasy.Assembly.AssemblyInfo.html#Fantasy_Assembly_AssemblyInfo_Unload
+  name: Unload
+  nameWithType: AssemblyInfo.Unload
+  fullName: Fantasy.Assembly.AssemblyInfo.Unload

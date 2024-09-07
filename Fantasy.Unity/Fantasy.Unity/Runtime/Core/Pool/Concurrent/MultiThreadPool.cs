@@ -4,12 +4,12 @@ using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 #pragma warning disable CS8603 // Possible null reference return.
 
-namespace Fantasy
+namespace Fantasy.Pool
 {
     /// <summary>
     /// 线程安全的静态通用对象池。
     /// </summary>
-    public static class MultiThreadPool
+    internal static class MultiThreadPool
     {
         private static readonly ConcurrentDictionary<Type, MultiThreadPoolQueue> ObjectPools = new ConcurrentDictionary<Type, MultiThreadPoolQueue>();
 

@@ -1,9 +1,20 @@
 using System;
+using Fantasy.Network;
+using Fantasy.PacketParser.Interface;
+#if FANTASY_NET
+using Fantasy.Network.Interface;
+using Fantasy.Network.Route;
+using Fantasy.PacketParser;
+using Fantasy.Async;
+using Fantasy.Helper;
+using Fantasy.InnerMessage;
+#endif
+
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
-namespace Fantasy
+namespace Fantasy.Scheduler
 {
     /// <summary>
     /// 提供了一个机制来调度和处理外部网络消息。
@@ -26,7 +37,7 @@ namespace Fantasy
     }
 #endif
 #if FANTASY_NET
-    public sealed class OuterMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
+    internal sealed class OuterMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
     {
         private readonly PingResponse _pingResponse = new PingResponse();
         public override void Scheduler(Session session, APackInfo packInfo)

@@ -3,6 +3,8 @@ using MemoryPack;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using Fantasy;
+using Fantasy.Network.Interface;
+using Fantasy.Serialize;
 // ReSharper disable InconsistentNaming
 // ReSharper disable RedundantUsingDirective
 // ReSharper disable RedundantOverriddenMember
@@ -16,7 +18,7 @@ using Fantasy;
 namespace Fantasy
 {	
 	[ProtoContract]
-	public partial class C2G_TestMessage : AMessage, IMessage
+	public partial class C2G_TestMessage : AMessage, IMessage, IProto
 	{
 		public static C2G_TestMessage Create(Scene scene)
 		{
@@ -54,7 +56,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class G2C_TestResponse : AMessage, IResponse
+	public partial class G2C_TestResponse : AMessage, IResponse, IProto
 	{
 		public static G2C_TestResponse Create(Scene scene)
 		{
@@ -75,7 +77,7 @@ namespace Fantasy
 		public uint ErrorCode { get; set; }
 	}
 	[ProtoContract]
-	public partial class C2G_CreateAddressableRequest : AMessage, IRequest
+	public partial class C2G_CreateAddressableRequest : AMessage, IRequest, IProto
 	{
 		public static C2G_CreateAddressableRequest Create(Scene scene)
 		{
@@ -92,7 +94,7 @@ namespace Fantasy
 		public uint OpCode() { return OuterOpcode.C2G_CreateAddressableRequest; }
 	}
 	[ProtoContract]
-	public partial class G2C_CreateAddressableResponse : AMessage, IResponse
+	public partial class G2C_CreateAddressableResponse : AMessage, IResponse, IProto
 	{
 		public static G2C_CreateAddressableResponse Create(Scene scene)
 		{
@@ -110,7 +112,7 @@ namespace Fantasy
 		public uint ErrorCode { get; set; }
 	}
 	[ProtoContract]
-	public partial class C2M_TestMessage : AMessage, IAddressableRouteMessage
+	public partial class C2M_TestMessage : AMessage, IAddressableRouteMessage, IProto
 	{
 		public static C2M_TestMessage Create(Scene scene)
 		{
@@ -128,7 +130,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class C2M_TestRequest : AMessage, IAddressableRouteRequest
+	public partial class C2M_TestRequest : AMessage, IAddressableRouteRequest, IProto
 	{
 		public static C2M_TestRequest Create(Scene scene)
 		{
@@ -148,7 +150,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class M2C_TestResponse : AMessage, IAddressableRouteResponse
+	public partial class M2C_TestResponse : AMessage, IAddressableRouteResponse, IProto
 	{
 		public static M2C_TestResponse Create(Scene scene)
 		{
@@ -172,7 +174,7 @@ namespace Fantasy
 	///  通知Gate服务器创建一个Chat的Route连接
 	/// </summary>
 	[ProtoContract]
-	public partial class C2G_CreateChatRouteRequest : AMessage, IRequest
+	public partial class C2G_CreateChatRouteRequest : AMessage, IRequest, IProto
 	{
 		public static C2G_CreateChatRouteRequest Create(Scene scene)
 		{
@@ -189,7 +191,7 @@ namespace Fantasy
 		public uint OpCode() { return OuterOpcode.C2G_CreateChatRouteRequest; }
 	}
 	[ProtoContract]
-	public partial class G2C_CreateChatRouteResponse : AMessage, IResponse
+	public partial class G2C_CreateChatRouteResponse : AMessage, IResponse, IProto
 	{
 		public static G2C_CreateChatRouteResponse Create(Scene scene)
 		{
@@ -210,7 +212,7 @@ namespace Fantasy
 	///  发送一个Route消息给Chat
 	/// </summary>
 	[ProtoContract]
-	public partial class C2Chat_TestMessage : AMessage, ICustomRouteMessage
+	public partial class C2Chat_TestMessage : AMessage, ICustomRouteMessage, IProto
 	{
 		public static C2Chat_TestMessage Create(Scene scene)
 		{
@@ -233,7 +235,7 @@ namespace Fantasy
 	///  发送一个RPCRoute消息给Chat
 	/// </summary>
 	[ProtoContract]
-	public partial class C2Chat_TestMessageRequest : AMessage, ICustomRouteRequest
+	public partial class C2Chat_TestMessageRequest : AMessage, ICustomRouteRequest, IProto
 	{
 		public static C2Chat_TestMessageRequest Create(Scene scene)
 		{
@@ -255,7 +257,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class Chat2C_TestMessageResponse : AMessage, ICustomRouteResponse
+	public partial class Chat2C_TestMessageResponse : AMessage, ICustomRouteResponse, IProto
 	{
 		public static Chat2C_TestMessageResponse Create(Scene scene)
 		{

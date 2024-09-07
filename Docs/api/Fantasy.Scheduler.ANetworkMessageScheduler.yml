@@ -1,0 +1,688 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Scheduler.ANetworkMessageScheduler
+  commentId: T:Fantasy.Scheduler.ANetworkMessageScheduler
+  id: ANetworkMessageScheduler
+  parent: Fantasy.Scheduler
+  children:
+  - Fantasy.Scheduler.ANetworkMessageScheduler.#ctor(Fantasy.Scene)
+  - Fantasy.Scheduler.ANetworkMessageScheduler.MessageDispatcherComponent
+  - Fantasy.Scheduler.ANetworkMessageScheduler.NetworkMessagingComponent
+  - Fantasy.Scheduler.ANetworkMessageScheduler.Scene
+  - Fantasy.Scheduler.ANetworkMessageScheduler.Scheduler(Fantasy.Network.Session,Fantasy.PacketParser.Interface.APackInfo)
+  langs:
+  - csharp
+  - vb
+  name: ANetworkMessageScheduler
+  nameWithType: ANetworkMessageScheduler
+  fullName: Fantasy.Scheduler.ANetworkMessageScheduler
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ANetworkMessageScheduler
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+    startLine: 12
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  syntax:
+    content: public abstract class ANetworkMessageScheduler
+    content.vb: Public MustInherit Class ANetworkMessageScheduler
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Scheduler.ANetworkMessageScheduler.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Scheduler.ANetworkMessageScheduler.Scene
+  commentId: F:Fantasy.Scheduler.ANetworkMessageScheduler.Scene
+  id: Scene
+  parent: Fantasy.Scheduler.ANetworkMessageScheduler
+  langs:
+  - csharp
+  - vb
+  name: Scene
+  nameWithType: ANetworkMessageScheduler.Scene
+  fullName: Fantasy.Scheduler.ANetworkMessageScheduler.Scene
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Scene
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  syntax:
+    content: protected readonly Scene Scene
+    return:
+      type: Fantasy.Scene
+    content.vb: Protected ReadOnly Scene As Scene
+- uid: Fantasy.Scheduler.ANetworkMessageScheduler.MessageDispatcherComponent
+  commentId: F:Fantasy.Scheduler.ANetworkMessageScheduler.MessageDispatcherComponent
+  id: MessageDispatcherComponent
+  parent: Fantasy.Scheduler.ANetworkMessageScheduler
+  langs:
+  - csharp
+  - vb
+  name: MessageDispatcherComponent
+  nameWithType: ANetworkMessageScheduler.MessageDispatcherComponent
+  fullName: Fantasy.Scheduler.ANetworkMessageScheduler.MessageDispatcherComponent
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MessageDispatcherComponent
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+    startLine: 15
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  syntax:
+    content: protected readonly MessageDispatcherComponent MessageDispatcherComponent
+    return:
+      type: Fantasy.Network.Interface.MessageDispatcherComponent
+    content.vb: Protected ReadOnly MessageDispatcherComponent As MessageDispatcherComponent
+- uid: Fantasy.Scheduler.ANetworkMessageScheduler.NetworkMessagingComponent
+  commentId: F:Fantasy.Scheduler.ANetworkMessageScheduler.NetworkMessagingComponent
+  id: NetworkMessagingComponent
+  parent: Fantasy.Scheduler.ANetworkMessageScheduler
+  langs:
+  - csharp
+  - vb
+  name: NetworkMessagingComponent
+  nameWithType: ANetworkMessageScheduler.NetworkMessagingComponent
+  fullName: Fantasy.Scheduler.ANetworkMessageScheduler.NetworkMessagingComponent
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NetworkMessagingComponent
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+    startLine: 16
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  syntax:
+    content: protected readonly NetworkMessagingComponent NetworkMessagingComponent
+    return:
+      type: Fantasy.Scheduler.NetworkMessagingComponent
+    content.vb: Protected ReadOnly NetworkMessagingComponent As NetworkMessagingComponent
+- uid: Fantasy.Scheduler.ANetworkMessageScheduler.#ctor(Fantasy.Scene)
+  commentId: M:Fantasy.Scheduler.ANetworkMessageScheduler.#ctor(Fantasy.Scene)
+  id: '#ctor(Fantasy.Scene)'
+  parent: Fantasy.Scheduler.ANetworkMessageScheduler
+  langs:
+  - csharp
+  - vb
+  name: ANetworkMessageScheduler(Scene)
+  nameWithType: ANetworkMessageScheduler.ANetworkMessageScheduler(Scene)
+  fullName: Fantasy.Scheduler.ANetworkMessageScheduler.ANetworkMessageScheduler(Fantasy.Scene)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+    startLine: 17
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  syntax:
+    content: protected ANetworkMessageScheduler(Scene scene)
+    parameters:
+    - id: scene
+      type: Fantasy.Scene
+    content.vb: Protected Sub New(scene As Scene)
+  overload: Fantasy.Scheduler.ANetworkMessageScheduler.#ctor*
+  nameWithType.vb: ANetworkMessageScheduler.New(Scene)
+  fullName.vb: Fantasy.Scheduler.ANetworkMessageScheduler.New(Fantasy.Scene)
+  name.vb: New(Scene)
+- uid: Fantasy.Scheduler.ANetworkMessageScheduler.Scheduler(Fantasy.Network.Session,Fantasy.PacketParser.Interface.APackInfo)
+  commentId: M:Fantasy.Scheduler.ANetworkMessageScheduler.Scheduler(Fantasy.Network.Session,Fantasy.PacketParser.Interface.APackInfo)
+  id: Scheduler(Fantasy.Network.Session,Fantasy.PacketParser.Interface.APackInfo)
+  parent: Fantasy.Scheduler.ANetworkMessageScheduler
+  langs:
+  - csharp
+  - vb
+  name: Scheduler(Session, APackInfo)
+  nameWithType: ANetworkMessageScheduler.Scheduler(Session, APackInfo)
+  fullName: Fantasy.Scheduler.ANetworkMessageScheduler.Scheduler(Fantasy.Network.Session, Fantasy.PacketParser.Interface.APackInfo)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Scheduler
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/Interface/ANetworkMessageScheduler.cs
+    startLine: 23
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Scheduler
+  syntax:
+    content: public abstract void Scheduler(Session session, APackInfo packInfo)
+    parameters:
+    - id: session
+      type: Fantasy.Network.Session
+    - id: packInfo
+      type: Fantasy.PacketParser.Interface.APackInfo
+    content.vb: Public MustOverride Sub Scheduler(session As Session, packInfo As APackInfo)
+  overload: Fantasy.Scheduler.ANetworkMessageScheduler.Scheduler*
+references:
+- uid: Fantasy.Scheduler
+  commentId: N:Fantasy.Scheduler
+  href: Fantasy.html
+  name: Fantasy.Scheduler
+  nameWithType: Fantasy.Scheduler
+  fullName: Fantasy.Scheduler
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Scheduler
+    name: Scheduler
+    href: Fantasy.Scheduler.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Scheduler
+    name: Scheduler
+    href: Fantasy.Scheduler.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Scheduler.ANetworkMessageScheduler.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<ANetworkMessageScheduler>(ANetworkMessageScheduler)
+  nameWithType: JsonHelper.ToJson<ANetworkMessageScheduler>(ANetworkMessageScheduler)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Scheduler.ANetworkMessageScheduler>(Fantasy.Scheduler.ANetworkMessageScheduler)
+  nameWithType.vb: JsonHelper.ToJson(Of ANetworkMessageScheduler)(ANetworkMessageScheduler)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Scheduler.ANetworkMessageScheduler)(Fantasy.Scheduler.ANetworkMessageScheduler)
+  name.vb: ToJson(Of ANetworkMessageScheduler)(ANetworkMessageScheduler)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Scheduler.ANetworkMessageScheduler)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Scheduler.ANetworkMessageScheduler
+    name: ANetworkMessageScheduler
+    href: Fantasy.Scheduler.ANetworkMessageScheduler.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Scheduler.ANetworkMessageScheduler
+    name: ANetworkMessageScheduler
+    href: Fantasy.Scheduler.ANetworkMessageScheduler.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Scheduler.ANetworkMessageScheduler)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Scheduler.ANetworkMessageScheduler
+    name: ANetworkMessageScheduler
+    href: Fantasy.Scheduler.ANetworkMessageScheduler.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Scheduler.ANetworkMessageScheduler
+    name: ANetworkMessageScheduler
+    href: Fantasy.Scheduler.ANetworkMessageScheduler.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Scene
+  commentId: T:Fantasy.Scene
+  parent: Fantasy
+  href: Fantasy.Scene.html
+  name: Scene
+  nameWithType: Scene
+  fullName: Fantasy.Scene
+- uid: Fantasy
+  commentId: N:Fantasy
+  href: Fantasy.html
+  name: Fantasy
+  nameWithType: Fantasy
+  fullName: Fantasy
+- uid: Fantasy.Network.Interface.MessageDispatcherComponent
+  commentId: T:Fantasy.Network.Interface.MessageDispatcherComponent
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.MessageDispatcherComponent.html
+  name: MessageDispatcherComponent
+  nameWithType: MessageDispatcherComponent
+  fullName: Fantasy.Network.Interface.MessageDispatcherComponent
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  href: Fantasy.html
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+- uid: Fantasy.Scheduler.NetworkMessagingComponent
+  commentId: T:Fantasy.Scheduler.NetworkMessagingComponent
+  parent: Fantasy.Scheduler
+  href: Fantasy.Scheduler.NetworkMessagingComponent.html
+  name: NetworkMessagingComponent
+  nameWithType: NetworkMessagingComponent
+  fullName: Fantasy.Scheduler.NetworkMessagingComponent
+- uid: Fantasy.Scheduler.ANetworkMessageScheduler.#ctor*
+  commentId: Overload:Fantasy.Scheduler.ANetworkMessageScheduler.#ctor
+  href: Fantasy.Scheduler.ANetworkMessageScheduler.html#Fantasy_Scheduler_ANetworkMessageScheduler__ctor_Fantasy_Scene_
+  name: ANetworkMessageScheduler
+  nameWithType: ANetworkMessageScheduler.ANetworkMessageScheduler
+  fullName: Fantasy.Scheduler.ANetworkMessageScheduler.ANetworkMessageScheduler
+  nameWithType.vb: ANetworkMessageScheduler.New
+  fullName.vb: Fantasy.Scheduler.ANetworkMessageScheduler.New
+  name.vb: New
+- uid: Fantasy.Scheduler.ANetworkMessageScheduler.Scheduler*
+  commentId: Overload:Fantasy.Scheduler.ANetworkMessageScheduler.Scheduler
+  href: Fantasy.Scheduler.ANetworkMessageScheduler.html#Fantasy_Scheduler_ANetworkMessageScheduler_Scheduler_Fantasy_Network_Session_Fantasy_PacketParser_Interface_APackInfo_
+  name: Scheduler
+  nameWithType: ANetworkMessageScheduler.Scheduler
+  fullName: Fantasy.Scheduler.ANetworkMessageScheduler.Scheduler
+- uid: Fantasy.Network.Session
+  commentId: T:Fantasy.Network.Session
+  parent: Fantasy.Network
+  href: Fantasy.Network.Session.html
+  name: Session
+  nameWithType: Session
+  fullName: Fantasy.Network.Session
+- uid: Fantasy.PacketParser.Interface.APackInfo
+  commentId: T:Fantasy.PacketParser.Interface.APackInfo
+  parent: Fantasy.PacketParser.Interface
+  href: Fantasy.PacketParser.Interface.APackInfo.html
+  name: APackInfo
+  nameWithType: APackInfo
+  fullName: Fantasy.PacketParser.Interface.APackInfo
+- uid: Fantasy.Network
+  commentId: N:Fantasy.Network
+  href: Fantasy.html
+  name: Fantasy.Network
+  nameWithType: Fantasy.Network
+  fullName: Fantasy.Network
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+- uid: Fantasy.PacketParser.Interface
+  commentId: N:Fantasy.PacketParser.Interface
+  href: Fantasy.html
+  name: Fantasy.PacketParser.Interface
+  nameWithType: Fantasy.PacketParser.Interface
+  fullName: Fantasy.PacketParser.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+  - name: .
+  - uid: Fantasy.PacketParser.Interface
+    name: Interface
+    href: Fantasy.PacketParser.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+  - name: .
+  - uid: Fantasy.PacketParser.Interface
+    name: Interface
+    href: Fantasy.PacketParser.Interface.html

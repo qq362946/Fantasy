@@ -1,0 +1,763 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.Interface.Message`1
+  commentId: T:Fantasy.Network.Interface.Message`1
+  id: Message`1
+  parent: Fantasy.Network.Interface
+  children:
+  - Fantasy.Network.Interface.Message`1.Handle(Fantasy.Network.Session,System.UInt32,System.UInt32,System.Object)
+  - Fantasy.Network.Interface.Message`1.Run(Fantasy.Network.Session,`0)
+  - Fantasy.Network.Interface.Message`1.Type
+  langs:
+  - csharp
+  - vb
+  name: Message<T>
+  nameWithType: Message<T>
+  fullName: Fantasy.Network.Interface.Message<T>
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IMessageHandler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Message
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IMessageHandler.cs
+    startLine: 34
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  summary: 泛型消息基类，实现了 <xref href="Fantasy.Network.Interface.IMessageHandler" data-throw-if-not-resolved="false"></xref> 接口。
+  example: []
+  syntax:
+    content: 'public abstract class Message<T> : IMessageHandler'
+    typeParameters:
+    - id: T
+    content.vb: Public MustInherit Class Message(Of T) Implements IMessageHandler
+  inheritance:
+  - System.Object
+  implements:
+  - Fantasy.Network.Interface.IMessageHandler
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Network.Interface.Message`1.Fantasy.Helper.JsonHelper.ToJson``1
+  nameWithType.vb: Message(Of T)
+  fullName.vb: Fantasy.Network.Interface.Message(Of T)
+  name.vb: Message(Of T)
+- uid: Fantasy.Network.Interface.Message`1.Type
+  commentId: M:Fantasy.Network.Interface.Message`1.Type
+  id: Type
+  parent: Fantasy.Network.Interface.Message`1
+  langs:
+  - csharp
+  - vb
+  name: Type()
+  nameWithType: Message<T>.Type()
+  fullName: Fantasy.Network.Interface.Message<T>.Type()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IMessageHandler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Type
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IMessageHandler.cs
+    startLine: 40
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  summary: 获取处理的消息类型。
+  example: []
+  syntax:
+    content: public Type Type()
+    return:
+      type: System.Type
+      description: 消息类型。
+    content.vb: Public Function Type() As Type
+  overload: Fantasy.Network.Interface.Message`1.Type*
+  implements:
+  - Fantasy.Network.Interface.IMessageHandler.Type
+  nameWithType.vb: Message(Of T).Type()
+  fullName.vb: Fantasy.Network.Interface.Message(Of T).Type()
+- uid: Fantasy.Network.Interface.Message`1.Handle(Fantasy.Network.Session,System.UInt32,System.UInt32,System.Object)
+  commentId: M:Fantasy.Network.Interface.Message`1.Handle(Fantasy.Network.Session,System.UInt32,System.UInt32,System.Object)
+  id: Handle(Fantasy.Network.Session,System.UInt32,System.UInt32,System.Object)
+  parent: Fantasy.Network.Interface.Message`1
+  langs:
+  - csharp
+  - vb
+  name: Handle(Session, uint, uint, object)
+  nameWithType: Message<T>.Handle(Session, uint, uint, object)
+  fullName: Fantasy.Network.Interface.Message<T>.Handle(Fantasy.Network.Session, uint, uint, object)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IMessageHandler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Handle
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IMessageHandler.cs
+    startLine: 53
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  summary: 处理消息的方法。
+  example: []
+  syntax:
+    content: public FTask Handle(Session session, uint rpcId, uint messageTypeCode, object message)
+    parameters:
+    - id: session
+      type: Fantasy.Network.Session
+      description: 会话对象。
+    - id: rpcId
+      type: System.UInt32
+      description: RPC标识。
+    - id: messageTypeCode
+      type: System.UInt32
+      description: 消息类型代码。
+    - id: message
+      type: System.Object
+      description: 要处理的消息。
+    return:
+      type: Fantasy.Async.FTask
+      description: 异步任务。
+    content.vb: Public Function Handle(session As Session, rpcId As UInteger, messageTypeCode As UInteger, message As Object) As FTask
+  overload: Fantasy.Network.Interface.Message`1.Handle*
+  implements:
+  - Fantasy.Network.Interface.IMessageHandler.Handle(Fantasy.Network.Session,System.UInt32,System.UInt32,System.Object)
+  nameWithType.vb: Message(Of T).Handle(Session, UInteger, UInteger, Object)
+  fullName.vb: Fantasy.Network.Interface.Message(Of T).Handle(Fantasy.Network.Session, UInteger, UInteger, Object)
+  name.vb: Handle(Session, UInteger, UInteger, Object)
+- uid: Fantasy.Network.Interface.Message`1.Run(Fantasy.Network.Session,`0)
+  commentId: M:Fantasy.Network.Interface.Message`1.Run(Fantasy.Network.Session,`0)
+  id: Run(Fantasy.Network.Session,`0)
+  parent: Fantasy.Network.Interface.Message`1
+  langs:
+  - csharp
+  - vb
+  name: Run(Session, T)
+  nameWithType: Message<T>.Run(Session, T)
+  fullName: Fantasy.Network.Interface.Message<T>.Run(Fantasy.Network.Session, T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IMessageHandler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Run
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IMessageHandler.cs
+    startLine: 71
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  summary: 运行消息处理逻辑。
+  example: []
+  syntax:
+    content: protected abstract FTask Run(Session session, T message)
+    parameters:
+    - id: session
+      type: Fantasy.Network.Session
+      description: 会话对象。
+    - id: message
+      type: '{T}'
+      description: 要处理的消息。
+    return:
+      type: Fantasy.Async.FTask
+      description: 异步任务。
+    content.vb: Protected MustOverride Function Run(session As Session, message As T) As FTask
+  overload: Fantasy.Network.Interface.Message`1.Run*
+  nameWithType.vb: Message(Of T).Run(Session, T)
+  fullName.vb: Fantasy.Network.Interface.Message(Of T).Run(Fantasy.Network.Session, T)
+references:
+- uid: Fantasy.Network.Interface.IMessageHandler
+  commentId: T:Fantasy.Network.Interface.IMessageHandler
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IMessageHandler.html
+  name: IMessageHandler
+  nameWithType: IMessageHandler
+  fullName: Fantasy.Network.Interface.IMessageHandler
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  href: Fantasy.html
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Network.Interface.Message`1.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<Message<T>>(Message<T>)
+  nameWithType: JsonHelper.ToJson<Message<T>>(Message<T>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.Interface.Message<T>>(Fantasy.Network.Interface.Message<T>)
+  nameWithType.vb: JsonHelper.ToJson(Of Message(Of T))(Message(Of T))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.Interface.Message(Of T))(Fantasy.Network.Interface.Message(Of T))
+  name.vb: ToJson(Of Message(Of T))(Message(Of T))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Interface.Message{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.Interface.Message`1
+    name: Message
+    href: Fantasy.Network.Interface.Message-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.Interface.Message`1
+    name: Message
+    href: Fantasy.Network.Interface.Message-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Interface.Message{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.Interface.Message`1
+    name: Message
+    href: Fantasy.Network.Interface.Message-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.Interface.Message`1
+    name: Message
+    href: Fantasy.Network.Interface.Message-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Network.Interface.Message`1.Type*
+  commentId: Overload:Fantasy.Network.Interface.Message`1.Type
+  href: Fantasy.Network.Interface.Message-1.html#Fantasy_Network_Interface_Message_1_Type
+  name: Type
+  nameWithType: Message<T>.Type
+  fullName: Fantasy.Network.Interface.Message<T>.Type
+  nameWithType.vb: Message(Of T).Type
+  fullName.vb: Fantasy.Network.Interface.Message(Of T).Type
+- uid: Fantasy.Network.Interface.IMessageHandler.Type
+  commentId: M:Fantasy.Network.Interface.IMessageHandler.Type
+  parent: Fantasy.Network.Interface.IMessageHandler
+  href: Fantasy.Network.Interface.IMessageHandler.html#Fantasy_Network_Interface_IMessageHandler_Type
+  name: Type()
+  nameWithType: IMessageHandler.Type()
+  fullName: Fantasy.Network.Interface.IMessageHandler.Type()
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.IMessageHandler.Type
+    name: Type
+    href: Fantasy.Network.Interface.IMessageHandler.html#Fantasy_Network_Interface_IMessageHandler_Type
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.IMessageHandler.Type
+    name: Type
+    href: Fantasy.Network.Interface.IMessageHandler.html#Fantasy_Network_Interface_IMessageHandler_Type
+  - name: (
+  - name: )
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Fantasy.Network.Interface.Message`1.Handle*
+  commentId: Overload:Fantasy.Network.Interface.Message`1.Handle
+  href: Fantasy.Network.Interface.Message-1.html#Fantasy_Network_Interface_Message_1_Handle_Fantasy_Network_Session_System_UInt32_System_UInt32_System_Object_
+  name: Handle
+  nameWithType: Message<T>.Handle
+  fullName: Fantasy.Network.Interface.Message<T>.Handle
+  nameWithType.vb: Message(Of T).Handle
+  fullName.vb: Fantasy.Network.Interface.Message(Of T).Handle
+- uid: Fantasy.Network.Interface.IMessageHandler.Handle(Fantasy.Network.Session,System.UInt32,System.UInt32,System.Object)
+  commentId: M:Fantasy.Network.Interface.IMessageHandler.Handle(Fantasy.Network.Session,System.UInt32,System.UInt32,System.Object)
+  parent: Fantasy.Network.Interface.IMessageHandler
+  isExternal: true
+  href: Fantasy.Network.Interface.IMessageHandler.html#Fantasy_Network_Interface_IMessageHandler_Handle_Fantasy_Network_Session_System_UInt32_System_UInt32_System_Object_
+  name: Handle(Session, uint, uint, object)
+  nameWithType: IMessageHandler.Handle(Session, uint, uint, object)
+  fullName: Fantasy.Network.Interface.IMessageHandler.Handle(Fantasy.Network.Session, uint, uint, object)
+  nameWithType.vb: IMessageHandler.Handle(Session, UInteger, UInteger, Object)
+  fullName.vb: Fantasy.Network.Interface.IMessageHandler.Handle(Fantasy.Network.Session, UInteger, UInteger, Object)
+  name.vb: Handle(Session, UInteger, UInteger, Object)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.IMessageHandler.Handle(Fantasy.Network.Session,System.UInt32,System.UInt32,System.Object)
+    name: Handle
+    href: Fantasy.Network.Interface.IMessageHandler.html#Fantasy_Network_Interface_IMessageHandler_Handle_Fantasy_Network_Session_System_UInt32_System_UInt32_System_Object_
+  - name: (
+  - uid: Fantasy.Network.Session
+    name: Session
+    href: Fantasy.Network.Session.html
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: uint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: uint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.IMessageHandler.Handle(Fantasy.Network.Session,System.UInt32,System.UInt32,System.Object)
+    name: Handle
+    href: Fantasy.Network.Interface.IMessageHandler.html#Fantasy_Network_Interface_IMessageHandler_Handle_Fantasy_Network_Session_System_UInt32_System_UInt32_System_Object_
+  - name: (
+  - uid: Fantasy.Network.Session
+    name: Session
+    href: Fantasy.Network.Session.html
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: UInteger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: ','
+  - name: " "
+  - uid: System.UInt32
+    name: UInteger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.Network.Session
+  commentId: T:Fantasy.Network.Session
+  parent: Fantasy.Network
+  href: Fantasy.Network.Session.html
+  name: Session
+  nameWithType: Session
+  fullName: Fantasy.Network.Session
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: Fantasy.Async.FTask
+  commentId: T:Fantasy.Async.FTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask.html
+  name: FTask
+  nameWithType: FTask
+  fullName: Fantasy.Async.FTask
+- uid: Fantasy.Network
+  commentId: N:Fantasy.Network
+  href: Fantasy.html
+  name: Fantasy.Network
+  nameWithType: Fantasy.Network
+  fullName: Fantasy.Network
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+- uid: Fantasy.Network.Interface.Message`1.Run*
+  commentId: Overload:Fantasy.Network.Interface.Message`1.Run
+  href: Fantasy.Network.Interface.Message-1.html#Fantasy_Network_Interface_Message_1_Run_Fantasy_Network_Session__0_
+  name: Run
+  nameWithType: Message<T>.Run
+  fullName: Fantasy.Network.Interface.Message<T>.Run
+  nameWithType.vb: Message(Of T).Run
+  fullName.vb: Fantasy.Network.Interface.Message(Of T).Run
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T

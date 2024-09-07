@@ -1,0 +1,184 @@
+### YamlMime:ManagedReference
+items:
+- uid: KCP.KcpCallback
+  commentId: T:KCP.KcpCallback
+  id: KcpCallback
+  parent: KCP
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: KcpCallback
+  nameWithType: KcpCallback
+  fullName: KCP.KcpCallback
+  type: Delegate
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: KcpCallback
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Base/ikcph.cs
+    startLine: 12
+  assemblies:
+  - Fantasy.Net
+  namespace: KCP
+  syntax:
+    content: public delegate void KcpCallback(byte[] buffer, ref int length)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+    - id: length
+      type: System.Int32
+    content.vb: Public Delegate Sub KcpCallback(buffer As Byte(), length As Integer)
+  extensionMethods:
+  - KCP.KcpCallback.Fantasy.Helper.JsonHelper.ToJson``1
+references:
+- uid: KCP
+  commentId: N:KCP
+  href: KCP.html
+  name: KCP
+  nameWithType: KCP
+  fullName: KCP
+- uid: KCP.KcpCallback.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<KcpCallback>(KcpCallback)
+  nameWithType: JsonHelper.ToJson<KcpCallback>(KcpCallback)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<KCP.KcpCallback>(KCP.KcpCallback)
+  nameWithType.vb: JsonHelper.ToJson(Of KcpCallback)(KcpCallback)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of KCP.KcpCallback)(KCP.KcpCallback)
+  name.vb: ToJson(Of KcpCallback)(KcpCallback)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(KCP.KcpCallback)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: KCP.KcpCallback
+    name: KcpCallback
+    href: KCP.KcpCallback.html
+  - name: '>'
+  - name: (
+  - uid: KCP.KcpCallback
+    name: KcpCallback
+    href: KCP.KcpCallback.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(KCP.KcpCallback)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: KCP.KcpCallback
+    name: KcpCallback
+    href: KCP.KcpCallback.html
+  - name: )
+  - name: (
+  - uid: KCP.KcpCallback
+    name: KcpCallback
+    href: KCP.KcpCallback.html
+  - name: )
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html

@@ -2,14 +2,24 @@ using System;
 using System.Buffers;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Fantasy.Helper;
+using Fantasy.Network;
+using Fantasy.Network.Interface;
+using Fantasy.PacketParser.Interface;
+using Fantasy.Serialize;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-namespace Fantasy
+namespace Fantasy.PacketParser
 {
-    // 这个不会用在TCP协议中、因此不用考虑分包和粘包的问题。
-    // 目前这个只会用在KCP协议中、因为KCP出来的就是一个完整的包、所以可以一次性全部解析出来。
-    // 如果是用在其他协议上可能会出现问题。
+    /// <summary>
+    /// BufferPacketParser消息格式化器抽象类
+    /// 这个不会用在TCP协议中、因此不用考虑分包和粘包的问题。
+    /// 目前这个只会用在KCP协议中、因为KCP出来的就是一个完整的包、所以可以一次性全部解析出来。
+    /// 如果是用在其他协议上可能会出现问题。
+    /// </summary>
     public abstract class BufferPacketParser : APacketParser
     {
         protected uint RpcId;
@@ -24,12 +34,29 @@ namespace Fantasy
             MessagePacketLength = 0;
             base.Dispose();
         }
-
+        /// <summary>
+        /// 解包方法
+        /// </summary>
+        /// <param name="buffer">buffer</param>
+        /// <param name="count">count</param>
+        /// <param name="packInfo">packInfo</param>
+        /// <returns></returns>
         public abstract bool UnPack(byte[] buffer, ref int count, out APackInfo packInfo);
     }
 #if FANTASY_NET
+    /// <summary>
+    /// 服务器之间专用的BufferPacketParser消息格式化器
+    /// </summary>
     public sealed class InnerBufferPacketParser : BufferPacketParser
     {
+        /// <summary>
+        /// <see cref="BufferPacketParser.UnPack"/>
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="count"></param>
+        /// <param name="packInfo"></param>
+        /// <returns></returns>
+        /// <exception cref="ScanException"></exception>
         public override unsafe bool UnPack(byte[] buffer, ref int count, out APackInfo packInfo)
         {
             packInfo = null;
@@ -146,8 +173,19 @@ namespace Fantasy
         }
     }
 #endif
+    /// <summary>
+    /// 客户端和服务器之间专用的BufferPacketParser消息格式化器
+    /// </summary>
     public sealed class OuterBufferPacketParser : BufferPacketParser
     {
+        /// <summary>
+        /// <see cref="BufferPacketParser.UnPack"/>
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="count"></param>
+        /// <param name="packInfo"></param>
+        /// <returns></returns>
+        /// <exception cref="ScanException"></exception>
         public override unsafe bool UnPack(byte[] buffer, ref int count, out APackInfo packInfo)
         {
             packInfo = null;
@@ -261,9 +299,19 @@ namespace Fantasy
             return memoryStream;
         }
     }
-    
+    /// <summary>
+    /// Webgl专用的客户端和服务器之间专用的BufferPacketParser消息格式化器
+    /// </summary>
     public sealed class OuterWebglBufferPacketParser : BufferPacketParser
     {
+        /// <summary>
+        /// <see cref="BufferPacketParser.UnPack"/>
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="count"></param>
+        /// <param name="packInfo"></param>
+        /// <returns></returns>
+        /// <exception cref="ScanException"></exception>
         public override bool UnPack(byte[] buffer, ref int count, out APackInfo packInfo)
         {
             packInfo = null;

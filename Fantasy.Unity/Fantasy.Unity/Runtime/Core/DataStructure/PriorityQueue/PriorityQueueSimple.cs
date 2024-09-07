@@ -3,8 +3,9 @@
 // ReSharper disable ConvertToPrimaryConstructor
 using System;
 using System.Collections.Generic;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS8601 // Possible null reference assignment.
-namespace Fantasy
+namespace Fantasy.DataStructure.PriorityQueue
 {
     public sealed class PriorityQueue<T> where T : IComparable<T>
     {

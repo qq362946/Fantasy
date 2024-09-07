@@ -1,0 +1,390 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Entitas.Interface
+  commentId: N:Fantasy.Entitas.Interface
+  id: Interface
+  parent: Fantasy.Entitas
+  children:
+  - Fantasy.Entitas.Interface.AwakeSystem`1
+  - Fantasy.Entitas.Interface.AwakeSystem`2
+  - Fantasy.Entitas.Interface.DeserializeSystem`1
+  - Fantasy.Entitas.Interface.DestroySystem`1
+  - Fantasy.Entitas.Interface.FrameUpdateSystem`1
+  - Fantasy.Entitas.Interface.IEntitiesSystem
+  - Fantasy.Entitas.Interface.ISingleCollectionRoot
+  - Fantasy.Entitas.Interface.ISupportedDataBase
+  - Fantasy.Entitas.Interface.ISupportedMultiEntity
+  - Fantasy.Entitas.Interface.ISupportedSingleCollection
+  - Fantasy.Entitas.Interface.ISupportedTransfer
+  - Fantasy.Entitas.Interface.SingleCollectionAttribute
+  - Fantasy.Entitas.Interface.SingleCollectionRootChecker`1
+  - Fantasy.Entitas.Interface.SupportedDataBaseChecker`1
+  - Fantasy.Entitas.Interface.SupportedMultiEntityChecker`1
+  - Fantasy.Entitas.Interface.SupportedSingleCollectionChecker`1
+  - Fantasy.Entitas.Interface.SupportedTransferChecker`1
+  - Fantasy.Entitas.Interface.UpdateSystem`1
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Entitas.Interface
+  nameWithType: Fantasy.Entitas.Interface
+  fullName: Fantasy.Entitas.Interface
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Entitas.Interface.AwakeSystem`1
+  commentId: T:Fantasy.Entitas.Interface.AwakeSystem`1
+  href: Fantasy.Entitas.Interface.AwakeSystem-1.html
+  name: AwakeSystem<T>
+  nameWithType: AwakeSystem<T>
+  fullName: Fantasy.Entitas.Interface.AwakeSystem<T>
+  nameWithType.vb: AwakeSystem(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.AwakeSystem(Of T)
+  name.vb: AwakeSystem(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1
+    name: AwakeSystem
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`1
+    name: AwakeSystem
+    href: Fantasy.Entitas.Interface.AwakeSystem-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.Interface.AwakeSystem`2
+  commentId: T:Fantasy.Entitas.Interface.AwakeSystem`2
+  href: Fantasy.Entitas.Interface.AwakeSystem-2.html
+  name: AwakeSystem<T, T1>
+  nameWithType: AwakeSystem<T, T1>
+  fullName: Fantasy.Entitas.Interface.AwakeSystem<T, T1>
+  nameWithType.vb: AwakeSystem(Of T, T1)
+  fullName.vb: Fantasy.Entitas.Interface.AwakeSystem(Of T, T1)
+  name.vb: AwakeSystem(Of T, T1)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`2
+    name: AwakeSystem
+    href: Fantasy.Entitas.Interface.AwakeSystem-2.html
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.AwakeSystem`2
+    name: AwakeSystem
+    href: Fantasy.Entitas.Interface.AwakeSystem-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: )
+- uid: Fantasy.Entitas.Interface.DeserializeSystem`1
+  commentId: T:Fantasy.Entitas.Interface.DeserializeSystem`1
+  href: Fantasy.Entitas.Interface.DeserializeSystem-1.html
+  name: DeserializeSystem<T>
+  nameWithType: DeserializeSystem<T>
+  fullName: Fantasy.Entitas.Interface.DeserializeSystem<T>
+  nameWithType.vb: DeserializeSystem(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.DeserializeSystem(Of T)
+  name.vb: DeserializeSystem(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.DeserializeSystem`1
+    name: DeserializeSystem
+    href: Fantasy.Entitas.Interface.DeserializeSystem-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.DeserializeSystem`1
+    name: DeserializeSystem
+    href: Fantasy.Entitas.Interface.DeserializeSystem-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.Interface.DestroySystem`1
+  commentId: T:Fantasy.Entitas.Interface.DestroySystem`1
+  href: Fantasy.Entitas.Interface.DestroySystem-1.html
+  name: DestroySystem<T>
+  nameWithType: DestroySystem<T>
+  fullName: Fantasy.Entitas.Interface.DestroySystem<T>
+  nameWithType.vb: DestroySystem(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.DestroySystem(Of T)
+  name.vb: DestroySystem(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.DestroySystem`1
+    name: DestroySystem
+    href: Fantasy.Entitas.Interface.DestroySystem-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.DestroySystem`1
+    name: DestroySystem
+    href: Fantasy.Entitas.Interface.DestroySystem-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1
+  commentId: T:Fantasy.Entitas.Interface.FrameUpdateSystem`1
+  href: Fantasy.Entitas.Interface.FrameUpdateSystem-1.html
+  name: FrameUpdateSystem<T>
+  nameWithType: FrameUpdateSystem<T>
+  fullName: Fantasy.Entitas.Interface.FrameUpdateSystem<T>
+  nameWithType.vb: FrameUpdateSystem(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.FrameUpdateSystem(Of T)
+  name.vb: FrameUpdateSystem(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1
+    name: FrameUpdateSystem
+    href: Fantasy.Entitas.Interface.FrameUpdateSystem-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1
+    name: FrameUpdateSystem
+    href: Fantasy.Entitas.Interface.FrameUpdateSystem-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.Interface.IEntitiesSystem
+  commentId: T:Fantasy.Entitas.Interface.IEntitiesSystem
+  parent: Fantasy.Entitas.Interface
+  href: Fantasy.Entitas.Interface.IEntitiesSystem.html
+  name: IEntitiesSystem
+  nameWithType: IEntitiesSystem
+  fullName: Fantasy.Entitas.Interface.IEntitiesSystem
+- uid: Fantasy.Entitas.Interface.ISingleCollectionRoot
+  commentId: T:Fantasy.Entitas.Interface.ISingleCollectionRoot
+  href: Fantasy.Entitas.Interface.ISingleCollectionRoot.html
+  name: ISingleCollectionRoot
+  nameWithType: ISingleCollectionRoot
+  fullName: Fantasy.Entitas.Interface.ISingleCollectionRoot
+- uid: Fantasy.Entitas.Interface.ISupportedDataBase
+  commentId: T:Fantasy.Entitas.Interface.ISupportedDataBase
+  href: Fantasy.Entitas.Interface.ISupportedDataBase.html
+  name: ISupportedDataBase
+  nameWithType: ISupportedDataBase
+  fullName: Fantasy.Entitas.Interface.ISupportedDataBase
+- uid: Fantasy.Entitas.Interface.ISupportedMultiEntity
+  commentId: T:Fantasy.Entitas.Interface.ISupportedMultiEntity
+  parent: Fantasy.Entitas.Interface
+  href: Fantasy.Entitas.Interface.ISupportedMultiEntity.html
+  name: ISupportedMultiEntity
+  nameWithType: ISupportedMultiEntity
+  fullName: Fantasy.Entitas.Interface.ISupportedMultiEntity
+- uid: Fantasy.Entitas.Interface.ISupportedSingleCollection
+  commentId: T:Fantasy.Entitas.Interface.ISupportedSingleCollection
+  href: Fantasy.Entitas.Interface.ISupportedSingleCollection.html
+  name: ISupportedSingleCollection
+  nameWithType: ISupportedSingleCollection
+  fullName: Fantasy.Entitas.Interface.ISupportedSingleCollection
+- uid: Fantasy.Entitas.Interface.ISupportedTransfer
+  commentId: T:Fantasy.Entitas.Interface.ISupportedTransfer
+  href: Fantasy.Entitas.Interface.ISupportedTransfer.html
+  name: ISupportedTransfer
+  nameWithType: ISupportedTransfer
+  fullName: Fantasy.Entitas.Interface.ISupportedTransfer
+- uid: Fantasy.Entitas.Interface.SingleCollectionAttribute
+  commentId: T:Fantasy.Entitas.Interface.SingleCollectionAttribute
+  href: Fantasy.Entitas.Interface.SingleCollectionAttribute.html
+  name: SingleCollectionAttribute
+  nameWithType: SingleCollectionAttribute
+  fullName: Fantasy.Entitas.Interface.SingleCollectionAttribute
+- uid: Fantasy.Entitas.Interface.SingleCollectionRootChecker`1
+  commentId: T:Fantasy.Entitas.Interface.SingleCollectionRootChecker`1
+  href: Fantasy.Entitas.Interface.SingleCollectionRootChecker-1.html
+  name: SingleCollectionRootChecker<T>
+  nameWithType: SingleCollectionRootChecker<T>
+  fullName: Fantasy.Entitas.Interface.SingleCollectionRootChecker<T>
+  nameWithType.vb: SingleCollectionRootChecker(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.SingleCollectionRootChecker(Of T)
+  name.vb: SingleCollectionRootChecker(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.SingleCollectionRootChecker`1
+    name: SingleCollectionRootChecker
+    href: Fantasy.Entitas.Interface.SingleCollectionRootChecker-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.SingleCollectionRootChecker`1
+    name: SingleCollectionRootChecker
+    href: Fantasy.Entitas.Interface.SingleCollectionRootChecker-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.Interface.SupportedDataBaseChecker`1
+  commentId: T:Fantasy.Entitas.Interface.SupportedDataBaseChecker`1
+  href: Fantasy.Entitas.Interface.SupportedDataBaseChecker-1.html
+  name: SupportedDataBaseChecker<T>
+  nameWithType: SupportedDataBaseChecker<T>
+  fullName: Fantasy.Entitas.Interface.SupportedDataBaseChecker<T>
+  nameWithType.vb: SupportedDataBaseChecker(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.SupportedDataBaseChecker(Of T)
+  name.vb: SupportedDataBaseChecker(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.SupportedDataBaseChecker`1
+    name: SupportedDataBaseChecker
+    href: Fantasy.Entitas.Interface.SupportedDataBaseChecker-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.SupportedDataBaseChecker`1
+    name: SupportedDataBaseChecker
+    href: Fantasy.Entitas.Interface.SupportedDataBaseChecker-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.Interface.SupportedMultiEntityChecker`1
+  commentId: T:Fantasy.Entitas.Interface.SupportedMultiEntityChecker`1
+  href: Fantasy.Entitas.Interface.SupportedMultiEntityChecker-1.html
+  name: SupportedMultiEntityChecker<T>
+  nameWithType: SupportedMultiEntityChecker<T>
+  fullName: Fantasy.Entitas.Interface.SupportedMultiEntityChecker<T>
+  nameWithType.vb: SupportedMultiEntityChecker(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.SupportedMultiEntityChecker(Of T)
+  name.vb: SupportedMultiEntityChecker(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.SupportedMultiEntityChecker`1
+    name: SupportedMultiEntityChecker
+    href: Fantasy.Entitas.Interface.SupportedMultiEntityChecker-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.SupportedMultiEntityChecker`1
+    name: SupportedMultiEntityChecker
+    href: Fantasy.Entitas.Interface.SupportedMultiEntityChecker-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.Interface.SupportedSingleCollectionChecker`1
+  commentId: T:Fantasy.Entitas.Interface.SupportedSingleCollectionChecker`1
+  href: Fantasy.Entitas.Interface.SupportedSingleCollectionChecker-1.html
+  name: SupportedSingleCollectionChecker<T>
+  nameWithType: SupportedSingleCollectionChecker<T>
+  fullName: Fantasy.Entitas.Interface.SupportedSingleCollectionChecker<T>
+  nameWithType.vb: SupportedSingleCollectionChecker(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.SupportedSingleCollectionChecker(Of T)
+  name.vb: SupportedSingleCollectionChecker(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.SupportedSingleCollectionChecker`1
+    name: SupportedSingleCollectionChecker
+    href: Fantasy.Entitas.Interface.SupportedSingleCollectionChecker-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.SupportedSingleCollectionChecker`1
+    name: SupportedSingleCollectionChecker
+    href: Fantasy.Entitas.Interface.SupportedSingleCollectionChecker-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.Interface.SupportedTransferChecker`1
+  commentId: T:Fantasy.Entitas.Interface.SupportedTransferChecker`1
+  href: Fantasy.Entitas.Interface.SupportedTransferChecker-1.html
+  name: SupportedTransferChecker<T>
+  nameWithType: SupportedTransferChecker<T>
+  fullName: Fantasy.Entitas.Interface.SupportedTransferChecker<T>
+  nameWithType.vb: SupportedTransferChecker(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.SupportedTransferChecker(Of T)
+  name.vb: SupportedTransferChecker(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.SupportedTransferChecker`1
+    name: SupportedTransferChecker
+    href: Fantasy.Entitas.Interface.SupportedTransferChecker-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.SupportedTransferChecker`1
+    name: SupportedTransferChecker
+    href: Fantasy.Entitas.Interface.SupportedTransferChecker-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.Interface.UpdateSystem`1
+  commentId: T:Fantasy.Entitas.Interface.UpdateSystem`1
+  href: Fantasy.Entitas.Interface.UpdateSystem-1.html
+  name: UpdateSystem<T>
+  nameWithType: UpdateSystem<T>
+  fullName: Fantasy.Entitas.Interface.UpdateSystem<T>
+  nameWithType.vb: UpdateSystem(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.UpdateSystem(Of T)
+  name.vb: UpdateSystem(Of T)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.UpdateSystem`1
+    name: UpdateSystem
+    href: Fantasy.Entitas.Interface.UpdateSystem-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.UpdateSystem`1
+    name: UpdateSystem
+    href: Fantasy.Entitas.Interface.UpdateSystem-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Entitas.Interface
+  commentId: N:Fantasy.Entitas.Interface
+  href: Fantasy.html
+  name: Fantasy.Entitas.Interface
+  nameWithType: Fantasy.Entitas.Interface
+  fullName: Fantasy.Entitas.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  - name: .
+  - uid: Fantasy.Entitas.Interface
+    name: Interface
+    href: Fantasy.Entitas.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  - name: .
+  - uid: Fantasy.Entitas.Interface
+    name: Interface
+    href: Fantasy.Entitas.Interface.html

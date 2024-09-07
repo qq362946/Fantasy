@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Fantasy.Pool;
+
 #pragma warning disable CS8603
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Collection
 {
     /// <summary>
     /// 基于排序字典实现的一对多映射列表的对象池包装类，继承自 <see cref="SortedOneToManyList{TKey, TValue}"/> 类，

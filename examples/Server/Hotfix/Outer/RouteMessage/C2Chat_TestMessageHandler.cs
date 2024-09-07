@@ -1,3 +1,6 @@
+using Fantasy.Async;
+using Fantasy.Network.Interface;
+
 namespace Fantasy;
 
 public sealed class C2Chat_TestMessageHandler : Route<ChatUnit, C2Chat_TestMessage>

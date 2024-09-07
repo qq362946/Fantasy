@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Fantasy.Pool;
+
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Collection
 {
     /// <summary>
     /// 一对多哈希集合（OneToManyHashSet）对象池。

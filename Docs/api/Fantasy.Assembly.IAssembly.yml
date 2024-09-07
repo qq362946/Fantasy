@@ -1,0 +1,367 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Assembly.IAssembly
+  commentId: T:Fantasy.Assembly.IAssembly
+  id: IAssembly
+  parent: Fantasy.Assembly
+  children:
+  - Fantasy.Assembly.IAssembly.Load(System.Int64)
+  - Fantasy.Assembly.IAssembly.OnUnLoad(System.Int64)
+  - Fantasy.Assembly.IAssembly.ReLoad(System.Int64)
+  langs:
+  - csharp
+  - vb
+  name: IAssembly
+  nameWithType: IAssembly
+  fullName: Fantasy.Assembly.IAssembly
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/IAssembly.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IAssembly
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/IAssembly.cs
+    startLine: 8
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 实现这个接口、会再程序集首次加载、卸载、重载的时候调用
+  example: []
+  syntax:
+    content: 'public interface IAssembly : IDisposable'
+    content.vb: Public Interface IAssembly Inherits IDisposable
+  inheritedMembers:
+  - System.IDisposable.Dispose
+  extensionMethods:
+  - Fantasy.Assembly.IAssembly.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Assembly.IAssembly.Load(System.Int64)
+  commentId: M:Fantasy.Assembly.IAssembly.Load(System.Int64)
+  id: Load(System.Int64)
+  parent: Fantasy.Assembly.IAssembly
+  langs:
+  - csharp
+  - vb
+  name: Load(long)
+  nameWithType: IAssembly.Load(long)
+  fullName: Fantasy.Assembly.IAssembly.Load(long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/IAssembly.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Load
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/IAssembly.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 程序集加载时调用
+  example: []
+  syntax:
+    content: FTask Load(long assemblyIdentity)
+    parameters:
+    - id: assemblyIdentity
+      type: System.Int64
+      description: 程序集标识
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function Load(assemblyIdentity As Long) As FTask
+  overload: Fantasy.Assembly.IAssembly.Load*
+  nameWithType.vb: IAssembly.Load(Long)
+  fullName.vb: Fantasy.Assembly.IAssembly.Load(Long)
+  name.vb: Load(Long)
+- uid: Fantasy.Assembly.IAssembly.ReLoad(System.Int64)
+  commentId: M:Fantasy.Assembly.IAssembly.ReLoad(System.Int64)
+  id: ReLoad(System.Int64)
+  parent: Fantasy.Assembly.IAssembly
+  langs:
+  - csharp
+  - vb
+  name: ReLoad(long)
+  nameWithType: IAssembly.ReLoad(long)
+  fullName: Fantasy.Assembly.IAssembly.ReLoad(long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/IAssembly.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ReLoad
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/IAssembly.cs
+    startLine: 19
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 程序集重新加载的时候调用
+  example: []
+  syntax:
+    content: FTask ReLoad(long assemblyIdentity)
+    parameters:
+    - id: assemblyIdentity
+      type: System.Int64
+      description: 程序集标识
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function ReLoad(assemblyIdentity As Long) As FTask
+  overload: Fantasy.Assembly.IAssembly.ReLoad*
+  nameWithType.vb: IAssembly.ReLoad(Long)
+  fullName.vb: Fantasy.Assembly.IAssembly.ReLoad(Long)
+  name.vb: ReLoad(Long)
+- uid: Fantasy.Assembly.IAssembly.OnUnLoad(System.Int64)
+  commentId: M:Fantasy.Assembly.IAssembly.OnUnLoad(System.Int64)
+  id: OnUnLoad(System.Int64)
+  parent: Fantasy.Assembly.IAssembly
+  langs:
+  - csharp
+  - vb
+  name: OnUnLoad(long)
+  nameWithType: IAssembly.OnUnLoad(long)
+  fullName: Fantasy.Assembly.IAssembly.OnUnLoad(long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/IAssembly.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OnUnLoad
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/IAssembly.cs
+    startLine: 24
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 卸载的时候调用
+  example: []
+  syntax:
+    content: FTask OnUnLoad(long assemblyIdentity)
+    parameters:
+    - id: assemblyIdentity
+      type: System.Int64
+      description: 程序集标识
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function OnUnLoad(assemblyIdentity As Long) As FTask
+  overload: Fantasy.Assembly.IAssembly.OnUnLoad*
+  nameWithType.vb: IAssembly.OnUnLoad(Long)
+  fullName.vb: Fantasy.Assembly.IAssembly.OnUnLoad(Long)
+  name.vb: OnUnLoad(Long)
+references:
+- uid: Fantasy.Assembly
+  commentId: N:Fantasy.Assembly
+  href: Fantasy.html
+  name: Fantasy.Assembly
+  nameWithType: Fantasy.Assembly
+  fullName: Fantasy.Assembly
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Assembly
+    name: Assembly
+    href: Fantasy.Assembly.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Assembly
+    name: Assembly
+    href: Fantasy.Assembly.html
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: Fantasy.Assembly.IAssembly.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<IAssembly>(IAssembly)
+  nameWithType: JsonHelper.ToJson<IAssembly>(IAssembly)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Assembly.IAssembly>(Fantasy.Assembly.IAssembly)
+  nameWithType.vb: JsonHelper.ToJson(Of IAssembly)(IAssembly)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Assembly.IAssembly)(Fantasy.Assembly.IAssembly)
+  name.vb: ToJson(Of IAssembly)(IAssembly)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Assembly.IAssembly)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Assembly.IAssembly
+    name: IAssembly
+    href: Fantasy.Assembly.IAssembly.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Assembly.IAssembly
+    name: IAssembly
+    href: Fantasy.Assembly.IAssembly.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Assembly.IAssembly)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Assembly.IAssembly
+    name: IAssembly
+    href: Fantasy.Assembly.IAssembly.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Assembly.IAssembly
+    name: IAssembly
+    href: Fantasy.Assembly.IAssembly.html
+  - name: )
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Assembly.IAssembly.Load*
+  commentId: Overload:Fantasy.Assembly.IAssembly.Load
+  href: Fantasy.Assembly.IAssembly.html#Fantasy_Assembly_IAssembly_Load_System_Int64_
+  name: Load
+  nameWithType: IAssembly.Load
+  fullName: Fantasy.Assembly.IAssembly.Load
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.Async.FTask
+  commentId: T:Fantasy.Async.FTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask.html
+  name: FTask
+  nameWithType: FTask
+  fullName: Fantasy.Async.FTask
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+- uid: Fantasy.Assembly.IAssembly.ReLoad*
+  commentId: Overload:Fantasy.Assembly.IAssembly.ReLoad
+  href: Fantasy.Assembly.IAssembly.html#Fantasy_Assembly_IAssembly_ReLoad_System_Int64_
+  name: ReLoad
+  nameWithType: IAssembly.ReLoad
+  fullName: Fantasy.Assembly.IAssembly.ReLoad
+- uid: Fantasy.Assembly.IAssembly.OnUnLoad*
+  commentId: Overload:Fantasy.Assembly.IAssembly.OnUnLoad
+  href: Fantasy.Assembly.IAssembly.html#Fantasy_Assembly_IAssembly_OnUnLoad_System_Int64_
+  name: OnUnLoad
+  nameWithType: IAssembly.OnUnLoad
+  fullName: Fantasy.Assembly.IAssembly.OnUnLoad

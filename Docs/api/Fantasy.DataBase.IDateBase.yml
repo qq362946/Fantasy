@@ -1,0 +1,2551 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.DataBase.IDateBase
+  commentId: T:Fantasy.DataBase.IDateBase
+  id: IDateBase
+  parent: Fantasy.DataBase
+  children:
+  - Fantasy.DataBase.IDateBase.Count``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  - Fantasy.DataBase.IDateBase.Count``1(System.String)
+  - Fantasy.DataBase.IDateBase.CreateDB(System.Type)
+  - Fantasy.DataBase.IDateBase.CreateDB``1
+  - Fantasy.DataBase.IDateBase.CreateIndex``1(System.Object[])
+  - Fantasy.DataBase.IDateBase.CreateIndex``1(System.String,System.Object[])
+  - Fantasy.DataBase.IDateBase.Exist``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  - Fantasy.DataBase.IDateBase.Exist``1(System.String)
+  - Fantasy.DataBase.IDateBase.First``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  - Fantasy.DataBase.IDateBase.First``1(System.String,System.String[],System.String)
+  - Fantasy.DataBase.IDateBase.Initialize(Fantasy.Scene,System.String,System.String)
+  - Fantasy.DataBase.IDateBase.InsertBatch``1(System.Collections.Generic.IEnumerable{``0},System.String)
+  - Fantasy.DataBase.IDateBase.InsertBatch``1(System.Object,System.Collections.Generic.IEnumerable{``0},System.String)
+  - Fantasy.DataBase.IDateBase.Insert``1(``0,System.String)
+  - Fantasy.DataBase.IDateBase.Query(System.Int64,System.Collections.Generic.List{System.String},System.Collections.Generic.List{Fantasy.Entitas.Entity})
+  - Fantasy.DataBase.IDateBase.QueryByPageOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)
+  - Fantasy.DataBase.IDateBase.QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)
+  - Fantasy.DataBase.IDateBase.QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)
+  - Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)
+  - Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)
+  - Fantasy.DataBase.IDateBase.QueryJson``1(System.Int64,System.String,System.String)
+  - Fantasy.DataBase.IDateBase.QueryJson``1(System.String,System.String)
+  - Fantasy.DataBase.IDateBase.QueryJson``1(System.String,System.String[],System.String)
+  - Fantasy.DataBase.IDateBase.QueryNotLock``1(System.Int64,System.String)
+  - Fantasy.DataBase.IDateBase.QueryOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)
+  - Fantasy.DataBase.IDateBase.Query``1(System.Int64,System.String)
+  - Fantasy.DataBase.IDateBase.Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  - Fantasy.DataBase.IDateBase.Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String[],System.String)
+  - Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  - Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  - Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.String)
+  - Fantasy.DataBase.IDateBase.Remove``1(System.Object,System.Int64,System.String)
+  - Fantasy.DataBase.IDateBase.Save(System.Int64,System.Collections.Generic.List{Fantasy.Entitas.Entity})
+  - Fantasy.DataBase.IDateBase.Save``1(System.Object,``0,System.String)
+  - Fantasy.DataBase.IDateBase.Save``1(``0,System.String)
+  - Fantasy.DataBase.IDateBase.Sum``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.String)
+  langs:
+  - csharp
+  - vb
+  name: IDateBase
+  nameWithType: IDateBase
+  fullName: Fantasy.DataBase.IDateBase
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IDateBase
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 12
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 表示用于执行各种数据库操作的数据库接口。
+  example: []
+  syntax:
+    content: public interface IDateBase
+    content.vb: Public Interface IDateBase
+  extensionMethods:
+  - Fantasy.DataBase.IDateBase.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.DataBase.IDateBase.Initialize(Fantasy.Scene,System.String,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Initialize(Fantasy.Scene,System.String,System.String)
+  id: Initialize(Fantasy.Scene,System.String,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Initialize(Scene, string, string)
+  nameWithType: IDateBase.Initialize(Scene, string, string)
+  fullName: Fantasy.DataBase.IDateBase.Initialize(Fantasy.Scene, string, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Initialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 17
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 初始化数据库连接。
+  example: []
+  syntax:
+    content: IDateBase Initialize(Scene scene, string connectionString, string dbName)
+    parameters:
+    - id: scene
+      type: Fantasy.Scene
+    - id: connectionString
+      type: System.String
+    - id: dbName
+      type: System.String
+    return:
+      type: Fantasy.DataBase.IDateBase
+    content.vb: Function Initialize(scene As Scene, connectionString As String, dbName As String) As IDateBase
+  overload: Fantasy.DataBase.IDateBase.Initialize*
+  nameWithType.vb: IDateBase.Initialize(Scene, String, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Initialize(Fantasy.Scene, String, String)
+  name.vb: Initialize(Scene, String, String)
+- uid: Fantasy.DataBase.IDateBase.Count``1(System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Count``1(System.String)
+  id: Count``1(System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Count<T>(string)
+  nameWithType: IDateBase.Count<T>(string)
+  fullName: Fantasy.DataBase.IDateBase.Count<T>(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 21
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 在指定的集合中检索类型 <code class="typeparamref">T</code> 的实体数量。
+  example: []
+  syntax:
+    content: 'FTask<long> Count<T>(string collection = null) where T : Entity'
+    parameters:
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Int64}
+    content.vb: Function Count(Of T As Entity)(collection As String = Nothing) As FTask(Of Long)
+  overload: Fantasy.DataBase.IDateBase.Count*
+  nameWithType.vb: IDateBase.Count(Of T)(String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Count(Of T)(String)
+  name.vb: Count(Of T)(String)
+- uid: Fantasy.DataBase.IDateBase.Count``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Count``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  id: Count``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Count<T>(Expression<Func<T, bool>>, string)
+  nameWithType: IDateBase.Count<T>(Expression<Func<T, bool>>, string)
+  fullName: Fantasy.DataBase.IDateBase.Count<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 25
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 在指定的集合中检索满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体数量。
+  example: []
+  syntax:
+    content: 'FTask<long> Count<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Int64}
+    content.vb: Function Count(Of T As Entity)(filter As Expression(Of Func(Of T, Boolean)), collection As String = Nothing) As FTask(Of Long)
+  overload: Fantasy.DataBase.IDateBase.Count*
+  nameWithType.vb: IDateBase.Count(Of T)(Expression(Of Func(Of T, Boolean)), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Count(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), String)
+  name.vb: Count(Of T)(Expression(Of Func(Of T, Boolean)), String)
+- uid: Fantasy.DataBase.IDateBase.Exist``1(System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Exist``1(System.String)
+  id: Exist``1(System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Exist<T>(string)
+  nameWithType: IDateBase.Exist<T>(string)
+  fullName: Fantasy.DataBase.IDateBase.Exist<T>(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Exist
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 29
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 检查指定集合中是否存在类型 <code class="typeparamref">T</code> 的实体。
+  example: []
+  syntax:
+    content: 'FTask<bool> Exist<T>(string collection = null) where T : Entity'
+    parameters:
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Boolean}
+    content.vb: Function Exist(Of T As Entity)(collection As String = Nothing) As FTask(Of Boolean)
+  overload: Fantasy.DataBase.IDateBase.Exist*
+  nameWithType.vb: IDateBase.Exist(Of T)(String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Exist(Of T)(String)
+  name.vb: Exist(Of T)(String)
+- uid: Fantasy.DataBase.IDateBase.Exist``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Exist``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  id: Exist``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Exist<T>(Expression<Func<T, bool>>, string)
+  nameWithType: IDateBase.Exist<T>(Expression<Func<T, bool>>, string)
+  fullName: Fantasy.DataBase.IDateBase.Exist<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Exist
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 33
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 检查指定集合中是否存在满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体。
+  example: []
+  syntax:
+    content: 'FTask<bool> Exist<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Boolean}
+    content.vb: Function Exist(Of T As Entity)(filter As Expression(Of Func(Of T, Boolean)), collection As String = Nothing) As FTask(Of Boolean)
+  overload: Fantasy.DataBase.IDateBase.Exist*
+  nameWithType.vb: IDateBase.Exist(Of T)(Expression(Of Func(Of T, Boolean)), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Exist(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), String)
+  name.vb: Exist(Of T)(Expression(Of Func(Of T, Boolean)), String)
+- uid: Fantasy.DataBase.IDateBase.QueryNotLock``1(System.Int64,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.QueryNotLock``1(System.Int64,System.String)
+  id: QueryNotLock``1(System.Int64,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: QueryNotLock<T>(long, string)
+  nameWithType: IDateBase.QueryNotLock<T>(long, string)
+  fullName: Fantasy.DataBase.IDateBase.QueryNotLock<T>(long, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: QueryNotLock
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 37
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 从指定集合中检索指定 ID 的类型 <code class="typeparamref">T</code> 的实体，不锁定。
+  example: []
+  syntax:
+    content: 'FTask<T> QueryNotLock<T>(long id, string collection = null) where T : Entity'
+    parameters:
+    - id: id
+      type: System.Int64
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{{T}}
+    content.vb: Function QueryNotLock(Of T As Entity)(id As Long, collection As String = Nothing) As FTask(Of T)
+  overload: Fantasy.DataBase.IDateBase.QueryNotLock*
+  nameWithType.vb: IDateBase.QueryNotLock(Of T)(Long, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.QueryNotLock(Of T)(Long, String)
+  name.vb: QueryNotLock(Of T)(Long, String)
+- uid: Fantasy.DataBase.IDateBase.Query``1(System.Int64,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Query``1(System.Int64,System.String)
+  id: Query``1(System.Int64,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Query<T>(long, string)
+  nameWithType: IDateBase.Query<T>(long, string)
+  fullName: Fantasy.DataBase.IDateBase.Query<T>(long, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Query
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 41
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 从指定集合中检索指定 ID 的类型 <code class="typeparamref">T</code> 的实体。
+  example: []
+  syntax:
+    content: 'FTask<T> Query<T>(long id, string collection = null) where T : Entity'
+    parameters:
+    - id: id
+      type: System.Int64
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{{T}}
+    content.vb: Function Query(Of T As Entity)(id As Long, collection As String = Nothing) As FTask(Of T)
+  overload: Fantasy.DataBase.IDateBase.Query*
+  nameWithType.vb: IDateBase.Query(Of T)(Long, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Query(Of T)(Long, String)
+  name.vb: Query(Of T)(Long, String)
+- uid: Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)
+  id: QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: QueryCountAndDatesByPage<T>(Expression<Func<T, bool>>, int, int, string)
+  nameWithType: IDateBase.QueryCountAndDatesByPage<T>(Expression<Func<T, bool>>, int, int, string)
+  fullName: Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, int, int, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: QueryCountAndDatesByPage
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 45
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体数量和日期。
+  example: []
+  syntax:
+    content: 'FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: pageIndex
+      type: System.Int32
+    - id: pageSize
+      type: System.Int32
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.ValueTuple{System.Int32,System.Collections.Generic.List{{T}}}}
+    content.vb: Function QueryCountAndDatesByPage(Of T As Entity)(filter As Expression(Of Func(Of T, Boolean)), pageIndex As Integer, pageSize As Integer, collection As String = Nothing) As FTask(Of (count As Integer, dates As List(Of T)))
+  overload: Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage*
+  nameWithType.vb: IDateBase.QueryCountAndDatesByPage(Of T)(Expression(Of Func(Of T, Boolean)), Integer, Integer, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), Integer, Integer, String)
+  name.vb: QueryCountAndDatesByPage(Of T)(Expression(Of Func(Of T, Boolean)), Integer, Integer, String)
+- uid: Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)
+  id: QueryCountAndDatesByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: QueryCountAndDatesByPage<T>(Expression<Func<T, bool>>, int, int, string[], string)
+  nameWithType: IDateBase.QueryCountAndDatesByPage<T>(Expression<Func<T, bool>>, int, int, string[], string)
+  fullName: Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, int, int, string[], string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: QueryCountAndDatesByPage
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 49
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体数量和日期。
+  example: []
+  syntax:
+    content: 'FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: pageIndex
+      type: System.Int32
+    - id: pageSize
+      type: System.Int32
+    - id: cols
+      type: System.String[]
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.ValueTuple{System.Int32,System.Collections.Generic.List{{T}}}}
+    content.vb: Function QueryCountAndDatesByPage(Of T As Entity)(filter As Expression(Of Func(Of T, Boolean)), pageIndex As Integer, pageSize As Integer, cols As String(), collection As String = Nothing) As FTask(Of (count As Integer, dates As List(Of T)))
+  overload: Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage*
+  nameWithType.vb: IDateBase.QueryCountAndDatesByPage(Of T)(Expression(Of Func(Of T, Boolean)), Integer, Integer, String(), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), Integer, Integer, String(), String)
+  name.vb: QueryCountAndDatesByPage(Of T)(Expression(Of Func(Of T, Boolean)), Integer, Integer, String(), String)
+- uid: Fantasy.DataBase.IDateBase.QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)
+  id: QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: QueryByPage<T>(Expression<Func<T, bool>>, int, int, string)
+  nameWithType: IDateBase.QueryByPage<T>(Expression<Func<T, bool>>, int, int, string)
+  fullName: Fantasy.DataBase.IDateBase.QueryByPage<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, int, int, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: QueryByPage
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 53
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 分页查询指定集合中满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表。
+  example: []
+  syntax:
+    content: 'FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: pageIndex
+      type: System.Int32
+    - id: pageSize
+      type: System.Int32
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Collections.Generic.List{{T}}}
+    content.vb: Function QueryByPage(Of T As Entity)(filter As Expression(Of Func(Of T, Boolean)), pageIndex As Integer, pageSize As Integer, collection As String = Nothing) As FTask(Of List(Of T))
+  overload: Fantasy.DataBase.IDateBase.QueryByPage*
+  nameWithType.vb: IDateBase.QueryByPage(Of T)(Expression(Of Func(Of T, Boolean)), Integer, Integer, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.QueryByPage(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), Integer, Integer, String)
+  name.vb: QueryByPage(Of T)(Expression(Of Func(Of T, Boolean)), Integer, Integer, String)
+- uid: Fantasy.DataBase.IDateBase.QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)
+  id: QueryByPage``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.String[],System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: QueryByPage<T>(Expression<Func<T, bool>>, int, int, string[], string)
+  nameWithType: IDateBase.QueryByPage<T>(Expression<Func<T, bool>>, int, int, string[], string)
+  fullName: Fantasy.DataBase.IDateBase.QueryByPage<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, int, int, string[], string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: QueryByPage
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 57
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 分页查询指定集合中满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表，仅返回指定列的数据。
+  example: []
+  syntax:
+    content: 'FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: pageIndex
+      type: System.Int32
+    - id: pageSize
+      type: System.Int32
+    - id: cols
+      type: System.String[]
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Collections.Generic.List{{T}}}
+    content.vb: Function QueryByPage(Of T As Entity)(filter As Expression(Of Func(Of T, Boolean)), pageIndex As Integer, pageSize As Integer, cols As String(), collection As String = Nothing) As FTask(Of List(Of T))
+  overload: Fantasy.DataBase.IDateBase.QueryByPage*
+  nameWithType.vb: IDateBase.QueryByPage(Of T)(Expression(Of Func(Of T, Boolean)), Integer, Integer, String(), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.QueryByPage(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), Integer, Integer, String(), String)
+  name.vb: QueryByPage(Of T)(Expression(Of Func(Of T, Boolean)), Integer, Integer, String(), String)
+- uid: Fantasy.DataBase.IDateBase.QueryByPageOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.QueryByPageOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)
+  id: QueryByPageOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: QueryByPageOrderBy<T>(Expression<Func<T, bool>>, int, int, Expression<Func<T, object>>, bool, string)
+  nameWithType: IDateBase.QueryByPageOrderBy<T>(Expression<Func<T, bool>>, int, int, Expression<Func<T, object>>, bool, string)
+  fullName: Fantasy.DataBase.IDateBase.QueryByPageOrderBy<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, int, int, System.Linq.Expressions.Expression<System.Func<T, object>>, bool, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: QueryByPageOrderBy
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 61
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 从指定集合中按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表，按指定字段排序。
+  example: []
+  syntax:
+    content: 'FTask<List<T>> QueryByPageOrderBy<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: pageIndex
+      type: System.Int32
+    - id: pageSize
+      type: System.Int32
+    - id: orderByExpression
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Object}}
+    - id: isAsc
+      type: System.Boolean
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Collections.Generic.List{{T}}}
+    content.vb: Function QueryByPageOrderBy(Of T As Entity)(filter As Expression(Of Func(Of T, Boolean)), pageIndex As Integer, pageSize As Integer, orderByExpression As Expression(Of Func(Of T, Object)), isAsc As Boolean = True, collection As String = Nothing) As FTask(Of List(Of T))
+  overload: Fantasy.DataBase.IDateBase.QueryByPageOrderBy*
+  nameWithType.vb: IDateBase.QueryByPageOrderBy(Of T)(Expression(Of Func(Of T, Boolean)), Integer, Integer, Expression(Of Func(Of T, Object)), Boolean, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.QueryByPageOrderBy(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), Integer, Integer, System.Linq.Expressions.Expression(Of System.Func(Of T, Object)), Boolean, String)
+  name.vb: QueryByPageOrderBy(Of T)(Expression(Of Func(Of T, Boolean)), Integer, Integer, Expression(Of Func(Of T, Object)), Boolean, String)
+- uid: Fantasy.DataBase.IDateBase.First``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.First``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  id: First``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: First<T>(Expression<Func<T, bool>>, string)
+  nameWithType: IDateBase.First<T>(Expression<Func<T, bool>>, string)
+  fullName: Fantasy.DataBase.IDateBase.First<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: First
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 65
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 检索满足给定筛选条件的类型 <code class="typeparamref">T</code> 的第一个实体，从指定集合中。
+  example: []
+  syntax:
+    content: 'FTask<T?> First<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{{T}}
+    content.vb: Function First(Of T As Entity)(filter As Expression(Of Func(Of T, Boolean)), collection As String = Nothing) As FTask(Of T)
+  overload: Fantasy.DataBase.IDateBase.First*
+  nameWithType.vb: IDateBase.First(Of T)(Expression(Of Func(Of T, Boolean)), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.First(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), String)
+  name.vb: First(Of T)(Expression(Of Func(Of T, Boolean)), String)
+- uid: Fantasy.DataBase.IDateBase.First``1(System.String,System.String[],System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.First``1(System.String,System.String[],System.String)
+  id: First``1(System.String,System.String[],System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: First<T>(string, string[], string)
+  nameWithType: IDateBase.First<T>(string, string[], string)
+  fullName: Fantasy.DataBase.IDateBase.First<T>(string, string[], string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: First
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 69
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 查询指定集合中满足给定 JSON 查询字符串的类型 <code class="typeparamref">T</code> 的第一个实体，仅返回指定列的数据。
+  example: []
+  syntax:
+    content: 'FTask<T> First<T>(string json, string[] cols, string collection = null) where T : Entity'
+    parameters:
+    - id: json
+      type: System.String
+    - id: cols
+      type: System.String[]
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{{T}}
+    content.vb: Function First(Of T As Entity)(json As String, cols As String(), collection As String = Nothing) As FTask(Of T)
+  overload: Fantasy.DataBase.IDateBase.First*
+  nameWithType.vb: IDateBase.First(Of T)(String, String(), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.First(Of T)(String, String(), String)
+  name.vb: First(Of T)(String, String(), String)
+- uid: Fantasy.DataBase.IDateBase.QueryOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.QueryOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)
+  id: QueryOrderBy``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: QueryOrderBy<T>(Expression<Func<T, bool>>, Expression<Func<T, object>>, bool, string)
+  nameWithType: IDateBase.QueryOrderBy<T>(Expression<Func<T, bool>>, Expression<Func<T, object>>, bool, string)
+  fullName: Fantasy.DataBase.IDateBase.QueryOrderBy<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, System.Linq.Expressions.Expression<System.Func<T, object>>, bool, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: QueryOrderBy
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 73
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 从指定集合中按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表，按指定字段排序。
+  example: []
+  syntax:
+    content: 'FTask<List<T>> QueryOrderBy<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: orderByExpression
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Object}}
+    - id: isAsc
+      type: System.Boolean
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Collections.Generic.List{{T}}}
+    content.vb: Function QueryOrderBy(Of T As Entity)(filter As Expression(Of Func(Of T, Boolean)), orderByExpression As Expression(Of Func(Of T, Object)), isAsc As Boolean = True, collection As String = Nothing) As FTask(Of List(Of T))
+  overload: Fantasy.DataBase.IDateBase.QueryOrderBy*
+  nameWithType.vb: IDateBase.QueryOrderBy(Of T)(Expression(Of Func(Of T, Boolean)), Expression(Of Func(Of T, Object)), Boolean, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.QueryOrderBy(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), System.Linq.Expressions.Expression(Of System.Func(Of T, Object)), Boolean, String)
+  name.vb: QueryOrderBy(Of T)(Expression(Of Func(Of T, Boolean)), Expression(Of Func(Of T, Object)), Boolean, String)
+- uid: Fantasy.DataBase.IDateBase.Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  id: Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Query<T>(Expression<Func<T, bool>>, string)
+  nameWithType: IDateBase.Query<T>(Expression<Func<T, bool>>, string)
+  fullName: Fantasy.DataBase.IDateBase.Query<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Query
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 77
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 从指定集合中按页查询满足给定筛选条件的类型 <code class="typeparamref">T</code> 的实体列表。
+  example: []
+  syntax:
+    content: 'FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Collections.Generic.List{{T}}}
+    content.vb: Function Query(Of T As Entity)(filter As Expression(Of Func(Of T, Boolean)), collection As String = Nothing) As FTask(Of List(Of T))
+  overload: Fantasy.DataBase.IDateBase.Query*
+  nameWithType.vb: IDateBase.Query(Of T)(Expression(Of Func(Of T, Boolean)), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Query(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), String)
+  name.vb: Query(Of T)(Expression(Of Func(Of T, Boolean)), String)
+- uid: Fantasy.DataBase.IDateBase.Query(System.Int64,System.Collections.Generic.List{System.String},System.Collections.Generic.List{Fantasy.Entitas.Entity})
+  commentId: M:Fantasy.DataBase.IDateBase.Query(System.Int64,System.Collections.Generic.List{System.String},System.Collections.Generic.List{Fantasy.Entitas.Entity})
+  id: Query(System.Int64,System.Collections.Generic.List{System.String},System.Collections.Generic.List{Fantasy.Entitas.Entity})
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Query(long, List<string>, List<Entity>)
+  nameWithType: IDateBase.Query(long, List<string>, List<Entity>)
+  fullName: Fantasy.DataBase.IDateBase.Query(long, System.Collections.Generic.List<string>, System.Collections.Generic.List<Fantasy.Entitas.Entity>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Query
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 81
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 查询指定 ID 的多个集合，将结果存储在给定的实体列表中。
+  example: []
+  syntax:
+    content: FTask Query(long id, List<string> collectionNames, List<Entity> result)
+    parameters:
+    - id: id
+      type: System.Int64
+    - id: collectionNames
+      type: System.Collections.Generic.List{System.String}
+    - id: result
+      type: System.Collections.Generic.List{Fantasy.Entitas.Entity}
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function Query(id As Long, collectionNames As List(Of String), result As List(Of Entity)) As FTask
+  overload: Fantasy.DataBase.IDateBase.Query*
+  nameWithType.vb: IDateBase.Query(Long, List(Of String), List(Of Entity))
+  fullName.vb: Fantasy.DataBase.IDateBase.Query(Long, System.Collections.Generic.List(Of String), System.Collections.Generic.List(Of Fantasy.Entitas.Entity))
+  name.vb: Query(Long, List(Of String), List(Of Entity))
+- uid: Fantasy.DataBase.IDateBase.QueryJson``1(System.String,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.QueryJson``1(System.String,System.String)
+  id: QueryJson``1(System.String,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: QueryJson<T>(string, string)
+  nameWithType: IDateBase.QueryJson<T>(string, string)
+  fullName: Fantasy.DataBase.IDateBase.QueryJson<T>(string, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: QueryJson
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 85
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 根据给定的 JSON 查询字符串查询指定集合中的类型 <code class="typeparamref">T</code> 实体列表。
+  example: []
+  syntax:
+    content: 'FTask<List<T>> QueryJson<T>(string json, string collection = null) where T : Entity'
+    parameters:
+    - id: json
+      type: System.String
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Collections.Generic.List{{T}}}
+    content.vb: Function QueryJson(Of T As Entity)(json As String, collection As String = Nothing) As FTask(Of List(Of T))
+  overload: Fantasy.DataBase.IDateBase.QueryJson*
+  nameWithType.vb: IDateBase.QueryJson(Of T)(String, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.QueryJson(Of T)(String, String)
+  name.vb: QueryJson(Of T)(String, String)
+- uid: Fantasy.DataBase.IDateBase.QueryJson``1(System.String,System.String[],System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.QueryJson``1(System.String,System.String[],System.String)
+  id: QueryJson``1(System.String,System.String[],System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: QueryJson<T>(string, string[], string)
+  nameWithType: IDateBase.QueryJson<T>(string, string[], string)
+  fullName: Fantasy.DataBase.IDateBase.QueryJson<T>(string, string[], string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: QueryJson
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 89
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 根据给定的 JSON 查询字符串查询指定集合中的类型 <code class="typeparamref">T</code> 实体列表，仅返回指定列的数据。
+  example: []
+  syntax:
+    content: 'FTask<List<T>> QueryJson<T>(string json, string[] cols, string collection = null) where T : Entity'
+    parameters:
+    - id: json
+      type: System.String
+    - id: cols
+      type: System.String[]
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Collections.Generic.List{{T}}}
+    content.vb: Function QueryJson(Of T As Entity)(json As String, cols As String(), collection As String = Nothing) As FTask(Of List(Of T))
+  overload: Fantasy.DataBase.IDateBase.QueryJson*
+  nameWithType.vb: IDateBase.QueryJson(Of T)(String, String(), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.QueryJson(Of T)(String, String(), String)
+  name.vb: QueryJson(Of T)(String, String(), String)
+- uid: Fantasy.DataBase.IDateBase.QueryJson``1(System.Int64,System.String,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.QueryJson``1(System.Int64,System.String,System.String)
+  id: QueryJson``1(System.Int64,System.String,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: QueryJson<T>(long, string, string)
+  nameWithType: IDateBase.QueryJson<T>(long, string, string)
+  fullName: Fantasy.DataBase.IDateBase.QueryJson<T>(long, string, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: QueryJson
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 93
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 根据给定的 JSON 查询字符串查询指定集合中的类型 <code class="typeparamref">T</code> 实体列表，通过指定的任务 ID 进行标识。
+  example: []
+  syntax:
+    content: 'FTask<List<T>> QueryJson<T>(long taskId, string json, string collection = null) where T : Entity'
+    parameters:
+    - id: taskId
+      type: System.Int64
+    - id: json
+      type: System.String
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Collections.Generic.List{{T}}}
+    content.vb: Function QueryJson(Of T As Entity)(taskId As Long, json As String, collection As String = Nothing) As FTask(Of List(Of T))
+  overload: Fantasy.DataBase.IDateBase.QueryJson*
+  nameWithType.vb: IDateBase.QueryJson(Of T)(Long, String, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.QueryJson(Of T)(Long, String, String)
+  name.vb: QueryJson(Of T)(Long, String, String)
+- uid: Fantasy.DataBase.IDateBase.Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String[],System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String[],System.String)
+  id: Query``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String[],System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Query<T>(Expression<Func<T, bool>>, string[], string)
+  nameWithType: IDateBase.Query<T>(Expression<Func<T, bool>>, string[], string)
+  fullName: Fantasy.DataBase.IDateBase.Query<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, string[], string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Query
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 97
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 查询指定集合中满足给定筛选条件的类型 <code class="typeparamref">T</code> 实体列表，仅返回指定列的数据。
+  example: []
+  syntax:
+    content: 'FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string[] cols, string collection = null) where T : class'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: cols
+      type: System.String[]
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Collections.Generic.List{{T}}}
+    content.vb: Function Query(Of T As Class)(filter As Expression(Of Func(Of T, Boolean)), cols As String(), collection As String = Nothing) As FTask(Of List(Of T))
+  overload: Fantasy.DataBase.IDateBase.Query*
+  nameWithType.vb: IDateBase.Query(Of T)(Expression(Of Func(Of T, Boolean)), String(), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Query(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), String(), String)
+  name.vb: Query(Of T)(Expression(Of Func(Of T, Boolean)), String(), String)
+- uid: Fantasy.DataBase.IDateBase.Save``1(``0,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Save``1(``0,System.String)
+  id: Save``1(``0,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Save<T>(T, string)
+  nameWithType: IDateBase.Save<T>(T, string)
+  fullName: Fantasy.DataBase.IDateBase.Save<T>(T, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Save
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 101
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 保存类型 <code class="typeparamref">T</code> 实体到指定集合中，如果集合不存在将自动创建。
+  example: []
+  syntax:
+    content: 'FTask Save<T>(T entity, string collection = null) where T : Entity, new()'
+    parameters:
+    - id: entity
+      type: '{T}'
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function Save(Of T As {Entity, New})(entity As T, collection As String = Nothing) As FTask
+  overload: Fantasy.DataBase.IDateBase.Save*
+  nameWithType.vb: IDateBase.Save(Of T)(T, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Save(Of T)(T, String)
+  name.vb: Save(Of T)(T, String)
+- uid: Fantasy.DataBase.IDateBase.Save(System.Int64,System.Collections.Generic.List{Fantasy.Entitas.Entity})
+  commentId: M:Fantasy.DataBase.IDateBase.Save(System.Int64,System.Collections.Generic.List{Fantasy.Entitas.Entity})
+  id: Save(System.Int64,System.Collections.Generic.List{Fantasy.Entitas.Entity})
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Save(long, List<Entity>)
+  nameWithType: IDateBase.Save(long, List<Entity>)
+  fullName: Fantasy.DataBase.IDateBase.Save(long, System.Collections.Generic.List<Fantasy.Entitas.Entity>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Save
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 105
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 保存一组实体到数据库中，根据实体列表的 ID 进行区分和存储。
+  example: []
+  syntax:
+    content: FTask Save(long id, List<Entity> entities)
+    parameters:
+    - id: id
+      type: System.Int64
+    - id: entities
+      type: System.Collections.Generic.List{Fantasy.Entitas.Entity}
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function Save(id As Long, entities As List(Of Entity)) As FTask
+  overload: Fantasy.DataBase.IDateBase.Save*
+  nameWithType.vb: IDateBase.Save(Long, List(Of Entity))
+  fullName.vb: Fantasy.DataBase.IDateBase.Save(Long, System.Collections.Generic.List(Of Fantasy.Entitas.Entity))
+  name.vb: Save(Long, List(Of Entity))
+- uid: Fantasy.DataBase.IDateBase.Save``1(System.Object,``0,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Save``1(System.Object,``0,System.String)
+  id: Save``1(System.Object,``0,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Save<T>(object, T, string)
+  nameWithType: IDateBase.Save<T>(object, T, string)
+  fullName: Fantasy.DataBase.IDateBase.Save<T>(object, T, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Save
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 109
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 通过事务会话将类型 <code class="typeparamref">T</code> 实体保存到指定集合中，如果集合不存在将自动创建。
+  example: []
+  syntax:
+    content: 'FTask Save<T>(object transactionSession, T entity, string collection = null) where T : Entity'
+    parameters:
+    - id: transactionSession
+      type: System.Object
+    - id: entity
+      type: '{T}'
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function Save(Of T As Entity)(transactionSession As Object, entity As T, collection As String = Nothing) As FTask
+  overload: Fantasy.DataBase.IDateBase.Save*
+  nameWithType.vb: IDateBase.Save(Of T)(Object, T, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Save(Of T)(Object, T, String)
+  name.vb: Save(Of T)(Object, T, String)
+- uid: Fantasy.DataBase.IDateBase.Insert``1(``0,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Insert``1(``0,System.String)
+  id: Insert``1(``0,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Insert<T>(T, string)
+  nameWithType: IDateBase.Insert<T>(T, string)
+  fullName: Fantasy.DataBase.IDateBase.Insert<T>(T, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Insert
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 113
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 向指定集合中插入一个类型 <code class="typeparamref">T</code> 实体，如果集合不存在将自动创建。
+  example: []
+  syntax:
+    content: 'FTask Insert<T>(T entity, string collection = null) where T : Entity, new()'
+    parameters:
+    - id: entity
+      type: '{T}'
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function Insert(Of T As {Entity, New})(entity As T, collection As String = Nothing) As FTask
+  overload: Fantasy.DataBase.IDateBase.Insert*
+  nameWithType.vb: IDateBase.Insert(Of T)(T, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Insert(Of T)(T, String)
+  name.vb: Insert(Of T)(T, String)
+- uid: Fantasy.DataBase.IDateBase.InsertBatch``1(System.Collections.Generic.IEnumerable{``0},System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.InsertBatch``1(System.Collections.Generic.IEnumerable{``0},System.String)
+  id: InsertBatch``1(System.Collections.Generic.IEnumerable{``0},System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: InsertBatch<T>(IEnumerable<T>, string)
+  nameWithType: IDateBase.InsertBatch<T>(IEnumerable<T>, string)
+  fullName: Fantasy.DataBase.IDateBase.InsertBatch<T>(System.Collections.Generic.IEnumerable<T>, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: InsertBatch
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 117
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 批量插入一组类型 <code class="typeparamref">T</code> 实体到指定集合中，如果集合不存在将自动创建。
+  example: []
+  syntax:
+    content: 'FTask InsertBatch<T>(IEnumerable<T> list, string collection = null) where T : Entity, new()'
+    parameters:
+    - id: list
+      type: System.Collections.Generic.IEnumerable{{T}}
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function InsertBatch(Of T As {Entity, New})(list As IEnumerable(Of T), collection As String = Nothing) As FTask
+  overload: Fantasy.DataBase.IDateBase.InsertBatch*
+  nameWithType.vb: IDateBase.InsertBatch(Of T)(IEnumerable(Of T), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.InsertBatch(Of T)(System.Collections.Generic.IEnumerable(Of T), String)
+  name.vb: InsertBatch(Of T)(IEnumerable(Of T), String)
+- uid: Fantasy.DataBase.IDateBase.InsertBatch``1(System.Object,System.Collections.Generic.IEnumerable{``0},System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.InsertBatch``1(System.Object,System.Collections.Generic.IEnumerable{``0},System.String)
+  id: InsertBatch``1(System.Object,System.Collections.Generic.IEnumerable{``0},System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: InsertBatch<T>(object, IEnumerable<T>, string)
+  nameWithType: IDateBase.InsertBatch<T>(object, IEnumerable<T>, string)
+  fullName: Fantasy.DataBase.IDateBase.InsertBatch<T>(object, System.Collections.Generic.IEnumerable<T>, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: InsertBatch
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 121
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 通过事务会话，批量插入一组类型 <code class="typeparamref">T</code> 实体到指定集合中，如果集合不存在将自动创建。
+  example: []
+  syntax:
+    content: 'FTask InsertBatch<T>(object transactionSession, IEnumerable<T> list, string collection = null) where T : Entity, new()'
+    parameters:
+    - id: transactionSession
+      type: System.Object
+    - id: list
+      type: System.Collections.Generic.IEnumerable{{T}}
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function InsertBatch(Of T As {Entity, New})(transactionSession As Object, list As IEnumerable(Of T), collection As String = Nothing) As FTask
+  overload: Fantasy.DataBase.IDateBase.InsertBatch*
+  nameWithType.vb: IDateBase.InsertBatch(Of T)(Object, IEnumerable(Of T), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.InsertBatch(Of T)(Object, System.Collections.Generic.IEnumerable(Of T), String)
+  name.vb: InsertBatch(Of T)(Object, IEnumerable(Of T), String)
+- uid: Fantasy.DataBase.IDateBase.Remove``1(System.Object,System.Int64,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Remove``1(System.Object,System.Int64,System.String)
+  id: Remove``1(System.Object,System.Int64,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Remove<T>(object, long, string)
+  nameWithType: IDateBase.Remove<T>(object, long, string)
+  fullName: Fantasy.DataBase.IDateBase.Remove<T>(object, long, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 125
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 通过事务会话，根据指定的 ID 从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。
+  example: []
+  syntax:
+    content: 'FTask<long> Remove<T>(object transactionSession, long id, string collection = null) where T : Entity, new()'
+    parameters:
+    - id: transactionSession
+      type: System.Object
+    - id: id
+      type: System.Int64
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Int64}
+    content.vb: Function Remove(Of T As {Entity, New})(transactionSession As Object, id As Long, collection As String = Nothing) As FTask(Of Long)
+  overload: Fantasy.DataBase.IDateBase.Remove*
+  nameWithType.vb: IDateBase.Remove(Of T)(Object, Long, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Remove(Of T)(Object, Long, String)
+  name.vb: Remove(Of T)(Object, Long, String)
+- uid: Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.String)
+  id: Remove``1(System.Int64,System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Remove<T>(long, string)
+  nameWithType: IDateBase.Remove<T>(long, string)
+  fullName: Fantasy.DataBase.IDateBase.Remove<T>(long, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 129
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 根据指定的 ID 从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。
+  example: []
+  syntax:
+    content: 'FTask<long> Remove<T>(long id, string collection = null) where T : Entity, new()'
+    parameters:
+    - id: id
+      type: System.Int64
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Int64}
+    content.vb: Function Remove(Of T As {Entity, New})(id As Long, collection As String = Nothing) As FTask(Of Long)
+  overload: Fantasy.DataBase.IDateBase.Remove*
+  nameWithType.vb: IDateBase.Remove(Of T)(Long, String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Remove(Of T)(Long, String)
+  name.vb: Remove(Of T)(Long, String)
+- uid: Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  id: Remove``1(System.Int64,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Remove<T>(long, object, Expression<Func<T, bool>>, string)
+  nameWithType: IDateBase.Remove<T>(long, object, Expression<Func<T, bool>>, string)
+  fullName: Fantasy.DataBase.IDateBase.Remove<T>(long, object, System.Linq.Expressions.Expression<System.Func<T, bool>>, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 133
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 通过事务会话，根据给定的筛选条件从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。
+  example: []
+  syntax:
+    content: 'FTask<long> Remove<T>(long coroutineLockQueueKey, object transactionSession, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new()'
+    parameters:
+    - id: coroutineLockQueueKey
+      type: System.Int64
+    - id: transactionSession
+      type: System.Object
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Int64}
+    content.vb: Function Remove(Of T As {Entity, New})(coroutineLockQueueKey As Long, transactionSession As Object, filter As Expression(Of Func(Of T, Boolean)), collection As String = Nothing) As FTask(Of Long)
+  overload: Fantasy.DataBase.IDateBase.Remove*
+  nameWithType.vb: IDateBase.Remove(Of T)(Long, Object, Expression(Of Func(Of T, Boolean)), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Remove(Of T)(Long, Object, System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), String)
+  name.vb: Remove(Of T)(Long, Object, Expression(Of Func(Of T, Boolean)), String)
+- uid: Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Remove``1(System.Int64,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  id: Remove``1(System.Int64,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Remove<T>(long, Expression<Func<T, bool>>, string)
+  nameWithType: IDateBase.Remove<T>(long, Expression<Func<T, bool>>, string)
+  fullName: Fantasy.DataBase.IDateBase.Remove<T>(long, System.Linq.Expressions.Expression<System.Func<T, bool>>, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Remove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 137
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 根据给定的筛选条件从数据库中删除指定类型 <code class="typeparamref">T</code> 实体。
+  example: []
+  syntax:
+    content: 'FTask<long> Remove<T>(long coroutineLockQueueKey, Expression<Func<T, bool>> filter, string collection = null) where T : Entity, new()'
+    parameters:
+    - id: coroutineLockQueueKey
+      type: System.Int64
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Int64}
+    content.vb: Function Remove(Of T As {Entity, New})(coroutineLockQueueKey As Long, filter As Expression(Of Func(Of T, Boolean)), collection As String = Nothing) As FTask(Of Long)
+  overload: Fantasy.DataBase.IDateBase.Remove*
+  nameWithType.vb: IDateBase.Remove(Of T)(Long, Expression(Of Func(Of T, Boolean)), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Remove(Of T)(Long, System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), String)
+  name.vb: Remove(Of T)(Long, Expression(Of Func(Of T, Boolean)), String)
+- uid: Fantasy.DataBase.IDateBase.Sum``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.String)
+  commentId: M:Fantasy.DataBase.IDateBase.Sum``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.String)
+  id: Sum``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.String)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: Sum<T>(Expression<Func<T, bool>>, Expression<Func<T, object>>, string)
+  nameWithType: IDateBase.Sum<T>(Expression<Func<T, bool>>, Expression<Func<T, object>>, string)
+  fullName: Fantasy.DataBase.IDateBase.Sum<T>(System.Linq.Expressions.Expression<System.Func<T, bool>>, System.Linq.Expressions.Expression<System.Func<T, object>>, string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Sum
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 141
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 根据给定的筛选条件计算指定集合中类型 <code class="typeparamref">T</code> 实体某个属性的总和。
+  example: []
+  syntax:
+    content: 'FTask<long> Sum<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> sumExpression, string collection = null) where T : Entity'
+    parameters:
+    - id: filter
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+    - id: sumExpression
+      type: System.Linq.Expressions.Expression{System.Func{{T},System.Object}}
+    - id: collection
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask{System.Int64}
+    content.vb: Function Sum(Of T As Entity)(filter As Expression(Of Func(Of T, Boolean)), sumExpression As Expression(Of Func(Of T, Object)), collection As String = Nothing) As FTask(Of Long)
+  overload: Fantasy.DataBase.IDateBase.Sum*
+  nameWithType.vb: IDateBase.Sum(Of T)(Expression(Of Func(Of T, Boolean)), Expression(Of Func(Of T, Object)), String)
+  fullName.vb: Fantasy.DataBase.IDateBase.Sum(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)), System.Linq.Expressions.Expression(Of System.Func(Of T, Object)), String)
+  name.vb: Sum(Of T)(Expression(Of Func(Of T, Boolean)), Expression(Of Func(Of T, Object)), String)
+- uid: Fantasy.DataBase.IDateBase.CreateIndex``1(System.String,System.Object[])
+  commentId: M:Fantasy.DataBase.IDateBase.CreateIndex``1(System.String,System.Object[])
+  id: CreateIndex``1(System.String,System.Object[])
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: CreateIndex<T>(string, params object[])
+  nameWithType: IDateBase.CreateIndex<T>(string, params object[])
+  fullName: Fantasy.DataBase.IDateBase.CreateIndex<T>(string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CreateIndex
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 145
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 在指定的集合中创建索引，以提高类型 <code class="typeparamref">T</code> 实体的查询性能。
+  example: []
+  syntax:
+    content: 'FTask CreateIndex<T>(string collection, params object[] keys) where T : Entity'
+    parameters:
+    - id: collection
+      type: System.String
+    - id: keys
+      type: System.Object[]
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function CreateIndex(Of T As Entity)(collection As String, ParamArray keys As Object()) As FTask
+  overload: Fantasy.DataBase.IDateBase.CreateIndex*
+  nameWithType.vb: IDateBase.CreateIndex(Of T)(String, ParamArray Object())
+  fullName.vb: Fantasy.DataBase.IDateBase.CreateIndex(Of T)(String, ParamArray Object())
+  name.vb: CreateIndex(Of T)(String, ParamArray Object())
+- uid: Fantasy.DataBase.IDateBase.CreateIndex``1(System.Object[])
+  commentId: M:Fantasy.DataBase.IDateBase.CreateIndex``1(System.Object[])
+  id: CreateIndex``1(System.Object[])
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: CreateIndex<T>(params object[])
+  nameWithType: IDateBase.CreateIndex<T>(params object[])
+  fullName: Fantasy.DataBase.IDateBase.CreateIndex<T>(params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CreateIndex
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 149
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 在默认集合中创建索引，以提高类型 <code class="typeparamref">T</code> 实体的查询性能。
+  example: []
+  syntax:
+    content: 'FTask CreateIndex<T>(params object[] keys) where T : Entity'
+    parameters:
+    - id: keys
+      type: System.Object[]
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function CreateIndex(Of T As Entity)(ParamArray keys As Object()) As FTask
+  overload: Fantasy.DataBase.IDateBase.CreateIndex*
+  nameWithType.vb: IDateBase.CreateIndex(Of T)(ParamArray Object())
+  fullName.vb: Fantasy.DataBase.IDateBase.CreateIndex(Of T)(ParamArray Object())
+  name.vb: CreateIndex(Of T)(ParamArray Object())
+- uid: Fantasy.DataBase.IDateBase.CreateDB``1
+  commentId: M:Fantasy.DataBase.IDateBase.CreateDB``1
+  id: CreateDB``1
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: CreateDB<T>()
+  nameWithType: IDateBase.CreateDB<T>()
+  fullName: Fantasy.DataBase.IDateBase.CreateDB<T>()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CreateDB
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 153
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 创建指定类型 <code class="typeparamref">T</code> 的数据库，用于存储实体。
+  example: []
+  syntax:
+    content: 'FTask CreateDB<T>() where T : Entity'
+    typeParameters:
+    - id: T
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function CreateDB(Of T As Entity)() As FTask
+  overload: Fantasy.DataBase.IDateBase.CreateDB*
+  nameWithType.vb: IDateBase.CreateDB(Of T)()
+  fullName.vb: Fantasy.DataBase.IDateBase.CreateDB(Of T)()
+  name.vb: CreateDB(Of T)()
+- uid: Fantasy.DataBase.IDateBase.CreateDB(System.Type)
+  commentId: M:Fantasy.DataBase.IDateBase.CreateDB(System.Type)
+  id: CreateDB(System.Type)
+  parent: Fantasy.DataBase.IDateBase
+  langs:
+  - csharp
+  - vb
+  name: CreateDB(Type)
+  nameWithType: IDateBase.CreateDB(Type)
+  fullName: Fantasy.DataBase.IDateBase.CreateDB(System.Type)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CreateDB
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/IDateBase.cs
+    startLine: 157
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataBase
+  summary: 根据指定类型创建数据库，用于存储实体。
+  example: []
+  syntax:
+    content: FTask CreateDB(Type type)
+    parameters:
+    - id: type
+      type: System.Type
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Function CreateDB(type As Type) As FTask
+  overload: Fantasy.DataBase.IDateBase.CreateDB*
+references:
+- uid: Fantasy.DataBase
+  commentId: N:Fantasy.DataBase
+  href: Fantasy.html
+  name: Fantasy.DataBase
+  nameWithType: Fantasy.DataBase
+  fullName: Fantasy.DataBase
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataBase
+    name: DataBase
+    href: Fantasy.DataBase.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataBase
+    name: DataBase
+    href: Fantasy.DataBase.html
+- uid: Fantasy.DataBase.IDateBase.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<IDateBase>(IDateBase)
+  nameWithType: JsonHelper.ToJson<IDateBase>(IDateBase)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.DataBase.IDateBase>(Fantasy.DataBase.IDateBase)
+  nameWithType.vb: JsonHelper.ToJson(Of IDateBase)(IDateBase)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.DataBase.IDateBase)(Fantasy.DataBase.IDateBase)
+  name.vb: ToJson(Of IDateBase)(IDateBase)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.DataBase.IDateBase)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.DataBase.IDateBase
+    name: IDateBase
+    href: Fantasy.DataBase.IDateBase.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.DataBase.IDateBase
+    name: IDateBase
+    href: Fantasy.DataBase.IDateBase.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.DataBase.IDateBase)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.DataBase.IDateBase
+    name: IDateBase
+    href: Fantasy.DataBase.IDateBase.html
+  - name: )
+  - name: (
+  - uid: Fantasy.DataBase.IDateBase
+    name: IDateBase
+    href: Fantasy.DataBase.IDateBase.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.DataBase.IDateBase.Initialize*
+  commentId: Overload:Fantasy.DataBase.IDateBase.Initialize
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_Initialize_Fantasy_Scene_System_String_System_String_
+  name: Initialize
+  nameWithType: IDateBase.Initialize
+  fullName: Fantasy.DataBase.IDateBase.Initialize
+- uid: Fantasy.Scene
+  commentId: T:Fantasy.Scene
+  parent: Fantasy
+  href: Fantasy.Scene.html
+  name: Scene
+  nameWithType: Scene
+  fullName: Fantasy.Scene
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Fantasy.DataBase.IDateBase
+  commentId: T:Fantasy.DataBase.IDateBase
+  parent: Fantasy.DataBase
+  href: Fantasy.DataBase.IDateBase.html
+  name: IDateBase
+  nameWithType: IDateBase
+  fullName: Fantasy.DataBase.IDateBase
+- uid: Fantasy
+  commentId: N:Fantasy
+  href: Fantasy.html
+  name: Fantasy
+  nameWithType: Fantasy
+  fullName: Fantasy
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.DataBase.IDateBase.Count*
+  commentId: Overload:Fantasy.DataBase.IDateBase.Count
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_Count__1_System_String_
+  name: Count
+  nameWithType: IDateBase.Count
+  fullName: Fantasy.DataBase.IDateBase.Count
+- uid: Fantasy.Async.FTask{System.Int64}
+  commentId: T:Fantasy.Async.FTask{System.Int64}
+  parent: Fantasy.Async
+  definition: Fantasy.Async.FTask`1
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<long>
+  nameWithType: FTask<long>
+  fullName: Fantasy.Async.FTask<long>
+  nameWithType.vb: FTask(Of Long)
+  fullName.vb: Fantasy.Async.FTask(Of Long)
+  name.vb: FTask(Of Long)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+- uid: Fantasy.Async.FTask`1
+  commentId: T:Fantasy.Async.FTask`1
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<T>
+  nameWithType: FTask<T>
+  fullName: Fantasy.Async.FTask<T>
+  nameWithType.vb: FTask(Of T)
+  fullName.vb: Fantasy.Async.FTask(Of T)
+  name.vb: FTask(Of T)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+- uid: System.Linq.Expressions.Expression{System.Func{{T},System.Boolean}}
+  commentId: T:System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}}
+  parent: System.Linq.Expressions
+  definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  name: Expression<Func<T, bool>>
+  nameWithType: Expression<Func<T, bool>>
+  fullName: System.Linq.Expressions.Expression<System.Func<T, bool>>
+  nameWithType.vb: Expression(Of Func(Of T, Boolean))
+  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean))
+  name.vb: Expression(Of Func(Of T, Boolean))
+  spec.csharp:
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: <
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: )
+- uid: System.Linq.Expressions.Expression`1
+  commentId: T:System.Linq.Expressions.Expression`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  name: Expression<TDelegate>
+  nameWithType: Expression<TDelegate>
+  fullName: System.Linq.Expressions.Expression<TDelegate>
+  nameWithType.vb: Expression(Of TDelegate)
+  fullName.vb: System.Linq.Expressions.Expression(Of TDelegate)
+  name.vb: Expression(Of TDelegate)
+  spec.csharp:
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: <
+  - name: TDelegate
+  - name: '>'
+  spec.vb:
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TDelegate
+  - name: )
+- uid: System.Linq.Expressions
+  commentId: N:System.Linq.Expressions
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Linq.Expressions
+  nameWithType: System.Linq.Expressions
+  fullName: System.Linq.Expressions
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Linq
+    name: Linq
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq
+  - name: .
+  - uid: System.Linq.Expressions
+    name: Expressions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Linq
+    name: Linq
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq
+  - name: .
+  - uid: System.Linq.Expressions
+    name: Expressions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions
+- uid: Fantasy.DataBase.IDateBase.Exist*
+  commentId: Overload:Fantasy.DataBase.IDateBase.Exist
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_Exist__1_System_String_
+  name: Exist
+  nameWithType: IDateBase.Exist
+  fullName: Fantasy.DataBase.IDateBase.Exist
+- uid: Fantasy.Async.FTask{System.Boolean}
+  commentId: T:Fantasy.Async.FTask{System.Boolean}
+  parent: Fantasy.Async
+  definition: Fantasy.Async.FTask`1
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<bool>
+  nameWithType: FTask<bool>
+  fullName: Fantasy.Async.FTask<bool>
+  nameWithType.vb: FTask(Of Boolean)
+  fullName.vb: Fantasy.Async.FTask(Of Boolean)
+  name.vb: FTask(Of Boolean)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Fantasy.DataBase.IDateBase.QueryNotLock*
+  commentId: Overload:Fantasy.DataBase.IDateBase.QueryNotLock
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_QueryNotLock__1_System_Int64_System_String_
+  name: QueryNotLock
+  nameWithType: IDateBase.QueryNotLock
+  fullName: Fantasy.DataBase.IDateBase.QueryNotLock
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.Async.FTask{{T}}
+  commentId: T:Fantasy.Async.FTask{``0}
+  parent: Fantasy.Async
+  definition: Fantasy.Async.FTask`1
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<T>
+  nameWithType: FTask<T>
+  fullName: Fantasy.Async.FTask<T>
+  nameWithType.vb: FTask(Of T)
+  fullName.vb: Fantasy.Async.FTask(Of T)
+  name.vb: FTask(Of T)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.DataBase.IDateBase.Query*
+  commentId: Overload:Fantasy.DataBase.IDateBase.Query
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_Query__1_System_Int64_System_String_
+  name: Query
+  nameWithType: IDateBase.Query
+  fullName: Fantasy.DataBase.IDateBase.Query
+- uid: Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage*
+  commentId: Overload:Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_QueryCountAndDatesByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String_
+  name: QueryCountAndDatesByPage
+  nameWithType: IDateBase.QueryCountAndDatesByPage
+  fullName: Fantasy.DataBase.IDateBase.QueryCountAndDatesByPage
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Fantasy.Async.FTask{System.ValueTuple{System.Int32,System.Collections.Generic.List{{T}}}}
+  commentId: T:Fantasy.Async.FTask{System.ValueTuple{System.Int32,System.Collections.Generic.List{``0}}}
+  parent: Fantasy.Async
+  definition: Fantasy.Async.FTask`1
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<(int count, List<T> dates)>
+  nameWithType: FTask<(int count, List<T> dates)>
+  fullName: Fantasy.Async.FTask<(int count, System.Collections.Generic.List<T> dates)>
+  nameWithType.vb: FTask(Of (count As Integer, dates As List(Of T)))
+  fullName.vb: Fantasy.Async.FTask(Of (count As Integer, dates As System.Collections.Generic.List(Of T)))
+  name.vb: FTask(Of (count As Integer, dates As List(Of T)))
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: " "
+  - uid: System.ValueTuple{System.Int32,System.Collections.Generic.List{``0}}.count
+    name: count
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.count
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: " "
+  - uid: System.ValueTuple{System.Int32,System.Collections.Generic.List{``0}}.dates
+    name: dates
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.dates
+  - name: )
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: (
+  - uid: System.ValueTuple{System.Int32,System.Collections.Generic.List{``0}}.count
+    name: count
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.count
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.ValueTuple{System.Int32,System.Collections.Generic.List{``0}}.dates
+    name: dates
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.collections.generic.list---0--.dates
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: )
+- uid: System.String[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
+  nameWithType.vb: String()
+  fullName.vb: String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+- uid: Fantasy.DataBase.IDateBase.QueryByPage*
+  commentId: Overload:Fantasy.DataBase.IDateBase.QueryByPage
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_QueryByPage__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_String_
+  name: QueryByPage
+  nameWithType: IDateBase.QueryByPage
+  fullName: Fantasy.DataBase.IDateBase.QueryByPage
+- uid: Fantasy.Async.FTask{System.Collections.Generic.List{{T}}}
+  commentId: T:Fantasy.Async.FTask{System.Collections.Generic.List{``0}}
+  parent: Fantasy.Async
+  definition: Fantasy.Async.FTask`1
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<List<T>>
+  nameWithType: FTask<List<T>>
+  fullName: Fantasy.Async.FTask<System.Collections.Generic.List<T>>
+  nameWithType.vb: FTask(Of List(Of T))
+  fullName.vb: Fantasy.Async.FTask(Of System.Collections.Generic.List(Of T))
+  name.vb: FTask(Of List(Of T))
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: Fantasy.DataBase.IDateBase.QueryByPageOrderBy*
+  commentId: Overload:Fantasy.DataBase.IDateBase.QueryByPageOrderBy
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_QueryByPageOrderBy__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Int32_System_Int32_System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Boolean_System_String_
+  name: QueryByPageOrderBy
+  nameWithType: IDateBase.QueryByPageOrderBy
+  fullName: Fantasy.DataBase.IDateBase.QueryByPageOrderBy
+- uid: System.Linq.Expressions.Expression{System.Func{{T},System.Object}}
+  commentId: T:System.Linq.Expressions.Expression{System.Func{``0,System.Object}}
+  parent: System.Linq.Expressions
+  definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  name: Expression<Func<T, object>>
+  nameWithType: Expression<Func<T, object>>
+  fullName: System.Linq.Expressions.Expression<System.Func<T, object>>
+  nameWithType.vb: Expression(Of Func(Of T, Object))
+  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of T, Object))
+  name.vb: Expression(Of Func(Of T, Object))
+  spec.csharp:
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: <
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Fantasy.DataBase.IDateBase.First*
+  commentId: Overload:Fantasy.DataBase.IDateBase.First
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_First__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_String_
+  name: First
+  nameWithType: IDateBase.First
+  fullName: Fantasy.DataBase.IDateBase.First
+- uid: Fantasy.DataBase.IDateBase.QueryOrderBy*
+  commentId: Overload:Fantasy.DataBase.IDateBase.QueryOrderBy
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_QueryOrderBy__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Boolean_System_String_
+  name: QueryOrderBy
+  nameWithType: IDateBase.QueryOrderBy
+  fullName: Fantasy.DataBase.IDateBase.QueryOrderBy
+- uid: System.Collections.Generic.List{System.String}
+  commentId: T:System.Collections.Generic.List{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<string>
+  nameWithType: List<string>
+  fullName: System.Collections.Generic.List<string>
+  nameWithType.vb: List(Of String)
+  fullName.vb: System.Collections.Generic.List(Of String)
+  name.vb: List(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Collections.Generic.List{Fantasy.Entitas.Entity}
+  commentId: T:System.Collections.Generic.List{Fantasy.Entitas.Entity}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<Entity>
+  nameWithType: List<Entity>
+  fullName: System.Collections.Generic.List<Fantasy.Entitas.Entity>
+  nameWithType.vb: List(Of Entity)
+  fullName.vb: System.Collections.Generic.List(Of Fantasy.Entitas.Entity)
+  name.vb: List(Of Entity)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: )
+- uid: Fantasy.Async.FTask
+  commentId: T:Fantasy.Async.FTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask.html
+  name: FTask
+  nameWithType: FTask
+  fullName: Fantasy.Async.FTask
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Fantasy.DataBase.IDateBase.QueryJson*
+  commentId: Overload:Fantasy.DataBase.IDateBase.QueryJson
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_QueryJson__1_System_String_System_String_
+  name: QueryJson
+  nameWithType: IDateBase.QueryJson
+  fullName: Fantasy.DataBase.IDateBase.QueryJson
+- uid: Fantasy.DataBase.IDateBase.Save*
+  commentId: Overload:Fantasy.DataBase.IDateBase.Save
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_Save__1___0_System_String_
+  name: Save
+  nameWithType: IDateBase.Save
+  fullName: Fantasy.DataBase.IDateBase.Save
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.DataBase.IDateBase.Insert*
+  commentId: Overload:Fantasy.DataBase.IDateBase.Insert
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_Insert__1___0_System_String_
+  name: Insert
+  nameWithType: IDateBase.Insert
+  fullName: Fantasy.DataBase.IDateBase.Insert
+- uid: Fantasy.DataBase.IDateBase.InsertBatch*
+  commentId: Overload:Fantasy.DataBase.IDateBase.InsertBatch
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_InsertBatch__1_System_Collections_Generic_IEnumerable___0__System_String_
+  name: InsertBatch
+  nameWithType: IDateBase.InsertBatch
+  fullName: Fantasy.DataBase.IDateBase.InsertBatch
+- uid: System.Collections.Generic.IEnumerable{{T}}
+  commentId: T:System.Collections.Generic.IEnumerable{``0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.DataBase.IDateBase.Remove*
+  commentId: Overload:Fantasy.DataBase.IDateBase.Remove
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_Remove__1_System_Object_System_Int64_System_String_
+  name: Remove
+  nameWithType: IDateBase.Remove
+  fullName: Fantasy.DataBase.IDateBase.Remove
+- uid: Fantasy.DataBase.IDateBase.Sum*
+  commentId: Overload:Fantasy.DataBase.IDateBase.Sum
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_Sum__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Linq_Expressions_Expression_System_Func___0_System_Object___System_String_
+  name: Sum
+  nameWithType: IDateBase.Sum
+  fullName: Fantasy.DataBase.IDateBase.Sum
+- uid: Fantasy.DataBase.IDateBase.CreateIndex*
+  commentId: Overload:Fantasy.DataBase.IDateBase.CreateIndex
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_CreateIndex__1_System_String_System_Object___
+  name: CreateIndex
+  nameWithType: IDateBase.CreateIndex
+  fullName: Fantasy.DataBase.IDateBase.CreateIndex
+- uid: System.Object[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object[]
+  nameWithType: object[]
+  fullName: object[]
+  nameWithType.vb: Object()
+  fullName.vb: Object()
+  name.vb: Object()
+  spec.csharp:
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: (
+  - name: )
+- uid: Fantasy.DataBase.IDateBase.CreateDB*
+  commentId: Overload:Fantasy.DataBase.IDateBase.CreateDB
+  href: Fantasy.DataBase.IDateBase.html#Fantasy_DataBase_IDateBase_CreateDB__1
+  name: CreateDB
+  nameWithType: IDateBase.CreateDB
+  fullName: Fantasy.DataBase.IDateBase.CreateDB
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type

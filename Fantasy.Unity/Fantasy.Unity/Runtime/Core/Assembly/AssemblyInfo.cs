@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Fantasy.DataStructure.Collection;
 
 // ReSharper disable CollectionNeverQueried.Global
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-namespace Fantasy
+namespace Fantasy.Assembly
 {
     /// <summary>
     /// AssemblyInfo提供有关程序集和类型的信息
@@ -20,7 +21,7 @@ namespace Fantasy
         /// <summary>
         /// 获取或设置与此程序集相关联的 <see cref="Assembly"/> 实例。
         /// </summary>
-        public Assembly Assembly { get; private set; }
+        public System.Reflection.Assembly Assembly { get; private set; }
         /// <summary>
         /// 程序集类型集合，获取一个列表，包含从程序集加载的所有类型。
         /// </summary>
@@ -43,7 +44,7 @@ namespace Fantasy
         /// 从指定的程序集加载类型信息并进行分类。
         /// </summary>
         /// <param name="assembly">要加载信息的程序集。</param>
-        public void Load(Assembly assembly)
+        public void Load(System.Reflection.Assembly assembly)
         {
             Assembly = assembly;
             var assemblyTypes = assembly.GetTypes().ToList();

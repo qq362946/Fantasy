@@ -1,0 +1,399 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  id: Interface
+  parent: Fantasy.Network
+  children:
+  - Fantasy.Network.Interface.AClientNetwork
+  - Fantasy.Network.Interface.ANetwork
+  - Fantasy.Network.Interface.ANetworkServerChannel
+  - Fantasy.Network.Interface.AddressableRPC`3
+  - Fantasy.Network.Interface.Addressable`2
+  - Fantasy.Network.Interface.IAddressableRouteMessage
+  - Fantasy.Network.Interface.IAddressableRouteRequest
+  - Fantasy.Network.Interface.IAddressableRouteResponse
+  - Fantasy.Network.Interface.ICustomRoute
+  - Fantasy.Network.Interface.ICustomRouteMessage
+  - Fantasy.Network.Interface.ICustomRouteRequest
+  - Fantasy.Network.Interface.ICustomRouteResponse
+  - Fantasy.Network.Interface.IMessage
+  - Fantasy.Network.Interface.IMessageHandler
+  - Fantasy.Network.Interface.INetworkChannel
+  - Fantasy.Network.Interface.IRequest
+  - Fantasy.Network.Interface.IResponse
+  - Fantasy.Network.Interface.IRouteMessage
+  - Fantasy.Network.Interface.IRouteMessageHandler
+  - Fantasy.Network.Interface.IRouteRequest
+  - Fantasy.Network.Interface.IRouteResponse
+  - Fantasy.Network.Interface.MessageDispatcherComponent
+  - Fantasy.Network.Interface.MessageRPC`2
+  - Fantasy.Network.Interface.Message`1
+  - Fantasy.Network.Interface.RouteRPC`3
+  - Fantasy.Network.Interface.Route`2
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Network.Interface.AClientNetwork
+  commentId: T:Fantasy.Network.Interface.AClientNetwork
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.AClientNetwork.html
+  name: AClientNetwork
+  nameWithType: AClientNetwork
+  fullName: Fantasy.Network.Interface.AClientNetwork
+- uid: Fantasy.Network.Interface.ANetwork
+  commentId: T:Fantasy.Network.Interface.ANetwork
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.ANetwork.html
+  name: ANetwork
+  nameWithType: ANetwork
+  fullName: Fantasy.Network.Interface.ANetwork
+- uid: Fantasy.Network.Interface.ANetworkServerChannel
+  commentId: T:Fantasy.Network.Interface.ANetworkServerChannel
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.ANetworkServerChannel.html
+  name: ANetworkServerChannel
+  nameWithType: ANetworkServerChannel
+  fullName: Fantasy.Network.Interface.ANetworkServerChannel
+- uid: Fantasy.Network.Interface.AddressableRPC`3
+  commentId: T:Fantasy.Network.Interface.AddressableRPC`3
+  href: Fantasy.Network.Interface.AddressableRPC-3.html
+  name: AddressableRPC<TEntity, TRouteRequest, TRouteResponse>
+  nameWithType: AddressableRPC<TEntity, TRouteRequest, TRouteResponse>
+  fullName: Fantasy.Network.Interface.AddressableRPC<TEntity, TRouteRequest, TRouteResponse>
+  nameWithType.vb: AddressableRPC(Of TEntity, TRouteRequest, TRouteResponse)
+  fullName.vb: Fantasy.Network.Interface.AddressableRPC(Of TEntity, TRouteRequest, TRouteResponse)
+  name.vb: AddressableRPC(Of TEntity, TRouteRequest, TRouteResponse)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.AddressableRPC`3
+    name: AddressableRPC
+    href: Fantasy.Network.Interface.AddressableRPC-3.html
+  - name: <
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TRouteRequest
+  - name: ','
+  - name: " "
+  - name: TRouteResponse
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Network.Interface.AddressableRPC`3
+    name: AddressableRPC
+    href: Fantasy.Network.Interface.AddressableRPC-3.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TRouteRequest
+  - name: ','
+  - name: " "
+  - name: TRouteResponse
+  - name: )
+- uid: Fantasy.Network.Interface.Addressable`2
+  commentId: T:Fantasy.Network.Interface.Addressable`2
+  href: Fantasy.Network.Interface.Addressable-2.html
+  name: Addressable<TEntity, TMessage>
+  nameWithType: Addressable<TEntity, TMessage>
+  fullName: Fantasy.Network.Interface.Addressable<TEntity, TMessage>
+  nameWithType.vb: Addressable(Of TEntity, TMessage)
+  fullName.vb: Fantasy.Network.Interface.Addressable(Of TEntity, TMessage)
+  name.vb: Addressable(Of TEntity, TMessage)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.Addressable`2
+    name: Addressable
+    href: Fantasy.Network.Interface.Addressable-2.html
+  - name: <
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TMessage
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Network.Interface.Addressable`2
+    name: Addressable
+    href: Fantasy.Network.Interface.Addressable-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TMessage
+  - name: )
+- uid: Fantasy.Network.Interface.IAddressableRouteMessage
+  commentId: T:Fantasy.Network.Interface.IAddressableRouteMessage
+  href: Fantasy.Network.Interface.IAddressableRouteMessage.html
+  name: IAddressableRouteMessage
+  nameWithType: IAddressableRouteMessage
+  fullName: Fantasy.Network.Interface.IAddressableRouteMessage
+- uid: Fantasy.Network.Interface.IAddressableRouteRequest
+  commentId: T:Fantasy.Network.Interface.IAddressableRouteRequest
+  href: Fantasy.Network.Interface.IAddressableRouteRequest.html
+  name: IAddressableRouteRequest
+  nameWithType: IAddressableRouteRequest
+  fullName: Fantasy.Network.Interface.IAddressableRouteRequest
+- uid: Fantasy.Network.Interface.IAddressableRouteResponse
+  commentId: T:Fantasy.Network.Interface.IAddressableRouteResponse
+  href: Fantasy.Network.Interface.IAddressableRouteResponse.html
+  name: IAddressableRouteResponse
+  nameWithType: IAddressableRouteResponse
+  fullName: Fantasy.Network.Interface.IAddressableRouteResponse
+- uid: Fantasy.Network.Interface.ICustomRoute
+  commentId: T:Fantasy.Network.Interface.ICustomRoute
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.ICustomRoute.html
+  name: ICustomRoute
+  nameWithType: ICustomRoute
+  fullName: Fantasy.Network.Interface.ICustomRoute
+- uid: Fantasy.Network.Interface.ICustomRouteMessage
+  commentId: T:Fantasy.Network.Interface.ICustomRouteMessage
+  href: Fantasy.Network.Interface.ICustomRouteMessage.html
+  name: ICustomRouteMessage
+  nameWithType: ICustomRouteMessage
+  fullName: Fantasy.Network.Interface.ICustomRouteMessage
+- uid: Fantasy.Network.Interface.ICustomRouteRequest
+  commentId: T:Fantasy.Network.Interface.ICustomRouteRequest
+  href: Fantasy.Network.Interface.ICustomRouteRequest.html
+  name: ICustomRouteRequest
+  nameWithType: ICustomRouteRequest
+  fullName: Fantasy.Network.Interface.ICustomRouteRequest
+- uid: Fantasy.Network.Interface.ICustomRouteResponse
+  commentId: T:Fantasy.Network.Interface.ICustomRouteResponse
+  href: Fantasy.Network.Interface.ICustomRouteResponse.html
+  name: ICustomRouteResponse
+  nameWithType: ICustomRouteResponse
+  fullName: Fantasy.Network.Interface.ICustomRouteResponse
+- uid: Fantasy.Network.Interface.IMessage
+  commentId: T:Fantasy.Network.Interface.IMessage
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IMessage.html
+  name: IMessage
+  nameWithType: IMessage
+  fullName: Fantasy.Network.Interface.IMessage
+- uid: Fantasy.Network.Interface.IMessageHandler
+  commentId: T:Fantasy.Network.Interface.IMessageHandler
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IMessageHandler.html
+  name: IMessageHandler
+  nameWithType: IMessageHandler
+  fullName: Fantasy.Network.Interface.IMessageHandler
+- uid: Fantasy.Network.Interface.INetworkChannel
+  commentId: T:Fantasy.Network.Interface.INetworkChannel
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.INetworkChannel.html
+  name: INetworkChannel
+  nameWithType: INetworkChannel
+  fullName: Fantasy.Network.Interface.INetworkChannel
+- uid: Fantasy.Network.Interface.IRequest
+  commentId: T:Fantasy.Network.Interface.IRequest
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IRequest.html
+  name: IRequest
+  nameWithType: IRequest
+  fullName: Fantasy.Network.Interface.IRequest
+- uid: Fantasy.Network.Interface.IResponse
+  commentId: T:Fantasy.Network.Interface.IResponse
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IResponse.html
+  name: IResponse
+  nameWithType: IResponse
+  fullName: Fantasy.Network.Interface.IResponse
+- uid: Fantasy.Network.Interface.IRouteMessage
+  commentId: T:Fantasy.Network.Interface.IRouteMessage
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IRouteMessage.html
+  name: IRouteMessage
+  nameWithType: IRouteMessage
+  fullName: Fantasy.Network.Interface.IRouteMessage
+- uid: Fantasy.Network.Interface.IRouteMessageHandler
+  commentId: T:Fantasy.Network.Interface.IRouteMessageHandler
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IRouteMessageHandler.html
+  name: IRouteMessageHandler
+  nameWithType: IRouteMessageHandler
+  fullName: Fantasy.Network.Interface.IRouteMessageHandler
+- uid: Fantasy.Network.Interface.IRouteRequest
+  commentId: T:Fantasy.Network.Interface.IRouteRequest
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IRouteRequest.html
+  name: IRouteRequest
+  nameWithType: IRouteRequest
+  fullName: Fantasy.Network.Interface.IRouteRequest
+- uid: Fantasy.Network.Interface.IRouteResponse
+  commentId: T:Fantasy.Network.Interface.IRouteResponse
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IRouteResponse.html
+  name: IRouteResponse
+  nameWithType: IRouteResponse
+  fullName: Fantasy.Network.Interface.IRouteResponse
+- uid: Fantasy.Network.Interface.MessageDispatcherComponent
+  commentId: T:Fantasy.Network.Interface.MessageDispatcherComponent
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.MessageDispatcherComponent.html
+  name: MessageDispatcherComponent
+  nameWithType: MessageDispatcherComponent
+  fullName: Fantasy.Network.Interface.MessageDispatcherComponent
+- uid: Fantasy.Network.Interface.MessageRPC`2
+  commentId: T:Fantasy.Network.Interface.MessageRPC`2
+  href: Fantasy.Network.Interface.MessageRPC-2.html
+  name: MessageRPC<TRequest, TResponse>
+  nameWithType: MessageRPC<TRequest, TResponse>
+  fullName: Fantasy.Network.Interface.MessageRPC<TRequest, TResponse>
+  nameWithType.vb: MessageRPC(Of TRequest, TResponse)
+  fullName.vb: Fantasy.Network.Interface.MessageRPC(Of TRequest, TResponse)
+  name.vb: MessageRPC(Of TRequest, TResponse)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.MessageRPC`2
+    name: MessageRPC
+    href: Fantasy.Network.Interface.MessageRPC-2.html
+  - name: <
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Network.Interface.MessageRPC`2
+    name: MessageRPC
+    href: Fantasy.Network.Interface.MessageRPC-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: )
+- uid: Fantasy.Network.Interface.Message`1
+  commentId: T:Fantasy.Network.Interface.Message`1
+  href: Fantasy.Network.Interface.Message-1.html
+  name: Message<T>
+  nameWithType: Message<T>
+  fullName: Fantasy.Network.Interface.Message<T>
+  nameWithType.vb: Message(Of T)
+  fullName.vb: Fantasy.Network.Interface.Message(Of T)
+  name.vb: Message(Of T)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.Message`1
+    name: Message
+    href: Fantasy.Network.Interface.Message-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Network.Interface.Message`1
+    name: Message
+    href: Fantasy.Network.Interface.Message-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Network.Interface.RouteRPC`3
+  commentId: T:Fantasy.Network.Interface.RouteRPC`3
+  href: Fantasy.Network.Interface.RouteRPC-3.html
+  name: RouteRPC<TEntity, TRouteRequest, TRouteResponse>
+  nameWithType: RouteRPC<TEntity, TRouteRequest, TRouteResponse>
+  fullName: Fantasy.Network.Interface.RouteRPC<TEntity, TRouteRequest, TRouteResponse>
+  nameWithType.vb: RouteRPC(Of TEntity, TRouteRequest, TRouteResponse)
+  fullName.vb: Fantasy.Network.Interface.RouteRPC(Of TEntity, TRouteRequest, TRouteResponse)
+  name.vb: RouteRPC(Of TEntity, TRouteRequest, TRouteResponse)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.RouteRPC`3
+    name: RouteRPC
+    href: Fantasy.Network.Interface.RouteRPC-3.html
+  - name: <
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TRouteRequest
+  - name: ','
+  - name: " "
+  - name: TRouteResponse
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Network.Interface.RouteRPC`3
+    name: RouteRPC
+    href: Fantasy.Network.Interface.RouteRPC-3.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TRouteRequest
+  - name: ','
+  - name: " "
+  - name: TRouteResponse
+  - name: )
+- uid: Fantasy.Network.Interface.Route`2
+  commentId: T:Fantasy.Network.Interface.Route`2
+  href: Fantasy.Network.Interface.Route-2.html
+  name: Route<TEntity, TMessage>
+  nameWithType: Route<TEntity, TMessage>
+  fullName: Fantasy.Network.Interface.Route<TEntity, TMessage>
+  nameWithType.vb: Route(Of TEntity, TMessage)
+  fullName.vb: Fantasy.Network.Interface.Route(Of TEntity, TMessage)
+  name.vb: Route(Of TEntity, TMessage)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.Route`2
+    name: Route
+    href: Fantasy.Network.Interface.Route-2.html
+  - name: <
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TMessage
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Network.Interface.Route`2
+    name: Route
+    href: Fantasy.Network.Interface.Route-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TMessage
+  - name: )
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  href: Fantasy.html
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html

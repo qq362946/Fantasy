@@ -1,0 +1,47 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.SingleCollection
+  commentId: N:Fantasy.SingleCollection
+  id: SingleCollection
+  parent: Fantasy
+  children:
+  - Fantasy.SingleCollection.SingleCollectionComponent
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.SingleCollection
+  nameWithType: Fantasy.SingleCollection
+  fullName: Fantasy.SingleCollection
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.SingleCollection.SingleCollectionComponent
+  commentId: T:Fantasy.SingleCollection.SingleCollectionComponent
+  parent: Fantasy.SingleCollection
+  href: Fantasy.SingleCollection.SingleCollectionComponent.html
+  name: SingleCollectionComponent
+  nameWithType: SingleCollectionComponent
+  fullName: Fantasy.SingleCollection.SingleCollectionComponent
+- uid: Fantasy.SingleCollection
+  commentId: N:Fantasy.SingleCollection
+  href: Fantasy.html
+  name: Fantasy.SingleCollection
+  nameWithType: Fantasy.SingleCollection
+  fullName: Fantasy.SingleCollection
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.SingleCollection
+    name: SingleCollection
+    href: Fantasy.SingleCollection.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.SingleCollection
+    name: SingleCollection
+    href: Fantasy.SingleCollection.html

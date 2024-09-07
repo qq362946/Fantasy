@@ -1,0 +1,1874 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  id: NativeCollections
+  children:
+  - NativeCollections.NativeArrayPool`1
+  - NativeCollections.NativeArrayReference`1
+  - NativeCollections.NativeArrayReference`1.Enumerator
+  - NativeCollections.NativeArraySegment`1
+  - NativeCollections.NativeArraySegment`1.Enumerator
+  - NativeCollections.NativeArray`1
+  - NativeCollections.NativeArray`1.Enumerator
+  - NativeCollections.NativeConcurrentDictionary`2
+  - NativeCollections.NativeConcurrentDictionary`2.Enumerator
+  - NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+  - NativeCollections.NativeConcurrentDictionary`2.KeyCollection.Enumerator
+  - NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+  - NativeCollections.NativeConcurrentDictionary`2.ValueCollection.Enumerator
+  - NativeCollections.NativeConcurrentHashSet`1
+  - NativeCollections.NativeConcurrentHashSet`1.Enumerator
+  - NativeCollections.NativeConcurrentQueue`1
+  - NativeCollections.NativeConcurrentSpinLock
+  - NativeCollections.NativeConcurrentStack`1
+  - NativeCollections.NativeDictionary`2
+  - NativeCollections.NativeDictionary`2.Enumerator
+  - NativeCollections.NativeDictionary`2.KeyCollection
+  - NativeCollections.NativeDictionary`2.KeyCollection.Enumerator
+  - NativeCollections.NativeDictionary`2.ValueCollection
+  - NativeCollections.NativeDictionary`2.ValueCollection.Enumerator
+  - NativeCollections.NativeHashSet`1
+  - NativeCollections.NativeHashSet`1.Enumerator
+  - NativeCollections.NativeList`1
+  - NativeCollections.NativeList`1.Enumerator
+  - NativeCollections.NativeMemoryAllocator
+  - NativeCollections.NativeMemoryBucket
+  - NativeCollections.NativeMemoryPool
+  - NativeCollections.NativeMemoryStream
+  - NativeCollections.NativeMonitorLock
+  - NativeCollections.NativePriorityQueue`2
+  - NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+  - NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection.Enumerator
+  - NativeCollections.NativeQueue`1
+  - NativeCollections.NativeQueue`1.Enumerator
+  - NativeCollections.NativeReference`1
+  - NativeCollections.NativeSortedDictionary`2
+  - NativeCollections.NativeSortedDictionary`2.Enumerator
+  - NativeCollections.NativeSortedDictionary`2.KeyCollection
+  - NativeCollections.NativeSortedDictionary`2.KeyCollection.Enumerator
+  - NativeCollections.NativeSortedDictionary`2.ValueCollection
+  - NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+  - NativeCollections.NativeSortedList`2
+  - NativeCollections.NativeSortedList`2.Enumerator
+  - NativeCollections.NativeSortedList`2.KeyCollection
+  - NativeCollections.NativeSortedList`2.KeyCollection.Enumerator
+  - NativeCollections.NativeSortedList`2.ValueCollection
+  - NativeCollections.NativeSortedList`2.ValueCollection.Enumerator
+  - NativeCollections.NativeSortedSet`1
+  - NativeCollections.NativeSortedSet`1.Enumerator
+  - NativeCollections.NativeStack`1
+  - NativeCollections.NativeStack`1.Enumerator
+  langs:
+  - csharp
+  - vb
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: NativeCollections.NativeArrayPool`1
+  commentId: T:NativeCollections.NativeArrayPool`1
+  parent: NativeCollections
+  href: NativeCollections.NativeArrayPool-1.html
+  name: NativeArrayPool<T>
+  nameWithType: NativeArrayPool<T>
+  fullName: NativeCollections.NativeArrayPool<T>
+  nameWithType.vb: NativeArrayPool(Of T)
+  fullName.vb: NativeCollections.NativeArrayPool(Of T)
+  name.vb: NativeArrayPool(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeArrayReference`1
+  commentId: T:NativeCollections.NativeArrayReference`1
+  parent: NativeCollections
+  href: NativeCollections.NativeArrayReference-1.html
+  name: NativeArrayReference<T>
+  nameWithType: NativeArrayReference<T>
+  fullName: NativeCollections.NativeArrayReference<T>
+  nameWithType.vb: NativeArrayReference(Of T)
+  fullName.vb: NativeCollections.NativeArrayReference(Of T)
+  name.vb: NativeArrayReference(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeArrayReference`1.Enumerator
+  commentId: T:NativeCollections.NativeArrayReference`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeArrayReference-1.html
+  name: NativeArrayReference<T>.Enumerator
+  nameWithType: NativeArrayReference<T>.Enumerator
+  fullName: NativeCollections.NativeArrayReference<T>.Enumerator
+  nameWithType.vb: NativeArrayReference(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeArrayReference(Of T).Enumerator
+  name.vb: NativeArrayReference(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeArrayReference`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeArrayReference-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeArrayReference`1
+    name: NativeArrayReference
+    href: NativeCollections.NativeArrayReference-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeArrayReference`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeArrayReference-1.Enumerator.html
+- uid: NativeCollections.NativeArraySegment`1
+  commentId: T:NativeCollections.NativeArraySegment`1
+  parent: NativeCollections
+  href: NativeCollections.NativeArraySegment-1.html
+  name: NativeArraySegment<T>
+  nameWithType: NativeArraySegment<T>
+  fullName: NativeCollections.NativeArraySegment<T>
+  nameWithType.vb: NativeArraySegment(Of T)
+  fullName.vb: NativeCollections.NativeArraySegment(Of T)
+  name.vb: NativeArraySegment(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeArraySegment`1
+    name: NativeArraySegment
+    href: NativeCollections.NativeArraySegment-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeArraySegment`1
+    name: NativeArraySegment
+    href: NativeCollections.NativeArraySegment-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeArraySegment`1.Enumerator
+  commentId: T:NativeCollections.NativeArraySegment`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeArraySegment-1.html
+  name: NativeArraySegment<T>.Enumerator
+  nameWithType: NativeArraySegment<T>.Enumerator
+  fullName: NativeCollections.NativeArraySegment<T>.Enumerator
+  nameWithType.vb: NativeArraySegment(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeArraySegment(Of T).Enumerator
+  name.vb: NativeArraySegment(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeArraySegment`1
+    name: NativeArraySegment
+    href: NativeCollections.NativeArraySegment-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeArraySegment`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeArraySegment-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeArraySegment`1
+    name: NativeArraySegment
+    href: NativeCollections.NativeArraySegment-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeArraySegment`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeArraySegment-1.Enumerator.html
+- uid: NativeCollections.NativeArray`1
+  commentId: T:NativeCollections.NativeArray`1
+  parent: NativeCollections
+  href: NativeCollections.NativeArray-1.html
+  name: NativeArray<T>
+  nameWithType: NativeArray<T>
+  fullName: NativeCollections.NativeArray<T>
+  nameWithType.vb: NativeArray(Of T)
+  fullName.vb: NativeCollections.NativeArray(Of T)
+  name.vb: NativeArray(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeArray`1
+    name: NativeArray
+    href: NativeCollections.NativeArray-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeArray`1
+    name: NativeArray
+    href: NativeCollections.NativeArray-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeArray`1.Enumerator
+  commentId: T:NativeCollections.NativeArray`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeArray-1.html
+  name: NativeArray<T>.Enumerator
+  nameWithType: NativeArray<T>.Enumerator
+  fullName: NativeCollections.NativeArray<T>.Enumerator
+  nameWithType.vb: NativeArray(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeArray(Of T).Enumerator
+  name.vb: NativeArray(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeArray`1
+    name: NativeArray
+    href: NativeCollections.NativeArray-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeArray`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeArray-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeArray`1
+    name: NativeArray
+    href: NativeCollections.NativeArray-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeArray`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeArray-1.Enumerator.html
+- uid: NativeCollections.NativeConcurrentDictionary`2
+  commentId: T:NativeCollections.NativeConcurrentDictionary`2
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentDictionary-2.html
+  name: NativeConcurrentDictionary<TKey, TValue>
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue)
+  name.vb: NativeConcurrentDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: NativeCollections.NativeConcurrentDictionary`2.Enumerator
+  commentId: T:NativeCollections.NativeConcurrentDictionary`2.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentDictionary-2.html
+  name: NativeConcurrentDictionary<TKey, TValue>.Enumerator
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Enumerator
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Enumerator
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Enumerator
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Enumerator
+  name.vb: NativeConcurrentDictionary(Of TKey, TValue).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentDictionary-2.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentDictionary-2.Enumerator.html
+- uid: NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+  commentId: T:NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentDictionary-2.html
+  name: NativeConcurrentDictionary<TKey, TValue>.KeyCollection
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.KeyCollection
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.KeyCollection
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).KeyCollection
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).KeyCollection
+  name.vb: NativeConcurrentDictionary(Of TKey, TValue).KeyCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.KeyCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.KeyCollection.html
+- uid: NativeCollections.NativeConcurrentDictionary`2.KeyCollection.Enumerator
+  commentId: T:NativeCollections.NativeConcurrentDictionary`2.KeyCollection.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentDictionary-2.html
+  name: NativeConcurrentDictionary<TKey, TValue>.KeyCollection.Enumerator
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.KeyCollection.Enumerator
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.KeyCollection.Enumerator
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).KeyCollection.Enumerator
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).KeyCollection.Enumerator
+  name.vb: NativeConcurrentDictionary(Of TKey, TValue).KeyCollection.Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.KeyCollection.html
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.KeyCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentDictionary-2.KeyCollection.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.KeyCollection.html
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.KeyCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentDictionary-2.KeyCollection.Enumerator.html
+- uid: NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+  commentId: T:NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentDictionary-2.html
+  name: NativeConcurrentDictionary<TKey, TValue>.ValueCollection
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.ValueCollection
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.ValueCollection
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).ValueCollection
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).ValueCollection
+  name.vb: NativeConcurrentDictionary(Of TKey, TValue).ValueCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.ValueCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.ValueCollection.html
+- uid: NativeCollections.NativeConcurrentDictionary`2.ValueCollection.Enumerator
+  commentId: T:NativeCollections.NativeConcurrentDictionary`2.ValueCollection.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentDictionary-2.html
+  name: NativeConcurrentDictionary<TKey, TValue>.ValueCollection.Enumerator
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.ValueCollection.Enumerator
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.ValueCollection.Enumerator
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).ValueCollection.Enumerator
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).ValueCollection.Enumerator
+  name.vb: NativeConcurrentDictionary(Of TKey, TValue).ValueCollection.Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.ValueCollection.html
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentDictionary-2.ValueCollection.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.ValueCollection.html
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentDictionary-2.ValueCollection.Enumerator.html
+- uid: NativeCollections.NativeConcurrentHashSet`1
+  commentId: T:NativeCollections.NativeConcurrentHashSet`1
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentHashSet-1.html
+  name: NativeConcurrentHashSet<T>
+  nameWithType: NativeConcurrentHashSet<T>
+  fullName: NativeCollections.NativeConcurrentHashSet<T>
+  nameWithType.vb: NativeConcurrentHashSet(Of T)
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T)
+  name.vb: NativeConcurrentHashSet(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeConcurrentHashSet`1.Enumerator
+  commentId: T:NativeCollections.NativeConcurrentHashSet`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentHashSet-1.html
+  name: NativeConcurrentHashSet<T>.Enumerator
+  nameWithType: NativeConcurrentHashSet<T>.Enumerator
+  fullName: NativeCollections.NativeConcurrentHashSet<T>.Enumerator
+  nameWithType.vb: NativeConcurrentHashSet(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeConcurrentHashSet(Of T).Enumerator
+  name.vb: NativeConcurrentHashSet(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeConcurrentHashSet`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentHashSet-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentHashSet`1
+    name: NativeConcurrentHashSet
+    href: NativeCollections.NativeConcurrentHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeConcurrentHashSet`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentHashSet-1.Enumerator.html
+- uid: NativeCollections.NativeConcurrentQueue`1
+  commentId: T:NativeCollections.NativeConcurrentQueue`1
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentQueue-1.html
+  name: NativeConcurrentQueue<T>
+  nameWithType: NativeConcurrentQueue<T>
+  fullName: NativeCollections.NativeConcurrentQueue<T>
+  nameWithType.vb: NativeConcurrentQueue(Of T)
+  fullName.vb: NativeCollections.NativeConcurrentQueue(Of T)
+  name.vb: NativeConcurrentQueue(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentQueue`1
+    name: NativeConcurrentQueue
+    href: NativeCollections.NativeConcurrentQueue-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentQueue`1
+    name: NativeConcurrentQueue
+    href: NativeCollections.NativeConcurrentQueue-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeConcurrentSpinLock
+  commentId: T:NativeCollections.NativeConcurrentSpinLock
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentSpinLock.html
+  name: NativeConcurrentSpinLock
+  nameWithType: NativeConcurrentSpinLock
+  fullName: NativeCollections.NativeConcurrentSpinLock
+- uid: NativeCollections.NativeConcurrentStack`1
+  commentId: T:NativeCollections.NativeConcurrentStack`1
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentStack-1.html
+  name: NativeConcurrentStack<T>
+  nameWithType: NativeConcurrentStack<T>
+  fullName: NativeCollections.NativeConcurrentStack<T>
+  nameWithType.vb: NativeConcurrentStack(Of T)
+  fullName.vb: NativeCollections.NativeConcurrentStack(Of T)
+  name.vb: NativeConcurrentStack(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentStack`1
+    name: NativeConcurrentStack
+    href: NativeCollections.NativeConcurrentStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeDictionary`2
+  commentId: T:NativeCollections.NativeDictionary`2
+  parent: NativeCollections
+  href: NativeCollections.NativeDictionary-2.html
+  name: NativeDictionary<TKey, TValue>
+  nameWithType: NativeDictionary<TKey, TValue>
+  fullName: NativeCollections.NativeDictionary<TKey, TValue>
+  nameWithType.vb: NativeDictionary(Of TKey, TValue)
+  fullName.vb: NativeCollections.NativeDictionary(Of TKey, TValue)
+  name.vb: NativeDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: NativeCollections.NativeDictionary`2.Enumerator
+  commentId: T:NativeCollections.NativeDictionary`2.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeDictionary-2.html
+  name: NativeDictionary<TKey, TValue>.Enumerator
+  nameWithType: NativeDictionary<TKey, TValue>.Enumerator
+  fullName: NativeCollections.NativeDictionary<TKey, TValue>.Enumerator
+  nameWithType.vb: NativeDictionary(Of TKey, TValue).Enumerator
+  fullName.vb: NativeCollections.NativeDictionary(Of TKey, TValue).Enumerator
+  name.vb: NativeDictionary(Of TKey, TValue).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeDictionary-2.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeDictionary-2.Enumerator.html
+- uid: NativeCollections.NativeDictionary`2.KeyCollection
+  commentId: T:NativeCollections.NativeDictionary`2.KeyCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeDictionary-2.html
+  name: NativeDictionary<TKey, TValue>.KeyCollection
+  nameWithType: NativeDictionary<TKey, TValue>.KeyCollection
+  fullName: NativeCollections.NativeDictionary<TKey, TValue>.KeyCollection
+  nameWithType.vb: NativeDictionary(Of TKey, TValue).KeyCollection
+  fullName.vb: NativeCollections.NativeDictionary(Of TKey, TValue).KeyCollection
+  name.vb: NativeDictionary(Of TKey, TValue).KeyCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeDictionary-2.KeyCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeDictionary-2.KeyCollection.html
+- uid: NativeCollections.NativeDictionary`2.KeyCollection.Enumerator
+  commentId: T:NativeCollections.NativeDictionary`2.KeyCollection.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeDictionary-2.html
+  name: NativeDictionary<TKey, TValue>.KeyCollection.Enumerator
+  nameWithType: NativeDictionary<TKey, TValue>.KeyCollection.Enumerator
+  fullName: NativeCollections.NativeDictionary<TKey, TValue>.KeyCollection.Enumerator
+  nameWithType.vb: NativeDictionary(Of TKey, TValue).KeyCollection.Enumerator
+  fullName.vb: NativeCollections.NativeDictionary(Of TKey, TValue).KeyCollection.Enumerator
+  name.vb: NativeDictionary(Of TKey, TValue).KeyCollection.Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeDictionary-2.KeyCollection.html
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.KeyCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeDictionary-2.KeyCollection.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeDictionary-2.KeyCollection.html
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.KeyCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeDictionary-2.KeyCollection.Enumerator.html
+- uid: NativeCollections.NativeDictionary`2.ValueCollection
+  commentId: T:NativeCollections.NativeDictionary`2.ValueCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeDictionary-2.html
+  name: NativeDictionary<TKey, TValue>.ValueCollection
+  nameWithType: NativeDictionary<TKey, TValue>.ValueCollection
+  fullName: NativeCollections.NativeDictionary<TKey, TValue>.ValueCollection
+  nameWithType.vb: NativeDictionary(Of TKey, TValue).ValueCollection
+  fullName.vb: NativeCollections.NativeDictionary(Of TKey, TValue).ValueCollection
+  name.vb: NativeDictionary(Of TKey, TValue).ValueCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeDictionary-2.ValueCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeDictionary-2.ValueCollection.html
+- uid: NativeCollections.NativeDictionary`2.ValueCollection.Enumerator
+  commentId: T:NativeCollections.NativeDictionary`2.ValueCollection.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeDictionary-2.html
+  name: NativeDictionary<TKey, TValue>.ValueCollection.Enumerator
+  nameWithType: NativeDictionary<TKey, TValue>.ValueCollection.Enumerator
+  fullName: NativeCollections.NativeDictionary<TKey, TValue>.ValueCollection.Enumerator
+  nameWithType.vb: NativeDictionary(Of TKey, TValue).ValueCollection.Enumerator
+  fullName.vb: NativeCollections.NativeDictionary(Of TKey, TValue).ValueCollection.Enumerator
+  name.vb: NativeDictionary(Of TKey, TValue).ValueCollection.Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeDictionary-2.ValueCollection.html
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeDictionary-2.ValueCollection.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeDictionary`2
+    name: NativeDictionary
+    href: NativeCollections.NativeDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeDictionary-2.ValueCollection.html
+  - name: .
+  - uid: NativeCollections.NativeDictionary`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeDictionary-2.ValueCollection.Enumerator.html
+- uid: NativeCollections.NativeHashSet`1
+  commentId: T:NativeCollections.NativeHashSet`1
+  parent: NativeCollections
+  href: NativeCollections.NativeHashSet-1.html
+  name: NativeHashSet<T>
+  nameWithType: NativeHashSet<T>
+  fullName: NativeCollections.NativeHashSet<T>
+  nameWithType.vb: NativeHashSet(Of T)
+  fullName.vb: NativeCollections.NativeHashSet(Of T)
+  name.vb: NativeHashSet(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeHashSet`1
+    name: NativeHashSet
+    href: NativeCollections.NativeHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeHashSet`1
+    name: NativeHashSet
+    href: NativeCollections.NativeHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeHashSet`1.Enumerator
+  commentId: T:NativeCollections.NativeHashSet`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeHashSet-1.html
+  name: NativeHashSet<T>.Enumerator
+  nameWithType: NativeHashSet<T>.Enumerator
+  fullName: NativeCollections.NativeHashSet<T>.Enumerator
+  nameWithType.vb: NativeHashSet(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeHashSet(Of T).Enumerator
+  name.vb: NativeHashSet(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeHashSet`1
+    name: NativeHashSet
+    href: NativeCollections.NativeHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeHashSet`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeHashSet-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeHashSet`1
+    name: NativeHashSet
+    href: NativeCollections.NativeHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeHashSet`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeHashSet-1.Enumerator.html
+- uid: NativeCollections.NativeList`1
+  commentId: T:NativeCollections.NativeList`1
+  parent: NativeCollections
+  href: NativeCollections.NativeList-1.html
+  name: NativeList<T>
+  nameWithType: NativeList<T>
+  fullName: NativeCollections.NativeList<T>
+  nameWithType.vb: NativeList(Of T)
+  fullName.vb: NativeCollections.NativeList(Of T)
+  name.vb: NativeList(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeList`1.Enumerator
+  commentId: T:NativeCollections.NativeList`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeList-1.html
+  name: NativeList<T>.Enumerator
+  nameWithType: NativeList<T>.Enumerator
+  fullName: NativeCollections.NativeList<T>.Enumerator
+  nameWithType.vb: NativeList(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeList(Of T).Enumerator
+  name.vb: NativeList(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeList`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeList-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeList`1
+    name: NativeList
+    href: NativeCollections.NativeList-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeList`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeList-1.Enumerator.html
+- uid: NativeCollections.NativeMemoryAllocator
+  commentId: T:NativeCollections.NativeMemoryAllocator
+  href: NativeCollections.NativeMemoryAllocator.html
+  name: NativeMemoryAllocator
+  nameWithType: NativeMemoryAllocator
+  fullName: NativeCollections.NativeMemoryAllocator
+- uid: NativeCollections.NativeMemoryBucket
+  commentId: T:NativeCollections.NativeMemoryBucket
+  parent: NativeCollections
+  href: NativeCollections.NativeMemoryBucket.html
+  name: NativeMemoryBucket
+  nameWithType: NativeMemoryBucket
+  fullName: NativeCollections.NativeMemoryBucket
+- uid: NativeCollections.NativeMemoryPool
+  commentId: T:NativeCollections.NativeMemoryPool
+  parent: NativeCollections
+  href: NativeCollections.NativeMemoryPool.html
+  name: NativeMemoryPool
+  nameWithType: NativeMemoryPool
+  fullName: NativeCollections.NativeMemoryPool
+- uid: NativeCollections.NativeMemoryStream
+  commentId: T:NativeCollections.NativeMemoryStream
+  parent: NativeCollections
+  href: NativeCollections.NativeMemoryStream.html
+  name: NativeMemoryStream
+  nameWithType: NativeMemoryStream
+  fullName: NativeCollections.NativeMemoryStream
+- uid: NativeCollections.NativeMonitorLock
+  commentId: T:NativeCollections.NativeMonitorLock
+  parent: NativeCollections
+  href: NativeCollections.NativeMonitorLock.html
+  name: NativeMonitorLock
+  nameWithType: NativeMonitorLock
+  fullName: NativeCollections.NativeMonitorLock
+- uid: NativeCollections.NativePriorityQueue`2
+  commentId: T:NativeCollections.NativePriorityQueue`2
+  parent: NativeCollections
+  href: NativeCollections.NativePriorityQueue-2.html
+  name: NativePriorityQueue<TElement, TPriority>
+  nameWithType: NativePriorityQueue<TElement, TPriority>
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority)
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority)
+  name.vb: NativePriorityQueue(Of TElement, TPriority)
+  spec.csharp:
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )
+- uid: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+  commentId: T:NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+  parent: NativeCollections
+  href: NativeCollections.NativePriorityQueue-2.html
+  name: NativePriorityQueue<TElement, TPriority>.UnorderedItemsCollection
+  nameWithType: NativePriorityQueue<TElement, TPriority>.UnorderedItemsCollection
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.UnorderedItemsCollection
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).UnorderedItemsCollection
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).UnorderedItemsCollection
+  name.vb: NativePriorityQueue(Of TElement, TPriority).UnorderedItemsCollection
+  spec.csharp:
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+    name: UnorderedItemsCollection
+    href: NativeCollections.NativePriorityQueue-2.UnorderedItemsCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+    name: UnorderedItemsCollection
+    href: NativeCollections.NativePriorityQueue-2.UnorderedItemsCollection.html
+- uid: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection.Enumerator
+  commentId: T:NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativePriorityQueue-2.html
+  name: NativePriorityQueue<TElement, TPriority>.UnorderedItemsCollection.Enumerator
+  nameWithType: NativePriorityQueue<TElement, TPriority>.UnorderedItemsCollection.Enumerator
+  fullName: NativeCollections.NativePriorityQueue<TElement, TPriority>.UnorderedItemsCollection.Enumerator
+  nameWithType.vb: NativePriorityQueue(Of TElement, TPriority).UnorderedItemsCollection.Enumerator
+  fullName.vb: NativeCollections.NativePriorityQueue(Of TElement, TPriority).UnorderedItemsCollection.Enumerator
+  name.vb: NativePriorityQueue(Of TElement, TPriority).UnorderedItemsCollection.Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+    name: UnorderedItemsCollection
+    href: NativeCollections.NativePriorityQueue-2.UnorderedItemsCollection.html
+  - name: .
+  - uid: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativePriorityQueue-2.UnorderedItemsCollection.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativePriorityQueue`2
+    name: NativePriorityQueue
+    href: NativeCollections.NativePriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection
+    name: UnorderedItemsCollection
+    href: NativeCollections.NativePriorityQueue-2.UnorderedItemsCollection.html
+  - name: .
+  - uid: NativeCollections.NativePriorityQueue`2.UnorderedItemsCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativePriorityQueue-2.UnorderedItemsCollection.Enumerator.html
+- uid: NativeCollections.NativeQueue`1
+  commentId: T:NativeCollections.NativeQueue`1
+  parent: NativeCollections
+  href: NativeCollections.NativeQueue-1.html
+  name: NativeQueue<T>
+  nameWithType: NativeQueue<T>
+  fullName: NativeCollections.NativeQueue<T>
+  nameWithType.vb: NativeQueue(Of T)
+  fullName.vb: NativeCollections.NativeQueue(Of T)
+  name.vb: NativeQueue(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeQueue`1.Enumerator
+  commentId: T:NativeCollections.NativeQueue`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeQueue-1.html
+  name: NativeQueue<T>.Enumerator
+  nameWithType: NativeQueue<T>.Enumerator
+  fullName: NativeCollections.NativeQueue<T>.Enumerator
+  nameWithType.vb: NativeQueue(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeQueue(Of T).Enumerator
+  name.vb: NativeQueue(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeQueue`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeQueue-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeQueue`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeQueue-1.Enumerator.html
+- uid: NativeCollections.NativeReference`1
+  commentId: T:NativeCollections.NativeReference`1
+  parent: NativeCollections
+  href: NativeCollections.NativeReference-1.html
+  name: NativeReference<T>
+  nameWithType: NativeReference<T>
+  fullName: NativeCollections.NativeReference<T>
+  nameWithType.vb: NativeReference(Of T)
+  fullName.vb: NativeCollections.NativeReference(Of T)
+  name.vb: NativeReference(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeReference`1
+    name: NativeReference
+    href: NativeCollections.NativeReference-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeReference`1
+    name: NativeReference
+    href: NativeCollections.NativeReference-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeSortedDictionary`2
+  commentId: T:NativeCollections.NativeSortedDictionary`2
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedDictionary-2.html
+  name: NativeSortedDictionary<TKey, TValue>
+  nameWithType: NativeSortedDictionary<TKey, TValue>
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue)
+  name.vb: NativeSortedDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: NativeCollections.NativeSortedDictionary`2.Enumerator
+  commentId: T:NativeCollections.NativeSortedDictionary`2.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedDictionary-2.html
+  name: NativeSortedDictionary<TKey, TValue>.Enumerator
+  nameWithType: NativeSortedDictionary<TKey, TValue>.Enumerator
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.Enumerator
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).Enumerator
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).Enumerator
+  name.vb: NativeSortedDictionary(Of TKey, TValue).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.Enumerator.html
+- uid: NativeCollections.NativeSortedDictionary`2.KeyCollection
+  commentId: T:NativeCollections.NativeSortedDictionary`2.KeyCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedDictionary-2.html
+  name: NativeSortedDictionary<TKey, TValue>.KeyCollection
+  nameWithType: NativeSortedDictionary<TKey, TValue>.KeyCollection
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.KeyCollection
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).KeyCollection
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).KeyCollection
+  name.vb: NativeSortedDictionary(Of TKey, TValue).KeyCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedDictionary-2.KeyCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedDictionary-2.KeyCollection.html
+- uid: NativeCollections.NativeSortedDictionary`2.KeyCollection.Enumerator
+  commentId: T:NativeCollections.NativeSortedDictionary`2.KeyCollection.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedDictionary-2.html
+  name: NativeSortedDictionary<TKey, TValue>.KeyCollection.Enumerator
+  nameWithType: NativeSortedDictionary<TKey, TValue>.KeyCollection.Enumerator
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.KeyCollection.Enumerator
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).KeyCollection.Enumerator
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).KeyCollection.Enumerator
+  name.vb: NativeSortedDictionary(Of TKey, TValue).KeyCollection.Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedDictionary-2.KeyCollection.html
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.KeyCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.KeyCollection.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedDictionary-2.KeyCollection.html
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.KeyCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.KeyCollection.Enumerator.html
+- uid: NativeCollections.NativeSortedDictionary`2.ValueCollection
+  commentId: T:NativeCollections.NativeSortedDictionary`2.ValueCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedDictionary-2.html
+  name: NativeSortedDictionary<TKey, TValue>.ValueCollection
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ValueCollection
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection
+  name.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.html
+- uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+  commentId: T:NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedDictionary-2.html
+  name: NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator
+  nameWithType: NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator
+  fullName: NativeCollections.NativeSortedDictionary<TKey, TValue>.ValueCollection.Enumerator
+  nameWithType.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator
+  fullName.vb: NativeCollections.NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator
+  name.vb: NativeSortedDictionary(Of TKey, TValue).ValueCollection.Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.html
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedDictionary`2
+    name: NativeSortedDictionary
+    href: NativeCollections.NativeSortedDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.html
+  - name: .
+  - uid: NativeCollections.NativeSortedDictionary`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedDictionary-2.ValueCollection.Enumerator.html
+- uid: NativeCollections.NativeSortedList`2
+  commentId: T:NativeCollections.NativeSortedList`2
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedList-2.html
+  name: NativeSortedList<TKey, TValue>
+  nameWithType: NativeSortedList<TKey, TValue>
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>
+  nameWithType.vb: NativeSortedList(Of TKey, TValue)
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue)
+  name.vb: NativeSortedList(Of TKey, TValue)
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: NativeCollections.NativeSortedList`2.Enumerator
+  commentId: T:NativeCollections.NativeSortedList`2.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedList-2.html
+  name: NativeSortedList<TKey, TValue>.Enumerator
+  nameWithType: NativeSortedList<TKey, TValue>.Enumerator
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.Enumerator
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).Enumerator
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).Enumerator
+  name.vb: NativeSortedList(Of TKey, TValue).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedList-2.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedList-2.Enumerator.html
+- uid: NativeCollections.NativeSortedList`2.KeyCollection
+  commentId: T:NativeCollections.NativeSortedList`2.KeyCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedList-2.html
+  name: NativeSortedList<TKey, TValue>.KeyCollection
+  nameWithType: NativeSortedList<TKey, TValue>.KeyCollection
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.KeyCollection
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).KeyCollection
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).KeyCollection
+  name.vb: NativeSortedList(Of TKey, TValue).KeyCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedList-2.KeyCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedList-2.KeyCollection.html
+- uid: NativeCollections.NativeSortedList`2.KeyCollection.Enumerator
+  commentId: T:NativeCollections.NativeSortedList`2.KeyCollection.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedList-2.html
+  name: NativeSortedList<TKey, TValue>.KeyCollection.Enumerator
+  nameWithType: NativeSortedList<TKey, TValue>.KeyCollection.Enumerator
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.KeyCollection.Enumerator
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).KeyCollection.Enumerator
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).KeyCollection.Enumerator
+  name.vb: NativeSortedList(Of TKey, TValue).KeyCollection.Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedList-2.KeyCollection.html
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.KeyCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedList-2.KeyCollection.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeSortedList-2.KeyCollection.html
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.KeyCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedList-2.KeyCollection.Enumerator.html
+- uid: NativeCollections.NativeSortedList`2.ValueCollection
+  commentId: T:NativeCollections.NativeSortedList`2.ValueCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedList-2.html
+  name: NativeSortedList<TKey, TValue>.ValueCollection
+  nameWithType: NativeSortedList<TKey, TValue>.ValueCollection
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.ValueCollection
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).ValueCollection
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).ValueCollection
+  name.vb: NativeSortedList(Of TKey, TValue).ValueCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedList-2.ValueCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedList-2.ValueCollection.html
+- uid: NativeCollections.NativeSortedList`2.ValueCollection.Enumerator
+  commentId: T:NativeCollections.NativeSortedList`2.ValueCollection.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedList-2.html
+  name: NativeSortedList<TKey, TValue>.ValueCollection.Enumerator
+  nameWithType: NativeSortedList<TKey, TValue>.ValueCollection.Enumerator
+  fullName: NativeCollections.NativeSortedList<TKey, TValue>.ValueCollection.Enumerator
+  nameWithType.vb: NativeSortedList(Of TKey, TValue).ValueCollection.Enumerator
+  fullName.vb: NativeCollections.NativeSortedList(Of TKey, TValue).ValueCollection.Enumerator
+  name.vb: NativeSortedList(Of TKey, TValue).ValueCollection.Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedList-2.ValueCollection.html
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedList-2.ValueCollection.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedList`2
+    name: NativeSortedList
+    href: NativeCollections.NativeSortedList-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeSortedList-2.ValueCollection.html
+  - name: .
+  - uid: NativeCollections.NativeSortedList`2.ValueCollection.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedList-2.ValueCollection.Enumerator.html
+- uid: NativeCollections.NativeSortedSet`1
+  commentId: T:NativeCollections.NativeSortedSet`1
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedSet-1.html
+  name: NativeSortedSet<T>
+  nameWithType: NativeSortedSet<T>
+  fullName: NativeCollections.NativeSortedSet<T>
+  nameWithType.vb: NativeSortedSet(Of T)
+  fullName.vb: NativeCollections.NativeSortedSet(Of T)
+  name.vb: NativeSortedSet(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedSet`1
+    name: NativeSortedSet
+    href: NativeCollections.NativeSortedSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeSortedSet`1
+    name: NativeSortedSet
+    href: NativeCollections.NativeSortedSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeSortedSet`1.Enumerator
+  commentId: T:NativeCollections.NativeSortedSet`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeSortedSet-1.html
+  name: NativeSortedSet<T>.Enumerator
+  nameWithType: NativeSortedSet<T>.Enumerator
+  fullName: NativeCollections.NativeSortedSet<T>.Enumerator
+  nameWithType.vb: NativeSortedSet(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeSortedSet(Of T).Enumerator
+  name.vb: NativeSortedSet(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeSortedSet`1
+    name: NativeSortedSet
+    href: NativeCollections.NativeSortedSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeSortedSet`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedSet-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeSortedSet`1
+    name: NativeSortedSet
+    href: NativeCollections.NativeSortedSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeSortedSet`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeSortedSet-1.Enumerator.html
+- uid: NativeCollections.NativeStack`1
+  commentId: T:NativeCollections.NativeStack`1
+  parent: NativeCollections
+  href: NativeCollections.NativeStack-1.html
+  name: NativeStack<T>
+  nameWithType: NativeStack<T>
+  fullName: NativeCollections.NativeStack<T>
+  nameWithType.vb: NativeStack(Of T)
+  fullName.vb: NativeCollections.NativeStack(Of T)
+  name.vb: NativeStack(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeStack`1.Enumerator
+  commentId: T:NativeCollections.NativeStack`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeStack-1.html
+  name: NativeStack<T>.Enumerator
+  nameWithType: NativeStack<T>.Enumerator
+  fullName: NativeCollections.NativeStack<T>.Enumerator
+  nameWithType.vb: NativeStack(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeStack(Of T).Enumerator
+  name.vb: NativeStack(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeStack`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeStack-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeStack`1
+    name: NativeStack
+    href: NativeCollections.NativeStack-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeStack`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeStack-1.Enumerator.html
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections

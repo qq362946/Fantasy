@@ -1,10 +1,12 @@
 using System;
 using System.Reflection.Emit;
+using Fantasy.Serialize;
+
 #pragma warning disable CS8604 // Possible null reference argument.
 
-namespace Fantasy
+namespace Fantasy.Pool
 {
-    public static class CreateInstance<T> where T : IPool
+    internal static class CreateInstance<T> where T : IPool
     {
         public static Func<T> Create { get; }
         
@@ -19,7 +21,7 @@ namespace Fantasy
         }
     }
 
-    public static class CreateInstance
+    internal static class CreateInstance
     {
         public static Func<IPool> CreateIPool(Type type)
         {

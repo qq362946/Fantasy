@@ -1,0 +1,632 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.OpCodeIdStruct
+  commentId: T:Fantasy.Network.OpCodeIdStruct
+  id: OpCodeIdStruct
+  parent: Fantasy.Network
+  children:
+  - Fantasy.Network.OpCodeIdStruct.#ctor(System.UInt32,System.UInt32,System.UInt32)
+  - Fantasy.Network.OpCodeIdStruct.Index
+  - Fantasy.Network.OpCodeIdStruct.OpCodeProtocolType
+  - Fantasy.Network.OpCodeIdStruct.Protocol
+  - Fantasy.Network.OpCodeIdStruct.op_Implicit(Fantasy.Network.OpCodeIdStruct)~System.UInt32
+  - Fantasy.Network.OpCodeIdStruct.op_Implicit(System.UInt32)~Fantasy.Network.OpCodeIdStruct
+  langs:
+  - csharp
+  - vb
+  name: OpCodeIdStruct
+  nameWithType: OpCodeIdStruct
+  fullName: Fantasy.Network.OpCodeIdStruct
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OpCodeIdStruct
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+    startLine: 3
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  syntax:
+    content: public struct OpCodeIdStruct
+    content.vb: Public Structure OpCodeIdStruct
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - Fantasy.Network.OpCodeIdStruct.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.OpCodeIdStruct.OpCodeProtocolType
+  commentId: P:Fantasy.Network.OpCodeIdStruct.OpCodeProtocolType
+  id: OpCodeProtocolType
+  parent: Fantasy.Network.OpCodeIdStruct
+  langs:
+  - csharp
+  - vb
+  name: OpCodeProtocolType
+  nameWithType: OpCodeIdStruct.OpCodeProtocolType
+  fullName: Fantasy.Network.OpCodeIdStruct.OpCodeProtocolType
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OpCodeProtocolType
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+    startLine: 9
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  syntax:
+    content: public readonly uint OpCodeProtocolType { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public Property OpCodeProtocolType As UInteger
+  overload: Fantasy.Network.OpCodeIdStruct.OpCodeProtocolType*
+- uid: Fantasy.Network.OpCodeIdStruct.Protocol
+  commentId: P:Fantasy.Network.OpCodeIdStruct.Protocol
+  id: Protocol
+  parent: Fantasy.Network.OpCodeIdStruct
+  langs:
+  - csharp
+  - vb
+  name: Protocol
+  nameWithType: OpCodeIdStruct.Protocol
+  fullName: Fantasy.Network.OpCodeIdStruct.Protocol
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Protocol
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+    startLine: 10
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  syntax:
+    content: public readonly uint Protocol { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public Property Protocol As UInteger
+  overload: Fantasy.Network.OpCodeIdStruct.Protocol*
+- uid: Fantasy.Network.OpCodeIdStruct.Index
+  commentId: P:Fantasy.Network.OpCodeIdStruct.Index
+  id: Index
+  parent: Fantasy.Network.OpCodeIdStruct
+  langs:
+  - csharp
+  - vb
+  name: Index
+  nameWithType: OpCodeIdStruct.Index
+  fullName: Fantasy.Network.OpCodeIdStruct.Index
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Index
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+    startLine: 11
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  syntax:
+    content: public readonly uint Index { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public Property Index As UInteger
+  overload: Fantasy.Network.OpCodeIdStruct.Index*
+- uid: Fantasy.Network.OpCodeIdStruct.#ctor(System.UInt32,System.UInt32,System.UInt32)
+  commentId: M:Fantasy.Network.OpCodeIdStruct.#ctor(System.UInt32,System.UInt32,System.UInt32)
+  id: '#ctor(System.UInt32,System.UInt32,System.UInt32)'
+  parent: Fantasy.Network.OpCodeIdStruct
+  langs:
+  - csharp
+  - vb
+  name: OpCodeIdStruct(uint, uint, uint)
+  nameWithType: OpCodeIdStruct.OpCodeIdStruct(uint, uint, uint)
+  fullName: Fantasy.Network.OpCodeIdStruct.OpCodeIdStruct(uint, uint, uint)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+    startLine: 13
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  syntax:
+    content: public OpCodeIdStruct(uint opCodeProtocolType, uint protocol, uint index)
+    parameters:
+    - id: opCodeProtocolType
+      type: System.UInt32
+    - id: protocol
+      type: System.UInt32
+    - id: index
+      type: System.UInt32
+    content.vb: Public Sub New(opCodeProtocolType As UInteger, protocol As UInteger, index As UInteger)
+  overload: Fantasy.Network.OpCodeIdStruct.#ctor*
+  nameWithType.vb: OpCodeIdStruct.New(UInteger, UInteger, UInteger)
+  fullName.vb: Fantasy.Network.OpCodeIdStruct.New(UInteger, UInteger, UInteger)
+  name.vb: New(UInteger, UInteger, UInteger)
+- uid: Fantasy.Network.OpCodeIdStruct.op_Implicit(Fantasy.Network.OpCodeIdStruct)~System.UInt32
+  commentId: M:Fantasy.Network.OpCodeIdStruct.op_Implicit(Fantasy.Network.OpCodeIdStruct)~System.UInt32
+  id: op_Implicit(Fantasy.Network.OpCodeIdStruct)~System.UInt32
+  parent: Fantasy.Network.OpCodeIdStruct
+  langs:
+  - csharp
+  - vb
+  name: implicit operator uint(OpCodeIdStruct)
+  nameWithType: OpCodeIdStruct.implicit operator uint(OpCodeIdStruct)
+  fullName: Fantasy.Network.OpCodeIdStruct.implicit operator uint(Fantasy.Network.OpCodeIdStruct)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Implicit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+    startLine: 20
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  syntax:
+    content: public static implicit operator uint(OpCodeIdStruct opCodeIdStruct)
+    parameters:
+    - id: opCodeIdStruct
+      type: Fantasy.Network.OpCodeIdStruct
+    return:
+      type: System.UInt32
+    content.vb: Public Shared Widening Operator CType(opCodeIdStruct As OpCodeIdStruct) As UInteger
+  overload: Fantasy.Network.OpCodeIdStruct.op_Implicit*
+  nameWithType.vb: OpCodeIdStruct.CType(OpCodeIdStruct)
+  fullName.vb: Fantasy.Network.OpCodeIdStruct.CType(Fantasy.Network.OpCodeIdStruct)
+  name.vb: CType(OpCodeIdStruct)
+- uid: Fantasy.Network.OpCodeIdStruct.op_Implicit(System.UInt32)~Fantasy.Network.OpCodeIdStruct
+  commentId: M:Fantasy.Network.OpCodeIdStruct.op_Implicit(System.UInt32)~Fantasy.Network.OpCodeIdStruct
+  id: op_Implicit(System.UInt32)~Fantasy.Network.OpCodeIdStruct
+  parent: Fantasy.Network.OpCodeIdStruct
+  langs:
+  - csharp
+  - vb
+  name: implicit operator OpCodeIdStruct(uint)
+  nameWithType: OpCodeIdStruct.implicit operator OpCodeIdStruct(uint)
+  fullName: Fantasy.Network.OpCodeIdStruct.implicit operator Fantasy.Network.OpCodeIdStruct(uint)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Implicit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
+    startLine: 28
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  syntax:
+    content: public static implicit operator OpCodeIdStruct(uint opCodeId)
+    parameters:
+    - id: opCodeId
+      type: System.UInt32
+    return:
+      type: Fantasy.Network.OpCodeIdStruct
+    content.vb: Public Shared Widening Operator CType(opCodeId As UInteger) As OpCodeIdStruct
+  overload: Fantasy.Network.OpCodeIdStruct.op_Implicit*
+  nameWithType.vb: OpCodeIdStruct.CType(UInteger)
+  fullName.vb: Fantasy.Network.OpCodeIdStruct.CType(UInteger)
+  name.vb: CType(UInteger)
+references:
+- uid: Fantasy.Network
+  commentId: N:Fantasy.Network
+  href: Fantasy.html
+  name: Fantasy.Network
+  nameWithType: Fantasy.Network
+  fullName: Fantasy.Network
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.Network.OpCodeIdStruct.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<OpCodeIdStruct>(OpCodeIdStruct)
+  nameWithType: JsonHelper.ToJson<OpCodeIdStruct>(OpCodeIdStruct)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.OpCodeIdStruct>(Fantasy.Network.OpCodeIdStruct)
+  nameWithType.vb: JsonHelper.ToJson(Of OpCodeIdStruct)(OpCodeIdStruct)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.OpCodeIdStruct)(Fantasy.Network.OpCodeIdStruct)
+  name.vb: ToJson(Of OpCodeIdStruct)(OpCodeIdStruct)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.OpCodeIdStruct)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.OpCodeIdStruct
+    name: OpCodeIdStruct
+    href: Fantasy.Network.OpCodeIdStruct.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.OpCodeIdStruct
+    name: OpCodeIdStruct
+    href: Fantasy.Network.OpCodeIdStruct.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.OpCodeIdStruct)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.OpCodeIdStruct
+    name: OpCodeIdStruct
+    href: Fantasy.Network.OpCodeIdStruct.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.OpCodeIdStruct
+    name: OpCodeIdStruct
+    href: Fantasy.Network.OpCodeIdStruct.html
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Network.OpCodeIdStruct.OpCodeProtocolType*
+  commentId: Overload:Fantasy.Network.OpCodeIdStruct.OpCodeProtocolType
+  href: Fantasy.Network.OpCodeIdStruct.html#Fantasy_Network_OpCodeIdStruct_OpCodeProtocolType
+  name: OpCodeProtocolType
+  nameWithType: OpCodeIdStruct.OpCodeProtocolType
+  fullName: Fantasy.Network.OpCodeIdStruct.OpCodeProtocolType
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: Fantasy.Network.OpCodeIdStruct.Protocol*
+  commentId: Overload:Fantasy.Network.OpCodeIdStruct.Protocol
+  href: Fantasy.Network.OpCodeIdStruct.html#Fantasy_Network_OpCodeIdStruct_Protocol
+  name: Protocol
+  nameWithType: OpCodeIdStruct.Protocol
+  fullName: Fantasy.Network.OpCodeIdStruct.Protocol
+- uid: Fantasy.Network.OpCodeIdStruct.Index*
+  commentId: Overload:Fantasy.Network.OpCodeIdStruct.Index
+  href: Fantasy.Network.OpCodeIdStruct.html#Fantasy_Network_OpCodeIdStruct_Index
+  name: Index
+  nameWithType: OpCodeIdStruct.Index
+  fullName: Fantasy.Network.OpCodeIdStruct.Index
+- uid: Fantasy.Network.OpCodeIdStruct.#ctor*
+  commentId: Overload:Fantasy.Network.OpCodeIdStruct.#ctor
+  href: Fantasy.Network.OpCodeIdStruct.html#Fantasy_Network_OpCodeIdStruct__ctor_System_UInt32_System_UInt32_System_UInt32_
+  name: OpCodeIdStruct
+  nameWithType: OpCodeIdStruct.OpCodeIdStruct
+  fullName: Fantasy.Network.OpCodeIdStruct.OpCodeIdStruct
+  nameWithType.vb: OpCodeIdStruct.New
+  fullName.vb: Fantasy.Network.OpCodeIdStruct.New
+  name.vb: New
+- uid: Fantasy.Network.OpCodeIdStruct.op_Implicit*
+  commentId: Overload:Fantasy.Network.OpCodeIdStruct.op_Implicit
+  name: implicit operator
+  nameWithType: OpCodeIdStruct.implicit operator
+  fullName: Fantasy.Network.OpCodeIdStruct.implicit operator
+  nameWithType.vb: OpCodeIdStruct.CType
+  fullName.vb: Fantasy.Network.OpCodeIdStruct.CType
+  name.vb: CType
+  spec.csharp:
+  - name: implicit
+  - name: " "
+  - name: operator
+- uid: Fantasy.Network.OpCodeIdStruct
+  commentId: T:Fantasy.Network.OpCodeIdStruct
+  parent: Fantasy.Network
+  href: Fantasy.Network.OpCodeIdStruct.html
+  name: OpCodeIdStruct
+  nameWithType: OpCodeIdStruct
+  fullName: Fantasy.Network.OpCodeIdStruct

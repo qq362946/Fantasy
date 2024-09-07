@@ -1,0 +1,133 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.DataStructure.PriorityQueue
+  commentId: N:Fantasy.DataStructure.PriorityQueue
+  id: PriorityQueue
+  parent: Fantasy.DataStructure
+  children:
+  - Fantasy.DataStructure.PriorityQueue.PriorityQueueItemUint`1
+  - Fantasy.DataStructure.PriorityQueue.PriorityQueueItem`2
+  - Fantasy.DataStructure.PriorityQueue.PriorityQueue`1
+  - Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.DataStructure.PriorityQueue
+  nameWithType: Fantasy.DataStructure.PriorityQueue
+  fullName: Fantasy.DataStructure.PriorityQueue
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueueItemUint`1
+  commentId: T:Fantasy.DataStructure.PriorityQueue.PriorityQueueItemUint`1
+  href: Fantasy.DataStructure.PriorityQueue.PriorityQueueItemUint-1.html
+  name: PriorityQueueItemUint<T>
+  nameWithType: PriorityQueueItemUint<T>
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueueItemUint<T>
+  nameWithType.vb: PriorityQueueItemUint(Of T)
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueueItemUint(Of T)
+  name.vb: PriorityQueueItemUint(Of T)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueueItemUint`1
+    name: PriorityQueueItemUint
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueueItemUint-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueueItemUint`1
+    name: PriorityQueueItemUint
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueueItemUint-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueueItem`2
+  commentId: T:Fantasy.DataStructure.PriorityQueue.PriorityQueueItem`2
+  href: Fantasy.DataStructure.PriorityQueue.PriorityQueueItem-2.html
+  name: PriorityQueueItem<T, T1>
+  nameWithType: PriorityQueueItem<T, T1>
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueueItem<T, T1>
+  nameWithType.vb: PriorityQueueItem(Of T, T1)
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueueItem(Of T, T1)
+  name.vb: PriorityQueueItem(Of T, T1)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueueItem`2
+    name: PriorityQueueItem
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueueItem-2.html
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueueItem`2
+    name: PriorityQueueItem
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueueItem-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: )
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`1
+  commentId: T:Fantasy.DataStructure.PriorityQueue.PriorityQueue`1
+  href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-1.html
+  name: PriorityQueue<T>
+  nameWithType: PriorityQueue<T>
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<T>
+  nameWithType.vb: PriorityQueue(Of T)
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of T)
+  name.vb: PriorityQueue(Of T)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`1
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`1
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+  commentId: T:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+  href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html
+  name: PriorityQueue<TElement, TPriority>
+  nameWithType: PriorityQueue<TElement, TPriority>
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority)
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority)
+  name.vb: PriorityQueue(Of TElement, TPriority)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )

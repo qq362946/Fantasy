@@ -1,0 +1,1594 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeArrayPool`1
+  commentId: T:NativeCollections.NativeArrayPool`1
+  id: NativeArrayPool`1
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeArrayPool`1.#ctor(System.Int32,System.Int32)
+  - NativeCollections.NativeArrayPool`1.Dispose
+  - NativeCollections.NativeArrayPool`1.Empty
+  - NativeCollections.NativeArrayPool`1.Equals(NativeCollections.NativeArrayPool{`0})
+  - NativeCollections.NativeArrayPool`1.Equals(System.Object)
+  - NativeCollections.NativeArrayPool`1.GetHashCode
+  - NativeCollections.NativeArrayPool`1.IsCreated
+  - NativeCollections.NativeArrayPool`1.MaxLength
+  - NativeCollections.NativeArrayPool`1.Rent(System.Int32)
+  - NativeCollections.NativeArrayPool`1.Return(NativeCollections.NativeArray{`0}@)
+  - NativeCollections.NativeArrayPool`1.Return(System.Int32,`0*)
+  - NativeCollections.NativeArrayPool`1.Size
+  - NativeCollections.NativeArrayPool`1.ToString
+  - NativeCollections.NativeArrayPool`1.TryRent(System.Int32,NativeCollections.NativeArray{`0}@)
+  - NativeCollections.NativeArrayPool`1.TryReturn(NativeCollections.NativeArray{`0}@)
+  - NativeCollections.NativeArrayPool`1.TryReturn(System.Int32,`0*)
+  - NativeCollections.NativeArrayPool`1.op_Equality(NativeCollections.NativeArrayPool{`0},NativeCollections.NativeArrayPool{`0})
+  - NativeCollections.NativeArrayPool`1.op_Inequality(NativeCollections.NativeArrayPool{`0},NativeCollections.NativeArrayPool{`0})
+  langs:
+  - csharp
+  - vb
+  name: NativeArrayPool<T>
+  nameWithType: NativeArrayPool<T>
+  fullName: NativeCollections.NativeArrayPool<T>
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeArrayPool
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 24
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: NativeMemoryPool
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeArrayPool<T> : IDisposable, IEquatable<NativeArrayPool<T>> where T : unmanaged
+    typeParameters:
+    - id: T
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeArrayPool(Of T As Structure) Implements IDisposable, IEquatable(Of NativeArrayPool(Of T))
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeArrayPool`1}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeArrayPool`1.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+  nameWithType.vb: NativeArrayPool(Of T)
+  fullName.vb: NativeCollections.NativeArrayPool(Of T)
+  name.vb: NativeArrayPool(Of T)
+- uid: NativeCollections.NativeArrayPool`1.#ctor(System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeArrayPool`1.#ctor(System.Int32,System.Int32)
+  id: '#ctor(System.Int32,System.Int32)'
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: NativeArrayPool(int, int)
+  nameWithType: NativeArrayPool<T>.NativeArrayPool(int, int)
+  fullName: NativeCollections.NativeArrayPool<T>.NativeArrayPool(int, int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 47
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeArrayPool(int size, int maxLength)
+    parameters:
+    - id: size
+      type: System.Int32
+      description: Size
+    - id: maxLength
+      type: System.Int32
+      description: Max length
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(size As Integer, maxLength As Integer)
+  overload: NativeCollections.NativeArrayPool`1.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayPool(Of T).New(Integer, Integer)
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).New(Integer, Integer)
+  name.vb: New(Integer, Integer)
+- uid: NativeCollections.NativeArrayPool`1.IsCreated
+  commentId: P:NativeCollections.NativeArrayPool`1.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeArrayPool<T>.IsCreated
+  fullName: NativeCollections.NativeArrayPool<T>.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 70
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeArrayPool`1.IsCreated*
+  nameWithType.vb: NativeArrayPool(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).IsCreated
+- uid: NativeCollections.NativeArrayPool`1.Size
+  commentId: P:NativeCollections.NativeArrayPool`1.Size
+  id: Size
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: Size
+  nameWithType: NativeArrayPool<T>.Size
+  fullName: NativeCollections.NativeArrayPool<T>.Size
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Size
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 75
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Size
+  example: []
+  syntax:
+    content: public int Size { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Size As Integer
+  overload: NativeCollections.NativeArrayPool`1.Size*
+  nameWithType.vb: NativeArrayPool(Of T).Size
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Size
+- uid: NativeCollections.NativeArrayPool`1.MaxLength
+  commentId: P:NativeCollections.NativeArrayPool`1.MaxLength
+  id: MaxLength
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: MaxLength
+  nameWithType: NativeArrayPool<T>.MaxLength
+  fullName: NativeCollections.NativeArrayPool<T>.MaxLength
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MaxLength
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 80
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Max length
+  example: []
+  syntax:
+    content: public int MaxLength { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property MaxLength As Integer
+  overload: NativeCollections.NativeArrayPool`1.MaxLength*
+  nameWithType.vb: NativeArrayPool(Of T).MaxLength
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).MaxLength
+- uid: NativeCollections.NativeArrayPool`1.Equals(NativeCollections.NativeArrayPool{`0})
+  commentId: M:NativeCollections.NativeArrayPool`1.Equals(NativeCollections.NativeArrayPool{`0})
+  id: Equals(NativeCollections.NativeArrayPool{`0})
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeArrayPool<T>)
+  nameWithType: NativeArrayPool<T>.Equals(NativeArrayPool<T>)
+  fullName: NativeCollections.NativeArrayPool<T>.Equals(NativeCollections.NativeArrayPool<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 87
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeArrayPool<T> other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeArrayPool`1
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeArrayPool(Of T)) As Boolean
+  overload: NativeCollections.NativeArrayPool`1.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeArrayPool`1}.Equals(NativeCollections.NativeArrayPool{{T}})
+  nameWithType.vb: NativeArrayPool(Of T).Equals(NativeArrayPool(Of T))
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Equals(NativeCollections.NativeArrayPool(Of T))
+  name.vb: Equals(NativeArrayPool(Of T))
+- uid: NativeCollections.NativeArrayPool`1.Equals(System.Object)
+  commentId: M:NativeCollections.NativeArrayPool`1.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeArrayPool<T>.Equals(object?)
+  fullName: NativeCollections.NativeArrayPool<T>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 94
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeArrayPool`1.Equals*
+  nameWithType.vb: NativeArrayPool(Of T).Equals(Object)
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeArrayPool`1.GetHashCode
+  commentId: M:NativeCollections.NativeArrayPool`1.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeArrayPool<T>.GetHashCode()
+  fullName: NativeCollections.NativeArrayPool<T>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 100
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeArrayPool`1.GetHashCode*
+  nameWithType.vb: NativeArrayPool(Of T).GetHashCode()
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).GetHashCode()
+- uid: NativeCollections.NativeArrayPool`1.ToString
+  commentId: M:NativeCollections.NativeArrayPool`1.ToString
+  id: ToString
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeArrayPool<T>.ToString()
+  fullName: NativeCollections.NativeArrayPool<T>.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 106
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeArrayPool`1.ToString*
+  nameWithType.vb: NativeArrayPool(Of T).ToString()
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).ToString()
+- uid: NativeCollections.NativeArrayPool`1.op_Equality(NativeCollections.NativeArrayPool{`0},NativeCollections.NativeArrayPool{`0})
+  commentId: M:NativeCollections.NativeArrayPool`1.op_Equality(NativeCollections.NativeArrayPool{`0},NativeCollections.NativeArrayPool{`0})
+  id: op_Equality(NativeCollections.NativeArrayPool{`0},NativeCollections.NativeArrayPool{`0})
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeArrayPool<T>, NativeArrayPool<T>)
+  nameWithType: NativeArrayPool<T>.operator ==(NativeArrayPool<T>, NativeArrayPool<T>)
+  fullName: NativeCollections.NativeArrayPool<T>.operator ==(NativeCollections.NativeArrayPool<T>, NativeCollections.NativeArrayPool<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 114
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeArrayPool<T> left, NativeArrayPool<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeArrayPool`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeArrayPool`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeArrayPool(Of T), right As NativeArrayPool(Of T)) As Boolean
+  overload: NativeCollections.NativeArrayPool`1.op_Equality*
+  nameWithType.vb: NativeArrayPool(Of T).=(NativeArrayPool(Of T), NativeArrayPool(Of T))
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).=(NativeCollections.NativeArrayPool(Of T), NativeCollections.NativeArrayPool(Of T))
+  name.vb: =(NativeArrayPool(Of T), NativeArrayPool(Of T))
+- uid: NativeCollections.NativeArrayPool`1.op_Inequality(NativeCollections.NativeArrayPool{`0},NativeCollections.NativeArrayPool{`0})
+  commentId: M:NativeCollections.NativeArrayPool`1.op_Inequality(NativeCollections.NativeArrayPool{`0},NativeCollections.NativeArrayPool{`0})
+  id: op_Inequality(NativeCollections.NativeArrayPool{`0},NativeCollections.NativeArrayPool{`0})
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeArrayPool<T>, NativeArrayPool<T>)
+  nameWithType: NativeArrayPool<T>.operator !=(NativeArrayPool<T>, NativeArrayPool<T>)
+  fullName: NativeCollections.NativeArrayPool<T>.operator !=(NativeCollections.NativeArrayPool<T>, NativeCollections.NativeArrayPool<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 122
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeArrayPool<T> left, NativeArrayPool<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeArrayPool`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeArrayPool`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeArrayPool(Of T), right As NativeArrayPool(Of T)) As Boolean
+  overload: NativeCollections.NativeArrayPool`1.op_Inequality*
+  nameWithType.vb: NativeArrayPool(Of T).<>(NativeArrayPool(Of T), NativeArrayPool(Of T))
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).<>(NativeCollections.NativeArrayPool(Of T), NativeCollections.NativeArrayPool(Of T))
+  name.vb: <>(NativeArrayPool(Of T), NativeArrayPool(Of T))
+- uid: NativeCollections.NativeArrayPool`1.Dispose
+  commentId: M:NativeCollections.NativeArrayPool`1.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeArrayPool<T>.Dispose()
+  fullName: NativeCollections.NativeArrayPool<T>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 127
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeArrayPool`1.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayPool(Of T).Dispose()
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Dispose()
+- uid: NativeCollections.NativeArrayPool`1.Rent(System.Int32)
+  commentId: M:NativeCollections.NativeArrayPool`1.Rent(System.Int32)
+  id: Rent(System.Int32)
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: Rent(int)
+  nameWithType: NativeArrayPool<T>.Rent(int)
+  fullName: NativeCollections.NativeArrayPool<T>.Rent(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Rent
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 142
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Rent buffer
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeArray<T> Rent(int minimumLength)
+    parameters:
+    - id: minimumLength
+      type: System.Int32
+      description: Minimum buffer length
+    return:
+      type: NativeCollections.NativeArray{{T}}
+      description: Buffer
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Rent(minimumLength As Integer) As NativeArray(Of T)
+  overload: NativeCollections.NativeArrayPool`1.Rent*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayPool(Of T).Rent(Integer)
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Rent(Integer)
+  name.vb: Rent(Integer)
+- uid: NativeCollections.NativeArrayPool`1.TryRent(System.Int32,NativeCollections.NativeArray{`0}@)
+  commentId: M:NativeCollections.NativeArrayPool`1.TryRent(System.Int32,NativeCollections.NativeArray{`0}@)
+  id: TryRent(System.Int32,NativeCollections.NativeArray{`0}@)
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: TryRent(int, out NativeArray<T>)
+  nameWithType: NativeArrayPool<T>.TryRent(int, out NativeArray<T>)
+  fullName: NativeCollections.NativeArrayPool<T>.TryRent(int, out NativeCollections.NativeArray<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryRent
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 159
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Rent buffer
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryRent(int minimumLength, out NativeArray<T> array)
+    parameters:
+    - id: minimumLength
+      type: System.Int32
+      description: Minimum buffer length
+    - id: array
+      type: NativeCollections.NativeArray{{T}}
+      description: Buffer
+    return:
+      type: System.Boolean
+      description: Rented
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryRent(minimumLength As Integer, array As NativeArray(Of T)) As Boolean
+  overload: NativeCollections.NativeArrayPool`1.TryRent*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayPool(Of T).TryRent(Integer, NativeArray(Of T))
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).TryRent(Integer, NativeCollections.NativeArray(Of T))
+  name.vb: TryRent(Integer, NativeArray(Of T))
+- uid: NativeCollections.NativeArrayPool`1.Return(NativeCollections.NativeArray{`0}@)
+  commentId: M:NativeCollections.NativeArrayPool`1.Return(NativeCollections.NativeArray{`0}@)
+  id: Return(NativeCollections.NativeArray{`0}@)
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: Return(in NativeArray<T>)
+  nameWithType: NativeArrayPool<T>.Return(in NativeArray<T>)
+  fullName: NativeCollections.NativeArrayPool<T>.Return(in NativeCollections.NativeArray<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Return
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 183
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Return buffer
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Return(in NativeArray<T> array)
+    parameters:
+    - id: array
+      type: NativeCollections.NativeArray{{T}}
+      description: Buffer
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub [Return](array As NativeArray(Of T))
+  overload: NativeCollections.NativeArrayPool`1.Return*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayPool(Of T).Return(NativeArray(Of T))
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Return(NativeCollections.NativeArray(Of T))
+  name.vb: Return(NativeArray(Of T))
+- uid: NativeCollections.NativeArrayPool`1.TryReturn(NativeCollections.NativeArray{`0}@)
+  commentId: M:NativeCollections.NativeArrayPool`1.TryReturn(NativeCollections.NativeArray{`0}@)
+  id: TryReturn(NativeCollections.NativeArray{`0}@)
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: TryReturn(in NativeArray<T>)
+  nameWithType: NativeArrayPool<T>.TryReturn(in NativeArray<T>)
+  fullName: NativeCollections.NativeArrayPool<T>.TryReturn(in NativeCollections.NativeArray<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryReturn
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 200
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try return buffer
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryReturn(in NativeArray<T> array)
+    parameters:
+    - id: array
+      type: NativeCollections.NativeArray{{T}}
+      description: Buffer
+    return:
+      type: System.Boolean
+      description: Returned
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryReturn(array As NativeArray(Of T)) As Boolean
+  overload: NativeCollections.NativeArrayPool`1.TryReturn*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayPool(Of T).TryReturn(NativeArray(Of T))
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).TryReturn(NativeCollections.NativeArray(Of T))
+  name.vb: TryReturn(NativeArray(Of T))
+- uid: NativeCollections.NativeArrayPool`1.Return(System.Int32,`0*)
+  commentId: M:NativeCollections.NativeArrayPool`1.Return(System.Int32,`0*)
+  id: Return(System.Int32,`0*)
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: Return(int, T*)
+  nameWithType: NativeArrayPool<T>.Return(int, T*)
+  fullName: NativeCollections.NativeArrayPool<T>.Return(int, T*)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Return
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 218
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Return buffer
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Return(int length, T* array)
+    parameters:
+    - id: length
+      type: System.Int32
+      description: Length
+    - id: array
+      type: '{T}*'
+      description: Buffer
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub [Return](length As Integer, array As T*)
+  overload: NativeCollections.NativeArrayPool`1.Return*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayPool(Of T).Return(Integer, T*)
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Return(Integer, T*)
+  name.vb: Return(Integer, T*)
+- uid: NativeCollections.NativeArrayPool`1.TryReturn(System.Int32,`0*)
+  commentId: M:NativeCollections.NativeArrayPool`1.TryReturn(System.Int32,`0*)
+  id: TryReturn(System.Int32,`0*)
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: TryReturn(int, T*)
+  nameWithType: NativeArrayPool<T>.TryReturn(int, T*)
+  fullName: NativeCollections.NativeArrayPool<T>.TryReturn(int, T*)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryReturn
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 235
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try return buffer
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryReturn(int length, T* array)
+    parameters:
+    - id: length
+      type: System.Int32
+      description: Length
+    - id: array
+      type: '{T}*'
+      description: Buffer
+    return:
+      type: System.Boolean
+      description: Returned
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryReturn(length As Integer, array As T*) As Boolean
+  overload: NativeCollections.NativeArrayPool`1.TryReturn*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeArrayPool(Of T).TryReturn(Integer, T*)
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).TryReturn(Integer, T*)
+  name.vb: TryReturn(Integer, T*)
+- uid: NativeCollections.NativeArrayPool`1.Empty
+  commentId: P:NativeCollections.NativeArrayPool`1.Empty
+  id: Empty
+  parent: NativeCollections.NativeArrayPool`1
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeArrayPool<T>.Empty
+  fullName: NativeCollections.NativeArrayPool<T>.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeArrayPool.cs
+    startLine: 258
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeArrayPool<T> Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeArrayPool`1
+    content.vb: Public Shared ReadOnly Property Empty As NativeArrayPool(Of T)
+  overload: NativeCollections.NativeArrayPool`1.Empty*
+  nameWithType.vb: NativeArrayPool(Of T).Empty
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Empty
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeArrayPool`1}
+  commentId: T:System.IEquatable{NativeCollections.NativeArrayPool`1}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeArrayPool<T>>
+  nameWithType: IEquatable<NativeArrayPool<T>>
+  fullName: System.IEquatable<NativeCollections.NativeArrayPool<T>>
+  nameWithType.vb: IEquatable(Of NativeArrayPool(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeArrayPool(Of T))
+  name.vb: IEquatable(Of NativeArrayPool(Of T))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeArrayPool`1.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeArrayPool<T>>(NativeArrayPool<T>)
+  nameWithType: JsonHelper.ToJson<NativeArrayPool<T>>(NativeArrayPool<T>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeArrayPool<T>>(NativeCollections.NativeArrayPool<T>)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeArrayPool(Of T))(NativeArrayPool(Of T))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeArrayPool(Of T))(NativeCollections.NativeArrayPool(Of T))
+  name.vb: ToJson(Of NativeArrayPool(Of T))(NativeArrayPool(Of T))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeArrayPool{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeArrayPool{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeArrayPool`1.#ctor*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.#ctor
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1__ctor_System_Int32_System_Int32_
+  name: NativeArrayPool
+  nameWithType: NativeArrayPool<T>.NativeArrayPool
+  fullName: NativeCollections.NativeArrayPool<T>.NativeArrayPool
+  nameWithType.vb: NativeArrayPool(Of T).New
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativeArrayPool`1.IsCreated*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.IsCreated
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_IsCreated
+  name: IsCreated
+  nameWithType: NativeArrayPool<T>.IsCreated
+  fullName: NativeCollections.NativeArrayPool<T>.IsCreated
+  nameWithType.vb: NativeArrayPool(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeArrayPool`1.Size*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.Size
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_Size
+  name: Size
+  nameWithType: NativeArrayPool<T>.Size
+  fullName: NativeCollections.NativeArrayPool<T>.Size
+  nameWithType.vb: NativeArrayPool(Of T).Size
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Size
+- uid: NativeCollections.NativeArrayPool`1.MaxLength*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.MaxLength
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_MaxLength
+  name: MaxLength
+  nameWithType: NativeArrayPool<T>.MaxLength
+  fullName: NativeCollections.NativeArrayPool<T>.MaxLength
+  nameWithType.vb: NativeArrayPool(Of T).MaxLength
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).MaxLength
+- uid: NativeCollections.NativeArrayPool`1.Equals*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.Equals
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_Equals_NativeCollections_NativeArrayPool__0__
+  name: Equals
+  nameWithType: NativeArrayPool<T>.Equals
+  fullName: NativeCollections.NativeArrayPool<T>.Equals
+  nameWithType.vb: NativeArrayPool(Of T).Equals
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Equals
+- uid: System.IEquatable{NativeCollections.NativeArrayPool`1}.Equals(NativeCollections.NativeArrayPool{{T}})
+  commentId: M:System.IEquatable{NativeCollections.NativeArrayPool`1}.Equals(NativeCollections.NativeArrayPool{`0})
+  parent: System.IEquatable{NativeCollections.NativeArrayPool`1}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeArrayPool<T>)
+  nameWithType: IEquatable<NativeArrayPool<T>>.Equals(NativeArrayPool<T>)
+  fullName: System.IEquatable<NativeCollections.NativeArrayPool<T>>.Equals(NativeCollections.NativeArrayPool<T>)
+  nameWithType.vb: IEquatable(Of NativeArrayPool(Of T)).Equals(NativeArrayPool(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeArrayPool(Of T)).Equals(NativeCollections.NativeArrayPool(Of T))
+  name.vb: Equals(NativeArrayPool(Of T))
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeArrayPool`1}.Equals(NativeCollections.NativeArrayPool{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeArrayPool`1}.Equals(NativeCollections.NativeArrayPool{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: NativeCollections.NativeArrayPool`1
+  commentId: T:NativeCollections.NativeArrayPool`1
+  parent: NativeCollections
+  href: NativeCollections.NativeArrayPool-1.html
+  name: NativeArrayPool<T>
+  nameWithType: NativeArrayPool<T>
+  fullName: NativeCollections.NativeArrayPool<T>
+  nameWithType.vb: NativeArrayPool(Of T)
+  fullName.vb: NativeCollections.NativeArrayPool(Of T)
+  name.vb: NativeArrayPool(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeArrayPool`1
+    name: NativeArrayPool
+    href: NativeCollections.NativeArrayPool-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeArrayPool`1.GetHashCode*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.GetHashCode
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeArrayPool<T>.GetHashCode
+  fullName: NativeCollections.NativeArrayPool<T>.GetHashCode
+  nameWithType.vb: NativeArrayPool(Of T).GetHashCode
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeArrayPool`1.ToString*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.ToString
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_ToString
+  name: ToString
+  nameWithType: NativeArrayPool<T>.ToString
+  fullName: NativeCollections.NativeArrayPool<T>.ToString
+  nameWithType.vb: NativeArrayPool(Of T).ToString
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeArrayPool`1.op_Equality*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.op_Equality
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_op_Equality_NativeCollections_NativeArrayPool__0__NativeCollections_NativeArrayPool__0__
+  name: operator ==
+  nameWithType: NativeArrayPool<T>.operator ==
+  fullName: NativeCollections.NativeArrayPool<T>.operator ==
+  nameWithType.vb: NativeArrayPool(Of T).=
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeArrayPool`1.op_Equality*
+    name: ==
+    href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_op_Equality_NativeCollections_NativeArrayPool__0__NativeCollections_NativeArrayPool__0__
+- uid: NativeCollections.NativeArrayPool`1.op_Inequality*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.op_Inequality
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_op_Inequality_NativeCollections_NativeArrayPool__0__NativeCollections_NativeArrayPool__0__
+  name: operator !=
+  nameWithType: NativeArrayPool<T>.operator !=
+  fullName: NativeCollections.NativeArrayPool<T>.operator !=
+  nameWithType.vb: NativeArrayPool(Of T).<>
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeArrayPool`1.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_op_Inequality_NativeCollections_NativeArrayPool__0__NativeCollections_NativeArrayPool__0__
+- uid: NativeCollections.NativeArrayPool`1.Dispose*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.Dispose
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_Dispose
+  name: Dispose
+  nameWithType: NativeArrayPool<T>.Dispose
+  fullName: NativeCollections.NativeArrayPool<T>.Dispose
+  nameWithType.vb: NativeArrayPool(Of T).Dispose
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeArrayPool`1.Rent*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.Rent
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_Rent_System_Int32_
+  name: Rent
+  nameWithType: NativeArrayPool<T>.Rent
+  fullName: NativeCollections.NativeArrayPool<T>.Rent
+  nameWithType.vb: NativeArrayPool(Of T).Rent
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Rent
+- uid: NativeCollections.NativeArray{{T}}
+  commentId: T:NativeCollections.NativeArray{`0}
+  parent: NativeCollections
+  definition: NativeCollections.NativeArray`1
+  href: NativeCollections.NativeArray-1.html
+  name: NativeArray<T>
+  nameWithType: NativeArray<T>
+  fullName: NativeCollections.NativeArray<T>
+  nameWithType.vb: NativeArray(Of T)
+  fullName.vb: NativeCollections.NativeArray(Of T)
+  name.vb: NativeArray(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeArray`1
+    name: NativeArray
+    href: NativeCollections.NativeArray-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeArray`1
+    name: NativeArray
+    href: NativeCollections.NativeArray-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeArray`1
+  commentId: T:NativeCollections.NativeArray`1
+  parent: NativeCollections
+  href: NativeCollections.NativeArray-1.html
+  name: NativeArray<T>
+  nameWithType: NativeArray<T>
+  fullName: NativeCollections.NativeArray<T>
+  nameWithType.vb: NativeArray(Of T)
+  fullName.vb: NativeCollections.NativeArray(Of T)
+  name.vb: NativeArray(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeArray`1
+    name: NativeArray
+    href: NativeCollections.NativeArray-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeArray`1
+    name: NativeArray
+    href: NativeCollections.NativeArray-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: NativeCollections.NativeArrayPool`1.TryRent*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.TryRent
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_TryRent_System_Int32_NativeCollections_NativeArray__0___
+  name: TryRent
+  nameWithType: NativeArrayPool<T>.TryRent
+  fullName: NativeCollections.NativeArrayPool<T>.TryRent
+  nameWithType.vb: NativeArrayPool(Of T).TryRent
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).TryRent
+- uid: NativeCollections.NativeArrayPool`1.Return*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.Return
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_Return_NativeCollections_NativeArray__0___
+  name: Return
+  nameWithType: NativeArrayPool<T>.Return
+  fullName: NativeCollections.NativeArrayPool<T>.Return
+  nameWithType.vb: NativeArrayPool(Of T).Return
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Return
+- uid: NativeCollections.NativeArrayPool`1.TryReturn*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.TryReturn
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_TryReturn_NativeCollections_NativeArray__0___
+  name: TryReturn
+  nameWithType: NativeArrayPool<T>.TryReturn
+  fullName: NativeCollections.NativeArrayPool<T>.TryReturn
+  nameWithType.vb: NativeArrayPool(Of T).TryReturn
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).TryReturn
+- uid: '{T}*'
+  isExternal: true
+  name: T*
+  nameWithType: T*
+  fullName: T*
+  spec.csharp:
+  - name: T
+  - name: '*'
+  spec.vb:
+  - name: T
+  - name: '*'
+- uid: NativeCollections.NativeArrayPool`1.Empty*
+  commentId: Overload:NativeCollections.NativeArrayPool`1.Empty
+  href: NativeCollections.NativeArrayPool-1.html#NativeCollections_NativeArrayPool_1_Empty
+  name: Empty
+  nameWithType: NativeArrayPool<T>.Empty
+  fullName: NativeCollections.NativeArrayPool<T>.Empty
+  nameWithType.vb: NativeArrayPool(Of T).Empty
+  fullName.vb: NativeCollections.NativeArrayPool(Of T).Empty

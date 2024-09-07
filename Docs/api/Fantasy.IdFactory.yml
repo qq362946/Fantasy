@@ -1,0 +1,71 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.IdFactory
+  commentId: N:Fantasy.IdFactory
+  id: IdFactory
+  parent: Fantasy
+  children:
+  - Fantasy.IdFactory.EntityIdFactory
+  - Fantasy.IdFactory.EntityIdStruct
+  - Fantasy.IdFactory.RuntimeIdFactory
+  - Fantasy.IdFactory.RuntimeIdStruct
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.IdFactory
+  nameWithType: Fantasy.IdFactory
+  fullName: Fantasy.IdFactory
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.IdFactory.EntityIdFactory
+  commentId: T:Fantasy.IdFactory.EntityIdFactory
+  parent: Fantasy.IdFactory
+  href: Fantasy.IdFactory.EntityIdFactory.html
+  name: EntityIdFactory
+  nameWithType: EntityIdFactory
+  fullName: Fantasy.IdFactory.EntityIdFactory
+- uid: Fantasy.IdFactory.EntityIdStruct
+  commentId: T:Fantasy.IdFactory.EntityIdStruct
+  parent: Fantasy.IdFactory
+  href: Fantasy.IdFactory.EntityIdStruct.html
+  name: EntityIdStruct
+  nameWithType: EntityIdStruct
+  fullName: Fantasy.IdFactory.EntityIdStruct
+- uid: Fantasy.IdFactory.RuntimeIdFactory
+  commentId: T:Fantasy.IdFactory.RuntimeIdFactory
+  parent: Fantasy.IdFactory
+  href: Fantasy.IdFactory.RuntimeIdFactory.html
+  name: RuntimeIdFactory
+  nameWithType: RuntimeIdFactory
+  fullName: Fantasy.IdFactory.RuntimeIdFactory
+- uid: Fantasy.IdFactory.RuntimeIdStruct
+  commentId: T:Fantasy.IdFactory.RuntimeIdStruct
+  parent: Fantasy.IdFactory
+  href: Fantasy.IdFactory.RuntimeIdStruct.html
+  name: RuntimeIdStruct
+  nameWithType: RuntimeIdStruct
+  fullName: Fantasy.IdFactory.RuntimeIdStruct
+- uid: Fantasy.IdFactory
+  commentId: N:Fantasy.IdFactory
+  href: Fantasy.html
+  name: Fantasy.IdFactory
+  nameWithType: Fantasy.IdFactory
+  fullName: Fantasy.IdFactory
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.IdFactory
+    name: IdFactory
+    href: Fantasy.IdFactory.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.IdFactory
+    name: IdFactory
+    href: Fantasy.IdFactory.html

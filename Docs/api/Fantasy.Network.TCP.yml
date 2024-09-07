@@ -1,0 +1,38 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.TCP
+  commentId: N:Fantasy.Network.TCP
+  id: TCP
+  parent: Fantasy.Network
+  children:
+  - Fantasy.Network.TCP.TCPClientNetwork
+  - Fantasy.Network.TCP.TCPServerNetwork
+  - Fantasy.Network.TCP.TCPServerNetworkChannel
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Network.TCP
+  nameWithType: Fantasy.Network.TCP
+  fullName: Fantasy.Network.TCP
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Network.TCP.TCPClientNetwork
+  commentId: T:Fantasy.Network.TCP.TCPClientNetwork
+  href: Fantasy.Network.TCP.TCPClientNetwork.html
+  name: TCPClientNetwork
+  nameWithType: TCPClientNetwork
+  fullName: Fantasy.Network.TCP.TCPClientNetwork
+- uid: Fantasy.Network.TCP.TCPServerNetwork
+  commentId: T:Fantasy.Network.TCP.TCPServerNetwork
+  href: Fantasy.Network.TCP.TCPServerNetwork.html
+  name: TCPServerNetwork
+  nameWithType: TCPServerNetwork
+  fullName: Fantasy.Network.TCP.TCPServerNetwork
+- uid: Fantasy.Network.TCP.TCPServerNetworkChannel
+  commentId: T:Fantasy.Network.TCP.TCPServerNetworkChannel
+  href: Fantasy.Network.TCP.TCPServerNetworkChannel.html
+  name: TCPServerNetworkChannel
+  nameWithType: TCPServerNetworkChannel
+  fullName: Fantasy.Network.TCP.TCPServerNetworkChannel

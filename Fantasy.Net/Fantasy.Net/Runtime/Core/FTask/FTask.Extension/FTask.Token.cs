@@ -2,10 +2,15 @@
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-namespace Fantasy
+namespace Fantasy.Async
 {
     public partial class FTask
     {
+        /// <summary>
+        /// 获得当前FTask中传递的UserToken
+        /// </summary>
+        /// <typeparam name="T">UserToken的泛型类型</typeparam>
+        /// <returns>返回一个UserToken</returns>
         public static async FTask<T> GetUserTokenAsync<T>() where T : class
         {
             var tcs = FTask<object>.Create();

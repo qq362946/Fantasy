@@ -1,0 +1,1042 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>SkipTableBase&lt;TValue&gt; 类
+ | Fantasy </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="SkipTableBase&lt;TValue&gt; 类
+ | Fantasy ">
+    
+    <meta name="description" content="抽象的跳表基类，提供跳表的基本功能和操作。">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="Fantasy">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="搜索" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">搜索结果 <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="首页" data-prev="上一页" data-next="下一页" data-last="尾页"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">显示/隐藏目录</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1">
+
+
+
+  <h1 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1" class="text-break">SkipTableBase&lt;TValue&gt; 类
+</h1>
+  <div class="markdown level0 summary"><p>抽象的跳表基类，提供跳表的基本功能和操作。</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>继承</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">SkipTableBase&lt;TValue&gt;</span></div>
+      <div class="level2"><a class="xref" href="Fantasy.DataStructure.SkipTable.SkipTableDesc-1.html">SkipTableDesc&lt;TValue&gt;</a></div>
+      <div class="level2"><a class="xref" href="Fantasy.DataStructure.SkipTable.SkipTable-1.html">SkipTable&lt;TValue&gt;</a></div>
+  </div>
+  <div class="implements">
+    <h5>实现</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Fantasy.DataStructure.SkipTable.SkipTableNode-1.html">SkipTableNode</a>&lt;TValue&gt;&gt;</div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>继承成员</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>命名空间</strong>: <a class="xref" href="Fantasy.html">Fantasy</a>.<a class="xref" href="Fantasy.DataStructure.html">DataStructure</a>.<a class="xref" href="Fantasy.DataStructure.SkipTable.html">SkipTable</a></h6>
+  <h6><strong>程序集</strong>: Fantasy.Net.dll</h6>
+  <h5 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_syntax">语法</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class SkipTableBase&lt;TValue&gt; : IEnumerable&lt;SkipTableNode&lt;TValue&gt;&gt;, IEnumerable</code></pre>
+  </div>
+  <h5 class="typeParameters">类型参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TValue</span></td>
+        <td><p>跳表中存储的值的类型。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">构造函数
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1__ctor_System_Int32_.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.%23ctor(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L52">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1__ctor_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.#ctor*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1__ctor_System_Int32_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.#ctor(System.Int32)">SkipTableBase(int)</h4>
+  <div class="markdown level1 summary"><p>初始化一个新的跳表实例。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SkipTableBase(int maxLayer = 8)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">maxLayer</span></td>
+        <td><p>跳表的最大层数，默认为 8。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">字段
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_AntiFindStack.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.AntiFindStack%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L46">查看源代码</a>
+  </span>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_AntiFindStack" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.AntiFindStack">AntiFindStack</h4>
+  <div class="markdown level1 summary"><p>用于辅助反向查找的栈</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly Stack&lt;SkipTableNode&lt;TValue&gt;&gt; AntiFindStack</code></pre>
+  </div>
+  <h5 class="fieldValue">字段值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.stack-1">Stack</a>&lt;<a class="xref" href="Fantasy.DataStructure.SkipTable.SkipTableNode-1.html">SkipTableNode</a>&lt;TValue&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_BottomHeader.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.BottomHeader%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L30">查看源代码</a>
+  </span>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_BottomHeader" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.BottomHeader">BottomHeader</h4>
+  <div class="markdown level1 summary"><p>跳表的底部头节点</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SkipTableNode&lt;TValue&gt; BottomHeader</code></pre>
+  </div>
+  <h5 class="fieldValue">字段值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.DataStructure.SkipTable.SkipTableNode-1.html">SkipTableNode</a>&lt;TValue&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_MaxLayer.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.MaxLayer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L22">查看源代码</a>
+  </span>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_MaxLayer" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.MaxLayer">MaxLayer</h4>
+  <div class="markdown level1 summary"><p>跳表的最大层数</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly int MaxLayer</code></pre>
+  </div>
+  <h5 class="fieldValue">字段值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_Node.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.Node%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L42">查看源代码</a>
+  </span>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Node" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Node">Node</h4>
+  <div class="markdown level1 summary"><p>存储跳表节点的字典</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly Dictionary&lt;long, SkipTableNode&lt;TValue&gt;&gt; Node</code></pre>
+  </div>
+  <h5 class="fieldValue">字段值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>, <a class="xref" href="Fantasy.DataStructure.SkipTable.SkipTableNode-1.html">SkipTableNode</a>&lt;TValue&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_Random.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.Random%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L38">查看源代码</a>
+  </span>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Random" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Random">Random</h4>
+  <div class="markdown level1 summary"><p>用于生成随机数的随机数生成器</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly Random Random</code></pre>
+  </div>
+  <h5 class="fieldValue">字段值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.random">Random</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_TopHeader.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.TopHeader%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L26">查看源代码</a>
+  </span>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_TopHeader" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.TopHeader">TopHeader</h4>
+  <div class="markdown level1 summary"><p>跳表的顶部头节点</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly SkipTableNode&lt;TValue&gt; TopHeader</code></pre>
+  </div>
+  <h5 class="fieldValue">字段值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.DataStructure.SkipTable.SkipTableNode-1.html">SkipTableNode</a>&lt;TValue&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">属性
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_Count.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.Count%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L34">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Count_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Count*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Count" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Count">Count</h4>
+  <div class="markdown level1 summary"><p>跳表中节点的数量，使用了 Node 字典的计数</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Count { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_Item_System_Int64_.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.Item(System.Int64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L70">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Item_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Item*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Item_System_Int64_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Item(System.Int64)">this[long]</h4>
+  <div class="markdown level1 summary"><p>获取指定键的节点的值，若不存在则返回默认值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TValue this[long key] { get; }</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>要查找的键。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">方法
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_Add_System_Int64_System_Int64_System_Int64__0_.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.Add(System.Int64%2CSystem.Int64%2CSystem.Int64%2C%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L247">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Add_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Add*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Add_System_Int64_System_Int64_System_Int64__0_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Add(System.Int64,System.Int64,System.Int64,`0)">Add(long, long, long, TValue)</h4>
+  <div class="markdown level1 summary"><p>向跳表中添加节点。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract void Add(long sortKey, long viceKey, long key, TValue value)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">sortKey</span></td>
+        <td><p>节点的排序键。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">viceKey</span></td>
+        <td><p>节点的副键。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>节点的键。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>节点的值。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_AntiFind_System_Int32_System_Int32_Fantasy_DataStructure_Collection_ListPool_Fantasy_DataStructure_SkipTable_SkipTableNode__0___.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.AntiFind(System.Int32%2CSystem.Int32%2CFantasy.DataStructure.Collection.ListPool%7BFantasy.DataStructure.SkipTable.SkipTableNode%7B%600%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L172">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_AntiFind_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.AntiFind*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_AntiFind_System_Int32_System_Int32_Fantasy_DataStructure_Collection_ListPool_Fantasy_DataStructure_SkipTable_SkipTableNode__0___" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.AntiFind(System.Int32,System.Int32,Fantasy.DataStructure.Collection.ListPool{Fantasy.DataStructure.SkipTable.SkipTableNode{`0}})">AntiFind(int, int, ListPool&lt;SkipTableNode&lt;TValue&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>在跳表中进行反向查找节点，返回从结束位置到起始位置的节点列表。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AntiFind(int start, int end, ListPool&lt;SkipTableNode&lt;TValue&gt;&gt; list)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">start</span></td>
+        <td><p>结束位置的排名。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">end</span></td>
+        <td><p>起始位置的排名。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Fantasy.DataStructure.Collection.ListPool-1.html">ListPool</a>&lt;<a class="xref" href="Fantasy.DataStructure.SkipTable.SkipTableNode-1.html">SkipTableNode</a>&lt;TValue&gt;&gt;</td>
+        <td><span class="parametername">list</span></td>
+        <td><p>用于存储节点列表的 <a class="xref" href="Fantasy.DataStructure.Collection.ListPool-1.html">ListPool&lt;T&gt;</a> 实例。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_Find_System_Int32_System_Int32_Fantasy_DataStructure_Collection_ListPool_Fantasy_DataStructure_SkipTable_SkipTableNode__0___.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.Find(System.Int32%2CSystem.Int32%2CFantasy.DataStructure.Collection.ListPool%7BFantasy.DataStructure.SkipTable.SkipTableNode%7B%600%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L144">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Find_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Find*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Find_System_Int32_System_Int32_Fantasy_DataStructure_Collection_ListPool_Fantasy_DataStructure_SkipTable_SkipTableNode__0___" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Find(System.Int32,System.Int32,Fantasy.DataStructure.Collection.ListPool{Fantasy.DataStructure.SkipTable.SkipTableNode{`0}})">Find(int, int, ListPool&lt;SkipTableNode&lt;TValue&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>在跳表中查找节点，返回从起始位置到结束位置的节点列表。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Find(int start, int end, ListPool&lt;SkipTableNode&lt;TValue&gt;&gt; list)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">start</span></td>
+        <td><p>起始位置的排名。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">end</span></td>
+        <td><p>结束位置的排名。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Fantasy.DataStructure.Collection.ListPool-1.html">ListPool</a>&lt;<a class="xref" href="Fantasy.DataStructure.SkipTable.SkipTableNode-1.html">SkipTableNode</a>&lt;TValue&gt;&gt;</td>
+        <td><span class="parametername">list</span></td>
+        <td><p>用于存储节点列表的 <a class="xref" href="Fantasy.DataStructure.Collection.ListPool-1.html">ListPool&lt;T&gt;</a> 实例。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetAntiRanking_System_Int64_.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.GetAntiRanking(System.Int64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L92">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetAntiRanking_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.GetAntiRanking*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetAntiRanking_System_Int64_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.GetAntiRanking(System.Int64)">GetAntiRanking(long)</h4>
+  <div class="markdown level1 summary"><p>获取指定键的反向排名，即在比该键更大的节点中的排名。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetAntiRanking(long key)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>要查找的键。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>反向排名。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetEnumerator.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.GetEnumerator%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L263">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetEnumerator_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.GetEnumerator*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetEnumerator" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.GetEnumerator">GetEnumerator()</h4>
+  <div class="markdown level1 summary"><p>返回一个枚举器，用于遍历跳表中的节点。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerator&lt;SkipTableNode&lt;TValue&gt;&gt; GetEnumerator()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1">IEnumerator</a>&lt;<a class="xref" href="Fantasy.DataStructure.SkipTable.SkipTableNode-1.html">SkipTableNode</a>&lt;TValue&gt;&gt;</td>
+        <td><p>一个可用于遍历跳表节点的枚举器。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetLastValue.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.GetLastValue%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L205">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetLastValue_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.GetLastValue*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetLastValue" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.GetLastValue">GetLastValue()</h4>
+  <div class="markdown level1 summary"><p>获取跳表中最后一个节点的值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TValue GetLastValue()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><p>最后一个节点的值。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetRanking_System_Int64_.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.GetRanking(System.Int64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L77">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetRanking_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.GetRanking*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_GetRanking_System_Int64_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.GetRanking(System.Int64)">GetRanking(long)</h4>
+  <div class="markdown level1 summary"><p>获取指定键的节点在跳表中的排名。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetRanking(long key)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>要查找的键。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>节点的排名。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_Remove_System_Int64_.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.Remove(System.Int64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L230">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Remove_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Remove*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Remove_System_Int64_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Remove(System.Int64)">Remove(long)</h4>
+  <div class="markdown level1 summary"><p>移除跳表中指定键的节点。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Remove(long key)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>要移除的节点的键。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>移除是否成功。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_Remove_System_Int64_System_Int64_System_Int64__0__.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.Remove(System.Int64%2CSystem.Int64%2CSystem.Int64%2C%600%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L257">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Remove_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Remove*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_Remove_System_Int64_System_Int64_System_Int64__0__" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.Remove(System.Int64,System.Int64,System.Int64,`0@)">Remove(long, long, long, out TValue)</h4>
+  <div class="markdown level1 summary"><p>从跳表中移除指定键的节点。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract bool Remove(long sortKey, long viceKey, long key, out TValue value)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">sortKey</span></td>
+        <td><p>节点的排序键。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">viceKey</span></td>
+        <td><p>节点的副键。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>节点的键。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>被移除的节点的值。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>移除是否成功。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_TryGetNodeByKey_System_Int64_Fantasy_DataStructure_SkipTable_SkipTableNode__0___.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.TryGetNodeByKey(System.Int64%2CFantasy.DataStructure.SkipTable.SkipTableNode%7B%600%7D%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L128">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_TryGetNodeByKey_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.TryGetNodeByKey*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_TryGetNodeByKey_System_Int64_Fantasy_DataStructure_SkipTable_SkipTableNode__0___" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.TryGetNodeByKey(System.Int64,Fantasy.DataStructure.SkipTable.SkipTableNode{`0}@)">TryGetNodeByKey(long, out SkipTableNode&lt;TValue&gt;)</h4>
+  <div class="markdown level1 summary"><p>尝试通过键获取节点。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetNodeByKey(long key, out SkipTableNode&lt;TValue&gt; node)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>要查找的键。</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Fantasy.DataStructure.SkipTable.SkipTableNode-1.html">SkipTableNode</a>&lt;TValue&gt;</td>
+        <td><span class="parametername">node</span></td>
+        <td><p>获取到的节点，如果键不存在则为 <code>null</code>。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>是否成功获取节点。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1_TryGetValueByKey_System_Int64__0__.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601.TryGetValueByKey(System.Int64%2C%600%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L110">查看源代码</a>
+  </span>
+  <a id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_TryGetValueByKey_" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.TryGetValueByKey*"></a>
+  <h4 id="Fantasy_DataStructure_SkipTable_SkipTableBase_1_TryGetValueByKey_System_Int64__0__" data-uid="Fantasy.DataStructure.SkipTable.SkipTableBase`1.TryGetValueByKey(System.Int64,`0@)">TryGetValueByKey(long, out TValue)</h4>
+  <div class="markdown level1 summary"><p>尝试通过键获取节点的值。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetValueByKey(long key, out TValue value)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>要查找的键。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>获取到的节点的值，如果键不存在则为默认值。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>是否成功获取节点的值。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">实现</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a>
+  </div>
+  <h3 id="extensionmethods">扩展方法</h3>
+  <div>
+      <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_DataStructure_SkipTable_SkipTableBase_1.md&amp;value=---%0Auid%3A%20Fantasy.DataStructure.SkipTable.SkipTableBase%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/SkipTable/SkipTableBase.cs/#L17" class="contribution-link">查看源代码</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>本文内容</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1874 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeQueue`1
+  commentId: T:NativeCollections.NativeQueue`1
+  id: NativeQueue`1
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeQueue`1.#ctor(System.Int32)
+  - NativeCollections.NativeQueue`1.Clear
+  - NativeCollections.NativeQueue`1.Count
+  - NativeCollections.NativeQueue`1.Dequeue
+  - NativeCollections.NativeQueue`1.Dispose
+  - NativeCollections.NativeQueue`1.Empty
+  - NativeCollections.NativeQueue`1.Enqueue(`0@)
+  - NativeCollections.NativeQueue`1.EnsureCapacity(System.Int32)
+  - NativeCollections.NativeQueue`1.Equals(NativeCollections.NativeQueue{`0})
+  - NativeCollections.NativeQueue`1.Equals(System.Object)
+  - NativeCollections.NativeQueue`1.GetEnumerator
+  - NativeCollections.NativeQueue`1.GetHashCode
+  - NativeCollections.NativeQueue`1.IsCreated
+  - NativeCollections.NativeQueue`1.IsEmpty
+  - NativeCollections.NativeQueue`1.Item(System.Int32)
+  - NativeCollections.NativeQueue`1.Item(System.UInt32)
+  - NativeCollections.NativeQueue`1.Peek
+  - NativeCollections.NativeQueue`1.ToString
+  - NativeCollections.NativeQueue`1.TrimExcess
+  - NativeCollections.NativeQueue`1.TryDequeue(`0@)
+  - NativeCollections.NativeQueue`1.TryEnqueue(`0@)
+  - NativeCollections.NativeQueue`1.TryPeek(`0@)
+  - NativeCollections.NativeQueue`1.op_Equality(NativeCollections.NativeQueue{`0},NativeCollections.NativeQueue{`0})
+  - NativeCollections.NativeQueue`1.op_Inequality(NativeCollections.NativeQueue{`0},NativeCollections.NativeQueue{`0})
+  langs:
+  - csharp
+  - vb
+  name: NativeQueue<T>
+  nameWithType: NativeQueue<T>
+  fullName: NativeCollections.NativeQueue<T>
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeQueue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 22
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native queue
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeQueue<T> : IDisposable, IEquatable<NativeQueue<T>> where T : unmanaged
+    typeParameters:
+    - id: T
+      description: Type
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeQueue(Of T As Structure) Implements IDisposable, IEquatable(Of NativeQueue(Of T))
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeQueue`1}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeQueue`1.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+  nameWithType.vb: NativeQueue(Of T)
+  fullName.vb: NativeCollections.NativeQueue(Of T)
+  name.vb: NativeQueue(Of T)
+- uid: NativeCollections.NativeQueue`1.#ctor(System.Int32)
+  commentId: M:NativeCollections.NativeQueue`1.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: NativeQueue(int)
+  nameWithType: NativeQueue<T>.NativeQueue(int)
+  fullName: NativeCollections.NativeQueue<T>.NativeQueue(int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 71
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeQueue(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(capacity As Integer)
+  overload: NativeCollections.NativeQueue`1.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeQueue(Of T).New(Integer)
+  fullName.vb: NativeCollections.NativeQueue(Of T).New(Integer)
+  name.vb: New(Integer)
+- uid: NativeCollections.NativeQueue`1.IsCreated
+  commentId: P:NativeCollections.NativeQueue`1.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeQueue<T>.IsCreated
+  fullName: NativeCollections.NativeQueue<T>.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 90
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeQueue`1.IsCreated*
+  nameWithType.vb: NativeQueue(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeQueue(Of T).IsCreated
+- uid: NativeCollections.NativeQueue`1.IsEmpty
+  commentId: P:NativeCollections.NativeQueue`1.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativeQueue<T>.IsEmpty
+  fullName: NativeCollections.NativeQueue<T>.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 95
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is empty
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativeQueue`1.IsEmpty*
+  nameWithType.vb: NativeQueue(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeQueue(Of T).IsEmpty
+- uid: NativeCollections.NativeQueue`1.Item(System.Int32)
+  commentId: P:NativeCollections.NativeQueue`1.Item(System.Int32)
+  id: Item(System.Int32)
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: this[int]
+  nameWithType: NativeQueue<T>.this[int]
+  fullName: NativeCollections.NativeQueue<T>.this[int]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 101
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get reference
+  example: []
+  syntax:
+    content: public ref T this[int index] { get; }
+    parameters:
+    - id: index
+      type: System.Int32
+      description: Index
+    return:
+      type: '{T}'
+    content.vb: Public ReadOnly Default ByRef Property this[](index As Integer) As T
+  overload: NativeCollections.NativeQueue`1.Item*
+  nameWithType.vb: NativeQueue(Of T).this[](Integer)
+  fullName.vb: NativeCollections.NativeQueue(Of T).this[](Integer)
+  name.vb: this[](Integer)
+- uid: NativeCollections.NativeQueue`1.Item(System.UInt32)
+  commentId: P:NativeCollections.NativeQueue`1.Item(System.UInt32)
+  id: Item(System.UInt32)
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: this[uint]
+  nameWithType: NativeQueue<T>.this[uint]
+  fullName: NativeCollections.NativeQueue<T>.this[uint]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 111
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get reference
+  example: []
+  syntax:
+    content: public ref T this[uint index] { get; }
+    parameters:
+    - id: index
+      type: System.UInt32
+      description: Index
+    return:
+      type: '{T}'
+    content.vb: Public ReadOnly Default ByRef Property this[](index As UInteger) As T
+  overload: NativeCollections.NativeQueue`1.Item*
+  nameWithType.vb: NativeQueue(Of T).this[](UInteger)
+  fullName.vb: NativeCollections.NativeQueue(Of T).this[](UInteger)
+  name.vb: this[](UInteger)
+- uid: NativeCollections.NativeQueue`1.Count
+  commentId: P:NativeCollections.NativeQueue`1.Count
+  id: Count
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: NativeQueue<T>.Count
+  fullName: NativeCollections.NativeQueue<T>.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 120
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Count
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: NativeCollections.NativeQueue`1.Count*
+  nameWithType.vb: NativeQueue(Of T).Count
+  fullName.vb: NativeCollections.NativeQueue(Of T).Count
+- uid: NativeCollections.NativeQueue`1.Equals(NativeCollections.NativeQueue{`0})
+  commentId: M:NativeCollections.NativeQueue`1.Equals(NativeCollections.NativeQueue{`0})
+  id: Equals(NativeCollections.NativeQueue{`0})
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeQueue<T>)
+  nameWithType: NativeQueue<T>.Equals(NativeQueue<T>)
+  fullName: NativeCollections.NativeQueue<T>.Equals(NativeCollections.NativeQueue<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 127
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeQueue<T> other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeQueue`1
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeQueue(Of T)) As Boolean
+  overload: NativeCollections.NativeQueue`1.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeQueue`1}.Equals(NativeCollections.NativeQueue{{T}})
+  nameWithType.vb: NativeQueue(Of T).Equals(NativeQueue(Of T))
+  fullName.vb: NativeCollections.NativeQueue(Of T).Equals(NativeCollections.NativeQueue(Of T))
+  name.vb: Equals(NativeQueue(Of T))
+- uid: NativeCollections.NativeQueue`1.Equals(System.Object)
+  commentId: M:NativeCollections.NativeQueue`1.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeQueue<T>.Equals(object?)
+  fullName: NativeCollections.NativeQueue<T>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 134
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeQueue`1.Equals*
+  nameWithType.vb: NativeQueue(Of T).Equals(Object)
+  fullName.vb: NativeCollections.NativeQueue(Of T).Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeQueue`1.GetHashCode
+  commentId: M:NativeCollections.NativeQueue`1.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeQueue<T>.GetHashCode()
+  fullName: NativeCollections.NativeQueue<T>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 140
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeQueue`1.GetHashCode*
+  nameWithType.vb: NativeQueue(Of T).GetHashCode()
+  fullName.vb: NativeCollections.NativeQueue(Of T).GetHashCode()
+- uid: NativeCollections.NativeQueue`1.ToString
+  commentId: M:NativeCollections.NativeQueue`1.ToString
+  id: ToString
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeQueue<T>.ToString()
+  fullName: NativeCollections.NativeQueue<T>.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 146
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeQueue`1.ToString*
+  nameWithType.vb: NativeQueue(Of T).ToString()
+  fullName.vb: NativeCollections.NativeQueue(Of T).ToString()
+- uid: NativeCollections.NativeQueue`1.op_Equality(NativeCollections.NativeQueue{`0},NativeCollections.NativeQueue{`0})
+  commentId: M:NativeCollections.NativeQueue`1.op_Equality(NativeCollections.NativeQueue{`0},NativeCollections.NativeQueue{`0})
+  id: op_Equality(NativeCollections.NativeQueue{`0},NativeCollections.NativeQueue{`0})
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeQueue<T>, NativeQueue<T>)
+  nameWithType: NativeQueue<T>.operator ==(NativeQueue<T>, NativeQueue<T>)
+  fullName: NativeCollections.NativeQueue<T>.operator ==(NativeCollections.NativeQueue<T>, NativeCollections.NativeQueue<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 154
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeQueue<T> left, NativeQueue<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeQueue`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeQueue`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeQueue(Of T), right As NativeQueue(Of T)) As Boolean
+  overload: NativeCollections.NativeQueue`1.op_Equality*
+  nameWithType.vb: NativeQueue(Of T).=(NativeQueue(Of T), NativeQueue(Of T))
+  fullName.vb: NativeCollections.NativeQueue(Of T).=(NativeCollections.NativeQueue(Of T), NativeCollections.NativeQueue(Of T))
+  name.vb: =(NativeQueue(Of T), NativeQueue(Of T))
+- uid: NativeCollections.NativeQueue`1.op_Inequality(NativeCollections.NativeQueue{`0},NativeCollections.NativeQueue{`0})
+  commentId: M:NativeCollections.NativeQueue`1.op_Inequality(NativeCollections.NativeQueue{`0},NativeCollections.NativeQueue{`0})
+  id: op_Inequality(NativeCollections.NativeQueue{`0},NativeCollections.NativeQueue{`0})
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeQueue<T>, NativeQueue<T>)
+  nameWithType: NativeQueue<T>.operator !=(NativeQueue<T>, NativeQueue<T>)
+  fullName: NativeCollections.NativeQueue<T>.operator !=(NativeCollections.NativeQueue<T>, NativeCollections.NativeQueue<T>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 162
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeQueue<T> left, NativeQueue<T> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeQueue`1
+      description: Left
+    - id: right
+      type: NativeCollections.NativeQueue`1
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeQueue(Of T), right As NativeQueue(Of T)) As Boolean
+  overload: NativeCollections.NativeQueue`1.op_Inequality*
+  nameWithType.vb: NativeQueue(Of T).<>(NativeQueue(Of T), NativeQueue(Of T))
+  fullName.vb: NativeCollections.NativeQueue(Of T).<>(NativeCollections.NativeQueue(Of T), NativeCollections.NativeQueue(Of T))
+  name.vb: <>(NativeQueue(Of T), NativeQueue(Of T))
+- uid: NativeCollections.NativeQueue`1.Dispose
+  commentId: M:NativeCollections.NativeQueue`1.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeQueue<T>.Dispose()
+  fullName: NativeCollections.NativeQueue<T>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 167
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeQueue`1.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeQueue(Of T).Dispose()
+  fullName.vb: NativeCollections.NativeQueue(Of T).Dispose()
+- uid: NativeCollections.NativeQueue`1.Clear
+  commentId: M:NativeCollections.NativeQueue`1.Clear
+  id: Clear
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: NativeQueue<T>.Clear()
+  fullName: NativeCollections.NativeQueue<T>.Clear()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clear
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 179
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Clear
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Clear()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Clear()
+  overload: NativeCollections.NativeQueue`1.Clear*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeQueue(Of T).Clear()
+  fullName.vb: NativeCollections.NativeQueue(Of T).Clear()
+- uid: NativeCollections.NativeQueue`1.Enqueue(`0@)
+  commentId: M:NativeCollections.NativeQueue`1.Enqueue(`0@)
+  id: Enqueue(`0@)
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: Enqueue(in T)
+  nameWithType: NativeQueue<T>.Enqueue(in T)
+  fullName: NativeCollections.NativeQueue<T>.Enqueue(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Enqueue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 192
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Enqueue
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Enqueue(in T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Enqueue(item As T)
+  overload: NativeCollections.NativeQueue`1.Enqueue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeQueue(Of T).Enqueue(T)
+  fullName.vb: NativeCollections.NativeQueue(Of T).Enqueue(T)
+  name.vb: Enqueue(T)
+- uid: NativeCollections.NativeQueue`1.TryEnqueue(`0@)
+  commentId: M:NativeCollections.NativeQueue`1.TryEnqueue(`0@)
+  id: TryEnqueue(`0@)
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: TryEnqueue(in T)
+  nameWithType: NativeQueue<T>.TryEnqueue(in T)
+  fullName: NativeCollections.NativeQueue<T>.TryEnqueue(in T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryEnqueue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 208
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try enqueue
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryEnqueue(in T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: Item
+    return:
+      type: System.Boolean
+      description: Enqueued
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryEnqueue(item As T) As Boolean
+  overload: NativeCollections.NativeQueue`1.TryEnqueue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeQueue(Of T).TryEnqueue(T)
+  fullName.vb: NativeCollections.NativeQueue(Of T).TryEnqueue(T)
+  name.vb: TryEnqueue(T)
+- uid: NativeCollections.NativeQueue`1.Dequeue
+  commentId: M:NativeCollections.NativeQueue`1.Dequeue
+  id: Dequeue
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: Dequeue()
+  nameWithType: NativeQueue<T>.Dequeue()
+  fullName: NativeCollections.NativeQueue<T>.Dequeue()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dequeue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 227
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dequeue
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public T Dequeue()
+    return:
+      type: '{T}'
+      description: Item
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Dequeue() As T
+  overload: NativeCollections.NativeQueue`1.Dequeue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeQueue(Of T).Dequeue()
+  fullName.vb: NativeCollections.NativeQueue(Of T).Dequeue()
+- uid: NativeCollections.NativeQueue`1.TryDequeue(`0@)
+  commentId: M:NativeCollections.NativeQueue`1.TryDequeue(`0@)
+  id: TryDequeue(`0@)
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: TryDequeue(out T)
+  nameWithType: NativeQueue<T>.TryDequeue(out T)
+  fullName: NativeCollections.NativeQueue<T>.TryDequeue(out T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryDequeue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 244
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try dequeue
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryDequeue(out T result)
+    parameters:
+    - id: result
+      type: '{T}'
+      description: Item
+    return:
+      type: System.Boolean
+      description: Dequeued
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryDequeue(result As T) As Boolean
+  overload: NativeCollections.NativeQueue`1.TryDequeue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeQueue(Of T).TryDequeue(T)
+  fullName.vb: NativeCollections.NativeQueue(Of T).TryDequeue(T)
+  name.vb: TryDequeue(T)
+- uid: NativeCollections.NativeQueue`1.Peek
+  commentId: M:NativeCollections.NativeQueue`1.Peek
+  id: Peek
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: Peek()
+  nameWithType: NativeQueue<T>.Peek()
+  fullName: NativeCollections.NativeQueue<T>.Peek()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Peek
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 264
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Peek
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public T Peek()
+    return:
+      type: '{T}'
+      description: Item
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Peek() As T
+  overload: NativeCollections.NativeQueue`1.Peek*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeQueue(Of T).Peek()
+  fullName.vb: NativeCollections.NativeQueue(Of T).Peek()
+- uid: NativeCollections.NativeQueue`1.TryPeek(`0@)
+  commentId: M:NativeCollections.NativeQueue`1.TryPeek(`0@)
+  id: TryPeek(`0@)
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: TryPeek(out T)
+  nameWithType: NativeQueue<T>.TryPeek(out T)
+  fullName: NativeCollections.NativeQueue<T>.TryPeek(out T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryPeek
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 272
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try peek
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryPeek(out T result)
+    parameters:
+    - id: result
+      type: '{T}'
+      description: Item
+    return:
+      type: System.Boolean
+      description: Peeked
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryPeek(result As T) As Boolean
+  overload: NativeCollections.NativeQueue`1.TryPeek*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeQueue(Of T).TryPeek(T)
+  fullName.vb: NativeCollections.NativeQueue(Of T).TryPeek(T)
+  name.vb: TryPeek(T)
+- uid: NativeCollections.NativeQueue`1.EnsureCapacity(System.Int32)
+  commentId: M:NativeCollections.NativeQueue`1.EnsureCapacity(System.Int32)
+  id: EnsureCapacity(System.Int32)
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: EnsureCapacity(int)
+  nameWithType: NativeQueue<T>.EnsureCapacity(int)
+  fullName: NativeCollections.NativeQueue<T>.EnsureCapacity(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: EnsureCapacity
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 290
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Ensure capacity
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int EnsureCapacity(int capacity)
+    parameters:
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    return:
+      type: System.Int32
+      description: New capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function EnsureCapacity(capacity As Integer) As Integer
+  overload: NativeCollections.NativeQueue`1.EnsureCapacity*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeQueue(Of T).EnsureCapacity(Integer)
+  fullName.vb: NativeCollections.NativeQueue(Of T).EnsureCapacity(Integer)
+  name.vb: EnsureCapacity(Integer)
+- uid: NativeCollections.NativeQueue`1.TrimExcess
+  commentId: M:NativeCollections.NativeQueue`1.TrimExcess
+  id: TrimExcess
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: TrimExcess()
+  nameWithType: NativeQueue<T>.TrimExcess()
+  fullName: NativeCollections.NativeQueue<T>.TrimExcess()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TrimExcess
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 304
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Trim excess
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public int TrimExcess()
+    return:
+      type: System.Int32
+      description: New capacity
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TrimExcess() As Integer
+  overload: NativeCollections.NativeQueue`1.TrimExcess*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeQueue(Of T).TrimExcess()
+  fullName.vb: NativeCollections.NativeQueue(Of T).TrimExcess()
+- uid: NativeCollections.NativeQueue`1.Empty
+  commentId: P:NativeCollections.NativeQueue`1.Empty
+  id: Empty
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeQueue<T>.Empty
+  fullName: NativeCollections.NativeQueue<T>.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 375
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeQueue<T> Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeQueue`1
+    content.vb: Public Shared ReadOnly Property Empty As NativeQueue(Of T)
+  overload: NativeCollections.NativeQueue`1.Empty*
+  nameWithType.vb: NativeQueue(Of T).Empty
+  fullName.vb: NativeCollections.NativeQueue(Of T).Empty
+- uid: NativeCollections.NativeQueue`1.GetEnumerator
+  commentId: M:NativeCollections.NativeQueue`1.GetEnumerator
+  id: GetEnumerator
+  parent: NativeCollections.NativeQueue`1
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: NativeQueue<T>.GetEnumerator()
+  fullName: NativeCollections.NativeQueue<T>.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetEnumerator
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeQueue.cs
+    startLine: 381
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get enumerator
+  example: []
+  syntax:
+    content: public NativeQueue<T>.Enumerator GetEnumerator()
+    return:
+      type: NativeCollections.NativeQueue`1.Enumerator
+      description: Enumerator
+    content.vb: Public Function GetEnumerator() As NativeQueue(Of T).Enumerator
+  overload: NativeCollections.NativeQueue`1.GetEnumerator*
+  nameWithType.vb: NativeQueue(Of T).GetEnumerator()
+  fullName.vb: NativeCollections.NativeQueue(Of T).GetEnumerator()
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeQueue`1}
+  commentId: T:System.IEquatable{NativeCollections.NativeQueue`1}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeQueue<T>>
+  nameWithType: IEquatable<NativeQueue<T>>
+  fullName: System.IEquatable<NativeCollections.NativeQueue<T>>
+  nameWithType.vb: IEquatable(Of NativeQueue(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeQueue(Of T))
+  name.vb: IEquatable(Of NativeQueue(Of T))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeQueue`1.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeQueue<T>>(NativeQueue<T>)
+  nameWithType: JsonHelper.ToJson<NativeQueue<T>>(NativeQueue<T>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeQueue<T>>(NativeCollections.NativeQueue<T>)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeQueue(Of T))(NativeQueue(Of T))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeQueue(Of T))(NativeCollections.NativeQueue(Of T))
+  name.vb: ToJson(Of NativeQueue(Of T))(NativeQueue(Of T))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeQueue{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeQueue{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeQueue`1.#ctor*
+  commentId: Overload:NativeCollections.NativeQueue`1.#ctor
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1__ctor_System_Int32_
+  name: NativeQueue
+  nameWithType: NativeQueue<T>.NativeQueue
+  fullName: NativeCollections.NativeQueue<T>.NativeQueue
+  nameWithType.vb: NativeQueue(Of T).New
+  fullName.vb: NativeCollections.NativeQueue(Of T).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativeQueue`1.IsCreated*
+  commentId: Overload:NativeCollections.NativeQueue`1.IsCreated
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_IsCreated
+  name: IsCreated
+  nameWithType: NativeQueue<T>.IsCreated
+  fullName: NativeCollections.NativeQueue<T>.IsCreated
+  nameWithType.vb: NativeQueue(Of T).IsCreated
+  fullName.vb: NativeCollections.NativeQueue(Of T).IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeQueue`1.IsEmpty*
+  commentId: Overload:NativeCollections.NativeQueue`1.IsEmpty
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_IsEmpty
+  name: IsEmpty
+  nameWithType: NativeQueue<T>.IsEmpty
+  fullName: NativeCollections.NativeQueue<T>.IsEmpty
+  nameWithType.vb: NativeQueue(Of T).IsEmpty
+  fullName.vb: NativeCollections.NativeQueue(Of T).IsEmpty
+- uid: NativeCollections.NativeQueue`1.Item*
+  commentId: Overload:NativeCollections.NativeQueue`1.Item
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_Item_System_Int32_
+  name: this
+  nameWithType: NativeQueue<T>.this
+  fullName: NativeCollections.NativeQueue<T>.this
+  nameWithType.vb: NativeQueue(Of T).this[]
+  fullName.vb: NativeCollections.NativeQueue(Of T).this[]
+  name.vb: this[]
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: NativeCollections.NativeQueue`1.Count*
+  commentId: Overload:NativeCollections.NativeQueue`1.Count
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_Count
+  name: Count
+  nameWithType: NativeQueue<T>.Count
+  fullName: NativeCollections.NativeQueue<T>.Count
+  nameWithType.vb: NativeQueue(Of T).Count
+  fullName.vb: NativeCollections.NativeQueue(Of T).Count
+- uid: NativeCollections.NativeQueue`1.Equals*
+  commentId: Overload:NativeCollections.NativeQueue`1.Equals
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_Equals_NativeCollections_NativeQueue__0__
+  name: Equals
+  nameWithType: NativeQueue<T>.Equals
+  fullName: NativeCollections.NativeQueue<T>.Equals
+  nameWithType.vb: NativeQueue(Of T).Equals
+  fullName.vb: NativeCollections.NativeQueue(Of T).Equals
+- uid: System.IEquatable{NativeCollections.NativeQueue`1}.Equals(NativeCollections.NativeQueue{{T}})
+  commentId: M:System.IEquatable{NativeCollections.NativeQueue`1}.Equals(NativeCollections.NativeQueue{`0})
+  parent: System.IEquatable{NativeCollections.NativeQueue`1}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeQueue<T>)
+  nameWithType: IEquatable<NativeQueue<T>>.Equals(NativeQueue<T>)
+  fullName: System.IEquatable<NativeCollections.NativeQueue<T>>.Equals(NativeCollections.NativeQueue<T>)
+  nameWithType.vb: IEquatable(Of NativeQueue(Of T)).Equals(NativeQueue(Of T))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeQueue(Of T)).Equals(NativeCollections.NativeQueue(Of T))
+  name.vb: Equals(NativeQueue(Of T))
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeQueue`1}.Equals(NativeCollections.NativeQueue{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeQueue`1}.Equals(NativeCollections.NativeQueue{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: NativeCollections.NativeQueue`1
+  commentId: T:NativeCollections.NativeQueue`1
+  parent: NativeCollections
+  href: NativeCollections.NativeQueue-1.html
+  name: NativeQueue<T>
+  nameWithType: NativeQueue<T>
+  fullName: NativeCollections.NativeQueue<T>
+  nameWithType.vb: NativeQueue(Of T)
+  fullName.vb: NativeCollections.NativeQueue(Of T)
+  name.vb: NativeQueue(Of T)
+  spec.csharp:
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeQueue`1.GetHashCode*
+  commentId: Overload:NativeCollections.NativeQueue`1.GetHashCode
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeQueue<T>.GetHashCode
+  fullName: NativeCollections.NativeQueue<T>.GetHashCode
+  nameWithType.vb: NativeQueue(Of T).GetHashCode
+  fullName.vb: NativeCollections.NativeQueue(Of T).GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeQueue`1.ToString*
+  commentId: Overload:NativeCollections.NativeQueue`1.ToString
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_ToString
+  name: ToString
+  nameWithType: NativeQueue<T>.ToString
+  fullName: NativeCollections.NativeQueue<T>.ToString
+  nameWithType.vb: NativeQueue(Of T).ToString
+  fullName.vb: NativeCollections.NativeQueue(Of T).ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeQueue`1.op_Equality*
+  commentId: Overload:NativeCollections.NativeQueue`1.op_Equality
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_op_Equality_NativeCollections_NativeQueue__0__NativeCollections_NativeQueue__0__
+  name: operator ==
+  nameWithType: NativeQueue<T>.operator ==
+  fullName: NativeCollections.NativeQueue<T>.operator ==
+  nameWithType.vb: NativeQueue(Of T).=
+  fullName.vb: NativeCollections.NativeQueue(Of T).=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeQueue`1.op_Equality*
+    name: ==
+    href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_op_Equality_NativeCollections_NativeQueue__0__NativeCollections_NativeQueue__0__
+- uid: NativeCollections.NativeQueue`1.op_Inequality*
+  commentId: Overload:NativeCollections.NativeQueue`1.op_Inequality
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_op_Inequality_NativeCollections_NativeQueue__0__NativeCollections_NativeQueue__0__
+  name: operator !=
+  nameWithType: NativeQueue<T>.operator !=
+  fullName: NativeCollections.NativeQueue<T>.operator !=
+  nameWithType.vb: NativeQueue(Of T).<>
+  fullName.vb: NativeCollections.NativeQueue(Of T).<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeQueue`1.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_op_Inequality_NativeCollections_NativeQueue__0__NativeCollections_NativeQueue__0__
+- uid: NativeCollections.NativeQueue`1.Dispose*
+  commentId: Overload:NativeCollections.NativeQueue`1.Dispose
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_Dispose
+  name: Dispose
+  nameWithType: NativeQueue<T>.Dispose
+  fullName: NativeCollections.NativeQueue<T>.Dispose
+  nameWithType.vb: NativeQueue(Of T).Dispose
+  fullName.vb: NativeCollections.NativeQueue(Of T).Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeQueue`1.Clear*
+  commentId: Overload:NativeCollections.NativeQueue`1.Clear
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_Clear
+  name: Clear
+  nameWithType: NativeQueue<T>.Clear
+  fullName: NativeCollections.NativeQueue<T>.Clear
+  nameWithType.vb: NativeQueue(Of T).Clear
+  fullName.vb: NativeCollections.NativeQueue(Of T).Clear
+- uid: NativeCollections.NativeQueue`1.Enqueue*
+  commentId: Overload:NativeCollections.NativeQueue`1.Enqueue
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_Enqueue__0__
+  name: Enqueue
+  nameWithType: NativeQueue<T>.Enqueue
+  fullName: NativeCollections.NativeQueue<T>.Enqueue
+  nameWithType.vb: NativeQueue(Of T).Enqueue
+  fullName.vb: NativeCollections.NativeQueue(Of T).Enqueue
+- uid: NativeCollections.NativeQueue`1.TryEnqueue*
+  commentId: Overload:NativeCollections.NativeQueue`1.TryEnqueue
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_TryEnqueue__0__
+  name: TryEnqueue
+  nameWithType: NativeQueue<T>.TryEnqueue
+  fullName: NativeCollections.NativeQueue<T>.TryEnqueue
+  nameWithType.vb: NativeQueue(Of T).TryEnqueue
+  fullName.vb: NativeCollections.NativeQueue(Of T).TryEnqueue
+- uid: NativeCollections.NativeQueue`1.Dequeue*
+  commentId: Overload:NativeCollections.NativeQueue`1.Dequeue
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_Dequeue
+  name: Dequeue
+  nameWithType: NativeQueue<T>.Dequeue
+  fullName: NativeCollections.NativeQueue<T>.Dequeue
+  nameWithType.vb: NativeQueue(Of T).Dequeue
+  fullName.vb: NativeCollections.NativeQueue(Of T).Dequeue
+- uid: NativeCollections.NativeQueue`1.TryDequeue*
+  commentId: Overload:NativeCollections.NativeQueue`1.TryDequeue
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_TryDequeue__0__
+  name: TryDequeue
+  nameWithType: NativeQueue<T>.TryDequeue
+  fullName: NativeCollections.NativeQueue<T>.TryDequeue
+  nameWithType.vb: NativeQueue(Of T).TryDequeue
+  fullName.vb: NativeCollections.NativeQueue(Of T).TryDequeue
+- uid: NativeCollections.NativeQueue`1.Peek*
+  commentId: Overload:NativeCollections.NativeQueue`1.Peek
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_Peek
+  name: Peek
+  nameWithType: NativeQueue<T>.Peek
+  fullName: NativeCollections.NativeQueue<T>.Peek
+  nameWithType.vb: NativeQueue(Of T).Peek
+  fullName.vb: NativeCollections.NativeQueue(Of T).Peek
+- uid: NativeCollections.NativeQueue`1.TryPeek*
+  commentId: Overload:NativeCollections.NativeQueue`1.TryPeek
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_TryPeek__0__
+  name: TryPeek
+  nameWithType: NativeQueue<T>.TryPeek
+  fullName: NativeCollections.NativeQueue<T>.TryPeek
+  nameWithType.vb: NativeQueue(Of T).TryPeek
+  fullName.vb: NativeCollections.NativeQueue(Of T).TryPeek
+- uid: NativeCollections.NativeQueue`1.EnsureCapacity*
+  commentId: Overload:NativeCollections.NativeQueue`1.EnsureCapacity
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_EnsureCapacity_System_Int32_
+  name: EnsureCapacity
+  nameWithType: NativeQueue<T>.EnsureCapacity
+  fullName: NativeCollections.NativeQueue<T>.EnsureCapacity
+  nameWithType.vb: NativeQueue(Of T).EnsureCapacity
+  fullName.vb: NativeCollections.NativeQueue(Of T).EnsureCapacity
+- uid: NativeCollections.NativeQueue`1.TrimExcess*
+  commentId: Overload:NativeCollections.NativeQueue`1.TrimExcess
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_TrimExcess
+  name: TrimExcess
+  nameWithType: NativeQueue<T>.TrimExcess
+  fullName: NativeCollections.NativeQueue<T>.TrimExcess
+  nameWithType.vb: NativeQueue(Of T).TrimExcess
+  fullName.vb: NativeCollections.NativeQueue(Of T).TrimExcess
+- uid: NativeCollections.NativeQueue`1.Empty*
+  commentId: Overload:NativeCollections.NativeQueue`1.Empty
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_Empty
+  name: Empty
+  nameWithType: NativeQueue<T>.Empty
+  fullName: NativeCollections.NativeQueue<T>.Empty
+  nameWithType.vb: NativeQueue(Of T).Empty
+  fullName.vb: NativeCollections.NativeQueue(Of T).Empty
+- uid: NativeCollections.NativeQueue`1.GetEnumerator*
+  commentId: Overload:NativeCollections.NativeQueue`1.GetEnumerator
+  href: NativeCollections.NativeQueue-1.html#NativeCollections_NativeQueue_1_GetEnumerator
+  name: GetEnumerator
+  nameWithType: NativeQueue<T>.GetEnumerator
+  fullName: NativeCollections.NativeQueue<T>.GetEnumerator
+  nameWithType.vb: NativeQueue(Of T).GetEnumerator
+  fullName.vb: NativeCollections.NativeQueue(Of T).GetEnumerator
+- uid: NativeCollections.NativeQueue`1.Enumerator
+  commentId: T:NativeCollections.NativeQueue`1.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeQueue-1.html
+  name: NativeQueue<T>.Enumerator
+  nameWithType: NativeQueue<T>.Enumerator
+  fullName: NativeCollections.NativeQueue<T>.Enumerator
+  nameWithType.vb: NativeQueue(Of T).Enumerator
+  fullName.vb: NativeCollections.NativeQueue(Of T).Enumerator
+  name.vb: NativeQueue(Of T).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeQueue`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeQueue-1.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeQueue`1
+    name: NativeQueue
+    href: NativeCollections.NativeQueue-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeQueue`1.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeQueue-1.Enumerator.html

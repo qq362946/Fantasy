@@ -1,8 +1,9 @@
 using System;
 using System.Buffers;
 using System.IO;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Fantasy
+namespace Fantasy.Serialize
 {
     public sealed class MemoryStreamBuffer : MemoryStream, IBufferWriter<byte>
     {

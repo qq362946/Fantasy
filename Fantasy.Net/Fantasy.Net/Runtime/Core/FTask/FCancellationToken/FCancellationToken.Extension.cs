@@ -1,7 +1,10 @@
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 using System;
-namespace Fantasy
+namespace Fantasy.Async
 {
+    /// <summary>
+    /// FCancellationToken扩展类
+    /// </summary>
     public static class FCancellationTokenExtension
     {
         /// <summary>
@@ -10,7 +13,6 @@ namespace Fantasy
         /// </summary>
         /// <param name="fTask"></param>
         /// <param name="fCancellationToken"></param>
-        /// <exception cref="Exception"></exception>
         public static async FTask AddToCancellationToken(this FTask fTask, FCancellationToken fCancellationToken)
         {
             if (fCancellationToken == null)
@@ -36,7 +38,6 @@ namespace Fantasy
         /// <param name="fCancellationToken"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
         public static async FTask<T> AddToCancellationToken<T>(this FTask<T> fTask, FCancellationToken fCancellationToken)
         {
             if (fCancellationToken == null)

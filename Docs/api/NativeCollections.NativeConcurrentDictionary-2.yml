@@ -1,0 +1,2115 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeConcurrentDictionary`2
+  commentId: T:NativeCollections.NativeConcurrentDictionary`2
+  id: NativeConcurrentDictionary`2
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeConcurrentDictionary`2.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)
+  - NativeCollections.NativeConcurrentDictionary`2.Clear
+  - NativeCollections.NativeConcurrentDictionary`2.ContainsKey(`0@)
+  - NativeCollections.NativeConcurrentDictionary`2.Count
+  - NativeCollections.NativeConcurrentDictionary`2.Dispose
+  - NativeCollections.NativeConcurrentDictionary`2.Empty
+  - NativeCollections.NativeConcurrentDictionary`2.Equals(NativeCollections.NativeConcurrentDictionary{`0,`1})
+  - NativeCollections.NativeConcurrentDictionary`2.Equals(System.Object)
+  - NativeCollections.NativeConcurrentDictionary`2.GetEnumerator
+  - NativeCollections.NativeConcurrentDictionary`2.GetHashCode
+  - NativeCollections.NativeConcurrentDictionary`2.GetOrAdd(`0@,`1@)
+  - NativeCollections.NativeConcurrentDictionary`2.IsCreated
+  - NativeCollections.NativeConcurrentDictionary`2.IsEmpty
+  - NativeCollections.NativeConcurrentDictionary`2.Item(`0@)
+  - NativeCollections.NativeConcurrentDictionary`2.Keys
+  - NativeCollections.NativeConcurrentDictionary`2.ToString
+  - NativeCollections.NativeConcurrentDictionary`2.TryAdd(`0@,`1@)
+  - NativeCollections.NativeConcurrentDictionary`2.TryGetValue(`0@,`1@)
+  - NativeCollections.NativeConcurrentDictionary`2.TryRemove(System.Collections.Generic.KeyValuePair{`0,`1}@)
+  - NativeCollections.NativeConcurrentDictionary`2.TryRemove(`0@,`1@)
+  - NativeCollections.NativeConcurrentDictionary`2.TryUpdate(`0@,`1@,`1@)
+  - NativeCollections.NativeConcurrentDictionary`2.Values
+  - NativeCollections.NativeConcurrentDictionary`2.op_Equality(NativeCollections.NativeConcurrentDictionary{`0,`1},NativeCollections.NativeConcurrentDictionary{`0,`1})
+  - NativeCollections.NativeConcurrentDictionary`2.op_Inequality(NativeCollections.NativeConcurrentDictionary{`0,`1},NativeCollections.NativeConcurrentDictionary{`0,`1})
+  langs:
+  - csharp
+  - vb
+  name: NativeConcurrentDictionary<TKey, TValue>
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeConcurrentDictionary
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 30
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: >-
+    Native concurrentDictionary
+
+    (Slower than ConcurrentDictionary)
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeConcurrentDictionary<TKey, TValue> : IDisposable, IEquatable<NativeConcurrentDictionary<TKey, TValue>> where TKey : unmanaged, IEquatable<TKey> where TValue : unmanaged, IEquatable<TValue>
+    typeParameters:
+    - id: TKey
+      description: Type
+    - id: TValue
+      description: Type
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeConcurrentDictionary(Of TKey As {Structure, IEquatable(Of TKey)}, TValue As {Structure, IEquatable(Of TValue)}) Implements IDisposable, IEquatable(Of NativeConcurrentDictionary(Of TKey, TValue))
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeConcurrentDictionary`2}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeConcurrentDictionary`2.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue)
+  name.vb: NativeConcurrentDictionary(Of TKey, TValue)
+- uid: NativeCollections.NativeConcurrentDictionary`2.Keys
+  commentId: P:NativeCollections.NativeConcurrentDictionary`2.Keys
+  id: Keys
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Keys
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Keys
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Keys
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Keys
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 83
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Keys
+  example: []
+  syntax:
+    content: public NativeConcurrentDictionary<TKey, TValue>.KeyCollection Keys { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+    content.vb: Public ReadOnly Property Keys As NativeConcurrentDictionary(Of TKey, TValue).KeyCollection
+  overload: NativeCollections.NativeConcurrentDictionary`2.Keys*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Keys
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Keys
+- uid: NativeCollections.NativeConcurrentDictionary`2.Values
+  commentId: P:NativeCollections.NativeConcurrentDictionary`2.Values
+  id: Values
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Values
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Values
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Values
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Values
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 88
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Values
+  example: []
+  syntax:
+    content: public NativeConcurrentDictionary<TKey, TValue>.ValueCollection Values { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+    content.vb: Public ReadOnly Property Values As NativeConcurrentDictionary(Of TKey, TValue).ValueCollection
+  overload: NativeCollections.NativeConcurrentDictionary`2.Values*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Values
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Values
+- uid: NativeCollections.NativeConcurrentDictionary`2.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)
+  id: '#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)'
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: NativeConcurrentDictionary(int, int, int, int, bool)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.NativeConcurrentDictionary(int, int, int, int, bool)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.NativeConcurrentDictionary(int, int, int, int, bool)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 98
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeConcurrentDictionary(int size, int maxFreeSlabs, int concurrencyLevel, int capacity, bool growLockArray)
+    parameters:
+    - id: size
+      type: System.Int32
+      description: Size
+    - id: maxFreeSlabs
+      type: System.Int32
+      description: Max free slabs
+    - id: concurrencyLevel
+      type: System.Int32
+      description: Concurrency level
+    - id: capacity
+      type: System.Int32
+      description: Capacity
+    - id: growLockArray
+      type: System.Boolean
+      description: Grow lock array
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(size As Integer, maxFreeSlabs As Integer, concurrencyLevel As Integer, capacity As Integer, growLockArray As Boolean)
+  overload: NativeCollections.NativeConcurrentDictionary`2.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).New(Integer, Integer, Integer, Integer, Boolean)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).New(Integer, Integer, Integer, Integer, Boolean)
+  name.vb: New(Integer, Integer, Integer, Integer, Boolean)
+- uid: NativeCollections.NativeConcurrentDictionary`2.IsCreated
+  commentId: P:NativeCollections.NativeConcurrentDictionary`2.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.IsCreated
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 126
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeConcurrentDictionary`2.IsCreated*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).IsCreated
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).IsCreated
+- uid: NativeCollections.NativeConcurrentDictionary`2.IsEmpty
+  commentId: P:NativeCollections.NativeConcurrentDictionary`2.IsEmpty
+  id: IsEmpty
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.IsEmpty
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsEmpty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 131
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: NativeCollections.NativeConcurrentDictionary`2.IsEmpty*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).IsEmpty
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).IsEmpty
+- uid: NativeCollections.NativeConcurrentDictionary`2.Item(`0@)
+  commentId: P:NativeCollections.NativeConcurrentDictionary`2.Item(`0@)
+  id: Item(`0@)
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: this[TKey]
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.this[TKey]
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.this[TKey]
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: this[]
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 155
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get or set value
+  example: []
+  syntax:
+    content: public TValue this[in TKey key] { get; set; }
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    return:
+      type: '{TValue}'
+    content.vb: Public Default Property this[](key As TKey) As TValue
+  overload: NativeCollections.NativeConcurrentDictionary`2.Item*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).this[](TKey)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).this[](TKey)
+  name.vb: this[](TKey)
+- uid: NativeCollections.NativeConcurrentDictionary`2.Count
+  commentId: P:NativeCollections.NativeConcurrentDictionary`2.Count
+  id: Count
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Count
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 171
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Count
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: NativeCollections.NativeConcurrentDictionary`2.Count*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Count
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Count
+- uid: NativeCollections.NativeConcurrentDictionary`2.Equals(NativeCollections.NativeConcurrentDictionary{`0,`1})
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.Equals(NativeCollections.NativeConcurrentDictionary{`0,`1})
+  id: Equals(NativeCollections.NativeConcurrentDictionary{`0,`1})
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeConcurrentDictionary<TKey, TValue>)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Equals(NativeConcurrentDictionary<TKey, TValue>)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Equals(NativeCollections.NativeConcurrentDictionary<TKey, TValue>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 194
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeConcurrentDictionary<TKey, TValue> other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeConcurrentDictionary`2
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeConcurrentDictionary(Of TKey, TValue)) As Boolean
+  overload: NativeCollections.NativeConcurrentDictionary`2.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeConcurrentDictionary`2}.Equals(NativeCollections.NativeConcurrentDictionary{{TKey},{TValue}})
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Equals(NativeConcurrentDictionary(Of TKey, TValue))
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Equals(NativeCollections.NativeConcurrentDictionary(Of TKey, TValue))
+  name.vb: Equals(NativeConcurrentDictionary(Of TKey, TValue))
+- uid: NativeCollections.NativeConcurrentDictionary`2.Equals(System.Object)
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Equals(object?)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 201
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeConcurrentDictionary`2.Equals*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Equals(Object)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeConcurrentDictionary`2.GetHashCode
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.GetHashCode()
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 207
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeConcurrentDictionary`2.GetHashCode*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).GetHashCode()
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).GetHashCode()
+- uid: NativeCollections.NativeConcurrentDictionary`2.ToString
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.ToString
+  id: ToString
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.ToString()
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 213
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeConcurrentDictionary`2.ToString*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).ToString()
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).ToString()
+- uid: NativeCollections.NativeConcurrentDictionary`2.op_Equality(NativeCollections.NativeConcurrentDictionary{`0,`1},NativeCollections.NativeConcurrentDictionary{`0,`1})
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.op_Equality(NativeCollections.NativeConcurrentDictionary{`0,`1},NativeCollections.NativeConcurrentDictionary{`0,`1})
+  id: op_Equality(NativeCollections.NativeConcurrentDictionary{`0,`1},NativeCollections.NativeConcurrentDictionary{`0,`1})
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeConcurrentDictionary<TKey, TValue>, NativeConcurrentDictionary<TKey, TValue>)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.operator ==(NativeConcurrentDictionary<TKey, TValue>, NativeConcurrentDictionary<TKey, TValue>)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.operator ==(NativeCollections.NativeConcurrentDictionary<TKey, TValue>, NativeCollections.NativeConcurrentDictionary<TKey, TValue>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 221
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeConcurrentDictionary<TKey, TValue> left, NativeConcurrentDictionary<TKey, TValue> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeConcurrentDictionary`2
+      description: Left
+    - id: right
+      type: NativeCollections.NativeConcurrentDictionary`2
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeConcurrentDictionary(Of TKey, TValue), right As NativeConcurrentDictionary(Of TKey, TValue)) As Boolean
+  overload: NativeCollections.NativeConcurrentDictionary`2.op_Equality*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).=(NativeConcurrentDictionary(Of TKey, TValue), NativeConcurrentDictionary(Of TKey, TValue))
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).=(NativeCollections.NativeConcurrentDictionary(Of TKey, TValue), NativeCollections.NativeConcurrentDictionary(Of TKey, TValue))
+  name.vb: =(NativeConcurrentDictionary(Of TKey, TValue), NativeConcurrentDictionary(Of TKey, TValue))
+- uid: NativeCollections.NativeConcurrentDictionary`2.op_Inequality(NativeCollections.NativeConcurrentDictionary{`0,`1},NativeCollections.NativeConcurrentDictionary{`0,`1})
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.op_Inequality(NativeCollections.NativeConcurrentDictionary{`0,`1},NativeCollections.NativeConcurrentDictionary{`0,`1})
+  id: op_Inequality(NativeCollections.NativeConcurrentDictionary{`0,`1},NativeCollections.NativeConcurrentDictionary{`0,`1})
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeConcurrentDictionary<TKey, TValue>, NativeConcurrentDictionary<TKey, TValue>)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.operator !=(NativeConcurrentDictionary<TKey, TValue>, NativeConcurrentDictionary<TKey, TValue>)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.operator !=(NativeCollections.NativeConcurrentDictionary<TKey, TValue>, NativeCollections.NativeConcurrentDictionary<TKey, TValue>)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 229
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeConcurrentDictionary<TKey, TValue> left, NativeConcurrentDictionary<TKey, TValue> right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeConcurrentDictionary`2
+      description: Left
+    - id: right
+      type: NativeCollections.NativeConcurrentDictionary`2
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeConcurrentDictionary(Of TKey, TValue), right As NativeConcurrentDictionary(Of TKey, TValue)) As Boolean
+  overload: NativeCollections.NativeConcurrentDictionary`2.op_Inequality*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).<>(NativeConcurrentDictionary(Of TKey, TValue), NativeConcurrentDictionary(Of TKey, TValue))
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).<>(NativeCollections.NativeConcurrentDictionary(Of TKey, TValue), NativeCollections.NativeConcurrentDictionary(Of TKey, TValue))
+  name.vb: <>(NativeConcurrentDictionary(Of TKey, TValue), NativeConcurrentDictionary(Of TKey, TValue))
+- uid: NativeCollections.NativeConcurrentDictionary`2.Dispose
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Dispose()
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 234
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeConcurrentDictionary`2.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Dispose()
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Dispose()
+- uid: NativeCollections.NativeConcurrentDictionary`2.Clear
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.Clear
+  id: Clear
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Clear()
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Clear()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clear
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 248
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Clear
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Clear()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Clear()
+  overload: NativeCollections.NativeConcurrentDictionary`2.Clear*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Clear()
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Clear()
+- uid: NativeCollections.NativeConcurrentDictionary`2.TryAdd(`0@,`1@)
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.TryAdd(`0@,`1@)
+  id: TryAdd(`0@,`1@)
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: TryAdd(in TKey, in TValue)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.TryAdd(in TKey, in TValue)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.TryAdd(in TKey, in TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryAdd
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 295
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try add
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryAdd(in TKey key, in TValue value)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    - id: value
+      type: '{TValue}'
+      description: Value
+    return:
+      type: System.Boolean
+      description: Added
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryAdd(key As TKey, value As TValue) As Boolean
+  overload: NativeCollections.NativeConcurrentDictionary`2.TryAdd*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).TryAdd(TKey, TValue)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).TryAdd(TKey, TValue)
+  name.vb: TryAdd(TKey, TValue)
+- uid: NativeCollections.NativeConcurrentDictionary`2.TryRemove(`0@,`1@)
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.TryRemove(`0@,`1@)
+  id: TryRemove(`0@,`1@)
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: TryRemove(in TKey, out TValue)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.TryRemove(in TKey, out TValue)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.TryRemove(in TKey, out TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryRemove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 304
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try remove
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryRemove(in TKey key, out TValue value)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    - id: value
+      type: '{TValue}'
+      description: Value
+    return:
+      type: System.Boolean
+      description: Removed
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryRemove(key As TKey, value As TValue) As Boolean
+  overload: NativeCollections.NativeConcurrentDictionary`2.TryRemove*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).TryRemove(TKey, TValue)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).TryRemove(TKey, TValue)
+  name.vb: TryRemove(TKey, TValue)
+- uid: NativeCollections.NativeConcurrentDictionary`2.TryRemove(System.Collections.Generic.KeyValuePair{`0,`1}@)
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.TryRemove(System.Collections.Generic.KeyValuePair{`0,`1}@)
+  id: TryRemove(System.Collections.Generic.KeyValuePair{`0,`1}@)
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: TryRemove(in KeyValuePair<TKey, TValue>)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.TryRemove(in KeyValuePair<TKey, TValue>)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.TryRemove(in System.Collections.Generic.KeyValuePair<TKey, TValue>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryRemove
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 367
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try remove
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryRemove(in KeyValuePair<TKey, TValue> keyValuePair)
+    parameters:
+    - id: keyValuePair
+      type: System.Collections.Generic.KeyValuePair{{TKey},{TValue}}
+      description: Key value pair
+    return:
+      type: System.Boolean
+      description: Removed
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryRemove(keyValuePair As KeyValuePair(Of TKey, TValue)) As Boolean
+  overload: NativeCollections.NativeConcurrentDictionary`2.TryRemove*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).TryRemove(KeyValuePair(Of TKey, TValue))
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).TryRemove(System.Collections.Generic.KeyValuePair(Of TKey, TValue))
+  name.vb: TryRemove(KeyValuePair(Of TKey, TValue))
+- uid: NativeCollections.NativeConcurrentDictionary`2.ContainsKey(`0@)
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.ContainsKey(`0@)
+  id: ContainsKey(`0@)
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: ContainsKey(in TKey)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.ContainsKey(in TKey)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.ContainsKey(in TKey)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ContainsKey
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 432
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Contains key
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool ContainsKey(in TKey key)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    return:
+      type: System.Boolean
+      description: Contains key
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function ContainsKey(key As TKey) As Boolean
+  overload: NativeCollections.NativeConcurrentDictionary`2.ContainsKey*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).ContainsKey(TKey)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).ContainsKey(TKey)
+  name.vb: ContainsKey(TKey)
+- uid: NativeCollections.NativeConcurrentDictionary`2.TryGetValue(`0@,`1@)
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.TryGetValue(`0@,`1@)
+  id: TryGetValue(`0@,`1@)
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: TryGetValue(in TKey, out TValue)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.TryGetValue(in TKey, out TValue)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.TryGetValue(in TKey, out TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryGetValue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 452
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try to get the value
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryGetValue(in TKey key, out TValue value)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    - id: value
+      type: '{TValue}'
+      description: Value
+    return:
+      type: System.Boolean
+      description: Got
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryGetValue(key As TKey, value As TValue) As Boolean
+  overload: NativeCollections.NativeConcurrentDictionary`2.TryGetValue*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).TryGetValue(TKey, TValue)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).TryGetValue(TKey, TValue)
+  name.vb: TryGetValue(TKey, TValue)
+- uid: NativeCollections.NativeConcurrentDictionary`2.TryUpdate(`0@,`1@,`1@)
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.TryUpdate(`0@,`1@,`1@)
+  id: TryUpdate(`0@,`1@,`1@)
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: TryUpdate(in TKey, in TValue, in TValue)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.TryUpdate(in TKey, in TValue, in TValue)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.TryUpdate(in TKey, in TValue, in TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryUpdate
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 477
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Try update
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public bool TryUpdate(in TKey key, in TValue newValue, in TValue comparisonValue)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    - id: newValue
+      type: '{TValue}'
+      description: New value
+    - id: comparisonValue
+      type: '{TValue}'
+      description: Comparison value
+    return:
+      type: System.Boolean
+      description: Updated
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function TryUpdate(key As TKey, newValue As TValue, comparisonValue As TValue) As Boolean
+  overload: NativeCollections.NativeConcurrentDictionary`2.TryUpdate*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).TryUpdate(TKey, TValue, TValue)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).TryUpdate(TKey, TValue, TValue)
+  name.vb: TryUpdate(TKey, TValue, TValue)
+- uid: NativeCollections.NativeConcurrentDictionary`2.GetOrAdd(`0@,`1@)
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.GetOrAdd(`0@,`1@)
+  id: GetOrAdd(`0@,`1@)
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: GetOrAdd(in TKey, in TValue)
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.GetOrAdd(in TKey, in TValue)
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.GetOrAdd(in TKey, in TValue)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetOrAdd
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 486
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get or add value
+  example: []
+  syntax:
+    content: public TValue GetOrAdd(in TKey key, in TValue value)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: Key
+    - id: value
+      type: '{TValue}'
+      description: Value
+    return:
+      type: '{TValue}'
+      description: Value
+    content.vb: Public Function GetOrAdd(key As TKey, value As TValue) As TValue
+  overload: NativeCollections.NativeConcurrentDictionary`2.GetOrAdd*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).GetOrAdd(TKey, TValue)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).GetOrAdd(TKey, TValue)
+  name.vb: GetOrAdd(TKey, TValue)
+- uid: NativeCollections.NativeConcurrentDictionary`2.Empty
+  commentId: P:NativeCollections.NativeConcurrentDictionary`2.Empty
+  id: Empty
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Empty
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 1007
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeConcurrentDictionary<TKey, TValue> Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeConcurrentDictionary`2
+    content.vb: Public Shared ReadOnly Property Empty As NativeConcurrentDictionary(Of TKey, TValue)
+  overload: NativeCollections.NativeConcurrentDictionary`2.Empty*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Empty
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Empty
+- uid: NativeCollections.NativeConcurrentDictionary`2.GetEnumerator
+  commentId: M:NativeCollections.NativeConcurrentDictionary`2.GetEnumerator
+  id: GetEnumerator
+  parent: NativeCollections.NativeConcurrentDictionary`2
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.GetEnumerator()
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetEnumerator
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentDictionary.cs
+    startLine: 1013
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get enumerator
+  example: []
+  syntax:
+    content: public NativeConcurrentDictionary<TKey, TValue>.Enumerator GetEnumerator()
+    return:
+      type: NativeCollections.NativeConcurrentDictionary`2.Enumerator
+      description: Enumerator
+    content.vb: Public Function GetEnumerator() As NativeConcurrentDictionary(Of TKey, TValue).Enumerator
+  overload: NativeCollections.NativeConcurrentDictionary`2.GetEnumerator*
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).GetEnumerator()
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).GetEnumerator()
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeConcurrentDictionary`2}
+  commentId: T:System.IEquatable{NativeCollections.NativeConcurrentDictionary`2}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeConcurrentDictionary<TKey, TValue>>
+  nameWithType: IEquatable<NativeConcurrentDictionary<TKey, TValue>>
+  fullName: System.IEquatable<NativeCollections.NativeConcurrentDictionary<TKey, TValue>>
+  nameWithType.vb: IEquatable(Of NativeConcurrentDictionary(Of TKey, TValue))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeConcurrentDictionary(Of TKey, TValue))
+  name.vb: IEquatable(Of NativeConcurrentDictionary(Of TKey, TValue))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeConcurrentDictionary`2.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeConcurrentDictionary<TKey, TValue>>(NativeConcurrentDictionary<TKey, TValue>)
+  nameWithType: JsonHelper.ToJson<NativeConcurrentDictionary<TKey, TValue>>(NativeConcurrentDictionary<TKey, TValue>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeConcurrentDictionary<TKey, TValue>>(NativeCollections.NativeConcurrentDictionary<TKey, TValue>)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeConcurrentDictionary(Of TKey, TValue))(NativeConcurrentDictionary(Of TKey, TValue))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeConcurrentDictionary(Of TKey, TValue))(NativeCollections.NativeConcurrentDictionary(Of TKey, TValue))
+  name.vb: ToJson(Of NativeConcurrentDictionary(Of TKey, TValue))(NativeConcurrentDictionary(Of TKey, TValue))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeConcurrentDictionary{`0,`1})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeConcurrentDictionary{`0,`1})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeConcurrentDictionary`2.Keys*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.Keys
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_Keys
+  name: Keys
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Keys
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Keys
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Keys
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Keys
+- uid: NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+  commentId: T:NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentDictionary-2.html
+  name: NativeConcurrentDictionary<TKey, TValue>.KeyCollection
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.KeyCollection
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.KeyCollection
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).KeyCollection
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).KeyCollection
+  name.vb: NativeConcurrentDictionary(Of TKey, TValue).KeyCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.KeyCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.KeyCollection
+    name: KeyCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.KeyCollection.html
+- uid: NativeCollections.NativeConcurrentDictionary`2.Values*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.Values
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_Values
+  name: Values
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Values
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Values
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Values
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Values
+- uid: NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+  commentId: T:NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentDictionary-2.html
+  name: NativeConcurrentDictionary<TKey, TValue>.ValueCollection
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.ValueCollection
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.ValueCollection
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).ValueCollection
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).ValueCollection
+  name.vb: NativeConcurrentDictionary(Of TKey, TValue).ValueCollection
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.ValueCollection.html
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.ValueCollection
+    name: ValueCollection
+    href: NativeCollections.NativeConcurrentDictionary-2.ValueCollection.html
+- uid: NativeCollections.NativeConcurrentDictionary`2.#ctor*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.#ctor
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2__ctor_System_Int32_System_Int32_System_Int32_System_Int32_System_Boolean_
+  name: NativeConcurrentDictionary
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.NativeConcurrentDictionary
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.NativeConcurrentDictionary
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).New
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeConcurrentDictionary`2.IsCreated*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.IsCreated
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_IsCreated
+  name: IsCreated
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.IsCreated
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.IsCreated
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).IsCreated
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).IsCreated
+- uid: NativeCollections.NativeConcurrentDictionary`2.IsEmpty*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.IsEmpty
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_IsEmpty
+  name: IsEmpty
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.IsEmpty
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.IsEmpty
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).IsEmpty
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).IsEmpty
+- uid: NativeCollections.NativeConcurrentDictionary`2.Item*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.Item
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_Item__0__
+  name: this
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.this
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.this
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).this[]
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).this[]
+  name.vb: this[]
+- uid: '{TKey}'
+  commentId: '!:TKey'
+  definition: TKey
+  name: TKey
+  nameWithType: TKey
+  fullName: TKey
+- uid: '{TValue}'
+  commentId: '!:TValue'
+  definition: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: TKey
+  name: TKey
+  nameWithType: TKey
+  fullName: TKey
+- uid: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: NativeCollections.NativeConcurrentDictionary`2.Count*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.Count
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_Count
+  name: Count
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Count
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Count
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Count
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Count
+- uid: NativeCollections.NativeConcurrentDictionary`2.Equals*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.Equals
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_Equals_NativeCollections_NativeConcurrentDictionary__0__1__
+  name: Equals
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Equals
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Equals
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Equals
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Equals
+- uid: System.IEquatable{NativeCollections.NativeConcurrentDictionary`2}.Equals(NativeCollections.NativeConcurrentDictionary{{TKey},{TValue}})
+  commentId: M:System.IEquatable{NativeCollections.NativeConcurrentDictionary`2}.Equals(NativeCollections.NativeConcurrentDictionary{`0,`1})
+  parent: System.IEquatable{NativeCollections.NativeConcurrentDictionary`2}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeConcurrentDictionary<TKey, TValue>)
+  nameWithType: IEquatable<NativeConcurrentDictionary<TKey, TValue>>.Equals(NativeConcurrentDictionary<TKey, TValue>)
+  fullName: System.IEquatable<NativeCollections.NativeConcurrentDictionary<TKey, TValue>>.Equals(NativeCollections.NativeConcurrentDictionary<TKey, TValue>)
+  nameWithType.vb: IEquatable(Of NativeConcurrentDictionary(Of TKey, TValue)).Equals(NativeConcurrentDictionary(Of TKey, TValue))
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeConcurrentDictionary(Of TKey, TValue)).Equals(NativeCollections.NativeConcurrentDictionary(Of TKey, TValue))
+  name.vb: Equals(NativeConcurrentDictionary(Of TKey, TValue))
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeConcurrentDictionary`2}.Equals(NativeCollections.NativeConcurrentDictionary{`0,`1})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeConcurrentDictionary`2}.Equals(NativeCollections.NativeConcurrentDictionary{`0,`1})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: )
+- uid: NativeCollections.NativeConcurrentDictionary`2
+  commentId: T:NativeCollections.NativeConcurrentDictionary`2
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentDictionary-2.html
+  name: NativeConcurrentDictionary<TKey, TValue>
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue)
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue)
+  name.vb: NativeConcurrentDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentDictionary`2.GetHashCode*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.GetHashCode
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.GetHashCode
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.GetHashCode
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).GetHashCode
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentDictionary`2.ToString*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.ToString
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_ToString
+  name: ToString
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.ToString
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.ToString
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).ToString
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeConcurrentDictionary`2.op_Equality*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.op_Equality
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_op_Equality_NativeCollections_NativeConcurrentDictionary__0__1__NativeCollections_NativeConcurrentDictionary__0__1__
+  name: operator ==
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.operator ==
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.operator ==
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).=
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentDictionary`2.op_Equality*
+    name: ==
+    href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_op_Equality_NativeCollections_NativeConcurrentDictionary__0__1__NativeCollections_NativeConcurrentDictionary__0__1__
+- uid: NativeCollections.NativeConcurrentDictionary`2.op_Inequality*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.op_Inequality
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_op_Inequality_NativeCollections_NativeConcurrentDictionary__0__1__NativeCollections_NativeConcurrentDictionary__0__1__
+  name: operator !=
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.operator !=
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.operator !=
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).<>
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentDictionary`2.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_op_Inequality_NativeCollections_NativeConcurrentDictionary__0__1__NativeCollections_NativeConcurrentDictionary__0__1__
+- uid: NativeCollections.NativeConcurrentDictionary`2.Dispose*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.Dispose
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_Dispose
+  name: Dispose
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Dispose
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Dispose
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Dispose
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentDictionary`2.Clear*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.Clear
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_Clear
+  name: Clear
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Clear
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Clear
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Clear
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Clear
+- uid: NativeCollections.NativeConcurrentDictionary`2.TryAdd*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.TryAdd
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_TryAdd__0___1__
+  name: TryAdd
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.TryAdd
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.TryAdd
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).TryAdd
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).TryAdd
+- uid: NativeCollections.NativeConcurrentDictionary`2.TryRemove*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.TryRemove
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_TryRemove__0___1__
+  name: TryRemove
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.TryRemove
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.TryRemove
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).TryRemove
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).TryRemove
+- uid: System.Collections.Generic.KeyValuePair{{TKey},{TValue}}
+  commentId: T:System.Collections.Generic.KeyValuePair{`0,`1}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.KeyValuePair`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  name: KeyValuePair<TKey, TValue>
+  nameWithType: KeyValuePair<TKey, TValue>
+  fullName: System.Collections.Generic.KeyValuePair<TKey, TValue>
+  nameWithType.vb: KeyValuePair(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.KeyValuePair(Of TKey, TValue)
+  name.vb: KeyValuePair(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.Collections.Generic.KeyValuePair`2
+  commentId: T:System.Collections.Generic.KeyValuePair`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  name: KeyValuePair<TKey, TValue>
+  nameWithType: KeyValuePair<TKey, TValue>
+  fullName: System.Collections.Generic.KeyValuePair<TKey, TValue>
+  nameWithType.vb: KeyValuePair(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.KeyValuePair(Of TKey, TValue)
+  name.vb: KeyValuePair(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: NativeCollections.NativeConcurrentDictionary`2.ContainsKey*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.ContainsKey
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_ContainsKey__0__
+  name: ContainsKey
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.ContainsKey
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.ContainsKey
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).ContainsKey
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).ContainsKey
+- uid: NativeCollections.NativeConcurrentDictionary`2.TryGetValue*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.TryGetValue
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_TryGetValue__0___1__
+  name: TryGetValue
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.TryGetValue
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.TryGetValue
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).TryGetValue
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).TryGetValue
+- uid: NativeCollections.NativeConcurrentDictionary`2.TryUpdate*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.TryUpdate
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_TryUpdate__0___1___1__
+  name: TryUpdate
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.TryUpdate
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.TryUpdate
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).TryUpdate
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).TryUpdate
+- uid: NativeCollections.NativeConcurrentDictionary`2.GetOrAdd*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.GetOrAdd
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_GetOrAdd__0___1__
+  name: GetOrAdd
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.GetOrAdd
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.GetOrAdd
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).GetOrAdd
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).GetOrAdd
+- uid: NativeCollections.NativeConcurrentDictionary`2.Empty*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.Empty
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_Empty
+  name: Empty
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Empty
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Empty
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Empty
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Empty
+- uid: NativeCollections.NativeConcurrentDictionary`2.GetEnumerator*
+  commentId: Overload:NativeCollections.NativeConcurrentDictionary`2.GetEnumerator
+  href: NativeCollections.NativeConcurrentDictionary-2.html#NativeCollections_NativeConcurrentDictionary_2_GetEnumerator
+  name: GetEnumerator
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.GetEnumerator
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.GetEnumerator
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).GetEnumerator
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).GetEnumerator
+- uid: NativeCollections.NativeConcurrentDictionary`2.Enumerator
+  commentId: T:NativeCollections.NativeConcurrentDictionary`2.Enumerator
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentDictionary-2.html
+  name: NativeConcurrentDictionary<TKey, TValue>.Enumerator
+  nameWithType: NativeConcurrentDictionary<TKey, TValue>.Enumerator
+  fullName: NativeCollections.NativeConcurrentDictionary<TKey, TValue>.Enumerator
+  nameWithType.vb: NativeConcurrentDictionary(Of TKey, TValue).Enumerator
+  fullName.vb: NativeCollections.NativeConcurrentDictionary(Of TKey, TValue).Enumerator
+  name.vb: NativeConcurrentDictionary(Of TKey, TValue).Enumerator
+  spec.csharp:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentDictionary-2.Enumerator.html
+  spec.vb:
+  - uid: NativeCollections.NativeConcurrentDictionary`2
+    name: NativeConcurrentDictionary
+    href: NativeCollections.NativeConcurrentDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: .
+  - uid: NativeCollections.NativeConcurrentDictionary`2.Enumerator
+    name: Enumerator
+    href: NativeCollections.NativeConcurrentDictionary-2.Enumerator.html

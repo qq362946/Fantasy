@@ -1,0 +1,51 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../Fantasy.Net/Fantasy.Net/",
+          "files": [
+            "**/*.csproj"
+          ]
+        }
+      ],
+      "dest": "api",
+      "includePrivateMembers": false,
+      "disableGitFeatures": false,
+      "disableDefaultFilter": true,
+      "noRestore": false,
+      "namespaceLayout": "Nested",
+      "memberLayout": "samePage",
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "**/*.{md,yml}"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "output": "_site",
+    "template": [
+      "default",
+      "default(zh-cn)"
+    ],
+    "globalMetadata": {
+      "_appName": "Fantasy",
+      "_appTitle": "Fantasy",
+      "_enableSearch": true,
+      "pdf": false
+    }
+  }
+}

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Fantasy;
+using Fantasy.Async;
+using Fantasy.Network;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +41,7 @@ public class Addressable : MonoBehaviour
     {
         ConnectAddressable.interactable = false;
         // 1、初始化Fantasy
-        _scene = await Fantasy.Entry.Initialize(GetType().Assembly);
+        _scene = await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
         // 2、连接到Gate服务器
         _session = _scene.Connect(
             "127.0.0.1:20000",

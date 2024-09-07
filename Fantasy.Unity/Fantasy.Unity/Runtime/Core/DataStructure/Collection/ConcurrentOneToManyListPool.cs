@@ -3,9 +3,11 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using Fantasy.Pool;
+
 #pragma warning disable CS8603 // Possible null reference return.
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Collection
 {
     /// <summary>
     /// 并发的一对多列表池，用于维护具有相同键的多个值的关联关系，实现了 <see cref="IDisposable"/> 接口。

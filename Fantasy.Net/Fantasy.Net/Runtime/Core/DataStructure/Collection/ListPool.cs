@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Fantasy.Pool;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Collection
 {
     /// <summary>
     /// 可释放的列表（List）对象池。

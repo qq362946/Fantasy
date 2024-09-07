@@ -1,0 +1,950 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder
+  commentId: T:Fantasy.Async.AsyncFTaskMethodBuilder
+  id: AsyncFTaskMethodBuilder
+  parent: Fantasy.Async
+  children:
+  - Fantasy.Async.AsyncFTaskMethodBuilder.#ctor(Fantasy.Async.FTask)
+  - Fantasy.Async.AsyncFTaskMethodBuilder.AwaitOnCompleted``2(``0@,``1@)
+  - Fantasy.Async.AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted``2(``0@,``1@)
+  - Fantasy.Async.AsyncFTaskMethodBuilder.Create
+  - Fantasy.Async.AsyncFTaskMethodBuilder.SetException(System.Exception)
+  - Fantasy.Async.AsyncFTaskMethodBuilder.SetResult
+  - Fantasy.Async.AsyncFTaskMethodBuilder.SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+  - Fantasy.Async.AsyncFTaskMethodBuilder.Start``1(``0@)
+  - Fantasy.Async.AsyncFTaskMethodBuilder.Task
+  langs:
+  - csharp
+  - vb
+  name: AsyncFTaskMethodBuilder
+  nameWithType: AsyncFTaskMethodBuilder
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AsyncFTaskMethodBuilder
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+    startLine: 11
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Auto)]
+
+      public readonly struct AsyncFTaskMethodBuilder
+    content.vb: >-
+      <StructLayout(LayoutKind.Auto)>
+
+      Public Structure AsyncFTaskMethodBuilder
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - Fantasy.Async.AsyncFTaskMethodBuilder.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 3
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.Task
+  commentId: P:Fantasy.Async.AsyncFTaskMethodBuilder.Task
+  id: Task
+  parent: Fantasy.Async.AsyncFTaskMethodBuilder
+  langs:
+  - csharp
+  - vb
+  name: Task
+  nameWithType: AsyncFTaskMethodBuilder.Task
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.Task
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Task
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: public FTask Task { get; }
+    parameters: []
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Public ReadOnly Property Task As FTask
+  overload: Fantasy.Async.AsyncFTaskMethodBuilder.Task*
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.Create
+  commentId: M:Fantasy.Async.AsyncFTaskMethodBuilder.Create
+  id: Create
+  parent: Fantasy.Async.AsyncFTaskMethodBuilder
+  langs:
+  - csharp
+  - vb
+  name: Create()
+  nameWithType: AsyncFTaskMethodBuilder.Create()
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.Create()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Create
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+    startLine: 21
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static AsyncFTaskMethodBuilder Create()
+    return:
+      type: Fantasy.Async.AsyncFTaskMethodBuilder
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Function Create() As AsyncFTaskMethodBuilder
+  overload: Fantasy.Async.AsyncFTaskMethodBuilder.Create*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.#ctor(Fantasy.Async.FTask)
+  commentId: M:Fantasy.Async.AsyncFTaskMethodBuilder.#ctor(Fantasy.Async.FTask)
+  id: '#ctor(Fantasy.Async.FTask)'
+  parent: Fantasy.Async.AsyncFTaskMethodBuilder
+  langs:
+  - csharp
+  - vb
+  name: AsyncFTaskMethodBuilder(FTask)
+  nameWithType: AsyncFTaskMethodBuilder.AsyncFTaskMethodBuilder(FTask)
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.AsyncFTaskMethodBuilder(Fantasy.Async.FTask)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+    startLine: 28
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: public AsyncFTaskMethodBuilder(FTask fTask)
+    parameters:
+    - id: fTask
+      type: Fantasy.Async.FTask
+    content.vb: Public Sub New(fTask As FTask)
+  overload: Fantasy.Async.AsyncFTaskMethodBuilder.#ctor*
+  nameWithType.vb: AsyncFTaskMethodBuilder.New(FTask)
+  fullName.vb: Fantasy.Async.AsyncFTaskMethodBuilder.New(Fantasy.Async.FTask)
+  name.vb: New(FTask)
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.Start``1(``0@)
+  commentId: M:Fantasy.Async.AsyncFTaskMethodBuilder.Start``1(``0@)
+  id: Start``1(``0@)
+  parent: Fantasy.Async.AsyncFTaskMethodBuilder
+  langs:
+  - csharp
+  - vb
+  name: Start<TStateMachine>(ref TStateMachine)
+  nameWithType: AsyncFTaskMethodBuilder.Start<TStateMachine>(ref TStateMachine)
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.Start<TStateMachine>(ref TStateMachine)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Start
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+    startLine: 33
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Start<TStateMachine>(ref TStateMachine stateMachine) where TStateMachine : IAsyncStateMachine
+    parameters:
+    - id: stateMachine
+      type: '{TStateMachine}'
+    typeParameters:
+    - id: TStateMachine
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Start(Of TStateMachine As IAsyncStateMachine)(stateMachine As TStateMachine)
+  overload: Fantasy.Async.AsyncFTaskMethodBuilder.Start*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: AsyncFTaskMethodBuilder.Start(Of TStateMachine)(TStateMachine)
+  fullName.vb: Fantasy.Async.AsyncFTaskMethodBuilder.Start(Of TStateMachine)(TStateMachine)
+  name.vb: Start(Of TStateMachine)(TStateMachine)
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.SetResult
+  commentId: M:Fantasy.Async.AsyncFTaskMethodBuilder.SetResult
+  id: SetResult
+  parent: Fantasy.Async.AsyncFTaskMethodBuilder
+  langs:
+  - csharp
+  - vb
+  name: SetResult()
+  nameWithType: AsyncFTaskMethodBuilder.SetResult()
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.SetResult()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetResult
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+    startLine: 40
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void SetResult()
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub SetResult()
+  overload: Fantasy.Async.AsyncFTaskMethodBuilder.SetResult*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.SetException(System.Exception)
+  commentId: M:Fantasy.Async.AsyncFTaskMethodBuilder.SetException(System.Exception)
+  id: SetException(System.Exception)
+  parent: Fantasy.Async.AsyncFTaskMethodBuilder
+  langs:
+  - csharp
+  - vb
+  name: SetException(Exception)
+  nameWithType: AsyncFTaskMethodBuilder.SetException(Exception)
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.SetException(System.Exception)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetException
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+    startLine: 47
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void SetException(Exception exception)
+    parameters:
+    - id: exception
+      type: System.Exception
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub SetException(exception As Exception)
+  overload: Fantasy.Async.AsyncFTaskMethodBuilder.SetException*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitOnCompleted``2(``0@,``1@)
+  commentId: M:Fantasy.Async.AsyncFTaskMethodBuilder.AwaitOnCompleted``2(``0@,``1@)
+  id: AwaitOnCompleted``2(``0@,``1@)
+  parent: Fantasy.Async.AsyncFTaskMethodBuilder
+  langs:
+  - csharp
+  - vb
+  name: AwaitOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter, ref TStateMachine)
+  nameWithType: AsyncFTaskMethodBuilder.AwaitOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter, ref TStateMachine)
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter, ref TStateMachine)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AwaitOnCompleted
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+    startLine: 54
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void AwaitOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine) where TAwaiter : INotifyCompletion where TStateMachine : IAsyncStateMachine
+    parameters:
+    - id: awaiter
+      type: '{TAwaiter}'
+    - id: stateMachine
+      type: '{TStateMachine}'
+    typeParameters:
+    - id: TAwaiter
+    - id: TStateMachine
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub AwaitOnCompleted(Of TAwaiter As INotifyCompletion, TStateMachine As IAsyncStateMachine)(awaiter As TAwaiter, stateMachine As TStateMachine)
+  overload: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitOnCompleted*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: AsyncFTaskMethodBuilder.AwaitOnCompleted(Of TAwaiter, TStateMachine)(TAwaiter, TStateMachine)
+  fullName.vb: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitOnCompleted(Of TAwaiter, TStateMachine)(TAwaiter, TStateMachine)
+  name.vb: AwaitOnCompleted(Of TAwaiter, TStateMachine)(TAwaiter, TStateMachine)
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted``2(``0@,``1@)
+  commentId: M:Fantasy.Async.AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted``2(``0@,``1@)
+  id: AwaitUnsafeOnCompleted``2(``0@,``1@)
+  parent: Fantasy.Async.AsyncFTaskMethodBuilder
+  langs:
+  - csharp
+  - vb
+  name: AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter, ref TStateMachine)
+  nameWithType: AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter, ref TStateMachine)
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter, ref TStateMachine)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AwaitUnsafeOnCompleted
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+    startLine: 62
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine) where TAwaiter : ICriticalNotifyCompletion where TStateMachine : IAsyncStateMachine
+    parameters:
+    - id: awaiter
+      type: '{TAwaiter}'
+    - id: stateMachine
+      type: '{TStateMachine}'
+    typeParameters:
+    - id: TAwaiter
+    - id: TStateMachine
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub AwaitUnsafeOnCompleted(Of TAwaiter As ICriticalNotifyCompletion, TStateMachine As IAsyncStateMachine)(awaiter As TAwaiter, stateMachine As TStateMachine)
+  overload: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted(Of TAwaiter, TStateMachine)(TAwaiter, TStateMachine)
+  fullName.vb: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted(Of TAwaiter, TStateMachine)(TAwaiter, TStateMachine)
+  name.vb: AwaitUnsafeOnCompleted(Of TAwaiter, TStateMachine)(TAwaiter, TStateMachine)
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+  commentId: M:Fantasy.Async.AsyncFTaskMethodBuilder.SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+  id: SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+  parent: Fantasy.Async.AsyncFTaskMethodBuilder
+  langs:
+  - csharp
+  - vb
+  name: SetStateMachine(IAsyncStateMachine)
+  nameWithType: AsyncFTaskMethodBuilder.SetStateMachine(IAsyncStateMachine)
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetStateMachine
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Builder/AsyncFTaskMethodBuilder.cs
+    startLine: 84
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void SetStateMachine(IAsyncStateMachine stateMachine)
+    parameters:
+    - id: stateMachine
+      type: System.Runtime.CompilerServices.IAsyncStateMachine
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub SetStateMachine(stateMachine As IAsyncStateMachine)
+  overload: Fantasy.Async.AsyncFTaskMethodBuilder.SetStateMachine*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+references:
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<AsyncFTaskMethodBuilder>(AsyncFTaskMethodBuilder)
+  nameWithType: JsonHelper.ToJson<AsyncFTaskMethodBuilder>(AsyncFTaskMethodBuilder)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Async.AsyncFTaskMethodBuilder>(Fantasy.Async.AsyncFTaskMethodBuilder)
+  nameWithType.vb: JsonHelper.ToJson(Of AsyncFTaskMethodBuilder)(AsyncFTaskMethodBuilder)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Async.AsyncFTaskMethodBuilder)(Fantasy.Async.AsyncFTaskMethodBuilder)
+  name.vb: ToJson(Of AsyncFTaskMethodBuilder)(AsyncFTaskMethodBuilder)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Async.AsyncFTaskMethodBuilder)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Async.AsyncFTaskMethodBuilder
+    name: AsyncFTaskMethodBuilder
+    href: Fantasy.Async.AsyncFTaskMethodBuilder.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Async.AsyncFTaskMethodBuilder
+    name: AsyncFTaskMethodBuilder
+    href: Fantasy.Async.AsyncFTaskMethodBuilder.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Async.AsyncFTaskMethodBuilder)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Async.AsyncFTaskMethodBuilder
+    name: AsyncFTaskMethodBuilder
+    href: Fantasy.Async.AsyncFTaskMethodBuilder.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Async.AsyncFTaskMethodBuilder
+    name: AsyncFTaskMethodBuilder
+    href: Fantasy.Async.AsyncFTaskMethodBuilder.html
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.Task*
+  commentId: Overload:Fantasy.Async.AsyncFTaskMethodBuilder.Task
+  href: Fantasy.Async.AsyncFTaskMethodBuilder.html#Fantasy_Async_AsyncFTaskMethodBuilder_Task
+  name: Task
+  nameWithType: AsyncFTaskMethodBuilder.Task
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.Task
+- uid: Fantasy.Async.FTask
+  commentId: T:Fantasy.Async.FTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask.html
+  name: FTask
+  nameWithType: FTask
+  fullName: Fantasy.Async.FTask
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.Create*
+  commentId: Overload:Fantasy.Async.AsyncFTaskMethodBuilder.Create
+  href: Fantasy.Async.AsyncFTaskMethodBuilder.html#Fantasy_Async_AsyncFTaskMethodBuilder_Create
+  name: Create
+  nameWithType: AsyncFTaskMethodBuilder.Create
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.Create
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder
+  commentId: T:Fantasy.Async.AsyncFTaskMethodBuilder
+  parent: Fantasy.Async
+  href: Fantasy.Async.AsyncFTaskMethodBuilder.html
+  name: AsyncFTaskMethodBuilder
+  nameWithType: AsyncFTaskMethodBuilder
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.#ctor*
+  commentId: Overload:Fantasy.Async.AsyncFTaskMethodBuilder.#ctor
+  href: Fantasy.Async.AsyncFTaskMethodBuilder.html#Fantasy_Async_AsyncFTaskMethodBuilder__ctor_Fantasy_Async_FTask_
+  name: AsyncFTaskMethodBuilder
+  nameWithType: AsyncFTaskMethodBuilder.AsyncFTaskMethodBuilder
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.AsyncFTaskMethodBuilder
+  nameWithType.vb: AsyncFTaskMethodBuilder.New
+  fullName.vb: Fantasy.Async.AsyncFTaskMethodBuilder.New
+  name.vb: New
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.Start*
+  commentId: Overload:Fantasy.Async.AsyncFTaskMethodBuilder.Start
+  href: Fantasy.Async.AsyncFTaskMethodBuilder.html#Fantasy_Async_AsyncFTaskMethodBuilder_Start__1___0__
+  name: Start
+  nameWithType: AsyncFTaskMethodBuilder.Start
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.Start
+- uid: '{TStateMachine}'
+  commentId: '!:TStateMachine'
+  definition: TStateMachine
+  name: TStateMachine
+  nameWithType: TStateMachine
+  fullName: TStateMachine
+- uid: TStateMachine
+  name: TStateMachine
+  nameWithType: TStateMachine
+  fullName: TStateMachine
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.SetResult*
+  commentId: Overload:Fantasy.Async.AsyncFTaskMethodBuilder.SetResult
+  href: Fantasy.Async.AsyncFTaskMethodBuilder.html#Fantasy_Async_AsyncFTaskMethodBuilder_SetResult
+  name: SetResult
+  nameWithType: AsyncFTaskMethodBuilder.SetResult
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.SetResult
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.SetException*
+  commentId: Overload:Fantasy.Async.AsyncFTaskMethodBuilder.SetException
+  href: Fantasy.Async.AsyncFTaskMethodBuilder.html#Fantasy_Async_AsyncFTaskMethodBuilder_SetException_System_Exception_
+  name: SetException
+  nameWithType: AsyncFTaskMethodBuilder.SetException
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.SetException
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitOnCompleted*
+  commentId: Overload:Fantasy.Async.AsyncFTaskMethodBuilder.AwaitOnCompleted
+  href: Fantasy.Async.AsyncFTaskMethodBuilder.html#Fantasy_Async_AsyncFTaskMethodBuilder_AwaitOnCompleted__2___0____1__
+  name: AwaitOnCompleted
+  nameWithType: AsyncFTaskMethodBuilder.AwaitOnCompleted
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitOnCompleted
+- uid: '{TAwaiter}'
+  commentId: '!:TAwaiter'
+  definition: TAwaiter
+  name: TAwaiter
+  nameWithType: TAwaiter
+  fullName: TAwaiter
+- uid: TAwaiter
+  name: TAwaiter
+  nameWithType: TAwaiter
+  fullName: TAwaiter
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted*
+  commentId: Overload:Fantasy.Async.AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted
+  href: Fantasy.Async.AsyncFTaskMethodBuilder.html#Fantasy_Async_AsyncFTaskMethodBuilder_AwaitUnsafeOnCompleted__2___0____1__
+  name: AwaitUnsafeOnCompleted
+  nameWithType: AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.AwaitUnsafeOnCompleted
+- uid: Fantasy.Async.AsyncFTaskMethodBuilder.SetStateMachine*
+  commentId: Overload:Fantasy.Async.AsyncFTaskMethodBuilder.SetStateMachine
+  href: Fantasy.Async.AsyncFTaskMethodBuilder.html#Fantasy_Async_AsyncFTaskMethodBuilder_SetStateMachine_System_Runtime_CompilerServices_IAsyncStateMachine_
+  name: SetStateMachine
+  nameWithType: AsyncFTaskMethodBuilder.SetStateMachine
+  fullName: Fantasy.Async.AsyncFTaskMethodBuilder.SetStateMachine
+- uid: System.Runtime.CompilerServices.IAsyncStateMachine
+  commentId: T:System.Runtime.CompilerServices.IAsyncStateMachine
+  parent: System.Runtime.CompilerServices
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.iasyncstatemachine
+  name: IAsyncStateMachine
+  nameWithType: IAsyncStateMachine
+  fullName: System.Runtime.CompilerServices.IAsyncStateMachine
+- uid: System.Runtime.CompilerServices
+  commentId: N:System.Runtime.CompilerServices
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Runtime.CompilerServices
+  nameWithType: System.Runtime.CompilerServices
+  fullName: System.Runtime.CompilerServices
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Runtime
+    name: Runtime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime
+  - name: .
+  - uid: System.Runtime.CompilerServices
+    name: CompilerServices
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Runtime
+    name: Runtime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime
+  - name: .
+  - uid: System.Runtime.CompilerServices
+    name: CompilerServices
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices

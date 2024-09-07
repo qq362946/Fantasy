@@ -1,0 +1,562 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.KCP.PendingConnection
+  commentId: T:Fantasy.Network.KCP.PendingConnection
+  id: PendingConnection
+  parent: Fantasy.Network.KCP
+  children:
+  - Fantasy.Network.KCP.PendingConnection.#ctor(System.UInt32,System.Net.IPEndPoint,System.UInt32)
+  - Fantasy.Network.KCP.PendingConnection.ChannelId
+  - Fantasy.Network.KCP.PendingConnection.RemoteEndPoint
+  - Fantasy.Network.KCP.PendingConnection.TimeOutId
+  langs:
+  - csharp
+  - vb
+  name: PendingConnection
+  nameWithType: PendingConnection
+  fullName: Fantasy.Network.KCP.PendingConnection
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetwork.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: PendingConnection
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetwork.cs
+    startLine: 33
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: public struct PendingConnection
+    content.vb: Public Structure PendingConnection
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - Fantasy.Network.KCP.PendingConnection.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.KCP.PendingConnection.ChannelId
+  commentId: F:Fantasy.Network.KCP.PendingConnection.ChannelId
+  id: ChannelId
+  parent: Fantasy.Network.KCP.PendingConnection
+  langs:
+  - csharp
+  - vb
+  name: ChannelId
+  nameWithType: PendingConnection.ChannelId
+  fullName: Fantasy.Network.KCP.PendingConnection.ChannelId
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetwork.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ChannelId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetwork.cs
+    startLine: 35
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: public readonly uint ChannelId
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly ChannelId As UInteger
+- uid: Fantasy.Network.KCP.PendingConnection.TimeOutId
+  commentId: F:Fantasy.Network.KCP.PendingConnection.TimeOutId
+  id: TimeOutId
+  parent: Fantasy.Network.KCP.PendingConnection
+  langs:
+  - csharp
+  - vb
+  name: TimeOutId
+  nameWithType: PendingConnection.TimeOutId
+  fullName: Fantasy.Network.KCP.PendingConnection.TimeOutId
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetwork.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TimeOutId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetwork.cs
+    startLine: 36
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: public readonly uint TimeOutId
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly TimeOutId As UInteger
+- uid: Fantasy.Network.KCP.PendingConnection.RemoteEndPoint
+  commentId: F:Fantasy.Network.KCP.PendingConnection.RemoteEndPoint
+  id: RemoteEndPoint
+  parent: Fantasy.Network.KCP.PendingConnection
+  langs:
+  - csharp
+  - vb
+  name: RemoteEndPoint
+  nameWithType: PendingConnection.RemoteEndPoint
+  fullName: Fantasy.Network.KCP.PendingConnection.RemoteEndPoint
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetwork.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RemoteEndPoint
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetwork.cs
+    startLine: 37
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: public readonly IPEndPoint RemoteEndPoint
+    return:
+      type: System.Net.IPEndPoint
+    content.vb: Public ReadOnly RemoteEndPoint As IPEndPoint
+- uid: Fantasy.Network.KCP.PendingConnection.#ctor(System.UInt32,System.Net.IPEndPoint,System.UInt32)
+  commentId: M:Fantasy.Network.KCP.PendingConnection.#ctor(System.UInt32,System.Net.IPEndPoint,System.UInt32)
+  id: '#ctor(System.UInt32,System.Net.IPEndPoint,System.UInt32)'
+  parent: Fantasy.Network.KCP.PendingConnection
+  langs:
+  - csharp
+  - vb
+  name: PendingConnection(uint, IPEndPoint, uint)
+  nameWithType: PendingConnection.PendingConnection(uint, IPEndPoint, uint)
+  fullName: Fantasy.Network.KCP.PendingConnection.PendingConnection(uint, System.Net.IPEndPoint, uint)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetwork.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetwork.cs
+    startLine: 39
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.KCP
+  syntax:
+    content: public PendingConnection(uint channelId, IPEndPoint remoteEndPoint, uint time)
+    parameters:
+    - id: channelId
+      type: System.UInt32
+    - id: remoteEndPoint
+      type: System.Net.IPEndPoint
+    - id: time
+      type: System.UInt32
+    content.vb: Public Sub New(channelId As UInteger, remoteEndPoint As IPEndPoint, time As UInteger)
+  overload: Fantasy.Network.KCP.PendingConnection.#ctor*
+  nameWithType.vb: PendingConnection.New(UInteger, IPEndPoint, UInteger)
+  fullName.vb: Fantasy.Network.KCP.PendingConnection.New(UInteger, System.Net.IPEndPoint, UInteger)
+  name.vb: New(UInteger, IPEndPoint, UInteger)
+references:
+- uid: Fantasy.Network.KCP
+  commentId: N:Fantasy.Network.KCP
+  href: Fantasy.html
+  name: Fantasy.Network.KCP
+  nameWithType: Fantasy.Network.KCP
+  fullName: Fantasy.Network.KCP
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.KCP
+    name: KCP
+    href: Fantasy.Network.KCP.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.KCP
+    name: KCP
+    href: Fantasy.Network.KCP.html
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.Network.KCP.PendingConnection.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<PendingConnection>(PendingConnection)
+  nameWithType: JsonHelper.ToJson<PendingConnection>(PendingConnection)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.KCP.PendingConnection>(Fantasy.Network.KCP.PendingConnection)
+  nameWithType.vb: JsonHelper.ToJson(Of PendingConnection)(PendingConnection)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.KCP.PendingConnection)(Fantasy.Network.KCP.PendingConnection)
+  name.vb: ToJson(Of PendingConnection)(PendingConnection)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.KCP.PendingConnection)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.KCP.PendingConnection
+    name: PendingConnection
+    href: Fantasy.Network.KCP.PendingConnection.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.KCP.PendingConnection
+    name: PendingConnection
+    href: Fantasy.Network.KCP.PendingConnection.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.KCP.PendingConnection)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.KCP.PendingConnection
+    name: PendingConnection
+    href: Fantasy.Network.KCP.PendingConnection.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.KCP.PendingConnection
+    name: PendingConnection
+    href: Fantasy.Network.KCP.PendingConnection.html
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: System.Net.IPEndPoint
+  commentId: T:System.Net.IPEndPoint
+  parent: System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.ipendpoint
+  name: IPEndPoint
+  nameWithType: IPEndPoint
+  fullName: System.Net.IPEndPoint
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+- uid: Fantasy.Network.KCP.PendingConnection.#ctor*
+  commentId: Overload:Fantasy.Network.KCP.PendingConnection.#ctor
+  href: Fantasy.Network.KCP.PendingConnection.html#Fantasy_Network_KCP_PendingConnection__ctor_System_UInt32_System_Net_IPEndPoint_System_UInt32_
+  name: PendingConnection
+  nameWithType: PendingConnection.PendingConnection
+  fullName: Fantasy.Network.KCP.PendingConnection.PendingConnection
+  nameWithType.vb: PendingConnection.New
+  fullName.vb: Fantasy.Network.KCP.PendingConnection.New
+  name.vb: New

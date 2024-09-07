@@ -1,0 +1,709 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+  commentId: T:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+  id: PriorityQueue`2
+  parent: Fantasy.DataStructure.PriorityQueue
+  children:
+  - Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.#ctor(System.Int32)
+  - Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Count
+  - Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Dequeue
+  - Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Enqueue(`0,`1)
+  - Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Peek
+  - Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.TryDequeue(`0@)
+  langs:
+  - csharp
+  - vb
+  name: PriorityQueue<TElement, TPriority>
+  nameWithType: PriorityQueue<TElement, TPriority>
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: PriorityQueue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+    startLine: 15
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataStructure.PriorityQueue
+  summary: 优先队列
+  example: []
+  syntax:
+    content: 'public sealed class PriorityQueue<TElement, TPriority> where TPriority : IComparable<TPriority>'
+    typeParameters:
+    - id: TElement
+      description: 节点数据
+    - id: TPriority
+      description: 排序的类型、
+    content.vb: Public NotInheritable Class PriorityQueue(Of TElement, TPriority As IComparable(Of TPriority))
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Fantasy.Helper.JsonHelper.ToJson``1
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority)
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority)
+  name.vb: PriorityQueue(Of TElement, TPriority)
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.#ctor(System.Int32)
+  commentId: M:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: PriorityQueue(int)
+  nameWithType: PriorityQueue<TElement, TPriority>.PriorityQueue(int)
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.PriorityQueue(int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+    startLine: 19
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataStructure.PriorityQueue
+  syntax:
+    content: public PriorityQueue(int initialCapacity = 16)
+    parameters:
+    - id: initialCapacity
+      type: System.Int32
+    content.vb: Public Sub New(initialCapacity As Integer = 16)
+  overload: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.#ctor*
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).New(Integer)
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).New(Integer)
+  name.vb: New(Integer)
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Count
+  commentId: P:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Count
+  id: Count
+  parent: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: PriorityQueue<TElement, TPriority>.Count
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.Count
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Count
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+    startLine: 24
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataStructure.PriorityQueue
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Count*
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).Count
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).Count
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Enqueue(`0,`1)
+  commentId: M:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Enqueue(`0,`1)
+  id: Enqueue(`0,`1)
+  parent: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Enqueue(TElement, TPriority)
+  nameWithType: PriorityQueue<TElement, TPriority>.Enqueue(TElement, TPriority)
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.Enqueue(TElement, TPriority)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Enqueue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+    startLine: 26
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataStructure.PriorityQueue
+  syntax:
+    content: public void Enqueue(TElement element, TPriority priority)
+    parameters:
+    - id: element
+      type: '{TElement}'
+    - id: priority
+      type: '{TPriority}'
+    content.vb: Public Sub Enqueue(element As TElement, priority As TPriority)
+  overload: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Enqueue*
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).Enqueue(TElement, TPriority)
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).Enqueue(TElement, TPriority)
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Dequeue
+  commentId: M:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Dequeue
+  id: Dequeue
+  parent: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Dequeue()
+  nameWithType: PriorityQueue<TElement, TPriority>.Dequeue()
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.Dequeue()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dequeue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+    startLine: 32
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataStructure.PriorityQueue
+  syntax:
+    content: public TElement Dequeue()
+    return:
+      type: '{TElement}'
+    content.vb: Public Function Dequeue() As TElement
+  overload: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Dequeue*
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).Dequeue()
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).Dequeue()
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.TryDequeue(`0@)
+  commentId: M:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.TryDequeue(`0@)
+  id: TryDequeue(`0@)
+  parent: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: TryDequeue(out TElement)
+  nameWithType: PriorityQueue<TElement, TPriority>.TryDequeue(out TElement)
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.TryDequeue(out TElement)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TryDequeue
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+    startLine: 46
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataStructure.PriorityQueue
+  syntax:
+    content: public bool TryDequeue(out TElement element)
+    parameters:
+    - id: element
+      type: '{TElement}'
+    return:
+      type: System.Boolean
+    content.vb: Public Function TryDequeue(element As TElement) As Boolean
+  overload: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.TryDequeue*
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).TryDequeue(TElement)
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).TryDequeue(TElement)
+  name.vb: TryDequeue(TElement)
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Peek
+  commentId: M:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Peek
+  id: Peek
+  parent: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+  langs:
+  - csharp
+  - vb
+  name: Peek()
+  nameWithType: PriorityQueue<TElement, TPriority>.Peek()
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.Peek()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Peek
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/PriorityQueue/PriorityQueueGenerics.cs
+    startLine: 58
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.DataStructure.PriorityQueue
+  syntax:
+    content: public TElement Peek()
+    return:
+      type: '{TElement}'
+    content.vb: Public Function Peek() As TElement
+  overload: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Peek*
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).Peek()
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).Peek()
+references:
+- uid: Fantasy.DataStructure.PriorityQueue
+  commentId: N:Fantasy.DataStructure.PriorityQueue
+  href: Fantasy.html
+  name: Fantasy.DataStructure.PriorityQueue
+  nameWithType: Fantasy.DataStructure.PriorityQueue
+  fullName: Fantasy.DataStructure.PriorityQueue
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.PriorityQueue
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.PriorityQueue
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<PriorityQueue<TElement, TPriority>>(PriorityQueue<TElement, TPriority>)
+  nameWithType: JsonHelper.ToJson<PriorityQueue<TElement, TPriority>>(PriorityQueue<TElement, TPriority>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>>(Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>)
+  nameWithType.vb: JsonHelper.ToJson(Of PriorityQueue(Of TElement, TPriority))(PriorityQueue(Of TElement, TPriority))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority))(Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority))
+  name.vb: ToJson(Of PriorityQueue(Of TElement, TPriority))(PriorityQueue(Of TElement, TPriority))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.DataStructure.PriorityQueue.PriorityQueue{`0,`1})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html
+  - name: <
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.DataStructure.PriorityQueue.PriorityQueue{`0,`1})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )
+  - name: )
+  - name: (
+  - uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TElement
+  - name: ','
+  - name: " "
+  - name: TPriority
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.#ctor*
+  commentId: Overload:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.#ctor
+  href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html#Fantasy_DataStructure_PriorityQueue_PriorityQueue_2__ctor_System_Int32_
+  name: PriorityQueue
+  nameWithType: PriorityQueue<TElement, TPriority>.PriorityQueue
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.PriorityQueue
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).New
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Count*
+  commentId: Overload:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Count
+  href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html#Fantasy_DataStructure_PriorityQueue_PriorityQueue_2_Count
+  name: Count
+  nameWithType: PriorityQueue<TElement, TPriority>.Count
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.Count
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).Count
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).Count
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Enqueue*
+  commentId: Overload:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Enqueue
+  href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html#Fantasy_DataStructure_PriorityQueue_PriorityQueue_2_Enqueue__0__1_
+  name: Enqueue
+  nameWithType: PriorityQueue<TElement, TPriority>.Enqueue
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.Enqueue
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).Enqueue
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).Enqueue
+- uid: '{TElement}'
+  commentId: '!:TElement'
+  definition: TElement
+  name: TElement
+  nameWithType: TElement
+  fullName: TElement
+- uid: '{TPriority}'
+  commentId: '!:TPriority'
+  definition: TPriority
+  name: TPriority
+  nameWithType: TPriority
+  fullName: TPriority
+- uid: TElement
+  name: TElement
+  nameWithType: TElement
+  fullName: TElement
+- uid: TPriority
+  name: TPriority
+  nameWithType: TPriority
+  fullName: TPriority
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Dequeue*
+  commentId: Overload:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Dequeue
+  href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html#Fantasy_DataStructure_PriorityQueue_PriorityQueue_2_Dequeue
+  name: Dequeue
+  nameWithType: PriorityQueue<TElement, TPriority>.Dequeue
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.Dequeue
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).Dequeue
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).Dequeue
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.TryDequeue*
+  commentId: Overload:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.TryDequeue
+  href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html#Fantasy_DataStructure_PriorityQueue_PriorityQueue_2_TryDequeue__0__
+  name: TryDequeue
+  nameWithType: PriorityQueue<TElement, TPriority>.TryDequeue
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.TryDequeue
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).TryDequeue
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).TryDequeue
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Peek*
+  commentId: Overload:Fantasy.DataStructure.PriorityQueue.PriorityQueue`2.Peek
+  href: Fantasy.DataStructure.PriorityQueue.PriorityQueue-2.html#Fantasy_DataStructure_PriorityQueue_PriorityQueue_2_Peek
+  name: Peek
+  nameWithType: PriorityQueue<TElement, TPriority>.Peek
+  fullName: Fantasy.DataStructure.PriorityQueue.PriorityQueue<TElement, TPriority>.Peek
+  nameWithType.vb: PriorityQueue(Of TElement, TPriority).Peek
+  fullName.vb: Fantasy.DataStructure.PriorityQueue.PriorityQueue(Of TElement, TPriority).Peek

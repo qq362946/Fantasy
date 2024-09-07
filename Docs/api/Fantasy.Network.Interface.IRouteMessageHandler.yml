@@ -1,0 +1,380 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.Interface.IRouteMessageHandler
+  commentId: T:Fantasy.Network.Interface.IRouteMessageHandler
+  id: IRouteMessageHandler
+  parent: Fantasy.Network.Interface
+  children:
+  - Fantasy.Network.Interface.IRouteMessageHandler.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+  - Fantasy.Network.Interface.IRouteMessageHandler.Type
+  langs:
+  - csharp
+  - vb
+  name: IRouteMessageHandler
+  nameWithType: IRouteMessageHandler
+  fullName: Fantasy.Network.Interface.IRouteMessageHandler
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IRouteMessageHandler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IRouteMessageHandler
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IRouteMessageHandler.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  summary: 表示路由消息处理器的接口，处理特定类型的路由消息。
+  example: []
+  syntax:
+    content: public interface IRouteMessageHandler
+    content.vb: Public Interface IRouteMessageHandler
+  extensionMethods:
+  - Fantasy.Network.Interface.IRouteMessageHandler.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.Interface.IRouteMessageHandler.Type
+  commentId: M:Fantasy.Network.Interface.IRouteMessageHandler.Type
+  id: Type
+  parent: Fantasy.Network.Interface.IRouteMessageHandler
+  langs:
+  - csharp
+  - vb
+  name: Type()
+  nameWithType: IRouteMessageHandler.Type()
+  fullName: Fantasy.Network.Interface.IRouteMessageHandler.Type()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IRouteMessageHandler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Type
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IRouteMessageHandler.cs
+    startLine: 20
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  summary: 获取处理的消息类型。
+  example: []
+  syntax:
+    content: Type Type()
+    return:
+      type: System.Type
+      description: 消息类型。
+    content.vb: Function Type() As Type
+  overload: Fantasy.Network.Interface.IRouteMessageHandler.Type*
+- uid: Fantasy.Network.Interface.IRouteMessageHandler.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+  commentId: M:Fantasy.Network.Interface.IRouteMessageHandler.Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+  id: Handle(Fantasy.Network.Session,Fantasy.Entitas.Entity,System.UInt32,System.Object)
+  parent: Fantasy.Network.Interface.IRouteMessageHandler
+  langs:
+  - csharp
+  - vb
+  name: Handle(Session, Entity, uint, object)
+  nameWithType: IRouteMessageHandler.Handle(Session, Entity, uint, object)
+  fullName: Fantasy.Network.Interface.IRouteMessageHandler.Handle(Fantasy.Network.Session, Fantasy.Entitas.Entity, uint, object)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IRouteMessageHandler.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Handle
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Dispatcher/Interface/IRouteMessageHandler.cs
+    startLine: 30
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  summary: 处理路由消息的方法。
+  example: []
+  syntax:
+    content: FTask Handle(Session session, Entity entity, uint rpcId, object routeMessage)
+    parameters:
+    - id: session
+      type: Fantasy.Network.Session
+      description: 会话对象。
+    - id: entity
+      type: Fantasy.Entitas.Entity
+      description: 实体对象。
+    - id: rpcId
+      type: System.UInt32
+      description: RPC标识。
+    - id: routeMessage
+      type: System.Object
+      description: 要处理的路由消息。
+    return:
+      type: Fantasy.Async.FTask
+      description: 异步任务。
+    content.vb: Function Handle(session As Session, entity As Entity, rpcId As UInteger, routeMessage As Object) As FTask
+  overload: Fantasy.Network.Interface.IRouteMessageHandler.Handle*
+  nameWithType.vb: IRouteMessageHandler.Handle(Session, Entity, UInteger, Object)
+  fullName.vb: Fantasy.Network.Interface.IRouteMessageHandler.Handle(Fantasy.Network.Session, Fantasy.Entitas.Entity, UInteger, Object)
+  name.vb: Handle(Session, Entity, UInteger, Object)
+references:
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  href: Fantasy.html
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+- uid: Fantasy.Network.Interface.IRouteMessageHandler.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<IRouteMessageHandler>(IRouteMessageHandler)
+  nameWithType: JsonHelper.ToJson<IRouteMessageHandler>(IRouteMessageHandler)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.Interface.IRouteMessageHandler>(Fantasy.Network.Interface.IRouteMessageHandler)
+  nameWithType.vb: JsonHelper.ToJson(Of IRouteMessageHandler)(IRouteMessageHandler)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.Interface.IRouteMessageHandler)(Fantasy.Network.Interface.IRouteMessageHandler)
+  name.vb: ToJson(Of IRouteMessageHandler)(IRouteMessageHandler)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Interface.IRouteMessageHandler)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.Interface.IRouteMessageHandler
+    name: IRouteMessageHandler
+    href: Fantasy.Network.Interface.IRouteMessageHandler.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.Interface.IRouteMessageHandler
+    name: IRouteMessageHandler
+    href: Fantasy.Network.Interface.IRouteMessageHandler.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Interface.IRouteMessageHandler)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.Interface.IRouteMessageHandler
+    name: IRouteMessageHandler
+    href: Fantasy.Network.Interface.IRouteMessageHandler.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.Interface.IRouteMessageHandler
+    name: IRouteMessageHandler
+    href: Fantasy.Network.Interface.IRouteMessageHandler.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Network.Interface.IRouteMessageHandler.Type*
+  commentId: Overload:Fantasy.Network.Interface.IRouteMessageHandler.Type
+  href: Fantasy.Network.Interface.IRouteMessageHandler.html#Fantasy_Network_Interface_IRouteMessageHandler_Type
+  name: Type
+  nameWithType: IRouteMessageHandler.Type
+  fullName: Fantasy.Network.Interface.IRouteMessageHandler.Type
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Network.Interface.IRouteMessageHandler.Handle*
+  commentId: Overload:Fantasy.Network.Interface.IRouteMessageHandler.Handle
+  href: Fantasy.Network.Interface.IRouteMessageHandler.html#Fantasy_Network_Interface_IRouteMessageHandler_Handle_Fantasy_Network_Session_Fantasy_Entitas_Entity_System_UInt32_System_Object_
+  name: Handle
+  nameWithType: IRouteMessageHandler.Handle
+  fullName: Fantasy.Network.Interface.IRouteMessageHandler.Handle
+- uid: Fantasy.Network.Session
+  commentId: T:Fantasy.Network.Session
+  parent: Fantasy.Network
+  href: Fantasy.Network.Session.html
+  name: Session
+  nameWithType: Session
+  fullName: Fantasy.Network.Session
+- uid: Fantasy.Entitas.Entity
+  commentId: T:Fantasy.Entitas.Entity
+  parent: Fantasy.Entitas
+  href: Fantasy.Entitas.Entity.html
+  name: Entity
+  nameWithType: Entity
+  fullName: Fantasy.Entitas.Entity
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Async.FTask
+  commentId: T:Fantasy.Async.FTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask.html
+  name: FTask
+  nameWithType: FTask
+  fullName: Fantasy.Async.FTask
+- uid: Fantasy.Network
+  commentId: N:Fantasy.Network
+  href: Fantasy.html
+  name: Fantasy.Network
+  nameWithType: Fantasy.Network
+  fullName: Fantasy.Network
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+- uid: Fantasy.Entitas
+  commentId: N:Fantasy.Entitas
+  href: Fantasy.html
+  name: Fantasy.Entitas
+  nameWithType: Fantasy.Entitas
+  fullName: Fantasy.Entitas
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html

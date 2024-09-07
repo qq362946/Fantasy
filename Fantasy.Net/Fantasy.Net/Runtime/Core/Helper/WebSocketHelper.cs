@@ -1,8 +1,11 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Fantasy
+namespace Fantasy.Helper
 {
+    /// <summary>
+    /// WebSocket帮助类
+    /// </summary>
     public static class WebSocketHelper
     {
         /// <summary>

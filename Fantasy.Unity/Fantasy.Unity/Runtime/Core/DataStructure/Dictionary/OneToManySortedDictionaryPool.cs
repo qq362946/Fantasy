@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Fantasy.Pool;
+
 #pragma warning disable CS8601
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Dictionary
 {
     /// <summary>
     /// 一对多映射关系的排序字典对象池。

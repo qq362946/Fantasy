@@ -1,8 +1,13 @@
+using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
+using Fantasy.Helper;
+using Fantasy.Timer;
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #if FANTASY_NET
-namespace Fantasy;
+namespace Fantasy.Network;
 
 public class SessionIdleCheckerComponentAwakeSystem : AwakeSystem<SessionIdleCheckerComponent>
 {
@@ -17,10 +22,22 @@ public class SessionIdleCheckerComponentAwakeSystem : AwakeSystem<SessionIdleChe
 /// </summary>
 public class SessionIdleCheckerComponent : Entity
 {
-    private long _timeOut;  // 空闲超时时间（毫秒）
-    private long _timerId;  // 检查计时器的 ID
-    private long _selfRuntimeId;  // 用于确保组件完整性的自身运行时 ID
-    private Session _session;  // 对会话对象的引用
+    /// <summary>
+    /// 空闲超时时间（毫秒）
+    /// </summary>
+    private long _timeOut;  
+    /// <summary>
+    /// 检查计时器的 ID
+    /// </summary>
+    private long _timerId; 
+    /// <summary>
+    /// 用于确保组件完整性的自身运行时 ID
+    /// </summary>
+    private long _selfRuntimeId; 
+    /// <summary>
+    /// 对会话对象的引用
+    /// </summary>
+    private Session _session; 
     public TimerComponent TimerComponent;
 
     /// <summary>

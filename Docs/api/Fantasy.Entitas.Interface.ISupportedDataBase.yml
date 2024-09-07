@@ -1,0 +1,164 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Entitas.Interface.ISupportedDataBase
+  commentId: T:Fantasy.Entitas.Interface.ISupportedDataBase
+  id: ISupportedDataBase
+  parent: Fantasy.Entitas.Interface
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: ISupportedDataBase
+  nameWithType: ISupportedDataBase
+  fullName: Fantasy.Entitas.Interface.ISupportedDataBase
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Interface/Supported/ISupportedDataBase.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ISupportedDataBase
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Interface/Supported/ISupportedDataBase.cs
+    startLine: 8
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Entitas.Interface
+  summary: Entity支持数据库
+  example: []
+  syntax:
+    content: public interface ISupportedDataBase
+    content.vb: Public Interface ISupportedDataBase
+  extensionMethods:
+  - Fantasy.Entitas.Interface.ISupportedDataBase.Fantasy.Helper.JsonHelper.ToJson``1
+references:
+- uid: Fantasy.Entitas.Interface
+  commentId: N:Fantasy.Entitas.Interface
+  href: Fantasy.html
+  name: Fantasy.Entitas.Interface
+  nameWithType: Fantasy.Entitas.Interface
+  fullName: Fantasy.Entitas.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  - name: .
+  - uid: Fantasy.Entitas.Interface
+    name: Interface
+    href: Fantasy.Entitas.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  - name: .
+  - uid: Fantasy.Entitas.Interface
+    name: Interface
+    href: Fantasy.Entitas.Interface.html
+- uid: Fantasy.Entitas.Interface.ISupportedDataBase.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<ISupportedDataBase>(ISupportedDataBase)
+  nameWithType: JsonHelper.ToJson<ISupportedDataBase>(ISupportedDataBase)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Entitas.Interface.ISupportedDataBase>(Fantasy.Entitas.Interface.ISupportedDataBase)
+  nameWithType.vb: JsonHelper.ToJson(Of ISupportedDataBase)(ISupportedDataBase)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Entitas.Interface.ISupportedDataBase)(Fantasy.Entitas.Interface.ISupportedDataBase)
+  name.vb: ToJson(Of ISupportedDataBase)(ISupportedDataBase)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Entitas.Interface.ISupportedDataBase)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Entitas.Interface.ISupportedDataBase
+    name: ISupportedDataBase
+    href: Fantasy.Entitas.Interface.ISupportedDataBase.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Entitas.Interface.ISupportedDataBase
+    name: ISupportedDataBase
+    href: Fantasy.Entitas.Interface.ISupportedDataBase.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Entitas.Interface.ISupportedDataBase)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Entitas.Interface.ISupportedDataBase
+    name: ISupportedDataBase
+    href: Fantasy.Entitas.Interface.ISupportedDataBase.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Entitas.Interface.ISupportedDataBase
+    name: ISupportedDataBase
+    href: Fantasy.Entitas.Interface.ISupportedDataBase.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html

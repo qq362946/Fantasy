@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Fantasy.DataStructure.Collection;
+
 #pragma warning disable CS8601
 #pragma warning disable CS8603
 #pragma warning disable CS8625
 #pragma warning disable CS8604
 
-namespace Fantasy
+namespace Fantasy.DataStructure.SkipTable
 {
     /// <summary>
     /// 抽象的跳表基类，提供跳表的基本功能和操作。

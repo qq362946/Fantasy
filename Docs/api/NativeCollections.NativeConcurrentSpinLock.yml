@@ -1,0 +1,1152 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeConcurrentSpinLock
+  commentId: T:NativeCollections.NativeConcurrentSpinLock
+  id: NativeConcurrentSpinLock
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeConcurrentSpinLock.#ctor(System.Int32)
+  - NativeCollections.NativeConcurrentSpinLock.Dispose
+  - NativeCollections.NativeConcurrentSpinLock.Empty
+  - NativeCollections.NativeConcurrentSpinLock.Enter
+  - NativeCollections.NativeConcurrentSpinLock.Equals(NativeCollections.NativeConcurrentSpinLock)
+  - NativeCollections.NativeConcurrentSpinLock.Equals(System.Object)
+  - NativeCollections.NativeConcurrentSpinLock.Exit
+  - NativeCollections.NativeConcurrentSpinLock.GetHashCode
+  - NativeCollections.NativeConcurrentSpinLock.IsCreated
+  - NativeCollections.NativeConcurrentSpinLock.SleepThreshold
+  - NativeCollections.NativeConcurrentSpinLock.ToString
+  - NativeCollections.NativeConcurrentSpinLock.op_Equality(NativeCollections.NativeConcurrentSpinLock,NativeCollections.NativeConcurrentSpinLock)
+  - NativeCollections.NativeConcurrentSpinLock.op_Inequality(NativeCollections.NativeConcurrentSpinLock,NativeCollections.NativeConcurrentSpinLock)
+  langs:
+  - csharp
+  - vb
+  name: NativeConcurrentSpinLock
+  nameWithType: NativeConcurrentSpinLock
+  fullName: NativeCollections.NativeConcurrentSpinLock
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeConcurrentSpinLock
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 22
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native concurrent spinLock
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeConcurrentSpinLock : IDisposable, IEquatable<NativeConcurrentSpinLock>
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeConcurrentSpinLock Implements IDisposable, IEquatable(Of NativeConcurrentSpinLock)
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeConcurrentSpinLock}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeConcurrentSpinLock.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+- uid: NativeCollections.NativeConcurrentSpinLock.#ctor(System.Int32)
+  commentId: M:NativeCollections.NativeConcurrentSpinLock.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: NativeConcurrentSpinLock(int)
+  nameWithType: NativeConcurrentSpinLock.NativeConcurrentSpinLock(int)
+  fullName: NativeCollections.NativeConcurrentSpinLock.NativeConcurrentSpinLock(int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 56
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeConcurrentSpinLock(int sleepThreshold)
+    parameters:
+    - id: sleepThreshold
+      type: System.Int32
+      description: Sleep threshold
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(sleepThreshold As Integer)
+  overload: NativeCollections.NativeConcurrentSpinLock.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeConcurrentSpinLock.New(Integer)
+  fullName.vb: NativeCollections.NativeConcurrentSpinLock.New(Integer)
+  name.vb: New(Integer)
+- uid: NativeCollections.NativeConcurrentSpinLock.IsCreated
+  commentId: P:NativeCollections.NativeConcurrentSpinLock.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeConcurrentSpinLock.IsCreated
+  fullName: NativeCollections.NativeConcurrentSpinLock.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 72
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeConcurrentSpinLock.IsCreated*
+- uid: NativeCollections.NativeConcurrentSpinLock.SleepThreshold
+  commentId: P:NativeCollections.NativeConcurrentSpinLock.SleepThreshold
+  id: SleepThreshold
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: SleepThreshold
+  nameWithType: NativeConcurrentSpinLock.SleepThreshold
+  fullName: NativeCollections.NativeConcurrentSpinLock.SleepThreshold
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SleepThreshold
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 77
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Sleep threshold
+  example: []
+  syntax:
+    content: public int SleepThreshold { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property SleepThreshold As Integer
+  overload: NativeCollections.NativeConcurrentSpinLock.SleepThreshold*
+- uid: NativeCollections.NativeConcurrentSpinLock.Equals(NativeCollections.NativeConcurrentSpinLock)
+  commentId: M:NativeCollections.NativeConcurrentSpinLock.Equals(NativeCollections.NativeConcurrentSpinLock)
+  id: Equals(NativeCollections.NativeConcurrentSpinLock)
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeConcurrentSpinLock)
+  nameWithType: NativeConcurrentSpinLock.Equals(NativeConcurrentSpinLock)
+  fullName: NativeCollections.NativeConcurrentSpinLock.Equals(NativeCollections.NativeConcurrentSpinLock)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 84
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeConcurrentSpinLock other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeConcurrentSpinLock
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeConcurrentSpinLock) As Boolean
+  overload: NativeCollections.NativeConcurrentSpinLock.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeConcurrentSpinLock}.Equals(NativeCollections.NativeConcurrentSpinLock)
+- uid: NativeCollections.NativeConcurrentSpinLock.Equals(System.Object)
+  commentId: M:NativeCollections.NativeConcurrentSpinLock.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeConcurrentSpinLock.Equals(object?)
+  fullName: NativeCollections.NativeConcurrentSpinLock.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 91
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeConcurrentSpinLock.Equals*
+  nameWithType.vb: NativeConcurrentSpinLock.Equals(Object)
+  fullName.vb: NativeCollections.NativeConcurrentSpinLock.Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeConcurrentSpinLock.GetHashCode
+  commentId: M:NativeCollections.NativeConcurrentSpinLock.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeConcurrentSpinLock.GetHashCode()
+  fullName: NativeCollections.NativeConcurrentSpinLock.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 97
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeConcurrentSpinLock.GetHashCode*
+- uid: NativeCollections.NativeConcurrentSpinLock.ToString
+  commentId: M:NativeCollections.NativeConcurrentSpinLock.ToString
+  id: ToString
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeConcurrentSpinLock.ToString()
+  fullName: NativeCollections.NativeConcurrentSpinLock.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 103
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeConcurrentSpinLock.ToString*
+- uid: NativeCollections.NativeConcurrentSpinLock.op_Equality(NativeCollections.NativeConcurrentSpinLock,NativeCollections.NativeConcurrentSpinLock)
+  commentId: M:NativeCollections.NativeConcurrentSpinLock.op_Equality(NativeCollections.NativeConcurrentSpinLock,NativeCollections.NativeConcurrentSpinLock)
+  id: op_Equality(NativeCollections.NativeConcurrentSpinLock,NativeCollections.NativeConcurrentSpinLock)
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeConcurrentSpinLock, NativeConcurrentSpinLock)
+  nameWithType: NativeConcurrentSpinLock.operator ==(NativeConcurrentSpinLock, NativeConcurrentSpinLock)
+  fullName: NativeCollections.NativeConcurrentSpinLock.operator ==(NativeCollections.NativeConcurrentSpinLock, NativeCollections.NativeConcurrentSpinLock)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 111
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeConcurrentSpinLock left, NativeConcurrentSpinLock right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeConcurrentSpinLock
+      description: Left
+    - id: right
+      type: NativeCollections.NativeConcurrentSpinLock
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeConcurrentSpinLock, right As NativeConcurrentSpinLock) As Boolean
+  overload: NativeCollections.NativeConcurrentSpinLock.op_Equality*
+  nameWithType.vb: NativeConcurrentSpinLock.=(NativeConcurrentSpinLock, NativeConcurrentSpinLock)
+  fullName.vb: NativeCollections.NativeConcurrentSpinLock.=(NativeCollections.NativeConcurrentSpinLock, NativeCollections.NativeConcurrentSpinLock)
+  name.vb: =(NativeConcurrentSpinLock, NativeConcurrentSpinLock)
+- uid: NativeCollections.NativeConcurrentSpinLock.op_Inequality(NativeCollections.NativeConcurrentSpinLock,NativeCollections.NativeConcurrentSpinLock)
+  commentId: M:NativeCollections.NativeConcurrentSpinLock.op_Inequality(NativeCollections.NativeConcurrentSpinLock,NativeCollections.NativeConcurrentSpinLock)
+  id: op_Inequality(NativeCollections.NativeConcurrentSpinLock,NativeCollections.NativeConcurrentSpinLock)
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeConcurrentSpinLock, NativeConcurrentSpinLock)
+  nameWithType: NativeConcurrentSpinLock.operator !=(NativeConcurrentSpinLock, NativeConcurrentSpinLock)
+  fullName: NativeCollections.NativeConcurrentSpinLock.operator !=(NativeCollections.NativeConcurrentSpinLock, NativeCollections.NativeConcurrentSpinLock)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 119
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeConcurrentSpinLock left, NativeConcurrentSpinLock right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeConcurrentSpinLock
+      description: Left
+    - id: right
+      type: NativeCollections.NativeConcurrentSpinLock
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeConcurrentSpinLock, right As NativeConcurrentSpinLock) As Boolean
+  overload: NativeCollections.NativeConcurrentSpinLock.op_Inequality*
+  nameWithType.vb: NativeConcurrentSpinLock.<>(NativeConcurrentSpinLock, NativeConcurrentSpinLock)
+  fullName.vb: NativeCollections.NativeConcurrentSpinLock.<>(NativeCollections.NativeConcurrentSpinLock, NativeCollections.NativeConcurrentSpinLock)
+  name.vb: <>(NativeConcurrentSpinLock, NativeConcurrentSpinLock)
+- uid: NativeCollections.NativeConcurrentSpinLock.Dispose
+  commentId: M:NativeCollections.NativeConcurrentSpinLock.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeConcurrentSpinLock.Dispose()
+  fullName: NativeCollections.NativeConcurrentSpinLock.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 124
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeConcurrentSpinLock.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeConcurrentSpinLock.Enter
+  commentId: M:NativeCollections.NativeConcurrentSpinLock.Enter
+  id: Enter
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: Enter()
+  nameWithType: NativeConcurrentSpinLock.Enter()
+  fullName: NativeCollections.NativeConcurrentSpinLock.Enter()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Enter
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 135
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Enter
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Enter()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Enter()
+  overload: NativeCollections.NativeConcurrentSpinLock.Enter*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeConcurrentSpinLock.Exit
+  commentId: M:NativeCollections.NativeConcurrentSpinLock.Exit
+  id: Exit
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: Exit()
+  nameWithType: NativeConcurrentSpinLock.Exit()
+  fullName: NativeCollections.NativeConcurrentSpinLock.Exit()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Exit
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 176
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Exit
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Exit()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub [Exit]()
+  overload: NativeCollections.NativeConcurrentSpinLock.Exit*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeConcurrentSpinLock.Empty
+  commentId: P:NativeCollections.NativeConcurrentSpinLock.Empty
+  id: Empty
+  parent: NativeCollections.NativeConcurrentSpinLock
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeConcurrentSpinLock.Empty
+  fullName: NativeCollections.NativeConcurrentSpinLock.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeConcurrentSpinLock.cs
+    startLine: 182
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeConcurrentSpinLock Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeConcurrentSpinLock
+    content.vb: Public Shared ReadOnly Property Empty As NativeConcurrentSpinLock
+  overload: NativeCollections.NativeConcurrentSpinLock.Empty*
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeConcurrentSpinLock}
+  commentId: T:System.IEquatable{NativeCollections.NativeConcurrentSpinLock}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeConcurrentSpinLock>
+  nameWithType: IEquatable<NativeConcurrentSpinLock>
+  fullName: System.IEquatable<NativeCollections.NativeConcurrentSpinLock>
+  nameWithType.vb: IEquatable(Of NativeConcurrentSpinLock)
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeConcurrentSpinLock)
+  name.vb: IEquatable(Of NativeConcurrentSpinLock)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeConcurrentSpinLock
+    name: NativeConcurrentSpinLock
+    href: NativeCollections.NativeConcurrentSpinLock.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentSpinLock
+    name: NativeConcurrentSpinLock
+    href: NativeCollections.NativeConcurrentSpinLock.html
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeConcurrentSpinLock.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeConcurrentSpinLock>(NativeConcurrentSpinLock)
+  nameWithType: JsonHelper.ToJson<NativeConcurrentSpinLock>(NativeConcurrentSpinLock)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeConcurrentSpinLock>(NativeCollections.NativeConcurrentSpinLock)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeConcurrentSpinLock)(NativeConcurrentSpinLock)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeConcurrentSpinLock)(NativeCollections.NativeConcurrentSpinLock)
+  name.vb: ToJson(Of NativeConcurrentSpinLock)(NativeConcurrentSpinLock)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeConcurrentSpinLock)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeConcurrentSpinLock
+    name: NativeConcurrentSpinLock
+    href: NativeCollections.NativeConcurrentSpinLock.html
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeConcurrentSpinLock
+    name: NativeConcurrentSpinLock
+    href: NativeCollections.NativeConcurrentSpinLock.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeConcurrentSpinLock)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentSpinLock
+    name: NativeConcurrentSpinLock
+    href: NativeCollections.NativeConcurrentSpinLock.html
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeConcurrentSpinLock
+    name: NativeConcurrentSpinLock
+    href: NativeCollections.NativeConcurrentSpinLock.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeConcurrentSpinLock.#ctor*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.#ctor
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock__ctor_System_Int32_
+  name: NativeConcurrentSpinLock
+  nameWithType: NativeConcurrentSpinLock.NativeConcurrentSpinLock
+  fullName: NativeCollections.NativeConcurrentSpinLock.NativeConcurrentSpinLock
+  nameWithType.vb: NativeConcurrentSpinLock.New
+  fullName.vb: NativeCollections.NativeConcurrentSpinLock.New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativeConcurrentSpinLock.IsCreated*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.IsCreated
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_IsCreated
+  name: IsCreated
+  nameWithType: NativeConcurrentSpinLock.IsCreated
+  fullName: NativeCollections.NativeConcurrentSpinLock.IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeConcurrentSpinLock.SleepThreshold*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.SleepThreshold
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_SleepThreshold
+  name: SleepThreshold
+  nameWithType: NativeConcurrentSpinLock.SleepThreshold
+  fullName: NativeCollections.NativeConcurrentSpinLock.SleepThreshold
+- uid: NativeCollections.NativeConcurrentSpinLock.Equals*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.Equals
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_Equals_NativeCollections_NativeConcurrentSpinLock_
+  name: Equals
+  nameWithType: NativeConcurrentSpinLock.Equals
+  fullName: NativeCollections.NativeConcurrentSpinLock.Equals
+- uid: System.IEquatable{NativeCollections.NativeConcurrentSpinLock}.Equals(NativeCollections.NativeConcurrentSpinLock)
+  commentId: M:System.IEquatable{NativeCollections.NativeConcurrentSpinLock}.Equals(NativeCollections.NativeConcurrentSpinLock)
+  parent: System.IEquatable{NativeCollections.NativeConcurrentSpinLock}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeConcurrentSpinLock)
+  nameWithType: IEquatable<NativeConcurrentSpinLock>.Equals(NativeConcurrentSpinLock)
+  fullName: System.IEquatable<NativeCollections.NativeConcurrentSpinLock>.Equals(NativeCollections.NativeConcurrentSpinLock)
+  nameWithType.vb: IEquatable(Of NativeConcurrentSpinLock).Equals(NativeConcurrentSpinLock)
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeConcurrentSpinLock).Equals(NativeCollections.NativeConcurrentSpinLock)
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeConcurrentSpinLock}.Equals(NativeCollections.NativeConcurrentSpinLock)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeConcurrentSpinLock
+    name: NativeConcurrentSpinLock
+    href: NativeCollections.NativeConcurrentSpinLock.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeConcurrentSpinLock}.Equals(NativeCollections.NativeConcurrentSpinLock)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeConcurrentSpinLock
+    name: NativeConcurrentSpinLock
+    href: NativeCollections.NativeConcurrentSpinLock.html
+  - name: )
+- uid: NativeCollections.NativeConcurrentSpinLock
+  commentId: T:NativeCollections.NativeConcurrentSpinLock
+  parent: NativeCollections
+  href: NativeCollections.NativeConcurrentSpinLock.html
+  name: NativeConcurrentSpinLock
+  nameWithType: NativeConcurrentSpinLock
+  fullName: NativeCollections.NativeConcurrentSpinLock
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentSpinLock.GetHashCode*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.GetHashCode
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeConcurrentSpinLock.GetHashCode
+  fullName: NativeCollections.NativeConcurrentSpinLock.GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentSpinLock.ToString*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.ToString
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_ToString
+  name: ToString
+  nameWithType: NativeConcurrentSpinLock.ToString
+  fullName: NativeCollections.NativeConcurrentSpinLock.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeConcurrentSpinLock.op_Equality*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.op_Equality
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_op_Equality_NativeCollections_NativeConcurrentSpinLock_NativeCollections_NativeConcurrentSpinLock_
+  name: operator ==
+  nameWithType: NativeConcurrentSpinLock.operator ==
+  fullName: NativeCollections.NativeConcurrentSpinLock.operator ==
+  nameWithType.vb: NativeConcurrentSpinLock.=
+  fullName.vb: NativeCollections.NativeConcurrentSpinLock.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentSpinLock.op_Equality*
+    name: ==
+    href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_op_Equality_NativeCollections_NativeConcurrentSpinLock_NativeCollections_NativeConcurrentSpinLock_
+- uid: NativeCollections.NativeConcurrentSpinLock.op_Inequality*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.op_Inequality
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_op_Inequality_NativeCollections_NativeConcurrentSpinLock_NativeCollections_NativeConcurrentSpinLock_
+  name: operator !=
+  nameWithType: NativeConcurrentSpinLock.operator !=
+  fullName: NativeCollections.NativeConcurrentSpinLock.operator !=
+  nameWithType.vb: NativeConcurrentSpinLock.<>
+  fullName.vb: NativeCollections.NativeConcurrentSpinLock.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeConcurrentSpinLock.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_op_Inequality_NativeCollections_NativeConcurrentSpinLock_NativeCollections_NativeConcurrentSpinLock_
+- uid: NativeCollections.NativeConcurrentSpinLock.Dispose*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.Dispose
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_Dispose
+  name: Dispose
+  nameWithType: NativeConcurrentSpinLock.Dispose
+  fullName: NativeCollections.NativeConcurrentSpinLock.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeConcurrentSpinLock.Enter*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.Enter
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_Enter
+  name: Enter
+  nameWithType: NativeConcurrentSpinLock.Enter
+  fullName: NativeCollections.NativeConcurrentSpinLock.Enter
+- uid: NativeCollections.NativeConcurrentSpinLock.Exit*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.Exit
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_Exit
+  name: Exit
+  nameWithType: NativeConcurrentSpinLock.Exit
+  fullName: NativeCollections.NativeConcurrentSpinLock.Exit
+- uid: NativeCollections.NativeConcurrentSpinLock.Empty*
+  commentId: Overload:NativeCollections.NativeConcurrentSpinLock.Empty
+  href: NativeCollections.NativeConcurrentSpinLock.html#NativeCollections_NativeConcurrentSpinLock_Empty
+  name: Empty
+  nameWithType: NativeConcurrentSpinLock.Empty
+  fullName: NativeCollections.NativeConcurrentSpinLock.Empty

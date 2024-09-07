@@ -1,0 +1,1663 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Async.FTask
+  commentId: T:Fantasy.Async.FTask
+  id: FTask
+  parent: Fantasy.Async
+  children:
+  - Fantasy.Async.FTask.CompletedTask
+  - Fantasy.Async.FTask.Coroutine
+  - Fantasy.Async.FTask.Coroutine(System.Object)
+  - Fantasy.Async.FTask.Create(System.Boolean)
+  - Fantasy.Async.FTask.FTaskType
+  - Fantasy.Async.FTask.GetAwaiter
+  - Fantasy.Async.FTask.GetResult
+  - Fantasy.Async.FTask.GetUserTokenAsync``1
+  - Fantasy.Async.FTask.IsCompleted
+  - Fantasy.Async.FTask.OnCompleted(System.Action)
+  - Fantasy.Async.FTask.SetException(System.Exception)
+  - Fantasy.Async.FTask.SetResult
+  - Fantasy.Async.FTask.SetUserToKen(System.Object)
+  - Fantasy.Async.FTask.UnsafeOnCompleted(System.Action)
+  - Fantasy.Async.FTask.UserToKen
+  - Fantasy.Async.FTask.WaitAll(System.Collections.Generic.List{Fantasy.Async.FTask})
+  - Fantasy.Async.FTask.WaitAny(System.Collections.Generic.List{Fantasy.Async.FTask})
+  langs:
+  - csharp
+  - vb
+  name: FTask
+  nameWithType: FTask
+  fullName: Fantasy.Async.FTask
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FTask
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 22
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  summary: 一个异步任务
+  example: []
+  syntax:
+    content: >-
+      [AsyncMethodBuilder(typeof(AsyncFTaskMethodBuilder))]
+
+      public sealed class FTask : ICriticalNotifyCompletion, INotifyCompletion, IFTask
+    content.vb: >-
+      <AsyncMethodBuilder(GetType(AsyncFTaskMethodBuilder))>
+
+      Public NotInheritable Class FTask Implements ICriticalNotifyCompletion, INotifyCompletion, IFTask
+  inheritance:
+  - System.Object
+  implements:
+  - System.Runtime.CompilerServices.ICriticalNotifyCompletion
+  - System.Runtime.CompilerServices.INotifyCompletion
+  - Fantasy.Async.IFTask
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Async.FTask.Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FCancellationToken)
+  - Fantasy.Async.FTask.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.CompilerServices.AsyncMethodBuilderAttribute
+    ctor: System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Fantasy.Async.AsyncFTaskMethodBuilder
+- uid: Fantasy.Async.FTask.CompletedTask
+  commentId: P:Fantasy.Async.FTask.CompletedTask
+  id: CompletedTask
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: CompletedTask
+  nameWithType: FTask.CompletedTask
+  fullName: Fantasy.Async.FTask.CompletedTask
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/FTask.Extension/FTask.Factory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CompletedTask
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/FTask.Extension/FTask.Factory.cs
+    startLine: 25
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  summary: 创建一个空的任务
+  example: []
+  syntax:
+    content: public static FTaskCompleted CompletedTask { get; }
+    parameters: []
+    return:
+      type: Fantasy.Async.FTaskCompleted
+    content.vb: Public Shared ReadOnly Property CompletedTask As FTaskCompleted
+  overload: Fantasy.Async.FTask.CompletedTask*
+- uid: Fantasy.Async.FTask.Create(System.Boolean)
+  commentId: M:Fantasy.Async.FTask.Create(System.Boolean)
+  id: Create(System.Boolean)
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: Create(bool)
+  nameWithType: FTask.Create(bool)
+  fullName: Fantasy.Async.FTask.Create(bool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/FTask.Extension/FTask.Factory.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Create
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/FTask.Extension/FTask.Factory.cs
+    startLine: 32
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  summary: 创建一个任务
+  example: []
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public static FTask Create(bool isPool = true)
+    parameters:
+    - id: isPool
+      type: System.Boolean
+      description: 是否从对象池中创建
+    return:
+      type: Fantasy.Async.FTask
+      description: ''
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Shared Function Create(isPool As Boolean = True) As FTask
+  overload: Fantasy.Async.FTask.Create*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: FTask.Create(Boolean)
+  fullName.vb: Fantasy.Async.FTask.Create(Boolean)
+  name.vb: Create(Boolean)
+- uid: Fantasy.Async.FTask.GetUserTokenAsync``1
+  commentId: M:Fantasy.Async.FTask.GetUserTokenAsync``1
+  id: GetUserTokenAsync``1
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: GetUserTokenAsync<T>()
+  nameWithType: FTask.GetUserTokenAsync<T>()
+  fullName: Fantasy.Async.FTask.GetUserTokenAsync<T>()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/FTask.Extension/FTask.Token.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetUserTokenAsync
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/FTask.Extension/FTask.Token.cs
+    startLine: 13
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  summary: 获得当前FTask中传递的UserToken
+  example: []
+  syntax:
+    content: 'public static FTask<T> GetUserTokenAsync<T>() where T : class'
+    typeParameters:
+    - id: T
+      description: UserToken的泛型类型
+    return:
+      type: Fantasy.Async.FTask{{T}}
+      description: 返回一个UserToken
+    content.vb: Public Shared Function GetUserTokenAsync(Of T As Class)() As FTask(Of T)
+  overload: Fantasy.Async.FTask.GetUserTokenAsync*
+  nameWithType.vb: FTask.GetUserTokenAsync(Of T)()
+  fullName.vb: Fantasy.Async.FTask.GetUserTokenAsync(Of T)()
+  name.vb: GetUserTokenAsync(Of T)()
+- uid: Fantasy.Async.FTask.WaitAll(System.Collections.Generic.List{Fantasy.Async.FTask})
+  commentId: M:Fantasy.Async.FTask.WaitAll(System.Collections.Generic.List{Fantasy.Async.FTask})
+  id: WaitAll(System.Collections.Generic.List{Fantasy.Async.FTask})
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: WaitAll(List<FTask>)
+  nameWithType: FTask.WaitAll(List<FTask>)
+  fullName: Fantasy.Async.FTask.WaitAll(System.Collections.Generic.List<Fantasy.Async.FTask>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/FTask.Extension/FTask.Tools.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WaitAll
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/FTask.Extension/FTask.Tools.cs
+    startLine: 11
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  summary: 等待所有任务完成
+  example: []
+  syntax:
+    content: public static FTask WaitAll(List<FTask> tasks)
+    parameters:
+    - id: tasks
+      type: System.Collections.Generic.List{Fantasy.Async.FTask}
+      description: ''
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Public Shared Function WaitAll(tasks As List(Of FTask)) As FTask
+  overload: Fantasy.Async.FTask.WaitAll*
+  nameWithType.vb: FTask.WaitAll(List(Of FTask))
+  fullName.vb: Fantasy.Async.FTask.WaitAll(System.Collections.Generic.List(Of Fantasy.Async.FTask))
+  name.vb: WaitAll(List(Of FTask))
+- uid: Fantasy.Async.FTask.WaitAny(System.Collections.Generic.List{Fantasy.Async.FTask})
+  commentId: M:Fantasy.Async.FTask.WaitAny(System.Collections.Generic.List{Fantasy.Async.FTask})
+  id: WaitAny(System.Collections.Generic.List{Fantasy.Async.FTask})
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: WaitAny(List<FTask>)
+  nameWithType: FTask.WaitAny(List<FTask>)
+  fullName: Fantasy.Async.FTask.WaitAny(System.Collections.Generic.List<Fantasy.Async.FTask>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/FTask.Extension/FTask.Tools.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: WaitAny
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/FTask.Extension/FTask.Tools.cs
+    startLine: 43
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  summary: 等待其中一个任务完成
+  example: []
+  syntax:
+    content: public static FTask WaitAny(List<FTask> tasks)
+    parameters:
+    - id: tasks
+      type: System.Collections.Generic.List{Fantasy.Async.FTask}
+      description: ''
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: Public Shared Function WaitAny(tasks As List(Of FTask)) As FTask
+  overload: Fantasy.Async.FTask.WaitAny*
+  nameWithType.vb: FTask.WaitAny(List(Of FTask))
+  fullName.vb: Fantasy.Async.FTask.WaitAny(System.Collections.Generic.List(Of Fantasy.Async.FTask))
+  name.vb: WaitAny(List(Of FTask))
+- uid: Fantasy.Async.FTask.FTaskType
+  commentId: P:Fantasy.Async.FTask.FTaskType
+  id: FTaskType
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: FTaskType
+  nameWithType: FTask.FTaskType
+  fullName: Fantasy.Async.FTask.FTaskType
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FTaskType
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 28
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  example: []
+  syntax:
+    content: public FTaskType FTaskType { get; set; }
+    parameters: []
+    return:
+      type: Fantasy.Async.FTaskType
+    content.vb: Public Property FTaskType As FTaskType
+  overload: Fantasy.Async.FTask.FTaskType*
+  implements:
+  - Fantasy.Async.IFTask.FTaskType
+- uid: Fantasy.Async.FTask.UserToKen
+  commentId: P:Fantasy.Async.FTask.UserToKen
+  id: UserToKen
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: UserToKen
+  nameWithType: FTask.UserToKen
+  fullName: Fantasy.Async.FTask.UserToKen
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: UserToKen
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 29
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  example: []
+  syntax:
+    content: public object UserToKen { get; set; }
+    parameters: []
+    return:
+      type: System.Object
+    content.vb: Public Property UserToKen As Object
+  overload: Fantasy.Async.FTask.UserToKen*
+  implements:
+  - Fantasy.Async.IFTask.UserToKen
+- uid: Fantasy.Async.FTask.IsCompleted
+  commentId: P:Fantasy.Async.FTask.IsCompleted
+  id: IsCompleted
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: IsCompleted
+  nameWithType: FTask.IsCompleted
+  fullName: Fantasy.Async.FTask.IsCompleted
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCompleted
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 30
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: public bool IsCompleted { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCompleted As Boolean
+  overload: Fantasy.Async.FTask.IsCompleted*
+- uid: Fantasy.Async.FTask.GetAwaiter
+  commentId: M:Fantasy.Async.FTask.GetAwaiter
+  id: GetAwaiter
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: GetAwaiter()
+  nameWithType: FTask.GetAwaiter()
+  fullName: Fantasy.Async.FTask.GetAwaiter()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetAwaiter
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 37
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public FTask GetAwaiter()
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function GetAwaiter() As FTask
+  overload: Fantasy.Async.FTask.GetAwaiter*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Async.FTask.Coroutine
+  commentId: M:Fantasy.Async.FTask.Coroutine
+  id: Coroutine
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: Coroutine()
+  nameWithType: FTask.Coroutine()
+  fullName: Fantasy.Async.FTask.Coroutine()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Coroutine
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 48
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Coroutine()
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Coroutine()
+  overload: Fantasy.Async.FTask.Coroutine*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Async.FTask.Coroutine(System.Object)
+  commentId: M:Fantasy.Async.FTask.Coroutine(System.Object)
+  id: Coroutine(System.Object)
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: Coroutine(object)
+  nameWithType: FTask.Coroutine(object)
+  fullName: Fantasy.Async.FTask.Coroutine(object)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Coroutine
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 56
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Coroutine(object userToken)
+    parameters:
+    - id: userToken
+      type: System.Object
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Coroutine(userToken As Object)
+  overload: Fantasy.Async.FTask.Coroutine*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: FTask.Coroutine(Object)
+  fullName.vb: Fantasy.Async.FTask.Coroutine(Object)
+  name.vb: Coroutine(Object)
+- uid: Fantasy.Async.FTask.SetUserToKen(System.Object)
+  commentId: M:Fantasy.Async.FTask.SetUserToKen(System.Object)
+  id: SetUserToKen(System.Object)
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: SetUserToKen(object)
+  nameWithType: FTask.SetUserToKen(object)
+  fullName: Fantasy.Async.FTask.SetUserToKen(object)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetUserToKen
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 64
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public FTask SetUserToKen(object userToken)
+    parameters:
+    - id: userToken
+      type: System.Object
+    return:
+      type: Fantasy.Async.FTask
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function SetUserToKen(userToken As Object) As FTask
+  overload: Fantasy.Async.FTask.SetUserToKen*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: FTask.SetUserToKen(Object)
+  fullName.vb: Fantasy.Async.FTask.SetUserToKen(Object)
+  name.vb: SetUserToKen(Object)
+- uid: Fantasy.Async.FTask.GetResult
+  commentId: M:Fantasy.Async.FTask.GetResult
+  id: GetResult
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: GetResult()
+  nameWithType: FTask.GetResult()
+  fullName: Fantasy.Async.FTask.GetResult()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetResult
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 72
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void GetResult()
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub GetResult()
+  overload: Fantasy.Async.FTask.GetResult*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Async.FTask.SetResult
+  commentId: M:Fantasy.Async.FTask.SetResult
+  id: SetResult
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: SetResult()
+  nameWithType: FTask.SetResult()
+  fullName: Fantasy.Async.FTask.SetResult()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetResult
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 104
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void SetResult()
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub SetResult()
+  overload: Fantasy.Async.FTask.SetResult*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Async.FTask.OnCompleted(System.Action)
+  commentId: M:Fantasy.Async.FTask.OnCompleted(System.Action)
+  id: OnCompleted(System.Action)
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: OnCompleted(Action)
+  nameWithType: FTask.OnCompleted(Action)
+  fullName: Fantasy.Async.FTask.OnCompleted(System.Action)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OnCompleted
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 125
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  summary: Schedules the continuation action that's invoked when the instance completes.
+  example: []
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void OnCompleted(Action action)
+    parameters:
+    - id: action
+      type: System.Action
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub OnCompleted(action As Action)
+  overload: Fantasy.Async.FTask.OnCompleted*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code class="paramref">continuation</code> argument is null (Nothing in Visual Basic).
+  implements:
+  - System.Runtime.CompilerServices.INotifyCompletion.OnCompleted(System.Action)
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Async.FTask.UnsafeOnCompleted(System.Action)
+  commentId: M:Fantasy.Async.FTask.UnsafeOnCompleted(System.Action)
+  id: UnsafeOnCompleted(System.Action)
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: UnsafeOnCompleted(Action)
+  nameWithType: FTask.UnsafeOnCompleted(Action)
+  fullName: Fantasy.Async.FTask.UnsafeOnCompleted(System.Action)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: UnsafeOnCompleted
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 132
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  summary: Schedules the continuation action that's invoked when the instance completes.
+  example: []
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void UnsafeOnCompleted(Action action)
+    parameters:
+    - id: action
+      type: System.Action
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub UnsafeOnCompleted(action As Action)
+  overload: Fantasy.Async.FTask.UnsafeOnCompleted*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code class="paramref">continuation</code> argument is null (Nothing in Visual Basic).
+  implements:
+  - System.Runtime.CompilerServices.ICriticalNotifyCompletion.UnsafeOnCompleted(System.Action)
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: Fantasy.Async.FTask.SetException(System.Exception)
+  commentId: M:Fantasy.Async.FTask.SetException(System.Exception)
+  id: SetException(System.Exception)
+  parent: Fantasy.Async.FTask
+  langs:
+  - csharp
+  - vb
+  name: SetException(Exception)
+  nameWithType: FTask.SetException(Exception)
+  fullName: Fantasy.Async.FTask.SetException(System.Exception)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetException
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/FTask/Task/FTask.cs
+    startLine: 145
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Async
+  syntax:
+    content: >-
+      [DebuggerHidden]
+
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void SetException(Exception exception)
+    parameters:
+    - id: exception
+      type: System.Exception
+    content.vb: >-
+      <DebuggerHidden>
+
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub SetException(exception As Exception)
+  overload: Fantasy.Async.FTask.SetException*
+  attributes:
+  - type: System.Diagnostics.DebuggerHiddenAttribute
+    ctor: System.Diagnostics.DebuggerHiddenAttribute.#ctor
+    arguments: []
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+references:
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Runtime.CompilerServices.ICriticalNotifyCompletion
+  commentId: T:System.Runtime.CompilerServices.ICriticalNotifyCompletion
+  parent: System.Runtime.CompilerServices
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.icriticalnotifycompletion
+  name: ICriticalNotifyCompletion
+  nameWithType: ICriticalNotifyCompletion
+  fullName: System.Runtime.CompilerServices.ICriticalNotifyCompletion
+- uid: System.Runtime.CompilerServices.INotifyCompletion
+  commentId: T:System.Runtime.CompilerServices.INotifyCompletion
+  parent: System.Runtime.CompilerServices
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.inotifycompletion
+  name: INotifyCompletion
+  nameWithType: INotifyCompletion
+  fullName: System.Runtime.CompilerServices.INotifyCompletion
+- uid: Fantasy.Async.IFTask
+  commentId: T:Fantasy.Async.IFTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.IFTask.html
+  name: IFTask
+  nameWithType: IFTask
+  fullName: Fantasy.Async.IFTask
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Async.FTask.Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FCancellationToken)
+  commentId: M:Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FTask,Fantasy.Async.FCancellationToken)
+  parent: Fantasy.Async.FCancellationTokenExtension
+  definition: Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FTask,Fantasy.Async.FCancellationToken)
+  href: Fantasy.Async.FCancellationTokenExtension.html#Fantasy_Async_FCancellationTokenExtension_AddToCancellationToken_Fantasy_Async_FTask_Fantasy_Async_FCancellationToken_
+  name: AddToCancellationToken(FTask, FCancellationToken)
+  nameWithType: FCancellationTokenExtension.AddToCancellationToken(FTask, FCancellationToken)
+  fullName: Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FTask, Fantasy.Async.FCancellationToken)
+  spec.csharp:
+  - uid: Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FTask,Fantasy.Async.FCancellationToken)
+    name: AddToCancellationToken
+    href: Fantasy.Async.FCancellationTokenExtension.html#Fantasy_Async_FCancellationTokenExtension_AddToCancellationToken_Fantasy_Async_FTask_Fantasy_Async_FCancellationToken_
+  - name: (
+  - uid: Fantasy.Async.FTask
+    name: FTask
+    href: Fantasy.Async.FTask.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.Async.FCancellationToken
+    name: FCancellationToken
+    href: Fantasy.Async.FCancellationToken.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FTask,Fantasy.Async.FCancellationToken)
+    name: AddToCancellationToken
+    href: Fantasy.Async.FCancellationTokenExtension.html#Fantasy_Async_FCancellationTokenExtension_AddToCancellationToken_Fantasy_Async_FTask_Fantasy_Async_FCancellationToken_
+  - name: (
+  - uid: Fantasy.Async.FTask
+    name: FTask
+    href: Fantasy.Async.FTask.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.Async.FCancellationToken
+    name: FCancellationToken
+    href: Fantasy.Async.FCancellationToken.html
+  - name: )
+- uid: Fantasy.Async.FTask.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<FTask>(FTask)
+  nameWithType: JsonHelper.ToJson<FTask>(FTask)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Async.FTask>(Fantasy.Async.FTask)
+  nameWithType.vb: JsonHelper.ToJson(Of FTask)(FTask)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Async.FTask)(Fantasy.Async.FTask)
+  name.vb: ToJson(Of FTask)(FTask)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Async.FTask)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Async.FTask
+    name: FTask
+    href: Fantasy.Async.FTask.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Async.FTask
+    name: FTask
+    href: Fantasy.Async.FTask.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Async.FTask)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Async.FTask
+    name: FTask
+    href: Fantasy.Async.FTask.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Async.FTask
+    name: FTask
+    href: Fantasy.Async.FTask.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Runtime.CompilerServices
+  commentId: N:System.Runtime.CompilerServices
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Runtime.CompilerServices
+  nameWithType: System.Runtime.CompilerServices
+  fullName: System.Runtime.CompilerServices
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Runtime
+    name: Runtime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime
+  - name: .
+  - uid: System.Runtime.CompilerServices
+    name: CompilerServices
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Runtime
+    name: Runtime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime
+  - name: .
+  - uid: System.Runtime.CompilerServices
+    name: CompilerServices
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices
+- uid: Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FTask,Fantasy.Async.FCancellationToken)
+  commentId: M:Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FTask,Fantasy.Async.FCancellationToken)
+  href: Fantasy.Async.FCancellationTokenExtension.html#Fantasy_Async_FCancellationTokenExtension_AddToCancellationToken_Fantasy_Async_FTask_Fantasy_Async_FCancellationToken_
+  name: AddToCancellationToken(FTask, FCancellationToken)
+  nameWithType: FCancellationTokenExtension.AddToCancellationToken(FTask, FCancellationToken)
+  fullName: Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FTask, Fantasy.Async.FCancellationToken)
+  spec.csharp:
+  - uid: Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FTask,Fantasy.Async.FCancellationToken)
+    name: AddToCancellationToken
+    href: Fantasy.Async.FCancellationTokenExtension.html#Fantasy_Async_FCancellationTokenExtension_AddToCancellationToken_Fantasy_Async_FTask_Fantasy_Async_FCancellationToken_
+  - name: (
+  - uid: Fantasy.Async.FTask
+    name: FTask
+    href: Fantasy.Async.FTask.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.Async.FCancellationToken
+    name: FCancellationToken
+    href: Fantasy.Async.FCancellationToken.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Async.FCancellationTokenExtension.AddToCancellationToken(Fantasy.Async.FTask,Fantasy.Async.FCancellationToken)
+    name: AddToCancellationToken
+    href: Fantasy.Async.FCancellationTokenExtension.html#Fantasy_Async_FCancellationTokenExtension_AddToCancellationToken_Fantasy_Async_FTask_Fantasy_Async_FCancellationToken_
+  - name: (
+  - uid: Fantasy.Async.FTask
+    name: FTask
+    href: Fantasy.Async.FTask.html
+  - name: ','
+  - name: " "
+  - uid: Fantasy.Async.FCancellationToken
+    name: FCancellationToken
+    href: Fantasy.Async.FCancellationToken.html
+  - name: )
+- uid: Fantasy.Async.FCancellationTokenExtension
+  commentId: T:Fantasy.Async.FCancellationTokenExtension
+  parent: Fantasy.Async
+  href: Fantasy.Async.FCancellationTokenExtension.html
+  name: FCancellationTokenExtension
+  nameWithType: FCancellationTokenExtension
+  fullName: Fantasy.Async.FCancellationTokenExtension
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Async.FTask.CompletedTask*
+  commentId: Overload:Fantasy.Async.FTask.CompletedTask
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_CompletedTask
+  name: CompletedTask
+  nameWithType: FTask.CompletedTask
+  fullName: Fantasy.Async.FTask.CompletedTask
+- uid: Fantasy.Async.FTaskCompleted
+  commentId: T:Fantasy.Async.FTaskCompleted
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTaskCompleted.html
+  name: FTaskCompleted
+  nameWithType: FTaskCompleted
+  fullName: Fantasy.Async.FTaskCompleted
+- uid: Fantasy.Async.FTask.Create*
+  commentId: Overload:Fantasy.Async.FTask.Create
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_Create_System_Boolean_
+  name: Create
+  nameWithType: FTask.Create
+  fullName: Fantasy.Async.FTask.Create
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Fantasy.Async.FTask
+  commentId: T:Fantasy.Async.FTask
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask.html
+  name: FTask
+  nameWithType: FTask
+  fullName: Fantasy.Async.FTask
+- uid: Fantasy.Async.FTask.GetUserTokenAsync*
+  commentId: Overload:Fantasy.Async.FTask.GetUserTokenAsync
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_GetUserTokenAsync__1
+  name: GetUserTokenAsync
+  nameWithType: FTask.GetUserTokenAsync
+  fullName: Fantasy.Async.FTask.GetUserTokenAsync
+- uid: Fantasy.Async.FTask{{T}}
+  commentId: T:Fantasy.Async.FTask{``0}
+  parent: Fantasy.Async
+  definition: Fantasy.Async.FTask`1
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<T>
+  nameWithType: FTask<T>
+  fullName: Fantasy.Async.FTask<T>
+  nameWithType.vb: FTask(Of T)
+  fullName.vb: Fantasy.Async.FTask(Of T)
+  name.vb: FTask(Of T)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Async.FTask`1
+  commentId: T:Fantasy.Async.FTask`1
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<T>
+  nameWithType: FTask<T>
+  fullName: Fantasy.Async.FTask<T>
+  nameWithType.vb: FTask(Of T)
+  fullName.vb: Fantasy.Async.FTask(Of T)
+  name.vb: FTask(Of T)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Async.FTask.WaitAll*
+  commentId: Overload:Fantasy.Async.FTask.WaitAll
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_WaitAll_System_Collections_Generic_List_Fantasy_Async_FTask__
+  name: WaitAll
+  nameWithType: FTask.WaitAll
+  fullName: Fantasy.Async.FTask.WaitAll
+- uid: System.Collections.Generic.List{Fantasy.Async.FTask}
+  commentId: T:System.Collections.Generic.List{Fantasy.Async.FTask}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<FTask>
+  nameWithType: List<FTask>
+  fullName: System.Collections.Generic.List<Fantasy.Async.FTask>
+  nameWithType.vb: List(Of FTask)
+  fullName.vb: System.Collections.Generic.List(Of Fantasy.Async.FTask)
+  name.vb: List(Of FTask)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: Fantasy.Async.FTask
+    name: FTask
+    href: Fantasy.Async.FTask.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Async.FTask
+    name: FTask
+    href: Fantasy.Async.FTask.html
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Fantasy.Async.FTask.WaitAny*
+  commentId: Overload:Fantasy.Async.FTask.WaitAny
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_WaitAny_System_Collections_Generic_List_Fantasy_Async_FTask__
+  name: WaitAny
+  nameWithType: FTask.WaitAny
+  fullName: Fantasy.Async.FTask.WaitAny
+- uid: Fantasy.Async.FTask.FTaskType*
+  commentId: Overload:Fantasy.Async.FTask.FTaskType
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_FTaskType
+  name: FTaskType
+  nameWithType: FTask.FTaskType
+  fullName: Fantasy.Async.FTask.FTaskType
+- uid: Fantasy.Async.IFTask.FTaskType
+  commentId: P:Fantasy.Async.IFTask.FTaskType
+  parent: Fantasy.Async.IFTask
+  href: Fantasy.Async.IFTask.html#Fantasy_Async_IFTask_FTaskType
+  name: FTaskType
+  nameWithType: IFTask.FTaskType
+  fullName: Fantasy.Async.IFTask.FTaskType
+- uid: Fantasy.Async.FTaskType
+  commentId: T:Fantasy.Async.FTaskType
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTaskType.html
+  name: FTaskType
+  nameWithType: FTaskType
+  fullName: Fantasy.Async.FTaskType
+- uid: Fantasy.Async.FTask.UserToKen*
+  commentId: Overload:Fantasy.Async.FTask.UserToKen
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_UserToKen
+  name: UserToKen
+  nameWithType: FTask.UserToKen
+  fullName: Fantasy.Async.FTask.UserToKen
+- uid: Fantasy.Async.IFTask.UserToKen
+  commentId: P:Fantasy.Async.IFTask.UserToKen
+  parent: Fantasy.Async.IFTask
+  href: Fantasy.Async.IFTask.html#Fantasy_Async_IFTask_UserToKen
+  name: UserToKen
+  nameWithType: IFTask.UserToKen
+  fullName: Fantasy.Async.IFTask.UserToKen
+- uid: Fantasy.Async.FTask.IsCompleted*
+  commentId: Overload:Fantasy.Async.FTask.IsCompleted
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_IsCompleted
+  name: IsCompleted
+  nameWithType: FTask.IsCompleted
+  fullName: Fantasy.Async.FTask.IsCompleted
+- uid: Fantasy.Async.FTask.GetAwaiter*
+  commentId: Overload:Fantasy.Async.FTask.GetAwaiter
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_GetAwaiter
+  name: GetAwaiter
+  nameWithType: FTask.GetAwaiter
+  fullName: Fantasy.Async.FTask.GetAwaiter
+- uid: Fantasy.Async.FTask.Coroutine*
+  commentId: Overload:Fantasy.Async.FTask.Coroutine
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_Coroutine
+  name: Coroutine
+  nameWithType: FTask.Coroutine
+  fullName: Fantasy.Async.FTask.Coroutine
+- uid: Fantasy.Async.FTask.SetUserToKen*
+  commentId: Overload:Fantasy.Async.FTask.SetUserToKen
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_SetUserToKen_System_Object_
+  name: SetUserToKen
+  nameWithType: FTask.SetUserToKen
+  fullName: Fantasy.Async.FTask.SetUserToKen
+- uid: Fantasy.Async.FTask.GetResult*
+  commentId: Overload:Fantasy.Async.FTask.GetResult
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_GetResult
+  name: GetResult
+  nameWithType: FTask.GetResult
+  fullName: Fantasy.Async.FTask.GetResult
+- uid: Fantasy.Async.FTask.SetResult*
+  commentId: Overload:Fantasy.Async.FTask.SetResult
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_SetResult
+  name: SetResult
+  nameWithType: FTask.SetResult
+  fullName: Fantasy.Async.FTask.SetResult
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+  name: ArgumentNullException
+  nameWithType: ArgumentNullException
+  fullName: System.ArgumentNullException
+- uid: Fantasy.Async.FTask.OnCompleted*
+  commentId: Overload:Fantasy.Async.FTask.OnCompleted
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_OnCompleted_System_Action_
+  name: OnCompleted
+  nameWithType: FTask.OnCompleted
+  fullName: Fantasy.Async.FTask.OnCompleted
+- uid: System.Runtime.CompilerServices.INotifyCompletion.OnCompleted(System.Action)
+  commentId: M:System.Runtime.CompilerServices.INotifyCompletion.OnCompleted(System.Action)
+  parent: System.Runtime.CompilerServices.INotifyCompletion
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.inotifycompletion.oncompleted
+  name: OnCompleted(Action)
+  nameWithType: INotifyCompletion.OnCompleted(Action)
+  fullName: System.Runtime.CompilerServices.INotifyCompletion.OnCompleted(System.Action)
+  spec.csharp:
+  - uid: System.Runtime.CompilerServices.INotifyCompletion.OnCompleted(System.Action)
+    name: OnCompleted
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.inotifycompletion.oncompleted
+  - name: (
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: )
+  spec.vb:
+  - uid: System.Runtime.CompilerServices.INotifyCompletion.OnCompleted(System.Action)
+    name: OnCompleted
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.inotifycompletion.oncompleted
+  - name: (
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: )
+- uid: System.Action
+  commentId: T:System.Action
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action
+  name: Action
+  nameWithType: Action
+  fullName: System.Action
+- uid: Fantasy.Async.FTask.UnsafeOnCompleted*
+  commentId: Overload:Fantasy.Async.FTask.UnsafeOnCompleted
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_UnsafeOnCompleted_System_Action_
+  name: UnsafeOnCompleted
+  nameWithType: FTask.UnsafeOnCompleted
+  fullName: Fantasy.Async.FTask.UnsafeOnCompleted
+- uid: System.Runtime.CompilerServices.ICriticalNotifyCompletion.UnsafeOnCompleted(System.Action)
+  commentId: M:System.Runtime.CompilerServices.ICriticalNotifyCompletion.UnsafeOnCompleted(System.Action)
+  parent: System.Runtime.CompilerServices.ICriticalNotifyCompletion
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.icriticalnotifycompletion.unsafeoncompleted
+  name: UnsafeOnCompleted(Action)
+  nameWithType: ICriticalNotifyCompletion.UnsafeOnCompleted(Action)
+  fullName: System.Runtime.CompilerServices.ICriticalNotifyCompletion.UnsafeOnCompleted(System.Action)
+  spec.csharp:
+  - uid: System.Runtime.CompilerServices.ICriticalNotifyCompletion.UnsafeOnCompleted(System.Action)
+    name: UnsafeOnCompleted
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.icriticalnotifycompletion.unsafeoncompleted
+  - name: (
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: )
+  spec.vb:
+  - uid: System.Runtime.CompilerServices.ICriticalNotifyCompletion.UnsafeOnCompleted(System.Action)
+    name: UnsafeOnCompleted
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.icriticalnotifycompletion.unsafeoncompleted
+  - name: (
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: )
+- uid: Fantasy.Async.FTask.SetException*
+  commentId: Overload:Fantasy.Async.FTask.SetException
+  href: Fantasy.Async.FTask.html#Fantasy_Async_FTask_SetException_System_Exception_
+  name: SetException
+  nameWithType: FTask.SetException
+  fullName: Fantasy.Async.FTask.SetException
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception

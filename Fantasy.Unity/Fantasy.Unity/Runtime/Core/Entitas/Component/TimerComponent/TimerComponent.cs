@@ -1,10 +1,14 @@
 // ReSharper disable ForCanBeConvertedToForeach
+
+using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #if FANTASY_UNITY
 using UnityEngine;
 #endif
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace Fantasy
+namespace Fantasy.Timer
 {
     public sealed class TimerComponentUpdateSystem : UpdateSystem<TimerComponent>
     {

@@ -1,6 +1,7 @@
 using System;
+using Fantasy.Async;
 
-namespace Fantasy
+namespace Fantasy.Assembly
 {
     /// <summary>
     /// 实现这个接口、会再程序集首次加载、卸载、重载的时候调用

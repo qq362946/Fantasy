@@ -3,6 +3,8 @@ using MemoryPack;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using Fantasy;
+using Fantasy.Network.Interface;
+using Fantasy.Serialize;
 // ReSharper disable InconsistentNaming
 // ReSharper disable RedundantUsingDirective
 // ReSharper disable RedundantOverriddenMember
@@ -51,7 +53,7 @@ namespace Fantasy
 		public uint ErrorCode { get; set; }
 	}
 	[ProtoContract]
-	public partial class G2M_RequestAddressableId : AMessage, IRouteRequest
+	public partial class G2M_RequestAddressableId : AMessage, IRouteRequest, IProto
 	{
 		public static G2M_RequestAddressableId Create(Scene scene)
 		{
@@ -68,7 +70,7 @@ namespace Fantasy
 		public uint OpCode() { return InnerOpcode.G2M_RequestAddressableId; }
 	}
 	[ProtoContract]
-	public partial class M2G_ResponseAddressableId : AMessage, IRouteResponse
+	public partial class M2G_ResponseAddressableId : AMessage, IRouteResponse, IProto
 	{
 		public static M2G_ResponseAddressableId Create(Scene scene)
 		{
@@ -92,7 +94,7 @@ namespace Fantasy
 	///  通知Chat服务器创建一个RouteId
 	/// </summary>
 	[ProtoContract]
-	public partial class G2Chat_CreateRouteRequest : AMessage, IRouteRequest
+	public partial class G2Chat_CreateRouteRequest : AMessage, IRouteRequest, IProto
 	{
 		public static G2Chat_CreateRouteRequest Create(Scene scene)
 		{
@@ -112,7 +114,7 @@ namespace Fantasy
 		public long GateRouteId { get; set; }
 	}
 	[ProtoContract]
-	public partial class Chat2G_CreateRouteResponse : AMessage, IRouteResponse
+	public partial class Chat2G_CreateRouteResponse : AMessage, IRouteResponse, IProto
 	{
 		public static Chat2G_CreateRouteResponse Create(Scene scene)
 		{

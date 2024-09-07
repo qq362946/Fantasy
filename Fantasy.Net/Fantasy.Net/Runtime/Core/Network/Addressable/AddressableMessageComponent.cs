@@ -1,6 +1,10 @@
+using Fantasy.Async;
+using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
+
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #if FANTASY_NET
-namespace Fantasy
+namespace Fantasy.Network.Route
 {
     public class AddressableMessageComponentDestroySystem : DestroySystem<AddressableMessageComponent>
     {

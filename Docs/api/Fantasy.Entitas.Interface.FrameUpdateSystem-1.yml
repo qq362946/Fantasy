@@ -1,0 +1,665 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1
+  commentId: T:Fantasy.Entitas.Interface.FrameUpdateSystem`1
+  id: FrameUpdateSystem`1
+  parent: Fantasy.Entitas.Interface
+  children:
+  - Fantasy.Entitas.Interface.FrameUpdateSystem`1.EntitiesType
+  - Fantasy.Entitas.Interface.FrameUpdateSystem`1.FrameUpdate(`0)
+  - Fantasy.Entitas.Interface.FrameUpdateSystem`1.Invoke(Fantasy.Entitas.Entity)
+  langs:
+  - csharp
+  - vb
+  name: FrameUpdateSystem<T>
+  nameWithType: FrameUpdateSystem<T>
+  fullName: Fantasy.Entitas.Interface.FrameUpdateSystem<T>
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Interface/System/IFrameUpdateSystem.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FrameUpdateSystem
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Interface/System/IFrameUpdateSystem.cs
+    startLine: 9
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Entitas.Interface
+  summary: 帧更新时间的抽象接口
+  example: []
+  syntax:
+    content: 'public abstract class FrameUpdateSystem<T> : IEntitiesSystem where T : Entity'
+    typeParameters:
+    - id: T
+      description: ''
+    content.vb: Public MustInherit Class FrameUpdateSystem(Of T As Entity) Implements IEntitiesSystem
+  inheritance:
+  - System.Object
+  implements:
+  - Fantasy.Entitas.Interface.IEntitiesSystem
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Entitas.Interface.FrameUpdateSystem`1.Fantasy.Helper.JsonHelper.ToJson``1
+  nameWithType.vb: FrameUpdateSystem(Of T)
+  fullName.vb: Fantasy.Entitas.Interface.FrameUpdateSystem(Of T)
+  name.vb: FrameUpdateSystem(Of T)
+- uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1.EntitiesType
+  commentId: M:Fantasy.Entitas.Interface.FrameUpdateSystem`1.EntitiesType
+  id: EntitiesType
+  parent: Fantasy.Entitas.Interface.FrameUpdateSystem`1
+  langs:
+  - csharp
+  - vb
+  name: EntitiesType()
+  nameWithType: FrameUpdateSystem<T>.EntitiesType()
+  fullName: Fantasy.Entitas.Interface.FrameUpdateSystem<T>.EntitiesType()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Interface/System/IFrameUpdateSystem.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: EntitiesType
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Interface/System/IFrameUpdateSystem.cs
+    startLine: 15
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Entitas.Interface
+  summary: 实体的类型
+  example: []
+  syntax:
+    content: public Type EntitiesType()
+    return:
+      type: System.Type
+      description: ''
+    content.vb: Public Function EntitiesType() As Type
+  overload: Fantasy.Entitas.Interface.FrameUpdateSystem`1.EntitiesType*
+  implements:
+  - Fantasy.Entitas.Interface.IEntitiesSystem.EntitiesType
+  nameWithType.vb: FrameUpdateSystem(Of T).EntitiesType()
+  fullName.vb: Fantasy.Entitas.Interface.FrameUpdateSystem(Of T).EntitiesType()
+- uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1.FrameUpdate(`0)
+  commentId: M:Fantasy.Entitas.Interface.FrameUpdateSystem`1.FrameUpdate(`0)
+  id: FrameUpdate(`0)
+  parent: Fantasy.Entitas.Interface.FrameUpdateSystem`1
+  langs:
+  - csharp
+  - vb
+  name: FrameUpdate(T)
+  nameWithType: FrameUpdateSystem<T>.FrameUpdate(T)
+  fullName: Fantasy.Entitas.Interface.FrameUpdateSystem<T>.FrameUpdate(T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Interface/System/IFrameUpdateSystem.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FrameUpdate
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Interface/System/IFrameUpdateSystem.cs
+    startLine: 20
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Entitas.Interface
+  summary: 事件的抽象方法，需要自己实现这个方法
+  example: []
+  syntax:
+    content: protected abstract void FrameUpdate(T self)
+    parameters:
+    - id: self
+      type: '{T}'
+      description: 触发事件的实体实例
+    content.vb: Protected MustOverride Sub FrameUpdate(self As T)
+  overload: Fantasy.Entitas.Interface.FrameUpdateSystem`1.FrameUpdate*
+  nameWithType.vb: FrameUpdateSystem(Of T).FrameUpdate(T)
+  fullName.vb: Fantasy.Entitas.Interface.FrameUpdateSystem(Of T).FrameUpdate(T)
+- uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1.Invoke(Fantasy.Entitas.Entity)
+  commentId: M:Fantasy.Entitas.Interface.FrameUpdateSystem`1.Invoke(Fantasy.Entitas.Entity)
+  id: Invoke(Fantasy.Entitas.Entity)
+  parent: Fantasy.Entitas.Interface.FrameUpdateSystem`1
+  langs:
+  - csharp
+  - vb
+  name: Invoke(Entity)
+  nameWithType: FrameUpdateSystem<T>.Invoke(Entity)
+  fullName: Fantasy.Entitas.Interface.FrameUpdateSystem<T>.Invoke(Fantasy.Entitas.Entity)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Interface/System/IFrameUpdateSystem.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Invoke
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Interface/System/IFrameUpdateSystem.cs
+    startLine: 25
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Entitas.Interface
+  summary: 框架内部调用的触发FrameUpdate的方法
+  example: []
+  syntax:
+    content: public void Invoke(Entity self)
+    parameters:
+    - id: self
+      type: Fantasy.Entitas.Entity
+      description: ''
+    content.vb: Public Sub Invoke(self As Entity)
+  overload: Fantasy.Entitas.Interface.FrameUpdateSystem`1.Invoke*
+  implements:
+  - Fantasy.Entitas.Interface.IEntitiesSystem.Invoke(Fantasy.Entitas.Entity)
+  nameWithType.vb: FrameUpdateSystem(Of T).Invoke(Entity)
+  fullName.vb: Fantasy.Entitas.Interface.FrameUpdateSystem(Of T).Invoke(Fantasy.Entitas.Entity)
+references:
+- uid: Fantasy.Entitas.Interface
+  commentId: N:Fantasy.Entitas.Interface
+  href: Fantasy.html
+  name: Fantasy.Entitas.Interface
+  nameWithType: Fantasy.Entitas.Interface
+  fullName: Fantasy.Entitas.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  - name: .
+  - uid: Fantasy.Entitas.Interface
+    name: Interface
+    href: Fantasy.Entitas.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  - name: .
+  - uid: Fantasy.Entitas.Interface
+    name: Interface
+    href: Fantasy.Entitas.Interface.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Entitas.Interface.IEntitiesSystem
+  commentId: T:Fantasy.Entitas.Interface.IEntitiesSystem
+  parent: Fantasy.Entitas.Interface
+  href: Fantasy.Entitas.Interface.IEntitiesSystem.html
+  name: IEntitiesSystem
+  nameWithType: IEntitiesSystem
+  fullName: Fantasy.Entitas.Interface.IEntitiesSystem
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<FrameUpdateSystem<T>>(FrameUpdateSystem<T>)
+  nameWithType: JsonHelper.ToJson<FrameUpdateSystem<T>>(FrameUpdateSystem<T>)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Entitas.Interface.FrameUpdateSystem<T>>(Fantasy.Entitas.Interface.FrameUpdateSystem<T>)
+  nameWithType.vb: JsonHelper.ToJson(Of FrameUpdateSystem(Of T))(FrameUpdateSystem(Of T))
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Entitas.Interface.FrameUpdateSystem(Of T))(Fantasy.Entitas.Interface.FrameUpdateSystem(Of T))
+  name.vb: ToJson(Of FrameUpdateSystem(Of T))(FrameUpdateSystem(Of T))
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Entitas.Interface.FrameUpdateSystem{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1
+    name: FrameUpdateSystem
+    href: Fantasy.Entitas.Interface.FrameUpdateSystem-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1
+    name: FrameUpdateSystem
+    href: Fantasy.Entitas.Interface.FrameUpdateSystem-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Entitas.Interface.FrameUpdateSystem{`0})
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1
+    name: FrameUpdateSystem
+    href: Fantasy.Entitas.Interface.FrameUpdateSystem-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: (
+  - uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1
+    name: FrameUpdateSystem
+    href: Fantasy.Entitas.Interface.FrameUpdateSystem-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1.EntitiesType*
+  commentId: Overload:Fantasy.Entitas.Interface.FrameUpdateSystem`1.EntitiesType
+  href: Fantasy.Entitas.Interface.FrameUpdateSystem-1.html#Fantasy_Entitas_Interface_FrameUpdateSystem_1_EntitiesType
+  name: EntitiesType
+  nameWithType: FrameUpdateSystem<T>.EntitiesType
+  fullName: Fantasy.Entitas.Interface.FrameUpdateSystem<T>.EntitiesType
+  nameWithType.vb: FrameUpdateSystem(Of T).EntitiesType
+  fullName.vb: Fantasy.Entitas.Interface.FrameUpdateSystem(Of T).EntitiesType
+- uid: Fantasy.Entitas.Interface.IEntitiesSystem.EntitiesType
+  commentId: M:Fantasy.Entitas.Interface.IEntitiesSystem.EntitiesType
+  parent: Fantasy.Entitas.Interface.IEntitiesSystem
+  href: Fantasy.Entitas.Interface.IEntitiesSystem.html#Fantasy_Entitas_Interface_IEntitiesSystem_EntitiesType
+  name: EntitiesType()
+  nameWithType: IEntitiesSystem.EntitiesType()
+  fullName: Fantasy.Entitas.Interface.IEntitiesSystem.EntitiesType()
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.IEntitiesSystem.EntitiesType
+    name: EntitiesType
+    href: Fantasy.Entitas.Interface.IEntitiesSystem.html#Fantasy_Entitas_Interface_IEntitiesSystem_EntitiesType
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.IEntitiesSystem.EntitiesType
+    name: EntitiesType
+    href: Fantasy.Entitas.Interface.IEntitiesSystem.html#Fantasy_Entitas_Interface_IEntitiesSystem_EntitiesType
+  - name: (
+  - name: )
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1.FrameUpdate*
+  commentId: Overload:Fantasy.Entitas.Interface.FrameUpdateSystem`1.FrameUpdate
+  href: Fantasy.Entitas.Interface.FrameUpdateSystem-1.html#Fantasy_Entitas_Interface_FrameUpdateSystem_1_FrameUpdate__0_
+  name: FrameUpdate
+  nameWithType: FrameUpdateSystem<T>.FrameUpdate
+  fullName: Fantasy.Entitas.Interface.FrameUpdateSystem<T>.FrameUpdate
+  nameWithType.vb: FrameUpdateSystem(Of T).FrameUpdate
+  fullName.vb: Fantasy.Entitas.Interface.FrameUpdateSystem(Of T).FrameUpdate
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Fantasy.Entitas.Interface.FrameUpdateSystem`1.Invoke*
+  commentId: Overload:Fantasy.Entitas.Interface.FrameUpdateSystem`1.Invoke
+  href: Fantasy.Entitas.Interface.FrameUpdateSystem-1.html#Fantasy_Entitas_Interface_FrameUpdateSystem_1_Invoke_Fantasy_Entitas_Entity_
+  name: Invoke
+  nameWithType: FrameUpdateSystem<T>.Invoke
+  fullName: Fantasy.Entitas.Interface.FrameUpdateSystem<T>.Invoke
+  nameWithType.vb: FrameUpdateSystem(Of T).Invoke
+  fullName.vb: Fantasy.Entitas.Interface.FrameUpdateSystem(Of T).Invoke
+- uid: Fantasy.Entitas.Interface.IEntitiesSystem.Invoke(Fantasy.Entitas.Entity)
+  commentId: M:Fantasy.Entitas.Interface.IEntitiesSystem.Invoke(Fantasy.Entitas.Entity)
+  parent: Fantasy.Entitas.Interface.IEntitiesSystem
+  href: Fantasy.Entitas.Interface.IEntitiesSystem.html#Fantasy_Entitas_Interface_IEntitiesSystem_Invoke_Fantasy_Entitas_Entity_
+  name: Invoke(Entity)
+  nameWithType: IEntitiesSystem.Invoke(Entity)
+  fullName: Fantasy.Entitas.Interface.IEntitiesSystem.Invoke(Fantasy.Entitas.Entity)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Interface.IEntitiesSystem.Invoke(Fantasy.Entitas.Entity)
+    name: Invoke
+    href: Fantasy.Entitas.Interface.IEntitiesSystem.html#Fantasy_Entitas_Interface_IEntitiesSystem_Invoke_Fantasy_Entitas_Entity_
+  - name: (
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Interface.IEntitiesSystem.Invoke(Fantasy.Entitas.Entity)
+    name: Invoke
+    href: Fantasy.Entitas.Interface.IEntitiesSystem.html#Fantasy_Entitas_Interface_IEntitiesSystem_Invoke_Fantasy_Entitas_Entity_
+  - name: (
+  - uid: Fantasy.Entitas.Entity
+    name: Entity
+    href: Fantasy.Entitas.Entity.html
+  - name: )
+- uid: Fantasy.Entitas.Entity
+  commentId: T:Fantasy.Entitas.Entity
+  parent: Fantasy.Entitas
+  href: Fantasy.Entitas.Entity.html
+  name: Entity
+  nameWithType: Entity
+  fullName: Fantasy.Entitas.Entity
+- uid: Fantasy.Entitas
+  commentId: N:Fantasy.Entitas
+  href: Fantasy.html
+  name: Fantasy.Entitas
+  nameWithType: Fantasy.Entitas
+  fullName: Fantasy.Entitas
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Entitas
+    name: Entitas
+    href: Fantasy.Entitas.html

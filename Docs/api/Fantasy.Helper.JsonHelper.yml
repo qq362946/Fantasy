@@ -1,0 +1,532 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  id: JsonHelper
+  parent: Fantasy.Helper
+  children:
+  - Fantasy.Helper.JsonHelper.Clone``1(``0)
+  - Fantasy.Helper.JsonHelper.Deserialize(System.String,System.Type,System.Boolean)
+  - Fantasy.Helper.JsonHelper.Deserialize``1(System.String)
+  - Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  langs:
+  - csharp
+  - vb
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/JsonHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: JsonHelper
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/JsonHelper.cs
+    startLine: 9
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 提供操作 JSON 数据的辅助方法。
+  example: []
+  syntax:
+    content: public static class JsonHelper
+    content.vb: Public Module JsonHelper
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  id: ToJson``1(``0)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.JsonHelper
+  langs:
+  - csharp
+  - vb
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/JsonHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToJson
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/JsonHelper.cs
+    startLine: 17
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 将对象序列化为 JSON 字符串。
+  example: []
+  syntax:
+    content: public static string ToJson<T>(this T t)
+    parameters:
+    - id: t
+      type: '{T}'
+      description: 要序列化的对象。
+    typeParameters:
+    - id: T
+      description: 要序列化的对象类型。
+    return:
+      type: System.String
+      description: 表示序列化对象的 JSON 字符串。
+    content.vb: Public Shared Function ToJson(Of T)(t As T) As String
+  overload: Fantasy.Helper.JsonHelper.ToJson*
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+- uid: Fantasy.Helper.JsonHelper.Deserialize(System.String,System.Type,System.Boolean)
+  commentId: M:Fantasy.Helper.JsonHelper.Deserialize(System.String,System.Type,System.Boolean)
+  id: Deserialize(System.String,System.Type,System.Boolean)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.JsonHelper
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(string, Type, bool)
+  nameWithType: JsonHelper.Deserialize(string, Type, bool)
+  fullName: Fantasy.Helper.JsonHelper.Deserialize(string, System.Type, bool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/JsonHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/JsonHelper.cs
+    startLine: 29
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 反序列化 JSON 字符串为指定类型的对象。
+  example: []
+  syntax:
+    content: public static object Deserialize(this string json, Type type, bool reflection = true)
+    parameters:
+    - id: json
+      type: System.String
+      description: 要反序列化的 JSON 字符串。
+    - id: type
+      type: System.Type
+      description: 目标对象的类型。
+    - id: reflection
+      type: System.Boolean
+      description: 是否使用反射进行反序列化（默认为 true）。
+    return:
+      type: System.Object
+      description: 反序列化后的对象。
+    content.vb: Public Shared Function Deserialize(json As String, type As Type, reflection As Boolean = True) As Object
+  overload: Fantasy.Helper.JsonHelper.Deserialize*
+  nameWithType.vb: JsonHelper.Deserialize(String, Type, Boolean)
+  fullName.vb: Fantasy.Helper.JsonHelper.Deserialize(String, System.Type, Boolean)
+  name.vb: Deserialize(String, Type, Boolean)
+- uid: Fantasy.Helper.JsonHelper.Deserialize``1(System.String)
+  commentId: M:Fantasy.Helper.JsonHelper.Deserialize``1(System.String)
+  id: Deserialize``1(System.String)
+  isExtensionMethod: true
+  parent: Fantasy.Helper.JsonHelper
+  langs:
+  - csharp
+  - vb
+  name: Deserialize<T>(string)
+  nameWithType: JsonHelper.Deserialize<T>(string)
+  fullName: Fantasy.Helper.JsonHelper.Deserialize<T>(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/JsonHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/JsonHelper.cs
+    startLine: 40
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 反序列化 JSON 字符串为指定类型的对象。
+  example: []
+  syntax:
+    content: public static T Deserialize<T>(this string json)
+    parameters:
+    - id: json
+      type: System.String
+      description: 要反序列化的 JSON 字符串。
+    typeParameters:
+    - id: T
+      description: 目标对象的类型。
+    return:
+      type: '{T}'
+      description: 反序列化后的对象。
+    content.vb: Public Shared Function Deserialize(Of T)(json As String) As T
+  overload: Fantasy.Helper.JsonHelper.Deserialize*
+  nameWithType.vb: JsonHelper.Deserialize(Of T)(String)
+  fullName.vb: Fantasy.Helper.JsonHelper.Deserialize(Of T)(String)
+  name.vb: Deserialize(Of T)(String)
+- uid: Fantasy.Helper.JsonHelper.Clone``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.Clone``1(``0)
+  id: Clone``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  langs:
+  - csharp
+  - vb
+  name: Clone<T>(T)
+  nameWithType: JsonHelper.Clone<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.Clone<T>(T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/JsonHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clone
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/JsonHelper.cs
+    startLine: 51
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 克隆对象，通过将对象序列化为 JSON，然后再进行反序列化。
+  example: []
+  syntax:
+    content: public static T Clone<T>(T t)
+    parameters:
+    - id: t
+      type: '{T}'
+      description: 要克隆的对象。
+    typeParameters:
+    - id: T
+      description: 要克隆的对象类型。
+    return:
+      type: '{T}'
+      description: 克隆后的对象。
+    content.vb: Public Shared Function Clone(Of T)(t As T) As T
+  overload: Fantasy.Helper.JsonHelper.Clone*
+  nameWithType.vb: JsonHelper.Clone(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.Clone(Of T)(T)
+  name.vb: Clone(Of T)(T)
+references:
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson*
+  commentId: Overload:Fantasy.Helper.JsonHelper.ToJson
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson
+  nameWithType: JsonHelper.ToJson
+  fullName: Fantasy.Helper.JsonHelper.ToJson
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Fantasy.Helper.JsonHelper.Deserialize*
+  commentId: Overload:Fantasy.Helper.JsonHelper.Deserialize
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_Deserialize_System_String_System_Type_System_Boolean_
+  name: Deserialize
+  nameWithType: JsonHelper.Deserialize
+  fullName: Fantasy.Helper.JsonHelper.Deserialize
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Fantasy.Helper.JsonHelper.Clone*
+  commentId: Overload:Fantasy.Helper.JsonHelper.Clone
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_Clone__1___0_
+  name: Clone
+  nameWithType: JsonHelper.Clone
+  fullName: Fantasy.Helper.JsonHelper.Clone

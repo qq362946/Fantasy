@@ -1,10 +1,17 @@
 using System;
 using System.Net;
+using Fantasy.Entitas;
+using Fantasy.Helper;
+using Fantasy.Network.Interface;
+using Fantasy.Network.KCP;
+using Fantasy.Network.TCP;
+using Fantasy.Network.WebSocket;
+
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Fantasy
+namespace Fantasy.Network
 {
-    public static class NetworkProtocolFactory
+    internal static class NetworkProtocolFactory
     {
 #if FANTASY_NET
         public static ANetwork CreateServer(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget, string bindIp, int port, bool isHttps = false)

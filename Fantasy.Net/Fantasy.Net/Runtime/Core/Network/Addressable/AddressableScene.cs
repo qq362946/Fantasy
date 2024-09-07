@@ -1,15 +1,31 @@
 #if FANTASY_NET
-namespace Fantasy;
+using Fantasy.IdFactory;
+using Fantasy.Platform.Net;
 
-public sealed class AddressableScene
+namespace Fantasy.Network.Route
 {
-    public readonly long Id;
-    public readonly long RunTimeId;
-
-    public AddressableScene(SceneConfig sceneConfig)
+    /// <summary>
+    /// AddressableScene
+    /// </summary>
+    public sealed class AddressableScene
     {
-        Id = new EntityIdStruct(0, sceneConfig.Id, (byte)sceneConfig.WorldConfigId, 0);
-        RunTimeId = new RuntimeIdStruct(0, sceneConfig.Id, (byte)sceneConfig.WorldConfigId, 0);
+        /// <summary>
+        /// Id
+        /// </summary>
+        public readonly long Id;
+        /// <summary>
+        /// RunTimeId
+        /// </summary>
+        public readonly long RunTimeId;
+        /// <summary>
+        /// 构造方法
+        /// </summary>
+        /// <param name="sceneConfig">sceneConfig</param>
+        public AddressableScene(SceneConfig sceneConfig)
+        {
+            Id = new EntityIdStruct(0, sceneConfig.Id, (byte)sceneConfig.WorldConfigId, 0);
+            RunTimeId = new RuntimeIdStruct(0, sceneConfig.Id, (byte)sceneConfig.WorldConfigId, 0);
+        }
     }
 }
 #endif

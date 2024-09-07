@@ -2,7 +2,7 @@ using System;
 
 namespace Fantasy
 {
-    public interface ISceneScheduler : IDisposable
+    internal interface ISceneScheduler : IDisposable
     {
         void Add(Scene scene);
         void Remove(Scene scene);

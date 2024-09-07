@@ -1,0 +1,813 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.ThreadSynchronizationContext
+  commentId: T:Fantasy.ThreadSynchronizationContext
+  id: ThreadSynchronizationContext
+  parent: Fantasy
+  children:
+  - Fantasy.ThreadSynchronizationContext.Post(System.Action)
+  - Fantasy.ThreadSynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)
+  - Fantasy.ThreadSynchronizationContext.Update
+  langs:
+  - csharp
+  - vb
+  name: ThreadSynchronizationContext
+  nameWithType: ThreadSynchronizationContext
+  fullName: Fantasy.ThreadSynchronizationContext
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ThreadSynchronizationContext.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ThreadSynchronizationContext
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ThreadSynchronizationContext.cs
+    startLine: 11
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 线程的同步上下文
+  example: []
+  syntax:
+    content: 'public sealed class ThreadSynchronizationContext : SynchronizationContext'
+    content.vb: Public NotInheritable Class ThreadSynchronizationContext Inherits SynchronizationContext
+  inheritance:
+  - System.Object
+  - System.Threading.SynchronizationContext
+  inheritedMembers:
+  - System.Threading.SynchronizationContext.CreateCopy
+  - System.Threading.SynchronizationContext.IsWaitNotificationRequired
+  - System.Threading.SynchronizationContext.OperationCompleted
+  - System.Threading.SynchronizationContext.OperationStarted
+  - System.Threading.SynchronizationContext.Send(System.Threading.SendOrPostCallback,System.Object)
+  - System.Threading.SynchronizationContext.SetSynchronizationContext(System.Threading.SynchronizationContext)
+  - System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)
+  - System.Threading.SynchronizationContext.Current
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.ThreadSynchronizationContext.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.ThreadSynchronizationContext.Update
+  commentId: M:Fantasy.ThreadSynchronizationContext.Update
+  id: Update
+  parent: Fantasy.ThreadSynchronizationContext
+  langs:
+  - csharp
+  - vb
+  name: Update()
+  nameWithType: ThreadSynchronizationContext.Update()
+  fullName: Fantasy.ThreadSynchronizationContext.Update()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ThreadSynchronizationContext.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Update
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ThreadSynchronizationContext.cs
+    startLine: 18
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 执行当前上下文投递过的逻辑
+  example: []
+  syntax:
+    content: public void Update()
+    content.vb: Public Sub Update()
+  overload: Fantasy.ThreadSynchronizationContext.Update*
+- uid: Fantasy.ThreadSynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)
+  commentId: M:Fantasy.ThreadSynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)
+  id: Post(System.Threading.SendOrPostCallback,System.Object)
+  parent: Fantasy.ThreadSynchronizationContext
+  langs:
+  - csharp
+  - vb
+  name: Post(SendOrPostCallback, object)
+  nameWithType: ThreadSynchronizationContext.Post(SendOrPostCallback, object)
+  fullName: Fantasy.ThreadSynchronizationContext.Post(System.Threading.SendOrPostCallback, object)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ThreadSynchronizationContext.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Post
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ThreadSynchronizationContext.cs
+    startLine: 38
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 投递一个逻辑到当前上下文
+  example: []
+  syntax:
+    content: public override void Post(SendOrPostCallback callback, object state)
+    parameters:
+    - id: callback
+      type: System.Threading.SendOrPostCallback
+      description: ''
+    - id: state
+      type: System.Object
+      description: ''
+    content.vb: Public Overrides Sub Post(callback As SendOrPostCallback, state As Object)
+  overridden: System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)
+  overload: Fantasy.ThreadSynchronizationContext.Post*
+  nameWithType.vb: ThreadSynchronizationContext.Post(SendOrPostCallback, Object)
+  fullName.vb: Fantasy.ThreadSynchronizationContext.Post(System.Threading.SendOrPostCallback, Object)
+  name.vb: Post(SendOrPostCallback, Object)
+- uid: Fantasy.ThreadSynchronizationContext.Post(System.Action)
+  commentId: M:Fantasy.ThreadSynchronizationContext.Post(System.Action)
+  id: Post(System.Action)
+  parent: Fantasy.ThreadSynchronizationContext
+  langs:
+  - csharp
+  - vb
+  name: Post(Action)
+  nameWithType: ThreadSynchronizationContext.Post(Action)
+  fullName: Fantasy.ThreadSynchronizationContext.Post(System.Action)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ThreadSynchronizationContext.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Post
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/ThreadSynchronizationContext.cs
+    startLine: 47
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 投递一个逻辑到当前上下文
+  example: []
+  syntax:
+    content: public void Post(Action action)
+    parameters:
+    - id: action
+      type: System.Action
+      description: ''
+    content.vb: Public Sub Post(action As Action)
+  overload: Fantasy.ThreadSynchronizationContext.Post*
+references:
+- uid: Fantasy
+  commentId: N:Fantasy
+  href: Fantasy.html
+  name: Fantasy
+  nameWithType: Fantasy
+  fullName: Fantasy
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Threading.SynchronizationContext
+  commentId: T:System.Threading.SynchronizationContext
+  parent: System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext
+  name: SynchronizationContext
+  nameWithType: SynchronizationContext
+  fullName: System.Threading.SynchronizationContext
+- uid: System.Threading.SynchronizationContext.CreateCopy
+  commentId: M:System.Threading.SynchronizationContext.CreateCopy
+  parent: System.Threading.SynchronizationContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.createcopy
+  name: CreateCopy()
+  nameWithType: SynchronizationContext.CreateCopy()
+  fullName: System.Threading.SynchronizationContext.CreateCopy()
+  spec.csharp:
+  - uid: System.Threading.SynchronizationContext.CreateCopy
+    name: CreateCopy
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.createcopy
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Threading.SynchronizationContext.CreateCopy
+    name: CreateCopy
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.createcopy
+  - name: (
+  - name: )
+- uid: System.Threading.SynchronizationContext.IsWaitNotificationRequired
+  commentId: M:System.Threading.SynchronizationContext.IsWaitNotificationRequired
+  parent: System.Threading.SynchronizationContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.iswaitnotificationrequired
+  name: IsWaitNotificationRequired()
+  nameWithType: SynchronizationContext.IsWaitNotificationRequired()
+  fullName: System.Threading.SynchronizationContext.IsWaitNotificationRequired()
+  spec.csharp:
+  - uid: System.Threading.SynchronizationContext.IsWaitNotificationRequired
+    name: IsWaitNotificationRequired
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.iswaitnotificationrequired
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Threading.SynchronizationContext.IsWaitNotificationRequired
+    name: IsWaitNotificationRequired
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.iswaitnotificationrequired
+  - name: (
+  - name: )
+- uid: System.Threading.SynchronizationContext.OperationCompleted
+  commentId: M:System.Threading.SynchronizationContext.OperationCompleted
+  parent: System.Threading.SynchronizationContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.operationcompleted
+  name: OperationCompleted()
+  nameWithType: SynchronizationContext.OperationCompleted()
+  fullName: System.Threading.SynchronizationContext.OperationCompleted()
+  spec.csharp:
+  - uid: System.Threading.SynchronizationContext.OperationCompleted
+    name: OperationCompleted
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.operationcompleted
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Threading.SynchronizationContext.OperationCompleted
+    name: OperationCompleted
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.operationcompleted
+  - name: (
+  - name: )
+- uid: System.Threading.SynchronizationContext.OperationStarted
+  commentId: M:System.Threading.SynchronizationContext.OperationStarted
+  parent: System.Threading.SynchronizationContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.operationstarted
+  name: OperationStarted()
+  nameWithType: SynchronizationContext.OperationStarted()
+  fullName: System.Threading.SynchronizationContext.OperationStarted()
+  spec.csharp:
+  - uid: System.Threading.SynchronizationContext.OperationStarted
+    name: OperationStarted
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.operationstarted
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Threading.SynchronizationContext.OperationStarted
+    name: OperationStarted
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.operationstarted
+  - name: (
+  - name: )
+- uid: System.Threading.SynchronizationContext.Send(System.Threading.SendOrPostCallback,System.Object)
+  commentId: M:System.Threading.SynchronizationContext.Send(System.Threading.SendOrPostCallback,System.Object)
+  parent: System.Threading.SynchronizationContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.send
+  name: Send(SendOrPostCallback, object)
+  nameWithType: SynchronizationContext.Send(SendOrPostCallback, object)
+  fullName: System.Threading.SynchronizationContext.Send(System.Threading.SendOrPostCallback, object)
+  nameWithType.vb: SynchronizationContext.Send(SendOrPostCallback, Object)
+  fullName.vb: System.Threading.SynchronizationContext.Send(System.Threading.SendOrPostCallback, Object)
+  name.vb: Send(SendOrPostCallback, Object)
+  spec.csharp:
+  - uid: System.Threading.SynchronizationContext.Send(System.Threading.SendOrPostCallback,System.Object)
+    name: Send
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.send
+  - name: (
+  - uid: System.Threading.SendOrPostCallback
+    name: SendOrPostCallback
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.sendorpostcallback
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Threading.SynchronizationContext.Send(System.Threading.SendOrPostCallback,System.Object)
+    name: Send
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.send
+  - name: (
+  - uid: System.Threading.SendOrPostCallback
+    name: SendOrPostCallback
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.sendorpostcallback
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Threading.SynchronizationContext.SetSynchronizationContext(System.Threading.SynchronizationContext)
+  commentId: M:System.Threading.SynchronizationContext.SetSynchronizationContext(System.Threading.SynchronizationContext)
+  parent: System.Threading.SynchronizationContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.setsynchronizationcontext
+  name: SetSynchronizationContext(SynchronizationContext)
+  nameWithType: SynchronizationContext.SetSynchronizationContext(SynchronizationContext)
+  fullName: System.Threading.SynchronizationContext.SetSynchronizationContext(System.Threading.SynchronizationContext)
+  spec.csharp:
+  - uid: System.Threading.SynchronizationContext.SetSynchronizationContext(System.Threading.SynchronizationContext)
+    name: SetSynchronizationContext
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.setsynchronizationcontext
+  - name: (
+  - uid: System.Threading.SynchronizationContext
+    name: SynchronizationContext
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext
+  - name: )
+  spec.vb:
+  - uid: System.Threading.SynchronizationContext.SetSynchronizationContext(System.Threading.SynchronizationContext)
+    name: SetSynchronizationContext
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.setsynchronizationcontext
+  - name: (
+  - uid: System.Threading.SynchronizationContext
+    name: SynchronizationContext
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext
+  - name: )
+- uid: System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)
+  commentId: M:System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)
+  parent: System.Threading.SynchronizationContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.wait
+  name: Wait(nint[], bool, int)
+  nameWithType: SynchronizationContext.Wait(nint[], bool, int)
+  fullName: System.Threading.SynchronizationContext.Wait(nint[], bool, int)
+  nameWithType.vb: SynchronizationContext.Wait(IntPtr(), Boolean, Integer)
+  fullName.vb: System.Threading.SynchronizationContext.Wait(System.IntPtr(), Boolean, Integer)
+  name.vb: Wait(IntPtr(), Boolean, Integer)
+  spec.csharp:
+  - uid: System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)
+    name: Wait
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.wait
+  - name: (
+  - uid: System.IntPtr
+    name: nint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.intptr
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Threading.SynchronizationContext.Wait(System.IntPtr[],System.Boolean,System.Int32)
+    name: Wait
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.wait
+  - name: (
+  - uid: System.IntPtr
+    name: IntPtr
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.intptr
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Threading.SynchronizationContext.Current
+  commentId: P:System.Threading.SynchronizationContext.Current
+  parent: System.Threading.SynchronizationContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.current
+  name: Current
+  nameWithType: SynchronizationContext.Current
+  fullName: System.Threading.SynchronizationContext.Current
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.ThreadSynchronizationContext.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<ThreadSynchronizationContext>(ThreadSynchronizationContext)
+  nameWithType: JsonHelper.ToJson<ThreadSynchronizationContext>(ThreadSynchronizationContext)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.ThreadSynchronizationContext>(Fantasy.ThreadSynchronizationContext)
+  nameWithType.vb: JsonHelper.ToJson(Of ThreadSynchronizationContext)(ThreadSynchronizationContext)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.ThreadSynchronizationContext)(Fantasy.ThreadSynchronizationContext)
+  name.vb: ToJson(Of ThreadSynchronizationContext)(ThreadSynchronizationContext)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.ThreadSynchronizationContext)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.ThreadSynchronizationContext
+    name: ThreadSynchronizationContext
+    href: Fantasy.ThreadSynchronizationContext.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.ThreadSynchronizationContext
+    name: ThreadSynchronizationContext
+    href: Fantasy.ThreadSynchronizationContext.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.ThreadSynchronizationContext)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.ThreadSynchronizationContext
+    name: ThreadSynchronizationContext
+    href: Fantasy.ThreadSynchronizationContext.html
+  - name: )
+  - name: (
+  - uid: Fantasy.ThreadSynchronizationContext
+    name: ThreadSynchronizationContext
+    href: Fantasy.ThreadSynchronizationContext.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.ThreadSynchronizationContext.Update*
+  commentId: Overload:Fantasy.ThreadSynchronizationContext.Update
+  href: Fantasy.ThreadSynchronizationContext.html#Fantasy_ThreadSynchronizationContext_Update
+  name: Update
+  nameWithType: ThreadSynchronizationContext.Update
+  fullName: Fantasy.ThreadSynchronizationContext.Update
+- uid: System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)
+  commentId: M:System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)
+  parent: System.Threading.SynchronizationContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.post
+  name: Post(SendOrPostCallback, object)
+  nameWithType: SynchronizationContext.Post(SendOrPostCallback, object)
+  fullName: System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback, object)
+  nameWithType.vb: SynchronizationContext.Post(SendOrPostCallback, Object)
+  fullName.vb: System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback, Object)
+  name.vb: Post(SendOrPostCallback, Object)
+  spec.csharp:
+  - uid: System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)
+    name: Post
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.post
+  - name: (
+  - uid: System.Threading.SendOrPostCallback
+    name: SendOrPostCallback
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.sendorpostcallback
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)
+    name: Post
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.synchronizationcontext.post
+  - name: (
+  - uid: System.Threading.SendOrPostCallback
+    name: SendOrPostCallback
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.sendorpostcallback
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.ThreadSynchronizationContext.Post*
+  commentId: Overload:Fantasy.ThreadSynchronizationContext.Post
+  href: Fantasy.ThreadSynchronizationContext.html#Fantasy_ThreadSynchronizationContext_Post_System_Threading_SendOrPostCallback_System_Object_
+  name: Post
+  nameWithType: ThreadSynchronizationContext.Post
+  fullName: Fantasy.ThreadSynchronizationContext.Post
+- uid: System.Threading.SendOrPostCallback
+  commentId: T:System.Threading.SendOrPostCallback
+  parent: System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.sendorpostcallback
+  name: SendOrPostCallback
+  nameWithType: SendOrPostCallback
+  fullName: System.Threading.SendOrPostCallback
+- uid: System.Action
+  commentId: T:System.Action
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action
+  name: Action
+  nameWithType: Action
+  fullName: System.Action

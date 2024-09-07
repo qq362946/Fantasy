@@ -1,0 +1,192 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.Interface.IAddressableRouteRequest
+  commentId: T:Fantasy.Network.Interface.IAddressableRouteRequest
+  id: IAddressableRouteRequest
+  parent: Fantasy.Network.Interface
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: IAddressableRouteRequest
+  nameWithType: IAddressableRouteRequest
+  fullName: Fantasy.Network.Interface.IAddressableRouteRequest
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/IMessage.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IAddressableRouteRequest
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/IMessage.cs
+    startLine: 60
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Interface
+  summary: 可寻址协议的普通路由请求接口，继承自可寻址协议的普通路由消息接口。
+  example: []
+  syntax:
+    content: 'public interface IAddressableRouteRequest : IRouteRequest, IRouteMessage, IRequest, IMessage'
+    content.vb: Public Interface IAddressableRouteRequest Inherits IRouteRequest, IRouteMessage, IRequest, IMessage
+  inheritedMembers:
+  - Fantasy.Network.Interface.IMessage.OpCode
+  extensionMethods:
+  - Fantasy.Network.Interface.IAddressableRouteRequest.Fantasy.Helper.JsonHelper.ToJson``1
+references:
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  href: Fantasy.html
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+- uid: Fantasy.Network.Interface.IMessage.OpCode
+  commentId: M:Fantasy.Network.Interface.IMessage.OpCode
+  parent: Fantasy.Network.Interface.IMessage
+  href: Fantasy.Network.Interface.IMessage.html#Fantasy_Network_Interface_IMessage_OpCode
+  name: OpCode()
+  nameWithType: IMessage.OpCode()
+  fullName: Fantasy.Network.Interface.IMessage.OpCode()
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.IMessage.OpCode
+    name: OpCode
+    href: Fantasy.Network.Interface.IMessage.html#Fantasy_Network_Interface_IMessage_OpCode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.IMessage.OpCode
+    name: OpCode
+    href: Fantasy.Network.Interface.IMessage.html#Fantasy_Network_Interface_IMessage_OpCode
+  - name: (
+  - name: )
+- uid: Fantasy.Network.Interface.IAddressableRouteRequest.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<IAddressableRouteRequest>(IAddressableRouteRequest)
+  nameWithType: JsonHelper.ToJson<IAddressableRouteRequest>(IAddressableRouteRequest)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.Interface.IAddressableRouteRequest>(Fantasy.Network.Interface.IAddressableRouteRequest)
+  nameWithType.vb: JsonHelper.ToJson(Of IAddressableRouteRequest)(IAddressableRouteRequest)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.Interface.IAddressableRouteRequest)(Fantasy.Network.Interface.IAddressableRouteRequest)
+  name.vb: ToJson(Of IAddressableRouteRequest)(IAddressableRouteRequest)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Interface.IAddressableRouteRequest)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.Interface.IAddressableRouteRequest
+    name: IAddressableRouteRequest
+    href: Fantasy.Network.Interface.IAddressableRouteRequest.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.Interface.IAddressableRouteRequest
+    name: IAddressableRouteRequest
+    href: Fantasy.Network.Interface.IAddressableRouteRequest.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Interface.IAddressableRouteRequest)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.Interface.IAddressableRouteRequest
+    name: IAddressableRouteRequest
+    href: Fantasy.Network.Interface.IAddressableRouteRequest.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.Interface.IAddressableRouteRequest
+    name: IAddressableRouteRequest
+    href: Fantasy.Network.Interface.IAddressableRouteRequest.html
+  - name: )
+- uid: Fantasy.Network.Interface.IMessage
+  commentId: T:Fantasy.Network.Interface.IMessage
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.IMessage.html
+  name: IMessage
+  nameWithType: IMessage
+  fullName: Fantasy.Network.Interface.IMessage
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html

@@ -1,7 +1,15 @@
 // ReSharper disable MemberCanBePrivate.Global
+
+using Fantasy.Async;
+using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
+using Fantasy.Helper;
+using Fantasy.InnerMessage;
+using Fantasy.Timer;
+
 #if FANTASY_UNITY
 
-namespace Fantasy
+namespace Fantasy.Network
 {
     public class SessionHeartbeatComponentAwakeSystem : AwakeSystem<SessionHeartbeatComponent>
     {

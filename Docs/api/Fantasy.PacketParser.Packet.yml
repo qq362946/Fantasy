@@ -1,0 +1,691 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.PacketParser.Packet
+  commentId: T:Fantasy.PacketParser.Packet
+  id: Packet
+  parent: Fantasy.PacketParser
+  children:
+  - Fantasy.PacketParser.Packet.InnerPacketHeadLength
+  - Fantasy.PacketParser.Packet.InnerPacketRouteRouteIdLocation
+  - Fantasy.PacketParser.Packet.InnerPacketRpcIdLocation
+  - Fantasy.PacketParser.Packet.OuterPacketHeadLength
+  - Fantasy.PacketParser.Packet.OuterPacketRpcIdLocation
+  - Fantasy.PacketParser.Packet.PacketBodyMaxLength
+  - Fantasy.PacketParser.Packet.PacketLength
+  - Fantasy.PacketParser.Packet.PacketRouteIdLength
+  - Fantasy.PacketParser.Packet.ProtocolCodeLength
+  - Fantasy.PacketParser.Packet.RpcIdLength
+  langs:
+  - csharp
+  - vb
+  name: Packet
+  nameWithType: Packet
+  fullName: Fantasy.PacketParser.Packet
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Packet
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+    startLine: 5
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: 提供关于消息包的常量定义。
+  example: []
+  syntax:
+    content: public struct Packet
+    content.vb: Public Structure Packet
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - Fantasy.PacketParser.Packet.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.PacketParser.Packet.PacketBodyMaxLength
+  commentId: F:Fantasy.PacketParser.Packet.PacketBodyMaxLength
+  id: PacketBodyMaxLength
+  parent: Fantasy.PacketParser.Packet
+  langs:
+  - csharp
+  - vb
+  name: PacketBodyMaxLength
+  nameWithType: Packet.PacketBodyMaxLength
+  fullName: Fantasy.PacketParser.Packet.PacketBodyMaxLength
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: PacketBodyMaxLength
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+    startLine: 10
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: 消息体最大长度
+  example: []
+  syntax:
+    content: public const int PacketBodyMaxLength = 1048560
+    return:
+      type: System.Int32
+    content.vb: Public Const PacketBodyMaxLength As Integer = 1048560
+- uid: Fantasy.PacketParser.Packet.PacketLength
+  commentId: F:Fantasy.PacketParser.Packet.PacketLength
+  id: PacketLength
+  parent: Fantasy.PacketParser.Packet
+  langs:
+  - csharp
+  - vb
+  name: PacketLength
+  nameWithType: Packet.PacketLength
+  fullName: Fantasy.PacketParser.Packet.PacketLength
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: PacketLength
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: 消息体长度在消息头占用的长度
+  example: []
+  syntax:
+    content: public const int PacketLength = 4
+    return:
+      type: System.Int32
+    content.vb: Public Const PacketLength As Integer = 4
+- uid: Fantasy.PacketParser.Packet.ProtocolCodeLength
+  commentId: F:Fantasy.PacketParser.Packet.ProtocolCodeLength
+  id: ProtocolCodeLength
+  parent: Fantasy.PacketParser.Packet
+  langs:
+  - csharp
+  - vb
+  name: ProtocolCodeLength
+  nameWithType: Packet.ProtocolCodeLength
+  fullName: Fantasy.PacketParser.Packet.ProtocolCodeLength
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ProtocolCodeLength
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+    startLine: 18
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: 协议编号在消息头占用的长度
+  example: []
+  syntax:
+    content: public const int ProtocolCodeLength = 4
+    return:
+      type: System.Int32
+    content.vb: Public Const ProtocolCodeLength As Integer = 4
+- uid: Fantasy.PacketParser.Packet.PacketRouteIdLength
+  commentId: F:Fantasy.PacketParser.Packet.PacketRouteIdLength
+  id: PacketRouteIdLength
+  parent: Fantasy.PacketParser.Packet
+  langs:
+  - csharp
+  - vb
+  name: PacketRouteIdLength
+  nameWithType: Packet.PacketRouteIdLength
+  fullName: Fantasy.PacketParser.Packet.PacketRouteIdLength
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: PacketRouteIdLength
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+    startLine: 22
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: RouteId长度
+  example: []
+  syntax:
+    content: public const int PacketRouteIdLength = 8
+    return:
+      type: System.Int32
+    content.vb: Public Const PacketRouteIdLength As Integer = 8
+- uid: Fantasy.PacketParser.Packet.RpcIdLength
+  commentId: F:Fantasy.PacketParser.Packet.RpcIdLength
+  id: RpcIdLength
+  parent: Fantasy.PacketParser.Packet
+  langs:
+  - csharp
+  - vb
+  name: RpcIdLength
+  nameWithType: Packet.RpcIdLength
+  fullName: Fantasy.PacketParser.Packet.RpcIdLength
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RpcIdLength
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+    startLine: 26
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: RpcId在消息头占用的长度
+  example: []
+  syntax:
+    content: public const int RpcIdLength = 4
+    return:
+      type: System.Int32
+    content.vb: Public Const RpcIdLength As Integer = 4
+- uid: Fantasy.PacketParser.Packet.OuterPacketRpcIdLocation
+  commentId: F:Fantasy.PacketParser.Packet.OuterPacketRpcIdLocation
+  id: OuterPacketRpcIdLocation
+  parent: Fantasy.PacketParser.Packet
+  langs:
+  - csharp
+  - vb
+  name: OuterPacketRpcIdLocation
+  nameWithType: Packet.OuterPacketRpcIdLocation
+  fullName: Fantasy.PacketParser.Packet.OuterPacketRpcIdLocation
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OuterPacketRpcIdLocation
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+    startLine: 30
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: OuterRPCId所在的位置
+  example: []
+  syntax:
+    content: public const int OuterPacketRpcIdLocation = 8
+    return:
+      type: System.Int32
+    content.vb: Public Const OuterPacketRpcIdLocation As Integer = 8
+- uid: Fantasy.PacketParser.Packet.InnerPacketRpcIdLocation
+  commentId: F:Fantasy.PacketParser.Packet.InnerPacketRpcIdLocation
+  id: InnerPacketRpcIdLocation
+  parent: Fantasy.PacketParser.Packet
+  langs:
+  - csharp
+  - vb
+  name: InnerPacketRpcIdLocation
+  nameWithType: Packet.InnerPacketRpcIdLocation
+  fullName: Fantasy.PacketParser.Packet.InnerPacketRpcIdLocation
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: InnerPacketRpcIdLocation
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+    startLine: 34
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: InnerRPCId所在的位置
+  example: []
+  syntax:
+    content: public const int InnerPacketRpcIdLocation = 8
+    return:
+      type: System.Int32
+    content.vb: Public Const InnerPacketRpcIdLocation As Integer = 8
+- uid: Fantasy.PacketParser.Packet.InnerPacketRouteRouteIdLocation
+  commentId: F:Fantasy.PacketParser.Packet.InnerPacketRouteRouteIdLocation
+  id: InnerPacketRouteRouteIdLocation
+  parent: Fantasy.PacketParser.Packet
+  langs:
+  - csharp
+  - vb
+  name: InnerPacketRouteRouteIdLocation
+  nameWithType: Packet.InnerPacketRouteRouteIdLocation
+  fullName: Fantasy.PacketParser.Packet.InnerPacketRouteRouteIdLocation
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: InnerPacketRouteRouteIdLocation
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+    startLine: 38
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: RouteId所在的位置
+  example: []
+  syntax:
+    content: public const int InnerPacketRouteRouteIdLocation = 12
+    return:
+      type: System.Int32
+    content.vb: Public Const InnerPacketRouteRouteIdLocation As Integer = 12
+- uid: Fantasy.PacketParser.Packet.OuterPacketHeadLength
+  commentId: F:Fantasy.PacketParser.Packet.OuterPacketHeadLength
+  id: OuterPacketHeadLength
+  parent: Fantasy.PacketParser.Packet
+  langs:
+  - csharp
+  - vb
+  name: OuterPacketHeadLength
+  nameWithType: Packet.OuterPacketHeadLength
+  fullName: Fantasy.PacketParser.Packet.OuterPacketHeadLength
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: OuterPacketHeadLength
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+    startLine: 42
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: 外网消息头长度（消息体长度在消息头占用的长度 + 协议编号在消息头占用的长度 + RPCId长度 + RouteId长度）
+  example: []
+  syntax:
+    content: public const int OuterPacketHeadLength = 20
+    return:
+      type: System.Int32
+    content.vb: Public Const OuterPacketHeadLength As Integer = 20
+- uid: Fantasy.PacketParser.Packet.InnerPacketHeadLength
+  commentId: F:Fantasy.PacketParser.Packet.InnerPacketHeadLength
+  id: InnerPacketHeadLength
+  parent: Fantasy.PacketParser.Packet
+  langs:
+  - csharp
+  - vb
+  name: InnerPacketHeadLength
+  nameWithType: Packet.InnerPacketHeadLength
+  fullName: Fantasy.PacketParser.Packet.InnerPacketHeadLength
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: InnerPacketHeadLength
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Packet.cs
+    startLine: 46
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.PacketParser
+  summary: 内网消息头长度（消息体长度在消息头占用的长度 + 协议编号在消息头占用的长度 + RPCId长度 + RouteId长度）
+  example: []
+  syntax:
+    content: public const int InnerPacketHeadLength = 20
+    return:
+      type: System.Int32
+    content.vb: Public Const InnerPacketHeadLength As Integer = 20
+references:
+- uid: Fantasy.PacketParser
+  commentId: N:Fantasy.PacketParser
+  href: Fantasy.html
+  name: Fantasy.PacketParser
+  nameWithType: Fantasy.PacketParser
+  fullName: Fantasy.PacketParser
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.PacketParser
+    name: PacketParser
+    href: Fantasy.PacketParser.html
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Fantasy.PacketParser.Packet.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<Packet>(Packet)
+  nameWithType: JsonHelper.ToJson<Packet>(Packet)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.PacketParser.Packet>(Fantasy.PacketParser.Packet)
+  nameWithType.vb: JsonHelper.ToJson(Of Packet)(Packet)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.PacketParser.Packet)(Fantasy.PacketParser.Packet)
+  name.vb: ToJson(Of Packet)(Packet)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.PacketParser.Packet)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.PacketParser.Packet
+    name: Packet
+    href: Fantasy.PacketParser.Packet.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.PacketParser.Packet
+    name: Packet
+    href: Fantasy.PacketParser.Packet.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.PacketParser.Packet)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.PacketParser.Packet
+    name: Packet
+    href: Fantasy.PacketParser.Packet.html
+  - name: )
+  - name: (
+  - uid: Fantasy.PacketParser.Packet
+    name: Packet
+    href: Fantasy.PacketParser.Packet.html
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer

@@ -1,0 +1,132 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Pool
+  commentId: N:Fantasy.Pool
+  id: Pool
+  parent: Fantasy
+  children:
+  - Fantasy.Pool.IPool
+  - Fantasy.Pool.PoolCore
+  - Fantasy.Pool.PoolCore`1
+  - Fantasy.Pool.PoolWithDisposable`1
+  - Fantasy.Pool.Pool`1
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Pool
+  nameWithType: Fantasy.Pool
+  fullName: Fantasy.Pool
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Pool.IPool
+  commentId: T:Fantasy.Pool.IPool
+  parent: Fantasy.Pool
+  href: Fantasy.Pool.IPool.html
+  name: IPool
+  nameWithType: IPool
+  fullName: Fantasy.Pool.IPool
+- uid: Fantasy.Pool.PoolCore
+  commentId: T:Fantasy.Pool.PoolCore
+  href: Fantasy.Pool.PoolCore.html
+  name: PoolCore
+  nameWithType: PoolCore
+  fullName: Fantasy.Pool.PoolCore
+- uid: Fantasy.Pool.PoolCore`1
+  commentId: T:Fantasy.Pool.PoolCore`1
+  href: Fantasy.Pool.PoolCore-1.html
+  name: PoolCore<T>
+  nameWithType: PoolCore<T>
+  fullName: Fantasy.Pool.PoolCore<T>
+  nameWithType.vb: PoolCore(Of T)
+  fullName.vb: Fantasy.Pool.PoolCore(Of T)
+  name.vb: PoolCore(Of T)
+  spec.csharp:
+  - uid: Fantasy.Pool.PoolCore`1
+    name: PoolCore
+    href: Fantasy.Pool.PoolCore-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Pool.PoolCore`1
+    name: PoolCore
+    href: Fantasy.Pool.PoolCore-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Pool.PoolWithDisposable`1
+  commentId: T:Fantasy.Pool.PoolWithDisposable`1
+  href: Fantasy.Pool.PoolWithDisposable-1.html
+  name: PoolWithDisposable<T>
+  nameWithType: PoolWithDisposable<T>
+  fullName: Fantasy.Pool.PoolWithDisposable<T>
+  nameWithType.vb: PoolWithDisposable(Of T)
+  fullName.vb: Fantasy.Pool.PoolWithDisposable(Of T)
+  name.vb: PoolWithDisposable(Of T)
+  spec.csharp:
+  - uid: Fantasy.Pool.PoolWithDisposable`1
+    name: PoolWithDisposable
+    href: Fantasy.Pool.PoolWithDisposable-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Pool.PoolWithDisposable`1
+    name: PoolWithDisposable
+    href: Fantasy.Pool.PoolWithDisposable-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Pool.Pool`1
+  commentId: T:Fantasy.Pool.Pool`1
+  href: Fantasy.Pool.Pool-1.html
+  name: Pool<T>
+  nameWithType: Pool<T>
+  fullName: Fantasy.Pool.Pool<T>
+  nameWithType.vb: Pool(Of T)
+  fullName.vb: Fantasy.Pool.Pool(Of T)
+  name.vb: Pool(Of T)
+  spec.csharp:
+  - uid: Fantasy.Pool.Pool`1
+    name: Pool
+    href: Fantasy.Pool.Pool-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Pool.Pool`1
+    name: Pool
+    href: Fantasy.Pool.Pool-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Pool
+  commentId: N:Fantasy.Pool
+  href: Fantasy.html
+  name: Fantasy.Pool
+  nameWithType: Fantasy.Pool
+  fullName: Fantasy.Pool
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Pool
+    name: Pool
+    href: Fantasy.Pool.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Pool
+    name: Pool
+    href: Fantasy.Pool.html

@@ -1,0 +1,1388 @@
+### YamlMime:ManagedReference
+items:
+- uid: NativeCollections.NativeMemoryPool
+  commentId: T:NativeCollections.NativeMemoryPool
+  id: NativeMemoryPool
+  parent: NativeCollections
+  children:
+  - NativeCollections.NativeMemoryPool.#ctor(System.Int32,System.Int32,System.Int32)
+  - NativeCollections.NativeMemoryPool.Dispose
+  - NativeCollections.NativeMemoryPool.Empty
+  - NativeCollections.NativeMemoryPool.Equals(NativeCollections.NativeMemoryPool)
+  - NativeCollections.NativeMemoryPool.Equals(System.Object)
+  - NativeCollections.NativeMemoryPool.FreeSlabs
+  - NativeCollections.NativeMemoryPool.GetHashCode
+  - NativeCollections.NativeMemoryPool.IsCreated
+  - NativeCollections.NativeMemoryPool.Length
+  - NativeCollections.NativeMemoryPool.MaxFreeSlabs
+  - NativeCollections.NativeMemoryPool.Rent
+  - NativeCollections.NativeMemoryPool.Return(System.Void*)
+  - NativeCollections.NativeMemoryPool.Size
+  - NativeCollections.NativeMemoryPool.Slabs
+  - NativeCollections.NativeMemoryPool.ToString
+  - NativeCollections.NativeMemoryPool.TrimExcess
+  - NativeCollections.NativeMemoryPool.op_Equality(NativeCollections.NativeMemoryPool,NativeCollections.NativeMemoryPool)
+  - NativeCollections.NativeMemoryPool.op_Inequality(NativeCollections.NativeMemoryPool,NativeCollections.NativeMemoryPool)
+  langs:
+  - csharp
+  - vb
+  name: NativeMemoryPool
+  nameWithType: NativeMemoryPool
+  fullName: NativeCollections.NativeMemoryPool
+  type: Struct
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NativeMemoryPool
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 21
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Native memory pool
+  example: []
+  syntax:
+    content: >-
+      [StructLayout(LayoutKind.Sequential)]
+
+      public readonly struct NativeMemoryPool : IDisposable, IEquatable<NativeMemoryPool>
+    content.vb: >-
+      <StructLayout(LayoutKind.Sequential)>
+
+      Public Structure NativeMemoryPool Implements IDisposable, IEquatable(Of NativeMemoryPool)
+  implements:
+  - System.IDisposable
+  - System.IEquatable{NativeCollections.NativeMemoryPool}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - NativeCollections.NativeMemoryPool.Fantasy.Helper.JsonHelper.ToJson``1
+  attributes:
+  - type: System.Runtime.InteropServices.StructLayoutAttribute
+    ctor: System.Runtime.InteropServices.StructLayoutAttribute.#ctor(System.Runtime.InteropServices.LayoutKind)
+    arguments:
+    - type: System.Runtime.InteropServices.LayoutKind
+      value: 0
+- uid: NativeCollections.NativeMemoryPool.#ctor(System.Int32,System.Int32,System.Int32)
+  commentId: M:NativeCollections.NativeMemoryPool.#ctor(System.Int32,System.Int32,System.Int32)
+  id: '#ctor(System.Int32,System.Int32,System.Int32)'
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: NativeMemoryPool(int, int, int)
+  nameWithType: NativeMemoryPool.NativeMemoryPool(int, int, int)
+  fullName: NativeCollections.NativeMemoryPool.NativeMemoryPool(int, int, int)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 121
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Structure
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public NativeMemoryPool(int size, int length, int maxFreeSlabs)
+    parameters:
+    - id: size
+      type: System.Int32
+      description: Size
+    - id: length
+      type: System.Int32
+      description: Length
+    - id: maxFreeSlabs
+      type: System.Int32
+      description: Max free slabs
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub New(size As Integer, length As Integer, maxFreeSlabs As Integer)
+  overload: NativeCollections.NativeMemoryPool.#ctor*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryPool.New(Integer, Integer, Integer)
+  fullName.vb: NativeCollections.NativeMemoryPool.New(Integer, Integer, Integer)
+  name.vb: New(Integer, Integer, Integer)
+- uid: NativeCollections.NativeMemoryPool.IsCreated
+  commentId: P:NativeCollections.NativeMemoryPool.IsCreated
+  id: IsCreated
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: IsCreated
+  nameWithType: NativeMemoryPool.IsCreated
+  fullName: NativeCollections.NativeMemoryPool.IsCreated
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IsCreated
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 159
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Is created
+  example: []
+  syntax:
+    content: public bool IsCreated { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCreated As Boolean
+  overload: NativeCollections.NativeMemoryPool.IsCreated*
+- uid: NativeCollections.NativeMemoryPool.Slabs
+  commentId: P:NativeCollections.NativeMemoryPool.Slabs
+  id: Slabs
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: Slabs
+  nameWithType: NativeMemoryPool.Slabs
+  fullName: NativeCollections.NativeMemoryPool.Slabs
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Slabs
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 164
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Slabs
+  example: []
+  syntax:
+    content: public int Slabs { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Slabs As Integer
+  overload: NativeCollections.NativeMemoryPool.Slabs*
+- uid: NativeCollections.NativeMemoryPool.FreeSlabs
+  commentId: P:NativeCollections.NativeMemoryPool.FreeSlabs
+  id: FreeSlabs
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: FreeSlabs
+  nameWithType: NativeMemoryPool.FreeSlabs
+  fullName: NativeCollections.NativeMemoryPool.FreeSlabs
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: FreeSlabs
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 169
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Free slabs
+  example: []
+  syntax:
+    content: public int FreeSlabs { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property FreeSlabs As Integer
+  overload: NativeCollections.NativeMemoryPool.FreeSlabs*
+- uid: NativeCollections.NativeMemoryPool.MaxFreeSlabs
+  commentId: P:NativeCollections.NativeMemoryPool.MaxFreeSlabs
+  id: MaxFreeSlabs
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: MaxFreeSlabs
+  nameWithType: NativeMemoryPool.MaxFreeSlabs
+  fullName: NativeCollections.NativeMemoryPool.MaxFreeSlabs
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: MaxFreeSlabs
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 174
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Max free slabs
+  example: []
+  syntax:
+    content: public int MaxFreeSlabs { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property MaxFreeSlabs As Integer
+  overload: NativeCollections.NativeMemoryPool.MaxFreeSlabs*
+- uid: NativeCollections.NativeMemoryPool.Size
+  commentId: P:NativeCollections.NativeMemoryPool.Size
+  id: Size
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: Size
+  nameWithType: NativeMemoryPool.Size
+  fullName: NativeCollections.NativeMemoryPool.Size
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Size
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 179
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Size
+  example: []
+  syntax:
+    content: public int Size { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Size As Integer
+  overload: NativeCollections.NativeMemoryPool.Size*
+- uid: NativeCollections.NativeMemoryPool.Length
+  commentId: P:NativeCollections.NativeMemoryPool.Length
+  id: Length
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: Length
+  nameWithType: NativeMemoryPool.Length
+  fullName: NativeCollections.NativeMemoryPool.Length
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Length
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 184
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Length
+  example: []
+  syntax:
+    content: public int Length { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Length As Integer
+  overload: NativeCollections.NativeMemoryPool.Length*
+- uid: NativeCollections.NativeMemoryPool.Equals(NativeCollections.NativeMemoryPool)
+  commentId: M:NativeCollections.NativeMemoryPool.Equals(NativeCollections.NativeMemoryPool)
+  id: Equals(NativeCollections.NativeMemoryPool)
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: Equals(NativeMemoryPool)
+  nameWithType: NativeMemoryPool.Equals(NativeMemoryPool)
+  fullName: NativeCollections.NativeMemoryPool.Equals(NativeCollections.NativeMemoryPool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 191
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public bool Equals(NativeMemoryPool other)
+    parameters:
+    - id: other
+      type: NativeCollections.NativeMemoryPool
+      description: Other
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Function Equals(other As NativeMemoryPool) As Boolean
+  overload: NativeCollections.NativeMemoryPool.Equals*
+  implements:
+  - System.IEquatable{NativeCollections.NativeMemoryPool}.Equals(NativeCollections.NativeMemoryPool)
+- uid: NativeCollections.NativeMemoryPool.Equals(System.Object)
+  commentId: M:NativeCollections.NativeMemoryPool.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: NativeMemoryPool.Equals(object?)
+  fullName: NativeCollections.NativeMemoryPool.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Equals
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 198
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: object
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: NativeCollections.NativeMemoryPool.Equals*
+  nameWithType.vb: NativeMemoryPool.Equals(Object)
+  fullName.vb: NativeCollections.NativeMemoryPool.Equals(Object)
+  name.vb: Equals(Object)
+- uid: NativeCollections.NativeMemoryPool.GetHashCode
+  commentId: M:NativeCollections.NativeMemoryPool.GetHashCode
+  id: GetHashCode
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: NativeMemoryPool.GetHashCode()
+  fullName: NativeCollections.NativeMemoryPool.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetHashCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 204
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Get hashCode
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: HashCode
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: NativeCollections.NativeMemoryPool.GetHashCode*
+- uid: NativeCollections.NativeMemoryPool.ToString
+  commentId: M:NativeCollections.NativeMemoryPool.ToString
+  id: ToString
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: NativeMemoryPool.ToString()
+  fullName: NativeCollections.NativeMemoryPool.ToString()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ToString
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 210
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: To string
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: NativeCollections.NativeMemoryPool.ToString*
+- uid: NativeCollections.NativeMemoryPool.op_Equality(NativeCollections.NativeMemoryPool,NativeCollections.NativeMemoryPool)
+  commentId: M:NativeCollections.NativeMemoryPool.op_Equality(NativeCollections.NativeMemoryPool,NativeCollections.NativeMemoryPool)
+  id: op_Equality(NativeCollections.NativeMemoryPool,NativeCollections.NativeMemoryPool)
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: operator ==(NativeMemoryPool, NativeMemoryPool)
+  nameWithType: NativeMemoryPool.operator ==(NativeMemoryPool, NativeMemoryPool)
+  fullName: NativeCollections.NativeMemoryPool.operator ==(NativeCollections.NativeMemoryPool, NativeCollections.NativeMemoryPool)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Equality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 218
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Equals
+  example: []
+  syntax:
+    content: public static bool operator ==(NativeMemoryPool left, NativeMemoryPool right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeMemoryPool
+      description: Left
+    - id: right
+      type: NativeCollections.NativeMemoryPool
+      description: Right
+    return:
+      type: System.Boolean
+      description: Equals
+    content.vb: Public Shared Operator =(left As NativeMemoryPool, right As NativeMemoryPool) As Boolean
+  overload: NativeCollections.NativeMemoryPool.op_Equality*
+  nameWithType.vb: NativeMemoryPool.=(NativeMemoryPool, NativeMemoryPool)
+  fullName.vb: NativeCollections.NativeMemoryPool.=(NativeCollections.NativeMemoryPool, NativeCollections.NativeMemoryPool)
+  name.vb: =(NativeMemoryPool, NativeMemoryPool)
+- uid: NativeCollections.NativeMemoryPool.op_Inequality(NativeCollections.NativeMemoryPool,NativeCollections.NativeMemoryPool)
+  commentId: M:NativeCollections.NativeMemoryPool.op_Inequality(NativeCollections.NativeMemoryPool,NativeCollections.NativeMemoryPool)
+  id: op_Inequality(NativeCollections.NativeMemoryPool,NativeCollections.NativeMemoryPool)
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: operator !=(NativeMemoryPool, NativeMemoryPool)
+  nameWithType: NativeMemoryPool.operator !=(NativeMemoryPool, NativeMemoryPool)
+  fullName: NativeCollections.NativeMemoryPool.operator !=(NativeCollections.NativeMemoryPool, NativeCollections.NativeMemoryPool)
+  type: Operator
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: op_Inequality
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 226
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Not equals
+  example: []
+  syntax:
+    content: public static bool operator !=(NativeMemoryPool left, NativeMemoryPool right)
+    parameters:
+    - id: left
+      type: NativeCollections.NativeMemoryPool
+      description: Left
+    - id: right
+      type: NativeCollections.NativeMemoryPool
+      description: Right
+    return:
+      type: System.Boolean
+      description: Not equals
+    content.vb: Public Shared Operator <>(left As NativeMemoryPool, right As NativeMemoryPool) As Boolean
+  overload: NativeCollections.NativeMemoryPool.op_Inequality*
+  nameWithType.vb: NativeMemoryPool.<>(NativeMemoryPool, NativeMemoryPool)
+  fullName.vb: NativeCollections.NativeMemoryPool.<>(NativeCollections.NativeMemoryPool, NativeCollections.NativeMemoryPool)
+  name.vb: <>(NativeMemoryPool, NativeMemoryPool)
+- uid: NativeCollections.NativeMemoryPool.Dispose
+  commentId: M:NativeCollections.NativeMemoryPool.Dispose
+  id: Dispose
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: NativeMemoryPool.Dispose()
+  fullName: NativeCollections.NativeMemoryPool.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Dispose
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 231
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Dispose
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Dispose()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub Dispose()
+  overload: NativeCollections.NativeMemoryPool.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMemoryPool.Rent
+  commentId: M:NativeCollections.NativeMemoryPool.Rent
+  id: Rent
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: Rent()
+  nameWithType: NativeMemoryPool.Rent()
+  fullName: NativeCollections.NativeMemoryPool.Rent()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Rent
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 261
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Rent buffer
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void* Rent()
+    return:
+      type: System.Void*
+      description: Buffer
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Function Rent() As Void*
+  overload: NativeCollections.NativeMemoryPool.Rent*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMemoryPool.Return(System.Void*)
+  commentId: M:NativeCollections.NativeMemoryPool.Return(System.Void*)
+  id: Return(System.Void*)
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: Return(void*)
+  nameWithType: NativeMemoryPool.Return(void*)
+  fullName: NativeCollections.NativeMemoryPool.Return(void*)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Return
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 317
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Return buffer
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void Return(void* ptr)
+    parameters:
+    - id: ptr
+      type: System.Void*
+      description: Pointer
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub [Return](ptr As Void*)
+  overload: NativeCollections.NativeMemoryPool.Return*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+  nameWithType.vb: NativeMemoryPool.Return(Void*)
+  fullName.vb: NativeCollections.NativeMemoryPool.Return(Void*)
+  name.vb: Return(Void*)
+- uid: NativeCollections.NativeMemoryPool.TrimExcess
+  commentId: M:NativeCollections.NativeMemoryPool.TrimExcess
+  id: TrimExcess
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: TrimExcess()
+  nameWithType: NativeMemoryPool.TrimExcess()
+  fullName: NativeCollections.NativeMemoryPool.TrimExcess()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: TrimExcess
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 351
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Trim excess
+  example: []
+  syntax:
+    content: >-
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+      public void TrimExcess()
+    content.vb: >-
+      <MethodImpl(MethodImplOptions.AggressiveInlining)>
+
+      Public Sub TrimExcess()
+  overload: NativeCollections.NativeMemoryPool.TrimExcess*
+  attributes:
+  - type: System.Runtime.CompilerServices.MethodImplAttribute
+    ctor: System.Runtime.CompilerServices.MethodImplAttribute.#ctor(System.Runtime.CompilerServices.MethodImplOptions)
+    arguments:
+    - type: System.Runtime.CompilerServices.MethodImplOptions
+      value: 256
+- uid: NativeCollections.NativeMemoryPool.Empty
+  commentId: P:NativeCollections.NativeMemoryPool.Empty
+  id: Empty
+  parent: NativeCollections.NativeMemoryPool
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: NativeMemoryPool.Empty
+  fullName: NativeCollections.NativeMemoryPool.Empty
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Empty
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/NativeCollections/NativeCollections/NativeMemoryPool.cs
+    startLine: 367
+  assemblies:
+  - Fantasy.Net
+  namespace: NativeCollections
+  summary: Empty
+  example: []
+  syntax:
+    content: public static NativeMemoryPool Empty { get; }
+    parameters: []
+    return:
+      type: NativeCollections.NativeMemoryPool
+    content.vb: Public Shared ReadOnly Property Empty As NativeMemoryPool
+  overload: NativeCollections.NativeMemoryPool.Empty*
+references:
+- uid: NativeCollections
+  commentId: N:NativeCollections
+  href: NativeCollections.html
+  name: NativeCollections
+  nameWithType: NativeCollections
+  fullName: NativeCollections
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable{NativeCollections.NativeMemoryPool}
+  commentId: T:System.IEquatable{NativeCollections.NativeMemoryPool}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<NativeMemoryPool>
+  nameWithType: IEquatable<NativeMemoryPool>
+  fullName: System.IEquatable<NativeCollections.NativeMemoryPool>
+  nameWithType.vb: IEquatable(Of NativeMemoryPool)
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeMemoryPool)
+  name.vb: IEquatable(Of NativeMemoryPool)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: NativeCollections.NativeMemoryPool
+    name: NativeMemoryPool
+    href: NativeCollections.NativeMemoryPool.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeMemoryPool
+    name: NativeMemoryPool
+    href: NativeCollections.NativeMemoryPool.html
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: NativeCollections.NativeMemoryPool.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<NativeMemoryPool>(NativeMemoryPool)
+  nameWithType: JsonHelper.ToJson<NativeMemoryPool>(NativeMemoryPool)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<NativeCollections.NativeMemoryPool>(NativeCollections.NativeMemoryPool)
+  nameWithType.vb: JsonHelper.ToJson(Of NativeMemoryPool)(NativeMemoryPool)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of NativeCollections.NativeMemoryPool)(NativeCollections.NativeMemoryPool)
+  name.vb: ToJson(Of NativeMemoryPool)(NativeMemoryPool)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeMemoryPool)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: NativeCollections.NativeMemoryPool
+    name: NativeMemoryPool
+    href: NativeCollections.NativeMemoryPool.html
+  - name: '>'
+  - name: (
+  - uid: NativeCollections.NativeMemoryPool
+    name: NativeMemoryPool
+    href: NativeCollections.NativeMemoryPool.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(NativeCollections.NativeMemoryPool)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NativeCollections.NativeMemoryPool
+    name: NativeMemoryPool
+    href: NativeCollections.NativeMemoryPool.html
+  - name: )
+  - name: (
+  - uid: NativeCollections.NativeMemoryPool
+    name: NativeMemoryPool
+    href: NativeCollections.NativeMemoryPool.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: NativeCollections.NativeMemoryPool.#ctor*
+  commentId: Overload:NativeCollections.NativeMemoryPool.#ctor
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool__ctor_System_Int32_System_Int32_System_Int32_
+  name: NativeMemoryPool
+  nameWithType: NativeMemoryPool.NativeMemoryPool
+  fullName: NativeCollections.NativeMemoryPool.NativeMemoryPool
+  nameWithType.vb: NativeMemoryPool.New
+  fullName.vb: NativeCollections.NativeMemoryPool.New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: NativeCollections.NativeMemoryPool.IsCreated*
+  commentId: Overload:NativeCollections.NativeMemoryPool.IsCreated
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_IsCreated
+  name: IsCreated
+  nameWithType: NativeMemoryPool.IsCreated
+  fullName: NativeCollections.NativeMemoryPool.IsCreated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NativeCollections.NativeMemoryPool.Slabs*
+  commentId: Overload:NativeCollections.NativeMemoryPool.Slabs
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_Slabs
+  name: Slabs
+  nameWithType: NativeMemoryPool.Slabs
+  fullName: NativeCollections.NativeMemoryPool.Slabs
+- uid: NativeCollections.NativeMemoryPool.FreeSlabs*
+  commentId: Overload:NativeCollections.NativeMemoryPool.FreeSlabs
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_FreeSlabs
+  name: FreeSlabs
+  nameWithType: NativeMemoryPool.FreeSlabs
+  fullName: NativeCollections.NativeMemoryPool.FreeSlabs
+- uid: NativeCollections.NativeMemoryPool.MaxFreeSlabs*
+  commentId: Overload:NativeCollections.NativeMemoryPool.MaxFreeSlabs
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_MaxFreeSlabs
+  name: MaxFreeSlabs
+  nameWithType: NativeMemoryPool.MaxFreeSlabs
+  fullName: NativeCollections.NativeMemoryPool.MaxFreeSlabs
+- uid: NativeCollections.NativeMemoryPool.Size*
+  commentId: Overload:NativeCollections.NativeMemoryPool.Size
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_Size
+  name: Size
+  nameWithType: NativeMemoryPool.Size
+  fullName: NativeCollections.NativeMemoryPool.Size
+- uid: NativeCollections.NativeMemoryPool.Length*
+  commentId: Overload:NativeCollections.NativeMemoryPool.Length
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_Length
+  name: Length
+  nameWithType: NativeMemoryPool.Length
+  fullName: NativeCollections.NativeMemoryPool.Length
+- uid: NativeCollections.NativeMemoryPool.Equals*
+  commentId: Overload:NativeCollections.NativeMemoryPool.Equals
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_Equals_NativeCollections_NativeMemoryPool_
+  name: Equals
+  nameWithType: NativeMemoryPool.Equals
+  fullName: NativeCollections.NativeMemoryPool.Equals
+- uid: System.IEquatable{NativeCollections.NativeMemoryPool}.Equals(NativeCollections.NativeMemoryPool)
+  commentId: M:System.IEquatable{NativeCollections.NativeMemoryPool}.Equals(NativeCollections.NativeMemoryPool)
+  parent: System.IEquatable{NativeCollections.NativeMemoryPool}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(NativeMemoryPool)
+  nameWithType: IEquatable<NativeMemoryPool>.Equals(NativeMemoryPool)
+  fullName: System.IEquatable<NativeCollections.NativeMemoryPool>.Equals(NativeCollections.NativeMemoryPool)
+  nameWithType.vb: IEquatable(Of NativeMemoryPool).Equals(NativeMemoryPool)
+  fullName.vb: System.IEquatable(Of NativeCollections.NativeMemoryPool).Equals(NativeCollections.NativeMemoryPool)
+  spec.csharp:
+  - uid: System.IEquatable{NativeCollections.NativeMemoryPool}.Equals(NativeCollections.NativeMemoryPool)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeMemoryPool
+    name: NativeMemoryPool
+    href: NativeCollections.NativeMemoryPool.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{NativeCollections.NativeMemoryPool}.Equals(NativeCollections.NativeMemoryPool)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: NativeCollections.NativeMemoryPool
+    name: NativeMemoryPool
+    href: NativeCollections.NativeMemoryPool.html
+  - name: )
+- uid: NativeCollections.NativeMemoryPool
+  commentId: T:NativeCollections.NativeMemoryPool
+  parent: NativeCollections
+  href: NativeCollections.NativeMemoryPool.html
+  name: NativeMemoryPool
+  nameWithType: NativeMemoryPool
+  fullName: NativeCollections.NativeMemoryPool
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMemoryPool.GetHashCode*
+  commentId: Overload:NativeCollections.NativeMemoryPool.GetHashCode
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_GetHashCode
+  name: GetHashCode
+  nameWithType: NativeMemoryPool.GetHashCode
+  fullName: NativeCollections.NativeMemoryPool.GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMemoryPool.ToString*
+  commentId: Overload:NativeCollections.NativeMemoryPool.ToString
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_ToString
+  name: ToString
+  nameWithType: NativeMemoryPool.ToString
+  fullName: NativeCollections.NativeMemoryPool.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: NativeCollections.NativeMemoryPool.op_Equality*
+  commentId: Overload:NativeCollections.NativeMemoryPool.op_Equality
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_op_Equality_NativeCollections_NativeMemoryPool_NativeCollections_NativeMemoryPool_
+  name: operator ==
+  nameWithType: NativeMemoryPool.operator ==
+  fullName: NativeCollections.NativeMemoryPool.operator ==
+  nameWithType.vb: NativeMemoryPool.=
+  fullName.vb: NativeCollections.NativeMemoryPool.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeMemoryPool.op_Equality*
+    name: ==
+    href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_op_Equality_NativeCollections_NativeMemoryPool_NativeCollections_NativeMemoryPool_
+- uid: NativeCollections.NativeMemoryPool.op_Inequality*
+  commentId: Overload:NativeCollections.NativeMemoryPool.op_Inequality
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_op_Inequality_NativeCollections_NativeMemoryPool_NativeCollections_NativeMemoryPool_
+  name: operator !=
+  nameWithType: NativeMemoryPool.operator !=
+  fullName: NativeCollections.NativeMemoryPool.operator !=
+  nameWithType.vb: NativeMemoryPool.<>
+  fullName.vb: NativeCollections.NativeMemoryPool.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: NativeCollections.NativeMemoryPool.op_Inequality*
+    name: '!='
+    href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_op_Inequality_NativeCollections_NativeMemoryPool_NativeCollections_NativeMemoryPool_
+- uid: NativeCollections.NativeMemoryPool.Dispose*
+  commentId: Overload:NativeCollections.NativeMemoryPool.Dispose
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_Dispose
+  name: Dispose
+  nameWithType: NativeMemoryPool.Dispose
+  fullName: NativeCollections.NativeMemoryPool.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: NativeCollections.NativeMemoryPool.Rent*
+  commentId: Overload:NativeCollections.NativeMemoryPool.Rent
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_Rent
+  name: Rent
+  nameWithType: NativeMemoryPool.Rent
+  fullName: NativeCollections.NativeMemoryPool.Rent
+- uid: System.Void*
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.void
+  name: void*
+  nameWithType: void*
+  fullName: void*
+  nameWithType.vb: Void*
+  fullName.vb: Void*
+  name.vb: Void*
+  spec.csharp:
+  - uid: System.Void
+    name: void
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.void
+  - name: '*'
+  spec.vb:
+  - uid: System.Void
+    name: Void
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.void
+  - name: '*'
+- uid: NativeCollections.NativeMemoryPool.Return*
+  commentId: Overload:NativeCollections.NativeMemoryPool.Return
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_Return_System_Void__
+  name: Return
+  nameWithType: NativeMemoryPool.Return
+  fullName: NativeCollections.NativeMemoryPool.Return
+- uid: NativeCollections.NativeMemoryPool.TrimExcess*
+  commentId: Overload:NativeCollections.NativeMemoryPool.TrimExcess
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_TrimExcess
+  name: TrimExcess
+  nameWithType: NativeMemoryPool.TrimExcess
+  fullName: NativeCollections.NativeMemoryPool.TrimExcess
+- uid: NativeCollections.NativeMemoryPool.Empty*
+  commentId: Overload:NativeCollections.NativeMemoryPool.Empty
+  href: NativeCollections.NativeMemoryPool.html#NativeCollections_NativeMemoryPool_Empty
+  name: Empty
+  nameWithType: NativeMemoryPool.Empty
+  fullName: NativeCollections.NativeMemoryPool.Empty

@@ -1,0 +1,136 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.DataStructure
+  id: DataStructure
+  parent: Fantasy
+  children:
+  - Fantasy.DataStructure.Collection
+  - Fantasy.DataStructure.Dictionary
+  - Fantasy.DataStructure.PriorityQueue
+  - Fantasy.DataStructure.SkipTable
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.DataStructure
+  type: Namespace
+references:
+- uid: Fantasy.DataStructure.Collection
+  commentId: N:Fantasy.DataStructure.Collection
+  href: Fantasy.html
+  name: Fantasy.DataStructure.Collection
+  nameWithType: Fantasy.DataStructure.Collection
+  fullName: Fantasy.DataStructure.Collection
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.Collection
+    name: Collection
+    href: Fantasy.DataStructure.Collection.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.Collection
+    name: Collection
+    href: Fantasy.DataStructure.Collection.html
+- uid: Fantasy.DataStructure.Dictionary
+  commentId: N:Fantasy.DataStructure.Dictionary
+  href: Fantasy.html
+  name: Fantasy.DataStructure.Dictionary
+  nameWithType: Fantasy.DataStructure.Dictionary
+  fullName: Fantasy.DataStructure.Dictionary
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.Dictionary
+    name: Dictionary
+    href: Fantasy.DataStructure.Dictionary.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.Dictionary
+    name: Dictionary
+    href: Fantasy.DataStructure.Dictionary.html
+- uid: Fantasy.DataStructure.PriorityQueue
+  commentId: N:Fantasy.DataStructure.PriorityQueue
+  href: Fantasy.html
+  name: Fantasy.DataStructure.PriorityQueue
+  nameWithType: Fantasy.DataStructure.PriorityQueue
+  fullName: Fantasy.DataStructure.PriorityQueue
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.PriorityQueue
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.PriorityQueue
+    name: PriorityQueue
+    href: Fantasy.DataStructure.PriorityQueue.html
+- uid: Fantasy.DataStructure.SkipTable
+  commentId: N:Fantasy.DataStructure.SkipTable
+  href: Fantasy.html
+  name: Fantasy.DataStructure.SkipTable
+  nameWithType: Fantasy.DataStructure.SkipTable
+  fullName: Fantasy.DataStructure.SkipTable
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.SkipTable
+    name: SkipTable
+    href: Fantasy.DataStructure.SkipTable.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.SkipTable
+    name: SkipTable
+    href: Fantasy.DataStructure.SkipTable.html

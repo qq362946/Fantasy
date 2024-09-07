@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Fantasy.Pool;
+
 #pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8603 // Possible null reference return.
 
-namespace Fantasy
+namespace Fantasy.DataStructure.Dictionary
 {
     /// <summary>
     /// 提供一个双向映射字典对象池类，用于双向键值对映射。

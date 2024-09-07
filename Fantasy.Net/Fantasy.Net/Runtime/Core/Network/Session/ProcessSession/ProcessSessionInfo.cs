@@ -1,5 +1,7 @@
+using Fantasy.Network.Interface;
+
 #if FANTASY_NET
-namespace Fantasy;
+namespace Fantasy.Network;
 
 internal sealed class ProcessSessionInfo(Session session, AClientNetwork aClientNetwork) : IDisposable
 {

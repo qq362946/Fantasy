@@ -1,0 +1,539 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.Route.AddressableScene
+  commentId: T:Fantasy.Network.Route.AddressableScene
+  id: AddressableScene
+  parent: Fantasy.Network.Route
+  children:
+  - Fantasy.Network.Route.AddressableScene.#ctor(Fantasy.Platform.Net.SceneConfig)
+  - Fantasy.Network.Route.AddressableScene.Id
+  - Fantasy.Network.Route.AddressableScene.RunTimeId
+  langs:
+  - csharp
+  - vb
+  name: AddressableScene
+  nameWithType: AddressableScene
+  fullName: Fantasy.Network.Route.AddressableScene
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableScene.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: AddressableScene
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableScene.cs
+    startLine: 9
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Route
+  summary: AddressableScene
+  example: []
+  syntax:
+    content: public sealed class AddressableScene
+    content.vb: Public NotInheritable Class AddressableScene
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Fantasy.Network.Route.AddressableScene.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.Route.AddressableScene.Id
+  commentId: F:Fantasy.Network.Route.AddressableScene.Id
+  id: Id
+  parent: Fantasy.Network.Route.AddressableScene
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: AddressableScene.Id
+  fullName: Fantasy.Network.Route.AddressableScene.Id
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableScene.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Id
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableScene.cs
+    startLine: 14
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Route
+  summary: Id
+  example: []
+  syntax:
+    content: public readonly long Id
+    return:
+      type: System.Int64
+    content.vb: Public ReadOnly Id As Long
+- uid: Fantasy.Network.Route.AddressableScene.RunTimeId
+  commentId: F:Fantasy.Network.Route.AddressableScene.RunTimeId
+  id: RunTimeId
+  parent: Fantasy.Network.Route.AddressableScene
+  langs:
+  - csharp
+  - vb
+  name: RunTimeId
+  nameWithType: AddressableScene.RunTimeId
+  fullName: Fantasy.Network.Route.AddressableScene.RunTimeId
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableScene.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RunTimeId
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableScene.cs
+    startLine: 18
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Route
+  summary: RunTimeId
+  example: []
+  syntax:
+    content: public readonly long RunTimeId
+    return:
+      type: System.Int64
+    content.vb: Public ReadOnly RunTimeId As Long
+- uid: Fantasy.Network.Route.AddressableScene.#ctor(Fantasy.Platform.Net.SceneConfig)
+  commentId: M:Fantasy.Network.Route.AddressableScene.#ctor(Fantasy.Platform.Net.SceneConfig)
+  id: '#ctor(Fantasy.Platform.Net.SceneConfig)'
+  parent: Fantasy.Network.Route.AddressableScene
+  langs:
+  - csharp
+  - vb
+  name: AddressableScene(SceneConfig)
+  nameWithType: AddressableScene.AddressableScene(SceneConfig)
+  fullName: Fantasy.Network.Route.AddressableScene.AddressableScene(Fantasy.Platform.Net.SceneConfig)
+  type: Constructor
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableScene.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: .ctor
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableScene.cs
+    startLine: 23
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network.Route
+  summary: 构造方法
+  example: []
+  syntax:
+    content: public AddressableScene(SceneConfig sceneConfig)
+    parameters:
+    - id: sceneConfig
+      type: Fantasy.Platform.Net.SceneConfig
+      description: sceneConfig
+    content.vb: Public Sub New(sceneConfig As SceneConfig)
+  overload: Fantasy.Network.Route.AddressableScene.#ctor*
+  nameWithType.vb: AddressableScene.New(SceneConfig)
+  fullName.vb: Fantasy.Network.Route.AddressableScene.New(Fantasy.Platform.Net.SceneConfig)
+  name.vb: New(SceneConfig)
+references:
+- uid: Fantasy.Network.Route
+  commentId: N:Fantasy.Network.Route
+  href: Fantasy.html
+  name: Fantasy.Network.Route
+  nameWithType: Fantasy.Network.Route
+  fullName: Fantasy.Network.Route
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Route
+    name: Route
+    href: Fantasy.Network.Route.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Route
+    name: Route
+    href: Fantasy.Network.Route.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Fantasy.Network.Route.AddressableScene.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<AddressableScene>(AddressableScene)
+  nameWithType: JsonHelper.ToJson<AddressableScene>(AddressableScene)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.Route.AddressableScene>(Fantasy.Network.Route.AddressableScene)
+  nameWithType.vb: JsonHelper.ToJson(Of AddressableScene)(AddressableScene)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.Route.AddressableScene)(Fantasy.Network.Route.AddressableScene)
+  name.vb: ToJson(Of AddressableScene)(AddressableScene)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Route.AddressableScene)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Network.Route.AddressableScene
+    name: AddressableScene
+    href: Fantasy.Network.Route.AddressableScene.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Network.Route.AddressableScene
+    name: AddressableScene
+    href: Fantasy.Network.Route.AddressableScene.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.Route.AddressableScene)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Network.Route.AddressableScene
+    name: AddressableScene
+    href: Fantasy.Network.Route.AddressableScene.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Network.Route.AddressableScene
+    name: AddressableScene
+    href: Fantasy.Network.Route.AddressableScene.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.Network.Route.AddressableScene.#ctor*
+  commentId: Overload:Fantasy.Network.Route.AddressableScene.#ctor
+  href: Fantasy.Network.Route.AddressableScene.html#Fantasy_Network_Route_AddressableScene__ctor_Fantasy_Platform_Net_SceneConfig_
+  name: AddressableScene
+  nameWithType: AddressableScene.AddressableScene
+  fullName: Fantasy.Network.Route.AddressableScene.AddressableScene
+  nameWithType.vb: AddressableScene.New
+  fullName.vb: Fantasy.Network.Route.AddressableScene.New
+  name.vb: New
+- uid: Fantasy.Platform.Net.SceneConfig
+  commentId: T:Fantasy.Platform.Net.SceneConfig
+  parent: Fantasy.Platform.Net
+  href: Fantasy.Platform.Net.SceneConfig.html
+  name: SceneConfig
+  nameWithType: SceneConfig
+  fullName: Fantasy.Platform.Net.SceneConfig
+- uid: Fantasy.Platform.Net
+  commentId: N:Fantasy.Platform.Net
+  href: Fantasy.html
+  name: Fantasy.Platform.Net
+  nameWithType: Fantasy.Platform.Net
+  fullName: Fantasy.Platform.Net
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Platform
+    name: Platform
+    href: Fantasy.Platform.html
+  - name: .
+  - uid: Fantasy.Platform.Net
+    name: Net
+    href: Fantasy.Platform.Net.html

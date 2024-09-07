@@ -1,0 +1,406 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.DataStructure.Dictionary
+  commentId: N:Fantasy.DataStructure.Dictionary
+  id: Dictionary
+  parent: Fantasy.DataStructure
+  children:
+  - Fantasy.DataStructure.Dictionary.DictionaryExtensions
+  - Fantasy.DataStructure.Dictionary.DictionaryPool`2
+  - Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2
+  - Fantasy.DataStructure.Dictionary.DoubleMapDictionary`2
+  - Fantasy.DataStructure.Dictionary.EntityDictionary`2
+  - Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3
+  - Fantasy.DataStructure.Dictionary.OneToManyDictionary`3
+  - Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3
+  - Fantasy.DataStructure.Dictionary.OneToManySortedDictionary`3
+  - Fantasy.DataStructure.Dictionary.ReuseDictionary`2
+  - Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.DataStructure.Dictionary
+  nameWithType: Fantasy.DataStructure.Dictionary
+  fullName: Fantasy.DataStructure.Dictionary
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.DataStructure.Dictionary.DictionaryExtensions
+  commentId: T:Fantasy.DataStructure.Dictionary.DictionaryExtensions
+  parent: Fantasy.DataStructure.Dictionary
+  href: Fantasy.DataStructure.Dictionary.DictionaryExtensions.html
+  name: DictionaryExtensions
+  nameWithType: DictionaryExtensions
+  fullName: Fantasy.DataStructure.Dictionary.DictionaryExtensions
+- uid: Fantasy.DataStructure.Dictionary.DictionaryPool`2
+  commentId: T:Fantasy.DataStructure.Dictionary.DictionaryPool`2
+  parent: Fantasy.DataStructure.Dictionary
+  href: Fantasy.DataStructure.Dictionary.DictionaryPool-2.html
+  name: DictionaryPool<TM, TN>
+  nameWithType: DictionaryPool<TM, TN>
+  fullName: Fantasy.DataStructure.Dictionary.DictionaryPool<TM, TN>
+  nameWithType.vb: DictionaryPool(Of TM, TN)
+  fullName.vb: Fantasy.DataStructure.Dictionary.DictionaryPool(Of TM, TN)
+  name.vb: DictionaryPool(Of TM, TN)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Dictionary.DictionaryPool`2
+    name: DictionaryPool
+    href: Fantasy.DataStructure.Dictionary.DictionaryPool-2.html
+  - name: <
+  - name: TM
+  - name: ','
+  - name: " "
+  - name: TN
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Dictionary.DictionaryPool`2
+    name: DictionaryPool
+    href: Fantasy.DataStructure.Dictionary.DictionaryPool-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TM
+  - name: ','
+  - name: " "
+  - name: TN
+  - name: )
+- uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2
+  commentId: T:Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2
+  parent: Fantasy.DataStructure.Dictionary
+  href: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool-2.html
+  name: DoubleMapDictionaryPool<TKey, TValue>
+  nameWithType: DoubleMapDictionaryPool<TKey, TValue>
+  fullName: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool<TKey, TValue>
+  nameWithType.vb: DoubleMapDictionaryPool(Of TKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool(Of TKey, TValue)
+  name.vb: DoubleMapDictionaryPool(Of TKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2
+    name: DoubleMapDictionaryPool
+    href: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2
+    name: DoubleMapDictionaryPool
+    href: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionary`2
+  commentId: T:Fantasy.DataStructure.Dictionary.DoubleMapDictionary`2
+  href: Fantasy.DataStructure.Dictionary.DoubleMapDictionary-2.html
+  name: DoubleMapDictionary<TK, TV>
+  nameWithType: DoubleMapDictionary<TK, TV>
+  fullName: Fantasy.DataStructure.Dictionary.DoubleMapDictionary<TK, TV>
+  nameWithType.vb: DoubleMapDictionary(Of TK, TV)
+  fullName.vb: Fantasy.DataStructure.Dictionary.DoubleMapDictionary(Of TK, TV)
+  name.vb: DoubleMapDictionary(Of TK, TV)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionary`2
+    name: DoubleMapDictionary
+    href: Fantasy.DataStructure.Dictionary.DoubleMapDictionary-2.html
+  - name: <
+  - name: TK
+  - name: ','
+  - name: " "
+  - name: TV
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionary`2
+    name: DoubleMapDictionary
+    href: Fantasy.DataStructure.Dictionary.DoubleMapDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TK
+  - name: ','
+  - name: " "
+  - name: TV
+  - name: )
+- uid: Fantasy.DataStructure.Dictionary.EntityDictionary`2
+  commentId: T:Fantasy.DataStructure.Dictionary.EntityDictionary`2
+  parent: Fantasy.DataStructure.Dictionary
+  href: Fantasy.DataStructure.Dictionary.EntityDictionary-2.html
+  name: EntityDictionary<TM, TN>
+  nameWithType: EntityDictionary<TM, TN>
+  fullName: Fantasy.DataStructure.Dictionary.EntityDictionary<TM, TN>
+  nameWithType.vb: EntityDictionary(Of TM, TN)
+  fullName.vb: Fantasy.DataStructure.Dictionary.EntityDictionary(Of TM, TN)
+  name.vb: EntityDictionary(Of TM, TN)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Dictionary.EntityDictionary`2
+    name: EntityDictionary
+    href: Fantasy.DataStructure.Dictionary.EntityDictionary-2.html
+  - name: <
+  - name: TM
+  - name: ','
+  - name: " "
+  - name: TN
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Dictionary.EntityDictionary`2
+    name: EntityDictionary
+    href: Fantasy.DataStructure.Dictionary.EntityDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TM
+  - name: ','
+  - name: " "
+  - name: TN
+  - name: )
+- uid: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3
+  commentId: T:Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3
+  parent: Fantasy.DataStructure.Dictionary
+  href: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool-3.html
+  name: OneToManyDictionaryPool<TKey, TValueKey, TValue>
+  nameWithType: OneToManyDictionaryPool<TKey, TValueKey, TValue>
+  fullName: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool<TKey, TValueKey, TValue>
+  nameWithType.vb: OneToManyDictionaryPool(Of TKey, TValueKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool(Of TKey, TValueKey, TValue)
+  name.vb: OneToManyDictionaryPool(Of TKey, TValueKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3
+    name: OneToManyDictionaryPool
+    href: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool-3.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValueKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3
+    name: OneToManyDictionaryPool
+    href: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool-3.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValueKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Dictionary.OneToManyDictionary`3
+  commentId: T:Fantasy.DataStructure.Dictionary.OneToManyDictionary`3
+  href: Fantasy.DataStructure.Dictionary.OneToManyDictionary-3.html
+  name: OneToManyDictionary<TKey, TValueKey, TValue>
+  nameWithType: OneToManyDictionary<TKey, TValueKey, TValue>
+  fullName: Fantasy.DataStructure.Dictionary.OneToManyDictionary<TKey, TValueKey, TValue>
+  nameWithType.vb: OneToManyDictionary(Of TKey, TValueKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManyDictionary(Of TKey, TValueKey, TValue)
+  name.vb: OneToManyDictionary(Of TKey, TValueKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Dictionary.OneToManyDictionary`3
+    name: OneToManyDictionary
+    href: Fantasy.DataStructure.Dictionary.OneToManyDictionary-3.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValueKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Dictionary.OneToManyDictionary`3
+    name: OneToManyDictionary
+    href: Fantasy.DataStructure.Dictionary.OneToManyDictionary-3.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValueKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3
+  commentId: T:Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3
+  parent: Fantasy.DataStructure.Dictionary
+  href: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool-3.html
+  name: OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>
+  nameWithType: OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>
+  fullName: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>
+  nameWithType.vb: OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue)
+  name.vb: OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3
+    name: OneToManySortedDictionaryPool
+    href: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool-3.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TSortedKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3
+    name: OneToManySortedDictionaryPool
+    href: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool-3.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TSortedKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Dictionary.OneToManySortedDictionary`3
+  commentId: T:Fantasy.DataStructure.Dictionary.OneToManySortedDictionary`3
+  href: Fantasy.DataStructure.Dictionary.OneToManySortedDictionary-3.html
+  name: OneToManySortedDictionary<TKey, TSortedKey, TValue>
+  nameWithType: OneToManySortedDictionary<TKey, TSortedKey, TValue>
+  fullName: Fantasy.DataStructure.Dictionary.OneToManySortedDictionary<TKey, TSortedKey, TValue>
+  nameWithType.vb: OneToManySortedDictionary(Of TKey, TSortedKey, TValue)
+  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManySortedDictionary(Of TKey, TSortedKey, TValue)
+  name.vb: OneToManySortedDictionary(Of TKey, TSortedKey, TValue)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Dictionary.OneToManySortedDictionary`3
+    name: OneToManySortedDictionary
+    href: Fantasy.DataStructure.Dictionary.OneToManySortedDictionary-3.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TSortedKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Dictionary.OneToManySortedDictionary`3
+    name: OneToManySortedDictionary
+    href: Fantasy.DataStructure.Dictionary.OneToManySortedDictionary-3.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TSortedKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Fantasy.DataStructure.Dictionary.ReuseDictionary`2
+  commentId: T:Fantasy.DataStructure.Dictionary.ReuseDictionary`2
+  parent: Fantasy.DataStructure.Dictionary
+  href: Fantasy.DataStructure.Dictionary.ReuseDictionary-2.html
+  name: ReuseDictionary<TM, TN>
+  nameWithType: ReuseDictionary<TM, TN>
+  fullName: Fantasy.DataStructure.Dictionary.ReuseDictionary<TM, TN>
+  nameWithType.vb: ReuseDictionary(Of TM, TN)
+  fullName.vb: Fantasy.DataStructure.Dictionary.ReuseDictionary(Of TM, TN)
+  name.vb: ReuseDictionary(Of TM, TN)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Dictionary.ReuseDictionary`2
+    name: ReuseDictionary
+    href: Fantasy.DataStructure.Dictionary.ReuseDictionary-2.html
+  - name: <
+  - name: TM
+  - name: ','
+  - name: " "
+  - name: TN
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Dictionary.ReuseDictionary`2
+    name: ReuseDictionary
+    href: Fantasy.DataStructure.Dictionary.ReuseDictionary-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TM
+  - name: ','
+  - name: " "
+  - name: TN
+  - name: )
+- uid: Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2
+  commentId: T:Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2
+  parent: Fantasy.DataStructure.Dictionary
+  href: Fantasy.DataStructure.Dictionary.SortedDictionaryPool-2.html
+  name: SortedDictionaryPool<TM, TN>
+  nameWithType: SortedDictionaryPool<TM, TN>
+  fullName: Fantasy.DataStructure.Dictionary.SortedDictionaryPool<TM, TN>
+  nameWithType.vb: SortedDictionaryPool(Of TM, TN)
+  fullName.vb: Fantasy.DataStructure.Dictionary.SortedDictionaryPool(Of TM, TN)
+  name.vb: SortedDictionaryPool(Of TM, TN)
+  spec.csharp:
+  - uid: Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2
+    name: SortedDictionaryPool
+    href: Fantasy.DataStructure.Dictionary.SortedDictionaryPool-2.html
+  - name: <
+  - name: TM
+  - name: ','
+  - name: " "
+  - name: TN
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2
+    name: SortedDictionaryPool
+    href: Fantasy.DataStructure.Dictionary.SortedDictionaryPool-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TM
+  - name: ','
+  - name: " "
+  - name: TN
+  - name: )
+- uid: Fantasy.DataStructure.Dictionary
+  commentId: N:Fantasy.DataStructure.Dictionary
+  href: Fantasy.html
+  name: Fantasy.DataStructure.Dictionary
+  nameWithType: Fantasy.DataStructure.Dictionary
+  fullName: Fantasy.DataStructure.Dictionary
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.Dictionary
+    name: Dictionary
+    href: Fantasy.DataStructure.Dictionary.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.DataStructure
+    name: DataStructure
+    href: Fantasy.DataStructure.html
+  - name: .
+  - uid: Fantasy.DataStructure.Dictionary
+    name: Dictionary
+    href: Fantasy.DataStructure.Dictionary.html

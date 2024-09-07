@@ -1,0 +1,1294 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Helper.RandomHelper
+  commentId: T:Fantasy.Helper.RandomHelper
+  id: RandomHelper
+  parent: Fantasy.Helper
+  children:
+  - Fantasy.Helper.RandomHelper.BreakRank``1(System.Collections.Generic.List{``0})
+  - Fantasy.Helper.RandomHelper.NextFloat(System.Boolean)
+  - Fantasy.Helper.RandomHelper.NextFloat(System.Single)
+  - Fantasy.Helper.RandomHelper.NextFloat(System.Single,System.Single)
+  - Fantasy.Helper.RandomHelper.NextVector2(System.Single,System.Single,System.Single,System.Single)
+  - Fantasy.Helper.RandomHelper.RandFloat01
+  - Fantasy.Helper.RandomHelper.RandInt64
+  - Fantasy.Helper.RandomHelper.RandUInt16
+  - Fantasy.Helper.RandomHelper.RandUInt32
+  - Fantasy.Helper.RandomHelper.RandUInt64
+  - Fantasy.Helper.RandomHelper.RandomArray``1(System.Collections.Generic.List{``0})
+  - Fantasy.Helper.RandomHelper.RandomArray``1(``0[])
+  - Fantasy.Helper.RandomHelper.RandomBool
+  - Fantasy.Helper.RandomHelper.RandomByFixedProbability(System.Int32[])
+  - Fantasy.Helper.RandomHelper.RandomByWeight(System.Int32[])
+  - Fantasy.Helper.RandomHelper.RandomNumber(System.Int32,System.Int32)
+  - Fantasy.Helper.RandomHelper.RandomNumberCode(System.Int32)
+  langs:
+  - csharp
+  - vb
+  name: RandomHelper
+  nameWithType: RandomHelper
+  fullName: Fantasy.Helper.RandomHelper
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandomHelper
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 10
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 随机数操作助手类，提供各种随机数生成和操作方法。
+  example: []
+  syntax:
+    content: public static class RandomHelper
+    content.vb: Public Module RandomHelper
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Fantasy.Helper.RandomHelper.RandUInt64
+  commentId: M:Fantasy.Helper.RandomHelper.RandUInt64
+  id: RandUInt64
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandUInt64()
+  nameWithType: RandomHelper.RandUInt64()
+  fullName: Fantasy.Helper.RandomHelper.RandUInt64()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandUInt64
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 20
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 生成一个随机的无符号 64 位整数。
+  example: []
+  syntax:
+    content: public static ulong RandUInt64()
+    return:
+      type: System.UInt64
+      description: 无符号 64 位整数。
+    content.vb: Public Shared Function RandUInt64() As ULong
+  overload: Fantasy.Helper.RandomHelper.RandUInt64*
+- uid: Fantasy.Helper.RandomHelper.RandInt64
+  commentId: M:Fantasy.Helper.RandomHelper.RandInt64
+  id: RandInt64
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandInt64()
+  nameWithType: RandomHelper.RandInt64()
+  fullName: Fantasy.Helper.RandomHelper.RandInt64()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandInt64
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 30
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 生成一个随机的 64 位整数。
+  example: []
+  syntax:
+    content: public static long RandInt64()
+    return:
+      type: System.Int64
+      description: 64 位整数。
+    content.vb: Public Shared Function RandInt64() As Long
+  overload: Fantasy.Helper.RandomHelper.RandInt64*
+- uid: Fantasy.Helper.RandomHelper.RandUInt32
+  commentId: M:Fantasy.Helper.RandomHelper.RandUInt32
+  id: RandUInt32
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandUInt32()
+  nameWithType: RandomHelper.RandUInt32()
+  fullName: Fantasy.Helper.RandomHelper.RandUInt32()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandUInt32
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 40
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 生成一个随机的无符号 32 位整数。
+  example: []
+  syntax:
+    content: public static uint RandUInt32()
+    return:
+      type: System.UInt32
+      description: 无符号 32 位整数。
+    content.vb: Public Shared Function RandUInt32() As UInteger
+  overload: Fantasy.Helper.RandomHelper.RandUInt32*
+- uid: Fantasy.Helper.RandomHelper.RandUInt16
+  commentId: M:Fantasy.Helper.RandomHelper.RandUInt16
+  id: RandUInt16
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandUInt16()
+  nameWithType: RandomHelper.RandUInt16()
+  fullName: Fantasy.Helper.RandomHelper.RandUInt16()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandUInt16
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 49
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 生成一个随机的无符号 16 位整数。
+  example: []
+  syntax:
+    content: public static ushort RandUInt16()
+    return:
+      type: System.UInt16
+      description: 无符号 16 位整数。
+    content.vb: Public Shared Function RandUInt16() As UShort
+  overload: Fantasy.Helper.RandomHelper.RandUInt16*
+- uid: Fantasy.Helper.RandomHelper.RandomNumber(System.Int32,System.Int32)
+  commentId: M:Fantasy.Helper.RandomHelper.RandomNumber(System.Int32,System.Int32)
+  id: RandomNumber(System.Int32,System.Int32)
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandomNumber(int, int)
+  nameWithType: RandomHelper.RandomNumber(int, int)
+  fullName: Fantasy.Helper.RandomHelper.RandomNumber(int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandomNumber
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 61
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 在指定范围内生成一个随机整数（包含下限，不包含上限）。
+  example: []
+  syntax:
+    content: public static int RandomNumber(int lower, int upper)
+    parameters:
+    - id: lower
+      type: System.Int32
+      description: 下限。
+    - id: upper
+      type: System.Int32
+      description: 上限。
+    return:
+      type: System.Int32
+      description: 生成的随机整数。
+    content.vb: Public Shared Function RandomNumber(lower As Integer, upper As Integer) As Integer
+  overload: Fantasy.Helper.RandomHelper.RandomNumber*
+  nameWithType.vb: RandomHelper.RandomNumber(Integer, Integer)
+  fullName.vb: Fantasy.Helper.RandomHelper.RandomNumber(Integer, Integer)
+  name.vb: RandomNumber(Integer, Integer)
+- uid: Fantasy.Helper.RandomHelper.RandomBool
+  commentId: M:Fantasy.Helper.RandomHelper.RandomBool
+  id: RandomBool
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandomBool()
+  nameWithType: RandomHelper.RandomBool()
+  fullName: Fantasy.Helper.RandomHelper.RandomBool()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandomBool
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 70
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 生成一个随机的布尔值。
+  example: []
+  syntax:
+    content: public static bool RandomBool()
+    return:
+      type: System.Boolean
+      description: 随机的布尔值。
+    content.vb: Public Shared Function RandomBool() As Boolean
+  overload: Fantasy.Helper.RandomHelper.RandomBool*
+- uid: Fantasy.Helper.RandomHelper.RandomArray``1(``0[])
+  commentId: M:Fantasy.Helper.RandomHelper.RandomArray``1(``0[])
+  id: RandomArray``1(``0[])
+  isExtensionMethod: true
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandomArray<T>(T[])
+  nameWithType: RandomHelper.RandomArray<T>(T[])
+  fullName: Fantasy.Helper.RandomHelper.RandomArray<T>(T[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandomArray
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 81
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 从数组中随机选择一个元素。
+  example: []
+  syntax:
+    content: public static T RandomArray<T>(this T[] array)
+    parameters:
+    - id: array
+      type: '{T}[]'
+      description: 要选择的数组。
+    typeParameters:
+    - id: T
+      description: 数组元素的类型。
+    return:
+      type: '{T}'
+      description: 随机选择的数组元素。
+    content.vb: Public Shared Function RandomArray(Of T)(array As T()) As T
+  overload: Fantasy.Helper.RandomHelper.RandomArray*
+  nameWithType.vb: RandomHelper.RandomArray(Of T)(T())
+  fullName.vb: Fantasy.Helper.RandomHelper.RandomArray(Of T)(T())
+  name.vb: RandomArray(Of T)(T())
+- uid: Fantasy.Helper.RandomHelper.RandomArray``1(System.Collections.Generic.List{``0})
+  commentId: M:Fantasy.Helper.RandomHelper.RandomArray``1(System.Collections.Generic.List{``0})
+  id: RandomArray``1(System.Collections.Generic.List{``0})
+  isExtensionMethod: true
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandomArray<T>(List<T>)
+  nameWithType: RandomHelper.RandomArray<T>(List<T>)
+  fullName: Fantasy.Helper.RandomHelper.RandomArray<T>(System.Collections.Generic.List<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandomArray
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 92
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 从列表中随机选择一个元素。
+  example: []
+  syntax:
+    content: public static T RandomArray<T>(this List<T> array)
+    parameters:
+    - id: array
+      type: System.Collections.Generic.List{{T}}
+      description: 要选择的列表。
+    typeParameters:
+    - id: T
+      description: 列表元素的类型。
+    return:
+      type: '{T}'
+      description: 随机选择的列表元素。
+    content.vb: Public Shared Function RandomArray(Of T)(array As List(Of T)) As T
+  overload: Fantasy.Helper.RandomHelper.RandomArray*
+  nameWithType.vb: RandomHelper.RandomArray(Of T)(List(Of T))
+  fullName.vb: Fantasy.Helper.RandomHelper.RandomArray(Of T)(System.Collections.Generic.List(Of T))
+  name.vb: RandomArray(Of T)(List(Of T))
+- uid: Fantasy.Helper.RandomHelper.BreakRank``1(System.Collections.Generic.List{``0})
+  commentId: M:Fantasy.Helper.RandomHelper.BreakRank``1(System.Collections.Generic.List{``0})
+  id: BreakRank``1(System.Collections.Generic.List{``0})
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: BreakRank<T>(List<T>)
+  nameWithType: RandomHelper.BreakRank<T>(List<T>)
+  fullName: Fantasy.Helper.RandomHelper.BreakRank<T>(System.Collections.Generic.List<T>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: BreakRank
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 102
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 打乱列表中元素的顺序。
+  example: []
+  syntax:
+    content: public static void BreakRank<T>(List<T> arr)
+    parameters:
+    - id: arr
+      type: System.Collections.Generic.List{{T}}
+      description: 要打乱顺序的列表。
+    typeParameters:
+    - id: T
+      description: 列表元素的类型。
+    content.vb: Public Shared Sub BreakRank(Of T)(arr As List(Of T))
+  overload: Fantasy.Helper.RandomHelper.BreakRank*
+  nameWithType.vb: RandomHelper.BreakRank(Of T)(List(Of T))
+  fullName.vb: Fantasy.Helper.RandomHelper.BreakRank(Of T)(System.Collections.Generic.List(Of T))
+  name.vb: BreakRank(Of T)(List(Of T))
+- uid: Fantasy.Helper.RandomHelper.RandFloat01
+  commentId: M:Fantasy.Helper.RandomHelper.RandFloat01
+  id: RandFloat01
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandFloat01()
+  nameWithType: RandomHelper.RandFloat01()
+  fullName: Fantasy.Helper.RandomHelper.RandFloat01()
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandFloat01
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 120
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 生成一个介于 0 和 1 之间的随机单精度浮点数。
+  example: []
+  syntax:
+    content: public static float RandFloat01()
+    return:
+      type: System.Single
+      description: 随机单精度浮点数。
+    content.vb: Public Shared Function RandFloat01() As Single
+  overload: Fantasy.Helper.RandomHelper.RandFloat01*
+- uid: Fantasy.Helper.RandomHelper.RandomByWeight(System.Int32[])
+  commentId: M:Fantasy.Helper.RandomHelper.RandomByWeight(System.Int32[])
+  id: RandomByWeight(System.Int32[])
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandomByWeight(int[])
+  nameWithType: RandomHelper.RandomByWeight(int[])
+  fullName: Fantasy.Helper.RandomHelper.RandomByWeight(int[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandomByWeight
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 138
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 根据权重随机选择一个索引。
+  example: []
+  syntax:
+    content: public static int RandomByWeight(int[] weights)
+    parameters:
+    - id: weights
+      type: System.Int32[]
+      description: 权重数组，每个元素表示相应索引的权重。
+    return:
+      type: System.Int32
+      description: 随机选择的索引值。
+    content.vb: Public Shared Function RandomByWeight(weights As Integer()) As Integer
+  overload: Fantasy.Helper.RandomHelper.RandomByWeight*
+  nameWithType.vb: RandomHelper.RandomByWeight(Integer())
+  fullName.vb: Fantasy.Helper.RandomHelper.RandomByWeight(Integer())
+  name.vb: RandomByWeight(Integer())
+- uid: Fantasy.Helper.RandomHelper.RandomByFixedProbability(System.Int32[])
+  commentId: M:Fantasy.Helper.RandomHelper.RandomByFixedProbability(System.Int32[])
+  id: RandomByFixedProbability(System.Int32[])
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandomByFixedProbability(int[])
+  nameWithType: RandomHelper.RandomByFixedProbability(int[])
+  fullName: Fantasy.Helper.RandomHelper.RandomByFixedProbability(int[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandomByFixedProbability
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 160
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 根据固定概率随机选择一个索引，即某个数值上限内随机多少次。
+  example: []
+  syntax:
+    content: public static int RandomByFixedProbability(int[] args)
+    parameters:
+    - id: args
+      type: System.Int32[]
+      description: 概率数组，每个元素表示相应索引的概率。
+    return:
+      type: System.Int32
+      description: 随机选择的索引值。
+    content.vb: Public Shared Function RandomByFixedProbability(args As Integer()) As Integer
+  overload: Fantasy.Helper.RandomHelper.RandomByFixedProbability*
+  nameWithType.vb: RandomHelper.RandomByFixedProbability(Integer())
+  fullName.vb: Fantasy.Helper.RandomHelper.RandomByFixedProbability(Integer())
+  name.vb: RandomByFixedProbability(Integer())
+- uid: Fantasy.Helper.RandomHelper.NextFloat(System.Boolean)
+  commentId: M:Fantasy.Helper.RandomHelper.NextFloat(System.Boolean)
+  id: NextFloat(System.Boolean)
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: NextFloat(bool)
+  nameWithType: RandomHelper.NextFloat(bool)
+  fullName: Fantasy.Helper.RandomHelper.NextFloat(bool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NextFloat
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 179
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 返回随机数。
+  example: []
+  syntax:
+    content: public static float NextFloat(bool containNegative = false)
+    parameters:
+    - id: containNegative
+      type: System.Boolean
+      description: 是否包含负数。
+    return:
+      type: System.Single
+      description: 返回一个随机的单精度浮点数。
+    content.vb: Public Shared Function NextFloat(containNegative As Boolean = False) As Single
+  overload: Fantasy.Helper.RandomHelper.NextFloat*
+  nameWithType.vb: RandomHelper.NextFloat(Boolean)
+  fullName.vb: Fantasy.Helper.RandomHelper.NextFloat(Boolean)
+  name.vb: NextFloat(Boolean)
+- uid: Fantasy.Helper.RandomHelper.NextFloat(System.Single)
+  commentId: M:Fantasy.Helper.RandomHelper.NextFloat(System.Single)
+  id: NextFloat(System.Single)
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: NextFloat(float)
+  nameWithType: RandomHelper.NextFloat(float)
+  fullName: Fantasy.Helper.RandomHelper.NextFloat(float)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NextFloat
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 208
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 返回一个小于所指定最大值的非负随机数。
+  example: []
+  syntax:
+    content: public static float NextFloat(float maxValue)
+    parameters:
+    - id: maxValue
+      type: System.Single
+      description: 要生成的随机数的上限（随机数不能取该上限值）。 maxValue 必须大于或等于零。
+    return:
+      type: System.Single
+      description: 大于等于零且小于 maxValue 的单精度浮点数，即：返回值的范围通常包括零但不包括 maxValue。 不过，如果 maxValue 等于零，则返回 maxValue。
+    content.vb: Public Shared Function NextFloat(maxValue As Single) As Single
+  overload: Fantasy.Helper.RandomHelper.NextFloat*
+  nameWithType.vb: RandomHelper.NextFloat(Single)
+  fullName.vb: Fantasy.Helper.RandomHelper.NextFloat(Single)
+  name.vb: NextFloat(Single)
+- uid: Fantasy.Helper.RandomHelper.NextFloat(System.Single,System.Single)
+  commentId: M:Fantasy.Helper.RandomHelper.NextFloat(System.Single,System.Single)
+  id: NextFloat(System.Single,System.Single)
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: NextFloat(float, float)
+  nameWithType: RandomHelper.NextFloat(float, float)
+  fullName: Fantasy.Helper.RandomHelper.NextFloat(float, float)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NextFloat
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 238
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 返回一个指定范围内的随机数。
+  example: []
+  syntax:
+    content: public static float NextFloat(float minValue, float maxValue)
+    parameters:
+    - id: minValue
+      type: System.Single
+      description: 返回的随机数的下界（随机数可取该下界值）。
+    - id: maxValue
+      type: System.Single
+      description: 返回的随机数的上界（随机数不能取该上界值）。 maxValue 必须大于或等于 minValue。
+    return:
+      type: System.Single
+      description: 一个大于等于 minValue 且小于 maxValue 的单精度浮点数，即：返回的值范围包括 minValue 但不包括 maxValue。 如果 minValue 等于 maxValue，则返回 minValue。
+    content.vb: Public Shared Function NextFloat(minValue As Single, maxValue As Single) As Single
+  overload: Fantasy.Helper.RandomHelper.NextFloat*
+  nameWithType.vb: RandomHelper.NextFloat(Single, Single)
+  fullName.vb: Fantasy.Helper.RandomHelper.NextFloat(Single, Single)
+  name.vb: NextFloat(Single, Single)
+- uid: Fantasy.Helper.RandomHelper.NextVector2(System.Single,System.Single,System.Single,System.Single)
+  commentId: M:Fantasy.Helper.RandomHelper.NextVector2(System.Single,System.Single,System.Single,System.Single)
+  id: NextVector2(System.Single,System.Single,System.Single,System.Single)
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: NextVector2(float, float, float, float)
+  nameWithType: RandomHelper.NextVector2(float, float, float, float)
+  fullName: Fantasy.Helper.RandomHelper.NextVector2(float, float, float, float)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: NextVector2
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 270
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 在指定的矩形区域内随机生成一个二维向量位置。
+  example: []
+  syntax:
+    content: public static Vector2 NextVector2(float minX, float maxX, float minY, float maxY)
+    parameters:
+    - id: minX
+      type: System.Single
+      description: X轴最小值。
+    - id: maxX
+      type: System.Single
+      description: X轴最大值。
+    - id: minY
+      type: System.Single
+      description: Y轴最小值。
+    - id: maxY
+      type: System.Single
+      description: Y轴最大值。
+    return:
+      type: System.Numerics.Vector2
+      description: 随机生成的二维向量位置。
+    content.vb: Public Shared Function NextVector2(minX As Single, maxX As Single, minY As Single, maxY As Single) As Vector2
+  overload: Fantasy.Helper.RandomHelper.NextVector2*
+  nameWithType.vb: RandomHelper.NextVector2(Single, Single, Single, Single)
+  fullName.vb: Fantasy.Helper.RandomHelper.NextVector2(Single, Single, Single, Single)
+  name.vb: NextVector2(Single, Single, Single, Single)
+- uid: Fantasy.Helper.RandomHelper.RandomNumberCode(System.Int32)
+  commentId: M:Fantasy.Helper.RandomHelper.RandomNumberCode(System.Int32)
+  id: RandomNumberCode(System.Int32)
+  parent: Fantasy.Helper.RandomHelper
+  langs:
+  - csharp
+  - vb
+  name: RandomNumberCode(int)
+  nameWithType: RandomHelper.RandomNumberCode(int)
+  fullName: Fantasy.Helper.RandomHelper.RandomNumberCode(int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: RandomNumberCode
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/RandomHelper.cs
+    startLine: 280
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Helper
+  summary: 生成指定长度的随机数字代码。
+  example: []
+  syntax:
+    content: public static string RandomNumberCode(int len = 6)
+    parameters:
+    - id: len
+      type: System.Int32
+      description: 数字代码的长度。
+    return:
+      type: System.String
+      description: 生成的随机数字代码。
+    content.vb: Public Shared Function RandomNumberCode(len As Integer = 6) As String
+  overload: Fantasy.Helper.RandomHelper.RandomNumberCode*
+  nameWithType.vb: RandomHelper.RandomNumberCode(Integer)
+  fullName.vb: Fantasy.Helper.RandomHelper.RandomNumberCode(Integer)
+  name.vb: RandomNumberCode(Integer)
+references:
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Helper.RandomHelper.RandUInt64*
+  commentId: Overload:Fantasy.Helper.RandomHelper.RandUInt64
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_RandUInt64
+  name: RandUInt64
+  nameWithType: RandomHelper.RandUInt64
+  fullName: Fantasy.Helper.RandomHelper.RandUInt64
+- uid: System.UInt64
+  commentId: T:System.UInt64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint64
+  name: ulong
+  nameWithType: ulong
+  fullName: ulong
+  nameWithType.vb: ULong
+  fullName.vb: ULong
+  name.vb: ULong
+- uid: Fantasy.Helper.RandomHelper.RandInt64*
+  commentId: Overload:Fantasy.Helper.RandomHelper.RandInt64
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_RandInt64
+  name: RandInt64
+  nameWithType: RandomHelper.RandInt64
+  fullName: Fantasy.Helper.RandomHelper.RandInt64
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Fantasy.Helper.RandomHelper.RandUInt32*
+  commentId: Overload:Fantasy.Helper.RandomHelper.RandUInt32
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_RandUInt32
+  name: RandUInt32
+  nameWithType: RandomHelper.RandUInt32
+  fullName: Fantasy.Helper.RandomHelper.RandUInt32
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: Fantasy.Helper.RandomHelper.RandUInt16*
+  commentId: Overload:Fantasy.Helper.RandomHelper.RandUInt16
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_RandUInt16
+  name: RandUInt16
+  nameWithType: RandomHelper.RandUInt16
+  fullName: Fantasy.Helper.RandomHelper.RandUInt16
+- uid: System.UInt16
+  commentId: T:System.UInt16
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint16
+  name: ushort
+  nameWithType: ushort
+  fullName: ushort
+  nameWithType.vb: UShort
+  fullName.vb: UShort
+  name.vb: UShort
+- uid: Fantasy.Helper.RandomHelper.RandomNumber*
+  commentId: Overload:Fantasy.Helper.RandomHelper.RandomNumber
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_RandomNumber_System_Int32_System_Int32_
+  name: RandomNumber
+  nameWithType: RandomHelper.RandomNumber
+  fullName: Fantasy.Helper.RandomHelper.RandomNumber
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Fantasy.Helper.RandomHelper.RandomBool*
+  commentId: Overload:Fantasy.Helper.RandomHelper.RandomBool
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_RandomBool
+  name: RandomBool
+  nameWithType: RandomHelper.RandomBool
+  fullName: Fantasy.Helper.RandomHelper.RandomBool
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Fantasy.Helper.RandomHelper.RandomArray*
+  commentId: Overload:Fantasy.Helper.RandomHelper.RandomArray
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_RandomArray__1___0___
+  name: RandomArray
+  nameWithType: RandomHelper.RandomArray
+  fullName: Fantasy.Helper.RandomHelper.RandomArray
+- uid: '{T}[]'
+  isExternal: true
+  name: T[]
+  nameWithType: T[]
+  fullName: T[]
+  nameWithType.vb: T()
+  fullName.vb: T()
+  name.vb: T()
+  spec.csharp:
+  - name: T
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - name: T
+  - name: (
+  - name: )
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.Collections.Generic.List{{T}}
+  commentId: T:System.Collections.Generic.List{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Fantasy.Helper.RandomHelper.BreakRank*
+  commentId: Overload:Fantasy.Helper.RandomHelper.BreakRank
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_BreakRank__1_System_Collections_Generic_List___0__
+  name: BreakRank
+  nameWithType: RandomHelper.BreakRank
+  fullName: Fantasy.Helper.RandomHelper.BreakRank
+- uid: Fantasy.Helper.RandomHelper.RandFloat01*
+  commentId: Overload:Fantasy.Helper.RandomHelper.RandFloat01
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_RandFloat01
+  name: RandFloat01
+  nameWithType: RandomHelper.RandFloat01
+  fullName: Fantasy.Helper.RandomHelper.RandFloat01
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: Fantasy.Helper.RandomHelper.RandomByWeight*
+  commentId: Overload:Fantasy.Helper.RandomHelper.RandomByWeight
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_RandomByWeight_System_Int32___
+  name: RandomByWeight
+  nameWithType: RandomHelper.RandomByWeight
+  fullName: Fantasy.Helper.RandomHelper.RandomByWeight
+- uid: System.Int32[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int[]
+  nameWithType: int[]
+  fullName: int[]
+  nameWithType.vb: Integer()
+  fullName.vb: Integer()
+  name.vb: Integer()
+  spec.csharp:
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: (
+  - name: )
+- uid: Fantasy.Helper.RandomHelper.RandomByFixedProbability*
+  commentId: Overload:Fantasy.Helper.RandomHelper.RandomByFixedProbability
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_RandomByFixedProbability_System_Int32___
+  name: RandomByFixedProbability
+  nameWithType: RandomHelper.RandomByFixedProbability
+  fullName: Fantasy.Helper.RandomHelper.RandomByFixedProbability
+- uid: Fantasy.Helper.RandomHelper.NextFloat*
+  commentId: Overload:Fantasy.Helper.RandomHelper.NextFloat
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_NextFloat_System_Boolean_
+  name: NextFloat
+  nameWithType: RandomHelper.NextFloat
+  fullName: Fantasy.Helper.RandomHelper.NextFloat
+- uid: Fantasy.Helper.RandomHelper.NextVector2*
+  commentId: Overload:Fantasy.Helper.RandomHelper.NextVector2
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_NextVector2_System_Single_System_Single_System_Single_System_Single_
+  name: NextVector2
+  nameWithType: RandomHelper.NextVector2
+  fullName: Fantasy.Helper.RandomHelper.NextVector2
+- uid: System.Numerics.Vector2
+  commentId: T:System.Numerics.Vector2
+  parent: System.Numerics
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.numerics.vector2
+  name: Vector2
+  nameWithType: Vector2
+  fullName: System.Numerics.Vector2
+- uid: System.Numerics
+  commentId: N:System.Numerics
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Numerics
+  nameWithType: System.Numerics
+  fullName: System.Numerics
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Numerics
+    name: Numerics
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.numerics
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Numerics
+    name: Numerics
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.numerics
+- uid: Fantasy.Helper.RandomHelper.RandomNumberCode*
+  commentId: Overload:Fantasy.Helper.RandomHelper.RandomNumberCode
+  href: Fantasy.Helper.RandomHelper.html#Fantasy_Helper_RandomHelper_RandomNumberCode_System_Int32_
+  name: RandomNumberCode
+  nameWithType: RandomHelper.RandomNumberCode
+  fullName: Fantasy.Helper.RandomHelper.RandomNumberCode
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
