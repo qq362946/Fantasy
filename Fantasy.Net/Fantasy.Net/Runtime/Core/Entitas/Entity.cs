@@ -174,7 +174,8 @@ namespace Fantasy.Entitas
         /// <returns>返回添加到实体上组件的实例</returns>
         public T AddComponent<T>(bool isPool = true) where T : Entity, new()
         {
-            var entity = Create<T>(Scene, Id, isPool, false);
+            var id = SupportedMultiEntityChecker<T>.IsSupported ? Scene.EntityIdFactory.Create : Id;
+            var entity = Create<T>(Scene, id, isPool, false);
             AddComponent(entity);
             Scene.EntityComponent.Awake(entity);
             Scene.EntityComponent.StartUpdate(entity);

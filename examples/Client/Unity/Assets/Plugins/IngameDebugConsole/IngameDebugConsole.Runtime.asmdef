@@ -1,6 +1,0 @@
-﻿{
-    "name": "IngameDebugConsole.Runtime",
-    "references": [
-        "Unity.InputSystem"
-    ]
-}

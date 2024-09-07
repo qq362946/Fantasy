@@ -1,10 +1,20 @@
 ﻿using Fantasy.Async;
 using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
 using Fantasy.Event;
 using MongoDB.Driver;
 
 namespace Fantasy;
 
+public class User : Entity, ISupportedMultiEntity
+{
+
+}
+
+public class UserManager : Entity
+{
+    
+}
 public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 {
     private static long _addressableSceneRunTimeId;
@@ -32,6 +42,11 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
+                var userManager = Entity.Create<UserManager>(scene, true, true);
+                var addComponent1 = userManager.AddComponent<User>();
+                var addComponent2 = userManager.AddComponent<User>();
+                var addComponent3 = userManager.AddComponent<User>();
+                var addComponent4 = userManager.AddComponent<User>();
                 // var tasks = new List<FTask>(2000);
                 // var session = scene.GetSession(_addressableSceneRunTimeId);
                 // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
