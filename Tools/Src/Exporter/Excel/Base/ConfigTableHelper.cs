@@ -1,4 +1,6 @@
 using Fantasy;
+using Fantasy.Serialize;
+
 #pragma warning disable CS8603 // Possible null reference return.
 
 namespace Fantasy;

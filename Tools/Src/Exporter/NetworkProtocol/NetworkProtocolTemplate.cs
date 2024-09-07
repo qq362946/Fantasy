@@ -9,6 +9,8 @@ public static class NetworkProtocolTemplate
                                             using System.Collections.Generic;
                                             using MongoDB.Bson.Serialization.Attributes;
                                             using Fantasy;
+                                            using Fantasy.Network.Interface;
+                                            using Fantasy.Serialize;
                                             // ReSharper disable InconsistentNaming
                                             // ReSharper disable RedundantUsingDirective
                                             // ReSharper disable RedundantOverriddenMember
@@ -25,6 +27,9 @@ public static class NetworkProtocolTemplate
                                             using ProtoBuf;
                                             using MemoryPack;
                                             using System.Collections.Generic;
+                                            using Fantasy;
+                                            using Fantasy.Network.Interface;
+                                            using Fantasy.Serialize;
                                             #pragma warning disable CS8618
                                             
                                             namespace Fantasy

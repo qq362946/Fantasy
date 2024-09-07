@@ -1,5 +1,7 @@
 using System.Text;
 using Exporter;
+using Fantasy.Helper;
+using Fantasy.Network;
 using ProtoBuf;
 using ProtoBuf.Meta;
 
@@ -312,6 +314,10 @@ public sealed class ProtocolExporter
                     messageStr.Append(string.IsNullOrWhiteSpace(parameter)
                         ? $"\tpublic partial class {className} : AMessage"
                         : $"\tpublic partial class {className} : AMessage, {parameter}");
+                    if (protocolMember == "ProtoMember")
+                    {
+                        messageStr.Append(", IProto");
+                    }
                     continue;
                 }
 

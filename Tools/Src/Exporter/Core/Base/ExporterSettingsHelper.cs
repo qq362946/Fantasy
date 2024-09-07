@@ -1,4 +1,5 @@
 using Fantasy;
+using Fantasy.Helper;
 using Microsoft.Extensions.Configuration;
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8632

@@ -10,6 +10,8 @@ public static class ExcelTemplate
                                              using System.Reflection;
                                              using System.Collections.Generic;
                                              using System.Collections.Concurrent;
+                                             using Fantasy.ConfigTable;
+                                             using Fantasy.Serialize;
                                              // ReSharper disable CollectionNeverUpdated.Global
                                              // ReSharper disable UnusedAutoPropertyAccessor.Global
                                              #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member

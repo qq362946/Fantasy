@@ -1,6 +1,7 @@
 using System.Reflection;
 using Fantasy;
 using Fantasy.Exporter;
+using Fantasy.Serialize;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using ProtoBuf;
