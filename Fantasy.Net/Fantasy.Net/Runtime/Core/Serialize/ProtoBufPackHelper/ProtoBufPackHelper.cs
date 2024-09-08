@@ -286,7 +286,7 @@ namespace Fantasy.Serialize
         /// <param name="type"></param>
         /// <param name="object"></param>
         /// <param name="buffer"></param>
-        public static void Serialize(Type type, object @object, MemoryStream buffer)
+        public static void Serialize(Type type, object @object, MemoryStreamBuffer buffer)
         {
             if (@object is ASerialize aSerialize)
             {

@@ -69,31 +69,17 @@ namespace Fantasy.PacketParser
                 return createInstance();
             }
 
-            switch (OpCodeIdStruct.OpCodeProtocolType)
+            if (SerializerManager.TryGetSerializer(OpCodeIdStruct.OpCodeProtocolType, out var serializer))
             {
-                case OpCodeProtocolType.ProtoBuf:
-                {
-                    obj = ProtoBufPackHelper.Deserialize(messageType, MemoryStream);
-                    break;
-                }
-                case OpCodeProtocolType.MemoryPack:
-                {
-                    obj = MemoryPackHelper.Deserialize(messageType, MemoryStream);
-                    break;
-                }
-                case OpCodeProtocolType.Bson:
-                {
-                    obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
-                    break;
-                }
-                default:
-                {
-                    MemoryStream.Seek(0, SeekOrigin.Begin);
-                    Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
-                    return null;
-                }
+                obj = serializer.Deserialize(messageType, MemoryStream);
             }
-
+            else
+            {
+                MemoryStream.Seek(0, SeekOrigin.Begin);
+                Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
+                return null;
+            }
+            
             MemoryStream.Seek(0, SeekOrigin.Begin);
             return obj;
         }
