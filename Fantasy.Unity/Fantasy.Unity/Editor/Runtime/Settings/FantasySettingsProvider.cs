@@ -50,7 +50,6 @@ namespace Fantasy
             {
                 _serializedObject!.Update();
                 
-                EditorGUILayout.PropertyField(_linkAssemblyDefinitions);
                 EditorGUILayout.HelpBox("默认包括Assembly-CSharp和Fantasy.Unity，所以不需要再次指定。", MessageType.Info);
                 if (GUILayout.Button("GenerateLinkXml"))
                 {
@@ -61,6 +60,7 @@ namespace Fantasy
                 EditorGUILayout.PropertyField(_autoCopyAssembly);
                 EditorGUILayout.PropertyField(_hotUpdatePath);
                 EditorGUILayout.PropertyField(_hotUpdateAssemblyDefinitions);
+                EditorGUILayout.PropertyField(_linkAssemblyDefinitions);
                 
                 if (EditorGUI.EndChangeCheck())
                 {
