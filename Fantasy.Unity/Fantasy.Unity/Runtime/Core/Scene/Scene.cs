@@ -250,9 +250,13 @@ namespace Fantasy
         }
         public Session Connect(string remoteAddress, NetworkProtocolType networkProtocolType, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000)
         {
+            Log.Debug("Connect 1");
             UnityNetwork?.Dispose();
+            Log.Debug("Connect 2");
             UnityNetwork = NetworkProtocolFactory.CreateClient(this, networkProtocolType, NetworkTarget.Outer);
+            Log.Debug("Connect 3");
             Session = UnityNetwork.Connect(remoteAddress, onConnectComplete, onConnectFail, onConnectDisconnect, isHttps, connectTimeout);
+            Log.Debug("Connect 4");
             return Session;
         }
 #endif
@@ -479,7 +483,13 @@ namespace Fantasy
         #region InnerSession
 
 #if FANTASY_NET
-        internal Session GetSession(long runTimeId)
+        /// <summary>
+        /// 根据runTimeId获得Session
+        /// </summary>
+        /// <param name="runTimeId"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public Session GetSession(long runTimeId)
         {
             var sceneId = RuntimeIdFactory.GetSceneId(ref runTimeId);
 
@@ -493,13 +503,13 @@ namespace Fantasy
                 _processSessionInfos.Remove(sceneId);
             }
 
-            if (Process.IsInAppliaction(ref sceneId))
-            {
-                // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
-                var processSession = Session.CreateInnerSession(Scene);
-                _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
-                return processSession;
-            }
+            // if (Process.IsInAppliaction(ref sceneId))
+            // {
+            //     // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
+            //     var processSession = Session.CreateInnerSession(Scene);
+            //     _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
+            //     return processSession;
+            // }
 
             if (!SceneConfigData.Instance.TryGet(sceneId, out var sceneConfig))
             {

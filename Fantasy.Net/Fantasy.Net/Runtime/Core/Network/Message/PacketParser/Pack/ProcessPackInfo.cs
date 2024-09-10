@@ -19,9 +19,7 @@ namespace Fantasy.PacketParser
         private int _disposeCount;
         public Type MessageType { get; private set; }
         private static readonly ConcurrentQueue<ProcessPackInfo> Caches = new ConcurrentQueue<ProcessPackInfo>();
-
-        private readonly ConcurrentDictionary<Type, Func<object>> _createInstances =
-            new ConcurrentDictionary<Type, Func<object>>();
+        private readonly ConcurrentDictionary<Type, Func<object>> _createInstances = new ConcurrentDictionary<Type, Func<object>>();
 
         public override void Dispose()
         {
@@ -42,42 +40,34 @@ namespace Fantasy.PacketParser
             Caches.Enqueue(this);
         }
 
-        public static unsafe ProcessPackInfo Create<T>(Scene scene, T message, int disposeCount, uint rpcId = 0,
-            long routeId = 0) where T : IRouteMessage
+        public static unsafe ProcessPackInfo Create<T>(Scene scene, T message, int disposeCount, uint rpcId = 0, long routeId = 0) where T : IRouteMessage
         {
             if (!Caches.TryDequeue(out var packInfo))
             {
                 packInfo = new ProcessPackInfo();
             }
 
+            var type = typeof(T);
+            var memoryStreamLength = 0;
             packInfo._disposeCount = disposeCount;
-            packInfo.MessageType = typeof(T);
+            packInfo.MessageType = type;
             packInfo.IsDisposed = false;
             var memoryStream = new MemoryStreamBuffer();
             OpCodeIdStruct opCodeIdStruct = message.OpCode();
             memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
-            switch (opCodeIdStruct.OpCodeProtocolType)
+            if (SerializerManager.TryGetSerializer(opCodeIdStruct.OpCodeProtocolType, out var serializer))
             {
-                case OpCodeProtocolType.Bson:
-                {
-                    BsonPackHelper.Serialize<T>(message, memoryStream);
-                    break;
-                }
-                case OpCodeProtocolType.MemoryPack:
-                {
-                    ProtoBufPackHelper.Serialize<T>(message, memoryStream);
-                    break;
-                }
-                case OpCodeProtocolType.ProtoBuf:
-                {
-                    MemoryPackHelper.Serialize<T>(message, memoryStream);
-                    break;
-                }
+                serializer.Serialize(type, message, memoryStream);
+                memoryStreamLength = (int)memoryStream.Position;
+            }
+            else
+            {
+                Log.Error($"type:{type} Does not support processing protocol");
             }
 
             var opCode = scene.MessageDispatcherComponent.GetOpCode(packInfo.MessageType);
-            var packetBodyCount = (int)(memoryStream.Position - Packet.InnerPacketHeadLength);
+            var packetBodyCount = memoryStreamLength - Packet.InnerPacketHeadLength;
 
             if (packetBodyCount == 0)
             {
@@ -153,33 +143,16 @@ namespace Fantasy.PacketParser
                 return createInstance();
             }
 
-            switch (OpCodeIdStruct.OpCodeProtocolType)
+            if (SerializerManager.TryGetSerializer(OpCodeIdStruct.OpCodeProtocolType, out var serializer))
             {
-                case OpCodeProtocolType.ProtoBuf:
-                {
-                    obj = ProtoBufPackHelper.Deserialize(messageType, MemoryStream);
-                    break;
-                }
-                case OpCodeProtocolType.MemoryPack:
-                {
-                    obj = MemoryPackHelper.Deserialize(messageType, MemoryStream);
-                    break;
-                }
-                case OpCodeProtocolType.Bson:
-                {
-                    obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
-                    break;
-                }
-                default:
-                {
-                    MemoryStream.Seek(0, SeekOrigin.Begin);
-                    Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
-                    return null;
-                }
+                obj = serializer.Deserialize(messageType, MemoryStream);
+                MemoryStream.Seek(0, SeekOrigin.Begin);
+                return obj;
             }
-
+            
             MemoryStream.Seek(0, SeekOrigin.Begin);
-            return obj;
+            Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
+            return null;
         }
     }
 }

@@ -47,7 +47,7 @@ namespace Fantasy.Async
 
     internal sealed class OnCoroutineLockTimeout : EventSystem<CoroutineLockTimeout>
     {
-        public override void Handler(CoroutineLockTimeout self)
+        protected override void Handler(CoroutineLockTimeout self)
         {
             var selfWaitCoroutineLock = self.WaitCoroutineLock;
             

@@ -20,7 +20,7 @@ namespace Fantasy.Scheduler
         /// </summary>
         /// <param name="self"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Handler(NetworkMessageUpdate self)
+        protected override void Handler(NetworkMessageUpdate self)
         {
             var timeNow = TimeHelper.Now;
             var selfNetworkMessagingComponent = self.NetworkMessagingComponent;

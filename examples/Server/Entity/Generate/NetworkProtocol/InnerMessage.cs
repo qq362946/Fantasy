@@ -1,5 +1,5 @@
 using ProtoBuf;
-using MemoryPack;
+
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using Fantasy;
@@ -17,8 +17,8 @@ using Fantasy.Serialize;
 
 namespace Fantasy
 {	
-	[MemoryPackable]
-	public partial class G2A_TestRequest : AMessage, IRouteRequest
+	[ProtoContract]
+	public partial class G2A_TestRequest : AMessage, IRouteRequest, IProto
 	{
 		public static G2A_TestRequest Create(Scene scene)
 		{
@@ -30,12 +30,12 @@ namespace Fantasy
 			Scene.MessagePoolComponent.Return<G2A_TestRequest>(this);
 #endif
 		}
-		[MemoryPackIgnore]
+		[ProtoIgnore]
 		public G2A_TestResponse ResponseType { get; set; }
 		public uint OpCode() { return InnerOpcode.G2A_TestRequest; }
 	}
-	[MemoryPackable]
-	public partial class G2A_TestResponse : AMessage, IRouteResponse
+	[ProtoContract]
+	public partial class G2A_TestResponse : AMessage, IRouteResponse, IProto
 	{
 		public static G2A_TestResponse Create(Scene scene)
 		{
@@ -49,7 +49,7 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.G2A_TestResponse; }
-		[MemoryPackOrder(0)]
+		[ProtoMember(1)]
 		public uint ErrorCode { get; set; }
 	}
 	[ProtoContract]

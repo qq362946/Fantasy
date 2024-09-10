@@ -12,49 +12,32 @@ namespace Fantasy.PacketParser
     /// </summary>
     public static class OuterBufferPacketParserHelper
     {
-        private static readonly byte[] StaticBodyBuffer = new byte[sizeof(int)];
-        private static readonly byte[] StaticRpcIdBuffer = new byte[sizeof(uint)];
-        private static readonly byte[] StaticOpCodeBuffer = new byte[sizeof(uint)];
-        private static readonly byte[] StaticPackRouteIdBuffer = new byte[sizeof(long)];
-
         /// <summary>
         /// 打包一个网络消息
         /// </summary>
         /// <param name="scene">scene</param>
         /// <param name="rpcId">如果是RPC消息需要传递一个rpcId</param>
         /// <param name="message">打包的网络消息</param>
+        /// <param name="memoryStreamLength">序列化后流的长度</param>
         /// <returns>打包完成会返回一个MemoryStreamBuffer</returns>
         /// <exception cref="Exception"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static MemoryStreamBuffer Pack(Scene scene, uint rpcId, IMessage message)
+        public static unsafe MemoryStreamBuffer Pack(Scene scene, uint rpcId, IMessage message, out int memoryStreamLength)
         {
-            var memoryStreamLength = 0;
+            memoryStreamLength = 0;
             var messageType = message.GetType();
             var memoryStream = new MemoryStreamBuffer();
             OpCodeIdStruct opCodeIdStruct = message.OpCode();
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
-            MemoryPackHelper.Serialize(messageType, message, memoryStream);
 
-            switch (opCodeIdStruct.OpCodeProtocolType)
+            if (SerializerManager.TryGetSerializer(opCodeIdStruct.OpCodeProtocolType, out var serializer))
             {
-                case OpCodeProtocolType.ProtoBuf:
-                {
-                    ProtoBufPackHelper.Serialize(messageType, message, memoryStream);
-                    memoryStreamLength = (int)memoryStream.Position;
-                    break;
-                }
-                case OpCodeProtocolType.MemoryPack:
-                {
-                    MemoryPackHelper.Serialize(messageType, message, memoryStream);
-                    memoryStreamLength = (int)memoryStream.Length;
-                    break;
-                }
-                case OpCodeProtocolType.Bson:
-                {
-                    BsonPackHelper.Serialize(messageType, message, memoryStream);
-                    memoryStreamLength = (int)memoryStream.Length;
-                    break;
-                }
+                serializer.Serialize(messageType, message, memoryStream);
+                memoryStreamLength = (int)memoryStream.Position;
+            }
+            else
+            {
+                Log.Error($"type:{messageType} Does not support processing protocol");
             }
 
             var opCode = scene.MessageDispatcherComponent.GetOpCode(messageType);
@@ -72,16 +55,14 @@ namespace Fantasy.PacketParser
                 // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
-
-            rpcId.GetBytes(StaticRpcIdBuffer);
-            opCode.GetBytes(StaticOpCodeBuffer);
-            packetBodyCount.GetBytes(StaticBodyBuffer);
-            memoryStream.Seek(0, SeekOrigin.Begin);
-            memoryStream.Write(StaticBodyBuffer);
-            memoryStream.Write(StaticOpCodeBuffer);
-            memoryStream.Write(StaticRpcIdBuffer);
-            memoryStream.Write(StaticPackRouteIdBuffer);
-            memoryStream.Seek(0, SeekOrigin.Begin);
+            
+            fixed (byte* bufferPtr = memoryStream.GetBuffer())
+            {
+                *(int*)bufferPtr = packetBodyCount;
+                *(uint*)(bufferPtr + Packet.PacketLength) = opCode;
+                *(uint*)(bufferPtr + Packet.OuterPacketRpcIdLocation) = rpcId;
+            }
+            
             return memoryStream;
         }
     }

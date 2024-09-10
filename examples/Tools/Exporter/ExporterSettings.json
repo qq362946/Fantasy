@@ -55,6 +55,10 @@
         "ClientCustomExportDirectory": {
             "Value": "../../Client/Unity/Assets/Scripts/Hotfix/Generate/CustomExport",
             "Comment": "Excel在客户端端生成自定义代码的文件夹位置"
+        },
+        "Serializes": {
+            "Value": [],
+            "Comment": "自定义序列化器"
         }
     }
 }

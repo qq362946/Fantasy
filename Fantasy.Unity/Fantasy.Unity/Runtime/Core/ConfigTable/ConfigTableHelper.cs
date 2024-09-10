@@ -34,10 +34,10 @@ namespace Fantasy.ConfigTable
                     {
                         return (T)aProto;
                     }
-
+                   
                     var configFile = GetConfigPath(dataConfig);
                     var bytes = File.ReadAllBytes(configFile);
-                    var data = ProtoBufPackHelper.Deserialize<T>(bytes);
+                    var data = SerializerManager.GetSerializer(FantasySerializerType.ProtoBuf).Deserialize<T>(bytes);
                     ConfigDic[dataConfig] = data;
                     return data;
                 }

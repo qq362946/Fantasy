@@ -5,9 +5,10 @@ using System.Runtime.Serialization;
 using Fantasy.Entitas.Interface;
 using Fantasy.Pool;
 using Fantasy.Serialize;
-using MemoryPack;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
+using ProtoBuf;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable MergeIntoPattern
 // ReSharper disable SuspiciousTypeConversion.Global
@@ -37,7 +38,6 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [MemoryPackIgnore]
         public bool IsPool { get; set; }
         /// <summary>
         /// 实体的Id
@@ -52,7 +52,7 @@ namespace Fantasy.Entitas
         /// </summary>
         [BsonIgnore]
         [IgnoreDataMember]
-        [MemoryPackIgnore]
+        [ProtoIgnore]
         public long RunTimeId { get; protected set; }
         /// <summary>
         /// 当前实体是否已经被销毁
@@ -60,7 +60,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [MemoryPackIgnore]
+        [ProtoIgnore]
         public bool IsDisposed => RunTimeId == 0;
         /// <summary>
         /// 当前实体所归属的Scene
@@ -68,7 +68,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [MemoryPackIgnore]
+        [ProtoIgnore]
         public Scene Scene { get; protected set; }
         /// <summary>
         /// 实体的父实体
@@ -76,7 +76,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [MemoryPackIgnore]
+        [ProtoIgnore]
         public Entity Parent { get; protected set; }
         /// <summary>
         /// 实体的真实Type
@@ -84,14 +84,14 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [MemoryPackIgnore]
+        [ProtoIgnore]
         public Type Type { get; protected set; }
 #if FANTASY_NET
         [BsonElement("t")] [BsonIgnoreIfNull] private EntityList<Entity> _treeDb;
         [BsonElement("m")] [BsonIgnoreIfNull] private EntityList<Entity> _multiDb;
 #endif
-        [BsonIgnore] [IgnoreDataMember] [MemoryPackIgnore] private EntitySortedDictionary<long, Entity> _tree;
-        [BsonIgnore] [IgnoreDataMember] [MemoryPackIgnore] private EntitySortedDictionary<long, Entity> _multi;
+        [BsonIgnore] [IgnoreDataMember] [ProtoIgnore] private EntitySortedDictionary<long, Entity> _tree;
+        [BsonIgnore] [IgnoreDataMember] [ProtoIgnore] private EntitySortedDictionary<long, Entity> _multi;
         
         /// <summary>
         /// 获得父Entity
@@ -723,7 +723,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [MemoryPackIgnore]
+        [ProtoIgnore]
         public IEnumerable<Entity> ForEachSingleCollection
         {
             get
@@ -745,7 +745,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [MemoryPackIgnore]
+        [ProtoIgnore]
         public IEnumerable<Entity> ForEachTransfer
         {
             get
@@ -782,7 +782,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [MemoryPackIgnore]
+        [ProtoIgnore]
         public IEnumerable<Entity> ForEachMultiEntity
         {
             get
@@ -804,7 +804,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [MemoryPackIgnore]
+        [ProtoIgnore]
         public IEnumerable<Entity> ForEachEntity
         {
             get
@@ -820,27 +820,6 @@ namespace Fantasy.Entitas
                 }
             }
         }
-        #endregion
-
-        #region Clone
-
-        /// <summary>
-        /// 克隆一个实体
-        /// </summary>
-        /// <returns></returns>
-        public Entity Clone()
-        {
-#if FANTASY_NET
-            var entity = BsonPackHelper.Clone(this);
-            entity.Deserialize(Scene, true);
-            return entity;
-#elif FANTASY_UNITY
-            var entity = MemoryPackHelper.Clone(this);
-            entity.Deserialize(Scene, true);
-            return entity;
-#endif
-        }
-
         #endregion
 
         #region Dispose
