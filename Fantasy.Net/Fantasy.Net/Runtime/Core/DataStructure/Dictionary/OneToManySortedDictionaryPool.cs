@@ -14,10 +14,7 @@ namespace Fantasy.DataStructure.Dictionary
     /// <typeparam name="TValue">内部字典中的值类型。</typeparam>
     public class OneToManySortedDictionaryPool<TKey, TSortedKey, TValue> : OneToManySortedDictionary<TKey, TSortedKey, TValue>, IDisposable, IPool where TKey : notnull where TSortedKey : notnull
     {
-        /// <summary>
-        /// 是否是池
-        /// </summary>
-        public bool IsPool { get; set; }
+        private bool _isPool;
         private bool _isDispose;
 
         /// <summary>
@@ -32,7 +29,7 @@ namespace Fantasy.DataStructure.Dictionary
             var a = MultiThreadPool.Rent<OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>>();
 #endif
             a._isDispose = false;
-            a.IsPool = true;
+            a._isPool = true;
             return a;
         }
 
@@ -53,6 +50,24 @@ namespace Fantasy.DataStructure.Dictionary
 #else
             MultiThreadPool.Return(this);
 #endif
+        }
+
+        /// <summary>
+        /// 获取一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <returns></returns>
+        public bool IsPool()
+        {
+            return _isPool;
+        }
+
+        /// <summary>
+        /// 设置一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <param name="isPool"></param>
+        public void SetIsPool(bool isPool)
+        {
+            _isPool = isPool;
         }
     }
 

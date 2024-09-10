@@ -1,6 +1,7 @@
 #if FANTASY_NET && FANTASY_KCPUNSAFE
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using Fantasy.Helper;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser;
@@ -18,28 +19,15 @@ namespace Fantasy.Network.KCP
     /// </summary>
     public class KCPServerNetworkChannel : ANetworkServerChannel
     {
-        private uint _channelId;
         private bool _isInnerDispose;
         private readonly int _maxSndWnd;
         private KCPServerNetwork _kcpServerNetwork;
         private readonly BufferPacketParser _packetParser;
-        private readonly byte[] _channelIdBytes = new byte[sizeof(uint)];
         private readonly byte[] _receiveBuffer = new byte[Packet.PacketBodyMaxLength + 20];
-
         public Kcp Kcp { get; private set; }
+        public uint ChannelId { get; private set; }
 
-        public uint ChannelId
-        {
-            get => _channelId;
-            private set
-            {
-                _channelId = value;
-                _channelId.GetBytes(_channelIdBytes);
-            }
-        }
-
-        public KCPServerNetworkChannel(KCPServerNetwork network, uint channelId, IPEndPoint ipEndPoint) : base(network,
-            channelId, ipEndPoint)
+        public KCPServerNetworkChannel(KCPServerNetwork network, uint channelId, IPEndPoint ipEndPoint) : base(network, channelId, ipEndPoint)
         {
             _kcpServerNetwork = network;
             ChannelId = channelId;
@@ -132,7 +120,7 @@ namespace Fantasy.Network.KCP
             }
 
             var buffer = _packetParser.Pack(ref rpcId, ref routeId, memoryStream, message);
-            Kcp.Send(buffer.GetBuffer(), 0, (int)buffer.Length);
+            Kcp.Send(buffer.GetBuffer(), 0, (int)buffer.Position);
             _kcpServerNetwork.ReturnMemoryStream(buffer);
             _kcpServerNetwork.AddUpdateChannel(ChannelId, 0);
         }
@@ -152,16 +140,13 @@ namespace Fantasy.Network.KCP
                 {
                     throw new Exception("KcpOutput count 0");
                 }
-
+                
                 fixed (byte* p = buffer)
                 {
                     p[0] = KcpHeaderReceiveData;
-                    p[1] = _channelIdBytes[0];
-                    p[2] = _channelIdBytes[1];
-                    p[3] = _channelIdBytes[2];
-                    p[4] = _channelIdBytes[3];
+                    *(uint*)(p + 1) = ChannelId;
                 }
-
+                
                 _kcpServerNetwork.SendAsync(buffer, 0, count + 5, RemoteEndPoint);
             }
             catch (Exception e)

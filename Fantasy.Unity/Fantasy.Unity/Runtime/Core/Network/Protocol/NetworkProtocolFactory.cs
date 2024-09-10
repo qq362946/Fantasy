@@ -3,8 +3,10 @@ using System.Net;
 using Fantasy.Entitas;
 using Fantasy.Helper;
 using Fantasy.Network.Interface;
-using Fantasy.Network.KCP;
+#if !FANTASY_WEBGL
 using Fantasy.Network.TCP;
+using Fantasy.Network.KCP;
+#endif
 using Fantasy.Network.WebSocket;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member

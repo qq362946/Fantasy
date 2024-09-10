@@ -2,6 +2,7 @@
 using System.Reflection;
 using Fantasy.Assembly;
 using Fantasy.Async;
+using Fantasy.Serialize;
 using UnityEngine;
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8603 // Possible null reference return.
@@ -43,6 +44,8 @@ namespace Fantasy.Platform.Unity
             Scene?.Dispose();
             // 初始化程序集管理系统
             AssemblySystem.Initialize(assemblies);
+            // 初始化序列化
+            SerializerManager.Initialize();
             if (!_isInit)
             {
 #if FANTASY_WEBGL
@@ -67,6 +70,7 @@ namespace Fantasy.Platform.Unity
         private void OnDestroy()
         {
             AssemblySystem.Dispose();
+            SerializerManager.Dispose();
             if (Scene != null)
             {
                 Scene?.Dispose();

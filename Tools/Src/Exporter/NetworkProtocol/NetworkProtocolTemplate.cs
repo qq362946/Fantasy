@@ -5,7 +5,7 @@ public static class NetworkProtocolTemplate
     public static readonly string Template ="""
                                             #if SERVER
                                             using ProtoBuf;
-                                            using MemoryPack;
+                                            (UsingNamespace)
                                             using System.Collections.Generic;
                                             using MongoDB.Bson.Serialization.Attributes;
                                             using Fantasy;
@@ -25,7 +25,7 @@ public static class NetworkProtocolTemplate
                                             {	
                                             #else
                                             using ProtoBuf;
-                                            using MemoryPack;
+                                            (UsingNamespace)
                                             using System.Collections.Generic;
                                             using Fantasy;
                                             using Fantasy.Network.Interface;

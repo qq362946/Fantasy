@@ -38,12 +38,7 @@ namespace Fantasy.PacketParser
 
         public override MemoryStreamBuffer RentMemoryStream(int size = 0)
         {
-            if (MemoryStream == null)
-            {
-                MemoryStream = Network.RentMemoryStream(size);
-            }
-
-            return MemoryStream;
+            return MemoryStream ??= Network.RentMemoryStream(size);
         }
 
         public override object Deserialize(Type messageType)
@@ -54,7 +49,6 @@ namespace Fantasy.PacketParser
                 return null;
             }
 
-            object obj = null;
             MemoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
             if (MemoryStream.Length == 0)
@@ -69,33 +63,16 @@ namespace Fantasy.PacketParser
                 return createInstance();
             }
 
-            switch (OpCodeIdStruct.OpCodeProtocolType)
+            if (SerializerManager.TryGetSerializer(OpCodeIdStruct.OpCodeProtocolType, out var serializer))
             {
-                case OpCodeProtocolType.ProtoBuf:
-                {
-                    obj = ProtoBufPackHelper.Deserialize(messageType, MemoryStream);
-                    break;
-                }
-                case OpCodeProtocolType.MemoryPack:
-                {
-                    obj = MemoryPackHelper.Deserialize(messageType, MemoryStream);
-                    break;
-                }
-                case OpCodeProtocolType.Bson:
-                {
-                    obj = BsonPackHelper.Deserialize(messageType, MemoryStream);
-                    break;
-                }
-                default:
-                {
-                    MemoryStream.Seek(0, SeekOrigin.Begin);
-                    Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
-                    return null;
-                }
+                var obj = serializer.Deserialize(messageType, MemoryStream);
+                MemoryStream.Seek(0, SeekOrigin.Begin);
+                return obj;
             }
-
+            
             MemoryStream.Seek(0, SeekOrigin.Begin);
-            return obj;
+            Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
+            return null;
         }
     }
 }

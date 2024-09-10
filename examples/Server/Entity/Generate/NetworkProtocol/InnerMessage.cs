@@ -1,5 +1,5 @@
 using ProtoBuf;
-using MemoryPack;
+
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using Fantasy;
@@ -17,8 +17,8 @@ using Fantasy.Serialize;
 
 namespace Fantasy
 {	
-	[MemoryPackable]
-	public partial class G2A_TestRequest : AMessage, IRouteRequest
+	[ProtoContract]
+	public partial class G2A_TestRequest : AMessage, IRouteRequest, IProto
 	{
 		public static G2A_TestRequest Create(Scene scene)
 		{
@@ -27,15 +27,15 @@ namespace Fantasy
 		public override void Dispose()
 		{
 #if FANTASY_NET || FANTASY_UNITY
-			Scene.MessagePoolComponent.Return<G2A_TestRequest>(this);
+			GetScene().MessagePoolComponent.Return<G2A_TestRequest>(this);
 #endif
 		}
-		[MemoryPackIgnore]
+		[ProtoIgnore]
 		public G2A_TestResponse ResponseType { get; set; }
 		public uint OpCode() { return InnerOpcode.G2A_TestRequest; }
 	}
-	[MemoryPackable]
-	public partial class G2A_TestResponse : AMessage, IRouteResponse
+	[ProtoContract]
+	public partial class G2A_TestResponse : AMessage, IRouteResponse, IProto
 	{
 		public static G2A_TestResponse Create(Scene scene)
 		{
@@ -45,11 +45,11 @@ namespace Fantasy
 		{
 			ErrorCode = default;
 #if FANTASY_NET || FANTASY_UNITY
-			Scene.MessagePoolComponent.Return<G2A_TestResponse>(this);
+			GetScene().MessagePoolComponent.Return<G2A_TestResponse>(this);
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.G2A_TestResponse; }
-		[MemoryPackOrder(0)]
+		[ProtoMember(1)]
 		public uint ErrorCode { get; set; }
 	}
 	[ProtoContract]
@@ -62,7 +62,7 @@ namespace Fantasy
 		public override void Dispose()
 		{
 #if FANTASY_NET || FANTASY_UNITY
-			Scene.MessagePoolComponent.Return<G2M_RequestAddressableId>(this);
+			GetScene().MessagePoolComponent.Return<G2M_RequestAddressableId>(this);
 #endif
 		}
 		[ProtoIgnore]
@@ -81,7 +81,7 @@ namespace Fantasy
 			ErrorCode = default;
 			AddressableId = default;
 #if FANTASY_NET || FANTASY_UNITY
-			Scene.MessagePoolComponent.Return<M2G_ResponseAddressableId>(this);
+			GetScene().MessagePoolComponent.Return<M2G_ResponseAddressableId>(this);
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_ResponseAddressableId; }
@@ -104,7 +104,7 @@ namespace Fantasy
 		{
 			GateRouteId = default;
 #if FANTASY_NET || FANTASY_UNITY
-			Scene.MessagePoolComponent.Return<G2Chat_CreateRouteRequest>(this);
+			GetScene().MessagePoolComponent.Return<G2Chat_CreateRouteRequest>(this);
 #endif
 		}
 		[ProtoIgnore]
@@ -125,7 +125,7 @@ namespace Fantasy
 			ErrorCode = default;
 			ChatRouteId = default;
 #if FANTASY_NET || FANTASY_UNITY
-			Scene.MessagePoolComponent.Return<Chat2G_CreateRouteResponse>(this);
+			GetScene().MessagePoolComponent.Return<Chat2G_CreateRouteResponse>(this);
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.Chat2G_CreateRouteResponse; }

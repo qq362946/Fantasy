@@ -139,25 +139,23 @@ namespace Fantasy.PacketParser
 
         public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message)
         {
-            return memoryStream == null
-                ? Pack(ref rpcId, ref routeId, message)
-                : Pack(ref rpcId, ref routeId, memoryStream);
+            return memoryStream == null ? Pack(ref rpcId, ref routeId, message) : Pack(ref rpcId, ref routeId, memoryStream);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream)
+        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream)
         {
-            memoryStream.Seek(Packet.InnerPacketRpcIdLocation, SeekOrigin.Begin);
-            rpcId.GetBytes(RpcIdBuffer);
-            routeId.GetBytes(RouteIdBuffer);
-            memoryStream.Write(RpcIdBuffer);
-            memoryStream.Write(RouteIdBuffer);
-            memoryStream.Seek(0, SeekOrigin.Begin);
+            fixed (byte* bufferPtr = memoryStream.GetBuffer())
+            {
+                *(uint*)(bufferPtr + Packet.InnerPacketRpcIdLocation) = rpcId;
+                *(long*)(bufferPtr + Packet.InnerPacketRouteRouteIdLocation) = routeId;
+            }
+            
             return memoryStream;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, IMessage message)
+        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, IMessage message)
         {
             var memoryStreamLength = 0;
             var messageType = message.GetType();
@@ -165,26 +163,14 @@ namespace Fantasy.PacketParser
             OpCodeIdStruct opCodeIdStruct = message.OpCode();
             memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
-            switch (opCodeIdStruct.OpCodeProtocolType)
+            if (SerializerManager.TryGetSerializer(opCodeIdStruct.OpCodeProtocolType, out var serializer))
             {
-                case OpCodeProtocolType.Bson:
-                {
-                    BsonPackHelper.Serialize(messageType, message, memoryStream);
-                    memoryStreamLength = (int)memoryStream.Length;
-                    break;
-                }
-                case OpCodeProtocolType.MemoryPack:
-                {
-                    MemoryPackHelper.Serialize(messageType, message, memoryStream);
-                    memoryStreamLength = (int)memoryStream.Length;
-                    break;
-                }
-                case OpCodeProtocolType.ProtoBuf:
-                {
-                    ProtoBufPackHelper.Serialize(messageType, message, memoryStream);
-                    memoryStreamLength = (int)memoryStream.Position;
-                    break;
-                }
+                serializer.Serialize(messageType, message, memoryStream);
+                memoryStreamLength = (int)memoryStream.Position;
+            }
+            else
+            {
+                Log.Error($"type:{messageType} Does not support processing protocol");
             }
 
             var opCode = Scene.MessageDispatcherComponent.GetOpCode(messageType);
@@ -203,17 +189,15 @@ namespace Fantasy.PacketParser
                 // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
-
-            rpcId.GetBytes(RpcIdBuffer);
-            opCode.GetBytes(OpCodeBuffer);
-            routeId.GetBytes(RouteIdBuffer);
-            packetBodyCount.GetBytes(BodyBuffer);
-            memoryStream.Seek(0, SeekOrigin.Begin);
-            memoryStream.Write(BodyBuffer);
-            memoryStream.Write(OpCodeBuffer);
-            memoryStream.Write(RpcIdBuffer);
-            memoryStream.Write(RouteIdBuffer);
-            memoryStream.Seek(0, SeekOrigin.Begin);
+            
+            fixed (byte* bufferPtr = memoryStream.GetBuffer())
+            {
+                *(int*)bufferPtr = packetBodyCount;
+                *(uint*)(bufferPtr + Packet.PacketLength) = opCode;
+                *(uint*)(bufferPtr + Packet.InnerPacketRpcIdLocation) = rpcId;
+                *(long*)(bufferPtr + Packet.InnerPacketRouteRouteIdLocation) = routeId;
+            }
+            
             return memoryStream;
         }
     }
@@ -311,23 +295,22 @@ namespace Fantasy.PacketParser
 
         public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message)
         {
-            return memoryStream == null
-                ? Pack(ref rpcId, message)
-                : Pack(ref rpcId, memoryStream);
+            return memoryStream == null ? Pack(ref rpcId, message) : Pack(ref rpcId, memoryStream);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStreamBuffer Pack(ref uint rpcId, MemoryStreamBuffer memoryStream)
+        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, MemoryStreamBuffer memoryStream)
         {
-            memoryStream.Seek(Packet.OuterPacketRpcIdLocation, SeekOrigin.Begin);
-            rpcId.GetBytes(RpcIdBuffer);
-            memoryStream.Write(RpcIdBuffer);
-            memoryStream.Seek(0, SeekOrigin.Begin);
+            fixed (byte* bufferPtr = memoryStream.GetBuffer())
+            {
+                *(uint*)(bufferPtr + Packet.OuterPacketRpcIdLocation) = rpcId;
+            }
+            
             return memoryStream;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStreamBuffer Pack(ref uint rpcId, IMessage message)
+        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, IMessage message)
         {
             var memoryStreamLength = 0;
             var messageType = message.GetType();
@@ -335,28 +318,14 @@ namespace Fantasy.PacketParser
             OpCodeIdStruct opCodeIdStruct = message.OpCode();
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
             
-            switch (opCodeIdStruct.OpCodeProtocolType)
+            if (SerializerManager.TryGetSerializer(opCodeIdStruct.OpCodeProtocolType, out var serializer))
             {
-#if FANTASY_NET
-                case OpCodeProtocolType.Bson:
-                {
-                    BsonPackHelper.Serialize(messageType, message, memoryStream);
-                    memoryStreamLength = (int)memoryStream.Length;
-                    break;
-                }
-#endif
-                case OpCodeProtocolType.MemoryPack:
-                {
-                    MemoryPackHelper.Serialize(messageType, message, memoryStream);
-                    memoryStreamLength = (int)memoryStream.Length;
-                    break;
-                }
-                case OpCodeProtocolType.ProtoBuf:
-                {
-                    ProtoBufPackHelper.Serialize(messageType, message, memoryStream);
-                    memoryStreamLength = (int)memoryStream.Position;
-                    break;
-                }
+                serializer.Serialize(messageType, message, memoryStream);
+                memoryStreamLength = (int)memoryStream.Position;
+            }
+            else
+            {
+                Log.Error($"type:{messageType} Does not support processing protocol");
             }
             
             var opCode = Scene.MessageDispatcherComponent.GetOpCode(messageType);
@@ -374,16 +343,14 @@ namespace Fantasy.PacketParser
                 // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
-
-            rpcId.GetBytes(RpcIdBuffer);
-            opCode.GetBytes(OpCodeBuffer);
-            packetBodyCount.GetBytes(BodyBuffer);
-            memoryStream.Seek(0, SeekOrigin.Begin);
-            memoryStream.Write(BodyBuffer);
-            memoryStream.Write(OpCodeBuffer);
-            memoryStream.Write(RpcIdBuffer);
-            memoryStream.Write(RouteIdBuffer);
-            memoryStream.Seek(0, SeekOrigin.Begin);
+            
+            fixed (byte* bufferPtr = memoryStream.GetBuffer())
+            {
+                *(int*)bufferPtr = packetBodyCount;
+                *(uint*)(bufferPtr + Packet.PacketLength) = opCode;
+                *(uint*)(bufferPtr + Packet.OuterPacketRpcIdLocation) = rpcId;
+            }
+            
             return memoryStream;
         }
     }

@@ -1,0 +1,11 @@
+{
+    "name": "StompyRobot.SRDebugger.Editor",
+    "references": [
+        "StompyRobot.SRDebugger",
+        "StompyRobot.SRF"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
