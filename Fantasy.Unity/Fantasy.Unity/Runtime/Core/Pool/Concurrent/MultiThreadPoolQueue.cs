@@ -30,13 +30,12 @@ namespace Fantasy.Pool
         {
             if (!_poolQueue.TryDequeue(out var t))
             {
-                return new T
-                {
-                    IsPool = true
-                };
+                var pool = new T();
+                pool.SetIsPool(true);
+                return pool;
             }
             
-            t.IsPool = true;
+            t.SetIsPool(true);
             Interlocked.Decrement(ref _poolCount);
             return (T)t;
         }
@@ -46,23 +45,23 @@ namespace Fantasy.Pool
             if (!_poolQueue.TryDequeue(out var t))
             {
                 var instance = _createInstance();
-                instance.IsPool = true;
+                instance.SetIsPool(true);
                 return instance;
             }
             
-            t.IsPool = true;
+            t.SetIsPool(true);
             Interlocked.Decrement(ref _poolCount);
             return t;
         }
         
         public void Return(IPool obj)
         {
-            if (!obj.IsPool)
+            if (!obj.IsPool())
             {
                 return;
             }
             
-            obj.IsPool = false;
+            obj.SetIsPool(false);
             
             if (Interlocked.Increment(ref _poolCount) <= _maxCapacity)
             {

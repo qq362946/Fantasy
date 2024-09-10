@@ -32,13 +32,15 @@ namespace Fantasy.Entitas
     public abstract class Entity : IEntity
     {
         #region Members
+
         /// <summary>
         /// 获取一个值，表示实体是否支持对象池。
         /// </summary>
-        [BsonIgnore]
-        [JsonIgnore]
+        [BsonIgnore] 
+        [JsonIgnore] 
+        [ProtoIgnore]
         [IgnoreDataMember]
-        public bool IsPool { get; set; }
+        private bool _isPool;
         /// <summary>
         /// 实体的Id
         /// </summary>
@@ -120,7 +122,7 @@ namespace Fantasy.Entitas
             var entity = isPool ? scene.EntityPool.Rent<T>() : new T();
             entity.Scene = scene;
             entity.Type = typeof(T);
-            entity.IsPool = isPool;
+            entity.SetIsPool(isPool);
             entity.Id = scene.EntityIdFactory.Create;
             entity.RunTimeId = scene.RuntimeIdFactory.Create;
             scene.AddEntity(entity);
@@ -148,7 +150,7 @@ namespace Fantasy.Entitas
             var entity = isPool ? scene.EntityPool.Rent<T>() : new T();
             entity.Scene = scene;
             entity.Type = typeof(T);
-            entity.IsPool = isPool;
+            entity.SetIsPool(isPool);
             entity.Id = id;
             entity.RunTimeId = scene.RuntimeIdFactory.Create;
             scene.AddEntity(entity);
@@ -895,12 +897,34 @@ namespace Fantasy.Entitas
             Parent = null;
             scene.RemoveEntity(runTimeId);
 
-            if (IsPool)
+            if (IsPool())
             {
                 scene.EntityPool.Return(Type, this);
             }
 
             Type = null;
+        }
+
+        #endregion
+
+        #region Pool
+
+        /// <summary>
+        /// 获取一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <returns></returns>
+        public bool IsPool()
+        {
+            return _isPool;
+        }
+
+        /// <summary>
+        /// 设置一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <param name="isPool"></param>
+        public void SetIsPool(bool isPool)
+        {
+            _isPool = isPool;
         }
 
         #endregion

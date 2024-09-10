@@ -58,6 +58,13 @@ namespace Fantasy.Network
             Session = (Session)Parent;
             SelfRunTimeId = RunTimeId;
             LastTime = TimeHelper.Now;
+
+            if (TimerComponent == null)
+            {
+                Log.Error("请在Unity的菜单执行Fantasy->Generate link.xml再重新打包");
+                return;
+            }
+            
             TimerId = TimerComponent.Unity.RepeatedTimer(interval, () => RepeatedSend().Coroutine());
             TimeOutTimerId = TimerComponent.Unity.RepeatedTimer(timeOutInterval, CheckTimeOut);
         }

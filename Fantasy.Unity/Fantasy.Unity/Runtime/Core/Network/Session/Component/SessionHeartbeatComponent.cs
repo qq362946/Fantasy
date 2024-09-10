@@ -66,9 +66,7 @@ namespace Fantasy.Network
             }
             
             TimerId = TimerComponent.Unity.RepeatedTimer(interval, () => RepeatedSend().Coroutine());
-            Log.Debug("SessionHeartbeatComponent 666666666666");
             TimeOutTimerId = TimerComponent.Unity.RepeatedTimer(timeOutInterval, CheckTimeOut);
-            Log.Debug("SessionHeartbeatComponent 7777777777777");
         }
 
         private void CheckTimeOut()

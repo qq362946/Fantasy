@@ -17,7 +17,6 @@ public class NormalMessage : MonoBehaviour
     private Session _session;
     private void Start()
     {
-        Log.Debug("Start 1");
         ConnectButton.onClick.RemoveAllListeners();
         ConnectButton.onClick.AddListener(() =>
         {
@@ -39,13 +38,10 @@ public class NormalMessage : MonoBehaviour
     private long timerId;
     private async FTask OnConnectButtonClick()
     {
-        Log.Debug("OnConnectButtonClick 1");
         ConnectButton.interactable = false;
-        Log.Debug("OnConnectButtonClick 2");
         _scene = await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
-        Log.Debug("OnConnectButtonClick 3");
         _session = _scene.Connect(
-            "192.168.31.203:20000",
+            "127.0.0.1:20000",
             NetworkProtocolType.KCP,
             OnConnectComplete,
             OnConnectFail,
@@ -56,15 +52,10 @@ public class NormalMessage : MonoBehaviour
     private void OnConnectComplete()
     {
         Text.text = "连接成功";
-        Log.Debug($"OnConnectComplete 1 _session:{_session == null}");
         _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
-        Log.Debug("OnConnectComplete 1");
         ConnectButton.interactable = false;
-        Log.Debug("OnConnectComplete 1");
         SendMessageButton.interactable = true;
-        Log.Debug("OnConnectComplete 1");
         SendRPCMessageButton.interactable = true;
-        Log.Debug("OnConnectComplete 1");
     }
 
     private void OnConnectFail()

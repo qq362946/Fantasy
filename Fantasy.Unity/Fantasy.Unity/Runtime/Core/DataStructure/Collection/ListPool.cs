@@ -12,10 +12,7 @@ namespace Fantasy.DataStructure.Collection
     /// <typeparam name="T">列表中元素的类型。</typeparam>
     public sealed class ListPool<T> : List<T>, IDisposable, IPool
     {
-        /// <summary>
-        /// 获取或设置一个值，该值指示当前实例是否为对象池中的实例。
-        /// </summary>
-        public bool IsPool { get; set; }
+        private bool _isPool;
         private bool _isDispose;
 
         /// <summary>
@@ -50,7 +47,7 @@ namespace Fantasy.DataStructure.Collection
             var list = MultiThreadPool.Rent<ListPool<T>>();
 #endif
             list._isDispose = false;
-            list.IsPool = true;
+            list._isPool = true;
 
             if (args != null)
             {
@@ -73,7 +70,7 @@ namespace Fantasy.DataStructure.Collection
             var list = MultiThreadPool.Rent<ListPool<T>>();
 #endif
             list._isDispose = false;
-            list.IsPool = true;
+            list._isPool = true;
 
             if (args != null)
             {
@@ -81,6 +78,24 @@ namespace Fantasy.DataStructure.Collection
             }
 
             return list;
+        }
+
+        /// <summary>
+        /// 获取一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <returns></returns>
+        public bool IsPool()
+        {
+            return _isPool;
+        }
+
+        /// <summary>
+        /// 设置一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <param name="isPool"></param>
+        public void SetIsPool(bool isPool)
+        {
+            _isPool = isPool;
         }
     }
 }

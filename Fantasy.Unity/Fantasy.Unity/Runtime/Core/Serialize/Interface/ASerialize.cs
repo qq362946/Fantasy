@@ -23,16 +23,35 @@ namespace Fantasy.Serialize
     public abstract class AMessage : ASerialize, IPool
     {
 #if FANTASY_NET || FANTASY_UNITY
-        [BsonIgnore]
-        [JsonIgnore]
-        [IgnoreDataMember]
+        [BsonIgnore] 
+        [JsonIgnore] 
+        [IgnoreDataMember] 
         [ProtoIgnore]
-        public Scene Scene { get; set; }
+        private Scene _scene;
+        protected Scene GetScene()
+        {
+            return _scene;
+        }
+
+        public void SetScene(Scene scene)
+        {
+            _scene = scene;
+        }
 #endif
-        [BsonIgnore]
-        [JsonIgnore]
-        [IgnoreDataMember]
+        [BsonIgnore] 
+        [JsonIgnore] 
+        [IgnoreDataMember] 
         [ProtoIgnore]
-        public bool IsPool { get; set; }
+        private bool _isPool;
+
+        public bool IsPool()
+        {
+            return _isPool;
+        }
+
+        public void SetIsPool(bool isPool)
+        {
+            _isPool = isPool;
+        }
     }
 }

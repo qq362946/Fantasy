@@ -61,14 +61,9 @@ namespace Fantasy.Network.KCP
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly SortedOneToManyList<uint, uint> _updateTimer = new SortedOneToManyList<uint, uint>();
 
-        private readonly Dictionary<uint, PendingConnection> _pendingConnection =
-            new Dictionary<uint, PendingConnection>();
-
-        private readonly SortedOneToManyList<uint, uint> _pendingConnectionTimeOut =
-            new SortedOneToManyList<uint, uint>();
-
-        private readonly Dictionary<uint, KCPServerNetworkChannel> _connectionChannel =
-            new Dictionary<uint, KCPServerNetworkChannel>();
+        private readonly Dictionary<uint, PendingConnection> _pendingConnection = new Dictionary<uint, PendingConnection>();
+        private readonly SortedOneToManyList<uint, uint> _pendingConnectionTimeOut = new SortedOneToManyList<uint, uint>();
+        private readonly Dictionary<uint, KCPServerNetworkChannel> _connectionChannel = new Dictionary<uint, KCPServerNetworkChannel>();
 
         public KCPSettings Settings { get; private set; }
 
@@ -228,8 +223,7 @@ namespace Fantasy.Network.KCP
             await pipeReader.CompleteAsync();
         }
 
-        private unsafe bool TryReadMessage(ref ReadOnlySequence<byte> buffer, out KcpHeader header, out uint channelId,
-            out ReadOnlyMemory<byte> message)
+        private unsafe bool TryReadMessage(ref ReadOnlySequence<byte> buffer, out KcpHeader header, out uint channelId, out ReadOnlyMemory<byte> message)
         {
             if (buffer.Length < 5)
             {

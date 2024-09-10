@@ -250,13 +250,9 @@ namespace Fantasy
         }
         public Session Connect(string remoteAddress, NetworkProtocolType networkProtocolType, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000)
         {
-            Log.Debug("Connect 1");
             UnityNetwork?.Dispose();
-            Log.Debug("Connect 2");
             UnityNetwork = NetworkProtocolFactory.CreateClient(this, networkProtocolType, NetworkTarget.Outer);
-            Log.Debug("Connect 3");
             Session = UnityNetwork.Connect(remoteAddress, onConnectComplete, onConnectFail, onConnectDisconnect, isHttps, connectTimeout);
-            Log.Debug("Connect 4");
             return Session;
         }
 #endif

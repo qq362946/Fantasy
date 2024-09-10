@@ -280,7 +280,7 @@ namespace Fantasy.Helper
             MemoryMarshal.Write(memorySpan, in value);
 #endif
 #if FANTASY_UNITY
-            MemoryMarshal.Write(memorySpan.AsSpan(), ref value);
+            MemoryMarshal.Write(memorySpan, ref value);
 #endif
             memoryStream.Write(memorySpan);
         }
@@ -322,7 +322,7 @@ namespace Fantasy.Helper
             MemoryMarshal.Write(memorySpan, in value);
 #endif
 #if FANTASY_UNITY
-            MemoryMarshal.Write(memorySpan.AsSpan(), ref value);
+            MemoryMarshal.Write(memorySpan, ref value);
 #endif
             memoryStream.Write(memorySpan);
         }
@@ -363,7 +363,7 @@ namespace Fantasy.Helper
             MemoryMarshal.Write(memorySpan, in value);
 #endif
 #if FANTASY_UNITY
-            MemoryMarshal.Write(memorySpan.AsSpan(), ref value);
+            MemoryMarshal.Write(memorySpan, ref value);
 #endif
             memoryStream.Write(memorySpan);
         }

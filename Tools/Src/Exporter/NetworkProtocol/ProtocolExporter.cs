@@ -347,7 +347,7 @@ public sealed class ProtocolExporter
                         messageStr.AppendLine($"\t\t{{\n\t\t\treturn scene.MessagePoolComponent.Rent<{className}>();\n\t\t}}");
                         messageStr.AppendLine($"\t\tpublic override void Dispose()");
                         messageStr.AppendLine($"\t\t{{");
-                        messageStr.AppendLine($"<<<<Dispose>>>#if FANTASY_NET || FANTASY_UNITY\n\t\t\tScene.MessagePoolComponent.Return<{className}>(this);\n#endif");
+                        messageStr.AppendLine($"<<<<Dispose>>>#if FANTASY_NET || FANTASY_UNITY\n\t\t\tGetScene().MessagePoolComponent.Return<{className}>(this);\n#endif");
                         messageStr.AppendLine($"\t\t}}");
 
                         if (parameter == "IMessage")
