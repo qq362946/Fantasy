@@ -61,14 +61,9 @@ namespace Fantasy.Network.KCP
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly SortedOneToManyList<uint, uint> _updateTimer = new SortedOneToManyList<uint, uint>();
 
-        private readonly Dictionary<uint, PendingConnection> _pendingConnection =
-            new Dictionary<uint, PendingConnection>();
-
-        private readonly SortedOneToManyList<uint, uint> _pendingConnectionTimeOut =
-            new SortedOneToManyList<uint, uint>();
-
-        private readonly Dictionary<uint, KCPServerNetworkChannel> _connectionChannel =
-            new Dictionary<uint, KCPServerNetworkChannel>();
+        private readonly Dictionary<uint, PendingConnection> _pendingConnection = new Dictionary<uint, PendingConnection>();
+        private readonly SortedOneToManyList<uint, uint> _pendingConnectionTimeOut = new SortedOneToManyList<uint, uint>();
+        private readonly Dictionary<uint, KCPServerNetworkChannel> _connectionChannel = new Dictionary<uint, KCPServerNetworkChannel>();
 
         public KCPSettings Settings { get; private set; }
 
@@ -93,8 +88,7 @@ namespace Fantasy.Network.KCP
             _socket.SetSioUdpConnReset();
             ReadPipeDataAsync().Coroutine();
             ReceiveSocketAsync().Coroutine();
-            Log.Info(
-                $"SceneConfigId = {Scene.SceneConfigId} networkTarget = {networkTarget.ToString()} KCPServer Listen {address}");
+            Log.Info($"SceneConfigId = {Scene.SceneConfigId} networkTarget = {networkTarget.ToString()} KCPServer Listen {address}");
         }
 
         public override void Dispose()
@@ -229,8 +223,7 @@ namespace Fantasy.Network.KCP
             await pipeReader.CompleteAsync();
         }
 
-        private unsafe bool TryReadMessage(ref ReadOnlySequence<byte> buffer, out KcpHeader header, out uint channelId,
-            out ReadOnlyMemory<byte> message)
+        private unsafe bool TryReadMessage(ref ReadOnlySequence<byte> buffer, out KcpHeader header, out uint channelId, out ReadOnlyMemory<byte> message)
         {
             if (buffer.Length < 5)
             {
@@ -241,7 +234,6 @@ namespace Fantasy.Network.KCP
                 {
                     buffer = buffer.Slice(buffer.Length);
                 }
-
                 return false;
             }
 
@@ -252,9 +244,7 @@ namespace Fantasy.Network.KCP
                 fixed (byte* bytePointer = &arraySegment.Array[arraySegment.Offset])
                 {
                     header = (KcpHeader)bytePointer[0];
-                    channelId = (uint)(bytePointer[1] | (bytePointer[2] << 8) | (bytePointer[3] << 16) |
-                                       (bytePointer[4] << 24));
-                    message = readOnlyMemory.Slice(5);
+                    channelId = Unsafe.ReadUnaligned<uint>(ref bytePointer[1]);
                 }
             }
             else
@@ -262,10 +252,10 @@ namespace Fantasy.Network.KCP
                 // 如果无法获取数组段，回退到安全代码来执行。这种情况几乎不会发生、为了保险还是写一下了。
                 var firstSpan = readOnlyMemory.Span;
                 header = (KcpHeader)firstSpan[0];
-                channelId = BitConverter.ToUInt32(firstSpan.Slice(1, 4));
-                message = readOnlyMemory.Slice(5);
+                channelId = MemoryMarshal.Read<uint>(firstSpan.Slice(1, 4));
             }
-
+            
+            message = readOnlyMemory.Slice(5);
             buffer = buffer.Slice(readOnlyMemory.Length);
             return true;
         }
@@ -564,10 +554,10 @@ namespace Fantasy.Network.KCP
         {
             fixed (byte* p = _sendBuff)
             {
-                *p = KcpHeaderDisconnect;
+                p[0] = KcpHeaderDisconnect;
                 *(uint*)(p + 1) = channelId;
             }
-
+            
             SendAsync(_sendBuff, 0, 5, clientEndPoint);
         }
 
@@ -575,10 +565,10 @@ namespace Fantasy.Network.KCP
         {
             fixed (byte* p = _sendBuff)
             {
-                *p = KcpHeaderRepeatChannelId;
+                p[0] = KcpHeaderRepeatChannelId;
                 *(uint*)(p + 1) = channelId;
             }
-
+            
             SendAsync(_sendBuff, 0, 5, clientEndPoint);
         }
 
@@ -586,10 +576,10 @@ namespace Fantasy.Network.KCP
         {
             fixed (byte* p = _sendBuff)
             {
-                *p = KcpHeaderWaitConfirmConnection;
+                p[0] = KcpHeaderWaitConfirmConnection;
                 *(uint*)(p + 1) = channelId;
             }
-
+            
             SendAsync(_sendBuff, 0, 5, clientEndPoint);
         }
 

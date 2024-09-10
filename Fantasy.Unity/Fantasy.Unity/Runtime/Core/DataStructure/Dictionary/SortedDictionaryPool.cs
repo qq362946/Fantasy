@@ -11,10 +11,7 @@ namespace Fantasy.DataStructure.Dictionary
     /// <typeparam name="TN"></typeparam>
     public sealed class SortedDictionaryPool<TM, TN> : SortedDictionary<TM, TN>, IDisposable, IPool where TM : notnull
     {
-        /// <summary>
-        /// 是否是池
-        /// </summary>
-        public bool IsPool { get; set; }
+        private bool _isPool;
         private bool _isDispose;
 
         /// <summary>
@@ -48,8 +45,26 @@ namespace Fantasy.DataStructure.Dictionary
             var dictionary = MultiThreadPool.Rent<SortedDictionaryPool<TM, TN>>();
 #endif
             dictionary._isDispose = false;
-            dictionary.IsPool = true;
+            dictionary._isPool = true;
             return dictionary;
+        }
+
+        /// <summary>
+        /// 获取一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <returns></returns>
+        public bool IsPool()
+        {
+            return _isPool;
+        }
+
+        /// <summary>
+        /// 设置一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <param name="isPool"></param>
+        public void SetIsPool(bool isPool)
+        {
+            _isPool = isPool;
         }
     }
 }

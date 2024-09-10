@@ -73,8 +73,7 @@ namespace Fantasy.Network.WebSocket
             _clientWebSocket = null;
         }
 
-        public override Session Connect(string remoteAddress, Action onConnectComplete, Action onConnectFail,
-            Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000)
+        public override Session Connect(string remoteAddress, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000)
         {
             if (IsInit)
             {
@@ -280,7 +279,7 @@ namespace Fantasy.Network.WebSocket
         private async FTask SendAsync(MemoryStreamBuffer memoryStream)
         {
             await _clientWebSocket.SendAsync(
-                new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Length),
+                new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position),
                 WebSocketMessageType.Binary, true, _cancellationTokenSource.Token);
             ReturnMemoryStream(memoryStream);
         }

@@ -47,7 +47,7 @@ namespace Fantasy.Async
 
     internal sealed class OnCoroutineLockTimeout : EventSystem<CoroutineLockTimeout>
     {
-        public override void Handler(CoroutineLockTimeout self)
+        protected override void Handler(CoroutineLockTimeout self)
         {
             var selfWaitCoroutineLock = self.WaitCoroutineLock;
             
@@ -65,10 +65,7 @@ namespace Fantasy.Async
     /// </summary>
     public sealed class WaitCoroutineLock : IPool, IDisposable
     {
-        /// <summary>
-        /// 显示是否是从对象池中创建
-        /// </summary>
-        public bool IsPool { get; set; }
+        private bool _isPool;
         internal string Tag { get; private set; }
         internal long LockId { get; private set; }
         internal long TimerId { get; private set; }
@@ -126,6 +123,24 @@ namespace Fantasy.Async
             
             _isSetResult = true;
             Tcs.SetResult(this);
+        }
+
+        /// <summary>
+        /// 获取一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <returns></returns>
+        public bool IsPool()
+        {
+            return _isPool;
+        }
+
+        /// <summary>
+        /// 设置一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <param name="isPool"></param>
+        public void SetIsPool(bool isPool)
+        {
+            _isPool = isPool;
         }
     }
 }

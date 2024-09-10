@@ -13,6 +13,23 @@ namespace Fantasy.Async
     
     internal sealed class CoroutineLockQueue : Queue<WaitCoroutineLock>, IPool
     {
-        public bool IsPool { get; set; }
+        private bool _isPool;
+        /// <summary>
+        /// 获取一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <returns></returns>
+        public bool IsPool()
+        {
+            return _isPool;
+        }
+
+        /// <summary>
+        /// 设置一个值，该值指示当前实例是否为对象池中的实例。
+        /// </summary>
+        /// <param name="isPool"></param>
+        public void SetIsPool(bool isPool)
+        {
+            _isPool = isPool;
+        }
     }
 }

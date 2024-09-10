@@ -1,0 +1,10 @@
+{
+    "name": "StompyRobot.SRF.Editor",
+    "references": [
+        "StompyRobot.SRF"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

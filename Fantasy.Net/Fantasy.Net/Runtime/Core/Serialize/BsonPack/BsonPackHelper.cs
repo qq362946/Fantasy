@@ -1,4 +1,5 @@
 #if FANTASY_NET
+using System.Buffers;
 using System.Collections;
 using System.ComponentModel;
 using System.Reflection;
@@ -18,14 +19,17 @@ namespace Fantasy.Serialize
     /// <summary>
     /// BSON帮助方法
     /// </summary>
-    public static class BsonPackHelper
+    public class BsonPackHelper : ISerialize
     {
-        #region Initialize
-
         /// <summary>
-        /// 初始化
+        /// 序列化器的名字
         /// </summary>
-        public static void Initialize()
+        public string SerializeName { get; } = "Bson";
+        
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public BsonPackHelper()
         {
             // 清除掉注册过的LookupClassMap。
 
@@ -75,15 +79,13 @@ namespace Fantasy.Serialize
             }
         }
 
-        #endregion
-
         /// <summary>
         /// 反序列化
         /// </summary>
         /// <param name="bytes"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T Deserialize<T>(byte[] bytes)
+        public T Deserialize<T>(byte[] bytes)
         {
             var @object = BsonSerializer.Deserialize<T>(bytes);
             if (@object is ASerialize aSerialize)
@@ -99,7 +101,7 @@ namespace Fantasy.Serialize
         /// <param name="buffer"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T Deserialize<T>(MemoryStreamBuffer buffer)
+        public T Deserialize<T>(MemoryStreamBuffer buffer)
         {
             var @object = BsonSerializer.Deserialize<T>(buffer);
             if (@object is ASerialize aSerialize)
@@ -115,7 +117,7 @@ namespace Fantasy.Serialize
         /// <param name="type"></param>
         /// <param name="bytes"></param>
         /// <returns></returns>
-        public static object Deserialize(Type type, byte[] bytes)
+        public object Deserialize(Type type, byte[] bytes)
         {
             var @object = BsonSerializer.Deserialize(bytes, type);
             if (@object is ASerialize aSerialize)
@@ -131,7 +133,7 @@ namespace Fantasy.Serialize
         /// <param name="type"></param>
         /// <param name="buffer"></param>
         /// <returns></returns>
-        public static object Deserialize(Type type, MemoryStreamBuffer buffer)
+        public object Deserialize(Type type, MemoryStreamBuffer buffer)
         {
             var @object = BsonSerializer.Deserialize(buffer, type);
             if (@object is ASerialize aSerialize)
@@ -149,7 +151,7 @@ namespace Fantasy.Serialize
         /// <param name="count"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static unsafe T Deserialize<T>(byte[] bytes, int index, int count)
+        public unsafe T Deserialize<T>(byte[] bytes, int index, int count)
         {
             T @object;
             
@@ -175,7 +177,7 @@ namespace Fantasy.Serialize
         /// <param name="index"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static unsafe object Deserialize(Type type, byte[] bytes, int index, int count)
+        public unsafe object Deserialize(Type type, byte[] bytes, int index, int count)
         {
             object @object;
             
@@ -199,14 +201,33 @@ namespace Fantasy.Serialize
         /// <param name="object"></param>
         /// <param name="buffer"></param>
         /// <typeparam name="T"></typeparam>
-        public static void Serialize<T>(T @object, MemoryStreamBuffer buffer)
+        public void Serialize<T>(T @object, IBufferWriter<byte> buffer)
         {
             if (@object is ASerialize aSerialize)
             {
                 aSerialize.BeginInit();
             }
-            using IBsonWriter bsonWriter = new BsonBinaryWriter(buffer, BsonBinaryWriterSettings.Defaults);
+
+            using IBsonWriter bsonWriter =
+                new BsonBinaryWriter((MemoryStream)buffer, BsonBinaryWriterSettings.Defaults);
             BsonSerializer.Serialize(bsonWriter, @object);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="object"></param>
+        /// <param name="buffer"></param>
+        public void Serialize(object @object, IBufferWriter<byte> buffer)
+        {
+            if (@object is ASerialize aSerialize)
+            {
+                aSerialize.BeginInit();
+            }
+            
+            using IBsonWriter bsonWriter =
+                new BsonBinaryWriter((MemoryStream)buffer, BsonBinaryWriterSettings.Defaults);
+            BsonSerializer.Serialize(bsonWriter, @object.GetType(), @object);
         }
 
         /// <summary>
@@ -215,14 +236,35 @@ namespace Fantasy.Serialize
         /// <param name="type"></param>
         /// <param name="object"></param>
         /// <param name="buffer"></param>
-        public static void Serialize(Type type, object @object, MemoryStreamBuffer buffer)
+        public void Serialize(Type type, object @object, IBufferWriter<byte> buffer)
         {
             if (@object is ASerialize aSerialize)
             {
                 aSerialize.BeginInit();
             }
+
+            using IBsonWriter bsonWriter =
+                new BsonBinaryWriter((MemoryStream)buffer, BsonBinaryWriterSettings.Defaults);
+            BsonSerializer.Serialize(bsonWriter, type, @object);
+        }
+
+        /// <summary>
+        /// 序列化并返回的长度
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="object"></param>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
+        public int SerializeAndReturnLength(Type type, object @object, MemoryStreamBuffer buffer)
+        {
+            if (@object is ASerialize aSerialize)
+            {
+                aSerialize.BeginInit();
+            }
+            
             using IBsonWriter bsonWriter = new BsonBinaryWriter(buffer, BsonBinaryWriterSettings.Defaults);
             BsonSerializer.Serialize(bsonWriter, type, @object);
+            return (int)buffer.Length;
         }
 
         /// <summary>
@@ -260,7 +302,7 @@ namespace Fantasy.Serialize
         /// <param name="t"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T Clone<T>(T t)
+        public T Clone<T>(T t)
         {
             return Deserialize<T>(Serialize(t));
         }

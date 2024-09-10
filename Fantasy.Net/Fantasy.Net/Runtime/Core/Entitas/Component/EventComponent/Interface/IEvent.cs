@@ -56,7 +56,7 @@ namespace Fantasy.Event
         /// 事件调用的方法，要在这个方法里编写事件发生的逻辑
         /// </summary>
         /// <param name="self"></param>
-        public abstract void Handler(T self);
+        protected abstract void Handler(T self);
         /// <summary>
         /// <see cref="IEvent.Invoke"/>
         /// </summary>
@@ -92,7 +92,7 @@ namespace Fantasy.Event
         /// 事件调用的方法，要在这个方法里编写事件发生的逻辑
         /// </summary>
         /// <param name="self"></param>
-        public abstract FTask Handler(T self);
+        protected abstract FTask Handler(T self);
         /// <summary>
         /// <see cref="IEvent.Invoke"/>
         /// </summary>
