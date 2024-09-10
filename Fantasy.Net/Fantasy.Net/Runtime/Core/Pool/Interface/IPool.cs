@@ -6,13 +6,8 @@ namespace Fantasy.Pool
     public interface IPool
     {
         /// <summary>
-        /// 是否从池里创建的
+        /// 是否从吃池里创建的
         /// </summary>
-        bool IsPool();
-        /// <summary>
-        /// 设置是否从池里创建的
-        /// </summary>
-        /// <param name="isPool"></param>
-        void SetIsPool(bool isPool);
+        bool IsPool { get; set; }
     }
 }

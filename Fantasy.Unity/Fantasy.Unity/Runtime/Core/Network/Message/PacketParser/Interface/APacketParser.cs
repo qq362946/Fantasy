@@ -18,6 +18,10 @@ namespace Fantasy.PacketParser.Interface
         internal Scene Scene;
         internal ANetwork Network;
         internal MessageDispatcherComponent MessageDispatcherComponent;
+        protected readonly byte[] BodyBuffer = new byte[sizeof(int)];
+        protected readonly byte[] RpcIdBuffer = new byte[sizeof(uint)];
+        protected readonly byte[] OpCodeBuffer = new byte[sizeof(uint)];
+        protected readonly byte[] RouteIdBuffer = new byte[sizeof(long)];
         protected bool IsDisposed { get; private set; }
         public abstract MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message);
         public virtual void Dispose()
@@ -25,6 +29,10 @@ namespace Fantasy.PacketParser.Interface
             IsDisposed = true;
             Scene = null;
             MessageDispatcherComponent = null;
+            Array.Clear(BodyBuffer, 0, BodyBuffer.Length);
+            Array.Clear(RpcIdBuffer, 0, RpcIdBuffer.Length);
+            Array.Clear(OpCodeBuffer, 0, OpCodeBuffer.Length);
+            Array.Clear(RouteIdBuffer, 0, OpCodeBuffer.Length);
         }
     }
 }

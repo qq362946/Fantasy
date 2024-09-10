@@ -39,7 +39,7 @@ namespace Fantasy.Pool
             }
 
             var dequeue = _poolQueue.Dequeue();
-            dequeue.SetIsPool(true);
+            dequeue.IsPool = true;
             _poolCount--;
             return dequeue;
         }
@@ -57,7 +57,7 @@ namespace Fantasy.Pool
             }
             
             var dequeue = _poolQueue.Dequeue();
-            dequeue.SetIsPool(true);
+            dequeue.IsPool = true;
             _poolCount--;
             return dequeue;
         }
@@ -73,7 +73,7 @@ namespace Fantasy.Pool
                 return;
             }
 
-            if (!t.IsPool())
+            if (!t.IsPool)
             {
                 return;
             }
@@ -84,7 +84,7 @@ namespace Fantasy.Pool
             }
 
             _poolCount++;
-            t.SetIsPool(true);
+            t.IsPool = true;
             _poolQueue.Enqueue(t);
             t.Dispose();
         }
@@ -101,7 +101,7 @@ namespace Fantasy.Pool
                 return;
             }
             
-            if (!t.IsPool())
+            if (!t.IsPool)
             {
                 reset(t);
                 return;
@@ -114,7 +114,7 @@ namespace Fantasy.Pool
 
             reset(t);
             _poolCount++;
-            t.SetIsPool(false);
+            t.IsPool = false;
             _poolQueue.Enqueue(t);
             t.Dispose();
         }

@@ -57,9 +57,8 @@ namespace Fantasy.Scheduler
                 case OpCodeType.OuterPingRequest:
                 {
                     // 注意心跳目前只有外网才才会有、内网之间不需要心跳。
-
-                    session.LastReceiveTime = TimeHelper.Now;
-                    _pingResponse.Now = session.LastReceiveTime;
+                
+                    session.LastReceiveTime = _pingResponse.Now = TimeHelper.Now;
                 
                     using (packInfo)
                     {

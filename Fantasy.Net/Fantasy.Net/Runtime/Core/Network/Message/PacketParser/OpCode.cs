@@ -43,7 +43,8 @@ namespace Fantasy.Network
     public static class OpCodeProtocolType
     {
         public const uint Bson = 1; 
-        public const uint ProtoBuf = 0;
+        public const uint MemoryPack = 2; 
+        public const uint ProtoBuf = 3; 
     }
 
     public static class OpCodeType
@@ -78,22 +79,22 @@ namespace Fantasy.Network
 
     public static class OpCode
     {
-        public static readonly uint PingRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterPingRequest, 1);
-        public static readonly uint PingResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterPingResponse, 1);
-        public static readonly uint DefaultResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerResponse, 1);
-        public static readonly uint DefaultRouteResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 7);
-        public static readonly uint AddressableAddRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 1);
-        public static readonly uint AddressableAddResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 1);
-        public static readonly uint AddressableGetRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 2);
-        public static readonly uint AddressableGetResponse = Create(OpCodeProtocolType.ProtoBuf,OpCodeType.InnerRouteResponse,2);
-        public static readonly uint AddressableRemoveRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 3);
-        public static readonly uint AddressableRemoveResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 3);
-        public static readonly uint AddressableLockRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 4);
-        public static readonly uint AddressableLockResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 4);
-        public static readonly uint AddressableUnLockRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 5);
-        public static readonly uint AddressableUnLockResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 5);
-        public static readonly uint LinkEntityRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 6);
-        public static readonly uint LinkEntityResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 6);
+        public static readonly uint PingRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.OuterPingRequest, 1);
+        public static readonly uint PingResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.OuterPingResponse, 1);
+        public static readonly uint DefaultResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerResponse, 1);
+        public static readonly uint DefaultRouteResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 7);
+        public static readonly uint AddressableAddRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 1);
+        public static readonly uint AddressableAddResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 1);
+        public static readonly uint AddressableGetRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 2);
+        public static readonly uint AddressableGetResponse = Create(OpCodeProtocolType.MemoryPack,OpCodeType.InnerRouteResponse,2);
+        public static readonly uint AddressableRemoveRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 3);
+        public static readonly uint AddressableRemoveResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 3);
+        public static readonly uint AddressableLockRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 4);
+        public static readonly uint AddressableLockResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 4);
+        public static readonly uint AddressableUnLockRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 5);
+        public static readonly uint AddressableUnLockResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 5);
+        public static readonly uint LinkEntityRequest = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteRequest, 6);
+        public static readonly uint LinkEntityResponse = Create(OpCodeProtocolType.MemoryPack, OpCodeType.InnerRouteResponse, 6);
         
         public static uint Create(uint opCodeProtocolType, uint protocol, uint index)
         {

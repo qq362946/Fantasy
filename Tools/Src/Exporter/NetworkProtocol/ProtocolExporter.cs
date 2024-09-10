@@ -112,7 +112,6 @@ public sealed class ProtocolExporter
         var messageStr = new StringBuilder();
         var disposeStr = new StringBuilder();
         var errorCodeStr = new StringBuilder();
-        var usingNamespace = new HashSet<string>();
         var saveDirectory = new Dictionary<string, string>();
         
         OpcodeInfo opcodeInfo = null;
@@ -229,15 +228,15 @@ public sealed class ProtocolExporter
                             protocolOpCodeType = OpCodeProtocolType.ProtoBuf;
                             break;
                         }
-                        // case "MemoryPack":
-                        // {
-                        //     keyIndex = 0;
-                        //     protocolType = "\t[MemoryPackable]";
-                        //     protocolIgnore = "\t\t[MemoryPackIgnore]";
-                        //     protocolMember = "MemoryPackOrder";
-                        //     // protocolOpCodeType = OpCodeProtocolType.MemoryPack;
-                        //     break;
-                        // }
+                        case "MemoryPack":
+                        {
+                            keyIndex = 0;
+                            protocolType = "\t[MemoryPackable]";
+                            protocolIgnore = "\t\t[MemoryPackIgnore]";
+                            protocolMember = "MemoryPackOrder";
+                            protocolOpCodeType = OpCodeProtocolType.MemoryPack;
+                            break;
+                        }
                         case "Bson":
                         {
                             if (opCodeType == NetworkProtocolOpCodeType.Outer)
@@ -252,19 +251,8 @@ public sealed class ProtocolExporter
                         }
                         default:
                         {
-                            if (!ExporterSettingsHelper.CustomSerializes.TryGetValue(protocol, out var customSerialize))
-                            {
-                                Log.Error($"// Protocol {protocol} is not supported!");
-                                return;
-                            }
-
-                            usingNamespace.Add(customSerialize.NameSpace);
-                            keyIndex = customSerialize.KeyIndex;
-                            protocolType = customSerialize.Attribute;
-                            protocolIgnore = customSerialize.Ignore;
-                            protocolMember = customSerialize.Member;
-                            protocolOpCodeType = customSerialize.OpCodeType;
-                            break;
+                            Log.Error($"// Protocol {protocol} is not supported!");
+                            return;
                         }
                     }
                 }
@@ -347,7 +335,7 @@ public sealed class ProtocolExporter
                         messageStr.AppendLine($"\t\t{{\n\t\t\treturn scene.MessagePoolComponent.Rent<{className}>();\n\t\t}}");
                         messageStr.AppendLine($"\t\tpublic override void Dispose()");
                         messageStr.AppendLine($"\t\t{{");
-                        messageStr.AppendLine($"<<<<Dispose>>>#if FANTASY_NET || FANTASY_UNITY\n\t\t\tGetScene().MessagePoolComponent.Return<{className}>(this);\n#endif");
+                        messageStr.AppendLine($"<<<<Dispose>>>#if FANTASY_NET || FANTASY_UNITY\n\t\t\tScene.MessagePoolComponent.Return<{className}>(this);\n#endif");
                         messageStr.AppendLine($"\t\t}}");
 
                         if (parameter == "IMessage")
@@ -535,19 +523,11 @@ public sealed class ProtocolExporter
                 }
             }
             
-            var namespaceBuilder = new StringBuilder();
-            
-            foreach (var @namespace in usingNamespace)
-            {
-                namespaceBuilder.Append($"using {@namespace};\n");
-            }
-            
             var csName = $"{Path.GetFileNameWithoutExtension(filePath)}.cs";
             foreach (var (directory, template) in saveDirectory)
             {
                 var csFile = Path.Combine(directory, csName);
                 var content = template.Replace("(Content)", file.ToString());
-                content = content.Replace("(UsingNamespace)", namespaceBuilder.ToString());
                 await File.WriteAllTextAsync(csFile, content);
             }
             file.Clear();

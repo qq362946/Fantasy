@@ -67,8 +67,10 @@ public static class Entry
         }
         // 初始化程序集管理系统
         AssemblySystem.Initialize(assemblies);
-        // 初始化序列化
-        SerializerManager.Initialize();
+        // Mongo初始化
+        BsonPackHelper.Initialize();
+        // ProtoBuf初始化
+        ProtoBufPackHelper.Initialize();
         // 精度处理（只针对Windows下有作用、其他系统没有这个问题、一般也不会用Windows来做服务器的）
         WinPeriod.Initialize();
         // 启动Process
@@ -118,7 +120,6 @@ public static class Entry
     public static void Close()
     {
         AssemblySystem.Dispose();
-        SerializerManager.Dispose();
     }
 }
 #endif

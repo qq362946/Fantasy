@@ -58,16 +58,30 @@ namespace Fantasy.PacketParser
 
             MemoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
             
-            if (SerializerManager.TryGetSerializer(OpCodeIdStruct.OpCodeProtocolType, out var serializer))
+            object obj = null;
+            
+            switch (OpCodeIdStruct.OpCodeProtocolType)
             {
-                var obj = serializer.Deserialize(messageType, MemoryStream);
-                MemoryStream.Seek(0, SeekOrigin.Begin);
-                return obj;
+                case OpCodeProtocolType.ProtoBuf:
+                {
+                    obj = ProtoBufPackHelper.Deserialize(messageType, MemoryStream);
+                    break;
+                }
+                case OpCodeProtocolType.MemoryPack:
+                {
+                    obj = MemoryPackHelper.Deserialize(messageType, MemoryStream);
+                    break;
+                }
+                default:
+                {
+                    MemoryStream.Seek(0, SeekOrigin.Begin);
+                    Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
+                    return null;
+                }
             }
             
             MemoryStream.Seek(0, SeekOrigin.Begin);
-            Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
-            return null;
+            return obj;
         }
     }
 }

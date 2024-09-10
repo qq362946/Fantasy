@@ -15,7 +15,10 @@ namespace Fantasy.DataStructure.Collection
     /// <typeparam name="TValue">值的类型。</typeparam>
     public class ConcurrentOneToManyQueuePool<TKey, TValue> : ConcurrentOneToManyQueue<TKey, TValue>, IDisposable, IPool where TKey : notnull
     {
-        private bool _isPool;
+        /// <summary>
+        /// 是否是池
+        /// </summary>
+        public bool IsPool { get; set; }
         private bool _isDispose;
 
         /// <summary>
@@ -26,7 +29,7 @@ namespace Fantasy.DataStructure.Collection
         {
             var a = MultiThreadPool.Rent<ConcurrentOneToManyQueuePool<TKey, TValue>>();
             a._isDispose = false;
-            a._isPool = true;
+            a.IsPool = true;
             return a;
         }
 
@@ -44,24 +47,6 @@ namespace Fantasy.DataStructure.Collection
             Clear();
             // 将实例返回到对象池中，以便重用
             MultiThreadPool.Return(this);
-        }
-
-        /// <summary>
-        /// 获取一个值，该值指示当前实例是否为对象池中的实例。
-        /// </summary>
-        /// <returns></returns>
-        public bool IsPool()
-        {
-            return _isPool;
-        }
-
-        /// <summary>
-        /// 设置一个值，该值指示当前实例是否为对象池中的实例。
-        /// </summary>
-        /// <param name="isPool"></param>
-        public void SetIsPool(bool isPool)
-        {
-            _isPool = isPool;
         }
     }
 

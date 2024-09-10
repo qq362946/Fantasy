@@ -479,13 +479,7 @@ namespace Fantasy
         #region InnerSession
 
 #if FANTASY_NET
-        /// <summary>
-        /// 根据runTimeId获得Session
-        /// </summary>
-        /// <param name="runTimeId"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public Session GetSession(long runTimeId)
+        internal Session GetSession(long runTimeId)
         {
             var sceneId = RuntimeIdFactory.GetSceneId(ref runTimeId);
 
@@ -499,13 +493,13 @@ namespace Fantasy
                 _processSessionInfos.Remove(sceneId);
             }
 
-            // if (Process.IsInAppliaction(ref sceneId))
-            // {
-            //     // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
-            //     var processSession = Session.CreateInnerSession(Scene);
-            //     _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
-            //     return processSession;
-            // }
+            if (Process.IsInAppliaction(ref sceneId))
+            {
+                // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
+                var processSession = Session.CreateInnerSession(Scene);
+                _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
+                return processSession;
+            }
 
             if (!SceneConfigData.Instance.TryGet(sceneId, out var sceneConfig))
             {

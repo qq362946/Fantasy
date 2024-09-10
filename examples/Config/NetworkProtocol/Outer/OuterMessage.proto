@@ -11,6 +11,7 @@ message C2G_TestMessage // IMessage
 {
 	string Tag = 1;
 }
+// Protocol MemoryPack
 message C2G_TestRequest // IRequest,G2C_TestResponse
 {
 	string Tag = 1;

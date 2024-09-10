@@ -14,7 +14,7 @@ public struct OnceTimerEvent
 
 public sealed class OnOnceTimerEvent : EventSystem<OnceTimerEvent>
 {
-    protected override void Handler(OnceTimerEvent self)
+    public override void Handler(OnceTimerEvent self)
     {
         Log.Debug("使用OnceTimer在2秒后执行了一个Event");
     }

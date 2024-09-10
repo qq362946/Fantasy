@@ -96,7 +96,8 @@ namespace Fantasy.Network.TCP
                     channelId = 0xC0000000 | (uint)_random.Next();
                 } while (_connectionChannel.ContainsKey(channelId));
 
-                _connectionChannel.Add(channelId, new TCPServerNetworkChannel(this, asyncEventArgs.AcceptSocket, channelId));
+                _connectionChannel.Add(channelId,
+                    new TCPServerNetworkChannel(this, asyncEventArgs.AcceptSocket, channelId));
             }
             catch (Exception e)
             {

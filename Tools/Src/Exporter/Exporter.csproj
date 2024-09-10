@@ -28,7 +28,6 @@
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
       <PackageReference Include="EPPlus" Version="7.3.0" />
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
       <PackageReference Include="MongoDB.Bson" Version="2.28.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="protobuf-net" Version="3.2.30" />
@@ -48,9 +47,6 @@
       </Compile>
       <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\ConfigTable\Dictionary\StringDictionaryConfig.cs">
         <Link>Excel\Base\Dictionary\StringDictionaryConfig.cs</Link>
-      </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\HashCodeHelper.cs">
-        <Link>Core\Helper\HashCodeHelper.cs</Link>
       </Compile>
       <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Pool\Interface\IPool.cs">
         <Link>Excel\Base\IPool.cs</Link>
@@ -73,35 +69,14 @@
       <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Pool\Normal\Pool.cs">
         <Link>Excel\Base\Pool.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\BsonPack\BsonPackHelper.cs">
-        <Link>Core\Serialize\BsonPack\BsonPackHelper.cs</Link>
-      </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\BsonPack\StructBsonSerialize.cs">
-        <Link>Core\Serialize\BsonPack\StructBsonSerialize.cs</Link>
-      </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\BsonPack\SupportInitializeChecker.cs">
-        <Link>Core\Serialize\BsonPack\SupportInitializeChecker.cs</Link>
-      </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\Interface\ASerialize.cs">
-        <Link>Core\Serialize\Interface\ASerialize.cs</Link>
-      </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\Interface\ISerialize.cs">
-        <Link>Core\Serialize\Interface\ISerialize.cs</Link>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\ASerialize.cs">
+        <Link>Excel\Base\ASerialize.cs</Link>
       </Compile>
       <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\MemoryStreamBuffer.cs">
         <Link>Excel\Base\MemoryStreamBuffer.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\ProtoBufPackHelper\IProto.cs">
-        <Link>Core\Serialize\ProtoBufPackHelper\IProto.cs</Link>
-      </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\ProtoBufPackHelper\ProtoBufPackHelperNet.cs">
-        <Link>Core\Serialize\ProtoBufPackHelper\ProtoBufPackHelperNet.cs</Link>
-      </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\ProtoBufPackHelper\ProtoBufPackHelperUnity.cs">
-        <Link>Core\Serialize\ProtoBufPackHelper\ProtoBufPackHelperUnity.cs</Link>
-      </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\SerializerManager.cs">
-        <Link>Core\Serialize\SerializerManager.cs</Link>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\ProtoBufPackHelper\ProtoBufPackHelper.cs">
+        <Link>Excel\Base\ProtoBufPackHelper.cs</Link>
       </Compile>
     </ItemGroup>
 

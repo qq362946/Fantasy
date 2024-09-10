@@ -20,7 +20,6 @@ namespace Fantasy.DataBase
         private string _dbName;
         private string _connectionString;
         private MongoClient _mongoClient;
-        private ISerialize _serializer;
         private IMongoDatabase _mongoDatabase;
         private CoroutineLock _dataBaseLock;
         private readonly HashSet<string> _collections = new HashSet<string>();
@@ -42,7 +41,6 @@ namespace Fantasy.DataBase
             _dataBaseLock = scene.CoroutineLockComponent.Create(GetType().TypeHandle.Value.ToInt64());
             // 记录所有集合名
             _collections.UnionWith(_mongoDatabase.ListCollectionNames().ToList());
-            _serializer = SerializerManager.GetSerializer(FantasySerializerType.Bson);
             return this;
         }
 
@@ -529,7 +527,7 @@ namespace Fantasy.DataBase
                 return;
             }
 
-            var clone = _serializer.Clone(entity);
+            var clone = BsonPackHelper.Clone(entity);
 
             using (await _dataBaseLock.Wait(clone.Id))
             {
@@ -554,7 +552,7 @@ namespace Fantasy.DataBase
                 return;
             }
 
-            var clone = _serializer.Clone(entity);
+            var clone = BsonPackHelper.Clone(entity);
 
             using (await _dataBaseLock.Wait(clone.Id))
             {
@@ -578,7 +576,7 @@ namespace Fantasy.DataBase
                 return;
             }
 
-            var clone = _serializer.Clone(entity);
+            var clone = BsonPackHelper.Clone(entity);
 
             using (await _dataBaseLock.Wait(clone.Id))
             {
@@ -600,7 +598,7 @@ namespace Fantasy.DataBase
                 return;
             }
 
-            var clones = _serializer.Clone(entities);
+            var clones = BsonPackHelper.Clone(entities);
 
             using (await _dataBaseLock.Wait(id))
             {

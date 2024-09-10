@@ -172,7 +172,7 @@ public sealed partial class ExcelExporter
                 break;
             }
         }
-        SerializerManager.Initialize();
+
         Find();
         Parsing();
         ExportToBinary();
@@ -705,14 +705,14 @@ public sealed partial class ExcelExporter
 
                 if (serverDynamicInfo?.ConfigData != null)
                 {
-                    var memoryStream = new MemoryStreamBuffer();
-                    SerializerManager.GetSerializer(FantasySerializerType.ProtoBuf).Serialize(serverDynamicInfo.ConfigData, memoryStream);
+                    var bytes = ProtoBufPackHelper.Serialize(serverDynamicInfo.ConfigData);
+                    
                     if (!Directory.Exists(_excelServerBinaryDirectory))
                     {
                         Directory.CreateDirectory(_excelServerBinaryDirectory);
                     }
-                    var asSpan = memoryStream.GetBuffer().AsSpan(0, (int)memoryStream.Position);
-                    File.WriteAllBytes(Path.Combine(_excelServerBinaryDirectory, $"{csName}Data.bytes"), asSpan.ToArray());
+                    
+                    File.WriteAllBytes(Path.Combine(_excelServerBinaryDirectory, $"{csName}Data.bytes"), bytes);
 
                     if (serverDynamicInfo.Json.Length > 0)
                     {
@@ -729,14 +729,14 @@ public sealed partial class ExcelExporter
                 
                 if (clientDynamicInfo?.ConfigData != null)
                 {
-                    var memoryStream = new MemoryStreamBuffer();
-                    SerializerManager.GetSerializer(FantasySerializerType.ProtoBuf).Serialize(clientDynamicInfo.ConfigData, memoryStream);
+                    var bytes = ProtoBufPackHelper.Serialize(clientDynamicInfo.ConfigData);
+                    
                     if (!Directory.Exists(_excelClientBinaryDirectory))
                     {
                         Directory.CreateDirectory(_excelClientBinaryDirectory);
                     }
-                    var asSpan = memoryStream.GetBuffer().AsSpan(0, (int)memoryStream.Position);
-                    File.WriteAllBytes(Path.Combine(_excelClientBinaryDirectory, $"{csName}Data.bytes"), asSpan.ToArray());
+                    
+                    File.WriteAllBytes(Path.Combine(_excelClientBinaryDirectory, $"{csName}Data.bytes"), bytes);
                 
                     if (clientDynamicInfo.Json.Length > 0)
                     {

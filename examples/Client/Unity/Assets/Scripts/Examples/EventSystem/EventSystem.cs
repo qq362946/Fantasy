@@ -20,7 +20,7 @@ public class TestEventEntity : Entity
 // 这个是订阅了一个同步的事件，监听的事件参数是TestEvent
 public class OnTestEvent : EventSystem<TestEvent>
 {
-    protected override void Handler(TestEvent self)
+    public override void Handler(TestEvent self)
     {
         Log.Debug($"接收到TestEvent事件{self.Age}");
     }
@@ -29,7 +29,7 @@ public class OnTestEvent : EventSystem<TestEvent>
 // 这个是订阅了一个异步步的事件，监听的事件参数是TestEvent
 public class OnTestEventAsync : AsyncEventSystem<TestEvent>
 {
-    protected override async FTask Handler(TestEvent self)
+    public override async FTask Handler(TestEvent self)
     {
         Log.Debug($"接收到TestEvent 异步事件{self.Age}");
         await FTask.CompletedTask;
@@ -39,7 +39,7 @@ public class OnTestEventAsync : AsyncEventSystem<TestEvent>
 // 这个是订阅了一个同步的事件，监听的事件参数是TestEvent
 public class OnTestEventEntity : EventSystem<TestEventEntity>
 {
-    protected override void Handler(TestEventEntity self)
+    public override void Handler(TestEventEntity self)
     {
         Log.Debug($"接收到TestEventEntity事件{self.Age}");
     }
@@ -48,7 +48,7 @@ public class OnTestEventEntity : EventSystem<TestEventEntity>
 // 这个是订阅了一个异步步的事件，监听的事件参数是TestEvent
 public class OnTestEventEntityAsync : AsyncEventSystem<TestEventEntity>
 {
-    protected override async FTask Handler(TestEventEntity self)
+    public override async FTask Handler(TestEventEntity self)
     {
         Log.Debug($"接收到TestEventEntity 异步事件{self.Age}");
         await FTask.CompletedTask;

@@ -44,7 +44,7 @@ namespace Fantasy.Pool
                 return new T();
             }
             
-            queue.SetIsPool(true);
+            queue.IsPool = true;
             _poolCount--;
             return (T)queue;
         }
@@ -73,11 +73,11 @@ namespace Fantasy.Pool
                 }
                 
                 var instance = createInstance();
-                instance.SetIsPool(true);
+                instance.IsPool = true;
                 return instance;
             }
             
-            queue.SetIsPool(true);
+            queue.IsPool = true;
             _poolCount--;
             return queue;
         }
@@ -94,7 +94,7 @@ namespace Fantasy.Pool
                 return;
             }
 
-            if (!obj.IsPool())
+            if (!obj.IsPool)
             {
                 return;
             }
@@ -105,7 +105,7 @@ namespace Fantasy.Pool
             }
 
             _poolCount++;
-            obj.SetIsPool(false);
+            obj.IsPool = false;
             _poolQueue.Enqueue(type, obj);
         }
 
@@ -155,7 +155,7 @@ namespace Fantasy.Pool
             }
 
             var dequeue = _poolQueue.Dequeue();
-            dequeue.SetIsPool(true);
+            dequeue.IsPool = true;
             _poolCount--;
             return dequeue;
         }
@@ -171,7 +171,7 @@ namespace Fantasy.Pool
                 return;
             }
             
-            if (!item.IsPool())
+            if (!item.IsPool)
             {
                 return;
             }
@@ -182,7 +182,7 @@ namespace Fantasy.Pool
             }
 
             _poolCount++;
-            item.SetIsPool(false);
+            item.IsPool = false;
             _poolQueue.Enqueue(item);
         }
         

@@ -39,12 +39,12 @@ namespace Fantasy.Entitas
             if (!_poolQueue.TryDequeue(typeof(T), out var queue))
             {
                 var instance = new T();
-                instance.SetScene(Scene);
-                instance.SetIsPool(true);
+                instance.Scene = Scene;
+                instance.IsPool = true;
                 return instance;
             }
 
-            queue.SetIsPool(true);
+            queue.IsPool = true;
             _poolCount--;
             return (T)queue;
         }
@@ -74,12 +74,12 @@ namespace Fantasy.Entitas
                 }
                 
                 var instance = createInstance();
-                instance.SetScene(Scene);
-                instance.SetIsPool(true);
+                instance.Scene = Scene;
+                instance.IsPool = true;
                 return instance;
             }
             
-            queue.SetIsPool(true);
+            queue.IsPool = true;
             _poolCount--;
             return queue;
         }
@@ -94,7 +94,7 @@ namespace Fantasy.Entitas
                 return;
             }
 
-            if (!obj.IsPool())
+            if (!obj.IsPool)
             {
                 return;
             }
@@ -105,7 +105,7 @@ namespace Fantasy.Entitas
             }
             
             _poolCount++;
-            obj.SetIsPool(false);
+            obj.IsPool = false;
             _poolQueue.Enqueue(obj.GetType(), obj);
         }
 
@@ -121,7 +121,7 @@ namespace Fantasy.Entitas
                 return;
             }
 
-            if (!obj.IsPool())
+            if (!obj.IsPool)
             {
                 return;
             }
@@ -132,7 +132,7 @@ namespace Fantasy.Entitas
             }
             
             _poolCount++;
-            obj.SetIsPool(false);
+            obj.IsPool = false;
             _poolQueue.Enqueue(typeof(T), obj);
         }
     }

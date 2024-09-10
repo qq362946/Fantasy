@@ -5,10 +5,9 @@ using System.Runtime.Serialization;
 using Fantasy.Entitas.Interface;
 using Fantasy.Pool;
 using Fantasy.Serialize;
+using MemoryPack;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
-using ProtoBuf;
-
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable MergeIntoPattern
 // ReSharper disable SuspiciousTypeConversion.Global
@@ -32,15 +31,14 @@ namespace Fantasy.Entitas
     public abstract class Entity : IEntity
     {
         #region Members
-
         /// <summary>
         /// 获取一个值，表示实体是否支持对象池。
         /// </summary>
-        [BsonIgnore] 
-        [JsonIgnore] 
-        [ProtoIgnore]
+        [BsonIgnore]
+        [JsonIgnore]
         [IgnoreDataMember]
-        private bool _isPool;
+        [MemoryPackIgnore]
+        public bool IsPool { get; set; }
         /// <summary>
         /// 实体的Id
         /// </summary>
@@ -54,7 +52,7 @@ namespace Fantasy.Entitas
         /// </summary>
         [BsonIgnore]
         [IgnoreDataMember]
-        [ProtoIgnore]
+        [MemoryPackIgnore]
         public long RunTimeId { get; protected set; }
         /// <summary>
         /// 当前实体是否已经被销毁
@@ -62,7 +60,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [ProtoIgnore]
+        [MemoryPackIgnore]
         public bool IsDisposed => RunTimeId == 0;
         /// <summary>
         /// 当前实体所归属的Scene
@@ -70,7 +68,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [ProtoIgnore]
+        [MemoryPackIgnore]
         public Scene Scene { get; protected set; }
         /// <summary>
         /// 实体的父实体
@@ -78,7 +76,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [ProtoIgnore]
+        [MemoryPackIgnore]
         public Entity Parent { get; protected set; }
         /// <summary>
         /// 实体的真实Type
@@ -86,14 +84,14 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [ProtoIgnore]
+        [MemoryPackIgnore]
         public Type Type { get; protected set; }
 #if FANTASY_NET
         [BsonElement("t")] [BsonIgnoreIfNull] private EntityList<Entity> _treeDb;
         [BsonElement("m")] [BsonIgnoreIfNull] private EntityList<Entity> _multiDb;
 #endif
-        [BsonIgnore] [IgnoreDataMember] [ProtoIgnore] private EntitySortedDictionary<long, Entity> _tree;
-        [BsonIgnore] [IgnoreDataMember] [ProtoIgnore] private EntitySortedDictionary<long, Entity> _multi;
+        [BsonIgnore] [IgnoreDataMember] [MemoryPackIgnore] private EntitySortedDictionary<long, Entity> _tree;
+        [BsonIgnore] [IgnoreDataMember] [MemoryPackIgnore] private EntitySortedDictionary<long, Entity> _multi;
         
         /// <summary>
         /// 获得父Entity
@@ -122,7 +120,7 @@ namespace Fantasy.Entitas
             var entity = isPool ? scene.EntityPool.Rent<T>() : new T();
             entity.Scene = scene;
             entity.Type = typeof(T);
-            entity.SetIsPool(isPool);
+            entity.IsPool = isPool;
             entity.Id = scene.EntityIdFactory.Create;
             entity.RunTimeId = scene.RuntimeIdFactory.Create;
             scene.AddEntity(entity);
@@ -150,7 +148,7 @@ namespace Fantasy.Entitas
             var entity = isPool ? scene.EntityPool.Rent<T>() : new T();
             entity.Scene = scene;
             entity.Type = typeof(T);
-            entity.SetIsPool(isPool);
+            entity.IsPool = isPool;
             entity.Id = id;
             entity.RunTimeId = scene.RuntimeIdFactory.Create;
             scene.AddEntity(entity);
@@ -725,7 +723,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [ProtoIgnore]
+        [MemoryPackIgnore]
         public IEnumerable<Entity> ForEachSingleCollection
         {
             get
@@ -747,7 +745,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [ProtoIgnore]
+        [MemoryPackIgnore]
         public IEnumerable<Entity> ForEachTransfer
         {
             get
@@ -784,7 +782,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [ProtoIgnore]
+        [MemoryPackIgnore]
         public IEnumerable<Entity> ForEachMultiEntity
         {
             get
@@ -806,7 +804,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [JsonIgnore]
         [IgnoreDataMember]
-        [ProtoIgnore]
+        [MemoryPackIgnore]
         public IEnumerable<Entity> ForEachEntity
         {
             get
@@ -822,6 +820,27 @@ namespace Fantasy.Entitas
                 }
             }
         }
+        #endregion
+
+        #region Clone
+
+        /// <summary>
+        /// 克隆一个实体
+        /// </summary>
+        /// <returns></returns>
+        public Entity Clone()
+        {
+#if FANTASY_NET
+            var entity = BsonPackHelper.Clone(this);
+            entity.Deserialize(Scene, true);
+            return entity;
+#elif FANTASY_UNITY
+            var entity = MemoryPackHelper.Clone(this);
+            entity.Deserialize(Scene, true);
+            return entity;
+#endif
+        }
+
         #endregion
 
         #region Dispose
@@ -897,34 +916,12 @@ namespace Fantasy.Entitas
             Parent = null;
             scene.RemoveEntity(runTimeId);
 
-            if (IsPool())
+            if (IsPool)
             {
                 scene.EntityPool.Return(Type, this);
             }
 
             Type = null;
-        }
-
-        #endregion
-
-        #region Pool
-
-        /// <summary>
-        /// 获取一个值，该值指示当前实例是否为对象池中的实例。
-        /// </summary>
-        /// <returns></returns>
-        public bool IsPool()
-        {
-            return _isPool;
-        }
-
-        /// <summary>
-        /// 设置一个值，该值指示当前实例是否为对象池中的实例。
-        /// </summary>
-        /// <param name="isPool"></param>
-        public void SetIsPool(bool isPool)
-        {
-            _isPool = isPool;
         }
 
         #endregion

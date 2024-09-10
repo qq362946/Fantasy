@@ -25,7 +25,7 @@ namespace Fantasy.Pool
 
         public static void Return<T>(T obj) where T : IPool, new()
         {
-            if (!obj.IsPool())
+            if (!obj.IsPool)
             {
                 return;
             }

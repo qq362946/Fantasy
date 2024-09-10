@@ -2,7 +2,6 @@ using System;
 using System.Buffers;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Fantasy.Helper
@@ -256,13 +255,11 @@ namespace Fantasy.Helper
             {
                 throw new ArgumentException("Buffer too small.");
             }
-            
-#if FANTASY_NET
-            MemoryMarshal.Write(buffer.AsSpan(), in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(buffer.AsSpan(), ref value);
-#endif
+                
+            buffer[0] = (byte)value;
+            buffer[1] = (byte)(value >> 8);
+            buffer[2] = (byte)(value >> 16);
+            buffer[3] = (byte)(value >> 24);
         }
 
         /// <summary>
@@ -276,12 +273,10 @@ namespace Fantasy.Helper
         {
             using var memoryOwner = MemoryPool<byte>.Shared.Rent(4);
             var memorySpan = memoryOwner.Memory.Span;
-#if FANTASY_NET
-            MemoryMarshal.Write(memorySpan, in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(memorySpan, ref value);
-#endif
+            memorySpan[0] = (byte)value;
+            memorySpan[1] = (byte)(value >> 8);
+            memorySpan[2] = (byte)(value >> 16);
+            memorySpan[3] = (byte)(value >> 24);
             memoryStream.Write(memorySpan);
         }
 
@@ -299,12 +294,10 @@ namespace Fantasy.Helper
                 throw new ArgumentException("Buffer too small.");
             }
                 
-#if FANTASY_NET
-            MemoryMarshal.Write(buffer.AsSpan(), in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(buffer.AsSpan(), ref value);
-#endif
+            buffer[0] = (byte)value;
+            buffer[1] = (byte)(value >> 8);
+            buffer[2] = (byte)(value >> 16);
+            buffer[3] = (byte)(value >> 24);
         }
         
         /// <summary>
@@ -318,12 +311,10 @@ namespace Fantasy.Helper
         {
             using var memoryOwner = MemoryPool<byte>.Shared.Rent(4);
             var memorySpan = memoryOwner.Memory.Span;
-#if FANTASY_NET
-            MemoryMarshal.Write(memorySpan, in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(memorySpan, ref value);
-#endif
+            memorySpan[0] = (byte)value;
+            memorySpan[1] = (byte)(value >> 8);
+            memorySpan[2] = (byte)(value >> 16);
+            memorySpan[3] = (byte)(value >> 24);
             memoryStream.Write(memorySpan);
         }
         
@@ -340,12 +331,15 @@ namespace Fantasy.Helper
             {
                 throw new ArgumentException("Buffer too small.");
             }
-#if FANTASY_NET
-            MemoryMarshal.Write(buffer.AsSpan(), in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(buffer.AsSpan(), ref value);
-#endif
+                
+            buffer[0] = (byte)value;
+            buffer[1] = (byte)(value >> 8);
+            buffer[2] = (byte)(value >> 16);
+            buffer[3] = (byte)(value >> 24);
+            buffer[4] = (byte)(value >> 32);
+            buffer[5] = (byte)(value >> 40);
+            buffer[6] = (byte)(value >> 48);
+            buffer[7] = (byte)(value >> 56);
         }
         
         /// <summary>
@@ -359,12 +353,14 @@ namespace Fantasy.Helper
         {
             using var memoryOwner = MemoryPool<byte>.Shared.Rent(8);
             var memorySpan = memoryOwner.Memory.Span;
-#if FANTASY_NET
-            MemoryMarshal.Write(memorySpan, in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(memorySpan, ref value);
-#endif
+            memorySpan[0] = (byte)value;
+            memorySpan[1] = (byte)(value >> 8);
+            memorySpan[2] = (byte)(value >> 16);
+            memorySpan[3] = (byte)(value >> 24);
+            memorySpan[4] = (byte)(value >> 32);
+            memorySpan[5] = (byte)(value >> 40);
+            memorySpan[6] = (byte)(value >> 48);
+            memorySpan[7] = (byte)(value >> 56);
             memoryStream.Write(memorySpan);
         }
     }

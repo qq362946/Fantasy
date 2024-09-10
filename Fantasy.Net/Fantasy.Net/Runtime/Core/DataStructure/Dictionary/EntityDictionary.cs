@@ -11,7 +11,10 @@ namespace Fantasy.DataStructure.Dictionary
     /// <typeparam name="TN">字典中值的类型，必须实现 IDisposable 接口。</typeparam>
     public sealed class EntityDictionary<TM, TN> : Dictionary<TM, TN>, IDisposable, IPool where TN : IDisposable where TM : notnull
     {
-        private bool _isPool;
+        /// <summary>
+        /// 是否是池
+        /// </summary>
+        public bool IsPool { get; set; }
         private bool _isDispose;
 
         /// <summary>
@@ -26,7 +29,7 @@ namespace Fantasy.DataStructure.Dictionary
             var entityDictionary = MultiThreadPool.Rent<EntityDictionary<TM, TN>>();
 #endif
             entityDictionary._isDispose = false;
-            entityDictionary._isPool = true;
+            entityDictionary.IsPool = true;
             return entityDictionary;
         }
 
@@ -68,24 +71,6 @@ namespace Fantasy.DataStructure.Dictionary
 #else
             MultiThreadPool.Return(this);
 #endif
-        }
-
-        /// <summary>
-        /// 获取一个值，该值指示当前实例是否为对象池中的实例。
-        /// </summary>
-        /// <returns></returns>
-        public bool IsPool()
-        {
-            return _isPool;
-        }
-
-        /// <summary>
-        /// 设置一个值，该值指示当前实例是否为对象池中的实例。
-        /// </summary>
-        /// <param name="isPool"></param>
-        public void SetIsPool(bool isPool)
-        {
-            _isPool = isPool;
         }
     }
 }

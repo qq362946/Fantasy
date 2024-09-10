@@ -205,7 +205,8 @@ namespace Fantasy.Network.TCP
         {
             try
             {
-                await _socket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position), SocketFlags.None);
+                await _socket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Length),
+                    SocketFlags.None);
             }
             catch (SocketException)
             {

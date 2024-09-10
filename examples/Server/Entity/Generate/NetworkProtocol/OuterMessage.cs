@@ -1,5 +1,5 @@
 using ProtoBuf;
-
+using MemoryPack;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using Fantasy;
@@ -28,15 +28,15 @@ namespace Fantasy
 		{
 			Tag = default;
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<C2G_TestMessage>(this);
+			Scene.MessagePoolComponent.Return<C2G_TestMessage>(this);
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.C2G_TestMessage; }
 		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
-	[ProtoContract]
-	public partial class C2G_TestRequest : AMessage, IRequest, IProto
+	[MemoryPackable]
+	public partial class C2G_TestRequest : AMessage, IRequest
 	{
 		public static C2G_TestRequest Create(Scene scene)
 		{
@@ -46,13 +46,13 @@ namespace Fantasy
 		{
 			Tag = default;
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<C2G_TestRequest>(this);
+			Scene.MessagePoolComponent.Return<C2G_TestRequest>(this);
 #endif
 		}
-		[ProtoIgnore]
+		[MemoryPackIgnore]
 		public G2C_TestResponse ResponseType { get; set; }
 		public uint OpCode() { return OuterOpcode.C2G_TestRequest; }
-		[ProtoMember(1)]
+		[MemoryPackOrder(0)]
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
@@ -67,7 +67,7 @@ namespace Fantasy
 			ErrorCode = default;
 			Tag = default;
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<G2C_TestResponse>(this);
+			Scene.MessagePoolComponent.Return<G2C_TestResponse>(this);
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.G2C_TestResponse; }
@@ -86,7 +86,7 @@ namespace Fantasy
 		public override void Dispose()
 		{
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<C2G_CreateAddressableRequest>(this);
+			Scene.MessagePoolComponent.Return<C2G_CreateAddressableRequest>(this);
 #endif
 		}
 		[ProtoIgnore]
@@ -104,7 +104,7 @@ namespace Fantasy
 		{
 			ErrorCode = default;
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<G2C_CreateAddressableResponse>(this);
+			Scene.MessagePoolComponent.Return<G2C_CreateAddressableResponse>(this);
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.G2C_CreateAddressableResponse; }
@@ -122,7 +122,7 @@ namespace Fantasy
 		{
 			Tag = default;
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<C2M_TestMessage>(this);
+			Scene.MessagePoolComponent.Return<C2M_TestMessage>(this);
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.C2M_TestMessage; }
@@ -140,7 +140,7 @@ namespace Fantasy
 		{
 			Tag = default;
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<C2M_TestRequest>(this);
+			Scene.MessagePoolComponent.Return<C2M_TestRequest>(this);
 #endif
 		}
 		[ProtoIgnore]
@@ -161,7 +161,7 @@ namespace Fantasy
 			ErrorCode = default;
 			Tag = default;
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<M2C_TestResponse>(this);
+			Scene.MessagePoolComponent.Return<M2C_TestResponse>(this);
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.M2C_TestResponse; }
@@ -183,7 +183,7 @@ namespace Fantasy
 		public override void Dispose()
 		{
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<C2G_CreateChatRouteRequest>(this);
+			Scene.MessagePoolComponent.Return<C2G_CreateChatRouteRequest>(this);
 #endif
 		}
 		[ProtoIgnore]
@@ -201,7 +201,7 @@ namespace Fantasy
 		{
 			ErrorCode = default;
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<G2C_CreateChatRouteResponse>(this);
+			Scene.MessagePoolComponent.Return<G2C_CreateChatRouteResponse>(this);
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.G2C_CreateChatRouteResponse; }
@@ -222,7 +222,7 @@ namespace Fantasy
 		{
 			Tag = default;
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<C2Chat_TestMessage>(this);
+			Scene.MessagePoolComponent.Return<C2Chat_TestMessage>(this);
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.C2Chat_TestMessage; }
@@ -245,7 +245,7 @@ namespace Fantasy
 		{
 			Tag = default;
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<C2Chat_TestMessageRequest>(this);
+			Scene.MessagePoolComponent.Return<C2Chat_TestMessageRequest>(this);
 #endif
 		}
 		[ProtoIgnore]
@@ -268,7 +268,7 @@ namespace Fantasy
 			ErrorCode = default;
 			Tag = default;
 #if FANTASY_NET || FANTASY_UNITY
-			GetScene().MessagePoolComponent.Return<Chat2C_TestMessageResponse>(this);
+			Scene.MessagePoolComponent.Return<Chat2C_TestMessageResponse>(this);
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.Chat2C_TestMessageResponse; }
