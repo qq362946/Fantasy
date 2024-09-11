@@ -1,10 +1,12 @@
 using Fantasy.Entitas;
+using Fantasy.Network.HTTP;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fantasy;
 
 [ApiController]
 [Route("api/[controller]")]
+[ServiceFilter(typeof(SceneContextFilter))]
 public class HelloController : ControllerBase
 {
     private readonly Scene _scene;
@@ -21,6 +23,7 @@ public class HelloController : ControllerBase
     [HttpGet("greet")]
     public IActionResult Greet()
     {
+        Log.Debug($"HelloController Thread.CurrentThread.ManagedThreadId:{Thread.CurrentThread.ManagedThreadId}");
         return Ok($"Hello from the Fantasy controller! _scene.SceneType:{_scene.SceneType} _scene.SceneType:{_scene.SceneConfigId}");
     }
 }

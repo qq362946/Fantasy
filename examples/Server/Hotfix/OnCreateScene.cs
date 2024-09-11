@@ -31,6 +31,11 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             {
                 break;
             }
+            case SceneType.Chat:
+            {
+                Log.Debug($"SceneType.Chat Thread.CurrentThread.ManagedThreadId:{Thread.CurrentThread.ManagedThreadId}");
+                break;
+            }
             case SceneType.Gate:
             {
                 //     var tasks = new List<FTask>(2000);

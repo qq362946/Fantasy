@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+#pragma warning disable CS8604 // Possible null reference argument.
 
 // ReSharper disable PossibleMultipleEnumeration
 
@@ -54,6 +55,8 @@ namespace Fantasy.Network.HTTP
             builder.Logging.SetMinimumLevel(LogLevel.Warning);
             // 将Scene注册到 DI 容器中，传递给控制器
             builder.Services.AddSingleton(Scene);
+            // 注册Scene同步过滤器
+            builder.Services.AddScoped<SceneContextFilter>();
             // 注册控制器服务
             var addControllers = builder.Services.AddControllers();
             foreach (var assembly in AssemblySystem.ForEachAssembly)
