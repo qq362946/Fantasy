@@ -33,7 +33,6 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Chat:
             {
-                Log.Debug($"SceneType.Chat Thread.CurrentThread.ManagedThreadId:{Thread.CurrentThread.ManagedThreadId}");
                 break;
             }
             case SceneType.Gate:
