@@ -34,6 +34,10 @@ namespace Fantasy.Network.Interface
             NetworkTarget = networkTarget;
             NetworkProtocolType = networkProtocolType;
 #if FANTASY_NET
+            if (networkProtocolType == NetworkProtocolType.HTTP)
+            {
+                return;
+            }
             if (networkTarget == NetworkTarget.Inner)
             {
                 _innerPackInfoPool = new Queue<InnerPackInfo>();

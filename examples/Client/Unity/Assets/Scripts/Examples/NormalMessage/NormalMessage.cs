@@ -1,6 +1,8 @@
 using Fantasy;
 using Fantasy.Async;
 using Fantasy.Network;
+using Fantasy.Unity;
+using Fantasy.Unity.Download;
 using UnityEngine;
 using UnityEngine.UI;
 

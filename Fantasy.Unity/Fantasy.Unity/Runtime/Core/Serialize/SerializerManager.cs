@@ -56,14 +56,16 @@ namespace Fantasy.Serialize
                     var computeHash64 = HashCodeHelper.ComputeHash64(serializer.SerializeName);
                     sort.Add(computeHash64, serializer);
                 }
-                
-                var index = 1;
+
 #if FANTASY_NET
-               _serializers = new ISerialize[sort.Count]; 
+                var index = 1;
 #endif
 #if FANTASY_UNITY
-                _serializers = new ISerialize[sort.Count + 1];
+                var index = 0;
 #endif
+                
+                _serializers = new ISerialize[sort.Count];
+            
                 foreach (var (_, serialize) in sort)
                 {
                     var serializerIndex = 0;

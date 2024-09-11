@@ -61,5 +61,9 @@ namespace Fantasy.Network
         /// WebSocket
         /// </summary>
         WebSocket = 3,
+        /// <summary>
+        /// HTTP
+        /// </summary>
+        HTTP = 4,
     }
 }

@@ -7,6 +7,9 @@ using Fantasy.Network.Interface;
 using Fantasy.Network.TCP;
 using Fantasy.Network.KCP;
 #endif
+#if FANTASY_NET
+using Fantasy.Network.HTTP;
+#endif
 using Fantasy.Network.WebSocket;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -37,6 +40,13 @@ namespace Fantasy.Network
                 case NetworkProtocolType.WebSocket:
                 {
                     var network = Entity.Create<WebSocketServerNetwork>(scene, false, true);
+                    var urls = isHttps ? new [] { $"https://{bindIp}:{port}/" } : new [] { $"http://{bindIp}:{port}/" };
+                    network.Initialize(networkTarget, urls);
+                    return network;
+                }
+                case NetworkProtocolType.HTTP:
+                {
+                    var network = Entity.Create<HTTPServerNetwork>(scene, false, true);
                     var urls = isHttps ? new [] { $"https://{bindIp}:{port}/" } : new [] { $"http://{bindIp}:{port}/" };
                     network.Initialize(networkTarget, urls);
                     return network;

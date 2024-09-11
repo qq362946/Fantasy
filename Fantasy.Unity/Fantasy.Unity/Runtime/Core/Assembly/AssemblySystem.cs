@@ -218,6 +218,21 @@ namespace Fantasy.Assembly
         {
             return !AssemblyList.TryGetValue(assemblyIdentity, out var assemblyInfo) ? null : assemblyInfo.Assembly;
         }
+
+        /// <summary>
+        /// 获取当前框架注册的Assembly
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<System.Reflection.Assembly> ForEachAssembly
+        {
+            get
+            {
+                foreach (var (_, assemblyInfo) in AssemblyList)
+                {
+                    yield return assemblyInfo.Assembly;
+                }
+            }
+        }
         
         /// <summary>
         /// 根据Assembly的强命名计算唯一标识。
