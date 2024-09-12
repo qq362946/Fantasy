@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Fantasy.Network.Interface;
 using Fantasy.Serialize;
 using ProtoBuf;
