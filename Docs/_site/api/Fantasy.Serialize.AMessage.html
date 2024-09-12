@@ -156,30 +156,55 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public abstract class AMessage : ASerialize, ISupportInitialize, IDisposable, IPool</code></pre>
   </div>
-  <h3 id="properties">属性
+  <h3 id="methods">方法
 </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_AMessage_GetScene.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.AMessage.GetScene%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs/#L31">查看源代码</a>
+  </span>
+  <a id="Fantasy_Serialize_AMessage_GetScene_" data-uid="Fantasy.Serialize.AMessage.GetScene*"></a>
+  <h4 id="Fantasy_Serialize_AMessage_GetScene" data-uid="Fantasy.Serialize.AMessage.GetScene">GetScene()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Scene GetScene()</code></pre>
+  </div>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Fantasy.Scene.html">Scene</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_AMessage_IsPool.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.AMessage.IsPool%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs/#L36">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs/#L47">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_AMessage_IsPool_" data-uid="Fantasy.Serialize.AMessage.IsPool*"></a>
-  <h4 id="Fantasy_Serialize_AMessage_IsPool" data-uid="Fantasy.Serialize.AMessage.IsPool">IsPool</h4>
-  <div class="markdown level1 summary"><p>是否从吃池里创建的</p>
+  <h4 id="Fantasy_Serialize_AMessage_IsPool" data-uid="Fantasy.Serialize.AMessage.IsPool">IsPool()</h4>
+  <div class="markdown level1 summary"><p>是否从池里创建的</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[BsonIgnore]
-[JsonIgnore]
-[IgnoreDataMember]
-[ProtoIgnore]
-[MemoryPackIgnore]
-public bool IsPool { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool IsPool()</code></pre>
   </div>
-  <h5 class="propertyValue">属性值</h5>
+  <h5 class="returns">返回</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -196,35 +221,65 @@ public bool IsPool { get; set; }</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_AMessage_Scene.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.AMessage.Scene%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_AMessage_SetIsPool_System_Boolean_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.AMessage.SetIsPool(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs/#L29">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs/#L52">查看源代码</a>
   </span>
-  <a id="Fantasy_Serialize_AMessage_Scene_" data-uid="Fantasy.Serialize.AMessage.Scene*"></a>
-  <h4 id="Fantasy_Serialize_AMessage_Scene" data-uid="Fantasy.Serialize.AMessage.Scene">Scene</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="Fantasy_Serialize_AMessage_SetIsPool_" data-uid="Fantasy.Serialize.AMessage.SetIsPool*"></a>
+  <h4 id="Fantasy_Serialize_AMessage_SetIsPool_System_Boolean_" data-uid="Fantasy.Serialize.AMessage.SetIsPool(System.Boolean)">SetIsPool(bool)</h4>
+  <div class="markdown level1 summary"><p>设置是否从池里创建的</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[BsonIgnore]
-[JsonIgnore]
-[IgnoreDataMember]
-[ProtoIgnore]
-[MemoryPackIgnore]
-public Scene Scene { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetIsPool(bool isPool)</code></pre>
   </div>
-  <h5 class="propertyValue">属性值</h5>
+  <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
         <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">isPool</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_AMessage_SetScene_Fantasy_Scene_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.AMessage.SetScene(Fantasy.Scene)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs/#L36">查看源代码</a>
+  </span>
+  <a id="Fantasy_Serialize_AMessage_SetScene_" data-uid="Fantasy.Serialize.AMessage.SetScene*"></a>
+  <h4 id="Fantasy_Serialize_AMessage_SetScene_Fantasy_Scene_" data-uid="Fantasy.Serialize.AMessage.SetScene(Fantasy.Scene)">SetScene(Scene)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetScene(Scene scene)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
         <th>描述</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><a class="xref" href="Fantasy.Scene.html">Scene</a></td>
+        <td><span class="parametername">scene</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -255,7 +310,7 @@ public Scene Scene { get; set; }</code></pre>
                     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_AMessage.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.AMessage%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
                   </li>
                   <li>
-                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs/#L26" class="contribution-link">查看源代码</a>
+                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs/#L23" class="contribution-link">查看源代码</a>
                   </li>
                 </ul>
               </div>

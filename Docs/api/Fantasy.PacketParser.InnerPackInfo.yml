@@ -165,7 +165,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Deserialize
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/InnerPackInfo.cs
-    startLine: 48
+    startLine: 43
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser

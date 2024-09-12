@@ -25,7 +25,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: KCPServerNetworkChannel
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetworkChannel.cs
-    startLine: 18
+    startLine: 19
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network.KCP
@@ -73,7 +73,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Kcp
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetworkChannel.cs
-    startLine: 28
+    startLine: 26
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network.KCP
@@ -102,7 +102,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ChannelId
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetworkChannel.cs
-    startLine: 30
+    startLine: 27
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network.KCP
@@ -131,7 +131,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: .ctor
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetworkChannel.cs
-    startLine: 40
+    startLine: 29
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network.KCP
@@ -167,7 +167,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Dispose
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetworkChannel.cs
-    startLine: 50
+    startLine: 38
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network.KCP
@@ -196,7 +196,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Input
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetworkChannel.cs
-    startLine: 67
+    startLine: 55
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network.KCP
@@ -228,7 +228,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Send
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Server/KCPServerNetworkChannel.cs
-    startLine: 118
+    startLine: 106
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network.KCP

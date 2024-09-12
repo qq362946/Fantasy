@@ -6,7 +6,6 @@ items:
   parent: Fantasy.Network
   children:
   - Fantasy.Network.OpCodeProtocolType.Bson
-  - Fantasy.Network.OpCodeProtocolType.MemoryPack
   - Fantasy.Network.OpCodeProtocolType.ProtoBuf
   langs:
   - csharp
@@ -66,33 +65,6 @@ items:
     return:
       type: System.UInt32
     content.vb: Public Const Bson As UInteger = 1
-- uid: Fantasy.Network.OpCodeProtocolType.MemoryPack
-  commentId: F:Fantasy.Network.OpCodeProtocolType.MemoryPack
-  id: MemoryPack
-  parent: Fantasy.Network.OpCodeProtocolType
-  langs:
-  - csharp
-  - vb
-  name: MemoryPack
-  nameWithType: OpCodeProtocolType.MemoryPack
-  fullName: Fantasy.Network.OpCodeProtocolType.MemoryPack
-  type: Field
-  source:
-    remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-      branch: main
-      repo: https://github.com/qq362946/Fantasy.git
-    id: MemoryPack
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 45
-  assemblies:
-  - Fantasy.Net
-  namespace: Fantasy.Network
-  syntax:
-    content: public const uint MemoryPack = 2
-    return:
-      type: System.UInt32
-    content.vb: Public Const MemoryPack As UInteger = 2
 - uid: Fantasy.Network.OpCodeProtocolType.ProtoBuf
   commentId: F:Fantasy.Network.OpCodeProtocolType.ProtoBuf
   id: ProtoBuf
@@ -111,15 +83,15 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ProtoBuf
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 46
+    startLine: 45
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
   syntax:
-    content: public const uint ProtoBuf = 3
+    content: public const uint ProtoBuf = 0
     return:
       type: System.UInt32
-    content.vb: Public Const ProtoBuf As UInteger = 3
+    content.vb: Public Const ProtoBuf As UInteger = 0
 references:
 - uid: Fantasy.Network
   commentId: N:Fantasy.Network

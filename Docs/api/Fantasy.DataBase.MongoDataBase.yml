@@ -95,7 +95,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Initialize
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 33
+    startLine: 34
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -141,7 +141,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Sum
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 56
+    startLine: 58
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -190,7 +190,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Count
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 105
+    startLine: 107
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -233,7 +233,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Count
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 117
+    startLine: 119
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -279,7 +279,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Exist
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 132
+    startLine: 134
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -322,7 +322,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Exist
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 144
+    startLine: 146
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -368,7 +368,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: QueryNotLock
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 160
+    startLine: 162
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -414,7 +414,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Query
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 174
+    startLine: 176
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -460,7 +460,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: QueryCountAndDatesByPage
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 193
+    startLine: 195
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -512,7 +512,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: QueryCountAndDatesByPage
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 214
+    startLine: 216
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -567,7 +567,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: QueryByPage
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 236
+    startLine: 238
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -619,7 +619,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: QueryByPage
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 257
+    startLine: 259
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -674,7 +674,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: QueryByPageOrderBy
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 285
+    startLine: 287
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -732,7 +732,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: First
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 308
+    startLine: 310
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -778,7 +778,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: First
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 326
+    startLine: 328
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -827,7 +827,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: QueryOrderBy
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 356
+    startLine: 358
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -879,7 +879,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Query
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 378
+    startLine: 380
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -925,7 +925,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Query
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 395
+    startLine: 397
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -970,7 +970,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: QueryJson
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 427
+    startLine: 429
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1016,7 +1016,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: QueryJson
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 446
+    startLine: 448
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1065,7 +1065,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: QueryJson
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 475
+    startLine: 477
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1114,7 +1114,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Query
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 494
+    startLine: 496
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1163,7 +1163,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Save
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 521
+    startLine: 523
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1211,7 +1211,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Save
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 545
+    startLine: 547
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1256,7 +1256,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Save
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 592
+    startLine: 594
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1298,7 +1298,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Insert
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 629
+    startLine: 631
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1343,7 +1343,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InsertBatch
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 640
+    startLine: 642
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1388,7 +1388,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InsertBatch
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 655
+    startLine: 657
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1436,7 +1436,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Remove
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 677
+    startLine: 679
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1485,7 +1485,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Remove
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 695
+    startLine: 697
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1531,7 +1531,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Remove
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 713
+    startLine: 715
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1583,7 +1583,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Remove
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 732
+    startLine: 734
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1632,7 +1632,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: CreateIndex
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 758
+    startLine: 760
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1677,7 +1677,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: CreateIndex
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 782
+    startLine: 784
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1719,7 +1719,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: CreateDB
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 809
+    startLine: 811
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase
@@ -1757,7 +1757,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: CreateDB
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataBase/MongoDataBase.cs
-    startLine: 828
+    startLine: 830
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataBase

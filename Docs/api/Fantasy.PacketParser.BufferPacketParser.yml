@@ -25,7 +25,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: BufferPacketParser
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Handler/BufferPacketParser.cs
-    startLine: 22
+    startLine: 23
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -51,10 +51,6 @@ items:
   implements:
   - System.IDisposable
   inheritedMembers:
-  - Fantasy.PacketParser.Interface.APacketParser.BodyBuffer
-  - Fantasy.PacketParser.Interface.APacketParser.RpcIdBuffer
-  - Fantasy.PacketParser.Interface.APacketParser.OpCodeBuffer
-  - Fantasy.PacketParser.Interface.APacketParser.RouteIdBuffer
   - Fantasy.PacketParser.Interface.APacketParser.IsDisposed
   - Fantasy.PacketParser.Interface.APacketParser.Pack(System.UInt32@,System.Int64@,Fantasy.Serialize.MemoryStreamBuffer,Fantasy.Network.Interface.IMessage)
   - System.Object.Equals(System.Object)
@@ -84,7 +80,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: RpcId
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Handler/BufferPacketParser.cs
-    startLine: 24
+    startLine: 25
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -111,7 +107,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: RouteId
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Handler/BufferPacketParser.cs
-    startLine: 25
+    startLine: 26
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -138,7 +134,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ProtocolCode
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Handler/BufferPacketParser.cs
-    startLine: 26
+    startLine: 27
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -165,7 +161,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: MessagePacketLength
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Handler/BufferPacketParser.cs
-    startLine: 27
+    startLine: 28
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -192,7 +188,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Dispose
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Handler/BufferPacketParser.cs
-    startLine: 28
+    startLine: 29
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -221,7 +217,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: UnPack
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Handler/BufferPacketParser.cs
-    startLine: 43
+    startLine: 44
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -296,34 +292,6 @@ references:
   name: IDisposable
   nameWithType: IDisposable
   fullName: System.IDisposable
-- uid: Fantasy.PacketParser.Interface.APacketParser.BodyBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.BodyBuffer
-  parent: Fantasy.PacketParser.Interface.APacketParser
-  href: Fantasy.PacketParser.Interface.APacketParser.html#Fantasy_PacketParser_Interface_APacketParser_BodyBuffer
-  name: BodyBuffer
-  nameWithType: APacketParser.BodyBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.BodyBuffer
-- uid: Fantasy.PacketParser.Interface.APacketParser.RpcIdBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.RpcIdBuffer
-  parent: Fantasy.PacketParser.Interface.APacketParser
-  href: Fantasy.PacketParser.Interface.APacketParser.html#Fantasy_PacketParser_Interface_APacketParser_RpcIdBuffer
-  name: RpcIdBuffer
-  nameWithType: APacketParser.RpcIdBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.RpcIdBuffer
-- uid: Fantasy.PacketParser.Interface.APacketParser.OpCodeBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.OpCodeBuffer
-  parent: Fantasy.PacketParser.Interface.APacketParser
-  href: Fantasy.PacketParser.Interface.APacketParser.html#Fantasy_PacketParser_Interface_APacketParser_OpCodeBuffer
-  name: OpCodeBuffer
-  nameWithType: APacketParser.OpCodeBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.OpCodeBuffer
-- uid: Fantasy.PacketParser.Interface.APacketParser.RouteIdBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.RouteIdBuffer
-  parent: Fantasy.PacketParser.Interface.APacketParser
-  href: Fantasy.PacketParser.Interface.APacketParser.html#Fantasy_PacketParser_Interface_APacketParser_RouteIdBuffer
-  name: RouteIdBuffer
-  nameWithType: APacketParser.RouteIdBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.RouteIdBuffer
 - uid: Fantasy.PacketParser.Interface.APacketParser.IsDisposed
   commentId: P:Fantasy.PacketParser.Interface.APacketParser.IsDisposed
   parent: Fantasy.PacketParser.Interface.APacketParser

@@ -5,13 +5,9 @@ items:
   id: APacketParser
   parent: Fantasy.PacketParser.Interface
   children:
-  - Fantasy.PacketParser.Interface.APacketParser.BodyBuffer
   - Fantasy.PacketParser.Interface.APacketParser.Dispose
   - Fantasy.PacketParser.Interface.APacketParser.IsDisposed
-  - Fantasy.PacketParser.Interface.APacketParser.OpCodeBuffer
   - Fantasy.PacketParser.Interface.APacketParser.Pack(System.UInt32@,System.Int64@,Fantasy.Serialize.MemoryStreamBuffer,Fantasy.Network.Interface.IMessage)
-  - Fantasy.PacketParser.Interface.APacketParser.RouteIdBuffer
-  - Fantasy.PacketParser.Interface.APacketParser.RpcIdBuffer
   langs:
   - csharp
   - vb
@@ -51,114 +47,6 @@ items:
   - System.Object.ToString
   extensionMethods:
   - Fantasy.PacketParser.Interface.APacketParser.Fantasy.Helper.JsonHelper.ToJson``1
-- uid: Fantasy.PacketParser.Interface.APacketParser.BodyBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.BodyBuffer
-  id: BodyBuffer
-  parent: Fantasy.PacketParser.Interface.APacketParser
-  langs:
-  - csharp
-  - vb
-  name: BodyBuffer
-  nameWithType: APacketParser.BodyBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.BodyBuffer
-  type: Field
-  source:
-    remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Interface/APacketParser.cs
-      branch: main
-      repo: https://github.com/qq362946/Fantasy.git
-    id: BodyBuffer
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Interface/APacketParser.cs
-    startLine: 20
-  assemblies:
-  - Fantasy.Net
-  namespace: Fantasy.PacketParser.Interface
-  syntax:
-    content: protected readonly byte[] BodyBuffer
-    return:
-      type: System.Byte[]
-    content.vb: Protected ReadOnly BodyBuffer As Byte()
-- uid: Fantasy.PacketParser.Interface.APacketParser.RpcIdBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.RpcIdBuffer
-  id: RpcIdBuffer
-  parent: Fantasy.PacketParser.Interface.APacketParser
-  langs:
-  - csharp
-  - vb
-  name: RpcIdBuffer
-  nameWithType: APacketParser.RpcIdBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.RpcIdBuffer
-  type: Field
-  source:
-    remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Interface/APacketParser.cs
-      branch: main
-      repo: https://github.com/qq362946/Fantasy.git
-    id: RpcIdBuffer
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Interface/APacketParser.cs
-    startLine: 21
-  assemblies:
-  - Fantasy.Net
-  namespace: Fantasy.PacketParser.Interface
-  syntax:
-    content: protected readonly byte[] RpcIdBuffer
-    return:
-      type: System.Byte[]
-    content.vb: Protected ReadOnly RpcIdBuffer As Byte()
-- uid: Fantasy.PacketParser.Interface.APacketParser.OpCodeBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.OpCodeBuffer
-  id: OpCodeBuffer
-  parent: Fantasy.PacketParser.Interface.APacketParser
-  langs:
-  - csharp
-  - vb
-  name: OpCodeBuffer
-  nameWithType: APacketParser.OpCodeBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.OpCodeBuffer
-  type: Field
-  source:
-    remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Interface/APacketParser.cs
-      branch: main
-      repo: https://github.com/qq362946/Fantasy.git
-    id: OpCodeBuffer
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Interface/APacketParser.cs
-    startLine: 22
-  assemblies:
-  - Fantasy.Net
-  namespace: Fantasy.PacketParser.Interface
-  syntax:
-    content: protected readonly byte[] OpCodeBuffer
-    return:
-      type: System.Byte[]
-    content.vb: Protected ReadOnly OpCodeBuffer As Byte()
-- uid: Fantasy.PacketParser.Interface.APacketParser.RouteIdBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.RouteIdBuffer
-  id: RouteIdBuffer
-  parent: Fantasy.PacketParser.Interface.APacketParser
-  langs:
-  - csharp
-  - vb
-  name: RouteIdBuffer
-  nameWithType: APacketParser.RouteIdBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.RouteIdBuffer
-  type: Field
-  source:
-    remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Interface/APacketParser.cs
-      branch: main
-      repo: https://github.com/qq362946/Fantasy.git
-    id: RouteIdBuffer
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Interface/APacketParser.cs
-    startLine: 23
-  assemblies:
-  - Fantasy.Net
-  namespace: Fantasy.PacketParser.Interface
-  syntax:
-    content: protected readonly byte[] RouteIdBuffer
-    return:
-      type: System.Byte[]
-    content.vb: Protected ReadOnly RouteIdBuffer As Byte()
 - uid: Fantasy.PacketParser.Interface.APacketParser.IsDisposed
   commentId: P:Fantasy.PacketParser.Interface.APacketParser.IsDisposed
   id: IsDisposed
@@ -177,7 +65,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: IsDisposed
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Interface/APacketParser.cs
-    startLine: 24
+    startLine: 20
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser.Interface
@@ -206,7 +94,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Pack
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Interface/APacketParser.cs
-    startLine: 25
+    startLine: 21
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser.Interface
@@ -246,7 +134,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Dispose
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Interface/APacketParser.cs
-    startLine: 26
+    startLine: 22
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser.Interface
@@ -635,29 +523,6 @@ references:
   - uid: Fantasy.Helper
     name: Helper
     href: Fantasy.Helper.html
-- uid: System.Byte[]
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.byte
-  name: byte[]
-  nameWithType: byte[]
-  fullName: byte[]
-  nameWithType.vb: Byte()
-  fullName.vb: Byte()
-  name.vb: Byte()
-  spec.csharp:
-  - uid: System.Byte
-    name: byte
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.byte
-  - name: '['
-  - name: ']'
-  spec.vb:
-  - uid: System.Byte
-    name: Byte
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.byte
-  - name: (
-  - name: )
 - uid: Fantasy.PacketParser.Interface.APacketParser.IsDisposed*
   commentId: Overload:Fantasy.PacketParser.Interface.APacketParser.IsDisposed
   href: Fantasy.PacketParser.Interface.APacketParser.html#Fantasy_PacketParser_Interface_APacketParser_IsDisposed

@@ -100,7 +100,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Dispose
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/ProcessPackInfo.cs
-    startLine: 25
+    startLine: 23
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -129,7 +129,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Create
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/ProcessPackInfo.cs
-    startLine: 44
+    startLine: 42
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -173,7 +173,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Set
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/ProcessPackInfo.cs
-    startLine: 112
+    startLine: 102
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -207,7 +207,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: RentMemoryStream
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/ProcessPackInfo.cs
-    startLine: 127
+    startLine: 117
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -243,7 +243,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Deserialize
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Pack/ProcessPackInfo.cs
-    startLine: 132
+    startLine: 122
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser

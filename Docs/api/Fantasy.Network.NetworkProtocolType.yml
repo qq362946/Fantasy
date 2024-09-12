@@ -5,6 +5,7 @@ items:
   id: NetworkProtocolType
   parent: Fantasy.Network
   children:
+  - Fantasy.Network.NetworkProtocolType.HTTP
   - Fantasy.Network.NetworkProtocolType.KCP
   - Fantasy.Network.NetworkProtocolType.None
   - Fantasy.Network.NetworkProtocolType.TCP
@@ -144,6 +145,34 @@ items:
   example: []
   syntax:
     content: WebSocket = 3
+    return:
+      type: Fantasy.Network.NetworkProtocolType
+- uid: Fantasy.Network.NetworkProtocolType.HTTP
+  commentId: F:Fantasy.Network.NetworkProtocolType.HTTP
+  id: HTTP
+  parent: Fantasy.Network.NetworkProtocolType
+  langs:
+  - csharp
+  - vb
+  name: HTTP
+  nameWithType: NetworkProtocolType.HTTP
+  fullName: Fantasy.Network.NetworkProtocolType.HTTP
+  type: Field
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/NetworkProtocolType.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: HTTP
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/NetworkProtocolType.cs
+    startLine: 66
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Network
+  summary: HTTP
+  example: []
+  syntax:
+    content: HTTP = 4
     return:
       type: Fantasy.Network.NetworkProtocolType
 references:

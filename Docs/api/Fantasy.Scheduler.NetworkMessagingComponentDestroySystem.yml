@@ -20,7 +20,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: NetworkMessagingComponentDestroySystem
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 44
+    startLine: 45
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -62,7 +62,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Destroy
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 46
+    startLine: 47
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler

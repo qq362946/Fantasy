@@ -18,12 +18,12 @@ items:
   type: Class
   source:
     remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs
       branch: main
       repo: https://github.com/qq362946/Fantasy.git
     id: ASerialize
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs
-    startLine: 17
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs
+    startLine: 14
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Serialize
@@ -68,12 +68,12 @@ items:
   type: Method
   source:
     remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs
       branch: main
       repo: https://github.com/qq362946/Fantasy.git
     id: Dispose
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs
-    startLine: 19
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs
+    startLine: 16
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Serialize
@@ -98,12 +98,12 @@ items:
   type: Method
   source:
     remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs
       branch: main
       repo: https://github.com/qq362946/Fantasy.git
     id: BeginInit
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs
-    startLine: 20
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs
+    startLine: 17
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Serialize
@@ -128,12 +128,12 @@ items:
   type: Method
   source:
     remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs
       branch: main
       repo: https://github.com/qq362946/Fantasy.git
     id: EndInit
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs
-    startLine: 21
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs
+    startLine: 18
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Serialize
@@ -158,12 +158,12 @@ items:
   type: Method
   source:
     remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs
       branch: main
       repo: https://github.com/qq362946/Fantasy.git
     id: AfterDeserialization
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ASerialize.cs
-    startLine: 22
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ASerialize.cs
+    startLine: 19
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Serialize

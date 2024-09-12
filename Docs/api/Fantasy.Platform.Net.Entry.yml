@@ -102,7 +102,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Close
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Platform/Net/Entry.cs
-    startLine: 119
+    startLine: 117
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Platform.Net

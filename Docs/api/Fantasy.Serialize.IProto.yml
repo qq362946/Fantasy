@@ -14,12 +14,12 @@ items:
   type: Interface
   source:
     remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ProtoBufPackHelper/ProtoBufPackHelper.cs
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ProtoBufPackHelper/IProto.cs
       branch: main
       repo: https://github.com/qq362946/Fantasy.git
     id: IProto
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ProtoBufPackHelper/ProtoBufPackHelper.cs
-    startLine: 12
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/ProtoBufPackHelper/IProto.cs
+    startLine: 5
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Serialize

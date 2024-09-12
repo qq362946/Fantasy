@@ -71,12 +71,12 @@ items:
   summary: 处理网络消息更新检查超时。
   example: []
   syntax:
-    content: public override void Handler(NetworkMessageUpdate self)
+    content: protected override void Handler(NetworkMessageUpdate self)
     parameters:
     - id: self
       type: Fantasy.Scheduler.NetworkMessageUpdate
       description: ''
-    content.vb: Public Overrides Sub Handler(self As NetworkMessageUpdate)
+    content.vb: Protected Overrides Sub Handler(self As NetworkMessageUpdate)
   overridden: Fantasy.Event.EventSystem{Fantasy.Scheduler.NetworkMessageUpdate}.Handler(Fantasy.Scheduler.NetworkMessageUpdate)
   overload: Fantasy.Scheduler.OnNetworkMessageUpdateCheckTimeout.Handler*
   exceptions:

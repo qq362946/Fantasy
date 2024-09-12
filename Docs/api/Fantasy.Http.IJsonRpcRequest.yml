@@ -1,0 +1,338 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Http.IJsonRpcRequest
+  commentId: T:Fantasy.Http.IJsonRpcRequest
+  id: IJsonRpcRequest
+  parent: Fantasy.Http
+  children:
+  - Fantasy.Http.IJsonRpcRequest.Init(System.String,System.Int32,System.Object[])
+  langs:
+  - csharp
+  - vb
+  name: IJsonRpcRequest
+  nameWithType: IJsonRpcRequest
+  fullName: Fantasy.Http.IJsonRpcRequest
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/IJsonRpcRequest.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: IJsonRpcRequest
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/IJsonRpcRequest.cs
+    startLine: 8
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Http
+  summary: 一个JsonRPC的接口
+  example: []
+  syntax:
+    content: 'public interface IJsonRpcRequest : IPool'
+    content.vb: Public Interface IJsonRpcRequest Inherits IPool
+  inheritedMembers:
+  - Fantasy.Pool.IPool.IsPool
+  - Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+  extensionMethods:
+  - Fantasy.Http.IJsonRpcRequest.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Http.IJsonRpcRequest.Init(System.String,System.Int32,System.Object[])
+  commentId: M:Fantasy.Http.IJsonRpcRequest.Init(System.String,System.Int32,System.Object[])
+  id: Init(System.String,System.Int32,System.Object[])
+  parent: Fantasy.Http.IJsonRpcRequest
+  langs:
+  - csharp
+  - vb
+  name: Init(string, int, params object[])
+  nameWithType: IJsonRpcRequest.Init(string, int, params object[])
+  fullName: Fantasy.Http.IJsonRpcRequest.Init(string, int, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/IJsonRpcRequest.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Init
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/IJsonRpcRequest.cs
+    startLine: 16
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Http
+  summary: 用于初始化这个Json对象
+  example: []
+  syntax:
+    content: void Init(string method, int id, params object[] @params)
+    parameters:
+    - id: method
+      type: System.String
+      description: ''
+    - id: id
+      type: System.Int32
+      description: ''
+    - id: params
+      type: System.Object[]
+      description: ''
+    content.vb: Sub Init(method As String, id As Integer, ParamArray params As Object())
+  overload: Fantasy.Http.IJsonRpcRequest.Init*
+  nameWithType.vb: IJsonRpcRequest.Init(String, Integer, ParamArray Object())
+  fullName.vb: Fantasy.Http.IJsonRpcRequest.Init(String, Integer, ParamArray Object())
+  name.vb: Init(String, Integer, ParamArray Object())
+references:
+- uid: Fantasy.Http
+  commentId: N:Fantasy.Http
+  href: Fantasy.html
+  name: Fantasy.Http
+  nameWithType: Fantasy.Http
+  fullName: Fantasy.Http
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Http
+    name: Http
+    href: Fantasy.Http.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Http
+    name: Http
+    href: Fantasy.Http.html
+- uid: Fantasy.Pool.IPool.IsPool
+  commentId: M:Fantasy.Pool.IPool.IsPool
+  parent: Fantasy.Pool.IPool
+  href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_IsPool
+  name: IsPool()
+  nameWithType: IPool.IsPool()
+  fullName: Fantasy.Pool.IPool.IsPool()
+  spec.csharp:
+  - uid: Fantasy.Pool.IPool.IsPool
+    name: IsPool
+    href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_IsPool
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Pool.IPool.IsPool
+    name: IsPool
+    href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_IsPool
+  - name: (
+  - name: )
+- uid: Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+  commentId: M:Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+  parent: Fantasy.Pool.IPool
+  isExternal: true
+  href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_SetIsPool_System_Boolean_
+  name: SetIsPool(bool)
+  nameWithType: IPool.SetIsPool(bool)
+  fullName: Fantasy.Pool.IPool.SetIsPool(bool)
+  nameWithType.vb: IPool.SetIsPool(Boolean)
+  fullName.vb: Fantasy.Pool.IPool.SetIsPool(Boolean)
+  name.vb: SetIsPool(Boolean)
+  spec.csharp:
+  - uid: Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Fantasy.Http.IJsonRpcRequest.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<IJsonRpcRequest>(IJsonRpcRequest)
+  nameWithType: JsonHelper.ToJson<IJsonRpcRequest>(IJsonRpcRequest)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Http.IJsonRpcRequest>(Fantasy.Http.IJsonRpcRequest)
+  nameWithType.vb: JsonHelper.ToJson(Of IJsonRpcRequest)(IJsonRpcRequest)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Http.IJsonRpcRequest)(Fantasy.Http.IJsonRpcRequest)
+  name.vb: ToJson(Of IJsonRpcRequest)(IJsonRpcRequest)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Http.IJsonRpcRequest)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Http.IJsonRpcRequest
+    name: IJsonRpcRequest
+    href: Fantasy.Http.IJsonRpcRequest.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Http.IJsonRpcRequest
+    name: IJsonRpcRequest
+    href: Fantasy.Http.IJsonRpcRequest.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Http.IJsonRpcRequest)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Http.IJsonRpcRequest
+    name: IJsonRpcRequest
+    href: Fantasy.Http.IJsonRpcRequest.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Http.IJsonRpcRequest
+    name: IJsonRpcRequest
+    href: Fantasy.Http.IJsonRpcRequest.html
+  - name: )
+- uid: Fantasy.Pool.IPool
+  commentId: T:Fantasy.Pool.IPool
+  parent: Fantasy.Pool
+  href: Fantasy.Pool.IPool.html
+  name: IPool
+  nameWithType: IPool
+  fullName: Fantasy.Pool.IPool
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Pool
+  commentId: N:Fantasy.Pool
+  href: Fantasy.html
+  name: Fantasy.Pool
+  nameWithType: Fantasy.Pool
+  fullName: Fantasy.Pool
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Pool
+    name: Pool
+    href: Fantasy.Pool.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Pool
+    name: Pool
+    href: Fantasy.Pool.html
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Http.IJsonRpcRequest.Init*
+  commentId: Overload:Fantasy.Http.IJsonRpcRequest.Init
+  href: Fantasy.Http.IJsonRpcRequest.html#Fantasy_Http_IJsonRpcRequest_Init_System_String_System_Int32_System_Object___
+  name: Init
+  nameWithType: IJsonRpcRequest.Init
+  fullName: Fantasy.Http.IJsonRpcRequest.Init
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Object[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object[]
+  nameWithType: object[]
+  fullName: object[]
+  nameWithType.vb: Object()
+  fullName.vb: Object()
+  name.vb: Object()
+  spec.csharp:
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System

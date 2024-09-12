@@ -1202,6 +1202,36 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Fantasy.Http.HttpClientHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Fantasy.Http.HttpClientHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Fantasy.Http.IJsonRpcRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Fantasy.Http.IJsonRpcRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Fantasy.Http.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Fantasy.Http.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Fantasy.ILog.yml",
       "output": {
         ".html": {
@@ -1452,150 +1482,30 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.AddressableHelper.yml",
+      "source_relative_path": "api/Fantasy.Network.HTTP.HTTPServerNetwork.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Fantasy.Network.AddressableHelper.html"
+          "relative_path": "api/Fantasy.Network.HTTP.HTTPServerNetwork.html"
         }
       },
       "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.AddressableManageComponent.yml",
+      "source_relative_path": "api/Fantasy.Network.HTTP.SceneContextFilter.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Fantasy.Network.AddressableManageComponent.html"
+          "relative_path": "api/Fantasy.Network.HTTP.SceneContextFilter.html"
         }
       },
       "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.AddressableManageComponentAwakeSystem.yml",
+      "source_relative_path": "api/Fantasy.Network.HTTP.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Fantasy.Network.AddressableManageComponentAwakeSystem.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.AddressableManageComponentDestroySystem.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.AddressableManageComponentDestroySystem.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.AddressableMessageComponent.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.AddressableMessageComponent.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.AddressableMessageComponentDestroySystem.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.AddressableMessageComponentDestroySystem.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.AddressableRouteComponent.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.AddressableRouteComponent.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.AddressableRouteComponentAwakeSystem.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.AddressableRouteComponentAwakeSystem.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.AddressableRouteComponentDestroySystem.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.AddressableRouteComponentDestroySystem.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.AddressableScene.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.AddressableScene.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.I_AddressableAddHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.I_AddressableAddHandler.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.I_AddressableGetHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.I_AddressableGetHandler.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.I_AddressableLockHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.I_AddressableLockHandler.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.I_AddressableRemoveHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.I_AddressableRemoveHandler.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Network.I_AddressableUnLockHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Network.I_AddressableUnLockHandler.html"
+          "relative_path": "api/Fantasy.Network.HTTP.html"
         }
       },
       "version": ""
@@ -2582,16 +2492,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Platform.Net.ThreadSynchronizationContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Fantasy.Platform.Net.ThreadSynchronizationContext.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Fantasy.Platform.Net.WorldConfig.yml",
       "output": {
         ".html": {
@@ -2872,6 +2772,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Fantasy.Serialize.FantasySerializerType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Fantasy.Serialize.FantasySerializerType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Fantasy.Serialize.IProto.yml",
       "output": {
         ".html": {
@@ -2882,10 +2792,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Fantasy.Serialize.MemoryPackHelper.yml",
+      "source_relative_path": "api/Fantasy.Serialize.ISerialize.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Fantasy.Serialize.MemoryPackHelper.html"
+          "relative_path": "api/Fantasy.Serialize.ISerialize.html"
         }
       },
       "version": ""
@@ -2906,6 +2816,16 @@
       "output": {
         ".html": {
           "relative_path": "api/Fantasy.Serialize.ProtoBufPackHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Fantasy.Serialize.SerializerManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Fantasy.Serialize.SerializerManager.html"
         }
       },
       "version": ""

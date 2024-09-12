@@ -15,6 +15,7 @@ items:
   - Fantasy.Scene.EventComponent
   - Fantasy.Scene.GetEntity(System.Int64)
   - Fantasy.Scene.GetEntity``1(System.Int64)
+  - Fantasy.Scene.GetSession(System.Int64)
   - Fantasy.Scene.MessagePoolComponent
   - Fantasy.Scene.NetworkMessagingComponent
   - Fantasy.Scene.Process
@@ -59,7 +60,6 @@ items:
   - System.IDisposable
   - Fantasy.Pool.IPool
   inheritedMembers:
-  - Fantasy.Entitas.Entity.IsPool
   - Fantasy.Entitas.Entity.Id
   - Fantasy.Entitas.Entity.RunTimeId
   - Fantasy.Entitas.Entity.IsDisposed
@@ -86,7 +86,8 @@ items:
   - Fantasy.Entitas.Entity.ForEachTransfer
   - Fantasy.Entitas.Entity.ForEachMultiEntity
   - Fantasy.Entitas.Entity.ForEachEntity
-  - Fantasy.Entitas.Entity.Clone
+  - Fantasy.Entitas.Entity.IsPool
+  - Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -882,6 +883,48 @@ items:
       description: 返回一个bool值来提示是否删除了这个实体
     content.vb: Public Function RemoveEntity(entity As Entity) As Boolean
   overload: Fantasy.Scene.RemoveEntity*
+- uid: Fantasy.Scene.GetSession(System.Int64)
+  commentId: M:Fantasy.Scene.GetSession(System.Int64)
+  id: GetSession(System.Int64)
+  parent: Fantasy.Scene
+  langs:
+  - csharp
+  - vb
+  name: GetSession(long)
+  nameWithType: Scene.GetSession(long)
+  fullName: Fantasy.Scene.GetSession(long)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Scene/Scene.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: GetSession
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Scene/Scene.cs
+    startLine: 487
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy
+  summary: 根据runTimeId获得Session
+  example: []
+  syntax:
+    content: public Session GetSession(long runTimeId)
+    parameters:
+    - id: runTimeId
+      type: System.Int64
+      description: ''
+    return:
+      type: Fantasy.Network.Session
+      description: ''
+    content.vb: Public Function GetSession(runTimeId As Long) As Session
+  overload: Fantasy.Scene.GetSession*
+  exceptions:
+  - type: System.Exception
+    commentId: T:System.Exception
+    description: ''
+  nameWithType.vb: Scene.GetSession(Long)
+  fullName.vb: Fantasy.Scene.GetSession(Long)
+  name.vb: GetSession(Long)
 references:
 - uid: Fantasy
   commentId: N:Fantasy
@@ -929,13 +972,6 @@ references:
   name: IPool
   nameWithType: IPool
   fullName: Fantasy.Pool.IPool
-- uid: Fantasy.Entitas.Entity.IsPool
-  commentId: P:Fantasy.Entitas.Entity.IsPool
-  parent: Fantasy.Entitas.Entity
-  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
-  name: IsPool
-  nameWithType: Entity.IsPool
-  fullName: Fantasy.Entitas.Entity.IsPool
 - uid: Fantasy.Entitas.Entity.Id
   commentId: P:Fantasy.Entitas.Entity.Id
   parent: Fantasy.Entitas.Entity
@@ -1671,24 +1707,55 @@ references:
   name: ForEachEntity
   nameWithType: Entity.ForEachEntity
   fullName: Fantasy.Entitas.Entity.ForEachEntity
-- uid: Fantasy.Entitas.Entity.Clone
-  commentId: M:Fantasy.Entitas.Entity.Clone
+- uid: Fantasy.Entitas.Entity.IsPool
+  commentId: M:Fantasy.Entitas.Entity.IsPool
   parent: Fantasy.Entitas.Entity
-  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
-  name: Clone()
-  nameWithType: Entity.Clone()
-  fullName: Fantasy.Entitas.Entity.Clone()
+  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
+  name: IsPool()
+  nameWithType: Entity.IsPool()
+  fullName: Fantasy.Entitas.Entity.IsPool()
   spec.csharp:
-  - uid: Fantasy.Entitas.Entity.Clone
-    name: Clone
-    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
+  - uid: Fantasy.Entitas.Entity.IsPool
+    name: IsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
   - name: (
   - name: )
   spec.vb:
-  - uid: Fantasy.Entitas.Entity.Clone
-    name: Clone
-    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
+  - uid: Fantasy.Entitas.Entity.IsPool
+    name: IsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
   - name: (
+  - name: )
+- uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+  commentId: M:Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+  parent: Fantasy.Entitas.Entity
+  isExternal: true
+  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
+  name: SetIsPool(bool)
+  nameWithType: Entity.SetIsPool(bool)
+  fullName: Fantasy.Entitas.Entity.SetIsPool(bool)
+  nameWithType.vb: Entity.SetIsPool(Boolean)
+  fullName.vb: Fantasy.Entitas.Entity.SetIsPool(Boolean)
+  name.vb: SetIsPool(Boolean)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
@@ -2745,3 +2812,46 @@ references:
   name: RemoveEntity
   nameWithType: Scene.RemoveEntity
   fullName: Fantasy.Scene.RemoveEntity
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception
+- uid: Fantasy.Scene.GetSession*
+  commentId: Overload:Fantasy.Scene.GetSession
+  href: Fantasy.Scene.html#Fantasy_Scene_GetSession_System_Int64_
+  name: GetSession
+  nameWithType: Scene.GetSession
+  fullName: Fantasy.Scene.GetSession
+- uid: Fantasy.Network.Session
+  commentId: T:Fantasy.Network.Session
+  parent: Fantasy.Network
+  href: Fantasy.Network.Session.html
+  name: Session
+  nameWithType: Session
+  fullName: Fantasy.Network.Session
+- uid: Fantasy.Network
+  commentId: N:Fantasy.Network
+  href: Fantasy.html
+  name: Fantasy.Network
+  nameWithType: Fantasy.Network
+  fullName: Fantasy.Network
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html

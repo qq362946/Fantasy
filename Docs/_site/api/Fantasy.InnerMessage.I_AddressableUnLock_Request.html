@@ -102,16 +102,20 @@
     <div><a class="xref" href="Fantasy.Network.Interface.IRouteMessage.html">IRouteMessage</a></div>
     <div><a class="xref" href="Fantasy.Network.Interface.IRequest.html">IRequest</a></div>
     <div><a class="xref" href="Fantasy.Network.Interface.IMessage.html">IMessage</a></div>
-    <div><span class="xref">IMemoryPackable</span>&lt;<a class="xref" href="Fantasy.InnerMessage.I_AddressableUnLock_Request.html">I_AddressableUnLock_Request</a>&gt;</div>
-    <div><span class="xref">IMemoryPackFormatterRegister</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>继承成员</h5>
     <div>
-      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_Scene">AMessage.Scene</a>
+      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_GetScene">AMessage.GetScene()</a>
     </div>
     <div>
-      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_IsPool">AMessage.IsPool</a>
+      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetScene_Fantasy_Scene_">AMessage.SetScene(Scene)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_IsPool">AMessage.IsPool()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetIsPool_System_Boolean_">AMessage.SetIsPool(bool)</a>
     </div>
     <div>
       <a class="xref" href="Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_Dispose">ASerialize.Dispose()</a>
@@ -151,12 +155,9 @@
   <h6><strong>程序集</strong>: Fantasy.Net.dll</h6>
   <h5 id="Fantasy_InnerMessage_I_AddressableUnLock_Request_syntax">语法</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[MemoryPackable(GenerateType.Object)]
-public class I_AddressableUnLock_Request : AMessage, ISupportInitialize, IDisposable, IPool, IRouteRequest, IRouteMessage, IRequest, IMessage, IMemoryPackable&lt;I_AddressableUnLock_Request&gt;, IMemoryPackFormatterRegister</code></pre>
+    <pre><code class="lang-csharp hljs">[ProtoContract]
+public class I_AddressableUnLock_Request : AMessage, ISupportInitialize, IDisposable, IPool, IRouteRequest, IRouteMessage, IRequest, IMessage</code></pre>
   </div>
-  <h5 id="Fantasy_InnerMessage_I_AddressableUnLock_Request_remarks"><strong>备注</strong></h5>
-  <div class="markdown level0 remarks"><p>MemoryPack GenerateType: Object<br><pre><code class="lang-csharp">long AddressableIdlong RouteIdstring Source</code></pre>
-</div>
   <h3 id="properties">属性
 </h3>
   <span class="small pull-right mobile-hide">
@@ -164,7 +165,7 @@ public class I_AddressableUnLock_Request : AMessage, ISupportInitialize, IDispos
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_InnerMessage_I_AddressableUnLock_Request_AddressableId.md&amp;value=---%0Auid%3A%20Fantasy.InnerMessage.I_AddressableUnLock_Request.AddressableId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L144">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L145">查看源代码</a>
   </span>
   <a id="Fantasy_InnerMessage_I_AddressableUnLock_Request_AddressableId_" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.AddressableId*"></a>
   <h4 id="Fantasy_InnerMessage_I_AddressableUnLock_Request_AddressableId" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.AddressableId">AddressableId</h4>
@@ -172,7 +173,7 @@ public class I_AddressableUnLock_Request : AMessage, ISupportInitialize, IDispos
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[MemoryPackOrder(0)]
+    <pre><code class="lang-csharp hljs">[ProtoMember(1)]
 public long AddressableId { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">属性值</h5>
@@ -195,7 +196,7 @@ public long AddressableId { get; set; }</code></pre>
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_InnerMessage_I_AddressableUnLock_Request_ResponseType.md&amp;value=---%0Auid%3A%20Fantasy.InnerMessage.I_AddressableUnLock_Request.ResponseType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L140">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L141">查看源代码</a>
   </span>
   <a id="Fantasy_InnerMessage_I_AddressableUnLock_Request_ResponseType_" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.ResponseType*"></a>
   <h4 id="Fantasy_InnerMessage_I_AddressableUnLock_Request_ResponseType" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.ResponseType">ResponseType</h4>
@@ -203,7 +204,7 @@ public long AddressableId { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[MemoryPackIgnore]
+    <pre><code class="lang-csharp hljs">[ProtoIgnore]
 public I_AddressableUnLock_Response ResponseType { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">属性值</h5>
@@ -226,7 +227,7 @@ public I_AddressableUnLock_Response ResponseType { get; set; }</code></pre>
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_InnerMessage_I_AddressableUnLock_Request_RouteId.md&amp;value=---%0Auid%3A%20Fantasy.InnerMessage.I_AddressableUnLock_Request.RouteId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L146">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L147">查看源代码</a>
   </span>
   <a id="Fantasy_InnerMessage_I_AddressableUnLock_Request_RouteId_" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.RouteId*"></a>
   <h4 id="Fantasy_InnerMessage_I_AddressableUnLock_Request_RouteId" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.RouteId">RouteId</h4>
@@ -234,7 +235,7 @@ public I_AddressableUnLock_Response ResponseType { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[MemoryPackOrder(1)]
+    <pre><code class="lang-csharp hljs">[ProtoMember(2)]
 public long RouteId { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">属性值</h5>
@@ -257,7 +258,7 @@ public long RouteId { get; set; }</code></pre>
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_InnerMessage_I_AddressableUnLock_Request_Source.md&amp;value=---%0Auid%3A%20Fantasy.InnerMessage.I_AddressableUnLock_Request.Source%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L148">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L149">查看源代码</a>
   </span>
   <a id="Fantasy_InnerMessage_I_AddressableUnLock_Request_Source_" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.Source*"></a>
   <h4 id="Fantasy_InnerMessage_I_AddressableUnLock_Request_Source" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.Source">Source</h4>
@@ -265,7 +266,7 @@ public long RouteId { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[MemoryPackOrder(2)]
+    <pre><code class="lang-csharp hljs">[ProtoMember(3)]
 public string Source { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">属性值</h5>
@@ -290,7 +291,7 @@ public string Source { get; set; }</code></pre>
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_InnerMessage_I_AddressableUnLock_Request_OpCode.md&amp;value=---%0Auid%3A%20Fantasy.InnerMessage.I_AddressableUnLock_Request.OpCode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L142">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L143">查看源代码</a>
   </span>
   <a id="Fantasy_InnerMessage_I_AddressableUnLock_Request_OpCode_" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.OpCode*"></a>
   <h4 id="Fantasy_InnerMessage_I_AddressableUnLock_Request_OpCode" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.OpCode">OpCode()</h4>
@@ -322,7 +323,7 @@ public string Source { get; set; }</code></pre>
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_InnerMessage_I_AddressableUnLock_Request_RouteTypeOpCode.md&amp;value=---%0Auid%3A%20Fantasy.InnerMessage.I_AddressableUnLock_Request.RouteTypeOpCode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L143">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L144">查看源代码</a>
   </span>
   <a id="Fantasy_InnerMessage_I_AddressableUnLock_Request_RouteTypeOpCode_" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.RouteTypeOpCode*"></a>
   <h4 id="Fantasy_InnerMessage_I_AddressableUnLock_Request_RouteTypeOpCode" data-uid="Fantasy.InnerMessage.I_AddressableUnLock_Request.RouteTypeOpCode">RouteTypeOpCode()</h4>
@@ -369,12 +370,6 @@ public string Source { get; set; }</code></pre>
   <div>
       <a class="xref" href="Fantasy.Network.Interface.IMessage.html">IMessage</a>
   </div>
-  <div>
-      <span class="xref">MemoryPack.IMemoryPackable&lt;T&gt;</span>
-  </div>
-  <div>
-      <span class="xref">MemoryPack.IMemoryPackFormatterRegister</span>
-  </div>
   <h3 id="extensionmethods">扩展方法</h3>
   <div>
       <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
@@ -387,6 +382,12 @@ public string Source { get; set; }</code></pre>
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_InnerMessage_I_AddressableUnLock_Request.md&amp;value=---%0Auid%3A%20Fantasy.InnerMessage.I_AddressableUnLock_Request%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L138" class="contribution-link">查看源代码</a>
+                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

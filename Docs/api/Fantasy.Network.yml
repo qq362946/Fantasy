@@ -5,6 +5,7 @@ items:
   id: Network
   parent: Fantasy
   children:
+  - Fantasy.Network.HTTP
   - Fantasy.Network.InnerErrorCode
   - Fantasy.Network.Interface
   - Fantasy.Network.KCP
@@ -34,6 +35,36 @@ items:
   assemblies:
   - Fantasy.Net
 references:
+- uid: Fantasy.Network.HTTP
+  commentId: N:Fantasy.Network.HTTP
+  href: Fantasy.html
+  name: Fantasy.Network.HTTP
+  nameWithType: Fantasy.Network.HTTP
+  fullName: Fantasy.Network.HTTP
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.HTTP
+    name: HTTP
+    href: Fantasy.Network.HTTP.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.HTTP
+    name: HTTP
+    href: Fantasy.Network.HTTP.html
 - uid: Fantasy.Network.Interface
   commentId: N:Fantasy.Network.Interface
   href: Fantasy.html

@@ -5,13 +5,13 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>AddressableMessageComponent 类
+      <title>HTTPServerNetwork 类
  | Fantasy </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="AddressableMessageComponent 类
+      <meta name="title" content="HTTPServerNetwork 类
  | Fantasy ">
     
-    <meta name="description" content="可寻址消息组件、挂载了这个组件可以接收Addressable消息">
+    <meta name="description" content="HTTP服务器">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -78,20 +78,21 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Fantasy.Network.AddressableMessageComponent">
+            <article class="content wrap" id="_content" data-uid="Fantasy.Network.HTTP.HTTPServerNetwork">
 
 
 
-  <h1 id="Fantasy_Network_AddressableMessageComponent" data-uid="Fantasy.Network.AddressableMessageComponent" class="text-break">AddressableMessageComponent 类
+  <h1 id="Fantasy_Network_HTTP_HTTPServerNetwork" data-uid="Fantasy.Network.HTTP.HTTPServerNetwork" class="text-break">HTTPServerNetwork 类
 </h1>
-  <div class="markdown level0 summary"><p>可寻址消息组件、挂载了这个组件可以接收Addressable消息</p>
+  <div class="markdown level0 summary"><p>HTTP服务器</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>继承</h5>
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
     <div class="level1"><a class="xref" href="Fantasy.Entitas.Entity.html">Entity</a></div>
-    <div class="level2"><span class="xref">AddressableMessageComponent</span></div>
+    <div class="level2"><a class="xref" href="Fantasy.Network.Interface.ANetwork.html">ANetwork</a></div>
+    <div class="level3"><span class="xref">HTTPServerNetwork</span></div>
   </div>
   <div class="implements">
     <h5>实现</h5>
@@ -102,7 +103,37 @@
   <div class="inheritedMembers">
     <h5>继承成员</h5>
     <div>
-      <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool">Entity.IsPool</a>
+      <a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_NetworkType">ANetwork.NetworkType</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_NetworkTarget">ANetwork.NetworkTarget</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_NetworkProtocolType">ANetwork.NetworkProtocolType</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_NetworkMessageScheduler">ANetwork.NetworkMessageScheduler</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentMemoryStream_System_Int32_">ANetwork.RentMemoryStream(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnMemoryStream_Fantasy_Serialize_MemoryStreamBuffer_">ANetwork.ReturnMemoryStream(MemoryStreamBuffer)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentOuterPackInfo">ANetwork.RentOuterPackInfo()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnOuterPackInfo_Fantasy_PacketParser_OuterPackInfo_">ANetwork.ReturnOuterPackInfo(OuterPackInfo)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentInnerPackInfo">ANetwork.RentInnerPackInfo()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnInnerPackInfo_Fantasy_PacketParser_InnerPackInfo_">ANetwork.ReturnInnerPackInfo(InnerPackInfo)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_Dispose">ANetwork.Dispose()</a>
     </div>
     <div>
       <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Id">Entity.Id</a>
@@ -183,10 +214,10 @@
       <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_ForEachEntity">Entity.ForEachEntity</a>
     </div>
     <div>
-      <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone">Entity.Clone()</a>
+      <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool">Entity.IsPool()</a>
     </div>
     <div>
-      <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Dispose">Entity.Dispose()</a>
+      <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_">Entity.SetIsPool(bool)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
@@ -207,92 +238,29 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
   </div>
-  <h6><strong>命名空间</strong>: <a class="xref" href="Fantasy.html">Fantasy</a>.<a class="xref" href="Fantasy.Network.html">Network</a></h6>
+  <h6><strong>命名空间</strong>: <a class="xref" href="Fantasy.html">Fantasy</a>.<a class="xref" href="Fantasy.Network.html">Network</a>.<a class="xref" href="Fantasy.Network.HTTP.html">HTTP</a></h6>
   <h6><strong>程序集</strong>: Fantasy.Net.dll</h6>
-  <h5 id="Fantasy_Network_AddressableMessageComponent_syntax">语法</h5>
+  <h5 id="Fantasy_Network_HTTP_HTTPServerNetwork_syntax">语法</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class AddressableMessageComponent : Entity, IEntity, IDisposable, IPool</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class HTTPServerNetwork : ANetwork, IEntity, IDisposable, IPool</code></pre>
   </div>
-  <h3 id="fields">字段
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_AddressableMessageComponent_AddressableId.md&amp;value=---%0Auid%3A%20Fantasy.Network.AddressableMessageComponent.AddressableId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableMessageComponent.cs/#L29">查看源代码</a>
-  </span>
-  <h4 id="Fantasy_Network_AddressableMessageComponent_AddressableId" data-uid="Fantasy.Network.AddressableMessageComponent.AddressableId">AddressableId</h4>
-  <div class="markdown level1 summary"><p>可寻址消息组件的唯一标识。</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">声明</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public long AddressableId</code></pre>
-  </div>
-  <h5 class="fieldValue">字段值</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>类型</th>
-        <th>描述</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="methods">方法
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_AddressableMessageComponent_Lock.md&amp;value=---%0Auid%3A%20Fantasy.Network.AddressableMessageComponent.Lock%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_HTTP_HTTPServerNetwork_Initialize_Fantasy_Network_NetworkTarget_System_Collections_Generic_IEnumerable_System_String__.md&amp;value=---%0Auid%3A%20Fantasy.Network.HTTP.HTTPServerNetwork.Initialize(Fantasy.Network.NetworkTarget%2CSystem.Collections.Generic.IEnumerable%7BSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableMessageComponent.cs/#L58">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/HTTPServerNetwork.cs/#L26">查看源代码</a>
   </span>
-  <a id="Fantasy_Network_AddressableMessageComponent_Lock_" data-uid="Fantasy.Network.AddressableMessageComponent.Lock*"></a>
-  <h4 id="Fantasy_Network_AddressableMessageComponent_Lock" data-uid="Fantasy.Network.AddressableMessageComponent.Lock">Lock()</h4>
-  <div class="markdown level1 summary"><p>锁定可寻址消息组件。</p>
+  <a id="Fantasy_Network_HTTP_HTTPServerNetwork_Initialize_" data-uid="Fantasy.Network.HTTP.HTTPServerNetwork.Initialize*"></a>
+  <h4 id="Fantasy_Network_HTTP_HTTPServerNetwork_Initialize_Fantasy_Network_NetworkTarget_System_Collections_Generic_IEnumerable_System_String__" data-uid="Fantasy.Network.HTTP.HTTPServerNetwork.Initialize(Fantasy.Network.NetworkTarget,System.Collections.Generic.IEnumerable{System.String})">Initialize(NetworkTarget, IEnumerable&lt;string&gt;)</h4>
+  <div class="markdown level1 summary"><p>初始化入口</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public FTask Lock()</code></pre>
-  </div>
-  <h5 class="returns">返回</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>类型</th>
-        <th>描述</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_AddressableMessageComponent_Register_System_Boolean_.md&amp;value=---%0Auid%3A%20Fantasy.Network.AddressableMessageComponent.Register(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableMessageComponent.cs/#L35">查看源代码</a>
-  </span>
-  <a id="Fantasy_Network_AddressableMessageComponent_Register_" data-uid="Fantasy.Network.AddressableMessageComponent.Register*"></a>
-  <h4 id="Fantasy_Network_AddressableMessageComponent_Register_System_Boolean_" data-uid="Fantasy.Network.AddressableMessageComponent.Register(System.Boolean)">Register(bool)</h4>
-  <div class="markdown level1 summary"><p>注册可寻址消息组件。</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">声明</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public FTask Register(bool isLock = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Initialize(NetworkTarget networkTarget, IEnumerable&lt;string&gt; urls)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -305,43 +273,32 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td><span class="parametername">isLock</span></td>
-        <td><p>是否进行锁定。</p>
-</td>
+        <td><a class="xref" href="Fantasy.Network.NetworkTarget.html">NetworkTarget</a></td>
+        <td><span class="parametername">networkTarget</span></td>
+        <td></td>
       </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">返回</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
       <tr>
-        <th>类型</th>
-        <th>描述</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">urls</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_AddressableMessageComponent_UnLock_System_String_.md&amp;value=---%0Auid%3A%20Fantasy.Network.AddressableMessageComponent.UnLock(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_HTTP_HTTPServerNetwork_RemoveChannel_System_UInt32_.md&amp;value=---%0Auid%3A%20Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel(System.UInt32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableMessageComponent.cs/#L70">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/HTTPServerNetwork.cs/#L89">查看源代码</a>
   </span>
-  <a id="Fantasy_Network_AddressableMessageComponent_UnLock_" data-uid="Fantasy.Network.AddressableMessageComponent.UnLock*"></a>
-  <h4 id="Fantasy_Network_AddressableMessageComponent_UnLock_System_String_" data-uid="Fantasy.Network.AddressableMessageComponent.UnLock(System.String)">UnLock(string)</h4>
-  <div class="markdown level1 summary"><p>解锁可寻址消息组件。</p>
+  <a id="Fantasy_Network_HTTP_HTTPServerNetwork_RemoveChannel_" data-uid="Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel*"></a>
+  <h4 id="Fantasy_Network_HTTP_HTTPServerNetwork_RemoveChannel_System_UInt32_" data-uid="Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel(System.UInt32)">RemoveChannel(uint)</h4>
+  <div class="markdown level1 summary"><p>移除Channel</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public FTask UnLock(string source)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void RemoveChannel(uint channelId)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -354,24 +311,25 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
-        <td><span class="parametername">source</span></td>
-        <td><p>解锁来源。</p>
-</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><span class="parametername">channelId</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">返回</h5>
+  <h5 class="overrides">重写</h5>
+  <div><a class="xref" href="Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RemoveChannel_System_UInt32_">ANetwork.RemoveChannel(uint)</a></div>
+  <h5 class="exceptions">异常</h5>
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
         <th>类型</th>
-        <th>描述</th>
+        <th>条件</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notimplementedexception">NotImplementedException</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -399,10 +357,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_AddressableMessageComponent.md&amp;value=---%0Auid%3A%20Fantasy.Network.AddressableMessageComponent%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
+                    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_HTTP_HTTPServerNetwork.md&amp;value=---%0Auid%3A%20Fantasy.Network.HTTP.HTTPServerNetwork%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
                   </li>
                   <li>
-                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableMessageComponent.cs/#L24" class="contribution-link">查看源代码</a>
+                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/HTTPServerNetwork.cs/#L19" class="contribution-link">查看源代码</a>
                   </li>
                 </ul>
               </div>

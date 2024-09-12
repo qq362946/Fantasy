@@ -459,20 +459,20 @@ items:
   namespace: Fantasy.Platform.Net
   syntax:
     content: >-
-      [MemoryPackIgnore]
+      [ProtoIgnore]
 
       public long RouteId { get; }
     parameters: []
     return:
       type: System.Int64
     content.vb: >-
-      <MemoryPackIgnore>
+      <ProtoIgnore>
 
       Public Property RouteId As Long
   overload: Fantasy.Platform.Net.SceneConfig.RouteId*
   attributes:
-  - type: MemoryPack.MemoryPackIgnoreAttribute
-    ctor: MemoryPack.MemoryPackIgnoreAttribute.#ctor
+  - type: ProtoBuf.ProtoIgnoreAttribute
+    ctor: ProtoBuf.ProtoIgnoreAttribute.#ctor
     arguments: []
 - uid: Fantasy.Platform.Net.SceneConfig.EndInit
   commentId: M:Fantasy.Platform.Net.SceneConfig.EndInit

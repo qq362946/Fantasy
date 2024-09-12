@@ -5,7 +5,7 @@ items:
   id: OuterBufferPacketParserHelper
   parent: Fantasy.PacketParser
   children:
-  - Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage)
+  - Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage,System.Int32@)
   langs:
   - csharp
   - vb
@@ -39,16 +39,16 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage)
-  commentId: M:Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage)
-  id: Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage)
+- uid: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage,System.Int32@)
+  commentId: M:Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage,System.Int32@)
+  id: Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage,System.Int32@)
   parent: Fantasy.PacketParser.OuterBufferPacketParserHelper
   langs:
   - csharp
   - vb
-  name: Pack(Scene, uint, IMessage)
-  nameWithType: OuterBufferPacketParserHelper.Pack(Scene, uint, IMessage)
-  fullName: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene, uint, Fantasy.Network.Interface.IMessage)
+  name: Pack(Scene, uint, IMessage, out int)
+  nameWithType: OuterBufferPacketParserHelper.Pack(Scene, uint, IMessage, out int)
+  fullName: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene, uint, Fantasy.Network.Interface.IMessage, out int)
   type: Method
   source:
     remote:
@@ -57,7 +57,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Pack
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Handler/OuterBufferPacketParserHelper.cs
-    startLine: 27
+    startLine: 23
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -67,7 +67,7 @@ items:
     content: >-
       [MethodImpl(MethodImplOptions.AggressiveInlining)]
 
-      public static MemoryStreamBuffer Pack(Scene scene, uint rpcId, IMessage message)
+      public static MemoryStreamBuffer Pack(Scene scene, uint rpcId, IMessage message, out int memoryStreamLength)
     parameters:
     - id: scene
       type: Fantasy.Scene
@@ -78,13 +78,16 @@ items:
     - id: message
       type: Fantasy.Network.Interface.IMessage
       description: 打包的网络消息
+    - id: memoryStreamLength
+      type: System.Int32
+      description: 序列化后流的长度
     return:
       type: Fantasy.Serialize.MemoryStreamBuffer
       description: 打包完成会返回一个MemoryStreamBuffer
     content.vb: >-
       <MethodImpl(MethodImplOptions.AggressiveInlining)>
 
-      Public Shared Function Pack(scene As Scene, rpcId As UInteger, message As IMessage) As MemoryStreamBuffer
+      Public Shared Function Pack(scene As Scene, rpcId As UInteger, message As IMessage, memoryStreamLength As Integer) As MemoryStreamBuffer
   overload: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack*
   exceptions:
   - type: System.Exception
@@ -96,9 +99,9 @@ items:
     arguments:
     - type: System.Runtime.CompilerServices.MethodImplOptions
       value: 256
-  nameWithType.vb: OuterBufferPacketParserHelper.Pack(Scene, UInteger, IMessage)
-  fullName.vb: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene, UInteger, Fantasy.Network.Interface.IMessage)
-  name.vb: Pack(Scene, UInteger, IMessage)
+  nameWithType.vb: OuterBufferPacketParserHelper.Pack(Scene, UInteger, IMessage, Integer)
+  fullName.vb: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene, UInteger, Fantasy.Network.Interface.IMessage, Integer)
+  name.vb: Pack(Scene, UInteger, IMessage, Integer)
 references:
 - uid: Fantasy.PacketParser
   commentId: N:Fantasy.PacketParser
@@ -369,7 +372,7 @@ references:
   fullName: System.Exception
 - uid: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack*
   commentId: Overload:Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack
-  href: Fantasy.PacketParser.OuterBufferPacketParserHelper.html#Fantasy_PacketParser_OuterBufferPacketParserHelper_Pack_Fantasy_Scene_System_UInt32_Fantasy_Network_Interface_IMessage_
+  href: Fantasy.PacketParser.OuterBufferPacketParserHelper.html#Fantasy_PacketParser_OuterBufferPacketParserHelper_Pack_Fantasy_Scene_System_UInt32_Fantasy_Network_Interface_IMessage_System_Int32__
   name: Pack
   nameWithType: OuterBufferPacketParserHelper.Pack
   fullName: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack
@@ -398,6 +401,17 @@ references:
   name: IMessage
   nameWithType: IMessage
   fullName: Fantasy.Network.Interface.IMessage
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
 - uid: Fantasy.Serialize.MemoryStreamBuffer
   commentId: T:Fantasy.Serialize.MemoryStreamBuffer
   parent: Fantasy.Serialize

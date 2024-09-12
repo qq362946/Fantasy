@@ -45,7 +45,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ByteHelper
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 11
+    startLine: 12
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -82,7 +82,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ReadInt64
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 18
+    startLine: 19
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -115,7 +115,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ReadInt32
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 28
+    startLine: 29
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -148,7 +148,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ReadInt64
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 38
+    startLine: 39
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -181,7 +181,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ReadInt32
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 48
+    startLine: 49
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -215,7 +215,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ToHex
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 58
+    startLine: 59
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -252,7 +252,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ToHex
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 66
+    startLine: 67
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -289,7 +289,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ToHex
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 80
+    startLine: 81
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -328,7 +328,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ToHex
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 94
+    startLine: 95
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -369,7 +369,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ToStr
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 108
+    startLine: 109
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -406,7 +406,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ToStr
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 116
+    startLine: 117
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -447,7 +447,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Utf8ToStr
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 124
+    startLine: 125
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -484,7 +484,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Utf8ToStr
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 132
+    startLine: 133
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -525,7 +525,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: WriteTo
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 140
+    startLine: 141
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -564,7 +564,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: WriteTo
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 151
+    startLine: 152
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -603,7 +603,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: WriteTo
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 162
+    startLine: 163
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -642,7 +642,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: WriteTo
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 170
+    startLine: 171
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -681,7 +681,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: WriteTo
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 179
+    startLine: 180
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -720,7 +720,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ToReadableSpeed
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 190
+    startLine: 191
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -759,7 +759,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ToReadableSpeed
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 212
+    startLine: 213
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -797,7 +797,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: MergeBytes
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 236
+    startLine: 237
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -839,7 +839,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: GetBytes
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 250
+    startLine: 251
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -894,7 +894,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: WriteBytes
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 270
+    startLine: 273
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -949,7 +949,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: GetBytes
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 288
+    startLine: 293
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -1004,7 +1004,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: WriteBytes
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 308
+    startLine: 315
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -1059,7 +1059,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: GetBytes
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 326
+    startLine: 335
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper
@@ -1114,7 +1114,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: WriteBytes
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/ByteHelper.cs
-    startLine: 350
+    startLine: 356
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Helper

@@ -1,0 +1,903 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Http.HttpClientHelper
+  commentId: T:Fantasy.Http.HttpClientHelper
+  id: HttpClientHelper
+  parent: Fantasy.Http
+  children:
+  - Fantasy.Http.HttpClientHelper.CallByGet``1(System.String)
+  - Fantasy.Http.HttpClientHelper.CallByPost``1(System.String,System.Net.Http.HttpContent)
+  - Fantasy.Http.HttpClientHelper.CallByPost``1(System.String,System.Net.Http.HttpMethod)
+  - Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet(System.String)
+  - Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost(System.String,System.Net.Http.HttpContent)
+  - Fantasy.Http.HttpClientHelper.Call``2(System.String,System.Int32,System.Net.Http.Headers.AuthenticationHeaderValue,System.String,System.Object[])
+  langs:
+  - csharp
+  - vb
+  name: HttpClientHelper
+  nameWithType: HttpClientHelper
+  fullName: Fantasy.Http.HttpClientHelper
+  type: Class
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: HttpClientHelper
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+    startLine: 16
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Http
+  summary: HTTP帮助类
+  example: []
+  syntax:
+    content: public static class HttpClientHelper
+    content.vb: Public Module HttpClientHelper
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost(System.String,System.Net.Http.HttpContent)
+  commentId: M:Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost(System.String,System.Net.Http.HttpContent)
+  id: CallNotDeserializeByPost(System.String,System.Net.Http.HttpContent)
+  parent: Fantasy.Http.HttpClientHelper
+  langs:
+  - csharp
+  - vb
+  name: CallNotDeserializeByPost(string, HttpContent)
+  nameWithType: HttpClientHelper.CallNotDeserializeByPost(string, HttpContent)
+  fullName: Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost(string, System.Net.Http.HttpContent)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CallNotDeserializeByPost
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+    startLine: 30
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Http
+  summary: 用Post方式请求string数据
+  example: []
+  syntax:
+    content: public static FTask<string> CallNotDeserializeByPost(string url, HttpContent content)
+    parameters:
+    - id: url
+      type: System.String
+      description: ''
+    - id: content
+      type: System.Net.Http.HttpContent
+      description: ''
+    return:
+      type: Fantasy.Async.FTask{System.String}
+      description: ''
+    content.vb: Public Shared Function CallNotDeserializeByPost(url As String, content As HttpContent) As FTask(Of String)
+  overload: Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost*
+  exceptions:
+  - type: System.Exception
+    commentId: T:System.Exception
+    description: ''
+  nameWithType.vb: HttpClientHelper.CallNotDeserializeByPost(String, HttpContent)
+  fullName.vb: Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost(String, System.Net.Http.HttpContent)
+  name.vb: CallNotDeserializeByPost(String, HttpContent)
+- uid: Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet(System.String)
+  commentId: M:Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet(System.String)
+  id: CallNotDeserializeByGet(System.String)
+  parent: Fantasy.Http.HttpClientHelper
+  langs:
+  - csharp
+  - vb
+  name: CallNotDeserializeByGet(string)
+  nameWithType: HttpClientHelper.CallNotDeserializeByGet(string)
+  fullName: Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CallNotDeserializeByGet
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+    startLine: 48
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Http
+  summary: 用Get方式请求string数据
+  example: []
+  syntax:
+    content: public static FTask<string> CallNotDeserializeByGet(string url)
+    parameters:
+    - id: url
+      type: System.String
+      description: ''
+    return:
+      type: Fantasy.Async.FTask{System.String}
+      description: ''
+    content.vb: Public Shared Function CallNotDeserializeByGet(url As String) As FTask(Of String)
+  overload: Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet*
+  exceptions:
+  - type: System.Exception
+    commentId: T:System.Exception
+    description: ''
+  nameWithType.vb: HttpClientHelper.CallNotDeserializeByGet(String)
+  fullName.vb: Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet(String)
+  name.vb: CallNotDeserializeByGet(String)
+- uid: Fantasy.Http.HttpClientHelper.CallByPost``1(System.String,System.Net.Http.HttpContent)
+  commentId: M:Fantasy.Http.HttpClientHelper.CallByPost``1(System.String,System.Net.Http.HttpContent)
+  id: CallByPost``1(System.String,System.Net.Http.HttpContent)
+  parent: Fantasy.Http.HttpClientHelper
+  langs:
+  - csharp
+  - vb
+  name: CallByPost<T>(string, HttpContent)
+  nameWithType: HttpClientHelper.CallByPost<T>(string, HttpContent)
+  fullName: Fantasy.Http.HttpClientHelper.CallByPost<T>(string, System.Net.Http.HttpContent)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CallByPost
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+    startLine: 67
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Http
+  summary: 用Post方式请求JSON数据，并自动把JSON转换为对象。
+  example: []
+  syntax:
+    content: public static FTask<T> CallByPost<T>(string url, HttpContent content)
+    parameters:
+    - id: url
+      type: System.String
+      description: ''
+    - id: content
+      type: System.Net.Http.HttpContent
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: Fantasy.Async.FTask{{T}}
+      description: ''
+    content.vb: Public Shared Function CallByPost(Of T)(url As String, content As HttpContent) As FTask(Of T)
+  overload: Fantasy.Http.HttpClientHelper.CallByPost*
+  nameWithType.vb: HttpClientHelper.CallByPost(Of T)(String, HttpContent)
+  fullName.vb: Fantasy.Http.HttpClientHelper.CallByPost(Of T)(String, System.Net.Http.HttpContent)
+  name.vb: CallByPost(Of T)(String, HttpContent)
+- uid: Fantasy.Http.HttpClientHelper.CallByPost``1(System.String,System.Net.Http.HttpMethod)
+  commentId: M:Fantasy.Http.HttpClientHelper.CallByPost``1(System.String,System.Net.Http.HttpMethod)
+  id: CallByPost``1(System.String,System.Net.Http.HttpMethod)
+  parent: Fantasy.Http.HttpClientHelper
+  langs:
+  - csharp
+  - vb
+  name: CallByPost<T>(string, HttpMethod)
+  nameWithType: HttpClientHelper.CallByPost<T>(string, HttpMethod)
+  fullName: Fantasy.Http.HttpClientHelper.CallByPost<T>(string, System.Net.Http.HttpMethod)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CallByPost
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+    startLine: 79
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Http
+  summary: 用Post方式请求JSON数据，并自动把JSON转换为对象。
+  example: []
+  syntax:
+    content: public static FTask<T> CallByPost<T>(string url, HttpMethod method)
+    parameters:
+    - id: url
+      type: System.String
+      description: ''
+    - id: method
+      type: System.Net.Http.HttpMethod
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: Fantasy.Async.FTask{{T}}
+      description: ''
+    content.vb: Public Shared Function CallByPost(Of T)(url As String, method As HttpMethod) As FTask(Of T)
+  overload: Fantasy.Http.HttpClientHelper.CallByPost*
+  nameWithType.vb: HttpClientHelper.CallByPost(Of T)(String, HttpMethod)
+  fullName.vb: Fantasy.Http.HttpClientHelper.CallByPost(Of T)(String, System.Net.Http.HttpMethod)
+  name.vb: CallByPost(Of T)(String, HttpMethod)
+- uid: Fantasy.Http.HttpClientHelper.CallByGet``1(System.String)
+  commentId: M:Fantasy.Http.HttpClientHelper.CallByGet``1(System.String)
+  id: CallByGet``1(System.String)
+  parent: Fantasy.Http.HttpClientHelper
+  langs:
+  - csharp
+  - vb
+  name: CallByGet<T>(string)
+  nameWithType: HttpClientHelper.CallByGet<T>(string)
+  fullName: Fantasy.Http.HttpClientHelper.CallByGet<T>(string)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: CallByGet
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+    startLine: 90
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Http
+  summary: 用Get方式请求JSON数据，并自动把JSON转换为对象。
+  example: []
+  syntax:
+    content: public static FTask<T> CallByGet<T>(string url)
+    parameters:
+    - id: url
+      type: System.String
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: Fantasy.Async.FTask{{T}}
+      description: ''
+    content.vb: Public Shared Function CallByGet(Of T)(url As String) As FTask(Of T)
+  overload: Fantasy.Http.HttpClientHelper.CallByGet*
+  nameWithType.vb: HttpClientHelper.CallByGet(Of T)(String)
+  fullName.vb: Fantasy.Http.HttpClientHelper.CallByGet(Of T)(String)
+  name.vb: CallByGet(Of T)(String)
+- uid: Fantasy.Http.HttpClientHelper.Call``2(System.String,System.Int32,System.Net.Http.Headers.AuthenticationHeaderValue,System.String,System.Object[])
+  commentId: M:Fantasy.Http.HttpClientHelper.Call``2(System.String,System.Int32,System.Net.Http.Headers.AuthenticationHeaderValue,System.String,System.Object[])
+  id: Call``2(System.String,System.Int32,System.Net.Http.Headers.AuthenticationHeaderValue,System.String,System.Object[])
+  parent: Fantasy.Http.HttpClientHelper
+  langs:
+  - csharp
+  - vb
+  name: Call<TRequest, TResponse>(string, int, AuthenticationHeaderValue, string, params object[])
+  nameWithType: HttpClientHelper.Call<TRequest, TResponse>(string, int, AuthenticationHeaderValue, string, params object[])
+  fullName: Fantasy.Http.HttpClientHelper.Call<TRequest, TResponse>(string, int, System.Net.Http.Headers.AuthenticationHeaderValue, string, params object[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Call
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Helper/HttpClient/HttpClientHelper.cs
+    startLine: 106
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Http
+  summary: 用Post方式请求JSON数据，并自动把JSON转换为对象。
+  example: []
+  syntax:
+    content: 'public static FTask<TResponse> Call<TRequest, TResponse>(string url, int id, AuthenticationHeaderValue authentication, string method, params object[] @params) where TRequest : class, IJsonRpcRequest, new()'
+    parameters:
+    - id: url
+      type: System.String
+      description: ''
+    - id: id
+      type: System.Int32
+      description: ''
+    - id: authentication
+      type: System.Net.Http.Headers.AuthenticationHeaderValue
+      description: ''
+    - id: method
+      type: System.String
+      description: ''
+    - id: params
+      type: System.Object[]
+      description: ''
+    typeParameters:
+    - id: TRequest
+      description: ''
+    - id: TResponse
+      description: ''
+    return:
+      type: Fantasy.Async.FTask{{TResponse}}
+      description: ''
+    content.vb: Public Shared Function [Call](Of TRequest As {Class, IJsonRpcRequest, New}, TResponse)(url As String, id As Integer, authentication As AuthenticationHeaderValue, method As String, ParamArray params As Object()) As FTask(Of TResponse)
+  overload: Fantasy.Http.HttpClientHelper.Call*
+  nameWithType.vb: HttpClientHelper.Call(Of TRequest, TResponse)(String, Integer, AuthenticationHeaderValue, String, ParamArray Object())
+  fullName.vb: Fantasy.Http.HttpClientHelper.Call(Of TRequest, TResponse)(String, Integer, System.Net.Http.Headers.AuthenticationHeaderValue, String, ParamArray Object())
+  name.vb: Call(Of TRequest, TResponse)(String, Integer, AuthenticationHeaderValue, String, ParamArray Object())
+references:
+- uid: Fantasy.Http
+  commentId: N:Fantasy.Http
+  href: Fantasy.html
+  name: Fantasy.Http
+  nameWithType: Fantasy.Http
+  fullName: Fantasy.Http
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Http
+    name: Http
+    href: Fantasy.Http.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Http
+    name: Http
+    href: Fantasy.Http.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception
+- uid: Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost*
+  commentId: Overload:Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost
+  href: Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallNotDeserializeByPost_System_String_System_Net_Http_HttpContent_
+  name: CallNotDeserializeByPost
+  nameWithType: HttpClientHelper.CallNotDeserializeByPost
+  fullName: Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Net.Http.HttpContent
+  commentId: T:System.Net.Http.HttpContent
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcontent
+  name: HttpContent
+  nameWithType: HttpContent
+  fullName: System.Net.Http.HttpContent
+- uid: Fantasy.Async.FTask{System.String}
+  commentId: T:Fantasy.Async.FTask{System.String}
+  parent: Fantasy.Async
+  definition: Fantasy.Async.FTask`1
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<string>
+  nameWithType: FTask<string>
+  fullName: Fantasy.Async.FTask<string>
+  nameWithType.vb: FTask(Of String)
+  fullName.vb: Fantasy.Async.FTask(Of String)
+  name.vb: FTask(Of String)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Net.Http
+  commentId: N:System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net.Http
+  nameWithType: System.Net.Http
+  fullName: System.Net.Http
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+- uid: Fantasy.Async.FTask`1
+  commentId: T:Fantasy.Async.FTask`1
+  parent: Fantasy.Async
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<T>
+  nameWithType: FTask<T>
+  fullName: Fantasy.Async.FTask<T>
+  nameWithType.vb: FTask(Of T)
+  fullName.vb: Fantasy.Async.FTask(Of T)
+  name.vb: FTask(Of T)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Fantasy.Async
+  commentId: N:Fantasy.Async
+  href: Fantasy.html
+  name: Fantasy.Async
+  nameWithType: Fantasy.Async
+  fullName: Fantasy.Async
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Async
+    name: Async
+    href: Fantasy.Async.html
+- uid: Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet*
+  commentId: Overload:Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet
+  href: Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallNotDeserializeByGet_System_String_
+  name: CallNotDeserializeByGet
+  nameWithType: HttpClientHelper.CallNotDeserializeByGet
+  fullName: Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet
+- uid: Fantasy.Http.HttpClientHelper.CallByPost*
+  commentId: Overload:Fantasy.Http.HttpClientHelper.CallByPost
+  href: Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallByPost__1_System_String_System_Net_Http_HttpContent_
+  name: CallByPost
+  nameWithType: HttpClientHelper.CallByPost
+  fullName: Fantasy.Http.HttpClientHelper.CallByPost
+- uid: Fantasy.Async.FTask{{T}}
+  commentId: T:Fantasy.Async.FTask{``0}
+  parent: Fantasy.Async
+  definition: Fantasy.Async.FTask`1
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<T>
+  nameWithType: FTask<T>
+  fullName: Fantasy.Async.FTask<T>
+  nameWithType.vb: FTask(Of T)
+  fullName.vb: Fantasy.Async.FTask(Of T)
+  name.vb: FTask(Of T)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Net.Http.HttpMethod
+  commentId: T:System.Net.Http.HttpMethod
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmethod
+  name: HttpMethod
+  nameWithType: HttpMethod
+  fullName: System.Net.Http.HttpMethod
+- uid: Fantasy.Http.HttpClientHelper.CallByGet*
+  commentId: Overload:Fantasy.Http.HttpClientHelper.CallByGet
+  href: Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallByGet__1_System_String_
+  name: CallByGet
+  nameWithType: HttpClientHelper.CallByGet
+  fullName: Fantasy.Http.HttpClientHelper.CallByGet
+- uid: Fantasy.Http.HttpClientHelper.Call*
+  commentId: Overload:Fantasy.Http.HttpClientHelper.Call
+  href: Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_Call__2_System_String_System_Int32_System_Net_Http_Headers_AuthenticationHeaderValue_System_String_System_Object___
+  name: Call
+  nameWithType: HttpClientHelper.Call
+  fullName: Fantasy.Http.HttpClientHelper.Call
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Net.Http.Headers.AuthenticationHeaderValue
+  commentId: T:System.Net.Http.Headers.AuthenticationHeaderValue
+  parent: System.Net.Http.Headers
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.headers.authenticationheadervalue
+  name: AuthenticationHeaderValue
+  nameWithType: AuthenticationHeaderValue
+  fullName: System.Net.Http.Headers.AuthenticationHeaderValue
+- uid: System.Object[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object[]
+  nameWithType: object[]
+  fullName: object[]
+  nameWithType.vb: Object()
+  fullName.vb: Object()
+  name.vb: Object()
+  spec.csharp:
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: (
+  - name: )
+- uid: Fantasy.Async.FTask{{TResponse}}
+  commentId: T:Fantasy.Async.FTask{``1}
+  parent: Fantasy.Async
+  definition: Fantasy.Async.FTask`1
+  href: Fantasy.Async.FTask-1.html
+  name: FTask<TResponse>
+  nameWithType: FTask<TResponse>
+  fullName: Fantasy.Async.FTask<TResponse>
+  nameWithType.vb: FTask(Of TResponse)
+  fullName.vb: Fantasy.Async.FTask(Of TResponse)
+  name.vb: FTask(Of TResponse)
+  spec.csharp:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: <
+  - name: TResponse
+  - name: '>'
+  spec.vb:
+  - uid: Fantasy.Async.FTask`1
+    name: FTask
+    href: Fantasy.Async.FTask-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResponse
+  - name: )
+- uid: System.Net.Http.Headers
+  commentId: N:System.Net.Http.Headers
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net.Http.Headers
+  nameWithType: System.Net.Http.Headers
+  fullName: System.Net.Http.Headers
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+  - name: .
+  - uid: System.Net.Http.Headers
+    name: Headers
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.headers
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+  - name: .
+  - uid: System.Net.Http.Headers
+    name: Headers
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.headers

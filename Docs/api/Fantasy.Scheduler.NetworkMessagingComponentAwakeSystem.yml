@@ -20,7 +20,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: NetworkMessagingComponentAwakeSystem
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 28
+    startLine: 29
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -62,7 +62,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Awake
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 30
+    startLine: 31
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler

@@ -10,6 +10,7 @@ items:
   - Fantasy.Assembly.AssemblySystem.ForEach(System.Int64)
   - Fantasy.Assembly.AssemblySystem.ForEach(System.Int64,System.Type)
   - Fantasy.Assembly.AssemblySystem.ForEach(System.Type)
+  - Fantasy.Assembly.AssemblySystem.ForEachAssembly
   - Fantasy.Assembly.AssemblySystem.GetAssembly(System.Int64)
   - Fantasy.Assembly.AssemblySystem.Initialize(System.Reflection.Assembly[])
   - Fantasy.Assembly.AssemblySystem.LoadAssembly(System.Reflection.Assembly)
@@ -30,7 +31,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: AssemblySystem
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 18
+    startLine: 19
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -67,7 +68,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Initialize
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 30
+    startLine: 31
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -101,7 +102,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: LoadAssembly
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 43
+    startLine: 44
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -133,7 +134,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: UnLoadAssembly
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 72
+    startLine: 73
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -165,7 +166,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Register
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 92
+    startLine: 93
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -202,7 +203,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: UnRegister
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 111
+    startLine: 112
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -237,7 +238,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ForEach
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 136
+    startLine: 137
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -268,7 +269,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ForEach
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 152
+    startLine: 153
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -306,7 +307,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ForEach
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 170
+    startLine: 171
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -341,7 +342,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ForEach
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 192
+    startLine: 193
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -382,7 +383,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: GetAssembly
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 215
+    startLine: 216
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -402,6 +403,38 @@ items:
   nameWithType.vb: AssemblySystem.GetAssembly(Long)
   fullName.vb: Fantasy.Assembly.AssemblySystem.GetAssembly(Long)
   name.vb: GetAssembly(Long)
+- uid: Fantasy.Assembly.AssemblySystem.ForEachAssembly
+  commentId: P:Fantasy.Assembly.AssemblySystem.ForEachAssembly
+  id: ForEachAssembly
+  parent: Fantasy.Assembly.AssemblySystem
+  langs:
+  - csharp
+  - vb
+  name: ForEachAssembly
+  nameWithType: AssemblySystem.ForEachAssembly
+  fullName: Fantasy.Assembly.AssemblySystem.ForEachAssembly
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ForEachAssembly
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
+    startLine: 225
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Assembly
+  summary: 获取当前框架注册的Assembly
+  example: []
+  syntax:
+    content: public static IEnumerable<Assembly> ForEachAssembly { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{System.Reflection.Assembly}
+      description: ''
+    content.vb: Public Shared ReadOnly Property ForEachAssembly As IEnumerable(Of Assembly)
+  overload: Fantasy.Assembly.AssemblySystem.ForEachAssembly*
 - uid: Fantasy.Assembly.AssemblySystem.Dispose
   commentId: M:Fantasy.Assembly.AssemblySystem.Dispose
   id: Dispose
@@ -420,7 +453,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Dispose
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Assembly/AssemblySystem.cs
-    startLine: 233
+    startLine: 249
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Assembly
@@ -938,6 +971,47 @@ references:
   name: GetAssembly
   nameWithType: AssemblySystem.GetAssembly
   fullName: Fantasy.Assembly.AssemblySystem.GetAssembly
+- uid: Fantasy.Assembly.AssemblySystem.ForEachAssembly*
+  commentId: Overload:Fantasy.Assembly.AssemblySystem.ForEachAssembly
+  href: Fantasy.Assembly.AssemblySystem.html#Fantasy_Assembly_AssemblySystem_ForEachAssembly
+  name: ForEachAssembly
+  nameWithType: AssemblySystem.ForEachAssembly
+  fullName: Fantasy.Assembly.AssemblySystem.ForEachAssembly
+- uid: System.Collections.Generic.IEnumerable{System.Reflection.Assembly}
+  commentId: T:System.Collections.Generic.IEnumerable{System.Reflection.Assembly}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<Assembly>
+  nameWithType: IEnumerable<Assembly>
+  fullName: System.Collections.Generic.IEnumerable<System.Reflection.Assembly>
+  nameWithType.vb: IEnumerable(Of Assembly)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.Reflection.Assembly)
+  name.vb: IEnumerable(Of Assembly)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.reflection.assembly
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Reflection.Assembly
+    name: Assembly
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.reflection.assembly
+  - name: )
 - uid: Fantasy.Assembly.AssemblySystem.Dispose*
   commentId: Overload:Fantasy.Assembly.AssemblySystem.Dispose
   href: Fantasy.Assembly.AssemblySystem.html#Fantasy_Assembly_AssemblySystem_Dispose

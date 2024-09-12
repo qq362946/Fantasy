@@ -254,6 +254,13 @@ items:
       name: WebSocketHelper
     - uid: Fantasy.Helper.WinPeriod
       name: WinPeriod
+  - uid: Fantasy.Http
+    name: Http
+    items:
+    - uid: Fantasy.Http.HttpClientHelper
+      name: HttpClientHelper
+    - uid: Fantasy.Http.IJsonRpcRequest
+      name: IJsonRpcRequest
   - uid: Fantasy.IdFactory
     name: IdFactory
     items:
@@ -303,6 +310,13 @@ items:
   - uid: Fantasy.Network
     name: Network
     items:
+    - uid: Fantasy.Network.HTTP
+      name: HTTP
+      items:
+      - uid: Fantasy.Network.HTTP.HTTPServerNetwork
+        name: HTTPServerNetwork
+      - uid: Fantasy.Network.HTTP.SceneContextFilter
+        name: SceneContextFilter
     - uid: Fantasy.Network.Interface
       name: Interface
       items:
@@ -564,14 +578,18 @@ items:
       name: ASerialize
     - uid: Fantasy.Serialize.BsonPackHelper
       name: BsonPackHelper
+    - uid: Fantasy.Serialize.FantasySerializerType
+      name: FantasySerializerType
     - uid: Fantasy.Serialize.IProto
       name: IProto
-    - uid: Fantasy.Serialize.MemoryPackHelper
-      name: MemoryPackHelper
+    - uid: Fantasy.Serialize.ISerialize
+      name: ISerialize
     - uid: Fantasy.Serialize.MemoryStreamBuffer
       name: MemoryStreamBuffer
     - uid: Fantasy.Serialize.ProtoBufPackHelper
       name: ProtoBufPackHelper
+    - uid: Fantasy.Serialize.SerializerManager
+      name: SerializerManager
     - uid: Fantasy.Serialize.StructBsonSerialize`1
       name: StructBsonSerialize<TValue>
     - uid: Fantasy.Serialize.SupportInitializeChecker`1

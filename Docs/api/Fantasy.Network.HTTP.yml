@@ -1,0 +1,31 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Network.HTTP
+  commentId: N:Fantasy.Network.HTTP
+  id: HTTP
+  parent: Fantasy.Network
+  children:
+  - Fantasy.Network.HTTP.HTTPServerNetwork
+  - Fantasy.Network.HTTP.SceneContextFilter
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Network.HTTP
+  nameWithType: Fantasy.Network.HTTP
+  fullName: Fantasy.Network.HTTP
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork
+  commentId: T:Fantasy.Network.HTTP.HTTPServerNetwork
+  href: Fantasy.Network.HTTP.HTTPServerNetwork.html
+  name: HTTPServerNetwork
+  nameWithType: HTTPServerNetwork
+  fullName: Fantasy.Network.HTTP.HTTPServerNetwork
+- uid: Fantasy.Network.HTTP.SceneContextFilter
+  commentId: T:Fantasy.Network.HTTP.SceneContextFilter
+  href: Fantasy.Network.HTTP.SceneContextFilter.html
+  name: SceneContextFilter
+  nameWithType: SceneContextFilter
+  fullName: Fantasy.Network.HTTP.SceneContextFilter

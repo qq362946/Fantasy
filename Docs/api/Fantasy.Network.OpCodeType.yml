@@ -39,7 +39,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OpCodeType
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 49
+    startLine: 48
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -74,7 +74,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OuterMessage
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 51
+    startLine: 50
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -101,7 +101,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OuterRequest
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 52
+    startLine: 51
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -128,7 +128,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OuterResponse
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 53
+    startLine: 52
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -155,7 +155,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InnerMessage
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 55
+    startLine: 54
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -182,7 +182,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InnerRequest
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 56
+    startLine: 55
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -209,7 +209,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InnerResponse
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 57
+    startLine: 56
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -236,7 +236,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InnerRouteMessage
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 59
+    startLine: 58
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -263,7 +263,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InnerRouteRequest
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 60
+    startLine: 59
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -290,7 +290,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InnerRouteResponse
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 61
+    startLine: 60
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -317,7 +317,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OuterAddressableMessage
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 63
+    startLine: 62
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -344,7 +344,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OuterAddressableRequest
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 64
+    startLine: 63
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -371,7 +371,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OuterAddressableResponse
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 65
+    startLine: 64
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -398,7 +398,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InnerAddressableMessage
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 67
+    startLine: 66
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -425,7 +425,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InnerAddressableRequest
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 68
+    startLine: 67
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -452,7 +452,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InnerAddressableResponse
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 69
+    startLine: 68
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -479,7 +479,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OuterCustomRouteMessage
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 71
+    startLine: 70
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -506,7 +506,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OuterCustomRouteRequest
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 72
+    startLine: 71
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -533,7 +533,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OuterCustomRouteResponse
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 73
+    startLine: 72
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -560,7 +560,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OuterPingRequest
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 75
+    startLine: 74
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network
@@ -587,7 +587,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OuterPingResponse
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/OpCode.cs
-    startLine: 76
+    startLine: 75
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network

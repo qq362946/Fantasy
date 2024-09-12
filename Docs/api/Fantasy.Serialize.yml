@@ -8,10 +8,12 @@ items:
   - Fantasy.Serialize.AMessage
   - Fantasy.Serialize.ASerialize
   - Fantasy.Serialize.BsonPackHelper
+  - Fantasy.Serialize.FantasySerializerType
   - Fantasy.Serialize.IProto
-  - Fantasy.Serialize.MemoryPackHelper
+  - Fantasy.Serialize.ISerialize
   - Fantasy.Serialize.MemoryStreamBuffer
   - Fantasy.Serialize.ProtoBufPackHelper
+  - Fantasy.Serialize.SerializerManager
   - Fantasy.Serialize.StructBsonSerialize`1
   - Fantasy.Serialize.SupportInitializeChecker`1
   langs:
@@ -44,6 +46,12 @@ references:
   name: BsonPackHelper
   nameWithType: BsonPackHelper
   fullName: Fantasy.Serialize.BsonPackHelper
+- uid: Fantasy.Serialize.FantasySerializerType
+  commentId: T:Fantasy.Serialize.FantasySerializerType
+  href: Fantasy.Serialize.FantasySerializerType.html
+  name: FantasySerializerType
+  nameWithType: FantasySerializerType
+  fullName: Fantasy.Serialize.FantasySerializerType
 - uid: Fantasy.Serialize.IProto
   commentId: T:Fantasy.Serialize.IProto
   parent: Fantasy.Serialize
@@ -51,12 +59,13 @@ references:
   name: IProto
   nameWithType: IProto
   fullName: Fantasy.Serialize.IProto
-- uid: Fantasy.Serialize.MemoryPackHelper
-  commentId: T:Fantasy.Serialize.MemoryPackHelper
-  href: Fantasy.Serialize.MemoryPackHelper.html
-  name: MemoryPackHelper
-  nameWithType: MemoryPackHelper
-  fullName: Fantasy.Serialize.MemoryPackHelper
+- uid: Fantasy.Serialize.ISerialize
+  commentId: T:Fantasy.Serialize.ISerialize
+  parent: Fantasy.Serialize
+  href: Fantasy.Serialize.ISerialize.html
+  name: ISerialize
+  nameWithType: ISerialize
+  fullName: Fantasy.Serialize.ISerialize
 - uid: Fantasy.Serialize.MemoryStreamBuffer
   commentId: T:Fantasy.Serialize.MemoryStreamBuffer
   parent: Fantasy.Serialize
@@ -70,6 +79,12 @@ references:
   name: ProtoBufPackHelper
   nameWithType: ProtoBufPackHelper
   fullName: Fantasy.Serialize.ProtoBufPackHelper
+- uid: Fantasy.Serialize.SerializerManager
+  commentId: T:Fantasy.Serialize.SerializerManager
+  href: Fantasy.Serialize.SerializerManager.html
+  name: SerializerManager
+  nameWithType: SerializerManager
+  fullName: Fantasy.Serialize.SerializerManager
 - uid: Fantasy.Serialize.StructBsonSerialize`1
   commentId: T:Fantasy.Serialize.StructBsonSerialize`1
   href: Fantasy.Serialize.StructBsonSerialize-1.html

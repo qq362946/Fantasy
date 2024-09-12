@@ -101,17 +101,20 @@
     <div><a class="xref" href="Fantasy.Network.Interface.IRouteResponse.html">IRouteResponse</a></div>
     <div><a class="xref" href="Fantasy.Network.Interface.IResponse.html">IResponse</a></div>
     <div><a class="xref" href="Fantasy.Network.Interface.IMessage.html">IMessage</a></div>
-    <div><span class="xref">IMemoryPackable</span>&lt;<a class="xref" href="Fantasy.InnerMessage.I_AddressableLock_Response.html">I_AddressableLock_Response</a>&gt;</div>
-    <div><span class="xref">IMemoryPackFormatterRegister</span></div>
-    <div><span class="xref">IFixedSizeMemoryPackable</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>继承成员</h5>
     <div>
-      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_Scene">AMessage.Scene</a>
+      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_GetScene">AMessage.GetScene()</a>
     </div>
     <div>
-      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_IsPool">AMessage.IsPool</a>
+      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetScene_Fantasy_Scene_">AMessage.SetScene(Scene)</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_IsPool">AMessage.IsPool()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetIsPool_System_Boolean_">AMessage.SetIsPool(bool)</a>
     </div>
     <div>
       <a class="xref" href="Fantasy.Serialize.ASerialize.html#Fantasy_Serialize_ASerialize_Dispose">ASerialize.Dispose()</a>
@@ -151,12 +154,9 @@
   <h6><strong>程序集</strong>: Fantasy.Net.dll</h6>
   <h5 id="Fantasy_InnerMessage_I_AddressableLock_Response_syntax">语法</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[MemoryPackable(GenerateType.Object)]
-public class I_AddressableLock_Response : AMessage, ISupportInitialize, IDisposable, IPool, IRouteResponse, IResponse, IMessage, IMemoryPackable&lt;I_AddressableLock_Response&gt;, IMemoryPackFormatterRegister, IFixedSizeMemoryPackable</code></pre>
+    <pre><code class="lang-csharp hljs">[ProtoContract]
+public class I_AddressableLock_Response : AMessage, ISupportInitialize, IDisposable, IPool, IRouteResponse, IResponse, IMessage</code></pre>
   </div>
-  <h5 id="Fantasy_InnerMessage_I_AddressableLock_Response_remarks"><strong>备注</strong></h5>
-  <div class="markdown level0 remarks"><p>MemoryPack GenerateType: Object<br><pre><code class="lang-csharp">uint ErrorCode</code></pre>
-</div>
   <h3 id="properties">属性
 </h3>
   <span class="small pull-right mobile-hide">
@@ -164,7 +164,7 @@ public class I_AddressableLock_Response : AMessage, ISupportInitialize, IDisposa
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_InnerMessage_I_AddressableLock_Response_ErrorCode.md&amp;value=---%0Auid%3A%20Fantasy.InnerMessage.I_AddressableLock_Response.ErrorCode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L134">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L135">查看源代码</a>
   </span>
   <a id="Fantasy_InnerMessage_I_AddressableLock_Response_ErrorCode_" data-uid="Fantasy.InnerMessage.I_AddressableLock_Response.ErrorCode*"></a>
   <h4 id="Fantasy_InnerMessage_I_AddressableLock_Response_ErrorCode" data-uid="Fantasy.InnerMessage.I_AddressableLock_Response.ErrorCode">ErrorCode</h4>
@@ -173,7 +173,7 @@ public class I_AddressableLock_Response : AMessage, ISupportInitialize, IDisposa
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[MemoryPackOrder(0)]
+    <pre><code class="lang-csharp hljs">[ProtoMember(1)]
 public uint ErrorCode { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">属性值</h5>
@@ -198,7 +198,7 @@ public uint ErrorCode { get; set; }</code></pre>
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_InnerMessage_I_AddressableLock_Response_OpCode.md&amp;value=---%0Auid%3A%20Fantasy.InnerMessage.I_AddressableLock_Response.OpCode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L133">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L134">查看源代码</a>
   </span>
   <a id="Fantasy_InnerMessage_I_AddressableLock_Response_OpCode_" data-uid="Fantasy.InnerMessage.I_AddressableLock_Response.OpCode*"></a>
   <h4 id="Fantasy_InnerMessage_I_AddressableLock_Response_OpCode" data-uid="Fantasy.InnerMessage.I_AddressableLock_Response.OpCode">OpCode()</h4>
@@ -244,15 +244,6 @@ public uint ErrorCode { get; set; }</code></pre>
   <div>
       <a class="xref" href="Fantasy.Network.Interface.IMessage.html">IMessage</a>
   </div>
-  <div>
-      <span class="xref">MemoryPack.IMemoryPackable&lt;T&gt;</span>
-  </div>
-  <div>
-      <span class="xref">MemoryPack.IMemoryPackFormatterRegister</span>
-  </div>
-  <div>
-      <span class="xref">MemoryPack.IFixedSizeMemoryPackable</span>
-  </div>
   <h3 id="extensionmethods">扩展方法</h3>
   <div>
       <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
@@ -265,6 +256,12 @@ public uint ErrorCode { get; set; }</code></pre>
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_InnerMessage_I_AddressableLock_Response.md&amp;value=---%0Auid%3A%20Fantasy.InnerMessage.I_AddressableLock_Response%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs/#L131" class="contribution-link">查看源代码</a>
+                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

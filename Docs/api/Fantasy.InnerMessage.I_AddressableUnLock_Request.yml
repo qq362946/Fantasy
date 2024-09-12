@@ -19,23 +19,25 @@ items:
   fullName: Fantasy.InnerMessage.I_AddressableUnLock_Request
   type: Class
   source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
     id: I_AddressableUnLock_Request
-    path: MemoryPack.Generator/MemoryPack.Generator.MemoryPackGenerator/Fantasy.InnerMessage.I_AddressableUnLock_Request.MemoryPackFormatter.g.cs
-    startLine: 31
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs
+    startLine: 137
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.InnerMessage
-  remarks: 'MemoryPack GenerateType: Object<br /><pre><code class="lang-csharp">long AddressableIdlong RouteIdstring Source</code></pre>'
-  example: []
   syntax:
     content: >-
-      [MemoryPackable(GenerateType.Object)]
+      [ProtoContract]
 
-      public class I_AddressableUnLock_Request : AMessage, ISupportInitialize, IDisposable, IPool, IRouteRequest, IRouteMessage, IRequest, IMessage, IMemoryPackable<I_AddressableUnLock_Request>, IMemoryPackFormatterRegister
+      public class I_AddressableUnLock_Request : AMessage, ISupportInitialize, IDisposable, IPool, IRouteRequest, IRouteMessage, IRequest, IMessage
     content.vb: >-
-      <MemoryPackable(GenerateType.Object)>
+      <ProtoContract>
 
-      Public Class I_AddressableUnLock_Request Inherits AMessage Implements ISupportInitialize, IDisposable, IPool, IRouteRequest, IRouteMessage, IRequest, IMessage, IMemoryPackable(Of I_AddressableUnLock_Request), IMemoryPackFormatterRegister
+      Public Class I_AddressableUnLock_Request Inherits AMessage Implements ISupportInitialize, IDisposable, IPool, IRouteRequest, IRouteMessage, IRequest, IMessage
   inheritance:
   - System.Object
   - Fantasy.Serialize.ASerialize
@@ -48,11 +50,11 @@ items:
   - Fantasy.Network.Interface.IRouteMessage
   - Fantasy.Network.Interface.IRequest
   - Fantasy.Network.Interface.IMessage
-  - MemoryPack.IMemoryPackable{Fantasy.InnerMessage.I_AddressableUnLock_Request}
-  - MemoryPack.IMemoryPackFormatterRegister
   inheritedMembers:
-  - Fantasy.Serialize.AMessage.Scene
+  - Fantasy.Serialize.AMessage.GetScene
+  - Fantasy.Serialize.AMessage.SetScene(Fantasy.Scene)
   - Fantasy.Serialize.AMessage.IsPool
+  - Fantasy.Serialize.AMessage.SetIsPool(System.Boolean)
   - Fantasy.Serialize.ASerialize.Dispose
   - Fantasy.Serialize.ASerialize.BeginInit
   - Fantasy.Serialize.ASerialize.EndInit
@@ -67,11 +69,9 @@ items:
   extensionMethods:
   - Fantasy.InnerMessage.I_AddressableUnLock_Request.Fantasy.Helper.JsonHelper.ToJson``1
   attributes:
-  - type: MemoryPack.MemoryPackableAttribute
-    ctor: MemoryPack.MemoryPackableAttribute.#ctor(MemoryPack.GenerateType)
-    arguments:
-    - type: MemoryPack.GenerateType
-      value: 0
+  - type: ProtoBuf.ProtoContractAttribute
+    ctor: ProtoBuf.ProtoContractAttribute.#ctor
+    arguments: []
 - uid: Fantasy.InnerMessage.I_AddressableUnLock_Request.ResponseType
   commentId: P:Fantasy.InnerMessage.I_AddressableUnLock_Request.ResponseType
   id: ResponseType
@@ -90,26 +90,26 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ResponseType
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs
-    startLine: 139
+    startLine: 140
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.InnerMessage
   syntax:
     content: >-
-      [MemoryPackIgnore]
+      [ProtoIgnore]
 
       public I_AddressableUnLock_Response ResponseType { get; set; }
     parameters: []
     return:
       type: Fantasy.InnerMessage.I_AddressableUnLock_Response
     content.vb: >-
-      <MemoryPackIgnore>
+      <ProtoIgnore>
 
       Public Property ResponseType As I_AddressableUnLock_Response
   overload: Fantasy.InnerMessage.I_AddressableUnLock_Request.ResponseType*
   attributes:
-  - type: MemoryPack.MemoryPackIgnoreAttribute
-    ctor: MemoryPack.MemoryPackIgnoreAttribute.#ctor
+  - type: ProtoBuf.ProtoIgnoreAttribute
+    ctor: ProtoBuf.ProtoIgnoreAttribute.#ctor
     arguments: []
 - uid: Fantasy.InnerMessage.I_AddressableUnLock_Request.OpCode
   commentId: M:Fantasy.InnerMessage.I_AddressableUnLock_Request.OpCode
@@ -129,7 +129,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: OpCode
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs
-    startLine: 141
+    startLine: 142
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.InnerMessage
@@ -162,7 +162,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: RouteTypeOpCode
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs
-    startLine: 142
+    startLine: 143
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.InnerMessage
@@ -190,29 +190,29 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: AddressableId
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs
-    startLine: 143
+    startLine: 144
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.InnerMessage
   syntax:
     content: >-
-      [MemoryPackOrder(0)]
+      [ProtoMember(1)]
 
       public long AddressableId { get; set; }
     parameters: []
     return:
       type: System.Int64
     content.vb: >-
-      <MemoryPackOrder(0)>
+      <ProtoMember(1)>
 
       Public Property AddressableId As Long
   overload: Fantasy.InnerMessage.I_AddressableUnLock_Request.AddressableId*
   attributes:
-  - type: MemoryPack.MemoryPackOrderAttribute
-    ctor: MemoryPack.MemoryPackOrderAttribute.#ctor(System.Int32)
+  - type: ProtoBuf.ProtoMemberAttribute
+    ctor: ProtoBuf.ProtoMemberAttribute.#ctor(System.Int32)
     arguments:
     - type: System.Int32
-      value: 0
+      value: 1
 - uid: Fantasy.InnerMessage.I_AddressableUnLock_Request.RouteId
   commentId: P:Fantasy.InnerMessage.I_AddressableUnLock_Request.RouteId
   id: RouteId
@@ -231,29 +231,29 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: RouteId
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs
-    startLine: 145
+    startLine: 146
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.InnerMessage
   syntax:
     content: >-
-      [MemoryPackOrder(1)]
+      [ProtoMember(2)]
 
       public long RouteId { get; set; }
     parameters: []
     return:
       type: System.Int64
     content.vb: >-
-      <MemoryPackOrder(1)>
+      <ProtoMember(2)>
 
       Public Property RouteId As Long
   overload: Fantasy.InnerMessage.I_AddressableUnLock_Request.RouteId*
   attributes:
-  - type: MemoryPack.MemoryPackOrderAttribute
-    ctor: MemoryPack.MemoryPackOrderAttribute.#ctor(System.Int32)
+  - type: ProtoBuf.ProtoMemberAttribute
+    ctor: ProtoBuf.ProtoMemberAttribute.#ctor(System.Int32)
     arguments:
     - type: System.Int32
-      value: 1
+      value: 2
 - uid: Fantasy.InnerMessage.I_AddressableUnLock_Request.Source
   commentId: P:Fantasy.InnerMessage.I_AddressableUnLock_Request.Source
   id: Source
@@ -272,29 +272,29 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Source
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/InnerMessage.cs
-    startLine: 147
+    startLine: 148
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.InnerMessage
   syntax:
     content: >-
-      [MemoryPackOrder(2)]
+      [ProtoMember(3)]
 
       public string Source { get; set; }
     parameters: []
     return:
       type: System.String
     content.vb: >-
-      <MemoryPackOrder(2)>
+      <ProtoMember(3)>
 
       Public Property Source As String
   overload: Fantasy.InnerMessage.I_AddressableUnLock_Request.Source*
   attributes:
-  - type: MemoryPack.MemoryPackOrderAttribute
-    ctor: MemoryPack.MemoryPackOrderAttribute.#ctor(System.Int32)
+  - type: ProtoBuf.ProtoMemberAttribute
+    ctor: ProtoBuf.ProtoMemberAttribute.#ctor(System.Int32)
     arguments:
     - type: System.Int32
-      value: 2
+      value: 3
 references:
 - uid: Fantasy.InnerMessage
   commentId: N:Fantasy.InnerMessage
@@ -394,58 +394,100 @@ references:
   name: IMessage
   nameWithType: IMessage
   fullName: Fantasy.Network.Interface.IMessage
-- uid: MemoryPack.IMemoryPackable{Fantasy.InnerMessage.I_AddressableUnLock_Request}
-  commentId: T:MemoryPack.IMemoryPackable{Fantasy.InnerMessage.I_AddressableUnLock_Request}
-  parent: MemoryPack
-  definition: MemoryPack.IMemoryPackable`1
-  href: Fantasy.InnerMessage.I_AddressableUnLock_Request.html
-  name: IMemoryPackable<I_AddressableUnLock_Request>
-  nameWithType: IMemoryPackable<I_AddressableUnLock_Request>
-  fullName: MemoryPack.IMemoryPackable<Fantasy.InnerMessage.I_AddressableUnLock_Request>
-  nameWithType.vb: IMemoryPackable(Of I_AddressableUnLock_Request)
-  fullName.vb: MemoryPack.IMemoryPackable(Of Fantasy.InnerMessage.I_AddressableUnLock_Request)
-  name.vb: IMemoryPackable(Of I_AddressableUnLock_Request)
-  spec.csharp:
-  - uid: MemoryPack.IMemoryPackable`1
-    name: IMemoryPackable
-    isExternal: true
-  - name: <
-  - uid: Fantasy.InnerMessage.I_AddressableUnLock_Request
-    name: I_AddressableUnLock_Request
-    href: Fantasy.InnerMessage.I_AddressableUnLock_Request.html
-  - name: '>'
-  spec.vb:
-  - uid: MemoryPack.IMemoryPackable`1
-    name: IMemoryPackable
-    isExternal: true
-  - name: (
-  - name: Of
-  - name: " "
-  - uid: Fantasy.InnerMessage.I_AddressableUnLock_Request
-    name: I_AddressableUnLock_Request
-    href: Fantasy.InnerMessage.I_AddressableUnLock_Request.html
-  - name: )
-- uid: MemoryPack.IMemoryPackFormatterRegister
-  commentId: T:MemoryPack.IMemoryPackFormatterRegister
-  parent: MemoryPack
-  isExternal: true
-  name: IMemoryPackFormatterRegister
-  nameWithType: IMemoryPackFormatterRegister
-  fullName: MemoryPack.IMemoryPackFormatterRegister
-- uid: Fantasy.Serialize.AMessage.Scene
-  commentId: P:Fantasy.Serialize.AMessage.Scene
+- uid: Fantasy.Serialize.AMessage.GetScene
+  commentId: M:Fantasy.Serialize.AMessage.GetScene
   parent: Fantasy.Serialize.AMessage
-  href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_Scene
-  name: Scene
-  nameWithType: AMessage.Scene
-  fullName: Fantasy.Serialize.AMessage.Scene
+  href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_GetScene
+  name: GetScene()
+  nameWithType: AMessage.GetScene()
+  fullName: Fantasy.Serialize.AMessage.GetScene()
+  spec.csharp:
+  - uid: Fantasy.Serialize.AMessage.GetScene
+    name: GetScene
+    href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_GetScene
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.AMessage.GetScene
+    name: GetScene
+    href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_GetScene
+  - name: (
+  - name: )
+- uid: Fantasy.Serialize.AMessage.SetScene(Fantasy.Scene)
+  commentId: M:Fantasy.Serialize.AMessage.SetScene(Fantasy.Scene)
+  parent: Fantasy.Serialize.AMessage
+  href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetScene_Fantasy_Scene_
+  name: SetScene(Scene)
+  nameWithType: AMessage.SetScene(Scene)
+  fullName: Fantasy.Serialize.AMessage.SetScene(Fantasy.Scene)
+  spec.csharp:
+  - uid: Fantasy.Serialize.AMessage.SetScene(Fantasy.Scene)
+    name: SetScene
+    href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetScene_Fantasy_Scene_
+  - name: (
+  - uid: Fantasy.Scene
+    name: Scene
+    href: Fantasy.Scene.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.AMessage.SetScene(Fantasy.Scene)
+    name: SetScene
+    href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetScene_Fantasy_Scene_
+  - name: (
+  - uid: Fantasy.Scene
+    name: Scene
+    href: Fantasy.Scene.html
+  - name: )
 - uid: Fantasy.Serialize.AMessage.IsPool
-  commentId: P:Fantasy.Serialize.AMessage.IsPool
+  commentId: M:Fantasy.Serialize.AMessage.IsPool
   parent: Fantasy.Serialize.AMessage
   href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_IsPool
-  name: IsPool
-  nameWithType: AMessage.IsPool
-  fullName: Fantasy.Serialize.AMessage.IsPool
+  name: IsPool()
+  nameWithType: AMessage.IsPool()
+  fullName: Fantasy.Serialize.AMessage.IsPool()
+  spec.csharp:
+  - uid: Fantasy.Serialize.AMessage.IsPool
+    name: IsPool
+    href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_IsPool
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.AMessage.IsPool
+    name: IsPool
+    href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_IsPool
+  - name: (
+  - name: )
+- uid: Fantasy.Serialize.AMessage.SetIsPool(System.Boolean)
+  commentId: M:Fantasy.Serialize.AMessage.SetIsPool(System.Boolean)
+  parent: Fantasy.Serialize.AMessage
+  isExternal: true
+  href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetIsPool_System_Boolean_
+  name: SetIsPool(bool)
+  nameWithType: AMessage.SetIsPool(bool)
+  fullName: Fantasy.Serialize.AMessage.SetIsPool(bool)
+  nameWithType.vb: AMessage.SetIsPool(Boolean)
+  fullName.vb: Fantasy.Serialize.AMessage.SetIsPool(Boolean)
+  name.vb: SetIsPool(Boolean)
+  spec.csharp:
+  - uid: Fantasy.Serialize.AMessage.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Serialize.AMessage.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
 - uid: Fantasy.Serialize.ASerialize.Dispose
   commentId: M:Fantasy.Serialize.ASerialize.Dispose
   parent: Fantasy.Serialize.ASerialize
@@ -890,37 +932,6 @@ references:
   - uid: Fantasy.Network.Interface
     name: Interface
     href: Fantasy.Network.Interface.html
-- uid: MemoryPack.IMemoryPackable`1
-  commentId: T:MemoryPack.IMemoryPackable`1
-  isExternal: true
-  name: IMemoryPackable<T>
-  nameWithType: IMemoryPackable<T>
-  fullName: MemoryPack.IMemoryPackable<T>
-  nameWithType.vb: IMemoryPackable(Of T)
-  fullName.vb: MemoryPack.IMemoryPackable(Of T)
-  name.vb: IMemoryPackable(Of T)
-  spec.csharp:
-  - uid: MemoryPack.IMemoryPackable`1
-    name: IMemoryPackable
-    isExternal: true
-  - name: <
-  - name: T
-  - name: '>'
-  spec.vb:
-  - uid: MemoryPack.IMemoryPackable`1
-    name: IMemoryPackable
-    isExternal: true
-  - name: (
-  - name: Of
-  - name: " "
-  - name: T
-  - name: )
-- uid: MemoryPack
-  commentId: N:MemoryPack
-  isExternal: true
-  name: MemoryPack
-  nameWithType: MemoryPack
-  fullName: MemoryPack
 - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
   commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
   href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_

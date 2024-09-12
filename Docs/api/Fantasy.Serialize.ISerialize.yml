@@ -1,0 +1,814 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Serialize.ISerialize
+  commentId: T:Fantasy.Serialize.ISerialize
+  id: ISerialize
+  parent: Fantasy.Serialize
+  children:
+  - Fantasy.Serialize.ISerialize.Clone``1(``0)
+  - Fantasy.Serialize.ISerialize.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  - Fantasy.Serialize.ISerialize.Deserialize(System.Type,System.Byte[])
+  - Fantasy.Serialize.ISerialize.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
+  - Fantasy.Serialize.ISerialize.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  - Fantasy.Serialize.ISerialize.Deserialize``1(System.Byte[])
+  - Fantasy.Serialize.ISerialize.Deserialize``1(System.Byte[],System.Int32,System.Int32)
+  - Fantasy.Serialize.ISerialize.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
+  - Fantasy.Serialize.ISerialize.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
+  - Fantasy.Serialize.ISerialize.SerializeName
+  - Fantasy.Serialize.ISerialize.Serialize``1(``0,System.Buffers.IBufferWriter{System.Byte})
+  langs:
+  - csharp
+  - vb
+  name: ISerialize
+  nameWithType: ISerialize
+  fullName: Fantasy.Serialize.ISerialize
+  type: Interface
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: ISerialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 6
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  syntax:
+    content: public interface ISerialize
+    content.vb: Public Interface ISerialize
+  extensionMethods:
+  - Fantasy.Serialize.ISerialize.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Serialize.ISerialize.SerializeName
+  commentId: P:Fantasy.Serialize.ISerialize.SerializeName
+  id: SerializeName
+  parent: Fantasy.Serialize.ISerialize
+  langs:
+  - csharp
+  - vb
+  name: SerializeName
+  nameWithType: ISerialize.SerializeName
+  fullName: Fantasy.Serialize.ISerialize.SerializeName
+  type: Property
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SerializeName
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 11
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 序列化器的名字，用于在协议里指定用什么协议序列化使用
+  example: []
+  syntax:
+    content: string SerializeName { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: ReadOnly Property SerializeName As String
+  overload: Fantasy.Serialize.ISerialize.SerializeName*
+- uid: Fantasy.Serialize.ISerialize.Deserialize``1(System.Byte[])
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize``1(System.Byte[])
+  id: Deserialize``1(System.Byte[])
+  parent: Fantasy.Serialize.ISerialize
+  langs:
+  - csharp
+  - vb
+  name: Deserialize<T>(byte[])
+  nameWithType: ISerialize.Deserialize<T>(byte[])
+  fullName: Fantasy.Serialize.ISerialize.Deserialize<T>(byte[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 18
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: T Deserialize<T>(byte[] bytes)
+    parameters:
+    - id: bytes
+      type: System.Byte[]
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: Function Deserialize(Of T)(bytes As Byte()) As T
+  overload: Fantasy.Serialize.ISerialize.Deserialize*
+  nameWithType.vb: ISerialize.Deserialize(Of T)(Byte())
+  fullName.vb: Fantasy.Serialize.ISerialize.Deserialize(Of T)(Byte())
+  name.vb: Deserialize(Of T)(Byte())
+- uid: Fantasy.Serialize.ISerialize.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  id: Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  parent: Fantasy.Serialize.ISerialize
+  langs:
+  - csharp
+  - vb
+  name: Deserialize<T>(MemoryStreamBuffer)
+  nameWithType: ISerialize.Deserialize<T>(MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.ISerialize.Deserialize<T>(Fantasy.Serialize.MemoryStreamBuffer)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 25
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: T Deserialize<T>(MemoryStreamBuffer buffer)
+    parameters:
+    - id: buffer
+      type: Fantasy.Serialize.MemoryStreamBuffer
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: Function Deserialize(Of T)(buffer As MemoryStreamBuffer) As T
+  overload: Fantasy.Serialize.ISerialize.Deserialize*
+  nameWithType.vb: ISerialize.Deserialize(Of T)(MemoryStreamBuffer)
+  fullName.vb: Fantasy.Serialize.ISerialize.Deserialize(Of T)(Fantasy.Serialize.MemoryStreamBuffer)
+  name.vb: Deserialize(Of T)(MemoryStreamBuffer)
+- uid: Fantasy.Serialize.ISerialize.Deserialize(System.Type,System.Byte[])
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize(System.Type,System.Byte[])
+  id: Deserialize(System.Type,System.Byte[])
+  parent: Fantasy.Serialize.ISerialize
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(Type, byte[])
+  nameWithType: ISerialize.Deserialize(Type, byte[])
+  fullName: Fantasy.Serialize.ISerialize.Deserialize(System.Type, byte[])
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 32
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: object Deserialize(Type type, byte[] bytes)
+    parameters:
+    - id: type
+      type: System.Type
+      description: ''
+    - id: bytes
+      type: System.Byte[]
+      description: ''
+    return:
+      type: System.Object
+      description: ''
+    content.vb: Function Deserialize(type As Type, bytes As Byte()) As Object
+  overload: Fantasy.Serialize.ISerialize.Deserialize*
+  nameWithType.vb: ISerialize.Deserialize(Type, Byte())
+  fullName.vb: Fantasy.Serialize.ISerialize.Deserialize(System.Type, Byte())
+  name.vb: Deserialize(Type, Byte())
+- uid: Fantasy.Serialize.ISerialize.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  id: Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  parent: Fantasy.Serialize.ISerialize
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(Type, MemoryStreamBuffer)
+  nameWithType: ISerialize.Deserialize(Type, MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.ISerialize.Deserialize(System.Type, Fantasy.Serialize.MemoryStreamBuffer)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 39
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: object Deserialize(Type type, MemoryStreamBuffer buffer)
+    parameters:
+    - id: type
+      type: System.Type
+      description: ''
+    - id: buffer
+      type: Fantasy.Serialize.MemoryStreamBuffer
+      description: ''
+    return:
+      type: System.Object
+      description: ''
+    content.vb: Function Deserialize(type As Type, buffer As MemoryStreamBuffer) As Object
+  overload: Fantasy.Serialize.ISerialize.Deserialize*
+- uid: Fantasy.Serialize.ISerialize.Deserialize``1(System.Byte[],System.Int32,System.Int32)
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize``1(System.Byte[],System.Int32,System.Int32)
+  id: Deserialize``1(System.Byte[],System.Int32,System.Int32)
+  parent: Fantasy.Serialize.ISerialize
+  langs:
+  - csharp
+  - vb
+  name: Deserialize<T>(byte[], int, int)
+  nameWithType: ISerialize.Deserialize<T>(byte[], int, int)
+  fullName: Fantasy.Serialize.ISerialize.Deserialize<T>(byte[], int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 48
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: T Deserialize<T>(byte[] bytes, int index, int count)
+    parameters:
+    - id: bytes
+      type: System.Byte[]
+      description: ''
+    - id: index
+      type: System.Int32
+      description: ''
+    - id: count
+      type: System.Int32
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: Function Deserialize(Of T)(bytes As Byte(), index As Integer, count As Integer) As T
+  overload: Fantasy.Serialize.ISerialize.Deserialize*
+  nameWithType.vb: ISerialize.Deserialize(Of T)(Byte(), Integer, Integer)
+  fullName.vb: Fantasy.Serialize.ISerialize.Deserialize(Of T)(Byte(), Integer, Integer)
+  name.vb: Deserialize(Of T)(Byte(), Integer, Integer)
+- uid: Fantasy.Serialize.ISerialize.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
+  id: Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
+  parent: Fantasy.Serialize.ISerialize
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(Type, byte[], int, int)
+  nameWithType: ISerialize.Deserialize(Type, byte[], int, int)
+  fullName: Fantasy.Serialize.ISerialize.Deserialize(System.Type, byte[], int, int)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Deserialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 57
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 反序列化
+  example: []
+  syntax:
+    content: object Deserialize(Type type, byte[] bytes, int index, int count)
+    parameters:
+    - id: type
+      type: System.Type
+      description: ''
+    - id: bytes
+      type: System.Byte[]
+      description: ''
+    - id: index
+      type: System.Int32
+      description: ''
+    - id: count
+      type: System.Int32
+      description: ''
+    return:
+      type: System.Object
+      description: ''
+    content.vb: Function Deserialize(type As Type, bytes As Byte(), index As Integer, count As Integer) As Object
+  overload: Fantasy.Serialize.ISerialize.Deserialize*
+  nameWithType.vb: ISerialize.Deserialize(Type, Byte(), Integer, Integer)
+  fullName.vb: Fantasy.Serialize.ISerialize.Deserialize(System.Type, Byte(), Integer, Integer)
+  name.vb: Deserialize(Type, Byte(), Integer, Integer)
+- uid: Fantasy.Serialize.ISerialize.Serialize``1(``0,System.Buffers.IBufferWriter{System.Byte})
+  commentId: M:Fantasy.Serialize.ISerialize.Serialize``1(``0,System.Buffers.IBufferWriter{System.Byte})
+  id: Serialize``1(``0,System.Buffers.IBufferWriter{System.Byte})
+  parent: Fantasy.Serialize.ISerialize
+  langs:
+  - csharp
+  - vb
+  name: Serialize<T>(T, IBufferWriter<byte>)
+  nameWithType: ISerialize.Serialize<T>(T, IBufferWriter<byte>)
+  fullName: Fantasy.Serialize.ISerialize.Serialize<T>(T, System.Buffers.IBufferWriter<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Serialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 64
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 序列化
+  example: []
+  syntax:
+    content: void Serialize<T>(T @object, IBufferWriter<byte> buffer)
+    parameters:
+    - id: object
+      type: '{T}'
+      description: ''
+    - id: buffer
+      type: System.Buffers.IBufferWriter{System.Byte}
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    content.vb: Sub Serialize(Of T)([object] As T, buffer As IBufferWriter(Of Byte))
+  overload: Fantasy.Serialize.ISerialize.Serialize*
+  nameWithType.vb: ISerialize.Serialize(Of T)(T, IBufferWriter(Of Byte))
+  fullName.vb: Fantasy.Serialize.ISerialize.Serialize(Of T)(T, System.Buffers.IBufferWriter(Of Byte))
+  name.vb: Serialize(Of T)(T, IBufferWriter(Of Byte))
+- uid: Fantasy.Serialize.ISerialize.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
+  commentId: M:Fantasy.Serialize.ISerialize.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
+  id: Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
+  parent: Fantasy.Serialize.ISerialize
+  langs:
+  - csharp
+  - vb
+  name: Serialize(object, IBufferWriter<byte>)
+  nameWithType: ISerialize.Serialize(object, IBufferWriter<byte>)
+  fullName: Fantasy.Serialize.ISerialize.Serialize(object, System.Buffers.IBufferWriter<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Serialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 70
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 序列化
+  example: []
+  syntax:
+    content: void Serialize(object @object, IBufferWriter<byte> buffer)
+    parameters:
+    - id: object
+      type: System.Object
+      description: ''
+    - id: buffer
+      type: System.Buffers.IBufferWriter{System.Byte}
+      description: ''
+    content.vb: Sub Serialize([object] As Object, buffer As IBufferWriter(Of Byte))
+  overload: Fantasy.Serialize.ISerialize.Serialize*
+  nameWithType.vb: ISerialize.Serialize(Object, IBufferWriter(Of Byte))
+  fullName.vb: Fantasy.Serialize.ISerialize.Serialize(Object, System.Buffers.IBufferWriter(Of Byte))
+  name.vb: Serialize(Object, IBufferWriter(Of Byte))
+- uid: Fantasy.Serialize.ISerialize.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
+  commentId: M:Fantasy.Serialize.ISerialize.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
+  id: Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
+  parent: Fantasy.Serialize.ISerialize
+  langs:
+  - csharp
+  - vb
+  name: Serialize(Type, object, IBufferWriter<byte>)
+  nameWithType: ISerialize.Serialize(Type, object, IBufferWriter<byte>)
+  fullName: Fantasy.Serialize.ISerialize.Serialize(System.Type, object, System.Buffers.IBufferWriter<byte>)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Serialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 77
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 序列化
+  example: []
+  syntax:
+    content: void Serialize(Type type, object @object, IBufferWriter<byte> buffer)
+    parameters:
+    - id: type
+      type: System.Type
+      description: ''
+    - id: object
+      type: System.Object
+      description: ''
+    - id: buffer
+      type: System.Buffers.IBufferWriter{System.Byte}
+      description: ''
+    content.vb: Sub Serialize(type As Type, [object] As Object, buffer As IBufferWriter(Of Byte))
+  overload: Fantasy.Serialize.ISerialize.Serialize*
+  nameWithType.vb: ISerialize.Serialize(Type, Object, IBufferWriter(Of Byte))
+  fullName.vb: Fantasy.Serialize.ISerialize.Serialize(System.Type, Object, System.Buffers.IBufferWriter(Of Byte))
+  name.vb: Serialize(Type, Object, IBufferWriter(Of Byte))
+- uid: Fantasy.Serialize.ISerialize.Clone``1(``0)
+  commentId: M:Fantasy.Serialize.ISerialize.Clone``1(``0)
+  id: Clone``1(``0)
+  parent: Fantasy.Serialize.ISerialize
+  langs:
+  - csharp
+  - vb
+  name: Clone<T>(T)
+  nameWithType: ISerialize.Clone<T>(T)
+  fullName: Fantasy.Serialize.ISerialize.Clone<T>(T)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: Clone
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/Interface/ISerialize.cs
+    startLine: 84
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Serialize
+  summary: 克隆
+  example: []
+  syntax:
+    content: T Clone<T>(T t)
+    parameters:
+    - id: t
+      type: '{T}'
+      description: ''
+    typeParameters:
+    - id: T
+      description: ''
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: Function Clone(Of T)(t As T) As T
+  overload: Fantasy.Serialize.ISerialize.Clone*
+  nameWithType.vb: ISerialize.Clone(Of T)(T)
+  fullName.vb: Fantasy.Serialize.ISerialize.Clone(Of T)(T)
+  name.vb: Clone(Of T)(T)
+references:
+- uid: Fantasy.Serialize
+  commentId: N:Fantasy.Serialize
+  href: Fantasy.html
+  name: Fantasy.Serialize
+  nameWithType: Fantasy.Serialize
+  fullName: Fantasy.Serialize
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Serialize
+    name: Serialize
+    href: Fantasy.Serialize.html
+- uid: Fantasy.Serialize.ISerialize.Fantasy.Helper.JsonHelper.ToJson``1
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  parent: Fantasy.Helper.JsonHelper
+  definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<ISerialize>(ISerialize)
+  nameWithType: JsonHelper.ToJson<ISerialize>(ISerialize)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Serialize.ISerialize>(Fantasy.Serialize.ISerialize)
+  nameWithType.vb: JsonHelper.ToJson(Of ISerialize)(ISerialize)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Serialize.ISerialize)(Fantasy.Serialize.ISerialize)
+  name.vb: ToJson(Of ISerialize)(ISerialize)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Serialize.ISerialize)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - uid: Fantasy.Serialize.ISerialize
+    name: ISerialize
+    href: Fantasy.Serialize.ISerialize.html
+  - name: '>'
+  - name: (
+  - uid: Fantasy.Serialize.ISerialize
+    name: ISerialize
+    href: Fantasy.Serialize.ISerialize.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Serialize.ISerialize)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Fantasy.Serialize.ISerialize
+    name: ISerialize
+    href: Fantasy.Serialize.ISerialize.html
+  - name: )
+  - name: (
+  - uid: Fantasy.Serialize.ISerialize
+    name: ISerialize
+    href: Fantasy.Serialize.ISerialize.html
+  - name: )
+- uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
+  href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  name: ToJson<T>(T)
+  nameWithType: JsonHelper.ToJson<T>(T)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<T>(T)
+  nameWithType.vb: JsonHelper.ToJson(Of T)(T)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of T)(T)
+  name.vb: ToJson(Of T)(T)
+  spec.csharp:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(``0)
+    name: ToJson
+    href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Fantasy.Helper.JsonHelper
+  commentId: T:Fantasy.Helper.JsonHelper
+  parent: Fantasy.Helper
+  href: Fantasy.Helper.JsonHelper.html
+  name: JsonHelper
+  nameWithType: JsonHelper
+  fullName: Fantasy.Helper.JsonHelper
+- uid: Fantasy.Helper
+  commentId: N:Fantasy.Helper
+  href: Fantasy.html
+  name: Fantasy.Helper
+  nameWithType: Fantasy.Helper
+  fullName: Fantasy.Helper
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Helper
+    name: Helper
+    href: Fantasy.Helper.html
+- uid: Fantasy.Serialize.ISerialize.SerializeName*
+  commentId: Overload:Fantasy.Serialize.ISerialize.SerializeName
+  href: Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_SerializeName
+  name: SerializeName
+  nameWithType: ISerialize.SerializeName
+  fullName: Fantasy.Serialize.ISerialize.SerializeName
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Fantasy.Serialize.ISerialize.Deserialize*
+  commentId: Overload:Fantasy.Serialize.ISerialize.Deserialize
+  href: Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Deserialize__1_System_Byte___
+  name: Deserialize
+  nameWithType: ISerialize.Deserialize
+  fullName: Fantasy.Serialize.ISerialize.Deserialize
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Fantasy.Serialize.MemoryStreamBuffer
+  commentId: T:Fantasy.Serialize.MemoryStreamBuffer
+  parent: Fantasy.Serialize
+  href: Fantasy.Serialize.MemoryStreamBuffer.html
+  name: MemoryStreamBuffer
+  nameWithType: MemoryStreamBuffer
+  fullName: Fantasy.Serialize.MemoryStreamBuffer
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Fantasy.Serialize.ISerialize.Serialize*
+  commentId: Overload:Fantasy.Serialize.ISerialize.Serialize
+  href: Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Serialize__1___0_System_Buffers_IBufferWriter_System_Byte__
+  name: Serialize
+  nameWithType: ISerialize.Serialize
+  fullName: Fantasy.Serialize.ISerialize.Serialize
+- uid: System.Buffers.IBufferWriter{System.Byte}
+  commentId: T:System.Buffers.IBufferWriter{System.Byte}
+  parent: System.Buffers
+  definition: System.Buffers.IBufferWriter`1
+  href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  name: IBufferWriter<byte>
+  nameWithType: IBufferWriter<byte>
+  fullName: System.Buffers.IBufferWriter<byte>
+  nameWithType.vb: IBufferWriter(Of Byte)
+  fullName.vb: System.Buffers.IBufferWriter(Of Byte)
+  name.vb: IBufferWriter(Of Byte)
+  spec.csharp:
+  - uid: System.Buffers.IBufferWriter`1
+    name: IBufferWriter
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.Buffers.IBufferWriter`1
+    name: IBufferWriter
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.Buffers.IBufferWriter`1
+  commentId: T:System.Buffers.IBufferWriter`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  name: IBufferWriter<T>
+  nameWithType: IBufferWriter<T>
+  fullName: System.Buffers.IBufferWriter<T>
+  nameWithType.vb: IBufferWriter(Of T)
+  fullName.vb: System.Buffers.IBufferWriter(Of T)
+  name.vb: IBufferWriter(Of T)
+  spec.csharp:
+  - uid: System.Buffers.IBufferWriter`1
+    name: IBufferWriter
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Buffers.IBufferWriter`1
+    name: IBufferWriter
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Buffers
+  commentId: N:System.Buffers
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Buffers
+  nameWithType: System.Buffers
+  fullName: System.Buffers
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Buffers
+    name: Buffers
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Buffers
+    name: Buffers
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.buffers
+- uid: Fantasy.Serialize.ISerialize.Clone*
+  commentId: Overload:Fantasy.Serialize.ISerialize.Clone
+  href: Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Clone__1___0_
+  name: Clone
+  nameWithType: ISerialize.Clone
+  fullName: Fantasy.Serialize.ISerialize.Clone

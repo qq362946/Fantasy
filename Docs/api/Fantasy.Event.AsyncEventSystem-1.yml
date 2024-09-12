@@ -111,14 +111,14 @@ items:
   summary: 事件调用的方法，要在这个方法里编写事件发生的逻辑
   example: []
   syntax:
-    content: public abstract FTask Handler(T self)
+    content: protected abstract FTask Handler(T self)
     parameters:
     - id: self
       type: '{T}'
       description: ''
     return:
       type: Fantasy.Async.FTask
-    content.vb: Public MustOverride Function Handler(self As T) As FTask
+    content.vb: Protected MustOverride Function Handler(self As T) As FTask
   overload: Fantasy.Event.AsyncEventSystem`1.Handler*
   nameWithType.vb: AsyncEventSystem(Of T).Handler(T)
   fullName.vb: Fantasy.Event.AsyncEventSystem(Of T).Handler(T)

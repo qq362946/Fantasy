@@ -1,0 +1,31 @@
+### YamlMime:ManagedReference
+items:
+- uid: Fantasy.Http
+  commentId: N:Fantasy.Http
+  id: Http
+  parent: Fantasy
+  children:
+  - Fantasy.Http.HttpClientHelper
+  - Fantasy.Http.IJsonRpcRequest
+  langs:
+  - csharp
+  - vb
+  name: Fantasy.Http
+  nameWithType: Fantasy.Http
+  fullName: Fantasy.Http
+  type: Namespace
+  assemblies:
+  - Fantasy.Net
+references:
+- uid: Fantasy.Http.HttpClientHelper
+  commentId: T:Fantasy.Http.HttpClientHelper
+  href: Fantasy.Http.HttpClientHelper.html
+  name: HttpClientHelper
+  nameWithType: HttpClientHelper
+  fullName: Fantasy.Http.HttpClientHelper
+- uid: Fantasy.Http.IJsonRpcRequest
+  commentId: T:Fantasy.Http.IJsonRpcRequest
+  href: Fantasy.Http.IJsonRpcRequest.html
+  name: IJsonRpcRequest
+  nameWithType: IJsonRpcRequest
+  fullName: Fantasy.Http.IJsonRpcRequest

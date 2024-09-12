@@ -35,7 +35,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: DoubleMapDictionary
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 64
+    startLine: 79
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -84,7 +84,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: .ctor
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 72
+    startLine: 87
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -115,7 +115,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: .ctor
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 78
+    startLine: 93
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -150,7 +150,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Keys
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 87
+    startLine: 102
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -183,7 +183,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Values
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 92
+    startLine: 107
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -216,7 +216,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ForEach
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 98
+    startLine: 113
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -251,7 +251,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Add
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 117
+    startLine: 132
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -288,7 +288,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: GetValueByKey
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 133
+    startLine: 148
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -325,7 +325,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: TryGetValueByKey
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 149
+    startLine: 164
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -366,7 +366,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: GetKeyByValue
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 163
+    startLine: 178
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -403,7 +403,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: TryGetKeyByValue
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 179
+    startLine: 194
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -444,7 +444,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: RemoveByKey
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 192
+    startLine: 207
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -478,7 +478,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: RemoveByValue
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 212
+    startLine: 227
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -512,7 +512,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Clear
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 231
+    startLine: 246
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -542,7 +542,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ContainsKey
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 242
+    startLine: 257
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -579,7 +579,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ContainsValue
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 252
+    startLine: 267
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary
@@ -616,7 +616,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Contains
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Dictionary/DoubleMapDictionaryPool.cs
-    startLine: 263
+    startLine: 278
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Dictionary

@@ -19,7 +19,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: IEntity
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Entitas/Entity.cs
-    startLine: 26
+    startLine: 27
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Entitas
@@ -31,6 +31,7 @@ items:
   inheritedMembers:
   - System.IDisposable.Dispose
   - Fantasy.Pool.IPool.IsPool
+  - Fantasy.Pool.IPool.SetIsPool(System.Boolean)
   extensionMethods:
   - Fantasy.Entitas.IEntity.Fantasy.Helper.JsonHelper.ToJson``1
 references:
@@ -79,12 +80,55 @@ references:
   - name: (
   - name: )
 - uid: Fantasy.Pool.IPool.IsPool
-  commentId: P:Fantasy.Pool.IPool.IsPool
+  commentId: M:Fantasy.Pool.IPool.IsPool
   parent: Fantasy.Pool.IPool
   href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_IsPool
-  name: IsPool
-  nameWithType: IPool.IsPool
-  fullName: Fantasy.Pool.IPool.IsPool
+  name: IsPool()
+  nameWithType: IPool.IsPool()
+  fullName: Fantasy.Pool.IPool.IsPool()
+  spec.csharp:
+  - uid: Fantasy.Pool.IPool.IsPool
+    name: IsPool
+    href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_IsPool
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Pool.IPool.IsPool
+    name: IsPool
+    href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_IsPool
+  - name: (
+  - name: )
+- uid: Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+  commentId: M:Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+  parent: Fantasy.Pool.IPool
+  isExternal: true
+  href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_SetIsPool_System_Boolean_
+  name: SetIsPool(bool)
+  nameWithType: IPool.SetIsPool(bool)
+  fullName: Fantasy.Pool.IPool.SetIsPool(bool)
+  nameWithType.vb: IPool.SetIsPool(Boolean)
+  fullName.vb: Fantasy.Pool.IPool.SetIsPool(Boolean)
+  name.vb: SetIsPool(Boolean)
+  spec.csharp:
+  - uid: Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
 - uid: Fantasy.Entitas.IEntity.Fantasy.Helper.JsonHelper.ToJson``1
   commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
   parent: Fantasy.Helper.JsonHelper

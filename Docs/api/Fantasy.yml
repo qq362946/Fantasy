@@ -12,6 +12,7 @@ items:
   - Fantasy.Entitas
   - Fantasy.Event
   - Fantasy.Helper
+  - Fantasy.Http
   - Fantasy.ILog
   - Fantasy.IdFactory
   - Fantasy.InnerMessage
@@ -194,6 +195,28 @@ references:
   - uid: Fantasy.Helper
     name: Helper
     href: Fantasy.Helper.html
+- uid: Fantasy.Http
+  commentId: N:Fantasy.Http
+  href: Fantasy.html
+  name: Fantasy.Http
+  nameWithType: Fantasy.Http
+  fullName: Fantasy.Http
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Http
+    name: Http
+    href: Fantasy.Http.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Http
+    name: Http
+    href: Fantasy.Http.html
 - uid: Fantasy.IdFactory
   commentId: N:Fantasy.IdFactory
   href: Fantasy.html

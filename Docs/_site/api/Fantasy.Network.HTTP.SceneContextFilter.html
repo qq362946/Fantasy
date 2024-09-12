@@ -5,13 +5,13 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>I_AddressableRemoveHandler 类
+      <title>SceneContextFilter 类
  | Fantasy </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="I_AddressableRemoveHandler 类
+      <meta name="title" content="SceneContextFilter 类
  | Fantasy ">
     
-    <meta name="description" content="声明一个 sealed 类 I_AddressableRemoveHandler，继承自 RouteRPC 类，并指定泛型参数">
+    <meta name="description" content="让所有实现SceneContextFilter的控制器，都在执行的Scene下执行">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -78,33 +78,27 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Fantasy.Network.I_AddressableRemoveHandler">
+            <article class="content wrap" id="_content" data-uid="Fantasy.Network.HTTP.SceneContextFilter">
 
 
 
-  <h1 id="Fantasy_Network_I_AddressableRemoveHandler" data-uid="Fantasy.Network.I_AddressableRemoveHandler" class="text-break">I_AddressableRemoveHandler 类
+  <h1 id="Fantasy_Network_HTTP_SceneContextFilter" data-uid="Fantasy.Network.HTTP.SceneContextFilter" class="text-break">SceneContextFilter 类
 </h1>
-  <div class="markdown level0 summary"><p>声明一个 sealed 类 I_AddressableRemoveHandler，继承自 RouteRPC 类，并指定泛型参数</p>
+  <div class="markdown level0 summary"><p>让所有实现SceneContextFilter的控制器，都在执行的Scene下执行</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>继承</h5>
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-    <div class="level1"><a class="xref" href="Fantasy.Network.Interface.RouteRPC-3.html">RouteRPC</a>&lt;<a class="xref" href="Fantasy.Scene.html">Scene</a>, <a class="xref" href="Fantasy.InnerMessage.I_AddressableRemove_Request.html">I_AddressableRemove_Request</a>, <a class="xref" href="Fantasy.InnerMessage.I_AddressableRemove_Response.html">I_AddressableRemove_Response</a>&gt;</div>
-    <div class="level2"><span class="xref">I_AddressableRemoveHandler</span></div>
+    <div class="level1"><span class="xref">SceneContextFilter</span></div>
   </div>
   <div class="implements">
     <h5>实现</h5>
-    <div><a class="xref" href="Fantasy.Network.Interface.IRouteMessageHandler.html">IRouteMessageHandler</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncactionfilter">IAsyncActionFilter</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.filters.ifiltermetadata">IFilterMetadata</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>继承成员</h5>
-    <div>
-      <a class="xref" href="Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Type">RouteRPC&lt;Scene, I_AddressableRemove_Request, I_AddressableRemove_Response&gt;.Type()</a>
-    </div>
-    <div>
-      <a class="xref" href="Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Handle_Fantasy_Network_Session_Fantasy_Entitas_Entity_System_UInt32_System_Object_">RouteRPC&lt;Scene, I_AddressableRemove_Request, I_AddressableRemove_Response&gt;.Handle(Session, Entity, uint, object)</a>
-    </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
     </div>
@@ -124,29 +118,29 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
   </div>
-  <h6><strong>命名空间</strong>: <a class="xref" href="Fantasy.html">Fantasy</a>.<a class="xref" href="Fantasy.Network.html">Network</a></h6>
+  <h6><strong>命名空间</strong>: <a class="xref" href="Fantasy.html">Fantasy</a>.<a class="xref" href="Fantasy.Network.html">Network</a>.<a class="xref" href="Fantasy.Network.HTTP.html">HTTP</a></h6>
   <h6><strong>程序集</strong>: Fantasy.Net.dll</h6>
-  <h5 id="Fantasy_Network_I_AddressableRemoveHandler_syntax">语法</h5>
+  <h5 id="Fantasy_Network_HTTP_SceneContextFilter_syntax">语法</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class I_AddressableRemoveHandler : RouteRPC&lt;Scene, I_AddressableRemove_Request, I_AddressableRemove_Response&gt;, IRouteMessageHandler</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class SceneContextFilter : IAsyncActionFilter, IFilterMetadata</code></pre>
   </div>
-  <h3 id="methods">方法
+  <h3 id="constructors">构造函数
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_I_AddressableRemoveHandler_Run_Fantasy_Scene_Fantasy_InnerMessage_I_AddressableRemove_Request_Fantasy_InnerMessage_I_AddressableRemove_Response_System_Action_.md&amp;value=---%0Auid%3A%20Fantasy.Network.I_AddressableRemoveHandler.Run(Fantasy.Scene%2CFantasy.InnerMessage.I_AddressableRemove_Request%2CFantasy.InnerMessage.I_AddressableRemove_Response%2CSystem.Action)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_HTTP_SceneContextFilter__ctor_Fantasy_Scene_.md&amp;value=---%0Auid%3A%20Fantasy.Network.HTTP.SceneContextFilter.%23ctor(Fantasy.Scene)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/Handler/I_AddressableRemoveHandler.cs/#L20">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/SceneContextFilter.cs/#L17">查看源代码</a>
   </span>
-  <a id="Fantasy_Network_I_AddressableRemoveHandler_Run_" data-uid="Fantasy.Network.I_AddressableRemoveHandler.Run*"></a>
-  <h4 id="Fantasy_Network_I_AddressableRemoveHandler_Run_Fantasy_Scene_Fantasy_InnerMessage_I_AddressableRemove_Request_Fantasy_InnerMessage_I_AddressableRemove_Response_System_Action_" data-uid="Fantasy.Network.I_AddressableRemoveHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableRemove_Request,Fantasy.InnerMessage.I_AddressableRemove_Response,System.Action)">Run(Scene, I_AddressableRemove_Request, I_AddressableRemove_Response, Action)</h4>
-  <div class="markdown level1 summary"><p>在收到地址映射移除请求时执行的逻辑。</p>
+  <a id="Fantasy_Network_HTTP_SceneContextFilter__ctor_" data-uid="Fantasy.Network.HTTP.SceneContextFilter.#ctor*"></a>
+  <h4 id="Fantasy_Network_HTTP_SceneContextFilter__ctor_Fantasy_Scene_" data-uid="Fantasy.Network.HTTP.SceneContextFilter.#ctor(Fantasy.Scene)">SceneContextFilter(Scene)</h4>
+  <div class="markdown level1 summary"><p>构造函数</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override FTask Run(Scene scene, I_AddressableRemove_Request request, I_AddressableRemove_Response response, Action reply)</code></pre>
+    <pre><code class="lang-csharp hljs">public SceneContextFilter(Scene scene)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -161,26 +155,47 @@
       <tr>
         <td><a class="xref" href="Fantasy.Scene.html">Scene</a></td>
         <td><span class="parametername">scene</span></td>
-        <td><p>当前场景实例。</p>
-</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">方法
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_HTTP_SceneContextFilter_OnActionExecutionAsync_Microsoft_AspNetCore_Mvc_Filters_ActionExecutingContext_Microsoft_AspNetCore_Mvc_Filters_ActionExecutionDelegate_.md&amp;value=---%0Auid%3A%20Fantasy.Network.HTTP.SceneContextFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext%2CMicrosoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/SceneContextFilter.cs/#L28">查看源代码</a>
+  </span>
+  <a id="Fantasy_Network_HTTP_SceneContextFilter_OnActionExecutionAsync_" data-uid="Fantasy.Network.HTTP.SceneContextFilter.OnActionExecutionAsync*"></a>
+  <h4 id="Fantasy_Network_HTTP_SceneContextFilter_OnActionExecutionAsync_Microsoft_AspNetCore_Mvc_Filters_ActionExecutingContext_Microsoft_AspNetCore_Mvc_Filters_ActionExecutionDelegate_" data-uid="Fantasy.Network.HTTP.SceneContextFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">OnActionExecutionAsync(ActionExecutingContext, ActionExecutionDelegate)</h4>
+  <div class="markdown level1 summary"><p>OnActionExecutionAsync</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.filters.actionexecutingcontext">ActionExecutingContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Fantasy.InnerMessage.I_AddressableRemove_Request.html">I_AddressableRemove_Request</a></td>
-        <td><span class="parametername">request</span></td>
-        <td><p>包含请求信息的 I_AddressableRemove_Request 实例。</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Fantasy.InnerMessage.I_AddressableRemove_Response.html">I_AddressableRemove_Response</a></td>
-        <td><span class="parametername">response</span></td>
-        <td><p>用于构建响应的 I_AddressableRemove_Response 实例。</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a></td>
-        <td><span class="parametername">reply</span></td>
-        <td><p>执行响应的回调操作。</p>
-</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.filters.actionexecutiondelegate">ActionExecutionDelegate</a></td>
+        <td><span class="parametername">next</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -194,16 +209,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Fantasy.Async.FTask.html">FTask</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">重写</h5>
-  <div><a class="xref" href="Fantasy.Network.Interface.RouteRPC-3.html#Fantasy_Network_Interface_RouteRPC_3_Run__0__1__2_System_Action_">RouteRPC&lt;Scene, I_AddressableRemove_Request, I_AddressableRemove_Response&gt;.Run(Scene, I_AddressableRemove_Request, I_AddressableRemove_Response, Action)</a></div>
   <h3 id="implements">实现</h3>
   <div>
-      <a class="xref" href="Fantasy.Network.Interface.IRouteMessageHandler.html">IRouteMessageHandler</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncactionfilter">IAsyncActionFilter</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.filters.ifiltermetadata">IFilterMetadata</a>
   </div>
   <h3 id="extensionmethods">扩展方法</h3>
   <div>
@@ -218,10 +234,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_I_AddressableRemoveHandler.md&amp;value=---%0Auid%3A%20Fantasy.Network.I_AddressableRemoveHandler%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
+                    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_HTTP_SceneContextFilter.md&amp;value=---%0Auid%3A%20Fantasy.Network.HTTP.SceneContextFilter%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
                   </li>
                   <li>
-                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/Handler/I_AddressableRemoveHandler.cs/#L11" class="contribution-link">查看源代码</a>
+                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/SceneContextFilter.cs/#L9" class="contribution-link">查看源代码</a>
                   </li>
                 </ul>
               </div>

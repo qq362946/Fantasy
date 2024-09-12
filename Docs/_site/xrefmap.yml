@@ -151,6 +151,19 @@ references:
   isSpec: "True"
   fullName: Fantasy.Assembly.AssemblySystem.ForEach
   nameWithType: AssemblySystem.ForEach
+- uid: Fantasy.Assembly.AssemblySystem.ForEachAssembly
+  name: ForEachAssembly
+  href: api/Fantasy.Assembly.AssemblySystem.html#Fantasy_Assembly_AssemblySystem_ForEachAssembly
+  commentId: P:Fantasy.Assembly.AssemblySystem.ForEachAssembly
+  fullName: Fantasy.Assembly.AssemblySystem.ForEachAssembly
+  nameWithType: AssemblySystem.ForEachAssembly
+- uid: Fantasy.Assembly.AssemblySystem.ForEachAssembly*
+  name: ForEachAssembly
+  href: api/Fantasy.Assembly.AssemblySystem.html#Fantasy_Assembly_AssemblySystem_ForEachAssembly_
+  commentId: Overload:Fantasy.Assembly.AssemblySystem.ForEachAssembly
+  isSpec: "True"
+  fullName: Fantasy.Assembly.AssemblySystem.ForEachAssembly
+  nameWithType: AssemblySystem.ForEachAssembly
 - uid: Fantasy.Assembly.AssemblySystem.GetAssembly(System.Int64)
   name: GetAssembly(long)
   href: api/Fantasy.Assembly.AssemblySystem.html#Fantasy_Assembly_AssemblySystem_GetAssembly_System_Int64_
@@ -758,11 +771,11 @@ references:
   fullName: Fantasy.Async.CoroutineLock.Dispose
   nameWithType: CoroutineLock.Dispose
 - uid: Fantasy.Async.CoroutineLock.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.Async.CoroutineLock.html#Fantasy_Async_CoroutineLock_IsPool
-  commentId: P:Fantasy.Async.CoroutineLock.IsPool
-  fullName: Fantasy.Async.CoroutineLock.IsPool
-  nameWithType: CoroutineLock.IsPool
+  commentId: M:Fantasy.Async.CoroutineLock.IsPool
+  fullName: Fantasy.Async.CoroutineLock.IsPool()
+  nameWithType: CoroutineLock.IsPool()
 - uid: Fantasy.Async.CoroutineLock.IsPool*
   name: IsPool
   href: api/Fantasy.Async.CoroutineLock.html#Fantasy_Async_CoroutineLock_IsPool_
@@ -786,6 +799,22 @@ references:
   isSpec: "True"
   fullName: Fantasy.Async.CoroutineLock.Release
   nameWithType: CoroutineLock.Release
+- uid: Fantasy.Async.CoroutineLock.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.Async.CoroutineLock.html#Fantasy_Async_CoroutineLock_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.Async.CoroutineLock.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.Async.CoroutineLock.SetIsPool(bool)
+  fullName.vb: Fantasy.Async.CoroutineLock.SetIsPool(Boolean)
+  nameWithType: CoroutineLock.SetIsPool(bool)
+  nameWithType.vb: CoroutineLock.SetIsPool(Boolean)
+- uid: Fantasy.Async.CoroutineLock.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.Async.CoroutineLock.html#Fantasy_Async_CoroutineLock_SetIsPool_
+  commentId: Overload:Fantasy.Async.CoroutineLock.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.Async.CoroutineLock.SetIsPool
+  nameWithType: CoroutineLock.SetIsPool
 - uid: Fantasy.Async.CoroutineLock.Wait(System.Int64,System.String,System.Int32)
   name: Wait(long, string, int)
   href: api/Fantasy.Async.CoroutineLock.html#Fantasy_Async_CoroutineLock_Wait_System_Int64_System_String_System_Int32_
@@ -1639,11 +1668,11 @@ references:
   fullName: Fantasy.Async.WaitCoroutineLock.Dispose
   nameWithType: WaitCoroutineLock.Dispose
 - uid: Fantasy.Async.WaitCoroutineLock.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.Async.WaitCoroutineLock.html#Fantasy_Async_WaitCoroutineLock_IsPool
-  commentId: P:Fantasy.Async.WaitCoroutineLock.IsPool
-  fullName: Fantasy.Async.WaitCoroutineLock.IsPool
-  nameWithType: WaitCoroutineLock.IsPool
+  commentId: M:Fantasy.Async.WaitCoroutineLock.IsPool
+  fullName: Fantasy.Async.WaitCoroutineLock.IsPool()
+  nameWithType: WaitCoroutineLock.IsPool()
 - uid: Fantasy.Async.WaitCoroutineLock.IsPool*
   name: IsPool
   href: api/Fantasy.Async.WaitCoroutineLock.html#Fantasy_Async_WaitCoroutineLock_IsPool_
@@ -1651,6 +1680,22 @@ references:
   isSpec: "True"
   fullName: Fantasy.Async.WaitCoroutineLock.IsPool
   nameWithType: WaitCoroutineLock.IsPool
+- uid: Fantasy.Async.WaitCoroutineLock.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.Async.WaitCoroutineLock.html#Fantasy_Async_WaitCoroutineLock_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.Async.WaitCoroutineLock.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.Async.WaitCoroutineLock.SetIsPool(bool)
+  fullName.vb: Fantasy.Async.WaitCoroutineLock.SetIsPool(Boolean)
+  nameWithType: WaitCoroutineLock.SetIsPool(bool)
+  nameWithType.vb: WaitCoroutineLock.SetIsPool(Boolean)
+- uid: Fantasy.Async.WaitCoroutineLock.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.Async.WaitCoroutineLock.html#Fantasy_Async_WaitCoroutineLock_SetIsPool_
+  commentId: Overload:Fantasy.Async.WaitCoroutineLock.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.Async.WaitCoroutineLock.SetIsPool
+  nameWithType: WaitCoroutineLock.SetIsPool
 - uid: Fantasy.ConfigTable
   name: Fantasy.ConfigTable
   href: api/Fantasy.ConfigTable.html
@@ -3115,13 +3160,13 @@ references:
   nameWithType: ConcurrentOneToManyListPool<TKey, TValue>.Dispose
   nameWithType.vb: ConcurrentOneToManyListPool(Of TKey, TValue).Dispose
 - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool-2.html#Fantasy_DataStructure_Collection_ConcurrentOneToManyListPool_2_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2.IsPool
-  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool<TKey, TValue>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool(Of TKey, TValue).IsPool
-  nameWithType: ConcurrentOneToManyListPool<TKey, TValue>.IsPool
-  nameWithType.vb: ConcurrentOneToManyListPool(Of TKey, TValue).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2.IsPool
+  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool<TKey, TValue>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool(Of TKey, TValue).IsPool()
+  nameWithType: ConcurrentOneToManyListPool<TKey, TValue>.IsPool()
+  nameWithType.vb: ConcurrentOneToManyListPool(Of TKey, TValue).IsPool()
 - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool-2.html#Fantasy_DataStructure_Collection_ConcurrentOneToManyListPool_2_IsPool_
@@ -3131,6 +3176,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool(Of TKey, TValue).IsPool
   nameWithType: ConcurrentOneToManyListPool<TKey, TValue>.IsPool
   nameWithType.vb: ConcurrentOneToManyListPool(Of TKey, TValue).IsPool
+- uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool-2.html#Fantasy_DataStructure_Collection_ConcurrentOneToManyListPool_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool<TKey, TValue>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool(Of TKey, TValue).SetIsPool(Boolean)
+  nameWithType: ConcurrentOneToManyListPool<TKey, TValue>.SetIsPool(bool)
+  nameWithType.vb: ConcurrentOneToManyListPool(Of TKey, TValue).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool-2.html#Fantasy_DataStructure_Collection_ConcurrentOneToManyListPool_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool<TKey, TValue>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool(Of TKey, TValue).SetIsPool
+  nameWithType: ConcurrentOneToManyListPool<TKey, TValue>.SetIsPool
+  nameWithType.vb: ConcurrentOneToManyListPool(Of TKey, TValue).SetIsPool
 - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyList`2
   name: ConcurrentOneToManyList<TKey, TValue>
   href: api/Fantasy.DataStructure.Collection.ConcurrentOneToManyList-2.html
@@ -3314,13 +3377,13 @@ references:
   nameWithType: ConcurrentOneToManyQueuePool<TKey, TValue>.Dispose
   nameWithType.vb: ConcurrentOneToManyQueuePool(Of TKey, TValue).Dispose
 - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool-2.html#Fantasy_DataStructure_Collection_ConcurrentOneToManyQueuePool_2_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2.IsPool
-  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool<TKey, TValue>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool(Of TKey, TValue).IsPool
-  nameWithType: ConcurrentOneToManyQueuePool<TKey, TValue>.IsPool
-  nameWithType.vb: ConcurrentOneToManyQueuePool(Of TKey, TValue).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2.IsPool
+  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool<TKey, TValue>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool(Of TKey, TValue).IsPool()
+  nameWithType: ConcurrentOneToManyQueuePool<TKey, TValue>.IsPool()
+  nameWithType.vb: ConcurrentOneToManyQueuePool(Of TKey, TValue).IsPool()
 - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool-2.html#Fantasy_DataStructure_Collection_ConcurrentOneToManyQueuePool_2_IsPool_
@@ -3330,6 +3393,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool(Of TKey, TValue).IsPool
   nameWithType: ConcurrentOneToManyQueuePool<TKey, TValue>.IsPool
   nameWithType.vb: ConcurrentOneToManyQueuePool(Of TKey, TValue).IsPool
+- uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool-2.html#Fantasy_DataStructure_Collection_ConcurrentOneToManyQueuePool_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool<TKey, TValue>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool(Of TKey, TValue).SetIsPool(Boolean)
+  nameWithType: ConcurrentOneToManyQueuePool<TKey, TValue>.SetIsPool(bool)
+  nameWithType.vb: ConcurrentOneToManyQueuePool(Of TKey, TValue).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool-2.html#Fantasy_DataStructure_Collection_ConcurrentOneToManyQueuePool_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool<TKey, TValue>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool(Of TKey, TValue).SetIsPool
+  nameWithType: ConcurrentOneToManyQueuePool<TKey, TValue>.SetIsPool
+  nameWithType.vb: ConcurrentOneToManyQueuePool(Of TKey, TValue).SetIsPool
 - uid: Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue`2
   name: ConcurrentOneToManyQueue<TKey, TValue>
   href: api/Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue-2.html
@@ -3505,13 +3586,13 @@ references:
   nameWithType: HashSetBasePool<T>.Dispose
   nameWithType.vb: HashSetBasePool(Of T).Dispose
 - uid: Fantasy.DataStructure.Collection.HashSetBasePool`1.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.HashSetBasePool-1.html#Fantasy_DataStructure_Collection_HashSetBasePool_1_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.HashSetBasePool`1.IsPool
-  fullName: Fantasy.DataStructure.Collection.HashSetBasePool<T>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.HashSetBasePool(Of T).IsPool
-  nameWithType: HashSetBasePool<T>.IsPool
-  nameWithType.vb: HashSetBasePool(Of T).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.HashSetBasePool`1.IsPool
+  fullName: Fantasy.DataStructure.Collection.HashSetBasePool<T>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.HashSetBasePool(Of T).IsPool()
+  nameWithType: HashSetBasePool<T>.IsPool()
+  nameWithType.vb: HashSetBasePool(Of T).IsPool()
 - uid: Fantasy.DataStructure.Collection.HashSetBasePool`1.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.HashSetBasePool-1.html#Fantasy_DataStructure_Collection_HashSetBasePool_1_IsPool_
@@ -3529,6 +3610,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.HashSetBasePool(Of T).Set
   nameWithType: HashSetBasePool<T>.Set
   nameWithType.vb: HashSetBasePool(Of T).Set
+- uid: Fantasy.DataStructure.Collection.HashSetBasePool`1.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.HashSetBasePool-1.html#Fantasy_DataStructure_Collection_HashSetBasePool_1_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.HashSetBasePool`1.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.HashSetBasePool<T>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.HashSetBasePool(Of T).SetIsPool(Boolean)
+  nameWithType: HashSetBasePool<T>.SetIsPool(bool)
+  nameWithType.vb: HashSetBasePool(Of T).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.HashSetBasePool`1.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.HashSetBasePool-1.html#Fantasy_DataStructure_Collection_HashSetBasePool_1_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.HashSetBasePool`1.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.HashSetBasePool<T>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.HashSetBasePool(Of T).SetIsPool
+  nameWithType: HashSetBasePool<T>.SetIsPool
+  nameWithType.vb: HashSetBasePool(Of T).SetIsPool
 - uid: Fantasy.DataStructure.Collection.HashSetPool`1
   name: HashSetPool<T>
   href: api/Fantasy.DataStructure.Collection.HashSetPool-1.html
@@ -3573,13 +3672,13 @@ references:
   nameWithType: HashSetPool<T>.Dispose
   nameWithType.vb: HashSetPool(Of T).Dispose
 - uid: Fantasy.DataStructure.Collection.HashSetPool`1.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.HashSetPool-1.html#Fantasy_DataStructure_Collection_HashSetPool_1_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.HashSetPool`1.IsPool
-  fullName: Fantasy.DataStructure.Collection.HashSetPool<T>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.HashSetPool(Of T).IsPool
-  nameWithType: HashSetPool<T>.IsPool
-  nameWithType.vb: HashSetPool(Of T).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.HashSetPool`1.IsPool
+  fullName: Fantasy.DataStructure.Collection.HashSetPool<T>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.HashSetPool(Of T).IsPool()
+  nameWithType: HashSetPool<T>.IsPool()
+  nameWithType.vb: HashSetPool(Of T).IsPool()
 - uid: Fantasy.DataStructure.Collection.HashSetPool`1.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.HashSetPool-1.html#Fantasy_DataStructure_Collection_HashSetPool_1_IsPool_
@@ -3589,6 +3688,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.HashSetPool(Of T).IsPool
   nameWithType: HashSetPool<T>.IsPool
   nameWithType.vb: HashSetPool(Of T).IsPool
+- uid: Fantasy.DataStructure.Collection.HashSetPool`1.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.HashSetPool-1.html#Fantasy_DataStructure_Collection_HashSetPool_1_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.HashSetPool`1.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.HashSetPool<T>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.HashSetPool(Of T).SetIsPool(Boolean)
+  nameWithType: HashSetPool<T>.SetIsPool(bool)
+  nameWithType.vb: HashSetPool(Of T).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.HashSetPool`1.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.HashSetPool-1.html#Fantasy_DataStructure_Collection_HashSetPool_1_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.HashSetPool`1.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.HashSetPool<T>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.HashSetPool(Of T).SetIsPool
+  nameWithType: HashSetPool<T>.SetIsPool
+  nameWithType.vb: HashSetPool(Of T).SetIsPool
 - uid: Fantasy.DataStructure.Collection.ListPool`1
   name: ListPool<T>
   href: api/Fantasy.DataStructure.Collection.ListPool-1.html
@@ -3643,13 +3760,13 @@ references:
   nameWithType: ListPool<T>.Dispose
   nameWithType.vb: ListPool(Of T).Dispose
 - uid: Fantasy.DataStructure.Collection.ListPool`1.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.ListPool-1.html#Fantasy_DataStructure_Collection_ListPool_1_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.ListPool`1.IsPool
-  fullName: Fantasy.DataStructure.Collection.ListPool<T>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.ListPool(Of T).IsPool
-  nameWithType: ListPool<T>.IsPool
-  nameWithType.vb: ListPool(Of T).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.ListPool`1.IsPool
+  fullName: Fantasy.DataStructure.Collection.ListPool<T>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.ListPool(Of T).IsPool()
+  nameWithType: ListPool<T>.IsPool()
+  nameWithType.vb: ListPool(Of T).IsPool()
 - uid: Fantasy.DataStructure.Collection.ListPool`1.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.ListPool-1.html#Fantasy_DataStructure_Collection_ListPool_1_IsPool_
@@ -3659,6 +3776,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.ListPool(Of T).IsPool
   nameWithType: ListPool<T>.IsPool
   nameWithType.vb: ListPool(Of T).IsPool
+- uid: Fantasy.DataStructure.Collection.ListPool`1.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.ListPool-1.html#Fantasy_DataStructure_Collection_ListPool_1_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.ListPool`1.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.ListPool<T>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.ListPool(Of T).SetIsPool(Boolean)
+  nameWithType: ListPool<T>.SetIsPool(bool)
+  nameWithType.vb: ListPool(Of T).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.ListPool`1.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.ListPool-1.html#Fantasy_DataStructure_Collection_ListPool_1_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.ListPool`1.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.ListPool<T>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.ListPool(Of T).SetIsPool
+  nameWithType: ListPool<T>.SetIsPool
+  nameWithType.vb: ListPool(Of T).SetIsPool
 - uid: Fantasy.DataStructure.Collection.OneToManyHashSetPool`2
   name: OneToManyHashSetPool<TKey, TValue>
   href: api/Fantasy.DataStructure.Collection.OneToManyHashSetPool-2.html
@@ -3703,13 +3838,13 @@ references:
   nameWithType: OneToManyHashSetPool<TKey, TValue>.Dispose
   nameWithType.vb: OneToManyHashSetPool(Of TKey, TValue).Dispose
 - uid: Fantasy.DataStructure.Collection.OneToManyHashSetPool`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.OneToManyHashSetPool-2.html#Fantasy_DataStructure_Collection_OneToManyHashSetPool_2_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.OneToManyHashSetPool`2.IsPool
-  fullName: Fantasy.DataStructure.Collection.OneToManyHashSetPool<TKey, TValue>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.OneToManyHashSetPool(Of TKey, TValue).IsPool
-  nameWithType: OneToManyHashSetPool<TKey, TValue>.IsPool
-  nameWithType.vb: OneToManyHashSetPool(Of TKey, TValue).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.OneToManyHashSetPool`2.IsPool
+  fullName: Fantasy.DataStructure.Collection.OneToManyHashSetPool<TKey, TValue>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyHashSetPool(Of TKey, TValue).IsPool()
+  nameWithType: OneToManyHashSetPool<TKey, TValue>.IsPool()
+  nameWithType.vb: OneToManyHashSetPool(Of TKey, TValue).IsPool()
 - uid: Fantasy.DataStructure.Collection.OneToManyHashSetPool`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.OneToManyHashSetPool-2.html#Fantasy_DataStructure_Collection_OneToManyHashSetPool_2_IsPool_
@@ -3719,6 +3854,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.OneToManyHashSetPool(Of TKey, TValue).IsPool
   nameWithType: OneToManyHashSetPool<TKey, TValue>.IsPool
   nameWithType.vb: OneToManyHashSetPool(Of TKey, TValue).IsPool
+- uid: Fantasy.DataStructure.Collection.OneToManyHashSetPool`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.OneToManyHashSetPool-2.html#Fantasy_DataStructure_Collection_OneToManyHashSetPool_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.OneToManyHashSetPool`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.OneToManyHashSetPool<TKey, TValue>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyHashSetPool(Of TKey, TValue).SetIsPool(Boolean)
+  nameWithType: OneToManyHashSetPool<TKey, TValue>.SetIsPool(bool)
+  nameWithType.vb: OneToManyHashSetPool(Of TKey, TValue).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.OneToManyHashSetPool`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.OneToManyHashSetPool-2.html#Fantasy_DataStructure_Collection_OneToManyHashSetPool_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.OneToManyHashSetPool`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.OneToManyHashSetPool<TKey, TValue>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyHashSetPool(Of TKey, TValue).SetIsPool
+  nameWithType: OneToManyHashSetPool<TKey, TValue>.SetIsPool
+  nameWithType.vb: OneToManyHashSetPool(Of TKey, TValue).SetIsPool
 - uid: Fantasy.DataStructure.Collection.OneToManyHashSet`2
   name: OneToManyHashSet<TKey, TValue>
   href: api/Fantasy.DataStructure.Collection.OneToManyHashSet-2.html
@@ -3902,13 +4055,13 @@ references:
   nameWithType: OneToManyListPool<TKey, TValue>.Dispose
   nameWithType.vb: OneToManyListPool(Of TKey, TValue).Dispose
 - uid: Fantasy.DataStructure.Collection.OneToManyListPool`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.OneToManyListPool-2.html#Fantasy_DataStructure_Collection_OneToManyListPool_2_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.OneToManyListPool`2.IsPool
-  fullName: Fantasy.DataStructure.Collection.OneToManyListPool<TKey, TValue>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.OneToManyListPool(Of TKey, TValue).IsPool
-  nameWithType: OneToManyListPool<TKey, TValue>.IsPool
-  nameWithType.vb: OneToManyListPool(Of TKey, TValue).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.OneToManyListPool`2.IsPool
+  fullName: Fantasy.DataStructure.Collection.OneToManyListPool<TKey, TValue>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyListPool(Of TKey, TValue).IsPool()
+  nameWithType: OneToManyListPool<TKey, TValue>.IsPool()
+  nameWithType.vb: OneToManyListPool(Of TKey, TValue).IsPool()
 - uid: Fantasy.DataStructure.Collection.OneToManyListPool`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.OneToManyListPool-2.html#Fantasy_DataStructure_Collection_OneToManyListPool_2_IsPool_
@@ -3918,6 +4071,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.OneToManyListPool(Of TKey, TValue).IsPool
   nameWithType: OneToManyListPool<TKey, TValue>.IsPool
   nameWithType.vb: OneToManyListPool(Of TKey, TValue).IsPool
+- uid: Fantasy.DataStructure.Collection.OneToManyListPool`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.OneToManyListPool-2.html#Fantasy_DataStructure_Collection_OneToManyListPool_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.OneToManyListPool`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.OneToManyListPool<TKey, TValue>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyListPool(Of TKey, TValue).SetIsPool(Boolean)
+  nameWithType: OneToManyListPool<TKey, TValue>.SetIsPool(bool)
+  nameWithType.vb: OneToManyListPool(Of TKey, TValue).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.OneToManyListPool`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.OneToManyListPool-2.html#Fantasy_DataStructure_Collection_OneToManyListPool_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.OneToManyListPool`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.OneToManyListPool<TKey, TValue>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyListPool(Of TKey, TValue).SetIsPool
+  nameWithType: OneToManyListPool<TKey, TValue>.SetIsPool
+  nameWithType.vb: OneToManyListPool(Of TKey, TValue).SetIsPool
 - uid: Fantasy.DataStructure.Collection.OneToManyList`2
   name: OneToManyList<TKey, TValue>
   href: api/Fantasy.DataStructure.Collection.OneToManyList-2.html
@@ -4118,13 +4289,13 @@ references:
   nameWithType: OneToManyQueuePool<TKey, TValue>.Dispose
   nameWithType.vb: OneToManyQueuePool(Of TKey, TValue).Dispose
 - uid: Fantasy.DataStructure.Collection.OneToManyQueuePool`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.OneToManyQueuePool-2.html#Fantasy_DataStructure_Collection_OneToManyQueuePool_2_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.OneToManyQueuePool`2.IsPool
-  fullName: Fantasy.DataStructure.Collection.OneToManyQueuePool<TKey, TValue>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.OneToManyQueuePool(Of TKey, TValue).IsPool
-  nameWithType: OneToManyQueuePool<TKey, TValue>.IsPool
-  nameWithType.vb: OneToManyQueuePool(Of TKey, TValue).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.OneToManyQueuePool`2.IsPool
+  fullName: Fantasy.DataStructure.Collection.OneToManyQueuePool<TKey, TValue>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyQueuePool(Of TKey, TValue).IsPool()
+  nameWithType: OneToManyQueuePool<TKey, TValue>.IsPool()
+  nameWithType.vb: OneToManyQueuePool(Of TKey, TValue).IsPool()
 - uid: Fantasy.DataStructure.Collection.OneToManyQueuePool`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.OneToManyQueuePool-2.html#Fantasy_DataStructure_Collection_OneToManyQueuePool_2_IsPool_
@@ -4134,6 +4305,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.OneToManyQueuePool(Of TKey, TValue).IsPool
   nameWithType: OneToManyQueuePool<TKey, TValue>.IsPool
   nameWithType.vb: OneToManyQueuePool(Of TKey, TValue).IsPool
+- uid: Fantasy.DataStructure.Collection.OneToManyQueuePool`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.OneToManyQueuePool-2.html#Fantasy_DataStructure_Collection_OneToManyQueuePool_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.OneToManyQueuePool`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.OneToManyQueuePool<TKey, TValue>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyQueuePool(Of TKey, TValue).SetIsPool(Boolean)
+  nameWithType: OneToManyQueuePool<TKey, TValue>.SetIsPool(bool)
+  nameWithType.vb: OneToManyQueuePool(Of TKey, TValue).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.OneToManyQueuePool`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.OneToManyQueuePool-2.html#Fantasy_DataStructure_Collection_OneToManyQueuePool_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.OneToManyQueuePool`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.OneToManyQueuePool<TKey, TValue>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.OneToManyQueuePool(Of TKey, TValue).SetIsPool
+  nameWithType: OneToManyQueuePool<TKey, TValue>.SetIsPool
+  nameWithType.vb: OneToManyQueuePool(Of TKey, TValue).SetIsPool
 - uid: Fantasy.DataStructure.Collection.OneToManyQueue`2
   name: OneToManyQueue<TKey, TValue>
   href: api/Fantasy.DataStructure.Collection.OneToManyQueue-2.html
@@ -4309,13 +4498,13 @@ references:
   nameWithType: ReuseList<T>.Dispose
   nameWithType.vb: ReuseList(Of T).Dispose
 - uid: Fantasy.DataStructure.Collection.ReuseList`1.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.ReuseList-1.html#Fantasy_DataStructure_Collection_ReuseList_1_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.ReuseList`1.IsPool
-  fullName: Fantasy.DataStructure.Collection.ReuseList<T>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.ReuseList(Of T).IsPool
-  nameWithType: ReuseList<T>.IsPool
-  nameWithType.vb: ReuseList(Of T).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.ReuseList`1.IsPool
+  fullName: Fantasy.DataStructure.Collection.ReuseList<T>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.ReuseList(Of T).IsPool()
+  nameWithType: ReuseList<T>.IsPool()
+  nameWithType.vb: ReuseList(Of T).IsPool()
 - uid: Fantasy.DataStructure.Collection.ReuseList`1.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.ReuseList-1.html#Fantasy_DataStructure_Collection_ReuseList_1_IsPool_
@@ -4325,6 +4514,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.ReuseList(Of T).IsPool
   nameWithType: ReuseList<T>.IsPool
   nameWithType.vb: ReuseList(Of T).IsPool
+- uid: Fantasy.DataStructure.Collection.ReuseList`1.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.ReuseList-1.html#Fantasy_DataStructure_Collection_ReuseList_1_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.ReuseList`1.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.ReuseList<T>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.ReuseList(Of T).SetIsPool(Boolean)
+  nameWithType: ReuseList<T>.SetIsPool(bool)
+  nameWithType.vb: ReuseList(Of T).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.ReuseList`1.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.ReuseList-1.html#Fantasy_DataStructure_Collection_ReuseList_1_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.ReuseList`1.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.ReuseList<T>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.ReuseList(Of T).SetIsPool
+  nameWithType: ReuseList<T>.SetIsPool
+  nameWithType.vb: ReuseList(Of T).SetIsPool
 - uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2
   name: SortedConcurrentOneToManyListPool<TKey, TValue>
   href: api/Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool-2.html
@@ -4369,13 +4576,13 @@ references:
   nameWithType: SortedConcurrentOneToManyListPool<TKey, TValue>.Dispose
   nameWithType.vb: SortedConcurrentOneToManyListPool(Of TKey, TValue).Dispose
 - uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool-2.html#Fantasy_DataStructure_Collection_SortedConcurrentOneToManyListPool_2_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2.IsPool
-  fullName: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool<TKey, TValue>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool(Of TKey, TValue).IsPool
-  nameWithType: SortedConcurrentOneToManyListPool<TKey, TValue>.IsPool
-  nameWithType.vb: SortedConcurrentOneToManyListPool(Of TKey, TValue).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2.IsPool
+  fullName: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool<TKey, TValue>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool(Of TKey, TValue).IsPool()
+  nameWithType: SortedConcurrentOneToManyListPool<TKey, TValue>.IsPool()
+  nameWithType.vb: SortedConcurrentOneToManyListPool(Of TKey, TValue).IsPool()
 - uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool-2.html#Fantasy_DataStructure_Collection_SortedConcurrentOneToManyListPool_2_IsPool_
@@ -4385,6 +4592,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool(Of TKey, TValue).IsPool
   nameWithType: SortedConcurrentOneToManyListPool<TKey, TValue>.IsPool
   nameWithType.vb: SortedConcurrentOneToManyListPool(Of TKey, TValue).IsPool
+- uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool-2.html#Fantasy_DataStructure_Collection_SortedConcurrentOneToManyListPool_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool<TKey, TValue>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool(Of TKey, TValue).SetIsPool(Boolean)
+  nameWithType: SortedConcurrentOneToManyListPool<TKey, TValue>.SetIsPool(bool)
+  nameWithType.vb: SortedConcurrentOneToManyListPool(Of TKey, TValue).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool-2.html#Fantasy_DataStructure_Collection_SortedConcurrentOneToManyListPool_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool<TKey, TValue>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool(Of TKey, TValue).SetIsPool
+  nameWithType: SortedConcurrentOneToManyListPool<TKey, TValue>.SetIsPool
+  nameWithType.vb: SortedConcurrentOneToManyListPool(Of TKey, TValue).SetIsPool
 - uid: Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList`2
   name: SortedConcurrentOneToManyList<TKey, TValue>
   href: api/Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList-2.html
@@ -4568,13 +4793,13 @@ references:
   nameWithType: SortedOneToManyHashSetPool<TKey, TValue>.Dispose
   nameWithType.vb: SortedOneToManyHashSetPool(Of TKey, TValue).Dispose
 - uid: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool-2.html#Fantasy_DataStructure_Collection_SortedOneToManyHashSetPool_2_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2.IsPool
-  fullName: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool<TKey, TValue>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool(Of TKey, TValue).IsPool
-  nameWithType: SortedOneToManyHashSetPool<TKey, TValue>.IsPool
-  nameWithType.vb: SortedOneToManyHashSetPool(Of TKey, TValue).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2.IsPool
+  fullName: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool<TKey, TValue>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool(Of TKey, TValue).IsPool()
+  nameWithType: SortedOneToManyHashSetPool<TKey, TValue>.IsPool()
+  nameWithType.vb: SortedOneToManyHashSetPool(Of TKey, TValue).IsPool()
 - uid: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool-2.html#Fantasy_DataStructure_Collection_SortedOneToManyHashSetPool_2_IsPool_
@@ -4584,6 +4809,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool(Of TKey, TValue).IsPool
   nameWithType: SortedOneToManyHashSetPool<TKey, TValue>.IsPool
   nameWithType.vb: SortedOneToManyHashSetPool(Of TKey, TValue).IsPool
+- uid: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool-2.html#Fantasy_DataStructure_Collection_SortedOneToManyHashSetPool_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool<TKey, TValue>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool(Of TKey, TValue).SetIsPool(Boolean)
+  nameWithType: SortedOneToManyHashSetPool<TKey, TValue>.SetIsPool(bool)
+  nameWithType.vb: SortedOneToManyHashSetPool(Of TKey, TValue).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool-2.html#Fantasy_DataStructure_Collection_SortedOneToManyHashSetPool_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool<TKey, TValue>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool(Of TKey, TValue).SetIsPool
+  nameWithType: SortedOneToManyHashSetPool<TKey, TValue>.SetIsPool
+  nameWithType.vb: SortedOneToManyHashSetPool(Of TKey, TValue).SetIsPool
 - uid: Fantasy.DataStructure.Collection.SortedOneToManyHashSet`2
   name: SortedOneToManyHashSet<TKey, TValue>
   href: api/Fantasy.DataStructure.Collection.SortedOneToManyHashSet-2.html
@@ -4750,13 +4993,13 @@ references:
   nameWithType: SortedOneToManyListPool<TKey, TValue>.Dispose
   nameWithType.vb: SortedOneToManyListPool(Of TKey, TValue).Dispose
 - uid: Fantasy.DataStructure.Collection.SortedOneToManyListPool`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Collection.SortedOneToManyListPool-2.html#Fantasy_DataStructure_Collection_SortedOneToManyListPool_2_IsPool
-  commentId: P:Fantasy.DataStructure.Collection.SortedOneToManyListPool`2.IsPool
-  fullName: Fantasy.DataStructure.Collection.SortedOneToManyListPool<TKey, TValue>.IsPool
-  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyListPool(Of TKey, TValue).IsPool
-  nameWithType: SortedOneToManyListPool<TKey, TValue>.IsPool
-  nameWithType.vb: SortedOneToManyListPool(Of TKey, TValue).IsPool
+  commentId: M:Fantasy.DataStructure.Collection.SortedOneToManyListPool`2.IsPool
+  fullName: Fantasy.DataStructure.Collection.SortedOneToManyListPool<TKey, TValue>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyListPool(Of TKey, TValue).IsPool()
+  nameWithType: SortedOneToManyListPool<TKey, TValue>.IsPool()
+  nameWithType.vb: SortedOneToManyListPool(Of TKey, TValue).IsPool()
 - uid: Fantasy.DataStructure.Collection.SortedOneToManyListPool`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Collection.SortedOneToManyListPool-2.html#Fantasy_DataStructure_Collection_SortedOneToManyListPool_2_IsPool_
@@ -4766,6 +5009,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyListPool(Of TKey, TValue).IsPool
   nameWithType: SortedOneToManyListPool<TKey, TValue>.IsPool
   nameWithType.vb: SortedOneToManyListPool(Of TKey, TValue).IsPool
+- uid: Fantasy.DataStructure.Collection.SortedOneToManyListPool`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Collection.SortedOneToManyListPool-2.html#Fantasy_DataStructure_Collection_SortedOneToManyListPool_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Collection.SortedOneToManyListPool`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Collection.SortedOneToManyListPool<TKey, TValue>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyListPool(Of TKey, TValue).SetIsPool(Boolean)
+  nameWithType: SortedOneToManyListPool<TKey, TValue>.SetIsPool(bool)
+  nameWithType.vb: SortedOneToManyListPool(Of TKey, TValue).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Collection.SortedOneToManyListPool`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Collection.SortedOneToManyListPool-2.html#Fantasy_DataStructure_Collection_SortedOneToManyListPool_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Collection.SortedOneToManyListPool`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Collection.SortedOneToManyListPool<TKey, TValue>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Collection.SortedOneToManyListPool(Of TKey, TValue).SetIsPool
+  nameWithType: SortedOneToManyListPool<TKey, TValue>.SetIsPool
+  nameWithType.vb: SortedOneToManyListPool(Of TKey, TValue).SetIsPool
 - uid: Fantasy.DataStructure.Collection.SortedOneToManyList`2
   name: SortedOneToManyList<TKey, TValue>
   href: api/Fantasy.DataStructure.Collection.SortedOneToManyList-2.html
@@ -4977,13 +5238,13 @@ references:
   nameWithType: DictionaryPool<TM, TN>.Dispose
   nameWithType.vb: DictionaryPool(Of TM, TN).Dispose
 - uid: Fantasy.DataStructure.Dictionary.DictionaryPool`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Dictionary.DictionaryPool-2.html#Fantasy_DataStructure_Dictionary_DictionaryPool_2_IsPool
-  commentId: P:Fantasy.DataStructure.Dictionary.DictionaryPool`2.IsPool
-  fullName: Fantasy.DataStructure.Dictionary.DictionaryPool<TM, TN>.IsPool
-  fullName.vb: Fantasy.DataStructure.Dictionary.DictionaryPool(Of TM, TN).IsPool
-  nameWithType: DictionaryPool<TM, TN>.IsPool
-  nameWithType.vb: DictionaryPool(Of TM, TN).IsPool
+  commentId: M:Fantasy.DataStructure.Dictionary.DictionaryPool`2.IsPool
+  fullName: Fantasy.DataStructure.Dictionary.DictionaryPool<TM, TN>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Dictionary.DictionaryPool(Of TM, TN).IsPool()
+  nameWithType: DictionaryPool<TM, TN>.IsPool()
+  nameWithType.vb: DictionaryPool(Of TM, TN).IsPool()
 - uid: Fantasy.DataStructure.Dictionary.DictionaryPool`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Dictionary.DictionaryPool-2.html#Fantasy_DataStructure_Dictionary_DictionaryPool_2_IsPool_
@@ -4993,6 +5254,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Dictionary.DictionaryPool(Of TM, TN).IsPool
   nameWithType: DictionaryPool<TM, TN>.IsPool
   nameWithType.vb: DictionaryPool(Of TM, TN).IsPool
+- uid: Fantasy.DataStructure.Dictionary.DictionaryPool`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Dictionary.DictionaryPool-2.html#Fantasy_DataStructure_Dictionary_DictionaryPool_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Dictionary.DictionaryPool`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Dictionary.DictionaryPool<TM, TN>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Dictionary.DictionaryPool(Of TM, TN).SetIsPool(Boolean)
+  nameWithType: DictionaryPool<TM, TN>.SetIsPool(bool)
+  nameWithType.vb: DictionaryPool(Of TM, TN).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Dictionary.DictionaryPool`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Dictionary.DictionaryPool-2.html#Fantasy_DataStructure_Dictionary_DictionaryPool_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Dictionary.DictionaryPool`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Dictionary.DictionaryPool<TM, TN>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Dictionary.DictionaryPool(Of TM, TN).SetIsPool
+  nameWithType: DictionaryPool<TM, TN>.SetIsPool
+  nameWithType.vb: DictionaryPool(Of TM, TN).SetIsPool
 - uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2
   name: DoubleMapDictionaryPool<TKey, TValue>
   href: api/Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool-2.html
@@ -5037,13 +5316,13 @@ references:
   nameWithType: DoubleMapDictionaryPool<TKey, TValue>.Dispose
   nameWithType.vb: DoubleMapDictionaryPool(Of TKey, TValue).Dispose
 - uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool-2.html#Fantasy_DataStructure_Dictionary_DoubleMapDictionaryPool_2_IsPool
-  commentId: P:Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2.IsPool
-  fullName: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool<TKey, TValue>.IsPool
-  fullName.vb: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool(Of TKey, TValue).IsPool
-  nameWithType: DoubleMapDictionaryPool<TKey, TValue>.IsPool
-  nameWithType.vb: DoubleMapDictionaryPool(Of TKey, TValue).IsPool
+  commentId: M:Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2.IsPool
+  fullName: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool<TKey, TValue>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool(Of TKey, TValue).IsPool()
+  nameWithType: DoubleMapDictionaryPool<TKey, TValue>.IsPool()
+  nameWithType.vb: DoubleMapDictionaryPool(Of TKey, TValue).IsPool()
 - uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool-2.html#Fantasy_DataStructure_Dictionary_DoubleMapDictionaryPool_2_IsPool_
@@ -5053,6 +5332,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool(Of TKey, TValue).IsPool
   nameWithType: DoubleMapDictionaryPool<TKey, TValue>.IsPool
   nameWithType.vb: DoubleMapDictionaryPool(Of TKey, TValue).IsPool
+- uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool-2.html#Fantasy_DataStructure_Dictionary_DoubleMapDictionaryPool_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool<TKey, TValue>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool(Of TKey, TValue).SetIsPool(Boolean)
+  nameWithType: DoubleMapDictionaryPool<TKey, TValue>.SetIsPool(bool)
+  nameWithType.vb: DoubleMapDictionaryPool(Of TKey, TValue).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool-2.html#Fantasy_DataStructure_Dictionary_DoubleMapDictionaryPool_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool<TKey, TValue>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Dictionary.DoubleMapDictionaryPool(Of TKey, TValue).SetIsPool
+  nameWithType: DoubleMapDictionaryPool<TKey, TValue>.SetIsPool
+  nameWithType.vb: DoubleMapDictionaryPool(Of TKey, TValue).SetIsPool
 - uid: Fantasy.DataStructure.Dictionary.DoubleMapDictionary`2
   name: DoubleMapDictionary<TK, TV>
   href: api/Fantasy.DataStructure.Dictionary.DoubleMapDictionary-2.html
@@ -5409,13 +5706,13 @@ references:
   nameWithType: EntityDictionary<TM, TN>.Dispose
   nameWithType.vb: EntityDictionary(Of TM, TN).Dispose
 - uid: Fantasy.DataStructure.Dictionary.EntityDictionary`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Dictionary.EntityDictionary-2.html#Fantasy_DataStructure_Dictionary_EntityDictionary_2_IsPool
-  commentId: P:Fantasy.DataStructure.Dictionary.EntityDictionary`2.IsPool
-  fullName: Fantasy.DataStructure.Dictionary.EntityDictionary<TM, TN>.IsPool
-  fullName.vb: Fantasy.DataStructure.Dictionary.EntityDictionary(Of TM, TN).IsPool
-  nameWithType: EntityDictionary<TM, TN>.IsPool
-  nameWithType.vb: EntityDictionary(Of TM, TN).IsPool
+  commentId: M:Fantasy.DataStructure.Dictionary.EntityDictionary`2.IsPool
+  fullName: Fantasy.DataStructure.Dictionary.EntityDictionary<TM, TN>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Dictionary.EntityDictionary(Of TM, TN).IsPool()
+  nameWithType: EntityDictionary<TM, TN>.IsPool()
+  nameWithType.vb: EntityDictionary(Of TM, TN).IsPool()
 - uid: Fantasy.DataStructure.Dictionary.EntityDictionary`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Dictionary.EntityDictionary-2.html#Fantasy_DataStructure_Dictionary_EntityDictionary_2_IsPool_
@@ -5425,6 +5722,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Dictionary.EntityDictionary(Of TM, TN).IsPool
   nameWithType: EntityDictionary<TM, TN>.IsPool
   nameWithType.vb: EntityDictionary(Of TM, TN).IsPool
+- uid: Fantasy.DataStructure.Dictionary.EntityDictionary`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Dictionary.EntityDictionary-2.html#Fantasy_DataStructure_Dictionary_EntityDictionary_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Dictionary.EntityDictionary`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Dictionary.EntityDictionary<TM, TN>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Dictionary.EntityDictionary(Of TM, TN).SetIsPool(Boolean)
+  nameWithType: EntityDictionary<TM, TN>.SetIsPool(bool)
+  nameWithType.vb: EntityDictionary(Of TM, TN).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Dictionary.EntityDictionary`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Dictionary.EntityDictionary-2.html#Fantasy_DataStructure_Dictionary_EntityDictionary_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Dictionary.EntityDictionary`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Dictionary.EntityDictionary<TM, TN>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Dictionary.EntityDictionary(Of TM, TN).SetIsPool
+  nameWithType: EntityDictionary<TM, TN>.SetIsPool
+  nameWithType.vb: EntityDictionary(Of TM, TN).SetIsPool
 - uid: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3
   name: OneToManyDictionaryPool<TKey, TValueKey, TValue>
   href: api/Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool-3.html
@@ -5469,13 +5784,13 @@ references:
   nameWithType: OneToManyDictionaryPool<TKey, TValueKey, TValue>.Dispose
   nameWithType.vb: OneToManyDictionaryPool(Of TKey, TValueKey, TValue).Dispose
 - uid: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool-3.html#Fantasy_DataStructure_Dictionary_OneToManyDictionaryPool_3_IsPool
-  commentId: P:Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3.IsPool
-  fullName: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool<TKey, TValueKey, TValue>.IsPool
-  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool(Of TKey, TValueKey, TValue).IsPool
-  nameWithType: OneToManyDictionaryPool<TKey, TValueKey, TValue>.IsPool
-  nameWithType.vb: OneToManyDictionaryPool(Of TKey, TValueKey, TValue).IsPool
+  commentId: M:Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3.IsPool
+  fullName: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool<TKey, TValueKey, TValue>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool(Of TKey, TValueKey, TValue).IsPool()
+  nameWithType: OneToManyDictionaryPool<TKey, TValueKey, TValue>.IsPool()
+  nameWithType.vb: OneToManyDictionaryPool(Of TKey, TValueKey, TValue).IsPool()
 - uid: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool-3.html#Fantasy_DataStructure_Dictionary_OneToManyDictionaryPool_3_IsPool_
@@ -5485,6 +5800,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool(Of TKey, TValueKey, TValue).IsPool
   nameWithType: OneToManyDictionaryPool<TKey, TValueKey, TValue>.IsPool
   nameWithType.vb: OneToManyDictionaryPool(Of TKey, TValueKey, TValue).IsPool
+- uid: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool-3.html#Fantasy_DataStructure_Dictionary_OneToManyDictionaryPool_3_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool<TKey, TValueKey, TValue>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool(Of TKey, TValueKey, TValue).SetIsPool(Boolean)
+  nameWithType: OneToManyDictionaryPool<TKey, TValueKey, TValue>.SetIsPool(bool)
+  nameWithType.vb: OneToManyDictionaryPool(Of TKey, TValueKey, TValue).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool-3.html#Fantasy_DataStructure_Dictionary_OneToManyDictionaryPool_3_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool`3.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool<TKey, TValueKey, TValue>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManyDictionaryPool(Of TKey, TValueKey, TValue).SetIsPool
+  nameWithType: OneToManyDictionaryPool<TKey, TValueKey, TValue>.SetIsPool
+  nameWithType.vb: OneToManyDictionaryPool(Of TKey, TValueKey, TValue).SetIsPool
 - uid: Fantasy.DataStructure.Dictionary.OneToManyDictionary`3
   name: OneToManyDictionary<TKey, TValueKey, TValue>
   href: api/Fantasy.DataStructure.Dictionary.OneToManyDictionary-3.html
@@ -5695,13 +6028,13 @@ references:
   nameWithType: OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>.Dispose
   nameWithType.vb: OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue).Dispose
 - uid: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool-3.html#Fantasy_DataStructure_Dictionary_OneToManySortedDictionaryPool_3_IsPool
-  commentId: P:Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3.IsPool
-  fullName: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>.IsPool
-  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue).IsPool
-  nameWithType: OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>.IsPool
-  nameWithType.vb: OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue).IsPool
+  commentId: M:Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3.IsPool
+  fullName: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue).IsPool()
+  nameWithType: OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>.IsPool()
+  nameWithType.vb: OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue).IsPool()
 - uid: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool-3.html#Fantasy_DataStructure_Dictionary_OneToManySortedDictionaryPool_3_IsPool_
@@ -5711,6 +6044,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue).IsPool
   nameWithType: OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>.IsPool
   nameWithType.vb: OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue).IsPool
+- uid: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool-3.html#Fantasy_DataStructure_Dictionary_OneToManySortedDictionaryPool_3_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue).SetIsPool(Boolean)
+  nameWithType: OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>.SetIsPool(bool)
+  nameWithType.vb: OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool-3.html#Fantasy_DataStructure_Dictionary_OneToManySortedDictionaryPool_3_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool`3.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Dictionary.OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue).SetIsPool
+  nameWithType: OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>.SetIsPool
+  nameWithType.vb: OneToManySortedDictionaryPool(Of TKey, TSortedKey, TValue).SetIsPool
 - uid: Fantasy.DataStructure.Dictionary.OneToManySortedDictionary`3
   name: OneToManySortedDictionary<TKey, TSortedKey, TValue>
   href: api/Fantasy.DataStructure.Dictionary.OneToManySortedDictionary-3.html
@@ -5921,13 +6272,13 @@ references:
   nameWithType: ReuseDictionary<TM, TN>.Dispose
   nameWithType.vb: ReuseDictionary(Of TM, TN).Dispose
 - uid: Fantasy.DataStructure.Dictionary.ReuseDictionary`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Dictionary.ReuseDictionary-2.html#Fantasy_DataStructure_Dictionary_ReuseDictionary_2_IsPool
-  commentId: P:Fantasy.DataStructure.Dictionary.ReuseDictionary`2.IsPool
-  fullName: Fantasy.DataStructure.Dictionary.ReuseDictionary<TM, TN>.IsPool
-  fullName.vb: Fantasy.DataStructure.Dictionary.ReuseDictionary(Of TM, TN).IsPool
-  nameWithType: ReuseDictionary<TM, TN>.IsPool
-  nameWithType.vb: ReuseDictionary(Of TM, TN).IsPool
+  commentId: M:Fantasy.DataStructure.Dictionary.ReuseDictionary`2.IsPool
+  fullName: Fantasy.DataStructure.Dictionary.ReuseDictionary<TM, TN>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Dictionary.ReuseDictionary(Of TM, TN).IsPool()
+  nameWithType: ReuseDictionary<TM, TN>.IsPool()
+  nameWithType.vb: ReuseDictionary(Of TM, TN).IsPool()
 - uid: Fantasy.DataStructure.Dictionary.ReuseDictionary`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Dictionary.ReuseDictionary-2.html#Fantasy_DataStructure_Dictionary_ReuseDictionary_2_IsPool_
@@ -5937,6 +6288,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Dictionary.ReuseDictionary(Of TM, TN).IsPool
   nameWithType: ReuseDictionary<TM, TN>.IsPool
   nameWithType.vb: ReuseDictionary(Of TM, TN).IsPool
+- uid: Fantasy.DataStructure.Dictionary.ReuseDictionary`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Dictionary.ReuseDictionary-2.html#Fantasy_DataStructure_Dictionary_ReuseDictionary_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Dictionary.ReuseDictionary`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Dictionary.ReuseDictionary<TM, TN>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Dictionary.ReuseDictionary(Of TM, TN).SetIsPool(Boolean)
+  nameWithType: ReuseDictionary<TM, TN>.SetIsPool(bool)
+  nameWithType.vb: ReuseDictionary(Of TM, TN).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Dictionary.ReuseDictionary`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Dictionary.ReuseDictionary-2.html#Fantasy_DataStructure_Dictionary_ReuseDictionary_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Dictionary.ReuseDictionary`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Dictionary.ReuseDictionary<TM, TN>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Dictionary.ReuseDictionary(Of TM, TN).SetIsPool
+  nameWithType: ReuseDictionary<TM, TN>.SetIsPool
+  nameWithType.vb: ReuseDictionary(Of TM, TN).SetIsPool
 - uid: Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2
   name: SortedDictionaryPool<TM, TN>
   href: api/Fantasy.DataStructure.Dictionary.SortedDictionaryPool-2.html
@@ -5981,13 +6350,13 @@ references:
   nameWithType: SortedDictionaryPool<TM, TN>.Dispose
   nameWithType.vb: SortedDictionaryPool(Of TM, TN).Dispose
 - uid: Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.DataStructure.Dictionary.SortedDictionaryPool-2.html#Fantasy_DataStructure_Dictionary_SortedDictionaryPool_2_IsPool
-  commentId: P:Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2.IsPool
-  fullName: Fantasy.DataStructure.Dictionary.SortedDictionaryPool<TM, TN>.IsPool
-  fullName.vb: Fantasy.DataStructure.Dictionary.SortedDictionaryPool(Of TM, TN).IsPool
-  nameWithType: SortedDictionaryPool<TM, TN>.IsPool
-  nameWithType.vb: SortedDictionaryPool(Of TM, TN).IsPool
+  commentId: M:Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2.IsPool
+  fullName: Fantasy.DataStructure.Dictionary.SortedDictionaryPool<TM, TN>.IsPool()
+  fullName.vb: Fantasy.DataStructure.Dictionary.SortedDictionaryPool(Of TM, TN).IsPool()
+  nameWithType: SortedDictionaryPool<TM, TN>.IsPool()
+  nameWithType.vb: SortedDictionaryPool(Of TM, TN).IsPool()
 - uid: Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2.IsPool*
   name: IsPool
   href: api/Fantasy.DataStructure.Dictionary.SortedDictionaryPool-2.html#Fantasy_DataStructure_Dictionary_SortedDictionaryPool_2_IsPool_
@@ -5997,6 +6366,24 @@ references:
   fullName.vb: Fantasy.DataStructure.Dictionary.SortedDictionaryPool(Of TM, TN).IsPool
   nameWithType: SortedDictionaryPool<TM, TN>.IsPool
   nameWithType.vb: SortedDictionaryPool(Of TM, TN).IsPool
+- uid: Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.DataStructure.Dictionary.SortedDictionaryPool-2.html#Fantasy_DataStructure_Dictionary_SortedDictionaryPool_2_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.DataStructure.Dictionary.SortedDictionaryPool<TM, TN>.SetIsPool(bool)
+  fullName.vb: Fantasy.DataStructure.Dictionary.SortedDictionaryPool(Of TM, TN).SetIsPool(Boolean)
+  nameWithType: SortedDictionaryPool<TM, TN>.SetIsPool(bool)
+  nameWithType.vb: SortedDictionaryPool(Of TM, TN).SetIsPool(Boolean)
+- uid: Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.DataStructure.Dictionary.SortedDictionaryPool-2.html#Fantasy_DataStructure_Dictionary_SortedDictionaryPool_2_SetIsPool_
+  commentId: Overload:Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.DataStructure.Dictionary.SortedDictionaryPool<TM, TN>.SetIsPool
+  fullName.vb: Fantasy.DataStructure.Dictionary.SortedDictionaryPool(Of TM, TN).SetIsPool
+  nameWithType: SortedDictionaryPool<TM, TN>.SetIsPool
+  nameWithType.vb: SortedDictionaryPool(Of TM, TN).SetIsPool
 - uid: Fantasy.DataStructure.PriorityQueue
   name: Fantasy.DataStructure.PriorityQueue
   href: api/Fantasy.DataStructure.PriorityQueue.html
@@ -6932,19 +7319,6 @@ references:
   fullName.vb: Fantasy.Entitas.Entity.AddComponent(Of T)(T)
   nameWithType: Entity.AddComponent<T>(T)
   nameWithType.vb: Entity.AddComponent(Of T)(T)
-- uid: Fantasy.Entitas.Entity.Clone
-  name: Clone()
-  href: api/Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
-  commentId: M:Fantasy.Entitas.Entity.Clone
-  fullName: Fantasy.Entitas.Entity.Clone()
-  nameWithType: Entity.Clone()
-- uid: Fantasy.Entitas.Entity.Clone*
-  name: Clone
-  href: api/Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone_
-  commentId: Overload:Fantasy.Entitas.Entity.Clone
-  isSpec: "True"
-  fullName: Fantasy.Entitas.Entity.Clone
-  nameWithType: Entity.Clone
 - uid: Fantasy.Entitas.Entity.Create*
   name: Create
   href: api/Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Create_
@@ -7141,11 +7515,11 @@ references:
   fullName: Fantasy.Entitas.Entity.IsDisposed
   nameWithType: Entity.IsDisposed
 - uid: Fantasy.Entitas.Entity.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
-  commentId: P:Fantasy.Entitas.Entity.IsPool
-  fullName: Fantasy.Entitas.Entity.IsPool
-  nameWithType: Entity.IsPool
+  commentId: M:Fantasy.Entitas.Entity.IsPool
+  fullName: Fantasy.Entitas.Entity.IsPool()
+  nameWithType: Entity.IsPool()
 - uid: Fantasy.Entitas.Entity.IsPool*
   name: IsPool
   href: api/Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool_
@@ -7235,6 +7609,22 @@ references:
   isSpec: "True"
   fullName: Fantasy.Entitas.Entity.Scene
   nameWithType: Entity.Scene
+- uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.Entitas.Entity.SetIsPool(bool)
+  fullName.vb: Fantasy.Entitas.Entity.SetIsPool(Boolean)
+  nameWithType: Entity.SetIsPool(bool)
+  nameWithType.vb: Entity.SetIsPool(Boolean)
+- uid: Fantasy.Entitas.Entity.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_
+  commentId: Overload:Fantasy.Entitas.Entity.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.Entitas.Entity.SetIsPool
+  nameWithType: Entity.SetIsPool
 - uid: Fantasy.Entitas.Entity.Type
   name: Type
   href: api/Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Type
@@ -9777,6 +10167,129 @@ references:
   isSpec: "True"
   fullName: Fantasy.Helper.WinPeriod.Initialize
   nameWithType: WinPeriod.Initialize
+- uid: Fantasy.Http
+  name: Fantasy.Http
+  href: api/Fantasy.Http.html
+  commentId: N:Fantasy.Http
+  fullName: Fantasy.Http
+  nameWithType: Fantasy.Http
+- uid: Fantasy.Http.HttpClientHelper
+  name: HttpClientHelper
+  href: api/Fantasy.Http.HttpClientHelper.html
+  commentId: T:Fantasy.Http.HttpClientHelper
+  fullName: Fantasy.Http.HttpClientHelper
+  nameWithType: HttpClientHelper
+- uid: Fantasy.Http.HttpClientHelper.Call*
+  name: Call
+  href: api/Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_Call_
+  commentId: Overload:Fantasy.Http.HttpClientHelper.Call
+  isSpec: "True"
+  fullName: Fantasy.Http.HttpClientHelper.Call
+  nameWithType: HttpClientHelper.Call
+- uid: Fantasy.Http.HttpClientHelper.CallByGet*
+  name: CallByGet
+  href: api/Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallByGet_
+  commentId: Overload:Fantasy.Http.HttpClientHelper.CallByGet
+  isSpec: "True"
+  fullName: Fantasy.Http.HttpClientHelper.CallByGet
+  nameWithType: HttpClientHelper.CallByGet
+- uid: Fantasy.Http.HttpClientHelper.CallByGet``1(System.String)
+  name: CallByGet<T>(string)
+  href: api/Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallByGet__1_System_String_
+  commentId: M:Fantasy.Http.HttpClientHelper.CallByGet``1(System.String)
+  name.vb: CallByGet(Of T)(String)
+  fullName: Fantasy.Http.HttpClientHelper.CallByGet<T>(string)
+  fullName.vb: Fantasy.Http.HttpClientHelper.CallByGet(Of T)(String)
+  nameWithType: HttpClientHelper.CallByGet<T>(string)
+  nameWithType.vb: HttpClientHelper.CallByGet(Of T)(String)
+- uid: Fantasy.Http.HttpClientHelper.CallByPost*
+  name: CallByPost
+  href: api/Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallByPost_
+  commentId: Overload:Fantasy.Http.HttpClientHelper.CallByPost
+  isSpec: "True"
+  fullName: Fantasy.Http.HttpClientHelper.CallByPost
+  nameWithType: HttpClientHelper.CallByPost
+- uid: Fantasy.Http.HttpClientHelper.CallByPost``1(System.String,System.Net.Http.HttpContent)
+  name: CallByPost<T>(string, HttpContent)
+  href: api/Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallByPost__1_System_String_System_Net_Http_HttpContent_
+  commentId: M:Fantasy.Http.HttpClientHelper.CallByPost``1(System.String,System.Net.Http.HttpContent)
+  name.vb: CallByPost(Of T)(String, HttpContent)
+  fullName: Fantasy.Http.HttpClientHelper.CallByPost<T>(string, System.Net.Http.HttpContent)
+  fullName.vb: Fantasy.Http.HttpClientHelper.CallByPost(Of T)(String, System.Net.Http.HttpContent)
+  nameWithType: HttpClientHelper.CallByPost<T>(string, HttpContent)
+  nameWithType.vb: HttpClientHelper.CallByPost(Of T)(String, HttpContent)
+- uid: Fantasy.Http.HttpClientHelper.CallByPost``1(System.String,System.Net.Http.HttpMethod)
+  name: CallByPost<T>(string, HttpMethod)
+  href: api/Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallByPost__1_System_String_System_Net_Http_HttpMethod_
+  commentId: M:Fantasy.Http.HttpClientHelper.CallByPost``1(System.String,System.Net.Http.HttpMethod)
+  name.vb: CallByPost(Of T)(String, HttpMethod)
+  fullName: Fantasy.Http.HttpClientHelper.CallByPost<T>(string, System.Net.Http.HttpMethod)
+  fullName.vb: Fantasy.Http.HttpClientHelper.CallByPost(Of T)(String, System.Net.Http.HttpMethod)
+  nameWithType: HttpClientHelper.CallByPost<T>(string, HttpMethod)
+  nameWithType.vb: HttpClientHelper.CallByPost(Of T)(String, HttpMethod)
+- uid: Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet(System.String)
+  name: CallNotDeserializeByGet(string)
+  href: api/Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallNotDeserializeByGet_System_String_
+  commentId: M:Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet(System.String)
+  name.vb: CallNotDeserializeByGet(String)
+  fullName: Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet(string)
+  fullName.vb: Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet(String)
+  nameWithType: HttpClientHelper.CallNotDeserializeByGet(string)
+  nameWithType.vb: HttpClientHelper.CallNotDeserializeByGet(String)
+- uid: Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet*
+  name: CallNotDeserializeByGet
+  href: api/Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallNotDeserializeByGet_
+  commentId: Overload:Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet
+  isSpec: "True"
+  fullName: Fantasy.Http.HttpClientHelper.CallNotDeserializeByGet
+  nameWithType: HttpClientHelper.CallNotDeserializeByGet
+- uid: Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost(System.String,System.Net.Http.HttpContent)
+  name: CallNotDeserializeByPost(string, HttpContent)
+  href: api/Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallNotDeserializeByPost_System_String_System_Net_Http_HttpContent_
+  commentId: M:Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost(System.String,System.Net.Http.HttpContent)
+  name.vb: CallNotDeserializeByPost(String, HttpContent)
+  fullName: Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost(string, System.Net.Http.HttpContent)
+  fullName.vb: Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost(String, System.Net.Http.HttpContent)
+  nameWithType: HttpClientHelper.CallNotDeserializeByPost(string, HttpContent)
+  nameWithType.vb: HttpClientHelper.CallNotDeserializeByPost(String, HttpContent)
+- uid: Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost*
+  name: CallNotDeserializeByPost
+  href: api/Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_CallNotDeserializeByPost_
+  commentId: Overload:Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost
+  isSpec: "True"
+  fullName: Fantasy.Http.HttpClientHelper.CallNotDeserializeByPost
+  nameWithType: HttpClientHelper.CallNotDeserializeByPost
+- uid: Fantasy.Http.HttpClientHelper.Call``2(System.String,System.Int32,System.Net.Http.Headers.AuthenticationHeaderValue,System.String,System.Object[])
+  name: Call<TRequest, TResponse>(string, int, AuthenticationHeaderValue, string, params object[])
+  href: api/Fantasy.Http.HttpClientHelper.html#Fantasy_Http_HttpClientHelper_Call__2_System_String_System_Int32_System_Net_Http_Headers_AuthenticationHeaderValue_System_String_System_Object___
+  commentId: M:Fantasy.Http.HttpClientHelper.Call``2(System.String,System.Int32,System.Net.Http.Headers.AuthenticationHeaderValue,System.String,System.Object[])
+  name.vb: Call(Of TRequest, TResponse)(String, Integer, AuthenticationHeaderValue, String, ParamArray Object())
+  fullName: Fantasy.Http.HttpClientHelper.Call<TRequest, TResponse>(string, int, System.Net.Http.Headers.AuthenticationHeaderValue, string, params object[])
+  fullName.vb: Fantasy.Http.HttpClientHelper.Call(Of TRequest, TResponse)(String, Integer, System.Net.Http.Headers.AuthenticationHeaderValue, String, ParamArray Object())
+  nameWithType: HttpClientHelper.Call<TRequest, TResponse>(string, int, AuthenticationHeaderValue, string, params object[])
+  nameWithType.vb: HttpClientHelper.Call(Of TRequest, TResponse)(String, Integer, AuthenticationHeaderValue, String, ParamArray Object())
+- uid: Fantasy.Http.IJsonRpcRequest
+  name: IJsonRpcRequest
+  href: api/Fantasy.Http.IJsonRpcRequest.html
+  commentId: T:Fantasy.Http.IJsonRpcRequest
+  fullName: Fantasy.Http.IJsonRpcRequest
+  nameWithType: IJsonRpcRequest
+- uid: Fantasy.Http.IJsonRpcRequest.Init(System.String,System.Int32,System.Object[])
+  name: Init(string, int, params object[])
+  href: api/Fantasy.Http.IJsonRpcRequest.html#Fantasy_Http_IJsonRpcRequest_Init_System_String_System_Int32_System_Object___
+  commentId: M:Fantasy.Http.IJsonRpcRequest.Init(System.String,System.Int32,System.Object[])
+  name.vb: Init(String, Integer, ParamArray Object())
+  fullName: Fantasy.Http.IJsonRpcRequest.Init(string, int, params object[])
+  fullName.vb: Fantasy.Http.IJsonRpcRequest.Init(String, Integer, ParamArray Object())
+  nameWithType: IJsonRpcRequest.Init(string, int, params object[])
+  nameWithType.vb: IJsonRpcRequest.Init(String, Integer, ParamArray Object())
+- uid: Fantasy.Http.IJsonRpcRequest.Init*
+  name: Init
+  href: api/Fantasy.Http.IJsonRpcRequest.html#Fantasy_Http_IJsonRpcRequest_Init_
+  commentId: Overload:Fantasy.Http.IJsonRpcRequest.Init
+  isSpec: "True"
+  fullName: Fantasy.Http.IJsonRpcRequest.Init
+  nameWithType: IJsonRpcRequest.Init
 - uid: Fantasy.ILog
   name: ILog
   href: api/Fantasy.ILog.html
@@ -11497,522 +12010,88 @@ references:
   commentId: N:Fantasy.Network
   fullName: Fantasy.Network
   nameWithType: Fantasy.Network
-- uid: Fantasy.Network.AddressableHelper
-  name: AddressableHelper
-  href: api/Fantasy.Network.AddressableHelper.html
-  commentId: T:Fantasy.Network.AddressableHelper
-  fullName: Fantasy.Network.AddressableHelper
-  nameWithType: AddressableHelper
-- uid: Fantasy.Network.AddressableHelper.AddAddressable(Fantasy.Scene,System.Int64,System.Int64,System.Boolean)
-  name: AddAddressable(Scene, long, long, bool)
-  href: api/Fantasy.Network.AddressableHelper.html#Fantasy_Network_AddressableHelper_AddAddressable_Fantasy_Scene_System_Int64_System_Int64_System_Boolean_
-  commentId: M:Fantasy.Network.AddressableHelper.AddAddressable(Fantasy.Scene,System.Int64,System.Int64,System.Boolean)
-  name.vb: AddAddressable(Scene, Long, Long, Boolean)
-  fullName: Fantasy.Network.AddressableHelper.AddAddressable(Fantasy.Scene, long, long, bool)
-  fullName.vb: Fantasy.Network.AddressableHelper.AddAddressable(Fantasy.Scene, Long, Long, Boolean)
-  nameWithType: AddressableHelper.AddAddressable(Scene, long, long, bool)
-  nameWithType.vb: AddressableHelper.AddAddressable(Scene, Long, Long, Boolean)
-- uid: Fantasy.Network.AddressableHelper.AddAddressable*
-  name: AddAddressable
-  href: api/Fantasy.Network.AddressableHelper.html#Fantasy_Network_AddressableHelper_AddAddressable_
-  commentId: Overload:Fantasy.Network.AddressableHelper.AddAddressable
+- uid: Fantasy.Network.HTTP
+  name: Fantasy.Network.HTTP
+  href: api/Fantasy.Network.HTTP.html
+  commentId: N:Fantasy.Network.HTTP
+  fullName: Fantasy.Network.HTTP
+  nameWithType: Fantasy.Network.HTTP
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork
+  name: HTTPServerNetwork
+  href: api/Fantasy.Network.HTTP.HTTPServerNetwork.html
+  commentId: T:Fantasy.Network.HTTP.HTTPServerNetwork
+  fullName: Fantasy.Network.HTTP.HTTPServerNetwork
+  nameWithType: HTTPServerNetwork
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork.Initialize(Fantasy.Network.NetworkTarget,System.Collections.Generic.IEnumerable{System.String})
+  name: Initialize(NetworkTarget, IEnumerable<string>)
+  href: api/Fantasy.Network.HTTP.HTTPServerNetwork.html#Fantasy_Network_HTTP_HTTPServerNetwork_Initialize_Fantasy_Network_NetworkTarget_System_Collections_Generic_IEnumerable_System_String__
+  commentId: M:Fantasy.Network.HTTP.HTTPServerNetwork.Initialize(Fantasy.Network.NetworkTarget,System.Collections.Generic.IEnumerable{System.String})
+  name.vb: Initialize(NetworkTarget, IEnumerable(Of String))
+  fullName: Fantasy.Network.HTTP.HTTPServerNetwork.Initialize(Fantasy.Network.NetworkTarget, System.Collections.Generic.IEnumerable<string>)
+  fullName.vb: Fantasy.Network.HTTP.HTTPServerNetwork.Initialize(Fantasy.Network.NetworkTarget, System.Collections.Generic.IEnumerable(Of String))
+  nameWithType: HTTPServerNetwork.Initialize(NetworkTarget, IEnumerable<string>)
+  nameWithType.vb: HTTPServerNetwork.Initialize(NetworkTarget, IEnumerable(Of String))
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork.Initialize*
+  name: Initialize
+  href: api/Fantasy.Network.HTTP.HTTPServerNetwork.html#Fantasy_Network_HTTP_HTTPServerNetwork_Initialize_
+  commentId: Overload:Fantasy.Network.HTTP.HTTPServerNetwork.Initialize
   isSpec: "True"
-  fullName: Fantasy.Network.AddressableHelper.AddAddressable
-  nameWithType: AddressableHelper.AddAddressable
-- uid: Fantasy.Network.AddressableHelper.GetAddressableRouteId(Fantasy.Scene,System.Int64)
-  name: GetAddressableRouteId(Scene, long)
-  href: api/Fantasy.Network.AddressableHelper.html#Fantasy_Network_AddressableHelper_GetAddressableRouteId_Fantasy_Scene_System_Int64_
-  commentId: M:Fantasy.Network.AddressableHelper.GetAddressableRouteId(Fantasy.Scene,System.Int64)
-  name.vb: GetAddressableRouteId(Scene, Long)
-  fullName: Fantasy.Network.AddressableHelper.GetAddressableRouteId(Fantasy.Scene, long)
-  fullName.vb: Fantasy.Network.AddressableHelper.GetAddressableRouteId(Fantasy.Scene, Long)
-  nameWithType: AddressableHelper.GetAddressableRouteId(Scene, long)
-  nameWithType.vb: AddressableHelper.GetAddressableRouteId(Scene, Long)
-- uid: Fantasy.Network.AddressableHelper.GetAddressableRouteId*
-  name: GetAddressableRouteId
-  href: api/Fantasy.Network.AddressableHelper.html#Fantasy_Network_AddressableHelper_GetAddressableRouteId_
-  commentId: Overload:Fantasy.Network.AddressableHelper.GetAddressableRouteId
+  fullName: Fantasy.Network.HTTP.HTTPServerNetwork.Initialize
+  nameWithType: HTTPServerNetwork.Initialize
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel(System.UInt32)
+  name: RemoveChannel(uint)
+  href: api/Fantasy.Network.HTTP.HTTPServerNetwork.html#Fantasy_Network_HTTP_HTTPServerNetwork_RemoveChannel_System_UInt32_
+  commentId: M:Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel(System.UInt32)
+  name.vb: RemoveChannel(UInteger)
+  fullName: Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel(uint)
+  fullName.vb: Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel(UInteger)
+  nameWithType: HTTPServerNetwork.RemoveChannel(uint)
+  nameWithType.vb: HTTPServerNetwork.RemoveChannel(UInteger)
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel*
+  name: RemoveChannel
+  href: api/Fantasy.Network.HTTP.HTTPServerNetwork.html#Fantasy_Network_HTTP_HTTPServerNetwork_RemoveChannel_
+  commentId: Overload:Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel
   isSpec: "True"
-  fullName: Fantasy.Network.AddressableHelper.GetAddressableRouteId
-  nameWithType: AddressableHelper.GetAddressableRouteId
-- uid: Fantasy.Network.AddressableHelper.LockAddressable(Fantasy.Scene,System.Int64)
-  name: LockAddressable(Scene, long)
-  href: api/Fantasy.Network.AddressableHelper.html#Fantasy_Network_AddressableHelper_LockAddressable_Fantasy_Scene_System_Int64_
-  commentId: M:Fantasy.Network.AddressableHelper.LockAddressable(Fantasy.Scene,System.Int64)
-  name.vb: LockAddressable(Scene, Long)
-  fullName: Fantasy.Network.AddressableHelper.LockAddressable(Fantasy.Scene, long)
-  fullName.vb: Fantasy.Network.AddressableHelper.LockAddressable(Fantasy.Scene, Long)
-  nameWithType: AddressableHelper.LockAddressable(Scene, long)
-  nameWithType.vb: AddressableHelper.LockAddressable(Scene, Long)
-- uid: Fantasy.Network.AddressableHelper.LockAddressable*
-  name: LockAddressable
-  href: api/Fantasy.Network.AddressableHelper.html#Fantasy_Network_AddressableHelper_LockAddressable_
-  commentId: Overload:Fantasy.Network.AddressableHelper.LockAddressable
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableHelper.LockAddressable
-  nameWithType: AddressableHelper.LockAddressable
-- uid: Fantasy.Network.AddressableHelper.RemoveAddressable(Fantasy.Scene,System.Int64)
-  name: RemoveAddressable(Scene, long)
-  href: api/Fantasy.Network.AddressableHelper.html#Fantasy_Network_AddressableHelper_RemoveAddressable_Fantasy_Scene_System_Int64_
-  commentId: M:Fantasy.Network.AddressableHelper.RemoveAddressable(Fantasy.Scene,System.Int64)
-  name.vb: RemoveAddressable(Scene, Long)
-  fullName: Fantasy.Network.AddressableHelper.RemoveAddressable(Fantasy.Scene, long)
-  fullName.vb: Fantasy.Network.AddressableHelper.RemoveAddressable(Fantasy.Scene, Long)
-  nameWithType: AddressableHelper.RemoveAddressable(Scene, long)
-  nameWithType.vb: AddressableHelper.RemoveAddressable(Scene, Long)
-- uid: Fantasy.Network.AddressableHelper.RemoveAddressable*
-  name: RemoveAddressable
-  href: api/Fantasy.Network.AddressableHelper.html#Fantasy_Network_AddressableHelper_RemoveAddressable_
-  commentId: Overload:Fantasy.Network.AddressableHelper.RemoveAddressable
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableHelper.RemoveAddressable
-  nameWithType: AddressableHelper.RemoveAddressable
-- uid: Fantasy.Network.AddressableHelper.UnLockAddressable(Fantasy.Scene,System.Int64,System.Int64,System.String)
-  name: UnLockAddressable(Scene, long, long, string)
-  href: api/Fantasy.Network.AddressableHelper.html#Fantasy_Network_AddressableHelper_UnLockAddressable_Fantasy_Scene_System_Int64_System_Int64_System_String_
-  commentId: M:Fantasy.Network.AddressableHelper.UnLockAddressable(Fantasy.Scene,System.Int64,System.Int64,System.String)
-  name.vb: UnLockAddressable(Scene, Long, Long, String)
-  fullName: Fantasy.Network.AddressableHelper.UnLockAddressable(Fantasy.Scene, long, long, string)
-  fullName.vb: Fantasy.Network.AddressableHelper.UnLockAddressable(Fantasy.Scene, Long, Long, String)
-  nameWithType: AddressableHelper.UnLockAddressable(Scene, long, long, string)
-  nameWithType.vb: AddressableHelper.UnLockAddressable(Scene, Long, Long, String)
-- uid: Fantasy.Network.AddressableHelper.UnLockAddressable*
-  name: UnLockAddressable
-  href: api/Fantasy.Network.AddressableHelper.html#Fantasy_Network_AddressableHelper_UnLockAddressable_
-  commentId: Overload:Fantasy.Network.AddressableHelper.UnLockAddressable
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableHelper.UnLockAddressable
-  nameWithType: AddressableHelper.UnLockAddressable
-- uid: Fantasy.Network.AddressableManageComponent
-  name: AddressableManageComponent
-  href: api/Fantasy.Network.AddressableManageComponent.html
-  commentId: T:Fantasy.Network.AddressableManageComponent
-  fullName: Fantasy.Network.AddressableManageComponent
-  nameWithType: AddressableManageComponent
-- uid: Fantasy.Network.AddressableManageComponent.Add(System.Int64,System.Int64,System.Boolean)
-  name: Add(long, long, bool)
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_Add_System_Int64_System_Int64_System_Boolean_
-  commentId: M:Fantasy.Network.AddressableManageComponent.Add(System.Int64,System.Int64,System.Boolean)
-  name.vb: Add(Long, Long, Boolean)
-  fullName: Fantasy.Network.AddressableManageComponent.Add(long, long, bool)
-  fullName.vb: Fantasy.Network.AddressableManageComponent.Add(Long, Long, Boolean)
-  nameWithType: AddressableManageComponent.Add(long, long, bool)
-  nameWithType.vb: AddressableManageComponent.Add(Long, Long, Boolean)
-- uid: Fantasy.Network.AddressableManageComponent.Add*
-  name: Add
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_Add_
-  commentId: Overload:Fantasy.Network.AddressableManageComponent.Add
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableManageComponent.Add
-  nameWithType: AddressableManageComponent.Add
-- uid: Fantasy.Network.AddressableManageComponent.Addressable
-  name: Addressable
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_Addressable
-  commentId: F:Fantasy.Network.AddressableManageComponent.Addressable
-  fullName: Fantasy.Network.AddressableManageComponent.Addressable
-  nameWithType: AddressableManageComponent.Addressable
-- uid: Fantasy.Network.AddressableManageComponent.AddressableLock
-  name: AddressableLock
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_AddressableLock
-  commentId: F:Fantasy.Network.AddressableManageComponent.AddressableLock
-  fullName: Fantasy.Network.AddressableManageComponent.AddressableLock
-  nameWithType: AddressableManageComponent.AddressableLock
-- uid: Fantasy.Network.AddressableManageComponent.Get(System.Int64)
-  name: Get(long)
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_Get_System_Int64_
-  commentId: M:Fantasy.Network.AddressableManageComponent.Get(System.Int64)
-  name.vb: Get(Long)
-  fullName: Fantasy.Network.AddressableManageComponent.Get(long)
-  fullName.vb: Fantasy.Network.AddressableManageComponent.Get(Long)
-  nameWithType: AddressableManageComponent.Get(long)
-  nameWithType.vb: AddressableManageComponent.Get(Long)
-- uid: Fantasy.Network.AddressableManageComponent.Get*
-  name: Get
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_Get_
-  commentId: Overload:Fantasy.Network.AddressableManageComponent.Get
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableManageComponent.Get
-  nameWithType: AddressableManageComponent.Get
-- uid: Fantasy.Network.AddressableManageComponent.Lock(System.Int64)
-  name: Lock(long)
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_Lock_System_Int64_
-  commentId: M:Fantasy.Network.AddressableManageComponent.Lock(System.Int64)
-  name.vb: Lock(Long)
-  fullName: Fantasy.Network.AddressableManageComponent.Lock(long)
-  fullName.vb: Fantasy.Network.AddressableManageComponent.Lock(Long)
-  nameWithType: AddressableManageComponent.Lock(long)
-  nameWithType.vb: AddressableManageComponent.Lock(Long)
-- uid: Fantasy.Network.AddressableManageComponent.Lock*
-  name: Lock
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_Lock_
-  commentId: Overload:Fantasy.Network.AddressableManageComponent.Lock
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableManageComponent.Lock
-  nameWithType: AddressableManageComponent.Lock
-- uid: Fantasy.Network.AddressableManageComponent.Locks
-  name: Locks
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_Locks
-  commentId: F:Fantasy.Network.AddressableManageComponent.Locks
-  fullName: Fantasy.Network.AddressableManageComponent.Locks
-  nameWithType: AddressableManageComponent.Locks
-- uid: Fantasy.Network.AddressableManageComponent.Remove(System.Int64)
-  name: Remove(long)
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_Remove_System_Int64_
-  commentId: M:Fantasy.Network.AddressableManageComponent.Remove(System.Int64)
-  name.vb: Remove(Long)
-  fullName: Fantasy.Network.AddressableManageComponent.Remove(long)
-  fullName.vb: Fantasy.Network.AddressableManageComponent.Remove(Long)
-  nameWithType: AddressableManageComponent.Remove(long)
-  nameWithType.vb: AddressableManageComponent.Remove(Long)
-- uid: Fantasy.Network.AddressableManageComponent.Remove*
-  name: Remove
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_Remove_
-  commentId: Overload:Fantasy.Network.AddressableManageComponent.Remove
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableManageComponent.Remove
-  nameWithType: AddressableManageComponent.Remove
-- uid: Fantasy.Network.AddressableManageComponent.UnLock(System.Int64,System.Int64,System.String)
-  name: UnLock(long, long, string)
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_UnLock_System_Int64_System_Int64_System_String_
-  commentId: M:Fantasy.Network.AddressableManageComponent.UnLock(System.Int64,System.Int64,System.String)
-  name.vb: UnLock(Long, Long, String)
-  fullName: Fantasy.Network.AddressableManageComponent.UnLock(long, long, string)
-  fullName.vb: Fantasy.Network.AddressableManageComponent.UnLock(Long, Long, String)
-  nameWithType: AddressableManageComponent.UnLock(long, long, string)
-  nameWithType.vb: AddressableManageComponent.UnLock(Long, Long, String)
-- uid: Fantasy.Network.AddressableManageComponent.UnLock*
-  name: UnLock
-  href: api/Fantasy.Network.AddressableManageComponent.html#Fantasy_Network_AddressableManageComponent_UnLock_
-  commentId: Overload:Fantasy.Network.AddressableManageComponent.UnLock
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableManageComponent.UnLock
-  nameWithType: AddressableManageComponent.UnLock
-- uid: Fantasy.Network.AddressableManageComponentAwakeSystem
-  name: AddressableManageComponentAwakeSystem
-  href: api/Fantasy.Network.AddressableManageComponentAwakeSystem.html
-  commentId: T:Fantasy.Network.AddressableManageComponentAwakeSystem
-  fullName: Fantasy.Network.AddressableManageComponentAwakeSystem
-  nameWithType: AddressableManageComponentAwakeSystem
-- uid: Fantasy.Network.AddressableManageComponentAwakeSystem.Awake(Fantasy.Network.AddressableManageComponent)
-  name: Awake(AddressableManageComponent)
-  href: api/Fantasy.Network.AddressableManageComponentAwakeSystem.html#Fantasy_Network_AddressableManageComponentAwakeSystem_Awake_Fantasy_Network_AddressableManageComponent_
-  commentId: M:Fantasy.Network.AddressableManageComponentAwakeSystem.Awake(Fantasy.Network.AddressableManageComponent)
-  fullName: Fantasy.Network.AddressableManageComponentAwakeSystem.Awake(Fantasy.Network.AddressableManageComponent)
-  nameWithType: AddressableManageComponentAwakeSystem.Awake(AddressableManageComponent)
-- uid: Fantasy.Network.AddressableManageComponentAwakeSystem.Awake*
-  name: Awake
-  href: api/Fantasy.Network.AddressableManageComponentAwakeSystem.html#Fantasy_Network_AddressableManageComponentAwakeSystem_Awake_
-  commentId: Overload:Fantasy.Network.AddressableManageComponentAwakeSystem.Awake
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableManageComponentAwakeSystem.Awake
-  nameWithType: AddressableManageComponentAwakeSystem.Awake
-- uid: Fantasy.Network.AddressableManageComponentDestroySystem
-  name: AddressableManageComponentDestroySystem
-  href: api/Fantasy.Network.AddressableManageComponentDestroySystem.html
-  commentId: T:Fantasy.Network.AddressableManageComponentDestroySystem
-  fullName: Fantasy.Network.AddressableManageComponentDestroySystem
-  nameWithType: AddressableManageComponentDestroySystem
-- uid: Fantasy.Network.AddressableManageComponentDestroySystem.Destroy(Fantasy.Network.AddressableManageComponent)
-  name: Destroy(AddressableManageComponent)
-  href: api/Fantasy.Network.AddressableManageComponentDestroySystem.html#Fantasy_Network_AddressableManageComponentDestroySystem_Destroy_Fantasy_Network_AddressableManageComponent_
-  commentId: M:Fantasy.Network.AddressableManageComponentDestroySystem.Destroy(Fantasy.Network.AddressableManageComponent)
-  fullName: Fantasy.Network.AddressableManageComponentDestroySystem.Destroy(Fantasy.Network.AddressableManageComponent)
-  nameWithType: AddressableManageComponentDestroySystem.Destroy(AddressableManageComponent)
-- uid: Fantasy.Network.AddressableManageComponentDestroySystem.Destroy*
-  name: Destroy
-  href: api/Fantasy.Network.AddressableManageComponentDestroySystem.html#Fantasy_Network_AddressableManageComponentDestroySystem_Destroy_
-  commentId: Overload:Fantasy.Network.AddressableManageComponentDestroySystem.Destroy
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableManageComponentDestroySystem.Destroy
-  nameWithType: AddressableManageComponentDestroySystem.Destroy
-- uid: Fantasy.Network.AddressableMessageComponent
-  name: AddressableMessageComponent
-  href: api/Fantasy.Network.AddressableMessageComponent.html
-  commentId: T:Fantasy.Network.AddressableMessageComponent
-  fullName: Fantasy.Network.AddressableMessageComponent
-  nameWithType: AddressableMessageComponent
-- uid: Fantasy.Network.AddressableMessageComponent.AddressableId
-  name: AddressableId
-  href: api/Fantasy.Network.AddressableMessageComponent.html#Fantasy_Network_AddressableMessageComponent_AddressableId
-  commentId: F:Fantasy.Network.AddressableMessageComponent.AddressableId
-  fullName: Fantasy.Network.AddressableMessageComponent.AddressableId
-  nameWithType: AddressableMessageComponent.AddressableId
-- uid: Fantasy.Network.AddressableMessageComponent.Lock
-  name: Lock()
-  href: api/Fantasy.Network.AddressableMessageComponent.html#Fantasy_Network_AddressableMessageComponent_Lock
-  commentId: M:Fantasy.Network.AddressableMessageComponent.Lock
-  fullName: Fantasy.Network.AddressableMessageComponent.Lock()
-  nameWithType: AddressableMessageComponent.Lock()
-- uid: Fantasy.Network.AddressableMessageComponent.Lock*
-  name: Lock
-  href: api/Fantasy.Network.AddressableMessageComponent.html#Fantasy_Network_AddressableMessageComponent_Lock_
-  commentId: Overload:Fantasy.Network.AddressableMessageComponent.Lock
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableMessageComponent.Lock
-  nameWithType: AddressableMessageComponent.Lock
-- uid: Fantasy.Network.AddressableMessageComponent.Register(System.Boolean)
-  name: Register(bool)
-  href: api/Fantasy.Network.AddressableMessageComponent.html#Fantasy_Network_AddressableMessageComponent_Register_System_Boolean_
-  commentId: M:Fantasy.Network.AddressableMessageComponent.Register(System.Boolean)
-  name.vb: Register(Boolean)
-  fullName: Fantasy.Network.AddressableMessageComponent.Register(bool)
-  fullName.vb: Fantasy.Network.AddressableMessageComponent.Register(Boolean)
-  nameWithType: AddressableMessageComponent.Register(bool)
-  nameWithType.vb: AddressableMessageComponent.Register(Boolean)
-- uid: Fantasy.Network.AddressableMessageComponent.Register*
-  name: Register
-  href: api/Fantasy.Network.AddressableMessageComponent.html#Fantasy_Network_AddressableMessageComponent_Register_
-  commentId: Overload:Fantasy.Network.AddressableMessageComponent.Register
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableMessageComponent.Register
-  nameWithType: AddressableMessageComponent.Register
-- uid: Fantasy.Network.AddressableMessageComponent.UnLock(System.String)
-  name: UnLock(string)
-  href: api/Fantasy.Network.AddressableMessageComponent.html#Fantasy_Network_AddressableMessageComponent_UnLock_System_String_
-  commentId: M:Fantasy.Network.AddressableMessageComponent.UnLock(System.String)
-  name.vb: UnLock(String)
-  fullName: Fantasy.Network.AddressableMessageComponent.UnLock(string)
-  fullName.vb: Fantasy.Network.AddressableMessageComponent.UnLock(String)
-  nameWithType: AddressableMessageComponent.UnLock(string)
-  nameWithType.vb: AddressableMessageComponent.UnLock(String)
-- uid: Fantasy.Network.AddressableMessageComponent.UnLock*
-  name: UnLock
-  href: api/Fantasy.Network.AddressableMessageComponent.html#Fantasy_Network_AddressableMessageComponent_UnLock_
-  commentId: Overload:Fantasy.Network.AddressableMessageComponent.UnLock
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableMessageComponent.UnLock
-  nameWithType: AddressableMessageComponent.UnLock
-- uid: Fantasy.Network.AddressableMessageComponentDestroySystem
-  name: AddressableMessageComponentDestroySystem
-  href: api/Fantasy.Network.AddressableMessageComponentDestroySystem.html
-  commentId: T:Fantasy.Network.AddressableMessageComponentDestroySystem
-  fullName: Fantasy.Network.AddressableMessageComponentDestroySystem
-  nameWithType: AddressableMessageComponentDestroySystem
-- uid: Fantasy.Network.AddressableMessageComponentDestroySystem.Destroy(Fantasy.Network.AddressableMessageComponent)
-  name: Destroy(AddressableMessageComponent)
-  href: api/Fantasy.Network.AddressableMessageComponentDestroySystem.html#Fantasy_Network_AddressableMessageComponentDestroySystem_Destroy_Fantasy_Network_AddressableMessageComponent_
-  commentId: M:Fantasy.Network.AddressableMessageComponentDestroySystem.Destroy(Fantasy.Network.AddressableMessageComponent)
-  fullName: Fantasy.Network.AddressableMessageComponentDestroySystem.Destroy(Fantasy.Network.AddressableMessageComponent)
-  nameWithType: AddressableMessageComponentDestroySystem.Destroy(AddressableMessageComponent)
-- uid: Fantasy.Network.AddressableMessageComponentDestroySystem.Destroy*
-  name: Destroy
-  href: api/Fantasy.Network.AddressableMessageComponentDestroySystem.html#Fantasy_Network_AddressableMessageComponentDestroySystem_Destroy_
-  commentId: Overload:Fantasy.Network.AddressableMessageComponentDestroySystem.Destroy
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableMessageComponentDestroySystem.Destroy
-  nameWithType: AddressableMessageComponentDestroySystem.Destroy
-- uid: Fantasy.Network.AddressableRouteComponent
-  name: AddressableRouteComponent
-  href: api/Fantasy.Network.AddressableRouteComponent.html
-  commentId: T:Fantasy.Network.AddressableRouteComponent
-  fullName: Fantasy.Network.AddressableRouteComponent
-  nameWithType: AddressableRouteComponent
-- uid: Fantasy.Network.AddressableRouteComponent.AddressableId
-  name: AddressableId
-  href: api/Fantasy.Network.AddressableRouteComponent.html#Fantasy_Network_AddressableRouteComponent_AddressableId
-  commentId: F:Fantasy.Network.AddressableRouteComponent.AddressableId
-  fullName: Fantasy.Network.AddressableRouteComponent.AddressableId
-  nameWithType: AddressableRouteComponent.AddressableId
-- uid: Fantasy.Network.AddressableRouteComponent.AddressableRouteLock
-  name: AddressableRouteLock
-  href: api/Fantasy.Network.AddressableRouteComponent.html#Fantasy_Network_AddressableRouteComponent_AddressableRouteLock
-  commentId: F:Fantasy.Network.AddressableRouteComponent.AddressableRouteLock
-  fullName: Fantasy.Network.AddressableRouteComponent.AddressableRouteLock
-  nameWithType: AddressableRouteComponent.AddressableRouteLock
-- uid: Fantasy.Network.AddressableRouteComponent.MessageDispatcherComponent
-  name: MessageDispatcherComponent
-  href: api/Fantasy.Network.AddressableRouteComponent.html#Fantasy_Network_AddressableRouteComponent_MessageDispatcherComponent
-  commentId: F:Fantasy.Network.AddressableRouteComponent.MessageDispatcherComponent
-  fullName: Fantasy.Network.AddressableRouteComponent.MessageDispatcherComponent
-  nameWithType: AddressableRouteComponent.MessageDispatcherComponent
-- uid: Fantasy.Network.AddressableRouteComponent.NetworkMessagingComponent
-  name: NetworkMessagingComponent
-  href: api/Fantasy.Network.AddressableRouteComponent.html#Fantasy_Network_AddressableRouteComponent_NetworkMessagingComponent
-  commentId: F:Fantasy.Network.AddressableRouteComponent.NetworkMessagingComponent
-  fullName: Fantasy.Network.AddressableRouteComponent.NetworkMessagingComponent
-  nameWithType: AddressableRouteComponent.NetworkMessagingComponent
-- uid: Fantasy.Network.AddressableRouteComponent.RouteId
-  name: RouteId
-  href: api/Fantasy.Network.AddressableRouteComponent.html#Fantasy_Network_AddressableRouteComponent_RouteId
-  commentId: F:Fantasy.Network.AddressableRouteComponent.RouteId
-  fullName: Fantasy.Network.AddressableRouteComponent.RouteId
-  nameWithType: AddressableRouteComponent.RouteId
-- uid: Fantasy.Network.AddressableRouteComponent.TimerComponent
-  name: TimerComponent
-  href: api/Fantasy.Network.AddressableRouteComponent.html#Fantasy_Network_AddressableRouteComponent_TimerComponent
-  commentId: F:Fantasy.Network.AddressableRouteComponent.TimerComponent
-  fullName: Fantasy.Network.AddressableRouteComponent.TimerComponent
-  nameWithType: AddressableRouteComponent.TimerComponent
-- uid: Fantasy.Network.AddressableRouteComponentAwakeSystem
-  name: AddressableRouteComponentAwakeSystem
-  href: api/Fantasy.Network.AddressableRouteComponentAwakeSystem.html
-  commentId: T:Fantasy.Network.AddressableRouteComponentAwakeSystem
-  fullName: Fantasy.Network.AddressableRouteComponentAwakeSystem
-  nameWithType: AddressableRouteComponentAwakeSystem
-- uid: Fantasy.Network.AddressableRouteComponentAwakeSystem.Awake(Fantasy.Network.AddressableRouteComponent)
-  name: Awake(AddressableRouteComponent)
-  href: api/Fantasy.Network.AddressableRouteComponentAwakeSystem.html#Fantasy_Network_AddressableRouteComponentAwakeSystem_Awake_Fantasy_Network_AddressableRouteComponent_
-  commentId: M:Fantasy.Network.AddressableRouteComponentAwakeSystem.Awake(Fantasy.Network.AddressableRouteComponent)
-  fullName: Fantasy.Network.AddressableRouteComponentAwakeSystem.Awake(Fantasy.Network.AddressableRouteComponent)
-  nameWithType: AddressableRouteComponentAwakeSystem.Awake(AddressableRouteComponent)
-- uid: Fantasy.Network.AddressableRouteComponentAwakeSystem.Awake*
-  name: Awake
-  href: api/Fantasy.Network.AddressableRouteComponentAwakeSystem.html#Fantasy_Network_AddressableRouteComponentAwakeSystem_Awake_
-  commentId: Overload:Fantasy.Network.AddressableRouteComponentAwakeSystem.Awake
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableRouteComponentAwakeSystem.Awake
-  nameWithType: AddressableRouteComponentAwakeSystem.Awake
-- uid: Fantasy.Network.AddressableRouteComponentDestroySystem
-  name: AddressableRouteComponentDestroySystem
-  href: api/Fantasy.Network.AddressableRouteComponentDestroySystem.html
-  commentId: T:Fantasy.Network.AddressableRouteComponentDestroySystem
-  fullName: Fantasy.Network.AddressableRouteComponentDestroySystem
-  nameWithType: AddressableRouteComponentDestroySystem
-- uid: Fantasy.Network.AddressableRouteComponentDestroySystem.Destroy(Fantasy.Network.AddressableRouteComponent)
-  name: Destroy(AddressableRouteComponent)
-  href: api/Fantasy.Network.AddressableRouteComponentDestroySystem.html#Fantasy_Network_AddressableRouteComponentDestroySystem_Destroy_Fantasy_Network_AddressableRouteComponent_
-  commentId: M:Fantasy.Network.AddressableRouteComponentDestroySystem.Destroy(Fantasy.Network.AddressableRouteComponent)
-  fullName: Fantasy.Network.AddressableRouteComponentDestroySystem.Destroy(Fantasy.Network.AddressableRouteComponent)
-  nameWithType: AddressableRouteComponentDestroySystem.Destroy(AddressableRouteComponent)
-- uid: Fantasy.Network.AddressableRouteComponentDestroySystem.Destroy*
-  name: Destroy
-  href: api/Fantasy.Network.AddressableRouteComponentDestroySystem.html#Fantasy_Network_AddressableRouteComponentDestroySystem_Destroy_
-  commentId: Overload:Fantasy.Network.AddressableRouteComponentDestroySystem.Destroy
-  isSpec: "True"
-  fullName: Fantasy.Network.AddressableRouteComponentDestroySystem.Destroy
-  nameWithType: AddressableRouteComponentDestroySystem.Destroy
-- uid: Fantasy.Network.AddressableScene
-  name: AddressableScene
-  href: api/Fantasy.Network.AddressableScene.html
-  commentId: T:Fantasy.Network.AddressableScene
-  fullName: Fantasy.Network.AddressableScene
-  nameWithType: AddressableScene
-- uid: Fantasy.Network.AddressableScene.#ctor(Fantasy.Platform.Net.SceneConfig)
-  name: AddressableScene(SceneConfig)
-  href: api/Fantasy.Network.AddressableScene.html#Fantasy_Network_AddressableScene__ctor_Fantasy_Platform_Net_SceneConfig_
-  commentId: M:Fantasy.Network.AddressableScene.#ctor(Fantasy.Platform.Net.SceneConfig)
-  name.vb: New(SceneConfig)
-  fullName: Fantasy.Network.AddressableScene.AddressableScene(Fantasy.Platform.Net.SceneConfig)
-  fullName.vb: Fantasy.Network.AddressableScene.New(Fantasy.Platform.Net.SceneConfig)
-  nameWithType: AddressableScene.AddressableScene(SceneConfig)
-  nameWithType.vb: AddressableScene.New(SceneConfig)
-- uid: Fantasy.Network.AddressableScene.#ctor*
-  name: AddressableScene
-  href: api/Fantasy.Network.AddressableScene.html#Fantasy_Network_AddressableScene__ctor_
-  commentId: Overload:Fantasy.Network.AddressableScene.#ctor
+  fullName: Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel
+  nameWithType: HTTPServerNetwork.RemoveChannel
+- uid: Fantasy.Network.HTTP.SceneContextFilter
+  name: SceneContextFilter
+  href: api/Fantasy.Network.HTTP.SceneContextFilter.html
+  commentId: T:Fantasy.Network.HTTP.SceneContextFilter
+  fullName: Fantasy.Network.HTTP.SceneContextFilter
+  nameWithType: SceneContextFilter
+- uid: Fantasy.Network.HTTP.SceneContextFilter.#ctor(Fantasy.Scene)
+  name: SceneContextFilter(Scene)
+  href: api/Fantasy.Network.HTTP.SceneContextFilter.html#Fantasy_Network_HTTP_SceneContextFilter__ctor_Fantasy_Scene_
+  commentId: M:Fantasy.Network.HTTP.SceneContextFilter.#ctor(Fantasy.Scene)
+  name.vb: New(Scene)
+  fullName: Fantasy.Network.HTTP.SceneContextFilter.SceneContextFilter(Fantasy.Scene)
+  fullName.vb: Fantasy.Network.HTTP.SceneContextFilter.New(Fantasy.Scene)
+  nameWithType: SceneContextFilter.SceneContextFilter(Scene)
+  nameWithType.vb: SceneContextFilter.New(Scene)
+- uid: Fantasy.Network.HTTP.SceneContextFilter.#ctor*
+  name: SceneContextFilter
+  href: api/Fantasy.Network.HTTP.SceneContextFilter.html#Fantasy_Network_HTTP_SceneContextFilter__ctor_
+  commentId: Overload:Fantasy.Network.HTTP.SceneContextFilter.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: Fantasy.Network.AddressableScene.AddressableScene
-  fullName.vb: Fantasy.Network.AddressableScene.New
-  nameWithType: AddressableScene.AddressableScene
-  nameWithType.vb: AddressableScene.New
-- uid: Fantasy.Network.AddressableScene.Id
-  name: Id
-  href: api/Fantasy.Network.AddressableScene.html#Fantasy_Network_AddressableScene_Id
-  commentId: F:Fantasy.Network.AddressableScene.Id
-  fullName: Fantasy.Network.AddressableScene.Id
-  nameWithType: AddressableScene.Id
-- uid: Fantasy.Network.AddressableScene.RunTimeId
-  name: RunTimeId
-  href: api/Fantasy.Network.AddressableScene.html#Fantasy_Network_AddressableScene_RunTimeId
-  commentId: F:Fantasy.Network.AddressableScene.RunTimeId
-  fullName: Fantasy.Network.AddressableScene.RunTimeId
-  nameWithType: AddressableScene.RunTimeId
-- uid: Fantasy.Network.I_AddressableAddHandler
-  name: I_AddressableAddHandler
-  href: api/Fantasy.Network.I_AddressableAddHandler.html
-  commentId: T:Fantasy.Network.I_AddressableAddHandler
-  fullName: Fantasy.Network.I_AddressableAddHandler
-  nameWithType: I_AddressableAddHandler
-- uid: Fantasy.Network.I_AddressableAddHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableAdd_Request,Fantasy.InnerMessage.I_AddressableAdd_Response,System.Action)
-  name: Run(Scene, I_AddressableAdd_Request, I_AddressableAdd_Response, Action)
-  href: api/Fantasy.Network.I_AddressableAddHandler.html#Fantasy_Network_I_AddressableAddHandler_Run_Fantasy_Scene_Fantasy_InnerMessage_I_AddressableAdd_Request_Fantasy_InnerMessage_I_AddressableAdd_Response_System_Action_
-  commentId: M:Fantasy.Network.I_AddressableAddHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableAdd_Request,Fantasy.InnerMessage.I_AddressableAdd_Response,System.Action)
-  fullName: Fantasy.Network.I_AddressableAddHandler.Run(Fantasy.Scene, Fantasy.InnerMessage.I_AddressableAdd_Request, Fantasy.InnerMessage.I_AddressableAdd_Response, System.Action)
-  nameWithType: I_AddressableAddHandler.Run(Scene, I_AddressableAdd_Request, I_AddressableAdd_Response, Action)
-- uid: Fantasy.Network.I_AddressableAddHandler.Run*
-  name: Run
-  href: api/Fantasy.Network.I_AddressableAddHandler.html#Fantasy_Network_I_AddressableAddHandler_Run_
-  commentId: Overload:Fantasy.Network.I_AddressableAddHandler.Run
+  fullName: Fantasy.Network.HTTP.SceneContextFilter.SceneContextFilter
+  fullName.vb: Fantasy.Network.HTTP.SceneContextFilter.New
+  nameWithType: SceneContextFilter.SceneContextFilter
+  nameWithType.vb: SceneContextFilter.New
+- uid: Fantasy.Network.HTTP.SceneContextFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)
+  name: OnActionExecutionAsync(ActionExecutingContext, ActionExecutionDelegate)
+  href: api/Fantasy.Network.HTTP.SceneContextFilter.html#Fantasy_Network_HTTP_SceneContextFilter_OnActionExecutionAsync_Microsoft_AspNetCore_Mvc_Filters_ActionExecutingContext_Microsoft_AspNetCore_Mvc_Filters_ActionExecutionDelegate_
+  commentId: M:Fantasy.Network.HTTP.SceneContextFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)
+  fullName: Fantasy.Network.HTTP.SceneContextFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext, Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)
+  nameWithType: SceneContextFilter.OnActionExecutionAsync(ActionExecutingContext, ActionExecutionDelegate)
+- uid: Fantasy.Network.HTTP.SceneContextFilter.OnActionExecutionAsync*
+  name: OnActionExecutionAsync
+  href: api/Fantasy.Network.HTTP.SceneContextFilter.html#Fantasy_Network_HTTP_SceneContextFilter_OnActionExecutionAsync_
+  commentId: Overload:Fantasy.Network.HTTP.SceneContextFilter.OnActionExecutionAsync
   isSpec: "True"
-  fullName: Fantasy.Network.I_AddressableAddHandler.Run
-  nameWithType: I_AddressableAddHandler.Run
-- uid: Fantasy.Network.I_AddressableGetHandler
-  name: I_AddressableGetHandler
-  href: api/Fantasy.Network.I_AddressableGetHandler.html
-  commentId: T:Fantasy.Network.I_AddressableGetHandler
-  fullName: Fantasy.Network.I_AddressableGetHandler
-  nameWithType: I_AddressableGetHandler
-- uid: Fantasy.Network.I_AddressableGetHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableGet_Request,Fantasy.InnerMessage.I_AddressableGet_Response,System.Action)
-  name: Run(Scene, I_AddressableGet_Request, I_AddressableGet_Response, Action)
-  href: api/Fantasy.Network.I_AddressableGetHandler.html#Fantasy_Network_I_AddressableGetHandler_Run_Fantasy_Scene_Fantasy_InnerMessage_I_AddressableGet_Request_Fantasy_InnerMessage_I_AddressableGet_Response_System_Action_
-  commentId: M:Fantasy.Network.I_AddressableGetHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableGet_Request,Fantasy.InnerMessage.I_AddressableGet_Response,System.Action)
-  fullName: Fantasy.Network.I_AddressableGetHandler.Run(Fantasy.Scene, Fantasy.InnerMessage.I_AddressableGet_Request, Fantasy.InnerMessage.I_AddressableGet_Response, System.Action)
-  nameWithType: I_AddressableGetHandler.Run(Scene, I_AddressableGet_Request, I_AddressableGet_Response, Action)
-- uid: Fantasy.Network.I_AddressableGetHandler.Run*
-  name: Run
-  href: api/Fantasy.Network.I_AddressableGetHandler.html#Fantasy_Network_I_AddressableGetHandler_Run_
-  commentId: Overload:Fantasy.Network.I_AddressableGetHandler.Run
-  isSpec: "True"
-  fullName: Fantasy.Network.I_AddressableGetHandler.Run
-  nameWithType: I_AddressableGetHandler.Run
-- uid: Fantasy.Network.I_AddressableLockHandler
-  name: I_AddressableLockHandler
-  href: api/Fantasy.Network.I_AddressableLockHandler.html
-  commentId: T:Fantasy.Network.I_AddressableLockHandler
-  fullName: Fantasy.Network.I_AddressableLockHandler
-  nameWithType: I_AddressableLockHandler
-- uid: Fantasy.Network.I_AddressableLockHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableLock_Request,Fantasy.InnerMessage.I_AddressableLock_Response,System.Action)
-  name: Run(Scene, I_AddressableLock_Request, I_AddressableLock_Response, Action)
-  href: api/Fantasy.Network.I_AddressableLockHandler.html#Fantasy_Network_I_AddressableLockHandler_Run_Fantasy_Scene_Fantasy_InnerMessage_I_AddressableLock_Request_Fantasy_InnerMessage_I_AddressableLock_Response_System_Action_
-  commentId: M:Fantasy.Network.I_AddressableLockHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableLock_Request,Fantasy.InnerMessage.I_AddressableLock_Response,System.Action)
-  fullName: Fantasy.Network.I_AddressableLockHandler.Run(Fantasy.Scene, Fantasy.InnerMessage.I_AddressableLock_Request, Fantasy.InnerMessage.I_AddressableLock_Response, System.Action)
-  nameWithType: I_AddressableLockHandler.Run(Scene, I_AddressableLock_Request, I_AddressableLock_Response, Action)
-- uid: Fantasy.Network.I_AddressableLockHandler.Run*
-  name: Run
-  href: api/Fantasy.Network.I_AddressableLockHandler.html#Fantasy_Network_I_AddressableLockHandler_Run_
-  commentId: Overload:Fantasy.Network.I_AddressableLockHandler.Run
-  isSpec: "True"
-  fullName: Fantasy.Network.I_AddressableLockHandler.Run
-  nameWithType: I_AddressableLockHandler.Run
-- uid: Fantasy.Network.I_AddressableRemoveHandler
-  name: I_AddressableRemoveHandler
-  href: api/Fantasy.Network.I_AddressableRemoveHandler.html
-  commentId: T:Fantasy.Network.I_AddressableRemoveHandler
-  fullName: Fantasy.Network.I_AddressableRemoveHandler
-  nameWithType: I_AddressableRemoveHandler
-- uid: Fantasy.Network.I_AddressableRemoveHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableRemove_Request,Fantasy.InnerMessage.I_AddressableRemove_Response,System.Action)
-  name: Run(Scene, I_AddressableRemove_Request, I_AddressableRemove_Response, Action)
-  href: api/Fantasy.Network.I_AddressableRemoveHandler.html#Fantasy_Network_I_AddressableRemoveHandler_Run_Fantasy_Scene_Fantasy_InnerMessage_I_AddressableRemove_Request_Fantasy_InnerMessage_I_AddressableRemove_Response_System_Action_
-  commentId: M:Fantasy.Network.I_AddressableRemoveHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableRemove_Request,Fantasy.InnerMessage.I_AddressableRemove_Response,System.Action)
-  fullName: Fantasy.Network.I_AddressableRemoveHandler.Run(Fantasy.Scene, Fantasy.InnerMessage.I_AddressableRemove_Request, Fantasy.InnerMessage.I_AddressableRemove_Response, System.Action)
-  nameWithType: I_AddressableRemoveHandler.Run(Scene, I_AddressableRemove_Request, I_AddressableRemove_Response, Action)
-- uid: Fantasy.Network.I_AddressableRemoveHandler.Run*
-  name: Run
-  href: api/Fantasy.Network.I_AddressableRemoveHandler.html#Fantasy_Network_I_AddressableRemoveHandler_Run_
-  commentId: Overload:Fantasy.Network.I_AddressableRemoveHandler.Run
-  isSpec: "True"
-  fullName: Fantasy.Network.I_AddressableRemoveHandler.Run
-  nameWithType: I_AddressableRemoveHandler.Run
-- uid: Fantasy.Network.I_AddressableUnLockHandler
-  name: I_AddressableUnLockHandler
-  href: api/Fantasy.Network.I_AddressableUnLockHandler.html
-  commentId: T:Fantasy.Network.I_AddressableUnLockHandler
-  fullName: Fantasy.Network.I_AddressableUnLockHandler
-  nameWithType: I_AddressableUnLockHandler
-- uid: Fantasy.Network.I_AddressableUnLockHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response,System.Action)
-  name: Run(Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response, Action)
-  href: api/Fantasy.Network.I_AddressableUnLockHandler.html#Fantasy_Network_I_AddressableUnLockHandler_Run_Fantasy_Scene_Fantasy_InnerMessage_I_AddressableUnLock_Request_Fantasy_InnerMessage_I_AddressableUnLock_Response_System_Action_
-  commentId: M:Fantasy.Network.I_AddressableUnLockHandler.Run(Fantasy.Scene,Fantasy.InnerMessage.I_AddressableUnLock_Request,Fantasy.InnerMessage.I_AddressableUnLock_Response,System.Action)
-  fullName: Fantasy.Network.I_AddressableUnLockHandler.Run(Fantasy.Scene, Fantasy.InnerMessage.I_AddressableUnLock_Request, Fantasy.InnerMessage.I_AddressableUnLock_Response, System.Action)
-  nameWithType: I_AddressableUnLockHandler.Run(Scene, I_AddressableUnLock_Request, I_AddressableUnLock_Response, Action)
-- uid: Fantasy.Network.I_AddressableUnLockHandler.Run*
-  name: Run
-  href: api/Fantasy.Network.I_AddressableUnLockHandler.html#Fantasy_Network_I_AddressableUnLockHandler_Run_
-  commentId: Overload:Fantasy.Network.I_AddressableUnLockHandler.Run
-  isSpec: "True"
-  fullName: Fantasy.Network.I_AddressableUnLockHandler.Run
-  nameWithType: I_AddressableUnLockHandler.Run
+  fullName: Fantasy.Network.HTTP.SceneContextFilter.OnActionExecutionAsync
+  nameWithType: SceneContextFilter.OnActionExecutionAsync
 - uid: Fantasy.Network.InnerErrorCode
   name: InnerErrorCode
   href: api/Fantasy.Network.InnerErrorCode.html
@@ -13704,6 +13783,12 @@ references:
   commentId: T:Fantasy.Network.NetworkProtocolType
   fullName: Fantasy.Network.NetworkProtocolType
   nameWithType: NetworkProtocolType
+- uid: Fantasy.Network.NetworkProtocolType.HTTP
+  name: HTTP
+  href: api/Fantasy.Network.NetworkProtocolType.html#Fantasy_Network_NetworkProtocolType_HTTP
+  commentId: F:Fantasy.Network.NetworkProtocolType.HTTP
+  fullName: Fantasy.Network.NetworkProtocolType.HTTP
+  nameWithType: NetworkProtocolType.HTTP
 - uid: Fantasy.Network.NetworkProtocolType.KCP
   name: KCP
   href: api/Fantasy.Network.NetworkProtocolType.html#Fantasy_Network_NetworkProtocolType_KCP
@@ -13998,12 +14083,6 @@ references:
   commentId: F:Fantasy.Network.OpCodeProtocolType.Bson
   fullName: Fantasy.Network.OpCodeProtocolType.Bson
   nameWithType: OpCodeProtocolType.Bson
-- uid: Fantasy.Network.OpCodeProtocolType.MemoryPack
-  name: MemoryPack
-  href: api/Fantasy.Network.OpCodeProtocolType.html#Fantasy_Network_OpCodeProtocolType_MemoryPack
-  commentId: F:Fantasy.Network.OpCodeProtocolType.MemoryPack
-  fullName: Fantasy.Network.OpCodeProtocolType.MemoryPack
-  nameWithType: OpCodeProtocolType.MemoryPack
 - uid: Fantasy.Network.OpCodeProtocolType.ProtoBuf
   name: ProtoBuf
   href: api/Fantasy.Network.OpCodeProtocolType.html#Fantasy_Network_OpCodeProtocolType_ProtoBuf
@@ -15781,12 +15860,6 @@ references:
   commentId: T:Fantasy.PacketParser.Interface.APacketParser
   fullName: Fantasy.PacketParser.Interface.APacketParser
   nameWithType: APacketParser
-- uid: Fantasy.PacketParser.Interface.APacketParser.BodyBuffer
-  name: BodyBuffer
-  href: api/Fantasy.PacketParser.Interface.APacketParser.html#Fantasy_PacketParser_Interface_APacketParser_BodyBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.BodyBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.BodyBuffer
-  nameWithType: APacketParser.BodyBuffer
 - uid: Fantasy.PacketParser.Interface.APacketParser.Dispose
   name: Dispose()
   href: api/Fantasy.PacketParser.Interface.APacketParser.html#Fantasy_PacketParser_Interface_APacketParser_Dispose
@@ -15813,12 +15886,6 @@ references:
   isSpec: "True"
   fullName: Fantasy.PacketParser.Interface.APacketParser.IsDisposed
   nameWithType: APacketParser.IsDisposed
-- uid: Fantasy.PacketParser.Interface.APacketParser.OpCodeBuffer
-  name: OpCodeBuffer
-  href: api/Fantasy.PacketParser.Interface.APacketParser.html#Fantasy_PacketParser_Interface_APacketParser_OpCodeBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.OpCodeBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.OpCodeBuffer
-  nameWithType: APacketParser.OpCodeBuffer
 - uid: Fantasy.PacketParser.Interface.APacketParser.Pack(System.UInt32@,System.Int64@,Fantasy.Serialize.MemoryStreamBuffer,Fantasy.Network.Interface.IMessage)
   name: Pack(ref uint, ref long, MemoryStreamBuffer, IMessage)
   href: api/Fantasy.PacketParser.Interface.APacketParser.html#Fantasy_PacketParser_Interface_APacketParser_Pack_System_UInt32__System_Int64__Fantasy_Serialize_MemoryStreamBuffer_Fantasy_Network_Interface_IMessage_
@@ -15835,18 +15902,6 @@ references:
   isSpec: "True"
   fullName: Fantasy.PacketParser.Interface.APacketParser.Pack
   nameWithType: APacketParser.Pack
-- uid: Fantasy.PacketParser.Interface.APacketParser.RouteIdBuffer
-  name: RouteIdBuffer
-  href: api/Fantasy.PacketParser.Interface.APacketParser.html#Fantasy_PacketParser_Interface_APacketParser_RouteIdBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.RouteIdBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.RouteIdBuffer
-  nameWithType: APacketParser.RouteIdBuffer
-- uid: Fantasy.PacketParser.Interface.APacketParser.RpcIdBuffer
-  name: RpcIdBuffer
-  href: api/Fantasy.PacketParser.Interface.APacketParser.html#Fantasy_PacketParser_Interface_APacketParser_RpcIdBuffer
-  commentId: F:Fantasy.PacketParser.Interface.APacketParser.RpcIdBuffer
-  fullName: Fantasy.PacketParser.Interface.APacketParser.RpcIdBuffer
-  nameWithType: APacketParser.RpcIdBuffer
 - uid: Fantasy.PacketParser.OuterBufferPacketParser
   name: OuterBufferPacketParser
   href: api/Fantasy.PacketParser.OuterBufferPacketParser.html
@@ -15891,15 +15946,15 @@ references:
   commentId: T:Fantasy.PacketParser.OuterBufferPacketParserHelper
   fullName: Fantasy.PacketParser.OuterBufferPacketParserHelper
   nameWithType: OuterBufferPacketParserHelper
-- uid: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage)
-  name: Pack(Scene, uint, IMessage)
-  href: api/Fantasy.PacketParser.OuterBufferPacketParserHelper.html#Fantasy_PacketParser_OuterBufferPacketParserHelper_Pack_Fantasy_Scene_System_UInt32_Fantasy_Network_Interface_IMessage_
-  commentId: M:Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage)
-  name.vb: Pack(Scene, UInteger, IMessage)
-  fullName: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene, uint, Fantasy.Network.Interface.IMessage)
-  fullName.vb: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene, UInteger, Fantasy.Network.Interface.IMessage)
-  nameWithType: OuterBufferPacketParserHelper.Pack(Scene, uint, IMessage)
-  nameWithType.vb: OuterBufferPacketParserHelper.Pack(Scene, UInteger, IMessage)
+- uid: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage,System.Int32@)
+  name: Pack(Scene, uint, IMessage, out int)
+  href: api/Fantasy.PacketParser.OuterBufferPacketParserHelper.html#Fantasy_PacketParser_OuterBufferPacketParserHelper_Pack_Fantasy_Scene_System_UInt32_Fantasy_Network_Interface_IMessage_System_Int32__
+  commentId: M:Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene,System.UInt32,Fantasy.Network.Interface.IMessage,System.Int32@)
+  name.vb: Pack(Scene, UInteger, IMessage, Integer)
+  fullName: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene, uint, Fantasy.Network.Interface.IMessage, out int)
+  fullName.vb: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack(Fantasy.Scene, UInteger, Fantasy.Network.Interface.IMessage, Integer)
+  nameWithType: OuterBufferPacketParserHelper.Pack(Scene, uint, IMessage, out int)
+  nameWithType.vb: OuterBufferPacketParserHelper.Pack(Scene, UInteger, IMessage, Integer)
 - uid: Fantasy.PacketParser.OuterBufferPacketParserHelper.Pack*
   name: Pack
   href: api/Fantasy.PacketParser.OuterBufferPacketParserHelper.html#Fantasy_PacketParser_OuterBufferPacketParserHelper_Pack_
@@ -16823,47 +16878,6 @@ references:
   isSpec: "True"
   fullName: Fantasy.Platform.Net.SceneConfigData.TryGet
   nameWithType: SceneConfigData.TryGet
-- uid: Fantasy.Platform.Net.ThreadSynchronizationContext
-  name: ThreadSynchronizationContext
-  href: api/Fantasy.Platform.Net.ThreadSynchronizationContext.html
-  commentId: T:Fantasy.Platform.Net.ThreadSynchronizationContext
-  fullName: Fantasy.Platform.Net.ThreadSynchronizationContext
-  nameWithType: ThreadSynchronizationContext
-- uid: Fantasy.Platform.Net.ThreadSynchronizationContext.Post(System.Action)
-  name: Post(Action)
-  href: api/Fantasy.Platform.Net.ThreadSynchronizationContext.html#Fantasy_Platform_Net_ThreadSynchronizationContext_Post_System_Action_
-  commentId: M:Fantasy.Platform.Net.ThreadSynchronizationContext.Post(System.Action)
-  fullName: Fantasy.Platform.Net.ThreadSynchronizationContext.Post(System.Action)
-  nameWithType: ThreadSynchronizationContext.Post(Action)
-- uid: Fantasy.Platform.Net.ThreadSynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)
-  name: Post(SendOrPostCallback, object)
-  href: api/Fantasy.Platform.Net.ThreadSynchronizationContext.html#Fantasy_Platform_Net_ThreadSynchronizationContext_Post_System_Threading_SendOrPostCallback_System_Object_
-  commentId: M:Fantasy.Platform.Net.ThreadSynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)
-  name.vb: Post(SendOrPostCallback, Object)
-  fullName: Fantasy.Platform.Net.ThreadSynchronizationContext.Post(System.Threading.SendOrPostCallback, object)
-  fullName.vb: Fantasy.Platform.Net.ThreadSynchronizationContext.Post(System.Threading.SendOrPostCallback, Object)
-  nameWithType: ThreadSynchronizationContext.Post(SendOrPostCallback, object)
-  nameWithType.vb: ThreadSynchronizationContext.Post(SendOrPostCallback, Object)
-- uid: Fantasy.Platform.Net.ThreadSynchronizationContext.Post*
-  name: Post
-  href: api/Fantasy.Platform.Net.ThreadSynchronizationContext.html#Fantasy_Platform_Net_ThreadSynchronizationContext_Post_
-  commentId: Overload:Fantasy.Platform.Net.ThreadSynchronizationContext.Post
-  isSpec: "True"
-  fullName: Fantasy.Platform.Net.ThreadSynchronizationContext.Post
-  nameWithType: ThreadSynchronizationContext.Post
-- uid: Fantasy.Platform.Net.ThreadSynchronizationContext.Update
-  name: Update()
-  href: api/Fantasy.Platform.Net.ThreadSynchronizationContext.html#Fantasy_Platform_Net_ThreadSynchronizationContext_Update
-  commentId: M:Fantasy.Platform.Net.ThreadSynchronizationContext.Update
-  fullName: Fantasy.Platform.Net.ThreadSynchronizationContext.Update()
-  nameWithType: ThreadSynchronizationContext.Update()
-- uid: Fantasy.Platform.Net.ThreadSynchronizationContext.Update*
-  name: Update
-  href: api/Fantasy.Platform.Net.ThreadSynchronizationContext.html#Fantasy_Platform_Net_ThreadSynchronizationContext_Update_
-  commentId: Overload:Fantasy.Platform.Net.ThreadSynchronizationContext.Update
-  isSpec: "True"
-  fullName: Fantasy.Platform.Net.ThreadSynchronizationContext.Update
-  nameWithType: ThreadSynchronizationContext.Update
 - uid: Fantasy.Platform.Net.WorldConfig
   name: WorldConfig
   href: api/Fantasy.Platform.Net.WorldConfig.html
@@ -17141,11 +17155,11 @@ references:
   fullName: Fantasy.Pool.IPool
   nameWithType: IPool
 - uid: Fantasy.Pool.IPool.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_IsPool
-  commentId: P:Fantasy.Pool.IPool.IsPool
-  fullName: Fantasy.Pool.IPool.IsPool
-  nameWithType: IPool.IsPool
+  commentId: M:Fantasy.Pool.IPool.IsPool
+  fullName: Fantasy.Pool.IPool.IsPool()
+  nameWithType: IPool.IsPool()
 - uid: Fantasy.Pool.IPool.IsPool*
   name: IsPool
   href: api/Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_IsPool_
@@ -17153,6 +17167,22 @@ references:
   isSpec: "True"
   fullName: Fantasy.Pool.IPool.IsPool
   nameWithType: IPool.IsPool
+- uid: Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.Pool.IPool.SetIsPool(bool)
+  fullName.vb: Fantasy.Pool.IPool.SetIsPool(Boolean)
+  nameWithType: IPool.SetIsPool(bool)
+  nameWithType.vb: IPool.SetIsPool(Boolean)
+- uid: Fantasy.Pool.IPool.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_SetIsPool_
+  commentId: Overload:Fantasy.Pool.IPool.SetIsPool
+  isSpec: "True"
+  fullName: Fantasy.Pool.IPool.SetIsPool
+  nameWithType: IPool.SetIsPool
 - uid: Fantasy.Pool.PoolCore
   name: PoolCore
   href: api/Fantasy.Pool.PoolCore.html
@@ -17682,6 +17712,22 @@ references:
   fullName.vb: Fantasy.Scene.GetEntity(Of T)(Long)
   nameWithType: Scene.GetEntity<T>(long)
   nameWithType.vb: Scene.GetEntity(Of T)(Long)
+- uid: Fantasy.Scene.GetSession(System.Int64)
+  name: GetSession(long)
+  href: api/Fantasy.Scene.html#Fantasy_Scene_GetSession_System_Int64_
+  commentId: M:Fantasy.Scene.GetSession(System.Int64)
+  name.vb: GetSession(Long)
+  fullName: Fantasy.Scene.GetSession(long)
+  fullName.vb: Fantasy.Scene.GetSession(Long)
+  nameWithType: Scene.GetSession(long)
+  nameWithType.vb: Scene.GetSession(Long)
+- uid: Fantasy.Scene.GetSession*
+  name: GetSession
+  href: api/Fantasy.Scene.html#Fantasy_Scene_GetSession_
+  commentId: Overload:Fantasy.Scene.GetSession
+  isSpec: "True"
+  fullName: Fantasy.Scene.GetSession
+  nameWithType: Scene.GetSession
 - uid: Fantasy.Scene.MessagePoolComponent
   name: MessagePoolComponent
   href: api/Fantasy.Scene.html#Fantasy_Scene_MessagePoolComponent
@@ -18283,12 +18329,25 @@ references:
   commentId: T:Fantasy.Serialize.AMessage
   fullName: Fantasy.Serialize.AMessage
   nameWithType: AMessage
+- uid: Fantasy.Serialize.AMessage.GetScene
+  name: GetScene()
+  href: api/Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_GetScene
+  commentId: M:Fantasy.Serialize.AMessage.GetScene
+  fullName: Fantasy.Serialize.AMessage.GetScene()
+  nameWithType: AMessage.GetScene()
+- uid: Fantasy.Serialize.AMessage.GetScene*
+  name: GetScene
+  href: api/Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_GetScene_
+  commentId: Overload:Fantasy.Serialize.AMessage.GetScene
+  isSpec: "True"
+  fullName: Fantasy.Serialize.AMessage.GetScene
+  nameWithType: AMessage.GetScene
 - uid: Fantasy.Serialize.AMessage.IsPool
-  name: IsPool
+  name: IsPool()
   href: api/Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_IsPool
-  commentId: P:Fantasy.Serialize.AMessage.IsPool
-  fullName: Fantasy.Serialize.AMessage.IsPool
-  nameWithType: AMessage.IsPool
+  commentId: M:Fantasy.Serialize.AMessage.IsPool
+  fullName: Fantasy.Serialize.AMessage.IsPool()
+  nameWithType: AMessage.IsPool()
 - uid: Fantasy.Serialize.AMessage.IsPool*
   name: IsPool
   href: api/Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_IsPool_
@@ -18296,19 +18355,35 @@ references:
   isSpec: "True"
   fullName: Fantasy.Serialize.AMessage.IsPool
   nameWithType: AMessage.IsPool
-- uid: Fantasy.Serialize.AMessage.Scene
-  name: Scene
-  href: api/Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_Scene
-  commentId: P:Fantasy.Serialize.AMessage.Scene
-  fullName: Fantasy.Serialize.AMessage.Scene
-  nameWithType: AMessage.Scene
-- uid: Fantasy.Serialize.AMessage.Scene*
-  name: Scene
-  href: api/Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_Scene_
-  commentId: Overload:Fantasy.Serialize.AMessage.Scene
+- uid: Fantasy.Serialize.AMessage.SetIsPool(System.Boolean)
+  name: SetIsPool(bool)
+  href: api/Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetIsPool_System_Boolean_
+  commentId: M:Fantasy.Serialize.AMessage.SetIsPool(System.Boolean)
+  name.vb: SetIsPool(Boolean)
+  fullName: Fantasy.Serialize.AMessage.SetIsPool(bool)
+  fullName.vb: Fantasy.Serialize.AMessage.SetIsPool(Boolean)
+  nameWithType: AMessage.SetIsPool(bool)
+  nameWithType.vb: AMessage.SetIsPool(Boolean)
+- uid: Fantasy.Serialize.AMessage.SetIsPool*
+  name: SetIsPool
+  href: api/Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetIsPool_
+  commentId: Overload:Fantasy.Serialize.AMessage.SetIsPool
   isSpec: "True"
-  fullName: Fantasy.Serialize.AMessage.Scene
-  nameWithType: AMessage.Scene
+  fullName: Fantasy.Serialize.AMessage.SetIsPool
+  nameWithType: AMessage.SetIsPool
+- uid: Fantasy.Serialize.AMessage.SetScene(Fantasy.Scene)
+  name: SetScene(Scene)
+  href: api/Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetScene_Fantasy_Scene_
+  commentId: M:Fantasy.Serialize.AMessage.SetScene(Fantasy.Scene)
+  fullName: Fantasy.Serialize.AMessage.SetScene(Fantasy.Scene)
+  nameWithType: AMessage.SetScene(Scene)
+- uid: Fantasy.Serialize.AMessage.SetScene*
+  name: SetScene
+  href: api/Fantasy.Serialize.AMessage.html#Fantasy_Serialize_AMessage_SetScene_
+  commentId: Overload:Fantasy.Serialize.AMessage.SetScene
+  isSpec: "True"
+  fullName: Fantasy.Serialize.AMessage.SetScene
+  nameWithType: AMessage.SetScene
 - uid: Fantasy.Serialize.ASerialize
   name: ASerialize
   href: api/Fantasy.Serialize.ASerialize.html
@@ -18373,6 +18448,25 @@ references:
   commentId: T:Fantasy.Serialize.BsonPackHelper
   fullName: Fantasy.Serialize.BsonPackHelper
   nameWithType: BsonPackHelper
+- uid: Fantasy.Serialize.BsonPackHelper.#ctor
+  name: BsonPackHelper()
+  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper__ctor
+  commentId: M:Fantasy.Serialize.BsonPackHelper.#ctor
+  name.vb: New()
+  fullName: Fantasy.Serialize.BsonPackHelper.BsonPackHelper()
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.New()
+  nameWithType: BsonPackHelper.BsonPackHelper()
+  nameWithType.vb: BsonPackHelper.New()
+- uid: Fantasy.Serialize.BsonPackHelper.#ctor*
+  name: BsonPackHelper
+  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper__ctor_
+  commentId: Overload:Fantasy.Serialize.BsonPackHelper.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Fantasy.Serialize.BsonPackHelper.BsonPackHelper
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.New
+  nameWithType: BsonPackHelper.BsonPackHelper
+  nameWithType.vb: BsonPackHelper.New
 - uid: Fantasy.Serialize.BsonPackHelper.Clone*
   name: Clone
   href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Clone_
@@ -18447,19 +18541,6 @@ references:
   fullName.vb: Fantasy.Serialize.BsonPackHelper.Deserialize(Of T)(Byte(), Integer, Integer)
   nameWithType: BsonPackHelper.Deserialize<T>(byte[], int, int)
   nameWithType.vb: BsonPackHelper.Deserialize(Of T)(Byte(), Integer, Integer)
-- uid: Fantasy.Serialize.BsonPackHelper.Initialize
-  name: Initialize()
-  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Initialize
-  commentId: M:Fantasy.Serialize.BsonPackHelper.Initialize
-  fullName: Fantasy.Serialize.BsonPackHelper.Initialize()
-  nameWithType: BsonPackHelper.Initialize()
-- uid: Fantasy.Serialize.BsonPackHelper.Initialize*
-  name: Initialize
-  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Initialize_
-  commentId: Overload:Fantasy.Serialize.BsonPackHelper.Initialize
-  isSpec: "True"
-  fullName: Fantasy.Serialize.BsonPackHelper.Initialize
-  nameWithType: BsonPackHelper.Initialize
 - uid: Fantasy.Serialize.BsonPackHelper.Serialize(System.Object)
   name: Serialize(object)
   href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Serialize_System_Object_
@@ -18469,15 +18550,24 @@ references:
   fullName.vb: Fantasy.Serialize.BsonPackHelper.Serialize(Object)
   nameWithType: BsonPackHelper.Serialize(object)
   nameWithType.vb: BsonPackHelper.Serialize(Object)
-- uid: Fantasy.Serialize.BsonPackHelper.Serialize(System.Type,System.Object,Fantasy.Serialize.MemoryStreamBuffer)
-  name: Serialize(Type, object, MemoryStreamBuffer)
-  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Serialize_System_Type_System_Object_Fantasy_Serialize_MemoryStreamBuffer_
-  commentId: M:Fantasy.Serialize.BsonPackHelper.Serialize(System.Type,System.Object,Fantasy.Serialize.MemoryStreamBuffer)
-  name.vb: Serialize(Type, Object, MemoryStreamBuffer)
-  fullName: Fantasy.Serialize.BsonPackHelper.Serialize(System.Type, object, Fantasy.Serialize.MemoryStreamBuffer)
-  fullName.vb: Fantasy.Serialize.BsonPackHelper.Serialize(System.Type, Object, Fantasy.Serialize.MemoryStreamBuffer)
-  nameWithType: BsonPackHelper.Serialize(Type, object, MemoryStreamBuffer)
-  nameWithType.vb: BsonPackHelper.Serialize(Type, Object, MemoryStreamBuffer)
+- uid: Fantasy.Serialize.BsonPackHelper.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
+  name: Serialize(object, IBufferWriter<byte>)
+  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Serialize_System_Object_System_Buffers_IBufferWriter_System_Byte__
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
+  name.vb: Serialize(Object, IBufferWriter(Of Byte))
+  fullName: Fantasy.Serialize.BsonPackHelper.Serialize(object, System.Buffers.IBufferWriter<byte>)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Serialize(Object, System.Buffers.IBufferWriter(Of Byte))
+  nameWithType: BsonPackHelper.Serialize(object, IBufferWriter<byte>)
+  nameWithType.vb: BsonPackHelper.Serialize(Object, IBufferWriter(Of Byte))
+- uid: Fantasy.Serialize.BsonPackHelper.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
+  name: Serialize(Type, object, IBufferWriter<byte>)
+  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Serialize_System_Type_System_Object_System_Buffers_IBufferWriter_System_Byte__
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
+  name.vb: Serialize(Type, Object, IBufferWriter(Of Byte))
+  fullName: Fantasy.Serialize.BsonPackHelper.Serialize(System.Type, object, System.Buffers.IBufferWriter<byte>)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Serialize(System.Type, Object, System.Buffers.IBufferWriter(Of Byte))
+  nameWithType: BsonPackHelper.Serialize(Type, object, IBufferWriter<byte>)
+  nameWithType.vb: BsonPackHelper.Serialize(Type, Object, IBufferWriter(Of Byte))
 - uid: Fantasy.Serialize.BsonPackHelper.Serialize*
   name: Serialize
   href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Serialize_
@@ -18485,6 +18575,35 @@ references:
   isSpec: "True"
   fullName: Fantasy.Serialize.BsonPackHelper.Serialize
   nameWithType: BsonPackHelper.Serialize
+- uid: Fantasy.Serialize.BsonPackHelper.SerializeAndReturnLength(System.Type,System.Object,Fantasy.Serialize.MemoryStreamBuffer)
+  name: SerializeAndReturnLength(Type, object, MemoryStreamBuffer)
+  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_SerializeAndReturnLength_System_Type_System_Object_Fantasy_Serialize_MemoryStreamBuffer_
+  commentId: M:Fantasy.Serialize.BsonPackHelper.SerializeAndReturnLength(System.Type,System.Object,Fantasy.Serialize.MemoryStreamBuffer)
+  name.vb: SerializeAndReturnLength(Type, Object, MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.BsonPackHelper.SerializeAndReturnLength(System.Type, object, Fantasy.Serialize.MemoryStreamBuffer)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.SerializeAndReturnLength(System.Type, Object, Fantasy.Serialize.MemoryStreamBuffer)
+  nameWithType: BsonPackHelper.SerializeAndReturnLength(Type, object, MemoryStreamBuffer)
+  nameWithType.vb: BsonPackHelper.SerializeAndReturnLength(Type, Object, MemoryStreamBuffer)
+- uid: Fantasy.Serialize.BsonPackHelper.SerializeAndReturnLength*
+  name: SerializeAndReturnLength
+  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_SerializeAndReturnLength_
+  commentId: Overload:Fantasy.Serialize.BsonPackHelper.SerializeAndReturnLength
+  isSpec: "True"
+  fullName: Fantasy.Serialize.BsonPackHelper.SerializeAndReturnLength
+  nameWithType: BsonPackHelper.SerializeAndReturnLength
+- uid: Fantasy.Serialize.BsonPackHelper.SerializeName
+  name: SerializeName
+  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_SerializeName
+  commentId: P:Fantasy.Serialize.BsonPackHelper.SerializeName
+  fullName: Fantasy.Serialize.BsonPackHelper.SerializeName
+  nameWithType: BsonPackHelper.SerializeName
+- uid: Fantasy.Serialize.BsonPackHelper.SerializeName*
+  name: SerializeName
+  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_SerializeName_
+  commentId: Overload:Fantasy.Serialize.BsonPackHelper.SerializeName
+  isSpec: "True"
+  fullName: Fantasy.Serialize.BsonPackHelper.SerializeName
+  nameWithType: BsonPackHelper.SerializeName
 - uid: Fantasy.Serialize.BsonPackHelper.Serialize``1(``0)
   name: Serialize<T>(T)
   href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Serialize__1___0_
@@ -18494,153 +18613,166 @@ references:
   fullName.vb: Fantasy.Serialize.BsonPackHelper.Serialize(Of T)(T)
   nameWithType: BsonPackHelper.Serialize<T>(T)
   nameWithType.vb: BsonPackHelper.Serialize(Of T)(T)
-- uid: Fantasy.Serialize.BsonPackHelper.Serialize``1(``0,Fantasy.Serialize.MemoryStreamBuffer)
-  name: Serialize<T>(T, MemoryStreamBuffer)
-  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Serialize__1___0_Fantasy_Serialize_MemoryStreamBuffer_
-  commentId: M:Fantasy.Serialize.BsonPackHelper.Serialize``1(``0,Fantasy.Serialize.MemoryStreamBuffer)
-  name.vb: Serialize(Of T)(T, MemoryStreamBuffer)
-  fullName: Fantasy.Serialize.BsonPackHelper.Serialize<T>(T, Fantasy.Serialize.MemoryStreamBuffer)
-  fullName.vb: Fantasy.Serialize.BsonPackHelper.Serialize(Of T)(T, Fantasy.Serialize.MemoryStreamBuffer)
-  nameWithType: BsonPackHelper.Serialize<T>(T, MemoryStreamBuffer)
-  nameWithType.vb: BsonPackHelper.Serialize(Of T)(T, MemoryStreamBuffer)
+- uid: Fantasy.Serialize.BsonPackHelper.Serialize``1(``0,System.Buffers.IBufferWriter{System.Byte})
+  name: Serialize<T>(T, IBufferWriter<byte>)
+  href: api/Fantasy.Serialize.BsonPackHelper.html#Fantasy_Serialize_BsonPackHelper_Serialize__1___0_System_Buffers_IBufferWriter_System_Byte__
+  commentId: M:Fantasy.Serialize.BsonPackHelper.Serialize``1(``0,System.Buffers.IBufferWriter{System.Byte})
+  name.vb: Serialize(Of T)(T, IBufferWriter(Of Byte))
+  fullName: Fantasy.Serialize.BsonPackHelper.Serialize<T>(T, System.Buffers.IBufferWriter<byte>)
+  fullName.vb: Fantasy.Serialize.BsonPackHelper.Serialize(Of T)(T, System.Buffers.IBufferWriter(Of Byte))
+  nameWithType: BsonPackHelper.Serialize<T>(T, IBufferWriter<byte>)
+  nameWithType.vb: BsonPackHelper.Serialize(Of T)(T, IBufferWriter(Of Byte))
+- uid: Fantasy.Serialize.FantasySerializerType
+  name: FantasySerializerType
+  href: api/Fantasy.Serialize.FantasySerializerType.html
+  commentId: T:Fantasy.Serialize.FantasySerializerType
+  fullName: Fantasy.Serialize.FantasySerializerType
+  nameWithType: FantasySerializerType
+- uid: Fantasy.Serialize.FantasySerializerType.Bson
+  name: Bson
+  href: api/Fantasy.Serialize.FantasySerializerType.html#Fantasy_Serialize_FantasySerializerType_Bson
+  commentId: F:Fantasy.Serialize.FantasySerializerType.Bson
+  fullName: Fantasy.Serialize.FantasySerializerType.Bson
+  nameWithType: FantasySerializerType.Bson
+- uid: Fantasy.Serialize.FantasySerializerType.ProtoBuf
+  name: ProtoBuf
+  href: api/Fantasy.Serialize.FantasySerializerType.html#Fantasy_Serialize_FantasySerializerType_ProtoBuf
+  commentId: F:Fantasy.Serialize.FantasySerializerType.ProtoBuf
+  fullName: Fantasy.Serialize.FantasySerializerType.ProtoBuf
+  nameWithType: FantasySerializerType.ProtoBuf
 - uid: Fantasy.Serialize.IProto
   name: IProto
   href: api/Fantasy.Serialize.IProto.html
   commentId: T:Fantasy.Serialize.IProto
   fullName: Fantasy.Serialize.IProto
   nameWithType: IProto
-- uid: Fantasy.Serialize.MemoryPackHelper
-  name: MemoryPackHelper
-  href: api/Fantasy.Serialize.MemoryPackHelper.html
-  commentId: T:Fantasy.Serialize.MemoryPackHelper
-  fullName: Fantasy.Serialize.MemoryPackHelper
-  nameWithType: MemoryPackHelper
-- uid: Fantasy.Serialize.MemoryPackHelper.Clone*
+- uid: Fantasy.Serialize.ISerialize
+  name: ISerialize
+  href: api/Fantasy.Serialize.ISerialize.html
+  commentId: T:Fantasy.Serialize.ISerialize
+  fullName: Fantasy.Serialize.ISerialize
+  nameWithType: ISerialize
+- uid: Fantasy.Serialize.ISerialize.Clone*
   name: Clone
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Clone_
-  commentId: Overload:Fantasy.Serialize.MemoryPackHelper.Clone
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Clone_
+  commentId: Overload:Fantasy.Serialize.ISerialize.Clone
   isSpec: "True"
-  fullName: Fantasy.Serialize.MemoryPackHelper.Clone
-  nameWithType: MemoryPackHelper.Clone
-- uid: Fantasy.Serialize.MemoryPackHelper.Clone``1(``0)
+  fullName: Fantasy.Serialize.ISerialize.Clone
+  nameWithType: ISerialize.Clone
+- uid: Fantasy.Serialize.ISerialize.Clone``1(``0)
   name: Clone<T>(T)
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Clone__1___0_
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Clone``1(``0)
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Clone__1___0_
+  commentId: M:Fantasy.Serialize.ISerialize.Clone``1(``0)
   name.vb: Clone(Of T)(T)
-  fullName: Fantasy.Serialize.MemoryPackHelper.Clone<T>(T)
-  fullName.vb: Fantasy.Serialize.MemoryPackHelper.Clone(Of T)(T)
-  nameWithType: MemoryPackHelper.Clone<T>(T)
-  nameWithType.vb: MemoryPackHelper.Clone(Of T)(T)
-- uid: Fantasy.Serialize.MemoryPackHelper.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.ISerialize.Clone<T>(T)
+  fullName.vb: Fantasy.Serialize.ISerialize.Clone(Of T)(T)
+  nameWithType: ISerialize.Clone<T>(T)
+  nameWithType.vb: ISerialize.Clone(Of T)(T)
+- uid: Fantasy.Serialize.ISerialize.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
   name: Deserialize(Type, MemoryStreamBuffer)
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Deserialize_System_Type_Fantasy_Serialize_MemoryStreamBuffer_
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
-  fullName: Fantasy.Serialize.MemoryPackHelper.Deserialize(System.Type, Fantasy.Serialize.MemoryStreamBuffer)
-  nameWithType: MemoryPackHelper.Deserialize(Type, MemoryStreamBuffer)
-- uid: Fantasy.Serialize.MemoryPackHelper.Deserialize(System.Type,System.Byte[])
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Deserialize_System_Type_Fantasy_Serialize_MemoryStreamBuffer_
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.ISerialize.Deserialize(System.Type, Fantasy.Serialize.MemoryStreamBuffer)
+  nameWithType: ISerialize.Deserialize(Type, MemoryStreamBuffer)
+- uid: Fantasy.Serialize.ISerialize.Deserialize(System.Type,System.Byte[])
   name: Deserialize(Type, byte[])
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Deserialize_System_Type_System_Byte___
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Deserialize(System.Type,System.Byte[])
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Deserialize_System_Type_System_Byte___
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize(System.Type,System.Byte[])
   name.vb: Deserialize(Type, Byte())
-  fullName: Fantasy.Serialize.MemoryPackHelper.Deserialize(System.Type, byte[])
-  fullName.vb: Fantasy.Serialize.MemoryPackHelper.Deserialize(System.Type, Byte())
-  nameWithType: MemoryPackHelper.Deserialize(Type, byte[])
-  nameWithType.vb: MemoryPackHelper.Deserialize(Type, Byte())
-- uid: Fantasy.Serialize.MemoryPackHelper.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
+  fullName: Fantasy.Serialize.ISerialize.Deserialize(System.Type, byte[])
+  fullName.vb: Fantasy.Serialize.ISerialize.Deserialize(System.Type, Byte())
+  nameWithType: ISerialize.Deserialize(Type, byte[])
+  nameWithType.vb: ISerialize.Deserialize(Type, Byte())
+- uid: Fantasy.Serialize.ISerialize.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
   name: Deserialize(Type, byte[], int, int)
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Deserialize_System_Type_System_Byte___System_Int32_System_Int32_
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Deserialize_System_Type_System_Byte___System_Int32_System_Int32_
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)
   name.vb: Deserialize(Type, Byte(), Integer, Integer)
-  fullName: Fantasy.Serialize.MemoryPackHelper.Deserialize(System.Type, byte[], int, int)
-  fullName.vb: Fantasy.Serialize.MemoryPackHelper.Deserialize(System.Type, Byte(), Integer, Integer)
-  nameWithType: MemoryPackHelper.Deserialize(Type, byte[], int, int)
-  nameWithType.vb: MemoryPackHelper.Deserialize(Type, Byte(), Integer, Integer)
-- uid: Fantasy.Serialize.MemoryPackHelper.Deserialize*
+  fullName: Fantasy.Serialize.ISerialize.Deserialize(System.Type, byte[], int, int)
+  fullName.vb: Fantasy.Serialize.ISerialize.Deserialize(System.Type, Byte(), Integer, Integer)
+  nameWithType: ISerialize.Deserialize(Type, byte[], int, int)
+  nameWithType.vb: ISerialize.Deserialize(Type, Byte(), Integer, Integer)
+- uid: Fantasy.Serialize.ISerialize.Deserialize*
   name: Deserialize
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Deserialize_
-  commentId: Overload:Fantasy.Serialize.MemoryPackHelper.Deserialize
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Deserialize_
+  commentId: Overload:Fantasy.Serialize.ISerialize.Deserialize
   isSpec: "True"
-  fullName: Fantasy.Serialize.MemoryPackHelper.Deserialize
-  nameWithType: MemoryPackHelper.Deserialize
-- uid: Fantasy.Serialize.MemoryPackHelper.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.ISerialize.Deserialize
+  nameWithType: ISerialize.Deserialize
+- uid: Fantasy.Serialize.ISerialize.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
   name: Deserialize<T>(MemoryStreamBuffer)
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Deserialize__1_Fantasy_Serialize_MemoryStreamBuffer_
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Deserialize__1_Fantasy_Serialize_MemoryStreamBuffer_
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
   name.vb: Deserialize(Of T)(MemoryStreamBuffer)
-  fullName: Fantasy.Serialize.MemoryPackHelper.Deserialize<T>(Fantasy.Serialize.MemoryStreamBuffer)
-  fullName.vb: Fantasy.Serialize.MemoryPackHelper.Deserialize(Of T)(Fantasy.Serialize.MemoryStreamBuffer)
-  nameWithType: MemoryPackHelper.Deserialize<T>(MemoryStreamBuffer)
-  nameWithType.vb: MemoryPackHelper.Deserialize(Of T)(MemoryStreamBuffer)
-- uid: Fantasy.Serialize.MemoryPackHelper.Deserialize``1(System.Byte[])
+  fullName: Fantasy.Serialize.ISerialize.Deserialize<T>(Fantasy.Serialize.MemoryStreamBuffer)
+  fullName.vb: Fantasy.Serialize.ISerialize.Deserialize(Of T)(Fantasy.Serialize.MemoryStreamBuffer)
+  nameWithType: ISerialize.Deserialize<T>(MemoryStreamBuffer)
+  nameWithType.vb: ISerialize.Deserialize(Of T)(MemoryStreamBuffer)
+- uid: Fantasy.Serialize.ISerialize.Deserialize``1(System.Byte[])
   name: Deserialize<T>(byte[])
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Deserialize__1_System_Byte___
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Deserialize``1(System.Byte[])
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Deserialize__1_System_Byte___
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize``1(System.Byte[])
   name.vb: Deserialize(Of T)(Byte())
-  fullName: Fantasy.Serialize.MemoryPackHelper.Deserialize<T>(byte[])
-  fullName.vb: Fantasy.Serialize.MemoryPackHelper.Deserialize(Of T)(Byte())
-  nameWithType: MemoryPackHelper.Deserialize<T>(byte[])
-  nameWithType.vb: MemoryPackHelper.Deserialize(Of T)(Byte())
-- uid: Fantasy.Serialize.MemoryPackHelper.Deserialize``1(System.Byte[],System.Int32,System.Int32)
+  fullName: Fantasy.Serialize.ISerialize.Deserialize<T>(byte[])
+  fullName.vb: Fantasy.Serialize.ISerialize.Deserialize(Of T)(Byte())
+  nameWithType: ISerialize.Deserialize<T>(byte[])
+  nameWithType.vb: ISerialize.Deserialize(Of T)(Byte())
+- uid: Fantasy.Serialize.ISerialize.Deserialize``1(System.Byte[],System.Int32,System.Int32)
   name: Deserialize<T>(byte[], int, int)
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Deserialize__1_System_Byte___System_Int32_System_Int32_
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Deserialize``1(System.Byte[],System.Int32,System.Int32)
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Deserialize__1_System_Byte___System_Int32_System_Int32_
+  commentId: M:Fantasy.Serialize.ISerialize.Deserialize``1(System.Byte[],System.Int32,System.Int32)
   name.vb: Deserialize(Of T)(Byte(), Integer, Integer)
-  fullName: Fantasy.Serialize.MemoryPackHelper.Deserialize<T>(byte[], int, int)
-  fullName.vb: Fantasy.Serialize.MemoryPackHelper.Deserialize(Of T)(Byte(), Integer, Integer)
-  nameWithType: MemoryPackHelper.Deserialize<T>(byte[], int, int)
-  nameWithType.vb: MemoryPackHelper.Deserialize(Of T)(Byte(), Integer, Integer)
-- uid: Fantasy.Serialize.MemoryPackHelper.Serialize(System.Object)
-  name: Serialize(object)
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Serialize_System_Object_
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Serialize(System.Object)
-  name.vb: Serialize(Object)
-  fullName: Fantasy.Serialize.MemoryPackHelper.Serialize(object)
-  fullName.vb: Fantasy.Serialize.MemoryPackHelper.Serialize(Object)
-  nameWithType: MemoryPackHelper.Serialize(object)
-  nameWithType.vb: MemoryPackHelper.Serialize(Object)
-- uid: Fantasy.Serialize.MemoryPackHelper.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
+  fullName: Fantasy.Serialize.ISerialize.Deserialize<T>(byte[], int, int)
+  fullName.vb: Fantasy.Serialize.ISerialize.Deserialize(Of T)(Byte(), Integer, Integer)
+  nameWithType: ISerialize.Deserialize<T>(byte[], int, int)
+  nameWithType.vb: ISerialize.Deserialize(Of T)(Byte(), Integer, Integer)
+- uid: Fantasy.Serialize.ISerialize.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
   name: Serialize(object, IBufferWriter<byte>)
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Serialize_System_Object_System_Buffers_IBufferWriter_System_Byte__
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Serialize_System_Object_System_Buffers_IBufferWriter_System_Byte__
+  commentId: M:Fantasy.Serialize.ISerialize.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
   name.vb: Serialize(Object, IBufferWriter(Of Byte))
-  fullName: Fantasy.Serialize.MemoryPackHelper.Serialize(object, System.Buffers.IBufferWriter<byte>)
-  fullName.vb: Fantasy.Serialize.MemoryPackHelper.Serialize(Object, System.Buffers.IBufferWriter(Of Byte))
-  nameWithType: MemoryPackHelper.Serialize(object, IBufferWriter<byte>)
-  nameWithType.vb: MemoryPackHelper.Serialize(Object, IBufferWriter(Of Byte))
-- uid: Fantasy.Serialize.MemoryPackHelper.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
+  fullName: Fantasy.Serialize.ISerialize.Serialize(object, System.Buffers.IBufferWriter<byte>)
+  fullName.vb: Fantasy.Serialize.ISerialize.Serialize(Object, System.Buffers.IBufferWriter(Of Byte))
+  nameWithType: ISerialize.Serialize(object, IBufferWriter<byte>)
+  nameWithType.vb: ISerialize.Serialize(Object, IBufferWriter(Of Byte))
+- uid: Fantasy.Serialize.ISerialize.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
   name: Serialize(Type, object, IBufferWriter<byte>)
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Serialize_System_Type_System_Object_System_Buffers_IBufferWriter_System_Byte__
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Serialize_System_Type_System_Object_System_Buffers_IBufferWriter_System_Byte__
+  commentId: M:Fantasy.Serialize.ISerialize.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
   name.vb: Serialize(Type, Object, IBufferWriter(Of Byte))
-  fullName: Fantasy.Serialize.MemoryPackHelper.Serialize(System.Type, object, System.Buffers.IBufferWriter<byte>)
-  fullName.vb: Fantasy.Serialize.MemoryPackHelper.Serialize(System.Type, Object, System.Buffers.IBufferWriter(Of Byte))
-  nameWithType: MemoryPackHelper.Serialize(Type, object, IBufferWriter<byte>)
-  nameWithType.vb: MemoryPackHelper.Serialize(Type, Object, IBufferWriter(Of Byte))
-- uid: Fantasy.Serialize.MemoryPackHelper.Serialize*
+  fullName: Fantasy.Serialize.ISerialize.Serialize(System.Type, object, System.Buffers.IBufferWriter<byte>)
+  fullName.vb: Fantasy.Serialize.ISerialize.Serialize(System.Type, Object, System.Buffers.IBufferWriter(Of Byte))
+  nameWithType: ISerialize.Serialize(Type, object, IBufferWriter<byte>)
+  nameWithType.vb: ISerialize.Serialize(Type, Object, IBufferWriter(Of Byte))
+- uid: Fantasy.Serialize.ISerialize.Serialize*
   name: Serialize
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Serialize_
-  commentId: Overload:Fantasy.Serialize.MemoryPackHelper.Serialize
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Serialize_
+  commentId: Overload:Fantasy.Serialize.ISerialize.Serialize
   isSpec: "True"
-  fullName: Fantasy.Serialize.MemoryPackHelper.Serialize
-  nameWithType: MemoryPackHelper.Serialize
-- uid: Fantasy.Serialize.MemoryPackHelper.Serialize``1(``0)
-  name: Serialize<T>(T)
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Serialize__1___0_
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Serialize``1(``0)
-  name.vb: Serialize(Of T)(T)
-  fullName: Fantasy.Serialize.MemoryPackHelper.Serialize<T>(T)
-  fullName.vb: Fantasy.Serialize.MemoryPackHelper.Serialize(Of T)(T)
-  nameWithType: MemoryPackHelper.Serialize<T>(T)
-  nameWithType.vb: MemoryPackHelper.Serialize(Of T)(T)
-- uid: Fantasy.Serialize.MemoryPackHelper.Serialize``1(``0,Fantasy.Serialize.MemoryStreamBuffer)
-  name: Serialize<T>(T, MemoryStreamBuffer)
-  href: api/Fantasy.Serialize.MemoryPackHelper.html#Fantasy_Serialize_MemoryPackHelper_Serialize__1___0_Fantasy_Serialize_MemoryStreamBuffer_
-  commentId: M:Fantasy.Serialize.MemoryPackHelper.Serialize``1(``0,Fantasy.Serialize.MemoryStreamBuffer)
-  name.vb: Serialize(Of T)(T, MemoryStreamBuffer)
-  fullName: Fantasy.Serialize.MemoryPackHelper.Serialize<T>(T, Fantasy.Serialize.MemoryStreamBuffer)
-  fullName.vb: Fantasy.Serialize.MemoryPackHelper.Serialize(Of T)(T, Fantasy.Serialize.MemoryStreamBuffer)
-  nameWithType: MemoryPackHelper.Serialize<T>(T, MemoryStreamBuffer)
-  nameWithType.vb: MemoryPackHelper.Serialize(Of T)(T, MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.ISerialize.Serialize
+  nameWithType: ISerialize.Serialize
+- uid: Fantasy.Serialize.ISerialize.SerializeName
+  name: SerializeName
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_SerializeName
+  commentId: P:Fantasy.Serialize.ISerialize.SerializeName
+  fullName: Fantasy.Serialize.ISerialize.SerializeName
+  nameWithType: ISerialize.SerializeName
+- uid: Fantasy.Serialize.ISerialize.SerializeName*
+  name: SerializeName
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_SerializeName_
+  commentId: Overload:Fantasy.Serialize.ISerialize.SerializeName
+  isSpec: "True"
+  fullName: Fantasy.Serialize.ISerialize.SerializeName
+  nameWithType: ISerialize.SerializeName
+- uid: Fantasy.Serialize.ISerialize.Serialize``1(``0,System.Buffers.IBufferWriter{System.Byte})
+  name: Serialize<T>(T, IBufferWriter<byte>)
+  href: api/Fantasy.Serialize.ISerialize.html#Fantasy_Serialize_ISerialize_Serialize__1___0_System_Buffers_IBufferWriter_System_Byte__
+  commentId: M:Fantasy.Serialize.ISerialize.Serialize``1(``0,System.Buffers.IBufferWriter{System.Byte})
+  name.vb: Serialize(Of T)(T, IBufferWriter(Of Byte))
+  fullName: Fantasy.Serialize.ISerialize.Serialize<T>(T, System.Buffers.IBufferWriter<byte>)
+  fullName.vb: Fantasy.Serialize.ISerialize.Serialize(Of T)(T, System.Buffers.IBufferWriter(Of Byte))
+  nameWithType: ISerialize.Serialize<T>(T, IBufferWriter<byte>)
+  nameWithType.vb: ISerialize.Serialize(Of T)(T, IBufferWriter(Of Byte))
 - uid: Fantasy.Serialize.MemoryStreamBuffer
   name: MemoryStreamBuffer
   href: api/Fantasy.Serialize.MemoryStreamBuffer.html
@@ -18738,6 +18870,25 @@ references:
   commentId: T:Fantasy.Serialize.ProtoBufPackHelper
   fullName: Fantasy.Serialize.ProtoBufPackHelper
   nameWithType: ProtoBufPackHelper
+- uid: Fantasy.Serialize.ProtoBufPackHelper.#ctor
+  name: ProtoBufPackHelper()
+  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper__ctor
+  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.#ctor
+  name.vb: New()
+  fullName: Fantasy.Serialize.ProtoBufPackHelper.ProtoBufPackHelper()
+  fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.New()
+  nameWithType: ProtoBufPackHelper.ProtoBufPackHelper()
+  nameWithType.vb: ProtoBufPackHelper.New()
+- uid: Fantasy.Serialize.ProtoBufPackHelper.#ctor*
+  name: ProtoBufPackHelper
+  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper__ctor_
+  commentId: Overload:Fantasy.Serialize.ProtoBufPackHelper.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Fantasy.Serialize.ProtoBufPackHelper.ProtoBufPackHelper
+  fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.New
+  nameWithType: ProtoBufPackHelper.ProtoBufPackHelper
+  nameWithType.vb: ProtoBufPackHelper.New
 - uid: Fantasy.Serialize.ProtoBufPackHelper.Clone*
   name: Clone
   href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Clone_
@@ -18754,6 +18905,12 @@ references:
   fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.Clone(Of T)(T)
   nameWithType: ProtoBufPackHelper.Clone<T>(T)
   nameWithType.vb: ProtoBufPackHelper.Clone(Of T)(T)
+- uid: Fantasy.Serialize.ProtoBufPackHelper.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  name: Deserialize(Type, MemoryStreamBuffer)
+  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Deserialize_System_Type_Fantasy_Serialize_MemoryStreamBuffer_
+  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.ProtoBufPackHelper.Deserialize(System.Type, Fantasy.Serialize.MemoryStreamBuffer)
+  nameWithType: ProtoBufPackHelper.Deserialize(Type, MemoryStreamBuffer)
 - uid: Fantasy.Serialize.ProtoBufPackHelper.Deserialize(System.Type,System.Byte[])
   name: Deserialize(Type, byte[])
   href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Deserialize_System_Type_System_Byte___
@@ -18772,12 +18929,6 @@ references:
   fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.Deserialize(System.Type, Byte(), Integer, Integer)
   nameWithType: ProtoBufPackHelper.Deserialize(Type, byte[], int, int)
   nameWithType.vb: ProtoBufPackHelper.Deserialize(Type, Byte(), Integer, Integer)
-- uid: Fantasy.Serialize.ProtoBufPackHelper.Deserialize(System.Type,System.IO.MemoryStream)
-  name: Deserialize(Type, MemoryStream)
-  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Deserialize_System_Type_System_IO_MemoryStream_
-  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.Deserialize(System.Type,System.IO.MemoryStream)
-  fullName: Fantasy.Serialize.ProtoBufPackHelper.Deserialize(System.Type, System.IO.MemoryStream)
-  nameWithType: ProtoBufPackHelper.Deserialize(Type, MemoryStream)
 - uid: Fantasy.Serialize.ProtoBufPackHelper.Deserialize*
   name: Deserialize
   href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Deserialize_
@@ -18785,6 +18936,15 @@ references:
   isSpec: "True"
   fullName: Fantasy.Serialize.ProtoBufPackHelper.Deserialize
   nameWithType: ProtoBufPackHelper.Deserialize
+- uid: Fantasy.Serialize.ProtoBufPackHelper.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  name: Deserialize<T>(MemoryStreamBuffer)
+  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Deserialize__1_Fantasy_Serialize_MemoryStreamBuffer_
+  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)
+  name.vb: Deserialize(Of T)(MemoryStreamBuffer)
+  fullName: Fantasy.Serialize.ProtoBufPackHelper.Deserialize<T>(Fantasy.Serialize.MemoryStreamBuffer)
+  fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.Deserialize(Of T)(Fantasy.Serialize.MemoryStreamBuffer)
+  nameWithType: ProtoBufPackHelper.Deserialize<T>(MemoryStreamBuffer)
+  nameWithType.vb: ProtoBufPackHelper.Deserialize(Of T)(MemoryStreamBuffer)
 - uid: Fantasy.Serialize.ProtoBufPackHelper.Deserialize``1(System.Byte[])
   name: Deserialize<T>(byte[])
   href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Deserialize__1_System_Byte___
@@ -18803,46 +18963,24 @@ references:
   fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.Deserialize(Of T)(Byte(), Integer, Integer)
   nameWithType: ProtoBufPackHelper.Deserialize<T>(byte[], int, int)
   nameWithType.vb: ProtoBufPackHelper.Deserialize(Of T)(Byte(), Integer, Integer)
-- uid: Fantasy.Serialize.ProtoBufPackHelper.Deserialize``1(System.IO.MemoryStream)
-  name: Deserialize<T>(MemoryStream)
-  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Deserialize__1_System_IO_MemoryStream_
-  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.Deserialize``1(System.IO.MemoryStream)
-  name.vb: Deserialize(Of T)(MemoryStream)
-  fullName: Fantasy.Serialize.ProtoBufPackHelper.Deserialize<T>(System.IO.MemoryStream)
-  fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.Deserialize(Of T)(System.IO.MemoryStream)
-  nameWithType: ProtoBufPackHelper.Deserialize<T>(MemoryStream)
-  nameWithType.vb: ProtoBufPackHelper.Deserialize(Of T)(MemoryStream)
-- uid: Fantasy.Serialize.ProtoBufPackHelper.Initialize
-  name: Initialize()
-  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Initialize
-  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.Initialize
-  fullName: Fantasy.Serialize.ProtoBufPackHelper.Initialize()
-  nameWithType: ProtoBufPackHelper.Initialize()
-- uid: Fantasy.Serialize.ProtoBufPackHelper.Initialize*
-  name: Initialize
-  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Initialize_
-  commentId: Overload:Fantasy.Serialize.ProtoBufPackHelper.Initialize
-  isSpec: "True"
-  fullName: Fantasy.Serialize.ProtoBufPackHelper.Initialize
-  nameWithType: ProtoBufPackHelper.Initialize
-- uid: Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Object,System.IO.MemoryStream)
-  name: Serialize(object, MemoryStream)
-  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Serialize_System_Object_System_IO_MemoryStream_
-  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Object,System.IO.MemoryStream)
-  name.vb: Serialize(Object, MemoryStream)
-  fullName: Fantasy.Serialize.ProtoBufPackHelper.Serialize(object, System.IO.MemoryStream)
-  fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.Serialize(Object, System.IO.MemoryStream)
-  nameWithType: ProtoBufPackHelper.Serialize(object, MemoryStream)
-  nameWithType.vb: ProtoBufPackHelper.Serialize(Object, MemoryStream)
-- uid: Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Type,System.Object,System.IO.MemoryStream)
-  name: Serialize(Type, object, MemoryStream)
-  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Serialize_System_Type_System_Object_System_IO_MemoryStream_
-  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Type,System.Object,System.IO.MemoryStream)
-  name.vb: Serialize(Type, Object, MemoryStream)
-  fullName: Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Type, object, System.IO.MemoryStream)
-  fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Type, Object, System.IO.MemoryStream)
-  nameWithType: ProtoBufPackHelper.Serialize(Type, object, MemoryStream)
-  nameWithType.vb: ProtoBufPackHelper.Serialize(Type, Object, MemoryStream)
+- uid: Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
+  name: Serialize(object, IBufferWriter<byte>)
+  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Serialize_System_Object_System_Buffers_IBufferWriter_System_Byte__
+  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})
+  name.vb: Serialize(Object, IBufferWriter(Of Byte))
+  fullName: Fantasy.Serialize.ProtoBufPackHelper.Serialize(object, System.Buffers.IBufferWriter<byte>)
+  fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.Serialize(Object, System.Buffers.IBufferWriter(Of Byte))
+  nameWithType: ProtoBufPackHelper.Serialize(object, IBufferWriter<byte>)
+  nameWithType.vb: ProtoBufPackHelper.Serialize(Object, IBufferWriter(Of Byte))
+- uid: Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
+  name: Serialize(Type, object, IBufferWriter<byte>)
+  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Serialize_System_Type_System_Object_System_Buffers_IBufferWriter_System_Byte__
+  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})
+  name.vb: Serialize(Type, Object, IBufferWriter(Of Byte))
+  fullName: Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Type, object, System.Buffers.IBufferWriter<byte>)
+  fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.Serialize(System.Type, Object, System.Buffers.IBufferWriter(Of Byte))
+  nameWithType: ProtoBufPackHelper.Serialize(Type, object, IBufferWriter<byte>)
+  nameWithType.vb: ProtoBufPackHelper.Serialize(Type, Object, IBufferWriter(Of Byte))
 - uid: Fantasy.Serialize.ProtoBufPackHelper.Serialize*
   name: Serialize
   href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Serialize_
@@ -18850,15 +18988,92 @@ references:
   isSpec: "True"
   fullName: Fantasy.Serialize.ProtoBufPackHelper.Serialize
   nameWithType: ProtoBufPackHelper.Serialize
-- uid: Fantasy.Serialize.ProtoBufPackHelper.Serialize``1(``0,System.IO.MemoryStream)
-  name: Serialize<T>(T, MemoryStream)
-  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Serialize__1___0_System_IO_MemoryStream_
-  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.Serialize``1(``0,System.IO.MemoryStream)
-  name.vb: Serialize(Of T)(T, MemoryStream)
-  fullName: Fantasy.Serialize.ProtoBufPackHelper.Serialize<T>(T, System.IO.MemoryStream)
-  fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.Serialize(Of T)(T, System.IO.MemoryStream)
-  nameWithType: ProtoBufPackHelper.Serialize<T>(T, MemoryStream)
-  nameWithType.vb: ProtoBufPackHelper.Serialize(Of T)(T, MemoryStream)
+- uid: Fantasy.Serialize.ProtoBufPackHelper.SerializeName
+  name: SerializeName
+  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_SerializeName
+  commentId: P:Fantasy.Serialize.ProtoBufPackHelper.SerializeName
+  fullName: Fantasy.Serialize.ProtoBufPackHelper.SerializeName
+  nameWithType: ProtoBufPackHelper.SerializeName
+- uid: Fantasy.Serialize.ProtoBufPackHelper.SerializeName*
+  name: SerializeName
+  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_SerializeName_
+  commentId: Overload:Fantasy.Serialize.ProtoBufPackHelper.SerializeName
+  isSpec: "True"
+  fullName: Fantasy.Serialize.ProtoBufPackHelper.SerializeName
+  nameWithType: ProtoBufPackHelper.SerializeName
+- uid: Fantasy.Serialize.ProtoBufPackHelper.Serialize``1(``0,System.Buffers.IBufferWriter{System.Byte})
+  name: Serialize<T>(T, IBufferWriter<byte>)
+  href: api/Fantasy.Serialize.ProtoBufPackHelper.html#Fantasy_Serialize_ProtoBufPackHelper_Serialize__1___0_System_Buffers_IBufferWriter_System_Byte__
+  commentId: M:Fantasy.Serialize.ProtoBufPackHelper.Serialize``1(``0,System.Buffers.IBufferWriter{System.Byte})
+  name.vb: Serialize(Of T)(T, IBufferWriter(Of Byte))
+  fullName: Fantasy.Serialize.ProtoBufPackHelper.Serialize<T>(T, System.Buffers.IBufferWriter<byte>)
+  fullName.vb: Fantasy.Serialize.ProtoBufPackHelper.Serialize(Of T)(T, System.Buffers.IBufferWriter(Of Byte))
+  nameWithType: ProtoBufPackHelper.Serialize<T>(T, IBufferWriter<byte>)
+  nameWithType.vb: ProtoBufPackHelper.Serialize(Of T)(T, IBufferWriter(Of Byte))
+- uid: Fantasy.Serialize.SerializerManager
+  name: SerializerManager
+  href: api/Fantasy.Serialize.SerializerManager.html
+  commentId: T:Fantasy.Serialize.SerializerManager
+  fullName: Fantasy.Serialize.SerializerManager
+  nameWithType: SerializerManager
+- uid: Fantasy.Serialize.SerializerManager.Dispose
+  name: Dispose()
+  href: api/Fantasy.Serialize.SerializerManager.html#Fantasy_Serialize_SerializerManager_Dispose
+  commentId: M:Fantasy.Serialize.SerializerManager.Dispose
+  fullName: Fantasy.Serialize.SerializerManager.Dispose()
+  nameWithType: SerializerManager.Dispose()
+- uid: Fantasy.Serialize.SerializerManager.Dispose*
+  name: Dispose
+  href: api/Fantasy.Serialize.SerializerManager.html#Fantasy_Serialize_SerializerManager_Dispose_
+  commentId: Overload:Fantasy.Serialize.SerializerManager.Dispose
+  isSpec: "True"
+  fullName: Fantasy.Serialize.SerializerManager.Dispose
+  nameWithType: SerializerManager.Dispose
+- uid: Fantasy.Serialize.SerializerManager.GetSerializer(System.UInt32)
+  name: GetSerializer(uint)
+  href: api/Fantasy.Serialize.SerializerManager.html#Fantasy_Serialize_SerializerManager_GetSerializer_System_UInt32_
+  commentId: M:Fantasy.Serialize.SerializerManager.GetSerializer(System.UInt32)
+  name.vb: GetSerializer(UInteger)
+  fullName: Fantasy.Serialize.SerializerManager.GetSerializer(uint)
+  fullName.vb: Fantasy.Serialize.SerializerManager.GetSerializer(UInteger)
+  nameWithType: SerializerManager.GetSerializer(uint)
+  nameWithType.vb: SerializerManager.GetSerializer(UInteger)
+- uid: Fantasy.Serialize.SerializerManager.GetSerializer*
+  name: GetSerializer
+  href: api/Fantasy.Serialize.SerializerManager.html#Fantasy_Serialize_SerializerManager_GetSerializer_
+  commentId: Overload:Fantasy.Serialize.SerializerManager.GetSerializer
+  isSpec: "True"
+  fullName: Fantasy.Serialize.SerializerManager.GetSerializer
+  nameWithType: SerializerManager.GetSerializer
+- uid: Fantasy.Serialize.SerializerManager.Initialize
+  name: Initialize()
+  href: api/Fantasy.Serialize.SerializerManager.html#Fantasy_Serialize_SerializerManager_Initialize
+  commentId: M:Fantasy.Serialize.SerializerManager.Initialize
+  fullName: Fantasy.Serialize.SerializerManager.Initialize()
+  nameWithType: SerializerManager.Initialize()
+- uid: Fantasy.Serialize.SerializerManager.Initialize*
+  name: Initialize
+  href: api/Fantasy.Serialize.SerializerManager.html#Fantasy_Serialize_SerializerManager_Initialize_
+  commentId: Overload:Fantasy.Serialize.SerializerManager.Initialize
+  isSpec: "True"
+  fullName: Fantasy.Serialize.SerializerManager.Initialize
+  nameWithType: SerializerManager.Initialize
+- uid: Fantasy.Serialize.SerializerManager.TryGetSerializer(System.UInt32,Fantasy.Serialize.ISerialize@)
+  name: TryGetSerializer(uint, out ISerialize)
+  href: api/Fantasy.Serialize.SerializerManager.html#Fantasy_Serialize_SerializerManager_TryGetSerializer_System_UInt32_Fantasy_Serialize_ISerialize__
+  commentId: M:Fantasy.Serialize.SerializerManager.TryGetSerializer(System.UInt32,Fantasy.Serialize.ISerialize@)
+  name.vb: TryGetSerializer(UInteger, ISerialize)
+  fullName: Fantasy.Serialize.SerializerManager.TryGetSerializer(uint, out Fantasy.Serialize.ISerialize)
+  fullName.vb: Fantasy.Serialize.SerializerManager.TryGetSerializer(UInteger, Fantasy.Serialize.ISerialize)
+  nameWithType: SerializerManager.TryGetSerializer(uint, out ISerialize)
+  nameWithType.vb: SerializerManager.TryGetSerializer(UInteger, ISerialize)
+- uid: Fantasy.Serialize.SerializerManager.TryGetSerializer*
+  name: TryGetSerializer
+  href: api/Fantasy.Serialize.SerializerManager.html#Fantasy_Serialize_SerializerManager_TryGetSerializer_
+  commentId: Overload:Fantasy.Serialize.SerializerManager.TryGetSerializer
+  isSpec: "True"
+  fullName: Fantasy.Serialize.SerializerManager.TryGetSerializer
+  nameWithType: SerializerManager.TryGetSerializer
 - uid: Fantasy.Serialize.StructBsonSerialize`1
   name: StructBsonSerialize<TValue>
   href: api/Fantasy.Serialize.StructBsonSerialize-1.html

@@ -49,7 +49,6 @@ items:
   - Fantasy.Network.Interface.ANetwork.ReturnOuterPackInfo(Fantasy.PacketParser.OuterPackInfo)
   - Fantasy.Network.Interface.ANetwork.RentInnerPackInfo
   - Fantasy.Network.Interface.ANetwork.ReturnInnerPackInfo(Fantasy.PacketParser.InnerPackInfo)
-  - Fantasy.Entitas.Entity.IsPool
   - Fantasy.Entitas.Entity.Id
   - Fantasy.Entitas.Entity.RunTimeId
   - Fantasy.Entitas.Entity.IsDisposed
@@ -76,7 +75,8 @@ items:
   - Fantasy.Entitas.Entity.ForEachTransfer
   - Fantasy.Entitas.Entity.ForEachMultiEntity
   - Fantasy.Entitas.Entity.ForEachEntity
-  - Fantasy.Entitas.Entity.Clone
+  - Fantasy.Entitas.Entity.IsPool
+  - Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -478,13 +478,6 @@ references:
     name: InnerPackInfo
     href: Fantasy.PacketParser.InnerPackInfo.html
   - name: )
-- uid: Fantasy.Entitas.Entity.IsPool
-  commentId: P:Fantasy.Entitas.Entity.IsPool
-  parent: Fantasy.Entitas.Entity
-  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
-  name: IsPool
-  nameWithType: Entity.IsPool
-  fullName: Fantasy.Entitas.Entity.IsPool
 - uid: Fantasy.Entitas.Entity.Id
   commentId: P:Fantasy.Entitas.Entity.Id
   parent: Fantasy.Entitas.Entity
@@ -1220,24 +1213,55 @@ references:
   name: ForEachEntity
   nameWithType: Entity.ForEachEntity
   fullName: Fantasy.Entitas.Entity.ForEachEntity
-- uid: Fantasy.Entitas.Entity.Clone
-  commentId: M:Fantasy.Entitas.Entity.Clone
+- uid: Fantasy.Entitas.Entity.IsPool
+  commentId: M:Fantasy.Entitas.Entity.IsPool
   parent: Fantasy.Entitas.Entity
-  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
-  name: Clone()
-  nameWithType: Entity.Clone()
-  fullName: Fantasy.Entitas.Entity.Clone()
+  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
+  name: IsPool()
+  nameWithType: Entity.IsPool()
+  fullName: Fantasy.Entitas.Entity.IsPool()
   spec.csharp:
-  - uid: Fantasy.Entitas.Entity.Clone
-    name: Clone
-    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
+  - uid: Fantasy.Entitas.Entity.IsPool
+    name: IsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
   - name: (
   - name: )
   spec.vb:
-  - uid: Fantasy.Entitas.Entity.Clone
-    name: Clone
-    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
+  - uid: Fantasy.Entitas.Entity.IsPool
+    name: IsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
   - name: (
+  - name: )
+- uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+  commentId: M:Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+  parent: Fantasy.Entitas.Entity
+  isExternal: true
+  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
+  name: SetIsPool(bool)
+  nameWithType: Entity.SetIsPool(bool)
+  fullName: Fantasy.Entitas.Entity.SetIsPool(bool)
+  nameWithType.vb: Entity.SetIsPool(Boolean)
+  fullName.vb: Fantasy.Entitas.Entity.SetIsPool(Boolean)
+  name.vb: SetIsPool(Boolean)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)

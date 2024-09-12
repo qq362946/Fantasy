@@ -113,12 +113,12 @@ items:
   summary: 事件调用的方法，要在这个方法里编写事件发生的逻辑
   example: []
   syntax:
-    content: public abstract void Handler(T self)
+    content: protected abstract void Handler(T self)
     parameters:
     - id: self
       type: '{T}'
       description: ''
-    content.vb: Public MustOverride Sub Handler(self As T)
+    content.vb: Protected MustOverride Sub Handler(self As T)
   overload: Fantasy.Event.EventSystem`1.Handler*
   nameWithType.vb: EventSystem(Of T).Handler(T)
   fullName.vb: Fantasy.Event.EventSystem(Of T).Handler(T)

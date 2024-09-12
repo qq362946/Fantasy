@@ -6,6 +6,7 @@ items:
   parent: Fantasy.Pool
   children:
   - Fantasy.Pool.IPool.IsPool
+  - Fantasy.Pool.IPool.SetIsPool(System.Boolean)
   langs:
   - csharp
   - vb
@@ -32,16 +33,16 @@ items:
   extensionMethods:
   - Fantasy.Pool.IPool.Fantasy.Helper.JsonHelper.ToJson``1
 - uid: Fantasy.Pool.IPool.IsPool
-  commentId: P:Fantasy.Pool.IPool.IsPool
+  commentId: M:Fantasy.Pool.IPool.IsPool
   id: IsPool
   parent: Fantasy.Pool.IPool
   langs:
   - csharp
   - vb
-  name: IsPool
-  nameWithType: IPool.IsPool
-  fullName: Fantasy.Pool.IPool.IsPool
-  type: Property
+  name: IsPool()
+  nameWithType: IPool.IsPool()
+  fullName: Fantasy.Pool.IPool.IsPool()
+  type: Method
   source:
     remote:
       path: Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Interface/IPool.cs
@@ -53,15 +54,49 @@ items:
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Pool
-  summary: 是否从吃池里创建的
+  summary: 是否从池里创建的
   example: []
   syntax:
-    content: bool IsPool { get; set; }
-    parameters: []
+    content: bool IsPool()
     return:
       type: System.Boolean
-    content.vb: Property IsPool As Boolean
+    content.vb: Function IsPool() As Boolean
   overload: Fantasy.Pool.IPool.IsPool*
+- uid: Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+  commentId: M:Fantasy.Pool.IPool.SetIsPool(System.Boolean)
+  id: SetIsPool(System.Boolean)
+  parent: Fantasy.Pool.IPool
+  langs:
+  - csharp
+  - vb
+  name: SetIsPool(bool)
+  nameWithType: IPool.SetIsPool(bool)
+  fullName: Fantasy.Pool.IPool.SetIsPool(bool)
+  type: Method
+  source:
+    remote:
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Interface/IPool.cs
+      branch: main
+      repo: https://github.com/qq362946/Fantasy.git
+    id: SetIsPool
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Pool/Interface/IPool.cs
+    startLine: 15
+  assemblies:
+  - Fantasy.Net
+  namespace: Fantasy.Pool
+  summary: 设置是否从池里创建的
+  example: []
+  syntax:
+    content: void SetIsPool(bool isPool)
+    parameters:
+    - id: isPool
+      type: System.Boolean
+      description: ''
+    content.vb: Sub SetIsPool(isPool As Boolean)
+  overload: Fantasy.Pool.IPool.SetIsPool*
+  nameWithType.vb: IPool.SetIsPool(Boolean)
+  fullName.vb: Fantasy.Pool.IPool.SetIsPool(Boolean)
+  name.vb: SetIsPool(Boolean)
 references:
 - uid: Fantasy.Pool
   commentId: N:Fantasy.Pool
@@ -210,3 +245,9 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Fantasy.Pool.IPool.SetIsPool*
+  commentId: Overload:Fantasy.Pool.IPool.SetIsPool
+  href: Fantasy.Pool.IPool.html#Fantasy_Pool_IPool_SetIsPool_System_Boolean_
+  name: SetIsPool
+  nameWithType: IPool.SetIsPool
+  fullName: Fantasy.Pool.IPool.SetIsPool

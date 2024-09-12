@@ -1,48 +1,55 @@
 ### YamlMime:ManagedReference
 items:
-- uid: Fantasy.Network.AddressableRouteComponent
-  commentId: T:Fantasy.Network.AddressableRouteComponent
-  id: AddressableRouteComponent
-  parent: Fantasy.Network
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork
+  commentId: T:Fantasy.Network.HTTP.HTTPServerNetwork
+  id: HTTPServerNetwork
+  parent: Fantasy.Network.HTTP
   children:
-  - Fantasy.Network.AddressableRouteComponent.AddressableId
-  - Fantasy.Network.AddressableRouteComponent.AddressableRouteLock
-  - Fantasy.Network.AddressableRouteComponent.MessageDispatcherComponent
-  - Fantasy.Network.AddressableRouteComponent.NetworkMessagingComponent
-  - Fantasy.Network.AddressableRouteComponent.RouteId
-  - Fantasy.Network.AddressableRouteComponent.TimerComponent
+  - Fantasy.Network.HTTP.HTTPServerNetwork.Initialize(Fantasy.Network.NetworkTarget,System.Collections.Generic.IEnumerable{System.String})
+  - Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel(System.UInt32)
   langs:
   - csharp
   - vb
-  name: AddressableRouteComponent
-  nameWithType: AddressableRouteComponent
-  fullName: Fantasy.Network.AddressableRouteComponent
+  name: HTTPServerNetwork
+  nameWithType: HTTPServerNetwork
+  fullName: Fantasy.Network.HTTP.HTTPServerNetwork
   type: Class
   source:
     remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/HTTPServerNetwork.cs
       branch: main
       repo: https://github.com/qq362946/Fantasy.git
-    id: AddressableRouteComponent
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
-    startLine: 47
+    id: HTTPServerNetwork
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/HTTPServerNetwork.cs
+    startLine: 18
   assemblies:
   - Fantasy.Net
-  namespace: Fantasy.Network
-  summary: 可寻址路由消息组件，挂载了这个组件可以接收和发送 Addressable 消息。
+  namespace: Fantasy.Network.HTTP
+  summary: HTTP服务器
   example: []
   syntax:
-    content: 'public sealed class AddressableRouteComponent : Entity, IEntity, IDisposable, IPool'
-    content.vb: Public NotInheritable Class AddressableRouteComponent Inherits Entity Implements IEntity, IDisposable, IPool
+    content: 'public sealed class HTTPServerNetwork : ANetwork, IEntity, IDisposable, IPool'
+    content.vb: Public NotInheritable Class HTTPServerNetwork Inherits ANetwork Implements IEntity, IDisposable, IPool
   inheritance:
   - System.Object
   - Fantasy.Entitas.Entity
+  - Fantasy.Network.Interface.ANetwork
   implements:
   - Fantasy.Entitas.IEntity
   - System.IDisposable
   - Fantasy.Pool.IPool
   inheritedMembers:
-  - Fantasy.Entitas.Entity.IsPool
+  - Fantasy.Network.Interface.ANetwork.NetworkType
+  - Fantasy.Network.Interface.ANetwork.NetworkTarget
+  - Fantasy.Network.Interface.ANetwork.NetworkProtocolType
+  - Fantasy.Network.Interface.ANetwork.NetworkMessageScheduler
+  - Fantasy.Network.Interface.ANetwork.RentMemoryStream(System.Int32)
+  - Fantasy.Network.Interface.ANetwork.ReturnMemoryStream(Fantasy.Serialize.MemoryStreamBuffer)
+  - Fantasy.Network.Interface.ANetwork.RentOuterPackInfo
+  - Fantasy.Network.Interface.ANetwork.ReturnOuterPackInfo(Fantasy.PacketParser.OuterPackInfo)
+  - Fantasy.Network.Interface.ANetwork.RentInnerPackInfo
+  - Fantasy.Network.Interface.ANetwork.ReturnInnerPackInfo(Fantasy.PacketParser.InnerPackInfo)
+  - Fantasy.Network.Interface.ANetwork.Dispose
   - Fantasy.Entitas.Entity.Id
   - Fantasy.Entitas.Entity.RunTimeId
   - Fantasy.Entitas.Entity.IsDisposed
@@ -69,8 +76,8 @@ items:
   - Fantasy.Entitas.Entity.ForEachTransfer
   - Fantasy.Entitas.Entity.ForEachMultiEntity
   - Fantasy.Entitas.Entity.ForEachEntity
-  - Fantasy.Entitas.Entity.Clone
-  - Fantasy.Entitas.Entity.Dispose
+  - Fantasy.Entitas.Entity.IsPool
+  - Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -78,176 +85,92 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   extensionMethods:
-  - Fantasy.Network.AddressableRouteComponent.Fantasy.Helper.JsonHelper.ToJson``1
-- uid: Fantasy.Network.AddressableRouteComponent.RouteId
-  commentId: F:Fantasy.Network.AddressableRouteComponent.RouteId
-  id: RouteId
-  parent: Fantasy.Network.AddressableRouteComponent
+  - Fantasy.Network.HTTP.HTTPServerNetwork.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork.Initialize(Fantasy.Network.NetworkTarget,System.Collections.Generic.IEnumerable{System.String})
+  commentId: M:Fantasy.Network.HTTP.HTTPServerNetwork.Initialize(Fantasy.Network.NetworkTarget,System.Collections.Generic.IEnumerable{System.String})
+  id: Initialize(Fantasy.Network.NetworkTarget,System.Collections.Generic.IEnumerable{System.String})
+  parent: Fantasy.Network.HTTP.HTTPServerNetwork
   langs:
   - csharp
   - vb
-  name: RouteId
-  nameWithType: AddressableRouteComponent.RouteId
-  fullName: Fantasy.Network.AddressableRouteComponent.RouteId
-  type: Field
+  name: Initialize(NetworkTarget, IEnumerable<string>)
+  nameWithType: HTTPServerNetwork.Initialize(NetworkTarget, IEnumerable<string>)
+  fullName: Fantasy.Network.HTTP.HTTPServerNetwork.Initialize(Fantasy.Network.NetworkTarget, System.Collections.Generic.IEnumerable<string>)
+  type: Method
   source:
     remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/HTTPServerNetwork.cs
       branch: main
       repo: https://github.com/qq362946/Fantasy.git
-    id: RouteId
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
-    startLine: 49
+    id: Initialize
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/HTTPServerNetwork.cs
+    startLine: 25
   assemblies:
   - Fantasy.Net
-  namespace: Fantasy.Network
+  namespace: Fantasy.Network.HTTP
+  summary: 初始化入口
+  example: []
   syntax:
-    content: public long RouteId
-    return:
-      type: System.Int64
-    content.vb: Public RouteId As Long
-- uid: Fantasy.Network.AddressableRouteComponent.AddressableId
-  commentId: F:Fantasy.Network.AddressableRouteComponent.AddressableId
-  id: AddressableId
-  parent: Fantasy.Network.AddressableRouteComponent
+    content: public void Initialize(NetworkTarget networkTarget, IEnumerable<string> urls)
+    parameters:
+    - id: networkTarget
+      type: Fantasy.Network.NetworkTarget
+      description: ''
+    - id: urls
+      type: System.Collections.Generic.IEnumerable{System.String}
+      description: ''
+    content.vb: Public Sub Initialize(networkTarget As NetworkTarget, urls As IEnumerable(Of String))
+  overload: Fantasy.Network.HTTP.HTTPServerNetwork.Initialize*
+  nameWithType.vb: HTTPServerNetwork.Initialize(NetworkTarget, IEnumerable(Of String))
+  fullName.vb: Fantasy.Network.HTTP.HTTPServerNetwork.Initialize(Fantasy.Network.NetworkTarget, System.Collections.Generic.IEnumerable(Of String))
+  name.vb: Initialize(NetworkTarget, IEnumerable(Of String))
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel(System.UInt32)
+  commentId: M:Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel(System.UInt32)
+  id: RemoveChannel(System.UInt32)
+  parent: Fantasy.Network.HTTP.HTTPServerNetwork
   langs:
   - csharp
   - vb
-  name: AddressableId
-  nameWithType: AddressableRouteComponent.AddressableId
-  fullName: Fantasy.Network.AddressableRouteComponent.AddressableId
-  type: Field
+  name: RemoveChannel(uint)
+  nameWithType: HTTPServerNetwork.RemoveChannel(uint)
+  fullName: Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel(uint)
+  type: Method
   source:
     remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
+      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/HTTPServerNetwork.cs
       branch: main
       repo: https://github.com/qq362946/Fantasy.git
-    id: AddressableId
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
-    startLine: 50
+    id: RemoveChannel
+    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/HTTP/HTTPServerNetwork.cs
+    startLine: 88
   assemblies:
   - Fantasy.Net
-  namespace: Fantasy.Network
+  namespace: Fantasy.Network.HTTP
+  summary: 移除Channel
+  example: []
   syntax:
-    content: public long AddressableId
-    return:
-      type: System.Int64
-    content.vb: Public AddressableId As Long
-- uid: Fantasy.Network.AddressableRouteComponent.AddressableRouteLock
-  commentId: F:Fantasy.Network.AddressableRouteComponent.AddressableRouteLock
-  id: AddressableRouteLock
-  parent: Fantasy.Network.AddressableRouteComponent
-  langs:
-  - csharp
-  - vb
-  name: AddressableRouteLock
-  nameWithType: AddressableRouteComponent.AddressableRouteLock
-  fullName: Fantasy.Network.AddressableRouteComponent.AddressableRouteLock
-  type: Field
-  source:
-    remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
-      branch: main
-      repo: https://github.com/qq362946/Fantasy.git
-    id: AddressableRouteLock
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
-    startLine: 51
-  assemblies:
-  - Fantasy.Net
-  namespace: Fantasy.Network
-  syntax:
-    content: public CoroutineLock AddressableRouteLock
-    return:
-      type: Fantasy.Async.CoroutineLock
-    content.vb: Public AddressableRouteLock As CoroutineLock
-- uid: Fantasy.Network.AddressableRouteComponent.TimerComponent
-  commentId: F:Fantasy.Network.AddressableRouteComponent.TimerComponent
-  id: TimerComponent
-  parent: Fantasy.Network.AddressableRouteComponent
-  langs:
-  - csharp
-  - vb
-  name: TimerComponent
-  nameWithType: AddressableRouteComponent.TimerComponent
-  fullName: Fantasy.Network.AddressableRouteComponent.TimerComponent
-  type: Field
-  source:
-    remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
-      branch: main
-      repo: https://github.com/qq362946/Fantasy.git
-    id: TimerComponent
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
-    startLine: 52
-  assemblies:
-  - Fantasy.Net
-  namespace: Fantasy.Network
-  syntax:
-    content: public TimerComponent TimerComponent
-    return:
-      type: Fantasy.Timer.TimerComponent
-    content.vb: Public TimerComponent As TimerComponent
-- uid: Fantasy.Network.AddressableRouteComponent.NetworkMessagingComponent
-  commentId: F:Fantasy.Network.AddressableRouteComponent.NetworkMessagingComponent
-  id: NetworkMessagingComponent
-  parent: Fantasy.Network.AddressableRouteComponent
-  langs:
-  - csharp
-  - vb
-  name: NetworkMessagingComponent
-  nameWithType: AddressableRouteComponent.NetworkMessagingComponent
-  fullName: Fantasy.Network.AddressableRouteComponent.NetworkMessagingComponent
-  type: Field
-  source:
-    remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
-      branch: main
-      repo: https://github.com/qq362946/Fantasy.git
-    id: NetworkMessagingComponent
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
-    startLine: 53
-  assemblies:
-  - Fantasy.Net
-  namespace: Fantasy.Network
-  syntax:
-    content: public NetworkMessagingComponent NetworkMessagingComponent
-    return:
-      type: Fantasy.Scheduler.NetworkMessagingComponent
-    content.vb: Public NetworkMessagingComponent As NetworkMessagingComponent
-- uid: Fantasy.Network.AddressableRouteComponent.MessageDispatcherComponent
-  commentId: F:Fantasy.Network.AddressableRouteComponent.MessageDispatcherComponent
-  id: MessageDispatcherComponent
-  parent: Fantasy.Network.AddressableRouteComponent
-  langs:
-  - csharp
-  - vb
-  name: MessageDispatcherComponent
-  nameWithType: AddressableRouteComponent.MessageDispatcherComponent
-  fullName: Fantasy.Network.AddressableRouteComponent.MessageDispatcherComponent
-  type: Field
-  source:
-    remote:
-      path: Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
-      branch: main
-      repo: https://github.com/qq362946/Fantasy.git
-    id: MessageDispatcherComponent
-    path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Addressable/AddressableRouteComponent.cs
-    startLine: 54
-  assemblies:
-  - Fantasy.Net
-  namespace: Fantasy.Network
-  syntax:
-    content: public MessageDispatcherComponent MessageDispatcherComponent
-    return:
-      type: Fantasy.Network.Interface.MessageDispatcherComponent
-    content.vb: Public MessageDispatcherComponent As MessageDispatcherComponent
+    content: public override void RemoveChannel(uint channelId)
+    parameters:
+    - id: channelId
+      type: System.UInt32
+      description: ''
+    content.vb: Public Overrides Sub RemoveChannel(channelId As UInteger)
+  overridden: Fantasy.Network.Interface.ANetwork.RemoveChannel(System.UInt32)
+  overload: Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel*
+  exceptions:
+  - type: System.NotImplementedException
+    commentId: T:System.NotImplementedException
+    description: ''
+  nameWithType.vb: HTTPServerNetwork.RemoveChannel(UInteger)
+  fullName.vb: Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel(UInteger)
+  name.vb: RemoveChannel(UInteger)
 references:
-- uid: Fantasy.Network
-  commentId: N:Fantasy.Network
+- uid: Fantasy.Network.HTTP
+  commentId: N:Fantasy.Network.HTTP
   href: Fantasy.html
-  name: Fantasy.Network
-  nameWithType: Fantasy.Network
-  fullName: Fantasy.Network
+  name: Fantasy.Network.HTTP
+  nameWithType: Fantasy.Network.HTTP
+  fullName: Fantasy.Network.HTTP
   spec.csharp:
   - uid: Fantasy
     name: Fantasy
@@ -256,6 +179,10 @@ references:
   - uid: Fantasy.Network
     name: Network
     href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.HTTP
+    name: HTTP
+    href: Fantasy.Network.HTTP.html
   spec.vb:
   - uid: Fantasy
     name: Fantasy
@@ -264,6 +191,10 @@ references:
   - uid: Fantasy.Network
     name: Network
     href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.HTTP
+    name: HTTP
+    href: Fantasy.Network.HTTP.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
@@ -282,6 +213,13 @@ references:
   name: Entity
   nameWithType: Entity
   fullName: Fantasy.Entitas.Entity
+- uid: Fantasy.Network.Interface.ANetwork
+  commentId: T:Fantasy.Network.Interface.ANetwork
+  parent: Fantasy.Network.Interface
+  href: Fantasy.Network.Interface.ANetwork.html
+  name: ANetwork
+  nameWithType: ANetwork
+  fullName: Fantasy.Network.Interface.ANetwork
 - uid: Fantasy.Entitas.IEntity
   commentId: T:Fantasy.Entitas.IEntity
   parent: Fantasy.Entitas
@@ -304,13 +242,197 @@ references:
   name: IPool
   nameWithType: IPool
   fullName: Fantasy.Pool.IPool
-- uid: Fantasy.Entitas.Entity.IsPool
-  commentId: P:Fantasy.Entitas.Entity.IsPool
-  parent: Fantasy.Entitas.Entity
-  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
-  name: IsPool
-  nameWithType: Entity.IsPool
-  fullName: Fantasy.Entitas.Entity.IsPool
+- uid: Fantasy.Network.Interface.ANetwork.NetworkType
+  commentId: P:Fantasy.Network.Interface.ANetwork.NetworkType
+  parent: Fantasy.Network.Interface.ANetwork
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_NetworkType
+  name: NetworkType
+  nameWithType: ANetwork.NetworkType
+  fullName: Fantasy.Network.Interface.ANetwork.NetworkType
+- uid: Fantasy.Network.Interface.ANetwork.NetworkTarget
+  commentId: P:Fantasy.Network.Interface.ANetwork.NetworkTarget
+  parent: Fantasy.Network.Interface.ANetwork
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_NetworkTarget
+  name: NetworkTarget
+  nameWithType: ANetwork.NetworkTarget
+  fullName: Fantasy.Network.Interface.ANetwork.NetworkTarget
+- uid: Fantasy.Network.Interface.ANetwork.NetworkProtocolType
+  commentId: P:Fantasy.Network.Interface.ANetwork.NetworkProtocolType
+  parent: Fantasy.Network.Interface.ANetwork
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_NetworkProtocolType
+  name: NetworkProtocolType
+  nameWithType: ANetwork.NetworkProtocolType
+  fullName: Fantasy.Network.Interface.ANetwork.NetworkProtocolType
+- uid: Fantasy.Network.Interface.ANetwork.NetworkMessageScheduler
+  commentId: P:Fantasy.Network.Interface.ANetwork.NetworkMessageScheduler
+  parent: Fantasy.Network.Interface.ANetwork
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_NetworkMessageScheduler
+  name: NetworkMessageScheduler
+  nameWithType: ANetwork.NetworkMessageScheduler
+  fullName: Fantasy.Network.Interface.ANetwork.NetworkMessageScheduler
+- uid: Fantasy.Network.Interface.ANetwork.RentMemoryStream(System.Int32)
+  commentId: M:Fantasy.Network.Interface.ANetwork.RentMemoryStream(System.Int32)
+  parent: Fantasy.Network.Interface.ANetwork
+  isExternal: true
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentMemoryStream_System_Int32_
+  name: RentMemoryStream(int)
+  nameWithType: ANetwork.RentMemoryStream(int)
+  fullName: Fantasy.Network.Interface.ANetwork.RentMemoryStream(int)
+  nameWithType.vb: ANetwork.RentMemoryStream(Integer)
+  fullName.vb: Fantasy.Network.Interface.ANetwork.RentMemoryStream(Integer)
+  name.vb: RentMemoryStream(Integer)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.ANetwork.RentMemoryStream(System.Int32)
+    name: RentMemoryStream
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentMemoryStream_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.ANetwork.RentMemoryStream(System.Int32)
+    name: RentMemoryStream
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentMemoryStream_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Fantasy.Network.Interface.ANetwork.ReturnMemoryStream(Fantasy.Serialize.MemoryStreamBuffer)
+  commentId: M:Fantasy.Network.Interface.ANetwork.ReturnMemoryStream(Fantasy.Serialize.MemoryStreamBuffer)
+  parent: Fantasy.Network.Interface.ANetwork
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnMemoryStream_Fantasy_Serialize_MemoryStreamBuffer_
+  name: ReturnMemoryStream(MemoryStreamBuffer)
+  nameWithType: ANetwork.ReturnMemoryStream(MemoryStreamBuffer)
+  fullName: Fantasy.Network.Interface.ANetwork.ReturnMemoryStream(Fantasy.Serialize.MemoryStreamBuffer)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.ANetwork.ReturnMemoryStream(Fantasy.Serialize.MemoryStreamBuffer)
+    name: ReturnMemoryStream
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnMemoryStream_Fantasy_Serialize_MemoryStreamBuffer_
+  - name: (
+  - uid: Fantasy.Serialize.MemoryStreamBuffer
+    name: MemoryStreamBuffer
+    href: Fantasy.Serialize.MemoryStreamBuffer.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.ANetwork.ReturnMemoryStream(Fantasy.Serialize.MemoryStreamBuffer)
+    name: ReturnMemoryStream
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnMemoryStream_Fantasy_Serialize_MemoryStreamBuffer_
+  - name: (
+  - uid: Fantasy.Serialize.MemoryStreamBuffer
+    name: MemoryStreamBuffer
+    href: Fantasy.Serialize.MemoryStreamBuffer.html
+  - name: )
+- uid: Fantasy.Network.Interface.ANetwork.RentOuterPackInfo
+  commentId: M:Fantasy.Network.Interface.ANetwork.RentOuterPackInfo
+  parent: Fantasy.Network.Interface.ANetwork
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentOuterPackInfo
+  name: RentOuterPackInfo()
+  nameWithType: ANetwork.RentOuterPackInfo()
+  fullName: Fantasy.Network.Interface.ANetwork.RentOuterPackInfo()
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.ANetwork.RentOuterPackInfo
+    name: RentOuterPackInfo
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentOuterPackInfo
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.ANetwork.RentOuterPackInfo
+    name: RentOuterPackInfo
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentOuterPackInfo
+  - name: (
+  - name: )
+- uid: Fantasy.Network.Interface.ANetwork.ReturnOuterPackInfo(Fantasy.PacketParser.OuterPackInfo)
+  commentId: M:Fantasy.Network.Interface.ANetwork.ReturnOuterPackInfo(Fantasy.PacketParser.OuterPackInfo)
+  parent: Fantasy.Network.Interface.ANetwork
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnOuterPackInfo_Fantasy_PacketParser_OuterPackInfo_
+  name: ReturnOuterPackInfo(OuterPackInfo)
+  nameWithType: ANetwork.ReturnOuterPackInfo(OuterPackInfo)
+  fullName: Fantasy.Network.Interface.ANetwork.ReturnOuterPackInfo(Fantasy.PacketParser.OuterPackInfo)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.ANetwork.ReturnOuterPackInfo(Fantasy.PacketParser.OuterPackInfo)
+    name: ReturnOuterPackInfo
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnOuterPackInfo_Fantasy_PacketParser_OuterPackInfo_
+  - name: (
+  - uid: Fantasy.PacketParser.OuterPackInfo
+    name: OuterPackInfo
+    href: Fantasy.PacketParser.OuterPackInfo.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.ANetwork.ReturnOuterPackInfo(Fantasy.PacketParser.OuterPackInfo)
+    name: ReturnOuterPackInfo
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnOuterPackInfo_Fantasy_PacketParser_OuterPackInfo_
+  - name: (
+  - uid: Fantasy.PacketParser.OuterPackInfo
+    name: OuterPackInfo
+    href: Fantasy.PacketParser.OuterPackInfo.html
+  - name: )
+- uid: Fantasy.Network.Interface.ANetwork.RentInnerPackInfo
+  commentId: M:Fantasy.Network.Interface.ANetwork.RentInnerPackInfo
+  parent: Fantasy.Network.Interface.ANetwork
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentInnerPackInfo
+  name: RentInnerPackInfo()
+  nameWithType: ANetwork.RentInnerPackInfo()
+  fullName: Fantasy.Network.Interface.ANetwork.RentInnerPackInfo()
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.ANetwork.RentInnerPackInfo
+    name: RentInnerPackInfo
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentInnerPackInfo
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.ANetwork.RentInnerPackInfo
+    name: RentInnerPackInfo
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RentInnerPackInfo
+  - name: (
+  - name: )
+- uid: Fantasy.Network.Interface.ANetwork.ReturnInnerPackInfo(Fantasy.PacketParser.InnerPackInfo)
+  commentId: M:Fantasy.Network.Interface.ANetwork.ReturnInnerPackInfo(Fantasy.PacketParser.InnerPackInfo)
+  parent: Fantasy.Network.Interface.ANetwork
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnInnerPackInfo_Fantasy_PacketParser_InnerPackInfo_
+  name: ReturnInnerPackInfo(InnerPackInfo)
+  nameWithType: ANetwork.ReturnInnerPackInfo(InnerPackInfo)
+  fullName: Fantasy.Network.Interface.ANetwork.ReturnInnerPackInfo(Fantasy.PacketParser.InnerPackInfo)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.ANetwork.ReturnInnerPackInfo(Fantasy.PacketParser.InnerPackInfo)
+    name: ReturnInnerPackInfo
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnInnerPackInfo_Fantasy_PacketParser_InnerPackInfo_
+  - name: (
+  - uid: Fantasy.PacketParser.InnerPackInfo
+    name: InnerPackInfo
+    href: Fantasy.PacketParser.InnerPackInfo.html
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.ANetwork.ReturnInnerPackInfo(Fantasy.PacketParser.InnerPackInfo)
+    name: ReturnInnerPackInfo
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_ReturnInnerPackInfo_Fantasy_PacketParser_InnerPackInfo_
+  - name: (
+  - uid: Fantasy.PacketParser.InnerPackInfo
+    name: InnerPackInfo
+    href: Fantasy.PacketParser.InnerPackInfo.html
+  - name: )
+- uid: Fantasy.Network.Interface.ANetwork.Dispose
+  commentId: M:Fantasy.Network.Interface.ANetwork.Dispose
+  parent: Fantasy.Network.Interface.ANetwork
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_Dispose
+  name: Dispose()
+  nameWithType: ANetwork.Dispose()
+  fullName: Fantasy.Network.Interface.ANetwork.Dispose()
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.ANetwork.Dispose
+    name: Dispose
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_Dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.ANetwork.Dispose
+    name: Dispose
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_Dispose
+  - name: (
+  - name: )
 - uid: Fantasy.Entitas.Entity.Id
   commentId: P:Fantasy.Entitas.Entity.Id
   parent: Fantasy.Entitas.Entity
@@ -1046,43 +1168,55 @@ references:
   name: ForEachEntity
   nameWithType: Entity.ForEachEntity
   fullName: Fantasy.Entitas.Entity.ForEachEntity
-- uid: Fantasy.Entitas.Entity.Clone
-  commentId: M:Fantasy.Entitas.Entity.Clone
+- uid: Fantasy.Entitas.Entity.IsPool
+  commentId: M:Fantasy.Entitas.Entity.IsPool
   parent: Fantasy.Entitas.Entity
-  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
-  name: Clone()
-  nameWithType: Entity.Clone()
-  fullName: Fantasy.Entitas.Entity.Clone()
+  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
+  name: IsPool()
+  nameWithType: Entity.IsPool()
+  fullName: Fantasy.Entitas.Entity.IsPool()
   spec.csharp:
-  - uid: Fantasy.Entitas.Entity.Clone
-    name: Clone
-    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
+  - uid: Fantasy.Entitas.Entity.IsPool
+    name: IsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
   - name: (
   - name: )
   spec.vb:
-  - uid: Fantasy.Entitas.Entity.Clone
-    name: Clone
-    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
+  - uid: Fantasy.Entitas.Entity.IsPool
+    name: IsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
   - name: (
   - name: )
-- uid: Fantasy.Entitas.Entity.Dispose
-  commentId: M:Fantasy.Entitas.Entity.Dispose
+- uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+  commentId: M:Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
   parent: Fantasy.Entitas.Entity
-  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Dispose
-  name: Dispose()
-  nameWithType: Entity.Dispose()
-  fullName: Fantasy.Entitas.Entity.Dispose()
+  isExternal: true
+  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
+  name: SetIsPool(bool)
+  nameWithType: Entity.SetIsPool(bool)
+  fullName: Fantasy.Entitas.Entity.SetIsPool(bool)
+  nameWithType.vb: Entity.SetIsPool(Boolean)
+  fullName.vb: Fantasy.Entitas.Entity.SetIsPool(Boolean)
+  name.vb: SetIsPool(Boolean)
   spec.csharp:
-  - uid: Fantasy.Entitas.Entity.Dispose
-    name: Dispose
-    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Dispose
+  - uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
   - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
   spec.vb:
-  - uid: Fantasy.Entitas.Entity.Dispose
-    name: Dispose
-    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Dispose
+  - uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
   - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
@@ -1279,46 +1413,46 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
   - name: )
-- uid: Fantasy.Network.AddressableRouteComponent.Fantasy.Helper.JsonHelper.ToJson``1
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork.Fantasy.Helper.JsonHelper.ToJson``1
   commentId: M:Fantasy.Helper.JsonHelper.ToJson``1(``0)
   parent: Fantasy.Helper.JsonHelper
   definition: Fantasy.Helper.JsonHelper.ToJson``1(``0)
   href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
-  name: ToJson<AddressableRouteComponent>(AddressableRouteComponent)
-  nameWithType: JsonHelper.ToJson<AddressableRouteComponent>(AddressableRouteComponent)
-  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.AddressableRouteComponent>(Fantasy.Network.AddressableRouteComponent)
-  nameWithType.vb: JsonHelper.ToJson(Of AddressableRouteComponent)(AddressableRouteComponent)
-  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.AddressableRouteComponent)(Fantasy.Network.AddressableRouteComponent)
-  name.vb: ToJson(Of AddressableRouteComponent)(AddressableRouteComponent)
+  name: ToJson<HTTPServerNetwork>(HTTPServerNetwork)
+  nameWithType: JsonHelper.ToJson<HTTPServerNetwork>(HTTPServerNetwork)
+  fullName: Fantasy.Helper.JsonHelper.ToJson<Fantasy.Network.HTTP.HTTPServerNetwork>(Fantasy.Network.HTTP.HTTPServerNetwork)
+  nameWithType.vb: JsonHelper.ToJson(Of HTTPServerNetwork)(HTTPServerNetwork)
+  fullName.vb: Fantasy.Helper.JsonHelper.ToJson(Of Fantasy.Network.HTTP.HTTPServerNetwork)(Fantasy.Network.HTTP.HTTPServerNetwork)
+  name.vb: ToJson(Of HTTPServerNetwork)(HTTPServerNetwork)
   spec.csharp:
-  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.AddressableRouteComponent)
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.HTTP.HTTPServerNetwork)
     name: ToJson
     href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
   - name: <
-  - uid: Fantasy.Network.AddressableRouteComponent
-    name: AddressableRouteComponent
-    href: Fantasy.Network.AddressableRouteComponent.html
+  - uid: Fantasy.Network.HTTP.HTTPServerNetwork
+    name: HTTPServerNetwork
+    href: Fantasy.Network.HTTP.HTTPServerNetwork.html
   - name: '>'
   - name: (
-  - uid: Fantasy.Network.AddressableRouteComponent
-    name: AddressableRouteComponent
-    href: Fantasy.Network.AddressableRouteComponent.html
+  - uid: Fantasy.Network.HTTP.HTTPServerNetwork
+    name: HTTPServerNetwork
+    href: Fantasy.Network.HTTP.HTTPServerNetwork.html
   - name: )
   spec.vb:
-  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.AddressableRouteComponent)
+  - uid: Fantasy.Helper.JsonHelper.ToJson``1(Fantasy.Network.HTTP.HTTPServerNetwork)
     name: ToJson
     href: Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_
   - name: (
   - name: Of
   - name: " "
-  - uid: Fantasy.Network.AddressableRouteComponent
-    name: AddressableRouteComponent
-    href: Fantasy.Network.AddressableRouteComponent.html
+  - uid: Fantasy.Network.HTTP.HTTPServerNetwork
+    name: HTTPServerNetwork
+    href: Fantasy.Network.HTTP.HTTPServerNetwork.html
   - name: )
   - name: (
-  - uid: Fantasy.Network.AddressableRouteComponent
-    name: AddressableRouteComponent
-    href: Fantasy.Network.AddressableRouteComponent.html
+  - uid: Fantasy.Network.HTTP.HTTPServerNetwork
+    name: HTTPServerNetwork
+    href: Fantasy.Network.HTTP.HTTPServerNetwork.html
   - name: )
 - uid: System
   commentId: N:System
@@ -1349,6 +1483,36 @@ references:
   - uid: Fantasy.Entitas
     name: Entitas
     href: Fantasy.Entitas.html
+- uid: Fantasy.Network.Interface
+  commentId: N:Fantasy.Network.Interface
+  href: Fantasy.html
+  name: Fantasy.Network.Interface
+  nameWithType: Fantasy.Network.Interface
+  fullName: Fantasy.Network.Interface
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  - name: .
+  - uid: Fantasy.Network.Interface
+    name: Interface
+    href: Fantasy.Network.Interface.html
 - uid: Fantasy.Pool
   commentId: N:Fantasy.Pool
   href: Fantasy.html
@@ -1506,138 +1670,193 @@ references:
   - uid: Fantasy.Helper
     name: Helper
     href: Fantasy.Helper.html
-- uid: System.Int64
-  commentId: T:System.Int64
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork.Initialize*
+  commentId: Overload:Fantasy.Network.HTTP.HTTPServerNetwork.Initialize
+  href: Fantasy.Network.HTTP.HTTPServerNetwork.html#Fantasy_Network_HTTP_HTTPServerNetwork_Initialize_Fantasy_Network_NetworkTarget_System_Collections_Generic_IEnumerable_System_String__
+  name: Initialize
+  nameWithType: HTTPServerNetwork.Initialize
+  fullName: Fantasy.Network.HTTP.HTTPServerNetwork.Initialize
+- uid: Fantasy.Network.NetworkTarget
+  commentId: T:Fantasy.Network.NetworkTarget
+  parent: Fantasy.Network
+  href: Fantasy.Network.NetworkTarget.html
+  name: NetworkTarget
+  nameWithType: NetworkTarget
+  fullName: Fantasy.Network.NetworkTarget
+- uid: System.Collections.Generic.IEnumerable{System.String}
+  commentId: T:System.Collections.Generic.IEnumerable{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<string>
+  nameWithType: IEnumerable<string>
+  fullName: System.Collections.Generic.IEnumerable<string>
+  nameWithType.vb: IEnumerable(Of String)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of String)
+  name.vb: IEnumerable(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Fantasy.Network
+  commentId: N:Fantasy.Network
+  href: Fantasy.html
+  name: Fantasy.Network
+  nameWithType: Fantasy.Network
+  fullName: Fantasy.Network
+  spec.csharp:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+  spec.vb:
+  - uid: Fantasy
+    name: Fantasy
+    href: Fantasy.html
+  - name: .
+  - uid: Fantasy.Network
+    name: Network
+    href: Fantasy.Network.html
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.NotImplementedException
+  commentId: T:System.NotImplementedException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.notimplementedexception
+  name: NotImplementedException
+  nameWithType: NotImplementedException
+  fullName: System.NotImplementedException
+- uid: Fantasy.Network.Interface.ANetwork.RemoveChannel(System.UInt32)
+  commentId: M:Fantasy.Network.Interface.ANetwork.RemoveChannel(System.UInt32)
+  parent: Fantasy.Network.Interface.ANetwork
+  isExternal: true
+  href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RemoveChannel_System_UInt32_
+  name: RemoveChannel(uint)
+  nameWithType: ANetwork.RemoveChannel(uint)
+  fullName: Fantasy.Network.Interface.ANetwork.RemoveChannel(uint)
+  nameWithType.vb: ANetwork.RemoveChannel(UInteger)
+  fullName.vb: Fantasy.Network.Interface.ANetwork.RemoveChannel(UInteger)
+  name.vb: RemoveChannel(UInteger)
+  spec.csharp:
+  - uid: Fantasy.Network.Interface.ANetwork.RemoveChannel(System.UInt32)
+    name: RemoveChannel
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RemoveChannel_System_UInt32_
+  - name: (
+  - uid: System.UInt32
+    name: uint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Network.Interface.ANetwork.RemoveChannel(System.UInt32)
+    name: RemoveChannel
+    href: Fantasy.Network.Interface.ANetwork.html#Fantasy_Network_Interface_ANetwork_RemoveChannel_System_UInt32_
+  - name: (
+  - uid: System.UInt32
+    name: UInteger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: )
+- uid: Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel*
+  commentId: Overload:Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel
+  href: Fantasy.Network.HTTP.HTTPServerNetwork.html#Fantasy_Network_HTTP_HTTPServerNetwork_RemoveChannel_System_UInt32_
+  name: RemoveChannel
+  nameWithType: HTTPServerNetwork.RemoveChannel
+  fullName: Fantasy.Network.HTTP.HTTPServerNetwork.RemoveChannel
+- uid: System.UInt32
+  commentId: T:System.UInt32
   parent: System
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.int64
-  name: long
-  nameWithType: long
-  fullName: long
-  nameWithType.vb: Long
-  fullName.vb: Long
-  name.vb: Long
-- uid: Fantasy.Async.CoroutineLock
-  commentId: T:Fantasy.Async.CoroutineLock
-  parent: Fantasy.Async
-  href: Fantasy.Async.CoroutineLock.html
-  name: CoroutineLock
-  nameWithType: CoroutineLock
-  fullName: Fantasy.Async.CoroutineLock
-- uid: Fantasy.Async
-  commentId: N:Fantasy.Async
-  href: Fantasy.html
-  name: Fantasy.Async
-  nameWithType: Fantasy.Async
-  fullName: Fantasy.Async
-  spec.csharp:
-  - uid: Fantasy
-    name: Fantasy
-    href: Fantasy.html
-  - name: .
-  - uid: Fantasy.Async
-    name: Async
-    href: Fantasy.Async.html
-  spec.vb:
-  - uid: Fantasy
-    name: Fantasy
-    href: Fantasy.html
-  - name: .
-  - uid: Fantasy.Async
-    name: Async
-    href: Fantasy.Async.html
-- uid: Fantasy.Timer.TimerComponent
-  commentId: T:Fantasy.Timer.TimerComponent
-  parent: Fantasy.Timer
-  href: Fantasy.Timer.TimerComponent.html
-  name: TimerComponent
-  nameWithType: TimerComponent
-  fullName: Fantasy.Timer.TimerComponent
-- uid: Fantasy.Timer
-  commentId: N:Fantasy.Timer
-  href: Fantasy.html
-  name: Fantasy.Timer
-  nameWithType: Fantasy.Timer
-  fullName: Fantasy.Timer
-  spec.csharp:
-  - uid: Fantasy
-    name: Fantasy
-    href: Fantasy.html
-  - name: .
-  - uid: Fantasy.Timer
-    name: Timer
-    href: Fantasy.Timer.html
-  spec.vb:
-  - uid: Fantasy
-    name: Fantasy
-    href: Fantasy.html
-  - name: .
-  - uid: Fantasy.Timer
-    name: Timer
-    href: Fantasy.Timer.html
-- uid: Fantasy.Scheduler.NetworkMessagingComponent
-  commentId: T:Fantasy.Scheduler.NetworkMessagingComponent
-  parent: Fantasy.Scheduler
-  href: Fantasy.Scheduler.NetworkMessagingComponent.html
-  name: NetworkMessagingComponent
-  nameWithType: NetworkMessagingComponent
-  fullName: Fantasy.Scheduler.NetworkMessagingComponent
-- uid: Fantasy.Scheduler
-  commentId: N:Fantasy.Scheduler
-  href: Fantasy.html
-  name: Fantasy.Scheduler
-  nameWithType: Fantasy.Scheduler
-  fullName: Fantasy.Scheduler
-  spec.csharp:
-  - uid: Fantasy
-    name: Fantasy
-    href: Fantasy.html
-  - name: .
-  - uid: Fantasy.Scheduler
-    name: Scheduler
-    href: Fantasy.Scheduler.html
-  spec.vb:
-  - uid: Fantasy
-    name: Fantasy
-    href: Fantasy.html
-  - name: .
-  - uid: Fantasy.Scheduler
-    name: Scheduler
-    href: Fantasy.Scheduler.html
-- uid: Fantasy.Network.Interface.MessageDispatcherComponent
-  commentId: T:Fantasy.Network.Interface.MessageDispatcherComponent
-  parent: Fantasy.Network.Interface
-  href: Fantasy.Network.Interface.MessageDispatcherComponent.html
-  name: MessageDispatcherComponent
-  nameWithType: MessageDispatcherComponent
-  fullName: Fantasy.Network.Interface.MessageDispatcherComponent
-- uid: Fantasy.Network.Interface
-  commentId: N:Fantasy.Network.Interface
-  href: Fantasy.html
-  name: Fantasy.Network.Interface
-  nameWithType: Fantasy.Network.Interface
-  fullName: Fantasy.Network.Interface
-  spec.csharp:
-  - uid: Fantasy
-    name: Fantasy
-    href: Fantasy.html
-  - name: .
-  - uid: Fantasy.Network
-    name: Network
-    href: Fantasy.Network.html
-  - name: .
-  - uid: Fantasy.Network.Interface
-    name: Interface
-    href: Fantasy.Network.Interface.html
-  spec.vb:
-  - uid: Fantasy
-    name: Fantasy
-    href: Fantasy.html
-  - name: .
-  - uid: Fantasy.Network
-    name: Network
-    href: Fantasy.Network.html
-  - name: .
-  - uid: Fantasy.Network.Interface
-    name: Interface
-    href: Fantasy.Network.Interface.html
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger

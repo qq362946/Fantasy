@@ -21,7 +21,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: InnerBufferPacketParser
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Handler/BufferPacketParser.cs
-    startLine: 49
+    startLine: 50
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -64,7 +64,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: UnPack
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Handler/BufferPacketParser.cs
-    startLine: 59
+    startLine: 60
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser
@@ -113,7 +113,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Pack
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/PacketParser/Handler/BufferPacketParser.cs
-    startLine: 97
+    startLine: 98
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.PacketParser

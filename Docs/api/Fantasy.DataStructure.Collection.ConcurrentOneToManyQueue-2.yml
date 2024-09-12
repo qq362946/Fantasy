@@ -26,7 +26,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ConcurrentOneToManyQueue
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Collection/ConcurrentOneToManyQueuePool.cs
-    startLine: 57
+    startLine: 72
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Collection
@@ -107,7 +107,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: .ctor
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Collection/ConcurrentOneToManyQueuePool.cs
-    startLine: 69
+    startLine: 84
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Collection
@@ -145,7 +145,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Contains
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Collection/ConcurrentOneToManyQueuePool.cs
-    startLine: 80
+    startLine: 95
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Collection
@@ -185,7 +185,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Enqueue
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Collection/ConcurrentOneToManyQueuePool.cs
-    startLine: 92
+    startLine: 107
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Collection
@@ -222,7 +222,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Dequeue
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Collection/ConcurrentOneToManyQueuePool.cs
-    startLine: 110
+    startLine: 125
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Collection
@@ -259,7 +259,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: TryDequeue
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Collection/ConcurrentOneToManyQueuePool.cs
-    startLine: 127
+    startLine: 142
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Collection
@@ -300,7 +300,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: RemoveKey
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Collection/ConcurrentOneToManyQueuePool.cs
-    startLine: 138
+    startLine: 153
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Collection
@@ -334,7 +334,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Clear
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/DataStructure/Collection/ConcurrentOneToManyQueuePool.cs
-    startLine: 171
+    startLine: 186
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.DataStructure.Collection

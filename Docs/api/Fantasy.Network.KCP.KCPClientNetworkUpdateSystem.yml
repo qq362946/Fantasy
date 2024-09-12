@@ -20,7 +20,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: KCPClientNetworkUpdateSystem
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Client/KCPClientNetwork.cs
-    startLine: 28
+    startLine: 29
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network.KCP
@@ -61,7 +61,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: Update
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/KCP/KCPUnSafe/Client/KCPClientNetwork.cs
-    startLine: 30
+    startLine: 31
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Network.KCP

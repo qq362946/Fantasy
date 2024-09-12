@@ -33,7 +33,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: NetworkMessagingComponent
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 68
+    startLine: 69
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -48,7 +48,6 @@ items:
   - System.IDisposable
   - Fantasy.Pool.IPool
   inheritedMembers:
-  - Fantasy.Entitas.Entity.IsPool
   - Fantasy.Entitas.Entity.Id
   - Fantasy.Entitas.Entity.RunTimeId
   - Fantasy.Entitas.Entity.IsDisposed
@@ -75,8 +74,9 @@ items:
   - Fantasy.Entitas.Entity.ForEachTransfer
   - Fantasy.Entitas.Entity.ForEachMultiEntity
   - Fantasy.Entitas.Entity.ForEachEntity
-  - Fantasy.Entitas.Entity.Clone
   - Fantasy.Entitas.Entity.Dispose
+  - Fantasy.Entitas.Entity.IsPool
+  - Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -103,7 +103,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: TimerId
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 71
+    startLine: 72
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -130,7 +130,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: AddressableRouteMessageLock
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 73
+    startLine: 74
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -157,7 +157,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: TimerComponent
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 74
+    startLine: 75
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -184,7 +184,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: MessageDispatcherComponent
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 75
+    startLine: 76
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -211,7 +211,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: RequestCallback
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 76
+    startLine: 77
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -238,7 +238,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: TimeoutRouteMessageSenders
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 77
+    startLine: 78
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -265,7 +265,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: SendInnerRoute
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 79
+    startLine: 80
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -299,7 +299,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: SendInnerRoute
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 101
+    startLine: 102
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -333,7 +333,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: SendAddressable
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 117
+    startLine: 118
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -369,7 +369,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: CallInnerRouteBySession
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 138
+    startLine: 139
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -407,7 +407,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: CallInnerRoute
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 147
+    startLine: 148
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -443,7 +443,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: CallAddressable
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 163
+    startLine: 164
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -479,7 +479,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ResponseHandler
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 213
+    startLine: 214
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -513,7 +513,7 @@ items:
       repo: https://github.com/qq362946/Fantasy.git
     id: ReturnMessageSender
     path: ../Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Message/Scheduler/MessageHelper/NetworkMessagingComponent.cs
-    startLine: 241
+    startLine: 242
   assemblies:
   - Fantasy.Net
   namespace: Fantasy.Scheduler
@@ -592,13 +592,6 @@ references:
   name: IPool
   nameWithType: IPool
   fullName: Fantasy.Pool.IPool
-- uid: Fantasy.Entitas.Entity.IsPool
-  commentId: P:Fantasy.Entitas.Entity.IsPool
-  parent: Fantasy.Entitas.Entity
-  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
-  name: IsPool
-  nameWithType: Entity.IsPool
-  fullName: Fantasy.Entitas.Entity.IsPool
 - uid: Fantasy.Entitas.Entity.Id
   commentId: P:Fantasy.Entitas.Entity.Id
   parent: Fantasy.Entitas.Entity
@@ -1334,25 +1327,6 @@ references:
   name: ForEachEntity
   nameWithType: Entity.ForEachEntity
   fullName: Fantasy.Entitas.Entity.ForEachEntity
-- uid: Fantasy.Entitas.Entity.Clone
-  commentId: M:Fantasy.Entitas.Entity.Clone
-  parent: Fantasy.Entitas.Entity
-  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
-  name: Clone()
-  nameWithType: Entity.Clone()
-  fullName: Fantasy.Entitas.Entity.Clone()
-  spec.csharp:
-  - uid: Fantasy.Entitas.Entity.Clone
-    name: Clone
-    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
-  - name: (
-  - name: )
-  spec.vb:
-  - uid: Fantasy.Entitas.Entity.Clone
-    name: Clone
-    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone
-  - name: (
-  - name: )
 - uid: Fantasy.Entitas.Entity.Dispose
   commentId: M:Fantasy.Entitas.Entity.Dispose
   parent: Fantasy.Entitas.Entity
@@ -1371,6 +1345,56 @@ references:
     name: Dispose
     href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Dispose
   - name: (
+  - name: )
+- uid: Fantasy.Entitas.Entity.IsPool
+  commentId: M:Fantasy.Entitas.Entity.IsPool
+  parent: Fantasy.Entitas.Entity
+  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
+  name: IsPool()
+  nameWithType: Entity.IsPool()
+  fullName: Fantasy.Entitas.Entity.IsPool()
+  spec.csharp:
+  - uid: Fantasy.Entitas.Entity.IsPool
+    name: IsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Entity.IsPool
+    name: IsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool
+  - name: (
+  - name: )
+- uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+  commentId: M:Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+  parent: Fantasy.Entitas.Entity
+  isExternal: true
+  href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
+  name: SetIsPool(bool)
+  nameWithType: Entity.SetIsPool(bool)
+  fullName: Fantasy.Entitas.Entity.SetIsPool(bool)
+  nameWithType.vb: Entity.SetIsPool(Boolean)
+  fullName.vb: Fantasy.Entitas.Entity.SetIsPool(Boolean)
+  name.vb: SetIsPool(Boolean)
+  spec.csharp:
+  - uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Fantasy.Entitas.Entity.SetIsPool(System.Boolean)
+    name: SetIsPool
+    href: Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)

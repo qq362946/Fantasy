@@ -92,6 +92,7 @@
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
     <div class="level1"><a class="xref" href="Fantasy.Entitas.Entity.html">Entity</a></div>
     <div class="level2"><span class="xref">ANetwork</span></div>
+      <div class="level3"><a class="xref" href="Fantasy.Network.HTTP.HTTPServerNetwork.html">HTTPServerNetwork</a></div>
       <div class="level3"><a class="xref" href="Fantasy.Network.Interface.AClientNetwork.html">AClientNetwork</a></div>
       <div class="level3"><a class="xref" href="Fantasy.Network.KCP.KCPServerNetwork.html">KCPServerNetwork</a></div>
       <div class="level3"><a class="xref" href="Fantasy.Network.TCP.TCPServerNetwork.html">TCPServerNetwork</a></div>
@@ -105,9 +106,6 @@
   </div>
   <div class="inheritedMembers">
     <h5>继承成员</h5>
-    <div>
-      <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool">Entity.IsPool</a>
-    </div>
     <div>
       <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Id">Entity.Id</a>
     </div>
@@ -187,7 +185,10 @@
       <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_ForEachEntity">Entity.ForEachEntity</a>
     </div>
     <div>
-      <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_Clone">Entity.Clone()</a>
+      <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_IsPool">Entity.IsPool()</a>
+    </div>
+    <div>
+      <a class="xref" href="Fantasy.Entitas.Entity.html#Fantasy_Entitas_Entity_SetIsPool_System_Boolean_">Entity.SetIsPool(bool)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
@@ -346,7 +347,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_Interface_ANetwork_Dispose.md&amp;value=---%0Auid%3A%20Fantasy.Network.Interface.ANetwork.Dispose%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L178">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L182">查看源代码</a>
   </span>
   <a id="Fantasy_Network_Interface_ANetwork_Dispose_" data-uid="Fantasy.Network.Interface.ANetwork.Dispose*"></a>
   <h4 id="Fantasy_Network_Interface_ANetwork_Dispose" data-uid="Fantasy.Network.Interface.ANetwork.Dispose">Dispose()</h4>
@@ -406,7 +407,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_Interface_ANetwork_RemoveChannel_System_UInt32_.md&amp;value=---%0Auid%3A%20Fantasy.Network.Interface.ANetwork.RemoveChannel(System.UInt32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L63">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L67">查看源代码</a>
   </span>
   <a id="Fantasy_Network_Interface_ANetwork_RemoveChannel_" data-uid="Fantasy.Network.Interface.ANetwork.RemoveChannel*"></a>
   <h4 id="Fantasy_Network_Interface_ANetwork_RemoveChannel_System_UInt32_" data-uid="Fantasy.Network.Interface.ANetwork.RemoveChannel(System.UInt32)">RemoveChannel(uint)</h4>
@@ -438,7 +439,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_Interface_ANetwork_RentInnerPackInfo.md&amp;value=---%0Auid%3A%20Fantasy.Network.Interface.ANetwork.RentInnerPackInfo%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L144">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L148">查看源代码</a>
   </span>
   <a id="Fantasy_Network_Interface_ANetwork_RentInnerPackInfo_" data-uid="Fantasy.Network.Interface.ANetwork.RentInnerPackInfo*"></a>
   <h4 id="Fantasy_Network_Interface_ANetwork_RentInnerPackInfo" data-uid="Fantasy.Network.Interface.ANetwork.RentInnerPackInfo">RentInnerPackInfo()</h4>
@@ -468,7 +469,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_Interface_ANetwork_RentMemoryStream_System_Int32_.md&amp;value=---%0Auid%3A%20Fantasy.Network.Interface.ANetwork.RentMemoryStream(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L65">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L69">查看源代码</a>
   </span>
   <a id="Fantasy_Network_Interface_ANetwork_RentMemoryStream_" data-uid="Fantasy.Network.Interface.ANetwork.RentMemoryStream*"></a>
   <h4 id="Fantasy_Network_Interface_ANetwork_RentMemoryStream_System_Int32_" data-uid="Fantasy.Network.Interface.ANetwork.RentMemoryStream(System.Int32)">RentMemoryStream(int)</h4>
@@ -515,7 +516,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_Interface_ANetwork_RentOuterPackInfo.md&amp;value=---%0Auid%3A%20Fantasy.Network.Interface.ANetwork.RentOuterPackInfo%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L108">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L112">查看源代码</a>
   </span>
   <a id="Fantasy_Network_Interface_ANetwork_RentOuterPackInfo_" data-uid="Fantasy.Network.Interface.ANetwork.RentOuterPackInfo*"></a>
   <h4 id="Fantasy_Network_Interface_ANetwork_RentOuterPackInfo" data-uid="Fantasy.Network.Interface.ANetwork.RentOuterPackInfo">RentOuterPackInfo()</h4>
@@ -545,7 +546,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_Interface_ANetwork_ReturnInnerPackInfo_Fantasy_PacketParser_InnerPackInfo_.md&amp;value=---%0Auid%3A%20Fantasy.Network.Interface.ANetwork.ReturnInnerPackInfo(Fantasy.PacketParser.InnerPackInfo)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L166">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L170">查看源代码</a>
   </span>
   <a id="Fantasy_Network_Interface_ANetwork_ReturnInnerPackInfo_" data-uid="Fantasy.Network.Interface.ANetwork.ReturnInnerPackInfo*"></a>
   <h4 id="Fantasy_Network_Interface_ANetwork_ReturnInnerPackInfo_Fantasy_PacketParser_InnerPackInfo_" data-uid="Fantasy.Network.Interface.ANetwork.ReturnInnerPackInfo(Fantasy.PacketParser.InnerPackInfo)">ReturnInnerPackInfo(InnerPackInfo)</h4>
@@ -577,7 +578,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_Interface_ANetwork_ReturnMemoryStream_Fantasy_Serialize_MemoryStreamBuffer_.md&amp;value=---%0Auid%3A%20Fantasy.Network.Interface.ANetwork.ReturnMemoryStream(Fantasy.Serialize.MemoryStreamBuffer)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L90">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L94">查看源代码</a>
   </span>
   <a id="Fantasy_Network_Interface_ANetwork_ReturnMemoryStream_" data-uid="Fantasy.Network.Interface.ANetwork.ReturnMemoryStream*"></a>
   <h4 id="Fantasy_Network_Interface_ANetwork_ReturnMemoryStream_Fantasy_Serialize_MemoryStreamBuffer_" data-uid="Fantasy.Network.Interface.ANetwork.ReturnMemoryStream(Fantasy.Serialize.MemoryStreamBuffer)">ReturnMemoryStream(MemoryStreamBuffer)</h4>
@@ -609,7 +610,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Network_Interface_ANetwork_ReturnOuterPackInfo_Fantasy_PacketParser_OuterPackInfo_.md&amp;value=---%0Auid%3A%20Fantasy.Network.Interface.ANetwork.ReturnOuterPackInfo(Fantasy.PacketParser.OuterPackInfo)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L130">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Network/Protocol/Interface/ANetwork.cs/#L134">查看源代码</a>
   </span>
   <a id="Fantasy_Network_Interface_ANetwork_ReturnOuterPackInfo_" data-uid="Fantasy.Network.Interface.ANetwork.ReturnOuterPackInfo*"></a>
   <h4 id="Fantasy_Network_Interface_ANetwork_ReturnOuterPackInfo_Fantasy_PacketParser_OuterPackInfo_" data-uid="Fantasy.Network.Interface.ANetwork.ReturnOuterPackInfo(Fantasy.PacketParser.OuterPackInfo)">ReturnOuterPackInfo(OuterPackInfo)</h4>

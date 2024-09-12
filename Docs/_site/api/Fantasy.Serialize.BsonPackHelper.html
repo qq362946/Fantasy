@@ -92,6 +92,10 @@
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
     <div class="level1"><span class="xref">BsonPackHelper</span></div>
   </div>
+  <div class="implements">
+    <h5>实现</h5>
+    <div><a class="xref" href="Fantasy.Serialize.ISerialize.html">ISerialize</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>继承成员</h5>
     <div>
@@ -120,8 +124,59 @@
   <h6><strong>程序集</strong>: Fantasy.Net.dll</h6>
   <h5 id="Fantasy_Serialize_BsonPackHelper_syntax">语法</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class BsonPackHelper</code></pre>
+    <pre><code class="lang-csharp hljs">public class BsonPackHelper : ISerialize</code></pre>
   </div>
+  <h3 id="constructors">构造函数
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper__ctor.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L32">查看源代码</a>
+  </span>
+  <a id="Fantasy_Serialize_BsonPackHelper__ctor_" data-uid="Fantasy.Serialize.BsonPackHelper.#ctor*"></a>
+  <h4 id="Fantasy_Serialize_BsonPackHelper__ctor" data-uid="Fantasy.Serialize.BsonPackHelper.#ctor">BsonPackHelper()</h4>
+  <div class="markdown level1 summary"><p>构造函数</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BsonPackHelper()</code></pre>
+  </div>
+  <h3 id="properties">属性
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_SerializeName.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.SerializeName%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L27">查看源代码</a>
+  </span>
+  <a id="Fantasy_Serialize_BsonPackHelper_SerializeName_" data-uid="Fantasy.Serialize.BsonPackHelper.SerializeName*"></a>
+  <h4 id="Fantasy_Serialize_BsonPackHelper_SerializeName" data-uid="Fantasy.Serialize.BsonPackHelper.SerializeName">SerializeName</h4>
+  <div class="markdown level1 summary"><p>序列化器的名字</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string SerializeName { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">属性值</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">方法
 </h3>
   <span class="small pull-right mobile-hide">
@@ -129,7 +184,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Clone__1___0_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Clone%60%601(%60%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L263">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L305">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_BsonPackHelper_Clone_" data-uid="Fantasy.Serialize.BsonPackHelper.Clone*"></a>
   <h4 id="Fantasy_Serialize_BsonPackHelper_Clone__1___0_" data-uid="Fantasy.Serialize.BsonPackHelper.Clone``1(``0)">Clone&lt;T&gt;(T)</h4>
@@ -138,7 +193,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static T Clone&lt;T&gt;(T t)</code></pre>
+    <pre><code class="lang-csharp hljs">public T Clone&lt;T&gt;(T t)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -192,7 +247,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Deserialize_System_Type_Fantasy_Serialize_MemoryStreamBuffer_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type%2CFantasy.Serialize.MemoryStreamBuffer)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L134">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L136">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_BsonPackHelper_Deserialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize*"></a>
   <h4 id="Fantasy_Serialize_BsonPackHelper_Deserialize_System_Type_Fantasy_Serialize_MemoryStreamBuffer_" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,Fantasy.Serialize.MemoryStreamBuffer)">Deserialize(Type, MemoryStreamBuffer)</h4>
@@ -201,7 +256,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static object Deserialize(Type type, MemoryStreamBuffer buffer)</code></pre>
+    <pre><code class="lang-csharp hljs">public object Deserialize(Type type, MemoryStreamBuffer buffer)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -245,7 +300,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Deserialize_System_Type_System_Byte___.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type%2CSystem.Byte%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L118">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L120">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_BsonPackHelper_Deserialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize*"></a>
   <h4 id="Fantasy_Serialize_BsonPackHelper_Deserialize_System_Type_System_Byte___" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,System.Byte[])">Deserialize(Type, byte[])</h4>
@@ -254,7 +309,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static object Deserialize(Type type, byte[] bytes)</code></pre>
+    <pre><code class="lang-csharp hljs">public object Deserialize(Type type, byte[] bytes)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -298,7 +353,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Deserialize_System_Type_System_Byte___System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type%2CSystem.Byte%5B%5D%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L178">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L180">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_BsonPackHelper_Deserialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize*"></a>
   <h4 id="Fantasy_Serialize_BsonPackHelper_Deserialize_System_Type_System_Byte___System_Int32_System_Int32_" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize(System.Type,System.Byte[],System.Int32,System.Int32)">Deserialize(Type, byte[], int, int)</h4>
@@ -307,7 +362,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static object Deserialize(Type type, byte[] bytes, int index, int count)</code></pre>
+    <pre><code class="lang-csharp hljs">public object Deserialize(Type type, byte[] bytes, int index, int count)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -361,7 +416,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Deserialize__1_Fantasy_Serialize_MemoryStreamBuffer_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Deserialize%60%601(Fantasy.Serialize.MemoryStreamBuffer)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L102">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L104">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_BsonPackHelper_Deserialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize*"></a>
   <h4 id="Fantasy_Serialize_BsonPackHelper_Deserialize__1_Fantasy_Serialize_MemoryStreamBuffer_" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize``1(Fantasy.Serialize.MemoryStreamBuffer)">Deserialize&lt;T&gt;(MemoryStreamBuffer)</h4>
@@ -370,7 +425,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static T Deserialize&lt;T&gt;(MemoryStreamBuffer buffer)</code></pre>
+    <pre><code class="lang-csharp hljs">public T Deserialize&lt;T&gt;(MemoryStreamBuffer buffer)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -424,7 +479,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Deserialize__1_System_Byte___.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Deserialize%60%601(System.Byte%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L86">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L88">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_BsonPackHelper_Deserialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize*"></a>
   <h4 id="Fantasy_Serialize_BsonPackHelper_Deserialize__1_System_Byte___" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize``1(System.Byte[])">Deserialize&lt;T&gt;(byte[])</h4>
@@ -433,7 +488,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static T Deserialize&lt;T&gt;(byte[] bytes)</code></pre>
+    <pre><code class="lang-csharp hljs">public T Deserialize&lt;T&gt;(byte[] bytes)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -487,7 +542,7 @@
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Deserialize__1_System_Byte___System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Deserialize%60%601(System.Byte%5B%5D%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L152">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L154">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_BsonPackHelper_Deserialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize*"></a>
   <h4 id="Fantasy_Serialize_BsonPackHelper_Deserialize__1_System_Byte___System_Int32_System_Int32_" data-uid="Fantasy.Serialize.BsonPackHelper.Deserialize``1(System.Byte[],System.Int32,System.Int32)">Deserialize&lt;T&gt;(byte[], int, int)</h4>
@@ -496,7 +551,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static T Deserialize&lt;T&gt;(byte[] bytes, int index, int count)</code></pre>
+    <pre><code class="lang-csharp hljs">public T Deserialize&lt;T&gt;(byte[] bytes, int index, int count)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -557,26 +612,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Initialize.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Initialize%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L28">查看源代码</a>
-  </span>
-  <a id="Fantasy_Serialize_BsonPackHelper_Initialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Initialize*"></a>
-  <h4 id="Fantasy_Serialize_BsonPackHelper_Initialize" data-uid="Fantasy.Serialize.BsonPackHelper.Initialize">Initialize()</h4>
-  <div class="markdown level1 summary"><p>初始化</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">声明</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Initialize()</code></pre>
-  </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Serialize_System_Object_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Serialize(System.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L233">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L275">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_BsonPackHelper_Serialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize*"></a>
   <h4 id="Fantasy_Serialize_BsonPackHelper_Serialize_System_Object_" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize(System.Object)">Serialize(object)</h4>
@@ -621,19 +660,99 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Serialize_System_Type_System_Object_Fantasy_Serialize_MemoryStreamBuffer_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Serialize(System.Type%2CSystem.Object%2CFantasy.Serialize.MemoryStreamBuffer)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Serialize_System_Object_System_Buffers_IBufferWriter_System_Byte__.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Serialize(System.Object%2CSystem.Buffers.IBufferWriter%7BSystem.Byte%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L218">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L221">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_BsonPackHelper_Serialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize*"></a>
-  <h4 id="Fantasy_Serialize_BsonPackHelper_Serialize_System_Type_System_Object_Fantasy_Serialize_MemoryStreamBuffer_" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize(System.Type,System.Object,Fantasy.Serialize.MemoryStreamBuffer)">Serialize(Type, object, MemoryStreamBuffer)</h4>
+  <h4 id="Fantasy_Serialize_BsonPackHelper_Serialize_System_Object_System_Buffers_IBufferWriter_System_Byte__" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize(System.Object,System.Buffers.IBufferWriter{System.Byte})">Serialize(object, IBufferWriter&lt;byte&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Serialize(object @object, IBufferWriter&lt;byte&gt; buffer)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">object</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1">IBufferWriter</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</td>
+        <td><span class="parametername">buffer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Serialize_System_Type_System_Object_System_Buffers_IBufferWriter_System_Byte__.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Serialize(System.Type%2CSystem.Object%2CSystem.Buffers.IBufferWriter%7BSystem.Byte%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L239">查看源代码</a>
+  </span>
+  <a id="Fantasy_Serialize_BsonPackHelper_Serialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize*"></a>
+  <h4 id="Fantasy_Serialize_BsonPackHelper_Serialize_System_Type_System_Object_System_Buffers_IBufferWriter_System_Byte__" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize(System.Type,System.Object,System.Buffers.IBufferWriter{System.Byte})">Serialize(Type, object, IBufferWriter&lt;byte&gt;)</h4>
   <div class="markdown level1 summary"><p>序列化</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Serialize(Type type, object @object, MemoryStreamBuffer buffer)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Serialize(Type type, object @object, IBufferWriter&lt;byte&gt; buffer)</code></pre>
+  </div>
+  <h5 class="parameters">参数</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>名称</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">object</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1">IBufferWriter</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</td>
+        <td><span class="parametername">buffer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_SerializeAndReturnLength_System_Type_System_Object_Fantasy_Serialize_MemoryStreamBuffer_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.SerializeAndReturnLength(System.Type%2CSystem.Object%2CFantasy.Serialize.MemoryStreamBuffer)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L258">查看源代码</a>
+  </span>
+  <a id="Fantasy_Serialize_BsonPackHelper_SerializeAndReturnLength_" data-uid="Fantasy.Serialize.BsonPackHelper.SerializeAndReturnLength*"></a>
+  <h4 id="Fantasy_Serialize_BsonPackHelper_SerializeAndReturnLength_System_Type_System_Object_Fantasy_Serialize_MemoryStreamBuffer_" data-uid="Fantasy.Serialize.BsonPackHelper.SerializeAndReturnLength(System.Type,System.Object,Fantasy.Serialize.MemoryStreamBuffer)">SerializeAndReturnLength(Type, object, MemoryStreamBuffer)</h4>
+  <div class="markdown level1 summary"><p>序列化并返回的长度</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">声明</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int SerializeAndReturnLength(Type type, object @object, MemoryStreamBuffer buffer)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -662,12 +781,27 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="returns">返回</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>类型</th>
+        <th>描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Serialize__1___0_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Serialize%60%601(%60%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L248">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L290">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_BsonPackHelper_Serialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize*"></a>
   <h4 id="Fantasy_Serialize_BsonPackHelper_Serialize__1___0_" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize``1(``0)">Serialize&lt;T&gt;(T)</h4>
@@ -727,19 +861,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Serialize__1___0_Fantasy_Serialize_MemoryStreamBuffer_.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Serialize%60%601(%60%600%2CFantasy.Serialize.MemoryStreamBuffer)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
+    <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper_Serialize__1___0_System_Buffers_IBufferWriter_System_Byte__.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper.Serialize%60%601(%60%600%2CSystem.Buffers.IBufferWriter%7BSystem.Byte%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">编辑本文</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L202">查看源代码</a>
+    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L204">查看源代码</a>
   </span>
   <a id="Fantasy_Serialize_BsonPackHelper_Serialize_" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize*"></a>
-  <h4 id="Fantasy_Serialize_BsonPackHelper_Serialize__1___0_Fantasy_Serialize_MemoryStreamBuffer_" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize``1(``0,Fantasy.Serialize.MemoryStreamBuffer)">Serialize&lt;T&gt;(T, MemoryStreamBuffer)</h4>
+  <h4 id="Fantasy_Serialize_BsonPackHelper_Serialize__1___0_System_Buffers_IBufferWriter_System_Byte__" data-uid="Fantasy.Serialize.BsonPackHelper.Serialize``1(``0,System.Buffers.IBufferWriter{System.Byte})">Serialize&lt;T&gt;(T, IBufferWriter&lt;byte&gt;)</h4>
   <div class="markdown level1 summary"><p>序列化</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">声明</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Serialize&lt;T&gt;(T @object, MemoryStreamBuffer buffer)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Serialize&lt;T&gt;(T @object, IBufferWriter&lt;byte&gt; buffer)</code></pre>
   </div>
   <h5 class="parameters">参数</h5>
   <table class="table table-bordered table-condensed">
@@ -757,7 +891,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Fantasy.Serialize.MemoryStreamBuffer.html">MemoryStreamBuffer</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.buffers.ibufferwriter-1">IBufferWriter</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</td>
         <td><span class="parametername">buffer</span></td>
         <td></td>
       </tr>
@@ -778,6 +912,14 @@
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">实现</h3>
+  <div>
+      <a class="xref" href="Fantasy.Serialize.ISerialize.html">ISerialize</a>
+  </div>
+  <h3 id="extensionmethods">扩展方法</h3>
+  <div>
+      <a class="xref" href="Fantasy.Helper.JsonHelper.html#Fantasy_Helper_JsonHelper_ToJson__1___0_">JsonHelper.ToJson&lt;T&gt;(T)</a>
+  </div>
 
 </article>
           </div>
@@ -790,7 +932,7 @@
                     <a href="https://github.com/qq362946/Fantasy/new/main/apiSpec/new?filename=Fantasy_Serialize_BsonPackHelper.md&amp;value=---%0Auid%3A%20Fantasy.Serialize.BsonPackHelper%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">编辑本文</a>
                   </li>
                   <li>
-                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L21" class="contribution-link">查看源代码</a>
+                    <a href="https://github.com/qq362946/Fantasy/blob/main/Fantasy.Net/Fantasy.Net/Runtime/Core/Serialize/BsonPack/BsonPackHelper.cs/#L22" class="contribution-link">查看源代码</a>
                   </li>
                 </ul>
               </div>
