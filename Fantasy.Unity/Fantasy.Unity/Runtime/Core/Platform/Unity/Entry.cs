@@ -59,6 +59,7 @@ namespace Fantasy.Platform.Unity
             {
                 Scene = Scene
             });
+            Log.Debug("Fantasy Initialize Complete!");
             return Scene;
         }
         
