@@ -8,7 +8,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/qq362946/Fantasy)
 ![GitHub Created At](https://img.shields.io/github/created-at/qq362946/Fantasy)
 # Fantasy
-#### 框架支持TCP\KCP\WebSocket（支持Unity发布成H5）三种网络协议，采用的Protobuf/MemoryPack/Bson做为消息的序列化方案。
+#### 框架支持TCP\KCP\WebSocket\http（支持Unity发布成H5）三种网络协议，采用的Protobuf/MemoryPack/Bson做为消息的序列化方案。
 #### Fantasy是基于.NET的高性能网络开发框架，支持主流协议，前后端分离，适合需要快速上手、可扩展、分布式全平台商业级解决方案的开发团队或个人。它旨在提供易用工具，同时保证系统的高性能和扩展性。
 ## 导航
 * [Fantasy介绍网站](https://www.code-fantasy.com/)
