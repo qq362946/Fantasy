@@ -18,15 +18,22 @@ public class RouteMessage : MonoBehaviour
     
     private void Start()
     {
+        StartAsync().Coroutine();
+    }
+
+    private async FTask StartAsync()
+    {
+        // 初始化框架
+        Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
+        // 创建一个Scene，这个Scene代表一个客户端的场景，客户端的所有逻辑都可以写这里
+        // 如果有自己的框架，也可以就单纯拿这个Scene做网络通讯也没问题。
+        _scene = await Scene.Create(SceneRuntimeType.MainThread);
         // 详细操作步骤，都在服务器的G2Chat_CreateRouteRequestHandler.cs文件里有详细说明。
         Button2.interactable = false;
         Button3.interactable = false;
         Button4.interactable = false;
         Button1.onClick.RemoveAllListeners();
-        Button1.onClick.AddListener(() =>
-        {
-            Connect().Coroutine();
-        });
+        Button1.onClick.AddListener(Connect);
         Button2.onClick.RemoveAllListeners();
         Button2.onClick.AddListener(() =>
         {
@@ -41,10 +48,10 @@ public class RouteMessage : MonoBehaviour
         });
     }
 
-    private async FTask Connect()
+    private void Connect()
     {
         Button1.interactable = false;
-        _scene = await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
+       
         _session = _scene.Connect(
             "127.0.0.1:20000",
             NetworkProtocolType.KCP,

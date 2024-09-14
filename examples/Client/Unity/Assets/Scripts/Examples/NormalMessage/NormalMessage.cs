@@ -19,11 +19,19 @@ public class NormalMessage : MonoBehaviour
     private Session _session;
     private void Start()
     {
+        StartAsync().Coroutine();
+    }
+
+    private async FTask StartAsync()
+    {
+        // 初始化框架
+        Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
+        // 创建一个Scene，这个Scene代表一个客户端的场景，客户端的所有逻辑都可以写这里
+        // 如果有自己的框架，也可以就单纯拿这个Scene做网络通讯也没问题。
+        _scene = await Scene.Create(SceneRuntimeType.MainThread);
+        
         ConnectButton.onClick.RemoveAllListeners();
-        ConnectButton.onClick.AddListener(() =>
-        {
-            OnConnectButtonClick().Coroutine();
-        });
+        ConnectButton.onClick.AddListener(OnConnectButtonClick);
         
         SendMessageButton.onClick.RemoveAllListeners();
         SendMessageButton.onClick.AddListener(OnSendMessageButtonClick);
@@ -38,10 +46,11 @@ public class NormalMessage : MonoBehaviour
     #region Connect
 
     private long timerId;
-    private async FTask OnConnectButtonClick()
+    private void OnConnectButtonClick()
     {
         ConnectButton.interactable = false;
-        _scene = await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
+        
+        // 用当前的Scene创建一个新的网络连接
         _session = _scene.Connect(
             "127.0.0.1:20000",
             NetworkProtocolType.KCP,

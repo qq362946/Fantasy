@@ -23,7 +23,7 @@ using Fantasy.Network.Route;
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 namespace Fantasy
 {
-    internal class SceneRuntimeType
+    public class SceneRuntimeType
     {
         /// <summary>
         /// Scene在主线程中运行.
@@ -162,6 +162,7 @@ namespace Fantasy
             SingleCollectionComponent = scene.SingleCollectionComponent;
 #endif
         }
+        
         /// <summary>
         /// Scene销毁方法，执行了该方法会把当前Scene下的所有实体都销毁掉。
         /// </summary>

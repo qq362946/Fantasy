@@ -23,7 +23,10 @@ using Fantasy.Network.Route;
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 namespace Fantasy
 {
-    internal class SceneRuntimeType
+    /// <summary>
+    /// Scene的运行类型
+    /// </summary>
+    public class SceneRuntimeType
     {
         /// <summary>
         /// Scene在主线程中运行.

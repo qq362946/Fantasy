@@ -36,30 +36,43 @@ namespace Fantasy.Platform.Unity
     {
         private static bool _isInit;
         public static Scene Scene { get; private set; }
+
         /// <summary>
         /// 初始化框架
         /// </summary>
-        public static async FTask<Scene> Initialize(params System.Reflection.Assembly[] assemblies)
+        /// <param name="assemblies"></param>
+        public static void Initialize(params System.Reflection.Assembly[] assemblies)
         {
-            Scene?.Dispose();
+            if (_isInit)
+            {
+                Log.Error("Fantasy has already been initialized and does not need to be initialized again!");
+                return;
+            }
             // 初始化程序集管理系统
             AssemblySystem.Initialize(assemblies);
             // 初始化序列化
             SerializerManager.Initialize();
-            if (!_isInit)
-            {
 #if FANTASY_WEBGL
-                ThreadSynchronizationContext.Initialize();
+            ThreadSynchronizationContext.Initialize();
 #endif
-                _isInit = true;
-                FantasyObject.FantasyObjectGameObject.AddComponent<Entry>();
-            }
-            Scene = await Scene.Create(SceneRuntimeType.MainThread);
+            _isInit = true;
+            FantasyObject.FantasyObjectGameObject.AddComponent<Entry>();
+            Log.Debug("Fantasy Initialize Complete!");
+        }
+
+        /// <summary>
+        /// 在Entry中创建一个Scene，如果Scene已经被创建过，将先销毁Scene再创建。
+        /// </summary>
+        /// <param name="sceneRuntimeType"></param>
+        /// <returns></returns>
+        public static async FTask<Scene> CreateScene(string sceneRuntimeType = SceneRuntimeType.MainThread)
+        {
+            Scene?.Dispose();
+            Scene = await Scene.Create(sceneRuntimeType);
             await Scene.EventComponent.PublishAsync(new OnFantasyInit()
             {
                 Scene = Scene
             });
-            Log.Debug("Fantasy Initialize Complete!");
             return Scene;
         }
         

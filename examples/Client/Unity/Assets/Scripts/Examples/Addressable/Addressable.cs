@@ -16,6 +16,17 @@ public class Addressable : MonoBehaviour
     private Session _session;
     private void Start()
     {
+        StartAsync().Coroutine();
+    }
+
+    private async FTask StartAsync()
+    {
+        // 初始化框架
+        Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
+        // 创建一个Scene，这个Scene代表一个客户端的场景，客户端的所有逻辑都可以写这里
+        // 如果有自己的框架，也可以就单纯拿这个Scene做网络通讯也没问题。
+        _scene = await Scene.Create(SceneRuntimeType.MainThread);
+        
         SendAddressableMessage.interactable = false;
         SendAddressableRPC.interactable = false;
         
@@ -40,9 +51,7 @@ public class Addressable : MonoBehaviour
     private async FTask OnConnectAddressableClick()
     {
         ConnectAddressable.interactable = false;
-        // 1、初始化Fantasy
-        _scene = await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
-        // 2、连接到Gate服务器
+        // 连接到Gate服务器
         _session = _scene.Connect(
             "127.0.0.1:20000",
             NetworkProtocolType.KCP,
