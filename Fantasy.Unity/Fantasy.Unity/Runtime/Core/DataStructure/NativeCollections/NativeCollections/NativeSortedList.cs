@@ -8,12 +8,7 @@ using System.Collections.Generic;
 #pragma warning disable CA2208
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -93,9 +88,9 @@ namespace NativeCollections
                 throw new ArgumentOutOfRangeException(nameof(capacity), capacity, "MustBeNonNegative");
             if (capacity < 4)
                 capacity = 4;
-            _handle = (NativeSortedListHandle*)NativeMemoryAllocator.Alloc(sizeof(NativeSortedListHandle));
-            _handle->Buckets = (TKey*)NativeMemoryAllocator.Alloc(capacity * sizeof(TKey));
-            _handle->Entries = (TValue*)NativeMemoryAllocator.Alloc(capacity * sizeof(TValue));
+            _handle = (NativeSortedListHandle*)NativeMemoryAllocator.Alloc((uint)sizeof(NativeSortedListHandle));
+            _handle->Buckets = (TKey*)NativeMemoryAllocator.Alloc((uint)(capacity * sizeof(TKey)));
+            _handle->Entries = (TValue*)NativeMemoryAllocator.Alloc((uint)(capacity * sizeof(TValue)));
             _handle->Size = 0;
             _handle->Version = 0;
             _handle->Capacity = capacity;
@@ -162,8 +157,8 @@ namespace NativeCollections
                 {
                     if (value > 0)
                     {
-                        var keys = (TKey*)NativeMemoryAllocator.Alloc(value * sizeof(TKey));
-                        var values = (TValue*)NativeMemoryAllocator.Alloc(value * sizeof(TValue));
+                        var keys = (TKey*)NativeMemoryAllocator.Alloc((uint)(value * sizeof(TKey)));
+                        var values = (TValue*)NativeMemoryAllocator.Alloc((uint)(value * sizeof(TValue)));
                         if (_handle->Size > 0)
                         {
                             Unsafe.CopyBlockUnaligned(keys, _handle->Buckets, (uint)(_handle->Size * sizeof(TKey)));

@@ -7,12 +7,7 @@ using System;
 #pragma warning disable CA2208
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -72,8 +67,8 @@ namespace NativeCollections
                 throw new ArgumentOutOfRangeException(nameof(capacity), capacity, "MustBeNonNegative");
             if (capacity < 4)
                 capacity = 4;
-            _handle = (NativePriorityQueueHandle*)NativeMemoryAllocator.Alloc(sizeof(NativePriorityQueueHandle));
-            _handle->Nodes = (ValueTuple<TElement, TPriority>*)NativeMemoryAllocator.Alloc(capacity * sizeof(ValueTuple<TElement, TPriority>));
+            _handle = (NativePriorityQueueHandle*)NativeMemoryAllocator.Alloc((uint)sizeof(NativePriorityQueueHandle));
+            _handle->Nodes = (ValueTuple<TElement, TPriority>*)NativeMemoryAllocator.Alloc((uint)(capacity * sizeof(ValueTuple<TElement, TPriority>)));
             _handle->Length = capacity;
             _handle->UnorderedItems = new UnorderedItemsCollection(this);
             _handle->Size = 0;
@@ -418,7 +413,7 @@ namespace NativeCollections
         {
             if (_handle->Size >= (int)(_handle->Length * 0.9))
                 return;
-            var nodes = (ValueTuple<TElement, TPriority>*)NativeMemoryAllocator.Alloc(_handle->Size * sizeof(ValueTuple<TElement, TPriority>));
+            var nodes = (ValueTuple<TElement, TPriority>*)NativeMemoryAllocator.Alloc((uint)(_handle->Size * sizeof(ValueTuple<TElement, TPriority>)));
             Unsafe.CopyBlockUnaligned(nodes, _handle->Nodes, (uint)_handle->Size);
             NativeMemoryAllocator.Free(_handle->Nodes);
             _handle->Nodes = nodes;
@@ -440,7 +435,7 @@ namespace NativeCollections
             newCapacity = newCapacity > expected ? newCapacity : expected;
             if (newCapacity < capacity)
                 newCapacity = capacity;
-            var nodes = (ValueTuple<TElement, TPriority>*)NativeMemoryAllocator.Alloc(newCapacity * sizeof(ValueTuple<TElement, TPriority>));
+            var nodes = (ValueTuple<TElement, TPriority>*)NativeMemoryAllocator.Alloc((uint)(newCapacity * sizeof(ValueTuple<TElement, TPriority>)));
             Unsafe.CopyBlockUnaligned(nodes, _handle->Nodes, (uint)_handle->Size);
             NativeMemoryAllocator.Free(_handle->Nodes);
             _handle->Nodes = nodes;

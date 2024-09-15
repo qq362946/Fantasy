@@ -23,6 +23,9 @@ using Fantasy.Network.Route;
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 namespace Fantasy
 {
+    /// <summary>
+    /// Scene的运行类型
+    /// </summary>
     public class SceneRuntimeType
     {
         /// <summary>
@@ -162,7 +165,6 @@ namespace Fantasy
             SingleCollectionComponent = scene.SingleCollectionComponent;
 #endif
         }
-        
         /// <summary>
         /// Scene销毁方法，执行了该方法会把当前Scene下的所有实体都销毁掉。
         /// </summary>
@@ -500,13 +502,13 @@ namespace Fantasy
                 _processSessionInfos.Remove(sceneId);
             }
 
-            // if (Process.IsInAppliaction(ref sceneId))
-            // {
-            //     // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
-            //     var processSession = Session.CreateInnerSession(Scene);
-            //     _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
-            //     return processSession;
-            // }
+            if (Process.IsInAppliaction(ref sceneId))
+            {
+                // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
+                var processSession = Session.CreateInnerSession(Scene);
+                _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
+                return processSession;
+            }
 
             if (!SceneConfigData.Instance.TryGet(sceneId, out var sceneConfig))
             {

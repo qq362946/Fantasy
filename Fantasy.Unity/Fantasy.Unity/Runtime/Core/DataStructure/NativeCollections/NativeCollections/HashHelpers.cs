@@ -2,11 +2,9 @@
 using System;
 #endif
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
-// ReSharper disable UseCollectionExpression
-// ReSharper disable RedundantExplicitArrayCreation
-// ReSharper disable RedundantArrayCreationExpression
-// ReSharper disable RedundantExplicitArraySize
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -33,20 +31,21 @@ namespace NativeCollections
         /// <param name="min">Min</param>
         /// <returns>Prime</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int BinarySearch(int min)
+        private static int BinarySearch(int min)
         {
             var left = 0;
             var right = 71;
+            ref var value = ref MemoryMarshal.GetReference(Primes);
             while (left <= right)
             {
                 var mid = left + (right - left) / 2;
-                if (Primes[mid] >= min)
+                if (Unsafe.Add(ref value, mid) >= min)
                     right = mid - 1;
                 else
                     left = mid + 1;
             }
 
-            return Primes[left];
+            return Unsafe.Add(ref value, left);
         }
 
         /// <summary>

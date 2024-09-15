@@ -7,6 +7,7 @@ using Fantasy.Helper;
 using Fantasy.Network;
 using Fantasy.Serialize;
 using NLog;
+// ReSharper disable FunctionNeverReturns
 
 namespace Fantasy.Platform.Net;
 
@@ -18,10 +19,10 @@ namespace Fantasy.Platform.Net;
 public static class Entry
 {
     /// <summary>
-    /// 启动Fantasy.Net
+    /// 框架初始化
     /// </summary>
     /// <param name="assemblies"></param>
-    public static async FTask Start(params System.Reflection.Assembly[] assemblies)
+    public static void Initialize(params System.Reflection.Assembly[] assemblies)
     {
         // 解析命令行参数
         Parser.Default.ParseArguments<CommandLineOptions>(Environment.GetCommandLineArgs())
@@ -71,6 +72,13 @@ public static class Entry
         SerializerManager.Initialize();
         // 精度处理（只针对Windows下有作用、其他系统没有这个问题、一般也不会用Windows来做服务器的）
         WinPeriod.Initialize();
+    }
+    
+    /// <summary>
+    /// 启动Fantasy.Net
+    /// </summary>
+    public static async FTask Start()
+    {
         // 启动Process
         StartProcess().Coroutine();
         await FTask.CompletedTask;
@@ -79,6 +87,16 @@ public static class Entry
             ThreadScheduler.Update();
             Thread.Sleep(1);
         }
+    }
+
+    /// <summary>
+    /// 初始化并且启动框架
+    /// </summary>
+    /// <param name="assemblies"></param>
+    public static async FTask Start(params System.Reflection.Assembly[] assemblies)
+    {
+        Initialize(assemblies);
+        await Start();
     }
 
     private static async FTask StartProcess()

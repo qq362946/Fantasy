@@ -7,12 +7,7 @@ using System;
 #pragma warning disable CA2208
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -129,7 +124,7 @@ namespace NativeCollections
             if (maxFreeSlabs < 0)
                 throw new ArgumentOutOfRangeException(nameof(maxFreeSlabs), maxFreeSlabs, "MustBeNonNegative");
             var nodeSize = sizeof(NativeMemoryNode) + length;
-            var array = (byte*)NativeMemoryAllocator.Alloc(sizeof(NativeMemorySlab) + size * nodeSize);
+            var array = (byte*)NativeMemoryAllocator.Alloc((uint)(sizeof(NativeMemorySlab) + size * nodeSize));
             var slab = (NativeMemorySlab*)array;
             slab->Next = slab;
             slab->Previous = slab;
@@ -144,7 +139,7 @@ namespace NativeCollections
 
             slab->Node = next;
             slab->Count = size;
-            _handle = (NativeMemoryPoolHandle*)NativeMemoryAllocator.Alloc(sizeof(NativeMemoryPoolHandle));
+            _handle = (NativeMemoryPoolHandle*)NativeMemoryAllocator.Alloc((uint)sizeof(NativeMemoryPoolHandle));
             _handle->Slab = slab;
             _handle->FreeSlab = null;
             _handle->Slabs = 1;
@@ -274,7 +269,7 @@ namespace NativeCollections
                     if (_handle->FreeSlabs == 0)
                     {
                         var nodeSize = sizeof(NativeMemoryNode) + _handle->Length;
-                        var array = (byte*)NativeMemoryAllocator.Alloc(sizeof(NativeMemorySlab) + size * nodeSize);
+                        var array = (byte*)NativeMemoryAllocator.Alloc((uint)(sizeof(NativeMemorySlab) + size * nodeSize));
                         slab = (NativeMemorySlab*)array;
                         array += sizeof(NativeMemorySlab);
                         NativeMemoryNode* next = null;
@@ -360,6 +355,29 @@ namespace NativeCollections
                 node = node->Next;
                 NativeMemoryAllocator.Free(temp);
             }
+
+            _handle->FreeSlab = node;
+        }
+
+        /// <summary>
+        ///     Trim excess
+        /// </summary>
+        /// <param name="capacity">Remaining free slabs</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void TrimExcess(int capacity)
+        {
+            if (capacity < 0)
+                throw new ArgumentOutOfRangeException(nameof(capacity), capacity, "MustBeNonNegative");
+            var node = _handle->FreeSlab;
+            while (_handle->FreeSlabs > capacity)
+            {
+                _handle->FreeSlabs--;
+                var temp = node;
+                node = node->Next;
+                NativeMemoryAllocator.Free(temp);
+            }
+
+            _handle->FreeSlab = node;
         }
 
         /// <summary>

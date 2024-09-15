@@ -7,12 +7,7 @@ using System;
 #pragma warning disable CA2208
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -91,6 +86,32 @@ namespace NativeCollections
         /// <param name="count">Count</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public NativeArraySegment(NativeArray<T> array, int offset, int count)
+        {
+            _array = array.Array;
+            _offset = offset;
+            _count = count;
+        }
+
+        /// <summary>
+        ///     Structure
+        /// </summary>
+        /// <param name="array">Array</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public NativeArraySegment(NativeMemoryArray<T> array)
+        {
+            _array = array.Array;
+            _offset = 0;
+            _count = array.Length;
+        }
+
+        /// <summary>
+        ///     Structure
+        /// </summary>
+        /// <param name="array">Array</param>
+        /// <param name="offset">Offset</param>
+        /// <param name="count">Count</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public NativeArraySegment(NativeMemoryArray<T> array, int offset, int count)
         {
             _array = array.Array;
             _offset = offset;
@@ -197,6 +218,14 @@ namespace NativeCollections
         /// <returns>NativeArraySegment</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator NativeArraySegment<T>(NativeArray<T> nativeArray) => new(nativeArray);
+
+        /// <summary>
+        ///     As native array segment
+        /// </summary>
+        /// <param name="nativeArray">Native array</param>
+        /// <returns>NativeArraySegment</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator NativeArraySegment<T>(NativeMemoryArray<T> nativeArray) => new(nativeArray);
 
         /// <summary>
         ///     Equals

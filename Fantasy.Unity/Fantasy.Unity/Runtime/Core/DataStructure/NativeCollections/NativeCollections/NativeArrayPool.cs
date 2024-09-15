@@ -10,12 +10,7 @@ using System.Runtime.InteropServices;
 #pragma warning disable CA2208
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -57,7 +52,7 @@ namespace NativeCollections
             else if (maxLength < 16)
                 maxLength = 16;
             var length = SelectBucketIndex(maxLength) + 1;
-            var buckets = (NativeArrayPoolBucket*)NativeMemoryAllocator.Alloc(length * sizeof(NativeArrayPoolBucket));
+            var buckets = (NativeArrayPoolBucket*)NativeMemoryAllocator.Alloc((uint)(length * sizeof(NativeArrayPoolBucket)));
             for (var i = 0; i < length; ++i)
                 buckets[i].Initialize(size, 16 << i);
             _buckets = buckets;
@@ -304,7 +299,7 @@ namespace NativeCollections
             {
                 _size = size;
                 _length = length;
-                _array = (T**)NativeMemoryAllocator.AllocZeroed(size * sizeof(T*));
+                _array = (T**)NativeMemoryAllocator.AllocZeroed((uint)(size * sizeof(T*)));
                 _index = 0;
                 _memoryPool = new NativeMemoryPool(size, length * sizeof(T), 0);
                 _lock = new SpinLock();

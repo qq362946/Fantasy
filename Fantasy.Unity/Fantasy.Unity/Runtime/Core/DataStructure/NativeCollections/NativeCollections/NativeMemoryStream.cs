@@ -8,12 +8,7 @@ using System.IO;
 #pragma warning disable CA2208
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -66,8 +61,8 @@ namespace NativeCollections
                 throw new ArgumentOutOfRangeException(nameof(capacity), capacity, "MustBeNonNegative");
             if (capacity < 4)
                 capacity = 4;
-            _handle = (NativeMemoryStreamHandle*)NativeMemoryAllocator.Alloc(sizeof(NativeMemoryStreamHandle));
-            _handle->Array = (byte*)NativeMemoryAllocator.Alloc(capacity);
+            _handle = (NativeMemoryStreamHandle*)NativeMemoryAllocator.Alloc((uint)sizeof(NativeMemoryStreamHandle));
+            _handle->Array = (byte*)NativeMemoryAllocator.Alloc((uint)capacity);
             _handle->Position = 0;
             _handle->Length = 0;
             _handle->Capacity = capacity;
@@ -173,9 +168,9 @@ namespace NativeCollections
                 {
                     if (value > 0)
                     {
-                        var newBuffer = (byte*)NativeMemoryAllocator.Alloc(value);
+                        var newBuffer = (byte*)NativeMemoryAllocator.Alloc((uint)value);
                         if (_handle->Length > 0)
-                            Unsafe.CopyBlock(newBuffer, _handle->Array, (uint)_handle->Length);
+                            Unsafe.CopyBlockUnaligned(newBuffer, _handle->Array, (uint)_handle->Length);
                         NativeMemoryAllocator.Free(_handle->Array);
                         _handle->Array = newBuffer;
                     }
@@ -399,7 +394,7 @@ namespace NativeCollections
             }
             else
             {
-                Unsafe.CopyBlock(buffer + offset, _handle->Array + _handle->Position, (uint)n);
+                Unsafe.CopyBlockUnaligned(buffer + offset, _handle->Array + _handle->Position, (uint)n);
             }
 
             _handle->Position += n;
@@ -419,7 +414,7 @@ namespace NativeCollections
             var n = size < buffer.Length ? size : buffer.Length;
             if (n <= 0)
                 return 0;
-            Unsafe.CopyBlock(ref buffer[0], ref *(_handle->Array + _handle->Position), (uint)n);
+            Unsafe.CopyBlockUnaligned(ref buffer[0], ref *(_handle->Array + _handle->Position), (uint)n);
             _handle->Position += n;
             return n;
         }
@@ -471,7 +466,7 @@ namespace NativeCollections
             }
             else
             {
-                Unsafe.CopyBlock(_handle->Array + _handle->Position, buffer + offset, (uint)count);
+                Unsafe.CopyBlockUnaligned(_handle->Array + _handle->Position, buffer + offset, (uint)count);
             }
 
             _handle->Position = i;
@@ -503,7 +498,7 @@ namespace NativeCollections
                 _handle->Length = i;
             }
 
-            Unsafe.CopyBlock(ref *(_handle->Array + _handle->Position), ref MemoryMarshal.GetReference(buffer), (uint)buffer.Length);
+            Unsafe.CopyBlockUnaligned(ref *(_handle->Array + _handle->Position), ref MemoryMarshal.GetReference(buffer), (uint)buffer.Length);
             _handle->Position = i;
         }
 

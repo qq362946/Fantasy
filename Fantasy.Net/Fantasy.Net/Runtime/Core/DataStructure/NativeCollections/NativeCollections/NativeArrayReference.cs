@@ -9,13 +9,7 @@ using System;
 #pragma warning disable CS8603
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
-// ReSharper disable SuggestBaseTypeForParameterInConstructor
+// ReSharper disable ALL
 
 namespace NativeCollections
 {

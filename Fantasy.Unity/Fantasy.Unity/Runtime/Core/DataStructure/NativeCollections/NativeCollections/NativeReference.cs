@@ -7,12 +7,7 @@ using System;
 #pragma warning disable CA2208
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -38,34 +33,32 @@ namespace NativeCollections
         /// <summary>
         ///     Structure
         /// </summary>
-        /// <param name="value">Value</param>
+        /// <param name="handle">Handle</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public NativeReference(T value)
-        {
-            _handle = (T*)NativeMemoryAllocator.Alloc(sizeof(T));
-            *_handle = value;
-        }
-
-        /// <summary>
-        ///     Handle
-        /// </summary>
-        public T* Handle => _handle;
-
-        /// <summary>
-        ///     Value
-        /// </summary>
-        public T Value
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => *_handle;
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => *_handle = value;
-        }
+        public NativeReference(nint handle) => _handle = (T*)handle;
 
         /// <summary>
         ///     Is created
         /// </summary>
         public bool IsCreated => _handle != null;
+
+        /// <summary>
+        ///     Handle
+        /// </summary>
+        public T* Handle
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => _handle;
+        }
+
+        /// <summary>
+        ///     Value
+        /// </summary>
+        public ref T Value
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => ref *_handle;
+        }
 
         /// <summary>
         ///     Equals
@@ -91,7 +84,7 @@ namespace NativeCollections
         ///     To string
         /// </summary>
         /// <returns>String</returns>
-        public override string ToString() => $"NativeReference<{typeof(T).Name}>[{*_handle}]";
+        public override string ToString() => $"NativeReference<{typeof(T).Name}>";
 
         /// <summary>
         ///     As reference

@@ -7,12 +7,7 @@ using System;
 #pragma warning disable CA2208
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -66,8 +61,8 @@ namespace NativeCollections
                 throw new ArgumentOutOfRangeException(nameof(capacity), capacity, "MustBeNonNegative");
             if (capacity < 4)
                 capacity = 4;
-            _handle = (NativeListHandle*)NativeMemoryAllocator.Alloc(sizeof(NativeListHandle));
-            _handle->Array = (T*)NativeMemoryAllocator.Alloc(capacity * sizeof(T));
+            _handle = (NativeListHandle*)NativeMemoryAllocator.Alloc((uint)sizeof(NativeListHandle));
+            _handle->Array = (T*)NativeMemoryAllocator.Alloc((uint)(capacity * sizeof(T)));
             _handle->Length = capacity;
             _handle->Size = 0;
             _handle->Version = 0;
@@ -124,7 +119,7 @@ namespace NativeCollections
                 {
                     if (value > 0)
                     {
-                        var newItems = (T*)NativeMemoryAllocator.Alloc(value * sizeof(T));
+                        var newItems = (T*)NativeMemoryAllocator.Alloc((uint)(value * sizeof(T)));
                         if (_handle->Size > 0)
                             Unsafe.CopyBlockUnaligned(newItems, _handle->Array, (uint)(_handle->Size * sizeof(T)));
                         NativeMemoryAllocator.Free(_handle->Array);

@@ -8,12 +8,7 @@ using System.Collections.Generic;
 #pragma warning disable CA2208
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -113,7 +108,7 @@ namespace NativeCollections
                 throw new ArgumentOutOfRangeException(nameof(capacity), capacity, "MustBeNonNegative");
             if (capacity < 4)
                 capacity = 4;
-            _handle = (NativeDictionaryHandle*)NativeMemoryAllocator.Alloc(sizeof(NativeDictionaryHandle));
+            _handle = (NativeDictionaryHandle*)NativeMemoryAllocator.Alloc((uint)sizeof(NativeDictionaryHandle));
             _handle->Count = 0;
             _handle->FreeCount = 0;
             _handle->Version = 0;
@@ -398,7 +393,7 @@ namespace NativeCollections
             Initialize(newSize);
             var newEntries = _handle->Entries;
             var newCount = 0;
-            for (var i = 0; i < oldCount; i++)
+            for (var i = 0; i < oldCount; ++i)
             {
                 var hashCode = oldEntries[i].HashCode;
                 if (oldEntries[i].Next >= -1)
@@ -454,8 +449,8 @@ namespace NativeCollections
         {
             var size = HashHelpers.GetPrime(capacity);
             _handle->FreeList = -1;
-            _handle->Buckets = (int*)NativeMemoryAllocator.AllocZeroed(size * sizeof(int));
-            _handle->Entries = (Entry*)NativeMemoryAllocator.AllocZeroed(size * sizeof(Entry));
+            _handle->Buckets = (int*)NativeMemoryAllocator.AllocZeroed((uint)(size * sizeof(int)));
+            _handle->Entries = (Entry*)NativeMemoryAllocator.AllocZeroed((uint)(size * sizeof(Entry)));
             _handle->BucketsLength = size;
             _handle->EntriesLength = size;
             _handle->FastModMultiplier = IntPtr.Size == 8 ? HashHelpers.GetFastModMultiplier((uint)size) : 0;
@@ -474,15 +469,15 @@ namespace NativeCollections
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void Resize(int newSize)
         {
-            var entries = (Entry*)NativeMemoryAllocator.AllocZeroed(newSize * sizeof(Entry));
+            var entries = (Entry*)NativeMemoryAllocator.AllocZeroed((uint)(newSize * sizeof(Entry)));
             var count = _handle->Count;
             Unsafe.CopyBlockUnaligned(entries, _handle->Entries, (uint)(count * sizeof(Entry)));
-            var buckets = (int*)NativeMemoryAllocator.AllocZeroed(newSize * sizeof(int));
+            var buckets = (int*)NativeMemoryAllocator.AllocZeroed((uint)(newSize * sizeof(int)));
             NativeMemoryAllocator.Free(_handle->Buckets);
             _handle->Buckets = buckets;
             _handle->BucketsLength = newSize;
             _handle->FastModMultiplier = IntPtr.Size == 8 ? HashHelpers.GetFastModMultiplier((uint)newSize) : 0;
-            for (var i = 0; i < count; i++)
+            for (var i = 0; i < count; ++i)
             {
                 if (entries[i].Next >= -1)
                 {

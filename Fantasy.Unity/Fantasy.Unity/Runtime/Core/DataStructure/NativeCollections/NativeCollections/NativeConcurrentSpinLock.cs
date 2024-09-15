@@ -8,12 +8,7 @@ using System.Threading;
 #pragma warning disable CA2208
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -61,7 +56,7 @@ namespace NativeCollections
                 sleepThreshold = -1;
             else if (sleepThreshold >= 0 && sleepThreshold < 10)
                 sleepThreshold = 10;
-            _handle = (NativeConcurrentSpinLockHandle*)NativeMemoryAllocator.Alloc(sizeof(NativeConcurrentSpinLockHandle));
+            _handle = (NativeConcurrentSpinLockHandle*)NativeMemoryAllocator.Alloc((uint)sizeof(NativeConcurrentSpinLockHandle));
             _handle->SequenceNumber = 0;
             _handle->NextSequenceNumber = 1;
             _handle->SleepThreshold = sleepThreshold;

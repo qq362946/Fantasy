@@ -8,16 +8,7 @@ using System.Threading;
 #pragma warning disable CA2208
 #pragma warning disable CS8632
 
-// ReSharper disable ConvertToAutoProperty
-// ReSharper disable ConvertToAutoPropertyWhenPossible
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
-// ReSharper disable ConvertIfStatementToSwitchStatement
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable MemberHidesStaticFromOuterClass
-// ReSharper disable RedundantAssignment
-// ReSharper disable StaticMemberInGenericType
-// ReSharper disable ByRefArgumentIsVolatileField
-// ReSharper disable ConvertSwitchStatementToSwitchExpression
+// ReSharper disable ALL
 
 namespace NativeCollections
 {
@@ -88,8 +79,8 @@ namespace NativeCollections
                 locks[i] = new object();
             var countPerLock = new NativeArray<int>(locks.Length, true);
             var buckets = new NativeArray<VolatileNode>(capacity, true);
-            _handle = (NativeConcurrentHashSetHandle*)NativeMemoryAllocator.Alloc(sizeof(NativeConcurrentHashSetHandle));
-            _handle->Tables = (Tables*)NativeMemoryAllocator.Alloc(sizeof(Tables));
+            _handle = (NativeConcurrentHashSetHandle*)NativeMemoryAllocator.Alloc((uint)sizeof(NativeConcurrentHashSetHandle));
+            _handle->Tables = (Tables*)NativeMemoryAllocator.Alloc((uint)sizeof(Tables));
             _handle->Tables->Initialize(buckets, locks, countPerLock);
             _handle->GrowLockArray = growLockArray;
             _handle->Budget = buckets.Length / locks.Length;
@@ -423,7 +414,7 @@ namespace NativeCollections
 
                 var newBuckets = new NativeArray<VolatileNode>(newLength, true);
                 var newCountPerLock = new NativeArray<int>(newLocks.Length, true);
-                var newTables = (Tables*)NativeMemoryAllocator.Alloc(sizeof(Tables));
+                var newTables = (Tables*)NativeMemoryAllocator.Alloc((uint)sizeof(Tables));
                 newTables->Initialize(newBuckets, newLocks, newCountPerLock);
                 AcquirePostFirstLock(tables, ref locksAcquired);
                 foreach (var bucket in tables->Buckets)
