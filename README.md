@@ -13,6 +13,7 @@
 ## 导航
 * [Fantasy介绍网站](https://www.code-fantasy.com/)
 * [Fantasy的API文档](https://www.code-fantasy.com/doc/api/Fantasy.html)
+* [入门视频观看地址](https://space.bilibili.com/382126312)
 ## 快速上手
 * 01.快速入门
   * [1.1.获得Fantasy](https://www.code-fantasy.com/top/download-fantasy/)
@@ -38,10 +39,16 @@
 * [API文档](https://www.code-fantasy.com/doc/api/Fantasy.html)
 * [常见问题](https://www.code-fantasy.com/question/)
 
-
 ## 优质开源项目推荐
 #### <a href="https://github.com/egametang/ET"><strong>ET</strong></a> - ET框架是一整套完善的游戏开发框架。
 #### <a href="https://github.com/ALEXTANGXIAO/TEngine"><strong>TEngine</strong></a> - TEngine是一个简单(新手友好开箱即用)且强大的Unity框架全平台解决方案。
+#### <a href="https://github.com/FlameskyDexive/Legends-Of-Heroes"><strong>Legends-Of-Heroes</strong></a> - 一个LOL风格的球球大作战游戏，基于ET，使用状态同步。
 ## 交流与讨论：  
 __讨论QQ群 : Fantasy服务器开发交流群 569888673 __
+## 特别鸣谢
+
+感谢JetBrains公司提供的使用许可证！
+
+<p><a href="https://www.jetbrains.com/?from=fantasy">
+<img src="https://user-images.githubusercontent.com/8274346/223466125-611c027a-61f3-4ea0-a96d-4052283da746.png" alt="JetBrains的Logo" width="20%" height="20%"></a></p>
 
