@@ -13,6 +13,7 @@
 ## 导航
 * [Fantasy介绍网站](https://www.code-fantasy.com/)
 * [Fantasy的API文档](https://www.code-fantasy.com/doc/api/Fantasy.html)
+* [入门视频观看地址](https://space.bilibili.com/382126312)
 ## 快速上手
 * 01.快速入门
   * [1.1.获得Fantasy](https://www.code-fantasy.com/top/download-fantasy/)
