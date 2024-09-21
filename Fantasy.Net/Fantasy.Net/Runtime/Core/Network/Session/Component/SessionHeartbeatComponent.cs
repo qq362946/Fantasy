@@ -1,5 +1,6 @@
 // ReSharper disable MemberCanBePrivate.Global
 
+using System;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
@@ -121,20 +122,27 @@ namespace Fantasy.Network
                 Dispose();
                 return;
             }
-            
-            var requestTime = TimeHelper.Now;
-            
-            var pingResponse = (PingResponse)await session.Call(_pingRequest);
 
-            if (pingResponse.ErrorCode != 0)
+            try
             {
-                return;
+                var requestTime = TimeHelper.Now;
+
+                var pingResponse = (PingResponse)await session.Call(_pingRequest);
+
+                if (pingResponse.ErrorCode != 0)
+                {
+                    return;
+                }
+
+                var responseTime = TimeHelper.Now;
+                LastTime = responseTime;
+                Ping = (int)(responseTime - requestTime) / 2;
+                TimeHelper.TimeDiff = pingResponse.Now + Ping - responseTime;
             }
-            
-            var responseTime = TimeHelper.Now;
-            LastTime = responseTime;
-            Ping = (int)(responseTime - requestTime) / 2;
-            TimeHelper.TimeDiff = pingResponse.Now + Ping - responseTime;
+            catch (Exception e)
+            {
+                Dispose();
+            }
         }
     }
 }
