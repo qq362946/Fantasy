@@ -1,9 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <PackageId>Fantasy-Net</PackageId>
+        <PackageVersion>2024.1.1</PackageVersion>
+        <Title>Fantasy-Net</Title>
+        <Authors>qq362946</Authors>
+        <owners>qq362946</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <Description>
+            Fantasy is a high-performance network development framework based on .NET, supporting mainstream protocols. It is designed for development teams or individuals needing a quick start, scalability, and a distributed, cross-platform solution at the commercial level. Fantasy aims to provide easy-to-use tools while ensuring high system performance and scalability.</Description>
+        <Copyright>Copyright 2026 qq362946</Copyright>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageProjectUrl>https://www.code-fantasy.com/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/qq362946/Fantasy</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>Net, c#, Server, Game, GameServer, Fantasy , Network</PackageTags>
+        <PackageIcon>icon.png</PackageIcon>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AssemblyName>Fantasy-Net</AssemblyName>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -30,7 +47,16 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Runtime\Core\Network\Protocol\KCP\KCPUnSafe\" />
+        <None Include="Config\NLog\NLog.config" Pack="true" PackagePath="build\NLog.config" />
+        <None Include="Config\NLog\NLog.xsd" Pack="true" PackagePath="build\NLog.xsd" />
+        <None Include="Config\Server\MachineConfig.xlsx" Pack="true" PackagePath="build\MachineConfig.xlsx" />
+        <None Include="Config\Server\SceneConfig.xlsx" Pack="true" PackagePath="build\SceneConfig.xlsx" />
+        <None Include="Config\Server\ProcessConfig.xlsx" Pack="true" PackagePath="build\ProcessConfig.xlsx" />
+        <None Include="Config\Server\WorldConfig.xlsx" Pack="true" PackagePath="build\WorldConfig.xlsx" />
+        <None Include="Fantasy-Net.targets" Pack="true" PackagePath="buildTransitive" />
+        <None Include="icon.png" Pack="true" PackagePath="\"/>
+        <None Include="LICENSE" Pack="true" PackagePath="\"/>
+        <None Include="README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>
