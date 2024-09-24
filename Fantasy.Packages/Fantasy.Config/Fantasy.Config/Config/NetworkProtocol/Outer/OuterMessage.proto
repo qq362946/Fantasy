@@ -1,0 +1,64 @@
+syntax = "proto3";
+package Fantasy.Network.Message;
+// 协议分为:
+// ProtoBuf:可以在Outer和Inner文件里使用。
+// MemoryPack:可以在Outer和Inner文件里使用。
+// Bson:仅支持在Inner文件里使用。
+// 使用方式:
+// 在message协议上方添加// Protocol+空格+协议名字
+// 例如:// Protocol ProtoBuf 或 // Protocol MemoryPack
+message C2G_TestMessage // IMessage
+{
+	string Tag = 1;
+}
+message C2G_TestRequest // IRequest,G2C_TestResponse
+{
+	string Tag = 1;
+}
+message G2C_TestResponse // IResponse
+{
+	string Tag = 1;
+}
+message C2G_CreateAddressableRequest // IRequest,G2C_CreateAddressableResponse
+{
+
+}
+message G2C_CreateAddressableResponse // IResponse
+{
+
+}
+message C2M_TestMessage // IAddressableRouteMessage
+{
+	string Tag = 1;
+}
+message C2M_TestRequest // IAddressableRouteRequest,M2C_TestResponse
+{
+	string Tag = 1;
+}
+message M2C_TestResponse // IAddressableRouteResponse
+{
+	string Tag = 1;
+}
+/// 通知Gate服务器创建一个Chat的Route连接
+message C2G_CreateChatRouteRequest // IRequest,G2C_CreateChatRouteResponse
+{
+
+}
+message G2C_CreateChatRouteResponse // IResponse
+{
+
+}
+/// 发送一个Route消息给Chat
+message C2Chat_TestMessage // ICustomRouteMessage,ChatRoute
+{
+	string Tag = 1;
+}
+/// 发送一个RPCRoute消息给Chat
+message C2Chat_TestMessageRequest // ICustomRouteRequest,Chat2C_TestMessageResponse,ChatRoute
+{
+	string Tag = 1;
+}
+message Chat2C_TestMessageResponse // ICustomRouteResponse
+{
+	string Tag = 1;
+}

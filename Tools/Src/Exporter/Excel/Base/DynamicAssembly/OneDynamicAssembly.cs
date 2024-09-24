@@ -1,5 +1,4 @@
 using System.Reflection;
-using Fantasy;
 using Fantasy.Exporter;
 using Fantasy.Serialize;
 using Microsoft.CodeAnalysis;

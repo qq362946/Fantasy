@@ -1,0 +1,27 @@
+syntax = "proto3";
+package Sining.Message;
+message G2A_TestRequest // IRouteRequest,G2A_TestResponse
+{
+
+}
+message G2A_TestResponse // IRouteResponse
+{
+	
+}
+message G2M_RequestAddressableId // IRouteRequest,M2G_ResponseAddressableId
+{
+
+}
+message M2G_ResponseAddressableId // IRouteResponse
+{
+	int64 AddressableId = 1;	// Map服务器返回的AddressableId
+}
+/// 通知Chat服务器创建一个RouteId
+message G2Chat_CreateRouteRequest // IRouteRequest,Chat2G_CreateRouteResponse
+{
+	int64 GateRouteId = 1;
+}
+message Chat2G_CreateRouteResponse // IRouteResponse
+{
+	int64 ChatRouteId = 1;
+}

@@ -1,0 +1,6 @@
+{"List":[
+{"Id":1001,"ProcessConfigId":1,"WorldConfigId":1,"SceneRuntimeType":"MultiThread","SceneTypeString":"Addressable","NetworkProtocol":null,"OuterPort":0,"InnerPort":11001,"SceneType":2},
+{"Id":1002,"ProcessConfigId":1,"WorldConfigId":1,"SceneRuntimeType":"MultiThread","SceneTypeString":"Gate","NetworkProtocol":"KCP","OuterPort":20000,"InnerPort":11002,"SceneType":3},
+{"Id":1003,"ProcessConfigId":1,"WorldConfigId":1,"SceneRuntimeType":"MultiThread","SceneTypeString":"Map","NetworkProtocol":null,"OuterPort":0,"InnerPort":11003,"SceneType":4},
+{"Id":1004,"ProcessConfigId":1,"WorldConfigId":1,"SceneRuntimeType":"MultiThread","SceneTypeString":"Chat","NetworkProtocol":null,"OuterPort":0,"InnerPort":11004,"SceneType":8}
+]}

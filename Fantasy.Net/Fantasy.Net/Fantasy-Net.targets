@@ -1,34 +1,34 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <!-- 物理复制 Excel 配置文件到项目根目录 -->
-    <Target Name="CopyExcelFilesToProject" BeforeTargets="PrepareForBuild">
-        <ItemGroup>
-            <ExcelFilesToCopy Include="$(MSBuildThisFileDirectory)..\build\MachineConfig.xlsx" />
-            <ExcelFilesToCopy Include="$(MSBuildThisFileDirectory)..\build\SceneConfig.xlsx" />
-            <ExcelFilesToCopy Include="$(MSBuildThisFileDirectory)..\build\ProcessConfig.xlsx" />
-            <ExcelFilesToCopy Include="$(MSBuildThisFileDirectory)..\build\WorldConfig.xlsx" />
-        </ItemGroup>
-        <Copy SourceFiles="@(ExcelFilesToCopy)" DestinationFolder="$(MSBuildProjectDirectory)/ServerConfig" SkipUnchangedFiles="true" />
-    </Target>
-    <!-- 物理复制 NLog 配置文件到项目根目录 -->
-    <Target Name="CopyNLogFilesToProject" BeforeTargets="PrepareForBuild">
-        <ItemGroup>
-            <!-- 定义源文件路径，指向 NuGet 包中的文件 -->
-            <FilesToCopy Include="$(MSBuildThisFileDirectory)..\build\NLog.config" />
-            <FilesToCopy Include="$(MSBuildThisFileDirectory)..\build\NLog.xsd" />
-        </ItemGroup>
-        <!-- 使用 Copy 任务将文件复制到项目物理根目录 -->
-        <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(MSBuildProjectDirectory)" SkipUnchangedFiles="true" />        
-        <!-- 将复制的文件添加到解决方案中，并设置复制到输出目录 -->
-        <ItemGroup>
-            <!-- 使用 Include 确保文件在解决方案中显示 -->
-            <None Include="NLog.config">
-                <!-- 确保复制到输出目录，并设置复制模式 -->
-                <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            </None>
-            <None Include="NLog.xsd">
-                <!-- 确保复制到输出目录，并设置复制模式 -->
-                <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            </None>
-        </ItemGroup>
-    </Target>
+<!--    &lt;!&ndash; 物理复制 Excel 配置文件到项目根目录 &ndash;&gt;-->
+<!--    <Target Name="CopyExcelFilesToProject" BeforeTargets="PrepareForBuild">-->
+<!--        <ItemGroup>-->
+<!--            <ExcelFilesToCopy Include="$(MSBuildThisFileDirectory)..\build\MachineConfig.xlsx" />-->
+<!--            <ExcelFilesToCopy Include="$(MSBuildThisFileDirectory)..\build\SceneConfig.xlsx" />-->
+<!--            <ExcelFilesToCopy Include="$(MSBuildThisFileDirectory)..\build\ProcessConfig.xlsx" />-->
+<!--            <ExcelFilesToCopy Include="$(MSBuildThisFileDirectory)..\build\WorldConfig.xlsx" />-->
+<!--        </ItemGroup>-->
+<!--        <Copy SourceFiles="@(ExcelFilesToCopy)" DestinationFolder="$(MSBuildProjectDirectory)/ServerConfig" SkipUnchangedFiles="true" />-->
+<!--    </Target>-->
+<!--    &lt;!&ndash; 物理复制 NLog 配置文件到项目根目录 &ndash;&gt;-->
+<!--    <Target Name="CopyNLogFilesToProject" BeforeTargets="PrepareForBuild">-->
+<!--        <ItemGroup>-->
+<!--            &lt;!&ndash; 定义源文件路径，指向 NuGet 包中的文件 &ndash;&gt;-->
+<!--            <FilesToCopy Include="$(MSBuildThisFileDirectory)..\build\NLog.config" />-->
+<!--            <FilesToCopy Include="$(MSBuildThisFileDirectory)..\build\NLog.xsd" />-->
+<!--        </ItemGroup>-->
+<!--        &lt;!&ndash; 使用 Copy 任务将文件复制到项目物理根目录 &ndash;&gt;-->
+<!--        <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(MSBuildProjectDirectory)" SkipUnchangedFiles="true" />        -->
+<!--        &lt;!&ndash; 将复制的文件添加到解决方案中，并设置复制到输出目录 &ndash;&gt;-->
+<!--        <ItemGroup>-->
+<!--            &lt;!&ndash; 使用 Include 确保文件在解决方案中显示 &ndash;&gt;-->
+<!--            <None Include="NLog.config">-->
+<!--                &lt;!&ndash; 确保复制到输出目录，并设置复制模式 &ndash;&gt;-->
+<!--                <CopyToOutputDirectory>Always</CopyToOutputDirectory>-->
+<!--            </None>-->
+<!--            <None Include="NLog.xsd">-->
+<!--                &lt;!&ndash; 确保复制到输出目录，并设置复制模式 &ndash;&gt;-->
+<!--                <CopyToOutputDirectory>Always</CopyToOutputDirectory>-->
+<!--            </None>-->
+<!--        </ItemGroup>-->
+<!--    </Target>-->
 </Project>

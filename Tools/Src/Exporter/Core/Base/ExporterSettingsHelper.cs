@@ -1,4 +1,3 @@
-using Fantasy;
 using Fantasy.Helper;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;

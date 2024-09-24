@@ -1,9 +1,9 @@
-#if FANTASY_NET
 using System;
 using System.Collections.Generic;
 using System.IO;
 using Fantasy.Platform.Net;
 using Fantasy.Serialize;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 // ReSharper disable SuspiciousTypeConversion.Global
 
@@ -14,9 +14,18 @@ namespace Fantasy.ConfigTable
     /// </summary>
     public static class ConfigTableHelper
     {
+        private static string _configTableBinaryDirectory;
         private static readonly object Lock = new object();
         // 配置表数据缓存字典
         private static readonly Dictionary<string, ASerialize> ConfigDic = new ();
+        /// <summary>
+        /// 初始化ConfigTableHelper
+        /// </summary>
+        /// <param name="configTableBinaryDirectory"></param>
+        public static void Initialize(string configTableBinaryDirectory)
+        {
+            _configTableBinaryDirectory = configTableBinaryDirectory;
+        }
         /// <summary>
         /// 加载配置表数据
         /// </summary>
@@ -55,7 +64,7 @@ namespace Fantasy.ConfigTable
         /// <returns>配置表文件路径</returns>
         private static string GetConfigPath(string name)
         {
-            var configFile = Path.Combine(ProcessDefine.ConfigTableBinaryDirectory, $"{name}.bytes");
+            var configFile = Path.Combine(_configTableBinaryDirectory, $"{name}.bytes");
 
             if (File.Exists(configFile))
             {
@@ -82,4 +91,3 @@ namespace Fantasy.ConfigTable
         }
     }
 }
-#endif

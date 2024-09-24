@@ -2,7 +2,6 @@
 using CommandLine;
 using Exporter;
 using Exporter.Excel;
-using Fantasy;
 using Fantasy.Exporter;
 
 try

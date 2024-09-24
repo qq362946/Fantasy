@@ -6,7 +6,6 @@ using Fantasy.Async;
 using Fantasy.Helper;
 using Fantasy.Network;
 using Fantasy.Serialize;
-using NLog;
 // ReSharper disable FunctionNeverReturns
 
 namespace Fantasy.Platform.Net;
@@ -32,28 +31,8 @@ public static class Entry
                 ProcessDefine.Options = option;
                 ProcessDefine.InnerNetwork = Enum.Parse<NetworkProtocolType>(option.InnerNetwork);
             });
-        // 非Benchmark模式、根据不同的运行模式来选择日志的方式
-        switch (ProcessDefine.Options.Mode)
-        {
-            case "Develop":
-            {
-                LogManager.Configuration.RemoveRuleByName("ServerDebug");
-                LogManager.Configuration.RemoveRuleByName("ServerTrace");
-                LogManager.Configuration.RemoveRuleByName("ServerInfo");
-                LogManager.Configuration.RemoveRuleByName("ServerWarn");
-                LogManager.Configuration.RemoveRuleByName("ServerError");
-                break;
-            }
-            case "Release":
-            {
-                LogManager.Configuration.RemoveRuleByName("ConsoleTrace");
-                LogManager.Configuration.RemoveRuleByName("ConsoleDebug");
-                LogManager.Configuration.RemoveRuleByName("ConsoleInfo");
-                LogManager.Configuration.RemoveRuleByName("ConsoleWarn");
-                LogManager.Configuration.RemoveRuleByName("ConsoleError");
-                break;
-            }
-        }
+        // 初始化Log系统
+        Log.Initialize();
         // 检查启动参数,后期可能有机器人等不同的启动参数
         switch (ProcessDefine.Options.ProcessType)
         {
@@ -66,6 +45,7 @@ public static class Entry
                 throw new NotSupportedException($"ProcessType is {ProcessDefine.Options.ProcessType} Unrecognized!");
             }
         }
+
         // 初始化程序集管理系统
         AssemblySystem.Initialize(assemblies);
         // 初始化序列化
@@ -73,7 +53,7 @@ public static class Entry
         // 精度处理（只针对Windows下有作用、其他系统没有这个问题、一般也不会用Windows来做服务器的）
         WinPeriod.Initialize();
     }
-    
+
     /// <summary>
     /// 启动Fantasy.Net
     /// </summary>

@@ -4,7 +4,7 @@
     "Main": {
       "commandName": "Project",
       "environmentVariables": {},
-      "commandLineArgs": "--m Develop --c ../../../Config/Binary"
+      "commandLineArgs": "--m Develop"
     }
   }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Concurrent;
-using Fantasy;
 using Fantasy.Exporter;
 using Fantasy.Helper;
 using OfficeOpenXml;
