@@ -82,7 +82,7 @@ namespace Fantasy.Platform.Console
         /// <summary>
         /// 如果有的话一定要在每帧执行这个方法
         /// </summary>
-        public void Update()
+        public static void Update()
         {
             ThreadScheduler.Update();
         }
