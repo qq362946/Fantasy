@@ -1,3 +1,4 @@
+#if FANTASY_NET
 using Fantasy.Platform.Net;
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
@@ -140,3 +141,4 @@ public sealed class ConsoleLog : ILog
         Console.WriteLine(message, args);
     }
 }
+#endif

@@ -5,6 +5,25 @@ using Fantasy.Network;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 namespace Fantasy.Platform.Net;
 
+/// <summary>
+/// Process运行模式
+/// </summary>
+public enum ProcessMode
+{
+    /// <summary>
+    /// 默认
+    /// </summary>
+    None =0,
+    /// <summary>
+    /// 开发模式
+    /// </summary>
+    Develop = 1,
+    /// <summary>
+    /// 发布模式
+    /// </summary>
+    Release = 2
+}
+
 internal sealed class CommandLineOptions
 {
     /// <summary>
@@ -35,11 +54,6 @@ internal sealed class CommandLineOptions
     [Option('n', "InnerNetwork", Required = false, Default = "TCP", HelpText = "TCP、KCP、WebSocket")]
     public string InnerNetwork { get; set; }
     /// <summary>
-    /// 配置表文件夹路径。
-    /// </summary>
-    [Option('c', "ConfigTableBinaryDirectory", Required = true, Default = "", HelpText = "Configure the table binary folder path")]
-    public string ConfigTableBinaryDirectory { get; set; }
-    /// <summary>
     /// 会话空闲检查超时时间。
     /// </summary>
     [Option('t', "SessionIdleCheckerTimeout", Required = false, Default = 8000, HelpText = "Session idle check timeout")]
@@ -65,27 +79,18 @@ internal static class ProcessDefine
     /// 命令行选项
     /// </summary>
     public static CommandLineOptions Options;
-
     /// <summary>
     /// App程序Id
     /// </summary>
     public static uint ProcessId => Options.ProcessId;
-
     /// <summary>
     /// 会话空闲检查超时时间。
     /// </summary>
     public static int SessionIdleCheckerTimeout => Options.SessionIdleCheckerTimeout;
-
     /// <summary>
     /// 会话空闲检查间隔。
     /// </summary>
     public static int SessionIdleCheckerInterval => Options.SessionIdleCheckerInterval;
-
-    /// <summary>
-    /// 配置表文件夹路径
-    /// </summary>
-    public static string ConfigTableBinaryDirectory => Options.ConfigTableBinaryDirectory;
-
     /// <summary>
     /// 内部网络通讯协议类型
     /// </summary>

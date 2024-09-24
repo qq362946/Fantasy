@@ -1,24 +1,19 @@
 #if FANTASY_NET
-using NLog;
+using Fantasy.Platform.Net;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Fantasy;
 
 /// <summary>
-/// 使用 NLog 实现的日志记录器。
+/// 标准的控制台Log
 /// </summary>
-public class NLog : ILog
+public sealed class ConsoleLog : ILog
 {
-    private readonly Logger _logger; // NLog 日志记录器实例
-
     /// <summary>
-    /// 初始化 NLog 实例。
+    /// 初始化方法
     /// </summary>
-    /// <param name="name">日志记录器的名称。</param>
-    public NLog(string name)
-    {
-        // 获取指定名称的 NLog 日志记录器
-        _logger = LogManager.GetLogger(name);
-    }
+    /// <param name="processMode"></param>
+    public void Initialize(ProcessMode processMode) { }
 
     /// <summary>
     /// 记录跟踪级别的日志消息。
@@ -26,7 +21,8 @@ public class NLog : ILog
     /// <param name="message">日志消息。</param>
     public void Trace(string message)
     {
-        _logger.Trace(message);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine(message);
     }
 
     /// <summary>
@@ -35,7 +31,8 @@ public class NLog : ILog
     /// <param name="message">日志消息。</param>
     public void Warning(string message)
     {
-        _logger.Warn(message);
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(message);
     }
 
     /// <summary>
@@ -44,7 +41,8 @@ public class NLog : ILog
     /// <param name="message">日志消息。</param>
     public void Info(string message)
     {
-        _logger.Info(message);
+        Console.ForegroundColor = ConsoleColor.Gray;
+        Console.WriteLine(message);
     }
 
     /// <summary>
@@ -53,7 +51,8 @@ public class NLog : ILog
     /// <param name="message">日志消息。</param>
     public void Debug(string message)
     {
-        _logger.Debug(message);
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine(message);
     }
 
     /// <summary>
@@ -62,7 +61,8 @@ public class NLog : ILog
     /// <param name="message">日志消息。</param>
     public void Error(string message)
     {
-        _logger.Error(message);
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.WriteLine(message);
     }
 
     /// <summary>
@@ -71,7 +71,8 @@ public class NLog : ILog
     /// <param name="message">日志消息。</param>
     public void Fatal(string message)
     {
-        _logger.Fatal(message);
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(message);
     }
 
     /// <summary>
@@ -81,7 +82,8 @@ public class NLog : ILog
     /// <param name="args">格式化参数。</param>
     public void Trace(string message, params object[] args)
     {
-        _logger.Trace(message, args);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine(message, args);
     }
 
     /// <summary>
@@ -91,7 +93,8 @@ public class NLog : ILog
     /// <param name="args">格式化参数。</param>
     public void Warning(string message, params object[] args)
     {
-        _logger.Warn(message, args);
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(message, args);
     }
 
     /// <summary>
@@ -101,7 +104,8 @@ public class NLog : ILog
     /// <param name="args">格式化参数。</param>
     public void Info(string message, params object[] args)
     {
-        _logger.Info(message, args);
+        Console.ForegroundColor = ConsoleColor.Gray;
+        Console.WriteLine(message, args);
     }
 
     /// <summary>
@@ -111,7 +115,8 @@ public class NLog : ILog
     /// <param name="args">格式化参数。</param>
     public void Debug(string message, params object[] args)
     {
-        _logger.Debug(message, args);
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine(message, args);
     }
 
     /// <summary>
@@ -121,7 +126,8 @@ public class NLog : ILog
     /// <param name="args">格式化参数。</param>
     public void Error(string message, params object[] args)
     {
-        _logger.Error(message, args);
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.WriteLine(message, args);
     }
 
     /// <summary>
@@ -131,7 +137,8 @@ public class NLog : ILog
     /// <param name="args">格式化参数。</param>
     public void Fatal(string message, params object[] args)
     {
-        _logger.Fatal(message, args);
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(message, args);
     }
 }
 #endif

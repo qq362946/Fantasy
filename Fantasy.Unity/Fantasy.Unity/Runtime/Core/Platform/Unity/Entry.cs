@@ -48,6 +48,7 @@ namespace Fantasy.Platform.Unity
                 Log.Error("Fantasy has already been initialized and does not need to be initialized again!");
                 return;
             }
+            Log.Register(new UnityLog());
             // 初始化程序集管理系统
             AssemblySystem.Initialize(assemblies);
             // 初始化序列化

@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
+#if FANTASY_NET
 using Fantasy.Platform.Net;
+#endif
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -12,8 +14,8 @@ namespace Fantasy
     public static class Log
     {
         private static ILog _logCore;
+#if FANTASY_NET
         private static bool _isRegister;
-        
         /// <summary>
         /// 初始化Log系统
         /// </summary>
@@ -43,7 +45,7 @@ namespace Fantasy
             
             _logCore.Initialize(processMode);
         }
-
+#endif
         /// <summary>
         /// 注册一个日志系统
         /// </summary>
@@ -51,7 +53,9 @@ namespace Fantasy
         public static void Register(ILog log)
         {
             _logCore = log;
+#if FANTASY_NET
             _isRegister = true;
+#endif
         }
 
         /// <summary>

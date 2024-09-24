@@ -1,5 +1,10 @@
 using System;
 using System.Diagnostics;
+#if FANTASY_NET
+using Fantasy.Platform.Net;
+#endif
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 namespace Fantasy
 {
@@ -8,14 +13,48 @@ namespace Fantasy
     /// </summary>
     public static class Log
     {
-        private static readonly ILog LogCore;
-
-        static Log()
-        {
+        private static ILog _logCore;
 #if FANTASY_NET
-            LogCore = new NLog("Server");
-#elif FANTASY_UNITY
-            LogCore = new UnityLog();
+        private static bool _isRegister;
+        /// <summary>
+        /// 初始化Log系统
+        /// </summary>
+        public static void Initialize()
+        {
+            if (!_isRegister)
+            {
+                Register(new ConsoleLog());
+                return;
+            }
+            
+            var processMode = ProcessMode.None;
+
+            switch (ProcessDefine.Options.Mode)
+            {
+                case "Develop":
+                {
+                    processMode = ProcessMode.Develop;
+                    break;
+                }
+                case "Release":
+                {
+                    processMode = ProcessMode.Release;
+                    break;
+                }
+            }
+            
+            _logCore.Initialize(processMode);
+        }
+#endif
+        /// <summary>
+        /// 注册一个日志系统
+        /// </summary>
+        /// <param name="log"></param>
+        public static void Register(ILog log)
+        {
+            _logCore = log;
+#if FANTASY_NET
+            _isRegister = true;
 #endif
         }
 
@@ -26,7 +65,7 @@ namespace Fantasy
         public static void Trace(string msg)
         {
             var st = new StackTrace(1, true);
-            LogCore.Trace($"{msg}\n{st}");
+            _logCore.Trace($"{msg}\n{st}");
         }
 
         /// <summary>
@@ -35,7 +74,7 @@ namespace Fantasy
         /// <param name="msg">日志消息。</param>
         public static void Debug(string msg)
         {
-            LogCore.Debug(msg);
+            _logCore.Debug(msg);
         }
 
         /// <summary>
@@ -44,7 +83,7 @@ namespace Fantasy
         /// <param name="msg">日志消息。</param>
         public static void Info(string msg)
         {
-            LogCore.Info(msg);
+            _logCore.Info(msg);
         }
 
         /// <summary>
@@ -54,7 +93,7 @@ namespace Fantasy
         public static void TraceInfo(string msg)
         {
             var st = new StackTrace(1, true);
-            LogCore.Trace($"{msg}\n{st}");
+            _logCore.Trace($"{msg}\n{st}");
         }
 
         /// <summary>
@@ -63,7 +102,7 @@ namespace Fantasy
         /// <param name="msg">日志消息。</param>
         public static void Warning(string msg)
         {
-            LogCore.Warning(msg);
+            _logCore.Warning(msg);
         }
 
         /// <summary>
@@ -73,7 +112,7 @@ namespace Fantasy
         public static void Error(string msg)
         {
             var st = new StackTrace(1, true);
-            LogCore.Error($"{msg}\n{st}");
+            _logCore.Error($"{msg}\n{st}");
         }
 
         /// <summary>
@@ -84,11 +123,11 @@ namespace Fantasy
         {
             if (e.Data.Contains("StackTrace"))
             {
-                LogCore.Error($"{e.Data["StackTrace"]}\n{e}");
+                _logCore.Error($"{e.Data["StackTrace"]}\n{e}");
                 return;
             }
             var str = e.ToString();
-            LogCore.Error(str);
+            _logCore.Error(str);
         }
 
         /// <summary>
@@ -99,7 +138,7 @@ namespace Fantasy
         public static void Trace(string message, params object[] args)
         {
             var st = new StackTrace(1, true);
-            LogCore.Trace($"{string.Format(message, args)}\n{st}");
+            _logCore.Trace($"{string.Format(message, args)}\n{st}");
         }
 
         /// <summary>
@@ -109,7 +148,7 @@ namespace Fantasy
         /// <param name="args">格式化参数。</param>
         public static void Warning(string message, params object[] args)
         {
-            LogCore.Warning(string.Format(message, args));
+            _logCore.Warning(string.Format(message, args));
         }
 
         /// <summary>
@@ -119,7 +158,7 @@ namespace Fantasy
         /// <param name="args">格式化参数。</param>
         public static void Info(string message, params object[] args)
         {
-            LogCore.Info(string.Format(message, args));
+            _logCore.Info(string.Format(message, args));
         }
 
         /// <summary>
@@ -129,7 +168,7 @@ namespace Fantasy
         /// <param name="args">格式化参数。</param>
         public static void Debug(string message, params object[] args)
         {
-            LogCore.Debug(string.Format(message, args));
+            _logCore.Debug(string.Format(message, args));
         }
 
         /// <summary>
@@ -141,7 +180,7 @@ namespace Fantasy
         {
             var st = new StackTrace(1, true);
             var s = string.Format(message, args) + '\n' + st;
-            LogCore.Error(s);
+            _logCore.Error(s);
         }
     }
 }

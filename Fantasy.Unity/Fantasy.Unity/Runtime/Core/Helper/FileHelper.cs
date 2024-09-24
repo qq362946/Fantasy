@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Fantasy.Helper
 {
@@ -16,6 +18,27 @@ namespace Fantasy.Helper
         public static string GetFullPath(string relativePath)
         {
             return Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), relativePath));
+        }
+
+        /// <summary>
+        /// 获取相对路径的的文本信息。
+        /// </summary>
+        /// <param name="relativePath"></param>
+        /// <returns></returns>
+        public static async Task<string> GetTextByRelativePath(string relativePath)
+        {
+            var fullPath = GetFullPath(relativePath);
+            return await File.ReadAllTextAsync(fullPath, Encoding.UTF8);
+        }
+        
+        /// <summary>
+        /// 获取绝对路径的的文本信息。
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <returns></returns>
+        public static async Task<string> GetText(string fullPath)
+        {
+            return await File.ReadAllTextAsync(fullPath, Encoding.UTF8);
         }
 
         /// <summary>

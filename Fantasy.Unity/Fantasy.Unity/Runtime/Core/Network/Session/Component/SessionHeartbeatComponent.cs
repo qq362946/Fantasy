@@ -139,7 +139,7 @@ namespace Fantasy.Network
                 Ping = (int)(responseTime - requestTime) / 2;
                 TimeHelper.TimeDiff = pingResponse.Now + Ping - responseTime;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Dispose();
             }

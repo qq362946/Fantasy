@@ -1,3 +1,6 @@
+#if FANTASY_NET
+using Fantasy.Platform.Net;
+#endif
 namespace Fantasy
 {
     /// <summary>
@@ -5,6 +8,13 @@ namespace Fantasy
     /// </summary>
     public interface ILog
     {
+#if FANTASY_NET
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="processMode"></param>
+        void Initialize(ProcessMode processMode);
+#endif
         /// <summary>
         /// 记录跟踪级别的日志消息。
         /// </summary>
