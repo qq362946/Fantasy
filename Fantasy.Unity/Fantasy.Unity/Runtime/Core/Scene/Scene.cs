@@ -213,7 +213,7 @@ namespace Fantasy
 
         #region Create
 
-#if FANTASY_UNITY
+#if FANTASY_UNITY || FANTASY_CONSOLE
         private static uint _unitySceneId = 0;
         private static byte _unityWorldId = 0;
         public Session Session { get; private set; }

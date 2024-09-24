@@ -702,9 +702,8 @@ namespace Fantasy.Entitas
                         _multi.Add(entity.Id, entity);
                     }
                 }
-                
-                scene.EntityComponent.Deserialize(this);
 #endif
+                scene.EntityComponent.Deserialize(this);
             }
             catch (Exception e)
             {

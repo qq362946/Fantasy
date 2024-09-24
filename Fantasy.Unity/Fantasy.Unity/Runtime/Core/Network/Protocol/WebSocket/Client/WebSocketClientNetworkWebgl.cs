@@ -1,4 +1,4 @@
-#if !FANTASY_NET
+#if !FANTASY_NET && !FANTASY_CONSOLE
 using System;
 using System.Collections.Generic;
 using System.IO;

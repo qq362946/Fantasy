@@ -24,7 +24,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DefineConstants>TRACE;FANTASY_NET;FANTASY_KCPUNSAFE</DefineConstants>
+      <DefineConstants>TRACE;FANTASY_NET;FANTASY_KCPUNSAFE;</DefineConstants>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <DocumentationFile>bin\Debug\net8.0\Fantasy.Net.xml</DocumentationFile>

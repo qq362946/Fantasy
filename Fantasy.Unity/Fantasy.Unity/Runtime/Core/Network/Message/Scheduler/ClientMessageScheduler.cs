@@ -7,10 +7,10 @@ using Fantasy.PacketParser.Interface;
 
 namespace Fantasy.Scheduler
 {
+#if FANTASY_UNITY || FANTASY_CONSOLE
     /// <summary>
     /// 提供了一个用于客户端网络消息调度和处理的抽象基类。
     /// </summary>
-#if FANTASY_UNITY
     public sealed class ClientMessageScheduler : ANetworkMessageScheduler
     {
         public ClientMessageScheduler(Scene scene) : base(scene) { }

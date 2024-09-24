@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Console.Main", "Fantasy.Console.Main\Fantasy.Console.Main.csproj", "{2FADD1FD-805B-4234-A70D-0C9085EEEF77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Console.Entity", "Fantasy.Console.Entity\Fantasy.Console.Entity.csproj", "{F1FE5BEA-DA59-4B49-863E-3344F43357A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Console", "..\..\Fantays.Console\Fantasy.Console\Fantasy.Console.csproj", "{E613E40C-C4C4-4299-B6BA-64BCBAC27926}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2FADD1FD-805B-4234-A70D-0C9085EEEF77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FADD1FD-805B-4234-A70D-0C9085EEEF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FADD1FD-805B-4234-A70D-0C9085EEEF77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FADD1FD-805B-4234-A70D-0C9085EEEF77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1FE5BEA-DA59-4B49-863E-3344F43357A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1FE5BEA-DA59-4B49-863E-3344F43357A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1FE5BEA-DA59-4B49-863E-3344F43357A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1FE5BEA-DA59-4B49-863E-3344F43357A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E613E40C-C4C4-4299-B6BA-64BCBAC27926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E613E40C-C4C4-4299-B6BA-64BCBAC27926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E613E40C-C4C4-4299-B6BA-64BCBAC27926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E613E40C-C4C4-4299-B6BA-64BCBAC27926}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,4 +1,4 @@
-#if FANTASY_UNITY
+#if FANTASY_UNITY || FANTASY_CONSOLE
 using System;
 using System.Buffers;
 using System.IO;

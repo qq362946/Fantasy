@@ -22,7 +22,7 @@ namespace Fantasy.Serialize
 
     public abstract class AMessage : ASerialize, IPool
     {
-#if FANTASY_NET || FANTASY_UNITY
+#if FANTASY_NET || FANTASY_UNITY || FANTASY_CONSOLE
         [BsonIgnore] 
         [JsonIgnore] 
         [IgnoreDataMember] 
