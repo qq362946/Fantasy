@@ -10,6 +10,7 @@ using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.Serializers;
+
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -19,13 +20,13 @@ namespace Fantasy.Serialize
     /// <summary>
     /// BSON帮助方法
     /// </summary>
-    public class BsonPackHelper : ISerialize
+    class BsonPackHelper : ISerialize
     {
         /// <summary>
         /// 序列化器的名字
         /// </summary>
         public string SerializeName { get; } = "Bson";
-        
+
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -74,7 +75,7 @@ namespace Fantasy.Serialize
                 {
                     continue;
                 }
-                    
+
                 BsonClassMap.LookupClassMap(type);
             }
         }
@@ -92,6 +93,7 @@ namespace Fantasy.Serialize
             {
                 aSerialize.AfterDeserialization();
             }
+
             return @object;
         }
 
@@ -108,9 +110,10 @@ namespace Fantasy.Serialize
             {
                 aSerialize.AfterDeserialization();
             }
+
             return @object;
         }
-    
+
         /// <summary>
         /// 反序列化
         /// </summary>
@@ -124,9 +127,10 @@ namespace Fantasy.Serialize
             {
                 aSerialize.AfterDeserialization();
             }
+
             return @object;
         }
-    
+
         /// <summary>
         /// 反序列化
         /// </summary>
@@ -140,6 +144,7 @@ namespace Fantasy.Serialize
             {
                 aSerialize.AfterDeserialization();
             }
+
             return @object;
         }
 
@@ -154,7 +159,7 @@ namespace Fantasy.Serialize
         public unsafe T Deserialize<T>(byte[] bytes, int index, int count)
         {
             T @object;
-            
+
             fixed (byte* ptr = &bytes[index])
             {
                 using var stream = new UnmanagedMemoryStream(ptr, count);
@@ -180,13 +185,13 @@ namespace Fantasy.Serialize
         public unsafe object Deserialize(Type type, byte[] bytes, int index, int count)
         {
             object @object;
-            
+
             fixed (byte* ptr = &bytes[index])
             {
                 using var stream = new UnmanagedMemoryStream(ptr, count);
                 @object = BsonSerializer.Deserialize(stream, type);
             }
-            
+
             if (@object is ASerialize aSerialize)
             {
                 aSerialize.AfterDeserialization();
@@ -224,7 +229,7 @@ namespace Fantasy.Serialize
             {
                 aSerialize.BeginInit();
             }
-            
+
             using IBsonWriter bsonWriter =
                 new BsonBinaryWriter((MemoryStream)buffer, BsonBinaryWriterSettings.Defaults);
             BsonSerializer.Serialize(bsonWriter, @object.GetType(), @object);
@@ -261,7 +266,7 @@ namespace Fantasy.Serialize
             {
                 aSerialize.BeginInit();
             }
-            
+
             using IBsonWriter bsonWriter = new BsonBinaryWriter(buffer, BsonBinaryWriterSettings.Defaults);
             BsonSerializer.Serialize(bsonWriter, type, @object);
             return (int)buffer.Length;
@@ -278,9 +283,10 @@ namespace Fantasy.Serialize
             {
                 aSerialize.BeginInit();
             }
+
             return @object.ToBson(@object.GetType());
         }
-    
+
         /// <summary>
         /// 序列化
         /// </summary>
@@ -293,9 +299,10 @@ namespace Fantasy.Serialize
             {
                 aSerialize.BeginInit();
             }
+
             return @object.ToBson<T>();
         }
-    
+
         /// <summary>
         /// 克隆
         /// </summary>

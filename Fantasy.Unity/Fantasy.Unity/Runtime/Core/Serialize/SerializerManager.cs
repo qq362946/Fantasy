@@ -25,6 +25,11 @@ namespace Fantasy.Serialize
         /// Bson在SerializerManager的数组下标
         /// </summary>
         public const int Bson = 1;
+
+        /// <summary>
+        /// 用户自定义的序列化器下标映射
+        /// </summary>
+        public const int Protocal = 2;
     }
     
     /// <summary>
@@ -36,10 +41,12 @@ namespace Fantasy.Serialize
         private static bool _isInitialized = false;
 
 #if FANTASY_NET || FANTASY_UNITY
+
         /// <summary>
-        /// 初始化方法
+        /// 初始化
         /// </summary>
-        public static void Initialize()
+        /// <param name="customeSerialize">自定义序列化器 默认使用ProtoBuf</param>
+        public static void Initialize(ISerialize customeSerialize = null)
         {
             if (_isInitialized)
             {
@@ -48,52 +55,19 @@ namespace Fantasy.Serialize
 
             try
             {
-                var sort = new SortedList<long, ISerialize>();
-            
-                foreach (var serializerType in AssemblySystem.ForEach(typeof(ISerialize)))
-                {
-                    var serializer = (ISerialize)Activator.CreateInstance(serializerType);
-                    var computeHash64 = HashCodeHelper.ComputeHash64(serializer.SerializeName);
-                    sort.Add(computeHash64, serializer);
-                }
+                _serializers = new ISerialize[3];
+#if FANTASY_NET
+                var bsonSerializeHelper = (ISerialize)Activator.CreateInstance<BsonPackHelper>();
+                _serializers[FantasySerializerType.Bson] = bsonSerializeHelper;
+#endif
 
-#if FANTASY_NET
-                var index = 1;
-#endif
-#if FANTASY_UNITY
-                var index = 0;
-#endif
-                
-                _serializers = new ISerialize[sort.Count];
-            
-                foreach (var (_, serialize) in sort)
-                {
-                    var serializerIndex = 0;
-                    
-                    switch (serialize)
-                    {
-                        case ProtoBufPackHelper:
-                        {
-                            serializerIndex = FantasySerializerType.ProtoBuf;
-                            break;
-                        }
-#if FANTASY_NET
-                        case BsonPackHelper:
-                        {
-                            serializerIndex = FantasySerializerType.Bson;
-                            break;
-                        }    
-#endif
-                        default:
-                        {
-                            serializerIndex = ++index;
-                            break;
-                        }
-                    }
-                
-                    _serializers[serializerIndex] = serialize;
-                }
-            
+                var protobufSerializeHelper = (ISerialize)Activator.CreateInstance<ProtoBufPackHelper>();
+                _serializers[FantasySerializerType.ProtoBuf] = protobufSerializeHelper;
+
+                //没有传入序列化器 默认框架内所有的协议都在内置Pb
+                _serializers[FantasySerializerType.Protocal] = customeSerialize != null ? customeSerialize : protobufSerializeHelper;
+
+
                 _isInitialized = true;
             }
             catch

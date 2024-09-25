@@ -44,6 +44,11 @@ namespace Fantasy.Network
     {
         public const uint Bson = 1; 
         public const uint ProtoBuf = 0;
+
+        /// <summary>
+        /// 用户自定义序列化类型
+        /// </summary>
+        public const uint Protocal = 2;
     }
 
     public static class OpCodeType

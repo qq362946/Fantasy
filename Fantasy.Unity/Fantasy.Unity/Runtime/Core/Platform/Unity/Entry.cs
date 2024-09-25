@@ -4,6 +4,7 @@ using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Serialize;
 using UnityEngine;
+
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -14,6 +15,7 @@ namespace Fantasy.Platform.Unity
     public sealed class FantasyObject : MonoBehaviour
     {
         public static GameObject FantasyObjectGameObject { get; private set; }
+
         // 这个方法将在游戏启动时自动调用
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void OnRuntimeMethodLoad()
@@ -21,17 +23,18 @@ namespace Fantasy.Platform.Unity
             FantasyObjectGameObject = new GameObject("Fantasy.Net");
             DontDestroyOnLoad(FantasyObjectGameObject);
         }
+
         private void OnApplicationQuit()
         {
             Destroy(FantasyObjectGameObject);
         }
     }
-    
+
     public struct OnFantasyInit
     {
         public Scene Scene;
     }
-    
+
     public class Entry : MonoBehaviour
     {
         private static bool _isInit;
@@ -48,6 +51,34 @@ namespace Fantasy.Platform.Unity
                 Log.Error("Fantasy has already been initialized and does not need to be initialized again!");
                 return;
             }
+
+            Log.Register(new UnityLog());
+            // 初始化程序集管理系统
+            AssemblySystem.Initialize(assemblies);
+            // 初始化序列化
+            SerializerManager.Initialize();
+#if FANTASY_WEBGL
+            ThreadSynchronizationContext.Initialize();
+#endif
+            _isInit = true;
+            FantasyObject.FantasyObjectGameObject.AddComponent<Entry>();
+            Log.Debug("Fantasy Initialize Complete!");
+        }
+        
+        
+        /// <summary>
+        /// 初始化框架
+        /// </summary>
+        /// <param name="customeSerialize">指定自定义序列化辅助器</param>
+        /// <param name="assemblies">相关程序集</param>
+        public static void Initialize(ISerialize customeSerialize, params System.Reflection.Assembly[] assemblies)
+        {
+            if (_isInit)
+            {
+                Log.Error("Fantasy has already been initialized and does not need to be initialized again!");
+                return;
+            }
+
             Log.Register(new UnityLog());
             // 初始化程序集管理系统
             AssemblySystem.Initialize(assemblies);
@@ -76,7 +107,7 @@ namespace Fantasy.Platform.Unity
             });
             return Scene;
         }
-        
+
         private void Update()
         {
             ThreadScheduler.Update();
@@ -91,6 +122,7 @@ namespace Fantasy.Platform.Unity
                 Scene?.Dispose();
                 Scene = null;
             }
+
             _isInit = false;
         }
     }

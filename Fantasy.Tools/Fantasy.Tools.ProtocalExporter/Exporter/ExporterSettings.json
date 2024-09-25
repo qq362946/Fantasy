@@ -1,0 +1,34 @@
+{
+    "Export": {
+        "NetworkProtocolDirectory": {
+            "Value": "../../Config/NetworkProtocol/",
+            "Comment": "协议文件所在的文件夹位置"
+        },
+        "NetworkProtocolServerDirectory": {
+            "Value": "../../Server/Entity/Generate/NetworkProtocol/",
+            "Comment": "协议生成到服务端的文件夹位置"
+        },
+        "NetworkProtocolClientDirectory": {
+            "Value": "../../Client/Unity/Assets/Scripts/Hotfix/Generate/NetworkProtocol/",
+            "Comment": "协议生成到客户端的文件夹位置"
+        },
+        "SerializeHelpers": {
+            "ProtoBuf": [
+                {
+                    "NameSpace" : "ProtoBuf",
+                    "Attribute": "\t[ProtoContract]",
+                    "Ignore": "\t\t[ProtoIgnore]",
+                    "Member": "ProtoMember"
+                }
+            ],
+            "MemoryPack": [
+                {
+                    "NameSpace" : "MemoryPack",
+                    "Attribute": "\t[MemoryPackable]",
+                    "Ignore": "\t\t[MemoryPackIgnore]",
+                    "Member": "MemoryPackOrder"
+                }
+            ]
+        }
+    }
+}

@@ -8,17 +8,17 @@ namespace Fantasy.Serialize
     /// <summary>
     /// ProtoBufP帮助类，Net平台使用
     /// </summary>
-    public sealed class ProtoBufPackHelper : ISerialize
+    sealed class ProtoBufPackHelper : ISerialize
     {
         /// <summary>
         /// 序列化器的名字
         /// </summary>
         public string SerializeName { get; } = "ProtoBuf";
-        
+
         /// <summary>
         /// 构造函数
         /// </summary>
-        public ProtoBufPackHelper ()
+        public ProtoBufPackHelper()
         {
 #if FANTASY_NET
             RuntimeTypeModel.Default.AutoAddMissingTypes = true;
@@ -27,7 +27,7 @@ namespace Fantasy.Serialize
             RuntimeTypeModel.Default.AutoCompile = true;
             RuntimeTypeModel.Default.UseImplicitZeroDefaults = true;
             RuntimeTypeModel.Default.InferTagFromNameDefault = true;
-            
+
             foreach (var type in AssemblySystem.ForEach(typeof(IProto)))
             {
                 RuntimeTypeModel.Default.Add(type, true);
@@ -51,8 +51,10 @@ namespace Fantasy.Serialize
             {
                 aSerialize.AfterDeserialization();
             }
+
             return @object;
         }
+
         /// <summary>
         /// 使用ProtoBuf反序列化数据到实例
         /// </summary>
@@ -69,6 +71,7 @@ namespace Fantasy.Serialize
 
             return @object;
         }
+
         /// <summary>
         /// 使用ProtoBuf反序列化数据到实例
         /// </summary>
@@ -86,6 +89,7 @@ namespace Fantasy.Serialize
 
             return @object;
         }
+
         /// <summary>
         /// 使用ProtoBuf反序列化数据到实例
         /// </summary>
@@ -102,6 +106,7 @@ namespace Fantasy.Serialize
 
             return @object;
         }
+
         /// <summary>
         /// 使用ProtoBuf反序列化数据到实例
         /// </summary>
@@ -121,6 +126,7 @@ namespace Fantasy.Serialize
 
             return @object;
         }
+
         /// <summary>
         /// 使用ProtoBuf反序列化数据到实例
         /// </summary>
@@ -140,6 +146,7 @@ namespace Fantasy.Serialize
 
             return @object;
         }
+
         /// <summary>
         /// 使用ProtoBuf序列化某一个实例到IBufferWriter中
         /// </summary>
@@ -155,6 +162,7 @@ namespace Fantasy.Serialize
 
             RuntimeTypeModel.Default.Serialize<T>(buffer, @object);
         }
+
         /// <summary>
         /// 使用ProtoBuf序列化某一个实例到IBufferWriter中
         /// </summary>
@@ -169,6 +177,7 @@ namespace Fantasy.Serialize
 
             RuntimeTypeModel.Default.Serialize(buffer, @object);
         }
+
         /// <summary>
         /// 使用ProtoBuf序列化某一个实例到IBufferWriter中
         /// </summary>
@@ -184,6 +193,7 @@ namespace Fantasy.Serialize
 
             RuntimeTypeModel.Default.Serialize(buffer, @object);
         }
+
         internal byte[] Serialize(object @object)
         {
             if (@object is ASerialize aSerialize)
@@ -195,17 +205,19 @@ namespace Fantasy.Serialize
             RuntimeTypeModel.Default.Serialize(buffer, @object);
             return buffer.ToArray();
         }
+
         private byte[] Serialize<T>(T @object)
         {
             if (@object is ASerialize aSerialize)
             {
                 aSerialize.BeginInit();
             }
-            
+
             var buffer = new MemoryStream();
             RuntimeTypeModel.Default.Serialize<T>(buffer, @object);
             return buffer.ToArray();
         }
+
         /// <summary>
         /// 克隆
         /// </summary>

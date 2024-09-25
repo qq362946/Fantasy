@@ -11,7 +11,7 @@ namespace Fantasy.Serialize
     /// <summary>
     /// ProtoBufP帮助类，Unity平台使用
     /// </summary>
-    public sealed class ProtoBufPackHelper : ISerialize
+    sealed class ProtoBufPackHelper : ISerialize
     {
         /// <summary>
         /// 序列化器的名字

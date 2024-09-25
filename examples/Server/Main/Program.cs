@@ -1,6 +1,8 @@
 ﻿using Fantasy;
 using Fantasy.Helper;
 using Fantasy.Platform.Net;
+using Fantasy.Serialize;
+
 // 获取配置文件
 // 比如通过远程获取这个配置文件，这样可以多组服务器共享一套配置了
 var machineConfigText = await FileHelper.GetTextByRelativePath("../../../Config/Json/Server/MachineConfigData.Json");
@@ -17,7 +19,13 @@ SceneConfigData.Initialize(sceneConfigText);
 // 开发者可以自己注册日志系统到框架，只要实现Fantasy.ILog接口就可以。
 // 这里用的是NLog日志系统注册到框架中。
 Fantasy.Log.Register(new Fantasy.NLog("Server"));
-// 初始化框架，添加程序集到框架中
+
+//自定义序列化器 
+//比如可以使用扩展包里的MemoryPack
+//SerializerManager.Initialize(new MemoryPackHelper());
+SerializerManager.Initialize();
+
+// 初始化框架，添加程序集到框架中s
 Fantasy.Platform.Net.Entry.Initialize(Fantasy.AssemblyHelper.Assemblies);
 // 启动Fantasy.Net
 await Fantasy.Platform.Net.Entry.Start();

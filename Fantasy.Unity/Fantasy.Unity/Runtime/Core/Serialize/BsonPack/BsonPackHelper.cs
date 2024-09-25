@@ -19,7 +19,7 @@ namespace Fantasy.Serialize
     /// <summary>
     /// BSON帮助方法
     /// </summary>
-    public class BsonPackHelper : ISerialize
+    class BsonPackHelper : ISerialize
     {
         /// <summary>
         /// 序列化器的名字
