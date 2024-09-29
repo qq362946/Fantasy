@@ -51,7 +51,7 @@ namespace Fantasy.Network
 #if FANTASY_NET       
         internal static Session Create(ANetworkMessageScheduler networkMessageScheduler, ANetworkServerChannel channel, NetworkTarget networkTarget)
         {
-            var session = Entity.Create<Session>(channel.Scene, false, false);
+            var session = Entity.Create<Session>(channel.Scene, false, true);
             session.Channel = channel;
             session.NetworkMessageScheduler = networkMessageScheduler;
             session.RemoteEndPoint = channel.RemoteEndPoint as IPEndPoint;
@@ -70,7 +70,7 @@ namespace Fantasy.Network
         internal static Session Create(AClientNetwork network, IPEndPoint remoteEndPoint)
         {
             // 创建会话实例
-            var session = Entity.Create<Session>(network.Scene, false, false);
+            var session = Entity.Create<Session>(network.Scene, false, true);
             session.Channel = network;
             session.RemoteEndPoint = remoteEndPoint;
             session.OnDispose = network.Dispose;

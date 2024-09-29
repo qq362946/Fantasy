@@ -27,10 +27,9 @@ namespace Fantasy.Platform.Unity
         }
     }
     
-    public struct OnSceneCreate
+    public struct OnFantasyInit
     {
         public Scene Scene;
-        public object Arg;
     }
     
     public class Entry : MonoBehaviour
@@ -65,21 +64,19 @@ namespace Fantasy.Platform.Unity
         /// <summary>
         /// 在Entry中创建一个Scene，如果Scene已经被创建过，将先销毁Scene再创建。
         /// </summary>
-        /// <param name="arg">额外参数</param>
         /// <param name="sceneRuntimeType"></param>
         /// <returns></returns>
-        public static async FTask<Scene> CreateScene(object arg = null, string sceneRuntimeType = SceneRuntimeType.MainThread)
+        public static async FTask<Scene> CreateScene(string sceneRuntimeType = SceneRuntimeType.MainThread)
         {
             Scene?.Dispose();
             Scene = await Scene.Create(sceneRuntimeType);
-            await Scene.EventComponent.PublishAsync(new OnSceneCreate()
+            await Scene.EventComponent.PublishAsync(new OnFantasyInit()
             {
-                Arg = arg,
                 Scene = Scene
             });
             return Scene;
         }
-
+        
         private void Update()
         {
             ThreadScheduler.Update();
