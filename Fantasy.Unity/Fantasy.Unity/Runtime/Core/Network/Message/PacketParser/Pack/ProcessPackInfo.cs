@@ -53,6 +53,7 @@ namespace Fantasy.PacketParser
             packInfo.MessageType = type;
             packInfo.IsDisposed = false;
             var memoryStream = new MemoryStreamBuffer();
+            memoryStream.MemoryStreamBufferSource = MemoryStreamBufferSource.Pack;
             OpCodeIdStruct opCodeIdStruct = message.OpCode();
             memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
@@ -115,7 +116,7 @@ namespace Fantasy.PacketParser
             MemoryStream.Seek(0, SeekOrigin.Begin);
         }
 
-        public override MemoryStreamBuffer RentMemoryStream(int size = 0)
+        public override MemoryStreamBuffer RentMemoryStream(MemoryStreamBufferSource memoryStreamBufferSource, int size = 0)
         {
             throw new NotImplementedException();
         }

@@ -25,3 +25,13 @@ message Chat2G_CreateRouteResponse // IRouteResponse
 {
 	int64 ChatRouteId = 1;
 }
+/// Map给另外一个Map发送Unit数据
+// Protocol Bson
+message M2M_SendUnitRequest // IRouteRequest,M2M_SendUnitResponse
+{
+	Unit Unit = 1;
+}
+message M2M_SendUnitResponse // IRouteResponse
+{
+
+}

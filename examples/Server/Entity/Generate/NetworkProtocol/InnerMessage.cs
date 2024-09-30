@@ -134,4 +134,44 @@ namespace Fantasy
 		[ProtoMember(2)]
 		public uint ErrorCode { get; set; }
 	}
+	/// <summary>
+	///  Map给另外一个Map发送Unit数据
+	/// </summary>
+	public partial class M2M_SendUnitRequest : AMessage, IRouteRequest, IProto
+	{
+		public static M2M_SendUnitRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2M_SendUnitRequest>();
+		}
+		public override void Dispose()
+		{
+			Unit = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<M2M_SendUnitRequest>(this);
+#endif
+		}
+		[BsonIgnore]
+		public M2M_SendUnitResponse ResponseType { get; set; }
+		public uint OpCode() { return InnerOpcode.M2M_SendUnitRequest; }
+		[ProtoMember(1)]
+		public Unit Unit { get; set; }
+	}
+	[ProtoContract]
+	public partial class M2M_SendUnitResponse : AMessage, IRouteResponse, IProto
+	{
+		public static M2M_SendUnitResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2M_SendUnitResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<M2M_SendUnitResponse>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.M2M_SendUnitResponse; }
+		[ProtoMember(1)]
+		public uint ErrorCode { get; set; }
+	}
 }

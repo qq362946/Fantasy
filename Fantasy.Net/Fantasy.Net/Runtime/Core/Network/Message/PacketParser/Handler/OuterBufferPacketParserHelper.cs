@@ -27,6 +27,7 @@ namespace Fantasy.PacketParser
             memoryStreamLength = 0;
             var messageType = message.GetType();
             var memoryStream = new MemoryStreamBuffer();
+            memoryStream.MemoryStreamBufferSource = MemoryStreamBufferSource.Pack;
             OpCodeIdStruct opCodeIdStruct = message.OpCode();
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
 

@@ -149,11 +149,11 @@ namespace Fantasy.Scheduler
                                             case OpCodeType.OuterAddressableMessage:
                                             {
                                                 Scene.MessageDispatcherComponent.FailRouteResponse(session, messageType, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
-                                                break;
+                                                return;
                                             }
                                         }
                                         
-                                        throw new Exception($"The Entity associated with RouteId = {packInfoRouteId} was not found! messageType = {messageType.FullName}");
+                                        throw new Exception($"The Entity associated with RouteId = {packInfoRouteId} was not found! messageType = {messageType.FullName} protocol = {protocol}");
                                     }
                                 }
                             }

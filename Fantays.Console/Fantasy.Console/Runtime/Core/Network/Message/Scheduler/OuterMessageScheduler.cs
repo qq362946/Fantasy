@@ -113,7 +113,7 @@ namespace Fantasy.Scheduler
                 case OpCodeType.OuterAddressableMessage:
                 {
                     var packInfoPackInfoId = packInfo.PackInfoId;
-                    
+                   
                     try
                     {
                         var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
@@ -129,7 +129,6 @@ namespace Fantasy.Scheduler
                         {
                             throw new Exception("OuterMessageScheduler error session does not have an AddressableRouteComponent component");
                         }
-
                         
                         await addressableRouteComponent.Send(messageType, packInfo);
                     }

@@ -5,10 +5,22 @@ using System.IO;
 
 namespace Fantasy.Serialize
 {
+    public enum MemoryStreamBufferSource
+    {
+        None = 0,
+        Pack = 1,
+        UnPack = 2,
+    }
+    
     public sealed class MemoryStreamBuffer : MemoryStream, IBufferWriter<byte>
     {
+        public MemoryStreamBufferSource MemoryStreamBufferSource;
         public MemoryStreamBuffer() { }
-        public MemoryStreamBuffer(int capacity): base(capacity) { }
+
+        public MemoryStreamBuffer(MemoryStreamBufferSource memoryStreamBufferSource, int capacity) : base(capacity)
+        {
+            MemoryStreamBufferSource = memoryStreamBufferSource;
+        }
         public MemoryStreamBuffer(byte[] buffer): base(buffer) { } 
         
         public void Advance(int count)

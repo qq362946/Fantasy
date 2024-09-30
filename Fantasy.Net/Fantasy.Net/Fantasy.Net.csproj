@@ -24,14 +24,14 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DefineConstants>TRACE;FANTASY_NET;FANTASY_KCPUNSAFE;</DefineConstants>
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <DocumentationFile>bin\Debug\net8.0\Fantasy.Net.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DefineConstants>TRACE;FANTASY_NET;FANTASY_KCPUNSAFE</DefineConstants>
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 

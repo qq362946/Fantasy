@@ -222,29 +222,9 @@ namespace Fantasy.Network.TCP
             }
             finally
             {
-                _network.ReturnMemoryStream(memoryStream);
-            }
-        }
-
-        private void OnSendCompleted(object sender, SocketAsyncEventArgs e)
-        {
-            if (_cancellationTokenSource.IsCancellationRequested)
-            {
-                return;
-            }
-
-            switch (e.LastOperation)
-            {
-                case SocketAsyncOperation.Send:
+                if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
                 {
-                    var eUserToken = (MemoryStreamBuffer)e.UserToken;
-                    Scene.ThreadSynchronizationContext.Post(() => { _network.ReturnMemoryStream(eUserToken); });
-                    return;
-                }
-                case SocketAsyncOperation.Disconnect:
-                {
-                    Scene.ThreadSynchronizationContext.Post(Dispose);
-                    return;
+                    _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
                 }
             }
         }

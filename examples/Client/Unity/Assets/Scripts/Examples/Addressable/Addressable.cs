@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Fantasy;
@@ -12,6 +13,8 @@ public class Addressable : MonoBehaviour
     public Button ConnectAddressable;
     public Button SendAddressableMessage;
     public Button SendAddressableRPC;
+    public Button MoveAddressable;
+    
     private Scene _scene;
     private Session _session;
     private void Start()
@@ -29,6 +32,7 @@ public class Addressable : MonoBehaviour
         
         SendAddressableMessage.interactable = false;
         SendAddressableRPC.interactable = false;
+        MoveAddressable.interactable = false;
         
         ConnectAddressable.onClick.RemoveAllListeners();
         ConnectAddressable.onClick.AddListener(() =>
@@ -43,6 +47,12 @@ public class Addressable : MonoBehaviour
         SendAddressableRPC.onClick.AddListener(() =>
         {
             OnSendAddressableRPCClick().Coroutine();
+        });
+        
+        MoveAddressable.onClick.RemoveAllListeners();
+        MoveAddressable.onClick.AddListener(() =>
+        {
+            OnMoveAddressableButtonClick().Coroutine();
         });
     }
 
@@ -67,17 +77,19 @@ public class Addressable : MonoBehaviour
             ConnectAddressable.interactable = true;
             SendAddressableMessage.interactable = false;
             SendAddressableRPC.interactable = false;
+            MoveAddressable.interactable = false;
             return;
         }
         Log.Debug("创建Addressable成功！");
         SendAddressableMessage.interactable = true;
         SendAddressableRPC.interactable = true;
+        MoveAddressable.interactable = true;
     }
     
     private void OnConnectComplete()
     {
         Text.text = "连接成功";
-        _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
+        // _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
         ConnectAddressable.interactable = false;
     }
 
@@ -87,6 +99,7 @@ public class Addressable : MonoBehaviour
         ConnectAddressable.interactable = true;
         SendAddressableMessage.interactable = false;
         SendAddressableRPC.interactable = false;
+        MoveAddressable.interactable = false;
     }
 
     private void OnConnectDisconnect()
@@ -95,6 +108,7 @@ public class Addressable : MonoBehaviour
         ConnectAddressable.interactable = true;
         SendAddressableMessage.interactable = false;
         SendAddressableRPC.interactable = false;
+        MoveAddressable.interactable = false;
     }
 
     #endregion
@@ -129,6 +143,29 @@ public class Addressable : MonoBehaviour
         });
         Text.text = $"收到M2C_TestResponse Tag = {response.Tag}";
         SendAddressableRPC.interactable = true;
+    }
+
+    #endregion
+
+    #region MoveAddressable
+
+    private async FTask OnMoveAddressableButtonClick()
+    {
+        MoveAddressable.interactable = false;
+        try
+        {
+            var response = (M2C_MoveToMapResponse)await _session.Call(new C2M_MoveToMapRequest());
+            if (response.ErrorCode != 0)
+            {
+                Log.Error($"发送C2M_MoveToMapRequest消息失败 ErrorCode:{response.ErrorCode}");
+                return;
+            }
+            Text.text = $"收到M2C_MoveToMapResponse发来的消息";
+        }
+        finally
+        {
+            MoveAddressable.interactable = true;
+        }
     }
 
     #endregion

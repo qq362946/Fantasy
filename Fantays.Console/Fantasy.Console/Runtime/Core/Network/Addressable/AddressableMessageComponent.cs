@@ -74,6 +74,18 @@ namespace Fantasy.Network.Route
 #endif
             return AddressableHelper.UnLockAddressable(Scene, Parent.Id, Parent.RunTimeId, source);
         }
+
+        /// <summary>
+        /// 锁定可寻址消息并且释放掉AddressableMessageComponent组件。
+        /// 该方法不会自动取Addressable中心删除自己的信息。
+        /// 用于传送或转移到其他服务器时使用
+        /// </summary>
+        public async FTask LockAndRelease()
+        {
+            await Lock();
+            AddressableId = 0;
+            Dispose();
+        }
     }
 }
 #endif

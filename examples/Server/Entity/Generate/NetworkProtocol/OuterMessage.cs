@@ -277,4 +277,42 @@ namespace Fantasy
 		[ProtoMember(2)]
 		public uint ErrorCode { get; set; }
 	}
+	/// <summary>
+	///  发送一个RPC消息给Map，让Map里的Entity转移到另外一个Map上
+	/// </summary>
+	[ProtoContract]
+	public partial class C2M_MoveToMapRequest : AMessage, IAddressableRouteRequest, IProto
+	{
+		public static C2M_MoveToMapRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2M_MoveToMapRequest>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2M_MoveToMapRequest>(this);
+#endif
+		}
+		[ProtoIgnore]
+		public M2C_MoveToMapResponse ResponseType { get; set; }
+		public uint OpCode() { return OuterOpcode.C2M_MoveToMapRequest; }
+	}
+	[ProtoContract]
+	public partial class M2C_MoveToMapResponse : AMessage, IAddressableRouteResponse, IProto
+	{
+		public static M2C_MoveToMapResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2C_MoveToMapResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<M2C_MoveToMapResponse>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.M2C_MoveToMapResponse; }
+		[ProtoMember(1)]
+		public uint ErrorCode { get; set; }
+	}
 }

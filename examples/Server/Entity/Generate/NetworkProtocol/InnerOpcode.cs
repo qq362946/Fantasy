@@ -8,5 +8,7 @@ namespace Fantasy
 		 public const uint M2G_ResponseAddressableId = 1207969554;
 		 public const uint G2Chat_CreateRouteRequest = 1073751827;
 		 public const uint Chat2G_CreateRouteResponse = 1207969555;
+		 public const uint M2M_SendUnitRequest = 1082140436;
+		 public const uint M2M_SendUnitResponse = 1207969556;
 	}
 }

@@ -15,5 +15,7 @@ namespace Fantasy
 		 public const uint C2Chat_TestMessage = 2147493649;
 		 public const uint C2Chat_TestMessageRequest = 2281711377;
 		 public const uint Chat2C_TestMessageResponse = 2415929105;
+		 public const uint C2M_MoveToMapRequest = 1476405010;
+		 public const uint M2C_MoveToMapResponse = 1610622738;
 	}
 }

@@ -62,3 +62,12 @@ message Chat2C_TestMessageResponse // ICustomRouteResponse
 {
 	string Tag = 1;
 }
+/// 发送一个RPC消息给Map，让Map里的Entity转移到另外一个Map上
+message C2M_MoveToMapRequest // IAddressableRouteRequest,M2C_MoveToMapResponse
+{
+
+}
+message M2C_MoveToMapResponse // IAddressableRouteResponse
+{
+
+}

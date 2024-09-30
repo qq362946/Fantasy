@@ -148,7 +148,7 @@ namespace Fantasy.Network.Interface
                 {
                     return;
                 }
-                
+
                 session.Send(response, rpcId);
             }
             
@@ -301,7 +301,7 @@ namespace Fantasy.Network.Interface
                 {
                     return;
                 }
-                
+
                 session.Send(response, rpcId);
             }
             

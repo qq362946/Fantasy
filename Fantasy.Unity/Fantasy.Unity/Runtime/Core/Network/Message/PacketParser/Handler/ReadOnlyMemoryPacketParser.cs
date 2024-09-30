@@ -83,7 +83,8 @@ namespace Fantasy.PacketParser
                         }
 
                         PackInfo = InnerPackInfo.Create(Network);
-                        var memoryStream = PackInfo.RentMemoryStream(Packet.InnerPacketHeadLength + MessagePacketLength);
+                        var memoryStream = PackInfo.RentMemoryStream(MemoryStreamBufferSource.UnPack,
+                            Packet.InnerPacketHeadLength + MessagePacketLength);
                         PackInfo.RpcId = *(uint*)(messagePtr + Packet.InnerPacketRpcIdLocation);
                         PackInfo.ProtocolCode = *(uint*)(messagePtr + Packet.PacketLength);
                         PackInfo.RouteId = *(long*)(messagePtr + Packet.InnerPacketRouteRouteIdLocation);
@@ -159,7 +160,7 @@ namespace Fantasy.PacketParser
         {
             var memoryStreamLength = 0;
             var messageType = message.GetType();
-            var memoryStream = Network.RentMemoryStream();
+            var memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
             OpCodeIdStruct opCodeIdStruct = message.OpCode();
             memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
@@ -242,7 +243,8 @@ namespace Fantasy.PacketParser
                         PackInfo = OuterPackInfo.Create(Network);
                         PackInfo.ProtocolCode = *(uint*)(messagePtr + Packet.PacketLength);
                         PackInfo.RpcId = *(uint*)(messagePtr + Packet.OuterPacketRpcIdLocation);
-                        var memoryStream = PackInfo.RentMemoryStream(Packet.OuterPacketHeadLength + MessagePacketLength);
+                        var memoryStream = PackInfo.RentMemoryStream(MemoryStreamBufferSource.UnPack,
+                            Packet.OuterPacketHeadLength + MessagePacketLength);
                         memoryStream.Write(MessageHead);
                         IsUnPackHead = false;
                         bufferLength -= copyLength;
@@ -314,7 +316,7 @@ namespace Fantasy.PacketParser
         {
             var memoryStreamLength = 0;
             var messageType = message.GetType();
-            var memoryStream = Network.RentMemoryStream();
+            var memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
             OpCodeIdStruct opCodeIdStruct = message.OpCode();
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
             

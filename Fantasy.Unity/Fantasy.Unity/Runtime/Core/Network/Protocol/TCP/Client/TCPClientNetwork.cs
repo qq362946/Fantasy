@@ -289,7 +289,6 @@ namespace Fantasy.Network.TCP
             try
             {
                 await _socket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position), SocketFlags.None);
-
             }
             catch (SocketException)
             {
@@ -306,7 +305,10 @@ namespace Fantasy.Network.TCP
             }
             finally
             {
-                ReturnMemoryStream(memoryStream);
+                if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+                {
+                    MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+                }
             }
         }
 

@@ -1,11 +1,6 @@
 #if !FANTASY_WEBGL
 using System;
-#if FANTASY_KCPUNSAFE
 using KCP;
-#endif
-#if FANTASY_KCP2K
-using kcp2k;
-#endif
 
 #pragma warning disable CS1591
 namespace Fantasy.Network.KCP

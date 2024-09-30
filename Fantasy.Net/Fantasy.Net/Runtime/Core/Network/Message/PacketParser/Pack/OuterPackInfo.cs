@@ -33,11 +33,11 @@ namespace Fantasy.PacketParser
             return outerPackInfo;
         }
 
-        public override MemoryStreamBuffer RentMemoryStream(int size = 0)
+        public override MemoryStreamBuffer RentMemoryStream(MemoryStreamBufferSource memoryStreamBufferSource, int size = 0)
         {
             if (MemoryStream == null)
             {
-                MemoryStream = Network.RentMemoryStream(size);
+                MemoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(memoryStreamBufferSource, size);
             }
 
             return MemoryStream;

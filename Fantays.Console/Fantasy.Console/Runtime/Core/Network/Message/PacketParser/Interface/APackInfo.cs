@@ -33,7 +33,7 @@ namespace Fantasy.PacketParser.Interface
         public OpCodeIdStruct OpCodeIdStruct { get; private set; }
         public MemoryStreamBuffer MemoryStream { get; protected set; }
         public abstract object Deserialize(Type messageType);
-        public abstract MemoryStreamBuffer RentMemoryStream(int size = 0);
+        public abstract MemoryStreamBuffer RentMemoryStream(MemoryStreamBufferSource memoryStreamBufferSource, int size = 0);
         public virtual void Dispose()
         {
             if (IsDisposed)
@@ -50,7 +50,7 @@ namespace Fantasy.PacketParser.Interface
             
             if (MemoryStream != null)
             {
-                Network.ReturnMemoryStream(MemoryStream);
+                Network.MemoryStreamBufferPool.ReturnMemoryStream(MemoryStream);
                 MemoryStream = null;
             }
             

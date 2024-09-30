@@ -207,7 +207,11 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
     private async FTask SendAsync(MemoryStreamBuffer memoryStream)
     {
         await _webSocket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position), WebSocketMessageType.Binary, true, _cancellationTokenSource.Token);
-        _network.ReturnMemoryStream(memoryStream);
+
+        if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+        {
+            _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+        }
     }
 
     #endregion

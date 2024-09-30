@@ -36,9 +36,9 @@ namespace Fantasy.PacketParser
             return innerPackInfo;
         }
 
-        public override MemoryStreamBuffer RentMemoryStream(int size = 0)
+        public override MemoryStreamBuffer RentMemoryStream(MemoryStreamBufferSource memoryStreamBufferSource, int size = 0)
         {
-            return MemoryStream ??= Network.RentMemoryStream(size);
+            return MemoryStream ??= Network.MemoryStreamBufferPool.RentMemoryStream(memoryStreamBufferSource, size);
         }
 
         public override object Deserialize(Type messageType)

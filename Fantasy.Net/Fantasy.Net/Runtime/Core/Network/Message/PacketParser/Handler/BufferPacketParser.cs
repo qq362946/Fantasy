@@ -92,7 +92,7 @@ namespace Fantasy.PacketParser
             packInfo.RpcId = RpcId;
             packInfo.RouteId = RouteId;
             packInfo.ProtocolCode = ProtocolCode;
-            packInfo.RentMemoryStream(count).Write(buffer, 0, count);
+            packInfo.RentMemoryStream(MemoryStreamBufferSource.UnPack, count).Write(buffer, 0, count);
             return true;
         }
         
@@ -118,7 +118,7 @@ namespace Fantasy.PacketParser
         {
             var memoryStreamLength = 0;
             var messageType = message.GetType();
-            var memoryStream = Network.RentMemoryStream();
+            var memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
             OpCodeIdStruct opCodeIdStruct = message.OpCode();
             memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
@@ -205,7 +205,7 @@ namespace Fantasy.PacketParser
             packInfo = OuterPackInfo.Create(Network);
             packInfo.RpcId = RpcId;
             packInfo.ProtocolCode = ProtocolCode;
-            packInfo.RentMemoryStream(count).Write(buffer, 0, count);
+            packInfo.RentMemoryStream(MemoryStreamBufferSource.UnPack, count).Write(buffer, 0, count);
             return true;
         }
         
@@ -230,7 +230,7 @@ namespace Fantasy.PacketParser
         {
             var memoryStreamLength = 0;
             var messageType = message.GetType();
-            var memoryStream = Network.RentMemoryStream();
+            var memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
             OpCodeIdStruct opCodeIdStruct = message.OpCode();
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
             
@@ -312,7 +312,7 @@ namespace Fantasy.PacketParser
             packInfo = OuterPackInfo.Create(Network);
             packInfo.RpcId = RpcId;
             packInfo.ProtocolCode = ProtocolCode;
-            packInfo.RentMemoryStream(count).Write(buffer, 0, count);
+            packInfo.RentMemoryStream(MemoryStreamBufferSource.UnPack, count).Write(buffer, 0, count);
             return true;
         }
         
@@ -339,7 +339,7 @@ namespace Fantasy.PacketParser
         {
             var memoryStreamLength = 0;
             var messageType = message.GetType();
-            var memoryStream = Network.RentMemoryStream();
+            var memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.UnPack);
             OpCodeIdStruct opCodeIdStruct = message.OpCode();
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
             

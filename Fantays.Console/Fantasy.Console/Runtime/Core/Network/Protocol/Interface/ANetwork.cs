@@ -17,11 +17,9 @@ namespace Fantasy.Network.Interface
     /// </summary>
     public abstract class ANetwork : Entity
     {
-        private const int MaxMemoryStreamSize = 2048;
-        
         private long _outerPackInfoId;
         private Queue<OuterPackInfo> _outerPackInfoPool;
-        private readonly Queue<MemoryStreamBuffer> _memoryStreamPool = new Queue<MemoryStreamBuffer>();
+        public readonly MemoryStreamBufferPool MemoryStreamBufferPool = new MemoryStreamBufferPool();
         
         public NetworkType NetworkType { get; private set; }
         public NetworkTarget NetworkTarget { get; private set; }
@@ -65,50 +63,6 @@ namespace Fantasy.Network.Interface
         }
         
         public abstract void RemoveChannel(uint channelId);
-
-        public MemoryStreamBuffer RentMemoryStream(int size = 0)
-        {
-            if (size > MaxMemoryStreamSize)
-            {
-                return new MemoryStreamBuffer(size);
-            }
-
-            if (size < MaxMemoryStreamSize)
-            {
-                size = MaxMemoryStreamSize;
-            }
-
-            if (_memoryStreamPool.Count == 0)
-            {
-                return new MemoryStreamBuffer(size);
-            }
-
-            if (_memoryStreamPool.TryDequeue(out var memoryStream))
-            {
-                return memoryStream;
-            }
-
-            return new MemoryStreamBuffer(size);
-        }
-
-        public void ReturnMemoryStream(MemoryStreamBuffer memoryStreamBuffer)
-        {
-            if (memoryStreamBuffer.Capacity > MaxMemoryStreamSize)
-            {
-                return;
-            }
-            
-            if (_memoryStreamPool.Count > 512)
-            {
-                // 设置该值只能是内网或服务器转发的时候可能在连接之前发送的数据过多的情况下可以修改。
-                // 设置过大会导致内存占用过大，所以要谨慎设置。
-                return;
-            }
-            
-            memoryStreamBuffer.SetLength(0);
-            _memoryStreamPool.Enqueue(memoryStreamBuffer);
-        }
-        
         public OuterPackInfo RentOuterPackInfo()
         {
             if (_outerPackInfoPool.Count == 0)
@@ -184,11 +138,7 @@ namespace Fantasy.Network.Interface
             NetworkType = NetworkType.None;
             NetworkTarget = NetworkTarget.None;
             NetworkProtocolType = NetworkProtocolType.None;
-            foreach (var memoryStream in _memoryStreamPool)
-            {
-                memoryStream.Dispose();
-            }
-            _memoryStreamPool.Clear();
+            MemoryStreamBufferPool.Dispose();
             _outerPackInfoPool?.Clear();
 #if FANTASY_NET
             _innerPackInfoPool?.Clear();
