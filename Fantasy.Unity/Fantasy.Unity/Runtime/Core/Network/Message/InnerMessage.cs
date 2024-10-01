@@ -10,6 +10,38 @@ using ProtoBuf;
 namespace Fantasy.InnerMessage
 {
     [ProtoContract]
+    public sealed partial class BenchmarkMessage : AMessage, IMessage
+    {
+        public uint OpCode()
+        {
+            return Fantasy.Network.OpCode.BenchmarkMessage;
+        }
+    }
+    [ProtoContract]
+    public partial class BenchmarkRequest : AMessage, IRequest
+    {
+        public uint OpCode()
+        {
+            return Fantasy.Network.OpCode.BenchmarkRequest;
+        }
+        [ProtoIgnore] 
+        public BenchmarkResponse ResponseType { get; set; }
+        [ProtoMember(1)]
+        public long RpcId { get; set; }
+    }
+    
+    [ProtoContract]
+    public partial class BenchmarkResponse : AMessage, IResponse
+    {
+        public uint OpCode()
+        {
+            return Fantasy.Network.OpCode.BenchmarkResponse;
+        }
+        [ProtoMember(1)]
+        public long RpcId { get; set; }
+        [ProtoMember(2)]
+        public uint ErrorCode { get; set; }
+    }
     public sealed partial class Response : AMessage, IResponse
     {
         public uint OpCode()

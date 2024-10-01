@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using Fantasy.Assembly;
 using Fantasy.Helper;
+#if !FANTASY_EXPORTER
 using Fantasy.Network;
+#endif
 using ProtoBuf;
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.

@@ -55,6 +55,7 @@ namespace Fantasy.Platform.Console
                 while (_isInit)
                 {
                     ThreadScheduler.Update();
+                    Thread.Sleep(1);
                 }
             })
             {

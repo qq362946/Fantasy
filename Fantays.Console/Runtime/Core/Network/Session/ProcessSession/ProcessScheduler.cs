@@ -202,7 +202,6 @@ internal static class ProcessScheduler
                     if (entity == null || entity.IsDisposed)
                     {
                         sceneMessageDispatcherComponent.FailRouteResponse(session, message.GetType(), InnerErrorCode.ErrNotFoundRoute, rpcId);
-
                         return;
                     }
                     

@@ -5,12 +5,12 @@ namespace Fantasy.Console.Entity;
 
 public static class Entry
 {
-    public static Scene Scene;
-    private static Session Session;
+    private static Scene _scene;
+    private static Session _session;
     public static async FTask Show()
     {
-        Scene = await Fantasy.Scene.Create(SceneRuntimeType.MainThread);
-        Session = Scene.Connect(
+        _scene = await Fantasy.Scene.Create(SceneRuntimeType.MainThread);
+        _session = _scene.Connect(
             "127.0.0.1:20000",
             NetworkProtocolType.KCP,
             OnConnectComplete,
@@ -22,11 +22,12 @@ public static class Entry
     private static void OnConnectComplete()
     {
         Log.Debug("连接成功");
+        // Session.AddComponent<SessionHeartbeatComponent>();
         // 添加心跳组件给Session。
         // Start(2000)就是2000毫秒。
-        Session.AddComponent<SessionHeartbeatComponent>().Start(2000);
-        
-        Session.Send(new C2G_TestMessage()
+        _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
+            
+        _session.Send(new C2G_TestMessage()
         {
             Tag = "111111111111"
         });

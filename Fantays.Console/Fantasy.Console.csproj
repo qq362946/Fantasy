@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DefineConstants>TRACE;FANTASY_CONSOLE;FANTASY_KCPUNSAFE;</DefineConstants>
+      <DefineConstants>TRACE;FANTASY_CONSOLE</DefineConstants>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DefineConstants>TRACE;FANTASY_CONSOLE;FANTASY_KCPUNSAFE</DefineConstants>
+      <DefineConstants>TRACE;FANTASY_CONSOLE</DefineConstants>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 

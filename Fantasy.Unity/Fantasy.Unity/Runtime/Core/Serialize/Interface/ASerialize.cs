@@ -2,7 +2,9 @@ using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using Fantasy.Pool;
+#if FANTASY_NET || FANTASY_UNITY || FANTASY_CONSOLE
 using MongoDB.Bson.Serialization.Attributes;
+#endif
 using Newtonsoft.Json;
 using ProtoBuf;
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -38,7 +40,9 @@ namespace Fantasy.Serialize
             _scene = scene;
         }
 #endif
+#if FANTASY_NET
         [BsonIgnore] 
+#endif
         [JsonIgnore] 
         [IgnoreDataMember] 
         [ProtoIgnore]

@@ -78,6 +78,9 @@ namespace Fantasy.Network
 
     public static class OpCode
     {
+        public static readonly uint BenchmarkMessage = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterMessage, 8388607);
+        public static readonly uint BenchmarkRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterRequest, 8388607);
+        public static readonly uint BenchmarkResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterResponse, 8388607);
         public static readonly uint PingRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterPingRequest, 1);
         public static readonly uint PingResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterPingResponse, 1);
         public static readonly uint DefaultResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerResponse, 1);
