@@ -37,7 +37,6 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
-                // var currentThreadManagedThreadId = Thread.CurrentThread.ManagedThreadId;
                 // var tasks = new List<FTask>(2000);
                 // var session = scene.GetSession(_addressableSceneRunTimeId);
                 // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;

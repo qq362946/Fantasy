@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <OutputPath>../../Exporter/NetworkProtocol/</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <OutputPath>../../Exporter/NetworkProtocol/</OutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CommandLineParser" Version="2.9.1" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\FileHelper.cs">
+        <Link>Core\FileHelper.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\HashCodeHelper.cs">
+        <Link>Core\HashCodeHelper.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\JsonHelper.cs">
+        <Link>Core\JsonHelper.cs</Link>
+      </Compile>
+      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Network\Message\PacketParser\OpCode.cs">
+        <Link>ProtocalExporter\OpCode.cs</Link>
+      </Compile>
+      <Compile Update="ExporterSettingsHelper.cs">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="ExporterSettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Run.bat">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Run.sh">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>

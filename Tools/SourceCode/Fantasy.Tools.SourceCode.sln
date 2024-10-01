@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Tools.NetworkProtocol", "Fantasy.Tools.NetworkProtocol\Fantasy.Tools.NetworkProtocol.csproj", "{72D45E2D-EF78-4D80-8BFC-ED95FA8543C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Tools.ConfigTable", "Fantasy.Tools.ConfigTable\Fantasy.Tools.ConfigTable.csproj", "{F01BD146-FDEA-46D6-9A08-F3CCF05D817E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{CCF6F6B1-50D8-4B0D-91B9-035CDCC4B1CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Tools.ExporterNetworkProtocol", "..\NuGet\Fantasy.Tools.ExporterNetworkProtocol\Fantasy.Tools.ExporterNetworkProtocol.csproj", "{E0F9231E-F057-4121-B167-7AC47D48E7E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Tools.ExporterConfigTable", "..\NuGet\Fantasy.Tools.ExporterConfigTable\Fantasy.Tools.ExporterConfigTable.csproj", "{5A236869-283F-4046-860B-E295963139AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SourceCode", "SourceCode", "{A402EB74-8BF8-4A53-82F2-F77E59D9F4C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72D45E2D-EF78-4D80-8BFC-ED95FA8543C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D45E2D-EF78-4D80-8BFC-ED95FA8543C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D45E2D-EF78-4D80-8BFC-ED95FA8543C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D45E2D-EF78-4D80-8BFC-ED95FA8543C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F01BD146-FDEA-46D6-9A08-F3CCF05D817E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F01BD146-FDEA-46D6-9A08-F3CCF05D817E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F01BD146-FDEA-46D6-9A08-F3CCF05D817E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F01BD146-FDEA-46D6-9A08-F3CCF05D817E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F9231E-F057-4121-B167-7AC47D48E7E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F9231E-F057-4121-B167-7AC47D48E7E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F9231E-F057-4121-B167-7AC47D48E7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F9231E-F057-4121-B167-7AC47D48E7E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A236869-283F-4046-860B-E295963139AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A236869-283F-4046-860B-E295963139AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A236869-283F-4046-860B-E295963139AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A236869-283F-4046-860B-E295963139AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E0F9231E-F057-4121-B167-7AC47D48E7E3} = {CCF6F6B1-50D8-4B0D-91B9-035CDCC4B1CA}
+		{5A236869-283F-4046-860B-E295963139AB} = {CCF6F6B1-50D8-4B0D-91B9-035CDCC4B1CA}
+		{F01BD146-FDEA-46D6-9A08-F3CCF05D817E} = {A402EB74-8BF8-4A53-82F2-F77E59D9F4C6}
+		{72D45E2D-EF78-4D80-8BFC-ED95FA8543C7} = {A402EB74-8BF8-4A53-82F2-F77E59D9F4C6}
+	EndGlobalSection
+EndGlobal

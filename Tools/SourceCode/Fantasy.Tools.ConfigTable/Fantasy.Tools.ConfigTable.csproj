@@ -1,0 +1,120 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <DefineConstants>TRACE;FANTASY_EXPORTER</DefineConstants>
+        <OutputPath>../../Exporter/ConfigTable/</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <DefineConstants>TRACE;FANTASY_EXPORTER</DefineConstants>
+        <OutputPath>../../Exporter/ConfigTable/</OutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CommandLineParser" Version="2.9.1" />
+      <PackageReference Include="EPPlus" Version="7.3.2" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="protobuf-net" Version="3.2.30" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Pool\Normal\Pool.cs">
+          <Link>Core\Base\Pool.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Packages\Fantasy.ConfigTable\Net\Dictionary\IntDictionaryConfig.cs">
+            <Link>Core\Dictionary\IntDictionaryConfig.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Packages\Fantasy.ConfigTable\Net\Dictionary\StringDictionaryConfig.cs">
+            <Link>Core\Dictionary\StringDictionaryConfig.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Packages\Fantasy.ConfigTable\Net\Interface\IConfigTable.cs">
+            <Link>Core\Interface\IConfigTable.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\ProtoBufPackHelper\IProto.cs">
+            <Link>Core\Serialize\ProtoBufPackHelper\IProto.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\TimeHelper.cs">
+            <Link>Excel\Base\TimeHelper.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Pool\Interface\IPool.cs">
+            <Link>Excel\Base\IPool.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Assembly\AssemblyInfo.cs">
+            <Link>Excel\Base\AssemblyInfo.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\DataStructure\Collection\OneToManyListPool.cs">
+            <Link>Excel\Base\OneToManyList.cs</Link>
+        </Compile>
+      <Compile Include="..\Fantasy.Tools.NetworkProtocol\Core\Base\ConsoleLog.cs">
+        <Link>Core\ConsoleLog.cs</Link>
+      </Compile>
+      <Compile Include="..\Fantasy.Tools.NetworkProtocol\Core\Base\ExporterAges.cs">
+        <Link>Core\ExporterAges.cs</Link>
+      </Compile>
+      <Compile Include="..\Fantasy.Tools.NetworkProtocol\Core\Base\ExportPlatform.cs">
+        <Link>Core\ExportPlatform.cs</Link>
+      </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\FileHelper.cs">
+            <Link>Core\FileHelper.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\HashCodeHelper.cs">
+            <Link>Core\HashCodeHelper.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\JsonHelper.cs">
+            <Link>Core\JsonHelper.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\BsonPack\BsonPackHelper.cs">
+            <Link>Core\Serialize\BsonPack\BsonPackHelper.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\BsonPack\StructBsonSerialize.cs">
+            <Link>Core\Serialize\BsonPack\StructBsonSerialize.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\BsonPack\SupportInitializeChecker.cs">
+            <Link>Core\Serialize\BsonPack\SupportInitializeChecker.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\Interface\ASerialize.cs">
+            <Link>Core\Serialize\Interface\ASerialize.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\Interface\ISerialize.cs">
+            <Link>Core\Serialize\Interface\ISerialize.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\SerializerManager.cs">
+            <Link>Core\Serialize\SerializerManager.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\ProtoBufPackHelper\ProtoBufPackHelperNet.cs">
+            <Link>Core\Serialize\ProtoBufPackHelper\ProtoBufPackHelperNet.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\MemoryStreamBuffer.cs">
+            <Link>Excel\Base\MemoryStreamBuffer.cs</Link>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="ExporterSettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Run.bat">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Run.sh">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>

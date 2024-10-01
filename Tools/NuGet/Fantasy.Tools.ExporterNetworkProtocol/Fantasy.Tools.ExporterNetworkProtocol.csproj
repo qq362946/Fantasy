@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <PackageId>Fantasy-Net.Tools.ExporterNetworkProtocol</PackageId>
+        <PackageVersion>2024.1.7</PackageVersion>
+        <Title>Fantasy-Net.Tools.ExporterNetworkProtocol</Title>
+        <Authors>qq362946</Authors>
+        <owners>qq362946</owners>
+        <PackageOutputPath>../../../nupkg</PackageOutputPath>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <Description>
+            Fantasy is a high-performance network development framework based on .NET, supporting mainstream protocols. It is designed for development teams or individuals needing a quick start, scalability, and a distributed, cross-platform solution at the commercial level. Fantasy aims to provide easy-to-use tools while ensuring high system performance and scalability.</Description>
+        <Copyright>Copyright 2026 qq362946</Copyright>
+        <PackageProjectUrl>https://www.code-fantasy.com/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/qq362946/Fantasy</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>Net, c#, Server, Game, GameServer, Fantasy , Network</PackageTags>
+        <PackageIcon>icon.png</PackageIcon>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="../../Exporter/NetworkProtocol/**/*" Pack="true" PackagePath="tools\output\" />
+        <None Include="icon.png" Pack="true" PackagePath="\"/>
+        <None Include="Fantasy-Net.Tools.ExporterNetworkProtocol.targets" Pack="true" PackagePath="buildTransitive" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Remove="**\.DS_Store" />
+    </ItemGroup>
+</Project>

@@ -1,0 +1,9 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <!-- 物理复制 Exporter 文件到项目根目录 -->
+    <Target Name="CopyExporterFilesToProject" BeforeTargets="PrepareForBuild">
+        <ItemGroup>
+            <ExporterFilesToCopy Include="$(MSBuildThisFileDirectory)..\tools\output\**\*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(ExporterFilesToCopy)" DestinationFolder="$(MSBuildProjectDirectory)/Tools/Exporter/NetworkProtocol" SkipUnchangedFiles="true" />
+    </Target>
+</Project>
