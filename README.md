@@ -19,16 +19,15 @@
 ## 快速上手
 * 01.快速入门
   * [1.1.获得Fantasy](https://www.code-fantasy.com/top/download-fantasy/)
-  * [1.2.安装Fantasy](https://www.code-fantasy.com/top/creating-your-app/)
+  * [1.2.配置文件](https://www.code-fantasy.com/top/config-file/)
   * [1.3.Fantasy的网络](https://www.code-fantasy.com/top/use-network/)
   * [1.4.Fantasy的配置文件](https://www.code-fantasy.com/top/config-file/)
   * [1.5.Fantasy的命令行参数](https://www.code-fantasy.com/top/command-line-parameter/)
-  * [1.6.Fantasy的导表工具](https://www.code-fantasy.com/top/guidance/)
-  * [1.7.如何升级到最新版](https://www.code-fantasy.com/top/upgrade/)
+  * [1.6.如何升级到最新版](https://www.code-fantasy.com/top/upgrade/)
 * 02.网络通信
-  * [2.1.客户端服务器之间发送消息](https://www.code-fantasy.com/network/session/)
-  * [2.2.服务器之间发送消息](https://www.code-fantasy.com/network/networkmessagingomponent/)
-  * [2.3.定义通信协议](https://www.code-fantasy.com/network/network-protocols/)
+  * [2.1.配置网络协议](https://www.code-fantasy.com/network/network-protocols/)
+  * [2.2.客户端服务器之间发送消息](https://www.code-fantasy.com/network/session/)
+  * [2.3.服务器之间发送消息](https://www.code-fantasy.com/network/networkmessagingomponent/)
   * [2.4.Route通信协议](https://www.code-fantasy.com/network/network-route/)
   * [2.5.Addressable通信协议](https://www.code-fantasy.com/network/network-addressable/)
 * 03.系统组件
