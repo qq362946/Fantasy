@@ -14,26 +14,26 @@ using Fantasy.Helper;
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy.Entitas
 {
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct UpdateQueueStruct
+    internal sealed class UpdateQueueInfo
     {
+        public bool IsStop;
         public readonly Type Type;
         public readonly long RunTimeId;
 
-        public UpdateQueueStruct(Type type, long runTimeId)
+        public UpdateQueueInfo(Type type, long runTimeId)
         {
             Type = type;
+            IsStop = false;
             RunTimeId = runTimeId;
         }
     }
     
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct FrameUpdateQueueStruct
+    internal sealed class FrameUpdateQueueInfo
     {
         public readonly Type Type;
         public readonly long RunTimeId;
 
-        public FrameUpdateQueueStruct(Type type, long runTimeId)
+        public FrameUpdateQueueInfo(Type type, long runTimeId)
         {
             Type = type;
             RunTimeId = runTimeId;
@@ -54,8 +54,9 @@ namespace Fantasy.Entitas
         private readonly Dictionary<Type, IFrameUpdateSystem> _frameUpdateSystem = new();
         
         private readonly Dictionary<Type, long> _hashCodes = new Dictionary<Type, long>();
-        private readonly Queue<UpdateQueueStruct> _updateQueue = new Queue<UpdateQueueStruct>();
-        private readonly Queue<FrameUpdateQueueStruct> _frameUpdateQueue = new Queue<FrameUpdateQueueStruct>();
+        private readonly Queue<UpdateQueueInfo> _updateQueue = new Queue<UpdateQueueInfo>();
+        private readonly Queue<FrameUpdateQueueInfo> _frameUpdateQueue = new Queue<FrameUpdateQueueInfo>();
+        private readonly Dictionary<Type, UpdateQueueInfo> _updateQueueDic = new Dictionary<Type, UpdateQueueInfo>();
 
         public async FTask<EntityComponent> Initialize()
         {
@@ -334,6 +335,7 @@ namespace Fantasy.Entitas
         /// 将实体加入更新队列，准备进行更新
         /// </summary>
         /// <param name="entity">实体对象</param>
+        /// <typeparam name="T"></typeparam>
         public void StartUpdate<T>(T entity) where T : Entity
         {
             var type = typeof(T);
@@ -341,13 +343,32 @@ namespace Fantasy.Entitas
 
             if (_updateSystems.ContainsKey(type))
             {
-                _updateQueue.Enqueue(new UpdateQueueStruct(type, entityRuntimeId));
+                var updateQueueInfo = new UpdateQueueInfo(type, entityRuntimeId);
+                _updateQueue.Enqueue(updateQueueInfo);
+                _updateQueueDic.Add(type, updateQueueInfo);
             }
 
             if (_frameUpdateSystem.ContainsKey(type))
             {
-                _frameUpdateQueue.Enqueue(new FrameUpdateQueueStruct(type, entityRuntimeId));
+                _frameUpdateQueue.Enqueue(new FrameUpdateQueueInfo(type, entityRuntimeId));
             }
+        }
+
+        /// <summary>
+        /// 停止实体进行更新
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        /// <typeparam name="T"></typeparam>
+        public void StopUpdate<T>(T entity) where T : Entity
+        {
+            var type = typeof(T);
+            
+            if (!_updateQueueDic.Remove(type,out var updateQueueInfo))
+            {
+                return;
+            }
+
+            updateQueueInfo.IsStop = true;
         }
 
         /// <summary>
@@ -360,6 +381,11 @@ namespace Fantasy.Entitas
             while (updateQueueCount-- > 0)
             {
                 var updateQueueStruct = _updateQueue.Dequeue();
+
+                if (updateQueueStruct.IsStop)
+                {
+                    continue;
+                }
                 
                 if (!_updateSystems.TryGetValue(updateQueueStruct.Type, out var updateSystem))
                 {
