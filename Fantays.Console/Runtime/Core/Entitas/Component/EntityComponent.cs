@@ -396,6 +396,7 @@ namespace Fantasy.Entitas
                 
                 if (entity == null || entity.IsDisposed)
                 {
+                    _updateQueueDic.Remove(updateQueueStruct.Type);
                     continue;
                 }
                 

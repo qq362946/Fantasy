@@ -358,7 +358,6 @@ namespace Fantasy.Entitas
         /// 停止实体进行更新
         /// </summary>
         /// <param name="entity">实体对象</param>
-        /// <typeparam name="T"></typeparam>
         public void StopUpdate(Entity entity)
         {
             var type = entity.GetType();
@@ -396,6 +395,7 @@ namespace Fantasy.Entitas
                 
                 if (entity == null || entity.IsDisposed)
                 {
+                    _updateQueueDic.Remove(updateQueueStruct.Type);
                     continue;
                 }
                 

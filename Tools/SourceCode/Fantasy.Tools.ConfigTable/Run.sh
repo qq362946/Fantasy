@@ -9,13 +9,13 @@ echo ""
 echo ""
 case $choice in
     1)
-        dotnet Exporter.dll --ExportPlatform 1
+        dotnet Fantasy.Tools.ConfigTable.dll --ExportPlatform 1
         ;;
     2)
-        dotnet Exporter.dll --ExportPlatform 2
+        dotnet Fantasy.Tools.ConfigTable.dll --ExportPlatform 2
         ;;
     3)
-        dotnet Exporter.dll --ExportPlatform 3
+        dotnet Fantasy.Tools.ConfigTable.dll --ExportPlatform 3
         ;;
     *)
         echo "Invalid option"
