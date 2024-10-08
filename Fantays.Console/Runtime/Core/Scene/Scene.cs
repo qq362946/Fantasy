@@ -6,6 +6,7 @@ using Fantasy.Event;
 using Fantasy.IdFactory;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
+using Fantasy.Pool;
 using Fantasy.Scheduler;
 using Fantasy.Timer;
 #if FANTASY_NET
@@ -69,8 +70,12 @@ namespace Fantasy
         internal SceneConfig SceneConfig => SceneConfigData.Instance.Get(SceneConfigId);
         private readonly Dictionary<uint, ProcessSessionInfo> _processSessionInfos = new Dictionary<uint, ProcessSessionInfo>();
 #endif
-        internal ThreadSynchronizationContext ThreadSynchronizationContext { get; private set; }
+        /// <summary>
+        /// 当前Scene的上下文
+        /// </summary>
+        public ThreadSynchronizationContext ThreadSynchronizationContext { get; private set; }
         private readonly Dictionary<long, Entity> _entities = new Dictionary<long, Entity>();
+        internal readonly Dictionary<Type, Func<IPool>> TypeInstance = new Dictionary<Type, Func<IPool>>();
         #endregion
 
         #region IdFactory

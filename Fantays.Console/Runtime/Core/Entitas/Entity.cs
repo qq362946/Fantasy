@@ -108,6 +108,68 @@ namespace Fantasy.Entitas
         #endregion
 
         #region Create
+
+        /// <summary>
+        /// 创建一个实体
+        /// </summary>
+        /// <param name="scene">所属的Scene</param>
+        /// <param name="type">实体的Type</param>
+        /// <param name="isPool">是否从对象池创建，如果选择的是，销毁的时候同样会进入对象池</param>
+        /// <param name="isRunEvent">是否执行实体事件</param>
+        /// <returns></returns>
+        public static Entity Create(Scene scene, Type type, bool isPool, bool isRunEvent)
+        {
+            return Create(scene, type, scene.EntityIdFactory.Create, isPool, isRunEvent);
+        }
+
+        /// <summary>
+        /// 创建一个实体
+        /// </summary>
+        /// <param name="scene">所属的Scene</param>
+        /// <param name="type">实体的Type</param>
+        /// <param name="id">指定实体的Id</param>
+        /// <param name="isPool">是否从对象池创建，如果选择的是，销毁的时候同样会进入对象池</param>
+        /// <param name="isRunEvent">是否执行实体事件</param>
+        /// <returns></returns>
+        public static Entity Create(Scene scene, Type type, long id, bool isPool, bool isRunEvent)
+        {
+            if (!typeof(Entity).IsAssignableFrom(type))
+            {
+                throw new NotSupportedException($"{type.FullName} Type:{type.FullName} must inherit from Entity");
+            }
+            
+            Entity entity = null;
+            
+            if (isPool)
+            {
+                entity = (Entity)scene.EntityPool.Rent(type);
+            }
+            else
+            {
+                if (!scene.TypeInstance.TryGetValue(type, out var createInstance))
+                {
+                    createInstance = CreateInstance.CreateIPool(type);
+                    scene.TypeInstance[type] = createInstance;
+                }
+
+                entity = (Entity)createInstance();
+            }
+            
+            entity.Scene = scene;
+            entity.Type = type;
+            entity.SetIsPool(isPool);
+            entity.Id = id;
+            entity.RunTimeId = scene.RuntimeIdFactory.Create;
+            scene.AddEntity(entity);
+            
+            if (isRunEvent)
+            {
+                scene.EntityComponent.Awake(entity);
+                scene.EntityComponent.StartUpdate(entity);
+            }
+            
+            return entity;
+        }
         
         /// <summary>
         /// 创建一个实体
@@ -119,21 +181,7 @@ namespace Fantasy.Entitas
         /// <returns></returns>
         public static T Create<T>(Scene scene, bool isPool, bool isRunEvent) where T : Entity, new()
         {
-            var entity = isPool ? scene.EntityPool.Rent<T>() : new T();
-            entity.Scene = scene;
-            entity.Type = typeof(T);
-            entity.SetIsPool(isPool);
-            entity.Id = scene.EntityIdFactory.Create;
-            entity.RunTimeId = scene.RuntimeIdFactory.Create;
-            scene.AddEntity(entity);
-            
-            if (isRunEvent)
-            {
-                scene.EntityComponent.Awake(entity);
-                scene.EntityComponent.StartUpdate(entity);
-            }
-            
-            return entity;
+            return Create<T>(scene, scene.EntityIdFactory.Create, isPool, isRunEvent);
         }
 
         /// <summary>
