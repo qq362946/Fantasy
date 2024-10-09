@@ -193,11 +193,10 @@ namespace Fantasy.Entitas
         /// <summary>
         /// 触发实体的唤醒方法
         /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
         /// <param name="entity">实体对象</param>
-        public void Awake<T>(T entity) where T : Entity
+        public void Awake(Entity entity)
         {
-            if (!_awakeSystems.TryGetValue(typeof(T), out var awakeSystem))
+            if (!_awakeSystems.TryGetValue(entity.Type, out var awakeSystem))
             {
                 return;
             }
@@ -208,36 +207,7 @@ namespace Fantasy.Entitas
             }
             catch (Exception e)
             {
-                Log.Error($"{typeof(T).FullName} Error {e}");
-            }
-        }
-
-        /// <summary>
-        /// 触发实体的唤醒方法
-        /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <typeparam name="T1">参数类型</typeparam>
-        /// <param name="entity">实体对象</param>
-        /// <param name="ages">参数</param>
-        public void Awake<T, T1>(T entity, T1 ages) where T : Entity where T1 : struct
-        {
-            if (!_awakeSystems.TryGetValue(typeof(T), out var awakeSystem))
-            {
-                return;
-            }
-
-            try
-            {
-                if (awakeSystem is not AwakeSystem<T, T1> system)
-                {
-                    return;
-                }
-
-                system.Invoke(entity, ages);
-            }
-            catch (Exception e)
-            {
-                Log.Error($"{typeof(T).FullName} Awake Error {e}");
+                Log.Error($"{entity.Type.FullName} Error {e}");
             }
         }
         
@@ -247,7 +217,7 @@ namespace Fantasy.Entitas
         /// <param name="entity">实体对象</param>
         public void Destroy(Entity entity)
         {
-            if (!_destroySystems.TryGetValue(entity.GetType(), out var system))
+            if (!_destroySystems.TryGetValue(entity.Type, out var system))
             {
                 return;
             }
@@ -258,29 +228,7 @@ namespace Fantasy.Entitas
             }
             catch (Exception e)
             {
-                Log.Error($"{entity.GetType().FullName} Destroy Error {e}");
-            }
-        }
-
-        /// <summary>
-        /// 触发实体的销毁方法
-        /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <param name="entity">实体对象</param>
-        public void Destroy<T>(T entity) where T : Entity
-        {
-            if (!_destroySystems.TryGetValue(typeof(T), out var system))
-            {
-                return;
-            }
-
-            try
-            {
-                system.Invoke(entity);
-            }
-            catch (Exception e)
-            {
-                Log.Error($"{typeof(T).FullName} Destroy Error {e}");
+                Log.Error($"{entity.Type.FullName} Destroy Error {e}");
             }
         }
         
@@ -290,7 +238,7 @@ namespace Fantasy.Entitas
         /// <param name="entity">实体对象</param>
         public void Deserialize(Entity entity) 
         {
-            if (!_deserializeSystems.TryGetValue(entity.GetType(), out var system))
+            if (!_deserializeSystems.TryGetValue(entity.Type, out var system))
             {
                 return;
             }
@@ -301,29 +249,7 @@ namespace Fantasy.Entitas
             }
             catch (Exception e)
             {
-                Log.Error($"{entity.GetType().FullName} Deserialize Error {e}");
-            }
-        }
-
-        /// <summary>
-        /// 触发实体的反序列化方法
-        /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <param name="entity">实体对象</param>
-        public void Deserialize<T>(T entity) where T : Entity
-        {
-            if (!_deserializeSystems.TryGetValue(typeof(T), out var system))
-            {
-                return;
-            }
-
-            try
-            {
-                system.Invoke(entity);
-            }
-            catch (Exception e)
-            {
-                Log.Error($"{typeof(T).FullName} Deserialize Error {e}");
+                Log.Error($"{entity.Type.FullName} Deserialize Error {e}");
             }
         }
 
@@ -335,10 +261,9 @@ namespace Fantasy.Entitas
         /// 将实体加入更新队列，准备进行更新
         /// </summary>
         /// <param name="entity">实体对象</param>
-        /// <typeparam name="T"></typeparam>
-        public void StartUpdate<T>(T entity) where T : Entity
+        public void StartUpdate(Entity entity)
         {
-            var type = typeof(T);
+            var type = entity.Type;
             var entityRuntimeId = entity.RunTimeId;
 
             if (_updateSystems.ContainsKey(type))
