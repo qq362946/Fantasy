@@ -248,6 +248,7 @@ namespace Fantasy
             var scene = new Scene();
             scene.Scene = scene;
             scene.Parent = scene;
+            scene.Type = typeof(Scene);
             scene.EntityIdFactory = new EntityIdFactory(sceneId, world);
             scene.RuntimeIdFactory = new RuntimeIdFactory(sceneId, world);
             scene.Id = new EntityIdStruct(0, sceneId, world, 0);
@@ -271,6 +272,7 @@ namespace Fantasy
             var scene = new Scene();
             scene.Scene = scene;
             scene.Parent = scene;
+            scene.Type = typeof(Scene);
             scene.Process = process;
             scene.EntityIdFactory = new EntityIdFactory(sceneConfigId, worldId);
             scene.RuntimeIdFactory = new RuntimeIdFactory(sceneConfigId, worldId);
@@ -336,6 +338,7 @@ namespace Fantasy
             var scene = new Scene();
             scene.Scene = scene;
             scene.Parent = scene;
+            scene.Type = typeof(Scene);
             scene.SceneType = sceneType;
             scene.World = parentScene.World;
             scene.Process = parentScene.Process;
