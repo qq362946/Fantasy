@@ -46,12 +46,18 @@ namespace Fantasy.Entitas
     public sealed class EntityComponent : Entity, ISceneUpdate, IAssembly
     {
         private readonly OneToManyList<long, Type> _assemblyList = new();
+        private readonly OneToManyList<long, Type> _assemblyAsyncList = new();
         private readonly OneToManyList<long, Type> _assemblyHashCodes = new();
+        
         private readonly Dictionary<Type, IAwakeSystem> _awakeSystems = new();
         private readonly Dictionary<Type, IUpdateSystem> _updateSystems = new();
         private readonly Dictionary<Type, IDestroySystem> _destroySystems = new();
-        private readonly Dictionary<Type, IEntitiesSystem> _deserializeSystems = new();
+        private readonly Dictionary<Type, IDeserializeSystem> _deserializeSystems = new();
         private readonly Dictionary<Type, IFrameUpdateSystem> _frameUpdateSystem = new();
+        
+        private readonly Dictionary<Type, IAwakeSystemAsync> _awakeAsyncSystems = new();
+        private readonly Dictionary<Type, IDestroySystemAsync> _destroyAsyncSystems = new();
+        private readonly Dictionary<Type, IDeserializeSystemAsync> _deserializeAsyncSystems = new();
         
         private readonly Dictionary<Type, long> _hashCodes = new Dictionary<Type, long>();
         private readonly Queue<UpdateQueueInfo> _updateQueue = new Queue<UpdateQueueInfo>();
@@ -155,6 +161,41 @@ namespace Fantasy.Entitas
 
                 _assemblyList.Add(assemblyIdentity, entitiesType);
             }
+            
+            foreach (var entitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(IEntitiesSystemAsync)))
+            {
+                Type entitiesType = null;
+                var entity = Activator.CreateInstance(entitiesSystemType);
+
+                switch (entity)
+                {
+                    case IAwakeSystemAsync iAwakeSystem:
+                    {
+                        entitiesType = iAwakeSystem.EntitiesType();
+                        _awakeAsyncSystems.Add(entitiesType, iAwakeSystem);
+                        break;
+                    }
+                    case IDestroySystemAsync iDestroySystem:
+                    {
+                        entitiesType = iDestroySystem.EntitiesType();
+                        _destroyAsyncSystems.Add(entitiesType, iDestroySystem);
+                        break;
+                    }
+                    case IDeserializeSystemAsync iDeserializeSystem:
+                    {
+                        entitiesType = iDeserializeSystem.EntitiesType();
+                        _deserializeAsyncSystems.Add(entitiesType, iDeserializeSystem);
+                        break;
+                    }
+                    default:
+                    {
+                        Log.Error($"IEntitiesSystemAsync not support type {entitiesSystemType}");
+                        return;
+                    }
+                }
+
+                _assemblyAsyncList.Add(assemblyIdentity, entitiesType);
+            }
         }
 
         private void OnUnLoadInner(long assemblyIdentity)
@@ -169,21 +210,31 @@ namespace Fantasy.Entitas
                 _assemblyHashCodes.RemoveByKey(assemblyIdentity);
             }
 
-            if (!_assemblyList.TryGetValue(assemblyIdentity, out var assembly))
+            if (_assemblyList.TryGetValue(assemblyIdentity, out var assembly))
             {
-                return;
+                foreach (var type in assembly)
+                {
+                    _awakeSystems.Remove(type);
+                    _updateSystems.Remove(type);
+                    _destroySystems.Remove(type);
+                    _deserializeSystems.Remove(type);
+                    _frameUpdateSystem.Remove(type);
+                }
+                
+                _assemblyList.RemoveByKey(assemblyIdentity);
             }
             
-            foreach (var type in assembly)
+            if (_assemblyAsyncList.TryGetValue(assemblyIdentity, out var assemblyAsync))
             {
-                _awakeSystems.Remove(type);
-                _updateSystems.Remove(type);
-                _destroySystems.Remove(type);
-                _deserializeSystems.Remove(type);
-                _frameUpdateSystem.Remove(type);
+                foreach (var type in assemblyAsync)
+                {
+                    _awakeAsyncSystems.Remove(type);
+                    _destroyAsyncSystems.Remove(type);
+                    _deserializeAsyncSystems.Remove(type);
+                }
+                
+                _assemblyAsyncList.RemoveByKey(assemblyIdentity);
             }
-            
-            _assemblyList.RemoveByKey(assemblyIdentity);
         }
 
         #endregion
@@ -204,6 +255,27 @@ namespace Fantasy.Entitas
             try
             {
                 awakeSystem.Invoke(entity);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"{entity.Type.FullName} Error {e}");
+            }
+        }
+        
+        /// <summary>
+        /// 触发实体的唤醒方法
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        public async FTask AwakeAsync(Entity entity)
+        {
+            if (!_awakeAsyncSystems.TryGetValue(entity.Type, out var awakeSystemAsync))
+            {
+                return;
+            }
+
+            try
+            {
+                await awakeSystemAsync.Invoke(entity);
             }
             catch (Exception e)
             {
@@ -233,6 +305,27 @@ namespace Fantasy.Entitas
         }
         
         /// <summary>
+        /// 触发实体的销毁方法
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        public async FTask DestroyAsync(Entity entity)
+        {
+            if (!_destroyAsyncSystems.TryGetValue(entity.Type, out var system))
+            {
+                return;
+            }
+
+            try
+            {
+                await system.Invoke(entity);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"{entity.Type.FullName} Destroy Error {e}");
+            }
+        }
+        
+        /// <summary>
         /// 触发实体的反序列化方法
         /// </summary>
         /// <param name="entity">实体对象</param>
@@ -246,6 +339,27 @@ namespace Fantasy.Entitas
             try
             {
                 system.Invoke(entity);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"{entity.Type.FullName} Deserialize Error {e}");
+            }
+        }
+        
+        /// <summary>
+        /// 触发实体的反序列化方法
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        public async FTask DeserializeAsync(Entity entity) 
+        {
+            if (!_deserializeAsyncSystems.TryGetValue(entity.Type, out var system))
+            {
+                return;
+            }
+
+            try
+            {
+                await system.Invoke(entity);
             }
             catch (Exception e)
             {

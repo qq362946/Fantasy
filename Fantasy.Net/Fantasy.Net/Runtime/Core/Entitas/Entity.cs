@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using Fantasy.Async;
 using Fantasy.Entitas.Interface;
 using Fantasy.Pool;
 using Fantasy.Serialize;
@@ -26,6 +27,7 @@ namespace Fantasy.Entitas
     /// 用来表示一个Entity
     /// </summary>
     public interface IEntity : IDisposable, IPool { }
+
     /// <summary>
     /// Entity的抽象类，任何Entity必须继承这个接口才可以使用
     /// </summary>
@@ -231,6 +233,22 @@ namespace Fantasy.Entitas
             Scene.EntityComponent.StartUpdate(entity);
             return entity;
         }
+        
+        /// <summary>
+        /// 添加一个组件到当前实体上
+        /// </summary>
+        /// <param name="isPool">是否从对象池里创建</param>
+        /// <typeparam name="T">要添加组件的泛型类型</typeparam>
+        /// <returns>返回添加到实体上组件的实例</returns>
+        public async FTask<T> AddComponentAsync<T>(bool isPool = true) where T : Entity, new()
+        {
+            var id = SupportedMultiEntityChecker<T>.IsSupported ? Scene.EntityIdFactory.Create : Id;
+            var entity = Create<T>(Scene, id, isPool, false);
+            AddComponent(entity);
+            await Scene.EntityComponent.AwakeAsync(entity);
+            Scene.EntityComponent.StartUpdate(entity);
+            return entity;
+        }
 
         /// <summary>
         /// 添加一个组件到当前实体上
@@ -244,6 +262,22 @@ namespace Fantasy.Entitas
             var entity = Create<T>(Scene, id, isPool, false);
             AddComponent(entity);
             Scene.EntityComponent.Awake(entity);
+            Scene.EntityComponent.StartUpdate(entity);
+            return entity;
+        }
+        
+        /// <summary>
+        /// 添加一个组件到当前实体上
+        /// </summary>
+        /// <param name="id">要添加组件的Id</param>
+        /// <param name="isPool">是否从对象池里创建</param>
+        /// <typeparam name="T">要添加组件的泛型类型</typeparam>
+        /// <returns>返回添加到实体上组件的实例</returns>
+        public async FTask<T> AddComponentAsync<T>(long id, bool isPool = true) where T : Entity, new()
+        {
+            var entity = Create<T>(Scene, id, isPool, false);
+            AddComponent(entity);
+            await Scene.EntityComponent.AwakeAsync(entity);
             Scene.EntityComponent.StartUpdate(entity);
             return entity;
         }
@@ -456,7 +490,7 @@ namespace Fantasy.Entitas
         #endregion
 
         #region RemoveComponent
-
+        
         /// <summary>
         /// 当前实体下删除一个实体
         /// </summary>
@@ -510,6 +544,56 @@ namespace Fantasy.Entitas
         /// <summary>
         /// 当前实体下删除一个实体
         /// </summary>
+        /// <param name="isDispose">是否执行删除实体的Dispose方法</param>
+        /// <typeparam name="T">实体的泛型类型</typeparam>
+        /// <exception cref="NotSupportedException"></exception>
+        public async FTask RemoveComponentAsync<T>(bool isDispose = true) where T : Entity, new()
+        {
+            if (SupportedMultiEntityChecker<T>.IsSupported)
+            {
+                throw new NotSupportedException($"{typeof(T).FullName} message:Cannot delete components that implement the ISupportedMultiEntity interface");
+            }
+            
+            if (_tree == null)
+            {
+                return;
+            }
+            
+            var type = typeof(T);
+            var typeHashCode = Scene.EntityComponent.GetHashCode(type);
+            if (!_tree.TryGetValue(typeHashCode, out var component))
+            {
+                return;
+            }
+#if FANTASY_NET
+            if (_treeDb != null && SupportedDataBaseChecker<T>.IsSupported)
+            {
+                _treeDb.Remove(component);
+
+                if (_treeDb.Count == 0)
+                {
+                    Scene.EntityListPool.Return(_treeDb);
+                    _treeDb = null;
+                }
+            }
+#endif
+            _tree.Remove(typeHashCode);
+
+            if (_tree.Count == 0)
+            {
+                Scene.EntitySortedDictionaryPool.Return(_tree);
+                _tree = null;
+            }
+            
+            if (isDispose)
+            {
+                await component.DisposeAsync();
+            }
+        }
+
+        /// <summary>
+        /// 当前实体下删除一个实体
+        /// </summary>
         /// <param name="id">要删除的实体Id</param>
         /// <param name="isDispose">是否执行删除实体的Dispose方法</param>
         /// <typeparam name="T">实体的泛型类型</typeparam>
@@ -545,6 +629,47 @@ namespace Fantasy.Entitas
             if (isDispose)
             {
                 component.Dispose();
+            }
+        }
+        
+        /// <summary>
+        /// 当前实体下删除一个实体
+        /// </summary>
+        /// <param name="id">要删除的实体Id</param>
+        /// <param name="isDispose">是否执行删除实体的Dispose方法</param>
+        /// <typeparam name="T">实体的泛型类型</typeparam>
+        public async FTask RemoveComponentAsync<T>(long id, bool isDispose = true) where T : Entity, ISupportedMultiEntity, new()
+        {
+            if (_multi == null)
+            {
+                return;
+            }
+
+            if (!_multi.TryGetValue(id, out var component))
+            {
+                return;
+            }
+#if FANTASY_NET
+            if (SupportedDataBaseChecker<T>.IsSupported)
+            {
+                _multiDb.Remove(component);
+                if (_multiDb.Count == 0)
+                {
+                    Scene.EntityListPool.Return(_multiDb);
+                    _multiDb = null;
+                }
+            }
+#endif
+            _multi.Remove(component.Id);
+            if (_multi.Count == 0)
+            {
+                Scene.EntitySortedDictionaryPool.Return(_multi);
+                _multi = null;
+            }
+            
+            if (isDispose)
+            {
+                await component.DisposeAsync();
             }
         }
 
@@ -618,6 +743,79 @@ namespace Fantasy.Entitas
             if (isDispose)
             {
                 component.Dispose();
+            }
+        }
+        
+        /// <summary>
+        /// 当前实体下删除一个实体
+        /// </summary>
+        /// <param name="component">要删除的实体实例</param>
+        /// <param name="isDispose">是否执行删除实体的Dispose方法</param>
+        public async FTask RemoveComponentAsync(Entity component, bool isDispose = true)
+        {
+            if (this == component)
+            {
+                return;
+            }
+            
+            if (component is ISupportedMultiEntity)
+            {
+                if (_multi != null)
+                {
+                    if (!_multi.ContainsKey(component.Id))
+                    {
+                        return;
+                    }
+#if FANTASY_NET
+                    if (component is ISupportedDataBase)
+                    {
+                        _multiDb.Remove(component);
+                        if (_multiDb.Count == 0)
+                        {
+                            Scene.EntityListPool.Return(_multiDb);
+                            _multiDb = null;
+                        }
+                    }
+#endif
+                    _multi.Remove(component.Id);
+                    if (_multi.Count == 0)
+                    {
+                        Scene.EntitySortedDictionaryPool.Return(_multi);
+                        _multi = null;
+                    }
+                }
+            }
+            else if (_tree != null)
+            {
+                var typeHashCode = Scene.EntityComponent.GetHashCode(component.Type);
+                if (!_tree.ContainsKey(typeHashCode))
+                {
+                    return;
+                }
+#if FANTASY_NET
+                if (_treeDb != null && component is ISupportedDataBase)
+                {
+                    _treeDb.Remove(component);
+
+                    if (_treeDb.Count == 0)
+                    {
+                        Scene.EntityListPool.Return(_treeDb);
+                        _treeDb = null;
+                    }
+                }
+#endif
+                _tree.Remove(typeHashCode);
+
+                if (_tree.Count == 0)
+                {
+                    Scene.EntitySortedDictionaryPool.Return(_tree);
+                    _tree = null;
+                }
+            }
+            
+            if (isDispose)
+            {
+                await component.DisposeAsync();
             }
         }
 
@@ -700,6 +898,86 @@ namespace Fantasy.Entitas
                 component.Dispose();
             }
         }
+        
+        /// <summary>
+        /// 当前实体下删除一个实体
+        /// </summary>
+        /// <param name="component">要删除的实体实例</param>
+        /// <param name="isDispose">是否执行删除实体的Dispose方法</param>
+        /// <typeparam name="T">实体的泛型类型</typeparam>
+        public async FTask RemoveComponentAsync<T>(T component, bool isDispose = true) where T : Entity
+        {
+            if (this == component)
+            {
+                return;
+            }
+
+            if (typeof(T) == typeof(Entity))
+            {
+                Log.Error("Cannot remove a generic Entity type as a component. Specify a more specific type.");
+                return;
+            }
+
+            if (SupportedMultiEntityChecker<T>.IsSupported)
+            {
+                if (_multi != null)
+                {
+                    if (!_multi.ContainsKey(component.Id))
+                    {
+                        return;
+                    }
+#if FANTASY_NET
+                    if (SupportedDataBaseChecker<T>.IsSupported)
+                    {
+                        _multiDb.Remove(component);
+                        if (_multiDb.Count == 0)
+                        {
+                            Scene.EntityListPool.Return(_multiDb);
+                            _multiDb = null;
+                        }
+                    }
+#endif
+                    _multi.Remove(component.Id);
+                    if (_multi.Count == 0)
+                    {
+                        Scene.EntitySortedDictionaryPool.Return(_multi);
+                        _multi = null;
+                    }
+                }
+            }
+            else if (_tree != null)
+            {
+                var typeHashCode = Scene.EntityComponent.GetHashCode(typeof(T));
+                if (!_tree.ContainsKey(typeHashCode))
+                {
+                    return;
+                }
+#if FANTASY_NET
+                if (_treeDb != null && SupportedDataBaseChecker<T>.IsSupported)
+                {
+                    _treeDb.Remove(component);
+
+                    if (_treeDb.Count == 0)
+                    {
+                        Scene.EntityListPool.Return(_treeDb);
+                        _treeDb = null;
+                    }
+                }
+#endif
+                _tree.Remove(typeHashCode);
+
+                if (_tree.Count == 0)
+                {
+                    Scene.EntitySortedDictionaryPool.Return(_tree);
+                    _tree = null;
+                }
+            }
+            
+            if (isDispose)
+            {
+                await component.DisposeAsync();
+            }
+        }
 
         #endregion
 
@@ -753,6 +1031,66 @@ namespace Fantasy.Entitas
 #endif
                 scene.AddEntity(this);
                 scene.EntityComponent.Deserialize(this);
+            }
+            catch (Exception e)
+            {
+                if (RunTimeId != 0)
+                {
+                    scene.RemoveEntity(RunTimeId);
+                }
+
+                Log.Error(e);
+            }
+        }
+        
+        /// <summary>
+        /// 反序列化当前实体，因为在数据库加载过来的或通过协议传送过来的实体并没有跟当前Scene做关联。
+        /// 所以必须要执行一下这个反序列化的方法才可以使用。
+        /// </summary>
+        /// <param name="scene">Scene</param>
+        /// <param name="resetId">是否是重新生成实体的Id,如果是数据库加载过来的一般是不需要的</param>
+        public async FTask DeserializeAsync(Scene scene, bool resetId = false)
+        {
+            if (RunTimeId != 0)
+            {
+                return;
+            }
+
+            try
+            {
+                Scene = scene;
+                Type = GetType();
+                RunTimeId = Scene.RuntimeIdFactory.Create;
+                if (resetId)
+                {
+                    Id = RunTimeId;
+                }
+#if FANTASY_NET
+                if (_treeDb != null && _treeDb.Count > 0)
+                {
+                    _tree = Scene.EntitySortedDictionaryPool.Rent();
+                    foreach (var entity in _treeDb)
+                    {
+                        entity.Parent = this;
+                        var typeHashCode = Scene.EntityComponent.GetHashCode(Type);
+                        _tree.Add(typeHashCode, entity);
+                        await entity.DeserializeAsync(scene, resetId);
+                    }
+                }
+
+                if (_multiDb != null && _multiDb.Count > 0)
+                {
+                    _multi = Scene.EntitySortedDictionaryPool.Rent();
+                    foreach (var entity in _multiDb)
+                    {
+                        entity.Parent = this;
+                        await entity.DeserializeAsync(scene, resetId);
+                        _multi.Add(entity.Id, entity);
+                    }
+                }
+#endif
+                scene.AddEntity(this);
+                await scene.EntityComponent.DeserializeAsync(this);
             }
             catch (Exception e)
             {
@@ -935,6 +1273,85 @@ namespace Fantasy.Entitas
             }
 #endif
             scene.EntityComponent.Destroy(this);
+            
+            if (Parent != null && Parent != this && !Parent.IsDisposed)
+            {
+                Parent.RemoveComponent(this, false);
+                Parent = null;
+            }
+
+            Id = 0;
+            Scene = null;
+            Parent = null;
+            scene.RemoveEntity(runTimeId);
+
+            if (IsPool())
+            {
+                scene.EntityPool.Return(Type, this);
+            }
+
+            Type = null;
+        }
+
+        /// <summary>
+        /// 销毁当前实体，销毁后会自动销毁当前实体下的所有实体。
+        /// </summary>
+        public virtual async FTask DisposeAsync()
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+            
+            var scene = Scene;
+            var runTimeId = RunTimeId;
+            RunTimeId = 0;
+            
+            if (_tree != null)
+            {
+                foreach (var (_, entity) in _tree)
+                {
+                    await entity.DisposeAsync();
+                }
+
+                scene.EntitySortedDictionaryPool.Return(_tree);
+                _tree = null;
+            }
+            
+            if (_multi != null)
+            {
+                foreach (var (_, entity) in _multi)
+                {
+                    await entity.DisposeAsync();
+                }
+
+                scene.EntitySortedDictionaryPool.Return(_multi);
+                _multi = null;
+            }
+#if FANTASY_NET
+            if (_treeDb != null)
+            {
+                foreach (var entity in _treeDb)
+                {
+                    await entity.DisposeAsync();
+                }
+
+                scene.EntityListPool.Return(_treeDb);
+                _treeDb = null;
+            }
+            
+            if (_multiDb != null)
+            {
+                foreach (var entity in _multiDb)
+                {
+                    await entity.DisposeAsync();
+                }
+
+                scene.EntityListPool.Return(_multiDb);
+                _multiDb = null;
+            }
+#endif
+            await scene.EntityComponent.DestroyAsync(this);
             
             if (Parent != null && Parent != this && !Parent.IsDisposed)
             {

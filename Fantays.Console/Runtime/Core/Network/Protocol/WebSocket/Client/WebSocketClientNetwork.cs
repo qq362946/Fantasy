@@ -55,13 +55,13 @@ namespace Fantasy.Network.WebSocket
 
             base.Dispose();
             ClearConnectTimeout();
-            DisposeAsync().Coroutine();
+            WebSocketClientDisposeAsync().Coroutine();
             _onConnectDisconnect?.Invoke();
             _packetParser.Dispose();
             _packetParser = null;
         }
 
-        private async FTask DisposeAsync()
+        private async FTask WebSocketClientDisposeAsync()
         {
             if (_clientWebSocket == null)
             {
