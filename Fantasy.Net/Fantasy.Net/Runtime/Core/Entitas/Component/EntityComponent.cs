@@ -62,7 +62,7 @@ namespace Fantasy.Entitas
         private readonly Dictionary<Type, long> _hashCodes = new Dictionary<Type, long>();
         private readonly Queue<UpdateQueueInfo> _updateQueue = new Queue<UpdateQueueInfo>();
         private readonly Queue<FrameUpdateQueueInfo> _frameUpdateQueue = new Queue<FrameUpdateQueueInfo>();
-        private readonly Dictionary<Type, UpdateQueueInfo> _updateQueueDic = new Dictionary<Type, UpdateQueueInfo>();
+        private readonly Dictionary<long, UpdateQueueInfo> _updateQueueDic = new Dictionary<long, UpdateQueueInfo>();
 
         public async FTask<EntityComponent> Initialize()
         {
@@ -384,7 +384,7 @@ namespace Fantasy.Entitas
             {
                 var updateQueueInfo = new UpdateQueueInfo(type, entityRuntimeId);
                 _updateQueue.Enqueue(updateQueueInfo);
-                _updateQueueDic.Add(type, updateQueueInfo);
+                _updateQueueDic.Add(entityRuntimeId, updateQueueInfo);
             }
 
             if (_frameUpdateSystem.ContainsKey(type))
@@ -400,8 +400,8 @@ namespace Fantasy.Entitas
         public void StopUpdate(Entity entity)
         {
             var type = entity.GetType();
-            
-            if (!_updateQueueDic.Remove(type,out var updateQueueInfo))
+
+            if (!_updateQueueDic.Remove(entity.RunTimeId, out var updateQueueInfo))
             {
                 return;
             }
@@ -434,7 +434,7 @@ namespace Fantasy.Entitas
                 
                 if (entity == null || entity.IsDisposed)
                 {
-                    _updateQueueDic.Remove(updateQueueStruct.Type);
+                    _updateQueueDic.Remove(updateQueueStruct.RunTimeId);
                     continue;
                 }
                 

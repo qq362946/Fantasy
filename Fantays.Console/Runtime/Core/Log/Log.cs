@@ -14,8 +14,8 @@ namespace Fantasy
     public static class Log
     {
         private static ILog _logCore;
-#if FANTASY_NET
         private static bool _isRegister;
+#if FANTASY_NET
         /// <summary>
         /// 初始化Log系统
         /// </summary>
@@ -52,10 +52,13 @@ namespace Fantasy
         /// <param name="log"></param>
         public static void Register(ILog log)
         {
+            if (_isRegister)
+            {
+                return;
+            }
+            
             _logCore = log;
-#if FANTASY_NET
             _isRegister = true;
-#endif
         }
 
         /// <summary>

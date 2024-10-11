@@ -257,7 +257,7 @@ namespace Fantasy.Helper
                 throw new ArgumentException("Buffer too small.");
             }
             
-#if FANTASY_NET
+#if FANTASY_NET || FANTASY_CONSOLE
             MemoryMarshal.Write(buffer.AsSpan(), in value);
 #endif
 #if FANTASY_UNITY
