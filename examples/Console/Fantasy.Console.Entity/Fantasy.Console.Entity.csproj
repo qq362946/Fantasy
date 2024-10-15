@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Fantays.Console\Fantasy.Console\Fantasy.Console.csproj" />
+      <ProjectReference Include="..\..\..\Fantays.Console\Fantasy.Console.csproj" />
     </ItemGroup>
 
 </Project>

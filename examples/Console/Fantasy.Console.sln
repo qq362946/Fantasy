@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Console.Main", "Fan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Console.Entity", "Fantasy.Console.Entity\Fantasy.Console.Entity.csproj", "{F1FE5BEA-DA59-4B49-863E-3344F43357A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Console", "..\..\Fantays.Console\Fantasy.Console\Fantasy.Console.csproj", "{E613E40C-C4C4-4299-B6BA-64BCBAC27926}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Console", "..\..\Fantays.Console\Fantasy.Console.csproj", "{0D88EEBF-7249-4E7A-89F0-C376012A9297}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,9 +20,9 @@ Global
 		{F1FE5BEA-DA59-4B49-863E-3344F43357A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1FE5BEA-DA59-4B49-863E-3344F43357A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1FE5BEA-DA59-4B49-863E-3344F43357A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E613E40C-C4C4-4299-B6BA-64BCBAC27926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E613E40C-C4C4-4299-B6BA-64BCBAC27926}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E613E40C-C4C4-4299-B6BA-64BCBAC27926}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E613E40C-C4C4-4299-B6BA-64BCBAC27926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D88EEBF-7249-4E7A-89F0-C376012A9297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D88EEBF-7249-4E7A-89F0-C376012A9297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D88EEBF-7249-4E7A-89F0-C376012A9297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D88EEBF-7249-4E7A-89F0-C376012A9297}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

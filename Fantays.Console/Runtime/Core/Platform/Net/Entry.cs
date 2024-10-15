@@ -45,7 +45,7 @@ public static class Entry
                 throw new NotSupportedException($"ProcessType is {ProcessDefine.Options.ProcessType} Unrecognized!");
             }
         }
-
+        
         // 初始化程序集管理系统
         AssemblySystem.Initialize(assemblies);
         // 初始化序列化

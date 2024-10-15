@@ -29,7 +29,7 @@ namespace Fantasy.Network.KCP
                     settings.ReceiveWindowSize = 8192;
                     settings.MaxSendWindowSize = 8192 * 8192 * 7;
 #endif
-#if FANTASY_UNITY
+#if FANTASY_UNITY || FANTASY_CONSOLE
                     settings.SendWindowSize = 512;
                     settings.ReceiveWindowSize = 512;
                     settings.MaxSendWindowSize = 512 * 512 * 7;

@@ -27,10 +27,37 @@ public static class Entry
         // Start(2000)就是2000毫秒。
         _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
             
-        _session.Send(new C2G_TestMessage()
+        // _session.Send(new C2G_TestMessage()
+        // {
+        //     Tag = "111111111111"
+        // });
+        TestSend1000().Coroutine();
+    }
+
+    private static int Index;
+    private static async FTask TestSend1000()
+    {
+        Log.Debug($"Call 1{Thread.CurrentThread.ManagedThreadId}");
+        
+        await _session.Call(new C2G_TestRequest()
         {
-            Tag = "111111111111"
+            Tag = "111"
         });
+        
+        Log.Debug($"Call 2{Thread.CurrentThread.ManagedThreadId}");
+        
+        // _session.Dispose();
+        
+        // for (int i = 0; i < 1000; i++)
+        // {
+        // _session.Send(new C2G_TestMessage()
+        // {
+        //     Tag = $"{++Index}"
+        // });
+        // // }
+        // await _session.Scene.TimerComponent.Net.WaitAsync(3000);
+        // _session.Dispose();
+        await FTask.CompletedTask;
     }
 
     private static void OnConnectFail()
