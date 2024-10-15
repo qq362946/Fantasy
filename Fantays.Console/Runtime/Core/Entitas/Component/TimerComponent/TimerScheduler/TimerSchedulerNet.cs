@@ -325,7 +325,7 @@ namespace Fantasy.Timer
         /// <returns>计时器的 ID。</returns>
         public long RepeatedTimer(long time, Action action)
         {
-            if (time < 100)
+            if (time < 0)
             {
                 Log.Error($"time too small: {time}");
                 return 0;
