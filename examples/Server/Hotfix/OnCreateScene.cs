@@ -37,6 +37,20 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
+                // var session = scene.GetSession(_addressableSceneRunTimeId);
+                // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
+                //
+                // for (int i = 0; i < 1000; i++)
+                // {
+                //     sceneNetworkMessagingComponent.SendInnerRoute(_addressableSceneRunTimeId,new G2A_TestMessage()
+                //     {
+                //         Tag = $"{i}"
+                //     });
+                // }
+                //
+                // Log.Debug($"Send G2A_TestMessage 1000");
+                
+                
                 // var tasks = new List<FTask>(2000);
                 // var session = scene.GetSession(_addressableSceneRunTimeId);
                 // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;

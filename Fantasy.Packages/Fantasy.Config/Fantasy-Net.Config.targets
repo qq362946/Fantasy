@@ -1,44 +1,25 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <!-- 物理复制 Exporter 文件到项目根目录，保留目录结构 -->
     <Target Name="CopyExporterFilesToProject" BeforeTargets="PrepareForBuild">
         <ItemGroup>
-            <!-- 获取源文件 -->
+            <!-- 获取需要复制的文件 -->
             <ExporterFilesToCopy Include="$(MSBuildThisFileDirectory)..\tools\output\**\*" />
         </ItemGroup>
 
-        <Message Text="Copying exporter files to $(MSBuildProjectDirectory)/Config" Importance="high" />
-
-        <!-- 确保目标目录存在 -->
-        <MakeDir Directories="$(MSBuildProjectDirectory)/Config" />
-
-        <!-- 过滤出需要复制的文件，排除已经在目标目录中的文件 -->
         <ItemGroup>
-            <FilesToCopy Include="@(ExporterFilesToCopy)"
-                         Exclude="$(MSBuildProjectDirectory)/Config/**/*" />
+            <!-- 生成目标路径，保持原有目录结构 -->
+            <ExporterFilesWithDestination Include="@(ExporterFilesToCopy)">
+                <DestinationPath>$(MSBuildProjectDirectory)\Tools\Exporter\ConfigTable\%(RecursiveDir)%(Filename)%(Extension)</DestinationPath>
+            </ExporterFilesWithDestination>
         </ItemGroup>
 
-        <!-- 添加包根目录下的 README.md 文件 -->
-        <ItemGroup>
-            <ReadMeFile Include="$(MSBuildProjectDirectory)/README.md" />
-        </ItemGroup>
+        <!-- 日志输出 -->
+        <Message Text="Source: %(ExporterFilesWithDestination.Identity), Destination: %(ExporterFilesWithDestination.DestinationPath)" />
 
-        <!-- 将 README.md 添加到 FilesToCopy 中 -->
-        <ItemGroup>
-            <FilesToCopy Include="@(FilesToCopy);@(ReadMeFile)"
-                         Exclude="$(MSBuildProjectDirectory)/Config/**/*" />
-        </ItemGroup>
-
-        <!-- 设置目标文件路径 -->
-        <ItemGroup>
-            <DestinationFiles Include="@(FilesToCopy->'$(MSBuildProjectDirectory)/Config\%(RecursiveDir)%(Filename)%(Extension)')" />
-        </ItemGroup>
-
-        <!-- 进行复制操作 -->
-        <Copy SourceFiles="@(FilesToCopy)"
-              DestinationFiles="@(DestinationFiles)"
-              SkipUnchangedFiles="false"
-              Condition="!Exists('@(DestinationFiles)')" />
-
-        <!-- 输出信息用于调试 -->
-        <Message Text="Copied files from @(FilesToCopy) to @(DestinationFiles)" Importance="high" />
+        <!-- 复制文件 -->
+        <Copy
+                SourceFiles="@(ExporterFilesWithDestination)"
+                DestinationFiles="@(ExporterFilesWithDestination->'%(DestinationPath)')"
+                SkipUnchangedFiles="true" />
     </Target>
 </Project>
