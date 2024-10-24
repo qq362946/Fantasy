@@ -383,14 +383,17 @@ namespace Fantasy.Network.KCP
             {
                 try
                 {
-                    var receiveCount = _kcp.Receive(_receiveBuffer);
+                    var peekSize = _kcp.PeekSize();
 
-                    if (receiveCount < 0)
+                    if (peekSize < 0)
                     {
-                        if (receiveCount != -1)
-                        {
-                            Log.Error($"KCPClientNetwork ReceiveData peekSize:{receiveCount} > _receiveBuffer:{_receiveBuffer}");
-                        }
+                        return;
+                    }
+
+                    var receiveCount = _kcp.Receive(_receiveBuffer, peekSize);
+
+                    if (receiveCount != peekSize)
+                    {
                         return;
                     }
                     
