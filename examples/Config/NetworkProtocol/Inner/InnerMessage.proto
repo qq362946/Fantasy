@@ -39,3 +39,8 @@ message M2M_SendUnitResponse // IRouteResponse
 {
 
 }
+/// Gate发送Addressable消息给MAP
+message G2M_SendAddressableMessage // IAddressableRouteMessage
+{
+	string Tag = 1;
+}

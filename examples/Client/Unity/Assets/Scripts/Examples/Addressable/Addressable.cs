@@ -14,6 +14,7 @@ public class Addressable : MonoBehaviour
     public Button SendAddressableMessage;
     public Button SendAddressableRPC;
     public Button MoveAddressable;
+    public Button GateSendToAddressable;
     
     private Scene _scene;
     private Session _session;
@@ -33,6 +34,7 @@ public class Addressable : MonoBehaviour
         SendAddressableMessage.interactable = false;
         SendAddressableRPC.interactable = false;
         MoveAddressable.interactable = false;
+        GateSendToAddressable.interactable = false;
         
         ConnectAddressable.onClick.RemoveAllListeners();
         ConnectAddressable.onClick.AddListener(() =>
@@ -54,6 +56,9 @@ public class Addressable : MonoBehaviour
         {
             OnMoveAddressableButtonClick().Coroutine();
         });
+        
+        GateSendToAddressable.onClick.RemoveAllListeners();
+        GateSendToAddressable.onClick.AddListener(OnGateSendToAddressableClick);
     }
 
     #region Connect
@@ -78,12 +83,14 @@ public class Addressable : MonoBehaviour
             SendAddressableMessage.interactable = false;
             SendAddressableRPC.interactable = false;
             MoveAddressable.interactable = false;
+            GateSendToAddressable.interactable = false;
             return;
         }
         Log.Debug("创建Addressable成功！");
         SendAddressableMessage.interactable = true;
         SendAddressableRPC.interactable = true;
         MoveAddressable.interactable = true;
+        GateSendToAddressable.interactable = true;
     }
     
     private void OnConnectComplete()
@@ -100,6 +107,7 @@ public class Addressable : MonoBehaviour
         SendAddressableMessage.interactable = false;
         SendAddressableRPC.interactable = false;
         MoveAddressable.interactable = false;
+        GateSendToAddressable.interactable = false;
     }
 
     private void OnConnectDisconnect()
@@ -109,6 +117,7 @@ public class Addressable : MonoBehaviour
         SendAddressableMessage.interactable = false;
         SendAddressableRPC.interactable = false;
         MoveAddressable.interactable = false;
+        GateSendToAddressable.interactable = false;
     }
 
     #endregion
@@ -166,6 +175,22 @@ public class Addressable : MonoBehaviour
         {
             MoveAddressable.interactable = true;
         }
+    }
+
+    #endregion
+
+    #region GateSendToAddressable
+
+    private void OnGateSendToAddressableClick()
+    {
+        SendAddressableMessage.interactable = false;
+        // 发送一个消息给Gate服务器，Gate服务器会发送Addressable消息给MAP
+        // 流程: Client -> Gate -> Map
+        _session.Send(new C2G_SendAddressableToMap()
+        {
+            Tag = "Hello SendAddressableToMap"
+        });
+        SendAddressableMessage.interactable = true;
     }
 
     #endregion

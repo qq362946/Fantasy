@@ -43,6 +43,10 @@ namespace Fantasy.Async
             {
                 fTask = new FTask();
             }
+            else
+            {
+                fTask.FTaskType = FTaskType.Task;
+            }
 
             fTask._isPool = true;
             return fTask;

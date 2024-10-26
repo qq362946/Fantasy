@@ -157,6 +157,7 @@ internal static class ProcessScheduler
                 
                 return;
             }
+            case OpCodeType.InnerAddressableMessage:
             case OpCodeType.InnerRouteMessage:
             {
                 var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
@@ -183,6 +184,7 @@ internal static class ProcessScheduler
                 
                 return;
             }
+            case OpCodeType.InnerAddressableRequest:
             case OpCodeType.InnerRouteRequest:
             {
                 var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);

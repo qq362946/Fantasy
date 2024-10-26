@@ -192,4 +192,25 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public uint ErrorCode { get; set; }
 	}
+	/// <summary>
+	///  Gate发送Addressable消息给MAP
+	/// </summary>
+	[ProtoContract]
+	public partial class G2M_SendAddressableMessage : AMessage, IAddressableRouteMessage, IProto
+	{
+		public static G2M_SendAddressableMessage Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2M_SendAddressableMessage>();
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2M_SendAddressableMessage>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.G2M_SendAddressableMessage; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
 }

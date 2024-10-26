@@ -315,4 +315,25 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public uint ErrorCode { get; set; }
 	}
+	/// <summary>
+	///  发送一个消息给Gate，让Gate发送一个Addressable消息给MAP
+	/// </summary>
+	[ProtoContract]
+	public partial class C2G_SendAddressableToMap : AMessage, IMessage, IProto
+	{
+		public static C2G_SendAddressableToMap Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2G_SendAddressableToMap>();
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2G_SendAddressableToMap>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2G_SendAddressableToMap; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
 }

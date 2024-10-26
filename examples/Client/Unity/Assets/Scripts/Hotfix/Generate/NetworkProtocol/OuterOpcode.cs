@@ -17,5 +17,6 @@ namespace Fantasy
 		 public const uint Chat2C_TestMessageResponse = 2415929105;
 		 public const uint C2M_MoveToMapRequest = 1476405010;
 		 public const uint M2C_MoveToMapResponse = 1610622738;
+		 public const uint C2G_SendAddressableToMap = 134227730;
 	}
 }

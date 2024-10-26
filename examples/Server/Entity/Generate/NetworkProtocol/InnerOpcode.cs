@@ -11,5 +11,6 @@ namespace Fantasy
 		 public const uint Chat2G_CreateRouteResponse = 1207969555;
 		 public const uint M2M_SendUnitRequest = 1082140436;
 		 public const uint M2M_SendUnitResponse = 1207969556;
+		 public const uint G2M_SendAddressableMessage = 1744840465;
 	}
 }

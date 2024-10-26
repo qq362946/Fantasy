@@ -71,3 +71,8 @@ message M2C_MoveToMapResponse // IAddressableRouteResponse
 {
 
 }
+/// 发送一个消息给Gate，让Gate发送一个Addressable消息给MAP
+message C2G_SendAddressableToMap // IMessage
+{
+	string Tag = 1;
+}
