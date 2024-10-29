@@ -30,7 +30,6 @@ namespace Fantasy.Network
         public long LastTime;
         public long SelfRunTimeId;
         public long TimeOutTimerId;
-        public long SessionRunTimeId;
         public TimerComponent TimerComponent; 
         public EntityReference<Session> Session;
         private readonly PingRequest _pingRequest = new PingRequest(); 
@@ -43,6 +42,7 @@ namespace Fantasy.Network
             Ping = 0;
             Session = null;
             TimeOut = 0;
+            LastTime = 0;
             SelfRunTimeId = 0;
             base.Dispose();
         }
@@ -53,9 +53,9 @@ namespace Fantasy.Network
         /// <param name="interval">以毫秒为单位的心跳请求发送间隔。</param>
         /// <param name="timeOut">设置与服务器的通信超时时间，如果超过这个时间限制，将自动断开会话(Session)。</param>
         /// <param name="timeOutInterval">用于检测与服务器连接超时频率。</param>
-        public void Start(int interval, int timeOut = 2000, int timeOutInterval = 3000)
+        public void Start(int interval, int timeOut = 5000, int timeOutInterval = 3000)
         {
-            TimeOut = timeOut;
+            TimeOut = timeOut + interval;
             Session = (Session)Parent;
             SelfRunTimeId = RunTimeId;
             LastTime = TimeHelper.Now;
@@ -66,7 +66,10 @@ namespace Fantasy.Network
                 return;
             }
             
-            TimerId = TimerComponent.Unity.RepeatedTimer(interval, () => RepeatedSend().Coroutine());
+            TimerId = TimerComponent.Unity.RepeatedTimer(interval, () =>
+            {
+                RepeatedSend().Coroutine();
+            });
             TimeOutTimerId = TimerComponent.Unity.RepeatedTimer(timeOutInterval, CheckTimeOut);
         }
 
@@ -116,7 +119,7 @@ namespace Fantasy.Network
             }
             
             Session session = Session;
-
+           
             if (session == null)
             {
                 Dispose();
@@ -126,14 +129,13 @@ namespace Fantasy.Network
             try
             {
                 var requestTime = TimeHelper.Now;
-
                 var pingResponse = (PingResponse)await session.Call(_pingRequest);
-
+               
                 if (pingResponse.ErrorCode != 0)
                 {
                     return;
                 }
-
+                
                 var responseTime = TimeHelper.Now;
                 LastTime = responseTime;
                 Ping = (int)(responseTime - requestTime) / 2;

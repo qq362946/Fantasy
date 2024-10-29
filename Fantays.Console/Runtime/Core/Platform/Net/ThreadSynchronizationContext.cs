@@ -11,18 +11,17 @@ namespace Fantasy;
 /// </summary>
 public sealed class ThreadSynchronizationContext : SynchronizationContext
 {
-    private Action _actionHandler;
     private readonly ConcurrentQueue<Action> _queue = new();
     /// <summary>
     /// 执行当前上下文投递过的逻辑
     /// </summary>
     public void Update()
     {
-        while (_queue.TryDequeue(out _actionHandler))
+        while (_queue.TryDequeue(out var actionHandler))
         {
             try
             {
-                _actionHandler();
+                actionHandler();
             }
             catch (Exception e)
             {

@@ -52,7 +52,7 @@ namespace Fantasy
         public void Add(Scene scene)
         {
             var cts = new CancellationTokenSource();
-            var thread = new Thread(() => Loop(scene,cts.Token));
+            var thread = new Thread(() => Loop(scene, cts.Token));
             _threads.TryAdd(scene.RunTimeId, new MultiThreadStruct(thread, cts));
             thread.Start();
         }

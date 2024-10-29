@@ -77,5 +77,6 @@ public class ConnectToServer : MonoBehaviour
         // 这里只是展示一下如何销毁这个Scene的地方。
         // 但这里销毁的时机明显是不对的，应该放到一个全局的地方。
         _scene?.Dispose();
+        _session?.Dispose();
     }
 }

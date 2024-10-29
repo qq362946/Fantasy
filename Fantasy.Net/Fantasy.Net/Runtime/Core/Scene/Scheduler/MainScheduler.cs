@@ -69,7 +69,7 @@ namespace Fantasy
                 {
                     continue;
                 }
-
+            
                 if (scene.IsDisposed)
                 {
                     continue;

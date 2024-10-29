@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "com.fantasy.unity": "file:../../../../Fantasy.Unity/Fantasy.Unity",
-    "com.unity.collab-proxy": "2.3.1",
+    "com.unity.collab-proxy": "2.5.1",
     "com.unity.ide.rider": "3.0.34",
     "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.unity.timeline": "1.8.6",
-    "com.unity.visualscripting": "1.9.1",
+    "com.unity.visualscripting": "1.9.4",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

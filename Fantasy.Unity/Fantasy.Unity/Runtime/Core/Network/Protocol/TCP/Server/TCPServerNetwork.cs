@@ -35,8 +35,7 @@ namespace Fantasy.Network.TCP
             _socket.Bind(address);
             _socket.Listen(int.MaxValue);
             _socket.SetSocketBufferToOsLimit();
-            Log.Info(
-                $"SceneConfigId = {Scene.SceneConfigId} networkTarget = {networkTarget.ToString()} TCPServer Listen {address}");
+            Log.Info($"SceneConfigId = {Scene.SceneConfigId} networkTarget = {networkTarget.ToString()} TCPServer Listen {address}");
             _acceptAsync.Completed += OnCompleted;
             AcceptAsync();
         }
@@ -71,7 +70,7 @@ namespace Fantasy.Network.TCP
             {
                 return;
             }
-
+            
             OnAcceptComplete(_acceptAsync);
         }
 
@@ -131,8 +130,10 @@ namespace Fantasy.Network.TCP
             {
                 case SocketAsyncOperation.Accept:
                 {
-                    Scene.ThreadSynchronizationContext.Post(() => { OnAcceptComplete(asyncEventArgs); });
-
+                    Scene.ThreadSynchronizationContext.Post(() =>
+                    {
+                        OnAcceptComplete(asyncEventArgs);
+                    });
                     break;
                 }
                 default:

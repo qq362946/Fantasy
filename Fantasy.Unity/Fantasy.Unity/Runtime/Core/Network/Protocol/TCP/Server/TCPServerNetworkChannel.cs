@@ -6,6 +6,7 @@ using Fantasy.Async;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser;
 using Fantasy.Serialize;
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
@@ -25,8 +26,7 @@ namespace Fantasy.Network.TCP
         private readonly ReadOnlyMemoryPacketParser _packetParser;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-        public TCPServerNetworkChannel(ANetwork network, Socket socket, uint id) : base(network, id,
-            socket.RemoteEndPoint)
+        public TCPServerNetworkChannel(ANetwork network, Socket socket, uint id) : base(network, id, socket.RemoteEndPoint)
         {
             _socket = socket;
             _network = network;
@@ -45,6 +45,7 @@ namespace Fantasy.Network.TCP
 
             _isInnerDispose = true;
             _network.RemoveChannel(Id);
+            
             if (!_cancellationTokenSource.IsCancellationRequested)
             {
                 try
@@ -58,10 +59,10 @@ namespace Fantasy.Network.TCP
             }
 
             base.Dispose();
-
-            if (_socket.Connected)
+            
+            if (_socket != null)
             {
-                _socket.Disconnect(true);
+                _socket.Shutdown(SocketShutdown.Both);
                 _socket.Close();
             }
 
@@ -78,6 +79,13 @@ namespace Fantasy.Network.TCP
                 {
                     var memory = _pipe.Writer.GetMemory(8192);
                     var count = await _socket.ReceiveAsync(memory, SocketFlags.None, _cancellationTokenSource.Token);
+                    
+                    if (count == 0)
+                    {
+                        Dispose();
+                        return;
+                    }
+                    
                     _pipe.Writer.Advance(count);
                     await _pipe.Writer.FlushAsync();
                 }

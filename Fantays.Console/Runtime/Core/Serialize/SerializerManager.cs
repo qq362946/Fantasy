@@ -59,13 +59,7 @@ namespace Fantasy.Serialize
                     sort.Add(computeHash64, serializer);
                 }
 
-#if FANTASY_NET
                 var index = 1;
-#endif
-#if FANTASY_UNITY
-                var index = 0;
-#endif
-                
                 _serializers = new ISerialize[sort.Count];
             
                 foreach (var (_, serialize) in sort)
@@ -79,13 +73,11 @@ namespace Fantasy.Serialize
                             serializerIndex = FantasySerializerType.ProtoBuf;
                             break;
                         }
-#if FANTASY_NET
                         case BsonPackHelper:
                         {
                             serializerIndex = FantasySerializerType.Bson;
                             break;
                         }    
-#endif
                         default:
                         {
                             serializerIndex = ++index;

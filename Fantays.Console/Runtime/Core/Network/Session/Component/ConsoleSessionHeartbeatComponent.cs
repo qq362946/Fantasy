@@ -57,7 +57,7 @@ namespace Fantasy.Network
         /// <param name="timeOutInterval">用于检测与服务器连接超时频率。</param>
         public void Start(int interval, int timeOut = 2000, int timeOutInterval = 3000)
         {
-            TimeOut = timeOut;
+            TimeOut = timeOut + interval;
             Session = (Session)Parent;
             SelfRunTimeId = RunTimeId;
             LastTime = TimeHelper.Now;
