@@ -527,6 +527,22 @@ namespace Fantasy.Entitas
             component.Scene = Scene;
         }
 
+        /// <summary>
+        ///  添加一个组件到当前实体上
+        /// </summary>
+        /// <param name="type">组件的类型</param>
+        /// <param name="isPool">是否在对象池创建</param>
+        /// <returns></returns>
+        public Entity AddComponent(Type type, bool isPool = true)
+        {
+            var id = typeof(ISupportedMultiEntity).IsAssignableFrom(type) ? Scene.EntityIdFactory.Create : Id;
+            var entity = Entity.Create(Scene, type, id, isPool, false);
+            AddComponent(entity);
+            Scene.EntityComponent.Awake(entity);
+            Scene.EntityComponent.StartUpdate(entity);
+            return entity;
+        }
+
         #endregion
 
         #region GetComponent

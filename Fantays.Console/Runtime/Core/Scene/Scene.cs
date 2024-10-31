@@ -255,6 +255,10 @@ namespace Fantasy
             scene.RunTimeId = new RuntimeIdStruct(0, sceneId, world, 0);
             scene.AddEntity(scene);
             await SetScheduler(scene, null, sceneRuntimeType);
+            scene.ThreadSynchronizationContext.Post(() =>
+            {
+                scene.EventComponent.PublishAsync(new OnCreateScene(scene)).Coroutine();
+            });
             return scene;
         }
         public Session Connect(string remoteAddress, NetworkProtocolType networkProtocolType, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000)

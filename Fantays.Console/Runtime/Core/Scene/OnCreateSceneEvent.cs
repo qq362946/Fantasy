@@ -1,4 +1,3 @@
-#if FANTASY_NET
 namespace Fantasy;
 
 /// <summary>
@@ -19,4 +18,3 @@ public struct OnCreateScene
         Scene = scene;
     }
 }
-#endif

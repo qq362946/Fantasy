@@ -1,10 +1,10 @@
+using System;
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-#if FANTASY_NET
 namespace Fantasy.Entitas.Interface
 {
     // Entity是单一集合、保存到数据库的时候不会跟随父组件保存在一个集合里、会单独保存在一个集合里
-// 需要配合SingleCollectionAttribute一起使用、如在Entity类头部定义SingleCollectionAttribute(typeOf(Unit))
-// SingleCollectionAttribute用来定义这个Entity是属于哪个Entity的子集
+    // 需要配合SingleCollectionAttribute一起使用、如在Entity类头部定义SingleCollectionAttribute(typeOf(Unit))
+    // SingleCollectionAttribute用来定义这个Entity是属于哪个Entity的子集
     /// <summary>
     /// 定义实体支持单一集合存储的接口。当实体需要单独存储在一个集合中，并且在保存到数据库时不会与父组件一起保存在同一个集合中时，应实现此接口。
     /// </summary>
@@ -45,4 +45,3 @@ namespace Fantasy.Entitas.Interface
         }
     }
 }
-#endif
