@@ -2,22 +2,27 @@
 using System.Buffers;
 using System.IO.Pipelines;
 using System.Net;
+using System.Net.Sockets;
 using System.Net.WebSockets;
 using Fantasy.Async;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser;
 using Fantasy.Serialize;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Fantasy.Network.WebSocket;
 
 public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
 {
+    private bool _isSending;
     private bool _isInnerDispose;
     private readonly Pipe _pipe = new Pipe();
     private readonly System.Net.WebSockets.WebSocket _webSocket;
     private readonly WebSocketServerNetwork _network;
     private readonly ReadOnlyMemoryPacketParser _packetParser;
+    private readonly Queue<MemoryStreamBuffer> _sendBuffers = new Queue<MemoryStreamBuffer>();
     private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
     
     public WebSocketServerNetworkChannel(ANetwork network, uint id, HttpListenerWebSocketContext httpListenerWebSocketContext, IPEndPoint remoteEndPoint) : base(network, id, remoteEndPoint)
@@ -48,9 +53,11 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
                 // 通常情况下，此处的异常可以忽略
             }
         }
+        _sendBuffers.Clear();
         _network.RemoveChannel(Id);
         base.Dispose();
         _webSocket.Dispose();
+        _isSending = false;
     }
     
     #region ReceiveSocket
@@ -201,16 +208,37 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
 
     public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
     {
-        SendAsync(_packetParser.Pack(ref rpcId, ref routeId, memoryStream, message)).Coroutine();
-    }
+        _sendBuffers.Enqueue(_packetParser.Pack(ref rpcId, ref routeId, memoryStream, message));
 
-    private async FTask SendAsync(MemoryStreamBuffer memoryStream)
-    {
-        await _webSocket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position), WebSocketMessageType.Binary, true, _cancellationTokenSource.Token);
-
-        if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+        if (!_isSending)
         {
-            _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+            Send().Coroutine();
+        }
+    }
+    
+    private async FTask Send()
+    {
+        if (_isSending || IsDisposed)
+        {
+            return;
+        }
+            
+        _isSending = true;
+            
+        while (_isSending)
+        {
+            if (!_sendBuffers.TryDequeue(out var memoryStream))
+            {
+                _isSending = false;
+                return;
+            }
+
+            await _webSocket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position), WebSocketMessageType.Binary, true, _cancellationTokenSource.Token);
+                
+            if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+            {
+                _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+            }
         }
     }
 

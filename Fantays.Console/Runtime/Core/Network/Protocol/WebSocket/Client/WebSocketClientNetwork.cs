@@ -16,11 +16,13 @@ namespace Fantasy.Network.WebSocket
 {
     public sealed class WebSocketClientNetwork : AClientNetwork
     {
+        private bool _isSending;
         private bool _isInnerDispose;
         private long _connectTimeoutId;
         private ClientWebSocket _clientWebSocket;
         private ReadOnlyMemoryPacketParser _packetParser;
         private readonly Pipe _pipe = new Pipe();
+        private readonly Queue<MemoryStreamBuffer> _sendBuffers = new Queue<MemoryStreamBuffer>();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         private Action _onConnectFail;
@@ -59,6 +61,7 @@ namespace Fantasy.Network.WebSocket
             _onConnectDisconnect?.Invoke();
             _packetParser.Dispose();
             _packetParser = null;
+            _isSending = false;
         }
 
         private async FTask WebSocketClientDisposeAsync()
@@ -273,18 +276,37 @@ namespace Fantasy.Network.WebSocket
 
         public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
         {
-            SendAsync(_packetParser.Pack(ref rpcId, ref routeId, memoryStream, message)).Coroutine();
-        }
+            _sendBuffers.Enqueue(_packetParser.Pack(ref rpcId, ref routeId, memoryStream, message));
 
-        private async FTask SendAsync(MemoryStreamBuffer memoryStream)
-        {
-            await _clientWebSocket.SendAsync(
-                new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position),
-                WebSocketMessageType.Binary, true, _cancellationTokenSource.Token);
-
-            if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+            if (!_isSending)
             {
-                MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+                Send().Coroutine();
+            }
+        }
+        
+        private async FTask Send()
+        {
+            if (_isSending || IsDisposed)
+            {
+                return;
+            }
+            
+            _isSending = true;
+            
+            while (_isSending)
+            {
+                if (!_sendBuffers.TryDequeue(out var memoryStream))
+                {
+                    _isSending = false;
+                    return;
+                }
+
+                await _clientWebSocket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position), WebSocketMessageType.Binary, true, _cancellationTokenSource.Token);
+                
+                if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+                {
+                    MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+                }
             }
         }
 

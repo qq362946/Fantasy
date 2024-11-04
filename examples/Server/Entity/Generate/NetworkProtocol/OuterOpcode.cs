@@ -5,6 +5,8 @@ namespace Fantasy
 		 public const uint C2G_TestMessage = 134227729;
 		 public const uint C2G_TestRequest = 268445457;
 		 public const uint G2C_TestResponse = 402663185;
+		 public const uint C2G_TestRequestPushMessage = 134227730;
+		 public const uint G2C_PushMessage = 134227731;
 		 public const uint C2G_CreateAddressableRequest = 268445458;
 		 public const uint G2C_CreateAddressableResponse = 402663186;
 		 public const uint C2M_TestMessage = 1342187281;
@@ -17,6 +19,8 @@ namespace Fantasy
 		 public const uint Chat2C_TestMessageResponse = 2415929105;
 		 public const uint C2M_MoveToMapRequest = 1476405010;
 		 public const uint M2C_MoveToMapResponse = 1610622738;
-		 public const uint C2G_SendAddressableToMap = 134227730;
+		 public const uint C2G_SendAddressableToMap = 134227732;
+		 public const uint C2Chat_TestRequestPushMessage = 2147493650;
+		 public const uint Chat2C_PushMessage = 2147493651;
 	}
 }

@@ -7,6 +7,7 @@ using Fantasy.Network.Interface;
 using Fantasy.PacketParser;
 using Fantasy.Serialize;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
@@ -19,11 +20,14 @@ namespace Fantasy.Network.TCP
 {
     public sealed class TCPServerNetworkChannel : ANetworkServerChannel
     {
+        private bool _isSending;
         private bool _isInnerDispose;
         private readonly Socket _socket;
         private readonly ANetwork _network;
         private readonly Pipe _pipe = new Pipe();
+        private readonly SocketAsyncEventArgs _sendArgs;
         private readonly ReadOnlyMemoryPacketParser _packetParser;
+        private readonly Queue<MemoryStreamBuffer> _sendBuffers = new Queue<MemoryStreamBuffer>();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         public TCPServerNetworkChannel(ANetwork network, Socket socket, uint id) : base(network, id, socket.RemoteEndPoint)
@@ -31,6 +35,8 @@ namespace Fantasy.Network.TCP
             _socket = socket;
             _network = network;
             _socket.NoDelay = true;
+            _sendArgs = new SocketAsyncEventArgs();
+            _sendArgs.Completed += OnSendCompletedHandler;
             _packetParser = PacketParserFactory.CreateServerReadOnlyMemoryPacket(network);
             ReadPipeDataAsync().Coroutine();
             ReceiveSocketAsync().Coroutine();
@@ -66,7 +72,9 @@ namespace Fantasy.Network.TCP
                 _socket.Close();
             }
 
+            _sendBuffers.Clear();
             _packetParser.Dispose();
+            _isSending = false;
         }
 
         #region ReceiveSocket
@@ -206,34 +214,57 @@ namespace Fantasy.Network.TCP
 
         public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
         {
-            Send(_packetParser.Pack(ref rpcId, ref routeId, memoryStream, message)).Coroutine();
-        }
+            _sendBuffers.Enqueue(_packetParser.Pack(ref rpcId, ref routeId, memoryStream, message));
 
-        private async FTask Send(MemoryStreamBuffer memoryStream)
+            if (!_isSending)
+            {
+                Send();
+            }
+        }
+        
+        private void Send()
         {
-            try
+            if (_isSending || IsDisposed)
             {
-                await _socket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position), SocketFlags.None);
+                return;
             }
-            catch (SocketException)
+            
+            _isSending = true;
+            
+            while (_isSending)
             {
-                // 一般发生在地方Socket断开时出现，所以也额可以忽略。
-                Dispose();
-            }
-            catch (OperationCanceledException)
-            {
-                // 取消操作，可以忽略这个异常。这个属于正常逻辑
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-            finally
-            {
-                if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+                if (!_sendBuffers.TryDequeue(out var memoryStreamBuffer))
                 {
-                    _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+                    _isSending = false;
+                    return;
                 }
+                _sendArgs.UserToken = memoryStreamBuffer;
+                _sendArgs.SetBuffer(memoryStreamBuffer.GetBuffer(), 0, (int)memoryStreamBuffer.Position);
+                if (!_socket.SendAsync(_sendArgs))
+                {
+                    OnSendCompletedHandler(null, _sendArgs);
+                }
+            }
+        }
+        
+        private void OnSendCompletedHandler(object sender, SocketAsyncEventArgs asyncEventArgs)
+        {
+            if (asyncEventArgs.SocketError != SocketError.Success || asyncEventArgs.BytesTransferred == 0)
+            {
+                // 一般是网络或对方断开产生、这里不用处理，因为会有专门的地方处理。
+                return;
+            }
+
+            var memoryStream = (MemoryStreamBuffer)asyncEventArgs.UserToken;
+            
+            if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+            {
+                _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+            }
+            
+            if (_sendBuffers.Count > 0)
+            {
+                Send();
             }
         }
 

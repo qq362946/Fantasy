@@ -18,6 +18,5 @@ namespace Fantasy
             Scene = scene;
         }
     }
+
 }
-
-

@@ -19,6 +19,15 @@ message G2C_TestResponse // IResponse
 {
 	string Tag = 1;
 }
+message C2G_TestRequestPushMessage // IMessage
+{
+
+}
+/// Gate服务器推送一个消息给客户端
+message G2C_PushMessage // IMessage
+{
+	string Tag = 1;
+}
 message C2G_CreateAddressableRequest // IRequest,G2C_CreateAddressableResponse
 {
 
@@ -73,6 +82,16 @@ message M2C_MoveToMapResponse // IAddressableRouteResponse
 }
 /// 发送一个消息给Gate，让Gate发送一个Addressable消息给MAP
 message C2G_SendAddressableToMap // IMessage
+{
+	string Tag = 1;
+}
+/// 发送一个消息给Chat，让Chat服务器主动推送一个RouteMessage消息给客户端
+message C2Chat_TestRequestPushMessage // ICustomRouteMessage,ChatRoute
+{
+
+}
+/// Chat服务器主动推送一个消息给客户端
+message Chat2C_PushMessage // ICustomRouteMessage,ChatRoute
 {
 	string Tag = 1;
 }

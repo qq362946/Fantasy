@@ -50,7 +50,7 @@ namespace Fantasy.Helper
         /// </summary>
         /// <param name="d">要转换的日期时间。</param>
         /// <returns>转换后的毫秒数。</returns>
-        public static long Transition(DateTime d)
+        public static long Transition(this DateTime d)
         {
             return (d.Ticks - Epoch) / 10000;
         }
@@ -60,7 +60,7 @@ namespace Fantasy.Helper
         /// </summary>
         /// <param name="timeStamp">要转换的毫秒数。</param>
         /// <returns>转换后的日期时间。</returns>
-        public static DateTime Transition(long timeStamp)
+        public static DateTime Transition(this long timeStamp)
         {
             return Dt1970.AddTicks(timeStamp);
         }
@@ -70,7 +70,7 @@ namespace Fantasy.Helper
         /// </summary>
         /// <param name="timeStamp">要转换的毫秒数。</param>
         /// <returns>转换后的本地时间的日期时间。</returns>
-        public static DateTime TransitionLocal(long timeStamp)
+        public static DateTime TransitionLocal(this long timeStamp)
         {
             return Dt1970.AddTicks(timeStamp).ToLocalTime();
         }

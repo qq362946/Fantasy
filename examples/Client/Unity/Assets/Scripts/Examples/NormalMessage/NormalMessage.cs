@@ -14,6 +14,7 @@ public class NormalMessage : MonoBehaviour
     public Button ConnectButton;
     public Button SendMessageButton;
     public Button SendRPCMessageButton;
+    public Button PushMessageButton;
     
     private Scene _scene;
     private Session _session;
@@ -41,6 +42,13 @@ public class NormalMessage : MonoBehaviour
         {
             OnSendRPCMessageButtonClick().Coroutine();
         });
+        
+        PushMessageButton.onClick.RemoveAllListeners();
+        PushMessageButton.onClick.AddListener(OnPushMessageButtonClick);
+        
+        SendMessageButton.interactable = false;
+        SendRPCMessageButton.interactable = false;
+        PushMessageButton.interactable = false;
     }
 
     #region Connect
@@ -67,6 +75,7 @@ public class NormalMessage : MonoBehaviour
         ConnectButton.interactable = false;
         SendMessageButton.interactable = true;
         SendRPCMessageButton.interactable = true;
+        PushMessageButton.interactable = true;
     }
 
     private void OnConnectFail()
@@ -75,6 +84,7 @@ public class NormalMessage : MonoBehaviour
         ConnectButton.interactable = true;
         SendMessageButton.interactable = false;
         SendRPCMessageButton.interactable = false;
+        PushMessageButton.interactable = false;
     }
 
     private void OnConnectDisconnect()
@@ -113,6 +123,20 @@ public class NormalMessage : MonoBehaviour
         });
         Text.text = $"收到G2C_TestResponse Tag = {response.Tag}";
         SendRPCMessageButton.interactable = true;
+    }
+
+    #endregion
+
+    #region PushMessageButton
+
+    private void OnPushMessageButtonClick()
+    {
+        PushMessageButton.interactable = false;
+        // 发送消息后，服务器会主动推送一个G2C_PushMessage消息给客户端。
+        // 接收的Handler参考G2C_PushMessageHandler.cs。
+        _session.Send(new C2G_TestRequestPushMessage());
+        
+        PushMessageButton.interactable = true;
     }
 
     #endregion

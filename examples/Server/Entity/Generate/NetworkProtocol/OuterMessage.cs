@@ -77,6 +77,42 @@ namespace Fantasy
 		public uint ErrorCode { get; set; }
 	}
 	[ProtoContract]
+	public partial class C2G_TestRequestPushMessage : AMessage, IMessage, IProto
+	{
+		public static C2G_TestRequestPushMessage Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2G_TestRequestPushMessage>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2G_TestRequestPushMessage>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2G_TestRequestPushMessage; }
+	}
+	/// <summary>
+	///  Gate服务器推送一个消息给客户端
+	/// </summary>
+	[ProtoContract]
+	public partial class G2C_PushMessage : AMessage, IMessage, IProto
+	{
+		public static G2C_PushMessage Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_PushMessage>();
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2C_PushMessage>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_PushMessage; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
+	[ProtoContract]
 	public partial class C2G_CreateAddressableRequest : AMessage, IRequest, IProto
 	{
 		public static C2G_CreateAddressableRequest Create(Scene scene)
@@ -333,6 +369,49 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return OuterOpcode.C2G_SendAddressableToMap; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
+	/// <summary>
+	///  发送一个消息给Chat，让Chat服务器主动推送一个RouteMessage消息给客户端
+	/// </summary>
+	[ProtoContract]
+	public partial class C2Chat_TestRequestPushMessage : AMessage, ICustomRouteMessage, IProto
+	{
+		public static C2Chat_TestRequestPushMessage Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2Chat_TestRequestPushMessage>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2Chat_TestRequestPushMessage>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2Chat_TestRequestPushMessage; }
+		[ProtoIgnore]
+		public int RouteType => Fantasy.RouteType.ChatRoute;
+	}
+	/// <summary>
+	///  Chat服务器主动推送一个消息给客户端
+	/// </summary>
+	[ProtoContract]
+	public partial class Chat2C_PushMessage : AMessage, ICustomRouteMessage, IProto
+	{
+		public static Chat2C_PushMessage Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<Chat2C_PushMessage>();
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<Chat2C_PushMessage>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.Chat2C_PushMessage; }
+		[ProtoIgnore]
+		public int RouteType => Fantasy.RouteType.ChatRoute;
 		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}

@@ -399,8 +399,6 @@ namespace Fantasy.Entitas
         /// <param name="entity">实体对象</param>
         public void StopUpdate(Entity entity)
         {
-            var type = entity.GetType();
-
             if (!_updateQueueDic.Remove(entity.RunTimeId, out var updateQueueInfo))
             {
                 return;
