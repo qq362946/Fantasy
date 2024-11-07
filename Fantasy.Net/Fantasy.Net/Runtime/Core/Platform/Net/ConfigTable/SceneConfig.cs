@@ -2,9 +2,11 @@
 using System.Collections.Concurrent;
 using System.Runtime.Serialization;
 using Fantasy.DataStructure.Collection;
+using Fantasy.DataStructure.Dictionary;
 using Fantasy.Helper;
 using Fantasy.IdFactory;
 using Newtonsoft.Json;
+#pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8601 // Possible null reference assignment.
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -19,12 +21,17 @@ namespace Fantasy.Platform.Net
 		/// 存放所有SceneConfig信息
 		/// </summary>
 		public List<SceneConfig> List;
-		[JsonIgnore] [IgnoreDataMember]
+		[JsonIgnore] 
+		[IgnoreDataMember]
 		private readonly ConcurrentDictionary<uint, SceneConfig> _configs = new ConcurrentDictionary<uint, SceneConfig>();
-		[JsonIgnore] [IgnoreDataMember]
+		[JsonIgnore] 
+		[IgnoreDataMember]
 		private readonly OneToManyList<int, SceneConfig> _sceneConfigBySceneType = new OneToManyList<int, SceneConfig>();
-		[JsonIgnore] [IgnoreDataMember]
+		[JsonIgnore] 
+		[IgnoreDataMember]
 		private readonly OneToManyList<uint, SceneConfig> _sceneConfigByProcess = new OneToManyList<uint, SceneConfig>();
+		[JsonIgnore] [IgnoreDataMember]
+		private readonly Dictionary<int, Dictionary<int, List<SceneConfig>>> _worldSceneTypes = new Dictionary<int, Dictionary<int, List<SceneConfig>>>();
 		/// <summary>
 		/// 获得SceneConfigData的实例
 		/// </summary>
@@ -42,6 +49,21 @@ namespace Fantasy.Platform.Net
 				Instance._configs.TryAdd(config.Id, config);
 				Instance._sceneConfigByProcess.Add(config.ProcessConfigId, config);
 				Instance._sceneConfigBySceneType.Add(config.SceneType, config);
+				
+				var configWorldConfigId = (int)config.WorldConfigId;
+				
+				if (!Instance._worldSceneTypes.TryGetValue(configWorldConfigId, out var sceneConfigDic))
+				{
+					sceneConfigDic = new Dictionary<int, List<SceneConfig>>();
+				}
+
+				if (!sceneConfigDic.TryGetValue(config.SceneType, out var sceneConfigList))
+				{
+					sceneConfigList = new List<SceneConfig>();
+					sceneConfigDic.Add(config.SceneType, sceneConfigList);
+				}
+				
+				sceneConfigList.Add(config);
 			}
 		}
 
@@ -90,6 +112,27 @@ namespace Fantasy.Platform.Net
 		public List<SceneConfig> GetSceneBySceneType(int sceneType)
 		{
 			return !_sceneConfigBySceneType.TryGetValue(sceneType, out var list) ? new List<SceneConfig>() : list;
+		}
+
+		/// <summary>
+		/// 获得SceneConfig
+		/// </summary>
+		/// <param name="world"></param>
+		/// <param name="sceneType"></param>
+		/// <returns></returns>
+		public List<SceneConfig> GetSceneBySceneType(int world, int sceneType)
+		{
+			if (!_worldSceneTypes.TryGetValue(world, out var sceneConfigDic))
+			{
+				return new List<SceneConfig>();
+			}
+
+			if (!sceneConfigDic.TryGetValue(sceneType, out var list))
+			{
+				return new List<SceneConfig>();
+			}
+
+			return list;
 		}
 	}
 

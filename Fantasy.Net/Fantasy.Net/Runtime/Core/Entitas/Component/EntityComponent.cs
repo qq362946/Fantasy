@@ -64,7 +64,7 @@ namespace Fantasy.Entitas
         private readonly Queue<FrameUpdateQueueInfo> _frameUpdateQueue = new Queue<FrameUpdateQueueInfo>();
         private readonly Dictionary<long, UpdateQueueInfo> _updateQueueDic = new Dictionary<long, UpdateQueueInfo>();
 
-        public async FTask<EntityComponent> Initialize()
+        internal async FTask<EntityComponent> Initialize()
         {
             await AssemblySystem.Register(this);
             return this;

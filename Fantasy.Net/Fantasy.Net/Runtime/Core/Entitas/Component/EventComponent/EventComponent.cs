@@ -30,7 +30,7 @@ namespace Fantasy.Event
         private readonly OneToManyList<long, EventCache> _assemblyEvents = new();
         private readonly OneToManyList<long, EventCache> _assemblyAsyncEvents = new();
 
-        public async FTask<EventComponent> Initialize()
+        internal async FTask<EventComponent> Initialize()
         {
             await AssemblySystem.Register(this);
             return this;

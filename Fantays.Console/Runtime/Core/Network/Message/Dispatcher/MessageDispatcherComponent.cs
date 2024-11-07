@@ -58,7 +58,7 @@ namespace Fantasy.Network.Interface
         
         #region Initialize
 
-        public async FTask<MessageDispatcherComponent> Initialize()
+        internal async FTask<MessageDispatcherComponent> Initialize()
         {
             _receiveRouteMessageLock = Scene.CoroutineLockComponent.Create(GetType().TypeHandle.Value.ToInt64());
             await AssemblySystem.Register(this);

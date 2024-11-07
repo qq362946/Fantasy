@@ -33,7 +33,7 @@ namespace Fantasy.Timer
         /// </summary>
         public TimerSchedulerNetUnity Unity { get; private set; }
 #endif
-        public TimerComponent Initialize()
+        internal TimerComponent Initialize()
         {
             Net = new TimerSchedulerNet(Scene);
 #if FANTASY_UNITY
