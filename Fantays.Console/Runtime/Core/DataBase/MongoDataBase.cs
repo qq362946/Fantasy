@@ -1,6 +1,7 @@
 #if FANTASY_NET
 using System.Linq.Expressions;
 using Fantasy.Async;
+using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas;
 using Fantasy.Helper;
 using Fantasy.Serialize;
@@ -395,7 +396,7 @@ namespace Fantasy.DataBase
         /// <param name="id">文档 ID。</param>
         /// <param name="collectionNames">要查询的集合名称列表。</param>
         /// <param name="result">查询结果存储列表。</param>
-        public async FTask Query(long id, List<string> collectionNames, List<Entity> result)
+        public async FTask Query(long id, List<string>? collectionNames, List<Entity> result)
         {
             using (await _dataBaseLock.Wait(id))
             {
@@ -521,7 +522,7 @@ namespace Fantasy.DataBase
         /// <param name="transactionSession">事务会话对象。</param>
         /// <param name="entity">要保存的实体对象。</param>
         /// <param name="collection">集合名称。</param>
-        public async FTask Save<T>(object transactionSession, T entity, string collection = null) where T : Entity
+        public async FTask Save<T>(object transactionSession, T? entity, string collection = null) where T : Entity
         {
             if (entity == null)
             {
@@ -545,31 +546,7 @@ namespace Fantasy.DataBase
         /// <typeparam name="T">实体类型。</typeparam>
         /// <param name="entity">要保存的实体对象。</param>
         /// <param name="collection">集合名称。</param>
-        public async FTask Save<T>(T entity, string collection = null) where T : Entity, new()
-        {
-            if (entity == null)
-            {
-                Log.Error($"save entity is null: {typeof(T).Name}");
-
-                return;
-            }
-
-            var clone = _serializer.Clone(entity);
-
-            using (await _dataBaseLock.Wait(clone.Id))
-            {
-                await GetCollection(collection ?? clone.GetType().Name).ReplaceOneAsync(d => d.Id == clone.Id, clone,
-                    new ReplaceOptions { IsUpsert = true });
-            }
-        }
-
-        /// <summary>
-        /// 保存实体对象到数据库（加锁）。
-        /// </summary>
-        /// <typeparam name="T">实体类型。</typeparam>
-        /// <param name="entity">要保存的实体对象。</param>
-        /// <param name="collection">集合名称。</param>
-        private async FTask SaveBase<T>(T entity, string collection = null) where T : Entity
+        public async FTask Save<T>(T? entity, string collection = null) where T : Entity, new()
         {
             if (entity == null)
             {
@@ -592,19 +569,24 @@ namespace Fantasy.DataBase
         /// </summary>
         /// <param name="id">文档 ID。</param>
         /// <param name="entities">要保存的实体对象列表。</param>
-        public async FTask Save(long id, List<Entity> entities)
+        public async FTask Save(long id, List<Entity>? entities)
         {
-            if (entities == null)
+            if (entities == null || entities.Count == 0)
             {
                 Log.Error("save entity is null");
                 return;
             }
 
-            var clones = _serializer.Clone(entities);
+            using var listPool = ListPool<Entity>.Create();
+            
+            foreach (var entity in entities)
+            {
+                listPool.Add(_serializer.Clone(entity)); 
+            }
 
             using (await _dataBaseLock.Wait(id))
             {
-                foreach (Entity clone in clones)
+                foreach (var clone in listPool)
                 {
                     try
                     {
@@ -758,7 +740,7 @@ namespace Fantasy.DataBase
         /// 2 : Builders.IndexKeys.Descending(d=>d.Id).Ascending(d=>d.Name)
         /// 3 : Builders.IndexKeys.Descending(d=>d.Id),Builders.IndexKeys.Descending(d=>d.Name)
         /// </code>
-        public async FTask CreateIndex<T>(string collection, params object[] keys) where T : Entity
+        public async FTask CreateIndex<T>(string collection, params object[]? keys) where T : Entity
         {
             if (keys == null || keys.Length <= 0)
             {
@@ -782,7 +764,7 @@ namespace Fantasy.DataBase
         /// </summary>
         /// <typeparam name="T">实体类型。</typeparam>
         /// <param name="keys">索引键定义。</param>
-        public async FTask CreateIndex<T>(params object[] keys) where T : Entity
+        public async FTask CreateIndex<T>(params object[]? keys) where T : Entity
         {
             if (keys == null)
             {

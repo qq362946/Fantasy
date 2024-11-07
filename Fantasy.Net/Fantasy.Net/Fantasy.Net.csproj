@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Fantasy-Net</PackageId>
-        <PackageVersion>2024.1.16</PackageVersion>
+        <PackageVersion>2024.1.17</PackageVersion>
         <Title>Fantasy-Net</Title>
         <Authors>qq362946</Authors>
         <owners>qq362946</owners>
@@ -39,10 +39,10 @@
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
       <FrameworkReference Include="Microsoft.AspNetCore.App"/>
-      <PackageReference Include="MongoDB.Bson" Version="2.29.0" />
-      <PackageReference Include="MongoDB.Driver" Version="2.29.0" />
+      <PackageReference Include="MongoDB.Bson" Version="3.0.0" />
+      <PackageReference Include="MongoDB.Driver" Version="3.0.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="protobuf-net" Version="3.2.30" />
+      <PackageReference Include="protobuf-net" Version="3.2.45" />
       <PackageReference Include="System.IO.Pipelines" Version="8.0.0" />
     </ItemGroup>
 

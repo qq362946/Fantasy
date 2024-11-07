@@ -1,8 +1,5 @@
 using Fantasy.Async;
-using Fantasy.Entitas;
-using Fantasy.Entitas.Interface;
 using Fantasy.Event;
-using MongoDB.Driver;
 
 namespace Fantasy;
 
@@ -12,7 +9,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 
     /// <summary>
     /// Handles the OnCreateScene event.
-    /// </summary>
+    /// </summary> 
     /// <param name="self">The OnCreateScene object.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
     protected override async FTask Handler(OnCreateScene self)
