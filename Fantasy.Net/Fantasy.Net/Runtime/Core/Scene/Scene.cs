@@ -121,6 +121,13 @@ namespace Fantasy
         /// Scene下的协程锁组件
         /// </summary>
         public CoroutineLockComponent CoroutineLockComponent { get; private set; }
+        // /// <summary>
+        // /// Scene下的网络线程组件
+        // /// </summary>
+        // internal NetworkThreadComponent NetworkThreadComponent  { get; private set; }
+        /// <summary>
+        /// Scene下的网络消息派发组件
+        /// </summary>
         internal MessageDispatcherComponent MessageDispatcherComponent { get; private set; }
         /// <summary>
         /// Scene下的内网消息发送组件
@@ -148,6 +155,7 @@ namespace Fantasy
             CoroutineLockComponent = AddComponent<CoroutineLockComponent>(false).Initialize();
             MessageDispatcherComponent = await AddComponent<MessageDispatcherComponent>(false).Initialize();
             NetworkMessagingComponent = AddComponent<NetworkMessagingComponent>(false);
+            // NetworkThreadComponent = AddComponent<NetworkThreadComponent>().Initialize();
 #if FANTASY_NET
             SingleCollectionComponent = await AddComponent<SingleCollectionComponent>(false).Initialize();
 #endif
@@ -166,6 +174,7 @@ namespace Fantasy
             CoroutineLockComponent = scene.CoroutineLockComponent;
             MessageDispatcherComponent = scene.MessageDispatcherComponent;
             NetworkMessagingComponent = scene.NetworkMessagingComponent;
+            // NetworkThreadComponent = scene.NetworkThreadComponent;
 #if FANTASY_NET
             SingleCollectionComponent = scene.SingleCollectionComponent;
 #endif

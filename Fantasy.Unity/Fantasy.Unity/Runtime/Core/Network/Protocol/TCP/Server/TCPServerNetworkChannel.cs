@@ -231,19 +231,36 @@ namespace Fantasy.Network.TCP
             
             _isSending = true;
             
-            while (_isSending)
+            while (_sendBuffers.Count > 0)
             {
-                if (!_sendBuffers.TryDequeue(out var memoryStreamBuffer))
+                var memoryStreamBuffer = _sendBuffers.Dequeue();
+                _sendArgs.UserToken = memoryStreamBuffer;
+                _sendArgs.SetBuffer(new ArraySegment<byte>(memoryStreamBuffer.GetBuffer(), 0, (int)memoryStreamBuffer.Position));
+
+                try
+                {
+                    if (_socket.SendAsync(_sendArgs))
+                    {
+                        break;
+                    }
+
+                    ReturnMemoryStream(memoryStreamBuffer);
+                }
+                catch
                 {
                     _isSending = false;
                     return;
                 }
-                _sendArgs.UserToken = memoryStreamBuffer;
-                _sendArgs.SetBuffer(memoryStreamBuffer.GetBuffer(), 0, (int)memoryStreamBuffer.Position);
-                if (!_socket.SendAsync(_sendArgs))
-                {
-                    OnSendCompletedHandler(null, _sendArgs);
-                }
+            }
+            
+            _isSending = false;
+        }
+        
+        private void ReturnMemoryStream(MemoryStreamBuffer memoryStream)
+        {
+            if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+            {
+                _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
             }
         }
         
@@ -251,21 +268,25 @@ namespace Fantasy.Network.TCP
         {
             if (asyncEventArgs.SocketError != SocketError.Success || asyncEventArgs.BytesTransferred == 0)
             {
-                // 一般是网络或对方断开产生、这里不用处理，因为会有专门的地方处理。
+                _isSending = false;
                 return;
             }
 
-            var memoryStream = (MemoryStreamBuffer)asyncEventArgs.UserToken;
+            var memoryStreamBuffer = (MemoryStreamBuffer)asyncEventArgs.UserToken;
             
-            if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+            Scene.ThreadSynchronizationContext.Post(() =>
             {
-                _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
-            }
-            
-            if (_sendBuffers.Count > 0)
-            {
-                Send();
-            }
+                ReturnMemoryStream(memoryStreamBuffer);
+                
+                if (_sendBuffers.Count > 0)
+                {
+                    Send();
+                }
+                else
+                {
+                    _isSending = false;
+                }
+            });
         }
 
         #endregion

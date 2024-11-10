@@ -138,9 +138,9 @@ namespace Fantasy.Network.KCP
                 try
                 {
                     var memory = _pipe.Writer.GetMemory(8192);
-                    var socketReceiveFromResult = await _socket.ReceiveFromAsync(memory, SocketFlags.None,
-                        remoteEndPoint, _cancellationTokenSource.Token);
+                    var socketReceiveFromResult = await _socket.ReceiveFromAsync(memory, SocketFlags.None, remoteEndPoint, _cancellationTokenSource.Token);
                     var receivedBytes = socketReceiveFromResult.ReceivedBytes;
+                    
                     if (receivedBytes == 5)
                     {
                         switch ((KcpHeader)memory.Span[0])

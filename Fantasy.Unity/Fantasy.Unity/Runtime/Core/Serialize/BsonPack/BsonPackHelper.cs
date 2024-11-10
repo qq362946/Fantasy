@@ -275,7 +275,7 @@ namespace Fantasy.Serialize
         }
 
         /// <summary>
-        /// 
+        /// 序列化
         /// </summary>
         /// <param name="object"></param>
         /// <param name="buffer"></param>

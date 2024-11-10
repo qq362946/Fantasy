@@ -13,6 +13,7 @@ using Fantasy.Helper;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser;
 using Fantasy.Serialize;
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -122,7 +123,7 @@ namespace Fantasy.Network.TCP
             _socket.NoDelay = true;
             _socket.SetSocketBufferToOsLimit();
             _sendArgs = new SocketAsyncEventArgs();
-            _sendArgs.Completed += OnSendCompletedHandler;
+            _sendArgs.Completed += OnSendCompleted;
             var outArgs = new SocketAsyncEventArgs
             {
                 RemoteEndPoint = _remoteEndPoint
@@ -169,7 +170,7 @@ namespace Fantasy.Network.TCP
             ReadPipeDataAsync().Coroutine();
             ReceiveSocketAsync().Coroutine();
         }
-        
+
         #region ReceiveSocket
 
         private async FTask ReceiveSocketAsync()
@@ -185,12 +186,11 @@ namespace Fantasy.Network.TCP
                      MemoryMarshal.TryGetArray(memory, out ArraySegment<byte> arraySegment);
                      var result = await _socket.ReceiveFromAsync(arraySegment, SocketFlags.None, _remoteEndPoint);
                      _pipe.Writer.Advance(result.ReceivedBytes);
-                     await _pipe.Writer.FlushAsync();
 #else
                     var count = await _socket.ReceiveAsync(memory, SocketFlags.None, _cancellationTokenSource.Token);
                     _pipe.Writer.Advance(count);
-                    await _pipe.Writer.FlushAsync();
 #endif
+                    await _pipe.Writer.FlushAsync();
                 }
                 catch (SocketException)
                 {
@@ -225,7 +225,7 @@ namespace Fantasy.Network.TCP
             while (!_cancellationTokenSource.IsCancellationRequested)
             {
                 ReadResult result = default;
-            
+                
                 try
                 {
                     result = await pipeReader.ReadAsync(_cancellationTokenSource.Token);
@@ -325,41 +325,61 @@ namespace Fantasy.Network.TCP
             
             _isSending = true;
             
-            while (_isSending)
+            while (_sendBuffers.Count > 0)
             {
-                if (!_sendBuffers.TryDequeue(out var memoryStreamBuffer))
+                var memoryStreamBuffer = _sendBuffers.Dequeue();
+                _sendArgs.UserToken = memoryStreamBuffer;
+                _sendArgs.SetBuffer(new ArraySegment<byte>(memoryStreamBuffer.GetBuffer(), 0, (int)memoryStreamBuffer.Position));
+
+                try
+                {
+                    if (_socket.SendAsync(_sendArgs))
+                    {
+                        break;
+                    }
+
+                    ReturnMemoryStream(memoryStreamBuffer);
+                }
+                catch
                 {
                     _isSending = false;
                     return;
                 }
-                _sendArgs.UserToken = memoryStreamBuffer;
-                _sendArgs.SetBuffer(memoryStreamBuffer.GetBuffer(), 0, (int)memoryStreamBuffer.Position);
-                if (!_socket.SendAsync(_sendArgs))
-                {
-                    OnSendCompletedHandler(null, _sendArgs);
-                }
             }
+            
+            _isSending = false;
         }
 
-        private void OnSendCompletedHandler(object sender, SocketAsyncEventArgs asyncEventArgs)
+        private void ReturnMemoryStream(MemoryStreamBuffer memoryStream)
         {
-            if (asyncEventArgs.SocketError != SocketError.Success || asyncEventArgs.BytesTransferred == 0)
-            {
-                // 一般是网络或对方断开产生、这里不用处理，因为会有专门的地方处理。
-                return;
-            }
-
-            var memoryStream = (MemoryStreamBuffer)asyncEventArgs.UserToken;
-            
             if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
             {
                 MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
             }
-            
-            if (_sendBuffers.Count > 0)
+        }
+
+        private void OnSendCompleted(object sender, SocketAsyncEventArgs asyncEventArgs)
+        {
+            if (asyncEventArgs.SocketError != SocketError.Success || asyncEventArgs.BytesTransferred == 0)
             {
-                Send();
+                _isSending = false;
+                return;
             }
+
+            var memoryStreamBuffer = (MemoryStreamBuffer)asyncEventArgs.UserToken;
+            Scene.ThreadSynchronizationContext.Post(() =>
+            {
+                ReturnMemoryStream(memoryStreamBuffer);
+                
+                if (_sendBuffers.Count > 0)
+                {
+                    Send();
+                }
+                else
+                {
+                    _isSending = false;
+                }
+            });
         }
 
         #endregion
