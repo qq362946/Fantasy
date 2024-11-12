@@ -24,6 +24,8 @@ namespace Fantasy.Async
         /// 创建一个空的任务
         /// </summary>
         public static FTaskCompleted CompletedTask => new FTaskCompleted();
+        
+        private FTask() { }
 
         /// <summary>
         /// 创建一个任务
@@ -43,18 +45,9 @@ namespace Fantasy.Async
             {
                 fTask = new FTask();
             }
-            else
-            {
-                fTask.FTaskType = FTaskType.Task;
-            }
 
             fTask._isPool = true;
             return fTask;
-        }
-
-        private FTask()
-        {
-            FTaskType = FTaskType.Task;
         }
 
         private void Return()
@@ -65,8 +58,6 @@ namespace Fantasy.Async
             }
 
             _callBack = null;
-            UserToKen = null;
-            FTaskType = FTaskType.Task;
             _status = STaskStatus.Pending;
             Caches.Enqueue(this);
         }
@@ -107,10 +98,7 @@ namespace Fantasy.Async
             return fTask;
         }
         
-        private FTask()
-        {
-            FTaskType = FTaskType.Task;
-        }
+        private FTask() { }
 
         private void Return()
         {
@@ -120,8 +108,6 @@ namespace Fantasy.Async
             }
             
             _callBack = null;
-            UserToKen = null;
-            FTaskType = FTaskType.Task;
             _status = STaskStatus.Pending;
             Caches.Enqueue(this);
         }

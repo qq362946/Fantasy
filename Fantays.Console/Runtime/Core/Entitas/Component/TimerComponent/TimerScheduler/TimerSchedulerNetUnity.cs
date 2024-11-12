@@ -84,8 +84,8 @@ namespace Fantasy.Timer
                 {
                     case TimerType.OnceWaitTimer:
                     {
-                        var tcs = timerAction.Callback as FTask;
-                        tcs.SetResult();
+                        var tcs = (FTask<bool>)timerAction.Callback;
+                        tcs.SetResult(true);
                         break;
                     }
                     case TimerType.OnceTimer:
@@ -134,36 +134,41 @@ namespace Fantasy.Timer
         /// <param name="time">等待的时间长度。</param>
         /// <param name="cancellationToken">可选的取消令牌。</param>
         /// <returns>等待是否成功。</returns>
-        public async FTask WaitAsync(long time, FCancellationToken cancellationToken = null)
+        public async FTask<bool> WaitAsync(long time, FCancellationToken cancellationToken = null)
         {
             if (time <= 0)
             {
-                return;
+                return true;
             }
             
             var now = Now();
             var timerId = GetId;
-            var tcs = FTask.Create();
+            var tcs = FTask<bool>.Create();
             var timerAction = new TimerAction(timerId, TimerType.OnceWaitTimer, now, time, tcs);
-            AddTimer(ref timerAction);
-            // 定义取消操作的方法
+            
+            
             void CancelActionVoid()
             {
                 if (Remove(timerId))
                 {
-                    tcs.SetResult();
+                    tcs.SetResult(false);
                 }
             }
+            
+            bool result;
             
             try
             {
                 cancellationToken?.Add(CancelActionVoid);
-                await tcs;
+                AddTimer(ref timerAction);
+                result =await tcs;
             }
             finally
             {
                 cancellationToken?.Remove(CancelActionVoid);
             }
+            
+            return result;
         }
         
         /// <summary>
@@ -172,51 +177,50 @@ namespace Fantasy.Timer
         /// <param name="tillTime">等待的目标时间。</param>
         /// <param name="cancellationToken">可选的取消令牌。</param>
         /// <returns>等待是否成功。</returns>
-        public async FTask WaitTillAsync(long tillTime, FCancellationToken cancellationToken = null)
+        public async FTask<bool> WaitTillAsync(long tillTime, FCancellationToken cancellationToken = null)
         {
             var now = Now();
 
             if (now >= tillTime)
             {
-                return;
+                return true;
             }
 
             var timerId = GetId;
-            var tcs = FTask.Create();
+            var tcs = FTask<bool>.Create();
             var timerAction = new TimerAction(timerId, TimerType.OnceWaitTimer, now, tillTime - now, tcs);
-            AddTimer(ref timerAction);
             
-            // 定义取消操作的方法
             void CancelActionVoid()
             {
                 if (Remove(timerId))
                 {
-                    tcs.SetResult();
+                    tcs.SetResult(false);
                 }
             }
+            
+            bool result;
             
             try
             {
                 cancellationToken?.Add(CancelActionVoid);
-                await tcs;
+                AddTimer(ref timerAction);
+                result = await tcs;
             }
             finally
             {
                 cancellationToken?.Remove(CancelActionVoid);
             }
+            
+            return result;
         }
 
         /// <summary>
         /// 异步等待一帧时间。
         /// </summary>
         /// <returns>等待是否成功。</returns>
-        public FTask WaitFrameAsync(FCancellationToken cancellationToken = null)
+        public async FTask WaitFrameAsync(FCancellationToken cancellationToken = null)
         {
-#if FANTASY_NET
-            return WaitAsync(100, cancellationToken);
-#else
-            return WaitAsync(0, cancellationToken);
-#endif
+            await WaitAsync(1, cancellationToken);
         }
 
         /// <summary>
@@ -228,7 +232,6 @@ namespace Fantasy.Timer
         public long OnceTimer(long time, Action action)
         {
             var now = Now();
-            
             var timerId = GetId;
             var timerAction = new TimerAction(timerId, TimerType.OnceTimer, now, time, action);
             AddTimer(ref timerAction);
@@ -297,11 +300,7 @@ namespace Fantasy.Timer
         /// <returns></returns>
         public long FrameTimer(Action action)
         {
-#if FANTASY_NET
-            return RepeatedTimerInner(100, action);
-#else
-            return RepeatedTimerInner(0, action);
-#endif
+            return RepeatedTimerInner(1, action);
         }
 
         /// <summary>

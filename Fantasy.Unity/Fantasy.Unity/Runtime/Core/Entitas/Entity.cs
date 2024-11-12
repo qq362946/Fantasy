@@ -545,6 +545,51 @@ namespace Fantasy.Entitas
 
         #endregion
 
+        #region HasComponent
+
+        /// <summary>
+        /// 当前实体上是否有指定类型的组件
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public bool HasComponent<T>() where T : Entity, new()
+        {
+            return HasComponent(typeof(T));
+        }
+
+        /// <summary>
+        /// 当前实体上是否有指定类型的组件
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public bool HasComponent(Type type)
+        {
+            if (_tree == null)
+            {
+                return false;
+            }
+            
+            return _tree.ContainsKey(Scene.EntityComponent.GetHashCode(type));
+        }
+
+        /// <summary>
+        /// 当前实体上是否有指定类型的组件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public bool HasComponent<T>(long id) where T : Entity, ISupportedMultiEntity, new()
+        {
+            if (_multi == null)
+            {
+                return false;
+            }
+
+            return _multi.ContainsKey(id);
+        }
+
+        #endregion
+
         #region GetComponent
 
         /// <summary>

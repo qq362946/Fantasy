@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public struct TestEvent
 {
     public int Age;
+    public Scene Scene;
 }
 
 public class TestEventEntity : Entity
@@ -101,12 +102,14 @@ public class EventSystem : MonoBehaviour
         // 发送一个同步的事件
         _scene.EventComponent.Publish(new TestEvent()
         {
-            Age = 1
+            Age = 1,
+            Scene = _scene
         });
         // 发送一个异步的事件
         await _scene.EventComponent.PublishAsync(new TestEvent()
         {
-            Age = 1
+            Age = 1,
+            Scene = _scene
         });
     }
     

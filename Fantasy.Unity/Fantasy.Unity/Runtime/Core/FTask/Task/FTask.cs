@@ -21,13 +21,11 @@ namespace Fantasy.Async
     }
     
     [AsyncMethodBuilder(typeof(AsyncFTaskMethodBuilder))]
-    public sealed partial class FTask : ICriticalNotifyCompletion, IFTask
+    public sealed partial class FTask : ICriticalNotifyCompletion
     {
         private Action _callBack;
         private ExceptionDispatchInfo _exception;
         private STaskStatus _status = STaskStatus.Pending;
-        public FTaskType FTaskType { get; set; }
-        public object UserToKen { get; set; }
         public bool IsCompleted
         {
             [DebuggerHidden]
@@ -50,24 +48,7 @@ namespace Fantasy.Async
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Coroutine()
         {
-            this.InnerSetUserToken(null);
             InnerCoroutine().Coroutine();
-        }
-        
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Coroutine(object userToken)
-        {
-            this.InnerSetUserToken(userToken);
-            InnerCoroutine().Coroutine();
-        }
-        
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public async FTask SetUserToKen(object userToken)
-        {
-            this.InnerSetUserToken(userToken);
-            await this;
         }
         
         [DebuggerHidden]
@@ -159,14 +140,12 @@ namespace Fantasy.Async
     }
 
     [AsyncMethodBuilder(typeof(AsyncFTaskMethodBuilder<>))]
-    public sealed partial class FTask<T> : ICriticalNotifyCompletion, IFTask
+    public sealed partial class FTask<T> : ICriticalNotifyCompletion
     {
         private T _value;
         private Action _callBack;
         private ExceptionDispatchInfo _exception;
         private STaskStatus _status = STaskStatus.Pending;
-        public FTaskType FTaskType { get; set; }
-        public object UserToKen { get; set; }
         public bool IsCompleted
         {
             [DebuggerHidden]
@@ -189,24 +168,7 @@ namespace Fantasy.Async
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Coroutine()
         {
-            this.InnerSetUserToken(null);
             InnerCoroutine().Coroutine();
-        }
-        
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Coroutine(object userToken)
-        {
-            this.InnerSetUserToken(userToken);
-            InnerCoroutine().Coroutine();
-        }
-        
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public async FTask<T> SetUserToKen(object userToken)
-        {
-            this.InnerSetUserToken(userToken);
-            return await this;
         }
         
         [DebuggerHidden]

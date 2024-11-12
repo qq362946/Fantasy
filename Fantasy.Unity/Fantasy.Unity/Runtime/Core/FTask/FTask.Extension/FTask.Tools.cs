@@ -2,33 +2,36 @@
 
 using System;
 using System.Collections.Generic;
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 namespace Fantasy.Async
 {
     public partial class FTask
     {
         #region NetTimer
-        
+
         /// <summary>
         /// 异步等待指定时间
         /// </summary>
         /// <param name="scene"></param>
         /// <param name="time"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static FTask Wait(Scene scene, long time)
+        public static FTask<bool> Wait(Scene scene, long time, FCancellationToken cancellationToken = null)
         {
-            return scene.TimerComponent.Net.WaitAsync(time);
+            return scene.TimerComponent.Net.WaitAsync(time, cancellationToken);
         }
-        
+
         /// <summary>
         /// 异步等待直到指定时间
         /// </summary>
         /// <param name="scene"></param>
         /// <param name="time"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static FTask WaitTill(Scene scene, long time)
+        public static FTask<bool> WaitTill(Scene scene, long time, FCancellationToken cancellationToken = null)
         {
-            return scene.TimerComponent.Net.WaitTillAsync(time);
+            return scene.TimerComponent.Net.WaitTillAsync(time, cancellationToken);
         }
         
         /// <summary>
@@ -137,21 +140,23 @@ namespace Fantasy.Async
         /// </summary>
         /// <param name="scene"></param>
         /// <param name="time"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static FTask UnityWait(Scene scene, long time)
+        public static FTask<bool> UnityWait(Scene scene, long time, FCancellationToken cancellationToken = null)
         {
-            return scene.TimerComponent.Unity.WaitAsync(time);
+            return scene.TimerComponent.Unity.WaitAsync(time, cancellationToken);
         }
-        
+
         /// <summary>
         /// 异步等待直到指定时间。（使用Unity的Time时间）
         /// </summary>
         /// <param name="scene"></param>
         /// <param name="time"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static FTask UnityWaitTill(Scene scene, long time)
+        public static FTask<bool> UnityWaitTill(Scene scene, long time, FCancellationToken cancellationToken = null)
         {
-            return scene.TimerComponent.Unity.WaitTillAsync(time);
+            return scene.TimerComponent.Unity.WaitTillAsync(time, cancellationToken);
         }
         
         /// <summary>

@@ -55,6 +55,7 @@ namespace Fantasy.Platform.Net
 				if (!Instance._worldSceneTypes.TryGetValue(configWorldConfigId, out var sceneConfigDic))
 				{
 					sceneConfigDic = new Dictionary<int, List<SceneConfig>>();
+					Instance._worldSceneTypes.Add(configWorldConfigId, sceneConfigDic);
 				}
 
 				if (!sceneConfigDic.TryGetValue(config.SceneType, out var sceneConfigList))

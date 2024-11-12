@@ -56,7 +56,7 @@ internal sealed class CommandLineOptions
     /// <summary>
     /// 会话空闲检查超时时间。
     /// </summary>
-    [Option('t', "SessionIdleCheckerTimeout", Required = false, Default = 8000000, HelpText = "Session idle check timeout")]
+    [Option('t', "SessionIdleCheckerTimeout", Required = false, Default = 8000, HelpText = "Session idle check timeout")]
     public int SessionIdleCheckerTimeout { get; set; }
     /// <summary>
     /// 会话空闲检查间隔。
