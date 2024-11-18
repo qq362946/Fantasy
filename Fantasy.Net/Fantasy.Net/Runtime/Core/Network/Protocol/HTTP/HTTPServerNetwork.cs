@@ -58,7 +58,8 @@ namespace Fantasy.Network.HTTP
             // 注册Scene同步过滤器
             builder.Services.AddScoped<SceneContextFilter>();
             // 注册控制器服务
-            var addControllers = builder.Services.AddControllers();
+            var addControllers = builder.Services.AddControllers()
+                .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNamingPolicy = null; });
             foreach (var assembly in AssemblySystem.ForEachAssembly)
             {
                 addControllers.AddApplicationPart(assembly);
