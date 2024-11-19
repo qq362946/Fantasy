@@ -125,7 +125,7 @@ namespace Fantasy.SingleCollection
                 return;
             }
 
-            var worldDateBase = Scene.World.DateBase;
+            var worldDateBase = Scene.World.DataBase;
 
             using (await _coroutineLock.Wait(entity.Id))
             {
@@ -158,7 +158,7 @@ namespace Fantasy.SingleCollection
             }
 
             collections.Add(entity);
-            await entity.Scene.World.DateBase.Save(entity.Id, collections);
+            await entity.Scene.World.DataBase.Save(entity.Id, collections);
         }
 
         #endregion

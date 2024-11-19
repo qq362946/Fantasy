@@ -41,6 +41,11 @@ namespace Fantasy.Network
         
         public override void Dispose()
         {
+            if (IsDisposed)
+            {
+                return;
+            }
+
             Stop();
             Ping = 0;
             Session = null;

@@ -12,12 +12,12 @@ namespace Fantasy.DataBase
     /// <summary>
     /// 表示用于执行各种数据库操作的数据库接口。
     /// </summary>
-    public interface IDateBase
+    public interface IDataBase
     {
         /// <summary>
         /// 初始化数据库连接。
         /// </summary>
-        IDateBase Initialize(Scene scene, string connectionString, string dbName);
+        IDataBase Initialize(Scene scene, string connectionString, string dbName);
         /// <summary>
         /// 在指定的集合中检索类型 <typeparamref name="T"/> 的实体数量。
         /// </summary>

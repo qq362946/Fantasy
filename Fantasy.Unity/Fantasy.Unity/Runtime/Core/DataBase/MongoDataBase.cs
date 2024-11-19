@@ -15,7 +15,7 @@ namespace Fantasy.DataBase
     /// <summary>
     /// 使用 MongoDB 数据库的实现。
     /// </summary>
-    public sealed class MongoDataBase : IDateBase
+    public sealed class MongoDataBase : IDataBase
     {
         private Scene _scene;
         private string _dbName;
@@ -33,7 +33,7 @@ namespace Fantasy.DataBase
         /// <param name="connectionString">数据库连接字符串。</param>
         /// <param name="dbName">数据库名称。</param>
         /// <returns>初始化后的数据库实例。</returns>
-        public IDateBase Initialize(Scene scene, string connectionString, string dbName)
+        public IDataBase Initialize(Scene scene, string connectionString, string dbName)
         {
             _scene = scene;
             _dbName = dbName;

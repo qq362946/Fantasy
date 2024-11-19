@@ -131,7 +131,11 @@ namespace Fantasy.Network.KCP
             OnConnectComplete = onConnectComplete;
             OnConnectDisconnect = onConnectDisconnect;
             _connectEventArgs.Completed += OnConnectSocketCompleted;
-            _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () => { OnConnectFail?.Invoke(); });
+            _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () =>
+            {
+                OnConnectFail?.Invoke();
+                Dispose();
+            });
             _connectEventArgs.RemoteEndPoint = _remoteAddress;
             _socket = new Socket(_remoteAddress.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
             _socket.Blocking = false;

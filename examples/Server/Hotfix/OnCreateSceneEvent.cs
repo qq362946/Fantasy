@@ -1,4 +1,5 @@
 using Fantasy.Async;
+using Fantasy.Entitas;
 using Fantasy.Event;
 
 namespace Fantasy;
@@ -15,7 +16,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
     protected override async FTask Handler(OnCreateScene self)
     {
         var scene = self.Scene;
-
+        
         switch (scene.SceneType)
         {
             case SceneType.Addressable:

@@ -24,7 +24,7 @@ namespace Fantasy.Network.Interface
             
             if (Session != null)
             {
-                if (Session.IsDisposed)
+                if (!Session.IsDisposed)
                 {
                     Session.Dispose();
                 }

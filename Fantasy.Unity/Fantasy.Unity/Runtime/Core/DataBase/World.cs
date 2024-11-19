@@ -16,7 +16,7 @@ namespace Fantasy.DataBase
         /// <summary>
         /// 获取游戏世界的数据库接口。
         /// </summary>
-        public IDateBase DateBase { get; private init; }
+        public IDataBase DataBase { get; private init; }
         /// <summary>
         /// 获取游戏世界的配置信息。
         /// </summary>
@@ -41,8 +41,8 @@ namespace Fantasy.DataBase
             {
                 case "mongodb":
                 {
-                    DateBase = new MongoDataBase();
-                    DateBase.Initialize(scene, worldConfig.DbConnection, worldConfig.DbName);
+                    DataBase = new MongoDataBase();
+                    DataBase.Initialize(scene, worldConfig.DbConnection, worldConfig.DbName);
                     break;
                 }
                 default:
