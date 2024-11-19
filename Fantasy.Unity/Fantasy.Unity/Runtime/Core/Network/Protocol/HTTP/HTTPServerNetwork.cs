@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+
 #pragma warning disable CS8604 // Possible null reference argument.
 
 // ReSharper disable PossibleMultipleEnumeration
@@ -58,22 +59,26 @@ namespace Fantasy.Network.HTTP
             // 注册Scene同步过滤器
             builder.Services.AddScoped<SceneContextFilter>();
             // 注册控制器服务
-            var addControllers = builder.Services.AddControllers();
+            var addControllers = builder.Services.AddControllers()
+                .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNamingPolicy = null; });
             foreach (var assembly in AssemblySystem.ForEachAssembly)
             {
                 addControllers.AddApplicationPart(assembly);
             }
+
             var app = builder.Build();
             // 配置多个监听地址
             foreach (var url in urls)
             {
                 app.Urls.Add(url);
             }
+
             // 启用开发者工具
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
             // 路由注册
             app.MapControllers();
             // 开启监听
