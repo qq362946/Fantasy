@@ -93,9 +93,9 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
                 Dispose();
                 break;
             }
-            catch (WebSocketException wse)
+            catch (WebSocketException)
             {
-                Log.Error($"WebSocket error: {wse.Message}");
+                // Log.Error($"WebSocket error: {wse.Message}");
                 Dispose();
                 break;
             }
