@@ -70,6 +70,7 @@ public class NormalMessage : MonoBehaviour
 
     private void OnConnectComplete()
     {
+        Log.Debug("OnConnectComplete");
         Text.text = "连接成功";
         _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
         ConnectButton.interactable = false;
@@ -80,6 +81,7 @@ public class NormalMessage : MonoBehaviour
 
     private void OnConnectFail()
     {
+        Log.Debug("OnConnectFail");
         Text.text = "连接失败";
         ConnectButton.interactable = true;
         SendMessageButton.interactable = false;
@@ -89,6 +91,7 @@ public class NormalMessage : MonoBehaviour
 
     private void OnConnectDisconnect()
     {
+        Log.Debug("OnConnectDisconnect");
         Text.text = "连接断开";
         ConnectButton.interactable = true;
         SendMessageButton.interactable = false;

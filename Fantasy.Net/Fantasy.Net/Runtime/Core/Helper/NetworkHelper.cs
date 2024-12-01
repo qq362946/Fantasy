@@ -15,7 +15,7 @@ namespace Fantasy.Helper
     /// <summary>
     /// 提供网络操作相关的帮助方法。
     /// </summary>
-    public static class NetworkHelper
+    public static partial class NetworkHelper
     {
         /// <summary>
         /// 根据字符串获取一个IPEndPoint

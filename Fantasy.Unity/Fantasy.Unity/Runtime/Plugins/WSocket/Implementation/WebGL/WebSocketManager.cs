@@ -1,4 +1,4 @@
-#if !UNITY_EDITOR && UNITY_WEBGL
+﻿#if !UNITY_EDITOR && UNITY_WEBGL
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -29,7 +29,7 @@ namespace UnityWebSocket
         public static extern int WebSocketClose(int instanceId, int code, string reason);
 
         [DllImport("__Internal")]
-        public static extern int WebSocketSend(int instanceId, byte[] dataPtr, int offset, int dataLength);
+        public static extern int WebSocketSend(int instanceId, byte[] dataPtr, int offset,int dataLength);
 
         [DllImport("__Internal")]
         public static extern int WebSocketSendStr(int instanceId, string data);
@@ -39,7 +39,7 @@ namespace UnityWebSocket
 
         /* WebSocket JSLIB callback setters and other functions */
         [DllImport("__Internal")]
-        public static extern int WebSocketAllocate(string url, string binaryType);
+        public static extern int WebSocketAllocate(string url);
 
         [DllImport("__Internal")]
         public static extern int WebSocketAddSubProtocol(int instanceId, string protocol);
@@ -97,7 +97,7 @@ namespace UnityWebSocket
             }
         }
 
-        [MonoPInvokeCallback(typeof(OnMessageCallback))]
+        [MonoPInvokeCallback(typeof(OnMessageStrCallback))]
         public static void DelegateOnMessageStrEvent(int instanceId, IntPtr msgStrPtr)
         {
             if (sockets.TryGetValue(instanceId, out var socket))
@@ -127,10 +127,10 @@ namespace UnityWebSocket
             }
         }
 
-        internal static int AllocateInstance(string address, string binaryType)
+        internal static int AllocateInstance(string address)
         {
             if (!isInitialized) Initialize();
-            return WebSocketAllocate(address, binaryType);
+            return WebSocketAllocate(address);
         }
 
         internal static void Add(WebSocket socket)

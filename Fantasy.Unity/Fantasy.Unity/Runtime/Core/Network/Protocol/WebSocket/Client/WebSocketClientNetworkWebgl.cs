@@ -38,13 +38,13 @@ namespace Fantasy.Network.WebSocket
             {
                 return;
             }
-
+            
             _isInnerDispose = true;
             base.Dispose();
             
             if (_webSocket != null && _webSocket.ReadyState != WebSocketState.Closed)
             {
-                OnConnectDisconnect(this, null);
+                _onConnectDisconnect?.Invoke();
                 _webSocket.CloseAsync();
             }
             
@@ -75,20 +75,14 @@ namespace Fantasy.Network.WebSocket
             _webSocket = new UnityWebSocket.WebSocket(webSocketAddress);
             _webSocket.OnOpen += OnNetworkConnectComplete;
             _webSocket.OnMessage += OnReceiveComplete;
-            _webSocket.OnClose += OnConnectDisconnect;
+            _webSocket.OnClose += (sender, args) =>
+            {
+                _onConnectDisconnect?.Invoke();
+                Dispose();
+            };
             _webSocket.ConnectAsync();
             Session = Session.Create(this, null);
             return Session;
-        }
-        
-        private void OnConnectDisconnect(object sender, CloseEventArgs e)
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-            
-            _onConnectDisconnect?.Invoke();
         }
 
         private void OnNetworkConnectComplete(object sender, OpenEventArgs e)

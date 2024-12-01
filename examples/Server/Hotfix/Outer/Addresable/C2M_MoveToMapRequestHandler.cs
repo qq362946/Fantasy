@@ -1,5 +1,7 @@
 using System;
 using Fantasy.Async;
+using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
 using Fantasy.Network.Interface;
 using Fantasy.Network.Route;
 using Fantasy.Platform.Net;

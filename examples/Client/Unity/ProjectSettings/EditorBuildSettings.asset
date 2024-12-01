@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Examples/NormalMessage.unity
     guid: 1583d499cabbd4963830ada18e12b23a
+  - enabled: 1
+    path: Assets/Examples/Addressable.unity
+    guid: 7e0a3637e34ff44de977cb5ad8dedec0
   m_configObjects: {}

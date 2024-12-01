@@ -8,7 +8,7 @@ namespace Fantasy.Helper
     /// <summary>
     /// 提供与时间相关的帮助方法。
     /// </summary>
-    public static class TimeHelper
+    public static partial class TimeHelper
     {
         /// <summary>
         /// 一小时的毫秒值。

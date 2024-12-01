@@ -17,6 +17,7 @@ namespace Fantasy.DataBase
     /// </summary>
     public sealed class MongoDataBase : IDataBase
     {
+        private const int DefaultTaskSize = 1024;
         private Scene _scene;
         private string _dbName;
         private string _connectionString;
@@ -57,17 +58,11 @@ namespace Fantasy.DataBase
         /// <param name="sumExpression">要对其进行求和的字段表达式。</param>
         /// <param name="collection">集合名称，可选。如果未指定，将使用实体类型的名称。</param>
         /// <returns>满足条件的文档中指定字段的求和结果。</returns>
-        public async FTask<long> Sum<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> sumExpression,
-            string collection = null) where T : Entity
+        public async FTask<long> Sum<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> sumExpression, string collection = null) where T : Entity
         {
             var member = (MemberExpression)((UnaryExpression)sumExpression.Body).Operand;
-
-            var projection =
-                new BsonDocument("_id", "null").Add("Result", new BsonDocument("$sum", $"${member.Member.Name}"));
-
-            var data = await GetCollection<T>(collection).Aggregate().Match(filter).Group(projection)
-                .FirstOrDefaultAsync();
-
+            var projection = new BsonDocument("_id", "null").Add("Result", new BsonDocument("$sum", $"${member.Member.Name}"));
+            var data = await GetCollection<T>(collection).Aggregate().Match(filter).Group(projection).FirstOrDefaultAsync();
             return data == null ? 0 : Convert.ToInt64(data["Result"]);
         }
 
@@ -194,10 +189,9 @@ namespace Fantasy.DataBase
         /// <param name="pageSize">每页大小。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档数量和日期列表。</returns>
-        public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter,
-            int pageIndex, int pageSize, string collection = null) where T : Entity
+        public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var count = await Count(filter);
                 var dates = await QueryByPage(filter, pageIndex, pageSize, collection);
@@ -215,10 +209,9 @@ namespace Fantasy.DataBase
         /// <param name="cols">要查询的列名称数组。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档数量和日期列表。</returns>
-        public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter,
-            int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity
+        public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var count = await Count(filter);
 
@@ -237,10 +230,9 @@ namespace Fantasy.DataBase
         /// <param name="pageSize">每页大小。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档列表。</returns>
-        public async FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize,
-            string collection = null) where T : Entity
+        public async FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 return await GetCollection<T>(collection).Find(filter).Skip((pageIndex - 1) * pageSize)
                     .Limit(pageSize)
@@ -261,7 +253,7 @@ namespace Fantasy.DataBase
         public async FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize,
             string[] cols, string collection = null) where T : Entity
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var projection = Builders<T>.Projection.Include("");
 
@@ -289,7 +281,7 @@ namespace Fantasy.DataBase
         public async FTask<List<T>> QueryByPageOrderBy<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize,
             Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 if (isAsc)
                 {
@@ -311,7 +303,7 @@ namespace Fantasy.DataBase
         /// <returns>满足条件的第一个文档，如果未找到则为 null。</returns>
         public async FTask<T?> First<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var cursor = await GetCollection<T>(collection).FindAsync(filter);
 
@@ -329,7 +321,7 @@ namespace Fantasy.DataBase
         /// <returns>满足条件的第一个文档。</returns>
         public async FTask<T> First<T>(string json, string[] cols, string collection = null) where T : Entity
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var projection = Builders<T>.Projection.Include("");
 
@@ -360,7 +352,7 @@ namespace Fantasy.DataBase
         public async FTask<List<T>> QueryOrderBy<T>(Expression<Func<T, bool>> filter,
             Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 if (isAsc)
                 {
@@ -382,7 +374,7 @@ namespace Fantasy.DataBase
         public async FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string collection = null)
             where T : Entity
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var cursor = await GetCollection<T>(collection).FindAsync(filter);
                 var v = await cursor.ToListAsync();
@@ -430,7 +422,7 @@ namespace Fantasy.DataBase
         /// <returns>满足条件的文档列表。</returns>
         public async FTask<List<T>> QueryJson<T>(string json, string collection = null) where T : Entity
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
                 var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition);
@@ -449,7 +441,7 @@ namespace Fantasy.DataBase
         /// <returns>满足条件的文档列表。</returns>
         public async FTask<List<T>> QueryJson<T>(string json, string[] cols, string collection = null) where T : Entity
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var projection = Builders<T>.Projection.Include("");
 
@@ -498,7 +490,7 @@ namespace Fantasy.DataBase
         public async FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string[] cols, string collection = null)
             where T : class
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var projection = Builders<T>.Projection.Include(cols[0]);
 
@@ -624,7 +616,7 @@ namespace Fantasy.DataBase
         /// <param name="collection">集合名称。</param>
         public async FTask InsertBatch<T>(IEnumerable<T> list, string collection = null) where T : Entity, new()
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 await GetCollection<T>(collection ?? typeof(T).Name).InsertManyAsync(list);
             }
@@ -640,7 +632,7 @@ namespace Fantasy.DataBase
         public async FTask InsertBatch<T>(object transactionSession, IEnumerable<T> list, string collection = null)
             where T : Entity, new()
         {
-            using (await _dataBaseLock.Wait(RandomHelper.RandInt64()))
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 await GetCollection<T>(collection ?? typeof(T).Name)
                     .InsertManyAsync((IClientSessionHandle)transactionSession, list);

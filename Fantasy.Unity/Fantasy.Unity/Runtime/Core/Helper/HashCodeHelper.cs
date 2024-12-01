@@ -7,7 +7,7 @@ namespace Fantasy.Helper
     /// <summary>
     /// HashCode算法帮助类
     /// </summary>
-    public static class HashCodeHelper
+    public static partial class HashCodeHelper
     {
         private static readonly SHA256 Sha256Hash = SHA256.Create();
         

@@ -14,7 +14,7 @@ namespace Fantasy.Http
     /// <summary>
     /// HTTP帮助类
     /// </summary>
-    public static class HttpClientHelper
+    public static partial class HttpClientHelper
     {
         private static readonly HttpClient Client = new HttpClient(new HttpClientHandler
         {

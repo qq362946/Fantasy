@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace UnityWebSocket
 {
@@ -119,19 +119,6 @@ namespace UnityWebSocket
         ///   </para>
         /// </value>
         WebSocketState ReadyState { get; }
-
-        /// <summary>
-        /// Gets the current binaryType of the connection, supported on WEBGL platform only.
-        /// </summary>
-        /// <value>
-        ///   <para>
-        ///   It indicates the current binaryType of the connection.
-        ///   </para>
-        ///   <para>
-        ///   The default value is "arraybuffer", options: "blob" or "arraybuffer".
-        ///   </para>
-        /// </value>
-        string BinaryType { get; set; }
 
         /// <summary>
         /// Occurs when the WebSocket connection has been established.

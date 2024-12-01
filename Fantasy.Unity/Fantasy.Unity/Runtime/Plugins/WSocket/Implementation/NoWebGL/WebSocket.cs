@@ -1,12 +1,11 @@
-#if !NET_LEGACY && (UNITY_EDITOR || !UNITY_WEBGL)
+﻿#if !NET_LEGACY && (UNITY_EDITOR || !UNITY_WEBGL)
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Net.WebSockets;
 using System.IO;
-using Fantasy;
+using System.Collections.Concurrent;
 
 namespace UnityWebSocket
 {
@@ -38,8 +37,6 @@ namespace UnityWebSocket
             }
         }
 
-        public string BinaryType { get; set; } = "arraybuffer";
-
         public event EventHandler<OpenEventArgs> OnOpen;
         public event EventHandler<CloseEventArgs> OnClose;
         public event EventHandler<ErrorEventArgs> OnError;
@@ -47,6 +44,10 @@ namespace UnityWebSocket
 
         private ClientWebSocket socket;
         private bool isOpening => socket != null && socket.State == System.Net.WebSockets.WebSocketState.Open;
+        private ConcurrentQueue<SendBuffer> sendQueue = new ConcurrentQueue<SendBuffer>();
+        private ConcurrentQueue<EventArgs> eventQueue = new ConcurrentQueue<EventArgs>();
+        private bool closeProcessing;
+        private CancellationTokenSource cts = null;
 
         #region APIs 
         public WebSocket(string address)
@@ -68,15 +69,18 @@ namespace UnityWebSocket
 
         public void ConnectAsync()
         {
-#if !UNITY_WEB_SOCKET_ENABLE_ASYNC
-            WebSocketManager.Instance.Add(this);
-#endif
             if (socket != null)
             {
                 HandleError(new Exception("Socket is busy."));
                 return;
             }
+
+            WebSocketManager.Instance.Add(this);
+
             socket = new ClientWebSocket();
+            cts = new CancellationTokenSource();
+
+            // support sub protocols
             if (this.SubProtocols != null)
             {
                 foreach (var protocol in this.SubProtocols)
@@ -86,30 +90,28 @@ namespace UnityWebSocket
                     socket.Options.AddSubProtocol(protocol);
                 }
             }
+
             Task.Run(ConnectTask);
         }
 
         public void CloseAsync()
         {
             if (!isOpening) return;
-            SendBufferAsync(new SendBuffer(null, 0, 0, WebSocketMessageType.Close));
+            closeProcessing = true;
         }
 
         public void SendAsync(byte[] data, int offset, int len)
         {
-            if (!isOpening)
-            {
-                return;
-            }
-
+            if (!isOpening) return;
             var buffer = new SendBuffer(data, offset, len, WebSocketMessageType.Binary);
-            SendBufferAsync(buffer);
+            sendQueue.Enqueue(buffer);
         }
+
         public void SendAsync(byte[] data)
         {
             if (!isOpening) return;
-            var buffer = new SendBuffer(data, 0, data.Length, WebSocketMessageType.Binary);
-            SendBufferAsync(buffer);
+            var buffer = new SendBuffer(data,0,data.Length, WebSocketMessageType.Binary);
+            sendQueue.Enqueue(buffer);
         }
 
         public void SendAsync(string text)
@@ -117,42 +119,16 @@ namespace UnityWebSocket
             if (!isOpening) return;
             var data = Encoding.UTF8.GetBytes(text);
             var buffer = new SendBuffer(data, 0, data.Length, WebSocketMessageType.Text);
-            SendBufferAsync(buffer);
+            sendQueue.Enqueue(buffer);
         }
         #endregion
 
-
-        private async Task ConnectTask()
-        {
-            Log("Connect Task Begin ...");
-
-            try
-            {
-                var uri = new Uri(Address);
-                await socket.ConnectAsync(uri, CancellationToken.None);
-            }
-            catch (Exception e)
-            {
-                HandleError(e);
-                HandleClose((ushort)CloseStatusCode.Abnormal, e.Message);
-                SocketDispose();
-                return;
-            }
-
-            HandleOpen();
-
-            Log("Connect Task End !");
-
-            await ReceiveTask();
-        }
-
         class SendBuffer
         {
-            public byte[] data;
             public int offset;
             public int len;
+            public byte[] data;
             public WebSocketMessageType type;
-
             public SendBuffer(byte[] data, int offset, int len, WebSocketMessageType type)
             {
                 this.offset = offset;
@@ -162,55 +138,62 @@ namespace UnityWebSocket
             }
         }
 
-        private object sendQueueLock = new object();
-        private Queue<SendBuffer> sendQueue = new Queue<SendBuffer>();
-        private bool isSendTaskRunning;
-
-        private void SendBufferAsync(SendBuffer buffer)
+        private void CleanSendQueue()
         {
-            if (isSendTaskRunning)
-            {
-                lock (sendQueueLock)
-                {
-                    if (buffer.type == WebSocketMessageType.Close)
-                    {
-                        sendQueue.Clear();
-                    }
-                    sendQueue.Enqueue(buffer);
-                }
-            }
-            else
-            {
-                isSendTaskRunning = true;
-                sendQueue.Enqueue(buffer);
-                Task.Run(SendTask);
-            }
+            while (sendQueue.TryDequeue(out var _)) ;
         }
 
-        private async Task SendTask()
+        private void CleanEventQueue()
+        {
+            while (eventQueue.TryDequeue(out var _)) ;
+        }
+
+        private async Task ConnectTask()
+        {
+            Log("Connect Task Begin ...");
+
+            try
+            {
+                var uri = new Uri(Address);
+                await socket.ConnectAsync(uri, cts.Token);
+            }
+            catch (Exception e)
+            {
+                HandleError(e);
+                HandleClose((ushort)CloseStatusCode.Abnormal, e.Message);
+                return;
+            }
+
+            HandleOpen();
+
+            Log("Connect Task Success !");
+
+            StartReceiveTask();
+            StartSendTask();
+        }
+
+        private async void StartSendTask()
         {
             Log("Send Task Begin ...");
 
             try
             {
-                SendBuffer buffer = null;
-                while (sendQueue.Count > 0 && isOpening)
+                while (!closeProcessing && socket != null && cts != null && !cts.IsCancellationRequested)
                 {
-                    lock (sendQueueLock)
-                    {
-                        buffer = sendQueue.Dequeue();
-                    }
-                    if (buffer.type == WebSocketMessageType.Close)
-                    {
-                        Log($"Close Send Begin ...");
-                        await socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Normal Closure", CancellationToken.None);
-                        Log($"Close Send End !");
-                    }
-                    else
+                    while (!closeProcessing && sendQueue.Count > 0 && sendQueue.TryDequeue(out var buffer))
                     {
                         Log($"Send, type: {buffer.type}, size: {buffer.data.Length}, queue left: {sendQueue.Count}");
-                        await socket.SendAsync(new ArraySegment<byte>(buffer.data, buffer.offset, buffer.len), buffer.type, true, CancellationToken.None);
+                        await socket.SendAsync(new ArraySegment<byte>(buffer.data, buffer.offset, buffer.len),
+                            buffer.type, true, cts.Token);
                     }
+                    Thread.Sleep(3);
+                }
+                if (closeProcessing && socket != null && cts != null && !cts.IsCancellationRequested)
+                {
+                    CleanSendQueue();
+                    Log($"Close Send Begin ...");
+                    await socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Normal Closure", cts.Token);
+                    Log($"Close Send Success !");
                 }
             }
             catch (Exception e)
@@ -219,13 +202,13 @@ namespace UnityWebSocket
             }
             finally
             {
-                isSendTaskRunning = false;
+                closeProcessing = false;
             }
 
             Log("Send Task End !");
         }
 
-        private async Task ReceiveTask()
+        private async void StartReceiveTask()
         {
             Log("Receive Task Begin ...");
 
@@ -237,9 +220,9 @@ namespace UnityWebSocket
 
             try
             {
-                while (!isClosed)
+                while (!isClosed && !cts.IsCancellationRequested)
                 {
-                    var result = await socket.ReceiveAsync(segment, CancellationToken.None);
+                    var result = await socket.ReceiveAsync(segment, cts.Token);
                     ms.Write(segment.Array, 0, result.Count);
                     if (!result.EndOfMessage) continue;
                     var data = ms.ToArray();
@@ -272,83 +255,55 @@ namespace UnityWebSocket
             }
 
             HandleClose(closeCode, closeReason);
-            SocketDispose();
 
             Log("Receive Task End !");
         }
 
         private void SocketDispose()
         {
-            sendQueue.Clear();
+            Log("Dispose");
+            WebSocketManager.Instance.Remove(this);
+            CleanSendQueue();
+            CleanEventQueue();
             socket.Dispose();
             socket = null;
+            cts.Dispose();
+            cts = null;
         }
 
         private void HandleOpen()
         {
             Log("OnOpen");
-#if !UNITY_WEB_SOCKET_ENABLE_ASYNC
-            HandleEventSync(new OpenEventArgs());
-#else
-            OnOpen?.Invoke(this, new OpenEventArgs());
-#endif
+            eventQueue.Enqueue(new OpenEventArgs());
         }
 
         private void HandleMessage(Opcode opcode, byte[] rawData)
         {
-            Log($"OnMessage, type: {opcode}, size: {rawData.Length}\n{BitConverter.ToString(rawData)}");
-#if !UNITY_WEB_SOCKET_ENABLE_ASYNC
-            HandleEventSync(new MessageEventArgs(opcode, rawData));
-#else
-            OnMessage?.Invoke(this, new MessageEventArgs(opcode, rawData));
-#endif
+            Log($"OnMessage, type: {opcode}, size: {rawData.Length}");
+            eventQueue.Enqueue(new MessageEventArgs(opcode, rawData));
         }
 
         private void HandleClose(ushort code, string reason)
         {
             Log($"OnClose, code: {code}, reason: {reason}");
-#if !UNITY_WEB_SOCKET_ENABLE_ASYNC
-            HandleEventSync(new CloseEventArgs(code, reason));
-#else
-            OnClose?.Invoke(this, new CloseEventArgs(code, reason));
-#endif
+            eventQueue.Enqueue(new CloseEventArgs(code, reason));
         }
 
         private void HandleError(Exception exception)
         {
             Log("OnError, error: " + exception.Message);
-#if !UNITY_WEB_SOCKET_ENABLE_ASYNC
-            HandleEventSync(new ErrorEventArgs(exception.Message));
-#else
-            OnError?.Invoke(this, new ErrorEventArgs(exception.Message));
-#endif
-        }
-
-#if !UNITY_WEB_SOCKET_ENABLE_ASYNC
-        private readonly Queue<EventArgs> eventQueue = new Queue<EventArgs>();
-        private readonly object eventQueueLock = new object();
-        private void HandleEventSync(EventArgs eventArgs)
-        {
-            lock (eventQueueLock)
-            {
-                eventQueue.Enqueue(eventArgs);
-            }
+            eventQueue.Enqueue(new ErrorEventArgs(exception.Message));
         }
 
         internal void Update()
         {
-            EventArgs e;
-            while (eventQueue.Count > 0)
+            while (eventQueue.Count > 0 && eventQueue.TryDequeue(out var e))
             {
-                lock (eventQueueLock)
-                {
-                    e = eventQueue.Dequeue();
-                }
-
                 if (e is CloseEventArgs)
                 {
                     OnClose?.Invoke(this, e as CloseEventArgs);
-                    WebSocketManager.Instance.Remove(this);
+                    SocketDispose();
+                    break;
                 }
                 else if (e is OpenEventArgs)
                 {
@@ -364,15 +319,22 @@ namespace UnityWebSocket
                 }
             }
         }
-#endif
+
+        internal void Abort()
+        {
+            Log("Abort");
+            if (cts != null)
+            {
+                cts.Cancel();
+            }
+        }
 
         [System.Diagnostics.Conditional("UNITY_WEB_SOCKET_LOG")]
         static void Log(string msg)
         {
-            UnityEngine.Debug.Log($"<color=yellow>[UnityWebSocket]</color>" +
-                $"<color=green>[T-{Thread.CurrentThread.ManagedThreadId:D3}]</color>" +
-                $"<color=red>[{DateTime.Now.TimeOfDay}]</color>" +
-                $" {msg}");
+            var time = DateTime.Now.ToString("HH:mm:ss.fff");
+            var thread = Thread.CurrentThread.ManagedThreadId;
+            UnityEngine.Debug.Log($"[{time}][UnityWebSocket][T-{thread:D3}] {msg}");
         }
     }
 }

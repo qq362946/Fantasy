@@ -8,7 +8,7 @@ namespace Fantasy.Helper
     /// <summary>
     /// 文件操作助手类，提供了各种文件操作方法。
     /// </summary>
-    public static class FileHelper
+    public static partial class FileHelper
     {
         /// <summary>
         /// 获取相对路径的完整路径。

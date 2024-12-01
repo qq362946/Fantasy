@@ -45,7 +45,7 @@ namespace Fantasy
     /// <summary>
     /// 表示一个场景实体，用于创建与管理特定的游戏场景信息。
     /// </summary>
-    public class Scene : Entity
+    public partial class Scene : Entity
     {
         #region Members
 #if FANTASY_NET

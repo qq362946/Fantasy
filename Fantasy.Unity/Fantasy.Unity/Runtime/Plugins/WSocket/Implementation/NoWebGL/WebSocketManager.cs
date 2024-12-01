@@ -1,9 +1,10 @@
-#if !NET_LEGACY && (UNITY_EDITOR || !UNITY_WEBGL) && !UNITY_WEB_SOCKET_ENABLE_ASYNC
+﻿#if !NET_LEGACY && (UNITY_EDITOR || !UNITY_WEBGL)
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityWebSocket
 {
+    [DisallowMultipleComponent]
     [DefaultExecutionOrder(-10000)]
     internal class WebSocketManager : MonoBehaviour
     {
@@ -53,6 +54,21 @@ namespace UnityWebSocket
                 sockets[i].Update();
             }
         }
+
+#if UNITY_EDITOR
+        private void OnDisable()
+        {
+            SocketAbort();
+        }
+
+        private void SocketAbort()
+        {
+            for (int i = sockets.Count - 1; i >= 0; i--)
+            {
+                sockets[i].Abort();
+            }
+        }
+#endif
     }
 }
 #endif

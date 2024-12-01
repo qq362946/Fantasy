@@ -7,7 +7,7 @@ namespace Fantasy.Helper
     /// <summary>
     /// Socket帮助类
     /// </summary>
-    public static class SocketHelper
+    public static partial class SocketHelper
     {
     // always pass the same IPEndPointNonAlloc instead of allocating a new
         // one each time.

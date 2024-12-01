@@ -6,7 +6,7 @@ namespace Fantasy.Helper
     /// <summary>
     /// WebSocket帮助类
     /// </summary>
-    public static class WebSocketHelper
+    public static partial class WebSocketHelper
     {
         /// <summary>
         /// 根据字符串获取WebSocket的连接地址

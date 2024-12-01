@@ -31,7 +31,7 @@ namespace Fantasy.Entitas
     /// <summary>
     /// Entity的抽象类，任何Entity必须继承这个接口才可以使用
     /// </summary>
-    public abstract class Entity : IEntity
+    public abstract partial class Entity : IEntity
     {
         #region Members
 

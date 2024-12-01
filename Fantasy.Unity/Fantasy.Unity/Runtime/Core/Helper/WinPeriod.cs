@@ -5,7 +5,7 @@ namespace Fantasy.Helper
     /// <summary>
     /// 精度设置
     /// </summary>
-    public static class WinPeriod
+    public static partial class WinPeriod
     {
         // 一般默认的精度不止1毫秒（不同操作系统有所不同），需要调用timeBeginPeriod与timeEndPeriod来设置精度
         [DllImport("winmm")]

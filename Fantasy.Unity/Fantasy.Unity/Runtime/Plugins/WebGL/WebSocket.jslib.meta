@@ -32,6 +32,11 @@ PluginImporter:
     second:
       enabled: 1
       settings: {}
+  - first:
+      WeixinMiniGame: WeixinMiniGame
+    second:
+      enabled: 1
+      settings: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

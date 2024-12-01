@@ -8,7 +8,7 @@ namespace Fantasy.Helper
     /// <summary>
     /// 随机数操作助手类，提供各种随机数生成和操作方法。
     /// </summary>
-    public static class RandomHelper
+    public static partial class RandomHelper
     {
         private static readonly Random Random = new Random();
         private static readonly byte[] Byte8 = new byte[8];
