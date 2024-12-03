@@ -167,9 +167,9 @@ namespace Fantasy
 
         private void Initialize(Scene scene) 
         {
-            scene.EntityPool = scene.EntityPool;
-            scene.EntityListPool = scene.EntityListPool;
-            scene.EntitySortedDictionaryPool = scene.EntitySortedDictionaryPool;
+            EntityPool = scene.EntityPool;
+            EntityListPool = scene.EntityListPool;
+            EntitySortedDictionaryPool = scene.EntitySortedDictionaryPool;
             SceneUpdate = scene.SceneUpdate;
             TimerComponent = scene.TimerComponent;
             EventComponent = scene.EventComponent;
