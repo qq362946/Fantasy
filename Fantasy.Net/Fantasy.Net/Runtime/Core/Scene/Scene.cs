@@ -41,6 +41,10 @@ namespace Fantasy
         /// Scene在一个根据当前CPU核心数创建的线程池中运行.
         /// </summary>
         public const string ThreadPool = "ThreadPool";
+        /// <summary>
+        /// Scene在一个父亲Scene所在的线程中运行.
+        /// </summary>
+        public const string SceneThread = "SceneThread";
     }
     /// <summary>
     /// 表示一个场景实体，用于创建与管理特定的游戏场景信息。
@@ -346,7 +350,7 @@ namespace Fantasy
         /// <param name="sceneType">SceneType，可以在SceneType里找到，例如:SceneType.Addressable</param>
         /// <param name="onSubSceneComplete">子Scene创建成功后执行的委托，可以传递null</param>
         /// <returns></returns>
-        public static async FTask<Scene> CreateSubScene(Scene parentScene, int sceneType, Action<Scene, Scene> onSubSceneComplete)
+        public static async FTask<Scene> CreateSubScene(Scene parentScene, int sceneType, Action<Scene, Scene> onSubSceneComplete = null)
         {
             var scene = new Scene();
             scene.Scene = scene;
@@ -360,7 +364,7 @@ namespace Fantasy
             scene.Id = scene.EntityIdFactory.Create;
             scene.RunTimeId = scene.RuntimeIdFactory.Create;
             scene.AddEntity(scene);
-            await SetScheduler(scene, parentScene, SceneRuntimeType.ThreadPool);
+            await SetScheduler(scene, parentScene, SceneRuntimeType.SceneThread);
             
             Process.AddScene(scene);
             parentScene.Process.AddSceneToProcess(scene);
