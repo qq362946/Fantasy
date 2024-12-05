@@ -95,3 +95,17 @@ message Chat2C_PushMessage // ICustomRouteMessage,ChatRoute
 {
 	string Tag = 1;
 }
+/// 客户端发送给Gate服务器通知map服务器创建一个SubScene
+message C2G_CreateSubSceneRequest // IRequest,G2C_CreateSubSceneResponse
+{
+
+}
+message G2C_CreateSubSceneResponse // IResponse
+{
+
+}
+/// 客户端通知Gate服务器给SubScene发送一个消息
+message C2G_SendToSubSceneMessage // IMessage
+{
+	
+}

@@ -17,7 +17,7 @@ public sealed class G2Chat_CreateRouteRequestHandler : RouteRPC<Scene, G2Chat_Cr
         chatUnit.GateRouteId = request.GateRouteId;
         // 把chatUnit的RunTimeId发送给Gate。
         // 正如之前所说任何实体的RunTimeId都可以当做RouteId使用。
-        response.ChatRouteId = chatUnit.RunTimeId;
+        response.ChatRouteId = chatUnit.RuntimeId;
         await FTask.CompletedTask;
     }
 }

@@ -23,7 +23,7 @@ namespace Fantasy.Entitas
             }
             
             _entity = t;
-            _runTimeId = t.RunTimeId;
+            _runTimeId = t.RuntimeId;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Fantasy.Entitas
                 return null;
             }
 
-            if (v._entity.RunTimeId != v._runTimeId)
+            if (v._entity.RuntimeId != v._runTimeId)
             {
                 v._entity = null;
             }

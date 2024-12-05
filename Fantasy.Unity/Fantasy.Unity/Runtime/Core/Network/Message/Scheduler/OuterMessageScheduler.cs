@@ -163,10 +163,10 @@ namespace Fantasy.Scheduler
                         }
                     
                         var rpcId = packInfo.RpcId;
-                        var runtimeId = session.RunTimeId;
+                        var runtimeId = session.RuntimeId;
                         var response = await addressableRouteComponent.Call(messageType, packInfo);
                         // session可能已经断开了，所以这里需要判断
-                        if (session.RunTimeId == runtimeId)
+                        if (session.RuntimeId == runtimeId)
                         {
                             session.Send(response, rpcId);
                         }
@@ -256,10 +256,10 @@ namespace Fantasy.Scheduler
                         }
                     
                         var rpcId = packInfo.RpcId;
-                        var runtimeId = session.RunTimeId;
+                        var runtimeId = session.RuntimeId;
                         var response = await NetworkMessagingComponent.CallInnerRoute(routeId, messageType, packInfo);
                         // session可能已经断开了，所以这里需要判断
-                        if (session.RunTimeId == runtimeId)
+                        if (session.RuntimeId == runtimeId)
                         {
                             session.Send(response, rpcId);
                         }

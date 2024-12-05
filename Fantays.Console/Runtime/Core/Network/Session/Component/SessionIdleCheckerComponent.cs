@@ -61,7 +61,7 @@ public class SessionIdleCheckerComponent : Entity
     {
         _timeOut = timeOut;
         _session = (Session)Parent;
-        _selfRuntimeId = RunTimeId;
+        _selfRuntimeId = RuntimeId;
         // 安排重复计时器，在指定的间隔内执行 Check 方法
         _timerId = TimerComponent.Net.RepeatedTimer(interval, Check);
     }
@@ -84,7 +84,7 @@ public class SessionIdleCheckerComponent : Entity
     /// </summary>
     private void Check()
     {
-        if (_selfRuntimeId != RunTimeId || IsDisposed || _session == null)
+        if (_selfRuntimeId != RuntimeId || IsDisposed || _session == null)
         {
             Stop();
             return;

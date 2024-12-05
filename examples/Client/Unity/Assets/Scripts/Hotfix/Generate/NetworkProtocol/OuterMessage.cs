@@ -406,4 +406,60 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
+	/// <summary>
+	///  客户端发送给Gate服务器通知map服务器创建一个SubScene
+	/// </summary>
+	[ProtoContract]
+	public partial class C2G_CreateSubSceneRequest : AMessage, IRequest, IProto
+	{
+		public static C2G_CreateSubSceneRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2G_CreateSubSceneRequest>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2G_CreateSubSceneRequest>(this);
+#endif
+		}
+		[ProtoIgnore]
+		public G2C_CreateSubSceneResponse ResponseType { get; set; }
+		public uint OpCode() { return OuterOpcode.C2G_CreateSubSceneRequest; }
+	}
+	[ProtoContract]
+	public partial class G2C_CreateSubSceneResponse : AMessage, IResponse, IProto
+	{
+		public static G2C_CreateSubSceneResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_CreateSubSceneResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2C_CreateSubSceneResponse>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_CreateSubSceneResponse; }
+		[ProtoMember(1)]
+		public uint ErrorCode { get; set; }
+	}
+	/// <summary>
+	///  客户端通知Gate服务器给SubScene发送一个消息
+	/// </summary>
+	[ProtoContract]
+	public partial class C2G_SendToSubSceneMessage : AMessage, IMessage, IProto
+	{
+		public static C2G_SendToSubSceneMessage Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2G_SendToSubSceneMessage>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2G_SendToSubSceneMessage>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2G_SendToSubSceneMessage; }
+	}
 }

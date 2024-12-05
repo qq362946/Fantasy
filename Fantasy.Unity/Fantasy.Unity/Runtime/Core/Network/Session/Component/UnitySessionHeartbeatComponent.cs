@@ -62,7 +62,7 @@ namespace Fantasy.Network
         {
             TimeOut = timeOut + interval;
             Session = (Session)Parent;
-            SelfRunTimeId = RunTimeId;
+            SelfRunTimeId = RuntimeId;
             LastTime = TimeHelper.Now;
 
             if (TimerComponent == null)
@@ -117,7 +117,7 @@ namespace Fantasy.Network
         /// <returns>表示进行中操作的异步任务。</returns>
         private async FTask RepeatedSend()
         {
-            if (SelfRunTimeId != RunTimeId)
+            if (SelfRunTimeId != RuntimeId)
             {
                 Stop();
                 return;

@@ -22,5 +22,8 @@ namespace Fantasy
 		 public const uint C2G_SendAddressableToMap = 134227732;
 		 public const uint C2Chat_TestRequestPushMessage = 2147493650;
 		 public const uint Chat2C_PushMessage = 2147493651;
+		 public const uint C2G_CreateSubSceneRequest = 268445460;
+		 public const uint G2C_CreateSubSceneResponse = 402663188;
+		 public const uint C2G_SendToSubSceneMessage = 134227733;
 	}
 }

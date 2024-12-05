@@ -44,3 +44,17 @@ message G2M_SendAddressableMessage // IAddressableRouteMessage
 {
 	string Tag = 1;
 }
+// Gate通知Map创建一个SubScene
+message G2M_CreateSubSceneRequest // IRouteRequest,M2G_CreateSubSceneResponse
+{
+
+}
+message M2G_CreateSubSceneResponse // IRouteResponse
+{
+	int64 SubSceneRouteId = 1;
+}
+// Gate给SubScene发送一个消息
+message G2SubScene_SentMessage // IRouteMessage
+{
+	string Tag = 1;
+}

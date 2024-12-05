@@ -327,8 +327,8 @@ namespace Fantasy.Network.Interface
                 return;
             }
             
-            var runtimeId = entity.RunTimeId;
-            var sessionRuntimeId = session.RunTimeId;
+            var runtimeId = entity.RuntimeId;
+            var sessionRuntimeId = session.RuntimeId;
 
             if (entity is Scene)
             {
@@ -340,12 +340,12 @@ namespace Fantasy.Network.Interface
             // 使用协程锁来确保多线程安全
             using (await _receiveRouteMessageLock.Wait(runtimeId))
             {
-                if (sessionRuntimeId != session.RunTimeId)
+                if (sessionRuntimeId != session.RuntimeId)
                 {
                     return;
                 }
                 
-                if (runtimeId != entity.RunTimeId)
+                if (runtimeId != entity.RuntimeId)
                 {
                     if (message is IRouteRequest request)
                     {

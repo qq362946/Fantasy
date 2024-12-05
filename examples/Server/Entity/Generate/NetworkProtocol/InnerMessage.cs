@@ -213,4 +213,60 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
+	[ProtoContract]
+	public partial class G2M_CreateSubSceneRequest : AMessage, IRouteRequest, IProto
+	{
+		public static G2M_CreateSubSceneRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2M_CreateSubSceneRequest>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2M_CreateSubSceneRequest>(this);
+#endif
+		}
+		[ProtoIgnore]
+		public M2G_CreateSubSceneResponse ResponseType { get; set; }
+		public uint OpCode() { return InnerOpcode.G2M_CreateSubSceneRequest; }
+	}
+	[ProtoContract]
+	public partial class M2G_CreateSubSceneResponse : AMessage, IRouteResponse, IProto
+	{
+		public static M2G_CreateSubSceneResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2G_CreateSubSceneResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+			SubSceneRouteId = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<M2G_CreateSubSceneResponse>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.M2G_CreateSubSceneResponse; }
+		[ProtoMember(1)]
+		public long SubSceneRouteId { get; set; }
+		[ProtoMember(2)]
+		public uint ErrorCode { get; set; }
+	}
+	[ProtoContract]
+	public partial class G2SubScene_SentMessage : AMessage, IRouteMessage, IProto
+	{
+		public static G2SubScene_SentMessage Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2SubScene_SentMessage>();
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2SubScene_SentMessage>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.G2SubScene_SentMessage; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
 }

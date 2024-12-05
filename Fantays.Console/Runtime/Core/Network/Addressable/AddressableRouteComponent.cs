@@ -74,7 +74,7 @@ namespace Fantasy.Network.Route
 
             packInfo.IsDisposed = true;
             var failCount = 0;
-            var runtimeId = RunTimeId;
+            var runtimeId = RuntimeId;
             IResponse iRouteResponse = null;
 
             try
@@ -96,7 +96,7 @@ namespace Fantasy.Network.Route
                         
                         iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, requestType, packInfo);
                         
-                        if (runtimeId != RunTimeId)
+                        if (runtimeId != RuntimeId)
                         {
                             iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
                         }
@@ -117,7 +117,7 @@ namespace Fantasy.Network.Route
 
                                 await TimerComponent.Net.WaitAsync(100);
 
-                                if (runtimeId != RunTimeId)
+                                if (runtimeId != RuntimeId)
                                 {
                                     iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
                                 }
@@ -154,7 +154,7 @@ namespace Fantasy.Network.Route
             }
 
             var failCount = 0;
-            var runtimeId = RunTimeId;
+            var runtimeId = RuntimeId;
 
             using (await AddressableRouteLock.Wait(AddressableId, "AddressableRouteComponent Call"))
             {
@@ -173,7 +173,7 @@ namespace Fantasy.Network.Route
 
                     var iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, request);
 
-                    if (runtimeId != RunTimeId)
+                    if (runtimeId != RuntimeId)
                     {
                         iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
                     }
@@ -191,7 +191,7 @@ namespace Fantasy.Network.Route
 
                             await TimerComponent.Net.WaitAsync(500);
 
-                            if (runtimeId != RunTimeId)
+                            if (runtimeId != RuntimeId)
                             {
                                 iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
                             }

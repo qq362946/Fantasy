@@ -263,7 +263,7 @@ namespace Fantasy.Entitas
         public void StartUpdate(Entity entity)
         {
             var type = entity.Type;
-            var entityRuntimeId = entity.RunTimeId;
+            var entityRuntimeId = entity.RuntimeId;
 
             if (_updateSystems.ContainsKey(type))
             {
@@ -284,7 +284,7 @@ namespace Fantasy.Entitas
         /// <param name="entity">实体对象</param>
         public void StopUpdate(Entity entity)
         {
-            if (!_updateQueueDic.Remove(entity.RunTimeId, out var updateQueueInfo))
+            if (!_updateQueueDic.Remove(entity.RuntimeId, out var updateQueueInfo))
             {
                 return;
             }

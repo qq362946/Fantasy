@@ -57,7 +57,7 @@ namespace Fantasy.Entitas
         [BsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
-        public long RunTimeId { get; protected set; }
+        public long RuntimeId { get; protected set; }
         /// <summary>
         /// 当前实体是否已经被销毁
         /// </summary>
@@ -65,7 +65,7 @@ namespace Fantasy.Entitas
         [JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
-        public bool IsDisposed => RunTimeId == 0;
+        public bool IsDisposed => RuntimeId == 0;
         /// <summary>
         /// 当前实体所归属的Scene
         /// </summary>
@@ -161,7 +161,7 @@ namespace Fantasy.Entitas
             entity.Type = type;
             entity.SetIsPool(isPool);
             entity.Id = id;
-            entity.RunTimeId = scene.RuntimeIdFactory.Create;
+            entity.RuntimeId = scene.RuntimeIdFactory.Create;
             scene.AddEntity(entity);
             
             if (isRunEvent)
@@ -202,7 +202,7 @@ namespace Fantasy.Entitas
             entity.Type = typeof(T);
             entity.SetIsPool(isPool);
             entity.Id = id;
-            entity.RunTimeId = scene.RuntimeIdFactory.Create;
+            entity.RuntimeId = scene.RuntimeIdFactory.Create;
             scene.AddEntity(entity);
             
             if (isRunEvent)
@@ -776,7 +776,7 @@ namespace Fantasy.Entitas
         /// <param name="resetId">是否是重新生成实体的Id,如果是数据库加载过来的一般是不需要的</param>
         public void Deserialize(Scene scene, bool resetId = false)
         {
-            if (RunTimeId != 0)
+            if (RuntimeId != 0)
             {
                 return;
             }
@@ -785,10 +785,10 @@ namespace Fantasy.Entitas
             {
                 Scene = scene;
                 Type ??= GetType();
-                RunTimeId = Scene.RuntimeIdFactory.Create;
+                RuntimeId = Scene.RuntimeIdFactory.Create;
                 if (resetId)
                 {
-                    Id = RunTimeId;
+                    Id = RuntimeId;
                 }
 #if FANTASY_NET
                 if (_treeDb != null && _treeDb.Count > 0)
@@ -820,9 +820,9 @@ namespace Fantasy.Entitas
             }
             catch (Exception e)
             {
-                if (RunTimeId != 0)
+                if (RuntimeId != 0)
                 {
-                    scene.RemoveEntity(RunTimeId);
+                    scene.RemoveEntity(RuntimeId);
                 }
 
                 Log.Error(e);
@@ -951,8 +951,8 @@ namespace Fantasy.Entitas
             }
             
             var scene = Scene;
-            var runTimeId = RunTimeId;
-            RunTimeId = 0;
+            var runTimeId = RuntimeId;
+            RuntimeId = 0;
             
             if (_tree != null)
             {

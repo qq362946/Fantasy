@@ -49,7 +49,7 @@ namespace Fantasy.Network.Route
 #if FANTASY_DEVELOP
             Log.Debug($"AddressableMessageComponent Register addressableId:{AddressableId} RouteId:{Parent.RuntimeId}");
 #endif
-            return AddressableHelper.AddAddressable(Scene, AddressableId, Parent.RunTimeId, isLock);
+            return AddressableHelper.AddAddressable(Scene, AddressableId, Parent.RuntimeId, isLock);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Fantasy.Network.Route
 #if FANTASY_DEVELOP
             Log.Debug($"AddressableMessageComponent UnLock {Parent.Id} {Parent.RuntimeId}");
 #endif
-            return AddressableHelper.UnLockAddressable(Scene, Parent.Id, Parent.RunTimeId, source);
+            return AddressableHelper.UnLockAddressable(Scene, Parent.Id, Parent.RuntimeId, source);
         }
 
         /// <summary>
