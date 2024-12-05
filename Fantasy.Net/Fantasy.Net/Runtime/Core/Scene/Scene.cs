@@ -180,11 +180,6 @@ namespace Fantasy
             _unitySceneId--;
             UnityNetwork?.Dispose();
 #endif
-            foreach (var entity in _entities.Values.ToArray())
-            {
-                entity.Dispose();
-            }
-            
             TypeInstance.Clear();
             base.Dispose();
         }
