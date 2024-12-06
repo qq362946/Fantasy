@@ -269,4 +269,45 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
+	/// <summary>
+	///  Gate通知SubScene创建一个Addressable消息
+	/// </summary>
+	[ProtoContract]
+	public partial class G2SubScene_AddressableIdRequest : AMessage, IRouteRequest, IProto
+	{
+		public static G2SubScene_AddressableIdRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2SubScene_AddressableIdRequest>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2SubScene_AddressableIdRequest>(this);
+#endif
+		}
+		[ProtoIgnore]
+		public SubScene2G_AddressableIdResponse ResponseType { get; set; }
+		public uint OpCode() { return InnerOpcode.G2SubScene_AddressableIdRequest; }
+	}
+	[ProtoContract]
+	public partial class SubScene2G_AddressableIdResponse : AMessage, IRouteResponse, IProto
+	{
+		public static SubScene2G_AddressableIdResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<SubScene2G_AddressableIdResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+			AddressableId = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<SubScene2G_AddressableIdResponse>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.SubScene2G_AddressableIdResponse; }
+		[ProtoMember(1)]
+		public long AddressableId { get; set; }
+		[ProtoMember(2)]
+		public uint ErrorCode { get; set; }
+	}
 }

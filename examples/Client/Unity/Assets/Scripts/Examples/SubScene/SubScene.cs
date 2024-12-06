@@ -13,14 +13,16 @@ public class SubScene : MonoBehaviour
      public Button ConnectButton;
      public Button CreateSubSceneButton;
      public Button SendMessageButton;
-     public Button SendRPCMessageButton;
+     public Button CreaateAddressabeButton;
+     public Button SendAddressableButton;
 
      public void Start()
      {
           ConnectButton.interactable = false;
           CreateSubSceneButton.interactable = false;
           SendMessageButton.interactable = false;
-          SendRPCMessageButton.interactable = false;
+          CreaateAddressabeButton.interactable = false;
+          SendAddressableButton.interactable = false;
           StartAsync().Coroutine();
      }
 
@@ -39,6 +41,13 @@ public class SubScene : MonoBehaviour
           });
           SendMessageButton.onClick.RemoveAllListeners();
           SendMessageButton.onClick.AddListener(SendMessage);
+          CreaateAddressabeButton.onClick.RemoveAllListeners();
+          CreaateAddressabeButton.onClick.AddListener(() =>
+          {
+               CreateAddressable().Coroutine();
+          });
+          SendAddressableButton.onClick.RemoveAllListeners();
+          SendAddressableButton.onClick.AddListener(SendAddressable);
           ConnectButton.interactable = true;
      }
 
@@ -53,6 +62,8 @@ public class SubScene : MonoBehaviour
                     ConnectButton.interactable = false;
                     CreateSubSceneButton.interactable = true;
                     SendMessageButton.interactable = true;
+                    CreaateAddressabeButton.interactable = true;
+                    SendAddressableButton.interactable = true;
                     Log.Debug("连接到服务器完成");
                     _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
                },
@@ -61,6 +72,8 @@ public class SubScene : MonoBehaviour
                     ConnectButton.interactable = true;
                     CreateSubSceneButton.interactable = false;
                     SendMessageButton.interactable = false;
+                    CreaateAddressabeButton.interactable = false;
+                    SendAddressableButton.interactable = false;
                     Log.Error("无法连接到目标服务器");
                },
                () =>
@@ -68,6 +81,8 @@ public class SubScene : MonoBehaviour
                     ConnectButton.interactable = false;
                     CreateSubSceneButton.interactable = false;
                     SendMessageButton.interactable = false;
+                    CreaateAddressabeButton.interactable = false;
+                    SendAddressableButton.interactable = false;
                     Log.Debug("与服务器断开了连接");
                },
                false, 5000);
@@ -87,5 +102,25 @@ public class SubScene : MonoBehaviour
      private void SendMessage()
      {
           _session.Send(new C2G_SendToSubSceneMessage());
+     }
+
+     private async FTask CreateAddressable()
+     {
+          var response = (G2C_CreateSubSceneAddressableResponse)await _session.Call(new C2G_CreateSubSceneAddressableRequest());
+          if (response.ErrorCode != 0)
+          {
+               Log.Debug($"创建SubSceneAddressable失败 ErrorCode: {response.ErrorCode}");
+               return;
+          }
+
+          Log.Debug("创建SubSceneAddressable成功");
+     }
+
+     private void SendAddressable()
+     {
+          _session.Send(new C2SubScene_TestMessage()
+          {
+               Tag = "hi subScene Addressable"
+          });
      }
 }

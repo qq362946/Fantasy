@@ -107,5 +107,19 @@ message G2C_CreateSubSceneResponse // IResponse
 /// 客户端通知Gate服务器给SubScene发送一个消息
 message C2G_SendToSubSceneMessage // IMessage
 {
-	
+
+}
+/// 客户端通知Gate服务器创建一个SubScene的Address消息
+message C2G_CreateSubSceneAddressableRequest // IRequest,G2C_CreateSubSceneAddressableResponse
+{
+
+}
+message G2C_CreateSubSceneAddressableResponse // IResponse
+{
+
+}
+/// 客户端向SubScene发送一个测试消息
+message C2SubScene_TestMessage // IAddressableRouteMessage
+{
+	string Tag = 1;
 }

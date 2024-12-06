@@ -462,4 +462,63 @@ namespace Fantasy
 		}
 		public uint OpCode() { return OuterOpcode.C2G_SendToSubSceneMessage; }
 	}
+	/// <summary>
+	///  客户端通知Gate服务器创建一个SubScene的Address消息
+	/// </summary>
+	[ProtoContract]
+	public partial class C2G_CreateSubSceneAddressableRequest : AMessage, IRequest, IProto
+	{
+		public static C2G_CreateSubSceneAddressableRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2G_CreateSubSceneAddressableRequest>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2G_CreateSubSceneAddressableRequest>(this);
+#endif
+		}
+		[ProtoIgnore]
+		public G2C_CreateSubSceneAddressableResponse ResponseType { get; set; }
+		public uint OpCode() { return OuterOpcode.C2G_CreateSubSceneAddressableRequest; }
+	}
+	[ProtoContract]
+	public partial class G2C_CreateSubSceneAddressableResponse : AMessage, IResponse, IProto
+	{
+		public static G2C_CreateSubSceneAddressableResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_CreateSubSceneAddressableResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2C_CreateSubSceneAddressableResponse>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_CreateSubSceneAddressableResponse; }
+		[ProtoMember(1)]
+		public uint ErrorCode { get; set; }
+	}
+	/// <summary>
+	///  客户端向SubScene发送一个测试消息
+	/// </summary>
+	[ProtoContract]
+	public partial class C2SubScene_TestMessage : AMessage, IAddressableRouteMessage, IProto
+	{
+		public static C2SubScene_TestMessage Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2SubScene_TestMessage>();
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2SubScene_TestMessage>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2SubScene_TestMessage; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
 }

@@ -57,7 +57,10 @@ namespace Fantasy
         /// 当前Scene的上下文
         /// </summary>
         public ThreadSynchronizationContext ThreadSynchronizationContext { get; internal set; }
-        private readonly Dictionary<long, Entity> _entities = new Dictionary<long, Entity>();
+        /// <summary>
+        /// 当前Scene的下创建的Entity
+        /// </summary>
+        internal readonly Dictionary<long, Entity> Entities = new Dictionary<long, Entity>();
         internal readonly Dictionary<Type, Func<IPool>> TypeInstance = new Dictionary<Type, Func<IPool>>();
         #endregion
 
@@ -134,7 +137,6 @@ namespace Fantasy
             CoroutineLockComponent = AddComponent<CoroutineLockComponent>(false).Initialize();
             MessageDispatcherComponent = await AddComponent<MessageDispatcherComponent>(false).Initialize();
             NetworkMessagingComponent = AddComponent<NetworkMessagingComponent>(false);
-            // NetworkThreadComponent = AddComponent<NetworkThreadComponent>().Initialize();
 #if FANTASY_NET
             SingleCollectionComponent = await AddComponent<SingleCollectionComponent>(false).Initialize();
 #endif
@@ -153,7 +155,6 @@ namespace Fantasy
             CoroutineLockComponent = scene.CoroutineLockComponent;
             MessageDispatcherComponent = scene.MessageDispatcherComponent;
             NetworkMessagingComponent = scene.NetworkMessagingComponent;
-            // NetworkThreadComponent = scene.NetworkThreadComponent;
 #if FANTASY_NET
             SingleCollectionComponent = scene.SingleCollectionComponent;
 #endif
@@ -181,6 +182,11 @@ namespace Fantasy
             UnityNetwork?.Dispose();
 #endif
             TypeInstance.Clear();
+            EventComponent.Dispose();
+            MessagePoolComponent.Dispose();
+            EntityPool.Dispose();
+            EntityListPool.Dispose();
+            EntitySortedDictionaryPool.Dispose();
             base.Dispose();
         }
 
@@ -336,7 +342,6 @@ namespace Fantasy
             scene.Id = scene.EntityIdFactory.Create;
             scene.RuntimeId = scene.RuntimeIdFactory.Create;
             scene.AddEntity(scene);
-            parentScene.AddEntity(scene);
             scene.Initialize(parentScene);
             scene.ThreadSynchronizationContext.Post(() => OnEvent().Coroutine());
             return scene;
@@ -389,9 +394,9 @@ namespace Fantasy
         /// 添加一个实体到当前Scene下
         /// </summary>
         /// <param name="entity">实体实例</param>
-        public void AddEntity(Entity entity)
+        public virtual void AddEntity(Entity entity)
         {
-            _entities.Add(entity.RuntimeId, entity);
+            Entities.Add(entity.RuntimeId, entity);
         }
 
         /// <summary>
@@ -399,9 +404,9 @@ namespace Fantasy
         /// </summary>
         /// <param name="runTimeId">实体的RunTimeId</param>
         /// <returns>返回的实体</returns>
-        public Entity GetEntity(long runTimeId)
+        public virtual Entity GetEntity(long runTimeId)
         {
-            return _entities.TryGetValue(runTimeId, out var entity) ? entity : null;
+            return Entities.TryGetValue(runTimeId, out var entity) ? entity : null;
         }
 
         /// <summary>
@@ -410,9 +415,9 @@ namespace Fantasy
         /// <param name="runTimeId">实体的RunTimeId</param>
         /// <param name="entity">实体实例</param>
         /// <returns>返回一个bool值来提示是否查找到这个实体</returns>
-        public bool TryGetEntity(long runTimeId, out Entity entity)
+        public virtual bool TryGetEntity(long runTimeId, out Entity entity)
         {
-            return _entities.TryGetValue(runTimeId, out entity);
+            return Entities.TryGetValue(runTimeId, out entity);
         }
 
         /// <summary>
@@ -421,9 +426,9 @@ namespace Fantasy
         /// <param name="runTimeId">实体的RunTimeId</param>
         /// <typeparam name="T">要查询实体的泛型类型</typeparam>
         /// <returns>返回的实体</returns>
-        public T GetEntity<T>(long runTimeId) where T : Entity
+        public virtual T GetEntity<T>(long runTimeId) where T : Entity
         {
-            return _entities.TryGetValue(runTimeId, out var entity) ? (T)entity : null;
+            return Entities.TryGetValue(runTimeId, out var entity) ? (T)entity : null;
         }
 
         /// <summary>
@@ -433,9 +438,9 @@ namespace Fantasy
         /// <param name="entity">实体实例</param>
         /// <typeparam name="T">要查询实体的泛型类型</typeparam>
         /// <returns>返回一个bool值来提示是否查找到这个实体</returns>
-        public bool TryGetEntity<T>(long runTimeId, out T entity) where T : Entity
+        public virtual bool TryGetEntity<T>(long runTimeId, out T entity) where T : Entity
         {
-            if (_entities.TryGetValue(runTimeId, out var getEntity))
+            if (Entities.TryGetValue(runTimeId, out var getEntity))
             {
                 entity = (T)getEntity;
                 return true;
@@ -450,9 +455,9 @@ namespace Fantasy
         /// </summary>
         /// <param name="runTimeId">实体的RunTimeId</param>
         /// <returns>返回一个bool值来提示是否删除了这个实体</returns>
-        public bool RemoveEntity(long runTimeId)
+        public virtual bool RemoveEntity(long runTimeId)
         {
-            return _entities.Remove(runTimeId);
+            return Entities.Remove(runTimeId);
         }
 
         /// <summary>
@@ -460,9 +465,9 @@ namespace Fantasy
         /// </summary>
         /// <param name="entity">实体实例</param>
         /// <returns>返回一个bool值来提示是否删除了这个实体</returns>
-        public bool RemoveEntity(Entity entity)
+        public virtual bool RemoveEntity(Entity entity)
         {
-            return _entities.Remove(entity.RuntimeId);
+            return Entities.Remove(entity.RuntimeId);
         }
 
         #endregion

@@ -15,5 +15,7 @@ namespace Fantasy
 		 public const uint G2M_CreateSubSceneRequest = 1073751829;
 		 public const uint M2G_CreateSubSceneResponse = 1207969557;
 		 public const uint G2SubScene_SentMessage = 939534098;
+		 public const uint G2SubScene_AddressableIdRequest = 1073751830;
+		 public const uint SubScene2G_AddressableIdResponse = 1207969558;
 	}
 }

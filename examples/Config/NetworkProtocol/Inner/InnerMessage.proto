@@ -58,3 +58,12 @@ message G2SubScene_SentMessage // IRouteMessage
 {
 	string Tag = 1;
 }
+/// Gate通知SubScene创建一个Addressable消息
+message G2SubScene_AddressableIdRequest // IRouteRequest,SubScene2G_AddressableIdResponse
+{
+
+}
+message SubScene2G_AddressableIdResponse // IRouteResponse
+{
+	int64 AddressableId = 1;	// SubScene服务器返回的AddressableId
+}
