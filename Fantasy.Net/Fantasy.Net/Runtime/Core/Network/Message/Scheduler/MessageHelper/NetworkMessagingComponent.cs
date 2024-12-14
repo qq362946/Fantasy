@@ -1,8 +1,5 @@
-using Fantasy.Entitas;
 #if FANTASY_NET
-using System;
-using System.Collections.Generic;
-using System.IO;
+using Fantasy.Entitas;
 using System.Runtime.CompilerServices;
 using Fantasy.Async;
 using Fantasy.Entitas.Interface;
@@ -13,7 +10,6 @@ using Fantasy.Network.Route;
 using Fantasy.PacketParser;
 using Fantasy.PacketParser.Interface;
 using Fantasy.Timer;
-#endif
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -21,7 +17,6 @@ using Fantasy.Timer;
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy.Scheduler
 {
-#if FANTASY_NET
     public struct NetworkMessageUpdate
     {
         public NetworkMessagingComponent NetworkMessagingComponent;
@@ -66,10 +61,8 @@ namespace Fantasy.Scheduler
             self.AddressableRouteMessageLock = null;
         }
     }
-#endif
     public sealed class NetworkMessagingComponent : Entity
     {
-#if FANTASY_NET
         public long TimerId;
         private uint _rpcId;
         public CoroutineLock AddressableRouteMessageLock;
@@ -275,6 +268,6 @@ namespace Fantasy.Scheduler
                 throw;
             }
         }
-#endif
     }
 }
+#endif

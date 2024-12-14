@@ -4,11 +4,6 @@ using Fantasy.Event;
 
 namespace Fantasy;
 
-public class TEntity : Entity
-{
-    
-}
-
 public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 {
     private static long _addressableSceneRunTimeId;

@@ -111,15 +111,15 @@ namespace Fantasy
         /// Scene下的网络消息派发组件
         /// </summary>
         internal MessageDispatcherComponent MessageDispatcherComponent { get; set; }
-        /// <summary>
-        /// Scene下的内网消息发送组件
-        /// </summary>
-        public NetworkMessagingComponent NetworkMessagingComponent { get; internal set; }
 #if FANTASY_NET
         /// <summary>
         /// Scene下的Entity分表组件
         /// </summary>
         public SingleCollectionComponent SingleCollectionComponent { get; internal set; }
+        /// <summary>
+        /// Scene下的内网消息发送组件
+        /// </summary>
+        public NetworkMessagingComponent NetworkMessagingComponent { get; internal set; }
 #endif
         #endregion
 
@@ -136,8 +136,8 @@ namespace Fantasy
             TimerComponent = AddComponent<TimerComponent>(false).Initialize();
             CoroutineLockComponent = AddComponent<CoroutineLockComponent>(false).Initialize();
             MessageDispatcherComponent = await AddComponent<MessageDispatcherComponent>(false).Initialize();
-            NetworkMessagingComponent = AddComponent<NetworkMessagingComponent>(false);
 #if FANTASY_NET
+            NetworkMessagingComponent = AddComponent<NetworkMessagingComponent>(false);
             SingleCollectionComponent = await AddComponent<SingleCollectionComponent>(false).Initialize();
 #endif
         }
@@ -154,8 +154,8 @@ namespace Fantasy
             MessagePoolComponent = scene.MessagePoolComponent;
             CoroutineLockComponent = scene.CoroutineLockComponent;
             MessageDispatcherComponent = scene.MessageDispatcherComponent;
-            NetworkMessagingComponent = scene.NetworkMessagingComponent;
 #if FANTASY_NET
+            NetworkMessagingComponent = scene.NetworkMessagingComponent;
             SingleCollectionComponent = scene.SingleCollectionComponent;
 #endif
         }

@@ -7,6 +7,8 @@ using Fantasy.Helper;
 using Fantasy.Serialize;
 using MongoDB.Bson;
 using MongoDB.Driver;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -154,12 +156,19 @@ namespace Fantasy.DataBase
         /// </summary>
         /// <typeparam name="T">文档实体类型。</typeparam>
         /// <param name="id">要查询的文档 ID。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>查询到的文档。</returns>
-        public async FTask<T> QueryNotLock<T>(long id, string collection = null) where T : Entity
+        public async FTask<T> QueryNotLock<T>(long id, bool isDeserialize = false, string collection = null) where T : Entity
         {
             var cursor = await GetCollection<T>(collection).FindAsync(d => d.Id == id);
             var v = await cursor.FirstOrDefaultAsync();
+
+            if (isDeserialize && v != null)
+            {
+                v.Deserialize(_scene);
+            }
+
             return v;
         }
 
@@ -168,14 +177,21 @@ namespace Fantasy.DataBase
         /// </summary>
         /// <typeparam name="T">文档实体类型。</typeparam>
         /// <param name="id">要查询的文档 ID。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>查询到的文档。</returns>
-        public async FTask<T> Query<T>(long id, string collection = null) where T : Entity
+        public async FTask<T> Query<T>(long id, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(id))
             {
                 var cursor = await GetCollection<T>(collection).FindAsync(d => d.Id == id);
                 var v = await cursor.FirstOrDefaultAsync();
+
+                if (isDeserialize && v != null)
+                {
+                    v.Deserialize(_scene);
+                }
+
                 return v;
             }
         }
@@ -187,14 +203,15 @@ namespace Fantasy.DataBase
         /// <param name="filter">查询过滤条件。</param>
         /// <param name="pageIndex">页码。</param>
         /// <param name="pageSize">每页大小。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档数量和日期列表。</returns>
-        public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity
+        public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var count = await Count(filter);
-                var dates = await QueryByPage(filter, pageIndex, pageSize, collection);
+                var dates = await QueryByPage(filter, pageIndex, pageSize, isDeserialize, collection);
                 return ((int)count, dates);
             }
         }
@@ -207,16 +224,15 @@ namespace Fantasy.DataBase
         /// <param name="pageIndex">页码。</param>
         /// <param name="pageSize">每页大小。</param>
         /// <param name="cols">要查询的列名称数组。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档数量和日期列表。</returns>
-        public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity
+        public async FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var count = await Count(filter);
-
-                var dates = await QueryByPage(filter, pageIndex, pageSize, cols, collection);
-
+                var dates = await QueryByPage(filter, pageIndex, pageSize, cols, isDeserialize, collection);
                 return ((int)count, dates);
             }
         }
@@ -228,15 +244,28 @@ namespace Fantasy.DataBase
         /// <param name="filter">查询过滤条件。</param>
         /// <param name="pageIndex">页码。</param>
         /// <param name="pageSize">每页大小。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档列表。</returns>
-        public async FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity
+        public async FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
-                return await GetCollection<T>(collection).Find(filter).Skip((pageIndex - 1) * pageSize)
+                var list = await GetCollection<T>(collection).Find(filter).Skip((pageIndex - 1) * pageSize)
                     .Limit(pageSize)
                     .ToListAsync();
+
+                if (!isDeserialize || list is not { Count: > 0 })
+                {
+                    return list;
+                }
+
+                foreach (var entity in list)
+                {
+                    entity.Deserialize(_scene);
+                }
+
+                return list;
             }
         }
 
@@ -248,10 +277,10 @@ namespace Fantasy.DataBase
         /// <param name="pageIndex">页码。</param>
         /// <param name="pageSize">每页大小。</param>
         /// <param name="cols">要查询的列名称数组。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档列表。</returns>
-        public async FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize,
-            string[] cols, string collection = null) where T : Entity
+        public async FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
@@ -261,9 +290,21 @@ namespace Fantasy.DataBase
                 {
                     projection = projection.Include(col);
                 }
-
-                return await GetCollection<T>(collection).Find(filter).Project<T>(projection)
+                
+                var list = await GetCollection<T>(collection).Find(filter).Project<T>(projection)
                     .Skip((pageIndex - 1) * pageSize).Limit(pageSize).ToListAsync();
+
+                if (!isDeserialize || list is not { Count: > 0 })
+                {
+                    return list;
+                }
+
+                foreach (var entity in list)
+                {
+                    entity.Deserialize(_scene);
+                }
+
+                return list;
             }
         }
 
@@ -276,21 +317,35 @@ namespace Fantasy.DataBase
         /// <param name="pageSize">每页大小。</param>
         /// <param name="orderByExpression">排序表达式。</param>
         /// <param name="isAsc">是否升序排序。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档列表。</returns>
-        public async FTask<List<T>> QueryByPageOrderBy<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize,
-            Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity
+        public async FTask<List<T>> QueryByPageOrderBy<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, Expression<Func<T, object>> orderByExpression, bool isAsc = true, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
+                List<T> list;
+                
                 if (isAsc)
                 {
-                    return await GetCollection<T>(collection).Find(filter).SortBy(orderByExpression)
-                        .Skip((pageIndex - 1) * pageSize).Limit(pageSize).ToListAsync();
+                    list = await GetCollection<T>(collection).Find(filter).SortBy(orderByExpression).Skip((pageIndex - 1) * pageSize).Limit(pageSize).ToListAsync();
+                }
+                else
+                {
+                    list = await GetCollection<T>(collection).Find(filter).SortByDescending(orderByExpression).Skip((pageIndex - 1) * pageSize).Limit(pageSize).ToListAsync();
                 }
 
-                return await GetCollection<T>(collection).Find(filter).SortByDescending(orderByExpression)
-                    .Skip((pageIndex - 1) * pageSize).Limit(pageSize).ToListAsync();
+                if (!isDeserialize || list is not { Count: > 0 })
+                {
+                    return list;
+                }
+                
+                foreach (var entity in list)
+                {
+                    entity.Deserialize(_scene);
+                }
+
+                return list;
             }
         }
 
@@ -299,15 +354,22 @@ namespace Fantasy.DataBase
         /// </summary>
         /// <typeparam name="T">文档实体类型。</typeparam>
         /// <param name="filter">查询过滤条件。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的第一个文档，如果未找到则为 null。</returns>
-        public async FTask<T?> First<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity
+        public async FTask<T?> First<T>(Expression<Func<T, bool>> filter, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var cursor = await GetCollection<T>(collection).FindAsync(filter);
+                var t = await cursor.FirstOrDefaultAsync();
 
-                return await cursor.FirstOrDefaultAsync();
+                if (isDeserialize && t != null)
+                {
+                    t.Deserialize(_scene);
+                }
+
+                return t;
             }
         }
 
@@ -317,9 +379,10 @@ namespace Fantasy.DataBase
         /// <typeparam name="T">文档实体类型。</typeparam>
         /// <param name="json">JSON 查询条件。</param>
         /// <param name="cols">要查询的列名称数组。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的第一个文档。</returns>
-        public async FTask<T> First<T>(string json, string[] cols, string collection = null) where T : Entity
+        public async FTask<T> First<T>(string json, string[] cols, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
@@ -335,8 +398,14 @@ namespace Fantasy.DataBase
                 FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
 
                 var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition, options);
+                var t = await cursor.FirstOrDefaultAsync();
 
-                return await cursor.FirstOrDefaultAsync();
+                if (isDeserialize && t != null)
+                {
+                    t.Deserialize(_scene);
+                }
+
+                return t;
             }
         }
 
@@ -347,20 +416,35 @@ namespace Fantasy.DataBase
         /// <param name="filter">查询过滤条件。</param>
         /// <param name="orderByExpression">排序表达式。</param>
         /// <param name="isAsc">是否升序排序。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档列表。</returns>
-        public async FTask<List<T>> QueryOrderBy<T>(Expression<Func<T, bool>> filter,
-            Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity
+        public async FTask<List<T>> QueryOrderBy<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> orderByExpression, bool isAsc = true, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
+                List<T> list;
+                
                 if (isAsc)
                 {
-                    return await GetCollection<T>(collection).Find(filter).SortBy(orderByExpression).ToListAsync();
+                    list = await GetCollection<T>(collection).Find(filter).SortBy(orderByExpression).ToListAsync();
+                }
+                else
+                {
+                    list = await GetCollection<T>(collection).Find(filter).SortByDescending(orderByExpression).ToListAsync();
                 }
 
-                return await GetCollection<T>(collection).Find(filter).SortByDescending(orderByExpression)
-                    .ToListAsync();
+                if (!isDeserialize || list is not { Count: > 0 })
+                {
+                    return list;
+                }
+                
+                foreach (var entity in list)
+                {
+                    entity.Deserialize(_scene);
+                }
+
+                return list;
             }
         }
 
@@ -369,16 +453,27 @@ namespace Fantasy.DataBase
         /// </summary>
         /// <typeparam name="T">文档实体类型。</typeparam>
         /// <param name="filter">查询过滤条件。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档列表。</returns>
-        public async FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string collection = null)
-            where T : Entity
+        public async FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 var cursor = await GetCollection<T>(collection).FindAsync(filter);
-                var v = await cursor.ToListAsync();
-                return v;
+                var list = await cursor.ToListAsync();
+                
+                if (!isDeserialize || list is not { Count: > 0 })
+                {
+                    return list;
+                }
+                
+                foreach (var entity in list)
+                {
+                    entity.Deserialize(_scene);
+                }
+                
+                return list;
             }
         }
 
@@ -388,7 +483,8 @@ namespace Fantasy.DataBase
         /// <param name="id">文档 ID。</param>
         /// <param name="collectionNames">要查询的集合名称列表。</param>
         /// <param name="result">查询结果存储列表。</param>
-        public async FTask Query(long id, List<string>? collectionNames, List<Entity> result)
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
+        public async FTask Query(long id, List<string>? collectionNames, List<Entity> result, bool isDeserialize = false)
         {
             using (await _dataBaseLock.Wait(id))
             {
@@ -408,6 +504,11 @@ namespace Fantasy.DataBase
                         continue;
                     }
 
+                    if (isDeserialize)
+                    {
+                        e.Deserialize(_scene);
+                    }
+
                     result.Add(e);
                 }
             }
@@ -418,16 +519,28 @@ namespace Fantasy.DataBase
         /// </summary>
         /// <typeparam name="T">文档实体类型。</typeparam>
         /// <param name="json">JSON 查询条件。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档列表。</returns>
-        public async FTask<List<T>> QueryJson<T>(string json, string collection = null) where T : Entity
+        public async FTask<List<T>> QueryJson<T>(string json, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
                 var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition);
-                var v = await cursor.ToListAsync();
-                return v;
+                var list = await cursor.ToListAsync();
+                
+                if (!isDeserialize || list is not { Count: > 0 })
+                {
+                    return list;
+                }
+                
+                foreach (var entity in list)
+                {
+                    entity.Deserialize(_scene);
+                }
+                
+                return list;
             }
         }
 
@@ -437,9 +550,10 @@ namespace Fantasy.DataBase
         /// <typeparam name="T">文档实体类型。</typeparam>
         /// <param name="json">JSON 查询条件。</param>
         /// <param name="cols">要查询的列名称数组。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档列表。</returns>
-        public async FTask<List<T>> QueryJson<T>(string json, string[] cols, string collection = null) where T : Entity
+        public async FTask<List<T>> QueryJson<T>(string json, string[] cols, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
@@ -455,8 +569,19 @@ namespace Fantasy.DataBase
                 FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
 
                 var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition, options);
-                var v = await cursor.ToListAsync();
-                return v;
+                var list = await cursor.ToListAsync();
+                
+                if (!isDeserialize || list is not { Count: > 0 })
+                {
+                    return list;
+                }
+                
+                foreach (var entity in list)
+                {
+                    entity.Deserialize(_scene);
+                }
+                
+                return list;
             }
         }
 
@@ -466,16 +591,28 @@ namespace Fantasy.DataBase
         /// <typeparam name="T">文档实体类型。</typeparam>
         /// <param name="taskId">任务 ID。</param>
         /// <param name="json">JSON 查询条件。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档列表。</returns>
-        public async FTask<List<T>> QueryJson<T>(long taskId, string json, string collection = null) where T : Entity
+        public async FTask<List<T>> QueryJson<T>(long taskId, string json, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(taskId))
             {
                 FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
                 var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition);
-                var v = await cursor.ToListAsync();
-                return v;
+                var list = await cursor.ToListAsync();
+                
+                if (!isDeserialize || list is not { Count: > 0 })
+                {
+                    return list;
+                }
+                
+                foreach (var entity in list)
+                {
+                    entity.Deserialize(_scene);
+                }
+                
+                return list;
             }
         }
 
@@ -485,10 +622,10 @@ namespace Fantasy.DataBase
         /// <typeparam name="T">文档实体类型。</typeparam>
         /// <param name="filter">查询过滤条件。</param>
         /// <param name="cols">要查询的列名称数组。</param>
+        /// <param name="isDeserialize">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
         /// <param name="collection">集合名称。</param>
         /// <returns>满足条件的文档列表。</returns>
-        public async FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string[] cols, string collection = null)
-            where T : class
+        public async FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string[] cols, bool isDeserialize = false, string collection = null) where T : Entity
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
@@ -499,7 +636,19 @@ namespace Fantasy.DataBase
                     projection = projection.Include(cols[i]);
                 }
 
-                return await GetCollection<T>(collection).Find(filter).Project<T>(projection).ToListAsync();
+                var list = await GetCollection<T>(collection).Find(filter).Project<T>(projection).ToListAsync();
+                
+                if (!isDeserialize || list is not { Count: > 0 })
+                {
+                    return list;
+                }
+                
+                foreach (var entity in list)
+                {
+                    entity.Deserialize(_scene);
+                }
+                
+                return list;
             }
         }
 

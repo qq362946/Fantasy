@@ -131,8 +131,7 @@ namespace Fantasy.SingleCollection
             {
                 foreach (var collectionName in collections)
                 {
-                    var singleCollection = await worldDateBase.QueryNotLock<Entity>(entity.Id, collectionName);
-                    singleCollection.Deserialize(Scene);
+                    var singleCollection = await worldDateBase.QueryNotLock<Entity>(entity.Id, true, collectionName);
                     entity.AddComponent(singleCollection);
                 }
             }

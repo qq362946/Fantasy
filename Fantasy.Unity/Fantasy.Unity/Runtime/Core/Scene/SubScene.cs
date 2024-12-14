@@ -36,8 +36,8 @@ namespace Fantasy
             MessagePoolComponent = rootScene.MessagePoolComponent;
             CoroutineLockComponent = rootScene.CoroutineLockComponent;
             MessageDispatcherComponent = rootScene.MessageDispatcherComponent;
-            NetworkMessagingComponent = rootScene.NetworkMessagingComponent;
     #if FANTASY_NET
+            NetworkMessagingComponent = rootScene.NetworkMessagingComponent;
             SingleCollectionComponent = rootScene.SingleCollectionComponent;
     #endif
             ThreadSynchronizationContext = rootScene.ThreadSynchronizationContext;
