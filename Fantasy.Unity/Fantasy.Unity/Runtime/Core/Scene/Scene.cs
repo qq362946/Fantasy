@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Event;
@@ -125,7 +126,7 @@ namespace Fantasy
 
         #region Initialize
 
-        private async FTask Initialize()
+        private async UniTask Initialize()
         {
             EntityPool = new EntityPool();
             EntityListPool = new EntityListPool<Entity>();
@@ -219,7 +220,7 @@ namespace Fantasy
         /// <param name="sceneRuntimeType">选择Scene的运行方式</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async FTask<Scene> Create(string sceneRuntimeType = SceneRuntimeType.MainThread)
+        public static async UniTask<Scene> Create(string sceneRuntimeType = SceneRuntimeType.MainThread)
         {
             var world = ++_unityWorldId;
 
@@ -247,7 +248,7 @@ namespace Fantasy
             await SetScheduler(scene, sceneRuntimeType);
             scene.ThreadSynchronizationContext.Post(() =>
             {
-                scene.EventComponent.PublishAsync(new OnCreateScene(scene)).Coroutine();
+                scene.EventComponent.PublishAsync(new OnCreateScene(scene)).Forget();
             });
             return scene;
         }
@@ -352,7 +353,7 @@ namespace Fantasy
             }
         }
 #endif
-        private static async FTask SetScheduler(Scene scene, string sceneRuntimeType)
+        private static async UniTask SetScheduler(Scene scene, string sceneRuntimeType)
         {
             switch (sceneRuntimeType)
             {

@@ -1,7 +1,10 @@
 {
     "name": "Fantasy.Unity",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:77d6c8c98758f884fbc6cb1c9bfb5924"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": true,

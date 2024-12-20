@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Fantasy.Async;
 
 namespace Fantasy.Event
@@ -34,7 +35,7 @@ namespace Fantasy.Event
         /// <see cref="IEvent.Invoke"/>
         /// </summary>
         /// <returns></returns>
-        FTask InvokeAsync(object self);
+        UniTask InvokeAsync(object self);
     }
     
     /// <summary>
@@ -92,12 +93,12 @@ namespace Fantasy.Event
         /// 事件调用的方法，要在这个方法里编写事件发生的逻辑
         /// </summary>
         /// <param name="self"></param>
-        protected abstract FTask Handler(T self);
+        protected abstract UniTask Handler(T self);
         /// <summary>
         /// <see cref="IEvent.Invoke"/>
         /// </summary>
         /// <returns></returns>
-        public async FTask InvokeAsync(object self)
+        public async UniTask InvokeAsync(object self)
         {
             try
             {

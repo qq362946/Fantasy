@@ -65,7 +65,7 @@ namespace Fantasy.Scheduler
                             return;
                         }
 
-                        action.SetResult(aResponse);
+                        action.TrySetResult(aResponse);
                     }
                     
                     return;

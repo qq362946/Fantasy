@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Fantasy.Async;
 using Fantasy.Network;
 using Fantasy.Serialize;
@@ -26,7 +27,7 @@ namespace Fantasy.Network.Interface
         /// <param name="messageTypeCode">消息类型代码。</param>
         /// <param name="message">要处理的消息。</param>
         /// <returns>异步任务。</returns>
-        FTask Handle(Session session, uint rpcId, uint messageTypeCode, object message);
+        UniTask Handle(Session session, uint rpcId, uint messageTypeCode, object message);
     }
 
     /// <summary>
@@ -51,7 +52,7 @@ namespace Fantasy.Network.Interface
         /// <param name="messageTypeCode">消息类型代码。</param>
         /// <param name="message">要处理的消息。</param>
         /// <returns>异步任务。</returns>
-        public async FTask Handle(Session session, uint rpcId, uint messageTypeCode, object message)
+        public async UniTask Handle(Session session, uint rpcId, uint messageTypeCode, object message)
         {
             try
             {
@@ -69,7 +70,7 @@ namespace Fantasy.Network.Interface
         /// <param name="session">会话对象。</param>
         /// <param name="message">要处理的消息。</param>
         /// <returns>异步任务。</returns>
-        protected abstract FTask Run(Session session, T message);
+        protected abstract UniTask Run(Session session, T message);
     }
 
     /// <summary>
@@ -94,7 +95,7 @@ namespace Fantasy.Network.Interface
         /// <param name="messageTypeCode">消息类型代码。</param>
         /// <param name="message">要处理的消息。</param>
         /// <returns>异步任务。</returns>
-        public async FTask Handle(Session session, uint rpcId, uint messageTypeCode, object message)
+        public async UniTask Handle(Session session, uint rpcId, uint messageTypeCode, object message)
         {
             if (message is not TRequest request)
             {
@@ -145,7 +146,7 @@ namespace Fantasy.Network.Interface
         /// <param name="response">响应消息。</param>
         /// <param name="reply">发送响应的方法。</param>
         /// <returns>异步任务。</returns>
-        protected abstract FTask Run(Session session, TRequest request, TResponse response, Action reply);
+        protected abstract UniTask Run(Session session, TRequest request, TResponse response, Action reply);
     }
 #if FANTASY_UNITY
     public interface IMessageDelegateHandler
@@ -167,7 +168,7 @@ namespace Fantasy.Network.Interface
         /// <param name="message"></param>
         public void Handle(Session session, object message);
     }
-    public delegate FTask MessageDelegate<in T>(Session session, T msg) where T : IMessage;
+    public delegate UniTask MessageDelegate<in T>(Session session, T msg) where T : IMessage;
     public sealed class MessageDelegateHandler<T> : IMessageDelegateHandler, IDisposable where T : IMessage
     {
         private readonly List<MessageDelegate<T>> _delegates = new List<MessageDelegate<T>>();
@@ -202,7 +203,7 @@ namespace Fantasy.Network.Interface
             {
                 try
                 {
-                    registerDelegate(session, (T)message).Coroutine();
+                    registerDelegate(session, (T)message).Forget();
                 }
                 catch (Exception e)
                 {

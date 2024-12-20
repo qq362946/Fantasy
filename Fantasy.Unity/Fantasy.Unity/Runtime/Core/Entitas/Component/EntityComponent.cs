@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Cysharp.Threading.Tasks;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
@@ -59,7 +60,7 @@ namespace Fantasy.Entitas
         private readonly Queue<FrameUpdateQueueInfo> _frameUpdateQueue = new Queue<FrameUpdateQueueInfo>();
         private readonly Dictionary<long, UpdateQueueInfo> _updateQueueDic = new Dictionary<long, UpdateQueueInfo>();
 
-        internal async FTask<EntityComponent> Initialize()
+        internal async UniTask<EntityComponent> Initialize()
         {
             await AssemblySystem.Register(this);
             return this;
@@ -67,39 +68,38 @@ namespace Fantasy.Entitas
 
         #region Assembly
 
-        public FTask Load(long assemblyIdentity)
+        public UniTask Load(long assemblyIdentity)
         {
-            var task = FTask.Create(false);
+            var task = AutoResetUniTaskCompletionSourcePlus.Create();
             Scene.ThreadSynchronizationContext.Post(() =>
             {
                 LoadInner(assemblyIdentity);
-                task.SetResult();
+                task.TrySetResult();
             });
-            return task;
+            return task.Task;
         }
 
-        public FTask ReLoad(long assemblyIdentity)
+        public UniTask ReLoad(long assemblyIdentity)
         {
-            var task = FTask.Create(false);
+            var task = AutoResetUniTaskCompletionSourcePlus.Create();
             Scene.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 LoadInner(assemblyIdentity);
-                task.SetResult();
+                task.TrySetResult();
             });
-            
-            return task;
+            return task.Task;
         }
 
-        public FTask OnUnLoad(long assemblyIdentity)
+        public UniTask OnUnLoad(long assemblyIdentity)
         {
-            var task = FTask.Create(false);
+            var task = AutoResetUniTaskCompletionSourcePlus.Create();
             Scene.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
-                task.SetResult();
+                task.TrySetResult();
             });
-            return task;
+            return task.Task;
         }
 
         private void LoadInner(long assemblyIdentity)

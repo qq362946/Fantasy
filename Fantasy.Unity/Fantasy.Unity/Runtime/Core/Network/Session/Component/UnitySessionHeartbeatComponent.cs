@@ -1,6 +1,7 @@
 // ReSharper disable MemberCanBePrivate.Global
 
 using System;
+using Cysharp.Threading.Tasks;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
@@ -73,7 +74,7 @@ namespace Fantasy.Network
             
             TimerId = TimerComponent.Unity.RepeatedTimer(interval, () =>
             {
-                RepeatedSend().Coroutine();
+                RepeatedSend().Forget();
             });
             TimeOutTimerId = TimerComponent.Unity.RepeatedTimer(timeOutInterval, CheckTimeOut);
         }
@@ -115,7 +116,7 @@ namespace Fantasy.Network
         /// 异步发送心跳请求并处理响应。
         /// </summary>
         /// <returns>表示进行中操作的异步任务。</returns>
-        private async FTask RepeatedSend()
+        private async UniTask RepeatedSend()
         {
             if (SelfRunTimeId != RuntimeId)
             {

@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Fantasy.Async;
 using Fantasy.Helper;
 using Fantasy.Network.Interface;
@@ -36,7 +37,7 @@ namespace Fantasy.Scheduler
         /// <summary>
         /// 获取或设置任务。
         /// </summary>
-        public FTask<IResponse> Tcs { get; private set; }
+        public AutoResetUniTaskCompletionSourcePlus<IResponse> Tcs { get; private set; }
 
         /// <summary>
         /// 释放资源。
@@ -58,7 +59,7 @@ namespace Fantasy.Scheduler
         /// <param name="requestType">请求消息类型。</param>
         /// <param name="tcs">任务。</param>
         /// <returns>创建的 <see cref="MessageSender"/> 实例。</returns>
-        public static MessageSender Create(uint rpcId, Type requestType, FTask<IResponse> tcs)
+        public static MessageSender Create(uint rpcId, Type requestType, AutoResetUniTaskCompletionSourcePlus<IResponse> tcs)
         {
             var routeMessageSender = new MessageSender();
             routeMessageSender.Tcs = tcs;
@@ -75,7 +76,7 @@ namespace Fantasy.Scheduler
         /// <param name="request">请求消息。</param>
         /// <param name="tcs">任务。</param>
         /// <returns>创建的 <see cref="MessageSender"/> 实例。</returns>
-        public static MessageSender Create(uint rpcId, IRequest request, FTask<IResponse> tcs)
+        public static MessageSender Create(uint rpcId, IRequest request, AutoResetUniTaskCompletionSourcePlus<IResponse> tcs)
         {
             var routeMessageSender = new MessageSender();
             routeMessageSender.Tcs = tcs;
@@ -93,7 +94,7 @@ namespace Fantasy.Scheduler
         /// <param name="request">路由消息请求。</param>
         /// <param name="tcs">任务。</param>
         /// <returns>创建的 <see cref="MessageSender"/> 实例。</returns>
-        public static MessageSender Create(uint rpcId, long routeId, IRouteMessage request, FTask<IResponse> tcs)
+        public static MessageSender Create(uint rpcId, long routeId, IRouteMessage request, AutoResetUniTaskCompletionSourcePlus<IResponse> tcs)
         {
             var routeMessageSender = new MessageSender();
             routeMessageSender.Tcs = tcs;

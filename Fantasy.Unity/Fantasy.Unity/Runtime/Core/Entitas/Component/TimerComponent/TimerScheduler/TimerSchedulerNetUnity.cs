@@ -1,6 +1,7 @@
 #if FANTASY_UNITY
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
 using Fantasy.Helper;
@@ -84,8 +85,8 @@ namespace Fantasy.Timer
                 {
                     case TimerType.OnceWaitTimer:
                     {
-                        var tcs = (FTask<bool>)timerAction.Callback;
-                        tcs.SetResult(true);
+                        var tcs = (AutoResetUniTaskCompletionSourcePlus<bool>)timerAction.Callback;
+                        tcs.TrySetResult(true);
                         break;
                     }
                     case TimerType.OnceTimer:
@@ -134,7 +135,7 @@ namespace Fantasy.Timer
         /// <param name="time">等待的时间长度。</param>
         /// <param name="cancellationToken">可选的取消令牌。</param>
         /// <returns>等待是否成功。</returns>
-        public async FTask<bool> WaitAsync(long time, FCancellationToken cancellationToken = null)
+        public async UniTask<bool> WaitAsync(long time)
         {
             if (time <= 0)
             {
@@ -143,7 +144,7 @@ namespace Fantasy.Timer
             
             var now = Now();
             var timerId = GetId;
-            var tcs = FTask<bool>.Create();
+            var tcs = AutoResetUniTaskCompletionSourcePlus<bool>.Create();
             var timerAction = new TimerAction(timerId, TimerType.OnceWaitTimer, now, time, tcs);
             
             
@@ -151,7 +152,7 @@ namespace Fantasy.Timer
             {
                 if (Remove(timerId))
                 {
-                    tcs.SetResult(false);
+                    tcs.TrySetResult(false);
                 }
             }
             
@@ -159,13 +160,13 @@ namespace Fantasy.Timer
             
             try
             {
-                cancellationToken?.Add(CancelActionVoid);
+                tcs?.AddOnCancelAction(CancelActionVoid);
                 AddTimer(ref timerAction);
-                result =await tcs;
+                result = await tcs.Task;
             }
             finally
             {
-                cancellationToken?.Remove(CancelActionVoid);
+                tcs?.RemoveOnCancelAction(CancelActionVoid);
             }
             
             return result;
@@ -177,7 +178,7 @@ namespace Fantasy.Timer
         /// <param name="tillTime">等待的目标时间。</param>
         /// <param name="cancellationToken">可选的取消令牌。</param>
         /// <returns>等待是否成功。</returns>
-        public async FTask<bool> WaitTillAsync(long tillTime, FCancellationToken cancellationToken = null)
+        public async UniTask<bool> WaitTillAsync(long tillTime)
         {
             var now = Now();
 
@@ -187,14 +188,14 @@ namespace Fantasy.Timer
             }
 
             var timerId = GetId;
-            var tcs = FTask<bool>.Create();
+            var tcs = AutoResetUniTaskCompletionSourcePlus<bool>.Create();
             var timerAction = new TimerAction(timerId, TimerType.OnceWaitTimer, now, tillTime - now, tcs);
             
             void CancelActionVoid()
             {
                 if (Remove(timerId))
                 {
-                    tcs.SetResult(false);
+                    tcs.TrySetResult(false);
                 }
             }
             
@@ -202,13 +203,13 @@ namespace Fantasy.Timer
             
             try
             {
-                cancellationToken?.Add(CancelActionVoid);
+                tcs?.AddOnCancelAction(CancelActionVoid);
                 AddTimer(ref timerAction);
-                result = await tcs;
+                result = await tcs.Task;
             }
             finally
             {
-                cancellationToken?.Remove(CancelActionVoid);
+                tcs?.RemoveOnCancelAction(CancelActionVoid);
             }
             
             return result;
@@ -218,9 +219,9 @@ namespace Fantasy.Timer
         /// 异步等待一帧时间。
         /// </summary>
         /// <returns>等待是否成功。</returns>
-        public async FTask WaitFrameAsync(FCancellationToken cancellationToken = null)
+        public async UniTask WaitFrameAsync()
         {
-            await WaitAsync(1, cancellationToken);
+            await WaitAsync(1);
         }
 
         /// <summary>

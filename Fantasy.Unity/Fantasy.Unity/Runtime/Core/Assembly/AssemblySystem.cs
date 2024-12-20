@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using Cysharp.Threading.Tasks;
 using Fantasy.Async;
 using Fantasy.Helper;
 
@@ -91,7 +92,7 @@ namespace Fantasy.Assembly
         /// 将AssemblySystem接口的object注册到程序集管理中心
         /// </summary>
         /// <param name="obj"></param>
-        public static async FTask Register(object obj)
+        public static async UniTask Register(object obj)
         {
             if (obj is not IAssembly assemblySystem)
             {

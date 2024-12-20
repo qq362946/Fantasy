@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Fantasy.Async;
 
 namespace Fantasy.Assembly
@@ -12,16 +13,16 @@ namespace Fantasy.Assembly
         /// 程序集加载时调用
         /// </summary>
         /// <param name="assemblyIdentity">程序集标识</param>
-        public FTask Load(long assemblyIdentity);
+        public UniTask Load(long assemblyIdentity);
         /// <summary>
         /// 程序集重新加载的时候调用
         /// </summary>
         /// <param name="assemblyIdentity">程序集标识</param>
-        public FTask ReLoad(long assemblyIdentity);
+        public UniTask ReLoad(long assemblyIdentity);
         /// <summary>
         /// 卸载的时候调用
         /// </summary>
         /// <param name="assemblyIdentity">程序集标识</param>
-        public FTask OnUnLoad(long assemblyIdentity);
+        public UniTask OnUnLoad(long assemblyIdentity);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Fantasy.Event;
 using Fantasy.Pool;
 
@@ -73,7 +74,7 @@ namespace Fantasy.Async
         internal CoroutineLock CoroutineLock { get; private set; }
 
         private bool _isSetResult;
-        private FTask<WaitCoroutineLock> _tcs;
+        private AutoResetUniTaskCompletionSourcePlus<WaitCoroutineLock> _tcs;
         private WaitCoroutineLockPool _waitCoroutineLockPool;
         internal void Initialize(CoroutineLock coroutineLock, WaitCoroutineLockPool waitCoroutineLockPool, ref long coroutineLockQueueKey, ref long timerId, ref long lockId, string tag)
         {
@@ -108,9 +109,9 @@ namespace Fantasy.Async
             _waitCoroutineLockPool = null;
         }
         
-        internal FTask<WaitCoroutineLock> Tcs
+        internal AutoResetUniTaskCompletionSourcePlus<WaitCoroutineLock> Tcs
         {
-            get { return _tcs ??= FTask<WaitCoroutineLock>.Create(); }
+            get { return _tcs ??= AutoResetUniTaskCompletionSourcePlus<WaitCoroutineLock>.Create(); }
         }
 
         internal void SetResult()
@@ -122,7 +123,7 @@ namespace Fantasy.Async
             }
             
             _isSetResult = true;
-            Tcs.SetResult(this);
+            Tcs.TrySetResult(this);
         }
 
         /// <summary>

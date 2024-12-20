@@ -1,5 +1,6 @@
 #if FANTASY_UNITY
 using System.Reflection;
+using Cysharp.Threading.Tasks;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Serialize;
@@ -68,7 +69,7 @@ namespace Fantasy.Platform.Unity
         /// <param name="arg"></param>
         /// <param name="sceneRuntimeType"></param>
         /// <returns></returns>
-        public static async FTask<Scene> CreateScene(object arg = null, string sceneRuntimeType = SceneRuntimeType.MainThread)
+        public static async UniTask<Scene> CreateScene(object arg = null, string sceneRuntimeType = SceneRuntimeType.MainThread)
         {
             Scene?.Dispose();
             Scene = await Scene.Create(sceneRuntimeType);

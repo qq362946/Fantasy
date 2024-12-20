@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using Fantasy.Async;
 using Fantasy.Entitas.Interface;
 using Fantasy.Helper;
@@ -189,15 +190,15 @@ namespace Fantasy.Network.KCP
         private void OnReceiveSocketComplete()
         {
             SendRequestConnection();
-            ReadPipeDataAsync().Coroutine();
-            ReceiveSocketAsync().Coroutine();
+            ReadPipeDataAsync().Forget();
+            ReceiveSocketAsync().Forget();
         }
 
         #endregion
 
         #region ReceiveSocket
 
-        private async FTask ReceiveSocketAsync()
+        private async UniTask ReceiveSocketAsync()
         {
             while (!_cancellationTokenSource.IsCancellationRequested)
             {
@@ -242,7 +243,7 @@ namespace Fantasy.Network.KCP
 
         #region ReceivePipeData
 
-        private async FTask ReadPipeDataAsync()
+        private async UniTask ReadPipeDataAsync()
         {
             var pipeReader = _pipe.Reader;
             while (!_cancellationTokenSource.IsCancellationRequested)

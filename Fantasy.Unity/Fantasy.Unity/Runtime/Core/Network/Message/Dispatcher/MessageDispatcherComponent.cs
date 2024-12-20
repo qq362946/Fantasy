@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
@@ -58,22 +59,22 @@ namespace Fantasy.Network.Interface
         
         #region Initialize
 
-        internal async FTask<MessageDispatcherComponent> Initialize()
+        internal async UniTask<MessageDispatcherComponent> Initialize()
         {
             _receiveRouteMessageLock = Scene.CoroutineLockComponent.Create(GetType().TypeHandle.Value.ToInt64());
             await AssemblySystem.Register(this);
             return this;
         }
 
-        public async FTask Load(long assemblyIdentity)
+        public async UniTask Load(long assemblyIdentity)
         {
-            var tcs = FTask.Create(false);
+            var tcs = AutoResetUniTaskCompletionSourcePlus.Create();
             Scene.ThreadSynchronizationContext.Post(() =>
             {
                 LoadInner(assemblyIdentity);
-                tcs.SetResult();
+                tcs.TrySetResult();
             });
-            await tcs;
+            await tcs.Task;
         }
 
         private void LoadInner(long assemblyIdentity)
@@ -151,27 +152,27 @@ namespace Fantasy.Network.Interface
 #endif
         }
 
-        public async FTask ReLoad(long assemblyIdentity)
+        public async UniTask ReLoad(long assemblyIdentity)
         {
-            var tcs = FTask.Create(false);
+            var tcs = AutoResetUniTaskCompletionSourcePlus.Create();
             Scene.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 LoadInner(assemblyIdentity);
-                tcs.SetResult();
+                tcs.TrySetResult();
             });
-            await tcs;
+            await tcs.Task;
         }
 
-        public async FTask OnUnLoad(long assemblyIdentity)
+        public async UniTask OnUnLoad(long assemblyIdentity)
         {
-            var tcs = FTask.Create(false);
+            var tcs = AutoResetUniTaskCompletionSourcePlus.Create();
             Scene.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
-                tcs.SetResult();
+                tcs.TrySetResult();
             });
-            await tcs;
+            await tcs.Task;
         }
 
         private void OnUnLoadInner(long assemblyIdentity)
@@ -300,7 +301,7 @@ namespace Fantasy.Network.Interface
             }
             
             // 调用消息处理器的Handle方法并启动协程执行处理逻辑
-            messageHandler.Handle(session, rpcId, protocolCode, message).Coroutine();
+            messageHandler.Handle(session, rpcId, protocolCode, message).Forget();
         }
         
         // 如果编译符号FANTASY_NET存在，定义处理路由消息的方法

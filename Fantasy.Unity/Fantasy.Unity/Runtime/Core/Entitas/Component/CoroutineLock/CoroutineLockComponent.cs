@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Fantasy.Entitas;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -65,7 +66,7 @@ namespace Fantasy.Async
         /// 返回的WaitCoroutineLock通过Dispose来解除这个锁、建议用using来保住这个锁。
         /// 也可以返回的WaitCoroutineLock通过CoroutineLockComponent.UnLock来解除这个锁。
         /// </returns>
-        public FTask<WaitCoroutineLock> Wait(long coroutineLockType, long coroutineLockQueueKey, string tag = null, int time = 30000)
+        public UniTask<WaitCoroutineLock> Wait(long coroutineLockType, long coroutineLockQueueKey, string tag = null, int time = 30000)
         {
             if (!_coroutineLocks.TryGetValue(coroutineLockType, out var coroutineLock))
             {
