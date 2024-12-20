@@ -191,9 +191,11 @@ namespace Fantasy.Serialize
                 aSerialize.BeginInit();
             }
 
-            var buffer = new MemoryStream();
-            RuntimeTypeModel.Default.Serialize(buffer, @object);
-            return buffer.ToArray();
+            using (var buffer = new MemoryStream())
+            {
+                RuntimeTypeModel.Default.Serialize(buffer, @object);
+                return buffer.ToArray();
+            }
         }
         private byte[] Serialize<T>(T @object)
         {
@@ -201,10 +203,12 @@ namespace Fantasy.Serialize
             {
                 aSerialize.BeginInit();
             }
-            
-            var buffer = new MemoryStream();
-            RuntimeTypeModel.Default.Serialize<T>(buffer, @object);
-            return buffer.ToArray();
+
+            using (var buffer = new MemoryStream())
+            {
+                RuntimeTypeModel.Default.Serialize<T>(buffer, @object);
+                return buffer.ToArray();
+            }
         }
         /// <summary>
         /// 克隆

@@ -37,67 +37,67 @@ namespace Fantasy.DataBase
         /// <summary>
         /// 从指定集合中检索指定 ID 的类型 <typeparamref name="T"/> 的实体，不锁定。
         /// </summary>
-        FTask<T> QueryNotLock<T>(long id, string collection = null) where T : Entity;
+        FTask<T> QueryNotLock<T>(long id, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 从指定集合中检索指定 ID 的类型 <typeparamref name="T"/> 的实体。
         /// </summary>
-        FTask<T> Query<T>(long id, string collection = null) where T : Entity;
+        FTask<T> Query<T>(long id, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 按页查询满足给定筛选条件的类型 <typeparamref name="T"/> 的实体数量和日期。
         /// </summary>
-        FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity;
+        FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 按页查询满足给定筛选条件的类型 <typeparamref name="T"/> 的实体数量和日期。
         /// </summary>
-        FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity;
+        FTask<(int count, List<T> dates)> QueryCountAndDatesByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 分页查询指定集合中满足给定筛选条件的类型 <typeparamref name="T"/> 的实体列表。
         /// </summary>
-        FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string collection = null) where T : Entity;
+        FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 分页查询指定集合中满足给定筛选条件的类型 <typeparamref name="T"/> 的实体列表，仅返回指定列的数据。
         /// </summary>
-        FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, string collection = null) where T : Entity;
+        FTask<List<T>> QueryByPage<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, string[] cols, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 从指定集合中按页查询满足给定筛选条件的类型 <typeparamref name="T"/> 的实体列表，按指定字段排序。
         /// </summary>
-        FTask<List<T>> QueryByPageOrderBy<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity;
+        FTask<List<T>> QueryByPageOrderBy<T>(Expression<Func<T, bool>> filter, int pageIndex, int pageSize, Expression<Func<T, object>> orderByExpression, bool isAsc = true, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 检索满足给定筛选条件的类型 <typeparamref name="T"/> 的第一个实体，从指定集合中。
         /// </summary>
-        FTask<T?> First<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity;
+        FTask<T?> First<T>(Expression<Func<T, bool>> filter, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 查询指定集合中满足给定 JSON 查询字符串的类型 <typeparamref name="T"/> 的第一个实体，仅返回指定列的数据。
         /// </summary>
-        FTask<T> First<T>(string json, string[] cols, string collection = null) where T : Entity;
+        FTask<T> First<T>(string json, string[] cols, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 从指定集合中按页查询满足给定筛选条件的类型 <typeparamref name="T"/> 的实体列表，按指定字段排序。
         /// </summary>
-        FTask<List<T>> QueryOrderBy<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> orderByExpression, bool isAsc = true, string collection = null) where T : Entity;
+        FTask<List<T>> QueryOrderBy<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> orderByExpression, bool isAsc = true, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 从指定集合中按页查询满足给定筛选条件的类型 <typeparamref name="T"/> 的实体列表。
         /// </summary>
-        FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string collection = null) where T : Entity;
+        FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 查询指定 ID 的多个集合，将结果存储在给定的实体列表中。
         /// </summary>
-        FTask Query(long id, List<string> collectionNames, List<Entity> result);
+        FTask Query(long id, List<string> collectionNames, List<Entity> result, bool isDeserialize = false);
         /// <summary>
         /// 根据给定的 JSON 查询字符串查询指定集合中的类型 <typeparamref name="T"/> 实体列表。
         /// </summary>
-        FTask<List<T>> QueryJson<T>(string json, string collection = null) where T : Entity;
+        FTask<List<T>> QueryJson<T>(string json, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 根据给定的 JSON 查询字符串查询指定集合中的类型 <typeparamref name="T"/> 实体列表，仅返回指定列的数据。
         /// </summary>
-        FTask<List<T>> QueryJson<T>(string json, string[] cols, string collection = null) where T : Entity;
+        FTask<List<T>> QueryJson<T>(string json, string[] cols, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 根据给定的 JSON 查询字符串查询指定集合中的类型 <typeparamref name="T"/> 实体列表，通过指定的任务 ID 进行标识。
         /// </summary>
-        FTask<List<T>> QueryJson<T>(long taskId, string json, string collection = null) where T : Entity;
+        FTask<List<T>> QueryJson<T>(long taskId, string json, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 查询指定集合中满足给定筛选条件的类型 <typeparamref name="T"/> 实体列表，仅返回指定列的数据。
         /// </summary>
-        FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string[] cols, string collection = null) where T : class;
+        FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, string[] cols, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
         /// 保存类型 <typeparamref name="T"/> 实体到指定集合中，如果集合不存在将自动创建。
         /// </summary>

@@ -1,4 +1,5 @@
 using System.Threading;
+using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Network.HTTP;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ public class HelloController : ControllerBase
     }
     
     [HttpGet("greet")]
-    public IActionResult Greet()
+    public async FTask<IActionResult> Greet()
     {
         Log.Debug($"HelloController Thread.CurrentThread.ManagedThreadId:{Thread.CurrentThread.ManagedThreadId}");
         return Ok($"Hello from the Fantasy controller! _scene.SceneType:{_scene.SceneType} _scene.SceneType:{_scene.SceneConfigId}");
