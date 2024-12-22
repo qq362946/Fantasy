@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
-using Fantasy.Entitas;
 using Fantasy.Pool;
 #if FANTASY_NET || FANTASY_UNITY || FANTASY_CONSOLE
 using MongoDB.Bson.Serialization.Attributes;

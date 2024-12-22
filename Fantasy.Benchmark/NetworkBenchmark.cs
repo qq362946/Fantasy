@@ -26,7 +26,7 @@ public class NetworkBenchmark
         Entry.StartUpdate();
         _scene = await Entry.CreateScene();
         // 创建远程连接
-        _session = _scene.Connect("127.0.0.1:20000", NetworkProtocolType.KCP,
+        _session = _scene.Connect("127.0.0.1:20000", NetworkProtocolType.WebSocket,
             () =>
             {
                 Log.Debug("连接到目标服务器成功");

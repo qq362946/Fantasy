@@ -161,12 +161,15 @@ namespace Fantasy.Network.WebSocket
                     Dispose();
                     break;
                 }
-                catch (WebSocketException wse)
-                {
-                    Log.Error($"WebSocket error: {wse.Message}");
-                    Dispose();
-                    break;
-                }
+                // 这个先暂时注释掉，因为有些时候会出现WebSocketException
+                // 因为会出现这个挥手的错误，下个版本处理一下。
+                // The remote party closed the WebSocket connection without completing the close handshake.
+                // catch (WebSocketException wse)
+                // {
+                //     Log.Error($"WebSocket error: {wse.Message}");
+                //     Dispose();
+                //     break;
+                // }
                 catch (Exception e)
                 {
                     Log.Error(e);

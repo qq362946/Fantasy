@@ -51,7 +51,7 @@ namespace Fantasy.Serialize
             try
             {
                 var sort = new SortedList<long, ISerialize>();
-            
+
                 foreach (var serializerType in AssemblySystem.ForEach(typeof(ISerialize)))
                 {
                     var serializer = (ISerialize)Activator.CreateInstance(serializerType);
@@ -61,11 +61,11 @@ namespace Fantasy.Serialize
 
                 var index = 1;
                 _serializers = new ISerialize[sort.Count];
-            
+
                 foreach (var (_, serialize) in sort)
                 {
                     var serializerIndex = 0;
-                    
+
                     switch (serialize)
                     {
                         case ProtoBufPackHelper:
@@ -77,23 +77,23 @@ namespace Fantasy.Serialize
                         {
                             serializerIndex = FantasySerializerType.Bson;
                             break;
-                        }    
+                        }
                         default:
                         {
                             serializerIndex = ++index;
                             break;
                         }
                     }
-                
+
                     _serializers[serializerIndex] = serialize;
                 }
-            
+
                 _isInitialized = true;
             }
-            catch
+            catch (Exception e)
             {
+                Log.Error(e);
                 Dispose();
-                throw;
             }
         }
 #else
