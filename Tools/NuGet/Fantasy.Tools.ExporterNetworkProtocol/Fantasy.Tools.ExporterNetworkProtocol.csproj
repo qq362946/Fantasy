@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Fantasy-Net.Tools.ExporterNetworkProtocol</PackageId>
-        <PackageVersion>2024.1.7</PackageVersion>
+        <PackageVersion>2024.2.20</PackageVersion>
         <Title>Fantasy-Net.Tools.ExporterNetworkProtocol</Title>
         <Authors>qq362946</Authors>
         <owners>qq362946</owners>

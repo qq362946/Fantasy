@@ -254,6 +254,7 @@ public sealed class ProtocolExporter
                             }
                             protocolType = null;
                             protocolIgnore = "\t\t[BsonIgnore]";
+                            protocolMember = null;
                             protocolOpCodeType = OpCodeProtocolType.Bson;
                             break;
                         }
@@ -620,7 +621,10 @@ public sealed class ProtocolExporter
             var name = property[1];
             // var memberIndex = int.Parse(property[3]);
             var typeCs = ConvertType(type);
-            file.AppendLine($"\t\t[{protocolMember}({keyIndex++})]");
+            if (protocolMember != null)
+            {
+                file.AppendLine($"\t\t[{protocolMember}({keyIndex++})]");
+            }
             file.AppendLine($"\t\tpublic {typeCs} {name} {{ get; set; }}");
             disposeStr.AppendLine($"\t\t\t{name} = default;");
         }
