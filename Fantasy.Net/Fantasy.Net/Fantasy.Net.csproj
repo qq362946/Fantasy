@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Fantasy-Net</PackageId>
-        <PackageVersion>2024.2.10</PackageVersion>
+        <PackageVersion>2024.2.20</PackageVersion>
         <Title>Fantasy-Net</Title>
         <Authors>qq362946</Authors>
         <owners>qq362946</owners>
@@ -18,10 +18,10 @@
         <RepositoryType>git</RepositoryType>
         <PackageTags>Net, c#, Server, Game, GameServer, Fantasy , Network</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
-        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>Fantasy-Net</AssemblyName>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -39,11 +39,11 @@
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
       <FrameworkReference Include="Microsoft.AspNetCore.App"/>
-      <PackageReference Include="MongoDB.Bson" Version="3.0.0" />
-      <PackageReference Include="MongoDB.Driver" Version="3.0.0" />
+      <PackageReference Include="MongoDB.Bson" Version="3.1.0" />
+      <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="protobuf-net" Version="3.2.45" />
-      <PackageReference Include="System.IO.Pipelines" Version="8.0.0" />
+      <PackageReference Include="System.IO.Pipelines" Version="9.0.0" />
     </ItemGroup>
 
     <ItemGroup>

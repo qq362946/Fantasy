@@ -21,8 +21,6 @@ namespace Fantasy.DataBase
     {
         private const int DefaultTaskSize = 1024;
         private Scene _scene;
-        private string _dbName;
-        private string _connectionString;
         private MongoClient _mongoClient;
         private ISerialize _serializer;
         private IMongoDatabase _mongoDatabase;
@@ -32,15 +30,13 @@ namespace Fantasy.DataBase
         /// <summary>
         /// 初始化 MongoDB 数据库连接并记录所有集合名。
         /// </summary>
-        /// <param name="scene">所在的Scene。</param>
+        /// <param name="scene">场景对象。</param>
         /// <param name="connectionString">数据库连接字符串。</param>
         /// <param name="dbName">数据库名称。</param>
         /// <returns>初始化后的数据库实例。</returns>
         public IDataBase Initialize(Scene scene, string connectionString, string dbName)
         {
             _scene = scene;
-            _dbName = dbName;
-            _connectionString = connectionString;
             _mongoClient = new MongoClient(connectionString);
             _mongoDatabase = _mongoClient.GetDatabase(dbName);
             _dataBaseLock = scene.CoroutineLockComponent.Create(GetType().TypeHandle.Value.ToInt64());
@@ -48,6 +44,22 @@ namespace Fantasy.DataBase
             _collections.UnionWith(_mongoDatabase.ListCollectionNames().ToList());
             _serializer = SerializerManager.GetSerializer(FantasySerializerType.Bson);
             return this;
+        }
+        
+        /// <summary>
+        /// 销毁释放资源。
+        /// </summary>
+        public void Dispose()
+        {
+            // 优先释放协程锁。
+            _dataBaseLock.Dispose();
+            // 清理资源。
+            _scene = null;
+            _serializer = null;
+            _mongoDatabase = null;
+            _dataBaseLock = null;
+            _collections.Clear();
+            _mongoClient.Dispose();
         }
 
         #region Other
@@ -781,11 +793,11 @@ namespace Fantasy.DataBase
                 return;
             }
 
-            T clone = _serializer.Clone(entity);
+            var clone = _serializer.Clone(entity);
             
             using (await _dataBaseLock.Wait(entity.Id))
             {
-                await GetCollection<T>(collection).InsertOneAsync(entity);
+                await GetCollection<T>(collection).InsertOneAsync(clone);
             }
         }
 

@@ -1,13 +1,10 @@
 #if FANTASY_NET
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-using System.Runtime.CompilerServices;
 using Fantasy.IdFactory;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
-using Fantasy.PacketParser;
 using Fantasy.PacketParser.Interface;
 using Fantasy.Platform.Net;
-using Fantasy.Serialize;
 
 namespace Fantasy.Scheduler;
 
@@ -40,7 +37,7 @@ internal static class ProcessScheduler
             {
                 using (packInfo)
                 {
-                    var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+                    var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
                 
                     if (!Process.TryGetScene(sceneId, out var scene))
                     {
@@ -69,7 +66,7 @@ internal static class ProcessScheduler
             {
                 using (packInfo)
                 {
-                    var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+                    var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
                 
                     if (!Process.TryGetScene(sceneId, out var scene))
                     {
@@ -102,7 +99,7 @@ internal static class ProcessScheduler
             {
                 using (packInfo)
                 {
-                    var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+                    var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
 
                     if (!Process.TryGetScene(sceneId, out var scene))
                     {
@@ -160,7 +157,7 @@ internal static class ProcessScheduler
             case OpCodeType.InnerAddressableMessage:
             case OpCodeType.InnerRouteMessage:
             {
-                var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+                var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
                 
                 if (!Process.TryGetScene(sceneId, out var scene))
                 {
@@ -187,7 +184,7 @@ internal static class ProcessScheduler
             case OpCodeType.InnerAddressableRequest:
             case OpCodeType.InnerRouteRequest:
             {
-                var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+                var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
                 
                 if (!Process.TryGetScene(sceneId, out var scene))
                 {
@@ -215,7 +212,7 @@ internal static class ProcessScheduler
             case OpCodeType.OuterAddressableMessage:
             case OpCodeType.OuterCustomRouteMessage:
             {
-                var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+                var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
                 
                 if (!Process.TryGetScene(sceneId, out var scene))
                 {

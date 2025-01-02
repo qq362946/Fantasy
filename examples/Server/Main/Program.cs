@@ -1,6 +1,9 @@
 ﻿using Fantasy;
 using Fantasy.Helper;
+using Fantasy.IdFactory;
 using Fantasy.Platform.Net;
+// 设置ID生成规则
+IdFactoryHelper.Initialize(IdFactoryType.World);
 // 获取配置文件
 // 比如通过远程获取这个配置文件，这样可以多组服务器共享一套配置了
 var machineConfigText = await FileHelper.GetTextByRelativePath("../../../Config/Json/Server/MachineConfigData.Json");

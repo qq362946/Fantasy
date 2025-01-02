@@ -1,9 +1,9 @@
 #if FANTASY_NET
-using System.Reflection;
 using CommandLine;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Helper;
+using Fantasy.IdFactory;
 using Fantasy.Network;
 using Fantasy.Serialize;
 // ReSharper disable FunctionNeverReturns
@@ -20,7 +20,7 @@ public static class Entry
     /// <summary>
     /// 框架初始化
     /// </summary>
-    /// <param name="assemblies"></param>
+    /// <param name="assemblies">注册的Assembly</param>
     public static void Initialize(params System.Reflection.Assembly[] assemblies)
     {
         // 解析命令行参数
@@ -45,7 +45,6 @@ public static class Entry
                 throw new NotSupportedException($"ProcessType is {ProcessDefine.Options.ProcessType} Unrecognized!");
             }
         }
-        
         // 初始化程序集管理系统
         AssemblySystem.Initialize(assemblies);
         // 初始化序列化

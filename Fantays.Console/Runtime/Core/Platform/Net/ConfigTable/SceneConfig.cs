@@ -189,7 +189,7 @@ namespace Fantasy.Platform.Net
 		/// </summary>
 	    public void Initialize()
 	    {
-		    RouteId = new RuntimeIdStruct(0, Id, (byte)WorldConfigId, 0);
+		    RouteId =  IdFactoryHelper.RuntimeId(0, Id, (byte)WorldConfigId, 0);
 	    }
     }
 }

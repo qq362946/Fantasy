@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using Fantasy.Async;
 
 namespace Fantasy.Helper
 {
@@ -20,7 +21,11 @@ namespace Fantasy.Helper
         public static long ReadInt64(FileStream stream)
         {
             var buffer = new byte[8];
+#if FANTASY_NET
+            stream.ReadExactly(buffer, 0, 8);
+#else
             stream.Read(buffer, 0, 8);
+#endif
             return BitConverter.ToInt64(buffer, 0);
         }
 
@@ -30,7 +35,11 @@ namespace Fantasy.Helper
         public static int ReadInt32(FileStream stream)
         {
             var buffer = new byte[4];
+#if FANTASY_NET
+            stream.ReadExactly(buffer, 0, 4);
+#else
             stream.Read(buffer, 0, 4);
+#endif
             return BitConverter.ToInt32(buffer, 0);
         }
 
@@ -40,7 +49,11 @@ namespace Fantasy.Helper
         public static long ReadInt64(MemoryStream stream)
         {
             var buffer = new byte[8];
+#if FANTASY_NET
+            stream.ReadExactly(buffer, 0, 8);
+#else
             stream.Read(buffer, 0, 8);
+#endif
             return BitConverter.ToInt64(buffer, 0);
         }
 
@@ -50,7 +63,11 @@ namespace Fantasy.Helper
         public static int ReadInt32(MemoryStream stream)
         {
             var buffer = new byte[4];
+#if FANTASY_NET
+            stream.ReadExactly(buffer, 0, 4);
+#else
             stream.Read(buffer, 0, 4);
+#endif
             return BitConverter.ToInt32(buffer, 0);
         }
 

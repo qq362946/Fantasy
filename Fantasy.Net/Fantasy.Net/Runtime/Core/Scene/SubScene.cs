@@ -15,15 +15,6 @@ namespace Fantasy
     /// </summary>
     public sealed partial class SubScene : Scene
     {
-        /// <summary>
-        /// 当前子Scene的父Scene
-        /// </summary>
-        [BsonIgnore] 
-        [JsonIgnore] 
-        [ProtoIgnore]
-        [IgnoreDataMember]
-        public Scene RootScene { get; internal set; }
-        
         internal void Initialize(Scene rootScene) 
         {
             EntityPool = rootScene.EntityPool;
@@ -41,21 +32,6 @@ namespace Fantasy
             SingleCollectionComponent = rootScene.SingleCollectionComponent;
     #endif
             ThreadSynchronizationContext = rootScene.ThreadSynchronizationContext;
-        }
-    
-        /// <summary>
-        /// 子Scene的销毁方法
-        /// </summary>
-        public override void Dispose()
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-            
-            RootScene.RemoveEntity(RuntimeId);
-            RootScene = null;
-            base.Dispose();
         }
 
         /// <summary>

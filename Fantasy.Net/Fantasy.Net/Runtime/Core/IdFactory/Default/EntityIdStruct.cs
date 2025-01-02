@@ -11,35 +11,31 @@ namespace Fantasy.IdFactory
     /// 表示一个唯一实体的ID。
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct EntityIdStruct
+    internal struct EntityIdStruct
     {
-        // EntityId:39 + 8 + 8 + 18 =  64
-        // +-------------------+--------------------------+-----------------------+------------------------------------+
-        // |  time(30) 最大34年 | SceneId(8) 最多255个Scene | WordId(8) 最多255个世界 | sequence(18) 每秒每个进程能生产262143个
-        // +-------------------+--------------------------+-----------------------+------------------------------------+
-        public uint Time { get; private set; }
-        public uint SceneId { get; private set; }
-        public byte WordId { get; private set; }
-        public uint Sequence { get; private set; }
+        // EntityId:39 + 16 + 18 =  64
+        // +-------------------+-----------------------------+------------------------------------+
+        // |  time(30) 最大34年 | SceneId(16) 最多65535个Scene | sequence(18) 每秒每个进程能生产262143个
+        // +-------------------+-----------------------------+------------------------------------+
+        public uint Time { get; set; }
+        public uint SceneId { get; set; }
+        public uint Sequence { get; set; }
         
         public const uint MaskSequence = 0x3FFFF;
-        public const uint MaskSceneId = 0xFF;
-        public const uint MaskWordId = 0xFF;
+        public const uint MaskSceneId = 0xFFFF;
         public const uint MaskTime = 0x3FFFFFFF;
 
         /// <summary>
-        /// RuntimeIdStruct（如果超过下面参数的设定该ID会失效）。
+        /// WorldEntityIdStruct（如果超过下面参数的设定该ID会失效）。
         /// </summary>
         /// <param name="time">time不能超过1073741823</param>
-        /// <param name="sceneId">sceneId不能超过255</param>
-        /// <param name="wordId">wordId不能超过255</param>
+        /// <param name="sceneId">sceneId不能超过65535</param>
         /// <param name="sequence">sequence不能超过262143</param>
-        public EntityIdStruct(uint time, uint sceneId, byte wordId, uint sequence)
+        public EntityIdStruct(uint time, uint sceneId, uint sequence)
         {
             // 因为都是在配置表里拿到参数、所以这个不做边界判定、能节省一点点性能。
             Time = time;
             SceneId = sceneId;
-            WordId = wordId;
             Sequence = sequence;
         }
 
@@ -47,8 +43,7 @@ namespace Fantasy.IdFactory
         {
             ulong result = 0;
             result |= entityIdStruct.Sequence;
-            result |= (ulong)entityIdStruct.WordId << 18;
-            result |= (ulong)(entityIdStruct.SceneId % (entityIdStruct.WordId * 1000)) << 26;
+            result |= (ulong)entityIdStruct.SceneId << 18;
             result |= (ulong)entityIdStruct.Time << 34;
             return (long)result;
         }
@@ -61,19 +56,16 @@ namespace Fantasy.IdFactory
                 Sequence = (uint)(result & MaskSequence)
             };
             result >>= 18;
-            entityIdStruct.WordId = (byte)(result & MaskWordId);
-            result >>= 8;
-            entityIdStruct.SceneId = (uint)(result & MaskSceneId) + (uint)entityIdStruct.WordId * 1000;
-            result >>= 8;
+            entityIdStruct.SceneId = (uint)(result & MaskSceneId);
+            result >>= 16;
             entityIdStruct.Time = (uint)(result & MaskTime);
             return entityIdStruct;
         }
     }
 
-    public sealed class EntityIdFactory
+    public sealed class EntityIdFactory : IEntityIdFactory
     {
-        private readonly uint _sceneId;
-        private readonly byte _worldId;
+        private readonly ushort _sceneId;
         
         private uint _lastTime;
         private uint _lastSequence;
@@ -82,22 +74,17 @@ namespace Fantasy.IdFactory
     
         private EntityIdFactory() { }
     
-        public EntityIdFactory(uint sceneId, byte worldId)
+        public EntityIdFactory(uint sceneId)
         {
             switch (sceneId)
             {
-                case > 255255:
+                case > 65535:
                 {
                     throw new NotSupportedException($"sceneId:{sceneId} cannot be greater than 255255");
                 }
-                case < 1001:
-                {
-                    throw new NotSupportedException($"sceneId:{sceneId} cannot be less than 1001");
-                }
                 default:
                 {
-                    _sceneId = sceneId;
-                    _worldId = worldId;
+                    _sceneId = (ushort)sceneId;
                     break;
                 }
             }
@@ -120,31 +107,30 @@ namespace Fantasy.IdFactory
                     _lastSequence = 0;
                 }
 
-                return new EntityIdStruct(time, _sceneId, _worldId, _lastSequence);
+                return new EntityIdStruct(time, _sceneId, _lastSequence);
             }
         }
-        
+    }
+
+    public sealed class EntityIdFactoryTool : IIdFactoryTool
+    {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint GetTime(ref long entityId)
+        public uint GetTime(ref long entityId)
         {
             var result = (ulong)entityId >> 34;
             return (uint)(result & EntityIdStruct.MaskTime);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint GetSceneId(ref long entityId)
+        public uint GetSceneId(ref long entityId)
         {
             var result = (ulong)entityId >> 18;
-            var worldId = (uint)(result & EntityIdStruct.MaskWordId) * 1000;
-            result >>= 8;
-            return (uint)(result & EntityIdStruct.MaskSceneId) + worldId;
+            return (uint)(result & EntityIdStruct.MaskSceneId);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static byte GetWorldId(ref long entityId)
+        public byte GetWorldId(ref long entityId)
         {
-            var result = (ulong)entityId >> 18;
-            return (byte)(result & EntityIdStruct.MaskWordId);
+            throw new NotImplementedException();
         }
     }
 }

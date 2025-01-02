@@ -12,7 +12,7 @@ namespace Fantasy.DataBase
     /// <summary>
     /// 表示用于执行各种数据库操作的数据库接口。
     /// </summary>
-    public interface IDataBase
+    public interface IDataBase : IDisposable
     {
         /// <summary>
         /// 初始化数据库连接。

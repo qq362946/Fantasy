@@ -23,8 +23,8 @@ namespace Fantasy.Network.Route
         /// <param name="sceneConfig">sceneConfig</param>
         public AddressableScene(SceneConfig sceneConfig)
         {
-            Id = new EntityIdStruct(0, sceneConfig.Id, (byte)sceneConfig.WorldConfigId, 0);
-            RunTimeId = new RuntimeIdStruct(0, sceneConfig.Id, (byte)sceneConfig.WorldConfigId, 0);
+            Id = IdFactoryHelper.EntityId(0, sceneConfig.Id, (byte)sceneConfig.WorldConfigId, 0);
+            RunTimeId = IdFactoryHelper.RuntimeId(0, sceneConfig.Id, (byte)sceneConfig.WorldConfigId, 0);
         }
     }
 }

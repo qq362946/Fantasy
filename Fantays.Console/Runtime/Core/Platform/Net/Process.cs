@@ -31,7 +31,7 @@ public sealed class Process : IDisposable
     
     internal bool IsProcess(ref long routeId)
     {
-        var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+        var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
         return _processScenes.ContainsKey(sceneId);
     }
     
@@ -57,7 +57,7 @@ public sealed class Process : IDisposable
     
     internal bool TryGetSceneToProcess(long routeId, out Scene scene)
     {
-        var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+        var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
         return _processScenes.TryGetValue(sceneId, out scene);
     }
 
@@ -138,7 +138,7 @@ public sealed class Process : IDisposable
     
     internal static bool TryGetScene(long routeId, out Scene scene)
     {
-        var sceneId = RuntimeIdFactory.GetSceneId(ref routeId);
+        var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
         return Scenes.TryGetValue(sceneId, out scene);
     }
 

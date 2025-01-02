@@ -11,7 +11,7 @@ namespace Fantasy.IdFactory
     /// 表示一个运行时的ID。
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct RuntimeIdStruct
+    public struct WorldRuntimeIdStruct
     {
         // RuntimeId:23 + 8 + 8 + 25 =  64
         // +-------------------+--------------------------+-----------------------+--------------------------------------+
@@ -28,13 +28,13 @@ namespace Fantasy.IdFactory
         public const uint MaskTime = 0x7FFFFF;
         
         /// <summary>
-        /// RuntimeIdStruct（如果超过下面参数的设定该ID会失效）。
+        /// WorldRuntimeIdStruct（如果超过下面参数的设定该ID会失效）。
         /// </summary>
         /// <param name="time">time不能超过8388607</param>
         /// <param name="sceneId">sceneId不能超过255</param>
         /// <param name="wordId">wordId不能超过255</param>
         /// <param name="sequence">sequence不能超过33554431</param>
-        public RuntimeIdStruct(uint time, uint sceneId, byte wordId, uint sequence)
+        public WorldRuntimeIdStruct(uint time, uint sceneId, byte wordId, uint sequence)
         {
             // 因为都是在配置表里拿到参数、所以这个不做边界判定、能节省一点点性能。
             Time = time;
@@ -43,7 +43,7 @@ namespace Fantasy.IdFactory
             Sequence = sequence;
         }
 
-        public static implicit operator long(RuntimeIdStruct runtimeIdStruct)
+        public static implicit operator long(WorldRuntimeIdStruct runtimeIdStruct)
         {
             ulong result = runtimeIdStruct.Sequence;
             result |= (ulong)runtimeIdStruct.WordId << 25;
@@ -52,10 +52,10 @@ namespace Fantasy.IdFactory
             return (long)result;
         }
 
-        public static implicit operator RuntimeIdStruct(long runtimeId)
+        public static implicit operator WorldRuntimeIdStruct(long runtimeId)
         {
             var result = (ulong)runtimeId;
-            var runtimeIdStruct = new RuntimeIdStruct
+            var runtimeIdStruct = new WorldRuntimeIdStruct
             {
                 Sequence = (uint)(result & MaskSequence)
             };
@@ -69,7 +69,7 @@ namespace Fantasy.IdFactory
         }
     }
 
-    public sealed class RuntimeIdFactory
+    public sealed class WorldRuntimeIdFactory : IRuntimeIdFactory
     {
         private readonly uint _sceneId;
         private readonly byte _worldId;
@@ -79,11 +79,11 @@ namespace Fantasy.IdFactory
         private readonly long _epochNow;
         private readonly long _epoch1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000;
         
-        private RuntimeIdFactory() { }
+        private WorldRuntimeIdFactory() { }
 
-        public RuntimeIdFactory(uint sceneId, byte worldId) : this(TimeHelper.Now, sceneId, worldId) { }
+        public WorldRuntimeIdFactory(uint sceneId, byte worldId) : this(TimeHelper.Now, sceneId, worldId) { }
 
-        public RuntimeIdFactory(long epochNow, uint sceneId, byte worldId)
+        public WorldRuntimeIdFactory(long epochNow, uint sceneId, byte worldId)
         {
             switch (sceneId)
             {
@@ -116,37 +116,40 @@ namespace Fantasy.IdFactory
                     _lastTime = time;
                     _lastSequence = 0;
                 }
-                else if (++_lastSequence > RuntimeIdStruct.MaskSequence - 1)
+                else if (++_lastSequence > WorldRuntimeIdStruct.MaskSequence - 1)
                 {
                     _lastTime++;
                     _lastSequence = 0;
                 }
 
-                return new RuntimeIdStruct(time, _sceneId, _worldId, _lastSequence);
+                return new WorldRuntimeIdStruct(time, _sceneId, _worldId, _lastSequence);
             }
         }
+    }
 
+    public sealed class WorldRuntimeIdFactoryTool : IIdFactoryTool
+    {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint GetTime(ref long runtimeId)
+        public uint GetTime(ref long runtimeId)
         {
             var result = (ulong)runtimeId >> 41;
-            return (uint)(result & RuntimeIdStruct.MaskTime);
+            return (uint)(result & WorldRuntimeIdStruct.MaskTime);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint GetSceneId(ref long runtimeId)
+        public uint GetSceneId(ref long runtimeId)
         {
             var result = (ulong)runtimeId >> 25;
-            var worldId = (uint)(result & RuntimeIdStruct.MaskWordId) * 1000;
+            var worldId = (uint)(result & WorldRuntimeIdStruct.MaskWordId) * 1000;
             result >>= 8;
-            return (uint)(result & RuntimeIdStruct.MaskSceneId) + worldId;
+            return (uint)(result & WorldRuntimeIdStruct.MaskSceneId) + worldId;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static byte GetWorldId(ref long runtimeId)
+        public byte GetWorldId(ref long runtimeId)
         {
             var result = (ulong)runtimeId >> 25;
-            return (byte)(result & RuntimeIdStruct.MaskWordId);
+            return (byte)(result & WorldRuntimeIdStruct.MaskWordId);
         }
     }
 }
