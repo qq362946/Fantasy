@@ -2,6 +2,7 @@ using System;
 using Fantasy.Network;
 using Fantasy.PacketParser.Interface;
 #if FANTASY_NET
+using System.Text;
 using Fantasy.Network.Interface;
 using Fantasy.Network.Route;
 using Fantasy.PacketParser;
@@ -277,7 +278,8 @@ namespace Fantasy.Scheduler
                 default:
                 {
                     packInfo.Dispose();
-                    throw new NotSupportedException($"OuterMessageScheduler Received unsupported message protocolCode:{packInfo.ProtocolCode}");
+                    throw new NotSupportedException(
+                        $"OuterMessageScheduler Received unsupported message protocolCode:{packInfo.ProtocolCode}\n1、请检查该协议所在的程序集是否在框架初始化的时候添加到框架中。\n2、如果看到这个消息表示你有可能用的老版本的导出工具，请更换为最新的导出工具。");
                 }
             }
         }

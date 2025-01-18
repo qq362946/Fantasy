@@ -19,7 +19,7 @@ namespace Fantasy.Network
     internal static class NetworkProtocolFactory
     {
 #if FANTASY_NET
-        public static ANetwork CreateServer(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget, string bindIp, int port, bool isHttps = false)
+        public static ANetwork CreateServer(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget, string bindIp, int port)
         {
             switch (protocolType)
             {
@@ -40,15 +40,13 @@ namespace Fantasy.Network
                 case NetworkProtocolType.WebSocket:
                 {
                     var network = Entity.Create<WebSocketServerNetwork>(scene, false, true);
-                    var urls = isHttps ? new [] { $"https://{bindIp}:{port}/" } : new [] { $"http://{bindIp}:{port}/" };
-                    network.Initialize(networkTarget, urls);
+                    network.Initialize(networkTarget, bindIp, port);
                     return network;
                 }
                 case NetworkProtocolType.HTTP:
                 {
                     var network = Entity.Create<HTTPServerNetwork>(scene, false, true);
-                    var urls = isHttps ? new [] { $"https://{bindIp}:{port}/" } : new [] { $"http://{bindIp}:{port}/" };
-                    network.Initialize(networkTarget, urls);
+                    network.Initialize(networkTarget, bindIp, port);
                     return network;
                 }
                 default:

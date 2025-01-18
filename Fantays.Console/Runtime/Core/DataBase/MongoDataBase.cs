@@ -641,11 +641,11 @@ namespace Fantasy.DataBase
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
-                var projection = Builders<T>.Projection.Include(cols[0]);
+                var projection = Builders<T>.Projection.Include("_id");
 
-                for (var i = 1; i < cols.Length; i++)
+                foreach (var t in cols)
                 {
-                    projection = projection.Include(cols[i]);
+                    projection = projection.Include(t);
                 }
 
                 var list = await GetCollection<T>(collection).Find(filter).Project<T>(projection).ToListAsync();
@@ -660,6 +660,47 @@ namespace Fantasy.DataBase
                     entity.Deserialize(_scene);
                 }
                 
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// 根据指定过滤条件查询并返回满足条件的文档列表，选择指定的列（加锁）。
+        /// </summary>
+        /// <param name="filter">文档实体类型。</param>
+        /// <param name="cols">查询过滤条件。</param>
+        /// <param name="isDeserialize">要查询的列名称数组。</param>
+        /// <param name="collection">是否在查询后反序列化,执行反序列化后会自动将实体注册到框架系统中，并且能正常使用组件相关功能。</param>
+        /// <typeparam name="T">集合名称。</typeparam>
+        /// <returns></returns>
+        public async FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>>[] cols, bool isDeserialize = false, string collection = null) where T : Entity
+        {
+            using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
+            {
+                var projection = Builders<T>.Projection.Include("_id");
+
+                foreach (var col in cols)
+                {
+                    if (col.Body is not MemberExpression memberExpression)
+                    {
+                        throw new ArgumentException("Lambda expression must be a member access expression.");
+                    }
+
+                    projection = projection.Include(memberExpression.Member.Name);
+                }
+
+                var list = await GetCollection<T>(collection).Find(filter).Project<T>(projection).ToListAsync();
+
+                if (!isDeserialize || list is not { Count: > 0 })
+                {
+                    return list;
+                }
+
+                foreach (var entity in list)
+                {
+                    entity.Deserialize(_scene);
+                }
+
                 return list;
             }
         }

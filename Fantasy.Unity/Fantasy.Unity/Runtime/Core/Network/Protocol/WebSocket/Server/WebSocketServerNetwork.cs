@@ -1,6 +1,7 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #if FANTASY_NET
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using Fantasy.Async;
 using Fantasy.Network.Interface;
 
@@ -16,7 +17,7 @@ public class WebSocketServerNetwork : ANetwork
     private HttpListener _httpListener;
     private readonly Dictionary<uint, INetworkChannel> _connectionChannel = new Dictionary<uint, INetworkChannel>();
 
-    public void Initialize(NetworkTarget networkTarget, IEnumerable<string> urls)
+    public void Initialize(NetworkTarget networkTarget, string bindIp, int port)
     {
         base.Initialize(NetworkType.Server, NetworkProtocolType.WebSocket, networkTarget);
         
@@ -24,8 +25,7 @@ public class WebSocketServerNetwork : ANetwork
         {
             _random = new Random();
             _httpListener = new HttpListener();
-            StartAcceptAsync(urls).Coroutine();
-            Log.Info($"SceneConfigId = {Scene.SceneConfigId} WebSocketServer Listen {urls.FirstOrDefault()}");
+            StartAcceptAsync(bindIp, port).Coroutine();
         }
         catch (HttpListenerException e)
         {
@@ -64,14 +64,14 @@ public class WebSocketServerNetwork : ANetwork
         base.Dispose();
     }
 
-    private async FTask StartAcceptAsync(IEnumerable<string> urls)
+    private async FTask StartAcceptAsync(string bindIp, int port)
     {
-        foreach (var prefix in urls)
-        {
-            _httpListener.Prefixes.Add(prefix);
-        }
+        var listenUrl = "";
+        var certificatePath = Path.Combine(AppContext.BaseDirectory, $"certificate{bindIp}{port}");
+        listenUrl = Directory.Exists(certificatePath) ? $"https://{bindIp}:{port}/" : $"http://{bindIp}:{port}/";
+        _httpListener.Prefixes.Add(listenUrl);
         _httpListener.Start();
-        
+        Log.Info($"SceneConfigId = {Scene.SceneConfigId} WebSocketServer Listen {listenUrl}");
         while (!IsDisposed)
         {
             try
@@ -84,7 +84,7 @@ public class WebSocketServerNetwork : ANetwork
                 {
                     channelId = 0xC0000000 | (uint) _random.Next();
                 }
-            
+    
                 _connectionChannel.Add(channelId, new WebSocketServerNetworkChannel(this, channelId, webSocketContext, httpListenerContext.Request.RemoteEndPoint));
             }
             catch (Exception e)

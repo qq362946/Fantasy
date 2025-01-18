@@ -79,6 +79,10 @@ namespace Fantasy.DataBase
         /// </summary>
         FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, bool isDeserialize = false, string collection = null) where T : Entity;
         /// <summary>
+        /// 查询指定集合中满足给定筛选条件的类型 <typeparamref name="T"/> 实体列表，仅返回指定字段的数据。
+        /// </summary>
+        FTask<List<T>> Query<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>>[] cols, bool isDeserialize = false, string collection = null) where T : Entity;
+        /// <summary>
         /// 查询指定 ID 的多个集合，将结果存储在给定的实体列表中。
         /// </summary>
         FTask Query(long id, List<string> collectionNames, List<Entity> result, bool isDeserialize = false);
