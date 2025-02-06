@@ -15,11 +15,12 @@ namespace Fantasy.IdFactory
         /// <summary>
         /// EntityId工具
         /// </summary>
-        public static IIdFactoryTool EntityIdTool { get; private set; }
+        public static IIdFactoryTool EntityIdTool { get; private set; } = new WorldEntityIdFactoryTool();
+
         /// <summary>
         /// RuntimeId工具
         /// </summary>
-        public static IIdFactoryTool RuntimeIdTool { get; private set; }
+        public static IIdFactoryTool RuntimeIdTool { get; private set; } = new WorldRuntimeIdFactoryTool();
 
         /// <summary>
         /// 初始化
