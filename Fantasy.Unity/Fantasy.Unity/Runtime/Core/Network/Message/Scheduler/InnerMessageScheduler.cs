@@ -1,10 +1,12 @@
 #if FANTASY_NET
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 using System.Runtime.CompilerServices;
+using Fantasy.Async;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser;
 using Fantasy.PacketParser.Interface;
+#pragma warning disable CS8604 // Possible null reference argument.
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy.Scheduler
@@ -14,7 +16,7 @@ namespace Fantasy.Scheduler
     /// </summary>
     internal sealed class InnerMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
     {
-        public override void Scheduler(Session session, APackInfo packInfo)
+        public override async FTask Scheduler(Session session, APackInfo packInfo)
         {
             var protocol = packInfo.OpCodeIdStruct.Protocol;
             
@@ -84,7 +86,7 @@ namespace Fantasy.Scheduler
                         }
 
                         var obj = packInfo.Deserialize(messageType);
-                        Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId).Coroutine();
+                        await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId);
                     }
 
                     return;
@@ -104,10 +106,11 @@ namespace Fantasy.Scheduler
                         if (!Scene.TryGetEntity(packInfo.RouteId, out var entity))
                         {
                             Scene.MessageDispatcherComponent.FailRouteResponse(session, messageType, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
+                            return;
                         }
 
                         var obj = packInfo.Deserialize(messageType);
-                        Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId).Coroutine();
+                        await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId);
                     }
 
                     return;
@@ -180,7 +183,7 @@ namespace Fantasy.Scheduler
                                 }
                             
                                 var obj = packInfo.Deserialize(messageType);
-                                Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId).Coroutine();
+                                await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId);
                             }
                             
                             return;

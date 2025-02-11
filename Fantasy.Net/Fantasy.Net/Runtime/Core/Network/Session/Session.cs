@@ -248,7 +248,7 @@ namespace Fantasy.Network
 
             try
             {
-                NetworkMessageScheduler.Scheduler(this, packInfo);
+                NetworkMessageScheduler.Scheduler(this, packInfo).Coroutine();
             }
             catch (Exception e)
             {

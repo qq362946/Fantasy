@@ -9,13 +9,13 @@ echo ""
 echo ""
 case $choice in
     1)
-        dotnet Fantasy.Tools.NetworkProtocol.dll --ExportPlatform 1
+        dotnet Fantasy.Tools.NetworkProtocol.dll --p 1
         ;;
     2)
-        dotnet Fantasy.Tools.NetworkProtocol.dll --ExportPlatform 2
+        dotnet Fantasy.Tools.NetworkProtocol.dll --p 2
         ;;
     3)
-        dotnet Fantasy.Tools.NetworkProtocol.dll --ExportPlatform 3
+        dotnet Fantasy.Tools.NetworkProtocol.dll --p 3
         ;;
     *)
         echo "Invalid option"

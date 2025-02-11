@@ -255,7 +255,7 @@ namespace Fantasy.Scheduler
                     default:
                     {
                         Log.Error(messageSender.Request != null
-                            ? $"Unsupported protocol type {messageSender.Request.GetType()} rpcId:{rpcId}"
+                            ? $"Unsupported protocol type {messageSender.Request.GetType()} rpcId:{rpcId} messageSender.Request != null"
                             : $"Unsupported protocol type:{messageSender.MessageType.FullName} rpcId:{rpcId}");
                         RequestCallback.Remove(rpcId);
                         break;

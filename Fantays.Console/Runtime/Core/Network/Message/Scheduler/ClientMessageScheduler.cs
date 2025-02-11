@@ -1,4 +1,5 @@
 using System;
+using Fantasy.Async;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser.Interface;
@@ -82,7 +83,7 @@ namespace Fantasy.Scheduler
 #if FANTASY_NET
     internal sealed class ClientMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
     {
-        public override void Scheduler(Session session, APackInfo packInfo)
+        public override FTask Scheduler(Session session, APackInfo packInfo)
         {
             throw new NotSupportedException($"ClientMessageScheduler Received unsupported message protocolCode:{packInfo.ProtocolCode}");
         }

@@ -1,4 +1,5 @@
 using System;
+using Fantasy.Async;
 using Fantasy.Network;
 using Fantasy.PacketParser.Interface;
 #if FANTASY_NET
@@ -29,9 +30,8 @@ namespace Fantasy.Scheduler
         /// 在Unity环境下，处理外部消息的方法。
         /// </summary>
         /// <param name="session">网络会话。</param>
-        /// <param name="messageType">消息类型。</param>
         /// <param name="packInfo">消息封包信息。</param>
-        public override void Scheduler(Session session, APackInfo packInfo)
+        public override FTask Scheduler(Session session, APackInfo packInfo)
         {
             throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode}");
         }
@@ -41,12 +41,7 @@ namespace Fantasy.Scheduler
     internal sealed class OuterMessageScheduler(Scene scene) : ANetworkMessageScheduler(scene)
     {
         private readonly PingResponse _pingResponse = new PingResponse();
-        public override void Scheduler(Session session, APackInfo packInfo)
-        {
-            HandlerAsync(session, packInfo).Coroutine();
-        }
-
-        private async FTask HandlerAsync(Session session, APackInfo packInfo)
+        public override async FTask Scheduler(Session session, APackInfo packInfo)
         {
             if (session.IsDisposed)
             {
@@ -277,9 +272,9 @@ namespace Fantasy.Scheduler
                 }
                 default:
                 {
+                    var ipAddress = session.IsDisposed ? "null" : session.RemoteEndPoint.ToString();
                     packInfo.Dispose();
-                    throw new NotSupportedException(
-                        $"OuterMessageScheduler Received unsupported message protocolCode:{packInfo.ProtocolCode}\n1、请检查该协议所在的程序集是否在框架初始化的时候添加到框架中。\n2、如果看到这个消息表示你有可能用的老版本的导出工具，请更换为最新的导出工具。");
+                    throw new NotSupportedException($"OuterMessageScheduler Received unsupported message protocolCode:{packInfo.ProtocolCode}\n1、请检查该协议所在的程序集是否在框架初始化的时候添加到框架中。\n2、如果看到这个消息表示你有可能用的老版本的导出工具，请更换为最新的导出工具。\n IP地址:{ipAddress}");
                 }
             }
         }

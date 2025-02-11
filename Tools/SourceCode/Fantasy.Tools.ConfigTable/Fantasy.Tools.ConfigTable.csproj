@@ -64,9 +64,6 @@
       <Compile Include="..\Fantasy.Tools.NetworkProtocol\Core\Base\ConsoleLog.cs">
         <Link>Core\ConsoleLog.cs</Link>
       </Compile>
-      <Compile Include="..\Fantasy.Tools.NetworkProtocol\Core\Base\ExporterAges.cs">
-        <Link>Core\ExporterAges.cs</Link>
-      </Compile>
       <Compile Include="..\Fantasy.Tools.NetworkProtocol\Core\Base\ExportPlatform.cs">
         <Link>Core\ExportPlatform.cs</Link>
       </Compile>
@@ -79,8 +76,8 @@
         <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\JsonHelper.cs">
             <Link>Core\JsonHelper.cs</Link>
         </Compile>
-        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\BsonPack\BsonPackHelper.cs">
-            <Link>Core\Serialize\BsonPack\BsonPackHelper.cs</Link>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\BsonPack\BsonPackHelperNet.cs">
+            <Link>Core\Serialize\BsonPack\BsonPackHelperNet.cs</Link>
         </Compile>
         <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\BsonPack\StructBsonSerialize.cs">
             <Link>Core\Serialize\BsonPack\StructBsonSerialize.cs</Link>

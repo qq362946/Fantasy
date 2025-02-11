@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Fantasy.Async;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser.Interface;
@@ -24,6 +25,6 @@ namespace Fantasy.Scheduler
             NetworkMessagingComponent = scene.NetworkMessagingComponent;
 #endif
         }
-        public abstract void Scheduler(Session session, APackInfo packInfo);
+        public abstract FTask Scheduler(Session session, APackInfo packInfo);
     }
 }

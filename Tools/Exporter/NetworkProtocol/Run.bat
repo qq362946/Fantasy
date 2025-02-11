@@ -9,13 +9,13 @@ set /p choice=Please select an option:
 
 if "%choice%"=="1" (
     echo Client
-    dotnet Fantasy.Tools.NetworkProtocol.dll --ExportPlatform 1
+    dotnet Fantasy.Tools.NetworkProtocol.dll --p 1
 ) else if "%choice%"=="2" (
     echo Server
-    dotnet Fantasy.Tools.NetworkProtocol.dll --ExportPlatform 2
+    dotnet Fantasy.Tools.NetworkProtocol.dll --p 2
 ) else if "%choice%"=="3" (
     echo All
-    dotnet Fantasy.Tools.NetworkProtocol.dll --ExportPlatform 3
+    dotnet Fantasy.Tools.NetworkProtocol.dll --p 3
 ) else (
     echo Invalid option
 )
