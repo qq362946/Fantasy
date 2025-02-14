@@ -200,7 +200,7 @@ namespace Fantasy.Scheduler
 
                         if (routeComponent == null)
                         {
-                            throw new Exception("OuterMessageScheduler CustomRouteType session does not have an routeComponent component");
+                            throw new Exception($"OuterMessageScheduler CustomRouteType session does not have an routeComponent component messageType:{messageType.FullName} ProtocolCode：{packInfo.ProtocolCode}");
                         }
 
                         if (!routeComponent.TryGetRouteId(routeType, out var routeId))

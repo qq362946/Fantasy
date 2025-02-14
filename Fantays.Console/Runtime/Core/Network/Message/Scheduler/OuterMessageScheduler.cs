@@ -1,4 +1,5 @@
 using System;
+using Fantasy.Async;
 using Fantasy.Network;
 using Fantasy.PacketParser.Interface;
 #if FANTASY_NET
@@ -29,9 +30,8 @@ namespace Fantasy.Scheduler
         /// 在Unity环境下，处理外部消息的方法。
         /// </summary>
         /// <param name="session">网络会话。</param>
-        /// <param name="messageType">消息类型。</param>
         /// <param name="packInfo">消息封包信息。</param>
-        public override void Scheduler(Session session, APackInfo packInfo)
+        public override FTask Scheduler(Session session, APackInfo packInfo)
         {
             throw new NotSupportedException($"Received unsupported message protocolCode:{packInfo.ProtocolCode}");
         }
@@ -200,7 +200,7 @@ namespace Fantasy.Scheduler
 
                         if (routeComponent == null)
                         {
-                            throw new Exception("OuterMessageScheduler CustomRouteType session does not have an routeComponent component");
+                            throw new Exception($"OuterMessageScheduler CustomRouteType session does not have an routeComponent component messageType:{messageType.FullName} ProtocolCode：{packInfo.ProtocolCode}");
                         }
 
                         if (!routeComponent.TryGetRouteId(routeType, out var routeId))

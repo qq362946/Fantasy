@@ -1,4 +1,5 @@
 ﻿using Fantasy;
+using Fantasy.DataBase;
 using Fantasy.Helper;
 using Fantasy.IdFactory;
 using Fantasy.Platform.Net;

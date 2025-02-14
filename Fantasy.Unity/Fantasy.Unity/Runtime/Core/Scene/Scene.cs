@@ -147,24 +147,6 @@ namespace Fantasy
             SingleCollectionComponent = await AddComponent<SingleCollectionComponent>(false).Initialize();
 #endif
         }
-
-        private void InitializeSubScene(Scene scene) 
-        {
-            EntityPool = scene.EntityPool;
-            EntityListPool = scene.EntityListPool;
-            EntitySortedDictionaryPool = scene.EntitySortedDictionaryPool;
-            SceneUpdate = scene.SceneUpdate;
-            TimerComponent = scene.TimerComponent;
-            EventComponent = scene.EventComponent;
-            EntityComponent = scene.EntityComponent;
-            MessagePoolComponent = scene.MessagePoolComponent;
-            CoroutineLockComponent = scene.CoroutineLockComponent;
-            MessageDispatcherComponent = scene.MessageDispatcherComponent;
-#if FANTASY_NET
-            NetworkMessagingComponent = scene.NetworkMessagingComponent;
-            SingleCollectionComponent = scene.SingleCollectionComponent;
-#endif
-        }
         /// <summary>
         /// Scene销毁方法，执行了该方法会把当前Scene下的所有实体都销毁掉。
         /// </summary>
@@ -361,7 +343,7 @@ namespace Fantasy
             scene.Scene = scene;
             scene.Parent = scene;
             scene.RootScene = parentScene;
-            scene.Type = typeof(Scene);
+            scene.Type = typeof(SubScene);
             scene.SceneType = sceneType;
             scene.World = parentScene.World;
             scene.Process = parentScene.Process;

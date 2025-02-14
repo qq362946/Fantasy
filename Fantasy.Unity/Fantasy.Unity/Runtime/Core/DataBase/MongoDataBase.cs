@@ -26,7 +26,11 @@ namespace Fantasy.DataBase
         private IMongoDatabase _mongoDatabase;
         private CoroutineLock _dataBaseLock;
         private readonly HashSet<string> _collections = new HashSet<string>();
-
+        /// <summary>
+        /// 获得当前数据的类型
+        /// </summary>
+        public DataBaseType GetDataBaseType { get; } = DataBaseType.MongoDB;
+        
         /// <summary>
         /// 初始化 MongoDB 数据库连接并记录所有集合名。
         /// </summary>
@@ -37,7 +41,12 @@ namespace Fantasy.DataBase
         public IDataBase Initialize(Scene scene, string connectionString, string dbName)
         {
             _scene = scene;
-            _mongoClient = new MongoClient(connectionString);
+            _mongoClient = DataBaseSetting.MongoDBCustomInitialize != null
+                ? DataBaseSetting.MongoDBCustomInitialize(new DataBaseCustomConfig()
+                {
+                    Scene = scene, ConnectionString = connectionString, DBName = dbName
+                })
+                : new MongoClient(connectionString);
             _mongoDatabase = _mongoClient.GetDatabase(dbName);
             _dataBaseLock = scene.CoroutineLockComponent.Create(GetType().TypeHandle.Value.ToInt64());
             // 记录所有集合名

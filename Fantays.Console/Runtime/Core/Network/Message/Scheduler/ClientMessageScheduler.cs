@@ -16,8 +16,9 @@ namespace Fantasy.Scheduler
     {
         public ClientMessageScheduler(Scene scene) : base(scene) { }
 
-        public override void Scheduler(Session session, APackInfo packInfo)
+        public override async FTask Scheduler(Session session, APackInfo packInfo)
         {
+            await FTask.CompletedTask;
             switch (packInfo.OpCodeIdStruct.Protocol)
             {
                 case OpCodeType.OuterMessage:

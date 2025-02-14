@@ -4,16 +4,33 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Fantasy.Async;
 using Fantasy.Entitas;
+using MongoDB.Driver;
+// ReSharper disable InconsistentNaming
 
 #pragma warning disable CS8625
 
 namespace Fantasy.DataBase
 {
     /// <summary>
+    /// 数据库设置助手
+    /// </summary>
+    public static class DataBaseSetting
+    {
+        /// <summary>
+        /// 初始化自定义委托，当设置了这个委托后，就不会自动创建MongoClient，需要自己在委托里创建MongoClient。
+        /// </summary>
+        public static Func<Scene, string, string, MongoClient>? MongoDBCustomInitialize;
+    }
+    
+    /// <summary>
     /// 表示用于执行各种数据库操作的数据库接口。
     /// </summary>
     public interface IDataBase : IDisposable
     {
+        /// <summary>
+        /// 获得当前数据的类型
+        /// </summary>
+        public DataBaseType GetDataBaseType { get;}
         /// <summary>
         /// 初始化数据库连接。
         /// </summary>
