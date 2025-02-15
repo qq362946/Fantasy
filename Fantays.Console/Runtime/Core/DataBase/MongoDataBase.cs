@@ -41,7 +41,12 @@ namespace Fantasy.DataBase
         public IDataBase Initialize(Scene scene, string connectionString, string dbName)
         {
             _scene = scene;
-            _mongoClient = DataBaseSetting.MongoDBCustomInitialize != null ? DataBaseSetting.MongoDBCustomInitialize(scene, connectionString, dbName) : new MongoClient(connectionString);
+            _mongoClient = DataBaseSetting.MongoDBCustomInitialize != null
+                ? DataBaseSetting.MongoDBCustomInitialize(new DataBaseCustomConfig()
+                {
+                    Scene = scene, ConnectionString = connectionString, DBName = dbName
+                })
+                : new MongoClient(connectionString);
             _mongoDatabase = _mongoClient.GetDatabase(dbName);
             _dataBaseLock = scene.CoroutineLockComponent.Create(GetType().TypeHandle.Value.ToInt64());
             // 记录所有集合名

@@ -6,6 +6,7 @@ using Fantasy.Async;
 using Fantasy.Entitas;
 using MongoDB.Driver;
 // ReSharper disable InconsistentNaming
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 #pragma warning disable CS8625
 
@@ -19,7 +20,26 @@ namespace Fantasy.DataBase
         /// <summary>
         /// 初始化自定义委托，当设置了这个委托后，就不会自动创建MongoClient，需要自己在委托里创建MongoClient。
         /// </summary>
-        public static Func<Scene, string, string, MongoClient>? MongoDBCustomInitialize;
+        public static Func<DataBaseCustomConfig, MongoClient>? MongoDBCustomInitialize;
+    }
+
+    /// <summary>
+    /// MongoDB自定义连接参数
+    /// </summary>
+    public sealed class DataBaseCustomConfig
+    {
+        /// <summary>
+        /// 当前Scene
+        /// </summary>
+        public Scene Scene;
+        /// <summary>
+        /// 连接字符串
+        /// </summary>
+        public string ConnectionString;
+        /// <summary>
+        /// 数据库名字
+        /// </summary>
+        public string DBName;
     }
     
     /// <summary>

@@ -1,0 +1,17 @@
+{
+    "name": "RefAssemblyB",
+    "rootNamespace": "",
+    "references": [
+        "GUID:0b7224b83ba514121aa026f3857f820a",
+        "GUID:e4f90e29c70724534a491a5732ceabb7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
