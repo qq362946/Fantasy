@@ -68,6 +68,16 @@ namespace Fantasy.Assembly
         }
 
         /// <summary>
+        /// 重新加载程序集的类型信息。
+        /// </summary>
+        /// <param name="assembly"></param>
+        public void ReLoad(System.Reflection.Assembly assembly)
+        {
+            Unload();
+            Load(assembly);
+        }
+
+        /// <summary>
         /// 卸载程序集的类型信息。
         /// </summary>
         public void Unload()

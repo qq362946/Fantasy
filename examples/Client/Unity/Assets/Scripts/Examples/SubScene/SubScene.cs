@@ -29,7 +29,7 @@ public class SubScene : MonoBehaviour
      private async FTask StartAsync()
      {
           // 初始化框架
-          Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
+          await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
           // 如果有自己的框架，也可以就单纯拿这个Scene做网络通讯也没问题。
           _scene = await Scene.Create(SceneRuntimeType.MainThread);
           ConnectButton.onClick.RemoveAllListeners();

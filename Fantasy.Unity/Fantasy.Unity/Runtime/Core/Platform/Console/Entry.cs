@@ -35,7 +35,7 @@ namespace Fantasy.Platform.Console
             }
             
             // 初始化程序集管理系统
-            AssemblySystem.Initialize(assemblies);
+            AssemblySystem.InnerInitialize(assemblies);
             // 初始化序列化
             SerializerManager.Initialize();
             _isInit = true;

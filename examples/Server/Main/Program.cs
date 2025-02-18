@@ -22,7 +22,7 @@ SceneConfigData.Initialize(sceneConfigText);
 // 这里用的是NLog日志系统注册到框架中。
 Fantasy.Log.Register(new Fantasy.NLog("Server"));
 // 初始化框架，添加程序集到框架中
-Fantasy.Platform.Net.Entry.Initialize(Fantasy.AssemblyHelper.Assemblies);
+await Fantasy.Platform.Net.Entry.Initialize(Fantasy.AssemblyHelper.Assemblies);
 // 启动Fantasy.Net
 await Fantasy.Platform.Net.Entry.Start();
 // 也可以使用下面的Start方法来初始化并且启动Fantasy.Net

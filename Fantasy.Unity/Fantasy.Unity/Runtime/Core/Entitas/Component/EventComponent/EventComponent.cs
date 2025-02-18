@@ -198,7 +198,7 @@ namespace Fantasy.Event
             {
                 return;
             }
-
+            
             using var tasks = ListPool<FTask>.Create();
 
             foreach (var @event in list)

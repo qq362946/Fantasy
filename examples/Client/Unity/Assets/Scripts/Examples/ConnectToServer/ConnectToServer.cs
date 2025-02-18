@@ -19,7 +19,7 @@ public class ConnectToServer : MonoBehaviour
         // Initialize方法可以接收多个需要装载程序集，本例子就把当前程序集装载到Fantasy里。
         // 因为生成的网络协议在当前程序集里，如果不装载就无法正常通过Fantasy发送协议到服务器中。
         // 初始化框架
-        Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
+        await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
         // 创建一个Scene，这个Scene代表一个客户端的场景，客户端的所有逻辑都可以写这里
         // 如果有自己的框架，也可以就单纯拿这个Scene做网络通讯也没问题。
         // Create完成后会返回一个Scene,Fantasy的所有功能都在这个Scene下面。

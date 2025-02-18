@@ -7,7 +7,6 @@ using System.Security.Cryptography;
 using System.Text;
 using Fantasy.Async;
 using Fantasy.Helper;
-
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8603
@@ -27,14 +26,15 @@ namespace Fantasy.Assembly
         private static readonly ConcurrentDictionary<long, AssemblyInfo> AssemblyList = new ConcurrentDictionary<long, AssemblyInfo>();
 #endif
         /// <summary>
-        /// 初始化 AssemblySystem。
+        /// 初始化 AssemblySystem。（仅限内部）
         /// </summary>
-        public static void Initialize(params System.Reflection.Assembly[] assemblies)
+        /// <param name="assemblies"></param>
+        internal static async FTask InnerInitialize(params System.Reflection.Assembly[] assemblies)
         {
-            LoadAssembly(typeof(AssemblySystem).Assembly);
+            await LoadAssembly(typeof(AssemblySystem).Assembly);
             foreach (var assembly in assemblies)
             {
-                LoadAssembly(assembly);
+                await LoadAssembly(assembly);
             }
         }
 
@@ -42,36 +42,46 @@ namespace Fantasy.Assembly
         /// 加载指定的程序集，并触发相应的事件。
         /// </summary>
         /// <param name="assembly">要加载的程序集。</param>
-        public static void LoadAssembly(System.Reflection.Assembly assembly)
+        /// <param name="isCurrentDomain">如果当前Domain中已经存在同名的Assembly,使用Domain中的程序集。</param>
+        public static async FTask LoadAssembly(System.Reflection.Assembly assembly, bool isCurrentDomain = true)
         {
+            if (isCurrentDomain)
+            {
+                var currentDomainAssemblies = System.AppDomain.CurrentDomain.GetAssemblies();
+                var currentAssembly = currentDomainAssemblies.FirstOrDefault(d => d.GetName().Name == assembly.GetName().Name);
+                if (currentAssembly != null)
+                {
+                    assembly = currentAssembly;
+                }
+            }
+            
             var assemblyIdentity = AssemblyIdentity(assembly);
-                
+            
             if (AssemblyList.TryGetValue(assemblyIdentity, out var assemblyInfo))
             {
-                assemblyInfo.Unload();
+                assemblyInfo.ReLoad(assembly);
                 foreach (var assemblySystem in AssemblySystems)
                 {
-                    assemblySystem.ReLoad(assemblyIdentity);
+                    await assemblySystem.ReLoad(assemblyIdentity);
                 }
             }
             else
             {
                 assemblyInfo = new AssemblyInfo(assemblyIdentity);
+                assemblyInfo.Load(assembly);
                 AssemblyList.TryAdd(assemblyIdentity, assemblyInfo);
                 foreach (var assemblySystem in AssemblySystems)
                 {
-                    assemblySystem.Load(assemblyIdentity);
+                    await assemblySystem.Load(assemblyIdentity);
                 }
             }
-            
-            assemblyInfo.Load(assembly);
         }
 
         /// <summary>
         /// 卸载程序集
         /// </summary>
         /// <param name="assembly"></param>
-        public static void UnLoadAssembly(System.Reflection.Assembly assembly)
+        public static async FTask UnLoadAssembly(System.Reflection.Assembly assembly)
         {
             var assemblyIdentity = AssemblyIdentity(assembly);
             
@@ -83,7 +93,7 @@ namespace Fantasy.Assembly
             assemblyInfo.Unload();
             foreach (var assemblySystem in AssemblySystems)
             {
-                assemblySystem.OnUnLoad(assemblyIdentity);
+                await assemblySystem.OnUnLoad(assemblyIdentity);
             }
         }
         
@@ -249,9 +259,14 @@ namespace Fantasy.Assembly
         /// </summary>
         public static void Dispose()
         {
+            DisposeAsync().Coroutine();
+        }
+        
+        private static async FTask DisposeAsync()
+        {
             foreach (var (_, assemblyInfo) in AssemblyList.ToArray())
             {
-                UnLoadAssembly(assemblyInfo.Assembly);
+                await UnLoadAssembly(assemblyInfo.Assembly);
             }
             
             AssemblyList.Clear();
