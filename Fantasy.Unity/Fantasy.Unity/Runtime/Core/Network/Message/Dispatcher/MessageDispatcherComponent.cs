@@ -166,7 +166,7 @@ namespace Fantasy.Network.Interface
         public async FTask OnUnLoad(long assemblyIdentity)
         {
             var tcs = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 tcs.SetResult();

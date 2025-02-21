@@ -55,7 +55,6 @@ namespace UnityWebSocket
             }
         }
 
-#if UNITY_EDITOR
         private void OnDisable()
         {
             SocketAbort();
@@ -68,7 +67,6 @@ namespace UnityWebSocket
                 sockets[i].Abort();
             }
         }
-#endif
     }
 }
 #endif

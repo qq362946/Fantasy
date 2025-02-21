@@ -96,10 +96,14 @@ namespace UnityWebSocket
 
         public void CloseAsync()
         {
-            if (!isOpening) return;
+            if (!isOpening)
+            {
+                return;
+            }
+            
             closeProcessing = true;
         }
-
+        
         public void SendAsync(byte[] data, int offset, int len)
         {
             if (!isOpening) return;
@@ -110,7 +114,7 @@ namespace UnityWebSocket
         public void SendAsync(byte[] data)
         {
             if (!isOpening) return;
-            var buffer = new SendBuffer(data,0,data.Length, WebSocketMessageType.Binary);
+            var buffer = new SendBuffer(data, 0, data.Length, WebSocketMessageType.Binary);
             sendQueue.Enqueue(buffer);
         }
 
@@ -183,11 +187,11 @@ namespace UnityWebSocket
                     while (!closeProcessing && sendQueue.Count > 0 && sendQueue.TryDequeue(out var buffer))
                     {
                         Log($"Send, type: {buffer.type}, size: {buffer.data.Length}, queue left: {sendQueue.Count}");
-                        await socket.SendAsync(new ArraySegment<byte>(buffer.data, buffer.offset, buffer.len),
-                            buffer.type, true, cts.Token);
+                        await socket.SendAsync(new ArraySegment<byte>(buffer.data,buffer.offset, buffer.len), buffer.type, true, cts.Token);
                     }
                     Thread.Sleep(3);
                 }
+                
                 if (closeProcessing && socket != null && cts != null && !cts.IsCancellationRequested)
                 {
                     CleanSendQueue();

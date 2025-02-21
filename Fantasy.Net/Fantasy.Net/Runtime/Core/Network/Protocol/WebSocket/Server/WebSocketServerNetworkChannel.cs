@@ -56,6 +56,11 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
         _sendBuffers.Clear();
         _network.RemoveChannel(Id);
         base.Dispose();
+        if (_webSocket.State == WebSocketState.Open || _webSocket.State == WebSocketState.CloseReceived)
+        {
+            _webSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Normal Closure",
+                _cancellationTokenSource.Token).GetAwaiter().GetResult();
+        }
         _webSocket.Dispose();
         _isSending = false;
     }
@@ -74,6 +79,7 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
 
                 if (receiveResult.MessageType == WebSocketMessageType.Close)
                 {
+                    Dispose();
                     break;
                 }
 

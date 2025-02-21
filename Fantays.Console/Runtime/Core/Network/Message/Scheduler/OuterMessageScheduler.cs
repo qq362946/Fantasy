@@ -7,7 +7,6 @@ using System.Text;
 using Fantasy.Network.Interface;
 using Fantasy.Network.Route;
 using Fantasy.PacketParser;
-using Fantasy.Async;
 using Fantasy.Helper;
 using Fantasy.InnerMessage;
 #endif

@@ -29,7 +29,7 @@ namespace UnityWebSocket
         public static extern int WebSocketClose(int instanceId, int code, string reason);
 
         [DllImport("__Internal")]
-        public static extern int WebSocketSend(int instanceId, byte[] dataPtr, int offset,int dataLength);
+        public static extern int WebSocketSend(int instanceId, byte[] dataPtr, int offset, int dataLength);
 
         [DllImport("__Internal")]
         public static extern int WebSocketSendStr(int instanceId, string data);
@@ -61,6 +61,9 @@ namespace UnityWebSocket
 
         [DllImport("__Internal")]
         public static extern void WebSocketSetOnClose(OnCloseCallback callback);
+        
+        [DllImport("__Internal")]
+        public static extern void WebSocketSetSupport6000();
 
         /* If callbacks was initialized and set */
         private static bool isInitialized = false;
@@ -73,6 +76,9 @@ namespace UnityWebSocket
             WebSocketSetOnMessageStr(DelegateOnMessageStrEvent);
             WebSocketSetOnError(DelegateOnErrorEvent);
             WebSocketSetOnClose(DelegateOnCloseEvent);
+#if UNITY_6000_0_OR_NEWER
+            WebSocketSetSupport6000();
+#endif
 
             isInitialized = true;
         }

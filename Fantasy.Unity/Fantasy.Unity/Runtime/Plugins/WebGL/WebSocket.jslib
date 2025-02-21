@@ -22,7 +22,19 @@ var WebSocketLibrary =
         onMessage: null,
         onMessageStr: null,
         onError: null,
-        onClose: null
+        onClose: null,
+
+        /* Support Unity 6000 */
+        support6000: false
+    },
+
+    /**
+     * Support Unity 6000
+     *
+     */
+    WebSocketSetSupport6000: function()
+    {
+        webSocketManager.support6000 = true;
     },
 
     /**
@@ -154,7 +166,14 @@ var WebSocketLibrary =
 
         instance.ws.onopen = function()
         {
-            Module.dynCall_vi(webSocketManager.onOpen, instanceId);
+            if (webSocketManager.support6000)
+            {
+                {{{ makeDynCall('vi', 'webSocketManager.onOpen') }}}(instanceId);
+            }
+            else
+            {
+                Module.dynCall_vi(webSocketManager.onOpen, instanceId);
+            }
         };
 
         instance.ws.onmessage = function(ev)
@@ -166,7 +185,14 @@ var WebSocketLibrary =
                 writeArrayToMemory(array, buffer);
                 try
                 {
-                    Module.dynCall_viii(webSocketManager.onMessage, instanceId, buffer, array.length);
+                    if (webSocketManager.support6000)
+                    {
+                        {{{ makeDynCall('viii', 'webSocketManager.onMessage') }}}(instanceId, buffer, array.length);
+                    }
+                    else
+                    {
+                        Module.dynCall_viii(webSocketManager.onMessage, instanceId, buffer, array.length);
+                    }
                 }
                 finally
                 {
@@ -180,7 +206,14 @@ var WebSocketLibrary =
                 stringToUTF8(ev.data, buffer, length);
                 try
                 {
-                    Module.dynCall_vii(webSocketManager.onMessageStr, instanceId, buffer);
+                    if (webSocketManager.support6000)
+                    {
+                        {{{ makeDynCall('vii', 'webSocketManager.onMessageStr') }}}(instanceId, buffer);
+                    }
+                    else
+                    {
+                        Module.dynCall_vii(webSocketManager.onMessageStr, instanceId, buffer);
+                    }
                 }
                 finally
                 {
@@ -197,7 +230,14 @@ var WebSocketLibrary =
                     writeArrayToMemory(array, buffer);
                     try
                     {
-                        Module.dynCall_viii(webSocketManager.onMessage, instanceId, buffer, array.length);
+                        if (webSocketManager.support6000)
+                        {
+                            {{{ makeDynCall('viii', 'webSocketManager.onMessage') }}}(instanceId, buffer, array.length);
+                        }
+                        else
+                        {
+                            Module.dynCall_viii(webSocketManager.onMessage, instanceId, buffer, array.length);
+                        }
                     }
                     finally
                     {
@@ -221,7 +261,14 @@ var WebSocketLibrary =
             stringToUTF8(msg, buffer, length);
             try
             {
-                Module.dynCall_vii(webSocketManager.onError, instanceId, buffer);
+                if (webSocketManager.support6000)
+                {
+                    {{{ makeDynCall('vii', 'webSocketManager.onError') }}}(instanceId, buffer);
+                }
+                else
+                {
+                    Module.dynCall_vii(webSocketManager.onError, instanceId, buffer);
+                }
             }
             finally
             {
@@ -237,7 +284,14 @@ var WebSocketLibrary =
             stringToUTF8(msg, buffer, length);
             try
             {
-                Module.dynCall_viii(webSocketManager.onClose, instanceId, ev.code, buffer);
+                if (webSocketManager.support6000)
+                {
+                    {{{ makeDynCall('viii', 'webSocketManager.onClose') }}}(instanceId, ev.code, buffer);
+                }
+                else
+                {
+                    Module.dynCall_viii(webSocketManager.onClose, instanceId, ev.code, buffer);
+                }
             }
             finally
             {
