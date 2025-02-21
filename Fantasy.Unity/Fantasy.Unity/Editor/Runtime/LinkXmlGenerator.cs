@@ -18,10 +18,13 @@ namespace Fantasy
                 Debug.Log("Assembly-CSharp Link generation completed");
                 GenerateLinkXml(writer, "Fantasy.Unity", LinkPath);
                 Debug.Log("Fantasy.Unity Link generation completed");
-                foreach (var linkAssembly in FantasySettingsScriptableObject.Instance.linkAssemblyDefinitions)
+                if (FantasySettingsScriptableObject.Instance?.linkAssemblyDefinitions != null)
                 {
-                    GenerateLinkXml(writer, linkAssembly.name, LinkPath);
-                    Debug.Log($"{linkAssembly.name} Link generation completed");
+                    foreach (var linkAssembly in FantasySettingsScriptableObject.Instance.linkAssemblyDefinitions)
+                    {
+                        GenerateLinkXml(writer, linkAssembly.name, LinkPath);
+                        Debug.Log($"{linkAssembly.name} Link generation completed");
+                    }
                 }
                 writer.WriteLine("</linker>");
             }

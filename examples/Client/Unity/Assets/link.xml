@@ -12,9 +12,11 @@
     <type fullname="EventSystem" preserve="all"/>
     <type fullname="NormalMessage" preserve="all"/>
     <type fullname="RouteMessage" preserve="all"/>
+    <type fullname="SubScene" preserve="all"/>
     <type fullname="OnceTimerEvent" preserve="all"/>
     <type fullname="OnOnceTimerEvent" preserve="all"/>
     <type fullname="TimerScheduler" preserve="all"/>
+    <type fullname="Fantasy.RefAssemblyMain" preserve="all"/>
     <type fullname="Fantasy.C2G_TestMessage" preserve="all"/>
     <type fullname="Fantasy.C2G_TestRequest" preserve="all"/>
     <type fullname="Fantasy.G2C_TestResponse" preserve="all"/>
@@ -35,6 +37,12 @@
     <type fullname="Fantasy.C2G_SendAddressableToMap" preserve="all"/>
     <type fullname="Fantasy.C2Chat_TestRequestPushMessage" preserve="all"/>
     <type fullname="Fantasy.Chat2C_PushMessage" preserve="all"/>
+    <type fullname="Fantasy.C2G_CreateSubSceneRequest" preserve="all"/>
+    <type fullname="Fantasy.G2C_CreateSubSceneResponse" preserve="all"/>
+    <type fullname="Fantasy.C2G_SendToSubSceneMessage" preserve="all"/>
+    <type fullname="Fantasy.C2G_CreateSubSceneAddressableRequest" preserve="all"/>
+    <type fullname="Fantasy.G2C_CreateSubSceneAddressableResponse" preserve="all"/>
+    <type fullname="Fantasy.C2SubScene_TestMessage" preserve="all"/>
     <type fullname="Fantasy.OuterOpcode" preserve="all"/>
     <type fullname="Fantasy.RouteType" preserve="all"/>
     <type fullname="Examples.RouteMessage.Chat2C_PushMessageHandler" preserve="all"/>
@@ -61,9 +69,13 @@
     <type fullname="RouteMessage++StartAsync+d__8" preserve="all"/>
     <type fullname="RouteMessage++RequestRouteToGate+d__10" preserve="all"/>
     <type fullname="RouteMessage++CallRouteMessage+d__12" preserve="all"/>
+    <type fullname="SubScene++StartAsync+d__8" preserve="all"/>
+    <type fullname="SubScene++CreateSubScene+d__10" preserve="all"/>
+    <type fullname="SubScene++CreateAddressable+d__12" preserve="all"/>
     <type fullname="TimerScheduler++StartAsync+d__8" preserve="all"/>
     <type fullname="TimerScheduler++Wait+d__9" preserve="all"/>
     <type fullname="TimerScheduler+++c" preserve="all"/>
+    <type fullname="Fantasy.RefAssemblyMain++StartAsync+d__1" preserve="all"/>
     <type fullname="Examples.RouteMessage.Chat2C_PushMessageHandler++Run+d__0" preserve="all"/>
     <type fullname="Examples.NormalMessage.G2C_PushMessageHandler++Run+d__0" preserve="all"/>
   </assembly>
@@ -73,8 +85,6 @@
     <type fullname="System.Runtime.CompilerServices.NullableAttribute" preserve="all"/>
     <type fullname="System.Runtime.CompilerServices.NullableContextAttribute" preserve="all"/>
     <type fullname="System.Runtime.CompilerServices.NativeIntegerAttribute" preserve="all"/>
-    <type fullname="WebGLSynchronizationContextUpdater" preserve="all"/>
-    <type fullname="ThreadSynchronizationContext" preserve="all"/>
     <type fullname="UnityWebSocket.CloseEventArgs" preserve="all"/>
     <type fullname="UnityWebSocket.CloseStatusCode" preserve="all"/>
     <type fullname="UnityWebSocket.ErrorEventArgs" preserve="all"/>
@@ -246,17 +256,19 @@
     <type fullname="Fantasy.Log" preserve="all"/>
     <type fullname="Fantasy.UnityLog" preserve="all"/>
     <type fullname="Fantasy.LogRedirection" preserve="all"/>
+    <type fullname="Fantasy.ThreadSynchronizationContext" preserve="all"/>
     <type fullname="Fantasy.ISceneUpdate" preserve="all"/>
     <type fullname="Fantasy.EmptySceneUpdate" preserve="all"/>
     <type fullname="Fantasy.OnCreateScene" preserve="all"/>
-    <type fullname="Fantasy.SceneRuntimeType" preserve="all"/>
     <type fullname="Fantasy.Scene" preserve="all"/>
+    <type fullname="Fantasy.SceneRuntimeType" preserve="all"/>
     <type fullname="Fantasy.ISceneScheduler" preserve="all"/>
     <type fullname="Fantasy.MainScheduler" preserve="all"/>
     <type fullname="Fantasy.MultiThreadStruct" preserve="all"/>
     <type fullname="Fantasy.MultiThreadScheduler" preserve="all"/>
     <type fullname="Fantasy.ThreadPoolScheduler" preserve="all"/>
     <type fullname="Fantasy.ThreadScheduler" preserve="all"/>
+    <type fullname="Fantasy.SubScene" preserve="all"/>
     <type fullname="Fantasy.Serialize.BsonPackHelper" preserve="all"/>
     <type fullname="Fantasy.Serialize.ASerialize" preserve="all"/>
     <type fullname="Fantasy.Serialize.AMessage" preserve="all"/>
@@ -267,6 +279,8 @@
     <type fullname="Fantasy.Serialize.ProtoBufPackHelper" preserve="all"/>
     <type fullname="Fantasy.Serialize.FantasySerializerType" preserve="all"/>
     <type fullname="Fantasy.Serialize.SerializerManager" preserve="all"/>
+    <type fullname="Fantasy.Pool.MultiThreadPool" preserve="all"/>
+    <type fullname="Fantasy.Pool.MultiThreadPoolQueue" preserve="all"/>
     <type fullname="Fantasy.Pool.IPool" preserve="all"/>
     <type fullname="Fantasy.Pool.Pool`1" preserve="all"/>
     <type fullname="Fantasy.Pool.PoolCore" preserve="all"/>
@@ -281,7 +295,6 @@
     <type fullname="Fantasy.Scheduler.ClientMessageScheduler" preserve="all"/>
     <type fullname="Fantasy.Scheduler.ANetworkMessageScheduler" preserve="all"/>
     <type fullname="Fantasy.Scheduler.MessageSender" preserve="all"/>
-    <type fullname="Fantasy.Scheduler.NetworkMessagingComponent" preserve="all"/>
     <type fullname="Fantasy.Scheduler.OuterMessageScheduler" preserve="all"/>
     <type fullname="Fantasy.PacketParser.BufferPacketParser" preserve="all"/>
     <type fullname="Fantasy.PacketParser.OuterBufferPacketParser" preserve="all"/>
@@ -323,11 +336,18 @@
     <type fullname="Fantasy.Network.NetworkType" preserve="all"/>
     <type fullname="Fantasy.Network.NetworkTarget" preserve="all"/>
     <type fullname="Fantasy.Network.NetworkProtocolType" preserve="all"/>
+    <type fullname="Fantasy.Network.INetworkThreadUpdate" preserve="all"/>
+    <type fullname="Fantasy.Network.NetworkThreadComponent" preserve="all"/>
     <type fullname="Fantasy.Network.SessionHeartbeatComponentAwakeSystem" preserve="all"/>
     <type fullname="Fantasy.Network.SessionHeartbeatComponent" preserve="all"/>
     <type fullname="Fantasy.Network.Session" preserve="all"/>
     <type fullname="Fantasy.Network.WebSocket.WebSocketClientNetwork" preserve="all"/>
+    <type fullname="Fantasy.Network.TCP.TCPClientNetwork" preserve="all"/>
+    <type fullname="Fantasy.Network.KCP.KCPClientNetworkUpdateSystem" preserve="all"/>
+    <type fullname="Fantasy.Network.KCP.KCPClientNetwork" preserve="all"/>
     <type fullname="Fantasy.Network.KCP.KcpHeader" preserve="all"/>
+    <type fullname="Fantasy.Network.KCP.KCPSettings" preserve="all"/>
+    <type fullname="Fantasy.Network.KCP.KCPFactory" preserve="all"/>
     <type fullname="Fantasy.Network.Interface.IMessageHandler" preserve="all"/>
     <type fullname="Fantasy.Network.Interface.Message`1" preserve="all"/>
     <type fullname="Fantasy.Network.Interface.MessageRPC`2" preserve="all"/>
@@ -354,8 +374,24 @@
     <type fullname="Fantasy.Network.Interface.INetworkChannel" preserve="all"/>
     <type fullname="Fantasy.IdFactory.EntityIdStruct" preserve="all"/>
     <type fullname="Fantasy.IdFactory.EntityIdFactory" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.EntityIdFactoryTool" preserve="all"/>
     <type fullname="Fantasy.IdFactory.RuntimeIdStruct" preserve="all"/>
     <type fullname="Fantasy.IdFactory.RuntimeIdFactory" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.RuntimeIdFactoryTool" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.IdFactoryHelper" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.IdFactoryType" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.IEntityIdFactory" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.IRuntimeIdFactory" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.IIdFactoryTool" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.WorldEntityIdStruct" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.WorldEntityIdFactory" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.WorldEntityIdFactoryTool" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.WorldRuntimeIdStruct" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.WorldRuntimeIdFactory" preserve="all"/>
+    <type fullname="Fantasy.IdFactory.WorldRuntimeIdFactoryTool" preserve="all"/>
+    <type fullname="Fantasy.Http.HttpClientHelper" preserve="all"/>
+    <type fullname="Fantasy.Http.HttpClientPool" preserve="all"/>
+    <type fullname="Fantasy.Http.IJsonRpcRequest" preserve="all"/>
     <type fullname="Fantasy.Unity.UnityWebRequestHelper" preserve="all"/>
     <type fullname="Fantasy.Unity.Download.AUnityDownload" preserve="all"/>
     <type fullname="Fantasy.Unity.Download.Download" preserve="all"/>
@@ -370,7 +406,9 @@
     <type fullname="Fantasy.Helper.FileHelper" preserve="all"/>
     <type fullname="Fantasy.Helper.HashCodeHelper" preserve="all"/>
     <type fullname="Fantasy.Helper.JsonHelper" preserve="all"/>
+    <type fullname="Fantasy.Helper.NetworkHelper" preserve="all"/>
     <type fullname="Fantasy.Helper.RandomHelper" preserve="all"/>
+    <type fullname="Fantasy.Helper.SocketHelper" preserve="all"/>
     <type fullname="Fantasy.Helper.TimeHelper" preserve="all"/>
     <type fullname="Fantasy.Helper.WebSocketHelper" preserve="all"/>
     <type fullname="Fantasy.Helper.WinPeriod" preserve="all"/>
@@ -399,6 +437,10 @@
     <type fullname="Fantasy.Entitas.EntitySortedDictionary`2" preserve="all"/>
     <type fullname="Fantasy.Entitas.EntitySortedDictionaryPool`2" preserve="all"/>
     <type fullname="Fantasy.Entitas.EntityReference`1" preserve="all"/>
+    <type fullname="Fantasy.Entitas.Interface.ISingleCollectionRoot" preserve="all"/>
+    <type fullname="Fantasy.Entitas.Interface.SingleCollectionRootChecker`1" preserve="all"/>
+    <type fullname="Fantasy.Entitas.Interface.ISupportedDataBase" preserve="all"/>
+    <type fullname="Fantasy.Entitas.Interface.SupportedDataBaseChecker`1" preserve="all"/>
     <type fullname="Fantasy.Entitas.Interface.ISupportedMultiEntity" preserve="all"/>
     <type fullname="Fantasy.Entitas.Interface.SupportedMultiEntityChecker`1" preserve="all"/>
     <type fullname="Fantasy.Entitas.Interface.ISupportedSingleCollection" preserve="all"/>
@@ -454,6 +496,10 @@
     <type fullname="Fantasy.DataStructure.Dictionary.ReuseDictionary`2" preserve="all"/>
     <type fullname="Fantasy.DataStructure.Dictionary.SortedDictionaryPool`2" preserve="all"/>
     <type fullname="Fantasy.DataStructure.Collection.CircularBuffer" preserve="all"/>
+    <type fullname="Fantasy.DataStructure.Collection.ConcurrentOneToManyListPool`2" preserve="all"/>
+    <type fullname="Fantasy.DataStructure.Collection.ConcurrentOneToManyList`2" preserve="all"/>
+    <type fullname="Fantasy.DataStructure.Collection.ConcurrentOneToManyQueuePool`2" preserve="all"/>
+    <type fullname="Fantasy.DataStructure.Collection.ConcurrentOneToManyQueue`2" preserve="all"/>
     <type fullname="Fantasy.DataStructure.Collection.HashSetPool`1" preserve="all"/>
     <type fullname="Fantasy.DataStructure.Collection.HashSetBasePool`1" preserve="all"/>
     <type fullname="Fantasy.DataStructure.Collection.ListPool`1" preserve="all"/>
@@ -464,6 +510,8 @@
     <type fullname="Fantasy.DataStructure.Collection.OneToManyQueuePool`2" preserve="all"/>
     <type fullname="Fantasy.DataStructure.Collection.OneToManyQueue`2" preserve="all"/>
     <type fullname="Fantasy.DataStructure.Collection.ReuseList`1" preserve="all"/>
+    <type fullname="Fantasy.DataStructure.Collection.SortedConcurrentOneToManyListPool`2" preserve="all"/>
+    <type fullname="Fantasy.DataStructure.Collection.SortedConcurrentOneToManyList`2" preserve="all"/>
     <type fullname="Fantasy.DataStructure.Collection.SortedOneToManyHashSetPool`2" preserve="all"/>
     <type fullname="Fantasy.DataStructure.Collection.SortedOneToManyHashSet`2" preserve="all"/>
     <type fullname="Fantasy.DataStructure.Collection.SortedOneToManyListPool`2" preserve="all"/>
@@ -472,7 +520,6 @@
     <type fullname="Fantasy.Assembly.AssemblySystem" preserve="all"/>
     <type fullname="Fantasy.Assembly.IAssembly" preserve="all"/>
     <type fullname="+PrivateImplementationDetails+" preserve="all"/>
-    <type fullname="ThreadSynchronizationContext+++c__DisplayClass4_0" preserve="all"/>
     <type fullname="UnityWebSocket.WebSocket+SendBuffer" preserve="all"/>
     <type fullname="UnityWebSocket.WebSocket++ConnectTask+d__40" preserve="all"/>
     <type fullname="UnityWebSocket.WebSocket++StartSendTask+d__41" preserve="all"/>
@@ -564,15 +611,28 @@
     <type fullname="NativeCollections.NativeSortedSet`1+TreeRotation" preserve="all"/>
     <type fullname="NativeCollections.NativeStack`1+NativeStackHandle" preserve="all"/>
     <type fullname="NativeCollections.NativeStack`1+Enumerator" preserve="all"/>
-    <type fullname="Fantasy.Scene++Initialize+d__54" preserve="all"/>
-    <type fullname="Fantasy.Scene+++c__DisplayClass72_0" preserve="all"/>
-    <type fullname="Fantasy.Scene++Create+d__72" preserve="all"/>
-    <type fullname="Fantasy.Scene++SetScheduler+d__74" preserve="all"/>
+    <type fullname="Fantasy.ThreadSynchronizationContext+++c__DisplayClass3_0" preserve="all"/>
+    <type fullname="Fantasy.Scene++Initialize+d__45" preserve="all"/>
+    <type fullname="Fantasy.Scene+++c__DisplayClass62_0" preserve="all"/>
+    <type fullname="Fantasy.Scene++Create+d__62" preserve="all"/>
+    <type fullname="Fantasy.Scene++SetScheduler+d__64" preserve="all"/>
     <type fullname="Fantasy.MainScheduler+++c__DisplayClass4_0" preserve="all"/>
     <type fullname="Fantasy.MainScheduler+++c__DisplayClass5_0" preserve="all"/>
     <type fullname="Fantasy.MultiThreadScheduler+++c__DisplayClass5_0" preserve="all"/>
+    <type fullname="Fantasy.Pool.MultiThreadPool+++c__1`1" preserve="all"/>
+    <type fullname="Fantasy.Pool.MultiThreadPool+++c__DisplayClass2_0" preserve="all"/>
+    <type fullname="Fantasy.Pool.MultiThreadPool+++c__3`1" preserve="all"/>
+    <type fullname="Fantasy.Platform.Unity.Entry++Initialize+d__5" preserve="all"/>
     <type fullname="Fantasy.Platform.Unity.Entry++CreateScene+d__6" preserve="all"/>
+    <type fullname="Fantasy.Scheduler.ClientMessageScheduler++Scheduler+d__1" preserve="all"/>
+    <type fullname="Fantasy.Network.NetworkThreadComponent+++c__DisplayClass9_0" preserve="all"/>
+    <type fullname="Fantasy.Network.NetworkThreadComponent+++c__DisplayClass10_0" preserve="all"/>
     <type fullname="Fantasy.Network.SessionHeartbeatComponent++RepeatedSend+d__16" preserve="all"/>
+    <type fullname="Fantasy.Network.TCP.TCPClientNetwork++ReceiveSocketAsync+d__22" preserve="all"/>
+    <type fullname="Fantasy.Network.TCP.TCPClientNetwork++ReadPipeDataAsync+d__23" preserve="all"/>
+    <type fullname="Fantasy.Network.TCP.TCPClientNetwork+++c__DisplayClass29_0" preserve="all"/>
+    <type fullname="Fantasy.Network.KCP.KCPClientNetwork++ReceiveSocketAsync+d__41" preserve="all"/>
+    <type fullname="Fantasy.Network.KCP.KCPClientNetwork++ReadPipeDataAsync+d__42" preserve="all"/>
     <type fullname="Fantasy.Network.Interface.Message`1++Handle+d__1" preserve="all"/>
     <type fullname="Fantasy.Network.Interface.MessageRPC`2+++c__DisplayClass1_0" preserve="all"/>
     <type fullname="Fantasy.Network.Interface.MessageRPC`2++Handle+d__1" preserve="all"/>
@@ -583,6 +643,15 @@
     <type fullname="Fantasy.Network.Interface.MessageDispatcherComponent++ReLoad+d__15" preserve="all"/>
     <type fullname="Fantasy.Network.Interface.MessageDispatcherComponent+++c__DisplayClass16_0" preserve="all"/>
     <type fullname="Fantasy.Network.Interface.MessageDispatcherComponent++OnUnLoad+d__16" preserve="all"/>
+    <type fullname="Fantasy.Http.HttpClientHelper++CallNotDeserializeByPost+d__1" preserve="all"/>
+    <type fullname="Fantasy.Http.HttpClientHelper++CallNotDeserializeByGet+d__2" preserve="all"/>
+    <type fullname="Fantasy.Http.HttpClientHelper++CallByPost+d__3`1" preserve="all"/>
+    <type fullname="Fantasy.Http.HttpClientHelper++CallByPost+d__4`1" preserve="all"/>
+    <type fullname="Fantasy.Http.HttpClientHelper++CallByGet+d__5`1" preserve="all"/>
+    <type fullname="Fantasy.Http.HttpClientHelper++Call+d__6`2" preserve="all"/>
+    <type fullname="Fantasy.Http.HttpClientHelper++Deserialize+d__7`1" preserve="all"/>
+    <type fullname="Fantasy.Http.HttpClientHelper+++c" preserve="all"/>
+    <type fullname="Fantasy.Http.HttpClientPool+++c" preserve="all"/>
     <type fullname="Fantasy.Unity.UnityWebRequestHelper+++c__DisplayClass0_0" preserve="all"/>
     <type fullname="Fantasy.Unity.UnityWebRequestHelper+++c__DisplayClass1_0" preserve="all"/>
     <type fullname="Fantasy.Unity.UnityWebRequestHelper+++c__DisplayClass2_0" preserve="all"/>
@@ -638,12 +707,17 @@
     <type fullname="Fantasy.Async.FTask++InnerCoroutine+d__37" preserve="all"/>
     <type fullname="Fantasy.Async.FTask`1++InnerCoroutine+d__12" preserve="all"/>
     <type fullname="Fantasy.DataStructure.SkipTable.SkipTableBase`1++GetEnumerator+d__21" preserve="all"/>
+    <type fullname="Fantasy.Assembly.AssemblySystem++InnerInitialize+d__2" preserve="all"/>
+    <type fullname="Fantasy.Assembly.AssemblySystem+++c__DisplayClass3_0" preserve="all"/>
+    <type fullname="Fantasy.Assembly.AssemblySystem++LoadAssembly+d__3" preserve="all"/>
+    <type fullname="Fantasy.Assembly.AssemblySystem++UnLoadAssembly+d__4" preserve="all"/>
     <type fullname="Fantasy.Assembly.AssemblySystem++Register+d__5" preserve="all"/>
     <type fullname="Fantasy.Assembly.AssemblySystem++ForEach+d__7" preserve="all"/>
     <type fullname="Fantasy.Assembly.AssemblySystem++ForEach+d__8" preserve="all"/>
     <type fullname="Fantasy.Assembly.AssemblySystem++ForEach+d__9" preserve="all"/>
     <type fullname="Fantasy.Assembly.AssemblySystem++ForEach+d__10" preserve="all"/>
     <type fullname="Fantasy.Assembly.AssemblySystem++get_ForEachAssembly+d__13" preserve="all"/>
+    <type fullname="Fantasy.Assembly.AssemblySystem++DisposeAsync+d__16" preserve="all"/>
     <type fullname="+PrivateImplementationDetails++__StaticArrayInitTypeSize=32" preserve="all"/>
     <type fullname="+PrivateImplementationDetails++__StaticArrayInitTypeSize=288" preserve="all"/>
     <type fullname="NativeCollections.NativeConcurrentDictionary`2+KeyCollection+Enumerator" preserve="all"/>

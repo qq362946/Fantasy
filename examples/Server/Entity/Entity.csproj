@@ -17,10 +17,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.Net\Fantasy.Net.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Generate\ConfigTable\" />
+      <ProjectReference Include="..\..\..\Fantasy.Packages\Fantasy.ConfigTable\Net\Fantasy.ConfigTable.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,8 +1,11 @@
 ﻿using Fantasy;
+using Fantasy.ConfigTable;
 using Fantasy.DataBase;
 using Fantasy.Helper;
 using Fantasy.IdFactory;
 using Fantasy.Platform.Net;
+// 设置配置表的路径
+ConfigTableHelper.Initialize("../../../Config/Binary");
 // 设置ID生成规则
 IdFactoryHelper.Initialize(IdFactoryType.World);
 // 获取配置文件

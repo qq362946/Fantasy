@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a37e930ca3454fb57bc895f50d2106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoCopyAssembly: 1
+  autoCopyAssembly: 0
   hotUpdatePath: Assets/AssetBundle/Hotfix
   hotUpdateAssemblyDefinitions:
   - {fileID: 5897886265953266890, guid: e4f90e29c70724534a491a5732ceabb7, type: 3}

@@ -68,6 +68,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
                 //     }
                 //     await FTask.WaitAll(tasks);
                 // }
+                var instanceList = UnitConfigData.Instance.List;
                 break;
             }
         }
