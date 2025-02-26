@@ -55,10 +55,10 @@ namespace Fantasy.Network.TCP
             {
                 return;
             }
-
-            base.Dispose();
+            
             _isSending = false;
             _isInnerDispose = true;
+            base.Dispose();
             ClearConnectTimeout();
             
             if (!_cancellationTokenSource.IsCancellationRequested)
@@ -73,6 +73,7 @@ namespace Fantasy.Network.TCP
                 }
             }
             
+           
             _onConnectDisconnect?.Invoke();
             
             if (_socket.Connected)
