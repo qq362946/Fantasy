@@ -41,7 +41,7 @@ namespace Fantasy.Pool
         {
             if (!_poolQueue.TryDequeue(typeof(T), out var queue))
             {
-                return new T();
+                queue = new T();
             }
             
             queue.SetIsPool(true);
@@ -141,7 +141,7 @@ namespace Fantasy.Pool
         protected PoolCore(int maxCapacity)
         {
             _maxCapacity = maxCapacity;
-        }
+        } 
 
         /// <summary>
         /// 租借
