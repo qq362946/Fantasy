@@ -149,14 +149,19 @@ namespace Fantasy.Pool
         /// <returns></returns>
         public virtual T Rent()
         {
+            T dequeue;
+            
             if (_poolQueue.Count == 0)
             {
-                return new T();
+                dequeue = new T();
             }
-
-            var dequeue = _poolQueue.Dequeue();
+            else
+            {
+                _poolCount--;
+                dequeue = _poolQueue.Dequeue();
+            }
+            
             dequeue.SetIsPool(true);
-            _poolCount--;
             return dequeue;
         }
         

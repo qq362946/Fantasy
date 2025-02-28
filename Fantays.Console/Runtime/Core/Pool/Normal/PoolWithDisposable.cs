@@ -33,14 +33,18 @@ namespace Fantasy.Pool
         /// <returns></returns>
         public T Rent()
         {
+            T dequeue;
             if (_poolQueue.Count == 0)
             {
-                return new T();
+                dequeue = new T();
             }
-
-            var dequeue = _poolQueue.Dequeue();
+            else
+            {
+                _poolCount--;
+                dequeue = _poolQueue.Dequeue();
+            }
+            
             dequeue.SetIsPool(true);
-            _poolCount--;
             return dequeue;
         }
         
@@ -51,14 +55,19 @@ namespace Fantasy.Pool
         /// <returns></returns>
         public T Rent(Func<T> generator)
         {
+            T dequeue;
+            
             if (_poolQueue.Count == 0)
             {
-                return generator();
+                dequeue = generator();
+            }
+            else
+            {
+                _poolCount--;
+                dequeue = _poolQueue.Dequeue();
             }
             
-            var dequeue = _poolQueue.Dequeue();
             dequeue.SetIsPool(true);
-            _poolCount--;
             return dequeue;
         }
         
