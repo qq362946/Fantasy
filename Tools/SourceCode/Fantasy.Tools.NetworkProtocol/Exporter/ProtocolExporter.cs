@@ -402,7 +402,10 @@ public sealed class ProtocolExporter
                                 case "IResponse":
                                 {
                                     opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.Response, protocolOpCode.AResponse++);
-                                    errorCodeStr.AppendLine($"\t\t[{protocolMember}(ErrorCodeKeyIndex)]");
+                                    if (!string.IsNullOrEmpty(protocolMember))
+                                    {
+                                        errorCodeStr.AppendLine($"\t\t[{protocolMember}(ErrorCodeKeyIndex)]");
+                                    }
                                     errorCodeStr.AppendLine("\t\tpublic uint ErrorCode { get; set; }");
                                     disposeStr.AppendLine($"\t\t\tErrorCode = default;");
                                     break;
@@ -424,7 +427,10 @@ public sealed class ProtocolExporter
                                         case "IAddressableRouteResponse":
                                         {
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.AddressableResponse, protocolOpCode.AAddressableResponse++);
-                                            errorCodeStr.AppendLine($"\t\t[{protocolMember}(ErrorCodeKeyIndex)]");
+                                            if (!string.IsNullOrEmpty(protocolMember))
+                                            {
+                                                errorCodeStr.AppendLine($"\t\t[{protocolMember}(ErrorCodeKeyIndex)]");
+                                            }
                                             errorCodeStr.AppendLine("\t\tpublic uint ErrorCode { get; set; }");
                                             disposeStr.AppendLine($"\t\t\tErrorCode = default;");
                                             break;
@@ -454,7 +460,10 @@ public sealed class ProtocolExporter
                                                 throw new NotSupportedException("Under Inner, /// does not support the ICustomRouteMessage!");
                                             }
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.CustomRouteResponse, protocolOpCode.ACustomRouteResponse++);
-                                            errorCodeStr.AppendLine($"\t\t[{protocolMember}(ErrorCodeKeyIndex)]");
+                                            if (!string.IsNullOrEmpty(protocolMember))
+                                            {
+                                                errorCodeStr.AppendLine($"\t\t[{protocolMember}(ErrorCodeKeyIndex)]");
+                                            }
                                             errorCodeStr.AppendLine("\t\tpublic uint ErrorCode { get; set; }");
                                             disposeStr.AppendLine($"\t\t\tErrorCode = default;");
                                             break;
@@ -484,7 +493,10 @@ public sealed class ProtocolExporter
                                                 throw new NotSupportedException("Under Inner, /// does not support the ICustomRouteMessage!");
                                             }
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.RouteResponse, protocolOpCode.ARouteResponse++);
-                                            errorCodeStr.AppendLine($"\t\t[{protocolMember}(ErrorCodeKeyIndex)]");
+                                            if (!string.IsNullOrEmpty(protocolMember))
+                                            {
+                                                errorCodeStr.AppendLine($"\t\t[{protocolMember}(ErrorCodeKeyIndex)]");
+                                            }
                                             errorCodeStr.AppendLine("\t\tpublic uint ErrorCode { get; set; }");
                                             disposeStr.AppendLine($"\t\t\tErrorCode = default;");
                                             break;

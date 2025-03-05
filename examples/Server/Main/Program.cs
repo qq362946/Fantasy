@@ -1,4 +1,5 @@
 ﻿using Fantasy;
+using Fantasy.Assembly;
 using Fantasy.ConfigTable;
 using Fantasy.DataBase;
 using Fantasy.Helper;

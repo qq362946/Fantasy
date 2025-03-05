@@ -173,8 +173,7 @@ namespace Fantasy
 		public uint OpCode() { return InnerOpcode.M2M_SendUnitRequest; }
 		public Unit Unit { get; set; }
 	}
-	[ProtoContract]
-	public partial class M2M_SendUnitResponse : AMessage, IRouteResponse, IProto
+	public partial class M2M_SendUnitResponse : AMessage, IRouteResponse
 	{
 		public static M2M_SendUnitResponse Create(Scene scene)
 		{
@@ -188,7 +187,6 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2M_SendUnitResponse; }
-		[ProtoMember(1)]
 		public uint ErrorCode { get; set; }
 	}
 	/// <summary>
