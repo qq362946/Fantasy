@@ -958,6 +958,7 @@ namespace Fantasy.Entitas
                     entity.Dispose();
                 }
 
+                _tree.Clear();
                 scene.EntitySortedDictionaryPool.Return(_tree);
                 _tree = null;
             }
@@ -969,6 +970,7 @@ namespace Fantasy.Entitas
                     entity.Dispose();
                 }
 
+                _multi.Clear();
                 scene.EntitySortedDictionaryPool.Return(_multi);
                 _multi = null;
             }
@@ -980,6 +982,7 @@ namespace Fantasy.Entitas
                     entity.Dispose();
                 }
 
+                _treeDb.Clear();
                 scene.EntityListPool.Return(_treeDb);
                 _treeDb = null;
             }
@@ -991,6 +994,7 @@ namespace Fantasy.Entitas
                     entity.Dispose();
                 }
 
+                _multiDb.Clear();
                 scene.EntityListPool.Return(_multiDb);
                 _multiDb = null;
             }

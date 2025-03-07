@@ -73,7 +73,6 @@ namespace Fantasy.Network.TCP
                 }
             }
             
-           
             _onConnectDisconnect?.Invoke();
             
             if (_socket.Connected)

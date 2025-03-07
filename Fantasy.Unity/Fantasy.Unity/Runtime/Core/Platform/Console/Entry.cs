@@ -26,7 +26,7 @@ namespace Fantasy.Platform.Console
         /// 初始化框架
         /// </summary>
         /// <param name="assemblies"></param>
-        public static void Initialize(params System.Reflection.Assembly[] assemblies)
+        public static async FTask Initialize(params System.Reflection.Assembly[] assemblies)
         {
             if (_isInit)
             {
@@ -35,7 +35,7 @@ namespace Fantasy.Platform.Console
             }
             
             // 初始化程序集管理系统
-            AssemblySystem.InnerInitialize(assemblies);
+            await AssemblySystem.InnerInitialize(assemblies);
             // 初始化序列化
             SerializerManager.Initialize();
             _isInit = true;
