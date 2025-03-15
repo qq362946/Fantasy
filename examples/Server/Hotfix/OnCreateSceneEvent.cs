@@ -37,6 +37,8 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             {
                 
                 var instanceList = UnitConfigData.Instance.List;
+                var unitConfig = instanceList[0];
+                Log.Debug(instanceList[0].Dic[1]);
                 break;
             }
         }

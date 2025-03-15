@@ -92,6 +92,8 @@ namespace Fantasy
 		[ProtoMember(2)]
 		public string Name { get; set; } // 名称
 		[ProtoMember(3)]
-		public string Model { get; set; } // 数据库类型  
+		public string Model { get; set; } // 数据库类型
+		[ProtoMember(4)]
+		public StringDictionaryConfig Dic { get; set; } // 字典类型  
     } 
 }  

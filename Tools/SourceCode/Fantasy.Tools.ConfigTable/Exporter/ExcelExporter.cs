@@ -620,7 +620,6 @@ public sealed class ExcelExporter
                     }
                     var asSpan = memoryStream.GetBuffer().AsSpan(0, (int)memoryStream.Position);
                     File.WriteAllBytes(Path.Combine(_excelServerBinaryDirectory, $"{csName}Data.bytes"), asSpan.ToArray());
-
                     if (serverDynamicInfo.Json.Length > 0)
                     {
                         if (!Directory.Exists(_excelServerJsonDirectory))

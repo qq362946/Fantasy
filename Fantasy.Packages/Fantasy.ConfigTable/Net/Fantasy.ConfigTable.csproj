@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Fantasy-Net.ConfigTable</PackageId>
-        <PackageVersion>2024.1.3</PackageVersion>
+        <PackageVersion>2024.2.0</PackageVersion>
         <Title>Fantasy-Net.ConfigTable</Title>
         <Authors>qq362946</Authors>
         <owners>qq362946</owners>

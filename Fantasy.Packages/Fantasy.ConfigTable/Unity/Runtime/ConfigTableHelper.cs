@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using Fantasy.Platform.Net;
 using Fantasy.Serialize;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -14,17 +12,21 @@ namespace Fantasy.ConfigTable
     /// </summary>
     public static class ConfigTableHelper
     {
-        private static string _configTableBinaryDirectory;
+        private static string _assetBundleDirectoryPath;
+        private static IConfigTableAssetBundle _configTableAssetBundle;
         private static readonly object Lock = new object();
         // 配置表数据缓存字典
         private static readonly Dictionary<string, ASerialize> ConfigDic = new ();
+
         /// <summary>
         /// 初始化ConfigTableHelper
         /// </summary>
-        /// <param name="configTableBinaryDirectory"></param>
-        public static void Initialize(string configTableBinaryDirectory)
+        /// <param name="assetBundleDirectoryPath"></param>
+        /// <param name="configTableAssetBundle"></param>
+        public static void Initialize(string assetBundleDirectoryPath, IConfigTableAssetBundle configTableAssetBundle)
         {
-            _configTableBinaryDirectory = configTableBinaryDirectory;
+            _assetBundleDirectoryPath = assetBundleDirectoryPath;
+            _configTableAssetBundle = configTableAssetBundle;
         }
         /// <summary>
         /// 加载配置表数据
@@ -43,10 +45,9 @@ namespace Fantasy.ConfigTable
                     {
                         return (T)aProto;
                     }
-                   
-                    var configFile = GetConfigPath(dataConfig);
-                    var bytes = File.ReadAllBytes(configFile);
-                    // Log.Debug($"dataConfig:{dataConfig} {bytes.Length}");
+                    
+                    var dataConfigPath = _configTableAssetBundle.Combine(_assetBundleDirectoryPath, dataConfig);
+                    var bytes = _configTableAssetBundle.LoadConfigTable(dataConfigPath);
                     var data = SerializerManager.GetSerializer(FantasySerializerType.ProtoBuf).Deserialize<T>(bytes);
                     ConfigDic[dataConfig] = data;
                     return data;
@@ -56,23 +57,6 @@ namespace Fantasy.ConfigTable
                     throw new Exception($"ConfigTableManage:{typeof(T).Name} 数据表加载之后反序列化时出错:{ex}");
                 }
             }
-        }
-
-        /// <summary>
-        /// 获取配置表文件路径
-        /// </summary>
-        /// <param name="name">配置表名称</param>
-        /// <returns>配置表文件路径</returns>
-        private static string GetConfigPath(string name)
-        {
-            var configFile = Path.Combine(_configTableBinaryDirectory, $"{name}.bytes");
-
-            if (File.Exists(configFile))
-            {
-                return configFile;
-            }
-
-            throw new FileNotFoundException($"{name}.byte not found: {configFile}");
         }
         
         /// <summary>
