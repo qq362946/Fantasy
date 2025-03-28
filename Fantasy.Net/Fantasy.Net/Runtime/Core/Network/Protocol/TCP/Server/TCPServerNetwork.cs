@@ -47,19 +47,29 @@ namespace Fantasy.Network.TCP
                 return;
             }
 
-            foreach (var networkChannel in _connectionChannel.Values.ToArray())
+            try
             {
-                networkChannel.Dispose();
-            }
+                foreach (var networkChannel in _connectionChannel.Values.ToArray())
+                {
+                    networkChannel.Dispose();
+                }
 
-            _connectionChannel.Clear();
-            _random = null;
-            _socket.Dispose();
-            _socket = null;
-            _acceptAsync.Dispose();
-            _acceptAsync = null;
-            GC.SuppressFinalize(this);
-            base.Dispose();
+                _connectionChannel.Clear();
+                _random = null;
+                _socket.Dispose();
+                _socket = null;
+                _acceptAsync.Dispose();
+                _acceptAsync = null;
+                GC.SuppressFinalize(this);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+            finally
+            {
+                base.Dispose();
+            }
         }
 
         private void AcceptAsync()

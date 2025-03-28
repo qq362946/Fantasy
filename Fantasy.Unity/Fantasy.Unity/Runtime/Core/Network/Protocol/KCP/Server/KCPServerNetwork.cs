@@ -98,33 +98,42 @@ namespace Fantasy.Network.KCP
                 return;
             }
 
-            if (!_cancellationTokenSource.IsCancellationRequested)
+            try
             {
-                try
+                if (!_cancellationTokenSource.IsCancellationRequested)
                 {
-                    _cancellationTokenSource.Cancel();
+                    try
+                    {
+                        _cancellationTokenSource.Cancel();
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        // 通常情况下，此处的异常可以忽略
+                    }
                 }
-                catch (OperationCanceledException)
+
+                foreach (var (_, channel) in _connectionChannel.ToArray())
                 {
-                    // 通常情况下，此处的异常可以忽略
+                    channel.Dispose();
+                }
+
+                _connectionChannel.Clear();
+                _pendingConnection.Clear();
+
+                if (_socket != null)
+                {
+                    _socket.Dispose();
+                    _socket = null;
                 }
             }
-
-            foreach (var (_, channel) in _connectionChannel.ToArray())
+            catch (Exception e)
             {
-                channel.Dispose();
+                Log.Error(e);
             }
-
-            _connectionChannel.Clear();
-            _pendingConnection.Clear();
-
-            if (_socket != null)
+            finally
             {
-                _socket.Dispose();
-                _socket = null;
+                base.Dispose();
             }
-
-            base.Dispose();
         }
 
         #region ReceiveSocket

@@ -63,8 +63,6 @@ namespace Fantasy.Network.TCP
                     // 通常情况下，此处的异常可以忽略
                 }
             }
-
-            base.Dispose();
             
             if (_socket != null)
             {
@@ -75,6 +73,7 @@ namespace Fantasy.Network.TCP
             _sendBuffers.Clear();
             _packetParser.Dispose();
             _isSending = false;
+            base.Dispose();
         }
 
         #region ReceiveSocket

@@ -55,36 +55,46 @@ namespace Fantasy.Network.TCP
             {
                 return;
             }
-            
-            _isSending = false;
-            _isInnerDispose = true;
-            base.Dispose();
-            ClearConnectTimeout();
-            
-            if (!_cancellationTokenSource.IsCancellationRequested)
+
+            try
             {
-                try
+                _isSending = false;
+                _isInnerDispose = true;
+                ClearConnectTimeout();
+
+                if (!_cancellationTokenSource.IsCancellationRequested)
                 {
-                    _cancellationTokenSource.Cancel();
+                    try
+                    {
+                        _cancellationTokenSource.Cancel();
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        // 通常情况下，此处的异常可以忽略
+                    }
                 }
-                catch (OperationCanceledException)
+
+                _onConnectDisconnect?.Invoke();
+
+                if (_socket.Connected)
                 {
-                    // 通常情况下，此处的异常可以忽略
+                    _socket.Close();
+                    _socket = null;
                 }
+
+                _sendBuffers.Clear();
+                _packetParser?.Dispose();
+                ChannelId = 0;
+                _sendArgs = null;
             }
-            
-            _onConnectDisconnect?.Invoke();
-            
-            if (_socket.Connected)
+            catch (Exception e)
             {
-                _socket.Close();
-                _socket = null;
+                Log.Error(e);
             }
-            
-            _sendBuffers.Clear();
-            _packetParser?.Dispose();
-            ChannelId = 0;
-            _sendArgs = null;
+            finally
+            {
+                base.Dispose();
+            }
         }
 
         /// <summary>
@@ -396,7 +406,7 @@ namespace Fantasy.Network.TCP
                 return;
             }
 
-            Scene.TimerComponent.Net.Remove(ref _connectTimeoutId);
+            Scene?.TimerComponent?.Net?.Remove(ref _connectTimeoutId);
         }
     }
 }

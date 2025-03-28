@@ -43,14 +43,24 @@ namespace Fantasy.Network.KCP
                 return;
             }
 
-            _isInnerDispose = true;
-            _kcpServerNetwork.RemoveChannel(Id);
-            base.Dispose();
-            IsDisposed = true;
-            Kcp.Dispose();
-            Kcp = null;
-            ChannelId = 0;
-            _kcpServerNetwork = null;
+            try
+            {
+                _isInnerDispose = true;
+                _kcpServerNetwork.RemoveChannel(Id);
+                IsDisposed = true;
+                Kcp.Dispose();
+                Kcp = null;
+                ChannelId = 0;
+                _kcpServerNetwork = null;
+            }
+            catch (Exception e)
+            {
+               Log.Error(e);
+            }
+            finally
+            {
+                base.Dispose();
+            }
         }
 
         public void Input(ReadOnlyMemory<byte> buffer)

@@ -55,7 +55,6 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
         }
         _sendBuffers.Clear();
         _network.RemoveChannel(Id);
-        base.Dispose();
         if (_webSocket.State == WebSocketState.Open || _webSocket.State == WebSocketState.CloseReceived)
         {
             _webSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Normal Closure",
@@ -63,6 +62,7 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
         }
         _webSocket.Dispose();
         _isSending = false;
+        base.Dispose();
     }
     
     #region ReceiveSocket

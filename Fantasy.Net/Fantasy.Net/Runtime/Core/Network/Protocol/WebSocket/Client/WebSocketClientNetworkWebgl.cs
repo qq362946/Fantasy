@@ -38,19 +38,29 @@ namespace Fantasy.Network.WebSocket
             {
                 return;
             }
-            
-            _isInnerDispose = true;
-            base.Dispose();
-            
-            if (_webSocket != null && _webSocket.ReadyState != WebSocketState.Closed)
+
+            try
             {
-                _onConnectDisconnect?.Invoke();
-                _webSocket.CloseAsync();
-            }
+                _isInnerDispose = true;
+                ClearConnectTimeout();
             
-            _packetParser.Dispose();
-            ClearConnectTimeout();
-            _messageCache.Clear();
+                if (_webSocket != null && _webSocket.ReadyState != WebSocketState.Closed)
+                {
+                    _onConnectDisconnect?.Invoke();
+                    _webSocket.CloseAsync();
+                }
+            
+                _packetParser.Dispose();
+                _messageCache.Clear();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+            finally
+            {
+                base.Dispose();
+            }
         }
 
         public override Session Connect(string remoteAddress, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000)

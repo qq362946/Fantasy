@@ -42,26 +42,37 @@ namespace Fantasy.Network.WebSocket
                 return;
             }
 
-            _isInnerDispose = true;
-            if (!_cancellationTokenSource.IsCancellationRequested)
+            try
             {
-                try
-                {
-                    _cancellationTokenSource.Cancel();
-                }
-                catch (OperationCanceledException)
-                {
-                    // 通常情况下，此处的异常可以忽略
-                }
-            }
+                _isInnerDispose = true;
 
-            base.Dispose();
-            ClearConnectTimeout();
-            WebSocketClientDisposeAsync().Coroutine();
-            _onConnectDisconnect?.Invoke();
-            _packetParser.Dispose();
-            _packetParser = null;
-            _isSending = false;
+                if (!_cancellationTokenSource.IsCancellationRequested)
+                {
+                    try
+                    {
+                        _cancellationTokenSource.Cancel();
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        // 通常情况下，此处的异常可以忽略
+                    }
+                }
+
+                ClearConnectTimeout();
+                WebSocketClientDisposeAsync().Coroutine();
+                _onConnectDisconnect?.Invoke();
+                _packetParser.Dispose();
+                _packetParser = null;
+                _isSending = false;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+            finally
+            {
+                base.Dispose();
+            }
         }
 
         private async FTask WebSocketClientDisposeAsync()
@@ -327,7 +338,7 @@ namespace Fantasy.Network.WebSocket
                 return;
             }
 
-            Scene.TimerComponent.Net.Remove(ref _connectTimeoutId);
+            Scene?.TimerComponent?.Net?.Remove(ref _connectTimeoutId);
         }
     }
 }

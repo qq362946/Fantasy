@@ -77,41 +77,51 @@ namespace Fantasy.Network.KCP
             {
                 return;
             }
-            
-            _isInnerDispose = true;
-            
-            if (!_isDisconnect)
+
+            try
             {
-                SendDisconnect();
-            }
-            
-            base.Dispose();
-            ClearConnectTimeout();
-            
-            if (!_cancellationTokenSource.IsCancellationRequested)
-            {
-                try
+                _isInnerDispose = true;
+
+                if (!_isDisconnect)
                 {
-                    _cancellationTokenSource.Cancel();
+                    SendDisconnect();
                 }
-                catch (OperationCanceledException)
+
+                ClearConnectTimeout();
+
+                if (!_cancellationTokenSource.IsCancellationRequested)
                 {
-                    // 通常情况下，此处的异常可以忽略
+                    try
+                    {
+                        _cancellationTokenSource.Cancel();
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        // 通常情况下，此处的异常可以忽略
+                    }
                 }
+
+                OnConnectDisconnect?.Invoke();
+                _kcp.Dispose();
+
+                if (_socket.Connected)
+                {
+                    _socket.Close();
+                }
+
+                _packetParser.Dispose();
+                ChannelId = 0;
+                _isConnected = false;
+                _messageCache.Clear();
             }
-            
-            OnConnectDisconnect?.Invoke();
-            _kcp.Dispose();
-            
-            if (_socket.Connected)
+            catch (Exception e)
             {
-                _socket.Close();
+                Log.Error(e);
             }
-            
-            _packetParser.Dispose();
-            ChannelId = 0;
-            _isConnected = false;
-            _messageCache.Clear();
+            finally
+            {
+                base.Dispose();
+            }
         }
 
         #region Connect
