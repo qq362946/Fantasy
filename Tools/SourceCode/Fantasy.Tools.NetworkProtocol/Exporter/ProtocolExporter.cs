@@ -46,8 +46,7 @@ public sealed class ProtocolExporter
             return;
         }
 
-        _networkProtocolDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.NetworkProtocolDirectory);
-        
+        _networkProtocolDirectory = ExporterSettingsHelper.NetworkProtocolDirectory;
         if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client))
         {
             if (ExporterSettingsHelper.NetworkProtocolClientDirectory?.Trim() == "")
@@ -56,8 +55,7 @@ public sealed class ProtocolExporter
                 return;
             }
 
-            _networkProtocolClientDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.NetworkProtocolClientDirectory);
-
+            _networkProtocolClientDirectory = ExporterSettingsHelper.NetworkProtocolClientDirectory ?? string.Empty;
             if (!Directory.Exists(_networkProtocolClientDirectory))
             {
                 Directory.CreateDirectory(_networkProtocolClientDirectory);
@@ -72,8 +70,7 @@ public sealed class ProtocolExporter
                 return;
             }
 
-            _networkProtocolServerDirectory = FileHelper.GetFullPath(ExporterSettingsHelper.NetworkProtocolServerDirectory);
-
+            _networkProtocolServerDirectory = ExporterSettingsHelper.NetworkProtocolServerDirectory ?? string.Empty;
             if (!Directory.Exists(_networkProtocolServerDirectory))
             {
                 Directory.CreateDirectory(_networkProtocolServerDirectory);

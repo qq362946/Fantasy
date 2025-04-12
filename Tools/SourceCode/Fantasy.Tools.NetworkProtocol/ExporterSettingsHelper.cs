@@ -1,3 +1,4 @@
+using Fantasy.Exporter;
 using Fantasy.Helper;
 using Microsoft.Extensions.Configuration;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -16,18 +17,22 @@ public class ExporterSettingsHelper
     public static void Initialize()
     {
         const string settingsName = "ExporterSettings.json";
-        var currentDirectory = Directory.GetCurrentDirectory();
+        var currentDirectory = ExporterAges.Instance.Folder;
+        if (string.IsNullOrEmpty(currentDirectory))
+        {
+            currentDirectory = Directory.GetCurrentDirectory();
+        }
 
         if (!File.Exists(Path.Combine(currentDirectory, settingsName)))
         {
             throw new FileNotFoundException($"not found {settingsName} in OutputDirectory");
         }
         
-        var root = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(settingsName).Build();
+        var root = new ConfigurationBuilder().SetBasePath(currentDirectory).AddJsonFile(settingsName).Build();
         
-        NetworkProtocolDirectory = FileHelper.GetFullPath(root["Export:NetworkProtocolDirectory:Value"]);
-        NetworkProtocolServerDirectory = FileHelper.GetFullPath(root["Export:NetworkProtocolServerDirectory:Value"]);
-        NetworkProtocolClientDirectory = FileHelper.GetFullPath(root["Export:NetworkProtocolClientDirectory:Value"]);
+        NetworkProtocolDirectory = FileHelper.GetFullPath(root["Export:NetworkProtocolDirectory:Value"], currentDirectory);
+        NetworkProtocolServerDirectory = FileHelper.GetFullPath(root["Export:NetworkProtocolServerDirectory:Value"], currentDirectory);
+        NetworkProtocolClientDirectory = FileHelper.GetFullPath(root["Export:NetworkProtocolClientDirectory:Value"], currentDirectory);
         
         CustomSerializes = [];
         var sort = new SortedList<long, CustomSerialize>();
