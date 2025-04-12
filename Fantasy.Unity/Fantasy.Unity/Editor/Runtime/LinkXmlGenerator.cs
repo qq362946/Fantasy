@@ -14,10 +14,13 @@ namespace Fantasy
             using (var writer = new StreamWriter("Assets/link.xml"))
             {
                 writer.WriteLine("<linker>");
-                GenerateLinkXml(writer, "Assembly-CSharp", LinkPath);
-                Debug.Log("Assembly-CSharp Link generation completed");
-                GenerateLinkXml(writer, "Fantasy.Unity", LinkPath);
-                Debug.Log("Fantasy.Unity Link generation completed");
+                
+                foreach (var assembly in FantasySettingsScriptableObject.Instance.includeAssembly)
+                {
+                    GenerateLinkXml(writer, assembly, LinkPath);
+                    Debug.Log($"{assembly} Link generation completed");
+                }
+                
                 if (FantasySettingsScriptableObject.Instance?.linkAssemblyDefinitions != null)
                 {
                     foreach (var linkAssembly in FantasySettingsScriptableObject.Instance.linkAssemblyDefinitions)

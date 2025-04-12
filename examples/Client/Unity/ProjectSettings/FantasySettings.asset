@@ -18,3 +18,6 @@ MonoBehaviour:
   - {fileID: 5897886265953266890, guid: e4f90e29c70724534a491a5732ceabb7, type: 3}
   - {fileID: 5897886265953266890, guid: 946f62c1e785141e8915ce3c436ca437, type: 3}
   linkAssemblyDefinitions: []
+  includeAssembly:
+  - Assembly-CSharp
+  - Fantasy.Unity

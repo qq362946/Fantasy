@@ -15,6 +15,7 @@ namespace Fantasy
         private SerializedProperty _hotUpdatePath;
         private SerializedProperty _hotUpdateAssemblyDefinitions;
         private SerializedProperty _linkAssemblyDefinitions;
+        private SerializedProperty _includeAssembly;
         public FantasySettingsProvider() : base("Project/Fantasy Settings", SettingsScope.Project) { }
 
         public override void OnActivate(string searchContext, VisualElement rootElement)
@@ -37,6 +38,7 @@ namespace Fantasy
             _hotUpdatePath = _serializedObject.FindProperty("hotUpdatePath");
             _hotUpdateAssemblyDefinitions = _serializedObject.FindProperty("hotUpdateAssemblyDefinitions");
             _linkAssemblyDefinitions = _serializedObject.FindProperty("linkAssemblyDefinitions");
+            _includeAssembly = _serializedObject.FindProperty("includeAssembly");
         }
 
         public override void OnGUI(string searchContext)
@@ -54,8 +56,9 @@ namespace Fantasy
                 EditorGUILayout.PropertyField(_autoCopyAssembly);
                 EditorGUILayout.PropertyField(_hotUpdatePath);
                 EditorGUILayout.PropertyField(_hotUpdateAssemblyDefinitions);
+                EditorGUILayout.PropertyField(_includeAssembly);
                 EditorGUILayout.PropertyField(_linkAssemblyDefinitions);
-                EditorGUILayout.HelpBox("默认包括Assembly-CSharp和Fantasy.Unity，所以不需要再次指定。", MessageType.Info);
+                // EditorGUILayout.HelpBox("默认包括Fantasy.Unity，所以不需要再次指定。", MessageType.Info);
 
                 if (GUILayout.Button("GenerateLinkXml"))
                 {
