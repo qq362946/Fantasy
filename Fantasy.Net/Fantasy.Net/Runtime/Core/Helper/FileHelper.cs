@@ -21,6 +21,17 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
+        /// 获取相对路径的完整路径。
+        /// </summary>
+        /// <param name="relativePath">相对于指定的目录的相对路径。</param>
+        /// <param name="srcDir">指定的目录</param>
+        /// <returns>完整路径。</returns>
+        public static string GetFullPath(string relativePath, string srcDir)
+        {
+            return Path.GetFullPath(Path.Combine(srcDir, relativePath));
+        }
+
+        /// <summary>
         /// 获取相对路径的的文本信息。
         /// </summary>
         /// <param name="relativePath"></param>
