@@ -24,7 +24,6 @@ namespace Fantasy.Helper
         public const long OneDay = 86400000;
         // 1970年1月1日的Ticks
         private const long Epoch = 621355968000000000L;
-        private static readonly DateTime Dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         /// <summary>
         /// 获取当前时间的毫秒数，从1970年1月1日开始计算。
         /// </summary>
@@ -46,13 +45,19 @@ namespace Fantasy.Helper
 #endif
 #endif
         /// <summary>
-        /// 将日期时间转换为毫秒数，从1970年1月1日开始计算。
+        /// 根据时间获取时间戳
         /// </summary>
-        /// <param name="d">要转换的日期时间。</param>
-        /// <returns>转换后的毫秒数。</returns>
-        public static long Transition(this DateTime d)
+        public static long Transition(DateTime dateTime)
         {
-            return (d.Ticks - Epoch) / 10000;
+            return (dateTime.ToUniversalTime().Ticks - Epoch) / 10000;
+        }
+
+        /// <summary>
+        /// 根据时间获取 时间戳
+        /// </summary>
+        public static long TransitionToSeconds(DateTime dateTime)
+        {
+            return (dateTime.ToUniversalTime().Ticks - Epoch) / 10000000;
         }
 
         /// <summary>
@@ -62,7 +67,7 @@ namespace Fantasy.Helper
         /// <returns>转换后的日期时间。</returns>
         public static DateTime Transition(this long timeStamp)
         {
-            return Dt1970.AddTicks(timeStamp);
+            return new DateTime(Epoch + timeStamp * 10000, DateTimeKind.Utc).ToUniversalTime();
         }
 
         /// <summary>
@@ -72,7 +77,7 @@ namespace Fantasy.Helper
         /// <returns>转换后的本地时间的日期时间。</returns>
         public static DateTime TransitionLocal(this long timeStamp)
         {
-            return Dt1970.AddTicks(timeStamp).ToLocalTime();
+            return new DateTime(Epoch + timeStamp * 10000, DateTimeKind.Utc).ToLocalTime();
         }
     }
 }
