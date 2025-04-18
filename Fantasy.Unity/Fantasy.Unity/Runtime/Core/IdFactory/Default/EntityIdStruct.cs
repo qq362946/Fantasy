@@ -70,7 +70,7 @@ namespace Fantasy.IdFactory
         private uint _lastTime;
         private uint _lastSequence;
         private static readonly long Epoch1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000;
-        private static readonly long EpochThisYear = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - Epoch1970;
+        private static readonly long EpochThisYear = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - Epoch1970;
     
         private EntityIdFactory() { }
     

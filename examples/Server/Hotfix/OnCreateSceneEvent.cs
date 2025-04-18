@@ -1,6 +1,7 @@
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Event;
+using Fantasy.Helper;
 
 namespace Fantasy;
 
@@ -15,6 +16,23 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
     /// <returns>A task representing the asynchronous operation.</returns>
     protected override async FTask Handler(OnCreateScene self)
     {
+        
+        var epoch1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000;
+        
+        {
+            var now = TimeHelper.Transition(new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc));
+            var epochThisYear = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - epoch1970;
+            var time = (uint)((now - epochThisYear) / 1000);
+            Log.Debug($"time = {time} now = {now} epochThisYear = {epochThisYear}");
+        }
+        
+        {
+            var now = TimeHelper.Transition(new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc));
+            var epochThisYear = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - epoch1970;
+            var time = (uint)((now - epochThisYear) / 1000);
+            Log.Debug($"time = {time} now = {now} epochThisYear = {epochThisYear}");
+        }
+        
         var scene = self.Scene;
         
         switch (scene.SceneType)
