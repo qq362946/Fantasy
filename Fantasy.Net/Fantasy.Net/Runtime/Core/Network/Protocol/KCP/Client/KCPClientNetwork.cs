@@ -390,7 +390,7 @@ namespace Fantasy.Network.KCP
 
         private void Input(ReadOnlyMemory<byte> buffer)
         {
-            _kcp.Input(buffer);
+            _kcp.Input(buffer.Span);
             AddToUpdate(0);
 
             while (!_cancellationTokenSource.IsCancellationRequested)
@@ -404,7 +404,7 @@ namespace Fantasy.Network.KCP
                         return;
                     }
 
-                    var receiveCount = _kcp.Receive(_receiveBuffer, peekSize);
+                    var receiveCount = _kcp.Receive(_receiveBuffer.AsSpan(0, peekSize));
 
                     if (receiveCount != peekSize)
                     {
@@ -550,7 +550,7 @@ namespace Fantasy.Network.KCP
 
             try
             {
-                _kcp.Send(memoryStream.GetBuffer(), 0, (int)memoryStream.Position);
+                _kcp.Send(memoryStream.GetBuffer().AsSpan(0, (int)memoryStream.Position));
                 AddToUpdate(0);
             }
             finally
@@ -647,7 +647,7 @@ namespace Fantasy.Network.KCP
             }
         }
         
-        private unsafe void KcpSpanCallback(byte[] buffer, ref int count)
+        private unsafe void KcpSpanCallback(byte[] buffer, int count)
         {
             if (IsDisposed)
             {
