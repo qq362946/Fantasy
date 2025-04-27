@@ -4,6 +4,7 @@ using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Helper;
 using Fantasy.IdFactory;
+using Fantasy.LowLevel;
 using Fantasy.Network;
 using Fantasy.Serialize;
 // ReSharper disable FunctionNeverReturns
@@ -51,6 +52,8 @@ public static class Entry
         SerializerManager.Initialize();
         // 精度处理（只针对Windows下有作用、其他系统没有这个问题、一般也不会用Windows来做服务器的）
         WinPeriod.Initialize();
+
+        FantasyMemory.Initialize();
     }
 
     /// <summary>
