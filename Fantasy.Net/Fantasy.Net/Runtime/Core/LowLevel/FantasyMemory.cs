@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using mimalloc;
 #if NET7_0_OR_GREATER
 using System.Runtime.Intrinsics;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #endif
 
 namespace Fantasy.LowLevel
