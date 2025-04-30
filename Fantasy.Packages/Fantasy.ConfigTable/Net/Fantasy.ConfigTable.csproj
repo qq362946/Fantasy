@@ -16,10 +16,10 @@
         <RepositoryType>git</RepositoryType>
         <PackageTags>Net, c#, Server, Game, GameServer, Fantasy , Network</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
-        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>Fantasy-Net.ConfigTable</AssemblyName>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
