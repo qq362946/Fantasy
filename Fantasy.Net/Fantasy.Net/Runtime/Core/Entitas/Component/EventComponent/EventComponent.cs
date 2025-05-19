@@ -41,7 +41,7 @@ namespace Fantasy.Event
         public async FTask Load(long assemblyIdentity)
         {
             var tcs = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 LoadInner(assemblyIdentity);
                 tcs.SetResult();
@@ -52,7 +52,7 @@ namespace Fantasy.Event
         public async FTask ReLoad(long assemblyIdentity)
         {
             var tcs = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 LoadInner(assemblyIdentity);
@@ -64,7 +64,7 @@ namespace Fantasy.Event
         public async FTask OnUnLoad(long assemblyIdentity)
         {
             var tcs = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 tcs.SetResult();

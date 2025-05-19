@@ -45,7 +45,6 @@ namespace Fantasy.Network.Interface
         private readonly OneToManyList<long, uint> _assemblyNetworkProtocols = new OneToManyList<long, uint>();
         private readonly OneToManyList<long, HandlerInfo<IMessageHandler>> _assemblyMessageHandlers = new OneToManyList<long, HandlerInfo<IMessageHandler>>();
 #if FANTASY_UNITY
-
         private readonly Dictionary<Type, IMessageDelegateHandler> _messageDelegateHandlers = new Dictionary<Type, IMessageDelegateHandler>();
 #endif
 #if FANTASY_NET
@@ -68,7 +67,7 @@ namespace Fantasy.Network.Interface
         public async FTask Load(long assemblyIdentity)
         {
             var tcs = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 LoadInner(assemblyIdentity);
                 tcs.SetResult();
@@ -154,7 +153,7 @@ namespace Fantasy.Network.Interface
         public async FTask ReLoad(long assemblyIdentity)
         {
             var tcs = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 LoadInner(assemblyIdentity);
@@ -166,7 +165,7 @@ namespace Fantasy.Network.Interface
         public async FTask OnUnLoad(long assemblyIdentity)
         {
             var tcs = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 tcs.SetResult();
@@ -273,7 +272,6 @@ namespace Fantasy.Network.Interface
             _messageDelegateHandlers.Remove(type);
         }
 #endif
-
         #endregion
         
         /// <summary>

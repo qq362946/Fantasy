@@ -70,7 +70,7 @@ namespace Fantasy.Entitas
         public FTask Load(long assemblyIdentity)
         {
             var task = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 LoadInner(assemblyIdentity);
                 task.SetResult();
@@ -81,7 +81,7 @@ namespace Fantasy.Entitas
         public FTask ReLoad(long assemblyIdentity)
         {
             var task = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 LoadInner(assemblyIdentity);
@@ -94,7 +94,7 @@ namespace Fantasy.Entitas
         public FTask OnUnLoad(long assemblyIdentity)
         {
             var task = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 task.SetResult();

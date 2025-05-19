@@ -156,15 +156,19 @@ namespace Fantasy
             {
                 return;
             }
-
+            
             if (SceneRuntimeType == SceneRuntimeType.Root)
             {
+                foreach (var (_, entity) in _entities)
+                {
+                    entity.Dispose();
+                }
+                _entities.Clear();
 #if FANTASY_NET
                 foreach (var (_, innerSession) in _processSessionInfos)
                 {
                     innerSession.Dispose();
                 }
-
                 _processSessionInfos.Clear();
 #endif
 #if FANTASY_UNITY

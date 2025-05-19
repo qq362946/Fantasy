@@ -152,20 +152,23 @@ namespace Fantasy
         /// </summary>
         public override void Dispose()
         {
-            Log.Debug("99999");
             if (IsDisposed)
             {
                 return;
             }
-
+            
             if (SceneRuntimeType == SceneRuntimeType.Root)
             {
+                foreach (var (_, entity) in _entities)
+                {
+                    entity.Dispose();
+                }
+                _entities.Clear();
 #if FANTASY_NET
                 foreach (var (_, innerSession) in _processSessionInfos)
                 {
                     innerSession.Dispose();
                 }
-
                 _processSessionInfos.Clear();
 #endif
 #if FANTASY_UNITY
@@ -291,7 +294,7 @@ namespace Fantasy
             var scene = Create(process, (byte)sceneConfig.WorldConfigId, sceneConfig.Id);
             scene.SceneType = sceneConfig.SceneType;
             scene.SceneConfigId = sceneConfig.Id;
-            await SetScheduler(scene, sceneConfig.SceneRuntimeType);
+            await SetScheduler(scene, sceneConfig.SceneRuntimeMode);
             
             if (sceneConfig.WorldConfigId != 0)
             {

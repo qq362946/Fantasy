@@ -9,6 +9,7 @@ public sealed class G2SubScene_AddressableIdRequestHandler : RouteRPC<SubScene, 
 {
     protected override async FTask Run(SubScene subScene, G2SubScene_AddressableIdRequest request, SubScene2G_AddressableIdResponse response, Action reply)
     {
+        Log.Debug($"G2SubScene_AddressableIdRequestHandler {subScene.SceneType}");
         // 1、因为是测试代码，所以默认每次请求这个协议我都创建一个新的Unit来做Addressable。
         var unit = Entity.Create<Unit>(subScene, false, true);
         // 2、给Unit添加AddressableMessageComponent组件，并执行Register()，向AddressableScene注册自己当前的位置。

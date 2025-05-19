@@ -43,7 +43,7 @@ namespace Fantasy.SingleCollection
         public async FTask Load(long assemblyIdentity)
         {
             var tcs = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 LoadInner(assemblyIdentity);
                 tcs.SetResult();
@@ -54,7 +54,7 @@ namespace Fantasy.SingleCollection
         public async FTask ReLoad(long assemblyIdentity)
         {
             var tcs = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 LoadInner(assemblyIdentity);
@@ -66,7 +66,7 @@ namespace Fantasy.SingleCollection
         public async FTask OnUnLoad(long assemblyIdentity)
         {
             var tcs = FTask.Create(false);
-            Scene.ThreadSynchronizationContext.Post(() =>
+            Scene?.ThreadSynchronizationContext.Post(() =>
             {
                 OnUnLoadInner(assemblyIdentity);
                 tcs.SetResult();

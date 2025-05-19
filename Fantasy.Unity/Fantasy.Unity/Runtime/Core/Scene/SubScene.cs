@@ -46,42 +46,44 @@ namespace Fantasy
         /// </summary>
         public override void Dispose()
         {
-            Log.Debug("r5345345");
-            if (IsDisposed)
+            ThreadSynchronizationContext.Post(() =>
             {
-                return;
-            }
+                if (IsDisposed)
+                {
+                    return;
+                }
             
-            foreach (var (runtimeId, _) in _entities)
-            {
-                RootScene.RemoveEntity(runtimeId);
-            }
+                foreach (var (_, entity) in _entities)
+                {
+                    entity.Dispose();
+                }
             
-            _entities.Clear();
+                _entities.Clear();
+                base.Dispose();
 #if FANTASY_NET
-            World = null;
-            Process = null;
-            SceneType = 0;
+                World = null;
+                Process = null;
+                SceneType = 0;
 #endif
-            EntityIdFactory = null;
-            RuntimeIdFactory = null;
-            RootScene = null;
-            EntityPool = null;
-            EntityListPool = null;
-            EntitySortedDictionaryPool = null;
-            SceneUpdate = null;
-            TimerComponent = null;
-            EventComponent = null;
-            EntityComponent = null;
-            MessagePoolComponent = null;
-            CoroutineLockComponent = null;
-            MessageDispatcherComponent = null;
+                EntityIdFactory = null;
+                RuntimeIdFactory = null;
+                RootScene = null;
+                EntityPool = null;
+                EntityListPool = null;
+                EntitySortedDictionaryPool = null;
+                SceneUpdate = null;
+                TimerComponent = null;
+                EventComponent = null;
+                EntityComponent = null;
+                MessagePoolComponent = null;
+                CoroutineLockComponent = null;
+                MessageDispatcherComponent = null;
 #if FANTASY_NET
-            NetworkMessagingComponent = null;
-            SingleCollectionComponent = null;
+                NetworkMessagingComponent = null;
+                SingleCollectionComponent = null;
 #endif
-            ThreadSynchronizationContext = null;
-            base.Dispose();
+                ThreadSynchronizationContext = null;
+            });
         }
 
         /// <summary>

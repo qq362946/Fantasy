@@ -53,9 +53,9 @@ namespace Fantasy
                     return;
                 }
             
-                foreach (var (runtimeId, _) in _entities)
+                foreach (var (_, entity) in _entities)
                 {
-                    RootScene.RemoveEntity(runtimeId);
+                    entity.Dispose();
                 }
             
                 _entities.Clear();

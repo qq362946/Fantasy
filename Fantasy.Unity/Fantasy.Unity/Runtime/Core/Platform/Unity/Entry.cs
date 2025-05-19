@@ -16,9 +16,7 @@ namespace Fantasy.Platform.Unity
     public sealed class FantasyObject : MonoBehaviour
     {
         public static GameObject FantasyObjectGameObject { get; private set; }
-        // 这个方法将在游戏启动时自动调用
-        [Preserve]
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        
         public static void OnRuntimeMethodLoad()
         {
             FantasyObjectGameObject = new GameObject("Fantasy.Net");
@@ -52,6 +50,7 @@ namespace Fantasy.Platform.Unity
                 Log.Error("Fantasy has already been initialized and does not need to be initialized again!");
                 return;
             }
+            FantasyObject.OnRuntimeMethodLoad();
             Log.Register(new UnityLog());
             await AssemblySystem.InnerInitialize(assemblies);
             // 初始化序列化
