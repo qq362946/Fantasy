@@ -1,20 +1,24 @@
-#if UNITY_2021_3_OR_NEWER || GODOT
-using System;
+﻿using System;
+using System.Runtime.InteropServices;
 using System.Threading;
-#endif
-using static KCP.IKCP;
+using kcp;
+using static kcp.KCP;
 
 #pragma warning disable CS8601
 #pragma warning disable CS8602
 #pragma warning disable CS8625
 
-// ReSharper disable IdentifierTypo
-// ReSharper disable GrammarMistakeInComment
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
+// ReSharper disable ALL
 
 namespace KCP
 {
+    /// <summary>
+    ///     Kcp callback
+    /// </summary>
+    /// <param name="buffer">KCP output destination</param>
+    /// <param name="length">KCP output size (excluding reserved)</param>
+    public delegate void KcpCallback(byte[] buffer, int length);
+
     /// <summary>
     ///     Kcp
     /// </summary>
@@ -36,6 +40,11 @@ namespace KCP
         private byte[] _buffer;
 
         /// <summary>
+        ///     Reserved overhead
+        /// </summary>
+        private int _reserved;
+
+        /// <summary>
         ///     Disposed
         /// </summary>
         private int _disposed;
@@ -43,20 +52,14 @@ namespace KCP
         /// <summary>
         ///     Structure
         /// </summary>
-        /// <param name="output">Output</param>
-        public Kcp(KcpCallback output) : this(0, output)
-        {
-        }
-
-        /// <summary>
-        ///     Structure
-        /// </summary>
         /// <param name="conv">ConversationId</param>
         /// <param name="output">Output</param>
-        public Kcp(uint conv, KcpCallback output)
+        /// <param name="reserved">Reserved overhead</param>
+        public Kcp(uint conv, KcpCallback output, int reserved)
         {
-            _kcp = ikcp_create(conv, ref _buffer);
+            _kcp = ikcp_create(conv, reserved, ref _buffer);
             _output = output;
+            _reserved = reserved;
         }
 
         /// <summary>
@@ -82,7 +85,7 @@ namespace KCP
         /// <summary>
         ///     Connection state
         /// </summary>
-        public int State => _kcp->state;
+        public uint State => _kcp->state;
 
         /// <summary>
         ///     The sequence number of the first unacknowledged packet
@@ -270,6 +273,11 @@ namespace KCP
         public KcpCallback Output => _output;
 
         /// <summary>
+        ///     Reserved overhead
+        /// </summary>
+        public int Reserved => _reserved;
+
+        /// <summary>
         ///     Dispose
         /// </summary>
         public void Dispose()
@@ -299,68 +307,12 @@ namespace KCP
         /// </summary>
         /// <param name="buffer">Buffer</param>
         /// <returns>Sent bytes</returns>
-        public int Send(byte[] buffer)
-        {
-            fixed (byte* src = &buffer[0])
-                return ikcp_send(_kcp, src, buffer.Length);
-        }
-
-        /// <summary>
-        ///     Send
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <param name="length">Length</param>
-        /// <returns>Sent bytes</returns>
-        public int Send(byte[] buffer, int length)
-        {
-            fixed (byte* src = &buffer[0])
-                return ikcp_send(_kcp, src, length);
-        }
-
-        /// <summary>
-        ///     Send
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <param name="offset">Offset</param>
-        /// <param name="length">Length</param>
-        /// <returns>Sent bytes</returns>
-        public int Send(byte[] buffer, int offset, int length)
-        {
-            fixed (byte* src = &buffer[offset])
-                return ikcp_send(_kcp, src, length);
-        }
-
-        /// <summary>
-        ///     Send
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <returns>Sent bytes</returns>
         public int Send(ReadOnlySpan<byte> buffer)
         {
-            fixed (byte* src = &buffer[0])
-                return ikcp_send(_kcp, src, buffer.Length);
-        }
-
-        /// <summary>
-        ///     Send
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <returns>Sent bytes</returns>
-        public int Send(ReadOnlyMemory<byte> buffer)
-        {
-            fixed (byte* src = &buffer.Span[0])
-                return ikcp_send(_kcp, src, buffer.Length);
-        }
-
-        /// <summary>
-        ///     Send
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <returns>Sent bytes</returns>
-        public int Send(ArraySegment<byte> buffer)
-        {
-            fixed (byte* src = &buffer.Array[buffer.Offset])
-                return ikcp_send(_kcp, src, buffer.Count);
+            fixed (byte* pinnedBuffer = &MemoryMarshal.GetReference(buffer))
+            {
+                return ikcp_send(_kcp, pinnedBuffer, buffer.Length);
+            }
         }
 
         /// <summary>
@@ -372,81 +324,16 @@ namespace KCP
         public int Send(byte* buffer, int length) => ikcp_send(_kcp, buffer, length);
 
         /// <summary>
-        ///     Send
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <param name="offset">Offset</param>
-        /// <param name="length">Length</param>
-        /// <returns>Sent bytes</returns>
-        public int Send(byte* buffer, int offset, int length) => ikcp_send(_kcp, buffer + offset, length);
-
-        /// <summary>
-        ///     Input
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <returns>Input bytes</returns>
-        public int Input(byte[] buffer)
-        {
-            fixed (byte* src = &buffer[0])
-                return ikcp_input(_kcp, src, buffer.Length);
-        }
-
-        /// <summary>
-        ///     Input
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <param name="length">Length</param>
-        /// <returns>Input bytes</returns>
-        public int Input(byte[] buffer, int length)
-        {
-            fixed (byte* src = &buffer[0])
-                return ikcp_input(_kcp, src, length);
-        }
-
-        /// <summary>
-        ///     Input
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <param name="offset">Offset</param>
-        /// <param name="length">Length</param>
-        /// <returns>Input bytes</returns>
-        public int Input(byte[] buffer, int offset, int length)
-        {
-            fixed (byte* src = &buffer[offset])
-                return ikcp_input(_kcp, src, length);
-        }
-
-        /// <summary>
         ///     Input
         /// </summary>
         /// <param name="buffer">Buffer</param>
         /// <returns>Input bytes</returns>
         public int Input(ReadOnlySpan<byte> buffer)
         {
-            fixed (byte* src = &buffer[0])
-                return ikcp_input(_kcp, src, buffer.Length);
-        }
-
-        /// <summary>
-        ///     Input
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <returns>Input bytes</returns>
-        public int Input(ReadOnlyMemory<byte> buffer)
-        {
-            fixed (byte* src = &buffer.Span[0])
-                return ikcp_input(_kcp, src, buffer.Length);
-        }
-
-        /// <summary>
-        ///     Input
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <returns>Input bytes</returns>
-        public int Input(ArraySegment<byte> buffer)
-        {
-            fixed (byte* src = &buffer.Array[buffer.Offset])
-                return ikcp_input(_kcp, src, buffer.Count);
+            fixed (byte* pinnedBuffer = &MemoryMarshal.GetReference(buffer))
+            {
+                return ikcp_input(_kcp, pinnedBuffer, buffer.Length);
+            }
         }
 
         /// <summary>
@@ -456,15 +343,6 @@ namespace KCP
         /// <param name="length">Length</param>
         /// <returns>Input bytes</returns>
         public int Input(byte* buffer, int length) => ikcp_input(_kcp, buffer, length);
-
-        /// <summary>
-        ///     Input
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <param name="offset">Offset</param>
-        /// <param name="length">Length</param>
-        /// <returns>Input bytes</returns>
-        public int Input(byte* buffer, int offset, int length) => ikcp_input(_kcp, buffer + offset, length);
 
         /// <summary>
         ///     Peek size
@@ -477,68 +355,12 @@ namespace KCP
         /// </summary>
         /// <param name="buffer">Buffer</param>
         /// <returns>Received bytes</returns>
-        public int Receive(byte[] buffer)
-        {
-            fixed (byte* dest = &buffer[0])
-                return ikcp_recv(_kcp, dest, buffer.Length);
-        }
-
-        /// <summary>
-        ///     Receive
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <param name="length">Length</param>
-        /// <returns>Received bytes</returns>
-        public int Receive(byte[] buffer, int length)
-        {
-            fixed (byte* dest = &buffer[0])
-                return ikcp_recv(_kcp, dest, length);
-        }
-
-        /// <summary>
-        ///     Receive
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <param name="offset">Offset</param>
-        /// <param name="length">Length</param>
-        /// <returns>Received bytes</returns>
-        public int Receive(byte[] buffer, int offset, int length)
-        {
-            fixed (byte* dest = &buffer[offset])
-                return ikcp_recv(_kcp, dest, length);
-        }
-
-        /// <summary>
-        ///     Receive
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <returns>Received bytes</returns>
         public int Receive(Span<byte> buffer)
         {
-            fixed (byte* dest = &buffer[0])
-                return ikcp_recv(_kcp, dest, buffer.Length);
-        }
-
-        /// <summary>
-        ///     Receive
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <returns>Received bytes</returns>
-        public int Receive(Memory<byte> buffer)
-        {
-            fixed (byte* dest = &buffer.Span[0])
-                return ikcp_recv(_kcp, dest, buffer.Length);
-        }
-
-        /// <summary>
-        ///     Receive
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <returns>Received bytes</returns>
-        public int Receive(ArraySegment<byte> buffer)
-        {
-            fixed (byte* dest = &buffer.Array[buffer.Offset])
-                return ikcp_recv(_kcp, dest, buffer.Count);
+            fixed (byte* pinnedBuffer = &MemoryMarshal.GetReference(buffer))
+            {
+                return ikcp_recv(_kcp, pinnedBuffer, buffer.Length);
+            }
         }
 
         /// <summary>
@@ -550,19 +372,16 @@ namespace KCP
         public int Receive(byte* buffer, int length) => ikcp_recv(_kcp, buffer, length);
 
         /// <summary>
-        ///     Receive
-        /// </summary>
-        /// <param name="buffer">Buffer</param>
-        /// <param name="offset">Offset</param>
-        /// <param name="length">Length</param>
-        /// <returns>Received bytes</returns>
-        public int Receive(byte* buffer, int offset, int length) => ikcp_recv(_kcp, buffer + offset, length);
-
-        /// <summary>
         ///     Update
         /// </summary>
         /// <param name="current">Timestamp</param>
-        public void Update(uint current) => ikcp_update(_kcp, current, _output, _buffer);
+        public void Update(uint current)
+        {
+            fixed (byte* ptr = &_buffer[_reserved])
+            {
+                ikcp_update(_kcp, current, ptr, _buffer, _output);
+            }
+        }
 
         /// <summary>
         ///     Check
@@ -574,14 +393,20 @@ namespace KCP
         /// <summary>
         ///     Flush
         /// </summary>
-        public void Flush() => ikcp_flush(_kcp, _output, _buffer);
+        public void Flush()
+        {
+            fixed (byte* ptr = &_buffer[_reserved])
+            {
+                ikcp_flush(_kcp, ptr, _buffer, _output);
+            }
+        }
 
         /// <summary>
         ///     Set maximum transmission unit
         /// </summary>
         /// <param name="mtu">Maximum transmission unit</param>
         /// <returns>Set</returns>
-        public int SetMtu(int mtu) => ikcp_setmtu(_kcp, mtu, ref _buffer);
+        public int SetMtu(int mtu) => ikcp_setmtu(_kcp, mtu, _reserved, ref _buffer);
 
         /// <summary>
         ///     Set flush interval
@@ -609,18 +434,18 @@ namespace KCP
         ///     Set fast resend limit
         /// </summary>
         /// <param name="fastlimit">Fast resend limit</param>
-        public void SetFastResendLimit(int fastlimit) => ikcp_fastresendlimit(_kcp, fastlimit);
+        public void SetFastResendLimit(int fastlimit) => _kcp->fastlimit = Math.Clamp(fastlimit, 0, 5);
 
         /// <summary>
         ///     Set whether stream mode is enabled
         /// </summary>
         /// <param name="stream">Whether stream mode is enabled</param>
-        public void SetStreamMode(int stream) => ikcp_streammode(_kcp, stream);
+        public void SetStreamMode(int stream) => _kcp->stream = stream == 1 ? 1 : 0;
 
         /// <summary>
         ///     Set minimum retransmission timeout
         /// </summary>
         /// <param name="minrto">Minimum retransmission timeout</param>
-        public void SetMinrto(int minrto) => ikcp_minrto(_kcp, minrto);
+        public void SetMinrto(int minrto) => _kcp->rx_minrto = (int)Math.Clamp(minrto, 1, IKCP_RTO_MAX);
     }
 }

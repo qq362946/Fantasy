@@ -530,4 +530,22 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
+	/// <summary>
+	///  客户端向SubScene发送一个销毁测试消息
+	/// </summary>
+	[ProtoContract]
+	public partial class C2SubScene_TestDisposeMessage : AMessage, IAddressableRouteMessage, IProto
+	{
+		public static C2SubScene_TestDisposeMessage Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2SubScene_TestDisposeMessage>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2SubScene_TestDisposeMessage>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2SubScene_TestDisposeMessage; }
+	}
 }

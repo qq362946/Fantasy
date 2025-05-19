@@ -5,6 +5,15 @@ using Fantasy.Helper;
 
 namespace Fantasy;
 
+public sealed class SubSceneTestComponent : Entity
+{
+    public override void Dispose()
+    {
+        Log.Debug("销毁SubScene下的SubSceneTestComponent");
+        base.Dispose();
+    }
+}
+
 public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 {
     private static long _addressableSceneRunTimeId;
@@ -37,6 +46,12 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         
         switch (scene.SceneType)
         {
+            case 6666:
+            {
+                scene.AddComponent<SubSceneTestComponent>();
+                Log.Debug("增加了SubSceneTestComponent");
+                break;
+            }
             case SceneType.Addressable:
             {
                 // scene.AddComponent<AddressableManageComponent>(); 

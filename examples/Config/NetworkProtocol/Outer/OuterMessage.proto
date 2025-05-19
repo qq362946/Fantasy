@@ -123,3 +123,8 @@ message C2SubScene_TestMessage // IAddressableRouteMessage
 {
 	string Tag = 1;
 }
+/// 客户端向SubScene发送一个销毁测试消息
+message C2SubScene_TestDisposeMessage // IAddressableRouteMessage
+{
+	
+}

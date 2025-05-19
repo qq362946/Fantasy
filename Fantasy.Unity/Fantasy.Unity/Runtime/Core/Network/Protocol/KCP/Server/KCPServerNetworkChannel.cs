@@ -65,7 +65,7 @@ namespace Fantasy.Network.KCP
 
         public void Input(ReadOnlyMemory<byte> buffer)
         {
-            Kcp.Input(buffer);
+            Kcp.Input(buffer.Span);
             _kcpServerNetwork.AddUpdateChannel(ChannelId, 0);
 
             while (!IsDisposed)
@@ -79,7 +79,7 @@ namespace Fantasy.Network.KCP
                         return;
                     }
 
-                    var receiveCount = Kcp.Receive(_receiveBuffer, peekSize);
+                    var receiveCount = Kcp.Receive(_receiveBuffer.AsSpan(0, peekSize));
 
                     if (receiveCount != peekSize)
                     {
@@ -121,7 +121,7 @@ namespace Fantasy.Network.KCP
             }
 
             var buffer = _packetParser.Pack(ref rpcId, ref routeId, memoryStream, message);
-            Kcp.Send(buffer.GetBuffer(), 0, (int)buffer.Position);
+            Kcp.Send(buffer.GetBuffer().AsSpan(0, (int)buffer.Position));
             
             if (buffer.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
             {
@@ -133,7 +133,7 @@ namespace Fantasy.Network.KCP
 
         private const byte KcpHeaderReceiveData = (byte)KcpHeader.ReceiveData;
 
-        private unsafe void KcpSpanCallback(byte[] buffer, ref int count)
+        private unsafe void KcpSpanCallback(byte[] buffer, int count)
         {
             if (IsDisposed)
             {

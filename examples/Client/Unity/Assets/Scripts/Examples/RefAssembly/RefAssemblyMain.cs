@@ -17,7 +17,7 @@ namespace Fantasy
             var refAssemblyA = LoadAssembly("RefAssemblyA");
             var refAssemblyB = LoadAssembly("RefAssemblyB");
             await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
-            var scene = await Scene.Create(SceneRuntimeType.MainThread);
+            var scene = await Scene.Create(SceneRuntimeMode.MainThread);
             await AssemblySystem.LoadAssembly(refAssemblyA);
             await AssemblySystem.LoadAssembly(refAssemblyB);
             await scene.EventComponent.PublishAsync(new OnCreateScene(scene));

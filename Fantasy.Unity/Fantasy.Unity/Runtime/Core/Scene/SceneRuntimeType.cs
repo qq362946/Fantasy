@@ -1,21 +1,21 @@
 namespace Fantasy
 {
     /// <summary>
-    /// Scene的运行类型
+    /// 代表一个Scene的类型
     /// </summary>
-    public class SceneRuntimeType
+    public enum SceneRuntimeType
     {
         /// <summary>
-        /// Scene在主线程中运行.
+        /// 默认
         /// </summary>
-        public const string MainThread = "MainThread";
+        None = 0,
         /// <summary>
-        /// Scene在一个独立的线程中运行.
+        /// 代表一个普通的Scene，一个普通的Scene肯定是是Root的
         /// </summary>
-        public const string MultiThread = "MultiThread";
+        Root = 1,       
         /// <summary>
-        /// Scene在一个根据当前CPU核心数创建的线程池中运行.
+        /// 代表一个子场景，子场景肯定是有父场景的
         /// </summary>
-        public const string ThreadPool = "ThreadPool";
+        SubScene = 2,
     }
 }

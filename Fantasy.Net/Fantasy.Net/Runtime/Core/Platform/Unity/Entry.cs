@@ -4,6 +4,7 @@ using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Serialize;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8603 // Possible null reference return.
@@ -16,8 +17,9 @@ namespace Fantasy.Platform.Unity
     {
         public static GameObject FantasyObjectGameObject { get; private set; }
         // 这个方法将在游戏启动时自动调用
+        [Preserve]
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        static void OnRuntimeMethodLoad()
+        public static void OnRuntimeMethodLoad()
         {
             FantasyObjectGameObject = new GameObject("Fantasy.Net");
             DontDestroyOnLoad(FantasyObjectGameObject);
@@ -66,12 +68,12 @@ namespace Fantasy.Platform.Unity
         /// 在Entry中创建一个Scene，如果Scene已经被创建过，将先销毁Scene再创建。
         /// </summary>
         /// <param name="arg"></param>
-        /// <param name="sceneRuntimeType"></param>
+        /// <param name="sceneRuntimeMode"></param>
         /// <returns></returns>
-        public static async FTask<Scene> CreateScene(object arg = null, string sceneRuntimeType = SceneRuntimeType.MainThread)
+        public static async FTask<Scene> CreateScene(object arg = null, string sceneRuntimeMode = SceneRuntimeMode.MainThread)
         {
             Scene?.Dispose();
-            Scene = await Scene.Create(sceneRuntimeType);
+            Scene = await Scene.Create(sceneRuntimeMode);
             await Scene.EventComponent.PublishAsync(new OnSceneCreate()
             {
                 Arg = arg,

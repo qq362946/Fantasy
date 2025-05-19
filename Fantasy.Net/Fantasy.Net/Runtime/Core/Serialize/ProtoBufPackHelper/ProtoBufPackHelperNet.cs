@@ -1,8 +1,7 @@
+#if FANTASY_NET || FANTASY_EXPORTER
 using System.Buffers;
 using Fantasy.Assembly;
 using ProtoBuf.Meta;
-
-#if FANTASY_NET || FANTASY_EXPORTER
 namespace Fantasy.Serialize
 {
     /// <summary>

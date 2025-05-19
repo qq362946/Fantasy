@@ -24,7 +24,7 @@ public class ConnectToServer : MonoBehaviour
         // 如果有自己的框架，也可以就单纯拿这个Scene做网络通讯也没问题。
         // Create完成后会返回一个Scene,Fantasy的所有功能都在这个Scene下面。
         // 如果只使用网络部分、只需要找一个地方保存这个Scene供其他地方调用就可以了。
-        _scene = await Scene.Create(SceneRuntimeType.MainThread);
+        _scene = await Scene.Create(SceneRuntimeMode.MainThread);
         // 2:
         // 使用Scene.Connect连接到目标服务器
         // 一个Scene只能创建一个连接不能多个，如果想要创建多个可以重复第一步创建多个Scene。

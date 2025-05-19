@@ -67,12 +67,12 @@ namespace Fantasy.Platform.Console
         /// <summary>
         /// 在Entry中创建一个Scene，如果Scene已经被创建过，将先销毁Scene再创建。
         /// </summary>
-        /// <param name="sceneRuntimeType"></param>
+        /// <param name="sceneRuntimeMode"></param>
         /// <returns></returns>
-        public static async FTask<Scene> CreateScene(string sceneRuntimeType = SceneRuntimeType.MainThread)
+        public static async FTask<Scene> CreateScene(string sceneRuntimeMode = SceneRuntimeMode.MainThread)
         {
             Scene?.Dispose();
-            Scene = await Scene.Create(sceneRuntimeType);
+            Scene = await Scene.Create(sceneRuntimeMode);
             await Scene.EventComponent.PublishAsync(new OnFantasyInit()
             {
                 Scene = Scene

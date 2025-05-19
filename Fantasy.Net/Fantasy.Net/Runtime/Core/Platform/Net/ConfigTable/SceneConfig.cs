@@ -157,7 +157,7 @@ namespace Fantasy.Platform.Net
 	    /// <summary>
 	    /// Scene运行类型
 	    /// </summary>
-	    public string SceneRuntimeType { get; set; }
+	    public string SceneRuntimeMode { get; set; }
 	    /// <summary>
 	    /// Scene类型
 	    /// </summary>

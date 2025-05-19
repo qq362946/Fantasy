@@ -33,27 +33,26 @@ namespace Fantasy
     {
         #region Members
         /// <summary>
-        /// 当前Scene的父Scene,一般是用于实现子Scene的嵌套。
-        /// 这个后期新版本会把Scene和SubScene分开,这里先暂时这样处理。
+        /// Scene的运行类型
         /// </summary>
-        public Scene RootScene { get; internal set; }
+        public SceneRuntimeType SceneRuntimeType { get; protected set; }
 #if FANTASY_NET
         /// <summary>
         /// Scene类型，对应SceneConfig的SceneType
         /// </summary>
-        public int SceneType { get; private set; }
+        public int SceneType { get; protected set; }
         /// <summary>
         /// 所属的世界
         /// </summary>
-        public World World { get; private set; }
+        public World World { get; protected set; }
         /// <summary>
         /// 所在的Process
         /// </summary>
-        public Process Process { get; private set; }
+        public Process Process { get; protected set; }
         /// <summary>
         /// SceneConfig的Id
         /// </summary>
-        public uint SceneConfigId { get; private set; }
+        public uint SceneConfigId { get; protected set; }
         internal ANetwork InnerNetwork { get; private set; }
         internal ANetwork OuterNetwork { get; private set; }
         internal SceneConfig SceneConfig => SceneConfigData.Instance.Get(SceneConfigId);
@@ -75,11 +74,11 @@ namespace Fantasy
         /// <summary>
         /// Entity实体Id的生成器
         /// </summary>
-        public IEntityIdFactory EntityIdFactory { get; private set; }
+        public IEntityIdFactory EntityIdFactory { get; protected set; }
         /// <summary>
         /// Entity实体RuntimeId的生成器
         /// </summary>
-        public IRuntimeIdFactory RuntimeIdFactory { get; private set; }
+        public IRuntimeIdFactory RuntimeIdFactory { get; protected set; }
 
         #endregion
         
@@ -147,56 +146,50 @@ namespace Fantasy
             SingleCollectionComponent = await AddComponent<SingleCollectionComponent>(false).Initialize();
 #endif
         }
+
         /// <summary>
         /// Scene销毁方法，执行了该方法会把当前Scene下的所有实体都销毁掉。
         /// </summary>
         public override void Dispose()
         {
+            Log.Debug("99999");
             if (IsDisposed)
             {
                 return;
             }
-#if FANTASY_NET
-            foreach (var (_, innerSession) in _processSessionInfos)
+
+            if (SceneRuntimeType == SceneRuntimeType.Root)
             {
-                innerSession.Dispose();
-            }
-            _processSessionInfos.Clear();
+#if FANTASY_NET
+                foreach (var (_, innerSession) in _processSessionInfos)
+                {
+                    innerSession.Dispose();
+                }
+
+                _processSessionInfos.Clear();
 #endif
 #if FANTASY_UNITY
-            Session = null;
-            _unityWorldId--;
-            _unitySceneId--;
-            UnityNetwork?.Dispose();
+                Session = null;
+                _unityWorldId--;
+                _unitySceneId--;
+                UnityNetwork?.Dispose();
 #endif
-            TypeInstance.Clear();
-            EventComponent.Dispose();
-            MessagePoolComponent.Dispose();
-            EntityPool.Dispose();
-            EntityListPool.Dispose();
-            EntitySortedDictionaryPool.Dispose();
+                TypeInstance.Clear();
+                EventComponent.Dispose();
+                MessagePoolComponent.Dispose();
+                EntityPool.Dispose();
+                EntityListPool.Dispose();
+                EntitySortedDictionaryPool.Dispose();
 #if FANTASY_NET
-            if (World != null)
-            {
-                if (RootScene == null)
+                if (World != null)
                 {
                     World.Dispose();
+                    World = null;
                 }
-                else
-                {
-                    RootScene.RemoveEntity(RuntimeId);
-                    RootScene = null;
-                }
-                
-                World = null;
-            }
-#else
-            if (RootScene != null)
-            {
-                RootScene.RemoveEntity(RuntimeId);
-                RootScene = null;
-            }
 #endif
+            }
+
+            SceneRuntimeType = SceneRuntimeType.None;
             base.Dispose();
         }
 
@@ -226,10 +219,10 @@ namespace Fantasy
         /// <summary>
         /// 创建一个Unity的Scene，注意:该方法只能在主线程下使用。
         /// </summary>
-        /// <param name="sceneRuntimeType">选择Scene的运行方式</param>
+        /// <param name="sceneRuntimeMode">选择Scene的运行方式</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async FTask<Scene> Create(string sceneRuntimeType = SceneRuntimeType.MainThread)
+        public static async FTask<Scene> Create(string sceneRuntimeMode = SceneRuntimeMode.MainThread)
         {
             var world = ++_unityWorldId;
 
@@ -254,7 +247,7 @@ namespace Fantasy
             scene.Id = IdFactoryHelper.EntityId(0, sceneId, world, 0);
             scene.RuntimeId = IdFactoryHelper.RuntimeId(0, sceneId, world, 0);
             scene.AddEntity(scene);
-            await SetScheduler(scene, sceneRuntimeType);
+            await SetScheduler(scene, sceneRuntimeMode);
             scene.ThreadSynchronizationContext.Post(() =>
             {
                 scene.EventComponent.PublishAsync(new OnCreateScene(scene)).Coroutine();
@@ -278,6 +271,7 @@ namespace Fantasy
             scene.Parent = scene;
             scene.Type = typeof(Scene);
             scene.Process = process;
+            scene.SceneRuntimeType = SceneRuntimeType.Root;
             scene.EntityIdFactory = IdFactoryHelper.EntityIdFactory(sceneConfigId, worldId);
             scene.RuntimeIdFactory = IdFactoryHelper.RuntimeIdFactory(0,sceneConfigId, worldId);
             scene.Id = IdFactoryHelper.EntityId(0, sceneConfigId, worldId, 0);
@@ -316,8 +310,10 @@ namespace Fantasy
                 var networkProtocolType = Enum.Parse<NetworkProtocolType>(sceneConfig.NetworkProtocol);
                 scene.OuterNetwork = NetworkProtocolFactory.CreateServer(scene, networkProtocolType, NetworkTarget.Outer, machineConfig.OuterBindIP, sceneConfig.OuterPort);
             }
+            
             Process.AddScene(scene);
             process.AddSceneToProcess(scene);
+            
             scene.ThreadSynchronizationContext.Post(() =>
             {
                 if (sceneConfig.SceneTypeString == "Addressable")
@@ -328,6 +324,7 @@ namespace Fantasy
                 
                 scene.EventComponent.PublishAsync(new OnCreateScene(scene)).Coroutine();
             });
+            
             return scene;
         }
         /// <summary>
@@ -347,6 +344,7 @@ namespace Fantasy
             scene.SceneType = sceneType;
             scene.World = parentScene.World;
             scene.Process = parentScene.Process;
+            scene.SceneRuntimeType = SceneRuntimeType.SubScene;
             scene.EntityIdFactory = parentScene.EntityIdFactory;
             scene.RuntimeIdFactory = parentScene.RuntimeIdFactory;
             scene.Id = scene.EntityIdFactory.Create;
@@ -362,9 +360,9 @@ namespace Fantasy
             }
         }
 #endif
-        private static async FTask SetScheduler(Scene scene, string sceneRuntimeType)
+        private static async FTask SetScheduler(Scene scene, string sceneRuntimeMode)
         {
-            switch (sceneRuntimeType)
+            switch (sceneRuntimeMode)
             {
                 case "MainThread":
                 {

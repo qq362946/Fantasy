@@ -28,5 +28,6 @@ namespace Fantasy
 		 public const uint C2G_CreateSubSceneAddressableRequest = 268445461;
 		 public const uint G2C_CreateSubSceneAddressableResponse = 402663189;
 		 public const uint C2SubScene_TestMessage = 1342187282;
+		 public const uint C2SubScene_TestDisposeMessage = 1342187283;
 	}
 }

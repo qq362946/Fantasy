@@ -64,9 +64,11 @@ namespace Fantasy.Network.KCP
 
     public static class KCPFactory
     {
+        public const int FANTASY_KCP_RESERVED_HEAD = 5;
+
         public static Kcp Create(NetworkTarget networkTarget, uint conv, KcpCallback output, out KCPSettings kcpSettings)
         {
-            var kcp = new Kcp(conv, output);
+            var kcp = new Kcp(conv, output, FANTASY_KCP_RESERVED_HEAD);
             kcpSettings = KCPSettings.Create(networkTarget);
             kcp.SetNoDelay(1, 5, 2, 1);
             kcp.SetWindowSize(kcpSettings.SendWindowSize, kcpSettings.ReceiveWindowSize);
@@ -74,10 +76,10 @@ namespace Fantasy.Network.KCP
             kcp.SetMinrto(30);
             return kcp;
         }
-        
+
         public static Kcp Create(KCPSettings kcpSettings, uint conv, KcpCallback output)
         {
-            var kcp = new Kcp(conv, output);
+            var kcp = new Kcp(conv, output, FANTASY_KCP_RESERVED_HEAD);
             kcp.SetNoDelay(1, 5, 2, 1);
             kcp.SetWindowSize(kcpSettings.SendWindowSize, kcpSettings.ReceiveWindowSize);
             kcp.SetMtu(kcpSettings.Mtu);
