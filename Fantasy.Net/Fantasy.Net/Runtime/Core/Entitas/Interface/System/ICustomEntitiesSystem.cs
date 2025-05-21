@@ -41,7 +41,7 @@ namespace Fantasy.Entitas.Interface
         /// 事件的抽象方法，需要自己实现这个方法
         /// </summary>
         /// <param name="self">触发事件的实体实例</param>
-        protected abstract void Awake(T self);
+        protected abstract void Custom(T self);
         /// <summary>
         /// 实体的类型
         /// </summary>
@@ -53,7 +53,7 @@ namespace Fantasy.Entitas.Interface
         /// <param name="self">触发事件的实体实例</param>
         public void Invoke(Entity self)
         {
-            Awake((T) self);
+            Custom((T) self);
         }
     }
 }

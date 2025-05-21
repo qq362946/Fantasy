@@ -19,7 +19,7 @@ public abstract class RunSystem<T> : CustomSystem<T> where T : Entity
     /// 不知道为什么这样定义的，就照搬就可以了。
     /// </summary>
     /// <param name="self"></param>
-    protected abstract override void Awake(T self);
+    protected abstract override void Custom(T self);
     /// <summary>
     /// 不知道为什么这样定义的，就照搬就可以了。
     /// </summary>
@@ -36,7 +36,7 @@ public class TestCustomSystemComponent : Entity
 // 现在添加的就是上面定义的RunSystem自定义系统。
 public class TestCustomSystemComponentRunSystem : RunSystem<TestCustomSystemComponent>
 {
-    protected override void Awake(TestCustomSystemComponent self)
+    protected override void Custom(TestCustomSystemComponent self)
     {
         Log.Debug($"执行了TestCustomSystemComponentRunSystem");
     }
