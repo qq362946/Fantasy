@@ -1,6 +1,7 @@
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Fantasy.Assembly;
 using Fantasy.Async;
@@ -8,6 +9,8 @@ using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
 using Fantasy.Helper;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
 
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
@@ -39,6 +42,31 @@ namespace Fantasy.Entitas
             RunTimeId = runTimeId;
         }
     }
+
+    internal struct CustomEntitiesSystemKey : IEquatable<CustomEntitiesSystemKey>
+    {
+        public int CustomEventType { get; }
+        public Type EntitiesType { get; }
+        public CustomEntitiesSystemKey(int customEventType, Type entitiesType)
+        {
+            CustomEventType = customEventType;
+            EntitiesType = entitiesType;
+        }
+        public bool Equals(CustomEntitiesSystemKey other)
+        {
+            return CustomEventType == other.CustomEventType && EntitiesType == other.EntitiesType;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is CustomEntitiesSystemKey other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(CustomEventType, EntitiesType);
+        }
+    }
     
     /// <summary>
     /// Entity管理组件
@@ -53,6 +81,9 @@ namespace Fantasy.Entitas
         private readonly Dictionary<Type, IDestroySystem> _destroySystems = new();
         private readonly Dictionary<Type, IDeserializeSystem> _deserializeSystems = new();
         private readonly Dictionary<Type, IFrameUpdateSystem> _frameUpdateSystem = new();
+        
+        private readonly OneToManyList<long, CustomEntitiesSystemKey> _assemblyCustomSystemList = new();
+        private readonly Dictionary<CustomEntitiesSystemKey, ICustomEntitiesSystem> _customEntitiesSystems = new Dictionary<CustomEntitiesSystemKey, ICustomEntitiesSystem>();
         
         private readonly Dictionary<Type, long> _hashCodes = new Dictionary<Type, long>();
         private readonly Queue<UpdateQueueInfo> _updateQueue = new Queue<UpdateQueueInfo>();
@@ -156,6 +187,14 @@ namespace Fantasy.Entitas
 
                 _assemblyList.Add(assemblyIdentity, entitiesType);
             }
+            
+            foreach (var customEntitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(ICustomEntitiesSystem)))
+            {
+                var entity = (ICustomEntitiesSystem)Activator.CreateInstance(customEntitiesSystemType);
+                var customEntitiesSystemKey = new CustomEntitiesSystemKey(entity.CustomEventType, entity.EntitiesType());
+                _customEntitiesSystems.Add(customEntitiesSystemKey, entity);
+                _assemblyCustomSystemList.Add(assemblyIdentity, customEntitiesSystemKey);
+            }
         }
 
         private void OnUnLoadInner(long assemblyIdentity)
@@ -182,6 +221,16 @@ namespace Fantasy.Entitas
                 }
                 
                 _assemblyList.RemoveByKey(assemblyIdentity);
+            }
+
+            if (_assemblyCustomSystemList.TryGetValue(assemblyIdentity, out var customSystemAssembly))
+            {
+                foreach (var customEntitiesSystemKey in customSystemAssembly)
+                {
+                    _customEntitiesSystems.Remove(customEntitiesSystemKey);
+                }
+
+                _assemblyCustomSystemList.RemoveByKey(assemblyIdentity);
             }
         }
 
@@ -249,6 +298,29 @@ namespace Fantasy.Entitas
             catch (Exception e)
             {
                 Log.Error($"{entity.Type.FullName} Deserialize Error {e}");
+            }
+        }
+
+        #endregion
+
+        #region CustomEvent
+
+        public void CustomSystem(Entity entity, int customEventType)
+        {
+            var customEntitiesSystemKey = new CustomEntitiesSystemKey(customEventType, entity.Type);
+            
+            if (!_customEntitiesSystems.TryGetValue(customEntitiesSystemKey, out var system))
+            {
+                return;
+            }
+
+            try
+            {
+                system.Invoke(entity);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"{entity.Type.FullName} CustomSystem Error {e}");
             }
         }
 

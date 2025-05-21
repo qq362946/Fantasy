@@ -15,12 +15,6 @@ public sealed class SubSceneTestComponent : Entity
         base.Dispose();
     }
 }
-[ProtoContract]
-public class MyPdTest
-{
-    [ProtoMember(1)]
-    public string Tag { get; set; }
-}
 
 public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 {
@@ -56,8 +50,9 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         {
             case 6666:
             {
-                scene.AddComponent<SubSceneTestComponent>();
+                var subSceneTestComponent = scene.AddComponent<SubSceneTestComponent>();
                 Log.Debug("增加了SubSceneTestComponent");
+                scene.EntityComponent.CustomSystem(subSceneTestComponent,CustomSystemType.RunSystem);
                 break;
             }
             case SceneType.Addressable:
@@ -76,6 +71,10 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
+                // 执行自定义系统
+                var testCustomSystemComponent = scene.AddComponent<TestCustomSystemComponent>();
+                scene.EntityComponent.CustomSystem(testCustomSystemComponent, CustomSystemType.RunSystem);
+                // 测试配置表
                 var instanceList = UnitConfigData.Instance.List;
                 var unitConfig = instanceList[0];
                 Log.Debug(instanceList[0].Dic[1]);
