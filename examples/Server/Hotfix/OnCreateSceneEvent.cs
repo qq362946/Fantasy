@@ -2,6 +2,8 @@ using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Event;
 using Fantasy.Helper;
+using Fantasy.Serialize;
+using ProtoBuf;
 
 namespace Fantasy;
 
@@ -12,6 +14,12 @@ public sealed class SubSceneTestComponent : Entity
         Log.Debug("销毁SubScene下的SubSceneTestComponent");
         base.Dispose();
     }
+}
+[ProtoContract]
+public class MyPdTest
+{
+    [ProtoMember(1)]
+    public string Tag { get; set; }
 }
 
 public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
@@ -68,7 +76,6 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
-                
                 var instanceList = UnitConfigData.Instance.List;
                 var unitConfig = instanceList[0];
                 Log.Debug(instanceList[0].Dic[1]);

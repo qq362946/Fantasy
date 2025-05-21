@@ -31,10 +31,12 @@ namespace Fantasy.Serialize
             }
             
             var newLength = Position + count;
-            if (newLength > Length)
+
+            if (newLength != Length)
             {
                 SetLength(newLength);
             }
+            
             Position = newLength;
         }
 

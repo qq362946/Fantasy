@@ -10,6 +10,7 @@ using Fantasy.Network.Interface;
 using Fantasy.Pool;
 using Fantasy.Scheduler;
 using Fantasy.Timer;
+using Entity = Fantasy.Entitas.Entity;
 #if FANTASY_NET
 using Fantasy.DataBase;
 using Fantasy.Platform.Net;
