@@ -9,7 +9,7 @@ public static class Entry
     private static Session _session;
     public static async FTask Show()
     {
-        _scene = await Fantasy.Scene.Create(SceneRuntimeType.MainThread);
+        _scene = await Fantasy.Scene.Create(SceneRuntimeMode.MainThread);
         _session = _scene.Connect(
             "127.0.0.1:20000",
             NetworkProtocolType.KCP,

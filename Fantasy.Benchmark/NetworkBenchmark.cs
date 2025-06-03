@@ -21,7 +21,7 @@ public class NetworkBenchmark
         // 注册日志实例到框架中
         Log.Register(new ConsoleLog());
         // 初始化框架
-        Entry.Initialize();
+        await Entry.Initialize();
         // 执行StartUpdate方法
         Entry.StartUpdate();
         _scene = await Entry.CreateScene();
