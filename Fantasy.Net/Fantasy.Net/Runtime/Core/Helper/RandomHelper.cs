@@ -1,8 +1,10 @@
+#if FANTASY_NET || !FANTASY_WEBGL
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Fantasy.LowLevel;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 namespace Fantasy.Helper
 {
@@ -12,7 +14,7 @@ namespace Fantasy.Helper
     public static partial class RandomHelper
     {
         [ThreadStatic]
-        private static Random? _random;
+        private static Random _random;
 
         /// <summary>
         /// 生成一个随机的无符号 64 位整数。
@@ -20,10 +22,10 @@ namespace Fantasy.Helper
         /// <returns>无符号 64 位整数。</returns>
         public static ulong RandUInt64()
         {
-            var Byte8 = new FixedBytes8().AsSpan();
+            var byte8 = new FixedBytes8().AsSpan();
             var random = _random ??= new Random();
-            random.NextBytes(Byte8);
-            return BitConverter.ToUInt64(Byte8);
+            random.NextBytes(byte8);
+            return BitConverter.ToUInt64(byte8);
         }
 
         /// <summary>
@@ -32,10 +34,10 @@ namespace Fantasy.Helper
         /// <returns>64 位整数。</returns>
         public static long RandInt64()
         {
-            var Byte8 = new FixedBytes8().AsSpan();
+            var byte8 = new FixedBytes8().AsSpan();
             var random = _random ??= new Random();
-            random.NextBytes(Byte8);
-            return BitConverter.ToInt64(Byte8);
+            random.NextBytes(byte8);
+            return BitConverter.ToInt64(byte8);
         }
 
         /// <summary>
@@ -54,10 +56,10 @@ namespace Fantasy.Helper
         /// <returns>无符号 16 位整数。</returns>
         public static ushort RandUInt16()
         {
-            var Byte2 = new FixedBytes2().AsSpan();
+            var byte2 = new FixedBytes2().AsSpan();
             var random = _random ??= new Random();
-            random.NextBytes(Byte2);
-            return BitConverter.ToUInt16(Byte2);
+            random.NextBytes(byte2);
+            return BitConverter.ToUInt16(byte2);
         }
 
         /// <summary>
@@ -306,3 +308,4 @@ namespace Fantasy.Helper
         }
     }
 }
+#endif

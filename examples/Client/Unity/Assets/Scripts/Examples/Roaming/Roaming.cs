@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Fantasy;
 using Fantasy.Async;
+using Fantasy.Helper;
 using Fantasy.Network;
 using UnityEngine;
 using UnityEngine.UI;
@@ -81,6 +82,7 @@ public class Roaming : MonoBehaviour
         {
             Tag = "Hi Roaming!"
         });
+        // RandomHelper.BreakRank();
     }
 
     private async FTask OnCallRoamingMessageClick()

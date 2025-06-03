@@ -1,10 +1,8 @@
-#if FANTASY_NET || !FANTASY_WEBGL
+#if FANTASY_WEBGL
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Fantasy.LowLevel;
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 namespace Fantasy.Helper
 {
@@ -13,8 +11,9 @@ namespace Fantasy.Helper
     /// </summary>
     public static partial class RandomHelper
     {
-        [ThreadStatic]
-        private static Random _random;
+        private static readonly Random Random = new Random();
+        private static readonly byte[] Byte8 = new byte[8];
+        private static readonly byte[] Byte2 = new byte[2];
 
         /// <summary>
         /// 生成一个随机的无符号 64 位整数。
@@ -22,10 +21,8 @@ namespace Fantasy.Helper
         /// <returns>无符号 64 位整数。</returns>
         public static ulong RandUInt64()
         {
-            var byte8 = new FixedBytes8().AsSpan();
-            var random = _random ??= new Random();
-            random.NextBytes(byte8);
-            return BitConverter.ToUInt64(byte8);
+            Random.NextBytes(Byte8);
+            return BitConverter.ToUInt64(Byte8, 0);
         }
 
         /// <summary>
@@ -34,10 +31,8 @@ namespace Fantasy.Helper
         /// <returns>64 位整数。</returns>
         public static long RandInt64()
         {
-            var byte8 = new FixedBytes8().AsSpan();
-            var random = _random ??= new Random();
-            random.NextBytes(byte8);
-            return BitConverter.ToInt64(byte8);
+            Random.NextBytes(Byte8);
+            return BitConverter.ToInt64(Byte8, 0);
         }
 
         /// <summary>
@@ -45,9 +40,8 @@ namespace Fantasy.Helper
         /// </summary>
         /// <returns>无符号 32 位整数。</returns>
         public static uint RandUInt32()
-        { 
-            var random = _random ??= new Random();
-            return (uint) random.Next();
+        {
+            return (uint) Random.Next();
         }
 
         /// <summary>
@@ -56,10 +50,8 @@ namespace Fantasy.Helper
         /// <returns>无符号 16 位整数。</returns>
         public static ushort RandUInt16()
         {
-            var byte2 = new FixedBytes2().AsSpan();
-            var random = _random ??= new Random();
-            random.NextBytes(byte2);
-            return BitConverter.ToUInt16(byte2);
+            Random.NextBytes(Byte2);
+            return BitConverter.ToUInt16(Byte2, 0);
         }
 
         /// <summary>
@@ -70,8 +62,7 @@ namespace Fantasy.Helper
         /// <returns>生成的随机整数。</returns>
         public static int RandomNumber(int lower, int upper)
         {
-            var random = _random ??= new Random();
-            return random.Next(lower, upper);
+            return Random.Next(lower, upper);
         }
 
         /// <summary>
@@ -80,8 +71,7 @@ namespace Fantasy.Helper
         /// <returns>随机的布尔值。</returns>
         public static bool RandomBool()
         {
-            var random = _random ??= new Random();
-            return (random.Next() & 1) == 0;
+            return Random.Next(2) == 0;
         }
 
         /// <summary>
@@ -118,10 +108,9 @@ namespace Fantasy.Helper
                 return;
             }
 
-            var random = _random ??= new Random();
             for (var i = 0; i < arr.Count / 2; i++)
             {
-                var index = random.Next(0, arr.Count);
+                var index = Random.Next(0, arr.Count);
                 (arr[index], arr[arr.Count - index - 1]) = (arr[arr.Count - index - 1], arr[index]);
             }
         }
@@ -132,8 +121,7 @@ namespace Fantasy.Helper
         /// <returns>随机单精度浮点数。</returns>
         public static float RandFloat01()
         {
-            var random = _random ??= new Random();
-            var value = random.NextDouble();
+            var value = Random.NextDouble();
             return (float) value;
         }
 
@@ -173,11 +161,10 @@ namespace Fantasy.Helper
         /// <returns>随机选择的索引值。</returns>
         public static int RandomByFixedProbability(int[] args)
         {
-            var random = _random ??= new Random();
             var argCount = args.Length;
             var sum = args.Sum();
-            var value = random.NextDouble() * sum;
-            while (sum > value)
+            var random = Random.NextDouble() * sum;
+            while (sum > random)
             {
                 sum -= args[argCount - 1];
                 argCount--;
@@ -193,15 +180,14 @@ namespace Fantasy.Helper
         /// <returns>返回一个随机的单精度浮点数。</returns>
         public static float NextFloat(bool containNegative = false)
         {
-            var random = _random ??= new Random();
             float f;
-            var buffer = new FixedBytes4().AsSpan();
+            var buffer = new byte[4];
             if (containNegative)
             {
                 do
                 {
-                    random.NextBytes(buffer);
-                    f = BitConverter.ToSingle(buffer);
+                    Random.NextBytes(buffer);
+                    f = BitConverter.ToSingle(buffer, 0);
                 } while ((f >= float.MinValue && f < float.MaxValue) == false);
 
                 return f;
@@ -209,8 +195,8 @@ namespace Fantasy.Helper
 
             do
             {
-                random.NextBytes(buffer);
-                f = BitConverter.ToSingle(buffer);
+                Random.NextBytes(buffer);
+                f = BitConverter.ToSingle(buffer, 0);
             } while ((f >= 0 && f < float.MaxValue) == false);
 
             return f;
@@ -233,14 +219,13 @@ namespace Fantasy.Helper
                 throw new ArgumentOutOfRangeException("“maxValue”必须大于 0。", "maxValue");
             }
 
-            var random = _random ??= new Random();
             float f;
-            var buffer = new FixedBytes4().AsSpan();
+            var buffer = new byte[4];
 
             do
             {
-                random.NextBytes(buffer);
-                f = BitConverter.ToSingle(buffer);
+                Random.NextBytes(buffer);
+                f = BitConverter.ToSingle(buffer, 0);
             } while ((f >= 0 && f < maxValue) == false);
 
             return f;
@@ -264,14 +249,13 @@ namespace Fantasy.Helper
                 throw new ArgumentOutOfRangeException("“minValue”不能大于 maxValue。", "minValue");
             }
 
-            var random = _random ??= new Random();
-            var buffer = new FixedBytes4().AsSpan();
             float f;
+            var buffer = new byte[4];
 
             do
             {
-                random.NextBytes(buffer);
-                f = BitConverter.ToSingle(buffer);
+                Random.NextBytes(buffer);
+                f = BitConverter.ToSingle(buffer, 0);
             } while ((f >= minValue && f < maxValue) == false);
 
             return f;
