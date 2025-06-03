@@ -25,7 +25,7 @@ public sealed class C2G_CreateChatRouteRequestHandler : MessageRPC<C2G_CreateCha
         var routeResponse = (Chat2G_CreateRouteResponse)await networkMessagingComponent.CallInnerRoute(chatRouteId,
             new G2Chat_CreateRouteRequest()
             {
-                GateRouteId = session.RuntimeId
+                GateRouteId = session.RouteId
             });
         if (routeResponse.ErrorCode != 0)
         {

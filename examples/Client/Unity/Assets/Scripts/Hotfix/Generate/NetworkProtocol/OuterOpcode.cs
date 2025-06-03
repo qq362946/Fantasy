@@ -29,5 +29,14 @@ namespace Fantasy
 		 public const uint G2C_CreateSubSceneAddressableResponse = 402663189;
 		 public const uint C2SubScene_TestMessage = 1342187282;
 		 public const uint C2SubScene_TestDisposeMessage = 1342187283;
+		 public const uint C2G_ConnectRoamingRequest = 268445462;
+		 public const uint G2C_ConnectRoamingResponse = 402663190;
+		 public const uint C2Chat_TestRoamingMessage = 2550146833;
+		 public const uint C2Map_TestRoamingMessage = 2550146834;
+		 public const uint C2Chat_TestRPCRoamingRequest = 2684364561;
+		 public const uint Chat2C_TestRPCRoamingResponse = 2818582289;
+		 public const uint C2Map_TestTransferRequest = 2684364562;
+		 public const uint Map2C_TestTransferResponse = 2818582290;
+		 public const uint C2Chat_TestSendMapMessage = 2550146835;
 	}
 }

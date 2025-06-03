@@ -27,6 +27,8 @@ namespace Fantasy.Scheduler
                 case OpCodeType.OuterAddressableRequest:
                 case OpCodeType.OuterCustomRouteMessage:
                 case OpCodeType.OuterCustomRouteRequest:
+                case OpCodeType.OuterRoamingMessage:
+                case OpCodeType.OuterRoamingRequest:
                 {
                     using (packInfo)
                     {
@@ -47,6 +49,7 @@ namespace Fantasy.Scheduler
                 case OpCodeType.OuterPingResponse:
                 case OpCodeType.OuterAddressableResponse:
                 case OpCodeType.OuterCustomRouteResponse:
+                case OpCodeType.OuterRoamingResponse:
                 {
                     using (packInfo)
                     {

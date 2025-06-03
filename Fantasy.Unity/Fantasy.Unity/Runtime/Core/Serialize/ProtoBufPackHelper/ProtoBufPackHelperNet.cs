@@ -82,8 +82,6 @@ namespace Fantasy.Serialize
             {
                 aSerialize.AfterDeserialization();
             }
-
-            new ArrayBufferWriter<byte>();
             return @object;
         }
         /// <summary>

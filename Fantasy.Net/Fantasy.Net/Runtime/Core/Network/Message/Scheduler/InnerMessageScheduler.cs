@@ -51,8 +51,10 @@ namespace Fantasy.Scheduler
                 case OpCodeType.InnerResponse:
                 case OpCodeType.InnerRouteResponse:
                 case OpCodeType.InnerAddressableResponse:
+                case OpCodeType.InnerRoamingResponse:
                 case OpCodeType.OuterAddressableResponse:
                 case OpCodeType.OuterCustomRouteResponse:
+                case OpCodeType.OuterRoamingResponse:
                 {
                     using (packInfo)
                     {
@@ -70,6 +72,7 @@ namespace Fantasy.Scheduler
                 }
                 case OpCodeType.InnerRouteMessage:
                 case OpCodeType.InnerAddressableMessage:
+                case OpCodeType.InnerRoamingMessage:
                 {
                     using (packInfo)
                     {
@@ -82,7 +85,8 @@ namespace Fantasy.Scheduler
 
                         if (!Scene.TryGetEntity(packInfo.RouteId, out var entity))
                         {
-                            throw new Exception($"The Entity associated with RouteId = {packInfo.RouteId} was not found! messageType = {messageType.FullName}");
+                            Scene.MessageDispatcherComponent.FailRouteResponse(session, messageType, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
+                            return;
                         }
 
                         var obj = packInfo.Deserialize(messageType);
@@ -93,6 +97,7 @@ namespace Fantasy.Scheduler
                 }
                 case OpCodeType.InnerRouteRequest:
                 case OpCodeType.InnerAddressableRequest:
+                case OpCodeType.InnerRoamingRequest:
                 {
                     using (packInfo)
                     {
@@ -119,6 +124,8 @@ namespace Fantasy.Scheduler
                 case OpCodeType.OuterAddressableRequest:
                 case OpCodeType.OuterAddressableMessage:
                 case OpCodeType.OuterCustomRouteMessage:
+                case OpCodeType.OuterRoamingMessage:
+                case OpCodeType.OuterRoamingRequest:
                 {
                     var entity = Scene.GetEntity(packInfo.RouteId);
 

@@ -28,21 +28,21 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
     protected override async FTask Handler(OnCreateScene self)
     {
         
-        var epoch1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000;
-        
-        {
-            var now = TimeHelper.Transition(new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc));
-            var epochThisYear = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - epoch1970;
-            var time = (uint)((now - epochThisYear) / 1000);
-            Log.Debug($"time = {time} now = {now} epochThisYear = {epochThisYear}");
-        }
-        
-        {
-            var now = TimeHelper.Transition(new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc));
-            var epochThisYear = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - epoch1970;
-            var time = (uint)((now - epochThisYear) / 1000);
-            Log.Debug($"time = {time} now = {now} epochThisYear = {epochThisYear}");
-        }
+        // var epoch1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000;
+        //
+        // {
+        //     var now = TimeHelper.Transition(new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc));
+        //     var epochThisYear = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - epoch1970;
+        //     var time = (uint)((now - epochThisYear) / 1000);
+        //     Log.Debug($"time = {time} now = {now} epochThisYear = {epochThisYear}");
+        // }
+        //
+        // {
+        //     var now = TimeHelper.Transition(new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc));
+        //     var epochThisYear = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - epoch1970;
+        //     var time = (uint)((now - epochThisYear) / 1000);
+        //     Log.Debug($"time = {time} now = {now} epochThisYear = {epochThisYear}");
+        // }
         
         var scene = self.Scene;
         
@@ -63,6 +63,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Map:
             {
+                Log.Debug($"Map Scene  SceneRuntimeId:{scene.RuntimeId}");
                 break;
             }
             case SceneType.Chat:
@@ -74,10 +75,10 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
                 // 执行自定义系统
                 var testCustomSystemComponent = scene.AddComponent<TestCustomSystemComponent>();
                 scene.EntityComponent.CustomSystem(testCustomSystemComponent, CustomSystemType.RunSystem);
-                // 测试配置表
-                var instanceList = UnitConfigData.Instance.List;
-                var unitConfig = instanceList[0];
-                Log.Debug(instanceList[0].Dic[1]);
+                // // 测试配置表
+                // var instanceList = UnitConfigData.Instance.List;
+                // var unitConfig = instanceList[0];
+                // Log.Debug(instanceList[0].Dic[1]);
                 break;
             }
         }

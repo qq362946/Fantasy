@@ -68,3 +68,8 @@ message SubScene2G_AddressableIdResponse // IRouteResponse
 {
 	int64 AddressableId = 1;	// SubScene服务器返回的AddressableId
 }
+/// Chat发送一个漫游消息给Map
+message Chat2M_TestMessage // IRoamingMessage,MapRoamingType
+{
+	string Tag = 1;
+}

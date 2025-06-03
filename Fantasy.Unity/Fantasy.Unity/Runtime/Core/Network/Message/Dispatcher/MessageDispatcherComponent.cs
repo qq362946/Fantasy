@@ -8,6 +8,7 @@ using Fantasy.DataStructure.Dictionary;
 using Fantasy.Entitas;
 using Fantasy.InnerMessage;
 using Fantasy.Network;
+#pragma warning disable CS8604 // Possible null reference argument.
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
@@ -84,16 +85,16 @@ namespace Fantasy.Network.Interface
                 var opCode = obj.OpCode();
                 
                 _networkProtocols.Add(opCode, type);
-
+                
                 var responseType = type.GetProperty("ResponseType");
-
+                
                 // 如果类型具有ResponseType属性，将其添加到_responseTypes字典中
                 if (responseType != null)
                 {
                     _responseTypes.Add(type, responseType.PropertyType);
                     _assemblyResponseTypes.Add(assemblyIdentity, type);
                 }
-
+                
                 _assemblyNetworkProtocols.Add(assemblyIdentity, opCode);
             }
             
@@ -357,7 +358,7 @@ namespace Fantasy.Network.Interface
             }
         }
 
-        internal bool GetCustomRouteType(long protocolCode,out int routeType)
+        internal bool GetCustomRouteType(long protocolCode, out int routeType)
         {
             return _customRouteMap.TryGetValue(protocolCode, out routeType);
         }

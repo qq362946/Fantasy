@@ -19,6 +19,8 @@ namespace Fantasy.Network.Route
     {
         protected override void Awake(AddressableRouteComponent self)
         {
+            ((Session)self.Parent).AddressableRouteComponent = self;
+            
             var selfScene = self.Scene;
             self.TimerComponent = selfScene.TimerComponent;
             self.NetworkMessagingComponent = selfScene.NetworkMessagingComponent;
@@ -34,7 +36,7 @@ namespace Fantasy.Network.Route
         {
             self.AddressableRouteLock.Dispose();
 
-            self.RouteId = 0;
+            self.AddressableRouteId = 0;
             self.AddressableId = 0;
             self.TimerComponent = null;
             self.AddressableRouteLock = null;
@@ -48,8 +50,8 @@ namespace Fantasy.Network.Route
     /// </summary>
     public sealed class AddressableRouteComponent : Entity
     {
-        public long RouteId;
         public long AddressableId;
+        public long AddressableRouteId;
         public CoroutineLock AddressableRouteLock;
         public TimerComponent TimerComponent;
         public NetworkMessagingComponent NetworkMessagingComponent;
@@ -83,18 +85,18 @@ namespace Fantasy.Network.Route
                 {
                     while (!IsDisposed)
                     {
-                        if (RouteId == 0)
+                        if (AddressableRouteId == 0)
                         {
-                            RouteId = await AddressableHelper.GetAddressableRouteId(Scene, AddressableId);
+                            AddressableRouteId = await AddressableHelper.GetAddressableRouteId(Scene, AddressableId);
                         }
 
-                        if (RouteId == 0)
+                        if (AddressableRouteId == 0)
                         {
                             return MessageDispatcherComponent.CreateResponse(requestType,
                                 InnerErrorCode.ErrNotFoundRoute);
                         }
                         
-                        iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, requestType, packInfo);
+                        iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(AddressableRouteId, requestType, packInfo);
                         
                         if (runtimeId != RuntimeId)
                         {
@@ -122,7 +124,7 @@ namespace Fantasy.Network.Route
                                     iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
                                 }
 
-                                RouteId = 0;
+                                AddressableRouteId = 0;
                                 continue;
                             }
                             default:
@@ -160,18 +162,18 @@ namespace Fantasy.Network.Route
             {
                 while (true)
                 {
-                    if (RouteId == 0)
+                    if (AddressableRouteId == 0)
                     {
-                        RouteId = await AddressableHelper.GetAddressableRouteId(Scene, AddressableId);
+                        AddressableRouteId = await AddressableHelper.GetAddressableRouteId(Scene, AddressableId);
                     }
 
-                    if (RouteId == 0)
+                    if (AddressableRouteId == 0)
                     {
                         return MessageDispatcherComponent.CreateResponse(request.GetType(),
                             InnerErrorCode.ErrNotFoundRoute);
                     }
 
-                    var iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(RouteId, request);
+                    var iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(AddressableRouteId, request);
 
                     if (runtimeId != RuntimeId)
                     {
@@ -196,7 +198,7 @@ namespace Fantasy.Network.Route
                                 iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
                             }
 
-                            RouteId = 0;
+                            AddressableRouteId = 0;
                             continue;
                         }
                         case InnerErrorCode.ErrRouteTimeout:

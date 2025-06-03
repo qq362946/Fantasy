@@ -128,3 +128,45 @@ message C2SubScene_TestDisposeMessage // IAddressableRouteMessage
 {
 	
 }
+/// 客户端向服务器发送连接消息（Roaming）
+message C2G_ConnectRoamingRequest // IRequest,G2C_ConnectRoamingResponse
+{
+
+}
+message G2C_ConnectRoamingResponse // IResponse
+{
+
+}
+/// 测试一个Chat漫游普通消息
+message C2Chat_TestRoamingMessage // IRoamingMessage,ChatRoamingType
+{
+	string Tag = 1;
+}
+/// 测试一个Map漫游普通消息
+message C2Map_TestRoamingMessage // IRoamingMessage,MapRoamingType
+{
+	string Tag = 1;
+}
+/// 测试一个Chat漫游RPC消息
+message C2Chat_TestRPCRoamingRequest // IRoamingRequest,Chat2C_TestRPCRoamingResponse,ChatRoamingType
+{
+	string Tag = 1;
+}
+message Chat2C_TestRPCRoamingResponse // IRoamingResponse
+{
+
+}
+/// 测试传送漫游的触发协议
+message C2Map_TestTransferRequest // IRoamingRequest,Map2C_TestTransferResponse,MapRoamingType
+{
+
+}
+message Map2C_TestTransferResponse // IRoamingResponse
+{
+
+}
+/// 测试一个Chat发送到Map之间漫游协议
+message C2Chat_TestSendMapMessage // IRoamingMessage,ChatRoamingType
+{
+	string Tag = 1;
+}

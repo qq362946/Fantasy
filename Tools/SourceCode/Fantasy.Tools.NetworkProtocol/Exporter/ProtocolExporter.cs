@@ -94,9 +94,10 @@ public sealed class ProtocolExporter
 
     public void Run()
     {
-        var tasks = new Task[2];
+        var tasks = new Task[3];
         tasks[0] = Task.Run(RouteType);
-        tasks[1] = Task.Run(async () =>
+        tasks[1] = Task.Run(RoamingType);
+        tasks[2] = Task.Run(async () =>
         {
             LoadTemplate();
             await Start(NetworkProtocolOpCodeType.Outer);
@@ -152,6 +153,9 @@ public sealed class ProtocolExporter
                     CustomRouteMessage = OpCodeType.OuterCustomRouteMessage,
                     CustomRouteRequest = OpCodeType.OuterCustomRouteRequest,
                     CustomRouteResponse = OpCodeType.OuterCustomRouteResponse,
+                    RoamingMessage = OpCodeType.OuterRoamingMessage,
+                    RoamingRequest = OpCodeType.OuterRoamingRequest,
+                    RoamingResponse = OpCodeType.OuterRoamingResponse,
                 };
                 opCodeName = "OuterOpcode";
                 protocolFiles = FileHelper.GetDirectoryFile(_networkProtocolDirectoryOuter, "*.proto", SearchOption.AllDirectories);
@@ -173,6 +177,9 @@ public sealed class ProtocolExporter
                     CustomRouteMessage = 0,
                     CustomRouteRequest = 0,
                     CustomRouteResponse = 0,
+                    RoamingMessage = OpCodeType.InnerRoamingMessage,
+                    RoamingRequest = OpCodeType.InnerRoamingRequest,
+                    RoamingResponse = OpCodeType.InnerRoamingResponse,
                 };
                 opCodeName = "InnerOpcode";
                 saveDirectory.Add(_networkProtocolServerDirectory, _serverTemplate);
@@ -305,19 +312,30 @@ public sealed class ProtocolExporter
                         {
                             case 2:
                             {
-                                if (parameter == "ICustomRouteMessage")
+                                switch (parameter)
                                 {
-                                    customRouteType = parameterArray[1].Trim();
-                                    break;
+                                    case "ICustomRouteMessage":
+                                    {
+                                        customRouteType = $"Fantasy.RouteType.{parameterArray[1].Trim()}";
+                                        break;
+                                    }
+                                    case "IRoamingMessage":
+                                    {
+                                        customRouteType = $"Fantasy.RoamingType.{parameterArray[1].Trim()}";
+                                        break;
+                                    }
+                                    default:
+                                    {
+                                        responseTypeStr = parameterArray[1].Trim();
+                                        break;
+                                    }
                                 }
-
-                                responseTypeStr = parameterArray[1].Trim();
                                 break;
                             }
                             case 3:
                             {
                                 responseTypeStr = parameterArray[1].Trim();
-                                customRouteType = parameterArray[2].Trim();
+                                customRouteType = parameter.Contains("IRoaming") ? $"Fantasy.RoamingType.{parameterArray[2].Trim()}" : $"Fantasy.RouteType.{parameterArray[2].Trim()}";
                                 break;
                             }
                         }
@@ -385,7 +403,7 @@ public sealed class ProtocolExporter
                             if (customRouteType != null)
                             {
                                 messageStr.AppendLine(protocolIgnore);
-                                messageStr.AppendLine($"\t\tpublic int RouteType => Fantasy.RouteType.{customRouteType};");
+                                messageStr.AppendLine($"\t\tpublic int RouteType => {customRouteType};");
                                 customRouteType = null;
                             }
 
@@ -457,6 +475,39 @@ public sealed class ProtocolExporter
                                                 throw new NotSupportedException("Under Inner, /// does not support the ICustomRouteMessage!");
                                             }
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.CustomRouteResponse, protocolOpCode.ACustomRouteResponse++);
+                                            if (!string.IsNullOrEmpty(protocolMember))
+                                            {
+                                                errorCodeStr.AppendLine($"\t\t[{protocolMember}(ErrorCodeKeyIndex)]");
+                                            }
+                                            errorCodeStr.AppendLine("\t\tpublic uint ErrorCode { get; set; }");
+                                            disposeStr.AppendLine($"\t\t\tErrorCode = default;");
+                                            break;
+                                        }
+                                        case "IRoamingMessage":
+                                        {
+                                            // if (opCodeType == NetworkProtocolOpCodeType.Inner)
+                                            // {
+                                            //     throw new NotSupportedException("Under Inner, /// does not support the IRoamingMessage!");
+                                            // }
+                                            opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.RoamingMessage, protocolOpCode.ARoamingMessage++);
+                                            break;
+                                        }
+                                        case "IRoamingRequest":
+                                        {
+                                            // if (opCodeType == NetworkProtocolOpCodeType.Inner)
+                                            // {
+                                            //     throw new NotSupportedException("Under Inner, /// does not support the IRoamingRequest!");
+                                            // }
+                                            opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.RoamingRequest, protocolOpCode.ARoamingRequest++);
+                                            break;
+                                        }
+                                        case "IRoamingResponse":
+                                        {
+                                            // if (opCodeType == NetworkProtocolOpCodeType.Inner)
+                                            // {
+                                            //     throw new NotSupportedException("Under Inner, /// does not support the IRoamingResponse!");
+                                            // }
+                                            opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.RoamingResponse, protocolOpCode.ARoamingResponse++);
                                             if (!string.IsNullOrEmpty(protocolMember))
                                             {
                                                 errorCodeStr.AppendLine($"\t\t[{protocolMember}(ErrorCodeKeyIndex)]");
@@ -657,11 +708,92 @@ public sealed class ProtocolExporter
             _ => type
         };
     }
+
+    private async Task RoamingType()
+    {
+        var routeTypeFile = $"{_networkProtocolDirectory}RoamingType.Config";
+        var protoFileText = "";
+        if (!File.Exists(routeTypeFile))
+        {
+            protoFileText = "// Roaming协议定义(需要定义10000以上、因为10000以内的框架预留)\n";
+            await File.WriteAllTextAsync(routeTypeFile, protoFileText);
+        }
+        else
+        {
+            protoFileText = await File.ReadAllTextAsync(routeTypeFile);
+        }
+
+        var roamingTypes = new HashSet<int>();
+        var roamingTypeFileSb = new StringBuilder();
+        roamingTypeFileSb.AppendLine("using System.Collections.Generic;");
+        roamingTypeFileSb.AppendLine("namespace Fantasy\n{");
+        roamingTypeFileSb.AppendLine("\t// Roaming协议定义(需要定义10000以上、因为10000以内的框架预留)\t");
+        roamingTypeFileSb.AppendLine("\tpublic static class RoamingType\n\t{");
+
+        foreach (var line in protoFileText.Split('\n'))
+        {
+            var currentLine = line.Trim();
+
+            if (currentLine == "" || currentLine.StartsWith("//"))
+            {
+                continue;
+            }
+
+            var splits = currentLine.Split(["//"], StringSplitOptions.RemoveEmptyEntries);
+            var routeTypeStr = splits[0].Split("=", StringSplitOptions.RemoveEmptyEntries);
+            var roamingType = routeTypeStr[1].Trim();
+            roamingTypes.Add(int.Parse(roamingType));
+            roamingTypeFileSb.Append($"\t\tpublic const int {routeTypeStr[0].Trim()} = {roamingType};");
+
+            if (splits.Length > 1)
+            {
+                roamingTypeFileSb.Append($" // {splits[1].Trim()}\n");
+            }
+            else
+            {
+                roamingTypeFileSb.Append('\n');
+            }
+        }
+
+        if (roamingTypes.Count > 0)
+        {
+            roamingTypeFileSb.AppendLine("\t\tpublic static IEnumerable<int> RoamingTypes");
+            roamingTypeFileSb.AppendLine("\t\t{\n\t\t\tget\n\t\t\t{");
+            foreach (var roamingType in roamingTypes)
+            {
+                roamingTypeFileSb.AppendLine($"\t\t\t\tyield return {roamingType};");
+            }
+            roamingTypeFileSb.AppendLine("\t\t\t}\n\t\t}");
+        }
+        
+
+        roamingTypeFileSb.AppendLine("\t}\n}");
+        var file = roamingTypeFileSb.ToString();
+
+        if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Server))
+        {
+            await File.WriteAllTextAsync($"{_networkProtocolServerDirectory}RoamingType.cs", file);
+        }
+
+        if (ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client))
+        {
+            await File.WriteAllTextAsync($"{_networkProtocolClientDirectory}RoamingType.cs", file);
+        }
+    }
     
     private async Task RouteType()
     {
         var routeTypeFile = $"{_networkProtocolDirectory}RouteType.Config";
-        var protoFileText = await File.ReadAllTextAsync(routeTypeFile);
+        var protoFileText = "";
+        if (!File.Exists(routeTypeFile))
+        {
+            protoFileText = "// Route协议定义(需要定义1000以上、因为1000以内的框架预留)\n";
+            await File.WriteAllTextAsync(routeTypeFile, protoFileText);
+        }
+        else
+        {
+            protoFileText = await File.ReadAllTextAsync(routeTypeFile);
+        }
         var routeTypeFileSb = new StringBuilder();
         routeTypeFileSb.AppendLine("namespace Fantasy\n{");
         routeTypeFileSb.AppendLine("\t// Route协议定义(需要定义1000以上、因为1000以内的框架预留)\t");

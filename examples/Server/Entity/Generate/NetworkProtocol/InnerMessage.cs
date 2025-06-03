@@ -307,4 +307,27 @@ namespace Fantasy
 		[ProtoMember(2)]
 		public uint ErrorCode { get; set; }
 	}
+	/// <summary>
+	///  Chat发送一个漫游消息给Map
+	/// </summary>
+	[ProtoContract]
+	public partial class Chat2M_TestMessage : AMessage, IRoamingMessage, IProto
+	{
+		public static Chat2M_TestMessage Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<Chat2M_TestMessage>();
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<Chat2M_TestMessage>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.Chat2M_TestMessage; }
+		[ProtoIgnore]
+		public int RouteType => Fantasy.RoamingType.MapRoamingType;
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
 }

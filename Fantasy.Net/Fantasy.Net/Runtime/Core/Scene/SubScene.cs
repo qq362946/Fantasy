@@ -37,6 +37,7 @@ namespace Fantasy
     #if FANTASY_NET
             NetworkMessagingComponent = rootScene.NetworkMessagingComponent;
             SingleCollectionComponent = rootScene.SingleCollectionComponent;
+            TerminusComponent = rootScene.TerminusComponent;
     #endif
             ThreadSynchronizationContext = rootScene.ThreadSynchronizationContext;
         }
@@ -81,6 +82,7 @@ namespace Fantasy
 #if FANTASY_NET
                 NetworkMessagingComponent = null;
                 SingleCollectionComponent = null;
+                TerminusComponent = null;
 #endif
                 ThreadSynchronizationContext = null;
             });

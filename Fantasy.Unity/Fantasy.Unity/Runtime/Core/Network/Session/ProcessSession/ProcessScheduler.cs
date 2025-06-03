@@ -17,8 +17,10 @@ internal static class ProcessScheduler
             case OpCodeType.InnerResponse:
             case OpCodeType.InnerRouteResponse:
             case OpCodeType.InnerAddressableResponse:
+            case OpCodeType.InnerRoamingResponse:
             case OpCodeType.OuterAddressableResponse:
             case OpCodeType.OuterCustomRouteResponse:
+            case OpCodeType.OuterRoamingResponse:
             {
                 using (packInfo)
                 {
@@ -96,6 +98,8 @@ internal static class ProcessScheduler
             case OpCodeType.OuterCustomRouteMessage:
             case OpCodeType.OuterAddressableRequest:
             case OpCodeType.OuterCustomRouteRequest:
+            case OpCodeType.OuterRoamingMessage:
+            case OpCodeType.OuterRoamingRequest:
             {
                 using (packInfo)
                 {
@@ -141,8 +145,10 @@ internal static class ProcessScheduler
             case OpCodeType.InnerResponse:
             case OpCodeType.InnerRouteResponse:
             case OpCodeType.InnerAddressableResponse:
+            case OpCodeType.InnerRoamingResponse:
             case OpCodeType.OuterAddressableResponse:
             case OpCodeType.OuterCustomRouteResponse:
+            case OpCodeType.OuterRoamingResponse:
             {
                 var sessionScene = session.Scene;
                 sessionScene.ThreadSynchronizationContext.Post(() =>
@@ -154,6 +160,7 @@ internal static class ProcessScheduler
                 
                 return;
             }
+            case OpCodeType.InnerRoamingMessage:
             case OpCodeType.InnerAddressableMessage:
             case OpCodeType.InnerRouteMessage:
             {
@@ -182,6 +189,7 @@ internal static class ProcessScheduler
                 return;
             }
             case OpCodeType.InnerAddressableRequest:
+            case OpCodeType.InnerRoamingRequest:
             case OpCodeType.InnerRouteRequest:
             {
                 var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
@@ -211,6 +219,7 @@ internal static class ProcessScheduler
             }
             case OpCodeType.OuterAddressableMessage:
             case OpCodeType.OuterCustomRouteMessage:
+            case OpCodeType.OuterRoamingMessage:
             {
                 var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
                 

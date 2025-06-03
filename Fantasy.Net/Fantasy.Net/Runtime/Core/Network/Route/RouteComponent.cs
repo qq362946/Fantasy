@@ -1,7 +1,24 @@
 using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
 
 #if FANTASY_NET
 namespace Fantasy.Network;
+
+/// <summary>
+/// RouteComponent的AwakeSystem
+/// </summary>
+public sealed class RouteComponentAwakeSystem : AwakeSystem<RouteComponent>
+{
+    /// <summary>
+    /// Awake
+    /// </summary>
+    /// <param name="self"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    protected override void Awake(RouteComponent self)
+    {
+        ((Session)self.Parent).RouteComponent = self;
+    }
+}
 
 /// <summary>
 /// 自定义Route组件、如果要自定义Route协议必须使用这个组件

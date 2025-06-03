@@ -11,7 +11,7 @@ public class G2M_CreateSubSceneRequestHandler : RouteRPC<Scene, G2M_CreateSubSce
         // 下面的SceneType传的是666，其实并没有这个类型，这个是我随便写的。
         var subScene = Scene.CreateSubScene(scene, 6666);
         // 返回subScene的运行时id
-        response.SubSceneRouteId = subScene.RuntimeId;
+        response.SubSceneRouteId = subScene.RouteId;
         await FTask.CompletedTask;
     }
 }

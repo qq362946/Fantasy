@@ -72,8 +72,16 @@ namespace Fantasy.Network
         public const uint OuterCustomRouteRequest = 17;
         public const uint OuterCustomRouteResponse = 18;
         
-        public const uint OuterPingRequest = 19;
-        public const uint OuterPingResponse = 20;
+        public const uint OuterRoamingMessage = 19;
+        public const uint OuterRoamingRequest = 20;
+        public const uint OuterRoamingResponse = 21;
+        
+        public const uint InnerRoamingMessage = 22;
+        public const uint InnerRoamingRequest = 23;
+        public const uint InnerRoamingResponse = 24;
+        
+        public const uint OuterPingRequest = 190;
+        public const uint OuterPingResponse = 200;
     }
 
     public static class OpCode
@@ -95,8 +103,23 @@ namespace Fantasy.Network
         public static readonly uint AddressableLockResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 4);
         public static readonly uint AddressableUnLockRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 5);
         public static readonly uint AddressableUnLockResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 5);
-        public static readonly uint LinkEntityRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 6);
-        public static readonly uint LinkEntityResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 6);
+        public static readonly uint LinkRoamingRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 6);
+        public static readonly uint LinkRoamingResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 6);
+        public static readonly uint UnLinkRoamingRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 8);
+        public static readonly uint UnLinkRoamingResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 8);
+        public static readonly uint LockTerminusIdRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 9);
+        public static readonly uint LockTerminusIdResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 9);
+        public static readonly uint UnLockTerminusIdRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 10);
+        public static readonly uint UnLockTerminusIdResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 10);
+        public static readonly uint GetTerminusIdRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 11);
+        public static readonly uint GetTerminusIdResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 11);
+        
+        public static readonly uint TransferTerminusRequest = Create(OpCodeProtocolType.Bson, OpCodeType.InnerRouteRequest, 1);
+        public static readonly uint TransferTerminusResponse = Create(OpCodeProtocolType.Bson, OpCodeType.InnerRouteResponse, 1);
+        
+        
+        // public static readonly uint LinkEntityRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 6);
+        // public static readonly uint LinkEntityResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 6);
         
         public static uint Create(uint opCodeProtocolType, uint protocol, uint index)
         {

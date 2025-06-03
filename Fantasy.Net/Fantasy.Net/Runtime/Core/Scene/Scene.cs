@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Event;
@@ -10,15 +9,15 @@ using Fantasy.Network.Interface;
 using Fantasy.Pool;
 using Fantasy.Scheduler;
 using Fantasy.Timer;
-using Entity = Fantasy.Entitas.Entity;
 #if FANTASY_NET
 using Fantasy.DataBase;
 using Fantasy.Platform.Net;
 using Fantasy.SingleCollection;
 using System.Runtime.CompilerServices;
 using Fantasy.Network.Route;
-// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+using Fantasy.Network.Roaming;
 #endif
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8603 // Possible null reference return.
@@ -27,6 +26,25 @@ using Fantasy.Network.Route;
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 namespace Fantasy
 {
+    /// <summary>
+    /// 当Scene创建完成后发送的事件参数
+    /// </summary>
+    public struct OnCreateScene
+    {
+        /// <summary>
+        /// 获取与事件关联的场景实体。
+        /// </summary>
+        public readonly Scene Scene;
+        /// <summary>
+        /// 初始化一个新的 OnCreateScene 实例。
+        /// </summary>
+        /// <param name="scene"></param>
+        public OnCreateScene(Scene scene)
+        {
+            Scene = scene;
+        }
+    }
+    
     /// <summary>
     /// 表示一个场景实体，用于创建与管理特定的游戏场景信息。
     /// </summary>
@@ -126,6 +144,14 @@ namespace Fantasy
         /// Scene下的内网消息发送组件
         /// </summary>
         public NetworkMessagingComponent NetworkMessagingComponent { get; internal set; }
+        /// <summary>
+        /// Scene下的漫游终端管理组件
+        /// </summary>
+        public TerminusComponent TerminusComponent { get; internal set; }
+        /// <summary>
+        /// Scene下的Session漫游组件。
+        /// </summary>
+        public RoamingComponent RoamingComponent { get; internal set; }
 #endif
         #endregion
 
@@ -145,6 +171,8 @@ namespace Fantasy
 #if FANTASY_NET
             NetworkMessagingComponent = AddComponent<NetworkMessagingComponent>(false);
             SingleCollectionComponent = await AddComponent<SingleCollectionComponent>(false).Initialize();
+            TerminusComponent = AddComponent<TerminusComponent>(false);
+            RoamingComponent = AddComponent<RoamingComponent>(false).Initialize();
 #endif
         }
 
@@ -179,8 +207,11 @@ namespace Fantasy
                 UnityNetwork?.Dispose();
 #endif
                 TypeInstance.Clear();
+                TimerComponent.Dispose();
                 EventComponent.Dispose();
                 MessagePoolComponent.Dispose();
+                CoroutineLockComponent.Dispose();
+                MessageDispatcherComponent.Dispose();
                 EntityPool.Dispose();
                 EntityListPool.Dispose();
                 EntitySortedDictionaryPool.Dispose();
@@ -190,6 +221,10 @@ namespace Fantasy
                     World.Dispose();
                     World = null;
                 }
+                SingleCollectionComponent.Dispose();
+                NetworkMessagingComponent.Dispose();
+                TerminusComponent.Dispose();
+                RoamingComponent.Dispose();
 #endif
             }
 
@@ -507,13 +542,13 @@ namespace Fantasy
                 _processSessionInfos.Remove(sceneId);
             }
 
-            if (Process.IsInAppliaction(ref sceneId))
-            {
-                // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
-                var processSession = Session.CreateInnerSession(Scene);
-                _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
-                return processSession;
-            }
+            // if (Process.IsInAppliaction(ref sceneId))
+            // {
+            //     // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
+            //     var processSession = Session.CreateInnerSession(Scene);
+            //     _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
+            //     return processSession;
+            // }
 
             if (!SceneConfigData.Instance.TryGet(sceneId, out var sceneConfig))
             {

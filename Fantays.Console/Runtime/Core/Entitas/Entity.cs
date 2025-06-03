@@ -103,6 +103,11 @@ namespace Fantasy.Entitas
             return Parent as T;
         }
 
+        /// <summary>
+        /// 获取当前实体的RouteId。
+        /// </summary>
+        public long RouteId => RuntimeId;
+
         #endregion
 
         #region Create
