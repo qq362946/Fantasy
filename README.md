@@ -46,6 +46,7 @@
 #### <a href="https://github.com/FlameskyDexive/Legends-Of-Heroes"><strong>Legends-Of-Heroes</strong></a> - 一个LOL风格的球球大作战游戏，基于ET，使用状态同步。
 ## 交流与讨论：  
 __讨论QQ群 : Fantasy服务器开发交流群 569888673 __
+__联系邮箱  : 362946@qq.com
 ## 特别鸣谢
 
 感谢JetBrains公司提供的使用许可证！
