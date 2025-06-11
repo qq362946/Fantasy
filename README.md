@@ -45,7 +45,7 @@
 #### <a href="https://github.com/ALEXTANGXIAO/TEngine"><strong>TEngine</strong></a> - TEngine是一个简单(新手友好开箱即用)且强大的Unity框架全平台解决方案。
 #### <a href="https://github.com/FlameskyDexive/Legends-Of-Heroes"><strong>Legends-Of-Heroes</strong></a> - 一个LOL风格的球球大作战游戏，基于ET，使用状态同步。
 ## 交流与讨论：  
-__讨论QQ群 : 569888673 
+__讨论QQ群 : 569888673  
 __联系邮箱  : 362946@qq.com
 ## 特别鸣谢
 
