@@ -12,6 +12,20 @@ namespace Fantasy.Helper
         private static readonly SHA256 Sha256Hash = SHA256.Create();
         
         /// <summary>
+        /// 计算两个字符串的HashCode
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static int GetHashCode(string a, string b)
+        {
+            var hash = 17;
+            hash = hash * 31 + a.GetHashCode();
+            hash = hash * 31 + b.GetHashCode();
+            return hash;
+        }
+#if FANTASY_NET || !FANTASY_WEBGL
+        /// <summary>
         /// 使用bkdr算法生成一个long的值
         /// </summary>
         /// <param name="str"></param>
@@ -114,7 +128,93 @@ namespace Fantasy.Helper
             hash ^= hash >> 33;
             return (long)hash;
         }
+#endif
+#if FANTASY_WEBGL
+        /// <summary>
+        /// 使用bkdr算法生成一个long的值
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static long GetBKDRHashCode(string str)
+        {
+            long hash = 0;
+            // 如果要修改这个种子、建议选择一个质数来做种子
+            const uint seed = 13131; // 31 131 1313 13131 131313 etc..
+            foreach (var c in str)
+            {
+                var high = (byte)(c >> 8);
+                var low = (byte)(c & byte.MaxValue);
+                hash = hash * seed + high;
+                hash = hash * seed + low;
+            }
+            return hash;
+        }
+        /// <summary>
+        /// 使用MurmurHash3算法生成一个uint的值
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static uint MurmurHash3(string str)
+        {
+            const uint seed = 0xc58f1a7b;
+            uint hash = seed;
+            uint c1 = 0xcc9e2d51;
+            uint c2 = 0x1b873593;
+            
+            foreach (var t in str)
+            {
+                var k1 = (uint)(t);
+                k1 *= c1;
+                k1 = (k1 << 15) | (k1 >> (32 - 15));
+                k1 *= c2;
+
+                hash ^= k1;
+                hash = (hash << 13) | (hash >> (32 - 13));
+                hash = hash * 5 + 0xe6546b64;
+            }
+
+            hash ^= (uint)str.Length;
+            hash ^= hash >> 16;
+            hash *= 0x85ebca6b;
+            hash ^= hash >> 13;
+            hash *= 0xc2b2ae35;
+            hash ^= hash >> 16;
+            return hash;
+        }
         
+        /// <summary>
+        /// 使用MurmurHash3算法生成一个long的值
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static long ComputeHash64(string str)
+        {
+            const ulong seed = 0xc58f1a7bc58f1a7bUL; // 64-bit seed
+            var hash = seed;
+            var c1 = 0x87c37b91114253d5UL;
+            var c2 = 0x4cf5ad432745937fUL;
+            
+            foreach (var t in str)
+            {
+                var k1 = (ulong)(t);
+                k1 *= c1;
+                k1 = (k1 << 31) | (k1 >> (64 - 31));
+                k1 *= c2;
+
+                hash ^= k1;
+                hash = (hash << 27) | (hash >> (64 - 27));
+                hash = hash * 5 + 0x52dce729;
+            }
+
+            hash ^= (ulong)str.Length;
+            hash ^= hash >> 33;
+            hash *= 0xff51afd7ed558ccdUL;
+            hash ^= hash >> 33;
+            hash *= 0xc4ceb9fe1a85ec53UL;
+            hash ^= hash >> 33;
+            return (long)hash;
+        }
+#endif
         /// <summary>
         /// 根据字符串计算一个Hash值
         /// </summary>
