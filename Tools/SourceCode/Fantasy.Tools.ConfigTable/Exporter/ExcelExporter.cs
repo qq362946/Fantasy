@@ -68,7 +68,7 @@ public sealed class ExcelExporter
     ];
     static ExcelExporter()
     {
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+        ExcelPackage.License.SetNonCommercialOrganization("Fantasy");
     }
     /// <summary>
     /// 根据指定的 exportType 初始化 ExcelExporter 类的新实例。
@@ -366,11 +366,13 @@ public sealed class ExcelExporter
 
             foreach (var exportInfo in tableList)
             {
+                var key = HashCodeHelper.ComputeHash64(exportInfo.Name);
                 var timer = TimeHelper.Transition(exportInfo.FileInfo.LastWriteTime);
 
                 if (!isNeedExport)
                 {
-                    if (VersionInfo.Tables.TryGetValue(exportInfo.Name, out var lastWriteTime))
+                    
+                    if (VersionInfo.Tables.TryGetValue(key, out var lastWriteTime))
                     {
                         isNeedExport = lastWriteTime != timer;
                     }
@@ -380,7 +382,7 @@ public sealed class ExcelExporter
                     }
                 }
                 
-                VersionInfo.Tables[exportInfo.Name] = timer;
+                VersionInfo.Tables[key] = timer;
             }
 
             if (!isNeedExport)
@@ -738,7 +740,7 @@ public sealed class ExcelExporter
             
             foreach (var workbookWorksheet in workbookWorksheets)
             {
-                VersionInfo.WorksheetNames.Add(workbookWorksheet.Name);
+                VersionInfo.WorksheetNames.Add(HashCodeHelper.ComputeHash64(workbookWorksheet.Name));
                 Worksheets.TryAdd(workbookWorksheet.Name, workbookWorksheet);
             }
         }

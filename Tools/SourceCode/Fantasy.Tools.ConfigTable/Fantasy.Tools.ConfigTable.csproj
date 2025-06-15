@@ -27,11 +27,11 @@
 
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
-      <PackageReference Include="EPPlus" Version="7.3.2" />
-      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+      <PackageReference Include="EPPlus" Version="8.0.5" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.6" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="protobuf-net" Version="3.2.30" />
+      <PackageReference Include="protobuf-net" Version="3.2.52" />
     </ItemGroup>
 
     <ItemGroup>

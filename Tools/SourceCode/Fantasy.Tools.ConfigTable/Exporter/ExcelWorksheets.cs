@@ -1,4 +1,5 @@
 using Fantasy.Exporter;
+using Fantasy.Helper;
 using OfficeOpenXml;
 #pragma warning disable CS8601 // Possible null reference assignment.
 
@@ -13,7 +14,8 @@ public sealed class ExcelWorksheets(ExcelExporter excelExporter)
             return true;
         }
 
-        if (!excelExporter.VersionInfo.WorksheetNames.Contains(worksheetName))
+        var computeHash64 = HashCodeHelper.ComputeHash64(worksheetName);
+        if (!excelExporter.VersionInfo.WorksheetNames.Contains(computeHash64))
         {
             Log.Info($"{worksheetName} is not exist!");
         }

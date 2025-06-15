@@ -2,6 +2,6 @@ namespace Fantasy.Tools.ConfigTable;
 
 public class VersionInfo
 {
-    public List<string> WorksheetNames = [];
-    public Dictionary<string, long> Tables = new();
+    public SortedSet<long> WorksheetNames = [];
+    public SortedDictionary<long, long> Tables = new();
 }
