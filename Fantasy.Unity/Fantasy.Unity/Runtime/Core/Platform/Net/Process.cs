@@ -47,7 +47,10 @@ public sealed class Process : IDisposable
 
     internal void RemoveSceneToProcess(Scene scene, bool isDispose)
     {
-        _processScenes.Remove(scene.SceneConfigId, out _);
+        if (!_processScenes.Remove(scene.SceneConfigId, out _))
+        {
+            return;
+        }
 
         if (isDispose)
         {
@@ -128,7 +131,10 @@ public sealed class Process : IDisposable
 
     internal static void RemoveScene(Scene scene, bool isDispose)
     {
-        Scenes.Remove(scene.SceneConfigId, out _);
+        if (!Scenes.Remove(scene.SceneConfigId, out _))
+        {
+            return;
+        }
 
         if (isDispose)
         {

@@ -4,9 +4,9 @@ namespace Fantasy.Network
     public struct OpCodeIdStruct
     {
         // OpCodeIdStruct:5 + 4 + 23 = 32
-        // +---------------------------+---------------------------------+-----------------------------+
-        // |  OpCodeType(5) 最多31种类型 | Protocol(4) 最多15种不同的网络协议 | Index(23) 最多8388607个协议  |
-        // +---------------------------+---------------------------------+-----------------------------+
+        // +-------------------------+-------------------------------------------+-----------------------------+
+        // |  protocol(5) 最多31种类型 | OpCodeProtocolType(4) 最多15种不同的网络协议 | Index(23) 最多8388607个协议  |
+        // +-------------------------+-------------------------------------------+-----------------------------+
         public uint OpCodeProtocolType { get; private set; }
         public uint Protocol { get; private set; }
         public uint Index { get; private set; }
@@ -80,8 +80,8 @@ namespace Fantasy.Network
         public const uint InnerRoamingRequest = 23;
         public const uint InnerRoamingResponse = 24;
         
-        public const uint OuterPingRequest = 190;
-        public const uint OuterPingResponse = 200;
+        public const uint OuterPingRequest = 30;
+        public const uint OuterPingResponse = 31;
     }
 
     public static class OpCode
@@ -116,10 +116,6 @@ namespace Fantasy.Network
         
         public static readonly uint TransferTerminusRequest = Create(OpCodeProtocolType.Bson, OpCodeType.InnerRouteRequest, 1);
         public static readonly uint TransferTerminusResponse = Create(OpCodeProtocolType.Bson, OpCodeType.InnerRouteResponse, 1);
-        
-        
-        // public static readonly uint LinkEntityRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 6);
-        // public static readonly uint LinkEntityResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 6);
         
         public static uint Create(uint opCodeProtocolType, uint protocol, uint index)
         {

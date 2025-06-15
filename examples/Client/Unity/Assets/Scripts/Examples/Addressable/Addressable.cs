@@ -23,6 +23,11 @@ public class Addressable : MonoBehaviour
         StartAsync().Coroutine();
     }
 
+    private void OnDestroy()
+    {
+        _scene?.Dispose();
+    }
+
     private async FTask StartAsync()
     {
         // 初始化框架

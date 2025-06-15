@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Event;
@@ -149,7 +150,7 @@ namespace Fantasy
         /// </summary>
         public TerminusComponent TerminusComponent { get; internal set; }
         /// <summary>
-        /// Scene下的Session漫游组件。
+        /// Scene下的Session漫游组件
         /// </summary>
         public RoamingComponent RoamingComponent { get; internal set; }
 #endif
@@ -163,16 +164,16 @@ namespace Fantasy
             EntityListPool = new EntityListPool<Entity>();
             EntitySortedDictionaryPool = new EntitySortedDictionaryPool<long, Entity>();
             SceneUpdate = EntityComponent = await Create<EntityComponent>(this, false, false).Initialize();
-            MessagePoolComponent = AddComponent<MessagePoolComponent>(false);
-            EventComponent = await AddComponent<EventComponent>(false).Initialize();
-            TimerComponent = AddComponent<TimerComponent>(false).Initialize();
-            CoroutineLockComponent = AddComponent<CoroutineLockComponent>(false).Initialize();
-            MessageDispatcherComponent = await AddComponent<MessageDispatcherComponent>(false).Initialize();
+            MessagePoolComponent = Create<MessagePoolComponent>(this,false,true);
+            EventComponent = await Create<EventComponent>(this,false,true).Initialize();
+            TimerComponent = Create<TimerComponent>(this, false, true).Initialize();
+            CoroutineLockComponent = Create<CoroutineLockComponent>(this, false, true).Initialize();
+            MessageDispatcherComponent = await Create<MessageDispatcherComponent>(this, false, true).Initialize();
 #if FANTASY_NET
-            NetworkMessagingComponent = AddComponent<NetworkMessagingComponent>(false);
-            SingleCollectionComponent = await AddComponent<SingleCollectionComponent>(false).Initialize();
-            TerminusComponent = AddComponent<TerminusComponent>(false);
-            RoamingComponent = AddComponent<RoamingComponent>(false).Initialize();
+            NetworkMessagingComponent = Create<NetworkMessagingComponent>(this, false, true);
+            SingleCollectionComponent = await Create<SingleCollectionComponent>(this, false, true).Initialize();
+            TerminusComponent = Create<TerminusComponent>(this, false, true);
+            RoamingComponent = Create<RoamingComponent>(this, false, true).Initialize();
 #endif
         }
 
@@ -186,50 +187,87 @@ namespace Fantasy
                 return;
             }
             
-            if (SceneRuntimeType == SceneRuntimeType.Root)
+            base.Dispose();
+            _entities.Remove(RuntimeId);
+
+            switch (SceneRuntimeType)
             {
-                foreach (var (_, entity) in _entities)
+                case SceneRuntimeType.Root:
                 {
-                    entity.Dispose();
-                }
-                _entities.Clear();
 #if FANTASY_NET
-                foreach (var (_, innerSession) in _processSessionInfos)
-                {
-                    innerSession.Dispose();
-                }
-                _processSessionInfos.Clear();
+                    foreach (var (_, processSessionInfo) in _processSessionInfos.ToList())
+                    {
+                        processSessionInfo.Dispose();
+                    }
+
+                    _processSessionInfos.Clear();
 #endif
+                    _entities.Remove(EntityComponent.RuntimeId);
+
+                    foreach (var (runtimeId, entity) in _entities.ToList())
+                    {
+                        if (runtimeId != entity.RuntimeId)
+                        {
+                            continue;
+                        }
+                        entity.Dispose();
+                    }
+
+                    _entities.Clear();
 #if FANTASY_UNITY
-                Session = null;
-                _unityWorldId--;
-                _unitySceneId--;
-                UnityNetwork?.Dispose();
+                    _unityWorldId--;
+                    _unitySceneId--;
 #endif
-                TypeInstance.Clear();
-                TimerComponent.Dispose();
-                EventComponent.Dispose();
-                MessagePoolComponent.Dispose();
-                CoroutineLockComponent.Dispose();
-                MessageDispatcherComponent.Dispose();
-                EntityPool.Dispose();
-                EntityListPool.Dispose();
-                EntitySortedDictionaryPool.Dispose();
+                    TypeInstance.Clear();
 #if FANTASY_NET
-                if (World != null)
-                {
-                    World.Dispose();
-                    World = null;
-                }
-                SingleCollectionComponent.Dispose();
-                NetworkMessagingComponent.Dispose();
-                TerminusComponent.Dispose();
-                RoamingComponent.Dispose();
+                    Process.RemoveScene(this, false);
+                    Process.RemoveSceneToProcess(this, false);
 #endif
+                    EntityComponent.Dispose();
+                    EntityPool.Dispose();
+                    EntityListPool.Dispose();
+                    EntitySortedDictionaryPool.Dispose();
+                    break;
+                }
+                case SceneRuntimeType.SubScene:
+                {
+                    break;
+                }
+                default:
+                {
+                    Log.Error($"SceneRuntimeType: {SceneRuntimeType} The unsupported SceneRuntimeType of the Scene executed Dispose.");
+                    break;
+                }
             }
 
+            SceneUpdate = null;
+            EntityIdFactory = null;
+            RuntimeIdFactory = null;
+
+            EntityPool = null;
+            EntityListPool = null;
+            EntitySortedDictionaryPool = null;
+            EntityComponent = null;
+            TimerComponent = null;
+            EventComponent = null;
+            MessagePoolComponent = null;
+            CoroutineLockComponent = null;
+            MessageDispatcherComponent = null;
+#if FANTASY_NET
+            World = null;
+            Process = null;
+            SceneType = 0;
+            SceneConfigId = 0;
+            SingleCollectionComponent = null;
+            NetworkMessagingComponent = null;
+            TerminusComponent = null;
+            RoamingComponent = null;
+#elif FANTASY_UNITY
+            Session = null;
+            UnityNetwork = null;
+#endif
+            ThreadSynchronizationContext = null;
             SceneRuntimeType = SceneRuntimeType.None;
-            base.Dispose();
         }
 
         #endregion
@@ -281,6 +319,7 @@ namespace Fantasy
             scene.Scene = scene;
             scene.Parent = scene;
             scene.Type = typeof(Scene);
+            scene.SceneRuntimeType = SceneRuntimeType.Root;
             scene.EntityIdFactory =  IdFactoryHelper.EntityIdFactory(sceneId, world);
             scene.RuntimeIdFactory = IdFactoryHelper.RuntimeIdFactory(0, sceneId, world);
             scene.Id = IdFactoryHelper.EntityId(0, sceneId, world, 0);
@@ -542,13 +581,13 @@ namespace Fantasy
                 _processSessionInfos.Remove(sceneId);
             }
 
-            // if (Process.IsInAppliaction(ref sceneId))
-            // {
-            //     // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
-            //     var processSession = Session.CreateInnerSession(Scene);
-            //     _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
-            //     return processSession;
-            // }
+            if (Process.IsInAppliaction(ref sceneId))
+            {
+                // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
+                var processSession = Session.CreateInnerSession(Scene);
+                _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
+                return processSession;
+            }
 
             if (!SceneConfigData.Instance.TryGet(sceneId, out var sceneConfig))
             {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Fantasy.Entitas;
 using Fantasy.Network;
 #pragma warning disable CS8601 // Possible null reference assignment.
@@ -47,44 +48,29 @@ namespace Fantasy
         /// </summary>
         public override void Dispose()
         {
+            if (IsDisposed)
+            {
+                return;
+            }
+            
             ThreadSynchronizationContext.Post(() =>
             {
                 if (IsDisposed)
                 {
                     return;
                 }
-            
-                foreach (var (_, entity) in _entities)
+                
+                foreach (var (runtimeId, entity) in _entities.ToList())
                 {
+                    if (runtimeId != entity.RuntimeId)
+                    {
+                        continue;
+                    }
                     entity.Dispose();
                 }
-            
+                
                 _entities.Clear();
                 base.Dispose();
-#if FANTASY_NET
-                World = null;
-                Process = null;
-                SceneType = 0;
-#endif
-                EntityIdFactory = null;
-                RuntimeIdFactory = null;
-                RootScene = null;
-                EntityPool = null;
-                EntityListPool = null;
-                EntitySortedDictionaryPool = null;
-                SceneUpdate = null;
-                TimerComponent = null;
-                EventComponent = null;
-                EntityComponent = null;
-                MessagePoolComponent = null;
-                CoroutineLockComponent = null;
-                MessageDispatcherComponent = null;
-#if FANTASY_NET
-                NetworkMessagingComponent = null;
-                SingleCollectionComponent = null;
-                TerminusComponent = null;
-#endif
-                ThreadSynchronizationContext = null;
             });
         }
 

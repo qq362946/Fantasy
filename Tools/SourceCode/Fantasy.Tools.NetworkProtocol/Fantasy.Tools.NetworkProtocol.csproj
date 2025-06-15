@@ -4,8 +4,8 @@
         <OutputType>Exe</OutputType>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
         <LangVersion>default</LangVersion>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -16,11 +16,13 @@
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <OutputPath>../../Exporter/NetworkProtocol/</OutputPath>
+        <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <OutputPath>../../Exporter/NetworkProtocol/</OutputPath>
+        <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>
