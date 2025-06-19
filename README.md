@@ -8,6 +8,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/qq362946/Fantasy)
 ![GitHub Created At](https://img.shields.io/github/created-at/qq362946/Fantasy)
 # Fantasy
+#### Fantasy框架的设计理念源自于ET框架，然而需要特别强调的是，借鉴并不等同于抄袭。虽然Fantasy在核心设计理念上汲取了ET的精髓，但它在此基础上进行了创新与优化，加入了独特的功能和改进，使得Fantasy成为一个独立且原创的系统。我们尊重ET框架的设计思想，但始终保持着对创新的追求，力求为用户提供更高效、更灵活、更易扩展的解决方案。
 #### Fantasy是基于.NET的高性能网络开发框架，支持主流协议，前后端分离。
 #### 支持Unity/Godot/WinFrom/WPF/Console等C#客户端接入。
 #### 框架支持TCP\KCP\WebSocket\http（支持Unity发布成H5）三种网络协议。 
