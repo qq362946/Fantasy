@@ -1,6 +1,7 @@
 #if FANTASY_NET
 using Fantasy.Async;
 using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
 using Fantasy.InnerMessage;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
@@ -16,7 +17,7 @@ namespace Fantasy.Network.Roaming;
 /// <summary>
 /// 漫游终端实体
 /// </summary>
-public sealed class Terminus : Entity
+public sealed class Terminus : Entity, ISupportedRedirectMessage
 {
     /// <summary>
     /// 当前漫游终端的TerminusId。
@@ -39,7 +40,7 @@ public sealed class Terminus : Entity
     /// 不知道原理千万不要手动赋值这个。
     /// </summary>
     [BsonElement("f")]
-    internal long ForwardSessionRouteId;
+    public long ForwardSessionRouteId;
     /// <summary>
     /// 关联的玩家实体
     /// </summary>
@@ -56,6 +57,12 @@ public sealed class Terminus : Entity
     /// </summary>
     [BsonIgnore]
     private readonly Dictionary<int, long> _roamingTerminusId = new Dictionary<int, long>();
+
+    /// <summary>
+    /// 重定向目标实体
+    /// </summary>
+    public Entity RedirectEntity => TerminusEntity;
+
     /// <summary>
     /// 创建关联的终端实体。
     /// 创建完成后，接收消息都是由关联的终端实体来处理。
