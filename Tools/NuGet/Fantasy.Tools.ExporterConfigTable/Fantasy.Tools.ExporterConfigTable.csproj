@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Fantasy-Net.Tools.ExporterConfigTable</PackageId>
-        <PackageVersion>2024.2.0</PackageVersion>
+        <PackageVersion>2024.2.26</PackageVersion>
         <Title>Fantasy-Net.Tools.ExporterConfigTable</Title>
         <Authors>qq362946</Authors>
         <owners>qq362946</owners>

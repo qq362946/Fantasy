@@ -107,9 +107,11 @@ namespace Fantasy.Assembly
             {
                 return;
             }
-            
+#if FANTASY_WEBGL 
+            AssemblySystems.Add(assemblySystem);
+#else
             AssemblySystems.Enqueue(assemblySystem);
-            
+#endif
             foreach (var (assemblyIdentity, _) in AssemblyList)
             {
                 await assemblySystem.Load(assemblyIdentity);
