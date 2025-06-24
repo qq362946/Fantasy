@@ -676,6 +676,52 @@ namespace Fantasy
 		public uint ErrorCode { get; set; }
 	}
 	/// <summary>
+	///  客户端发送一个漫游消息给Map通知Map主动推送一个消息给客户端
+	/// </summary>
+	[ProtoContract]
+	public partial class C2Map_PushMessageToClient : AMessage, IRoamingMessage, IProto
+	{
+		public static C2Map_PushMessageToClient Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2Map_PushMessageToClient>();
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2Map_PushMessageToClient>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2Map_PushMessageToClient; }
+		[ProtoIgnore]
+		public int RouteType => Fantasy.RoamingType.MapRoamingType;
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
+	/// <summary>
+	///  漫游端发送一个消息给客户端
+	/// </summary>
+	[ProtoContract]
+	public partial class Map2C_PushMessageToClient : AMessage, IRoamingMessage, IProto
+	{
+		public static Map2C_PushMessageToClient Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<Map2C_PushMessageToClient>();
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<Map2C_PushMessageToClient>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.Map2C_PushMessageToClient; }
+		[ProtoIgnore]
+		public int RouteType => Fantasy.RoamingType.MapRoamingType;
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
+	/// <summary>
 	///  测试传送漫游的触发协议
 	/// </summary>
 	[ProtoContract]

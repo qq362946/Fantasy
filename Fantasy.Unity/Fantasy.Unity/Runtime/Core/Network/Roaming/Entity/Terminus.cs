@@ -51,6 +51,10 @@ public sealed class Terminus : Entity
     [BsonIgnore]
     internal CoroutineLock RoamingMessageLock;
     /// <summary>
+    /// 获得转发的SessionRouteId，可以通过这个Id来发送消息来自动转发到客户端。
+    /// </summary>
+    public long SessionRouteId => ForwardSessionRouteId;
+    /// <summary>
     /// 存放其他漫游终端的Id。
     /// 通过这个Id可以发送消息给它。
     /// </summary>
@@ -201,6 +205,14 @@ public sealed class Terminus : Entity
         return response.TerminusId;
     }
 
+    /// <summary>
+    /// 发送一个消息给客户端
+    /// </summary>
+    /// <param name="message"></param>
+    public void Send(IRouteMessage message)
+    {
+        Scene.NetworkMessagingComponent.SendInnerRoute(ForwardSessionRouteId, message);
+    }
     /// <summary>
     /// 发送一个漫游消息
     /// </summary>

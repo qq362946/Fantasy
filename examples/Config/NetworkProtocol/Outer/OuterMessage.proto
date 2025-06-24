@@ -156,6 +156,16 @@ message Chat2C_TestRPCRoamingResponse // IRoamingResponse
 {
 
 }
+/// 客户端发送一个漫游消息给Map通知Map主动推送一个消息给客户端
+message C2Map_PushMessageToClient // IRoamingMessage,MapRoamingType
+{
+	string Tag = 1;
+}
+/// 漫游端发送一个消息给客户端
+message Map2C_PushMessageToClient // IRoamingMessage,MapRoamingType
+{
+	string Tag = 1;
+}
 /// 测试传送漫游的触发协议
 message C2Map_TestTransferRequest // IRoamingRequest,Map2C_TestTransferResponse,MapRoamingType
 {

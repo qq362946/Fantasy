@@ -4,8 +4,18 @@ using Fantasy;
 using Fantasy.Async;
 using Fantasy.Helper;
 using Fantasy.Network;
+using Fantasy.Network.Interface;
 using UnityEngine;
 using UnityEngine.UI;
+
+public sealed class Map2C_PushMessageToClientHandler : Message<Map2C_PushMessageToClient>
+{
+    protected override async FTask Run(Session session, Map2C_PushMessageToClient message)
+    {
+        Log.Debug($"Map2C_PushMessageToClient:{message.Tag}");
+        await FTask.CompletedTask;
+    }
+}
 
 public class Roaming : MonoBehaviour
 {
@@ -14,6 +24,7 @@ public class Roaming : MonoBehaviour
     public Button SendRoamingMessage;
     public Button RoamingTransferMessage;
     public Button SendInnerRoamingMessage;
+    public Button PushRoamingMessageToClient;
 
     private Scene _scene;
     private Session _session;
@@ -53,6 +64,8 @@ public class Roaming : MonoBehaviour
         RoamingTransferMessage.onClick.AddListener(() => OnRoamingTransferMessageClick().Coroutine());
         SendInnerRoamingMessage.onClick.RemoveAllListeners();
         SendInnerRoamingMessage.onClick.AddListener(OnSendInnerRoamingMessageClick);
+        PushRoamingMessageToClient.onClick.RemoveAllListeners();
+        PushRoamingMessageToClient.onClick.AddListener(OnPushRoamingMessageToClientClick);
         
         // 初始化框架
         await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
@@ -121,6 +134,14 @@ public class Roaming : MonoBehaviour
         _session.Send(new C2Chat_TestSendMapMessage()
         {
             Tag = "Hi SendInnerRoamingMessage"
+        });
+    }
+
+    private void OnPushRoamingMessageToClientClick()
+    {
+        _session.Send(new C2Map_PushMessageToClient()
+        {
+            Tag = "Push Message"
         });
     }
     
