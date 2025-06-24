@@ -51,6 +51,10 @@ public sealed class Terminus : Entity
     [BsonIgnore]
     internal CoroutineLock RoamingMessageLock;
     /// <summary>
+    /// 获得转发的SessionRouteId，可以通过这个Id来发送消息来自动转发到客户端。
+    /// </summary>
+    public long SessionRouteId => ForwardSessionRouteId;
+    /// <summary>
     /// 存放其他漫游终端的Id。
     /// 通过这个Id可以发送消息给它。
     /// </summary>
@@ -59,10 +63,11 @@ public sealed class Terminus : Entity
     /// <summary>
     /// 创建关联的终端实体。
     /// 创建完成后，接收消息都是由关联的终端实体来处理。
+    /// 注意，当你销毁这个实体的时候，并不能直接销毁Terminus，会导致无法接收到漫游消息。
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public T CreateTerminusEntity<T>() where T : Entity, new()
+    public T LinkTerminusEntity<T>() where T : Entity, new()
     {
         if (TerminusEntity != null)
         {
@@ -74,6 +79,29 @@ public sealed class Terminus : Entity
         TerminusEntity = t;
         TerminusId = TerminusEntity.RuntimeId;
         return t;
+    }
+
+    /// <summary>
+    /// 关联的终端实体。
+    /// 注意，当你销毁这个实体的时候，并不能直接销毁Terminus，会导致无法接收到漫游消息
+    /// </summary>
+    /// <param name="entity"></param>
+    public void LinkTerminusEntity(Entity entity)
+    {
+        if (entity == null)
+        {
+            Log.Error("Entity cannot be empty");
+            return;
+        }
+        
+        if (TerminusEntity != null)
+        {
+            Log.Error($"TerminusEntity:{TerminusEntity.Type.FullName} Already exists!");
+            return;
+        }
+        
+        TerminusEntity = entity;
+        TerminusId = TerminusEntity.RuntimeId;
     }
 
     #region Transfer
@@ -201,6 +229,14 @@ public sealed class Terminus : Entity
         return response.TerminusId;
     }
 
+    /// <summary>
+    /// 发送一个消息给客户端
+    /// </summary>
+    /// <param name="message"></param>
+    public void Send(IRouteMessage message)
+    {
+        Scene.NetworkMessagingComponent.SendInnerRoute(ForwardSessionRouteId, message);
+    }
     /// <summary>
     /// 发送一个漫游消息
     /// </summary>

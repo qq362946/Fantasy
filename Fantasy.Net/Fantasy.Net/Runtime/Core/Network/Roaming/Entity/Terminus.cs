@@ -63,10 +63,11 @@ public sealed class Terminus : Entity
     /// <summary>
     /// 创建关联的终端实体。
     /// 创建完成后，接收消息都是由关联的终端实体来处理。
+    /// 注意，当你销毁这个实体的时候，并不能直接销毁Terminus，会导致无法接收到漫游消息。
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public T CreateTerminusEntity<T>() where T : Entity, new()
+    public T LinkTerminusEntity<T>() where T : Entity, new()
     {
         if (TerminusEntity != null)
         {
@@ -78,6 +79,29 @@ public sealed class Terminus : Entity
         TerminusEntity = t;
         TerminusId = TerminusEntity.RuntimeId;
         return t;
+    }
+
+    /// <summary>
+    /// 关联的终端实体。
+    /// 注意，当你销毁这个实体的时候，并不能直接销毁Terminus，会导致无法接收到漫游消息
+    /// </summary>
+    /// <param name="entity"></param>
+    public void LinkTerminusEntity(Entity entity)
+    {
+        if (entity == null)
+        {
+            Log.Error("Entity cannot be empty");
+            return;
+        }
+        
+        if (TerminusEntity != null)
+        {
+            Log.Error($"TerminusEntity:{TerminusEntity.Type.FullName} Already exists!");
+            return;
+        }
+        
+        TerminusEntity = entity;
+        TerminusId = TerminusEntity.RuntimeId;
     }
 
     #region Transfer
