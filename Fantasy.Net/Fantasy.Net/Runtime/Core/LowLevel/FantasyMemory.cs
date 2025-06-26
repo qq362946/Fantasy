@@ -28,7 +28,18 @@ namespace Fantasy.LowLevel
             }
             catch
             {
-                Log.Info("mimalloc 用不了, 继续使用系统默认分配.");
+                Log.Info("mimalloc的二进制文件丢失");
+                return;
+            }
+
+            try
+            {
+                var ptr = MiMalloc.mi_malloc(MiMalloc.MI_SMALL_SIZE_MAX);
+                MiMalloc.mi_free(ptr);
+            }
+            catch
+            {
+                Log.Info("mimalloc权限不足,\r\n可能的问题:\r\n1. 禁止了虚拟内存分配 -> 允许虚拟内存分配;\r\n2. 没有硬盘读写权限 -> 管理员获取所有权限");
                 return;
             }
 
