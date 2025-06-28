@@ -87,7 +87,7 @@ namespace Fantasy.Network.Interface
     /// <summary>
     /// 漫游协议的普通路由请求接口，继承自自定义Route协议的普通路由消息接口。
     /// </summary>
-    public interface IRoamingRequest : IRouteRequest, ICustomRoute { }
+    public interface IRoamingRequest : IRoamingMessage { }
     /// <summary>
     /// 漫游协议的普通路由响应接口，继承自普通路由响应接口。
     /// </summary>

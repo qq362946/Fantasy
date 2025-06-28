@@ -6,14 +6,8 @@ namespace Fantasy;
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
-    [HttpGet("{id}")]
-    public IActionResult GetProductById(int id)
-    {
-        return Ok($"Product ID: {id}");
-    }
-
     [HttpPost]
-    public IActionResult CreateProduct([FromBody] Product product)
+    public IActionResult MiniGame ([FromBody] Product product)
     {
         // 假设已经保存产品数据
         return Ok("Product created successfully");
