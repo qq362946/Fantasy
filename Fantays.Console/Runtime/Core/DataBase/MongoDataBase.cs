@@ -30,7 +30,10 @@ namespace Fantasy.DataBase
         /// 获得当前数据的类型
         /// </summary>
         public DataBaseType GetDataBaseType { get; } = DataBaseType.MongoDB;
-        
+        /// <summary>
+        /// 获得对应数据的操作实例
+        /// </summary>
+        public object GetDataBaseInstance => _mongoDatabase;
         /// <summary>
         /// 初始化 MongoDB 数据库连接并记录所有集合名。
         /// </summary>

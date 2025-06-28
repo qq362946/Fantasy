@@ -52,6 +52,11 @@ namespace Fantasy.DataBase
         /// </summary>
         public DataBaseType GetDataBaseType { get;}
         /// <summary>
+        /// 获得对应数据的操作实例
+        /// </summary>
+        /// <returns>如MongoDB就是IMongoDatabase</returns>
+        public object GetDataBaseInstance { get;}
+        /// <summary>
         /// 初始化数据库连接。
         /// </summary>
         IDataBase Initialize(Scene scene, string connectionString, string dbName);
