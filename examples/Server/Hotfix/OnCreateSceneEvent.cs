@@ -72,6 +72,26 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
+                // var tasks = new List<FTask>(2000);
+                // var session = scene.GetSession(_addressableSceneRunTimeId);
+                // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
+                // var g2ATestRequest = new G2A_TestRequest();
+                //
+                // async FTask Call()
+                // {
+                //     await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,g2ATestRequest);
+                // }
+                //
+                // for (int i = 0; i < 100000000000; i++)
+                // {
+                //     tasks.Clear();
+                //     for (int j = 0; j < tasks.Capacity; ++j)
+                //     {
+                //         tasks.Add(Call());
+                //     }
+                //     await FTask.WaitAll(tasks);
+                // }
+                
                 // 执行自定义系统
                 var testCustomSystemComponent = scene.AddComponent<TestCustomSystemComponent>();
                 scene.EntityComponent.CustomSystem(testCustomSystemComponent, CustomSystemType.RunSystem);

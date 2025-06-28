@@ -8,7 +8,7 @@ public static class CustomSystemType
 {
     public const int RunSystem = 1;
 }
-//  这个是一个自定义系统，用于处理自定义事件。
+// 这个是一个自定义系统，用于处理自定义事件。
 public abstract class RunSystem<T> : CustomSystem<T> where T : Entity
 {
     /// <summary>
