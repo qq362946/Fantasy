@@ -1,5 +1,6 @@
 using Fantasy.Async;
 using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
 using Fantasy.InnerMessage;
 using Fantasy.Network;
 using Fantasy.Serialize;
@@ -65,8 +66,15 @@ namespace Fantasy.Network.Interface
 
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
-                return;
+                if (entity is ISupportedRedirectMessage sm2tEntity && sm2tEntity.RedirectEntity != null && sm2tEntity.RedirectEntity is TEntity targetEntity)
+                {
+                    tEntity = targetEntity;
+                }
+                else
+                {
+                    Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                    return;
+                }
             }
 
             try
@@ -125,13 +133,19 @@ namespace Fantasy.Network.Interface
                 Log.Error($"Message type conversion error: {routeMessage.GetType().FullName} to {typeof(TRouteRequest).Name}");
                 return;
             }
-
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
-                return;
+                if (entity is ISupportedRedirectMessage sm2tEntity && sm2tEntity.RedirectEntity != null && sm2tEntity.RedirectEntity is TEntity targetEntity)
+                {
+                    tEntity = targetEntity;
+                }
+                else
+                {
+                    Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                    return;
+                }
             }
-            
+
             var isReply = false;
             var response = new TRouteResponse();
             
@@ -216,8 +230,15 @@ namespace Fantasy.Network.Interface
 
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
-                return;
+                if (entity is ISupportedRedirectMessage sm2tEntity && sm2tEntity.RedirectEntity != null && sm2tEntity.RedirectEntity is TEntity targetEntity)
+                {
+                    tEntity = targetEntity;
+                }
+                else
+                {
+                    Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                    return;
+                }
             }
 
             try
@@ -281,10 +302,17 @@ namespace Fantasy.Network.Interface
 
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
-                return;
+                if (entity is ISupportedRedirectMessage sm2tEntity && sm2tEntity.RedirectEntity != null && sm2tEntity.RedirectEntity is TEntity targetEntity)
+                {
+                    tEntity = targetEntity;
+                }
+                else
+                {
+                    Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                    return;
+                }
             }
-            
+
             var isReply = false;
             var response = new TRouteResponse();
             
@@ -368,8 +396,15 @@ namespace Fantasy.Network.Interface
 
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
-                return;
+                if (entity is ISupportedRedirectMessage sm2tEntity && sm2tEntity.RedirectEntity != null && sm2tEntity.RedirectEntity is TEntity targetEntity)
+                {
+                    tEntity = targetEntity;
+                }
+                else
+                {
+                    Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                    return;
+                }
             }
 
             try
@@ -433,8 +468,15 @@ namespace Fantasy.Network.Interface
 
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
-                return;
+                if(entity is ISupportedRedirectMessage sm2tEntity&&sm2tEntity.RedirectEntity!=null&&sm2tEntity.RedirectEntity is TEntity targetEntity)
+                {
+                    tEntity = targetEntity;
+                }
+                else
+                {
+                    Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                    return;
+                }
             }
             
             var isReply = false;
