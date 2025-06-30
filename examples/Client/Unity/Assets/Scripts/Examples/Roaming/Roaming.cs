@@ -25,6 +25,8 @@ public class Roaming : MonoBehaviour
     public Button RoamingTransferMessage;
     public Button SendInnerRoamingMessage;
     public Button PushRoamingMessageToClient;
+    public Button GateSendRouteToRoaming;
+    public Button GateSendRoamingToRoaming;
 
     private Scene _scene;
     private Session _session;
@@ -49,6 +51,8 @@ public class Roaming : MonoBehaviour
         SendRoamingMessage.interactable = false;
         RoamingTransferMessage.interactable = false;
         SendInnerRoamingMessage.interactable = false;
+        GateSendRouteToRoaming.interactable = false;
+        GateSendRoamingToRoaming.interactable = false;
         
         Connect.onClick.RemoveAllListeners();
         Connect.onClick.AddListener(() =>
@@ -66,6 +70,10 @@ public class Roaming : MonoBehaviour
         SendInnerRoamingMessage.onClick.AddListener(OnSendInnerRoamingMessageClick);
         PushRoamingMessageToClient.onClick.RemoveAllListeners();
         PushRoamingMessageToClient.onClick.AddListener(OnPushRoamingMessageToClientClick);
+        GateSendRouteToRoaming.onClick.RemoveAllListeners();
+        GateSendRouteToRoaming.onClick.AddListener(OnGateSendRouteToRoamingClick);
+        GateSendRoamingToRoaming.onClick.RemoveAllListeners();
+        GateSendRoamingToRoaming.onClick.AddListener(OnGateSendRoamingToRoamingClick);
         
         // 初始化框架
         await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
@@ -144,6 +152,22 @@ public class Roaming : MonoBehaviour
             Tag = "Push Message"
         });
     }
+
+    private void OnGateSendRouteToRoamingClick()
+    {
+        _session.Send(new C2G_TestRouteToRoaming()
+        {
+            Tag = "Hi Roaming"
+        });
+    }
+    
+    private void OnGateSendRoamingToRoamingClick()
+    {
+        _session.Send(new C2G_TestRoamingToRoaming()
+        {
+            Tag = "Hi Roaming"
+        });
+    }
     
     private void OnConnectComplete()
     {
@@ -152,6 +176,8 @@ public class Roaming : MonoBehaviour
         SendRoamingMessage.interactable = true;
         RoamingTransferMessage.interactable = true;
         SendInnerRoamingMessage.interactable = true;
+        GateSendRouteToRoaming.interactable = true;
+        GateSendRoamingToRoaming.interactable = true;
     }
 
     private void OnConnectFail()
@@ -161,6 +187,8 @@ public class Roaming : MonoBehaviour
         SendRoamingMessage.interactable = false;
         RoamingTransferMessage.interactable = false;
         SendInnerRoamingMessage.interactable = false;
+        GateSendRouteToRoaming.interactable = false;
+        GateSendRoamingToRoaming.interactable = false;
     }
 
     private void OnConnectDisconnect()
@@ -170,5 +198,7 @@ public class Roaming : MonoBehaviour
         SendRoamingMessage.interactable = false;
         RoamingTransferMessage.interactable = false;
         SendInnerRoamingMessage.interactable = false;
+        GateSendRouteToRoaming.interactable = false;
+        GateSendRoamingToRoaming.interactable = false;
     }
 }

@@ -180,3 +180,13 @@ message C2Chat_TestSendMapMessage // IRoamingMessage,ChatRoamingType
 {
 	string Tag = 1;
 }
+/// 通知Gate服务器发送一个Route消息给Map的漫游终端
+message C2G_TestRouteToRoaming // IMessage
+{
+	string Tag = 1;
+}
+/// 通知Gate服务器发送一个漫游消息给Map的漫游终端
+message C2G_TestRoamingToRoaming // IMessage
+{
+	string Tag = 1;
+}

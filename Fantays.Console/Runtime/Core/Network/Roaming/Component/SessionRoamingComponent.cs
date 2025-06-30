@@ -184,7 +184,118 @@ public sealed class SessionRoamingComponent : Entity
 
     #endregion
 
-    #region Message
+    #region OuterMessage
+
+    /// <summary>
+    /// 发送一个消息给漫游终
+    /// </summary>
+    /// <param name="message"></param>
+    public void Send(IRoamingMessage message)
+    {
+        Call(message.RouteType, message).Coroutine();
+    }
+
+    /// <summary>
+    /// 发送一个消息给漫游终端
+    /// </summary>
+    /// <param name="roamingType"></param>
+    /// <param name="message"></param>
+    public void Send(int roamingType, IRouteMessage message)
+    {
+        Call(roamingType, message).Coroutine();
+    }
+
+    /// <summary>
+    /// 发送一个RPC消息给漫游终端
+    /// </summary>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    public async FTask<IResponse> Call(IRoamingMessage message)
+    {
+        return await Call(message.RouteType, message);
+    }
+    
+    /// <summary>
+    /// 发送一个RPC消息给漫游终端
+    /// </summary>
+    /// <param name="roamingType"></param>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    public async FTask<IResponse> Call(int roamingType, IRouteMessage message)
+    {
+        if (!_roaming.TryGetValue(roamingType, out var roaming))
+        {
+            return MessageDispatcherComponent.CreateResponse(message.GetType(), InnerErrorCode.ErrNotFoundRoaming);
+        }
+
+        var failCount = 0;
+        var runtimeId = RuntimeId;
+        var routeId = roaming.TerminusId;
+        var requestType = message.GetType();
+        
+        IResponse iRouteResponse = null;
+
+        using (await RoamingMessageLock.Wait(roaming.RoamingType, "RoamingComponent Call MemoryStream"))
+        {
+            while (!IsDisposed)
+            {
+                if (routeId == 0)
+                {
+                    routeId = await roaming.GetTerminusId();
+                }
+
+                if (routeId == 0)
+                {
+                    return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoaming);
+                }
+
+                iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(routeId, message);
+
+                if (runtimeId != RuntimeId)
+                {
+                    iRouteResponse.ErrorCode = InnerErrorCode.ErrRoamingTimeout;
+                }
+
+                switch (iRouteResponse.ErrorCode)
+                {
+                    case InnerErrorCode.ErrRouteTimeout:
+                    case InnerErrorCode.ErrRoamingTimeout:
+                    {
+                        return iRouteResponse;
+                    }
+                    case InnerErrorCode.ErrNotFoundRoute:
+                    case InnerErrorCode.ErrNotFoundRoaming:
+                    {
+                        if (++failCount > 20)
+                        {
+                            Log.Error($"RoamingComponent.Call failCount > 20 route send message fail, LinkRoamingId: {routeId}");
+                            return iRouteResponse;
+                        }
+
+                        await TimerComponent.Net.WaitAsync(100);
+
+                        if (runtimeId != RuntimeId)
+                        {
+                            iRouteResponse.ErrorCode = InnerErrorCode.ErrNotFoundRoaming;
+                        }
+
+                        routeId = 0;
+                        continue;
+                    }
+                    default:
+                    {
+                        return iRouteResponse; // 对于其他情况，直接返回响应，无需额外处理
+                    }
+                }
+            }
+        }
+        
+        return iRouteResponse;
+    }
+
+    #endregion
+
+    #region InnerMessage
 
     internal async FTask Send(int roamingType, Type requestType, APackInfo packInfo)
     {

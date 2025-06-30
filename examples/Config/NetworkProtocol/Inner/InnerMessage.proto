@@ -73,3 +73,21 @@ message Chat2M_TestMessage // IRoamingMessage,MapRoamingType
 {
 	string Tag = 1;
 }
+/// 测试一个Gate服务器发送一个Route消息给某个漫游终端
+message G2Map_TestRouteMessageRequest // IRouteRequest,Map2G_TestRouteMessageResponse
+{
+	string Tag = 1;
+}
+message Map2G_TestRouteMessageResponse // IRouteResponse
+{
+
+}
+/// 测试一个Gate服务器发送一个漫游协议给某个漫游终端
+message G2Map_TestRoamingMessageRequest // IRoamingRequest,Map2G_TestRoamingMessageResponse,MapRoamingType
+{
+	string Tag = 1;
+}
+message Map2G_TestRoamingMessageResponse // IRoamingResponse
+{
+	
+}

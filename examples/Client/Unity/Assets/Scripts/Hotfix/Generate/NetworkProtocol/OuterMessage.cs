@@ -775,4 +775,46 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
+	/// <summary>
+	///  通知Gate服务器发送一个Route消息给Map的漫游终端
+	/// </summary>
+	[ProtoContract]
+	public partial class C2G_TestRouteToRoaming : AMessage, IMessage, IProto
+	{
+		public static C2G_TestRouteToRoaming Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2G_TestRouteToRoaming>();
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2G_TestRouteToRoaming>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2G_TestRouteToRoaming; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
+	/// <summary>
+	///  通知Gate服务器发送一个漫游消息给Map的漫游终端
+	/// </summary>
+	[ProtoContract]
+	public partial class C2G_TestRoamingToRoaming : AMessage, IMessage, IProto
+	{
+		public static C2G_TestRoamingToRoaming Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2G_TestRoamingToRoaming>();
+		}
+		public override void Dispose()
+		{
+			Tag = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2G_TestRoamingToRoaming>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2G_TestRoamingToRoaming; }
+		[ProtoMember(1)]
+		public string Tag { get; set; }
+	}
 }
