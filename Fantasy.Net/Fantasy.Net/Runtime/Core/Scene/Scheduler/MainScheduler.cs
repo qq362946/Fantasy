@@ -79,5 +79,27 @@ namespace Fantasy
                 _queue.Enqueue(scene);
             }
         }
+#if FANTASY_UNITY
+        public void LateUpdate()
+        {
+            var initialCount = _queue.Count;
+            
+            while (initialCount-- > 0)
+            {
+                if(!_queue.TryDequeue(out var scene))
+                {
+                    continue;
+                }
+            
+                if (scene.IsDisposed)
+                {
+                    continue;
+                }
+                
+                scene.LateUpdate();
+                _queue.Enqueue(scene);
+            }
+        }
+#endif
     }
 }

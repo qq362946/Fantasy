@@ -30,6 +30,13 @@ namespace Fantasy
             MainScheduler.Update();
         }
 
+#if FANTASY_UNITY
+        internal static void LateUpdate()
+        {
+            MainScheduler.LateUpdate();
+        }
+#endif
+
         internal static void AddMainScheduler(Scene scene)
         {
             MainScheduler.Add(scene);

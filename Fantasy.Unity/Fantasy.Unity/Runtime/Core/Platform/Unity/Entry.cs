@@ -1,4 +1,5 @@
 #if FANTASY_UNITY
+using System;
 using System.Linq;
 using Fantasy.Assembly;
 using Fantasy.Async;
@@ -84,6 +85,11 @@ namespace Fantasy.Platform.Unity
         private void Update()
         {
             ThreadScheduler.Update();
+        }
+
+        private void LateUpdate()
+        {
+            ThreadScheduler.LateUpdate();
         }
 
         private void OnDestroy()

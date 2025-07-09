@@ -1,5 +1,7 @@
 using Fantasy;
 using Fantasy.Async;
+using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
 using Fantasy.InnerMessage;
 using Fantasy.Network;
 using Fantasy.Unity;
@@ -40,7 +42,6 @@ public class NormalMessage : MonoBehaviour
         // 创建一个Scene，这个Scene代表一个客户端的场景，客户端的所有逻辑都可以写这里
         // 如果有自己的框架，也可以就单纯拿这个Scene做网络通讯也没问题。
         _scene = await Scene.Create(SceneRuntimeMode.MainThread);
-        
         ConnectButton.onClick.RemoveAllListeners();
         ConnectButton.onClick.AddListener(OnConnectButtonClick);
         

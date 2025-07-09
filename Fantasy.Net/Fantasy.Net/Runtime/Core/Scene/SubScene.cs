@@ -22,24 +22,27 @@ namespace Fantasy
         /// 存储当前Scene下管理的实体。
         /// </summary>
         private readonly Dictionary<long, Entity> _entities = new Dictionary<long, Entity>();
-        
-        internal void Initialize(Scene rootScene) 
+
+        internal void Initialize(Scene rootScene)
         {
             EntityPool = rootScene.EntityPool;
             EntityListPool = rootScene.EntityListPool;
             EntitySortedDictionaryPool = rootScene.EntitySortedDictionaryPool;
             SceneUpdate = rootScene.SceneUpdate;
+#if FANTASY_UNITY
+            SceneLateUpdate = rootScene.SceneLateUpdate;
+#endif
             TimerComponent = rootScene.TimerComponent;
             EventComponent = rootScene.EventComponent;
             EntityComponent = rootScene.EntityComponent;
             MessagePoolComponent = rootScene.MessagePoolComponent;
             CoroutineLockComponent = rootScene.CoroutineLockComponent;
             MessageDispatcherComponent = rootScene.MessageDispatcherComponent;
-    #if FANTASY_NET
+#if FANTASY_NET
             NetworkMessagingComponent = rootScene.NetworkMessagingComponent;
             SingleCollectionComponent = rootScene.SingleCollectionComponent;
             TerminusComponent = rootScene.TerminusComponent;
-    #endif
+#endif
             ThreadSynchronizationContext = rootScene.ThreadSynchronizationContext;
         }
 

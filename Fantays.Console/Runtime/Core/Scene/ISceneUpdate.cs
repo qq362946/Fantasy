@@ -9,7 +9,23 @@ namespace Fantasy
     {
         public void Update()
         {
+
+        }
+    }
+
+#if FANTASY_UNITY
+    internal interface ISceneLateUpdate
+    {
+        void LateUpdate();
+    }
+
+    internal sealed class EmptySceneLateUpdate : ISceneLateUpdate
+    {
+        public void LateUpdate()
+        {
         
         }
     }
+#endif
+
 }
