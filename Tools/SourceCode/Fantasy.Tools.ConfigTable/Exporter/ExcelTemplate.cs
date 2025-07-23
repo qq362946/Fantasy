@@ -22,6 +22,7 @@ public static class ExcelTemplate
                                              
                                              namespace (namespace)
                                              {
+                                                 [Serializable]
                                                  [ProtoContract]
                                                  public sealed partial class (ConfigName)Data : ASerialize, IConfigTable, IProto
                                                  {
