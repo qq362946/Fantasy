@@ -2,10 +2,11 @@ namespace Fantasy.Tools.ProtocalExporter;
 
 public static class NetworkProtocolTemplate
 {
-    public static readonly string Template ="""
+    public static readonly string Template = """
                                             #if SERVER
                                             using ProtoBuf;
                                             (UsingNamespace)
+                                            using System;
                                             using System.Collections.Generic;
                                             using MongoDB.Bson.Serialization.Attributes;
                                             using Fantasy;

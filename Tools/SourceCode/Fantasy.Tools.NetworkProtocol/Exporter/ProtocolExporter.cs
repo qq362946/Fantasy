@@ -225,6 +225,12 @@ public sealed class ProtocolExporter
                     continue;
                 }
 
+
+                if (currentLine.StartsWith("// [Serializable]"))
+                {
+                    messageStr.AppendLine("\t[Serializable]");
+                }
+
                 if (currentLine.StartsWith("// Protocol"))
                 {
                     isSetProtocol = true;

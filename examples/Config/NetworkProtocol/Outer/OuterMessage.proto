@@ -7,6 +7,10 @@ package Fantasy.Network.Message;
 // 使用方式:
 // 在message协议上方添加// Protocol+空格+协议名字
 // 例如:// Protocol ProtoBuf 或 // Protocol MemoryPack
+
+// 协议生成的C#类添加标签可添加Serializable标签,
+// 只需在协议上方添加 : // [Serializable]
+
 message C2G_TestMessage // IMessage
 {
 	string Tag = 1;
