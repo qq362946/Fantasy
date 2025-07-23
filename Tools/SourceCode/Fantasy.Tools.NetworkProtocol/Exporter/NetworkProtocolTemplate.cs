@@ -27,6 +27,7 @@ public static class NetworkProtocolTemplate
                                             #else
                                             using ProtoBuf;
                                             (UsingNamespace)
+                                            using System;
                                             using System.Collections.Generic;
                                             using Fantasy;
                                             using Fantasy.Network.Interface;
