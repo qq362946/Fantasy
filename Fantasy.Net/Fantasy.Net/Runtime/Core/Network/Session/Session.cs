@@ -152,7 +152,9 @@ namespace Fantasy.Network
             {
                 return;
             }
-            
+
+            Log.Debug($"Session调用了Dispose - (Id:{Id} RuntimeId:{RuntimeId} )");
+
             _rpcId = 0;
             LastReceiveTime = 0;
             Channel = null;
