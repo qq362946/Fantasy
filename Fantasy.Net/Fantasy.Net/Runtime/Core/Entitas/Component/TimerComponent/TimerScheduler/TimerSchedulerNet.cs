@@ -142,6 +142,18 @@ namespace Fantasy.Timer
         }
 
         /// <summary>
+        /// 获取TimerAction
+        /// </summary>
+        /// <param name="timerId">timerId</param>
+        /// <returns></returns>
+        public TimerAction? GetTimer(long timerId)
+        {
+            if (_timerActions.TryGetValue(timerId, out TimerAction timerAction))
+                return _timerActions[timerId];
+            return null;
+        }
+
+        /// <summary>
         /// 异步等待指定时间。
         /// </summary>
         /// <param name="time">等待的时间长度。</param>

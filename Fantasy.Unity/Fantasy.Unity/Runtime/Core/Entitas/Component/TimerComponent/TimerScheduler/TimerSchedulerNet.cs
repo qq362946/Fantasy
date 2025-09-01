@@ -31,7 +31,7 @@ namespace Fantasy.Timer
         {
             _scene = scene;
         }
-        
+
         private long Now()
         {
             return TimeHelper.Now;
@@ -139,6 +139,13 @@ namespace Fantasy.Timer
             {
                 _minTime = tillTime;
             }
+        }
+
+        public TimerAction? GetTimer(long timerId)
+        {
+            if(_timerActions.TryGetValue(timerId,out TimerAction timerAction))
+                return _timerActions[timerId];
+            return null;
         }
 
         /// <summary>
