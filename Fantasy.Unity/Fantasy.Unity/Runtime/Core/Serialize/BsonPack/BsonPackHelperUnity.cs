@@ -36,6 +36,16 @@ namespace Fantasy.Serialize
             throw new NotImplementedException();
         }
 
+        public byte[] Serialize(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] Serialize<T>(T @object)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Serialize<T>(T @object, IBufferWriter<byte> buffer)
         {
             throw new NotImplementedException();

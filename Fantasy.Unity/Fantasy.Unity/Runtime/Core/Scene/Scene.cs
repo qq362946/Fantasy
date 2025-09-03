@@ -593,7 +593,7 @@ namespace Fantasy
         /// <param name="runTimeId"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public virtual Session GetSession(long runTimeId)
+        internal virtual Session GetSession(long runTimeId)
         {
             var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref runTimeId);
 

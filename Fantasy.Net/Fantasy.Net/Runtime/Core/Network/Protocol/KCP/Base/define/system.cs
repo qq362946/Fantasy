@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 
 namespace kcp
 {
-    public static unsafe partial class KCP
+    internal static unsafe partial class KCP
     {
-        public static void* malloc(nuint size)
+        private static void* malloc(nuint size)
         {
 #if NET6_0_OR_GREATER
             return NativeMemory.Alloc((nuint)size);
@@ -20,7 +20,7 @@ namespace kcp
 #endif
         }
 
-        public static void free(void* memory)
+        private static void free(void* memory)
         {
 #if NET6_0_OR_GREATER
             NativeMemory.Free(memory);
@@ -29,13 +29,13 @@ namespace kcp
 #endif
         }
 
-        public static void memcpy(void* dst, void* src, nuint size) => Unsafe.CopyBlockUnaligned(dst, src, (uint)size);
+        private static void memcpy(void* dst, void* src, nuint size) => Unsafe.CopyBlockUnaligned(dst, src, (uint)size);
 
-        public static void memset(void* dst, byte val, nuint size) => Unsafe.InitBlockUnaligned(dst, val, (uint)size);
+        private static void memset(void* dst, byte val, nuint size) => Unsafe.InitBlockUnaligned(dst, val, (uint)size);
 
         [Conditional("DEBUG")]
-        public static void assert(bool condition) => Debug.Assert(condition);
+        private static void assert(bool condition) => Debug.Assert(condition);
 
-        public static void abort() => Environment.Exit(-1);
+        private static void abort() => Environment.Exit(-1);
     }
 }

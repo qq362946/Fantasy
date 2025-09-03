@@ -1,7 +1,7 @@
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy.Network.KCP
-#pragma warning disable CS1591
 {
-    public enum KcpHeader : byte
+    internal enum KcpHeader : byte
     {
         None = 0x00,
         RequestConnection = 0x01,

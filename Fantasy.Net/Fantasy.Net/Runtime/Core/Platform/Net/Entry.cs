@@ -3,8 +3,6 @@ using CommandLine;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Helper;
-using Fantasy.IdFactory;
-using Fantasy.LowLevel;
 using Fantasy.Network;
 using Fantasy.Serialize;
 // ReSharper disable FunctionNeverReturns
@@ -34,6 +32,7 @@ public static class Entry
             });
         // 初始化Log系统
         Log.Initialize();
+        Log.Info($"Fantasy Version:{Define.VERSION}");
         // 检查启动参数,后期可能有机器人等不同的启动参数
         switch (ProcessDefine.Options.ProcessType)
         {
@@ -52,8 +51,6 @@ public static class Entry
         SerializerManager.Initialize();
         // 精度处理（只针对Windows下有作用、其他系统没有这个问题、一般也不会用Windows来做服务器的）
         WinPeriod.Initialize();
-
-        FantasyMemory.Initialize();
     }
 
     /// <summary>

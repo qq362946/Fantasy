@@ -73,20 +73,20 @@ namespace Fantasy.PacketParser
                 return false;
             }
             
-            fixed (byte* bufferPtr = buffer)
-            {
-                MessagePacketLength = *(int*)bufferPtr;
+            var span = buffer.AsSpan();
+            ref var bufferRef = ref MemoryMarshal.GetReference(span);
+            
+            MessagePacketLength = Unsafe.ReadUnaligned<int>(ref bufferRef);
 
-                if (MessagePacketLength > Packet.PacketBodyMaxLength || count < MessagePacketLength)
-                {
-                    // 检查消息体长度是否超出限制
-                    throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
-                }
-                
-                ProtocolCode = *(uint*)(bufferPtr + Packet.PacketLength);
-                RpcId = *(uint*)(bufferPtr + Packet.InnerPacketRpcIdLocation);
-                RouteId = *(long*)(bufferPtr + Packet.InnerPacketRouteRouteIdLocation);
+            if (MessagePacketLength > Packet.PacketBodyMaxLength || count < MessagePacketLength)
+            {
+                // 检查消息体长度是否超出限制
+                throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
             }
+            
+            ProtocolCode = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.PacketLength));
+            RpcId = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation));
+            RouteId = Unsafe.ReadUnaligned<long>(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteRouteIdLocation));
             
             packInfo = InnerPackInfo.Create(Network);
             packInfo.RpcId = RpcId;
@@ -102,19 +102,19 @@ namespace Fantasy.PacketParser
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream)
         {
-            fixed (byte* bufferPtr = memoryStream.GetBuffer())
-            {
-                *(uint*)(bufferPtr + Packet.InnerPacketRpcIdLocation) = rpcId;
-                *(long*)(bufferPtr + Packet.InnerPacketRouteRouteIdLocation) = routeId;
-            }
+            var buffer = memoryStream.GetBuffer();
+            ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
+            
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteRouteIdLocation), routeId);
             
             return memoryStream;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, IMessage message)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, IMessage message)
         {
             var memoryStreamLength = 0;
             var messageType = message.GetType();
@@ -148,13 +148,13 @@ namespace Fantasy.PacketParser
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
 
-            fixed (byte* bufferPtr = memoryStream.GetBuffer())
-            {
-                *(int*)bufferPtr = packetBodyCount;
-                *(uint*)(bufferPtr + Packet.PacketLength) = opCode;
-                *(uint*)(bufferPtr + Packet.InnerPacketRpcIdLocation) = rpcId;
-                *(long*)(bufferPtr + Packet.InnerPacketRouteRouteIdLocation) = routeId;
-            }
+            var buffer = memoryStream.GetBuffer();
+            ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
+            
+            Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteRouteIdLocation), routeId);
             
             return memoryStream;
         }
@@ -173,7 +173,7 @@ namespace Fantasy.PacketParser
         /// <param name="packInfo"></param>
         /// <returns></returns>
         /// <exception cref="ScanException"></exception>
-        public override unsafe bool UnPack(byte[] buffer, ref int count, out APackInfo packInfo)
+        public override bool UnPack(byte[] buffer, ref int count, out APackInfo packInfo)
         {
             packInfo = null;
 
@@ -188,19 +188,19 @@ namespace Fantasy.PacketParser
                 return false;
             }
             
-            fixed (byte* bufferPtr = buffer)
+            var span = buffer.AsSpan();
+            ref var bufferRef = ref MemoryMarshal.GetReference(span);
+            
+            MessagePacketLength = Unsafe.ReadUnaligned<int>(ref bufferRef);
+
+            if (MessagePacketLength > Packet.PacketBodyMaxLength || count < MessagePacketLength)
             {
-                MessagePacketLength =  *(int*)bufferPtr;
-
-                if (MessagePacketLength > Packet.PacketBodyMaxLength || count < MessagePacketLength)
-                {
-                    // 检查消息体长度是否超出限制
-                    throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
-                }
-
-                ProtocolCode = *(uint*)(bufferPtr + Packet.PacketLength);
-                RpcId = *(uint*)(bufferPtr + Packet.OuterPacketRpcIdLocation);
+                // 检查消息体长度是否超出限制
+                throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
             }
+
+            ProtocolCode = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.PacketLength));
+            RpcId = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.OuterPacketRpcIdLocation));
             
             packInfo = OuterPackInfo.Create(Network);
             packInfo.RpcId = RpcId;
@@ -213,20 +213,22 @@ namespace Fantasy.PacketParser
         {
             return memoryStream == null ? Pack(ref rpcId, message) : Pack(ref rpcId, memoryStream);
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, MemoryStreamBuffer memoryStream)
+        private MemoryStreamBuffer Pack(ref uint rpcId, MemoryStreamBuffer memoryStream)
         {
-            fixed (byte* bufferPtr = memoryStream.GetBuffer())
-            {
-                *(uint*)(bufferPtr + Packet.InnerPacketRpcIdLocation) = rpcId;
-            }
-            
+            var buffer = memoryStream.GetBuffer();
+#if FANTASY_UNITY
+            ref var bufferRef = ref MemoryMarshal.GetReference(buffer.AsSpan());
+#else
+            ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
+#endif
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
             return memoryStream;
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, IMessage message)
+        private MemoryStreamBuffer Pack(ref uint rpcId, IMessage message)
         {
             var memoryStreamLength = 0;
             var messageType = message.GetType();
@@ -260,12 +262,15 @@ namespace Fantasy.PacketParser
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
 
-            fixed (byte* bufferPtr = memoryStream.GetBuffer())
-            {
-                *(int*)bufferPtr = packetBodyCount;
-                *(uint*)(bufferPtr + Packet.PacketLength) = opCode;
-                *(uint*)(bufferPtr + Packet.OuterPacketRpcIdLocation) = rpcId;
-            }
+            var buffer = memoryStream.GetBuffer();
+#if FANTASY_UNITY
+            ref var bufferRef = ref MemoryMarshal.GetReference(buffer.AsSpan());
+#else
+            ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
+#endif   
+            Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.OuterPacketRpcIdLocation), rpcId);
             
             return memoryStream;
         }
@@ -298,7 +303,10 @@ namespace Fantasy.PacketParser
                 return false;
             }
             
-            MessagePacketLength = BitConverter.ToInt32(buffer, 0);
+            var span = buffer.AsSpan();
+            ref var bufferRef = ref MemoryMarshal.GetReference(span);
+            
+            MessagePacketLength = Unsafe.ReadUnaligned<int>(ref bufferRef);
             
             if (MessagePacketLength > Packet.PacketBodyMaxLength || count < MessagePacketLength)
             {
@@ -306,8 +314,8 @@ namespace Fantasy.PacketParser
                 throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
             }
             
-            ProtocolCode = BitConverter.ToUInt32(buffer, Packet.PacketLength);
-            RpcId = BitConverter.ToUInt32(buffer, Packet.OuterPacketRpcIdLocation);
+            ProtocolCode = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.PacketLength));
+            RpcId = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.OuterPacketRpcIdLocation));
             
             packInfo = OuterPackInfo.Create(Network);
             packInfo.RpcId = RpcId;
@@ -369,17 +377,15 @@ namespace Fantasy.PacketParser
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
             
-            var buffer = memoryStream.GetBuffer().AsSpan();
-#if FANTASY_NET
-            MemoryMarshal.Write(buffer, in packetBodyCount);
-            MemoryMarshal.Write(buffer.Slice(Packet.PacketLength, sizeof(uint)), in opCode);
-            MemoryMarshal.Write(buffer.Slice(Packet.OuterPacketRpcIdLocation, sizeof(uint)), in rpcId);
-#endif
+            var buffer = memoryStream.GetBuffer();
 #if FANTASY_UNITY
-            MemoryMarshal.Write(buffer, ref packetBodyCount);
-            MemoryMarshal.Write(buffer.Slice(Packet.PacketLength, sizeof(uint)), ref opCode);
-            MemoryMarshal.Write(buffer.Slice(Packet.OuterPacketRpcIdLocation, sizeof(uint)), ref rpcId);
-#endif
+            ref var bufferRef = ref MemoryMarshal.GetReference(buffer.AsSpan());
+#else
+            ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
+#endif 
+            Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.OuterPacketRpcIdLocation), rpcId);
             return memoryStream;
         }
     }

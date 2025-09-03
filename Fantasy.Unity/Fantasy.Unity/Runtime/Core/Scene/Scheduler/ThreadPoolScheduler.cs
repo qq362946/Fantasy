@@ -11,7 +11,7 @@ namespace Fantasy
     {
         private bool _isDisposed;
         private readonly List<Thread> _threads;
-        private readonly ConcurrentBag<Scene> _queue = new ConcurrentBag<Scene>();
+        private readonly ConcurrentQueue<Scene> _queue = new ConcurrentQueue<Scene>();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         
         public ThreadPoolScheduler()
@@ -63,7 +63,7 @@ namespace Fantasy
                 return;
             }
             
-            _queue.Add(scene);
+            _queue.Enqueue(scene);
         }
 
         public void Remove(Scene scene)
@@ -75,20 +75,18 @@ namespace Fantasy
             
             var newQueue = new Queue<Scene>();
 
-            while (!_queue.IsEmpty)
+            while (_queue.TryDequeue(out var currentScene))
             {
-                if (_queue.TryTake(out var currentScene))
+                if (currentScene == scene)
                 {
-                    if (currentScene != scene)
-                    {
-                        newQueue.Enqueue(currentScene);
-                    }
+                    continue;
                 }
+                newQueue.Enqueue(currentScene);
             }
             
             while (newQueue.TryDequeue(out var newScene))
             {
-                _queue.Add(newScene);
+                _queue.Enqueue(newScene);
             }
         }
 
@@ -101,7 +99,7 @@ namespace Fantasy
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                if (_queue.TryTake(out var scene))
+                if (_queue.TryDequeue(out var scene))
                 {
                     if (scene == null || scene.IsDisposed)
                     {
@@ -124,9 +122,9 @@ namespace Fantasy
                     {
                         SynchronizationContext.SetSynchronizationContext(null);
                     }
-                    
-                    _queue.Add(scene);
+                    // 先停止线程后再如队列，避免同一个Scene多次重复执行
                     Thread.Sleep(1);
+                    _queue.Enqueue(scene);
                 }
                 else
                 {

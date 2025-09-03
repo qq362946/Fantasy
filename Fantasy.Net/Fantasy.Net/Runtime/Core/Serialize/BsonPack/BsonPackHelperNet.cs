@@ -272,7 +272,7 @@ namespace Fantasy.Serialize
         /// </summary>
         /// <param name="object"></param>
         /// <returns></returns>
-        public static byte[] Serialize(object @object)
+        public byte[] Serialize(object @object)
         {
             if (@object is ASerialize aSerialize)
             {
@@ -287,7 +287,7 @@ namespace Fantasy.Serialize
         /// <param name="object"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static byte[] Serialize<T>(T @object)
+        public byte[] Serialize<T>(T @object)
         {
             if (@object is ASerialize aSerialize)
             {

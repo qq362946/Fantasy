@@ -91,7 +91,6 @@ namespace Fantasy.Helper
         {
             return endPoint.Address.Equals(ipEndPoint.Address) && endPoint.Port == ipEndPoint.Port;
         }
-
 #if !FANTASY_WEBGL
         /// <summary>
         /// 将SocketAddress写入到Byte[]中
@@ -100,7 +99,7 @@ namespace Fantasy.Helper
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe void SocketAddressToByte(this SocketAddress socketAddress, byte[] buffer, int offset)
+        public static void SocketAddressToByte(this SocketAddress socketAddress, byte[] buffer, int offset)
         {
             if (socketAddress == null)
             {
@@ -117,17 +116,16 @@ namespace Fantasy.Helper
                 throw new ArgumentException("The buffer length is insufficient. It must be at least the size of the SocketAddress plus 8 bytes.", nameof(buffer));
             }
             
-            fixed (byte* pBuffer = buffer)
+            var span = buffer.AsSpan(offset);
+            var addressFamilyValue = (int)socketAddress.Family;
+            var socketAddressSizeValue = socketAddress.Size;
+            
+            Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(span), addressFamilyValue);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref MemoryMarshal.GetReference(span), 4), socketAddressSizeValue);
+            
+            for (var i = 0; i < socketAddress.Size - 2; i++)
             {
-                var pOffsetBuffer = pBuffer + offset;
-                var addressFamilyValue = (int)socketAddress.Family;
-                var socketAddressSizeValue = socketAddress.Size;
-                Buffer.MemoryCopy(&addressFamilyValue, pOffsetBuffer, buffer.Length - offset, sizeof(int));
-                Buffer.MemoryCopy(&socketAddressSizeValue, pOffsetBuffer + 4, buffer.Length - offset -4, sizeof(int));
-                for (var i = 0; i < socketAddress.Size - 2; i++)
-                {
-                    pOffsetBuffer[8 + i] = socketAddress[i + 2];
-                }
+                Unsafe.Add(ref MemoryMarshal.GetReference(span), 8 + i) = socketAddress[i + 2];
             }
         }
 
@@ -141,7 +139,7 @@ namespace Fantasy.Helper
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe int ByteToSocketAddress(byte[] buffer, int offset, out SocketAddress socketAddress)
+        public static int ByteToSocketAddress(byte[] buffer, int offset, out SocketAddress socketAddress)
         {
             if (buffer == null)
             {
@@ -155,26 +153,25 @@ namespace Fantasy.Helper
             
             try
             {
-                fixed (byte* pBuffer = buffer)
+                var span = buffer.AsSpan(offset);
+                ref var spanRef = ref MemoryMarshal.GetReference(span);
+                
+                var addressFamily = (AddressFamily)Unsafe.ReadUnaligned<int>(ref spanRef);
+                var socketAddressSize = Unsafe.ReadUnaligned<int>(ref Unsafe.Add(ref spanRef, 4));
+
+                if (buffer.Length < offset + 8 + socketAddressSize)
                 {
-                    var pOffsetBuffer = pBuffer + offset;
-                    var addressFamily = (AddressFamily)Marshal.ReadInt32((IntPtr)pOffsetBuffer);
-                    var socketAddressSize = Marshal.ReadInt32((IntPtr)(pOffsetBuffer + 4));
-
-                    if (buffer.Length < offset + 8 + socketAddressSize)
-                    {
-                        throw new ArgumentException("Buffer length is insufficient for the given SocketAddress size.", nameof(buffer));
-                    }
-
-                    socketAddress = new SocketAddress(addressFamily, socketAddressSize);
-                    
-                    for (var i = 0; i < socketAddressSize - 2; i++)
-                    {
-                        socketAddress[i + 2] = *(pOffsetBuffer + 8 + i);
-                    }
-
-                    return 8 + offset + socketAddressSize;
+                    throw new ArgumentException("Buffer length is insufficient for the given SocketAddress size.", nameof(buffer));
                 }
+
+                socketAddress = new SocketAddress(addressFamily, socketAddressSize);
+                
+                for (var i = 0; i < socketAddressSize - 2; i++)
+                {
+                    socketAddress[i + 2] = Unsafe.Add(ref spanRef, 8 + i);
+                }
+
+                return 8 + offset + socketAddressSize;
             }
             catch (ArgumentNullException ex)
             {
@@ -199,7 +196,7 @@ namespace Fantasy.Helper
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe int ByteToSocketAddress(ReadOnlyMemory<byte> buffer, int offset, out SocketAddress socketAddress)
+        public static int ByteToSocketAddress(ReadOnlyMemory<byte> buffer, int offset, out SocketAddress socketAddress)
         {
             if (buffer.Length < 8)
             {
@@ -208,26 +205,25 @@ namespace Fantasy.Helper
 
             try
             {
-                fixed (byte* pBuffer = buffer.Span)
+                var span = buffer.Span.Slice(offset);
+                ref var spanRef = ref MemoryMarshal.GetReference(span);
+                
+                var addressFamily = (AddressFamily)Unsafe.ReadUnaligned<int>(ref spanRef);
+                var socketAddressSize = Unsafe.ReadUnaligned<int>(ref Unsafe.Add(ref spanRef, 4));
+
+                if (buffer.Length < offset + 8 + socketAddressSize)
                 {
-                    var pOffsetBuffer = pBuffer + offset;
-                    var addressFamily = (AddressFamily)Marshal.ReadInt32((IntPtr)pOffsetBuffer);
-                    var socketAddressSize = Marshal.ReadInt32((IntPtr)(pOffsetBuffer + 4));
-
-                    if (buffer.Length < offset + 8 + socketAddressSize)
-                    {
-                        throw new ArgumentException("Buffer length is insufficient for the given SocketAddress size.", nameof(buffer));
-                    }
-
-                    socketAddress = new SocketAddress(addressFamily, socketAddressSize);
-                    
-                    for (var i = 0; i < socketAddressSize - 2; i++)
-                    {
-                        socketAddress[i + 2] = *(pOffsetBuffer + 8 + i);
-                    }
-
-                    return 8 + offset + socketAddressSize;
+                    throw new ArgumentException("Buffer length is insufficient for the given SocketAddress size.", nameof(buffer));
                 }
+
+                socketAddress = new SocketAddress(addressFamily, socketAddressSize);
+                
+                for (var i = 0; i < socketAddressSize - 2; i++)
+                {
+                    socketAddress[i + 2] = Unsafe.Add(ref spanRef, 8 + i);
+                }
+
+                return 8 + offset + socketAddressSize;
             }
             catch (ArgumentNullException ex)
             {
@@ -274,18 +270,17 @@ namespace Fantasy.Helper
                         socketAddressSpan[i] = socketAddress[i];
                     }
                     
-                    fixed (byte* pSocketAddress = socketAddressSpan)
+                    ref var spanRef = ref MemoryMarshal.GetReference(socketAddressSpan);
+                    
+                    for (var i = 0; i < 16; i++)
                     {
-                        for (var i = 0; i < 16; i++)
-                        {
-                            ipBytes[i] = *(pSocketAddress + 8 + i);
-                        }
-                        
-                        var port = (*(pSocketAddress + 2) << 8) + *(pSocketAddress + 3);
-                        var scopeId = Marshal.ReadInt64((IntPtr)(pSocketAddress + 24));
-                        var ip = new IPAddress(ipBytes, scopeId);
-                        return new IPEndPoint(ip, port);
+                        ipBytes[i] = Unsafe.Add(ref spanRef, 8 + i);
                     }
+                    
+                    var port = (Unsafe.Add(ref spanRef, 2) << 8) + Unsafe.Add(ref spanRef, 3);
+                    var scopeId = Unsafe.ReadUnaligned<long>(ref Unsafe.Add(ref spanRef, 24));
+                    var ip = new IPAddress(ipBytes, scopeId);
+                    return new IPEndPoint(ip, port);
                 }
                 default:
                 {
@@ -438,6 +433,6 @@ namespace Fantasy.Helper
                 }
             }
         }
+#endif 
     }
 }
-#endif

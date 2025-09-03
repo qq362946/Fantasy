@@ -174,7 +174,30 @@ namespace Fantasy.Serialize
 
             RuntimeTypeModel.Default.Serialize((MemoryStream)buffer, @object);
         }
-        private byte[] Serialize<T>(T @object)
+        /// <summary>
+        /// 使用ProtoBuf序列化某一个实例到byte[]
+        /// </summary>
+        /// <param name="object"></param>
+        /// <returns></returns>
+        public byte[] Serialize(object @object)
+        {
+            if (@object is ASerialize aSerialize)
+            {
+                aSerialize.BeginInit();
+            }
+
+            using (var buffer = new MemoryStream())
+            {
+                RuntimeTypeModel.Default.Serialize(buffer, @object);
+                return buffer.ToArray();
+            }
+        }
+        /// <summary>
+        /// 使用ProtoBuf序列化某一个实例到byte[]
+        /// </summary>
+        /// <param name="object"></param>
+        /// <returns></returns>
+        public byte[] Serialize<T>(T @object)
         {
             if (@object is ASerialize aSerialize)
             {

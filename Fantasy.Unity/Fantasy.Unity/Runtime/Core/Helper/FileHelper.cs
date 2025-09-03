@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -17,7 +18,7 @@ namespace Fantasy.Helper
         /// <returns>完整路径。</returns>
         public static string GetFullPath(string relativePath)
         {
-            return Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), relativePath));
+            return Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, relativePath));
         }
 
         /// <summary>
