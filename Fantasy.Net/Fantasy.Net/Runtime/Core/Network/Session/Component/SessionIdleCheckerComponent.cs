@@ -96,8 +96,9 @@ public class SessionIdleCheckerComponent : Entity
         {
             return;
         }
-        
+#if FANTASY_DEBUG
         Log.Warning($"session timeout id:{Id} timeNow:{timeNow} _session.LastReceiveTime:{_session.LastReceiveTime} _timeOut:{_timeOut}");
+#endif
         _session.Dispose();
     }
 }

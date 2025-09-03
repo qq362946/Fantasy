@@ -182,7 +182,12 @@ namespace Fantasy.Serialize
 
             RuntimeTypeModel.Default.Serialize(buffer, @object);
         }
-        internal byte[] Serialize(object @object)
+        /// <summary>
+        /// 使用ProtoBuf序列化某一个实例到byte[]
+        /// </summary>
+        /// <param name="object"></param>
+        /// <returns></returns>
+        public byte[] Serialize(object @object)
         {
             if (@object is ASerialize aSerialize)
             {
@@ -195,7 +200,13 @@ namespace Fantasy.Serialize
                 return buffer.ToArray();
             }
         }
-        private byte[] Serialize<T>(T @object)
+        /// <summary>
+        /// 使用ProtoBuf序列化某一个实例到byte[]
+        /// </summary>
+        /// <param name="object"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public byte[] Serialize<T>(T @object)
         {
             if (@object is ASerialize aSerialize)
             {

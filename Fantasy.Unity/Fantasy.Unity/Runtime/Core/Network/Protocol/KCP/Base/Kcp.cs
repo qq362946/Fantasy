@@ -17,12 +17,12 @@ namespace KCP
     /// </summary>
     /// <param name="buffer">KCP output destination</param>
     /// <param name="length">KCP output size (excluding reserved)</param>
-    public delegate void KcpCallback(byte[] buffer, int length);
+    internal delegate void KcpCallback(byte[] buffer, int length);
 
     /// <summary>
     ///     Kcp
     /// </summary>
-    public sealed unsafe class Kcp : IDisposable
+    internal sealed unsafe class Kcp : IDisposable
     {
         /// <summary>
         ///     Kcp

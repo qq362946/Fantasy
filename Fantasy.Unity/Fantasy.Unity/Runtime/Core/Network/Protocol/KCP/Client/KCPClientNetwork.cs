@@ -27,14 +27,14 @@ using KCP;
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 namespace Fantasy.Network.KCP
 {
-    public sealed class KCPClientNetworkUpdateSystem : UpdateSystem<KCPClientNetwork>
+    internal sealed class KCPClientNetworkUpdateSystem : UpdateSystem<KCPClientNetwork>
     {
         protected override void Update(KCPClientNetwork self)
         {
             self.CheckUpdate();
         }
     }
-    public sealed class KCPClientNetwork : AClientNetwork
+    internal sealed class KCPClientNetwork : AClientNetwork
     {
         private Kcp _kcp;
         private Socket _socket;

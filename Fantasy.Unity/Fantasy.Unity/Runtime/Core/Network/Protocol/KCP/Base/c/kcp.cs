@@ -16,7 +16,7 @@ namespace kcp
     /// <summary>
     ///     https://github.com/skywind3000/kcp
     /// </summary>
-    public static unsafe partial class KCP
+    internal static unsafe partial class KCP
     {
         //=====================================================================
         // KCP BASIC
@@ -165,50 +165,50 @@ namespace kcp
             return ((int)(later - earlier));
         }
 
-        //---------------------------------------------------------------------
-        // manage segment
-        //---------------------------------------------------------------------
-        public static delegate* managed<nuint, void*> ikcp_malloc_hook = null;
-        public static delegate* managed<void*, void> ikcp_free_hook = null;
+        // //---------------------------------------------------------------------
+        // // manage segment
+        // //---------------------------------------------------------------------
+        // public static delegate* managed<nuint, void*> ikcp_malloc_hook = null;
+        // public static delegate* managed<void*, void> ikcp_free_hook = null;
 
-        // internal malloc
-        public static void* ikcp_malloc(nuint size)
-        {
-            if (ikcp_malloc_hook != null)
-                return ikcp_malloc_hook(size);
-            return malloc(size);
-        }
+        // // internal malloc
+        // public static void* ikcp_malloc(nuint size)
+        // {
+        //     if (ikcp_malloc_hook != null)
+        //         return ikcp_malloc_hook(size);
+        //     return malloc(size);
+        // }
 
-        // internal free
-        public static void ikcp_free(void* ptr)
-        {
-            if (ikcp_free_hook != null)
-            {
-                ikcp_free_hook(ptr);
-            }
-            else
-            {
-                free(ptr);
-            }
-        }
+        // // internal free
+        // public static void ikcp_free(void* ptr)
+        // {
+        //     if (ikcp_free_hook != null)
+        //     {
+        //         ikcp_free_hook(ptr);
+        //     }
+        //     else
+        //     {
+        //         free(ptr);
+        //     }
+        // }
 
-        // redefine allocator
-        public static void ikcp_allocator(delegate* managed<nuint, void*> new_malloc, delegate* managed<void*, void> new_free)
-        {
-            ikcp_malloc_hook = new_malloc;
-            ikcp_free_hook = new_free;
-        }
+        // // redefine allocator
+        // public static void ikcp_allocator(delegate* managed<nuint, void*> new_malloc, delegate* managed<void*, void> new_free)
+        // {
+        //     ikcp_malloc_hook = new_malloc;
+        //     ikcp_free_hook = new_free;
+        // }
 
         // allocate a new kcp segment
         public static IKCPSEG* ikcp_segment_new(IKCPCB* kcp, int size)
         {
-            return (IKCPSEG*)ikcp_malloc((nuint)(sizeof(IKCPSEG) + size));
+            return (IKCPSEG*)malloc((nuint)(sizeof(IKCPSEG) + size));
         }
 
         // delete a segment
         public static void ikcp_segment_delete(IKCPCB* kcp, IKCPSEG* seg)
         {
-            ikcp_free(seg);
+            free(seg);
         }
 
         // output segment
@@ -226,7 +226,7 @@ namespace kcp
         //---------------------------------------------------------------------
         public static IKCPCB* ikcp_create(uint conv, int reserved, ref byte[] buffer)
         {
-            IKCPCB* kcp = (IKCPCB*)ikcp_malloc((nuint)sizeof(IKCPCB));
+            IKCPCB* kcp = (IKCPCB*)malloc((nuint)sizeof(IKCPCB));
             if (kcp == null) return null;
             kcp->conv = conv;
             kcp->snd_una = 0;
@@ -318,7 +318,7 @@ namespace kcp
 
                 if (kcp->acklist != null)
                 {
-                    ikcp_free(kcp->acklist);
+                    free(kcp->acklist);
                 }
 
                 kcp->nrcv_buf = 0;
@@ -327,7 +327,7 @@ namespace kcp
                 kcp->nsnd_que = 0;
                 kcp->ackcount = 0;
                 kcp->acklist = null;
-                ikcp_free(kcp);
+                free(kcp);
             }
         }
 
@@ -669,7 +669,7 @@ namespace kcp
                 uint newblock;
 
                 newblock = newsize <= 8 ? 8 : _iceilpow2_(newsize);
-                acklist = (uint*)ikcp_malloc((nuint)(newblock * sizeof(uint) * 2));
+                acklist = (uint*)malloc((nuint)(newblock * sizeof(uint) * 2));
 
                 if (acklist == null)
                 {
@@ -686,7 +686,7 @@ namespace kcp
                         acklist[x * 2 + 1] = kcp->acklist[x * 2 + 1];
                     }
 
-                    ikcp_free(kcp->acklist);
+                    free(kcp->acklist);
                 }
 
                 kcp->acklist = acklist;

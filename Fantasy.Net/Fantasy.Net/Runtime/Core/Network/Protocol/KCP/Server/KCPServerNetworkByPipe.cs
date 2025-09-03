@@ -23,7 +23,7 @@ using Fantasy.Network.Interface;
 
 namespace Fantasy.Network.KCP
 {
-    public sealed class KCPServerNetworkUpdateSystem : UpdateSystem<KCPServerNetwork>
+    internal sealed class KCPServerNetworkUpdateSystem : UpdateSystem<KCPServerNetwork>
     {
         protected override void Update(KCPServerNetwork self)
         {
@@ -31,7 +31,7 @@ namespace Fantasy.Network.KCP
         }
     }
 
-    public struct PendingConnection
+    internal struct PendingConnection
     {
         public readonly uint ChannelId;
         public readonly uint TimeOutId;

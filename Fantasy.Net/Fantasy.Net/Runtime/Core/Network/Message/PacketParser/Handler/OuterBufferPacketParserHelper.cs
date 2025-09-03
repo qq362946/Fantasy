@@ -1,5 +1,6 @@
 #if FANTASY_NET
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Fantasy.Helper;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
@@ -22,7 +23,7 @@ namespace Fantasy.PacketParser
         /// <returns>打包完成会返回一个MemoryStreamBuffer</returns>
         /// <exception cref="Exception"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe MemoryStreamBuffer Pack(Scene scene, uint rpcId, IMessage message, out int memoryStreamLength)
+        public static MemoryStreamBuffer Pack(Scene scene, uint rpcId, IMessage message, out int memoryStreamLength)
         {
             memoryStreamLength = 0;
             var messageType = message.GetType();
@@ -57,12 +58,12 @@ namespace Fantasy.PacketParser
                 throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
             }
             
-            fixed (byte* bufferPtr = memoryStream.GetBuffer())
-            {
-                *(int*)bufferPtr = packetBodyCount;
-                *(uint*)(bufferPtr + Packet.PacketLength) = opCode;
-                *(uint*)(bufferPtr + Packet.OuterPacketRpcIdLocation) = rpcId;
-            }
+            var buffer = memoryStream.GetBuffer();
+            ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
+            
+            Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.OuterPacketRpcIdLocation), rpcId);
             
             return memoryStream;
         }

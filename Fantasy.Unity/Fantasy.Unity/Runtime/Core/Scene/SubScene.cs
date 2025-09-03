@@ -165,7 +165,7 @@ namespace Fantasy
         /// <param name="runTimeId"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public override Session GetSession(long runTimeId)
+        internal override Session GetSession(long runTimeId)
         {
             return RootScene.GetSession(runTimeId);
         }

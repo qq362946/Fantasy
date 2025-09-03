@@ -62,7 +62,7 @@ namespace Fantasy.Network.KCP
         }
     }
 
-    public static class KCPFactory
+    internal static class KCPFactory
     {
         public const int FANTASY_KCP_RESERVED_HEAD = 5;
 

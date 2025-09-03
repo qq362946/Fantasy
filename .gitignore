@@ -33,3 +33,4 @@ Packages.Unity/**/*.meta
 !examples/**/.vscode
 !Tools/**/.vscode
 examples/**/Unity/.vscode
+CLAUDE.md

@@ -33,7 +33,7 @@ namespace Fantasy.Platform.Console
                 Log.Error("Fantasy has already been initialized and does not need to be initialized again!");
                 return;
             }
-            
+            Log.Info($"Fantasy Version:{Define.VERSION}");
             // 初始化程序集管理系统
             await AssemblySystem.InnerInitialize(assemblies);
             // 初始化序列化

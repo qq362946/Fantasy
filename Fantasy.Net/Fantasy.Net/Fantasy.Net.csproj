@@ -40,15 +40,10 @@
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
       <FrameworkReference Include="Microsoft.AspNetCore.App"/>
-      <PackageReference Include="mimalloc-csharp" Version="1.0.7" />
-      <PackageReference Include="MongoDB.Bson" Version="3.1.0" />
-      <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
+      <PackageReference Include="MongoDB.Bson" Version="3.4.3" />
+      <PackageReference Include="MongoDB.Driver" Version="3.4.3" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="protobuf-net" Version="3.2.45" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-        <PackageReference Include="System.IO.Pipelines" Version="9.0.0" />
+      <PackageReference Include="protobuf-net" Version="3.2.56" />
     </ItemGroup>
 
     <ItemGroup>
@@ -56,6 +51,10 @@
         <None Include="icon.png" Pack="true" PackagePath="\"/>
         <None Include="LICENSE" Pack="true" PackagePath="\"/>
         <None Include="README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+      <PackageReference Include="System.IO.Pipelines" Version="9.0.8" />
     </ItemGroup>
 
 </Project>

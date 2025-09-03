@@ -82,7 +82,7 @@ namespace Fantasy.Async
         /// </summary>
         /// <param name="coroutineLockType"></param>
         /// <param name="coroutineLockQueueKey"></param>
-        public void Release(int coroutineLockType, long coroutineLockQueueKey)
+        public void Release(long coroutineLockType, long coroutineLockQueueKey)
         {
             if (IsDisposed)
             {

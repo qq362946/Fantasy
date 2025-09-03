@@ -53,6 +53,7 @@ namespace Fantasy.Platform.Unity
             }
             FantasyObject.OnRuntimeMethodLoad();
             Log.Register(new UnityLog());
+            Log.Info($"Fantasy Version:{Define.VERSION}");
             await AssemblySystem.InnerInitialize(assemblies);
             // 初始化序列化
             SerializerManager.Initialize();

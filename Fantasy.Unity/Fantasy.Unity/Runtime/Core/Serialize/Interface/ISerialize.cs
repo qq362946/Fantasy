@@ -59,6 +59,19 @@ namespace Fantasy.Serialize
         /// <summary>
         /// 序列化
         /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        byte[] Serialize(object obj);
+        /// <summary>
+        /// 序列化
+        /// </summary>
+        /// <param name="object"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        byte[] Serialize<T>(T @object);
+        /// <summary>
+        /// 序列化
+        /// </summary>
         /// <param name="object"></param>
         /// <param name="buffer"></param>
         /// <typeparam name="T"></typeparam>

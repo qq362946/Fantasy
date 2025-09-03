@@ -8,13 +8,13 @@ using System.Runtime.InteropServices;
 namespace kcp
 {
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct IQUEUEHEAD
+    internal unsafe struct IQUEUEHEAD
     {
         public IQUEUEHEAD* next;
         public IQUEUEHEAD* prev;
     }
 
-    public static unsafe partial class KCP
+    internal static unsafe partial class KCP
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void iqueue_init(IQUEUEHEAD* head)
@@ -65,7 +65,7 @@ namespace kcp
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct IKCPSEG
+    internal unsafe struct IKCPSEG
     {
         public IQUEUEHEAD node;
         public uint conv;
@@ -84,7 +84,7 @@ namespace kcp
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct IKCPCB
+    internal unsafe struct IKCPCB
     {
         public uint conv, mtu, mss, state;
         public uint snd_una, snd_nxt, rcv_nxt;
@@ -109,7 +109,7 @@ namespace kcp
         public int nocwnd, stream;
     }
 
-    public static partial class KCP
+    internal static partial class KCP
     {
         public const uint IKCP_LOG_OUTPUT = 1;
         public const uint IKCP_LOG_INPUT = 2;
