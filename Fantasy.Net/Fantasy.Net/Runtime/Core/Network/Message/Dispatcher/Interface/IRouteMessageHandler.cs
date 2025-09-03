@@ -65,7 +65,7 @@ namespace Fantasy.Network.Interface
 
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                Log.Error($"{this.GetType().Name} Route type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
                 return;
             }
 
@@ -128,7 +128,7 @@ namespace Fantasy.Network.Interface
 
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                Log.Error($"{this.GetType().Name} Route type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
                 return;
             }
             
@@ -216,7 +216,7 @@ namespace Fantasy.Network.Interface
 
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                Log.Error($"{this.GetType().Name} Route type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
                 return;
             }
 
@@ -281,7 +281,7 @@ namespace Fantasy.Network.Interface
 
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                Log.Error($"{this.GetType().Name} Route type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
                 return;
             }
             
@@ -368,7 +368,7 @@ namespace Fantasy.Network.Interface
 
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                Log.Error($"{this.GetType().Name} Route type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
                 return;
             }
 
@@ -433,7 +433,7 @@ namespace Fantasy.Network.Interface
 
             if (entity is not TEntity tEntity)
             {
-                Log.Error($"Route type conversion error: {entity.GetType().Name} to {nameof(TEntity)}");
+                Log.Error($"{this.GetType().Name} Route type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
                 return;
             }
             
