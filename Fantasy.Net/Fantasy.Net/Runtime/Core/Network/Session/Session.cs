@@ -268,5 +268,22 @@ namespace Fantasy.Network
                 Log.Error(e);
             }
         }
+        
+        /// <summary>
+        /// 重新开始心跳检查
+        /// </summary>
+        /// <param name="interval"></param>
+        /// <param name="timeOut"></param>
+        public void RestartIdleChecker(int interval, int timeOut)
+        {
+            var sessionIdleCheckerComponent = GetComponent<SessionIdleCheckerComponent>();
+            if (sessionIdleCheckerComponent == null)
+            {
+                Log.Error("SessionIdleCheckerComponent is null");
+                return;
+            }
+
+            sessionIdleCheckerComponent.Restart(interval, timeOut);
+        }
     }
 }

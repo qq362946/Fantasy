@@ -45,7 +45,7 @@ namespace Fantasy.Helper
         public static string FileMD5(FileStream fileStream)
         {
             var md5 = MD5.Create();
-            return md5.ComputeHash(fileStream).ToHex("x2");
+            return md5.ComputeHash(fileStream).ToHex(false);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Fantasy.Helper
         {
             var md5 = MD5.Create();
             bytes = md5.ComputeHash(bytes);
-            return bytes.ToHex("x2");
+            return bytes.ToHex(false);
         }
     }
 }
