@@ -1,10 +1,8 @@
 using System;
-using System.Buffers;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-using Fantasy.Async;
 
 namespace Fantasy.Helper
 {
@@ -13,237 +11,491 @@ namespace Fantasy.Helper
     /// </summary>
     public static class ByteHelper
     {
+        private static readonly string[] HexTableUpper = new string[256];
+        private static readonly string[] HexTableLower = new string[256];
         private static readonly string[] Suffix = { "Byte", "KB", "MB", "GB", "TB" };
+        private static readonly long[] Divisors = { 1L, 1024L, 1024L * 1024, 1024L * 1024 * 1024, 1024L * 1024 * 1024 * 1024 };
 
-        /// <summary>
-        /// 从指定的文件流中读取一个 64 位整数。
-        /// </summary>
-        public static long ReadInt64(FileStream stream)
+        static ByteHelper()
         {
-            var buffer = new byte[8];
-#if FANTASY_NET
-            stream.ReadExactly(buffer, 0, 8);
-#else
-            stream.Read(buffer, 0, 8);
-#endif
-            return BitConverter.ToInt64(buffer, 0);
-        }
-
-        /// <summary>
-        /// 从指定的文件流中读取一个 32 位整数。
-        /// </summary>
-        public static int ReadInt32(FileStream stream)
-        {
-            var buffer = new byte[4];
-#if FANTASY_NET
-            stream.ReadExactly(buffer, 0, 4);
-#else
-            stream.Read(buffer, 0, 4);
-#endif
-            return BitConverter.ToInt32(buffer, 0);
-        }
-
-        /// <summary>
-        /// 从指定的内存流中读取一个 64 位整数。
-        /// </summary>
-        public static long ReadInt64(MemoryStream stream)
-        {
-            var buffer = new byte[8];
-#if FANTASY_NET
-            stream.ReadExactly(buffer, 0, 8);
-#else
-            stream.Read(buffer, 0, 8);
-#endif
-            return BitConverter.ToInt64(buffer, 0);
-        }
-
-        /// <summary>
-        /// 从指定的内存流中读取一个 32 位整数。
-        /// </summary>
-        public static int ReadInt32(MemoryStream stream)
-        {
-            var buffer = new byte[4];
-#if FANTASY_NET
-            stream.ReadExactly(buffer, 0, 4);
-#else
-            stream.Read(buffer, 0, 4);
-#endif
-            return BitConverter.ToInt32(buffer, 0);
-        }
-
-        /// <summary>
-        /// 将字节转换为十六进制字符串表示。
-        /// </summary>
-        public static string ToHex(this byte b)
-        {
-            return b.ToString("X2");
-        }
-
-        /// <summary>
-        /// 将字节数组转换为十六进制字符串表示。
-        /// </summary>
-        public static string ToHex(this byte[] bytes)
-        {
-            var stringBuilder = new StringBuilder();
-            foreach (var b in bytes)
+            // 预计算所有256个字节的十六进制表示
+            for (var i = 0; i < 256; i++)
             {
-                stringBuilder.Append(b.ToString("X2"));
+                HexTableUpper[i] = i.ToString("X2"); // 大写：00, 01, ..., FF
+                HexTableLower[i] = i.ToString("x2"); // 小写：00, 01, ..., ff
+            }
+        }
+        
+        #region Read
+
+        /// <summary>
+        /// 从指定的流中读取一个 64 位整数。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long ReadInt64(this Stream stream)
+        {
+            Span<byte> buffer = stackalloc byte[8];
+#if FANTASY_NET
+            stream.ReadExactly(buffer);
+#else
+            _ = stream.Read(buffer);
+#endif
+            return MemoryMarshal.Read<long>(buffer);
+        }
+
+        /// <summary>
+        /// 从指定的流中读取一个 32 位整数。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int ReadInt32(this Stream stream)
+        {
+            Span<byte> buffer = stackalloc byte[4];
+#if FANTASY_NET
+            stream.ReadExactly(buffer);
+#else
+            _ = stream.Read(buffer);
+#endif
+            return MemoryMarshal.Read<int>(buffer);
+        }
+        
+        /// <summary>
+        /// 从指定的流中读取一个 16 位整数。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int ReadInt16(this Stream stream)
+        {
+            Span<byte> buffer = stackalloc byte[2];
+#if FANTASY_NET
+            stream.ReadExactly(buffer);
+#else
+            _ = stream.Read(buffer);
+#endif
+            return MemoryMarshal.Read<short>(buffer);
+        }
+
+        /// <summary>
+        /// 从指定的流中读取一个无符号 64 位整数。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong ReadUInt64(this Stream stream)
+        {
+            Span<byte> buffer = stackalloc byte[8];
+#if FANTASY_NET
+            stream.ReadExactly(buffer);
+#else
+            _ = stream.Read(buffer);
+#endif
+            return MemoryMarshal.Read<ulong>(buffer);
+        }
+
+        /// <summary>
+        /// 从指定的流中读取一个无符号 32 位整数。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong ReadUInt32(this Stream stream)
+        {
+            Span<byte> buffer = stackalloc byte[4];
+#if FANTASY_NET
+            stream.ReadExactly(buffer);
+#else
+            _ = stream.Read(buffer);
+#endif
+            return MemoryMarshal.Read<uint>(buffer);
+        }
+
+        /// <summary>
+        /// 从指定的流中读取一个无符号 16 位整数。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong ReadUInt16(this Stream stream)
+        {
+            Span<byte> buffer = stackalloc byte[2];
+#if FANTASY_NET
+            stream.ReadExactly(buffer);
+#else
+            _ = stream.Read(buffer);
+#endif
+            return MemoryMarshal.Read<ushort>(buffer);
+        }
+
+        #endregion
+
+        #region WriteTo
+
+        /// <summary>
+        /// 将值写入字节数组的指定偏移位置。
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="offset"></param>
+        /// <param name="value"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void WriteTo<T>(this byte[] bytes, int offset, T value) where T : unmanaged
+        {
+            if (offset < 0 || offset + Marshal.SizeOf<T>() > bytes.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            }
+            MemoryMarshal.Write(bytes.AsSpan(offset),
+#if FANTASY_NET || FANTASY_CONSOLE
+                in value
+#endif
+#if FANTASY_UNITY
+                ref value
+#endif
+            );
+        }
+
+        /// <summary>
+        /// 将值写入Span的指定偏移位置。
+        /// </summary>
+        /// <param name="span"></param>
+        /// <param name="offset"></param>
+        /// <param name="value"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void WriteTo<T>(this Span<byte> span, int offset, T value) where T : unmanaged
+        {
+            if (offset < 0 || offset + Marshal.SizeOf<T>() > span.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            }
+            MemoryMarshal.Write(span.Slice(offset),
+#if FANTASY_NET || FANTASY_CONSOLE
+                in value
+#endif
+#if FANTASY_UNITY
+                ref value
+#endif
+            );
+        }
+
+        /// <summary>
+        /// 将值写入内存流
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="value"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void WriteTo<T>(this Stream stream, T value) where T : unmanaged
+        {
+            Span<byte> buffer = stackalloc byte[Marshal.SizeOf<T>()];
+            MemoryMarshal.Write(buffer,
+#if FANTASY_NET || FANTASY_CONSOLE
+                in value
+#endif
+#if FANTASY_UNITY
+                ref value
+#endif
+            );
+            stream.Write(buffer);
+        }
+        
+        /// <summary>
+        /// 将值写入内存流的指定偏移位置。
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="offset"></param>
+        /// <param name="value"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void WriteTo<T>(this Stream stream, int offset, T value) where T : unmanaged
+        {
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+        
+            if (!stream.CanSeek)
+            {
+                throw new NotSupportedException("Stream must support seeking");
+            }
+        
+            if (offset < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            }    
+            
+            var originalPosition = stream.Position;
+            try
+            {
+                stream.Position = offset; 
+                Span<byte> buffer = stackalloc byte[Marshal.SizeOf<T>()]; 
+                MemoryMarshal.Write(buffer,
+#if FANTASY_NET || FANTASY_CONSOLE
+                in value
+#endif
+#if FANTASY_UNITY
+                    ref value
+#endif
+                );
+                stream.Write(buffer);
+            }
+            finally
+            {
+                stream.Position = originalPosition;  
+            }
+        }
+
+        #endregion
+
+        #region ReadFrom
+
+        /// <summary>
+        /// 从字节数组的指定偏移位置读取值。
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="offset"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T ReadFrom<T>(this byte[] bytes, int offset) where T : unmanaged
+        {
+            if (offset < 0 || offset + Marshal.SizeOf<T>() > bytes.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            }
+            
+            return MemoryMarshal.Read<T>(bytes.AsSpan(offset));
+        }
+
+        /// <summary>
+        /// 从Span的指定偏移位置读取值。
+        /// </summary>
+        /// <param name="span"></param>
+        /// <param name="offset"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T ReadFrom<T>(this ReadOnlySpan<byte> span, int offset) where T : unmanaged
+        {
+            if (offset < 0 || offset + Marshal.SizeOf<T>() > span.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            }
+            
+            return MemoryMarshal.Read<T>(span.Slice(offset));
+        }
+
+        /// <summary>
+        /// 从流的指定偏移位置读取值
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="offset"></param>
+        /// <param name="restorePosition">是否在读取完成后恢复到原始位置</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NotSupportedException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="EndOfStreamException"></exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T ReadFrom<T>(this Stream stream, int offset, bool restorePosition = false) where T : unmanaged
+        {
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
             }
 
-            return stringBuilder.ToString();
-        }
-
-        /// <summary>
-        /// 将字节数组按指定格式转换为十六进制字符串表示。
-        /// </summary>
-        public static string ToHex(this byte[] bytes, string format)
-        {
-            var stringBuilder = new StringBuilder();
-            foreach (var b in bytes)
+            if (!stream.CanSeek)
             {
-                stringBuilder.Append(b.ToString(format));
+                throw new NotSupportedException("Stream must support seeking");
             }
 
-            return stringBuilder.ToString();
-        }
-
-        /// <summary>
-        /// 将字节数组的指定范围按十六进制格式转换为字符串表示。
-        /// </summary>
-        public static string ToHex(this byte[] bytes, int offset, int count)
-        {
-            var stringBuilder = new StringBuilder();
-            for (var i = offset; i < offset + count; ++i)
+            if (offset < 0)
             {
-                stringBuilder.Append(bytes[i].ToString("X2"));
+                throw new ArgumentOutOfRangeException(nameof(offset));
             }
+            
+            var originalPosition = restorePosition ? stream.Position : 0;
 
-            return stringBuilder.ToString();
+            try
+            {
+                var sizeOf = Marshal.SizeOf<T>();
+                stream.Position = offset;
+                Span<byte> buffer = stackalloc byte[sizeOf];
+#if FANTASY_NET
+                stream.ReadExactly(buffer);
+#else
+                var bytesRead = stream.Read(buffer);
+                if (bytesRead != sizeOf)
+                {
+                    throw new EndOfStreamException($"Could not read {sizeOf} bytes from stream");
+                }
+#endif
+                return MemoryMarshal.Read<T>(buffer);
+            }
+            finally
+            {
+                if (restorePosition)
+                {
+                    stream.Position = originalPosition;
+                }
+            }
         }
 
+        #endregion
+
+        #region GetBytes
+
         /// <summary>
-        /// 将字节数组转换为默认编码的字符串表示。
+        /// 将值转换为字节数组。
         /// </summary>
-        public static string ToStr(this byte[] bytes)
+        /// <param name="value"></param>
+        /// <param name="buffer"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void GetBytes<T>(this T value, Span<byte> buffer) where T : unmanaged
         {
-            return Encoding.Default.GetString(bytes);
+            if (buffer.Length < Marshal.SizeOf<T>())
+            {
+                throw new ArgumentException($"Buffer too small. Required: {Marshal.SizeOf<T>()}, Actual: {buffer.Length}");
+            }
+            
+            MemoryMarshal.Write(buffer,
+#if FANTASY_NET || FANTASY_CONSOLE
+                in value
+#endif
+#if FANTASY_UNITY
+                ref value
+#endif
+            );
         }
 
         /// <summary>
-        /// 将字节数组的指定范围按默认编码转换为字符串表示。
+        /// 将值转换为字节数组。
         /// </summary>
-        public static string ToStr(this byte[] bytes, int index, int count)
+        /// <param name="value"></param>
+        /// <param name="buffer"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void GetBytes<T>(this T value, byte[] buffer) where T : unmanaged
         {
-            return Encoding.Default.GetString(bytes, index, count);
+            value.GetBytes(buffer.AsSpan());
         }
 
         /// <summary>
-        /// 将字节数组转换为 UTF-8 编码的字符串表示。
+        /// 将值转换为字节数组。
         /// </summary>
-        public static string Utf8ToStr(this byte[] bytes)
+        /// <param name="value"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte[] GetBytes<T>(this T value) where T : unmanaged
         {
-            return Encoding.UTF8.GetString(bytes);
+            var result = new byte[Marshal.SizeOf<T>()];
+            MemoryMarshal.Write(result.AsSpan(),
+#if FANTASY_NET || FANTASY_CONSOLE
+                in value
+#endif
+#if FANTASY_UNITY
+                ref value
+#endif
+            );
+            return result;
         }
 
-        /// <summary>
-        /// 将字节数组的指定范围按 UTF-8 编码转换为字符串表示。
-        /// </summary>
-        public static string Utf8ToStr(this byte[] bytes, int index, int count)
-        {
-            return Encoding.UTF8.GetString(bytes, index, count);
-        }
+        #endregion
+
+        #region ToReadableSpeed
 
         /// <summary>
-        /// 将无符号整数写入字节数组的指定偏移位置。
+        /// 将字节数转换为可读的大小表示
         /// </summary>
-        public static void WriteTo(this byte[] bytes, int offset, uint num)
-        {
-            bytes[offset]     = (byte)(num & 0xff);
-            bytes[offset + 1] = (byte)((num & 0xff00)     >> 8);
-            bytes[offset + 2] = (byte)((num & 0xff0000)   >> 16);
-            bytes[offset + 3] = (byte)((num & 0xff000000) >> 24);
-        }
-
-        /// <summary>
-        /// 将有符号整数写入字节数组的指定偏移位置。
-        /// </summary>
-        public static void WriteTo(this byte[] bytes, int offset, int num)
-        {
-            bytes[offset]     = (byte)(num & 0xff);
-            bytes[offset + 1] = (byte)((num & 0xff00)     >> 8);
-            bytes[offset + 2] = (byte)((num & 0xff0000)   >> 16);
-            bytes[offset + 3] = (byte)((num & 0xff000000) >> 24);
-        }
-
-        /// <summary>
-        /// 将字节写入字节数组的指定偏移位置。
-        /// </summary>
-        public static void WriteTo(this byte[] bytes, int offset, byte num)
-        {
-            bytes[offset] = num;
-        }
-
-        /// <summary>
-        /// 将有符号短整数写入字节数组的指定偏移位置。
-        /// </summary>
-        public static void WriteTo(this byte[] bytes, int offset, short num)
-        {
-            bytes[offset] = (byte)(num & 0xff);
-            bytes[offset + 1] = (byte)((num & 0xff00) >> 8);
-        }
-
-        /// <summary>
-        /// 将无符号短整数写入字节数组的指定偏移位置。
-        /// </summary>
-        public static void WriteTo(this byte[] bytes, int offset, ushort num)
-        {
-            bytes[offset]     = (byte)(num & 0xff);
-            bytes[offset + 1] = (byte)((num & 0xff00) >> 8);
-        }
-
-        /// <summary>
-        /// 将字节数转换为可读的速度表示。
-        /// </summary>
-        /// <param name="byteCount">字节数</param>
-        /// <returns>可读的速度表示</returns>
+        /// <param name="byteCount"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToReadableSpeed(this long byteCount)
         {
-            var    i        = 0;
-            double dblSByte = byteCount;
-            if (byteCount <= 1024)
+            switch (byteCount)
             {
-                return $"{dblSByte:0.##}{Suffix[i]}";
+                case <= 0:
+                {
+                    return "0 Byte";
+                }
+                // < 1TB，使用快速版本
+                case < 1L << 40:
+                {
+                    var minLevel = 0;
+                    var temp = byteCount;
+                    while (temp >= 1024 && minLevel < 4)
+                    {
+                        temp >>= 10;
+                        minLevel++;
+                    }
+                    return $"{(double)byteCount / Divisors[minLevel]:0.##} {Suffix[minLevel]}";
+                }
+                default:
+                {
+#if NET6_0_OR_GREATER
+                    var level = Math.Min((int)(Math.Log2(byteCount) / 10), Suffix.Length - 1);
+#else
+                    // .NET Framework / .NET Core < 6.0 替代方案
+                    var level = Math.Min((int)(Math.Log(byteCount) / Math.Log(2) / 10), Suffix.Length - 1);
+#endif
+                    var divisor = 1L << (level * 10);
+                    var value = (double)byteCount / divisor;
+                    return $"{value:0.##} {Suffix[level]}";
+                }
             }
-
-            for (i = 0; byteCount / 1024 > 0; i++, byteCount /= 1024)
-            {
-                dblSByte = byteCount / 1024.0;
-            }
-
-            return $"{dblSByte:0.##}{Suffix[i]}";
         }
-
+        
         /// <summary>
-        /// 将字节数转换为可读的速度表示。
+        /// 将字节数转换为可读的大小表示（无符号版本）
         /// </summary>
-        /// <param name="byteCount">字节数</param>
-        /// <returns>可读的速度表示</returns>
+        /// <param name="byteCount"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToReadableSpeed(this ulong byteCount)
         {
-            var i = 0;
-            double dblSByte = byteCount;
-
-            if (byteCount <= 1024)
+            switch (byteCount)
             {
-                return $"{dblSByte:0.##}{Suffix[i]}";
+                case 0:
+                {
+                    return "0 Byte";
+                }
+                // < 1TB，使用快速版本
+                case < 1L << 40:
+                {
+                    var minLevel = 0;
+                    var temp = byteCount;
+                    while (temp >= 1024 && minLevel < 4)
+                    {
+                        temp >>= 10;
+                        minLevel++;
+                    }
+                    return $"{(double)byteCount / Divisors[minLevel]:0.##} {Suffix[minLevel]}";
+                }
+                default:
+                {
+#if NET6_0_OR_GREATER
+                    var level = Math.Min((int)(Math.Log2(byteCount) / 10), Suffix.Length - 1);
+#else
+                    // .NET Framework / .NET Core < 6.0 替代方案
+                    var level = Math.Min((int)(Math.Log(byteCount) / Math.Log(2) / 10), Suffix.Length - 1);
+#endif
+                    var divisor = 1L << (level * 10);
+                    var value = (double)byteCount / divisor;
+                    return $"{value:0.##} {Suffix[level]}";
+                }
             }
+        }
 
-            for (i = 0; byteCount / 1024 > 0; i++, byteCount /= 1024)
-            {
-                dblSByte = byteCount / 1024.0;
-            }
+        #endregion
 
-            return $"{dblSByte:0.##}{Suffix[i]}";
+        #region MergeBytes
+
+        /// <summary>
+        /// 合并字节数组到目标缓冲区（零分配版本）。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void MergeBytesTo(Span<byte> destination, ReadOnlySpan<byte> first, ReadOnlySpan<byte> second)
+        {
+            if (destination.Length < first.Length + second.Length)
+                throw new ArgumentException("Destination buffer too small");
+
+            first.CopyTo(destination);
+            second.CopyTo(destination.Slice(first.Length));
         }
 
         /// <summary>
@@ -252,137 +504,298 @@ namespace Fantasy.Helper
         /// <param name="bytes">第一个字节数组</param>
         /// <param name="otherBytes">第二个字节数组</param>
         /// <returns>合并后的字节数组</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] MergeBytes(byte[] bytes, byte[] otherBytes)
         {
+            if (bytes == null)
+            {
+                throw new ArgumentNullException(nameof(bytes));
+            }
+
+            if (otherBytes == null)
+            {
+                throw new ArgumentNullException(nameof(otherBytes));
+            }
+            
+            // 优化：如果其中一个为空，直接返回另一个的副本
+            if (bytes.Length == 0)
+            {
+                return (byte[])otherBytes.Clone();
+            }
+
+            if (otherBytes.Length == 0)
+            {
+                return (byte[])bytes.Clone();
+            }
+            
             var result = new byte[bytes.Length + otherBytes.Length];
-            bytes.CopyTo(result, 0);
-            otherBytes.CopyTo(result, bytes.Length);
+            bytes.CopyTo(result.AsSpan());
+            otherBytes.CopyTo(result.AsSpan(bytes.Length));
             return result;
         }
 
+        #endregion
+
+        #region ToHex
+        
         /// <summary>
-        /// 根据int值获取字节数组。
+        /// 将字节转换为大写十六进制字符串。
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="buffer"></param>
-        /// <exception cref="ArgumentException"></exception>
+        /// <param name="b"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void GetBytes(this int value, byte[] buffer)
+        public static string ToHex(this byte b) 
         {
-            if (buffer.Length < 4)
+            return HexTableUpper[b];
+        }
+        
+        /// <summary>
+        /// 将字节转换为小写十六进制字符串。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToHexLower(this byte b)
+        {
+            return HexTableLower[b];
+        }
+        
+        /// <summary>
+        /// 将字节转换为指定格式的十六进制字符串。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToHex(this byte b, bool upperCase)
+        {
+            return upperCase ? HexTableUpper[b] : HexTableLower[b];
+        }
+
+        /// <summary>
+        /// 将字节数组转换为十六进制字符串表示。
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="upperCase"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToHex(this byte[] bytes, bool upperCase = true)
+        {
+            if (bytes == null)
             {
-                throw new ArgumentException("Buffer too small.");
+                throw new ArgumentNullException(nameof(bytes));
+            }
+
+            if (bytes.Length == 0)
+            {
+                return string.Empty;
             }
             
-#if FANTASY_NET || FANTASY_CONSOLE
-            MemoryMarshal.Write(buffer.AsSpan(), in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(buffer.AsSpan(), ref value);
-#endif
+            var hexTable = upperCase ? HexTableUpper : HexTableLower;
+
+            return string.Create(bytes.Length * 2, (bytes, hexTable), (chars, state) =>
+            {
+                var (buffer, table) = state;
+                var charIndex = 0;
+                ref var bytesRef = ref MemoryMarshal.GetReference(buffer.AsSpan());
+
+                for (var i = 0; i < buffer.Length; i++)
+                {
+                    var hexStr = table[Unsafe.Add(ref bytesRef, i)];
+                    chars[charIndex++] = hexStr[0];
+                    chars[charIndex++] = hexStr[1];
+                }
+            });
         }
 
         /// <summary>
-        /// 根据int值获取字节数组。
+        /// 将字节数组的指定范围按十六进制格式转换为字符串表示。
         /// </summary>
-        /// <param name="memoryStream"></param>
-        /// <param name="value"></param>
-        /// <exception cref="ArgumentException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void WriteBytes(this MemoryStream memoryStream, int value)
+        public static string ToHex(this byte[] bytes, int offset, int count, bool upperCase = true)
         {
-            using var memoryOwner = MemoryPool<byte>.Shared.Rent(4);
-            var memorySpan = memoryOwner.Memory.Span;
-#if FANTASY_NET
-            MemoryMarshal.Write(memorySpan, in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(memorySpan, ref value);
-#endif
-            memoryStream.Write(memorySpan);
+            if (bytes == null)
+            {
+                throw new ArgumentNullException(nameof(bytes));
+            }
+
+            if (offset < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            }
+
+            if (count < 0 || offset + count > bytes.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            if (count == 0)
+            {
+                return string.Empty;
+            }
+
+            var hexTable = upperCase ? HexTableUpper : HexTableLower;
+
+            return string.Create(count * 2, (bytes, offset, count, hexTable), (chars, state) =>
+            {
+                var (buffer, start, length, table) = state;
+                var charIndex = 0;
+                ref var bytesRef = ref MemoryMarshal.GetReference(buffer.AsSpan());
+
+                for (var i = 0; i < length; i++)
+                {
+                    var hexStr = table[Unsafe.Add(ref bytesRef, start + i)];
+                    chars[charIndex++] = hexStr[0];
+                    chars[charIndex++] = hexStr[1];
+                }
+            });
+        }
+        
+        /// <summary>
+        /// 将字节数组的指定范围按十六进制格式转换为字符串表示。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToHex(this ReadOnlySpan<byte> bytes, bool upperCase = true)
+        {
+            if (bytes.Length == 0)
+            {
+                return string.Empty;
+            }
+
+            var hexTable = upperCase ? HexTableUpper : HexTableLower;
+            
+            return string.Create(bytes.Length * 2, (MemoryMarshal.GetReference(bytes), bytes.Length, hexTable), (chars,
+                state) =>
+            {
+                var (bytesRef, length, table) = state;
+                var charIndex = 0;
+
+                for (var i = 0; i < length; i++)
+                {
+                    var hexStr = table[Unsafe.Add(ref bytesRef, i)];
+                    chars[charIndex++] = hexStr[0];
+                    chars[charIndex++] = hexStr[1];
+                }
+            });
         }
 
         /// <summary>
-        /// 根据uint值获取字节数组。
+        /// 将十六进制字符串转换为字节数组。
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="buffer"></param>
-        /// <exception cref="ArgumentException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void GetBytes(ref this uint value, byte[] buffer)
+        public static byte[] FromHex(this string hexString)
         {
-            if (buffer.Length < 4)
+            return hexString.AsSpan().FromHex();
+        }
+        
+        /// <summary>
+        /// 将十六进制字符串转换为字节数组。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte[] FromHex(this ReadOnlySpan<char> hexSpan)
+        {
+            if (hexSpan.Length == 0)
             {
-                throw new ArgumentException("Buffer too small.");
+                return Array.Empty<byte>();
             }
-                
-#if FANTASY_NET
-            MemoryMarshal.Write(buffer.AsSpan(), in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(buffer.AsSpan(), ref value);
-#endif
-        }
-        
-        /// <summary>
-        /// 根据uint值获取字节数组。
-        /// </summary>
-        /// <param name="memoryStream"></param>
-        /// <param name="value"></param>
-        /// <exception cref="ArgumentException"></exception>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void WriteBytes(this MemoryStream memoryStream, uint value)
-        {
-            using var memoryOwner = MemoryPool<byte>.Shared.Rent(4);
-            var memorySpan = memoryOwner.Memory.Span;
-#if FANTASY_NET
-            MemoryMarshal.Write(memorySpan, in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(memorySpan, ref value);
-#endif
-            memoryStream.Write(memorySpan);
-        }
-        
-        /// <summary>
-        /// 根据int值获取字节数组。
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="buffer"></param>
-        /// <exception cref="ArgumentException"></exception>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void GetBytes(this long value, byte[] buffer)
-        {
-            if (buffer.Length < 8)
+
+            if (hexSpan.Length % 2 != 0)
             {
-                throw new ArgumentException("Buffer too small.");
+                throw new ArgumentException("Hex string must have even length");
             }
-#if FANTASY_NET
-            MemoryMarshal.Write(buffer.AsSpan(), in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(buffer.AsSpan(), ref value);
-#endif
+
+            var result = new byte[hexSpan.Length / 2];
+
+            for (var i = 0; i < result.Length; i++)
+            {
+                var high = HexCharToValue(hexSpan[i * 2]);
+                var low = HexCharToValue(hexSpan[i * 2 + 1]);
+                result[i] = (byte)((high << 4) | low);
+            }
+
+            return result;
         }
+
         
         /// <summary>
-        /// 根据uint值获取字节数组。
+        /// 将十六进制字符串转换到现有字节数组。
         /// </summary>
-        /// <param name="memoryStream"></param>
-        /// <param name="value"></param>
-        /// <exception cref="ArgumentException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void WriteBytes(this MemoryStream memoryStream, long value)
+        public static void FromHexTo(this string hexString, Span<byte> destination)
         {
-            using var memoryOwner = MemoryPool<byte>.Shared.Rent(8);
-            var memorySpan = memoryOwner.Memory.Span;
-#if FANTASY_NET
-            MemoryMarshal.Write(memorySpan, in value);
-#endif
-#if FANTASY_UNITY
-            MemoryMarshal.Write(memorySpan, ref value);
-#endif
-            memoryStream.Write(memorySpan);
+            if (string.IsNullOrEmpty(hexString))
+            {
+                return;
+            }
+
+            if (hexString.Length % 2 != 0)
+            {
+                throw new ArgumentException("Hex string must have even length", nameof(hexString));
+            }
+
+            if (destination.Length < hexString.Length / 2)
+            {
+                throw new ArgumentException("Destination buffer too small", nameof(destination));
+            }
+
+            for (var i = 0; i < hexString.Length / 2; i++)
+            {
+                var high = HexCharToValue(hexString[i * 2]);
+                var low = HexCharToValue(hexString[i * 2 + 1]);
+                destination[i] = (byte)((high << 4) | low);
+            }
         }
+
+        
+        /// <summary>
+        /// 将十六进制字符转换为数值。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static int HexCharToValue(char c)
+        {
+            return c switch
+            {
+                >= '0' and <= '9' => c - '0',
+                >= 'A' and <= 'F' => c - 'A' + 10,
+                >= 'a' and <= 'f' => c - 'a' + 10,
+                _ => throw new ArgumentException($"Invalid hex character: {c}")
+            };
+        }
+
+
+        /// <summary>
+        /// 将字节数组转换为默认编码的字符串表示。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToStr(this byte[] bytes)
+        {
+            return Encoding.Default.GetString(bytes);
+        }
+
+        /// <summary>
+        /// 将字节数组的指定范围按默认编码转换为字符串表示。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToStr(this byte[] bytes, int index, int count)
+        {
+            return Encoding.Default.GetString(bytes, index, count);
+        }
+
+        /// <summary>
+        /// 将字节数组转换为 UTF-8 编码的字符串表示。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Utf8ToStr(this byte[] bytes)
+        {
+            return Encoding.UTF8.GetString(bytes);
+        }
+
+        /// <summary>
+        /// 将字节数组的指定范围按 UTF-8 编码转换为字符串表示。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Utf8ToStr(this byte[] bytes, int index, int count)
+        {
+            return Encoding.UTF8.GetString(bytes, index, count);
+        }
+
+        
+        #endregion
     }
 }

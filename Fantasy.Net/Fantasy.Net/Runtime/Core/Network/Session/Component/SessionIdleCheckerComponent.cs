@@ -57,7 +57,7 @@ public class SessionIdleCheckerComponent : Entity
     /// </summary>
     /// <param name="interval">以毫秒为单位的检查间隔。</param>
     /// <param name="timeOut">以毫秒为单位的空闲超时时间。</param>
-    public void Start(int interval, int timeOut)
+    internal void Start(int interval, int timeOut)
     {
         _timeOut = timeOut;
         _session = (Session)Parent;
@@ -67,9 +67,20 @@ public class SessionIdleCheckerComponent : Entity
     }
 
     /// <summary>
+    /// 重新开始心跳检查
+    /// </summary>
+    /// <param name="interval">以毫秒为单位的检查间隔。</param>
+    /// <param name="timeOut">以毫秒为单位的空闲超时时间。</param>
+    public void Restart(int interval, int timeOut)
+    {
+        Stop();
+        Start(interval, timeOut);
+    }
+
+    /// <summary>
     /// 停止空闲检查功能。
     /// </summary>
-    public void Stop()
+    private void Stop()
     {
         if (_timerId == 0)
         {
@@ -91,7 +102,7 @@ public class SessionIdleCheckerComponent : Entity
         }
 
         var timeNow = TimeHelper.Now;
-        
+        Log.Debug($"timeNow:{timeNow} _session.LastReceiveTime:{_session.LastReceiveTime} {timeNow - _session.LastReceiveTime}");
         if (timeNow - _session.LastReceiveTime < _timeOut)
         {
             return;

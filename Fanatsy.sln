@@ -14,8 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Tools.ExporterNetwo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "Fantasy.Net\Fantasy.Net\Fantasy.Net.csproj", "{4782A7D1-2B43-48DD-AF50-EDC773436E20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Console", "Fantays.Console\Fantasy.Console.csproj", "{4E463740-00D2-4B4F-AC5B-A09B24487D35}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{0CEB6A4D-8CE9-4EA7-A918-61FA62D6F6F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Tools.ConfigTable", "Tools\SourceCode\Fantasy.Tools.ConfigTable\Fantasy.Tools.ConfigTable.csproj", "{A93DFC08-E57F-4BBF-BAAA-18FDB458D515}"
