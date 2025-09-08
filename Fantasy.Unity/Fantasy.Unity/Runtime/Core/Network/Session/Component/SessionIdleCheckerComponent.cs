@@ -1,12 +1,13 @@
+#if FANTASY_NET
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
 using Fantasy.Helper;
+using Fantasy.Platform.Net;
 using Fantasy.Timer;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-#if FANTASY_NET
 namespace Fantasy.Network;
 
 public class SessionIdleCheckerComponentAwakeSystem : AwakeSystem<SessionIdleCheckerComponent>
@@ -102,7 +103,7 @@ public class SessionIdleCheckerComponent : Entity
         }
 
         var timeNow = TimeHelper.Now;
-        Log.Debug($"timeNow:{timeNow} _session.LastReceiveTime:{_session.LastReceiveTime} {timeNow - _session.LastReceiveTime}");
+        
         if (timeNow - _session.LastReceiveTime < _timeOut)
         {
             return;

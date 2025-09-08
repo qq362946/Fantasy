@@ -245,7 +245,7 @@ namespace Fantasy.Helper
         /// <param name="socketAddress"></param>
         /// <returns></returns>
         /// <exception cref="NotSupportedException"></exception>
-        public static unsafe IPEndPoint GetIPEndPoint(this SocketAddress socketAddress)
+        public static IPEndPoint GetIPEndPoint(this SocketAddress socketAddress)
         {
             switch (socketAddress.Family)
             {

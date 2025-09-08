@@ -50,7 +50,7 @@ namespace Fantasy.Network.KCP
         private BufferPacketParser _packetParser;
         private readonly Pipe _pipe = new Pipe();
         private readonly byte[] _sendBuff = new byte[5];
-        private readonly byte[] _receiveBuffer = new byte[Packet.PacketBodyMaxLength + 20];
+        private readonly byte[] _receiveBuffer = new byte[ProgramDefine.MaxMessageSize + 20];
         private readonly List<uint> _updateTimeOutTime = new List<uint>();
         private readonly SortedSet<uint> _updateTimer = new SortedSet<uint>();
         private readonly SocketAsyncEventArgs _connectEventArgs = new SocketAsyncEventArgs();

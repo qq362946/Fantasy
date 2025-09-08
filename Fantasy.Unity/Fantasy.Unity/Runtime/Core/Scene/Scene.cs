@@ -396,7 +396,7 @@ namespace Fantasy
             if (sceneConfig.InnerPort != 0)
             {
                 // 创建内网网络服务器
-                scene.InnerNetwork = NetworkProtocolFactory.CreateServer(scene, ProcessDefine.InnerNetwork, NetworkTarget.Inner, machineConfig.InnerBindIP, sceneConfig.InnerPort);
+                scene.InnerNetwork = NetworkProtocolFactory.CreateServer(scene, ProgramDefine.InnerNetwork, NetworkTarget.Inner, machineConfig.InnerBindIP, sceneConfig.InnerPort);
             }
 
             if (sceneConfig.OuterPort != 0)
@@ -631,7 +631,7 @@ namespace Fantasy
             }
             
             var remoteAddress = $"{machineConfig.InnerBindIP}:{sceneConfig.InnerPort}";
-            var client = NetworkProtocolFactory.CreateClient(Scene, ProcessDefine.InnerNetwork, NetworkTarget.Inner);
+            var client = NetworkProtocolFactory.CreateClient(Scene, ProgramDefine.InnerNetwork, NetworkTarget.Inner);
             var session = client.Connect(remoteAddress, null, () =>
             {
                 Log.Error($"Unable to connect to the target server sourceServerId:{Scene.Process.Id} targetServerId:{sceneConfig.ProcessConfigId}");

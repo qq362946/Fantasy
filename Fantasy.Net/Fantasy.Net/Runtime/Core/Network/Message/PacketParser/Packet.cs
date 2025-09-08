@@ -6,10 +6,6 @@ namespace Fantasy.PacketParser
     public struct Packet
     {
         /// <summary>
-        /// 消息体最大长度
-        /// </summary>
-        public const int PacketBodyMaxLength = ushort.MaxValue * 16;
-        /// <summary>
         /// 消息体长度在消息头占用的长度
         /// </summary>
         public const int PacketLength = sizeof(int);

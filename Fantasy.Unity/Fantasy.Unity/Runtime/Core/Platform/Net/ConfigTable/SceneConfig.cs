@@ -42,7 +42,27 @@ namespace Fantasy.Platform.Net
 		/// <param name="sceneConfigJson"></param>
 		public static void Initialize(string sceneConfigJson)
 		{
-			Instance = sceneConfigJson.Deserialize<SceneConfigData>();
+			try
+			{
+				Instance = sceneConfigJson.Deserialize<SceneConfigData>();
+				Initialize();
+			}
+			catch (Exception e)
+			{
+				throw new InvalidOperationException($"SceneConfigData.Json format error {e.Message}");
+			}
+		}
+		/// <summary>
+		/// 初始化SceneConfig
+		/// </summary>
+		public static void Initialize(List<SceneConfig> sceneConfigs)
+		{
+			Instance = new SceneConfigData() { List = sceneConfigs };
+			Initialize();
+		}
+
+		private static void Initialize()
+		{
 			foreach (var config in Instance.List)
 			{
 				config.Initialize();

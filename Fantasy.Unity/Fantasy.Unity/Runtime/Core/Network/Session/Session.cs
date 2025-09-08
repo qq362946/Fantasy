@@ -65,8 +65,8 @@ namespace Fantasy.Network
             // 在外部网络目标下，添加会话空闲检查组件
             if (networkTarget == NetworkTarget.Outer)
             {
-                var interval = ProcessDefine.SessionIdleCheckerInterval;
-                var timeOut = ProcessDefine.SessionIdleCheckerTimeout;
+                var interval = ProgramDefine.SessionIdleCheckerInterval;
+                var timeOut = ProgramDefine.SessionIdleCheckerTimeout;
                 session.AddComponent<SessionIdleCheckerComponent>().Start(interval, timeOut);
             }
             return session;
@@ -268,5 +268,31 @@ namespace Fantasy.Network
                 Log.Error(e);
             }
         }
+#if FANTASY_NET
+        /// <summary>
+        /// 重新开始心跳检查
+        /// </summary>
+        /// <param name="interval"></param>
+        /// <param name="timeOut"></param>
+        public void RestartIdleChecker(int interval, int timeOut)
+        {
+            var sessionIdleCheckerComponent = GetComponent<SessionIdleCheckerComponent>();
+            if (sessionIdleCheckerComponent == null)
+            {
+                Log.Error("SessionIdleCheckerComponent is null");
+                return;
+            }
+
+            sessionIdleCheckerComponent.Restart(interval, timeOut);
+        }
+
+        /// <summary>
+        /// 重新开始心跳检查(使用框架配置的参数)
+        /// </summary>
+        public void RestartIdleChecker()
+        {
+            RestartIdleChecker(ProgramDefine.SessionIdleCheckerInterval, ProgramDefine.SessionIdleCheckerTimeout);
+        }
+#endif
     }
 }

@@ -77,10 +77,10 @@ namespace Fantasy.PacketParser
                 packetBodyCount = -1;
             }
 
-            if (packetBodyCount > Packet.PacketBodyMaxLength)
+            if (packetBodyCount > ProgramDefine.MaxMessageSize)
             {
                 // 检查消息体长度是否超出限制
-                throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
+                throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
             }
 
             var buffer = memoryStream.GetBuffer();
