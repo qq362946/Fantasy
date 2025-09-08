@@ -23,7 +23,7 @@ namespace Fantasy.Network.KCP
         private readonly int _maxSndWnd;
         private KCPServerNetwork _kcpServerNetwork;
         private readonly BufferPacketParser _packetParser;
-        private readonly byte[] _receiveBuffer = new byte[Packet.PacketBodyMaxLength + 20];
+        private readonly byte[] _receiveBuffer = new byte[ProgramDefine.MaxMessageSize + 20];
         public Kcp Kcp { get; private set; }
         public uint ChannelId { get; private set; }
 

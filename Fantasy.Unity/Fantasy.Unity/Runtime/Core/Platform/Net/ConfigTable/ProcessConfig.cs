@@ -26,12 +26,34 @@ namespace Fantasy.Platform.Net
 	    /// </summary>
 	    public static ProcessConfigData Instance { get; private set; }
 	    /// <summary>
-	    /// 初始化MachineConfig
+	    /// 初始化ProcessConfig
 	    /// </summary>
 	    /// <param name="processConfigJson"></param>
 	    public static void Initialize(string processConfigJson)
 	    {
-		    Instance = processConfigJson.Deserialize<ProcessConfigData>();
+		    try
+		    {
+			    Instance = processConfigJson.Deserialize<ProcessConfigData>();
+			    foreach (var config in Instance.List)
+			    {
+				    Instance._configs.TryAdd(config.Id, config);
+			    }
+		    }
+		    catch (Exception e)
+		    {
+			    throw new InvalidOperationException($"ProcessConfigData.Json format error {e.Message}");
+		    }
+	    }
+	    /// <summary>
+	    /// 初始化ProcessConfig
+	    /// </summary>
+	    /// <param name="list"></param>
+	    public static void Initialize(List<ProcessConfig> list)
+	    {
+		    Instance = new ProcessConfigData
+		    {
+			    List = list
+		    };
 		    foreach (var config in Instance.List)
 		    {
 			    Instance._configs.TryAdd(config.Id, config);

@@ -30,7 +30,29 @@ namespace Fantasy.Platform.Net
 	    /// <param name="worldConfigJson"></param>
 	    public static void Initialize(string worldConfigJson)
 	    {
-		    Instance = worldConfigJson.Deserialize<WorldConfigData>();
+		    try
+		    {
+			    Instance = worldConfigJson.Deserialize<WorldConfigData>();
+			    foreach (var config in Instance.List)
+			    {
+				    Instance._configs.TryAdd(config.Id, config);
+			    }
+		    }
+		    catch (Exception e)
+		    {
+			    throw new InvalidOperationException($"WorldConfigData.Json format error {e.Message}");
+		    }
+	    }
+	    /// <summary>
+	    /// 初始化WorldConfig
+	    /// </summary>
+	    /// <param name="list"></param>
+	    public static void Initialize(List<WorldConfig> list)
+	    {
+		    Instance = new WorldConfigData
+		    {
+			    List = list
+		    };
 		    foreach (var config in Instance.List)
 		    {
 			    Instance._configs.TryAdd(config.Id, config);

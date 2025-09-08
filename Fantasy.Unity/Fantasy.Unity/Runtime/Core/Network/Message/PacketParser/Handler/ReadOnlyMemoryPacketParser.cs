@@ -77,7 +77,7 @@ namespace Fantasy.PacketParser
                     ref var messageRef = ref MemoryMarshal.GetArrayDataReference(MessageHead);
                     MessagePacketLength = Unsafe.ReadUnaligned<int>(ref messageRef);
                     // 检查消息体长度是否超出限制
-                    if (MessagePacketLength > Packet.PacketBodyMaxLength)
+                    if (MessagePacketLength > ProgramDefine.MaxMessageSize)
                     {
                         throw new ScanException(
                             $"The received information exceeds the maximum limit = {MessagePacketLength}");
@@ -190,10 +190,10 @@ namespace Fantasy.PacketParser
                 packetBodyCount = -1;
             }
             
-            if (packetBodyCount > Packet.PacketBodyMaxLength)
+            if (packetBodyCount > ProgramDefine.MaxMessageSize)
             {
                 // 检查消息体长度是否超出限制
-                throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
+                throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
             }
             
             var buffer = memoryStream.GetBuffer();
@@ -244,7 +244,7 @@ namespace Fantasy.PacketParser
 #endif
                     MessagePacketLength = Unsafe.ReadUnaligned<int>(ref messageRef);
                     // 检查消息体长度是否超出限制
-                    if (MessagePacketLength > Packet.PacketBodyMaxLength)
+                    if (MessagePacketLength > ProgramDefine.MaxMessageSize)
                     {
                         throw new ScanException(
                             $"The received information exceeds the maximum limit = {MessagePacketLength}");
@@ -354,10 +354,10 @@ namespace Fantasy.PacketParser
                 packetBodyCount = -1;
             }
             
-            if (packetBodyCount > Packet.PacketBodyMaxLength)
+            if (packetBodyCount > ProgramDefine.MaxMessageSize)
             {
                 // 检查消息体长度是否超出限制
-                throw new Exception($"Message content exceeds {Packet.PacketBodyMaxLength} bytes");
+                throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
             }
             
             var buffer = memoryStream.GetBuffer();

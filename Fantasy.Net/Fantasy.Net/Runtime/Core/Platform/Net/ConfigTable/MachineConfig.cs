@@ -30,7 +30,29 @@ namespace Fantasy.Platform.Net
         /// <param name="machineConfigJson"></param>
         public static void Initialize(string machineConfigJson)
         {
-            Instance = machineConfigJson.Deserialize<MachineConfigData>();
+            try
+            {
+                Instance = machineConfigJson.Deserialize<MachineConfigData>();
+                foreach (var config in Instance.List)
+                {
+                    Instance._configs.TryAdd(config.Id, config);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException($"MachineConfigData.Json format error {e.Message}");
+            }
+        }
+        /// <summary>
+        /// 初始化MachineConfig
+        /// </summary>
+        /// <param name="list"></param>
+        public static void Initialize(List<MachineConfig> list)
+        {
+            Instance = new MachineConfigData
+            {
+                List = list
+            };
             foreach (var config in Instance.List)
             {
                 Instance._configs.TryAdd(config.Id, config);

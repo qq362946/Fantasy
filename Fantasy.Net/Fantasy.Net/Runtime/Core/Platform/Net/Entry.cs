@@ -19,22 +19,33 @@ public static class Entry
     /// <summary>
     /// 框架初始化
     /// </summary>
+    /// <param name="log">日志实例</param>
     /// <param name="assemblies">注册的Assembly</param>
-    public static async FTask Initialize(params System.Reflection.Assembly[] assemblies)
+    /// <returns></returns>
+    public static async FTask Initialize(ILog? log, params System.Reflection.Assembly[] assemblies)
     {
+        // 注册日志模块到框架
+        if (log != null)
+        {
+            Log.Register(log);
+        }
+        // 加载Fantasy.config配置文件
+        await ConfigLoader.InitializeFromXml(Path.Combine(AppContext.BaseDirectory, "Fantasy.config"));
         // 解析命令行参数
         Parser.Default.ParseArguments<CommandLineOptions>(Environment.GetCommandLineArgs())
             .WithNotParsed(error => throw new Exception("Command line format error!"))
             .WithParsed(option =>
             {
-                ProcessDefine.Options = option;
-                ProcessDefine.InnerNetwork = Enum.Parse<NetworkProtocolType>(option.InnerNetwork);
+                ProgramDefine.ProcessId = option.ProcessId;
+                ProgramDefine.ProcessType  = option.ProcessType;
+                ProgramDefine.RuntimeMode = Enum.Parse<ProcessMode>(option.RuntimeMode);
+                ProgramDefine.StartupGroup = option.StartupGroup;
             });
         // 初始化Log系统
         Log.Initialize();
-        Log.Info($"Fantasy Version:{Define.VERSION}");
+        Log.Info($"Fantasy Version:{ProgramDefine.VERSION}");
         // 检查启动参数,后期可能有机器人等不同的启动参数
-        switch (ProcessDefine.Options.ProcessType)
+        switch (ProgramDefine.ProcessType)
         {
             case "Game":
             {
@@ -42,7 +53,7 @@ public static class Entry
             }
             default:
             {
-                throw new NotSupportedException($"ProcessType is {ProcessDefine.Options.ProcessType} Unrecognized!");
+                throw new NotSupportedException($"ProcessType is {ProgramDefine.ProcessType} Unrecognized!");
             }
         }
         // 初始化程序集管理系统
@@ -51,6 +62,15 @@ public static class Entry
         SerializerManager.Initialize();
         // 精度处理（只针对Windows下有作用、其他系统没有这个问题、一般也不会用Windows来做服务器的）
         WinPeriod.Initialize();
+    }
+
+    /// <summary>
+    /// 框架初始化
+    /// </summary>
+    /// <param name="assemblies">注册的Assembly</param>
+    public static FTask Initialize(params System.Reflection.Assembly[] assemblies)
+    {
+        return Initialize(null, assemblies);
     }
 
     /// <summary>
@@ -80,9 +100,9 @@ public static class Entry
 
     private static async FTask StartProcess()
     {
-        if (ProcessDefine.Options.StartupGroup != 0)
+        if (ProgramDefine.StartupGroup != 0)
         {
-            foreach (var processConfig in ProcessConfigData.Instance.ForEachByStartupGroup((uint)ProcessDefine.Options.StartupGroup))
+            foreach (var processConfig in ProcessConfigData.Instance.ForEachByStartupGroup((uint)ProgramDefine.StartupGroup))
             {
                 await Process.Create(processConfig.Id);
             }
@@ -90,9 +110,9 @@ public static class Entry
             return;
         }
         
-        switch (ProcessDefine.Options.Mode)
+        switch (ProgramDefine.RuntimeMode)
         {
-            case "Develop":
+            case ProcessMode.Develop:
             {
                 foreach (var processConfig in ProcessConfigData.Instance.List)
                 {
@@ -101,9 +121,9 @@ public static class Entry
                 
                 return;
             }
-            case "Release":
+            case ProcessMode.Release:
             {
-                await Process.Create(ProcessDefine.Options.ProcessId);
+                await Process.Create(ProgramDefine.ProcessId);
                 return;
             }
         }

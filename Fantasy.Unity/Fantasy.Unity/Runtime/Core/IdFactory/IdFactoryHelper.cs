@@ -47,6 +47,15 @@ namespace Fantasy.IdFactory
             }
         }
 
+        /// <summary>
+        /// 获得当前的IdFactoryType
+        /// </summary>
+        /// <returns></returns>
+        public static IdFactoryType GetIdFactoryType()
+        {
+            return _idFactoryType;
+        }
+
         internal static IEntityIdFactory EntityIdFactory(uint sceneId, byte worldId)
         {
             switch (_idFactoryType)

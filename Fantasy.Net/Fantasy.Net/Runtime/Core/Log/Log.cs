@@ -27,23 +27,7 @@ namespace Fantasy
                 return;
             }
             
-            var processMode = ProcessMode.None;
-
-            switch (ProcessDefine.Options.Mode)
-            {
-                case "Develop":
-                {
-                    processMode = ProcessMode.Develop;
-                    break;
-                }
-                case "Release":
-                {
-                    processMode = ProcessMode.Release;
-                    break;
-                }
-            }
-            
-            _logCore.Initialize(processMode);
+            _logCore.Initialize(ProgramDefine.RuntimeMode);
         }
 #endif
         /// <summary>
