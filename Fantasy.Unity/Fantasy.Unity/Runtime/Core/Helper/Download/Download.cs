@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Fantasy.Async;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Fantasy.Unity.Download
 {
@@ -63,9 +64,15 @@ namespace Fantasy.Unity.Download
             return new DownloadText(Scene, this).StartDownload(url, monitor, cancellationToken);
         }
 
-        public FTask<byte[]> DownloadByte(string url, bool monitor = false, FCancellationToken cancellationToken = null)
+        /// <summary>
+        /// 下载二进制数据或文件不需要返回FTask:
+        /// 直接在DownloadHandler当中处理接收数据的逻辑。
+        /// </summary>
+        public DownloadByte DownloadByte(string url, DownloadHandler downloadHandler, bool monitor = false)
         {
-            return new DownloadByte(Scene, this).StartDownload(url, monitor, cancellationToken);
+            var DownloadByte = new DownloadByte(Scene, this);
+            DownloadByte.StartDownload(url, downloadHandler, monitor);
+            return DownloadByte;
         }
     }
 }

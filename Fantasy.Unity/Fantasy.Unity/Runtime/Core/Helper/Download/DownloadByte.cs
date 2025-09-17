@@ -10,42 +10,24 @@ namespace Fantasy.Unity.Download
         {
         }
 
-        public FTask<byte[]> StartDownload(string url, bool monitor, FCancellationToken cancellationToken = null)
+        public void StartDownload(string url, DownloadHandler downloadHandler, bool monitor)
         {
-            var task = FTask<byte[]>.Create(false);
-            var unityWebRequestAsyncOperation = Start(UnityWebRequest.Get(url), monitor);
-
-            if (cancellationToken != null)
-            {
-                cancellationToken.Add(() =>
-                {
-                    Dispose();
-                    task.SetResult(null);
-                });
-            }
-            
+            UnityWebRequestAsyncOperation unityWebRequestAsyncOperation = Start(UnityWebRequest.Get(url), downloadHandler, monitor);
+           
             unityWebRequestAsyncOperation.completed += operation =>
             {
                 try
                 {
-                    if (UnityWebRequest.result == UnityWebRequest.Result.Success)
-                    {
-                        var bytes = UnityWebRequest.downloadHandler.data;
-                        task.SetResult(bytes);
-                    }
-                    else
+                    if (UnityWebRequest.result != UnityWebRequest.Result.Success)
                     {
                         Log.Error(UnityWebRequest.error);
-                        task.SetResult(null);
-                    }
+                    } 
                 }
                 finally
                 {
                     Dispose();
                 }
             };
-
-            return task;
         }
     }
 }

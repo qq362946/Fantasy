@@ -10,7 +10,7 @@ namespace Fantasy.Unity.Download
         private long _timeId;
         private ulong _totalDownloadedBytes;
         private Download _download;
-        protected UnityWebRequest UnityWebRequest;
+        public UnityWebRequest UnityWebRequest;
         private FCancellationToken _cancellationToken;
         private Scene Scene;
 
@@ -24,6 +24,17 @@ namespace Fantasy.Unity.Download
         protected UnityWebRequestAsyncOperation Start(UnityWebRequest unityWebRequest, bool monitor)
         {
             UnityWebRequest = unityWebRequest;
+            _timeId = Scene.TimerComponent.Unity.RepeatedTimer(33, Update);
+            return UnityWebRequest.SendWebRequest();
+        }
+
+        /// <summary>
+        /// Start重载版本, 可以传入一个DownloadHandler更精确处理下载
+        /// </summary>
+        protected UnityWebRequestAsyncOperation Start(UnityWebRequest unityWebRequest,DownloadHandler downloadHandler, bool monitor)
+        {
+            UnityWebRequest = unityWebRequest;
+            UnityWebRequest.downloadHandler = downloadHandler;
             _timeId = Scene.TimerComponent.Unity.RepeatedTimer(33, Update);
             return UnityWebRequest.SendWebRequest();
         }
