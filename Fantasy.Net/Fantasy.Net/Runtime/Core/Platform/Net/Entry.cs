@@ -20,17 +20,18 @@ public static class Entry
     /// 框架初始化
     /// </summary>
     /// <param name="log">日志实例</param>
+    /// <param name="configXmlPath">Xml启服配置</param>
     /// <param name="assemblies">注册的Assembly</param>
     /// <returns></returns>
-    public static async FTask Initialize(ILog? log, params System.Reflection.Assembly[] assemblies)
+    public static async FTask Initialize(ILog? log, string configXmlPath, params System.Reflection.Assembly[] assemblies)
     {
         // 注册日志模块到框架
         if (log != null)
         {
             Log.Register(log);
         }
-        // 加载Fantasy.config配置文件
-        await ConfigLoader.InitializeFromXml(Path.Combine(AppContext.BaseDirectory, "Fantasy.config"));
+        // 加载Fantasy.config 启服配置文件
+        await ConfigLoader.InitializeFromXml(configXmlPath);
         // 解析命令行参数
         Parser.Default.ParseArguments<CommandLineOptions>(Environment.GetCommandLineArgs())
             .WithNotParsed(error => throw new Exception("Command line format error!"))
@@ -67,10 +68,11 @@ public static class Entry
     /// <summary>
     /// 框架初始化
     /// </summary>
+    /// <param name="configXmlPath">Xml启服配置</param>
     /// <param name="assemblies">注册的Assembly</param>
-    public static FTask Initialize(params System.Reflection.Assembly[] assemblies)
+    public static FTask Initialize(string configXmlPath,params System.Reflection.Assembly[] assemblies)
     {
-        return Initialize(null, assemblies);
+        return Initialize(null, configXmlPath, assemblies);
     }
 
     /// <summary>
@@ -91,10 +93,11 @@ public static class Entry
     /// <summary>
     /// 初始化并且启动框架
     /// </summary>
+    /// <param name="configXmlPath"></param>
     /// <param name="assemblies"></param>
-    public static async FTask Start(params System.Reflection.Assembly[] assemblies)
+    public static async FTask Start(string configXmlPath,params System.Reflection.Assembly[] assemblies)
     {
-        await Initialize(assemblies);
+        await Initialize(configXmlPath,assemblies);
         await Start();
     }
 

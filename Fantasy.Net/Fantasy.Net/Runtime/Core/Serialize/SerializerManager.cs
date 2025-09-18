@@ -88,9 +88,7 @@ namespace Fantasy.Serialize
                 }
 
                 _isInitialized = true;
-#if FANTASY_DEBUG
-                Log.Info($"初始化序列化器成功，数量为：{_serializers.Length}");
-#endif
+                Log.Info($"初始化序列化器成功，序列化器类型数量为：{_serializers.Length}");
             }
             catch (Exception e)
             {
