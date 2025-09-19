@@ -2,6 +2,7 @@ using Fantasy;
 using Fantasy.Async;
 using Fantasy.Network;
 using UnityEngine;
+using System.Threading;
 
 public class ConnectToServer : MonoBehaviour
 {
@@ -33,7 +34,20 @@ public class ConnectToServer : MonoBehaviour
         // 如果有自己的框架，也可以就单纯拿这个Scene做网络通讯也没问题。
         // Create完成后会返回一个Scene,Fantasy的所有功能都在这个Scene下面。
         // 如果只使用网络部分、只需要找一个地方保存这个Scene供其他地方调用就可以了。
+        线程检查(0);
         _scene = await Scene.Create(SceneRuntimeMode.MainThread);
+        线程检查(1);
+        await Scene.Create(SceneRuntimeMode.ThreadPool);
+        线程检查(2);
+        await Scene.Create(SceneRuntimeMode.MultiThread);
+        线程检查(3);
+
+        void 线程检查(int step) {
+            Debug.Log($"线程检查{step} 当前线程名:{Thread.CurrentThread.Name} Id:{Thread.CurrentThread.ManagedThreadId} " +
+            $"Context:{SynchronizationContext.Current.GetType().Name} " +
+            $"ExecutionContex:{Thread.CurrentThread.ExecutionContext.GetType().Name}");
+        }
+
         // 2:
         // 使用Scene.Connect连接到目标服务器
         // 一个Scene只能创建一个连接不能多个，如果想要创建多个可以重复第一步创建多个Scene。
