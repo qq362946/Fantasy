@@ -72,7 +72,7 @@ public class NormalMessage : MonoBehaviour
         // 用当前的Scene创建一个新的网络连接
         _session = _scene.Connect(
             "127.0.0.1:20000",
-            NetworkProtocolType.WebSocket,
+            NetworkProtocolType.KCP,
             OnConnectComplete,
             OnConnectFail,
             OnConnectDisconnect,
