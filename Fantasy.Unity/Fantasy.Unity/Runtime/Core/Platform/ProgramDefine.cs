@@ -19,7 +19,7 @@ namespace Fantasy
         /// <summary>
         /// 消息体最大长度(字节)。
         /// </summary>
-        public static int MaxMessageSize { get; internal set; }
+        public static int MaxMessageSize { get; internal set; } = ushort.MaxValue * 16;
 #if FANTASY_NET
         /// <summary>
         /// App程序Id。
