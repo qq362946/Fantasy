@@ -52,7 +52,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             {
                 var subSceneTestComponent = scene.AddComponent<SubSceneTestComponent>();
                 Log.Debug("增加了SubSceneTestComponent");
-                scene.EntityComponent.CustomSystem(subSceneTestComponent,CustomSystemType.RunSystem);
+                scene.EntityComponent.CustomSystem(subSceneTestComponent, CustomSystemType.RunSystem);
                 break;
             }
             case SceneType.Addressable:
