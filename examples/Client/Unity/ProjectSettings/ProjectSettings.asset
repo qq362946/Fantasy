@@ -809,7 +809,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: 
+    Standalone: FANTASY_WEBGL
     WebGL: FANTASY_WEBGL
   additionalCompilerArguments: {}
   platformArchitecture: {}
