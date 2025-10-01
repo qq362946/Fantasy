@@ -17,7 +17,7 @@ public class WebSocketServerNetwork : ANetwork
     private HttpListener _httpListener;
     private readonly Dictionary<uint, INetworkChannel> _connectionChannel = new Dictionary<uint, INetworkChannel>();
 
-    public void Initialize(NetworkTarget networkTarget, string bindIp, int port)
+    public void Initialize(NetworkTarget networkTarget, int port)
     {
         base.Initialize(NetworkType.Server, NetworkProtocolType.WebSocket, networkTarget);
         
@@ -25,13 +25,15 @@ public class WebSocketServerNetwork : ANetwork
         {
             _random = new Random();
             _httpListener = new HttpListener();
-            StartAcceptAsync(bindIp, port).Coroutine();
+            StartAcceptAsync(port).Coroutine();
         }
         catch (HttpListenerException e)
         {
             if (e.ErrorCode == 5)
             {
-                throw new Exception($"CMD管理员中输入: netsh http add urlacl url=http://*:8080/ user=Everyone", e);
+                throw new Exception($"如果看下如下错误请尝试下面的办法:" +
+                                    $"1.用管理员运行CMD 输入命令: netsh http add urlacl url=http://+:8080/ user=Everyone。" +
+                                    $"2.用管理员身份运行编辑器或者程序。", e);
             }
 
             Log.Error(e);
@@ -97,11 +99,9 @@ public class WebSocketServerNetwork : ANetwork
         return true;
     }
 
-    private async FTask StartAcceptAsync(string bindIp, int port)
+    private async FTask StartAcceptAsync(int port)
     {
-        var listenUrl = "";
-        var certificatePath = Path.Combine(AppContext.BaseDirectory, $"certificate{bindIp}{port}");
-        listenUrl = Directory.Exists(certificatePath) ? $"https://{bindIp}:{port}/" : $"http://{bindIp}:{port}/";
+        var listenUrl = $"http://+:{port}/";
         _httpListener.Prefixes.Add(listenUrl);
         _httpListener.Start();
         Log.Info($"SceneConfigId = {Scene.SceneConfigId} WebSocketServer Listen {listenUrl}");
@@ -110,7 +110,6 @@ public class WebSocketServerNetwork : ANetwork
             try
             {
                 var httpListenerContext = await _httpListener.GetContextAsync();
-                
                 // 验证WebSocket握手请求头部
                 if (!IsValidWebSocketRequest(httpListenerContext.Request))
                 {
@@ -119,16 +118,15 @@ public class WebSocketServerNetwork : ANetwork
                     httpListenerContext.Response.Close();
                     continue;
                 }
-                
                 var webSocketContext = await httpListenerContext.AcceptWebSocketAsync(null);
                 var channelId = 0xC0000000 | (uint) _random.Next();
-
                 while (_connectionChannel.ContainsKey(channelId))
                 {
                     channelId = 0xC0000000 | (uint) _random.Next();
                 }
-    
-                _connectionChannel.Add(channelId, new WebSocketServerNetworkChannel(this, channelId, webSocketContext, httpListenerContext.Request.RemoteEndPoint));
+
+                var webSocketServerNetworkChannel = new WebSocketServerNetworkChannel(this, channelId, webSocketContext, httpListenerContext.Request.RemoteEndPoint);
+                _connectionChannel.Add(channelId, webSocketServerNetworkChannel);
             }
             catch (Exception e)
             {

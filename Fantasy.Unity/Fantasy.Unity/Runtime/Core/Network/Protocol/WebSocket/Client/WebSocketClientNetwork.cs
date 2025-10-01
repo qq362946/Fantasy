@@ -46,6 +46,11 @@ namespace Fantasy.Network.WebSocket
             {
                 _isInnerDispose = true;
 
+                if (_clientWebSocket.State == WebSocketState.Open || _clientWebSocket.State == WebSocketState.CloseReceived)
+                {
+                    _clientWebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Client Closing", CancellationToken.None).GetAwaiter().GetResult();
+                }
+
                 if (!_cancellationTokenSource.IsCancellationRequested)
                 {
                     try
@@ -59,11 +64,13 @@ namespace Fantasy.Network.WebSocket
                 }
 
                 ClearConnectTimeout();
-                WebSocketClientDisposeAsync().Coroutine();
                 _onConnectDisconnect?.Invoke();
                 _packetParser.Dispose();
                 _packetParser = null;
                 _isSending = false;
+                
+                _clientWebSocket.Dispose();
+                _clientWebSocket = null;
             }
             catch (Exception e)
             {
@@ -73,18 +80,6 @@ namespace Fantasy.Network.WebSocket
             {
                 base.Dispose();
             }
-        }
-
-        private async FTask WebSocketClientDisposeAsync()
-        {
-            if (_clientWebSocket == null)
-            {
-                return;
-            }
-
-            await _clientWebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", CancellationToken.None);
-            _clientWebSocket.Dispose();
-            _clientWebSocket = null;
         }
 
         public override Session Connect(string remoteAddress, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000)
@@ -150,10 +145,16 @@ namespace Fantasy.Network.WebSocket
                     var memory = _pipe.Writer.GetMemory(8192);
                     // 这里接收的数据不一定是一个完整的包。如果大于8192就会分成多个包。
                     var receiveResult = await _clientWebSocket.ReceiveAsync(memory, _cancellationTokenSource.Token);
-
+                    // 服务器发送了关闭帧，客户端需要响应关闭帧
                     if (receiveResult.MessageType == WebSocketMessageType.Close)
                     {
-                        break;
+                        if (_clientWebSocket.State == WebSocketState.CloseReceived)
+                        {
+                            await _clientWebSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Response Closure",
+                                CancellationToken.None);
+                        }
+                        Dispose();
+                        return;
                     }
 
                     var count = receiveResult.Count;

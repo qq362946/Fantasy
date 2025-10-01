@@ -42,6 +42,20 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
         }
         
         _isInnerDispose = true;
+        
+        if (_webSocket.State == WebSocketState.Open || _webSocket.State == WebSocketState.CloseReceived)
+        {
+            try
+            {
+                _webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Normal Closure",
+                    CancellationToken.None).GetAwaiter().GetResult();
+            }
+            catch (Exception)
+            {
+                // 关闭过程中的异常可以忽略
+            }
+        }
+        
         if (!_cancellationTokenSource.IsCancellationRequested)
         {
             try
@@ -53,13 +67,9 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
                 // 通常情况下，此处的异常可以忽略
             }
         }
+        
         _sendBuffers.Clear();
         _network.RemoveChannel(Id);
-        if (_webSocket.State == WebSocketState.Open || _webSocket.State == WebSocketState.CloseReceived)
-        {
-            _webSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Normal Closure",
-                _cancellationTokenSource.Token).GetAwaiter().GetResult();
-        }
         _webSocket.Dispose();
         _isSending = false;
         base.Dispose();
@@ -76,11 +86,16 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
                 var memory = _pipe.Writer.GetMemory(8192);
                 // 这里接收的数据不一定是一个完整的包。如果大于8192就会分成多个包。
                 var receiveResult = await _webSocket.ReceiveAsync(memory, _cancellationTokenSource.Token);
-
+                // 客户端发送了关闭帧，服务器需要响应关闭帧
                 if (receiveResult.MessageType == WebSocketMessageType.Close)
                 {
+                    if (_webSocket.State == WebSocketState.CloseReceived)
+                    {
+                        await _webSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Response Closure",
+                            CancellationToken.None);
+                    }
                     Dispose();
-                    break;
+                    return;
                 }
 
                 var count = receiveResult.Count;
@@ -112,6 +127,9 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
         }
 
         await _pipe.Writer.CompleteAsync();
+        
+        // 接收循环结束，自动释放连接
+        Dispose();
     }
     
     private async FTask PipeWriterFlushAsync(int count)
