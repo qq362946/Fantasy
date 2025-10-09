@@ -194,14 +194,15 @@ namespace Fantasy.Entitas
             {
                 if (entitySystemType.IsGenericTypeDefinition)
                 {
-                    if(!TryPreRegisterAllGenericEntitySystems(entitySystemType, closedGenericsByDefinition,
+                    if (!TryPreRegisterAllGenericEntitySystems(entitySystemType, closedGenericsByDefinition,
                        out Type entityDefinition, assemblyIdentity))
                     {
                         RegisterAsOpenGenericSystem(entityDefinition, entitySystemType);
                         continue;
-#if FANTASY_UNITY
-                    case ILateUpdateSystem iLateUpdateSystem:
-                    {
+                    }
+                }
+                else
+                {
                     object? system = Activator.CreateInstance(entitySystemType);
                     if (!RegisterSystemByInterfaceType(system, assemblyIdentity, entitySystemType))
                         return;
@@ -222,120 +223,10 @@ namespace Fantasy.Entitas
                     }
                 }
                 else
-                _assemblyList.Add(assemblyIdentity, entitiesType);
-            }
-            
-            foreach (var customEntitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(ICustomEntitiesSystem)))
-            {
-                var entity = (ICustomEntitiesSystem)Activator.CreateInstance(customEntitiesSystemType);
-                var customEntitiesSystemKey = new CustomEntitiesSystemKey(entity.CustomEventType, entity.EntitiesType());
-                _customEntitiesSystems.Add(customEntitiesSystemKey, entity);
-                _assemblyCustomSystemList.Add(assemblyIdentity, customEntitiesSystemKey);
-            }
-        }
-                _assemblyList.Add(assemblyIdentity, entitiesType);
-            }
-            
-            foreach (var customEntitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(ICustomEntitiesSystem)))
-            {
-                var entity = (ICustomEntitiesSystem)Activator.CreateInstance(customEntitiesSystemType);
-                var customEntitiesSystemKey = new CustomEntitiesSystemKey(entity.CustomEventType, entity.EntitiesType());
-                _customEntitiesSystems.Add(customEntitiesSystemKey, entity);
-                _assemblyCustomSystemList.Add(assemblyIdentity, customEntitiesSystemKey);
-            }
-        }
-                _assemblyList.Add(assemblyIdentity, entitiesType);
-            }
-            
-            foreach (var customEntitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(ICustomEntitiesSystem)))
-            {
-                var entity = (ICustomEntitiesSystem)Activator.CreateInstance(customEntitiesSystemType);
-                var customEntitiesSystemKey = new CustomEntitiesSystemKey(entity.CustomEventType, entity.EntitiesType());
-                _customEntitiesSystems.Add(customEntitiesSystemKey, entity);
-                _assemblyCustomSystemList.Add(assemblyIdentity, customEntitiesSystemKey);
-            }
-        }
-                _assemblyList.Add(assemblyIdentity, entitiesType);
-            }
-            
-            foreach (var customEntitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(ICustomEntitiesSystem)))
-            {
-                var entity = (ICustomEntitiesSystem)Activator.CreateInstance(customEntitiesSystemType);
-                var customEntitiesSystemKey = new CustomEntitiesSystemKey(entity.CustomEventType, entity.EntitiesType());
-                _customEntitiesSystems.Add(customEntitiesSystemKey, entity);
-                _assemblyCustomSystemList.Add(assemblyIdentity, customEntitiesSystemKey);
-            }
-        }
-                _assemblyList.Add(assemblyIdentity, entitiesType);
-            }
-            
-            foreach (var customEntitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(ICustomEntitiesSystem)))
-            {
-                var entity = (ICustomEntitiesSystem)Activator.CreateInstance(customEntitiesSystemType);
-                var customEntitiesSystemKey = new CustomEntitiesSystemKey(entity.CustomEventType, entity.EntitiesType());
-                _customEntitiesSystems.Add(customEntitiesSystemKey, entity);
-                _assemblyCustomSystemList.Add(assemblyIdentity, customEntitiesSystemKey);
-            }
-        }
-                    case ILateUpdateSystem iLateUpdateSystem:
-                    {
-                        entitiesType = iLateUpdateSystem.EntitiesType();
-                        _lateUpdateSystems.Add(entitiesType, iLateUpdateSystem);
-                        break;
-                    }   
-#endif
-                    default:
-                    {
-                        Log.Error($"IEntitiesSystem not support type {entitiesSystemType}");
-#if FANTASY_UNITY
-                    case ILateUpdateSystem iLateUpdateSystem:
-                    {
-                        entitiesType = iLateUpdateSystem.EntitiesType();
-                        _lateUpdateSystems.Add(entitiesType, iLateUpdateSystem);
-                        break;
-                    }   
-#endif
-                    default:
-                    {
-                        Log.Error($"IEntitiesSystem not support type {entitiesSystemType}");
-#if FANTASY_UNITY
-                    case ILateUpdateSystem iLateUpdateSystem:
-                    {
-                        entitiesType = iLateUpdateSystem.EntitiesType();
-                        _lateUpdateSystems.Add(entitiesType, iLateUpdateSystem);
-                        break;
-                    }   
-#endif
-                    default:
-                    {
-                        Log.Error($"IEntitiesSystem not support type {entitiesSystemType}");
-#if FANTASY_UNITY
-                    case ILateUpdateSystem iLateUpdateSystem:
-                    {
-                        entitiesType = iLateUpdateSystem.EntitiesType();
-                        _lateUpdateSystems.Add(entitiesType, iLateUpdateSystem);
-                        break;
-                    }   
-#endif
-                    default:
-                    {
-                        Log.Error($"IEntitiesSystem not support type {entitiesSystemType}");
-                    }
-                }
-                else
                 {
-                    object? system = Activator.CreateInstance(entitySystemType);
-                    if (!RegisterSystemByInterfaceType(system, assemblyIdentity, entitySystemType))
-                        return;
+                    object system = Activator.CreateInstance(customEntitySystemType);
+                    RegisterCustomSystemByBuiltKey(system, customEntitySystemType, assemblyIdentity);
                 }
-            }
-
-            foreach (var customEntitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(ICustomEntitiesSystem)))
-            {
-                var entity = (ICustomEntitiesSystem)Activator.CreateInstance(customEntitiesSystemType);
-                var customEntitiesSystemKey = new CustomEntitiesSystemKey(entity.CustomEventType, entity.EntitiesType());
-                _customEntitiesSystems.Add(customEntitiesSystemKey, entity);
-                _assemblyCustomSystemList.Add(assemblyIdentity, customEntitiesSystemKey);
             }
         }
 
@@ -580,6 +471,116 @@ namespace Fantasy.Entitas
         /// 执行实体系统的Update
         /// </summary>
         public void Update()
+        {
+            var updateQueueCount = _updateQueue.Count;
+
+            while (updateQueueCount-- > 0)
+            {
+                var updateQueueStruct = _updateQueue.Dequeue();
+
+                if (updateQueueStruct.IsStop)
+                {
+                    continue;
+                }
+
+                if (!_updateSystems.TryGetValue(updateQueueStruct.Type, out var updateSystem))
+                {
+                    continue;
+                }
+
+                var entity = Scene.GetEntity(updateQueueStruct.RunTimeId);
+
+                if (entity == null || entity.IsDisposed)
+                {
+                    _updateQueueDic.Remove(updateQueueStruct.RunTimeId);
+                    continue;
+                }
+
+                _updateQueue.Enqueue(updateQueueStruct);
+
+                try
+                {
+                    updateSystem.Invoke(entity);
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"{updateQueueStruct.Type.FullName} Update Error {e}");
+                }
+            }
+        }
+
+        #endregion
+
+#if FANTASY_UNITY
+        #region LateUpdate
+
+        /// <summary>
+        /// 将实体加入LateUpdate队列，准备进行LateUpdate
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        public void StartLateUpdate(Entity entity)
+        {
+            var type = entity.Type;
+            var entityRuntimeId = entity.RuntimeId;
+
+            if (!_lateUpdateSystems.ContainsKey(type))
+            {
+                return;
+            }
+
+            var updateQueueInfo = new UpdateQueueInfo(type, entityRuntimeId);
+            _lateUpdateQueue.Enqueue(updateQueueInfo);
+            _lateUpdateQueueDic.Add(entityRuntimeId, updateQueueInfo);
+        }
+
+        /// <summary>
+        /// 停止实体进行LateUpdate
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        public void StopLateUpdate(Entity entity)
+        {
+            if (!_lateUpdateQueueDic.Remove(entity.RuntimeId, out var updateQueueInfo))
+            {
+                return;
+            }
+
+            updateQueueInfo.IsStop = true;
+        }
+
+        public void LateUpdate()
+        {
+            var lateUpdateQueue = _lateUpdateQueue.Count;
+
+            while (lateUpdateQueue-- > 0)
+            {
+                var lateUpdateQueueStruct = _lateUpdateQueue.Dequeue();
+
+                if (lateUpdateQueueStruct.IsStop)
+                {
+                    continue;
+                }
+
+                if (!_lateUpdateSystems.TryGetValue(lateUpdateQueueStruct.Type, out var lateUpdateSystem))
+                {
+                    continue;
+                }
+
+                var entity = Scene.GetEntity(lateUpdateQueueStruct.RunTimeId);
+
+                if (entity == null || entity.IsDisposed)
+                {
+                    _lateUpdateQueueDic.Remove(lateUpdateQueueStruct.RunTimeId);
+                    continue;
+                }
+
+                _lateUpdateQueue.Enqueue(lateUpdateQueueStruct);
+
+                try
+                {
+                    lateUpdateSystem.Invoke(entity);
+                }
+                catch (Exception e)
+                {
                     Log.Error($"{lateUpdateQueueStruct.Type.FullName} Update Error {e}");
                 }
             }
@@ -634,9 +635,9 @@ namespace Fantasy.Entitas
                 try
                 {
                     (object, Type)? result = TryBuildClosedGenericSystemInstanceWithEntityType(genericSystemType, preregisteredEntityType);
- 
-                     if( !RegisterSystemByInterfaceType(result!.Value.Item1, assemblyIdentity, result!.Value.Item2)
-                        || result == null)
+
+                    if (!RegisterSystemByInterfaceType(result!.Value.Item1, assemblyIdentity, result!.Value.Item2)
+                       || result == null)
                         isAllSuccessful = false;
                 }
                 catch (Exception ex)
@@ -679,10 +680,10 @@ namespace Fantasy.Entitas
                 try
                 {
                     (object, Type)? result = TryBuildClosedGenericSystemInstanceWithEntityType(customSystemType, preregisteredEntityType);
-                    if(result==null)
+                    if (result == null)
                         isAllSuccessful = false;
                     else
-                        RegisterCustomSystemByBuiltKey(result.Value.Item1, result.Value.Item2,assemblyIdentity);                 
+                        RegisterCustomSystemByBuiltKey(result.Value.Item1, result.Value.Item2, assemblyIdentity);
                 }
                 catch (Exception ex)
                 {
@@ -837,124 +838,15 @@ namespace Fantasy.Entitas
         /// 通过构建的Key来注册自定义System
         /// </summary>
         /// <returns></returns>
-        private void RegisterCustomSystemByBuiltKey(object systemInstance,Type customEntitySystemType,long assemblyIdentity) {
-
+        private void RegisterCustomSystemByBuiltKey(object systemInstance, Type customEntitySystemType, long assemblyIdentity)
         {
-            var updateQueueCount = _updateQueue.Count;
 
-            while (updateQueueCount-- > 0)
-            {
-                var updateQueueStruct = _updateQueue.Dequeue();
-
-                if (updateQueueStruct.IsStop)
-                {
-                    continue;
-                }
-
-                if (!_updateSystems.TryGetValue(updateQueueStruct.Type, out var updateSystem))
-                {
-                    continue;
-                }
-
-                var entity = Scene.GetEntity(updateQueueStruct.RunTimeId);
-
-                if (entity == null || entity.IsDisposed)
-                {
-                    _updateQueueDic.Remove(updateQueueStruct.RunTimeId);
-                    continue;
-                }
-
-                _updateQueue.Enqueue(updateQueueStruct);
-
-                try
-                {
-                    updateSystem.Invoke(entity);
-                }
-                catch (Exception e)
-                {
-                    Log.Error($"{updateQueueStruct.Type.FullName} Update Error {e}");
-                }
-            }
+            var @interface = (ICustomEntitySystem)systemInstance;
+            var customEntitySystemKey = new CustomEntitySystemKey(@interface.CustomEventType, @interface.EntityType());
+            _customEntitySystems.Add(customEntitySystemKey, @interface);
+            _assemblyCustomSystemList.Add(assemblyIdentity, customEntitySystemKey);
         }
 
-        #endregion
-
-#if FANTASY_UNITY
-        #region LateUpdate
-
-        /// <summary>
-        /// 将实体加入LateUpdate队列，准备进行LateUpdate
-        /// </summary>
-        /// <param name="entity">实体对象</param>
-        public void StartLateUpdate(Entity entity)
-        {
-            var type = entity.Type;
-            var entityRuntimeId = entity.RuntimeId;
-
-            if (!_lateUpdateSystems.ContainsKey(type))
-            {
-                return;
-            }
-
-            var updateQueueInfo = new UpdateQueueInfo(type, entityRuntimeId);
-            _lateUpdateQueue.Enqueue(updateQueueInfo);
-            _lateUpdateQueueDic.Add(entityRuntimeId, updateQueueInfo);
-        }
-
-        /// <summary>
-        /// 停止实体进行LateUpdate
-        /// </summary>
-        /// <param name="entity">实体对象</param>
-        public void StopLateUpdate(Entity entity)
-        {
-            if (!_lateUpdateQueueDic.Remove(entity.RuntimeId, out var updateQueueInfo))
-            {
-                return;
-            }
-
-            updateQueueInfo.IsStop = true;
-        }
-
-        public void LateUpdate()
-        {
-            var lateUpdateQueue = _lateUpdateQueue.Count;
-
-            while (lateUpdateQueue-- > 0)
-            {
-                var lateUpdateQueueStruct = _lateUpdateQueue.Dequeue();
-
-                if (lateUpdateQueueStruct.IsStop)
-                {
-                    continue;
-                }
-
-                if (!_lateUpdateSystems.TryGetValue(lateUpdateQueueStruct.Type, out var lateUpdateSystem))
-                {
-                    continue;
-                }
-
-                var entity = Scene.GetEntity(lateUpdateQueueStruct.RunTimeId);
-
-                if (entity == null || entity.IsDisposed)
-                {
-                    _lateUpdateQueueDic.Remove(lateUpdateQueueStruct.RunTimeId);
-                    continue;
-                }
-
-                _lateUpdateQueue.Enqueue(lateUpdateQueueStruct);
-
-                try
-                {
-                    lateUpdateSystem.Invoke(entity);
-                }
-                catch (Exception e)
-                {
-                    Log.Error($"{lateUpdateQueueStruct.Type.FullName} Update Error {e}");
-                }
-            }
-        }
-        #endregion
-#endif
         public long GetHashCode(Type type)
         {
             var setting = ProjectSettings.EntitySettings.TypeCodeMode;
