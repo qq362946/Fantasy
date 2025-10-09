@@ -336,6 +336,7 @@ var WebSocketLibrary =
      *
      * @param instanceId Instance ID
      * @param bufferPtr Pointer to the message buffer
+     * @param offset The offset of the message in the buffer
      * @param length Length of the message in the buffer
      */
     WebSocketSend: function(instanceId, bufferPtr, offset, length)

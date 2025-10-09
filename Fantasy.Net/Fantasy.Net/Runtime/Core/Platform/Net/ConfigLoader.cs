@@ -526,11 +526,13 @@ public static class ConfigLoader
         ProgramDefine.SessionIdleCheckerTimeout = int.Parse(GetOptionalAttribute(sessionNode, "idleTimeout") ?? "5000");
         ProgramDefine.SessionIdleCheckerInterval = int.Parse(GetOptionalAttribute(sessionNode, "idleInterval") ?? "3000");
 
+        ProgramDefine.SessionIdleCheckerTimeout = int.Parse(GetOptionalAttribute(sessionNode, "idleTimeout") ?? "5000");
+        ProgramDefine.SessionIdleCheckerInterval = int.Parse(GetOptionalAttribute(sessionNode, "idleInterval") ?? "3000");
 
-        Log.Debug($"Current inner network protocol 当前会话内网协议:{ProgramDefine.InnerNetwork.ToString()}");
-        Log.Debug($"Max Message Size(byte) 最大消息字节量:{ProgramDefine.MaxMessageSize}");
-        Log.Debug($"Current session idle timeout 当前Session超时检查:{ProgramDefine.SessionIdleCheckerTimeout}");
-        Log.Debug($"Session-check interval 超时检查间隔:{ProgramDefine.SessionIdleCheckerInterval} ");
+         Log.Info($"Current inner network protocol {ProgramDefine.InnerNetwork.ToString()}");
+        Log.Info($"Max Message Size(byte) {ProgramDefine.MaxMessageSize}");
+        Log.Info($"Current session idle timeout {ProgramDefine.SessionIdleCheckerTimeout}");
+        Log.Info($"Session-check interval {ProgramDefine.SessionIdleCheckerInterval} ");
     }
 
     #endregion

@@ -388,7 +388,7 @@ namespace Fantasy.Network.KCP
                 {
                     continue;
                 }
-
+                
                 if (channel.IsDisposed)
                 {
                     _connectionChannel.Remove(channelId);
