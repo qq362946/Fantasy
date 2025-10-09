@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using Fantasy.Async;
+using Fantasy.DataStructure.Collection;
 using Fantasy.Helper;
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -54,9 +55,9 @@ namespace Fantasy.Assembly
                     assembly = currentAssembly;
                 }
             }
-            
+
             var assemblyIdentity = AssemblyIdentity(assembly);
-            
+
             if (AssemblyList.TryGetValue(assemblyIdentity, out var assemblyInfo))
             {
                 assemblyInfo.ReLoad(assembly);
@@ -84,19 +85,19 @@ namespace Fantasy.Assembly
         public static async FTask UnLoadAssembly(System.Reflection.Assembly assembly)
         {
             var assemblyIdentity = AssemblyIdentity(assembly);
-            
+
             if (!AssemblyList.Remove(assemblyIdentity, out var assemblyInfo))
             {
                 return;
             }
-            
+
             assemblyInfo.Unload();
             foreach (var assemblySystem in AssemblySystems)
             {
                 await assemblySystem.OnUnLoad(assemblyIdentity);
             }
         }
-        
+
         /// <summary>
         /// 将AssemblySystem接口的object注册到程序集管理中心
         /// </summary>
@@ -139,12 +140,12 @@ namespace Fantasy.Assembly
                 {
                     continue;
                 }
-                
+
                 if (removeAssemblySystem == assemblySystem)
                 {
                     break;
                 }
-                
+
                 AssemblySystems.Enqueue(removeAssemblySystem);
             }
 #endif
@@ -196,7 +197,7 @@ namespace Fantasy.Assembly
                 {
                     continue;
                 }
-                
+
                 foreach (var type in assemblyLoad)
                 {
                     yield return type;
@@ -221,12 +222,27 @@ namespace Fantasy.Assembly
             {
                 yield break;
             }
-            
+
             foreach (var type in assemblyLoad)
             {
                 yield return type;
             }
         }
+
+        /// <summary>
+        /// 根据开放泛型定义分类, 获取闭合泛型Attributes中的数据
+        /// </summary>
+        /// <param name="assemblyIdentity"></param>
+        /// <returns></returns>
+        public static OneToManyList<Type, Type>? GetClosedGenericsByDefinition(long assemblyIdentity)
+        {
+            if (!AssemblyList.TryGetValue(assemblyIdentity, out AssemblyInfo? assemblyInfo))
+            {
+                return null;
+            }
+            return assemblyInfo.ClosedGenericsFromAttributesByDefinition;
+        }
+
 
         /// <summary>
         /// 获取指定程序集的实例。
@@ -252,7 +268,7 @@ namespace Fantasy.Assembly
                 }
             }
         }
-        
+
         /// <summary>
         /// 根据Assembly的强命名计算唯一标识。
         /// </summary>
@@ -270,14 +286,14 @@ namespace Fantasy.Assembly
         {
             DisposeAsync().Coroutine();
         }
-        
+
         private static async FTask DisposeAsync()
         {
             foreach (var (_, assemblyInfo) in AssemblyList.ToArray())
             {
                 await UnLoadAssembly(assemblyInfo.Assembly);
             }
-            
+
             AssemblyList.Clear();
             AssemblySystems.Clear();
         }

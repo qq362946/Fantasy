@@ -523,10 +523,11 @@ public static class ConfigLoader
         // 加载会话配置
 
         XmlNode? sessionNode = root.SelectSingleNode("f:session", nsManager);
-        ProgramDefine.SessionIdleCheckerTimeout = int.Parse(GetOptionalAttribute(sessionNode, "idleTimeout") ?? "8000");
-        ProgramDefine.SessionIdleCheckerInterval = int.Parse(GetOptionalAttribute(sessionNode, "idleInterval") ?? "5000");
-        
-        Log.Info($"Current inner network protocol {ProgramDefine.InnerNetwork.ToString()}");
+
+        ProgramDefine.SessionIdleCheckerTimeout = int.Parse(GetOptionalAttribute(sessionNode, "idleTimeout") ?? "5000");
+        ProgramDefine.SessionIdleCheckerInterval = int.Parse(GetOptionalAttribute(sessionNode, "idleInterval") ?? "3000");
+
+         Log.Info($"Current inner network protocol {ProgramDefine.InnerNetwork.ToString()}");
         Log.Info($"Max Message Size(byte) {ProgramDefine.MaxMessageSize}");
         Log.Info($"Current session idle timeout {ProgramDefine.SessionIdleCheckerTimeout}");
         Log.Info($"Session-check interval {ProgramDefine.SessionIdleCheckerInterval} ");
