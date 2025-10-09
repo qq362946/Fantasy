@@ -189,15 +189,15 @@ namespace Fantasy.Entitas
                 _assemblyHashCodes.Add(assemblyIdentity, entityType);
             }
 
-            //注册System
+            //注册Systems
             foreach (Type entitySystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(IEntitySystem)))
             {
                 if (entitySystemType.IsGenericTypeDefinition)
                 {
-                    if (!TryPreRegisterGenericEntitySystem(entitySystemType, closedGenericsByDefinition,
-                        assemblyIdentity, out Type entityDefinition))
+                    if(!TryPreRegisterAllGenericEntitySystems(entitySystemType, closedGenericsByDefinition,
+                       out Type entityDefinition, assemblyIdentity))
                     {
-                        RegisterOpenGenericSystem(entityDefinition, entitySystemType);
+                        RegisterAsOpenGenericSystem(entityDefinition, entitySystemType);
                         continue;
                     }
                 }
@@ -212,29 +212,21 @@ namespace Fantasy.Entitas
             //注册自定义System
             foreach (var customEntitySystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(ICustomEntitySystem)))
             {
-                object? system = default;
-
                 if (customEntitySystemType.IsGenericType)
                 {
-                    if (TryBuildClosedGenericSystemInstanceWithThePreRegistered
-                            (customEntitySystemType, closedGenericsByDefinition, out Type entityDefinition) is { } result)
+                    if (!TryPreRegisterAllCustomGenericEntitySystems(customEntitySystemType,
+                        closedGenericsByDefinition, out Type entityDefinition, assemblyIdentity
+                        ))
                     {
-                        (object systemInstance, Type _) = result;
-                        system = systemInstance;
-                    }
-                    else
-                    {
-                        RegisterOpenGenericSystem(entityDefinition, customEntitySystemType);
+                        RegisterAsOpenGenericSystem(entityDefinition, customEntitySystemType);
                         continue;
                     }
                 }
                 else
-                    system = Activator.CreateInstance(customEntitySystemType);
-
-                var @interface = (ICustomEntitySystem)system;
-                var customEntitySystemKey = new CustomEntitySystemKey(@interface.CustomEventType, @interface.EntityType());
-                _customEntitySystems.Add(customEntitySystemKey, @interface);
-                _assemblyCustomSystemList.Add(assemblyIdentity, customEntitySystemKey);
+                {
+                    object system = Activator.CreateInstance(customEntitySystemType);
+                    RegisterCustomSystemByBuiltKey(system,customEntitySystemType, assemblyIdentity);
+                }
             }
         }
 
@@ -596,64 +588,110 @@ namespace Fantasy.Entitas
         #endregion
 #endif
 
-        #region Method
+        #region Method      
+
+        /// <summary>从泛型系统类型的基类中提取实体泛型定义</summary>
+        /// <param name="genericSystemType">泛型系统类型（如XXXXDestroy）</param>
+        /// <param name="entityGenericDefinition">输出的实体泛型定义</param>
+        private void GetEntityGenericDefinitionFromSystem(Type genericSystemType, out Type entityGenericDefinition)
+        {
+            // 从泛型参数取实体泛型定义,
+            // 比如 XXXXDestroy:XXXXSystem<XXXX>, 基类中第一个泛型参数XXXX即为所求实体泛型
+            Type baseType = genericSystemType.BaseType;
+            var arg = baseType.GetGenericArguments()[0];
+            entityGenericDefinition = arg.GetGenericTypeDefinition();
+        }
 
         /// <summary>
         /// 泛型实体闭合System预注册。
         /// 预注册成功返回 true
         /// 预注册失败返回 false
         /// </summary>
-        private bool TryPreRegisterGenericEntitySystem(Type genericSystemType,
-            OneToManyList<Type, Type>? preregisteredEntityGenericsByDefinition,
-            long assemblyIdentity, out Type entityGenericTypeDefinition)
-        {
-            if (TryBuildClosedGenericSystemInstanceWithThePreRegistered(genericSystemType,
-                preregisteredEntityGenericsByDefinition, out Type entityGenericDefinition) is { } result)
-            {
-                (object systemInstance, Type closedSystemType) = result;
-                entityGenericTypeDefinition = entityGenericDefinition;
-                return RegisterSystemByInterfaceType(systemInstance, assemblyIdentity, closedSystemType);
-            }
-            entityGenericTypeDefinition = entityGenericDefinition;
-            return false;
-        }
-
-        /// <summary>
-        /// 根据Attribute提供的闭合泛型, 构建对应的闭合泛型实体System的实例
-        /// </summary>
         /// <param name="genericSystemType">待构造的泛型System</param>
         /// <param name="preregisteredEntityGenericsByDefinition">预注册的实体泛型定义集合</param>
-        /// <param name="entityGenericDefinition">实体泛型的原始定义</param>
-        /// <returns>返回一个System实例object, 和闭合的System泛型Type</returns>
-        private (object, Type)? TryBuildClosedGenericSystemInstanceWithThePreRegistered(Type genericSystemType,
-          OneToManyList<Type, Type>? preregisteredEntityGenericsByDefinition, out Type entityGenericDefinition)
+        /// <param name="entityGenericDefinition">实体泛型定义</param>
+        /// <param name="assemblyIdentity">程序集Id</param>
+        /// <returns>成功返回true 失败返回false</returns>
+        private bool TryPreRegisterAllGenericEntitySystems(
+            Type genericSystemType,
+          OneToManyList<Type, Type>? preregisteredEntityGenericsByDefinition,
+          out Type entityGenericDefinition,
+          long assemblyIdentity
+            )
         {
-            // 1. 从泛型参数取实体泛型定义, 比如 XXXXDestroy:XXXXSystem<XXXX>, 基类中第一个泛型参数XXXX即为所求实体泛型
-            Type baseType = genericSystemType.BaseType;
-            var arg = baseType.GetGenericArguments()[0];
-            entityGenericDefinition = arg.GetGenericTypeDefinition();
+            // 1. 从泛型参数取实体泛型定义
+            GetEntityGenericDefinitionFromSystem(genericSystemType, out entityGenericDefinition);
 
             // 2. 从closedGenericsByDefinition检测标签预注册
             if (preregisteredEntityGenericsByDefinition.ContainsKey(entityGenericDefinition) == false)
             {
-                return null;
+                return false;
             }
 
-            // 3. 处理每个闭合泛型类型
+            // 3. 处理每个闭合泛型类型, 强制要求必须全部成功, 才返回true
+            bool isAllSuccessful = true;
             foreach (var preregisteredEntityType in preregisteredEntityGenericsByDefinition[entityGenericDefinition])
             {
                 try
                 {
-                    // 4. 根据预注册的实体闭合类型, 创建闭合System实例
-                    return TryBuildClosedGenericSystemInstanceWithEntityType(genericSystemType, preregisteredEntityType);
+                    (object, Type)? result = TryBuildClosedGenericSystemInstanceWithEntityType(genericSystemType, preregisteredEntityType);
+ 
+                     if( !RegisterSystemByInterfaceType(result!.Value.Item1, assemblyIdentity, result!.Value.Item2)
+                        || result == null)
+                        isAllSuccessful = false;
                 }
                 catch (Exception ex)
                 {
                     Log.Error($"处理闭合泛型({preregisteredEntityType})发生错误. (Error processing closed generic, msg: {ex.Message})");
+                    isAllSuccessful = false;
                 }
             }
-            Log.Error($"All Failed! 泛型System({genericSystemType})未能成功闭合任何类型! ");
-            return null;
+            return isAllSuccessful;
+        }
+
+        /// <summary>
+        /// 针对自定义的泛型实体System进行预注册
+        /// </summary>
+        /// <param name="customSystemType"></param>
+        /// <param name="preregisteredEntityGenericsByDefinition"></param>
+        /// <param name="entityGenericDefinition"></param>
+        /// <param name="assemblyIdentity"></param>
+        /// <returns></returns>
+        private bool TryPreRegisterAllCustomGenericEntitySystems(
+           Type customSystemType,
+         OneToManyList<Type, Type>? preregisteredEntityGenericsByDefinition,
+         out Type entityGenericDefinition,
+         long assemblyIdentity
+           )
+        {
+            // 1. 与TryPreRegisterAllGenericEntitySystems 相同
+            GetEntityGenericDefinitionFromSystem(customSystemType, out entityGenericDefinition);
+
+            // 2. 与TryPreRegisterAllGenericEntitySystems 相同
+            if (preregisteredEntityGenericsByDefinition.ContainsKey(entityGenericDefinition) == false)
+            {
+                return false;
+            }
+
+            // 3. 与TryPreRegisterAllGenericEntitySystems 相似, 但是注册的是CustomSystem实例
+            bool isAllSuccessful = true;
+            foreach (var preregisteredEntityType in preregisteredEntityGenericsByDefinition[entityGenericDefinition])
+            {
+                try
+                {
+                    (object, Type)? result = TryBuildClosedGenericSystemInstanceWithEntityType(customSystemType, preregisteredEntityType);
+                    if(result==null)
+                        isAllSuccessful = false;
+                    else
+                        RegisterCustomSystemByBuiltKey(result.Value.Item1, result.Value.Item2,assemblyIdentity);                 
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"处理闭合泛型({preregisteredEntityType})发生错误. (Error processing closed generic, msg: {ex.Message})");
+                    isAllSuccessful = false;
+                }
+            }
+            return isAllSuccessful;
         }
 
         /// <summary>
@@ -673,8 +711,8 @@ namespace Fantasy.Entitas
                 Type[] entityGenericArgs = entityType.GetGenericArguments();
                 Type closedSystemType = genericSystemType.MakeGenericType(entityGenericArgs);
 
-                Log.Debug($"(泛型类初始化) 已从({entityType})构造闭合泛型System({closedSystemType})");
-                Log.Debug($"(Generic Initialization) A closed System-Generic has been built, ({closedSystemType}) built from ({entityType})");
+                Log.Debug($"(泛型System初始化) 已从({entityType})构造闭合泛型System({closedSystemType})");
+                Log.Debug($"(Generic-System Initialization) A closed System-Generic has been built, ({closedSystemType}) built from ({entityType})");
 
                 object systemInstance = Activator.CreateInstance(closedSystemType)!;
                 return (systemInstance, closedSystemType);
@@ -692,7 +730,7 @@ namespace Fantasy.Entitas
         /// </summary>
         /// <param name="entityDefinition">实体泛型原始定义</param>
         /// <param name="openGenericSystem">开放式泛型System原始定义</param>
-        private void RegisterOpenGenericSystem(Type entityDefinition, Type openGenericSystem)
+        private void RegisterAsOpenGenericSystem(Type entityDefinition, Type openGenericSystem)
         {
             // 按顺序取四种接口中第一个实现的
             Type? implementedInterface = new[]
@@ -796,6 +834,17 @@ namespace Fantasy.Entitas
             return true;
         }
 
+        /// <summary>
+        /// 通过构建的Key来注册自定义System
+        /// </summary>
+        /// <returns></returns>
+        private void RegisterCustomSystemByBuiltKey(object systemInstance,Type customEntitySystemType,long assemblyIdentity) {
+
+            var @interface = (ICustomEntitySystem)systemInstance;
+            var customEntitySystemKey = new CustomEntitySystemKey(@interface.CustomEventType, @interface.EntityType());
+            _customEntitySystems.Add(customEntitySystemKey, @interface);
+            _assemblyCustomSystemList.Add(assemblyIdentity, customEntitySystemKey);
+        }
 
         public long GetHashCode(Type type)
         {
