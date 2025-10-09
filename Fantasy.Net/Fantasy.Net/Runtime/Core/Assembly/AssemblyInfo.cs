@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Fantasy.Attributes;
 using Fantasy.DataStructure.Collection;
 
 // ReSharper disable CollectionNeverQueried.Global
@@ -25,12 +26,15 @@ namespace Fantasy.Assembly
         /// <summary>
         /// 程序集类型集合，获取一个列表，包含从程序集加载的所有类型。
         /// </summary>
-        public readonly List<Type> AssemblyTypeList = new List<Type>();
+        public readonly List<Type> AssemblyTypeList = new ();
         /// <summary>
         /// 程序集类型分组集合，获取一个分组列表，将接口类型映射到实现这些接口的类型。
         /// </summary>
-        public readonly OneToManyList<Type, Type> AssemblyTypeGroupList = new OneToManyList<Type, Type>();
-
+        public readonly OneToManyList<Type, Type> AssemblyTypeGroupList = new ();
+        /// <summary>
+        /// 从Attributes中提取的开放泛型映射到闭合泛型标签类型
+        /// </summary>
+        public readonly OneToManyList<Type, Type> ClosedGenericsFromAttributesByDefinition = new ();
         /// <summary>
         /// 初始化 <see cref="AssemblyInfo"/> 类的新实例。
         /// </summary>
@@ -51,6 +55,9 @@ namespace Fantasy.Assembly
 
             foreach (var type in assemblyTypes)
             {
+
+                CollectClosedGenericsFromAttributes(type);
+
                 if (type.IsAbstract || type.IsInterface)
                 {
                     continue;
@@ -65,6 +72,24 @@ namespace Fantasy.Assembly
             }
 
             AssemblyTypeList.AddRange(assemblyTypes);
+        }
+
+        /// <summary>
+        /// 从闭合泛型标签中收集类型
+        /// </summary>
+        private void CollectClosedGenericsFromAttributes(Type type)
+        {
+            var closedAttrs = type.GetCustomAttributes<ClosedGenericsAttribute>(false);
+            foreach (var attr in closedAttrs)
+            {
+                if (attr.theClosed != null)
+                {
+                    foreach (var closedType in attr.theClosed)
+                    {                   
+                        ClosedGenericsFromAttributesByDefinition.Add(closedType.GetGenericTypeDefinition(),closedType);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -84,6 +109,7 @@ namespace Fantasy.Assembly
         {
             AssemblyTypeList.Clear();
             AssemblyTypeGroupList.Clear();
+            ClosedGenericsFromAttributesByDefinition.Clear();
         }
     }
 }

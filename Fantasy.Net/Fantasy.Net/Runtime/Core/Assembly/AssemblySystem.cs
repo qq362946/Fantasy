@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using Fantasy.Async;
+using Fantasy.DataStructure.Collection;
 using Fantasy.Helper;
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -227,6 +228,21 @@ namespace Fantasy.Assembly
                 yield return type;
             }
         }
+
+        /// <summary>
+        /// 根据开放泛型定义分类, 获取闭合泛型Attributes中的数据
+        /// </summary>
+        /// <param name="assemblyIdentity"></param>
+        /// <returns></returns>
+        public static OneToManyList<Type, Type>? GetClosedGenericsByDefinition(long assemblyIdentity)
+        {
+            if (!AssemblyList.TryGetValue(assemblyIdentity, out AssemblyInfo? assemblyInfo))
+            {
+                return null;
+            }
+            return assemblyInfo.ClosedGenericsFromAttributesByDefinition;
+        }
+
 
         /// <summary>
         /// 获取指定程序集的实例。

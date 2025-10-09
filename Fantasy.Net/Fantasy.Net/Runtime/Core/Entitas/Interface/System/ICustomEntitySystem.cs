@@ -7,7 +7,7 @@ namespace Fantasy.Entitas.Interface
     /// 如果需要自定义组件事件系统，请继承此接口。
     /// 这个接口内部使用。不对外开放。
     /// </summary>
-    internal interface ICustomEntitiesSystem
+    internal interface ICustomEntitySystem
     {
         /// <summary>
         /// 事件类型
@@ -18,7 +18,7 @@ namespace Fantasy.Entitas.Interface
         /// 实体的类型
         /// </summary>
         /// <returns></returns>
-        Type EntitiesType();
+        Type EntityType();
         /// <summary>
         /// 框架内部调用的触发事件方法
         /// </summary>
@@ -31,7 +31,7 @@ namespace Fantasy.Entitas.Interface
     /// 如果需要自定义组件事件系统，请继承此抽象类。
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class CustomSystem<T> : ICustomEntitiesSystem where T : Entity
+    public abstract class CustomSystem<T> : ICustomEntitySystem where T : Entity
     {
         /// <summary>
         /// 这个1表示是一个自定义事件类型，执行这个事件是时候需要用到这个1.
@@ -46,7 +46,7 @@ namespace Fantasy.Entitas.Interface
         /// 实体的类型
         /// </summary>
         /// <returns></returns>
-        public abstract Type EntitiesType();
+        public abstract Type EntityType();
         /// <summary>
         /// 框架内部调用的触发Awake的方法。
         /// </summary>

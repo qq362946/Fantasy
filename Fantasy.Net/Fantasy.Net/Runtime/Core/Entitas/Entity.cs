@@ -79,7 +79,7 @@ namespace Fantasy.Entitas
         [ProtoIgnore]
         public Entity Parent { get; protected set; }
         /// <summary>
-        /// 实体的真实Type
+        /// 实体的真实Type, 如果是泛型实体对象, 那么这里的Type会是运行时闭合泛型, 比如 GenericEntity`1 [int] 
         /// </summary>
         [BsonIgnore]
         [JsonIgnore]
@@ -304,7 +304,7 @@ namespace Fantasy.Entitas
                     Log.Error($"component type :{type.FullName} for implementing ISupportedSingleCollection, it is required that the Id must be the same as the parent");
                 }
 #endif
-                var typeHashCode = Scene.EntityComponent.GetHashCode(type);;
+                var typeHashCode = Scene.EntityComponent.GetHashCode(type);
                 
                 if (_tree == null)
                 {
@@ -474,7 +474,7 @@ namespace Fantasy.Entitas
         #region GetComponent
 
         /// <summary>
-        /// 当前实体上查找一个字实体
+        /// 当前实体上查找一个子实体
         /// </summary>
         /// <typeparam name="T">要查找实体泛型类型</typeparam>
         /// <returns>查找的实体实例</returns>
@@ -490,7 +490,7 @@ namespace Fantasy.Entitas
         }
 
         /// <summary>
-        /// 当前实体上查找一个字实体
+        /// 当前实体上查找一个子实体
         /// </summary>
         /// <param name="type">要查找实体类型</param>
         /// <returns>查找的实体实例</returns>
@@ -506,7 +506,7 @@ namespace Fantasy.Entitas
         }
 
         /// <summary>
-        /// 当前实体上查找一个字实体
+        /// 当前实体上查找一个子实体
         /// </summary>
         /// <param name="id">要查找实体的Id</param>
         /// <typeparam name="T">要查找实体泛型类型</typeparam>
@@ -522,7 +522,7 @@ namespace Fantasy.Entitas
         }
 
         /// <summary>
-        /// 当前实体上查找一个字实体，如果没有就创建一个新的并添加到当前实体上
+        /// 当前实体上查找一个子实体，如果没有就创建一个新的并添加到当前实体上
         /// </summary>
         /// <param name="isPool">是否从对象池创建</param>
         /// <typeparam name="T">要查找或添加实体泛型类型</typeparam>
