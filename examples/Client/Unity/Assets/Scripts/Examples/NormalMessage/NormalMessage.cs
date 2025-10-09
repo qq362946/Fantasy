@@ -67,8 +67,7 @@ public class NormalMessage : MonoBehaviour
     private long timerId;
     private void OnConnectButtonClick()
     {
-        ConnectButton.interactable = false;
-        
+        ConnectButton.interactable = false;  
         // 用当前的Scene创建一个新的网络连接
         _session = _scene.Connect(
             "127.0.0.1:20000",

@@ -15,7 +15,7 @@ namespace Fantasy
         public MainScheduler()
         {
             ThreadSynchronizationContext = new ThreadSynchronizationContext();
-#if !FANTASY_WEBGL
+#if !FANTASY_WEBGL || !UNITY_EDITOR
             SynchronizationContext.SetSynchronizationContext(ThreadSynchronizationContext);
 #endif
         }
