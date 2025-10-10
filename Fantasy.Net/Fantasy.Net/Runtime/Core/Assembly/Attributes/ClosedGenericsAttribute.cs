@@ -29,4 +29,23 @@ namespace Fantasy.Attributes
             theClosed = theClosedGenerics;
         }
     }
+    /// <summary>
+    /// 单个闭合泛型预注册
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum , Inherited = false, AllowMultiple = true)]
+    public class ClosedGenericAttribute : Attribute
+    {
+        /// <summary>
+        /// 闭合泛型
+        /// </summary>
+        public Type? theClosed { get; }
+        /// <summary>
+        /// 构造
+        /// </summary>
+        /// <param name="theClosedGeneric"></param>
+        public ClosedGenericAttribute(Type theClosedGeneric)
+        {
+            theClosed = theClosedGeneric;
+        }
+    }
 }
