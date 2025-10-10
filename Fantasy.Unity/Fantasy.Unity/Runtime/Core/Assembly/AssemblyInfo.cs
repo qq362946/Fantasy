@@ -80,6 +80,7 @@ namespace Fantasy.Assembly
         private void CollectClosedGenericsFromAttributes(Type type)
         {
             var closedAttrs = type.GetCustomAttributes<ClosedGenericsAttribute>(false);
+            var closedAttrsForOne = type.GetCustomAttributes<ClosedGenericAttribute>(false);
             foreach (var attr in closedAttrs)
             {
                 if (attr.theClosed != null)
@@ -88,6 +89,13 @@ namespace Fantasy.Assembly
                     {
                         ClosedGenericsFromAttributesByDefinition.Add(closedType.GetGenericTypeDefinition(), closedType);
                     }
+                }
+            }
+            foreach (var attr in closedAttrsForOne)
+            {
+                if (attr.theClosed != null)
+                {
+                    ClosedGenericsFromAttributesByDefinition.Add(attr.theClosed.GetGenericTypeDefinition(), closedType);
                 }
             }
         }
