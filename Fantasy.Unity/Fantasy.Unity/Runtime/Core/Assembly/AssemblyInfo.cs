@@ -95,7 +95,7 @@ namespace Fantasy.Assembly
             {
                 if (attr.theClosed != null)
                 {
-                    ClosedGenericsFromAttributesByDefinition.Add(attr.theClosed.GetGenericTypeDefinition(), closedType);
+                    ClosedGenericsFromAttributesByDefinition.Add(attr.theClosed.GetGenericTypeDefinition(), attr.theClosed);
                 }
             }
         }
