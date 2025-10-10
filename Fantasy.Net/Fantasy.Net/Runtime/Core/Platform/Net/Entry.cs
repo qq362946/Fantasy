@@ -44,7 +44,6 @@ public static class Entry
             });
         // 初始化Log系统
         Log.Initialize();
-        Log.Info($"Fantasy Version:{ProgramDefine.VERSION}");
         // 检查启动参数,后期可能有机器人等不同的启动参数
         switch (ProgramDefine.ProcessType)
         {

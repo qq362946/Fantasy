@@ -1,3 +1,4 @@
+using System;
 #if FANTASY_NET
 using Fantasy.Network;
 using Fantasy.Platform.Net;
@@ -17,9 +18,10 @@ namespace Fantasy
         /// </summary>
         public const string VERSION = "Fantasy 2.0 Beta";
         /// <summary>
-        /// 消息体最大长度(字节)。
+        /// 消息体最大长度(字节)。默认1024k。
+        /// 注意:前后端设置的消息大小，一定要一样才可以，不然会不出现问题。
         /// </summary>
-        public static int MaxMessageSize { get; internal set; } = ushort.MaxValue * 16;
+        public static int MaxMessageSize { get; set; } = ushort.MaxValue * 16;
 #if FANTASY_NET
         /// <summary>
         /// App程序Id。

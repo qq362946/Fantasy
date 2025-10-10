@@ -29,6 +29,7 @@ public static class Entry
         {
             Log.Register(log);
         }
+        Log.Info($"Fantasy Version:{ProgramDefine.VERSION}");
         // 加载Fantasy.config配置文件
         await ConfigLoader.InitializeFromXml(Path.Combine(AppContext.BaseDirectory, "Fantasy.config"));
         // 解析命令行参数
@@ -43,7 +44,6 @@ public static class Entry
             });
         // 初始化Log系统
         Log.Initialize();
-        Log.Info($"Fantasy Version:{ProgramDefine.VERSION}");
         // 检查启动参数,后期可能有机器人等不同的启动参数
         switch (ProgramDefine.ProcessType)
         {

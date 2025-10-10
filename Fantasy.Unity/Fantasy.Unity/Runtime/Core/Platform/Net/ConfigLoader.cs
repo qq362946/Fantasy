@@ -242,9 +242,9 @@ public static class ConfigLoader
         return node.Attributes?[attributeName]?.Value ?? throw new InvalidOperationException($"Required attribute '{attributeName}' is missing or null");
     }
 
-    private static string? GetOptionalAttribute(XmlNode node, string attributeName)
+    private static string? GetOptionalAttribute(XmlNode? node, string attributeName)
     {
-        return node.Attributes?[attributeName]?.Value;
+        return node?.Attributes?[attributeName]?.Value;
     }
 
     #endregion
@@ -509,40 +509,27 @@ public static class ConfigLoader
     private static void LoadRuntimeConfig(XmlNode root, XmlNamespaceManager nsManager)
     {
         // 加载IdFactory配置
-        
-        var idFactoryNode = root.SelectSingleNode("f:idFactory", nsManager);
-        
-        if (idFactoryNode != null)
-        {
-            var idFactoryType = GetOptionalAttribute(idFactoryNode, "type") ?? "World";
-            IdFactoryHelper.Initialize(Enum.Parse<IdFactoryType>(idFactoryType));
-        }
+
+        XmlNode? idFactoryNode = root.SelectSingleNode("f:idFactory", nsManager);
+        string idFactoryType = GetOptionalAttribute(idFactoryNode, "type") ?? "World";
+        IdFactoryHelper.Initialize(Enum.Parse<IdFactoryType>(idFactoryType));
 
         // 加载网络配置
-        
-        var networkNode = root.SelectSingleNode("f:network", nsManager);
-        
-        if (networkNode != null)
-        {
-            ProgramDefine.InnerNetwork = Enum.Parse<NetworkProtocolType>(GetOptionalAttribute(networkNode, "inner") ?? "TCP");
-            ProgramDefine.MaxMessageSize = int.Parse(GetOptionalAttribute(networkNode, "maxMessageSize") ?? "1048560");
-        }
-        else
-        {
-            // 设置默认值
-            ProgramDefine.InnerNetwork = NetworkProtocolType.TCP;
-            ProgramDefine.MaxMessageSize = 1048560;
-        }
+
+        XmlNode? networkNode = root.SelectSingleNode("f:network", nsManager);
+        ProgramDefine.InnerNetwork = Enum.Parse<NetworkProtocolType>(GetOptionalAttribute(networkNode, "inner") ?? "TCP");
+        ProgramDefine.MaxMessageSize = int.Parse(GetOptionalAttribute(networkNode, "maxMessageSize") ?? "1048560");
 
         // 加载会话配置
+
+        XmlNode? sessionNode = root.SelectSingleNode("f:session", nsManager);
+        ProgramDefine.SessionIdleCheckerTimeout = int.Parse(GetOptionalAttribute(sessionNode, "idleTimeout") ?? "8000");
+        ProgramDefine.SessionIdleCheckerInterval = int.Parse(GetOptionalAttribute(sessionNode, "idleInterval") ?? "5000");
         
-        var sessionNode = root.SelectSingleNode("f:session", nsManager);
-        
-        if (sessionNode != null)
-        {
-            ProgramDefine.SessionIdleCheckerTimeout = int.Parse(GetOptionalAttribute(sessionNode, "idleTimeout") ?? "8000");
-            ProgramDefine.SessionIdleCheckerInterval = int.Parse(GetOptionalAttribute(sessionNode, "idleInterval") ?? "5000");
-        }
+        Log.Info($"Current inner network protocol {ProgramDefine.InnerNetwork.ToString()}");
+        Log.Info($"Max Message Size(byte) {ProgramDefine.MaxMessageSize}");
+        Log.Info($"Current session idle timeout {ProgramDefine.SessionIdleCheckerTimeout}");
+        Log.Info($"Session-check interval {ProgramDefine.SessionIdleCheckerInterval} ");
     }
 
     #endregion
