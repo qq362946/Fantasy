@@ -2,6 +2,8 @@
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8603 // Possible null reference return.
+
+
 namespace Fantasy.Entitas
 {
     /// <summary>
@@ -54,6 +56,23 @@ namespace Fantasy.Entitas
             }
 
             return v._entity;
+        }
+
+        /// <summary>
+        /// 显式访问器
+        /// </summary>
+        public T Value
+        {
+            get
+            {
+                if (_entity == null)
+                    return null;
+
+                if (_entity.RuntimeId != _runTimeId)
+                    _entity = null;
+
+                return _entity;
+            }
         }
     }
 }
