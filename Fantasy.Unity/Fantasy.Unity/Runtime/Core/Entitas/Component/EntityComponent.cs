@@ -178,8 +178,8 @@ namespace Fantasy.Entitas
 #if FANTASY_NET
                     if (closedGenericsByDefinition.ContainsKey(entityType) == false)
                     {
-                        Log.Warning($"检测到泛型实体 ({entityType})从未进行任何闭合泛型预注册,请务必留意! 强烈建议使用ClosedGenericsAttribute预注册所需的闭合泛型以避免Awake时反射.");
-                        Log.Warning($"Generic entity class ({entityType}) has never been pre-registered with any closed generics. Pay Attention Please! And it is strongly recommended to pre-register the required closed generics using ClosedGenericsAttribute to avoid Awake-Time reflection.");
+                        Log.Warning($"检测到泛型实体 ({entityType})在程序集{assemblyIdentity}当中从未进行任何闭合泛型预注册,请务必留意! 可能存在Awake时反射风险!");
+                        Log.Warning($"Detected a generic entity ({entityType}) in assembly {assemblyIdentity} that has never been pre-registered with any closed generic types. Please be aware — this may cause reflection overhead during Awake!");
                     }
 #endif
                     continue;
@@ -200,6 +200,7 @@ namespace Fantasy.Entitas
                         RegisterAsOpenGenericSystem(entityDefinition, entitySystemType);
                         continue;
                     }
+                    RegisterAsOpenGenericSystem(entityDefinition, entitySystemType);
                 }
                 else
                 {
@@ -221,6 +222,7 @@ namespace Fantasy.Entitas
                         RegisterAsOpenGenericSystem(entityDefinition, customEntitySystemType);
                         continue;
                     }
+                    RegisterAsOpenGenericSystem(entityDefinition, customEntitySystemType);
                 }
                 else
                 {
@@ -292,7 +294,7 @@ namespace Fantasy.Entitas
                 if (entity.Type.IsGenericType == false) return;
                 else
                 {
-                    //运行时实时反射构造泛型对应的System实例,一般来说 建议用ClosedGenericsAttribute预注册,
+                    //运行时实时反射构造泛型对应的System实例,一般来说 建议用ClosedGenericAttribute预注册,
                     // 但是也兼容: 
 
                     var definition = entity.Type.GetGenericTypeDefinition();
@@ -711,8 +713,8 @@ namespace Fantasy.Entitas
                 Type[] entityGenericArgs = entityType.GetGenericArguments();
                 Type closedSystemType = genericSystemType.MakeGenericType(entityGenericArgs);
 
-                Log.Debug($"(泛型System初始化) 已从({entityType})构造闭合泛型System({closedSystemType})");
-                Log.Debug($"(Generic-System Initialization) A closed System-Generic has been built, ({closedSystemType}) built from ({entityType})");
+                Log.Debug($"(泛型System构造) 已从({entityType})构造闭合泛型System({closedSystemType})");
+                Log.Debug($"(Generic-System Built) A closed System-Generic has been built, ({closedSystemType}) built from ({entityType})");
 
                 object systemInstance = Activator.CreateInstance(closedSystemType)!;
                 return (systemInstance, closedSystemType);
@@ -721,12 +723,12 @@ namespace Fantasy.Entitas
             {
                 Log.Error($"处理闭合泛型({entityType})发生错误.");
                 Log.Error($"Error processing closed generic, msg: {ex.Message}");
+                return null;
             }
-            return null;
         }
 
         /// <summary>
-        /// 注册开放式泛型实体System (如果闭合注册没成功才会采取这一方案,与其配套的是运行时构建)
+        /// 注册开放式泛型实体System (与这一注册配套的是运行时构建)
         /// </summary>
         /// <param name="entityDefinition">实体泛型原始定义</param>
         /// <param name="openGenericSystem">开放式泛型System原始定义</param>
@@ -771,14 +773,6 @@ namespace Fantasy.Entitas
                 {
                     Log.Error($"泛型System({openGenericSystem})未实现任何支持的接口，无法注册. Generic-System lack Interface!");
                 }
-#if FANTASY_NET
-                Log.Warning($"({openGenericSystem})以开放式泛型注册了,可能会导致Awake时反射,请留意.");
-                Log.Warning($"Generic System ({openGenericSystem}) has been registered as an open generic, which may cause reflection during Awake.");
-#endif
-#if FANTASY_UNITY
-                Log.Info($"({openGenericSystem})以开放式泛型注册了,可能会导致Awake时反射,请留意.");
-                Log.Info($"Generic System ({openGenericSystem}) has been registered as an open generic, which may cause reflection during Awake.");
-#endif
             }
         }
 
@@ -877,8 +871,8 @@ namespace Fantasy.Entitas
                 {
                     hashCode = HashCodeHelper.ComputeHash64(type.FullName);
 #if FANTASY_NET
-                    Log.Warning($"检测到泛型{type}正在处理HashCode计算, 请务必留意是否需要添加ClosedGenericsAttribute以预注册.");
-                    Log.Warning($"Generic type {type} detected during HashCode computation. Please ensure a ClosedGenericsAttribute is added for pre-registration if necessary.");
+                    Log.Warning($"检测到泛型{type}正在处理HashCode计算, 请务必留意是否需要添加ClosedGenericAttribute以预注册.");
+                    Log.Warning($"Generic type {type} detected during HashCode computation. Please ensure a ClosedGenericAttribute is added for pre-registration if necessary.");
 #endif
                 }
             }

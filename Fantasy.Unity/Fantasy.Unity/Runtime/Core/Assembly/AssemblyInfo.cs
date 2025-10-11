@@ -79,25 +79,24 @@ namespace Fantasy.Assembly
         /// </summary>
         private void CollectClosedGenericsFromAttributes(Type type)
         {
-            var closedAttrs = type.GetCustomAttributes<ClosedGenericsAttribute>(false);
-            var closedAttrsForOne = type.GetCustomAttributes<ClosedGenericAttribute>(false);
+            var closedAttrs = type.GetCustomAttributes<ClosedGenericAttribute>(false);
             foreach (var attr in closedAttrs)
             {
                 if (attr.theClosed != null)
                 {
-                    foreach (var closedType in attr.theClosed)
-                    {
-                        ClosedGenericsFromAttributesByDefinition.Add(closedType.GetGenericTypeDefinition(), closedType);
-                    }
-                }
-            }
-            foreach (var attr in closedAttrsForOne)
-            {
-                if (attr.theClosed != null)
-                {
+                    Log.Debug($"收集到{attr.theClosed}");
                     ClosedGenericsFromAttributesByDefinition.Add(attr.theClosed.GetGenericTypeDefinition(), attr.theClosed);
                 }
             }
+            //TODO 自动分析泛型闭合
+            //var closedAttrsByAuto = type.GetCustomAttributes<AutoCloseGenericOnLoadAttribute>(false);
+            //if(type.IsGenericTypeDefinition)
+            //{
+            //    foreach (var attr in closedAttrsByAuto)
+            //    {
+
+            //    }
+            //}
         }
 
         /// <summary>
