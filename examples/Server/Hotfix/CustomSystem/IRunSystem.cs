@@ -24,7 +24,7 @@ public abstract class RunSystem<T> : CustomSystem<T> where T : Entity
     /// 不知道为什么这样定义的，就照搬就可以了。
     /// </summary>
     /// <returns></returns>
-    public override Type EntitiesType() => typeof(T);
+    public override Type EntityType() => typeof(T);
 }
 // 下面是一个测试自定义系统。
 // 首先定义一个组件用来测试自定义系统。

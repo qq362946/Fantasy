@@ -46,15 +46,15 @@ namespace Fantasy.Entitas
     internal struct CustomEntitiesSystemKey : IEquatable<CustomEntitiesSystemKey>
     {
         public int CustomEventType { get; }
-        public Type EntitiesType { get; }
-        public CustomEntitiesSystemKey(int customEventType, Type entitiesType)
+        public Type EntityType { get; }
+        public CustomEntitiesSystemKey(int customEventType, Type entityType)
         {
             CustomEventType = customEventType;
-            EntitiesType = entitiesType;
+            EntityType = entityType;
         }
         public bool Equals(CustomEntitiesSystemKey other)
         {
-            return CustomEventType == other.CustomEventType && EntitiesType == other.EntitiesType;
+            return CustomEventType == other.CustomEventType && EntityType == other.EntityType;
         }
 
         public override bool Equals(object obj)
@@ -64,7 +64,7 @@ namespace Fantasy.Entitas
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(CustomEventType, EntitiesType);
+            return HashCode.Combine(CustomEventType, EntityType);
         }
     }
 
@@ -85,7 +85,7 @@ namespace Fantasy.Entitas
         private readonly Dictionary<Type, IDeserializeSystem> _deserializeSystems = new();
         
         private readonly OneToManyList<long, CustomEntitiesSystemKey> _assemblyCustomSystemList = new();
-        private readonly Dictionary<CustomEntitiesSystemKey, ICustomEntitiesSystem> _customEntitiesSystems = new Dictionary<CustomEntitiesSystemKey, ICustomEntitiesSystem>();
+        private readonly Dictionary<CustomEntitiesSystemKey, ICustomEntitySystem> _customEntitiesSystems = new Dictionary<CustomEntitiesSystemKey, ICustomEntitySystem>();
         
         private readonly Queue<UpdateQueueInfo> _updateQueue = new Queue<UpdateQueueInfo>();
         private readonly Dictionary<long, UpdateQueueInfo> _updateQueueDic = new Dictionary<long, UpdateQueueInfo>();
@@ -139,7 +139,7 @@ namespace Fantasy.Entitas
 
         private void LoadInner(long assemblyIdentity)
         {
-            foreach (var entitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(IEntitiesSystem)))
+            foreach (var entitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(IEntitySystem)))
             {
                 Type entitiesType = null;
                 var entity = Activator.CreateInstance(entitiesSystemType);
@@ -148,32 +148,32 @@ namespace Fantasy.Entitas
                 {
                     case IAwakeSystem iAwakeSystem:
                     {
-                        entitiesType = iAwakeSystem.EntitiesType();
+                        entitiesType = iAwakeSystem.EntityType();
                         _awakeSystems.Add(entitiesType, iAwakeSystem);
                         break;
                     }
                     case IDestroySystem iDestroySystem:
                     {
-                        entitiesType = iDestroySystem.EntitiesType();
+                        entitiesType = iDestroySystem.EntityType();
                         _destroySystems.Add(entitiesType, iDestroySystem);
                         break;
                     }
                     case IDeserializeSystem iDeserializeSystem:
                     {
-                        entitiesType = iDeserializeSystem.EntitiesType();
+                        entitiesType = iDeserializeSystem.EntityType();
                         _deserializeSystems.Add(entitiesType, iDeserializeSystem);
                         break;
                     }
                     case IUpdateSystem iUpdateSystem:
                     {
-                        entitiesType = iUpdateSystem.EntitiesType();
+                        entitiesType = iUpdateSystem.EntityType();
                         _updateSystems.Add(entitiesType, iUpdateSystem);
                         break;
                     }
 #if FANTASY_UNITY
                     case ILateUpdateSystem iLateUpdateSystem:
                     {
-                        entitiesType = iLateUpdateSystem.EntitiesType();
+                        entitiesType = iLateUpdateSystem.EntityType();
                         _lateUpdateSystems.Add(entitiesType, iLateUpdateSystem);
                         break;
                     }   
@@ -188,10 +188,10 @@ namespace Fantasy.Entitas
                 _assemblyList.Add(assemblyIdentity, entitiesType);
             }
             
-            foreach (var customEntitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(ICustomEntitiesSystem)))
+            foreach (var customEntitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(ICustomEntitySystem)))
             {
-                var entity = (ICustomEntitiesSystem)Activator.CreateInstance(customEntitiesSystemType);
-                var customEntitiesSystemKey = new CustomEntitiesSystemKey(entity.CustomEventType, entity.EntitiesType());
+                var entity = (ICustomEntitySystem)Activator.CreateInstance(customEntitiesSystemType);
+                var customEntitiesSystemKey = new CustomEntitiesSystemKey(entity.CustomEventType, entity.EntityType());
                 _customEntitiesSystems.Add(customEntitiesSystemKey, entity);
                 _assemblyCustomSystemList.Add(assemblyIdentity, customEntitiesSystemKey);
             }
