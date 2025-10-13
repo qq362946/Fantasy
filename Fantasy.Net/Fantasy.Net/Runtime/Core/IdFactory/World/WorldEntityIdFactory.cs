@@ -128,10 +128,28 @@ namespace Fantasy.IdFactory
     public sealed class WorldEntityIdFactoryTool : IIdFactoryTool
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool GetIsPool(ref long runtimeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool GetIsPool(long runtimeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public uint GetTime(ref long entityId)
         {
             var result = (ulong)entityId >> 34;
             return (uint)(result & WorldEntityIdStruct.MaskTime);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public uint GetTime(long entityId)
+        {
+            return GetTime(ref entityId);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -144,10 +162,22 @@ namespace Fantasy.IdFactory
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public uint GetSceneId(long entityId)
+        {
+            return GetSceneId(ref entityId);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public byte GetWorldId(ref long entityId)
         {
             var result = (ulong)entityId >> 18;
             return (byte)(result & WorldEntityIdStruct.MaskWordId);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public byte GetWorldId(long entityId)
+        {
+            return GetWorldId(ref entityId);
         }
     }
 }

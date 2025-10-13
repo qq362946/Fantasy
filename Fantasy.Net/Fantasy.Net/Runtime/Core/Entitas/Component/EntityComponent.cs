@@ -78,7 +78,6 @@ namespace Fantasy.Entitas
 #endif
     {
         private readonly OneToManyList<long, Type> _assemblyList = new();
-        private readonly OneToManyList<long, Type> _assemblyHashCodes = new();
         
         private readonly Dictionary<Type, IAwakeSystem> _awakeSystems = new();
         private readonly Dictionary<Type, IUpdateSystem> _updateSystems = new();
@@ -88,16 +87,13 @@ namespace Fantasy.Entitas
         private readonly OneToManyList<long, CustomEntitiesSystemKey> _assemblyCustomSystemList = new();
         private readonly Dictionary<CustomEntitiesSystemKey, ICustomEntitiesSystem> _customEntitiesSystems = new Dictionary<CustomEntitiesSystemKey, ICustomEntitiesSystem>();
         
-        private readonly Dictionary<Type, long> _hashCodes = new Dictionary<Type, long>();
         private readonly Queue<UpdateQueueInfo> _updateQueue = new Queue<UpdateQueueInfo>();
-       
         private readonly Dictionary<long, UpdateQueueInfo> _updateQueueDic = new Dictionary<long, UpdateQueueInfo>();
 #if FANTASY_UNITY
         private readonly Dictionary<Type, ILateUpdateSystem> _lateUpdateSystems = new();
         private readonly Queue<UpdateQueueInfo> _lateUpdateQueue = new Queue<UpdateQueueInfo>();
         private readonly Dictionary<long, UpdateQueueInfo> _lateUpdateQueueDic = new Dictionary<long, UpdateQueueInfo>();
 #endif
-
         internal async FTask<EntityComponent> Initialize()
         {
             await AssemblySystem.Register(this);
@@ -143,12 +139,6 @@ namespace Fantasy.Entitas
 
         private void LoadInner(long assemblyIdentity)
         {
-            foreach (var entityType in AssemblySystem.ForEach(assemblyIdentity, typeof(IEntity)))
-            {
-                _hashCodes.Add(entityType, HashCodeHelper.ComputeHash64(entityType.FullName));
-                _assemblyHashCodes.Add(assemblyIdentity, entityType);
-            }
-            
             foreach (var entitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(IEntitiesSystem)))
             {
                 Type entitiesType = null;
@@ -209,16 +199,6 @@ namespace Fantasy.Entitas
 
         private void OnUnLoadInner(long assemblyIdentity)
         {
-            if (_assemblyHashCodes.TryGetValue(assemblyIdentity, out var entityType))
-            {
-                foreach (var type in entityType)
-                {
-                    _hashCodes.Remove(type);
-                }
-
-                _assemblyHashCodes.RemoveByKey(assemblyIdentity);
-            }
-
             if (_assemblyList.TryGetValue(assemblyIdentity, out var assembly))
             {
                 foreach (var type in assembly)
@@ -493,11 +473,6 @@ namespace Fantasy.Entitas
         }
         #endregion
 #endif
-        public long GetHashCode(Type type)
-        {
-            return _hashCodes[type];
-        }
-
         /// <summary>
         /// 释放实体系统管理器资源
         /// </summary>

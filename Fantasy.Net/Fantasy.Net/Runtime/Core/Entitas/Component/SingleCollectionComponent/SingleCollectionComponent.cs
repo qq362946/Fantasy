@@ -19,10 +19,8 @@ namespace Fantasy.SingleCollection
     public sealed class SingleCollectionComponent : Entity, IAssembly
     {
         private CoroutineLock _coroutineLock;
-        private readonly OneToManyHashSet<Type, string> _collection = new OneToManyHashSet<Type, string>();
-
-        private readonly OneToManyList<long, SingleCollectionInfo> _assemblyCollections =
-            new OneToManyList<long, SingleCollectionInfo>();
+        private readonly OneToManyHashSet<Type, string> _collection = new ();
+        private readonly OneToManyList<long, SingleCollectionInfo> _assemblyCollections = new ();
 
         private sealed class SingleCollectionInfo(Type rootType, string collectionName)
         {

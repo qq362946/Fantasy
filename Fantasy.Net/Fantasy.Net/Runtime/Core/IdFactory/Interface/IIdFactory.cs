@@ -19,6 +19,6 @@ namespace Fantasy.IdFactory
         /// <summary>
         /// 创建一个新的Id
         /// </summary>
-        public long Create { get; }
+        public long Create(bool isPool);
     }
 }

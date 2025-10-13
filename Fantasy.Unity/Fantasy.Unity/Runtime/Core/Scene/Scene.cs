@@ -340,7 +340,7 @@ namespace Fantasy
             scene.EntityIdFactory =  IdFactoryHelper.EntityIdFactory(sceneId, world);
             scene.RuntimeIdFactory = IdFactoryHelper.RuntimeIdFactory(0, sceneId, world);
             scene.Id = IdFactoryHelper.EntityId(0, sceneId, world, 0);
-            scene.RuntimeId = IdFactoryHelper.RuntimeId(0, sceneId, world, 0);
+            scene.RuntimeId = IdFactoryHelper.RuntimeId(false, 0, sceneId, world, 0);
             scene.AddEntity(scene);
             await SetScheduler(scene, sceneRuntimeMode);
             scene.ThreadSynchronizationContext.Post(() =>
@@ -368,9 +368,9 @@ namespace Fantasy
             scene.Process = process;
             scene.SceneRuntimeType = SceneRuntimeType.Root;
             scene.EntityIdFactory = IdFactoryHelper.EntityIdFactory(sceneConfigId, worldId);
-            scene.RuntimeIdFactory = IdFactoryHelper.RuntimeIdFactory(0,sceneConfigId, worldId);
+            scene.RuntimeIdFactory = IdFactoryHelper.RuntimeIdFactory(0, sceneConfigId, worldId);
             scene.Id = IdFactoryHelper.EntityId(0, sceneConfigId, worldId, 0);
-            scene.RuntimeId = IdFactoryHelper.RuntimeId(0, sceneConfigId, worldId, 0);
+            scene.RuntimeId = IdFactoryHelper.RuntimeId(false, 0, sceneConfigId, worldId, 0);
             scene.AddEntity(scene);
             return scene;
         }
@@ -443,7 +443,7 @@ namespace Fantasy
             scene.EntityIdFactory = parentScene.EntityIdFactory;
             scene.RuntimeIdFactory = parentScene.RuntimeIdFactory;
             scene.Id = scene.EntityIdFactory.Create;
-            scene.RuntimeId = scene.RuntimeIdFactory.Create;
+            scene.RuntimeId = scene.RuntimeIdFactory.Create(false);
             scene.AddEntity(scene);
             scene.Initialize(parentScene);
             scene.ThreadSynchronizationContext.Post(() => OnEvent().Coroutine());

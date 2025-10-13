@@ -118,17 +118,17 @@ namespace Fantasy.IdFactory
             }
         }
 
-        internal static long RuntimeId(uint time, uint sceneId, byte wordId, uint sequence)
+        internal static long RuntimeId(bool isPool, uint time, uint sceneId, byte wordId, uint sequence)
         {
             switch (_idFactoryType)
             {
                 case IdFactoryType.Default:
                 {
-                    return new RuntimeIdStruct(time, sceneId, sequence);
+                    return new RuntimeIdStruct(isPool, time, sceneId, sequence);
                 }
                 case IdFactoryType.World:
                 {
-                    return new WorldRuntimeIdStruct(time, sceneId, wordId, sequence);
+                    return new WorldRuntimeIdStruct(isPool, time, sceneId, wordId, sequence);
                 }
                 default:
                 {

@@ -115,10 +115,28 @@ namespace Fantasy.IdFactory
     public sealed class EntityIdFactoryTool : IIdFactoryTool
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool GetIsPool(ref long entityId)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool GetIsPool(long runtimeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public uint GetTime(ref long entityId)
         {
             var result = (ulong)entityId >> 34;
             return (uint)(result & EntityIdStruct.MaskTime);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public uint GetTime(long entityId)
+        {
+            return GetTime(ref entityId);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -128,7 +146,18 @@ namespace Fantasy.IdFactory
             return (uint)(result & EntityIdStruct.MaskSceneId);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public uint GetSceneId(long entityId)
+        {
+            return GetSceneId(ref entityId);
+        }
+
         public byte GetWorldId(ref long entityId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte GetWorldId(long entityId)
         {
             throw new NotImplementedException();
         }

@@ -120,10 +120,12 @@ namespace Fantasy.Serialize
         public static void Dispose()
         {
             _isInitialized = false;
+            
             if (_serializers == null || _serializers.Length == 0)
             {
                 return;
             }
+            
             Array.Clear(_serializers, 0, _serializers.Length);
         }
 
