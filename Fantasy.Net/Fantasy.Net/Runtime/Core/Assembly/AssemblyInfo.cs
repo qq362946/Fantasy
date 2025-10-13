@@ -55,7 +55,7 @@ namespace Fantasy.Assembly
                 {
                     continue;
                 }
-
+                
                 var interfaces = type.GetInterfaces();
 
                 foreach (var interfaceType in interfaces)

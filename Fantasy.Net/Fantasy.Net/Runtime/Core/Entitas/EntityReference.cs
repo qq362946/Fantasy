@@ -27,6 +27,11 @@ namespace Fantasy.Entitas
         }
 
         /// <summary>
+        /// 获取实体引用
+        /// </summary>
+        public T Value => _entity?.RuntimeId != _runTimeId ? null : _entity;
+
+        /// <summary>
         /// 将一个实体转换为EntityReference
         /// </summary>
         /// <param name="t">实体泛型类型</param>

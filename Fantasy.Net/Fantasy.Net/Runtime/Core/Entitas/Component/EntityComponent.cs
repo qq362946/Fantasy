@@ -142,8 +142,15 @@ namespace Fantasy.Entitas
             foreach (var entitiesSystemType in AssemblySystem.ForEach(assemblyIdentity, typeof(IEntitySystem)))
             {
                 Type entitiesType = null;
+                
+                if (entitiesSystemType.IsGenericType && entitiesSystemType.IsGenericTypeDefinition)
+                {
+                    Log.Error($"\n\nEntity System must use closed generic type, got {entitiesSystemType}\nFor example: \nEntitySystem<int>\nEntitySystem<string>\n");
+                    continue;
+                }
+                
                 var entity = Activator.CreateInstance(entitiesSystemType);
-
+                
                 switch (entity)
                 {
                     case IAwakeSystem iAwakeSystem:
