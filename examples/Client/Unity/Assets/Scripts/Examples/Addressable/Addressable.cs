@@ -134,10 +134,7 @@ public class Addressable : MonoBehaviour
         SendAddressableMessage.interactable = false;
         // 发送一个消息给Gate服务器，Gate服务器会自动转发到Map服务器上
         // 流程: Client -> Gate -> Map
-        _session.Send(new C2M_TestMessage()
-        {
-            Tag = "Hello C2M_TestMessage"
-        });
+        _session.C2M_TestMessage("Hello C2M_TestMessage");
         SendAddressableMessage.interactable = true;
     }
 
@@ -151,10 +148,7 @@ public class Addressable : MonoBehaviour
         // 发送一个RPC消息
         // C2M_TestRequest:Map服务器接收的协议 流程:Client -> Gate -> Map
         // M2C_TestResponse:客户端接收到服务器发送的返回消息 流程:Map -> Gate -> Client 
-        var response = (M2C_TestResponse)await _session.Call(new C2M_TestRequest()
-        {
-            Tag = "Hello C2M_TestRequest"
-        });
+        var response = await _session.C2M_TestRequest("Hello C2M_TestRequest");
         Text.text = $"收到M2C_TestResponse Tag = {response.Tag}";
         SendAddressableRPC.interactable = true;
     }
@@ -168,7 +162,7 @@ public class Addressable : MonoBehaviour
         MoveAddressable.interactable = false;
         try
         {
-            var response = (M2C_MoveToMapResponse)await _session.Call(new C2M_MoveToMapRequest());
+            var response = await _session.C2M_MoveToMapRequest();
             if (response.ErrorCode != 0)
             {
                 Log.Error($"发送C2M_MoveToMapRequest消息失败 ErrorCode:{response.ErrorCode}");
@@ -191,10 +185,7 @@ public class Addressable : MonoBehaviour
         SendAddressableMessage.interactable = false;
         // 发送一个消息给Gate服务器，Gate服务器会发送Addressable消息给MAP
         // 流程: Client -> Gate -> Map
-        _session.Send(new C2G_SendAddressableToMap()
-        {
-            Tag = "Hello SendAddressableToMap"
-        });
+        _session.C2G_SendAddressableToMap("Hello SendAddressableToMap" );
         SendAddressableMessage.interactable = true;
     }
 

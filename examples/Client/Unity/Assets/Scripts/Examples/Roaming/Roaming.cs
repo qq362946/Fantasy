@@ -92,7 +92,7 @@ public class Roaming : MonoBehaviour
             OnConnectFail,
             OnConnectDisconnect,
             false, 5000);
-        var response = (G2C_ConnectRoamingResponse)await _session.Call(new C2G_ConnectRoamingRequest());
+        var response = await _session.C2G_ConnectRoamingRequest();
         if (response.ErrorCode != 0)
         {
             OnConnectFail();
@@ -104,23 +104,14 @@ public class Roaming : MonoBehaviour
 
     private void OnSendRoamingMessageClick()
     {
-        _session.Send(new C2Chat_TestRoamingMessage()
-        {
-            Tag = "Hi Roaming!"
-        });
-        _session.Send(new C2Map_TestRoamingMessage()
-        {
-            Tag = "Hi Roaming!"
-        });
+        _session.C2Chat_TestRoamingMessage("Hi Roaming!");
+        _session.C2Map_TestRoamingMessage("Hi Roaming!");
         // RandomHelper.BreakRank();
     }
 
     private async FTask OnCallRoamingMessageClick()
     {
-        var response = (Chat2C_TestRPCRoamingResponse)await _session.Call(new C2Chat_TestRPCRoamingRequest()
-        {
-            Tag = "Hi RPCRoaming!"
-        });
+        var response = await _session.C2Chat_TestRPCRoamingRequest("Hi RPCRoaming!");
         if (response.ErrorCode != 0)
         {
             Log.Error($"OnCallRoamingMessageClick ErrorCode = {response.ErrorCode}");
@@ -129,7 +120,7 @@ public class Roaming : MonoBehaviour
 
     private async FTask OnRoamingTransferMessageClick()
     {
-        var response = (Map2C_TestTransferResponse)await _session.Call(new C2Map_TestTransferRequest());
+        var response = await _session.C2Map_TestTransferRequest();
         if (response.ErrorCode != 0)
         {
             Log.Error($"OnRoamingTransferMessageClick ErrorCode = {response.ErrorCode}");
@@ -139,34 +130,22 @@ public class Roaming : MonoBehaviour
 
     private void OnSendInnerRoamingMessageClick()
     {
-        _session.Send(new C2Chat_TestSendMapMessage()
-        {
-            Tag = "Hi SendInnerRoamingMessage"
-        });
+        _session.C2Chat_TestSendMapMessage("Hi SendInnerRoamingMessage");
     }
 
     private void OnPushRoamingMessageToClientClick()
     {
-        _session.Send(new C2Map_PushMessageToClient()
-        {
-            Tag = "Push Message"
-        });
+        _session.C2Map_PushMessageToClient("Push Message");
     }
 
     private void OnGateSendRouteToRoamingClick()
     {
-        _session.Send(new C2G_TestRouteToRoaming()
-        {
-            Tag = "Hi Roaming"
-        });
+        _session.C2G_TestRouteToRoaming("Hi Roaming");
     }
     
     private void OnGateSendRoamingToRoamingClick()
     {
-        _session.Send(new C2G_TestRoamingToRoaming()
-        {
-            Tag = "Hi Roaming"
-        });
+        _session.C2G_TestRoamingToRoaming("Hi Roaming");
     }
     
     private void OnConnectComplete()

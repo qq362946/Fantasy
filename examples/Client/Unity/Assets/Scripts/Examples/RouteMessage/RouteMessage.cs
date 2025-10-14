@@ -90,8 +90,7 @@ public class RouteMessage : MonoBehaviour
     private async FTask RequestRouteToGate()
     {
         Button2.interactable = false;
-        var response = (G2C_CreateChatRouteResponse)await _session.Call(new C2G_CreateChatRouteRequest());
-        
+        var response = await _session.C2G_CreateChatRouteRequest();
         if (response.ErrorCode != 0)
         {
             Button2.interactable = true;
@@ -108,20 +107,14 @@ public class RouteMessage : MonoBehaviour
     private void SendRouteMessage()
     {
         Button3.interactable = false;
-        _session.Send(new C2Chat_TestMessage()
-        {
-            Tag = "Hello RouteMessage",
-        });
+        _session.C2Chat_TestMessage("Hello RouteMessage");
         Button3.interactable = true;
     }
 
     private async FTask CallRouteMessage()
     {
         Button4.interactable = false;
-        var response = (Chat2C_TestMessageResponse)await _session.Call(new C2Chat_TestMessageRequest()
-        {
-            Tag = "Hello RouteRPCMessage",
-        });
+        var response = await _session.C2Chat_TestMessageRequest("Hello RouteRPCMessage");
         if (response.ErrorCode != 0)
         {
             Button4.interactable = true;
@@ -136,7 +129,7 @@ public class RouteMessage : MonoBehaviour
         // 发送消息后，服务器会主动推送一个Chat2C_PushMessage消息给客户端。
         // 接收的Handler参考GChat2C_PushMessageHandler.cs。
         Button5.interactable = false;
-        _session.Send(new C2Chat_TestRequestPushMessage());
+        _session.C2Chat_TestRequestPushMessage();
         Button5.interactable = true;
     }
 }

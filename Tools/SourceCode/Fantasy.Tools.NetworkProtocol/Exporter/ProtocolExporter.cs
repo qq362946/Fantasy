@@ -12,6 +12,13 @@ using OpCodeType = Fantasy.Network.OpCodeType;
 #pragma warning disable CS8604 // Possible null reference argument.
 
 namespace Fantasy.Tools.ProtocalExporter;
+
+// 自定义异常，用于协议格式错误
+public class ProtocolFormatException : Exception
+{
+    public ProtocolFormatException(string message) : base(message) { }
+}
+
 public enum NetworkProtocolOpCodeType
 {
     None = 0,
@@ -22,6 +29,20 @@ public sealed class OpcodeInfo
 {
     public uint Code;
     public string Name;
+}
+
+public sealed class MessageFieldInfo
+{
+    public string FieldName;
+    public string FieldType;
+}
+
+public sealed class MessageHelperInfo
+{
+    public string MessageName;
+    public string MessageType; // "IMessage" or "IRequest"
+    public string ResponseType; // Only for IRequest
+    public List<MessageFieldInfo> Fields = new(); // 消息的属性字段
 }
 
 public sealed class ProtocolExporter
@@ -119,10 +140,19 @@ public sealed class ProtocolExporter
         var errorCodeStr = new StringBuilder();
         var usingNamespace = new HashSet<string>();
         var saveDirectory = new Dictionary<string, string>();
-        
+        var helperInfos = new List<MessageHelperInfo>();
+
         OpcodeInfo opcodeInfo = null;
         ProtocolOpCode protocolOpCode = null;
         string[] protocolFiles = null;
+        MessageHelperInfo currentHelperInfo = null; // 当前正在处理的消息Helper信息
+
+        // 格式检测相关
+        var allMessageNames = new HashSet<string>(); // 所有消息名称
+        var currentFieldNames = new HashSet<string>(); // 当前消息的字段名
+        var currentFieldNumbers = new HashSet<int>(); // 当前消息的字段编号
+        var currentFilePath = ""; // 当前处理的文件路径
+
         _opcodes.Clear();
         
         switch (opCodeType)
@@ -197,6 +227,7 @@ public sealed class ProtocolExporter
 
         foreach (var filePath in protocolFiles)
         {
+            currentFilePath = filePath; // 记录当前文件路径
             var keyIndex = 1;
             var parameter = "";
             var hasOpCode = false;
@@ -285,6 +316,21 @@ public sealed class ProtocolExporter
                 {
                     isMsgHead = true;
                     className = currentLine.Split(SplitChars, StringSplitOptions.RemoveEmptyEntries)[1];
+
+                    // 检测消息名称是否重复
+                    if (!allMessageNames.Add(className))
+                    {
+                        var errorMsg = $"协议格式错误！\n文件: {currentFilePath}\n消息名称重复: {className}";
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(errorMsg);
+                        Console.ResetColor();
+                        throw new ProtocolFormatException(errorMsg);
+                    }
+
+                    // 清空当前消息的字段集合
+                    currentFieldNames.Clear();
+                    currentFieldNumbers.Clear();
+
                     var splits = currentLine.Split(new[] { "//" }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (isSetProtocol)
@@ -377,9 +423,23 @@ public sealed class ProtocolExporter
                         {
                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.Message, protocolOpCode.AMessage++);
                             messageStr.AppendLine($"\t\tpublic uint OpCode() {{ return {opCodeName}.{className}; }}");
+
+                            // 收集客户端Helper信息
+                            if (opCodeType == NetworkProtocolOpCodeType.Outer)
+                            {
+                                currentHelperInfo = new MessageHelperInfo
+                                {
+                                    MessageName = className,
+                                    MessageType = "IMessage"
+                                };
+                                helperInfos.Add(currentHelperInfo);
+                            }
                         }
                         else
                         {
+                            // 保存 responseTypeStr 用于后续收集Helper信息
+                            var savedResponseType = responseTypeStr;
+
                             if (responseTypeStr != null)
                             {
                                 messageStr.AppendLine(protocolIgnore);
@@ -412,6 +472,18 @@ public sealed class ProtocolExporter
                                 case "IRequest":
                                 {
                                     opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.Request, protocolOpCode.ARequest++);
+
+                                    // 收集客户端Helper信息
+                                    if (opCodeType == NetworkProtocolOpCodeType.Outer)
+                                    {
+                                        currentHelperInfo = new MessageHelperInfo
+                                        {
+                                            MessageName = className,
+                                            MessageType = "IRequest",
+                                            ResponseType = savedResponseType
+                                        };
+                                        helperInfos.Add(currentHelperInfo);
+                                    }
                                     break;
                                 }
                                 case "IResponse":
@@ -432,11 +504,34 @@ public sealed class ProtocolExporter
                                         case "IAddressableRouteMessage":
                                         {
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.AddressableMessage, protocolOpCode.AAddressableMessage++);
+
+                                            // 收集客户端Helper信息
+                                            if (opCodeType == NetworkProtocolOpCodeType.Outer)
+                                            {
+                                                currentHelperInfo = new MessageHelperInfo
+                                                {
+                                                    MessageName = className,
+                                                    MessageType = "IMessage" // IAddressableRouteMessage也是Send方式
+                                                };
+                                                helperInfos.Add(currentHelperInfo);
+                                            }
                                             break;
                                         }
                                         case "IAddressableRouteRequest":
                                         {
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.AddressableRequest, protocolOpCode.AAddressableRequest++);
+
+                                            // 收集客户端Helper信息
+                                            if (opCodeType == NetworkProtocolOpCodeType.Outer)
+                                            {
+                                                currentHelperInfo = new MessageHelperInfo
+                                                {
+                                                    MessageName = className,
+                                                    MessageType = "IRequest",
+                                                    ResponseType = savedResponseType
+                                                };
+                                                helperInfos.Add(currentHelperInfo);
+                                            }
                                             break;
                                         }
                                         case "IAddressableRouteResponse":
@@ -457,6 +552,17 @@ public sealed class ProtocolExporter
                                                 throw new NotSupportedException("Under Inner, /// does not support the ICustomRouteMessage!");
                                             }
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.CustomRouteMessage, protocolOpCode.ACustomRouteMessage++);
+
+                                            // 收集客户端Helper信息
+                                            if (opCodeType == NetworkProtocolOpCodeType.Outer)
+                                            {
+                                                currentHelperInfo = new MessageHelperInfo
+                                                {
+                                                    MessageName = className,
+                                                    MessageType = "IMessage" // ICustomRouteMessage也是Send方式
+                                                };
+                                                helperInfos.Add(currentHelperInfo);
+                                            }
                                             break;
                                         }
                                         case "ICustomRouteRequest":
@@ -466,6 +572,18 @@ public sealed class ProtocolExporter
                                                 throw new NotSupportedException("Under Inner, /// does not support the ICustomRouteMessage!");
                                             }
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.CustomRouteRequest, protocolOpCode.ACustomRouteRequest++);
+
+                                            // 收集客户端Helper信息
+                                            if (opCodeType == NetworkProtocolOpCodeType.Outer)
+                                            {
+                                                currentHelperInfo = new MessageHelperInfo
+                                                {
+                                                    MessageName = className,
+                                                    MessageType = "IRequest",
+                                                    ResponseType = savedResponseType
+                                                };
+                                                helperInfos.Add(currentHelperInfo);
+                                            }
                                             break;
                                         }
                                         case "ICustomRouteResponse":
@@ -490,6 +608,17 @@ public sealed class ProtocolExporter
                                             //     throw new NotSupportedException("Under Inner, /// does not support the IRoamingMessage!");
                                             // }
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.RoamingMessage, protocolOpCode.ARoamingMessage++);
+
+                                            // 收集客户端Helper信息
+                                            if (opCodeType == NetworkProtocolOpCodeType.Outer)
+                                            {
+                                                currentHelperInfo = new MessageHelperInfo
+                                                {
+                                                    MessageName = className,
+                                                    MessageType = "IMessage" // IRoamingMessage也是Send方式
+                                                };
+                                                helperInfos.Add(currentHelperInfo);
+                                            }
                                             break;
                                         }
                                         case "IRoamingRequest":
@@ -499,6 +628,18 @@ public sealed class ProtocolExporter
                                             //     throw new NotSupportedException("Under Inner, /// does not support the IRoamingRequest!");
                                             // }
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.RoamingRequest, protocolOpCode.ARoamingRequest++);
+
+                                            // 收集客户端Helper信息
+                                            if (opCodeType == NetworkProtocolOpCodeType.Outer)
+                                            {
+                                                currentHelperInfo = new MessageHelperInfo
+                                                {
+                                                    MessageName = className,
+                                                    MessageType = "IRequest",
+                                                    ResponseType = savedResponseType
+                                                };
+                                                helperInfos.Add(currentHelperInfo);
+                                            }
                                             break;
                                         }
                                         case "IRoamingResponse":
@@ -566,6 +707,7 @@ public sealed class ProtocolExporter
                     case "}":
                     {
                         isMsgHead = false;
+                        currentHelperInfo = null; // 清空当前Helper信息
                         errorCodeStr = errorCodeStr.Replace("ErrorCodeKeyIndex", keyIndex.ToString());
                         messageStr = messageStr.Replace("<<<<Dispose>>>", disposeStr.ToString());
                         messageStr.Append(errorCodeStr);
@@ -593,13 +735,21 @@ public sealed class ProtocolExporter
                     continue;
                 }
 
-                if (currentLine.StartsWith("repeated"))
+                if (currentLine.StartsWith("repeatedArray"))
                 {
-                    Repeated(messageStr, disposeStr, currentLine, protocolMember, ref keyIndex);
+                    Repeated(messageStr, disposeStr, currentLine, protocolMember, ref keyIndex, currentHelperInfo, "repeatedArray", className, currentFilePath, currentFieldNames, currentFieldNumbers);
+                }
+                else if (currentLine.StartsWith("repeatedList"))
+                {
+                    Repeated(messageStr, disposeStr, currentLine, protocolMember, ref keyIndex, currentHelperInfo, "repeatedList", className, currentFilePath, currentFieldNames, currentFieldNumbers);
+                }
+                else if (currentLine.StartsWith("repeated"))
+                {
+                    Repeated(messageStr, disposeStr, currentLine, protocolMember, ref keyIndex, currentHelperInfo, "repeated", className, currentFilePath, currentFieldNames, currentFieldNumbers);
                 }
                 else
                 {
-                    Members(messageStr, disposeStr, currentLine, protocolMember, ref keyIndex);
+                    Members(messageStr, disposeStr, currentLine, protocolMember, ref keyIndex, currentHelperInfo, className, currentFilePath, currentFieldNames, currentFieldNumbers);
                 }
             }
             
@@ -620,7 +770,21 @@ public sealed class ProtocolExporter
             }
             file.Clear();
         }
-        
+
+        #endregion
+
+        #region GenerateNetworkProtocolHelper
+
+        // 为客户端生成NetworkProtocolHelper
+        if (opCodeType == NetworkProtocolOpCodeType.Outer &&
+            ExporterAges.Instance.ExportPlatform.HasFlag(ExportPlatform.Client) &&
+            helperInfos.Count > 0)
+        {
+            var helperContent = GenerateNetworkProtocolHelperFile(helperInfos);
+            var helperFilePath = Path.Combine(_networkProtocolClientDirectory, "NetworkProtocolHelper.cs");
+            await File.WriteAllTextAsync(helperFilePath, helperContent);
+        }
+
         #endregion
 
         #region GenerateOpCode
@@ -648,7 +812,7 @@ public sealed class ProtocolExporter
         #endregion
     }
     
-    private void Repeated(StringBuilder file, StringBuilder disposeStr, string newline, string protocolMember, ref int keyIndex)
+    private void Repeated(StringBuilder file, StringBuilder disposeStr, string newline, string protocolMember, ref int keyIndex, MessageHelperInfo currentHelperInfo, string repeatedType, string messageName, string filePath, HashSet<string> fieldNames, HashSet<int> fieldNumbers)
     {
         try
         {
@@ -657,20 +821,97 @@ public sealed class ProtocolExporter
             var property = newline.Split(SplitChars, StringSplitOptions.RemoveEmptyEntries);
             var type = property[1];
             var name = property[2];
-            // var memberIndex = int.Parse(property[4]);
+            var fieldNumber = int.Parse(property[4]);
             type = ConvertType(type);
 
+            // 检测字段名重复
+            if (!fieldNames.Add(name))
+            {
+                var errorMsg = $"协议格式错误！\n文件: {filePath}\n消息: {messageName}\n字段名重复: {name}";
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(errorMsg);
+                Console.ResetColor();
+                throw new ProtocolFormatException(errorMsg);
+            }
+
+            // 检测字段编号重复
+            if (!fieldNumbers.Add(fieldNumber))
+            {
+                var errorMsg = $"协议格式错误！\n文件: {filePath}\n消息: {messageName}\n字段编号重复: {fieldNumber} (字段: {name})";
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(errorMsg);
+                Console.ResetColor();
+                throw new ProtocolFormatException(errorMsg);
+            }
+
             file.AppendLine($"\t\t[{protocolMember}({keyIndex++})]");
-            file.AppendLine($"\t\tpublic List<{type}> {name} = new List<{type}>();");
-            disposeStr.AppendLine($"\t\t\t{name}.Clear();");
+
+            switch (repeatedType)
+            {
+                case "repeated":
+                    // public List<string> List = new List<string>();
+                    file.AppendLine($"\t\tpublic List<{type}> {name} = new List<{type}>();");
+                    disposeStr.AppendLine($"\t\t\t{name}.Clear();");
+
+                    // 收集字段信息到Helper
+                    if (currentHelperInfo != null)
+                    {
+                        currentHelperInfo.Fields.Add(new MessageFieldInfo
+                        {
+                            FieldName = name,
+                            FieldType = $"List<{type}>"
+                        });
+                    }
+                    break;
+
+                case "repeatedArray":
+                    // public string[] List;
+                    file.AppendLine($"\t\tpublic {type}[] {name};");
+                    disposeStr.AppendLine($"\t\t\t{name} = default;");
+
+                    // 收集字段信息到Helper
+                    if (currentHelperInfo != null)
+                    {
+                        currentHelperInfo.Fields.Add(new MessageFieldInfo
+                        {
+                            FieldName = name,
+                            FieldType = $"{type}[]"
+                        });
+                    }
+                    break;
+
+                case "repeatedList":
+                    // public List<string> List;
+                    file.AppendLine($"\t\tpublic List<{type}> {name};");
+                    disposeStr.AppendLine($"\t\t\t{name} = default;");
+
+                    // 收集字段信息到Helper
+                    if (currentHelperInfo != null)
+                    {
+                        currentHelperInfo.Fields.Add(new MessageFieldInfo
+                        {
+                            FieldName = name,
+                            FieldType = $"List<{type}>"
+                        });
+                    }
+                    break;
+            }
+        }
+        catch (ProtocolFormatException)
+        {
+            // 格式错误已经打印过了，直接重新抛出
+            throw;
         }
         catch (Exception e)
         {
-            Log.Error($"{newline}\n {e}");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"解析字段时出错: {newline}\n错误: {e.Message}");
+            Console.ResetColor();
+            throw;
         }
     }
-    
-    private void Members(StringBuilder file, StringBuilder disposeStr, string currentLine, string protocolMember, ref int keyIndex)
+
+    private void Members(StringBuilder file, StringBuilder disposeStr, string currentLine, string protocolMember, ref int keyIndex, MessageHelperInfo currentHelperInfo, string messageName, string filePath, HashSet<string> fieldNames, HashSet<int> fieldNumbers)
     {
         try
         {
@@ -679,21 +920,59 @@ public sealed class ProtocolExporter
             var property = currentLine.Split(SplitChars, StringSplitOptions.RemoveEmptyEntries);
             var type = property[0];
             var name = property[1];
-            // var memberIndex = int.Parse(property[3]);
+            var fieldNumber = int.Parse(property[3]);
             var typeCs = ConvertType(type);
+
+            // 检测字段名重复
+            if (!fieldNames.Add(name))
+            {
+                var errorMsg = $"协议格式错误！\n文件: {filePath}\n消息: {messageName}\n字段名重复: {name}";
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(errorMsg);
+                Console.ResetColor();
+                throw new ProtocolFormatException(errorMsg);
+            }
+
+            // 检测字段编号重复
+            if (!fieldNumbers.Add(fieldNumber))
+            {
+                var errorMsg = $"协议格式错误！\n文件: {filePath}\n消息: {messageName}\n字段编号重复: {fieldNumber} (字段: {name})";
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(errorMsg);
+                Console.ResetColor();
+                throw new ProtocolFormatException(errorMsg);
+            }
             if (protocolMember != null)
             {
                 file.AppendLine($"\t\t[{protocolMember}({keyIndex++})]");
             }
             file.AppendLine($"\t\tpublic {typeCs} {name} {{ get; set; }}");
             disposeStr.AppendLine($"\t\t\t{name} = default;");
+
+            // 收集字段信息到Helper
+            if (currentHelperInfo != null)
+            {
+                currentHelperInfo.Fields.Add(new MessageFieldInfo
+                {
+                    FieldName = name,
+                    FieldType = typeCs
+                });
+            }
+        }
+        catch (ProtocolFormatException)
+        {
+            // 格式错误已经打印过了，直接重新抛出
+            throw;
         }
         catch (Exception e)
         {
-            Log.Error($"{currentLine}\n {e}");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"解析字段时出错: {currentLine}\n错误: {e.Message}");
+            Console.ResetColor();
+            throw;
         }
     }
-    
+
     private string ConvertType(string type)
     {
         return type switch
@@ -887,5 +1166,110 @@ public sealed class ProtocolExporter
 
         _serverTemplate = serverSb.Replace("(NetworkProtocol)", "ProtoBuf").ToString();
         _clientTemplate = clientSb.Replace("(NetworkProtocol)", "ProtoBuf").ToString();
+    }
+
+    private string GenerateNetworkProtocolHelperFile(List<MessageHelperInfo> helperInfos)
+    {
+        var helperSb = new StringBuilder();
+
+        // 添加文件头和命名空间
+        helperSb.AppendLine("using System.Runtime.CompilerServices;");
+        helperSb.AppendLine("using Fantasy;");
+        helperSb.AppendLine("using Fantasy.Async;");
+        helperSb.AppendLine("using Fantasy.Network;");
+        helperSb.AppendLine("using System.Collections.Generic;");
+        helperSb.AppendLine("#pragma warning disable CS8618");
+        helperSb.AppendLine();
+        helperSb.AppendLine("namespace Fantasy");
+        helperSb.AppendLine("{");
+        helperSb.AppendLine("\tpublic static class NetworkProtocolHelper");
+        helperSb.AppendLine("\t{");
+
+        foreach (var info in helperInfos)
+        {
+            if (info.MessageType == "IMessage")
+            {
+                // 版本1: 生成接受消息对象的 Send 方法
+                helperSb.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                helperSb.AppendLine($"\t\tpublic static void {info.MessageName}(this Session session, {info.MessageName} message)");
+                helperSb.AppendLine("\t\t{");
+                helperSb.AppendLine("\t\t\tsession.Send(message);");
+                helperSb.AppendLine("\t\t}");
+                helperSb.AppendLine();
+
+                // 版本2: 生成接受属性参数的 Send 方法
+                if (info.Fields.Count > 0)
+                {
+                    var parameters = string.Join(", ", info.Fields.Select(f => $"{f.FieldType} {char.ToLower(f.FieldName[0])}{f.FieldName.Substring(1)}"));
+                    helperSb.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                    helperSb.AppendLine($"\t\tpublic static void {info.MessageName}(this Session session, {parameters})");
+                    helperSb.AppendLine("\t\t{");
+                    helperSb.AppendLine($"\t\t\tusing var message = Fantasy.{info.MessageName}.Create(session.Scene);");
+                    foreach (var field in info.Fields)
+                    {
+                        var paramName = $"{char.ToLower(field.FieldName[0])}{field.FieldName.Substring(1)}";
+                        helperSb.AppendLine($"\t\t\tmessage.{field.FieldName} = {paramName};");
+                    }
+                    helperSb.AppendLine("\t\t\tsession.Send(message);");
+                    helperSb.AppendLine("\t\t}");
+                    helperSb.AppendLine();
+                }
+                else
+                {
+                    // 没有字段的消息，生成无参数版本
+                    helperSb.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                    helperSb.AppendLine($"\t\tpublic static void {info.MessageName}(this Session session)");
+                    helperSb.AppendLine("\t\t{");
+                    helperSb.AppendLine($"\t\t\tusing var message = Fantasy.{info.MessageName}.Create(session.Scene);");
+                    helperSb.AppendLine("\t\t\tsession.Send(message);");
+                    helperSb.AppendLine("\t\t}");
+                    helperSb.AppendLine();
+                }
+            }
+            else if (info.MessageType == "IRequest")
+            {
+                // 版本1: 生成接受请求对象的 Call 方法
+                helperSb.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                helperSb.AppendLine($"\t\tpublic static async FTask<{info.ResponseType}> {info.MessageName}(this Session session, {info.MessageName} request)");
+                helperSb.AppendLine("\t\t{");
+                helperSb.AppendLine($"\t\t\treturn ({info.ResponseType})await session.Call(request);");
+                helperSb.AppendLine("\t\t}");
+                helperSb.AppendLine();
+
+                // 版本2: 生成接受属性参数的 Call 方法
+                if (info.Fields.Count > 0)
+                {
+                    var parameters = string.Join(", ", info.Fields.Select(f => $"{f.FieldType} {char.ToLower(f.FieldName[0])}{f.FieldName.Substring(1)}"));
+                    helperSb.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                    helperSb.AppendLine($"\t\tpublic static async FTask<{info.ResponseType}> {info.MessageName}(this Session session, {parameters})");
+                    helperSb.AppendLine("\t\t{");
+                    helperSb.AppendLine($"\t\t\tusing var request = Fantasy.{info.MessageName}.Create(session.Scene);");
+                    foreach (var field in info.Fields)
+                    {
+                        var paramName = $"{char.ToLower(field.FieldName[0])}{field.FieldName.Substring(1)}";
+                        helperSb.AppendLine($"\t\t\trequest.{field.FieldName} = {paramName};");
+                    }
+                    helperSb.AppendLine($"\t\t\treturn ({info.ResponseType})await session.Call(request);");
+                    helperSb.AppendLine("\t\t}");
+                    helperSb.AppendLine();
+                }
+                else
+                {
+                    // 没有字段的请求，生成无参数版本
+                    helperSb.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+                    helperSb.AppendLine($"\t\tpublic static async FTask<{info.ResponseType}> {info.MessageName}(this Session session)");
+                    helperSb.AppendLine("\t\t{");
+                    helperSb.AppendLine($"\t\t\tusing var request = Fantasy.{info.MessageName}.Create(session.Scene);");
+                    helperSb.AppendLine($"\t\t\treturn ({info.ResponseType})await session.Call(request);");
+                    helperSb.AppendLine("\t\t}");
+                    helperSb.AppendLine();
+                }
+            }
+        }
+
+        helperSb.AppendLine("\t}");
+        helperSb.AppendLine("}");
+
+        return helperSb.ToString();
     }
 }

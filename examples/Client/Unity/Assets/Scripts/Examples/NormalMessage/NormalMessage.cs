@@ -115,8 +115,7 @@ public class NormalMessage : MonoBehaviour
     private void OnSendMessageButtonClick()
     {
         SendMessageButton.interactable = false;
-        // 发送一个消息给服务器
-        _session.Send(new C2G_TestMessage() { Tag = "Hello C2G_TestMessage" });
+        _session.C2G_TestMessage("Hello C2G_TestMessage");
         SendMessageButton.interactable = true;
     }
 
@@ -130,10 +129,7 @@ public class NormalMessage : MonoBehaviour
         // 发送一个RPC消息
         // C2G_TestRequest:服务器接收的协议
         // G2C_TestResponse:客户端接收到服务器发送的返回消息
-        var response = (G2C_TestResponse)await _session.Call(new C2G_TestRequest()
-        {
-            Tag = "Hello C2G_TestRequest"
-        });
+        var response = await _session.C2G_TestRequest("Hello C2G_TestRequest");
         Text.text = $"收到G2C_TestResponse Tag = {response.Tag}";
         SendRPCMessageButton.interactable = true;
     }
@@ -147,8 +143,7 @@ public class NormalMessage : MonoBehaviour
         PushMessageButton.interactable = false;
         // 发送消息后，服务器会主动推送一个G2C_PushMessage消息给客户端。
         // 接收的Handler参考G2C_PushMessageHandler.cs。
-        _session.Send(new C2G_TestRequestPushMessage());
-        
+        _session.C2G_TestRequestPushMessage();
         PushMessageButton.interactable = true;
     }
 

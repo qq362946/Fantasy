@@ -1,4 +1,5 @@
 using ProtoBuf;
+using System;
 
 using System.Collections.Generic;
 using Fantasy;
@@ -818,3 +819,4 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 }
+

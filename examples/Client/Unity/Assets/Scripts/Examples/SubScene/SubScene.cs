@@ -103,7 +103,7 @@ public class SubScene : MonoBehaviour
 
      private async FTask CreateSubScene()
      {
-          var response = (G2C_CreateSubSceneResponse)await _session.Call(new C2G_CreateSubSceneRequest());
+          var response = await _session.C2G_CreateSubSceneRequest();
           if (response.ErrorCode != 0)
           {
                Log.Debug($"创建SubScene失败 ErrorCode: {response.ErrorCode}");
@@ -114,12 +114,12 @@ public class SubScene : MonoBehaviour
 
      private void SendMessage()
      {
-          _session.Send(new C2G_SendToSubSceneMessage());
+          _session.C2G_SendToSubSceneMessage();
      }
 
      private async FTask CreateAddressable()
      {
-          var response = (G2C_CreateSubSceneAddressableResponse)await _session.Call(new C2G_CreateSubSceneAddressableRequest());
+          var response = await _session.C2G_CreateSubSceneAddressableRequest();
           if (response.ErrorCode != 0)
           {
                Log.Debug($"创建SubSceneAddressable失败 ErrorCode: {response.ErrorCode}");
@@ -132,14 +132,11 @@ public class SubScene : MonoBehaviour
 
      private void SendAddressable()
      {
-          _session.Send(new C2SubScene_TestMessage()
-          {
-               Tag = "hi subScene Addressable"
-          });
+          _session.C2SubScene_TestMessage("hi subScene Addressable");
      }
 
      private void DisposeScene()
      {
-          _session.Send(new C2SubScene_TestDisposeMessage());
+          _session.C2SubScene_TestDisposeMessage();
      }
 }

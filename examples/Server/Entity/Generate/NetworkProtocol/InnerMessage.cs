@@ -1,5 +1,6 @@
 using ProtoBuf;
 
+using System;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using Fantasy;
@@ -16,7 +17,7 @@ using Fantasy.Serialize;
 #pragma warning disable CS8618
 
 namespace Fantasy
-{	
+{
 	[ProtoContract]
 	public partial class G2A_TestMessage : AMessage, IRouteMessage, IProto
 	{
@@ -415,3 +416,4 @@ namespace Fantasy
 		public uint ErrorCode { get; set; }
 	}
 }
+

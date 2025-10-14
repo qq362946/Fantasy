@@ -53,6 +53,9 @@
       <None Update="ExporterSettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="NetworkProtocolTemplate.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
       <None Update="Run.bat">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>

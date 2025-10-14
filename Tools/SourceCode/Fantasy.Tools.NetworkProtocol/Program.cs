@@ -16,9 +16,15 @@ try
     // 运行导出协议的代码
     new ProtocolExporter().Run();
 }
+catch (Fantasy.Tools.ProtocalExporter.ProtocolFormatException)
+{
+    // 协议格式错误已经打印过详细信息，这里不再重复打印
+}
 catch (Exception e)
 {
-    Log.Error(e);
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine($"程序执行出错: {e.Message}");
+    Console.ResetColor();
 }
 finally
 {
