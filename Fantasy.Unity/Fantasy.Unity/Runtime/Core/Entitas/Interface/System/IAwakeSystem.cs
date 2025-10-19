@@ -3,7 +3,10 @@ using Fantasy.Async;
 
 namespace Fantasy.Entitas.Interface
 {
-    internal interface IAwakeSystem : IEntitySystem { }
+    /// <summary>
+    /// 实体的Awake事件的接口
+    /// </summary>
+    public interface IAwakeSystem : IEntitySystem { }
     /// <summary>
     /// 实体的Awake事件的抽象接口
     /// </summary>

@@ -7,9 +7,24 @@
         <LangVersion>default</LangVersion>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+    </PropertyGroup>
+
     <ItemGroup>
       <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.Net\Fantasy.Net.csproj" />
       <ProjectReference Include="..\Entity\Entity.csproj" />
+    </ItemGroup>
+
+    <!-- Source Generator Reference -->
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj"
+                        OutputItemType="Analyzer"
+                        ReferenceOutputAssembly="false" />
     </ItemGroup>
 
     <ItemGroup>

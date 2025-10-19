@@ -30,6 +30,9 @@
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <DocumentationFile>bin\Debug\net8.0\Fantasy.Net.xml</DocumentationFile>
+      <!-- 启用 Source Generator 文件输出（可选，用于调试） -->
+       <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles> 
+       <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath> 
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -55,6 +58,23 @@
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
       <PackageReference Include="System.IO.Pipelines" Version="9.0.8" />
+    </ItemGroup>
+
+    <!-- Source Generator Reference -->
+    <ItemGroup>
+      <ProjectReference Include="..\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj"
+                        OutputItemType="Analyzer"
+                        ReferenceOutputAssembly="false"
+                        SetTargetFramework="TargetFramework=netstandard2.0" />
+    </ItemGroup>
+
+    <!-- 将 Source Generator 打包到 NuGet -->
+    <ItemGroup>
+        <!-- 获取 Fantasy.SourceGenerator 的输出 DLL -->
+        <None Include="..\Fantasy.SourceGenerator\bin\$(Configuration)\netstandard2.0\Fantasy.SourceGenerator.dll"
+              Pack="true"
+              PackagePath="analyzers/dotnet/cs"
+              Visible="false" />
     </ItemGroup>
 
 </Project>

@@ -24,7 +24,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Fantasy-Net" Version="2024.2.22" />
+      <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.Net\Fantasy.Net.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -3,7 +3,7 @@ using System;
 
 namespace Fantasy.Entitas.Interface
 {
-    internal interface ILateUpdateSystem : IEntitySystem { }
+    public interface ILateUpdateSystem : IEntitySystem { }
 
     /// <summary>
     /// 实体的LateUpdate事件的抽象接口

@@ -10,5 +10,8 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
-    "noEngineReferences": false
+    "noEngineReferences": false,
+    "defineSymbols": [
+        "FANTASY_UNITY"
+    ]
 }

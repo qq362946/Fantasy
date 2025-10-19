@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Reflection;
 using Fantasy.Assembly;
+using Fantasy.Async;
 using Fantasy.Entitas;
 using MongoDB.Bson;
 using MongoDB.Bson.IO;
@@ -19,7 +20,7 @@ namespace Fantasy.Serialize
     /// <summary>
     /// BSON帮助方法
     /// </summary>
-    public class BsonPackHelper : ISerialize
+    public class BsonPackHelper : ISerialize, IAssemblyLifecycle
     {
         /// <summary>
         /// 序列化器的名字
@@ -31,53 +32,55 @@ namespace Fantasy.Serialize
         /// </summary>
         public BsonPackHelper()
         {
-            // 清除掉注册过的LookupClassMap。
-
-            var classMapRegistryField = typeof(BsonClassMap).GetField("__classMaps", BindingFlags.Static | BindingFlags.NonPublic);
-
-            if (classMapRegistryField != null)
-            {
-                ((Dictionary<Type, BsonClassMap>)classMapRegistryField.GetValue(null)).Clear();
-            }
-
-            // 清除掉注册过的ConventionRegistry。
-
-            var registryField = typeof(ConventionRegistry).GetField("_lookup", BindingFlags.Static | BindingFlags.NonPublic);
-
-            if (registryField != null)
-            {
-                var registry = registryField.GetValue(null);
-                var dictionaryField = registry.GetType().GetField("_conventions", BindingFlags.Instance | BindingFlags.NonPublic);
-                if (dictionaryField != null)
-                {
-                    ((IDictionary)dictionaryField.GetValue(registry)).Clear();
-                }
-            }
-
             // 初始化ConventionRegistry、注册IgnoreExtraElements。
-
             ConventionRegistry.Register("IgnoreExtraElements", new ConventionPack { new IgnoreExtraElementsConvention(true) }, type => true);
-
             // 注册一个自定义的序列化器。
-
             // BsonSerializer.TryRegisterSerializer(typeof(float2), new StructBsonSerialize<float2>());
             // BsonSerializer.TryRegisterSerializer(typeof(float3), new StructBsonSerialize<float3>());
             // BsonSerializer.TryRegisterSerializer(typeof(float4), new StructBsonSerialize<float4>());
             // BsonSerializer.TryRegisterSerializer(typeof(quaternion), new StructBsonSerialize<quaternion>());
             BsonSerializer.RegisterSerializer(new ObjectSerializer(x => true));
-
-            // 注册LookupClassMap。
-
-            foreach (var type in AssemblySystem.ForEach())
-            {
-                if (type.IsInterface || type.IsAbstract || type.IsGenericType || !typeof(Entity).IsAssignableFrom(type))
-                {
-                    continue;
-                }
-                    
-                BsonClassMap.LookupClassMap(type);
-            }
         }
+
+        #region AssemblyManifest
+
+        internal async FTask<BsonPackHelper> Initialize()
+        {
+            await AssemblyLifecycle.Add(this);
+            return this;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
+        public async FTask OnLoad(AssemblyManifest assemblyManifest)
+        {
+            var entityTypes = assemblyManifest.EntityTypeCollectionRegistrar.GetEntityTypes();
+            if (entityTypes.Any())
+            {
+                foreach (var entityType in entityTypes)
+                {
+                    if (BsonClassMap.IsClassMapRegistered(entityType))
+                    {
+                        continue;
+                    }
+                    BsonClassMap.LookupClassMap(entityType);
+                }
+            }
+            await FTask.CompletedTask;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
+        public async FTask OnUnload(AssemblyManifest assemblyManifest)
+        {
+            await FTask.CompletedTask;
+        }
+
+        #endregion
 
         /// <summary>
         /// 反序列化

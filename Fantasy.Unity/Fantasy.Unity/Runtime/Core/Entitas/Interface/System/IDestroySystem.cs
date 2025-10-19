@@ -3,7 +3,10 @@ using Fantasy.Async;
 
 namespace Fantasy.Entitas.Interface
 {
-    internal interface IDestroySystem : IEntitySystem { }
+    /// <summary>
+    /// 实体销毁事件的接口
+    /// </summary>
+    public interface IDestroySystem : IEntitySystem { }
     /// <summary>
     /// 实体销毁事件的抽象接口
     /// </summary>

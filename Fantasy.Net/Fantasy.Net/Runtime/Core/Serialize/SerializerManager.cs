@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Fantasy.Assembly;
+using Fantasy.Async;
 using Fantasy.Helper;
 #if !FANTASY_EXPORTER
 using Fantasy.Network;
@@ -40,7 +41,7 @@ namespace Fantasy.Serialize
         /// <summary>
         /// 初始化方法
         /// </summary>
-        public static void Initialize()
+        public static async FTask Initialize()
         {
             if (_isInitialized)
             {
@@ -50,14 +51,16 @@ namespace Fantasy.Serialize
             try
             {
                 var sort = new SortedList<long, ISerialize>();
+                
+                var protoBufPackSerializer = await new ProtoBufPackHelper().Initialize();
+                var protoBufPackSerializerHash64 = HashCodeHelper.ComputeHash64(protoBufPackSerializer.SerializeName);
+                sort.Add(protoBufPackSerializerHash64, protoBufPackSerializer);
 
-                foreach (var serializerType in AssemblySystem.ForEach(typeof(ISerialize)))
-                {
-                    var serializer = (ISerialize)Activator.CreateInstance(serializerType);
-                    var computeHash64 = HashCodeHelper.ComputeHash64(serializer.SerializeName);
-                    sort.Add(computeHash64, serializer);
-                }
-
+#if FANTASY_NET 
+                var bsonPackSerializer = await new BsonPackHelper().Initialize();
+                var bsonPackSerializerSerializerHash64 = HashCodeHelper.ComputeHash64(bsonPackSerializer.SerializeName);
+                sort.Add(bsonPackSerializerSerializerHash64, bsonPackSerializer);
+#endif
                 var index = 1;
                 _serializers = new ISerialize[sort.Count];
 

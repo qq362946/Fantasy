@@ -163,9 +163,9 @@ namespace Fantasy.Entitas
             if (isRunEvent)
             {
                 scene.EntityComponent.Awake(entity);
-                scene.EntityComponent.StartUpdate(entity);
+                scene.EntityComponent.RegisterUpdate(entity);
 #if FANTASY_UNITY
-                scene.EntityComponent.StartLateUpdate(entity);
+                scene.EntityComponent.RegisterLateUpdate(entity);
 #endif
             }
             
@@ -207,9 +207,9 @@ namespace Fantasy.Entitas
             if (isRunEvent)
             {
                 scene.EntityComponent.Awake(entity);
-                scene.EntityComponent.StartUpdate(entity);
+                scene.EntityComponent.RegisterUpdate(entity);
 #if FANTASY_UNITY
-                scene.EntityComponent.StartLateUpdate(entity);
+                scene.EntityComponent.RegisterLateUpdate(entity);
 #endif
             }
 
@@ -232,9 +232,9 @@ namespace Fantasy.Entitas
             var entity = Create<T>(Scene, id, isPool, false);
             AddComponent(entity);
             Scene.EntityComponent.Awake(entity);
-            Scene.EntityComponent.StartUpdate(entity);
+            Scene.EntityComponent.RegisterUpdate(entity);
 #if FANTASY_UNITY
-            Scene.EntityComponent.StartLateUpdate(entity);
+            Scene.EntityComponent.RegisterLateUpdate(entity);
 #endif
             return entity;
         }
@@ -251,9 +251,9 @@ namespace Fantasy.Entitas
             var entity = Create<T>(Scene, id, isPool, false);
             AddComponent(entity);
             Scene.EntityComponent.Awake(entity);
-            Scene.EntityComponent.StartUpdate(entity);
+            Scene.EntityComponent.RegisterUpdate(entity);
 #if FANTASY_UNITY
-            Scene.EntityComponent.StartLateUpdate(entity);
+            Scene.EntityComponent.RegisterLateUpdate(entity);
 #endif
             return entity;
         }
@@ -405,9 +405,9 @@ namespace Fantasy.Entitas
             var entity = Entity.Create(Scene, type, id, isPool, false);
             AddComponent(entity);
             Scene.EntityComponent.Awake(entity);
-            Scene.EntityComponent.StartUpdate(entity);
+            Scene.EntityComponent.RegisterUpdate(entity);
 #if FANTASY_UNITY
-            Scene.EntityComponent.StartLateUpdate(entity);
+            Scene.EntityComponent.RegisterLateUpdate(entity);
 #endif
             return entity;
         }

@@ -67,19 +67,18 @@ namespace Fantasy.Network.HTTP
             // 注册控制器服务
             var addControllers = builder.Services.AddControllers()
                 .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNamingPolicy = null; });
-            foreach (var assembly in AssemblySystem.ForEachAssembly)
+            foreach (var assemblyManifest in AssemblyManifest.GetAssemblyManifest)
             {
-                addControllers.AddApplicationPart(assembly);
+                addControllers.AddApplicationPart(assemblyManifest.Assembly);
             }
             var app = builder.Build();
-            var listenUrl = $"http://{bindIp}:{port}/";;
+            var listenUrl = $"http://{bindIp}:{port}/";
             app.Urls.Add(listenUrl);
             // 启用开发者工具
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
             // 路由注册
             app.MapControllers();
             // 开启监听

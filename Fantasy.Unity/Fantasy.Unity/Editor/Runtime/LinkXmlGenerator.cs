@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -8,27 +9,38 @@ namespace Fantasy
     {
         private const string LinkPath = "Assets/link.xml";
         // 在Unity编辑器中运行该方法来生成link.xml文件
-        [UnityEditor.MenuItem("Fantasy/Generate link.xml")]
         public static void GenerateLinkXml()
         {
             using (var writer = new StreamWriter("Assets/link.xml"))
             {
-                writer.WriteLine("<linker>");
+                var assemblyHashSet = new HashSet<string>();
                 
                 foreach (var assembly in FantasySettingsScriptableObject.Instance.includeAssembly)
+                {
+                    assemblyHashSet.Add(assembly);
+                }
+
+                if (FantasySettingsScriptableObject.Instance?.linkAssemblyDefinitions != null)
+                {
+                    foreach (var assemblyDefinition in FantasySettingsScriptableObject.Instance.linkAssemblyDefinitions)
+                    {
+                        assemblyHashSet.Add(assemblyDefinition.name);
+                    }
+                }
+
+                if (assemblyHashSet.Count == 0)
+                {
+                    return;
+                }
+                
+                writer.WriteLine("<linker>");
+                
+                foreach (var assembly in assemblyHashSet)
                 {
                     GenerateLinkXml(writer, assembly, LinkPath);
                     Debug.Log($"{assembly} Link generation completed");
                 }
                 
-                if (FantasySettingsScriptableObject.Instance?.linkAssemblyDefinitions != null)
-                {
-                    foreach (var linkAssembly in FantasySettingsScriptableObject.Instance.linkAssemblyDefinitions)
-                    {
-                        GenerateLinkXml(writer, linkAssembly.name, LinkPath);
-                        Debug.Log($"{linkAssembly.name} Link generation completed");
-                    }
-                }
                 writer.WriteLine("</linker>");
             }
 

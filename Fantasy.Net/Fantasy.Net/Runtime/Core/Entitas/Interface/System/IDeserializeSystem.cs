@@ -3,7 +3,10 @@ using Fantasy.Async;
 
 namespace Fantasy.Entitas.Interface
 {
-    internal interface IDeserializeSystem : IEntitySystem { }
+    /// <summary>
+    /// 实体的反序列化事件的接口
+    /// </summary>
+    public interface IDeserializeSystem : IEntitySystem { }
     /// <summary>
     /// 实体的反序列化事件的抽象接口
     /// </summary>

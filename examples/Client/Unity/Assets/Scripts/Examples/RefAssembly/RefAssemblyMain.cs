@@ -26,11 +26,10 @@ namespace Fantasy
         {
             var refAssemblyA = LoadAssembly("RefAssemblyA");
             var refAssemblyB = LoadAssembly("RefAssemblyB");
-            await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
+            await Fantasy.Platform.Unity.Entry.Initialize();
             _scene = await Scene.Create(SceneRuntimeMode.MainThread);
-            await AssemblySystem.LoadAssembly(refAssemblyA);
-            await AssemblySystem.LoadAssembly(refAssemblyB);
             await _scene.EventComponent.PublishAsync(new OnCreateScene(_scene));
+            await FTask.CompletedTask; 
         }
     
         private System.Reflection.Assembly LoadAssembly(string assemblyName)

@@ -2,6 +2,8 @@ using System;
 using System.Diagnostics;
 #if FANTASY_NET
 using Fantasy.Platform.Net;
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #endif
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -14,35 +16,27 @@ namespace Fantasy
     public static class Log
     {
         private static ILog _logCore;
-        private static bool _isRegister;
-#if FANTASY_NET
+
         /// <summary>
         /// 初始化Log系统
         /// </summary>
-        public static void Initialize()
+        public static void Initialize(ILog log = null)
         {
-            if (!_isRegister)
+            if (log == null)
             {
-                Register(new ConsoleLog());
-                return;
-            }
-            
-            _logCore.Initialize(ProgramDefine.RuntimeMode);
-        }
+#if FANTASY_NET
+                _logCore = new ConsoleLog();  
 #endif
-        /// <summary>
-        /// 注册一个日志系统
-        /// </summary>
-        /// <param name="log"></param>
-        public static void Register(ILog log)
-        {
-            if (_isRegister)
-            {
+#if FANTASY_UNITY
+                _logCore = new UnityLog(); 
+#endif         
                 return;
             }
             
             _logCore = log;
-            _isRegister = true;
+#if FANTASY_NET
+            _logCore.Initialize(ProgramDefine.RuntimeMode);
+#endif
         }
 
         /// <summary>

@@ -17,6 +17,14 @@ public sealed class SubSceneTestComponent : Entity
     }
 }
 
+public sealed class SubSceneTestComponentAwakeSystem : AwakeSystem<SubSceneTestComponent>
+{
+    protected override void Awake(SubSceneTestComponent self)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 {
     private static long _addressableSceneRunTimeId;
@@ -28,7 +36,6 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
     /// <returns>A task representing the asynchronous operation.</returns>
     protected override async FTask Handler(OnCreateScene self)
     {
-        
         // var epoch1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000;
         //
         // {
@@ -44,7 +51,6 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         //     var time = (uint)((now - epochThisYear) / 1000);
         //     Log.Debug($"time = {time} now = {now} epochThisYear = {epochThisYear}");
         // }
-        
         var scene = self.Scene;
         
         switch (scene.SceneType)
@@ -53,7 +59,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             {
                 var subSceneTestComponent = scene.AddComponent<SubSceneTestComponent>();
                 Log.Debug("增加了SubSceneTestComponent");
-                scene.EntityComponent.CustomSystem(subSceneTestComponent, CustomSystemType.RunSystem);
+                // scene.EntityComponent.CustomSystem(subSceneTestComponent, CustomSystemType.RunSystem);
                 break;
             }
             case SceneType.Addressable:
@@ -95,7 +101,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
                 
                 // 执行自定义系统
                 var testCustomSystemComponent = scene.AddComponent<TestCustomSystemComponent>();
-                scene.EntityComponent.CustomSystem(testCustomSystemComponent, CustomSystemType.RunSystem);
+                // scene.EntityComponent.CustomSystem(testCustomSystemComponent, CustomSystemType.RunSystem);
                 // // 测试配置表
                 // var instanceList = UnitConfigData.Instance.List;
                 // var unitConfig = instanceList[0];

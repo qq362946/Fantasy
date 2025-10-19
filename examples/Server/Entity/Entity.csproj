@@ -17,8 +17,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.Net\Fantasy.Net.csproj" />
-      <ProjectReference Include="..\..\..\Fantasy.Packages\Fantasy.ConfigTable\Net\Fantasy.ConfigTable.csproj" />
+        <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.Net\Fantasy.Net.csproj" />
+        <ProjectReference Include="..\..\..\Fantasy.Packages\Fantasy.ConfigTable\Net\Fantasy.ConfigTable.csproj" />
+    </ItemGroup>
+
+    <!-- Source Generator Reference -->
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj"
+                        OutputItemType="Analyzer"
+                        ReferenceOutputAssembly="false" />
     </ItemGroup>
 
 </Project>

@@ -2,7 +2,10 @@ using System;
 
 namespace Fantasy.Entitas.Interface
 {
-    internal interface IUpdateSystem : IEntitySystem { }
+    /// <summary>
+    /// Update事件的接口
+    /// </summary>
+    public interface IUpdateSystem : IEntitySystem { }
     /// <summary>
     /// Update事件的抽象接口
     /// </summary>

@@ -8,8 +8,8 @@ namespace Fantasy
         [InitializeOnLoadMethod]
         private static void OnInitializeOnLoad()
         {
-#if !UNITY_2021_3_OR_NEWER
-            Debug.LogError("Fantasy支持的最低版本为Unity2021.3.14f1c1");
+#if !UNITY_2022_3_OR_NEWER
+            Debug.LogError("Fantasy支持的最低版本为Unity2022.3.622f2");
 #endif
         }
     }

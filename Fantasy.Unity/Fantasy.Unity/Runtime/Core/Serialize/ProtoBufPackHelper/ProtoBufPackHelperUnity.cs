@@ -3,6 +3,7 @@ using System;
 using System.Buffers;
 using System.IO;
 using Fantasy.Assembly;
+using Fantasy.Async;
 using ProtoBuf;
 using ProtoBuf.Meta;
 
@@ -17,6 +18,12 @@ namespace Fantasy.Serialize
         /// 序列化器的名字
         /// </summary>
         public string SerializeName { get; } = "ProtoBuf";
+
+        internal async FTask<ProtoBufPackHelper> Initialize()
+        {
+            await FTask.CompletedTask;
+            return this;
+        }
 
         /// <summary>
         /// 使用ProtoBuf反序列化数据到实例

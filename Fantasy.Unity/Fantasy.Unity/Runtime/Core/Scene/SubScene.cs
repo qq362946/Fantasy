@@ -40,7 +40,7 @@ namespace Fantasy
             MessageDispatcherComponent = rootScene.MessageDispatcherComponent;
 #if FANTASY_NET
             NetworkMessagingComponent = rootScene.NetworkMessagingComponent;
-            SingleCollectionComponent = rootScene.SingleCollectionComponent;
+            // SingleCollectionComponent = rootScene.SingleCollectionComponent;
             TerminusComponent = rootScene.TerminusComponent;
 #endif
             ThreadSynchronizationContext = rootScene.ThreadSynchronizationContext;

@@ -20,7 +20,7 @@ namespace Fantasy
             
             if (string.IsNullOrEmpty(hotUpdatePath))
             {
-                Debug.LogError("请先在菜单Fantasy-Fantasy Settings里设置HotUpdatePath目录位置");
+                Debug.LogError("请先在菜单Fantasy-Fantasy Settings里设置自动拷贝程序集输出目录位置");
                 return; 
             }
             
@@ -28,7 +28,14 @@ namespace Fantasy
             {
                 Directory.CreateDirectory(hotUpdatePath); 
             }
-
+            else
+            {
+                foreach (var file in Directory.GetFiles(hotUpdatePath))
+                {
+                    File.Delete(file);
+                }
+            }
+            
             // ReSharper disable once StringLastIndexOfIsCultureSpecific.1
             if (hotUpdatePath.LastIndexOf("/") != hotUpdatePath.Length - 1)
             {

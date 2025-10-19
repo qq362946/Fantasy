@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotfix", "Hotfix\Hotfix.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.ConfigTable", "..\..\Fantasy.Packages\Fantasy.ConfigTable\Net\Fantasy.ConfigTable.csproj", "{0A539FA2-C595-4AA3-A2C3-86BF86EA7FFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.SourceGenerator", "..\..\Fantasy.Net\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj", "{7CFD56D0-D2EC-4874-8C2B-8516E9428C55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{0A539FA2-C595-4AA3-A2C3-86BF86EA7FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A539FA2-C595-4AA3-A2C3-86BF86EA7FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A539FA2-C595-4AA3-A2C3-86BF86EA7FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CFD56D0-D2EC-4874-8C2B-8516E9428C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CFD56D0-D2EC-4874-8C2B-8516E9428C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CFD56D0-D2EC-4874-8C2B-8516E9428C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CFD56D0-D2EC-4874-8C2B-8516E9428C55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

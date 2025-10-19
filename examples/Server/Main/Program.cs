@@ -1,23 +1,32 @@
-﻿using Fantasy.ConfigTable;
+﻿// ================================================================================
+// Fantasy.Net 服务器应用程序入口
 // ================================================================================
-// Fantasy.Net 框架启动配置
+// 本文件是 Fantasy.Net 分布式游戏服务器的主入口点
+//
+// 初始化流程：
+//   1. 强制加载引用程序集，触发 ModuleInitializer 执行
+//   2. 配置日志基础设施（NLog）
+//   3. 启动 Fantasy.Net 框架
 // ================================================================================
-// 1. 初始化配置表系统
-// 配置表路径：存放所有框架需要的配置数据文件(二进制格式)
-// 包含：技能表、道具表、怪物表等业务逻辑配置
-ConfigTableHelper.Initialize("../../../Config/Binary");
-// 2. 注册日志系统到框架
-// 开发者可以自己注册日志系统到框架，只要实现Fantasy.ILog接口即可
-// 这里使用的是NLog日志系统，支持文件输出、控制台输出等多种方式
-// 也可以不创建日志，只需要传递null，这情况就会使用默认控制台打印日志
-var nLog = new Fantasy.NLog("Server");
-// 3. 获取需要注册到框架的程序集
-// AssemblyHelper会自动扫描并加载所有相关的程序集
-// 包含：业务逻辑Assembly、热更新Assembly等
-var assemblies = Fantasy.AssemblyHelper.Assemblies;
-// 4. 初始化Fantasy.Net框架
-// 注册日志系统和程序集到框架中，准备启动环境
-await Fantasy.Platform.Net.Entry.Initialize(nLog, assemblies);
-// 5. 启动Fantasy.Net框架
-// 开始监听网络连接、启动各种服务组件
-await Fantasy.Platform.Net.Entry.Start();
+
+using Fantasy;
+
+try
+{
+    // 初始化引用的程序集，确保 ModuleInitializer 执行
+    // .NET 采用延迟加载机制 - 仅当类型被引用时才加载程序集
+    // 通过访问 AssemblyMarker 强制加载程序集并调用 ModuleInitializer
+    // 注意：Native AOT 不存在延迟加载问题，所有程序集在编译时打包
+    AssemblyHelper.Initialize();
+    // 配置 NLog 日志基础设施
+    // 可选：传入 null 或省略参数以使用控制台日志
+    var logger = new Fantasy.NLog("Server");
+    // 使用配置的日志系统启动 Fantasy.Net 框架
+    await Fantasy.Platform.Net.Entry.Start(logger);
+}
+catch (Exception ex)
+{
+    Console.Error.WriteLine($"服务器初始化过程中发生致命错误：{ex}");
+    Environment.Exit(1);
+}
+

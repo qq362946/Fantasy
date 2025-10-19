@@ -47,7 +47,7 @@ namespace Fantasy.Helper
         /// <summary>
         /// 根据时间获取时间戳
         /// </summary>
-        public static long Transition(DateTime dateTime)
+        public static long Transition(this DateTime dateTime)
         {
             return (dateTime.ToUniversalTime().Ticks - Epoch) / 10000;
         }
@@ -55,7 +55,7 @@ namespace Fantasy.Helper
         /// <summary>
         /// 根据时间获取 时间戳
         /// </summary>
-        public static long TransitionToSeconds(DateTime dateTime)
+        public static long TransitionToSeconds(this DateTime dateTime)
         {
             return (dateTime.ToUniversalTime().Ticks - Epoch) / 10000000;
         }
