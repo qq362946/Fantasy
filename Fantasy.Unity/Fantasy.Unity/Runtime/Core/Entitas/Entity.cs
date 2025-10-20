@@ -293,12 +293,6 @@ namespace Fantasy.Entitas
             }
             else
             {
-#if FANTASY_NET
-                if (component is ISupportedSingleCollection && component.Id != Id)
-                {
-                    Log.Error($"component type :{type.FullName} for implementing ISupportedSingleCollection, it is required that the Id must be the same as the parent");
-                }
-#endif
                 var typeHashCode = EntityTypeHashCache.GetHashCode(type);
                 
                 if (_tree == null)
@@ -360,13 +354,6 @@ namespace Fantasy.Entitas
             }
             else
             {
-#if FANTASY_NET
-                if (EntitySupportedChecker<T>.IsSingleCollection && component.Id != Id)
-                {
-                    Log.Error($"component type :{typeof(T).FullName} for implementing ISupportedSingleCollection, it is required that the Id must be the same as the parent");
-                    return;
-                }
-#endif
                 var typeHashCode = EntityTypeHashCache<T>.HashCode;
                 
                 if (_tree == null)
@@ -837,66 +824,7 @@ namespace Fantasy.Entitas
         #endregion
 
         #region ForEach
-#if FANTASY_NET
-        /// <summary>
-        /// 查询当前实体下支持数据库分表存储实体
-        /// </summary>
-        [BsonIgnore]
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [ProtoIgnore]
-        public IEnumerable<Entity> ForEachSingleCollection
-        {
-            get
-            {
-                foreach (var (_, treeEntity) in _tree)
-                {
-                    if (treeEntity is not ISupportedSingleCollection)
-                    {
-                        continue;
-                    }
-
-                    yield return treeEntity;
-                }
-            }
-        }
-        /// <summary>
-        /// 查询当前实体下支持传送实体
-        /// </summary>
-        [BsonIgnore]
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [ProtoIgnore]
-        public IEnumerable<Entity> ForEachTransfer
-        {
-            get
-            {
-                if (_tree != null)
-                {
-                    foreach (var (_, treeEntity) in _tree)
-                    {
-                        if (treeEntity is ISupportedTransfer)
-                        {
-                            yield return treeEntity;
-                        }
-                    }
-                }
-
-                if (_multiDb != null)
-                {
-                    foreach (var treeEntity in _multiDb)
-                    {
-                        if (treeEntity is not ISupportedTransfer)
-                        {
-                            continue;
-                        }
-
-                        yield return treeEntity;
-                    }
-                }
-            }
-        }
-#endif
+        
         /// <summary>
         /// 查询当前实体下的实现了ISupportedMultiEntity接口的实体
         /// </summary>

@@ -47,7 +47,6 @@ namespace Fantasy.SourceGenerator.Common
             public const string IMessage = "Fantasy.Network.Interface.IMessage";
             public const string IMessageHandler = "Fantasy.Network.Interface.IMessageHandler";
             public const string IRouteMessageHandler = "Fantasy.Network.Interface.IRouteMessageHandler";
-            public const string ICustomRoute = "Fantasy.Network.Interface.ICustomRoute";
         }
 
         /// <summary>

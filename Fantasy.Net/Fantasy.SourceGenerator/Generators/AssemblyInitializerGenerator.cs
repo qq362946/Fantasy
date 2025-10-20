@@ -161,6 +161,10 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("Fantasy.Assembly.IMessageDispatcherRegistrar? messageDispatcherRegistrar = null;");
             builder.AppendLine(
                 "Fantasy.Assembly.IEntityTypeCollectionRegistrar? entityTypeCollectionRegistrar = null;");
+            builder.AppendLine("#if FANTASY_NET", false);
+            builder.AppendLine(
+                "Fantasy.Assembly.ISeparateTableRegistrar? separateTableRegistrar = null;");
+            builder.AppendLine("#endif", false);
             builder.AppendLine();
 
             // 尝试创建各个注册器（如果存在）
@@ -170,11 +174,28 @@ namespace Fantasy.SourceGenerator.Generators
             GenerateTryCreateRegistrar(builder, "EntitySystem", "entitySystemRegistrar");
             GenerateTryCreateRegistrar(builder, "MessageDispatcher", "messageDispatcherRegistrar");
             GenerateTryCreateRegistrar(builder, "EntityTypeCollection", "entityTypeCollectionRegistrar");
-
+            builder.AppendLine("#if FANTASY_NET", false);
+            GenerateTryCreateRegistrar(builder, "SeparateTable", "separateTableRegistrar");
+            builder.AppendLine("#endif", false);
+            
             builder.AppendLine();
 
             // 注册到框架
             builder.AddComment("Register complete AssemblyManifest to the framework");
+            builder.AppendLine("#if FANTASY_NET", false);
+            builder.AppendLine("Fantasy.Assembly.AssemblyManifest.Register(");
+            builder.Indent();
+            builder.AppendLine("_assemblyManifestId,");
+            builder.AppendLine("assembly,");
+            builder.AppendLine("protoBufRegistrar,");
+            builder.AppendLine("eventSystemRegistrar,");
+            builder.AppendLine("entitySystemRegistrar,");
+            builder.AppendLine("messageDispatcherRegistrar,");
+            builder.AppendLine("entityTypeCollectionRegistrar,");
+            builder.AppendLine("separateTableRegistrar);");
+            builder.Unindent();
+            builder.AppendLine("#endif", false);
+            builder.AppendLine("#if FANTASY_UNITY", false);
             builder.AppendLine("Fantasy.Assembly.AssemblyManifest.Register(");
             builder.Indent();
             builder.AppendLine("_assemblyManifestId,");
@@ -185,7 +206,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("messageDispatcherRegistrar,");
             builder.AppendLine("entityTypeCollectionRegistrar);");
             builder.Unindent();
-
+            builder.AppendLine("#endif", false);
             builder.EndMethod();
         }
 

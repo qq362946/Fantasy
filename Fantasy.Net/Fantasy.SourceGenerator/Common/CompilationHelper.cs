@@ -11,6 +11,44 @@ namespace Fantasy.SourceGenerator.Common
     {
         /// <summary>
         /// 检查是否定义了 Fantasy 框架的预编译符号
+        /// 只有定义了 FANTASY_NET的项目才会生成代码
+        /// </summary>
+        public static bool HasFantasyNETDefine(Compilation compilation)
+        {
+            // 遍历所有语法树的预处理符号
+            foreach (var tree in compilation.SyntaxTrees)
+            {
+                var defines = tree.Options.PreprocessorSymbolNames;
+                if (defines.Contains("FANTASY_NET"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        
+        /// <summary>
+        /// 检查是否定义了 Fantasy 框架的预编译符号
+        /// 只有定义了 FANTASY_UNITY的项目才会生成代码
+        /// </summary>
+        public static bool HasFantasyUNITYDefine(Compilation compilation)
+        {
+            // 遍历所有语法树的预处理符号
+            foreach (var tree in compilation.SyntaxTrees)
+            {
+                var defines = tree.Options.PreprocessorSymbolNames;
+                if (defines.Contains("FANTASY_UNITY"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        
+        /// <summary>
+        /// 检查是否定义了 Fantasy 框架的预编译符号
         /// 只有定义了 FANTASY_NET 或 FANTASY_UNITY 的项目才会生成代码
         /// </summary>
         public static bool HasFantasyDefine(Compilation compilation)

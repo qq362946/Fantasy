@@ -41,25 +41,6 @@ namespace Fantasy.Entitas.Interface
         /// 如果实体类型实现了 <see cref="ISupportedTransfer"/> 接口，则为 <c>true</c>；否则为 <c>false</c>。
         /// </value>
         public static bool IsTransfer { get; }
-
-        /// <summary>
-        /// 获取实体类型是否实现了 <see cref="ISupportedSingleCollection"/> 接口。
-        /// 实现该接口的实体在保存到数据库时会单独存储在独立集合中，不会与父组件保存在同一集合。
-        /// 需要配合 <see cref="SingleCollectionAttribute"/> 特性使用。
-        /// </summary>
-        /// <value>
-        /// 如果实体类型实现了 <see cref="ISupportedSingleCollection"/> 接口，则为 <c>true</c>；否则为 <c>false</c>。
-        /// </value>
-        public static bool IsSingleCollection { get; }
-
-        /// <summary>
-        /// 获取实体类型是否实现了 <see cref="ISingleCollectionRoot"/> 接口。
-        /// 实现该接口的实体在保存到数据库时，会根据子组件的分离存储特性将其分表存储到不同的集合中。
-        /// </summary>
-        /// <value>
-        /// 如果实体类型实现了 <see cref="ISingleCollectionRoot"/> 接口，则为 <c>true</c>；否则为 <c>false</c>。
-        /// </value>
-        public static bool IsSingleCollectionRoot { get; }
 #endif
         /// <summary>
         /// 静态构造函数，在首次访问该泛型类型时执行一次，缓存所有接口检查结果。
@@ -71,8 +52,6 @@ namespace Fantasy.Entitas.Interface
 #if FANTASY_NET
             IsDataBase = typeof(ISupportedDataBase).IsAssignableFrom(type);
             IsTransfer = typeof(ISupportedTransfer).IsAssignableFrom(type);
-            IsSingleCollection = typeof(ISupportedSingleCollection).IsAssignableFrom(type);
-            IsSingleCollectionRoot = typeof(ISingleCollectionRoot).IsAssignableFrom(type);
 #endif
         }
     }

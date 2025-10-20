@@ -55,7 +55,12 @@ namespace Fantasy.Assembly
         /// 实体类型集合注册器
         /// </summary>
         internal IEntityTypeCollectionRegistrar EntityTypeCollectionRegistrar { get; set; }
-
+#if FANTASY_NET
+        /// <summary>
+        /// 分表注册器
+        /// </summary>
+        internal ISeparateTableRegistrar SeparateTableRegistrar { get; set; }
+#endif       
 #if FANTASY_WEBGL
         /// <summary>
         /// 程序集清单集合（WebGL 单线程版本）
@@ -85,10 +90,54 @@ namespace Fantasy.Assembly
             EntitySystemRegistrar = null;
             MessageDispatcherRegistrar = null;
             EntityTypeCollectionRegistrar = null;
+#if FANTASY_NET
+            SeparateTableRegistrar = null;
+#endif
         }
         
         #region static
 
+#if FANTASY_NET
+        /// <summary>
+        /// 注册程序集清单
+        /// 此方法由 Source Generator 生成的 ModuleInitializer 自动调用
+        /// 直接创建并缓存完整的 AssemblyManifest
+        /// </summary>
+        /// <param name="assemblyManifestId">程序集唯一标识（通过程序集名称哈希生成）</param>
+        /// <param name="assembly">程序集实例</param>
+        /// <param name="protoBufRegistrar">ProtoBuf 注册器</param>
+        /// <param name="eventSystemRegistrar">事件系统注册器</param>
+        /// <param name="entitySystemRegistrar">实体系统注册器</param>
+        /// <param name="messageDispatcherRegistrar">消息分发器注册器</param>
+        /// <param name="entityTypeCollectionRegistrar">实体类型集合注册器</param>
+        /// <param name="separateTableRegistrar">分表注册器</param>
+        public static void Register(
+            long assemblyManifestId,
+            System.Reflection.Assembly assembly,
+            IProtoBufRegistrar protoBufRegistrar,
+            IEventSystemRegistrar eventSystemRegistrar,
+            IEntitySystemRegistrar entitySystemRegistrar,
+            IMessageDispatcherRegistrar messageDispatcherRegistrar,
+            IEntityTypeCollectionRegistrar entityTypeCollectionRegistrar,
+            ISeparateTableRegistrar separateTableRegistrar)
+        {
+            var manifest = new AssemblyManifest
+            {
+                Assembly = assembly,
+                AssemblyManifestId = assemblyManifestId,
+                ProtoBufRegistrar = protoBufRegistrar,
+                EventSystemRegistrar = eventSystemRegistrar,
+                EntitySystemRegistrar = entitySystemRegistrar,
+                MessageDispatcherRegistrar = messageDispatcherRegistrar,
+                EntityTypeCollectionRegistrar = entityTypeCollectionRegistrar,
+                SeparateTableRegistrar = separateTableRegistrar
+            };
+
+            Manifests.TryAdd(assemblyManifestId, manifest);
+            AssemblyLifecycle.OnLoad(manifest).Coroutine();
+        }
+#endif
+#if FANTASY_UNITY
         /// <summary>
         /// 注册程序集清单
         /// 此方法由 Source Generator 生成的 ModuleInitializer 自动调用
@@ -127,7 +176,7 @@ namespace Fantasy.Assembly
 #endif
             AssemblyLifecycle.OnLoad(manifest).Coroutine();
         }
-        
+#endif
         /// <summary>
         /// 取消注册指定程序集的清单
         /// </summary>

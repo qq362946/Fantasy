@@ -1,8 +1,10 @@
 using Fantasy.Async;
+using Fantasy.DataBase;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
 using Fantasy.Event;
 using Fantasy.Helper;
+using Fantasy.SeparateTable;
 using Fantasy.Serialize;
 using ProtoBuf;
 
@@ -15,6 +17,12 @@ public sealed class SubSceneTestComponent : Entity
         Log.Debug("销毁SubScene下的SubSceneTestComponent");
         base.Dispose();
     }
+}
+
+[SeparateTable(typeof(SubSceneTestComponent),"TestEntity123")]
+public sealed class TestEntity : Entity
+{
+    
 }
 
 public sealed class SubSceneTestComponentAwakeSystem : AwakeSystem<SubSceneTestComponent>
