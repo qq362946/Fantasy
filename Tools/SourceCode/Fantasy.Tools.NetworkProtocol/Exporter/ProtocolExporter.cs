@@ -271,15 +271,6 @@ public sealed class ProtocolExporter
                             protocolOpCodeType = OpCodeProtocolType.ProtoBuf;
                             break;
                         }
-                        // case "MemoryPack":
-                        // {
-                        //     keyIndex = 0;
-                        //     protocolType = "\t[MemoryPackable]";
-                        //     protocolIgnore = "\t\t[MemoryPackIgnore]";
-                        //     protocolMember = "MemoryPackOrder";
-                        //     // protocolOpCodeType = OpCodeProtocolType.MemoryPack;
-                        //     break;
-                        // }
                         case "Bson":
                         {
                             if (opCodeType == NetworkProtocolOpCodeType.Outer)
@@ -395,10 +386,6 @@ public sealed class ProtocolExporter
                     messageStr.Append(string.IsNullOrWhiteSpace(parameter)
                         ? $"\tpublic partial class {className} : AMessage"
                         : $"\tpublic partial class {className} : AMessage, {parameter}");
-                    if (protocolMember == "ProtoMember")
-                    {
-                        messageStr.Append(", IProto");
-                    }
                     continue;
                 }
 

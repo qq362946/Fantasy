@@ -6,6 +6,7 @@ using Fantasy.Network;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser;
 using Fantasy.PacketParser.Interface;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8604 // Possible null reference argument.
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -85,12 +86,12 @@ namespace Fantasy.Scheduler
 
                         if (!Scene.TryGetEntity(packInfo.RouteId, out var entity))
                         {
-                            Scene.MessageDispatcherComponent.FailRouteResponse(session, messageType, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
+                            Scene.MessageDispatcherComponent.FailRouteResponse(session, packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
                             return;
                         }
 
                         var obj = packInfo.Deserialize(messageType);
-                        await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId);
+                        await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId, packInfo.ProtocolCode);
                     }
 
                     return;
@@ -110,12 +111,12 @@ namespace Fantasy.Scheduler
 
                         if (!Scene.TryGetEntity(packInfo.RouteId, out var entity))
                         {
-                            Scene.MessageDispatcherComponent.FailRouteResponse(session, messageType, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
+                            Scene.MessageDispatcherComponent.FailRouteResponse(session, packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
                             return;
                         }
 
                         var obj = packInfo.Deserialize(messageType);
-                        await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId);
+                        await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId, packInfo.ProtocolCode);
                     }
 
                     return;
@@ -158,7 +159,7 @@ namespace Fantasy.Scheduler
                                             case OpCodeType.OuterAddressableRequest:
                                             case OpCodeType.OuterAddressableMessage:
                                             {
-                                                Scene.MessageDispatcherComponent.FailRouteResponse(session, messageType, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
+                                                Scene.MessageDispatcherComponent.FailRouteResponse(session, packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
                                                 return;
                                             }
                                         }
@@ -190,7 +191,7 @@ namespace Fantasy.Scheduler
                                 }
                             
                                 var obj = packInfo.Deserialize(messageType);
-                                await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId);
+                                await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId, packInfo.ProtocolCode);
                             }
                             
                             return;

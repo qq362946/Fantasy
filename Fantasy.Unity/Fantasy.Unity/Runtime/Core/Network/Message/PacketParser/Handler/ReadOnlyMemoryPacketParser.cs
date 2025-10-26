@@ -143,9 +143,9 @@ namespace Fantasy.PacketParser
             return false;
         }
 
-        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
-            return memoryStream == null ? Pack(ref rpcId, ref routeId, message) : Pack(ref rpcId, ref routeId, memoryStream);
+            return memoryStream == null ? Pack(ref rpcId, ref routeId, message, messageType) : Pack(ref rpcId, ref routeId, memoryStream);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -161,12 +161,12 @@ namespace Fantasy.PacketParser
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, IMessage message)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, IMessage message, Type messageType)
         {
             var memoryStreamLength = 0;
-            var messageType = message.GetType();
             var memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
-            OpCodeIdStruct opCodeIdStruct = message.OpCode();
+            var opCode = message.OpCode();
+            OpCodeIdStruct opCodeIdStruct = opCode;
             memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
             if (SerializerManager.TryGetSerializer(opCodeIdStruct.OpCodeProtocolType, out var serializer))
@@ -179,7 +179,7 @@ namespace Fantasy.PacketParser
                 Log.Error($"type:{messageType} Does not support processing protocol");
             }
 
-            var opCode = Scene.MessageDispatcherComponent.GetOpCode(messageType);
+            
             var packetBodyCount = memoryStreamLength - Packet.InnerPacketHeadLength;
             
             if (packetBodyCount == 0)
@@ -306,9 +306,9 @@ namespace Fantasy.PacketParser
             return false;
         }
 
-        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
-            return memoryStream == null ? Pack(ref rpcId, message) : Pack(ref rpcId, memoryStream);
+            return memoryStream == null ? Pack(ref rpcId, message, messageType) : Pack(ref rpcId, memoryStream);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -326,12 +326,12 @@ namespace Fantasy.PacketParser
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, IMessage message)
+        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, IMessage message, Type messageType)
         {
             var memoryStreamLength = 0;
-            var messageType = message.GetType();
             var memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
-            OpCodeIdStruct opCodeIdStruct = message.OpCode();
+            var opCode = message.OpCode();
+            OpCodeIdStruct opCodeIdStruct = opCode;
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
             
             if (SerializerManager.TryGetSerializer(opCodeIdStruct.OpCodeProtocolType, out var serializer))
@@ -344,7 +344,7 @@ namespace Fantasy.PacketParser
                 Log.Error($"type:{messageType} Does not support processing protocol");
             }
             
-            var opCode = Scene.MessageDispatcherComponent.GetOpCode(messageType);
+            
             var packetBodyCount = memoryStreamLength - Packet.OuterPacketHeadLength;
 
             if (packetBodyCount == 0)

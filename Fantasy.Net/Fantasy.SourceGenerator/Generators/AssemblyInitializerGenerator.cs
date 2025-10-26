@@ -155,12 +155,16 @@ namespace Fantasy.SourceGenerator.Generators
 
             // 声明所有可能的注册器变量
             builder.AddComment("Declare registrar variables");
-            builder.AppendLine("Fantasy.Assembly.IProtoBufRegistrar? protoBufRegistrar = null;");
+            builder.AppendLine("Fantasy.Assembly.INetworkProtocolRegistrar? networkProtocolRegistrar = null;");
             builder.AppendLine("Fantasy.Assembly.IEventSystemRegistrar? eventSystemRegistrar = null;");
             builder.AppendLine("Fantasy.Assembly.IEntitySystemRegistrar? entitySystemRegistrar = null;");
-            builder.AppendLine("Fantasy.Assembly.IMessageDispatcherRegistrar? messageDispatcherRegistrar = null;");
+            builder.AppendLine("Fantasy.Assembly.IMessageHandlerResolver? messageHandlerResolverRegistrar = null;");
             builder.AppendLine(
                 "Fantasy.Assembly.IEntityTypeCollectionRegistrar? entityTypeCollectionRegistrar = null;");
+            builder.AppendLine(
+                "Fantasy.Assembly.INetworkProtocolOpCodeResolver? networkProtocolOpCodeResolverRegistrar = null;");
+            builder.AppendLine(
+                "Fantasy.Assembly.INetworkProtocolResponseTypeResolver? networkProtocolResponseTypeResolverRegistrar = null;");
             builder.AppendLine("#if FANTASY_NET", false);
             builder.AppendLine(
                 "Fantasy.Assembly.ISeparateTableRegistrar? separateTableRegistrar = null;");
@@ -169,11 +173,13 @@ namespace Fantasy.SourceGenerator.Generators
 
             // 尝试创建各个注册器（如果存在）
             builder.AddComment("Try to create registrars if they were generated in this assembly");
-            GenerateTryCreateRegistrar(builder, "ProtoBuf", "protoBufRegistrar");
+            GenerateTryCreateRegistrar(builder, "NetworkProtocol", "networkProtocolRegistrar");
             GenerateTryCreateRegistrar(builder, "EventSystem", "eventSystemRegistrar");
             GenerateTryCreateRegistrar(builder, "EntitySystem", "entitySystemRegistrar");
-            GenerateTryCreateRegistrar(builder, "MessageDispatcher", "messageDispatcherRegistrar");
+            GenerateTryCreateRegistrar(builder, "MessageHandlerResolver", "messageHandlerResolverRegistrar");
             GenerateTryCreateRegistrar(builder, "EntityTypeCollection", "entityTypeCollectionRegistrar");
+            GenerateTryCreateRegistrar(builder, "NetworkProtocolOpCodeResolver", "networkProtocolOpCodeResolverRegistrar");
+            GenerateTryCreateRegistrar(builder, "NetworkProtocolResponseTypeResolver", "networkProtocolResponseTypeResolverRegistrar");
             builder.AppendLine("#if FANTASY_NET", false);
             GenerateTryCreateRegistrar(builder, "SeparateTable", "separateTableRegistrar");
             builder.AppendLine("#endif", false);
@@ -187,12 +193,14 @@ namespace Fantasy.SourceGenerator.Generators
             builder.Indent();
             builder.AppendLine("_assemblyManifestId,");
             builder.AppendLine("assembly,");
-            builder.AppendLine("protoBufRegistrar,");
+            builder.AppendLine("networkProtocolRegistrar,");
             builder.AppendLine("eventSystemRegistrar,");
             builder.AppendLine("entitySystemRegistrar,");
-            builder.AppendLine("messageDispatcherRegistrar,");
+            builder.AppendLine("messageHandlerResolverRegistrar,");
             builder.AppendLine("entityTypeCollectionRegistrar,");
-            builder.AppendLine("separateTableRegistrar);");
+            builder.AppendLine("separateTableRegistrar,");
+            builder.AppendLine("networkProtocolOpCodeResolverRegistrar,");
+            builder.AppendLine("networkProtocolResponseTypeResolverRegistrar);");
             builder.Unindent();
             builder.AppendLine("#endif", false);
             builder.AppendLine("#if FANTASY_UNITY", false);
@@ -200,11 +208,13 @@ namespace Fantasy.SourceGenerator.Generators
             builder.Indent();
             builder.AppendLine("_assemblyManifestId,");
             builder.AppendLine("assembly,");
-            builder.AppendLine("protoBufRegistrar,");
+            builder.AppendLine("networkProtocolRegistrar,");
             builder.AppendLine("eventSystemRegistrar,");
             builder.AppendLine("entitySystemRegistrar,");
-            builder.AppendLine("messageDispatcherRegistrar,");
-            builder.AppendLine("entityTypeCollectionRegistrar);");
+            builder.AppendLine("messageHandlerResolverRegistrar,");
+            builder.AppendLine("entityTypeCollectionRegistrar,");
+            builder.AppendLine("networkProtocolOpCodeResolverRegistrar,");
+            builder.AppendLine("networkProtocolResponseTypeResolverRegistrar);");
             builder.Unindent();
             builder.AppendLine("#endif", false);
             builder.EndMethod();

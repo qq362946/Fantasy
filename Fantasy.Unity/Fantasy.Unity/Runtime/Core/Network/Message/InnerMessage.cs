@@ -21,6 +21,7 @@ namespace Fantasy.InnerMessage
             return Fantasy.Network.OpCode.BenchmarkMessage;
         }
     }
+    
     [ProtoContract]
     public partial class BenchmarkRequest : AMessage, IRequest
     {

@@ -140,14 +140,14 @@ namespace Fantasy.Network.WebSocket
 
         #region Send
 
-        public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
+        public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
             if (IsDisposed)
             {
                 return;
             }
-            
-            var buffer = _packetParser.Pack(ref rpcId, ref routeId, memoryStream, message);
+
+            var buffer = _packetParser.Pack(ref rpcId, ref routeId, memoryStream, message, messageType);
             
             if (!_isConnected)
             {

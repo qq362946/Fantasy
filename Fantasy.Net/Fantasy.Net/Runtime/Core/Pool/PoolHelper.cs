@@ -1,5 +1,6 @@
 using System;
 using System.Reflection.Emit;
+using Fantasy.Network.Interface;
 using Fantasy.Serialize;
 
 #pragma warning disable CS8604 // Possible null reference argument.

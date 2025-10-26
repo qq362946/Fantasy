@@ -18,7 +18,7 @@ using Fantasy.Serialize;
 namespace Fantasy
 {
     [ProtoContract]
-    public sealed partial class UnitConfigData : ASerialize, IConfigTable, IProto
+    public sealed partial class UnitConfigData : ASerialize, IConfigTable
     {
         [ProtoMember(1)]
         public List<UnitConfig> List { get; set; } = new List<UnitConfig>();
@@ -85,7 +85,7 @@ namespace Fantasy
     }
     
     [ProtoContract]
-    public sealed partial class UnitConfig : ASerialize, IProto
+    public sealed partial class UnitConfig : ASerialize
     {
 		[ProtoMember(1)]
 		public uint Id { get; set; } // Id

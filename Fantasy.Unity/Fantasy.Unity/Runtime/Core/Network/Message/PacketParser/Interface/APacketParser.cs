@@ -19,7 +19,7 @@ namespace Fantasy.PacketParser.Interface
         internal ANetwork Network;
         internal MessageDispatcherComponent MessageDispatcherComponent;
         protected bool IsDisposed { get; private set; }
-        public abstract MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message);
+        public abstract MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType);
         public virtual void Dispose()
         {
             IsDisposed = true;

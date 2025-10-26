@@ -47,9 +47,6 @@
         <Compile Include="..\..\..\Fantasy.Packages\Fantasy.ConfigTable\Net\Interface\IConfigTable.cs">
             <Link>Core\Interface\IConfigTable.cs</Link>
         </Compile>
-        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Serialize\ProtoBufPackHelper\IProto.cs">
-            <Link>Core\Serialize\ProtoBufPackHelper\IProto.cs</Link>
-        </Compile>
         <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\TimeHelper.cs">
             <Link>Excel\Base\TimeHelper.cs</Link>
         </Compile>

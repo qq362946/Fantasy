@@ -235,7 +235,7 @@ namespace Fantasy.Network.Interface
             }
             finally
             {
-                session.Send(new RouteResponse(), rpcId);
+                session.Send(new RouteResponse(), typeof(RouteResponse), rpcId);
             }
         }
 

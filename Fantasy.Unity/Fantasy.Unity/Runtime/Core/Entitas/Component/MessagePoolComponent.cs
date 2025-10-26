@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas;
+using Fantasy.Network.Interface;
 using Fantasy.Pool;
 using Fantasy.Serialize;
 

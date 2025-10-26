@@ -21,6 +21,7 @@ public class NormalMessage : MonoBehaviour
     
     private Scene _scene;
     private Session _session;
+    
     private void Start()
     {
         StartAsync().Coroutine();

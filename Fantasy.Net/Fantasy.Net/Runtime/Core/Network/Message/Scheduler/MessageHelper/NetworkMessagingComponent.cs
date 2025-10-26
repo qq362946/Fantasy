@@ -71,7 +71,7 @@ namespace Fantasy.Scheduler
         public readonly SortedDictionary<uint, MessageSender> RequestCallback = new();
         public readonly Dictionary<uint, MessageSender> TimeoutRouteMessageSenders = new();
         
-        public void SendInnerRoute(long routeId, IRouteMessage message)
+        public void SendInnerRoute<T>(long routeId, T message) where T : IRouteMessage
         {
             if (routeId == 0)
             {
@@ -93,7 +93,7 @@ namespace Fantasy.Scheduler
             Scene.GetSession(routeId).Send(0, routeId, messageType, packInfo);
         }
         
-        public void SendInnerRoute(ICollection<long> routeIdCollection, IRouteMessage message)
+        public void SendInnerRoute<T>(ICollection<long> routeIdCollection, T message) where T : IRouteMessage
         {
             if (routeIdCollection.Count <= 0)
             {
@@ -109,7 +109,7 @@ namespace Fantasy.Scheduler
             }
         }
         
-        public async FTask SendAddressable(long addressableId, IRouteMessage message)
+        public async FTask SendAddressable<T>(long addressableId, T message) where T : IRouteMessage
         {
             await CallAddressable(addressableId, message);
         }
@@ -121,7 +121,7 @@ namespace Fantasy.Scheduler
                 Log.Error($"CallInnerRoute routeId == 0");
                 return null;
             }
-            
+
             var rpcId = ++_rpcId;
             var session = Scene.GetSession(routeId);
             var requestCallback = FTask<IResponse>.Create(false);
@@ -130,7 +130,7 @@ namespace Fantasy.Scheduler
             return await requestCallback;
         }
 
-        public async FTask<IResponse> CallInnerRouteBySession(Session session, long routeId, IRouteMessage request)
+        public async FTask<IResponse> CallInnerRouteBySession<T>(Session session, long routeId, T request) where T : IRouteMessage
         {
             var rpcId = ++_rpcId;
             var requestCallback = FTask<IResponse>.Create(false);
@@ -139,7 +139,7 @@ namespace Fantasy.Scheduler
             return await requestCallback;
         }
 
-        public async FTask<IResponse> CallInnerRoute(long routeId, IRouteMessage request)
+        public async FTask<IResponse> CallInnerRoute<T>(long routeId, T request) where T : IRouteMessage
         {
             if (routeId == 0)
             {
@@ -151,11 +151,11 @@ namespace Fantasy.Scheduler
             var session = Scene.GetSession(routeId);
             var requestCallback = FTask<IResponse>.Create(false);
             RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
-            session.Send(request, rpcId, routeId);
+            session.Send<T>(request, rpcId, routeId);
             return await requestCallback;
         }
         
-        public async FTask<IResponse> CallAddressable(long addressableId, IRouteMessage request)
+        public async FTask<IResponse> CallAddressable<T>(long addressableId, T request) where T : IRouteMessage
         {
             var failCount = 0;
             
@@ -172,7 +172,7 @@ namespace Fantasy.Scheduler
                     
                     if (addressableRouteId == 0)
                     {
-                        return MessageDispatcherComponent.CreateResponse(request.GetType(), InnerErrorCode.ErrNotFoundRoute);
+                        return MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoute);
                     }
                     
                     var iRouteResponse = await CallInnerRoute(addressableRouteId, request);
@@ -246,8 +246,8 @@ namespace Fantasy.Scheduler
                     }
                     case IRequest iRequest:
                     {
-                        var response = MessageDispatcherComponent.CreateResponse(iRequest.GetType(), InnerErrorCode.ErrRpcFail);
                         var responseRpcId = messageSender.RpcId;
+                        var response = MessageDispatcherComponent.CreateResponse(iRequest.OpCode(), InnerErrorCode.ErrRpcFail);
                         ResponseHandler(responseRpcId, response);
                         Log.Warning($"timeout rpcId:{rpcId} responseRpcId:{responseRpcId} {iRequest.ToJson()}");
                         break;
@@ -256,7 +256,7 @@ namespace Fantasy.Scheduler
                     {
                         Log.Error(messageSender.Request != null
                             ? $"Unsupported protocol type {messageSender.Request.GetType()} rpcId:{rpcId} messageSender.Request != null"
-                            : $"Unsupported protocol type:{messageSender.MessageType.FullName} rpcId:{rpcId}");
+                            : $"Unsupported protocol type:{messageSender.MessageType} rpcId:{rpcId}");
                         RequestCallback.Remove(rpcId);
                         break;
                     }

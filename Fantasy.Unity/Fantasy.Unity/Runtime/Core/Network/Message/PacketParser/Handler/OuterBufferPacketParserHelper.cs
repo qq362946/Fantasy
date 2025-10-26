@@ -19,17 +19,18 @@ namespace Fantasy.PacketParser
         /// <param name="scene">scene</param>
         /// <param name="rpcId">如果是RPC消息需要传递一个rpcId</param>
         /// <param name="message">打包的网络消息</param>
+        /// <param name="messageType">打包的网络消息类型</param>
         /// <param name="memoryStreamLength">序列化后流的长度</param>
         /// <returns>打包完成会返回一个MemoryStreamBuffer</returns>
         /// <exception cref="Exception"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static MemoryStreamBuffer Pack(Scene scene, uint rpcId, IMessage message, out int memoryStreamLength)
+        public static MemoryStreamBuffer Pack(Scene scene, uint rpcId, IMessage message, Type messageType, out int memoryStreamLength)
         {
             memoryStreamLength = 0;
-            var messageType = message.GetType();
             var memoryStream = new MemoryStreamBuffer();
             memoryStream.MemoryStreamBufferSource = MemoryStreamBufferSource.Pack;
-            OpCodeIdStruct opCodeIdStruct = message.OpCode();
+            var opCode = message.OpCode();
+            OpCodeIdStruct opCodeIdStruct = opCode;
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
 
             if (SerializerManager.TryGetSerializer(opCodeIdStruct.OpCodeProtocolType, out var serializer))
@@ -41,8 +42,7 @@ namespace Fantasy.PacketParser
             {
                 Log.Error($"type:{messageType} Does not support processing protocol");
             }
-
-            var opCode = scene.MessageDispatcherComponent.GetOpCode(messageType);
+            ;
             var packetBodyCount = memoryStreamLength - Packet.OuterPacketHeadLength;
 
             if (packetBodyCount == 0)

@@ -57,12 +57,12 @@ namespace Fantasy.Network.Route
         public NetworkMessagingComponent NetworkMessagingComponent;
         public MessageDispatcherComponent MessageDispatcherComponent;
 
-        internal void Send(IAddressableRouteMessage message)
+        internal void Send<T>(T message)  where T : IAddressableRouteMessage
         {
-            Call(message).Coroutine();
+            Call<T>(message).Coroutine();
         }
 
-        internal async FTask Send(Type requestType, APackInfo packInfo)
+        internal async FTask Send(Type requestType,APackInfo packInfo)
         {
             await Call(requestType, packInfo);
         }
@@ -71,7 +71,7 @@ namespace Fantasy.Network.Route
         {
             if (IsDisposed)
             {
-                return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoute);
+                return MessageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoute);
             }
 
             packInfo.IsDisposed = true;
@@ -92,10 +92,9 @@ namespace Fantasy.Network.Route
 
                         if (AddressableRouteId == 0)
                         {
-                            return MessageDispatcherComponent.CreateResponse(requestType,
-                                InnerErrorCode.ErrNotFoundRoute);
+                            return MessageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoute);
                         }
-                        
+
                         iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(AddressableRouteId, requestType, packInfo);
                         
                         if (runtimeId != RuntimeId)
@@ -148,11 +147,11 @@ namespace Fantasy.Network.Route
         /// 调用可寻址路由消息并等待响应。
         /// </summary>
         /// <param name="request">可寻址路由请求。</param>
-        private async FTask<IResponse> Call(IAddressableRouteMessage request)
+        private async FTask<IResponse> Call<T>(T request) where T : IAddressableRouteMessage
         {
             if (IsDisposed)
             {
-                return MessageDispatcherComponent.CreateResponse(request.GetType(), InnerErrorCode.ErrNotFoundRoute);
+                return MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoute);
             }
 
             var failCount = 0;
@@ -169,8 +168,7 @@ namespace Fantasy.Network.Route
 
                     if (AddressableRouteId == 0)
                     {
-                        return MessageDispatcherComponent.CreateResponse(request.GetType(),
-                            InnerErrorCode.ErrNotFoundRoute);
+                        return MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoute);
                     }
 
                     var iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(AddressableRouteId, request);
@@ -186,8 +184,7 @@ namespace Fantasy.Network.Route
                         {
                             if (++failCount > 20)
                             {
-                                Log.Error(
-                                    $"AddressableRouteComponent.Call failCount > 20 route send message fail, routeId: {RouteId} AddressableRouteComponent:{Id}");
+                                Log.Error($"AddressableRouteComponent.Call failCount > 20 route send message fail, routeId: {RouteId} AddressableRouteComponent:{Id}");
                                 return iRouteResponse;
                             }
 

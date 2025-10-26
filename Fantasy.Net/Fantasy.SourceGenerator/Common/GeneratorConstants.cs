@@ -9,46 +9,10 @@ namespace Fantasy.SourceGenerator.Common
         /// 生成文件的命名空间
         /// </summary>
         public const string GeneratedNamespace = "Fantasy.Generated";
-
         /// <summary>
         /// 诊断 ID 前缀
         /// </summary>
         public const string DiagnosticIdPrefix = "FANTASY";
-
-        /// <summary>
-        /// Entity System 相关接口的完全限定名
-        /// </summary>
-        public static class EntitySystemInterfaces
-        {
-            public const string IEntitySystem = "Fantasy.Entitas.Interface.IEntitySystem";
-            public const string IAwakeSystem = "Fantasy.Entitas.Interface.IAwakeSystem";
-            public const string IUpdateSystem = "Fantasy.Entitas.Interface.IUpdateSystem";
-            public const string IDestroySystem = "Fantasy.Entitas.Interface.IDestroySystem";
-            public const string IDeserializeSystem = "Fantasy.Entitas.Interface.IDeserializeSystem";
-            public const string ILateUpdateSystem = "Fantasy.Entitas.Interface.ILateUpdateSystem";
-            public const string ICustomEntitySystem = "Fantasy.Entitas.Interface.ICustomEntitySystem";
-        }
-
-        /// <summary>
-        /// Event 相关接口的完全限定名
-        /// </summary>
-        public static class EventInterfaces
-        {
-            public const string IEvent = "Fantasy.Event.IEvent";
-            public const string IAsyncEvent = "Fantasy.Event.IAsyncEvent";
-            public const string ISphereEvent = "Fantasy.Event.ISphereEvent";
-        }
-
-        /// <summary>
-        /// Message 相关接口的完全限定名
-        /// </summary>
-        public static class MessageInterfaces
-        {
-            public const string IMessage = "Fantasy.Network.Interface.IMessage";
-            public const string IMessageHandler = "Fantasy.Network.Interface.IMessageHandler";
-            public const string IRouteMessageHandler = "Fantasy.Network.Interface.IRouteMessageHandler";
-        }
-
         /// <summary>
         /// 生成的代码文件注释头
         /// </summary>

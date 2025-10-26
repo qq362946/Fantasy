@@ -17,7 +17,7 @@ namespace Fantasy.Network.Interface
         protected bool IsInit;
         public Session Session { get; protected set; }
         public abstract Session Connect(string remoteAddress, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000);
-        public abstract void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message);
+        public abstract void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType);
         public override void Dispose()
         {
             IsInit = false;

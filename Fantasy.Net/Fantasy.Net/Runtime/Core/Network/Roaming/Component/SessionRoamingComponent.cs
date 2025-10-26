@@ -190,7 +190,7 @@ public sealed class SessionRoamingComponent : Entity
     /// 发送一个消息给漫游终
     /// </summary>
     /// <param name="message"></param>
-    public void Send(IRoamingMessage message)
+    public void Send<T>(T message) where T : IRoamingMessage
     {
         Call(message.RouteType, message).Coroutine();
     }
@@ -200,7 +200,7 @@ public sealed class SessionRoamingComponent : Entity
     /// </summary>
     /// <param name="roamingType"></param>
     /// <param name="message"></param>
-    public void Send(int roamingType, IRouteMessage message)
+    public void Send<T>(int roamingType, T message) where T : IRouteMessage
     {
         Call(roamingType, message).Coroutine();
     }
@@ -210,7 +210,7 @@ public sealed class SessionRoamingComponent : Entity
     /// </summary>
     /// <param name="message"></param>
     /// <returns></returns>
-    public async FTask<IResponse> Call(IRoamingMessage message)
+    public async FTask<IResponse> Call<T>(T message) where T : IRoamingMessage
     {
         return await Call(message.RouteType, message);
     }
@@ -221,17 +221,16 @@ public sealed class SessionRoamingComponent : Entity
     /// <param name="roamingType"></param>
     /// <param name="message"></param>
     /// <returns></returns>
-    public async FTask<IResponse> Call(int roamingType, IRouteMessage message)
+    public async FTask<IResponse> Call<T>(int roamingType, T message) where T : IRouteMessage
     {
         if (!_roaming.TryGetValue(roamingType, out var roaming))
         {
-            return MessageDispatcherComponent.CreateResponse(message.GetType(), InnerErrorCode.ErrNotFoundRoaming);
+            return MessageDispatcherComponent.CreateResponse(message.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
         }
 
         var failCount = 0;
         var runtimeId = RuntimeId;
         var routeId = roaming.TerminusId;
-        var requestType = message.GetType();
         
         IResponse iRouteResponse = null;
 
@@ -246,7 +245,7 @@ public sealed class SessionRoamingComponent : Entity
 
                 if (routeId == 0)
                 {
-                    return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoaming);
+                    return MessageDispatcherComponent.CreateResponse(message.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
                 }
 
                 iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(routeId, message);
@@ -306,14 +305,14 @@ public sealed class SessionRoamingComponent : Entity
     {
         if (IsDisposed)
         {
-            return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoaming);
+            return MessageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
         }
 
         packInfo.IsDisposed = true;
         
         if (!_roaming.TryGetValue(roamingType, out var roaming))
         {
-            return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoaming);
+            return MessageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
         }
         
         var failCount = 0;
@@ -334,7 +333,7 @@ public sealed class SessionRoamingComponent : Entity
 
                     if (routeId == 0)
                     {
-                        return MessageDispatcherComponent.CreateResponse(requestType, InnerErrorCode.ErrNotFoundRoaming);
+                        return MessageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
                     }
 
                     iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(routeId, requestType, packInfo);

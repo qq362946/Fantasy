@@ -20,41 +20,4 @@ namespace Fantasy.Serialize
         public virtual void EndInit() { }
         public virtual void AfterDeserialization() => EndInit();
     }
-
-    public abstract class AMessage : ASerialize, IPool
-    {
-#if FANTASY_NET || FANTASY_UNITY || FANTASY_CONSOLE
-        [BsonIgnore] 
-        [JsonIgnore] 
-        [IgnoreDataMember] 
-        [ProtoIgnore]
-        private Scene _scene;
-        protected Scene GetScene()
-        {
-            return _scene;
-        }
-
-        public void SetScene(Scene scene)
-        {
-            _scene = scene;
-        }
-#endif
-#if FANTASY_NET
-        [BsonIgnore] 
-#endif
-        [JsonIgnore] 
-        [IgnoreDataMember] 
-        [ProtoIgnore]
-        private bool _isPool;
-
-        public bool IsPool()
-        {
-            return _isPool;
-        }
-
-        public void SetIsPool(bool isPool)
-        {
-            _isPool = isPool;
-        }
-    }
 }

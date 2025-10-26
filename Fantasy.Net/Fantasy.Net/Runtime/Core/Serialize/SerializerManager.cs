@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Helper;
 #if !FANTASY_EXPORTER

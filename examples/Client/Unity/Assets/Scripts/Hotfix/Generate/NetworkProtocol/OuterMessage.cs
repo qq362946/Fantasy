@@ -10,7 +10,7 @@ using Fantasy.Serialize;
 namespace Fantasy
 {
 	[ProtoContract]
-	public partial class C2G_TestMessage : AMessage, IMessage, IProto
+	public partial class C2G_TestMessage : AMessage, IMessage
 	{
 		public static C2G_TestMessage Create(Scene scene)
 		{
@@ -28,7 +28,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class C2G_TestRequest : AMessage, IRequest, IProto
+	public partial class C2G_TestRequest : AMessage, IRequest
 	{
 		public static C2G_TestRequest Create(Scene scene)
 		{
@@ -48,7 +48,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class G2C_TestResponse : AMessage, IResponse, IProto
+	public partial class G2C_TestResponse : AMessage, IResponse
 	{
 		public static G2C_TestResponse Create(Scene scene)
 		{
@@ -69,7 +69,7 @@ namespace Fantasy
 		public uint ErrorCode { get; set; }
 	}
 	[ProtoContract]
-	public partial class C2G_TestRequestPushMessage : AMessage, IMessage, IProto
+	public partial class C2G_TestRequestPushMessage : AMessage, IMessage
 	{
 		public static C2G_TestRequestPushMessage Create(Scene scene)
 		{
@@ -87,7 +87,7 @@ namespace Fantasy
 	///  Gate服务器推送一个消息给客户端
 	/// </summary>
 	[ProtoContract]
-	public partial class G2C_PushMessage : AMessage, IMessage, IProto
+	public partial class G2C_PushMessage : AMessage, IMessage
 	{
 		public static G2C_PushMessage Create(Scene scene)
 		{
@@ -105,7 +105,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class C2G_CreateAddressableRequest : AMessage, IRequest, IProto
+	public partial class C2G_CreateAddressableRequest : AMessage, IRequest
 	{
 		public static C2G_CreateAddressableRequest Create(Scene scene)
 		{
@@ -122,7 +122,7 @@ namespace Fantasy
 		public uint OpCode() { return OuterOpcode.C2G_CreateAddressableRequest; }
 	}
 	[ProtoContract]
-	public partial class G2C_CreateAddressableResponse : AMessage, IResponse, IProto
+	public partial class G2C_CreateAddressableResponse : AMessage, IResponse
 	{
 		public static G2C_CreateAddressableResponse Create(Scene scene)
 		{
@@ -140,7 +140,7 @@ namespace Fantasy
 		public uint ErrorCode { get; set; }
 	}
 	[ProtoContract]
-	public partial class C2M_TestMessage : AMessage, IAddressableRouteMessage, IProto
+	public partial class C2M_TestMessage : AMessage, IAddressableRouteMessage
 	{
 		public static C2M_TestMessage Create(Scene scene)
 		{
@@ -158,7 +158,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class C2M_TestRequest : AMessage, IAddressableRouteRequest, IProto
+	public partial class C2M_TestRequest : AMessage, IAddressableRouteRequest
 	{
 		public static C2M_TestRequest Create(Scene scene)
 		{
@@ -178,7 +178,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class M2C_TestResponse : AMessage, IAddressableRouteResponse, IProto
+	public partial class M2C_TestResponse : AMessage, IAddressableRouteResponse
 	{
 		public static M2C_TestResponse Create(Scene scene)
 		{
@@ -202,7 +202,7 @@ namespace Fantasy
 	///  通知Gate服务器创建一个Chat的Route连接
 	/// </summary>
 	[ProtoContract]
-	public partial class C2G_CreateChatRouteRequest : AMessage, IRequest, IProto
+	public partial class C2G_CreateChatRouteRequest : AMessage, IRequest
 	{
 		public static C2G_CreateChatRouteRequest Create(Scene scene)
 		{
@@ -219,7 +219,7 @@ namespace Fantasy
 		public uint OpCode() { return OuterOpcode.C2G_CreateChatRouteRequest; }
 	}
 	[ProtoContract]
-	public partial class G2C_CreateChatRouteResponse : AMessage, IResponse, IProto
+	public partial class G2C_CreateChatRouteResponse : AMessage, IResponse
 	{
 		public static G2C_CreateChatRouteResponse Create(Scene scene)
 		{
@@ -240,7 +240,7 @@ namespace Fantasy
 	///  发送一个Route消息给Chat
 	/// </summary>
 	[ProtoContract]
-	public partial class C2Chat_TestMessage : AMessage, ICustomRouteMessage, IProto
+	public partial class C2Chat_TestMessage : AMessage, ICustomRouteMessage
 	{
 		public static C2Chat_TestMessage Create(Scene scene)
 		{
@@ -263,7 +263,7 @@ namespace Fantasy
 	///  发送一个RPCRoute消息给Chat
 	/// </summary>
 	[ProtoContract]
-	public partial class C2Chat_TestMessageRequest : AMessage, ICustomRouteRequest, IProto
+	public partial class C2Chat_TestMessageRequest : AMessage, ICustomRouteRequest
 	{
 		public static C2Chat_TestMessageRequest Create(Scene scene)
 		{
@@ -285,7 +285,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class Chat2C_TestMessageResponse : AMessage, ICustomRouteResponse, IProto
+	public partial class Chat2C_TestMessageResponse : AMessage, ICustomRouteResponse
 	{
 		public static Chat2C_TestMessageResponse Create(Scene scene)
 		{
@@ -309,7 +309,7 @@ namespace Fantasy
 	///  发送一个RPC消息给Map，让Map里的Entity转移到另外一个Map上
 	/// </summary>
 	[ProtoContract]
-	public partial class C2M_MoveToMapRequest : AMessage, IAddressableRouteRequest, IProto
+	public partial class C2M_MoveToMapRequest : AMessage, IAddressableRouteRequest
 	{
 		public static C2M_MoveToMapRequest Create(Scene scene)
 		{
@@ -326,7 +326,7 @@ namespace Fantasy
 		public uint OpCode() { return OuterOpcode.C2M_MoveToMapRequest; }
 	}
 	[ProtoContract]
-	public partial class M2C_MoveToMapResponse : AMessage, IAddressableRouteResponse, IProto
+	public partial class M2C_MoveToMapResponse : AMessage, IAddressableRouteResponse
 	{
 		public static M2C_MoveToMapResponse Create(Scene scene)
 		{
@@ -347,7 +347,7 @@ namespace Fantasy
 	///  发送一个消息给Gate，让Gate发送一个Addressable消息给MAP
 	/// </summary>
 	[ProtoContract]
-	public partial class C2G_SendAddressableToMap : AMessage, IMessage, IProto
+	public partial class C2G_SendAddressableToMap : AMessage, IMessage
 	{
 		public static C2G_SendAddressableToMap Create(Scene scene)
 		{
@@ -368,7 +368,7 @@ namespace Fantasy
 	///  发送一个消息给Chat，让Chat服务器主动推送一个RouteMessage消息给客户端
 	/// </summary>
 	[ProtoContract]
-	public partial class C2Chat_TestRequestPushMessage : AMessage, ICustomRouteMessage, IProto
+	public partial class C2Chat_TestRequestPushMessage : AMessage, ICustomRouteMessage
 	{
 		public static C2Chat_TestRequestPushMessage Create(Scene scene)
 		{
@@ -388,7 +388,7 @@ namespace Fantasy
 	///  Chat服务器主动推送一个消息给客户端
 	/// </summary>
 	[ProtoContract]
-	public partial class Chat2C_PushMessage : AMessage, ICustomRouteMessage, IProto
+	public partial class Chat2C_PushMessage : AMessage, ICustomRouteMessage
 	{
 		public static Chat2C_PushMessage Create(Scene scene)
 		{
@@ -411,7 +411,7 @@ namespace Fantasy
 	///  客户端发送给Gate服务器通知map服务器创建一个SubScene
 	/// </summary>
 	[ProtoContract]
-	public partial class C2G_CreateSubSceneRequest : AMessage, IRequest, IProto
+	public partial class C2G_CreateSubSceneRequest : AMessage, IRequest
 	{
 		public static C2G_CreateSubSceneRequest Create(Scene scene)
 		{
@@ -428,7 +428,7 @@ namespace Fantasy
 		public uint OpCode() { return OuterOpcode.C2G_CreateSubSceneRequest; }
 	}
 	[ProtoContract]
-	public partial class G2C_CreateSubSceneResponse : AMessage, IResponse, IProto
+	public partial class G2C_CreateSubSceneResponse : AMessage, IResponse
 	{
 		public static G2C_CreateSubSceneResponse Create(Scene scene)
 		{
@@ -449,7 +449,7 @@ namespace Fantasy
 	///  客户端通知Gate服务器给SubScene发送一个消息
 	/// </summary>
 	[ProtoContract]
-	public partial class C2G_SendToSubSceneMessage : AMessage, IMessage, IProto
+	public partial class C2G_SendToSubSceneMessage : AMessage, IMessage
 	{
 		public static C2G_SendToSubSceneMessage Create(Scene scene)
 		{
@@ -467,7 +467,7 @@ namespace Fantasy
 	///  客户端通知Gate服务器创建一个SubScene的Address消息
 	/// </summary>
 	[ProtoContract]
-	public partial class C2G_CreateSubSceneAddressableRequest : AMessage, IRequest, IProto
+	public partial class C2G_CreateSubSceneAddressableRequest : AMessage, IRequest
 	{
 		public static C2G_CreateSubSceneAddressableRequest Create(Scene scene)
 		{
@@ -484,7 +484,7 @@ namespace Fantasy
 		public uint OpCode() { return OuterOpcode.C2G_CreateSubSceneAddressableRequest; }
 	}
 	[ProtoContract]
-	public partial class G2C_CreateSubSceneAddressableResponse : AMessage, IResponse, IProto
+	public partial class G2C_CreateSubSceneAddressableResponse : AMessage, IResponse
 	{
 		public static G2C_CreateSubSceneAddressableResponse Create(Scene scene)
 		{
@@ -505,7 +505,7 @@ namespace Fantasy
 	///  客户端向SubScene发送一个测试消息
 	/// </summary>
 	[ProtoContract]
-	public partial class C2SubScene_TestMessage : AMessage, IAddressableRouteMessage, IProto
+	public partial class C2SubScene_TestMessage : AMessage, IAddressableRouteMessage
 	{
 		public static C2SubScene_TestMessage Create(Scene scene)
 		{
@@ -526,7 +526,7 @@ namespace Fantasy
 	///  客户端向SubScene发送一个销毁测试消息
 	/// </summary>
 	[ProtoContract]
-	public partial class C2SubScene_TestDisposeMessage : AMessage, IAddressableRouteMessage, IProto
+	public partial class C2SubScene_TestDisposeMessage : AMessage, IAddressableRouteMessage
 	{
 		public static C2SubScene_TestDisposeMessage Create(Scene scene)
 		{
@@ -544,7 +544,7 @@ namespace Fantasy
 	///  客户端向服务器发送连接消息（Roaming）
 	/// </summary>
 	[ProtoContract]
-	public partial class C2G_ConnectRoamingRequest : AMessage, IRequest, IProto
+	public partial class C2G_ConnectRoamingRequest : AMessage, IRequest
 	{
 		public static C2G_ConnectRoamingRequest Create(Scene scene)
 		{
@@ -561,7 +561,7 @@ namespace Fantasy
 		public uint OpCode() { return OuterOpcode.C2G_ConnectRoamingRequest; }
 	}
 	[ProtoContract]
-	public partial class G2C_ConnectRoamingResponse : AMessage, IResponse, IProto
+	public partial class G2C_ConnectRoamingResponse : AMessage, IResponse
 	{
 		public static G2C_ConnectRoamingResponse Create(Scene scene)
 		{
@@ -582,7 +582,7 @@ namespace Fantasy
 	///  测试一个Chat漫游普通消息
 	/// </summary>
 	[ProtoContract]
-	public partial class C2Chat_TestRoamingMessage : AMessage, IRoamingMessage, IProto
+	public partial class C2Chat_TestRoamingMessage : AMessage, IRoamingMessage
 	{
 		public static C2Chat_TestRoamingMessage Create(Scene scene)
 		{
@@ -605,7 +605,7 @@ namespace Fantasy
 	///  测试一个Map漫游普通消息
 	/// </summary>
 	[ProtoContract]
-	public partial class C2Map_TestRoamingMessage : AMessage, IRoamingMessage, IProto
+	public partial class C2Map_TestRoamingMessage : AMessage, IRoamingMessage
 	{
 		public static C2Map_TestRoamingMessage Create(Scene scene)
 		{
@@ -628,7 +628,7 @@ namespace Fantasy
 	///  测试一个Chat漫游RPC消息
 	/// </summary>
 	[ProtoContract]
-	public partial class C2Chat_TestRPCRoamingRequest : AMessage, IRoamingRequest, IProto
+	public partial class C2Chat_TestRPCRoamingRequest : AMessage, IRoamingRequest
 	{
 		public static C2Chat_TestRPCRoamingRequest Create(Scene scene)
 		{
@@ -650,7 +650,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class Chat2C_TestRPCRoamingResponse : AMessage, IRoamingResponse, IProto
+	public partial class Chat2C_TestRPCRoamingResponse : AMessage, IRoamingResponse
 	{
 		public static Chat2C_TestRPCRoamingResponse Create(Scene scene)
 		{
@@ -671,7 +671,7 @@ namespace Fantasy
 	///  客户端发送一个漫游消息给Map通知Map主动推送一个消息给客户端
 	/// </summary>
 	[ProtoContract]
-	public partial class C2Map_PushMessageToClient : AMessage, IRoamingMessage, IProto
+	public partial class C2Map_PushMessageToClient : AMessage, IRoamingMessage
 	{
 		public static C2Map_PushMessageToClient Create(Scene scene)
 		{
@@ -694,7 +694,7 @@ namespace Fantasy
 	///  漫游端发送一个消息给客户端
 	/// </summary>
 	[ProtoContract]
-	public partial class Map2C_PushMessageToClient : AMessage, IRoamingMessage, IProto
+	public partial class Map2C_PushMessageToClient : AMessage, IRoamingMessage
 	{
 		public static Map2C_PushMessageToClient Create(Scene scene)
 		{
@@ -717,7 +717,7 @@ namespace Fantasy
 	///  测试传送漫游的触发协议
 	/// </summary>
 	[ProtoContract]
-	public partial class C2Map_TestTransferRequest : AMessage, IRoamingRequest, IProto
+	public partial class C2Map_TestTransferRequest : AMessage, IRoamingRequest
 	{
 		public static C2Map_TestTransferRequest Create(Scene scene)
 		{
@@ -736,7 +736,7 @@ namespace Fantasy
 		public int RouteType => Fantasy.RoamingType.MapRoamingType;
 	}
 	[ProtoContract]
-	public partial class Map2C_TestTransferResponse : AMessage, IRoamingResponse, IProto
+	public partial class Map2C_TestTransferResponse : AMessage, IRoamingResponse
 	{
 		public static Map2C_TestTransferResponse Create(Scene scene)
 		{
@@ -757,7 +757,7 @@ namespace Fantasy
 	///  测试一个Chat发送到Map之间漫游协议
 	/// </summary>
 	[ProtoContract]
-	public partial class C2Chat_TestSendMapMessage : AMessage, IRoamingMessage, IProto
+	public partial class C2Chat_TestSendMapMessage : AMessage, IRoamingMessage
 	{
 		public static C2Chat_TestSendMapMessage Create(Scene scene)
 		{
@@ -780,7 +780,7 @@ namespace Fantasy
 	///  通知Gate服务器发送一个Route消息给Map的漫游终端
 	/// </summary>
 	[ProtoContract]
-	public partial class C2G_TestRouteToRoaming : AMessage, IMessage, IProto
+	public partial class C2G_TestRouteToRoaming : AMessage, IMessage
 	{
 		public static C2G_TestRouteToRoaming Create(Scene scene)
 		{
@@ -801,7 +801,7 @@ namespace Fantasy
 	///  通知Gate服务器发送一个漫游消息给Map的漫游终端
 	/// </summary>
 	[ProtoContract]
-	public partial class C2G_TestRoamingToRoaming : AMessage, IMessage, IProto
+	public partial class C2G_TestRoamingToRoaming : AMessage, IMessage
 	{
 		public static C2G_TestRoamingToRoaming Create(Scene scene)
 		{

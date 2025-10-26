@@ -316,9 +316,9 @@ namespace Fantasy.Network.TCP
 
         #region Send
 
-        public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
+        public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
-            _sendBuffers.Enqueue(_packetParser.Pack(ref rpcId, ref routeId, memoryStream, message));
+            _sendBuffers.Enqueue(_packetParser.Pack(ref rpcId, ref routeId, memoryStream, message, messageType));
 
             if (!_isSending)
             {

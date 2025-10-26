@@ -10,6 +10,7 @@ using Fantasy.PacketParser;
 using Fantasy.Helper;
 using Fantasy.InnerMessage;
 using Fantasy.Roaming;
+#pragma warning disable CS8604 // Possible null reference argument.
 #endif
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -125,7 +126,7 @@ namespace Fantasy.Scheduler
                         {
                             throw new Exception("OuterMessageScheduler error session does not have an AddressableRouteComponent component");
                         }
-                        
+
                         await addressableRouteComponent.Send(messageType, packInfo);
                     }
                     finally
@@ -164,7 +165,8 @@ namespace Fantasy.Scheduler
                         // session可能已经断开了，所以这里需要判断
                         if (session.RuntimeId == runtimeId)
                         {
-                            session.Send(response, rpcId);
+                            var responseType = MessageDispatcherComponent.GetOpCodeType(response.OpCode());
+                            session.Send(response, responseType, rpcId);
                         }
                     }
                     finally
@@ -184,7 +186,9 @@ namespace Fantasy.Scheduler
 
                     try
                     {
-                        if (!MessageDispatcherComponent.GetCustomRouteType(packInfoProtocolCode, out var routeType))
+                        var routeType = MessageDispatcherComponent.GetCustomRouteType(packInfoProtocolCode);
+                        
+                        if (!routeType.HasValue)
                         {
                             throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
@@ -203,7 +207,7 @@ namespace Fantasy.Scheduler
                             throw new Exception($"OuterMessageScheduler CustomRouteType session does not have an routeComponent component messageType:{messageType.FullName} ProtocolCode：{packInfo.ProtocolCode}");
                         }
 
-                        if (!routeComponent.TryGetRouteId(routeType, out var routeId))
+                        if (!routeComponent.TryGetRouteId(routeType.Value, out var routeId))
                         {
                             throw new Exception($"OuterMessageScheduler RouteComponent cannot find RouteId with RouteType {routeType}");
                         }
@@ -227,7 +231,9 @@ namespace Fantasy.Scheduler
 
                     try
                     {
-                        if (!MessageDispatcherComponent.GetCustomRouteType(packInfoProtocolCode, out var routeType))
+                        var routeType = MessageDispatcherComponent.GetCustomRouteType(packInfoProtocolCode);
+                        
+                        if (!routeType.HasValue)
                         {
                             throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
@@ -246,7 +252,7 @@ namespace Fantasy.Scheduler
                             throw new Exception("OuterMessageScheduler CustomRouteType session does not have an routeComponent component");
                         }
 
-                        if (!routeComponent.TryGetRouteId(routeType, out var routeId))
+                        if (!routeComponent.TryGetRouteId(routeType.Value, out var routeId))
                         {
                             throw new Exception($"OuterMessageScheduler RouteComponent cannot find RouteId with RouteType {routeType}");
                         }
@@ -257,7 +263,8 @@ namespace Fantasy.Scheduler
                         // session可能已经断开了，所以这里需要判断
                         if (session.RuntimeId == runtimeId)
                         {
-                            session.Send(response, rpcId);
+                            var responseType = MessageDispatcherComponent.GetOpCodeType(response.OpCode());
+                            session.Send(response, responseType, rpcId);
                         }
                     }
                     finally
@@ -277,7 +284,9 @@ namespace Fantasy.Scheduler
 
                     try
                     {
-                        if (!MessageDispatcherComponent.GetCustomRouteType(packInfoProtocolCode, out var routeType))
+                        var routeType = MessageDispatcherComponent.GetCustomRouteType(packInfoProtocolCode);
+                        
+                        if (!routeType.HasValue)
                         {
                             throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
@@ -296,7 +305,7 @@ namespace Fantasy.Scheduler
                             throw new Exception($"OuterMessageScheduler Roaming session does not have an sessionRoamingComponent component messageType:{messageType.FullName} ProtocolCode：{packInfo.ProtocolCode}");
                         }
 
-                        await sessionRoamingComponent.Send(routeType, messageType, packInfo);
+                        await sessionRoamingComponent.Send(routeType.Value, messageType, packInfo);
                     }
                     finally
                     {
@@ -315,7 +324,9 @@ namespace Fantasy.Scheduler
 
                     try
                     {
-                        if (!MessageDispatcherComponent.GetCustomRouteType(packInfoProtocolCode, out var routeType))
+                        var routeType = MessageDispatcherComponent.GetCustomRouteType(packInfoProtocolCode);
+                        
+                        if (!routeType.HasValue)
                         {
                             throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
@@ -336,11 +347,12 @@ namespace Fantasy.Scheduler
                     
                         var rpcId = packInfo.RpcId;
                         var runtimeId = session.RuntimeId;
-                        var response = await sessionRoamingComponent.Call(routeType, messageType, packInfo);
+                        var response = await sessionRoamingComponent.Call(routeType.Value, messageType, packInfo);
                         // session可能已经断开了，所以这里需要判断
                         if (session.RuntimeId == runtimeId)
                         {
-                            session.Send(response, rpcId);
+                            var responseType = MessageDispatcherComponent.GetOpCodeType(response.OpCode());
+                            session.Send(response, responseType, rpcId);
                         }
                     }
                     finally

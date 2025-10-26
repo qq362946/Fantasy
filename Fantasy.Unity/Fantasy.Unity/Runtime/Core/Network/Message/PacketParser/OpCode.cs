@@ -86,37 +86,43 @@ namespace Fantasy.Network
 
     public static class OpCode
     {
-        public static readonly uint BenchmarkMessage = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterMessage, 8388607);
-        public static readonly uint BenchmarkRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterRequest, 8388607);
-        public static readonly uint BenchmarkResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterResponse, 8388607);
-        public static readonly uint PingRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterPingRequest, 1);
-        public static readonly uint PingResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.OuterPingResponse, 1);
-        public static readonly uint DefaultResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerResponse, 1);
-        public static readonly uint DefaultRouteResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 7);
-        public static readonly uint AddressableAddRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 1);
-        public static readonly uint AddressableAddResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 1);
-        public static readonly uint AddressableGetRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 2);
-        public static readonly uint AddressableGetResponse = Create(OpCodeProtocolType.ProtoBuf,OpCodeType.InnerRouteResponse,2);
-        public static readonly uint AddressableRemoveRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 3);
-        public static readonly uint AddressableRemoveResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 3);
-        public static readonly uint AddressableLockRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 4);
-        public static readonly uint AddressableLockResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 4);
-        public static readonly uint AddressableUnLockRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 5);
-        public static readonly uint AddressableUnLockResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 5);
-        public static readonly uint LinkRoamingRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 6);
-        public static readonly uint LinkRoamingResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 6);
-        public static readonly uint UnLinkRoamingRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 8);
-        public static readonly uint UnLinkRoamingResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 8);
-        public static readonly uint LockTerminusIdRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 9);
-        public static readonly uint LockTerminusIdResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 9);
-        public static readonly uint UnLockTerminusIdRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 10);
-        public static readonly uint UnLockTerminusIdResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 10);
-        public static readonly uint GetTerminusIdRequest = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteRequest, 11);
-        public static readonly uint GetTerminusIdResponse = Create(OpCodeProtocolType.ProtoBuf, OpCodeType.InnerRouteResponse, 11);
-        
-        public static readonly uint TransferTerminusRequest = Create(OpCodeProtocolType.Bson, OpCodeType.InnerRouteRequest, 1);
-        public static readonly uint TransferTerminusResponse = Create(OpCodeProtocolType.Bson, OpCodeType.InnerRouteResponse, 1);
-        
+        // 格式: Index | (OpCodeProtocolType << 23) | (Protocol << 27)
+        // 所有值已预先计算，使 SourceGenerator 可以在编译时获取这些常量
+
+        public const uint BenchmarkMessage = 142606335;        // Create(ProtoBuf=0, OuterMessage=1, 8388607)
+        public const uint BenchmarkRequest = 276824063;        // Create(ProtoBuf=0, OuterRequest=2, 8388607)
+        public const uint BenchmarkResponse = 411041791;       // Create(ProtoBuf=0, OuterResponse=3, 8388607)
+        public const uint PingRequest = 4026531841;            // Create(ProtoBuf=0, OuterPingRequest=30, 1)
+        public const uint PingResponse = 4160749569;           // Create(ProtoBuf=0, OuterPingResponse=31, 1)
+        public const uint DefaultResponse = 805306369;         // Create(ProtoBuf=0, InnerResponse=6, 1)
+        public const uint DefaultRouteResponse = 1207959559;   // Create(ProtoBuf=0, InnerRouteResponse=9, 7)
+        public const uint AddressableAddRequest = 1073741825;  // Create(ProtoBuf=0, InnerRouteRequest=8, 1)
+        public const uint AddressableAddResponse = 1207959553; // Create(ProtoBuf=0, InnerRouteResponse=9, 1)
+        public const uint AddressableGetRequest = 1073741826;  // Create(ProtoBuf=0, InnerRouteRequest=8, 2)
+        public const uint AddressableGetResponse = 1207959554; // Create(ProtoBuf=0, InnerRouteResponse=9, 2)
+        public const uint AddressableRemoveRequest = 1073741827;  // Create(ProtoBuf=0, InnerRouteRequest=8, 3)
+        public const uint AddressableRemoveResponse = 1207959555; // Create(ProtoBuf=0, InnerRouteResponse=9, 3)
+        public const uint AddressableLockRequest = 1073741828;    // Create(ProtoBuf=0, InnerRouteRequest=8, 4)
+        public const uint AddressableLockResponse = 1207959556;   // Create(ProtoBuf=0, InnerRouteResponse=9, 4)
+        public const uint AddressableUnLockRequest = 1073741829;  // Create(ProtoBuf=0, InnerRouteRequest=8, 5)
+        public const uint AddressableUnLockResponse = 1207959557; // Create(ProtoBuf=0, InnerRouteResponse=9, 5)
+        public const uint LinkRoamingRequest = 1073741830;        // Create(ProtoBuf=0, InnerRouteRequest=8, 6)
+        public const uint LinkRoamingResponse = 1207959558;       // Create(ProtoBuf=0, InnerRouteResponse=9, 6)
+        public const uint UnLinkRoamingRequest = 1073741832;      // Create(ProtoBuf=0, InnerRouteRequest=8, 8)
+        public const uint UnLinkRoamingResponse = 1207959560;     // Create(ProtoBuf=0, InnerRouteResponse=9, 8)
+        public const uint LockTerminusIdRequest = 1073741833;     // Create(ProtoBuf=0, InnerRouteRequest=8, 9)
+        public const uint LockTerminusIdResponse = 1207959561;    // Create(ProtoBuf=0, InnerRouteResponse=9, 9)
+        public const uint UnLockTerminusIdRequest = 1073741834;   // Create(ProtoBuf=0, InnerRouteRequest=8, 10)
+        public const uint UnLockTerminusIdResponse = 1207959562;  // Create(ProtoBuf=0, InnerRouteResponse=9, 10)
+        public const uint GetTerminusIdRequest = 1073741835;      // Create(ProtoBuf=0, InnerRouteRequest=8, 11)
+        public const uint GetTerminusIdResponse = 1207959563;     // Create(ProtoBuf=0, InnerRouteResponse=9, 11)
+
+        public const uint TransferTerminusRequest = 1082130433;   // Create(Bson=1, InnerRouteRequest=8, 1)
+        public const uint TransferTerminusResponse = 1216348161;  // Create(Bson=1, InnerRouteResponse=9, 1)
+
+        /// <summary>
+        /// 创建 OpCode（运行时使用）
+        /// </summary>
         public static uint Create(uint opCodeProtocolType, uint protocol, uint index)
         {
             return new OpCodeIdStruct(opCodeProtocolType, protocol, index);

@@ -9,6 +9,6 @@ namespace Fantasy.Network.Interface
     {
         public Session Session { get;}
         public bool IsDisposed { get;}
-        public void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message);
+        public void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType);
     }
 }

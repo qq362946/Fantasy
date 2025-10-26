@@ -54,7 +54,8 @@ namespace Fantasy.PacketParser
             packInfo.IsDisposed = false;
             var memoryStream = new MemoryStreamBuffer();
             memoryStream.MemoryStreamBufferSource = MemoryStreamBufferSource.Pack;
-            OpCodeIdStruct opCodeIdStruct = message.OpCode();
+            var opCode = message.OpCode();
+            OpCodeIdStruct opCodeIdStruct = opCode;
             memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
             if (SerializerManager.TryGetSerializer(opCodeIdStruct.OpCodeProtocolType, out var serializer))
@@ -66,8 +67,7 @@ namespace Fantasy.PacketParser
             {
                 Log.Error($"type:{type} Does not support processing protocol");
             }
-
-            var opCode = scene.MessageDispatcherComponent.GetOpCode(packInfo.MessageType);
+            
             var packetBodyCount = memoryStreamLength - Packet.InnerPacketHeadLength;
 
             if (packetBodyCount == 0)

@@ -46,6 +46,7 @@ internal static class ProcessScheduler
                         throw new Exception($"not found scene routeId:{routeId}");
                     }
                     
+                    var protocolCode = packInfo.ProtocolCode;
                     var message = packInfo.Deserialize(messageType);
         
                     scene.ThreadSynchronizationContext.Post(() =>
@@ -58,7 +59,7 @@ internal static class ProcessScheduler
                             return;
                         }
 
-                        sceneMessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, message, rpcId).Coroutine();
+                        sceneMessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, message, rpcId, protocolCode).Coroutine();
                     });
                 }
                 
@@ -75,6 +76,7 @@ internal static class ProcessScheduler
                         throw new Exception($"not found scene routeId:{routeId}");
                     }
                     
+                    var protocolCode = packInfo.ProtocolCode;
                     var message = packInfo.Deserialize(messageType);
         
                     scene.ThreadSynchronizationContext.Post(() =>
@@ -84,11 +86,11 @@ internal static class ProcessScheduler
             
                         if (entity == null || entity.IsDisposed)
                         {
-                            sceneMessageDispatcherComponent.FailRouteResponse(session, messageType, InnerErrorCode.ErrNotFoundRoute, rpcId);
+                            sceneMessageDispatcherComponent.FailRouteResponse(session, protocolCode, InnerErrorCode.ErrNotFoundRoute, rpcId);
                             return;
                         }
 
-                        sceneMessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, message, rpcId).Coroutine();
+                        sceneMessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, message, rpcId, protocolCode).Coroutine();
                     });
                 }
                 
@@ -109,7 +111,8 @@ internal static class ProcessScheduler
                     {
                         throw new NotSupportedException($"not found scene routeId = {routeId}");
                     }
-                    
+
+                    var protocolCode = packInfo.ProtocolCode;
                     var message = packInfo.Deserialize(messageType);
                     
                     scene.ThreadSynchronizationContext.Post(() =>
@@ -118,11 +121,11 @@ internal static class ProcessScheduler
 
                         if (entity == null || entity.IsDisposed)
                         {
-                            scene.MessageDispatcherComponent.FailRouteResponse(session, messageType, InnerErrorCode.ErrNotFoundRoute, rpcId);
+                            scene.MessageDispatcherComponent.FailRouteResponse(session, protocolCode, InnerErrorCode.ErrNotFoundRoute, rpcId);
                             return;
                         }
-                        
-                        scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, message, rpcId).Coroutine();
+
+                        scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, message, rpcId, protocolCode).Coroutine();
                     });
                 }
                 return;
@@ -139,7 +142,7 @@ internal static class ProcessScheduler
     public static void Scheduler(this ProcessSession session, Type messageType, uint rpcId, long routeId, uint protocolCode, object message)
     {
         OpCodeIdStruct opCodeIdStruct = protocolCode;
-        
+   
         switch (opCodeIdStruct.Protocol)
         {
             case OpCodeType.InnerResponse:
@@ -182,8 +185,10 @@ internal static class ProcessScheduler
                     {
                         return;
                     }
-                    
-                    sceneMessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, messageObject, rpcId).Coroutine();
+
+                    sceneMessageDispatcherComponent
+                        .RouteMessageHandler(session, messageType, entity, messageObject, rpcId, protocolCode)
+                        .Coroutine();
                 });
                 
                 return;
@@ -208,11 +213,13 @@ internal static class ProcessScheduler
             
                     if (entity == null || entity.IsDisposed)
                     {
-                        sceneMessageDispatcherComponent.FailRouteResponse(session, message.GetType(), InnerErrorCode.ErrNotFoundRoute, rpcId);
+                        sceneMessageDispatcherComponent.FailRouteResponse(session, protocolCode, InnerErrorCode.ErrNotFoundRoute, rpcId);
                         return;
                     }
-                    
-                    sceneMessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, messageObject, rpcId).Coroutine();
+
+                    sceneMessageDispatcherComponent
+                        .RouteMessageHandler(session, messageType, entity, messageObject, rpcId, protocolCode)
+                        .Coroutine();
                 });
                 
                 return;
@@ -246,12 +253,13 @@ internal static class ProcessScheduler
                         case Session gateSession:
                         {
                             // 这里如果是Session只可能是Gate的Session、如果是的话、肯定是转发Address消息
-                            gateSession.Send((IMessage)messageObject, rpcId);
+                            gateSession.Send((IMessage)messageObject, messageType, rpcId);
                             return;
                         }
                         default:
                         {
-                            scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, messageObject, rpcId).Coroutine();
+                            scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity,
+                                messageObject, rpcId, protocolCode).Coroutine();
                             return;
                         }
                     }

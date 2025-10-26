@@ -34,7 +34,7 @@ namespace Fantasy.Assembly
         /// <summary>
         /// ProtoBuf 序列化类型注册器
         /// </summary>
-        internal IProtoBufRegistrar ProtoBufRegistrar { get; set; }
+        internal INetworkProtocolRegistrar NetworkProtocolRegistrar { get; set; }
 
         /// <summary>
         /// 事件系统注册器
@@ -49,12 +49,24 @@ namespace Fantasy.Assembly
         /// <summary>
         /// 消息分发器注册器
         /// </summary>
-        internal IMessageDispatcherRegistrar MessageDispatcherRegistrar { get; set; }
+        internal IMessageHandlerResolver MessageHandlerResolver { get; set; }
 
         /// <summary>
         /// 实体类型集合注册器
         /// </summary>
         internal IEntityTypeCollectionRegistrar EntityTypeCollectionRegistrar { get; set; }
+        
+        /// <summary>
+        /// 网络协议 OpCode 解析器接口
+        /// </summary>
+        internal INetworkProtocolOpCodeResolver NetworkProtocolOpCodeResolver { get; set; }
+        
+        
+        /// <summary>
+        /// 网络协议 Response 解析器接口
+        /// </summary>
+        internal INetworkProtocolResponseTypeResolver NetworkProtocolResponseTypeResolver { get; set; }
+        
 #if FANTASY_NET
         /// <summary>
         /// 分表注册器
@@ -82,13 +94,12 @@ namespace Fantasy.Assembly
         {
             EventSystemRegistrar?.Dispose();
             EntitySystemRegistrar?.Dispose();
-            MessageDispatcherRegistrar?.Dispose();
-
+            
             Assembly = null;
-            ProtoBufRegistrar = null;
+            NetworkProtocolRegistrar = null;
             EventSystemRegistrar = null;
             EntitySystemRegistrar = null;
-            MessageDispatcherRegistrar = null;
+            MessageHandlerResolver = null;
             EntityTypeCollectionRegistrar = null;
 #if FANTASY_NET
             SeparateTableRegistrar = null;
@@ -105,32 +116,38 @@ namespace Fantasy.Assembly
         /// </summary>
         /// <param name="assemblyManifestId">程序集唯一标识（通过程序集名称哈希生成）</param>
         /// <param name="assembly">程序集实例</param>
-        /// <param name="protoBufRegistrar">ProtoBuf 注册器</param>
+        /// <param name="networkProtocolRegistrar">网络协议注册器</param>
         /// <param name="eventSystemRegistrar">事件系统注册器</param>
         /// <param name="entitySystemRegistrar">实体系统注册器</param>
-        /// <param name="messageDispatcherRegistrar">消息分发器注册器</param>
+        /// <param name="messageHandlerResolver">消息分发器注册器</param>
         /// <param name="entityTypeCollectionRegistrar">实体类型集合注册器</param>
         /// <param name="separateTableRegistrar">分表注册器</param>
+        /// <param name="networkProtocolOpCodeResolver">网络协议 OpCode 解析器接口</param>
+        /// <param name="networkProtocolResponseTypeResolver">网络协议 Response 解析器接口</param>
         public static void Register(
             long assemblyManifestId,
             System.Reflection.Assembly assembly,
-            IProtoBufRegistrar protoBufRegistrar,
+            INetworkProtocolRegistrar networkProtocolRegistrar,
             IEventSystemRegistrar eventSystemRegistrar,
             IEntitySystemRegistrar entitySystemRegistrar,
-            IMessageDispatcherRegistrar messageDispatcherRegistrar,
+            IMessageHandlerResolver messageHandlerResolver,
             IEntityTypeCollectionRegistrar entityTypeCollectionRegistrar,
-            ISeparateTableRegistrar separateTableRegistrar)
+            ISeparateTableRegistrar separateTableRegistrar,
+            INetworkProtocolOpCodeResolver networkProtocolOpCodeResolver,
+            INetworkProtocolResponseTypeResolver networkProtocolResponseTypeResolver)
         {
             var manifest = new AssemblyManifest
             {
                 Assembly = assembly,
                 AssemblyManifestId = assemblyManifestId,
-                ProtoBufRegistrar = protoBufRegistrar,
+                NetworkProtocolRegistrar = networkProtocolRegistrar,
                 EventSystemRegistrar = eventSystemRegistrar,
                 EntitySystemRegistrar = entitySystemRegistrar,
-                MessageDispatcherRegistrar = messageDispatcherRegistrar,
+                MessageHandlerResolver = messageHandlerResolver,
                 EntityTypeCollectionRegistrar = entityTypeCollectionRegistrar,
-                SeparateTableRegistrar = separateTableRegistrar
+                SeparateTableRegistrar = separateTableRegistrar,
+                NetworkProtocolOpCodeResolver = networkProtocolOpCodeResolver,
+                NetworkProtocolResponseTypeResolver = networkProtocolResponseTypeResolver
             };
 
             Manifests.TryAdd(assemblyManifestId, manifest);
@@ -145,29 +162,35 @@ namespace Fantasy.Assembly
         /// </summary>
         /// <param name="assemblyManifestId">程序集唯一标识（通过程序集名称哈希生成）</param>
         /// <param name="assembly">程序集实例</param>
-        /// <param name="protoBufRegistrar">ProtoBuf 注册器</param>
+        /// <param name="networkProtocolRegistrar">网络协议注册器</param>
         /// <param name="eventSystemRegistrar">事件系统注册器</param>
         /// <param name="entitySystemRegistrar">实体系统注册器</param>
-        /// <param name="messageDispatcherRegistrar">消息分发器注册器</param>
+        /// <param name="messageHandlerResolver">消息分发器注册器</param>
         /// <param name="entityTypeCollectionRegistrar">实体类型集合注册器</param>
+        /// <param name="networkProtocolOpCodeResolver">网络协议 OpCode 解析器接口</param>
+        /// <param name="networkProtocolResponseTypeResolver">网络协议 Response 解析器接口</param>
         public static void Register(
             long assemblyManifestId,
             System.Reflection.Assembly assembly,
-            IProtoBufRegistrar protoBufRegistrar,
+            INetworkProtocolRegistrar networkProtocolRegistrar,
             IEventSystemRegistrar eventSystemRegistrar,
             IEntitySystemRegistrar entitySystemRegistrar,
-            IMessageDispatcherRegistrar messageDispatcherRegistrar,
-            IEntityTypeCollectionRegistrar entityTypeCollectionRegistrar)
+            IMessageHandlerResolver messageHandlerResolver,
+            IEntityTypeCollectionRegistrar entityTypeCollectionRegistrar,
+            INetworkProtocolOpCodeResolver networkProtocolOpCodeResolver,
+            INetworkProtocolResponseTypeResolver networkProtocolResponseTypeResolver)
         {
             var manifest = new AssemblyManifest
             {
                 Assembly = assembly,
                 AssemblyManifestId = assemblyManifestId,
-                ProtoBufRegistrar = protoBufRegistrar,
+                NetworkProtocolRegistrar = networkProtocolRegistrar,
                 EventSystemRegistrar = eventSystemRegistrar,
                 EntitySystemRegistrar = entitySystemRegistrar,
-                MessageDispatcherRegistrar = messageDispatcherRegistrar,
-                EntityTypeCollectionRegistrar = entityTypeCollectionRegistrar
+                MessageHandlerResolver = messageHandlerResolver,
+                EntityTypeCollectionRegistrar = entityTypeCollectionRegistrar,
+                NetworkProtocolOpCodeResolver = networkProtocolOpCodeResolver,
+                NetworkProtocolResponseTypeResolver = networkProtocolResponseTypeResolver
             };
 #if FANTASY_WEBGL
             Manifests[assemblyManifestId] = manifest;

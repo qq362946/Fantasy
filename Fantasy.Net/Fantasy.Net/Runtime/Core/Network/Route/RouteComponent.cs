@@ -65,7 +65,7 @@ public sealed class RouteComponent : Entity
     /// <param name="routeType">路由类型。</param>
     /// <param name="routeId">输出的路由ID。</param>
     /// <returns>如果获取成功返回true，否则返回false。</returns>
-    public bool TryGetRouteId(long routeType, out long routeId)
+    public bool TryGetRouteId(int routeType, out long routeId)
     {
         return RouteAddress.TryGetValue(routeType, out routeId);
     }

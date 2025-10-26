@@ -37,7 +37,7 @@ namespace Fantasy.Serialize
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
         public async FTask OnLoad(AssemblyManifest assemblyManifest)
         {
-            var protoBufTypes = assemblyManifest.ProtoBufRegistrar.GetProtoBufTypes();
+            var protoBufTypes = assemblyManifest.NetworkProtocolRegistrar.GetNetworkProtocolTypes();
             if (protoBufTypes.Any())
             {
                 foreach (var protoBufType in protoBufTypes)

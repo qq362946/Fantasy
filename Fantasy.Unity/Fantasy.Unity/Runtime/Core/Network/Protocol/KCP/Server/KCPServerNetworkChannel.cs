@@ -105,7 +105,7 @@ namespace Fantasy.Network.KCP
             }
         }
 
-        public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message)
+        public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
             if (IsDisposed)
             {
@@ -120,7 +120,7 @@ namespace Fantasy.Network.KCP
                 return;
             }
 
-            var buffer = _packetParser.Pack(ref rpcId, ref routeId, memoryStream, message);
+            var buffer = _packetParser.Pack(ref rpcId, ref routeId, memoryStream, message, messageType);
             Kcp.Send(buffer.GetBuffer().AsSpan(0, (int)buffer.Position));
             
             if (buffer.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)

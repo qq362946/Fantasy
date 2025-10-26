@@ -49,7 +49,7 @@ namespace Fantasy.Network.Interface
             }
         }
         
-        public abstract void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message);
+        public abstract void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType);
     }
 }
 #endif

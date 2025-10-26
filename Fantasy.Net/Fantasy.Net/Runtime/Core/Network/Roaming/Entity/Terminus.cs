@@ -233,7 +233,7 @@ public sealed class Terminus : Entity
     /// 发送一个消息给客户端
     /// </summary>
     /// <param name="message"></param>
-    public void Send(IRouteMessage message)
+    public void Send<T>(T message) where T : IRouteMessage
     {
         Scene.NetworkMessagingComponent.SendInnerRoute(ForwardSessionRouteId, message);
     }
@@ -242,7 +242,7 @@ public sealed class Terminus : Entity
     /// </summary>
     /// <param name="roamingType"></param>
     /// <param name="message"></param>
-    public void Send(int roamingType, IRoamingMessage message)
+    public void Send<T>(int roamingType, T message) where T : IRoamingMessage
     {
         Call(roamingType,  message).Coroutine();
     }
@@ -253,17 +253,17 @@ public sealed class Terminus : Entity
     /// <param name="roamingType"></param>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async FTask<IResponse> Call(int roamingType, IRoamingMessage request)
+    public async FTask<IResponse> Call<T>(int roamingType, T request) where T : IRoamingMessage
     {
         if (IsDisposed)
         {
-            return Scene.MessageDispatcherComponent.CreateResponse(request.GetType(), InnerErrorCode.ErrNotFoundRoaming);
+            return Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
         }
 
         if (roamingType == RoamingType)
         {
             Log.Warning($"Does not support sending messages to the same scene as roamingType currentRoamingType:{RoamingType} roamingType:{roamingType}");
-            return Scene.MessageDispatcherComponent.CreateResponse(request.GetType(), InnerErrorCode.ErrNotFoundRoaming);
+            return Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
         }
 
         var failCount = 0;
@@ -285,7 +285,7 @@ public sealed class Terminus : Entity
                     }
                     else
                     {
-                        return Scene.MessageDispatcherComponent.CreateResponse(request.GetType(), InnerErrorCode.ErrNotFoundRoaming);
+                        return Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
                     }
                 }
 

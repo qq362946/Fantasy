@@ -105,7 +105,7 @@ namespace Fantasy.Network
                 return;
             }
 
-            Channel.Send(rpcId, routeId, packInfo.MemoryStream, null);
+            Channel.Send(rpcId, routeId, packInfo.MemoryStream, null, messageType);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Fantasy.Network
 
             using (packInfo)
             {
-                Channel.Send(rpcId, routeId, packInfo.MemoryStream, null);
+                Channel.Send(rpcId, routeId, packInfo.MemoryStream, null, packInfo.MessageType);
             }
         }
 
@@ -140,7 +140,7 @@ namespace Fantasy.Network
                 return;
             }
 
-            Channel.Send(rpcId, routeId, memoryStream, null);
+            Channel.Send(rpcId, routeId, memoryStream, null, null);
         }
 #endif
         /// <summary>
@@ -174,6 +174,16 @@ namespace Fantasy.Network
             RequestCallback.Clear();
             OnDispose?.Invoke();
         }
+
+        public virtual void Send(IMessage message, Type messageType, uint rpcId = 0, long routeId = 0)
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+            
+            Channel.Send(rpcId, routeId, null, message, messageType);
+        }
         
         /// <summary>
         /// 发送一个消息
@@ -181,50 +191,14 @@ namespace Fantasy.Network
         /// <param name="message">消息的实例</param>
         /// <param name="rpcId">如果是RPC消息需要传递一个RPCId</param>
         /// <param name="routeId">routeId</param>
-        public virtual void Send(IMessage message, uint rpcId = 0, long routeId = 0)
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-            
-            Channel.Send(rpcId, routeId, null, message);
-        }
-        
-        /// <summary>
-        /// 发送一个消息
-        /// </summary>
-        /// <param name="routeMessage">消息的实例，不同的是这个是发送Route消息使用的</param>
-        /// <param name="rpcId">如果是RPC消息需要传递一个RPCId</param>
-        /// <param name="routeId">routeId</param>
-        public virtual void Send(IRouteMessage routeMessage, uint rpcId = 0, long routeId = 0)
+        public virtual void Send<T>(T message, uint rpcId = 0, long routeId = 0) where T : IMessage
         {
             if (IsDisposed)
             {
                 return;
             }
 
-            Channel.Send(rpcId, routeId, null, routeMessage);
-        }
-        
-        /// <summary>
-        /// 发送一个RPC消息
-        /// </summary>
-        /// <param name="request">请求Route消息的实例</param>
-        /// <param name="routeId">routeId</param>
-        /// <returns></returns>
-        public virtual FTask<IResponse> Call(IRouteRequest request, long routeId = 0)
-        {
-            if (IsDisposed)
-            {
-                return null;
-            }
-            
-            var requestCallback = FTask<IResponse>.Create();
-            var rpcId = ++_rpcId; 
-            RequestCallback.Add(rpcId, requestCallback);
-            Send(request, rpcId, routeId);
-            return requestCallback;
+            Channel.Send(rpcId, routeId, null, message, typeof(T));
         }
         
         /// <summary>
@@ -233,7 +207,7 @@ namespace Fantasy.Network
         /// <param name="request">请求消息的实例</param>
         /// <param name="routeId">routeId</param>
         /// <returns></returns>
-        public virtual FTask<IResponse> Call(IRequest request, long routeId = 0)
+        public virtual FTask<IResponse> Call<T>(T request, long routeId = 0) where T : IRequest
         {
             if (IsDisposed)
             {
@@ -243,7 +217,7 @@ namespace Fantasy.Network
             var requestCallback = FTask<IResponse>.Create();
             var rpcId = ++_rpcId; 
             RequestCallback.Add(rpcId, requestCallback);
-            Send(request, rpcId, routeId);
+            Send<T>(request, rpcId, routeId);
             return requestCallback;
         }
 
