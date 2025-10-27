@@ -18,8 +18,8 @@ namespace Fantasy.Entitas
     {
         private int _poolCount;
         private const int MaxCapacity = ushort.MaxValue;
-        private readonly OneToManyQueue<Type, AMessage> _poolQueue = new OneToManyQueue<Type, AMessage>();
-        private readonly Dictionary<Type, Func<AMessage>> _typeCheckCache = new Dictionary<Type, Func<AMessage>>();
+        private readonly OneToManyQueue<RuntimeTypeHandle, AMessage> _poolQueue = new OneToManyQueue<RuntimeTypeHandle, AMessage>();
+        private readonly Dictionary<RuntimeTypeHandle, Func<AMessage>> _typeCheckCache = new Dictionary<RuntimeTypeHandle, Func<AMessage>>();
         /// <summary>
         /// 销毁组件
         /// </summary>
@@ -37,7 +37,7 @@ namespace Fantasy.Entitas
         /// <returns></returns>
         public T Rent<T>() where T : AMessage, new()
         {
-            if (!_poolQueue.TryDequeue(typeof(T), out var queue))
+            if (!_poolQueue.TryDequeue(typeof(T).TypeHandle, out var queue))
             {
                 var instance = new T();
                 instance.SetScene(Scene);
@@ -59,9 +59,10 @@ namespace Fantasy.Entitas
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public AMessage Rent(Type type)
         {
-            if (!_poolQueue.TryDequeue(type, out var queue))
+            var runtimeTypeHandle = type.TypeHandle;
+            if (!_poolQueue.TryDequeue(runtimeTypeHandle, out var queue))
             {
-                if (!_typeCheckCache.TryGetValue(type, out var createInstance))
+                if (!_typeCheckCache.TryGetValue(runtimeTypeHandle, out var createInstance))
                 {
                     if (!typeof(AMessage).IsAssignableFrom(type))
                     {
@@ -70,7 +71,7 @@ namespace Fantasy.Entitas
                     else
                     {
                         createInstance = CreateInstance.CreateMessage(type);
-                        _typeCheckCache[type] = createInstance;
+                        _typeCheckCache[runtimeTypeHandle] = createInstance;
                     }
                 }
                 
@@ -107,7 +108,7 @@ namespace Fantasy.Entitas
             
             _poolCount++;
             obj.SetIsPool(false);
-            _poolQueue.Enqueue(obj.GetType(), obj);
+            _poolQueue.Enqueue(obj.GetType().TypeHandle, obj);
         }
 
         /// <summary>
@@ -134,7 +135,7 @@ namespace Fantasy.Entitas
             
             _poolCount++;
             obj.SetIsPool(false);
-            _poolQueue.Enqueue(typeof(T), obj);
+            _poolQueue.Enqueue(typeof(T).TypeHandle, obj);
         }
     }
 }

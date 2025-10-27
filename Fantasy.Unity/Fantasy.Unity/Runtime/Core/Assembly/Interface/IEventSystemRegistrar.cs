@@ -17,9 +17,9 @@ namespace Fantasy.Assembly
         /// <param name="asyncEvents">异步事件容器</param>
         /// <param name="sphereEvents">领域事件容器</param>
         void RegisterSystems(
-            OneToManyList<Type, IEvent> events,
-            OneToManyList<Type, IEvent> asyncEvents,
-            OneToManyList<Type, IEvent> sphereEvents);
+            OneToManyList<RuntimeTypeHandle, IEvent> events,
+            OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents,
+            OneToManyList<RuntimeTypeHandle, IEvent> sphereEvents);
 
         /// <summary>
         /// 取消注册该程序集中的所有事件系统（热重载卸载时调用）
@@ -28,8 +28,8 @@ namespace Fantasy.Assembly
         /// <param name="asyncEvents">异步事件容器</param>
         /// <param name="sphereEvents">领域事件容器</param>
         void UnRegisterSystems(
-            OneToManyList<Type, IEvent> events,
-            OneToManyList<Type, IEvent> asyncEvents,
-            OneToManyList<Type, IEvent> sphereEvents);
+            OneToManyList<RuntimeTypeHandle, IEvent> events,
+            OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents,
+            OneToManyList<RuntimeTypeHandle, IEvent> sphereEvents);
     }
 }

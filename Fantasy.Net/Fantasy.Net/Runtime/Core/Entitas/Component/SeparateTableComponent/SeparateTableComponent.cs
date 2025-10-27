@@ -33,7 +33,7 @@ namespace Fantasy.SeparateTable
         /// 分表信息映射表，键为父实体类型，值为该父实体对应的所有分表信息集合。
         /// 用于快速查询某个实体类型有哪些子实体需要分表存储。
         /// </summary>
-        private readonly OneToManyHashSet<Type, ISeparateTableRegistrar.SeparateTableInfo> _separateTables = new ();
+        private readonly OneToManyHashSet<long, ISeparateTableRegistrar.SeparateTableInfo> _separateTables = new ();
 
         #region AssemblyManifest
 
@@ -74,7 +74,7 @@ namespace Fantasy.SeparateTable
                 // 将分表信息按父实体类型进行分组注册
                 foreach (var separateTableInfo in separateTableInfos)
                 {
-                    _separateTables.Add(separateTableInfo.RootType, separateTableInfo);
+                    _separateTables.Add(TypeHashCache.GetHashCode(separateTableInfo.RootType), separateTableInfo);
                 }
 
                 _assemblyManifests.Add(assemblyManifestId);
@@ -114,7 +114,7 @@ namespace Fantasy.SeparateTable
             // 从映射表中逐个移除
             foreach (var separateTableInfo in separateTableInfos)
             {
-                _separateTables.RemoveValue(separateTableInfo.RootType, separateTableInfo);
+                _separateTables.RemoveValue(TypeHashCache.GetHashCode(separateTableInfo.RootType), separateTableInfo);
             }
 
             _assemblyManifests.Remove(assemblyManifest.AssemblyManifestId);
@@ -144,7 +144,7 @@ namespace Fantasy.SeparateTable
         public async FTask LoadWithSeparateTables<T>(T entity) where T : Entity
         {
             // 检查该实体类型是否配置了分表
-            if (!_separateTables.TryGetValue(typeof(T), out var separateTables))
+            if (!_separateTables.TryGetValue(entity.TypeHashCode, out var separateTables))
             {
                 return;
             }
@@ -189,7 +189,7 @@ namespace Fantasy.SeparateTable
         public async FTask PersistAggregate<T>(T entity) where T : Entity, new()
         {
             // 检查该实体类型是否配置了分表
-            if (!_separateTables.TryGetValue(typeof(T), out var separateTables))
+            if (!_separateTables.TryGetValue(entity.TypeHashCode, out var separateTables))
             {
                 // 没有分表配置，直接保存实体
                 await entity.Scene.World.DataBase.Save(entity);

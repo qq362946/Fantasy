@@ -29,7 +29,7 @@ public sealed class SubSceneTestComponentAwakeSystem : AwakeSystem<SubSceneTestC
 {
     protected override void Awake(SubSceneTestComponent self)
     {
-        throw new NotImplementedException();
+        Log.Debug("SubSceneTestComponentAwakeSystem");
     }
 }
 

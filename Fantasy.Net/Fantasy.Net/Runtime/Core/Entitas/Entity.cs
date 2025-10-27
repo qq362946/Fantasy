@@ -80,6 +80,14 @@ namespace Fantasy.Entitas
         [IgnoreDataMember]
         [ProtoIgnore]
         public Type Type { get; protected set; }
+        /// <summary>
+        /// 实体的真实Type的HashCode
+        /// </summary>
+        [BsonIgnore]
+        [JsonIgnore]
+        [IgnoreDataMember]
+        [ProtoIgnore]
+        public long TypeHashCode { get; private set; }
 #if FANTASY_NET
         [BsonElement("t")] [BsonIgnoreIfNull] private EntityList<Entity> _treeDb;
         [BsonElement("m")] [BsonIgnoreIfNull] private EntityList<Entity> _multiDb;
@@ -137,6 +145,7 @@ namespace Fantasy.Entitas
             }
             
             Entity entity = null;
+            var runtimeTypeHandle = type.TypeHandle;
             
             if (isPool)
             {
@@ -144,10 +153,10 @@ namespace Fantasy.Entitas
             }
             else
             {
-                if (!scene.TypeInstance.TryGetValue(type, out var createInstance))
+                if (!scene.TypeInstance.TryGetValue(runtimeTypeHandle, out var createInstance))
                 {
                     createInstance = CreateInstance.CreateIPool(type);
-                    scene.TypeInstance[type] = createInstance;
+                    scene.TypeInstance[runtimeTypeHandle] = createInstance;
                 }
 
                 entity = (Entity)createInstance();
@@ -155,6 +164,7 @@ namespace Fantasy.Entitas
             
             entity.Scene = scene;
             entity.Type = type;
+            entity.TypeHashCode = TypeHashCache.GetHashCode(type);
             entity.SetIsPool(isPool);
             entity.Id = id;
             entity.RuntimeId = scene.RuntimeIdFactory.Create(isPool);
@@ -199,6 +209,7 @@ namespace Fantasy.Entitas
             var entity = isPool ? scene.EntityPool.Rent<T>() : new T();
             entity.Scene = scene;
             entity.Type = typeof(T);
+            entity.TypeHashCode = EntityTypeHashCache<T>.HashCode;
             entity.SetIsPool(isPool);
             entity.Id = id;
             entity.RuntimeId = scene.RuntimeIdFactory.Create(isPool);
@@ -293,7 +304,7 @@ namespace Fantasy.Entitas
             }
             else
             {
-                var typeHashCode = EntityTypeHashCache.GetHashCode(type);
+                var typeHashCode = component.TypeHashCode;
                 
                 if (_tree == null)
                 {
@@ -354,7 +365,7 @@ namespace Fantasy.Entitas
             }
             else
             {
-                var typeHashCode = EntityTypeHashCache<T>.HashCode;
+                var typeHashCode = component.TypeHashCode;
                 
                 if (_tree == null)
                 {
@@ -381,7 +392,7 @@ namespace Fantasy.Entitas
         }
 
         /// <summary>
-        ///  添加一个组件到当前实体上
+        /// 添加一个组件到当前实体上
         /// </summary>
         /// <param name="type">组件的类型</param>
         /// <param name="isPool">是否在对象池创建</param>
@@ -432,7 +443,7 @@ namespace Fantasy.Entitas
                 return false;
             }
 
-            return _tree.ContainsKey(EntityTypeHashCache.GetHashCode(type));
+            return _tree.ContainsKey(TypeHashCache.GetHashCode(type));
         }
 
         /// <summary>
@@ -485,7 +496,7 @@ namespace Fantasy.Entitas
                 return null;
             }
             
-            return _tree.GetValueOrDefault(EntityTypeHashCache.GetHashCode(type));
+            return _tree.GetValueOrDefault(TypeHashCache.GetHashCode(type));
         }
 
         /// <summary>
@@ -651,7 +662,7 @@ namespace Fantasy.Entitas
             }
             else if (_tree != null)
             {
-                var typeHashCode = EntityTypeHashCache.GetHashCode(component.Type);
+                var typeHashCode = component.TypeHashCode;
                 if (!_tree.ContainsKey(typeHashCode))
                 {
                     return;
@@ -791,7 +802,7 @@ namespace Fantasy.Entitas
                     {
                         entity.Parent = this;
                         entity.Type = entity.GetType();
-                        _tree.Add(EntityTypeHashCache.GetHashCode(entity.Type), entity);
+                        _tree.Add(TypeHashCache.GetHashCode(entity.Type), entity);
                         entity.Deserialize(scene, resetId);
                     }
                 }

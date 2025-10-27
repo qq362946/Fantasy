@@ -87,7 +87,7 @@ namespace Fantasy
         /// 当前Scene的下创建的Entity
         /// </summary>
         private readonly Dictionary<long, Entity> _entities = new Dictionary<long, Entity>();
-        internal readonly Dictionary<Type, Func<IPool>> TypeInstance = new Dictionary<Type, Func<IPool>>();
+        internal readonly Dictionary<RuntimeTypeHandle, Func<IPool>> TypeInstance = new Dictionary<RuntimeTypeHandle, Func<IPool>>();
         #endregion
 
         #region IdFactory

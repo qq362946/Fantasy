@@ -93,7 +93,6 @@ namespace Fantasy.Assembly
         internal void Clear()
         {
             EventSystemRegistrar?.Dispose();
-            EntitySystemRegistrar?.Dispose();
             
             Assembly = null;
             NetworkProtocolRegistrar = null;

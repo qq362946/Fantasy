@@ -150,9 +150,9 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AddXmlComment("Register all Event Systems to the containers");
             builder.BeginMethod(
                 "public void RegisterSystems(" +
-                "OneToManyList<Type, IEvent> events, " +
-                "OneToManyList<Type, IEvent> asyncEvents, " +
-                "OneToManyList<Type, IEvent> sphereEvents)");
+                "OneToManyList<RuntimeTypeHandle, IEvent> events, " +
+                "OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents, " +
+                "OneToManyList<RuntimeTypeHandle, IEvent> sphereEvents)");
 
             if (eventSystems.Any())
             {
@@ -164,17 +164,17 @@ namespace Fantasy.SourceGenerator.Generators
                     {
                         case EventSystemType.EventSystem:
                         {
-                            builder.AppendLine($"events.Add({fieldName}.EventType(), {fieldName});");
+                            builder.AppendLine($"events.Add({fieldName}.EventType().TypeHandle, {fieldName});");
                             continue;
                         }
                         case EventSystemType.AsyncEventSystem:
                         {
-                            builder.AppendLine($"asyncEvents.Add({fieldName}.EventType(), {fieldName});");
+                            builder.AppendLine($"asyncEvents.Add({fieldName}.EventType().TypeHandle, {fieldName});");
                             continue;
                         }
                         case EventSystemType.SphereEventSystem:
                         {
-                            builder.AppendLine($"sphereEvents.Add({fieldName}.EventType(), {fieldName});");
+                            builder.AppendLine($"sphereEvents.Add({fieldName}.EventType().TypeHandle, {fieldName});");
                             continue;
                         }
                     }
@@ -193,9 +193,9 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
             builder.BeginMethod(
                 "public void UnRegisterSystems(" +
-                "OneToManyList<Type, IEvent> events, " +
-                "OneToManyList<Type, IEvent> asyncEvents, " +
-                "OneToManyList<Type, IEvent> sphereEvents)");
+                "OneToManyList<RuntimeTypeHandle, IEvent> events, " +
+                "OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents, " +
+                "OneToManyList<RuntimeTypeHandle, IEvent> sphereEvents)");
             
             if (eventSystems.Any())
             {
@@ -207,17 +207,17 @@ namespace Fantasy.SourceGenerator.Generators
                     {
                         case EventSystemType.EventSystem:
                         {
-                            builder.AppendLine($"events.RemoveValue({fieldName}.EventType(), {fieldName});");
+                            builder.AppendLine($"events.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
                             continue;
                         }
                         case EventSystemType.AsyncEventSystem:
                         {
-                            builder.AppendLine($"asyncEvents.RemoveValue({fieldName}.EventType(), {fieldName});");
+                            builder.AppendLine($"asyncEvents.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
                             continue;
                         }
                         case EventSystemType.SphereEventSystem:
                         {
-                            builder.AppendLine($"sphereEvents.RemoveValue({fieldName}.EventType(), {fieldName});");
+                            builder.AppendLine($"sphereEvents.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
                             continue;
                         }
                     }

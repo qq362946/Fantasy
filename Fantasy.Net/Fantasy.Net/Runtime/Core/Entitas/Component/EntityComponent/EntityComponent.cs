@@ -4,6 +4,7 @@ using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Entitas.Interface;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+// ReSharper disable ForCanBeConvertedToForeach
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -18,7 +19,7 @@ namespace Fantasy.Entitas
         /// <summary>
         /// 实体类型
         /// </summary>
-        public Type Type;
+        public long TypeHashCode;
         /// <summary>
         /// 实体运行时ID
         /// </summary>
@@ -39,21 +40,21 @@ namespace Fantasy.Entitas
         /// </summary>
         private readonly HashSet<long> _assemblyManifests = new();
         /// <summary>
-        /// 实体唤醒系统字典，Key为实体类型，Value为对应的唤醒系统
+        /// 实体唤醒系统字典，Key为实体类型TypeHashCode，Value为对应的唤醒系统
         /// </summary>
-        private readonly Dictionary<Type, IAwakeSystem> _awakeSystems = new();
+        private readonly Dictionary<long, Action<Entity>> _awakeSystems = new();
         /// <summary>
-        /// 实体更新系统字典，Key为实体类型，Value为对应的更新系统
+        /// 实体更新系统字典，Key为实体类型TypeHashCode，Value为对应的更新系统
         /// </summary>
-        private readonly Dictionary<Type, IUpdateSystem> _updateSystems = new();
+        private readonly Dictionary<long, Action<Entity>> _updateSystems = new();
         /// <summary>
-        /// 实体销毁系统字典，Key为实体类型，Value为对应的销毁系统
+        /// 实体销毁系统字典，Key为实体类型TypeHashCode，Value为对应的销毁系统
         /// </summary>
-        private readonly Dictionary<Type, IDestroySystem> _destroySystems = new();
+        private readonly Dictionary<long, Action<Entity>> _destroySystems = new();
         /// <summary>
-        /// 实体反序列化系统字典，Key为实体类型，Value为对应的反序列化系统
+        /// 实体反序列化系统字典，Key为实体类型TypeHashCode，Value为对应的反序列化系统
         /// </summary>
-        private readonly Dictionary<Type, IDeserializeSystem> _deserializeSystems = new();
+        private readonly Dictionary<long, Action<Entity>> _deserializeSystems = new();
         /// <summary>
         /// 更新队列，使用链表实现循环遍历和O(1)删除
         /// </summary>
@@ -63,7 +64,7 @@ namespace Fantasy.Entitas
         /// </summary>
         private readonly Dictionary<long, LinkedListNode<UpdateQueueNode>> _updateNodes = new();
 #if FANTASY_UNITY
-        private readonly Dictionary<Type, ILateUpdateSystem> _lateUpdateSystems = new();
+        private readonly Dictionary<long, Action<Entity>> _lateUpdateSystems = new();
         /// <summary>
         /// Late更新队列，使用链表实现循环遍历和O(1)删除
         /// </summary>
@@ -148,7 +149,7 @@ namespace Fantasy.Entitas
             });
             return task;
         }
-
+        
         /// <summary>
         /// 卸载程序集，取消注册该程序集中的所有实体系统
         /// </summary>
@@ -193,7 +194,7 @@ namespace Fantasy.Entitas
             while (node != null)
             {
                 var next = node.Next;
-                if (!_updateSystems.ContainsKey(node.Value.Type))
+                if (!_updateSystems.ContainsKey(node.Value.TypeHashCode))
                 {
                     _updateQueue.Remove(node);
                     _updateNodes.Remove(node.Value.RunTimeId);
@@ -205,7 +206,7 @@ namespace Fantasy.Entitas
             while (lateNode != null)
             {
                 var next = lateNode.Next;
-                if (!_lateUpdateSystems.ContainsKey(lateNode.Value.Type))
+                if (!_lateUpdateSystems.ContainsKey(lateNode.Value.TypeHashCode))
                 {
                     _lateUpdateQueue.Remove(lateNode);
                     _lateUpdateNodes.Remove(lateNode.Value.RunTimeId);
@@ -225,14 +226,14 @@ namespace Fantasy.Entitas
         /// <param name="entity">需要唤醒的实体</param>
         public void Awake(Entity entity)
         {
-            if (!_awakeSystems.TryGetValue(entity.Type, out var awakeSystem))
+            if (!_awakeSystems.TryGetValue(entity.TypeHashCode, out var awakeSystem))
             {
                 return;
             }
 
             try
             {
-                awakeSystem.Invoke(entity);
+                awakeSystem(entity);
             }
             catch (Exception e)
             {
@@ -246,14 +247,14 @@ namespace Fantasy.Entitas
         /// <param name="entity">需要销毁的实体</param>
         public void Destroy(Entity entity)
         {
-            if (!_destroySystems.TryGetValue(entity.Type, out var system))
+            if (!_destroySystems.TryGetValue(entity.TypeHashCode, out var system))
             {
                 return;
             }
 
             try
             {
-                system.Invoke(entity);
+                system(entity);
             }
             catch (Exception e)
             {
@@ -267,14 +268,14 @@ namespace Fantasy.Entitas
         /// <param name="entity">需要反序列化的实体</param>
         public void Deserialize(Entity entity)
         {
-            if (!_deserializeSystems.TryGetValue(entity.Type, out var system))
+            if (!_deserializeSystems.TryGetValue(entity.TypeHashCode, out var system))
             {
                 return;
             }
 
             try
             {
-                system.Invoke(entity);
+                system(entity);
             }
             catch (Exception e)
             {
@@ -293,9 +294,9 @@ namespace Fantasy.Entitas
         /// <param name="entity">需要注册更新的实体</param>
         public void RegisterUpdate(Entity entity)
         {
-            var type = entity.Type;
+            var typeHashCode = entity.TypeHashCode;
             // 检查该实体类型是否有对应的更新系统
-            if (!_updateSystems.ContainsKey(type))
+            if (!_updateSystems.ContainsKey(typeHashCode))
             {
                 return;
             }
@@ -308,7 +309,7 @@ namespace Fantasy.Entitas
             }
 
             // 创建节点并加入链表尾部
-            var nodeData = new UpdateQueueNode { Type = type, RunTimeId = runtimeId };
+            var nodeData = new UpdateQueueNode { TypeHashCode = typeHashCode, RunTimeId = runtimeId };
             var node = _updateQueue.AddLast(nodeData);
             _updateNodes.Add(runtimeId, node);
         }
@@ -346,7 +347,7 @@ namespace Fantasy.Entitas
                 var data = node.Value;
 
                 // 检查更新系统是否存在（可能被热重载卸载）
-                if (!_updateSystems.TryGetValue(data.Type, out var updateSystem))
+                if (!_updateSystems.TryGetValue(data.TypeHashCode, out var updateSystem))
                 {
                     node = next;
                     continue;
@@ -368,7 +369,7 @@ namespace Fantasy.Entitas
                     }
                     catch (Exception e)
                     {
-                        Log.Error($"{data.Type.FullName} Update Error {e}");
+                        Log.Error($"Update Error {e}");
                     }
                 }
 
@@ -387,9 +388,9 @@ namespace Fantasy.Entitas
         /// <param name="entity">需要注册更新的实体</param>
         public void RegisterLateUpdate(Entity entity)
         {
-            var type = entity.Type;
+            var typeHashCode = entity.TypeHashCode;
             // 检查该实体类型是否有对应的更新系统
-            if (!_lateUpdateSystems.ContainsKey(type))
+            if (!_lateUpdateSystems.ContainsKey(typeHashCode))
             {
                 return;
             }
@@ -402,7 +403,7 @@ namespace Fantasy.Entitas
             }
 
             // 创建节点并加入链表尾部
-            var nodeData = new UpdateQueueNode { Type = type, RunTimeId = runtimeId };
+            var nodeData = new UpdateQueueNode { TypeHashCode = typeHashCode, RunTimeId = runtimeId };
             var node = _lateUpdateQueue.AddLast(nodeData);
             _lateUpdateNodes.Add(runtimeId, node);
         }
@@ -440,7 +441,7 @@ namespace Fantasy.Entitas
                 var data = node.Value;
 
                 // 检查更新系统是否存在（可能被热重载卸载）
-                if (!_lateUpdateSystems.TryGetValue(data.Type, out var lateUpdateSystem))
+                if (!_lateUpdateSystems.TryGetValue(data.TypeHashCode, out var lateUpdateSystem))
                 {
                     node = next;
                     continue;
@@ -462,7 +463,7 @@ namespace Fantasy.Entitas
                     }
                     catch (Exception e)
                     {
-                        Log.Error($"{data.Type.FullName} Update Error {e}");
+                        Log.Error($"Update Error {e}");
                     }
                 }
 

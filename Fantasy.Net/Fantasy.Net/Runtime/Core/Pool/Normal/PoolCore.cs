@@ -20,8 +20,8 @@ namespace Fantasy.Pool
         /// 池子里可用的数量
         /// </summary>
         public int Count => _poolQueue.Count;
-        private readonly OneToManyQueue<Type, IPool> _poolQueue = new OneToManyQueue<Type, IPool>();
-        private readonly Dictionary<Type, Func<IPool>> _typeCheckCache = new Dictionary<Type, Func<IPool>>();
+        private readonly OneToManyQueue<RuntimeTypeHandle, IPool> _poolQueue = new OneToManyQueue<RuntimeTypeHandle, IPool>();
+        private readonly Dictionary<RuntimeTypeHandle, Func<IPool>> _typeCheckCache = new Dictionary<RuntimeTypeHandle, Func<IPool>>();
 
         /// <summary>
         /// 构造函数
@@ -39,7 +39,7 @@ namespace Fantasy.Pool
         /// <returns></returns>
         public T Rent<T>() where T : IPool, new()
         {
-            if (!_poolQueue.TryDequeue(typeof(T), out var queue))
+            if (!_poolQueue.TryDequeue(typeof(T).TypeHandle, out var queue))
             {
                 queue = new T();
             }
@@ -57,9 +57,10 @@ namespace Fantasy.Pool
         /// <exception cref="NotSupportedException"></exception>
         public IPool Rent(Type type)
         {
-            if (!_poolQueue.TryDequeue(type, out var queue))
+            var runtimeTypeHandle = type.TypeHandle;
+            if (!_poolQueue.TryDequeue(runtimeTypeHandle, out var queue))
             {
-                if (!_typeCheckCache.TryGetValue(type, out var createInstance))
+                if (!_typeCheckCache.TryGetValue(runtimeTypeHandle, out var createInstance))
                 {
                     if (!typeof(IPool).IsAssignableFrom(type))
                     {
@@ -68,7 +69,7 @@ namespace Fantasy.Pool
                     else
                     {
                         createInstance = CreateInstance.CreateIPool(type);
-                        _typeCheckCache[type] = createInstance;
+                        _typeCheckCache[runtimeTypeHandle] = createInstance;
                     }
                 }
                 
@@ -106,7 +107,7 @@ namespace Fantasy.Pool
 
             _poolCount++;
             obj.SetIsPool(false);
-            _poolQueue.Enqueue(type, obj);
+            _poolQueue.Enqueue(type.TypeHandle, obj);
         }
 
         /// <summary>

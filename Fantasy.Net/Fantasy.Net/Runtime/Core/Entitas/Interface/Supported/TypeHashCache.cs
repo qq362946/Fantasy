@@ -13,13 +13,13 @@ namespace Fantasy.Entitas.Interface
     /// 1. 泛型静态字段缓存（用于泛型方法，零开销）
     /// 2. 全局字典缓存（用于非泛型方法，运行时查找）
     /// </summary>
-    internal static class EntityTypeHashCache
+    public static class TypeHashCache
     {
         /// <summary>
         /// 全局类型哈希码缓存字典，用于非泛型方法的运行时查找。
         /// 使用 ConcurrentDictionary 保证线程安全。
         /// </summary>
-        private static readonly ConcurrentDictionary<Type, long> RuntimeCache = new();
+        private static readonly ConcurrentDictionary<RuntimeTypeHandle, long> RuntimeCache = new();
 
         /// <summary>
         /// 获取指定实体类型的哈希码（运行时查找）。
@@ -34,7 +34,9 @@ namespace Fantasy.Entitas.Interface
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetHashCode(Type type)
         {
-            return RuntimeCache.GetOrAdd(type, static t => HashCodeHelper.ComputeHash64(t.FullName));
+            return RuntimeCache.GetOrAdd(type.TypeHandle,
+                static (_, fullName) => HashCodeHelper.ComputeHash64(fullName),
+                type.FullName);
         }
 
         /// <summary>
@@ -92,7 +94,7 @@ namespace Fantasy.Entitas.Interface
         static EntityTypeHashCache()
         {
             // 直接调用非泛型版本，复用计算逻辑并共享缓存
-            HashCode = EntityTypeHashCache.GetHashCode(typeof(T));
+            HashCode = TypeHashCache.GetHashCode(typeof(T));
         }
     }
 }

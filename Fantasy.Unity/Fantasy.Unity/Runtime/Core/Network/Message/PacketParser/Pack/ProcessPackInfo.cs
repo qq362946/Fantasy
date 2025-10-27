@@ -19,7 +19,7 @@ namespace Fantasy.PacketParser
         private int _disposeCount;
         public Type MessageType { get; private set; }
         private static readonly ConcurrentQueue<ProcessPackInfo> Caches = new ConcurrentQueue<ProcessPackInfo>();
-        private readonly ConcurrentDictionary<Type, Func<object>> _createInstances = new ConcurrentDictionary<Type, Func<object>>();
+        private readonly ConcurrentDictionary<RuntimeTypeHandle, Func<object>> _createInstances = new ConcurrentDictionary<RuntimeTypeHandle, Func<object>>();
 
         public override void Dispose()
         {
@@ -128,25 +128,24 @@ namespace Fantasy.PacketParser
                 Log.Debug("Deserialize MemoryStream is null");
                 return null;
             }
-
-            object obj = null;
+            
+            var messageTypeTypeHandle = messageType.TypeHandle;
             MemoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
-
             if (MemoryStream.Length == 0)
             {
-                if (_createInstances.TryGetValue(messageType, out var createInstance))
+                if (_createInstances.TryGetValue(messageTypeTypeHandle, out var createInstance))
                 {
                     return createInstance();
                 }
 
                 createInstance = CreateInstance.CreateObject(messageType);
-                _createInstances.TryAdd(messageType, createInstance);
+                _createInstances.TryAdd(messageTypeTypeHandle, createInstance);
                 return createInstance();
             }
 
             if (SerializerManager.TryGetSerializer(OpCodeIdStruct.OpCodeProtocolType, out var serializer))
             {
-                obj = serializer.Deserialize(messageType, MemoryStream);
+                var obj = serializer.Deserialize(messageType, MemoryStream);
                 MemoryStream.Seek(0, SeekOrigin.Begin);
                 return obj;
             }

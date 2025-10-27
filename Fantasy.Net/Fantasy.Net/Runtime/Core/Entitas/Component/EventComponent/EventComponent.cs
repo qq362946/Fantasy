@@ -14,9 +14,9 @@ namespace Fantasy.Event
     public sealed class EventComponent : Entity, IAssemblyLifecycle
     {
         private readonly HashSet<long> _assemblyManifests = new();
-        private readonly OneToManyList<Type, IEvent> _events = new();
-        private readonly OneToManyList<Type, IEvent> _asyncEvents = new();
-        private readonly OneToManyList<Type, IEvent> _sphereEvents = new();
+        private readonly OneToManyList<RuntimeTypeHandle, IEvent> _events = new();
+        private readonly OneToManyList<RuntimeTypeHandle, IEvent> _asyncEvents = new();
+        private readonly OneToManyList<RuntimeTypeHandle, IEvent> _sphereEvents = new();
 
         /// <summary>
         /// 销毁时会清理组件里的所有数据
@@ -116,7 +116,7 @@ namespace Fantasy.Event
         /// <param name="eventData">事件数据</param>
         public void Publish<TEventData>(TEventData eventData) where TEventData : struct
         {
-            if (!_events.TryGetValue(typeof(TEventData), out var list))
+            if (!_events.TryGetValue(typeof(TEventData).TypeHandle, out var list))
             {
                 return;
             }
@@ -142,7 +142,7 @@ namespace Fantasy.Event
         /// <param name="isDisposed">事件处理完成后是否自动销毁Entity</param>
         public void Publish<TEventData>(TEventData eventData, bool isDisposed = true) where TEventData : Entity
         {
-            if (!_events.TryGetValue(typeof(TEventData), out var list))
+            if (!_events.TryGetValue(typeof(TEventData).TypeHandle, out var list))
             {
                 return;
             }
@@ -173,7 +173,7 @@ namespace Fantasy.Event
         /// <param name="eventData">事件数据</param>
         public async FTask PublishAsync<TEventData>(TEventData eventData) where TEventData : struct
         {
-            if (!_asyncEvents.TryGetValue(typeof(TEventData), out var list))
+            if (!_asyncEvents.TryGetValue(typeof(TEventData).TypeHandle, out var list))
             {
                 return;
             }
@@ -203,7 +203,7 @@ namespace Fantasy.Event
         /// <param name="isDisposed">事件处理完成后是否自动销毁Entity</param>
         public async FTask PublishAsync<TEventData>(TEventData eventData, bool isDisposed = true) where TEventData : Entity
         {
-            if (!_asyncEvents.TryGetValue(typeof(TEventData), out var list))
+            if (!_asyncEvents.TryGetValue(typeof(TEventData).TypeHandle, out var list))
             {
                 return;
             }

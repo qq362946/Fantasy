@@ -14,7 +14,7 @@ namespace Fantasy.PacketParser
 {
     public sealed class InnerPackInfo : APackInfo
     {
-        private readonly Dictionary<Type, Func<object>> _createInstances = new Dictionary<Type, Func<object>>();
+        private readonly Dictionary<RuntimeTypeHandle, Func<object>> _createInstances = new Dictionary<RuntimeTypeHandle, Func<object>>();
 
         public override void Dispose()
         {
@@ -53,13 +53,13 @@ namespace Fantasy.PacketParser
 
             if (MemoryStream.Length == 0)
             {
-                if (_createInstances.TryGetValue(messageType, out var createInstance))
+                if (_createInstances.TryGetValue(messageType.TypeHandle, out var createInstance))
                 {
                     return createInstance();
                 }
 
                 createInstance = CreateInstance.CreateObject(messageType);
-                _createInstances.Add(messageType, createInstance);
+                _createInstances.Add(messageType.TypeHandle, createInstance);
                 return createInstance();
             }
 

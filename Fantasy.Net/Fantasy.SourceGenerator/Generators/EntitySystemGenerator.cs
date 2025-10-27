@@ -98,14 +98,12 @@ namespace Fantasy.SourceGenerator.Generators
             // 开始类定义（实现 IEntitySystemRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Entity System registration class for {assemblyName}");
             builder.BeginClass("EntitySystemRegistrar", "internal sealed", "IEntitySystemRegistrar");
-            // 生成字段用于存储已注册（用于 UnRegister）
+            // 生成字段用于存储 System 实例
             GenerateFields(builder, entitySystemTypeInfos);
-            // 生成注册方法（标准版本）
+            // 生成注册方法
             GenerateRegisterMethod(builder, entitySystemTypeInfos);
-            // 生成反注册方法（标准版本）
+            // 生成反注册方法
             GenerateUnRegisterMethod(builder, entitySystemTypeInfos);
-            // 生成 Dispose 方法
-            GenerateDisposeMethod(builder, entitySystemTypeInfos);
             // 结束类和命名空间
             builder.EndClass();
             builder.EndNamespace();
@@ -125,7 +123,8 @@ namespace Fantasy.SourceGenerator.Generators
             foreach (var eventSystemTypeInfo in entitySystemTypeInfos)
             {
                 var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                builder.AppendLine($"private {eventSystemTypeInfo.GlobalTypeFullName} {fieldName} = new {eventSystemTypeInfo.GlobalTypeFullName}();");
+                builder.AppendLine($"private const long _typeHashCode{fieldName} = {eventSystemTypeInfo.EntityTypeHashCode};");
             }
             
             builder.AppendLine();
@@ -137,20 +136,20 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("#if FANTASY_NET", false);
             builder.BeginMethod(
                 "public void RegisterSystems(" +
-                "Dictionary<Type, IAwakeSystem> awakeSystems, " +
-                "Dictionary<Type, IUpdateSystem> updateSystems, " +
-                "Dictionary<Type, IDestroySystem> destroySystems, " +
-                "Dictionary<Type, IDeserializeSystem> deserializeSystems)");
+                "Dictionary<long, Action<Entity>> awakeSystems, " +
+                "Dictionary<long, Action<Entity>> updateSystems, " +
+                "Dictionary<long, Action<Entity>> destroySystems, " +
+                "Dictionary<long, Action<Entity>> deserializeSystems)");
             builder.AppendLine("#endif", false);
             builder.Unindent();
             builder.AppendLine("#if FANTASY_UNITY", false);
             builder.BeginMethod(
                 "public void RegisterSystems(" +
-                "Dictionary<Type, IAwakeSystem> awakeSystems, " +
-                "Dictionary<Type, IUpdateSystem> updateSystems, " +
-                "Dictionary<Type, IDestroySystem> destroySystems, " +
-                "Dictionary<Type, IDeserializeSystem> deserializeSystems, " +
-                "Dictionary<Type, ILateUpdateSystem> lateUpdateSystems)");
+                "Dictionary<long, Action<Entity>> awakeSystems, " +
+                "Dictionary<long, Action<Entity>> updateSystems, " +
+                "Dictionary<long, Action<Entity>> destroySystems, " +
+                "Dictionary<long, Action<Entity>> deserializeSystems, " +
+                "Dictionary<long, Action<Entity>> lateUpdateSystems)");
             builder.AppendLine("#endif", false);
             
             if (entitySystemTypeInfos.Any())
@@ -163,33 +162,34 @@ namespace Fantasy.SourceGenerator.Generators
                     {
                         case EntitySystemType.AwakeSystem:
                         {
-                            builder.AppendLine($"awakeSystems.Add({fieldName}.EntityType(), {fieldName});");
+                            builder.AppendLine($"awakeSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
                             continue;
                         }
                         case EntitySystemType.UpdateSystem:
                         {
-                            builder.AppendLine($"updateSystems.Add({fieldName}.EntityType(), {fieldName});");
+                            builder.AppendLine($"updateSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
                             continue;
                         }
                         case EntitySystemType.DestroySystem:
                         {
-                            builder.AppendLine($"destroySystems.Add({fieldName}.EntityType(), {fieldName});");
+                            builder.AppendLine($"destroySystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
                             continue;
                         }
                         case EntitySystemType.DeserializeSystem:
                         {
-                            builder.AppendLine($"deserializeSystems.Add({fieldName}.EntityType(), {fieldName});");
+                            builder.AppendLine($"deserializeSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
                             continue;
                         }
-                        // case EntitySystemType.AwakeSystem:
-                        // {
-                        //     builder.AppendLine($"awakeSystems.Add({fieldName}.EntityType(), {fieldName});");
-                        //     continue;
-                        // }
+                        case EntitySystemType.LateUpdateSystem:
+                        {
+                            builder.AppendLine("#if FANTASY_UNITY", false);
+                            builder.AppendLine($"awakeSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
+                            builder.AppendLine("#endif", false);
+                            continue;
+                        }
                     }
                 }
             }
-            
             builder.EndMethod();
             builder.AppendLine();
         }
@@ -200,20 +200,20 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("#if FANTASY_NET", false);
             builder.BeginMethod(
                 "public void UnRegisterSystems(" +
-                "Dictionary<Type, IAwakeSystem> awakeSystems, " +
-                "Dictionary<Type, IUpdateSystem> updateSystems, " +
-                "Dictionary<Type, IDestroySystem> destroySystems, " +
-                "Dictionary<Type, IDeserializeSystem> deserializeSystems)");
+                "Dictionary<long, Action<Entity>> awakeSystems, " +
+                "Dictionary<long, Action<Entity>> updateSystems, " +
+                "Dictionary<long, Action<Entity>> destroySystems, " +
+                "Dictionary<long, Action<Entity>> deserializeSystems)");
             builder.AppendLine("#endif", false);
             builder.Unindent();
             builder.AppendLine("#if FANTASY_UNITY", false);
             builder.BeginMethod(
                 "public void UnRegisterSystems(" +
-                "Dictionary<Type, IAwakeSystem> awakeSystems, " +
-                "Dictionary<Type, IUpdateSystem> updateSystems, " +
-                "Dictionary<Type, IDestroySystem> destroySystems, " +
-                "Dictionary<Type, IDeserializeSystem> deserializeSystems, " +
-                "Dictionary<Type, ILateUpdateSystem> lateUpdateSystems)");
+                "Dictionary<long, Action<Entity>> awakeSystems, " +
+                "Dictionary<long, Action<Entity>> updateSystems, " +
+                "Dictionary<long, Action<Entity>> destroySystems, " +
+                "Dictionary<long, Action<Entity>> deserializeSystems, " +
+                "Dictionary<long, Action<Entity>> lateUpdateSystems)");
             builder.AppendLine("#endif", false);
 
             if (entitySystemTypeInfos.Any())
@@ -226,55 +226,37 @@ namespace Fantasy.SourceGenerator.Generators
                     {
                         case EntitySystemType.AwakeSystem:
                         {
-                            builder.AppendLine($"awakeSystems.Remove({fieldName}.EntityType());");
+                            builder.AppendLine($"awakeSystems.Remove(_typeHashCode{fieldName});");
                             continue;
                         }
                         case EntitySystemType.UpdateSystem:
                         {
-                            builder.AppendLine($"updateSystems.Remove({fieldName}.EntityType());");
+                            builder.AppendLine($"updateSystems.Remove(_typeHashCode{fieldName});");
                             continue;
                         }
                         case EntitySystemType.DestroySystem:
                         {
-                            builder.AppendLine($"destroySystems.Remove({fieldName}.EntityType());");
+                            builder.AppendLine($"destroySystems.Remove(_typeHashCode{fieldName});");
                             continue;
                         }
                         case EntitySystemType.DeserializeSystem:
                         {
-                            builder.AppendLine($"deserializeSystems.Remove({fieldName}.EntityType());");
+                            builder.AppendLine($"deserializeSystems.Remove(_typeHashCode{fieldName});");
                             continue;
                         }
-                        // case EntitySystemType.LateUpdateSystem:
-                        // {
-                        //     builder.AppendLine($"lateUpdateSystem.Remove({fieldName}.EntityType());");
-                        //     continue;
-                        // }
+                        case EntitySystemType.LateUpdateSystem:
+                        {
+                            builder.AppendLine("#if FANTASY_UNITY", false);
+                            builder.AppendLine($"lateUpdateSystem.Remove(_typeHashCode{fieldName});");
+                            builder.AppendLine("#endif", false);
+                            continue;
+                        }
                     }
                 }
             }
             
             builder.EndMethod();
             builder.AppendLine();
-        }
-        
-        /// <summary>
-        /// 生成 Dispose 方法
-        /// </summary>
-        private static void GenerateDisposeMethod(SourceCodeBuilder builder, List<EntitySystemTypeInfo> entitySystemTypeInfos)
-        {
-            builder.AddXmlComment("Dispose the registrar (required by IDisposable)");
-            builder.BeginMethod("public void Dispose()");
-            
-            if (entitySystemTypeInfos.Any())
-            {
-                foreach (var systemTypeInfo in entitySystemTypeInfos)
-                {
-                    var fieldName = $"_{systemTypeInfo.TypeName.ToCamelCase()}";
-                    builder.AppendLine($"{fieldName} = null;");
-                }
-            }
-            
-            builder.EndMethod();
         }
         
         private static bool IsSystemClass(SyntaxNode node)
@@ -312,21 +294,44 @@ namespace Fantasy.SourceGenerator.Generators
         private sealed class EntitySystemTypeInfo
         {
             public readonly EntitySystemType EntitySystemType;
+            public readonly string GlobalTypeFullName;
             public readonly string TypeFullName;
             public readonly string TypeName;
-            private EntitySystemTypeInfo(EntitySystemType entitySystemType, string typeFullName, string typeName)
+            public readonly long EntityTypeHashCode;  // 预计算的实体类型哈希值
+            public readonly string EntityTypeFullName; // 实体类型的完整名称（用于注释）
+
+            private EntitySystemTypeInfo(
+                EntitySystemType entitySystemType,
+                string globalTypeFullName,
+                string typeFullName,
+                string typeName,
+                long entityTypeHashCode,
+                string entityTypeFullName)
             {
                 EntitySystemType = entitySystemType;
+                GlobalTypeFullName = globalTypeFullName;
                 TypeFullName = typeFullName;
                 TypeName = typeName;
+                EntityTypeHashCode = entityTypeHashCode;
+                EntityTypeFullName = entityTypeFullName;
             }
 
             public static EntitySystemTypeInfo Create(EntitySystemType entitySystemType, INamedTypeSymbol symbol)
             {
+                // 获取泛型参数 T (例如：AwakeSystem<T> 中的 T)
+                var entityType = symbol.BaseType?.TypeArguments.FirstOrDefault();
+                var entityTypeFullName = entityType?.GetFullName(false) ?? "Unknown";
+
+                // 使用与运行时相同的算法计算哈希值
+                var entityTypeHashCode = HashCodeHelper.ComputeHash64(entityTypeFullName);
+
                 return new EntitySystemTypeInfo(
                     entitySystemType,
                     symbol.GetFullName(),
-                    symbol.Name);
+                    symbol.GetFullName(false),
+                    symbol.Name,
+                    entityTypeHashCode,
+                    entityTypeFullName);
             }
         }
     }
