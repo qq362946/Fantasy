@@ -70,7 +70,6 @@ namespace Fantasy.Entitas.Interface
     /// 实体类型哈希码泛型缓存器。
     /// 通过泛型静态字段缓存每个实体类型的哈希码，实现零开销的类型哈希码访问。
     /// </summary>
-    /// <typeparam name="T">要缓存哈希码的实体类型，必须继承自 <see cref="Entity"/></typeparam>
     /// <remarks>
     /// 性能优势：
     /// <list type="bullet">
@@ -80,7 +79,7 @@ namespace Fantasy.Entitas.Interface
     /// <item><description>适合在泛型方法中使用，如 GetComponent&lt;T&gt;()</description></item>
     /// </list>
     /// </remarks>
-    internal static class EntityTypeHashCache<T> where T : Entity
+    internal static class TypeHashCache<T>
     {
         /// <summary>
         /// 获取实体类型 <typeparamref name="T"/> 的哈希码。
@@ -91,7 +90,7 @@ namespace Fantasy.Entitas.Interface
         /// </value>
         public static long HashCode { get; }
 
-        static EntityTypeHashCache()
+        static TypeHashCache()
         {
             // 直接调用非泛型版本，复用计算逻辑并共享缓存
             HashCode = TypeHashCache.GetHashCode(typeof(T));

@@ -18,6 +18,7 @@ using System.Runtime.CompilerServices;
 using Fantasy.Network.Route;
 using Fantasy.Network.Roaming;
 using Fantasy.SeparateTable;
+using Fantasy.Sphere;
 #endif
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8601 // Possible null reference assignment.
@@ -154,6 +155,10 @@ namespace Fantasy
         /// Scene下的Session漫游组件
         /// </summary>
         public RoamingComponent RoamingComponent { get; internal set; }
+        /// <summary>
+        /// Scene下的领域事件组件
+        /// </summary>
+        public SphereEventComponent SphereEventComponent  { get; internal set; }
 #endif
         #endregion
 
@@ -179,6 +184,7 @@ namespace Fantasy
             SeparateTableComponent = await Create<SeparateTableComponent>(this, false, true).Initialize();
             TerminusComponent = Create<TerminusComponent>(this, false, true);
             RoamingComponent = Create<RoamingComponent>(this, false, true).Initialize();
+            SphereEventComponent = await Create<SphereEventComponent>(this, false, true).Initialize();
 #endif
         }
 
@@ -267,6 +273,7 @@ namespace Fantasy
             NetworkMessagingComponent = null;
             TerminusComponent = null;
             RoamingComponent = null;
+            SphereEventComponent = null;
 #elif FANTASY_UNITY
             Session = null;
             UnityNetwork = null;

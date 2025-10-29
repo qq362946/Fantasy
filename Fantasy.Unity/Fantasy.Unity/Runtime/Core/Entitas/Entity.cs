@@ -209,7 +209,7 @@ namespace Fantasy.Entitas
             var entity = isPool ? scene.EntityPool.Rent<T>() : new T();
             entity.Scene = scene;
             entity.Type = typeof(T);
-            entity.TypeHashCode = EntityTypeHashCache<T>.HashCode;
+            entity.TypeHashCode = TypeHashCache<T>.HashCode;
             entity.SetIsPool(isPool);
             entity.Id = id;
             entity.RuntimeId = scene.RuntimeIdFactory.Create(isPool);
@@ -427,7 +427,7 @@ namespace Fantasy.Entitas
                 return false;
             }
             
-            return _tree.ContainsKey(EntityTypeHashCache<T>.HashCode);
+            return _tree.ContainsKey(TypeHashCache<T>.HashCode);
         }
 
         /// <summary>
@@ -480,7 +480,7 @@ namespace Fantasy.Entitas
                 return null;
             }
             
-            return _tree.TryGetValue(EntityTypeHashCache<T>.HashCode, out var component) ? (T)component : null;
+            return _tree.TryGetValue(TypeHashCache<T>.HashCode, out var component) ? (T)component : null;
         }
 
         /// <summary>
@@ -549,7 +549,7 @@ namespace Fantasy.Entitas
                 return;
             }
             
-            var typeHashCode = EntityTypeHashCache<T>.HashCode;
+            var typeHashCode = TypeHashCache<T>.HashCode;
             if (!_tree.TryGetValue(typeHashCode, out var component))
             {
                 return;
@@ -736,7 +736,7 @@ namespace Fantasy.Entitas
             }
             else if (_tree != null)
             {
-                var typeHashCode = EntityTypeHashCache<T>.HashCode;
+                var typeHashCode = TypeHashCache<T>.HashCode;
                 if (!_tree.ContainsKey(typeHashCode))
                 {
                     return;

@@ -1,11 +1,11 @@
 using Fantasy.Network.Interface;
 using Fantasy.Serialize;
-using Fantasy.Sphere;
 using MongoDB.Bson.Serialization.Attributes;
 using ProtoBuf;
 #if FANTASY_NET
 using Fantasy.Entitas;
 using Fantasy.Network.Roaming;
+using Fantasy.Sphere;
 #endif
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 // ReSharper disable InconsistentNaming

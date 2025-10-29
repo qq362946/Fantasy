@@ -1,0 +1,304 @@
+#if FANTASY_NET
+using Fantasy.Assembly;
+using Fantasy.Async;
+using Fantasy.DataStructure.Collection;
+using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
+using Fantasy.InnerMessage;
+using Fantasy.Network;
+// ReSharper disable CheckNamespace
+// ReSharper disable ForCanBeConvertedToForeach
+namespace Fantasy.Sphere;
+
+/// <summary>
+/// Sphere事件组件，用于管理分布式场景之间的事件订阅和发布
+/// </summary>
+public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
+{
+    #region AssemblyManifest
+    
+    private readonly HashSet<long> _assemblyManifests = new();
+    
+    /// <summary>
+    /// 初始化SphereEventComponent，将其注册到程序集系统中
+    /// </summary>
+    /// <returns>返回初始化后的SphereEventComponent实例</returns>
+    internal async FTask<SphereEventComponent> Initialize()
+    {
+        await AssemblyLifecycle.Add(this);
+        return this;
+    }
+    
+    /// <summary>
+    /// 加载程序集，注册该程序集中的所有事件系统
+    /// 支持热重载：如果程序集已加载，会先卸载再重新加载
+    /// </summary>
+    /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
+    /// <returns>异步任务</returns>
+    public async FTask OnLoad(AssemblyManifest assemblyManifest)
+    {
+        var tcs = FTask.Create(false);
+        var assemblyManifestId = assemblyManifest.AssemblyManifestId;
+        Scene?.ThreadSynchronizationContext.Post(() =>
+        {
+            // 如果程序集已加载，先卸载旧的
+            if (_assemblyManifests.Contains(assemblyManifestId))
+            {
+                OnUnLoadInner(assemblyManifest);
+            }
+            assemblyManifest.SphereEventRegistrar.Register(_sphereEvents);
+            _assemblyManifests.Add(assemblyManifestId);
+            tcs.SetResult();
+        });
+        await tcs;
+    }
+
+    /// <summary>
+    /// 卸载程序集，取消注册该程序集中的所有实体系统
+    /// </summary>
+    /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
+    /// <returns>异步任务</returns>
+    public async FTask OnUnload(AssemblyManifest assemblyManifest)
+    {
+        var tcs = FTask.Create(false);
+        Scene?.ThreadSynchronizationContext.Post(() =>
+        {
+            OnUnLoadInner(assemblyManifest);
+            tcs.SetResult();
+        });
+        await tcs;
+    }
+    
+    /// <summary>
+    /// 卸载程序集的内部实现
+    /// 会清理该程序集注册的所有系统
+    /// </summary>
+    /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
+    private void OnUnLoadInner(AssemblyManifest assemblyManifest)
+    {
+        assemblyManifest.SphereEventRegistrar.UnRegister(_sphereEvents);
+        _assemblyManifests.Remove(assemblyManifest.AssemblyManifestId);
+    }
+
+    #endregion
+    
+    #region Local
+    
+    /// <summary>
+    /// 本地订阅的远程服务器信息 (远程RouteId, 事件类型HashCode)
+    /// </summary>
+    private readonly HashSet<(long, long)> _localSubscribers = new();
+
+    /// <summary>
+    /// 本地订阅的事件
+    /// </summary>
+    private readonly OneToManyHashSet<long, Func<SphereEventArgs, FTask>> _sphereEvents = new();
+
+    /// <summary>
+    /// 订阅远程服务器的Sphere事件
+    /// </summary>
+    /// <param name="routeId">远程服务器的RouteId</param>
+    /// <typeparam name="T">事件类型</typeparam>
+    /// <returns></returns>
+    public FTask Subscribe<T>(long routeId) where T : SphereEventArgs, new()
+    {
+        return Subscribe(routeId, TypeHashCache<T>.HashCode);
+    }
+
+    /// <summary>
+    /// 订阅远程服务器的Sphere事件
+    /// </summary>
+    /// <param name="routeId"></param>
+    /// <param name="typeHashCode">事件类型的HashCode</param>
+    public async FTask Subscribe(long routeId, long typeHashCode)
+    {
+        var response = await Scene.NetworkMessagingComponent.CallInnerRoute(routeId, new I_SubscribeSphereEventRequest()
+        {
+            RouteId = Scene.RouteId,
+            TypeHashCode = typeHashCode
+        });
+
+        if (response.ErrorCode != 0)
+        {
+            Log.Error($"SphereEventComponent Subscribe failed with errorCode {response.ErrorCode}");
+            return;
+        }
+        
+        _localSubscribers.Add((routeId, typeHashCode));
+    }
+
+    /// <summary>
+    /// 取消订阅远程服务器的Sphere事件
+    /// </summary>
+    /// <typeparam name="T">事件类型</typeparam>
+    /// <param name="routeId">远程服务器的RouteId</param>
+    public FTask Unsubscribe<T>(long routeId) where T : SphereEventArgs, new()
+    {
+        return Unsubscribe(routeId, TypeHashCache<T>.HashCode, true);
+    }
+
+    /// <summary>
+    /// 取消订阅远程服务器的Sphere事件（内部方法）
+    /// </summary>
+    /// <param name="routeId">远程服务器的RouteId</param>
+    /// <param name="typeHashCode">事件类型的HashCode</param>
+    /// <param name="sendRemote">是否向远程服务器发送取消订阅请求。
+    /// true: 发送 I_UnsubscribeSphereEventRequest 通知远程服务器移除订阅关系（正常取消订阅流程）。
+    /// false: 仅在本地移除订阅记录，不通知远程服务器（用于远程服务器已断开或由远程服务器主动撤销的场景）。
+    /// </param>
+    internal async FTask Unsubscribe(long routeId, long typeHashCode, bool sendRemote)
+    {
+        if (sendRemote)
+        {
+            var response = await Scene.NetworkMessagingComponent.CallInnerRoute(routeId,
+                new I_UnsubscribeSphereEventRequest()
+                {
+                    RouteId = Scene.RouteId,
+                    TypeHashCode = typeHashCode
+                });
+
+            if (response.ErrorCode != 0)
+            {
+                Log.Error($"SphereEventComponent Unsubscribe failed with errorCode {response.ErrorCode}");
+            }
+        }
+
+        _localSubscribers.Remove((routeId, typeHashCode));
+    }
+
+    /// <summary>
+    /// 处理远程发布的事件并调用本地订阅者
+    /// </summary>
+    /// <param name="routeId">发布者的RouteId</param>
+    /// <param name="eventArgs">事件参数</param>
+    /// <returns>错误码: Success=成功, ErrHandleRemotePublicationNotSubscribed=未找到订阅关系</returns>
+    internal async FTask<uint> HandleRemotePublication(long routeId, SphereEventArgs eventArgs)
+    {
+        var eventArgsTypeHashCode = eventArgs.TypeHashCode;
+
+        // 检查本地是否订阅了该 RouteId 和事件类型的组合
+        // 如果未订阅，返回错误码表示没有订阅关系
+        if (!_localSubscribers.Contains((routeId, eventArgsTypeHashCode)))
+        {
+            return InnerErrorCode.ErrHandleRemotePublicationNotSubscribed;
+        }
+
+        // 获取该事件类型的所有本地处理器
+        // 如果没有注册任何处理器，直接返回成功（这是正常情况，可能还未注册处理器）
+        if (!_sphereEvents.TryGetValue(eventArgsTypeHashCode, out var sphereEvents))
+        {
+            return InnerErrorCode.Success;
+        }
+        
+        // 并发调用所有订阅了该事件的本地处理器
+        using var tasks = ListPool<FTask>.Create();
+
+        foreach (var @event in sphereEvents)
+        {
+            try
+            {
+                tasks.Add(@event(eventArgs));
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+        }
+
+        // 等待所有事件处理器执行完成
+        await FTask.WaitAll(tasks);
+        return InnerErrorCode.Success;
+    }
+
+    #endregion
+
+    #region Remote
+
+    /// <summary>
+    /// 订阅事件的远程服务器信息 (事件类型HashCode -> 远程RouteId列表)
+    /// </summary>
+    private readonly OneToManyHashSet<long, long> _remoteSubscribers = new();
+    
+    /// <summary>
+    /// 注册远程订阅者
+    /// </summary>
+    /// <param name="fromRouteId">远程服务器的RouteId</param>
+    /// <param name="typeHashCode">事件类型的HashCode</param>
+    internal void RegisterRemoteSubscriber(long fromRouteId, long typeHashCode)
+    {
+        _remoteSubscribers.Add(typeHashCode, fromRouteId);
+    }
+    
+    /// <summary>
+    /// 注销远程订阅者
+    /// </summary>
+    /// <param name="fromRouteId">远程服务器的RouteId</param>
+    /// <param name="typeHashCode">事件类型的HashCode</param>
+    internal void UnregisterRemoteSubscriber(long fromRouteId, long typeHashCode)
+    {
+        _remoteSubscribers.RemoveValue(typeHashCode, fromRouteId);
+    }
+
+    /// <summary>
+    /// 撤销远程订阅者的订阅
+    /// </summary>
+    /// <param name="fromRouteId">远程服务器的RouteId</param>
+    /// <typeparam name="T">事件类型</typeparam>
+    public async FTask RevokeRemoteSubscriber<T>(long fromRouteId) where T : ISphereEvent
+    {
+        var typeHashCode = TypeHashCache<T>.HashCode;
+        var response = await Scene.NetworkMessagingComponent.CallInnerRoute(fromRouteId,
+            new I_RevokeRemoteSubscriberRequest()
+            {
+                RouteId = Scene.RouteId,
+                TypeHashCode = typeHashCode
+            });
+
+        if (response.ErrorCode != 0)
+        {
+            Log.Error($"SphereEventComponent RevokeRemoteSubscriber failed with errorCode {response.ErrorCode}");
+        }
+
+        UnregisterRemoteSubscriber(fromRouteId, typeHashCode);
+    }
+
+    /// <summary>
+    /// 向远程订阅者发布事件
+    /// </summary>
+    /// <param name="sphereEventArgs">事件参数</param>
+    /// <param name="isAutoDisposed">是否自动释放事件参数</param>
+    public async FTask PublishToRemoteSubscribers(SphereEventArgs sphereEventArgs, bool isAutoDisposed)
+    {
+        var typeHashCode = sphereEventArgs.TypeHashCode;
+        
+        if (!_remoteSubscribers.TryGetValue(typeHashCode, out var subscribers))
+        {
+            return;
+        }
+        
+        var routeId = Scene.RouteId;
+        
+        foreach (var subscriber in subscribers)
+        {
+            var response = await Scene.NetworkMessagingComponent.CallInnerRoute(subscriber,
+                new I_PublishSphereEventRequest()
+                {
+                    RouteId = routeId,
+                    SphereEventArgs = sphereEventArgs
+                });
+            if (response.ErrorCode != 0)
+            {
+                Log.Error($"SphereEventComponent PublishToRemoteSubscribers failed with errorCode {response.ErrorCode}");
+            }
+        }
+        
+        if (isAutoDisposed)
+        {
+            sphereEventArgs.Dispose();
+        }
+    }
+
+    #endregion
+}
+
+#endif
