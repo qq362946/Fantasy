@@ -18,6 +18,19 @@ namespace Fantasy.SourceGenerator.Generators
             // 注册源代码输出
             context.RegisterSourceOutput(compilationProvider, (spc, compilation) =>
             {
+                // 检查是否定义了 FANTASY_NET 或 FANTASY_UNITY 预编译符号
+                if (!CompilationHelper.HasFantasyDefine(compilation))
+                {
+                    // 不是 Fantasy 框架项目，跳过代码生成
+                    return;
+                }
+                
+                // 检查2: 是否引用了 Fantasy 框架的核心类型
+                if (compilation.GetTypeByMetadataName("Fantasy.Assembly.IEntitySystemRegistrar") == null)
+                {
+                    return;
+                }
+                
                 GenerateModuleInitializer(spc, compilation);
             });
         }
@@ -26,13 +39,6 @@ namespace Fantasy.SourceGenerator.Generators
             SourceProductionContext context,
             Compilation compilation)
         {
-            // 检查是否定义了 FANTASY_NET 或 FANTASY_UNITY 预编译符号
-            if (!CompilationHelper.HasFantasyDefine(compilation))
-            {
-                // 不是 Fantasy 框架项目，跳过代码生成
-                return;
-            }
-
             var assemblyName = compilation.AssemblyName ?? "Unknown";
             // 检测是否是 Unity 环境
             var isUnity = CompilationHelper.IsUnityCompilation(compilation);
@@ -168,9 +174,13 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("#if FANTASY_NET", false);
             builder.AppendLine(
                 "Fantasy.Assembly.ISeparateTableRegistrar? separateTableRegistrar = null;");
+            builder.AppendLine(
+                "Fantasy.Assembly.ISphereEventRegistrar? sphereEventRegistrar = null;");
             builder.AppendLine("#endif", false);
+            builder.AppendLine(
+                "Fantasy.Assembly.ICustomInterfaceRegistrar? customInterfaceRegistrar = null;");
             builder.AppendLine();
-
+            
             // 尝试创建各个注册器（如果存在）
             builder.AddComment("Try to create registrars if they were generated in this assembly");
             GenerateTryCreateRegistrar(builder, "NetworkProtocol", "networkProtocolRegistrar");
@@ -182,7 +192,9 @@ namespace Fantasy.SourceGenerator.Generators
             GenerateTryCreateRegistrar(builder, "NetworkProtocolResponseTypeResolver", "networkProtocolResponseTypeResolverRegistrar");
             builder.AppendLine("#if FANTASY_NET", false);
             GenerateTryCreateRegistrar(builder, "SeparateTable", "separateTableRegistrar");
+            GenerateTryCreateRegistrar(builder, "SphereEvent", "sphereEventRegistrar");
             builder.AppendLine("#endif", false);
+            GenerateTryCreateRegistrar(builder, "CustomInterface", "customInterfaceRegistrar");
             
             builder.AppendLine();
 
@@ -200,7 +212,9 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("entityTypeCollectionRegistrar,");
             builder.AppendLine("separateTableRegistrar,");
             builder.AppendLine("networkProtocolOpCodeResolverRegistrar,");
-            builder.AppendLine("networkProtocolResponseTypeResolverRegistrar);");
+            builder.AppendLine("networkProtocolResponseTypeResolverRegistrar,");
+            builder.AppendLine("sphereEventRegistrar,");
+            builder.AppendLine("customInterfaceRegistrar);");
             builder.Unindent();
             builder.AppendLine("#endif", false);
             builder.AppendLine("#if FANTASY_UNITY", false);
@@ -214,7 +228,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("messageHandlerResolverRegistrar,");
             builder.AppendLine("entityTypeCollectionRegistrar,");
             builder.AppendLine("networkProtocolOpCodeResolverRegistrar,");
-            builder.AppendLine("networkProtocolResponseTypeResolverRegistrar);");
+            builder.AppendLine("networkProtocolResponseTypeResolverRegistrar,");
+            builder.AppendLine("customInterfaceRegistrar);");
             builder.Unindent();
             builder.AppendLine("#endif", false);
             builder.EndMethod();

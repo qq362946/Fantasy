@@ -1,8 +1,10 @@
 using Fantasy.Network.Interface;
 using Fantasy.Serialize;
+using Fantasy.Sphere;
 using MongoDB.Bson.Serialization.Attributes;
 using ProtoBuf;
 #if FANTASY_NET
+using Fantasy.Entitas;
 using Fantasy.Network.Roaming;
 #endif
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
@@ -314,6 +316,85 @@ namespace Fantasy.InnerMessage
         [ProtoMember(1)]
         public long TerminusId { get; set; }
         [ProtoMember(2)]
+        public uint ErrorCode { get; set; }
+    }
+    /// <summary>
+    /// 订阅一个领域事件
+    /// </summary>
+    [ProtoContract]
+    public partial class I_SubscribeSphereEventRequest : AMessage, IRouteRequest
+    {
+        [BsonIgnore]
+        public I_SubscribeSphereEventResponse ResponseType { get; set; }
+        public uint OpCode() { return Fantasy.Network.OpCode.SubscribeSphereEventRequest; }
+        [ProtoMember(1)]
+        public long RouteId { get; set; }
+        [ProtoMember(2)]
+        public long TypeHashCode { get; set; }
+    }
+    [ProtoContract]
+    public partial class I_SubscribeSphereEventResponse : AMessage, IRouteResponse
+    {
+        public uint OpCode() { return Fantasy.Network.OpCode.SubscribeSphereEventResponse; }
+        [ProtoMember(1)]
+        public uint ErrorCode { get; set; }
+    }
+    /// <summary>
+    /// 取消订阅一个领域事件
+    /// </summary>
+    [ProtoContract]
+    public partial class I_UnsubscribeSphereEventRequest : AMessage, IRouteRequest
+    {
+        [BsonIgnore]
+        public I_UnsubscribeSphereEventResponse ResponseType { get; set; }
+        public uint OpCode() { return Fantasy.Network.OpCode.UnsubscribeSphereEventRequest; }
+        [ProtoMember(1)]
+        public long RouteId { get; set; }
+        [ProtoMember(2)]
+        public long TypeHashCode { get; set; }
+    }
+    [ProtoContract]
+    public partial class I_UnsubscribeSphereEventResponse : AMessage, IRouteResponse
+    {
+        public uint OpCode() { return Fantasy.Network.OpCode.UnsubscribeSphereEventResponse; }
+        [ProtoMember(1)]
+        public uint ErrorCode { get; set; }
+    }
+    /// <summary>
+    /// 撤销远程订阅者的订阅领域事件
+    /// </summary>
+    [ProtoContract]
+    public partial class I_RevokeRemoteSubscriberRequest : AMessage, IRouteRequest
+    {
+        [BsonIgnore]
+        public I_RevokeRemoteSubscriberResponse ResponseType { get; set; }
+        public uint OpCode() { return Fantasy.Network.OpCode.RevokeRemoteSubscriberRequest; }
+        [ProtoMember(1)]
+        public long RouteId { get; set; }
+        [ProtoMember(2)]
+        public long TypeHashCode { get; set; }
+    }
+    [ProtoContract]
+    public partial class I_RevokeRemoteSubscriberResponse : AMessage, IRouteResponse
+    {
+        public uint OpCode() { return Fantasy.Network.OpCode.RevokeRemoteSubscriberResponse; }
+        [ProtoMember(1)]
+        public uint ErrorCode { get; set; }
+    }
+    /// <summary>
+    /// 发送一个领域事件
+    /// </summary>
+    public partial class I_PublishSphereEventRequest : AMessage, IRouteRequest
+    {
+        [BsonIgnore]
+        public I_PublishSphereEventResponse ResponseType { get; set; }
+        public uint OpCode() { return Fantasy.Network.OpCode.PublishSphereEventRequest; }
+        public long RouteId { get; set; }
+        public SphereEventArgs SphereEventArgs { get; set; }
+    }
+    public partial class I_PublishSphereEventResponse : AMessage, IRouteResponse
+    {
+        public uint OpCode() { return Fantasy.Network.OpCode.PublishSphereEventResponse; }
         public uint ErrorCode { get; set; }
     }
 #endif

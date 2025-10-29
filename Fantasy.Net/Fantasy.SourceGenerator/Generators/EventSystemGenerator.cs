@@ -41,7 +41,7 @@ namespace Fantasy.SourceGenerator.Generators
                     return;
                 }
 
-                GenerateRegistrationCode(spc, source.Left, source.Right!);
+                GenerateCode(spc, source.Left, source.Right!);
             });
         }
 
@@ -77,16 +77,50 @@ namespace Fantasy.SourceGenerator.Generators
                 _ => null
             };
         }
-        
+
         /// <summary>
         /// 生成注册代码
         /// </summary>
-        private static void GenerateRegistrationCode(
+        private static void GenerateCode(
             SourceProductionContext context,
             Compilation compilation,
             IEnumerable<EventSystemTypeInfo> eventSystemTypes)
         {
-            var eventSystems = eventSystemTypes.ToList();
+            var eventSystems = new List<EventSystemTypeInfo>();
+            var asyncEventSystem = new List<EventSystemTypeInfo>();
+            var sphereEventSystem = new List<EventSystemTypeInfo>();
+            
+            foreach (var eventSystemTypeInfo in eventSystemTypes)
+            {
+                switch (eventSystemTypeInfo.EventSystemType)
+                {
+                    case EventSystemType.EventSystem:
+                    {
+                        eventSystems.Add(eventSystemTypeInfo);
+                        break;
+                    }
+                    case EventSystemType.AsyncEventSystem:
+                    {
+                        asyncEventSystem.Add(eventSystemTypeInfo);
+                        break;
+                    }
+                    case EventSystemType.SphereEventSystem:
+                    {
+                        sphereEventSystem.Add(eventSystemTypeInfo);
+                        break;
+                    }
+                }
+            }
+
+            // 生成Event的注册代码
+            GenerateEventCode(context, compilation, eventSystems, asyncEventSystem);
+            // 生成SphereEvent
+            GenerateSphereCode(context, compilation, sphereEventSystem);
+        }
+
+        private static void GenerateEventCode(SourceProductionContext context, Compilation compilation,
+            List<EventSystemTypeInfo> eventSystems, List<EventSystemTypeInfo> asyncEventSystem)
+        {
             // 获取当前程序集名称（仅用于注释）
             var assemblyName = compilation.AssemblyName ?? "Unknown";
             // 生成代码文件
@@ -108,13 +142,62 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AddXmlComment($"Auto-generated Event System registration class for {assemblyName}");
             builder.BeginClass("EventSystemRegistrar", "internal sealed", "IEventSystemRegistrar");
             // 生成字段用于存储已注册的事件处理器（用于 UnRegister）
-            GenerateFields(builder, eventSystems);
+            builder.AddComment("Store registered event handlers for UnRegister");
+            foreach (var eventSystemTypeInfo in eventSystems)
+            {
+                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                builder.AppendLine(
+                    $"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+            }
+            foreach (var eventSystemTypeInfo in asyncEventSystem)
+            {
+                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                builder.AppendLine(
+                    $"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+            }
+            builder.AppendLine();
             // 生成 RegisterSystems 方法
-            GenerateRegisterMethod(builder, eventSystems);
+            builder.AddXmlComment("Register all Event Systems to the containers");
+            builder.BeginMethod(
+                "public void Register(" +
+                "OneToManyList<RuntimeTypeHandle, IEvent> events, " +
+                "OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents)");
+            
+            foreach (var eventSystemTypeInfo in eventSystems)
+            {
+                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                builder.AppendLine($"events.Add({fieldName}.EventType().TypeHandle, {fieldName});");
+            }
+
+            foreach (var eventSystemTypeInfo in asyncEventSystem)
+            {
+                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                builder.AppendLine($"asyncEvents.Add({fieldName}.EventType().TypeHandle, {fieldName});");
+            }
+
+            builder.EndMethod();
+            builder.AppendLine();
             // 生成 UnRegisterSystems 方法
-            GenerateUnRegisterMethod(builder, eventSystems);
-            // 生成 Dispose 方法
-            GenerateDisposeMethod(builder, eventSystems);
+            builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
+            builder.BeginMethod(
+                "public void UnRegister(" +
+                "OneToManyList<RuntimeTypeHandle, IEvent> events, " +
+                "OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents)");
+            
+            foreach (var eventSystemTypeInfo in eventSystems)
+            {
+                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                builder.AppendLine($"events.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
+            }
+
+            foreach (var eventSystemTypeInfo in asyncEventSystem)
+            {
+                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                builder.AppendLine($"asyncEvents.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
+            }
+
+            builder.EndMethod();
+            builder.AppendLine();
             // 结束类和命名空间
             builder.EndClass();
             builder.EndNamespace();
@@ -122,133 +205,70 @@ namespace Fantasy.SourceGenerator.Generators
             context.AddSource("EventSystemRegistrar.g.cs", builder.ToString());
         }
 
-        /// <summary>
-        /// 生成字段，用于存储已注册的事件处理器实例
-        /// </summary>
-        private static void GenerateFields(SourceCodeBuilder builder, List<EventSystemTypeInfo> eventSystems)
+        private static void GenerateSphereCode(SourceProductionContext context, Compilation compilation, List<EventSystemTypeInfo> sphereEventSystem)
         {
-            builder.AddComment("Store registered event handlers for UnRegister");
-
-            if (!eventSystems.Any())
-            {
-                return;
-            }
-            
-            foreach (var eventSystemTypeInfo in eventSystems)
+            // 获取当前程序集名称（仅用于注释）
+            var assemblyName = compilation.AssemblyName ?? "Unknown";
+            // 生成代码文件
+            var builder = new SourceCodeBuilder();
+            builder.AppendLine("#if FANTASY_NET",false);
+            // 添加文件头
+            builder.AppendLine(GeneratorConstants.AutoGeneratedHeader);
+            // 添加 using
+            builder.AddUsings(
+                "System",
+                "System.Collections.Generic",
+                "Fantasy.Assembly",
+                "Fantasy.DataStructure.Collection",
+                "Fantasy.Event",
+                "Fantasy.Sphere",
+                "Fantasy.Async"
+            );
+            builder.AppendLine();
+            // 开始命名空间（固定使用 Fantasy.Generated）
+            builder.BeginNamespace("Fantasy.Generated");
+            // 开始类定义（实现 ISphereEventRegistrar 接口）
+            builder.AddXmlComment($"Auto-generated Sphere Event System registration class for {assemblyName}");
+            builder.BeginClass("SphereEventRegistrar", "internal sealed", "ISphereEventRegistrar");
+            // 生成字段用于存储已注册的事件处理器（用于 UnRegister）
+            foreach (var eventSystemTypeInfo in sphereEventSystem)
             {
                 var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                builder.AppendLine($"private long {fieldName}TypeHashCode;");
+                builder.AppendLine($"private Func<SphereEventArgs, FTask> {fieldName}Delegate;");
             }
-            builder.AppendLine();
-        }
-        
-        /// <summary>
-        /// 生成 RegisterSystems 方法
-        /// </summary>
-        private static void GenerateRegisterMethod(SourceCodeBuilder builder, List<EventSystemTypeInfo> eventSystems)
-        {
-            builder.AddXmlComment("Register all Event Systems to the containers");
+            // 生成注册方法
+            builder.AddXmlComment("Register all SphereEvent to the containers");
             builder.BeginMethod(
-                "public void RegisterSystems(" +
-                "OneToManyList<RuntimeTypeHandle, IEvent> events, " +
-                "OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents, " +
-                "OneToManyList<RuntimeTypeHandle, IEvent> sphereEvents)");
-
-            if (eventSystems.Any())
+                "public void Register(OneToManyHashSet<long, Func<SphereEventArgs, FTask>> sphereEvents)");
+            foreach (var eventSystemTypeInfo in sphereEventSystem)
             {
-                foreach (var eventSystemTypeInfo in eventSystems)
-                {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    
-                    switch (eventSystemTypeInfo.EventSystemType)
-                    {
-                        case EventSystemType.EventSystem:
-                        {
-                            builder.AppendLine($"events.Add({fieldName}.EventType().TypeHandle, {fieldName});");
-                            continue;
-                        }
-                        case EventSystemType.AsyncEventSystem:
-                        {
-                            builder.AppendLine($"asyncEvents.Add({fieldName}.EventType().TypeHandle, {fieldName});");
-                            continue;
-                        }
-                        case EventSystemType.SphereEventSystem:
-                        {
-                            builder.AppendLine($"sphereEvents.Add({fieldName}.EventType().TypeHandle, {fieldName});");
-                            continue;
-                        }
-                    }
-                }
+                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                builder.AppendLine($"var {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                builder.AppendLine($"{fieldName}TypeHashCode = {fieldName}.TypeHashCode;");
+                builder.AppendLine($"{fieldName}Delegate = {fieldName}.Invoke;");
+                builder.AppendLine($"sphereEvents.Add({fieldName}.TypeHashCode, {fieldName}Delegate);");
             }
-        
             builder.EndMethod();
             builder.AppendLine();
-        }
-        
-        /// <summary>
-        /// 生成 UnRegisterSystems 方法
-        /// </summary>
-        private static void GenerateUnRegisterMethod(SourceCodeBuilder builder, List<EventSystemTypeInfo> eventSystems)
-        {
+            // 生成取消注册方法
             builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
             builder.BeginMethod(
-                "public void UnRegisterSystems(" +
-                "OneToManyList<RuntimeTypeHandle, IEvent> events, " +
-                "OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents, " +
-                "OneToManyList<RuntimeTypeHandle, IEvent> sphereEvents)");
-            
-            if (eventSystems.Any())
+                "public void UnRegister(OneToManyHashSet<long, Func<SphereEventArgs, FTask>> sphereEvents)");
+            foreach (var eventSystemTypeInfo in sphereEventSystem)
             {
-                foreach (var eventSystemTypeInfo in eventSystems)
-                {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    
-                    switch (eventSystemTypeInfo.EventSystemType)
-                    {
-                        case EventSystemType.EventSystem:
-                        {
-                            builder.AppendLine($"events.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
-                            continue;
-                        }
-                        case EventSystemType.AsyncEventSystem:
-                        {
-                            builder.AppendLine($"asyncEvents.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
-                            continue;
-                        }
-                        case EventSystemType.SphereEventSystem:
-                        {
-                            builder.AppendLine($"sphereEvents.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
-                            continue;
-                        }
-                    }
-                }
+                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                builder.AppendLine($"sphereEvents.RemoveValue({fieldName}TypeHashCode, {fieldName}Delegate);");
             }
-        
             builder.EndMethod();
-            builder.AppendLine();
+            // 结束类和命名空间
+            builder.EndClass();
+            builder.EndNamespace();
+            builder.AppendLine("#endif",false);
+            // 输出源代码
+            context.AddSource("SphereEventRegistrar.g.cs", builder.ToString());
         }
-        
-        /// <summary>
-        /// 生成 Dispose 方法
-        /// </summary>
-        private static void GenerateDisposeMethod(SourceCodeBuilder builder, List<EventSystemTypeInfo> eventSystems)
-        {
-            builder.AddXmlComment("Dispose all resources");
-            builder.BeginMethod("public void Dispose()");
-            builder.AddComment("Clear all references");
 
-            if (eventSystems.Any())
-            {
-                foreach (var eventSystemTypeInfo in eventSystems)
-                {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    builder.AppendLine($"{fieldName} = null;");
-                }
-            }
-
-            builder.EndMethod();
-        }
-        
         /// <summary>
         /// 快速判断语法节点是否可能是 EventSystem 类
         /// </summary>

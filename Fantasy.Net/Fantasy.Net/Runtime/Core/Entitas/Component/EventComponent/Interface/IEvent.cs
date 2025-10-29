@@ -131,43 +131,4 @@ namespace Fantasy.Event
             }
         }
     }
-    /// <summary>
-    /// 领域事件的抽象类，要使用事件必须要继承这个抽象接口。
-    /// 同时实现泛型和非泛型接口，支持零装箱调用
-    /// </summary>
-    /// <typeparam name="T">要监听的事件泛型类型</typeparam>
-    public abstract class SphereEventSystem<T> : ISphereEvent<T>
-    {
-        private readonly Type _selfType = typeof(T);
-        /// <summary>
-        /// <see cref="IEvent.EventType"/>
-        /// </summary>
-        /// <returns></returns>
-        public Type EventType()
-        {
-            return _selfType;
-        }
-
-        /// <summary>
-        /// 事件调用的方法，要在这个方法里编写事件发生的逻辑
-        /// </summary>
-        /// <param name="self"></param>
-        protected abstract FTask Handler(T self);
-
-        /// <summary>
-        /// 泛型调用入口
-        /// </summary>
-        /// <param name="self">事件数据</param>
-        public async FTask Invoke(T self)
-        {
-            try
-            {
-                await Handler(self);
-            }
-            catch (Exception e)
-            {
-                Log.Error($"{_selfType.Name} Error {e}");
-            }
-        }
-    }
 }

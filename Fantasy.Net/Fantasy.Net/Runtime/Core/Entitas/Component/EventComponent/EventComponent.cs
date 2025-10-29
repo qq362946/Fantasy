@@ -16,7 +16,6 @@ namespace Fantasy.Event
         private readonly HashSet<long> _assemblyManifests = new();
         private readonly OneToManyList<RuntimeTypeHandle, IEvent> _events = new();
         private readonly OneToManyList<RuntimeTypeHandle, IEvent> _asyncEvents = new();
-        private readonly OneToManyList<RuntimeTypeHandle, IEvent> _sphereEvents = new();
 
         /// <summary>
         /// 销毁时会清理组件里的所有数据
@@ -31,7 +30,6 @@ namespace Fantasy.Event
             _assemblyManifests.Clear();
             _events.Clear();
             _asyncEvents.Clear();
-            _sphereEvents.Clear();
             AssemblyLifecycle.Remove(this);
             base.Dispose();
         }
@@ -65,10 +63,9 @@ namespace Fantasy.Event
                 {
                     OnUnLoadInner(assemblyManifest);
                 }
-                assemblyManifest.EventSystemRegistrar.RegisterSystems(
+                assemblyManifest.EventSystemRegistrar.Register(
                     _events,
-                    _asyncEvents,
-                    _sphereEvents);
+                    _asyncEvents);
                 _assemblyManifests.Add(assemblyManifestId);
                 tcs.SetResult();
             });
@@ -98,10 +95,9 @@ namespace Fantasy.Event
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
         private void OnUnLoadInner(AssemblyManifest assemblyManifest)
         {
-            assemblyManifest.EventSystemRegistrar.UnRegisterSystems(
+            assemblyManifest.EventSystemRegistrar.UnRegister(
                 _events,
-                _asyncEvents,
-                _sphereEvents);
+                _asyncEvents);
             _assemblyManifests.Remove(assemblyManifest.AssemblyManifestId);
         }
 
@@ -182,14 +178,7 @@ namespace Fantasy.Event
 
             foreach (var @event in list)
             {
-                try
-                {
-                    tasks.Add(((IAsyncEvent<TEventData>)@event).InvokeAsync(eventData));
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e);
-                }
+                tasks.Add(((IAsyncEvent<TEventData>)@event).InvokeAsync(eventData));
             }
 
             await FTask.WaitAll(tasks);

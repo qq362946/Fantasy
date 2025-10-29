@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.CompilerServices;
 using Fantasy.Pool;
 
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
@@ -13,7 +13,7 @@ namespace Fantasy.DataStructure.Collection
     /// </summary>
     /// <typeparam name="TKey">键的类型。</typeparam>
     /// <typeparam name="TValue">值的类型。</typeparam>
-    public class OneToManyListPool<TKey, TValue> : OneToManyList<TKey, TValue>, IDisposable, IPool where TKey : notnull
+    public sealed class OneToManyListPool<TKey, TValue> : OneToManyList<TKey, TValue>, IDisposable, IPool where TKey : notnull
     {
         private bool _isPool;
         private bool _isDispose;
@@ -22,9 +22,10 @@ namespace Fantasy.DataStructure.Collection
         /// 创建一个 <see cref="OneToManyListPool{TKey, TValue}"/> 一对多关系的列表池的实例。
         /// </summary>
         /// <returns>创建的实例。</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OneToManyListPool<TKey, TValue> Create()
         {
-#if FANTASY_WEBGL || FANTASY_EXPORTER
+#if FANTASY_WEBGL
             var list = Pool<OneToManyListPool<TKey, TValue>>.Rent();
 #else
             var list = MultiThreadPool.Rent<OneToManyListPool<TKey, TValue>>();
@@ -37,6 +38,7 @@ namespace Fantasy.DataStructure.Collection
         /// <summary>
         /// 释放当前对象所占用的资源，并将对象回收到对象池中。
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Dispose()
         {
             if (_isDispose)
@@ -46,7 +48,7 @@ namespace Fantasy.DataStructure.Collection
 
             _isDispose = true;
             Clear();
-#if FANTASY_WEBGL || FANTASY_EXPORTER
+#if FANTASY_WEBGL
             Pool<OneToManyListPool<TKey, TValue>>.Return(this);
 #else
             MultiThreadPool.Return(this);
@@ -57,6 +59,7 @@ namespace Fantasy.DataStructure.Collection
         /// 获取一个值，该值指示当前实例是否为对象池中的实例。
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsPool()
         {
             return _isPool;
@@ -66,6 +69,7 @@ namespace Fantasy.DataStructure.Collection
         /// 设置一个值，该值指示当前实例是否为对象池中的实例。
         /// </summary>
         /// <param name="isPool"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetIsPool(bool isPool)
         {
             _isPool = isPool;
@@ -79,9 +83,12 @@ namespace Fantasy.DataStructure.Collection
     /// <typeparam name="TValue">值的类型。</typeparam>
     public class OneToManyList<TKey, TValue> : Dictionary<TKey, List<TValue>> where TKey : notnull
     {
+        /// 用于回收和重用的空闲值集合栈（Stack比Queue性能更好）。
+        private readonly Stack<List<TValue>> _pool = new Stack<List<TValue>>();
+        /// 设置最大回收限制，用于控制值集合的最大数量。
         private readonly int _recyclingLimit = 120;
-        private static readonly List<TValue> Empty = new List<TValue>();
-        private readonly Queue<List<TValue>> _queue = new Queue<List<TValue>>();
+        /// 一个空的、不包含任何元素的列表，用于在查找失败时返回。
+        private static readonly List<TValue> _empty = new List<TValue>();
 
         /// <summary>
         /// 初始化一个新的 <see cref="OneToManyList{TKey, TValue}"/> 实例。
@@ -106,11 +113,10 @@ namespace Fantasy.DataStructure.Collection
         /// <param name="key">要搜索的键。</param>
         /// <param name="value">要搜索的值。</param>
         /// <returns>如果存在则为 <see langword="true"/>，否则为 <see langword="false"/>。</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Contains(TKey key, TValue value)
         {
-            TryGetValue(key, out var list);
-
-            return list != null && list.Contains(value);
+            return TryGetValue(key, out var list) && list.Contains(value);
         }
 
         /// <summary>
@@ -118,14 +124,14 @@ namespace Fantasy.DataStructure.Collection
         /// </summary>
         /// <param name="key">要添加值的键。</param>
         /// <param name="value">要添加的值。</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Add(TKey key, TValue value)
         {
             if (!TryGetValue(key, out var list))
             {
                 list = Fetch();
                 list.Add(value);
-                Add(key, list);
-
+                base.Add(key, list);
                 return;
             }
 
@@ -137,9 +143,15 @@ namespace Fantasy.DataStructure.Collection
         /// </summary>
         /// <param name="key">要获取值的键。</param>
         /// <returns>键对应的列表中的第一个值。</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TValue First(TKey key)
         {
-            return !TryGetValue(key, out var list) ? default : list.FirstOrDefault();
+            if (!TryGetValue(key, out var list) || list.Count == 0)
+            {
+                return default;
+            }
+
+            return list[0];
         }
 
         /// <summary>
@@ -147,39 +159,36 @@ namespace Fantasy.DataStructure.Collection
         /// </summary>
         /// <param name="key">要移除值的键。</param>
         /// <param name="value">要移除的值。</param>
-        /// <returns>如果成功移除则为 <see langword="true"/>，否则为 <see langword="false"/>。</returns>
-        public bool RemoveValue(TKey key, TValue value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void RemoveValue(TKey key, TValue value)
         {
             if (!TryGetValue(key, out var list))
             {
-                return true;
+                return;
             }
 
-            var isRemove = list.Remove(value);
+            list.Remove(value);
 
             if (list.Count == 0)
             {
-                isRemove = RemoveByKey(key);
+                RemoveKey(key);
             }
-
-            return isRemove;
         }
 
         /// <summary>
         /// 从列表中移除指定键及其关联的所有值。
         /// </summary>
         /// <param name="key">要移除的键。</param>
-        /// <returns>如果成功移除则为 <see langword="true"/>，否则为 <see langword="false"/>。</returns>
-        public bool RemoveByKey(TKey key)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void RemoveKey(TKey key)
         {
             if (!TryGetValue(key, out var list))
             {
-                return false;
+                return;
             }
 
             Remove(key);
             Recycle(list);
-            return true;
         }
 
         /// <summary>
@@ -187,46 +196,45 @@ namespace Fantasy.DataStructure.Collection
         /// </summary>
         /// <param name="key">要获取值的键。</param>
         /// <returns>键关联的所有值的列表。</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public List<TValue> GetValues(TKey key)
         {
-            if (TryGetValue(key, out List<TValue> list))
-            {
-                return list;
-            }
-
-            return Empty;
+            return TryGetValue(key, out var list) ? list : _empty;
         }
 
         /// <summary>
-        /// 清除字典中的所有键值对，并回收相关的值集合。
+        /// 清空字典中的数据和对象池。
         /// </summary>
-        public new void Clear()
+        protected new void Clear()
         {
-            foreach (var keyValuePair in this) Recycle(keyValuePair.Value);
-
             base.Clear();
+            _pool.Clear();
         }
 
         /// <summary>
-        /// 从空闲值集合队列中获取一个值集合，如果队列为空则创建一个新的值集合。
+        /// 从栈中获取一个空闲的值集合，或者创建一个新的。
         /// </summary>
-        /// <returns>从队列中获取的值集合。</returns>
+        /// <returns>值集合。</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private List<TValue> Fetch()
         {
-            return _queue.Count <= 0 ? new List<TValue>() : _queue.Dequeue();
+            return _pool.Count > 0 ? _pool.Pop() : new List<TValue>();
         }
 
         /// <summary>
-        /// 回收一个不再使用的值集合到空闲值集合队列中。
+        /// 回收值集合到栈中，以便重复利用。
         /// </summary>
         /// <param name="list">要回收的值集合。</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void Recycle(List<TValue> list)
         {
             list.Clear();
 
-            if (_recyclingLimit != 0 && _queue.Count > _recyclingLimit) return;
-
-            _queue.Enqueue(list);
+            // 优化：先检查是否需要限制，避免不必要的比较
+            if (_recyclingLimit == 0 || _pool.Count < _recyclingLimit)
+            {
+                _pool.Push(list);
+            }
         }
     }
 }

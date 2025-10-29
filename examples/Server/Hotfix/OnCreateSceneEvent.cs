@@ -1,3 +1,4 @@
+using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.DataBase;
 using Fantasy.Entitas;
@@ -6,9 +7,23 @@ using Fantasy.Event;
 using Fantasy.Helper;
 using Fantasy.SeparateTable;
 using Fantasy.Serialize;
+using Fantasy.Sphere;
 using ProtoBuf;
 
 namespace Fantasy;
+
+public sealed class MySphereEventArgs : SphereEventArgs
+{
+
+}
+
+public sealed class OnMySphereEventEvent : SphereEventSystem<MySphereEventArgs>
+{
+    protected override FTask Handler(MySphereEventArgs args)
+    {
+        throw new NotImplementedException();
+    }
+}
 
 public sealed class SubSceneTestComponent : Entity
 {

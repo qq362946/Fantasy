@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
+
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
@@ -67,12 +69,18 @@ namespace Fantasy.Assembly
         /// </summary>
         internal INetworkProtocolResponseTypeResolver NetworkProtocolResponseTypeResolver { get; set; }
         
+        /// <summary>
+        /// 自定义接口
+        /// </summary>
+        internal ICustomInterfaceRegistrar CustomInterfaceRegistrar { get; set; }
 #if FANTASY_NET
         /// <summary>
         /// 分表注册器
         /// </summary>
         internal ISeparateTableRegistrar SeparateTableRegistrar { get; set; }
-#endif       
+        internal ISphereEventRegistrar SphereEventRegistrar { get; set; }
+#endif
+        private readonly OneToManyList<long, Type> CustomInterfaces = new();
 #if FANTASY_WEBGL
         /// <summary>
         /// 程序集清单集合（WebGL 单线程版本）
@@ -92,8 +100,6 @@ namespace Fantasy.Assembly
         /// </summary>
         internal void Clear()
         {
-            EventSystemRegistrar?.Dispose();
-            
             Assembly = null;
             NetworkProtocolRegistrar = null;
             EventSystemRegistrar = null;
@@ -102,6 +108,7 @@ namespace Fantasy.Assembly
             EntityTypeCollectionRegistrar = null;
 #if FANTASY_NET
             SeparateTableRegistrar = null;
+            SphereEventRegistrar = null;
 #endif
         }
         
@@ -123,6 +130,8 @@ namespace Fantasy.Assembly
         /// <param name="separateTableRegistrar">分表注册器</param>
         /// <param name="networkProtocolOpCodeResolver">网络协议 OpCode 解析器接口</param>
         /// <param name="networkProtocolResponseTypeResolver">网络协议 Response 解析器接口</param>
+        /// <param name="sphereEventRegistrar">领域事件系统注册器</param>
+        /// <param name="customInterfaceRegistrar">自定接口注册器</param>
         public static void Register(
             long assemblyManifestId,
             System.Reflection.Assembly assembly,
@@ -133,7 +142,9 @@ namespace Fantasy.Assembly
             IEntityTypeCollectionRegistrar entityTypeCollectionRegistrar,
             ISeparateTableRegistrar separateTableRegistrar,
             INetworkProtocolOpCodeResolver networkProtocolOpCodeResolver,
-            INetworkProtocolResponseTypeResolver networkProtocolResponseTypeResolver)
+            INetworkProtocolResponseTypeResolver networkProtocolResponseTypeResolver,
+            ISphereEventRegistrar sphereEventRegistrar,
+            ICustomInterfaceRegistrar customInterfaceRegistrar)
         {
             var manifest = new AssemblyManifest
             {
@@ -146,9 +157,12 @@ namespace Fantasy.Assembly
                 EntityTypeCollectionRegistrar = entityTypeCollectionRegistrar,
                 SeparateTableRegistrar = separateTableRegistrar,
                 NetworkProtocolOpCodeResolver = networkProtocolOpCodeResolver,
-                NetworkProtocolResponseTypeResolver = networkProtocolResponseTypeResolver
+                NetworkProtocolResponseTypeResolver = networkProtocolResponseTypeResolver,
+                SphereEventRegistrar = sphereEventRegistrar,
+                CustomInterfaceRegistrar = customInterfaceRegistrar
             };
-
+            
+            customInterfaceRegistrar.Register(manifest.CustomInterfaces);
             Manifests.TryAdd(assemblyManifestId, manifest);
             AssemblyLifecycle.OnLoad(manifest).Coroutine();
         }
@@ -168,6 +182,7 @@ namespace Fantasy.Assembly
         /// <param name="entityTypeCollectionRegistrar">实体类型集合注册器</param>
         /// <param name="networkProtocolOpCodeResolver">网络协议 OpCode 解析器接口</param>
         /// <param name="networkProtocolResponseTypeResolver">网络协议 Response 解析器接口</param>
+        /// <param name="customInterfaceRegistrar">自定接口注册器</param>
         public static void Register(
             long assemblyManifestId,
             System.Reflection.Assembly assembly,
@@ -177,7 +192,8 @@ namespace Fantasy.Assembly
             IMessageHandlerResolver messageHandlerResolver,
             IEntityTypeCollectionRegistrar entityTypeCollectionRegistrar,
             INetworkProtocolOpCodeResolver networkProtocolOpCodeResolver,
-            INetworkProtocolResponseTypeResolver networkProtocolResponseTypeResolver)
+            INetworkProtocolResponseTypeResolver networkProtocolResponseTypeResolver,
+            ICustomInterfaceRegistrar customInterfaceRegistrar)
         {
             var manifest = new AssemblyManifest
             {
@@ -189,7 +205,8 @@ namespace Fantasy.Assembly
                 MessageHandlerResolver = messageHandlerResolver,
                 EntityTypeCollectionRegistrar = entityTypeCollectionRegistrar,
                 NetworkProtocolOpCodeResolver = networkProtocolOpCodeResolver,
-                NetworkProtocolResponseTypeResolver = networkProtocolResponseTypeResolver
+                NetworkProtocolResponseTypeResolver = networkProtocolResponseTypeResolver,
+                CustomInterfaceRegistrar = customInterfaceRegistrar
             };
 #if FANTASY_WEBGL
             Manifests[assemblyManifestId] = manifest;
@@ -210,11 +227,13 @@ namespace Fantasy.Assembly
             {
                 AssemblyLifecycle.OnUnLoad(manifest).Coroutine();
                 Manifests.Remove(assemblyManifestId);
+                manifest.CustomInterfaceRegistrar.Register(manifest.CustomInterfaces);
             }
 #else
             if (Manifests.TryRemove(assemblyManifestId, out var manifest))
             {
                 AssemblyLifecycle.OnUnLoad(manifest).Coroutine();
+                manifest.CustomInterfaceRegistrar.Register(manifest.CustomInterfaces);
             }
 #endif
         }
@@ -231,6 +250,58 @@ namespace Fantasy.Assembly
                 {
                     yield return assemblyManifest;
                 }
+            }
+        }
+
+        /// <summary>
+        /// 获取所有程序集中实现ICustomRegistrar接口中指定类型的所有类型。
+        /// </summary>
+        /// <returns>所有程序集中实现ICustomRegistrar接口中指定类型的所有类型。</returns>
+        public static IEnumerable<Type> ForEach<T>()
+        {
+            if (!typeof(T).IsInterface)
+            {
+                yield break;
+            }
+            
+            var hashCode = TypeHashCache<T>.HashCode;
+            foreach (var (_, assemblyManifest) in Manifests)
+            {
+                if (!assemblyManifest.CustomInterfaces.TryGetValue(hashCode, out var customRegistrars))
+                {
+                    continue;
+                }
+
+                foreach (var customRegistrar in customRegistrars)
+                {
+                    yield return customRegistrar;
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 获取指定程序集中实现指定类型的所有类型。
+        /// </summary>
+        /// <param name="assemblyManifest">程序集清单。</param>
+        /// <returns>指定程序集中实现指定类型的类型。</returns>
+        public static IEnumerable<Type> ForEach<T>(AssemblyManifest assemblyManifest)
+        {
+            if (!typeof(T).IsInterface)
+            {
+                yield break;
+            }
+
+
+            var hashCode = TypeHashCache<T>.HashCode;
+            
+            if (!assemblyManifest.CustomInterfaces.TryGetValue(hashCode, out var customRegistrars))
+            {
+                yield break;
+            }
+            
+            foreach (var type in customRegistrars)
+            {
+                yield return type;
             }
         }
 
