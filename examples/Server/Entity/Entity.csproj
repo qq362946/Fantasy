@@ -23,9 +23,7 @@
 
     <!-- Source Generator Reference -->
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj"
-                        OutputItemType="Analyzer"
-                        ReferenceOutputAssembly="false" />
+      <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
 </Project>

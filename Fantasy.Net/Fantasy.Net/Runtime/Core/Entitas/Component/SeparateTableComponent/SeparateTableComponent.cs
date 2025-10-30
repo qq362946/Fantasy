@@ -3,6 +3,7 @@
 
 using Fantasy.Assembly;
 using Fantasy.Async;
+using Fantasy.Database;
 using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
@@ -128,6 +129,7 @@ namespace Fantasy.SeparateTable
         /// 从数据库加载指定实体的所有分表数据，并自动建立父子关系。
         /// </summary>
         /// <param name="entity">需要加载分表数据的实体实例。</param>
+        /// <param name="dbSession">指定的数据库会话。</param>
         /// <typeparam name="T">实体的泛型类型，必须继承自 <see cref="Entity"/>。</typeparam>
         /// <returns>异步任务。</returns>
         /// <remarks>
@@ -141,7 +143,7 @@ namespace Fantasy.SeparateTable
         /// await separateTableComponent.Load(player); // 加载玩家的所有分表数据
         /// </code>
         /// </example>
-        public async FTask LoadWithSeparateTables<T>(T entity) where T : Entity
+        public async FTask LoadWithSeparateTables<T>(T entity,IDbSession dbSession) where T : Entity
         {
             // 检查该实体类型是否配置了分表
             if (!_separateTables.TryGetValue(entity.TypeHashCode, out var separateTables))
@@ -149,13 +151,11 @@ namespace Fantasy.SeparateTable
                 return;
             }
 
-            var worldDateBase = Scene.World.DataBase;
-
             // 遍历所有分表配置，逐个加载
             foreach (var separateTable in separateTables)
             {
-                // 使用实体ID作为查询条件，从指定的集合中加载分表实体
-                var separateTableEntity = await worldDateBase.QueryNotLock<Entity>(
+                // 使用实体ID作为查询条件，加载分表实体
+                var separateTableEntity = await dbSession.QueryNotLock<Entity>(
                     entity.Id, true, separateTable.TableName);
 
                 if (separateTableEntity == null)
@@ -172,6 +172,7 @@ namespace Fantasy.SeparateTable
         /// 将实体及其所有分表组件保存到数据库中。
         /// </summary>
         /// <param name="entity">需要保存的实体实例。</param>
+        /// <param name="dbSession">指定的数据库会话。</param>
         /// <typeparam name="T">实体的泛型类型，必须继承自 <see cref="Entity"/> 并具有无参构造函数。</typeparam>
         /// <returns>异步任务。</returns>
         /// <remarks>
@@ -186,13 +187,13 @@ namespace Fantasy.SeparateTable
         /// await separateTableComponent.Save(player); // 保存玩家及分表数据
         /// </code>
         /// </example>
-        public async FTask PersistAggregate<T>(T entity) where T : Entity, new()
+        public async FTask PersistAggregate<T>(T entity, IDbSession dbSession) where T : Entity, new()
         {
             // 检查该实体类型是否配置了分表
             if (!_separateTables.TryGetValue(entity.TypeHashCode, out var separateTables))
             {
                 // 没有分表配置，直接保存实体
-                await entity.Scene.World.DataBase.Save(entity);
+                await dbSession.Save(entity);
                 return;
             }
 
@@ -211,7 +212,7 @@ namespace Fantasy.SeparateTable
             }
 
             // 批量保存实体ID及其所有分表组件
-            await entity.Scene.World.DataBase.Save(entity.Id, saveSeparateTables);
+            await dbSession.Save(entity.Id, saveSeparateTables);
         }
 
         #endregion

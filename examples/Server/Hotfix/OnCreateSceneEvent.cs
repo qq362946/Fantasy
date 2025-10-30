@@ -1,6 +1,6 @@
 using Fantasy.Assembly;
 using Fantasy.Async;
-using Fantasy.DataBase;
+using Fantasy.Database;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
 using Fantasy.Event;
@@ -77,7 +77,9 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         //     Log.Debug($"time = {time} now = {now} epochThisYear = {epochThisYear}");
         // }
         var scene = self.Scene;
-        
+
+        await FTask.CompletedTask;
+
         switch (scene.SceneType)
         {
             case 6666:
@@ -135,6 +137,13 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
         }
 
-        await FTask.CompletedTask;
+        //测试FTable
+        if (scene.SceneConfigId == 1001)
+        {
+            var TestFTableRoot =  scene.AddComponent<FTableExampleRoot>();
+            //TestFTableRoot.StartTest<PostgreSQL>(TestWhat.FastDeploy, dutyId: 0).Coroutine();
+            //TestFTableRoot.StartTest<MongoDb>(TestWhat.FastDeploy, dutyId: 2).Coroutine();
+            //TestFTableRoot.StartTest<MongoDb>(TestWhat.Insert, dutyId: 2).Coroutine();
+        }       
     }
 }

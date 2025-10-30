@@ -17,7 +17,7 @@ namespace Fantasy.Async
             _coroutineLockComponent = coroutineLockComponent;
         }
 
-        public WaitCoroutineLock Rent(CoroutineLock coroutineLock, ref long coroutineLockQueueKey, string tag = null, int timeOut = 30000)
+        public WaitCoroutineLock Rent(ICoroutineLock coroutineLock, ref long coroutineLockQueueKey, string tag = null, int timeOut = 30000)
         {
             var timerId = 0L;
             var lockId = _coroutineLockComponent.LockId;
@@ -50,18 +50,18 @@ namespace Fantasy.Async
         protected override void Handler(CoroutineLockTimeout self)
         {
             var selfWaitCoroutineLock = self.WaitCoroutineLock;
-            
+
             if (self.LockId != selfWaitCoroutineLock.LockId)
             {
                 return;
             }
-            
-            Log.Error($"coroutine lock timeout CoroutineLockQueueType:{selfWaitCoroutineLock.CoroutineLock.CoroutineLockType} Key:{selfWaitCoroutineLock.CoroutineLockQueueKey} Tag:{selfWaitCoroutineLock.Tag}");
+
+            Log.Error($"coroutine lock timeout LockDuty:{selfWaitCoroutineLock.CoroutineLock.LockDuty} Key:{selfWaitCoroutineLock.CoroutineLockQueueKey} Tag:{selfWaitCoroutineLock.Tag}");
         }
     }
 
     /// <summary>
-    /// 一个协程锁的实例，用户可以用过这个手动释放锁
+    /// 一个协程锁的等待器, 用户通过这里释放锁。(通常使用 using 语句)
     /// </summary>
     public sealed class WaitCoroutineLock : IPool, IDisposable
     {
@@ -70,12 +70,12 @@ namespace Fantasy.Async
         internal long LockId { get; private set; }
         internal long TimerId { get; private set; }
         internal long CoroutineLockQueueKey { get; private set; }
-        internal CoroutineLock CoroutineLock { get; private set; }
+        internal ICoroutineLock CoroutineLock { get; private set; }
 
         private bool _isSetResult;
         private FTask<WaitCoroutineLock> _tcs;
         private WaitCoroutineLockPool _waitCoroutineLockPool;
-        internal void Initialize(CoroutineLock coroutineLock, WaitCoroutineLockPool waitCoroutineLockPool, ref long coroutineLockQueueKey, ref long timerId, ref long lockId, string tag)
+        internal void Initialize(ICoroutineLock coroutineLock, WaitCoroutineLockPool waitCoroutineLockPool, ref long coroutineLockQueueKey, ref long timerId, ref long lockId, string tag)
         {
             Tag = tag;
             LockId = lockId;

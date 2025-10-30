@@ -42,22 +42,36 @@
 
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
-      <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+      <FrameworkReference Include="Microsoft.AspNetCore.App" />
+      <PackageReference Include="Dapper" Version="2.1.66" />
       <PackageReference Include="MongoDB.Bson" Version="3.4.3" />
       <PackageReference Include="MongoDB.Driver" Version="3.4.3" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="Npgsql" Version="9.0.4" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
       <PackageReference Include="protobuf-net" Version="3.2.56" />
     </ItemGroup>
 
     <ItemGroup>
         <None Include="Fantasy-Net.targets" Pack="true" PackagePath="buildTransitive" />
-        <None Include="icon.png" Pack="true" PackagePath="\"/>
-        <None Include="LICENSE" Pack="true" PackagePath="\"/>
-        <None Include="README.md" Pack="true" PackagePath="\"/>
+        <None Include="icon.png" Pack="true" PackagePath="\" />
+        <None Include="LICENSE" Pack="true" PackagePath="\" />
+        <None Include="README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
       <PackageReference Include="System.IO.Pipelines" Version="9.0.8" />
+    </ItemGroup>
+
+    <!-- Source Generator Reference -->
+    <ItemGroup>
+      <ProjectReference Include="..\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" SetTargetFramework="TargetFramework=netstandard2.0" />
+    </ItemGroup>
+
+    <!-- 将 Source Generator 打包到 NuGet -->
+    <ItemGroup>
+        <!-- 获取 Fantasy.SourceGenerator 的输出 DLL -->
+        <None Include="..\Fantasy.SourceGenerator\bin\$(Configuration)\netstandard2.0\Fantasy.SourceGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     </ItemGroup>
 
     <!-- Source Generator Reference -->
