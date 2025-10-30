@@ -256,15 +256,11 @@ namespace Fantasy.Assembly
         /// <summary>
         /// 获取所有程序集中实现ICustomRegistrar接口中指定类型的所有类型。
         /// </summary>
-        /// <returns>所有程序集中实现ICustomRegistrar接口中指定类型的所有类型。</returns>
-        public static IEnumerable<Type> ForEach<T>()
+        /// <param name="type">类型</param>
+        /// <returns></returns>
+        public static IEnumerable<Type> ForEach(Type type)
         {
-            if (!typeof(T).IsInterface)
-            {
-                yield break;
-            }
-            
-            var hashCode = TypeHashCache<T>.HashCode;
+            var hashCode = TypeHashCache.GetHashCode(type);
             foreach (var (_, assemblyManifest) in Manifests)
             {
                 if (!assemblyManifest.CustomInterfaces.TryGetValue(hashCode, out var customRegistrars))
@@ -279,6 +275,49 @@ namespace Fantasy.Assembly
             }
         }
         
+
+        /// <summary>
+        /// 获取所有程序集中实现ICustomRegistrar接口中指定类型的所有类型。
+        /// </summary>
+        /// <returns>所有程序集中实现ICustomRegistrar接口中指定类型的所有类型。</returns>
+        public static IEnumerable<Type> ForEach<T>()
+        {
+            var hashCode = TypeHashCache<T>.HashCode;
+            foreach (var (_, assemblyManifest) in Manifests)
+            {
+                if (!assemblyManifest.CustomInterfaces.TryGetValue(hashCode, out var customRegistrars))
+                {
+                    continue;
+                }
+
+                foreach (var customRegistrar in customRegistrars)
+                {
+                    yield return customRegistrar;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取指定程序集中实现指定类型的所有类型。
+        /// </summary>
+        /// <param name="assemblyManifest">程序集清单。</param>
+        /// <param name="type">类型</param>
+        /// <returns></returns>
+        public static IEnumerable<Type> ForEach(AssemblyManifest assemblyManifest, Type type)
+        {
+            var hashCode = TypeHashCache.GetHashCode(type);
+            
+            if (!assemblyManifest.CustomInterfaces.TryGetValue(hashCode, out var customRegistrars))
+            {
+                yield break;
+            }
+            
+            foreach (var customType in customRegistrars)
+            {
+                yield return customType;
+            }
+        }
+        
         /// <summary>
         /// 获取指定程序集中实现指定类型的所有类型。
         /// </summary>
@@ -286,12 +325,6 @@ namespace Fantasy.Assembly
         /// <returns>指定程序集中实现指定类型的类型。</returns>
         public static IEnumerable<Type> ForEach<T>(AssemblyManifest assemblyManifest)
         {
-            if (!typeof(T).IsInterface)
-            {
-                yield break;
-            }
-
-
             var hashCode = TypeHashCache<T>.HashCode;
             
             if (!assemblyManifest.CustomInterfaces.TryGetValue(hashCode, out var customRegistrars))

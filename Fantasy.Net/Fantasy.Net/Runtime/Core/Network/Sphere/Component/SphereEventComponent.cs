@@ -234,9 +234,19 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     /// </summary>
     /// <param name="fromRouteId">远程服务器的RouteId</param>
     /// <param name="typeHashCode">事件类型的HashCode</param>
-    internal void UnregisterRemoteSubscriber(long fromRouteId, long typeHashCode)
+    public void UnregisterRemoteSubscriber(long fromRouteId, long typeHashCode)
     {
         _remoteSubscribers.RemoveValue(typeHashCode, fromRouteId);
+    }
+
+    /// <summary>
+    /// 注销远程订阅者
+    /// </summary>
+    /// <param name="fromRouteId">远程服务器的RouteId</param>
+    /// <typeparam name="T">事件类型</typeparam>
+    public void UnregisterRemoteSubscriber<T>(long fromRouteId) where T : SphereEventArgs, new()
+    {
+        UnregisterRemoteSubscriber(fromRouteId, TypeHashCache<T>.HashCode);
     }
 
     /// <summary>
@@ -244,7 +254,7 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     /// </summary>
     /// <param name="fromRouteId">远程服务器的RouteId</param>
     /// <typeparam name="T">事件类型</typeparam>
-    public async FTask RevokeRemoteSubscriber<T>(long fromRouteId) where T : ISphereEvent
+    public async FTask RevokeRemoteSubscriber<T>(long fromRouteId) where T : SphereEventArgs, new()
     {
         var typeHashCode = TypeHashCache<T>.HashCode;
         var response = await Scene.NetworkMessagingComponent.CallInnerRoute(fromRouteId,
