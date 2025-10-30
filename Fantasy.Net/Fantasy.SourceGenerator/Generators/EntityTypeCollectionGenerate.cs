@@ -82,23 +82,30 @@ namespace Fantasy.SourceGenerator.Generators
         {
             builder.AddXmlComment("All Entity Types");
             builder.BeginMethod("public List<Type> GetEntityTypes()");
-            
-            if (entityTypeInfos.Any())
+
+            try
             {
-                builder.AppendLine($"return new List<Type>({entityTypeInfos.Count})");
-                builder.AppendLine("{");
-                builder.Indent();
-                foreach (var system in entityTypeInfos)
+                if (entityTypeInfos.Any())
                 {
-                    builder.AppendLine($"typeof({system.EntityTypeFullName}),");
+                    builder.AppendLine($"return new List<Type>({entityTypeInfos.Count})");
+                    builder.AppendLine("{");
+                    builder.Indent();
+                    foreach (var system in entityTypeInfos)
+                    {
+                        builder.AppendLine($"typeof({system.EntityTypeFullName}),");
+                    }
+                    builder.Unindent();
+                    builder.AppendLine("};");
+                    builder.AppendLine();
                 }
-                builder.Unindent();
-                builder.AppendLine("};");
-                builder.AppendLine();
+                else
+                {
+                    builder.AppendLine($"return new List<Type>();");
+                }
             }
-            else
+            catch (Exception e)
             {
-                builder.AppendLine($"return new List<Type>();");
+                Console.WriteLine(e);
             }
             
             builder.EndMethod();

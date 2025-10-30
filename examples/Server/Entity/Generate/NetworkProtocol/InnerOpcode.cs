@@ -24,5 +24,7 @@ namespace Fantasy
 		 public const uint Map2G_TestRoamingMessageResponse = 3221235473;
 		 public const uint G2Map_SubscribeSphereEventRequest = 1073751832;
 		 public const uint G2Map_SubscribeSphereEventResponse = 1207969560;
+		 public const uint G2Map_UnsubscribeSphereEventRequest = 1073751833;
+		 public const uint Map2G_UnsubscribeSphereEventResponse = 1207969561;
 	}
 }

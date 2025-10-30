@@ -10,7 +10,7 @@ namespace Fantasy.Platform.Net;
 /// <summary>
 /// 一个进程的实例
 /// </summary>
-public sealed class Process : IDisposable
+public sealed class Process
 {
     /// <summary>
     /// 当前进程的Id
@@ -45,17 +45,9 @@ public sealed class Process : IDisposable
         _processScenes.TryAdd(scene.SceneConfigId, scene);
     }
 
-    internal void RemoveSceneToProcess(Scene scene, bool isDispose)
+    internal void RemoveSceneToProcess(Scene scene)
     {
-        if (!_processScenes.Remove(scene.SceneConfigId, out _))
-        {
-            return;
-        }
-
-        if (isDispose)
-        {
-            scene.Dispose();
-        }
+        _processScenes.Remove(scene.SceneConfigId, out _);
     }
     
     internal bool TryGetSceneToProcess(long routeId, out Scene scene)
@@ -68,10 +60,11 @@ public sealed class Process : IDisposable
     {
         return _processScenes.TryGetValue(sceneId, out scene);
     }
+
     /// <summary>
-    /// 销毁方法
+    /// 关闭
     /// </summary>
-    public void Dispose()
+    public async FTask Close()
     {
         if (_processScenes.IsEmpty)
         {
@@ -87,7 +80,7 @@ public sealed class Process : IDisposable
 
         while (sceneQueue.TryDequeue(out var removeScene))
         {
-            removeScene.Dispose();
+            await removeScene.Close();
         }
 
         _processScenes.Clear();

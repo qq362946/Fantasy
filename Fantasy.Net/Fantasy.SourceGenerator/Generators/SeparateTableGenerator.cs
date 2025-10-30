@@ -167,17 +167,24 @@ namespace Fantasy.SourceGenerator.Generators
             SeparateTableInfo.Indent(2);
             SeparateTableInfo.AppendLine("{");
             SeparateTableInfo.Indent(1);
-            
-            if (separateTableTypeInfoList.Any())
+
+            try
             {
-                foreach (var separateTableTypeInfo in separateTableTypeInfoList)
+                if (separateTableTypeInfoList.Any())
                 {
-                    foreach (var separateTableInfo in separateTableTypeInfo.SeparateTableInfo)
+                    foreach (var separateTableTypeInfo in separateTableTypeInfoList)
                     {
-                        SeparateTableInfo.AppendLine(
-                            $"new ISeparateTableRegistrar.SeparateTableInfo(typeof({separateTableInfo.Key}) ,typeof({separateTableTypeInfo.TypeFullName}) ,\"{separateTableInfo.Value}\"),");
+                        foreach (var separateTableInfo in separateTableTypeInfo.SeparateTableInfo)
+                        {
+                            SeparateTableInfo.AppendLine(
+                                $"new ISeparateTableRegistrar.SeparateTableInfo(typeof({separateTableInfo.Key}) ,typeof({separateTableTypeInfo.TypeFullName}) ,\"{separateTableInfo.Value}\"),");
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
 
             SeparateTableInfo.Unindent();

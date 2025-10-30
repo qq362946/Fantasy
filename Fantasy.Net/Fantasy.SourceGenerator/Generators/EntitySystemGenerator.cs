@@ -116,21 +116,28 @@ namespace Fantasy.SourceGenerator.Generators
         
         private static void GenerateFields(SourceCodeBuilder builder, List<EntitySystemTypeInfo> entitySystemTypeInfos)
         {
-            builder.AddComment("Store registered entity system for UnRegister");
+            try
+            {
+                builder.AddComment("Store registered entity system for UnRegister");
 
-            if (!entitySystemTypeInfos.Any())
-            {
-                return;
-            }
+                if (!entitySystemTypeInfos.Any())
+                {
+                    return;
+                }
             
-            foreach (var eventSystemTypeInfo in entitySystemTypeInfos)
-            {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"private {eventSystemTypeInfo.GlobalTypeFullName} {fieldName} = new {eventSystemTypeInfo.GlobalTypeFullName}();");
-                builder.AppendLine($"private const long _typeHashCode{fieldName} = {eventSystemTypeInfo.EntityTypeHashCode};");
-            }
+                foreach (var eventSystemTypeInfo in entitySystemTypeInfos)
+                {
+                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                    builder.AppendLine($"private {eventSystemTypeInfo.GlobalTypeFullName} {fieldName} = new {eventSystemTypeInfo.GlobalTypeFullName}();");
+                    builder.AppendLine($"private const long _typeHashCode{fieldName} = {eventSystemTypeInfo.EntityTypeHashCode};");
+                }
             
-            builder.AppendLine();
+                builder.AppendLine();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
         
         private static void GenerateRegisterMethod(SourceCodeBuilder builder, List<EntitySystemTypeInfo> entitySystemTypeInfos)
@@ -154,45 +161,53 @@ namespace Fantasy.SourceGenerator.Generators
                 "Dictionary<long, Action<Entity>> deserializeSystems, " +
                 "Dictionary<long, Action<Entity>> lateUpdateSystems)");
             builder.AppendLine("#endif", false);
-            
-            if (entitySystemTypeInfos.Any())
-            {
-                foreach (var systemTypeInfo in entitySystemTypeInfos)
-                {
-                    var fieldName = $"_{systemTypeInfo.TypeName.ToCamelCase()}";
 
-                    switch (systemTypeInfo.EntitySystemType)
+            try
+            {
+                if (entitySystemTypeInfos.Any())
+                {
+                    foreach (var systemTypeInfo in entitySystemTypeInfos)
                     {
-                        case EntitySystemType.AwakeSystem:
+                        var fieldName = $"_{systemTypeInfo.TypeName.ToCamelCase()}";
+
+                        switch (systemTypeInfo.EntitySystemType)
                         {
-                            builder.AppendLine($"awakeSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
-                            continue;
-                        }
-                        case EntitySystemType.UpdateSystem:
-                        {
-                            builder.AppendLine($"updateSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
-                            continue;
-                        }
-                        case EntitySystemType.DestroySystem:
-                        {
-                            builder.AppendLine($"destroySystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
-                            continue;
-                        }
-                        case EntitySystemType.DeserializeSystem:
-                        {
-                            builder.AppendLine($"deserializeSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
-                            continue;
-                        }
-                        case EntitySystemType.LateUpdateSystem:
-                        {
-                            builder.AppendLine("#if FANTASY_UNITY", false);
-                            builder.AppendLine($"awakeSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
-                            builder.AppendLine("#endif", false);
-                            continue;
+                            case EntitySystemType.AwakeSystem:
+                            {
+                                builder.AppendLine($"awakeSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
+                                continue;
+                            }
+                            case EntitySystemType.UpdateSystem:
+                            {
+                                builder.AppendLine($"updateSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
+                                continue;
+                            }
+                            case EntitySystemType.DestroySystem:
+                            {
+                                builder.AppendLine($"destroySystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
+                                continue;
+                            }
+                            case EntitySystemType.DeserializeSystem:
+                            {
+                                builder.AppendLine($"deserializeSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
+                                continue;
+                            }
+                            case EntitySystemType.LateUpdateSystem:
+                            {
+                                builder.AppendLine("#if FANTASY_UNITY", false);
+                                builder.AppendLine($"awakeSystems.Add(_typeHashCode{fieldName}, {fieldName}.Invoke);");
+                                builder.AppendLine("#endif", false);
+                                continue;
+                            }
                         }
                     }
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
             builder.EndMethod();
             builder.AppendLine();
         }
@@ -219,43 +234,50 @@ namespace Fantasy.SourceGenerator.Generators
                 "Dictionary<long, Action<Entity>> lateUpdateSystems)");
             builder.AppendLine("#endif", false);
 
-            if (entitySystemTypeInfos.Any())
+            try
             {
-                foreach (var systemTypeInfo in entitySystemTypeInfos)
+                if (entitySystemTypeInfos.Any())
                 {
-                    var fieldName = $"_{systemTypeInfo.TypeName.ToCamelCase()}";
-
-                    switch (systemTypeInfo.EntitySystemType)
+                    foreach (var systemTypeInfo in entitySystemTypeInfos)
                     {
-                        case EntitySystemType.AwakeSystem:
+                        var fieldName = $"_{systemTypeInfo.TypeName.ToCamelCase()}";
+
+                        switch (systemTypeInfo.EntitySystemType)
                         {
-                            builder.AppendLine($"awakeSystems.Remove(_typeHashCode{fieldName});");
-                            continue;
-                        }
-                        case EntitySystemType.UpdateSystem:
-                        {
-                            builder.AppendLine($"updateSystems.Remove(_typeHashCode{fieldName});");
-                            continue;
-                        }
-                        case EntitySystemType.DestroySystem:
-                        {
-                            builder.AppendLine($"destroySystems.Remove(_typeHashCode{fieldName});");
-                            continue;
-                        }
-                        case EntitySystemType.DeserializeSystem:
-                        {
-                            builder.AppendLine($"deserializeSystems.Remove(_typeHashCode{fieldName});");
-                            continue;
-                        }
-                        case EntitySystemType.LateUpdateSystem:
-                        {
-                            builder.AppendLine("#if FANTASY_UNITY", false);
-                            builder.AppendLine($"lateUpdateSystem.Remove(_typeHashCode{fieldName});");
-                            builder.AppendLine("#endif", false);
-                            continue;
+                            case EntitySystemType.AwakeSystem:
+                            {
+                                builder.AppendLine($"awakeSystems.Remove(_typeHashCode{fieldName});");
+                                continue;
+                            }
+                            case EntitySystemType.UpdateSystem:
+                            {
+                                builder.AppendLine($"updateSystems.Remove(_typeHashCode{fieldName});");
+                                continue;
+                            }
+                            case EntitySystemType.DestroySystem:
+                            {
+                                builder.AppendLine($"destroySystems.Remove(_typeHashCode{fieldName});");
+                                continue;
+                            }
+                            case EntitySystemType.DeserializeSystem:
+                            {
+                                builder.AppendLine($"deserializeSystems.Remove(_typeHashCode{fieldName});");
+                                continue;
+                            }
+                            case EntitySystemType.LateUpdateSystem:
+                            {
+                                builder.AppendLine("#if FANTASY_UNITY", false);
+                                builder.AppendLine($"lateUpdateSystem.Remove(_typeHashCode{fieldName});");
+                                builder.AppendLine("#endif", false);
+                                continue;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
             
             builder.EndMethod();

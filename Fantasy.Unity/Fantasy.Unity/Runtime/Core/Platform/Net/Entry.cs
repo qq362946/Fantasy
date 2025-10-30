@@ -17,6 +17,7 @@ namespace Fantasy.Platform.Net;
 /// <exception cref="NotSupportedException">不支持的 ProcessType 类型异常。</exception>
 public static class Entry
 {
+    private static readonly List<Process> ProcessList = new List<Process>();
     /// <summary>
     /// 启动Fantasy.Net
     /// </summary>
@@ -40,7 +41,12 @@ public static class Entry
         {
             foreach (var processConfig in ProcessConfigData.Instance.ForEachByStartupGroup((uint)ProgramDefine.StartupGroup))
             {
-                await Process.Create(processConfig.Id);
+                var process = await Process.Create(processConfig.Id);
+                if (process != null)
+                {
+                    ProcessList.Add(process);
+                }
+                
             }
 
             return;
@@ -52,14 +58,22 @@ public static class Entry
             {
                 foreach (var processConfig in ProcessConfigData.Instance.List)
                 {
-                    await Process.Create(processConfig.Id);
+                    var process = await Process.Create(processConfig.Id);
+                    if (process != null)
+                    {
+                        ProcessList.Add(process);
+                    }
                 }
                 
                 return;
             }
             case ProcessMode.Release:
             {
-                await Process.Create(ProgramDefine.ProcessId);
+                var process = await Process.Create(ProgramDefine.ProcessId);
+                if (process != null)
+                {
+                    ProcessList.Add(process);
+                }
                 return;
             }
         }
@@ -108,9 +122,14 @@ public static class Entry
     /// <summary>
     /// 关闭 Fantasy
     /// </summary>
-    public static void Close()
+    public static async FTask Close()
     {
-        AssemblyManifest.Dispose().Coroutine();
+        foreach (var process in ProcessList)
+        {
+            await process.Close();
+        }
+        
+        await AssemblyManifest.Dispose();
         SerializerManager.Dispose();
     }
 }

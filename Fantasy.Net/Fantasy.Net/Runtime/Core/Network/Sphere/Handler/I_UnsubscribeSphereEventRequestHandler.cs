@@ -34,8 +34,7 @@ internal sealed class I_UnsubscribeSphereEventRequestHandler : RouteRPC<Scene, I
 
         // 从领域事件组件中移除远程订阅者
         // 移除后,本地场景触发对应类型的领域事件时,不再推送到该订阅者
-        scene.SphereEventComponent.UnregisterRemoteSubscriber(request.RouteId, request.TypeHashCode);
-        await FTask.CompletedTask;
+        await scene.SphereEventComponent.UnregisterRemoteSubscriber(request.RouteId, request.TypeHashCode);
     }
 }
 #endif

@@ -217,3 +217,12 @@ message G2C_UnsubscribeSphereEventResponse // IResponse
 {
 
 }
+/// 通知Map取消一个订阅领域事件
+message C2G_MapUnsubscribeSphereEventRequest // IRequest,G2C_MapUnsubscribeSphereEventResponse
+{
+
+}
+message G2C_MapUnsubscribeSphereEventResponse // IResponse
+{
+
+}

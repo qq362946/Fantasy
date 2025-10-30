@@ -145,39 +145,51 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AddXmlComment($"Auto-generated Event System registration class for {assemblyName}");
             builder.BeginClass("EventSystemRegistrar", "internal sealed", "IEventSystemRegistrar");
             // 生成字段用于存储已注册的事件处理器（用于 UnRegister）
-            builder.AddComment("Store registered event handlers for UnRegister");
-            foreach (var eventSystemTypeInfo in eventSystems)
+            try
             {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine(
-                    $"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                builder.AddComment("Store registered event handlers for UnRegister");
+                foreach (var eventSystemTypeInfo in eventSystems)
+                {
+                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                    builder.AppendLine(
+                        $"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                }
+                foreach (var eventSystemTypeInfo in asyncEventSystem)
+                {
+                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                    builder.AppendLine(
+                        $"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                }
+                builder.AppendLine();
             }
-            foreach (var eventSystemTypeInfo in asyncEventSystem)
+            catch (Exception e)
             {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine(
-                    $"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                Console.WriteLine(e);
             }
-            builder.AppendLine();
             // 生成 RegisterSystems 方法
             builder.AddXmlComment("Register all Event Systems to the containers");
             builder.BeginMethod(
                 "public void Register(" +
                 "OneToManyList<RuntimeTypeHandle, IEvent> events, " +
                 "OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents)");
-            
-            foreach (var eventSystemTypeInfo in eventSystems)
+            try
             {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"events.Add({fieldName}.EventType().TypeHandle, {fieldName});");
-            }
+                foreach (var eventSystemTypeInfo in eventSystems)
+                {
+                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                    builder.AppendLine($"events.Add({fieldName}.EventType().TypeHandle, {fieldName});");
+                }
 
-            foreach (var eventSystemTypeInfo in asyncEventSystem)
+                foreach (var eventSystemTypeInfo in asyncEventSystem)
+                {
+                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                    builder.AppendLine($"asyncEvents.Add({fieldName}.EventType().TypeHandle, {fieldName});");
+                }
+            }
+            catch (Exception e)
             {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"asyncEvents.Add({fieldName}.EventType().TypeHandle, {fieldName});");
+                Console.WriteLine(e);
             }
-
             builder.EndMethod();
             builder.AppendLine();
             // 生成 UnRegisterSystems 方法
@@ -186,19 +198,24 @@ namespace Fantasy.SourceGenerator.Generators
                 "public void UnRegister(" +
                 "OneToManyList<RuntimeTypeHandle, IEvent> events, " +
                 "OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents)");
-            
-            foreach (var eventSystemTypeInfo in eventSystems)
+            try
             {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"events.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
-            }
+                foreach (var eventSystemTypeInfo in eventSystems)
+                {
+                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                    builder.AppendLine($"events.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
+                }
 
-            foreach (var eventSystemTypeInfo in asyncEventSystem)
+                foreach (var eventSystemTypeInfo in asyncEventSystem)
+                {
+                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                    builder.AppendLine($"asyncEvents.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
+                }
+            }
+            catch (Exception e)
             {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"asyncEvents.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
+                Console.WriteLine(e);
             }
-
             builder.EndMethod();
             builder.AppendLine();
             // 结束类和命名空间
@@ -244,13 +261,20 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AddXmlComment("Register all SphereEvent to the containers");
             builder.BeginMethod(
                 "public void Register(OneToManyHashSet<long, Func<Scene, SphereEventArgs, FTask>> sphereEvents)");
-            foreach (var eventSystemTypeInfo in sphereEventSystem)
+            try
             {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"var {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
-                builder.AppendLine($"{fieldName}TypeHashCode = {fieldName}.TypeHashCode;");
-                builder.AppendLine($"{fieldName}Delegate = {fieldName}.Invoke;");
-                builder.AppendLine($"sphereEvents.Add({fieldName}.TypeHashCode, {fieldName}Delegate);");
+                foreach (var eventSystemTypeInfo in sphereEventSystem)
+                {
+                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                    builder.AppendLine($"var {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                    builder.AppendLine($"{fieldName}TypeHashCode = {fieldName}.TypeHashCode;");
+                    builder.AppendLine($"{fieldName}Delegate = {fieldName}.Invoke;");
+                    builder.AppendLine($"sphereEvents.Add({fieldName}.TypeHashCode, {fieldName}Delegate);");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
             builder.EndMethod();
             builder.AppendLine();
@@ -258,10 +282,17 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
             builder.BeginMethod(
                 "public void UnRegister(OneToManyHashSet<long, Func<Scene, SphereEventArgs, FTask>> sphereEvents)");
-            foreach (var eventSystemTypeInfo in sphereEventSystem)
+            try
             {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"sphereEvents.RemoveValue({fieldName}TypeHashCode, {fieldName}Delegate);");
+                foreach (var eventSystemTypeInfo in sphereEventSystem)
+                {
+                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                    builder.AppendLine($"sphereEvents.RemoveValue({fieldName}TypeHashCode, {fieldName}Delegate);");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
             builder.EndMethod();
             // 结束类和命名空间

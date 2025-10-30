@@ -9,7 +9,7 @@ public class C2SubScene_TestDisposeMessageHandler : Addressable<Unit, C2SubScene
     {
         var unitScene = unit.Scene;
         var unitSceneSceneType = unitScene.SceneType;
-        unitScene.Dispose();
+        await unitScene.Close();
         Log.Debug($"{unitSceneSceneType} {unitScene.RuntimeId} is Dispose!");
         await FTask.CompletedTask;
     }

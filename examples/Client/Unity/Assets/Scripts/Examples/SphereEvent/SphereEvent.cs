@@ -15,6 +15,8 @@ public class SphereEvent : MonoBehaviour
     public Button Connect;
     public Button Subscribe;
     public Button Publish;
+    public Button RevokeRemoteSubscriber;
+    public Button Unsubscribe;
     
     void Start()
     {
@@ -37,7 +39,18 @@ public class SphereEvent : MonoBehaviour
         {
             OnPublishClick().Coroutine();
         });
-        
+        RevokeRemoteSubscriber.onClick.RemoveAllListeners();
+        RevokeRemoteSubscriber.onClick.AddListener(() =>
+        {
+            OnRevokeRemoteSubscriberClick().Coroutine();
+        });
+        Unsubscribe.onClick.RemoveAllListeners();
+        Unsubscribe.onClick.AddListener(() =>
+        {
+            OnUnsubscribeClick().Coroutine();
+        });
+        RevokeRemoteSubscriber.interactable = false;
+        Unsubscribe.interactable = false;
     }
 
     private void OnConnectClick()
@@ -55,10 +68,12 @@ public class SphereEvent : MonoBehaviour
     
     private async FTask OnSubscribeClick()
     {
-        var response = await _session.Call(new C2G_SubscribeSphereEventRequest());
+        var response = await _session.C2G_SubscribeSphereEventRequest();
         if (response.ErrorCode == 0)
         {
             Subscribe.interactable = false;
+            RevokeRemoteSubscriber.interactable = true;
+            Unsubscribe.interactable = true;
         }
     }
 
@@ -68,11 +83,33 @@ public class SphereEvent : MonoBehaviour
         
         try
         {
-            await _session.Call(new C2G_PublishSphereEventRequest());
+            await _session.C2G_PublishSphereEventRequest();
         }
         finally
         {
             Publish.interactable = true;
+        }
+    }
+
+    private async FTask OnRevokeRemoteSubscriberClick()
+    {
+        RevokeRemoteSubscriber.interactable = false;
+        var response = await _session.C2G_UnsubscribeSphereEventRequest();
+        if (response.ErrorCode == 0)
+        {
+            Subscribe.interactable = true;
+            Unsubscribe.interactable = false;
+        }
+    }
+
+    private async FTask OnUnsubscribeClick()
+    {
+        Unsubscribe.interactable = false;
+        var response = await _session.C2G_MapUnsubscribeSphereEventRequest();
+        if (response.ErrorCode == 0)
+        {
+            Subscribe.interactable = true;
+            RevokeRemoteSubscriber.interactable = false;
         }
     }
     
@@ -87,19 +124,11 @@ public class SphereEvent : MonoBehaviour
     {
         Log.Debug("连接失败");
         Connect.interactable = true;
-        // SendAddressableMessage.interactable = false;
-        // SendAddressableRPC.interactable = false;
-        // MoveAddressable.interactable = false;
-        // GateSendToAddressable.interactable = false;
     }
 
     private void OnConnectDisconnect()
     {
         Log.Debug("连接断开");
         Connect.interactable = true;
-        // SendAddressableMessage.interactable = false;
-        // SendAddressableRPC.interactable = false;
-        // MoveAddressable.interactable = false;
-        // GateSendToAddressable.interactable = false;
     }
 }

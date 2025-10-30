@@ -81,25 +81,31 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.AddXmlComment($"Auto-generated NetworkProtocol registration class for {assemblyName}");
         builder.BeginClass("NetworkProtocolRegistrar", "internal sealed", "INetworkProtocolRegistrar");
         builder.BeginMethod("public List<Type> GetNetworkProtocolTypes()");
-            
-        if (networkProtocolTypeInfoList.Any())
+        try
         {
-            builder.AppendLine($"return new List<Type>({networkProtocolTypeInfoList.Count})");
-            builder.AppendLine("{");
-            builder.Indent();
-            foreach (var system in networkProtocolTypeInfoList)
+            if (networkProtocolTypeInfoList.Any())
             {
-                builder.AppendLine($"typeof({system.FullName}),");
+                builder.AppendLine($"return new List<Type>({networkProtocolTypeInfoList.Count})");
+                builder.AppendLine("{");
+                builder.Indent();
+                foreach (var system in networkProtocolTypeInfoList)
+                {
+                    builder.AppendLine($"typeof({system.FullName}),");
+                }
+                builder.Unindent();
+                builder.AppendLine("};");
+                builder.AppendLine();
             }
-            builder.Unindent();
-            builder.AppendLine("};");
-            builder.AppendLine();
+            else
+            {
+                builder.AppendLine($"return new List<Type>();");
+            }
         }
-        else
+        catch (Exception e)
         {
-            builder.AppendLine($"return new List<Type>();");
+            Console.WriteLine(e);
+            throw;
         }
-            
         builder.EndMethod();
         builder.AppendLine();
         // 结束类和命名空间
@@ -146,36 +152,42 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.AddXmlComment($"GetOpCodeType");
         builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
         builder.BeginMethod("public Type GetOpCodeType(uint opCode)");
-            
-        if (networkProtocolTypeInfoList.Any())
+        try
         {
-            builder.AppendLine("switch (opCode)");
-            builder.AppendLine("{");
-            builder.Indent();
-            foreach (var networkProtocolTypeInfo in networkProtocolTypeInfoList)
+            if (networkProtocolTypeInfoList.Any())
             {
-                builder.AppendLine($"case {networkProtocolTypeInfo.OpCode}:");
+                builder.AppendLine("switch (opCode)");
                 builder.AppendLine("{");
                 builder.Indent();
-                builder.AppendLine($"return typeof({networkProtocolTypeInfo.FullName});");
+                foreach (var networkProtocolTypeInfo in networkProtocolTypeInfoList)
+                {
+                    builder.AppendLine($"case {networkProtocolTypeInfo.OpCode}:");
+                    builder.AppendLine("{");
+                    builder.Indent();
+                    builder.AppendLine($"return typeof({networkProtocolTypeInfo.FullName});");
+                    builder.Unindent();
+                    builder.AppendLine("}");
+                }
+                builder.AppendLine("default:");
+                builder.AppendLine("{");
+                builder.Indent();
+                builder.AppendLine($"return null!;");
                 builder.Unindent();
                 builder.AppendLine("}");
+                builder.Unindent();
+                builder.AppendLine("}");
+                builder.AppendLine();
             }
-            builder.AppendLine("default:");
-            builder.AppendLine("{");
-            builder.Indent();
-            builder.AppendLine($"return null!;");
-            builder.Unindent();
-            builder.AppendLine("}");
-            builder.Unindent();
-            builder.AppendLine("}");
-            builder.AppendLine();
+            else
+            {
+                builder.AppendLine($"return null!;");
+            }
         }
-        else
+        catch (Exception e)
         {
-            builder.AppendLine($"return null!;");
+            Console.WriteLine(e);
+            throw;
         }
-        
         builder.EndMethod();
         
         // 开始定义GetRouteType方法
@@ -253,36 +265,42 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.AddXmlComment($"GetOpCodeType");
         builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
         builder.BeginMethod("public Type GetResponseType(uint opCode)");
-            
-        if (requestList.Any())
+        try
         {
-            builder.AppendLine("switch (opCode)");
-            builder.AppendLine("{");
-            builder.Indent();
-            foreach (var request in requestList)
+            if (requestList.Any())
             {
-                builder.AppendLine($"case {request.OpCode}:");
+                builder.AppendLine("switch (opCode)");
                 builder.AppendLine("{");
                 builder.Indent();
-                builder.AppendLine($"return typeof({request.ResponseType});");
+                foreach (var request in requestList)
+                {
+                    builder.AppendLine($"case {request.OpCode}:");
+                    builder.AppendLine("{");
+                    builder.Indent();
+                    builder.AppendLine($"return typeof({request.ResponseType});");
+                    builder.Unindent();
+                    builder.AppendLine("}");
+                }
+                builder.AppendLine("default:");
+                builder.AppendLine("{");
+                builder.Indent();
+                builder.AppendLine($"return null!;");
                 builder.Unindent();
                 builder.AppendLine("}");
+                builder.Unindent();
+                builder.AppendLine("}");
+                builder.AppendLine();
             }
-            builder.AppendLine("default:");
-            builder.AppendLine("{");
-            builder.Indent();
-            builder.AppendLine($"return null!;");
-            builder.Unindent();
-            builder.AppendLine("}");
-            builder.Unindent();
-            builder.AppendLine("}");
-            builder.AppendLine();
+            else
+            {
+                builder.AppendLine($"return null!;");
+            }
         }
-        else
+        catch (Exception e)
         {
-            builder.AppendLine($"return null!;");
+            Console.WriteLine(e);
+            throw;
         }
-        
         builder.EndMethod();
         builder.AppendLine();
         // 结束类和命名空间

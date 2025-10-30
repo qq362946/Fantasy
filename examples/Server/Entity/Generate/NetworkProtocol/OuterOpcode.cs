@@ -48,5 +48,7 @@ namespace Fantasy
 		 public const uint G2C_PublishSphereEventResponse = 402663192;
 		 public const uint C2G_UnsubscribeSphereEventRequest = 268445465;
 		 public const uint G2C_UnsubscribeSphereEventResponse = 402663193;
+		 public const uint C2G_MapUnsubscribeSphereEventRequest = 268445466;
+		 public const uint G2C_MapUnsubscribeSphereEventResponse = 402663194;
 	}
 }

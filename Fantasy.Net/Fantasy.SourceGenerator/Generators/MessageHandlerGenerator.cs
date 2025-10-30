@@ -96,17 +96,24 @@ namespace Fantasy.SourceGenerator.Generators
 
         private static void GenerateFields(SourceCodeBuilder builder, List<MessageHandlerInfo> messageHandlers, List<MessageHandlerInfo> routeMessageHandlers)
         {
-            foreach (var messageHandlerInfo in messageHandlers)
+            try
             {
-                builder.AppendLine($"private Func<Session, uint, uint, object, FTask> message_{messageHandlerInfo.TypeName} = new {messageHandlerInfo.TypeFullName}().Handle;");
-            }
+                foreach (var messageHandlerInfo in messageHandlers)
+                {
+                    builder.AppendLine($"private Func<Session, uint, uint, object, FTask> message_{messageHandlerInfo.TypeName} = new {messageHandlerInfo.TypeFullName}().Handle;");
+                }
 
-            foreach (var messageHandlerInfo in routeMessageHandlers)
+                foreach (var messageHandlerInfo in routeMessageHandlers)
+                {
+                    builder.AppendLine($"private Func<Session, Entity, uint, object, FTask> routeMessage_{messageHandlerInfo.TypeName} = new {messageHandlerInfo.TypeFullName}().Handle;");
+                }
+
+                builder.AppendLine();
+            }
+            catch (Exception e)
             {
-                builder.AppendLine($"private Func<Session, Entity, uint, object, FTask> routeMessage_{messageHandlerInfo.TypeName} = new {messageHandlerInfo.TypeFullName}().Handle;");
+                Console.WriteLine(e);
             }
-
-            builder.AppendLine();
         }
 
         private static void GenerateRegistrationCode(SourceCodeBuilder builder, List<MessageHandlerInfo> messageHandlers, List<MessageHandlerInfo> routeMessageHandlers)
@@ -121,68 +128,83 @@ namespace Fantasy.SourceGenerator.Generators
             builder.EndMethod();
             builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
             builder.BeginMethod("public bool MessageHandler(Session session, uint rpcId, uint protocolCode, object message)");
-            if (messageHandlers.Any())
+            try
             {
-                builder.AppendLine("switch (protocolCode)");
-                builder.AppendLine("{");
-                builder.Indent();
-                foreach (var messageHandlerInfo in messageHandlers)
+                if (messageHandlers.Any())
                 {
-                    builder.AppendLine($"case {messageHandlerInfo.OpCode}:");
+                    builder.AppendLine("switch (protocolCode)");
                     builder.AppendLine("{");
                     builder.Indent();
-                    builder.AppendLine($"message_{messageHandlerInfo.TypeName}(session, rpcId, protocolCode, message).Coroutine();");
-                    builder.AppendLine($"return true;");
+                    foreach (var messageHandlerInfo in messageHandlers)
+                    {
+                        builder.AppendLine($"case {messageHandlerInfo.OpCode}:");
+                        builder.AppendLine("{");
+                        builder.Indent();
+                        builder.AppendLine($"message_{messageHandlerInfo.TypeName}(session, rpcId, protocolCode, message).Coroutine();");
+                        builder.AppendLine($"return true;");
+                        builder.Unindent();
+                        builder.AppendLine("}");
+                    }
+                    builder.AppendLine("default:");
+                    builder.AppendLine("{");
+                    builder.Indent();
+                    builder.AppendLine($"return false;");
+                    builder.Unindent();
+                    builder.AppendLine("}");
                     builder.Unindent();
                     builder.AppendLine("}");
                 }
-                builder.AppendLine("default:");
-                builder.AppendLine("{");
-                builder.Indent();
-                builder.AppendLine($"return false;");
-                builder.Unindent();
-                builder.AppendLine("}");
-                builder.Unindent();
-                builder.AppendLine("}");
+                else
+                {
+                    builder.AppendLine($"return false;");
+                }
             }
-            else
+            catch (Exception e)
             {
-                builder.AppendLine($"return false;");
+                Console.WriteLine(e);
             }
+            
             builder.EndMethod();
             
             builder.AppendLine("#if FANTASY_NET", false);
             builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
             builder.BeginMethod("public async FTask<bool> RouteMessageHandler(Session session, Entity entity, uint rpcId, uint protocolCode, object message)");
-            if (routeMessageHandlers.Any())
+            try
             {
-                builder.AppendLine("switch (protocolCode)");
-                builder.AppendLine("{");
-                builder.Indent();
-                foreach (var routeMessageHandler in routeMessageHandlers)
+                if (routeMessageHandlers.Any())
                 {
-                    builder.AppendLine($"case {routeMessageHandler.OpCode}:");
+                    builder.AppendLine("switch (protocolCode)");
                     builder.AppendLine("{");
                     builder.Indent();
-                    builder.AppendLine($"await routeMessage_{routeMessageHandler.TypeName}(session, entity, rpcId, message);");
-                    builder.AppendLine($"return true;");
+                    foreach (var routeMessageHandler in routeMessageHandlers)
+                    {
+                        builder.AppendLine($"case {routeMessageHandler.OpCode}:");
+                        builder.AppendLine("{");
+                        builder.Indent();
+                        builder.AppendLine($"await routeMessage_{routeMessageHandler.TypeName}(session, entity, rpcId, message);");
+                        builder.AppendLine($"return true;");
+                        builder.Unindent();
+                        builder.AppendLine("}");
+                    }
+                    builder.AppendLine("default:");
+                    builder.AppendLine("{");
+                    builder.Indent();
+                    builder.AppendLine($"await FTask.CompletedTask;");
+                    builder.AppendLine($"return false;");
+                    builder.Unindent();
+                    builder.AppendLine("}");
                     builder.Unindent();
                     builder.AppendLine("}");
                 }
-                builder.AppendLine("default:");
-                builder.AppendLine("{");
-                builder.Indent();
-                builder.AppendLine($"await FTask.CompletedTask;");
-                builder.AppendLine($"return false;");
-                builder.Unindent();
-                builder.AppendLine("}");
-                builder.Unindent();
-                builder.AppendLine("}");
+                else
+                {
+                    builder.AppendLine($"await FTask.CompletedTask;");
+                    builder.AppendLine($"return false;");
+                }
             }
-            else
+            catch (Exception e)
             {
-                builder.AppendLine($"await FTask.CompletedTask;");
-                builder.AppendLine($"return false;");
+                Console.WriteLine(e);
             }
             builder.EndMethod();
             builder.AppendLine("#endif", false);

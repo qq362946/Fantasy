@@ -94,13 +94,18 @@ namespace Fantasy.Platform.Unity
 
         private void OnDestroy()
         {
-            SerializerManager.Dispose();
-            AssemblyManifest.Dispose().Coroutine();
+            OnDestroyAsync().Coroutine();
+        }
+
+        private async FTask OnDestroyAsync()
+        {
             if (Scene != null)
             {
-                Scene?.Dispose();
+                await Scene.Close();
                 Scene = null;
             }
+            SerializerManager.Dispose();
+            await AssemblyManifest.Dispose();
             _isInit = false;
         }
     }

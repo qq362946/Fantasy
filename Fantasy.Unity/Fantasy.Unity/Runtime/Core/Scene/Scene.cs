@@ -187,6 +187,18 @@ namespace Fantasy
             SphereEventComponent = await Create<SphereEventComponent>(this, false, true).Initialize();
 #endif
         }
+        
+        /// <summary>
+        /// Scene的关闭方法
+        /// </summary>
+        public async FTask Close()
+        {
+#if FANTASY_NET
+            await SphereEventComponent?.Close();
+#endif
+            await FTask.CompletedTask;
+            Dispose();
+        }
 
         /// <summary>
         /// Scene销毁方法，执行了该方法会把当前Scene下的所有实体都销毁掉。
@@ -232,7 +244,7 @@ namespace Fantasy
                     TypeInstance.Clear();
 #if FANTASY_NET
                     Process.RemoveScene(this, false);
-                    Process.RemoveSceneToProcess(this, false);
+                    Process.RemoveSceneToProcess(this);
 #endif
                     EntityComponent.Dispose();
                     EntityPool.Dispose();

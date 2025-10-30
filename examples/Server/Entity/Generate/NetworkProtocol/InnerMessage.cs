@@ -456,5 +456,46 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public uint ErrorCode { get; set; }
 	}
+	/// <summary>
+	///  Gate服务器通知Map取消订阅一个领域事件到Gate上
+	/// </summary>
+	[ProtoContract]
+	public partial class G2Map_UnsubscribeSphereEventRequest : AMessage, IRouteRequest
+	{
+		public static G2Map_UnsubscribeSphereEventRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2Map_UnsubscribeSphereEventRequest>();
+		}
+		public override void Dispose()
+		{
+			GateRouteId = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2Map_UnsubscribeSphereEventRequest>(this);
+#endif
+		}
+		[ProtoIgnore]
+		public Map2G_UnsubscribeSphereEventResponse ResponseType { get; set; }
+		public uint OpCode() { return InnerOpcode.G2Map_UnsubscribeSphereEventRequest; }
+		[ProtoMember(1)]
+		public long GateRouteId { get; set; }
+	}
+	[ProtoContract]
+	public partial class Map2G_UnsubscribeSphereEventResponse : AMessage, IRouteResponse
+	{
+		public static Map2G_UnsubscribeSphereEventResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<Map2G_UnsubscribeSphereEventResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<Map2G_UnsubscribeSphereEventResponse>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.Map2G_UnsubscribeSphereEventResponse; }
+		[ProtoMember(1)]
+		public uint ErrorCode { get; set; }
+	}
 }
 

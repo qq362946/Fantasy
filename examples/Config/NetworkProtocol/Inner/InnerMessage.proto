@@ -100,3 +100,12 @@ message G2Map_SubscribeSphereEventResponse // IRouteResponse
 {
 
 }
+/// Gate服务器通知Map取消订阅一个领域事件到Gate上
+message G2Map_UnsubscribeSphereEventRequest // IRouteRequest,Map2G_UnsubscribeSphereEventResponse
+{
+	int64 GateRouteId = 1;
+}
+message Map2G_UnsubscribeSphereEventResponse // IRouteResponse
+{
+
+}
