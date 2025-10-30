@@ -430,5 +430,18 @@ namespace Fantasy
 			return (G2C_PublishSphereEventResponse)await session.Call(request);
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static async FTask<G2C_UnsubscribeSphereEventResponse> C2G_UnsubscribeSphereEventRequest(this Session session, C2G_UnsubscribeSphereEventRequest request)
+		{
+			return (G2C_UnsubscribeSphereEventResponse)await session.Call(request);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static async FTask<G2C_UnsubscribeSphereEventResponse> C2G_UnsubscribeSphereEventRequest(this Session session)
+		{
+			using var request = Fantasy.C2G_UnsubscribeSphereEventRequest.Create(session.Scene);
+			return (G2C_UnsubscribeSphereEventResponse)await session.Call(request);
+		}
+
 	}
 }

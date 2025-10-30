@@ -903,5 +903,43 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public uint ErrorCode { get; set; }
 	}
+	/// <summary>
+	///  通知Gate取消一个订阅领域事件
+	/// </summary>
+	[ProtoContract]
+	public partial class C2G_UnsubscribeSphereEventRequest : AMessage, IRequest
+	{
+		public static C2G_UnsubscribeSphereEventRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2G_UnsubscribeSphereEventRequest>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2G_UnsubscribeSphereEventRequest>(this);
+#endif
+		}
+		[ProtoIgnore]
+		public G2C_UnsubscribeSphereEventResponse ResponseType { get; set; }
+		public uint OpCode() { return OuterOpcode.C2G_UnsubscribeSphereEventRequest; }
+	}
+	[ProtoContract]
+	public partial class G2C_UnsubscribeSphereEventResponse : AMessage, IResponse
+	{
+		public static G2C_UnsubscribeSphereEventResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_UnsubscribeSphereEventResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2C_UnsubscribeSphereEventResponse>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_UnsubscribeSphereEventResponse; }
+		[ProtoMember(1)]
+		public uint ErrorCode { get; set; }
+	}
 }
 

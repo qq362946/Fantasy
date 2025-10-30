@@ -7,6 +7,7 @@ using Fantasy.Event;
 using Fantasy.Helper;
 using Fantasy.SeparateTable;
 using Fantasy.Serialize;
+using Fantasy.SourceGenerator;
 using Fantasy.Sphere;
 using ProtoBuf;
 

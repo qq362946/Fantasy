@@ -206,5 +206,14 @@ message C2G_PublishSphereEventRequest // IRequest,G2C_PublishSphereEventResponse
 }
 message G2C_PublishSphereEventResponse // IResponse
 {
-	
+
+}
+/// 通知Gate取消一个订阅领域事件
+message C2G_UnsubscribeSphereEventRequest // IRequest,G2C_UnsubscribeSphereEventResponse
+{
+
+}
+message G2C_UnsubscribeSphereEventResponse // IResponse
+{
+
 }

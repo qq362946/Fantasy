@@ -122,5 +122,59 @@ namespace Fantasy.SourceGenerator.Common
 
             return false;
         }
+
+        /// <summary>
+        /// 获取程序集的目标平台类型
+        /// 优先级：TargetPlatformAttribute 指定的值 > 预编译符号检测
+        /// </summary>
+        /// <param name="compilation">编译上下文</param>
+        /// <returns>
+        /// 0 = Auto/未定义, 1 = Server, 2 = Unity
+        /// </returns>
+        public static int GetTargetPlatform(Compilation compilation)
+        {
+            // 1. 首先检查是否有 TargetPlatformAttribute
+            var targetPlatformAttribute = compilation.GetTypeByMetadataName("Fantasy.SourceGenerator.TargetPlatformAttribute");
+
+            if (targetPlatformAttribute != null)
+            {
+                // 检查程序集级别的 TargetPlatformAttribute
+                foreach (var attribute in compilation.Assembly.GetAttributes())
+                {
+                    if (SymbolEqualityComparer.Default.Equals(attribute.AttributeClass, targetPlatformAttribute))
+                    {
+                        // 读取构造函数参数（PlatformType 枚举值）
+                        if (attribute.ConstructorArguments.Length > 0)
+                        {
+                            var platformValue = attribute.ConstructorArguments[0].Value;
+                            if (platformValue is int platformType)
+                            {
+                                // 如果不是 Auto (0)，直接返回指定的平台类型
+                                if (platformType != 0)
+                                {
+                                    return platformType;
+                                }
+                            }
+                        }
+                        // 如果是 Auto 或没有参数，继续下面的自动检测逻辑
+                        break;
+                    }
+                }
+            }
+
+            // 2. 自动检测：根据预编译符号判断
+            if (HasFantasyNETDefine(compilation))
+            {
+                return 1; // Server
+            }
+
+            if (HasFantasyUNITYDefine(compilation) && IsUnityCompilation(compilation))
+            {
+                return 2; // Unity
+            }
+
+            // 3. 如果都没有，返回 Auto (0)
+            return 0;
+        }
     }
 }
