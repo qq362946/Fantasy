@@ -23,6 +23,11 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
        
         context.RegisterSourceOutput(compilationAndTypes, static (spc, source) =>
         {
+            if (CompilationHelper.IsSourceGeneratorDisabled(source.Left))
+            {
+                return;
+            }
+            
             if (!CompilationHelper.HasFantasyDefine(source.Left))
             {
                 return;

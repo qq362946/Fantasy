@@ -16,12 +16,12 @@ public interface ISphereEventRegistrar
     /// 注册当前程序集中的所有Sphere事件处理器
     /// </summary>
     /// <param name="sphereEvents">Sphere事件集合，用于存储事件ID到事件处理器的映射关系</param>
-    void Register(OneToManyHashSet<long, Func<SphereEventArgs, FTask>> sphereEvents);
+    void Register(OneToManyHashSet<long, Func<Scene, SphereEventArgs, FTask>> sphereEvents);
 
     /// <summary>
     /// 注销当前程序集中的所有Sphere事件处理器
     /// </summary>
     /// <param name="sphereEvents">Sphere事件集合，用于移除事件ID到事件处理器的映射关系</param>
-    void UnRegister(OneToManyHashSet<long, Func<SphereEventArgs, FTask>> sphereEvents);
+    void UnRegister(OneToManyHashSet<long, Func<Scene, SphereEventArgs, FTask>> sphereEvents);
 }
 #endif

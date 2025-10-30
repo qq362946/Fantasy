@@ -92,7 +92,7 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     /// <summary>
     /// 本地订阅的事件
     /// </summary>
-    private readonly OneToManyHashSet<long, Func<SphereEventArgs, FTask>> _sphereEvents = new();
+    private readonly OneToManyHashSet<long, Func<Scene, SphereEventArgs, FTask>> _sphereEvents = new();
 
     /// <summary>
     /// 订阅远程服务器的Sphere事件
@@ -197,7 +197,7 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
         {
             try
             {
-                tasks.Add(@event(eventArgs));
+                tasks.Add(@event(Scene, eventArgs));
             }
             catch (Exception e)
             {

@@ -415,5 +415,46 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public uint ErrorCode { get; set; }
 	}
+	/// <summary>
+	///  Gate服务器通知Map订阅一个领域事件到Gate上
+	/// </summary>
+	[ProtoContract]
+	public partial class G2Map_SubscribeSphereEventRequest : AMessage, IRouteRequest
+	{
+		public static G2Map_SubscribeSphereEventRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2Map_SubscribeSphereEventRequest>();
+		}
+		public override void Dispose()
+		{
+			GateRouteId = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2Map_SubscribeSphereEventRequest>(this);
+#endif
+		}
+		[ProtoIgnore]
+		public G2Map_SubscribeSphereEventResponse ResponseType { get; set; }
+		public uint OpCode() { return InnerOpcode.G2Map_SubscribeSphereEventRequest; }
+		[ProtoMember(1)]
+		public long GateRouteId { get; set; }
+	}
+	[ProtoContract]
+	public partial class G2Map_SubscribeSphereEventResponse : AMessage, IRouteResponse
+	{
+		public static G2Map_SubscribeSphereEventResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2Map_SubscribeSphereEventResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2Map_SubscribeSphereEventResponse>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.G2Map_SubscribeSphereEventResponse; }
+		[ProtoMember(1)]
+		public uint ErrorCode { get; set; }
+	}
 }
 

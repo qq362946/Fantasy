@@ -21,9 +21,10 @@ public interface ISphereEvent
     /// 异步调用事件处理方法
     /// Asynchronously invoke the event handler method
     /// </summary>
+    /// <param name="scene">Scene</param>
     /// <param name="args">事件参数 / Event arguments</param>
     /// <returns>异步任务 / Asynchronous task</returns>
-    FTask Invoke(SphereEventArgs args);
+    FTask Invoke(Scene scene, SphereEventArgs args);
 }
 
 /// <summary>
@@ -60,21 +61,23 @@ public abstract class SphereEventSystem<T> : ISphereEvent where T : SphereEventA
     /// 事件处理方法，子类需要重写此方法来实现具体的事件处理逻辑
     /// Event handler method, subclasses need to override this method to implement specific event handling logic
     /// </summary>
+    /// <param name="scene">Scene</param>
     /// <param name="args">事件参数 / Event arguments</param>
     /// <returns>异步任务 / Asynchronous task</returns>
-    protected abstract FTask Handler(T args);
+    protected abstract FTask Handler(Scene scene, T args);
 
     /// <summary>
     /// 非泛型调用入口，实现ISphereEvent接口，支持零装箱调用
     /// Non-generic invocation entry, implements ISphereEvent interface, supports zero-boxing calls
     /// </summary>
+    /// <param name="scene">Scene</param>
     /// <param name="args">事件参数 / Event arguments</param>
     /// <returns>异步任务 / Asynchronous task</returns>
-    public async FTask Invoke(SphereEventArgs args)
+    public async FTask Invoke(Scene scene, SphereEventArgs args)
     {
         try
         {
-            await Handler((T)args);
+            await Handler(scene, (T)args);
         }
         catch (Exception e)
         {

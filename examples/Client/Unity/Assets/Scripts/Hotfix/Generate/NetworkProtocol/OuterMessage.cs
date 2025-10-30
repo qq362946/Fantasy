@@ -818,5 +818,81 @@ namespace Fantasy
 		[ProtoMember(1)]
 		public string Tag { get; set; }
 	}
+	/// <summary>
+	///  通知Gate服务器发送一个内网消息通知Map服务器向Gate服务器注册一个领域事件
+	/// </summary>
+	[ProtoContract]
+	public partial class C2G_SubscribeSphereEventRequest : AMessage, IRequest
+	{
+		public static C2G_SubscribeSphereEventRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2G_SubscribeSphereEventRequest>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2G_SubscribeSphereEventRequest>(this);
+#endif
+		}
+		[ProtoIgnore]
+		public G2C_SubscribeSphereEventResponse ResponseType { get; set; }
+		public uint OpCode() { return OuterOpcode.C2G_SubscribeSphereEventRequest; }
+	}
+	[ProtoContract]
+	public partial class G2C_SubscribeSphereEventResponse : AMessage, IResponse
+	{
+		public static G2C_SubscribeSphereEventResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_SubscribeSphereEventResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2C_SubscribeSphereEventResponse>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_SubscribeSphereEventResponse; }
+		[ProtoMember(1)]
+		public uint ErrorCode { get; set; }
+	}
+	/// <summary>
+	///  通知Gate发送一个订阅领域事件
+	/// </summary>
+	[ProtoContract]
+	public partial class C2G_PublishSphereEventRequest : AMessage, IRequest
+	{
+		public static C2G_PublishSphereEventRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2G_PublishSphereEventRequest>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<C2G_PublishSphereEventRequest>(this);
+#endif
+		}
+		[ProtoIgnore]
+		public G2C_PublishSphereEventResponse ResponseType { get; set; }
+		public uint OpCode() { return OuterOpcode.C2G_PublishSphereEventRequest; }
+	}
+	[ProtoContract]
+	public partial class G2C_PublishSphereEventResponse : AMessage, IResponse
+	{
+		public static G2C_PublishSphereEventResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_PublishSphereEventResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+#if FANTASY_NET || FANTASY_UNITY
+			GetScene().MessagePoolComponent.Return<G2C_PublishSphereEventResponse>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_PublishSphereEventResponse; }
+		[ProtoMember(1)]
+		public uint ErrorCode { get; set; }
+	}
 }
 

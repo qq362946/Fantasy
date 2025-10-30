@@ -91,3 +91,12 @@ message Map2G_TestRoamingMessageResponse // IRoamingResponse
 {
 	
 }
+/// Gate服务器通知Map订阅一个领域事件到Gate上
+message G2Map_SubscribeSphereEventRequest // IRouteRequest,G2Map_SubscribeSphereEventResponse
+{
+	int64 GateRouteId = 1;
+}
+message G2Map_SubscribeSphereEventResponse // IRouteResponse
+{
+
+}

@@ -29,13 +29,16 @@ namespace Fantasy.SourceGenerator.Generators
             // 注册源代码输出
             context.RegisterSourceOutput(compilationAndTypes, static (spc, source) =>
             {
-                // 检查1: 是否定义了 FANTASY_NET 或 FANTASY_UNITY 预编译符号
+                if (CompilationHelper.IsSourceGeneratorDisabled(source.Left))
+                {
+                    return;
+                }
+                
                 if (!CompilationHelper.HasFantasyDefine(source.Left))
                 {
                     return;
                 }
-
-                // 检查2: 是否引用了 Fantasy 框架的核心类型
+                
                 if (source.Left.GetTypeByMetadataName("Fantasy.Assembly.IEventSystemRegistrar") == null)
                 {
                     return;
@@ -235,12 +238,12 @@ namespace Fantasy.SourceGenerator.Generators
             {
                 var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
                 builder.AppendLine($"private long {fieldName}TypeHashCode;");
-                builder.AppendLine($"private Func<SphereEventArgs, FTask> {fieldName}Delegate;");
+                builder.AppendLine($"private Func<Scene, SphereEventArgs, FTask> {fieldName}Delegate;");
             }
             // 生成注册方法
             builder.AddXmlComment("Register all SphereEvent to the containers");
             builder.BeginMethod(
-                "public void Register(OneToManyHashSet<long, Func<SphereEventArgs, FTask>> sphereEvents)");
+                "public void Register(OneToManyHashSet<long, Func<Scene, SphereEventArgs, FTask>> sphereEvents)");
             foreach (var eventSystemTypeInfo in sphereEventSystem)
             {
                 var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
@@ -254,7 +257,7 @@ namespace Fantasy.SourceGenerator.Generators
             // 生成取消注册方法
             builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
             builder.BeginMethod(
-                "public void UnRegister(OneToManyHashSet<long, Func<SphereEventArgs, FTask>> sphereEvents)");
+                "public void UnRegister(OneToManyHashSet<long, Func<Scene, SphereEventArgs, FTask>> sphereEvents)");
             foreach (var eventSystemTypeInfo in sphereEventSystem)
             {
                 var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";

@@ -190,3 +190,21 @@ message C2G_TestRoamingToRoaming // IMessage
 {
 	string Tag = 1;
 }
+/// 通知Gate服务器发送一个内网消息通知Map服务器向Gate服务器注册一个领域事件
+message C2G_SubscribeSphereEventRequest // IRequest,G2C_SubscribeSphereEventResponse
+{
+
+}
+message G2C_SubscribeSphereEventResponse // IResponse
+{
+
+}
+/// 通知Gate发送一个订阅领域事件
+message C2G_PublishSphereEventRequest // IRequest,G2C_PublishSphereEventResponse
+{
+
+}
+message G2C_PublishSphereEventResponse // IResponse
+{
+	
+}

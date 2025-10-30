@@ -42,5 +42,9 @@ namespace Fantasy
 		 public const uint C2Chat_TestSendMapMessage = 2550146837;
 		 public const uint C2G_TestRouteToRoaming = 134227734;
 		 public const uint C2G_TestRoamingToRoaming = 134227735;
+		 public const uint C2G_SubscribeSphereEventRequest = 268445463;
+		 public const uint G2C_SubscribeSphereEventResponse = 402663191;
+		 public const uint C2G_PublishSphereEventRequest = 268445464;
+		 public const uint G2C_PublishSphereEventResponse = 402663192;
 	}
 }

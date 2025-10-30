@@ -12,19 +12,20 @@ using ProtoBuf;
 
 namespace Fantasy;
 
-public sealed class MySphereEventArgs : SphereEventArgs
+public interface ITest : ICustomInterface
 {
-
+    
 }
 
-public sealed class OnMySphereEventEvent : SphereEventSystem<MySphereEventArgs>
+public abstract class ATest : ITest
 {
-    protected override FTask Handler(MySphereEventArgs args)
-    {
-        throw new NotImplementedException();
-    }
+    
 }
 
+public class MyTest : ATest
+{
+    
+}
 public sealed class SubSceneTestComponent : Entity
 {
     public override void Dispose()

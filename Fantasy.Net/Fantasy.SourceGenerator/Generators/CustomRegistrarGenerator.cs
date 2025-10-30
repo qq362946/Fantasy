@@ -21,13 +21,16 @@ namespace Fantasy.SourceGenerator.Generators
             // 注册源代码输出
             context.RegisterSourceOutput(compilationAndTypes, static (spc, source) =>
             {
-                // 检查1: 是否定义了 FANTASY_NET 或 FANTASY_UNITY 预编译符号
+                if (CompilationHelper.IsSourceGeneratorDisabled(source.Left))
+                {
+                    return;
+                }
+                
                 if (!CompilationHelper.HasFantasyDefine(source.Left))
                 {
                     return;
                 }
-
-                // 检查2: 是否引用了 Fantasy 框架的核心类型
+                
                 if (source.Left.GetTypeByMetadataName("Fantasy.Assembly.ICustomInterface") == null)
                 {
                     return;
@@ -125,39 +128,53 @@ namespace Fantasy.SourceGenerator.Generators
             {
                 return null;
             }
+            
+            var allCustomTypes = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
 
-            var interfacesImplementingICustomRegistrar = symbol.Interfaces
-                .Where(i => i.ToDisplayString() != "Fantasy.Assembly.ICustomInterface" &&
-                            i.AllInterfaces.Any(baseInterface =>
-                                baseInterface.ToDisplayString() == "Fantasy.Assembly.ICustomInterface"))
-                .ToList();
-
-            // 只有间接实现的才通过
-            if (!interfacesImplementingICustomRegistrar.Any())
-            {
-                return null;
-            }
-
-            // 获取该类实现的所有继承了 ICustomInterface 的接口（包括间接继承，但排除 ICustomInterface 本身）
-            var allInterfacesSet = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
-
-            foreach (var iface in symbol.AllInterfaces)
+            // 1. 检查该类实现的所有接口（包括间接继承的接口）
+            foreach (var iFace in symbol.AllInterfaces)
             {
                 // 排除 ICustomInterface 本身
-                if (iface.ToDisplayString() == "Fantasy.Assembly.ICustomInterface")
+                if (iFace.ToDisplayString() == "Fantasy.Assembly.ICustomInterface")
                 {
                     continue;
                 }
 
                 // 检查该接口是否继承了 ICustomInterface（直接或间接）
-                if (iface.AllInterfaces.Any(baseInterface =>
-                    baseInterface.ToDisplayString() == "Fantasy.Assembly.ICustomInterface"))
+                if (iFace.AllInterfaces.Any(baseInterface =>
+                        baseInterface.ToDisplayString() == "Fantasy.Assembly.ICustomInterface"))
                 {
-                    allInterfacesSet.Add(iface);
+                    allCustomTypes.Add(iFace);
                 }
             }
+            
+            
+            
+            var baseType = symbol.BaseType;
+            while (baseType != null && baseType.SpecialType != SpecialType.System_Object)
+            {
+                // 检查父类是否实现了 ICustomInterface 相关接口
+                var hasCustomInterface = baseType.AllInterfaces.Any(iFace =>
+                    iFace.ToDisplayString() == "Fantasy.Assembly.ICustomInterface" ||
+                    iFace.AllInterfaces.Any(baseInterface =>
+                        baseInterface.ToDisplayString() == "Fantasy.Assembly.ICustomInterface"));
 
-            var allInterfaces = allInterfacesSet
+                if (hasCustomInterface)
+                {
+                    allCustomTypes.Add(baseType);
+                }
+
+                baseType = baseType.BaseType;
+            }
+
+            // 如果没有找到任何实现 ICustomInterface 的类型，返回 null
+            if (!allCustomTypes.Any())
+            {
+                return null;
+            }
+
+            // 直接使用 allCustomTypes 生成接口信息列表
+            var allInterfaces = allCustomTypes
                 .Select(i => new InterfaceInfo(i.Name, i.GetFullName(false)))
                 .ToList();
 

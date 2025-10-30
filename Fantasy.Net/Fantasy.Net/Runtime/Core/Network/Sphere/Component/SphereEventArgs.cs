@@ -1,6 +1,11 @@
 #if FANTASY_NET
+using System.Runtime.Serialization;
 using Fantasy.Entitas.Interface;
 using Fantasy.Pool;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using ProtoBuf;
+
 // ReSharper disable CheckNamespace
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
@@ -41,7 +46,17 @@ public abstract class SphereEventArgs : IPool, IDisposable
     /// 事件参数的实际类型
     /// The actual type of the event arguments
     /// </summary>
+    [BsonIgnore]
+    [JsonIgnore]
+    [IgnoreDataMember]
+    [ProtoIgnore]
     public Type SphereEventArgsType { get; private set; }
+
+    /// <summary>
+    /// Protected 构造函数,防止外部直接实例化
+    /// Protected constructor to prevent direct instantiation from outside
+    /// </summary>
+    protected SphereEventArgs() { }
 
     /// <summary>
     /// 创建事件参数实例

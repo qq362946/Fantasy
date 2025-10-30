@@ -97,5 +97,30 @@ namespace Fantasy.SourceGenerator.Common
 
             return false;
         }
+
+        /// <summary>
+        /// 检查程序集是否显式禁用了 Source Generator
+        /// 通过检查是否标注了 [assembly: DisableSourceGenerator] 属性
+        /// </summary>
+        public static bool IsSourceGeneratorDisabled(Compilation compilation)
+        {
+            // 获取 DisableSourceGeneratorAttribute 类型
+            var disableAttribute = compilation.GetTypeByMetadataName("Fantasy.SourceGenerator.DisableSourceGeneratorAttribute");
+            if (disableAttribute == null)
+            {
+                return false;
+            }
+
+            // 检查程序集级别的属性
+            foreach (var attribute in compilation.Assembly.GetAttributes())
+            {
+                if (SymbolEqualityComparer.Default.Equals(attribute.AttributeClass, disableAttribute))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

@@ -1,4 +1,4 @@
-namespace Fantasy.SourceGenerator.Attributes
+namespace Fantasy.SourceGenerator
 {
     /// <summary>
     /// 标记程序集禁用 Source Generator 生成注册代码

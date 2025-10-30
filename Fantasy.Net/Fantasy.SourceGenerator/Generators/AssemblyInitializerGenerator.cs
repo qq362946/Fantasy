@@ -18,14 +18,17 @@ namespace Fantasy.SourceGenerator.Generators
             // 注册源代码输出
             context.RegisterSourceOutput(compilationProvider, (spc, compilation) =>
             {
-                // 检查是否定义了 FANTASY_NET 或 FANTASY_UNITY 预编译符号
+                if (CompilationHelper.IsSourceGeneratorDisabled(compilation))
+                {
+                    return;
+                }
+                
                 if (!CompilationHelper.HasFantasyDefine(compilation))
                 {
                     // 不是 Fantasy 框架项目，跳过代码生成
                     return;
                 }
                 
-                // 检查2: 是否引用了 Fantasy 框架的核心类型
                 if (compilation.GetTypeByMetadataName("Fantasy.Assembly.IEntitySystemRegistrar") == null)
                 {
                     return;
