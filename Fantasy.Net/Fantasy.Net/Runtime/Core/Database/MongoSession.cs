@@ -14,7 +14,7 @@ using System.Linq.Expressions;
 namespace Fantasy.Database
 {
     /// <summary>
-    /// MongoDB的会话,适用于数据库基本操作
+    /// MongoDB的会话,适用于数据库基本CRUD操作
     /// </summary>
     public sealed partial class MongoSession :IDbSession, IDisposable
     {

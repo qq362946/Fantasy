@@ -20,8 +20,8 @@ namespace Fantasy
         JoinQuery
     }
 
-    [FTable("FTableExampleEntity", Description = "Fantasy Table Test root Entity")]
-    public class FTableExampleRoot : Entity
+    [FantasyDbSet("FantasyDbSetExampleEntity", Description = "Fantasy Table Test root Entity")]
+    public class FantasyDbSetExampleRoot : Entity
     {
         public int TestIntField;
 
@@ -32,23 +32,23 @@ namespace Fantasy
 
         public async FTask StartTest<T>(TestWhat testItem,int dutyId)where T:class,IDatabase 
         {
-            var componentA = AddComponent<FTableComponentA>();
-            var componentB = AddComponent<FTableComponentB>();
+            var componentA = AddComponent<FantasyDbSetComponentA>();
+            var componentB = AddComponent<FantasyDbSetComponentB>();
 
-            var child01 = componentA.AddComponent<FTableChild>();
-            var child02 = componentA.AddComponent<FTableChild>();
-            var child03 = componentA.AddComponent<FTableChild>();
+            var child01 = componentA.AddComponent<FantasyDbSetChild>();
+            var child02 = componentA.AddComponent<FantasyDbSetChild>();
+            var child03 = componentA.AddComponent<FantasyDbSetChild>();
 
-            child01.AddComponent<FTableComponentA>();
-            child02.AddComponent<FTableComponentB>();
+            child01.AddComponent<FantasyDbSetComponentA>();
+            child02.AddComponent<FantasyDbSetComponentB>();
 
-            var componentC = child03.AddComponent<FTableComponentC>();
-            var grandChild = componentC.AddComponent<FTableGrandchild>();
-            grandChild.AddComponent<FTableComponentA>();
-            grandChild.AddComponent<FTableComponentB>();
-            grandChild.AddComponent<FTableComponentC>();
+            var componentC = child03.AddComponent<FantasyDbSetComponentC>();
+            var grandChild = componentC.AddComponent<FantasyDbSetGrandchild>();
+            grandChild.AddComponent<FantasyDbSetComponentA>();
+            grandChild.AddComponent<FantasyDbSetComponentB>();
+            grandChild.AddComponent<FantasyDbSetComponentC>();
 
-            Log.Debug("[FTable] 测试: 实体树已构造,");
+            Log.Debug("[FantasyDbSet] 测试: 实体树已构造,");
             Log.Debug("\r\n        ///     Root\r\n        ///     ├─ ComponentA\r\n        ///     │  ├─ Child01\r\n        ///     │  │  └─ ComponentA\r\n        ///     │  ├─ Child02\r\n        ///     │  │  └─ ComponentB\r\n        ///     │  └─ Child03\r\n        ///     │     └─ ComponentC\r\n        ///     │        └─ Grandchild\r\n        ///     │           ├─ ComponentA\r\n        ///     │           ├─ ComponentB\r\n        ///     │           └─ ComponentC\r\n        ///     └─ ComponentB");
 
             var db = Scene.World.GetDatabase<T>(dutyId);
@@ -73,8 +73,8 @@ namespace Fantasy
                         if (dbSession == null)
                             throw new("Failed to use dbSession.");
 
-                        var entity = Entity.Create<FTableExampleRoot>(Scene, true, true);
-                        await dbSession.Save(entity, "FTableExampleEntity");
+                        var entity = Entity.Create<FantasyDbSetExampleRoot>(Scene, true, true);
+                        await dbSession.Save(entity, "FantasyDbSetExampleEntity");
                       
                         break;
                 }

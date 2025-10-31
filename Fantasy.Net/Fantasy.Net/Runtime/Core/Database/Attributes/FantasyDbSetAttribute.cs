@@ -3,12 +3,16 @@
 namespace Fantasy.Database.Attributes
 {
     /// <summary>
-    /// [FTable] 是 Fantasy 对原生 [Table]标签的扩展, 设计用于加强对SQL数据库的分表、表迁移等情况的管理。
-    /// 打上这个标签, 框架会为该类建立"Entity-Table"映射。
+    /// [FantasyDbSet] 是 Fantasy 对原生 [Table]标签的扩展, 设计用于加强对数据库的分表、表迁移等情况的管理。
+    /// （在任意类上打上这个标签, 框架会根据其中设置的信息为该类建立 ORM 映射模型，）
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    public sealed class FTableAttribute : TableAttribute
+    public sealed class FantasyDbSetAttribute : TableAttribute
     {
+        /// <summary>
+        /// 数据库选择, 默认为任意, 即所有数据库均可以操作这个类
+        /// </summary>
+        public DatabaseType DbSelection = DatabaseType.Any;
         /// <summary>
         /// 表描述
         /// </summary>
@@ -35,9 +39,18 @@ namespace Fantasy.Database.Attributes
         /// 构造函数
         /// </summary>
         /// <param name="name"></param>
-        public FTableAttribute(string? name = null) : base(name ?? "")
+        public FantasyDbSetAttribute(string? name = null) : base(name ?? "")
         {
             
+        }
+
+        /// <summary>
+        /// 检查标签中的数据库选项是否包含数据库
+        /// </summary>
+        /// <returns></returns>
+        public bool IfSelectionContainsDbType(DatabaseType dbType)
+        {
+            return (DbSelection & DatabaseType.MongoDB) == DatabaseType.MongoDB;
         }
     }
 }

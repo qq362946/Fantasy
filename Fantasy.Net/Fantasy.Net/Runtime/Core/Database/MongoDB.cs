@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -183,7 +184,15 @@ namespace Fantasy.Database
         /// <returns></returns>
         public async FTask FastDeploy()
         {
-            await FTableHelper.ScanFTableTypesAsync((type, tableName) => CreateCollection(type, tableName));
+            await DbAttrHelper.ScanFantasyDbSetTypesAsync(async (type, tableName, attr) => {
+                if (attr.IfSelectionContainsDbType(DatabaseType.MongoDB) == false)
+                { 
+                    Log.Error($"Failed to operated a FantasyDbSet which`s Attr Info had not contained DbSelection of {DatabaseType.MongoDB}");
+                    return;
+                }
+                await CreateCollection(type, tableName);
+            }
+            );
         }
 
         /// <summary>
