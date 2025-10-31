@@ -11,7 +11,7 @@ using Fantasy.Pool;
 using Fantasy.Scheduler;
 using Fantasy.Timer;
 #if FANTASY_NET
-using Fantasy.DataBase;
+using Fantasy.Database;
 using Fantasy.Platform.Net;
 // using Fantasy.SingleCollection;
 using System.Runtime.CompilerServices;

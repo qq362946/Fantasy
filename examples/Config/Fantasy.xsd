@@ -15,7 +15,17 @@
           <xs:annotation>
             <xs:documentation>配置表路径设置</xs:documentation>
           </xs:annotation>
+        </xs:element>      
+        <xs:element name="network" type="networkRuntimeType" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>网络运行时配置</xs:documentation>
+          </xs:annotation>
         </xs:element>
+        <xs:element name="session" type="sessionRuntimeType" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>会话运行时配置</xs:documentation>
+          </xs:annotation>
+        </xs:element>       
         <xs:element name="server" type="serverType" minOccurs="1" maxOccurs="1">
           <xs:annotation>
             <xs:documentation>服务器配置</xs:documentation>
@@ -127,7 +137,53 @@
     </xs:sequence>
   </xs:complexType>
 
+  <!-- database的选择 -->
+  <xs:complexType name="databaseType">
+    <xs:attribute name="duty" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>数据库的工作职责（ 比如主职、从职、日志职责等, 需自行约定不同 int 值）</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="dbType" use="required">
+      <xs:annotation>
+        <xs:documentation>数据库类型</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <!-- PostgreSQL -->
+          <xs:enumeration value="PostgreSQL"/>
+          <xs:enumeration value="Postgres"/>
+          <xs:enumeration value="PgSQL"/>
+          <xs:enumeration value="Pg"/>
+          <xs:enumeration value="PG"/>
+          <!-- MongoDB -->
+          <xs:enumeration value="MongoDB"/>
+          <xs:enumeration value="Mongo"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="dbName" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>数据库名称</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="dbConnection" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>数据库连接字符串</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
   <xs:complexType name="worldType">
+    <!-- 每个world允许包含1或n个database -->
+    <xs:sequence>
+      <xs:annotation>
+        <xs:documentation>世界中配置的数据库</xs:documentation>
+      </xs:annotation>
+      <xs:element name="database" type="databaseType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+
+    <!-- world需要id和worldName -->
     <xs:attribute name="id" type="xs:unsignedInt" use="required">
       <xs:annotation>
         <xs:documentation>世界ID</xs:documentation>
@@ -137,27 +193,6 @@
       <xs:annotation>
         <xs:documentation>世界名称</xs:documentation>
       </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="dbConnection" type="xs:string" use="optional">
-      <xs:annotation>
-        <xs:documentation>数据库连接字符串</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="dbName" type="xs:string" use="required">
-      <xs:annotation>
-        <xs:documentation>数据库名称</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="dbType" use="required">
-      <xs:annotation>
-        <xs:documentation>数据库类型</xs:documentation>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="MongoDB"/>
-          <xs:enumeration value="SQL"/>
-        </xs:restriction>
-      </xs:simpleType>
     </xs:attribute>
   </xs:complexType>
 
@@ -232,6 +267,40 @@
     </xs:attribute>
   </xs:complexType>
 
+  <!-- Network Runtime type -->
+  <xs:complexType name="networkRuntimeType">
+    <xs:attribute name="inner" use="optional" default="TCP">
+      <xs:annotation>
+        <xs:documentation>服务器内部网络协议</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="TCP"/>
+          <xs:enumeration value="KCP"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="maxMessageSize" type="xs:int" use="optional" default="1048560">
+      <xs:annotation>
+        <xs:documentation>消息体最大长度(字节)，默认1048560字节(约1.02MB)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Session Runtime type -->
+  <xs:complexType name="sessionRuntimeType">
+    <xs:attribute name="idleTimeout" type="xs:int" use="optional" default="8000">
+      <xs:annotation>
+        <xs:documentation>Session idle check timeout (in milliseconds)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="idleInterval" type="xs:int" use="optional" default="5000">
+      <xs:annotation>
+        <xs:documentation>Session idle check interval (in milliseconds)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  
   <!-- Units types -->
   <xs:complexType name="unitsType">
     <xs:sequence>

@@ -29,7 +29,7 @@ namespace Fantasy.Platform.Net
 	    /// 初始化ProcessConfig
 	    /// </summary>
 	    /// <param name="processConfigJson"></param>
-	    public static void Initialize(string processConfigJson)
+	    public static void InitializeFromJson(string processConfigJson)
 	    {
 		    try
 		    {

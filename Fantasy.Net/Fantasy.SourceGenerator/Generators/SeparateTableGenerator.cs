@@ -114,6 +114,7 @@ namespace Fantasy.SourceGenerator.Generators
                 "System.Collections.Generic",
                 "Fantasy.Assembly",
                 "Fantasy.Entitas",
+                "Fantasy.Database",
                 "Fantasy.Entitas.Interface",
                 "Fantasy.Async"
             );
@@ -149,12 +150,12 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("{");
             builder.Indent(1);
             builder.AddXmlComment("从数据库加载指定实体的所有分表数据，并自动建立父子关系。");
-            builder.BeginMethod("public static FTask LoadWithSeparateTables<T>(this T entity) where T : Entity, new()");
-            builder.AppendLine("return entity.Scene.SeparateTableComponent.LoadWithSeparateTables(entity);");
+            builder.BeginMethod("public static FTask LoadWithSeparateTables<T>(this T entity,IDbSession dbSession) where T : Entity, new()");
+            builder.AppendLine("return entity.Scene.SeparateTableComponent.LoadWithSeparateTables(entity,dbSession);");
             builder.EndMethod();
             builder.AddXmlComment("将实体及其所有分表组件保存到数据库中。");
-            builder.BeginMethod("public static FTask PersistAggregate<T>(this T entity) where T : Entity, new()");
-            builder.AppendLine("return entity.Scene.SeparateTableComponent.PersistAggregate(entity);");
+            builder.BeginMethod("public static FTask PersistAggregate<T>(this T entity,IDbSession dbSession) where T : Entity, new()");
+            builder.AppendLine("return entity.Scene.SeparateTableComponent.PersistAggregate(entity,dbSession);");
             builder.EndMethod();
             builder.Unindent();
             builder.AppendLine("}");

@@ -64,7 +64,6 @@ public static class Entry
                         ProcessList.Add(process);
                     }
                 }
-                
                 return;
             }
             case ProcessMode.Release:
@@ -76,9 +75,24 @@ public static class Entry
                 }
                 return;
             }
-        }
+        }        
     }
-    
+
+    private static void LogFantasyVersion()
+    {
+        Log.Info($"\r\n" +
+        $"\r\n==========================================================================\r\n \r\n" +
+        $"  ███████╗ █████╗ ███╗   ██╗████████╗ █████╗  ██████╗ ██╗   ██╗\r\n" +
+        $"  ██╔════╝██╔══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔════╝ ╚██╗ ██╔╝\r\n" +
+        $"  █████╗  ███████║██╔██╗ ██║   ██║   ███████║╚█████╗   ╚████╔╝ \r\n" +
+        $"  ██╔══╝  ██╔══██║██║╚██╗██║   ██║   ██╔══██║╚════██║   ╚██╔╝  \r\n" +
+        $"  ██║     ██║  ██║██║ ╚████║   ██║   ██║  ██║██████╔╝    ██║   \r\n" +
+        $"  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═════╝     ╚═╝   \r\n" +
+        $"                                                            \r\n" +
+        $"                                          Version : {ProgramDefine.VERSION}\r\n");
+
+    }
+
     /// <summary>
     /// 框架初始化
     /// </summary>
@@ -88,7 +102,7 @@ public static class Entry
     {
         // 初始化Log系统
         Log.Initialize(log);
-        Log.Info($"Fantasy Version:{ProgramDefine.VERSION}");
+        LogFantasyVersion();
         // 加载Fantasy.config配置文件
         await ConfigLoader.InitializeFromXml(Path.Combine(AppContext.BaseDirectory, "Fantasy.config"));
         // 解析命令行参数

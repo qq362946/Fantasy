@@ -26,6 +26,7 @@ public class HelloController : ControllerBase
     public async FTask<IActionResult> Greet()
     {
         Log.Debug($"HelloController Thread.CurrentThread.ManagedThreadId:{Thread.CurrentThread.ManagedThreadId}");
+        await FTask.CompletedTask;
         return Ok($"Hello from the Fantasy controller! _scene.SceneType:{_scene.SceneType} _scene.SceneType:{_scene.SceneConfigId}");
     }
 }

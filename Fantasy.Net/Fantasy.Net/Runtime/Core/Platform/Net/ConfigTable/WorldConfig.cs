@@ -28,7 +28,7 @@ namespace Fantasy.Platform.Net
 	    /// 初始化WorldConfig
 	    /// </summary>
 	    /// <param name="worldConfigJson"></param>
-	    public static void Initialize(string worldConfigJson)
+	    public static void InitializeFromJson(string worldConfigJson)
 	    {
 		    try
 		    {
@@ -97,19 +97,29 @@ namespace Fantasy.Platform.Net
 		/// <summary>
 		/// 名称
 		/// </summary>
-		public string WorldName { get; set; } 
-		/// <summary>
-		/// 数据库连接字符串
-		/// </summary>
-		public string DbConnection { get; set; } 
-		/// <summary>
-		/// 数据库名称
-		/// </summary>
-		public string DbName { get; set; } 
-		/// <summary>
-		/// 数据库类型
-		/// </summary>
-		public string DbType { get; set; }   
-    } 
+		public string WorldName { get; set; }
+
+
+        #region ↓数据库相关, 在配置多数据库时, 如果未使用推荐的 Fantasy.config 进行配置, 请自行确保索引严格对齐↓
+
+        /// <summary>
+        /// 数据库工作职责标识
+        /// </summary>
+		public int[] DbDuty { get; set; }
+        /// <summary>
+        /// 数据库连接字符串
+        /// </summary>
+        public string[] DbConnection { get; set; }
+        /// <summary>
+        /// 数据库名称
+        /// </summary>
+        public string[] DbName { get; set; }
+        /// <summary>
+        /// 数据库类型
+        /// </summary>
+        public string[] DbType { get; set; }
+
+        #endregion
+    }
 }
 #endif

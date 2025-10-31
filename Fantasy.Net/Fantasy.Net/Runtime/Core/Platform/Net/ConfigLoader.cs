@@ -51,7 +51,7 @@ public static class ConfigLoader
             await LoadJsonConfig(configTablePath);
             return;
         }
-        
+
         var serverNode = root.SelectSingleNode("f:server", nsManager);
         if (serverNode == null)
         {
@@ -99,10 +99,10 @@ public static class ConfigLoader
             throw new InvalidOperationException($"SceneConfigData.Json not found in the {sceneConfigFullPath} directory");
         }
 
-        MachineConfigData.Initialize(await File.ReadAllTextAsync(machineConfigFullPath, Encoding.UTF8));
-        ProcessConfigData.Initialize(await File.ReadAllTextAsync(processConfigFullPath, Encoding.UTF8));
-        WorldConfigData.Initialize(await File.ReadAllTextAsync(worldConfigFullPath, Encoding.UTF8));
-        SceneConfigData.Initialize(await File.ReadAllTextAsync(sceneConfigFullPath, Encoding.UTF8));
+        MachineConfigData.InitializeFromJson(await File.ReadAllTextAsync(machineConfigFullPath, Encoding.UTF8));
+        ProcessConfigData.InitializeFromJson(await File.ReadAllTextAsync(processConfigFullPath, Encoding.UTF8));
+        WorldConfigData.InitializeFromJson(await File.ReadAllTextAsync(worldConfigFullPath, Encoding.UTF8));
+        SceneConfigData.InitializeFromJson(await File.ReadAllTextAsync(sceneConfigFullPath, Encoding.UTF8));
         
         // 验证所有配置的完整性和正确性
         CheckConfig();
@@ -186,19 +186,51 @@ public static class ConfigLoader
         }
         
         var worldList = new List<WorldConfig>();
+
+        // 解析world和所有database
         foreach (XmlNode worldNode in worldNodes)
         {
-            var world = new WorldConfig
+            uint id = uint.Parse(GetRequiredAttribute(worldNode, "id"));
+            string worldName = GetRequiredAttribute(worldNode, "worldName");
+            XmlNodeList databaseNodes = GetChildNodes(worldNode, "f:database", nsManager);
+
+            List<int> dbDuties = [];
+            List<string> dbTypes = [];
+            List<string> dbNames = [];
+            List<string> dbConnections = [];
+
+            foreach (XmlNode dbNode in databaseNodes)
             {
-                Id = uint.Parse(GetRequiredAttribute(worldNode, "id")),
-                WorldName = GetRequiredAttribute(worldNode, "worldName"),
-                DbConnection = GetOptionalAttribute(worldNode, "dbConnection") ?? string.Empty,
-                DbName = GetRequiredAttribute(worldNode, "dbName"),
-                DbType = GetRequiredAttribute(worldNode, "dbType")
+                string? dbConnection = GetOptionalAttribute(dbNode, "dbConnection");
+                string dbType = GetRequiredAttribute(dbNode, "dbType");
+                int dbDuty = int.Parse(GetRequiredAttribute(dbNode, "duty"));
+                string dbName = GetRequiredAttribute(dbNode, "dbName");
+
+                if (string.IsNullOrWhiteSpace(dbConnection))
+                {
+                    Log.Warning($"(Fantasy.config) \"DbConnection\" is empty, thus the database-config \"{dbName}({dbType})\" in {worldName} (World Id: {id}) will be ignoured.");
+                    dbConnection = string.Empty; 
+                }
+
+                dbDuties.Add(dbDuty);
+                dbTypes.Add(dbType);
+                dbNames.Add(dbName);
+                dbConnections.Add(dbConnection);
+            }
+
+            // 创建 WorldConfig
+            var worldConfig = new WorldConfig
+            {
+                Id = id,
+                WorldName = worldName,
+                DbDuty = dbDuties.ToArray(),
+                DbType = dbTypes.ToArray(),
+                DbName = dbNames.ToArray(),
+                DbConnection = dbConnections.ToArray()
             };
-            worldList.Add(world);
+            worldList.Add(worldConfig);
         }
-        
+
         WorldConfigData.Initialize(worldList);
     }
 
@@ -236,15 +268,29 @@ public static class ConfigLoader
         
         SceneConfigData.Initialize(sceneList);
     }
-    
+
+    /// <summary>
+    /// 获取必填的属性
+    /// </summary>
     private static string GetRequiredAttribute(XmlNode node, string attributeName)
     {
         return node.Attributes?[attributeName]?.Value ?? throw new InvalidOperationException($"Required attribute '{attributeName}' is missing or null");
     }
 
+    /// <summary>
+    /// 获取可选的属性
+    /// </summary>
     private static string? GetOptionalAttribute(XmlNode? node, string attributeName)
     {
         return node?.Attributes?[attributeName]?.Value;
+    }
+
+    /// <summary>
+    /// 获取 XMl 父节点下所有指定名称的子节点
+    /// </summary>
+    private static XmlNodeList GetChildNodes(XmlNode parentNode, string childNodeName, XmlNamespaceManager nsManager)
+    {
+        return parentNode.SelectNodes(childNodeName, nsManager) ?? throw new InvalidOperationException($"No child nodes named '{childNodeName}' found under parent node");
     }
 
     #endregion
@@ -342,13 +388,19 @@ public static class ConfigLoader
             {
                 throw new InvalidOperationException($"World {world.Id}: WorldName cannot be null or empty");
             }
-            
-            if (string.IsNullOrWhiteSpace(world.DbName))
+
+            if (world.DbDuty == null || world.DbDuty is { Length: <= 0 })
+            {
+                throw new InvalidOperationException($"World {world.Id}: DbDuty config has no value");
+            }
+
+            if (world.DbName == null || world.DbName is { Length: <= 0 } || world.DbName.Any(s => string.IsNullOrWhiteSpace(s))) 
             {
                 throw new InvalidOperationException($"World {world.Id}: DbName cannot be null or empty");
             }
-            
-            if (string.IsNullOrWhiteSpace(world.DbType))
+
+
+            if (world.DbType == null || world.DbType is { Length: <= 0 } || world.DbType.Any(s => string.IsNullOrWhiteSpace(s)))
             {
                 throw new InvalidOperationException($"World {world.Id}: DbType cannot be null or empty");
             }

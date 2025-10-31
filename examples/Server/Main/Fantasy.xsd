@@ -15,12 +15,7 @@
           <xs:annotation>
             <xs:documentation>配置表路径设置</xs:documentation>
           </xs:annotation>
-        </xs:element>
-        <xs:element name="idFactory" type="idFactoryType" minOccurs="0" maxOccurs="1">
-          <xs:annotation>
-            <xs:documentation>ID生成器配置</xs:documentation>
-          </xs:annotation>
-        </xs:element>
+        </xs:element>      
         <xs:element name="network" type="networkRuntimeType" minOccurs="0" maxOccurs="1">
           <xs:annotation>
             <xs:documentation>网络运行时配置</xs:documentation>
@@ -30,7 +25,7 @@
           <xs:annotation>
             <xs:documentation>会话运行时配置</xs:documentation>
           </xs:annotation>
-        </xs:element>
+        </xs:element>       
         <xs:element name="server" type="serverType" minOccurs="1" maxOccurs="1">
           <xs:annotation>
             <xs:documentation>服务器配置</xs:documentation>
@@ -49,28 +44,6 @@
     </xs:attribute>
   </xs:complexType>
 
-  <!-- IdFactory type -->
-  <xs:complexType name="idFactoryType">
-    <xs:attribute name="type" use="optional" default="World">
-      <xs:annotation>
-        <xs:documentation>ID生成器规则类型</xs:documentation>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="Default">
-            <xs:annotation>
-              <xs:documentation>默认生成器，Scene最大为65535个</xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="World">
-            <xs:annotation>
-              <xs:documentation>ID中包含World，可解决合区ID重复问题，但Scene数量限制到255个</xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:complexType>
 
   <!-- Server type -->
   <xs:complexType name="serverType">
@@ -93,6 +66,11 @@
       <xs:element name="scenes" type="scenesType" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>场景配置列表</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="units" type="unitsType" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>单位配置列表</xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
@@ -160,7 +138,53 @@
     </xs:sequence>
   </xs:complexType>
 
+  <!-- database的选择 -->
+  <xs:complexType name="databaseType">
+    <xs:attribute name="duty" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>数据库的工作职责（ 比如主职、从职、日志职责等, 需自行约定不同 int 值）</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="dbType" use="required">
+      <xs:annotation>
+        <xs:documentation>数据库类型</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <!-- PostgreSQL -->
+          <xs:enumeration value="PostgreSQL"/>
+          <xs:enumeration value="Postgres"/>
+          <xs:enumeration value="PgSQL"/>
+          <xs:enumeration value="Pg"/>
+          <xs:enumeration value="PG"/>
+          <!-- MongoDB -->
+          <xs:enumeration value="MongoDB"/>
+          <xs:enumeration value="Mongo"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="dbName" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>数据库名称</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="dbConnection" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>数据库连接字符串</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
   <xs:complexType name="worldType">
+    <!-- 每个world允许包含1或n个database -->
+    <xs:sequence>
+      <xs:annotation>
+        <xs:documentation>世界中配置的数据库</xs:documentation>
+      </xs:annotation>
+      <xs:element name="database" type="databaseType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+
+    <!-- world需要id和worldName -->
     <xs:attribute name="id" type="xs:unsignedInt" use="required">
       <xs:annotation>
         <xs:documentation>世界ID</xs:documentation>
@@ -170,27 +194,6 @@
       <xs:annotation>
         <xs:documentation>世界名称</xs:documentation>
       </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="dbConnection" type="xs:string" use="optional">
-      <xs:annotation>
-        <xs:documentation>数据库连接字符串</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="dbName" type="xs:string" use="required">
-      <xs:annotation>
-        <xs:documentation>数据库名称</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="dbType" use="required">
-      <xs:annotation>
-        <xs:documentation>数据库类型</xs:documentation>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="MongoDB"/>
-          <xs:enumeration value="SQL"/>
-        </xs:restriction>
-      </xs:simpleType>
     </xs:attribute>
   </xs:complexType>
 
@@ -297,6 +300,58 @@
         <xs:documentation>Session idle check interval (in milliseconds)</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+  </xs:complexType>
+  
+  
+  <!-- Units types -->
+  <xs:complexType name="unitsType">
+    <xs:sequence>
+      <xs:element name="unit" type="unitType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="unitType">
+    <xs:sequence>
+      <xs:element name="dic" type="unitDicType" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>单位字典数据</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:unsignedInt" use="required">
+      <xs:annotation>
+        <xs:documentation>单位ID</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="name" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>单位名称</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="model" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>单位模型</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="unitDicType">
+    <xs:sequence>
+      <xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="key" type="xs:string" use="required">
+            <xs:annotation>
+              <xs:documentation>字典键</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="value" type="xs:string" use="required">
+            <xs:annotation>
+              <xs:documentation>字典值</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
   </xs:complexType>
 
 </xs:schema>
