@@ -276,8 +276,9 @@ namespace Fantasy.Async
                 {
                     throw new TimeoutException($"[FlowLock] timeout Tag={tag ?? "null"}");
                 }
-                long minusOne = -1;
-                return CoroutineLockComponent.WaitCoroutineLockPool.Rent(this, ref minusOne, tag, timeOut);
+                // 成功进入临界区：登记 tag
+                _tagMap[(int)idx] = (tag, DateTime.UtcNow);
+                return CoroutineLockComponent.WaitCoroutineLockPool.Rent(this, ref idx, tag, timeOut);
             }
             catch
             {
@@ -291,9 +292,6 @@ namespace Fantasy.Async
         /// </summary>
         public void Release(long waitingKey) 
         {
-            if (waitingKey == -1) //-1 说明是纯限流了, 没有对任何Id上锁, 直接跳转
-                goto SomethingMustRelease;
-
             int idIndex = (int)waitingKey;
             if (idIndex < 0 || idIndex >= FTaskFlowLimit)
             {
@@ -310,8 +308,6 @@ namespace Fantasy.Async
             {
                 Log.Error($"FTaskFlowLock.Release: id lock {idIndex} release twice?");  // 防御性记录调试信息
             }
-
-            SomethingMustRelease:
 
             // active count 自减
             int newVal = Interlocked.Decrement(ref _activeCount);

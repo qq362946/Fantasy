@@ -24,7 +24,8 @@ using static System.Formats.Asn1.AsnWriter;
 namespace Fantasy.Database
 {
     /// <summary>
-    /// Fantasy框架使用 Mongo 数据库的实现。
+    /// 这里是 Fantasy框架使用 Mongo 数据库的实现。
+    /// ( 请注意"b"的小写性质, 容易与大写"B"的MongoDB命名空间产生混淆, 特此提醒。)
     /// </summary>
     public sealed partial class MongoDb : IDatabase, IRawHandler<IMongoDatabase>
     {
