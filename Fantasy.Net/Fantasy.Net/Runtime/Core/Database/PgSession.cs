@@ -36,7 +36,7 @@ namespace Fantasy.Database
     }
 
     /// <summary>
-    /// 【PgSession是 PgSql 数据库的操作会话, 继承自EFCore 的 DbContext。】
+    /// 【PgSession是 PgSql 数据库的操作会话, 继承自EFCore 的 DbContext。适用于PgSQL的 CRUD 操作。】
     /// </summary>
     /// 
     /// 【注意, 每个 PgSession 会交由EFCore构建一个“Entity - Table”模型】
@@ -106,9 +106,12 @@ namespace Fantasy.Database
         {
             //Log.Info("\" Entity - Table\" Model is Creating...");
 
-            FTableHelper.ScanFTableTypes((type, tableName) => {
-                //Log.Debug($"Registering entity: {type.FullName} -> table {tableName}");
-                modelBuilder.Entity(type).ToTable(tableName);
+            DbAttrHelper.ScanFantasyDbSetTypes((type, tableName,attr) => {
+                if (attr.IfSelectionContainsDbType(DatabaseType.PostgreSQL))
+                {
+                    Log.Debug($"Registering entity: {type.FullName} -> table {tableName}");
+                    modelBuilder.Entity(type).ToTable(tableName);
+                }
             });
 
             // 剔除属性导航

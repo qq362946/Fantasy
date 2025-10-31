@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace Fantasy
 {
-    //[FTable("ExampleComponent", Description = "Fantasy Table Test Child")]
-    public class FTableChild :Entity, ISupportedMultiEntity
+    //[FantasyDbSet("ExampleComponent", Description = "Fantasy Table Test Child")]
+    public class FantasyDbSetChild :Entity, ISupportedMultiEntity
     {
         public int TestIntField;
 

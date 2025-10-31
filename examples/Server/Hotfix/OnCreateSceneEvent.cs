@@ -137,13 +137,13 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
         }
 
-        //测试FTable
+        //测试FantasyDbSet
         if (scene.SceneConfigId == 1001)
         {
-            var TestFTableRoot =  scene.AddComponent<FTableExampleRoot>();
-            //TestFTableRoot.StartTest<PostgreSQL>(TestWhat.FastDeploy, dutyId: 0).Coroutine();
-            //TestFTableRoot.StartTest<MongoDb>(TestWhat.FastDeploy, dutyId: 2).Coroutine();
-            //TestFTableRoot.StartTest<MongoDb>(TestWhat.Insert, dutyId: 2).Coroutine();
+            var TestFantasyDbSetRoot =  scene.AddComponent<FantasyDbSetExampleRoot>();
+            //TestFantasyDbSetRoot.StartTest<PostgreSQL>(TestWhat.FastDeploy, dutyId: 0).Coroutine();
+            //TestFantasyDbSetRoot.StartTest<MongoDb>(TestWhat.FastDeploy, dutyId: 2).Coroutine();
+            //TestFantasyDbSetRoot.StartTest<MongoDb>(TestWhat.Insert, dutyId: 2).Coroutine();
         }       
     }
 }

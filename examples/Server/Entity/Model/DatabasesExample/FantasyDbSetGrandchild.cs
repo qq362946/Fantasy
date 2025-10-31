@@ -1,11 +1,14 @@
 ﻿using Fantasy.Database.Attributes;
 using Fantasy.Entitas;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Fantasy
 {
-    //[FTable("ExampleComponentC", Description = "Fantasy Table Test Component")]
-    public class FTableComponentC : Entity
+    //[FantasyDbSet("ExampleGrandchild", Description = "Fantasy Table Test Grandchild")]
+    public class FantasyDbSetGrandchild : Entity
     {
         public int TestIntField;
 

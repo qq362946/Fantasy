@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fantasy
 {
-    //[FTable("ExampleComponentA", Description = "Fantasy Table Test Component")]
-    public class FTableComponentA : Entity
+    //[FantasyDbSet("ExampleComponentC", Description = "Fantasy Table Test Component")]
+    public class FantasyDbSetComponentC : Entity
     {
         public int TestIntField;
 
