@@ -1,6 +1,6 @@
 <div align="center">
 
-![Fantasy](https://socialify.git.ci/qq362946/Fantasy/image?custom_description=%F0%9F%8E%AE+%E4%B8%93%E4%B8%BA%E5%A4%A7%E5%9E%8B%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E6%B8%B8%E6%88%8F%E6%89%93%E9%80%A0%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6%E7%94%A8+%0A%F0%9F%9A%80+C%23+%E6%9E%84%E5%BB%BA%E4%BD%A0%E7%9A%84%E6%B8%B8%E6%88%8F%E5%B8%9D%E5%9B%BD+%7C+%E4%BB%8E%E5%B0%8F%E5%9E%8B%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E5%88%B0%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E6%B8%B8%E6%88%8F%0A%E2%9A%A1+%E9%9B%B6%E5%8F%8D%E5%B0%84+%7C+%F0%9F%9A%80+Native+AOT+%7C+%F0%9F%8C%90+%E5%A4%9A%E5%8D%8F%E8%AE%AE+%7C+%F0%9F%94%A5+%E5%88%86%E5%B8%83%E5%BC%8F&description=1&font=Inter&forks=1&issues=1&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII%3D&name=1&owner=1&pattern=Signal&pulls=1&stargazers=1&theme=Auto)
+![Fantasy](https://socialify.git.ci/qq362946/Fantasy/image?custom_description=%F0%9F%8E%AE+%E4%B8%93%E4%B8%BA%E5%A4%A7%E5%9E%8B%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E6%B8%B8%E6%88%8F%E6%89%93%E9%80%A0%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6+%0A%F0%9F%9A%80+%E7%94%A8C%23+%E6%9E%84%E5%BB%BA%E4%BD%A0%E7%9A%84%E6%B8%B8%E6%88%8F%E5%B8%9D%E5%9B%BD+%7C+%E4%BB%8E%E5%B0%8F%E5%9E%8B%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E5%88%B0%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E5%A4%A7%E5%9E%8B%E6%B8%B8%E6%88%8F%0A%E2%9A%A1+%E9%9B%B6%E5%8F%8D%E5%B0%84+%7C+%F0%9F%9A%80+Native+AOT+%7C+%F0%9F%8C%90+%E5%A4%9A%E5%8D%8F%E8%AE%AE+%7C+%F0%9F%94%A5+%E5%88%86%E5%B8%83%E5%BC%8F&description=1&font=Inter&forks=1&issues=1&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII%3D&name=1&owner=1&pattern=Signal&pulls=1&stargazers=1&theme=Auto)
 
 </div>
 
@@ -181,6 +181,8 @@ public class PlayerAwakeSystem : AwakeSystem<Player>
 - **官方网站**: [www.code-fantasy.com](https://www.code-fantasy.com/)
 - **B站视频教程**: [空间主页](https://space.bilibili.com/382126312)
 
+---
+
 ## 🙏 感谢所有为 Fantasy 做出贡献的开发者
 
 [![Contributors](https://contrib.rocks/image?repo=qq362946/Fantasy)](https://github.com/qq362946/Fantasy/graphs/contributors)
@@ -189,61 +191,9 @@ public class PlayerAwakeSystem : AwakeSystem<Player>
 
 ## 🤝 优质开源项目推荐
 
-<table>
-<tr>
-<td width="33%" valign="top">
-
-### [ET Framework](https://github.com/egametang/ET)
-
-<sub>**Fantasy 的设计理念源自于 ET**</sub>
-
-ET 是一套完善的游戏开发框架，包含客户端和服务端，适合大型 MMO 游戏开发。
-
-**项目信息**
-- ⭐ Stars: 9k+
-- 🎮 类型: 完整游戏开发框架
-- 🔧 技术栈: C# / Unity / MongoDB
-- 📚 特色: Actor 模型、热更新、分布式
-
-[→ 访问项目](https://github.com/egametang/ET)
-
-</td>
-<td width="33%" valign="top">
-
-### [TEngine](https://github.com/ALEXTANGXIAO/TEngine)
-
-<sub>**简单且强大的 Unity 框架**</sub>
-
-TEngine 是一个新手友好、开箱即用的 Unity 全平台解决方案。
-
-**项目信息**
-- ⭐ Stars: 2k+
-- 🎮 类型: Unity 客户端框架
-- 🔧 技术栈: C# / Unity / YooAsset
-- 📚 特色: 模块化、资源管理、UI 框架
-
-[→ 访问项目](https://github.com/ALEXTANGXIAO/TEngine)
-
-</td>
-<td width="33%" valign="top">
-
-### [Legends-Of-Heroes](https://github.com/FlameskyDexive/Legends-Of-Heroes)
-
-<sub>**LOL 风格的球球大作战**</sub>
-
-一个 LOL 风格的球球大作战游戏，基于 ET 框架，使用状态同步。
-
-**项目信息**
-- ⭐ Stars: 1k+
-- 🎮 类型: 完整游戏项目
-- 🔧 技术栈: C# / ET / Unity
-- 📚 特色: 状态同步、技能系统、AI
-
-[→ 访问项目](https://github.com/FlameskyDexive/Legends-Of-Heroes)
-
-</td>
-</tr>
-</table>
+- [ET Framework](https://github.com/egametang/ET) - Fantasy 的设计灵感来源,完善的分布式游戏服务器框架
+- [TEngine](https://github.com/ALEXTANGXIAO/TEngine) - Unity框架解决方案,新手友好的全平台开发框架
+- [Legends-Of-Heroes](https://github.com/FlameskyDexive/Legends-Of-Heroes) - LOL风格的球球大作战,基于ET框架的完整游戏项目
 
 ---
 
