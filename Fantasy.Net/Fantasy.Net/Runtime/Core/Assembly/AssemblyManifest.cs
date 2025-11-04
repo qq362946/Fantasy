@@ -228,6 +228,7 @@ namespace Fantasy.Assembly
 #else
             Manifests.TryAdd(assemblyManifestId, manifest);
 #endif
+            customInterfaceRegistrar.Register(manifest.CustomInterfaces);
             AssemblyLifecycle.OnLoad(manifest).Coroutine();
         }
 #endif
