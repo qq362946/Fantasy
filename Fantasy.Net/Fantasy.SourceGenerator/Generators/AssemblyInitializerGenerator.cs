@@ -181,14 +181,16 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine(
                 "Fantasy.Assembly.IEntityTypeCollectionRegistrar? entityTypeCollectionRegistrar = null;");
             builder.AppendLine(
-                "Fantasy.Assembly.INetworkProtocolOpCodeResolver? networkProtocolOpCodeResolverRegistrar = null;");
+                "Fantasy.Assembly.IOpCodeRegistrar? opCodeRegistrar = null;");
             builder.AppendLine(
-                "Fantasy.Assembly.INetworkProtocolResponseTypeResolver? networkProtocolResponseTypeResolverRegistrar = null;");
+                "Fantasy.Assembly.IResponseTypeRegistrar? responseTypeRegistrar = null;");
             builder.AppendLine("#if FANTASY_NET", false);
             builder.AppendLine(
                 "Fantasy.Assembly.ISeparateTableRegistrar? separateTableRegistrar = null;");
             builder.AppendLine(
                 "Fantasy.Assembly.ISphereEventRegistrar? sphereEventRegistrar = null;");
+            builder.AppendLine(
+                "Fantasy.Assembly.IFantasyConfigRegistrar? fantasyConfigRegistrar = null;");
             builder.AppendLine("#endif", false);
             builder.AppendLine(
                 "Fantasy.Assembly.ICustomInterfaceRegistrar? customInterfaceRegistrar = null;");
@@ -201,11 +203,12 @@ namespace Fantasy.SourceGenerator.Generators
             GenerateTryCreateRegistrar(builder, "EntitySystem", "entitySystemRegistrar");
             GenerateTryCreateRegistrar(builder, "MessageHandlerResolver", "messageHandlerResolverRegistrar");
             GenerateTryCreateRegistrar(builder, "EntityTypeCollection", "entityTypeCollectionRegistrar");
-            GenerateTryCreateRegistrar(builder, "NetworkProtocolOpCodeResolver", "networkProtocolOpCodeResolverRegistrar");
-            GenerateTryCreateRegistrar(builder, "NetworkProtocolResponseTypeResolver", "networkProtocolResponseTypeResolverRegistrar");
+            GenerateTryCreateRegistrar(builder, "OpCode", "opCodeRegistrar");
+            GenerateTryCreateRegistrar(builder, "ResponseType", "responseTypeRegistrar");
             builder.AppendLine("#if FANTASY_NET", false);
             GenerateTryCreateRegistrar(builder, "SeparateTable", "separateTableRegistrar");
             GenerateTryCreateRegistrar(builder, "SphereEvent", "sphereEventRegistrar");
+            GenerateTryCreateRegistrar(builder, "FantasyConfig", "fantasyConfigRegistrar");
             builder.AppendLine("#endif", false);
             GenerateTryCreateRegistrar(builder, "CustomInterface", "customInterfaceRegistrar");
             
@@ -224,10 +227,11 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("messageHandlerResolverRegistrar,");
             builder.AppendLine("entityTypeCollectionRegistrar,");
             builder.AppendLine("separateTableRegistrar,");
-            builder.AppendLine("networkProtocolOpCodeResolverRegistrar,");
-            builder.AppendLine("networkProtocolResponseTypeResolverRegistrar,");
+            builder.AppendLine("opCodeRegistrar,");
+            builder.AppendLine("responseTypeRegistrar,");
             builder.AppendLine("sphereEventRegistrar,");
-            builder.AppendLine("customInterfaceRegistrar);");
+            builder.AppendLine("customInterfaceRegistrar,");
+            builder.AppendLine("fantasyConfigRegistrar);");
             builder.Unindent();
             builder.AppendLine("#endif", false);
             builder.AppendLine("#if FANTASY_UNITY", false);
@@ -240,8 +244,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("entitySystemRegistrar,");
             builder.AppendLine("messageHandlerResolverRegistrar,");
             builder.AppendLine("entityTypeCollectionRegistrar,");
-            builder.AppendLine("networkProtocolOpCodeResolverRegistrar,");
-            builder.AppendLine("networkProtocolResponseTypeResolverRegistrar,");
+            builder.AppendLine("opCodeRegistrar,");
+            builder.AppendLine("responseTypeRegistrar,");
             builder.AppendLine("customInterfaceRegistrar);");
             builder.Unindent();
             builder.AppendLine("#endif", false);

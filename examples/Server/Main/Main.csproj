@@ -21,24 +21,5 @@
       <ProjectReference Include="..\Entity\Entity.csproj" />
       <ProjectReference Include="..\Hotfix\Hotfix.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <None Update="NLog.config">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="NLog.xsd">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="Fantasy.config">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="Fantasy.xsd">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="NLog" Version="5.3.4" />
-    </ItemGroup>
-
+    
 </Project>

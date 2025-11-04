@@ -28,7 +28,7 @@ namespace Fantasy.Platform.Net
         /// 初始化MachineConfig
         /// </summary>
         /// <param name="machineConfigJson"></param>
-        public static void Initialize(string machineConfigJson)
+        public static void InitializeFromJson(string machineConfigJson)
         {
             try
             {

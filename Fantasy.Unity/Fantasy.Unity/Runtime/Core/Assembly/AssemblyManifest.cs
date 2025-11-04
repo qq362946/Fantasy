@@ -3,8 +3,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
-using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
+#if FANTASY_NET
+using System.Collections.Frozen;
+#endif
 
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -59,15 +61,14 @@ namespace Fantasy.Assembly
         internal IEntityTypeCollectionRegistrar EntityTypeCollectionRegistrar { get; set; }
         
         /// <summary>
-        /// 网络协议 OpCode 解析器接口
+        /// 网络协议 OpCode 注册器
         /// </summary>
-        internal INetworkProtocolOpCodeResolver NetworkProtocolOpCodeResolver { get; set; }
-        
+        internal IOpCodeRegistrar OpCodeRegistrar { get; set; }
         
         /// <summary>
-        /// 网络协议 Response 解析器接口
+        /// 网络协议Response注册器
         /// </summary>
-        internal INetworkProtocolResponseTypeResolver NetworkProtocolResponseTypeResolver { get; set; }
+        internal IResponseTypeRegistrar ResponseTypeRegistrar { get; set; }
         
         /// <summary>
         /// 自定义接口
@@ -128,10 +129,11 @@ namespace Fantasy.Assembly
         /// <param name="messageHandlerResolver">消息分发器注册器</param>
         /// <param name="entityTypeCollectionRegistrar">实体类型集合注册器</param>
         /// <param name="separateTableRegistrar">分表注册器</param>
-        /// <param name="networkProtocolOpCodeResolver">网络协议 OpCode 解析器接口</param>
-        /// <param name="networkProtocolResponseTypeResolver">网络协议 Response 解析器接口</param>
+        /// <param name="opCodeRegistrar">网络协议 OpCode 注册器</param>
+        /// <param name="responseTypeRegistrar">网络协议Response注册器</param>
         /// <param name="sphereEventRegistrar">领域事件系统注册器</param>
         /// <param name="customInterfaceRegistrar">自定接口注册器</param>
+        /// <param name="fantasyConfigRegistrar">Fantasy配置注册器</param>
         public static void Register(
             long assemblyManifestId,
             System.Reflection.Assembly assembly,
@@ -141,10 +143,11 @@ namespace Fantasy.Assembly
             IMessageHandlerResolver messageHandlerResolver,
             IEntityTypeCollectionRegistrar entityTypeCollectionRegistrar,
             ISeparateTableRegistrar separateTableRegistrar,
-            INetworkProtocolOpCodeResolver networkProtocolOpCodeResolver,
-            INetworkProtocolResponseTypeResolver networkProtocolResponseTypeResolver,
+            IOpCodeRegistrar opCodeRegistrar,
+            IResponseTypeRegistrar responseTypeRegistrar,
             ISphereEventRegistrar sphereEventRegistrar,
-            ICustomInterfaceRegistrar customInterfaceRegistrar)
+            ICustomInterfaceRegistrar customInterfaceRegistrar,
+            IFantasyConfigRegistrar fantasyConfigRegistrar)
         {
             var manifest = new AssemblyManifest
             {
@@ -156,12 +159,24 @@ namespace Fantasy.Assembly
                 MessageHandlerResolver = messageHandlerResolver,
                 EntityTypeCollectionRegistrar = entityTypeCollectionRegistrar,
                 SeparateTableRegistrar = separateTableRegistrar,
-                NetworkProtocolOpCodeResolver = networkProtocolOpCodeResolver,
-                NetworkProtocolResponseTypeResolver = networkProtocolResponseTypeResolver,
+                OpCodeRegistrar = opCodeRegistrar,
+                ResponseTypeRegistrar = responseTypeRegistrar,
                 SphereEventRegistrar = sphereEventRegistrar,
                 CustomInterfaceRegistrar = customInterfaceRegistrar
             };
-            
+
+            // 设置数据库名字字典
+            var databaseNameDictionary = fantasyConfigRegistrar.GetDatabaseNameDictionary();
+            if (databaseNameDictionary.Any())
+            {
+                Fantasy.Database.DataBaseHelper.DatabaseDbName = databaseNameDictionary.ToFrozenDictionary();
+            }
+            // 设置SceneType字典
+            var sceneTypeDictionary = fantasyConfigRegistrar.GetSceneTypeDictionary();
+            if (sceneTypeDictionary.Any())
+            { 
+                Scene.SceneTypeDictionary = sceneTypeDictionary.ToFrozenDictionary();
+            }
             customInterfaceRegistrar.Register(manifest.CustomInterfaces);
             Manifests.TryAdd(assemblyManifestId, manifest);
             AssemblyLifecycle.OnLoad(manifest).Coroutine();
@@ -180,8 +195,8 @@ namespace Fantasy.Assembly
         /// <param name="entitySystemRegistrar">实体系统注册器</param>
         /// <param name="messageHandlerResolver">消息分发器注册器</param>
         /// <param name="entityTypeCollectionRegistrar">实体类型集合注册器</param>
-        /// <param name="networkProtocolOpCodeResolver">网络协议 OpCode 解析器接口</param>
-        /// <param name="networkProtocolResponseTypeResolver">网络协议 Response 解析器接口</param>
+        /// <param name="opCodeRegistrar">网络协议 OpCode 注册器</param>
+        /// <param name="responseTypeRegistrar">网络协议 Response 注册器</param>
         /// <param name="customInterfaceRegistrar">自定接口注册器</param>
         public static void Register(
             long assemblyManifestId,
@@ -191,8 +206,8 @@ namespace Fantasy.Assembly
             IEntitySystemRegistrar entitySystemRegistrar,
             IMessageHandlerResolver messageHandlerResolver,
             IEntityTypeCollectionRegistrar entityTypeCollectionRegistrar,
-            INetworkProtocolOpCodeResolver networkProtocolOpCodeResolver,
-            INetworkProtocolResponseTypeResolver networkProtocolResponseTypeResolver,
+            IOpCodeRegistrar opCodeRegistrar,
+            IResponseTypeRegistrar responseTypeRegistrar,
             ICustomInterfaceRegistrar customInterfaceRegistrar)
         {
             var manifest = new AssemblyManifest
@@ -204,8 +219,8 @@ namespace Fantasy.Assembly
                 EntitySystemRegistrar = entitySystemRegistrar,
                 MessageHandlerResolver = messageHandlerResolver,
                 EntityTypeCollectionRegistrar = entityTypeCollectionRegistrar,
-                NetworkProtocolOpCodeResolver = networkProtocolOpCodeResolver,
-                NetworkProtocolResponseTypeResolver = networkProtocolResponseTypeResolver,
+                OpCodeRegistrar = opCodeRegistrar,
+                ResponseTypeRegistrar = responseTypeRegistrar,
                 CustomInterfaceRegistrar = customInterfaceRegistrar
             };
 #if FANTASY_WEBGL

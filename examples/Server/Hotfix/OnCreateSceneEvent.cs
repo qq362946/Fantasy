@@ -1,32 +1,10 @@
-using Fantasy.Assembly;
 using Fantasy.Async;
-using Fantasy.Database;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
 using Fantasy.Event;
-using Fantasy.Helper;
-using Fantasy.SeparateTable;
-using Fantasy.Serialize;
-using Fantasy.SourceGenerator;
-using Fantasy.Sphere;
-using ProtoBuf;
 
 namespace Fantasy;
 
-public interface ITest : ICustomInterface
-{
-    
-}
-
-public abstract class ATest : ITest
-{
-    
-}
-
-public class MyTest : ATest
-{
-    
-}
 public sealed class SubSceneTestComponent : Entity
 {
     public override void Dispose()
@@ -34,12 +12,6 @@ public sealed class SubSceneTestComponent : Entity
         Log.Debug("销毁SubScene下的SubSceneTestComponent");
         base.Dispose();
     }
-}
-
-[SeparateTable(typeof(SubSceneTestComponent),"TestEntity123")]
-public sealed class TestEntity : Entity
-{
-    
 }
 
 public sealed class SubSceneTestComponentAwakeSystem : AwakeSystem<SubSceneTestComponent>
@@ -61,21 +33,6 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
     /// <returns>A task representing the asynchronous operation.</returns>
     protected override async FTask Handler(OnCreateScene self)
     {
-        // var epoch1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000;
-        //
-        // {
-        //     var now = TimeHelper.Transition(new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc));
-        //     var epochThisYear = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - epoch1970;
-        //     var time = (uint)((now - epochThisYear) / 1000);
-        //     Log.Debug($"time = {time} now = {now} epochThisYear = {epochThisYear}");
-        // }
-        //
-        // {
-        //     var now = TimeHelper.Transition(new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc));
-        //     var epochThisYear = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks / 10000 - epoch1970;
-        //     var time = (uint)((now - epochThisYear) / 1000);
-        //     Log.Debug($"time = {time} now = {now} epochThisYear = {epochThisYear}");
-        // }
         var scene = self.Scene;
 
         await FTask.CompletedTask;
@@ -84,14 +41,10 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         {
             case 6666:
             {
-                var subSceneTestComponent = scene.AddComponent<SubSceneTestComponent>();
-                Log.Debug("增加了SubSceneTestComponent");
-                // scene.EntityComponent.CustomSystem(subSceneTestComponent, CustomSystemType.RunSystem);
                 break;
             }
             case SceneType.Addressable:
             {
-                // scene.AddComponent<AddressableManageComponent>(); 
                 _addressableSceneRunTimeId = scene.RuntimeId;
                 break;
             }
@@ -125,25 +78,8 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
                 //     }
                 //     await FTask.WaitAll(tasks);
                 // }
-                
-                // 执行自定义系统
-                var testCustomSystemComponent = scene.AddComponent<TestCustomSystemComponent>();
-                // scene.EntityComponent.CustomSystem(testCustomSystemComponent, CustomSystemType.RunSystem);
-                // // 测试配置表
-                // var instanceList = UnitConfigData.Instance.List;
-                // var unitConfig = instanceList[0];
-                // Log.Debug(instanceList[0].Dic[1]);
                 break;
             }
         }
-
-        //测试FTable
-        if (scene.SceneConfigId == 1001)
-        {
-            var TestFTableRoot =  scene.AddComponent<FTableExampleRoot>();
-            //TestFTableRoot.StartTest<PostgreSQL>(TestWhat.FastDeploy, dutyId: 0).Coroutine();
-            //TestFTableRoot.StartTest<MongoDb>(TestWhat.FastDeploy, dutyId: 2).Coroutine();
-            //TestFTableRoot.StartTest<MongoDb>(TestWhat.Insert, dutyId: 2).Coroutine();
-        }       
     }
 }

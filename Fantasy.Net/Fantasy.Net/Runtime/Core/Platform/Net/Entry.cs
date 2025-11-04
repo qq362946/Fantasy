@@ -89,8 +89,8 @@ public static class Entry
         $"  ██║     ██║  ██║██║ ╚████║   ██║   ██║  ██║██████╔╝    ██║   \r\n" +
         $"  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═════╝     ╚═╝   \r\n" +
         $"                                                            \r\n" +
-        $"                                          Version : {ProgramDefine.VERSION}\r\n");
-
+        $" Version : {ProgramDefine.VERSION}\r\n" +
+        $"==========================================================================\r\n");
     }
 
     /// <summary>

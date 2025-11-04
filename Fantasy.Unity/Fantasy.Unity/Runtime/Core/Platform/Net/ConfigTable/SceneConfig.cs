@@ -40,7 +40,7 @@ namespace Fantasy.Platform.Net
 		/// 初始化SceneConfig
 		/// </summary>
 		/// <param name="sceneConfigJson"></param>
-		public static void Initialize(string sceneConfigJson)
+		public static void InitializeFromJson(string sceneConfigJson)
 		{
 			try
 			{

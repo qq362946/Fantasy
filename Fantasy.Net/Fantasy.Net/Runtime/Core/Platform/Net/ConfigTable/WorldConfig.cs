@@ -98,28 +98,18 @@ namespace Fantasy.Platform.Net
 		/// 名称
 		/// </summary>
 		public string WorldName { get; set; }
-
-
-        #region ↓数据库相关, 在配置多数据库时, 如果未使用推荐的 Fantasy.config 进行配置, 请自行确保索引严格对齐↓
-
-        /// <summary>
-        /// 数据库工作职责标识
-        /// </summary>
-		public int[] DbDuty { get; set; }
-        /// <summary>
-        /// 数据库连接字符串
-        /// </summary>
-        public string[] DbConnection { get; set; }
-        /// <summary>
-        /// 数据库名称
-        /// </summary>
-        public string[] DbName { get; set; }
-        /// <summary>
-        /// 数据库类型
-        /// </summary>
-        public string[] DbType { get; set; }
-
-        #endregion
+		/// <summary>
+		/// 数据库配置
+		/// </summary>
+		public DatabaseConfig[]? DatabaseConfig;
     }
+
+	/// <summary>
+	/// 数据库配置
+	/// </summary>
+	/// <param name="DbConnection">数据库连接字符串</param>
+	/// <param name="DbName">数据库名称</param>
+	/// <param name="DbType">数据库类型</param>
+	public sealed record DatabaseConfig(string? DbConnection, string DbName, string DbType);
 }
 #endif

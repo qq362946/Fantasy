@@ -27,17 +27,17 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
             {
                 return;
             }
-            
+
             if (!CompilationHelper.HasFantasyDefine(source.Left))
             {
                 return;
             }
-            
+
             if (source.Left.GetTypeByMetadataName("Fantasy.Assembly.INetworkProtocolRegistrar") == null)
             {
                 return;
             }
-            
+
             GenerateCode(spc, source.Left, source.Right!);
         });
     }
@@ -54,10 +54,10 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         var assemblyName = compilation.AssemblyName ?? "Unknown";
         // 生成网络网络协议类型注册的类。
         GenerateNetworkProtocolTypesCode(context, assemblyName, networkProtocolTypeInfoList);
-        // 生成OpCode辅助方法。
-        GenerateNetworkProtocolOpCodeResolverCode(context, assemblyName, networkProtocolTypeInfoList);
+        // 生成OpCode注册方法。
+        GenerateOpCodeRegistrarCode(context, assemblyName, networkProtocolTypeInfoList);
         // 生成Request消息的ResponseType辅助方法。
-        GenerateNetworkProtocolResponseTypesResolverCode(context, assemblyName, networkProtocolTypeInfoList);
+        GenerateResponseTypeRegistrarCode(context, assemblyName, networkProtocolTypeInfoList);
     }
     
     private static void GenerateNetworkProtocolTypesCode(
@@ -115,7 +115,7 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         context.AddSource("NetworkProtocolRegistrar.g.cs", builder.ToString());
     }
     
-    private static void GenerateNetworkProtocolOpCodeResolverCode(
+    private static void GenerateOpCodeRegistrarCode(
         SourceProductionContext context,
         string assemblyName, 
         List<NetworkProtocolTypeInfo> networkProtocolTypeInfoList)
@@ -136,51 +136,37 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         // 开始命名空间（固定使用 Fantasy.Generated）
         builder.BeginNamespace("Fantasy.Generated");
         // 开始类定义（实现 INetworkProtocolOpCodeResolver 接口）
-        builder.AddXmlComment($"Auto-generated NetworkProtocolOpCodeResolverRegistrar class for {assemblyName}");
-        builder.BeginClass("NetworkProtocolOpCodeResolverRegistrar", "internal sealed", "INetworkProtocolOpCodeResolver");
-        builder.AddXmlComment($"GetOpCodeCount");
-        builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+        builder.AddXmlComment($"Auto-generated OpCodeRegistrar class for {assemblyName}");
+        builder.BeginClass("OpCodeRegistrar", "internal sealed", "IOpCodeRegistrar");
+        // 开始定义GetOpCodeCount方法
+        builder.AddXmlComment("GetOpCodeCount");
         builder.BeginMethod("public int GetOpCodeCount()");
-        builder.AppendLine($"return {networkProtocolTypeInfoList.Count};");
+        builder.AppendLine(RoslynExtensions.IsFantasyAssembly(assemblyName)
+            ? "return 0;"
+            : $"return {networkProtocolTypeInfoList.Count};");
         builder.EndMethod();
-        builder.AddXmlComment($"GetCustomRouteTypeCount");
-        builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
+        // 开始定义GetCustomRouteTypeCount方法
+        builder.AddXmlComment("GetCustomRouteTypeCount");
         builder.BeginMethod("public int GetCustomRouteTypeCount()");
-        builder.AppendLine($"return {routeTypeInfos.Count};");
+        builder.AppendLine(RoslynExtensions.IsFantasyAssembly(assemblyName)
+            ? "return 0;"
+            : $"return {routeTypeInfos.Count};");
         builder.EndMethod();
-        // 开始定义GetOpCodeType方法
-        builder.AddXmlComment($"GetOpCodeType");
+        // 开始定义OpCodeTypeDictionary方法
+        builder.AddXmlComment("OpCodeTypeDictionary");
         builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-        builder.BeginMethod("public Type GetOpCodeType(uint opCode)");
+        builder.BeginMethod("public void FillOpCodeType(uint[] opCodes, Type[] types)");
+        
         try
         {
-            if (networkProtocolTypeInfoList.Any())
+            if (!RoslynExtensions.IsFantasyAssembly(assemblyName) && networkProtocolTypeInfoList.Any())
             {
-                builder.AppendLine("switch (opCode)");
-                builder.AppendLine("{");
-                builder.Indent();
-                foreach (var networkProtocolTypeInfo in networkProtocolTypeInfoList)
+                for (var i = 0; i < networkProtocolTypeInfoList.Count; i++)
                 {
-                    builder.AppendLine($"case {networkProtocolTypeInfo.OpCode}:");
-                    builder.AppendLine("{");
-                    builder.Indent();
-                    builder.AppendLine($"return typeof({networkProtocolTypeInfo.FullName});");
-                    builder.Unindent();
-                    builder.AppendLine("}");
+                    var (fullName, opCode, _, _) = networkProtocolTypeInfoList[i];
+                    builder.AppendLine($"opCodes[{i}] = {opCode};");
+                    builder.AppendLine($"types[{i}] = typeof({fullName});");
                 }
-                builder.AppendLine("default:");
-                builder.AppendLine("{");
-                builder.Indent();
-                builder.AppendLine($"return null!;");
-                builder.Unindent();
-                builder.AppendLine("}");
-                builder.Unindent();
-                builder.AppendLine("}");
-                builder.AppendLine();
-            }
-            else
-            {
-                builder.AppendLine($"return null!;");
             }
         }
         catch (Exception e)
@@ -188,40 +174,20 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
             Console.WriteLine(e);
             throw;
         }
-        builder.EndMethod();
         
-        // 开始定义GetRouteType方法
-        builder.AddXmlComment($"CustomRouteType");
-        builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-        builder.BeginMethod("public int? GetCustomRouteType(uint opCode)");
-            
-        if (routeTypeInfos.Any())
+        builder.EndMethod();
+        // 开始定义FillCustomRouteType方法
+        builder.AddXmlComment("FillCustomRouteType");
+        builder.BeginMethod("public void FillCustomRouteType(uint[] opCodes, int[] routeTypes)");
+        
+        if (!RoslynExtensions.IsFantasyAssembly(assemblyName) && routeTypeInfos.Any())
         {
-            builder.AppendLine("switch (opCode)");
-            builder.AppendLine("{");
-            builder.Indent();
-            foreach (var routeTypeInfo in routeTypeInfos)
+            for (var i = 0; i < routeTypeInfos.Count; i++)
             {
-                builder.AppendLine($"case {routeTypeInfo.OpCode}:");
-                builder.AppendLine("{");
-                builder.Indent();
-                builder.AppendLine($"return {routeTypeInfo.RouteType};");
-                builder.Unindent();
-                builder.AppendLine("}");
+                var (_, opCode, _, routeType) = routeTypeInfos[i];
+                builder.AppendLine($"opCodes[{i}] = {opCode};");
+                builder.AppendLine($"routeTypes[{i}] = {routeType};");
             }
-            builder.AppendLine("default:");
-            builder.AppendLine("{");
-            builder.Indent();
-            builder.AppendLine($"return null;");
-            builder.Unindent();
-            builder.AppendLine("}");
-            builder.Unindent();
-            builder.AppendLine("}");
-            builder.AppendLine();
-        }
-        else
-        {
-            builder.AppendLine($"return null;");
         }
         
         builder.EndMethod();
@@ -230,10 +196,10 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.EndClass();
         builder.EndNamespace();
         // 输出源代码
-        context.AddSource("NetworkProtocolOpCodeResolverRegistrar.g.cs", builder.ToString());
+        context.AddSource("OpCodeRegistrar.g.cs", builder.ToString());
     }
 
-    private static void GenerateNetworkProtocolResponseTypesResolverCode(
+    private static void GenerateResponseTypeRegistrarCode(
         SourceProductionContext context,
         string assemblyName,
         List<NetworkProtocolTypeInfo> networkProtocolTypeInfoList)
@@ -254,46 +220,29 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         // 开始命名空间（固定使用 Fantasy.Generated）
         builder.BeginNamespace("Fantasy.Generated");
         // 开始类定义（实现 IEventSystemRegistrar 接口）
-        builder.AddXmlComment($"Auto-generated NetworkProtocolResponseTypeResolverRegistrar class for {assemblyName}");
-        builder.BeginClass("NetworkProtocolResponseTypeResolverRegistrar", "internal sealed", "INetworkProtocolResponseTypeResolver");
-        builder.AddXmlComment($"GetOpCodeCount");
+        builder.AddXmlComment($"Auto-generated ResponseTypeRegistrar class for {assemblyName}");
+        builder.BeginClass("ResponseTypeRegistrar", "internal sealed", "IResponseTypeRegistrar");
+        builder.AddXmlComment($"GetRequestCount");
         builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
         builder.BeginMethod("public int GetRequestCount()");
-        builder.AppendLine($"return {requestList.Count};");
+        builder.AppendLine(RoslynExtensions.IsFantasyAssembly(assemblyName)
+            ? "return 0;"
+            : $"return {requestList.Count};");
         builder.EndMethod();
         // 开始定义GetOpCodeType方法
-        builder.AddXmlComment($"GetOpCodeType");
+        builder.AddXmlComment($"FillResponseType");
         builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-        builder.BeginMethod("public Type GetResponseType(uint opCode)");
+        builder.BeginMethod("public void FillResponseType(uint[] opCodes, Type[] types)");
         try
         {
-            if (requestList.Any())
+            if (!RoslynExtensions.IsFantasyAssembly(assemblyName) && requestList.Any())
             {
-                builder.AppendLine("switch (opCode)");
-                builder.AppendLine("{");
-                builder.Indent();
-                foreach (var request in requestList)
+                for (var i = 0; i < requestList.Count; i++)
                 {
-                    builder.AppendLine($"case {request.OpCode}:");
-                    builder.AppendLine("{");
-                    builder.Indent();
-                    builder.AppendLine($"return typeof({request.ResponseType});");
-                    builder.Unindent();
-                    builder.AppendLine("}");
+                    var (_, opCode, responseType, _) = requestList[i];
+                    builder.AppendLine($"opCodes[{i}] = {opCode};");
+                    builder.AppendLine($"types[{i}] = typeof({responseType});");
                 }
-                builder.AppendLine("default:");
-                builder.AppendLine("{");
-                builder.Indent();
-                builder.AppendLine($"return null!;");
-                builder.Unindent();
-                builder.AppendLine("}");
-                builder.Unindent();
-                builder.AppendLine("}");
-                builder.AppendLine();
-            }
-            else
-            {
-                builder.AppendLine($"return null!;");
             }
         }
         catch (Exception e)
@@ -307,7 +256,7 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.EndClass();
         builder.EndNamespace();
         // 输出源代码
-        context.AddSource("NetworkProtocolResponseTypeResolverRegistrar.g.cs", builder.ToString());
+        context.AddSource("ResponseTypeRegistrar.g.cs", builder.ToString());
     }
 
     #endregion

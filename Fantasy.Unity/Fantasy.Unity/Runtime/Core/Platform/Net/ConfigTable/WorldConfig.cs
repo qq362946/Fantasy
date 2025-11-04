@@ -28,7 +28,7 @@ namespace Fantasy.Platform.Net
 	    /// 初始化WorldConfig
 	    /// </summary>
 	    /// <param name="worldConfigJson"></param>
-	    public static void Initialize(string worldConfigJson)
+	    public static void InitializeFromJson(string worldConfigJson)
 	    {
 		    try
 		    {
@@ -97,19 +97,19 @@ namespace Fantasy.Platform.Net
 		/// <summary>
 		/// 名称
 		/// </summary>
-		public string WorldName { get; set; } 
+		public string WorldName { get; set; }
 		/// <summary>
-		/// 数据库连接字符串
+		/// 数据库配置
 		/// </summary>
-		public string DbConnection { get; set; } 
-		/// <summary>
-		/// 数据库名称
-		/// </summary>
-		public string DbName { get; set; } 
-		/// <summary>
-		/// 数据库类型
-		/// </summary>
-		public string DbType { get; set; }   
-    } 
+		public DatabaseConfig[]? DatabaseConfig;
+    }
+
+	/// <summary>
+	/// 数据库配置
+	/// </summary>
+	/// <param name="DbConnection">数据库连接字符串</param>
+	/// <param name="DbName">数据库名称</param>
+	/// <param name="DbType">数据库类型</param>
+	public sealed record DatabaseConfig(string? DbConnection, string DbName, string DbType);
 }
 #endif

@@ -15,8 +15,6 @@ namespace Fantasy.SourceGenerator.Generators
     [Generator]
     public partial class SeparateTableGenerator : IIncrementalGenerator
     {
-        private static readonly SourceCodeBuilder SeparateTableInfo = new SourceCodeBuilder();
-        
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // 查找所有标记了 SeparateTableAttribute 的类
@@ -102,7 +100,6 @@ namespace Fantasy.SourceGenerator.Generators
             Compilation compilation,
             IEnumerable<SeparateTableTypeInfo> separateTableTypeInfos)
         {
-            SeparateTableInfo.Clear();
             var separateTableTypeInfoList = separateTableTypeInfos.ToList();
             // 获取当前程序集名称（仅用于注释）
             var assemblyName = compilation.AssemblyName ?? "Unknown";
@@ -150,12 +147,12 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("{");
             builder.Indent(1);
             builder.AddXmlComment("从数据库加载指定实体的所有分表数据，并自动建立父子关系。");
-            builder.BeginMethod("public static FTask LoadWithSeparateTables<T>(this T entity,IDbSession dbSession) where T : Entity, new()");
-            builder.AppendLine("return entity.Scene.SeparateTableComponent.LoadWithSeparateTables(entity,dbSession);");
+            builder.BeginMethod("public static FTask LoadWithSeparateTables<T>(this T entity, IDatabase database) where T : Entity, new()");
+            builder.AppendLine("return entity.Scene.SeparateTableComponent.LoadWithSeparateTables(entity, database);");
             builder.EndMethod();
             builder.AddXmlComment("将实体及其所有分表组件保存到数据库中。");
-            builder.BeginMethod("public static FTask PersistAggregate<T>(this T entity,IDbSession dbSession) where T : Entity, new()");
-            builder.AppendLine("return entity.Scene.SeparateTableComponent.PersistAggregate(entity,dbSession);");
+            builder.BeginMethod("public static FTask PersistAggregate<T>(this T entity, IDatabase database) where T : Entity, new()");
+            builder.AppendLine("return entity.Scene.SeparateTableComponent.PersistAggregate(entity,database);");
             builder.EndMethod();
             builder.Unindent();
             builder.AppendLine("}");
@@ -164,10 +161,11 @@ namespace Fantasy.SourceGenerator.Generators
 
         private static void GenerateFields(SourceCodeBuilder builder, List<SeparateTableTypeInfo> separateTableTypeInfoList)
         {
-            SeparateTableInfo.AppendLine("private readonly List<ISeparateTableRegistrar.SeparateTableInfo> _separateTableInfos = new List<ISeparateTableRegistrar.SeparateTableInfo>()");
-            SeparateTableInfo.Indent(2);
-            SeparateTableInfo.AppendLine("{");
-            SeparateTableInfo.Indent(1);
+            var separateTableInfoBuilder = new SourceCodeBuilder();
+            separateTableInfoBuilder.AppendLine("private readonly List<ISeparateTableRegistrar.SeparateTableInfo> _separateTableInfos = new List<ISeparateTableRegistrar.SeparateTableInfo>()");
+            separateTableInfoBuilder.Indent(2);
+            separateTableInfoBuilder.AppendLine("{");
+            separateTableInfoBuilder.Indent(1);
 
             try
             {
@@ -177,7 +175,7 @@ namespace Fantasy.SourceGenerator.Generators
                     {
                         foreach (var separateTableInfo in separateTableTypeInfo.SeparateTableInfo)
                         {
-                            SeparateTableInfo.AppendLine(
+                            separateTableInfoBuilder.AppendLine(
                                 $"new ISeparateTableRegistrar.SeparateTableInfo(typeof({separateTableInfo.Key}) ,typeof({separateTableTypeInfo.TypeFullName}) ,\"{separateTableInfo.Value}\"),");
                         }
                     }
@@ -188,9 +186,9 @@ namespace Fantasy.SourceGenerator.Generators
                 Console.WriteLine(e);
             }
 
-            SeparateTableInfo.Unindent();
-            SeparateTableInfo.AppendLine("};");
-            builder.AppendLine(SeparateTableInfo.ToString());
+            separateTableInfoBuilder.Unindent();
+            separateTableInfoBuilder.AppendLine("};");
+            builder.AppendLine(separateTableInfoBuilder.ToString());
         }
 
         private static void GenerateRegisterMethod(SourceCodeBuilder builder, List<SeparateTableTypeInfo> separateTableTypeInfos)

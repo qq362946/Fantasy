@@ -1,6 +1,10 @@
+using System;
 using Fantasy.Pool;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
@@ -216,8 +220,11 @@ namespace Fantasy.Async
         {
             _flowSem = new SemaphoreSlim(flowLimit, flowLimit);
             _idSem = new SemaphoreSlim[flowLimit];
+            
             for (int i = 0; i < flowLimit; i++)
+            {
                 _idSem[i] = new SemaphoreSlim(1, 1);
+            }
 
             CoroutineLockComponent = coroutineLockComponent;
             Scene = coroutineLockComponent.Scene;

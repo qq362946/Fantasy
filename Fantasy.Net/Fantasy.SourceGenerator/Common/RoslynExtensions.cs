@@ -1,6 +1,7 @@
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Fantasy.SourceGenerator.Common
 {
@@ -9,6 +10,16 @@ namespace Fantasy.SourceGenerator.Common
     /// </summary>
     internal static class RoslynExtensions
     {
+        /// <summary>
+        /// 检查是否是Fantasy的核心程序集
+        /// </summary>
+        /// <param name="assemblyName"></param>
+        /// <returns></returns>
+        public static bool IsFantasyAssembly(string assemblyName)
+        {
+            return assemblyName is GeneratorConstants.FantasyNetAssmbly or GeneratorConstants.FantasyUnityAssmbly;
+        }
+        
         /// <summary>
         /// 检查类型是否实现了指定的接口（通过完全限定名）
         /// </summary>
@@ -129,6 +140,28 @@ namespace Fantasy.SourceGenerator.Common
                 i.ConstructedFrom.ToDisplayString() == genericInterfaceName);
 
             return matchingInterface?.TypeArguments.FirstOrDefault();
+        }
+        
+        /// <summary>
+        /// 将字符串转换为 PascalCase
+        /// </summary>
+        public static string ToPascalCase(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return input;
+            }
+
+            // 移除特殊字符，只保留字母和数字
+            var cleaned = new string(input.Where(c => char.IsLetterOrDigit(c) || c == '_').ToArray());
+
+            if (string.IsNullOrEmpty(cleaned))
+            {
+                return "Unknown";
+            }
+
+            // 首字母大写
+            return char.ToUpper(cleaned[0]) + cleaned.Substring(1);
         }
     }
 }

@@ -64,7 +64,6 @@ namespace Fantasy.Entitas
         [JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
-        [NotMapped]
         public Scene Scene { get; protected set; }
         /// <summary>
         /// 实体的父实体
@@ -73,7 +72,6 @@ namespace Fantasy.Entitas
         [JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
-        [NotMapped]
         public Entity Parent { get; protected set; }
         /// <summary>
         /// 实体的真实Type
@@ -82,7 +80,6 @@ namespace Fantasy.Entitas
         [JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
-        [NotMapped]
         public Type Type { get; protected set; }
         /// <summary>
         /// 实体的真实Type的HashCode
@@ -96,8 +93,8 @@ namespace Fantasy.Entitas
         [BsonElement("t")] [BsonIgnoreIfNull] private EntityList<Entity> _treeDb;
         [BsonElement("m")] [BsonIgnoreIfNull] private EntityList<Entity> _multiDb;
 #endif
-        [BsonIgnore] [IgnoreDataMember] [ProtoIgnore][NotMapped] private EntitySortedDictionary<long, Entity> _tree;
-        [BsonIgnore] [IgnoreDataMember] [ProtoIgnore][NotMapped] private EntitySortedDictionary<long, Entity> _multi;
+        [BsonIgnore] [IgnoreDataMember] [ProtoIgnore] private EntitySortedDictionary<long, Entity> _tree;
+        [BsonIgnore] [IgnoreDataMember] [ProtoIgnore] private EntitySortedDictionary<long, Entity> _multi;
         
         /// <summary>
         /// 获得父Entity
@@ -847,7 +844,6 @@ namespace Fantasy.Entitas
         [JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
-        [NotMapped]
         public IEnumerable<Entity> ForEachMultiEntity
         {
             get
@@ -870,7 +866,6 @@ namespace Fantasy.Entitas
         [JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
-        [NotMapped]
         public IEnumerable<Entity> ForEachEntity
         {
             get

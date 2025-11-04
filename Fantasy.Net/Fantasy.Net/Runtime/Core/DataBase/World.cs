@@ -1,9 +1,13 @@
-#pragma warning disable CS8603 // Possible null reference return.
 #if FANTASY_NET
 using Fantasy.Database;
 using Fantasy.Platform.Net;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using Microsoft.EntityFrameworkCore.Storage;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+#pragma warning disable CS8601 // Possible null reference assignment.
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+// ReSharper disable ForCanBeConvertedToForeach
+#pragma warning disable CS8603 // Possible null reference return.
 
 namespace Fantasy
 {
@@ -21,45 +25,57 @@ namespace Fantasy
         /// </summary>
         public string Name { get; private init; }
         /// <summary>
-        /// 本世界的服务注册和提供者
+        /// 第一个数据库
         /// </summary>
-        internal ServiceProvider ServiceProvider { get; init; }
+        public Fantasy.Database.IDatabase Database { get; private set; }
         /// <summary>
-        /// 本世界所有数据库, 按照工作职责号存取。
+        /// 本世界所有数据库, 按照数据库名字生成的索引来存取。
         /// </summary>
-        private Dictionary<int, IDatabase> AllDatabases { get; init; }
+        private Fantasy.Database.IDatabase[] AllDatabase { get; init; }
 
         /// <summary>
-        /// 根据工作职责号获取某个类型的数据库。
+        /// 选择数据库为当前使用数据库，成功后会可以用World.Database使用，避免再次查询一下
+        /// </summary>
+        /// <param name="dbName">数据库名字</param>
+        /// <returns></returns>
+        public Fantasy.Database.IDatabase SelectDatabase(int dbName)
+        {
+            var database = this[dbName];
+            if (database == null)
+            {
+                return null;
+            }
+
+            Database = database;
+            return database;
+        }
+
+        /// <summary>
+        /// 根据数据库名字获取某个类型的数据库。
         /// </summary>
         /// <typeparam name="T">数据库类型</typeparam>
-        /// <param name="duty">数据库工作职责号</param>
+        /// <param name="dbName">数据库名字</param>
+        /// <param name="database">返回的数据库实例</param>
         /// <returns></returns>
-        public T? GetDatabase<T>(int duty) where T : class, IDatabase
+        public bool TryGetDatabase<T>(int dbName, out T database) where T : class, Fantasy.Database.IDatabase
         {
-            if(!AllDatabases.TryGetValue(duty, out IDatabase? database))
-                return null;
+            var currentDatabase = this[dbName];
+            
+            if (currentDatabase == null)
+            {
+                database = null;
+                return false;
+            }
 
-            var res = database as T;
-            return res;
+            database = currentDatabase as T;
+            return true;
         }
 
         /// <summary>
-        /// 重载方法, 根据工作职责号获取数据库接口。
-        /// 拿到接口后, 可以有两种用法:
-        /// 1. 强类型用法，转为对应的类型, 按照PostgreSQL、MongoDb等特定类型使用。
-        /// 2. 弱类型用法，直接使用IDatabase接口, 调用其中 DbSession 内部的通用方法，适合简单CRUD。
+        /// 根据数据库名字获取某个类型的数据库。
         /// </summary>
-        /// <param name="duty">数据库工作职责号</param>
-        /// <returns></returns>
-        public IDatabase? GetDatabase(int duty)
-        {
-            if (!AllDatabases.TryGetValue(duty, out IDatabase? database))
-                return null;
-
-            var res = database;
-            return res;
-        }
+        /// <param name="dbName"></param>
+        public Fantasy.Database.IDatabase? this[int dbName] => AllDatabase.Length >= dbName ? null : AllDatabase[dbName];
 
         /// <summary>
         /// 获取游戏世界的配置信息。
@@ -73,63 +89,51 @@ namespace Fantasy
         /// <param name="worldConfigId"></param>
         private World(Scene scene, byte worldConfigId)
         {
-            Id = worldConfigId;            
-            var worldConfig = Config;
+            var worldConfig = WorldConfigData.Instance.Get(worldConfigId);
+            var dataBaseConfigList = worldConfig.DatabaseConfig;
+            Id = worldConfigId;  
             Name = Config.WorldName;
-            var services = new ServiceCollection();
-            services.AddHttpContextAccessor();
 
-            AllDatabases = [];
-            for(int i = 0; i < worldConfig.DbType.Length; i++)
+            if (dataBaseConfigList == null || dataBaseConfigList.Length == 0)
             {
-                if (string.IsNullOrWhiteSpace(worldConfig.DbConnection[i]))
-                    continue;
-
-                string dbType = worldConfig.DbType[i].ToLower();
-                switch (dbType)
+                AllDatabase = [];
+                return;
+            }
+            
+            AllDatabase = new Fantasy.Database.IDatabase[dataBaseConfigList.Length];
+            
+            for (var i = 0; i < dataBaseConfigList.Length; i++)
+            {
+                var dataBaseConfig = dataBaseConfigList[i];
+                if (dataBaseConfig.DbConnection != null && !string.IsNullOrWhiteSpace(dataBaseConfig.DbConnection))
                 {
-                    case "postgresql":
-                    case "postgres":
-                    case "pgsql":
-                    case "pg":
+                    var dbType = dataBaseConfig.DbType.ToLower();
+                    switch (dbType)
+                    {
+                        case "mongodb":
+                        case "mongo":
                         {
-                            if (AllDatabases.ContainsKey(worldConfig.DbDuty[i]))
-                                throw new Exception($"Database {worldConfig.DbName[i]} Duty({worldConfig.DbDuty[i]}) is duplicated. Please verify your configuration.");
-                            
-                            var pg = new PgSQL();
-                            pg.Initialize(scene,ref services, worldConfig.DbDuty[i], worldConfig.DbConnection[i], worldConfig.DbName[i]);
-                            AllDatabases.Add(worldConfig.DbDuty[i], pg);
+                            if (dataBaseConfig.DbConnection != null)
+                            {
+                                try
+                                {
+                                    var mongoDataBase = new MongoDatabase();
+                                    var mongoDataBaseIndex = DataBaseHelper.DatabaseDbName[dataBaseConfig.DbName];
+                                    mongoDataBase.Initialize(scene, dataBaseConfig.DbConnection, dataBaseConfig.DbName);
+                                    AllDatabase[mongoDataBaseIndex] = mongoDataBase;
+                                }
+                                catch (Exception e)
+                                {
+                                    Log.Error($"WorldId:{Id} DbName:{dataBaseConfig.DbName} DbConnection:{dataBaseConfig.DbConnection} Initialization failed. Please check if the target database server can be connected normally.\n{e.Message}");
+                                }
+                            }
                             break;
                         }
-                    case "mongodb":
-                    case "mongo":
-                        {
-                            if (AllDatabases.ContainsKey(worldConfig.DbDuty[i]))
-                                throw new Exception($"Database {worldConfig.DbName[i]} Duty({worldConfig.DbDuty[i]}) is duplicated. Please verify your configuration.");
-                            
-                            var mongo = new Mongo();
-                            mongo.Initialize(scene, ref services, worldConfig.DbDuty[i], worldConfig.DbConnection[i], worldConfig.DbName[i]);
-                            AllDatabases.Add(worldConfig.DbDuty[i], mongo);                           
-                            break;
-                        }
-                    default:
-                        {
-                            throw new Exception("Not supported database type.");
-                        }
+                    }
                 }
             }
-            if (AllDatabases.Count == 0)
-            { 
-                Log.Warning($" Warning : Has no available database ! (World id:{Id})(Scene configId:{scene.SceneConfigId})");
-            }
-            else
-            {
-                Log.Debug($"(World id:{Id})(Scene configId:{scene.SceneConfigId}) Has successfully owned {AllDatabases.Count} database(s): "+
-                string.Join("，", AllDatabases.Select((kv, index) =>
-                $"{index + 1}.{kv.Value.GetDatabaseType} (Duty {kv.Key})")));   //依次打印世界中可用数据库的简要信息
-            }
-
-            ServiceProvider = services.BuildServiceProvider();  //构建服务中心
+            
+            Database = AllDatabase.Length > 0 ? AllDatabase[0] : null;
         }
 
         /// <summary>
@@ -145,9 +149,12 @@ namespace Fantasy
                 return null;
             }
 
-            return (worldConfigData.DbConnection == null || worldConfigData.DbConnection.Length == 0)
-            ? null
-            : new World(scene, id);
+            if (worldConfigData.DatabaseConfig == null || worldConfigData.DatabaseConfig.Length == 0)
+            {
+                return null;
+            }
+            
+            return new World(scene, id);
         }
 
         /// <summary>
@@ -155,7 +162,7 @@ namespace Fantasy
         /// </summary>
         public void Dispose()
         {
-            AllDatabases.Clear();
+            Array.Clear(AllDatabase);
         }
     }
 }

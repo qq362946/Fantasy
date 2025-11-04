@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using Fantasy.Assembly;
 using Fantasy.Async;
@@ -8,6 +9,7 @@ using Fantasy.InnerMessage;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable ForCanBeConvertedToForeach
 // ReSharper disable InvertIf
+#pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -22,18 +24,16 @@ namespace Fantasy.Network.Interface
         private CoroutineLock _receiveRouteMessageLock;
         
         private readonly HashSet<long> _assemblyManifests = new();
-
-        private Func<uint, Type>? _lastHitGetOpCodeType;
-        private Func<Session, uint, uint, object, bool>? _lastHitMessageHandler;
         
-        private readonly List<INetworkProtocolOpCodeResolver> _opCodeResolvers  = new List<INetworkProtocolOpCodeResolver>();
-        private readonly List<INetworkProtocolResponseTypeResolver> _responseTypeResolvers = new List<INetworkProtocolResponseTypeResolver>();
+        private Func<Session, uint, uint, object, bool>? _lastHitMessageHandler;
+
+        private UInt32FrozenDictionary<Type> _opCodeDictionary;
+        private UInt32FrozenDictionary<Type> _responseTypeDictionary;
         private readonly List<IMessageHandlerResolver> _messageHandlerResolver = new List<IMessageHandlerResolver>();
 #if FANTASY_NET
-        private Func<uint, int?>? _lastHitGetCustomRouteType;
+        private UInt32FrozenDictionary<int> _customRouteDictionary;
         private Func<Session, Entity, uint, uint, object, FTask<bool>>? _lastHitRouteMessageHandler;
         private readonly List<IMessageHandlerResolver> _routeMessageHandlerResolver = new List<IMessageHandlerResolver>();
-        private readonly List<INetworkProtocolOpCodeResolver> _customRouteResolvers  = new List<INetworkProtocolOpCodeResolver>();
 #endif
         
         #region Comparer
@@ -63,46 +63,7 @@ namespace Fantasy.Network.Interface
                 return y.GetRouteMessageHandlerCount().CompareTo(x.GetRouteMessageHandlerCount());
             }
         }
-        private class RouteTypeResolverComparer : IComparer<INetworkProtocolOpCodeResolver>
-        {
-            public int Compare(INetworkProtocolOpCodeResolver? x, INetworkProtocolOpCodeResolver? y)
-            {
-                if (x == null || y == null)
-                {
-                    return 0;
-                }
-
-                return y.GetCustomRouteTypeCount().CompareTo(x.GetCustomRouteTypeCount());
-            }
-        }
 #endif
-
-        private class OpCodeResolverComparer : IComparer<INetworkProtocolOpCodeResolver>
-        {
-            public int Compare(INetworkProtocolOpCodeResolver? x, INetworkProtocolOpCodeResolver? y)
-            {
-                if (x == null || y == null)
-                {
-                    return 0;
-                }
-
-                return y.GetOpCodeCount().CompareTo(x.GetOpCodeCount());
-            }
-        }
-
-        private class ResponseTypeResolverComparer : IComparer<INetworkProtocolResponseTypeResolver>
-        {
-            public int Compare(INetworkProtocolResponseTypeResolver? x, INetworkProtocolResponseTypeResolver? y)
-            {
-                if (x == null || y == null)
-                {
-                    return 0;
-                }
-
-                return y.GetRequestCount().CompareTo(x.GetRequestCount());
-            }
-        }
-        
         #endregion
 
         public override void Dispose()
@@ -112,19 +73,17 @@ namespace Fantasy.Network.Interface
                 return;
             }
             _assemblyManifests.Clear();
-            _opCodeResolvers.Clear();
-            _responseTypeResolvers.Clear();
             _receiveRouteMessageLock.Dispose();
             _messageHandlerResolver.Clear();
 #if FANTASY_NET
-            _customRouteResolvers.Clear();
             _routeMessageHandlerResolver.Clear();
-            _lastHitGetCustomRouteType = null;
+            _customRouteDictionary = null;
              _lastHitRouteMessageHandler = null;
 #endif
-            _lastHitGetOpCodeType = null;
+            _opCodeDictionary = null;
             _lastHitMessageHandler = null;
             _receiveRouteMessageLock = null;
+            _responseTypeDictionary = null;
             AssemblyLifecycle.Remove(this);
             base.Dispose();
         }
@@ -157,35 +116,43 @@ namespace Fantasy.Network.Interface
                     _messageHandlerResolver.Sort(new MessageHandlerResolverComparer());
                 }
                 // 注册OpCode
-                var opCodeResolver = assemblyManifest.NetworkProtocolOpCodeResolver;
+                var opCodeResolver = assemblyManifest.OpCodeRegistrar;
                 var opCodeCount = opCodeResolver.GetOpCodeCount();
                 if (opCodeCount > 0)
                 {
-                    _opCodeResolvers.Add(opCodeResolver);
-                    _opCodeResolvers.Sort(new OpCodeResolverComparer());
+                    var opCodes = new uint[opCodeCount + InnerNetworkProtocolRegistrar.OpCodeCount];
+                    var types = new Type[opCodeCount + InnerNetworkProtocolRegistrar.OpCodeCount];
+                    opCodeResolver.FillOpCodeType(opCodes, types);
+                    InnerNetworkProtocolRegistrar.FillOpCode(opCodes, types, opCodeCount);
+                    _opCodeDictionary = new UInt32FrozenDictionary<Type>(opCodes, types);
                 }
 #if FANTASY_NET
+                var customRouteTypeCount = opCodeResolver.GetCustomRouteTypeCount();
+                if (customRouteTypeCount > 0)
+                {
+                    var opCodes = new uint[customRouteTypeCount + InnerNetworkProtocolRegistrar.CustomRouteTypeCount];
+                    var routeTypes = new int[customRouteTypeCount + InnerNetworkProtocolRegistrar.CustomRouteTypeCount];
+                    opCodeResolver.FillCustomRouteType(opCodes, routeTypes);
+                    InnerNetworkProtocolRegistrar.FillCustomRouteType(opCodes, routeTypes, customRouteTypeCount);
+                    _customRouteDictionary = new UInt32FrozenDictionary<int>(opCodes, routeTypes);
+                }
                 var routeMessageHandlerCount = messageHandlerResolver.GetRouteMessageHandlerCount();
                 if (routeMessageHandlerCount > 0)
                 {
                     _routeMessageHandlerResolver.Add(messageHandlerResolver);
                     _routeMessageHandlerResolver.Sort(new RouteMessageHandlerResolverComparer());
                 }
-                // 注册CustomRouteType
-                var customRouteTypeCount = opCodeResolver.GetCustomRouteTypeCount();
-                if (customRouteTypeCount > 0)
-                {
-                    _customRouteResolvers.Add(opCodeResolver);
-                    _customRouteResolvers.Sort(new RouteTypeResolverComparer());
-                }
 #endif
                 // 注册ResponseType
-                var responseTypeResolver = assemblyManifest.NetworkProtocolResponseTypeResolver;
-                var requestCount = responseTypeResolver.GetRequestCount();
+                var responseTypeRegistrar = assemblyManifest.ResponseTypeRegistrar;
+                var requestCount = responseTypeRegistrar.GetRequestCount();
                 if (requestCount > 0)
                 {
-                    _responseTypeResolvers.Add(responseTypeResolver);
-                    _responseTypeResolvers.Sort(new ResponseTypeResolverComparer());
+                    var opCodes = new uint[requestCount + InnerNetworkProtocolRegistrar.GetRequestCount];
+                    var types = new Type[requestCount + InnerNetworkProtocolRegistrar.GetRequestCount];
+                    responseTypeRegistrar.FillResponseType(opCodes, types);
+                    InnerNetworkProtocolRegistrar.FillResponseType(opCodes, types, requestCount);
+                    _responseTypeDictionary = new UInt32FrozenDictionary<Type>(opCodes, types);
                 }
                 _assemblyManifests.Add(assemblyManifestId);
                 tcs.SetResult();
@@ -207,16 +174,10 @@ namespace Fantasy.Network.Interface
         private void OnUnLoadInner(AssemblyManifest assemblyManifest)
         {
             _messageHandlerResolver.Remove(assemblyManifest.MessageHandlerResolver);
-            _opCodeResolvers.Remove(assemblyManifest.NetworkProtocolOpCodeResolver);
-            _responseTypeResolvers.Remove(assemblyManifest.NetworkProtocolResponseTypeResolver);
             _messageHandlerResolver.Sort(new MessageHandlerResolverComparer());
-            _opCodeResolvers.Sort(new OpCodeResolverComparer());
-            _responseTypeResolvers.Sort(new ResponseTypeResolverComparer());
 #if FANTASY_NET
             _routeMessageHandlerResolver.Remove(assemblyManifest.MessageHandlerResolver);
-            _customRouteResolvers.Remove(assemblyManifest.NetworkProtocolOpCodeResolver);
             _routeMessageHandlerResolver.Sort(new RouteMessageHandlerResolverComparer());
-            _customRouteResolvers.Sort(new RouteTypeResolverComparer());
 #endif
             _assemblyManifests.Remove(assemblyManifest.AssemblyManifestId);
         }
@@ -313,46 +274,29 @@ namespace Fantasy.Network.Interface
 
         internal IResponse CreateResponse(uint requestOpCode, uint error)
         {
-            IResponse response;
-
-            for (var i = 0; i < _responseTypeResolvers.Count; i++)
+            if (_responseTypeDictionary.TryGetValue(requestOpCode, out var responseType))
             {
-                var resolver = _responseTypeResolvers[i];
-                var responseType = resolver.GetResponseType(requestOpCode);
-                if (responseType == null)
-                {
-                    continue;
-                }
-                response = (IResponse) Activator.CreateInstance(responseType);
-                response.ErrorCode = error;
-                return response;
+                var findResponse = (IResponse)Activator.CreateInstance(responseType);
+                findResponse.ErrorCode = error;
+                return findResponse;
             }
-            
-            response = new Response();
+
+            var response = new Response();
             response.ErrorCode = error;
             return response;
         }
 
         private IRouteResponse CreateRouteResponse(uint requestOpCode, uint error, out Type responseType)
         {
-            IRouteResponse response;
-
-            for (var i = 0; i < _responseTypeResolvers.Count; i++)
+            if (_responseTypeDictionary.TryGetValue(requestOpCode, out responseType))
             {
-                var resolver = _responseTypeResolvers[i];
-                responseType = resolver.GetResponseType(requestOpCode);
-                if (responseType == null)
-                {
-                    continue;
-                }
-
-                response = (IRouteResponse)Activator.CreateInstance(responseType);
-                response.ErrorCode = error;
-                return response;
+                var findResponse = (IRouteResponse)Activator.CreateInstance(responseType);
+                findResponse.ErrorCode = error;
+                return findResponse;
             }
-
+            
             responseType = typeof(RouteResponse);
-            response = new RouteResponse();
+            var response = new RouteResponse();
             response.ErrorCode = error;
             return response;
         }
@@ -363,52 +307,12 @@ namespace Fantasy.Network.Interface
 
         internal Type? GetOpCodeType(uint opCode)
         {
-            if (_lastHitGetOpCodeType != null )
-            {
-                var opCodeType = _lastHitGetOpCodeType(opCode);
-                if (opCodeType != null)
-                {
-                    return opCodeType;
-                }
-            }
-
-            for (var i = 0; i < _opCodeResolvers.Count; i++)
-            {
-                var resolver = _opCodeResolvers[i];
-                var opCodeType = resolver.GetOpCodeType(opCode);
-                if (opCodeType != null)
-                {
-                    _lastHitGetOpCodeType = resolver.GetOpCodeType;
-                    return opCodeType;
-                }
-            }
-
-            return null;
+            return _opCodeDictionary.TryGetValue(opCode, out var type) ? type : null;
         }
 #if FANTASY_NET
         internal int? GetCustomRouteType(uint protocolCode)
         {
-            if (_lastHitGetCustomRouteType != null)
-            {
-                var opCodeType = _lastHitGetCustomRouteType(protocolCode);
-                if (opCodeType.HasValue)
-                {
-                    return opCodeType.Value;
-                }
-            }
-
-            for (var i = 0; i < _customRouteResolvers.Count; i++)
-            {
-                var resolver = _customRouteResolvers[i];
-                var opCodeType = resolver.GetCustomRouteType(protocolCode);
-                if (opCodeType.HasValue)
-                {
-                    _lastHitGetCustomRouteType = resolver.GetCustomRouteType;
-                    return opCodeType.Value;
-                }
-            }
-
-            return null;
+            return _customRouteDictionary.TryGetValue(protocolCode, out var type) ? type : null;
         }
 #endif
         #endregion

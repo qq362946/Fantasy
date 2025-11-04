@@ -90,5 +90,8 @@
               PackagePath="analyzers/dotnet/cs"
               Visible="false" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Runtime\Core\World\" />
+    </ItemGroup>
 
 </Project>

@@ -6,6 +6,7 @@ using Fantasy.Helper;
 using Fantasy.IdFactory;
 using Fantasy.Network;
 using Fantasy.Platform.Net;
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 
 namespace Fantasy;
 
@@ -32,12 +33,9 @@ public static class ConfigLoader
         }
         
         // 创建命名空间管理器
-        
         var nsManager = new XmlNamespaceManager(doc.NameTable);
         nsManager.AddNamespace("f", "http://fantasy.net/config");
-        
         // 加载运行时配置
-        
         LoadRuntimeConfig(root, nsManager);
         
         var configTableNode = root.SelectSingleNode("f:configTable", nsManager);
@@ -190,44 +188,33 @@ public static class ConfigLoader
         // 解析world和所有database
         foreach (XmlNode worldNode in worldNodes)
         {
-            uint id = uint.Parse(GetRequiredAttribute(worldNode, "id"));
-            string worldName = GetRequiredAttribute(worldNode, "worldName");
-            XmlNodeList databaseNodes = GetChildNodes(worldNode, "f:database", nsManager);
-
-            List<int> dbDuties = [];
-            List<string> dbTypes = [];
-            List<string> dbNames = [];
-            List<string> dbConnections = [];
-
-            foreach (XmlNode dbNode in databaseNodes)
-            {
-                string? dbConnection = GetOptionalAttribute(dbNode, "dbConnection");
-                string dbType = GetRequiredAttribute(dbNode, "dbType");
-                int dbDuty = int.Parse(GetRequiredAttribute(dbNode, "duty"));
-                string dbName = GetRequiredAttribute(dbNode, "dbName");
-
-                if (string.IsNullOrWhiteSpace(dbConnection))
-                {
-                    Log.Warning($"(Fantasy.config) \"DbConnection\" is empty, thus the database-config \"{dbName}({dbType})\" in {worldName} (World Id: {id}) will be ignoured.");
-                    dbConnection = string.Empty; 
-                }
-
-                dbDuties.Add(dbDuty);
-                dbTypes.Add(dbType);
-                dbNames.Add(dbName);
-                dbConnections.Add(dbConnection);
-            }
-
-            // 创建 WorldConfig
+            var id = uint.Parse(GetRequiredAttribute(worldNode, "id"));
+            var worldName = GetRequiredAttribute(worldNode, "worldName");
+            var databaseNodes = GetChildNodes(worldNode, "f:database", nsManager);
+            
             var worldConfig = new WorldConfig
             {
                 Id = id,
-                WorldName = worldName,
-                DbDuty = dbDuties.ToArray(),
-                DbType = dbTypes.ToArray(),
-                DbName = dbNames.ToArray(),
-                DbConnection = dbConnections.ToArray()
+                WorldName = worldName
             };
+
+            var index = 0;
+            worldConfig.DatabaseConfig = new DatabaseConfig[databaseNodes.Count];
+            foreach (XmlNode dbNode in databaseNodes)
+            {
+                var dbConnection = GetOptionalAttribute(dbNode, "dbConnection");
+                var dbType = GetRequiredAttribute(dbNode, "dbType");
+                var dbName = GetRequiredAttribute(dbNode, "dbName");
+
+                if (string.IsNullOrWhiteSpace(dbConnection))
+                {
+                    // Log.Warning($"(Fantasy.config) \"DbConnection\" is empty, thus the database-config \"{dbName}({dbType})\" in {worldName} (World Id: {id}) will be ignoured.");
+                    dbConnection = string.Empty; 
+                }
+                
+                worldConfig.DatabaseConfig[index++] = new DatabaseConfig(dbConnection, dbName, dbType);
+            }
+            
             worldList.Add(worldConfig);
         }
 
@@ -260,9 +247,9 @@ public static class ConfigLoader
                 SceneTypeString = GetRequiredAttribute(sceneNode, "sceneTypeString"),
                 NetworkProtocol = GetOptionalAttribute(sceneNode, "networkProtocol") ?? string.Empty,
                 OuterPort = int.Parse(GetOptionalAttribute(sceneNode, "outerPort") ?? "0"),
-                InnerPort = int.Parse(GetRequiredAttribute(sceneNode, "innerPort")),
-                SceneType = int.Parse(GetRequiredAttribute(sceneNode, "sceneType"))
+                InnerPort = int.Parse(GetRequiredAttribute(sceneNode, "innerPort"))
             };
+            scene.SceneType = Scene.SceneTypeDictionary[scene.SceneTypeString];
             sceneList.Add(scene);
         }
         
@@ -389,20 +376,26 @@ public static class ConfigLoader
                 throw new InvalidOperationException($"World {world.Id}: WorldName cannot be null or empty");
             }
 
-            if (world.DbDuty == null || world.DbDuty is { Length: <= 0 })
+            if (world.DatabaseConfig != null)
             {
-                throw new InvalidOperationException($"World {world.Id}: DbDuty config has no value");
-            }
+                var dbNames = new HashSet<string>();
+                foreach (var databaseConfig in world.DatabaseConfig)
+                {
+                    if (databaseConfig.DbName == null)
+                    {
+                        throw new InvalidOperationException($"World {world.Id}: DbName config has no value");
+                    }
 
-            if (world.DbName == null || world.DbName is { Length: <= 0 } || world.DbName.Any(s => string.IsNullOrWhiteSpace(s))) 
-            {
-                throw new InvalidOperationException($"World {world.Id}: DbName cannot be null or empty");
-            }
+                    if (databaseConfig.DbType == null)
+                    {
+                        throw new InvalidOperationException($"World {world.Id}: DbType config has no value");
+                    }
 
-
-            if (world.DbType == null || world.DbType is { Length: <= 0 } || world.DbType.Any(s => string.IsNullOrWhiteSpace(s)))
-            {
-                throw new InvalidOperationException($"World {world.Id}: DbType cannot be null or empty");
+                    if (!dbNames.Add(databaseConfig.DbName))
+                    {
+                        throw new InvalidOperationException($"World {world.Id} configuration DbName:{databaseConfig.DbName} repeat");
+                    }
+                }
             }
         }
     }

@@ -44,12 +44,12 @@ namespace Fantasy.Async
         /// 使用这个方法创建的协程锁，需要手动释放管理CoroutineLock。
         /// 不会再CoroutineLockComponent理进行管理。
         /// </summary>
-        /// <param name="coroutineLockType"></param>
+        /// <param name="lockDuty">锁职责</param>
         /// <returns></returns>
-        public CoroutineLock Create(long coroutineLockType)
+        public CoroutineLock Create(long lockDuty)
         {
             var coroutineLock = _coroutineLockPool.Rent();
-            coroutineLock.Initialize(this, ref coroutineLockType);
+            coroutineLock.Initialize(this, ref lockDuty);
             return coroutineLock;
         }
 
@@ -57,32 +57,32 @@ namespace Fantasy.Async
         /// 请求一个协程锁。
         /// 使用这个方法创建的协程锁，会自动释放CoroutineLockQueueType。
         /// </summary>
-        /// <param name="coroutineLockType">锁类型</param>
-        /// <param name="coroutineLockQueueKey">锁队列Id</param>
+        /// <param name="lockDuty">锁职责</param>
+        /// <param name="waitForId">锁队列Id</param>
         /// <param name="tag">当某些锁超时，需要一个标记来方便排查问题，正常的情况下这个默认为null就可以。</param>
         /// <param name="time">设置锁的超时时间，让超过设置的时间会触发超时，保证锁不会因为某一个锁一直不解锁导致卡住的问题。</param>
         /// <returns>
         /// 返回的WaitCoroutineLock通过Dispose来解除这个锁、建议用using来保住这个锁。
         /// 也可以返回的WaitCoroutineLock通过CoroutineLockComponent.UnLock来解除这个锁。
         /// </returns>
-        public FTask<WaitCoroutineLock> Wait(long coroutineLockType, long coroutineLockQueueKey, string tag = null, int time = 30000)
+        public FTask<WaitCoroutineLock> Wait(long lockDuty, long waitForId, string tag = null, int time = 30000)
         {
-            if (!_coroutineLocks.TryGetValue(coroutineLockType, out var coroutineLock))
+            if (!_coroutineLocks.TryGetValue(lockDuty, out var coroutineLock))
             {
                 coroutineLock = _coroutineLockPool.Rent();
-                coroutineLock.Initialize(this, ref coroutineLockType);
-                _coroutineLocks.Add(coroutineLockType, coroutineLock);
+                coroutineLock.Initialize(this, ref lockDuty);
+                _coroutineLocks.Add(lockDuty, coroutineLock);
             }
 
-            return coroutineLock.Wait(coroutineLockQueueKey, tag, time);
+            return coroutineLock.Wait(waitForId, tag, time);
         }
 
         /// <summary>
         /// 解除一个协程锁。
         /// </summary>
         /// <param name="coroutineLockType"></param>
-        /// <param name="coroutineLockQueueKey"></param>
-        public void Release(long coroutineLockType, long coroutineLockQueueKey)
+        /// <param name="waitingKey"></param>
+        public void Release(long coroutineLockType, long waitingKey)
         {
             if (IsDisposed)
             {
@@ -94,7 +94,7 @@ namespace Fantasy.Async
                 return;
             }
                 
-            coroutineLock.Release(coroutineLockQueueKey);
+            coroutineLock.Release(waitingKey);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Fantasy.Async;
 using Fantasy.Entitas;
@@ -13,7 +14,7 @@ using Fantasy.Timer;
 #if FANTASY_NET
 using Fantasy.Database;
 using Fantasy.Platform.Net;
-// using Fantasy.SingleCollection;
+using System.Collections.Frozen;
 using System.Runtime.CompilerServices;
 using Fantasy.Network.Route;
 using Fantasy.Network.Roaming;
@@ -51,6 +52,8 @@ namespace Fantasy
     /// <summary>
     /// 表示一个场景实体，用于创建与管理特定的游戏场景信息。
     /// </summary>
+    [SuppressMessage("Compiler", "CS8618:Non-nullable field must contain a non-null value when exiting constructor. Consider adding the \'required\' modifier or declaring as nullable.")]
+    [SuppressMessage("Compiler", "CS8618:Non-nullable field must contain a non-null value when exiting constructor. Consider adding the \'required\' modifier or declaring as nullable.")]
     public partial class Scene : Entity
     {
         #region Members
@@ -659,6 +662,16 @@ namespace Fantasy
             _processSessionInfos.Add(sceneId, new ProcessSessionInfo(session, client));
             return session;
         }
+#endif
+        #endregion
+
+        #region SceneType
+#if FANTASY_NET
+        
+        /// <summary>
+        /// SceneType字符串字典，key为SceneType的字符串名字，value为对应的索引
+        /// </summary>
+        public static FrozenDictionary<string, int> SceneTypeDictionary { get; internal set; }
 #endif
         #endregion
     }

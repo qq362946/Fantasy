@@ -6,6 +6,14 @@ namespace Fantasy.SourceGenerator.Common
     internal static class GeneratorConstants
     {
         /// <summary>
+        /// FantasyNet程序集名字
+        /// </summary>
+        public const string FantasyNetAssmbly = "Fantasy-Net";
+        /// <summary>
+        /// Fantasy.Unity程序集名字
+        /// </summary>
+        public const string FantasyUnityAssmbly = "Fantasy.Unity";
+        /// <summary>
         /// 生成文件的命名空间
         /// </summary>
         public const string GeneratedNamespace = "Fantasy.Generated";
