@@ -319,51 +319,19 @@ git clone https://github.com/qq362946/Fantasy.git
 
 ---
 
-## 编写启动代码
+## 下一步：编写启动代码
 
-在你的服务器入口项目的 `Program.cs` 中编写启动代码：
+完成框架集成和配置文件创建后，下一步是编写服务器启动代码。
 
-```csharp
-using Fantasy;
+请继续阅读 **[编写启动代码](04-WritingStartupCode.md)**，学习：
+- 如何编写 `Program.cs` 启动代码
+- `AssemblyHelper` 的作用和原理
+- 程序集加载机制详解
+- 热重载支持
+- 常见问题和最佳实践
 
-try
-{
-    // 初始化程序集（触发 Source Generator 生成的代码）
-    AssemblyHelper.Initialize();
+---
 
-    // 配置日志（可选，不配置则使用控制台日志）
-    var logger = new ConsoleLog();
-
-    // 启动 Fantasy 框架
-    await Fantasy.Platform.Net.Entry.Start(logger);
-}
-catch (Exception ex)
-{
-    Console.Error.WriteLine($"服务器启动失败：{ex}");
-    Environment.Exit(1);
-}
-```
-
-就这么简单！**3 行核心代码即可启动服务器**。
-
-## 构建并运行服务器
-
-进入你的服务器入口项目目录，构建并运行：
-
-```bash
-cd YourServerProject
-dotnet build
-dotnet run
-```
-
-**预期输出：**
-
-```
-[INFO] Fantasy.Net 初始化完成
-[INFO] 场景创建：SceneId=1001, SceneType=1
-[INFO] Gate 场景监听：0.0.0.0:20000 (KCP)
-[INFO] 服务器启动完成
-```
 ## 常见问题
 
 ### Q1: 找不到 Fantasy 命名空间
@@ -474,13 +442,14 @@ Could not find Fantasy.config
 
 现在你已经成功集成了 Fantasy Framework，接下来可以：
 
-1. 📖 阅读 [Fantasy.config 配置文件详解](02-Configuration.md) 深入了解配置文件格式
-2. 💻 阅读 [配置系统使用指南](03-ConfigUsage.md) 学习如何在代码中使用配置
-3. 📱 阅读 [客户端快速开始](01-QuickStart-Client.md) 创建客户端（待完善）
-4. 🎮 阅读 [ECS 系统](04-ECS.md) 学习实体组件系统（待完善）
-5. 🌐 阅读 [网络开发](06-Network.md) 学习消息处理（待完善）
-6. 🔧 阅读 [协议定义](08-Protocol.md) 学习 .proto 文件（待完善）
-7. 📚 查看 `Examples/Server` 目录下的完整示例
+1. 💻 阅读 [编写启动代码](04-WritingStartupCode.md) 学习如何启动服务器
+2. 📖 阅读 [Fantasy.config 配置文件详解](02-Configuration.md) 深入了解配置文件格式
+3. 🔧 阅读 [配置系统使用指南](03-ConfigUsage.md) 学习如何在代码中使用配置
+4. 📱 阅读 [客户端快速开始](01-QuickStart-Client.md) 创建客户端（待完善）
+5. 🎮 阅读 [ECS 系统](05-ECS.md) 学习实体组件系统（待完善）
+6. 🌐 阅读 [网络开发](06-Network.md) 学习消息处理（待完善）
+7. 🔨 阅读 [协议定义](08-Protocol.md) 学习 .proto 文件（待完善）
+8. 📚 查看 `Examples/Server` 目录下的完整示例
 
 ## 获取帮助
 
