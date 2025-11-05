@@ -68,7 +68,7 @@ YourSolution/
 
 .NET 运行时默认使用**延迟加载**策略：
 ```csharp
-// 如果你的代码中没有显式使用 Entity 程序集中的类型
+// 如果你的代码中没有显式使用程序集中的类型
 // 那么即使项目引用了该程序集，运行时也不会加载它
 // 这会导致 Source Generator 生成的注册代码无法执行
 ```
@@ -473,11 +473,12 @@ FileNotFoundException: Could not find file 'Hotfix.dll'
 
 现在你已经掌握了如何编写启动代码，接下来可以：
 
-1. 📖 阅读 [配置系统使用指南](03-ConfigUsage.md) 学习如何在代码中使用配置
-2. 🎮 阅读 [ECS 系统](05-ECS.md) 学习实体组件系统（待完善）
-3. 🌐 阅读 [网络开发](06-Network.md) 学习消息处理（待完善）
-4. 🔧 阅读 [协议定义](08-Protocol.md) 学习 .proto 文件（待完善）
-5. 📚 查看 `Examples/Server` 目录下的完整示例
+1. 🎯 阅读 [OnCreateScene 事件使用指南](05-OnCreateScene.md) 学习如何在场景启动时初始化逻辑
+2. 📖 阅读 [配置系统使用指南](03-ConfigUsage.md) 学习如何在代码中使用配置
+3. 🎮 阅读 [ECS 系统](06-ECS.md) 学习实体组件系统（待完善）
+4. 🌐 阅读 [网络开发](09-Network.md) 学习消息处理（待完善）
+5. 🔧 阅读 [协议定义](11-Protocol.md) 学习 .proto 文件（待完善）
+6. 📚 查看 `Examples/Server` 目录下的完整示例
 
 ## 获取帮助
 

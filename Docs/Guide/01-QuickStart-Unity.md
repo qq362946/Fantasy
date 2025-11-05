@@ -1,0 +1,616 @@
+# Unity 客户端快速开始
+
+本指南将帮助你快速在 Unity 项目中集成 Fantasy Framework,并实现与服务器的网络通信。
+
+## 前置要求
+
+在开始之前,请确保:
+
+- ✅ Unity 版本 **2022.3.62 LTS** 或更高
+- ✅ 已了解 C# 和 Unity 基础开发知识
+- ✅ (可选) 已搭建 Fantasy 服务器并启动
+
+---
+
+## 安装 Fantasy.Unity
+
+Fantasy.Unity 支持两种安装方式,推荐使用 **OpenUPM** 方式安装。
+
+### 方式一: 通过 OpenUPM 安装 (推荐)
+
+OpenUPM 是 Unity 包管理器的第三方注册表服务,可以轻松管理和更新包版本。
+
+#### 选项 A: 使用 Package Manager UI 安装
+
+这是最直观的安装方式,适合不熟悉 JSON 配置的用户:
+
+1. **打开 Project Settings**
+   - 在 Unity 菜单栏选择 `Edit` → `Project Settings`
+
+2. **配置 Package Manager**
+   - 在左侧面板选择 `Package Manager`
+   - 点击 `Scoped Registries` 区域的 `+` 按钮添加新的注册表
+
+3. **添加 OpenUPM 注册表**
+
+   填写以下信息:
+
+   | 字段 | 值 |
+   |------|-----|
+   | **Name** | `package.openupm.com` |
+   | **URL** | `https://package.openupm.com` |
+   | **Scope(s)** | `com.fantasy.unity` |
+
+4. **保存设置**
+   - 点击 `Save` 或 `Apply` 按钮
+
+5. **安装 Fantasy.Unity 包**
+   - 打开 Package Manager: `Window` → `Package Manager`
+   - 点击左上角的 `+` 按钮
+   - 选择 `Add package by name...` 或 `Add package from git URL...`
+   - 在 **Name** 字段输入: `com.fantasy.unity`
+   - 在 **Version** 字段输入版本号 (例如 `2024.2.25`)
+     - 💡 **提示**: 可以指定特定版本号,也可以留空使用最新版本
+     - ✅ **建议**: 使用最新版本以获得最新功能和 Bug 修复
+   - 点击 `Add` 按钮
+
+6. **等待导入完成**
+   - Unity 会自动下载并导入 Fantasy.Unity 包及其依赖项
+   - 导入完成后,在 Package Manager 中可以看到 `Fantasy.Unity` 包
+
+---
+
+#### 选项 B: 通过 manifest.json 安装
+
+这是更快捷的安装方式,适合熟悉 Unity 包管理的用户:
+
+1. **定位 manifest.json 文件**
+
+   在你的 Unity 项目根目录下找到:
+   ```
+   YourProject/
+   └── Packages/
+       └── manifest.json
+   ```
+
+2. **编辑 manifest.json**
+
+   使用文本编辑器打开 `manifest.json`,将以下内容合并到文件中:
+
+   ```json
+   {
+       "scopedRegistries": [
+           {
+               "name": "package.openupm.com",
+               "url": "https://package.openupm.com",
+               "scopes": [
+                   "com.fantasy.unity"
+               ]
+           }
+       ],
+       "dependencies": {
+           "com.fantasy.unity": "2024.2.25"
+       }
+   }
+   ```
+
+   **版本说明:**
+   - 💡 可以指定特定版本号 (例如 `"2024.2.25"`)
+   - ✅ **建议使用最新版本** - 删除版本号让 Unity 自动获取最新版,或访问 [OpenUPM](https://openupm.com/packages/com.fantasy.unity/) 查看最新版本号
+
+   **完整示例:**
+
+   假设你的原始 `manifest.json` 内容为:
+   ```json
+   {
+       "dependencies": {
+           "com.unity.collab-proxy": "2.0.0",
+           "com.unity.ide.rider": "3.0.18"
+       }
+   }
+   ```
+
+   合并后应该是:
+   ```json
+   {
+       "scopedRegistries": [
+           {
+               "name": "package.openupm.com",
+               "url": "https://package.openupm.com",
+               "scopes": [
+                   "com.fantasy.unity"
+               ]
+           }
+       ],
+       "dependencies": {
+           "com.unity.collab-proxy": "2.0.0",
+           "com.unity.ide.rider": "3.0.18",
+           "com.fantasy.unity": "2024.2.25"  // 可以指定版本号,或删除引号中的版本号使用最新版
+       }
+   }
+   ```
+
+   > 💡 **版本号提示**: `"2024.2.25"` 可以改为其他版本号,或删除版本号部分改为 `"com.fantasy.unity": ""` 让 Unity 自动使用最新版
+
+3. **保存并返回 Unity**
+   - 保存 `manifest.json` 文件
+   - 返回 Unity 编辑器
+   - Unity 会自动检测文件变化并开始下载安装包
+
+---
+
+### 方式二: 手动安装本地源码
+
+如果你需要修改框架源码或调试框架内部逻辑,可以使用本地源码安装:
+
+1. **克隆或下载 Fantasy 源码**
+
+   ```bash
+   # 使用 Git 克隆
+   git clone https://github.com/qq362946/Fantasy.git
+
+   # 或者下载 ZIP 并解压
+   ```
+
+2. **复制 Unity 包到项目**
+
+   将 Fantasy 源码中的 Unity 包复制到你的项目:
+
+   ```
+   Fantasy/
+   └── Fantasy.Unity/
+       └── Fantasy.Unity/       # 这个目录就是 Unity 包
+   ```
+
+   复制到:
+
+   ```
+   YourProject/
+   └── Packages/
+       └── com.fantasy.unity/   # 将 Fantasy.Unity/Fantasy.Unity 复制到这里
+   ```
+
+3. **编辑 manifest.json**
+
+   打开 `Packages/manifest.json`,添加本地包引用:
+
+   ```json
+   {
+       "dependencies": {
+           "com.fantasy.unity": "file:com.fantasy.unity"
+       }
+   }
+   ```
+
+4. **返回 Unity**
+   - Unity 会自动识别本地包
+   - 在 Package Manager 中可以看到 `Fantasy.Unity (local)` 包
+
+**本地安装的优点:**
+- ✅ 可以修改框架源码
+- ✅ 便于调试和追踪问题
+- ✅ 不依赖网络连接
+
+**本地安装的缺点:**
+- ⚠️ 需要手动更新版本
+- ⚠️ 占用更多磁盘空间
+- ⚠️ 需要自行维护源码
+
+---
+
+## 配置 Fantasy 环境
+
+安装包完成后，需要配置 Fantasy 编译符号才能正常使用。
+
+### 安装 FANTASY_UNITY 编译符号
+
+1. **打开 Fantasy Settings**
+   - 在 Unity 菜单栏选择 `Fantasy` → `Fantasy Settings`
+   - 会打开 Fantasy 设置面板
+
+2. **安装编译符号**
+   - 在设置面板中找到 **Scripting Define Symbols** 区域
+   - 检查 `FANTASY_UNITY` 的状态:
+     - ✅ 如果显示 **"已安装"** 或 **"Installed"**，则无需操作
+     - ⚠️ 如果显示 **"未安装"** 或 **"Not Installed"**，点击 **"安装"** 或 **"Install"** 按钮
+
+3. **等待编译完成**
+   - Unity 会自动添加 `FANTASY_UNITY` 编译符号并重新编译
+   - 编译完成后，Fantasy 框架即可正常使用
+
+**为什么需要这一步？**
+
+- `FANTASY_UNITY` 是 Fantasy 框架的编译符号
+- 它会激活 Unity 平台相关的代码和 Source Generator
+- 没有这个符号，框架的核心功能将无法使用
+
+---
+
+### WebGL 平台额外配置
+
+如果你的项目需要构建到 **WebGL 平台**，还需要额外安装 `FANTASY_WEBGL` 编译符号。
+
+1. **打开 Fantasy Settings**
+   - 在 Unity 菜单栏选择 `Fantasy` → `Fantasy Settings`
+   - 会打开 Fantasy 设置面板
+
+2. **安装 WebGL 编译符号**
+   - 在设置面板中找到 **Scripting Define Symbols** 区域
+   - 检查 `FANTASY_WEBGL` 的状态:
+     - ✅ 如果显示 **"已安装"** 或 **"Installed"**，则无需操作
+     - ⚠️ 如果显示 **"未安装"** 或 **"Not Installed"**，点击 **"安装"** 或 **"Install"** 按钮
+
+3. **等待编译完成**
+   - Unity 会自动添加 `FANTASY_WEBGL` 编译符号并重新编译
+   - 编译完成后，项目即可构建到 WebGL 平台
+
+**为什么 WebGL 需要额外配置？**
+
+- `FANTASY_WEBGL` 是 WebGL 平台的专用编译符号
+- 它会激活 WebGL 平台特定的网络代码（WebSocket）
+- WebGL 平台有浏览器安全限制，需要特殊处理
+- 只在需要构建 WebGL 时才安装此符号
+
+**⚠️ 重要提示：**
+
+- 如果**不需要构建 WebGL**，不要安装此符号
+- WebGL 平台只支持 **WebSocket** 协议，不支持 KCP 和 TCP
+- WebGL 构建需要服务器支持 WebSocket 连接
+
+---
+
+## 验证安装
+
+配置完成后，验证 Fantasy.Unity 是否正确安装:
+
+1. **检查 Package Manager**
+   - 打开 `Window` → `Package Manager`
+   - 在左上角选择 `Packages: In Project`
+   - 确认列表中有 `Fantasy.Unity` 包
+
+2. **检查编译符号**
+   - 打开 `Fantasy` → `Fantasy Settings`
+   - 确认 `FANTASY_UNITY` 显示为 **"已安装"**
+   - （如果需要 WebGL 构建）确认 `FANTASY_WEBGL` 显示为 **"已安装"**
+
+3. **检查命名空间**
+
+   创建一个测试脚本:
+
+   ```csharp
+   using Fantasy;
+   using Fantasy.Async;
+   using Fantasy.Network;
+   using UnityEngine;
+
+   public class FantasyTest : MonoBehaviour
+   {
+       void Start()
+       {
+           Debug.Log("Fantasy.Unity 安装成功!");
+       }
+   }
+   ```
+
+   如果没有命名空间错误，说明安装成功。
+
+---
+
+## 快速入门示例
+
+下面通过一个简单的示例演示如何使用 Fantasy.Unity 连接服务器并发送消息。
+
+### 1. 初始化框架并创建场景
+
+```csharp
+using Fantasy;
+using Fantasy.Async;
+using Fantasy.Network;
+using UnityEngine;
+
+public class QuickStart : MonoBehaviour
+{
+    private Scene _scene;
+    private Session _session;
+
+    private void Start()
+    {
+        StartAsync().Coroutine();
+    }
+
+    private async FTask StartAsync()
+    {
+        // 1. 初始化 Fantasy 框架
+        await Fantasy.Platform.Unity.Entry.Initialize();
+
+        // 2. 创建一个 Scene (客户端场景)
+        // Scene 是 Fantasy 框架的核心容器,所有功能都在 Scene 下运行
+        // SceneRuntimeMode.MainThread 表示在 Unity 主线程运行
+        _scene = await Scene.Create(SceneRuntimeMode.MainThread);
+
+        Debug.Log("Fantasy 框架初始化完成!");
+    }
+
+    private void OnDestroy()
+    {
+        // 销毁 Scene,释放所有资源
+        _scene?.Dispose();
+    }
+}
+```
+
+**代码说明:**
+
+| 步骤 | 方法 | 说明 |
+|------|------|------|
+| 1 | `Entry.Initialize()` | 初始化 Fantasy 框架,加载必要的配置 |
+| 2 | `Scene.Create()` | 创建客户端场景,返回 Scene 实例 |
+| 3 | `scene.Dispose()` | 销毁场景,释放网络连接和所有资源 |
+
+#### Fantasy.Unity 支持三种场景运行模式:
+
+| 模式 | 说明 | 适用场景 |
+|------|------|---------|
+| `SceneRuntimeMode.MainThread` | 在 Unity 主线程运行 | 与 Unity UI 交互、需要访问 Unity API |
+| `SceneRuntimeMode.MultiThread` | 在独立线程运行 | 纯网络通信、不涉及 Unity API |
+| `SceneRuntimeMode.ThreadPool` | 在线程池运行 | 短期任务、临时逻辑 |
+
+**推荐使用:**
+
+```csharp
+// 客户端通常使用 MainThread 模式
+_scene = await Scene.Create(SceneRuntimeMode.MainThread);
+```
+
+**注意事项:**
+
+- ⚠️ `MultiThread` 和 `ThreadPool` 模式**不能**直接访问 Unity API
+- ⚠️ 如需在子线程更新 UI,使用 `UnityMainThreadDispatcher` 或 `SynchronizationContext`
+
+---
+
+---
+
+### 2. 连接服务器
+
+```csharp
+using Fantasy;
+using Fantasy.Async;
+using Fantasy.Network;
+using UnityEngine;
+
+public class ConnectExample : MonoBehaviour
+{
+    private Scene _scene;
+    private Session _session;
+
+    private void Start()
+    {
+        ConnectToServerAsync().Coroutine();
+    }
+
+    private async FTask ConnectToServerAsync()
+    {
+        // 1. 初始化框架并创建场景
+        await Fantasy.Platform.Unity.Entry.Initialize();
+        _scene = await Scene.Create(SceneRuntimeMode.MainThread);
+
+        // 2. 连接到服务器
+        _session = _scene.Connect(
+            remoteAddress: "127.0.0.1:20000",           // 服务器地址
+            networkProtocolType: NetworkProtocolType.KCP, // 协议类型
+            onConnectComplete: OnConnectSuccess,         // 连接成功回调
+            onConnectFail: OnConnectFail,               // 连接失败回调
+            onConnectDisconnect: OnDisconnect,          // 断开连接回调
+            isHttps: false,                             // WebGL 平台是否使用 HTTPS
+            connectTimeout: 5000                        // 连接超时(毫秒)
+        );
+    }
+
+    private void OnConnectSuccess()
+    {
+        Debug.Log("连接服务器成功!");
+
+        // 添加心跳组件,保持与服务器的连接
+        // 2000 毫秒发送一次心跳
+        _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
+    }
+
+    private void OnConnectFail()
+    {
+        Debug.LogError("连接服务器失败!");
+    }
+
+    private void OnDisconnect()
+    {
+        Debug.LogWarning("与服务器断开连接!");
+    }
+
+    private void OnDestroy()
+    {
+        _scene?.Dispose();
+    }
+}
+```
+
+**Scene.Connect() 参数说明:**
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `remoteAddress` | `string` | ✅ | 服务器地址,格式: `IP:端口` (如 `127.0.0.1:20000`) |
+| `networkProtocolType` | `NetworkProtocolType` | ✅ | 网络协议类型: `KCP`、`TCP`、`WebSocket` |
+| `onConnectComplete` | `Action` | ❌ | 连接成功回调 |
+| `onConnectFail` | `Action` | ❌ | 连接失败回调 |
+| `onConnectDisconnect` | `Action` | ❌ | 断开连接回调 |
+| `isHttps` | `bool` | ❌ | WebGL 平台是否使用 HTTPS (默认 `false`) |
+| `connectTimeout` | `int` | ❌ | 连接超时时间(毫秒,默认 `5000`) |
+
+**网络协议选择:**
+
+| 协议 | 适用场景 | 特点 |
+|------|---------|------|
+| **KCP** | 实时对战游戏、MOBA | 低延迟、高可靠性、适合弱网环境 |
+| **TCP** | 回合制游戏、卡牌游戏 | 可靠连接、顺序保证、开销较小 |
+| **WebSocket** | WebGL 平台、H5 游戏 | 浏览器支持、HTTP 兼容 |
+
+---
+
+## 示例项目
+
+Fantasy 仓库中提供了完整的 Unity 客户端示例项目:
+
+```
+Fantasy/
+└── Examples/
+    └── Client/
+        └── Unity/
+            └── Assets/
+                └── Scripts/
+                    └── Examples/
+                        ├── ConnectToServer/      # 连接服务器示例
+                        ├── NormalMessage/        # 普通消息示例
+                        ├── RouteMessage/         # 路由消息示例
+                        ├── Addressable/          # Addressable 示例
+                        ├── EventSystem/          # 事件系统示例
+                        └── ...                   # 更多示例
+```
+
+**推荐学习顺序:**
+1. `ConnectToServer/` - 学习如何连接服务器
+2. `NormalMessage/` - 学习消息发送和接收
+3. `RouteMessage/` - 学习路由消息
+4. `EventSystem/` - 学习事件系统
+
+---
+
+## 常见问题
+
+### Q1: 安装后找不到 Fantasy 命名空间?
+
+**解决方法:**
+
+1. **重新导入包**
+    - `Assets` → `Reimport All`
+    - 等待编译完成
+
+2. **检查程序集引用**
+    - 如果使用了 Assembly Definition (asmdef),确保引用了 `Fantasy.Unity`
+    - 在 asmdef 文件的 `Assembly Definition References` 中添加 `Fantasy.Unity`
+
+3. **重启 Unity 和 IDE**
+    - 关闭 Unity 和 Visual Studio/Rider
+    - 重新打开项目
+
+---
+
+### Q2: 连接服务器失败?
+
+**可能原因及解决方法:**
+
+1. **服务器未启动**
+    - 确保服务器正在运行并监听对应端口
+    - 检查服务器日志
+
+2. **IP 地址或端口错误**
+    - 确认服务器地址格式: `IP:端口`
+    - 本地测试使用 `127.0.0.1` 或 `localhost`
+    - 局域网测试使用服务器的内网 IP
+
+3. **防火墙拦截**
+    - Windows: 允许端口通过防火墙
+    - Mac: 系统偏好设置 → 安全性与隐私 → 防火墙 → 防火墙选项
+
+4. **协议类型不匹配**
+    - 确保客户端和服务器使用相同的协议(KCP/TCP/WebSocket)
+
+---
+
+### Q3: WebGL 平台如何连接?
+
+WebGL 平台只支持 **WebSocket** 协议:
+
+```csharp
+// WebGL 平台连接示例
+_session = _scene.Connect(
+    "example.com:443",                      // 服务器地址
+    NetworkProtocolType.WebSocket,          // 必须使用 WebSocket
+    OnConnectSuccess,
+    OnConnectFail,
+    OnDisconnect,
+    isHttps: true,                          // HTTPS 网站设置为 true
+    5000
+);
+```
+
+**WebGL 注意事项:**
+
+- ✅ 只能使用 `WebSocket` 协议
+- ✅ 服务器需要支持 WebSocket
+- ✅ HTTPS 网站必须连接到 WSS (WebSocket Secure)
+- ⚠️ 不支持 KCP 和 TCP
+
+---
+
+### Q4: 为什么需要心跳组件?
+
+**原因:**
+
+- 服务器有心跳超时检测机制
+- 如果一段时间没有收到客户端消息,服务器会断开连接
+- 心跳组件会定期发送心跳包,保持连接活跃
+
+**使用方法:**
+
+```csharp
+private void OnConnectSuccess()
+{
+    // 添加心跳组件,每 2000 毫秒发送一次心跳
+    _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
+}
+```
+
+**建议:**
+- ✅ 心跳间隔设置为 2000-5000 毫秒
+- ⚠️ 间隔不要太短(浪费带宽)或太长(可能超时)
+
+---
+
+### Q5: 如何调试网络消息?
+
+**查看消息内容:**
+
+```csharp
+public class G2C_PushMessageHandler : Message<G2C_PushMessage>
+{
+    protected override async FTask Run(Session session, G2C_PushMessage message)
+    {
+        // 打印消息详情
+        Debug.Log($"收到消息类型: {message.GetType().Name}");
+        Debug.Log($"消息内容: {message.Content}");
+        Debug.Log($"Session ID: {session.Id}");
+
+        await FTask.CompletedTask;
+    }
+}
+```
+
+---
+
+## 下一步
+
+恭喜! 你已经完成了 Fantasy.Unity 的安装和Unity 客户端的基础使用。接下来可以:
+
+1. 🔧 阅读 [协议定义指南](11-Protocol.md) 学习如何定义自己的消息协议
+2. 🎯 阅读 [网络消息处理](10-Message.md) 深入了解消息系统 (待完善)
+3. 📖 阅读 [ECS 系统详解](06-ECS.md) 学习客户端实体组件系统 (待完善)
+4. 🎮 阅读 [事件系统](22-Event.md) 学习客户端事件机制 (待完善)
+5. 📚 查看 `Examples/Client/Unity` 目录下的完整示例
+
+## 获取帮助
+
+- **GitHub**: https://github.com/qq362946/Fantasy
+- **文档**: https://www.code-fantasy.com/
+- **Issues**: https://github.com/qq362946/Fantasy/issues
+- **OpenUPM**: https://openupm.com/packages/com.fantasy.unity/
+
+---
