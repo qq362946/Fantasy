@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Fantasy.Async;
 using Fantasy.Helper;
 #if !FANTASY_EXPORTER
+using Fantasy.Async;
 using Fantasy.Network;
 #endif
 #pragma warning disable CS8604 // Possible null reference argument.

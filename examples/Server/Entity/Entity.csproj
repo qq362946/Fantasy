@@ -26,19 +26,16 @@
       <ProjectReference Include="..\..\..\Fantasy.Net\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
     <ItemGroup>
-      <AdditionalFiles Include="Fantasy.config" />
-    </ItemGroup>
-    <ItemGroup>
-      <None Update="Fantasy.config">
+      <AdditionalFiles Include="Fantasy.config">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="Fantasy.xsd">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
+      </AdditionalFiles>
       <None Update="NLog.config">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="NLog.xsd">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Fantasy.xsd">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

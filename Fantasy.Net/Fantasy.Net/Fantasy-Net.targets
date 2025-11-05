@@ -4,4 +4,42 @@
     <PropertyGroup>
         <DefineConstants>$(DefineConstants);FANTASY_NET</DefineConstants>
     </PropertyGroup>
+
+    <!-- 将 Fantasy 配置文件复制到引用项目的根目录和输出目录 -->
+    <Target Name="CopyFantasyConfigFilesToProject" BeforeTargets="PreBuildEvent;CoreCompile">
+        <ItemGroup>
+            <!-- 从 Fantasy.Net 项目目录获取配置文件 -->
+            <FantasyConfigSource Include="$(MSBuildThisFileDirectory)Fantasy.config" />
+            <FantasyConfigSource Include="$(MSBuildThisFileDirectory)Fantasy.xsd" />
+        </ItemGroup>
+
+        <!-- 只在文件不存在时复制到引用项目的根目录，避免覆盖用户修改 -->
+        <Copy SourceFiles="$(MSBuildThisFileDirectory)Fantasy.config"
+              DestinationFolder="$(ProjectDir)"
+              SkipUnchangedFiles="true"
+              Condition="Exists('$(MSBuildThisFileDirectory)Fantasy.config') And !Exists('$(ProjectDir)Fantasy.config')" />
+
+        <Copy SourceFiles="$(MSBuildThisFileDirectory)Fantasy.xsd"
+              DestinationFolder="$(ProjectDir)"
+              SkipUnchangedFiles="true"
+              Condition="Exists('$(MSBuildThisFileDirectory)Fantasy.xsd') And !Exists('$(ProjectDir)Fantasy.xsd')" />
+
+        <!-- 输出消息以便调试 -->
+        <Message Text="Fantasy 配置文件检查完成。如需重置配置，请删除项目根目录下的 Fantasy.config 和 Fantasy.xsd 后重新构建。" Importance="normal"
+                 Condition="Exists('$(ProjectDir)Fantasy.config') And Exists('$(ProjectDir)Fantasy.xsd')" />
+        <Message Text="已从 NuGet 包复制 Fantasy 配置文件到项目根目录: $(ProjectDir)" Importance="high"
+                 Condition="!Exists('$(ProjectDir)Fantasy.config') Or !Exists('$(ProjectDir)Fantasy.xsd')" />
+    </Target>
+
+    <!-- 将项目根目录的配置文件自动包含并复制到输出目录 -->
+    <ItemGroup>
+        <None Include="$(ProjectDir)Fantasy.config" Condition="Exists('$(ProjectDir)Fantasy.config')">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>Fantasy.config</Link>
+        </None>
+        <None Include="$(ProjectDir)Fantasy.xsd" Condition="Exists('$(ProjectDir)Fantasy.xsd')">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>Fantasy.xsd</Link>
+        </None>
+    </ItemGroup>
 </Project>

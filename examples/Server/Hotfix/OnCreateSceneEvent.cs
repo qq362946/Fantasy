@@ -1,3 +1,4 @@
+using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;

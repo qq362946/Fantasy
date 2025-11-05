@@ -1,10 +1,7 @@
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
-using Fantasy.Async;
-using Fantasy.InnerMessage;
-using Fantasy.Network;
-using Fantasy.Platform.Console;
+using SharpCompress.Common;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 

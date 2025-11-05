@@ -35,6 +35,12 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Pool\Concurrent\MultiThreadPool.cs">
+          <Link>Core\Base\Concurrent\MultiThreadPool.cs</Link>
+        </Compile>
+        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Pool\Concurrent\MultiThreadPoolQueue.cs">
+          <Link>Core\Base\Concurrent\MultiThreadPoolQueue.cs</Link>
+        </Compile>
         <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Pool\Normal\Pool.cs">
           <Link>Core\Base\Pool.cs</Link>
         </Compile>
@@ -52,9 +58,6 @@
         </Compile>
         <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Pool\Interface\IPool.cs">
             <Link>Excel\Base\IPool.cs</Link>
-        </Compile>
-        <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Assembly\AssemblyInfo.cs">
-            <Link>Excel\Base\AssemblyInfo.cs</Link>
         </Compile>
         <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\DataStructure\Collection\OneToManyListPool.cs">
             <Link>Excel\Base\OneToManyList.cs</Link>

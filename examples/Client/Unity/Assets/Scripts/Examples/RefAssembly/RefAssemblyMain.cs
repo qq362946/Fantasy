@@ -24,8 +24,8 @@ namespace Fantasy
 
         private async FTask StartAsync()
         {
-            var refAssemblyA = LoadAssembly("RefAssemblyA");
-            var refAssemblyB = LoadAssembly("RefAssemblyB");
+            // var refAssemblyA = LoadAssembly("RefAssemblyA");
+            // var refAssemblyB = LoadAssembly("RefAssemblyB");
             await Fantasy.Platform.Unity.Entry.Initialize();
             _scene = await Scene.Create(SceneRuntimeMode.MainThread);
             await _scene.EventComponent.PublishAsync(new OnCreateScene(_scene));

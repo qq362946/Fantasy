@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 using Exporter;
 using Exporter.Excel;
 using Fantasy;
-using Fantasy.Assembly;
 using Fantasy.ConfigTable;
 using Fantasy.DataStructure.Collection;
 using Fantasy.Exporter;

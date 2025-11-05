@@ -196,15 +196,15 @@ namespace Fantasy.Async
         /// 取当前临界区中的 FTask 数量
         /// </summary>
         public int ActiveCount(){ return _activeCount; }
-        private int _activeCount;
+        private int _activeCount = 0;
         private readonly ConcurrentDictionary<int, (string tag, DateTime start)> _tagMap = new();
         /// <summary>
         /// 提供读取当前活跃 tag（监控用）
         /// </summary>
         public IReadOnlyDictionary<int, (string tag, DateTime start)> ActiveTags => _tagMap;
-
-        private SemaphoreSlim _flowSem; // 限制总量
+       
         private SemaphoreSlim[] _idSem;// 按 ID 串行
+        private long loopingNumber = 0; // 一个自循环的数字, 用来限流
 
         /// 所在Scene
         public Scene Scene { get; private set; }
@@ -218,13 +218,9 @@ namespace Fantasy.Async
         /// </summary>
         internal FTaskFlowLock(int flowLimit, CoroutineLockComponent coroutineLockComponent, long lockDuty)
         {
-            _flowSem = new SemaphoreSlim(flowLimit, flowLimit);
             _idSem = new SemaphoreSlim[flowLimit];
-            
             for (int i = 0; i < flowLimit; i++)
-            {
                 _idSem[i] = new SemaphoreSlim(1, 1);
-            }
 
             CoroutineLockComponent = coroutineLockComponent;
             Scene = coroutineLockComponent.Scene;
@@ -247,16 +243,9 @@ namespace Fantasy.Async
 
             try
             {
-                // 总体限流
-                if (!await _flowSem.WaitAsync(timeOut, cancelToken.Token))
-                {
-                    throw new TimeoutException($"[FlowLock] timeout Tag={tag ?? "null"} Id={waitForId}");
-                }
-
                 // 按 id 串行等待
                 if (!await _idSem[idIndex].WaitAsync(timeOut, cancelToken.Token))
                 {
-                    _flowSem.Release();  // 没拿到 id lock，要释放之前拿到的 flow lock
                     throw new TimeoutException($"[FlowLock] timeout Id={waitForId} Tag={tag ?? "null"}");
                 }
 
@@ -284,13 +273,16 @@ namespace Fantasy.Async
 
             try
             {
-                // 仅限流
-                if (!await _flowSem.WaitAsync(timeOut, cancelToken.Token))
+                // 仅限流 (关键点: 通过原子自增, 然后取模, 让索引始终在 0 到 (FTaskFlowLimit-1) 之间循环旋转)
+                long idx = Interlocked.Increment(ref loopingNumber) % FTaskFlowLimit;
+
+                if (!await _idSem[idx].WaitAsync(timeOut, cancelToken.Token))
                 {
                     throw new TimeoutException($"[FlowLock] timeout Tag={tag ?? "null"}");
                 }
-                long minusOne = -1;
-                return CoroutineLockComponent.WaitCoroutineLockPool.Rent(this, ref minusOne, tag, timeOut);
+                // 成功进入临界区：登记 tag
+                _tagMap[(int)idx] = (tag, DateTime.UtcNow);
+                return CoroutineLockComponent.WaitCoroutineLockPool.Rent(this, ref idx, tag, timeOut);
             }
             catch
             {
@@ -304,9 +296,6 @@ namespace Fantasy.Async
         /// </summary>
         public void Release(long waitingKey) 
         {
-            if (waitingKey == -1) //-1 说明是纯限流了, 没有对任何Id上锁, 直接跳转
-                goto SomethingMustRelease;
-
             int idIndex = (int)waitingKey;
             if (idIndex < 0 || idIndex >= FTaskFlowLimit)
             {
@@ -322,17 +311,6 @@ namespace Fantasy.Async
             catch (SemaphoreFullException)
             {
                 Log.Error($"FTaskFlowLock.Release: id lock {idIndex} release twice?");  // 防御性记录调试信息
-            }
-
-            SomethingMustRelease:
-
-            try
-            {
-                _flowSem.Release();
-            }
-            catch (SemaphoreFullException)
-            {
-                Log.Error($"FTaskFlowLock.Release: flow lock release twice?");
             }
 
             // active count 自减
@@ -366,7 +344,6 @@ namespace Fantasy.Async
         {
             FTaskFlowLimit = updateLimit;
 
-            _flowSem = new SemaphoreSlim(updateLimit, updateLimit);
             if (updateLimit > _idSem.Length)
             {
                 _idSem = new SemaphoreSlim[updateLimit];
@@ -384,16 +361,7 @@ namespace Fantasy.Async
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void EnsureSemaphoresRelease()
         {
-            // flowLock 恢复满额（防御式，确保内部信号量被 reset）
-            while (_flowSem.CurrentCount < FTaskFlowLimit)
-            {
-                try { _flowSem.Release(); }
-                catch (SemaphoreFullException) { 
-                    break;     // 已经满额，无需再释放；预期内行为
-                }
-            }
-
-            // 每个 idLock 都恢复成 1
+            // 每个 idSem 都恢复成 1
             for (int i = 0; i < _idSem.Length; i++)
             {
                 var sem = _idSem[i];
@@ -438,10 +406,8 @@ namespace Fantasy.Async
             {
                 try { sem.Dispose(); } catch { }
             }
-            try { _flowSem.Dispose(); } catch { }
 
             _idSem = null;
-            _flowSem = null;
         }
     }  
 }

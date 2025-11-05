@@ -260,11 +260,6 @@
         <xs:documentation>内网端口</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="sceneType" type="xs:unsignedInt" use="required">
-      <xs:annotation>
-        <xs:documentation>场景类型数值</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
   </xs:complexType>
 
   <!-- Network Runtime type -->

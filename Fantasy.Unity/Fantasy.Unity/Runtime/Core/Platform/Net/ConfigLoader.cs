@@ -33,12 +33,9 @@ public static class ConfigLoader
         }
         
         // 创建命名空间管理器
-        
         var nsManager = new XmlNamespaceManager(doc.NameTable);
         nsManager.AddNamespace("f", "http://fantasy.net/config");
-        
         // 加载运行时配置
-        
         LoadRuntimeConfig(root, nsManager);
         
         var configTableNode = root.SelectSingleNode("f:configTable", nsManager);
@@ -250,9 +247,9 @@ public static class ConfigLoader
                 SceneTypeString = GetRequiredAttribute(sceneNode, "sceneTypeString"),
                 NetworkProtocol = GetOptionalAttribute(sceneNode, "networkProtocol") ?? string.Empty,
                 OuterPort = int.Parse(GetOptionalAttribute(sceneNode, "outerPort") ?? "0"),
-                InnerPort = int.Parse(GetRequiredAttribute(sceneNode, "innerPort")),
-                SceneType = int.Parse(GetRequiredAttribute(sceneNode, "sceneType"))
+                InnerPort = int.Parse(GetRequiredAttribute(sceneNode, "innerPort"))
             };
+            scene.SceneType = Scene.SceneTypeDictionary[scene.SceneTypeString];
             sceneList.Add(scene);
         }
         

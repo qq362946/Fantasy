@@ -1,14 +1,21 @@
 #if FANTASY_NET || FANTASY_EXPORTER
 using System.Buffers;
+#if !FANTASY_EXPORTER
 using Fantasy.Assembly;
 using Fantasy.Async;
+#endif
 using ProtoBuf.Meta;
 namespace Fantasy.Serialize
 {
     /// <summary>
     /// ProtoBufP帮助类，Net平台使用
     /// </summary>
+#if FANTASY_EXPORTER
+    public sealed class ProtoBufPackHelper : ISerialize
+#endif
+#if FANTASY_NET
     public sealed class ProtoBufPackHelper : ISerialize, IAssemblyLifecycle
+#endif
     {
         /// <summary>
         /// 序列化器的名字
@@ -16,7 +23,7 @@ namespace Fantasy.Serialize
         public string SerializeName { get; } = "ProtoBuf";
 
         #region AssemblyManifest
-
+#if !FANTASY_EXPORTER
         internal async FTask<ProtoBufPackHelper> Initialize()
         {
 #if FANTASY_NET
@@ -30,7 +37,8 @@ namespace Fantasy.Serialize
             await AssemblyLifecycle.Add(this);
             return this;
         }
-
+#endif
+#if !FANTASY_EXPORTER
         /// <summary>
         /// 
         /// </summary>
@@ -48,8 +56,7 @@ namespace Fantasy.Serialize
             }
             await FTask.CompletedTask;
         }
-
-        /// <summary>
+         /// <summary>
         /// 
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
@@ -57,7 +64,7 @@ namespace Fantasy.Serialize
         {
             await FTask.CompletedTask;
         }
-
+#endif
         #endregion
 
         /// <summary>

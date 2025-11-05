@@ -1,8 +1,19 @@
+using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Event;
 
 namespace Fantasy
 {
+    public interface IOnFantasyInitEventA : ICustomInterface
+    {
+        
+    }
+
+    public class ATest : IOnFantasyInitEventA
+    {
+        
+    }
+    
     public struct TestRefAssemblyEventA
     {
         
@@ -12,6 +23,11 @@ namespace Fantasy
     {
         protected override async FTask Handler(OnCreateScene self)
         {
+            Log.Debug("111");
+            foreach (var type in AssemblyManifest.ForEach<IOnFantasyInitEventA>())
+            {
+                Log.Debug($"type: {type.FullName}");
+            }
             Log.Debug("OnOnFantasyInitEventA Handler");
             self.Scene.EventComponent.Publish(new TestRefAssemblyEventA());
             await FTask.CompletedTask;

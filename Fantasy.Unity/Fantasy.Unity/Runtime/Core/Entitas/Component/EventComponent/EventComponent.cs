@@ -63,6 +63,7 @@ namespace Fantasy.Event
                 {
                     OnUnLoadInner(assemblyManifest);
                 }
+                
                 assemblyManifest.EventSystemRegistrar.Register(
                     _events,
                     _asyncEvents);
