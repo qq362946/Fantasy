@@ -57,6 +57,10 @@ namespace Fantasy
                 DrawCscRspInstallationSection();
                 DrawSectionDivider();
                 EditorGUILayout.Space(10);
+                // ============ Fantasy WebGL 支持检测 ============
+                DrawWebGLInstallationSection();
+                DrawSectionDivider();
+                EditorGUILayout.Space(10);
                 // ============ 程序集自动拷贝设置 ============
                 EditorGUI.BeginChangeCheck();
                 DrawAssemblyCopySection();
@@ -104,7 +108,7 @@ namespace Fantasy
 
                 EditorGUILayout.BeginVertical(boxStyle);
                 GUI.color = originalColor;
-                
+
                 GUIStyle installedButtonStyle = new GUIStyle(GUI.skin.button)
                 {
                     fontSize = 13,
@@ -113,10 +117,16 @@ namespace Fantasy
                 };
 
                 Color originalBgColor = GUI.backgroundColor;
-                GUI.backgroundColor = new Color(0.3f, 0.8f, 0.3f);  // 绿色
-                GUI.enabled = false;  // 禁用按钮，只显示状态
-                GUILayout.Button("✓ FANTASY_UNITY 已安装", installedButtonStyle);
-                GUI.enabled = true;
+                GUI.backgroundColor = new Color(1f, 0.6f, 0.4f);  // 橙红色
+                if (GUILayout.Button("✓ FANTASY_UNITY 已安装 - 点击卸载", installedButtonStyle))
+                {
+                    if (EditorUtility.DisplayDialog("确认卸载",
+                        "确定要卸载 FANTASY_UNITY 预编译符号吗？\n\n卸载后需要重新编译项目才能生效。",
+                        "确定卸载", "取消"))
+                    {
+                        UninstallFantasyUnityDefine();
+                    }
+                }
                 GUI.backgroundColor = originalBgColor;
 
                 EditorGUILayout.Space(3);
@@ -260,6 +270,321 @@ namespace Fantasy
             {
                 Debug.LogError($"安装 FANTASY_UNITY 失败: {ex.Message}");
                 EditorUtility.DisplayDialog("错误", $"安装失败:\n{ex.Message}", "确定");
+            }
+        }
+
+        /// <summary>
+        /// 卸载 FANTASY_UNITY 定义从 csc.rsp 文件
+        /// </summary>
+        private void UninstallFantasyUnityDefine()
+        {
+            string cscRspPath = Path.Combine(Application.dataPath, "csc.rsp");
+
+            try
+            {
+                if (!File.Exists(cscRspPath))
+                {
+                    EditorUtility.DisplayDialog("提示", "csc.rsp 文件不存在，无需卸载。", "确定");
+                    return;
+                }
+
+                // 读取现有内容
+                string content = File.ReadAllText(cscRspPath);
+
+                // 使用正则表达式移除 FANTASY_UNITY
+                string newContent = System.Text.RegularExpressions.Regex.Replace(
+                    content,
+                    @";?\s*FANTASY_UNITY\b",
+                    ""
+                );
+
+                // 清理可能出现的连续分号
+                newContent = System.Text.RegularExpressions.Regex.Replace(
+                    newContent,
+                    @";;+",
+                    ";"
+                );
+
+                // 清理 -define: 后面紧跟分号的情况
+                newContent = System.Text.RegularExpressions.Regex.Replace(
+                    newContent,
+                    @"-define:;",
+                    "-define:"
+                );
+
+                // 移除空的 -define: 行
+                string[] lines = newContent.Split(new[] { '\r', '\n' }, StringSplitOptions.None);
+                List<string> newLines = new List<string>();
+                foreach (var line in lines)
+                {
+                    string trimmed = line.Trim();
+                    if (trimmed != "-define:" && trimmed != "-define:;")
+                    {
+                        newLines.Add(line);
+                    }
+                }
+
+                newContent = string.Join("\n", newLines);
+
+                File.WriteAllText(cscRspPath, newContent);
+                AssetDatabase.Refresh();
+                EditorUtility.DisplayDialog("成功", "FANTASY_UNITY 已经卸载成功。\n\n重新编译后生效。", "确定");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"卸载 FANTASY_UNITY 失败: {ex.Message}");
+                EditorUtility.DisplayDialog("错误", $"卸载失败:\n{ex.Message}", "确定");
+            }
+        }
+
+        /// <summary>
+        /// 绘制 FANTASY_WEBGL 安装状态区域
+        /// </summary>
+        private void DrawWebGLInstallationSection()
+        {
+            bool isInstalled = CheckWebGLDefineStatus(out bool fileExists, out bool hasDefine);
+
+            // 状态框
+            if (isInstalled)
+            {
+                // 已安装 - 绿色背景框
+                GUIStyle boxStyle = new GUIStyle(GUI.skin.box)
+                {
+                    padding = new RectOffset(10, 10, 10, 10),
+                    margin = new RectOffset(0, 0, 5, 5)
+                };
+
+                Color originalColor = GUI.color;
+                GUI.color = new Color(0.7f, 1f, 0.7f);  // 绿色背景
+
+                EditorGUILayout.BeginVertical(boxStyle);
+                GUI.color = originalColor;
+
+                GUIStyle installedButtonStyle = new GUIStyle(GUI.skin.button)
+                {
+                    fontSize = 13,
+                    fontStyle = FontStyle.Bold,
+                    fixedHeight = 35
+                };
+
+                Color originalBgColor = GUI.backgroundColor;
+                GUI.backgroundColor = new Color(1f, 0.6f, 0.4f);  // 橙红色
+                if (GUILayout.Button("✓ FANTASY_WEBGL 已安装 - 点击卸载", installedButtonStyle))
+                {
+                    if (EditorUtility.DisplayDialog("确认卸载",
+                        "确定要卸载 FANTASY_WEBGL 预编译符号吗？\n\n卸载后需要重新编译项目才能生效。",
+                        "确定卸载", "取消"))
+                    {
+                        UninstallFantasyWebGLDefine();
+                    }
+                }
+                GUI.backgroundColor = originalBgColor;
+
+                EditorGUILayout.Space(3);
+                EditorGUILayout.HelpBox("WebGL 平台支持已启用", MessageType.Info);
+
+                EditorGUILayout.EndVertical();
+            }
+            else
+            {
+                // 未安装 - 橙黄色背景框
+                GUIStyle boxStyle = new GUIStyle(GUI.skin.box)
+                {
+                    padding = new RectOffset(10, 10, 10, 10),
+                    margin = new RectOffset(0, 0, 5, 5)
+                };
+
+                Color originalColor = GUI.color;
+                GUI.color = Color.red;  // 橙黄色背景
+
+                EditorGUILayout.BeginVertical(boxStyle);
+                GUI.color = originalColor;
+
+                EditorGUILayout.Space(8);
+
+                // 醒目的大按钮
+                GUIStyle buttonStyle = new GUIStyle(GUI.skin.button)
+                {
+                    fontSize = 13,
+                    fontStyle = FontStyle.Bold,
+                    fixedHeight = 35
+                };
+
+                Color originalBgColor = GUI.backgroundColor;
+                GUI.backgroundColor = new Color(0.3f, 0.8f, 1f);
+                if (GUILayout.Button("点击安装 FANTASY_WEBGL", buttonStyle))
+                {
+                    InstallFantasyWebGLDefine();
+                }
+                GUI.backgroundColor = originalBgColor;
+
+                EditorGUILayout.Space(3);
+                EditorGUILayout.HelpBox("安装后可能需要重新编译项目才能生效", MessageType.Info);
+
+                EditorGUILayout.EndVertical();
+            }
+        }
+
+        /// <summary>
+        /// 检测 csc.rsp 文件中的 FANTASY_WEBGL 定义状态
+        /// </summary>
+        /// <param name="fileExists">文件是否存在</param>
+        /// <param name="hasDefine">是否包含 FANTASY_WEBGL 定义</param>
+        /// <returns>是否已正确安装</returns>
+        private bool CheckWebGLDefineStatus(out bool fileExists, out bool hasDefine)
+        {
+            string cscRspPath = Path.Combine(Application.dataPath, "csc.rsp");
+            fileExists = File.Exists(cscRspPath);
+            hasDefine = false;
+
+            if (fileExists)
+            {
+                string content = File.ReadAllText(cscRspPath);
+                // 使用正则表达式精确匹配 FANTASY_WEBGL（确保是完整的单词，不是其他定义的一部分）
+                // 匹配条件：FANTASY_WEBGL 后面是分号、空白字符、换行或文件结束
+                hasDefine = System.Text.RegularExpressions.Regex.IsMatch(
+                    content,
+                    @"\bFANTASY_WEBGL\b"
+                );
+            }
+
+            return fileExists && hasDefine;
+        }
+
+        /// <summary>
+        /// 安装 FANTASY_WEBGL 定义到 csc.rsp 文件
+        /// </summary>
+        private void InstallFantasyWebGLDefine()
+        {
+            string cscRspPath = Path.Combine(Application.dataPath, "csc.rsp");
+
+            try
+            {
+                if (!File.Exists(cscRspPath))
+                {
+                    // 创建新文件
+                    File.WriteAllText(cscRspPath, "-define:FANTASY_WEBGL\n");
+                }
+                else
+                {
+                    // 读取现有内容
+                    string content = File.ReadAllText(cscRspPath);
+
+                    // 使用正则表达式精确检测，避免误判（例如 FANTASY_WEBGL123）
+                    bool hasFantasyWebGL = System.Text.RegularExpressions.Regex.IsMatch(
+                        content,
+                        @"\bFANTASY_WEBGL\b"
+                    );
+
+                    if (!hasFantasyWebGL)
+                    {
+                        // 查找是否已有 -define: 行
+                        string[] lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                        bool defineLineFound = false;
+
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            if (lines[i].TrimStart().StartsWith("-define:"))
+                            {
+                                // 添加到现有的 define 行
+                                if (lines[i].EndsWith(";"))
+                                {
+                                    lines[i] = lines[i] + "FANTASY_WEBGL";
+                                }
+                                else
+                                {
+                                    lines[i] = lines[i] + ";FANTASY_WEBGL";
+                                }
+                                defineLineFound = true;
+                                break;
+                            }
+                        }
+
+                        if (defineLineFound)
+                        {
+                            content = string.Join("\n", lines) + "\n";
+                        }
+                        else
+                        {
+                            // 添加新的 define 行到文件开头
+                            content = "-define:FANTASY_WEBGL\n" + content;
+                        }
+
+                        File.WriteAllText(cscRspPath, content);
+                    }
+                }
+
+                AssetDatabase.Refresh();
+                EditorUtility.DisplayDialog("成功", "FANTASY_WEBGL 已经安装成功。\n\n重新编译后生效。", "确定");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"安装 FANTASY_WEBGL 失败: {ex.Message}");
+                EditorUtility.DisplayDialog("错误", $"安装失败:\n{ex.Message}", "确定");
+            }
+        }
+
+        /// <summary>
+        /// 卸载 FANTASY_WEBGL 定义从 csc.rsp 文件
+        /// </summary>
+        private void UninstallFantasyWebGLDefine()
+        {
+            string cscRspPath = Path.Combine(Application.dataPath, "csc.rsp");
+
+            try
+            {
+                if (!File.Exists(cscRspPath))
+                {
+                    EditorUtility.DisplayDialog("提示", "csc.rsp 文件不存在，无需卸载。", "确定");
+                    return;
+                }
+
+                // 读取现有内容
+                string content = File.ReadAllText(cscRspPath);
+
+                // 使用正则表达式移除 FANTASY_WEBGL
+                string newContent = System.Text.RegularExpressions.Regex.Replace(
+                    content,
+                    @";?\s*FANTASY_WEBGL\b",
+                    ""
+                );
+
+                // 清理可能出现的连续分号
+                newContent = System.Text.RegularExpressions.Regex.Replace(
+                    newContent,
+                    @";;+",
+                    ";"
+                );
+
+                // 清理 -define: 后面紧跟分号的情况
+                newContent = System.Text.RegularExpressions.Regex.Replace(
+                    newContent,
+                    @"-define:;",
+                    "-define:"
+                );
+
+                // 移除空的 -define: 行
+                string[] lines = newContent.Split(new[] { '\r', '\n' }, StringSplitOptions.None);
+                List<string> newLines = new List<string>();
+                foreach (var line in lines)
+                {
+                    string trimmed = line.Trim();
+                    if (trimmed != "-define:" && trimmed != "-define:;")
+                    {
+                        newLines.Add(line);
+                    }
+                }
+
+                newContent = string.Join("\n", newLines);
+
+                File.WriteAllText(cscRspPath, newContent);
+                AssetDatabase.Refresh();
+                EditorUtility.DisplayDialog("成功", "FANTASY_WEBGL 已经卸载成功。\n\n重新编译后生效。", "确定");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"卸载 FANTASY_WEBGL 失败: {ex.Message}");
+                EditorUtility.DisplayDialog("错误", $"卸载失败:\n{ex.Message}", "确定");
             }
         }
 
