@@ -48,19 +48,29 @@ namespace Fantasy.Database
         /// <returns>初始化后的数据库实例。</returns>
         public IDatabase Initialize(Scene scene, string connectionString, string dbName)
         {
-            _scene = scene;
-            _mongoClient = DataBaseSetting.MongoDbCustomInitialize != null
-                ? DataBaseSetting.MongoDbCustomInitialize(new DataBaseCustomConfig()
-                {
-                    Scene = scene, ConnectionString = connectionString, DBName = dbName
-                })
-                : new MongoClient(connectionString);
-            Name = dbName;
-            _mongoDatabase = _mongoClient.GetDatabase(dbName);
-            _dataBaseLock = scene.CoroutineLockComponent.Create(GetType().TypeHandle.Value.ToInt64());
-            // 记录所有集合名
-            _collections.UnionWith(_mongoDatabase.ListCollectionNames().ToList());
-            _serializer = SerializerManager.GetSerializer(FantasySerializerType.Bson);
+            try
+            {
+                Log.Info($"dbName:{dbName} Initialize the db database and connect to the target.");
+                _scene = scene;
+                _mongoClient = DataBaseSetting.MongoDbCustomInitialize != null
+                    ? DataBaseSetting.MongoDbCustomInitialize(new DataBaseCustomConfig()
+                    {
+                        Scene = scene, ConnectionString = connectionString, DBName = dbName
+                    })
+                    : new MongoClient(connectionString);
+                Name = dbName;
+                _mongoDatabase = _mongoClient.GetDatabase(dbName);
+                _dataBaseLock = scene.CoroutineLockComponent.Create(GetType().TypeHandle.Value.ToInt64());
+                // 记录所有集合名
+                _collections.UnionWith(_mongoDatabase.ListCollectionNames().ToList());
+                _serializer = SerializerManager.GetSerializer(FantasySerializerType.Bson);
+                Log.Info($"dbName:{dbName} Database connection successful.");
+            }
+            catch (Exception e)
+            {
+                Log.Error($"dbName:{dbName} cannot connect to the database. Please check if the connectionString is correct or the network conditions.\n{e.Message}");
+            }
+            
             return this;
         }
         

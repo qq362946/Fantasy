@@ -819,7 +819,6 @@ var dbName = DatabaseName.game_main;  // "game_main"
 7. **单位配置**：自定义业务数据（可选）
 
 **下一步：**
-- 📖 阅读 [快速开始](../00-GettingStarted/01-QuickStart-Server.md) 学习如何创建配置文件
 - 💻 阅读 [配置系统使用指南](02-ConfigUsage.md) 学习如何在代码中使用配置
 - 🎮 阅读 [ECS 系统](04-ECS.md) 学习实体组件系统（待完善）
 - 🌐 阅读 [网络开发](06-Network.md) 学习消息处理（待完善）

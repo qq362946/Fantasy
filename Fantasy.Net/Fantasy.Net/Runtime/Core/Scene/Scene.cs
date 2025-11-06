@@ -80,7 +80,10 @@ namespace Fantasy
         public uint SceneConfigId { get; protected set; }
         internal ANetwork InnerNetwork { get; private set; }
         internal ANetwork OuterNetwork { get; private set; }
-        internal SceneConfig SceneConfig => SceneConfigData.Instance.Get(SceneConfigId);
+        /// <summary>
+        /// 获取Scene对应的SceneConfig
+        /// </summary>
+        public SceneConfig SceneConfig => SceneConfigData.Instance.Get(SceneConfigId);
         private readonly Dictionary<uint, ProcessSessionInfo> _processSessionInfos = new Dictionary<uint, ProcessSessionInfo>();
 #endif
         /// <summary>

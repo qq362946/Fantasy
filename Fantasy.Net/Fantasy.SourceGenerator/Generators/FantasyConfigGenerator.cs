@@ -146,8 +146,9 @@ namespace Fantasy.SourceGenerator.Generators
                     continue;
                 }
                 builder.AddXmlComment(dbName);
-                builder.AppendLine($"public const int {dbName.ToPascalCase()} = {++index};");
+                builder.AppendLine($"public const int {dbName.ToPascalCase()} = {index};");
                 dbNameDicBuilder.AppendLine($"dbNameDictionary.Add(\"{dbName}\", {index});");
+                index++;
             }
             builder.EndClass();
             builder.EndNamespace();
