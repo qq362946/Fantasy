@@ -330,7 +330,7 @@ git clone https://github.com/qq362946/Fantasy.git
 
 **不同方式的处理：**
 
-- **NuGet 包方式**：这些配置会**自动添加**到 `.csproj` 中，但建议检查确认是否存在。如果缺失，手动添加上述配置即可。
+- **NuGet 包方式**：**必须手动添加**上述配置到 `.csproj` 文件中，否则程序无法正常运行。
 - **源码引用方式**：**必须手动添加**上述配置到 `.csproj` 文件中，否则程序无法正常运行。
 
 ---
@@ -339,7 +339,7 @@ git clone https://github.com/qq362946/Fantasy.git
 
 完成框架集成和配置文件创建后，下一步是编写服务器启动代码。
 
-请继续阅读 **[编写启动代码](../01-Server/03-WritingStartupCode.md)**，学习：
+请继续阅读 **[编写启动代码](../01-Server/02-WritingStartupCode.md)**，学习：
 - 如何编写 `Program.cs` 启动代码
 - `AssemblyHelper` 的作用和原理
 - 程序集加载机制详解
@@ -466,21 +466,22 @@ Could not find Fantasy.config
    - [Fantasy.config 配置文件详解](../01-Server/01-ServerConfiguration.md)
    - 深入了解网络配置、场景配置、数据库配置等
 
-2. **配置系统使用** 🔧
-   - [配置系统使用指南](../01-Server/02-ConfigUsage.md)
-   - 学习如何在代码中读取和使用配置
-
-3. **编写启动代码** 💻
-   - [编写启动代码](../01-Server/03-WritingStartupCode.md)
+2. **编写启动代码** 💻
+   - [编写启动代码](../01-Server/02-WritingStartupCode.md)
    - 学习 AssemblyHelper、程序集加载、启动流程
 
-4. **命令行参数配置** ⚙️
-   - [命令行参数配置](../01-Server/04-CommandLineArguments.md)
-   - 配置开发环境和生产环境的启动参数
+3. **命令行参数配置** ⚙️
+    - [命令行参数配置](../01-Server/03-CommandLineArguments.md)
+    - 配置开发环境和生产环境的启动参数
 
-5. **场景初始化** 🎬
-   - [OnCreateScene 事件使用指南](../01-Server/05-OnCreateScene.md)
-   - 学习如何在场景启动时初始化逻辑
+4. **场景初始化** 🎬
+    - [OnCreateScene 事件使用指南](../01-Server/04-OnCreateScene.md)
+    - 学习如何在场景启动时初始化逻辑
+
+5. **配置系统使用** 🔧
+   - [配置系统使用指南](../01-Server/05-ConfigUsage.md)
+   - 学习如何在代码中读取和使用配置
+
 
 ### 🎯 其他资源
 

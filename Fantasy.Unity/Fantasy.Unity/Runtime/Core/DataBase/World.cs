@@ -1,8 +1,6 @@
 #if FANTASY_NET
 using Fantasy.Database;
 using Fantasy.Platform.Net;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore.Storage;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 #pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.

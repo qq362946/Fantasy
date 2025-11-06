@@ -2,6 +2,7 @@
 
 本指南将介绍如何在 Unity 项目中编写 Fantasy 框架的启动代码,包括:
 - **基础 Unity 启动流程**与 `[RuntimeInitializeOnLoadMethod]` 的使用
+- **手动加载程序集** (`Assembly.Load`) 后如何触发 Fantasy 注册
 - **HybridCLR 热更新**环境下的使用方法
 - **与 .NET 服务器端的差异**说明
 
@@ -15,6 +16,11 @@
   - [基础启动代码示例](#基础启动代码示例)
   - [启动流程详解](#启动流程详解)
   - [连接服务器示例](#连接服务器示例)
+- [手动加载程序集 (Assembly.Load)](#手动加载程序集-assemblyload)
+  - [为什么需要手动触发注册?](#为什么需要手动触发注册)
+  - [手动触发注册](#手动触发注册)
+  - [正确的加载流程](#正确的加载流程)
+  - [适用场景](#适用场景)
 - [HybridCLR 热更新环境](#hybridclr-热更新环境)
   - [程序集加载顺序](#1-程序集加载顺序)
   - [手动加载热更新程序集](#2-手动加载热更新程序集)
@@ -235,6 +241,7 @@ Unity 启动流程:
 │                ├─ 注册消息处理器                                │
 │                ├─ 注册事件系统                                  │
 │                └─ 注册网络协议                                  │
+│                └─ ...                                         │
 ├─────────────────────────────────────────────────────────────────┤
 │ 2. GameEntry.Start() [用户代码]                                 │
 │    └─ StartAsync()                                             │
@@ -254,7 +261,7 @@ Unity 启动流程:
 
 1. **自动初始化**
    - Unity 引擎会在 `AfterAssembliesLoaded` 阶段自动调用 Source Generator 生成的初始化代码
-   - 开发者无需手动调用 `AssemblyMarker.EnsureLoaded()`,框架已自动处理
+   - 对于已加载的程序集,框架已自动处理注册
 
 2. **初始化顺序**
    - `RuntimeInitializeOnLoadMethod` → `Entry.Initialize()` → `Entry.CreateScene()`
@@ -264,6 +271,174 @@ Unity 启动流程:
    - Unity 客户端通常只需要一个 Scene 实例
    - Scene 管理网络连接、实体、组件和事件
    - 在 `OnDestroy` 中正确释放 Scene 资源
+
+---
+
+## 手动加载程序集 (Assembly.Load)
+
+### 为什么需要手动触发注册?
+
+当你使用 `System.Reflection.Assembly.Load()` 手动加载 DLL 程序集时,**必须手动调用** `Assembly.EnsureLoaded()` 来触发 Fantasy 框架的注册。这是 Unity 的 `RuntimeInitializeOnLoadMethod` 机制决定的。
+
+#### 核心原因
+
+**1. RuntimeInitializeOnLoadMethod 只在 Unity 启动时执行一次**
+
+```
+Unity 引擎启动流程:
+┌─────────────────────────────────────────────────────────┐
+│ Unity 引擎启动                                           │
+│  └─ 扫描所有已加载的程序集                               │
+│      └─ 查找 [RuntimeInitializeOnLoadMethod] 标记的方法 │
+│          └─ 自动调用这些方法 (只执行一次!)               │
+└─────────────────────────────────────────────────────────┘
+```
+
+- 当 Unity 引擎启动时,会自动扫描所有已加载的程序集
+- 对于标记了 `[RuntimeInitializeOnLoadMethod]` 的静态方法,Unity 会自动调用一次
+- **这个过程只发生在引擎启动阶段,不会再次触发**
+
+**2. 手动加载的 DLL 不会触发 RuntimeInitializeOnLoadMethod**
+
+```csharp
+// 使用 Assembly.Load() 加载程序集
+var dllBytes = File.ReadAllBytes("MyHotfix.dll");
+var assembly = System.Reflection.Assembly.Load(dllBytes);
+
+// ⚠️ 问题: Unity 引擎不知道有新程序集被加载!
+// ⚠️ 新加载程序集中的 [RuntimeInitializeOnLoadMethod] 不会被自动调用
+// ⚠️ Source Generator 生成的初始化代码不会执行
+```
+
+**3. 不手动触发注册会导致的问题**
+
+如果不调用 `Assembly.EnsureLoaded()`,Fantasy 框架无法识别新加载程序集中的:
+
+- ❌ **实体系统**: `AwakeSystem<T>`, `UpdateSystem<T>`, `DestroySystem<T>` 等不会被注册
+- ❌ **消息处理器**: `IMessageHandler` 实现类不会被识别,无法处理网络消息
+- ❌ **事件处理器**: `IEvent` 实现类不会被注册,事件系统失效
+- ❌ **网络协议**: OpCode 不会被注册,消息路由失败
+
+---
+
+### 手动触发注册
+
+当使用 `Assembly.Load()` 手动加载程序集后，需要调用 `Assembly.EnsureLoaded()` 扩展方法来触发 Fantasy 框架的注册：
+
+```csharp
+// 加载程序集
+var assembly = System.Reflection.Assembly.Load(dllBytes);
+
+// ⚠️ 关键步骤: 手动触发 Fantasy 注册
+// 这会执行该程序集中 Source Generator 生成的所有注册代码
+assembly.EnsureLoaded();
+
+Log.Debug($"已触发 Fantasy 注册: {assembly.GetName().Name}");
+```
+
+#### 注册机制说明
+
+- Source Generator 会为每个包含 Fantasy 代码的程序集生成注册方法
+- 调用 `Assembly.EnsureLoaded()` 扩展方法会自动执行该程序集中的所有注册代码
+- 这包括实体系统、消息处理器、事件处理器、网络协议等的注册
+
+---
+
+### 正确的加载流程
+
+以下是手动加载程序集的完整流程示例:
+
+```csharp
+using Fantasy;
+using Fantasy.Async;
+using System.IO;
+using UnityEngine;
+
+public class AssemblyLoaderExample : MonoBehaviour
+{
+    private Scene _scene;
+
+    private void Start()
+    {
+        StartAsync().Coroutine();
+    }
+
+    private void OnDestroy()
+    {
+        _scene?.Dispose();
+    }
+
+    private async FTask StartAsync()
+    {
+        // 1️⃣ 加载自定义程序集 (必须第一步)
+        await LoadCustomAssemblies();
+
+        // 2️⃣ 初始化 Fantasy 框架
+        await Fantasy.Platform.Unity.Entry.Initialize();
+
+        // 3️⃣ 创建 Scene (最后一步)
+        _scene = await Fantasy.Platform.Unity.Entry.CreateScene();
+
+        Log.Debug("程序集加载完成,Fantasy 初始化成功!");
+    }
+
+    private async FTask LoadCustomAssemblies()
+    {
+        // 从资源加载 DLL 字节数据
+        // 可以从 AssetBundle、StreamingAssets、网络下载等方式加载
+        var dllPath = Path.Combine(Application.streamingAssetsPath, "MyHotfix.dll");
+        byte[] dllBytes = File.ReadAllBytes(dllPath);
+
+        // 加载程序集
+        var assembly = System.Reflection.Assembly.Load(dllBytes);
+        Log.Debug($"已加载程序集: {assembly.FullName}");
+
+        // ⚠️ 关键步骤: 手动触发 Fantasy 注册
+        // 调用 Assembly.EnsureLoaded() 来触发该程序集中的 Fantasy 框架注册
+        // 如果不调用这个方法,Fantasy 无法识别新程序集中的:
+        //   - 实体系统 (AwakeSystem, UpdateSystem 等)
+        //   - 消息处理器 (IMessageHandler)
+        //   - 事件处理器 (IEvent)
+        //   - 网络协议 (OpCode 注册)
+        assembly.EnsureLoaded();
+        Log.Debug($"已触发 Fantasy 注册: {assembly.GetName().Name}");
+
+        await FTask.CompletedTask;
+    }
+}
+```
+
+#### 加载顺序说明
+
+```
+正确的加载顺序:
+┌────────────────────────────────────────────────────────┐
+│ 1. Assembly.Load() + Assembly.EnsureLoaded()          │
+│    └─ 加载自定义程序集并触发注册                       │
+│                                                        │
+│ 2. Entry.Initialize()                                  │
+│    └─ 初始化 Fantasy 框架基础设施                      │
+│                                                        │
+│ 3. Entry.CreateScene()                                │
+│    └─ 创建 Scene,此时所有系统已注册完成                │
+└────────────────────────────────────────────────────────┘
+```
+
+> **⚠️ 重要:** 必须在 `Entry.Initialize()` 之前完成所有程序集的加载和注册,否则框架初始化时可能无法找到需要的系统
+
+---
+
+### 适用场景
+
+手动加载程序集的方式适用于以下场景:
+
+| 场景 | 说明 | 是否需要 Assembly.EnsureLoaded() |
+|------|------|-----------------------------------|
+| **热更新方案** | HybridCLR、ILRuntime 等热更新框架 | ✅ 需要 |
+| **动态加载插件** | 运行时加载扩展功能 DLL | ✅ 需要 |
+| **AssetBundle 加载** | 从 AssetBundle 中加载代码 DLL | ✅ 需要 |
+| **网络下载代码** | 从服务器下载并加载 DLL | ✅ 需要 |
+| **普通编译** | 直接编译到 APK/IPA 中的代码 | ❌ 不需要 (自动处理) |
 
 ---
 
@@ -304,7 +479,11 @@ Unity Project/
 
 #### 2. 手动加载热更新程序集
 
-HybridCLR 环境下,热更新程序集需要手动加载并触发 Fantasy 注册:
+HybridCLR 环境下,热更新程序集需要手动加载并触发 Fantasy 注册。
+
+> **📖 相关文档:** 如果你想详细了解为什么需要手动触发注册,请参考 [手动加载程序集 (Assembly.Load)](#手动加载程序集-assemblyload) 章节。
+
+以下是 HybridCLR 的完整示例:
 
 ```csharp
 using Fantasy;
@@ -329,12 +508,12 @@ public class HybridCLREntry : MonoBehaviour
 
     private async FTask StartAsync()
     {
-        // 1. 初始化 Fantasy 框架
-        await Fantasy.Platform.Unity.Entry.Initialize();
-
-        // 2. 加载热更新程序集
-        // 注意: 必须在 Entry.Initialize() 之后,CreateScene() 之前加载
+        // 1. 加载热更新程序集
+        // 注意: 必须在 Entry.Initialize() 之前加载
         await LoadHotUpdateAssemblies();
+
+        // 2. 初始化 Fantasy 框架
+        await Fantasy.Platform.Unity.Entry.Initialize();
 
         // 3. 创建 Scene
         _scene = await Fantasy.Platform.Unity.Entry.CreateScene();
@@ -363,38 +542,13 @@ public class HybridCLREntry : MonoBehaviour
             // 加载程序集
             var assembly = System.Reflection.Assembly.Load(dllBytes);
 
-            // 手动触发 Fantasy 注册
-            // Fantasy 会自动检测到新程序集并触发注册流程
-            TriggerFantasyRegistration(assembly);
+            // ⚠️ 重要: 手动加载程序集必须手动触发 Fantasy 注册
+            // RuntimeInitializeOnLoadMethod 只在 Unity 启动时自动执行一次
+            // 手动加载的 DLL 不会触发 RuntimeInitializeOnLoadMethod
+            // 调用 Assembly.EnsureLoaded() 来触发该程序集中的 Fantasy 框架注册
+            assembly.EnsureLoaded();
 
             Log.Debug($"已加载热更新程序集: {dllName}");
-        }
-    }
-
-    /// <summary>
-    /// 触发 Fantasy 框架注册
-    /// </summary>
-    private void TriggerFantasyRegistration(System.Reflection.Assembly assembly)
-    {
-        // 查找 Source Generator 生成的 AssemblyMarker
-        // 命名规则: {程序集名称}_AssemblyMarker
-        var assemblyName = assembly.GetName().Name.Replace(".", "_").Replace("-", "_");
-        var markerTypeName = $"Fantasy.Generated.{assemblyName}_AssemblyMarker";
-        var markerType = assembly.GetType(markerTypeName);
-
-        if (markerType != null)
-        {
-            // 调用 EnsureLoaded() 触发注册
-            var method = markerType.GetMethod("EnsureLoaded",
-                System.Reflection.BindingFlags.Public |
-                System.Reflection.BindingFlags.Static);
-            method?.Invoke(null, null);
-
-            Log.Debug($"已触发 Fantasy 注册: {markerTypeName}");
-        }
-        else
-        {
-            Log.Warning($"未找到 AssemblyMarker: {markerTypeName}");
         }
     }
 
@@ -438,7 +592,6 @@ HybridCLR 使用 IL2CPP 编译,需要配置 `link.xml` 防止代码裁剪:
     <!-- Source Generator 生成的类型 -->
     <assembly fullname="Assembly-CSharp">
         <type fullname="Fantasy.Generated.AssemblyInitializer" preserve="all"/>
-        <type fullname="Fantasy.Generated.Assembly_CSharp_AssemblyMarker" preserve="all"/>
         <type fullname="Fantasy.Generated.EntitySystemRegistrar" preserve="all"/>
         <type fullname="Fantasy.Generated.EntityTypeCollectionRegistrar" preserve="all"/>
         <type fullname="Fantasy.Generated.EventSystemRegistrar" preserve="all"/>
@@ -446,9 +599,9 @@ HybridCLR 使用 IL2CPP 编译,需要配置 `link.xml` 防止代码裁剪:
         <type fullname="Fantasy.Generated.NetworkProtocolRegistrar" preserve="all"/>
     </assembly>
 
-    <!-- 热更新程序集 -->
+    <!-- 热更新程序集 - 保留 Fantasy.Generated 命名空间下的所有生成代码 -->
     <assembly fullname="GameLogic">
-        <type fullname="Fantasy.Generated.GameLogic_AssemblyMarker" preserve="all"/>
+        <namespace fullname="Fantasy.Generated" preserve="all"/>
     </assembly>
 
     <!-- 保留所有网络协议类型 -->
@@ -473,6 +626,8 @@ HybridCLR Settings:
     ├── System.Collections.Generic.List<YourEntity>
     └── Fantasy.Network.Session
 ```
+
+> **📌 注意:** 记得在加载热更新程序集后调用 `assembly.EnsureLoaded()` 来触发 Fantasy 框架的注册
 
 ---
 
@@ -524,27 +679,73 @@ Unity Project/
 
 ---
 
-### Q2: HybridCLR 热更新程序集没有生效
+### Q2: 为什么手动加载程序集必须调用 Assembly.EnsureLoaded()?
+
+**回答: 这是 Unity 的 RuntimeInitializeOnLoadMethod 机制决定的。**
+
+**原因:**
+
+1. **RuntimeInitializeOnLoadMethod 只在 Unity 启动时执行一次**
+   - 当 Unity 引擎启动时,会自动扫描所有已加载的程序集
+   - 对于标记了 `[RuntimeInitializeOnLoadMethod]` 的静态方法,Unity 会自动调用一次
+   - 这个过程只发生在引擎启动阶段
+
+2. **手动加载的 DLL 不会触发 RuntimeInitializeOnLoadMethod**
+   - 使用 `Assembly.Load(dllBytes)` 加载程序集时,Unity 引擎不知道有新程序集加载
+   - 新加载程序集中的 `[RuntimeInitializeOnLoadMethod]` 方法**不会被自动调用**
+   - 因此,Source Generator 生成的初始化代码不会执行
+
+3. **必须手动触发 Fantasy 注册**
+   ```csharp
+   var assembly = System.Reflection.Assembly.Load(dllBytes);
+
+   // ⚠️ 必须手动调用,否则 Fantasy 框架无法识别新加载程序集中的:
+   //   - 实体系统 (AwakeSystem, UpdateSystem 等)
+   //   - 消息处理器 (IMessageHandler)
+   //   - 事件处理器 (IEvent)
+   //   - 网络协议 (OpCode 注册)
+   assembly.EnsureLoaded();
+   ```
+
+**正确的加载流程:**
+
+```csharp
+// 1. 加载热更新程序集
+var assembly = System.Reflection.Assembly.Load(dllBytes);
+
+// 2. ⚠️ 手动触发注册 (必须步骤!)
+assembly.EnsureLoaded();
+
+// 3. 初始化 Fantasy 框架
+await Fantasy.Platform.Unity.Entry.Initialize();
+
+// 4. 创建 Scene
+_scene = await Fantasy.Platform.Unity.Entry.CreateScene();
+```
+
+---
+
+### Q3: HybridCLR 热更新程序集没有生效
 
 **可能原因:**
 
 1. **未手动触发 Fantasy 注册**
    ```csharp
-   // 必须手动调用 AssemblyMarker.EnsureLoaded()
-   TriggerFantasyRegistration(hotUpdateAssembly);
+   // 必须手动调用 assembly.EnsureLoaded()
+   hotUpdateAssembly.EnsureLoaded();
    ```
 
 2. **link.xml 配置不正确**
    - 检查是否保留了 `Fantasy.Generated` 命名空间下的所有类型
-   - 检查是否保留了热更新程序集中的 AssemblyMarker
+   - 检查是否保留了热更新程序集中的相关类型
 
 3. **程序集加载顺序错误**
-   - 必须在 `Entry.Initialize()` 之后加载热更新程序集
+   - 必须在 `Entry.Initialize()` 之前加载热更新程序集
    - 必须在 `Entry.CreateScene()` 之前加载热更新程序集
 
 ---
 
-### Q3: WebGL 平台连接失败
+### Q4: WebGL 平台连接失败
 
 **可能原因:**
 
@@ -570,7 +771,7 @@ Unity Project/
 
 ---
 
-### Q4: Source Generator 没有生成代码
+### Q5: Source Generator 没有生成代码
 
 **错误信息:**
 ```
@@ -606,11 +807,11 @@ error CS0246: The type or namespace name 'Fantasy.Generated' could not be found
 
 现在你已经掌握了 Unity 客户端的启动代码编写,接下来可以:
 
-1. 🔧 阅读 [协议定义](11-Protocol.md) 学习 .proto 文件(待完善)
-2. 🌐 阅读 [网络开发](09-Network.md) 学习消息处理(待完善)
-3. 🎮 阅读 [ECS 系统](06-ECS.md) 学习实体组件系统(待完善)
-4. 📚 查看 `Examples/Client/Unity` 目录下的完整示例
-5. 📖 阅读 [编写启动代码 - 服务器端](../01-ServerGuide/03-WritingStartupCode.md) 了解服务器端启动流程
+1. 📖 阅读 [编写启动代码 - 服务器端](../01-Server/02-WritingStartupCode.md) 了解服务器端启动流程
+2. 🔧 阅读 [协议定义](11-Protocol.md) 学习 .proto 文件(待完善)
+3. 🌐 阅读 [网络开发](09-Network.md) 学习消息处理(待完善)
+4. 🎮 阅读 [ECS 系统](06-ECS.md) 学习实体组件系统(待完善)
+5. 📚 查看 `Examples/Client/Unity` 目录下的完整示例
 
 ## 获取帮助
 

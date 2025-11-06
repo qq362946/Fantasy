@@ -10,7 +10,7 @@
 2. ✅ 已配置好 `Fantasy.config` 文件
 
 如果你还没有完成这些步骤,请先阅读:
-- [编写启动代码](03-WritingStartupCode.md)
+- [编写启动代码](02-WritingStartupCode.md)
 - [Fantasy.config 配置文件详解](01-ServerConfiguration.md)
 
 ---
@@ -792,7 +792,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 
 2. **程序集未正确加载**
    - 确保在 `Entry.Start()` 之前调用了 `AssemblyHelper.Initialize()`
-   - 参考 [编写启动代码](04-WritingStartupCode.md)
+   - 参考 [编写启动代码](02-WritingStartupCode.md)
 
 3. **事件处理器定义错误**
    - 确保继承自 `AsyncEventSystem<OnCreateScene>`
@@ -953,9 +953,10 @@ public sealed class OnDisposeSceneEvent : EventSystem<OnDisposeScene>
 
 现在你已经掌握了如何使用 `OnCreateScene` 事件,接下来可以:
 
-1. 📖 阅读 [ECS 系统详解](06-ECS.md) 学习实体组件系统 (待完善)
+1. ⚙️ 阅读 [配置系统使用指南](05-ConfigUsage.md) 学习如何在代码中使用配置
+2. 🔧 阅读 [协议定义指南](08-Protocol.md) 学习 .proto 文件 (待完善)
 2. 🌐 阅读 [网络消息处理](07-Network.md) 学习消息处理器 (待完善)
-3. 🔧 阅读 [协议定义指南](08-Protocol.md) 学习 .proto 文件 (待完善)
+3. 📖 阅读 [ECS 系统详解](06-ECS.md) 学习实体组件系统 (待完善)
 4. 📚 查看 `Examples/Server/Hotfix` 目录下的完整示例
 
 ## 获取帮助

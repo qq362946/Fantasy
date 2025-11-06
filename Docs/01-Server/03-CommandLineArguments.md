@@ -6,7 +6,7 @@
 - 生产环境配置
 - 常用启动场景示例
 
-> **📌 提示:** 本文档是 [编写启动代码](03-WritingStartupCode.md) 的延续,建议先阅读启动代码文档。
+> **📌 提示:** 本文档是 [编写启动代码](02-WritingStartupCode.md) 的延续,建议先阅读启动代码文档。
 
 ---
 
@@ -1022,8 +1022,8 @@ Develop 模式会启动所有 Process,可能导致端口冲突。
 
 现在你已经掌握了命令行参数配置,接下来可以:
 
-1. 🎯 阅读 [OnCreateScene 事件使用指南](05-OnCreateScene.md) 学习如何在场景启动时初始化逻辑
-2. 📖 阅读 [配置系统使用指南](02-ConfigUsage.md) 学习如何在代码中使用配置
+1. 🎯 阅读 [OnCreateScene 事件使用指南](04-OnCreateScene.md) 学习如何在场景启动时初始化逻辑
+2. 📖 阅读 [配置系统使用指南](05-ConfigUsage.md) 学习如何在代码中使用配置
 3. 🚀 尝试在生产环境部署服务器
 4. 🐳 尝试使用 Docker 容器化部署
 5. 📚 查看 `Examples/Server` 目录下的完整示例

@@ -34,30 +34,30 @@
   - 机器、进程、世界、场景配置
   - 配置最佳实践
 
-- ✅ [02-ConfigUsage.md](01-Server/02-ConfigUsage.md) - 配置系统使用指南
-  - 机器配置 (MachineConfig)
-  - 进程配置 (ProcessConfig)
-  - 世界配置 (WorldConfig)
-  - 场景配置 (SceneConfig)
-  - Source Generator 自动生成的代码 (SceneType、DatabaseName)
-
-- ✅ [03-WritingStartupCode.md](01-Server/03-WritingStartupCode.md) - 编写启动代码
+- ✅ [02-WritingStartupCode.md](01-Server/02-WritingStartupCode.md) - 编写启动代码
   - AssemblyHelper 的作用和实现
   - ModuleInitializer 与 Source Generator
   - 服务器启动代码编写
   - 常见问题解答
 
-- ✅ [04-CommandLineArguments.md](01-Server/04-CommandLineArguments.md) - 命令行参数配置
+- ✅ [03-CommandLineArguments.md](01-Server/03-CommandLineArguments.md) - 命令行参数配置
   - 命令行参数说明 (RuntimeMode, ProcessId, ProcessType, StartupGroup)
   - 开发环境配置 (launchSettings.json)
   - 生产环境配置 (Shell, systemd, Docker)
   - 常用启动场景
 
-- ✅ [05-OnCreateScene.md](01-Server/05-OnCreateScene.md) - OnCreateScene 事件使用指南
+- ✅ [04-OnCreateScene.md](01-Server/04-OnCreateScene.md) - OnCreateScene 事件使用指南
   - OnCreateScene 事件触发时机
   - 创建事件处理器
   - 常见使用场景（组件挂载、配置加载、定时任务）
   - 最佳实践
+
+- ✅ [05-ConfigUsage.md](01-Server/05-ConfigUsage.md) - 配置系统使用指南
+    - 机器配置 (MachineConfig)
+    - 进程配置 (ProcessConfig)
+    - 世界配置 (WorldConfig)
+    - 场景配置 (SceneConfig)
+    - Source Generator 自动生成的代码 (SceneType、DatabaseName)
 
 ---
 

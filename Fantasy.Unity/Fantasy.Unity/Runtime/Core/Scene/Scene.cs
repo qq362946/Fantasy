@@ -80,7 +80,10 @@ namespace Fantasy
         public uint SceneConfigId { get; protected set; }
         internal ANetwork InnerNetwork { get; private set; }
         internal ANetwork OuterNetwork { get; private set; }
-        internal SceneConfig SceneConfig => SceneConfigData.Instance.Get(SceneConfigId);
+        /// <summary>
+        /// 获取Scene对应的SceneConfig
+        /// </summary>
+        public SceneConfig SceneConfig => SceneConfigData.Instance.Get(SceneConfigId);
         private readonly Dictionary<uint, ProcessSessionInfo> _processSessionInfos = new Dictionary<uint, ProcessSessionInfo>();
 #endif
         /// <summary>
@@ -672,6 +675,40 @@ namespace Fantasy
         /// SceneType字符串字典，key为SceneType的字符串名字，value为对应的索引
         /// </summary>
         public static FrozenDictionary<string, int> SceneTypeDictionary { get; internal set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="routeId"></param>
+        /// <param name="message"></param>
+        /// <typeparam name="T"></typeparam>
+        public void Send<T>(long routeId, T message) where T : IRouteMessage
+        {
+            NetworkMessagingComponent.SendInnerRoute<T>(routeId, message);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="routeIdCollection"></param>
+        /// <param name="message"></param>
+        /// <typeparam name="T"></typeparam>
+        public void Send<T>(ICollection<long> routeIdCollection, T message) where T : IRouteMessage
+        {
+            NetworkMessagingComponent.SendInnerRoute<T>(routeIdCollection, message);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="routeId"></param>
+        /// <param name="request"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public FTask<IResponse> Call<T>(long routeId, T request) where T : IRouteRequest
+        {
+            return NetworkMessagingComponent.CallInnerRoute<T>(routeId, request);
+        }
 #endif
         #endregion
     }
