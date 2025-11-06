@@ -8,7 +8,7 @@
 [![Unity](https://img.shields.io/badge/Unity-2022.3.62+-black.svg)](https://unity.com/)
 [![Stars](https://img.shields.io/github/stars/qq362946/Fantasy?style=social)](https://github.com/qq362946/Fantasy/stargazers)
 
-**[📖 官方文档](https://www.code-fantasy.com/)** | **[🚀 快速开始](https://www.code-fantasy.com/top/download-fantasy/)** | **[📚 API 文档](https://www.code-fantasy.com/doc/api/Fantasy.html)** | **[💬 QQ 群: 569888673](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=yourqrcode)**
+**[📖 官方文档](Docs/README.md)** | **[🚀 快速开始](Docs/README.md)** | **[💬 QQ 群: 569888673](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=yourqrcode)**
 </div>
 
 ---
