@@ -139,11 +139,6 @@
 
   <!-- database的选择 -->
   <xs:complexType name="databaseType">
-    <xs:attribute name="duty" type="xs:int" use="required">
-      <xs:annotation>
-        <xs:documentation>数据库的工作职责（ 比如主职、从职、日志职责等, 需自行约定不同 int 值）</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
     <xs:attribute name="dbType" use="required">
       <xs:annotation>
         <xs:documentation>数据库类型</xs:documentation>

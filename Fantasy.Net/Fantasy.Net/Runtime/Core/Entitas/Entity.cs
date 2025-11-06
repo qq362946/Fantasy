@@ -790,6 +790,7 @@ namespace Fantasy.Entitas
             {
                 Scene = scene;
                 Type ??= GetType();
+                TypeHashCode = TypeHashCache.GetHashCode(Type);
                 RuntimeId = Scene.RuntimeIdFactory.Create(false);
                 if (resetId)
                 {

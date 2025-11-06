@@ -3,9 +3,16 @@ using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
 using Fantasy.Event;
+using Fantasy.SeparateTable;
 
 namespace Fantasy;
 
+public sealed class SaveEntity : Entity
+{
+    
+}
+
+[SeparateTable(typeof(SaveEntity),"SubSceneTestComponent")]
 public sealed class SubSceneTestComponent : Entity
 {
     public override void Dispose()
@@ -60,6 +67,13 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
+                // var saveEntity = await scene.World.Database.Query<SaveEntity>(459439609634619405,true);
+                // await saveEntity.LoadWithSeparateTables(scene.World.Database);
+                //
+                // Log.Debug($"{saveEntity.GetComponent<SubSceneTestComponent>()!=null}");
+                // var saveEntity = Entity.Create<SaveEntity>(scene, true, false);
+                // saveEntity.AddComponent<SubSceneTestComponent>();
+                // await saveEntity.PersistAggregate(scene.World.Database);
                 // var tasks = new List<FTask>(2000);
                 // var session = scene.GetSession(_addressableSceneRunTimeId);
                 // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
