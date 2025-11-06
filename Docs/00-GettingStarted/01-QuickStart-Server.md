@@ -285,7 +285,7 @@ git clone https://github.com/qq362946/Fantasy.git
 - 生产环境：配置实际IP地址，根据业务需求配置多个场景
 - 数据库可选：开发环境可以不连接数据库（`dbConnection=""`）
 
-> **📖 详细说明：** 完整的配置参数说明请查看 [Fantasy.config 配置文件详解](02-Configuration.md)
+> **📖 详细说明：** 完整的配置参数说明请查看 [Fantasy.config 配置文件详解](../01-Serverr/01-ServerConfiguration.md)
 
 ---
 
@@ -300,22 +300,38 @@ git clone https://github.com/qq362946/Fantasy.git
 - ✅ 放在 `Server.Entity`（被 Server 和 Hotfix 引用）→ 所有项目都能使用生成的代码
 - ❌ 放在 `Server` 入口项目（Hotfix 不引用 Server）→ Hotfix 无法使用生成的代码
 
-**配置文件复制到输出目录：**
+---
 
-如果使用源码引用，确保在引用 Fantasy 的项目（如 `Server.Entity`）的 `.csproj` 中添加：
+#### ⚠️ 重要：配置文件必须复制到输出目录
+
+**无论使用 NuGet 包还是源码引用，都必须在引用 Fantasy 的项目（如 `Server.Entity`）的 `.csproj` 中包含以下配置：**
 
 ```xml
 <ItemGroup>
+    <!-- 将配置文件复制到输出目录 -->
     <None Update="Fantasy.config">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Fantasy.xsd">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+
+    <!-- 重要：将配置文件添加为 AdditionalFiles，使 Source Generator 能够读取 -->
+    <AdditionalFiles Include="Fantasy.config" />
 </ItemGroup>
 ```
 
-> **💡 提示：** 使用 NuGet 包时，这些配置会自动添加到 `.csproj` 中。
+**配置说明：**
+
+| 配置项 | 作用 | 缺少会导致 |
+|--------|------|-----------|
+| `<None Update>` | 确保配置文件在编译时复制到输出目录（`bin/Debug` 或 `bin/Release`），使运行时能够读取 | ❌ 运行时找不到配置文件，程序无法启动 |
+| `<AdditionalFiles Include>` | 使 Source Generator 在编译时能够读取配置文件并生成相应代码（数据库名称常量、场景类型枚举等） | ❌ 无法生成数据库相关的代码，导致编译错误或运行时异常 |
+
+**不同方式的处理：**
+
+- **NuGet 包方式**：这些配置会**自动添加**到 `.csproj` 中，但建议检查确认是否存在。如果缺失，手动添加上述配置即可。
+- **源码引用方式**：**必须手动添加**上述配置到 `.csproj` 文件中，否则程序无法正常运行。
 
 ---
 
@@ -323,7 +339,7 @@ git clone https://github.com/qq362946/Fantasy.git
 
 完成框架集成和配置文件创建后，下一步是编写服务器启动代码。
 
-请继续阅读 **[编写启动代码](04-WritingStartupCode.md)**，学习：
+请继续阅读 **[编写启动代码](../01-Serverr/03-WritingStartupCode.md)**，学习：
 - 如何编写 `Program.cs` 启动代码
 - `AssemblyHelper` 的作用和原理
 - 程序集加载机制详解
@@ -416,6 +432,8 @@ Could not find Fantasy.config
        <None Update="Fantasy.xsd">
            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
        </None>
+       <!-- 重要：将配置文件添加为 AdditionalFiles，使 Source Generator 能够读取 -->
+       <AdditionalFiles Include="Fantasy.config" />
    </ItemGroup>
    ```
 
@@ -440,16 +458,35 @@ Could not find Fantasy.config
 
 ## 下一步
 
-现在你已经成功集成了 Fantasy Framework，接下来可以：
+完成 Fantasy Framework 的安装和配置后，建议按照以下顺序学习：
 
-1. 💻 阅读 [编写启动代码](04-WritingStartupCode.md) 学习如何启动服务器
-2. 📖 阅读 [Fantasy.config 配置文件详解](02-Configuration.md) 深入了解配置文件格式
-3. 🔧 阅读 [配置系统使用指南](03-ConfigUsage.md) 学习如何在代码中使用配置
-4. 📱 阅读 [Unity 快速开始](01-QuickStart-Unity.md) 创建 Unity 客户端（待完善）
-5. 🎮 阅读 [ECS 系统](05-ECS.md) 学习实体组件系统（待完善）
-6. 🌐 阅读 [网络开发](06-Network.md) 学习消息处理（待完善）
-7. 🔨 阅读 [协议定义](08-Protocol.md) 学习 .proto 文件（待完善）
-8. 📚 查看 `Examples/Server` 目录下的完整示例
+### 📖 推荐学习路径
+
+1. **配置文件详解** 📋
+   - [Fantasy.config 配置文件详解](../01-Serverr/01-ServerConfiguration.md)
+   - 深入了解网络配置、场景配置、数据库配置等
+
+2. **配置系统使用** 🔧
+   - [配置系统使用指南](../01-Serverr/02-ConfigUsage.md)
+   - 学习如何在代码中读取和使用配置
+
+3. **编写启动代码** 💻
+   - [编写启动代码](../01-Serverr/03-WritingStartupCode.md)
+   - 学习 AssemblyHelper、程序集加载、启动流程
+
+4. **命令行参数配置** ⚙️
+   - [命令行参数配置](../01-Serverr/04-CommandLineArguments.md)
+   - 配置开发环境和生产环境的启动参数
+
+5. **场景初始化** 🎬
+   - [OnCreateScene 事件使用指南](../01-Serverr/05-OnCreateScene.md)
+   - 学习如何在场景启动时初始化逻辑
+
+### 🎯 其他资源
+
+- 📱 [Unity 客户端快速开始](02-QuickStart-Unity.md) - 创建 Unity 客户端
+- 📚 查看 `Examples/Server` 目录下的完整示例
+- 📖 返回 [文档首页](../README.md) 查看完整文档结构
 
 ## 获取帮助
 

@@ -129,35 +129,35 @@ namespace Fantasy.SourceGenerator.Generators
             GenerateUnRegisterMethod(builder, separateTableTypeInfoList);
             // 结束类
             builder.EndClass();
-            // 生成数据库帮助类
-            builder.Append(GenerateGenerateSeparateTableGeneratedExtensions().ToString());
+            // // 生成数据库帮助类
+            // builder.Append(GenerateGenerateSeparateTableGeneratedExtensions().ToString());
             // 结束命名空间
             builder.EndNamespace();
             // 输出源代码
             context.AddSource("SeparateTableRegistrar.g.cs", builder.ToString());
         }
 
-        private static SourceCodeBuilder GenerateGenerateSeparateTableGeneratedExtensions()
-        {
-            var builder = new SourceCodeBuilder();
-            builder.AppendLine();
-            builder.Indent(1);
-            builder.AddXmlComment("分表组件扩展方法。");
-            builder.AppendLine("public static class SeparateTableGeneratedExtensions");
-            builder.AppendLine("{");
-            builder.Indent(1);
-            builder.AddXmlComment("从数据库加载指定实体的所有分表数据，并自动建立父子关系。");
-            builder.BeginMethod("public static FTask LoadWithSeparateTables<T>(this T entity, IDatabase database) where T : Entity, new()");
-            builder.AppendLine("return entity.Scene.SeparateTableComponent.LoadWithSeparateTables(entity, database);");
-            builder.EndMethod();
-            builder.AddXmlComment("将实体及其所有分表组件保存到数据库中。");
-            builder.BeginMethod("public static FTask PersistAggregate<T>(this T entity, IDatabase database) where T : Entity, new()");
-            builder.AppendLine("return entity.Scene.SeparateTableComponent.PersistAggregate(entity,database);");
-            builder.EndMethod();
-            builder.Unindent();
-            builder.AppendLine("}");
-            return builder;
-        }
+        // private static SourceCodeBuilder GenerateGenerateSeparateTableGeneratedExtensions()
+        // {
+        //     var builder = new SourceCodeBuilder();
+        //     builder.AppendLine();
+        //     builder.Indent(1);
+        //     builder.AddXmlComment("分表组件扩展方法。");
+        //     builder.AppendLine("public static class SeparateTableGeneratedExtensions");
+        //     builder.AppendLine("{");
+        //     builder.Indent(1);
+        //     builder.AddXmlComment("从数据库加载指定实体的所有分表数据，并自动建立父子关系。");
+        //     builder.BeginMethod("public static FTask LoadWithSeparateTables<T>(this T entity, IDatabase database) where T : Entity, new()");
+        //     builder.AppendLine("return entity.Scene.SeparateTableComponent.LoadWithSeparateTables(entity, database);");
+        //     builder.EndMethod();
+        //     builder.AddXmlComment("将实体及其所有分表组件保存到数据库中。");
+        //     builder.BeginMethod("public static FTask PersistAggregate<T>(this T entity, IDatabase database) where T : Entity, new()");
+        //     builder.AppendLine("return entity.Scene.SeparateTableComponent.PersistAggregate(entity,database);");
+        //     builder.EndMethod();
+        //     builder.Unindent();
+        //     builder.AppendLine("}");
+        //     return builder;
+        // }
 
         private static void GenerateFields(SourceCodeBuilder builder, List<SeparateTableTypeInfo> separateTableTypeInfoList)
         {

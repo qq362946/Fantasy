@@ -10,8 +10,8 @@
 2. ✅ 已配置好 `Fantasy.config` 文件
 
 如果你还没有完成这些步骤,请先阅读:
-- [编写启动代码](04-WritingStartupCode.md)
-- [Fantasy.config 配置文件详解](02-Configuration.md)
+- [编写启动代码](03-WritingStartupCode.md)
+- [Fantasy.config 配置文件详解](01-ServerConfiguration.md)
 
 ---
 

@@ -1216,8 +1216,8 @@ Fantasy Framework 的配置系统提供了强大而灵活的配置管理功能�
 
 ### 相关文档
 
-- 📖 [Fantasy.config 配置文件详解](02-Configuration.md) - 了解配置文件格式
-- 📖 [快速开始](01-QuickStart.md) - 学习如何创建配置文件
+- 📖 [Fantasy.config 配置文件详解](01-ServerConfiguration.md) - 了解配置文件格式
+- 📖 [快速开始](../00-GettingStarted/01-QuickStart-Server.md) - 学习如何创建配置文件
 - 🎮 [ECS 系统](03-ECS.md) - 学习如何在实体系统中使用配置（待完善）
 - 🌐 [网络开发](06-Network.md) - 学习场景间通信（待完善）
 
