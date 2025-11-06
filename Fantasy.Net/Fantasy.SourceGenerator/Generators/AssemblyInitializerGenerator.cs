@@ -87,7 +87,7 @@ namespace Fantasy.SourceGenerator.Generators
             GenerateUnloadMethod(builder, targetPlatform);
             // 生成EnsureLoaded方法
             builder.AddXmlComment("EnsureLoaded");
-            builder.BeginMethod("public static void Initializer()");
+            builder.BeginMethod("public static void EnsureLoaded()");
             builder.EndMethod();
             // 结束 AssemblyInitializer 类
             builder.EndClass();
