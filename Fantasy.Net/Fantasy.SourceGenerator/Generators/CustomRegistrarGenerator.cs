@@ -47,7 +47,7 @@ namespace Fantasy.SourceGenerator.Generators
         {
             var customRegistrarTypeInfos = customRegistrarTypes.ToList();
             // 获取当前程序集名称（仅用于注释）
-            var assemblyName = compilation.AssemblyName ?? "Unknown";
+            var markerClassName = compilation.GetAssemblyName("CustomInterfaceRegistrar", out var assemblyName, out _);
             // 生成代码文件
             var builder = new SourceCodeBuilder();
             // 添加文件头
@@ -65,7 +65,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginNamespace("Fantasy.Generated");
             // 开始类定义（实现 ISphereEventRegistrar 接口）
             builder.AddXmlComment($"Auto-generated CustomInterface registration class for {assemblyName}");
-            builder.BeginClass("CustomInterfaceRegistrar", "internal sealed", "ICustomInterfaceRegistrar");
+            builder.BeginClass(markerClassName, "internal sealed", "ICustomInterfaceRegistrar");
             // 生成注册方法
             builder.AddXmlComment("Register all CustomInterface to the containers");
             builder.BeginMethod("public void Register(OneToManyList<long, Type> customRegistrar)");
@@ -93,7 +93,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.EndClass();
             builder.EndNamespace();
             // 输出源代码
-            context.AddSource("CustomInterfaceRegistrar.g.cs", builder.ToString());
+            context.AddSource($"{markerClassName}.g.cs", builder.ToString());
         }
 
         private static bool IsCustomRegistrar(SyntaxNode node)

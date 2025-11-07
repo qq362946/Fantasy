@@ -102,7 +102,7 @@ namespace Fantasy.SourceGenerator.Generators
         {
             var separateTableTypeInfoList = separateTableTypeInfos.ToList();
             // 获取当前程序集名称（仅用于注释）
-            var assemblyName = compilation.AssemblyName ?? "Unknown";
+            var markerClassName = compilation.GetAssemblyName("SeparateTableRegistrar", out var assemblyName, out _);
             // 生成代码文件
             var builder = new SourceCodeBuilder();
             // 添加 using
@@ -118,9 +118,9 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine();
             // 开始命名空间（固定使用 Fantasy.Generated）
             builder.BeginNamespace("Fantasy.Generated");
-            // 开始类定义（实现 IEntitySystemRegistrar 接口）
+            // 开始类定义（实现 ISeparateTableRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Entity System registration class for {assemblyName}");
-            builder.BeginClass("SeparateTableRegistrar", "internal sealed", "ISeparateTableRegistrar");
+            builder.BeginClass(markerClassName, "internal sealed", "ISeparateTableRegistrar");
             // 生成字段用于存储已注册（用于 UnRegister）
             GenerateFields(builder, separateTableTypeInfoList);
             // 生成注册方法
@@ -134,7 +134,7 @@ namespace Fantasy.SourceGenerator.Generators
             // 结束命名空间
             builder.EndNamespace();
             // 输出源代码
-            context.AddSource("SeparateTableRegistrar.g.cs", builder.ToString());
+            context.AddSource($"{markerClassName}.g.cs", builder.ToString());
         }
 
         // private static SourceCodeBuilder GenerateGenerateSeparateTableGeneratedExtensions()

@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Loader;
-using Fantasy.Generated;
 using Fantasy.Helper;
 
 namespace Fantasy

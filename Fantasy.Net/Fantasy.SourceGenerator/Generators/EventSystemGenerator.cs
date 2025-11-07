@@ -125,7 +125,7 @@ namespace Fantasy.SourceGenerator.Generators
             List<EventSystemTypeInfo> eventSystems, List<EventSystemTypeInfo> asyncEventSystem)
         {
             // 获取当前程序集名称（仅用于注释）
-            var assemblyName = compilation.AssemblyName ?? "Unknown";
+            var markerClassName = compilation.GetAssemblyName("EventSystemRegistrar", out var assemblyName, out _);
             // 生成代码文件
             var builder = new SourceCodeBuilder();
             // 添加文件头
@@ -143,7 +143,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginNamespace("Fantasy.Generated");
             // 开始类定义（实现 IEventSystemRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Event System registration class for {assemblyName}");
-            builder.BeginClass("EventSystemRegistrar", "internal sealed", "IEventSystemRegistrar");
+            builder.BeginClass(markerClassName, "internal sealed", "IEventSystemRegistrar");
             // 生成字段用于存储已注册的事件处理器（用于 UnRegister）
             try
             {
@@ -222,13 +222,13 @@ namespace Fantasy.SourceGenerator.Generators
             builder.EndClass();
             builder.EndNamespace();
             // 输出源代码
-            context.AddSource("EventSystemRegistrar.g.cs", builder.ToString());
+            context.AddSource($"{markerClassName}.g.cs", builder.ToString());
         }
 
         private static void GenerateSphereCode(SourceProductionContext context, Compilation compilation, List<EventSystemTypeInfo> sphereEventSystem)
         {
             // 获取当前程序集名称（仅用于注释）
-            var assemblyName = compilation.AssemblyName ?? "Unknown";
+            var markerClassName = compilation.GetAssemblyName("SphereEventRegistrar", out var assemblyName, out _);
             // 生成代码文件
             var builder = new SourceCodeBuilder();
             builder.AppendLine("#if FANTASY_NET",false);
@@ -249,7 +249,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginNamespace("Fantasy.Generated");
             // 开始类定义（实现 ISphereEventRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Sphere Event System registration class for {assemblyName}");
-            builder.BeginClass("SphereEventRegistrar", "internal sealed", "ISphereEventRegistrar");
+            builder.BeginClass(markerClassName, "internal sealed", "ISphereEventRegistrar");
             // 生成字段用于存储已注册的事件处理器（用于 UnRegister）
             foreach (var eventSystemTypeInfo in sphereEventSystem)
             {
@@ -300,7 +300,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.EndNamespace();
             builder.AppendLine("#endif",false);
             // 输出源代码
-            context.AddSource("SphereEventRegistrar.g.cs", builder.ToString());
+            context.AddSource($"{markerClassName}.g.cs", builder.ToString());
         }
 
         /// <summary>

@@ -82,7 +82,7 @@ namespace Fantasy.SourceGenerator.Generators
         {
             var entitySystemTypeInfos = systemTypes.ToList();
             // 获取当前程序集名称（仅用于注释）
-            var assemblyName = compilation.AssemblyName ?? "Unknown";
+            var markerClassName = compilation.GetAssemblyName("EntitySystemRegistrar", out var assemblyName, out _);
             // 生成代码文件
             var builder = new SourceCodeBuilder();
             // 添加文件头
@@ -100,7 +100,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginNamespace("Fantasy.Generated");
             // 开始类定义（实现 IEntitySystemRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Entity System registration class for {assemblyName}");
-            builder.BeginClass("EntitySystemRegistrar", "internal sealed", "IEntitySystemRegistrar");
+            builder.BeginClass(markerClassName, "internal sealed", "IEntitySystemRegistrar");
             // 生成字段用于存储 System 实例
             GenerateFields(builder, entitySystemTypeInfos);
             // 生成注册方法
@@ -111,7 +111,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.EndClass();
             builder.EndNamespace();
             // 输出源代码
-            context.AddSource("EntitySystemRegistrar.g.cs", builder.ToString());
+            context.AddSource($"{markerClassName}.g.cs", builder.ToString());
         }
         
         private static void GenerateFields(SourceCodeBuilder builder, List<EntitySystemTypeInfo> entitySystemTypeInfos)

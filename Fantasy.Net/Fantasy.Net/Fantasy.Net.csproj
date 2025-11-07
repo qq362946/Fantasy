@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Fantasy-Net</PackageId>
-        <PackageVersion>2.0</PackageVersion>
+        <PackageVersion>2.0.3</PackageVersion>
         <Title>Fantasy-Net</Title>
         <Authors>qq362946</Authors>
         <owners>qq362946</owners>
@@ -50,9 +50,14 @@
     </ItemGroup>
 
     <ItemGroup>
+        <!-- MSBuild props：仅直接引用（不传递），用于标记直接引用 -->
+        <None Include="Fantasy-Net.props" Pack="true" PackagePath="build" />
+        <!-- MSBuild targets：传递到所有引用项目 -->
         <None Include="Fantasy-Net.targets" Pack="true" PackagePath="build;buildTransitive" />
+        <!-- 配置文件：放到两个路径，targets 可以从任意路径访问 -->
         <None Include="Fantasy.config" Pack="true" PackagePath="build;buildTransitive" />
         <None Include="Fantasy.xsd" Pack="true" PackagePath="build;buildTransitive" />
+        <!-- 包元数据文件 -->
         <None Include="icon.png" Pack="true" PackagePath="\" />
         <None Include="LICENSE" Pack="true" PackagePath="\" />
         <None Include="README.md" Pack="true" PackagePath="\" />

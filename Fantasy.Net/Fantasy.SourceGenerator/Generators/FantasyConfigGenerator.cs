@@ -47,7 +47,7 @@ namespace Fantasy.SourceGenerator.Generators
             {
                 var config = GetConfig(configContent);
                 // 获取当前程序集名称（仅用于注释）
-                var assemblyName = compilation.AssemblyName ?? "Unknown";
+                var markerClassName = compilation.GetAssemblyName("FantasyConfigRegistrar", out var assemblyName, out _);
                 // 生成代码文件
                 var builder = new SourceCodeBuilder();
                 // 添加文件头
@@ -61,9 +61,9 @@ namespace Fantasy.SourceGenerator.Generators
                 builder.AppendLine();
                 // 开始命名空间（固定使用 Fantasy.Generated）
                 builder.BeginNamespace("Fantasy.Generated");
-                // 开始类定义（实现 IEntitySystemRegistrar 接口）
+                // 开始类定义（实现 IFantasyConfigRegistrar 接口）
                 builder.AddXmlComment($"Auto-generated Entity System registration class for {assemblyName}");
-                builder.BeginClass("FantasyConfigRegistrar", "internal sealed", "IFantasyConfigRegistrar");
+                builder.BeginClass(markerClassName, "internal sealed", "IFantasyConfigRegistrar");
                 builder.BeginMethod("public Dictionary<string, int> GetDatabaseNameDictionary()");
                 builder.AppendLine("var dbNameDictionary = new Dictionary<string, int>();");
                 if (config is { ConfigContent: true, Root: not null })
@@ -117,7 +117,7 @@ namespace Fantasy.SourceGenerator.Generators
                 // 结束类和命名空间
                 builder.EndClass();
                 builder.EndNamespace();
-                context.AddSource("FantasyConfigRegistrar.g.cs", builder.ToString());
+                context.AddSource($"{markerClassName}.g.cs", builder.ToString());
             }
             catch
             {

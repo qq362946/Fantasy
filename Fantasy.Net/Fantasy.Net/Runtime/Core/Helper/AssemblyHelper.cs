@@ -31,7 +31,7 @@ namespace Fantasy.Helper
                 return;
             }
 
-            var staticMethod = staticType.GetMethod("EnsureLoaded", EnsureLoadedFlags);
+            var staticMethod = staticType.GetMethod("Initialize", EnsureLoadedFlags);
             
             if (staticMethod == null)
             {

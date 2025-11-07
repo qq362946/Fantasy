@@ -14,9 +14,13 @@ namespace Fantasy.SourceGenerator.Common
         /// </summary>
         public const string FantasyUnityAssmbly = "Fantasy.Unity";
         /// <summary>
-        /// 生成文件的命名空间
+        /// 生成文件的命名空间完整名
         /// </summary>
         public const string GeneratedNamespace = "Fantasy.Generated";
+        /// <summary>
+        /// 生成文件的命名空间名字头
+        /// </summary>
+        public const string GeneratedNamespaceHead = "Fantasy.";
         /// <summary>
         /// 诊断 ID 前缀
         /// </summary>

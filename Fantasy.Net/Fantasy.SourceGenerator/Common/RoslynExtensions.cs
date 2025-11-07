@@ -46,6 +46,22 @@ namespace Fantasy.SourceGenerator.Common
         }
 
         /// <summary>
+        /// 获取一个根据当前程序集加指定flag的名字
+        /// </summary>
+        /// <param name="compilation"></param>
+        /// <param name="flag"></param>
+        /// <param name="assemblyName"></param>
+        /// <param name="replaceAssemblyName"></param>
+        /// <returns></returns>
+        public static string GetAssemblyName(this Compilation compilation, string flag, out string assemblyName,
+            out string replaceAssemblyName)
+        {
+            assemblyName = compilation.AssemblyName ?? "Unknown";
+            replaceAssemblyName = assemblyName.Replace("-", "_").Replace(".", "_");
+            return $"{replaceAssemblyName}_{flag}";
+        }
+
+        /// <summary>
         /// 获取类型的完全限定名（包括命名空间）
         /// </summary>
         public static string GetFullName(this ITypeSymbol typeSymbol, bool includeGlobal = true)

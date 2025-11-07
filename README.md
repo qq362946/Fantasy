@@ -15,8 +15,7 @@
 
 # ⭐ Fantasy 是什么？
 
-Fantasy 是一个**零反射、高性能的 C# 游戏服务器框架**，专为大型多人在线游戏打造。  
-设计灵感借鉴了 ET 框架的设计。
+Fantasy 是一个**零反射、高性能的 C# 游戏服务器框架**，专为大型多人在线游戏打造。
 
 **核心特点：** ⚡ 零反射架构 | 🚀 Native AOT 支持 | 🌐 多协议支持 | 🔥 分布式架构 | 🎮 ECS 设计
 
@@ -46,7 +45,7 @@ var message = new C2G_LoginRequest();
 message.Account = "player123";
 message.Password = "password";
 var bytes = ProtoBuf.Serialize(message);
-session.Send(opCode, bytes);
+var response = await session.Call(opCode, bytes);
 // ... 还要手动处理回调、超时、错误处理
 
 // ✅ Fantasy 只需 1 行代码(自动生成扩展方法)
