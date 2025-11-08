@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Fantasy-Net</PackageId>
-        <PackageVersion>2.0.0</PackageVersion>
+        <PackageVersion>2025.2.0</PackageVersion>
         <Title>Fantasy-Net</Title>
         <Authors>qq362946</Authors>
         <owners>qq362946</owners>
@@ -13,7 +13,7 @@
         <Copyright>Copyright 2026 qq362946</Copyright>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageProjectUrl>https://www.code-fantasy.com/</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/qq362946/Fantasy</PackageProjectUrl>
         <RepositoryUrl>https://github.com/qq362946/Fantasy</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>Net, c#, Server, Game, GameServer, Fantasy , Network</PackageTags>

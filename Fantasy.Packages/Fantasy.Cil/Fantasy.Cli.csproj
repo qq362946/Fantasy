@@ -11,12 +11,19 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>fantasy</ToolCommandName>
     <PackageId>Fantasy.Cli</PackageId>
-    <Version>1.0.0</Version>
+    <Version>2025.2.0</Version>
     <Authors>Fantasy Framework</Authors>
-    <Description>Fantasy Framework CLI Tool for scaffolding and project management</Description>
+      <Authors>qq362946</Authors>
+      <owners>qq362946</owners>
+      <PackageOutputPath>../../nupkg</PackageOutputPath>
+    <Description>Fantasy Framework CLI Tool for scaffolding and project management. Supports quick project initialization, modular tool management, and multilingual (English/Chinese) interface.</Description>
+    <Copyright>Copyright © 2023-2024 Fantasy Framework</Copyright>
     <PackageProjectUrl>https://github.com/qq362946/Fantasy</PackageProjectUrl>
     <RepositoryUrl>https://github.com/qq362946/Fantasy</RepositoryUrl>
-    <PackageTags>fantasy;game-framework;cli;scaffolding</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>fantasy;game-framework;cli;scaffolding;dotnet-tool;csharp;game-server</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
   </PropertyGroup>
 
@@ -31,6 +38,12 @@
     <EmbeddedResource Include="Templates\**\*.template" />
     <EmbeddedResource Include="Templates\**\*.json" />
     <EmbeddedResource Include="Resources\*.zip" />
+  </ItemGroup>
+
+  <!-- Include README and LICENSE in NuGet package -->
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="LICENSE" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
