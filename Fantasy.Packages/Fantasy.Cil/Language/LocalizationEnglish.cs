@@ -26,6 +26,7 @@ public class LocalizationEnglish : ILocalization
           fantasy add -p /path/to/project          # Add tools to specific project
         """;
     public string LanguageTip => "[dim]Tip: Set environment variable FANTASY_CLI_LANG={0} to skip this step next time.[/]";
+    public string PathWarningMessage => "Please add the following to your shell profile to use Fantasy CLI:";
 
     // InitCommand
     public string InitCommandDescription => "Initialize a new Fantasy project";

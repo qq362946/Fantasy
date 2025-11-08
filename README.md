@@ -182,6 +182,63 @@ public class PlayerAwakeSystem : AwakeSystem<Player>
 
 ---
 
+## 🛠️ Fantasy CLI 脚手架工具
+
+Fantasy CLI 是官方提供的项目脚手架和管理工具，帮助你快速创建和管理 Fantasy 项目。
+
+### 安装
+
+```bash
+dotnet tool install -g Fantasy.Cli
+```
+
+**⚠️ macOS/Linux 用户注意事项**
+
+在 macOS 或 Linux 上安装后，如果无法直接使用 `fantasy` 命令，需要将 .NET tools 路径添加到 PATH 环境变量：
+
+**macOS (zsh - 默认 Shell):**
+```bash
+echo 'export PATH="$PATH:$HOME/.dotnet/tools"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+**macOS (bash):**
+```bash
+echo 'export PATH="$PATH:$HOME/.dotnet/tools"' >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+**Linux (bash):**
+```bash
+echo 'export PATH="$PATH:$HOME/.dotnet/tools"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**验证安装:**
+```bash
+fantasy --version
+```
+
+### 快速使用
+
+**创建新项目:**
+```bash
+fantasy init                    # 交互式创建项目
+fantasy init -n MyGameServer    # 使用项目名快速创建
+```
+
+**添加框架组件:**
+```bash
+fantasy add                     # 交互式选择组件
+fantasy add -t protocolexporttool  # 添加协议导出工具
+fantasy add -t networkprotocol     # 添加网络协议
+fantasy add -t nlog                # 添加 NLog 日志
+```
+
+更多详细信息，请查看 [Fantasy.Cli 文档](Fantasy.Packages/Fantasy.Cil/README.md)
+
+---
+
 ## 💬 社区与支持
 
 - **QQ 讨论群**: **569888673** （点击加群：[链接](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=yourqrcode)）

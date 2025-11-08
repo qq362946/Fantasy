@@ -18,6 +18,7 @@ public interface ILocalization
     string RootCommandTitle { get; }
     string RootCommandDescription { get; }
     string LanguageTip { get; }
+    string PathWarningMessage { get; }
 
     // InitCommand
     string InitCommandDescription { get; }

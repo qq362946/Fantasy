@@ -26,6 +26,7 @@ public class LocalizationChinese : ILocalization
           fantasy add -p /path/to/project          # 添加工具到指定项目
         """;
     public string LanguageTip => "[dim]提示: 设置环境变量 FANTASY_CLI_LANG={0} 可跳过此步骤。[/]";
+    public string PathWarningMessage => "请将以下内容添加到你的 shell 配置文件中以使用 Fantasy CLI:";
 
     // InitCommand
     public string InitCommandDescription => "初始化一个新的 Fantasy 项目";

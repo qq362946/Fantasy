@@ -10,6 +10,7 @@ internal class Program
     static async Task<int> Main(string[] args)
     {
         InitializeLocalization();
+        CheckPathConfiguration();
 
         var loc = LocalizationManager.Current;
         var rootCommand = new RootCommand(loc.RootCommandTitle)
@@ -53,5 +54,63 @@ internal class Program
         // （可选）保存此选择以供将来使用
         AnsiConsole.MarkupLine(string.Format(LocalizationManager.Current.LanguageTip, lang));
         AnsiConsole.WriteLine();
+    }
+
+    private static void CheckPathConfiguration()
+    {
+        // Only check on macOS and Linux
+        if (!OperatingSystem.IsMacOS() && !OperatingSystem.IsLinux())
+        {
+            return;
+        }
+
+        var toolsPath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            ".dotnet", "tools"
+        );
+
+        var pathEnv = Environment.GetEnvironmentVariable("PATH") ?? "";
+
+        if (!pathEnv.Contains(toolsPath))
+        {
+            var loc = LocalizationManager.Current;
+            var shellProfileFile = GetShellProfileFile();
+
+            AnsiConsole.MarkupLine("[yellow]⚠️  Warning: .NET tools path is not in your PATH.[/]");
+            AnsiConsole.MarkupLine($"[yellow]   {loc.PathWarningMessage}[/]");
+            AnsiConsole.WriteLine();
+
+            if (OperatingSystem.IsMacOS())
+            {
+                AnsiConsole.MarkupLine($"[cyan]   echo 'export PATH=\"$PATH:$HOME/.dotnet/tools\"' >> ~/{shellProfileFile}[/]");
+                AnsiConsole.MarkupLine($"[cyan]   source ~/{shellProfileFile}[/]");
+            }
+            else // Linux
+            {
+                AnsiConsole.MarkupLine($"[cyan]   echo 'export PATH=\"$PATH:$HOME/.dotnet/tools\"' >> ~/{shellProfileFile}[/]");
+                AnsiConsole.MarkupLine($"[cyan]   source ~/{shellProfileFile}[/]");
+            }
+
+            AnsiConsole.WriteLine();
+        }
+    }
+
+    private static string GetShellProfileFile()
+    {
+        var shell = Environment.GetEnvironmentVariable("SHELL") ?? "";
+
+        if (shell.Contains("zsh"))
+        {
+            return ".zshrc";
+        }
+        else if (shell.Contains("bash"))
+        {
+            return ".bash_profile";
+        }
+        else
+        {
+            // Default to .zshrc on macOS (Catalina+), .bashrc on Linux
+            return OperatingSystem.IsMacOS() ? ".zshrc" : ".bashrc";
+        }
     }
 }

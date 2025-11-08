@@ -63,11 +63,17 @@ Fantasy CLI 提供了便捷的命令来安装和管理协议导出工具。
 
 ```bash
 # 安装 Fantasy CLI
-dotnet tool install -g Fantasy.CLI
+dotnet tool install -g Fantasy.Cli
 
 # 验证安装
 fantasy --version
 ```
+
+> **⚠️ macOS/Linux 用户注意：**
+>
+> 如果安装后无法直接使用 `fantasy` 命令，需要配置 PATH 环境变量。
+>
+> **详细配置步骤请查看：** [Fantasy CLI 完整文档](../../Fantasy.Packages/Fantasy.Cil/README.md)（查看"安装"章节）
 
 **安装协议导出工具:**
 

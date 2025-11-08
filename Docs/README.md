@@ -17,6 +17,7 @@
   - 安装 Fantasy Framework (NuGet 或源码)
   - 创建配置文件
   - 推荐的项目结构
+  - ⚠️ **macOS/Linux 用户**: 如果安装 CLI 后无法使用命令，请查看 [Fantasy CLI 文档](../Fantasy.Packages/Fantasy.Cil/README.md) 配置 PATH
 
 - ✅ [02-QuickStart-Unity.md](00-GettingStarted/02-QuickStart-Unity.md) - Unity 客户端快速开始
   - 安装 Fantasy.Unity 包
@@ -164,6 +165,7 @@ Unity 客户端开发的完整指南。
 1. **快速入门**
    - [01-QuickStart-Server.md](00-GettingStarted/01-QuickStart-Server.md) - 安装和基本配置
    - 🎯 **新手推荐**: 使用 Fantasy CLI 工具 (`fantasy init`) 一键创建项目
+   - ⚠️ **macOS/Linux 用户**: CLI 安装后如无法使用，请查看 [配置说明](../Fantasy.Packages/Fantasy.Cil/README.md)
 
 2. **配置和启动**
    - [01-ServerConfiguration.md](01-Server/01-ServerConfiguration.md) - 理解配置文件格式

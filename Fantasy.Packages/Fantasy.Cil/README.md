@@ -18,13 +18,40 @@ Fantasy CLI 是 [Fantasy 框架](https://github.com/qq362946/Fantasy) 的官方�
 dotnet tool install -g Fantasy.Cli
 ```
 
-更新到最新版本：
+**⚠️ macOS/Linux 用户注意事项**
+
+在 macOS 或 Linux 上安装后，如果无法直接使用 `fantasy` 命令，需要将 .NET tools 路径添加到 PATH 环境变量：
+
+**macOS (zsh - 默认 Shell):**
+```bash
+echo 'export PATH="$PATH:$HOME/.dotnet/tools"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+**macOS (bash):**
+```bash
+echo 'export PATH="$PATH:$HOME/.dotnet/tools"' >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+**Linux (bash):**
+```bash
+echo 'export PATH="$PATH:$HOME/.dotnet/tools"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**验证安装:**
+```bash
+fantasy --version
+```
+
+**更新到最新版本：**
 
 ```bash
 dotnet tool update -g Fantasy.Cli
 ```
 
-卸载：
+**卸载：**
 
 ```bash
 dotnet tool uninstall -g Fantasy.Cli

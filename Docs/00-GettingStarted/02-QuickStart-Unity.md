@@ -19,6 +19,8 @@
 > fantasy init -n MyGameServer
 > ```
 >
+> **⚠️ macOS/Linux 用户注意：** 如果安装后无法使用 `fantasy` 命令，请查看 [Fantasy CLI 文档](../../Fantasy.Packages/Fantasy.Cil/README.md) 配置 PATH。
+>
 > 详见 [服务器端快速开始](01-QuickStart-Server.md) 文档。
 
 ---

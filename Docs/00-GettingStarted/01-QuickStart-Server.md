@@ -39,6 +39,12 @@ dotnet tool install -g Fantasy.Cli
 dotnet tool update -g Fantasy.Cli
 ```
 
+> **⚠️ macOS/Linux 用户注意：**
+>
+> 如果安装后无法直接使用 `fantasy` 命令，需要配置 PATH 环境变量。
+>
+> **详细配置步骤请查看：** [Fantasy CLI 完整文档](../../Fantasy.Packages/Fantasy.Cil/README.md)（查看"安装"章节）
+
 ### 创建项目
 
 **方式一：交互模式（推荐）**
