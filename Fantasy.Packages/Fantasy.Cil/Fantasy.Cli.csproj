@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Fantasy.Cli</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- DotNet Tool Configuration -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>fantasy</ToolCommandName>
+    <PackageId>Fantasy.Cli</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Fantasy Framework</Authors>
+    <Description>Fantasy Framework CLI Tool for scaffolding and project management</Description>
+    <PackageProjectUrl>https://github.com/qq362946/Fantasy</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/qq362946/Fantasy</RepositoryUrl>
+    <PackageTags>fantasy;game-framework;cli;scaffolding</PackageTags>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+    <PackageReference Include="Spectre.Console" Version="0.49.1" />
+    <PackageReference Include="Scriban" Version="5.10.0" />
+  </ItemGroup>
+
+  <!-- Embed template files and tools as resources -->
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\**\*.template" />
+    <EmbeddedResource Include="Templates\**\*.json" />
+    <EmbeddedResource Include="Resources\*.zip" />
+  </ItemGroup>
+
+</Project>

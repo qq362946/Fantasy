@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.fantasy.unity": {
-      "version": "file:../../../../Fantasy.Unity/Fantasy.Unity",
+      "version": "file:../../../../Fantasy.Packages/Fantasy.Unity",
       "depth": 0,
       "source": "local",
       "dependencies": {

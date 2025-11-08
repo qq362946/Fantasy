@@ -136,10 +136,10 @@ git clone https://github.com/qq362946/Fantasy.git
 
     <ItemGroup>
         <!-- 引用核心框架 -->
-        <ProjectReference Include="path/to/Fantasy/Fantasy.Net/Fantasy.Net/Fantasy.Net.csproj" />
+        <ProjectReference Include="path/to/Fantasy/Fantasy.Packages/Fantasy.Net/Fantasy.Net.csproj" />
 
         <!-- 引用 Source Generator（必须！） -->
-        <ProjectReference Include="path/to/Fantasy/Fantasy.Net/Fantasy.SourceGenerator/Fantasy.SourceGenerator.csproj"
+        <ProjectReference Include="path/to/Fantasy/Fantasy.Packages/Fantasy.SourceGenerator/Fantasy.SourceGenerator.csproj"
                           OutputItemType="Analyzer"
                           ReferenceOutputAssembly="false" />
     </ItemGroup>
@@ -176,8 +176,8 @@ git clone https://github.com/qq362946/Fantasy.git
 
     <!-- 项目引用 -->
     <ItemGroup>
-        <ProjectReference Include="path/to/Fantasy/Fantasy.Net/Fantasy.Net/Fantasy.Net.csproj" />
-        <ProjectReference Include="path/to/Fantasy/Fantasy.Net/Fantasy.SourceGenerator/Fantasy.SourceGenerator.csproj"
+        <ProjectReference Include="path/to/Fantasy/Fantasy.Packages/Fantasy.Net/Fantasy.Net.csproj" />
+        <ProjectReference Include="path/to/Fantasy/Fantasy.Packages/Fantasy.SourceGenerator/Fantasy.SourceGenerator.csproj"
                           OutputItemType="Analyzer"
                           ReferenceOutputAssembly="false" />
     </ItemGroup>
@@ -190,7 +190,7 @@ git clone https://github.com/qq362946/Fantasy.git
 ```xml
 <!-- 项目添加Fantasy.SourceGenerator -->
 <ItemGroup>
-    <ProjectReference Include="path/to/Fantasy/Fantasy.Net/Fantasy.SourceGenerator/Fantasy.SourceGenerator.csproj"
+    <ProjectReference Include="path/to/Fantasy/Fantasy.Packages/Fantasy.SourceGenerator/Fantasy.SourceGenerator.csproj"
                       OutputItemType="Analyzer"
                       ReferenceOutputAssembly="false" />
 </ItemGroup>
@@ -218,8 +218,8 @@ git clone https://github.com/qq362946/Fantasy.git
 #### 方式二：源码引用（手动复制）
 
 源码中的配置文件位置：
-- `Fantasy.config` 位于：`Fantasy/Fantasy.Net/Fantasy.Net/Fantasy.config`
-- `Fantasy.xsd` 位于：`Fantasy/Fantasy.Net/Fantasy.Net/Fantasy.xsd`
+- `Fantasy.config` 位于：`Fantasy/Fantasy.Packages/Fantasy.Net/Fantasy.config`
+- `Fantasy.xsd` 位于：`Fantasy/Fantasy.Packages/Fantasy.Net/Fantasy.xsd`
 
 将这两个文件复制到你引用了 Fantasy 的项目根目录（例如 `Server.Entity/`）即可。
 

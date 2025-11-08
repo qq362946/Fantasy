@@ -24,8 +24,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Fantasy-Net" Version="2024.2.22" />
-      <PackageReference Include="NLog" Version="5.3.4" />
+      <PackageReference Include="Fantasy-Net" Version="*" />
+      <PackageReference Include="NLog" Version="*" />
     </ItemGroup>
 
     <ItemGroup>

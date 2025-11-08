@@ -27,21 +27,21 @@
 
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.6" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\FileHelper.cs">
+      <Compile Include="..\..\..\Fantasy.Packages\Fantasy.Net\Runtime\Core\Helper\FileHelper.cs">
         <Link>Core\FileHelper.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\HashCodeHelper.cs">
+      <Compile Include="..\..\..\Fantasy.Packages\Fantasy.Net\Runtime\Core\Helper\HashCodeHelper.cs">
         <Link>Core\HashCodeHelper.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Helper\JsonHelper.cs">
+      <Compile Include="..\..\..\Fantasy.Packages\Fantasy.Net\Runtime\Core\Helper\JsonHelper.cs">
         <Link>Core\JsonHelper.cs</Link>
       </Compile>
-      <Compile Include="..\..\..\Fantasy.Net\Fantasy.Net\Runtime\Core\Network\Message\PacketParser\OpCode.cs">
+      <Compile Include="..\..\..\Fantasy.Packages\Fantasy.Net\Runtime\Core\Network\Message\PacketParser\OpCode.cs">
         <Link>ProtocalExporter\OpCode.cs</Link>
       </Compile>
       <Compile Update="ExporterSettingsHelper.cs">

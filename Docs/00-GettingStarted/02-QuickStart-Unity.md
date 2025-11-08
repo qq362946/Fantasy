@@ -158,7 +158,7 @@ OpenUPM 是 Unity 包管理器的第三方注册表服务,可以轻松管理和�
 
    ```
    Fantasy/
-   └── Fantasy.Unity/
+   └── Fantasy.Packages/
        └── Fantasy.Unity/       # 这个目录就是 Unity 包
    ```
 
@@ -167,7 +167,7 @@ OpenUPM 是 Unity 包管理器的第三方注册表服务,可以轻松管理和�
    ```
    YourProject/
    └── Packages/
-       └── com.fantasy.unity/   # 将 Fantasy.Unity/Fantasy.Unity 复制到这里
+       └── com.fantasy.unity/   # 将 Fantasy.Packages/Fantasy.Unity 复制到这里
    ```
 
 3. **编辑 manifest.json**

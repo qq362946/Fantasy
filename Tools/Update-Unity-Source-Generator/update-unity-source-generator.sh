@@ -15,8 +15,8 @@ NC='\033[0m' # No Color
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # 项目根目录（脚本在 Tools/Update-Unity-Source-Generator/ 下，需要上两级到根目录）
 PROJECT_ROOT="${SCRIPT_DIR}/../.."
-SOURCE_GENERATOR_PROJECT="${PROJECT_ROOT}/Fantasy.Net/Fantasy.SourceGenerator/Fantasy.SourceGenerator.csproj"
-UNITY_PACKAGE_DIR="${PROJECT_ROOT}/Fantasy.Unity/Fantasy.Unity/RoslynAnalyzers"
+SOURCE_GENERATOR_PROJECT="${PROJECT_ROOT}/Fantasy.Packages/Fantasy.SourceGenerator/Fantasy.SourceGenerator.csproj"
+UNITY_PACKAGE_DIR="${PROJECT_ROOT}/Fantasy.Packages/Fantasy.Unity/RoslynAnalyzers"
 
 # 配置 - 为 Unity 使用特殊的构建配置
 BUILD_CONFIG="Unity"  # 使用 Unity 配置，引用低版本 Roslyn
@@ -51,7 +51,7 @@ echo -e "${GREEN}✓ 构建成功 (使用 Unity 兼容的 Roslyn 版本)${NC}"
 echo ""
 
 # 复制 DLL
-SOURCE_DLL="${PROJECT_ROOT}/Fantasy.Net/Fantasy.SourceGenerator/bin/${BUILD_CONFIG}/netstandard2.0/Fantasy.SourceGenerator.dll"
+SOURCE_DLL="${PROJECT_ROOT}/Fantasy.Packages/Fantasy.SourceGenerator/bin/${BUILD_CONFIG}/netstandard2.0/Fantasy.SourceGenerator.dll"
 TARGET_DLL="${UNITY_PACKAGE_DIR}/Fantasy.SourceGenerator.dll"
 
 if [ ! -f "${SOURCE_DLL}" ]; then

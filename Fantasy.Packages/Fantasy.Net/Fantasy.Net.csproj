@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <PackageId>Fantasy-Net</PackageId>
+        <PackageVersion>2.0.0</PackageVersion>
+        <Title>Fantasy-Net</Title>
+        <Authors>qq362946</Authors>
+        <owners>qq362946</owners>
+        <PackageOutputPath>../../nupkg</PackageOutputPath>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <Description>
+            Fantasy is a high-performance network development framework based on .NET, supporting mainstream protocols. It is designed for development teams or individuals needing a quick start, scalability, and a distributed, cross-platform solution at the commercial level. Fantasy aims to provide easy-to-use tools while ensuring high system performance and scalability.</Description>
+        <Copyright>Copyright 2026 qq362946</Copyright>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageProjectUrl>https://www.code-fantasy.com/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/qq362946/Fantasy</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>Net, c#, Server, Game, GameServer, Fantasy , Network</PackageTags>
+        <PackageIcon>icon.png</PackageIcon>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Fantasy-Net</AssemblyName>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+        <LangVersion>default</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <DocumentationFile>bin\Debug\net8.0\Fantasy.Net.xml</DocumentationFile>
+      <!-- 启用 Source Generator 文件输出（可选，用于调试） -->
+       <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles> 
+       <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath> 
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CommandLineParser" Version="2.9.1" />
+      <FrameworkReference Include="Microsoft.AspNetCore.App" />
+      <PackageReference Include="MongoDB.Bson" Version="3.5.0" />
+      <PackageReference Include="MongoDB.Driver" Version="3.5.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+      <PackageReference Include="protobuf-net" Version="3.2.56" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- MSBuild props：仅直接引用（不传递），用于标记直接引用 -->
+        <None Include="Fantasy-Net.props" Pack="true" PackagePath="build" />
+        <!-- MSBuild targets：传递到所有引用项目 -->
+        <None Include="Fantasy-Net.targets" Pack="true" PackagePath="build;buildTransitive" />
+        <!-- 配置文件：放到两个路径，targets 可以从任意路径访问 -->
+        <None Include="Fantasy.config" Pack="true" PackagePath="build;buildTransitive" />
+        <None Include="Fantasy.xsd" Pack="true" PackagePath="build;buildTransitive" />
+        <!-- 包元数据文件 -->
+        <None Include="icon.png" Pack="true" PackagePath="\" />
+        <None Include="LICENSE" Pack="true" PackagePath="\" />
+        <None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <!-- Source Generator Reference -->
+    <ItemGroup>
+      <ProjectReference Include="..\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" SetTargetFramework="TargetFramework=netstandard2.0" />
+    </ItemGroup>
+
+    <!-- 将 Source Generator 打包到 NuGet -->
+    <ItemGroup>
+        <!-- 获取 Fantasy.SourceGenerator 的输出 DLL -->
+        <None Include="..\Fantasy.SourceGenerator\bin\$(Configuration)\netstandard2.0\Fantasy.SourceGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Runtime\Core\World\" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+      <PackageReference Include="System.IO.Pipelines" Version="9.0.10" />
+    </ItemGroup>
+
+</Project>

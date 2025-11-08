@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "..\..\Fantasy.Net\Fantasy.Net\Fantasy.Net.csproj", "{7BDEBABB-8630-4B61-8AF4-75DD969F29E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.Net", "..\..\Fantasy.Packages\Fantasy.Net\Fantasy.Net.csproj", "{7BDEBABB-8630-4B61-8AF4-75DD969F29E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Main\Main.csproj", "{FE0784FD-8ACB-42FB-82EC-81A1335C85CF}"
 EndProject
@@ -8,9 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "Entity\Entity.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotfix", "Hotfix\Hotfix.csproj", "{B2740AB3-250F-44E2-B61D-8F3C4D9B4BEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.ConfigTable", "..\..\Fantasy.Packages\Fantasy.ConfigTable\Net\Fantasy.ConfigTable.csproj", "{0A539FA2-C595-4AA3-A2C3-86BF86EA7FFB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.SourceGenerator", "..\..\Fantasy.Net\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj", "{7CFD56D0-D2EC-4874-8C2B-8516E9428C55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.SourceGenerator", "..\..\Fantasy.Packages\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj", "{7CFD56D0-D2EC-4874-8C2B-8516E9428C55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +32,6 @@ Global
 		{B2740AB3-250F-44E2-B61D-8F3C4D9B4BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2740AB3-250F-44E2-B61D-8F3C4D9B4BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2740AB3-250F-44E2-B61D-8F3C4D9B4BEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A539FA2-C595-4AA3-A2C3-86BF86EA7FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A539FA2-C595-4AA3-A2C3-86BF86EA7FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A539FA2-C595-4AA3-A2C3-86BF86EA7FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A539FA2-C595-4AA3-A2C3-86BF86EA7FFB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7CFD56D0-D2EC-4874-8C2B-8516E9428C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7CFD56D0-D2EC-4874-8C2B-8516E9428C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CFD56D0-D2EC-4874-8C2B-8516E9428C55}.Release|Any CPU.ActiveCfg = Release|Any CPU

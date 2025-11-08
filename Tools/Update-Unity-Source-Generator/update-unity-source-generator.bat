@@ -8,8 +8,8 @@ REM 设置路径
 set SCRIPT_DIR=%~dp0
 REM 项目根目录（脚本在 Tools\Update-Unity-Source-Generator\ 下，需要上两级到根目录）
 set PROJECT_ROOT=%SCRIPT_DIR%..\..
-set SOURCE_GENERATOR_PROJECT=%PROJECT_ROOT%\Fantasy.Net\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj
-set UNITY_PACKAGE_DIR=%PROJECT_ROOT%\Fantasy.Unity\Fantasy.Unity\RoslynAnalyzers
+set SOURCE_GENERATOR_PROJECT=%PROJECT_ROOT%\Fantasy.Packages\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj
+set UNITY_PACKAGE_DIR=%PROJECT_ROOT%\Fantasy.Packages\Fantasy.Unity\RoslynAnalyzers
 
 REM 设置构建配置 (为 Unity 使用特殊配置)
 set BUILD_CONFIG=Unity
@@ -45,7 +45,7 @@ echo [成功] 构建完成 (使用 Unity 兼容的 Roslyn 版本)
 echo.
 
 REM 复制 DLL
-set SOURCE_DLL=%PROJECT_ROOT%\Fantasy.Net\Fantasy.SourceGenerator\bin\%BUILD_CONFIG%\netstandard2.0\Fantasy.SourceGenerator.dll
+set SOURCE_DLL=%PROJECT_ROOT%\Fantasy.Packages\Fantasy.SourceGenerator\bin\%BUILD_CONFIG%\netstandard2.0\Fantasy.SourceGenerator.dll
 set TARGET_DLL=%UNITY_PACKAGE_DIR%\Fantasy.SourceGenerator.dll
 
 if not exist "%SOURCE_DLL%" (
