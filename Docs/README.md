@@ -85,6 +85,14 @@ Unity 客户端开发的完整指南。
     - 协议定义规范和支持的数据类型
     - RouteType 和 RoamingType 配置
 
+- ✅ [08-NetworkProtocolExporter.md](01-Server/08-NetworkProtocolExporter.md) - 网络协议导出工具使用指南
+    - 导出工具获取方式 (Fantasy CLI、已编译工具、源码编译)
+    - ExporterSettings.json 配置文件详解
+    - 交互式运行和命令行参数运行
+    - 生成的代码结构 (协议类、OpCode、Helper 扩展方法)
+    - 自定义代码模板和错误检测
+    - 团队协作和 CI/CD 集成最佳实践
+
 ---
 
 ### 🚧 [03-Advanced](03-Advanced/) - 进阶主题 (规划中)
@@ -163,6 +171,7 @@ Unity 客户端开发的完整指南。
    - [02-WritingStartupCode.md](01-Server/02-WritingStartupCode.md) - 编写启动代码
    - [06-LogSystem.md](01-Server/06-LogSystem.md) - 日志系统配置和使用
    - [07-NetworkProtocol.md](01-Server/07-NetworkProtocol.md) - 网络协议目录结构说明
+   - [08-NetworkProtocolExporter.md](01-Server/08-NetworkProtocolExporter.md) - 网络协议导出工具使用
    - [03-CommandLineArguments.md](01-Server/03-CommandLineArguments.md) - 配置启动参数
 
 3. **场景初始化**
@@ -229,10 +238,10 @@ Unity 客户端开发的完整指南。
 | 分类 | 已完成 | 规划中 | 总计 | 进度 |
 |------|--------|--------|------|------|
 | **快速入门** | 2 | 0 | 2 | 100% ✅ |
-| **服务器端指南** | 7 | 0 | 7 | 100% ✅ |
+| **服务器端指南** | 8 | 0 | 8 | 100% ✅ |
 | **客户端指南** | 1 | 0 | 1 | 100% ✅ |
 | **进阶主题** | 0 | 30 | 30 | 0% 🚧 |
-| **总计** | **10** | **30** | **40** | **25%** |
+| **总计** | **11** | **30** | **41** | **27%** |
 
 **最后更新**: 2025-11-08
 
@@ -249,6 +258,7 @@ Unity 客户端开发的完整指南。
 ## 📝 更新日志
 
 ### 2025-11-08
+- ✅ 添加网络协议导出工具使用指南 (08-NetworkProtocolExporter.md)
 - ✅ 添加网络协议目录结构说明 (07-NetworkProtocol.md)
 - ✅ 添加日志系统使用指南 (06-LogSystem.md)
 - ✅ 添加 Fantasy CLI 脚手架工具说明

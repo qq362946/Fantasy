@@ -787,6 +787,7 @@ message C2G_LoginRequest // IRequest,G2C_LoginResponse
 
 ### 相关文档
 
+- 🛠️ 阅读 [网络协议导出工具使用指南](08-NetworkProtocolExporter.md) 学习如何生成协议代码
 - 📖 阅读 [日志系统使用指南](06-LogSystem.md) 学习如何使用日志
 - ⚙️ 阅读 [服务器配置](01-ServerConfiguration.md) 学习配置文件
 - 🎯 阅读 [配置系统使用指南](05-ConfigUsage.md) 学习如何使用配置
