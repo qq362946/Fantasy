@@ -6,7 +6,7 @@ message G2A_TestMessage // IRouteMessage
 }
 message G2A_TestRequest // IRouteRequest,G2A_TestResponse
 {
-
+	
 }
 message G2A_TestResponse // IRouteResponse
 {
