@@ -244,13 +244,13 @@ namespace Fantasy.Assembly
             {
                 AssemblyLifecycle.OnUnLoad(manifest).Coroutine();
                 Manifests.Remove(assemblyManifestId);
-                manifest.CustomInterfaceRegistrar.Register(manifest.CustomInterfaces);
+                manifest.CustomInterfaceRegistrar.UnRegister(manifest.CustomInterfaces);
             }
 #else
             if (Manifests.TryRemove(assemblyManifestId, out var manifest))
             {
                 AssemblyLifecycle.OnUnLoad(manifest).Coroutine();
-                manifest.CustomInterfaceRegistrar.Register(manifest.CustomInterfaces);
+                manifest.CustomInterfaceRegistrar.UnRegister(manifest.CustomInterfaces);
             }
 #endif
         }

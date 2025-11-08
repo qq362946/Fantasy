@@ -1,78 +1,148 @@
-<div align="center">
+# Fantasy Framework
 
-![Fantasy](https://socialify.git.ci/qq362946/Fantasy/image?custom_description=%F0%9F%8E%AE+%E4%B8%93%E4%B8%BA%E5%A4%A7%E5%9E%8B%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E6%B8%B8%E6%88%8F%E6%89%93%E9%80%A0%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6+%0A%F0%9F%9A%80+%E7%94%A8C%23+%E6%9E%84%E5%BB%BA%E4%BD%A0%E7%9A%84%E6%B8%B8%E6%88%8F%E5%B8%9D%E5%9B%BD+%7C+%E4%BB%8E%E5%B0%8F%E5%9E%8B%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E5%88%B0%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E5%A4%A7%E5%9E%8B%E6%B8%B8%E6%88%8F%0A%E2%9A%A1+%E9%9B%B6%E5%8F%8D%E5%B0%84+%7C+%F0%9F%9A%80+Native+AOT+%7C+%F0%9F%8C%90+%E5%A4%9A%E5%8D%8F%E8%AE%AE+%7C+%F0%9F%94%A5+%E5%88%86%E5%B8%83%E5%BC%8F&description=1&font=Inter&forks=1&issues=1&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII%3D&name=1&pattern=Signal&pulls=1&stargazers=1&theme=Auto)
+**专为大型多人在线游戏打造的高性能分布式服务器框架**
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/qq362946/Fantasy/blob/main/LICENSE)
 [![.NET](https://img.shields.io/badge/.NET-8.0+-purple.svg)](https://dotnet.microsoft.com/)
 [![C#](https://img.shields.io/badge/C%23-12.0-brightgreen.svg)](https://docs.microsoft.com/en-us/dotnet/csharp/)
 [![Unity](https://img.shields.io/badge/Unity-2022.3.62+-black.svg)](https://unity.com/)
-[![Stars](https://img.shields.io/github/stars/qq362946/Fantasy?style=social)](https://github.com/qq362946/Fantasy/stargazers)
+[![NuGet](https://img.shields.io/nuget/v/Fantasy-Net.svg)](https://www.nuget.org/packages/Fantasy-Net/)
+[![Downloads](https://img.shields.io/nuget/dt/Fantasy-Net.svg)](https://www.nuget.org/packages/Fantasy-Net/)
 
-**[📖 官方文档](Docs/README.md)** | **[🚀 快速开始](Docs/README.md)** | **[💬 QQ 群: 569888673](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=yourqrcode)**
-</div>
+**[📖 官方文档](https://github.com/qq362946/Fantasy/tree/main/Docs)** | **[🚀 快速开始](#-快速开始)** | **[💬 QQ群: 569888673](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=yourqrcode)**
 
 ---
 
-# ⭐ Fantasy 是什么？
+## ⭐ Fantasy 是什么？
 
 Fantasy 是一个**零反射、高性能的 C# 游戏服务器框架**，专为大型多人在线游戏打造。
 
-**核心特点：** ⚡ 零反射架构 | 🚀 Native AOT 支持 | 🌐 多协议支持 | 🔥 分布式架构 | 🎮 ECS 设计
+**核心特点：**
+- ⚡ **零反射架构** - 编译时代码生成，Native AOT 完美支持
+- 🚀 **极致性能** - 对象池、内存优化、原生集合
+- 🌐 **多协议支持** - TCP/KCP/WebSocket/HTTP 一键切换
+- 🔥 **分布式架构** - Server-to-Server 通信、跨服事件系统
+- 🎮 **ECS 设计** - Entity-Component-System，灵活扩展
+- 📦 **完整工具链** - 脚手架工具、协议生成器、配置表导出
 
-## 适用场景
+---
 
-- 🏰 **MMORPG** - 分布式架构、跨服通信、实体寻址系统
-- ⚔️ **实时对战游戏** - KCP 低延迟协议、高性能 ECS 架构
-- 🎲 **回合制/卡牌游戏** - 可靠的 TCP/WebSocket 通信、数据持久化
-- 🌍 **开放世界游戏** - 场景管理、实体层级系统
-- 🏪 **H5/小游戏** - WebSocket 协议支持、Unity WebGL 兼容
-- 🎰 **高并发游戏** - 分布式部署、对象池优化
+## 🚀 快速开始
 
-## 多协议支持
+### 方式一：使用 Fantasy CLI 脚手架（推荐）
 
-- 🔌 **TCP** - 稳定可靠，服务器间内网通信首选
-- ⚡ **KCP** - 低延迟 UDP 可靠传输协议，适合实时对战游戏
-- 🌍 **WebSocket** - 原生支持 H5/小游戏，Unity WebGL 一键发布
-- 🌐 **HTTP** - RESTful API、Web 后台管理、GM 工具完美集成
+**安装 Fantasy CLI：**
+```bash
+dotnet tool install -g Fantasy.Cli
+```
 
-## 核心优势
+**创建项目：**
+```bash
+fantasy init -n MyGameServer
+```
 
-### 📡 网络通信
+一行命令即可创建完整的项目结构，包括：
+- ✅ 服务器项目（Main/Entity/Hotfix 三层结构）
+- ✅ Fantasy.config 配置文件
+- ✅ 网络协议定义和导出工具
+- ✅ NLog 日志配置
 
+### 方式二：NuGet 包安装
+
+**1. 安装 NuGet 包：**
+```bash
+dotnet add package Fantasy-Net
+```
+
+**2. 创建配置文件 `Fantasy.config`（自动生成）**
+
+**3. 编写启动代码：**
 ```csharp
-// ❌ 传统框架需要 50+ 行代码
-var message = new C2G_LoginRequest();
-message.Account = "player123";
-message.Password = "password";
-var bytes = ProtoBuf.Serialize(message);
-var response = await session.Call(opCode, bytes);
-// ... 还要手动处理回调、超时、错误处理
+using Fantasy;
 
-// ✅ Fantasy 只需 1 行代码(自动生成扩展方法)
+// 加载程序集
+AssemblyHelper.Initialize(typeof(Program).Assembly);
+
+// 启动 Fantasy 框架
+await Fantasy.Entry.Initialize(args);
+```
+
+**4. 运行服务器：**
+```bash
+dotnet run
+```
+
+📖 **详细教程**：[快速开始文档](https://github.com/qq362946/Fantasy/blob/main/Docs/00-GettingStarted/01-QuickStart-Server.md)
+
+---
+
+## 🎯 适用场景
+
+| 游戏类型 | Fantasy 优势 |
+|---------|-------------|
+| 🏰 **MMORPG** | 分布式架构、跨服通信、实体寻址系统 |
+| ⚔️ **实时对战** | KCP 低延迟协议、高性能 ECS 架构 |
+| 🎲 **回合制/卡牌** | TCP/WebSocket 可靠通信、数据持久化 |
+| 🌍 **开放世界** | 场景管理、实体层级系统 |
+| 🏪 **H5/小游戏** | WebSocket 支持、Unity WebGL 兼容 |
+
+---
+
+## 💡 核心功能
+
+### 1. 网络协议助手 - 一行代码搞定网络通信
+
+传统框架需要 50+ 行代码处理消息序列化、发送、回调、超时...
+
+**Fantasy 只需 1 行：**
+```csharp
+// 自动生成的扩展方法，自动处理序列化、OpCode、回调
 var response = await session.C2G_Login("player123", "password");
 ```
 
-### ⚡ 零反射 + Native AOT 极致性能
+**协议定义：**
+```protobuf
+// Inner/G2G_CreateRoom.proto
+message G2G_CreateRoom // IRequest
+{
+    int32 RoomType = 1;
+    int32 MaxPlayers = 2;
+}
 
+message G2G_CreateRoomResponse // IResponse
+{
+    int32 ErrorCode = 1;
+    int64 RoomId = 2;
+}
+```
+
+**自动生成 Helper 扩展方法：**
 ```csharp
-// 传统框架: 运行时反射扫描注册(慢 + 不支持 AOT)
-// Assembly.GetTypes().Where(t => typeof(IMessageHandler).IsAssignableFrom(t))...
+// 服务器间调用，框架自动生成
+var response = await session.G2G_CreateRoom(roomType: 1, maxPlayers: 4);
 
-// Fantasy: 编译时自动生成注册代码(快 + AOT 友好)
-// 无需任何手动注册,源生成器自动完成一切
+// 客户端调用
+var loginRes = await session.C2G_Login(account, password);
+```
+
+**消息处理器（自动注册，零配置）：**
+```csharp
 public class C2G_LoginHandler : Message<Session, C2G_Login, G2C_Login>
 {
     protected override async FTask Run(Session session, C2G_Login request, G2C_Login response)
     {
-        // 框架自动路由到这里,零反射开销
+        // 框架自动路由到这里，零反射开销
         response.Token = await AuthService.Login(request.Account);
     }
 }
 ```
-### 🌉 Roaming 路由系统
 
-```csharp
-// 定义 Roaming 消息(.proto 文件)
+### 2. Roaming 路由系统 - 自动跨服务器转发
+
+客户端只需连接 Gate 服务器，消息自动转发到目标服务器（Map/Battle/Chat...）
+
+**协议定义：**
+```protobuf
 message C2M_EnterMap // IRoamingRequest
 {
     int32 MapId = 1;
@@ -83,54 +153,79 @@ message M2C_EnterMap // IRoamingResponse
     int32 ErrorCode = 1;
     int64 SceneId = 2;
 }
+```
 
-// Gate 服务器自动转发到目标 Map 服务器,无需任何配置
-// 客户端只需连接 Gate,剩下的交给框架处理
-var response = await session.C2M_EnterMap(1001);
+**客户端：**
+```csharp
+// Gate 服务器自动转发到 Map 服务器
+var response = await session.C2M_EnterMap(mapId: 1001);
+```
 
-// 服务端在 Map 服务器处理(不是 Gate 服务器!)
+**服务端（运行在 Map 服务器）：**
+```csharp
 public class C2M_EnterMapHandler : Roaming<Session, C2M_EnterMap, M2C_EnterMap>
 {
     protected override async FTask Run(Session session, C2M_EnterMap request, M2C_EnterMap response)
     {
-        // 这里运行在 Map 服务器上,Gate 已自动转发
+        // 这里运行在 Map 服务器，Gate 已自动转发
         var scene = await CreateMapScene(request.MapId);
         response.SceneId = scene.Id;
-        response.ErrorCode = 0;
     }
 }
 ```
 
-**Roaming 核心价值**
-- ✅ **自动服务器路由** - 客户端无需知道目标服务器地址
-- ✅ **零配置转发** - Gate 根据消息类型自动转发到正确的服务器
-- ✅ **透明的分布式** - 开发体验与单服务器一致
-- ✅ **灵活的服务器扩展** - 轻松添加新的游戏服务器类型
+**核心价值：**
+- ✅ 客户端无需知道目标服务器地址
+- ✅ 零配置自动转发
+- ✅ 开发体验与单服务器一致
 
-### 🌐 跨服通信轻松实现
+### 3. 零反射 + Native AOT 支持
+
+**传统框架：**
+```csharp
+// ❌ 运行时反射扫描（慢 + 不支持 AOT）
+Assembly.GetTypes().Where(t => typeof(IMessageHandler).IsAssignableFrom(t))...
+```
+
+**Fantasy：**
+```csharp
+// ✅ 编译时自动生成注册代码（快 + AOT 友好）
+// 无需任何手动注册，源生成器自动完成
+public class C2G_LoginHandler : Message<Session, C2G_Login, G2C_Login>
+{
+    protected override async FTask Run(Session session, C2G_Login request, G2C_Login response)
+    {
+        // 框架自动路由，零反射开销
+        response.Token = await AuthService.Login(request.Account);
+    }
+}
+```
+
+### 4. 跨服域事件系统 (SphereEvent)
+
+轻松实现跨服公告、跨服排行榜、跨服 PVP：
 
 ```csharp
-// 服务器 A 发布跨服事件
+// 服务器 A 发布事件
 await sphereEvent.PublishToRemoteSubscribers(new WorldBossDefeatedEvent
 {
     BossId = 1001,
     KillerGuildId = 5201314
 });
 
-// 服务器 B/C/D... 自动接收并处理
-// 跨服公告、跨服排行榜、跨服 PVP 轻松搞定
+// 服务器 B/C/D... 自动接收
+[SphereEvent]
+public class WorldBossEventHandler : SphereEvent<WorldBossDefeatedEvent>
+{
+    protected override async FTask Run(Scene scene, WorldBossDefeatedEvent args)
+    {
+        // 所有订阅的服务器都会收到此事件
+        await SendGlobalAnnouncement($"世界Boss已被击败！");
+    }
+}
 ```
 
-### 🎮 多协议支持,一套代码多场景
-
-```csharp
-// 同一个消息定义,支持 TCP/KCP/WebSocket/HTTP 全协议
-// 无需修改任何代码,只需配置文件切换协议类型
-var session = await NetworkHelper.Connect("127.0.0.1:20000", NetworkProtocolType.TCP);
-// 或 NetworkProtocolType.KCP / WebSocket / HTTP
-```
-
-### 🚀 ECS 架构,开发效率拉满
+### 5. ECS 架构 - 灵活的实体组件系统
 
 ```csharp
 // 定义实体
@@ -140,12 +235,12 @@ public class Player : Entity
     public int Level { get; set; }
 }
 
-// 添加组件(组合式设计,灵活扩展)
+// 添加组件（组合式设计）
 player.AddComponent<BagComponent>();
 player.AddComponent<EquipmentComponent>();
 player.AddComponent<SkillComponent>();
 
-// 系统自动执行(源生成器自动注册,零配置)
+// 系统自动执行（源生成器自动注册）
 public class PlayerAwakeSystem : AwakeSystem<Player>
 {
     protected override void Awake(Player self)
@@ -154,66 +249,151 @@ public class PlayerAwakeSystem : AwakeSystem<Player>
     }
 }
 ```
+
+### 6. 多协议支持
+
+同一套代码，切换配置即可支持所有协议：
+
+```csharp
+// TCP - 稳定可靠
+var session = await NetworkHelper.Connect("127.0.0.1:20000", NetworkProtocolType.TCP);
+
+// KCP - 低延迟（实时对战首选）
+var session = await NetworkHelper.Connect("127.0.0.1:20000", NetworkProtocolType.KCP);
+
+// WebSocket - H5/WebGL
+var session = await NetworkHelper.Connect("ws://127.0.0.1:20000", NetworkProtocolType.WebSocket);
+
+// HTTP - RESTful API
+var response = await httpClient.Get("/api/users/123");
+```
+
 ---
 
-## 平台支持
+## 📦 完整工具链
 
-| 平台 | 支持状态  | 说明               |
-|------|-------|------------------|
-| 🖥️ **Windows Server** | ✅ 完全支持 | 游戏服务器首选平台        |
-| 🐧 **Linux Server** | ✅ 完全支持 | Docker/K8s 容器化部署 |
-| 🍎 **macOS** | ✅ 完全支持 | 开发调试友好           |
-| 🎮 **Unity (Win/Mac/iOS/Android)** | ✅ 完全支持 | 2022.3.62+       |
-| 🌐 **Unity WebGL (H5)** | ✅ 完全支持 | WebSocket 协议     |
-| 🎯 **Godot** | ❎ 暂未支持 | .NET 版本 Godot    |
-| 🖼️ **WinForms / WPF** | ❎ 暂未支持 | GM 工具、服务器监控面板    |
-| 📟 **Console** | ❎ 暂未支持 | 独立游戏、机器人、压测工具    |
+### Fantasy CLI 脚手架
+
+一键生成项目结构：
+```bash
+# 安装
+dotnet tool install -g Fantasy.Cli
+
+# 创建项目
+fantasy init -n MyGame
+
+# 添加组件
+fantasy add -t networkprotocol  # 协议定义
+fantasy add -t nlog              # 日志组件
+```
+
+### 协议导出工具
+
+从 `.proto` 文件生成 C# 代码 + 自动生成 Session 扩展方法：
+
+```bash
+# 定义协议
+message C2G_Login // IRequest
+{
+    string Account = 1;
+    string Password = 2;
+}
+
+# 自动生成
+public static class NetworkProtocolHelper
+{
+    public static async FTask<G2C_Login> C2G_Login(
+        this Session session, string account, string password)
+    {
+        // ... 自动生成的完整实现
+    }
+}
+```
+
+### 配置表导出
+
+Excel → JSON/Binary，自动生成加载代码。
 
 ---
 
-## 📋 环境要求
+## 🔧 环境要求
 
-| 组件 | 版本要求                      | 说明 |
-|------|---------------------------|------|
-| **.NET SDK** | 8.0+                      | [下载地址](https://dotnet.microsoft.com/download) |
-| **Unity** | 2022.3.62+                | 客户端开发（可选） |
+| 组件 | 版本 | 说明 |
+|------|------|------|
+| **.NET SDK** | 8.0+ | [下载地址](https://dotnet.microsoft.com/download) |
+| **Unity** | 2022.3.62+ | 客户端开发（可选） |
 | **IDE** | VS 2022 / Rider / VS Code | 推荐 Rider 或 VS 2022 |
-| **MongoDB** | 4.0+                      | 数据库（可选，使用内存模式可不装） |
+| **MongoDB** | 4.0+ | 数据库（可选） |
+
+---
+
+## 🖥️ 平台支持
+
+| 平台 | 支持 | 说明 |
+|------|------|------|
+| 🖥️ Windows Server | ✅ | 游戏服务器首选 |
+| 🐧 Linux Server | ✅ | Docker/K8s 部署 |
+| 🍎 macOS | ✅ | 开发调试 |
+| 🎮 Unity (全平台) | ✅ | Win/Mac/iOS/Android |
+| 🌐 Unity WebGL | ✅ | H5 小游戏 |
+
+---
+
+## 📚 文档与教程
+
+- 📖 **[官方文档](https://github.com/qq362946/Fantasy/tree/main/Docs)** - 完整的使用指南
+- 🚀 **[快速开始 - 服务器](https://github.com/qq362946/Fantasy/blob/main/Docs/00-GettingStarted/01-QuickStart-Server.md)** - 5分钟上手
+- 📱 **[快速开始 - Unity](https://github.com/qq362946/Fantasy/blob/main/Docs/00-GettingStarted/02-QuickStart-Unity.md)** - Unity 客户端集成
+- 🎬 **[B站视频教程](https://space.bilibili.com/382126312)** - 视频讲解
+- 💡 **[示例项目](https://github.com/qq362946/Fantasy/tree/main/Examples)** - 可运行的完整示例
 
 ---
 
 ## 💬 社区与支持
 
-- **QQ 讨论群**: **569888673** （点击加群：[链接](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=yourqrcode)）
+- **QQ 讨论群**: **569888673**
 - **联系邮箱**: 362946@qq.com
 - **GitHub Issues**: [提交问题](https://github.com/qq362946/Fantasy/issues)
 - **官方网站**: [www.code-fantasy.com](https://www.code-fantasy.com/)
-- **B站视频教程**: [空间主页](https://space.bilibili.com/382126312)
+- **B站**: [@Fantasy框架](https://space.bilibili.com/382126312)
 
 ---
 
-## 🙏 感谢所有为 Fantasy 做出贡献的开发者
+## 🎯 为什么选择 Fantasy？
 
-[![Contributors](https://contrib.rocks/image?repo=qq362946/Fantasy)](https://github.com/qq362946/Fantasy/graphs/contributors)
+| 对比项 | Fantasy | 传统框架 |
+|-------|---------|---------|
+| **网络消息** | 1 行代码 | 50+ 行代码 |
+| **性能** | 零反射 + AOT | 大量反射 |
+| **分布式** | 内置 Roaming/SphereEvent | 需要自己实现 |
+| **协议切换** | 配置文件一键切换 | 需要重写代码 |
+| **学习曲线** | 脚手架 + 文档 + 视频 | 文档不全 |
+| **生产就绪** | ✅ 完整工具链 | ⚠️ 需要自己搭建 |
 
 ---
 
 ## 🤝 优质开源项目推荐
 
-- [ET Framework](https://github.com/egametang/ET) - Fantasy 的设计灵感来源,完善的分布式游戏服务器框架
-- [TEngine](https://github.com/ALEXTANGXIAO/TEngine) - Unity框架解决方案,新手友好的全平台开发框架
-- [Legends-Of-Heroes](https://github.com/FlameskyDexive/Legends-Of-Heroes) - LOL风格的球球大作战,基于ET框架的完整游戏项目
+- [ET Framework](https://github.com/egametang/ET) - Fantasy 的设计灵感来源
+- [TEngine](https://github.com/ALEXTANGXIAO/TEngine) - Unity 框架解决方案
+- [Legends-Of-Heroes](https://github.com/FlameskyDexive/Legends-Of-Heroes) - 基于 ET 的完整游戏
 
 ---
 
-<div align="center">
+## 📄 开源协议
 
-### 🎉 如果 Fantasy 对你有帮助，请给个 Star ⭐
+本项目采用 [MIT License](https://github.com/qq362946/Fantasy/blob/main/LICENSE) 开源协议。
 
-### 让更多人发现这个项目！
+---
+
+## 🙏 贡献者
+
+感谢所有为 Fantasy 做出贡献的开发者！
+
+[![Contributors](https://contrib.rocks/image?repo=qq362946/Fantasy)](https://github.com/qq362946/Fantasy/graphs/contributors)
+
+---
 
 **Built with ❤️ by Fantasy Team | Made for Game Developers**
 
-[⬆ 回到顶部](#fantasy-framework)
-
-</div>
+🎉 **如果 Fantasy 对你有帮助，请给个 Star ⭐**

@@ -10,6 +10,17 @@
 - ✅ 已了解 C# 和 Unity 基础开发知识
 - ✅ (可选) 已搭建 Fantasy 服务器并启动
 
+> **💡 提示：** 如果你还没有服务器，可以使用 Fantasy CLI 快速创建一个：
+> ```bash
+> # 安装 Fantasy CLI
+> dotnet tool install -g Fantasy.Cli
+>
+> # 创建服务器项目（包含协议定义工具）
+> fantasy init -n MyGameServer
+> ```
+>
+> 详见 [服务器端快速开始](01-QuickStart-Server.md) 文档。
+
 ---
 
 ## 安装 Fantasy.Unity
@@ -49,7 +60,7 @@ OpenUPM 是 Unity 包管理器的第三方注册表服务,可以轻松管理和�
    - 点击左上角的 `+` 按钮
    - 选择 `Add package by name...` 或 `Add package from git URL...`
    - 在 **Name** 字段输入: `com.fantasy.unity`
-   - 在 **Version** 字段输入版本号 (例如 `2024.2.25`)
+   - 在 **Version** 字段输入版本号 (例如 `2025.2.0`)
      - 💡 **提示**: 可以指定特定版本号,也可以留空使用最新版本
      - ✅ **建议**: 使用最新版本以获得最新功能和 Bug 修复
    - 点击 `Add` 按钮
@@ -89,13 +100,13 @@ OpenUPM 是 Unity 包管理器的第三方注册表服务,可以轻松管理和�
            }
        ],
        "dependencies": {
-           "com.fantasy.unity": "2024.2.25"
+           "com.fantasy.unity": "2025.2.0"
        }
    }
    ```
 
    **版本说明:**
-   - 💡 可以指定特定版本号 (例如 `"2024.2.25"`)
+   - 💡 可以指定特定版本号 (例如 `"2025.2.0"`)
    - ✅ **建议使用最新版本** - 删除版本号让 Unity 自动获取最新版,或访问 [OpenUPM](https://openupm.com/packages/com.fantasy.unity/) 查看最新版本号
 
    **完整示例:**
@@ -125,12 +136,12 @@ OpenUPM 是 Unity 包管理器的第三方注册表服务,可以轻松管理和�
        "dependencies": {
            "com.unity.collab-proxy": "2.0.0",
            "com.unity.ide.rider": "3.0.18",
-           "com.fantasy.unity": "2024.2.25"  // 可以指定版本号,或删除引号中的版本号使用最新版
+           "com.fantasy.unity": "2025.2.0"  // 可以指定版本号,或删除引号中的版本号使用最新版
        }
    }
    ```
 
-   > 💡 **版本号提示**: `"2024.2.25"` 可以改为其他版本号,或删除版本号部分改为 `"com.fantasy.unity": ""` 让 Unity 自动使用最新版
+   > 💡 **版本号提示**: `"2025.2.0"` 可以改为其他版本号,或删除版本号部分改为 `"com.fantasy.unity": ""` 让 Unity 自动使用最新版
 
 3. **保存并返回 Unity**
    - 保存 `manifest.json` 文件
@@ -326,7 +337,26 @@ Fantasy/
 
 ## 常见问题
 
-### Q1: 安装后找不到 Fantasy 命名空间?
+### Q1: 如何配合服务器使用网络协议？
+
+**推荐流程：**
+
+1. **使用 Fantasy CLI 创建服务器项目**（包含协议工具）
+   ```bash
+   fantasy init -n MyGameServer
+   ```
+
+2. **在服务器项目中定义协议**
+   - 编辑 `Tools/NetworkProtocol/*.proto` 文件
+   - 运行协议导出工具生成代码
+
+3. **将生成的协议代码复制到 Unity**
+   - 服务器和客户端使用相同的协议定义
+   - 确保 OpCode 和消息结构一致
+
+详见 [协议定义指南](../03-Advanced/06-Protocol.md)（规划中）
+
+### Q2: 安装后找不到 Fantasy 命名空间?
 
 **解决方法:**
 
