@@ -1,4 +1,5 @@
 #if FANTASY_NET
+using System;
 using System.Runtime.Serialization;
 using Fantasy.Entitas.Interface;
 using Fantasy.Pool;

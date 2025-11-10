@@ -1,9 +1,12 @@
 #if FANTASY_NET
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 using CommandLine;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Helper;
-using Fantasy.Network;
 using Fantasy.Serialize;
 // ReSharper disable FunctionNeverReturns
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.

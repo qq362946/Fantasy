@@ -1,5 +1,6 @@
 #if FANTASY_NET
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using Fantasy.Async;
 using Fantasy.IdFactory;
 

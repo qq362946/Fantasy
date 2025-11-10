@@ -1,7 +1,8 @@
+#if FANTASY_NET
+using System;
+using System.Collections.Generic;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
-
-#if FANTASY_NET
 namespace Fantasy.Network;
 
 /// <summary>

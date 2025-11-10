@@ -1,14 +1,10 @@
 #if FANTASY_NET
-using System.IO;
+using System;
 using System.Net;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Fantasy.Assembly;
-using Fantasy.Async;
 using Fantasy.Network.Interface;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

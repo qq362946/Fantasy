@@ -1,8 +1,8 @@
+#if FANTASY_NET
+using System;
 using Fantasy.Async;
 using Fantasy.InnerMessage;
 using Fantasy.Network.Interface;
-
-#if FANTASY_NET
 namespace Fantasy.Network.Benchmark.Handler;
 
 /// <summary>

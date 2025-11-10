@@ -1,3 +1,7 @@
+#if FANTASY_NET
+using System;
+using System.Collections.Generic;
+using System.IO;
 using Fantasy.Async;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser;
@@ -9,7 +13,6 @@ using Fantasy.Serialize;
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-#if FANTASY_NET
 namespace Fantasy.Network;
 
 /// <summary>

@@ -1,5 +1,6 @@
 #if FANTASY_NET
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+using System;
 using Fantasy.IdFactory;
 using Fantasy.Network;
 using Fantasy.Network.Interface;

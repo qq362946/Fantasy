@@ -1,8 +1,7 @@
 #if FANTASY_NET
+using System.Collections.Generic;
 using Fantasy.Async;
-using Fantasy.DataStructure.Dictionary;
 using Fantasy.Entitas;
-using Fantasy.Network;
 #pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.

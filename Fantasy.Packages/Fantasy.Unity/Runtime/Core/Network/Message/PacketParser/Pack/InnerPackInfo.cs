@@ -1,6 +1,8 @@
+#if FANTASY_NET
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-
-using Fantasy.Network;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser.Interface;
 using Fantasy.Pool;
@@ -9,7 +11,6 @@ using Fantasy.Serialize;
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8603 // Possible null reference return.
-#if FANTASY_NET
 namespace Fantasy.PacketParser
 {
     public sealed class InnerPackInfo : APackInfo

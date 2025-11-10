@@ -1,5 +1,5 @@
 #if FANTASY_NET
-using System.IO;
+using System;
 using System.Net;
 using Fantasy.Serialize;
 

@@ -1,4 +1,5 @@
 #if FANTASY_NET
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Fantasy.Async;
 using Fantasy.Entitas;

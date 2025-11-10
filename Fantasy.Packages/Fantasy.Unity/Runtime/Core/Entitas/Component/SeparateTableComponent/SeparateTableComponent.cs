@@ -1,13 +1,12 @@
 #if FANTASY_NET
-// ReSharper disable SuspiciousTypeConversion.Global
-
+using System.Collections.Generic;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Database;
 using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
-using Fantasy.Helper;
+// ReSharper disable SuspiciousTypeConversion.Global
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS8604 // Possible null reference argument.

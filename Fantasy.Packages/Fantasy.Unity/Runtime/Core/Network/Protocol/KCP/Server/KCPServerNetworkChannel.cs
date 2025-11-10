@@ -1,8 +1,6 @@
 #if FANTASY_NET
+using System;
 using System.Net;
-using System.Net.Sockets;
-using System.Runtime.CompilerServices;
-using Fantasy.Helper;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser;
 using Fantasy.Serialize;

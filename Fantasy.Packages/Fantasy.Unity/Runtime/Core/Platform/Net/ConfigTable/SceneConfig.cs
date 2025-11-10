@@ -1,8 +1,10 @@
 #if FANTASY_NET
+using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization;
 using Fantasy.DataStructure.Collection;
-using Fantasy.DataStructure.Dictionary;
 using Fantasy.Helper;
 using Fantasy.IdFactory;
 using Newtonsoft.Json;

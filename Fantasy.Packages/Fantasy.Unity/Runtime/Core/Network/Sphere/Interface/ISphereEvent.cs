@@ -1,4 +1,5 @@
 #if FANTASY_NET
+using System;
 using Fantasy.Async;
 using Fantasy.Entitas.Interface;
 // ReSharper disable CheckNamespace

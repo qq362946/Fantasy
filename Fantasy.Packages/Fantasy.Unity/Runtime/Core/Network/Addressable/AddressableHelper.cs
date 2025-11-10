@@ -1,4 +1,5 @@
 #if FANTASY_NET
+using System.Collections.Generic;
 using Fantasy.Async;
 using Fantasy.InnerMessage;
 using Fantasy.Platform.Net;

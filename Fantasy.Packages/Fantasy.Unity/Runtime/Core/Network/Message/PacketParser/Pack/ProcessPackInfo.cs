@@ -1,5 +1,7 @@
 #if FANTASY_NET
+using System;
 using System.Collections.Concurrent;
+using System.IO;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser.Interface;

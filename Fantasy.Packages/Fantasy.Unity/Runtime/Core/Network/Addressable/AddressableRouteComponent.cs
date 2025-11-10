@@ -1,7 +1,8 @@
+#if FANTASY_NET
+using System;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
-using Fantasy.Helper;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser.Interface;
 using Fantasy.Scheduler;
@@ -12,7 +13,7 @@ using Fantasy.Timer;
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-#if FANTASY_NET
+
 namespace Fantasy.Network.Route
 {
     public class AddressableRouteComponentAwakeSystem : AwakeSystem<AddressableRouteComponent>

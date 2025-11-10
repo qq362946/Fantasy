@@ -1,4 +1,5 @@
 #if FANTASY_NET
+using System.Threading.Tasks;
 using Fantasy.Async;
 using Microsoft.AspNetCore.Mvc.Filters;
 

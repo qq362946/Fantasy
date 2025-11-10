@@ -1,4 +1,5 @@
 #if FANTASY_NET
+using System.Collections.Generic;
 namespace Fantasy.Assembly;
 
 /// <summary>

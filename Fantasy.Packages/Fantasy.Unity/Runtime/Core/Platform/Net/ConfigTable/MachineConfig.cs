@@ -1,6 +1,9 @@
 #if FANTASY_NET
 // ReSharper disable InconsistentNaming
+using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization;
 using Fantasy.Helper;
 using Newtonsoft.Json;

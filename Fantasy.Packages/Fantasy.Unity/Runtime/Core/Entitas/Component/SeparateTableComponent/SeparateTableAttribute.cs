@@ -1,4 +1,5 @@
 #if FANTASY_NET
+using System;
 namespace Fantasy.SeparateTable;
 
 /// <summary>

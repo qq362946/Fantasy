@@ -1,5 +1,8 @@
 #if FANTASY_NET || FANTASY_EXPORTER
+using System;
 using System.Buffers;
+using System.IO;
+using System.Linq;
 #if !FANTASY_EXPORTER
 using Fantasy.Assembly;
 using Fantasy.Async;

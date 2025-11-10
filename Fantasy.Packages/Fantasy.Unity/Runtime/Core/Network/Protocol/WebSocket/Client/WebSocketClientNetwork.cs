@@ -1,7 +1,10 @@
 #if FANTASY_NET || FANTASY_CONSOLE
+using System;
 using System.Buffers;
+using System.Collections.Generic;
 using System.IO.Pipelines;
 using System.Net.WebSockets;
+using System.Threading;
 using Fantasy.Async;
 using Fantasy.Helper;
 using Fantasy.Network.Interface;

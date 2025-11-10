@@ -1,4 +1,5 @@
 #if FANTASY_NET
+using System;
 using System.Collections.Frozen;
 using MongoDB.Driver;
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value

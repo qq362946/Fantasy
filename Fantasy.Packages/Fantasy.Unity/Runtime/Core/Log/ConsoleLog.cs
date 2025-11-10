@@ -1,4 +1,5 @@
 #if FANTASY_NET
+using System;
 using Fantasy.Platform.Net;
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 

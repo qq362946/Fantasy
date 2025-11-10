@@ -1,4 +1,7 @@
 #if FANTASY_NET
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;

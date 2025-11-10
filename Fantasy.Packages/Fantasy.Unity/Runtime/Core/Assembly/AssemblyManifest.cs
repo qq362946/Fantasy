@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas.Interface;
@@ -243,13 +244,13 @@ namespace Fantasy.Assembly
             {
                 AssemblyLifecycle.OnUnLoad(manifest).Coroutine();
                 Manifests.Remove(assemblyManifestId);
-                manifest.CustomInterfaceRegistrar.Register(manifest.CustomInterfaces);
+                manifest.CustomInterfaceRegistrar.UnRegister(manifest.CustomInterfaces);
             }
 #else
             if (Manifests.TryRemove(assemblyManifestId, out var manifest))
             {
                 AssemblyLifecycle.OnUnLoad(manifest).Coroutine();
-                manifest.CustomInterfaceRegistrar.Register(manifest.CustomInterfaces);
+                manifest.CustomInterfaceRegistrar.UnRegister(manifest.CustomInterfaces);
             }
 #endif
         }

@@ -1,5 +1,8 @@
 #if FANTASY_NET
+using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas;

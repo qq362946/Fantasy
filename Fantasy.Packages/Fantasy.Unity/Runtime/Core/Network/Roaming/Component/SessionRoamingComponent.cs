@@ -1,4 +1,6 @@
 #if FANTASY_NET
+using System;
+using System.Collections.Generic;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;

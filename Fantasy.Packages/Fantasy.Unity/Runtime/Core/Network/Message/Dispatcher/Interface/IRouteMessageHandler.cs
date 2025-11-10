@@ -1,10 +1,8 @@
+#if FANTASY_NET
+using System;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.InnerMessage;
-using Fantasy.Network;
-using Fantasy.Serialize;
-
-#if FANTASY_NET
 // ReSharper disable InconsistentNaming
 
 namespace Fantasy.Network.Interface

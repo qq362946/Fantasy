@@ -1,14 +1,12 @@
 #if FANTASY_NET
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-using System.Runtime.CompilerServices;
+using System;
 using Fantasy.Async;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
-using Fantasy.PacketParser;
 using Fantasy.PacketParser.Interface;
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8604 // Possible null reference argument.
-
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy.Scheduler
 {
