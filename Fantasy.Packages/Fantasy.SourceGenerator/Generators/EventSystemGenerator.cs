@@ -144,7 +144,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginNamespace("Fantasy.Generated");
             // 开始类定义（实现 IEventSystemRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Event System registration class for {assemblyName}");
-            builder.BeginClass(markerClassName, "internal sealed", "IEventSystemRegistrar");
+            builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IEventSystemRegistrar");
             // 生成字段用于存储已注册的事件处理器（用于 UnRegister）
             try
             {
@@ -171,8 +171,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AddXmlComment("Register all Event Systems to the containers");
             builder.BeginMethod(
                 "public void Register(" +
-                "OneToManyList<RuntimeTypeHandle, IEvent> events, " +
-                "OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents)");
+                "global::Fantasy.DataStructure.Collection.OneToManyList<RuntimeTypeHandle, global::Fantasy.Event.IEvent> events, " +
+                "global::Fantasy.DataStructure.Collection.OneToManyList<RuntimeTypeHandle, global::Fantasy.Event.IEvent> asyncEvents)");
             try
             {
                 foreach (var eventSystemTypeInfo in eventSystems)
@@ -197,8 +197,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
             builder.BeginMethod(
                 "public void UnRegister(" +
-                "OneToManyList<RuntimeTypeHandle, IEvent> events, " +
-                "OneToManyList<RuntimeTypeHandle, IEvent> asyncEvents)");
+                "global::Fantasy.DataStructure.Collection.OneToManyList<RuntimeTypeHandle, global::Fantasy.Event.IEvent> events, " +
+                "global::Fantasy.DataStructure.Collection.OneToManyList<RuntimeTypeHandle, global::Fantasy.Event.IEvent> asyncEvents)");
             try
             {
                 foreach (var eventSystemTypeInfo in eventSystems)
@@ -250,18 +250,18 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginNamespace("Fantasy.Generated");
             // 开始类定义（实现 ISphereEventRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Sphere Event System registration class for {assemblyName}");
-            builder.BeginClass(markerClassName, "internal sealed", "ISphereEventRegistrar");
+            builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.ISphereEventRegistrar");
             // 生成字段用于存储已注册的事件处理器（用于 UnRegister）
             foreach (var eventSystemTypeInfo in sphereEventSystem)
             {
                 var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
                 builder.AppendLine($"private long {fieldName}TypeHashCode;");
-                builder.AppendLine($"private Func<Scene, SphereEventArgs, FTask> {fieldName}Delegate;");
+                builder.AppendLine($"private Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask> {fieldName}Delegate;");
             }
             // 生成注册方法
             builder.AddXmlComment("Register all SphereEvent to the containers");
             builder.BeginMethod(
-                "public void Register(OneToManyHashSet<long, Func<Scene, SphereEventArgs, FTask>> sphereEvents)");
+                "public void Register(global::Fantasy.DataStructure.Collection.OneToManyHashSet<long, Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>> sphereEvents)");
             try
             {
                 foreach (var eventSystemTypeInfo in sphereEventSystem)
@@ -282,7 +282,7 @@ namespace Fantasy.SourceGenerator.Generators
             // 生成取消注册方法
             builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
             builder.BeginMethod(
-                "public void UnRegister(OneToManyHashSet<long, Func<Scene, SphereEventArgs, FTask>> sphereEvents)");
+                "public void UnRegister(global::Fantasy.DataStructure.Collection.OneToManyHashSet<long, Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>> sphereEvents)");
             try
             {
                 foreach (var eventSystemTypeInfo in sphereEventSystem)

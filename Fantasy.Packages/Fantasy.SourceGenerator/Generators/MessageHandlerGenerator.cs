@@ -85,7 +85,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine();
             builder.BeginNamespace("Fantasy.Generated");
             builder.AddXmlComment($"Auto-generated message handler registration class for {assemblyName}");
-            builder.BeginClass(markerClassName, "internal sealed", "IMessageHandlerResolver");
+            builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IMessageHandlerResolver");
             // 生成字段用于存储已注册的实例（用于 UnRegister）
             GenerateFields(builder, messageHandlers, routeMessageHandlers);
             // 生成 Register 方法
@@ -103,12 +103,12 @@ namespace Fantasy.SourceGenerator.Generators
             {
                 foreach (var messageHandlerInfo in messageHandlers)
                 {
-                    builder.AppendLine($"private Func<Session, uint, uint, object, FTask> message_{messageHandlerInfo.TypeName} = new {messageHandlerInfo.TypeFullName}().Handle;");
+                    builder.AppendLine($"private Func<global::Fantasy.Network.Session, uint, uint, object, global::Fantasy.Async.FTask> message_{messageHandlerInfo.TypeName} = new {messageHandlerInfo.TypeFullName}().Handle;");
                 }
 
                 foreach (var messageHandlerInfo in routeMessageHandlers)
                 {
-                    builder.AppendLine($"private Func<Session, Entity, uint, object, FTask> routeMessage_{messageHandlerInfo.TypeName} = new {messageHandlerInfo.TypeFullName}().Handle;");
+                    builder.AppendLine($"private Func<global::Fantasy.Network.Session, global::Fantasy.Entitas.Entity, uint, object, global::Fantasy.Async.FTask> routeMessage_{messageHandlerInfo.TypeName} = new {messageHandlerInfo.TypeFullName}().Handle;");
                 }
 
                 builder.AppendLine();
@@ -130,7 +130,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine($"return {routeMessageHandlers.Count};");
             builder.EndMethod();
             builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            builder.BeginMethod("public bool MessageHandler(Session session, uint rpcId, uint protocolCode, object message)");
+            builder.BeginMethod("public bool MessageHandler(global::Fantasy.Network.Session session, uint rpcId, uint protocolCode, object message)");
             try
             {
                 if (messageHandlers.Any())
@@ -171,7 +171,7 @@ namespace Fantasy.SourceGenerator.Generators
             
             builder.AppendLine("#if FANTASY_NET", false);
             builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            builder.BeginMethod("public async FTask<bool> RouteMessageHandler(Session session, Entity entity, uint rpcId, uint protocolCode, object message)");
+            builder.BeginMethod("public async global::Fantasy.Async.FTask<bool> RouteMessageHandler(global::Fantasy.Network.Session session, global::Fantasy.Entitas.Entity entity, uint rpcId, uint protocolCode, object message)");
             try
             {
                 if (routeMessageHandlers.Any())
@@ -192,7 +192,7 @@ namespace Fantasy.SourceGenerator.Generators
                     builder.AppendLine("default:");
                     builder.AppendLine("{");
                     builder.Indent();
-                    builder.AppendLine($"await FTask.CompletedTask;");
+                    builder.AppendLine($"await global::Fantasy.Async.FTask.CompletedTask;");
                     builder.AppendLine($"return false;");
                     builder.Unindent();
                     builder.AppendLine("}");
@@ -201,7 +201,7 @@ namespace Fantasy.SourceGenerator.Generators
                 }
                 else
                 {
-                    builder.AppendLine($"await FTask.CompletedTask;");
+                    builder.AppendLine($"await global::Fantasy.Async.FTask.CompletedTask;");
                     builder.AppendLine($"return false;");
                 }
             }

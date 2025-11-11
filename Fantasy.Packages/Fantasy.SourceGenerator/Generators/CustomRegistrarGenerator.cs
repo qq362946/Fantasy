@@ -68,10 +68,10 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginNamespace("Fantasy.Generated");
             // 开始类定义（实现 ISphereEventRegistrar 接口）
             builder.AddXmlComment($"Auto-generated CustomInterface registration class for {assemblyName}");
-            builder.BeginClass(markerClassName, "internal sealed", "ICustomInterfaceRegistrar");
+            builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.ICustomInterfaceRegistrar");
             // 生成注册方法
             builder.AddXmlComment("Register all CustomInterface to the containers");
-            builder.BeginMethod("public void Register(OneToManyList<long, Type> customRegistrar)");
+            builder.BeginMethod("public void Register(global::Fantasy.DataStructure.Collection.OneToManyList<long, Type> customRegistrar)");
             foreach (var customRegistrarType in customRegistrarTypeInfos)
             {
                 foreach (var interfaceInfo in customRegistrarType.AllInterfaces)
@@ -83,7 +83,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine();
             // 生成取消注册方法
             builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
-            builder.BeginMethod("public void UnRegister(OneToManyList<long, Type> customRegistrar)");
+            builder.BeginMethod("public void UnRegister(global::Fantasy.DataStructure.Collection.OneToManyList<long, Type> customRegistrar)");
             foreach (var customRegistrarType in customRegistrarTypeInfos)
             {
                 foreach (var interfaceInfo in customRegistrarType.AllInterfaces)

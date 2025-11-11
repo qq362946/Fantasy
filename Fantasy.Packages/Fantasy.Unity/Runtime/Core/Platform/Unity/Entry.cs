@@ -4,6 +4,7 @@ using System.Linq;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Serialize;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Scripting;
 
@@ -43,14 +44,15 @@ namespace Fantasy.Platform.Unity
         /// <summary>
         /// 初始化框架
         /// </summary>
-        public static async FTask Initialize()
+        public static async FTask Initialize(ILog logger = null)
         {
             if (_isInit)
             {
                 Log.Error("Fantasy has already been initialized and does not need to be initialized again!");
                 return;
             }
-            Log.Initialize(new UnityLog());
+
+            Log.Initialize(logger ?? new UnityLog());
             FantasyObject.OnRuntimeMethodLoad();
             ProgramDefine.MaxMessageSize = ushort.MaxValue * 16;
             Log.Info($"Fantasy Version:{ProgramDefine.VERSION}");

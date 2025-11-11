@@ -101,7 +101,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginNamespace("Fantasy.Generated");
             // 开始类定义（实现 IEntitySystemRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Entity System registration class for {assemblyName}");
-            builder.BeginClass(markerClassName, "internal sealed", "IEntitySystemRegistrar");
+            builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IEntitySystemRegistrar");
             // 生成字段用于存储 System 实例
             GenerateFields(builder, entitySystemTypeInfos);
             // 生成注册方法
@@ -147,20 +147,20 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("#if FANTASY_NET", false);
             builder.BeginMethod(
                 "public void RegisterSystems(" +
-                "Dictionary<long, Action<Entity>> awakeSystems, " +
-                "Dictionary<long, Action<Entity>> updateSystems, " +
-                "Dictionary<long, Action<Entity>> destroySystems, " +
-                "Dictionary<long, Action<Entity>> deserializeSystems)");
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> awakeSystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> updateSystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> destroySystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> deserializeSystems)");
             builder.AppendLine("#endif", false);
             builder.Unindent();
             builder.AppendLine("#if FANTASY_UNITY", false);
             builder.BeginMethod(
                 "public void RegisterSystems(" +
-                "Dictionary<long, Action<Entity>> awakeSystems, " +
-                "Dictionary<long, Action<Entity>> updateSystems, " +
-                "Dictionary<long, Action<Entity>> destroySystems, " +
-                "Dictionary<long, Action<Entity>> deserializeSystems, " +
-                "Dictionary<long, Action<Entity>> lateUpdateSystems)");
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> awakeSystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> updateSystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> destroySystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> deserializeSystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> lateUpdateSystems)");
             builder.AppendLine("#endif", false);
 
             try
@@ -219,20 +219,20 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("#if FANTASY_NET", false);
             builder.BeginMethod(
                 "public void UnRegisterSystems(" +
-                "Dictionary<long, Action<Entity>> awakeSystems, " +
-                "Dictionary<long, Action<Entity>> updateSystems, " +
-                "Dictionary<long, Action<Entity>> destroySystems, " +
-                "Dictionary<long, Action<Entity>> deserializeSystems)");
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> awakeSystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> updateSystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> destroySystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> deserializeSystems)");
             builder.AppendLine("#endif", false);
             builder.Unindent();
             builder.AppendLine("#if FANTASY_UNITY", false);
             builder.BeginMethod(
                 "public void UnRegisterSystems(" +
-                "Dictionary<long, Action<Entity>> awakeSystems, " +
-                "Dictionary<long, Action<Entity>> updateSystems, " +
-                "Dictionary<long, Action<Entity>> destroySystems, " +
-                "Dictionary<long, Action<Entity>> deserializeSystems, " +
-                "Dictionary<long, Action<Entity>> lateUpdateSystems)");
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> awakeSystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> updateSystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> destroySystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> deserializeSystems, " +
+                "Dictionary<long, Action<global::Fantasy.Entitas.Entity>> lateUpdateSystems)");
             builder.AppendLine("#endif", false);
 
             try

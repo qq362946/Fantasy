@@ -70,7 +70,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginNamespace("Fantasy.Generated");
             // 开始类定义（实现 IEntityTypeCollectionRegistrar 接口）
             builder.AddXmlComment($"Automatically generated Entity Type collection class for {assemblyName}");
-            builder.BeginClass(markerClassName, "internal sealed", "IEntityTypeCollectionRegistrar");
+            builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IEntityTypeCollectionRegistrar");
             // 生成 GetEntityTypes 方法
             GetEntityTypesMethod(builder, entityTypeList);
             builder.AppendLine();

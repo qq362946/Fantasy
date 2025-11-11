@@ -82,7 +82,7 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.BeginNamespace("Fantasy.Generated");
         // 开始类定义（实现 INetworkProtocolRegistrar 接口）
         builder.AddXmlComment($"Auto-generated NetworkProtocol registration class for {assemblyName}");
-        builder.BeginClass(markerClassName, "internal sealed", "INetworkProtocolRegistrar");
+        builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.INetworkProtocolRegistrar");
         builder.BeginMethod("public List<Type> GetNetworkProtocolTypes()");
         try
         {
@@ -141,7 +141,7 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.BeginNamespace("Fantasy.Generated");
         // 开始类定义（实现 IOpCodeRegistrar 接口）
         builder.AddXmlComment($"Auto-generated OpCodeRegistrar class for {assemblyName}");
-        builder.BeginClass(markerClassName, "internal sealed", "IOpCodeRegistrar");
+        builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IOpCodeRegistrar");
         // 开始定义GetOpCodeCount方法
         builder.AddXmlComment("GetOpCodeCount");
         builder.BeginMethod("public int GetOpCodeCount()");
@@ -226,7 +226,7 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.BeginNamespace("Fantasy.Generated");
         // 开始类定义（实现 IResponseTypeRegistrar 接口）
         builder.AddXmlComment($"Auto-generated ResponseTypeRegistrar class for {assemblyName}");
-        builder.BeginClass(markerClassName, "internal sealed", "IResponseTypeRegistrar");
+        builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IResponseTypeRegistrar");
         builder.AddXmlComment($"GetRequestCount");
         builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
         builder.BeginMethod("public int GetRequestCount()");

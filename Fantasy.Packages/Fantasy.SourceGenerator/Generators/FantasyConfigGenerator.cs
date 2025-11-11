@@ -63,7 +63,7 @@ namespace Fantasy.SourceGenerator.Generators
                 builder.BeginNamespace("Fantasy.Generated");
                 // 开始类定义（实现 IFantasyConfigRegistrar 接口）
                 builder.AddXmlComment($"Auto-generated Entity System registration class for {assemblyName}");
-                builder.BeginClass(markerClassName, "internal sealed", "IFantasyConfigRegistrar");
+                builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IFantasyConfigRegistrar");
                 builder.BeginMethod("public Dictionary<string, int> GetDatabaseNameDictionary()");
                 builder.AppendLine("var dbNameDictionary = new Dictionary<string, int>();");
                 if (config is { ConfigContent: true, Root: not null })

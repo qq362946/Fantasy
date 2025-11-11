@@ -121,7 +121,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginNamespace("Fantasy.Generated");
             // 开始类定义（实现 ISeparateTableRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Entity System registration class for {assemblyName}");
-            builder.BeginClass(markerClassName, "internal sealed", "ISeparateTableRegistrar");
+            builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.ISeparateTableRegistrar");
             // 生成字段用于存储已注册（用于 UnRegister）
             GenerateFields(builder, separateTableTypeInfoList);
             // 生成注册方法
@@ -163,7 +163,7 @@ namespace Fantasy.SourceGenerator.Generators
         private static void GenerateFields(SourceCodeBuilder builder, List<SeparateTableTypeInfo> separateTableTypeInfoList)
         {
             var separateTableInfoBuilder = new SourceCodeBuilder();
-            separateTableInfoBuilder.AppendLine("private readonly List<ISeparateTableRegistrar.SeparateTableInfo> _separateTableInfos = new List<ISeparateTableRegistrar.SeparateTableInfo>()");
+            separateTableInfoBuilder.AppendLine("private readonly List<global::Fantasy.Assembly.ISeparateTableRegistrar.SeparateTableInfo> _separateTableInfos = new List<global::Fantasy.Assembly.ISeparateTableRegistrar.SeparateTableInfo>()");
             separateTableInfoBuilder.Indent(2);
             separateTableInfoBuilder.AppendLine("{");
             separateTableInfoBuilder.Indent(1);
@@ -177,7 +177,7 @@ namespace Fantasy.SourceGenerator.Generators
                         foreach (var separateTableInfo in separateTableTypeInfo.SeparateTableInfo)
                         {
                             separateTableInfoBuilder.AppendLine(
-                                $"new ISeparateTableRegistrar.SeparateTableInfo(typeof({separateTableInfo.Key}) ,typeof({separateTableTypeInfo.TypeFullName}) ,\"{separateTableInfo.Value}\"),");
+                                $"new global::Fantasy.Assembly.ISeparateTableRegistrar.SeparateTableInfo(typeof({separateTableInfo.Key}) ,typeof({separateTableTypeInfo.TypeFullName}) ,\"{separateTableInfo.Value}\"),");
                         }
                     }
                 }
@@ -194,7 +194,7 @@ namespace Fantasy.SourceGenerator.Generators
 
         private static void GenerateRegisterMethod(SourceCodeBuilder builder, List<SeparateTableTypeInfo> separateTableTypeInfos)
         {
-            builder.BeginMethod("public List<ISeparateTableRegistrar.SeparateTableInfo> Register()");
+            builder.BeginMethod("public List<global::Fantasy.Assembly.ISeparateTableRegistrar.SeparateTableInfo> Register()");
             builder.AppendLine("return _separateTableInfos;");
             builder.EndMethod();
             builder.AppendLine();
@@ -202,7 +202,7 @@ namespace Fantasy.SourceGenerator.Generators
 
         private static void GenerateUnRegisterMethod(SourceCodeBuilder builder, List<SeparateTableTypeInfo> separateTableTypeInfos)
         {
-            builder.BeginMethod("public List<ISeparateTableRegistrar.SeparateTableInfo> UnRegister()");
+            builder.BeginMethod("public List<global::Fantasy.Assembly.ISeparateTableRegistrar.SeparateTableInfo> UnRegister()");
             builder.AppendLine("return _separateTableInfos;");
             builder.EndMethod();
             builder.AppendLine();
