@@ -11,6 +11,6 @@ public sealed class C2G_UnsubscribeSphereEventRequestHandler : MessageRPC<C2G_Un
     {
         var sceneConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0];
         // 注销远程订阅者
-        await session.Scene.SphereEventComponent.RevokeRemoteSubscriber<TestSphereEvent>(sceneConfig.RouteId);
+        await session.Scene.SphereEventComponent.RevokeRemoteSubscriber<TestSphereEvent>(sceneConfig.Address);
     }
 }

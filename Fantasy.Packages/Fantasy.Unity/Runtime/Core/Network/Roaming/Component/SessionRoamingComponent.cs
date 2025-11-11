@@ -88,30 +88,30 @@ public sealed class SessionRoamingComponent : Entity
     /// <returns>如果建立完成会返回为0，其余不为0的都是发生错误了。可以通过InnerErrorCode.cs来查看错误。</returns>
     public async FTask<uint> Link(Session session, SceneConfig targetSceneConfig, int roamingTyp)
     {
-        return await Link(targetSceneConfig.RouteId, session.RuntimeId, roamingTyp);
+        return await Link(targetSceneConfig.Address, session.RuntimeId, roamingTyp);
     }
 
     /// <summary>
     /// 建立漫游关系。
     /// </summary>
-    /// <param name="targetSceneRouteId">要建立漫游协议的目标Scene的RouteId。</param>
-    /// <param name="forwardSessionRouteId">需要转发的Session的RouteId。</param>
+    /// <param name="targetSceneAddress">要建立漫游协议的目标Scene的Address。</param>
+    /// <param name="forwardSessionAddress">需要转发的Session的Address。</param>
     /// <param name="roamingType">要创建的漫游协议类型。</param>
     /// <returns>如果建立完成会返回为0，其余不为0的都是发生错误了。可以通过InnerErrorCode.cs来查看错误。</returns>
-    public async FTask<uint> Link(long targetSceneRouteId, long forwardSessionRouteId, int roamingType)
+    public async FTask<uint> Link(long targetSceneAddress, long forwardSessionAddress, int roamingType)
     {
         if (_roaming.ContainsKey(roamingType))
         {
             return InnerErrorCode.ErrLinkRoamingAlreadyExists;
         }
 
-        var response = (I_LinkRoamingResponse)await Scene.NetworkMessagingComponent.CallInnerRoute(targetSceneRouteId,
+        var response = (I_LinkRoamingResponse)await Scene.NetworkMessagingComponent.Call(targetSceneAddress,
             new I_LinkRoamingRequest()
             {
                 RoamingId = Id,
                 RoamingType = roamingType,
-                ForwardSessionRouteId = forwardSessionRouteId,
-                SceneRouteId = Scene.RuntimeId
+                ForwardSessionAddress = forwardSessionAddress,
+                SceneAddress = Scene.RuntimeId
             });
         
         if (response.ErrorCode != 0)
@@ -121,8 +121,8 @@ public sealed class SessionRoamingComponent : Entity
 
         var roaming = Entity.Create<Roaming>(Scene, true, true);
         roaming.TerminusId = response.TerminusId;
-        roaming.TargetSceneRouteId = targetSceneRouteId;
-        roaming.ForwardSessionRouteId = forwardSessionRouteId;
+        roaming.TargetSceneAddress = targetSceneAddress;
+        roaming.ForwardSessionAddress = forwardSessionAddress;
         roaming.SessionRoamingComponent = this;
         roaming.RoamingType = roamingType;
         roaming.RoamingLock = RoamingLock;
@@ -202,7 +202,7 @@ public sealed class SessionRoamingComponent : Entity
     /// </summary>
     /// <param name="roamingType"></param>
     /// <param name="message"></param>
-    public void Send<T>(int roamingType, T message) where T : IRouteMessage
+    public void Send<T>(int roamingType, T message) where T : IAddressMessage
     {
         Call(roamingType, message).Coroutine();
     }
@@ -223,7 +223,7 @@ public sealed class SessionRoamingComponent : Entity
     /// <param name="roamingType"></param>
     /// <param name="message"></param>
     /// <returns></returns>
-    public async FTask<IResponse> Call<T>(int roamingType, T message) where T : IRouteMessage
+    public async FTask<IResponse> Call<T>(int roamingType, T message) where T : IAddressMessage
     {
         if (!_roaming.TryGetValue(roamingType, out var roaming))
         {
@@ -232,7 +232,7 @@ public sealed class SessionRoamingComponent : Entity
 
         var failCount = 0;
         var runtimeId = RuntimeId;
-        var routeId = roaming.TerminusId;
+        var address = roaming.TerminusId;
         
         IResponse iRouteResponse = null;
 
@@ -240,17 +240,17 @@ public sealed class SessionRoamingComponent : Entity
         {
             while (!IsDisposed)
             {
-                if (routeId == 0)
+                if (address == 0)
                 {
-                    routeId = await roaming.GetTerminusId();
+                    address = await roaming.GetTerminusId();
                 }
 
-                if (routeId == 0)
+                if (address == 0)
                 {
                     return MessageDispatcherComponent.CreateResponse(message.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
                 }
 
-                iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(routeId, message);
+                iRouteResponse = await NetworkMessagingComponent.Call(address, message);
 
                 if (runtimeId != RuntimeId)
                 {
@@ -269,7 +269,7 @@ public sealed class SessionRoamingComponent : Entity
                     {
                         if (++failCount > 20)
                         {
-                            Log.Error($"RoamingComponent.Call failCount > 20 route send message fail, LinkRoamingId: {routeId}");
+                            Log.Error($"RoamingComponent.Call failCount > 20 route send message fail, LinkRoamingId: {address}");
                             return iRouteResponse;
                         }
 
@@ -280,7 +280,7 @@ public sealed class SessionRoamingComponent : Entity
                             iRouteResponse.ErrorCode = InnerErrorCode.ErrNotFoundRoaming;
                         }
 
-                        routeId = 0;
+                        address = 0;
                         continue;
                     }
                     default:
@@ -319,7 +319,7 @@ public sealed class SessionRoamingComponent : Entity
         
         var failCount = 0;
         var runtimeId = RuntimeId;
-        var routeId = roaming.TerminusId;
+        var address = roaming.TerminusId;
         IResponse iRouteResponse = null;
         
         try
@@ -328,17 +328,17 @@ public sealed class SessionRoamingComponent : Entity
             {
                 while (!IsDisposed)
                 {
-                    if (routeId == 0)
+                    if (address == 0)
                     {
-                        routeId = await roaming.GetTerminusId();
+                        address = await roaming.GetTerminusId();
                     }
 
-                    if (routeId == 0)
+                    if (address == 0)
                     {
                         return MessageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
                     }
 
-                    iRouteResponse = await NetworkMessagingComponent.CallInnerRoute(routeId, requestType, packInfo);
+                    iRouteResponse = await NetworkMessagingComponent.Call(address, requestType, packInfo);
 
                     if (runtimeId != RuntimeId)
                     {
@@ -357,7 +357,7 @@ public sealed class SessionRoamingComponent : Entity
                         {
                             if (++failCount > 20)
                             {
-                                Log.Error($"RoamingComponent.Call failCount > 20 route send message fail, LinkRoamingId: {routeId}");
+                                Log.Error($"RoamingComponent.Call failCount > 20 route send message fail, LinkRoamingId: {address}");
                                 return iRouteResponse;
                             }
 
@@ -367,7 +367,7 @@ public sealed class SessionRoamingComponent : Entity
                             {
                                 iRouteResponse.ErrorCode = InnerErrorCode.ErrNotFoundRoaming;
                             }
-                            routeId = 0;
+                            address = 0;
                             continue;
                         }
                         default:

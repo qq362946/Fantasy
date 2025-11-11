@@ -11,18 +11,18 @@ using Fantasy.Network.Interface;
 namespace Fantasy.Sphere;
 
 /// <summary>
-/// 处理领域事件发布请求的路由消息处理器。
+/// 处理领域事件发布请求的消息处理器。
 /// 用于接收远程节点发布的领域事件,并触发本地订阅者的事件处理。
 /// </summary>
-internal sealed class I_PublishSphereEventRequestHandler : RouteRPC<Scene, I_PublishSphereEventRequest, I_PublishSphereEventResponse>
+internal sealed class I_PublishSphereEventRequestHandler : AddressRPC<Scene, I_PublishSphereEventRequest, I_PublishSphereEventResponse>
 {
     protected override async FTask Run(Scene scene, I_PublishSphereEventRequest request, I_PublishSphereEventResponse response, Action reply)
     {
-        // 验证 RouteId 是否有效
-        // RouteId 用于标识发布者,不能为 0
-        if (request.RouteId == 0)
+        // 验证 Address 是否有效
+        // Address用于标识发布者,不能为 0
+        if (request.Address == 0)
         {
-            response.ErrorCode = InnerErrorCode.ErrPublishSphereEventInvalidRouteId;
+            response.ErrorCode = InnerErrorCode.ErrPublishSphereEventInvalidAddress;
             return;
         }
 
@@ -36,7 +36,7 @@ internal sealed class I_PublishSphereEventRequestHandler : RouteRPC<Scene, I_Pub
 
         // 处理远程发布的事件并调用本地订阅者
         // 将事件分发给所有订阅了该事件类型的本地处理器
-        response.ErrorCode = await scene.SphereEventComponent.HandleRemotePublication(request.RouteId, request.SphereEventArgs);
+        response.ErrorCode = await scene.SphereEventComponent.HandleRemotePublication(request.Address, request.SphereEventArgs);
     }
 }
 #endif

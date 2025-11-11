@@ -46,9 +46,9 @@ namespace Fantasy.Network.Route
         /// 添加地址映射。
         /// </summary>
         /// <param name="addressableId">地址映射的唯一标识。</param>
-        /// <param name="routeId">路由 ID。</param>
+        /// <param name="address">Address。</param>
         /// <param name="isLock">是否进行锁定。</param>
-        public async FTask Add(long addressableId, long routeId, bool isLock)
+        public async FTask Add(long addressableId, long address, bool isLock)
         {
             WaitCoroutineLock waitCoroutineLock = null;
             
@@ -59,9 +59,9 @@ namespace Fantasy.Network.Route
                     waitCoroutineLock = await AddressableLock.Wait(addressableId);
                 }
                 
-                Addressable[addressableId] = routeId;
+                Addressable[addressableId] = address;
 #if FANTASY_DEVELOP
-                Log.Debug($"AddressableManageComponent Add addressableId:{addressableId} routeId:{routeId}");
+                Log.Debug($"AddressableManageComponent Add addressableId:{addressableId} Address:{address}");
 #endif
             }
             catch (Exception e)
@@ -75,16 +75,16 @@ namespace Fantasy.Network.Route
         }
 
         /// <summary>
-        /// 获取地址映射的路由 ID。
+        /// 获取地址映射的Address。
         /// </summary>
         /// <param name="addressableId">地址映射的唯一标识。</param>
-        /// <returns>地址映射的路由 ID。</returns>
+        /// <returns>地址映射的Address。</returns>
         public async FTask<long> Get(long addressableId)
         {
             using (await AddressableLock.Wait(addressableId))
             {
-                Addressable.TryGetValue(addressableId, out var routeId);
-                return routeId;
+                Addressable.TryGetValue(addressableId, out var address);
+                return address;
             }
         }
 
@@ -117,9 +117,9 @@ namespace Fantasy.Network.Route
         /// 解锁地址映射。
         /// </summary>
         /// <param name="addressableId">地址映射的唯一标识。</param>
-        /// <param name="routeId">新的路由 ID。</param>
+        /// <param name="address">Address。</param>
         /// <param name="source">解锁来源。</param>
-        public void UnLock(long addressableId, long routeId, string source)
+        public void UnLock(long addressableId, long address, string source)
         {
             if (!Locks.Remove(addressableId, out var coroutineLock))
             {
@@ -127,17 +127,12 @@ namespace Fantasy.Network.Route
                 return;
             }
 
-            Addressable.TryGetValue(addressableId, out var oldAddressableId);
-
-            if (routeId != 0)
+            if (address != 0)
             {
-                Addressable[addressableId] = routeId;
+                Addressable[addressableId] = address;
             }
 
             coroutineLock.Dispose();
-#if FANTASY_DEVELOP
-            Log.Debug($"Addressable UnLock key: {addressableId} oldAddressableId : {oldAddressableId} routeId: {routeId}  Source:{source}");
-#endif
         }
     }
 }

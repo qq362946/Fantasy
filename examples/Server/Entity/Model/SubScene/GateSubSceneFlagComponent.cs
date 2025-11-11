@@ -4,11 +4,11 @@ namespace Fantasy;
 
 public sealed class GateSubSceneFlagComponent : Entity
 {
-    public long SubSceneRouteId;
+    public long SubSceneAddressId;
 
     public override void Dispose()
     {
-        SubSceneRouteId = 0;
+        SubSceneAddressId = 0;
         base.Dispose();
     }
 }

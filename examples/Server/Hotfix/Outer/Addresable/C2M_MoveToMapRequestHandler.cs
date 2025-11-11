@@ -23,7 +23,7 @@ public class C2M_MoveToMapRequestHandler : AddressableRPC<Unit, C2M_MoveToMapReq
         // 其他的任何销毁这个AddressableMessageComponent方法都会去Addressable里删除自己的位置信息。
         await unit.GetComponent<AddressableMessageComponent>().LockAndRelease();
         // 3、通过NetworkMessagingComponent发送内部消息给Map的Scene。
-        var sendResponse = await scene.NetworkMessagingComponent.CallInnerRoute(mapSceneConfig.RouteId,
+        var sendResponse = await scene.NetworkMessagingComponent.Call(mapSceneConfig.Address,
             new M2M_SendUnitRequest()
             {
                 Unit = unit

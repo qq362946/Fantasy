@@ -7,13 +7,13 @@ using Fantasy.Network.Interface;
 
 namespace Fantasy.Roaming.Handler;
 
-public sealed class I_LinkRoamingRequestHandler : RouteRPC<Scene, I_LinkRoamingRequest, I_LinkRoamingResponse>
+public sealed class I_LinkRoamingRequestHandler : AddressRPC<Scene, I_LinkRoamingRequest, I_LinkRoamingResponse>
 {
     protected override async FTask Run(Scene scene, I_LinkRoamingRequest request, I_LinkRoamingResponse response, Action reply)
     {
         var (errorCode, roamingTerminal) = await scene.TerminusComponent.Create(
             request.RoamingId, request.RoamingType,
-            request.ForwardSessionRouteId, request.SceneRouteId);
+            request.ForwardSessionAddress, request.SceneAddress);
         
         if (errorCode != 0)
         {

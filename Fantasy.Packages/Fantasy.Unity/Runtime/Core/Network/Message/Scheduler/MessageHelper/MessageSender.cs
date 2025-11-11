@@ -18,9 +18,9 @@ namespace Fantasy.Scheduler
         /// </summary>
         public uint RpcId { get; private set; }
         /// <summary>
-        /// 获取或设置路由 ID。
+        /// 获取或设置Address。
         /// </summary>
-        public long RouteId { get; private set; }
+        public long Address { get; private set; }
         /// <summary>
         /// 获取或设置创建时间。
         /// </summary>
@@ -44,7 +44,7 @@ namespace Fantasy.Scheduler
         public void Dispose()
         {
             RpcId = 0;
-            RouteId = 0;
+            Address = 0;
             CreateTime = 0;
             Tcs = null;
             Request = null;
@@ -89,16 +89,16 @@ namespace Fantasy.Scheduler
         /// 创建一个 <see cref="MessageSender"/> 实例。
         /// </summary>
         /// <param name="rpcId">RPC ID。</param>
-        /// <param name="routeId">路由 ID。</param>
+        /// <param name="address">Address。</param>
         /// <param name="request">路由消息请求。</param>
         /// <param name="tcs">任务。</param>
         /// <returns>创建的 <see cref="MessageSender"/> 实例。</returns>
-        public static MessageSender Create(uint rpcId, long routeId, IRouteMessage request, FTask<IResponse> tcs)
+        public static MessageSender Create(uint rpcId, long address, IAddressMessage request, FTask<IResponse> tcs)
         {
             var routeMessageSender = new MessageSender();
             routeMessageSender.Tcs = tcs;
             routeMessageSender.RpcId = rpcId;
-            routeMessageSender.RouteId = routeId;
+            routeMessageSender.Address = address;
             routeMessageSender.Request = request;
             routeMessageSender.CreateTime = TimeHelper.Now;
             return routeMessageSender;

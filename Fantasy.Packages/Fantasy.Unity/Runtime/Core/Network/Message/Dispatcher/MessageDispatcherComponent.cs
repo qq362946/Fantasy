@@ -59,7 +59,7 @@ namespace Fantasy.Network.Interface
                     return 0;
                 }
 
-                return y.GetRouteMessageHandlerCount().CompareTo(x.GetRouteMessageHandlerCount());
+                return y.GetAddressMessageHandlerCount().CompareTo(x.GetAddressMessageHandlerCount());
             }
         }
 #endif
@@ -135,7 +135,7 @@ namespace Fantasy.Network.Interface
                     InnerNetworkProtocolRegistrar.FillCustomRouteType(opCodes, routeTypes, customRouteTypeCount);
                     _customRouteDictionary = new UInt32FrozenDictionary<int>(opCodes, routeTypes);
                 }
-                var routeMessageHandlerCount = messageHandlerResolver.GetRouteMessageHandlerCount();
+                var routeMessageHandlerCount = messageHandlerResolver.GetAddressMessageHandlerCount();
                 if (routeMessageHandlerCount > 0)
                 {
                     _routeMessageHandlerResolver.Add(messageHandlerResolver);
@@ -204,7 +204,7 @@ namespace Fantasy.Network.Interface
             Log.Warning($"Scene:{session.Scene.Id} Found Unhandled Message: {type}");
         }
 #if FANTASY_NET
-        private async FTask<bool> InnerRouteMessageHandler(Session session, Entity entity, uint rpcId, uint protocolCode, object message)
+        private async FTask<bool> InnerAddressMessageHandler(Session session, Entity entity, uint rpcId, uint protocolCode, object message)
         {
             if (_lastHitRouteMessageHandler != null &&
                 await _lastHitRouteMessageHandler(session, entity, rpcId, protocolCode, message))
@@ -215,9 +215,9 @@ namespace Fantasy.Network.Interface
             for (var i = 0; i < _routeMessageHandlerResolver.Count; i++)
             {
                 var resolver = _routeMessageHandlerResolver[i];
-                if (await resolver.RouteMessageHandler(session, entity, rpcId, protocolCode, message))
+                if (await resolver.AddressMessageHandler(session, entity, rpcId, protocolCode, message))
                 {
-                    _lastHitRouteMessageHandler = resolver.RouteMessageHandler;
+                    _lastHitRouteMessageHandler = resolver.AddressMessageHandler;
                     return true;
                 }
             }
@@ -225,14 +225,14 @@ namespace Fantasy.Network.Interface
             return false;
         }
 
-        internal async FTask RouteMessageHandler(Session session, Type type, Entity entity, object message, uint rpcId, uint protocolCode)
+        internal async FTask AddressMessageHandler(Session session, Type type, Entity entity, object message, uint rpcId, uint protocolCode)
         {
             if (entity is Scene)
             {
                 // 如果是Scene的话、就不要加锁了、如果加锁很一不小心就可能会造成死锁
-                if (!await InnerRouteMessageHandler(session, entity, rpcId, protocolCode, message))
+                if (!await InnerAddressMessageHandler(session, entity, rpcId, protocolCode, message))
                 {
-                    Log.Warning($"Scene:{session.Scene.Id} Found Unhandled RouteMessage: {type}");
+                    Log.Warning($"Scene:{session.Scene.Id} Found Unhandled AddressMessage: {type}");
                 }
                 return;
             }
@@ -249,7 +249,7 @@ namespace Fantasy.Network.Interface
 
                 if (runtimeId != entity.RuntimeId)
                 {
-                    if (message is IRouteRequest request)
+                    if (message is IAddressRequest request)
                     {
                         FailRouteResponse(session, request.OpCode(), InnerErrorCode.ErrEntityNotFound, rpcId);
                     }
@@ -257,9 +257,9 @@ namespace Fantasy.Network.Interface
                     return;
                 }
 
-                if (!await InnerRouteMessageHandler(session, entity, rpcId, protocolCode, message))
+                if (!await InnerAddressMessageHandler(session, entity, rpcId, protocolCode, message))
                 {
-                    Log.Warning($"Scene:{session.Scene.Id} Found Unhandled RouteMessage: {message.GetType()}");
+                    Log.Warning($"Scene:{session.Scene.Id} Found Unhandled AddressMessage: {message.GetType()}");
                 }
             }
         }
@@ -285,17 +285,17 @@ namespace Fantasy.Network.Interface
             return response;
         }
 
-        private IRouteResponse CreateRouteResponse(uint requestOpCode, uint error, out Type responseType)
+        private IAddressResponse CreateRouteResponse(uint requestOpCode, uint error, out Type responseType)
         {
             if (_responseTypeDictionary.TryGetValue(requestOpCode, out responseType))
             {
-                var findResponse = (IRouteResponse)Activator.CreateInstance(responseType);
+                var findResponse = (IAddressResponse)Activator.CreateInstance(responseType);
                 findResponse.ErrorCode = error;
                 return findResponse;
             }
             
-            responseType = typeof(RouteResponse);
-            var response = new RouteResponse();
+            responseType = typeof(AddressResponse);
+            var response = new AddressResponse();
             response.ErrorCode = error;
             return response;
         }

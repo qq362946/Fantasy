@@ -67,33 +67,33 @@ namespace Fantasy.Network
         /// </summary>
         public const uint ErrTerminusStartTransfer = 100000017;
         /// <summary>
-        /// 表示订阅领域事件时 RouteId 无效的错误代码。
+        /// 表示订阅领域事件时 Address 无效的错误代码。
         /// </summary>
-        public const uint ErrSubscribeSphereEventInvalidRouteId = 100000018;
+        public const uint ErrSubscribeSphereEventInvalidAddress = 100000018;
         /// <summary>
         /// 表示订阅领域事件时 TypeHashCode 无效的错误代码。
         /// </summary>
         public const uint ErrSubscribeSphereEventInvalidTypeHashCode = 100000019;
         /// <summary>
-        /// 表示取消订阅领域事件时 RouteId 无效的错误代码。
+        /// 表示取消订阅领域事件时 Address 无效的错误代码。
         /// </summary>
-        public const uint ErrUnsubscribeSphereEventInvalidRouteId = 100000020;
+        public const uint ErrUnsubscribeSphereEventInvalidAddress = 100000020;
         /// <summary>
         /// 表示取消订阅领域事件时 TypeHashCode 无效的错误代码。
         /// </summary>
         public const uint ErrUnsubscribeSphereEventInvalidTypeHashCode = 100000021;
         /// <summary>
-        /// 表示撤销远程订阅者时 RouteId 无效的错误代码。
+        /// 表示撤销远程订阅者时 Address 无效的错误代码。
         /// </summary>
-        public const uint ErrRevokeRemoteSubscriberInvalidRouteId = 100000022;
+        public const uint ErrRevokeRemoteSubscriberInvalidAddress = 100000022;
         /// <summary>
         /// 表示撤销远程订阅者时 TypeHashCode 无效的错误代码。
         /// </summary>
         public const uint ErrRevokeRemoteSubscriberInvalidTypeHashCode = 100000023;
         /// <summary>
-        /// 表示发布领域事件时 RouteId 无效的错误代码。
+        /// 表示发布领域事件时 Address 无效的错误代码。
         /// </summary>
-        public const uint ErrPublishSphereEventInvalidRouteId = 100000024;
+        public const uint ErrPublishSphereEventInvalidAddress = 100000024;
         /// <summary>
         /// 表示发布领域事件时 SphereEventArgs 为空的错误代码。
         /// </summary>

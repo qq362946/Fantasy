@@ -6,9 +6,9 @@ using Fantasy.Network.Interface;
 namespace Fantasy.Network.Route
 {
     /// <summary>
-    /// 声明一个 sealed 类 I_AddressableGetHandler，继承自 RouteRPC 类，并指定泛型参数
+    /// 声明一个 sealed 类 I_AddressableGetHandler，继承自 AddressRPC 类，并指定泛型参数
     /// </summary>
-    public sealed class I_AddressableGetHandler : RouteRPC<Scene, I_AddressableGet_Request, I_AddressableGet_Response>
+    public sealed class I_AddressableGetHandler : AddressRPC<Scene, I_AddressableGet_Request, I_AddressableGet_Response>
     {
         /// <summary>
         /// 在收到地址映射获取请求时执行的逻辑。
@@ -19,7 +19,7 @@ namespace Fantasy.Network.Route
         /// <param name="reply">执行响应的回调操作。</param>
         protected override async FTask Run(Scene scene, I_AddressableGet_Request request, I_AddressableGet_Response response, Action reply)
         {
-            response.RouteId =  await scene.GetComponent<AddressableManageComponent>().Get(request.AddressableId);
+            response.Address =  await scene.GetComponent<AddressableManageComponent>().Get(request.AddressableId);
         }
     }
 }

@@ -61,7 +61,7 @@ namespace Fantasy.InnerMessage
         public uint ErrorCode { get; set; }
     }
     [ProtoContract]
-    public sealed partial class RouteResponse : AMessage, IRouteResponse
+    public sealed partial class AddressResponse : AMessage, IAddressResponse
     {
         public uint OpCode()
         {
@@ -100,7 +100,7 @@ namespace Fantasy.InnerMessage
         public long Now;
     }
     [ProtoContract]
-    public partial class I_AddressableAdd_Request : AMessage, IRouteRequest
+    public partial class I_AddressableAdd_Request : AMessage, IAddressRequest
     {
         [ProtoIgnore]
         public I_AddressableAdd_Response ResponseType { get; set; }
@@ -109,19 +109,19 @@ namespace Fantasy.InnerMessage
         [ProtoMember(1)]
         public long AddressableId { get; set; }
         [ProtoMember(2)]
-        public long RouteId { get; set; }
+        public long Address { get; set; }
         [ProtoMember(3)]
         public bool IsLock { get; set; }
     }
     [ProtoContract]
-    public partial class I_AddressableAdd_Response : AMessage, IRouteResponse
+    public partial class I_AddressableAdd_Response : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableAddResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     [ProtoContract]
-    public partial class I_AddressableGet_Request : AMessage, IRouteRequest
+    public partial class I_AddressableGet_Request : AMessage, IAddressRequest
     {
         [ProtoIgnore]
         public I_AddressableGet_Response ResponseType { get; set; }
@@ -131,16 +131,16 @@ namespace Fantasy.InnerMessage
         public long AddressableId { get; set; }
     }
     [ProtoContract]
-    public partial class I_AddressableGet_Response : AMessage, IRouteResponse
+    public partial class I_AddressableGet_Response : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableGetResponse; }
         [ProtoMember(2)]
         public uint ErrorCode { get; set; }
         [ProtoMember(1)]
-        public long RouteId { get; set; }
+        public long Address { get; set; }
     }
     [ProtoContract]
-    public partial class I_AddressableRemove_Request : AMessage, IRouteRequest
+    public partial class I_AddressableRemove_Request : AMessage, IAddressRequest
     {
         [ProtoIgnore]
         public I_AddressableRemove_Response ResponseType { get; set; }
@@ -150,14 +150,14 @@ namespace Fantasy.InnerMessage
         public long AddressableId { get; set; }
     }
     [ProtoContract]
-    public partial class I_AddressableRemove_Response : AMessage, IRouteResponse
+    public partial class I_AddressableRemove_Response : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableRemoveResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     [ProtoContract]
-    public partial class I_AddressableLock_Request : AMessage, IRouteRequest
+    public partial class I_AddressableLock_Request : AMessage, IAddressRequest
     {
         [ProtoIgnore]
         public I_AddressableLock_Response ResponseType { get; set; }
@@ -167,14 +167,14 @@ namespace Fantasy.InnerMessage
         public long AddressableId { get; set; }
     }
     [ProtoContract]
-    public partial class I_AddressableLock_Response : AMessage, IRouteResponse
+    public partial class I_AddressableLock_Response : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableLockResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     [ProtoContract]
-    public partial class I_AddressableUnLock_Request : AMessage, IRouteRequest
+    public partial class I_AddressableUnLock_Request : AMessage, IAddressRequest
     {
         [ProtoIgnore]
         public I_AddressableUnLock_Response ResponseType { get; set; }
@@ -183,12 +183,12 @@ namespace Fantasy.InnerMessage
         [ProtoMember(1)]
         public long AddressableId { get; set; }
         [ProtoMember(2)]
-        public long RouteId { get; set; }
+        public long Address { get; set; }
         [ProtoMember(3)]
         public string Source { get; set; }
     }
     [ProtoContract]
-    public partial class I_AddressableUnLock_Response : AMessage, IRouteResponse
+    public partial class I_AddressableUnLock_Response : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableUnLockResponse; }
         [ProtoMember(1)]
@@ -196,7 +196,7 @@ namespace Fantasy.InnerMessage
     }
 #if FANTASY_NET
     [ProtoContract]
-    public sealed class I_LinkRoamingRequest : AMessage, IRouteRequest
+    public sealed class I_LinkRoamingRequest : AMessage, IAddressRequest
     {
         [ProtoIgnore]
         public I_LinkRoamingResponse ResponseType { get; set; }
@@ -207,12 +207,12 @@ namespace Fantasy.InnerMessage
         [ProtoMember(2)]
         public int RoamingType { get; set; }
         [ProtoMember(3)]
-        public long ForwardSessionRouteId { get; set; }
+        public long ForwardSessionAddress { get; set; }
         [ProtoMember(4)]
-        public long SceneRouteId { get; set; }
+        public long SceneAddress { get; set; }
     }
     [ProtoContract]
-    public sealed class I_LinkRoamingResponse : AMessage, IRouteResponse
+    public sealed class I_LinkRoamingResponse : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.LinkRoamingResponse; }
         [ProtoMember(1)]
@@ -221,7 +221,7 @@ namespace Fantasy.InnerMessage
         public uint ErrorCode { get; set; }
     }
     [ProtoContract]
-    public sealed class I_UnLinkRoamingRequest : AMessage, IRouteRequest
+    public sealed class I_UnLinkRoamingRequest : AMessage, IAddressRequest
     {
         [ProtoIgnore]
         public I_UnLinkRoamingResponse ResponseType { get; set; }
@@ -233,14 +233,14 @@ namespace Fantasy.InnerMessage
         public bool DisposeRoaming { get; set; }
     }
     [ProtoContract]
-    public sealed class I_UnLinkRoamingResponse : AMessage, IRouteResponse
+    public sealed class I_UnLinkRoamingResponse : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.UnLinkRoamingResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     [ProtoContract]
-    public partial class I_LockTerminusIdRequest : AMessage, IRouteRequest
+    public partial class I_LockTerminusIdRequest : AMessage, IAddressRequest
     {
         [ProtoIgnore]
         public I_LockTerminusIdResponse ResponseType { get; set; }
@@ -251,14 +251,14 @@ namespace Fantasy.InnerMessage
         public int RoamingType { get; set; }
     }
     [ProtoContract]
-    public partial class I_LockTerminusIdResponse : AMessage, IRouteResponse
+    public partial class I_LockTerminusIdResponse : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.LockTerminusIdResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     [ProtoContract]
-    public sealed class I_UnLockTerminusIdRequest : AMessage, IRouteRequest
+    public sealed class I_UnLockTerminusIdRequest : AMessage, IAddressRequest
     {
         [ProtoIgnore]
         public I_UnLockTerminusIdResponse ResponseType { get; set; }
@@ -271,10 +271,10 @@ namespace Fantasy.InnerMessage
         [ProtoMember(3)]
         public long TerminusId { get; set; }
         [ProtoMember(4)]
-        public long TargetSceneRouteId { get; set; }
+        public long TargetSceneAddress { get; set; }
     }
     [ProtoContract]
-    public sealed class I_UnLockTerminusIdResponse : AMessage, IRouteResponse
+    public sealed class I_UnLockTerminusIdResponse : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.UnLockTerminusIdResponse; }
         [ProtoMember(1)]
@@ -283,14 +283,14 @@ namespace Fantasy.InnerMessage
     /// <summary>
     ///  漫游传送终端的请求
     /// </summary>
-    public partial class I_TransferTerminusRequest : AMessage, IRouteRequest
+    public partial class I_TransferTerminusRequest : AMessage, IAddressRequest
     {
         [BsonIgnore]
         public I_TransferTerminusResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.TransferTerminusRequest; }
         public Terminus Terminus { get; set; }
     }
-    public partial class I_TransferTerminusResponse : AMessage, IRouteResponse
+    public partial class I_TransferTerminusResponse : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.TransferTerminusResponse; }
         public uint ErrorCode { get; set; }
@@ -299,7 +299,7 @@ namespace Fantasy.InnerMessage
     /// 用于服务器之间获取漫游的TerminusId。
     /// </summary>
     [ProtoContract]
-    public partial class I_GetTerminusIdRequest : AMessage, IRouteRequest
+    public partial class I_GetTerminusIdRequest : AMessage, IAddressRequest
     {
         [ProtoIgnore]
         public I_GetTerminusIdResponse ResponseType { get; set; }
@@ -310,7 +310,7 @@ namespace Fantasy.InnerMessage
         public long SessionRuntimeId { get; set; }
     }
     [ProtoContract]
-    public partial class I_GetTerminusIdResponse : AMessage, IRouteResponse
+    public partial class I_GetTerminusIdResponse : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.GetTerminusIdResponse; }
         [ProtoMember(1)]
@@ -322,18 +322,18 @@ namespace Fantasy.InnerMessage
     /// 订阅一个领域事件
     /// </summary>
     [ProtoContract]
-    public partial class I_SubscribeSphereEventRequest : AMessage, IRouteRequest
+    public partial class I_SubscribeSphereEventRequest : AMessage, IAddressRequest
     {
         [BsonIgnore]
         public I_SubscribeSphereEventResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.SubscribeSphereEventRequest; }
         [ProtoMember(1)]
-        public long RouteId { get; set; }
+        public long Address { get; set; }
         [ProtoMember(2)]
         public long TypeHashCode { get; set; }
     }
     [ProtoContract]
-    public partial class I_SubscribeSphereEventResponse : AMessage, IRouteResponse
+    public partial class I_SubscribeSphereEventResponse : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.SubscribeSphereEventResponse; }
         [ProtoMember(1)]
@@ -343,18 +343,18 @@ namespace Fantasy.InnerMessage
     /// 取消订阅一个领域事件
     /// </summary>
     [ProtoContract]
-    public partial class I_UnsubscribeSphereEventRequest : AMessage, IRouteRequest
+    public partial class I_UnsubscribeSphereEventRequest : AMessage, IAddressRequest
     {
         [BsonIgnore]
         public I_UnsubscribeSphereEventResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.UnsubscribeSphereEventRequest; }
         [ProtoMember(1)]
-        public long RouteId { get; set; }
+        public long Address { get; set; }
         [ProtoMember(2)]
         public long TypeHashCode { get; set; }
     }
     [ProtoContract]
-    public partial class I_UnsubscribeSphereEventResponse : AMessage, IRouteResponse
+    public partial class I_UnsubscribeSphereEventResponse : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.UnsubscribeSphereEventResponse; }
         [ProtoMember(1)]
@@ -364,18 +364,18 @@ namespace Fantasy.InnerMessage
     /// 撤销远程订阅者的订阅领域事件
     /// </summary>
     [ProtoContract]
-    public partial class I_RevokeRemoteSubscriberRequest : AMessage, IRouteRequest
+    public partial class I_RevokeRemoteSubscriberRequest : AMessage, IAddressRequest
     {
         [BsonIgnore]
         public I_RevokeRemoteSubscriberResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.RevokeRemoteSubscriberRequest; }
         [ProtoMember(1)]
-        public long RouteId { get; set; }
+        public long Address { get; set; }
         [ProtoMember(2)]
         public long TypeHashCode { get; set; }
     }
     [ProtoContract]
-    public partial class I_RevokeRemoteSubscriberResponse : AMessage, IRouteResponse
+    public partial class I_RevokeRemoteSubscriberResponse : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.RevokeRemoteSubscriberResponse; }
         [ProtoMember(1)]
@@ -384,15 +384,15 @@ namespace Fantasy.InnerMessage
     /// <summary>
     /// 发送一个领域事件
     /// </summary>
-    public partial class I_PublishSphereEventRequest : AMessage, IRouteRequest
+    public partial class I_PublishSphereEventRequest : AMessage, IAddressRequest
     {
         [BsonIgnore]
         public I_PublishSphereEventResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.PublishSphereEventRequest; }
-        public long RouteId { get; set; }
+        public long Address { get; set; }
         public SphereEventArgs SphereEventArgs { get; set; }
     }
-    public partial class I_PublishSphereEventResponse : AMessage, IRouteResponse
+    public partial class I_PublishSphereEventResponse : AMessage, IAddressResponse
     {
         public uint OpCode() { return Fantasy.Network.OpCode.PublishSphereEventResponse; }
         public uint ErrorCode { get; set; }

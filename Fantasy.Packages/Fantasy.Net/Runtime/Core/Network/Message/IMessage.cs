@@ -48,6 +48,7 @@ namespace Fantasy.Network.Interface
             _isPool = isPool;
         }
     }
+    
     /// <summary>
     /// 表示通用消息接口。
     /// </summary>
@@ -63,10 +64,7 @@ namespace Fantasy.Network.Interface
     /// <summary>
     /// 表示请求消息接口。
     /// </summary>
-    public interface IRequest : IMessage
-    {
-        
-    }
+    public interface IRequest : IMessage { }
 
     /// <summary>
     /// 表示响应消息接口。
@@ -78,36 +76,34 @@ namespace Fantasy.Network.Interface
         /// </summary>
         uint ErrorCode { get; set; }
     }
-    // 普通路由消息
+    
     /// <summary>
-    /// 表示普通路由消息的接口，继承自请求接口。
+    /// 内网消息的接口，继承自请求接口。
     /// </summary>
-    public interface IRouteMessage : IRequest
-    {
-        
-    }
-
+    public interface IAddressMessage : IRequest { }
     /// <summary>
-    /// 普通路由请求接口，继承自普通路由消息接口。
+    /// 内网消息请求接口，继承自普通内网消息接口。
     /// </summary>
-    public interface IRouteRequest : IRouteMessage { }
+    public interface IAddressRequest : IAddressMessage { }
     /// <summary>
-    /// 普通路由响应接口，继承自响应接口。
+    /// 内网消息响应接口，继承自响应接口。
     /// </summary>
-    public interface IRouteResponse : IResponse { }
+    public interface IAddressResponse : IResponse { }
+    
     // 可寻址协议
     /// <summary>
     /// 表示可寻址协议的普通路由消息接口，继承自普通路由消息接口。
     /// </summary>
-    public interface IAddressableRouteMessage : IRouteMessage { }
+    public interface IAddressableMessage : IAddressMessage { }
     /// <summary>
     /// 可寻址协议的普通路由请求接口，继承自可寻址协议的普通路由消息接口。
     /// </summary>
-    public interface IAddressableRouteRequest : IRouteRequest { }
+    public interface IAddressableRequest : IAddressRequest { }
     /// <summary>
     /// 可寻址协议的普通路由响应接口，继承自普通路由响应接口。
     /// </summary>
-    public interface IAddressableRouteResponse : IRouteResponse { }
+    public interface IAddressableResponse : IAddressResponse { }
+    
     // 自定义Route协议
     public interface ICustomRoute : IMessage
     {
@@ -116,19 +112,20 @@ namespace Fantasy.Network.Interface
     /// <summary>
     /// 表示自定义Route协议的普通路由消息接口，继承自普通路由消息接口。
     /// </summary>
-    public interface ICustomRouteMessage : IRouteMessage, ICustomRoute { }
+    public interface ICustomRouteMessage : IAddressMessage, ICustomRoute { }
     /// <summary>
     /// 自定义Route协议的普通路由请求接口，继承自自定义Route协议的普通路由消息接口。
     /// </summary>
-    public interface ICustomRouteRequest : IRouteRequest, ICustomRoute { }
+    public interface ICustomRouteRequest : IAddressRequest, ICustomRoute { }
     /// <summary>
     /// 自定义Route协议的普通路由响应接口，继承自普通路由响应接口。
     /// </summary>
-    public interface ICustomRouteResponse : IRouteResponse { }
+    public interface ICustomRouteResponse : IAddressResponse { }
+    
     /// <summary>
     /// 表示漫游协议的普通路由消息接口，继承自普通路由消息接口。
     /// </summary>
-    public interface IRoamingMessage : IRouteMessage, ICustomRoute { }
+    public interface IRoamingMessage : IAddressMessage, ICustomRoute { }
     /// <summary>
     /// 漫游协议的普通路由请求接口，继承自自定义Route协议的普通路由消息接口。
     /// </summary>
@@ -136,5 +133,5 @@ namespace Fantasy.Network.Interface
     /// <summary>
     /// 漫游协议的普通路由响应接口，继承自普通路由响应接口。
     /// </summary>
-    public interface IRoamingResponse : IRouteResponse { }
+    public interface IRoamingResponse : IAddressResponse { }
 }

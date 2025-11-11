@@ -15,17 +15,17 @@ public sealed class Roaming : Entity
 {
     /// <summary>
     /// 连接到漫游TerminusId。
-    /// 也可以理解为目标实体的RouteId。
+    /// 也可以理解为目标实体的Address。
     /// </summary>
     internal long TerminusId;
     /// <summary>
-    /// 漫游目标Scene的RouteId。
+    /// 漫游目标Scene的Address。
     /// </summary>
-    public long TargetSceneRouteId { get; internal set; }
+    public long TargetSceneAddress { get; internal set; }
     /// <summary>
-    /// 漫游转发Session的RouteId。
+    /// 漫游转发Session的Address。
     /// </summary>
-    public long ForwardSessionRouteId { get; internal set; }
+    public long ForwardSessionAddress { get; internal set; }
     /// <summary>
     /// 当前漫游类型。
     /// </summary>
@@ -76,8 +76,8 @@ public sealed class Roaming : Entity
     /// 解锁TerminusId。
     /// </summary>
     /// <param name="terminusId"></param>
-    /// <param name="targetSceneRouteId"></param>
-    internal void UnLockTerminusId(long terminusId, long targetSceneRouteId)
+    /// <param name="targetSceneAddress"></param>
+    internal void UnLockTerminusId(long terminusId, long targetSceneAddress)
     {
         if (_waitCoroutineLock == null)
         {
@@ -86,7 +86,7 @@ public sealed class Roaming : Entity
         }
 
         TerminusId = terminusId;
-        TargetSceneRouteId = targetSceneRouteId;
+        TargetSceneAddress = targetSceneAddress;
         _waitCoroutineLock.Dispose();
         _waitCoroutineLock = null;
     }
@@ -98,7 +98,7 @@ public sealed class Roaming : Entity
     public async FTask<uint> Disconnect()
     {
         var response =
-            await Scene.NetworkMessagingComponent.CallInnerRoute(TargetSceneRouteId, new I_UnLinkRoamingRequest()
+            await Scene.NetworkMessagingComponent.Call(TargetSceneAddress, new I_UnLinkRoamingRequest()
             {
                 RoamingId = SessionRoamingComponent.Id
             });
@@ -121,8 +121,8 @@ public sealed class Roaming : Entity
         }
         
         TerminusId = 0;
-        TargetSceneRouteId = 0;
-        ForwardSessionRouteId = 0;
+        TargetSceneAddress = 0;
+        ForwardSessionAddress = 0;
         
         RoamingLock = null;
         SessionRoamingComponent = null;

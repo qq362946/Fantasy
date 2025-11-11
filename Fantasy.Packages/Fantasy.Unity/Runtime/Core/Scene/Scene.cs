@@ -197,7 +197,7 @@ namespace Fantasy
         /// <summary>
         /// Scene的关闭方法
         /// </summary>
-        public async FTask Close()
+        public virtual async FTask Close()
         {
 #if FANTASY_NET
             await SphereEventComponent?.Close();
@@ -455,8 +455,9 @@ namespace Fantasy
         /// <param name="sceneType">SceneType，可以在SceneType里找到，例如:SceneType.Addressable</param>
         /// <param name="onSubSceneComplete">子Scene创建成功后执行的委托，可以传递null</param>
         /// <returns></returns>
-        public static SubScene CreateSubScene(Scene parentScene, int sceneType, Action<SubScene, Scene> onSubSceneComplete = null)
+        public static async FTask<SubScene> CreateSubScene(Scene parentScene, int sceneType, Action<SubScene, Scene> onSubSceneComplete = null)
         {
+            var tcs = FTask<SubScene>.Create(false);
             var scene = new SubScene();
             scene.Scene = scene;
             scene.Parent = scene;
@@ -473,11 +474,12 @@ namespace Fantasy
             scene.AddEntity(scene);
             scene.Initialize(parentScene);
             scene.ThreadSynchronizationContext.Post(() => OnEvent().Coroutine());
-            return scene;
+            return await tcs;
             async FTask OnEvent()
             {
                 await scene.EventComponent.PublishAsync(new OnCreateScene(scene));
                 onSubSceneComplete?.Invoke(scene, parentScene);
+                tcs.SetResult(scene);
             }
         }
 #endif
@@ -616,12 +618,12 @@ namespace Fantasy
         /// <summary>
         /// 根据runTimeId获得Session
         /// </summary>
-        /// <param name="runTimeId"></param>
+        /// <param name="address"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        internal virtual Session GetSession(long runTimeId)
+        internal virtual Session GetSession(long address)
         {
-            var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref runTimeId);
+            var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref address);
 
             if (_processSessionInfos.TryGetValue(sceneId, out var processSessionInfo))
             {
@@ -679,35 +681,35 @@ namespace Fantasy
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="routeId"></param>
+        /// <param name="address"></param>
         /// <param name="message"></param>
         /// <typeparam name="T"></typeparam>
-        public void Send<T>(long routeId, T message) where T : IRouteMessage
+        public void Send<T>(long address, T message) where T : IAddressMessage
         {
-            NetworkMessagingComponent.SendInnerRoute<T>(routeId, message);
+            NetworkMessagingComponent.Send<T>(address, message);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="routeIdCollection"></param>
+        /// <param name="addressCollection"></param>
         /// <param name="message"></param>
         /// <typeparam name="T"></typeparam>
-        public void Send<T>(ICollection<long> routeIdCollection, T message) where T : IRouteMessage
+        public void Send<T>(ICollection<long> addressCollection, T message) where T : IAddressMessage
         {
-            NetworkMessagingComponent.SendInnerRoute<T>(routeIdCollection, message);
+            NetworkMessagingComponent.Send<T>(addressCollection, message);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="routeId"></param>
+        /// <param name="address"></param>
         /// <param name="request"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public FTask<IResponse> Call<T>(long routeId, T request) where T : IRouteRequest
+        public FTask<IResponse> Call<T>(long address, T request) where T : IAddressRequest
         {
-            return NetworkMessagingComponent.CallInnerRoute<T>(routeId, request);
+            return NetworkMessagingComponent.Call<T>(address, request);
         }
 #endif
         #endregion

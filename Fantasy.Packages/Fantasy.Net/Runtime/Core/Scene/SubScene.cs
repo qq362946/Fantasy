@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Network;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
@@ -46,6 +48,15 @@ namespace Fantasy
             SphereEventComponent = rootScene.SphereEventComponent;
 #endif
             ThreadSynchronizationContext = rootScene.ThreadSynchronizationContext;
+        }
+
+        /// <summary>
+        /// Scene的关闭方法
+        /// </summary>
+        public override async FTask Close()
+        {
+            Dispose();
+            await FTask.CompletedTask;
         }
 
         /// <summary>

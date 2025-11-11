@@ -24,13 +24,13 @@ namespace Fantasy.PacketParser
     public abstract class BufferPacketParser : APacketParser
     {
         protected uint RpcId;
-        protected long RouteId;
+        protected long Address;
         protected uint ProtocolCode;
         protected int MessagePacketLength;
         public override void Dispose()
         {
             RpcId = 0;
-            RouteId = 0;
+            Address = 0;
             ProtocolCode = 0;
             MessagePacketLength = 0;
             base.Dispose();
@@ -86,35 +86,35 @@ namespace Fantasy.PacketParser
             
             ProtocolCode = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.PacketLength));
             RpcId = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation));
-            RouteId = Unsafe.ReadUnaligned<long>(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteRouteIdLocation));
+            Address = Unsafe.ReadUnaligned<long>(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation));
             
             packInfo = InnerPackInfo.Create(Network);
             packInfo.RpcId = RpcId;
-            packInfo.RouteId = RouteId;
+            packInfo.Address = Address;
             packInfo.ProtocolCode = ProtocolCode;
             packInfo.RentMemoryStream(MemoryStreamBufferSource.UnPack, count).Write(buffer, 0, count);
             return true;
         }
         
-        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
-            return memoryStream == null ? Pack(ref rpcId, ref routeId, message, messageType) : Pack(ref rpcId, ref routeId, memoryStream);
+            return memoryStream == null ? Pack(ref rpcId, ref address, message, messageType) : Pack(ref rpcId, ref address, memoryStream);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long address, MemoryStreamBuffer memoryStream)
         {
             var buffer = memoryStream.GetBuffer();
             ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
             
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
-            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteRouteIdLocation), routeId);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation), address);
             
             return memoryStream;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, IMessage message, Type messageType)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long address, IMessage message, Type messageType)
         {
             var memoryStreamLength = 0;
             var memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
@@ -153,7 +153,7 @@ namespace Fantasy.PacketParser
             Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
-            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteRouteIdLocation), routeId);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation), address);
             
             return memoryStream;
         }
@@ -208,7 +208,7 @@ namespace Fantasy.PacketParser
             return true;
         }
         
-        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
             return memoryStream == null ? Pack(ref rpcId, message, messageType) : Pack(ref rpcId, memoryStream);
         }
@@ -324,7 +324,7 @@ namespace Fantasy.PacketParser
             return true;
         }
         
-        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
             return memoryStream == null ? Pack(ref rpcId, message, messageType) : Pack(ref rpcId, memoryStream);
         }

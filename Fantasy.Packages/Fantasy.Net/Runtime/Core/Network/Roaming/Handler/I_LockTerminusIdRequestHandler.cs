@@ -12,7 +12,7 @@ namespace Fantasy.Roaming.Handler;
 /// <summary>
 /// 内部网络漫游锁定的请求处理。
 /// </summary>
-internal sealed class I_LockTerminusIdRequestHandler : RouteRPC<Scene,  I_LockTerminusIdRequest, I_LockTerminusIdResponse>
+internal sealed class I_LockTerminusIdRequestHandler : AddressRPC<Scene,  I_LockTerminusIdRequest, I_LockTerminusIdResponse>
 {
     protected override async FTask Run(Scene scene, I_LockTerminusIdRequest request, I_LockTerminusIdResponse response, Action reply)
     {

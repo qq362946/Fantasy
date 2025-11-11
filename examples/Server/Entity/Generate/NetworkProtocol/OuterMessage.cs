@@ -149,7 +149,7 @@ namespace Fantasy
 		public uint ErrorCode { get; set; }
 	}
 	[ProtoContract]
-	public partial class C2M_TestMessage : AMessage, IAddressableRouteMessage
+	public partial class C2M_TestMessage : AMessage, IAddressableMessage
 	{
 		public static C2M_TestMessage Create(Scene scene)
 		{
@@ -167,7 +167,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class C2M_TestRequest : AMessage, IAddressableRouteRequest
+	public partial class C2M_TestRequest : AMessage, IAddressableRequest
 	{
 		public static C2M_TestRequest Create(Scene scene)
 		{
@@ -187,7 +187,7 @@ namespace Fantasy
 		public string Tag { get; set; }
 	}
 	[ProtoContract]
-	public partial class M2C_TestResponse : AMessage, IAddressableRouteResponse
+	public partial class M2C_TestResponse : AMessage, IAddressableResponse
 	{
 		public static M2C_TestResponse Create(Scene scene)
 		{
@@ -318,7 +318,7 @@ namespace Fantasy
 	///  发送一个RPC消息给Map，让Map里的Entity转移到另外一个Map上
 	/// </summary>
 	[ProtoContract]
-	public partial class C2M_MoveToMapRequest : AMessage, IAddressableRouteRequest
+	public partial class C2M_MoveToMapRequest : AMessage, IAddressableRequest
 	{
 		public static C2M_MoveToMapRequest Create(Scene scene)
 		{
@@ -335,7 +335,7 @@ namespace Fantasy
 		public uint OpCode() { return OuterOpcode.C2M_MoveToMapRequest; }
 	}
 	[ProtoContract]
-	public partial class M2C_MoveToMapResponse : AMessage, IAddressableRouteResponse
+	public partial class M2C_MoveToMapResponse : AMessage, IAddressableResponse
 	{
 		public static M2C_MoveToMapResponse Create(Scene scene)
 		{
@@ -514,7 +514,7 @@ namespace Fantasy
 	///  客户端向SubScene发送一个测试消息
 	/// </summary>
 	[ProtoContract]
-	public partial class C2SubScene_TestMessage : AMessage, IAddressableRouteMessage
+	public partial class C2SubScene_TestMessage : AMessage, IAddressableMessage
 	{
 		public static C2SubScene_TestMessage Create(Scene scene)
 		{
@@ -535,7 +535,7 @@ namespace Fantasy
 	///  客户端向SubScene发送一个销毁测试消息
 	/// </summary>
 	[ProtoContract]
-	public partial class C2SubScene_TestDisposeMessage : AMessage, IAddressableRouteMessage
+	public partial class C2SubScene_TestDisposeMessage : AMessage, IAddressableMessage
 	{
 		public static C2SubScene_TestDisposeMessage Create(Scene scene)
 		{

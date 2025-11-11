@@ -16,7 +16,7 @@ namespace Fantasy.PacketParser.Interface
         internal ANetwork Network;
         
         public uint RpcId;
-        public long RouteId;
+        public long Address;
         public long PackInfoId;
         public bool IsDisposed;
         private uint _protocolCode;
@@ -42,7 +42,7 @@ namespace Fantasy.PacketParser.Interface
             }
             
             RpcId = 0;
-            RouteId = 0;
+            Address = 0;
             PackInfoId = 0;
             ProtocolCode = 0;
             _protocolCode = 0;

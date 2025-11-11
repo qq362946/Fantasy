@@ -174,9 +174,9 @@ public sealed class ProtocolExporter
                     Message = OpCodeType.OuterMessage,
                     Request = OpCodeType.OuterRequest,
                     Response = OpCodeType.OuterResponse,
-                    RouteMessage = 0,
-                    RouteRequest = 0,
-                    RouteResponse = 0,
+                    AddressMessage = 0,
+                    AddressRequest = 0,
+                    AddressResponse = 0,
                     AddressableMessage = OpCodeType.OuterAddressableMessage,
                     AddressableRequest = OpCodeType.OuterAddressableRequest,
                     AddressableResponse = OpCodeType.OuterAddressableResponse,
@@ -198,9 +198,9 @@ public sealed class ProtocolExporter
                     Message = OpCodeType.InnerMessage,
                     Request = OpCodeType.InnerRequest,
                     Response = OpCodeType.InnerResponse,
-                    RouteMessage = OpCodeType.InnerRouteMessage,
-                    RouteRequest = OpCodeType.InnerRouteRequest,
-                    RouteResponse = OpCodeType.InnerRouteResponse,
+                    AddressMessage = OpCodeType.InnerRouteMessage,
+                    AddressRequest = OpCodeType.InnerRouteRequest,
+                    AddressResponse = OpCodeType.InnerRouteResponse,
                     AddressableMessage = OpCodeType.InnerAddressableMessage,
                     AddressableRequest = OpCodeType.InnerAddressableRequest,
                     AddressableResponse = OpCodeType.InnerAddressableResponse,
@@ -488,7 +488,7 @@ public sealed class ProtocolExporter
                                 {
                                     switch (parameter)
                                     {
-                                        case "IAddressableRouteMessage":
+                                        case "IAddressableMessage":
                                         {
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.AddressableMessage, protocolOpCode.AAddressableMessage++);
 
@@ -498,13 +498,13 @@ public sealed class ProtocolExporter
                                                 currentHelperInfo = new MessageHelperInfo
                                                 {
                                                     MessageName = className,
-                                                    MessageType = "IMessage" // IAddressableRouteMessage也是Send方式
+                                                    MessageType = "IMessage" // IAddressableMessage也是Send方式
                                                 };
                                                 helperInfos.Add(currentHelperInfo);
                                             }
                                             break;
                                         }
-                                        case "IAddressableRouteRequest":
+                                        case "IAddressableRequest":
                                         {
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.AddressableRequest, protocolOpCode.AAddressableRequest++);
 
@@ -521,7 +521,7 @@ public sealed class ProtocolExporter
                                             }
                                             break;
                                         }
-                                        case "IAddressableRouteResponse":
+                                        case "IAddressableResponse":
                                         {
                                             opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.AddressableResponse, protocolOpCode.AAddressableResponse++);
                                             if (!string.IsNullOrEmpty(protocolMember))
@@ -644,31 +644,31 @@ public sealed class ProtocolExporter
                                             disposeStr.AppendLine($"\t\t\tErrorCode = default;");
                                             break;
                                         }
-                                        case "IRouteMessage":
+                                        case "IAddressMessage":
                                         {
                                             if (opCodeType == NetworkProtocolOpCodeType.Outer)
                                             {
-                                                throw new NotSupportedException("Under Inner, /// does not support the ICustomRouteMessage!");
+                                                throw new NotSupportedException("Under Inner, /// does not support the IAddressMessage!");
                                             }
-                                            opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.RouteMessage, protocolOpCode.ARouteMessage++);
+                                            opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.AddressMessage, protocolOpCode.AAddressMessage++);
                                             break;
                                         }
-                                        case "IRouteRequest":
+                                        case "IAddressRequest":
                                         {
                                             if (opCodeType == NetworkProtocolOpCodeType.Outer)
                                             {
-                                                throw new NotSupportedException("Under Inner, /// does not support the ICustomRouteMessage!");
+                                                throw new NotSupportedException("Under Inner, /// does not support the IAddressRequest!");
                                             }
-                                            opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.RouteRequest, protocolOpCode.ARouteRequest++);
+                                            opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.AddressRequest, protocolOpCode.AAddressRequest++);
                                             break;
                                         }
-                                        case "IRouteResponse":
+                                        case "IAddressResponse":
                                         {
                                             if (opCodeType == NetworkProtocolOpCodeType.Outer)
                                             {
-                                                throw new NotSupportedException("Under Inner, /// does not support the ICustomRouteMessage!");
+                                                throw new NotSupportedException("Under Inner, /// does not support the IAddressResponse!");
                                             }
-                                            opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.RouteResponse, protocolOpCode.ARouteResponse++);
+                                            opcodeInfo.Code = OpCode.Create(protocolOpCodeType, protocolOpCode.AddressResponse, protocolOpCode.AAddressResponse++);
                                             if (!string.IsNullOrEmpty(protocolMember))
                                             {
                                                 errorCodeStr.AppendLine($"\t\t[{protocolMember}(ErrorCodeKeyIndex)]");

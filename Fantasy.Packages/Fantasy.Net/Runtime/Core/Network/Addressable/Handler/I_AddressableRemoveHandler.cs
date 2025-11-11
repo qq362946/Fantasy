@@ -6,9 +6,9 @@ using Fantasy.Network.Interface;
 namespace Fantasy.Network.Route
 {
     /// <summary>
-    /// 声明一个 sealed 类 I_AddressableRemoveHandler，继承自 RouteRPC 类，并指定泛型参数 
+    /// 声明一个 sealed 类 I_AddressableRemoveHandler，继承自 AddressRPC 类，并指定泛型参数 
     /// </summary>
-    public sealed class I_AddressableRemoveHandler : RouteRPC<Scene, I_AddressableRemove_Request, I_AddressableRemove_Response>
+    public sealed class I_AddressableRemoveHandler : AddressRPC<Scene, I_AddressableRemove_Request, I_AddressableRemove_Response>
     {
         /// <summary>
         /// 在收到地址映射移除请求时执行的逻辑。

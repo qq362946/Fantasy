@@ -33,7 +33,7 @@ namespace Fantasy.Assembly
         /// 
         /// </summary>
         /// <returns></returns>
-        int GetRouteMessageHandlerCount();
+        int GetAddressMessageHandlerCount();
         /// <summary>
         /// 
         /// </summary>
@@ -43,7 +43,7 @@ namespace Fantasy.Assembly
         /// <param name="protocolCode"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        FTask<bool> RouteMessageHandler(Session session, Entity entity, uint rpcId, uint protocolCode, object message);
+        FTask<bool> AddressMessageHandler(Session session, Entity entity, uint rpcId, uint protocolCode, object message);
 #endif
     }
 }

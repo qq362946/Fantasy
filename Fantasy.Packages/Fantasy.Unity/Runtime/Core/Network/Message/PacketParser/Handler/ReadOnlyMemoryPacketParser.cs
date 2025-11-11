@@ -73,7 +73,7 @@ namespace Fantasy.PacketParser
                 // 检查是否有完整包头
                 if (MessageHeadOffset == Packet.InnerPacketHeadLength)
                 {
-                    // 通过现代API直接读取协议编号、messagePacketLength protocolCode rpcId routeId
+                    // 通过现代API直接读取协议编号、messagePacketLength protocolCode rpcId address
                     ref var messageRef = ref MemoryMarshal.GetArrayDataReference(MessageHead);
                     MessagePacketLength = Unsafe.ReadUnaligned<int>(ref messageRef);
                     // 检查消息体长度是否超出限制
@@ -90,9 +90,9 @@ namespace Fantasy.PacketParser
                         Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref messageRef, Packet.InnerPacketRpcIdLocation));
                     PackInfo.ProtocolCode =
                         Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref messageRef, Packet.PacketLength));
-                    PackInfo.RouteId =
+                    PackInfo.Address =
                         Unsafe.ReadUnaligned<long>(ref Unsafe.Add(ref messageRef,
-                            Packet.InnerPacketRouteRouteIdLocation));
+                            Packet.InnerPacketRouteAddressLocation));
                     memoryStream.Write(MessageHead);
                     IsUnPackHead = false;
                     bufferLength -= copyLength;
@@ -143,25 +143,25 @@ namespace Fantasy.PacketParser
             return false;
         }
 
-        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
-            return memoryStream == null ? Pack(ref rpcId, ref routeId, message, messageType) : Pack(ref rpcId, ref routeId, memoryStream);
+            return memoryStream == null ? Pack(ref rpcId, ref address, message, messageType) : Pack(ref rpcId, ref address, memoryStream);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long address, MemoryStreamBuffer memoryStream)
         {
             var buffer = memoryStream.GetBuffer();
             ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
             
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
-            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteRouteIdLocation), routeId);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation), address);
             
             return memoryStream;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, IMessage message, Type messageType)
+        private MemoryStreamBuffer Pack(ref uint rpcId, ref long address, IMessage message, Type messageType)
         {
             var memoryStreamLength = 0;
             var memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
@@ -202,7 +202,7 @@ namespace Fantasy.PacketParser
             Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
-            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteRouteIdLocation), routeId);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation), address);
             
             return memoryStream;
         }
@@ -236,7 +236,7 @@ namespace Fantasy.PacketParser
                 // 检查是否有完整包头
                 if (MessageHeadOffset == Packet.OuterPacketHeadLength)
                 {
-                    // 通过现代API直接读取协议编号、messagePacketLength protocolCode rpcId routeId
+                    // 通过现代API直接读取协议编号、messagePacketLength protocolCode rpcId address
 #if FANTASY_UNITY
                     ref var messageRef = ref MemoryMarshal.GetReference(buffer.Span);
 #else
@@ -306,7 +306,7 @@ namespace Fantasy.PacketParser
             return false;
         }
 
-        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
+        public override MemoryStreamBuffer Pack(ref uint rpcId, ref long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
             return memoryStream == null ? Pack(ref rpcId, message, messageType) : Pack(ref rpcId, memoryStream);
         }

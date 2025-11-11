@@ -3,7 +3,7 @@ using Fantasy.Network.Interface;
 
 namespace Fantasy;
 
-public class G2SubScene_SentMessageHandler : Route<Scene, G2SubScene_SentMessage>
+public class G2SubScene_SentMessageHandler : Address<Scene, G2SubScene_SentMessage>
 {
     protected override async FTask Run(Scene scene, G2SubScene_SentMessage message)
     {

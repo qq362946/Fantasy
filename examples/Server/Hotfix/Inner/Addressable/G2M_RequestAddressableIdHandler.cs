@@ -7,7 +7,7 @@ using Fantasy.Network.Route;
 
 namespace Fantasy;
 
-public sealed class G2M_RequestAddressableIdHandler : RouteRPC<Scene, G2M_RequestAddressableId, M2G_ResponseAddressableId>
+public sealed class G2M_RequestAddressableIdHandler : AddressRPC<Scene, G2M_RequestAddressableId, M2G_ResponseAddressableId>
 {
     protected override async FTask Run(Scene scene, G2M_RequestAddressableId request, M2G_ResponseAddressableId response, Action reply)
     {

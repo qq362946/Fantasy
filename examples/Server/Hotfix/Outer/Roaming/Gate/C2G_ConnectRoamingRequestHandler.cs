@@ -31,7 +31,7 @@ public sealed class C2G_ConnectRoamingRequestHandler : MessageRPC<C2G_ConnectRoa
         // 可以同时漫游多个Scene，但每个Scene的漫游都有一个固定的类型，不能重复。
         var mapConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0];
         // 通过RoamingComponent.Link(session, mapConfig, 1, 1)链接Map场景
-        // 第一个参数是Session，第二个参数是Map场景的配置信息，第三个参数是Map场景的RouteId，第四个参数是Map场景的RoamingType。
+        // 第一个参数是Session，第二个参数是Map场景的配置信息，第三个参数是Map场景的AddressId，第四个参数是Map场景的RoamingType。
         // 这个RoamingType是通过RoamingType.Config文件中定义的。
         // RouteType.Config文件位置在你定义的网络文件协议文件夹下。如果找不到RoamingType.Config文件，可以运行下导出协议工具导出一个协议后会自动创建。
         // 该示例工程下文件位置在Config/NetworkProtocol/RoamingType.Config
@@ -43,7 +43,7 @@ public sealed class C2G_ConnectRoamingRequestHandler : MessageRPC<C2G_ConnectRoa
             response.ErrorCode = linkResponse;
             return;
         }
-        // 同样，你可以创建多个漫游的场景，但每个场景的RouteId和RoamingType不能重复。
+        // 同样，你可以创建多个漫游的场景，但每个场景的AddressId和RoamingType不能重复。
         // 这里创建Chat场景的漫游。
         var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
         linkResponse = await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);

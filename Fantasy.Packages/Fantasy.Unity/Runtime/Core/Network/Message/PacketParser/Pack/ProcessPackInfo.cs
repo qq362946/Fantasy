@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.IO;
+using System.Runtime.InteropServices;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser.Interface;
@@ -42,7 +43,7 @@ namespace Fantasy.PacketParser
             Caches.Enqueue(this);
         }
 
-        public static unsafe ProcessPackInfo Create<T>(Scene scene, T message, int disposeCount, uint rpcId = 0, long routeId = 0) where T : IRouteMessage
+        public static ProcessPackInfo Create<T>(Scene scene, T message, int disposeCount, uint rpcId = 0, long address = 0) where T : IAddressMessage
         {
             if (!Caches.TryDequeue(out var packInfo))
             {
@@ -86,34 +87,25 @@ namespace Fantasy.PacketParser
             }
 
             var buffer = memoryStream.GetBuffer();
-
-            fixed (byte* bufferPtr = buffer)
-            {
-                var opCodePtr = bufferPtr + Packet.PacketLength;
-                var rpcIdPtr = bufferPtr + Packet.InnerPacketRpcIdLocation;
-                var routeIdPtr = bufferPtr + Packet.InnerPacketRouteRouteIdLocation;
-                *(int*)bufferPtr = packetBodyCount;
-                *(uint*)opCodePtr = opCode;
-                *(uint*)rpcIdPtr = rpcId;
-                *(long*)routeIdPtr = routeId;
-            }
+            var bufferSpan = buffer.AsSpan();
+            
+            MemoryMarshal.Write(bufferSpan, in packetBodyCount);
+            MemoryMarshal.Write(bufferSpan[Packet.PacketLength..], in opCode);
+            MemoryMarshal.Write(bufferSpan[Packet.InnerPacketRpcIdLocation..], in rpcId);
+            MemoryMarshal.Write(bufferSpan[Packet.InnerPacketRouteAddressLocation..], in address);
 
             memoryStream.Seek(0, SeekOrigin.Begin);
             packInfo.MemoryStream = memoryStream;
             return packInfo;
         }
 
-        public unsafe void Set(uint rpcId, long routeId)
+        public void Set(uint rpcId, long address)
         {
             var buffer = MemoryStream.GetBuffer();
-
-            fixed (byte* bufferPtr = buffer)
-            {
-                var rpcIdPtr = bufferPtr + Packet.InnerPacketRpcIdLocation;
-                var routeIdPtr = bufferPtr + Packet.InnerPacketRouteRouteIdLocation;
-                *(uint*)rpcIdPtr = rpcId;
-                *(long*)routeIdPtr = routeId;
-            }
+            var bufferSpan = buffer.AsSpan();
+            
+            MemoryMarshal.Write(bufferSpan[Packet.InnerPacketRpcIdLocation..], in rpcId);
+            MemoryMarshal.Write(bufferSpan[Packet.InnerPacketRouteAddressLocation..], in address);
 
             MemoryStream.Seek(0, SeekOrigin.Begin);
         }

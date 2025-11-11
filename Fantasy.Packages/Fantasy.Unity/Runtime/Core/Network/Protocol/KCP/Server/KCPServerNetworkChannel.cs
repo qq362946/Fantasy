@@ -1,6 +1,7 @@
 #if FANTASY_NET
 using System;
 using System.Net;
+using System.Runtime.InteropServices;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser;
 using Fantasy.Serialize;
@@ -103,7 +104,7 @@ namespace Fantasy.Network.KCP
             }
         }
 
-        public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
+        public override void Send(uint rpcId, long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
             if (IsDisposed)
             {
@@ -118,7 +119,7 @@ namespace Fantasy.Network.KCP
                 return;
             }
 
-            var buffer = _packetParser.Pack(ref rpcId, ref routeId, memoryStream, message, messageType);
+            var buffer = _packetParser.Pack(ref rpcId, ref address, memoryStream, message, messageType);
             Kcp.Send(buffer.GetBuffer().AsSpan(0, (int)buffer.Position));
             
             if (buffer.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
@@ -145,11 +146,10 @@ namespace Fantasy.Network.KCP
                     throw new Exception("KcpOutput count 0");
                 }
                 
-                fixed (byte* p = buffer)
-                {
-                    p[0] = KcpHeaderReceiveData;
-                    *(uint*)(p + 1) = ChannelId;
-                }
+                var channelId = ChannelId;
+                var bufferSpan = buffer.AsSpan();
+                bufferSpan[0] = KcpHeaderReceiveData;
+                MemoryMarshal.Write(bufferSpan[1..], in channelId);
                 
                 _kcpServerNetwork.SendAsync(buffer, 0, count + 5, RemoteEndPoint);
             }

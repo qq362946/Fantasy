@@ -7,9 +7,9 @@ public class ProtocolOpCode
     public uint Message;
     public uint Request;
     public uint Response;
-    public uint RouteMessage;
-    public uint RouteRequest;
-    public uint RouteResponse;
+    public uint AddressMessage;
+    public uint AddressRequest;
+    public uint AddressResponse;
     public uint AddressableMessage;
     public uint AddressableRequest;
     public uint AddressableResponse;
@@ -23,9 +23,9 @@ public class ProtocolOpCode
     public uint AMessage = Start;
     public uint ARequest = Start;
     public uint AResponse = Start;
-    public uint ARouteMessage = Start;
-    public uint ARouteRequest = Start;
-    public uint ARouteResponse = Start;
+    public uint AAddressMessage = Start;
+    public uint AAddressRequest = Start;
+    public uint AAddressResponse = Start;
     public uint AAddressableMessage = Start;
     public uint AAddressableRequest = Start;
     public uint AAddressableResponse = Start;

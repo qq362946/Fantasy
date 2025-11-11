@@ -207,12 +207,12 @@ namespace Fantasy.Scheduler
                             throw new Exception($"OuterMessageScheduler CustomRouteType session does not have an routeComponent component messageType:{messageType.FullName} ProtocolCode：{packInfo.ProtocolCode}");
                         }
 
-                        if (!routeComponent.TryGetRouteId(routeType.Value, out var routeId))
+                        if (!routeComponent.TryGetAddress(routeType.Value, out var address))
                         {
-                            throw new Exception($"OuterMessageScheduler RouteComponent cannot find RouteId with RouteType {routeType}");
+                            throw new Exception($"OuterMessageScheduler RouteComponent cannot find Address with RouteType {routeType}");
                         }
                     
-                        NetworkMessagingComponent.SendInnerRoute(routeId, messageType, packInfo);
+                        NetworkMessagingComponent.Send(address, messageType, packInfo);
                     }
                     finally
                     {
@@ -252,14 +252,14 @@ namespace Fantasy.Scheduler
                             throw new Exception("OuterMessageScheduler CustomRouteType session does not have an routeComponent component");
                         }
 
-                        if (!routeComponent.TryGetRouteId(routeType.Value, out var routeId))
+                        if (!routeComponent.TryGetAddress(routeType.Value, out var address))
                         {
-                            throw new Exception($"OuterMessageScheduler RouteComponent cannot find RouteId with RouteType {routeType}");
+                            throw new Exception($"OuterMessageScheduler RouteComponent cannot find Address with RouteType {routeType}");
                         }
                     
                         var rpcId = packInfo.RpcId;
                         var runtimeId = session.RuntimeId;
-                        var response = await NetworkMessagingComponent.CallInnerRoute(routeId, messageType, packInfo);
+                        var response = await NetworkMessagingComponent.Call(address, messageType, packInfo);
                         // session可能已经断开了，所以这里需要判断
                         if (session.RuntimeId == runtimeId)
                         {

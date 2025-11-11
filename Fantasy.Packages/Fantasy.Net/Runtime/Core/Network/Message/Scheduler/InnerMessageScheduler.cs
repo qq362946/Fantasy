@@ -82,14 +82,14 @@ namespace Fantasy.Scheduler
                             throw new Exception($"InnerMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
 
-                        if (!Scene.TryGetEntity(packInfo.RouteId, out var entity))
+                        if (!Scene.TryGetEntity(packInfo.Address, out var entity))
                         {
                             Scene.MessageDispatcherComponent.FailRouteResponse(session, packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
                             return;
                         }
 
                         var obj = packInfo.Deserialize(messageType);
-                        await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId, packInfo.ProtocolCode);
+                        await Scene.MessageDispatcherComponent.AddressMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId, packInfo.ProtocolCode);
                     }
 
                     return;
@@ -107,14 +107,14 @@ namespace Fantasy.Scheduler
                             throw new Exception($"InnerMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
 
-                        if (!Scene.TryGetEntity(packInfo.RouteId, out var entity))
+                        if (!Scene.TryGetEntity(packInfo.Address, out var entity))
                         {
                             Scene.MessageDispatcherComponent.FailRouteResponse(session, packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoute, packInfo.RpcId);
                             return;
                         }
 
                         var obj = packInfo.Deserialize(messageType);
-                        await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId, packInfo.ProtocolCode);
+                        await Scene.MessageDispatcherComponent.AddressMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId, packInfo.ProtocolCode);
                     }
 
                     return;
@@ -126,7 +126,7 @@ namespace Fantasy.Scheduler
                 case OpCodeType.OuterRoamingMessage:
                 case OpCodeType.OuterRoamingRequest:
                 {
-                    var entity = Scene.GetEntity(packInfo.RouteId);
+                    var entity = Scene.GetEntity(packInfo.Address);
 
                     switch (entity)
                     {
@@ -148,7 +148,7 @@ namespace Fantasy.Scheduler
                                         // 2、当前是其他Scene、消息通过Gate发送到这个Scene上面，但这个Scene上面没有这个Entity。
                                         // 因为这个是Gate转发消息到这个Scene的，如果没有找到Entity要返回错误给Gate。
                                         // 出现这个情况一定要打印日志，因为出现这个问题肯定是上层逻辑导致的，不应该出现这样的问题。
-                                        var packInfoRouteId = packInfo.RouteId;
+                                        var packInfoAddress = packInfo.Address;
                                         var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
                             
                                         switch (protocol)
@@ -162,7 +162,7 @@ namespace Fantasy.Scheduler
                                             }
                                         }
                                         
-                                        throw new Exception($"The Entity associated with RouteId = {packInfoRouteId} was not found! messageType = {messageType.FullName} protocol = {protocol}");
+                                        throw new Exception($"The Entity associated with Address = {packInfoAddress} was not found! messageType = {messageType.FullName} protocol = {protocol}");
                                     }
                                 }
                             }
@@ -189,7 +189,7 @@ namespace Fantasy.Scheduler
                                 }
                             
                                 var obj = packInfo.Deserialize(messageType);
-                                await Scene.MessageDispatcherComponent.RouteMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId, packInfo.ProtocolCode);
+                                await Scene.MessageDispatcherComponent.AddressMessageHandler(session, messageType, entity, (IMessage)obj, packInfo.RpcId, packInfo.ProtocolCode);
                             }
                             
                             return;

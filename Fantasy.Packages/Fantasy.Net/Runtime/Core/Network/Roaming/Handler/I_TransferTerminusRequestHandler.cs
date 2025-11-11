@@ -10,7 +10,7 @@ namespace Fantasy.Roaming.Handler;
 /// <summary>
 /// 传送漫游Terminus的请求处理
 /// </summary>
-internal sealed class I_TransferTerminusRequestHandler : RouteRPC<Scene, I_TransferTerminusRequest, I_TransferTerminusResponse>
+internal sealed class I_TransferTerminusRequestHandler : AddressRPC<Scene, I_TransferTerminusRequest, I_TransferTerminusResponse>
 {
     protected override async FTask Run(Scene scene, I_TransferTerminusRequest request, I_TransferTerminusResponse response, Action reply)
     {

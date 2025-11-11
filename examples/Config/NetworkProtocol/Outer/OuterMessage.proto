@@ -36,15 +36,15 @@ message G2C_CreateAddressableResponse // IResponse
 {
 
 }
-message C2M_TestMessage // IAddressableRouteMessage
+message C2M_TestMessage // IAddressableMessage
 {
 	string Tag = 1;
 }
-message C2M_TestRequest // IAddressableRouteRequest,M2C_TestResponse
+message C2M_TestRequest // IAddressableRequest,M2C_TestResponse
 {
 	string Tag = 1;
 }
-message M2C_TestResponse // IAddressableRouteResponse
+message M2C_TestResponse // IAddressableResponse
 {
 	string Tag = 1;
 }
@@ -72,11 +72,11 @@ message Chat2C_TestMessageResponse // ICustomRouteResponse
 	string Tag = 1;
 }
 /// 发送一个RPC消息给Map，让Map里的Entity转移到另外一个Map上
-message C2M_MoveToMapRequest // IAddressableRouteRequest,M2C_MoveToMapResponse
+message C2M_MoveToMapRequest // IAddressableRequest,M2C_MoveToMapResponse
 {
 
 }
-message M2C_MoveToMapResponse // IAddressableRouteResponse
+message M2C_MoveToMapResponse // IAddressableResponse
 {
 
 }
@@ -119,12 +119,12 @@ message G2C_CreateSubSceneAddressableResponse // IResponse
 
 }
 /// 客户端向SubScene发送一个测试消息
-message C2SubScene_TestMessage // IAddressableRouteMessage
+message C2SubScene_TestMessage // IAddressableMessage
 {
 	string Tag = 1;
 }
 /// 客户端向SubScene发送一个销毁测试消息
-message C2SubScene_TestDisposeMessage // IAddressableRouteMessage
+message C2SubScene_TestDisposeMessage // IAddressableMessage
 {
 	
 }

@@ -12,11 +12,11 @@ public sealed class C2G_MapUnsubscribeSphereEventRequestHandler : MessageRPC<C2G
         var scene = session.Scene;
         var sceneConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0];
        
-        _ = await scene.NetworkMessagingComponent.CallInnerRoute(
-            sceneConfig.RouteId,
+        _ = await scene.NetworkMessagingComponent.Call(
+            sceneConfig.Address,
             new G2Map_UnsubscribeSphereEventRequest()
             {
-                GateRouteId = scene.RouteId
+                GateAddress = scene.Address
             });
     }
 }

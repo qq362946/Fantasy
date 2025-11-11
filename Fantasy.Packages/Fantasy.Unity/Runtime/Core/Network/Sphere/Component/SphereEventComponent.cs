@@ -96,7 +96,7 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     private CoroutineLock _localSphereEventLock;
     
     /// <summary>
-    /// 本地订阅的远程服务器信息 (远程RouteId, 事件类型HashCode)
+    /// 本地订阅的远程服务器信息 (远程Address, 事件类型HashCode)
     /// </summary>
     private readonly HashSet<(long, long)> _localSubscribers = new();
 
@@ -108,26 +108,26 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     /// <summary>
     /// 订阅远程服务器的Sphere事件
     /// </summary>
-    /// <param name="routeId">远程服务器的RouteId</param>
+    /// <param name="address">远程服务器的Address</param>
     /// <typeparam name="T">事件类型</typeparam>
     /// <returns></returns>
-    public FTask Subscribe<T>(long routeId) where T : SphereEventArgs, new()
+    public FTask Subscribe<T>(long address) where T : SphereEventArgs, new()
     {
-        return Subscribe(routeId, TypeHashCache<T>.HashCode);
+        return Subscribe(address, TypeHashCache<T>.HashCode);
     }
 
     /// <summary>
     /// 订阅远程服务器的Sphere事件
     /// </summary>
-    /// <param name="routeId"></param>
+    /// <param name="address"></param>
     /// <param name="typeHashCode">事件类型的HashCode</param>
-    public async FTask Subscribe(long routeId, long typeHashCode)
+    public async FTask Subscribe(long address, long typeHashCode)
     {
         using (await _localSphereEventLock.Wait(typeHashCode))
         {
-            var response = await Scene.NetworkMessagingComponent.CallInnerRoute(routeId, new I_SubscribeSphereEventRequest()
+            var response = await Scene.NetworkMessagingComponent.Call(address, new I_SubscribeSphereEventRequest()
             {
-                RouteId = Scene.RouteId,
+                Address = Scene.Address,
                 TypeHashCode = typeHashCode
             });
 
@@ -137,7 +137,7 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
                 return;
             }
         
-            _localSubscribers.Add((routeId, typeHashCode));
+            _localSubscribers.Add((address, typeHashCode));
         }
     }
 
@@ -145,31 +145,31 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     /// 取消订阅远程服务器的Sphere事件
     /// </summary>
     /// <typeparam name="T">事件类型</typeparam>
-    /// <param name="routeId">远程服务器的RouteId</param>
-    public FTask Unsubscribe<T>(long routeId) where T : SphereEventArgs, new()
+    /// <param name="address">远程服务器的Address</param>
+    public FTask Unsubscribe<T>(long address) where T : SphereEventArgs, new()
     {
-        return Unsubscribe(routeId, TypeHashCache<T>.HashCode, true);
+        return Unsubscribe(address, TypeHashCache<T>.HashCode, true);
     }
 
     /// <summary>
     /// 取消订阅远程服务器的Sphere事件（内部方法）
     /// </summary>
-    /// <param name="routeId">远程服务器的RouteId</param>
+    /// <param name="address">远程服务器的Address</param>
     /// <param name="typeHashCode">事件类型的HashCode</param>
     /// <param name="sendRemote">是否向远程服务器发送取消订阅请求。
     /// true: 发送 I_UnsubscribeSphereEventRequest 通知远程服务器移除订阅关系（正常取消订阅流程）。
     /// false: 仅在本地移除订阅记录，不通知远程服务器（用于远程服务器已断开或由远程服务器主动撤销的场景）。
     /// </param>
-    internal async FTask Unsubscribe(long routeId, long typeHashCode, bool sendRemote)
+    internal async FTask Unsubscribe(long address, long typeHashCode, bool sendRemote)
     {
         using (await _localSphereEventLock.Wait(typeHashCode))
         {
             if (sendRemote)
             {
-                var response = await Scene.NetworkMessagingComponent.CallInnerRoute(routeId,
+                var response = await Scene.NetworkMessagingComponent.Call(address,
                     new I_UnsubscribeSphereEventRequest()
                     {
-                        RouteId = Scene.RouteId,
+                        Address = Scene.Address,
                         TypeHashCode = typeHashCode
                     });
 
@@ -179,25 +179,25 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
                 }
             }
 
-            _localSubscribers.Remove((routeId, typeHashCode));
+            _localSubscribers.Remove((address, typeHashCode));
         }
     }
 
     /// <summary>
     /// 处理远程发布的事件并调用本地订阅者
     /// </summary>
-    /// <param name="routeId">发布者的RouteId</param>
+    /// <param name="address">发布者的Address</param>
     /// <param name="eventArgs">事件参数</param>
     /// <returns>错误码: Success=成功, ErrHandleRemotePublicationNotSubscribed=未找到订阅关系</returns>
-    internal async FTask<uint> HandleRemotePublication(long routeId, SphereEventArgs eventArgs)
+    internal async FTask<uint> HandleRemotePublication(long address, SphereEventArgs eventArgs)
     {
         var eventArgsTypeHashCode = eventArgs.TypeHashCode;
 
         using (await _localSphereEventLock.Wait(eventArgsTypeHashCode))
         {
-            // 检查本地是否订阅了该 RouteId 和事件类型的组合
+            // 检查本地是否订阅了该 Address 和事件类型的组合
             // 如果未订阅，返回错误码表示没有订阅关系
-            if (!_localSubscribers.Contains((routeId, eventArgsTypeHashCode)))
+            if (!_localSubscribers.Contains((address, eventArgsTypeHashCode)))
             {
                 return InnerErrorCode.ErrHandleRemotePublicationNotSubscribed;
             }
@@ -237,66 +237,66 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     private CoroutineLock _remoteSphereEventLock;
 
     /// <summary>
-    /// 订阅事件的远程服务器信息 (事件类型HashCode -> 远程RouteId列表)
+    /// 订阅事件的远程服务器信息 (事件类型HashCode -> 远程Address列表)
     /// </summary>
     private readonly OneToManyHashSet<long, long> _remoteSubscribers = new();
     
     /// <summary>
     /// 注册远程订阅者
     /// </summary>
-    /// <param name="fromRouteId">远程服务器的RouteId</param>
+    /// <param name="fromAddress">远程服务器的Address</param>
     /// <param name="typeHashCode">事件类型的HashCode</param>
-    internal void RegisterRemoteSubscriber(long fromRouteId, long typeHashCode)
+    internal void RegisterRemoteSubscriber(long fromAddress, long typeHashCode)
     {
-        _remoteSubscribers.Add(typeHashCode, fromRouteId);
+        _remoteSubscribers.Add(typeHashCode, fromAddress);
     }
     
     /// <summary>
     /// 注销远程订阅者
     /// </summary>
-    /// <param name="fromRouteId">远程服务器的RouteId</param>
+    /// <param name="fromAddress">远程服务器的Address</param>
     /// <param name="typeHashCode">事件类型的HashCode</param>
-    public async FTask UnregisterRemoteSubscriber(long fromRouteId, long typeHashCode)
+    public async FTask UnregisterRemoteSubscriber(long fromAddress, long typeHashCode)
     {
         using (await _remoteSphereEventLock.Wait(typeHashCode))
         {
-            _remoteSubscribers.RemoveValue(typeHashCode, fromRouteId);
+            _remoteSubscribers.RemoveValue(typeHashCode, fromAddress);
         }
     }
 
     /// <summary>
     /// 注销远程订阅者
     /// </summary>
-    /// <param name="fromRouteId">远程服务器的RouteId</param>
+    /// <param name="fromAddress">远程服务器的Address</param>
     /// <typeparam name="T">事件类型</typeparam>
-    public FTask UnregisterRemoteSubscriber<T>(long fromRouteId) where T : SphereEventArgs, new()
+    public FTask UnregisterRemoteSubscriber<T>(long fromAddress) where T : SphereEventArgs, new()
     {
-        return UnregisterRemoteSubscriber(fromRouteId, TypeHashCache<T>.HashCode);
+        return UnregisterRemoteSubscriber(fromAddress, TypeHashCache<T>.HashCode);
     }
 
     /// <summary>
     /// 撤销远程订阅者的订阅
     /// </summary>
-    /// <param name="fromRouteId">远程服务器的RouteId</param>
+    /// <param name="fromAddress">远程服务器的Address</param>
     /// <typeparam name="T">事件类型</typeparam>
-    public FTask RevokeRemoteSubscriber<T>(long fromRouteId) where T : SphereEventArgs, new()
+    public FTask RevokeRemoteSubscriber<T>(long fromAddress) where T : SphereEventArgs, new()
     {
-        return RevokeRemoteSubscriber(fromRouteId, TypeHashCache<T>.HashCode);
+        return RevokeRemoteSubscriber(fromAddress, TypeHashCache<T>.HashCode);
     }
 
     /// <summary>
     /// 撤销远程订阅者的订阅
     /// </summary>
-    /// <param name="fromRouteId">远程服务器的RouteId</param>
+    /// <param name="fromAddress">远程服务器的Address</param>
     /// <param name="typeHashCode">事件类型HashCode</param>
-    public async FTask RevokeRemoteSubscriber(long fromRouteId, long typeHashCode)
+    public async FTask RevokeRemoteSubscriber(long fromAddress, long typeHashCode)
     {
         using (await _remoteSphereEventLock.Wait(typeHashCode))
         {
-            var response = await Scene.NetworkMessagingComponent.CallInnerRoute(fromRouteId,
+            var response = await Scene.NetworkMessagingComponent.Call(fromAddress,
                 new I_RevokeRemoteSubscriberRequest()
                 {
-                    RouteId = Scene.RouteId,
+                    Address = Scene.Address,
                     TypeHashCode = typeHashCode
                 });
 
@@ -305,7 +305,7 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
                 Log.Error($"SphereEventComponent RevokeRemoteSubscriber failed with errorCode {response.ErrorCode}");
             }
         
-            _remoteSubscribers.RemoveValue(typeHashCode, fromRouteId);
+            _remoteSubscribers.RemoveValue(typeHashCode, fromAddress);
         }
     }
 
@@ -325,14 +325,14 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
                 return;
             }
         
-            var routeId = Scene.RouteId;
+            var address = Scene.Address;
         
             foreach (var subscriber in subscribers)
             {
-                var response = await Scene.NetworkMessagingComponent.CallInnerRoute(subscriber,
+                var response = await Scene.NetworkMessagingComponent.Call(subscriber,
                     new I_PublishSphereEventRequest()
                     {
-                        RouteId = routeId,
+                        Address = address,
                         SphereEventArgs = sphereEventArgs
                     });
                 if (response.ErrorCode != 0)
@@ -364,19 +364,19 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
         
         // Local
         var localSubscribersArray = _localSubscribers.ToArray();
-        foreach (var (routeId,typeHashCode) in localSubscribersArray)
+        foreach (var (address,typeHashCode) in localSubscribersArray)
         {
-            await Unsubscribe(routeId, typeHashCode, true);
+            await Unsubscribe(address, typeHashCode, true);
         }
         _sphereEvents.Clear();
         _remoteSphereEventLock.Dispose();
         _remoteSphereEventLock = null;
         // Remote
-        foreach (var (typeHashCode, routeIdList) in _remoteSubscribers)
+        foreach (var (typeHashCode, addressList) in _remoteSubscribers)
         {
-            foreach (var routeId in routeIdList)
+            foreach (var address in addressList)
             {
-                await RevokeRemoteSubscriber(routeId, typeHashCode);
+                await RevokeRemoteSubscriber(address, typeHashCode);
             }
         }
         _localSphereEventLock.Dispose();

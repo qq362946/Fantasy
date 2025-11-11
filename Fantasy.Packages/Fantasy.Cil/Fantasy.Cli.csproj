@@ -11,7 +11,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>fantasy</ToolCommandName>
     <PackageId>Fantasy.Cli</PackageId>
-    <Version>2025.2.0</Version>
+    <Version>2025.2.12</Version>
     <Authors>Fantasy Framework</Authors>
       <Authors>qq362946</Authors>
       <owners>qq362946</owners>

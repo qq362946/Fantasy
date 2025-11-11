@@ -126,7 +126,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine($"return {messageHandlers.Count};");
             builder.EndMethod();
             builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            builder.BeginMethod("public int GetRouteMessageHandlerCount()");
+            builder.BeginMethod("public int GetAddressMessageHandlerCount()");
             builder.AppendLine($"return {routeMessageHandlers.Count};");
             builder.EndMethod();
             builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
@@ -171,7 +171,7 @@ namespace Fantasy.SourceGenerator.Generators
             
             builder.AppendLine("#if FANTASY_NET", false);
             builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            builder.BeginMethod("public async global::Fantasy.Async.FTask<bool> RouteMessageHandler(global::Fantasy.Network.Session session, global::Fantasy.Entitas.Entity entity, uint rpcId, uint protocolCode, object message)");
+            builder.BeginMethod("public async global::Fantasy.Async.FTask<bool> AddressMessageHandler(global::Fantasy.Network.Session session, global::Fantasy.Entitas.Entity entity, uint rpcId, uint protocolCode, object message)");
             try
             {
                 if (routeMessageHandlers.Any())
@@ -230,11 +230,11 @@ namespace Fantasy.SourceGenerator.Generators
                 var typeName = baseType.Type.ToString();
                 
                 if (typeName.Contains("IMessageHandler") ||
-                    typeName.Contains("IRouteMessageHandler") ||
+                    typeName.Contains("IAddressMessageHandler") ||
                     typeName.Contains("Message<") ||
                     typeName.Contains("MessageRPC<") ||
-                    typeName.Contains("Route<") ||
-                    typeName.Contains("RouteRPC<") ||
+                    typeName.Contains("Address<") ||
+                    typeName.Contains("AddressRPC<") ||
                     typeName.Contains("Addressable<") ||
                     typeName.Contains("AddressableRPC<") ||
                     typeName.Contains("Roaming<") ||
@@ -277,12 +277,12 @@ namespace Fantasy.SourceGenerator.Generators
                         symbol.Name,
                         GetOpCode(context, baseType, 0));
                 }
-                case "Fantasy.Network.Interface.Route<TEntity, TMessage>":
-                case "Fantasy.Network.Interface.RouteRPC<TEntity, TRouteRequest, TRouteResponse>":
+                case "Fantasy.Network.Interface.Address<TEntity, TMessage>":
+                case "Fantasy.Network.Interface.AddressRPC<TEntity, TAddressRequest, TAddressResponse>":
                 case "Fantasy.Network.Interface.Addressable<TEntity, TMessage>":
-                case "Fantasy.Network.Interface.AddressableRPC<TEntity, TRouteRequest, TRouteResponse>":
+                case "Fantasy.Network.Interface.AddressableRPC<TEntity, TAddressRequest, TAddressResponse>":
                 case "Fantasy.Network.Interface.Roaming<TEntity, TMessage>":
-                case "Fantasy.Network.Interface.RoamingRPC<TEntity, TRouteRequest, TRouteResponse>":
+                case "Fantasy.Network.Interface.RoamingRPC<TEntity, TAddressRequest, TAddressResponse>":
                 {
                     return new MessageHandlerInfo(
                         HandlerType.RouteMessageHandler,

@@ -12,6 +12,6 @@ public class C2Map_TestTransferRequestHandler : RoamingRPC<Terminus, C2Map_TestT
     {
         Log.Debug($"C2Map_TestTransferRequestHandler1 terminus:{terminus.RuntimeId}");
         var mapConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[1];
-        response.ErrorCode = await terminus.StartTransfer(mapConfig.RouteId);
+        response.ErrorCode = await terminus.StartTransfer(mapConfig.Address);
     }
 }

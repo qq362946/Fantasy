@@ -5,7 +5,7 @@ using Fantasy.Network.Route;
 
 namespace Fantasy;
 
-public class M2M_SendUnitRequestHandler : RouteRPC<Scene, M2M_SendUnitRequest, M2M_SendUnitResponse>
+public class M2M_SendUnitRequestHandler : AddressRPC<Scene, M2M_SendUnitRequest, M2M_SendUnitResponse>
 {
     protected override async FTask Run(Scene scene, M2M_SendUnitRequest request, M2M_SendUnitResponse response, Action reply)
     {

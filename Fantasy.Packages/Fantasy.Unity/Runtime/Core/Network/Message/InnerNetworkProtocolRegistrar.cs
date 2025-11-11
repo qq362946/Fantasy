@@ -47,7 +47,7 @@ namespace Fantasy.Network
             keys[offset + 3] = 805306369;
             values[offset + 3] = typeof(InnerMessage.Response);
             keys[offset + 4] = 1207959559;
-            values[offset + 4] = typeof(InnerMessage.RouteResponse);
+            values[offset + 4] = typeof(InnerMessage.AddressResponse);
             keys[offset + 5] = 4026531841;
             values[offset + 5] = typeof(InnerMessage.PingRequest);
             keys[offset + 6] = 4160749569;

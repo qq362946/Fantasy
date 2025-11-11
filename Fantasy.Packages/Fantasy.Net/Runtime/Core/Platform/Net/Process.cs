@@ -30,9 +30,9 @@ public sealed class Process
         MachineId = machineId;
     }
     
-    internal bool IsProcess(ref long routeId)
+    internal bool IsProcess(ref long address)
     {
-        var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
+        var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref address);
         return _processScenes.ContainsKey(sceneId);
     }
     
@@ -51,9 +51,9 @@ public sealed class Process
         _processScenes.Remove(scene.SceneConfigId, out _);
     }
     
-    internal bool TryGetSceneToProcess(long routeId, out Scene scene)
+    internal bool TryGetSceneToProcess(long address, out Scene scene)
     {
-        var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
+        var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref address);
         return _processScenes.TryGetValue(sceneId, out scene);
     }
 
@@ -136,9 +136,9 @@ public sealed class Process
         }
     }
     
-    internal static bool TryGetScene(long routeId, out Scene scene)
+    internal static bool TryGetScene(long address, out Scene scene)
     {
-        var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref routeId);
+        var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref address);
         return Scenes.TryGetValue(sceneId, out scene);
     }
 

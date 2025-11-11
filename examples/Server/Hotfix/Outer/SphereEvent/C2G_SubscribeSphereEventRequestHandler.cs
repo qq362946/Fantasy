@@ -17,11 +17,11 @@ public sealed class C2G_SubscribeSphereEventRequestHandler : MessageRPC<C2G_Subs
     {
         var scene = session.Scene;
         var sceneConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0];
-        _ = (G2Map_SubscribeSphereEventResponse)await scene.NetworkMessagingComponent.CallInnerRoute(
-            sceneConfig.RouteId,
+        _ = (G2Map_SubscribeSphereEventResponse)await scene.NetworkMessagingComponent.Call(
+            sceneConfig.Address,
             new G2Map_SubscribeSphereEventRequest()
             {
-                GateRouteId = scene.RouteId
+                GateAddress = scene.Address
             });
     }
 }

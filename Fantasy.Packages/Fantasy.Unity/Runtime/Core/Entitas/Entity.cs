@@ -42,7 +42,7 @@ namespace Fantasy.Entitas
         [BsonDefaultValue(0L)]
         public long Id { get; protected set; }
         /// <summary>
-        /// 实体的RunTimeId，其他系统可以通过这个Id发送Route消息，这个Id也可以理解为RouteId
+        /// 实体的RunTimeId
         /// </summary>
         [BsonIgnore]
         [IgnoreDataMember]
@@ -107,9 +107,9 @@ namespace Fantasy.Entitas
         }
 
         /// <summary>
-        /// 获取当前实体的RouteId。
+        /// 获取当前实体的网络地址。
         /// </summary>
-        public long RouteId => RuntimeId;
+        public long Address => RuntimeId;
 
         #endregion
 

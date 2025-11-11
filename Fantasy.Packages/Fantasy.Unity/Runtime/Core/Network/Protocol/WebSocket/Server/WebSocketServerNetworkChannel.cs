@@ -232,9 +232,9 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
 
     #region Send
 
-    public override void Send(uint rpcId, long routeId, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
+    public override void Send(uint rpcId, long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
     {
-        _sendBuffers.Enqueue(_packetParser.Pack(ref rpcId, ref routeId, memoryStream, message, messageType));
+        _sendBuffers.Enqueue(_packetParser.Pack(ref rpcId, ref address, memoryStream, message, messageType));
 
         if (!_isSending)
         {

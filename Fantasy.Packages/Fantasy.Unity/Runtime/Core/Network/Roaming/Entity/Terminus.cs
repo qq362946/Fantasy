@@ -30,16 +30,16 @@ public sealed class Terminus : Entity
     [BsonElement("r")]
     internal int RoamingType;
     /// <summary>
-    /// 漫游转发Session所在的Scene的RouteId。
+    /// 漫游转发Session所在的Scene的Address。
     /// </summary>
     [BsonElement("s")]
-    internal long ForwardSceneRouteId;
+    internal long ForwardSceneAddress;
     /// <summary>
-    /// 漫游转发Session的RouteId。
+    /// 漫游转发Session的Address。
     /// 不知道原理千万不要手动赋值这个。
     /// </summary>
     [BsonElement("f")]
-    internal long ForwardSessionRouteId;
+    internal long ForwardSessionAddress;
     /// <summary>
     /// 关联的玩家实体
     /// </summary>
@@ -51,9 +51,9 @@ public sealed class Terminus : Entity
     [BsonIgnore]
     internal CoroutineLock RoamingMessageLock;
     /// <summary>
-    /// 获得转发的SessionRouteId，可以通过这个Id来发送消息来自动转发到客户端。
+    /// 获得转发的Session的Address，可以通过这个Id来发送消息来自动转发到客户端。
     /// </summary>
-    public long SessionRouteId => ForwardSessionRouteId;
+    public long SessionAddress => ForwardSessionAddress;
     /// <summary>
     /// 存放其他漫游终端的Id。
     /// 通过这个Id可以发送消息给它。
@@ -112,12 +112,12 @@ public sealed class Terminus : Entity
     /// 所以如果有其他组件关联这个实体，要提前记录好Id，方便传送后清理。
     /// </summary>
     /// <returns></returns>
-    public async FTask<uint> StartTransfer(long targetSceneRouteId)
+    public async FTask<uint> StartTransfer(long targetSceneAddress)
     {
-        var currentSceneRouteId = Scene.SceneConfig.RouteId;
-        if (targetSceneRouteId == currentSceneRouteId)
+        var currentSceneAddress = Scene.SceneConfig.Address;
+        if (targetSceneAddress == currentSceneAddress)
         {
-            Log.Warning($"Unable to teleport to your own scene targetSceneRouteId:{targetSceneRouteId} == currentSceneRouteId:{currentSceneRouteId}");
+            Log.Warning($"Unable to teleport to your own scene targetSceneAddress:{targetSceneAddress} == currentSceneAddress:{currentSceneAddress}");
             return 0;
         }
         
@@ -130,8 +130,8 @@ public sealed class Terminus : Entity
                 return lockErrorCode;
             }
             // 开始执行传送请求。
-            var response = (I_TransferTerminusResponse)await Scene.NetworkMessagingComponent.CallInnerRoute(
-                targetSceneRouteId,
+            var response = (I_TransferTerminusResponse)await Scene.NetworkMessagingComponent.Call(
+                targetSceneAddress,
                 new I_TransferTerminusRequest()
                 {
                     Terminus = this
@@ -182,10 +182,10 @@ public sealed class Terminus : Entity
     /// <returns></returns>
     public async FTask<uint> Lock()
     {
-        var response = await Scene.NetworkMessagingComponent.CallInnerRoute(ForwardSceneRouteId,
+        var response = await Scene.NetworkMessagingComponent.Call(ForwardSceneAddress,
             new I_LockTerminusIdRequest()
             {
-                SessionRuntimeId = ForwardSessionRouteId,
+                SessionRuntimeId = ForwardSessionAddress,
                 RoamingType = RoamingType
             });
         return response.ErrorCode;
@@ -197,13 +197,13 @@ public sealed class Terminus : Entity
     /// <returns></returns>
     public async FTask<uint> UnLock()
     {
-        var response = await Scene.NetworkMessagingComponent.CallInnerRoute(ForwardSceneRouteId,
+        var response = await Scene.NetworkMessagingComponent.Call(ForwardSceneAddress,
             new I_UnLockTerminusIdRequest()
             {
-                SessionRuntimeId = ForwardSessionRouteId,
+                SessionRuntimeId = ForwardSessionAddress,
                 RoamingType = RoamingType,
                 TerminusId = TerminusId,
-                TargetSceneRouteId = Scene.RouteId
+                TargetSceneAddress = Scene.Address
             });
         return response.ErrorCode;
     }
@@ -219,11 +219,11 @@ public sealed class Terminus : Entity
             return 0;
         }
 
-        var response = (I_GetTerminusIdResponse)await Scene.NetworkMessagingComponent.CallInnerRoute(
-            ForwardSceneRouteId,
+        var response = (I_GetTerminusIdResponse)await Scene.NetworkMessagingComponent.Call(
+            ForwardSceneAddress,
             new I_GetTerminusIdRequest()
             {
-                SessionRuntimeId = ForwardSessionRouteId,
+                SessionRuntimeId = ForwardSessionAddress,
                 RoamingType = roamingType
             });
         return response.TerminusId;
@@ -233,9 +233,9 @@ public sealed class Terminus : Entity
     /// 发送一个消息给客户端
     /// </summary>
     /// <param name="message"></param>
-    public void Send<T>(T message) where T : IRouteMessage
+    public void Send<T>(T message) where T : IAddressMessage
     {
-        Scene.NetworkMessagingComponent.SendInnerRoute(ForwardSessionRouteId, message);
+        Scene.NetworkMessagingComponent.Send(ForwardSessionAddress, message);
     }
     /// <summary>
     /// 发送一个漫游消息
@@ -269,19 +269,19 @@ public sealed class Terminus : Entity
         var failCount = 0;
         var runtimeId = RuntimeId;
         IResponse iRouteResponse = null;
-        _roamingTerminusId.TryGetValue(roamingType, out var routeId);
+        _roamingTerminusId.TryGetValue(roamingType, out var address);
 
         using (await RoamingMessageLock.Wait(roamingType, "Terminus Call request"))
         {
             while (!IsDisposed)
             {
-                if (routeId == 0)
+                if (address == 0)
                 {
-                    routeId = await GetTerminusId(roamingType);
+                    address = await GetTerminusId(roamingType);
                     
-                    if (routeId != 0)
+                    if (address != 0)
                     {
-                        _roamingTerminusId[roamingType] = routeId;
+                        _roamingTerminusId[roamingType] = address;
                     }
                     else
                     {
@@ -289,7 +289,7 @@ public sealed class Terminus : Entity
                     }
                 }
 
-                iRouteResponse = await Scene.NetworkMessagingComponent.CallInnerRoute(routeId, request);
+                iRouteResponse = await Scene.NetworkMessagingComponent.Call(address, request);
 
                 if (runtimeId != RuntimeId)
                 {
@@ -308,7 +308,7 @@ public sealed class Terminus : Entity
                     {
                         if (++failCount > 20)
                         {
-                            Log.Error($"Terminus.Call failCount > 20 route send message fail, TerminusId: {routeId}");
+                            Log.Error($"Terminus.Call failCount > 20 route send message fail, TerminusId: {address}");
                             return iRouteResponse;
                         }
 
@@ -319,7 +319,7 @@ public sealed class Terminus : Entity
                             iRouteResponse.ErrorCode = InnerErrorCode.ErrNotFoundRoaming;
                         }
 
-                        routeId = 0;
+                        address = 0;
                         continue;
                     }
                     default:

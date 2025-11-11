@@ -4,7 +4,7 @@ namespace Fantasy;
 
 public sealed class ChatUnit : Entity
 {
-    public long GateRouteId;
+    public long GateAddress;
 
     public override void Dispose()
     {
@@ -13,7 +13,7 @@ public sealed class ChatUnit : Entity
             return;
         }
 
-        GateRouteId = 0;
+        GateAddress = 0;
         base.Dispose();
     }
 }

@@ -48,9 +48,9 @@ namespace Fantasy.Network.Route
             }
 
 #if FANTASY_DEVELOP
-            Log.Debug($"AddressableMessageComponent Register addressableId:{AddressableId} RouteId:{Parent.RouteId}");
+            Log.Debug($"AddressableMessageComponent Register addressableId:{AddressableId} Address:{Parent.Address}");
 #endif
-            return AddressableHelper.AddAddressable(Scene, AddressableId, Parent.RouteId, isLock);
+            return AddressableHelper.AddAddressable(Scene, AddressableId, Parent.Address, isLock);
         }
 
         /// <summary>
@@ -71,9 +71,9 @@ namespace Fantasy.Network.Route
         public FTask UnLock(string source)
         {
 #if FANTASY_DEVELOP
-            Log.Debug($"AddressableMessageComponent UnLock {Parent.Id} {Parent.RouteId}");
+            Log.Debug($"AddressableMessageComponent UnLock {Parent.Id} {Parent.Address}");
 #endif
-            return AddressableHelper.UnLockAddressable(Scene, Parent.Id, Parent.RouteId, source);
+            return AddressableHelper.UnLockAddressable(Scene, Parent.Id, Parent.Address, source);
         }
 
         /// <summary>

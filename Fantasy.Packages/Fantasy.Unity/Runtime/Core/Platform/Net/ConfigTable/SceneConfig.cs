@@ -201,17 +201,17 @@ namespace Fantasy.Platform.Net
 	    /// </summary>
 	    public int SceneType { get; set; }
 	    /// <summary>
-	    /// RouteId
+	    /// Address
 	    /// </summary>
 	    [JsonIgnore] 
 	    [IgnoreDataMember]
-	    public long RouteId { get; private set; }
+	    public long Address { get; private set; }
 		/// <summary>
 		/// 初始化方法
 		/// </summary>
 	    public void Initialize()
 	    {
-		    RouteId = IdFactoryHelper.RuntimeId(false, 0, Id, (byte)WorldConfigId, 0);
+		    Address = IdFactoryHelper.RuntimeId(false, 0, Id, (byte)WorldConfigId, 0);
 	    }
     }
 }

@@ -11,7 +11,7 @@ public sealed class C2G_CreateSubSceneRequestHandler : MessageRPC<C2G_CreateSubS
     {
         var scene = session.Scene;
         var sceneConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0];
-        var createSubSceneResponse = (M2G_CreateSubSceneResponse)await scene.NetworkMessagingComponent.CallInnerRoute(sceneConfig.RouteId, new G2M_CreateSubSceneRequest());
+        var createSubSceneResponse = (M2G_CreateSubSceneResponse)await scene.NetworkMessagingComponent.Call(sceneConfig.Address, new G2M_CreateSubSceneRequest());
 
         if (createSubSceneResponse.ErrorCode != 0)
         {
@@ -20,7 +20,7 @@ public sealed class C2G_CreateSubSceneRequestHandler : MessageRPC<C2G_CreateSubS
             return;
         }
         
-        // 记录下这个RouteId，以便后续的消息转发。
-        session.AddComponent<GateSubSceneFlagComponent>().SubSceneRouteId = createSubSceneResponse.SubSceneRouteId;
+        // 记录下这个AddressId，以便后续的消息转发。
+        session.AddComponent<GateSubSceneFlagComponent>().SubSceneAddressId = createSubSceneResponse.SubSceneAddress;
     }
 }

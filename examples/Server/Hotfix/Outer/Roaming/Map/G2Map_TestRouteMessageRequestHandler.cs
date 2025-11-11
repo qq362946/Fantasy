@@ -4,9 +4,7 @@ using Fantasy.Network.Roaming;
 
 namespace Fantasy;
 
-public class
-    G2Map_TestRouteMessageRequestHandler : RouteRPC<Terminus, G2Map_TestRouteMessageRequest,
-    Map2G_TestRouteMessageResponse>
+public class G2Map_TestRouteMessageRequestHandler : AddressRPC<Terminus, G2Map_TestRouteMessageRequest, Map2G_TestRouteMessageResponse>
 {
     protected override async FTask Run(Terminus terminus, G2Map_TestRouteMessageRequest request,
         Map2G_TestRouteMessageResponse response,

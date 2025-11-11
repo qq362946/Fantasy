@@ -74,111 +74,111 @@ namespace Fantasy.Scheduler
         public readonly SortedDictionary<uint, MessageSender> RequestCallback = new();
         public readonly Dictionary<uint, MessageSender> TimeoutRouteMessageSenders = new();
         
-        public void SendInnerRoute<T>(long routeId, T message) where T : IRouteMessage
+        public void Send<T>(long address, T message) where T : IAddressMessage
         {
-            if (routeId == 0)
+            if (address == 0)
             {
-                Log.Error($"SendInnerRoute appId == 0");
+                Log.Error($"Send appId == 0");
                 return;
             }
 
-            Scene.GetSession(routeId).Send(message, 0, routeId);
+            Scene.GetSession(address).Send(message, 0, address);
         }
 
-        internal void SendInnerRoute(long routeId, Type messageType, APackInfo packInfo)
+        internal void Send(long address, Type messageType, APackInfo packInfo)
         {
-            if (routeId == 0)
+            if (address == 0)
             {
-                Log.Error($"SendInnerRoute routeId == 0");
+                Log.Error($"Send address == 0");
                 return;
             }
 
-            Scene.GetSession(routeId).Send(0, routeId, messageType, packInfo);
+            Scene.GetSession(address).Send(0, address, messageType, packInfo);
         }
         
-        public void SendInnerRoute<T>(ICollection<long> routeIdCollection, T message) where T : IRouteMessage
+        public void Send<T>(ICollection<long> addressCollection, T message) where T : IAddressMessage
         {
-            if (routeIdCollection.Count <= 0)
+            if (addressCollection.Count <= 0)
             {
-                Log.Error("SendInnerRoute routeIdCollection.Count <= 0");
+                Log.Error("Send addressCollection.Count <= 0");
                 return;
             }
             
-            using var processPackInfo = ProcessPackInfo.Create(Scene, message, routeIdCollection.Count);
-            foreach (var routeId in routeIdCollection)
+            using var processPackInfo = ProcessPackInfo.Create(Scene, message, addressCollection.Count);
+            foreach (var address in addressCollection)
             {
-                processPackInfo.Set(0, routeId);
-                Scene.GetSession(routeId).Send(processPackInfo, 0, routeId);
+                processPackInfo.Set(0, address);
+                Scene.GetSession(address).Send(processPackInfo, 0, address);
             }
         }
+
+        internal async FTask<IResponse> Call(long address, Type requestType, APackInfo packInfo)
+        {
+            if (address == 0)
+            {
+                Log.Error($"Call address == 0");
+                return null;
+            }
+
+            var rpcId = ++_rpcId;
+            var session = Scene.GetSession(address);
+            var requestCallback = FTask<IResponse>.Create(false);
+            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, requestType, requestCallback));
+            session.Send(rpcId, address, requestType, packInfo);
+            return await requestCallback;
+        }
+
+        public async FTask<IResponse> Call<T>(Session session, long address, T request) where T : IAddressMessage
+        {
+            var rpcId = ++_rpcId;
+            var requestCallback = FTask<IResponse>.Create(false);
+            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
+            session.Send(request, rpcId, address);
+            return await requestCallback;
+        }
+
+        public async FTask<IResponse> Call<T>(long address, T request) where T : IAddressMessage
+        {
+            if (address == 0)
+            {
+                Log.Error($"Call address == 0");
+                return null;
+            }
+            
+            var rpcId = ++_rpcId;
+            var session = Scene.GetSession(address);
+            var requestCallback = FTask<IResponse>.Create(false);
+            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
+            session.Send<T>(request, rpcId, address);
+            return await requestCallback;
+        }
         
-        public async FTask SendAddressable<T>(long addressableId, T message) where T : IRouteMessage
+        public async FTask SendAddressable<T>(long addressableId, T message) where T : IAddressMessage
         {
             await CallAddressable(addressableId, message);
         }
-
-        internal async FTask<IResponse> CallInnerRoute(long routeId, Type requestType, APackInfo packInfo)
-        {
-            if (routeId == 0)
-            {
-                Log.Error($"CallInnerRoute routeId == 0");
-                return null;
-            }
-
-            var rpcId = ++_rpcId;
-            var session = Scene.GetSession(routeId);
-            var requestCallback = FTask<IResponse>.Create(false);
-            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, requestType, requestCallback));
-            session.Send(rpcId, routeId, requestType, packInfo);
-            return await requestCallback;
-        }
-
-        public async FTask<IResponse> CallInnerRouteBySession<T>(Session session, long routeId, T request) where T : IRouteMessage
-        {
-            var rpcId = ++_rpcId;
-            var requestCallback = FTask<IResponse>.Create(false);
-            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
-            session.Send(request, rpcId, routeId);
-            return await requestCallback;
-        }
-
-        public async FTask<IResponse> CallInnerRoute<T>(long routeId, T request) where T : IRouteMessage
-        {
-            if (routeId == 0)
-            {
-                Log.Error($"CallInnerRoute routeId == 0");
-                return null;
-            }
-            
-            var rpcId = ++_rpcId;
-            var session = Scene.GetSession(routeId);
-            var requestCallback = FTask<IResponse>.Create(false);
-            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, request, requestCallback));
-            session.Send<T>(request, rpcId, routeId);
-            return await requestCallback;
-        }
         
-        public async FTask<IResponse> CallAddressable<T>(long addressableId, T request) where T : IRouteMessage
+        public async FTask<IResponse> CallAddressable<T>(long addressableId, T request) where T : IAddressMessage
         {
             var failCount = 0;
             
             using (await AddressableRouteMessageLock.Wait(addressableId, "CallAddressable"))
             {
-                var addressableRouteId = await AddressableHelper.GetAddressableRouteId(Scene, addressableId);
+                var addressableAddress = await AddressableHelper.GetAddressableAddress(Scene, addressableId);
 
                 while (true)
                 {
-                    if (addressableRouteId == 0)
+                    if (addressableAddress == 0)
                     {
-                        addressableRouteId = await AddressableHelper.GetAddressableRouteId(Scene, addressableId);
+                        addressableAddress = await AddressableHelper.GetAddressableAddress(Scene, addressableId);
                     }
                     
-                    if (addressableRouteId == 0)
+                    if (addressableAddress == 0)
                     {
                         return MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoute);
                     }
                     
-                    var iRouteResponse = await CallInnerRoute(addressableRouteId, request);
+                    var iRouteResponse = await Call(addressableAddress, request);
                     
                     switch (iRouteResponse.ErrorCode)
                     {
@@ -186,12 +186,12 @@ namespace Fantasy.Scheduler
                         {
                             if (++failCount > 20)
                             {
-                                Log.Error($"AddressableComponent.Call failCount > 20 route send message fail, routeId: {addressableRouteId} AddressableMessageComponent:{addressableId}");
+                                Log.Error($"AddressableComponent.Call failCount > 20 route send message fail, address: {addressableAddress} AddressableMessageComponent:{addressableId}");
                                 return iRouteResponse;
                             }
                             
                             await TimerComponent.Net.WaitAsync(500);
-                            addressableRouteId = 0;
+                            addressableAddress = 0;
                             continue;
                         }
                         case InnerErrorCode.ErrRouteTimeout:
@@ -224,9 +224,9 @@ namespace Fantasy.Scheduler
             if (response.ErrorCode == InnerErrorCode.ErrRouteTimeout)
             {
 #if FANTASY_DEVELOP
-                messageSender.Tcs.SetException(new Exception($"Rpc error: request, 注意RouteId消息超时，请注意查看是否死锁或者没有reply: RouteId: {messageSender.RouteId} {messageSender.Request.ToJson()}, response: {response}"));
+                messageSender.Tcs.SetException(new Exception($"Rpc error: request, 注意Address消息超时，请注意查看是否死锁或者没有reply: Address: {messageSender.Address} {messageSender.Request.ToJson()}, response: {response}"));
 #else
-                messageSender.Tcs.SetException(new Exception($"Rpc error: request, 注意RouteId消息超时，请注意查看是否死锁或者没有reply: RouteId: {messageSender.RouteId} {messageSender.Request}, response: {response}"));
+                messageSender.Tcs.SetException(new Exception($"Rpc error: request, 注意Address消息超时，请注意查看是否死锁或者没有reply: Address: {messageSender.Address} {messageSender.Request}, response: {response}"));
 #endif
                 messageSender.Dispose();
                 return;
@@ -242,9 +242,9 @@ namespace Fantasy.Scheduler
             {
                 switch (messageSender.Request)
                 {
-                    case IRouteMessage iRouteMessage:
+                    case IAddressMessage:
                     {
-                        // IRouteMessage是个特殊的RPC协议、这里不处理就可以了。
+                        // IAddressMessage是个特殊的RPC协议、这里不处理就可以了。
                         break;
                     }
                     case IRequest iRequest:
@@ -267,8 +267,7 @@ namespace Fantasy.Scheduler
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                Log.Error(e);
             }
         }
     }

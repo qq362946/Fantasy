@@ -17,10 +17,10 @@ public sealed class C2G_CreateAddressableRequestHandler : MessageRPC<C2G_CreateA
         // 演示的例子里只有一个MapScene，所以我就拿第一个Map服务器进行通讯了。
         // 我这里仅是演示功能，不是一定要这样拿Map
         var sceneConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0];
-        // 2、使用Scene.NetworkMessagingComponent.CallInnerRoute方法跟Gate服务器进行通讯。
-        // CallInnerRoute方法跟Gate服务器进行通讯需要提供一个runTimeId，这个Id在sceneConfig.RouteId可以获取到。
+        // 2、使用Scene.NetworkMessagingComponent.Call方法跟Gate服务器进行通讯。
+        // Call方法跟Gate服务器进行通讯需要提供一个AddressId，这个Id在sceneConfig.AddressId可以获取到。
         // 第二个参数是需要发送网络协议，这个协议在Fantasy/Examples/Config/ProtoBuf里的InnerBson或Inner文件定义。
-        var responseAddressableId = (M2G_ResponseAddressableId)await scene.NetworkMessagingComponent.CallInnerRoute(sceneConfig.RouteId, new G2M_RequestAddressableId());
+        var responseAddressableId = (M2G_ResponseAddressableId)await scene.NetworkMessagingComponent.Call(sceneConfig.Address, new G2M_RequestAddressableId());
         // 3、给session添加一个AddressableRouteComponent组件，这个组件很重要、能否转发Addressable协议主要是通过这个。
         var addressableRouteComponent = session.AddComponent<AddressableRouteComponent>();
         // 4、拿到MapScene返回的AddressableId赋值给addressableRouteComponent.AddressableId。

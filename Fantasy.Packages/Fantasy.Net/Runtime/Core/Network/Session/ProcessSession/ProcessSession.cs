@@ -23,14 +23,14 @@ public sealed class ProcessSession : Session
     private readonly MemoryStreamBufferPool _memoryStreamBufferPool = new MemoryStreamBufferPool();
     private readonly Dictionary<Type, Func<object>> _createInstances = new Dictionary<Type, Func<object>>();
 
-    public override void Send(IMessage message, Type messageType, uint rpcId = 0, long routeId = 0)
+    public override void Send(IMessage message, Type messageType, uint rpcId = 0, long address = 0)
     {
         if (IsDisposed)
         {
             return;
         }
         
-        this.Scheduler(messageType, rpcId, routeId, message.OpCode(), message);
+        this.Scheduler(messageType, rpcId, address, message.OpCode(), message);
     }
     
     /// <summary>
@@ -38,38 +38,38 @@ public sealed class ProcessSession : Session
     /// </summary>
     /// <param name="message">要发送的消息。</param>
     /// <param name="rpcId">RPC 标识符。</param>
-    /// <param name="routeId">路由标识符。</param>
-    public override void Send<T>(T message, uint rpcId = 0, long routeId = 0)
+    /// <param name="address">Address。</param>
+    public override void Send<T>(T message, uint rpcId = 0, long address = 0)
     {
         if (IsDisposed)
         {
             return;
         }
 
-        this.Scheduler(typeof(T), rpcId, routeId, message.OpCode(), message);
+        this.Scheduler(typeof(T), rpcId, address, message.OpCode(), message);
     }
 
-    public override void Send(uint rpcId, long routeId, Type messageType, APackInfo packInfo)
+    public override void Send(uint rpcId, long address, Type messageType, APackInfo packInfo)
     {
         if (IsDisposed)
         {
             return;
         }
         
-        this.Scheduler(messageType, rpcId, routeId, packInfo);
+        this.Scheduler(messageType, rpcId, address, packInfo);
     }
 
-    public override void Send(ProcessPackInfo packInfo, uint rpcId = 0, long routeId = 0)
+    public override void Send(ProcessPackInfo packInfo, uint rpcId = 0, long address = 0)
     {
-        this.Scheduler(packInfo.MessageType, rpcId, routeId, packInfo);
+        this.Scheduler(packInfo.MessageType, rpcId, address, packInfo);
     }
 
-    public override void Send(MemoryStreamBuffer memoryStream, uint rpcId = 0, long routeId = 0)
+    public override void Send(MemoryStreamBuffer memoryStream, uint rpcId = 0, long address = 0)
     {
         throw new Exception("The use of this method is not supported");
     }
 
-    public override FTask<IResponse> Call<T>(T request, long routeId = 0) 
+    public override FTask<IResponse> Call<T>(T request, long address = 0) 
     {
         throw new Exception("The use of this method is not supported");
     }

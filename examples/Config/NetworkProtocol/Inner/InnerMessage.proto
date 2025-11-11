@@ -1,70 +1,70 @@
 syntax = "proto3";
 package Sining.Message;
-message G2A_TestMessage // IRouteMessage
+message G2A_TestMessage // IAddressMessage
 {
 	string Tag = 1;
 }
-message G2A_TestRequest // IRouteRequest,G2A_TestResponse
+message G2A_TestRequest // IAddressRequest,G2A_TestResponse
 {
 	
 }
-message G2A_TestResponse // IRouteResponse
+message G2A_TestResponse // IAddressResponse
 {
 	
 }
-message G2M_RequestAddressableId // IRouteRequest,M2G_ResponseAddressableId
+message G2M_RequestAddressableId // IAddressRequest,M2G_ResponseAddressableId
 {
 
 }
-message M2G_ResponseAddressableId // IRouteResponse
+message M2G_ResponseAddressableId // IAddressResponse
 {
 	int64 AddressableId = 1;	// Map服务器返回的AddressableId
 }
 /// 通知Chat服务器创建一个RouteId
-message G2Chat_CreateRouteRequest // IRouteRequest,Chat2G_CreateRouteResponse
+message G2Chat_CreateRouteRequest // IAddressRequest,Chat2G_CreateRouteResponse
 {
-	int64 GateRouteId = 1;
+	int64 GateAddress = 1;
 }
-message Chat2G_CreateRouteResponse // IRouteResponse
+message Chat2G_CreateRouteResponse // IAddressResponse
 {
-	int64 ChatRouteId = 1;
+	int64 ChatAddress = 1;
 }
 /// Map给另外一个Map发送Unit数据
 // Protocol Bson
-message M2M_SendUnitRequest // IRouteRequest,M2M_SendUnitResponse
+message M2M_SendUnitRequest // IAddressRequest,M2M_SendUnitResponse
 {
 	Unit Unit = 1;
 }
 // Protocol Bson
-message M2M_SendUnitResponse // IRouteResponse
+message M2M_SendUnitResponse // IAddressResponse
 {
 
 }
 /// Gate发送Addressable消息给MAP
-message G2M_SendAddressableMessage // IAddressableRouteMessage
+message G2M_SendAddressableMessage // IAddressableMessage
 {
 	string Tag = 1;
 }
 // Gate通知Map创建一个SubScene
-message G2M_CreateSubSceneRequest // IRouteRequest,M2G_CreateSubSceneResponse
+message G2M_CreateSubSceneRequest // IAddressRequest,M2G_CreateSubSceneResponse
 {
 
 }
-message M2G_CreateSubSceneResponse // IRouteResponse
+message M2G_CreateSubSceneResponse // IAddressResponse
 {
-	int64 SubSceneRouteId = 1;
+	int64 SubSceneAddress = 1;
 }
 // Gate给SubScene发送一个消息
-message G2SubScene_SentMessage // IRouteMessage
+message G2SubScene_SentMessage // IAddressMessage
 {
 	string Tag = 1;
 }
 /// Gate通知SubScene创建一个Addressable消息
-message G2SubScene_AddressableIdRequest // IRouteRequest,SubScene2G_AddressableIdResponse
+message G2SubScene_AddressableIdRequest // IAddressRequest,SubScene2G_AddressableIdResponse
 {
 
 }
-message SubScene2G_AddressableIdResponse // IRouteResponse
+message SubScene2G_AddressableIdResponse // IAddressResponse
 {
 	int64 AddressableId = 1;	// SubScene服务器返回的AddressableId
 }
@@ -74,11 +74,11 @@ message Chat2M_TestMessage // IRoamingMessage,MapRoamingType
 	string Tag = 1;
 }
 /// 测试一个Gate服务器发送一个Route消息给某个漫游终端
-message G2Map_TestRouteMessageRequest // IRouteRequest,Map2G_TestRouteMessageResponse
+message G2Map_TestRouteMessageRequest // IAddressRequest,Map2G_TestRouteMessageResponse
 {
 	string Tag = 1;
 }
-message Map2G_TestRouteMessageResponse // IRouteResponse
+message Map2G_TestRouteMessageResponse // IAddressResponse
 {
 
 }
@@ -92,20 +92,20 @@ message Map2G_TestRoamingMessageResponse // IRoamingResponse
 	
 }
 /// Gate服务器通知Map订阅一个领域事件到Gate上
-message G2Map_SubscribeSphereEventRequest // IRouteRequest,G2Map_SubscribeSphereEventResponse
+message G2Map_SubscribeSphereEventRequest // IAddressRequest,G2Map_SubscribeSphereEventResponse
 {
-	int64 GateRouteId = 1;
+	int64 GateAddress = 1;
 }
-message G2Map_SubscribeSphereEventResponse // IRouteResponse
+message G2Map_SubscribeSphereEventResponse // IAddressResponse
 {
 
 }
 /// Gate服务器通知Map取消订阅一个领域事件到Gate上
-message G2Map_UnsubscribeSphereEventRequest // IRouteRequest,Map2G_UnsubscribeSphereEventResponse
+message G2Map_UnsubscribeSphereEventRequest // IAddressRequest,Map2G_UnsubscribeSphereEventResponse
 {
-	int64 GateRouteId = 1;
+	int64 GateAddress = 1;
 }
-message Map2G_UnsubscribeSphereEventResponse // IRouteResponse
+message Map2G_UnsubscribeSphereEventResponse // IAddressResponse
 {
 
 }
