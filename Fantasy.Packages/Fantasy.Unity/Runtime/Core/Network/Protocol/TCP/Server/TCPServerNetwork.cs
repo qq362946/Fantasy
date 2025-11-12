@@ -143,10 +143,18 @@ namespace Fantasy.Network.TCP
             {
                 case SocketAsyncOperation.Accept:
                 {
-                    Scene.ThreadSynchronizationContext.Post(() =>
+                    try
                     {
-                        OnAcceptComplete(asyncEventArgs);
-                    });
+                        Scene.ThreadSynchronizationContext.Post(() =>
+                        {
+                            OnAcceptComplete(asyncEventArgs);
+                        });
+                    }
+                    catch
+                    {
+                        // ignored
+                    }
+
                     break;
                 }
                 default:

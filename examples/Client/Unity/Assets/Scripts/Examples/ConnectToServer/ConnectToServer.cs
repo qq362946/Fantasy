@@ -9,8 +9,8 @@ public class ConnectToServer : MonoBehaviour
     private Session _session;
     private void Start()
     {
-        StartAsync().Coroutine();
-    }
+        StartAsync().Coroutine();                                      
+    }     
     
     private void OnDestroy()
     {

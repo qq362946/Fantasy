@@ -139,17 +139,20 @@ namespace Fantasy.DataStructure.Dictionary
         /// <param name="multiplier">使用 <see cref="GetFastModMultiplier"/> 预先计算的乘数。</param>
         /// <returns>模运算结果。</returns>
         /// <remarks>
-        /// 使用改进的 Daniel Lemire 快速模算法 (https://github.com/dotnet/runtime/pull/406)，
-        /// 如果除数小于 2**31，则可以避免长乘法。
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint FastMod(uint value, uint divisor, ulong multiplier)
         {
-            // 此版本比 BigMul 更快，因为我们只需要高位
-            uint highbits = (uint)(((((multiplier * value) >> 32) + 1) * divisor) >> 32);
-
-            Debug.Assert(highbits == value % divisor);
-            return highbits;
+            if (Environment.Is64BitProcess)
+            {
+                var highbits = (uint)(((((multiplier * value) >> 32) + 1) * divisor) >> 32);
+                Debug.Assert(highbits == value % divisor);
+                return highbits;
+            }
+            else
+            {
+                return value % divisor;
+            }
         }
     }
 }
