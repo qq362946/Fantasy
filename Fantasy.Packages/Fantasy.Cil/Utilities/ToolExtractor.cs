@@ -86,7 +86,8 @@ public class ToolExtractor
     /// </summary>
     /// <param name="targetDirectory"></param>
     /// <param name="ct"></param>
-    public async Task ExtractFantasyNetAsync(string targetDirectory, CancellationToken ct = default)
+    /// <param name="askOverwrite">是否询问覆盖确认（默认true）。新项目初始化时应设为false。</param>
+    public async Task ExtractFantasyNetAsync(string targetDirectory, CancellationToken ct = default, bool askOverwrite = true)
     {
         var loc = LocalizationManager.Current;
         // 检查目标目录是否已有 Fantasy.Net 相关文件
@@ -101,15 +102,18 @@ public class ToolExtractor
 
         if (Directory.Exists(fantasyNetDir) && Directory.GetFileSystemEntries(fantasyNetDir).Length > 0)
         {
-            var overwrite = AnsiConsole.Confirm(
-                loc.FantasyNetOverwriteConfirm(fantasyNetDir),
-                false
-            );
-
-            if (!overwrite)
+            if (askOverwrite)
             {
-                AnsiConsole.MarkupLine(loc.SkippedFantasyNet);
-                return;
+                var overwrite = AnsiConsole.Confirm(
+                    loc.FantasyNetOverwriteConfirm(fantasyNetDir),
+                    false
+                );
+
+                if (!overwrite)
+                {
+                    AnsiConsole.MarkupLine(loc.SkippedFantasyNet);
+                    return;
+                }
             }
 
             // 清理现有目录
@@ -126,7 +130,8 @@ public class ToolExtractor
     /// </summary>
     /// <param name="targetDirectory"></param>
     /// <param name="ct"></param>
-    public async Task ExtractFantasyUnityAsync(string targetDirectory, CancellationToken ct = default)
+    /// <param name="askOverwrite">是否询问覆盖确认（默认true）。新项目初始化时应设为false。</param>
+    public async Task ExtractFantasyUnityAsync(string targetDirectory, CancellationToken ct = default, bool askOverwrite = true)
     {
         var loc = LocalizationManager.Current;
         // 检查目标目录是否已有 Fantasy.Unity 相关文件
@@ -141,15 +146,18 @@ public class ToolExtractor
 
         if (Directory.Exists(fantasyUnityDir) && Directory.GetFileSystemEntries(fantasyUnityDir).Length > 0)
         {
-            var overwrite = AnsiConsole.Confirm(
-                loc.FantasyUnityOverwriteConfirm(fantasyUnityDir),
-                false
-            );
-
-            if (!overwrite)
+            if (askOverwrite)
             {
-                AnsiConsole.MarkupLine(loc.SkippedFantasyUnity);
-                return;
+                var overwrite = AnsiConsole.Confirm(
+                    loc.FantasyUnityOverwriteConfirm(fantasyUnityDir),
+                    false
+                );
+
+                if (!overwrite)
+                {
+                    AnsiConsole.MarkupLine(loc.SkippedFantasyUnity);
+                    return;
+                }
             }
 
             // 清理现有目录
@@ -230,19 +238,20 @@ public class ToolExtractor
     /// </summary>
     /// <param name="targetDirectory"></param>
     /// <param name="ct"></param>
-    public Task ExtractNLogAsync(string targetDirectory, CancellationToken ct = default)
+    /// <param name="askOverwrite">是否询问覆盖确认（默认true）。新项目初始化时应设为false。</param>
+    public Task ExtractNLogAsync(string targetDirectory, CancellationToken ct = default, bool askOverwrite = true)
     {
         var loc = LocalizationManager.Current;
         var toolsDir = Path.Combine(targetDirectory, "Tools");
         var nlogDir = Path.Combine(toolsDir, "NLog");
-        
+
         if (!Directory.Exists(toolsDir))
         {
             // 如果 Tools 目录不存在，则创建该目录
             Directory.CreateDirectory(toolsDir);
         }
-        
-        return ExtractNLogByDirAsync(nlogDir, ct);
+
+        return ExtractNLogByDirAsync(nlogDir, ct, askOverwrite);
     }
     
     /// <summary>

@@ -76,37 +76,114 @@ public class AddCommand : Command
 
                 tool = tool.ToLower().Replace(".", "").Replace(" ", "");
 
+                // Pre-check for overwrite confirmations BEFORE starting Status display
+                // This prevents "Trying to run one or more interactive functions concurrently" error
+                var skipTools = new HashSet<string>();
+
+                if (tool == "protocolexporttool" || tool == "all")
+                {
+                    var toolDir = Path.Combine(path, "Tools", "ProtocolExportTool");
+                    if (Directory.Exists(toolDir) && Directory.GetFileSystemEntries(toolDir).Length > 0)
+                    {
+                        if (!AnsiConsole.Confirm(loc.ProtocolExportToolOverwriteConfirm(toolDir), false))
+                        {
+                            AnsiConsole.MarkupLine(loc.SkippedProtocolExportTool);
+                            skipTools.Add("protocolexporttool");
+                        }
+                    }
+                }
+
+                if (tool == "networkprotocol" || tool == "all")
+                {
+                    var toolDir = Path.Combine(path, "Tools", "NetworkProtocol");
+                    if (Directory.Exists(toolDir) && Directory.GetFileSystemEntries(toolDir).Length > 0)
+                    {
+                        if (!AnsiConsole.Confirm(loc.NetworkProtocolOverwriteConfirm(toolDir), false))
+                        {
+                            AnsiConsole.MarkupLine(loc.SkippedNetworkProtocol);
+                            skipTools.Add("networkprotocol");
+                        }
+                    }
+                }
+
+                if (tool == "nlog" || tool == "all")
+                {
+                    var nlogDir = Path.Combine(path, "Tools", "NLog");
+                    if (Directory.Exists(nlogDir) && Directory.GetFileSystemEntries(nlogDir).Length > 0)
+                    {
+                        if (!AnsiConsole.Confirm(loc.NLogOverwriteConfirm(nlogDir), false))
+                        {
+                            AnsiConsole.MarkupLine(loc.SkippedNLog);
+                            skipTools.Add("nlog");
+                        }
+                    }
+                }
+
+                if (tool == "fantasynet" || tool == "all")
+                {
+                    var fantasyNetDir = Path.Combine(path, "Tools", "Fantasy.Net");
+                    if (Directory.Exists(fantasyNetDir) && Directory.GetFileSystemEntries(fantasyNetDir).Length > 0)
+                    {
+                        if (!AnsiConsole.Confirm(loc.FantasyNetOverwriteConfirm(fantasyNetDir), false))
+                        {
+                            AnsiConsole.MarkupLine(loc.SkippedFantasyNet);
+                            skipTools.Add("fantasynet");
+                        }
+                    }
+                }
+
+                if (tool == "fantasyunity" || tool == "all")
+                {
+                    var fantasyUnityDir = Path.Combine(path, "Tools", "Fantasy.Unity");
+                    if (Directory.Exists(fantasyUnityDir) && Directory.GetFileSystemEntries(fantasyUnityDir).Length > 0)
+                    {
+                        if (!AnsiConsole.Confirm(loc.FantasyUnityOverwriteConfirm(fantasyUnityDir), false))
+                        {
+                            AnsiConsole.MarkupLine(loc.SkippedFantasyUnity);
+                            skipTools.Add("fantasyunity");
+                        }
+                    }
+                }
+
+                // If all tools were skipped, exit early
+                if (tool != "all" && skipTools.Contains(tool))
+                {
+                    context.ExitCode = 0;
+                    return;
+                }
+
+                // Now perform extraction with askOverwrite=false (we already asked above)
                 await AnsiConsole.Status()
                     .StartAsync(loc.Extracting, async ctx =>
                     {
-                        if (tool == "protocolexporttool" || tool == "all")
+                        if ((tool == "protocolexporttool" || tool == "all") && !skipTools.Contains("protocolexporttool"))
                         {
                             ctx.Status(loc.ExtractingProtocolExportTool);
-                            await extractor.ExtractProtocolExportToolAsync(path, ct);
+                            await extractor.ExtractProtocolExportToolAsync(path, ct, askOverwrite: false);
                         }
 
-                        if (tool == "networkprotocol" || tool == "all")
+                        if ((tool == "networkprotocol" || tool == "all") && !skipTools.Contains("networkprotocol"))
                         {
                             ctx.Status(loc.ExtractingNetworkProtocol);
-                            await extractor.ExtractNetworkProtocolAsync(path, ct);
+                            await extractor.ExtractNetworkProtocolAsync(path, ct, askOverwrite: false);
                         }
 
-                        if (tool == "nlog" || tool == "all")
+                        if ((tool == "nlog" || tool == "all") && !skipTools.Contains("nlog"))
                         {
                             ctx.Status(loc.ExtractingNLog);
-                            await extractor.ExtractNLogAsync(path, ct);
+                            await extractor.ExtractNLogAsync(path, ct, askOverwrite: false);
                         }
 
-                        if (tool == "fantasynet" || tool == "all")
+                        if ((tool == "fantasynet" || tool == "all") && !skipTools.Contains("fantasynet"))
                         {
                             ctx.Status(loc.ExtractingFantasyNet);
-                            await extractor.ExtractFantasyNetAsync(path, ct);
+                            await extractor.ExtractFantasyNetAsync(path, ct, askOverwrite: false);
                         }
 
-                        if (tool == "fantasyunity" || tool == "all")
+                        if ((tool == "fantasyunity" || tool == "all") && !skipTools.Contains("fantasyunity"))
                         {
                             ctx.Status(loc.ExtractingFantasyUnity);
-                            await extractor.ExtractFantasyUnityAsync(path, ct);
+                            await extractor.ExtractFantasyUnityAsync(path, ct, askOverwrite: false);
                         }
                     });
 

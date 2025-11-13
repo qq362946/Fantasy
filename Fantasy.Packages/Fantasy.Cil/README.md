@@ -51,7 +51,7 @@ fantasy --version
 dotnet tool update -g Fantasy.Cli
 ```
 
-**卸载：**
+**卸载：**[01-ServerConfiguration.md](../../Docs/01-Server/01-ServerConfiguration.md)
 
 ```bash
 dotnet tool uninstall -g Fantasy.Cli
@@ -69,6 +69,11 @@ fantasy init
 **使用项目名快速开始：**
 ```bash
 fantasy init -n MyGameServer
+```
+
+**生成到指定目录：**
+```bash
+fantasy init -p /path/to/project
 ```
 
 这将创建一个完整的 Fantasy 项目结构：

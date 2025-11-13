@@ -1,0 +1,63 @@
+{
+  "outputDirectory": "Fantasy.Packages/Fantasy.Cil/Resources",
+  "packages": [
+    {
+      "name": "Fantasy.Net",
+      "sourceDirectory": "Fantasy.Packages/Fantasy.Net",
+      "outputFileName": "Fantasy.Net.zip",
+      "excludePatterns": [
+        "**/bin/**",
+        "**/obj/**",
+        "**/.vs/**",
+        "**/.git/**",
+        "**/*.user",
+        "**/*.suo",
+        "**/.DS_Store"
+      ]
+    },
+    {
+      "name": "NetworkProtocol",
+      "sourceDirectory": "Tools/NetworkProtocol",
+      "outputFileName": "NetworkProtocol.zip",
+      "excludePatterns": [
+        "**/.DS_Store"
+      ]
+    },
+    {
+      "name": "ProtocolExportTool",
+      "sourceDirectory": "Tools/Exporter/NetworkProtocol",
+      "outputFileName": "ProtocolExportTool.zip",
+      "excludePatterns": [
+        "**/.DS_Store"
+      ]
+    },
+    {
+      "name": "NLog",
+      "sourceDirectory": "Fantasy.Packages/Fantasy.NLog",
+      "outputFileName": "NLog.zip",
+      "excludePatterns": [
+        "**/bin/**",
+        "**/obj/**",
+        "**/.vs/**",
+        "**/.git/**",
+        "**/*.user",
+        "**/*.suo",
+        "**/.DS_Store"
+      ]
+    },
+    {
+      "name": "Fantasy.Unity",
+      "sourceDirectory": "Fantasy.Packages/Fantasy.Unity",
+      "outputFileName": "Fantasy.Unity.zip",
+      "excludePatterns": [
+        "**/bin/**",
+        "**/obj/**",
+        "**/.vs/**",
+        "**/.git/**",
+        "**/*.user",
+        "**/*.suo",
+        "**/.DS_Store"
+      ]
+    }
+  ]
+}

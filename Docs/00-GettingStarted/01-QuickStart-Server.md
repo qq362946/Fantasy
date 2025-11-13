@@ -225,7 +225,7 @@ Server (入口)
 dotnet add package Fantasy-Net
 
 # 或指定版本号
-dotnet add package Fantasy-Net --version 2025.2.0
+dotnet add package Fantasy-Net --version 2025.2.12
 ```
 
 或直接编辑 `Server.Entity.csproj` 文件：

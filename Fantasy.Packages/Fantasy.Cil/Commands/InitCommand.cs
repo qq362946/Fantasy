@@ -17,19 +17,26 @@ public class InitCommand : Command
             description: LocalizationManager.Current.InitProjectNameOption
         );
 
+        var pathOption = new Option<string?>(
+            aliases: ["-p", "--path"],
+            description: "Path to the directory where the project will be created"
+        );
+
         var interactiveOption = new Option<bool>(
             aliases: ["-i", "--interactive"],
             getDefaultValue: () => true,
             description: LocalizationManager.Current.InitInteractiveModeOption
         );
-        
+
         AddOption(nameOption);
+        AddOption(pathOption);
         AddOption(interactiveOption);
 
         this.SetHandler(async (InvocationContext context) =>
         {
             var loc = LocalizationManager.Current;
             var name = context.ParseResult.GetValueForOption(nameOption);
+            var path = context.ParseResult.GetValueForOption(pathOption);
             var interactive = context.ParseResult.GetValueForOption(interactiveOption);
             var ct = context.GetCancellationToken();
 
@@ -38,10 +45,20 @@ public class InitCommand : Command
             if (interactive || string.IsNullOrEmpty(name))
             {
                 config = await new ProjectWizard().RunAsync(ct);
+
+                // Override the wizard's output directory only if -p is specified
+                if (!string.IsNullOrEmpty(path))
+                {
+                    // If -p is specified, use: specified_path/project_name
+                    var basePath = Path.IsPathRooted(path)
+                        ? path
+                        : Path.Combine(Directory.GetCurrentDirectory(), path);
+                    config.OutputDirectory = Path.Combine(basePath, config.Name);
+                }
             }
             else
             {
-                config = CreateConfigFromArgs(name);
+                config = CreateConfigFromArgs(name, path);
             }
 
             // 验证输出目录
@@ -69,13 +86,28 @@ public class InitCommand : Command
         });
     }
     
-    private ProjectConfig CreateConfigFromArgs(string name)
+    private ProjectConfig CreateConfigFromArgs(string name, string? path = null)
     {
+        string basePath;
+
+        if (!string.IsNullOrEmpty(path))
+        {
+            basePath = Path.IsPathRooted(path)
+                ? path
+                : Path.Combine(Directory.GetCurrentDirectory(), path);
+        }
+        else
+        {
+            basePath = Directory.GetCurrentDirectory();
+        }
+        
+        var outputDirectory = Path.Combine(basePath, name);
+
         var config = new ProjectConfig
         {
             Name = name,
             TargetFramework = TargetFrameworkVersion.Net8,
-            OutputDirectory = Path.Combine(Directory.GetCurrentDirectory(), name)
+            OutputDirectory = outputDirectory
         };
 
         return config;
