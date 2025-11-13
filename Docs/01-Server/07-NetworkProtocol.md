@@ -60,7 +60,7 @@ Fantasy CLI 提供了便捷的命令来初始化网络协议目录结构:
 
 ```bash
 # 使用 Fantasy CLI 获得NetworkProtocol文件夹
-fantasy add NetworkProtocol
+fantasy add -t networkprotocol
 ```
 
 **CLI 工具会自动:**
