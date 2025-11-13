@@ -79,7 +79,7 @@ fantasy --version
 
 ```bash
 # 使用 Fantasy CLI 安装协议导出工具
-fantasy add ProtocolExportTool
+fantasy add -t protocolexporttool
 ```
 
 **说明:**
