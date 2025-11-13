@@ -96,7 +96,29 @@ Unity 客户端开发的完整指南。
 
 ---
 
-### 🚧 [03-Advanced](03-Advanced/) - 进阶主题 (规划中)
+### 🌐 [03-Networking](03-Networking/) - 网络通信基础
+
+掌握客户端与服务器之间的通信机制，是 Fantasy 开发的核心技能。
+
+- ✅ [01-Session.md](03-Networking/01-Session.md) - Session 使用指南
+  - Session 的获取方式（客户端和服务器端）
+  - 发送单向消息 - Send()
+  - 发送 RPC 请求 - Call()
+  - Session 生命周期管理
+  - 心跳和超时配置
+  - 完整的通信示例和最佳实践
+
+- ✅ [02-MessageHandler.md](03-Networking/02-MessageHandler.md) - 消息处理器实现指南
+  - Message&lt;T&gt; - 处理单向消息
+  - MessageRPC&lt;TRequest, TResponse&gt; - 处理 RPC 请求
+  - Handler 自动注册机制（Source Generator）
+  - Reply() 方法的使用
+  - 错误处理和异常管理
+  - 完整的业务场景示例
+
+---
+
+### 🚧 [04-Advanced](04-Advanced/) - 进阶主题 (规划中)
 
 深入探索 Fantasy Framework 的高级特性和最佳实践。
 
@@ -179,11 +201,15 @@ Unity 客户端开发的完整指南。
 3. **场景初始化**
    - [04-OnCreateScene.md](01-Server/04-OnCreateScene.md) - 场景创建事件处理
 
-4. **进阶主题**（规划中）
-   - ECS 系统
-   - 网络消息处理
+4. **网络通信基础**
+   - [01-Session.md](03-Networking/01-Session.md) - Session 使用和消息发送
+   - [02-MessageHandler.md](03-Networking/02-MessageHandler.md) - 服务器端消息处理器实现
+
+5. **进阶主题**（规划中）
+   - ECS 系统详解
    - 数据库集成
    - 分布式通信
+   - 性能优化
 
 ---
 
@@ -197,10 +223,13 @@ Unity 客户端开发的完整指南。
 2. **客户端启动**
    - [01-WritingStartupCode-Unity.md](02-Unity/01-WritingStartupCode-Unity.md) - Unity 启动代码编写
 
-3. **进阶主题**（规划中）
-   - Unity 网络通信
+3. **网络通信基础**
+   - [01-Session.md](03-Networking/01-Session.md) - Session 使用和消息发送
+
+4. **进阶主题**（规划中）
    - Unity ECS 集成
    - HybridCLR 热更新详解
+   - 客户端性能优化
 
 ---
 
@@ -211,8 +240,10 @@ Unity 客户端开发的完整指南。
 1. 先学习服务器端快速入门
 2. 再学习 Unity 客户端快速入门
 3. 深入学习服务器端配置和启动
-4. 深入学习客户端启动和网络通信
-5. 学习进阶主题（网络协议、分布式、性能优化）
+4. 学习网络协议定义和导出
+5. **学习网络通信基础（Session 和 MessageHandler）**
+6. 深入学习客户端启动和网络通信
+7. 学习进阶主题（ECS、分布式、数据库、性能优化）
 
 ---
 
@@ -231,7 +262,8 @@ Unity 客户端开发的完整指南。
 - **快速入门**: `00-GettingStarted/XX-文档名.md`
 - **服务器端**: `01-Server/XX-文档名.md`
 - **客户端**: `02-Unity/XX-文档名.md`
-- **进阶主题**: `03-Advanced/XX-文档名.md`
+- **网络通信**: `03-Networking/XX-文档名.md`
+- **进阶主题**: `04-Advanced/XX-文档名.md`
 
 ---
 
@@ -242,10 +274,11 @@ Unity 客户端开发的完整指南。
 | **快速入门** | 2 | 0 | 2 | 100% ✅ |
 | **服务器端指南** | 8 | 0 | 8 | 100% ✅ |
 | **客户端指南** | 1 | 0 | 1 | 100% ✅ |
+| **网络通信基础** | 2 | 0 | 2 | 100% ✅ |
 | **进阶主题** | 0 | 30 | 30 | 0% 🚧 |
-| **总计** | **11** | **30** | **41** | **27%** |
+| **总计** | **13** | **30** | **43** | **30%** |
 
-**最后更新**: 2025-11-08
+**最后更新**: 2025-11-13
 
 ---
 
@@ -260,6 +293,11 @@ Unity 客户端开发的完整指南。
 ## 📝 更新日志
 
 ### 2025-11-13
+- ✅ 新增网络通信基础主题 (03-Networking)
+- ✅ 添加 Session 使用指南 (03-Networking/01-Session.md)
+- ✅ 添加消息处理器实现指南 (03-Networking/02-MessageHandler.md)
+- ✅ 将原 03-Advanced 重新编号为 04-Advanced
+- ✅ 更新学习路径，添加网络通信基础内容
 - ✅ Fantasy.Cli init命令增加了执行目录参数
 
 ### 2025-11-12
