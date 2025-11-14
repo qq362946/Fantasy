@@ -263,8 +263,7 @@ message C2G_TestRequest // IRequest,G2C_TestResponse
 
 message G2C_TestResponse // IResponse
 {
-    int32 ErrorCode = 1;  // 错误码（0 表示成功）
-    string Tag = 2;
+    string Tag = 1;
 }
 ```
 
