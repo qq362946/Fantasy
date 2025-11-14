@@ -41,7 +41,7 @@ public class ClientExample
             OnConnectComplete,                    // 连接成功回调
             OnConnectFail,                        // 连接失败回调
             OnConnectDisconnect,                  // 连接断开回调
-            false,                                // 是否自动重连
+            false,                                // 是否HTTPS请求（仅用于WebSocket）
             5000);                                // 连接超时时间（毫秒）
     }
 

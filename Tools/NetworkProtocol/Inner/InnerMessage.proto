@@ -1,14 +1,2 @@
 syntax = "proto3";
 package Sining.Message;
-message G2A_TestMessage // IAddressMessage
-{
-	string Tag = 1;
-}
-message G2A_TestRequest // IAddressequest,G2A_TestResponse
-{
-
-}
-message G2A_TestResponse // IAddressResponse
-{
-	
-}
