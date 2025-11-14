@@ -2,7 +2,7 @@ namespace Fantasy.Cli.Models;
 
 public class ProjectConfig
 {
-    public string FantasyVersion { get; set; } = "2025.2.0";
+    public string FantasyVersion { get; set; } = "*";
     public string Name { get; set; } = string.Empty;
     public bool IsAddNLog { get; set; } = false;
     public TargetFrameworkVersion TargetFramework { get; set; } = TargetFrameworkVersion.Net8;
