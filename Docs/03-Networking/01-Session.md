@@ -148,12 +148,15 @@ public partial class C2G_PlayerMove : IMessage
 }
 
 // 发送消息
+// 方式1
 _session.Send(new C2G_PlayerMove
 {
     X = 100.5f,
     Y = 0.0f,
     Z = 200.3f
 });
+// 方式2(推荐)
+_session.C2G_PlayerMove(100.5f, 0.0f, 200.3f);
 
 Log.Debug("玩家移动消息已发送");
 ```
@@ -214,7 +217,7 @@ public virtual FTask<IResponse> Call<T>(T request, long address = 0) where T : I
 
 ```csharp
 // 定义请求和响应消息（通过 .proto 文件生成）
-public partial class C2G_LoginRequest : IRequest
+public partial class C2G_LoginRequest : IRequest,G2C_LoginResponse
 {
     public string Account { get; set; }
     public string Password { get; set; }
@@ -222,7 +225,6 @@ public partial class C2G_LoginRequest : IRequest
 
 public partial class G2C_LoginResponse : IResponse
 {
-    public int ErrorCode { get; set; }  // 0 表示成功
     public string Message { get; set; }
     public long PlayerId { get; set; }
 }
@@ -232,13 +234,17 @@ public async FTask Login(string account, string password)
 {
     try
     {
+        // 发送方式1
         // Call() 返回泛型响应，需要类型转换
         var response = (G2C_LoginResponse)await _session.Call(new C2G_LoginRequest
         {
             Account = account,
             Password = password
         });
-
+        // 发送方式2（推荐）
+        var response = await _session.C2G_LoginRequest(account, password);
+        // 以上方式任选其一
+        
         if (response.ErrorCode == 0)
         {
             Log.Debug($"登录成功，玩家 ID: {response.PlayerId}");
