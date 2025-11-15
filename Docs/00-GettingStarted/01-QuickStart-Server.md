@@ -611,6 +611,46 @@ Could not find Fantasy.config
 3. 检查项目引用链是否正确
 4. 重新构建解决方案：`dotnet clean && dotnet build`
 
+### Q7: 运行时出现 "Command line format error!" 错误
+
+**错误信息：**
+```
+Command line format error!
+```
+
+**原因：**
+服务器启动时缺少必需的命令行参数。Fantasy Framework 需要通过命令行参数指定运行模式（`RuntimeMode`）。
+
+**解决方案：**
+
+**方法 1: 配置 launchSettings.json（开发环境推荐）**
+
+在项目的 `Properties/launchSettings.json` 文件中添加命令行参数：
+
+```json
+{
+  "profiles": {
+    "Develop": {
+      "commandName": "Project",
+      "commandLineArgs": "--m Develop"
+    }
+  }
+}
+```
+
+**方法 2: IDE 配置**
+
+在 IDE 的启动配置中添加命令行参数 `--m Develop`
+
+**方法 3: 命令行启动**
+
+使用命令行启动时手动指定参数：
+```bash
+dotnet YourServer.dll --m Develop
+```
+
+> **📖 详细说明：** 关于命令行参数的完整配置说明，请查看 [命令行参数配置文档](../01-Server/03-CommandLineArguments.md)
+
 ## 下一步
 
 完成 Fantasy Framework 的安装和配置后，建议按照以下顺序学习：

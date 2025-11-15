@@ -15,7 +15,12 @@
           <xs:annotation>
             <xs:documentation>配置表路径设置</xs:documentation>
           </xs:annotation>
-        </xs:element>      
+        </xs:element>
+        <xs:element name="idFactory" type="idFactoryType" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>ID生成器配置</xs:documentation>
+          </xs:annotation>
+        </xs:element>
         <xs:element name="network" type="networkRuntimeType" minOccurs="0" maxOccurs="1">
           <xs:annotation>
             <xs:documentation>网络运行时配置</xs:documentation>
@@ -25,7 +30,7 @@
           <xs:annotation>
             <xs:documentation>会话运行时配置</xs:documentation>
           </xs:annotation>
-        </xs:element>       
+        </xs:element>
         <xs:element name="server" type="serverType" minOccurs="1" maxOccurs="1">
           <xs:annotation>
             <xs:documentation>服务器配置</xs:documentation>
@@ -41,6 +46,22 @@
       <xs:annotation>
         <xs:documentation>配置表文件路径</xs:documentation>
       </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- IdFactory type -->
+  <xs:complexType name="idFactoryType">
+    <xs:attribute name="type" use="optional" default="Default">
+      <xs:annotation>
+        <xs:documentation>ID生成器类型：Default(支持最多65535个Scene) 或 World(ID中包含WorldId，支持最多255个Scene，但解决合区ID重复问题)</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None"/>
+          <xs:enumeration value="Default"/>
+          <xs:enumeration value="World"/>
+        </xs:restriction>
+      </xs:simpleType>
     </xs:attribute>
   </xs:complexType>
 
@@ -65,11 +86,6 @@
       <xs:element name="scenes" type="scenesType" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>场景配置列表</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="units" type="unitsType" minOccurs="0" maxOccurs="1">
-        <xs:annotation>
-          <xs:documentation>单位配置列表</xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
@@ -255,11 +271,6 @@
         <xs:documentation>内网端口</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="sceneType" type="xs:unsignedInt" use="required">
-      <xs:annotation>
-        <xs:documentation>场景类型数值</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
   </xs:complexType>
 
   <!-- Network Runtime type -->
@@ -294,57 +305,6 @@
         <xs:documentation>Session idle check interval (in milliseconds)</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-  </xs:complexType>
-  
-  <!-- Units types -->
-  <xs:complexType name="unitsType">
-    <xs:sequence>
-      <xs:element name="unit" type="unitType" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="unitType">
-    <xs:sequence>
-      <xs:element name="dic" type="unitDicType" minOccurs="0" maxOccurs="1">
-        <xs:annotation>
-          <xs:documentation>单位字典数据</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-    <xs:attribute name="id" type="xs:unsignedInt" use="required">
-      <xs:annotation>
-        <xs:documentation>单位ID</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="name" type="xs:string" use="required">
-      <xs:annotation>
-        <xs:documentation>单位名称</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="model" type="xs:string" use="required">
-      <xs:annotation>
-        <xs:documentation>单位模型</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-  </xs:complexType>
-
-  <xs:complexType name="unitDicType">
-    <xs:sequence>
-      <xs:element name="item" minOccurs="0" maxOccurs="unbounded">
-        <xs:complexType>
-          <xs:attribute name="key" type="xs:string" use="required">
-            <xs:annotation>
-              <xs:documentation>字典键</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="value" type="xs:string" use="required">
-            <xs:annotation>
-              <xs:documentation>字典值</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
+  </xs:complexType> 
 
 </xs:schema>

@@ -560,7 +560,7 @@ public static class ConfigLoader
         // 加载IdFactory配置
 
         XmlNode? idFactoryNode = root.SelectSingleNode("f:idFactory", nsManager);
-        string idFactoryType = GetOptionalAttribute(idFactoryNode, "type") ?? "World";
+        string idFactoryType = GetOptionalAttribute(idFactoryNode, "type") ?? "Default";
         IdFactoryHelper.Initialize(Enum.Parse<IdFactoryType>(idFactoryType));
 
         // 加载网络配置
