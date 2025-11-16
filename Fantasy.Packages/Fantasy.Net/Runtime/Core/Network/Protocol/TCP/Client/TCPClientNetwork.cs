@@ -30,6 +30,7 @@ namespace Fantasy.Network.TCP
         private bool _isSending;
         private bool _isInnerDispose;
         private long _connectTimeoutId;
+        private bool _connectDisconnectEvent = true;
         private Socket _socket;
         private IPEndPoint _remoteEndPoint;
         private SocketAsyncEventArgs _sendArgs;
@@ -74,7 +75,10 @@ namespace Fantasy.Network.TCP
                     }
                 }
 
-                _onConnectDisconnect?.Invoke();
+                if (_connectDisconnectEvent)
+                {
+                    _onConnectDisconnect?.Invoke();
+                }
 
                 if (_socket.Connected)
                 {
@@ -86,6 +90,7 @@ namespace Fantasy.Network.TCP
                 _packetParser?.Dispose();
                 ChannelId = 0;
                 _sendArgs = null;
+                _connectDisconnectEvent = true;
             }
             catch (Exception e)
             {
@@ -124,6 +129,7 @@ namespace Fantasy.Network.TCP
             // 设置连接超时定时器
             _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () =>
             {
+                _connectDisconnectEvent = false;
                 _onConnectFail?.Invoke();
                 Dispose();
             });
@@ -166,6 +172,7 @@ namespace Fantasy.Network.TCP
                 {
                     Scene.ThreadSynchronizationContext.Post(() =>
                     {
+                        _connectDisconnectEvent = false;
                         _onConnectFail?.Invoke();
                         Dispose();
                     });

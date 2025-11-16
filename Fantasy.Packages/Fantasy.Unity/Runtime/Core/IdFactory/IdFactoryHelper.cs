@@ -10,7 +10,7 @@ namespace Fantasy.IdFactory
     /// </summary>
     public static class IdFactoryHelper
     {
-        private static IdFactoryType _idFactoryType = IdFactoryType.World;
+        private static IdFactoryType _idFactoryType = IdFactoryType.Default;
         
         /// <summary>
         /// EntityId工具

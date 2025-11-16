@@ -83,7 +83,7 @@ namespace Fantasy.IdFactory
             {
                 case > 65535:
                 {
-                    throw new NotSupportedException($"sceneId:{sceneId} cannot be greater than 255255");
+                    throw new NotSupportedException($"sceneId:{sceneId} cannot be greater than 65535");
                 }
                 default:
                 {

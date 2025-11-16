@@ -23,11 +23,6 @@ namespace Fantasy
     {
         protected override async FTask Handler(OnCreateScene self)
         {
-            Log.Debug("111");
-            foreach (var type in AssemblyManifest.ForEach<IOnFantasyInitEventA>())
-            {
-                Log.Debug($"type: {type.FullName}");
-            }
             Log.Debug("OnOnFantasyInitEventA Handler");
             self.Scene.EventComponent.Publish(new TestRefAssemblyEventA());
             await FTask.CompletedTask;

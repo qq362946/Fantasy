@@ -46,6 +46,7 @@ namespace Fantasy.Network.KCP
         private bool _isInnerDispose;
         private long _connectTimeoutId;
         private bool _allowWraparound = true;
+        private bool _connectDisconnectEvent = true;
         private IPEndPoint _remoteAddress;
         private BufferPacketParser _packetParser;
         private readonly Pipe _pipe = new Pipe();
@@ -101,7 +102,11 @@ namespace Fantasy.Network.KCP
                     }
                 }
 
-                OnConnectDisconnect?.Invoke();
+                if (_connectDisconnectEvent)
+                {
+                    OnConnectDisconnect?.Invoke();
+                }
+                
                 _kcp.Dispose();
 
                 if (_socket.Connected)
@@ -112,6 +117,7 @@ namespace Fantasy.Network.KCP
                 _packetParser.Dispose();
                 ChannelId = 0;
                 _isConnected = false;
+                _connectDisconnectEvent = true;
                 _messageCache.Clear();
             }
             catch (Exception e)
@@ -143,6 +149,7 @@ namespace Fantasy.Network.KCP
             _connectEventArgs.Completed += OnConnectSocketCompleted;
             _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () =>
             {
+                _connectDisconnectEvent = false;
                 OnConnectFail?.Invoke();
                 Dispose();
             });
@@ -164,6 +171,7 @@ namespace Fantasy.Network.KCP
                 catch (Exception e)
                 {
                     Log.Error(e);
+                    _connectDisconnectEvent = false;
                     OnConnectFail?.Invoke();
                 }
             }
@@ -189,6 +197,7 @@ namespace Fantasy.Network.KCP
                 {
                     Scene.ThreadSynchronizationContext.Post(() =>
                     {
+                        _connectDisconnectEvent = false;
                         OnConnectFail?.Invoke();
                         Dispose();
                     });
@@ -227,6 +236,12 @@ namespace Fantasy.Network.KCP
                 }
                 catch (SocketException)
                 {
+                    if (!_isConnected)
+                    {
+                        _connectDisconnectEvent = false;
+                        OnConnectFail?.Invoke();
+                    }
+                    
                     Dispose();
                     break;
                 }

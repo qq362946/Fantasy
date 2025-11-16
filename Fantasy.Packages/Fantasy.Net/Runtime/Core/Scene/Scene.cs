@@ -53,7 +53,6 @@ namespace Fantasy
     /// 表示一个场景实体，用于创建与管理特定的游戏场景信息。
     /// </summary>
     [SuppressMessage("Compiler", "CS8618:Non-nullable field must contain a non-null value when exiting constructor. Consider adding the \'required\' modifier or declaring as nullable.")]
-    [SuppressMessage("Compiler", "CS8618:Non-nullable field must contain a non-null value when exiting constructor. Consider adding the \'required\' modifier or declaring as nullable.")]
     public partial class Scene : Entity
     {
         #region Members

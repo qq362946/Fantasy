@@ -19,6 +19,7 @@ namespace Fantasy.Network.WebSocket
         private bool _isInnerDispose;
         private bool _isConnected;
         private long _connectTimeoutId;
+        private bool _connectDisconnectEvent = true;
         private BufferPacketParser _packetParser; 
         private readonly Queue<MemoryStreamBuffer> _messageCache = new Queue<MemoryStreamBuffer>();
         
@@ -46,12 +47,16 @@ namespace Fantasy.Network.WebSocket
             
                 if (_webSocket != null && _webSocket.ReadyState != WebSocketState.Closed)
                 {
-                    _onConnectDisconnect?.Invoke();
                     _webSocket.CloseAsync();
                 }
             
                 _packetParser.Dispose();
                 _messageCache.Clear();
+                
+                if (_connectDisconnectEvent)
+                {
+                    _onConnectDisconnect?.Invoke();
+                }
             }
             catch (Exception e)
             {
@@ -78,6 +83,7 @@ namespace Fantasy.Network.WebSocket
             _onConnectDisconnect = onConnectDisconnect;
             _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () =>
             {
+                _connectDisconnectEvent = false;
                 _onConnectFail?.Invoke();
                 Dispose();
             });
@@ -87,7 +93,6 @@ namespace Fantasy.Network.WebSocket
             _webSocket.OnMessage += OnReceiveComplete;
             _webSocket.OnClose += (sender, args) =>
             {
-                _onConnectDisconnect?.Invoke();
                 Dispose();
             };
             _webSocket.ConnectAsync();

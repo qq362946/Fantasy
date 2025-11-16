@@ -1,11 +1,6 @@
 using Fantasy;
 using Fantasy.Async;
-using Fantasy.Entitas;
-using Fantasy.Entitas.Interface;
-using Fantasy.InnerMessage;
 using Fantasy.Network;
-using Fantasy.Unity;
-using Fantasy.Unity.Download;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -89,7 +84,7 @@ public class NormalMessage : MonoBehaviour
         SendRPCMessageButton.interactable = true;
         PushMessageButton.interactable = true;
     }
-
+    
     private void OnConnectFail()
     {
         Log.Debug("OnConnectFail");
@@ -99,7 +94,7 @@ public class NormalMessage : MonoBehaviour
         SendRPCMessageButton.interactable = false;
         PushMessageButton.interactable = false;
     }
-
+    
     private void OnConnectDisconnect()
     {
         Log.Debug("OnConnectDisconnect");
@@ -115,6 +110,7 @@ public class NormalMessage : MonoBehaviour
 
     private void OnSendMessageButtonClick()
     {
+        Log.Debug($"OnSendMessageButtonClick");
         SendMessageButton.interactable = false;
         _session.C2G_TestMessage("Hello C2G_TestMessage");
         SendMessageButton.interactable = true;

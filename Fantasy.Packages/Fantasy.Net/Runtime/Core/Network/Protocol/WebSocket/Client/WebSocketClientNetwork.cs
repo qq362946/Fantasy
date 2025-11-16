@@ -22,6 +22,7 @@ namespace Fantasy.Network.WebSocket
         private bool _isSending;
         private bool _isInnerDispose;
         private long _connectTimeoutId;
+        private bool _connectDisconnectEvent = true;
         private ClientWebSocket _clientWebSocket;
         private ReadOnlyMemoryPacketParser _packetParser;
         private readonly Pipe _pipe = new Pipe();
@@ -67,7 +68,12 @@ namespace Fantasy.Network.WebSocket
                 }
 
                 ClearConnectTimeout();
-                _onConnectDisconnect?.Invoke();
+                
+                if (_connectDisconnectEvent)
+                {
+                    _onConnectDisconnect?.Invoke();
+                }
+                
                 _packetParser.Dispose();
                 _packetParser = null;
                 _isSending = false;
@@ -100,6 +106,7 @@ namespace Fantasy.Network.WebSocket
             // 设置连接超时定时器
             _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () =>
             {
+                _connectDisconnectEvent = false;
                 _onConnectFail?.Invoke();
                 Dispose();
             });
@@ -119,12 +126,16 @@ namespace Fantasy.Network.WebSocket
             catch (WebSocketException wse)
             {
                 Log.Error($"WebSocket error: {wse.Message}");
+                _connectDisconnectEvent = false;
+                _onConnectFail?.Invoke();
                 Dispose();
                 return null;
             }
             catch (Exception e)
             {
                 Log.Error($"An error occurred: {e.Message}");
+                _connectDisconnectEvent = false;
+                _onConnectFail?.Invoke();
                 Dispose();
                 return null;
             }
