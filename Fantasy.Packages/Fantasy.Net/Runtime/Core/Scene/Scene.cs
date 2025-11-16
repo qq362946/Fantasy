@@ -344,18 +344,25 @@ namespace Fantasy
         public static async FTask<Scene> Create(string sceneRuntimeMode = SceneRuntimeMode.MainThread)
         {
             var world = ++_unityWorldId;
+            var sceneId = ++_unitySceneId;
 
-            if (world > byte.MaxValue - 1)
+            if (sceneId > 65535)
             {
-                throw new Exception($"World ID ({world}) exceeds the maximum allowed value of 255.");
+                throw new Exception($"Scene ID ({sceneId}) exceeds the maximum allowed value of 65535.");
             }
 
-            var sceneId = (uint)(++_unitySceneId + world * 1000);
-            
-            if (sceneId > 255255)
-            {
-                throw new Exception($"Scene ID ({sceneId}) exceeds the maximum allowed value of 255255.");
-            }
+            //
+            // if (world > byte.MaxValue - 1)
+            // {
+            //     throw new Exception($"World ID ({world}) exceeds the maximum allowed value of 255.");
+            // }
+
+            // var sceneId = (uint)(++_unitySceneId + world * 1000);
+            //
+            // if (sceneId > 255255)
+            // {
+            //     throw new Exception($"Scene ID ({sceneId}) exceeds the maximum allowed value of 255255.");
+            // }
 
             var scene = new Scene();
             scene.Scene = scene;
