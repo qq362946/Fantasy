@@ -118,59 +118,61 @@ Unity 客户端开发的完整指南。
 
 ---
 
-### 🚧 [04-Advanced](04-Advanced/) - 进阶主题 (规划中)
+### 🚧 [04-Advanced](04-Advanced/) - 进阶主题
 
 深入探索 Fantasy Framework 的高级特性和最佳实践。
 
 #### 核心系统
-- [ ] 01-ECS.md - Entity-Component-System 详解
-- [ ] 02-Scene.md - Scene 和 SubScene 使用
-- [ ] 03-Lifecycle.md - Entity 生命周期和 System 系统
+- ✅ [01-ECS.md](04-Advanced/CoreSystems/01-ECS.md) - Entity-Component-System 详解
+- ✅ [02-ISupportedMultiEntity.md](04-Advanced/CoreSystems/02-ISupportedMultiEntity.md) - 多实例组件详解
+- [ ] 03-ISupportedDataBase.md - 数据库持久化详解
+- [ ] 04-Scene.md - Scene 和 SubScene 使用
+- [ ] 05-Lifecycle.md - Entity 生命周期和 System 系统
 
 #### 网络开发
-- [ ] 04-Network.md - 网络协议选择和配置
-- [ ] 05-Message.md - Message、Request/Response 使用
-- [ ] 06-Protocol.md - .proto 文件编写和代码生成
-- [ ] 07-Distributed.md - Server-to-Server 通信
-- [ ] 08-SphereEvent.md - SphereEvent 跨服域事件系统
+- [ ] 06-Network.md - 网络协议选择和配置
+- [ ] 07-Message.md - Message、Request/Response 使用
+- [ ] 08-Protocol.md - .proto 文件编写和代码生成
+- [ ] 09-Distributed.md - Server-to-Server 通信
+- [ ] 10-SphereEvent.md - SphereEvent 跨服域事件系统
 
 #### 异步编程
-- [ ] 09-FTask.md - FTask 和 FCancellationToken
-- [ ] 10-CoroutineLock.md - CoroutineLock 使用
-- [ ] 11-FlowControl.md - FTaskFlowLock 流量限制
+- [ ] 11-FTask.md - FTask 和 FCancellationToken
+- [ ] 12-CoroutineLock.md - CoroutineLock 使用
+- [ ] 13-FlowControl.md - FTaskFlowLock 流量限制
 
 #### 数据持久化
-- [ ] 12-Database.md - MongoDB 集成和使用
-- [ ] 13-Persistence.md - Entity 数据库操作
-- [ ] 14-SeparateTable.md - SeparateTable 层级关系
+- [ ] 14-Database.md - MongoDB 集成和使用
+- [ ] 15-Persistence.md - Entity 数据库操作
+- [ ] 16-SeparateTable.md - SeparateTable 层级关系
 
 #### 配置系统
-- [ ] 15-ConfigTable.md - Excel 配置表设计和导出
-- [ ] 16-CodeGeneration.md - 配置表代码生成工具
+- [ ] 17-ConfigTable.md - Excel 配置表设计和导出
+- [ ] 18-CodeGeneration.md - 配置表代码生成工具
 
 #### 高级特性
-- [ ] 17-Event.md - Event 系统使用
-- [ ] 18-Timer.md - Timer 系统
-- [ ] 19-Addressable.md - Addressable 路由
-- [ ] 20-HotReload.md - 热重载支持
-- [ ] 21-ObjectPool.md - 内存管理和对象池
+- [ ] 19-Event.md - Event 系统使用
+- [ ] 20-Timer.md - Timer 系统
+- [ ] 21-Addressable.md - Addressable 路由
+- [ ] 22-HotReload.md - 热重载支持
+- [ ] 23-ObjectPool.md - 内存管理和对象池
 
 #### Source Generator
-- [ ] 22-SourceGenerator.md - Roslyn Source Generator 原理
-- [ ] 23-CustomInterface.md - CustomInterface 注册
-- [ ] 24-AOT.md - Native AOT 支持
+- [ ] 24-SourceGenerator.md - Roslyn Source Generator 原理
+- [ ] 25-CustomInterface.md - CustomInterface 注册
+- [ ] 26-AOT.md - Native AOT 支持
 
 #### 性能优化
-- [ ] 25-Performance.md - 性能优化最佳实践
-- [ ] 26-Benchmark.md - Benchmark 使用
+- [ ] 27-Performance.md - 性能优化最佳实践
+- [ ] 28-Benchmark.md - Benchmark 使用
 
 #### 部署运维
-- [ ] 27-Deployment.md - 服务器部署指南
-- [ ] 28-UnityIntegration.md - Unity 客户端集成详解
+- [ ] 29-Deployment.md - 服务器部署指南
+- [ ] 30-UnityIntegration.md - Unity 客户端集成详解
 
 #### 示例项目
-- [ ] 29-ExampleConsole.md - Console 应用示例解析
-- [ ] 30-ExampleServer.md - Server 应用示例解析
+- [ ] 31-ExampleConsole.md - Console 应用示例解析
+- [ ] 32-ExampleServer.md - Server 应用示例解析
 
 #### 常见问题
 - [ ] FAQ.md - 常见问题解答
@@ -275,10 +277,10 @@ Unity 客户端开发的完整指南。
 | **服务器端指南** | 8 | 0 | 8 | 100% ✅ |
 | **客户端指南** | 1 | 0 | 1 | 100% ✅ |
 | **网络通信基础** | 2 | 0 | 2 | 100% ✅ |
-| **进阶主题** | 0 | 30 | 30 | 0% 🚧 |
-| **总计** | **13** | **30** | **43** | **30%** |
+| **进阶主题** | 2 | 30 | 32 | 6% 🚧 |
+| **总计** | **15** | **30** | **45** | **33%** |
 
-**最后更新**: 2025-11-13
+**最后更新**: 2025-11-14
 
 ---
 
@@ -291,6 +293,13 @@ Unity 客户端开发的完整指南。
 ---
 
 ## 📝 更新日志
+
+### 2025-11-14
+- ✅ 新增 ECS 系统详解文档 (04-Advanced/CoreSystems/01-ECS.md)
+- ✅ 新增 ISupportedMultiEntity 多实例组件详解文档 (04-Advanced/CoreSystems/02-ISupportedMultiEntity.md)
+- ✅ 创建核心系统文档分类 (04-Advanced/CoreSystems/)
+- ✅ 在 01-ECS.md 中添加链接指向 02-ISupportedMultiEntity.md
+- ✅ 更新文档进度统计和编号
 
 ### 2025-11-13
 - ✅ 新增网络通信基础主题 (03-Networking)
