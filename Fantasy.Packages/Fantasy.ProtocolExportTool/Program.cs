@@ -1,3 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System.CommandLine;
+using Fantasy.ProtocolExportTool.Commands;
 
-Console.WriteLine("Hello, World!");
+var rootCommand = new RootCommand("Fantasy 网络协议导出工具")
+{
+    new ProtocolExportCommand()
+};
+
+return await rootCommand.Parse(args).InvokeAsync();

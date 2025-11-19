@@ -1,0 +1,38 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cc="clr-namespace:AvaloniaEdit.CodeCompletion;assembly=AvaloniaEdit">
+
+    <!-- CompletionList ListBox 样式 -->
+    <Style Selector="cc|CompletionList ListBox">
+        <Setter Property="Background" Value="#2D2D30"/>
+        <Setter Property="Foreground" Value="#CCCCCC"/>
+        <Setter Property="BorderBrush" Value="#3E3E42"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <!-- CompletionListBox 项目样式 -->
+    <Style Selector="cc|CompletionList ListBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#CCCCCC"/>
+        <Setter Property="Padding" Value="4,2"/>
+    </Style>
+
+    <!-- 选中项样式 -->
+    <Style Selector="cc|CompletionList ListBoxItem:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="#264F78"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+    </Style>
+
+    <!-- 悬停项样式 -->
+    <Style Selector="cc|CompletionList ListBoxItem:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#2A2D2E"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+    </Style>
+
+    <!-- 选中且悬停项样式 -->
+    <Style Selector="cc|CompletionList ListBoxItem:selected:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#094771"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+    </Style>
+
+</Styles>

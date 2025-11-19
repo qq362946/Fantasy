@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Fantasy;
 using Fantasy.Async;
 using Fantasy.Network;
@@ -33,6 +34,8 @@ public class NormalMessage : MonoBehaviour
     
     private async FTask StartAsync()
     {
+        var list = new List<int>();
+        list.Clear();
         // 1、初始化框架
         await Fantasy.Platform.Unity.Entry.Initialize();
         // 2、创建一个Scene，这个Scene代表一个客户端的场景，客户端的所有逻辑都可以写这里

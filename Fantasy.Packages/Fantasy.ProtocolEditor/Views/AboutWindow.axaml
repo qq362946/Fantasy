@@ -1,0 +1,147 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="400"
+        x:Class="Fantasy.ProtocolEditor.Views.AboutWindow"
+        Title="关于 Fantasy Protocol Editor"
+        Width="500" Height="400"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        Background="#2B2B2B"
+        Icon="/Assets/avalonia-logo.ico">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 主要内容区 -->
+        <ScrollViewer Grid.Row="0"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <Border Padding="40,30">
+                <StackPanel Spacing="25">
+                <!-- 应用标题 -->
+                <StackPanel HorizontalAlignment="Center" Spacing="10">
+                    <TextBlock Text="⚡"
+                              FontSize="48"
+                              HorizontalAlignment="Center"
+                              Foreground="#007ACC"/>
+
+                    <TextBlock Text="Fantasy Protocol Editor"
+                              FontSize="24"
+                              FontWeight="Bold"
+                              Foreground="#FFFFFF"
+                              HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="Version 1.0.0"
+                              FontSize="14"
+                              Foreground="#858585"
+                              HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- 分割线 -->
+                <Border Height="1"
+                        Background="#3E3E42"
+                        Margin="0,10"/>
+
+                <!-- Fantasy 框架信息 -->
+                <StackPanel Spacing="15">
+                    <!-- GitHub 链接 -->
+                    <Border Background="#1E1E1E"
+                            BorderBrush="#3E3E42"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="15,12">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="📦 GitHub 仓库"
+                                      FontSize="13"
+                                      Foreground="#858585"/>
+                            <TextBlock x:Name="GitHubLink"
+                                      Text="https://github.com/qq362946/Fantasy"
+                                      FontSize="14"
+                                      Foreground="#4FC3F7"
+                                      Cursor="Hand"
+                                      TextDecorations="Underline"
+                                      PointerPressed="OnGitHubLinkClick">
+                                <TextBlock.Styles>
+                                    <Style Selector="TextBlock:pointerover">
+                                        <Setter Property="Foreground" Value="#80D8FF"/>
+                                    </Style>
+                                </TextBlock.Styles>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- QQ 群信息 -->
+                    <Border Background="#1E1E1E"
+                            BorderBrush="#3E3E42"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="15,12">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="💬 QQ 交流群"
+                                      FontSize="13"
+                                      Foreground="#858585"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBlock Text="569888673"
+                                          FontSize="18"
+                                          Foreground="#FFFFFF"
+                                          FontWeight="Bold"/>
+                                <Button Content="复制"
+                                       Background="#007ACC"
+                                       Foreground="#FFFFFF"
+                                       BorderThickness="0"
+                                       Padding="10,4"
+                                       FontSize="12"
+                                       Cursor="Hand"
+                                       Click="OnCopyQQGroupClick">
+                                    <Button.Styles>
+                                        <Style Selector="Button:pointerover">
+                                            <Setter Property="Background" Value="#005A9E"/>
+                                        </Style>
+                                    </Button.Styles>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- 版权信息 -->
+                <TextBlock Text="© 2024 Fantasy Framework. All rights reserved."
+                          FontSize="12"
+                          Foreground="#606060"
+                          HorizontalAlignment="Center"
+                          Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+
+        <!-- 底部按钮区 -->
+        <Border Grid.Row="1"
+                Background="#252526"
+                BorderBrush="#3E3E42"
+                BorderThickness="0,1,0,0"
+                Padding="20,15">
+            <Button Content="确定"
+                   Width="100"
+                   Height="32"
+                   Background="#007ACC"
+                   Foreground="#FFFFFF"
+                   BorderThickness="0"
+                   HorizontalAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   Cursor="Hand"
+                   Click="OnCloseClick">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover">
+                        <Setter Property="Background" Value="#005A9E"/>
+                    </Style>
+                </Button.Styles>
+            </Button>
+        </Border>
+    </Grid>
+</Window>

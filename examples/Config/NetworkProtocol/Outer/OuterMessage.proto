@@ -26,6 +26,7 @@ message C2G_TestRequestPushMessage // IMessage
 /// Gate服务器推送一个消息给客户端
 message G2C_PushMessage // IMessage
 {
+	/// 标记
 	string Tag = 1;
 }
 message C2G_CreateAddressableRequest // IRequest,G2C_CreateAddressableResponse

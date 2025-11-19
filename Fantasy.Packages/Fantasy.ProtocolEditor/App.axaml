@@ -1,0 +1,24 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Fantasy.ProtocolEditor.App"
+             xmlns:local="using:Fantasy.ProtocolEditor"
+             xmlns:converters="using:Fantasy.ProtocolEditor.Converters"
+             RequestedThemeVariant="Dark">
+             <!-- 固定使用暗色主题，不随系统变化 -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Resources>
+        <converters:BoolToValidationBackgroundConverter x:Key="BoolToValidationBackground"/>
+        <converters:BoolToValidationBorderConverter x:Key="BoolToValidationBorder"/>
+    </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml"/>
+        <StyleInclude Source="/Styles/VSCodeTheme.axaml"/>
+        <StyleInclude Source="/Styles/CompletionWindowStyles.axaml"/>
+    </Application.Styles>
+</Application>

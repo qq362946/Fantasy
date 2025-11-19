@@ -25,7 +25,7 @@
     },
     {
       "name": "ProtocolExportTool",
-      "sourceDirectory": "Tools/Exporter/NetworkProtocol",
+      "sourceDirectory": "Tools/ProtocolExportTool",
       "outputFileName": "ProtocolExportTool.zip",
       "excludePatterns": [
         "**/.DS_Store"

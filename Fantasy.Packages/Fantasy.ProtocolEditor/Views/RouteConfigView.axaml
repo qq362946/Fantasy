@@ -1,0 +1,244 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Fantasy.ProtocolEditor.ViewModels"
+             xmlns:models="using:Fantasy.ProtocolEditor.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="Fantasy.ProtocolEditor.Views.RouteConfigView"
+             x:DataType="vm:RouteConfigViewModel">
+
+  <Grid RowDefinitions="Auto,*,Auto" Margin="10">
+
+    <!-- 顶部工具栏 -->
+    <Border Grid.Row="0" Background="#2D2D30" CornerRadius="4" Padding="10" Margin="0,0,0,10">
+      <Grid ColumnDefinitions="*,Auto">
+        <TextBlock Grid.Column="0"
+                   Text="RouteType 配置编辑器"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"/>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10">
+          <TextBlock Text="{Binding FilePath}"
+                     FontSize="12"
+                     Foreground="#AAAAAA"
+                     VerticalAlignment="Center"/>
+          <Button Content="保存"
+                  Command="{Binding SaveConfigCommand}"
+                  IsEnabled="{Binding IsModified}"
+                  Background="#007ACC"
+                  Foreground="White"
+                  Padding="15,5"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- 中间主内容区 -->
+    <Grid Grid.Row="1" RowDefinitions="Auto,*">
+
+      <!-- 添加新条目区域 -->
+      <Border Grid.Row="0" Background="#252526" CornerRadius="4" Padding="15" Margin="0,0,0,10">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="100,*,100,*,Auto">
+
+          <!-- 标题 -->
+          <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"
+                     Text="添加新的 Route 类型"
+                     FontSize="14"
+                     FontWeight="Bold"
+                     Margin="0,0,0,10"/>
+
+          <!-- 名称输入 -->
+          <TextBlock Grid.Row="1" Grid.Column="0"
+                     Text="名称:"
+                     VerticalAlignment="Center"
+                     Margin="0,0,10,0"/>
+          <TextBox Grid.Row="1" Grid.Column="1"
+                   Text="{Binding NewEntryName}"
+                   Watermark="例如: PlayerRouteType"
+                   Margin="0,5"/>
+
+          <!-- 值输入 -->
+          <TextBlock Grid.Row="1" Grid.Column="2"
+                     Text="值:"
+                     VerticalAlignment="Center"
+                     Margin="20,0,10,0"/>
+          <NumericUpDown Grid.Row="1" Grid.Column="3"
+                         Value="{Binding NewEntryValue}"
+                         Minimum="1001"
+                         Maximum="999999"
+                         Increment="1"
+                         Margin="0,5"/>
+
+          <!-- 添加按钮 -->
+          <Button Grid.Row="1" Grid.Column="4"
+                  Content="添加"
+                  Command="{Binding AddEntryCommand}"
+                  Background="#0E639C"
+                  Foreground="White"
+                  Padding="20,5"
+                  Margin="10,5,0,5"/>
+
+          <!-- 说明文字 -->
+          <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5"
+                     Text="提示: 名称必须以 RouteType 结尾，值必须 >= 1000 (1000以内框架预留)"
+                     FontSize="11"
+                     Foreground="#AAAAAA"
+                     Margin="0,5,0,0"/>
+
+          <!-- 错误信息 -->
+          <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5"
+                     Text="{Binding ErrorMessage}"
+                     FontSize="12"
+                     Foreground="#F48771"
+                     IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                     Margin="0,5,0,0"/>
+        </Grid>
+      </Border>
+
+      <!-- 已有条目列表 -->
+      <Border Grid.Row="1" Background="#1E1E1E" CornerRadius="4">
+        <Grid RowDefinitions="Auto,Auto,*">
+
+          <!-- 列表标题 -->
+          <Border Grid.Row="0" Background="#2D2D30" Padding="10" BorderBrush="#3F3F46" BorderThickness="0,0,0,1">
+            <TextBlock Text="已添加的 Route 类型列表" FontSize="13" FontWeight="Bold"/>
+          </Border>
+
+          <!-- 搜索框 -->
+          <Border Grid.Row="1" Background="#252526" Padding="10" BorderBrush="#3F3F46" BorderThickness="0,0,0,1">
+            <Grid ColumnDefinitions="Auto,*">
+              <TextBlock Grid.Column="0"
+                         Text="🔍"
+                         FontSize="14"
+                         VerticalAlignment="Center"
+                         Margin="0,0,8,0"/>
+              <TextBox Grid.Column="1"
+                       Text="{Binding SearchText}"
+                       Watermark="搜索名称或值..."
+                       Background="#1E1E1E"
+                       BorderBrush="#3F3F46"
+                       BorderThickness="1"
+                       Padding="8,5"/>
+            </Grid>
+          </Border>
+
+          <!-- 列表内容 -->
+          <ScrollViewer Grid.Row="2">
+            <ItemsControl ItemsSource="{Binding FilteredEntries}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="models:RouteTypeEntry">
+                  <Border Background="#252526"
+                          Margin="5"
+                          Padding="10"
+                          CornerRadius="3"
+                          BorderBrush="#3F3F46"
+                          BorderThickness="1">
+                    <Panel>
+                      <!-- 非编辑模式 -->
+                      <Grid ColumnDefinitions="*,Auto,Auto,Auto" IsVisible="{Binding !IsEditing}">
+                      <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="15">
+                        <TextBlock Text="{Binding Name}"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"
+                                   Foreground="#4EC9B0"/>
+                        <TextBlock Text="="
+                                   VerticalAlignment="Center"
+                                   Foreground="#AAAAAA"/>
+                        <TextBlock Text="{Binding Value}"
+                                   FontSize="13"
+                                   VerticalAlignment="Center"
+                                   Foreground="#B5CEA8"/>
+                      </StackPanel>
+
+                      <Button Grid.Column="1"
+                              Content="📋 复制"
+                              Click="OnCopyNameClick"
+                              Tag="{Binding Name}"
+                              Background="#3E3E42"
+                              Foreground="White"
+                              Padding="10,3"
+                              Margin="5,0"
+                              ToolTip.Tip="复制名称到剪贴板"/>
+
+                      <Button Grid.Column="2"
+                              Content="编辑"
+                              Command="{Binding $parent[ItemsControl].((vm:RouteConfigViewModel)DataContext).EditEntryCommand}"
+                              CommandParameter="{Binding}"
+                              Background="#0E639C"
+                              Foreground="White"
+                              Padding="10,3"
+                              Margin="5,0"/>
+
+                      <Button Grid.Column="3"
+                              Content="删除"
+                              Command="{Binding $parent[ItemsControl].((vm:RouteConfigViewModel)DataContext).DeleteEntryCommand}"
+                              CommandParameter="{Binding}"
+                              Background="#C72E2E"
+                              Foreground="White"
+                              Padding="10,3"
+                              Margin="5,0"/>
+                      </Grid>
+
+                      <!-- 编辑模式 -->
+                      <Grid ColumnDefinitions="100,*,100,*,Auto,Auto" IsVisible="{Binding IsEditing}">
+                      <TextBlock Grid.Column="0"
+                                 Text="名称:"
+                                 VerticalAlignment="Center"
+                                 Margin="0,0,10,0"/>
+                      <TextBox Grid.Column="1"
+                               Text="{Binding Name}"
+                               Margin="0,0,10,0"/>
+
+                      <TextBlock Grid.Column="2"
+                                 Text="值:"
+                                 VerticalAlignment="Center"
+                                 Margin="0,0,10,0"/>
+                      <NumericUpDown Grid.Column="3"
+                                     Value="{Binding Value}"
+                                     Minimum="1000"
+                                     Maximum="999999"
+                                     Margin="0,0,10,0"/>
+
+                      <Button Grid.Column="4"
+                              Content="确定"
+                              Command="{Binding $parent[ItemsControl].((vm:RouteConfigViewModel)DataContext).ConfirmEditCommand}"
+                              CommandParameter="{Binding}"
+                              Background="#0E639C"
+                              Foreground="White"
+                              Padding="10,3"
+                              Margin="5,0"/>
+
+                      <Button Grid.Column="5"
+                              Content="取消"
+                              Command="{Binding $parent[ItemsControl].((vm:RouteConfigViewModel)DataContext).CancelEditCommand}"
+                              CommandParameter="{Binding}"
+                              Background="#3F3F46"
+                              Foreground="White"
+                              Padding="10,3"
+                              Margin="5,0"/>
+                      </Grid>
+                    </Panel>
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+
+        </Grid>
+      </Border>
+
+    </Grid>
+
+    <!-- 底部状态栏 -->
+    <Border Grid.Row="2" Background="#007ACC" CornerRadius="4" Padding="10" Margin="0,10,0,0"
+            IsVisible="{Binding IsModified}">
+      <TextBlock Text="文件已修改，请记得保存"
+                 FontSize="12"
+                 Foreground="White"
+                 FontWeight="Bold"/>
+    </Border>
+
+  </Grid>
+
+</UserControl>

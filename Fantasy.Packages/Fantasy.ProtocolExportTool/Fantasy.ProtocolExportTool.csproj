@@ -5,11 +5,40 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>ProtocolExportTool</RootNamespace>
+        <SatelliteResourceLanguages>en;zh-Hans</SatelliteResourceLanguages>
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Commands\" />
+      <PackageReference Include="Spectre.Console" Version="0.54.0" />
+      <PackageReference Include="System.CommandLine" Version="2.0.0" />
+      <PackageReference Include="System.Text.Json" Version="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="..\Fantasy.Net\Runtime\Core\Network\Message\PacketParser\OpCode.cs">
+        <Link>Link\OpCode.cs</Link>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="ExporterSettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Run.bat">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Run.sh">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="build-and-pack.bat">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="build-and-pack.sh">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="quick-build.sh">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

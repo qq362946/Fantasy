@@ -1,0 +1,540 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Fantasy.ProtocolEditor.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+        xmlns:views="using:Fantasy.ProtocolEditor.Views"
+        xmlns:converters="using:Fantasy.ProtocolEditor.Converters"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        x:Class="Fantasy.ProtocolEditor.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/app-icon.ico"
+        Title="Fantasy Protocol Editor"
+        Background="#2B2B2B"
+        Width="1200" Height="800">
+
+    <Window.Resources>
+        <converters:EditorTypeToTextEditorVisibilityConverter x:Key="EditorTypeToTextEditorVisibilityConverter"/>
+        <converters:EditorTypeToConfigEditorVisibilityConverter x:Key="EditorTypeToConfigEditorVisibilityConverter"/>
+        <converters:EditorTypeToExportSettingsVisibilityConverter x:Key="EditorTypeToExportSettingsVisibilityConverter"/>
+        <converters:FilePathToRoamingConfigVisibilityConverter x:Key="FilePathToRoamingConfigVisibilityConverter"/>
+        <converters:FilePathToRouteConfigVisibilityConverter x:Key="FilePathToRouteConfigVisibilityConverter"/>
+        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    </Window.Resources>
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- 顶部菜单栏 -->
+            <RowDefinition Height="Auto"/>
+            <!-- 主内容区 -->
+            <RowDefinition Height="*"/>
+            <!-- 底部面板 (可折叠) -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="180"/>
+            <!-- 状态栏 -->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 顶部菜单栏 -->
+        <Border Grid.Row="0" Background="#2B2B2B" BorderBrush="Transparent" BorderThickness="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 菜单 -->
+                <Menu Grid.Column="0" Background="Transparent" Foreground="#CCCCCC" Height="30">
+                    <MenuItem Header="文件">
+                        <MenuItem Header="打开目录..." Click="OnOpenFolderMenuClick" InputGesture="Ctrl+O"/>
+                        <MenuItem Header="导出设置" Command="{Binding OpenExportSettingsCommand}"/>
+                        <MenuItem Header="执行导出" Command="{Binding ExportProtocolsCommand}"/>
+                        <Separator/>
+                        <MenuItem Header="退出" Click="OnExitMenuClick"/>
+                    </MenuItem>
+                    <MenuItem Header="编辑">
+                        <MenuItem Header="查找" Click="OnFindMenuClick" InputGesture="Ctrl+F"/>
+                        <MenuItem Header="替换" Click="OnReplaceMenuClick" InputGesture="Ctrl+H"/>
+                        <Separator/>
+                        <MenuItem Header="跳转到行..." Click="OnGoToLineMenuClick" InputGesture="Ctrl+G"/>
+                    </MenuItem>
+                    <MenuItem Header="帮助">
+                        <MenuItem Header="关于" Click="OnAboutMenuClick"/>
+                    </MenuItem>
+                </Menu>
+
+                <!-- 工作区路径显示 -->
+                <StackPanel Grid.Column="1"
+                           Orientation="Horizontal"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Margin="0,0,15,0"
+                           IsVisible="{Binding WorkspacePath, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                    <TextBlock Text="📂"
+                              FontSize="14"
+                              Foreground="#CCCCCC"
+                              VerticalAlignment="Center"
+                              Margin="0,0,5,0"/>
+                    <TextBlock Text="{Binding WorkspacePath}"
+                              FontSize="14"
+                              Foreground="#858585"
+                              VerticalAlignment="Center"
+                              TextTrimming="CharacterEllipsis"
+                              MaxWidth="600"
+                              ToolTip.Tip="{Binding WorkspacePath}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 主内容区 -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <!-- 左侧边栏 -->
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="Auto"/>
+                <!-- 编辑器区域 -->
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 左侧边栏 -->
+            <Border Grid.Column="0" Background="#2B2B2B" BorderBrush="Transparent" BorderThickness="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- 侧边栏标题 -->
+                    <Border Grid.Row="0" Background="#2B2B2B" Padding="10,8">
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                            <TextBlock Grid.Column="0"
+                                      Text="配置目录"
+                                      Foreground="#CCCCCC"
+                                      FontSize="11"
+                                      FontWeight="Bold"
+                                      VerticalAlignment="Center"/>
+
+                            <!-- 打开文件夹按钮 -->
+                            <Button Grid.Column="1"
+                                   Content="📁"
+                                   ToolTip.Tip="Open Folder"
+                                   Background="Transparent"
+                                   BorderThickness="0"
+                                   Foreground="#CCCCCC"
+                                   Padding="5,2"
+                                   FontSize="14"
+                                   Cursor="Hand"
+                                   Click="OnOpenFolderMenuClick"
+                                   Margin="0,0,5,0">
+                                <Button.Styles>
+                                    <Style Selector="Button:pointerover">
+                                        <Setter Property="Background" Value="#3E3E42"/>
+                                    </Style>
+                                </Button.Styles>
+                            </Button>
+
+                            <!-- 导出设置按钮 -->
+                            <Button Grid.Column="2"
+                                   Content="⚙️"
+                                   ToolTip.Tip="Export Settings"
+                                   Background="Transparent"
+                                   BorderThickness="0"
+                                   Foreground="#CCCCCC"
+                                   Padding="5,2"
+                                   FontSize="14"
+                                   Cursor="Hand"
+                                   Command="{Binding OpenExportSettingsCommand}"
+                                   Margin="0,0,5,0">
+                                <Button.Styles>
+                                    <Style Selector="Button:pointerover">
+                                        <Setter Property="Background" Value="#3E3E42"/>
+                                    </Style>
+                                </Button.Styles>
+                            </Button>
+
+                            <!-- 导出协议按钮 -->
+                            <Button Grid.Column="3"
+                                   Content="⚡"
+                                   ToolTip.Tip="Export Protocols"
+                                   Background="Transparent"
+                                   BorderThickness="0"
+                                   Foreground="#CCCCCC"
+                                   Padding="5,2"
+                                   FontSize="14"
+                                   Cursor="Hand"
+                                   Command="{Binding ExportProtocolsCommand}">
+                                <Button.Styles>
+                                    <Style Selector="Button:pointerover">
+                                        <Setter Property="Background" Value="#3E3E42"/>
+                                    </Style>
+                                </Button.Styles>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <!-- 文件树视图 -->
+                    <TreeView x:Name="FileTreeView"
+                              Grid.Row="1"
+                              Background="Transparent"
+                              Foreground="#CCCCCC"
+                              Padding="5"
+                              ItemsSource="{Binding FileTreeNodes}"
+                              SelectionChanged="OnFileTreeSelectionChanged">
+                        <TreeView.ItemTemplate>
+                            <TreeDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal" Spacing="5" Tapped="OnFileTreeItemTapped" PointerPressed="OnFileTreeItemPointerPressed">
+                                    <!-- 文件夹图标 -->
+                                    <TextBlock Text="📁" IsVisible="{Binding IsDirectory}" FontSize="12"/>
+                                    <!-- 文件图标 -->
+                                    <TextBlock Text="📄" IsVisible="{Binding !IsDirectory}" FontSize="12"/>
+                                    <!-- 文件名 - 存在时正常颜色，不存在时灰色 -->
+                                    <TextBlock Text="{Binding Name}">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush>
+                                                <SolidColorBrush.Color>
+                                                    <Binding Path="Exists">
+                                                        <Binding.Converter>
+                                                            <converters:BoolToColorConverter TrueColor="#CCCCCC" FalseColor="#808080"/>
+                                                        </Binding.Converter>
+                                                    </Binding>
+                                                </SolidColorBrush.Color>
+                                            </SolidColorBrush>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                    <!-- 不存在标记 -->
+                                    <TextBlock Text="(not exists)"
+                                              Foreground="#808080"
+                                              FontSize="10"
+                                              IsVisible="{Binding !Exists}"/>
+                                </StackPanel>
+                            </TreeDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Border>
+
+            <!-- 分割条 -->
+            <GridSplitter Grid.Column="1"
+                         Width="5"
+                         Background="Transparent"
+                         HorizontalAlignment="Stretch">
+                <GridSplitter.Template>
+                    <ControlTemplate>
+                        <Border Background="Transparent">
+                            <Border Width="1" Background="#000000" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </GridSplitter.Template>
+            </GridSplitter>
+
+            <!-- 编辑器区域 -->
+            <Grid Grid.Column="2" Background="#1E1E1E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- 标签页栏 -->
+                <Border Grid.Row="0" Background="#2B2B2B" BorderBrush="Transparent" BorderThickness="0">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl x:Name="TabItemsControl" ItemsSource="{Binding OpenedTabs}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" Height="35"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="12,8"
+                                            Cursor="Hand"
+                                            DragDrop.AllowDrop="True"
+                                            PointerPressed="OnTabPointerPressed"
+                                            PointerMoved="OnTabPointerMoved"
+                                            PointerReleased="OnTabPointerReleased">
+                                        <Border.Styles>
+                                            <!-- 默认样式 -->
+                                            <Style Selector="Border">
+                                                <Setter Property="Background" Value="#2B2B2B"/>
+                                            </Style>
+                                            <!-- 悬停样式 -->
+                                            <Style Selector="Border:pointerover">
+                                                <Setter Property="Background" Value="#1E1E1E"/>
+                                            </Style>
+                                        </Border.Styles>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <TextBlock Text="{Binding FileName}"
+                                                      Foreground="#FFFFFF"
+                                                      VerticalAlignment="Center"/>
+                                            <TextBlock Text="×"
+                                                      Foreground="#CCCCCC"
+                                                      VerticalAlignment="Center"
+                                                      Cursor="Hand"
+                                                      PointerPressed="OnTabCloseClick"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Border>
+
+                <!-- 编辑器内容区 -->
+                <Grid Grid.Row="1" Background="#1E1E1E">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- 查找/替换面板 -->
+                    <Border x:Name="FindPanel"
+                            Grid.Row="0"
+                            Background="#2B2B2B"
+                            BorderBrush="#000000"
+                            BorderThickness="0,0,0,1"
+                            Padding="10,8"
+                            IsVisible="False">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <!-- 查找输入框 -->
+                            <TextBox x:Name="FindTextBox"
+                                    Background="#1E1E1E"
+                                    Foreground="#CCCCCC"
+                                    BorderBrush="#3E3E42"
+                                    BorderThickness="1"
+                                    Padding="6,4"
+                                    Width="200"
+                                    Watermark="Find"
+                                    KeyDown="OnFindTextBoxKeyDown"/>
+
+                            <!-- 替换输入框 -->
+                            <TextBox x:Name="ReplaceTextBox"
+                                    Background="#1E1E1E"
+                                    Foreground="#CCCCCC"
+                                    BorderBrush="#3E3E42"
+                                    BorderThickness="1"
+                                    Padding="6,4"
+                                    Width="200"
+                                    Watermark="Replace"
+                                    IsVisible="False"/>
+
+                            <!-- 查找按钮组 -->
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <Button Content="Previous"
+                                       Background="#2B2B2B"
+                                       Foreground="#CCCCCC"
+                                       BorderThickness="1"
+                                       BorderBrush="#3E3E42"
+                                       Padding="10,4"
+                                       Click="OnFindPreviousClick"/>
+
+                                <Button Content="Next"
+                                       Background="#2B2B2B"
+                                       Foreground="#CCCCCC"
+                                       BorderThickness="1"
+                                       BorderBrush="#3E3E42"
+                                       Padding="10,4"
+                                       Click="OnFindNextClick"/>
+                            </StackPanel>
+
+                            <!-- 替换按钮组 -->
+                            <StackPanel x:Name="ReplaceButtonPanel"
+                                       Orientation="Horizontal"
+                                       Spacing="4"
+                                       IsVisible="False">
+                                <Button Content="Replace"
+                                       Background="#2B2B2B"
+                                       Foreground="#CCCCCC"
+                                       BorderThickness="1"
+                                       BorderBrush="#3E3E42"
+                                       Padding="10,4"
+                                       Click="OnReplaceClick"/>
+
+                                <Button Content="Replace All"
+                                       Background="#2B2B2B"
+                                       Foreground="#CCCCCC"
+                                       BorderThickness="1"
+                                       BorderBrush="#3E3E42"
+                                       Padding="10,4"
+                                       Click="OnReplaceAllClick"/>
+                            </StackPanel>
+
+                            <!-- 选项 -->
+                            <CheckBox x:Name="CaseSensitiveCheckBox"
+                                     Content="Match case"
+                                     Foreground="#CCCCCC"
+                                     VerticalAlignment="Center"/>
+
+                            <!-- 结果文本 -->
+                            <TextBlock x:Name="FindResultText"
+                                      Foreground="#858585"
+                                      VerticalAlignment="Center"
+                                      MinWidth="80"/>
+
+                            <!-- 关闭按钮 -->
+                            <Button Content="×"
+                                   Background="Transparent"
+                                   Foreground="#CCCCCC"
+                                   BorderThickness="0"
+                                   Padding="8,4"
+                                   FontSize="16"
+                                   Click="OnCloseFindPanelClick"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- AvaloniaEdit 文本编辑器 -->
+                    <avaloniaEdit:TextEditor x:Name="TextEditor"
+                                            Grid.Row="1"
+                                            Background="#1E1E1E"
+                                            Foreground="#D4D4D4"
+                                            FontFamily="Consolas, Menlo, Monaco, Courier New, monospace"
+                                            FontSize="14"
+                                            ShowLineNumbers="True"
+                                            WordWrap="False"
+                                            Loaded="TextEditor_Loaded"
+                                            HorizontalScrollBarVisibility="Auto"
+                                            VerticalScrollBarVisibility="Auto"
+                                            IsVisible="{Binding ActiveTab.EditorType, Converter={StaticResource EditorTypeToTextEditorVisibilityConverter}}"/>
+
+                    <!-- RoamingConfig 配置编辑器 -->
+                    <views:RoamingConfigView Grid.Row="1"
+                                             DataContext="{Binding RoamingConfigViewModel}"
+                                             IsVisible="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).ActiveTab.FilePath, Converter={StaticResource FilePathToRoamingConfigVisibilityConverter}, FallbackValue=False}"/>
+
+                    <!-- RouteConfig 配置编辑器 -->
+                    <views:RouteConfigView Grid.Row="1"
+                                           DataContext="{Binding RouteConfigViewModel}"
+                                           IsVisible="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).ActiveTab.FilePath, Converter={StaticResource FilePathToRouteConfigVisibilityConverter}, FallbackValue=False}"/>
+
+                    <!-- 导出设置编辑器 -->
+                    <views:ExportSettingsView Grid.Row="1"
+                                              DataContext="{Binding ExportSettingsViewModel}"
+                                              IsVisible="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).ActiveTab.EditorType, Converter={StaticResource EditorTypeToExportSettingsVisibilityConverter}, FallbackValue=False}"/>
+
+                    <!-- 欢迎界面 - 当没有打开任何标签时显示 -->
+                    <views:WelcomeView Grid.Row="1"
+                                       IsVisible="{Binding ActiveTab, Converter={StaticResource NullToVisibilityConverter}}"/>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- 底部面板分割条 -->
+        <GridSplitter Grid.Row="2"
+                     Height="5"
+                     Background="Transparent"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     IsVisible="{Binding IsBottomPanelVisible}">
+            <GridSplitter.Template>
+                <ControlTemplate>
+                    <Border Background="Transparent">
+                        <Border Height="1" Background="#000000" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
+
+        <!-- 底部面板 -->
+        <Border Grid.Row="3"
+                Background="#2B2B2B"
+                BorderBrush="Transparent"
+                BorderThickness="0"
+                IsVisible="{Binding IsBottomPanelVisible}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- 底部面板标签 -->
+                <Border Grid.Row="0" Background="#2B2B2B" BorderBrush="#000000" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Height="35">
+                            <Button Content="输出"
+                                   Background="Transparent"
+                                   Foreground="#CCCCCC"
+                                   BorderThickness="0"
+                                   Padding="12,8"/>
+                        </StackPanel>
+
+                        <Button Grid.Column="1"
+                               Content="🗑️ 清空"
+                               ToolTip.Tip="清空输出"
+                               Background="Transparent"
+                               BorderThickness="0"
+                               Foreground="#CCCCCC"
+                               Padding="10,8"
+                               FontSize="12"
+                               Cursor="Hand"
+                               Click="OnClearOutputClick"
+                               VerticalAlignment="Center"
+                               Margin="0,0,10,0">
+                            <Button.Styles>
+                                <Style Selector="Button:pointerover">
+                                    <Setter Property="Background" Value="#3E3E42"/>
+                                </Style>
+                            </Button.Styles>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <!-- 底部面板内容 -->
+                <ScrollViewer x:Name="OutputScrollViewer" Grid.Row="1" Background="#1E1E1E" HorizontalScrollBarVisibility="Disabled">
+                    <TextBox Background="Transparent"
+                            Foreground="#CCCCCC"
+                            BorderThickness="0"
+                            IsReadOnly="True"
+                            Text="{Binding OutputText}"
+                            FontFamily="Consolas, Menlo, Monaco, Courier New, monospace"
+                            TextWrapping="Wrap"
+                            Padding="10"/>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+        <!-- 状态栏 -->
+        <Border Grid.Row="4"
+                Background="#007ACC"
+                Height="24">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0"
+                           Orientation="Horizontal"
+                           Spacing="15"
+                           Margin="10,0">
+                    <TextBlock Text="Fantasy Protocol Editor"
+                              Foreground="White"
+                              VerticalAlignment="Center"
+                              FontSize="12"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1"
+                           Orientation="Horizontal"
+                           Spacing="15"
+                           Margin="10,0">
+                    <TextBlock Text="UTF-8"
+                              Foreground="White"
+                              VerticalAlignment="Center"
+                              FontSize="12"/>
+                    <TextBlock Text="Proto3"
+                              Foreground="White"
+                              VerticalAlignment="Center"
+                              FontSize="12"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+
+</Window>

@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <RootNamespace>Fantasy.ProtocolEditor</RootNamespace>
+        <ApplicationIcon>Assets\app-icon.ico</ApplicationIcon>
+        <CFBundleIconFile>app-icon.icns</CFBundleIconFile>
+        <SatelliteResourceLanguages>en;zh-Hans</SatelliteResourceLanguages>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Folder Include="Models\"/>
+        <AvaloniaResource Include="Assets\**"/>
+        <EmbeddedResource Include="Resources\**\*.xshd"/>
+    </ItemGroup>
+
+    <!-- macOS specific icon configuration -->
+    <ItemGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+        <None Include="Assets\app-icon.icns">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.3.8" />
+        <PackageReference Include="Avalonia.AvaloniaEdit" Version="11.3.0" />
+        <PackageReference Include="AvaloniaEdit.TextMate" Version="11.1.0" />
+        <PackageReference Include="System.Text.Json" Version="10.0.0" />
+        <PackageReference Include="TextMateSharp.Grammars" Version="1.0.59" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.3.8" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.8" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.8" />
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Include="Avalonia.Diagnostics" Version="11.3.8">
+            <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+            <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Fantasy.ProtocolExportTool\Fantasy.ProtocolExportTool.csproj" />
+    </ItemGroup>
+</Project>

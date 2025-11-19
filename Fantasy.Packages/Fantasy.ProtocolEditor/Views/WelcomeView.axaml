@@ -1,0 +1,265 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="Fantasy.ProtocolEditor.Views.WelcomeView">
+
+  <Grid Background="#1E1E1E">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+      <StackPanel Margin="50" MaxWidth="800" HorizontalAlignment="Center">
+
+        <!-- 标题 -->
+        <TextBlock Text="Fantasy Protocol Editor"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   Foreground="#FFFFFF"
+                   HorizontalAlignment="Center"
+                   Margin="0,40,0,10"/>
+
+        <TextBlock Text="网络协议编辑器"
+                   FontSize="16"
+                   Foreground="#858585"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,60"/>
+
+        <!-- 快速开始 -->
+        <Border Background="#2D2D30"
+                CornerRadius="8"
+                Padding="30"
+                Margin="0,0,0,30">
+          <StackPanel>
+            <TextBlock Text="⚡ 快速开始"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="#FFFFFF"
+                       Margin="0,0,0,20"/>
+
+            <StackPanel Spacing="15">
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="1."
+                          FontSize="14"
+                          Foreground="#4EC9B0"
+                          Width="30"/>
+                <TextBlock Text="点击左侧 '配置目录' 旁的 📁 图标，或按 Ctrl+O 打开工作区文件夹"
+                          FontSize="14"
+                          Foreground="#CCCCCC"
+                          TextWrapping="Wrap"/>
+              </StackPanel>
+
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="2."
+                          FontSize="14"
+                          Foreground="#4EC9B0"
+                          Width="30"/>
+                <TextBlock Text="在文件树中点击 .proto 文件进行编辑"
+                          FontSize="14"
+                          Foreground="#CCCCCC"
+                          TextWrapping="Wrap"/>
+              </StackPanel>
+
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="3."
+                          FontSize="14"
+                          Foreground="#4EC9B0"
+                          Width="30"/>
+                <TextBlock Text="编辑完成后点击 ⚡ 图标或菜单中的 '执行导出' 生成代码"
+                          FontSize="14"
+                          Foreground="#CCCCCC"
+                          TextWrapping="Wrap"/>
+              </StackPanel>
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+        <!-- 快捷键说明 -->
+        <Border Background="#2D2D30"
+                CornerRadius="8"
+                Padding="30"
+                Margin="0,0,0,30">
+          <StackPanel>
+            <TextBlock Text="⌨️ 快捷键"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="#FFFFFF"
+                       Margin="0,0,0,20"/>
+
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="180,*">
+              <!-- Ctrl+O -->
+              <Border Grid.Row="0" Grid.Column="0"
+                      Background="#3E3E42"
+                      CornerRadius="4"
+                      Padding="8,4"
+                      Margin="0,5"
+                      HorizontalAlignment="Left">
+                <TextBlock Text="Ctrl + O"
+                          FontFamily="Consolas, Menlo, Monaco, monospace"
+                          FontSize="13"
+                          Foreground="#FFFFFF"/>
+              </Border>
+              <TextBlock Grid.Row="0" Grid.Column="1"
+                        Text="打开文件夹"
+                        FontSize="14"
+                        Foreground="#CCCCCC"
+                        VerticalAlignment="Center"
+                        Margin="15,5"/>
+
+              <!-- Ctrl+S -->
+              <Border Grid.Row="1" Grid.Column="0"
+                      Background="#3E3E42"
+                      CornerRadius="4"
+                      Padding="8,4"
+                      Margin="0,5"
+                      HorizontalAlignment="Left">
+                <TextBlock Text="Ctrl + S"
+                          FontFamily="Consolas, Menlo, Monaco, monospace"
+                          FontSize="13"
+                          Foreground="#FFFFFF"/>
+              </Border>
+              <TextBlock Grid.Row="1" Grid.Column="1"
+                        Text="保存当前文件"
+                        FontSize="14"
+                        Foreground="#CCCCCC"
+                        VerticalAlignment="Center"
+                        Margin="15,5"/>
+
+              <!-- Ctrl+F -->
+              <Border Grid.Row="2" Grid.Column="0"
+                      Background="#3E3E42"
+                      CornerRadius="4"
+                      Padding="8,4"
+                      Margin="0,5"
+                      HorizontalAlignment="Left">
+                <TextBlock Text="Ctrl + F"
+                          FontFamily="Consolas, Menlo, Monaco, monospace"
+                          FontSize="13"
+                          Foreground="#FFFFFF"/>
+              </Border>
+              <TextBlock Grid.Row="2" Grid.Column="1"
+                        Text="查找"
+                        FontSize="14"
+                        Foreground="#CCCCCC"
+                        VerticalAlignment="Center"
+                        Margin="15,5"/>
+
+              <!-- Ctrl+H -->
+              <Border Grid.Row="3" Grid.Column="0"
+                      Background="#3E3E42"
+                      CornerRadius="4"
+                      Padding="8,4"
+                      Margin="0,5"
+                      HorizontalAlignment="Left">
+                <TextBlock Text="Ctrl + H"
+                          FontFamily="Consolas, Menlo, Monaco, monospace"
+                          FontSize="13"
+                          Foreground="#FFFFFF"/>
+              </Border>
+              <TextBlock Grid.Row="3" Grid.Column="1"
+                        Text="替换"
+                        FontSize="14"
+                        Foreground="#CCCCCC"
+                        VerticalAlignment="Center"
+                        Margin="15,5"/>
+
+              <!-- Ctrl+G -->
+              <Border Grid.Row="4" Grid.Column="0"
+                      Background="#3E3E42"
+                      CornerRadius="4"
+                      Padding="8,4"
+                      Margin="0,5"
+                      HorizontalAlignment="Left">
+                <TextBlock Text="Ctrl + G"
+                          FontFamily="Consolas, Menlo, Monaco, monospace"
+                          FontSize="13"
+                          Foreground="#FFFFFF"/>
+              </Border>
+              <TextBlock Grid.Row="4" Grid.Column="1"
+                        Text="跳转到行"
+                        FontSize="14"
+                        Foreground="#CCCCCC"
+                        VerticalAlignment="Center"
+                        Margin="15,5"/>
+
+              <!-- Esc -->
+              <Border Grid.Row="5" Grid.Column="0"
+                      Background="#3E3E42"
+                      CornerRadius="4"
+                      Padding="8,4"
+                      Margin="0,5"
+                      HorizontalAlignment="Left">
+                <TextBlock Text="Esc"
+                          FontFamily="Consolas, Menlo, Monaco, monospace"
+                          FontSize="13"
+                          Foreground="#FFFFFF"/>
+              </Border>
+              <TextBlock Grid.Row="5" Grid.Column="1"
+                        Text="关闭查找/替换面板"
+                        FontSize="14"
+                        Foreground="#CCCCCC"
+                        VerticalAlignment="Center"
+                        Margin="15,5"/>
+
+              <!-- 单击 -->
+              <Border Grid.Row="6" Grid.Column="0"
+                      Background="#3E3E42"
+                      CornerRadius="4"
+                      Padding="8,4"
+                      Margin="0,5"
+                      HorizontalAlignment="Left">
+                <TextBlock Text="单击文件"
+                          FontFamily="Consolas, Menlo, Monaco, monospace"
+                          FontSize="13"
+                          Foreground="#FFFFFF"/>
+              </Border>
+              <TextBlock Grid.Row="6" Grid.Column="1"
+                        Text="打开文件/展开折叠文件夹"
+                        FontSize="14"
+                        Foreground="#CCCCCC"
+                        VerticalAlignment="Center"
+                        Margin="15,5"/>
+            </Grid>
+          </StackPanel>
+        </Border>
+
+        <!-- 提示 -->
+        <Border Background="#2D2D30"
+                CornerRadius="8"
+                Padding="30"
+                Margin="0,0,0,40">
+          <StackPanel>
+            <TextBlock Text="💡 提示"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="#FFFFFF"
+                       Margin="0,0,0,20"/>
+
+            <StackPanel Spacing="12">
+              <TextBlock TextWrapping="Wrap"
+                        FontSize="14"
+                        Foreground="#CCCCCC">
+                <Run Text="• "/>
+                <Run Text="RoamingType.Config 和 RouteType.Config 文件提供可视化编辑界面"/>
+              </TextBlock>
+
+              <TextBlock TextWrapping="Wrap"
+                        FontSize="14"
+                        Foreground="#CCCCCC">
+                <Run Text="• "/>
+                <Run Text=".proto 文件支持语法高亮和实时验证"/>
+              </TextBlock>
+
+              <TextBlock TextWrapping="Wrap"
+                        FontSize="14"
+                        Foreground="#CCCCCC">
+                <Run Text="• "/>
+                <Run Text="修改后记得执行导出以生成最新代码"/>
+              </TextBlock>
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+
+</UserControl>

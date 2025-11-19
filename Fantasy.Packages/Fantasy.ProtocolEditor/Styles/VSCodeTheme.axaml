@@ -1,0 +1,164 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Preview content -->
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- VSCode Dark Theme Colors -->
+    <Style>
+        <Style.Resources>
+            <!-- 背景色 -->
+            <Color x:Key="VSCodeDarkBackground">#1E1E1E</Color>
+            <Color x:Key="VSCodeSidebarBackground">#252526</Color>
+            <Color x:Key="VSCodeMenuBackground">#2D2D30</Color>
+
+            <!-- 边框色 -->
+            <Color x:Key="VSCodeBorder">#3E3E42</Color>
+
+            <!-- 文本色 -->
+            <Color x:Key="VSCodeForeground">#CCCCCC</Color>
+            <Color x:Key="VSCodeForegroundBright">#FFFFFF</Color>
+            <Color x:Key="VSCodeForegroundDim">#858585</Color>
+
+            <!-- 强调色 -->
+            <Color x:Key="VSCodeAccent">#007ACC</Color>
+            <Color x:Key="VSCodeAccentHover">#005A9E</Color>
+
+            <!-- 选中色 -->
+            <Color x:Key="VSCodeSelection">#264F78</Color>
+
+            <!-- SolidColorBrush Resources -->
+            <SolidColorBrush x:Key="VSCodeDarkBackgroundBrush" Color="{StaticResource VSCodeDarkBackground}"/>
+            <SolidColorBrush x:Key="VSCodeSidebarBackgroundBrush" Color="{StaticResource VSCodeSidebarBackground}"/>
+            <SolidColorBrush x:Key="VSCodeMenuBackgroundBrush" Color="{StaticResource VSCodeMenuBackground}"/>
+            <SolidColorBrush x:Key="VSCodeBorderBrush" Color="{StaticResource VSCodeBorder}"/>
+            <SolidColorBrush x:Key="VSCodeForegroundBrush" Color="{StaticResource VSCodeForeground}"/>
+            <SolidColorBrush x:Key="VSCodeForegroundBrightBrush" Color="{StaticResource VSCodeForegroundBright}"/>
+            <SolidColorBrush x:Key="VSCodeForegroundDimBrush" Color="{StaticResource VSCodeForegroundDim}"/>
+            <SolidColorBrush x:Key="VSCodeAccentBrush" Color="{StaticResource VSCodeAccent}"/>
+            <SolidColorBrush x:Key="VSCodeSelectionBrush" Color="{StaticResource VSCodeSelection}"/>
+        </Style.Resources>
+    </Style>
+
+    <!-- Menu Styles -->
+    <Style Selector="Menu">
+        <Setter Property="Background" Value="{StaticResource VSCodeMenuBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource VSCodeForegroundBrush}"/>
+    </Style>
+
+    <Style Selector="MenuItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource VSCodeForegroundBrush}"/>
+    </Style>
+
+    <Style Selector="MenuItem:pointerover /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="{StaticResource VSCodeSelectionBrush}"/>
+    </Style>
+
+    <!-- TreeView Styles -->
+    <Style Selector="TreeView">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource VSCodeForegroundBrush}"/>
+    </Style>
+
+    <Style Selector="TreeViewItem">
+        <Setter Property="Foreground" Value="{StaticResource VSCodeForegroundBrush}"/>
+    </Style>
+
+    <Style Selector="TreeViewItem:pointerover /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="{StaticResource VSCodeSelectionBrush}"/>
+    </Style>
+
+    <Style Selector="TreeViewItem:selected /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="{StaticResource VSCodeSelectionBrush}"/>
+    </Style>
+
+    <!-- Button Styles -->
+    <Style Selector="Button.VSCodeButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource VSCodeForegroundBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="12,8"/>
+    </Style>
+
+    <Style Selector="Button.VSCodeButton:pointerover">
+        <Setter Property="Background" Value="{StaticResource VSCodeSelectionBrush}"/>
+    </Style>
+
+    <!-- TextBox Styles -->
+    <Style Selector="TextBox.VSCodeTextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource VSCodeForegroundBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontFamily" Value="Consolas, Menlo, Monaco, Courier New, monospace"/>
+    </Style>
+
+    <!-- 全局 TextBox 暗色样式 -->
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="#3C3C3C"/>
+        <Setter Property="Foreground" Value="{StaticResource VSCodeForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource VSCodeBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <Style Selector="TextBox:focus">
+        <Setter Property="BorderBrush" Value="{StaticResource VSCodeAccentBrush}"/>
+    </Style>
+
+    <!-- 全局 Border/Panel 暗色样式 -->
+    <Style Selector="Border">
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <!-- ComboBox 暗色样式 -->
+    <Style Selector="ComboBox">
+        <Setter Property="Background" Value="#3C3C3C"/>
+        <Setter Property="Foreground" Value="{StaticResource VSCodeForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource VSCodeBorderBrush}"/>
+    </Style>
+
+    <Style Selector="ComboBox:pointerover /template/ Border#Background">
+        <Setter Property="Background" Value="#3C3C3C"/>
+    </Style>
+
+    <!-- CheckBox 暗色样式 -->
+    <Style Selector="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource VSCodeForegroundBrush}"/>
+    </Style>
+
+    <!-- ListBox 暗色样式 -->
+    <Style Selector="ListBox">
+        <Setter Property="Background" Value="#1E1E1E"/>
+        <Setter Property="Foreground" Value="{StaticResource VSCodeForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource VSCodeBorderBrush}"/>
+    </Style>
+
+    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource VSCodeSelectionBrush}"/>
+    </Style>
+
+    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource VSCodeSelectionBrush}"/>
+    </Style>
+
+    <!-- ScrollBar Styles for Dark Theme -->
+    <Style Selector="ScrollBar">
+        <Setter Property="Background" Value="{StaticResource VSCodeSidebarBackgroundBrush}"/>
+    </Style>
+
+    <Style Selector="ScrollBar:vertical">
+        <Setter Property="Width" Value="14"/>
+    </Style>
+
+    <Style Selector="ScrollBar:horizontal">
+        <Setter Property="Height" Value="14"/>
+    </Style>
+
+    <!-- ScrollViewer 暗色样式 -->
+    <Style Selector="ScrollViewer">
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+</Styles>

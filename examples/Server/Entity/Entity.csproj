@@ -41,5 +41,8 @@
     <ItemGroup>
       <PackageReference Include="NLog" Version="6.0.5" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Generate\NetworkProtocol\" />
+    </ItemGroup>
 
 </Project>
