@@ -9,10 +9,10 @@ namespace Fantasy;
 
 public sealed class SaveEntity : Entity
 {
-    
+
 }
 
-[SeparateTable(typeof(SaveEntity),"SubSceneTestComponent")]
+[SeparateTable(typeof(SaveEntity), "SubSceneTestComponent")]
 public sealed class SubSceneTestComponent : Entity
 {
     public override void Dispose()
@@ -48,53 +48,53 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         switch (scene.SceneType)
         {
             case 6666:
-            {
-                break;
-            }
+                {
+                    break;
+                }
             case SceneType.Addressable:
-            {
-                _addressableSceneRunTimeId = scene.RuntimeId;
-                break;
-            }
+                {
+                    _addressableSceneRunTimeId = scene.RuntimeId;
+                    break;
+                }
             case SceneType.Map:
-            {
-                Log.Debug($"Map Scene  SceneRuntimeId:{scene.RuntimeId}");
-                break;
-            }
+                {
+                    Log.Debug($"Map Scene  SceneRuntimeId:{scene.RuntimeId}");
+                    break;
+                }
             case SceneType.Chat:
-            {
-                break;
-            }
+                {
+                    break;
+                }
             case SceneType.Gate:
-            {
-                // var saveEntity = await scene.World.Database.Query<SaveEntity>(459439609634619405,true);
-                // await saveEntity.LoadWithSeparateTables(scene.World.Database);
-                //
-                // Log.Debug($"{saveEntity.GetComponent<SubSceneTestComponent>()!=null}");
-                // var saveEntity = Entity.Create<SaveEntity>(scene, true, false);
-                // saveEntity.AddComponent<SubSceneTestComponent>();
-                // await saveEntity.PersistAggregate(scene.World.Database);
-                // var tasks = new List<FTask>(2000);
-                // var session = scene.GetSession(_addressableSceneRunTimeId);
-                // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
-                // var g2ATestRequest = new G2A_TestRequest();
-                //
-                // async FTask Call()
-                // {
-                //     await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,g2ATestRequest);
-                // }
-                //
-                // for (int i = 0; i < 100000000000; i++)
-                // {
-                //     tasks.Clear();
-                //     for (int j = 0; j < tasks.Capacity; ++j)
-                //     {
-                //         tasks.Add(Call());
-                //     }
-                //     await FTask.WaitAll(tasks);
-                // }
-                break;
-            }
+                {
+                    // var saveEntity = await scene.World.Database.Query<SaveEntity>(459439609634619405,true);
+                    // await saveEntity.LoadWithSeparateTables(scene.World.Database);
+                    //
+                    // Log.Debug($"{saveEntity.GetComponent<SubSceneTestComponent>()!=null}");
+                    // var saveEntity = Entity.Create<SaveEntity>(scene, true, false);
+                    // saveEntity.AddComponent<SubSceneTestComponent>();
+                    // await saveEntity.PersistAggregate(scene.World.Database);
+                    // var tasks = new List<FTask>(2000);
+                    // var session = scene.GetSession(_addressableSceneRunTimeId);
+                    // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
+                    // var g2ATestRequest = new G2A_TestRequest();
+                    //
+                    // async FTask Call()
+                    // {
+                    //     await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,g2ATestRequest);
+                    // }
+                    //
+                    // for (int i = 0; i < 100000000000; i++)
+                    // {
+                    //     tasks.Clear();
+                    //     for (int j = 0; j < tasks.Capacity; ++j)
+                    //     {
+                    //         tasks.Add(Call());
+                    //     }
+                    //     await FTask.WaitAll(tasks);
+                    // }
+                    break;
+                }
         }
     }
 }

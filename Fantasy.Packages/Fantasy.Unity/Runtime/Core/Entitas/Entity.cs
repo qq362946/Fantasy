@@ -45,6 +45,8 @@ namespace Fantasy.Entitas
         /// 实体的RunTimeId
         /// </summary>
         [BsonIgnore]
+        [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
         public long RuntimeId { get; protected set; }
@@ -53,6 +55,7 @@ namespace Fantasy.Entitas
         /// </summary>
         [BsonIgnore]
         [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
         public bool IsDisposed => RuntimeId == 0;
@@ -61,6 +64,7 @@ namespace Fantasy.Entitas
         /// </summary>
         [BsonIgnore]
         [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
         public Scene Scene { get; protected set; }
@@ -69,6 +73,7 @@ namespace Fantasy.Entitas
         /// </summary>
         [BsonIgnore]
         [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
         public Entity Parent { get; protected set; }
@@ -77,6 +82,7 @@ namespace Fantasy.Entitas
         /// </summary>
         [BsonIgnore]
         [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
         public Type Type { get; protected set; }
@@ -85,6 +91,7 @@ namespace Fantasy.Entitas
         /// </summary>
         [BsonIgnore]
         [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
         public long TypeHashCode { get; private set; }
@@ -842,6 +849,7 @@ namespace Fantasy.Entitas
         /// </summary>
         [BsonIgnore]
         [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
         public IEnumerable<Entity> ForEachMultiEntity
@@ -864,6 +872,7 @@ namespace Fantasy.Entitas
         /// </summary>
         [BsonIgnore]
         [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         [IgnoreDataMember]
         [ProtoIgnore]
         public IEnumerable<Entity> ForEachEntity
