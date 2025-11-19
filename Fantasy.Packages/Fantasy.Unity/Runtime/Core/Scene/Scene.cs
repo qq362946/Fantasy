@@ -345,12 +345,12 @@ namespace Fantasy
         {
             var world = ++_unityWorldId;
             var sceneId = ++_unitySceneId;
-            
+
             if (sceneId > 65535)
             {
                 throw new Exception($"Scene ID ({sceneId}) exceeds the maximum allowed value of 65535.");
             }
-            
+
             //
             // if (world > byte.MaxValue - 1)
             // {

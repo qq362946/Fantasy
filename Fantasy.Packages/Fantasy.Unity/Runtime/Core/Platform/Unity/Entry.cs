@@ -44,7 +44,7 @@ namespace Fantasy.Platform.Unity
         {
             if (_isInit)
             {
-                // Log.Error("Fantasy has already been initialized and does not need to be initialized again!");
+                Log.Error("Fantasy has already been initialized and does not need to be initialized again!");
                 return;
             }
 
