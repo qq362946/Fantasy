@@ -35,6 +35,11 @@ Unity 客户端开发的完整指南。
     - 基础 Unity 启动流程
     - HybridCLR 热更新环境配置
     - 常见问题解答
+- ✅ [02-FantasyRuntime.md](02-Unity/02-FantasyRuntime.md) - FantasyRuntime 组件使用指南
+    - FantasyRuntime 组件模式详解
+    - Runtime 静态类模式详解
+    - 多实例管理
+    - 最佳实践
 
 ---
 
