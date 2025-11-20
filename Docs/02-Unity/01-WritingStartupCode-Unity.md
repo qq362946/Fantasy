@@ -807,11 +807,12 @@ error CS0246: The type or namespace name 'Fantasy.Generated' could not be found
 
 现在你已经掌握了 Unity 客户端的启动代码编写,接下来可以:
 
-1. 📖 阅读 [编写启动代码 - 服务器端](../01-Server/02-WritingStartupCode.md) 了解服务器端启动流程
-2. 🔧 阅读 [协议定义](11-Protocol.md) 学习 .proto 文件(待完善)
-3. 🌐 阅读 [网络开发](09-Network.md) 学习消息处理(待完善)
-4. 🎮 阅读 [ECS 系统](06-ECS.md) 学习实体组件系统(待完善)
-5. 📚 查看 `Examples/Client/Unity` 目录下的完整示例
+1. 🚀 阅读 [FantasyRuntime 组件使用指南](02-FantasyRuntime.md) 学习如何使用一站式网络连接组件简化初始化流程
+2. 📖 阅读 [编写启动代码 - 服务器端](../01-Server/02-WritingStartupCode.md) 了解服务器端启动流程
+3. 🔧 阅读 [协议定义](11-Protocol.md) 学习 .proto 文件(待完善)
+4. 🌐 阅读 [网络开发](09-Network.md) 学习消息处理(待完善)
+5. 🎮 阅读 [ECS 系统](06-ECS.md) 学习实体组件系统(待完善)
+6. 📚 查看 `Examples/Client/Unity` 目录下的完整示例
 
 ## 获取帮助
 
