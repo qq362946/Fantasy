@@ -20,10 +20,10 @@ namespace Fantasy.Assembly
         /// <param name="destroySystems">Destroy 系统容器</param>
         /// <param name="deserializeSystems">Deserialize 系统容器</param>
         void RegisterSystems(
-            Dictionary<long, Action<Entity>> awakeSystems,
-            Dictionary<long, Action<Entity>> updateSystems,
-            Dictionary<long, Action<Entity>> destroySystems,
-            Dictionary<long, Action<Entity>> deserializeSystems);
+            Dictionary<RuntimeTypeHandle, Action<Entity>> awakeSystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> updateSystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> destroySystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> deserializeSystems);
 
         /// <summary>
         /// 取消注册该程序集中的所有实体系统（热重载卸载时调用）
@@ -33,10 +33,10 @@ namespace Fantasy.Assembly
         /// <param name="destroySystems">Destroy 系统容器</param>
         /// <param name="deserializeSystems">Deserialize 系统容器</param>
         void UnRegisterSystems(
-            Dictionary<long, Action<Entity>> awakeSystems,
-            Dictionary<long, Action<Entity>> updateSystems,
-            Dictionary<long, Action<Entity>> destroySystems,
-            Dictionary<long, Action<Entity>> deserializeSystems);
+            Dictionary<RuntimeTypeHandle, Action<Entity>> awakeSystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> updateSystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> destroySystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> deserializeSystems);
 #endif
 #if FANTASY_UNITY
         /// <summary>
@@ -48,11 +48,11 @@ namespace Fantasy.Assembly
         /// <param name="deserializeSystems">Deserialize 系统容器</param>
         /// <param name="lateUpdateSystems">LateUpdate 系统容器</param>
         void RegisterSystems(
-            Dictionary<long, Action<Entity>> awakeSystems,
-            Dictionary<long, Action<Entity>> updateSystems,
-            Dictionary<long, Action<Entity>> destroySystems,
-            Dictionary<long, Action<Entity>> deserializeSystems,
-            Dictionary<long, Action<Entity>> lateUpdateSystems);
+            Dictionary<RuntimeTypeHandle, Action<Entity>> awakeSystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> updateSystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> destroySystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> deserializeSystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> lateUpdateSystems);
 
         /// <summary>
         /// 取消注册该程序集中的所有实体系统（热重载卸载时调用）
@@ -63,11 +63,11 @@ namespace Fantasy.Assembly
         /// <param name="deserializeSystems">Deserialize 系统容器</param>
         /// <param name="lateUpdateSystems">LateUpdate 系统容器</param>
         void UnRegisterSystems(
-            Dictionary<long, Action<Entity>> awakeSystems,
-            Dictionary<long, Action<Entity>> updateSystems,
-            Dictionary<long, Action<Entity>> destroySystems,
-            Dictionary<long, Action<Entity>> deserializeSystems,
-            Dictionary<long, Action<Entity>> lateUpdateSystems);
+            Dictionary<RuntimeTypeHandle, Action<Entity>> awakeSystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> updateSystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> destroySystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> deserializeSystems,
+            Dictionary<RuntimeTypeHandle, Action<Entity>> lateUpdateSystems);
 #endif
     }
 }

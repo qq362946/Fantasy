@@ -22,7 +22,6 @@ namespace Fantasy.PacketParser
         private int _disposeCount;
         public Type MessageType { get; private set; }
         private static readonly ConcurrentQueue<ProcessPackInfo> Caches = new ConcurrentQueue<ProcessPackInfo>();
-        private readonly ConcurrentDictionary<RuntimeTypeHandle, Func<object>> _createInstances = new ConcurrentDictionary<RuntimeTypeHandle, Func<object>>();
 
         public override void Dispose()
         {
@@ -55,6 +54,7 @@ namespace Fantasy.PacketParser
             packInfo._disposeCount = disposeCount;
             packInfo.MessageType = type;
             packInfo.IsDisposed = false;
+            packInfo.Scene = scene;
             var memoryStream = new MemoryStreamBuffer();
             memoryStream.MemoryStreamBufferSource = MemoryStreamBufferSource.Pack;
             var opCode = message.OpCode();
@@ -123,18 +123,11 @@ namespace Fantasy.PacketParser
                 return null;
             }
             
-            var messageTypeTypeHandle = messageType.TypeHandle;
             MemoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
+            
             if (MemoryStream.Length == 0)
             {
-                if (_createInstances.TryGetValue(messageTypeTypeHandle, out var createInstance))
-                {
-                    return createInstance();
-                }
-
-                createInstance = CreateInstance.CreateObject(messageType);
-                _createInstances.TryAdd(messageTypeTypeHandle, createInstance);
-                return createInstance();
+                return Network.Scene.PoolGeneratorComponent.Create(messageType);
             }
 
             if (SerializerManager.TryGetSerializer(OpCodeIdStruct.OpCodeProtocolType, out var serializer))

@@ -30,6 +30,7 @@ namespace Fantasy.PacketParser.Interface
                 OpCodeIdStruct = value;
             }
         }
+        public Scene Scene { get; protected set; }
         public OpCodeIdStruct OpCodeIdStruct { get; private set; }
         public MemoryStreamBuffer MemoryStream { get; protected set; }
         public abstract object Deserialize(Type messageType);
@@ -46,6 +47,7 @@ namespace Fantasy.PacketParser.Interface
             PackInfoId = 0;
             ProtocolCode = 0;
             _protocolCode = 0;
+            Scene = null;
             OpCodeIdStruct = default;
             
             if (MemoryStream != null)

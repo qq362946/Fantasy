@@ -19,7 +19,7 @@ namespace Fantasy.Entitas
         private int _poolCount;
         private const int MaxCapacity = ushort.MaxValue;
         private readonly OneToManyQueue<RuntimeTypeHandle, AMessage> _poolQueue = new OneToManyQueue<RuntimeTypeHandle, AMessage>();
-        private readonly Dictionary<RuntimeTypeHandle, Func<AMessage>> _typeCheckCache = new Dictionary<RuntimeTypeHandle, Func<AMessage>>();
+        
         /// <summary>
         /// 销毁组件
         /// </summary>
@@ -27,7 +27,6 @@ namespace Fantasy.Entitas
         {
             _poolCount = 0;
             _poolQueue.Clear();
-            _typeCheckCache.Clear();
             base.Dispose();
         }
         /// <summary>
@@ -60,22 +59,10 @@ namespace Fantasy.Entitas
         public AMessage Rent(Type type)
         {
             var runtimeTypeHandle = type.TypeHandle;
+            
             if (!_poolQueue.TryDequeue(runtimeTypeHandle, out var queue))
             {
-                if (!_typeCheckCache.TryGetValue(runtimeTypeHandle, out var createInstance))
-                {
-                    if (!typeof(AMessage).IsAssignableFrom(type))
-                    {
-                        throw new NotSupportedException($"{this.GetType().FullName} Type:{type.FullName} must inherit from IPool");
-                    }
-                    else
-                    {
-                        createInstance = CreateInstance.CreateMessage(type);
-                        _typeCheckCache[runtimeTypeHandle] = createInstance;
-                    }
-                }
-                
-                var instance = createInstance();
+                var instance = Scene.PoolGeneratorComponent.Create<AMessage>(type);
                 instance.SetScene(Scene);
                 instance.SetIsPool(true);
                 return instance;

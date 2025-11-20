@@ -18,9 +18,14 @@ namespace Fantasy.Pool
             return ObjectPools.GetOrAdd(typeof(T), t => new MultiThreadPoolQueue(2000, () => new T())).Rent<T>();
         }
 
-        public static IPool Rent(Type type)
+        public static IPool Rent(Scene scene, Type type)
         {
-            return ObjectPools.GetOrAdd(type, t => new MultiThreadPoolQueue(2000, CreateInstance.CreateIPool(type))).Rent();
+
+            return ObjectPools.GetOrAdd(type, t =>
+            {
+                return new MultiThreadPoolQueue(2000,
+                    () => scene.PoolGeneratorComponent.Create(type));
+            }).Rent();
         }
 
         public static void Return<T>(T obj) where T : IPool, new()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace Fantasy.Helper
         /// </summary>
         /// <param name="relativePath">相对路径。</param>
         /// <returns>完整路径。</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetFullPath(string relativePath)
         {
             return Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, relativePath));
@@ -27,6 +29,7 @@ namespace Fantasy.Helper
         /// <param name="relativePath">相对于指定的目录的相对路径。</param>
         /// <param name="srcDir">指定的目录</param>
         /// <returns>完整路径。</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetFullPath(string relativePath, string srcDir)
         {
             return Path.GetFullPath(Path.Combine(srcDir, relativePath));
@@ -37,6 +40,7 @@ namespace Fantasy.Helper
         /// </summary>
         /// <param name="relativePath"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async Task<string> GetTextByRelativePath(string relativePath)
         {
             var fullPath = GetFullPath(relativePath);
@@ -48,6 +52,7 @@ namespace Fantasy.Helper
         /// </summary>
         /// <param name="fullPath"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async Task<string> GetText(string fullPath)
         {
             return await File.ReadAllTextAsync(fullPath, Encoding.UTF8);
@@ -57,6 +62,7 @@ namespace Fantasy.Helper
         /// 根据文件夹路径创建文件夹，如果文件夹不存在会自动创建文件夹。
         /// </summary>
         /// <param name="directoryPath"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CreateDirectory(string directoryPath)
         {
             if (directoryPath.LastIndexOf('/') != directoryPath.Length - 1)
@@ -83,6 +89,7 @@ namespace Fantasy.Helper
         /// <param name="sourceFile">源文件路径。</param>
         /// <param name="destinationFile">目标文件路径。</param>
         /// <param name="overwrite">是否覆盖已存在的目标文件。</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Copy(string sourceFile, string destinationFile, bool overwrite)
         {
             CreateDirectory(destinationFile);
@@ -117,6 +124,7 @@ namespace Fantasy.Helper
         /// <param name="sourceDirectory">源文件夹路径。</param>
         /// <param name="destinationDirectory">目标文件夹路径。</param>
         /// <param name="overwrite">是否覆盖已存在的文件。</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CopyDirectory(string sourceDirectory, string destinationDirectory, bool overwrite)
         {
             // 创建目标文件夹
@@ -160,6 +168,7 @@ namespace Fantasy.Helper
         /// <param name="searchPattern">需要查找的文件通配符</param>
         /// <param name="searchOption">查找的类型</param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] GetDirectoryFile(string folderPath, string searchPattern, SearchOption searchOption)
         {
             return Directory.GetFiles(folderPath, searchPattern, searchOption);
@@ -169,6 +178,7 @@ namespace Fantasy.Helper
         /// 清空文件夹内的所有文件。
         /// </summary>
         /// <param name="folderPath">文件夹路径。</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ClearDirectoryFile(string folderPath)
         {
             if (!Directory.Exists(folderPath))

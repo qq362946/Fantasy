@@ -39,50 +39,54 @@ namespace Fantasy.Assembly
         /// <summary>
         /// ProtoBuf 序列化类型注册器
         /// </summary>
-        internal INetworkProtocolRegistrar NetworkProtocolRegistrar { get; set; }
+        internal INetworkProtocolRegistrar NetworkProtocolRegistrar { get; private set; }
 
         /// <summary>
         /// 事件系统注册器
         /// </summary>
-        internal IEventSystemRegistrar EventSystemRegistrar { get; set; }
+        internal IEventSystemRegistrar EventSystemRegistrar { get; private set; }
 
         /// <summary>
         /// 实体系统注册器
         /// </summary>
-        internal IEntitySystemRegistrar EntitySystemRegistrar { get; set; }
+        internal IEntitySystemRegistrar EntitySystemRegistrar { get; private set; }
 
         /// <summary>
         /// 消息分发器注册器
         /// </summary>
-        internal IMessageHandlerResolver MessageHandlerResolver { get; set; }
+        internal IMessageHandlerResolver MessageHandlerResolver { get; private set; }
 
         /// <summary>
         /// 实体类型集合注册器
         /// </summary>
-        internal IEntityTypeCollectionRegistrar EntityTypeCollectionRegistrar { get; set; }
+        internal IEntityTypeCollectionRegistrar EntityTypeCollectionRegistrar { get; private set; }
         
         /// <summary>
         /// 网络协议 OpCode 注册器
         /// </summary>
-        internal IOpCodeRegistrar OpCodeRegistrar { get; set; }
+        internal IOpCodeRegistrar OpCodeRegistrar { get; private set; }
         
         /// <summary>
         /// 网络协议Response注册器
         /// </summary>
-        internal IResponseTypeRegistrar ResponseTypeRegistrar { get; set; }
+        internal IResponseTypeRegistrar ResponseTypeRegistrar { get; private set; }
         
         /// <summary>
         /// 自定义接口
         /// </summary>
-        internal ICustomInterfaceRegistrar CustomInterfaceRegistrar { get; set; }
+        internal ICustomInterfaceRegistrar CustomInterfaceRegistrar { get; private set; }
+        /// <summary>
+        /// 池生成器注册器
+        /// </summary>
+        internal IPoolCreatorGenerator PoolCreatorGenerator{ get; set; }
 #if FANTASY_NET
         /// <summary>
         /// 分表注册器
         /// </summary>
-        internal ISeparateTableRegistrar SeparateTableRegistrar { get; set; }
-        internal ISphereEventRegistrar SphereEventRegistrar { get; set; }
+        internal ISeparateTableRegistrar SeparateTableRegistrar { get; private set; }
+        internal ISphereEventRegistrar SphereEventRegistrar { get; private set; }
 #endif
-        private readonly OneToManyList<long, Type> CustomInterfaces = new();
+        private readonly OneToManyList<RuntimeTypeHandle, Type> _customInterfaces = new();
 #if FANTASY_WEBGL
         /// <summary>
         /// 程序集清单集合（WebGL 单线程版本）
@@ -108,6 +112,7 @@ namespace Fantasy.Assembly
             EntitySystemRegistrar = null;
             MessageHandlerResolver = null;
             EntityTypeCollectionRegistrar = null;
+            PoolCreatorGenerator = null;
 #if FANTASY_NET
             SeparateTableRegistrar = null;
             SphereEventRegistrar = null;
@@ -135,6 +140,7 @@ namespace Fantasy.Assembly
         /// <param name="sphereEventRegistrar">领域事件系统注册器</param>
         /// <param name="customInterfaceRegistrar">自定接口注册器</param>
         /// <param name="fantasyConfigRegistrar">Fantasy配置注册器</param>
+        /// <param name="poolCreatorGenerator">池生成器注册器</param>
         public static void Register(
             long assemblyManifestId,
             System.Reflection.Assembly assembly,
@@ -148,7 +154,8 @@ namespace Fantasy.Assembly
             IResponseTypeRegistrar responseTypeRegistrar,
             ISphereEventRegistrar sphereEventRegistrar,
             ICustomInterfaceRegistrar customInterfaceRegistrar,
-            IFantasyConfigRegistrar fantasyConfigRegistrar)
+            IFantasyConfigRegistrar fantasyConfigRegistrar,
+            IPoolCreatorGenerator poolCreatorGenerator)
         {
             var manifest = new AssemblyManifest
             {
@@ -163,7 +170,8 @@ namespace Fantasy.Assembly
                 OpCodeRegistrar = opCodeRegistrar,
                 ResponseTypeRegistrar = responseTypeRegistrar,
                 SphereEventRegistrar = sphereEventRegistrar,
-                CustomInterfaceRegistrar = customInterfaceRegistrar
+                CustomInterfaceRegistrar = customInterfaceRegistrar,
+                PoolCreatorGenerator = poolCreatorGenerator
             };
 
             // 设置数据库名字字典
@@ -178,7 +186,7 @@ namespace Fantasy.Assembly
             { 
                 Scene.SceneTypeDictionary = sceneTypeDictionary.ToFrozenDictionary();
             }
-            customInterfaceRegistrar.Register(manifest.CustomInterfaces);
+            customInterfaceRegistrar.Register(manifest._customInterfaces);
             Manifests.TryAdd(assemblyManifestId, manifest);
             AssemblyLifecycle.OnLoad(manifest).Coroutine();
         }
@@ -199,6 +207,7 @@ namespace Fantasy.Assembly
         /// <param name="opCodeRegistrar">网络协议 OpCode 注册器</param>
         /// <param name="responseTypeRegistrar">网络协议 Response 注册器</param>
         /// <param name="customInterfaceRegistrar">自定接口注册器</param>
+        /// <param name="poolCreatorGenerator">池生成器注册器</param>
         public static void Register(
             long assemblyManifestId,
             System.Reflection.Assembly assembly,
@@ -209,7 +218,8 @@ namespace Fantasy.Assembly
             IEntityTypeCollectionRegistrar entityTypeCollectionRegistrar,
             IOpCodeRegistrar opCodeRegistrar,
             IResponseTypeRegistrar responseTypeRegistrar,
-            ICustomInterfaceRegistrar customInterfaceRegistrar)
+            ICustomInterfaceRegistrar customInterfaceRegistrar,
+            IPoolCreatorGenerator poolCreatorGenerator)
         {
             var manifest = new AssemblyManifest
             {
@@ -222,14 +232,15 @@ namespace Fantasy.Assembly
                 EntityTypeCollectionRegistrar = entityTypeCollectionRegistrar,
                 OpCodeRegistrar = opCodeRegistrar,
                 ResponseTypeRegistrar = responseTypeRegistrar,
-                CustomInterfaceRegistrar = customInterfaceRegistrar
+                CustomInterfaceRegistrar = customInterfaceRegistrar,
+                PoolCreatorGenerator = poolCreatorGenerator
             };
 #if FANTASY_WEBGL
             Manifests[assemblyManifestId] = manifest;
 #else
             Manifests.TryAdd(assemblyManifestId, manifest);
 #endif
-            customInterfaceRegistrar.Register(manifest.CustomInterfaces);
+            customInterfaceRegistrar.Register(manifest._customInterfaces);
             AssemblyLifecycle.OnLoad(manifest).Coroutine();
         }
 #endif
@@ -250,7 +261,7 @@ namespace Fantasy.Assembly
             if (Manifests.TryRemove(assemblyManifestId, out var manifest))
             {
                 AssemblyLifecycle.OnUnLoad(manifest).Coroutine();
-                manifest.CustomInterfaceRegistrar.UnRegister(manifest.CustomInterfaces);
+                manifest.CustomInterfaceRegistrar.UnRegister(manifest._customInterfaces);
             }
 #endif
         }
@@ -277,10 +288,9 @@ namespace Fantasy.Assembly
         /// <returns></returns>
         public static IEnumerable<Type> ForEach(Type type)
         {
-            var hashCode = TypeHashCache.GetHashCode(type);
             foreach (var (_, assemblyManifest) in Manifests)
             {
-                if (!assemblyManifest.CustomInterfaces.TryGetValue(hashCode, out var customRegistrars))
+                if (!assemblyManifest._customInterfaces.TryGetValue(type.TypeHandle, out var customRegistrars))
                 {
                     continue;
                 }
@@ -299,10 +309,9 @@ namespace Fantasy.Assembly
         /// <returns>所有程序集中实现ICustomRegistrar接口中指定类型的所有类型。</returns>
         public static IEnumerable<Type> ForEach<T>()
         {
-            var hashCode = TypeHashCache<T>.HashCode;
             foreach (var (_, assemblyManifest) in Manifests)
             {
-                if (!assemblyManifest.CustomInterfaces.TryGetValue(hashCode, out var customRegistrars))
+                if (!assemblyManifest._customInterfaces.TryGetValue(typeof(T).TypeHandle, out var customRegistrars))
                 {
                     continue;
                 }
@@ -322,9 +331,7 @@ namespace Fantasy.Assembly
         /// <returns></returns>
         public static IEnumerable<Type> ForEach(AssemblyManifest assemblyManifest, Type type)
         {
-            var hashCode = TypeHashCache.GetHashCode(type);
-            
-            if (!assemblyManifest.CustomInterfaces.TryGetValue(hashCode, out var customRegistrars))
+            if (!assemblyManifest._customInterfaces.TryGetValue(type.TypeHandle, out var customRegistrars))
             {
                 yield break;
             }
@@ -342,9 +349,7 @@ namespace Fantasy.Assembly
         /// <returns>指定程序集中实现指定类型的类型。</returns>
         public static IEnumerable<Type> ForEach<T>(AssemblyManifest assemblyManifest)
         {
-            var hashCode = TypeHashCache<T>.HashCode;
-            
-            if (!assemblyManifest.CustomInterfaces.TryGetValue(hashCode, out var customRegistrars))
+            if (!assemblyManifest._customInterfaces.TryGetValue(typeof(T).TypeHandle, out var customRegistrars))
             {
                 yield break;
             }

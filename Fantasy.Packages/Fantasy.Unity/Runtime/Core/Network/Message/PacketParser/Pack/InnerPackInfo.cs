@@ -15,8 +15,6 @@ namespace Fantasy.PacketParser
 {
     public sealed class InnerPackInfo : APackInfo
     {
-        private readonly Dictionary<RuntimeTypeHandle, Func<object>> _createInstances = new Dictionary<RuntimeTypeHandle, Func<object>>();
-
         public override void Dispose()
         {
             if (IsDisposed)
@@ -34,6 +32,7 @@ namespace Fantasy.PacketParser
             var innerPackInfo = network.RentInnerPackInfo();
             innerPackInfo.Network = network;
             innerPackInfo.IsDisposed = false;
+            innerPackInfo.Scene = network.Scene;
             return innerPackInfo;
         }
 
@@ -54,14 +53,7 @@ namespace Fantasy.PacketParser
 
             if (MemoryStream.Length == 0)
             {
-                if (_createInstances.TryGetValue(messageType.TypeHandle, out var createInstance))
-                {
-                    return createInstance();
-                }
-
-                createInstance = CreateInstance.CreateObject(messageType);
-                _createInstances.Add(messageType.TypeHandle, createInstance);
-                return createInstance();
+                return Scene.PoolGeneratorComponent.Create(messageType);
             }
 
             if (SerializerManager.TryGetSerializer(OpCodeIdStruct.OpCodeProtocolType, out var serializer))

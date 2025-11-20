@@ -21,7 +21,6 @@ namespace Fantasy.Pool
         /// </summary>
         public int Count => _poolQueue.Count;
         private readonly OneToManyQueue<RuntimeTypeHandle, IPool> _poolQueue = new OneToManyQueue<RuntimeTypeHandle, IPool>();
-        private readonly Dictionary<RuntimeTypeHandle, Func<IPool>> _typeCheckCache = new Dictionary<RuntimeTypeHandle, Func<IPool>>();
 
         /// <summary>
         /// 构造函数
@@ -52,32 +51,21 @@ namespace Fantasy.Pool
         /// <summary>
         /// 租借
         /// </summary>
+        /// <param name="scene">对应的Scene</param>
         /// <param name="type">租借的类型</param>
         /// <returns></returns>
         /// <exception cref="NotSupportedException"></exception>
-        public IPool Rent(Type type)
+        public IPool Rent(Scene scene, Type type)
         {
             var runtimeTypeHandle = type.TypeHandle;
+
             if (!_poolQueue.TryDequeue(runtimeTypeHandle, out var queue))
             {
-                if (!_typeCheckCache.TryGetValue(runtimeTypeHandle, out var createInstance))
-                {
-                    if (!typeof(IPool).IsAssignableFrom(type))
-                    {
-                        throw new NotSupportedException($"{this.GetType().FullName} Type:{type.FullName} must inherit from IPool");
-                    }
-                    else
-                    {
-                        createInstance = CreateInstance.CreateIPool(type);
-                        _typeCheckCache[runtimeTypeHandle] = createInstance;
-                    }
-                }
-                
-                var instance = createInstance();
+                var instance = scene.PoolGeneratorComponent.Create(type);
                 instance.SetIsPool(true);
                 return instance;
             }
-            
+
             queue.SetIsPool(true);
             _poolCount--;
             return queue;
@@ -117,7 +105,6 @@ namespace Fantasy.Pool
         {
             _poolCount = 0;
             _poolQueue.Clear();
-            _typeCheckCache.Clear();
         }
     }
 

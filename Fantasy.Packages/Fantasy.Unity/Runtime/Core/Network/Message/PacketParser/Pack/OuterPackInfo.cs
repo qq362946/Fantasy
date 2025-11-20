@@ -30,6 +30,7 @@ namespace Fantasy.PacketParser
             var outerPackInfo = network.RentOuterPackInfo();
             outerPackInfo.Network = network;
             outerPackInfo.IsDisposed = false;
+            outerPackInfo.Scene = network.Scene;
             return outerPackInfo;
         }
 

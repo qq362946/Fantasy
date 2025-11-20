@@ -1,10 +1,21 @@
+using System;
 using System.Collections.Generic;
 using Fantasy;
 using Fantasy.Async;
+using Fantasy.Entitas;
 using Fantasy.Network;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class TestEntity : Entity
+{
+    
+}
+
+public class TestEntity1 : Entity
+{
+    
+}
 // 协议在Examples/Config/ProtoBuf/Outer/OuterMessage.proto定义
 // 服务器接收的对应文件位置Examples/Server/Hotfix/Outer/NormalMessage/Gate
 public class NormalMessage : MonoBehaviour
@@ -34,8 +45,6 @@ public class NormalMessage : MonoBehaviour
     
     private async FTask StartAsync()
     {
-        var list = new List<int>();
-        list.Clear();
         // 1、初始化框架
         await Fantasy.Platform.Unity.Entry.Initialize();
         // 2、创建一个Scene，这个Scene代表一个客户端的场景，客户端的所有逻辑都可以写这里
@@ -59,6 +68,15 @@ public class NormalMessage : MonoBehaviour
         SendMessageButton.interactable = false;
         SendRPCMessageButton.interactable = false;
         PushMessageButton.interactable = false;
+        try
+        {
+            var addComponent = _scene.AddComponent<TestEntity>();
+            addComponent.AddComponent(typeof(TestEntity1));
+        }
+        catch (Exception e)
+        {
+            Text.text = e.Message;
+        }
     }
 
     #region Connect

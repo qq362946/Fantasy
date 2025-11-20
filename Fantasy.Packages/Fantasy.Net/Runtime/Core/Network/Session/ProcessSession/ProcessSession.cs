@@ -21,7 +21,6 @@ namespace Fantasy.Network;
 public sealed class ProcessSession : Session
 {
     private readonly MemoryStreamBufferPool _memoryStreamBufferPool = new MemoryStreamBufferPool();
-    private readonly Dictionary<Type, Func<object>> _createInstances = new Dictionary<Type, Func<object>>();
 
     public override void Send(IMessage message, Type messageType, uint rpcId = 0, long address = 0)
     {
@@ -86,14 +85,7 @@ public sealed class ProcessSession : Session
                 
                 if (memoryStream.Position == 0)
                 {
-                    if (_createInstances.TryGetValue(messageType, out var createInstance))
-                    {
-                        return createInstance();
-                    }
-
-                    createInstance = CreateInstance.CreateObject(messageType);
-                    _createInstances.Add(messageType, createInstance);
-                    return createInstance();
+                    return Scene.PoolGeneratorComponent.Create(messageType);
                 }
                 
                 memoryStream.SetLength(memoryStream.Position);

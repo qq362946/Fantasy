@@ -20,11 +20,11 @@ namespace Fantasy.Assembly
         /// 
         /// </summary>
         /// <param name="customRegistrar"></param>
-        void Register(OneToManyList<long, Type> customRegistrar);
+        void Register(OneToManyList<RuntimeTypeHandle, Type> customRegistrar);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="customRegistrar"></param>
-        void UnRegister(OneToManyList<long, Type> customRegistrar);
+        void UnRegister(OneToManyList<RuntimeTypeHandle, Type> customRegistrar);
     }
 }

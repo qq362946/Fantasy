@@ -34,16 +34,12 @@ namespace Fantasy.DataStructure.Dictionary
         private readonly TValue[] _values;
 
         /// <summary>
-        /// 初始化 <see cref="Int32FrozenDictionary{TValue}"/> 类的新实例（高性能构造函数，适合编译期生成代码）。
+        /// 初始化 <see cref="Int32FrozenDictionary{TValue}"/> 类的新实例。
         /// </summary>
         /// <param name="keys">键数组，必须保证无重复。</param>
         /// <param name="values">值数组，必须与键数组长度相同。</param>
         /// <exception cref="ArgumentNullException">当 keys 或 values 为 null 时抛出。</exception>
         /// <exception cref="ArgumentException">当数组长度不一致或为空时抛出。</exception>
-        /// <remarks>
-        /// 此构造函数假定键数组中没有重复键，适合编译期生成的代码使用。
-        /// 相比接受 Dictionary 的构造函数，此构造函数避免了创建临时对象和数据复制的开销。
-        /// </remarks>
         public Int32FrozenDictionary(int[] keys, TValue[] values)
         {
             if (keys == null)
@@ -55,8 +51,6 @@ namespace Fantasy.DataStructure.Dictionary
             if (keys.Length == 0)
                 throw new ArgumentException("Arrays cannot be empty");
 
-            _values = new TValue[keys.Length];
-
             // 使用 ArrayPool 避免分配
             int[] arrayPoolHashCodes = ArrayPool<int>.Shared.Rent(keys.Length);
             Span<int> hashCodes = arrayPoolHashCodes.AsSpan(0, keys.Length);
@@ -66,6 +60,8 @@ namespace Fantasy.DataStructure.Dictionary
 
             // 创建冻结哈希表，hashCodesAreUnique = true 因为调用者保证无重复
             _hashTable = FrozenHashTable.Create(hashCodes, hashCodesAreUnique: true);
+
+            _values = new TValue[keys.Length];
 
             // 根据哈希表返回的索引映射，将值放到正确的位置
             for (int srcIndex = 0; srcIndex < hashCodes.Length; srcIndex++)

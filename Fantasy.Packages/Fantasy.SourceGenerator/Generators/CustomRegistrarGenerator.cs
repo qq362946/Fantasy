@@ -71,24 +71,24 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.ICustomInterfaceRegistrar");
             // 生成注册方法
             builder.AddXmlComment("Register all CustomInterface to the containers");
-            builder.BeginMethod("public void Register(global::Fantasy.DataStructure.Collection.OneToManyList<long, Type> customRegistrar)");
+            builder.BeginMethod("public void Register(global::Fantasy.DataStructure.Collection.OneToManyList<global::System.RuntimeTypeHandle, Type> customRegistrar)");
             foreach (var customRegistrarType in customRegistrarTypeInfos)
             {
                 foreach (var interfaceInfo in customRegistrarType.AllInterfaces)
                 {
-                    builder.AppendLine($"customRegistrar.Add(TypeHashCache.GetHashCode(typeof({interfaceInfo.FullName})),typeof({customRegistrarType.TypeFullName}));");
+                    builder.AppendLine($"customRegistrar.Add(typeof({interfaceInfo.FullName}).TypeHandle,typeof({customRegistrarType.TypeFullName}));");
                 }
             }
             builder.EndMethod();
             builder.AppendLine();
             // 生成取消注册方法
             builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
-            builder.BeginMethod("public void UnRegister(global::Fantasy.DataStructure.Collection.OneToManyList<long, Type> customRegistrar)");
+            builder.BeginMethod("public void UnRegister(global::Fantasy.DataStructure.Collection.OneToManyList<global::System.RuntimeTypeHandle, Type> customRegistrar)");
             foreach (var customRegistrarType in customRegistrarTypeInfos)
             {
                 foreach (var interfaceInfo in customRegistrarType.AllInterfaces)
                 {
-                    builder.AppendLine($"customRegistrar.RemoveValue(TypeHashCache.GetHashCode(typeof({interfaceInfo.FullName})),typeof({customRegistrarType.TypeFullName}));");
+                    builder.AppendLine($"customRegistrar.RemoveValue(typeof({interfaceInfo.FullName}).TypeHandle,typeof({customRegistrarType.TypeFullName}));");
                 }
             }
             builder.EndMethod();

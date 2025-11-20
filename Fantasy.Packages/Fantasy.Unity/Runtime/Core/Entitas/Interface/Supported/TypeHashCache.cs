@@ -20,7 +20,7 @@ namespace Fantasy.Entitas.Interface
         /// 使用 ConcurrentDictionary 保证线程安全。
         /// </summary>
         private static readonly ConcurrentDictionary<RuntimeTypeHandle, long> RuntimeCache = new();
-
+    
         /// <summary>
         /// 获取指定实体类型的哈希码（运行时查找）。
         /// 首次访问时计算并缓存，后续访问直接返回缓存值。
@@ -38,7 +38,7 @@ namespace Fantasy.Entitas.Interface
                 static (_, fullName) => HashCodeHelper.ComputeHash64(fullName),
                 type.FullName);
         }
-
+    
         /// <summary>
         /// 预热缓存，批量计算并缓存一组类型的哈希码。
         /// </summary>
@@ -56,7 +56,7 @@ namespace Fantasy.Entitas.Interface
                 }
             }
         }
-
+    
         /// <summary>
         /// 清除所有缓存（仅用于热重载场景）。
         /// </summary>

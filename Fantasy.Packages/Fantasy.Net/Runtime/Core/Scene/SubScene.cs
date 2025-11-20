@@ -40,6 +40,7 @@ namespace Fantasy
             MessagePoolComponent = rootScene.MessagePoolComponent;
             CoroutineLockComponent = rootScene.CoroutineLockComponent;
             MessageDispatcherComponent = rootScene.MessageDispatcherComponent;
+            PoolGeneratorComponent = rootScene.PoolGeneratorComponent;
 #if FANTASY_NET
             NetworkMessagingComponent = rootScene.NetworkMessagingComponent;
             SeparateTableComponent = rootScene.SeparateTableComponent;

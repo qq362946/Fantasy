@@ -146,21 +146,14 @@ namespace Fantasy.Entitas
             }
             
             Entity entity = null;
-            var runtimeTypeHandle = type.TypeHandle;
             
             if (isPool)
             {
-                entity = (Entity)scene.EntityPool.Rent(type);
+                entity = (Entity)scene.EntityPool.Rent(scene, type);
             }
             else
             {
-                if (!scene.TypeInstance.TryGetValue(runtimeTypeHandle, out var createInstance))
-                {
-                    createInstance = CreateInstance.CreateIPool(type);
-                    scene.TypeInstance[runtimeTypeHandle] = createInstance;
-                }
-
-                entity = (Entity)createInstance();
+                entity = scene.PoolGeneratorComponent.Create<Entity>(type);
             }
             
             entity.Scene = scene;

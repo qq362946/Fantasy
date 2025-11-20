@@ -74,7 +74,7 @@ namespace Fantasy
         /// 根据数据库名字获取某个类型的数据库。
         /// </summary>
         /// <param name="dbName"></param>
-        public Fantasy.Database.IDatabase? this[int dbName] => AllDatabase.Length >= dbName ? null : AllDatabase[dbName];
+        public Fantasy.Database.IDatabase? this[int dbName] => dbName >= 0 && dbName < AllDatabase.Length ? AllDatabase[dbName] : null;
 
         /// <summary>
         /// 获取游戏世界的配置信息。

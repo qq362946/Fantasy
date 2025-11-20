@@ -83,7 +83,7 @@ namespace Fantasy
         /// 获取Scene对应的SceneConfig
         /// </summary>
         public SceneConfig SceneConfig => SceneConfigData.Instance.Get(SceneConfigId);
-        private readonly Dictionary<uint, ProcessSessionInfo> _processSessionInfos = new Dictionary<uint, ProcessSessionInfo>();
+        private readonly Dictionary<uint, ProcessSessionInfo> _processSessionInfos = new ();
 #endif
         /// <summary>
         /// 当前Scene的上下文
@@ -93,7 +93,6 @@ namespace Fantasy
         /// 当前Scene的下创建的Entity
         /// </summary>
         private readonly Dictionary<long, Entity> _entities = new Dictionary<long, Entity>();
-        internal readonly Dictionary<RuntimeTypeHandle, Func<IPool>> TypeInstance = new Dictionary<RuntimeTypeHandle, Func<IPool>>();
         #endregion
 
         #region IdFactory
@@ -143,6 +142,10 @@ namespace Fantasy
         /// Scene下的网络消息派发组件
         /// </summary>
         internal MessageDispatcherComponent MessageDispatcherComponent { get; set; }
+        /// <summary>
+        /// 池生成器组件
+        /// </summary>
+        internal PoolGeneratorComponent PoolGeneratorComponent  { get; set; }
 #if FANTASY_NET
         /// <summary>
         /// Scene下的Entity分表组件
@@ -184,6 +187,7 @@ namespace Fantasy
             TimerComponent = Create<TimerComponent>(this, false, true).Initialize();
             CoroutineLockComponent = Create<CoroutineLockComponent>(this, false, true).Initialize();
             MessageDispatcherComponent = await Create<MessageDispatcherComponent>(this, false, true).Initialize();
+            PoolGeneratorComponent = await Create<PoolGeneratorComponent>(this,false,false).Initialize();
 #if FANTASY_NET
             NetworkMessagingComponent = Create<NetworkMessagingComponent>(this, false, true);
             SeparateTableComponent = await Create<SeparateTableComponent>(this, false, true).Initialize();
@@ -246,7 +250,6 @@ namespace Fantasy
                     _unityWorldId--;
                     _unitySceneId--;
 #endif
-                    TypeInstance.Clear();
 #if FANTASY_NET
                     Process.RemoveScene(this, false);
                     Process.RemoveSceneToProcess(this);
@@ -281,6 +284,7 @@ namespace Fantasy
             MessagePoolComponent = null;
             CoroutineLockComponent = null;
             MessageDispatcherComponent = null;
+            PoolGeneratorComponent = null;
 #if FANTASY_NET
             World = null;
             Process = null;

@@ -33,7 +33,7 @@ namespace Fantasy.DataStructure.Dictionary
         private readonly long[] _keys;
 
         /// <summary>
-        /// 初始化 <see cref="Int64FrozenDictionary{TValue}"/> 类的新实例（高性能构造函数，适合编译期生成代码）。
+        /// 初始化 <see cref="Int64FrozenDictionary{TValue}"/> 类的新实例。
         /// </summary>
         /// <param name="keys">键数组，必须保证无重复。</param>
         /// <param name="values">值数组，必须与键数组长度相同。</param>
@@ -50,9 +50,6 @@ namespace Fantasy.DataStructure.Dictionary
             if (keys.Length == 0)
                 throw new ArgumentException("Arrays cannot be empty");
 
-            _keys = new long[keys.Length];
-            _values = new TValue[keys.Length];
-
             int[] arrayPoolHashCodes = ArrayPool<int>.Shared.Rent(keys.Length);
             Span<int> hashCodes = arrayPoolHashCodes.AsSpan(0, keys.Length);
 
@@ -62,6 +59,9 @@ namespace Fantasy.DataStructure.Dictionary
             }
 
             _hashTable = FrozenHashTable.Create(hashCodes, hashCodesAreUnique: false);
+
+            _keys = new long[keys.Length];
+            _values = new TValue[keys.Length];
 
             for (int srcIndex = 0; srcIndex < hashCodes.Length; srcIndex++)
             {
