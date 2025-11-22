@@ -10,13 +10,15 @@ namespace Fantasy.Assembly
     public interface IResponseTypeRegistrar
     {
         /// <summary>
-        /// 获取已注册的 Response 总数
+        /// OpCodes
         /// </summary>
-        /// <returns>协议系统中可用的 OpCode 数量</returns>
-        int GetRequestCount();
+        /// <returns></returns>
+        uint[] OpCodes();
+
         /// <summary>
-        /// FillResponseType
+        /// Types
         /// </summary>
-        void FillResponseType(uint[] opCodes, Type[] types);
+        /// <returns></returns>
+        Type[] Types();
     }
 }

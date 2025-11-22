@@ -497,6 +497,7 @@ public sealed class CSharpExporter(
             "uint" => "uint",
             "long" => "long",
             "ulong" => "ulong",
+            "byte" => "byte",
             _ when IsCustomType(type) => type,
             _ => throw new NotSupportedException($"Unsupported type '{type}'")
         };

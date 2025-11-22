@@ -99,7 +99,7 @@ public class NormalMessage : MonoBehaviour
     {
         Log.Debug("OnConnectComplete");
         Text.text = "连接成功";
-        // _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
+        _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
         ConnectButton.interactable = false;
         SendMessageButton.interactable = true;
         SendRPCMessageButton.interactable = true;

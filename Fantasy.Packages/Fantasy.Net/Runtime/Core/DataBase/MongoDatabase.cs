@@ -772,7 +772,7 @@ namespace Fantasy.Database
         /// <typeparam name="T">实体类型。</typeparam>
         /// <param name="entity">要保存的实体对象。</param>
         /// <param name="collection">集合名称。</param>
-        public async FTask Save<T>(T? entity, string collection = null) where T : Entity, new()
+        public async FTask Save<T>(T? entity, string collection = null) where T : Entity
         {
             if (entity == null)
             {
@@ -817,7 +817,7 @@ namespace Fantasy.Database
         /// </summary>
         /// <param name="id">文档 ID。</param>
         /// <param name="entities">要保存的实体对象列表。</param>
-        public async FTask Save(long id, List<Entity>? entities)
+        public async FTask Save(long id, List<(Entity, string)>? entities)
         {
             if (entities == null || entities.Count == 0)
             {
@@ -825,11 +825,11 @@ namespace Fantasy.Database
                 return;
             }
 
-            using var listPool = ListPool<Entity>.Create();
+            using var listPool = ListPool<(Entity, string)>.Create();
             
             foreach (var entity in entities)
             {
-                listPool.Add(_serializer.Clone(entity)); 
+                listPool.Add((_serializer.Clone(entity.Item1), entity.Item2));
             }
 
             using (await _dataBaseLock.Wait(id))
@@ -838,11 +838,11 @@ namespace Fantasy.Database
                 {
                     try
                     {
-                        await GetCollection(clone.GetType().Name).ReplaceOneAsync(d => d.Id == clone.Id, clone, new ReplaceOptions { IsUpsert = true });
+                        await GetCollection(clone.Item2).ReplaceOneAsync(d => d.Id == clone.Item1.Id, clone.Item1, new ReplaceOptions { IsUpsert = true });
                     }
                     catch (Exception e)
                     {
-                        Log.Error($"Save List Entity Error: {clone.GetType().Name} {clone}\n{e}");
+                        Log.Error($"Save List Entity Error: {clone.Item2} {clone}\n{e}");
                     }
                 }
             }

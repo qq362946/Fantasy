@@ -1,10 +1,6 @@
-using System;
 using Fantasy.SourceGenerator.Common;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 // ReSharper disable MemberHidesStaticFromOuterClass
 
 namespace Fantasy.SourceGenerator.Generators
@@ -122,90 +118,112 @@ namespace Fantasy.SourceGenerator.Generators
             // 开始类定义（实现 ISeparateTableRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Entity System registration class for {assemblyName}");
             builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.ISeparateTableRegistrar");
-            // 生成字段用于存储已注册（用于 UnRegister）
-            GenerateFields(builder, separateTableTypeInfoList);
             // 生成注册方法
-            GenerateRegisterMethod(builder, separateTableTypeInfoList);
-            // 生成反注册方法
-            GenerateUnRegisterMethod(builder, separateTableTypeInfoList);
+            GenerateCode(builder, separateTableTypeInfoList);
             // 结束类
             builder.EndClass();
-            // // 生成数据库帮助类
-            // builder.Append(GenerateGenerateSeparateTableGeneratedExtensions().ToString());
+            // 生成数据库帮助类
+            builder.Append(GenerateGenerateSeparateTableGeneratedExtensions().ToString());
             // 结束命名空间
             builder.EndNamespace();
             // 输出源代码
             context.AddSource($"{markerClassName}.g.cs", builder.ToString());
         }
 
-        // private static SourceCodeBuilder GenerateGenerateSeparateTableGeneratedExtensions()
-        // {
-        //     var builder = new SourceCodeBuilder();
-        //     builder.AppendLine();
-        //     builder.Indent(1);
-        //     builder.AddXmlComment("分表组件扩展方法。");
-        //     builder.AppendLine("public static class SeparateTableGeneratedExtensions");
-        //     builder.AppendLine("{");
-        //     builder.Indent(1);
-        //     builder.AddXmlComment("从数据库加载指定实体的所有分表数据，并自动建立父子关系。");
-        //     builder.BeginMethod("public static FTask LoadWithSeparateTables<T>(this T entity, IDatabase database) where T : Entity, new()");
-        //     builder.AppendLine("return entity.Scene.SeparateTableComponent.LoadWithSeparateTables(entity, database);");
-        //     builder.EndMethod();
-        //     builder.AddXmlComment("将实体及其所有分表组件保存到数据库中。");
-        //     builder.BeginMethod("public static FTask PersistAggregate<T>(this T entity, IDatabase database) where T : Entity, new()");
-        //     builder.AppendLine("return entity.Scene.SeparateTableComponent.PersistAggregate(entity,database);");
-        //     builder.EndMethod();
-        //     builder.Unindent();
-        //     builder.AppendLine("}");
-        //     return builder;
-        // }
-
-        private static void GenerateFields(SourceCodeBuilder builder, List<SeparateTableTypeInfo> separateTableTypeInfoList)
+        private static SourceCodeBuilder GenerateGenerateSeparateTableGeneratedExtensions()
         {
-            var separateTableInfoBuilder = new SourceCodeBuilder();
-            separateTableInfoBuilder.AppendLine("private readonly List<global::Fantasy.Assembly.ISeparateTableRegistrar.SeparateTableInfo> _separateTableInfos = new List<global::Fantasy.Assembly.ISeparateTableRegistrar.SeparateTableInfo>()");
-            separateTableInfoBuilder.Indent(2);
-            separateTableInfoBuilder.AppendLine("{");
-            separateTableInfoBuilder.Indent(1);
+            var builder = new SourceCodeBuilder();
+            builder.AppendLine("#if FANTASY_NET");
+            builder.Indent(1);
+            builder.AddXmlComment("分表组件扩展方法。");
+            builder.AppendLine("public static class SeparateTableGeneratedExtensions");
+            builder.AppendLine("{");
+            builder.Indent(1);
+            builder.AddXmlComment("从数据库加载指定实体的所有分表数据，并自动建立父子关系。");
+            builder.BeginMethod("public static global::Fantasy.Async.FTask LoadWithSeparateTables<T>(this T entity, global::Fantasy.Database.IDatabase database) where T : global::Fantasy.Entitas.Entity, new()");
+            builder.AppendLine("return entity.Scene.SeparateTableComponent.LoadWithSeparateTables(entity, database);");
+            builder.EndMethod();
+            builder.AddXmlComment("将实体及其所有分表组件保存到数据库中。");
+            builder.BeginMethod("public static global::Fantasy.Async.FTask PersistAggregate<T>(this T entity, global::Fantasy.Database.IDatabase database) where T : global::Fantasy.Entitas.Entity, new()");
+            builder.AppendLine("return entity.Scene.SeparateTableComponent.PersistAggregate(entity, database);");
+            builder.EndMethod();
+            builder.Unindent();
+            builder.AppendLine("}");
+            builder.AppendLine("#endif");
+            return builder;
+        }
 
+        private static void GenerateCode(SourceCodeBuilder builder, List<SeparateTableTypeInfo> separateTableTypeInfos)
+        {
+            // RootTypes
+            builder.AddXmlComment("RootTypes");
+            builder.BeginMethod("public global::System.RuntimeTypeHandle[] RootTypes()");
             try
             {
-                if (separateTableTypeInfoList.Any())
+                if (separateTableTypeInfos.Any())
                 {
-                    foreach (var separateTableTypeInfo in separateTableTypeInfoList)
+                    var count = 0;
+                    var rootTypes = new SourceCodeBuilder();
+                    
+                    for (var i = 0; i < separateTableTypeInfos.Count; i++)
                     {
-                        foreach (var separateTableInfo in separateTableTypeInfo.SeparateTableInfo)
+                        foreach (var keyValuePair in separateTableTypeInfos[i].SeparateTableInfo)
                         {
-                            separateTableInfoBuilder.AppendLine(
-                                $"new global::Fantasy.Assembly.ISeparateTableRegistrar.SeparateTableInfo(typeof({separateTableInfo.Key}) ,typeof({separateTableTypeInfo.TypeFullName}) ,\"{separateTableInfo.Value}\"),");
+                            count++;
+                            rootTypes.AppendLine($"\t\t\thandles[{i}] = typeof({keyValuePair.Key}).TypeHandle;");
                         }
                     }
+                    
+                    rootTypes.AppendLine("\t\t\treturn handles;");
+                    builder.AppendLine($"var handles = new global::System.RuntimeTypeHandle[{count}];");
+                    builder.Append(rootTypes.ToString());
+                }
+                else
+                {
+                    builder.AppendLine("return Array.Empty<global::System.RuntimeTypeHandle>();");
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                throw;
             }
-
-            separateTableInfoBuilder.Unindent();
-            separateTableInfoBuilder.AppendLine("};");
-            builder.AppendLine(separateTableInfoBuilder.ToString());
-        }
-
-        private static void GenerateRegisterMethod(SourceCodeBuilder builder, List<SeparateTableTypeInfo> separateTableTypeInfos)
-        {
-            builder.BeginMethod("public List<global::Fantasy.Assembly.ISeparateTableRegistrar.SeparateTableInfo> Register()");
-            builder.AppendLine("return _separateTableInfos;");
             builder.EndMethod();
-            builder.AppendLine();
-        }
-
-        private static void GenerateUnRegisterMethod(SourceCodeBuilder builder, List<SeparateTableTypeInfo> separateTableTypeInfos)
-        {
-            builder.BeginMethod("public List<global::Fantasy.Assembly.ISeparateTableRegistrar.SeparateTableInfo> UnRegister()");
-            builder.AppendLine("return _separateTableInfos;");
+            // SeparateTables
+            builder.AddXmlComment("SeparateTables");
+            builder.BeginMethod("public (global::System.Type EntityType, string TableName)[] SeparateTables()");
+            try
+            {
+                if (separateTableTypeInfos.Any())
+                {
+                    var count = 0;
+                    var rootTypes = new SourceCodeBuilder();
+                    
+                    for (var i = 0; i < separateTableTypeInfos.Count; i++)
+                    {
+                        var separateTableTypeInfo = separateTableTypeInfos[i];
+                        foreach (var keyValuePair in separateTableTypeInfo.SeparateTableInfo)
+                        {
+                            count++;
+                            rootTypes.AppendLine($"\t\t\thandles[{i}] = (typeof({separateTableTypeInfo.TypeFullName}), \"{keyValuePair.Value}\");");
+                        }
+                    }
+                   
+                    rootTypes.AppendLine("\t\t\treturn handles;");
+                    builder.AppendLine($"var handles = new (global::System.Type EntityType, string TableName)[{count}];");
+                    builder.Append(rootTypes.ToString());
+                }
+                else
+                {
+                    builder.AppendLine("return Array.Empty<(global::System.Type EntityType, string TableName)>();");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             builder.EndMethod();
-            builder.AppendLine();
         }
         
         private static bool IsSeparateTableClass(SyntaxNode node)

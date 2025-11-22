@@ -2,7 +2,24 @@
 # Fantasy Protocol Export Tool - 运行脚本
 # 此脚本用于快速运行协议导出工具
 
-set -e
+# 错误处理函数 - 确保脚本出错时不会一闪而过
+error_exit() {
+    echo ""
+    echo "按回车键退出..."
+    read -r
+    exit 1
+}
+
+# 成功退出函数
+success_exit() {
+    echo ""
+    echo "按回车键退出..."
+    read -r
+    exit 0
+}
+
+# 设置错误捕获
+trap 'echo ""; echo "=========================================="; echo "✗ 发生未预期的错误"; echo "=========================================="; error_exit' ERR
 
 # 获取脚本所在目录
 SCRIPT_DIR=$(cd $(dirname "$0") && pwd)
@@ -28,12 +45,21 @@ check_dotnet() {
         echo "  macOS:   brew install dotnet@8"
         echo "  Linux:   参考官方文档安装对应发行版的包"
         echo ""
-        exit 1
+        error_exit
     fi
 
     # 检查 .NET 版本
     DOTNET_VERSION=$(dotnet --version 2>/dev/null || echo "0.0.0")
     MAJOR_VERSION=$(echo "$DOTNET_VERSION" | cut -d'.' -f1)
+
+    if [ -z "$MAJOR_VERSION" ] || [ "$MAJOR_VERSION" = "0" ]; then
+        echo ""
+        echo "=========================================="
+        echo "错误：无法获取 .NET 版本"
+        echo "=========================================="
+        echo ""
+        error_exit
+    fi
 
     if [ "$MAJOR_VERSION" -lt 8 ]; then
         echo ""
@@ -49,7 +75,7 @@ check_dotnet() {
         echo "下载地址："
         echo "  https://dotnet.microsoft.com/download/dotnet/8.0"
         echo ""
-        exit 1
+        error_exit
     fi
 
     echo "✓ 检测到 .NET $DOTNET_VERSION"
@@ -72,14 +98,12 @@ echo "正在启动导出工具..."
 echo ""
 
 # 使用静默模式（从 ExporterSettings.json 读取配置）
-dotnet "$APP_DLL" export --silent
-
-if [ $? -eq 0 ]; then
+if dotnet "$APP_DLL" export --silent; then
     echo ""
     echo "=========================================="
     echo "✓ 导出完成！"
     echo "=========================================="
-    echo ""
+    success_exit
 else
     echo ""
     echo "=========================================="
@@ -87,6 +111,5 @@ else
     echo "=========================================="
     echo ""
     echo "提示：请检查 ExporterSettings.json 配置文件是否正确"
-    echo ""
-    exit 1
+    error_exit
 fi

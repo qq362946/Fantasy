@@ -106,6 +106,8 @@ public static class Entry
         // 初始化Log系统
         Log.Initialize(log);
         LogFantasyVersion();
+        // 注册当前框架内部程序集到框架中
+        typeof(Entry).Assembly.EnsureLoaded();
         // 加载Fantasy.config配置文件
         await ConfigLoader.InitializeFromXml(Path.Combine(AppContext.BaseDirectory, "Fantasy.config"));
         // 解析命令行参数

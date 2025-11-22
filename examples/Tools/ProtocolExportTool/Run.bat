@@ -2,6 +2,13 @@
 chcp 65001 >nul
 setlocal
 
+REM 设置错误处理 - 确保脚本出错时不会一闪而过
+if not defined IN_SUBPROCESS (
+    set IN_SUBPROCESS=1
+    cmd /k "%~f0 %*"
+    exit /b
+)
+
 echo ==========================================
 echo Fantasy Protocol Export Tool
 echo ==========================================
@@ -24,12 +31,20 @@ if errorlevel 1 (
     echo 下载地址：
     echo   https://dotnet.microsoft.com/download/dotnet/8.0
     echo.
-    pause
-    exit /b 1
+    goto :error
 )
 
 REM 检查 .NET 版本
 for /f "tokens=1 delims=." %%v in ('dotnet --version 2^>nul') do set MAJOR_VERSION=%%v
+
+if not defined MAJOR_VERSION (
+    echo.
+    echo ==========================================
+    echo 错误：无法获取 .NET 版本
+    echo ==========================================
+    echo.
+    goto :error
+)
 
 if %MAJOR_VERSION% LSS 8 (
     echo.
@@ -45,8 +60,7 @@ if %MAJOR_VERSION% LSS 8 (
     echo 下载地址：
     echo   https://dotnet.microsoft.com/download/dotnet/8.0
     echo.
-    pause
-    exit /b 1
+    goto :error
 )
 
 dotnet --version
@@ -65,8 +79,7 @@ if errorlevel 1 (
     echo.
     echo 提示：请检查 ExporterSettings.json 配置文件是否正确
     echo.
-    pause
-    exit /b 1
+    goto :error
 )
 
 echo.
@@ -74,4 +87,12 @@ echo ==========================================
 echo √ 导出完成！
 echo ==========================================
 echo.
-pause
+echo 按任意键退出...
+pause >nul
+exit /b 0
+
+:error
+echo.
+echo 按任意键退出...
+pause >nul
+exit /b 1

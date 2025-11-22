@@ -102,187 +102,117 @@ namespace Fantasy.SourceGenerator.Generators
             // 开始类定义（实现 IEntitySystemRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Entity System registration class for {assemblyName}");
             builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IEntitySystemRegistrar");
-            // 生成字段用于存储 System 实例
-            GenerateFields(builder, entitySystemTypeInfos);
-            // 生成注册方法
-            GenerateRegisterMethod(builder, entitySystemTypeInfos);
-            // 生成反注册方法
-            GenerateUnRegisterMethod(builder, entitySystemTypeInfos);
+            // 生成Code
+            GenerateCode(builder, entitySystemTypeInfos);
             // 结束类和命名空间
             builder.EndClass();
             builder.EndNamespace();
             // 输出源代码
             context.AddSource($"{markerClassName}.g.cs", builder.ToString());
         }
-        
-        private static void GenerateFields(SourceCodeBuilder builder, List<EntitySystemTypeInfo> entitySystemTypeInfos)
-        {
-            try
-            {
-                builder.AddComment("Store registered entity system for UnRegister");
 
-                if (!entitySystemTypeInfos.Any())
-                {
-                    return;
-                }
-            
-                foreach (var eventSystemTypeInfo in entitySystemTypeInfos)
-                {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    builder.AppendLine($"private {eventSystemTypeInfo.GlobalTypeFullName} {fieldName} = new {eventSystemTypeInfo.GlobalTypeFullName}();");
-                    builder.AppendLine($"private RuntimeTypeHandle _runtimeTypeHandle{fieldName} = typeof({eventSystemTypeInfo.EntityTypeFullName}).TypeHandle;");
-                }
-            
-                builder.AppendLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-        
-        private static void GenerateRegisterMethod(SourceCodeBuilder builder, List<EntitySystemTypeInfo> entitySystemTypeInfos)
+        private static void GenerateCode(SourceCodeBuilder builder, List<EntitySystemTypeInfo> entitySystemTypeInfos)
         {
-            builder.AddXmlComment("Register all Entity Systems to the dictionaries");
-            builder.AppendLine("#if FANTASY_NET", false);
-            builder.BeginMethod(
-                "public void RegisterSystems(" +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> awakeSystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> updateSystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> destroySystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> deserializeSystems)");
-            builder.AppendLine("#endif", false);
-            builder.Unindent();
-            builder.AppendLine("#if FANTASY_UNITY", false);
-            builder.BeginMethod(
-                "public void RegisterSystems(" +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> awakeSystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> updateSystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> destroySystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> deserializeSystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> lateUpdateSystems)");
-            builder.AppendLine("#endif", false);
-
-            try
+            var awake = new List<EntitySystemTypeInfo>();
+            var update = new List<EntitySystemTypeInfo>();
+            var destroy = new List<EntitySystemTypeInfo>();
+            var deserialize = new List<EntitySystemTypeInfo>();
+            var lateUpdate = new List<EntitySystemTypeInfo>();
+            
+            if (entitySystemTypeInfos.Any())
             {
-                if (entitySystemTypeInfos.Any())
+                foreach (var systemTypeInfo in entitySystemTypeInfos)
                 {
-                    foreach (var systemTypeInfo in entitySystemTypeInfos)
+                    switch (systemTypeInfo.EntitySystemType)
                     {
-                        var fieldName = $"_{systemTypeInfo.TypeName.ToCamelCase()}";
-
-                        switch (systemTypeInfo.EntitySystemType)
+                        case EntitySystemType.AwakeSystem:
                         {
-                            case EntitySystemType.AwakeSystem:
-                            {
-                                builder.AppendLine($"awakeSystems.Add(_runtimeTypeHandle{fieldName}, {fieldName}.Invoke);");
-                                continue;
-                            }
-                            case EntitySystemType.UpdateSystem:
-                            {
-                                builder.AppendLine($"updateSystems.Add(_runtimeTypeHandle{fieldName}, {fieldName}.Invoke);");
-                                continue;
-                            }
-                            case EntitySystemType.DestroySystem:
-                            {
-                                builder.AppendLine($"destroySystems.Add(_runtimeTypeHandle{fieldName}, {fieldName}.Invoke);");
-                                continue;
-                            }
-                            case EntitySystemType.DeserializeSystem:
-                            {
-                                builder.AppendLine($"deserializeSystems.Add(_runtimeTypeHandle{fieldName}, {fieldName}.Invoke);");
-                                continue;
-                            }
-                            case EntitySystemType.LateUpdateSystem:
-                            {
-                                builder.AppendLine("#if FANTASY_UNITY", false);
-                                builder.AppendLine($"awakeSystems.Add(_runtimeTypeHandle{fieldName}, {fieldName}.Invoke);");
-                                builder.AppendLine("#endif", false);
-                                continue;
-                            }
+                            awake.Add(systemTypeInfo);
+                                
+                            continue;
+                        }
+                        case EntitySystemType.UpdateSystem:
+                        {
+                            update.Add(systemTypeInfo);
+                            continue;
+                        }
+                        case EntitySystemType.DestroySystem:
+                        {
+                            destroy.Add(systemTypeInfo);
+                            continue;
+                        }
+                        case EntitySystemType.DeserializeSystem:
+                        {
+                            deserialize.Add(systemTypeInfo);
+                            continue;
+                        }
+                        case EntitySystemType.LateUpdateSystem:
+                        {
+                            lateUpdate.Add(systemTypeInfo);
+                            continue;
                         }
                     }
                 }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            
-            builder.EndMethod();
-            builder.AppendLine();
+
+            // Awake
+            GenerateSystemCode(builder, string.Empty, "AwakeTypeHandles", "AwakeHandles", awake);
+            // Update
+            GenerateSystemCode(builder, string.Empty, "UpdateTypeHandles", "UpdateHandles", update);
+            // Destroy
+            GenerateSystemCode(builder, string.Empty, "DestroyTypeHandles", "DestroyHandles", destroy);
+            // Deserialize
+            GenerateSystemCode(builder, string.Empty, "DeserializeTypeHandles", "DeserializeHandles", deserialize);
+            // LateUpdate
+            GenerateSystemCode(builder, "#if FANTASY_UNITY", "LateUpdateTypeHandles", "LateUpdateHandles", lateUpdate);
         }
         
-        private static void GenerateUnRegisterMethod(SourceCodeBuilder builder, List<EntitySystemTypeInfo> entitySystemTypeInfos)
+        private static void GenerateSystemCode(SourceCodeBuilder builder, string defineConstants, string typeHandle, string handler, List<EntitySystemTypeInfo> systemTypeInfos)
         {
-            builder.AddXmlComment("Unregister all Entity Systems from the dictionaries");
-            builder.AppendLine("#if FANTASY_NET", false);
-            builder.BeginMethod(
-                "public void UnRegisterSystems(" +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> awakeSystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> updateSystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> destroySystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> deserializeSystems)");
-            builder.AppendLine("#endif", false);
-            builder.Unindent();
-            builder.AppendLine("#if FANTASY_UNITY", false);
-            builder.BeginMethod(
-                "public void UnRegisterSystems(" +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> awakeSystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> updateSystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> destroySystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> deserializeSystems, " +
-                "Dictionary<global::System.RuntimeTypeHandle, Action<global::Fantasy.Entitas.Entity>> lateUpdateSystems)");
-            builder.AppendLine("#endif", false);
+            var typeHandleBuilder = new SourceCodeBuilder(2);
+            var handlerBuilder = new SourceCodeBuilder(2);
 
-            try
+            if (!string.IsNullOrEmpty(defineConstants))
             {
-                if (entitySystemTypeInfos.Any())
-                {
-                    foreach (var systemTypeInfo in entitySystemTypeInfos)
-                    {
-                        var fieldName = $"_{systemTypeInfo.TypeName.ToCamelCase()}";
-
-                        switch (systemTypeInfo.EntitySystemType)
-                        {
-                            case EntitySystemType.AwakeSystem:
-                            {
-                                builder.AppendLine($"awakeSystems.Remove(_runtimeTypeHandle{fieldName});");
-                                continue;
-                            }
-                            case EntitySystemType.UpdateSystem:
-                            {
-                                builder.AppendLine($"updateSystems.Remove(_runtimeTypeHandle{fieldName});");
-                                continue;
-                            }
-                            case EntitySystemType.DestroySystem:
-                            {
-                                builder.AppendLine($"destroySystems.Remove(_runtimeTypeHandle{fieldName});");
-                                continue;
-                            }
-                            case EntitySystemType.DeserializeSystem:
-                            {
-                                builder.AppendLine($"deserializeSystems.Remove(_runtimeTypeHandle{fieldName});");
-                                continue;
-                            }
-                            case EntitySystemType.LateUpdateSystem:
-                            {
-                                builder.AppendLine("#if FANTASY_UNITY", false);
-                                builder.AppendLine($"lateUpdateSystem.Remove(_runtimeTypeHandle{fieldName});");
-                                builder.AppendLine("#endif", false);
-                                continue;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
+                typeHandleBuilder.AppendLine(defineConstants, false);
+                handlerBuilder.AppendLine(defineConstants, false);
             }
             
-            builder.EndMethod();
-            builder.AppendLine();
+            typeHandleBuilder.AddXmlComment(typeHandle);
+            typeHandleBuilder.BeginMethod($"public global::System.RuntimeTypeHandle[] {typeHandle}()");
+            handlerBuilder.AddXmlComment(handler);
+            handlerBuilder.BeginMethod($"public global::System.Action<global::Fantasy.Entitas.Entity>[] {handler}()");
+
+            if (systemTypeInfos.Any())
+            {
+                typeHandleBuilder.AppendLine($"var array = new global::System.RuntimeTypeHandle[{systemTypeInfos.Count}];");
+                handlerBuilder.AppendLine($"var array = new global::System.Action<global::Fantasy.Entitas.Entity>[{systemTypeInfos.Count}];");
+                for (var i = 0; i < systemTypeInfos.Count; i++)
+                {
+                    var entitySystemTypeInfo = systemTypeInfos[i];
+                    typeHandleBuilder.AppendLine($"array[{i}] = typeof({entitySystemTypeInfo.EntityTypeFullName}).TypeHandle;");
+                    handlerBuilder.AppendLine($"array[{i}] = new {entitySystemTypeInfo.GlobalTypeFullName}().Invoke;");
+                }
+                typeHandleBuilder.AppendLine("return array;");
+                handlerBuilder.AppendLine("return array;");
+            }
+            else
+            {
+                typeHandleBuilder.AppendLine("return Array.Empty<global::System.RuntimeTypeHandle>();");
+                handlerBuilder.AppendLine("return Array.Empty<global::System.Action<global::Fantasy.Entitas.Entity>>();");
+            }
+
+            typeHandleBuilder.EndMethod();
+            handlerBuilder.EndMethod();
+            
+            if (!string.IsNullOrEmpty(defineConstants))
+            {
+                typeHandleBuilder.AppendLine("#endif", false);
+                handlerBuilder.AppendLine("#endif", false);
+            }
+
+            builder.AppendLine(typeHandleBuilder.ToString(), false);
+            builder.AppendLine(handlerBuilder.ToString(), false);
         }
         
         private static bool IsSystemClass(SyntaxNode node)
@@ -321,24 +251,24 @@ namespace Fantasy.SourceGenerator.Generators
         {
             public readonly EntitySystemType EntitySystemType;
             public readonly string GlobalTypeFullName;
-            public readonly string TypeFullName;
-            public readonly string TypeName;
-            public readonly long EntityTypeHashCode;  // 预计算的实体类型哈希值
+            // public readonly string TypeFullName;
+            // public readonly string TypeName;
+            // public readonly long EntityTypeHashCode;  // 预计算的实体类型哈希值
             public readonly string EntityTypeFullName; // 实体类型的完整名称（用于注释）
 
             private EntitySystemTypeInfo(
                 EntitySystemType entitySystemType,
                 string globalTypeFullName,
-                string typeFullName,
-                string typeName,
-                long entityTypeHashCode,
+                // string typeFullName,
+                // string typeName,
+                // long entityTypeHashCode,
                 string entityTypeFullName)
             {
                 EntitySystemType = entitySystemType;
                 GlobalTypeFullName = globalTypeFullName;
-                TypeFullName = typeFullName;
-                TypeName = typeName;
-                EntityTypeHashCode = entityTypeHashCode;
+                // TypeFullName = typeFullName;
+                // TypeName = typeName;
+                // EntityTypeHashCode = entityTypeHashCode;
                 EntityTypeFullName = entityTypeFullName;
             }
 
@@ -348,15 +278,15 @@ namespace Fantasy.SourceGenerator.Generators
                 var entityType = symbol.BaseType?.TypeArguments.FirstOrDefault();
                 var entityTypeFullName = entityType?.GetFullName(false) ?? "Unknown";
 
-                // 使用与运行时相同的算法计算哈希值
-                var entityTypeHashCode = HashCodeHelper.ComputeHash64(entityTypeFullName);
+                // // 使用与运行时相同的算法计算哈希值
+                // var entityTypeHashCode = HashCodeHelper.ComputeHash64(entityTypeFullName);
 
                 return new EntitySystemTypeInfo(
                     entitySystemType,
                     symbol.GetFullName(),
-                    symbol.GetFullName(false),
-                    symbol.Name,
-                    entityTypeHashCode,
+                    // symbol.GetFullName(false),
+                    // symbol.Name,
+                    // entityTypeHashCode,
                     entityTypeFullName);
             }
         }

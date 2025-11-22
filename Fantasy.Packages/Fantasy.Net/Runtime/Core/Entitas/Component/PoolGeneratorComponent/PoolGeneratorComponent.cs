@@ -5,6 +5,8 @@ using Fantasy.Async;
 using Fantasy.DataStructure.Dictionary;
 using Fantasy.Entitas.Interface;
 using Fantasy.Pool;
+// ReSharper disable CheckNamespace
+// ReSharper disable ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
@@ -13,7 +15,7 @@ namespace Fantasy.Entitas
     internal sealed class PoolGeneratorComponent : Entity, IAssemblyLifecycle
     {
         private RuntimeTypeHandleFrozenDictionary<Func<IPool>> _frozenDictionary;
-        private readonly PoolGenerator _poolGenerator = new PoolGenerator();
+        private readonly TypeHandleMergerFrozenDictionary<Func<IPool>> _typeHandleMerger = new();
         
         #region AssemblyManifest
         
@@ -28,8 +30,12 @@ namespace Fantasy.Entitas
             var tcs = FTask.Create(false);
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                _poolGenerator.Add(assemblyManifest);
-                _frozenDictionary = _poolGenerator.GetFrozenDictionary();
+                var poolCreatorGenerator = assemblyManifest.PoolCreatorGenerator;
+                _typeHandleMerger.Add(
+                    assemblyManifest.AssemblyManifestId,
+                    poolCreatorGenerator.RuntimeTypeHandles(),
+                    poolCreatorGenerator.Generators());
+                _frozenDictionary = _typeHandleMerger.GetFrozenDictionary();
                 tcs.SetResult();
             });
             await tcs;
@@ -40,8 +46,8 @@ namespace Fantasy.Entitas
             var tcs = FTask.Create(false);
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                _poolGenerator.Remove(assemblyManifest.AssemblyManifestId);
-                _frozenDictionary = _poolGenerator.GetFrozenDictionary();
+                _typeHandleMerger.Remove(assemblyManifest.AssemblyManifestId);
+                _frozenDictionary = _typeHandleMerger.GetFrozenDictionary();
                 tcs.SetResult();
             });
             await tcs;

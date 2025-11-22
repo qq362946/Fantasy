@@ -36,7 +36,7 @@
                               Foreground="#FFFFFF"
                               HorizontalAlignment="Center"/>
 
-                    <TextBlock Text="Version 1.0.0"
+                    <TextBlock Text="Version 2025.2.1401"
                               FontSize="14"
                               Foreground="#858585"
                               HorizontalAlignment="Center"/>

@@ -69,7 +69,7 @@
       <Word>sfixed64</Word>
       <Word>bool</Word>
       <Word>string</Word>
-      <Word>bytes</Word>
+      <Word>byte</Word>
     </Keywords>
 
     <!-- Fantasy Framework Interfaces (in comments) -->

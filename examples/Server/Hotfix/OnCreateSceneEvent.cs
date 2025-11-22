@@ -57,7 +57,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Map:
             {
-                Log.Debug($"Map Scene  SceneRuntimeId:{scene.RuntimeId}");
+                Log.Debug($"Map Scene SceneRuntimeId:{scene.RuntimeId}");
                 break;
             }
             case SceneType.Chat:

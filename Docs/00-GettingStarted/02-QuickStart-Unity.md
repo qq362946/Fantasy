@@ -62,7 +62,7 @@ OpenUPM 是 Unity 包管理器的第三方注册表服务,可以轻松管理和�
    - 点击左上角的 `+` 按钮
    - 选择 `Add package by name...` 或 `Add package from git URL...`
    - 在 **Name** 字段输入: `com.fantasy.unity`
-   - 在 **Version** 字段输入版本号 (例如 `2025.2.14`)
+   - 在 **Version** 字段输入版本号 (例如 `2025.2.1401`)
      - 💡 **提示**: 可以指定特定版本号,也可以留空使用最新版本
      - ✅ **建议**: 使用最新版本以获得最新功能和 Bug 修复
    - 点击 `Add` 按钮
@@ -102,13 +102,13 @@ OpenUPM 是 Unity 包管理器的第三方注册表服务,可以轻松管理和�
            }
        ],
        "dependencies": {
-           "com.fantasy.unity": "2025.2.14"
+           "com.fantasy.unity": "2025.2.1401"
        }
    }
    ```
 
    **版本说明:**
-   - 💡 可以指定特定版本号 (例如 `"2025.2.14"`)
+   - 💡 可以指定特定版本号 (例如 `"2025.2.1401"`)
    - ✅ **建议使用最新版本** - 删除版本号让 Unity 自动获取最新版,或访问 [OpenUPM](https://openupm.com/packages/com.fantasy.unity/) 查看最新版本号
 
    **完整示例:**
@@ -138,12 +138,12 @@ OpenUPM 是 Unity 包管理器的第三方注册表服务,可以轻松管理和�
        "dependencies": {
            "com.unity.collab-proxy": "2.0.0",
            "com.unity.ide.rider": "3.0.18",
-           "com.fantasy.unity": "2025.2.14"  // 可以指定版本号,或删除引号中的版本号使用最新版
+           "com.fantasy.unity": "2025.2.1401"  // 可以指定版本号,或删除引号中的版本号使用最新版
        }
    }
    ```
 
-   > 💡 **版本号提示**: `"2025.2.14"` 可以改为其他版本号,或删除版本号部分改为 `"com.fantasy.unity": ""` 让 Unity 自动使用最新版
+   > 💡 **版本号提示**: `"2025.2.1401"` 可以改为其他版本号,或删除版本号部分改为 `"com.fantasy.unity": ""` 让 Unity 自动使用最新版
 
 3. **保存并返回 Unity**
    - 保存 `manifest.json` 文件

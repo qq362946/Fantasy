@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
+using Fantasy.DataStructure.Dictionary;
 using Fantasy.Entitas;
 // ReSharper disable MethodOverloadWithOptionalParameter
+// ReSharper disable ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 namespace Fantasy.Event
 {
@@ -13,9 +17,11 @@ namespace Fantasy.Event
     /// </summary>
     public sealed class EventComponent : Entity, IAssemblyLifecycle
     {
-        private readonly HashSet<long> _assemblyManifests = new();
-        private readonly OneToManyList<RuntimeTypeHandle, IEvent> _events = new();
-        private readonly OneToManyList<RuntimeTypeHandle, IEvent> _asyncEvents = new();
+        private RuntimeTypeHandleFrozenDictionary<List<IEvent>> _events;
+        private RuntimeTypeHandleFrozenDictionary<List<IEvent>> _asyncEvents;
+        
+        private readonly TypeHandleMergerFrozenOneToManyList<IEvent> _eventMerger = new();
+        private readonly TypeHandleMergerFrozenOneToManyList<IEvent> _asyncEventMerger = new();
 
         /// <summary>
         /// 销毁时会清理组件里的所有数据
@@ -27,9 +33,6 @@ namespace Fantasy.Event
                 return;
             }
             
-            _assemblyManifests.Clear();
-            _events.Clear();
-            _asyncEvents.Clear();
             AssemblyLifecycle.Remove(this);
             base.Dispose();
         }
@@ -56,18 +59,22 @@ namespace Fantasy.Event
         {
             var tcs = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
+            
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                // 如果程序集已加载，先卸载旧的
-                if (_assemblyManifests.Contains(assemblyManifestId))
-                {
-                    OnUnLoadInner(assemblyManifest);
-                }
+                var eventSystemRegistrar = assemblyManifest.EventSystemRegistrar;
+
+                _eventMerger.Add(
+                    assemblyManifestId,
+                    eventSystemRegistrar.EventTypeHandles(),
+                    eventSystemRegistrar.Events());
+                _asyncEventMerger.Add(
+                    assemblyManifestId,
+                    eventSystemRegistrar.AsyncEventTypeHandles(),
+                    eventSystemRegistrar.AsyncEvents());
                 
-                assemblyManifest.EventSystemRegistrar.Register(
-                    _events,
-                    _asyncEvents);
-                _assemblyManifests.Add(assemblyManifestId);
+                _events = _eventMerger.GetFrozenDictionary();
+                _asyncEvents = _asyncEventMerger.GetFrozenDictionary();
                 tcs.SetResult();
             });
             await tcs;
@@ -81,25 +88,17 @@ namespace Fantasy.Event
         public async FTask OnUnload(AssemblyManifest assemblyManifest)
         {
             var tcs = FTask.Create(false);
+            var assemblyManifestId = assemblyManifest.AssemblyManifestId;
+            
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                OnUnLoadInner(assemblyManifest);
+                _eventMerger.Remove(assemblyManifestId);
+                _asyncEventMerger.Remove(assemblyManifestId);
+                _events = _eventMerger.GetFrozenDictionary();
+                _asyncEvents = _asyncEventMerger.GetFrozenDictionary();
                 tcs.SetResult();
             });
             await tcs;
-        }
-        
-        /// <summary>
-        /// 卸载程序集的内部实现
-        /// 会清理该程序集注册的所有系统
-        /// </summary>
-        /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
-        private void OnUnLoadInner(AssemblyManifest assemblyManifest)
-        {
-            assemblyManifest.EventSystemRegistrar.UnRegister(
-                _events,
-                _asyncEvents);
-            _assemblyManifests.Remove(assemblyManifest.AssemblyManifestId);
         }
 
         #endregion

@@ -55,7 +55,7 @@ namespace Fantasy.SourceGenerator.Generators
         private static EventSystemTypeInfo? GetEventSystemTypeInfo(GeneratorSyntaxContext context)
         {
             var classDecl = (ClassDeclarationSyntax)context.Node;
-            
+
             if (context.SemanticModel.GetDeclaredSymbol(classDecl) is not INamedTypeSymbol symbol || !symbol.IsInstantiable())
             {
                 return null;
@@ -65,21 +65,31 @@ namespace Fantasy.SourceGenerator.Generators
             {
                 return null;
             }
-            
-            var baseType = symbol.BaseType;
 
-            if (!baseType.IsGenericType)
+            // 向上遍历继承链，查找 EventSystem、AsyncEventSystem 或 SphereEventSystem
+            var currentType = symbol.BaseType;
+            while (currentType != null)
             {
-                return null;
+                if (currentType.IsGenericType)
+                {
+                    var eventSystemType = currentType.Name switch
+                    {
+                        "EventSystem" => EventSystemType.EventSystem,
+                        "AsyncEventSystem" => EventSystemType.AsyncEventSystem,
+                        "SphereEventSystem" => EventSystemType.SphereEventSystem,
+                        _ => EventSystemType.None
+                    };
+
+                    if (eventSystemType != EventSystemType.None)
+                    {
+                        return EventSystemTypeInfo.Create(eventSystemType, symbol);
+                    }
+                }
+
+                currentType = currentType.BaseType;
             }
 
-            return baseType.Name switch
-            {
-                "EventSystem" => EventSystemTypeInfo.Create(EventSystemType.EventSystem, symbol),
-                "AsyncEventSystem" => EventSystemTypeInfo.Create(EventSystemType.AsyncEventSystem, symbol),
-                "SphereEventSystem" => EventSystemTypeInfo.Create(EventSystemType.SphereEventSystem, symbol),
-                _ => null
-            };
+            return null;
         }
 
         /// <summary>
@@ -145,80 +155,124 @@ namespace Fantasy.SourceGenerator.Generators
             // 开始类定义（实现 IEventSystemRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Event System registration class for {assemblyName}");
             builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IEventSystemRegistrar");
-            // 生成字段用于存储已注册的事件处理器（用于 UnRegister）
+            // 生成私有字段
+            foreach (var eventSystemTypeInfo in eventSystems)
+            {
+                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                builder.AppendLine($"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+            }
+            foreach (var eventSystemTypeInfo in asyncEventSystem)
+            {
+                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
+                builder.AppendLine($"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+            }
+            builder.AppendLine();
+            // EventTypeHandles
+            builder.AddXmlComment("EventTypeHandles");
+            builder.BeginMethod("public global::System.RuntimeTypeHandle[] EventTypeHandles()");
             try
             {
-                builder.AddComment("Store registered event handlers for UnRegister");
-                foreach (var eventSystemTypeInfo in eventSystems)
+                if (eventSystems.Any())
                 {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    builder.AppendLine(
-                        $"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                    builder.AppendLine($"var handles = new global::System.RuntimeTypeHandle[{eventSystems.Count}];");
+                    for (var i = 0; i < eventSystems.Count; i++)
+                    {
+                        var fieldName = $"_{eventSystems[i].TypeName.ToCamelCase()}";
+                        builder.AppendLine($"handles[{i}] = {fieldName}.EventType().TypeHandle;");
+                    }
+                    builder.AppendLine("return handles;");
                 }
-                foreach (var eventSystemTypeInfo in asyncEventSystem)
+                else
                 {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    builder.AppendLine(
-                        $"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
-                }
-                builder.AppendLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            // 生成 RegisterSystems 方法
-            builder.AddXmlComment("Register all Event Systems to the containers");
-            builder.BeginMethod(
-                "public void Register(" +
-                "global::Fantasy.DataStructure.Collection.OneToManyList<RuntimeTypeHandle, global::Fantasy.Event.IEvent> events, " +
-                "global::Fantasy.DataStructure.Collection.OneToManyList<RuntimeTypeHandle, global::Fantasy.Event.IEvent> asyncEvents)");
-            try
-            {
-                foreach (var eventSystemTypeInfo in eventSystems)
-                {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    builder.AppendLine($"events.Add({fieldName}.EventType().TypeHandle, {fieldName});");
+                    builder.AppendLine("return Array.Empty<global::System.RuntimeTypeHandle>();");
                 }
 
-                foreach (var eventSystemTypeInfo in asyncEventSystem)
-                {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    builder.AppendLine($"asyncEvents.Add({fieldName}.EventType().TypeHandle, {fieldName});");
-                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                throw;
             }
             builder.EndMethod();
-            builder.AppendLine();
-            // 生成 UnRegisterSystems 方法
-            builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
-            builder.BeginMethod(
-                "public void UnRegister(" +
-                "global::Fantasy.DataStructure.Collection.OneToManyList<RuntimeTypeHandle, global::Fantasy.Event.IEvent> events, " +
-                "global::Fantasy.DataStructure.Collection.OneToManyList<RuntimeTypeHandle, global::Fantasy.Event.IEvent> asyncEvents)");
+            // Events
+            builder.AddXmlComment("Events");
+            builder.BeginMethod("public global::Fantasy.Event.IEvent[] Events()");
             try
             {
-                foreach (var eventSystemTypeInfo in eventSystems)
+                if (eventSystems.Any())
                 {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    builder.AppendLine($"events.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
+                    builder.AppendLine($"var events = new global::Fantasy.Event.IEvent[{eventSystems.Count}];");
+                    for (var i = 0; i < eventSystems.Count; i++)
+                    {
+                        builder.AppendLine($"events[{i}] = _{eventSystems[i].TypeName.ToCamelCase()};");
+                    }
+                    builder.AppendLine("return events;");
                 }
-
-                foreach (var eventSystemTypeInfo in asyncEventSystem)
+                else
                 {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    builder.AppendLine($"asyncEvents.RemoveValue({fieldName}.EventType().TypeHandle, {fieldName});");
+                    builder.AppendLine("return Array.Empty<global::Fantasy.Event.IEvent>();");
                 }
+                
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                throw;
             }
             builder.EndMethod();
-            builder.AppendLine();
+            // AsyncEventTypeHandles
+            builder.AddXmlComment("AsyncEventTypeHandles");
+            builder.BeginMethod("public global::System.RuntimeTypeHandle[] AsyncEventTypeHandles()");
+            try
+            {
+                if (asyncEventSystem.Any())
+                {
+                    builder.AppendLine($"var handles = new global::System.RuntimeTypeHandle[{asyncEventSystem.Count}];");
+                    for (var i = 0; i < asyncEventSystem.Count; i++)
+                    {
+                        var fieldName = $"_{asyncEventSystem[i].TypeName.ToCamelCase()}";
+                        builder.AppendLine($"handles[{i}] = {fieldName}.EventType().TypeHandle;");
+                    }
+                    builder.AppendLine("return handles;");
+                }
+                else
+                {
+                    builder.AppendLine("return Array.Empty<global::System.RuntimeTypeHandle>();");
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            builder.EndMethod();
+            // AsyncEvents
+            builder.AddXmlComment("AsyncEvents");
+            builder.BeginMethod("public global::Fantasy.Event.IEvent[] AsyncEvents()");
+            try
+            {
+                if (asyncEventSystem.Any())
+                {
+                    builder.AppendLine($"var events = new global::Fantasy.Event.IEvent[{asyncEventSystem.Count}];");
+                    for (var i = 0; i < asyncEventSystem.Count; i++)
+                    {
+                        builder.AppendLine($"events[{i}] = _{asyncEventSystem[i].TypeName.ToCamelCase()};");
+                    }
+                    builder.AppendLine("return events;");
+                }
+                else
+                {
+                    builder.AppendLine("return Array.Empty<global::Fantasy.Event.IEvent>();");
+                }
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            builder.EndMethod();
             // 结束类和命名空间
             builder.EndClass();
             builder.EndNamespace();
@@ -255,45 +309,58 @@ namespace Fantasy.SourceGenerator.Generators
             foreach (var eventSystemTypeInfo in sphereEventSystem)
             {
                 var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"private long {fieldName}TypeHashCode;");
-                builder.AppendLine($"private Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask> {fieldName}Delegate;");
+                builder.AppendLine($"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
             }
-            // 生成注册方法
-            builder.AddXmlComment("Register all SphereEvent to the containers");
-            builder.BeginMethod(
-                "public void Register(global::Fantasy.DataStructure.Collection.OneToManyHashSet<long, Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>> sphereEvents)");
+            // EventTypeHandles
+            builder.AddXmlComment("TypeHashCodes");
+            builder.BeginMethod("public long[] TypeHashCodes()");
             try
             {
-                foreach (var eventSystemTypeInfo in sphereEventSystem)
+                if (sphereEventSystem.Any())
                 {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    builder.AppendLine($"var {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
-                    builder.AppendLine($"{fieldName}TypeHashCode = {fieldName}.TypeHashCode;");
-                    builder.AppendLine($"{fieldName}Delegate = {fieldName}.Invoke;");
-                    builder.AppendLine($"sphereEvents.Add({fieldName}.TypeHashCode, {fieldName}Delegate);");
+                    builder.AppendLine($"var typeHashCodes = new long[{sphereEventSystem.Count}];");
+                    for (var i = 0; i < sphereEventSystem.Count; i++)
+                    {
+                        builder.AppendLine($"typeHashCodes[{i}] = _{sphereEventSystem[i].TypeName.ToCamelCase()}.TypeHashCode;");
+                    }
+                    builder.AppendLine("return typeHashCodes;");
                 }
+                else
+                {
+                    builder.AppendLine("return Array.Empty<long>();");
+                }
+                
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                throw;
             }
             builder.EndMethod();
-            builder.AppendLine();
-            // 生成取消注册方法
-            builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
-            builder.BeginMethod(
-                "public void UnRegister(global::Fantasy.DataStructure.Collection.OneToManyHashSet<long, Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>> sphereEvents)");
+            // SphereEvent
+            builder.AddXmlComment("SphereEvent");
+            builder.BeginMethod("public Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>[] SphereEvent()");
             try
             {
-                foreach (var eventSystemTypeInfo in sphereEventSystem)
+                if (sphereEventSystem.Any())
                 {
-                    var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                    builder.AppendLine($"sphereEvents.RemoveValue({fieldName}TypeHashCode, {fieldName}Delegate);");
+                    builder.AppendLine($"var sphereEvents = new Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>[{sphereEventSystem.Count}];");
+                    for (var i = 0; i < sphereEventSystem.Count; i++)
+                    {
+                        builder.AppendLine($"sphereEvents[{i}] = _{sphereEventSystem[i].TypeName.ToCamelCase()}.Invoke;");
+                    }
+                    builder.AppendLine("return sphereEvents;");
                 }
+                else
+                {
+                    builder.AppendLine("return Array.Empty<Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>>();");
+                }
+                
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                throw;
             }
             builder.EndMethod();
             // 结束类和命名空间
@@ -322,9 +389,10 @@ namespace Fantasy.SourceGenerator.Generators
 
             // 快速检查是否包含可能的 EventSystem 基类名称
             var baseListText = classDecl.BaseList.ToString();
-            return baseListText.Contains("AwakeSystem") ||
+            return baseListText.Contains("EventSystem") ||
                    baseListText.Contains("AsyncEventSystem") ||
-                   baseListText.Contains("SphereEventSystem");
+                   baseListText.Contains("SphereEventSystem") ||
+                   baseListText.Contains("TimerHandler");
         }
         
         private enum EventSystemType

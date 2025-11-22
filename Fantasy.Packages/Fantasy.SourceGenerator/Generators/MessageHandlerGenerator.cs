@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Fantasy.SourceGenerator.Common;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -86,10 +83,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.BeginNamespace("Fantasy.Generated");
             builder.AddXmlComment($"Auto-generated message handler registration class for {assemblyName}");
             builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IMessageHandlerResolver");
-            // 生成字段用于存储已注册的实例（用于 UnRegister）
-            GenerateFields(builder, messageHandlers, routeMessageHandlers);
-            // 生成 Register 方法
-            GenerateRegistrationCode(builder, messageHandlers, routeMessageHandlers);
+            // 生成 GenerateCode 方法
+            GenerateCode(builder, messageHandlers, routeMessageHandlers);
             // 结束类和命名空间
             builder.EndClass();
             builder.EndNamespace();
@@ -97,117 +92,111 @@ namespace Fantasy.SourceGenerator.Generators
             context.AddSource($"{markerClassName}.g.cs", builder.ToString());
         }
 
-        private static void GenerateFields(SourceCodeBuilder builder, List<MessageHandlerInfo> messageHandlers, List<MessageHandlerInfo> routeMessageHandlers)
+        private static void GenerateCode(SourceCodeBuilder builder, List<MessageHandlerInfo> messageHandlers, List<MessageHandlerInfo> routeMessageHandlers)
         {
-            try
-            {
-                foreach (var messageHandlerInfo in messageHandlers)
-                {
-                    builder.AppendLine($"private Func<global::Fantasy.Network.Session, uint, uint, object, global::Fantasy.Async.FTask> message_{messageHandlerInfo.TypeName} = new {messageHandlerInfo.TypeFullName}().Handle;");
-                }
-
-                foreach (var messageHandlerInfo in routeMessageHandlers)
-                {
-                    builder.AppendLine($"private Func<global::Fantasy.Network.Session, global::Fantasy.Entitas.Entity, uint, object, global::Fantasy.Async.FTask> routeMessage_{messageHandlerInfo.TypeName} = new {messageHandlerInfo.TypeFullName}().Handle;");
-                }
-
-                builder.AppendLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-
-        private static void GenerateRegistrationCode(SourceCodeBuilder builder, List<MessageHandlerInfo> messageHandlers, List<MessageHandlerInfo> routeMessageHandlers)
-        {
-            builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            builder.BeginMethod("public int GetMessageHandlerCount()");
-            builder.AppendLine($"return {messageHandlers.Count};");
-            builder.EndMethod();
-            builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            builder.BeginMethod("public int GetAddressMessageHandlerCount()");
-            builder.AppendLine($"return {routeMessageHandlers.Count};");
-            builder.EndMethod();
-            builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            builder.BeginMethod("public bool MessageHandler(global::Fantasy.Network.Session session, uint rpcId, uint protocolCode, object message)");
+            // MessageHandlerOpCodes
+            builder.AddXmlComment("MessageHandlerOpCodes");
+            builder.BeginMethod("public uint[] MessageHandlerOpCodes()");
             try
             {
                 if (messageHandlers.Any())
                 {
-                    builder.AppendLine("switch (protocolCode)");
-                    builder.AppendLine("{");
-                    builder.Indent();
-                    foreach (var messageHandlerInfo in messageHandlers)
+                    builder.AppendLine($"var uintArray = new uint[{messageHandlers.Count}];");
+                    for (var i = 0; i < messageHandlers.Count; i++)
                     {
-                        builder.AppendLine($"case {messageHandlerInfo.OpCode}:");
-                        builder.AppendLine("{");
-                        builder.Indent();
-                        builder.AppendLine($"message_{messageHandlerInfo.TypeName}(session, rpcId, protocolCode, message).Coroutine();");
-                        builder.AppendLine($"return true;");
-                        builder.Unindent();
-                        builder.AppendLine("}");
+                        builder.AppendLine($"uintArray[{i}] = {messageHandlers[i].OpCode};");
                     }
-                    builder.AppendLine("default:");
-                    builder.AppendLine("{");
-                    builder.Indent();
-                    builder.AppendLine($"return false;");
-                    builder.Unindent();
-                    builder.AppendLine("}");
-                    builder.Unindent();
-                    builder.AppendLine("}");
+
+                    builder.AppendLine("return uintArray;");
                 }
                 else
                 {
-                    builder.AppendLine($"return false;");
+                    builder.AppendLine("return Array.Empty<uint>();");
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                throw;
             }
-            
             builder.EndMethod();
-            
-            builder.AppendLine("#if FANTASY_NET", false);
-            builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-            builder.BeginMethod("public async global::Fantasy.Async.FTask<bool> AddressMessageHandler(global::Fantasy.Network.Session session, global::Fantasy.Entitas.Entity entity, uint rpcId, uint protocolCode, object message)");
+            // MessageHandlers
+            builder.AddXmlComment("MessageHandlers");
+            builder.BeginMethod("public global::System.Func<global::Fantasy.Network.Session, uint, object, global::Fantasy.Async.FTask>[] MessageHandlers()");
+            try
+            {
+                if (messageHandlers.Any())
+                {
+                    builder.AppendLine($"var handlerArray = new global::System.Func<global::Fantasy.Network.Session, uint, object, global::Fantasy.Async.FTask>[{messageHandlers.Count}];");
+                    for (var i = 0; i < messageHandlers.Count; i++)
+                    {
+                        builder.AppendLine($"handlerArray[{i}] = new {messageHandlers[i].TypeFullName}().Handle;;");
+                    }
+
+                    builder.AppendLine("return handlerArray;");
+                }
+                else
+                {
+                    builder.AppendLine("return Array.Empty<global::System.Func<global::Fantasy.Network.Session, uint, object, global::Fantasy.Async.FTask>>();");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            builder.EndMethod();
+            // AddressMessageHandlerOpCodes
+            builder.AddXmlComment("AddressMessageHandlerOpCodes");
+            builder.BeginMethod("public uint[] AddressMessageHandlerOpCodes()");
             try
             {
                 if (routeMessageHandlers.Any())
                 {
-                    builder.AppendLine("switch (protocolCode)");
-                    builder.AppendLine("{");
-                    builder.Indent();
-                    foreach (var routeMessageHandler in routeMessageHandlers)
+                    builder.AppendLine($"var uintArray = new uint[{routeMessageHandlers.Count}];");
+                    for (var i = 0; i < routeMessageHandlers.Count; i++)
                     {
-                        builder.AppendLine($"case {routeMessageHandler.OpCode}:");
-                        builder.AppendLine("{");
-                        builder.Indent();
-                        builder.AppendLine($"await routeMessage_{routeMessageHandler.TypeName}(session, entity, rpcId, message);");
-                        builder.AppendLine($"return true;");
-                        builder.Unindent();
-                        builder.AppendLine("}");
+                        builder.AppendLine($"uintArray[{i}] = {routeMessageHandlers[i].OpCode};");
                     }
-                    builder.AppendLine("default:");
-                    builder.AppendLine("{");
-                    builder.Indent();
-                    builder.AppendLine($"await global::Fantasy.Async.FTask.CompletedTask;");
-                    builder.AppendLine($"return false;");
-                    builder.Unindent();
-                    builder.AppendLine("}");
-                    builder.Unindent();
-                    builder.AppendLine("}");
+
+                    builder.AppendLine("return uintArray;");
                 }
                 else
                 {
-                    builder.AppendLine($"await global::Fantasy.Async.FTask.CompletedTask;");
-                    builder.AppendLine($"return false;");
+                    builder.AppendLine("return Array.Empty<uint>();");
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                throw;
+            }
+            builder.EndMethod();
+            // AddressMessageHandler
+            builder.AppendLine("#if FANTASY_NET", false);
+            builder.AddXmlComment("AddressMessageHandler");
+            builder.BeginMethod("public global::System.Func<global::Fantasy.Network.Session, global::Fantasy.Entitas.Entity, uint, object, global::Fantasy.Async.FTask>[] AddressMessageHandler()");
+            try
+            {
+                if (routeMessageHandlers.Any())
+                {
+                    builder.AppendLine($"var handlerArray = new global::System.Func<global::Fantasy.Network.Session, global::Fantasy.Entitas.Entity, uint, object, global::Fantasy.Async.FTask>[{routeMessageHandlers.Count}];");
+                    for (var i = 0; i < routeMessageHandlers.Count; i++)
+                    {
+                        builder.AppendLine($"handlerArray[{i}] = new {routeMessageHandlers[i].TypeFullName}().Handle;;");
+                    }
+
+                    builder.AppendLine("return handlerArray;");
+                }
+                else
+                {
+                    builder.AppendLine("return Array.Empty<global::System.Func<global::Fantasy.Network.Session, global::Fantasy.Entitas.Entity, uint, object, global::Fantasy.Async.FTask>>();");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
             builder.EndMethod();
             builder.AppendLine("#endif", false);

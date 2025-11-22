@@ -52,8 +52,6 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         IEnumerable<NetworkProtocolTypeInfo> networkProtocolTypeInfos)
     {
         var networkProtocolTypeInfoList = networkProtocolTypeInfos.ToList();
-        // // 获取当前程序集名称（仅用于注释）
-        // var assemblyName = compilation.AssemblyName ?? "Unknown";
         // 生成网络网络协议类型注册的类。
         GenerateNetworkProtocolTypesCode(context, compilation, networkProtocolTypeInfoList);
         // 生成OpCode注册方法。
@@ -142,35 +140,24 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         // 开始类定义（实现 IOpCodeRegistrar 接口）
         builder.AddXmlComment($"Auto-generated OpCodeRegistrar class for {assemblyName}");
         builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IOpCodeRegistrar");
-        // 开始定义GetOpCodeCount方法
-        builder.AddXmlComment("GetOpCodeCount");
-        builder.BeginMethod("public int GetOpCodeCount()");
-        builder.AppendLine(RoslynExtensions.IsFantasyAssembly(assemblyName)
-            ? "return 0;"
-            : $"return {networkProtocolTypeInfoList.Count};");
-        builder.EndMethod();
-        // 开始定义GetCustomRouteTypeCount方法
-        builder.AddXmlComment("GetCustomRouteTypeCount");
-        builder.BeginMethod("public int GetCustomRouteTypeCount()");
-        builder.AppendLine(RoslynExtensions.IsFantasyAssembly(assemblyName)
-            ? "return 0;"
-            : $"return {routeTypeInfos.Count};");
-        builder.EndMethod();
-        // 开始定义OpCodeTypeDictionary方法
-        builder.AddXmlComment("OpCodeTypeDictionary");
-        builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-        builder.BeginMethod("public void FillOpCodeType(uint[] opCodes, Type[] types)");
+        // 开始定义OpCodes方法
+        builder.AddXmlComment("TypeOpCodes");
+        builder.BeginMethod("public uint[] TypeOpCodes()");
         
         try
         {
-            if (!RoslynExtensions.IsFantasyAssembly(assemblyName) && networkProtocolTypeInfoList.Any())
+            if (networkProtocolTypeInfoList.Any())
             {
+                builder.AppendLine($"var uintArray = new uint[{networkProtocolTypeInfoList.Count}];");
                 for (var i = 0; i < networkProtocolTypeInfoList.Count; i++)
                 {
-                    var (fullName, opCode, _, _) = networkProtocolTypeInfoList[i];
-                    builder.AppendLine($"opCodes[{i}] = {opCode};");
-                    builder.AppendLine($"types[{i}] = typeof({fullName});");
+                    builder.AppendLine($"uintArray[{i}] = {networkProtocolTypeInfoList[i].OpCode};");
                 }
+                builder.AppendLine("return uintArray;");
+            }
+            else
+            {
+                builder.AppendLine("return Array.Empty<uint>();");
             }
         }
         catch (Exception e)
@@ -180,22 +167,87 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         }
         
         builder.EndMethod();
-        // 开始定义FillCustomRouteType方法
-        builder.AddXmlComment("FillCustomRouteType");
-        builder.BeginMethod("public void FillCustomRouteType(uint[] opCodes, int[] routeTypes)");
+        // 开始定义OpCodeTypes方法
+        builder.AddXmlComment("OpCodeTypes");
+        builder.BeginMethod("public global::System.Type[] OpCodeTypes()");
         
-        if (!RoslynExtensions.IsFantasyAssembly(assemblyName) && routeTypeInfos.Any())
+        try
         {
-            for (var i = 0; i < routeTypeInfos.Count; i++)
+            if (networkProtocolTypeInfoList.Any())
             {
-                var (_, opCode, _, routeType) = routeTypeInfos[i];
-                builder.AppendLine($"opCodes[{i}] = {opCode};");
-                builder.AppendLine($"routeTypes[{i}] = {routeType};");
+                builder.AppendLine($"var typeArray = new global::System.Type[{networkProtocolTypeInfoList.Count}];");
+                for (var i = 0; i < networkProtocolTypeInfoList.Count; i++)
+                {
+                    builder.AppendLine($"typeArray[{i}] = typeof({networkProtocolTypeInfoList[i].FullName});");
+                }
+                builder.AppendLine("return typeArray;");
             }
+            else
+            {
+                builder.AppendLine("return Array.Empty<global::System.Type>();");
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
         
         builder.EndMethod();
-        builder.AppendLine();
+        // 开始定义CustomRouteTypeOpCodes方法
+        builder.AddXmlComment("CustomRouteTypeOpCodes");
+        builder.BeginMethod("public uint[] CustomRouteTypeOpCodes()");
+        
+        try
+        {
+            if (routeTypeInfos.Any())
+            {
+                builder.AppendLine($"var unitArray = new uint[{routeTypeInfos.Count}];");
+                for (var i = 0; i < routeTypeInfos.Count; i++)
+                {
+                    builder.AppendLine($"unitArray[{i}] = {routeTypeInfos[i].OpCode};");
+                }
+                builder.AppendLine("return unitArray;");
+            }
+            else
+            {
+                builder.AppendLine("return Array.Empty<uint>();");
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
+        builder.EndMethod();
+        // 开始定义CustomRouteTypeOpCodes方法
+        builder.AddXmlComment("CustomRouteTypes");
+        builder.BeginMethod("public int[] CustomRouteTypes()");
+        
+        try
+        {
+            if (routeTypeInfos.Any())
+            {
+                builder.AppendLine($"var intArray = new int[{routeTypeInfos.Count}];");
+                for (var i = 0; i < routeTypeInfos.Count; i++)
+                {
+                    builder.AppendLine($"intArray[{i}] = {routeTypeInfos[i].RouteType};");
+                }
+                builder.AppendLine("return intArray;");
+            }
+            else
+            {
+                builder.AppendLine("return Array.Empty<int>();");
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
+        builder.EndMethod();
         // 结束类和命名空间
         builder.EndClass();
         builder.EndNamespace();
@@ -227,27 +279,23 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         // 开始类定义（实现 IResponseTypeRegistrar 接口）
         builder.AddXmlComment($"Auto-generated ResponseTypeRegistrar class for {assemblyName}");
         builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IResponseTypeRegistrar");
-        builder.AddXmlComment($"GetRequestCount");
-        builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-        builder.BeginMethod("public int GetRequestCount()");
-        builder.AppendLine(RoslynExtensions.IsFantasyAssembly(assemblyName)
-            ? "return 0;"
-            : $"return {requestList.Count};");
-        builder.EndMethod();
-        // 开始定义GetOpCodeType方法
-        builder.AddXmlComment($"FillResponseType");
-        builder.AppendLine("[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-        builder.BeginMethod("public void FillResponseType(uint[] opCodes, Type[] types)");
+        // 开始定义OpCodes方法
+        builder.AddXmlComment("OpCodes");
+        builder.BeginMethod("public uint[] OpCodes()");
         try
         {
-            if (!RoslynExtensions.IsFantasyAssembly(assemblyName) && requestList.Any())
+            if (requestList.Any())
             {
+                builder.AppendLine($"var unitArray = new uint[{requestList.Count}];");
                 for (var i = 0; i < requestList.Count; i++)
                 {
-                    var (_, opCode, responseType, _) = requestList[i];
-                    builder.AppendLine($"opCodes[{i}] = {opCode};");
-                    builder.AppendLine($"types[{i}] = typeof({responseType});");
+                    builder.AppendLine($"unitArray[{i}] = {requestList[i].OpCode};");
                 }
+                builder.AppendLine("return unitArray;");
+            }
+            else
+            {
+                builder.AppendLine("return Array.Empty<uint>();");
             }
         }
         catch (Exception e)
@@ -256,7 +304,31 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
             throw;
         }
         builder.EndMethod();
-        builder.AppendLine();
+        // 开始定义Types方法
+        builder.AddXmlComment("Types");
+        builder.BeginMethod("public global::System.Type[] Types()");
+        try
+        {
+            if (requestList.Any())
+            {
+                builder.AppendLine($"var typeArray = new global::System.Type[{requestList.Count}];");
+                for (var i = 0; i < requestList.Count; i++)
+                {
+                    builder.AppendLine($"typeArray[{i}] = typeof({requestList[i].ResponseType});");
+                }
+                builder.AppendLine("return typeArray;");
+            }
+            else
+            {
+                builder.AppendLine("return Array.Empty<global::System.Type>();");
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        builder.EndMethod();
         // 结束类和命名空间
         builder.EndClass();
         builder.EndNamespace();

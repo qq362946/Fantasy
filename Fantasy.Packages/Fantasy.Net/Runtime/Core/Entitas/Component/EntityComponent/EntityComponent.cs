@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using Fantasy.Assembly;
 using Fantasy.Async;
+using Fantasy.DataStructure.Dictionary;
 using Fantasy.Entitas.Interface;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable ForCanBeConvertedToForeach
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -35,26 +37,16 @@ namespace Fantasy.Entitas
     public sealed class EntityComponent : Entity, ISceneUpdate, IAssemblyLifecycle
 #endif
     {
-        /// <summary>
-        /// 已加载的程序集清单ID集合
-        /// </summary>
-        private readonly HashSet<long> _assemblyManifests = new();
-        /// <summary>
-        /// 实体唤醒系统字典，Key为实体类型TypeHashCode，Value为对应的唤醒系统
-        /// </summary>
-        private readonly Dictionary<RuntimeTypeHandle, Action<Entity>> _awakeSystems = new();
-        /// <summary>
-        /// 实体更新系统字典，Key为实体类型TypeHashCode，Value为对应的更新系统
-        /// </summary>
-        private readonly Dictionary<RuntimeTypeHandle, Action<Entity>> _updateSystems = new();
-        /// <summary>
-        /// 实体销毁系统字典，Key为实体类型TypeHashCode，Value为对应的销毁系统
-        /// </summary>
-        private readonly Dictionary<RuntimeTypeHandle, Action<Entity>> _destroySystems = new();
-        /// <summary>
-        /// 实体反序列化系统字典，Key为实体类型TypeHashCode，Value为对应的反序列化系统
-        /// </summary>
-        private readonly Dictionary<RuntimeTypeHandle, Action<Entity>> _deserializeSystems = new();
+        private RuntimeTypeHandleFrozenDictionary<Action<Entity>> _awakeSystems;
+        private RuntimeTypeHandleFrozenDictionary<Action<Entity>> _updateSystems;
+        private RuntimeTypeHandleFrozenDictionary<Action<Entity>> _destroySystems;
+        private RuntimeTypeHandleFrozenDictionary<Action<Entity>> _deserializeSystems;
+
+        private readonly TypeHandleMergerFrozenDictionary<Action<Entity>> _awakeSystemMerger = new();
+        private readonly TypeHandleMergerFrozenDictionary<Action<Entity>> _updateSystemMerger = new();
+        private readonly TypeHandleMergerFrozenDictionary<Action<Entity>> _destroySystemMerger = new();
+        private readonly TypeHandleMergerFrozenDictionary<Action<Entity>> _deserializeSystemMerger = new();
+        
         /// <summary>
         /// 更新队列，使用链表实现循环遍历和O(1)删除
         /// </summary>
@@ -64,7 +56,8 @@ namespace Fantasy.Entitas
         /// </summary>
         private readonly Dictionary<long, LinkedListNode<UpdateQueueNode>> _updateNodes = new();
 #if FANTASY_UNITY
-        private readonly Dictionary<RuntimeTypeHandle, Action<Entity>> _lateUpdateSystems = new();
+        private RuntimeTypeHandleFrozenDictionary<Action<Entity>> _lateUpdateSystems;
+        private readonly TypeHandleMergerFrozenDictionary<Action<Entity>> _lateUpdateSystemMerger = new();
         /// <summary>
         /// Late更新队列，使用链表实现循环遍历和O(1)删除
         /// </summary>
@@ -83,16 +76,10 @@ namespace Fantasy.Entitas
             {
                 return;
             }
-
-            _assemblyManifests.Clear();
-            _awakeSystems.Clear();
-            _updateSystems.Clear();
-            _destroySystems.Clear();
-
+            
             _updateQueue.Clear();
             _updateNodes.Clear();
 #if FANTASY_UNITY
-            _lateUpdateSystems.Clear();
             _lateUpdateQueue.Clear();
             _lateUpdateNodes.Clear();
 #endif
@@ -124,27 +111,41 @@ namespace Fantasy.Entitas
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                // 如果程序集已加载，先卸载旧的
-                if (_assemblyManifests.Contains(assemblyManifestId))
-                {
-                    OnUnLoadInner(assemblyManifest);
-                }
-#if FANTASY_NET
-                assemblyManifest.EntitySystemRegistrar.RegisterSystems(
-                    _awakeSystems,
-                    _updateSystems,
-                    _destroySystems,
-                    _deserializeSystems);
-#endif
+                var entitySystemRegistrar = assemblyManifest.EntitySystemRegistrar;
+
+                _awakeSystemMerger.Add(
+                    assemblyManifestId,
+                    entitySystemRegistrar.AwakeTypeHandles(),
+                    entitySystemRegistrar.AwakeHandles()
+                );
+                _updateSystemMerger.Add(
+                    assemblyManifestId,
+                    entitySystemRegistrar.UpdateTypeHandles(),
+                    entitySystemRegistrar.UpdateHandles()
+                );
+                _destroySystemMerger.Add(
+                    assemblyManifestId,
+                    entitySystemRegistrar.DestroyTypeHandles(),
+                    entitySystemRegistrar.DestroyHandles()
+                );
+                _deserializeSystemMerger.Add(
+                    assemblyManifestId,
+                    entitySystemRegistrar.DeserializeTypeHandles(),
+                    entitySystemRegistrar.DeserializeHandles()
+                );
+
+                _awakeSystems = _awakeSystemMerger.GetFrozenDictionary();
+                _updateSystems = _updateSystemMerger.GetFrozenDictionary();
+                _destroySystems = _destroySystemMerger.GetFrozenDictionary();
+                _deserializeSystems = _deserializeSystemMerger.GetFrozenDictionary();
 #if FANTASY_UNITY
-                assemblyManifest.EntitySystemRegistrar.RegisterSystems(
-                    _awakeSystems,
-                    _updateSystems,
-                    _destroySystems,
-                    _deserializeSystems,
-                    _lateUpdateSystems);
+                _lateUpdateSystemMerger.Add(
+                    assemblyManifestId,
+                    entitySystemRegistrar.LateUpdateTypeHandles(),
+                    entitySystemRegistrar.LateUpdateHandles()
+                );
+                _lateUpdateSystems = _lateUpdateSystemMerger.GetFrozenDictionary();
 #endif
-                _assemblyManifests.Add(assemblyManifestId);
                 task.SetResult();
             });
             return task;
@@ -158,49 +159,34 @@ namespace Fantasy.Entitas
         public FTask OnUnload(AssemblyManifest assemblyManifest)
         {
             var task = FTask.Create(false);
+            var assemblyManifestId = assemblyManifest.AssemblyManifestId;
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                OnUnLoadInner(assemblyManifest);
-                task.SetResult();
-            });
-            return task;
-        }
-
-        /// <summary>
-        /// 卸载程序集的内部实现
-        /// 会清理该程序集注册的所有系统，并移除更新队列中对应的实体
-        /// </summary>
-        /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
-        private void OnUnLoadInner(AssemblyManifest assemblyManifest)
-        {
-#if FANTASY_NET
-            assemblyManifest.EntitySystemRegistrar.UnRegisterSystems(
-                _awakeSystems,
-                _updateSystems,
-                _destroySystems,
-                _deserializeSystems);
-#endif
+                _awakeSystemMerger.Remove(assemblyManifestId);
+                _updateSystemMerger.Remove(assemblyManifestId);
+                _destroySystemMerger.Remove(assemblyManifestId);
+                _deserializeSystemMerger.Remove(assemblyManifestId);
+                
+                _awakeSystems = _awakeSystemMerger.GetFrozenDictionary();
+                _updateSystems = _updateSystemMerger.GetFrozenDictionary();
+                _destroySystems = _destroySystemMerger.GetFrozenDictionary();
+                _deserializeSystems = _deserializeSystemMerger.GetFrozenDictionary();
 #if FANTASY_UNITY
-            assemblyManifest.EntitySystemRegistrar.UnRegisterSystems(
-                _awakeSystems,
-                _updateSystems,
-                _destroySystems,
-                _deserializeSystems,
-                _lateUpdateSystems);
+                _lateUpdateSystemMerger.Remove(assemblyManifestId);
+                _lateUpdateSystems = _lateUpdateSystemMerger.GetFrozenDictionary();
 #endif
-            _assemblyManifests.Remove(assemblyManifest.AssemblyManifestId);
-            // 清理更新队列中已失效的节点（系统被卸载后，对应实体的更新系统不再存在）
-            var node = _updateQueue.First;
-            while (node != null)
-            {
-                var next = node.Next;
-                if (!_updateSystems.ContainsKey(node.Value.RuntimeTypeHandle))
+                // 清理更新队列中已失效的节点（系统被卸载后，对应实体的更新系统不再存在）
+                var node = _updateQueue.First;
+                while (node != null)
                 {
-                    _updateQueue.Remove(node);
-                    _updateNodes.Remove(node.Value.RunTimeId);
+                    var next = node.Next;
+                    if (!_updateSystems.ContainsKey(node.Value.RuntimeTypeHandle))
+                    {
+                        _updateQueue.Remove(node);
+                        _updateNodes.Remove(node.Value.RunTimeId);
+                    }
+                    node = next;
                 }
-                node = next;
-            }
 #if FANTASY_UNITY
             var lateNode = _lateUpdateQueue.First;
             while (lateNode != null)
@@ -214,6 +200,9 @@ namespace Fantasy.Entitas
                 lateNode = next;
             }
 #endif
+                task.SetResult();
+            });
+            return task;
         }
 
         #endregion

@@ -12,23 +12,27 @@ namespace Fantasy.Assembly
     public interface IOpCodeRegistrar
     {
         /// <summary>
-        /// 返回OpCode的总数
+        /// 获取所有已注册对象的TypeOpCode数组。
         /// </summary>
         /// <returns></returns>
-        int GetOpCodeCount();
+        uint[] TypeOpCodes();
+
         /// <summary>
-        /// 返回CustomRouteType的总数
+        /// 获取所有已注册对象的OpCodeType数组。
         /// </summary>
         /// <returns></returns>
-        int GetCustomRouteTypeCount();
-        /// <summary>
-        /// 填充OpCodeType到指定的数组中
-        /// </summary>
-        void FillOpCodeType(uint[] opCodes, Type[] types);
-        /// <summary>
-        /// 填充CustomRouteType到指定的数组中
-        /// </summary>
-        void FillCustomRouteType(uint[] opCodes, int[] routeTypes);
+        Type[] OpCodeTypes();
         
+        /// <summary>
+        /// 获取所有已注册对象的CustomRouteTypeOpCode数组。
+        /// </summary>
+        /// <returns></returns>
+        uint[] CustomRouteTypeOpCodes();
+        
+        /// <summary>
+        /// 获取所有已注册对象的CustomRouteType数组。
+        /// </summary>
+        /// <returns></returns>
+        int[] CustomRouteTypes();
     }
 }

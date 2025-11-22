@@ -156,12 +156,12 @@ public interface IDatabase
     /// <summary>
     /// 保存类型 <typeparamref name="T"/> 实体到指定集合中，如果集合不存在将自动创建。
     /// </summary>
-    FTask Save<T>(T entity, string name = null) where T : Entity, new();
+    FTask Save<T>(T entity, string name = null) where T : Entity;
 
     /// <summary>
     /// 保存一组实体到数据库中，根据实体列表的 ID 进行区分和存储。
     /// </summary>
-    FTask Save(long id, List<Entity> entities);
+    FTask Save(long id, List<(Entity, string)> entities);
 
     /// <summary>
     /// 通过事务会话将类型 <typeparamref name="T"/> 实体保存到指定集合中，如果集合不存在将自动创建。

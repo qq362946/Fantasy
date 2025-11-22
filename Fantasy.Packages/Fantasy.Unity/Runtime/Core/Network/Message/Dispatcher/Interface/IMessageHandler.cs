@@ -19,10 +19,9 @@ namespace Fantasy.Network.Interface
         /// </summary>
         /// <param name="session">会话对象。</param>
         /// <param name="rpcId">RPC标识。</param>
-        /// <param name="messageTypeCode">消息类型代码。</param>
         /// <param name="message">要处理的消息。</param>
         /// <returns>异步任务。</returns>
-        FTask Handle(Session session, uint rpcId, uint messageTypeCode, object message);
+        FTask Handle(Session session, uint rpcId, object message);
     }
 
     /// <summary>
@@ -44,10 +43,9 @@ namespace Fantasy.Network.Interface
         /// </summary>
         /// <param name="session">会话对象。</param>
         /// <param name="rpcId">RPC标识。</param>
-        /// <param name="messageTypeCode">消息类型代码。</param>
         /// <param name="message">要处理的消息。</param>
         /// <returns>异步任务。</returns>
-        public async FTask Handle(Session session, uint rpcId, uint messageTypeCode, object message)
+        public async FTask Handle(Session session, uint rpcId, object message)
         {
             try
             {
@@ -87,10 +85,9 @@ namespace Fantasy.Network.Interface
         /// </summary>
         /// <param name="session">会话对象。</param>
         /// <param name="rpcId">RPC标识。</param>
-        /// <param name="messageTypeCode">消息类型代码。</param>
         /// <param name="message">要处理的消息。</param>
         /// <returns>异步任务。</returns>
-        public async FTask Handle(Session session, uint rpcId, uint messageTypeCode, object message)
+        public async FTask Handle(Session session, uint rpcId, object message)
         {
             if (message is not TRequest request)
             {

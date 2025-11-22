@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.DataStructure.Dictionary;
@@ -8,6 +9,8 @@ using Fantasy.InnerMessage;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable ForCanBeConvertedToForeach
 // ReSharper disable InvertIf
+// ReSharper disable ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
+// ReSharper disable CheckNamespace
 #pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
@@ -21,68 +24,34 @@ namespace Fantasy.Network.Interface
     public sealed class MessageDispatcherComponent : Entity, IAssemblyLifecycle
     {
         private CoroutineLock _receiveRouteMessageLock;
-        
-        private readonly HashSet<long> _assemblyManifests = new();
-        
-        private Func<Session, uint, uint, object, bool>? _lastHitMessageHandler;
-
         private UInt32FrozenDictionary<Type> _opCodeDictionary;
         private UInt32FrozenDictionary<Type> _responseTypeDictionary;
-        private readonly List<IMessageHandlerResolver> _messageHandlerResolver = new List<IMessageHandlerResolver>();
+        private UInt32FrozenDictionary<Func<Session, uint, object, FTask>> _messageHandlerDictionary;
+        
+        private readonly UInt32MergerFrozenDictionary<Type> _opCodeMerger = new();
+        private readonly UInt32MergerFrozenDictionary<Type> _responseTypeMerger = new();
+        private readonly UInt32MergerFrozenDictionary<Func<Session, uint, object, FTask>> _messageHandlerMerger = new();
 #if FANTASY_NET
         private UInt32FrozenDictionary<int> _customRouteDictionary;
-        private Func<Session, Entity, uint, uint, object, FTask<bool>>? _lastHitRouteMessageHandler;
-        private readonly List<IMessageHandlerResolver> _routeMessageHandlerResolver = new List<IMessageHandlerResolver>();
+        private UInt32FrozenDictionary<Func<Session, Entity, uint, object, FTask>> _routeMessageHandlerDictionary;
+        private readonly UInt32MergerFrozenDictionary<int> _customRouteMerger = new();
+        private readonly UInt32MergerFrozenDictionary<Func<Session, Entity, uint, object, FTask>> _routeMessageHandlerMerger = new();
 #endif
-        
-        #region Comparer
-        
-        private class MessageHandlerResolverComparer : IComparer<IMessageHandlerResolver>
-        {
-            public int Compare(IMessageHandlerResolver? x, IMessageHandlerResolver? y)
-            {
-                if (x == null || y == null)
-                {
-                    return 0;
-                }
-
-                return y.GetMessageHandlerCount().CompareTo(x.GetMessageHandlerCount());
-            }
-        }
-#if FANTASY_NET     
-        private class RouteMessageHandlerResolverComparer : IComparer<IMessageHandlerResolver>
-        {
-            public int Compare(IMessageHandlerResolver? x, IMessageHandlerResolver? y)
-            {
-                if (x == null || y == null)
-                {
-                    return 0;
-                }
-
-                return y.GetAddressMessageHandlerCount().CompareTo(x.GetAddressMessageHandlerCount());
-            }
-        }
-#endif
-        #endregion
-
         public override void Dispose()
         {
             if (IsDisposed)
             {
                 return;
             }
-            _assemblyManifests.Clear();
+            
             _receiveRouteMessageLock.Dispose();
-            _messageHandlerResolver.Clear();
-#if FANTASY_NET
-            _routeMessageHandlerResolver.Clear();
-            _customRouteDictionary = null;
-             _lastHitRouteMessageHandler = null;
-#endif
             _opCodeDictionary = null;
-            _lastHitMessageHandler = null;
-            _receiveRouteMessageLock = null;
             _responseTypeDictionary = null;
+            _messageHandlerDictionary = null;
+#if FANTASY_NET
+            _customRouteDictionary = null;
+            _routeMessageHandlerDictionary = null;
+#endif
             AssemblyLifecycle.Remove(this);
             base.Dispose();
         }
@@ -100,60 +69,44 @@ namespace Fantasy.Network.Interface
         {
             var tcs = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
+            
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                if (_assemblyManifests.Contains(assemblyManifestId))
-                {
-                    OnUnLoadInner(assemblyManifest);
-                }
                 // 注册Handler
                 var messageHandlerResolver = assemblyManifest.MessageHandlerResolver;
-                var messageHandlerCount = messageHandlerResolver.GetMessageHandlerCount();
-                if (messageHandlerCount > 0)
-                {
-                    _messageHandlerResolver.Add(messageHandlerResolver);
-                    _messageHandlerResolver.Sort(new MessageHandlerResolverComparer());
-                }
+                _messageHandlerMerger.Add(
+                    assemblyManifestId,
+                    messageHandlerResolver.MessageHandlerOpCodes(),
+                    messageHandlerResolver.MessageHandlers());
+                _messageHandlerDictionary = _messageHandlerMerger.GetFrozenDictionary();
                 // 注册OpCode
                 var opCodeResolver = assemblyManifest.OpCodeRegistrar;
-                var opCodeCount = opCodeResolver.GetOpCodeCount();
-                if (opCodeCount > 0)
-                {
-                    var opCodes = new uint[opCodeCount + InnerNetworkProtocolRegistrar.OpCodeCount];
-                    var types = new Type[opCodeCount + InnerNetworkProtocolRegistrar.OpCodeCount];
-                    opCodeResolver.FillOpCodeType(opCodes, types);
-                    InnerNetworkProtocolRegistrar.FillOpCode(opCodes, types, opCodeCount);
-                    _opCodeDictionary = new UInt32FrozenDictionary<Type>(opCodes, types);
-                }
+                _opCodeMerger.Add(
+                    assemblyManifestId,
+                    opCodeResolver.TypeOpCodes(),
+                    opCodeResolver.OpCodeTypes());
+                _opCodeDictionary = _opCodeMerger.GetFrozenDictionary();
 #if FANTASY_NET
-                var customRouteTypeCount = opCodeResolver.GetCustomRouteTypeCount();
-                if (customRouteTypeCount > 0)
-                {
-                    var opCodes = new uint[customRouteTypeCount + InnerNetworkProtocolRegistrar.CustomRouteTypeCount];
-                    var routeTypes = new int[customRouteTypeCount + InnerNetworkProtocolRegistrar.CustomRouteTypeCount];
-                    opCodeResolver.FillCustomRouteType(opCodes, routeTypes);
-                    InnerNetworkProtocolRegistrar.FillCustomRouteType(opCodes, routeTypes, customRouteTypeCount);
-                    _customRouteDictionary = new UInt32FrozenDictionary<int>(opCodes, routeTypes);
-                }
-                var routeMessageHandlerCount = messageHandlerResolver.GetAddressMessageHandlerCount();
-                if (routeMessageHandlerCount > 0)
-                {
-                    _routeMessageHandlerResolver.Add(messageHandlerResolver);
-                    _routeMessageHandlerResolver.Sort(new RouteMessageHandlerResolverComparer());
-                }
+                _customRouteMerger.Add(
+                    assemblyManifestId,
+                    opCodeResolver.CustomRouteTypeOpCodes(),
+                    opCodeResolver.CustomRouteTypes());
+                _customRouteDictionary = _customRouteMerger.GetFrozenDictionary();
+                
+                _routeMessageHandlerMerger.Add(
+                    assemblyManifestId,
+                    messageHandlerResolver.AddressMessageHandlerOpCodes(),
+                    messageHandlerResolver.AddressMessageHandler());
+                _routeMessageHandlerDictionary = _routeMessageHandlerMerger.GetFrozenDictionary();
 #endif
                 // 注册ResponseType
                 var responseTypeRegistrar = assemblyManifest.ResponseTypeRegistrar;
-                var requestCount = responseTypeRegistrar.GetRequestCount();
-                if (requestCount > 0)
-                {
-                    var opCodes = new uint[requestCount + InnerNetworkProtocolRegistrar.GetRequestCount];
-                    var types = new Type[requestCount + InnerNetworkProtocolRegistrar.GetRequestCount];
-                    responseTypeRegistrar.FillResponseType(opCodes, types);
-                    InnerNetworkProtocolRegistrar.FillResponseType(opCodes, types, requestCount);
-                    _responseTypeDictionary = new UInt32FrozenDictionary<Type>(opCodes, types);
-                }
-                _assemblyManifests.Add(assemblyManifestId);
+                _responseTypeMerger.Add(
+                    assemblyManifest.AssemblyManifestId,
+                    responseTypeRegistrar.OpCodes(),
+                    responseTypeRegistrar.Types());
+                _responseTypeDictionary = _responseTypeMerger.GetFrozenDictionary();
+                
                 tcs.SetResult();
             });
             await tcs;
@@ -162,67 +115,52 @@ namespace Fantasy.Network.Interface
         public async FTask OnUnload(AssemblyManifest assemblyManifest)
         {
             var tcs = FTask.Create(false);
+            var assemblyManifestId = assemblyManifest.AssemblyManifestId;
+            
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                OnUnLoadInner(assemblyManifest);
+                _opCodeMerger.Remove(assemblyManifestId);
+                _responseTypeMerger.Remove(assemblyManifestId);
+                _messageHandlerMerger.Remove(assemblyManifestId);
+
+                _opCodeDictionary = _opCodeMerger.GetFrozenDictionary();
+                _responseTypeDictionary = _responseTypeMerger.GetFrozenDictionary();
+                _messageHandlerDictionary = _messageHandlerMerger.GetFrozenDictionary();
+#if FANTASY_NET
+                _customRouteMerger.Remove(assemblyManifestId);
+                _routeMessageHandlerMerger.Remove(assemblyManifestId);
+            
+                _customRouteDictionary = _customRouteMerger.GetFrozenDictionary();
+                _routeMessageHandlerDictionary = _routeMessageHandlerMerger.GetFrozenDictionary();
+#endif
                 tcs.SetResult();
             });
             await tcs;
-        }
-
-        private void OnUnLoadInner(AssemblyManifest assemblyManifest)
-        {
-            _messageHandlerResolver.Remove(assemblyManifest.MessageHandlerResolver);
-            _messageHandlerResolver.Sort(new MessageHandlerResolverComparer());
-#if FANTASY_NET
-            _routeMessageHandlerResolver.Remove(assemblyManifest.MessageHandlerResolver);
-            _routeMessageHandlerResolver.Sort(new RouteMessageHandlerResolverComparer());
-#endif
-            _assemblyManifests.Remove(assemblyManifest.AssemblyManifestId);
         }
 
         #endregion
 
         internal void MessageHandler(Session session, Type type, object message, uint rpcId, uint protocolCode)
         {
-            if (_lastHitMessageHandler != null &&
-                _lastHitMessageHandler(session, rpcId, protocolCode, message))
+            if (!_messageHandlerDictionary.TryGetValue(protocolCode, out var messageHandler))
             {
+                Log.Warning($"Scene:{session.Scene.Id} Found Unhandled Message: {type.FullName}");
                 return;
             }
-            
-            for (var i = 0; i < _messageHandlerResolver.Count; i++)
-            {
-                var resolver = _messageHandlerResolver[i];
-                if (resolver.MessageHandler(session, rpcId, protocolCode, message))
-                {
-                    _lastHitMessageHandler = resolver.MessageHandler;
-                    return;
-                }
-            }
-            
-            Log.Warning($"Scene:{session.Scene.Id} Found Unhandled Message: {type}");
+
+            messageHandler(session, rpcId, message).Coroutine();
         }
 #if FANTASY_NET
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private async FTask<bool> InnerAddressMessageHandler(Session session, Entity entity, uint rpcId, uint protocolCode, object message)
         {
-            if (_lastHitRouteMessageHandler != null &&
-                await _lastHitRouteMessageHandler(session, entity, rpcId, protocolCode, message))
+            if (!_routeMessageHandlerDictionary.TryGetValue(protocolCode, out var messageHandler))
             {
-                return true;
+                return false;
             }
 
-            for (var i = 0; i < _routeMessageHandlerResolver.Count; i++)
-            {
-                var resolver = _routeMessageHandlerResolver[i];
-                if (await resolver.AddressMessageHandler(session, entity, rpcId, protocolCode, message))
-                {
-                    _lastHitRouteMessageHandler = resolver.AddressMessageHandler;
-                    return true;
-                }
-            }
-
-            return false;
+            await messageHandler(session, entity, rpcId, message);
+            return true;
         }
 
         internal async FTask AddressMessageHandler(Session session, Type type, Entity entity, object message, uint rpcId, uint protocolCode)

@@ -1,11 +1,10 @@
 #if FANTASY_NET
-using System.Collections.Generic;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Database;
 using Fantasy.DataStructure.Collection;
+using Fantasy.DataStructure.Dictionary;
 using Fantasy.Entitas;
-using Fantasy.Entitas.Interface;
 // ReSharper disable SuspiciousTypeConversion.Global
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -24,16 +23,8 @@ namespace Fantasy.SeparateTable
     /// </remarks>
     public sealed class SeparateTableComponent : Entity, IAssemblyLifecycle
     {
-        /// <summary>
-        /// 存储已加载的程序集清单ID集合，用于追踪哪些程序集的分表信息已注册。
-        /// </summary>
-        private readonly HashSet<long> _assemblyManifests = new();
-
-        /// <summary>
-        /// 分表信息映射表，键为父实体类型，值为该父实体对应的所有分表信息集合。
-        /// 用于快速查询某个实体类型有哪些子实体需要分表存储。
-        /// </summary>
-        private readonly OneToManyHashSet<RuntimeTypeHandle, ISeparateTableRegistrar.SeparateTableInfo> _separateTables = new ();
+        private RuntimeTypeHandleFrozenDictionary<List<(Type EntityType, string TableName)>> _separateTables;
+        private readonly TypeHandleMergerFrozenOneToManyList<(Type EntityType, string TableName)> _separateMerger = new();
 
         #region AssemblyManifest
 
@@ -60,24 +51,15 @@ namespace Fantasy.SeparateTable
         {
             var tcs = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
+            
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                // 如果程序集已加载，先卸载旧的
-                if (_assemblyManifests.Contains(assemblyManifestId))
-                {
-                    OnUnLoadInner(assemblyManifest);
-                }
-
-                // 从 Source Generator 生成的注册器中获取分表信息
-                var separateTableInfos = assemblyManifest.SeparateTableRegistrar.Register();
-
-                // 将分表信息按父实体类型进行分组注册
-                foreach (var separateTableInfo in separateTableInfos)
-                {
-                    _separateTables.Add(separateTableInfo.RootType.TypeHandle, separateTableInfo);
-                }
-
-                _assemblyManifests.Add(assemblyManifestId);
+                var separateTableRegistrar = assemblyManifest.SeparateTableRegistrar;
+                _separateMerger.Add(
+                    assemblyManifestId,
+                    separateTableRegistrar.RootTypes(),
+                    separateTableRegistrar.SeparateTables());
+                _separateTables = _separateMerger.GetFrozenDictionary();
                 tcs.SetResult();
             });
             await tcs;
@@ -94,30 +76,14 @@ namespace Fantasy.SeparateTable
         public FTask OnUnload(AssemblyManifest assemblyManifest)
         {
             var task = FTask.Create(false);
+            var assemblyManifestId = assemblyManifest.AssemblyManifestId;
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                OnUnLoadInner(assemblyManifest);
+                _separateMerger.Remove(assemblyManifestId);
+                _separateTables = _separateMerger.GetFrozenDictionary();
                 task.SetResult();
             });
             return task;
-        }
-
-        /// <summary>
-        /// 卸载程序集的内部实现，从映射表中移除该程序集的所有分表信息。
-        /// </summary>
-        /// <param name="assemblyManifest">要卸载的程序集清单。</param>
-        private void OnUnLoadInner(AssemblyManifest assemblyManifest)
-        {
-            // 获取该程序集需要反注册的分表信息
-            var separateTableInfos = assemblyManifest.SeparateTableRegistrar.UnRegister();
-
-            // 从映射表中逐个移除
-            foreach (var separateTableInfo in separateTableInfos)
-            {
-                _separateTables.RemoveValue(separateTableInfo.RootType.TypeHandle, separateTableInfo);
-            }
-
-            _assemblyManifests.Remove(assemblyManifest.AssemblyManifestId);
         }
 
         #endregion
@@ -197,7 +163,7 @@ namespace Fantasy.SeparateTable
             }
 
             // 使用对象池创建列表，避免 GC
-            using var saveSeparateTables = ListPool<Entity>.Create(entity);
+            using var saveSeparateTables = ListPool<(Entity, string)>.Create();
 
             // 收集所有需要分表保存的组件
             foreach (var separateTableInfo in separateTables)
@@ -207,7 +173,7 @@ namespace Fantasy.SeparateTable
                 {
                     continue;
                 }
-                saveSeparateTables.Add(separateTableEntity);
+                saveSeparateTables.Add((separateTableEntity, separateTableInfo.TableName));
             }
 
             // 批量保存实体及其所有分表组件
