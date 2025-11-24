@@ -131,49 +131,23 @@ Unity 客户端开发的完整指南。
 - ✅ [01-ECS.md](04-Advanced/CoreSystems/01-ECS.md) - Entity-Component-System 详解
 - ✅ [02-ISupportedMultiEntity.md](04-Advanced/CoreSystems/02-ISupportedMultiEntity.md) - 多实例组件详解
 - ✅ [03-Scene.md](04-Advanced/CoreSystems/03-Scene.md) - Scene 和 SubScene 使用
-- [ ] 04-ISupportedDataBase.md - 数据库持久化详解
-- [ ] 05-Lifecycle.md - Entity 生命周期和 System 系统
-
-#### 网络开发
-- [ ] 06-Network.md - 网络协议选择和配置
-- [ ] 07-Message.md - Message、Request/Response 使用
-- [ ] 08-Protocol.md - .proto 文件编写和代码生成
-- [ ] 09-Distributed.md - Server-to-Server 通信
-- [ ] 10-SphereEvent.md - SphereEvent 跨服域事件系统
-
-#### 异步编程
-- [ ] 11-FTask.md - FTask 和 FCancellationToken
-- [ ] 12-CoroutineLock.md - CoroutineLock 使用
-- [ ] 13-FlowControl.md - FTaskFlowLock 流量限制
 
 #### 数据持久化
-- [ ] 14-Database.md - MongoDB 集成和使用
-- [ ] 15-Persistence.md - Entity 数据库操作
-- [ ] 16-SeparateTable.md - SeparateTable 层级关系
+- ✅ [04-Database.md](04-Advanced/Database/14-Database.md) - MongoDB 集成和使用
+- ✅ [05-SeparateTable.md](04-Advanced/Database/16-SeparateTable.md) - SeparateTable 分表存储详解
 
-#### 配置系统
-- [ ] 17-ConfigTable.md - Excel 配置表设计和导出
-- [ ] 18-CodeGeneration.md - 配置表代码生成工具
+#### 网络开发
+- [ ] 06-Address消息.md - Server-to-Server 通信
+- [ ] 07-Route.md - Route 路由消息
+- [ ] 08-Roaming.md - Roaming 漫游消息
+- [ ] 09-SphereEvent.md - SphereEvent 跨服域事件系统
 
 #### 高级特性
-- [ ] 19-Event.md - Event 系统使用
-- [ ] 20-Timer.md - Timer 系统
-- [ ] 21-Addressable.md - Addressable 路由
-- [ ] 22-HotReload.md - 热重载支持
-- [ ] 23-ObjectPool.md - 内存管理和对象池
-
-#### Source Generator
-- [ ] 24-SourceGenerator.md - Roslyn Source Generator 原理
-- [ ] 25-CustomInterface.md - CustomInterface 注册
-- [ ] 26-AOT.md - Native AOT 支持
-
-#### 性能优化
-- [ ] 27-Performance.md - 性能优化最佳实践
-- [ ] 28-Benchmark.md - Benchmark 使用
+- [ ] 10-Event.md - Event 系统使用
+- [ ] 11-Timer.md - Timer 系统
 
 #### 部署运维
-- [ ] 29-Deployment.md - 服务器部署指南
-- [ ] 30-UnityIntegration.md - Unity 客户端集成详解
+- [ ] 14-Deployment.md - 服务器部署指南
 
 #### 示例项目
 - [ ] 31-ExampleConsole.md - Console 应用示例解析
@@ -182,61 +156,6 @@ Unity 客户端开发的完整指南。
 #### 常见问题
 - [ ] FAQ.md - 常见问题解答
 - [ ] Troubleshooting.md - 故障排查指南
-
----
-
-## 📖 推荐学习路径
-
-### 服务器端开发路径 🖥️
-
-如果你是**服务器端开发者**，建议按照以下顺序学习：
-
-1. **快速入门**
-   - [01-QuickStart-Server.md](00-GettingStarted/01-QuickStart-Server.md) - 安装和基本配置
-   - 🎯 **新手推荐**: 使用 Fantasy CLI 工具 (`fantasy init`) 一键创建项目
-   - ⚠️ **macOS/Linux 用户**: CLI 安装后如无法使用，请查看 [配置说明](../Fantasy.Packages/Fantasy.Cil/README.md)
-
-2. **配置和启动**
-   - [01-ServerConfiguration.md](01-Server/01-ServerConfiguration.md) - 理解配置文件格式
-   - [05-ConfigUsage.md](01-Server/05-ConfigUsage.md) - 在代码中使用配置
-   - [02-WritingStartupCode.md](01-Server/02-WritingStartupCode.md) - 编写启动代码
-   - [06-LogSystem.md](01-Server/06-LogSystem.md) - 日志系统配置和使用
-   - [07-NetworkProtocol.md](01-Server/07-NetworkProtocol.md) - 网络协议目录结构说明
-   - [08-NetworkProtocolExporter.md](01-Server/08-NetworkProtocolExporter.md) - 网络协议导出工具使用
-   - [03-CommandLineArguments.md](01-Server/03-CommandLineArguments.md) - 配置启动参数
-
-3. **场景初始化**
-   - [04-OnCreateScene.md](01-Server/04-OnCreateScene.md) - 场景创建事件处理
-
-4. **网络通信基础**
-   - [01-Session.md](03-Networking/01-Session.md) - Session 使用和消息发送
-   - [02-MessageHandler.md](03-Networking/02-MessageHandler.md) - 服务器端消息处理器实现
-
-5. **进阶主题**（规划中）
-   - ECS 系统详解
-   - 数据库集成
-   - 分布式通信
-   - 性能优化
-
----
-
-### Unity 客户端开发路径 📱
-
-如果你是 **Unity 客户端开发者**，建议按照以下顺序学习：
-
-1. **快速入门**
-   - [02-QuickStart-Unity.md](00-GettingStarted/02-QuickStart-Unity.md) - Unity 包安装和配置
-
-2. **客户端启动**
-   - [01-WritingStartupCode-Unity.md](02-Unity/01-WritingStartupCode-Unity.md) - Unity 启动代码编写
-
-3. **网络通信基础**
-   - [01-Session.md](03-Networking/01-Session.md) - Session 使用和消息发送
-
-4. **进阶主题**（规划中）
-   - Unity ECS 集成
-   - HybridCLR 热更新详解
-   - 客户端性能优化
 
 ---
 
@@ -274,71 +193,8 @@ Unity 客户端开发的完整指南。
 
 ---
 
-## 📊 文档编写进度
-
-| 分类 | 已完成 | 规划中 | 总计 | 进度 |
-|------|--------|--------|------|------|
-| **快速入门** | 2 | 0 | 2 | 100% ✅ |
-| **服务器端指南** | 8 | 0 | 8 | 100% ✅ |
-| **客户端指南** | 1 | 0 | 1 | 100% ✅ |
-| **网络通信基础** | 2 | 0 | 2 | 100% ✅ |
-| **进阶主题** | 3 | 29 | 32 | 9% 🚧 |
-| **总计** | **16** | **29** | **45** | **36%** |
-
-**最后更新**: 2025-11-20
-
----
-
 ## 🔗 相关资源
 
 - **GitHub**: https://github.com/qq362946/Fantasy
 - **官方网站**: https://www.code-fantasy.com/
 - **问题反馈**: https://github.com/qq362946/Fantasy/issues
-
----
-
-## 📝 更新日志
-
-### 2025-11-20
-- ✅ 新增 Scene 使用指南 (04-Advanced/CoreSystems/03-Scene.md)
-- ✅ 新增 FantasyRuntime 使用指南 (02-Unity/02-FantasyRuntime.md)
-- ✅ 重新编写网络协议导出工具  使用指南 (01-Server/08-NetworkProtocolExporter.md)
-- ✅ 包含服务端配置自动创建和客户端手动创建的区别
-- ✅ 更新文档进度统计
-
-### 2025-11-14
-- ✅ 新增 ECS 系统详解文档 (04-Advanced/CoreSystems/01-ECS.md)
-- ✅ 新增 ISupportedMultiEntity 多实例组件详解文档 (04-Advanced/CoreSystems/02-ISupportedMultiEntity.md)
-- ✅ 创建核心系统文档分类 (04-Advanced/CoreSystems/)
-- ✅ 在 01-ECS.md 中添加链接指向 02-ISupportedMultiEntity.md
-- ✅ 更新文档进度统计和编号
-
-### 2025-11-13
-- ✅ 新增网络通信基础主题 (03-Networking)
-- ✅ 添加 Session 使用指南 (03-Networking/01-Session.md)
-- ✅ 添加消息处理器实现指南 (03-Networking/02-MessageHandler.md)
-- ✅ 将原 03-Advanced 重新编号为 04-Advanced
-- ✅ 更新学习路径，添加网络通信基础内容
-- ✅ Fantasy.Cli init命令增加了执行目录参数
-
-### 2025-11-12
-- ✅ 修改文档中默认框架的版本号
-
-### 2025-11-08
-- ✅ 添加网络协议导出工具使用指南 (08-NetworkProtocolExporter.md)
-- ✅ 添加网络协议目录结构说明 (07-NetworkProtocol.md)
-- ✅ 添加日志系统使用指南 (06-LogSystem.md)
-- ✅ 添加 Fantasy CLI 脚手架工具说明
-- ✅ 更新快速入门文档，推荐使用脚手架工具
-- ✅ 更新macOS/Linu使用脚手架工具的注意事项
-
-### 2025-11-06
-- ✅ 重组文档结构，按功能模块分组
-- ✅ 更新文档命名规范
-- ✅ 完善学习路径指引
-- ✅ 添加进度追踪
-
-### 之前
-- ✅ 完成快速入门文档
-- ✅ 完成服务器端配置和启动文档
-- ✅ 完成 Unity 客户端启动文档
