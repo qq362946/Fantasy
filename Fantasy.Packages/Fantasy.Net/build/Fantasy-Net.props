@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!--
+    Fantasy.Net Main Entry Point (Direct Reference Only)
+
+    This file is ONLY imported for projects that DIRECTLY reference Fantasy.Net.
+    It is packed to: build/ (NOT buildTransitive/)
+
+    Purpose: Mark the project as a direct reference so that template files
+             will be copied on first build.
+  -->
+
+  <PropertyGroup>
+    <!-- Mark this project as directly referencing Fantasy.Net -->
+    <IsDirectFantasyNetReference>true</IsDirectFantasyNetReference>
+  </PropertyGroup>
+
+</Project>

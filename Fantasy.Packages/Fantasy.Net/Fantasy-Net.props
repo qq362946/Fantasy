@@ -1,9 +1,0 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-    <!-- 此文件只在 build/ 路径下，不会传递到间接引用 -->
-    <!-- 用于标记当前项目是直接引用 Fantasy-Net -->
-    <PropertyGroup>
-        <IsDirectFantasyNetReference>true</IsDirectFantasyNetReference>
-    </PropertyGroup>
-
-</Project>

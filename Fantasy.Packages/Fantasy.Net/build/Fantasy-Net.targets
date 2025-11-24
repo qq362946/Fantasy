@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="modules/DefineConstants.targets" />
+  <Import Project="modules/AutoDiscovery.targets" />
+  <Import Project="modules/CopyTemplate.targets" />
+  <Import Project="modules/CopyToOutput.targets" />
+</Project>

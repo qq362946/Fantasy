@@ -14,15 +14,45 @@ namespace Fantasy.SourceGenerator.Generators
     [Generator]
     public class FantasyConfigGenerator : IIncrementalGenerator
     {
+        private const string SourceItemGroupMetadata = "build_metadata.AdditionalFiles.SourceItemGroup";
+
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            // 查找 Fantasy.config 文件
+            // 查找 Fantasy.config 文件，使用 SourceItemGroup 元数据进行过滤
             var configFiles = context.AdditionalTextsProvider
-                .Where(static file => file.Path.EndsWith("Fantasy.config"))
-                .Select(static (text, cancellationToken) => text.GetText(cancellationToken)!.ToString())
+                .Combine(context.AnalyzerConfigOptionsProvider)
+                .Where(static pair =>
+                {
+                    var (file, configOptions) = pair;
+
+                    // 检查文件名是否以 Fantasy.config 结尾
+                    if (!file.Path.EndsWith("Fantasy.config", System.StringComparison.OrdinalIgnoreCase))
+                    {
+                        return false;
+                    }
+
+                    // 检查 SourceItemGroup 元数据，确保是 FantasyConfig
+                    // 如果没有元数据，为了向后兼容也接受（允许手动配置 AdditionalFiles 的场景）
+                    var options = configOptions.GetOptions(file);
+                    if (options.TryGetValue(SourceItemGroupMetadata, out var sourceItemGroup))
+                    {
+                        // 如果有元数据，必须是 FantasyConfig
+                        return sourceItemGroup == "FantasyConfig";
+                    }
+
+                    // 没有元数据，接受所有 Fantasy.config 文件（向后兼容）
+                    return true;
+                })
+                .Select(static (pair, cancellationToken) =>
+                {
+                    var (file, _) = pair;
+                    return file.GetText(cancellationToken)?.ToString();
+                })
                 .Collect();
+
             // 组合编译信息和配置文件
             var compilationAndConfig = context.CompilationProvider.Combine(configFiles);
+
             // 注册源代码输出
             context.RegisterSourceOutput(compilationAndConfig, static (spc, source) =>
             {
@@ -30,7 +60,7 @@ namespace Fantasy.SourceGenerator.Generators
                 {
                     return;
                 }
-                
+
                 if (!CompilationHelper.HasFantasyNETDefine(source.Left))
                 {
                     return;
