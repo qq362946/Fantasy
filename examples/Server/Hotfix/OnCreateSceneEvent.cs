@@ -3,96 +3,151 @@ using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
 using Fantasy.Event;
 using Fantasy.SeparateTable;
+using Fantasy.GenericExample;
 
-namespace Fantasy;
-
-public sealed class SaveEntity : Entity
+namespace Fantasy.GenericExample
 {
+    public enum ENUMA { }
+    public enum ENUMB { }
+    public enum ENUMC { }
 
-}
-
-[SeparateTable(typeof(SaveEntity), "SubSceneTestComponent")]
-public sealed class SubSceneTestComponent : Entity
-{
-    public override void Dispose()
+    //泛型实体, 以双泛型参数作例子, 实际上可以写得更复杂
+    public sealed class AGenericEntity<T1, T2> : Entity where T1 : Enum
     {
-        Log.Debug("销毁SubScene下的SubSceneTestComponent");
-        base.Dispose();
+
     }
-}
 
-public sealed class SubSceneTestComponentAwakeSystem : AwakeSystem<SubSceneTestComponent>
-{
-    protected override void Awake(SubSceneTestComponent self)
+    //泛型System
+    public class AGenericEntityAwake<T1, T2> : AwakeSystem<AGenericEntity<T1, T2>> where T1 : Enum
     {
-        Log.Debug("SubSceneTestComponentAwakeSystem");
-    }
-}
-
-public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
-{
-    private static long _addressableSceneRunTimeId;
-
-    /// <summary>
-    /// Handles the OnCreateScene event.
-    /// </summary> 
-    /// <param name="self">The OnCreateScene object.</param>
-    /// <returns>A task representing the asynchronous operation.</returns>
-    protected override async FTask Handler(OnCreateScene self)
-    {
-        var scene = self.Scene;
-
-        await FTask.CompletedTask;
-
-        switch (scene.SceneType)
+        protected override void Awake(AGenericEntity<T1, T2> self)
         {
-            case 6666:
+            Log.Warning($"Awake AGenericEntity<{typeof(T1)},{typeof(T2)}>");
+        }
+    }
+    public class AGenericEntityDestroy<T1, T2> : DestroySystem<AGenericEntity<T1, T2>> where T1 : Enum
+    {
+        protected override void Destroy(AGenericEntity<T1, T2> self)
+        {
+            Log.Warning($"Disposed AGenericEntity<{typeof(T1)},{typeof(T2)}>");
+        }
+    }
+
+    public sealed class TestEntityAwake : AwakeSystem<TestEntity>
+    {
+        protected override void Awake(TestEntity self)
+        {
+            GenricFunc<ENUMA>(self);
+        }
+
+        Type typeAB = typeof(AGenericEntity<ENUMA, ENUMB>);
+        Type typeAC = typeof(AGenericEntity<ENUMA, ENUMC>);
+
+        public static void GenricFunc<T>(TestEntity entity) where T : Enum
+        {
+           var ab = Entity.Create<AGenericEntity<T, ENUMB>>(entity.Scene, true, true);
+           var ac = Entity.Create(entity.Scene,typeof(AGenericEntity<T, ENUMC>), true, true);
+            ab.Dispose();
+            ac.Dispose();
+        }
+    }
+}
+
+namespace Fantasy
+{   
+    public sealed class SaveEntity : Entity
+    {
+    }
+
+    //测试类
+    public sealed class TestEntity : Entity { } 
+
+    [SeparateTable(typeof(SaveEntity), "SubSceneTestComponent")]
+    public sealed class SubSceneTestComponent : Entity
+    {
+        public override void Dispose()
+        {
+            Log.Debug("销毁SubScene下的SubSceneTestComponent");
+            base.Dispose();
+        }
+    }
+
+    public sealed class SubSceneTestComponentAwakeSystem : AwakeSystem<SubSceneTestComponent>
+    {
+        protected override void Awake(SubSceneTestComponent self)
+        {
+            Log.Debug("SubSceneTestComponentAwakeSystem");
+        }
+    }
+
+    public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
+    {
+        private static long _addressableSceneRunTimeId;
+
+        /// <summary>
+        /// Handles the OnCreateScene event.
+        /// </summary> 
+        /// <param name="self">The OnCreateScene object.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        protected override async FTask Handler(OnCreateScene self)
+        {
+            var scene = self.Scene;
+
+            await FTask.CompletedTask;
+
+            switch (scene.SceneType)
             {
-                break;
-            }
-            case SceneType.Addressable:
-            {
-                _addressableSceneRunTimeId = scene.RuntimeId;
-                break;
-            }
-            case SceneType.Map:
-            {
-                Log.Debug($"Map Scene SceneRuntimeId:{scene.RuntimeId}");
-                break;
-            }
-            case SceneType.Chat:
-            {
-                break;
-            }
-            case SceneType.Gate:
-            {
-                // var saveEntity = await scene.World.Database.Query<SaveEntity>(459439609634619405,true);
-                // await saveEntity.LoadWithSeparateTables(scene.World.Database);
-                //
-                // Log.Debug($"{saveEntity.GetComponent<SubSceneTestComponent>()!=null}");
-                // var saveEntity = Entity.Create<SaveEntity>(scene, true, false);
-                // saveEntity.AddComponent<SubSceneTestComponent>();
-                // await saveEntity.PersistAggregate(scene.World.Database);
-                // var tasks = new List<FTask>(2000);
-                // var session = scene.GetSession(_addressableSceneRunTimeId);
-                // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
-                // var g2ATestRequest = new G2A_TestRequest();
-                //
-                // async FTask Call()
-                // {
-                //     await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,g2ATestRequest);
-                // }
-                //
-                // for (int i = 0; i < 100000000000; i++)
-                // {
-                //     tasks.Clear();
-                //     for (int j = 0; j < tasks.Capacity; ++j)
-                //     {
-                //         tasks.Add(Call());
-                //     }
-                //     await FTask.WaitAll(tasks);
-                // }
-                break;
+                case 6666:
+                    {
+                        break;
+                    }
+                case SceneType.Addressable:
+                    {
+                        _addressableSceneRunTimeId = scene.RuntimeId;
+                        break;
+                    }
+                case SceneType.Map:
+                    {
+                        Log.Debug($"Map Scene SceneRuntimeId:{scene.RuntimeId}");
+                        break;
+                    }
+                case SceneType.Chat:
+                    {
+                        break;
+                    }
+                case SceneType.Gate:
+                    {
+
+                        //Entity.Create<TestEntity>(scene, true, true);
+
+                        // var saveEntity = await scene.World.Database.Query<SaveEntity>(459439609634619405,true);
+                        // await saveEntity.LoadWithSeparateTables(scene.World.Database);
+                        //
+                        // Log.Debug($"{saveEntity.GetComponent<SubSceneTestComponent>()!=null}");
+                        // var saveEntity = Entity.Create<SaveEntity>(scene, true, false);
+                        // saveEntity.AddComponent<SubSceneTestComponent>();
+                        // await saveEntity.PersistAggregate(scene.World.Database);
+                        // var tasks = new List<FTask>(2000);
+                        // var session = scene.GetSession(_addressableSceneRunTimeId);
+                        // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
+                        // var g2ATestRequest = new G2A_TestRequest();
+                        //
+                        // async FTask Call()
+                        // {
+                        //     await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,g2ATestRequest);
+                        // }
+                        //
+                        // for (int i = 0; i < 100000000000; i++)
+                        // {
+                        //     tasks.Clear();
+                        //     for (int j = 0; j < tasks.Capacity; ++j)
+                        //     {
+                        //         tasks.Add(Call());
+                        //     }
+                        //     await FTask.WaitAll(tasks);
+                        // }
+                        break;
+                    }
             }
         }
     }

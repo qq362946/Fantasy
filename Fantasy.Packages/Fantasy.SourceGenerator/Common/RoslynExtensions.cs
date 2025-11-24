@@ -80,13 +80,39 @@ namespace Fantasy.SourceGenerator.Common
         }
 
         /// <summary>
-        /// 检查类型是否可以被实例化（非抽象、非接口、非泛型定义）
+        /// 检查类型是否可以被实例化（非抽象、非接口、非无参泛型、非开放式泛型、非静态）
         /// </summary>
         public static bool IsInstantiable(this INamedTypeSymbol typeSymbol)
         {
-            // 允许：具体的类（非抽象、非静态）
-            // 排除：抽象类、静态类、接口、开放泛型类型（如 MyClass<T> where T 未指定）
-            return typeSymbol is { IsAbstract: false, IsStatic: false, TypeKind: TypeKind.Class };
+            return typeSymbol.IsSpecific() && !typeSymbol.IsOpenGeneric();
+        }
+
+        /// <summary>
+        /// 是具体的。排除：抽象、静态、接口、无参泛型。
+        /// </summary>
+        public static bool IsSpecific(this INamedTypeSymbol typeSymbol) {
+            return typeSymbol is { IsAbstract: false, IsStatic: false, TypeKind: TypeKind.Class, IsUnboundGenericType: false };
+        }
+
+        /// <summary>
+        /// 是否为开放式泛型(递归检查)
+        /// </summary>
+        public static bool IsOpenGeneric(this ITypeSymbol typeSymbol)
+        {
+            if (typeSymbol is INamedTypeSymbol namedType)
+            {
+                // 顶层类型参数是开放类型
+                if (namedType.TypeArguments.Any(ta => ta.TypeKind == TypeKind.TypeParameter))
+                    return true;
+
+                // 递归检查
+                foreach (var ta in namedType.TypeArguments)
+                {
+                    if (ta.IsOpenGeneric())
+                        return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>

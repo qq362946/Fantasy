@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.Immutable;
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 
 namespace Fantasy.SourceGenerator.Generators
@@ -18,54 +19,166 @@ namespace Fantasy.SourceGenerator.Generators
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            // 查找所有实现了 IEntitySystem 相关接口的类
+            // 查找所有 System 类
             var systemTypes = context.SyntaxProvider
                 .CreateSyntaxProvider(
                     predicate: static (node, _) => IsSystemClass(node),
-                    transform: static (ctx, _) => GetSystemTypeInfo(ctx))
-                .Where(static info => info != null)
+                    transform: static (ctx, _) => GetSystemSymbol(ctx))
+                .Where(static symbol => symbol != null)
                 .Collect();
-            // 组合编译信息和找到的类型
-            var compilationAndTypes = context.CompilationProvider.Combine(systemTypes);
-            // 注册源代码输出
-            context.RegisterSourceOutput(compilationAndTypes, static (spc, source) =>
-            {
-                if (CompilationHelper.IsSourceGeneratorDisabled(source.Left))
-                {
-                    return;
-                }
-                
-                if (!CompilationHelper.HasFantasyDefine(source.Left))
-                {
-                    return;
-                }
-                
-                if (source.Left.GetTypeByMetadataName("Fantasy.Assembly.IEntitySystemRegistrar") == null)
-                {
-                    return;
-                }
 
-                GenerateRegistrationCode(spc, source.Left, source.Right!);
+            // 查找代码中所有使用到的闭合泛型 Entity
+            var usedClosedGenericEntities = context.SyntaxProvider
+                .CreateSyntaxProvider(
+                    predicate: static (node, _) => IsGenericEntityUsage(node),
+                    transform: static (ctx, _) => GetClosedEntitySymbol(ctx))
+                .Where(static symbol => symbol != null)
+                .Collect()
+                .Select(static (types, _) => types.Distinct<INamedTypeSymbol>(SymbolEqualityComparer.Default).ToImmutableArray());
+
+            // 根据 闭合Entity 处理 System
+            var finalSystemInfos = systemTypes.Combine(usedClosedGenericEntities)
+                .Select((tuple, _) =>
+            {
+                var systems = tuple.Left;
+                var usedEntities = tuple.Right;
+                var result = new List<EntitySystemTypeInfo>();
+
+                foreach (var systemSymbol in systems)
+                {
+                    // 泛型System
+                    if (systemSymbol!.IsOpenGeneric()) 
+                    {
+                        foreach (var entitySymbol in usedEntities)
+                        {
+                            // 尝试为 闭合Entity 构造 闭合System
+                            if (TryCreateClosedSystemInfo(systemSymbol!, entitySymbol!, out var info))
+                            {
+                                result.Add(info!);
+                            }
+                        }
+                    }
+                    else // 普通 System
+                    {
+                        var info = CreateInfoFromSymbol(systemSymbol!);
+                        if (info != null)
+                        {
+                            result.Add(info);
+                        }
+                    }
+                }
+                return result;
+            });
+
+            //组合编译信息输出
+           var source = context.CompilationProvider.Combine(finalSystemInfos);
+            context.RegisterSourceOutput(source, (spc, source) =>
+            {
+                if (CompilationHelper.IsSourceGeneratorDisabled(source.Left)) return;
+                if (!CompilationHelper.HasFantasyDefine(source.Left)) return;
+                if (source.Left.GetTypeByMetadataName("Fantasy.Assembly.IEntitySystemRegistrar") == null) return;
+
+                GenerateRegistrationCode(spc, source.Left, source.Right);
             });
         }
-        
-        private static EntitySystemTypeInfo? GetSystemTypeInfo(GeneratorSyntaxContext context)
+
+
+        #region Predicate & Transform
+
+        private static INamedTypeSymbol? GetSystemSymbol(GeneratorSyntaxContext context)
         {
             var classDecl = (ClassDeclarationSyntax)context.Node;
+            var symbol = context.SemanticModel.GetDeclaredSymbol(classDecl) as INamedTypeSymbol;
+            if (symbol == null || symbol.IsAbstract) return null; // 忽略抽象类
 
-            if (context.SemanticModel.GetDeclaredSymbol(classDecl) is not INamedTypeSymbol symbol || !symbol.IsInstantiable())
-            {
+            // 目标实体不能是闭合泛型
+            var targetEntityArg = GetSystemTargetEntityArg(symbol!);
+            if(targetEntityArg == null) return null;
+            if(targetEntityArg.IsGenericType && !targetEntityArg.IsOpenGeneric()) return null;
+
+            return symbol;
+        }
+
+        // 判断代码中使用到的闭合泛型 Entity
+        private static bool IsGenericEntityUsage(SyntaxNode node) => node is GenericNameSyntax;
+
+        private static INamedTypeSymbol? GetClosedEntitySymbol(GeneratorSyntaxContext context)
+        {
+            if (context.Node is not GenericNameSyntax genericName) return null;
+
+            var symbolInfo = context.SemanticModel.GetSymbolInfo(genericName);
+            var symbol = symbolInfo.Symbol as INamedTypeSymbol;
+
+            if (symbol == null) return null;
+            if (symbol.IsOpenGeneric()) return null; // 确保是闭合泛型
+
+            // 检查继承自 Entity
+            if (!EntityTypeCollectionGenerator.InheritsFromEntitySymbol(symbol)) return null;
+
+            return symbol;
+        }
+
+        #endregion
+
+        #region Generic Analysis
+
+        /// <summary>
+        /// 获取System类的目标实体参数
+        /// </summary>
+        private static INamedTypeSymbol? GetSystemTargetEntityArg(INamedTypeSymbol systemSymbol) {
+            var baseType = systemSymbol.BaseType;
+
+            if (!baseType.IsGenericType) 
                 return null;
+
+            return baseType.TypeArguments.FirstOrDefault() as INamedTypeSymbol;
+        }
+
+        ///<summary>
+        /// NOTE : 需要提高完备性
+        /// 尝试将一个 开放泛型System 和一个 闭合泛型Entity 进行匹配, 
+        /// 并生成闭合的 System 信息。
+        ///</summary>
+        private static bool TryCreateClosedSystemInfo(INamedTypeSymbol systemSymbol, INamedTypeSymbol entitySymbol, out EntitySystemTypeInfo? info)
+        {
+            // 1. 获取 System 关注的实体基类型 (从 AwakeSystem<T> 中提取 T)
+            var targetEntityArg = GetSystemTargetEntityArg(systemSymbol);
+            info = null;
+
+            // 2. 检查 Entity 是否匹配 System 的定义
+
+            // 比如 泛型System 的参数结构 AGenericEntity<T1, T2> 与对应的实体 AGenericEntity<EnumA, EnumB>, 
+            // 它们的 ConstructedFrom 必须吻合
+
+            if (!SymbolEqualityComparer.Default.Equals(targetEntityArg.ConstructedFrom, entitySymbol.ConstructedFrom))
+                return false;
+
+            // 3. 检查参数数量是否相等
+            var systemTypeArgs = entitySymbol.TypeArguments.ToArray();
+            if (systemTypeArgs.Length != systemSymbol.TypeParameters.Length) return false;
+
+            // 4. 构造闭合的 System 类型
+            // 使用 Entity 的泛型参数 (EnumA, EnumB) 来填充 System 的泛型参数
+            try
+            {
+                var constructedSystemSymbol = systemSymbol.Construct(systemTypeArgs);
+                info = CreateInfoFromSymbol(constructedSystemSymbol);
+                return info != null;
             }
-            
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static EntitySystemTypeInfo? CreateInfoFromSymbol(INamedTypeSymbol symbol)
+        {
             var baseType = symbol.BaseType;
+            if (baseType == null) return null;
 
-            if (!baseType.IsGenericType)
-            {
-                return null;
-            }
-       
-            return baseType.Name switch
+            var typeName = baseType.ConstructedFrom.Name;
+
+            return typeName switch
             {
                 "AwakeSystem" => EntitySystemTypeInfo.Create(EntitySystemType.AwakeSystem, symbol),
                 "UpdateSystem" => EntitySystemTypeInfo.Create(EntitySystemType.UpdateSystem, symbol),
@@ -75,7 +188,9 @@ namespace Fantasy.SourceGenerator.Generators
                 _ => null
             };
         }
-        
+
+        #endregion
+
         private static void GenerateRegistrationCode(
             SourceProductionContext context,
             Compilation compilation,
@@ -218,16 +333,12 @@ namespace Fantasy.SourceGenerator.Generators
         private static bool IsSystemClass(SyntaxNode node)
         {
             if (node is not ClassDeclarationSyntax classDecl)
-            {
                 return false;
-            }
 
             // 必须有基类型列表（继承抽象类）
             if (classDecl.BaseList == null || classDecl.BaseList.Types.Count == 0)
-            {
                 return false;
-            }
-            
+
             // 快速检查是否包含可能的 EntitySystem 基类名称
             var baseListText = classDecl.BaseList.ToString();
             return baseListText.Contains("AwakeSystem") ||
@@ -275,7 +386,7 @@ namespace Fantasy.SourceGenerator.Generators
             public static EntitySystemTypeInfo Create(EntitySystemType entitySystemType, INamedTypeSymbol symbol)
             {
                 // 获取泛型参数 T (例如：AwakeSystem<T> 中的 T)
-                var entityType = symbol.BaseType?.TypeArguments.FirstOrDefault();
+                var entityType = GetSystemTargetEntityArg(symbol);
                 var entityTypeFullName = entityType?.GetFullName(false) ?? "Unknown";
 
                 // // 使用与运行时相同的算法计算哈希值

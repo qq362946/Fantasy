@@ -8,36 +8,28 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Fantasy.SourceGenerator.Generators
 {
     [Generator]
-    public partial class EntityTypeCollectionGenerate : IIncrementalGenerator
+    public partial class EntityTypeCollectionGenerator : IIncrementalGenerator
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            // 查找所有实现了 EventSystem 相关抽象类的类
+            // 查找所有 Entity 类定义以及泛型实体的闭合使用
             var protoBufTypes = context.SyntaxProvider
                 .CreateSyntaxProvider(
-                    predicate: static (node, _) => IsEntityClass(node),
+                    predicate: static (node, _) => IsEntityTarget(node), 
                     transform: static (ctx, _) => GetEntityTypeInfo(ctx))
                 .Where(static info => info != null)
-                .Collect();
+                .Collect()
+                .Select(static (types, _) => types.Distinct().ToList());
+
             // 组合编译信息和找到的类型
             var compilationAndTypes = context.CompilationProvider.Combine(protoBufTypes);
-            // 注册源代码输出
+
+            // 源码输出
             context.RegisterSourceOutput(compilationAndTypes, static (spc, source) =>
             {
-                if (CompilationHelper.IsSourceGeneratorDisabled(source.Left))
-                {
-                    return;
-                }
-                
-                if (!CompilationHelper.HasFantasyDefine(source.Left))
-                {
-                    return;
-                }
-                
-                if (source.Left.GetTypeByMetadataName("Fantasy.Assembly.IEntityTypeCollectionRegistrar") == null)
-                {
-                    return;
-                }
+                if (CompilationHelper.IsSourceGeneratorDisabled(source.Left)) return;
+                if (!CompilationHelper.HasFantasyDefine(source.Left)) return;
+                if (source.Left.GetTypeByMetadataName("Fantasy.Assembly.IEntityTypeCollectionRegistrar") == null) return;
 
                 GenerateRegistrationCode(spc, source.Left, source.Right!);
             });
@@ -112,82 +104,79 @@ namespace Fantasy.SourceGenerator.Generators
             }
             
             builder.EndMethod();
-        }
-        
-        private static bool IsEntityClass(SyntaxNode node)
+        }       
+
+        private static bool IsEntityTarget(SyntaxNode node)
         {
-            if (node is not ClassDeclarationSyntax classDecl)
-            {
-                return false;
-            }
-            // 必须有基类型列表（实现接口）
-            return classDecl.BaseList != null && classDecl.BaseList.Types.Any();
-        }
-        
-        private static EntityTypeInfo? GetEntityTypeInfo(GeneratorSyntaxContext context)
-        {
-            var classDecl = (ClassDeclarationSyntax)context.Node;
-            var semanticModel = context.SemanticModel;
-            
-            // 检查是否继承自 Entity 或 Entity<T>
-            if (!InheritsFromEntity(classDecl, semanticModel))
-            {
-                return null;
-            }
-            
-            var symbol = context.SemanticModel.GetDeclaredSymbol(classDecl) as INamedTypeSymbol;
+            // 普通的实体类定义
+            if (node is ClassDeclarationSyntax classDecl)
+                return classDecl.BaseList != null && classDecl.BaseList.Types.Any();
 
-            if (symbol == null || !symbol.IsInstantiable())
-            {
-                return null;
-            }
-            
-            return new EntityTypeInfo(
-                symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                symbol.Name
-            );
-        }
-        
-        private static bool InheritsFromEntity(ClassDeclarationSyntax classDecl, SemanticModel semanticModel)
-        {
-            if (classDecl.BaseList == null)
-            {
-                return false;
-            }
-
-            foreach (var baseType in classDecl.BaseList.Types)
-            {
-                var typeInfo = semanticModel.GetTypeInfo(baseType.Type);
-                var baseTypeSymbol = typeInfo.Type as INamedTypeSymbol;
-
-                if (baseTypeSymbol == null)
-                {
-                    continue;
-                }
-
-                // 检查是否是 Entity（非泛型）
-                if (baseTypeSymbol.Name == "Entity" && baseTypeSymbol.Arity == 0)
-                {
-                    return true;
-                }
-
-                // 检查是否是 Entity<T>（泛型）
-                if (baseTypeSymbol.IsGenericType)
-                {
-                    var originalDef = baseTypeSymbol.OriginalDefinition;
-                    if (originalDef.Name == "Entity" && originalDef.Arity == 1)
-                    {
-                        return true;
-                    }
-                }
-            }
+            // 泛型写法
+            if (node is GenericNameSyntax)
+                return true;
 
             return false;
         }
-        
+
+        private static EntityTypeInfo? GetEntityTypeInfo(GeneratorSyntaxContext context)
+        {
+            var node = context.Node;
+            INamedTypeSymbol? symbol = null;
+
+            if (node is ClassDeclarationSyntax classDecl)
+            {
+                symbol = context.SemanticModel.GetDeclaredSymbol(classDecl) as INamedTypeSymbol;
+            }
+            else if (node is GenericNameSyntax genericName)
+            {
+                // 获取泛型名称对应的类型符号
+                var symbolInfo = context.SemanticModel.GetSymbolInfo(genericName);
+                symbol = symbolInfo.Symbol as INamedTypeSymbol;
+            }
+
+            if (symbol == null)
+                return null;
+
+            //排除非实体
+            if (!InheritsFromEntitySymbol(symbol))
+                return null;
+
+            //排除不可实例化的
+            if (!symbol.IsInstantiable())
+                return null;
+
+            if (symbol.IsGenericType) return new EntityTypeInfo(
+                    symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+                    symbol.Name ); // 注册闭合泛型实体
+            else return new EntityTypeInfo(
+                        symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+                        symbol.Name ); // 注册普通实体类型
+        }
+
         private sealed record EntityTypeInfo(
             string EntityTypeFullName,
             string EntityTypeName
         );
+
+        /// <summary>
+        /// 检查符号是否继承自 Entity
+        /// </summary>
+        public static bool InheritsFromEntitySymbol(INamedTypeSymbol? symbol)
+        {
+            var current = symbol;
+            while (current != null)
+            {
+                // 基类是否是Fantasy.Entitas.Entity
+                if (current.Name == "Entity" && current.Arity == 0)
+                {
+                    if (current.ContainingNamespace.ToDisplayString() == "Fantasy.Entitas") 
+                        return true;
+                }
+
+                current = current.BaseType;
+            }
+            return false;
+        }
     }
 }

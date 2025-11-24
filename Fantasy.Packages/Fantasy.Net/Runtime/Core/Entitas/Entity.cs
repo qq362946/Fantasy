@@ -970,12 +970,4 @@ namespace Fantasy.Entitas
 
         #endregion
     }
-
-    /// <summary>
-    /// Entity的泛型抽象类，如果使用泛型Entity必须继承这个接口才可以使用
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract partial class Entity<T> : Entity
-    {
-    }
 }

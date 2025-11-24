@@ -1,5 +1,6 @@
 using Fantasy.SourceGenerator.Common;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Fantasy.SourceGenerator.Generators
@@ -11,7 +12,7 @@ namespace Fantasy.SourceGenerator.Generators
         {
             var poolTypes = context.SyntaxProvider
                 .CreateSyntaxProvider(
-                    predicate: static (node, _) => IsPoolClass(node),
+                    predicate: static (node, _) => PotentialSyntax(node),
                     transform: static (ctx, _) => GetPoolTypeInfo(ctx))
                 .Where(static info => info != null)
                 .Collect();
@@ -39,44 +40,49 @@ namespace Fantasy.SourceGenerator.Generators
             });
         }
 
-        private static bool IsPoolClass(SyntaxNode node)
+        private static bool PotentialSyntax(SyntaxNode node)
         {
-            return node is ClassDeclarationSyntax classDecl && classDecl.Modifiers.All(m => m.Text != "abstract");
+            //拿到非抽象类定义和闭合泛型使用
+            return (node is ClassDeclarationSyntax classDecl &&
+                !classDecl.Modifiers.Any(m => m.IsKind(SyntaxKind.AbstractKeyword))) || 
+                node is GenericNameSyntax;
         }
 
         private static string? GetPoolTypeInfo(GeneratorSyntaxContext context)
         {
-            var classDeclaration = (ClassDeclarationSyntax)context.Node;
-            var symbol = context.SemanticModel.GetDeclaredSymbol(classDeclaration) as INamedTypeSymbol;
+            var symbol = context.Node switch
+            {
+                ClassDeclarationSyntax classDecl => context.SemanticModel.GetDeclaredSymbol(classDecl),
+                GenericNameSyntax genericName => context.SemanticModel.GetTypeInfo(genericName).Type as INamedTypeSymbol,
+                _ => null
+            };
 
-            if (symbol == null || symbol.IsAbstract || symbol.DeclaredAccessibility != Accessibility.Public)
+            if (symbol is null || !IsValidPoolType(symbol))
             {
                 return null;
             }
 
-            if (symbol.IsGenericType)
-            {
-                return null;
-            }
+            return symbol.GetFullName();            
+        }
 
-            var hasParameterlessConstructor = symbol.Constructors.Any(c =>
-                c.Parameters.Length == 0 && (c.DeclaredAccessibility == Accessibility.Public ||
-                                             c.DeclaredAccessibility == Accessibility.Internal));
+        private static bool IsValidPoolType(INamedTypeSymbol s)
+        {
+            if (s.DeclaredAccessibility != Accessibility.Public || s.IsAbstract)
+                return false;
 
-            if (!hasParameterlessConstructor)
-            {
-                return null;
-            }
+            if (s.IsOpenGeneric())
+                return false;
 
-            var implementsIPool = symbol.AllInterfaces.Any(i =>
-                i.Name == "IPool" && i.ContainingNamespace.ToString() == "Fantasy.Pool");
+            var implementsIPool = s.AllInterfaces.Any(i =>
+                i.Name == "IPool" &&
+                i.ContainingNamespace.ToString() == "Fantasy.Pool");
 
             if (!implementsIPool)
-            {
-                return null;
-            }
-            
-            return symbol.GetFullName();
+                return false;
+
+            return s.Constructors.Any(c =>
+                c.Parameters.Length == 0 &&
+                (c.DeclaredAccessibility == Accessibility.Public || c.DeclaredAccessibility == Accessibility.Internal));
         }
 
         private static void GeneratePoolCreators(
