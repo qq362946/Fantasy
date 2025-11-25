@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Condition="Exists('$(ProjectDir)Fantasy.config')">
+    <None Include="$(ProjectDir)Fantasy.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Fantasy.config</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup Condition="Exists('$(ProjectDir)Fantasy.xsd')">
+    <None Include="$(ProjectDir)Fantasy.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Fantasy.xsd</Link>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="_FantasyCopyTemplateFiles"
+          BeforeTargets="PreBuildEvent;CoreCompile"
+          Condition="'$(IsDirectFantasyNetReference)' == 'true'">
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../Fantasy.config"
+          DestinationFolder="$(ProjectDir)"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(MSBuildThisFileDirectory)../Fantasy.config') And !Exists('$(ProjectDir)Fantasy.config')" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)../Fantasy.xsd"
+          DestinationFolder="$(ProjectDir)"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(MSBuildThisFileDirectory)../Fantasy.xsd') And !Exists('$(ProjectDir)Fantasy.xsd')" />
+    
+    <Message Text="[Fantasy.Net] Copied template configuration files to project"
+             Importance="high"
+             Condition="!Exists('$(ProjectDir)Fantasy.config')" />
+  </Target>
+</Project>

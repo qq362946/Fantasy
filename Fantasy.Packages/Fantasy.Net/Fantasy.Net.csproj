@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Fantasy-Net</PackageId>
-        <PackageVersion>2025.2.1401</PackageVersion>
+        <PackageVersion>2025.2.1402</PackageVersion>
         <Title>Fantasy-Net</Title>
         <Authors>qq362946</Authors>
         <owners>qq362946</owners>
@@ -50,11 +50,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!-- MSBuild props：仅直接引用（不传递），用于标记直接引用 -->
-        <None Include="Fantasy-Net.props" Pack="true" PackagePath="build" />
-        <!-- MSBuild targets：传递到所有引用项目 -->
-        <None Include="Fantasy-Net.targets" Pack="true" PackagePath="build;buildTransitive" />
-        <!-- 配置文件：放到两个路径，targets 可以从任意路径访问 -->
+        <!-- Fantasy-Net.props: 仅直接引用（标记 IsDirectFantasyNetReference） -->
+        <None Include="build\Fantasy-Net.props" Pack="true" PackagePath="build" />
+        <!-- Fantasy-Net.targets: 传递到所有引用项目（导入所有模块） -->
+        <None Include="build\Fantasy-Net.targets" Pack="true" PackagePath="build;buildTransitive" />
+        <!-- MSBuild Modules -->
+        <None Include="build\modules\*.targets" Pack="true" PackagePath="build\modules;buildTransitive\modules" />
+        <!-- 配置文件模板：供 CopyTemplate 模块使用 -->
         <None Include="Fantasy.config" Pack="true" PackagePath="build;buildTransitive" />
         <None Include="Fantasy.xsd" Pack="true" PackagePath="build;buildTransitive" />
         <!-- 包元数据文件 -->
@@ -62,12 +64,9 @@
         <None Include="LICENSE" Pack="true" PackagePath="\" />
         <None Include="README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
-
-    <!-- Source Generator Reference -->
     <ItemGroup>
       <ProjectReference Include="..\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" SetTargetFramework="TargetFramework=netstandard2.0" />
     </ItemGroup>
-
     <!-- 将 Source Generator 打包到 NuGet -->
     <ItemGroup>
         <!-- 获取 Fantasy.SourceGenerator 的输出 DLL -->
@@ -79,5 +78,6 @@
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
       <PackageReference Include="System.IO.Pipelines" Version="9.0.10" />
     </ItemGroup>
-
+    <Import Project="build\Fantasy-Net.props" />
+    <Import Project="build\Fantasy-Net.targets" />
 </Project>

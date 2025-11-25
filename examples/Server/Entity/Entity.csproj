@@ -19,15 +19,11 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\Fantasy.Packages\Fantasy.Net\Fantasy.Net.csproj" />
     </ItemGroup>
-
-    <!-- Source Generator Reference -->
+    
     <ItemGroup>
       <ProjectReference Include="..\..\..\Fantasy.Packages\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
     <ItemGroup>
-      <AdditionalFiles Include="Fantasy.config">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </AdditionalFiles>
       <None Update="NLog.config">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
@@ -44,5 +40,10 @@
     <ItemGroup>
       <Folder Include="Generate\NetworkProtocol\" />
     </ItemGroup>
-
+    <ItemGroup>
+      <None Remove="Fantasy.config" />
+      <AdditionalFiles Include="Fantasy.config">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AdditionalFiles>
+    </ItemGroup>
 </Project>
