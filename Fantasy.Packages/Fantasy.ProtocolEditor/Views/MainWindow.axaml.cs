@@ -313,7 +313,7 @@ public partial class MainWindow : Window
         // Ctrl+S 或 Cmd+S 保存
         else if ((e.KeyModifiers == KeyModifiers.Control || e.KeyModifiers == KeyModifiers.Meta) && e.Key == Key.S)
         {
-            SaveCurrentFile();
+            SaveAllFiles();
             e.Handled = true;
         }
         // Ctrl+F 或 Cmd+F 查找
@@ -378,6 +378,13 @@ public partial class MainWindow : Window
             TextEditor.Redo();
     }
 
+    /// <summary>
+    /// 保存
+    /// </summary>
+    private void OnSaveMenuClick(object? sender, RoutedEventArgs e)
+    {
+        SaveAllFiles(); 
+    }
 
     /// <summary>
     /// 菜单打开文件夹点击事件
@@ -408,14 +415,6 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 菜单保存点击事件
-    /// </summary>
-    private void OnSaveMenuClick(object? sender, RoutedEventArgs e)
-    {
-        SaveCurrentFile();
-    }
-
-    /// <summary>
     /// 保存当前文件
     /// </summary>
     public void SaveCurrentFile()
@@ -441,6 +440,45 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             viewModel.OutputText += $"保存文件时出错：{ex.Message}\n";
+        }
+    }
+
+    /// <summary>
+    /// 保存所有文件
+    /// </summary>
+    public void SaveAllFiles()
+    {
+        if (DataContext is not MainWindowViewModel viewModel)
+            return;
+
+        if (viewModel.OpenedTabs == null || viewModel.OpenedTabs.Count == 0)
+        {
+            viewModel.OutputText += "没有可保存的文件。\n";
+            return;
+        }
+
+        foreach (var tab in viewModel.OpenedTabs)
+        {
+            if (string.IsNullOrEmpty(tab.FilePath))
+            {
+                viewModel.OutputText += $"跳过未保存文件：{tab.FileName}\n";
+                continue;
+            }
+
+            try
+            {
+                var textToSave = tab.Document?.Text;
+                if (textToSave != null)
+                {
+                    System.IO.File.WriteAllText(tab.FilePath, textToSave);
+                    tab.IsModified = false;
+                    viewModel.OutputText += $"已保存：{tab.FileName}\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                viewModel.OutputText += $"保存 {tab.FileName} 时出错：{ex.Message}\n";
+            }
         }
     }
 
