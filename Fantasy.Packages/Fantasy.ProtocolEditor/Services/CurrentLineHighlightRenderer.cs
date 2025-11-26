@@ -51,7 +51,7 @@ public class CurrentLineHighlightRenderer : IBackgroundRenderer
 
                     // 绘制黑色背景
                     drawingContext.DrawRectangle(
-                        new SolidColorBrush(Color.Parse("#000000")),
+                        new SolidColorBrush(Color.Parse("#131314")),
                         null,
                         expandedRect
                     );

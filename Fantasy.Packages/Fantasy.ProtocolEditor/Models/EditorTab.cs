@@ -84,4 +84,25 @@ public partial class EditorTab : ObservableObject
         _document = new TextDocument();
         _editorType = editorType;
     }
+
+    string _nameCache = string.Empty;
+    const string UnSaved = "(未保存)";
+
+    partial void OnIsModifiedChanged(bool value)
+    {
+        if (value)
+        {
+            // 文件名加上星号
+            if(!FileName.StartsWith(UnSaved))
+            {
+                _nameCache = _fileName;
+                FileName = $"{UnSaved}{_fileName}";
+            }
+        }
+        else 
+        {
+            // 恢复原始文件名
+            FileName = _nameCache;
+        }
+    }
 }

@@ -11,7 +11,7 @@ using Fantasy.ProtocolExportTool.Generators.Validators;
 using Fantasy.ProtocolExportTool.Models;
 using Spectre.Console;
 
-namespace Fantasy.ProtocolExportTool.Interface;
+namespace Fantasy.ProtocolExportTool.Abstract;
 
 public abstract partial class AProtocolExporter( string protocolDirectory, string clientDirectory, string serverDirectory, ProtocolExportType protocolExportType)
 {

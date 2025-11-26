@@ -17,6 +17,7 @@ using AvaloniaEdit.Highlighting.Xshd;
 using AvaloniaEdit.CodeCompletion;
 using Fantasy.ProtocolEditor.ViewModels;
 using Fantasy.ProtocolEditor.Services;
+using Avalonia.Media;
 
 namespace Fantasy.ProtocolEditor.Views;
 
@@ -145,6 +146,9 @@ public partial class MainWindow : Window
         // 切换到新标签的文档
         TextEditor.Document = tab.Document;
 
+        // 重置撤销栈，避免 Ctrl+Z 清空文本
+        TextEditor.Document.UndoStack.ClearAll();
+
         // 订阅新文档的文本变化事件
         if (TextEditor.Document != null)
         {
@@ -233,6 +237,9 @@ public partial class MainWindow : Window
         _currentLineRenderer = new CurrentLineHighlightRenderer(TextEditor, verticalPadding: 4);
         TextEditor.TextArea.TextView.BackgroundRenderers.Add(_currentLineRenderer);
 
+        TextEditor.TextArea.SelectionBrush = new SolidColorBrush(Color.Parse("#6599BB")); // 调整选中背景
+        TextEditor.TextArea.SelectionForeground = new SolidColorBrush(Colors.White);      // 调整选中文本颜色
+
         // 订阅光标位置变化事件，重绘当前行
         TextEditor.TextArea.Caret.PositionChanged += (s, e) => TextEditor.TextArea.TextView.InvalidateVisual();
 
@@ -245,7 +252,7 @@ public partial class MainWindow : Window
 
         if (DataContext is MainWindowViewModel vm)
         {
-            vm.OutputText += "编辑器已就绪，支持 Protobuf 语法高亮、验证和自动补全。\n";
+            vm.OutputText += "编辑器已就绪。\n";
         }
     }
 
@@ -306,7 +313,7 @@ public partial class MainWindow : Window
         // Ctrl+S 或 Cmd+S 保存
         else if ((e.KeyModifiers == KeyModifiers.Control || e.KeyModifiers == KeyModifiers.Meta) && e.Key == Key.S)
         {
-            SaveCurrentFile();
+            SaveAllFiles();
             e.Handled = true;
         }
         // Ctrl+F 或 Cmd+F 查找
@@ -333,6 +340,50 @@ public partial class MainWindow : Window
             CloseFindPanel();
             e.Handled = true;
         }
+        // Ctrl+Z  撤销
+        else if (e.KeyModifiers.HasFlag(KeyModifiers.Control) && e.Key == Key.Z)
+        {
+            if (TextEditor.CanUndo)
+                TextEditor.Undo();
+
+            e.Handled = true;
+            return;
+        }
+        // Ctrl+Y  重做
+        else if (e.KeyModifiers.HasFlag(KeyModifiers.Control) && e.Key == Key.Y)
+        {
+            if (TextEditor.CanRedo)
+                TextEditor.Redo();
+
+            e.Handled = true;
+            return;
+        }
+    }
+
+    /// <summary>
+    /// 撤销
+    /// </summary>
+    private void OnUndoClick(object? sender, RoutedEventArgs e)
+    {
+        if (TextEditor.CanUndo)
+            TextEditor.Undo();
+    }
+
+    /// <summary>
+    /// 重做
+    /// </summary>
+    private void OnRedoClick(object? sender, RoutedEventArgs e)
+    {
+        if (TextEditor.CanRedo)
+            TextEditor.Redo();
+    }
+
+    /// <summary>
+    /// 保存
+    /// </summary>
+    private void OnSaveMenuClick(object? sender, RoutedEventArgs e)
+    {
+        SaveAllFiles(); 
     }
 
     /// <summary>
@@ -364,14 +415,6 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 菜单保存点击事件
-    /// </summary>
-    private void OnSaveMenuClick(object? sender, RoutedEventArgs e)
-    {
-        SaveCurrentFile();
-    }
-
-    /// <summary>
     /// 保存当前文件
     /// </summary>
     public void SaveCurrentFile()
@@ -397,6 +440,45 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             viewModel.OutputText += $"保存文件时出错：{ex.Message}\n";
+        }
+    }
+
+    /// <summary>
+    /// 保存所有文件
+    /// </summary>
+    public void SaveAllFiles()
+    {
+        if (DataContext is not MainWindowViewModel viewModel)
+            return;
+
+        if (viewModel.OpenedTabs == null || viewModel.OpenedTabs.Count == 0)
+        {
+            viewModel.OutputText += "没有可保存的文件。\n";
+            return;
+        }
+
+        foreach (var tab in viewModel.OpenedTabs)
+        {
+            if (string.IsNullOrEmpty(tab.FilePath))
+            {
+                viewModel.OutputText += $"跳过未保存文件：{tab.FileName}\n";
+                continue;
+            }
+
+            try
+            {
+                var textToSave = tab.Document?.Text;
+                if (textToSave != null)
+                {
+                    System.IO.File.WriteAllText(tab.FilePath, textToSave);
+                    tab.IsModified = false;
+                    viewModel.OutputText += $"已保存：{tab.FileName}\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                viewModel.OutputText += $"保存 {tab.FileName} 时出错：{ex.Message}\n";
+            }
         }
     }
 
@@ -485,6 +567,16 @@ public partial class MainWindow : Window
         // 重启计时器（防止频繁验证）
         _validationTimer?.Stop();
         _validationTimer?.Start();
+
+        if (DataContext is MainWindowViewModel vm)
+        {
+            var activeTab = vm.ActiveTab;
+            if (activeTab != null)
+            {
+                // 标记当前活动的标签页为已修改
+                activeTab.IsModified = true;
+            }
+        }
     }
 
     /// <summary>
@@ -520,9 +612,17 @@ public partial class MainWindow : Window
         // 刷新视图
         TextEditor.TextArea.TextView.Redraw();
 
-        // 输出错误信息到控制台
+        // 更新 MainWindowViewModel 信息输出
         if (DataContext is MainWindowViewModel vm)
         {
+            // 更新语法相关信息
+            foreach (Models.EditorTab tab in vm.OpenedTabs) {
+                if (tab.Document == TextEditor.Document)
+                {
+                    vm.OutputText += tab.IsModified?  $"{tab.FileName}\n" : "";                    
+                }
+            }
+
             // 如果之前有错误输出，先删除它
             if (_lastErrorOutputPosition >= 0 && _lastErrorOutputPosition < vm.OutputText.Length)
             {

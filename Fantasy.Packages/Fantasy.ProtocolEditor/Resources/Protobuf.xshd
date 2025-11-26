@@ -99,7 +99,7 @@
 
     <!-- Message type name after 'message' keyword (e.g., message C2G_TestMessage) -->
     <Rule color="MessageType">
-      (?&lt;=\bmessage\s+)[A-Z][A-Za-z0-9_]*\b
+      (?&lt;=\bmessage\s+)[A-Z\u4E00-\u9FFF][A-Za-z0-9_\u4E00-\u9FFF\u3400-\u4DBF\u3040-\u30FF\uAC00-\uD7AF]*
     </Rule>
   </RuleSet>
 
@@ -108,7 +108,7 @@
     <!-- Custom message type names in comments (e.g., G2C_TestResponse, C2G_TestMessage) -->
     <!-- This rule must come before Keywords to match longer identifiers -->
     <Rule color="MessageTypeInComment">
-      \b[A-Z][A-Za-z0-9_]*\b
+      [A-Z\u4E00-\u9FFF][A-Za-z0-9_\u4E00-\u9FFF\u3400-\u4DBF\u3040-\u30FF\uAC00-\uD7AF]*
     </Rule>
 
     <!-- Fantasy Framework Interfaces in comments -->
