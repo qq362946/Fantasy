@@ -122,8 +122,8 @@ namespace Fantasy.SourceGenerator.Generators
             GenerateCode(builder, separateTableTypeInfoList);
             // 结束类
             builder.EndClass();
-            // 生成数据库帮助类
-            builder.Append(GenerateGenerateSeparateTableGeneratedExtensions().ToString());
+            // // 生成数据库帮助类
+            // builder.Append(GenerateGenerateSeparateTableGeneratedExtensions().ToString());
             // 结束命名空间
             builder.EndNamespace();
             // 输出源代码
@@ -189,29 +189,52 @@ namespace Fantasy.SourceGenerator.Generators
                 throw;
             }
             builder.EndMethod();
-            // SeparateTables
-            builder.AddXmlComment("SeparateTables");
-            builder.BeginMethod("public (global::System.Type EntityType, string TableName)[] SeparateTables()");
+            // EntityTypeHandles
+            var separateTableCount = 0;
+            var entityTypeHandles = new SourceCodeBuilder();
+            var separateTables = new SourceCodeBuilder();
+            builder.AddXmlComment("EntityTypeHandles");
+            builder.BeginMethod("public global::System.RuntimeTypeHandle[] EntityTypeHandles()");
             try
             {
                 if (separateTableTypeInfos.Any())
                 {
-                    var count = 0;
-                    var rootTypes = new SourceCodeBuilder();
-                    
                     for (var i = 0; i < separateTableTypeInfos.Count; i++)
                     {
                         var separateTableTypeInfo = separateTableTypeInfos[i];
                         foreach (var keyValuePair in separateTableTypeInfo.SeparateTableInfo)
                         {
-                            count++;
-                            rootTypes.AppendLine($"\t\t\thandles[{i}] = (typeof({separateTableTypeInfo.TypeFullName}), \"{keyValuePair.Value}\");");
+                            separateTableCount++;
+                            entityTypeHandles.AppendLine($"\t\t\thandles[{i}] = typeof({separateTableTypeInfo.TypeFullName}).TypeHandle;");
+                            separateTables.AppendLine($"\t\t\tseparateTables[{i}] = (typeof({separateTableTypeInfo.TypeFullName}), \"{keyValuePair.Value}\");");
                         }
                     }
-                   
-                    rootTypes.AppendLine("\t\t\treturn handles;");
-                    builder.AppendLine($"var handles = new (global::System.Type EntityType, string TableName)[{count}];");
-                    builder.Append(rootTypes.ToString());
+                    
+                    entityTypeHandles.AppendLine("\t\t\treturn handles;");
+                    builder.AppendLine($"var handles = new global::System.RuntimeTypeHandle[{separateTableCount}];");
+                    builder.Append(entityTypeHandles.ToString());
+                }
+                else
+                {
+                    builder.AppendLine("return Array.Empty<global::System.RuntimeTypeHandle>();");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            builder.EndMethod();
+            // SeparateTables
+            builder.AddXmlComment("SeparateTables");
+            builder.BeginMethod("public (global::System.Type EntityType, string TableName)[] SeparateTables()");
+            try
+            {
+                if (separateTableCount > 0)
+                {
+                    builder.AppendLine($"var separateTables = new (global::System.Type EntityType, string TableName)[{separateTableCount}];");
+                    builder.Append(separateTables.ToString());
+                    builder.AppendLine("return separateTables;");
                 }
                 else
                 {
@@ -225,7 +248,7 @@ namespace Fantasy.SourceGenerator.Generators
             }
             builder.EndMethod();
         }
-        
+
         private static bool IsSeparateTableClass(SyntaxNode node)
         {
             if (node is not ClassDeclarationSyntax classDecl)

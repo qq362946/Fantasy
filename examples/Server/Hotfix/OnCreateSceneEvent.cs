@@ -66,8 +66,15 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
-                // var saveEntity = await scene.World.Database.Query<SaveEntity>(459439609634619405,true);
+                var saveEntity = Entity.Create<SaveEntity>(scene);
+                saveEntity.AddComponent<SubSceneTestComponent>();
+                
+                await saveEntity.PersistAggregate<>(scene.World.Database);
+               
+                // var saveEntity = await scene.World.Database.LoadWithSeparateTables<SaveEntity>(488710241381777422);
+                // var saveEntity = await scene.World.Database.Query<SaveEntity>(488710241381777422,true);
                 // await saveEntity.LoadWithSeparateTables(scene.World.Database);
+                var a = 0;
                 //
                 // Log.Debug($"{saveEntity.GetComponent<SubSceneTestComponent>()!=null}");
                 // var saveEntity = Entity.Create<SaveEntity>(scene, true, false);

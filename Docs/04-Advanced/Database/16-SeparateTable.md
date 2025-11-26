@@ -13,8 +13,8 @@ SeparateTable 是 Fantasy Framework 提供的一种高级数据库持久化方�
 - [定义分表实体](#定义分表实体)
 - [保存聚合实体](#保存聚合实体)
 - [加载聚合实体](#加载聚合实体)
+- [API 参考](#api-参考)
 - [实际应用场景](#实际应用场景)
-- [Source Generator 自动生成](#source-generator-自动生成)
 - [最佳实践](#最佳实践)
 - [常见问题](#常见问题)
 
@@ -145,12 +145,38 @@ public class SeparateTableAttribute : Attribute
 
 ### 扩展方法
 
+Fantasy Framework 提供了一系列扩展方法，简化分表实体的加载和保存操作：
+
+**加载方法：**
+
 ```csharp
-// 保存聚合实体及所有分表组件
+// 1. 加载实体的所有分表组件
+await entity.LoadWithSeparateTables(database);
+
+// 2. 加载实体的单个分表组件（按需加载）
+bool loaded = await LoadWithSeparateTable<PlayerInventoryEntity>(entity, database);
+
+// 3. 通过 ID 查询实体并自动加载所有分表（一步到位）
+var player = await database.LoadWithSeparateTables<Player>(playerId);
+
+// 4. 通过条件查询实体并自动加载所有分表（一步到位）
+var player = await database.LoadWithSeparateTables<Player>(p => p.Name == "张三");
+```
+
+**保存方法：**
+
+```csharp
+// 1. 保存聚合根及所有分表组件
 await entity.PersistAggregate(database);
 
-// 加载聚合实体的所有分表组件
-await entity.LoadWithSeparateTables(database);
+// 2. 控制是否保存聚合根本身
+await entity.PersistAggregate(isSaveSelf: false, database);  // 只保存分表，不保存聚合根
+
+// 3. 只保存指定的单个分表组件（不保存聚合根）
+await player.PersistAggregate<Player, PlayerInventoryEntity>(database);
+
+// 4. 保存指定分表组件，可选是否保存聚合根
+await player.PersistAggregate<Player, PlayerInventoryEntity>(isSaveSelf: true, database);
 ```
 
 ---
@@ -300,7 +326,7 @@ public class GuildWarehouseEntity : Entity, ISupportedDataBase
 
 ## 保存聚合实体
 
-### 1. 使用 PersistAggregate
+### 1. 保存所有分表组件
 
 ```csharp
 // 创建主实体
@@ -323,8 +349,11 @@ equipment.Equipments = new Dictionary<int, EquipmentData>
     { 2, new EquipmentData { EquipId = 2002 } }
 };
 
-// 一键保存主实体及所有分表组件
+// 方式 1: 保存聚合根及所有分表组件（默认）
 await player.PersistAggregate(database);
+
+// 方式 2: 只保存分表组件，不保存聚合根本身
+await player.PersistAggregate(isSaveSelf: false, database);
 ```
 
 **执行结果：**
@@ -339,47 +368,90 @@ PlayerEquipment 集合:
 { "_id": 1001, "Equipments": { "1": { "EquipId": 2001 }, ... } }
 ```
 
-### 2. 手动保存单个分表组件
+### 2. 只保存指定的单个分表组件
 
 ```csharp
-// 只保存背包数据
-var inventory = player.GetComponent<PlayerInventoryEntity>();
-await database.Save(inventory, collection: "PlayerInventory");
+var player = await database.Query<Player>(playerId, isDeserialize: true);
 
-// 只保存装备数据
-var equipment = player.GetComponent<PlayerEquipmentEntity>();
-await database.Save(equipment, collection: "PlayerEquipment");
+// 加载并修改背包
+var inventory = await database.Query<PlayerInventoryEntity>(playerId, isDeserialize: true);
+player.AddComponent(inventory);
+inventory.Items.Add(new ItemData { ItemId = 1003, Count = 1 });
+
+// 方式 1: 使用新的 PersistAggregate 泛型方法（推荐）
+// 只保存 PlayerInventoryEntity，不保存 Player 本身
+await player.PersistAggregate<Player, PlayerInventoryEntity>(database);
+
+// 方式 2: 控制是否同时保存聚合根
+player.Level = 51;  // 修改了聚合根
+await player.PersistAggregate<Player, PlayerInventoryEntity>(isSaveSelf: true, database);
+// 同时保存 Player 和 PlayerInventoryEntity
+
+// 方式 3: 传统方式 - 手动保存
+await database.Save(inventory, collection: "PlayerInventory");
 ```
 
-### 3. 部分更新
+### 3. 智能部分更新
 
 ```csharp
 // 查询主实体
 var player = await database.Query<Player>(playerId, isDeserialize: true);
 
-// 只加载背包组件
+// 修改主实体
+player.Level = 51;
+player.Gold += 1000;
+
+// 加载并修改背包
 var inventory = await database.Query<PlayerInventoryEntity>(playerId, isDeserialize: true);
 player.AddComponent(inventory);
-
-// 修改背包
 inventory.Items.Add(new ItemData { ItemId = 1003, Count = 1 });
 
-// 只保存背包（不影响装备等其他分表）
-await database.Save(inventory, collection: "PlayerInventory");
+// 场景 1: 只保存主实体（不影响分表）
+await database.Save(player);
+
+// 场景 2: 只保存背包分表（不影响主实体和其他分表）
+await player.PersistAggregate<Player, PlayerInventoryEntity>(isSaveSelf: false, database);
+
+// 场景 3: 保存主实体和背包分表（不影响装备等其他分表）
+await player.PersistAggregate<Player, PlayerInventoryEntity>(isSaveSelf: true, database);
+
+// 场景 4: 保存主实体及所有已加载的分表组件
+await player.PersistAggregate(database);
+```
+
+### 4. 性能优化：按需保存
+
+```csharp
+// ✅ 推荐：使用脏标记机制，只保存修改过的组件
+var player = await database.LoadWithSeparateTables<Player>(playerId);
+
+// 只修改背包
+var inventory = player.GetComponent<PlayerInventoryEntity>();
+inventory.Items.Add(newItem);
+
+// 只保存被修改的背包组件
+await player.PersistAggregate<Player, PlayerInventoryEntity>(isSaveSelf: false, database);
+
+// ❌ 不推荐：总是保存所有组件（可能保存了未修改的数据）
+await player.PersistAggregate(database);
 ```
 
 ---
 
 ## 加载聚合实体
 
-### 1. 使用 LoadWithSeparateTables
+### 1. 使用 LoadWithSeparateTables（加载所有分表）
 
 ```csharp
-// 查询主实体
+// 方式 1: 先查询主实体，再加载分表
 var player = await database.Query<Player>(playerId, isDeserialize: true);
-
-// 加载所有分表组件
 await player.LoadWithSeparateTables(database);
+
+// 方式 2: 一步到位（推荐） - 直接通过 ID 查询并加载
+var player = await database.LoadWithSeparateTables<Player>(playerId);
+
+// 方式 3: 一步到位 - 通过条件查询并加载
+var player = await database.LoadWithSeparateTables<Player>(p => p.Name == "张三");
 
 // 现在可以访问所有组件
 var inventory = player.GetComponent<PlayerInventoryEntity>();
@@ -387,20 +459,21 @@ var equipment = player.GetComponent<PlayerEquipmentEntity>();
 var friends = player.GetComponent<PlayerFriendsEntity>();
 ```
 
-### 2. 按需加载
+### 2. 按需加载单个分表
 
 ```csharp
 // 只加载主实体
 var player = await database.Query<Player>(playerId, isDeserialize: true);
 
-// 按需加载背包（例如：打开背包界面时）
-if (needInventory)
+// 方式 1: 使用新的 LoadWithSeparateTable 方法（推荐）
+bool loaded = await LoadWithSeparateTable<PlayerInventoryEntity>(player, database);
+if (loaded)
 {
-    var inventory = await database.Query<PlayerInventoryEntity>(playerId, isDeserialize: true);
-    player.AddComponent(inventory);
+    var inventory = player.GetComponent<PlayerInventoryEntity>();
+    // 使用 inventory...
 }
 
-// 按需加载装备（例如：打开角色界面时）
+// 方式 2: 传统方式 - 手动查询并添加组件
 if (needEquipment)
 {
     var equipment = await database.Query<PlayerEquipmentEntity>(playerId, isDeserialize: true);
@@ -411,17 +484,309 @@ if (needEquipment)
 ### 3. 批量加载
 
 ```csharp
-// 加载多个玩家
+// 加载多个玩家（使用新的一步到位方法）
 var playerIds = new List<long> { 1001, 1002, 1003 };
 var players = new List<Player>();
 
 foreach (var playerId in playerIds)
 {
-    var player = await database.Query<Player>(playerId, isDeserialize: true);
-    await player.LoadWithSeparateTables(database);
-    players.Add(player);
+    // 一步完成查询和分表加载
+    var player = await database.LoadWithSeparateTables<Player>(playerId);
+    if (player != null)
+    {
+        players.Add(player);
+    }
 }
 ```
+
+### 4. 条件查询并加载分表
+
+```csharp
+// 查询高等级玩家并加载其分表数据
+var highLevelPlayer = await database.LoadWithSeparateTables<Player>(p => p.Level >= 50);
+
+if (highLevelPlayer != null)
+{
+    var inventory = highLevelPlayer.GetComponent<PlayerInventoryEntity>();
+    var equipment = highLevelPlayer.GetComponent<PlayerEquipmentEntity>();
+}
+```
+
+---
+
+## API 参考
+
+### 加载 API
+
+#### 1. LoadWithSeparateTables (Entity 扩展方法)
+
+加载实体的所有分表组件。
+
+```csharp
+public static FTask LoadWithSeparateTables<T>(this T entity, IDatabase database)
+    where T : Entity, new()
+```
+
+**参数：**
+- `entity`: 聚合根实体实例
+- `database`: 数据库实例
+
+**示例：**
+```csharp
+var player = await database.Query<Player>(playerId, isDeserialize: true);
+await player.LoadWithSeparateTables(database);
+
+var inventory = player.GetComponent<PlayerInventoryEntity>();
+var equipment = player.GetComponent<PlayerEquipmentEntity>();
+```
+
+---
+
+#### 2. LoadWithSeparateTable (泛型单表加载)
+
+加载实体的指定单个分表组件。
+
+```csharp
+public static FTask<bool> LoadWithSeparateTable<T>(Entity entity, IDatabase database)
+    where T : Entity, new()
+```
+
+**参数：**
+- `entity`: 聚合根实体实例
+- `database`: 数据库实例
+
+**返回值：**
+- `true`: 成功加载并添加分表组件
+- `false`: 分表不存在或加载失败
+
+**示例：**
+```csharp
+var player = await database.Query<Player>(playerId, isDeserialize: true);
+
+// 按需加载背包
+bool loaded = await LoadWithSeparateTable<PlayerInventoryEntity>(player, database);
+if (loaded)
+{
+    var inventory = player.GetComponent<PlayerInventoryEntity>();
+}
+```
+
+---
+
+#### 3. LoadWithSeparateTables (Database 扩展 - 通过 ID)
+
+从数据库查询指定 ID 的实体，并自动加载其所有分表数据。
+
+```csharp
+public static async FTask<T> LoadWithSeparateTables<T>(this IDatabase database, long id)
+    where T : Entity, new()
+```
+
+**参数：**
+- `database`: 数据库实例
+- `id`: 实体的唯一标识 ID
+
+**返回值：**
+- 加载了分表数据的实体实例，如果实体不存在则返回 `null`
+
+**示例：**
+```csharp
+// 一步完成查询和分表加载
+var player = await database.LoadWithSeparateTables<Player>(playerId);
+if (player != null)
+{
+    var inventory = player.GetComponent<PlayerInventoryEntity>();
+    var equipment = player.GetComponent<PlayerEquipmentEntity>();
+}
+```
+
+**等价于：**
+```csharp
+var player = await database.Query<Player>(playerId, isDeserialize: true);
+if (player != null)
+{
+    await player.LoadWithSeparateTables(database);
+}
+```
+
+---
+
+#### 4. LoadWithSeparateTables (Database 扩展 - 通过条件)
+
+从数据库查询满足条件的第一个实体，并自动加载其所有分表数据。
+
+```csharp
+public static async FTask<T> LoadWithSeparateTables<T>(
+    this IDatabase database,
+    Expression<Func<T, bool>> filter
+) where T : Entity, new()
+```
+
+**参数：**
+- `database`: 数据库实例
+- `filter`: 查询过滤条件的 Lambda 表达式
+
+**返回值：**
+- 加载了分表数据的实体实例，如果没有满足条件的实体则返回 `null`
+
+**示例：**
+```csharp
+// 根据条件查询并加载分表数据
+var player = await database.LoadWithSeparateTables<Player>(p => p.Name == "张三");
+if (player != null)
+{
+    var inventory = player.GetComponent<PlayerInventoryEntity>();
+}
+
+// 查询高等级玩家
+var highLevelPlayer = await database.LoadWithSeparateTables<Player>(p => p.Level >= 50);
+```
+
+---
+
+### 保存 API
+
+#### 1. PersistAggregate (保存所有分表 - 含聚合根)
+
+保存聚合根实体及其所有分表组件到数据库。
+
+```csharp
+public static FTask PersistAggregate<T>(this T entity, IDatabase database)
+    where T : Entity, new()
+```
+
+**参数：**
+- `entity`: 聚合根实体实例
+- `database`: 数据库实例
+
+**示例：**
+```csharp
+var player = Entity.Create<Player>(scene);
+player.Name = "玩家001";
+
+var inventory = player.AddComponent<PlayerInventoryEntity>();
+inventory.Items.Add(new ItemData { ItemId = 1001, Count = 10 });
+
+// 保存主实体及所有分表组件
+await player.PersistAggregate(database);
+```
+
+---
+
+#### 2. PersistAggregate (保存所有分表 - 可选聚合根)
+
+保存聚合根的所有分表组件，可选择是否保存聚合根本身。
+
+```csharp
+public static FTask PersistAggregate<T>(
+    this T entity,
+    bool isSaveSelf,
+    IDatabase database
+) where T : Entity, new()
+```
+
+**参数：**
+- `entity`: 聚合根实体实例
+- `isSaveSelf`: 是否保存聚合根本身
+- `database`: 数据库实例
+
+**示例：**
+```csharp
+// 只保存分表组件，不保存聚合根
+await player.PersistAggregate(isSaveSelf: false, database);
+
+// 保存聚合根及所有分表组件
+await player.PersistAggregate(isSaveSelf: true, database);
+```
+
+---
+
+#### 3. PersistAggregate (保存指定单表 - 不含聚合根)
+
+只保存指定的单个分表组件，不保存聚合根。
+
+```csharp
+public static FTask PersistAggregate<T, TEntity>(this T entity, IDatabase database)
+    where T : Entity, new()
+    where TEntity : Entity, new()
+```
+
+**参数：**
+- `entity`: 聚合根实体实例
+- `database`: 数据库实例
+
+**泛型参数：**
+- `T`: 聚合根实体类型
+- `TEntity`: 要保存的分表实体类型
+
+**示例：**
+```csharp
+var player = await database.Query<Player>(playerId, isDeserialize: true);
+
+// 加载并修改背包
+var inventory = await database.Query<PlayerInventoryEntity>(playerId, isDeserialize: true);
+player.AddComponent(inventory);
+inventory.Items.Add(new ItemData { ItemId = 1003, Count = 1 });
+
+// 只保存 PlayerInventoryEntity，不保存 Player 本身
+await player.PersistAggregate<Player, PlayerInventoryEntity>(database);
+```
+
+---
+
+#### 4. PersistAggregate (保存指定单表 - 可选聚合根)
+
+保存指定的单个分表组件，可选择是否保存聚合根。
+
+```csharp
+public static FTask PersistAggregate<T, TEntity>(
+    this T entity,
+    bool isSaveSelf,
+    IDatabase database
+)
+    where T : Entity, new()
+    where TEntity : Entity, new()
+```
+
+**参数：**
+- `entity`: 聚合根实体实例
+- `isSaveSelf`: 是否保存聚合根本身
+- `database`: 数据库实例
+
+**泛型参数：**
+- `T`: 聚合根实体类型
+- `TEntity`: 要保存的分表实体类型
+
+**示例：**
+```csharp
+var player = await database.Query<Player>(playerId, isDeserialize: true);
+player.Level = 51;  // 修改聚合根
+
+var inventory = await database.Query<PlayerInventoryEntity>(playerId, isDeserialize: true);
+player.AddComponent(inventory);
+inventory.Items.Add(newItem);  // 修改分表
+
+// 同时保存 Player 和 PlayerInventoryEntity
+await player.PersistAggregate<Player, PlayerInventoryEntity>(isSaveSelf: true, database);
+
+// 只保存 PlayerInventoryEntity
+await player.PersistAggregate<Player, PlayerInventoryEntity>(isSaveSelf: false, database);
+```
+
+---
+
+### API 对比表
+
+| API | 加载/保存 | 聚合根 | 分表范围 | 使用场景 |
+|-----|---------|-------|---------|---------|
+| `entity.LoadWithSeparateTables(db)` | 加载 | 需已查询 | 所有分表 | 已有实体，加载所有分表 |
+| `LoadWithSeparateTable<T>(entity, db)` | 加载 | 需已查询 | 指定单表 | 已有实体，按需加载单个分表 |
+| `db.LoadWithSeparateTables<T>(id)` | 加载 | 自动查询 | 所有分表 | 一步到位查询并加载（推荐） |
+| `db.LoadWithSeparateTables<T>(filter)` | 加载 | 自动查询 | 所有分表 | 条件查询并加载（推荐） |
+| `entity.PersistAggregate(db)` | 保存 | 保存 | 所有分表 | 保存聚合根及所有分表 |
+| `entity.PersistAggregate(false, db)` | 保存 | 不保存 | 所有分表 | 只保存分表，不保存聚合根 |
+| `entity.PersistAggregate<T, TEntity>(db)` | 保存 | 不保存 | 指定单表 | 只保存指定分表（性能优化） |
+| `entity.PersistAggregate<T, TEntity>(true, db)` | 保存 | 保存 | 指定单表 | 保存聚合根和指定分表 |
 
 ---
 
