@@ -58,6 +58,9 @@
                         <MenuItem Header="退出" Click="OnExitMenuClick"/>
                     </MenuItem>
                     <MenuItem Header="编辑">
+                        <MenuItem Header="撤销" Click="OnUndoClick" InputGesture="Ctrl+Z"/>
+                        <MenuItem Header="重做" Click="OnRedoClick" InputGesture="Ctrl+Y"/>
+                        <Separator/>
                         <MenuItem Header="查找" Click="OnFindMenuClick" InputGesture="Ctrl+F"/>
                         <MenuItem Header="替换" Click="OnReplaceMenuClick" InputGesture="Ctrl+H"/>
                         <Separator/>
@@ -241,11 +244,18 @@
 
                 <!-- 标签页栏 -->
                 <Border Grid.Row="0" Background="#2B2B2B" BorderBrush="Transparent" BorderThickness="0">
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                        <ItemsControl x:Name="TabItemsControl" ItemsSource="{Binding OpenedTabs}">
+                    <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+
+                      <ScrollViewer.Styles>
+                        <Style Selector="ScrollBar">
+                          <Setter Property="Opacity" Value="1"/>
+                        </Style>
+                      </ScrollViewer.Styles>
+
+                      <ItemsControl x:Name="TabItemsControl" ItemsSource="{Binding OpenedTabs}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" Height="35"/>
+                                    <StackPanel Orientation="Horizontal" Height="35" Margin="0,0,0,8"/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>

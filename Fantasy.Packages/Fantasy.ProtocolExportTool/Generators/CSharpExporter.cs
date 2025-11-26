@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Fantasy.ProtocolExportTool.Interface;
+using Fantasy.ProtocolExportTool.Abstract;
 using Fantasy.ProtocolExportTool.Models;
 // ReSharper disable PossibleMultipleEnumeration
 
@@ -158,6 +158,7 @@ public sealed class CSharpExporter(
         return messageDefinitions.Count == 0 ? string.Empty : $$"""
                                                                 using ProtoBuf;
                                                                 using System;
+                                                                using MemoryPack;
                                                                 using System.Collections.Generic;
                                                                 using Fantasy;
                                                                 using Fantasy.Network.Interface;
@@ -186,6 +187,7 @@ public sealed class CSharpExporter(
     {
         return messageDefinitions.Count == 0 ? string.Empty : $$"""
                                                                 using ProtoBuf;
+                                                                using MemoryPack;
                                                                 using System;
                                                                 using System.Collections.Generic;
                                                                 using MongoDB.Bson.Serialization.Attributes;
@@ -416,7 +418,8 @@ public sealed class CSharpExporter(
 
             if (!string.IsNullOrEmpty(messageDefinition.Protocol.ClassAttribute))
             {
-                builder.AppendLine($"    {messageDefinition.Protocol.ClassAttribute}");
+                builder.AppendLine($"    [Serializable]\n" +
+                                   $"    {messageDefinition.Protocol.ClassAttribute}");
             }
             
             if (string.IsNullOrEmpty(messageDefinition.InterfaceType))

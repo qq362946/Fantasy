@@ -120,6 +120,7 @@ public sealed partial class ProtocolFileParser(string filePath)
         {
             "ProtoBuf" => ProtocolSettings.CreateProtoBuf(),
             "Bson" => ProtocolSettings.CreateBson(),
+            "MemoryPack" => ProtocolSettings.CreateMemoryPack(),
             _ => throw new NotSupportedException($"Unsupported protocol type '{protocolName}' at {filePath} line {lineNumber}. Only 'ProtoBuf' and 'Bson' are supported.")
         };
     }
@@ -374,9 +375,9 @@ public sealed partial class ProtocolFileParser(string filePath)
         type is MessageType.Response or MessageType.RouteTypeResponse or MessageType.RoamingResponse;
 
     /// <summary>
-    /// 字段解析正则表达式: type name = number (允许 Tab 和空格)
+    /// 字段解析正则表达式: type name = number, 支持中日韩等非英文字符
     /// </summary>
-    [GeneratedRegex(@"^\s*(\w+)\s+(\w+)\s*=\s*(\d+)\s*;\s*$")]
+    [GeneratedRegex(@"^\s*([\p{L}_][\p{L}\p{N}_]*)\s+([\p{L}_][\p{L}\p{N}_]*)\s*=\s*(\d+)\s*;$")]
     private static partial Regex FieldRegex();
 }
 

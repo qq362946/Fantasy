@@ -17,6 +17,7 @@ using AvaloniaEdit.Highlighting.Xshd;
 using AvaloniaEdit.CodeCompletion;
 using Fantasy.ProtocolEditor.ViewModels;
 using Fantasy.ProtocolEditor.Services;
+using Avalonia.Media;
 
 namespace Fantasy.ProtocolEditor.Views;
 
@@ -145,6 +146,9 @@ public partial class MainWindow : Window
         // 切换到新标签的文档
         TextEditor.Document = tab.Document;
 
+        // 重置撤销栈，避免 Ctrl+Z 清空文本
+        TextEditor.Document.UndoStack.ClearAll();
+
         // 订阅新文档的文本变化事件
         if (TextEditor.Document != null)
         {
@@ -232,6 +236,9 @@ public partial class MainWindow : Window
         // 初始化当前行高亮渲染器（垂直内边距 4px）
         _currentLineRenderer = new CurrentLineHighlightRenderer(TextEditor, verticalPadding: 4);
         TextEditor.TextArea.TextView.BackgroundRenderers.Add(_currentLineRenderer);
+
+        TextEditor.TextArea.SelectionBrush = new SolidColorBrush(Color.Parse("#6599BB")); // 调整选中背景
+        TextEditor.TextArea.SelectionForeground = new SolidColorBrush(Colors.White);      // 调整选中文本颜色
 
         // 订阅光标位置变化事件，重绘当前行
         TextEditor.TextArea.Caret.PositionChanged += (s, e) => TextEditor.TextArea.TextView.InvalidateVisual();
@@ -333,7 +340,44 @@ public partial class MainWindow : Window
             CloseFindPanel();
             e.Handled = true;
         }
+        // Ctrl+Z  撤销
+        else if (e.KeyModifiers.HasFlag(KeyModifiers.Control) && e.Key == Key.Z)
+        {
+            if (TextEditor.CanUndo)
+                TextEditor.Undo();
+
+            e.Handled = true;
+            return;
+        }
+        // Ctrl+Y  重做
+        else if (e.KeyModifiers.HasFlag(KeyModifiers.Control) && e.Key == Key.Y)
+        {
+            if (TextEditor.CanRedo)
+                TextEditor.Redo();
+
+            e.Handled = true;
+            return;
+        }
     }
+
+    /// <summary>
+    /// 撤销
+    /// </summary>
+    private void OnUndoClick(object? sender, RoutedEventArgs e)
+    {
+        if (TextEditor.CanUndo)
+            TextEditor.Undo();
+    }
+
+    /// <summary>
+    /// 重做
+    /// </summary>
+    private void OnRedoClick(object? sender, RoutedEventArgs e)
+    {
+        if (TextEditor.CanRedo)
+            TextEditor.Redo();
+    }
+
 
     /// <summary>
     /// 菜单打开文件夹点击事件

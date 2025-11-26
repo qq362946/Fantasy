@@ -47,7 +47,7 @@ public class ProtobufValidator
             var trimmedLine = line.Trim();
             if (trimmedLine.StartsWith("message"))
             {
-                var match = Regex.Match(trimmedLine, @"message\s+([A-Za-z0-9_]+)");
+                var match = Regex.Match(trimmedLine, @"message\s+([\p{L}\p{N}_]+)");
                 if (match.Success)
                 {
                     definedMessages.Add(match.Groups[1].Value);
@@ -156,7 +156,7 @@ public class ProtobufValidator
         if (roamingMessageMatch.Success)
         {
             // IRoamingMessage 必须是格式：// IRoamingMessage,RoamingType
-            var formatPattern = @"//\s*IRoamingMessage\s*,\s*[A-Za-z0-9_]+";
+            var formatPattern = @"//\s*IRoamingMessage\s*,\s*[\p{L}\p{N}_]+";
             var formatMatch = Regex.Match(line, formatPattern);
 
             System.Diagnostics.Debug.WriteLine($"Found IRoamingMessage in line: {line.Trim()}");
@@ -190,7 +190,7 @@ public class ProtobufValidator
         if (customRouteMessageMatch.Success)
         {
             // ICustomRouteMessage 必须是格式：// ICustomRouteMessage,RouteType
-            var formatPattern = @"//\s*ICustomRouteMessage\s*,\s*[A-Za-z0-9_]+";
+            var formatPattern = @"//\s*ICustomRouteMessage\s*,\s*[\p{L}\p{N}_]+";
             var formatMatch = Regex.Match(line, formatPattern);
 
             System.Diagnostics.Debug.WriteLine($"Found ICustomRouteMessage in line: {line.Trim()}");
@@ -224,7 +224,7 @@ public class ProtobufValidator
         if (roamingRequestMatch.Success)
         {
             // IRoamingRequest 必须是格式：// IRoamingRequest,ResponseType,RoamingType
-            var formatPattern = @"//\s*IRoamingRequest\s*,\s*([A-Z][A-Za-z0-9_]*)\s*,\s*[A-Za-z0-9_]+";
+            var formatPattern = @"//\s*IRoamingRequest\s*,\s*([\p{L}_][\p{L}\p{N}_]*)\s*,\s*[\p{L}\p{N}_]+";
             var formatMatch = Regex.Match(line, formatPattern);
 
             System.Diagnostics.Debug.WriteLine($"Found IRoamingRequest in line: {line.Trim()}");
@@ -278,7 +278,7 @@ public class ProtobufValidator
         if (customRouteMatch.Success)
         {
             // ICustomRouteRequest 必须是格式：// ICustomRouteRequest,ResponseType,ChatRoute
-            var formatPattern = @"//\s*ICustomRouteRequest\s*,\s*([A-Z][A-Za-z0-9_]*)\s*,\s*[A-Za-z0-9_]+";
+            var formatPattern = @"//\s*ICustomRouteRequest\s*,\s*([\p{L}_][\p{L}\p{N}_]*)\s*,\s*[\p{L}\p{N}_]+";
             var formatMatch = Regex.Match(line, formatPattern);
 
             System.Diagnostics.Debug.WriteLine($"Found ICustomRouteRequest in line: {line.Trim()}");
@@ -341,7 +341,8 @@ public class ProtobufValidator
             if (match.Success)
             {
                 // 检查格式是否为 // IRequest,ResponseType
-                var formatPattern = $@"//\s*{requestInterface}\s*,\s*([A-Z][A-Za-z0-9_]*)";
+                var formatPattern = "//\\s*" + requestInterface + "\\s*,\\s*([\\p{L}][\\p{L}\\p{N}_]*)";
+
                 var formatMatch = Regex.Match(line, formatPattern);
 
                 System.Diagnostics.Debug.WriteLine($"Found {requestInterface} in line: {line.Trim()}");

@@ -74,4 +74,20 @@ public sealed class ProtocolSettings
             KeyStartIndex = 1
         };
     }
+
+    /// <summary>
+    /// 创建 MemoryPack 设置
+    /// </summary>
+    public static ProtocolSettings CreateMemoryPack()
+    {
+        return new ProtocolSettings
+        {
+            ProtocolName = "MemoryPack",
+            OpCodeType = OpCodeProtocolType.MemoryPack,
+            ClassAttribute = "[MemoryPackable]",
+            MemberAttribute = "MemoryPackOrder",
+            IgnoreAttribute = "[MemoryPackIgnore]",
+            KeyStartIndex = 1
+        };
+    }
 }
