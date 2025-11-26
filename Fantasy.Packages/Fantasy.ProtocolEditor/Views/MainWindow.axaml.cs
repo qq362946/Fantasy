@@ -252,7 +252,7 @@ public partial class MainWindow : Window
 
         if (DataContext is MainWindowViewModel vm)
         {
-            vm.OutputText += "编辑器已就绪，支持 Protobuf 语法高亮、验证和自动补全。\n";
+            vm.OutputText += "编辑器已就绪。\n";
         }
     }
 
@@ -567,6 +567,16 @@ public partial class MainWindow : Window
         // 重启计时器（防止频繁验证）
         _validationTimer?.Stop();
         _validationTimer?.Start();
+
+        if (DataContext is MainWindowViewModel vm)
+        {
+            var activeTab = vm.ActiveTab;
+            if (activeTab != null)
+            {
+                // 标记当前活动的标签页为已修改
+                activeTab.IsModified = true;
+            }
+        }
     }
 
     /// <summary>
@@ -602,9 +612,17 @@ public partial class MainWindow : Window
         // 刷新视图
         TextEditor.TextArea.TextView.Redraw();
 
-        // 输出错误信息到控制台
+        // 更新 MainWindowViewModel 信息输出
         if (DataContext is MainWindowViewModel vm)
         {
+            // 更新语法相关信息
+            foreach (Models.EditorTab tab in vm.OpenedTabs) {
+                if (tab.Document == TextEditor.Document)
+                {
+                    vm.OutputText += tab.IsModified?  $"{tab.FileName}\n" : "";                    
+                }
+            }
+
             // 如果之前有错误输出，先删除它
             if (_lastErrorOutputPosition >= 0 && _lastErrorOutputPosition < vm.OutputText.Length)
             {

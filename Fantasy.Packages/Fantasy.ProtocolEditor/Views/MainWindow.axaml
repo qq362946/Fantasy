@@ -127,8 +127,8 @@
 
                             <!-- 保存按钮 -->
                             <Button Grid.Column="1"
-                                    Content="💿"
-                                    ToolTip.Tip="Save All (Ctrl+S)"
+                                    Content="✅"
+                                    ToolTip.Tip="Save Changes (Ctrl+S)"
                                     Background="Transparent"
                                     BorderThickness="0"
                                     Foreground="#CCCCCC"
@@ -165,7 +165,7 @@
 
                             <!-- 导出协议按钮 -->
                             <Button Grid.Column="3"
-                                   Content="⚡"
+                                   Content="🚀"
                                    ToolTip.Tip="Export Protocols"
                                    Background="Transparent"
                                    BorderThickness="0"
