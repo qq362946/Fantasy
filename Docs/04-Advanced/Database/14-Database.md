@@ -116,8 +116,7 @@ namespace Fantasy.Database
 var database = scene.World.Database;
 
 // 使用自动生成的常量切换数据库
-scene.World.SelectDatabase(DatabaseName.log_data);
-var logDatabase = scene.World.Database;
+var logDatabase = scene.World.SelectDatabase(DatabaseName.log_data);
 ```
 
 ### 2. 通过索引获取

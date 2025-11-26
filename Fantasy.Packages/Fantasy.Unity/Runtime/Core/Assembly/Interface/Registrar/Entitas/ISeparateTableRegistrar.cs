@@ -17,6 +17,14 @@ public interface ISeparateTableRegistrar
     RuntimeTypeHandle[] RootTypes();
 
     /// <summary>
+    /// 获取所有分表实体类型的句柄数组
+    /// 包含所有标记了 [SeparateTable] 特性的实体类型句柄，用于快速类型查找和注册
+    /// 注意：可能包含重复的实体类型（如果同一实体类型被多次标记为不同表）
+    /// </summary>
+    /// <returns>RuntimeTypeHandle 数组，每个元素对应一个分表实体类型</returns>
+    RuntimeTypeHandle[] EntityTypeHandles();
+
+    /// <summary>
     /// 获取所有分表实体的类型和表名映射数组
     /// 每个分表实体都会映射到数据库中的独立表（集合），通过自定义表名实现数据隔离
     /// 表名通常基于实体类型名自动生成，或通过 [SeparateTable] 特性的参数自定义

@@ -131,6 +131,7 @@ Unity 客户端开发的完整指南。
 - ✅ [01-ECS.md](04-Advanced/CoreSystems/01-ECS.md) - Entity-Component-System 详解
 - ✅ [02-ISupportedMultiEntity.md](04-Advanced/CoreSystems/02-ISupportedMultiEntity.md) - 多实例组件详解
 - ✅ [03-Scene.md](04-Advanced/CoreSystems/03-Scene.md) - Scene 和 SubScene 使用
+- ✅ [04-Event.md](04-Advanced/CoreSystems/04-Event.md) - Event 系统使用指南
 
 #### 数据持久化
 - ✅ [04-Database.md](04-Advanced/Database/14-Database.md) - MongoDB 集成和使用
@@ -143,7 +144,6 @@ Unity 客户端开发的完整指南。
 - [ ] 09-SphereEvent.md - SphereEvent 跨服域事件系统
 
 #### 高级特性
-- [ ] 10-Event.md - Event 系统使用
 - [ ] 11-Timer.md - Timer 系统
 
 #### 部署运维

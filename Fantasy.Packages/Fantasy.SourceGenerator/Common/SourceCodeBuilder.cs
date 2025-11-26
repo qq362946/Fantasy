@@ -10,6 +10,8 @@ namespace Fantasy.SourceGenerator.Common
         private readonly StringBuilder _builder;
         private int _indentLevel;
         private const string IndentString = "    "; // 4 空格缩进
+        
+        public int Length => _builder.Length;
 
         public SourceCodeBuilder(int indentLevel = 0)
         {
