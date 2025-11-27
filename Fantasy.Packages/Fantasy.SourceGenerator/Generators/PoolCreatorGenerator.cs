@@ -15,7 +15,8 @@ namespace Fantasy.SourceGenerator.Generators
                     predicate: static (node, _) => PotentialSyntax(node),
                     transform: static (ctx, _) => GetPoolTypeInfo(ctx))
                 .Where(static info => info != null)
-                .Collect();
+                .Collect()
+                .Select(static (types, _) => types.Distinct().ToList());
             
             var compilationAndTypes = context.CompilationProvider.Combine(poolTypes);
             
