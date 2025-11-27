@@ -169,16 +169,14 @@ namespace Fantasy.PacketParser
             OpCodeIdStruct opCodeIdStruct = opCode;
             memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
-            if (SerializerManager.TryGetSerializer(opCodeIdStruct.OpCodeProtocolType, out var serializer))
+            if (SerializerManager.TrySerialize(opCodeIdStruct.OpCodeProtocolType, messageType, message, memoryStream, out var error))
             {
-                serializer.Serialize(messageType, message, memoryStream);
                 memoryStreamLength = (int)memoryStream.Position;
             }
             else
             {
-                Log.Error($"type:{messageType} Does not support processing protocol");
+                Log.Error($"type:{messageType} {error}");
             }
-
             
             var packetBodyCount = memoryStreamLength - Packet.InnerPacketHeadLength;
             
@@ -326,7 +324,7 @@ namespace Fantasy.PacketParser
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe MemoryStreamBuffer Pack(ref uint rpcId, IMessage message, Type messageType)
+        private MemoryStreamBuffer Pack(ref uint rpcId, IMessage message, Type messageType)
         {
             var memoryStreamLength = 0;
             var memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
@@ -334,16 +332,14 @@ namespace Fantasy.PacketParser
             OpCodeIdStruct opCodeIdStruct = opCode;
             memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
             
-            if (SerializerManager.TryGetSerializer(opCodeIdStruct.OpCodeProtocolType, out var serializer))
+            if (SerializerManager.TrySerialize(opCodeIdStruct.OpCodeProtocolType, messageType, message, memoryStream, out var error))
             {
-                serializer.Serialize(messageType, message, memoryStream);
                 memoryStreamLength = (int)memoryStream.Position;
             }
             else
             {
-                Log.Error($"type:{messageType} Does not support processing protocol");
+                Log.Error($"type:{messageType} {error}");
             }
-            
             
             var packetBodyCount = memoryStreamLength - Packet.OuterPacketHeadLength;
 

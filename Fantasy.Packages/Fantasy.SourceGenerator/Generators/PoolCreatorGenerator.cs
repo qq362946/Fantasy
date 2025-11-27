@@ -42,7 +42,7 @@ namespace Fantasy.SourceGenerator.Generators
 
         private static bool PotentialSyntax(SyntaxNode node)
         {
-            //拿到非抽象类定义和闭合泛型使用
+            // 拿到非抽象类定义和闭合泛型使用
             return (node is ClassDeclarationSyntax classDecl &&
                 !classDecl.Modifiers.Any(m => m.IsKind(SyntaxKind.AbstractKeyword))) || 
                 node is GenericNameSyntax;
@@ -68,17 +68,23 @@ namespace Fantasy.SourceGenerator.Generators
         private static bool IsValidPoolType(INamedTypeSymbol s)
         {
             if (s.DeclaredAccessibility != Accessibility.Public || s.IsAbstract)
+            {
                 return false;
+            }
 
             if (s.IsOpenGeneric())
+            {
                 return false;
+            }
 
             var implementsIPool = s.AllInterfaces.Any(i =>
                 i.Name == "IPool" &&
                 i.ContainingNamespace.ToString() == "Fantasy.Pool");
 
             if (!implementsIPool)
+            {
                 return false;
+            }
 
             return s.Constructors.Any(c =>
                 c.Parameters.Length == 0 &&

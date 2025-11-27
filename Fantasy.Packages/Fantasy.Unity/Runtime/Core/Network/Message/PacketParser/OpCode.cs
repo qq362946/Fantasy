@@ -42,8 +42,9 @@ namespace Fantasy.Network
 
     public static class OpCodeProtocolType
     {
-        public const uint Bson = 1; 
         public const uint ProtoBuf = 0;
+        public const uint Bson = 1; 
+        public const uint MemoryPack = 2;
     }
 
     public static class OpCodeType

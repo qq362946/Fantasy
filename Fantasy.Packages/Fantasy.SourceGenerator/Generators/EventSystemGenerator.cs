@@ -158,119 +158,79 @@ namespace Fantasy.SourceGenerator.Generators
             // 生成私有字段
             foreach (var eventSystemTypeInfo in eventSystems)
             {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                builder.AppendLine($"private {eventSystemTypeInfo.TypeFullName} {eventSystemTypeInfo.FieldName} = new {eventSystemTypeInfo.TypeFullName}();");
             }
             foreach (var eventSystemTypeInfo in asyncEventSystem)
             {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                builder.AppendLine($"private {eventSystemTypeInfo.TypeFullName} {eventSystemTypeInfo.FieldName} = new {eventSystemTypeInfo.TypeFullName}();");
             }
             builder.AppendLine();
             // EventTypeHandles
             builder.AddXmlComment("EventTypeHandles");
             builder.BeginMethod("public global::System.RuntimeTypeHandle[] EventTypeHandles()");
-            try
+            if (eventSystems.Any())
             {
-                if (eventSystems.Any())
+                builder.AppendLine($"var handles = new global::System.RuntimeTypeHandle[{eventSystems.Count}];");
+                for (var i = 0; i < eventSystems.Count; i++)
                 {
-                    builder.AppendLine($"var handles = new global::System.RuntimeTypeHandle[{eventSystems.Count}];");
-                    for (var i = 0; i < eventSystems.Count; i++)
-                    {
-                        var fieldName = $"_{eventSystems[i].TypeName.ToCamelCase()}";
-                        builder.AppendLine($"handles[{i}] = {fieldName}.EventType().TypeHandle;");
-                    }
-                    builder.AppendLine("return handles;");
+                    builder.AppendLine($"handles[{i}] = {eventSystems[i].FieldName}.EventType().TypeHandle;");
                 }
-                else
-                {
-                    builder.AppendLine("return Array.Empty<global::System.RuntimeTypeHandle>();");
-                }
-
+                builder.AppendLine("return handles;");
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e);
-                throw;
+                builder.AppendLine("return Array.Empty<global::System.RuntimeTypeHandle>();");
             }
             builder.EndMethod();
             // Events
             builder.AddXmlComment("Events");
             builder.BeginMethod("public global::Fantasy.Event.IEvent[] Events()");
-            try
+            if (eventSystems.Any())
             {
-                if (eventSystems.Any())
+                builder.AppendLine($"var events = new global::Fantasy.Event.IEvent[{eventSystems.Count}];");
+                for (var i = 0; i < eventSystems.Count; i++)
                 {
-                    builder.AppendLine($"var events = new global::Fantasy.Event.IEvent[{eventSystems.Count}];");
-                    for (var i = 0; i < eventSystems.Count; i++)
-                    {
-                        builder.AppendLine($"events[{i}] = _{eventSystems[i].TypeName.ToCamelCase()};");
-                    }
-                    builder.AppendLine("return events;");
+                    builder.AppendLine($"events[{i}] = {eventSystems[i].FieldName};");
                 }
-                else
-                {
-                    builder.AppendLine("return Array.Empty<global::Fantasy.Event.IEvent>();");
-                }
-                
+                builder.AppendLine("return events;");
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e);
-                throw;
+                builder.AppendLine("return Array.Empty<global::Fantasy.Event.IEvent>();");
             }
             builder.EndMethod();
             // AsyncEventTypeHandles
             builder.AddXmlComment("AsyncEventTypeHandles");
             builder.BeginMethod("public global::System.RuntimeTypeHandle[] AsyncEventTypeHandles()");
-            try
+            if (asyncEventSystem.Any())
             {
-                if (asyncEventSystem.Any())
+                builder.AppendLine($"var handles = new global::System.RuntimeTypeHandle[{asyncEventSystem.Count}];");
+                for (var i = 0; i < asyncEventSystem.Count; i++)
                 {
-                    builder.AppendLine($"var handles = new global::System.RuntimeTypeHandle[{asyncEventSystem.Count}];");
-                    for (var i = 0; i < asyncEventSystem.Count; i++)
-                    {
-                        var fieldName = $"_{asyncEventSystem[i].TypeName.ToCamelCase()}";
-                        builder.AppendLine($"handles[{i}] = {fieldName}.EventType().TypeHandle;");
-                    }
-                    builder.AppendLine("return handles;");
+                    builder.AppendLine($"handles[{i}] = {asyncEventSystem[i].FieldName}.EventType().TypeHandle;");
                 }
-                else
-                {
-                    builder.AppendLine("return Array.Empty<global::System.RuntimeTypeHandle>();");
-                }
-
+                builder.AppendLine("return handles;");
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e);
-                throw;
+                builder.AppendLine("return Array.Empty<global::System.RuntimeTypeHandle>();");
             }
             builder.EndMethod();
             // AsyncEvents
             builder.AddXmlComment("AsyncEvents");
             builder.BeginMethod("public global::Fantasy.Event.IEvent[] AsyncEvents()");
-            try
+            if (asyncEventSystem.Any())
             {
-                if (asyncEventSystem.Any())
+                builder.AppendLine($"var events = new global::Fantasy.Event.IEvent[{asyncEventSystem.Count}];");
+                for (var i = 0; i < asyncEventSystem.Count; i++)
                 {
-                    builder.AppendLine($"var events = new global::Fantasy.Event.IEvent[{asyncEventSystem.Count}];");
-                    for (var i = 0; i < asyncEventSystem.Count; i++)
-                    {
-                        builder.AppendLine($"events[{i}] = _{asyncEventSystem[i].TypeName.ToCamelCase()};");
-                    }
-                    builder.AppendLine("return events;");
+                    builder.AppendLine($"events[{i}] = {asyncEventSystem[i].FieldName};");
                 }
-                else
-                {
-                    builder.AppendLine("return Array.Empty<global::Fantasy.Event.IEvent>();");
-                }
-                
+                builder.AppendLine("return events;");
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e);
-                throw;
+                builder.AppendLine("return Array.Empty<global::Fantasy.Event.IEvent>();");
             }
             builder.EndMethod();
             // 结束类和命名空间
@@ -308,59 +268,40 @@ namespace Fantasy.SourceGenerator.Generators
             // 生成字段用于存储已注册的事件处理器（用于 UnRegister）
             foreach (var eventSystemTypeInfo in sphereEventSystem)
             {
-                var fieldName = $"_{eventSystemTypeInfo.TypeName.ToCamelCase()}";
-                builder.AppendLine($"private {eventSystemTypeInfo.TypeFullName} {fieldName} = new {eventSystemTypeInfo.TypeFullName}();");
+                builder.AppendLine($"private {eventSystemTypeInfo.TypeFullName} {eventSystemTypeInfo.FieldName} = new {eventSystemTypeInfo.TypeFullName}();");
             }
             // EventTypeHandles
             builder.AddXmlComment("TypeHashCodes");
             builder.BeginMethod("public long[] TypeHashCodes()");
-            try
+            if (sphereEventSystem.Any())
             {
-                if (sphereEventSystem.Any())
+                builder.AppendLine($"var typeHashCodes = new long[{sphereEventSystem.Count}];");
+                for (var i = 0; i < sphereEventSystem.Count; i++)
                 {
-                    builder.AppendLine($"var typeHashCodes = new long[{sphereEventSystem.Count}];");
-                    for (var i = 0; i < sphereEventSystem.Count; i++)
-                    {
-                        builder.AppendLine($"typeHashCodes[{i}] = _{sphereEventSystem[i].TypeName.ToCamelCase()}.TypeHashCode;");
-                    }
-                    builder.AppendLine("return typeHashCodes;");
+                    builder.AppendLine($"typeHashCodes[{i}] = {sphereEventSystem[i].FieldName}.TypeHashCode;");
                 }
-                else
-                {
-                    builder.AppendLine("return Array.Empty<long>();");
-                }
-                
+                builder.AppendLine("return typeHashCodes;");
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e);
-                throw;
+                builder.AppendLine("return Array.Empty<long>();");
             }
             builder.EndMethod();
             // SphereEvent
             builder.AddXmlComment("SphereEvent");
             builder.BeginMethod("public Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>[] SphereEvent()");
-            try
+            if (sphereEventSystem.Any())
             {
-                if (sphereEventSystem.Any())
+                builder.AppendLine($"var sphereEvents = new Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>[{sphereEventSystem.Count}];");
+                for (var i = 0; i < sphereEventSystem.Count; i++)
                 {
-                    builder.AppendLine($"var sphereEvents = new Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>[{sphereEventSystem.Count}];");
-                    for (var i = 0; i < sphereEventSystem.Count; i++)
-                    {
-                        builder.AppendLine($"sphereEvents[{i}] = _{sphereEventSystem[i].TypeName.ToCamelCase()}.Invoke;");
-                    }
-                    builder.AppendLine("return sphereEvents;");
+                    builder.AppendLine($"sphereEvents[{i}] = {sphereEventSystem[i].FieldName}.Invoke;");
                 }
-                else
-                {
-                    builder.AppendLine("return Array.Empty<Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>>();");
-                }
-                
+                builder.AppendLine("return sphereEvents;");
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e);
-                throw;
+                builder.AppendLine("return Array.Empty<Func<global::Fantasy.Scene, global::Fantasy.Sphere.SphereEventArgs, global::Fantasy.Async.FTask>>();");
             }
             builder.EndMethod();
             // 结束类和命名空间
@@ -408,20 +349,24 @@ namespace Fantasy.SourceGenerator.Generators
             public readonly EventSystemType EventSystemType;
             public readonly string TypeFullName;
             public readonly string TypeName;
+            public readonly string FieldName;  // 预先计算的字段名（_camelCase）
 
-            private EventSystemTypeInfo(EventSystemType eventSystemType, string typeFullName, string typeName)
+            private EventSystemTypeInfo(EventSystemType eventSystemType, string typeFullName, string typeName, string fieldName)
             {
                 EventSystemType = eventSystemType;
                 TypeFullName = typeFullName;
                 TypeName = typeName;
+                FieldName = fieldName;
             }
 
             public static EventSystemTypeInfo Create(EventSystemType eventSystemType, INamedTypeSymbol symbol)
             {
+                var typeName = symbol.Name;
                 return new EventSystemTypeInfo(
                     eventSystemType,
                     symbol.GetFullName(),
-                    symbol.Name);
+                    typeName,
+                    $"_{typeName.ToCamelCase()}");  // 预先计算字段名
             }
         }
     }

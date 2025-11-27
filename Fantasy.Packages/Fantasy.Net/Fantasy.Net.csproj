@@ -43,6 +43,7 @@
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
       <FrameworkReference Include="Microsoft.AspNetCore.App" />
+      <PackageReference Include="MemoryPack" Version="1.21.4" />
       <PackageReference Include="MongoDB.Bson" Version="3.5.0" />
       <PackageReference Include="MongoDB.Driver" Version="3.5.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />

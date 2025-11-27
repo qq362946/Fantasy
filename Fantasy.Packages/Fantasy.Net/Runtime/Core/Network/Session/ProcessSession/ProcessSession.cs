@@ -76,33 +76,30 @@ public sealed class ProcessSession : Session
     public object Deserialize(Type messageType, object message, ref OpCodeIdStruct opCodeIdStruct)
     {
         var memoryStream = _memoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.None);
-        
+
         try
         {
-            if (SerializerManager.TryGetSerializer(opCodeIdStruct.OpCodeProtocolType, out var serializer))
+            if (!SerializerManager.TrySerialize(opCodeIdStruct.OpCodeProtocolType, messageType, message, memoryStream,
+                    out var error))
             {
-                serializer.Serialize(messageType, message, memoryStream);
-                
-                if (memoryStream.Position == 0)
-                {
-                    return Scene.PoolGeneratorComponent.Create(messageType);
-                }
-                
-                memoryStream.SetLength(memoryStream.Position);
-                memoryStream.Seek(0, SeekOrigin.Begin);
-                return serializer.Deserialize(messageType, memoryStream);
+                throw new NotSupportedException(error);
             }
-        }
-        catch (Exception e)
-        {
-            Log.Error($"ProcessSession.Deserialize {e}");
+
+            if (memoryStream.Position == 0)
+            {
+                return Scene.PoolGeneratorComponent.Create(messageType);
+            }
+
+            memoryStream.SetLength(memoryStream.Position);
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            return SerializerManager.TryDeserialize(opCodeIdStruct.OpCodeProtocolType, messageType, memoryStream,
+                out var obj, out error) ? obj : throw new NotSupportedException(error);
         }
         finally
         {
             _memoryStreamBufferPool.ReturnMemoryStream(memoryStream);
         }
-        
-        throw new Exception($"type:{messageType} Does not support processing protocol");
     }
 }
 #endif

@@ -1,100 +1,116 @@
 using System;
 using System.Buffers;
 
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Fantasy.Serialize
 {
+    /// <summary>
+    /// 序列化接口，定义了 Fantasy 框架中所有序列化器必须实现的统一接口。
+    /// 支持 BSON、ProtoBuf、MemoryPack 等多种序列化方式。
+    /// </summary>
     public interface ISerialize
     {
         /// <summary>
-        /// 序列化器的名字，用于在协议里指定用什么协议序列化使用
+        /// 获取序列化器的名称标识，用于在网络协议中指定使用哪种序列化方式。
         /// </summary>
+        /// <value>序列化器名称，如 "Bson"、"ProtoBuf"、"MemoryPack"</value>
         string SerializeName { get; }
+
         /// <summary>
-        /// 反序列化
+        /// 将字节数组反序列化为指定类型的对象。
         /// </summary>
-        /// <param name="bytes"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">目标类型</typeparam>
+        /// <param name="bytes">包含序列化数据的字节数组</param>
+        /// <returns>反序列化后的对象实例</returns>
         T Deserialize<T>(byte[] bytes);
+
         /// <summary>
-        /// 反序列化
+        /// 从 MemoryStreamBuffer 中反序列化为指定类型的对象。
         /// </summary>
-        /// <param name="buffer"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">目标类型</typeparam>
+        /// <param name="buffer">包含序列化数据的内存流缓冲区</param>
+        /// <returns>反序列化后的对象实例</returns>
         T Deserialize<T>(MemoryStreamBuffer buffer);
+
         /// <summary>
-        /// 反序列化
+        /// 将字节数组反序列化为指定类型的对象（非泛型版本）。
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="bytes"></param>
-        /// <returns></returns>
+        /// <param name="type">目标对象的类型</param>
+        /// <param name="bytes">包含序列化数据的字节数组</param>
+        /// <returns>反序列化后的对象实例</returns>
         object Deserialize(Type type, byte[] bytes);
+
         /// <summary>
-        /// 反序列化
+        /// 从 MemoryStreamBuffer 中反序列化为指定类型的对象（非泛型版本）。
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="buffer"></param>
-        /// <returns></returns>
+        /// <param name="type">目标对象的类型</param>
+        /// <param name="buffer">包含序列化数据的内存流缓冲区</param>
+        /// <returns>反序列化后的对象实例</returns>
         object Deserialize(Type type, MemoryStreamBuffer buffer);
+
         /// <summary>
-        /// 反序列化
+        /// 从字节数组的指定范围反序列化为指定类型的对象。
         /// </summary>
-        /// <param name="bytes"></param>
-        /// <param name="index"></param>
-        /// <param name="count"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">目标类型</typeparam>
+        /// <param name="bytes">包含序列化数据的字节数组</param>
+        /// <param name="index">反序列化数据的起始索引</param>
+        /// <param name="count">要反序列化的字节数</param>
+        /// <returns>反序列化后的对象实例</returns>
         T Deserialize<T>(byte[] bytes, int index, int count);
+
         /// <summary>
-        /// 反序列化
+        /// 从字节数组的指定范围反序列化为指定类型的对象（非泛型版本）。
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="bytes"></param>
-        /// <param name="index"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
+        /// <param name="type">目标对象的类型</param>
+        /// <param name="bytes">包含序列化数据的字节数组</param>
+        /// <param name="index">反序列化数据的起始索引</param>
+        /// <param name="count">要反序列化的字节数</param>
+        /// <returns>反序列化后的对象实例</returns>
         object Deserialize(Type type, byte[] bytes, int index, int count);
+
         /// <summary>
-        /// 序列化
+        /// 将对象序列化为字节数组。
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">要序列化的对象</param>
+        /// <returns>包含序列化数据的字节数组</returns>
         byte[] Serialize(object obj);
+
         /// <summary>
-        /// 序列化
+        /// 将指定类型的对象序列化为字节数组。
         /// </summary>
-        /// <param name="object"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="object">要序列化的对象</param>
+        /// <returns>包含序列化数据的字节数组</returns>
         byte[] Serialize<T>(T @object);
+
         /// <summary>
-        /// 序列化
+        /// 将指定类型的对象序列化到 IBufferWriter 中，避免额外的内存分配。
         /// </summary>
-        /// <param name="object"></param>
-        /// <param name="buffer"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="object">要序列化的对象</param>
+        /// <param name="buffer">用于写入序列化数据的缓冲区</param>
         void Serialize<T>(T @object, IBufferWriter<byte> buffer);
+
         /// <summary>
-        /// 序列化
+        /// 将对象序列化到 IBufferWriter 中，避免额外的内存分配。
         /// </summary>
-        /// <param name="object"></param>
-        /// <param name="buffer"></param>
+        /// <param name="object">要序列化的对象</param>
+        /// <param name="buffer">用于写入序列化数据的缓冲区</param>
         void Serialize(object @object, IBufferWriter<byte> buffer);
+
         /// <summary>
-        /// 序列化
+        /// 将指定类型的对象序列化到 IBufferWriter 中，避免额外的内存分配。
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="object"></param>
-        /// <param name="buffer"></param>
+        /// <param name="type">对象的类型</param>
+        /// <param name="object">要序列化的对象</param>
+        /// <param name="buffer">用于写入序列化数据的缓冲区</param>
         void Serialize(Type type, object @object, IBufferWriter<byte> buffer);
+
         /// <summary>
-        /// 克隆
+        /// 通过序列化和反序列化创建对象的深度克隆。
         /// </summary>
-        /// <param name="t"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="t">要克隆的对象</param>
+        /// <returns>克隆后的新对象实例</returns>
         T Clone<T>(T t);
     }
 }

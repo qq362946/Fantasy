@@ -30,7 +30,6 @@ namespace Fantasy.SourceGenerator.Generators
                 if (CompilationHelper.IsSourceGeneratorDisabled(source.Left)) return;
                 if (!CompilationHelper.HasFantasyDefine(source.Left)) return;
                 if (source.Left.GetTypeByMetadataName("Fantasy.Assembly.IEntityTypeCollectionRegistrar") == null) return;
-
                 GenerateRegistrationCode(spc, source.Left, source.Right!);
             });
         }
@@ -108,15 +107,14 @@ namespace Fantasy.SourceGenerator.Generators
 
         private static bool IsEntityTarget(SyntaxNode node)
         {
-            // 普通的实体类定义
-            if (node is ClassDeclarationSyntax classDecl)
-                return classDecl.BaseList != null && classDecl.BaseList.Types.Any();
-
-            // 泛型写法
-            if (node is GenericNameSyntax)
-                return true;
-
-            return false;
+            return node switch
+            {
+                // 普通的实体类定义
+                ClassDeclarationSyntax classDecl => classDecl.BaseList != null && classDecl.BaseList.Types.Any(),
+                // 泛型写法
+                GenericNameSyntax => true,
+                _ => false
+            };
         }
 
         private static EntityTypeInfo? GetEntityTypeInfo(GeneratorSyntaxContext context)
@@ -124,34 +122,42 @@ namespace Fantasy.SourceGenerator.Generators
             var node = context.Node;
             INamedTypeSymbol? symbol = null;
 
-            if (node is ClassDeclarationSyntax classDecl)
+            switch (node)
             {
-                symbol = context.SemanticModel.GetDeclaredSymbol(classDecl) as INamedTypeSymbol;
-            }
-            else if (node is GenericNameSyntax genericName)
-            {
-                // 获取泛型名称对应的类型符号
-                var symbolInfo = context.SemanticModel.GetSymbolInfo(genericName);
-                symbol = symbolInfo.Symbol as INamedTypeSymbol;
+                case ClassDeclarationSyntax classDecl:
+                {
+                    symbol = context.SemanticModel.GetDeclaredSymbol(classDecl) as INamedTypeSymbol;
+                    break;
+                }
+                case GenericNameSyntax genericName:
+                {
+                    // 获取泛型名称对应的类型符号
+                    var symbolInfo = context.SemanticModel.GetSymbolInfo(genericName);
+                    symbol = symbolInfo.Symbol as INamedTypeSymbol;
+                    break;
+                }
             }
 
             if (symbol == null)
+            {
                 return null;
-
-            //排除非实体
+            }
+            
             if (!InheritsFromEntitySymbol(symbol))
+            {
+                // 排除非实体
                 return null;
-
-            //排除不可实例化的
+            }
+            
             if (!symbol.IsInstantiable())
+            {
+                // 排除不可实例化的
                 return null;
+            }
 
-            if (symbol.IsGenericType) return new EntityTypeInfo(
-                    symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                    symbol.Name ); // 注册闭合泛型实体
-            else return new EntityTypeInfo(
-                        symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                        symbol.Name ); // 注册普通实体类型
+            return new EntityTypeInfo(
+                symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+                symbol.Name );
         }
 
         private sealed record EntityTypeInfo(

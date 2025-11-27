@@ -56,15 +56,15 @@ namespace Fantasy.PacketParser
                 return Scene.PoolGeneratorComponent.Create(messageType);
             }
 
-            if (SerializerManager.TryGetSerializer(OpCodeIdStruct.OpCodeProtocolType, out var serializer))
+            if (SerializerManager.TryDeserialize( OpCodeIdStruct.OpCodeProtocolType, messageType, MemoryStream,
+                    out var obj, out var error))
             {
-                var obj = serializer.Deserialize(messageType, MemoryStream);
                 MemoryStream.Seek(0, SeekOrigin.Begin);
                 return obj;
             }
             
+            Log.Error(error);
             MemoryStream.Seek(0, SeekOrigin.Begin);
-            Log.Error($"protocolCode:{ProtocolCode} Does not support processing protocol");
             return null;
         }
     }

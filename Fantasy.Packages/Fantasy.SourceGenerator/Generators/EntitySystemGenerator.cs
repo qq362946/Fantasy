@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.Immutable;
+// ReSharper disable VariableHidesOuterVariable
+// ReSharper disable CollectionNeverUpdated.Local
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 
 namespace Fantasy.SourceGenerator.Generators
@@ -34,44 +36,101 @@ namespace Fantasy.SourceGenerator.Generators
                     transform: static (ctx, _) => GetClosedEntitySymbol(ctx))
                 .Where(static symbol => symbol != null)
                 .Collect()
-                .Select(static (types, _) => types.Distinct<INamedTypeSymbol>(SymbolEqualityComparer.Default).ToImmutableArray());
+                .Select(static (types, _) =>
+                    types.Distinct<INamedTypeSymbol>(SymbolEqualityComparer.Default).ToImmutableArray());
 
             // 根据 闭合Entity 处理 System
             var finalSystemInfos = systemTypes.Combine(usedClosedGenericEntities)
                 .Select((tuple, _) =>
-            {
-                var systems = tuple.Left;
-                var usedEntities = tuple.Right;
-                var result = new List<EntitySystemTypeInfo>();
-
-                foreach (var systemSymbol in systems)
                 {
-                    // 泛型System
-                    if (systemSymbol!.IsOpenGeneric()) 
+                    var systemWrappers = tuple.Left;
+                    var usedEntities = tuple.Right;
+                    var result = new List<EntitySystemTypeInfo>();
+                    var entitiesByConstructedFrom = new Dictionary<INamedTypeSymbol, List<INamedTypeSymbol>>(SymbolEqualityComparer.Default);
+
+                    foreach (var entity in usedEntities)
                     {
-                        foreach (var entitySymbol in usedEntities)
+                        if (entity == null)
                         {
-                            // 尝试为 闭合Entity 构造 闭合System
-                            if (TryCreateClosedSystemInfo(systemSymbol!, entitySymbol!, out var info))
+                            continue;
+                        }
+
+                        var key = entity.ConstructedFrom;
+
+                        if (!entitiesByConstructedFrom.TryGetValue(key, out var list))
+                        {
+                            list = new List<INamedTypeSymbol>();
+                            entitiesByConstructedFrom.Add(key, list);
+                        }
+
+                        list.Add(entity);
+                    }
+
+                    foreach (var systemWrapper in systemWrappers)
+                    {
+                        if (systemWrapper == null)
+                        {
+                            continue;
+                        }
+
+                        var systemSymbol = systemWrapper.Symbol;
+
+                        if (systemWrapper.IsOpenGeneric)
+                        {
+                            var targetEntityArg = systemWrapper.TargetEntityArg;
+
+                            if (targetEntityArg == null)
                             {
-                                result.Add(info!);
+                                continue;
+                            }
+
+                            var systemTypeParamCount = systemWrapper.TypeParameterCount;
+
+                            if (!entitiesByConstructedFrom.TryGetValue(targetEntityArg.ConstructedFrom, out var matchingEntities))
+                            {
+                                continue; // 没有匹配的实体，跳过
+                            }
+
+                            foreach (var entitySymbol in matchingEntities)
+                            {
+                                if (entitySymbol.TypeArguments.Length != systemTypeParamCount)
+                                {
+                                    // 快速验证泛型参数数量（提前过滤）
+                                    continue;
+                                }
+
+                                try
+                                {
+                                    // 构造闭合的 System 类型
+                                    var constructedSystemSymbol = systemSymbol.Construct(entitySymbol.TypeArguments.ToArray());
+                                    var info = CreateInfoFromSymbol(constructedSystemSymbol);
+                                    if (info != null)
+                                    {
+                                        result.Add(info);
+                                    }
+                                }
+                                catch
+                                {
+                                    // 构造失败（泛型约束不满足等），跳过
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // 普通 System（非泛型或已闭合泛型）
+                            var info = CreateInfoFromSymbol(systemSymbol);
+                            if (info != null)
+                            {
+                                result.Add(info);
                             }
                         }
                     }
-                    else // 普通 System
-                    {
-                        var info = CreateInfoFromSymbol(systemSymbol!);
-                        if (info != null)
-                        {
-                            result.Add(info);
-                        }
-                    }
-                }
-                return result;
-            });
+
+                    return result;
+                });
 
             //组合编译信息输出
-           var source = context.CompilationProvider.Combine(finalSystemInfos);
+            var source = context.CompilationProvider.Combine(finalSystemInfos);
             context.RegisterSourceOutput(source, (spc, source) =>
             {
                 if (CompilationHelper.IsSourceGeneratorDisabled(source.Left)) return;
@@ -85,18 +144,30 @@ namespace Fantasy.SourceGenerator.Generators
 
         #region Predicate & Transform
 
-        private static INamedTypeSymbol? GetSystemSymbol(GeneratorSyntaxContext context)
+        private static SystemSymbolWrapper? GetSystemSymbol(GeneratorSyntaxContext context)
         {
             var classDecl = (ClassDeclarationSyntax)context.Node;
             var symbol = context.SemanticModel.GetDeclaredSymbol(classDecl) as INamedTypeSymbol;
-            if (symbol == null || symbol.IsAbstract) return null; // 忽略抽象类
 
-            // 目标实体不能是闭合泛型
+            if (symbol == null || symbol.IsAbstract)
+            {
+                return null; // 忽略抽象类
+            }
+
+            // 计算目标实体类型
             var targetEntityArg = GetSystemTargetEntityArg(symbol!);
-            if(targetEntityArg == null) return null;
-            if(targetEntityArg.IsGenericType && !targetEntityArg.IsOpenGeneric()) return null;
 
-            return symbol;
+            if (targetEntityArg == null)
+            {
+                return null;
+            }
+
+            if (targetEntityArg.IsGenericType && !targetEntityArg.IsOpenGeneric())
+            {
+                return null;
+            }
+            
+            return new SystemSymbolWrapper(symbol, targetEntityArg);
         }
 
         // 判断代码中使用到的闭合泛型 Entity
@@ -104,18 +175,25 @@ namespace Fantasy.SourceGenerator.Generators
 
         private static INamedTypeSymbol? GetClosedEntitySymbol(GeneratorSyntaxContext context)
         {
-            if (context.Node is not GenericNameSyntax genericName) return null;
+            if (context.Node is not GenericNameSyntax genericName)
+            {
+                return null;
+            }
 
             var symbolInfo = context.SemanticModel.GetSymbolInfo(genericName);
             var symbol = symbolInfo.Symbol as INamedTypeSymbol;
 
-            if (symbol == null) return null;
-            if (symbol.IsOpenGeneric()) return null; // 确保是闭合泛型
-
-            // 检查继承自 Entity
-            if (!EntityTypeCollectionGenerator.InheritsFromEntitySymbol(symbol)) return null;
-
-            return symbol;
+            if (symbol == null)
+            {
+                return null;
+            }
+            
+            if (symbol.IsOpenGeneric())
+            {
+                return null; // 确保是闭合泛型
+            }
+            
+            return EntityTypeCollectionGenerator.InheritsFromEntitySymbol(symbol) ? symbol : null;
         }
 
         #endregion
@@ -125,56 +203,27 @@ namespace Fantasy.SourceGenerator.Generators
         /// <summary>
         /// 获取System类的目标实体参数
         /// </summary>
-        private static INamedTypeSymbol? GetSystemTargetEntityArg(INamedTypeSymbol systemSymbol) {
+        private static INamedTypeSymbol? GetSystemTargetEntityArg(INamedTypeSymbol systemSymbol) 
+        {
             var baseType = systemSymbol.BaseType;
 
-            if (!baseType.IsGenericType) 
+            if (!baseType.IsGenericType)
+            {
                 return null;
+            }
 
             return baseType.TypeArguments.FirstOrDefault() as INamedTypeSymbol;
         }
 
-        ///<summary>
-        /// NOTE : 需要提高完备性
-        /// 尝试将一个 开放泛型System 和一个 闭合泛型Entity 进行匹配, 
-        /// 并生成闭合的 System 信息。
-        ///</summary>
-        private static bool TryCreateClosedSystemInfo(INamedTypeSymbol systemSymbol, INamedTypeSymbol entitySymbol, out EntitySystemTypeInfo? info)
-        {
-            // 1. 获取 System 关注的实体基类型 (从 AwakeSystem<T> 中提取 T)
-            var targetEntityArg = GetSystemTargetEntityArg(systemSymbol);
-            info = null;
-
-            // 2. 检查 Entity 是否匹配 System 的定义
-
-            // 比如 泛型System 的参数结构 AGenericEntity<T1, T2> 与对应的实体 AGenericEntity<EnumA, EnumB>, 
-            // 它们的 ConstructedFrom 必须吻合
-
-            if (!SymbolEqualityComparer.Default.Equals(targetEntityArg.ConstructedFrom, entitySymbol.ConstructedFrom))
-                return false;
-
-            // 3. 检查参数数量是否相等
-            var systemTypeArgs = entitySymbol.TypeArguments.ToArray();
-            if (systemTypeArgs.Length != systemSymbol.TypeParameters.Length) return false;
-
-            // 4. 构造闭合的 System 类型
-            // 使用 Entity 的泛型参数 (EnumA, EnumB) 来填充 System 的泛型参数
-            try
-            {
-                var constructedSystemSymbol = systemSymbol.Construct(systemTypeArgs);
-                info = CreateInfoFromSymbol(constructedSystemSymbol);
-                return info != null;
-            }
-            catch
-            {
-                return false;
-            }
-        }
 
         private static EntitySystemTypeInfo? CreateInfoFromSymbol(INamedTypeSymbol symbol)
         {
             var baseType = symbol.BaseType;
-            if (baseType == null) return null;
+            
+            if (baseType == null)
+            {
+                return null;
+            }
 
             var typeName = baseType.ConstructedFrom.Name;
 
@@ -333,11 +382,15 @@ namespace Fantasy.SourceGenerator.Generators
         private static bool IsSystemClass(SyntaxNode node)
         {
             if (node is not ClassDeclarationSyntax classDecl)
+            {
                 return false;
+            }
 
             // 必须有基类型列表（继承抽象类）
             if (classDecl.BaseList == null || classDecl.BaseList.Types.Count == 0)
+            {
                 return false;
+            }
 
             // 快速检查是否包含可能的 EntitySystem 基类名称
             var baseListText = classDecl.BaseList.ToString();
@@ -348,6 +401,25 @@ namespace Fantasy.SourceGenerator.Generators
                    baseListText.Contains("LateUpdateSystem");
         }
         
+        /// <summary>
+        /// 系统符号包装类，携带预先计算的元数据以避免重复判断和访问
+        /// </summary>
+        private sealed class SystemSymbolWrapper
+        {
+            public INamedTypeSymbol Symbol { get; }
+            public bool IsOpenGeneric { get; }
+            public INamedTypeSymbol? TargetEntityArg { get; }  // 预先计算的目标实体类型
+            public int TypeParameterCount { get; }  // 预先计算的泛型参数数量
+
+            public SystemSymbolWrapper(INamedTypeSymbol symbol, INamedTypeSymbol? targetEntityArg)
+            {
+                Symbol = symbol;
+                TargetEntityArg = targetEntityArg;
+                IsOpenGeneric = symbol.IsOpenGeneric();
+                TypeParameterCount = symbol.TypeParameters.Length;
+            }
+        }
+
         private enum EntitySystemType
         {
             None,
@@ -357,7 +429,7 @@ namespace Fantasy.SourceGenerator.Generators
             DeserializeSystem,
             LateUpdateSystem
         }
-        
+
         private sealed class EntitySystemTypeInfo
         {
             public readonly EntitySystemType EntitySystemType;

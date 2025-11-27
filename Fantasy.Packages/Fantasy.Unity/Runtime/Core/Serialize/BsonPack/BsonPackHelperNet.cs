@@ -17,23 +17,23 @@ using MongoDB.Bson.Serialization.Serializers;
 namespace Fantasy.Serialize
 {
     /// <summary>
-    /// BSON帮助方法
+    /// BSON 序列化实现，基于 MongoDB.Bson 提供 BSON 格式的序列化/反序列化功能。
+    /// 支持 ASerialize 接口的序列化生命周期回调，适用于数据库持久化和网络传输。
     /// </summary>
     public class BsonPackHelper : ISerialize, IAssemblyLifecycle
     {
-        /// <summary>
-        /// 序列化器的名字
-        /// </summary>
+        /// <inheritdoc/>
         public string SerializeName { get; } = "Bson";
         
         /// <summary>
-        /// 构造函数
+        /// 初始化 BSON 序列化器，配置序列化约定和自定义序列化器。
         /// </summary>
         public BsonPackHelper()
         {
-            // 初始化ConventionRegistry、注册IgnoreExtraElements。
+            // 初始化 ConventionRegistry，注册 IgnoreExtraElements 约定，忽略反序列化时多余的字段
             ConventionRegistry.Register("IgnoreExtraElements", new ConventionPack { new IgnoreExtraElementsConvention(true) }, type => true);
-            // 注册一个自定义的序列化器。
+            // 注册通用 Object 序列化器，允许所有类型的对象序列化
+            // 可以在此处注册自定义结构体序列化器，例如：
             // BsonSerializer.TryRegisterSerializer(typeof(float2), new StructBsonSerialize<float2>());
             // BsonSerializer.TryRegisterSerializer(typeof(float3), new StructBsonSerialize<float3>());
             // BsonSerializer.TryRegisterSerializer(typeof(float4), new StructBsonSerialize<float4>());
@@ -43,6 +43,10 @@ namespace Fantasy.Serialize
 
         #region AssemblyManifest
 
+        /// <summary>
+        /// 初始化 BSON 序列化器并注册到程序集生命周期管理。
+        /// </summary>
+        /// <returns>初始化后的 BsonPackHelper 实例</returns>
         internal async FTask<BsonPackHelper> Initialize()
         {
             await AssemblyLifecycle.Add(this);
@@ -50,7 +54,7 @@ namespace Fantasy.Serialize
         }
 
         /// <summary>
-        /// 
+        /// 程序集加载时的回调，注册所有实体类型的 BSON ClassMap。
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
         public async FTask OnLoad(AssemblyManifest assemblyManifest)
@@ -71,7 +75,7 @@ namespace Fantasy.Serialize
         }
 
         /// <summary>
-        /// 
+        /// 程序集卸载时的回调。
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
         public async FTask OnUnload(AssemblyManifest assemblyManifest)
@@ -81,229 +85,105 @@ namespace Fantasy.Serialize
 
         #endregion
 
-        /// <summary>
-        /// 反序列化
-        /// </summary>
-        /// <param name="bytes"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public T Deserialize<T>(byte[] bytes)
         {
-            var @object = BsonSerializer.Deserialize<T>(bytes);
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.AfterDeserialization();
-            }
-            return @object;
+            return BsonSerializer.Deserialize<T>(bytes);
         }
 
-        /// <summary>
-        /// 反序列化
-        /// </summary>
-        /// <param name="buffer"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public T Deserialize<T>(MemoryStreamBuffer buffer)
         {
-            var @object = BsonSerializer.Deserialize<T>(buffer);
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.AfterDeserialization();
-            }
-            return @object;
+            return BsonSerializer.Deserialize<T>(buffer);
         }
-    
-        /// <summary>
-        /// 反序列化
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="bytes"></param>
-        /// <returns></returns>
+
+        /// <inheritdoc/>
         public object Deserialize(Type type, byte[] bytes)
         {
-            var @object = BsonSerializer.Deserialize(bytes, type);
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.AfterDeserialization();
-            }
-            return @object;
+            return BsonSerializer.Deserialize(bytes, type);
         }
-    
-        /// <summary>
-        /// 反序列化
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="buffer"></param>
-        /// <returns></returns>
+
+        /// <inheritdoc/>
         public object Deserialize(Type type, MemoryStreamBuffer buffer)
         {
-            var @object = BsonSerializer.Deserialize(buffer, type);
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.AfterDeserialization();
-            }
-            return @object;
+            return BsonSerializer.Deserialize(buffer, type);
         }
 
-        /// <summary>
-        /// 反序列化
-        /// </summary>
-        /// <param name="bytes"></param>
-        /// <param name="index"></param>
-        /// <param name="count"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public unsafe T Deserialize<T>(byte[] bytes, int index, int count)
         {
-            T @object;
-            
             fixed (byte* ptr = &bytes[index])
             {
                 using var stream = new UnmanagedMemoryStream(ptr, count);
-                @object = BsonSerializer.Deserialize<T>(stream);
+                return BsonSerializer.Deserialize<T>(stream);
             }
-
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.AfterDeserialization();
-            }
-
-            return @object;
         }
 
-        /// <summary>
-        /// 反序列化
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="bytes"></param>
-        /// <param name="index"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public unsafe object Deserialize(Type type, byte[] bytes, int index, int count)
         {
-            object @object;
-            
             fixed (byte* ptr = &bytes[index])
             {
                 using var stream = new UnmanagedMemoryStream(ptr, count);
-                @object = BsonSerializer.Deserialize(stream, type);
+                return BsonSerializer.Deserialize(stream, type);
             }
-            
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.AfterDeserialization();
-            }
-
-            return @object;
         }
 
-        /// <summary>
-        /// 序列化
-        /// </summary>
-        /// <param name="object"></param>
-        /// <param name="buffer"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <inheritdoc/>
         public void Serialize<T>(T @object, IBufferWriter<byte> buffer)
         {
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.BeginInit();
-            }
-
-            using IBsonWriter bsonWriter =
+            var bsonWriter =
                 new BsonBinaryWriter((MemoryStream)buffer, BsonBinaryWriterSettings.Defaults);
             BsonSerializer.Serialize(bsonWriter, @object);
+            bsonWriter.Flush();
         }
 
-        /// <summary>
-        /// 序列化
-        /// </summary>
-        /// <param name="object"></param>
-        /// <param name="buffer"></param>
+        /// <inheritdoc/>
         public void Serialize(object @object, IBufferWriter<byte> buffer)
         {
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.BeginInit();
-            }
-            
-            using IBsonWriter bsonWriter =
+            var bsonWriter =
                 new BsonBinaryWriter((MemoryStream)buffer, BsonBinaryWriterSettings.Defaults);
             BsonSerializer.Serialize(bsonWriter, @object.GetType(), @object);
+            bsonWriter.Flush();
         }
 
-        /// <summary>
-        /// 序列化
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="object"></param>
-        /// <param name="buffer"></param>
+        /// <inheritdoc/>
         public void Serialize(Type type, object @object, IBufferWriter<byte> buffer)
         {
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.BeginInit();
-            }
-
-            using IBsonWriter bsonWriter =
+            var bsonWriter =
                 new BsonBinaryWriter((MemoryStream)buffer, BsonBinaryWriterSettings.Defaults);
             BsonSerializer.Serialize(bsonWriter, type, @object);
+            bsonWriter.Flush();
         }
 
         /// <summary>
-        /// 序列化并返回的长度
+        /// 序列化对象到 MemoryStreamBuffer 并返回序列化后的数据长度。
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="object"></param>
-        /// <param name="buffer"></param>
-        /// <returns></returns>
+        /// <param name="type">对象的类型</param>
+        /// <param name="object">要序列化的对象</param>
+        /// <param name="buffer">用于写入序列化数据的缓冲区</param>
+        /// <returns>序列化后的数据长度（字节数）</returns>
         public int SerializeAndReturnLength(Type type, object @object, MemoryStreamBuffer buffer)
         {
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.BeginInit();
-            }
-            
-            using IBsonWriter bsonWriter = new BsonBinaryWriter(buffer, BsonBinaryWriterSettings.Defaults);
+            var bsonWriter = new BsonBinaryWriter(buffer, BsonBinaryWriterSettings.Defaults);
             BsonSerializer.Serialize(bsonWriter, type, @object);
+            bsonWriter.Flush();
             return (int)buffer.Length;
         }
 
-        /// <summary>
-        /// 序列化
-        /// </summary>
-        /// <param name="object"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public byte[] Serialize(object @object)
         {
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.BeginInit();
-            }
             return @object.ToBson(@object.GetType());
         }
-    
-        /// <summary>
-        /// 序列化
-        /// </summary>
-        /// <param name="object"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+
+        /// <inheritdoc/>
         public byte[] Serialize<T>(T @object)
         {
-            if (@object is ASerialize aSerialize)
-            {
-                aSerialize.BeginInit();
-            }
             return @object.ToBson<T>();
         }
-    
-        /// <summary>
-        /// 克隆
-        /// </summary>
-        /// <param name="t"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+
+        /// <inheritdoc/>
         public T Clone<T>(T t)
         {
             return Deserialize<T>(Serialize(t));

@@ -99,17 +99,23 @@ namespace Fantasy.SourceGenerator.Common
         /// </summary>
         public static bool IsOpenGeneric(this ITypeSymbol typeSymbol)
         {
-            if (typeSymbol is INamedTypeSymbol namedType)
+            if (typeSymbol is not INamedTypeSymbol namedType)
             {
-                // 顶层类型参数是开放类型
-                if (namedType.TypeArguments.Any(ta => ta.TypeKind == TypeKind.TypeParameter))
-                    return true;
+                return false;
+            }
+            
+            // 顶层类型参数是开放类型
+            if (namedType.TypeArguments.Any(ta => ta.TypeKind == TypeKind.TypeParameter))
+            {
+                return true;
+            }
 
-                // 递归检查
-                foreach (var ta in namedType.TypeArguments)
+            // 递归检查
+            foreach (var ta in namedType.TypeArguments)
+            {
+                if (ta.IsOpenGeneric())
                 {
-                    if (ta.IsOpenGeneric())
-                        return true;
+                    return true;
                 }
             }
             return false;

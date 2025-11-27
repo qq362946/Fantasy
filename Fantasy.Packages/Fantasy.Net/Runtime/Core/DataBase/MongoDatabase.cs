@@ -25,7 +25,7 @@ namespace Fantasy.Database
         private const int DefaultTaskSize = 1024;
         private Scene _scene;
         private MongoClient _mongoClient;
-        private ISerialize _serializer;
+        private BsonPackHelper _serializer;
         private IMongoDatabase _mongoDatabase;
         private CoroutineLock _dataBaseLock;
         private readonly HashSet<string> _collections = new HashSet<string>();
@@ -66,7 +66,7 @@ namespace Fantasy.Database
                 _dataBaseLock = scene.CoroutineLockComponent.Create(GetType().TypeHandle.Value.ToInt64());
                 // 记录所有集合名
                 _collections.UnionWith(_mongoDatabase.ListCollectionNames().ToList());
-                _serializer = SerializerManager.GetSerializer(FantasySerializerType.Bson);
+                _serializer = SerializerManager.BsonPack;
                 Log.Info($"dbName:{dbName} Database connection successful.");
             }
             catch (Exception e)

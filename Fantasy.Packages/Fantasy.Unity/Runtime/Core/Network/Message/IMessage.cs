@@ -12,7 +12,7 @@ using ProtoBuf;
 
 namespace Fantasy.Network.Interface
 {
-    public abstract class AMessage : ASerialize, IPool
+    public abstract class AMessage : IDisposable, IPool
     {
 #if FANTASY_NET || FANTASY_UNITY || FANTASY_CONSOLE
         [BsonIgnore] 
@@ -46,6 +46,11 @@ namespace Fantasy.Network.Interface
         public void SetIsPool(bool isPool)
         {
             _isPool = isPool;
+        }
+
+        public virtual void Dispose()
+        {
+            
         }
     }
     

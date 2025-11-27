@@ -6,6 +6,19 @@ using Fantasy.SeparateTable;
 
 namespace Fantasy;
 
+public sealed class TestGenericEntity<T> : Entity where T : Entity
+{
+    public T Entity;
+}
+
+public sealed class TestGenericEntityAwakeSystem<T> : AwakeSystem<TestGenericEntity<T>> where T : Entity
+{
+    protected override void Awake(TestGenericEntity<T> self)
+    {
+        Log.Debug($"TestGenericEntityAwakeSystem {typeof(T).FullName}");
+    }
+}
+
 public sealed class SaveEntity : Entity
 {
 
@@ -66,15 +79,17 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
-                var saveEntity = Entity.Create<SaveEntity>(scene);
-                saveEntity.AddComponent<SubSceneTestComponent>();
-                
-                await saveEntity.PersistAggregate<>(scene.World.Database);
+
+                Entity.Create<SubSceneTestComponent>(scene).AddComponent<TestGenericEntity<SaveEntity>>();
+                // var saveEntity = Entity.Create<SaveEntity>(scene);
+                // saveEntity.AddComponent<SubSceneTestComponent>();
+                //
+                // await saveEntity.PersistAggregate<>(scene.World.Database);
                
                 // var saveEntity = await scene.World.Database.LoadWithSeparateTables<SaveEntity>(488710241381777422);
                 // var saveEntity = await scene.World.Database.Query<SaveEntity>(488710241381777422,true);
                 // await saveEntity.LoadWithSeparateTables(scene.World.Database);
-                var a = 0;
+                // var a = 0;
                 //
                 // Log.Debug($"{saveEntity.GetComponent<SubSceneTestComponent>()!=null}");
                 // var saveEntity = Entity.Create<SaveEntity>(scene, true, false);
