@@ -66,7 +66,7 @@ public sealed class TerminusComponent : Entity
     /// <param name="forwardSessionAddress"></param>
     /// <param name="forwardSceneAddress"></param>
     /// <returns></returns>
-    public async FTask<(uint, Terminus)> Create(long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress)
+    internal async FTask<(uint, Terminus)> Create(long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress)
     {
         if (_terminals.ContainsKey(roamingId))
         {
@@ -76,6 +76,7 @@ public sealed class TerminusComponent : Entity
         var terminus = roamingId == 0
             ? Entity.Create<Terminus>(Scene, false, true)
             : Entity.Create<Terminus>(Scene, roamingId, false, true);
+        terminus.IsDisposeTerminus = false;
         terminus.RoamingType = roamingType;
         terminus.TerminusId = terminus.RuntimeId;
         terminus.ForwardSceneAddress = forwardSceneAddress;
@@ -90,7 +91,7 @@ public sealed class TerminusComponent : Entity
     /// 添加一个漫游终端。
     /// </summary>
     /// <param name="terminus"></param>
-    public void AddTerminus(Terminus terminus)
+    internal void AddTerminus(Terminus terminus)
     {
         _terminals.Add(terminus.Id, terminus);
     }
@@ -101,7 +102,7 @@ public sealed class TerminusComponent : Entity
     /// <param name="roamingId"></param>
     /// <param name="terminus"></param>
     /// <returns></returns>
-    public bool TryGetTerminus(long roamingId, out Terminus terminus)
+    internal bool TryGetTerminus(long roamingId, out Terminus terminus)
     {
         return _terminals.TryGetValue(roamingId, out terminus);
     }
@@ -111,7 +112,7 @@ public sealed class TerminusComponent : Entity
     /// </summary>
     /// <param name="roamingId"></param>
     /// <returns></returns>
-    public Terminus GetTerminus(long roamingId)
+    internal Terminus GetTerminus(long roamingId)
     {
         return _terminals[roamingId];
     }
@@ -121,7 +122,7 @@ public sealed class TerminusComponent : Entity
     /// </summary>
     /// <param name="roamingId"></param>
     /// <param name="isDispose"></param>
-    public void RemoveTerminus(long roamingId, bool isDispose = true)
+    internal void RemoveTerminus(long roamingId, bool isDispose)
     {
         if (!_terminals.Remove(roamingId, out var terminus))
         {

@@ -41,7 +41,7 @@ public sealed class Roaming : Entity
     /// <summary>
     /// 关联Session的漫游组件。
     /// </summary>
-    internal SessionRoamingComponent SessionRoamingComponent;
+    internal SessionRoamingComponent? SessionRoamingComponent;
     /// <summary>
     /// 获得当前漫游对应终端的TerminusId。
     /// </summary>
@@ -95,12 +95,12 @@ public sealed class Roaming : Entity
     /// 断开当前漫游的连接。
     /// </summary>
     /// <returns></returns>
-    public async FTask<uint> Disconnect()
+    internal async FTask<uint> Disconnect()
     {
         var response =
             await Scene.NetworkMessagingComponent.Call(TargetSceneAddress, new I_UnLinkRoamingRequest()
             {
-                RoamingId = SessionRoamingComponent.Id
+                RoamingId = SessionRoamingComponent!.Id, DisposeRoaming = true
             });
         return response.ErrorCode;
     }
@@ -120,12 +120,18 @@ public sealed class Roaming : Entity
             _waitCoroutineLock = null;
         }
         
+        if (SessionRoamingComponent != null)
+        {
+            SessionRoamingComponent.Remove(RoamingType, false);
+            SessionRoamingComponent = null;
+        }
+       
         TerminusId = 0;
+        RoamingType = 0;
         TargetSceneAddress = 0;
         ForwardSessionAddress = 0;
         
         RoamingLock = null;
-        SessionRoamingComponent = null;
         base.Dispose();
     }
 }

@@ -47,7 +47,8 @@ public sealed class RoamingComponent : Entity
         
         foreach (var (_, sessionRoamingComponent) in _sessionRoamingComponents)
         {
-            await sessionRoamingComponent.UnLink();
+            await sessionRoamingComponent.UnLinkAll();
+            sessionRoamingComponent.Dispose();
         }
         
         _sessionRoamingComponents.Clear();
@@ -156,20 +157,30 @@ public sealed class RoamingComponent : Entity
             return;
         }
 
-        taskId = _timerSchedulerNet.OnceTimer(delayRemove, () => 
-            { InnerRemove(roamingId, roamingType).Coroutine(); });
+        taskId = _timerSchedulerNet.OnceTimer(delayRemove, () =>
+        {
+            InnerRemove(roamingId, roamingType).Coroutine();
+        });
         _delayRemoveTaskId.Add(roamingId, taskId);
     }
 
     private async FTask InnerRemove(long roamingId, int roamingType)
     {
-        if (!_sessionRoamingComponents.Remove(roamingId, out var sessionRoamingComponent))
+        if (!_sessionRoamingComponents.TryGetValue(roamingId, out var sessionRoamingComponent))
         {
             return;
         }
 
-        await sessionRoamingComponent.UnLink(roamingType);
-        sessionRoamingComponent.Dispose();
+        if (roamingType == 0)
+        {
+            await sessionRoamingComponent.UnLinkAll();
+            sessionRoamingComponent.Dispose();
+        }
+        else
+        {
+            await sessionRoamingComponent.UnLink(roamingType, true);
+        }
+        
         _delayRemoveTaskId.Remove(roamingId);
     }
 }

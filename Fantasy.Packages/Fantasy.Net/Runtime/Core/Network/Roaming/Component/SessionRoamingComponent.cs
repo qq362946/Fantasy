@@ -1,15 +1,13 @@
 #if FANTASY_NET
-using System;
-using System.Collections.Generic;
 using Fantasy.Async;
 using Fantasy.Entitas;
-using Fantasy.Entitas.Interface;
 using Fantasy.InnerMessage;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser.Interface;
 using Fantasy.Platform.Net;
 using Fantasy.Scheduler;
 using Fantasy.Timer;
+// ReSharper disable CheckNamespace
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
@@ -18,21 +16,6 @@ using Fantasy.Timer;
 
 namespace Fantasy.Network.Roaming;
 
-internal sealed class SessionRoamingComponentDestroySystem : DestroySystem<SessionRoamingComponent>
-{
-    protected override void Destroy(SessionRoamingComponent self)
-    {
-        self.RoamingLock.Dispose();
-        self.RoamingMessageLock.Dispose();
-        
-        self.RoamingLock = null;
-        self.RoamingMessageLock = null;
-        self.TimerComponent = null;
-        self.NetworkMessagingComponent = null;
-        self.MessageDispatcherComponent = null;
-    }
-}
-
 /// <summary>
 /// Session的漫游组件。
 /// 用于关联对应的Session的功能。
@@ -40,11 +23,12 @@ internal sealed class SessionRoamingComponentDestroySystem : DestroySystem<Sessi
 /// </summary>
 public sealed class SessionRoamingComponent : Entity
 {
-    internal CoroutineLock RoamingLock;
-    internal CoroutineLock RoamingMessageLock;
-    internal TimerComponent TimerComponent;
-    internal NetworkMessagingComponent NetworkMessagingComponent;
-    internal MessageDispatcherComponent MessageDispatcherComponent;
+    private CoroutineLock? _roamingLock;
+    private CoroutineLock? _roamingMessageLock;
+    private TimerComponent _timerComponent;
+    private NetworkMessagingComponent _networkMessagingComponent;
+    private MessageDispatcherComponent _messageDispatcherComponent;
+    
     /// <summary>
     /// 漫游的列表。
     /// </summary>
@@ -55,13 +39,41 @@ public sealed class SessionRoamingComponent : Entity
         session.SessionRoamingComponent = this;
         
         var scene = session.Scene;
-        TimerComponent = scene.TimerComponent;
-        NetworkMessagingComponent = scene.NetworkMessagingComponent;
-        MessageDispatcherComponent = scene.MessageDispatcherComponent;
-        RoamingLock = scene.CoroutineLockComponent.Create(this.GetType().TypeHandle.Value.ToInt64());
-        RoamingMessageLock = scene.CoroutineLockComponent.Create(this.GetType().TypeHandle.Value.ToInt64());
+        _timerComponent = scene.TimerComponent;
+        _networkMessagingComponent = scene.NetworkMessagingComponent;
+        _messageDispatcherComponent = scene.MessageDispatcherComponent;
+        _roamingLock = scene.CoroutineLockComponent.Create(this.GetType().TypeHandle.Value.ToInt64());
+        _roamingMessageLock = scene.CoroutineLockComponent.Create(this.GetType().TypeHandle.Value.ToInt64());
     }
-    
+
+    /// <summary>
+    /// 销毁方法
+    /// </summary>
+    public override void Dispose()
+    {
+        if (IsDisposed)
+        {
+            return;
+        }
+
+        if (_roamingLock != null)
+        {
+            _roamingLock.Dispose();
+            _roamingLock = null;
+        }
+        
+        if (_roamingMessageLock != null)
+        {
+            _roamingMessageLock.Dispose();
+            _roamingMessageLock = null;
+        }
+        
+        _timerComponent = null;
+        _networkMessagingComponent = null;
+        _messageDispatcherComponent = null;
+        base.Dispose();
+    }
+
     #region Get
 
     /// <summary>
@@ -73,6 +85,23 @@ public sealed class SessionRoamingComponent : Entity
     public bool TryGetRoaming(int roamingType, out Roaming roaming)
     {
         return _roaming.TryGetValue(roamingType, out roaming);
+    }
+
+    #endregion
+
+    #region Remove
+
+    internal void Remove(int roamingType, bool isDisponse)
+    {
+        if (!_roaming.Remove(roamingType, out var roaming))
+        {
+            return;
+        }
+
+        if (isDisponse)
+        {
+            roaming.Dispose();
+        }
     }
 
     #endregion
@@ -125,7 +154,7 @@ public sealed class SessionRoamingComponent : Entity
         roaming.ForwardSessionAddress = forwardSessionAddress;
         roaming.SessionRoamingComponent = this;
         roaming.RoamingType = roamingType;
-        roaming.RoamingLock = RoamingLock;
+        roaming.RoamingLock = _roamingLock;
         _roaming.Add(roamingType, roaming);
         return 0;
     }
@@ -136,51 +165,58 @@ public sealed class SessionRoamingComponent : Entity
 
     /// <summary>
     /// 断开当前的所有漫游关系。
-    /// <param name="removeRoamingType">要移除的RoamingType，默认不设置是移除所有漫游。</param>
     /// </summary>
-    public async FTask UnLink(int removeRoamingType = 0)
+    public async FTask UnLinkAll()
     {
-        switch (removeRoamingType)
+        foreach (var (roamingType,roaming) in _roaming)
         {
-            case 0:
+            try
             {
-                foreach (var (roamingType,roaming) in _roaming)
-                {
-                    try
-                    {
-                        var errorCode = await roaming.Disconnect();
-                
-                        if (errorCode != 0)
-                        {
-                            Log.Warning($"roaming roamingId:{Id} roamingType:{roamingType} disconnect  errorCode:{errorCode}");
-                        }
-                    }
-                    finally
-                    {
-                        roaming.Dispose();
-                    }
-                }
-        
-                _roaming.Clear();
-                return;
-            }
-            default:
-            {
-                if (!_roaming.Remove(removeRoamingType, out var roaming))
-                {
-                    return;
-                }
-
                 var errorCode = await roaming.Disconnect();
-        
+                
                 if (errorCode != 0)
                 {
-                    Log.Warning($"roaming roamingId:{Id} roamingType:{removeRoamingType} disconnect  errorCode:{errorCode}");
+                    Log.Warning($"roaming roamingId:{Id} roamingType:{roamingType} disconnect  errorCode:{errorCode}");
                 }
-
-                roaming.Dispose();
-                return;
             }
+            finally
+            {
+                roaming.Dispose();
+            }
+        }
+        
+        _roaming.Clear();
+    }
+
+    /// <summary>
+    /// 断开当前的漫游关系。
+    /// <param name="removeRoamingType">要移除的RoamingType，默认不设置是移除所有漫游。</param>
+    /// <param name="isDisponse">如果当前没有任何连接的Roaming就移除这个组件</param>
+    /// </summary>
+    public async FTask UnLink(int removeRoamingType, bool isDisponse)
+    {
+        if (removeRoamingType == 0)
+        {
+            throw new ArgumentException("removeRoamingType cannot be 0. Use UnLinkAll() to remove all roaming connections.", nameof(removeRoamingType));
+        }
+        
+        if (!_roaming.Remove(removeRoamingType, out var roaming))
+        {
+            return;
+        }
+
+        var errorCode = await roaming.Disconnect();
+        
+        if (errorCode != 0)
+        {
+            Log.Warning($"roaming roamingId:{Id} roamingType:{removeRoamingType} disconnect  errorCode:{errorCode}");
+        }
+
+        roaming.Dispose();
+        
+        if(isDisponse && _roaming.Count == 0)
+        {
+            Dispose();
         }
     }
 
@@ -227,7 +263,7 @@ public sealed class SessionRoamingComponent : Entity
     {
         if (!_roaming.TryGetValue(roamingType, out var roaming))
         {
-            return MessageDispatcherComponent.CreateResponse(message.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
+            return _messageDispatcherComponent.CreateResponse(message.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
         }
 
         var failCount = 0;
@@ -236,7 +272,7 @@ public sealed class SessionRoamingComponent : Entity
         
         IResponse iRouteResponse = null;
 
-        using (await RoamingMessageLock.Wait(roaming.RoamingType, "RoamingComponent Call MemoryStream"))
+        using (await _roamingMessageLock!.Wait(roaming.RoamingType, "RoamingComponent Call MemoryStream"))
         {
             while (!IsDisposed)
             {
@@ -247,10 +283,10 @@ public sealed class SessionRoamingComponent : Entity
 
                 if (address == 0)
                 {
-                    return MessageDispatcherComponent.CreateResponse(message.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
+                    return _messageDispatcherComponent.CreateResponse(message.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
                 }
 
-                iRouteResponse = await NetworkMessagingComponent.Call(address, message);
+                iRouteResponse = await _networkMessagingComponent.Call(address, message);
 
                 if (runtimeId != RuntimeId)
                 {
@@ -273,7 +309,7 @@ public sealed class SessionRoamingComponent : Entity
                             return iRouteResponse;
                         }
 
-                        await TimerComponent.Net.WaitAsync(100);
+                        await _timerComponent.Net.WaitAsync(100);
 
                         if (runtimeId != RuntimeId)
                         {
@@ -307,14 +343,14 @@ public sealed class SessionRoamingComponent : Entity
     {
         if (IsDisposed)
         {
-            return MessageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
+            return _messageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
         }
 
         packInfo.IsDisposed = true;
         
         if (!_roaming.TryGetValue(roamingType, out var roaming))
         {
-            return MessageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
+            return _messageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
         }
         
         var failCount = 0;
@@ -324,7 +360,7 @@ public sealed class SessionRoamingComponent : Entity
         
         try
         {
-            using (await RoamingMessageLock.Wait(roamingType, "RoamingComponent Call MemoryStream"))
+            using (await _roamingMessageLock!.Wait(roamingType, "RoamingComponent Call MemoryStream"))
             {
                 while (!IsDisposed)
                 {
@@ -335,10 +371,10 @@ public sealed class SessionRoamingComponent : Entity
 
                     if (address == 0)
                     {
-                        return MessageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
+                        return _messageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
                     }
 
-                    iRouteResponse = await NetworkMessagingComponent.Call(address, requestType, packInfo);
+                    iRouteResponse = await _networkMessagingComponent.Call(address, requestType, packInfo);
 
                     if (runtimeId != RuntimeId)
                     {
@@ -361,7 +397,7 @@ public sealed class SessionRoamingComponent : Entity
                                 return iRouteResponse;
                             }
 
-                            await TimerComponent.Net.WaitAsync(100);
+                            await _timerComponent.Net.WaitAsync(100);
 
                             if (runtimeId != RuntimeId)
                             {
