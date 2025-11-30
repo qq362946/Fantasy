@@ -428,7 +428,7 @@ if (response.ErrorCode != 0)
 
 - [01-Session.md](../../03-Networking/01-Session.md) - Session 使用指南
 - [02-MessageHandler.md](../../03-Networking/02-MessageHandler.md) - 消息处理器实现指南
-- [08-Roaming.md](08-Roaming.md) - Roaming 漫游消息（分布式路由）
+- [08-Roaming.md](08-Roaming.md) - Roaming 漫游消息 - 分布式实体路由
 
 ---
 

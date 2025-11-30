@@ -28,7 +28,6 @@
 
     <ItemGroup>
       <Folder Include="Benchmark\" />
-      <Folder Include="Generated\" />
       <Folder Include="Outer\NormalMessage\" />
     </ItemGroup>
 
