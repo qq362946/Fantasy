@@ -79,7 +79,6 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
-
                 // // Entity.Create<SubSceneTestComponent>(scene).AddComponent<TestGenericEntity<SaveEntity>>();
                 // var saveEntity = Entity.Create<SaveEntity>(scene);
                 // saveEntity.AddComponent<SubSceneTestComponent>();

@@ -134,13 +134,12 @@ Unity 客户端开发的完整指南。
 - ✅ [04-Event.md](04-Advanced/CoreSystems/04-Event.md) - Event 系统使用指南
 
 #### 数据持久化
-- ✅ [04-Database.md](04-Advanced/Database/14-Database.md) - MongoDB 集成和使用
-- ✅ [05-SeparateTable.md](04-Advanced/Database/16-SeparateTable.md) - SeparateTable 分表存储详解
+- ✅ [05-Database.md](04-Advanced/Database/14-Database.md) - MongoDB 集成和使用
+- ✅ [06-SeparateTable.md](04-Advanced/Database/16-SeparateTable.md) - SeparateTable 分表存储详解
 
 #### 网络开发
-- [ ] 06-Address消息.md - Server-to-Server 通信
-- [ ] 07-Route.md - Route 路由消息
-- [ ] 08-Roaming.md - Roaming 漫游消息
+- ✅ [07-Address消息.md](04-Advanced/NetworkDevelopment/06-Address消息.md) - Address 消息 - 服务器间实体通信
+- ✅ [08-Roaming.md](04-Advanced/NetworkDevelopment/08-Roaming.md) - Roaming 漫游消息 - 分布式实体路由
 - [ ] 09-SphereEvent.md - SphereEvent 跨服域事件系统
 
 #### 高级特性

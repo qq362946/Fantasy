@@ -66,7 +66,7 @@ public sealed class TerminusComponent : Entity
     /// <param name="forwardSessionAddress"></param>
     /// <param name="forwardSceneAddress"></param>
     /// <returns></returns>
-    internal async FTask<(uint, Terminus)> Create(long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress)
+    internal (uint, Terminus) Create(long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress)
     {
         if (_terminals.ContainsKey(roamingId))
         {
@@ -82,7 +82,6 @@ public sealed class TerminusComponent : Entity
         terminus.ForwardSceneAddress = forwardSceneAddress;
         terminus.ForwardSessionAddress = forwardSessionAddress;
         terminus.RoamingMessageLock = Scene.CoroutineLockComponent.Create(terminus.Type.TypeHandle.Value.ToInt64());
-        await Scene.EventComponent.PublishAsync(new OnCreateTerminus(Scene, terminus));
         _terminals.Add(terminus.Id, terminus);
         return (0U, terminus);
     }

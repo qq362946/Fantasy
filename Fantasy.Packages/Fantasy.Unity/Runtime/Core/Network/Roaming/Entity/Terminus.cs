@@ -30,18 +30,18 @@ public sealed class Terminus : Entity
     /// 当前漫游终端的类型。
     /// </summary>
     [BsonElement("r")]
-    internal int RoamingType;
+    public int RoamingType { get; internal set; }
     /// <summary>
     /// 漫游转发Session所在的Scene的Address。
     /// </summary>
     [BsonElement("s")]
-    internal long ForwardSceneAddress;
+    public long ForwardSceneAddress{ get; internal set; }
     /// <summary>
     /// 漫游转发Session的Address。
     /// 不知道原理千万不要手动赋值这个。
     /// </summary>
     [BsonElement("f")]
-    internal long ForwardSessionAddress;
+    public long ForwardSessionAddress{ get; internal set; }
     /// <summary>
     /// 关联的玩家实体
     /// </summary>
@@ -52,10 +52,6 @@ public sealed class Terminus : Entity
     /// </summary>
     [BsonIgnore]
     internal CoroutineLock? RoamingMessageLock;
-    /// <summary>
-    /// 获得转发的Session的Address，可以通过这个Id来发送消息来自动转发到客户端。
-    /// </summary>
-    public long SessionAddress => ForwardSessionAddress;
     /// <summary>
     /// 存放其他漫游终端的Id。
     /// 通过这个Id可以发送消息给它。
@@ -100,22 +96,18 @@ public sealed class Terminus : Entity
     /// 注意：销毁关联实体不会自动销毁 Terminus，需通过 autoDispose 参数控制生命周期。
     /// </summary>
     /// <param name="autoDispose">Terminus 销毁时是否自动销毁该关联实体</param>
-    /// <param name="replaceExisting">如果已存在关联实体，是否销毁旧实体并替换为新实体</param>
     /// <typeparam name="T">要创建的实体类型</typeparam>
     /// <returns>创建的实体实例，如果已存在关联实体则返回 null</returns>
-    public T LinkTerminusEntity<T>(bool autoDispose, bool replaceExisting) where T : Entity, new()
+    public async FTask<T> LinkTerminusEntity<T>(bool autoDispose) where T : Entity, new()
     {
-        if (TerminusEntity != null)
+        if (!IsCanLink())
         {
-            Log.Error($"TerminusEntity:{TerminusEntity.Type.FullName} Already exists!");
             return null;
         }
 
-        var t = Entity.Create<T>(Scene, true, true);
-        TerminusEntity = t;
-        TerminusId = TerminusEntity.RuntimeId;
-        SetLinkEntity(TerminusEntity, autoDispose, replaceExisting);
-        return t;
+        var linkEntity = Entity.Create<T>(Scene, true, true);
+        await LinkEntity(linkEntity, autoDispose);
+        return linkEntity;
     }
 
     /// <summary>
@@ -125,8 +117,7 @@ public sealed class Terminus : Entity
     /// </summary>
     /// <param name="entity">要关联的实体</param>
     /// <param name="autoDispose">Terminus 销毁时是否自动销毁该关联实体</param>
-    /// <param name="replaceExisting">如果已存在关联实体，是否销毁旧实体并替换为新实体</param>
-    public void LinkTerminusEntity(Entity entity, bool autoDispose, bool replaceExisting)
+    public async FTask LinkTerminusEntity(Entity entity, bool autoDispose)
     {
         if (entity == null)
         {
@@ -134,64 +125,108 @@ public sealed class Terminus : Entity
             return;
         }
         
-        if (TerminusEntity != null)
+        if (!IsCanLink())
         {
-            Log.Error($"TerminusEntity:{TerminusEntity.Type.FullName} Already exists!");
             return;
         }
         
-        TerminusEntity = entity;
-        TerminusId = TerminusEntity.RuntimeId;
-        SetLinkEntity(TerminusEntity, autoDispose, replaceExisting);
-    }
-
-    private void SetLinkEntity(Entity entity, bool autoDispose, bool replaceExisting)
-    {
+        // 如果需要关联的实体已经关联过其他实体
+        
         var terminusFlagComponent = entity.GetComponent<TerminusFlagComponent>();
-
+        
         if (terminusFlagComponent != null)
         {
             Terminus terminus = terminusFlagComponent.Terminus;
             
             if (terminus != null)
             {
-                if (terminus != this)
-                {
-                    Log.Error($"Entity {entity.Id} is already linked to Terminus {terminus.Id}");
-                    return;
-                }
+                Log.Error($"Entity {entity.Id} is already linked to Terminus {terminus.Id}");
+                return;
+            }
+            else
+            {
+                // 如果关联的Terminus已经销毁了那就删除掉就可以了
+                // 因为这情况不会影响逻辑，一般是在Terminus已经断开了
+                // 这个情况是允许的
+                entity.RemoveComponent<TerminusFlagComponent>();
+            }
+        }
+
+        await LinkEntity(entity, autoDispose);
+    }
+
+    private async FTask LinkEntity(Entity entity, bool autoDispose)
+    {
+        var isLocked = false;
+        
+        try
+        {
+            // 连接之前要先锁定避免中间会有消息发送
+            var lockErrorCode = await Lock();
+
+            if (lockErrorCode != 0)
+            {
+                // 锁定失败，关联实体操作中止
+                Log.Error($"Failed to lock Terminus {Id} before linking entity. ErrorCode: {lockErrorCode}. Link operation aborted.");
+                return;
             }
 
-            terminusFlagComponent.Terminus = this;
-        }
-        else
-        {
+            isLocked = true;
+            TerminusEntity = entity;
+            TerminusId = TerminusEntity.RuntimeId;
+            // 给当前实体添加组件用来代表是已经关联了Terminus
             entity.AddComponent<TerminusFlagComponent>().Terminus = this;
+            // 只有autoDispose = true的时候当前Terminus添加组件来代表已经关联了Entity
+            if (autoDispose)
+            {
+                AddComponent<TerminusEntityFlagComponent>().LinkEntity = entity;
+            }
+            // 操作完成执行解锁
+            await UnLock();
+            isLocked = false;
         }
+        catch (Exception e)
+        {
+            Log.Error(e);
+            if (isLocked)
+            {
+                await UnLock();
+            }
+        }
+    }
+    
+    private bool IsCanLink()
+    {
+        // 如果TerminusEntity存在，表示已经关联过Entity
+        
+        if (TerminusEntity != null)
+        {
+            Log.Error($"TerminusEntity:{TerminusEntity.Type.FullName} Already exists!");
+            return false;
+        }
+        
+        // 如果当前已经挂载了TerminusEntityFlagComponent表示以前连接到某个实体
         
         var terminusEntityFlagComponent = GetComponent<TerminusEntityFlagComponent>();
 
-        if (terminusEntityFlagComponent != null)
+        if (terminusEntityFlagComponent == null)
         {
-            if (replaceExisting)
-            {
-                // 已有标记组件，处理旧实体替换逻辑
-                Entity oldEntity = terminusEntityFlagComponent.LinkEntity;
-                
-                if (oldEntity != null)
-                {
-                    oldEntity.Dispose();
-                }
-            }
+            return true;
+        }
+        
+        Entity linkEntity = terminusEntityFlagComponent.LinkEntity;
 
-            terminusEntityFlagComponent.LinkEntity = entity;
-        }
-        else if (autoDispose)
+        if (linkEntity != null)
         {
-            // 需要自动销毁，添加标记组件
-            terminusEntityFlagComponent = AddComponent<TerminusEntityFlagComponent>();
-            terminusEntityFlagComponent.LinkEntity = entity;
+            Log.Error($"TerminusEntity:{linkEntity.Type.FullName} Already exists!");
+            return false;
         }
+        
+        // 如果当前关联过的实体已经被销毁了
+        // 正常情况是不会出现这个问题的如果有加打印一个警告出来便于后期维护
+        Log.Warning($"Terminus {Id} has TerminusEntityFlagComponent but LinkEntity is null. This should not happen normally. The linked entity may have been disposed without properly cleaning up the Terminus relationship. Cleaning up orphaned component.");
+        RemoveComponent<TerminusEntityFlagComponent>();
+        return true;
     }
 
     #endregion
@@ -214,14 +249,18 @@ public sealed class Terminus : Entity
             return 0;
         }
         
+        var isLocked = false;
+        
         try
         {
             // 传送目标服务器之前要先锁定，防止再传送过程中还有其他消息发送过来。
             var lockErrorCode = await Lock();
             if (lockErrorCode != 0)
             {
+                Log.Error($"Failed to lock Terminus {Id} before transfer. ErrorCode: {lockErrorCode}");
                 return lockErrorCode;
             }
+            isLocked = true;
             // 开始执行传送请求。
             var response = (I_TransferTerminusResponse)await Scene.NetworkMessagingComponent.Call(
                 targetSceneAddress,
@@ -233,6 +272,7 @@ public sealed class Terminus : Entity
             {
                 // 如果传送出现异常，需要先解锁，不然会出现一直卡死的问题。
                 await UnLock();
+                isLocked = false;
                 return response.ErrorCode;
             }
             // 在当前Scene下移除漫游终端。
@@ -241,8 +281,13 @@ public sealed class Terminus : Entity
         catch (Exception e)
         {
             Log.Error(e);
+            
             // 如果代码执行出现任何异常，要先去解锁，避免会出现卡死的问题。
-            await UnLock();
+            if (isLocked)
+            {
+                await UnLock();
+            }
+            
             return InnerErrorCode.ErrTerminusStartTransfer;
         }
 
@@ -259,11 +304,13 @@ public sealed class Terminus : Entity
         // 首先恢复漫游终端的序列化数据。并且注册到框架中。
         Deserialize(scene);
         TerminusId = RuntimeId;
+        
         if (TerminusEntity != null)
         {
             TerminusEntity.Deserialize(scene);
             TerminusId = TerminusEntity.RuntimeId;
         }
+        
         // 然后要解锁下漫游
         return await UnLock();
     }
@@ -273,7 +320,7 @@ public sealed class Terminus : Entity
     /// 必须要解锁后才能继续发送消息。
     /// </summary>
     /// <returns></returns>
-    public async FTask<uint> Lock()
+    private async FTask<uint> Lock()
     {
         var response = await Scene.NetworkMessagingComponent.Call(ForwardSceneAddress,
             new I_LockTerminusIdRequest()
@@ -285,10 +332,10 @@ public sealed class Terminus : Entity
     }
     
     /// <summary>
-    /// 锁定漫游
+    /// 解锁漫游
     /// </summary>
     /// <returns></returns>
-    public async FTask<uint> UnLock()
+    private async FTask<uint> UnLock()
     {
         var response = await Scene.NetworkMessagingComponent.Call(ForwardSceneAddress,
             new I_UnLockTerminusIdRequest()
@@ -361,7 +408,7 @@ public sealed class Terminus : Entity
 
         var failCount = 0;
         var runtimeId = RuntimeId;
-        IResponse iRouteResponse = null;
+        var iRouteResponse = Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
         _roamingTerminusId.TryGetValue(roamingType, out var address);
 
         using (await RoamingMessageLock!.Wait(roamingType, "Terminus Call request"))

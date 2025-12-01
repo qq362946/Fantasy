@@ -103,7 +103,7 @@ namespace Fantasy.SourceGenerator.Generators
                                 {
                                     // 构造闭合的 System 类型
                                     var constructedSystemSymbol = systemSymbol.Construct(entitySymbol.TypeArguments.ToArray());
-                                    var info = CreateInfoFromSymbol(constructedSystemSymbol);
+                                    var info = CreateInfoFromSymbol(constructedSystemSymbol, systemWrapper);
                                     if (info != null)
                                     {
                                         result.Add(info);
@@ -118,7 +118,7 @@ namespace Fantasy.SourceGenerator.Generators
                         else
                         {
                             // 普通 System（非泛型或已闭合泛型）
-                            var info = CreateInfoFromSymbol(systemSymbol);
+                            var info = CreateInfoFromSymbol(systemSymbol, systemWrapper);
                             if (info != null)
                             {
                                 result.Add(info);
@@ -155,7 +155,7 @@ namespace Fantasy.SourceGenerator.Generators
             }
 
             // 计算目标实体类型
-            var targetEntityArg = GetSystemTargetEntityArg(symbol!);
+            var targetEntityArg = GetSystemTargetEntityArg(symbol);
 
             if (targetEntityArg == null)
             {
@@ -166,8 +166,29 @@ namespace Fantasy.SourceGenerator.Generators
             {
                 return null;
             }
-            
-            return new SystemSymbolWrapper(symbol, targetEntityArg);
+
+            // 获取所有 SceneAttribute 特性并提取 SceneType 值
+            var sceneTypes = new HashSet<int>();
+            var attributes = symbol.GetAttributes();
+
+            foreach (var attribute in attributes)
+            {
+                if (attribute.AttributeClass?.Name == "SceneAttribute" &&
+                    attribute.AttributeClass.ContainingNamespace?.ToDisplayString() == "Fantasy")
+                {
+                    // 获取构造函数参数中的 sceneType 值
+                    if (attribute.ConstructorArguments.Length > 0)
+                    {
+                        var arg = attribute.ConstructorArguments[0];
+                        if (arg.Value is int sceneType)
+                        {
+                            sceneTypes.Add(sceneType);
+                        }
+                    }
+                }
+            }
+
+            return new SystemSymbolWrapper(symbol, targetEntityArg, sceneTypes.ToArray());
         }
 
         // 判断代码中使用到的闭合泛型 Entity
@@ -199,6 +220,28 @@ namespace Fantasy.SourceGenerator.Generators
         #endregion
 
         #region Generic Analysis
+        
+        private static bool IsSystemClass(SyntaxNode node)
+        {
+            if (node is not ClassDeclarationSyntax classDecl)
+            {
+                return false;
+            }
+
+            // 必须有基类型列表（继承抽象类）
+            if (classDecl.BaseList == null || classDecl.BaseList.Types.Count == 0)
+            {
+                return false;
+            }
+
+            // 快速检查是否包含可能的 EntitySystem 基类名称
+            var baseListText = classDecl.BaseList.ToString();
+            return baseListText.Contains("AwakeSystem") ||
+                   baseListText.Contains("UpdateSystem") ||
+                   baseListText.Contains("DestroySystem") ||
+                   baseListText.Contains("DeserializeSystem") ||
+                   baseListText.Contains("LateUpdateSystem");
+        }
 
         /// <summary>
         /// 获取System类的目标实体参数
@@ -216,7 +259,7 @@ namespace Fantasy.SourceGenerator.Generators
         }
 
 
-        private static EntitySystemTypeInfo? CreateInfoFromSymbol(INamedTypeSymbol symbol)
+        private static EntitySystemTypeInfo? CreateInfoFromSymbol(INamedTypeSymbol symbol, SystemSymbolWrapper systemSymbolWrapper)
         {
             var baseType = symbol.BaseType;
             
@@ -229,16 +272,18 @@ namespace Fantasy.SourceGenerator.Generators
 
             return typeName switch
             {
-                "AwakeSystem" => EntitySystemTypeInfo.Create(EntitySystemType.AwakeSystem, symbol),
-                "UpdateSystem" => EntitySystemTypeInfo.Create(EntitySystemType.UpdateSystem, symbol),
-                "DestroySystem" => EntitySystemTypeInfo.Create(EntitySystemType.DestroySystem, symbol),
-                "DeserializeSystem" => EntitySystemTypeInfo.Create(EntitySystemType.DeserializeSystem, symbol),
-                "LateUpdateSystem" => EntitySystemTypeInfo.Create(EntitySystemType.LateUpdateSystem, symbol),
+                "AwakeSystem" => EntitySystemTypeInfo.Create(EntitySystemType.AwakeSystem, symbol, systemSymbolWrapper.SceneTypes),
+                "UpdateSystem" => EntitySystemTypeInfo.Create(EntitySystemType.UpdateSystem, symbol, systemSymbolWrapper.SceneTypes),
+                "DestroySystem" => EntitySystemTypeInfo.Create(EntitySystemType.DestroySystem, symbol, systemSymbolWrapper.SceneTypes),
+                "DeserializeSystem" => EntitySystemTypeInfo.Create(EntitySystemType.DeserializeSystem, symbol, systemSymbolWrapper.SceneTypes),
+                "LateUpdateSystem" => EntitySystemTypeInfo.Create(EntitySystemType.LateUpdateSystem, symbol, systemSymbolWrapper.SceneTypes),
                 _ => null
             };
         }
 
         #endregion
+
+        #region Generate
 
         private static void GenerateRegistrationCode(
             SourceProductionContext context,
@@ -378,28 +423,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine(typeHandleBuilder.ToString(), false);
             builder.AppendLine(handlerBuilder.ToString(), false);
         }
-        
-        private static bool IsSystemClass(SyntaxNode node)
-        {
-            if (node is not ClassDeclarationSyntax classDecl)
-            {
-                return false;
-            }
 
-            // 必须有基类型列表（继承抽象类）
-            if (classDecl.BaseList == null || classDecl.BaseList.Types.Count == 0)
-            {
-                return false;
-            }
-
-            // 快速检查是否包含可能的 EntitySystem 基类名称
-            var baseListText = classDecl.BaseList.ToString();
-            return baseListText.Contains("AwakeSystem") ||
-                   baseListText.Contains("UpdateSystem") ||
-                   baseListText.Contains("DestroySystem") ||
-                   baseListText.Contains("DeserializeSystem") ||
-                   baseListText.Contains("LateUpdateSystem");
-        }
+        #endregion
         
         /// <summary>
         /// 系统符号包装类，携带预先计算的元数据以避免重复判断和访问
@@ -410,13 +435,16 @@ namespace Fantasy.SourceGenerator.Generators
             public bool IsOpenGeneric { get; }
             public INamedTypeSymbol? TargetEntityArg { get; }  // 预先计算的目标实体类型
             public int TypeParameterCount { get; }  // 预先计算的泛型参数数量
+            public int[] SceneTypes { get; }  // SceneAttribute 中的 SceneType 值数组
 
-            public SystemSymbolWrapper(INamedTypeSymbol symbol, INamedTypeSymbol? targetEntityArg)
+            // ReSharper disable once ConvertToPrimaryConstructor
+            public SystemSymbolWrapper(INamedTypeSymbol symbol, INamedTypeSymbol? targetEntityArg, int[] sceneTypes)
             {
                 Symbol = symbol;
                 TargetEntityArg = targetEntityArg;
                 IsOpenGeneric = symbol.IsOpenGeneric();
                 TypeParameterCount = symbol.TypeParameters.Length;
+                SceneTypes = sceneTypes;
             }
         }
 
@@ -432,6 +460,7 @@ namespace Fantasy.SourceGenerator.Generators
 
         private sealed class EntitySystemTypeInfo
         {
+            public readonly int[] SceneTypes;
             public readonly EntitySystemType EntitySystemType;
             public readonly string GlobalTypeFullName;
             // public readonly string TypeFullName;
@@ -441,12 +470,14 @@ namespace Fantasy.SourceGenerator.Generators
 
             private EntitySystemTypeInfo(
                 EntitySystemType entitySystemType,
+                int[] sceneTypes,
                 string globalTypeFullName,
                 // string typeFullName,
                 // string typeName,
                 // long entityTypeHashCode,
                 string entityTypeFullName)
             {
+                SceneTypes = sceneTypes;
                 EntitySystemType = entitySystemType;
                 GlobalTypeFullName = globalTypeFullName;
                 // TypeFullName = typeFullName;
@@ -455,7 +486,7 @@ namespace Fantasy.SourceGenerator.Generators
                 EntityTypeFullName = entityTypeFullName;
             }
 
-            public static EntitySystemTypeInfo Create(EntitySystemType entitySystemType, INamedTypeSymbol symbol)
+            public static EntitySystemTypeInfo Create(EntitySystemType entitySystemType, INamedTypeSymbol symbol, int[] sceneTypes)
             {
                 // 获取泛型参数 T (例如：AwakeSystem<T> 中的 T)
                 var entityType = GetSystemTargetEntityArg(symbol);
@@ -466,6 +497,7 @@ namespace Fantasy.SourceGenerator.Generators
 
                 return new EntitySystemTypeInfo(
                     entitySystemType,
+                    sceneTypes,
                     symbol.GetFullName(),
                     // symbol.GetFullName(false),
                     // symbol.Name,

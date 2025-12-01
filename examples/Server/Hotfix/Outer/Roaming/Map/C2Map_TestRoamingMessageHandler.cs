@@ -1,4 +1,6 @@
 using Fantasy.Async;
+using Fantasy.Entitas;
+using Fantasy.Event;
 using Fantasy.Network.Interface;
 using Fantasy.Network.Roaming;
 using Fantasy.Roaming;
