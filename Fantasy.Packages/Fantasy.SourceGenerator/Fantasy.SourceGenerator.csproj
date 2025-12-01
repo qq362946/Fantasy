@@ -12,6 +12,8 @@
         <!-- 帮助 IDE 识别这是一个 Source Generator -->
         <DevelopmentDependency>true</DevelopmentDependency>
         <IncludeBuildOutput>false</IncludeBuildOutput>
+        <!-- 生成器 Debug 输出开关 -->
+        <!-- <DefineConstants>$(DefineConstants);SG_DEBUG</DefineConstants>-->
     </PropertyGroup>
 
     <!-- 为 Unity 构建使用低版本 Roslyn (Unity 2020.2-2022.x 使用 Roslyn 4.0-4.3) -->

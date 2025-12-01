@@ -76,10 +76,10 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
             "Fantasy.Assembly",
             "Fantasy.DataStructure.Collection"
         );
-        // 开始命名空间（固定使用 Fantasy.Generated）
-        builder.BeginNamespace("Fantasy.Generated");
-        // 开始类定义（实现 INetworkProtocolRegistrar 接口）
-        builder.AddXmlComment($"Auto-generated NetworkProtocol registration class for {assemblyName}");
+        // 开始命名空间
+        builder.BeginDefaultNamespace();
+		// 开始类定义（实现 INetworkProtocolRegistrar 接口）
+		builder.AddXmlComment($"Auto-generated NetworkProtocol registration class for {assemblyName}");
         builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.INetworkProtocolRegistrar");
         builder.BeginMethod("public List<Type> GetNetworkProtocolTypes()");
         try
@@ -135,8 +135,8 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
             "System.Runtime.CompilerServices"
         );
         builder.AppendLine();
-        // 开始命名空间（固定使用 Fantasy.Generated）
-        builder.BeginNamespace("Fantasy.Generated");
+        // 开始命名空间
+         builder.BeginDefaultNamespace();
         // 开始类定义（实现 IOpCodeRegistrar 接口）
         builder.AddXmlComment($"Auto-generated OpCodeRegistrar class for {assemblyName}");
         builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IOpCodeRegistrar");
@@ -274,8 +274,8 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
             "System.Runtime.CompilerServices"
         );
         builder.AppendLine();
-        // 开始命名空间（固定使用 Fantasy.Generated）
-        builder.BeginNamespace("Fantasy.Generated");
+        // 开始命名空间
+         builder.BeginDefaultNamespace();
         // 开始类定义（实现 IResponseTypeRegistrar 接口）
         builder.AddXmlComment($"Auto-generated ResponseTypeRegistrar class for {assemblyName}");
         builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IResponseTypeRegistrar");

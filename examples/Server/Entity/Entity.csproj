@@ -16,6 +16,11 @@
       <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
     </PropertyGroup>
 
+    <PropertyGroup>
+      <!-- SG调试输出避免被编译器升级为Error -->
+      <WarningsNotAsErrors>$(WarningsNotAsErrors);DebugFantasySG</WarningsNotAsErrors>
+    </PropertyGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\..\..\Fantasy.Packages\Fantasy.Net\Fantasy.Net.csproj" />
     </ItemGroup>

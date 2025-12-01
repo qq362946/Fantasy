@@ -150,8 +150,8 @@ namespace Fantasy.SourceGenerator.Generators
                 "Fantasy.Event"
             );
             builder.AppendLine();
-            // 开始命名空间（固定使用 Fantasy.Generated）
-            builder.BeginNamespace("Fantasy.Generated");
+            // 开始命名空间
+             builder.BeginDefaultNamespace();
             // 开始类定义（实现 IEventSystemRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Event System registration class for {assemblyName}");
             builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IEventSystemRegistrar");
@@ -260,8 +260,8 @@ namespace Fantasy.SourceGenerator.Generators
                 "Fantasy.Async"
             );
             builder.AppendLine();
-            // 开始命名空间（固定使用 Fantasy.Generated）
-            builder.BeginNamespace("Fantasy.Generated");
+            // 开始命名空间
+             builder.BeginDefaultNamespace();
             // 开始类定义（实现 ISphereEventRegistrar 接口）
             builder.AddXmlComment($"Auto-generated Sphere Event System registration class for {assemblyName}");
             builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.ISphereEventRegistrar");

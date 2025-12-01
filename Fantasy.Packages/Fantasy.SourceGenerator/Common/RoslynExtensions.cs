@@ -95,7 +95,7 @@ namespace Fantasy.SourceGenerator.Common
         }
 
         /// <summary>
-        /// 是否为开放式泛型(递归检查)
+        /// 是否为开放式泛型(递归检查, 开放式泛型包括两种: 无参泛型和开放式有参泛型)
         /// </summary>
         public static bool IsOpenGeneric(this ITypeSymbol typeSymbol)
         {
@@ -103,7 +103,13 @@ namespace Fantasy.SourceGenerator.Common
             {
                 return false;
             }
-            
+
+            // 顶层类型是无参泛型
+            if(namedType.IsUnboundGenericType)
+            {
+                return true;
+            }
+
             // 顶层类型参数是开放类型
             if (namedType.TypeArguments.Any(ta => ta.TypeKind == TypeKind.TypeParameter))
             {

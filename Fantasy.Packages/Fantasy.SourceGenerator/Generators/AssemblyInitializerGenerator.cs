@@ -71,7 +71,7 @@ namespace Fantasy.SourceGenerator.Generators
             
             builder.AppendLine();
             // 开始命名空间
-            builder.BeginNamespace(GeneratorConstants.GeneratedNamespace);
+            builder.BeginDefaultNamespace();
             // 添加类注释
             builder.AddXmlComment($"Auto-generated assembly initializer for {assemblyName}");
             builder.AddXmlComment("This class is automatically invoked when the assembly is loaded via ModuleInitializer");

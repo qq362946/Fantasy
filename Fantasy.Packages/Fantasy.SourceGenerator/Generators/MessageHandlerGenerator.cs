@@ -80,7 +80,7 @@ namespace Fantasy.SourceGenerator.Generators
                 "System.Runtime.CompilerServices"
             );
             builder.AppendLine();
-            builder.BeginNamespace("Fantasy.Generated");
+             builder.BeginDefaultNamespace();
             builder.AddXmlComment($"Auto-generated message handler registration class for {assemblyName}");
             builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IMessageHandlerResolver");
             // 生成 GenerateCode 方法

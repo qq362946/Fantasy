@@ -122,6 +122,16 @@ namespace Fantasy.SourceGenerator.Common
         }
 
         /// <summary>
+        /// 开始默认命名空间
+        /// </summary>
+        public SourceCodeBuilder BeginDefaultNamespace()
+        {
+            AppendLine($"namespace {GeneratorConstants.GeneratedNamespace}");
+            OpenBrace();
+            return this;
+        }
+
+        /// <summary>
         /// 结束命名空间
         /// </summary>
         public SourceCodeBuilder EndNamespace()
