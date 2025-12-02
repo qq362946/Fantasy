@@ -6,7 +6,21 @@
              x:Class="Fantasy.ProtocolEditor.Views.WelcomeView">
 
   <Grid Background="#1E1E1E">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto"
+                  AllowAutoHide="False">
+      <ScrollViewer.Styles>
+        <Style Selector="ScrollBar">
+          <Setter Property="Opacity" Value="1"/>
+          <Setter Property="Transitions" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="ScrollBar:vertical">
+          <Setter Property="Transitions" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="ScrollBar:horizontal">
+          <Setter Property="Transitions" Value="{x:Null}"/>
+        </Style>
+      </ScrollViewer.Styles>
       <StackPanel Margin="50" MaxWidth="800" HorizontalAlignment="Center">
 
         <!-- 标题 -->

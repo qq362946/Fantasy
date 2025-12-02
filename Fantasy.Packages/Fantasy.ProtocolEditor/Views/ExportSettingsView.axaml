@@ -35,7 +35,19 @@
         </Border>
 
         <!-- 主内容区 -->
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="1" AllowAutoHide="False">
+            <ScrollViewer.Styles>
+                <Style Selector="ScrollBar">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="Transitions" Value="{x:Null}"/>
+                </Style>
+                <Style Selector="ScrollBar:vertical">
+                    <Setter Property="Transitions" Value="{x:Null}"/>
+                </Style>
+                <Style Selector="ScrollBar:horizontal">
+                    <Setter Property="Transitions" Value="{x:Null}"/>
+                </Style>
+            </ScrollViewer.Styles>
             <StackPanel Margin="10" Spacing="15">
 
             <!-- 工作区路径（只读） -->

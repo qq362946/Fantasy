@@ -123,7 +123,19 @@
           </Border>
 
           <!-- 列表内容 -->
-          <ScrollViewer Grid.Row="2">
+          <ScrollViewer Grid.Row="2" AllowAutoHide="False">
+            <ScrollViewer.Styles>
+              <Style Selector="ScrollBar">
+                <Setter Property="Opacity" Value="1"/>
+                <Setter Property="Transitions" Value="{x:Null}"/>
+              </Style>
+              <Style Selector="ScrollBar:vertical">
+                <Setter Property="Transitions" Value="{x:Null}"/>
+              </Style>
+              <Style Selector="ScrollBar:horizontal">
+                <Setter Property="Transitions" Value="{x:Null}"/>
+              </Style>
+            </ScrollViewer.Styles>
             <ItemsControl ItemsSource="{Binding FilteredEntries}">
               <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="models:RouteTypeEntry">

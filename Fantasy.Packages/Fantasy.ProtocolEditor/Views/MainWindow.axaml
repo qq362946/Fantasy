@@ -189,11 +189,11 @@
                               Background="Transparent"
                               Foreground="#CCCCCC"
                               Padding="5"
-                              ItemsSource="{Binding FileTreeNodes}"
-                              SelectionChanged="OnFileTreeSelectionChanged">
+                              SelectionMode="Single"
+                              ItemsSource="{Binding FileTreeNodes}">
                         <TreeView.ItemTemplate>
                             <TreeDataTemplate ItemsSource="{Binding Children}">
-                                <StackPanel Orientation="Horizontal" Spacing="5" Tapped="OnFileTreeItemTapped" PointerPressed="OnFileTreeItemPointerPressed">
+                                <StackPanel Orientation="Horizontal" Spacing="5" PointerReleased="OnFileTreeItemPointerReleased" PointerPressed="OnFileTreeItemPointerPressed">
                                     <!-- 文件夹图标 -->
                                     <TextBlock Text="📁" IsVisible="{Binding IsDirectory}" FontSize="12"/>
                                     <!-- 文件图标 -->
@@ -247,11 +247,20 @@
 
                 <!-- 标签页栏 -->
                 <Border Grid.Row="0" Background="#2B2B2B" BorderBrush="Transparent" BorderThickness="0">
-                    <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                    <ScrollViewer HorizontalScrollBarVisibility="Visible"
+                                  VerticalScrollBarVisibility="Disabled"
+                                  AllowAutoHide="False">
 
                       <ScrollViewer.Styles>
                         <Style Selector="ScrollBar">
                           <Setter Property="Opacity" Value="1"/>
+                          <Setter Property="Transitions" Value="{x:Null}"/>
+                        </Style>
+                        <Style Selector="ScrollBar:vertical">
+                          <Setter Property="Transitions" Value="{x:Null}"/>
+                        </Style>
+                        <Style Selector="ScrollBar:horizontal">
+                          <Setter Property="Transitions" Value="{x:Null}"/>
                         </Style>
                       </ScrollViewer.Styles>
 
@@ -410,7 +419,21 @@
                                             Loaded="TextEditor_Loaded"
                                             HorizontalScrollBarVisibility="Auto"
                                             VerticalScrollBarVisibility="Auto"
-                                            IsVisible="{Binding ActiveTab.EditorType, Converter={StaticResource EditorTypeToTextEditorVisibilityConverter}}"/>
+                                            IsVisible="{Binding ActiveTab.EditorType, Converter={StaticResource EditorTypeToTextEditorVisibilityConverter}}">
+                        <avaloniaEdit:TextEditor.Styles>
+                            <Style Selector="ScrollBar">
+                                <Setter Property="AllowAutoHide" Value="False"/>
+                                <Setter Property="Opacity" Value="1"/>
+                                <Setter Property="Transitions" Value="{x:Null}"/>
+                            </Style>
+                            <Style Selector="ScrollBar:vertical">
+                                <Setter Property="Transitions" Value="{x:Null}"/>
+                            </Style>
+                            <Style Selector="ScrollBar:horizontal">
+                                <Setter Property="Transitions" Value="{x:Null}"/>
+                            </Style>
+                        </avaloniaEdit:TextEditor.Styles>
+                    </avaloniaEdit:TextEditor>
 
                     <!-- RoamingConfig 配置编辑器 -->
                     <views:RoamingConfigView Grid.Row="1"
@@ -500,7 +523,24 @@
                 </Border>
 
                 <!-- 底部面板内容 -->
-                <ScrollViewer x:Name="OutputScrollViewer" Grid.Row="1" Background="#1E1E1E" HorizontalScrollBarVisibility="Disabled">
+                <ScrollViewer x:Name="OutputScrollViewer"
+                              Grid.Row="1"
+                              Background="#1E1E1E"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto"
+                              AllowAutoHide="False">
+                    <ScrollViewer.Styles>
+                        <Style Selector="ScrollBar">
+                            <Setter Property="Opacity" Value="1"/>
+                            <Setter Property="Transitions" Value="{x:Null}"/>
+                        </Style>
+                        <Style Selector="ScrollBar:vertical">
+                            <Setter Property="Transitions" Value="{x:Null}"/>
+                        </Style>
+                        <Style Selector="ScrollBar:horizontal">
+                            <Setter Property="Transitions" Value="{x:Null}"/>
+                        </Style>
+                    </ScrollViewer.Styles>
                     <TextBox Background="Transparent"
                             Foreground="#CCCCCC"
                             BorderThickness="0"

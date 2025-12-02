@@ -485,74 +485,6 @@ public partial class MainWindow : Window
         }
     }
 
-    /// <summary>
-    /// TreeView 项目单击事件
-    /// </summary>
-    private void OnFileTreeItemTapped(object? sender, TappedEventArgs e)
-    {
-        // 从事件源获取 DataContext
-        if (sender is not StackPanel stackPanel)
-            return;
-
-        // 获取节点数据
-        var selectedNode = stackPanel.DataContext as Models.FileTreeNode;
-        if (selectedNode == null)
-            return;
-
-        // 如果是文件夹，切换展开/折叠
-        if (selectedNode.IsDirectory)
-        {
-            selectedNode.IsExpanded = !selectedNode.IsExpanded;
-            e.Handled = true;
-            return;
-        }
-
-        // 如果是文件
-        var filePath = selectedNode.FullPath;
-        if (string.IsNullOrEmpty(filePath))
-        {
-            if (DataContext is MainWindowViewModel viewModel)
-                viewModel.OutputText += $"选中无效, 因文件路径不存在：{filePath}\n";
-            return; 
-        }
-
-        // 检查文件是否存在
-        if (!selectedNode.Exists || !System.IO.File.Exists(filePath))
-        {
-            if (DataContext is MainWindowViewModel viewModel)
-            {
-                viewModel.OutputText += $"文件不存在：{selectedNode.Name}\n";
-                viewModel.OutputText += "您可以右键点击创建此文件。\n";
-            }
-            e.Handled = true;
-            return;
-        }
-
-        // 加载文件
-        LoadFileToEditor(filePath);
-
-        e.Handled = true;
-    }
-
-    /// <summary>
-    /// TreeView 选择改变事件 - 用于单击展开/折叠文件夹
-    /// </summary>
-    private void OnFileTreeSelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        if (sender is not TreeView treeView)
-            return;
-
-        // 获取选中的节点
-        var selectedNode = treeView.SelectedItem as Models.FileTreeNode;
-        if (selectedNode == null)
-            return;
-
-        // 如果是文件夹，单击时切换展开/折叠
-        if (selectedNode.IsDirectory)
-        {
-            selectedNode.IsExpanded = !selectedNode.IsExpanded;
-        }
-    }
 
     /// <summary>
     /// 加载文件到编辑器
@@ -1266,15 +1198,10 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 文件树项目右键点击事件
+    /// 文件树项目指针释放事件 - 处理左键单击
     /// </summary>
-    private void OnFileTreeItemPointerPressed(object? sender, PointerPressedEventArgs e)
+    private void OnFileTreeItemPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        // 只处理右键点击
-        var point = e.GetCurrentPoint(sender as Control);
-        if (!point.Properties.IsRightButtonPressed)
-            return;
-
         if (sender is not StackPanel stackPanel)
             return;
 
@@ -1282,55 +1209,114 @@ public partial class MainWindow : Window
         if (node == null)
             return;
 
-        if (DataContext is not MainWindowViewModel vm)
+        var point = e.GetCurrentPoint(sender as Control);
+
+        // 只处理左键释放
+        if (point.Properties.PointerUpdateKind != Avalonia.Input.PointerUpdateKind.LeftButtonReleased)
             return;
 
-        // 如果没有工作区路径，或者节点的 FullPath 为空，则不显示右键菜单
-        if (string.IsNullOrEmpty(vm.WorkspacePath) || string.IsNullOrEmpty(node.FullPath))
-            return;
-
-        // 根据节点类型创建相应的右键菜单
-        ContextMenu? contextMenu = null;
-
-        if (node.Name == "Inner" || node.Name == "Outer")
+        // 如果是文件夹，切换展开/折叠
+        if (node.IsDirectory)
         {
-            // Inner/Outer 文件夹 - 创建"新建协议文件"菜单
-            contextMenu = new ContextMenu();
-            var newProtoFileMenuItem = new MenuItem { Header = "新建协议文件" };
-            newProtoFileMenuItem.Click += (s, args) => OnNewProtoFileClick(node);
-            contextMenu.Items.Add(newProtoFileMenuItem);
-        }
-        else if (node.Name == "RoamingType.Config" || node.Name == "RouteType.Config")
-        {
-            // RoamingType.Config/RouteType.Config - 只有不存在时才创建"创建配置文件"菜单
-            if (!node.Exists)
-            {
-                contextMenu = new ContextMenu();
-                var createConfigFileMenuItem = new MenuItem { Header = "创建配置文件" };
-                createConfigFileMenuItem.Click += (s, args) => OnCreateConfigFileClick(node);
-                contextMenu.Items.Add(createConfigFileMenuItem);
-            }
-        }
-        else if (!node.IsDirectory && node.Name.EndsWith(".proto", StringComparison.OrdinalIgnoreCase))
-        {
-            // 协议文件 - 检查是否在 Inner 或 Outer 文件夹下
-            var parentFolder = Path.GetFileName(Path.GetDirectoryName(node.FullPath));
-            if (parentFolder == "Inner" || parentFolder == "Outer")
-            {
-                // 创建"移除协议文件"菜单
-                contextMenu = new ContextMenu();
-                var removeProtoFileMenuItem = new MenuItem { Header = "移除协议文件" };
-                removeProtoFileMenuItem.Click += (s, args) => OnRemoveProtoFileClick(node);
-                contextMenu.Items.Add(removeProtoFileMenuItem);
-            }
-        }
-
-        // 显示菜单
-        if (contextMenu != null)
-        {
-            contextMenu.PlacementTarget = stackPanel;
-            contextMenu.Open(stackPanel);
+            node.IsExpanded = !node.IsExpanded;
             e.Handled = true;
+            return;
+        }
+
+        // 如果是文件
+        var filePath = node.FullPath;
+        if (string.IsNullOrEmpty(filePath))
+        {
+            if (DataContext is MainWindowViewModel viewModel)
+                viewModel.OutputText += $"选中无效, 因文件路径不存在：{filePath}\n";
+            e.Handled = true;
+            return;
+        }
+
+        // 检查文件是否存在
+        if (!node.Exists || !System.IO.File.Exists(filePath))
+        {
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.OutputText += $"文件不存在：{node.Name}\n";
+                viewModel.OutputText += "您可以右键点击创建此文件。\n";
+            }
+            e.Handled = true;
+            return;
+        }
+
+        // 加载文件
+        LoadFileToEditor(filePath);
+        e.Handled = true;
+    }
+
+    /// <summary>
+    /// 文件树项目指针按下事件 - 仅处理右键菜单
+    /// </summary>
+    private void OnFileTreeItemPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (sender is not StackPanel stackPanel)
+            return;
+
+        var node = stackPanel.DataContext as Models.FileTreeNode;
+        if (node == null)
+            return;
+
+        var point = e.GetCurrentPoint(sender as Control);
+
+        // 只处理右键点击
+        if (point.Properties.IsRightButtonPressed)
+        {
+            if (DataContext is not MainWindowViewModel vm)
+                return;
+
+            // 如果没有工作区路径，或者节点的 FullPath 为空，则不显示右键菜单
+            if (string.IsNullOrEmpty(vm.WorkspacePath) || string.IsNullOrEmpty(node.FullPath))
+                return;
+
+            // 根据节点类型创建相应的右键菜单
+            ContextMenu? contextMenu = null;
+
+            if (node.Name == "Inner" || node.Name == "Outer")
+            {
+                // Inner/Outer 文件夹 - 创建"新建协议文件"菜单
+                contextMenu = new ContextMenu();
+                var newProtoFileMenuItem = new MenuItem { Header = "新建协议文件" };
+                newProtoFileMenuItem.Click += (s, args) => OnNewProtoFileClick(node);
+                contextMenu.Items.Add(newProtoFileMenuItem);
+            }
+            else if (node.Name == "RoamingType.Config" || node.Name == "RouteType.Config")
+            {
+                // RoamingType.Config/RouteType.Config - 只有不存在时才创建"创建配置文件"菜单
+                if (!node.Exists)
+                {
+                    contextMenu = new ContextMenu();
+                    var createConfigFileMenuItem = new MenuItem { Header = "创建配置文件" };
+                    createConfigFileMenuItem.Click += (s, args) => OnCreateConfigFileClick(node);
+                    contextMenu.Items.Add(createConfigFileMenuItem);
+                }
+            }
+            else if (!node.IsDirectory && node.Name.EndsWith(".proto", StringComparison.OrdinalIgnoreCase))
+            {
+                // 协议文件 - 检查是否在 Inner 或 Outer 文件夹下
+                var parentFolder = Path.GetFileName(Path.GetDirectoryName(node.FullPath));
+                if (parentFolder == "Inner" || parentFolder == "Outer")
+                {
+                    // 创建"移除协议文件"菜单
+                    contextMenu = new ContextMenu();
+                    var removeProtoFileMenuItem = new MenuItem { Header = "移除协议文件" };
+                    removeProtoFileMenuItem.Click += (s, args) => OnRemoveProtoFileClick(node);
+                    contextMenu.Items.Add(removeProtoFileMenuItem);
+                }
+            }
+
+            // 显示菜单
+            if (contextMenu != null)
+            {
+                contextMenu.PlacementTarget = stackPanel;
+                contextMenu.Open(stackPanel);
+                e.Handled = true;
+            }
         }
     }
 

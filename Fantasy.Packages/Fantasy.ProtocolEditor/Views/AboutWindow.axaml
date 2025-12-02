@@ -20,7 +20,20 @@
         <!-- 主要内容区 -->
         <ScrollViewer Grid.Row="0"
                       VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled">
+                      HorizontalScrollBarVisibility="Disabled"
+                      AllowAutoHide="False">
+            <ScrollViewer.Styles>
+                <Style Selector="ScrollBar">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="Transitions" Value="{x:Null}"/>
+                </Style>
+                <Style Selector="ScrollBar:vertical">
+                    <Setter Property="Transitions" Value="{x:Null}"/>
+                </Style>
+                <Style Selector="ScrollBar:horizontal">
+                    <Setter Property="Transitions" Value="{x:Null}"/>
+                </Style>
+            </ScrollViewer.Styles>
             <Border Padding="40,30">
                 <StackPanel Spacing="25">
                 <!-- 应用标题 -->
@@ -36,7 +49,7 @@
                               Foreground="#FFFFFF"
                               HorizontalAlignment="Center"/>
 
-                    <TextBlock Text="Version 2025.2.1401"
+                    <TextBlock Text="Version 2025.2.1402"
                               FontSize="14"
                               Foreground="#858585"
                               HorizontalAlignment="Center"/>
