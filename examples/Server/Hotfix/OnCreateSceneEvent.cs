@@ -42,6 +42,7 @@ public sealed class SubSceneTestComponentAwakeSystem : AwakeSystem<SubSceneTestC
     }
 }
 
+
 public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 {
     private static long _addressableSceneRunTimeId;
