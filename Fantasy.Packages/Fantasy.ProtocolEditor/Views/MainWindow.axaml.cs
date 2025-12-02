@@ -18,6 +18,7 @@ using AvaloniaEdit.CodeCompletion;
 using Fantasy.ProtocolEditor.ViewModels;
 using Fantasy.ProtocolEditor.Services;
 using Avalonia.Media;
+using Fantasy.ProtocolEditor.Models;
 
 namespace Fantasy.ProtocolEditor.Views;
 
@@ -313,7 +314,7 @@ public partial class MainWindow : Window
         // Ctrl+S 或 Cmd+S 保存
         else if ((e.KeyModifiers == KeyModifiers.Control || e.KeyModifiers == KeyModifiers.Meta) && e.Key == Key.S)
         {
-            SaveAllFiles();
+            SaveAllOpened();
             e.Handled = true;
         }
         // Ctrl+F 或 Cmd+F 查找
@@ -383,7 +384,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void OnSaveMenuClick(object? sender, RoutedEventArgs e)
     {
-        SaveAllFiles(); 
+        SaveAllOpened(); 
     }
 
     /// <summary>
@@ -417,12 +418,12 @@ public partial class MainWindow : Window
     /// <summary>
     /// 保存当前文件
     /// </summary>
-    public void SaveCurrentFile()
+    public void SaveTabFile(EditorTab tab,string outputSaveInfo = "已保存")
     {
         if (DataContext is not MainWindowViewModel viewModel)
             return;
 
-        if (viewModel.ActiveTab == null || string.IsNullOrEmpty(viewModel.ActiveTab.FilePath))
+        if (tab == null || string.IsNullOrEmpty(tab.FilePath))
         {
             viewModel.OutputText += "没有可保存的文件。\n";
             return;
@@ -430,11 +431,12 @@ public partial class MainWindow : Window
 
         try
         {
-            if (TextEditor != null && TextEditor.Document != null)
+            if (TextEditor != null && TextEditor.Document != null && tab.IsModified)
             {
-                System.IO.File.WriteAllText(viewModel.ActiveTab.FilePath, TextEditor.Document.Text);
-                viewModel.ActiveTab.IsModified = false;
-                viewModel.OutputText += $"已保存：{viewModel.ActiveTab.FileName}\n";
+                System.IO.File.WriteAllText(tab.FilePath, TextEditor.Document.Text);
+                tab.IsModified = false;
+                if(!string.IsNullOrEmpty(outputSaveInfo))
+                    viewModel.OutputText += $"{outputSaveInfo}：{tab.FileName}\n";
             }
         }
         catch (Exception ex)
@@ -444,9 +446,9 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 保存所有文件
+    /// 保存所有打开的文件
     /// </summary>
-    public void SaveAllFiles()
+    public void SaveAllOpened(string outputSaveInfo = "已保存")
     {
         if (DataContext is not MainWindowViewModel viewModel)
             return;
@@ -461,18 +463,19 @@ public partial class MainWindow : Window
         {
             if (string.IsNullOrEmpty(tab.FilePath))
             {
-                viewModel.OutputText += $"跳过未保存文件：{tab.FileName}\n";
+                viewModel.OutputText += $"跳过未保存文件：{tab.FileName}(路径为空)\n";
                 continue;
             }
 
             try
             {
                 var textToSave = tab.Document?.Text;
-                if (textToSave != null)
+                if (textToSave != null && tab.IsModified)
                 {
                     System.IO.File.WriteAllText(tab.FilePath, textToSave);
                     tab.IsModified = false;
-                    viewModel.OutputText += $"已保存：{tab.FileName}\n";
+                    if (!string.IsNullOrEmpty(outputSaveInfo))
+                        viewModel.OutputText += $"{outputSaveInfo}：{tab.FileName}\n";
                 }
             }
             catch (Exception ex)
@@ -507,7 +510,11 @@ public partial class MainWindow : Window
         // 如果是文件
         var filePath = selectedNode.FullPath;
         if (string.IsNullOrEmpty(filePath))
-            return;
+        {
+            if (DataContext is MainWindowViewModel viewModel)
+                viewModel.OutputText += $"选中无效, 因文件路径不存在：{filePath}\n";
+            return; 
+        }
 
         // 检查文件是否存在
         if (!selectedNode.Exists || !System.IO.File.Exists(filePath))
@@ -615,13 +622,13 @@ public partial class MainWindow : Window
         // 更新 MainWindowViewModel 信息输出
         if (DataContext is MainWindowViewModel vm)
         {
-            // 更新语法相关信息
-            foreach (Models.EditorTab tab in vm.OpenedTabs) {
-                if (tab.Document == TextEditor.Document)
-                {
-                    vm.OutputText += tab.IsModified?  $"{tab.FileName}\n" : "";                    
-                }
-            }
+            //// 输出未保存提示
+            //foreach (Models.EditorTab tab in vm.OpenedTabs) {
+            //    if (tab.Document == TextEditor.Document)
+            //    {
+            //        vm.OutputText += tab.IsModified?  $"*\n" : "";                    
+            //    }
+            //}
 
             // 如果之前有错误输出，先删除它
             if (_lastErrorOutputPosition >= 0 && _lastErrorOutputPosition < vm.OutputText.Length)
@@ -939,6 +946,7 @@ public partial class MainWindow : Window
 
         if (DataContext is MainWindowViewModel vm)
         {
+            SaveTabFile(tab,"自动保存");
             vm.CloseTab(tab);
         }
 
@@ -1653,6 +1661,8 @@ public partial class MainWindow : Window
 
             // 保存工作区配置
             vm.SaveWorkspaceConfig();
+            // 保存打开的文件
+            SaveAllOpened();
         }
     }
 
