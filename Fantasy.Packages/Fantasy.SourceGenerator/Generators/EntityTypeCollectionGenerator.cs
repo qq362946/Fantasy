@@ -57,8 +57,8 @@ namespace Fantasy.SourceGenerator.Generators
                 "Fantasy.Event"
             );
             builder.AppendLine();
-            // 开始命名空间（固定使用 Fantasy.Generated）
-            builder.BeginNamespace("Fantasy.Generated");
+            // 开始命名空间
+             builder.BeginDefaultNamespace();
             // 开始类定义（实现 IEntityTypeCollectionRegistrar 接口）
             builder.AddXmlComment($"Automatically generated Entity Type collection class for {assemblyName}");
             builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IEntityTypeCollectionRegistrar");

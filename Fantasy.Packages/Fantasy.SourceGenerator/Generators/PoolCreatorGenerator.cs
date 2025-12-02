@@ -111,7 +111,7 @@ namespace Fantasy.SourceGenerator.Generators
                 "Fantasy.Serialize"
             );
             builder.AppendLine();
-            builder.BeginNamespace("Fantasy.Generated");
+             builder.BeginDefaultNamespace();
             builder.AddXmlComment($"Auto-generated PoolCreatorGenerator class for {assemblyName}");
             builder.BeginClass(markerClassName, "internal sealed","global::Fantasy.Assembly.IPoolCreatorGenerator");
             // 开始定义RuntimeTypeHandles方法

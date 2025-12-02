@@ -10,6 +10,77 @@ namespace Fantasy.SourceGenerator.Common
     public static class CompilationHelper
     {
         /// <summary>
+        /// 是否是 FantasyNet 或者 FantasyUnity 程序集。
+        /// 这两个程序集都是框架的顶层程序集。
+        /// 在这两个程序集中生成的元数据, 能够传导到引用程序集中, 从而实现跨程序集的元数据分析。
+        /// </summary>
+        public static bool IsFantasyNetOrFantasyUnity(this Compilation compilation) {
+            return compilation.IsFantasyNet() || compilation.IsFantasyUnity();
+        }
+
+        /// <summary>
+        /// 是否是 Fantasy-Net 程序集。该程序集是框架的顶层程序集。在语法分析中位于依赖链的最上游。
+        /// </summary>
+        public static bool IsFantasyNet(this Compilation compilation)
+        {
+            string assmName = compilation.AssemblyName ?? string.Empty;
+            return assmName.Equals(GeneratorConstants.FantasyNetAssmbly, StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// 是否是 Fantasy-Unity (顶层)程序集。该程序集是框架的顶层程序集。在语法分析中位于依赖链的最上游。
+        /// </summary>
+        public static bool IsFantasyUnity(this Compilation compilation)
+        {
+            string assmName = compilation.AssemblyName ?? string.Empty;
+            return assmName.Equals(GeneratorConstants.FantasyUnityAssmbly, StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        /// 从一个 CompilationProvider 中获取所有引用的程序集提供者。
+        /// 支持按照程序集标签进行过滤。
+        /// </summary>
+        /// <param name="compilationProvider">CompilationProvider</param>
+        /// <param name="filterAttr">指定一个Attribute的名字进行程序集过滤。</param>
+        /// <param name="selfContained">获取的集合是否要包含自身。</param>
+        /// <returns></returns>
+        public static IncrementalValuesProvider<IAssemblySymbol> GetAllReferencedAssembliesProvider(
+            this IncrementalValueProvider<Compilation> compilationProvider, 
+            string? filterAttr = null, bool selfContained = false)
+        {
+            return compilationProvider.SelectMany((compilation, cancellationToken) =>
+             {
+                 var assemblies = new List<IAssemblySymbol>{};
+
+                 if (selfContained) // 包含当前程序集
+                 {
+                     assemblies.Add(compilation.Assembly);
+                 }
+
+                 // 遍历所有引用的程序集的元数据引用
+                 foreach (MetadataReference reference in compilation.References)
+                 {
+                     //从 MetadataReference 获取 Symbol
+                     var symbol = compilation.GetAssemblyOrModuleSymbol(reference) as IAssemblySymbol;
+                     if (symbol is not null)
+                     {
+                         // 如果传入了 filterAttr, 这里会分析含有 filterAttr 的程序集, 不含有就跳过, 含有就捕获
+                         if (string.IsNullOrEmpty(filterAttr)
+                            || symbol.GetAttributes()
+                                .Any(attr => attr.AttributeClass != null
+                                    && attr.AttributeClass
+                                    .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                                        .IndexOf(filterAttr, StringComparison.OrdinalIgnoreCase) >= 0))
+                         {
+                             assemblies.Add(symbol);
+                         }
+                     }
+                 }
+                 return assemblies;
+             });
+        }
+
+        /// <summary>
         /// 检查是否定义了 Fantasy 框架的预编译符号
         /// 只有定义了 FANTASY_NET的项目才会生成代码
         /// </summary>

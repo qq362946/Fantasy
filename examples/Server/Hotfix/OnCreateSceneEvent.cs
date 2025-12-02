@@ -6,19 +6,6 @@ using Fantasy.SeparateTable;
 
 namespace Fantasy;
 
-public sealed class TestGenericEntity<T> : Entity where T : Entity
-{
-    public T Entity;
-}
-
-public sealed class TestGenericEntityAwakeSystem<T> : AwakeSystem<TestGenericEntity<T>> where T : Entity
-{
-    protected override void Awake(TestGenericEntity<T> self)
-    {
-        Log.Debug($"TestGenericEntityAwakeSystem {typeof(T).FullName}");
-    }
-}
-
 public sealed class SaveEntity : Entity
 {
 
@@ -80,41 +67,44 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
-                // // Entity.Create<SubSceneTestComponent>(scene).AddComponent<TestGenericEntity<SaveEntity>>();
-                // var saveEntity = Entity.Create<SaveEntity>(scene);
-                // saveEntity.AddComponent<SubSceneTestComponent>();
-                //
-                // await saveEntity.PersistAggregate(scene.World.Database);
-               
-                // var saveEntity = await scene.World.Database.LoadWithSeparateTables<SaveEntity>(488710241381777422);
-                // var saveEntity = await scene.World.Database.Query<SaveEntity>(488710241381777422,true);
-                // await saveEntity.LoadWithSeparateTables(scene.World.Database);
-                // var a = 0;
-                //
-                // Log.Debug($"{saveEntity.GetComponent<SubSceneTestComponent>()!=null}");
-                // var saveEntity = Entity.Create<SaveEntity>(scene, true, false);
-                // saveEntity.AddComponent<SubSceneTestComponent>();
-                // await saveEntity.PersistAggregate(scene.World.Database);
-                // var tasks = new List<FTask>(2000);
-                // var session = scene.GetSession(_addressableSceneRunTimeId);
-                // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
-                // var g2ATestRequest = new G2A_TestRequest();
-                //
-                // async FTask Call()
-                // {
-                //     await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,g2ATestRequest);
-                // }
-                //
-                // for (int i = 0; i < 100000000000; i++)
-                // {
-                //     tasks.Clear();
-                //     for (int j = 0; j < tasks.Capacity; ++j)
-                //     {
-                //         tasks.Add(Call());
-                //     }
-                //     await FTask.WaitAll(tasks);
-                // }
-                break;
+                    //单泛型参数实体测试
+                    Entity.Create<SubSceneTestComponent>(scene).AddComponent<GenericTest.TestEntity<SaveEntity>>();
+                    //双泛型参数实体测试
+                    Entity.Create<SubSceneTestComponent>(scene).AddComponent<GenericTest.TestEntity2<SaveEntity, SaveEntity>>();
+                    // var saveEntity = Entity.Create<SaveEntity>(scene);
+                    // saveEntity.AddComponent<SubSceneTestComponent>();
+                    //
+                    // await saveEntity.PersistAggregate(scene.World.Database);
+
+                    // var saveEntity = await scene.World.Database.LoadWithSeparateTables<SaveEntity>(488710241381777422);
+                    // var saveEntity = await scene.World.Database.Query<SaveEntity>(488710241381777422,true);
+                    // await saveEntity.LoadWithSeparateTables(scene.World.Database);
+                    // var a = 0;
+                    //
+                    // Log.Debug($"{saveEntity.GetComponent<SubSceneTestComponent>()!=null}");
+                    // var saveEntity = Entity.Create<SaveEntity>(scene, true, false);
+                    // saveEntity.AddComponent<SubSceneTestComponent>();
+                    // await saveEntity.PersistAggregate(scene.World.Database);
+                    // var tasks = new List<FTask>(2000);
+                    // var session = scene.GetSession(_addressableSceneRunTimeId);
+                    // var sceneNetworkMessagingComponent = scene.NetworkMessagingComponent;
+                    // var g2ATestRequest = new G2A_TestRequest();
+                    //
+                    // async FTask Call()
+                    // {
+                    //     await sceneNetworkMessagingComponent.CallInnerRouteBySession(session,_addressableSceneRunTimeId,g2ATestRequest);
+                    // }
+                    //
+                    // for (int i = 0; i < 100000000000; i++)
+                    // {
+                    //     tasks.Clear();
+                    //     for (int j = 0; j < tasks.Capacity; ++j)
+                    //     {
+                    //         tasks.Add(Call());
+                    //     }
+                    //     await FTask.WaitAll(tasks);
+                    // }
+                    break;
             }
         }
     }

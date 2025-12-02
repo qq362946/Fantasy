@@ -89,8 +89,8 @@ namespace Fantasy.SourceGenerator.Generators
                     "Fantasy.Assembly"
                 );
                 builder.AppendLine();
-                // 开始命名空间（固定使用 Fantasy.Generated）
-                builder.BeginNamespace("Fantasy.Generated");
+                // 开始命名空间
+                 builder.BeginDefaultNamespace();
                 // 开始类定义（实现 IFantasyConfigRegistrar 接口）
                 builder.AddXmlComment($"Auto-generated Entity System registration class for {assemblyName}");
                 builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IFantasyConfigRegistrar");
