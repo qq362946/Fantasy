@@ -125,14 +125,12 @@ public class EventSystem : MonoBehaviour
     private async FTask EntityEvent()
     {
         // 发送一个同步的事件
-        _scene.EventComponent.Publish(new TestEventEntity()
-        {
-            Age = 1
-        });
+        var testEventEntity = Entity.Create<TestEventEntity>(_scene);
+        testEventEntity.Age = 1;
+        _scene.EventComponent.Publish(testEventEntity);
         // 发送一个异步的事件
-        await _scene.EventComponent.PublishAsync(new TestEventEntity()
-        {
-            Age = 1
-        });
+        var asyncTestEventEntity = Entity.Create<TestEventEntity>(_scene);
+        asyncTestEventEntity.Age = 1;
+        await _scene.EventComponent.PublishAsync(asyncTestEventEntity);
     }
 }
