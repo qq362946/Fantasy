@@ -314,7 +314,7 @@ namespace Fantasy
         /// </summary>
         private static void OnConnectComplete()
         {
-            Log.Info($"[Fantasy] Connection established successfully to {Session.RemoteEndPoint.Address}:{Session.RemoteEndPoint.Port}");
+            Log.Info($"[Fantasy] Connection established successfully");
             
             if (_enableHeartbeat && Session.GetComponent<SessionHeartbeatComponent>() == null)
             {
