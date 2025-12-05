@@ -65,7 +65,7 @@ public sealed class RoamingComponent : Entity
     /// <param name="isAutoDispose">是否在Session断开的时候自动断开漫游功能。</param>
     /// <param name="delayRemove">如果开启了自定断开漫游功能需要设置一个延迟多久执行断开。</param>
     /// <returns>创建成功会返回SessionRoamingComponent组件，这个组件提供漫游的所有功能。</returns>
-    public SessionRoamingComponent Create(Session session, long roamingId, bool isAutoDispose, int delayRemove)
+    internal async FTask<SessionRoamingComponent> Create(Session session, long roamingId, bool isAutoDispose, int delayRemove)
     {
         if (session.SessionRoamingComponent != null)
         {
@@ -83,6 +83,34 @@ public sealed class RoamingComponent : Entity
                 sessionRoamingComponent.Initialize(session);
                 _sessionRoamingComponents.Add(roamingId, sessionRoamingComponent);
             }
+            else
+            {
+                Session parentSession = sessionRoamingComponent.Session;
+
+                if (parentSession != null)
+                {
+                    // 这里要打印一个警告，说明当前已经绑定了一个Session并且Session没有断开。这时候会替换到这个Session。
+                    var sessionRoamingFlgComponent = parentSession.GetComponent<SessionRoamingFlgComponent>();
+                    if (sessionRoamingFlgComponent != null)
+                    {
+                        // 设置组件不会在销毁的时候移除SessionRoamingComponent
+                        sessionRoamingFlgComponent.DoNotRemove = true;
+                        parentSession.RemoveComponent<SessionRoamingFlgComponent>();
+                    }
+
+                    parentSession.SessionRoamingComponent = null;
+                }
+                else
+                {
+                    // 有可能关联的Session已经断开过，需要清除下定时删除任务
+                    session.Scene.RoamingComponent.CancelRemoveTask(roamingId);
+                }
+                
+                sessionRoamingComponent.Session = session;
+                session.SessionRoamingComponent = sessionRoamingComponent;
+                // 重新设定ForwardSessionAddress
+                await sessionRoamingComponent.SetForwardSessionAddress(session);
+            }
         }
 
         if (isAutoDispose)
@@ -93,12 +121,28 @@ public sealed class RoamingComponent : Entity
         return session.SessionRoamingComponent;
     }
 
+    private void Update()
+    {
+        
+    }
+
+    /// <summary>
+    /// 根据自定义roamingId获取漫游组件
+    /// </summary>
+    /// <param name="roamingId">自定义roamingId，这个Id在漫游中并没有实际作用，但用户可以用这个id来进行标记。。</param>
+    /// <param name="sessionRoamingComponent">SessionRoamingComponent组件，这个组件提供漫游的所有功能。</param>
+    /// <returns></returns>
+    internal bool TryGet(long roamingId, out SessionRoamingComponent sessionRoamingComponent)
+    {
+        return _sessionRoamingComponents.TryGetValue(roamingId, out sessionRoamingComponent);
+    }
+
     /// <summary>
     /// 获取当前Session会话的漫游组件
     /// </summary>
     /// <param name="session"></param>
     /// <returns></returns>
-    public SessionRoamingComponent Get(Session session)
+    internal SessionRoamingComponent Get(Session session)
     {
         var sessionRoamingFlgComponent = session.GetComponent<SessionRoamingFlgComponent>();
         
@@ -125,7 +169,7 @@ public sealed class RoamingComponent : Entity
     /// <param name="session"></param>
     /// <param name="sessionRoamingComponent"></param>
     /// <returns></returns>
-    public bool TryGet(Session session, out SessionRoamingComponent sessionRoamingComponent)
+    internal bool TryGet(Session session, out SessionRoamingComponent sessionRoamingComponent)
     {
         var sessionRoamingFlgComponent = session.GetComponent<SessionRoamingFlgComponent>();
 
@@ -139,17 +183,26 @@ public sealed class RoamingComponent : Entity
     }
 
     /// <summary>
-    /// 移除一个漫游
+    /// 移动一个设置延迟移除的任务
     /// </summary>
     /// <param name="roamingId"></param>
-    /// <param name="roamingType">要移除的RoamingType，默认不设置是移除所有漫游。</param>
-    /// <param name="delayRemove">当设置了延迟移除时间后，会在设置的时间后再进行移除。</param>
-    public async FTask Remove(long roamingId, int roamingType, int delayRemove = 0)
+    private void CancelRemoveTask(long roamingId)
     {
         if (_delayRemoveTaskId.Remove(roamingId, out var taskId))
         {
             _timerSchedulerNet.Remove(taskId);
         }
+    }
+
+    /// <summary>
+    /// 移除一个漫游
+    /// </summary>
+    /// <param name="roamingId"></param>
+    /// <param name="roamingType">要移除的RoamingType，默认不设置是移除所有漫游。</param>
+    /// <param name="delayRemove">当设置了延迟移除时间后，会在设置的时间后再进行移除。</param>
+    internal async FTask Remove(long roamingId, int roamingType, int delayRemove = 0)
+    {
+        CancelRemoveTask(roamingId);
 
         if (delayRemove <= 0)
         {
@@ -157,10 +210,11 @@ public sealed class RoamingComponent : Entity
             return;
         }
 
-        taskId = _timerSchedulerNet.OnceTimer(delayRemove, () =>
+        var taskId = _timerSchedulerNet.OnceTimer(delayRemove, () =>
         {
             InnerRemove(roamingId, roamingType).Coroutine();
         });
+        
         _delayRemoveTaskId.Add(roamingId, taskId);
     }
 
@@ -200,7 +254,7 @@ public static class RoamingHelper
     /// <param name="delayRemove">如果开启了自定断开漫游功能需要设置一个延迟多久执行断开。</param>
     /// <returns>创建成功会返回SessionRoamingComponent组件，这个组件提供漫游的所有功能。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static SessionRoamingComponent CreateRoaming(this Session session, long roamingId, bool isAutoDispose = true, int delayRemove = 1000 * 60 * 3)
+    public static FTask<SessionRoamingComponent> CreateRoaming(this Session session, long roamingId, bool isAutoDispose = true, int delayRemove = 1000 * 60 * 3)
     {
         return session.Scene.RoamingComponent.Create(session, roamingId, isAutoDispose, delayRemove);
     }

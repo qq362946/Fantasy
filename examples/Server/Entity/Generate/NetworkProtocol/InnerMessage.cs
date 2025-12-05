@@ -1,4 +1,5 @@
 using ProtoBuf;
+using MemoryPack;
 using System;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
@@ -20,6 +21,7 @@ using Fantasy.Serialize;
 #pragma warning disable CS8618
 namespace Fantasy
 {
+    [Serializable]
     [ProtoContract]
     public partial class G2A_TestMessage : AMessage, IAddressMessage
     {
@@ -35,11 +37,12 @@ namespace Fantasy
             GetScene().MessagePoolComponent.Return<G2A_TestMessage>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2A_TestMessage; } 
+        public uint OpCode() { return InnerOpcode.G2A_TestMessage; } 
         [ProtoMember(1)]
         public string Tag { get; set; }
     }
-    [ProtoContract]
+    [Serializable]
+    [ProtoContract(Serializer = typeof(global::Fantasy.Serialize.EmptyMessageSerializer<G2A_TestRequest>))]
     public partial class G2A_TestRequest : AMessage, IAddressRequest
     {
         public static G2A_TestRequest Create(Scene scene)
@@ -53,10 +56,11 @@ public uint OpCode() { return InnerOpcode.G2A_TestMessage; }
             GetScene().MessagePoolComponent.Return<G2A_TestRequest>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2A_TestRequest; } 
+        public uint OpCode() { return InnerOpcode.G2A_TestRequest; } 
         [ProtoIgnore]
         public G2A_TestResponse ResponseType { get; set; }
     }
+    [Serializable]
     [ProtoContract]
     public partial class G2A_TestResponse : AMessage, IAddressResponse
     {
@@ -71,11 +75,12 @@ public uint OpCode() { return InnerOpcode.G2A_TestRequest; }
             GetScene().MessagePoolComponent.Return<G2A_TestResponse>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2A_TestResponse; } 
+        public uint OpCode() { return InnerOpcode.G2A_TestResponse; } 
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
-    [ProtoContract]
+    [Serializable]
+    [ProtoContract(Serializer = typeof(global::Fantasy.Serialize.EmptyMessageSerializer<G2M_RequestAddressableId>))]
     public partial class G2M_RequestAddressableId : AMessage, IAddressRequest
     {
         public static G2M_RequestAddressableId Create(Scene scene)
@@ -89,10 +94,11 @@ public uint OpCode() { return InnerOpcode.G2A_TestResponse; }
             GetScene().MessagePoolComponent.Return<G2M_RequestAddressableId>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2M_RequestAddressableId; } 
+        public uint OpCode() { return InnerOpcode.G2M_RequestAddressableId; } 
         [ProtoIgnore]
         public M2G_ResponseAddressableId ResponseType { get; set; }
     }
+    [Serializable]
     [ProtoContract]
     public partial class M2G_ResponseAddressableId : AMessage, IAddressResponse
     {
@@ -108,7 +114,7 @@ public uint OpCode() { return InnerOpcode.G2M_RequestAddressableId; }
             GetScene().MessagePoolComponent.Return<M2G_ResponseAddressableId>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.M2G_ResponseAddressableId; } 
+        public uint OpCode() { return InnerOpcode.M2G_ResponseAddressableId; } 
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
         [ProtoMember(2)]
@@ -117,6 +123,7 @@ public uint OpCode() { return InnerOpcode.M2G_ResponseAddressableId; }
     /// <summary>
     /// 通知Chat服务器创建一个RouteId
     /// </summary>
+    [Serializable]
     [ProtoContract]
     public partial class G2Chat_CreateRouteRequest : AMessage, IAddressRequest
     {
@@ -132,12 +139,13 @@ public uint OpCode() { return InnerOpcode.M2G_ResponseAddressableId; }
             GetScene().MessagePoolComponent.Return<G2Chat_CreateRouteRequest>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2Chat_CreateRouteRequest; } 
+        public uint OpCode() { return InnerOpcode.G2Chat_CreateRouteRequest; } 
         [ProtoIgnore]
         public Chat2G_CreateRouteResponse ResponseType { get; set; }
         [ProtoMember(1)]
         public long GateAddress { get; set; }
     }
+    [Serializable]
     [ProtoContract]
     public partial class Chat2G_CreateRouteResponse : AMessage, IAddressResponse
     {
@@ -153,7 +161,7 @@ public uint OpCode() { return InnerOpcode.G2Chat_CreateRouteRequest; }
             GetScene().MessagePoolComponent.Return<Chat2G_CreateRouteResponse>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.Chat2G_CreateRouteResponse; } 
+        public uint OpCode() { return InnerOpcode.Chat2G_CreateRouteResponse; } 
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
         [ProtoMember(2)]
@@ -176,7 +184,7 @@ public uint OpCode() { return InnerOpcode.Chat2G_CreateRouteResponse; }
             GetScene().MessagePoolComponent.Return<M2M_SendUnitRequest>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.M2M_SendUnitRequest; } 
+        public uint OpCode() { return InnerOpcode.M2M_SendUnitRequest; } 
         [BsonIgnore]
         public M2M_SendUnitResponse ResponseType { get; set; }
         public Unit Unit { get; set; }
@@ -194,12 +202,13 @@ public uint OpCode() { return InnerOpcode.M2M_SendUnitRequest; }
             GetScene().MessagePoolComponent.Return<M2M_SendUnitResponse>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.M2M_SendUnitResponse; } 
+        public uint OpCode() { return InnerOpcode.M2M_SendUnitResponse; } 
         public uint ErrorCode { get; set; }
     }
     /// <summary>
     /// Gate发送Addressable消息给MAP
     /// </summary>
+    [Serializable]
     [ProtoContract]
     public partial class G2M_SendAddressableMessage : AMessage, IAddressableMessage
     {
@@ -215,11 +224,12 @@ public uint OpCode() { return InnerOpcode.M2M_SendUnitResponse; }
             GetScene().MessagePoolComponent.Return<G2M_SendAddressableMessage>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2M_SendAddressableMessage; } 
+        public uint OpCode() { return InnerOpcode.G2M_SendAddressableMessage; } 
         [ProtoMember(1)]
         public string Tag { get; set; }
     }
-    [ProtoContract]
+    [Serializable]
+    [ProtoContract(Serializer = typeof(global::Fantasy.Serialize.EmptyMessageSerializer<G2M_CreateSubSceneRequest>))]
     public partial class G2M_CreateSubSceneRequest : AMessage, IAddressRequest
     {
         public static G2M_CreateSubSceneRequest Create(Scene scene)
@@ -233,10 +243,11 @@ public uint OpCode() { return InnerOpcode.G2M_SendAddressableMessage; }
             GetScene().MessagePoolComponent.Return<G2M_CreateSubSceneRequest>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2M_CreateSubSceneRequest; } 
+        public uint OpCode() { return InnerOpcode.G2M_CreateSubSceneRequest; } 
         [ProtoIgnore]
         public M2G_CreateSubSceneResponse ResponseType { get; set; }
     }
+    [Serializable]
     [ProtoContract]
     public partial class M2G_CreateSubSceneResponse : AMessage, IAddressResponse
     {
@@ -252,12 +263,13 @@ public uint OpCode() { return InnerOpcode.G2M_CreateSubSceneRequest; }
             GetScene().MessagePoolComponent.Return<M2G_CreateSubSceneResponse>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.M2G_CreateSubSceneResponse; } 
+        public uint OpCode() { return InnerOpcode.M2G_CreateSubSceneResponse; } 
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
         [ProtoMember(2)]
         public long SubSceneAddress { get; set; }
     }
+    [Serializable]
     [ProtoContract]
     public partial class G2SubScene_SentMessage : AMessage, IAddressMessage
     {
@@ -273,14 +285,15 @@ public uint OpCode() { return InnerOpcode.M2G_CreateSubSceneResponse; }
             GetScene().MessagePoolComponent.Return<G2SubScene_SentMessage>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2SubScene_SentMessage; } 
+        public uint OpCode() { return InnerOpcode.G2SubScene_SentMessage; } 
         [ProtoMember(1)]
         public string Tag { get; set; }
     }
     /// <summary>
     /// Gate通知SubScene创建一个Addressable消息
     /// </summary>
-    [ProtoContract]
+    [Serializable]
+    [ProtoContract(Serializer = typeof(global::Fantasy.Serialize.EmptyMessageSerializer<G2SubScene_AddressableIdRequest>))]
     public partial class G2SubScene_AddressableIdRequest : AMessage, IAddressRequest
     {
         public static G2SubScene_AddressableIdRequest Create(Scene scene)
@@ -294,10 +307,11 @@ public uint OpCode() { return InnerOpcode.G2SubScene_SentMessage; }
             GetScene().MessagePoolComponent.Return<G2SubScene_AddressableIdRequest>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2SubScene_AddressableIdRequest; } 
+        public uint OpCode() { return InnerOpcode.G2SubScene_AddressableIdRequest; } 
         [ProtoIgnore]
         public SubScene2G_AddressableIdResponse ResponseType { get; set; }
     }
+    [Serializable]
     [ProtoContract]
     public partial class SubScene2G_AddressableIdResponse : AMessage, IAddressResponse
     {
@@ -313,7 +327,7 @@ public uint OpCode() { return InnerOpcode.G2SubScene_AddressableIdRequest; }
             GetScene().MessagePoolComponent.Return<SubScene2G_AddressableIdResponse>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.SubScene2G_AddressableIdResponse; } 
+        public uint OpCode() { return InnerOpcode.SubScene2G_AddressableIdResponse; } 
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
         [ProtoMember(2)]
@@ -322,6 +336,7 @@ public uint OpCode() { return InnerOpcode.SubScene2G_AddressableIdResponse; }
     /// <summary>
     /// Chat发送一个漫游消息给Map
     /// </summary>
+    [Serializable]
     [ProtoContract]
     public partial class Chat2M_TestMessage : AMessage, IRoamingMessage
     {
@@ -337,7 +352,7 @@ public uint OpCode() { return InnerOpcode.SubScene2G_AddressableIdResponse; }
             GetScene().MessagePoolComponent.Return<Chat2M_TestMessage>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.Chat2M_TestMessage; } 
+        public uint OpCode() { return InnerOpcode.Chat2M_TestMessage; } 
         [ProtoIgnore]
         public int RouteType => Fantasy.RoamingType.MapRoamingType;
         [ProtoMember(1)]
@@ -346,6 +361,7 @@ public uint OpCode() { return InnerOpcode.Chat2M_TestMessage; }
     /// <summary>
     /// 测试一个Gate服务器发送一个Route消息给某个漫游终端
     /// </summary>
+    [Serializable]
     [ProtoContract]
     public partial class G2Map_TestRouteMessageRequest : AMessage, IAddressRequest
     {
@@ -361,12 +377,13 @@ public uint OpCode() { return InnerOpcode.Chat2M_TestMessage; }
             GetScene().MessagePoolComponent.Return<G2Map_TestRouteMessageRequest>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2Map_TestRouteMessageRequest; } 
+        public uint OpCode() { return InnerOpcode.G2Map_TestRouteMessageRequest; } 
         [ProtoIgnore]
         public Map2G_TestRouteMessageResponse ResponseType { get; set; }
         [ProtoMember(1)]
         public string Tag { get; set; }
     }
+    [Serializable]
     [ProtoContract]
     public partial class Map2G_TestRouteMessageResponse : AMessage, IAddressResponse
     {
@@ -381,13 +398,14 @@ public uint OpCode() { return InnerOpcode.G2Map_TestRouteMessageRequest; }
             GetScene().MessagePoolComponent.Return<Map2G_TestRouteMessageResponse>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.Map2G_TestRouteMessageResponse; } 
+        public uint OpCode() { return InnerOpcode.Map2G_TestRouteMessageResponse; } 
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     /// <summary>
     /// 测试一个Gate服务器发送一个漫游协议给某个漫游终端
     /// </summary>
+    [Serializable]
     [ProtoContract]
     public partial class G2Map_TestRoamingMessageRequest : AMessage, IRoamingRequest
     {
@@ -403,7 +421,7 @@ public uint OpCode() { return InnerOpcode.Map2G_TestRouteMessageResponse; }
             GetScene().MessagePoolComponent.Return<G2Map_TestRoamingMessageRequest>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2Map_TestRoamingMessageRequest; } 
+        public uint OpCode() { return InnerOpcode.G2Map_TestRoamingMessageRequest; } 
         [ProtoIgnore]
         public Map2G_TestRoamingMessageResponse ResponseType { get; set; }
         [ProtoIgnore]
@@ -411,6 +429,7 @@ public uint OpCode() { return InnerOpcode.G2Map_TestRoamingMessageRequest; }
         [ProtoMember(1)]
         public string Tag { get; set; }
     }
+    [Serializable]
     [ProtoContract]
     public partial class Map2G_TestRoamingMessageResponse : AMessage, IRoamingResponse
     {
@@ -425,13 +444,14 @@ public uint OpCode() { return InnerOpcode.G2Map_TestRoamingMessageRequest; }
             GetScene().MessagePoolComponent.Return<Map2G_TestRoamingMessageResponse>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.Map2G_TestRoamingMessageResponse; } 
+        public uint OpCode() { return InnerOpcode.Map2G_TestRoamingMessageResponse; } 
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     /// <summary>
     /// Gate服务器通知Map订阅一个领域事件到Gate上
     /// </summary>
+    [Serializable]
     [ProtoContract]
     public partial class G2Map_SubscribeSphereEventRequest : AMessage, IAddressRequest
     {
@@ -447,12 +467,13 @@ public uint OpCode() { return InnerOpcode.Map2G_TestRoamingMessageResponse; }
             GetScene().MessagePoolComponent.Return<G2Map_SubscribeSphereEventRequest>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2Map_SubscribeSphereEventRequest; } 
+        public uint OpCode() { return InnerOpcode.G2Map_SubscribeSphereEventRequest; } 
         [ProtoIgnore]
         public G2Map_SubscribeSphereEventResponse ResponseType { get; set; }
         [ProtoMember(1)]
         public long GateAddress { get; set; }
     }
+    [Serializable]
     [ProtoContract]
     public partial class G2Map_SubscribeSphereEventResponse : AMessage, IAddressResponse
     {
@@ -467,13 +488,14 @@ public uint OpCode() { return InnerOpcode.G2Map_SubscribeSphereEventRequest; }
             GetScene().MessagePoolComponent.Return<G2Map_SubscribeSphereEventResponse>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2Map_SubscribeSphereEventResponse; } 
+        public uint OpCode() { return InnerOpcode.G2Map_SubscribeSphereEventResponse; } 
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     /// <summary>
     /// Gate服务器通知Map取消订阅一个领域事件到Gate上
     /// </summary>
+    [Serializable]
     [ProtoContract]
     public partial class G2Map_UnsubscribeSphereEventRequest : AMessage, IAddressRequest
     {
@@ -489,12 +511,13 @@ public uint OpCode() { return InnerOpcode.G2Map_SubscribeSphereEventResponse; }
             GetScene().MessagePoolComponent.Return<G2Map_UnsubscribeSphereEventRequest>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.G2Map_UnsubscribeSphereEventRequest; } 
+        public uint OpCode() { return InnerOpcode.G2Map_UnsubscribeSphereEventRequest; } 
         [ProtoIgnore]
         public Map2G_UnsubscribeSphereEventResponse ResponseType { get; set; }
         [ProtoMember(1)]
         public long GateAddress { get; set; }
     }
+    [Serializable]
     [ProtoContract]
     public partial class Map2G_UnsubscribeSphereEventResponse : AMessage, IAddressResponse
     {
@@ -509,7 +532,7 @@ public uint OpCode() { return InnerOpcode.G2Map_UnsubscribeSphereEventRequest; }
             GetScene().MessagePoolComponent.Return<Map2G_UnsubscribeSphereEventResponse>(this);
 #endif
         }
-public uint OpCode() { return InnerOpcode.Map2G_UnsubscribeSphereEventResponse; } 
+        public uint OpCode() { return InnerOpcode.Map2G_UnsubscribeSphereEventResponse; } 
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }

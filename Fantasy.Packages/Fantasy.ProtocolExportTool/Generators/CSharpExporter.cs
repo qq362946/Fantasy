@@ -342,7 +342,7 @@ public sealed class CSharpExporter(
             
             if (messageDefinition.HasOpCode)
             {
-                members.Add($"public uint OpCode() {{ return {opcodeName}.{messageDefinition.Name}; }} ");
+                members.Add($"        public uint OpCode() {{ return {opcodeName}.{messageDefinition.Name}; }} ");
             }
             
             if (IsRequestType(messageDefinition.MessageType))
@@ -418,8 +418,25 @@ public sealed class CSharpExporter(
 
             if (!string.IsNullOrEmpty(messageDefinition.Protocol.ClassAttribute))
             {
-                builder.AppendLine($"    [Serializable]\n" +
-                                   $"    {messageDefinition.Protocol.ClassAttribute}");
+                if (messageDefinition.Fields.Any())
+                {
+                    builder.AppendLine($"    [Serializable]\n" +
+                                       $"    {messageDefinition.Protocol.ClassAttribute}");
+                }
+                else
+                {
+                    if (IsResponseType(messageDefinition.MessageType) || messageDefinition.Protocol.ProtocolName != "ProtoBuf")
+                    {
+                        builder.AppendLine($"    [Serializable]\n" +
+                                           $"    {messageDefinition.Protocol.ClassAttribute}");
+                    }
+                    else
+                    {
+                        // 针对Protobuf空消息：使用 EmptyMessageSerializer
+                        builder.AppendLine($"    [Serializable]\n" +
+                                           $"    [ProtoContract(Serializer = typeof(global::Fantasy.Serialize.EmptyMessageSerializer<{messageDefinition.Name}>))]");
+                    }
+                }
             }
             
             if (string.IsNullOrEmpty(messageDefinition.InterfaceType))

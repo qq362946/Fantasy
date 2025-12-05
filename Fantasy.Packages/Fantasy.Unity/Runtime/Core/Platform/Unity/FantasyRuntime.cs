@@ -572,7 +572,7 @@ namespace Fantasy
         /// </summary>
         private void OnConnectComplete()
         {
-            Log.Info($"[{runtimeName}] Connection established successfully to {Session.RemoteEndPoint.Address}:{Session.RemoteEndPoint.Port}");
+            Log.Info($"[{runtimeName}] Connection established successfully");
 
             if (enableHeartbeat && Session.GetComponent<SessionHeartbeatComponent>() == null)
             {
@@ -605,7 +605,7 @@ namespace Fantasy
         /// </summary>
         private void OnConnectDisconnect()
         {
-            Log.Info($"[{runtimeName}] Connection disconnected from server66666666666666");
+            Log.Info($"[{runtimeName}] Connection disconnected from server");
             onConnectDisconnect?.Invoke();
         }
 

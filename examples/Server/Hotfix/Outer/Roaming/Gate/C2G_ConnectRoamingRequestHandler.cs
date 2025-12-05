@@ -25,7 +25,7 @@ public sealed class C2G_ConnectRoamingRequestHandler : MessageRPC<C2G_ConnectRoa
         // isAutoDispose我选择自动断开，这个断开的时机是Session断开后执行。
         // delayRemove断开漫游功能后，Session会自动断开，所以这里设置延迟1000毫秒执行断开。
         // 这里创建的漫游功能会自动处理Roaming协议，所以不需要手动处理Roaming协议。
-        var roaming = session.CreateRoaming(1, true, 1000);
+        var roaming = await session.CreateRoaming(1, true, 1000);
         // 通过SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0]拿到Map场景的配置信息
         // 如果需要协议漫游其他Scene可以在配置中查找要漫游的服务器。
         // 可以同时漫游多个Scene，但每个Scene的漫游都有一个固定的类型，不能重复。

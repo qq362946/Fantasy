@@ -92,6 +92,52 @@ public sealed class Roaming : Entity
     }
 
     /// <summary>
+    /// 通知Terminus更新ForwardSessionAddress
+    /// </summary>
+    /// <param name="forwardSessionAddress"></param>
+    /// <returns></returns>
+    internal async FTask SetForwardSessionAddress(long forwardSessionAddress)
+    {
+        var response = await Scene.NetworkMessagingComponent.Call(
+            TargetSceneAddress,
+            new I_SetForwardSessionAddressRequest()
+            {
+                RoamingId = SessionRoamingComponent!.Id,
+                ForwardSessionAddress = forwardSessionAddress
+            });
+
+        if (response.ErrorCode == 0)
+        {
+            ForwardSessionAddress = forwardSessionAddress;
+            return;
+        }
+
+        Log.Warning($"SetForwardSessionAddress failed with ErrorCode: {response.ErrorCode}, RoamingId: {SessionRoamingComponent!.Id}, TargetSceneAddress: {TargetSceneAddress}");
+    }
+
+    /// <summary>
+    /// 通知Terminus停止转发消息到ForwardSession。
+    /// 用于Session已断开但实体还在工作的场景，避免框架报错。
+    /// </summary>
+    /// <returns></returns>
+    internal async FTask StopForwarding()
+    {
+        var response = await Scene.NetworkMessagingComponent.Call(
+            TargetSceneAddress,
+            new I_StopForwardingRequest()
+            {
+                RoamingId = SessionRoamingComponent!.Id
+            });
+
+        if (response.ErrorCode == 0)
+        {
+            return;
+        }
+
+        Log.Warning($"StopForwarding failed with ErrorCode: {response.ErrorCode}, RoamingId: {SessionRoamingComponent!.Id}, TargetSceneAddress: {TargetSceneAddress}");
+    }
+
+    /// <summary>
     /// 断开当前漫游的连接。
     /// </summary>
     /// <returns></returns>

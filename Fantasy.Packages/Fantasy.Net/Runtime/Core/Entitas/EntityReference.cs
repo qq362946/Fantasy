@@ -11,7 +11,7 @@ namespace Fantasy.Entitas
     public struct EntityReference<T> where T : Entity
     {
         private T _entity;
-        private readonly long _runTimeId;
+        private long _runTimeId;
 
         private EntityReference(T t)
         {
@@ -30,6 +30,20 @@ namespace Fantasy.Entitas
         /// 获取实体引用
         /// </summary>
         public T Value => _entity?.RuntimeId != _runTimeId ? null : _entity;
+
+        /// <summary>
+        /// 检查引用是否有效
+        /// </summary>
+        public bool IsValid => _entity != null && _entity.RuntimeId == _runTimeId;
+
+        /// <summary>
+        /// 清空实体引用，用于对象池回收时重置
+        /// </summary>
+        public void Clear()
+        {
+            _entity = null;
+            _runTimeId = 0;
+        }
 
         /// <summary>
         /// 将一个实体转换为EntityReference

@@ -56,7 +56,7 @@ namespace Fantasy.Assembly
         /// 添加后会立即对所有已加载的程序集触发 Load 回调
         /// </summary>
         /// <param name="assemblyLifecycle">实现 IAssemblyLifecycle 接口的生命周期回调对象</param>
-        internal static async FTask Add(IAssemblyLifecycle assemblyLifecycle)
+        public static async FTask Add(IAssemblyLifecycle assemblyLifecycle)
         {
 #if FANTASY_WEBGL
             AssemblyLifecycles.Add(assemblyLifecycle, 0);

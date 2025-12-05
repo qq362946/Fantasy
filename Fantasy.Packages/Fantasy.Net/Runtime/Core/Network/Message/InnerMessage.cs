@@ -15,7 +15,7 @@ using Fantasy.Sphere;
 
 namespace Fantasy.InnerMessage
 {
-    [ProtoContract]
+    [ProtoContract(Serializer = typeof(Fantasy.Serialize.EmptyMessageSerializer<BenchmarkMessage>))]
     public sealed partial class BenchmarkMessage : AMessage, IMessage
     {
         public uint OpCode()
@@ -65,7 +65,7 @@ namespace Fantasy.InnerMessage
     {
         public uint OpCode()
         {
-            return Fantasy.Network.OpCode.DefaultRouteResponse;
+            return Fantasy.Network.OpCode.DefaultAddressResponse;
         }
         [ProtoMember(1)]
         public long RpcId { get; set; }
@@ -246,7 +246,7 @@ namespace Fantasy.InnerMessage
         public I_LockTerminusIdResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.LockTerminusIdRequest; }
         [ProtoMember(1)]
-        public long SessionRuntimeId { get; set; }
+        public long RoamingId { get; set; }
         [ProtoMember(2)]
         public int RoamingType { get; set; }
     }
@@ -265,7 +265,7 @@ namespace Fantasy.InnerMessage
         public uint OpCode() { return Fantasy.Network.OpCode.UnLockTerminusIdRequest; }
         public long RouteTypeOpCode() { return 1; }
         [ProtoMember(1)]
-        public long SessionRuntimeId { get; set; }
+        public long RoamingId { get; set; }
         [ProtoMember(2)]
         public int RoamingType { get; set; }
         [ProtoMember(3)]
@@ -307,7 +307,7 @@ namespace Fantasy.InnerMessage
         [ProtoMember(1)]
         public int RoamingType { get; set; }
         [ProtoMember(2)]
-        public long SessionRuntimeId { get; set; }
+        public long RoamingId { get; set; }
     }
     [ProtoContract]
     public partial class I_GetTerminusIdResponse : AMessage, IAddressResponse
@@ -316,6 +316,42 @@ namespace Fantasy.InnerMessage
         [ProtoMember(1)]
         public long TerminusId { get; set; }
         [ProtoMember(2)]
+        public uint ErrorCode { get; set; }
+    }
+    [ProtoContract]
+    public sealed class I_SetForwardSessionAddressRequest : AMessage, IAddressRequest
+    {
+        [ProtoIgnore]
+        public I_SetForwardSessionAddressResponse ResponseType { get; set; }
+        public uint OpCode() { return Fantasy.Network.OpCode.SetForwardSessionAddressRequest; }
+        public long RouteTypeOpCode() { return 1; }
+        [ProtoMember(1)]
+        public long RoamingId { get; set; }
+        [ProtoMember(2)]
+        public long ForwardSessionAddress { get; set; }
+    }
+    [ProtoContract]
+    public sealed class I_SetForwardSessionAddressResponse : AMessage, IAddressResponse
+    {
+        public uint OpCode() { return Fantasy.Network.OpCode.SetForwardSessionAddressResponse; }
+        [ProtoMember(1)]
+        public uint ErrorCode { get; set; }
+    }
+    [ProtoContract]
+    public sealed class I_StopForwardingRequest : AMessage, IAddressRequest
+    {
+        [ProtoIgnore]
+        public I_StopForwardingResponse ResponseType { get; set; }
+        public uint OpCode() { return Fantasy.Network.OpCode.StopForwardingRequest; }
+        public long RouteTypeOpCode() { return 1; }
+        [ProtoMember(1)]
+        public long RoamingId { get; set; }
+    }
+    [ProtoContract]
+    public sealed class I_StopForwardingResponse : AMessage, IAddressResponse
+    {
+        public uint OpCode() { return Fantasy.Network.OpCode.StopForwardingResponse; }
+        [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     /// <summary>

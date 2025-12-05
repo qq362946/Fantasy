@@ -7,6 +7,10 @@ package Fantasy.Network.Message;
 // 使用方式:
 // 在message协议上方添加// Protocol+空格+协议名字
 // 例如:// Protocol ProtoBuf 或 // Protocol MemoryPack
+message C2G_TestEmptyMessage // IMessage
+{
+	
+}
 message C2G_TestMessage // IMessage
 {
 	string Tag = 1;

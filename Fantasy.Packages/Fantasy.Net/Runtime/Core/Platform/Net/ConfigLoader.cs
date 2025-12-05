@@ -365,7 +365,8 @@ public static class ConfigLoader
     {
         var worlds = WorldConfigData.Instance.List;
         var worldIds = new HashSet<uint>();
-        
+        var idFactoryType = IdFactoryHelper.GetIdFactoryType();
+
         foreach (var world in worlds)
         {
             // 检查ID重复
@@ -373,11 +374,17 @@ public static class ConfigLoader
             {
                 throw new InvalidOperationException($"Duplicate world ID: {world.Id}");
             }
-            
+
             // 检查必填字段
             if (string.IsNullOrWhiteSpace(world.WorldName))
             {
                 throw new InvalidOperationException($"World {world.Id}: WorldName cannot be null or empty");
+            }
+
+            // 检查IdFactoryType为World时，world.Id最大值为255
+            if (idFactoryType == IdFactoryType.World && world.Id > 255)
+            {
+                throw new InvalidOperationException($"World {world.Id}: When IdFactoryType is World, World ID must be <= 255");
             }
 
             if (world.DatabaseConfig != null)
@@ -558,19 +565,14 @@ public static class ConfigLoader
     private static void LoadRuntimeConfig(XmlNode root, XmlNamespaceManager nsManager)
     {
         // 加载IdFactory配置
-
         XmlNode? idFactoryNode = root.SelectSingleNode("f:idFactory", nsManager);
         string idFactoryType = GetOptionalAttribute(idFactoryNode, "type") ?? "Default";
         IdFactoryHelper.Initialize(Enum.Parse<IdFactoryType>(idFactoryType));
-
         // 加载网络配置
-
         XmlNode? networkNode = root.SelectSingleNode("f:network", nsManager);
         ProgramDefine.InnerNetwork = Enum.Parse<NetworkProtocolType>(GetOptionalAttribute(networkNode, "inner") ?? "TCP");
         ProgramDefine.MaxMessageSize = int.Parse(GetOptionalAttribute(networkNode, "maxMessageSize") ?? "1048560");
-
         // 加载会话配置
-
         XmlNode? sessionNode = root.SelectSingleNode("f:session", nsManager);
         ProgramDefine.SessionIdleCheckerTimeout = int.Parse(GetOptionalAttribute(sessionNode, "idleTimeout") ?? "8000");
         ProgramDefine.SessionIdleCheckerInterval = int.Parse(GetOptionalAttribute(sessionNode, "idleInterval") ?? "5000");

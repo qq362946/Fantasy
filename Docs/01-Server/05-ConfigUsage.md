@@ -341,7 +341,7 @@ public sealed class WorldConfigData
 // 配置数据类
 public sealed class WorldConfig
 {
-    public uint Id { get; set; }                        // 世界ID
+    public uint Id { get; set; }                        // 世界ID (范围: World模式 1-255, Default模式 1-4294967295)
     public string WorldName { get; set; }               // 世界名称
     public DatabaseConfig[]? DatabaseConfig { get; set; } // 数据库配置数组
 }

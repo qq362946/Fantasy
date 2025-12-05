@@ -1,5 +1,6 @@
 #if FANTASY_NET
 using Fantasy.Async;
+using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas;
 using Fantasy.InnerMessage;
 using Fantasy.Network.Interface;
@@ -8,6 +9,7 @@ using Fantasy.Platform.Net;
 using Fantasy.Scheduler;
 using Fantasy.Timer;
 // ReSharper disable CheckNamespace
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
@@ -23,6 +25,8 @@ namespace Fantasy.Network.Roaming;
 /// </summary>
 public sealed class SessionRoamingComponent : Entity
 {
+    internal EntityReference<Session> Session;
+    
     private CoroutineLock? _roamingLock;
     private CoroutineLock? _roamingMessageLock;
     private TimerComponent _timerComponent;
@@ -36,14 +40,15 @@ public sealed class SessionRoamingComponent : Entity
 
     internal void Initialize(Session session)
     {
-        session.SessionRoamingComponent = this;
-        
         var scene = session.Scene;
         _timerComponent = scene.TimerComponent;
         _networkMessagingComponent = scene.NetworkMessagingComponent;
         _messageDispatcherComponent = scene.MessageDispatcherComponent;
         _roamingLock = scene.CoroutineLockComponent.Create(this.GetType().TypeHandle.Value.ToInt64());
         _roamingMessageLock = scene.CoroutineLockComponent.Create(this.GetType().TypeHandle.Value.ToInt64());
+        
+        Session = session;
+        session.SessionRoamingComponent = this;
     }
 
     /// <summary>
@@ -68,6 +73,7 @@ public sealed class SessionRoamingComponent : Entity
             _roamingMessageLock = null;
         }
         
+        Session.Clear();
         _timerComponent = null;
         _networkMessagingComponent = null;
         _messageDispatcherComponent = null;
@@ -107,6 +113,39 @@ public sealed class SessionRoamingComponent : Entity
     #endregion
     
     #region Link
+
+    /// <summary>
+    /// 重新设定ForwardSessionAddress
+    /// </summary>
+    /// <param name="session"></param>
+    internal async FTask SetForwardSessionAddress(Session session)
+    {
+        using var tasks = ListPool<FTask>.Create();
+        var forwardSessionAddress = session.RuntimeId;
+        
+        foreach (var (_, roaming) in _roaming)
+        {
+            tasks.Add(roaming.SetForwardSessionAddress(forwardSessionAddress));
+        }
+
+        await FTask.WaitAll(tasks);
+    }
+
+    /// <summary>
+    /// 通知所有连接的Terminus不要再转发消息
+    /// 用于session已经断开但实体还在工作的场景，避免框架报错
+    /// </summary>
+    internal async FTask StopForwarding()
+    {
+        using var tasks = ListPool<FTask>.Create();
+
+        foreach (var (_, roaming) in _roaming)
+        {
+            tasks.Add(roaming.StopForwarding());
+        }
+
+        await FTask.WaitAll(tasks);
+    }
 
     /// <summary>
     /// 建立漫游关系。

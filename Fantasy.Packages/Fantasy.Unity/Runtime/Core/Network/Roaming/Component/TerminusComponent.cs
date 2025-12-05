@@ -68,14 +68,17 @@ public sealed class TerminusComponent : Entity
     /// <returns></returns>
     internal (uint, Terminus) Create(long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress)
     {
+        if (roamingId == 0)
+        {
+            return (InnerErrorCode.ErrCreateTerminusInvalidRoamingId, null);
+        }
+        
         if (_terminals.ContainsKey(roamingId))
         {
             return (InnerErrorCode.ErrAddRoamingTerminalAlreadyExists, null);
         }
 
-        var terminus = roamingId == 0
-            ? Entity.Create<Terminus>(Scene, false, true)
-            : Entity.Create<Terminus>(Scene, roamingId, false, true);
+        var terminus = Entity.Create<Terminus>(Scene, roamingId, false, true);
         terminus.IsDisposeTerminus = false;
         terminus.RoamingType = roamingType;
         terminus.TerminusId = terminus.RuntimeId;

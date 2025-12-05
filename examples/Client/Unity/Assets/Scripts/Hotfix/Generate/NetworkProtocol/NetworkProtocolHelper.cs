@@ -9,6 +9,17 @@ namespace Fantasy
    public static class NetworkProtocolHelper
    {
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void C2G_TestEmptyMessage(this Session session, C2G_TestEmptyMessage message)
+		{
+			session.Send(message);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void C2G_TestEmptyMessage(this Session session)
+		{
+			using var message = Fantasy.C2G_TestEmptyMessage.Create(session.Scene);
+			session.Send(message);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2G_TestMessage(this Session session, C2G_TestMessage message)
 		{
 			session.Send(message);

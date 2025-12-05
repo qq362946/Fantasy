@@ -3,6 +3,7 @@ using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
 using Fantasy.Event;
 using Fantasy.SeparateTable;
+using Fantasy.Serialize;
 
 namespace Fantasy;
 

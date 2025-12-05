@@ -157,7 +157,7 @@ namespace Fantasy.SourceGenerator.Common
                     }
                 }
             }
-
+        
             // 方法2: 检查是否能够找到 UnityEngine 命名空间的核心类型
             var unityMonoBehaviour = compilation.GetTypeByMetadataName("UnityEngine.MonoBehaviour");
             var unityGameObject = compilation.GetTypeByMetadataName("UnityEngine.GameObject");
@@ -165,7 +165,7 @@ namespace Fantasy.SourceGenerator.Common
             {
                 return true;
             }
-
+        
             return false;
         }
 
@@ -200,7 +200,7 @@ namespace Fantasy.SourceGenerator.Common
         /// </summary>
         /// <param name="compilation">编译上下文</param>
         /// <returns>
-        /// 0 = Auto/未定义, 1 = Server, 2 = Unity
+        /// 0 = Auto/未定义, 1 = Server, 2 = Unity, 3 = Other
         /// </returns>
         public static int GetTargetPlatform(Compilation compilation)
         {
@@ -234,14 +234,17 @@ namespace Fantasy.SourceGenerator.Common
             }
 
             // 2. 自动检测：根据预编译符号判断
+            
             if (HasFantasyNETDefine(compilation))
             {
-                return 1; // Server
+                return 1;   // Server
             }
-
-            if (HasFantasyUNITYDefine(compilation) && IsUnityCompilation(compilation))
+            
+            if (HasFantasyUNITYDefine(compilation))
             {
-                return 2; // Unity
+                return IsUnityCompilation(compilation) 
+                    ? 2 :   // Unity
+                    3;      // 有FANTASY_UNITY预编译，但没有使用Unity相关的程序集
             }
 
             // 3. 如果都没有，返回 Auto (0)

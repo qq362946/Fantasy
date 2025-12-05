@@ -67,6 +67,14 @@ namespace Fantasy.SourceGenerator.Generators
                     );
                     break;
                 }
+                case 3: // Unity 但没有使用Unity相关的程序集
+                {
+                    builder.AddUsings(
+                        "System",
+                        "System.Runtime.CompilerServices"
+                    );
+                    break;
+                }
             }
             
             builder.AppendLine();
@@ -113,6 +121,12 @@ namespace Fantasy.SourceGenerator.Generators
                     builder.BeginMethod("public static void Initialize()");
                     break;
                 }
+                case 3:     // Unity 但没有使用Unity相关的程序集
+                {
+                    builder.AddXmlComment("Module initializer - automatically called when assembly is loaded");
+                    builder.BeginMethod("public static void Initialize()");
+                    break;
+                }
             }
 
             // 防止重复初始化
@@ -133,7 +147,8 @@ namespace Fantasy.SourceGenerator.Generators
 
             // 注册卸载事件（用于热更新支持）
             builder.AddComment("Register auto-unload for collectible AssemblyLoadContext (hot-reload support)");
-            if (targetPlatform == 2)
+           
+            if (targetPlatform == 2 || targetPlatform == 3)
             {
                 builder.AppendLine(
                     "#if !UNITY_EDITOR && !UNITY_STANDALONE && !UNITY_ANDROID && !UNITY_IOS && !UNITY_WEBGL");
@@ -145,7 +160,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.OpenBrace();
             builder.AppendLine("loadContext.Unloading += OnAssemblyUnloading;");
             builder.CloseBrace();
-            if (targetPlatform == 2)
+            
+            if (targetPlatform == 2 || targetPlatform == 3)
             {
                 builder.AppendLine("#endif");
             }
@@ -243,7 +259,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AddXmlComment("Called when AssemblyLoadContext is unloading (for hot-reload support)");
 
             // Unity 环境下，AssemblyLoadContext 仅在非编辑器/非独立平台可用
-            if (targetPlatform == 2)
+            if (targetPlatform == 2 || targetPlatform == 3)
             {
                 builder.AppendLine(
                     "#if !UNITY_EDITOR && !UNITY_STANDALONE && !UNITY_ANDROID && !UNITY_IOS && !UNITY_WEBGL");
@@ -259,7 +275,7 @@ namespace Fantasy.SourceGenerator.Generators
 
             builder.EndMethod();
 
-            if (targetPlatform == 2)
+            if (targetPlatform == 2 || targetPlatform == 3)
             {
                 builder.AppendLine("#endif");
             }

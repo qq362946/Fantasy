@@ -53,6 +53,11 @@ public sealed class Terminus : Entity
     [BsonIgnore]
     internal CoroutineLock? RoamingMessageLock;
     /// <summary>
+    /// 是否停止发送转发代码到Roaming
+    /// </summary>
+    [BsonIgnore]
+    internal bool StopForwarding;
+    /// <summary>
     /// 存放其他漫游终端的Id。
     /// 通过这个Id可以发送消息给它。
     /// </summary>
@@ -325,7 +330,7 @@ public sealed class Terminus : Entity
         var response = await Scene.NetworkMessagingComponent.Call(ForwardSceneAddress,
             new I_LockTerminusIdRequest()
             {
-                SessionRuntimeId = ForwardSessionAddress,
+                RoamingId = Id,
                 RoamingType = RoamingType
             });
         return response.ErrorCode;
@@ -340,7 +345,7 @@ public sealed class Terminus : Entity
         var response = await Scene.NetworkMessagingComponent.Call(ForwardSceneAddress,
             new I_UnLockTerminusIdRequest()
             {
-                SessionRuntimeId = ForwardSessionAddress,
+                RoamingId = Id,
                 RoamingType = RoamingType,
                 TerminusId = TerminusId,
                 TargetSceneAddress = Scene.Address
@@ -363,7 +368,7 @@ public sealed class Terminus : Entity
             ForwardSceneAddress,
             new I_GetTerminusIdRequest()
             {
-                SessionRuntimeId = ForwardSessionAddress,
+                RoamingId = Id,
                 RoamingType = roamingType
             });
         return response.TerminusId;
@@ -373,8 +378,13 @@ public sealed class Terminus : Entity
     /// 发送一个消息给客户端
     /// </summary>
     /// <param name="message"></param>
-    public void Send<T>(T message) where T : IAddressMessage
+    public void Send<T>(T message) where T : IRoamingMessage
     {
+        if (StopForwarding)
+        {
+            return;
+        }
+        
         Scene.NetworkMessagingComponent.Send(ForwardSessionAddress, message);
     }
     /// <summary>

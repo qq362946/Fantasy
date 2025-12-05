@@ -5,6 +5,8 @@ using Fantasy.InnerMessage;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+// ReSharper disable InconsistentNaming
+// ReSharper disable CheckNamespace
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Fantasy.Roaming.Handler;
@@ -16,20 +18,13 @@ internal sealed class I_UnLockTerminusIdRequestHandler : AddressRPC<Scene, I_UnL
 {
     protected override async FTask Run(Scene scene, I_UnLockTerminusIdRequest request, I_UnLockTerminusIdResponse response, Action reply)
     {
-        if (!scene.TryGetEntity(request.SessionRuntimeId, out var sessionEntity))
-        {
-            response.ErrorCode = InnerErrorCode.ErrUnLockTerminusIdNotFoundSession;
-            return;
-        }
-        
-        var session = (Session)sessionEntity;
-        
-        if (!scene.RoamingComponent.TryGet(session, out var sessionRoamingComponent) ||  !sessionRoamingComponent.TryGetRoaming(request.RoamingType, out var sessionRoaming))
+        if (!scene.RoamingComponent.TryGet(request.RoamingId, out var sessionRoamingComponent) ||
+            !sessionRoamingComponent.TryGetRoaming(request.RoamingType, out var sessionRoaming))
         {
             response.ErrorCode = InnerErrorCode.ErrLockTerminusIdNotFoundRoamingType;
             return;
         }
-
+        
         sessionRoaming.UnLockTerminusId(request.TerminusId, request.TargetSceneAddress);
         await FTask.CompletedTask;
     }
