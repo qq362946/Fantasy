@@ -78,11 +78,15 @@
       <Word>IRequest</Word>
       <Word>IResponse</Word>
       <Word>IRouteMessage</Word>
-      <Word>IAddressableRouteMessage</Word>
-      <Word>IAddressableRouteRequest</Word>
+      <Word>IAddressableMessage</Word>
+      <Word>IAddressableRequest</Word>
+      <Word>IAddressableResponse</Word>
       <Word>ICustomRouteMessage</Word>
+      <Word>ICustomRouteRequest</Word>
+      <Word>ICustomRouteResponse</Word>
       <Word>IRoamingMessage</Word>
       <Word>IRoamingRequest</Word>
+      <Word>IRoamingResponse</Word>
     </Keywords>
 
     <!-- Protocol Types -->

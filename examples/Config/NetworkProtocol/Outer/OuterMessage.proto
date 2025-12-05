@@ -227,7 +227,7 @@ message C2G_MapUnsubscribeSphereEventRequest // IRequest,G2C_MapUnsubscribeSpher
 {
 
 }
-message G2C_MapUnsubscribeSphereEventResponse // IResponse
+message G2C_MapUnsubscribeSphereEventResponse // IResponse 
 {
 
 }

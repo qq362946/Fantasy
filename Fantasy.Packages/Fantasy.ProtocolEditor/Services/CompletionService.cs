@@ -20,19 +20,30 @@ public class CompletionService
     /// </summary>
     private static readonly HashSet<string> ValidInterfaces = new()
     {
-        // 单向消息接口
+        // 基础接口
         "IMessage",
-        "IResponse",
-        "IAddressMessage",
-        "IAddressableMessage",
-        "IRoamingMessage",
-        "ICustomRouteMessage",
-        // Request 接口
         "IRequest",
+        "IResponse",
+
+        // Address 系列
+        "IAddressMessage",
         "IAddressRequest",
+        "IAddressResponse",
+
+        // Addressable 系列
+        "IAddressableMessage",
         "IAddressableRequest",
+        "IAddressableResponse",
+
+        // CustomRoute 系列
+        "ICustomRouteMessage",
+        "ICustomRouteRequest",
+        "ICustomRouteResponse",
+
+        // Roaming 系列
+        "IRoamingMessage",
         "IRoamingRequest",
-        "ICustomRouteRequest"
+        "IRoamingResponse"
     };
 
     /// <summary>
@@ -40,20 +51,30 @@ public class CompletionService
     /// </summary>
     private static readonly Dictionary<string, string> InterfaceDescriptions = new()
     {
-        // 单向消息接口
+        // ===== 基础接口 =====
         { "IMessage", "单向消息 - 无回应的简单消息 \n所在网络: Outer \n作用对象: Session \n定义规范: // IMessage" },
-        { "IResponse", "回应消息 - 该消息作为IRequest的回应 \n定义规范: // IResponse" },
-        { "IAddressMessage", "普通地址消息 - 带实体地址路由的消息\n所在网络: Inner \n作用对象: 特定实体 \n定义规范: // IAddressMessage" },
-        { "IAddressableMessage", "可寻址消息 - 由Gate服务器寻址转发\n（旧版兼容, 新版推荐更自动化的IRoamingMessage）\n所在网络: Outer & Inner \n作用对象: 特定实体\n定义规范: // IAddressableMessage" },
-        { "IRoamingMessage", "自动漫游消息 - 支持Gate服务器自动寻址，是针对旧版IAddressableMessage更加自动化的升级版本。\n所在网络: Outer & Inner \n作用对象: 特定实体\n定义规范: // IRoamingMessage,RoamingType" },
-        { "ICustomRouteMessage", "自定义路由消息\n定义规范: // ICustomRouteMessage,RouteType" },
-
-        // Request 接口
         { "IRequest", "请求消息 - 注意: 该消息须有一个IResponse作为回应\n所在网络: Outer \n作用对象: Session \n定义规范: // IRequest,ResponseTypeName" },
-        { "IAddressRequest", "普通地址请求 - 带实体地址路由的请求\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // IAddressRequest,ResponseTypeName" },
+        { "IResponse", "回应消息 - 该消息作为IRequest的回应 \n定义规范: // IResponse" },
+
+        // ===== Address 系列 =====
+        { "IAddressMessage", "内网地址消息 - 带实体地址路由的单向消息\n所在网络: Inner \n作用对象: 特定实体 \n定义规范: // IAddressMessage" },
+        { "IAddressRequest", "内网地址请求 - 带实体地址路由的请求\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // IAddressRequest,ResponseTypeName" },
+        { "IAddressResponse", "内网地址响应 - IAddressRequest的回应\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // IAddressResponse" },
+
+        // ===== Addressable 系列 =====
+        { "IAddressableMessage", "可寻址消息 - 由Gate服务器寻址转发的单向消息\n（旧版兼容, 新版推荐更自动化的IRoamingMessage）\n所在网络: Outer & Inner \n作用对象: 特定实体\n定义规范: // IAddressableMessage" },
         { "IAddressableRequest", "可寻址请求 - 由Gate服务器寻址转发的请求\n（旧版兼容, 新版推荐更自动化的IRoamingRequest）\n所在网络: Outer & Inner \n作用对象: 特定实体\n定义规范: // IAddressableRequest,ResponseTypeName" },
-        { "IRoamingRequest", "自动漫游请求 - 支持Gate服务器自动寻址，是针对旧版IAddressableRequest更加自动化的升级版本。\n所在网络: Outer & Inner \n作用对象: 特定实体 \n定义规范: // IRoamingRequest,ResponseTypeName,RoamingType" },
-        { "ICustomRouteRequest", "自定义路由请求\n定义规范: // ICustomRouteRequest,ResponseTypeName,RouteType" }
+        { "IAddressableResponse", "可寻址响应 - IAddressableRequest的回应\n所在网络: Outer & Inner \n作用对象: 特定实体\n定义规范: // IAddressableResponse" },
+
+        // ===== CustomRoute 系列 =====
+        { "ICustomRouteMessage", "自定义路由消息 - 通过RouteType自定义路由逻辑的单向消息\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // ICustomRouteMessage,RouteType" },
+        { "ICustomRouteRequest", "自定义路由请求 - 通过RouteType自定义路由逻辑的请求\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // ICustomRouteRequest,ResponseTypeName,RouteType" },
+        { "ICustomRouteResponse", "自定义路由响应 - ICustomRouteRequest的回应\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // ICustomRouteResponse" },
+
+        // ===== Roaming 系列 =====
+        { "IRoamingMessage", "自动漫游消息 - 支持Gate服务器自动寻址的单向消息\n（新版推荐，IAddressableMessage的自动化升级版本）\n所在网络: Outer & Inner \n作用对象: 特定实体\n定义规范: // IRoamingMessage,RoamingType" },
+        { "IRoamingRequest", "自动漫游请求 - 支持Gate服务器自动寻址的请求\n（新版推荐，IAddressableRequest的自动化升级版本）\n所在网络: Outer & Inner \n作用对象: 特定实体 \n定义规范: // IRoamingRequest,ResponseTypeName,RoamingType" },
+        { "IRoamingResponse", "自动漫游响应 - IRoamingRequest的回应\n所在网络: Outer & Inner \n作用对象: 特定实体\n定义规范: // IRoamingResponse" }
     };
 
     /// <summary>
@@ -238,18 +259,30 @@ public class InterfaceCompletionData : ICompletionData
     {
         return interfaceName switch
         {
+            // 基础接口
             "IMessage" => "",
-            "IResponse" => "",
-            "IAddressMessage" => "",
-            "IAddressableMessage" => "",
-            "IRoamingMessage" => ",RoamingType",
-            "ICustomRouteMessage" => ",RouteType",
-
             "IRequest" => ",ResponseTypeName",
+            "IResponse" => "",
+
+            // Address 系列
+            "IAddressMessage" => "",
             "IAddressRequest" => ",ResponseTypeName",
+            "IAddressResponse" => "",
+
+            // Addressable 系列
+            "IAddressableMessage" => "",
             "IAddressableRequest" => ",ResponseTypeName",
-            "IRoamingRequest" => ",ResponseTypeName,RoamingType",
+            "IAddressableResponse" => "",
+
+            // CustomRoute 系列
+            "ICustomRouteMessage" => ",RouteType",
             "ICustomRouteRequest" => ",ResponseTypeName,RouteType",
+            "ICustomRouteResponse" => "",
+
+            // Roaming 系列
+            "IRoamingMessage" => ",RoamingType",
+            "IRoamingRequest" => ",ResponseTypeName,RoamingType",
+            "IRoamingResponse" => "",
 
             _ => ""
         };

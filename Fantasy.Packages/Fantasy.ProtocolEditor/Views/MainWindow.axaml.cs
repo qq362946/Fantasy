@@ -84,8 +84,73 @@ public partial class MainWindow : Window
             if (DataContext is MainWindowViewModel vm)
             {
                 vm.LoadWorkspaceConfig();
+                // 设置 TreeView 的容器准备事件，用于同步 IsExpanded 状态
+                SetupTreeViewItemBinding();
             }
         }, DispatcherPriority.Loaded);
+    }
+
+    /// <summary>
+    /// 设置 TreeViewItem 的 IsExpanded 绑定
+    /// </summary>
+    private void SetupTreeViewItemBinding()
+    {
+        if (FileTreeView == null) return;
+
+        // 监听 TreeView 的 Loaded 事件，确保容器已生成
+        FileTreeView.Loaded += (s, e) =>
+        {
+            SyncTreeViewItemExpansion(FileTreeView);
+        };
+    }
+
+    /// <summary>
+    /// 递归同步 TreeViewItem 的 IsExpanded 状态
+    /// </summary>
+    private void SyncTreeViewItemExpansion(Control control)
+    {
+        if (control is TreeViewItem treeViewItem && treeViewItem.DataContext is FileTreeNode node)
+        {
+            // 同步展开状态
+            treeViewItem.IsExpanded = node.IsExpanded;
+
+            // 监听节点的 PropertyChanged 事件
+            node.PropertyChanged += (s, args) =>
+            {
+                if (args.PropertyName == nameof(FileTreeNode.IsExpanded))
+                {
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        if (treeViewItem.IsExpanded != node.IsExpanded)
+                        {
+                            treeViewItem.IsExpanded = node.IsExpanded;
+                        }
+                    });
+                }
+            };
+
+            // 监听 TreeViewItem 的 IsExpanded 变化，同步回模型
+            treeViewItem.PropertyChanged += (s, args) =>
+            {
+                if (args.Property == TreeViewItem.IsExpandedProperty)
+                {
+                    var isExpanded = (bool)(args.NewValue ?? false);
+                    if (node.IsExpanded != isExpanded)
+                    {
+                        node.IsExpanded = isExpanded;
+                    }
+                }
+            };
+        }
+
+        // 递归处理子控件
+        foreach (var child in control.GetVisualChildren())
+        {
+            if (child is Control childControl)
+            {
+                SyncTreeViewItemExpansion(childControl);
+            }
+        }
     }
 
     private void OnDataContextChanged(object? sender, EventArgs e)
@@ -104,6 +169,17 @@ public partial class MainWindow : Window
                     Dispatcher.UIThread.Post(() =>
                     {
                         OutputScrollViewer?.ScrollToEnd();
+                    }, DispatcherPriority.Background);
+                }
+                else if (args.PropertyName == nameof(MainWindowViewModel.FileTreeNodes))
+                {
+                    // 文件树变化时，重新同步 TreeViewItem 的展开状态
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        if (FileTreeView != null)
+                        {
+                            SyncTreeViewItemExpansion(FileTreeView);
+                        }
                     }, DispatcherPriority.Background);
                 }
             };
@@ -1202,10 +1278,10 @@ public partial class MainWindow : Window
     /// </summary>
     private void OnFileTreeItemPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (sender is not StackPanel stackPanel)
+        if (sender is not Border border)
             return;
 
-        var node = stackPanel.DataContext as Models.FileTreeNode;
+        var node = border.DataContext as Models.FileTreeNode;
         if (node == null)
             return;
 
@@ -1218,7 +1294,12 @@ public partial class MainWindow : Window
         // 如果是文件夹，切换展开/折叠
         if (node.IsDirectory)
         {
-            node.IsExpanded = !node.IsExpanded;
+            // 找到对应的 TreeViewItem 并切换展开状态
+            var treeViewItem = FindTreeViewItem(FileTreeView, node);
+            if (treeViewItem != null)
+            {
+                treeViewItem.IsExpanded = !treeViewItem.IsExpanded;
+            }
             e.Handled = true;
             return;
         }
@@ -1251,14 +1332,40 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
+    /// 查找对应节点的 TreeViewItem
+    /// </summary>
+    private TreeViewItem? FindTreeViewItem(Control? control, FileTreeNode targetNode)
+    {
+        if (control == null) return null;
+
+        if (control is TreeViewItem treeViewItem && treeViewItem.DataContext == targetNode)
+        {
+            return treeViewItem;
+        }
+
+        // 递归查找子控件
+        foreach (var child in control.GetVisualChildren())
+        {
+            if (child is Control childControl)
+            {
+                var found = FindTreeViewItem(childControl, targetNode);
+                if (found != null)
+                    return found;
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
     /// 文件树项目指针按下事件 - 仅处理右键菜单
     /// </summary>
     private void OnFileTreeItemPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (sender is not StackPanel stackPanel)
+        if (sender is not Border border)
             return;
 
-        var node = stackPanel.DataContext as Models.FileTreeNode;
+        var node = border.DataContext as Models.FileTreeNode;
         if (node == null)
             return;
 
@@ -1313,8 +1420,8 @@ public partial class MainWindow : Window
             // 显示菜单
             if (contextMenu != null)
             {
-                contextMenu.PlacementTarget = stackPanel;
-                contextMenu.Open(stackPanel);
+                contextMenu.PlacementTarget = border;
+                contextMenu.Open(border);
                 e.Handled = true;
             }
         }

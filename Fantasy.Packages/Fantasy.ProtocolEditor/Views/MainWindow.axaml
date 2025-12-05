@@ -193,31 +193,36 @@
                               ItemsSource="{Binding FileTreeNodes}">
                         <TreeView.ItemTemplate>
                             <TreeDataTemplate ItemsSource="{Binding Children}">
-                                <StackPanel Orientation="Horizontal" Spacing="5" PointerReleased="OnFileTreeItemPointerReleased" PointerPressed="OnFileTreeItemPointerPressed">
-                                    <!-- 文件夹图标 -->
-                                    <TextBlock Text="📁" IsVisible="{Binding IsDirectory}" FontSize="12"/>
-                                    <!-- 文件图标 -->
-                                    <TextBlock Text="📄" IsVisible="{Binding !IsDirectory}" FontSize="12"/>
-                                    <!-- 文件名 - 存在时正常颜色，不存在时灰色 -->
-                                    <TextBlock Text="{Binding Name}">
-                                        <TextBlock.Foreground>
-                                            <SolidColorBrush>
-                                                <SolidColorBrush.Color>
-                                                    <Binding Path="Exists">
-                                                        <Binding.Converter>
-                                                            <converters:BoolToColorConverter TrueColor="#CCCCCC" FalseColor="#808080"/>
-                                                        </Binding.Converter>
-                                                    </Binding>
-                                                </SolidColorBrush.Color>
-                                            </SolidColorBrush>
-                                        </TextBlock.Foreground>
-                                    </TextBlock>
-                                    <!-- 不存在标记 -->
-                                    <TextBlock Text="(not exists)"
-                                              Foreground="#808080"
-                                              FontSize="10"
-                                              IsVisible="{Binding !Exists}"/>
-                                </StackPanel>
+                                <Border Background="Transparent"
+                                        PointerReleased="OnFileTreeItemPointerReleased"
+                                        PointerPressed="OnFileTreeItemPointerPressed"
+                                        Cursor="Hand">
+                                    <StackPanel Orientation="Horizontal" Spacing="5">
+                                        <!-- 文件夹图标 -->
+                                        <TextBlock Text="📁" IsVisible="{Binding IsDirectory}" FontSize="12"/>
+                                        <!-- 文件图标 -->
+                                        <TextBlock Text="📄" IsVisible="{Binding !IsDirectory}" FontSize="12"/>
+                                        <!-- 文件名 - 存在时正常颜色，不存在时灰色 -->
+                                        <TextBlock Text="{Binding Name}">
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush>
+                                                    <SolidColorBrush.Color>
+                                                        <Binding Path="Exists">
+                                                            <Binding.Converter>
+                                                                <converters:BoolToColorConverter TrueColor="#CCCCCC" FalseColor="#808080"/>
+                                                            </Binding.Converter>
+                                                        </Binding>
+                                                    </SolidColorBrush.Color>
+                                                </SolidColorBrush>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                        <!-- 不存在标记 -->
+                                        <TextBlock Text="(not exists)"
+                                                  Foreground="#808080"
+                                                  FontSize="10"
+                                                  IsVisible="{Binding !Exists}"/>
+                                    </StackPanel>
+                                </Border>
                             </TreeDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>

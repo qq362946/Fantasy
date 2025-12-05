@@ -220,7 +220,7 @@ public sealed class RoamingComponent : Entity
 
     private async FTask InnerRemove(long roamingId, int roamingType)
     {
-        if (!_sessionRoamingComponents.TryGetValue(roamingId, out var sessionRoamingComponent))
+        if (!_sessionRoamingComponents.Remove(roamingId, out var sessionRoamingComponent))
         {
             return;
         }
