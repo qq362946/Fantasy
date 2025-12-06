@@ -9,6 +9,20 @@ using Spectre.Console;
 namespace Fantasy.ProtocolExportTool.Generators.Parsers;
 
 /// <summary>
+/// 解析结果
+/// </summary>
+public class ParseResult
+{
+    public SyntaxElementByIfDefine CustomNamespaceUsing { get; init; } = new();
+    public List<MessageDefinition> Messages { get; init; } = new();
+    public ParseResult(SyntaxElementByIfDefine customNamespaceUsing, List<MessageDefinition> messages)
+    {
+        CustomNamespaceUsing = customNamespaceUsing;
+        Messages = messages;
+    }
+}
+
+/// <summary>
 /// 协议文件解析器 - 将 .proto 文件内容解析为 MessageDefinition 对象
 /// </summary>
 public sealed partial class ProtocolFileParser(string filePath)
@@ -18,13 +32,18 @@ public sealed partial class ProtocolFileParser(string filePath)
     private ParserState _state = ParserState.WaitingForMessage;
     private MessageDefinition? _currentMessage;
     private ProtocolSettings _currentProtocolSettings = ProtocolSettings.CreateProtoBuf();
+    private SyntaxElementByIfDefine _customNamespaceUsing = new();
+    private SyntaxElementByIfDefine _currentCustomAttributes = new();
     private int _currentKeyIndex = 1;
     private readonly List<string> _pendingComments = new();
+    private static readonly Regex _attributesRegex = new Regex(@"^//\s*\[[^\]]+\]", RegexOptions.Compiled); //标签匹配
+    private bool _isInConditionalBlock = false; // 是否在条件编译块内
+    private string _currentIfDefine = string.Empty;
 
     /// <summary>
     /// 解析协议文件的所有行，返回消息定义列表
     /// </summary>
-    public List<MessageDefinition> Parse(string[] lines)
+    public ParseResult Parse(string[] lines)
     {
         var messages = new List<MessageDefinition>();
 
@@ -50,6 +69,61 @@ public sealed partial class ProtocolFileParser(string filePath)
             if (line.StartsWith("// Protocol"))
             {
                 ParseProtocolDeclaration(line, lineNumber);
+                continue;
+            }
+
+            //处理条件编译指令 (// If)
+            if (line.StartsWith("// If", StringComparison.OrdinalIgnoreCase))
+            {
+                _isInConditionalBlock = true;
+                _currentIfDefine = line.Substring(5).Trim(); // 移除前缀 "// If"
+                continue;
+            }else if (line.StartsWith("//If", StringComparison.OrdinalIgnoreCase))
+            {
+                _isInConditionalBlock = true;
+                _currentIfDefine = line.Substring(4).Trim(); // 移除前缀 "//If"
+                continue;
+            }
+
+            //条件编译结束指令 (// Endif)
+            if (line.StartsWith("// Endif", StringComparison.OrdinalIgnoreCase))
+            {
+                _isInConditionalBlock = false;
+                _currentIfDefine = string.Empty;
+                continue;
+            }
+            else if (line.StartsWith("//Endif", StringComparison.OrdinalIgnoreCase))
+            {
+                _isInConditionalBlock = false;
+                _currentIfDefine = string.Empty;
+                continue;
+            }
+
+            // 处理自定义标签 (// [MyCustomAttribute])
+            if (_attributesRegex.IsMatch(line))
+            {
+                var attribute = line.Substring(2).Trim(); // 移除前缀 "//"
+                
+                if(_currentCustomAttributes.TryGetValue(_currentIfDefine, out var attrslist))
+                    attrslist.Add(attribute);
+                else
+                    _currentCustomAttributes.Add(_currentIfDefine, new() { attribute});
+                
+                continue;
+            }
+
+            // 处理命名空间导入 (// Using Namespace.Name)
+            if (line.StartsWith("// Using", StringComparison.OrdinalIgnoreCase))
+            {
+                var @namespace = line.Substring(8).Trim(); // 移除前缀 "// Using" 
+                if (string.IsNullOrWhiteSpace(@namespace))
+                    continue;
+
+                if (_customNamespaceUsing.TryGetValue(_currentIfDefine, out var namespaceList))
+                    namespaceList.Add(@namespace);
+                else
+                    _customNamespaceUsing.Add(_currentIfDefine, new() { @namespace });
+
                 continue;
             }
 
@@ -98,6 +172,7 @@ public sealed partial class ProtocolFileParser(string filePath)
 
                     _state = ParserState.WaitingForMessage;
                     _currentProtocolSettings = ProtocolSettings.CreateProtoBuf();
+                    _currentCustomAttributes = new();
                     continue;
                 }
 
@@ -106,7 +181,7 @@ public sealed partial class ProtocolFileParser(string filePath)
             }
         }
 
-        return messages;
+        return new ParseResult(_customNamespaceUsing.CloneOne(), messages);
     }
 
     /// <summary>
@@ -140,6 +215,7 @@ public sealed partial class ProtocolFileParser(string filePath)
             SourceFilePath = filePath,
             SourceLineNumber = lineNumber,
             Protocol = CloneProtocolSettings(_currentProtocolSettings),
+            CustomClassAttributesByIfDefine = _currentCustomAttributes.CloneOne(),
             DocumentationComments = new List<string>(_pendingComments)
         };
 
@@ -358,8 +434,7 @@ public sealed partial class ProtocolFileParser(string filePath)
             ClassAttribute = source.ClassAttribute,
             MemberAttribute = source.MemberAttribute,
             IgnoreAttribute = source.IgnoreAttribute,
-            KeyStartIndex = source.KeyStartIndex,
-            RequiredNamespaces = new HashSet<string>(source.RequiredNamespaces)
+            KeyStartIndex = source.KeyStartIndex
         };
     }
 

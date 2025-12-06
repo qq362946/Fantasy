@@ -199,9 +199,9 @@
                                         Cursor="Hand">
                                     <StackPanel Orientation="Horizontal" Spacing="5">
                                         <!-- 文件夹图标 -->
-                                        <TextBlock Text="📁" IsVisible="{Binding IsDirectory}" FontSize="12"/>
+                                        <TextBlock Text="📁" IsVisible="{Binding IsFolder}" FontSize="12"/>
                                         <!-- 文件图标 -->
-                                        <TextBlock Text="📄" IsVisible="{Binding !IsDirectory}" FontSize="12"/>
+                                        <TextBlock Text="📄" IsVisible="{Binding !IsFolder}" FontSize="12"/>
                                         <!-- 文件名 - 存在时正常颜色，不存在时灰色 -->
                                         <TextBlock Text="{Binding Name}">
                                             <TextBlock.Foreground>

@@ -24,7 +24,7 @@ public partial class FileTreeNode : ObservableObject
     /// 是否是文件夹
     /// </summary>
     [ObservableProperty]
-    private bool _isDirectory;
+    private bool _isFolder;
 
     /// <summary>
     /// 是否展开
@@ -54,13 +54,13 @@ public partial class FileTreeNode : ObservableObject
     {
     }
 
-    public FileTreeNode(string name, string fullPath, bool isDirectory, FileTreeNodeType nodeType = FileTreeNodeType.Normal)
+    public FileTreeNode(string name, string fullPath, bool isFolder, FileTreeNodeType nodeType = FileTreeNodeType.Normal)
     {
         _name = name;
         _fullPath = fullPath;
-        _isDirectory = isDirectory;
+        _isFolder = isFolder;
         _nodeType = nodeType;
-        _isExpanded = isDirectory; // 文件夹默认展开
+        _isExpanded = isFolder; // 文件夹默认展开
     }
 }
 

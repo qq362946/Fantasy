@@ -19,6 +19,7 @@ using Fantasy.ProtocolEditor.ViewModels;
 using Fantasy.ProtocolEditor.Services;
 using Avalonia.Media;
 using Fantasy.ProtocolEditor.Models;
+using System.Diagnostics;
 
 namespace Fantasy.ProtocolEditor.Views;
 
@@ -1292,7 +1293,7 @@ public partial class MainWindow : Window
             return;
 
         // 如果是文件夹，切换展开/折叠
-        if (node.IsDirectory)
+        if (node.IsFolder)
         {
             // 找到对应的 TreeViewItem 并切换展开状态
             var treeViewItem = FindTreeViewItem(FileTreeView, node);
@@ -1391,6 +1392,10 @@ public partial class MainWindow : Window
                 var newProtoFileMenuItem = new MenuItem { Header = "新建协议文件" };
                 newProtoFileMenuItem.Click += (s, args) => OnNewProtoFileClick(node);
                 contextMenu.Items.Add(newProtoFileMenuItem);
+
+                var revealInFolder = new MenuItem { Header = "从文件夹找到..." };
+                revealInFolder.Click += (s, args) => OpenInFileExplorer(node.FullPath);
+                contextMenu.Items.Add(revealInFolder);
             }
             else if (node.Name == "RoamingType.Config" || node.Name == "RouteType.Config")
             {
@@ -1401,17 +1406,33 @@ public partial class MainWindow : Window
                     var createConfigFileMenuItem = new MenuItem { Header = "创建配置文件" };
                     createConfigFileMenuItem.Click += (s, args) => OnCreateConfigFileClick(node);
                     contextMenu.Items.Add(createConfigFileMenuItem);
+
+                    var revealInFolder = new MenuItem { Header = "从文件夹找到..." };
+                    revealInFolder.Click += (s, args) => OpenInFileExplorer(node.FullPath);
+                    contextMenu.Items.Add(revealInFolder);
                 }
             }
-            else if (!node.IsDirectory && node.Name.EndsWith(".proto", StringComparison.OrdinalIgnoreCase))
+            else if (!node.IsFolder && node.Name.EndsWith(".proto", StringComparison.OrdinalIgnoreCase))
             {
                 // 协议文件 - 检查是否在 Inner 或 Outer 文件夹下
                 var parentFolder = Path.GetFileName(Path.GetDirectoryName(node.FullPath));
                 if (parentFolder == "Inner" || parentFolder == "Outer")
                 {
-                    // 创建"移除协议文件"菜单
                     contextMenu = new ContextMenu();
-                    var removeProtoFileMenuItem = new MenuItem { Header = "移除协议文件" };
+
+                    var newProtoFileMenuItem = new MenuItem { Header = "新建协议文件" };
+                    newProtoFileMenuItem.Click += (s, args) => OnNewProtoFileClick(node);
+                    contextMenu.Items.Add(newProtoFileMenuItem);
+
+                    var revealInFolder = new MenuItem { Header = "从文件夹找到..." };
+                    revealInFolder.Click += (s, args) => OpenInFileExplorer(node.FullPath);
+                    contextMenu.Items.Add(revealInFolder);
+
+                    var renameItem = new MenuItem { Header = "重命名" };
+                    renameItem.Click += (s, args) => OnRenameNodeClick(node);
+                    contextMenu.Items.Add(renameItem);
+
+                    var removeProtoFileMenuItem = new MenuItem { Header = "删除协议文件" };
                     removeProtoFileMenuItem.Click += (s, args) => OnRemoveProtoFileClick(node);
                     contextMenu.Items.Add(removeProtoFileMenuItem);
                 }
@@ -1514,8 +1535,17 @@ public partial class MainWindow : Window
     /// </summary>
     private async void OnNewProtoFileClick(Models.FileTreeNode node)
     {
-        if (node == null || (!node.IsDirectory) || string.IsNullOrEmpty(node.FullPath))
+        if (node == null || string.IsNullOrEmpty(node.FullPath))
             return;
+
+        string? folderPath = node.FullPath;
+        if (!node.IsFolder)
+        {
+            // 如果不是文件夹，获取其父文件夹路径
+            folderPath = Path.GetDirectoryName(node.FullPath);
+            if (string.IsNullOrEmpty(folderPath))
+                return;
+        }
 
         if (DataContext is not MainWindowViewModel vm)
             return;
@@ -1572,7 +1602,7 @@ public partial class MainWindow : Window
 
             // 创建文件
             var fileName = result.EndsWith(".proto") ? result : $"{result}.proto";
-            var filePath = Path.Combine(node.FullPath, fileName);
+            var filePath = Path.Combine(folderPath, fileName);
 
             if (File.Exists(filePath))
             {
@@ -1581,10 +1611,11 @@ public partial class MainWindow : Window
             }
 
             // 创建文件夹（如果不存在）
-            if (!Directory.Exists(node.FullPath))
+            if (!Directory.Exists(folderPath))
             {
-                Directory.CreateDirectory(node.FullPath);
-                node.Exists = true;
+                Directory.CreateDirectory(folderPath);
+                if(node.IsFolder)
+                    node.Exists = true;
             }
 
             // 创建空的 proto 文件
@@ -1605,11 +1636,194 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 移除协议文件
+    /// 从文件夹打开一个路径
+    /// </summary>
+    private void OpenInFileExplorer(string fullPath) {
+
+        if (string.IsNullOrEmpty(fullPath)) 
+            return;
+
+        if (Directory.Exists(fullPath))
+        {
+            // 直接打开文件夹
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = fullPath,
+                UseShellExecute = true
+            });
+        }
+        else if (File.Exists(fullPath))
+        {
+            // 选中文件
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer.exe",
+                Arguments = $"/select,\"{fullPath}\"",
+                UseShellExecute = true
+            });
+        }
+    }
+
+    /// <summary>
+    /// 重命名
+    /// </summary>
+    private async void OnRenameNodeClick(Models.FileTreeNode node)
+    {
+        if (node == null || string.IsNullOrEmpty(node.FullPath))
+            return;
+
+        if (DataContext is not MainWindowViewModel vm)
+            return;
+
+        var fullPath = node.FullPath;
+        var isFolder = node.IsFolder || Directory.Exists(fullPath); 
+        var oldName = Path.GetFileName(fullPath);
+        var parentDir = Path.GetDirectoryName(fullPath);
+        if (string.IsNullOrEmpty(parentDir))
+            return;
+
+        try
+        {
+            // 预处理：如果是文件，分离扩展名以便默认只修改名称部分
+            string originalNameWithoutExt = oldName;
+            string originalExt = string.Empty;
+            if (!isFolder)
+            {
+                originalExt = Path.GetExtension(oldName); // 例如 ".proto"
+                originalNameWithoutExt = Path.GetFileNameWithoutExtension(oldName);
+            }
+
+            // ==== 弹窗 ====
+            var dialog = new Window
+            {
+                Title = "重命名",
+                Width = 420,
+                Height = 160,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                CanResize = false
+            };
+
+            var panel = new StackPanel { Margin = new Thickness(16) };
+
+            panel.Children.Add(new TextBlock
+            {
+                Text = $"原名称：{oldName}",
+                Margin = new Thickness(0, 0, 0, 8)
+            });
+
+            var textBox = new TextBox
+            {
+                Text = isFolder ? oldName : originalNameWithoutExt,
+                Watermark = isFolder ? "请输入新文件夹名称" : "请输入新文件名（不包含扩展名，或可包含扩展名）"
+            };
+
+            panel.Children.Add(textBox);
+
+            // 如果是文件且有扩展名，显示扩展名提示（可选）
+            if (!isFolder && !string.IsNullOrEmpty(originalExt))
+            {
+                panel.Children.Add(new TextBlock
+                {
+                    Text = $"扩展名：{originalExt}（如果输入的新名字不包含扩展名，将自动保留原扩展名）",
+                    FontSize = 12,
+                    Margin = new Thickness(0, 6, 0, 0)
+                });
+            }
+
+            var buttonPanel = new StackPanel
+            {
+                Orientation = Avalonia.Layout.Orientation.Horizontal,
+                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Right,
+                Margin = new Thickness(0, 12, 0, 0),
+                Spacing = 10
+            };
+
+            var okButton = new Button { Content = "确定", Width = 80 };
+            var cancelButton = new Button { Content = "取消", Width = 80 };
+
+            okButton.Click += (s, args) =>
+            {
+                if (!string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    dialog.Close(textBox.Text.Trim());
+                }
+            };
+
+            cancelButton.Click += (s, args) => dialog.Close(null);
+
+            buttonPanel.Children.Add(okButton);
+            buttonPanel.Children.Add(cancelButton);
+
+            panel.Children.Add(buttonPanel);
+            dialog.Content = panel;
+
+            var newNameInput = await dialog.ShowDialog<string?>(this);
+            if (string.IsNullOrWhiteSpace(newNameInput))
+                return;
+
+            var newNameTrim = newNameInput.Trim();
+
+            // 如果名字没变，不处理
+            string effectiveNewName = isFolder ? newNameTrim : (Path.HasExtension(newNameTrim) ? newNameTrim : newNameTrim + originalExt);
+            if (effectiveNewName == oldName)
+                return;
+
+            // 校验非法文件名字符
+            var invalidChars = Path.GetInvalidFileNameChars();
+            if (effectiveNewName.IndexOfAny(invalidChars) >= 0)
+            {
+                vm.OutputText += $"错误：名称包含非法字符：{effectiveNewName}\n";
+                return;
+            }
+
+            var newFullPath = Path.Combine(parentDir, effectiveNewName);
+
+            // 校验目标是否已存在
+            if (File.Exists(newFullPath) || Directory.Exists(newFullPath))
+            {
+                vm.OutputText += $"错误：目标已存在：{effectiveNewName}\n";
+                return;
+            }
+
+            // 执行重命名（移动）
+            if (isFolder)
+            {
+                Directory.Move(fullPath, newFullPath);
+            }
+            else
+            {
+                File.Move(fullPath, newFullPath);
+            }
+
+            // 刷新工作区文件树
+            vm.LoadWorkspaceFolder(vm.WorkspacePath);
+
+            try
+            {
+                if (!isFolder)
+                {
+                    vm.OpenFile(newFullPath);
+                }
+            }
+            catch
+            {
+                // 忽略打开文件时可能的异常（不影响重命名成功）
+            }
+
+            vm.OutputText += $"已重命名：{oldName} → {effectiveNewName}\n";
+        }
+        catch (Exception ex)
+        {
+            vm.OutputText += $"重命名失败：{ex.Message}\n";
+        }
+    }
+
+    /// <summary>
+    /// 删除协议文件
     /// </summary>
     private async void OnRemoveProtoFileClick(Models.FileTreeNode node)
     {
-        if (node == null || node.IsDirectory || string.IsNullOrEmpty(node.FullPath))
+        if (node == null || node.IsFolder || string.IsNullOrEmpty(node.FullPath))
             return;
 
         if (DataContext is not MainWindowViewModel vm)
@@ -1680,7 +1894,7 @@ public partial class MainWindow : Window
             // 刷新文件树
             vm.LoadWorkspaceFolder(vm.WorkspacePath);
 
-            vm.OutputText += $"已移除协议文件：{node.Name}\n";
+            vm.OutputText += $"已删除协议文件：{node.Name}\n";
         }
         catch (Exception ex)
         {
@@ -1693,7 +1907,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void OnCreateConfigFileClick(Models.FileTreeNode node)
     {
-        if (node == null || node.IsDirectory || string.IsNullOrEmpty(node.FullPath))
+        if (node == null || node.IsFolder || string.IsNullOrEmpty(node.FullPath))
             return;
 
         if (DataContext is not MainWindowViewModel vm)

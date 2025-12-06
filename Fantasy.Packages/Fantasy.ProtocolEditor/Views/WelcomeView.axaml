@@ -55,7 +55,7 @@
                           FontSize="14"
                           Foreground="#4EC9B0"
                           Width="30"/>
-                <TextBlock Text="点击左侧 '配置目录' 旁的 📁 图标，或按 Ctrl+O 打开工作区文件夹"
+                <TextBlock Text="点击左上角 [文件] -> [打开目录...] ，或按 Ctrl+O 打开工作区文件夹"
                           FontSize="14"
                           Foreground="#CCCCCC"
                           TextWrapping="Wrap"/>
@@ -66,7 +66,7 @@
                           FontSize="14"
                           Foreground="#4EC9B0"
                           Width="30"/>
-                <TextBlock Text="在文件树中点击 .proto 文件进行编辑"
+                <TextBlock Text="左侧文件树中鼠标右键, [新建协议文件]输入命名, 可新建 .proto项"
                           FontSize="14"
                           Foreground="#CCCCCC"
                           TextWrapping="Wrap"/>
@@ -77,7 +77,18 @@
                           FontSize="14"
                           Foreground="#4EC9B0"
                           Width="30"/>
-                <TextBlock Text="编辑完成后点击 ⚡ 图标或菜单中的 '执行导出' 生成代码"
+                <TextBlock Text="在文件树中点击 .proto 文件进行编辑"
+                          FontSize="14"
+                          Foreground="#CCCCCC"
+                          TextWrapping="Wrap"/>
+              </StackPanel>
+
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="4."
+                          FontSize="14"
+                          Foreground="#4EC9B0"
+                          Width="30"/>
+                <TextBlock Text="编辑完成后点击 [火箭] 图标或菜单中的 [文件] -> [执行导出] 生成代码"
                           FontSize="14"
                           Foreground="#CCCCCC"
                           TextWrapping="Wrap"/>
