@@ -18,10 +18,10 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
     private readonly ConcurrentBag<string> _errors = new();
     private readonly Dictionary<string, int> _routeTypes = new();
     private readonly Dictionary<string, int> _roamingTypes = new();
-    private readonly SyntaxElementByIfDefine _outerCustomNamespaces = [];
-    private readonly List<MessageDefinition> _outerMessages = [];
-    private readonly SyntaxElementByIfDefine _innerCustomNamespaces = [];
-    private readonly List<MessageDefinition> _innerMessages = [];
+    private readonly CustomNamespacesByIfDefine _outerCustomNamespaces = new();
+    private readonly MessagesByIfDefine _outerMessages = new();
+    private readonly CustomNamespacesByIfDefine _innerCustomNamespaces = new();
+    private readonly MessagesByIfDefine _innerMessages = new();
     private readonly List<OpcodeInfo> _outerOpcode = [];
     private readonly List<OpcodeInfo> _innerOpcode = [];
     
@@ -272,9 +272,9 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
     protected abstract string GenerateRoamingTypes(IReadOnlyDictionary<string, int> roamingTypes);
     protected abstract string GenerateOuterOpcode(IReadOnlyList<OpcodeInfo> opcodeInfos);
     protected abstract string GenerateInnerOpcode(IReadOnlyList<OpcodeInfo> opcodeInfos);
-    protected abstract string GenerateOuterMessages(SyntaxElementByIfDefine _outerCustomNamespaces, IReadOnlyList<MessageDefinition> messageDefinitions);
-    protected abstract string GenerateInnerMessages(SyntaxElementByIfDefine _innerCustomNamespaces, IReadOnlyList<MessageDefinition> messageDefinitions);
-    protected abstract string GenerateOuterMessageHelper(IReadOnlyList<MessageDefinition> messageDefinitions);
+    protected abstract string GenerateOuterMessages(CustomNamespacesByIfDefine _outerCustomNamespaces, MessagesByIfDefine messageDefinitions);
+    protected abstract string GenerateInnerMessages(CustomNamespacesByIfDefine _innerCustomNamespaces, MessagesByIfDefine messageDefinitions);
+    protected abstract string GenerateOuterMessageHelper(MessagesByIfDefine messageDefinitions);
 
     #endregion
 
@@ -391,7 +391,7 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
         ParseAndValidateProtocols("Inner", _innerOpcode, _innerCustomNamespaces, _innerMessages);
     }
 
-    private void ParseAndValidateProtocols(string protocol, List<OpcodeInfo> opcodeInfo,SyntaxElementByIfDefine customNamespaces, List<MessageDefinition> allMessages)
+    private void ParseAndValidateProtocols(string protocol, List<OpcodeInfo> opcodeInfo, CustomNamespacesByIfDefine customNamespaces, MessagesByIfDefine allMessages)
     {
         var validator = new ProtocolValidator();
         var isOuter = protocol.Equals("Outer", StringComparison.OrdinalIgnoreCase);
@@ -410,20 +410,26 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
             }
 
             customNamespaces.Merge(result.CustomNamespaceUsing);
-            allMessages.AddRange(result.Messages);
+            allMessages.Merge(result.Messages);
         }
 
         // 2. 为所有需要 OpCode 的消息生成 OpCode
-        foreach (var message in allMessages.Where(m => m.HasOpCode))
+        foreach (var kv in allMessages)
         {
-            message.OpCode = opCodeGenerator.Generate(message);
-            opcodeInfo.Add(message.OpCode);
+            foreach(var message in kv.Value.Where(m => m.HasOpCode))
+            {
+                message.OpCode = opCodeGenerator.Generate(message);
+                opcodeInfo.Add(message.OpCode);
+            }
         }
 
         // 3. 验证所有消息
-        foreach (var message in allMessages)
+        foreach (var kv in allMessages)
         {
-            validator.Validate(message);
+            foreach (var message in kv.Value.Where(m => m.HasOpCode))
+            {
+                validator.Validate(message);
+            }
         }
 
         // 4. 收集验证错误

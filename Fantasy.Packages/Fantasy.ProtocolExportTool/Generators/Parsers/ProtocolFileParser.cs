@@ -13,9 +13,9 @@ namespace Fantasy.ProtocolExportTool.Generators.Parsers;
 /// </summary>
 public class ParseResult
 {
-    public SyntaxElementByIfDefine CustomNamespaceUsing { get; init; } = new();
-    public List<MessageDefinition> Messages { get; init; } = new();
-    public ParseResult(SyntaxElementByIfDefine customNamespaceUsing, List<MessageDefinition> messages)
+    public CustomAttributesByIfDefine CustomNamespaceUsing { get; init; } = new();
+    public MessagesByIfDefine Messages { get; init; } = new();
+    public ParseResult(CustomAttributesByIfDefine customNamespaceUsing, MessagesByIfDefine messages)
     {
         CustomNamespaceUsing = customNamespaceUsing;
         Messages = messages;
@@ -32,20 +32,22 @@ public sealed partial class ProtocolFileParser(string filePath)
     private ParserState _state = ParserState.WaitingForMessage;
     private MessageDefinition? _currentMessage;
     private ProtocolSettings _currentProtocolSettings = ProtocolSettings.CreateProtoBuf();
-    private SyntaxElementByIfDefine _customNamespaceUsing = new();
-    private SyntaxElementByIfDefine _currentCustomAttributes = new();
+    private CustomAttributesByIfDefine _currentCustomAttributes = new();
     private int _currentKeyIndex = 1;
     private readonly List<string> _pendingComments = new();
     private static readonly Regex _attributesRegex = new Regex(@"^//\s*\[[^\]]+\]", RegexOptions.Compiled); //标签匹配
+    private bool _needPageCompileCondition = false; // 是否存需要消息页级条件编译指令 (消息通常会定义很多, 导致单个信息划分条件编译会较为不便, 因此将整个文件作为一个条件编译页)
+    private string _currentPageIfDefine = string.Empty;
     private bool _isInConditionalBlock = false; // 是否在条件编译块内
-    private string _currentIfDefine = string.Empty;
+    private string _currentSyntaxIfDefine = string.Empty;
 
     /// <summary>
-    /// 解析协议文件的所有行，返回消息定义列表
+    /// 解析协议文件的所有行，返回解析结果。
     /// </summary>
     public ParseResult Parse(string[] lines)
     {
-        var messages = new List<MessageDefinition>();
+        var messages = new MessagesByIfDefine();
+        var customNamespaceUsing = new CustomAttributesByIfDefine();
 
         for (var i = 0; i < lines.Length; i++)
         {
@@ -72,30 +74,45 @@ public sealed partial class ProtocolFileParser(string filePath)
                 continue;
             }
 
-            //处理条件编译指令 (// If)
-            if (line.StartsWith("// If", StringComparison.OrdinalIgnoreCase))
+            // 处理消息页条件编译指令, 作用于当前文件所有消息 (// ThisPageIf)
+            if (line.StartsWith("// ThisPageIf"))
             {
-                _isInConditionalBlock = true;
-                _currentIfDefine = line.Substring(5).Trim(); // 移除前缀 "// If"
+                _currentPageIfDefine = line.Substring(13).Trim(); // 移除前缀 "// ThisPageIf"
+                _needPageCompileCondition = true;
                 continue;
-            }else if (line.StartsWith("//If", StringComparison.OrdinalIgnoreCase))
+            }
+            else if (line.StartsWith("//ThisPageIf"))
+            {
+                _currentPageIfDefine = line.Substring(12).Trim(); // 移除前缀 "//ThisPageIf"
+                _needPageCompileCondition = true;
+                continue;
+            }
+
+            //处理命名空间和Attributes的条件编译指令 (// If)
+            if (line.StartsWith("// If"))
             {
                 _isInConditionalBlock = true;
-                _currentIfDefine = line.Substring(4).Trim(); // 移除前缀 "//If"
+                _currentSyntaxIfDefine = line.Substring(5).Trim(); // 移除前缀 "// If"
+                continue;
+            }
+            else if (line.StartsWith("//If"))
+            {
+                _isInConditionalBlock = true;
+                _currentSyntaxIfDefine = line.Substring(4).Trim(); // 移除前缀 "//If"
                 continue;
             }
 
             //条件编译结束指令 (// Endif)
-            if (line.StartsWith("// Endif", StringComparison.OrdinalIgnoreCase))
+            if (line.StartsWith("// Endif"))
             {
                 _isInConditionalBlock = false;
-                _currentIfDefine = string.Empty;
+                _currentSyntaxIfDefine = string.Empty;
                 continue;
             }
-            else if (line.StartsWith("//Endif", StringComparison.OrdinalIgnoreCase))
+            else if (line.StartsWith("//Endif"))
             {
                 _isInConditionalBlock = false;
-                _currentIfDefine = string.Empty;
+                _currentSyntaxIfDefine = string.Empty;
                 continue;
             }
 
@@ -103,12 +120,12 @@ public sealed partial class ProtocolFileParser(string filePath)
             if (_attributesRegex.IsMatch(line))
             {
                 var attribute = line.Substring(2).Trim(); // 移除前缀 "//"
-                
-                if(_currentCustomAttributes.TryGetValue(_currentIfDefine, out var attrslist))
+
+                if (_currentCustomAttributes.TryGetValue(_currentSyntaxIfDefine, out var attrslist))
                     attrslist.Add(attribute);
                 else
-                    _currentCustomAttributes.Add(_currentIfDefine, new() { attribute});
-                
+                    _currentCustomAttributes.Add(_currentSyntaxIfDefine, new() { attribute });
+
                 continue;
             }
 
@@ -119,10 +136,10 @@ public sealed partial class ProtocolFileParser(string filePath)
                 if (string.IsNullOrWhiteSpace(@namespace))
                     continue;
 
-                if (_customNamespaceUsing.TryGetValue(_currentIfDefine, out var namespaceList))
+                if (customNamespaceUsing.TryGetValue(_currentSyntaxIfDefine, out var namespaceList))
                     namespaceList.Add(@namespace);
                 else
-                    _customNamespaceUsing.Add(_currentIfDefine, new() { @namespace });
+                    customNamespaceUsing.Add(_currentSyntaxIfDefine, new() { @namespace });
 
                 continue;
             }
@@ -166,7 +183,8 @@ public sealed partial class ProtocolFileParser(string filePath)
                     // 消息解析完成
                     if (_currentMessage != null)
                     {
-                        messages.Add(_currentMessage);
+                        messages.TryAdd(_currentPageIfDefine, new List<MessageDefinition>());
+                        messages[_currentPageIfDefine].Add(_currentMessage);
                         _currentMessage = null;
                     }
 
@@ -181,7 +199,7 @@ public sealed partial class ProtocolFileParser(string filePath)
             }
         }
 
-        return new ParseResult(_customNamespaceUsing.CloneOne(), messages);
+        return new ParseResult(customNamespaceUsing, messages);
     }
 
     /// <summary>
@@ -215,7 +233,7 @@ public sealed partial class ProtocolFileParser(string filePath)
             SourceFilePath = filePath,
             SourceLineNumber = lineNumber,
             Protocol = CloneProtocolSettings(_currentProtocolSettings),
-            CustomClassAttributesByIfDefine = _currentCustomAttributes.CloneOne(),
+            CustomClassAttributesByIfDefine = (CustomAttributesByIfDefine)_currentCustomAttributes.CloneOne(),
             DocumentationComments = new List<string>(_pendingComments)
         };
 

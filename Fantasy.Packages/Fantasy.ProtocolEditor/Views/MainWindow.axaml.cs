@@ -20,6 +20,7 @@ using Fantasy.ProtocolEditor.Services;
 using Avalonia.Media;
 using Fantasy.ProtocolEditor.Models;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Fantasy.ProtocolEditor.Views;
 
@@ -1638,29 +1639,85 @@ public partial class MainWindow : Window
     /// <summary>
     /// 从文件夹打开一个路径
     /// </summary>
-    private void OpenInFileExplorer(string fullPath) {
-
-        if (string.IsNullOrEmpty(fullPath)) 
+    public void OpenInFileExplorer(string fullPath)
+    {
+        if (DataContext is not MainWindowViewModel vm)
             return;
 
-        if (Directory.Exists(fullPath))
+        if (string.IsNullOrEmpty(fullPath))
         {
-            // 直接打开文件夹
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = fullPath,
-                UseShellExecute = true
-            });
+            vm.OutputText += $"无法打开空路径\n";
+            return; 
         }
-        else if (File.Exists(fullPath))
+
+        if (!Directory.Exists(fullPath) && !File.Exists(fullPath))
         {
-            // 选中文件
-            Process.Start(new ProcessStartInfo
+            vm.OutputText += $"路径不存在：{fullPath}\n";
+            return;
+        }
+
+        var psi = new ProcessStartInfo { UseShellExecute = true };
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            // ** Windows 平台 **
+            psi.FileName = "explorer.exe";
+
+            if (Directory.Exists(fullPath))
             {
-                FileName = "explorer.exe",
-                Arguments = $"/select,\"{fullPath}\"",
-                UseShellExecute = true
-            });
+                psi.Arguments = fullPath;
+            }
+            else if (File.Exists(fullPath))
+            {
+                psi.Arguments = $"/select,\"{fullPath}\"";
+            }
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            // ** macOS 平台 (Finder) **
+            psi.FileName = "open";
+
+            if (Directory.Exists(fullPath))
+            {
+                psi.Arguments = $"\"{fullPath}\"";
+            }
+            else
+            if (File.Exists(fullPath))
+            {
+                psi.Arguments = $"-R \"{fullPath}\"";
+            }
+        }
+        else
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        {
+            // ** Linux 平台 **
+            psi.FileName = "xdg-open";
+
+            string? directoryPath = Directory.Exists(fullPath) ? fullPath : Path.GetDirectoryName(fullPath);
+
+            if (!string.IsNullOrEmpty(directoryPath))
+            {
+                psi.Arguments = $"\"{directoryPath}\"";
+            }
+            else
+            {
+                // 如果无法获取目录 (如根目录文件)，尝试直接打开
+                psi.Arguments = $"\"{fullPath}\"";
+            }
+        }
+        else
+        {
+            vm.OutputText += $"未知平台, 无法打开文件系统。\n";
+            return;
+        }
+
+        try
+        {
+            Process.Start(psi);
+        }
+        catch (Exception ex)
+        {
+            vm.OutputText += $"打开当前路径发生错误：{ex}\n";
         }
     }
 
