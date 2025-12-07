@@ -35,7 +35,11 @@ public sealed partial class ProtocolFileParser(string filePath)
     private CustomAttributesByIfDefine _currentCustomAttributes = new();
     private int _currentKeyIndex = 1;
     private readonly List<string> _pendingComments = new();
-    private static readonly Regex _attributesRegex = new Regex(@"^//\s*\[[^\]]+\]", RegexOptions.Compiled); //标签匹配
+    private static readonly Regex _attributesRegex = new Regex(@"^//[\p{Z}\s]*\[[^\]]+\]", RegexOptions.Compiled); //标签匹配
+    private static readonly Regex _usingRegex = new Regex(@"^//[\p{Z}\s]*Using", RegexOptions.Compiled); //命名空间导入匹配
+    private static readonly Regex _pageIfRegex = new Regex(@"^//[\p{Z}\s]*ThisPageIf", RegexOptions.Compiled); //全页条件编译匹配
+    private static readonly Regex _syntaxIfRegex = new Regex(@"^//[\p{Z}\s]*If", RegexOptions.Compiled); //局部语法条件编译匹配
+    private static readonly Regex _syntaxEndIfRegex = new Regex(@"^//[\p{Z}\s]*Endif", RegexOptions.Compiled); //局部语法条件编译匹配
     private bool _needPageCompileCondition = false; // 是否存需要消息页级条件编译指令 (消息通常会定义很多, 导致单个信息划分条件编译会较为不便, 因此将整个文件作为一个条件编译页)
     private string _currentPageIfDefine = string.Empty;
     private bool _isInConditionalBlock = false; // 是否在条件编译块内
@@ -75,41 +79,26 @@ public sealed partial class ProtocolFileParser(string filePath)
             }
 
             // 处理消息页条件编译指令, 作用于当前文件所有消息 (// ThisPageIf)
-            if (line.StartsWith("// ThisPageIf"))
+            var matchThisPageIf = _pageIfRegex.Match(line);
+            if (matchThisPageIf.Success)
             {
-                _currentPageIfDefine = line.Substring(13).Trim(); // 移除前缀 "// ThisPageIf"
-                _needPageCompileCondition = true;
-                continue;
-            }
-            else if (line.StartsWith("//ThisPageIf"))
-            {
-                _currentPageIfDefine = line.Substring(12).Trim(); // 移除前缀 "//ThisPageIf"
+                _currentPageIfDefine = line.Substring(matchThisPageIf.Length).Trim(); // 移除前缀 "// ThisPageIf"
                 _needPageCompileCondition = true;
                 continue;
             }
 
-            //处理命名空间和Attributes的条件编译指令 (// If)
-            if (line.StartsWith("// If"))
+            //处理局部语法的条件编译指令 (// If)
+            var matchIf = _syntaxIfRegex.Match(line);
+            if (matchIf.Success)
             {
                 _isInConditionalBlock = true;
-                _currentSyntaxIfDefine = line.Substring(5).Trim(); // 移除前缀 "// If"
-                continue;
-            }
-            else if (line.StartsWith("//If"))
-            {
-                _isInConditionalBlock = true;
-                _currentSyntaxIfDefine = line.Substring(4).Trim(); // 移除前缀 "//If"
+                _currentSyntaxIfDefine = line.Substring(matchIf.Length).Trim(); // 移除前缀 "// If"
                 continue;
             }
 
             //条件编译结束指令 (// Endif)
-            if (line.StartsWith("// Endif"))
-            {
-                _isInConditionalBlock = false;
-                _currentSyntaxIfDefine = string.Empty;
-                continue;
-            }
-            else if (line.StartsWith("//Endif"))
+            var matchEndIf = _syntaxEndIfRegex.Match(line);
+            if (matchEndIf.Success)
             {
                 _isInConditionalBlock = false;
                 _currentSyntaxIfDefine = string.Empty;
@@ -119,7 +108,7 @@ public sealed partial class ProtocolFileParser(string filePath)
             // 处理自定义标签 (// [MyCustomAttribute])
             if (_attributesRegex.IsMatch(line))
             {
-                var attribute = line.Substring(2).Trim(); // 移除前缀 "//"
+                var attribute = line.Substring(2).Trim(); // 移除前缀 "//"和多余的空格
 
                 if (_currentCustomAttributes.TryGetValue(_currentSyntaxIfDefine, out var attrslist))
                     attrslist.Add(attribute);
@@ -130,9 +119,10 @@ public sealed partial class ProtocolFileParser(string filePath)
             }
 
             // 处理命名空间导入 (// Using Namespace.Name)
-            if (line.StartsWith("// Using"))
+            var matchUsing = _usingRegex.Match(line);
+            if (matchUsing.Success)
             {
-                var @namespace = line.Substring(8).Trim(); // 移除前缀 "// Using" 
+                var @namespace = line.Substring(matchUsing.Length).Trim(); // 移除前缀 "// Using" 
                 if (string.IsNullOrWhiteSpace(@namespace))
                     continue;
 
