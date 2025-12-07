@@ -130,7 +130,7 @@ public sealed partial class ProtocolFileParser(string filePath)
             }
 
             // 处理命名空间导入 (// Using Namespace.Name)
-            if (line.StartsWith("// Using", StringComparison.OrdinalIgnoreCase))
+            if (line.StartsWith("// Using"))
             {
                 var @namespace = line.Substring(8).Trim(); // 移除前缀 "// Using" 
                 if (string.IsNullOrWhiteSpace(@namespace))
