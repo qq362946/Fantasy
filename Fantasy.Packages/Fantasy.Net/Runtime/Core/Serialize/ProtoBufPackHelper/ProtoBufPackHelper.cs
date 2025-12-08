@@ -57,16 +57,16 @@ namespace Fantasy.Serialize
             var protoBufTypes = assemblyManifest.NetworkProtocolRegistrar.GetNetworkProtocolTypes();
             if (protoBufTypes.Any())
             {
-                // 将所有网络协议类型注册到 ProtoBuf 模型
-                foreach (var protoBufType in protoBufTypes)
-                {
-                    RuntimeTypeModel.Default.Add(protoBufType, true);
-                }
 #if UNITY_EDITOR || !ENABLE_IL2CPP
-                // 编译模型以提高序列化/反序列化性能
-                // 在 AOT 环境下跳过编译，因为动态代码生成不被支持
+                // 在支持反射的环境下，将所有网络协议类型注册到 ProtoBuf 模型
+                // AOT 环境下跳过类型注册，依赖 AutoAddMissingTypes 和协议类上的 ProtoContract 特性
                 if (RuntimeFeature.IsDynamicCodeSupported)
                 {
+                    foreach (var protoBufType in protoBufTypes)
+                    {
+                        RuntimeTypeModel.Default.Add(protoBufType, true);
+                    }
+                    // 编译模型以提高序列化/反序列化性能
                     RuntimeTypeModel.Default.CompileInPlace();
                 }
 #endif
