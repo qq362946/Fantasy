@@ -519,9 +519,9 @@ public class LoadPlayerDataOnLogin : AsyncEventSystem<PlayerLoginEvent>
 }
 
 // 监听器 2：发送欢迎消息
-public class SendWelcomeMessageOnLogin : EventSystem<PlayerLoginEvent>
+public class SendWelcomeMessageOnLogin : AsyncEventSystem<PlayerLoginEvent>
 {
-    protected override void Handler(PlayerLoginEvent self)
+    protected override async FTask Handler(PlayerLoginEvent self)
     {
         Log.Info($"欢迎回来，{self.PlayerName}！");
         // 发送客户端消息
