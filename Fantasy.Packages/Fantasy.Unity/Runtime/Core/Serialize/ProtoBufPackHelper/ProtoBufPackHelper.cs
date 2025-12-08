@@ -2,6 +2,7 @@ using System;
 using System.Buffers;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using ProtoBuf.Meta;
@@ -61,9 +62,14 @@ namespace Fantasy.Serialize
                 {
                     RuntimeTypeModel.Default.Add(protoBufType, true);
                 }
-
+#if UNITY_EDITOR || !ENABLE_IL2CPP
                 // 编译模型以提高序列化/反序列化性能
-                RuntimeTypeModel.Default.CompileInPlace();
+                // 在 AOT 环境下跳过编译，因为动态代码生成不被支持
+                if (RuntimeFeature.IsDynamicCodeSupported)
+                {
+                    RuntimeTypeModel.Default.CompileInPlace();
+                }
+#endif
             }
 
             await FTask.CompletedTask;
