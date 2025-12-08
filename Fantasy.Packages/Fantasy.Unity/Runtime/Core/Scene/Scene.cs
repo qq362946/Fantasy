@@ -5,6 +5,7 @@ using System.Linq;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Event;
+using Fantasy.EventAwaiter;
 using Fantasy.IdFactory;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
@@ -113,6 +114,7 @@ namespace Fantasy
         internal EntityPool EntityPool;
         internal EntityListPool<Entity> EntityListPool;
         internal EntitySortedDictionaryPool<long, Entity> EntitySortedDictionaryPool;
+        internal EventAwaiterPool EventAwaiterPool;
 
         #endregion
         
@@ -177,6 +179,7 @@ namespace Fantasy
             EntityPool = new EntityPool();
             EntityListPool = new EntityListPool<Entity>();
             EntitySortedDictionaryPool = new EntitySortedDictionaryPool<long, Entity>();
+            EventAwaiterPool = new EventAwaiterPool();
             EntityComponent = await Create<EntityComponent>(this, false, false).Initialize();
             SceneUpdate = EntityComponent;
 #if FANTASY_UNITY

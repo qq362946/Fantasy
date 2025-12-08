@@ -79,6 +79,7 @@
         <None Include="..\Fantasy.SourceGenerator\bin\$(Configuration)\netstandard2.0\Fantasy.SourceGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     </ItemGroup>
     <ItemGroup>
+      <Folder Include="Runtime\Core\Entitas\Component\EventComponent\EventAwaiter\" />
       <Folder Include="Runtime\Core\World\" />
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Fantasy.DataStructure.Dictionary;
 // ReSharper disable UseCollectionExpression
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 namespace Fantasy.DataStructure.Collection
@@ -117,9 +118,9 @@ namespace Fantasy.DataStructure.Collection
         {
             if (_segments.Count == 0)
             {
-                _mergedDictionary =
-                    new RuntimeTypeHandleFrozenDictionary<Dictionary<TKey, TValue>>(Array.Empty<RuntimeTypeHandle>(),
-                        Array.Empty<Dictionary<TKey, TValue>>());
+                _mergedDictionary = new RuntimeTypeHandleFrozenDictionary<Dictionary<TKey, TValue>>(
+                    new RuntimeTypeHandle[1] { typeof(FrozenHashTable).TypeHandle },
+                    new Dictionary<TKey, TValue>[1] { new Dictionary<TKey, TValue>() });
                 return;
             }
 
