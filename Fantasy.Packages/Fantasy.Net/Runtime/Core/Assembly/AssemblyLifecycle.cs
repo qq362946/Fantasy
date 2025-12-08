@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Fantasy.Async;
+using Fantasy.DataStructure.Collection;
 
 namespace Fantasy.Assembly
 {
@@ -14,13 +15,13 @@ namespace Fantasy.Assembly
         /// <summary>
         /// 程序集生命周期回调集合（WebGL 单线程版本）
         /// </summary>
-        private static readonly Dictionary<IAssemblyLifecycle, byte> AssemblyLifecycles = new Dictionary<IAssemblyLifecycle, byte>();
+        private static readonly HashSet<IAssemblyLifecycle> AssemblyLifecycles = new ();
 #else
         /// <summary>
         /// 程序集生命周期回调集合（线程安全版本）
         /// 使用 ConcurrentDictionary 当作 Set 使用，Value 无实际意义
         /// </summary>
-        private static readonly ConcurrentDictionary<IAssemblyLifecycle, byte> AssemblyLifecycles = new ConcurrentDictionary<IAssemblyLifecycle, byte>();
+        private static readonly ConcurrentHashSet<IAssemblyLifecycle> AssemblyLifecycles = new();
 #endif
         /// <summary>
         /// 触发程序集加载事件
@@ -30,7 +31,7 @@ namespace Fantasy.Assembly
         /// <returns>异步任务</returns>
         internal static async FTask OnLoad(AssemblyManifest assemblyManifest)
         {
-            foreach (var (assemblyLifecycle, _) in AssemblyLifecycles)
+            foreach (IAssemblyLifecycle assemblyLifecycle in AssemblyLifecycles)
             {
                 await assemblyLifecycle.OnLoad(assemblyManifest);
             }
@@ -44,7 +45,7 @@ namespace Fantasy.Assembly
         /// <returns>异步任务</returns>
         internal static async FTask OnUnLoad(AssemblyManifest assemblyManifest)
         {
-            foreach (var (assemblyLifecycle, _) in AssemblyLifecycles)
+            foreach (IAssemblyLifecycle assemblyLifecycle in AssemblyLifecycles)
             {
                 await assemblyLifecycle.OnUnload(assemblyManifest);
             }
@@ -59,9 +60,9 @@ namespace Fantasy.Assembly
         public static async FTask Add(IAssemblyLifecycle assemblyLifecycle)
         {
 #if FANTASY_WEBGL
-            AssemblyLifecycles.Add(assemblyLifecycle, 0);
+            AssemblyLifecycles.Add(assemblyLifecycle);
 #else
-            AssemblyLifecycles.TryAdd(assemblyLifecycle, 0);
+            AssemblyLifecycles.TryAdd(assemblyLifecycle);
 #endif
             foreach (var (_, assemblyManifest) in AssemblyManifest.Manifests)
             {
@@ -76,7 +77,7 @@ namespace Fantasy.Assembly
         /// <param name="assemblyLifecycle">要移除的生命周期回调对象</param>
         internal static void Remove(IAssemblyLifecycle assemblyLifecycle)
         {
-            AssemblyLifecycles.Remove(assemblyLifecycle, out _);
+            AssemblyLifecycles.Remove(assemblyLifecycle);
         }
 
         /// <summary>
