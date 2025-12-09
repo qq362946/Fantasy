@@ -24,9 +24,6 @@ namespace Fantasy.Assembly
         private static readonly ConcurrentHashSet<IAssemblyLifecycle> AssemblyLifecycles = new();
 #endif
 
-        static List<FTask> _loadTasks = new();
-        static List<FTask> _unloadTasks = new();
-
         /// <summary>
         /// 触发程序集加载事件
         /// 遍历所有已注册的生命周期回调，调用其 OnLoad 方法
@@ -35,12 +32,12 @@ namespace Fantasy.Assembly
         /// <returns>异步任务</returns>
         internal static async FTask OnLoad(AssemblyManifest assemblyManifest)
         {
-            _loadTasks.Clear();
+            List<FTask> loadTasks = new();
             foreach (IAssemblyLifecycle assemblyLifecycle in AssemblyLifecycles)
             {
-                _loadTasks.Add(assemblyLifecycle.OnLoad(assemblyManifest));
+                loadTasks.Add(assemblyLifecycle.OnLoad(assemblyManifest));
             }
-            await FTask.WaitAll(_loadTasks);
+            await FTask.WaitAll(loadTasks);
         }
 
         /// <summary>
@@ -51,12 +48,12 @@ namespace Fantasy.Assembly
         /// <returns>异步任务</returns>
         internal static async FTask OnUnLoad(AssemblyManifest assemblyManifest)
         {
-            _unloadTasks.Clear();
+            List<FTask> unloadTasks = new();
             foreach (IAssemblyLifecycle assemblyLifecycle in AssemblyLifecycles)
             {
-                _unloadTasks.Add(assemblyLifecycle.OnUnload(assemblyManifest));
+                unloadTasks.Add(assemblyLifecycle.OnUnload(assemblyManifest));
             }
-            await FTask.WaitAll(_unloadTasks);
+            await FTask.WaitAll(unloadTasks);
             assemblyManifest.Clear();
         }
 
@@ -72,12 +69,12 @@ namespace Fantasy.Assembly
 #else
             AssemblyLifecycles.TryAdd(assemblyLifecycle);
 #endif
-            _loadTasks.Clear();
+            List<FTask> loadTasks = new();
             foreach (var (_, assemblyManifest) in AssemblyManifest.Manifests)
             {
-                _loadTasks.Add(assemblyLifecycle.OnLoad(assemblyManifest));
+                loadTasks.Add(assemblyLifecycle.OnLoad(assemblyManifest));
             }
-            await FTask.WaitAll(_loadTasks);
+            await FTask.WaitAll(loadTasks);
         }
 
         /// <summary>
