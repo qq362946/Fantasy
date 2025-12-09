@@ -630,8 +630,12 @@ namespace Fantasy
             }
 
             isRuntimeInstance = false;
-            OnDestroyEvent(this, EventArgs.Empty);
-            OnDestroyEvent -= Runtime.OnDestroy;
+
+            if (OnDestroyEvent != null)
+            {
+                OnDestroyEvent(this, EventArgs.Empty);
+                OnDestroyEvent -= Runtime.OnDestroy;
+            }
         }
     }
 }

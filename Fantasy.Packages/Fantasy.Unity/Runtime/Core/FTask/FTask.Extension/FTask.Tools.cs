@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 namespace Fantasy.Async
@@ -17,6 +19,7 @@ namespace Fantasy.Async
         /// <param name="time"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FTask<bool> Wait(Scene scene, long time, FCancellationToken cancellationToken = null)
         {
             return scene.TimerComponent.Net.WaitAsync(time, cancellationToken);
@@ -29,6 +32,7 @@ namespace Fantasy.Async
         /// <param name="time"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FTask<bool> WaitTill(Scene scene, long time, FCancellationToken cancellationToken = null)
         {
             return scene.TimerComponent.Net.WaitTillAsync(time, cancellationToken);
@@ -39,6 +43,7 @@ namespace Fantasy.Async
         /// </summary>
         /// <param name="scene"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FTask WaitFrame(Scene scene)
         {
             return scene.TimerComponent.Net.WaitFrameAsync();
@@ -51,6 +56,7 @@ namespace Fantasy.Async
         /// <param name="time"></param>
         /// <param name="action"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long OnceTimer(Scene scene, long time, Action action)
         {
             return scene.TimerComponent.Net.OnceTimer(time, action);
@@ -63,6 +69,7 @@ namespace Fantasy.Async
         /// <param name="time"></param>
         /// <param name="action"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long OnceTillTimer(Scene scene, long time, Action action)
         {
             return scene.TimerComponent.Net.OnceTillTimer(time, action);
@@ -76,6 +83,7 @@ namespace Fantasy.Async
         /// <param name="timerHandlerType"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long OnceTimer<T>(Scene scene, long time, T timerHandlerType) where T : struct
         {
             return scene.TimerComponent.Net.OnceTimer<T>(time, timerHandlerType);
@@ -89,6 +97,7 @@ namespace Fantasy.Async
         /// <param name="timerHandlerType"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long OnceTillTimer<T>(Scene scene, long tillTime, T timerHandlerType) where T : struct
         {
             return scene.TimerComponent.Net.OnceTillTimer<T>(tillTime, timerHandlerType);
@@ -101,6 +110,7 @@ namespace Fantasy.Async
         /// <param name="time"></param>
         /// <param name="action"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long RepeatedTimer(Scene scene, long time, Action action)
         {
             return scene.TimerComponent.Net.RepeatedTimer(time, action);
@@ -114,6 +124,7 @@ namespace Fantasy.Async
         /// <param name="timerHandlerType"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long RepeatedTimer<T>(Scene scene, long time, T timerHandlerType) where T : struct
         {
             return scene.TimerComponent.Net.RepeatedTimer<T>(time, timerHandlerType);
@@ -125,6 +136,7 @@ namespace Fantasy.Async
         /// <param name="scene"></param>
         /// <param name="timerId"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RemoveTimer(Scene scene, ref long timerId)
         {
             return scene.TimerComponent.Net.Remove(ref timerId);
@@ -142,6 +154,7 @@ namespace Fantasy.Async
         /// <param name="time"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FTask<bool> UnityWait(Scene scene, long time, FCancellationToken cancellationToken = null)
         {
             return scene.TimerComponent.Unity.WaitAsync(time, cancellationToken);
@@ -154,6 +167,7 @@ namespace Fantasy.Async
         /// <param name="time"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FTask<bool> UnityWaitTill(Scene scene, long time, FCancellationToken cancellationToken = null)
         {
             return scene.TimerComponent.Unity.WaitTillAsync(time, cancellationToken);
@@ -164,6 +178,7 @@ namespace Fantasy.Async
         /// </summary>
         /// <param name="scene"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FTask UnityWaitFrame(Scene scene)
         {
             return scene.TimerComponent.Unity.WaitFrameAsync();
@@ -176,6 +191,7 @@ namespace Fantasy.Async
         /// <param name="time"></param>
         /// <param name="action"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long UnityOnceTimer(Scene scene, long time, Action action)
         {
             return scene.TimerComponent.Unity.OnceTimer(time, action);
@@ -188,6 +204,7 @@ namespace Fantasy.Async
         /// <param name="time"></param>
         /// <param name="action"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long UnityOnceTillTimer(Scene scene, long time, Action action)
         {
             return scene.TimerComponent.Unity.OnceTillTimer(time, action);
@@ -201,6 +218,7 @@ namespace Fantasy.Async
         /// <param name="timerHandlerType"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long UnityOnceTimer<T>(Scene scene, long time, T timerHandlerType) where T : struct
         {
             return scene.TimerComponent.Unity.OnceTimer<T>(time, timerHandlerType);
@@ -214,6 +232,7 @@ namespace Fantasy.Async
         /// <param name="timerHandlerType"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long UnityOnceTillTimer<T>(Scene scene, long tillTime, T timerHandlerType) where T : struct
         {
             return scene.TimerComponent.Unity.OnceTillTimer<T>(tillTime, timerHandlerType);
@@ -226,6 +245,7 @@ namespace Fantasy.Async
         /// <param name="time"></param>
         /// <param name="action"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long UnityRepeatedTimer(Scene scene, long time, Action action)
         {
             return scene.TimerComponent.Unity.RepeatedTimer(time, action);
@@ -239,6 +259,7 @@ namespace Fantasy.Async
         /// <param name="timerHandlerType"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long UnityRepeatedTimer<T>(Scene scene, long time, T timerHandlerType) where T : struct
         {
             return scene.TimerComponent.Unity.RepeatedTimer<T>(time, timerHandlerType);
@@ -250,6 +271,7 @@ namespace Fantasy.Async
         /// <param name="scene"></param>
         /// <param name="timerId"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool UnityRemoveTimer(Scene scene, ref long timerId)
         {
             return scene.TimerComponent.Unity.Remove(ref timerId);
@@ -263,6 +285,7 @@ namespace Fantasy.Async
         /// </summary>
         /// <param name="factory"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FTask Run(Func<FTask> factory)
         {
             return factory();
@@ -274,6 +297,7 @@ namespace Fantasy.Async
         /// <param name="factory"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FTask<T> Run<T>(Func<FTask<T>> factory)
         {
             return factory();
@@ -283,6 +307,7 @@ namespace Fantasy.Async
         /// 等待所有任务完成
         /// </summary>
         /// <param name="tasks"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async FTask WaitAll(List<FTask> tasks)
         {
             if (tasks.Count <= 0)
@@ -314,6 +339,7 @@ namespace Fantasy.Async
         /// 等待其中一个任务完成
         /// </summary>
         /// <param name="tasks"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async FTask WaitAny(List<FTask> tasks)
         {
             if (tasks.Count <= 0)
