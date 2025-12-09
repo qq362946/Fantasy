@@ -23,6 +23,10 @@ namespace Fantasy.Assembly
         /// </summary>
         private static readonly ConcurrentHashSet<IAssemblyLifecycle> AssemblyLifecycles = new();
 #endif
+
+        static List<FTask> _loadTasks = new();
+        static List<FTask> _unloadTasks = new();
+
         /// <summary>
         /// 触发程序集加载事件
         /// 遍历所有已注册的生命周期回调，调用其 OnLoad 方法
@@ -31,10 +35,12 @@ namespace Fantasy.Assembly
         /// <returns>异步任务</returns>
         internal static async FTask OnLoad(AssemblyManifest assemblyManifest)
         {
+            _loadTasks.Clear();
             foreach (IAssemblyLifecycle assemblyLifecycle in AssemblyLifecycles)
             {
-                await assemblyLifecycle.OnLoad(assemblyManifest);
+                _loadTasks.Add(assemblyLifecycle.OnLoad(assemblyManifest));
             }
+            await FTask.WaitAll(_loadTasks);
         }
 
         /// <summary>
@@ -45,10 +51,12 @@ namespace Fantasy.Assembly
         /// <returns>异步任务</returns>
         internal static async FTask OnUnLoad(AssemblyManifest assemblyManifest)
         {
+            _unloadTasks.Clear();
             foreach (IAssemblyLifecycle assemblyLifecycle in AssemblyLifecycles)
             {
-                await assemblyLifecycle.OnUnload(assemblyManifest);
+                _unloadTasks.Add(assemblyLifecycle.OnUnload(assemblyManifest));
             }
+            await FTask.WaitAll(_unloadTasks);
             assemblyManifest.Clear();
         }
 
@@ -64,10 +72,12 @@ namespace Fantasy.Assembly
 #else
             AssemblyLifecycles.TryAdd(assemblyLifecycle);
 #endif
+            _loadTasks.Clear();
             foreach (var (_, assemblyManifest) in AssemblyManifest.Manifests)
             {
-                await assemblyLifecycle.OnLoad(assemblyManifest);
+                _loadTasks.Add(assemblyLifecycle.OnLoad(assemblyManifest));
             }
+            await FTask.WaitAll(_loadTasks);
         }
 
         /// <summary>
