@@ -6,7 +6,7 @@
   <Color name="Comment" foreground="#C8C8C8" />
   <Color name="CommentInterface" foreground="#56B6C2" fontWeight="bold" />
   <Color name="CommentKeyword" foreground="#61AFEF" />
-  <Color name="Langword" foreground="#5AA0FF"/>
+  <Color name="Langword" foreground="#61AFEF"/>
   <Color name="String" foreground="#98C379" />
   <Color name="Keyword" foreground="#C678DD" fontWeight="bold" />
   <Color name="TypeKeyword" foreground="#61AFEF" fontWeight="bold" />
