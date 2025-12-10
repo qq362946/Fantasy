@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas;
+#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
 
 namespace Fantasy.EventAwaiter
 {
@@ -57,6 +58,13 @@ namespace Fantasy.EventAwaiter
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="timeout"></param>
+        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public async FTask<T> Wait<T>(int timeout, FCancellationToken? cancellationToken = null) where T : struct
         {
@@ -101,6 +109,11 @@ namespace Fantasy.EventAwaiter
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <typeparam name="T"></typeparam>
         public void Notify<T>(T obj) where T : struct
         {
             var typeHandle = typeof(T).TypeHandle;

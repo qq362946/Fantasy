@@ -39,7 +39,21 @@ namespace Fantasy.Serialize
             RuntimeTypeModel.Default.AutoAddMissingTypes = true; // 自动添加缺失的类型
             RuntimeTypeModel.Default.AllowParseableTypes = true; // 允许可解析类型
             RuntimeTypeModel.Default.AutoAddMissingTypes = true; // 自动添加缺失的类型
-            RuntimeTypeModel.Default.AutoCompile = true; // 自动编译模型以提升性能
+#if UNITY_EDITOR || !ENABLE_IL2CPP
+            // 仅在支持动态代码生成的环境下启用自动编译
+            // Native AOT 和 IL2CPP 不支持 DynamicMethod，必须禁用 AutoCompile
+            if (RuntimeFeature.IsDynamicCodeSupported)
+            {
+                RuntimeTypeModel.Default.AutoCompile = true; // 自动编译模型以提升性能
+            }
+            else
+            {
+                RuntimeTypeModel.Default.AutoCompile = false; // AOT 环境禁用动态编译
+            }
+#else
+            RuntimeTypeModel.Default.AutoCompile = false; // IL2CPP 环境禁用动态编译
+#endif
+
             RuntimeTypeModel.Default.UseImplicitZeroDefaults = true; // 使用隐式零默认值
             RuntimeTypeModel.Default.InferTagFromNameDefault = true; // 从名称推断标签
 
