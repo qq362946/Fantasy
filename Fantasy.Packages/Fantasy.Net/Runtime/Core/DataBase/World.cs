@@ -99,7 +99,7 @@ namespace Fantasy
                 return;
             }
             
-            AllDatabase = new Fantasy.Database.IDatabase[dataBaseConfigList.Length];
+            AllDatabase = new Fantasy.Database.IDatabase[DataBaseHelper.DatabaseDbName.Count];
             
             for (var i = 0; i < dataBaseConfigList.Length; i++)
             {

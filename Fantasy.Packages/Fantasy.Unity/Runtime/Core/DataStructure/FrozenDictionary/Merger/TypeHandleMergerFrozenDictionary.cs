@@ -116,7 +116,9 @@ namespace Fantasy.DataStructure.Dictionary
         {
             if (_count == 0)
             {
-                _mergedDictionary = new RuntimeTypeHandleFrozenDictionary<TValue>(Array.Empty<RuntimeTypeHandle>(), Array.Empty<TValue>());
+                _mergedDictionary = new RuntimeTypeHandleFrozenDictionary<TValue>(
+                    new RuntimeTypeHandle[1] { typeof(FrozenHashTable).TypeHandle },
+                    new TValue[1] { default(TValue) });
                 return;
             }
 
