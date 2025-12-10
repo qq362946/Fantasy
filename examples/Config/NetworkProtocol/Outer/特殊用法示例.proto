@@ -5,7 +5,7 @@ package Fantasy.Network.Message;
 // 1.通过添加 // Using 导出时添加自定义命名空间
 // 2.通过 [我的标签] 给消息类导出时添加额外的Attributes;
 // 3.添加条件编译作用于当前文件的所有消息;
-//	(通过添加 // ThisPageIf 你自定义的条件编译符)
+//	(通过添加 // TheseMessagesIf 你自定义的条件编译符)
 // 4.添加条件编译作用于自定义命名空间或标签
 //	(通过添加 // If 你自定义的条件编译符
 //			 // Endif)
@@ -14,7 +14,7 @@ package Fantasy.Network.Message;
 
 // Using System.Runtime
 // Using System.Reflection
-// ThisPageIf Godot_Platform
+// TheseMessagesIf Godot_Platform
 
 // If FANTASY_UNITY
 // Using UnityEngine
@@ -28,7 +28,7 @@ message C2G_带标签的消息 // IMessage
 
 // If Godot_Platform
 // [我的某个标签]
-// Godot_Platform
+// Endif
 message C2M_带标签且条件编译的消息 // IMessage
 {
 	string Tag = 1;

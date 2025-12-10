@@ -119,7 +119,7 @@
       <Word>If</Word>
       <Word>Endif</Word>
       <Word>Using</Word>
-      <Word>ThisPageIf</Word>
+      <Word>TheseMessagesIf</Word>
     </Keywords>
 
     <Rule color="Langword">\[.*?\]</Rule>

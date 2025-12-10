@@ -37,11 +37,11 @@ public sealed partial class ProtocolFileParser(string filePath)
     private readonly List<string> _pendingComments = new();
     private static readonly Regex _attributesRegex = new Regex(@"^//[\p{Z}\s]*\[[^\]]+\]", RegexOptions.Compiled); //标签匹配
     private static readonly Regex _usingRegex = new Regex(@"^//[\p{Z}\s]*Using", RegexOptions.Compiled); //命名空间导入匹配
-    private static readonly Regex _pageIfRegex = new Regex(@"^//[\p{Z}\s]*ThisPageIf", RegexOptions.Compiled); //全页条件编译匹配
-    private static readonly Regex _syntaxIfRegex = new Regex(@"^//[\p{Z}\s]*If", RegexOptions.Compiled); //局部语法条件编译匹配
-    private static readonly Regex _syntaxEndIfRegex = new Regex(@"^//[\p{Z}\s]*Endif", RegexOptions.Compiled); //局部语法条件编译匹配
-    private bool _needPageCompileCondition = false; // 是否存需要消息页级条件编译指令 (消息通常会定义很多, 导致单个信息划分条件编译会较为不便, 因此将整个文件作为一个条件编译页)
-    private string _currentPageIfDefine = string.Empty;
+    private static readonly Regex _messagesIfRegex = new Regex(@"^//[\p{Z}\s]*TheseMessagesIf", RegexOptions.Compiled); //全页消息条件编译匹配
+    private static readonly Regex _syntaxIfRegex = new Regex(@"^//[\p{Z}\s]*If", RegexOptions.Compiled); //If语法匹配
+    private static readonly Regex _syntaxEndIfRegex = new Regex(@"^//[\p{Z}\s]*Endif", RegexOptions.Compiled); //EndIf语法匹配
+    private bool _needMessagesCompileCondition = false; // 是否存需要消息页级条件编译指令 (消息通常会定义很多, 导致单个信息划分条件编译会较为不便, 因此将整个文件作为一个条件编译页)
+    private string _currentMessagesIfDefine = string.Empty;
     private bool _isInConditionalBlock = false; // 是否在条件编译块内
     private string _currentSyntaxIfDefine = string.Empty;
 
@@ -78,12 +78,12 @@ public sealed partial class ProtocolFileParser(string filePath)
                 continue;
             }
 
-            // 处理消息页条件编译指令, 作用于当前文件所有消息 (// ThisPageIf)
-            var matchThisPageIf = _pageIfRegex.Match(line);
-            if (matchThisPageIf.Success)
+            // 处理消息页条件编译指令, 作用于当前文件所有消息 (// TheseMessagesIf)
+            var matchTheseMessagesIf = _messagesIfRegex.Match(line);
+            if (matchTheseMessagesIf.Success)
             {
-                _currentPageIfDefine = line.Substring(matchThisPageIf.Length).Trim(); // 移除前缀 "// ThisPageIf"
-                _needPageCompileCondition = true;
+                _currentMessagesIfDefine = line.Substring(matchTheseMessagesIf.Length).Trim(); // 移除前缀 "// TheseMessagesIf"
+                _needMessagesCompileCondition = true;
                 continue;
             }
 
@@ -173,8 +173,8 @@ public sealed partial class ProtocolFileParser(string filePath)
                     // 消息解析完成
                     if (_currentMessage != null)
                     {
-                        messages.TryAdd(_currentPageIfDefine, new List<MessageDefinition>());
-                        messages[_currentPageIfDefine].Add(_currentMessage);
+                        messages.TryAdd(_currentMessagesIfDefine, new List<MessageDefinition>());
+                        messages[_currentMessagesIfDefine].Add(_currentMessage);
                         _currentMessage = null;
                     }
 
