@@ -213,21 +213,27 @@ namespace Fantasy.SourceGenerator.Generators
             {
                 return false;
             }
-            
+
             foreach (var baseType in classDecl.BaseList.Types)
             {
-                var typeName = baseType.Type.ToString();
-                
-                if (typeName.Contains("IMessageHandler") ||
-                    typeName.Contains("IAddressMessageHandler") ||
-                    typeName.Contains("Message<") ||
-                    typeName.Contains("MessageRPC<") ||
-                    typeName.Contains("Address<") ||
-                    typeName.Contains("AddressRPC<") ||
-                    typeName.Contains("Addressable<") ||
-                    typeName.Contains("AddressableRPC<") ||
-                    typeName.Contains("Roaming<") ||
-                    typeName.Contains("RoamingRPC<"))
+                var symbolName = baseType.Type switch
+                {
+                    GenericNameSyntax g => g.Identifier.Text,
+                    IdentifierNameSyntax id => id.Identifier.Text,
+                    _ => baseType.Type.ToString()
+                };
+
+                if (symbolName is
+                   "IMessageHandler" or
+                   "IAddressMessageHandler" or
+                   "Message" or
+                   "MessageRPC" or
+                   "Address" or
+                   "AddressRPC" or
+                   "Addressable" or
+                   "AddressableRPC" or
+                   "Roaming" or
+                   "RoamingRPC")
                 {
                     return true;
                 }
