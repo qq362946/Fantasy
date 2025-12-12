@@ -22,6 +22,16 @@ namespace Fantasy.DataStructure.Collection
         /// </summary>
         public void Add(long segmentKey, long[] keys, TValue[] values)
         {
+            if (keys == null)
+            {
+                throw new ArgumentNullException(nameof(keys));
+            }
+
+            if (values == null)
+            {
+                throw new ArgumentNullException(nameof(values));
+            }
+
             if (keys.Length != values.Length)
             {
                 throw new ArgumentException("keys and values must have the same length");
@@ -56,7 +66,7 @@ namespace Fantasy.DataStructure.Collection
         {
             if (_segments.Count == 0)
             {
-                _mergedDictionary = new Int64FrozenDictionary<List<TValue>>( Array.Empty<long>(), Array.Empty<List<TValue>>());
+                _mergedDictionary = new Int64FrozenDictionary<List<TValue>>( new long[1] { 0 }, new List<TValue>[1] { new List<TValue>() });
                 return;
             }
 

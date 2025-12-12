@@ -8,67 +8,75 @@ namespace Fantasy.EventAwaiter
 {
     /// <summary>
     /// 事件等待器取消动作（池化对象）
-    /// 用于在 FCancellationToken 触发时通知 EventAwaiterComponent
+    /// 用于在 FCancellationToken 触发时通知事件等待器取消等待
+    /// Action 委托在构造时创建一次，对象池复用时无 GC 开销
     /// </summary>
     /// <typeparam name="T">事件类型</typeparam>
     internal sealed class EventAwaiterCancelAction<T> : IPool where T : struct
     {
         private bool _isPool;
-        private EventAwaiterComponent _component;
+        private EventAwaiterCallback<T> _callback;
 
         /// <summary>
-        /// 缓存的取消委托，避免每次创建新委托对象
+        /// 取消委托，在构造时创建一次，整个对象生命周期内复用
+        /// 对象池复用时不会重新分配委托，实现零 GC
         /// </summary>
         public Action Action { get; }
 
         /// <summary>
-        /// 构造函数，创建并缓存 Action 委托
+        /// 构造函数，创建可复用的 Action 委托
         /// </summary>
         public EventAwaiterCancelAction()
         {
-            Action = Cancel;  // 只在构造时创建一次委托，后续复用
+            // 委托只在对象创建时分配一次，后续对象池复用时不再分配
+            Action = Cancel;
         }
 
         /// <summary>
-        /// 初始化取消动作，设置关联的组件
+        /// 初始化取消动作（从对象池租用后调用）
         /// </summary>
-        /// <param name="component">关联的 EventAwaiterComponent</param>
+        /// <param name="callback">事件回调对象</param>
         /// <returns>返回自身以支持链式调用</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EventAwaiterCancelAction<T> Initialize(EventAwaiterComponent component)
+        public EventAwaiterCancelAction<T> Initialize(EventAwaiterCallback<T> callback)
         {
-            _component = component;
+            _callback = callback;
             return this;
         }
 
         /// <summary>
-        /// 取消回调方法，通知组件发送默认事件
-        /// 由 FCancellationToken.Cancel() 触发
+        /// 取消回调方法，由 FCancellationToken 在取消时自动调用
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void Cancel()
         {
-            _component?.Notify(new T());  // 使用 ?. 防止 _component 为 null
+            _callback.SetCancel();
         }
 
         /// <summary>
         /// 获取当前对象是否在对象池中
         /// </summary>
+        /// <returns>true 表示在池中，false 表示已租出</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsPool() => _isPool;
 
         /// <summary>
-        /// 设置对象池状态，归还到池时清理引用
+        /// 设置对象池状态，对象池框架自动调用
+        /// isPool = true 表示租出，isPool = false 表示归还
         /// </summary>
-        /// <param name="isPool">是否在池中</param>
+        /// <param name="isPool">true=租出, false=归还</param>
         public void SetIsPool(bool isPool)
         {
             _isPool = isPool;
 
-            if (!isPool)  // 归还到池时清理引用，避免内存泄漏
+            // 租出时不做任何操作
+            if (isPool)
             {
-                _component = null;
+                return;
             }
+
+            // 归还时清理引用，避免内存泄漏
+            _callback = null;
         }
     }
 }

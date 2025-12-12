@@ -12,7 +12,7 @@ namespace Fantasy.Network.Roaming;
 internal sealed class TerminusEntityFlagComponent : Entity
 {
     /// <summary>
-    /// 关联的实体引用
+    /// 关联的实体引用 
     /// </summary>
     public EntityReference<Entity> LinkEntity;
 

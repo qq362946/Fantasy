@@ -97,7 +97,21 @@ namespace Fantasy.Async
             fTask._isPool = true;
             return fTask;
         }
-        
+
+        /// <summary>
+        /// 创建一个已完成的任务，并设置结果值
+        /// </summary>
+        /// <param name="result">任务结果</param>
+        /// <returns>已完成的 FTask</returns>
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static FTask<T> FromResult(T result)
+        {
+            var fTask = Create();
+            fTask.SetResult(result);
+            return fTask;
+        }
+
         private FTask() { }
 
         private void Return()
@@ -106,7 +120,7 @@ namespace Fantasy.Async
             {
                 return;
             }
-            
+
             _callBack = null;
             _status = STaskStatus.Pending;
             Caches.Enqueue(this);

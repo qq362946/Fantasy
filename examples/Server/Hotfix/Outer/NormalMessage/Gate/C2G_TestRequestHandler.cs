@@ -1,5 +1,6 @@
 using System;
 using Fantasy.Async;
+using Fantasy.EventAwaiter;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 

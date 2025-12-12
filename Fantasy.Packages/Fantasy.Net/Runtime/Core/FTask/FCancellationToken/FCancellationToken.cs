@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Fantasy.Pool;
 
 namespace Fantasy.Async
 {
@@ -26,6 +27,11 @@ namespace Fantasy.Async
             {
                 return;
             }
+
+            if (_isCancel)
+            {
+                return;
+            }
             
             _actions.Add(action);
         }
@@ -36,6 +42,11 @@ namespace Fantasy.Async
         public void Remove(Action action)
         {
             if (_isDispose)
+            {
+                return;
+            }
+            
+            if (_isCancel)
             {
                 return;
             }
@@ -62,7 +73,7 @@ namespace Fantasy.Async
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    Log.Error(e);
                 }
             }
             

@@ -12,6 +12,41 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace Fantasy.Network.Roaming;
 
 /// <summary>
+/// Terminus 传送完成事件参数。
+/// 在 Terminus 完成传送并在目标场景中恢复后触发此事件。
+/// </summary>
+public struct OnTerminusTransferComplete
+{
+    /// <summary>
+    /// 获取传送目标场景。
+    /// </summary>
+    public readonly Scene Scene;
+
+    /// <summary>
+    /// 获取完成传送的 Terminus 实例。
+    /// </summary>
+    public readonly Terminus Terminus;
+
+    /// <summary>
+    /// 获取 Terminus 关联的实体（如果存在）。
+    /// </summary>
+    public readonly Entity LinkEntity;
+
+    /// <summary>
+    /// 初始化一个新的 OnTerminusTransferComplete 实例。
+    /// </summary>
+    /// <param name="scene">传送目标场景</param>
+    /// <param name="terminus">完成传送的 Terminus</param>
+    /// <param name="linkEntity">Terminus 关联的实体</param>
+    public OnTerminusTransferComplete(Scene scene, Terminus terminus, Entity linkEntity)
+    {
+        Scene = scene;
+        Terminus = terminus;
+        LinkEntity = linkEntity;
+    }
+}
+
+/// <summary>
 /// 漫游终端实体
 /// </summary>
 public sealed class Terminus : Entity
@@ -307,6 +342,7 @@ public sealed class Terminus : Entity
     public async FTask<uint> TransferComplete(Scene scene)
     {
         // 首先恢复漫游终端的序列化数据。并且注册到框架中。
+        
         Deserialize(scene);
         TerminusId = RuntimeId;
         
@@ -317,7 +353,17 @@ public sealed class Terminus : Entity
         }
         
         // 然后要解锁下漫游
-        return await UnLock();
+        
+        var result = await UnLock();
+        
+        if (result != InnerErrorCode.Success)
+        {
+            return result;
+        }
+        
+        // 发送传送成功的事件
+        await scene.EventComponent.PublishAsync(new OnTerminusTransferComplete(scene, this, TerminusEntity!));
+        return result;
     }
 
     /// <summary>

@@ -261,6 +261,7 @@ namespace Fantasy
                     EntityPool.Dispose();
                     EntityListPool.Dispose();
                     EntitySortedDictionaryPool.Dispose();
+                    EventAwaiterPool.Dispose();
                     break;
                 }
                 case SceneRuntimeType.SubScene:
@@ -281,6 +282,7 @@ namespace Fantasy
             EntityPool = null;
             EntityListPool = null;
             EntitySortedDictionaryPool = null;
+            EventAwaiterPool = null;
             EntityComponent = null;
             TimerComponent = null;
             EventComponent = null;
