@@ -6,7 +6,7 @@ namespace Fantasy.Assembly
     /// <summary>
     /// 程序集生命周期回调接口
     /// 实现此接口的类型可以接收程序集的加载、卸载、重载事件通知
-    /// 通过 AssemblySystem.Add() 注册后，在程序集状态变化时会自动调用对应的生命周期方法
+    /// 通过 <see cref="AssemblyLifecycle.Add"/> 注册后，在程序集状态变化时会自动调用对应的生命周期方法。
     /// </summary>
     public interface IAssemblyLifecycle
     {
