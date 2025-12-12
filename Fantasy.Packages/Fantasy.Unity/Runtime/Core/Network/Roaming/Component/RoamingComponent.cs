@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Timer;
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
@@ -11,6 +12,54 @@ using Fantasy.Timer;
 #pragma warning disable CS8603 // Possible null reference return.
 
 namespace Fantasy.Network.Roaming;
+
+/// <summary>
+/// 创建漫游组件的状态
+/// </summary>
+public enum CreateRoamingStatus
+{
+    /// <summary>
+    /// 新创建的漫游组件
+    /// </summary>
+    NewCreated,
+
+    /// <summary>
+    /// 使用已存在的漫游组件
+    /// </summary>
+    AlreadyExists,
+
+    /// <summary>
+    /// 错误：当前Session已经创建了不同roamingId的漫游组件
+    /// </summary>
+    SessionAlreadyHasRoaming
+}
+
+/// <summary>
+/// 创建漫游组件的返回结果
+/// </summary>
+public readonly struct CreateRoamingResult
+{
+    /// <summary>
+    /// 创建状态
+    /// </summary>
+    public readonly CreateRoamingStatus Status;
+
+    /// <summary>
+    /// 漫游组件实例。如果创建失败则为null
+    /// </summary>
+    public readonly SessionRoamingComponent Roaming;
+
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    /// <param name="status">创建状态</param>
+    /// <param name="roamingComponent">漫游组件实例</param>
+    public CreateRoamingResult(CreateRoamingStatus status, SessionRoamingComponent roamingComponent)
+    {
+        Status = status;
+        Roaming = roamingComponent;
+    }
+}
 
 /// <summary>
 /// 漫游组件，用来管理当然Scene下的所有漫游消息。
@@ -65,23 +114,30 @@ public sealed class RoamingComponent : Entity
     /// <param name="isAutoDispose">是否在Session断开的时候自动断开漫游功能。</param>
     /// <param name="delayRemove">如果开启了自定断开漫游功能需要设置一个延迟多久执行断开。</param>
     /// <returns>创建成功会返回SessionRoamingComponent组件，这个组件提供漫游的所有功能。</returns>
-    internal async FTask<SessionRoamingComponent> Create(Session session, long roamingId, bool isAutoDispose, int delayRemove)
+    internal async FTask<CreateRoamingResult> Create(Session session, long roamingId, bool isAutoDispose, int delayRemove)
     {
+        CreateRoamingStatus status;
+        SessionRoamingComponent sessionRoamingComponent;
+
         if (session.SessionRoamingComponent != null)
         {
             if (session.SessionRoamingComponent.Id != roamingId)
             {
                 Log.Error("The current session has created a SessionRoamingComponent.");
-                return null;
+                return new CreateRoamingResult(CreateRoamingStatus.SessionAlreadyHasRoaming, null);
             }
+
+            sessionRoamingComponent = session.SessionRoamingComponent;
+            status = CreateRoamingStatus.AlreadyExists;
         }
         else
         {
-            if (!_sessionRoamingComponents.TryGetValue(roamingId, out var sessionRoamingComponent))
+            if (!_sessionRoamingComponents.TryGetValue(roamingId, out sessionRoamingComponent))
             {
                 sessionRoamingComponent = Entity.Create<SessionRoamingComponent>(Scene, roamingId, true, true);
                 sessionRoamingComponent.Initialize(session);
                 _sessionRoamingComponents.Add(roamingId, sessionRoamingComponent);
+                status = CreateRoamingStatus.NewCreated;
             }
             else
             {
@@ -89,7 +145,7 @@ public sealed class RoamingComponent : Entity
 
                 if (parentSession != null)
                 {
-                    // 这里要打印一个警告，说明当前已经绑定了一个Session并且Session没有断开。这时候会替换到这个Session。
+                    // 这里要打印一个警告,说明当前已经绑定了一个Session并且Session没有断开。这时候会替换到这个Session。
                     var sessionRoamingFlgComponent = parentSession.GetComponent<SessionRoamingFlgComponent>();
                     if (sessionRoamingFlgComponent != null)
                     {
@@ -105,11 +161,12 @@ public sealed class RoamingComponent : Entity
                     // 有可能关联的Session已经断开过，需要清除下定时删除任务
                     session.Scene.RoamingComponent.CancelRemoveTask(roamingId);
                 }
-                
+
                 sessionRoamingComponent.Session = session;
                 session.SessionRoamingComponent = sessionRoamingComponent;
                 // 重新设定ForwardSessionAddress
                 await sessionRoamingComponent.SetForwardSessionAddress(session);
+                status = CreateRoamingStatus.AlreadyExists;
             }
         }
 
@@ -117,13 +174,8 @@ public sealed class RoamingComponent : Entity
         {
             session.AddComponent<SessionRoamingFlgComponent>(roamingId).DelayRemove = delayRemove;
         }
-        
-        return session.SessionRoamingComponent;
-    }
 
-    private void Update()
-    {
-        
+        return new CreateRoamingResult(status, sessionRoamingComponent!);
     }
 
     /// <summary>
@@ -254,7 +306,22 @@ public static class RoamingHelper
     /// <param name="delayRemove">如果开启了自定断开漫游功能需要设置一个延迟多久执行断开。</param>
     /// <returns>创建成功会返回SessionRoamingComponent组件，这个组件提供漫游的所有功能。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static FTask<SessionRoamingComponent> CreateRoaming(this Session session, long roamingId, bool isAutoDispose = true, int delayRemove = 1000 * 60 * 3)
+    public static async FTask<SessionRoamingComponent> CreateRoaming(this Session session, long roamingId, bool isAutoDispose = true, int delayRemove = 1000 * 60 * 3)
+    {
+        return (await session.Scene.RoamingComponent.Create(session, roamingId, isAutoDispose, delayRemove)).Roaming;
+    }
+    
+    /// <summary>
+    /// 给Session会话增加漫游功能，返回详细的创建状态信息
+    /// 如果指定的roamingId已经存在漫游，会把这个漫游功能和当前Session会话关联起来。
+    /// </summary>
+    /// <param name="session"></param>
+    /// <param name="roamingId">自定义roamingId，这个Id在漫游中并没有实际作用，但用户可以用这个id来进行标记。</param>
+    /// <param name="isAutoDispose">是否在Session断开的时候自动断开漫游功能。</param>
+    /// <param name="delayRemove">如果开启了自定断开漫游功能需要设置一个延迟多久执行断开。</param>
+    /// <returns>返回CreateRoamingResult结构体，包含创建状态和漫游组件。</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static FTask<CreateRoamingResult> TryCreateRoaming(this Session session, long roamingId, bool isAutoDispose = true, int delayRemove = 1000 * 60 * 3)
     {
         return session.Scene.RoamingComponent.Create(session, roamingId, isAutoDispose, delayRemove);
     }

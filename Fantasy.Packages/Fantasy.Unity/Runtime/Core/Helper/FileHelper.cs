@@ -92,7 +92,13 @@ namespace Fantasy.Helper
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Copy(string sourceFile, string destinationFile, bool overwrite)
         {
-            CreateDirectory(destinationFile);
+            var directory = Path.GetDirectoryName(destinationFile);
+            
+            if (!string.IsNullOrEmpty(directory))
+            {
+                CreateDirectory(directory + "/");
+            }
+            
             File.Copy(sourceFile, destinationFile, overwrite);
         }
 

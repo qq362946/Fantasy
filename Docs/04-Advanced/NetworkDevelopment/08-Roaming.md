@@ -178,17 +178,40 @@ message Map2G_GetPlayerResponse // IRoamingResponse
 **核心 API：**
 
 ```csharp
-// 1. 创建 Roaming 组件
-RoamingComponent session.CreateRoaming(long roamingId, bool isAutoDispose, int delayRemove);
+// 1. 创建 Roaming 组件（简单版本，直接返回组件）
+SessionRoamingComponent session.CreateRoaming(long roamingId, bool isAutoDispose, int delayRemove);
 
-// 2. 链接到后端服务器
+// 2. 创建 Roaming 组件（详细版本，返回状态信息）
+CreateRoamingResult session.TryCreateRoaming(long roamingId, bool isAutoDispose, int delayRemove);
+
+// 3. 链接到后端服务器
 uint roaming.Link(Session session, SceneConfig sceneConfig, int roamingType);
 ```
 
-**完整示例：**
+**CreateRoamingResult 结构体：**
 
 ```csharp
-// Gate 服务器：处理客户端的登录请求
+public readonly struct CreateRoamingResult
+{
+    // 创建状态
+    public readonly CreateRoamingStatus Status;
+
+    // 漫游组件实例（如果创建失败则为null）
+    public readonly SessionRoamingComponent Roaming;
+}
+
+public enum CreateRoamingStatus
+{
+    NewCreated,              // 新创建的漫游组件
+    AlreadyExists,           // 使用已存在的漫游组件
+    SessionAlreadyHasRoaming // 错误：当前Session已经创建了不同roamingId的漫游组件
+}
+```
+
+**完整示例（使用 CreateRoaming）：**
+
+```csharp
+// Gate 服务器：处理客户端的登录请求 - 简单版本
 public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginResponse>
 {
     protected override async FTask Run(
@@ -201,11 +224,17 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
         // roamingId: 漫游的唯一标识，通常使用玩家 ID
         // isAutoDispose: Session 断开时是否自动断开漫游功能
         // delayRemove: 延迟多久执行断开（毫秒）
-        var roaming = session.CreateRoaming(
+        var roaming = await session.CreateRoaming(
             roamingId: request.PlayerId,
             isAutoDispose: true,
             delayRemove: 1000
         );
+
+        if (roaming == null)
+        {
+            response.ErrorCode = ErrorCode.RoamingCreateFailed;
+            return;
+        }
 
         // 步骤 2：链接到 Chat 服务器
         var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
@@ -222,6 +251,65 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
     }
 }
 ```
+
+**完整示例（使用 TryCreateRoaming）：**
+
+```csharp
+// Gate 服务器：处理客户端的登录请求 - 详细版本
+public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginResponse>
+{
+    protected override async FTask Run(
+        Session session,
+        C2G_LoginRequest request,
+        G2C_LoginResponse response,
+        Action reply)
+    {
+        // 步骤 1：创建 Roaming 组件，获取详细状态
+        var result = await session.TryCreateRoaming(
+            roamingId: request.PlayerId,
+            isAutoDispose: true,
+            delayRemove: 1000
+        );
+
+        // 根据状态进行不同处理
+        switch (result.Status)
+        {
+            case CreateRoamingStatus.NewCreated:
+                Log.Info($"✅ 为玩家 {request.PlayerId} 创建新的漫游组件");
+                break;
+
+            case CreateRoamingStatus.AlreadyExists:
+                Log.Info($"⚠️ 玩家 {request.PlayerId} 的漫游组件已存在，复用现有组件");
+                break;
+
+            case CreateRoamingStatus.SessionAlreadyHasRoaming:
+                Log.Error($"❌ Session 已经创建了其他 roamingId 的漫游组件");
+                response.ErrorCode = ErrorCode.SessionAlreadyHasRoaming;
+                return;
+        }
+
+        // 步骤 2：链接到 Chat 服务器
+        var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
+        var errorCode = await result.Roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+
+        if (errorCode != 0)
+        {
+            response.ErrorCode = errorCode;
+            return;
+        }
+
+        Log.Info($"✅ 为玩家 {request.PlayerId} 建立到Chat的漫游路由");
+        await FTask.CompletedTask;
+    }
+}
+```
+
+**两种方法的选择：**
+
+| 方法 | 适用场景 | 优点 | 缺点 |
+|------|---------|------|------|
+| `CreateRoaming()` | 简单场景，不需要详细状态 | 代码简洁，直接获取组件 | 无法区分新创建还是已存在 |
+| `TryCreateRoaming()` | 需要详细状态判断的场景 | 可以根据不同状态做不同处理 | 代码稍复杂 |
 
 ---
 
@@ -954,17 +1042,18 @@ Roaming 漫游系统的核心优势：
 
 **核心 API 速查：**
 
-| API | 说明 | 使用场景 |
-|-----|------|---------|
-| `session.CreateRoaming()` | Gate 创建 Roaming 组件 | 客户端登录时 |
-| `roaming.Link()` | 建立到后端服务器的路由 | 客户端登录时 |
-| `terminus.LinkTerminusEntity()` | 关联业务实体到 Terminus | OnCreateTerminus 事件中 |
-| `entity.Send(message)` | 向客户端发送消息 | 服务器主动推送 |
-| `entity.Send(roamingType, message)` | 向其他服务器发送消息 | 服务器间通信 |
-| `entity.Call(roamingType, request)` | 向其他服务器发送 RPC | 服务器间 RPC |
-| `entity.StartTransfer(address)` | 传送实体到目标服务器 | 跨服传送 |
-| `entity.GetLinkTerminus()` | 获取关联的 Terminus | 性能优化场景 |
-| `entity.TryGetLinkTerminus(out t)` | 安全获取关联的 Terminus | 性能优化场景 |
+| API | 返回值 | 说明 | 使用场景 |
+|-----|--------|------|---------|
+| `session.CreateRoaming()` | `SessionRoamingComponent` | Gate 创建 Roaming 组件（简单版本） | 不需要详细状态时 |
+| `session.TryCreateRoaming()` | `CreateRoamingResult` | Gate 创建 Roaming 组件（详细版本，包含状态） | 需要判断创建状态时 |
+| `roaming.Link()` | `uint` | 建立到后端服务器的路由 | 客户端登录时 |
+| `terminus.LinkTerminusEntity()` | `FTask<T>` | 关联业务实体到 Terminus | OnCreateTerminus 事件中 |
+| `entity.Send(message)` | `void` | 向客户端发送消息 | 服务器主动推送 |
+| `entity.Send(roamingType, message)` | `void` | 向其他服务器发送消息 | 服务器间通信 |
+| `entity.Call(roamingType, request)` | `FTask<IResponse>` | 向其他服务器发送 RPC | 服务器间 RPC |
+| `entity.StartTransfer(address)` | `FTask<uint>` | 传送实体到目标服务器 | 跨服传送 |
+| `entity.GetLinkTerminus()` | `Terminus` | 获取关联的 Terminus | 性能优化场景 |
+| `entity.TryGetLinkTerminus(out t)` | `bool` | 安全获取关联的 Terminus | 性能优化场景 |
 
 **性能优化建议：**
 
