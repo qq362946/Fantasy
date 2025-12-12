@@ -51,6 +51,11 @@ public sealed class MessageDefinition
     public ProtocolSettings Protocol { get; set; } = new();
 
     /// <summary>
+    /// 自定义类标签, 根据条件编译符分组
+    /// </summary>
+    public CustomAttributesByIfDefine CustomClassAttributesByIfDefine { get; init; } = new();
+
+    /// <summary>
     /// 消息字段列表
     /// </summary>
     public List<FieldDefinition> Fields { get; set; } = new();

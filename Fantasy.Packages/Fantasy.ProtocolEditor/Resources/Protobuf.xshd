@@ -2,9 +2,11 @@
 <SyntaxDefinition name="Protobuf" extensions=".proto" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
 
   <!-- Soft Eye-Friendly Color Palette (Similar to screenshot) -->
-  <Color name="Comment" foreground="#5C6370" />
+  <Color name="Default" foreground="#C8C8C8" />
+  <Color name="Comment" foreground="#C8C8C8" />
   <Color name="CommentInterface" foreground="#56B6C2" fontWeight="bold" />
   <Color name="CommentKeyword" foreground="#61AFEF" />
+  <Color name="Langword" foreground="#61AFEF"/>
   <Color name="String" foreground="#98C379" />
   <Color name="Keyword" foreground="#C678DD" fontWeight="bold" />
   <Color name="TypeKeyword" foreground="#61AFEF" fontWeight="bold" />
@@ -12,8 +14,9 @@
   <Color name="MessageTypeInComment" foreground="#D19A66" />
   <Color name="FieldNumber" foreground="#D19A66" />
   <Color name="Interface" foreground="#56B6C2" fontWeight="bold" />
+  <Color name="Punctuation" foreground="#B8B8B8" />
 
-  <RuleSet ignoreCase="false">
+  <RuleSet ignoreCase="false" defaultColor="Default">
     <!-- Line Comments with Interface highlighting -->
     <Span color="Comment" begin="//" ruleSet="CommentRules" />
 
@@ -105,26 +108,36 @@
     <Rule color="MessageType">
       (?&lt;=\bmessage\s+)[A-Z\u4E00-\u9FFF][A-Za-z0-9_\u4E00-\u9FFF\u3400-\u4DBF\u3040-\u30FF\uAC00-\uD7AF]*
     </Rule>
+
   </RuleSet>
 
   <!-- RuleSet for inside comments -->
-  <RuleSet name="CommentRules">
-    <!-- Custom message type names in comments (e.g., G2C_TestResponse, C2G_TestMessage) -->
-    <!-- This rule must come before Keywords to match longer identifiers -->
-    <Rule color="MessageTypeInComment">
-      [A-Z\u4E00-\u9FFF][A-Za-z0-9_\u4E00-\u9FFF\u3400-\u4DBF\u3040-\u30FF\uAC00-\uD7AF]*
-    </Rule>
+  <RuleSet name="CommentRules" defaultColor="Default">
+
+    <!-- Langwords-->
+    <Keywords color="Langword">
+      <Word>If</Word>
+      <Word>Endif</Word>
+      <Word>Using</Word>
+      <Word>TheseMessagesIf</Word>
+    </Keywords>
+
+    <Rule color="Langword">\[.*?\]</Rule>
 
     <!-- Fantasy Framework Interfaces in comments -->
     <Keywords color="CommentInterface">
       <Word>IMessage</Word>
       <Word>IRequest</Word>
       <Word>IResponse</Word>
-      <Word>IRouteMessage</Word>
-      <Word>IAddressableRouteMessage</Word>
-      <Word>IAddressableRouteRequest</Word>
+      <Word>IAddressMessage</Word>
+      <Word>IAddressRequest</Word>
+      <Word>IAddressResponse</Word>
+      <Word>IAddressableMessage</Word>
+      <Word>IAddressableRequest</Word>
+      <Word>IAddressableResponse</Word>
       <Word>ICustomRouteMessage</Word>
       <Word>ICustomRouteRequest</Word>
+      <Word>ICustomRouteResponse</Word>
       <Word>IRoamingMessage</Word>
       <Word>IRoamingRequest</Word>
       <Word>IRoamingResponse</Word>
@@ -137,6 +150,12 @@
       <Word>MemoryPack</Word>
       <Word>Bson</Word>
     </Keywords>
+
+    <!-- Punctuation 标点符号 -->
+    <Rule color="Punctuation">
+      [\x21-\x2E\x3A-\x40\x5B-\x60\x7B-\x7E0-9]
+    </Rule>
+    
   </RuleSet>
 
 </SyntaxDefinition>

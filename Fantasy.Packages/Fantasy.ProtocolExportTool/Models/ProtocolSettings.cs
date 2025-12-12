@@ -19,7 +19,7 @@ public sealed class ProtocolSettings
     public uint OpCodeType { get; init; } = OpCodeProtocolType.ProtoBuf;
 
     /// <summary>
-    /// 类级别特性 (如 [ProtoContract], 自定义特性, null 表示无特性)
+    /// 协议标签 (如 [ProtoContract], null 表示无特性)
     /// </summary>
     public string? ClassAttribute { get; init; } = "[ProtoContract]";
 
@@ -37,11 +37,6 @@ public sealed class ProtocolSettings
     /// 序列化索引起始值
     /// </summary>
     public int KeyStartIndex { get; init; } = 1;
-
-    /// <summary>
-    /// 需要引入的命名空间
-    /// </summary>
-    public HashSet<string> RequiredNamespaces { get; init; } = [];
 
     /// <summary>
     /// 创建默认 ProtoBuf 设置
