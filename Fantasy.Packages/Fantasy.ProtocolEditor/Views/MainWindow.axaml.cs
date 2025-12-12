@@ -47,6 +47,9 @@ public partial class MainWindow : Window
     // 上次错误输出的起始位置（用于删除旧错误信息）
     private int _lastErrorOutputPosition = -1;
 
+    // 当前打开的右键菜单（用于防止多个菜单同时显示）
+    private ContextMenu? _currentContextMenu = null;
+
     public MainWindow()
     {
         InitializeComponent();
@@ -1442,6 +1445,24 @@ public partial class MainWindow : Window
             // 显示菜单
             if (contextMenu != null)
             {
+                // 关闭之前打开的菜单（如果有）
+                if (_currentContextMenu != null && _currentContextMenu.IsOpen)
+                {
+                    _currentContextMenu.Close();
+                }
+
+                // 保存当前菜单引用
+                _currentContextMenu = contextMenu;
+
+                // 监听菜单关闭事件，清空引用
+                contextMenu.Closed += (s, args) =>
+                {
+                    if (_currentContextMenu == contextMenu)
+                    {
+                        _currentContextMenu = null;
+                    }
+                };
+
                 contextMenu.PlacementTarget = border;
                 contextMenu.Open(border);
                 e.Handled = true;
