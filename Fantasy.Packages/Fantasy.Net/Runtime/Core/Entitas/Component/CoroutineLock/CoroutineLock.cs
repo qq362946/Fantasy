@@ -13,7 +13,7 @@ namespace Fantasy.Async
     /// <summary>
     /// 协程锁专用的对象池
     /// </summary>
-    public sealed class CoroutineLockPool : PoolCore<CoroutineLock>
+    public sealed class CoroutineLockPool : PoolStack<CoroutineLock>
     {
         /// <summary>
         /// 协程锁专用的对象池的构造函数

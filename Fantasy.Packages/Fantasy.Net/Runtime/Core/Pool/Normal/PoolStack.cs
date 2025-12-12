@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System.Linq;
 using Fantasy.DataStructure.Collection;
 
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
@@ -11,23 +11,35 @@ namespace Fantasy.Pool
 {
     /// <summary>
     /// 对象池抽象类，用于创建和管理可重复使用的对象实例。
-    /// 相比<see cref="PoolStack"/>具备公平性(池中对象不会被平等地利用), 但有可能在开发时难以暴露池对象未清理干净的问题。
+    /// 使用内部 Stack 来管理每种类型的池。
+    /// 比基于<see cref="Queue{T}"/>的实现<see cref="PoolCore"/>略快)。
+    /// 缓存友好, 且能更好地在开发时暴露池对象未清理干净的问题, 但是不具备公平性(池中对象不会被平等地利用)。
     /// </summary>
-    public abstract class PoolCore : IDisposable
+    public abstract class PoolStack : IDisposable
     {
         private int _poolCount;
         private readonly int _maxCapacity;
+        private readonly Dictionary<RuntimeTypeHandle, Stack<IPool>> _poolStacks = new();
+
         /// <summary>
         /// 池子里可用的数量
         /// </summary>
-        public int Count => _poolQueue.Count;
-        private readonly OneToManyQueue<RuntimeTypeHandle, IPool> _poolQueue = new OneToManyQueue<RuntimeTypeHandle, IPool>();
+        public int Count
+        {
+            get
+            {
+                int count = 0;
+                foreach (var stack in _poolStacks.Values)
+                    count += stack.Count;
+                return count;
+            }
+        }
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="maxCapacity">初始的容量</param>
-        protected PoolCore(int maxCapacity)
+        protected PoolStack(int maxCapacity)
         {
             _maxCapacity = maxCapacity;
         }
@@ -35,68 +47,65 @@ namespace Fantasy.Pool
         /// <summary>
         /// 租借
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
         public T Rent<T>() where T : IPool, new()
         {
-            if (!_poolQueue.TryDequeue(typeof(T).TypeHandle, out var queue))
+            var typeHandle = typeof(T).TypeHandle;
+            if (!_poolStacks.TryGetValue(typeHandle, out var stack) || stack.Count == 0)
             {
-                queue = new T();
+                stack = stack ?? new Stack<IPool>();
+                var instance = new T();
+                instance.SetIsPool(true);
+                _poolCount--;
+                return instance;
             }
-            
-            queue.SetIsPool(true);
+
+            var obj = stack.Pop();
+            obj.SetIsPool(true);
             _poolCount--;
-            return (T)queue;
+            return (T)obj;
         }
 
         /// <summary>
         /// 租借
         /// </summary>
-        /// <param name="scene">对应的Scene</param>
-        /// <param name="type">租借的类型</param>
-        /// <returns></returns>
-        /// <exception cref="NotSupportedException"></exception>
         public IPool Rent(Scene scene, Type type)
         {
-            var runtimeTypeHandle = type.TypeHandle;
-
-            if (!_poolQueue.TryDequeue(runtimeTypeHandle, out var queue))
+            var typeHandle = type.TypeHandle;
+            if (!_poolStacks.TryGetValue(typeHandle, out var stack) || stack.Count == 0)
             {
                 var instance = scene.PoolGeneratorComponent.Create(type);
                 instance.SetIsPool(true);
                 return instance;
             }
 
-            queue.SetIsPool(true);
+            var obj = stack.Pop();
+            obj.SetIsPool(true);
             _poolCount--;
-            return queue;
+            return obj;
         }
 
         /// <summary>
         /// 返还
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="obj"></param>
         public void Return(Type type, IPool obj)
         {
-            if (obj == null)
-            {
+            if (obj == null || !obj.IsPool())
                 return;
-            }
-
-            if (!obj.IsPool())
-            {
-                return;
-            }
 
             if (_poolCount >= _maxCapacity)
-            {
                 return;
-            }
 
             _poolCount++;
             obj.SetIsPool(false);
-            _poolQueue.Enqueue(type.TypeHandle, obj);
+
+            var typeHandle = type.TypeHandle;
+            if (!_poolStacks.TryGetValue(typeHandle, out var stack))
+            {
+                stack = new Stack<IPool>();
+                _poolStacks[typeHandle] = stack;
+            }
+
+            stack.Push(obj);
         }
 
         /// <summary>
@@ -105,20 +114,20 @@ namespace Fantasy.Pool
         public virtual void Dispose()
         {
             _poolCount = 0;
-            _poolQueue.Clear();
+            _poolStacks.Clear();
         }
     }
 
     /// <summary>
-    /// 泛型对象池核心类，用于创建和管理可重复使用的对象实例。
-    /// 基于<see cref="Queue{T}"/>的实现, 具备池内公平性, 但有可能在开发时难以暴露池对象未清理干净的问题。
+    /// 泛型对象栈池(基于<see cref="Stack{T}"/>的实现, 比基于<see cref="Queue{T}"/>的实现<see cref="PoolCore"/>略快)。
+    /// 缓存友好, 且能更好地在开发时暴露池对象未清理干净的问题, 但是不具备公平性(池中对象不会被平等地利用)。
     /// </summary>
     /// <typeparam name="T">要池化的对象类型</typeparam>
-    public abstract class PoolCore<T> where T : IPool, new()
+    public abstract class PoolStack<T> where T : IPool, new()
     {
         private int _poolCount;
         private readonly int _maxCapacity;
-        private readonly Queue<T> _poolQueue = new Queue<T>();
+        private readonly Stack<T> _poolQueue = new Stack<T>();
         /// <summary>
         /// 池子里可用的数量
         /// </summary>
@@ -128,10 +137,10 @@ namespace Fantasy.Pool
         /// 构造函数
         /// </summary>
         /// <param name="maxCapacity">初始的容量</param>
-        protected PoolCore(int maxCapacity)
+        protected PoolStack(int maxCapacity)
         {
             _maxCapacity = maxCapacity;
-        } 
+        }
 
         /// <summary>
         /// 租借
@@ -140,21 +149,21 @@ namespace Fantasy.Pool
         public virtual T Rent()
         {
             T dequeue;
-            
-            if (_poolQueue.Count == 0)
+
+            if (!_poolQueue.TryPop(out T Out))
             {
                 dequeue = new T();
             }
             else
             {
                 _poolCount--;
-                dequeue = _poolQueue.Dequeue();
+                dequeue = Out;
             }
-            
+
             dequeue.SetIsPool(true);
             return dequeue;
         }
-        
+
         /// <summary>
         /// 返还
         /// </summary>
@@ -165,7 +174,7 @@ namespace Fantasy.Pool
             {
                 return;
             }
-            
+
             if (!item.IsPool())
             {
                 return;
@@ -178,9 +187,9 @@ namespace Fantasy.Pool
 
             _poolCount++;
             item.SetIsPool(false);
-            _poolQueue.Enqueue(item);
+            _poolQueue.Push(item);
         }
-        
+
         /// <summary>
         /// 销毁方法
         /// </summary>

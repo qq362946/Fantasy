@@ -6,7 +6,7 @@ using Fantasy.Pool;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 namespace Fantasy.Async
 {
-    internal sealed class WaitCoroutineLockPool : PoolCore<WaitCoroutineLock>
+    internal sealed class WaitCoroutineLockPool : PoolStack<WaitCoroutineLock>
     {
         private readonly Scene _scene;
         private readonly CoroutineLockComponent _coroutineLockComponent;

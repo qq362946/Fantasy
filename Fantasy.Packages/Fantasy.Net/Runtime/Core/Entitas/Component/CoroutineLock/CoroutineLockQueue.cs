@@ -6,7 +6,7 @@ using Fantasy.Pool;
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 namespace Fantasy.Async
 {
-    internal sealed class CoroutineLockQueuePool : PoolCore<CoroutineLockQueue>
+    internal sealed class CoroutineLockQueuePool : PoolStack<CoroutineLockQueue>
     {
         public CoroutineLockQueuePool() : base(2000) { }
     }

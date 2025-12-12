@@ -5,7 +5,7 @@ using Fantasy.Pool;
 
 namespace Fantasy.Entitas
 {
-    internal sealed class EntityPool : PoolCore
+    internal sealed class EntityPool : PoolStack
     {
         public EntityPool() : base(4096) { }
     }
