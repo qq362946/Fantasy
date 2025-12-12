@@ -138,6 +138,10 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("_initialized = true;");
             builder.AppendLine();
 
+            // 执行手动注册MemoryPack的序列化器
+            builder.AddComment("Perform manual registration of the MemoryPack serializer");
+            builder.AppendLine($"{replaceAssemblyName}_MemoryPackInitializer.Initialize();");
+            
             // 获取程序集并计算唯一标识
             builder.AddComment("Get assembly and calculate manifest ID");
             builder.AppendLine($"var assembly = typeof({markerClassName}).Assembly;");
