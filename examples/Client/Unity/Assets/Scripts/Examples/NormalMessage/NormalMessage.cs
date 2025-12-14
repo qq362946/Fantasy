@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Fantasy;
 using Fantasy.Async;
 using Fantasy.Entitas;
@@ -31,6 +30,7 @@ public class NormalMessage : MonoBehaviour
     
     private void Start()
     {
+        Application.targetFrameRate = 30;
         StartAsync().Coroutine();
     }
     
@@ -99,7 +99,7 @@ public class NormalMessage : MonoBehaviour
     {
         Log.Debug("OnConnectComplete");
         Text.text = "连接成功";
-        _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
+        // _session.AddComponent<SessionHeartbeatComponent>().Start(2000);
         ConnectButton.interactable = false;
         SendMessageButton.interactable = true;
         SendRPCMessageButton.interactable = true;

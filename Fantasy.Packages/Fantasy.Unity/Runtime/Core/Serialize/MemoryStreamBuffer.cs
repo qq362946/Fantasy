@@ -15,7 +15,11 @@ namespace Fantasy.Serialize
     public sealed class MemoryStreamBuffer : MemoryStream, IBufferWriter<byte>
     {
         public MemoryStreamBufferSource MemoryStreamBufferSource;
-        public MemoryStreamBuffer() { }
+
+        public MemoryStreamBuffer() : base(256)
+        {
+            // 使用 capacity 参数的构造函数，这样创建的 MemoryStream 支持 GetBuffer()
+        }
 
         public MemoryStreamBuffer(MemoryStreamBufferSource memoryStreamBufferSource, int capacity) : base(capacity)
         {
@@ -47,11 +51,26 @@ namespace Fantasy.Serialize
                 throw new ArgumentOutOfRangeException(nameof(sizeHint), sizeHint, "The value of 'count' cannot be negative.");
             }
 
-            if (Length - Position <= sizeHint)
+            var availableSpace = Length - Position;
+
+            // 当没有足够可用空间时，需要扩展
+            if (availableSpace <= sizeHint)
             {
-                SetLength(Position + sizeHint);
+                // 当 sizeHint=0 时，至少扩展到 Capacity 或者增加一些空间
+                long newLength;
+                if (sizeHint == 0)
+                {
+                    // sizeHint=0 时，扩展到整个 Capacity，确保有足够空间
+                    newLength = Math.Max(Capacity, Position + 256);
+                }
+                else
+                {
+                    newLength = Position + sizeHint;
+                }
+
+                SetLength(newLength);
             }
-            
+
             return new Memory<byte>(GetBuffer(), (int)Position, (int)(Length - Position));
         }
 
@@ -61,12 +80,27 @@ namespace Fantasy.Serialize
             {
                 throw new ArgumentOutOfRangeException(nameof(sizeHint), sizeHint, "The value of 'count' cannot be negative.");
             }
-            
-            if (Length - Position <= sizeHint)
+
+            var availableSpace = Length - Position;
+
+            // 当没有足够可用空间时，需要扩展
+            if (availableSpace <= sizeHint)
             {
-                SetLength(Position + sizeHint);
+                // 当 sizeHint=0 时，至少扩展到 Capacity 或者增加一些空间
+                long newLength;
+                if (sizeHint == 0)
+                {
+                    // sizeHint=0 时，扩展到整个 Capacity，确保有足够空间
+                    newLength = Math.Max(Capacity, Position + 256);
+                }
+                else
+                {
+                    newLength = Position + sizeHint;
+                }
+
+                SetLength(newLength);
             }
-            
+
             return new Span<byte>(GetBuffer(), (int)Position, (int)(Length - Position));
         }
     }

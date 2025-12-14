@@ -55,5 +55,7 @@ namespace Fantasy
         public const uint G2C_UnsubscribeSphereEventResponse = 402663193;
         public const uint C2G_MapUnsubscribeSphereEventRequest = 268445466;
         public const uint G2C_MapUnsubscribeSphereEventResponse = 402663194;
+        public const uint C2G_带标签的消息 = 134227737;
+        public const uint C2M_带标签且条件编译的消息 = 134227738;
     }
 }

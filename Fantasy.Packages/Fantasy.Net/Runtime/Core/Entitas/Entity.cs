@@ -5,9 +5,9 @@ using System.Runtime.Serialization;
 using Fantasy.Entitas.Interface;
 using Fantasy.IdFactory;
 using Fantasy.Pool;
+using LightProto;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
-using ProtoBuf;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable MergeIntoPattern
 // ReSharper disable SuspiciousTypeConversion.Global

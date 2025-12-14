@@ -26,11 +26,7 @@ namespace Fantasy.DataStructure.Dictionary
         /// <returns>新创建的实例。</returns>
         public static DoubleMapDictionaryPool<TKey, TValue> Create()
         {
-#if FANTASY_WEBGL
             var a = Pool<DoubleMapDictionaryPool<TKey, TValue>>.Rent();
-#else
-            var a = MultiThreadPool.Rent<DoubleMapDictionaryPool<TKey, TValue>>();
-#endif
             a._isDispose = false;
             a._isPool = true;
             return a;
@@ -49,11 +45,7 @@ namespace Fantasy.DataStructure.Dictionary
 
             _isDispose = true;
             Clear();
-#if FANTASY_WEBGL
             Pool<DoubleMapDictionaryPool<TKey, TValue>>.Return(this);
-#else
-            MultiThreadPool.Return(this);
-#endif
         }
 
         /// <summary>

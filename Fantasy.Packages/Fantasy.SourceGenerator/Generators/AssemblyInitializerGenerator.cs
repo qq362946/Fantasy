@@ -196,6 +196,8 @@ namespace Fantasy.SourceGenerator.Generators
                 "Fantasy.Assembly.ICustomInterfaceRegistrar? customInterfaceRegistrar = null;");
             builder.AppendLine(
                 "Fantasy.Assembly.IPoolCreatorGenerator? poolCreatorGeneratorRegistrar = null;");
+            builder.AppendLine(
+                "Fantasy.Assembly.IProtoBufDispatcherRegistrar? protoBufDispatcherRegistrar = null;");
             builder.AppendLine();
             
             // 尝试创建各个注册器（如果存在）replaceAssemblyName
@@ -214,6 +216,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("#endif", false);
             GenerateTryCreateRegistrar(builder, $"{replaceAssemblyName}_CustomInterface", "customInterfaceRegistrar");
             GenerateTryCreateRegistrar(builder, $"{replaceAssemblyName}_PoolCreatorGenerator", "poolCreatorGeneratorRegistrar");
+            GenerateTryCreateRegistrar(builder, $"{replaceAssemblyName}_ProtoBufDispatcher", "protoBufDispatcherRegistrar");
             
             builder.AppendLine();
 
@@ -235,7 +238,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("sphereEventRegistrar,");
             builder.AppendLine("customInterfaceRegistrar,");
             builder.AppendLine("fantasyConfigRegistrar,");
-            builder.AppendLine("poolCreatorGeneratorRegistrar);");
+            builder.AppendLine("poolCreatorGeneratorRegistrar,");
+            builder.AppendLine("protoBufDispatcherRegistrar);");
             builder.Unindent();
             builder.AppendLine("#endif", false);
             builder.AppendLine("#if FANTASY_UNITY", false);
@@ -251,7 +255,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("opCodeRegistrar,");
             builder.AppendLine("responseTypeRegistrar,");
             builder.AppendLine("customInterfaceRegistrar,");
-            builder.AppendLine("poolCreatorGeneratorRegistrar);");
+            builder.AppendLine("poolCreatorGeneratorRegistrar,");
+            builder.AppendLine("protoBufDispatcherRegistrar);");
             builder.Unindent();
             builder.AppendLine("#endif", false);
             builder.EndMethod();

@@ -156,11 +156,12 @@ public sealed class CSharpExporter(
     protected override string GenerateOuterMessages(CustomNamespacesByIfDefine _outerCustomNamespaces, MessagesByIfDefine messageDefinitions)
     {
         return messageDefinitions.Count == 0 ? string.Empty : $$"""
-                                                                using ProtoBuf;
+                                                                using LightProto;
                                                                 using System;
                                                                 using MemoryPack;
                                                                 using System.Collections.Generic;
                                                                 using Fantasy;
+                                                                using Fantasy.Pool;
                                                                 using Fantasy.Network.Interface;
                                                                 using Fantasy.Serialize;
                                                                 {{_outerCustomNamespaces.ToCSharpLines()}}
@@ -184,18 +185,19 @@ public sealed class CSharpExporter(
                                                                 """;
     }
 
-    protected override string GenerateInnerMessages(CustomNamespacesByIfDefine _innerCustomNamespaces,MessagesByIfDefine messageDefinitions)
+    protected override string GenerateInnerMessages(CustomNamespacesByIfDefine innerCustomNamespaces, MessagesByIfDefine messageDefinitions)
     {
         return messageDefinitions.Count == 0 ? string.Empty : $$"""
-                                                                using ProtoBuf;
+                                                                using LightProto;
                                                                 using MemoryPack;
                                                                 using System;
                                                                 using System.Collections.Generic;
                                                                 using MongoDB.Bson.Serialization.Attributes;
                                                                 using Fantasy;
+                                                                using Fantasy.Pool;
                                                                 using Fantasy.Network.Interface;
                                                                 using Fantasy.Serialize;
-                                                                {{_innerCustomNamespaces.ToCSharpLines()}}
+                                                                {{innerCustomNamespaces.ToCSharpLines()}}
                                                                 // ReSharper disable InconsistentNaming
                                                                 // ReSharper disable CollectionNeverUpdated.Global
                                                                 // ReSharper disable RedundantTypeArgumentsOfMethod
@@ -261,7 +263,7 @@ public sealed class CSharpExporter(
                                 helper.AppendLine("\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
                                 helper.AppendLine($"\t\tpublic static void {messageDefinition.Name}(this Session session, {parameters})");
                                 helper.AppendLine("\t\t{");
-                                helper.AppendLine($"\t\t\tusing var message = Fantasy.{messageDefinition.Name}.Create(session.Scene);");
+                                helper.AppendLine($"\t\t\tusing var message = Fantasy.{messageDefinition.Name}.Create();");
 
                                 foreach (var field in messageDefinition.Fields)
                                 {
@@ -276,7 +278,7 @@ public sealed class CSharpExporter(
                                 helper.AppendLine("\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
                                 helper.AppendLine($"\t\tpublic static void {messageDefinition.Name}(this Session session)");
                                 helper.AppendLine("\t\t{");
-                                helper.AppendLine($"\t\t\tusing var message = Fantasy.{messageDefinition.Name}.Create(session.Scene);");
+                                helper.AppendLine($"\t\t\tusing var message = Fantasy.{messageDefinition.Name}.Create();");
                                 helper.AppendLine("\t\t\tsession.Send(message);");
                                 helper.AppendLine("\t\t}");
                             }
@@ -301,7 +303,7 @@ public sealed class CSharpExporter(
                                 helper.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
                                 helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinition.Name}(this Session session, {parameters})");
                                 helper.AppendLine("\t\t{");
-                                helper.AppendLine($"\t\t\tusing var request = Fantasy.{messageDefinition.Name}.Create(session.Scene);");
+                                helper.AppendLine($"\t\t\tusing var request = Fantasy.{messageDefinition.Name}.Create();");
                                 foreach (var field in messageDefinition.Fields)
                                 {
                                     helper.AppendLine($"\t\t\trequest.{field.Name} = {char.ToLower(field.Name[0])}{field.Name[1..]};");
@@ -314,7 +316,7 @@ public sealed class CSharpExporter(
                                 helper.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
                                 helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinition.Name}(this Session session)");
                                 helper.AppendLine("\t\t{");
-                                helper.AppendLine($"\t\t\tusing var request = Fantasy.{messageDefinition.Name}.Create(session.Scene);");
+                                helper.AppendLine($"\t\t\tusing var request = Fantasy.{messageDefinition.Name}.Create();");
                                 helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call(request);");
                                 helper.AppendLine("\t\t}");
                             }

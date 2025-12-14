@@ -16,7 +16,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2G_TestEmptyMessage(this Session session)
 		{
-			using var message = Fantasy.C2G_TestEmptyMessage.Create(session.Scene);
+			using var message = Fantasy.C2G_TestEmptyMessage.Create();
 			session.Send(message);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -27,7 +27,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2G_TestMessage(this Session session, string tag)
 		{
-			using var message = Fantasy.C2G_TestMessage.Create(session.Scene);
+			using var message = Fantasy.C2G_TestMessage.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -39,7 +39,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<G2C_TestResponse> C2G_TestRequest(this Session session, string tag)
 		{
-			using var request = Fantasy.C2G_TestRequest.Create(session.Scene);
+			using var request = Fantasy.C2G_TestRequest.Create();
 			request.Tag = tag;
 			return (G2C_TestResponse)await session.Call(request);
 		}
@@ -51,7 +51,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2G_TestRequestPushMessage(this Session session)
 		{
-			using var message = Fantasy.C2G_TestRequestPushMessage.Create(session.Scene);
+			using var message = Fantasy.C2G_TestRequestPushMessage.Create();
 			session.Send(message);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -62,7 +62,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void G2C_PushMessage(this Session session, string tag)
 		{
-			using var message = Fantasy.G2C_PushMessage.Create(session.Scene);
+			using var message = Fantasy.G2C_PushMessage.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -74,7 +74,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<G2C_CreateAddressableResponse> C2G_CreateAddressableRequest(this Session session)
 		{
-			using var request = Fantasy.C2G_CreateAddressableRequest.Create(session.Scene);
+			using var request = Fantasy.C2G_CreateAddressableRequest.Create();
 			return (G2C_CreateAddressableResponse)await session.Call(request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -85,7 +85,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2M_TestMessage(this Session session, string tag)
 		{
-			using var message = Fantasy.C2M_TestMessage.Create(session.Scene);
+			using var message = Fantasy.C2M_TestMessage.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -97,7 +97,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<M2C_TestResponse> C2M_TestRequest(this Session session, string tag)
 		{
-			using var request = Fantasy.C2M_TestRequest.Create(session.Scene);
+			using var request = Fantasy.C2M_TestRequest.Create();
 			request.Tag = tag;
 			return (M2C_TestResponse)await session.Call(request);
 		}
@@ -109,7 +109,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<G2C_CreateChatRouteResponse> C2G_CreateChatRouteRequest(this Session session)
 		{
-			using var request = Fantasy.C2G_CreateChatRouteRequest.Create(session.Scene);
+			using var request = Fantasy.C2G_CreateChatRouteRequest.Create();
 			return (G2C_CreateChatRouteResponse)await session.Call(request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -120,7 +120,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2Chat_TestMessage(this Session session, string tag)
 		{
-			using var message = Fantasy.C2Chat_TestMessage.Create(session.Scene);
+			using var message = Fantasy.C2Chat_TestMessage.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -132,7 +132,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<Chat2C_TestMessageResponse> C2Chat_TestMessageRequest(this Session session, string tag)
 		{
-			using var request = Fantasy.C2Chat_TestMessageRequest.Create(session.Scene);
+			using var request = Fantasy.C2Chat_TestMessageRequest.Create();
 			request.Tag = tag;
 			return (Chat2C_TestMessageResponse)await session.Call(request);
 		}
@@ -144,7 +144,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<M2C_MoveToMapResponse> C2M_MoveToMapRequest(this Session session)
 		{
-			using var request = Fantasy.C2M_MoveToMapRequest.Create(session.Scene);
+			using var request = Fantasy.C2M_MoveToMapRequest.Create();
 			return (M2C_MoveToMapResponse)await session.Call(request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -155,7 +155,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2G_SendAddressableToMap(this Session session, string tag)
 		{
-			using var message = Fantasy.C2G_SendAddressableToMap.Create(session.Scene);
+			using var message = Fantasy.C2G_SendAddressableToMap.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -167,7 +167,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2Chat_TestRequestPushMessage(this Session session)
 		{
-			using var message = Fantasy.C2Chat_TestRequestPushMessage.Create(session.Scene);
+			using var message = Fantasy.C2Chat_TestRequestPushMessage.Create();
 			session.Send(message);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -178,7 +178,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Chat2C_PushMessage(this Session session, string tag)
 		{
-			using var message = Fantasy.Chat2C_PushMessage.Create(session.Scene);
+			using var message = Fantasy.Chat2C_PushMessage.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -190,7 +190,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<G2C_CreateSubSceneResponse> C2G_CreateSubSceneRequest(this Session session)
 		{
-			using var request = Fantasy.C2G_CreateSubSceneRequest.Create(session.Scene);
+			using var request = Fantasy.C2G_CreateSubSceneRequest.Create();
 			return (G2C_CreateSubSceneResponse)await session.Call(request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -201,7 +201,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2G_SendToSubSceneMessage(this Session session)
 		{
-			using var message = Fantasy.C2G_SendToSubSceneMessage.Create(session.Scene);
+			using var message = Fantasy.C2G_SendToSubSceneMessage.Create();
 			session.Send(message);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -212,7 +212,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<G2C_CreateSubSceneAddressableResponse> C2G_CreateSubSceneAddressableRequest(this Session session)
 		{
-			using var request = Fantasy.C2G_CreateSubSceneAddressableRequest.Create(session.Scene);
+			using var request = Fantasy.C2G_CreateSubSceneAddressableRequest.Create();
 			return (G2C_CreateSubSceneAddressableResponse)await session.Call(request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -223,7 +223,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2SubScene_TestMessage(this Session session, string tag)
 		{
-			using var message = Fantasy.C2SubScene_TestMessage.Create(session.Scene);
+			using var message = Fantasy.C2SubScene_TestMessage.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -235,7 +235,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2SubScene_TestDisposeMessage(this Session session)
 		{
-			using var message = Fantasy.C2SubScene_TestDisposeMessage.Create(session.Scene);
+			using var message = Fantasy.C2SubScene_TestDisposeMessage.Create();
 			session.Send(message);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -246,7 +246,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<G2C_ConnectRoamingResponse> C2G_ConnectRoamingRequest(this Session session)
 		{
-			using var request = Fantasy.C2G_ConnectRoamingRequest.Create(session.Scene);
+			using var request = Fantasy.C2G_ConnectRoamingRequest.Create();
 			return (G2C_ConnectRoamingResponse)await session.Call(request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -257,7 +257,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2Chat_TestRoamingMessage(this Session session, string tag)
 		{
-			using var message = Fantasy.C2Chat_TestRoamingMessage.Create(session.Scene);
+			using var message = Fantasy.C2Chat_TestRoamingMessage.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -269,7 +269,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2Map_TestRoamingMessage(this Session session, string tag)
 		{
-			using var message = Fantasy.C2Map_TestRoamingMessage.Create(session.Scene);
+			using var message = Fantasy.C2Map_TestRoamingMessage.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -281,7 +281,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<Chat2C_TestRPCRoamingResponse> C2Chat_TestRPCRoamingRequest(this Session session, string tag)
 		{
-			using var request = Fantasy.C2Chat_TestRPCRoamingRequest.Create(session.Scene);
+			using var request = Fantasy.C2Chat_TestRPCRoamingRequest.Create();
 			request.Tag = tag;
 			return (Chat2C_TestRPCRoamingResponse)await session.Call(request);
 		}
@@ -293,7 +293,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2Map_PushMessageToClient(this Session session, string tag)
 		{
-			using var message = Fantasy.C2Map_PushMessageToClient.Create(session.Scene);
+			using var message = Fantasy.C2Map_PushMessageToClient.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -305,7 +305,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Map2C_PushMessageToClient(this Session session, string tag)
 		{
-			using var message = Fantasy.Map2C_PushMessageToClient.Create(session.Scene);
+			using var message = Fantasy.Map2C_PushMessageToClient.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -317,7 +317,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<Map2C_TestTransferResponse> C2Map_TestTransferRequest(this Session session)
 		{
-			using var request = Fantasy.C2Map_TestTransferRequest.Create(session.Scene);
+			using var request = Fantasy.C2Map_TestTransferRequest.Create();
 			return (Map2C_TestTransferResponse)await session.Call(request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -328,7 +328,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2Chat_TestSendMapMessage(this Session session, string tag)
 		{
-			using var message = Fantasy.C2Chat_TestSendMapMessage.Create(session.Scene);
+			using var message = Fantasy.C2Chat_TestSendMapMessage.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -340,7 +340,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2G_TestRouteToRoaming(this Session session, string tag)
 		{
-			using var message = Fantasy.C2G_TestRouteToRoaming.Create(session.Scene);
+			using var message = Fantasy.C2G_TestRouteToRoaming.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -352,7 +352,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2G_TestRoamingToRoaming(this Session session, string tag)
 		{
-			using var message = Fantasy.C2G_TestRoamingToRoaming.Create(session.Scene);
+			using var message = Fantasy.C2G_TestRoamingToRoaming.Create();
 			message.Tag = tag;
 			session.Send(message);
 		}
@@ -364,7 +364,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<G2C_SubscribeSphereEventResponse> C2G_SubscribeSphereEventRequest(this Session session)
 		{
-			using var request = Fantasy.C2G_SubscribeSphereEventRequest.Create(session.Scene);
+			using var request = Fantasy.C2G_SubscribeSphereEventRequest.Create();
 			return (G2C_SubscribeSphereEventResponse)await session.Call(request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -375,7 +375,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<G2C_PublishSphereEventResponse> C2G_PublishSphereEventRequest(this Session session)
 		{
-			using var request = Fantasy.C2G_PublishSphereEventRequest.Create(session.Scene);
+			using var request = Fantasy.C2G_PublishSphereEventRequest.Create();
 			return (G2C_PublishSphereEventResponse)await session.Call(request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -386,7 +386,7 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<G2C_UnsubscribeSphereEventResponse> C2G_UnsubscribeSphereEventRequest(this Session session)
 		{
-			using var request = Fantasy.C2G_UnsubscribeSphereEventRequest.Create(session.Scene);
+			using var request = Fantasy.C2G_UnsubscribeSphereEventRequest.Create();
 			return (G2C_UnsubscribeSphereEventResponse)await session.Call(request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -397,9 +397,34 @@ namespace Fantasy
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<G2C_MapUnsubscribeSphereEventResponse> C2G_MapUnsubscribeSphereEventRequest(this Session session)
 		{
-			using var request = Fantasy.C2G_MapUnsubscribeSphereEventRequest.Create(session.Scene);
+			using var request = Fantasy.C2G_MapUnsubscribeSphereEventRequest.Create();
 			return (G2C_MapUnsubscribeSphereEventResponse)await session.Call(request);
 		}
+#if Godot_Platform
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void C2G_带标签的消息(this Session session, C2G_带标签的消息 message)
+		{
+			session.Send(message);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void C2G_带标签的消息(this Session session)
+		{
+			using var message = Fantasy.C2G_带标签的消息.Create();
+			session.Send(message);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void C2M_带标签且条件编译的消息(this Session session, C2M_带标签且条件编译的消息 message)
+		{
+			session.Send(message);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void C2M_带标签且条件编译的消息(this Session session, string tag)
+		{
+			using var message = Fantasy.C2M_带标签且条件编译的消息.Create();
+			message.Tag = tag;
+			session.Send(message);
+		}
+#endif
 
    }
 }

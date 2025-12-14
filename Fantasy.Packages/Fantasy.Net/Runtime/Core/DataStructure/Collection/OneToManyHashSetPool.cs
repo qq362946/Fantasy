@@ -24,11 +24,7 @@ namespace Fantasy.DataStructure.Collection
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OneToManyHashSetPool<TKey, TValue> Create()
         {
-#if FANTASY_WEBGL
             var a = Pool<OneToManyHashSetPool<TKey, TValue>>.Rent();
-#else
-            var a = MultiThreadPool.Rent<OneToManyHashSetPool<TKey, TValue>>();
-#endif
             a._isDispose = false;
             a._isPool = true;
             return a;
@@ -47,11 +43,7 @@ namespace Fantasy.DataStructure.Collection
 
             _isDispose = true;
             Clear();
-#if FANTASY_WEBGL
             Pool<OneToManyHashSetPool<TKey, TValue>>.Return(this);
-#else
-            MultiThreadPool.Return(this);
-#endif
         }
 
         /// <summary>

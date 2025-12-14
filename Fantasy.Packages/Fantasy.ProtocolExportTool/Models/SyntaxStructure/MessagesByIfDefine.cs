@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Fantasy.ProtocolExportTool.Generators;
 
 namespace Fantasy.ProtocolExportTool.Models
@@ -85,9 +88,10 @@ namespace Fantasy.ProtocolExportTool.Models
                 members.Add($"        public {fieldType} {field.Name} {{ get; set; }}{initializer}");
             }
 
-            disposeCode.AppendLine("#if FANTASY_NET || FANTASY_UNITY");
-            disposeCode.AppendLine($"            GetScene().MessagePoolComponent.Return<{messageDefinition.Name}>(this);");
-            disposeCode.Append("#endif");
+            // disposeCode.AppendLine("#if FANTASY_NET || FANTASY_UNITY");
+            // disposeCode.AppendLine($"            GetScene().MessagePoolComponent.Return<{messageDefinition.Name}>(this);");
+            // disposeCode.Append("#endif");
+            disposeCode.Append($"            MessageObjectPool<{messageDefinition.Name}>.Return(this);");
 
             if (messageDefinition.DocumentationComments.Count > 0)
             {
@@ -115,17 +119,19 @@ namespace Fantasy.ProtocolExportTool.Models
                 }
                 else
                 {
-                    if (IsResponseType(messageDefinition.MessageType) || messageDefinition.Protocol.ProtocolName != "ProtoBuf")
-                    {
-                        builder.AppendLine($"    [Serializable]\n" +
-                                           $"    {messageDefinition.Protocol.ClassAttribute}");
-                    }
-                    else
-                    {
-                        // 针对Protobuf空消息：使用 EmptyMessageSerializer
-                        builder.AppendLine($"    [Serializable]\n" +
-                                           $"    [ProtoContract(Serializer = typeof(global::Fantasy.Serialize.EmptyMessageSerializer<{messageDefinition.Name}>))]");
-                    }
+                    builder.AppendLine($"    [Serializable]\n" +
+                                       $"    {messageDefinition.Protocol.ClassAttribute}");
+                    // if (IsResponseType(messageDefinition.MessageType) || messageDefinition.Protocol.ProtocolName != "ProtoBuf")
+                    // {
+                    //     builder.AppendLine($"    [Serializable]\n" +
+                    //                        $"    {messageDefinition.Protocol.ClassAttribute}");
+                    // }
+                    // else
+                    // {
+                    //     // 针对Protobuf空消息：使用 EmptyMessageSerializer
+                    //     builder.AppendLine($"    [Serializable]\n" +
+                    //                        $"    [ProtoContract(Serializer = typeof(global::Fantasy.Serialize.EmptyMessageSerializer<{messageDefinition.Name}>))]");
+                    // }
                 }
             }
 
@@ -140,12 +146,12 @@ namespace Fantasy.ProtocolExportTool.Models
 
             builder.AppendLine($$"""
                                      {
-                                         public static {{messageDefinition.Name}} Create(Scene scene)
+                                         public static {{messageDefinition.Name}} Create()
                                          {
-                                             return scene.MessagePoolComponent.Rent<{{messageDefinition.Name}}>();
+                                             return MessageObjectPool<{{messageDefinition.Name}}>.Rent();
                                          }
 
-                                         public override void Dispose()
+                                         public void Dispose()
                                          {
                                  {{disposeCode}}
                                          }

@@ -24,7 +24,7 @@ namespace Fantasy.DataStructure.Collection
         /// <returns>创建的实例。</returns>
         public static ConcurrentOneToManyQueuePool<TKey, TValue> Create()
         {
-            var a = MultiThreadPool.Rent<ConcurrentOneToManyQueuePool<TKey, TValue>>();
+            var a = Pool<ConcurrentOneToManyQueuePool<TKey, TValue>>.Rent();
             a._isDispose = false;
             a._isPool = true;
             return a;
@@ -43,7 +43,7 @@ namespace Fantasy.DataStructure.Collection
             _isDispose = true;
             Clear();
             // 将实例返回到对象池中，以便重用
-            MultiThreadPool.Return(this);
+            Pool<ConcurrentOneToManyQueuePool<TKey, TValue>>.Return(this);
         }
 
         /// <summary>

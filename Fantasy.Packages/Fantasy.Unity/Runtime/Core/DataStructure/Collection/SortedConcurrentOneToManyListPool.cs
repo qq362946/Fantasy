@@ -25,7 +25,7 @@ namespace Fantasy.DataStructure.Collection
         /// <returns>新创建的 <see cref="SortedConcurrentOneToManyListPool{TKey, TValue}"/> 实例。</returns>
         public static SortedConcurrentOneToManyListPool<TKey, TValue> Create()
         {
-            var a = MultiThreadPool.Rent<SortedConcurrentOneToManyListPool<TKey, TValue>>();
+            var a = Pool<SortedConcurrentOneToManyListPool<TKey, TValue>>.Rent();
             a._isDispose = false;
             a._isPool = true;
             return a;
@@ -43,7 +43,7 @@ namespace Fantasy.DataStructure.Collection
 
             _isDispose = true;
             Clear();
-            MultiThreadPool.Return(this);
+            Pool<SortedConcurrentOneToManyListPool<TKey, TValue>>.Return(this);
         }
 
         /// <summary>

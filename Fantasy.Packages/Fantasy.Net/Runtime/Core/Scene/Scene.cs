@@ -133,10 +133,6 @@ namespace Fantasy
         /// </summary>
         public EntityComponent EntityComponent { get; internal set; }
         /// <summary>
-        /// Scene下的网络消息对象池组件
-        /// </summary>
-        public MessagePoolComponent MessagePoolComponent { get; internal set; }
-        /// <summary>
         /// Scene下的协程锁组件
         /// </summary>
         public CoroutineLockComponent CoroutineLockComponent { get; internal set; }
@@ -185,7 +181,6 @@ namespace Fantasy
 #if FANTASY_UNITY
             SceneLateUpdate = EntityComponent;
 #endif
-            MessagePoolComponent = Create<MessagePoolComponent>(this,false,true);
             EventComponent = await Create<EventComponent>(this,false,true).Initialize();
             TimerComponent = Create<TimerComponent>(this, false, true).Initialize();
             CoroutineLockComponent = Create<CoroutineLockComponent>(this, false, true).Initialize();
@@ -286,7 +281,6 @@ namespace Fantasy
             EntityComponent = null;
             TimerComponent = null;
             EventComponent = null;
-            MessagePoolComponent = null;
             CoroutineLockComponent = null;
             MessageDispatcherComponent = null;
             PoolGeneratorComponent = null;

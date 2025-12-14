@@ -2,6 +2,8 @@
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.InnerMessage;
+using Fantasy.Pool;
+
 // ReSharper disable CheckNamespace
 // ReSharper disable InconsistentNaming
 
@@ -29,12 +31,12 @@ public abstract class Roaming<TEntity, TMessage> : IAddressMessageHandler where 
     /// <param name="session">会话。</param>
     /// <param name="entity">实体。</param>
     /// <param name="rpcId">RPC标识。</param>
-    /// <param name="routeMessage">漫游消息。</param>
-    public async FTask Handle(Session session, Entity entity, uint rpcId, object routeMessage)
+    /// <param name="roamingMessage">漫游消息。</param>
+    public async FTask Handle(Session session, Entity entity, uint rpcId, object roamingMessage)
     {
-        if (routeMessage is not TMessage ruteMessage)
+        if (roamingMessage is not TMessage rMessage)
         {
-            Log.Error($"Message type conversion error: {routeMessage.GetType().FullName} to {typeof(TMessage).Name}");
+            Log.Error($"Message type conversion error: {roamingMessage.GetType().FullName} to {typeof(TMessage).Name}");
             return;
         }
 
@@ -46,7 +48,7 @@ public abstract class Roaming<TEntity, TMessage> : IAddressMessageHandler where 
 
         try
         {
-            await Run(tEntity, ruteMessage);
+            await Run(tEntity, rMessage);
         }
         catch (Exception e)
         {
@@ -59,7 +61,8 @@ public abstract class Roaming<TEntity, TMessage> : IAddressMessageHandler where 
         }
         finally
         {
-            session.Send(new AddressResponse(), rpcId);
+            session.Send(MessageObjectPool<AddressResponse>.Rent(), rpcId);
+            rMessage.Dispose();
         }
     }
 
@@ -78,7 +81,7 @@ public abstract class Roaming<TEntity, TMessage> : IAddressMessageHandler where 
 /// <typeparam name="TAddressRequest">漫游RPC路由请求类型。</typeparam>
 /// <typeparam name="TAddressResponse">漫游RPC路由响应类型。</typeparam>
 public abstract class RoamingRPC<TEntity, TAddressRequest, TAddressResponse> : IAddressMessageHandler
-    where TEntity : Entity where TAddressRequest : IRoamingRequest where TAddressResponse : IRoamingResponse, new()
+    where TEntity : Entity where TAddressRequest : IRoamingRequest where TAddressResponse : AMessage, IRoamingResponse, new()
 {
     /// <summary>
     /// 获取消息类型。
@@ -111,7 +114,7 @@ public abstract class RoamingRPC<TEntity, TAddressRequest, TAddressResponse> : I
         }
 
         var isReply = false;
-        var response = new TAddressResponse();
+        var response = MessageObjectPool<TAddressResponse>.Rent();
 
         void Reply()
         {
@@ -147,6 +150,7 @@ public abstract class RoamingRPC<TEntity, TAddressRequest, TAddressResponse> : I
         finally
         {
             Reply();
+            aAddressRequest.Dispose();
         }
     }
 

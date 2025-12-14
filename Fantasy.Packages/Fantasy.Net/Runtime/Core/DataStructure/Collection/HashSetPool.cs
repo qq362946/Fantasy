@@ -25,11 +25,7 @@ namespace Fantasy.DataStructure.Collection
 
             _isDispose = true;
             Clear();
-#if FANTASY_WEBGL
             Pool<HashSetPool<T>>.Return(this);
-#else
-            MultiThreadPool.Return(this);
-#endif
         }
 
         /// <summary>
@@ -38,17 +34,10 @@ namespace Fantasy.DataStructure.Collection
         /// <returns>创建的实例。</returns>
         public static HashSetPool<T> Create()
         {
-#if FANTASY_WEBGL
             var list = Pool<HashSetPool<T>>.Rent();
             list._isDispose = false;
             list._isPool = true;
             return list;
-#else
-            var list = MultiThreadPool.Rent<HashSetPool<T>>();
-            list._isDispose = false;
-            list._isPool = true;
-            return list;
-#endif
         }
 
         /// <summary>
@@ -89,15 +78,9 @@ namespace Fantasy.DataStructure.Collection
         /// <returns>创建的实例。</returns>
         public static HashSetBasePool<T> Create()
         {
-#if FANTASY_WEBGL
             var hashSetBasePool = Pool<HashSetBasePool<T>>.Rent();
             hashSetBasePool._isPool = true;
             return hashSetBasePool;
-#else
-            var hashSetBasePool = MultiThreadPool.Rent<HashSetBasePool<T>>();
-            hashSetBasePool._isPool = true;
-            return hashSetBasePool;
-#endif
         }
 
         /// <summary>
@@ -106,11 +89,7 @@ namespace Fantasy.DataStructure.Collection
         public void Dispose()
         {
             Set.Clear();
-#if FANTASY_WEBGL
             Pool<HashSetBasePool<T>>.Return(this);
-#else
-            MultiThreadPool.Return(this);
-#endif
         }
 
         /// <summary>
@@ -128,7 +107,7 @@ namespace Fantasy.DataStructure.Collection
         /// <param name="isPool"></param>
         public void SetIsPool(bool isPool)
         {
-            throw new NotImplementedException();
+            _isPool = isPool;
         }
     }
 }

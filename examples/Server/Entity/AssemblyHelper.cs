@@ -1,5 +1,7 @@
-﻿using System.Runtime.Loader;
+﻿using System.Buffers;
+using System.Runtime.Loader;
 using Fantasy.Helper;
+using LightProto;
 
 namespace Fantasy
 {

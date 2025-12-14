@@ -19,11 +19,7 @@ namespace Fantasy.DataStructure.Collection
         /// <returns>创建的实例。</returns>
         public static ReuseList<T> Create()
         {
-#if FANTASY_WEBGL
             var list = Pool<ReuseList<T>>.Rent();
-#else
-            var list = MultiThreadPool.Rent<ReuseList<T>>();
-#endif
             list._isDispose = false;
             list._isPool = true;
             return list;
@@ -41,11 +37,7 @@ namespace Fantasy.DataStructure.Collection
 
             _isDispose = true;
             Clear();
-#if FANTASY_WEBGL
             Pool<ReuseList<T>>.Return(this);
-#else
-            MultiThreadPool.Return(this);
-#endif
         }
 
         /// <summary>

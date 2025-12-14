@@ -3,9 +3,9 @@ using System;
 using System.Runtime.Serialization;
 using Fantasy.Entitas.Interface;
 using Fantasy.Pool;
+using LightProto;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
-using ProtoBuf;
 
 // ReSharper disable CheckNamespace
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.

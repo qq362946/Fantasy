@@ -1,5 +1,6 @@
 using System;
 using System.Buffers;
+using LightProto;
 
 namespace Fantasy.Serialize
 {
@@ -21,7 +22,7 @@ namespace Fantasy.Serialize
         /// <typeparam name="T">目标类型</typeparam>
         /// <param name="bytes">包含序列化数据的字节数组</param>
         /// <returns>反序列化后的对象实例</returns>
-        T Deserialize<T>(byte[] bytes);
+        T Deserialize<T>(byte[] bytes) where T : IProtoParser<T>;
 
         /// <summary>
         /// 从 MemoryStreamBuffer 中反序列化为指定类型的对象。
@@ -29,7 +30,7 @@ namespace Fantasy.Serialize
         /// <typeparam name="T">目标类型</typeparam>
         /// <param name="buffer">包含序列化数据的内存流缓冲区</param>
         /// <returns>反序列化后的对象实例</returns>
-        T Deserialize<T>(MemoryStreamBuffer buffer);
+        T Deserialize<T>(MemoryStreamBuffer buffer) where T : IProtoParser<T>;
 
         /// <summary>
         /// 将字节数组反序列化为指定类型的对象（非泛型版本）。
@@ -55,7 +56,7 @@ namespace Fantasy.Serialize
         /// <param name="index">反序列化数据的起始索引</param>
         /// <param name="count">要反序列化的字节数</param>
         /// <returns>反序列化后的对象实例</returns>
-        T Deserialize<T>(byte[] bytes, int index, int count);
+        T Deserialize<T>(byte[] bytes, int index, int count) where T : IProtoParser<T>;
 
         /// <summary>
         /// 从字节数组的指定范围反序列化为指定类型的对象（非泛型版本）。
@@ -70,9 +71,10 @@ namespace Fantasy.Serialize
         /// <summary>
         /// 将对象序列化为字节数组。
         /// </summary>
+        /// <param name="type">要序列化的对象类型</param>
         /// <param name="obj">要序列化的对象</param>
         /// <returns>包含序列化数据的字节数组</returns>
-        byte[] Serialize(object obj);
+        byte[] Serialize(Type type, object obj);
 
         /// <summary>
         /// 将指定类型的对象序列化为字节数组。
@@ -80,7 +82,7 @@ namespace Fantasy.Serialize
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="object">要序列化的对象</param>
         /// <returns>包含序列化数据的字节数组</returns>
-        byte[] Serialize<T>(T @object);
+        byte[] Serialize<T>(T @object) where T : IProtoParser<T>;
 
         /// <summary>
         /// 将指定类型的对象序列化到 IBufferWriter 中，避免额外的内存分配。
@@ -88,14 +90,14 @@ namespace Fantasy.Serialize
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="object">要序列化的对象</param>
         /// <param name="buffer">用于写入序列化数据的缓冲区</param>
-        void Serialize<T>(T @object, IBufferWriter<byte> buffer);
+        void Serialize<T>(T @object, IBufferWriter<byte> buffer) where T : IProtoParser<T>;
 
-        /// <summary>
-        /// 将对象序列化到 IBufferWriter 中，避免额外的内存分配。
-        /// </summary>
-        /// <param name="object">要序列化的对象</param>
-        /// <param name="buffer">用于写入序列化数据的缓冲区</param>
-        void Serialize(object @object, IBufferWriter<byte> buffer);
+        // /// <summary>
+        // /// 将对象序列化到 IBufferWriter 中，避免额外的内存分配。
+        // /// </summary>
+        // /// <param name="object">要序列化的对象</param>
+        // /// <param name="buffer">用于写入序列化数据的缓冲区</param>
+        // void Serialize(object @object, IBufferWriter<byte> buffer);
 
         /// <summary>
         /// 将指定类型的对象序列化到 IBufferWriter 中，避免额外的内存分配。
@@ -111,6 +113,6 @@ namespace Fantasy.Serialize
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="t">要克隆的对象</param>
         /// <returns>克隆后的新对象实例</returns>
-        T Clone<T>(T t);
+        T Clone<T>(T t) where T : IProtoParser<T>;
     }
 }

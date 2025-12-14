@@ -25,11 +25,7 @@ namespace Fantasy.DataStructure.Collection
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OneToManyListPool<TKey, TValue> Create()
         {
-#if FANTASY_WEBGL
             var list = Pool<OneToManyListPool<TKey, TValue>>.Rent();
-#else
-            var list = MultiThreadPool.Rent<OneToManyListPool<TKey, TValue>>();
-#endif
             list._isDispose = false;
             list._isPool = true;
             return list;
@@ -48,11 +44,7 @@ namespace Fantasy.DataStructure.Collection
 
             _isDispose = true;
             Clear();
-#if FANTASY_WEBGL
             Pool<OneToManyListPool<TKey, TValue>>.Return(this);
-#else
-            MultiThreadPool.Return(this);
-#endif
         }
 
         /// <summary>

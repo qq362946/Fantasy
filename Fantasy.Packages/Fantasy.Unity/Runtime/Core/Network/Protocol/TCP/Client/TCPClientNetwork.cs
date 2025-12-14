@@ -196,17 +196,24 @@ namespace Fantasy.Network.TCP
             {
                 try
                 {
+                    var count = 0;
                     var memory = _pipe.Writer.GetMemory(8192);
 #if UNITY_2021
-                     // Unity2021.3.14f有个恶心的问题，使用ReceiveAsync会导致memory不能正确写入
-                     // 所有只能使用ReceiveFromAsync来接收消息，但ReceiveFromAsync只有一个接受ArraySegment的接口。
-                     MemoryMarshal.TryGetArray(memory, out ArraySegment<byte> arraySegment);
-                     var result = await _socket.ReceiveFromAsync(arraySegment, SocketFlags.None, _remoteEndPoint);
-                     _pipe.Writer.Advance(result.ReceivedBytes);
+                    // Unity2021.3.14f有个恶心的问题，使用ReceiveAsync会导致memory不能正确写入
+                    // 所有只能使用ReceiveFromAsync来接收消息，但ReceiveFromAsync只有一个接受ArraySegment的接口。
+                    MemoryMarshal.TryGetArray(memory, out ArraySegment<byte> arraySegment);
+                    var result = await _socket.ReceiveFromAsync(arraySegment, SocketFlags.None, _remoteEndPoint);
+                    count = result.ReceivedBytes;
 #else
-                    var count = await _socket.ReceiveAsync(memory, SocketFlags.None, _cancellationTokenSource.Token);
-                    _pipe.Writer.Advance(count);
+                    count = await _socket.ReceiveAsync(memory, SocketFlags.None, _cancellationTokenSource.Token);
 #endif
+                    if (count == 0)
+                    {
+                        Dispose();
+                        return;
+                    }
+                    
+                    _pipe.Writer.Advance(count);
                     await _pipe.Writer.FlushAsync();
                 }
                 catch (SocketException)

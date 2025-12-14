@@ -23,11 +23,7 @@ namespace Fantasy.DataStructure.Dictionary
         /// <returns>新创建的 OneToManySortedDictionaryPool 实例。</returns>
         public static OneToManySortedDictionaryPool<TKey, TSortedKey, TValue> Create()
         {
-#if FANTASY_WEBGL
             var a = Pool<OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>>.Rent();
-#else
-            var a = MultiThreadPool.Rent<OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>>();
-#endif
             a._isDispose = false;
             a._isPool = true;
             return a;
@@ -45,11 +41,7 @@ namespace Fantasy.DataStructure.Dictionary
 
             _isDispose = true;
             Clear();
-#if FANTASY_WEBGL
             Pool<OneToManySortedDictionaryPool<TKey, TSortedKey, TValue>>.Return(this);
-#else
-            MultiThreadPool.Return(this);
-#endif
         }
 
         /// <summary>

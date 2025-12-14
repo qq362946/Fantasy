@@ -1,9 +1,11 @@
+using System.Buffers;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
 using Fantasy.Event;
 using Fantasy.SeparateTable;
 using Fantasy.Serialize;
+using LightProto;
 
 namespace Fantasy;
 
@@ -68,7 +70,24 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
-                    //单泛型参数实体测试
+
+               
+                IBufferWriter<byte> buffer = new MemoryStreamBuffer();
+                object message = new C2G_TestMessage()
+                {
+                    Tag = "1111"
+                };
+                
+                
+                Serializer.Serialize<global::Fantasy.C2G_TestMessage>(buffer, (global::Fantasy.C2G_TestMessage)message, global::Fantasy.C2G_TestMessage.ProtoWriter);
+                
+                var memoryStreamBuffer = (MemoryStreamBuffer)buffer;
+                memoryStreamBuffer.Seek(0, SeekOrigin.Begin);
+                var c2GTestMessage = Serializer.Deserialize<global::Fantasy.C2G_TestMessage>(memoryStreamBuffer);
+                
+                Log.Debug($"C2G_TestMessage:{c2GTestMessage.Tag}");
+
+                //单泛型参数实体测试
                     Entity.Create<SubSceneTestComponent>(scene).AddComponent<GenericTest.TestEntity<SaveEntity>>();
                     //双泛型参数实体测试
                     Entity.Create<SubSceneTestComponent>(scene).AddComponent<GenericTest.TestEntity2<SaveEntity, SaveEntity>>();

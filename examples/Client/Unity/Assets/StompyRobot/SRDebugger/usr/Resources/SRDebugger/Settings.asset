@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d00b7005a47ef47802a8421dc6baf6, type: 3}
+  m_Name: Settings
+  m_EditorClassIdentifier: 
+  _isEnabled: 1
+  _defaultTab: 2
+  _triggerEnableMode: 0
+  _triggerBehaviour: 2
+  _enableKeyboardShortcuts: 1
+  _keyboardShortcuts: []
+  _newKeyboardShortcuts:
+  - Action: 1
+    Alt: 0
+    Control: 1
+    Key: 282
+    Shift: 1
+  - Action: 2
+    Alt: 0
+    Control: 1
+    Key: 283
+    Shift: 1
+  - Action: 3
+    Alt: 0
+    Control: 1
+    Key: 284
+    Shift: 1
+  - Action: 4
+    Alt: 0
+    Control: 1
+    Key: 285
+    Shift: 1
+  _keyboardModifierControl: 1
+  _keyboardModifierAlt: 0
+  _keyboardModifierShift: 1
+  _keyboardEscapeClose: 1
+  _enableBackgroundTransparency: 1
+  _collapseDuplicateLogEntries: 1
+  _richTextInConsole: 1
+  _requireEntryCode: 0
+  _requireEntryCodeEveryTime: 0
+  _entryCode: 00000000000000000000000000000000
+  _useDebugCamera: 0
+  _debugLayer: 5
+  _debugCameraDepth: 100
+  _apiKey: 
+  _enableBugReporter: 0
+  _disabledTabs: 
+  _profilerAlignment: 2
+  _optionsAlignment: 3
+  _consoleAlignment: 0
+  _triggerPosition: 6
+  _maximumConsoleEntries: 1500
+  _enableEventSystemCreation: 1
+  _automaticShowCursor: 1
+  _uiScale: 1

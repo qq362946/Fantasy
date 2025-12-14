@@ -1,5 +1,7 @@
 using System;
 using Fantasy.Async;
+using Fantasy.Pool;
+
 // ReSharper disable InconsistentNaming
 
 namespace Fantasy.Network.Interface
@@ -27,7 +29,7 @@ namespace Fantasy.Network.Interface
     /// <summary>
     /// 泛型消息基类，实现了 <see cref="IMessageHandler"/> 接口。
     /// </summary>
-    public abstract class Message<T> : IMessageHandler
+    public abstract class Message<T> : IMessageHandler where T : AMessage, IMessage, new()
     {
         /// <summary>
         /// 获取处理的消息类型。
@@ -47,13 +49,18 @@ namespace Fantasy.Network.Interface
         /// <returns>异步任务。</returns>
         public async FTask Handle(Session session, uint rpcId, object message)
         {
+            var messageObject = (T)message;
             try
             {
-                await Run(session, (T) message);
+                await Run(session, messageObject);
             }
             catch (Exception e)
             {
                 Log.Error(e);
+            }
+            finally
+            {
+                messageObject.Dispose();
             }
         }
 
@@ -95,7 +102,7 @@ namespace Fantasy.Network.Interface
                 return;
             }
             
-            var response = new TResponse();
+            var response = MessageObjectPool<TResponse>.Rent();
             var isReply = false;
 
             void Reply()
@@ -127,6 +134,7 @@ namespace Fantasy.Network.Interface
             finally
             {
                 Reply();
+                request.Dispose();
             }
         }
 

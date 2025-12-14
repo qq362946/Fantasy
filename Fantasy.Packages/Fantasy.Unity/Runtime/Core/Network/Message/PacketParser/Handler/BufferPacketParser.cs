@@ -154,6 +154,7 @@ namespace Fantasy.PacketParser
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation), address);
             
+            message.Dispose();
             return memoryStream;
         }
     }
@@ -268,7 +269,7 @@ namespace Fantasy.PacketParser
             Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.OuterPacketRpcIdLocation), rpcId);
-            
+            message.Dispose();
             return memoryStream;
         }
     }
@@ -381,6 +382,7 @@ namespace Fantasy.PacketParser
             Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.OuterPacketRpcIdLocation), rpcId);
+            message.Dispose();
             return memoryStream;
         }
     }

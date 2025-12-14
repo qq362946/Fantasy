@@ -21,11 +21,7 @@ namespace Fantasy.DataStructure.Collection
         /// <returns>新创建的实例。</returns>
         public static SortedOneToManyHashSetPool<TKey, TValue> Create()
         {
-#if FANTASY_WEBGL
             var a = Pool<SortedOneToManyHashSetPool<TKey, TValue>>.Rent();
-#else
-            var a = MultiThreadPool.Rent<SortedOneToManyHashSetPool<TKey, TValue>>();
-#endif
             a._isDispose = false;
             a._isPool = true;
             return a;
@@ -43,11 +39,7 @@ namespace Fantasy.DataStructure.Collection
 
             _isDispose = true;
             Clear();
-#if FANTASY_WEBGL
             Pool<SortedOneToManyHashSetPool<TKey, TValue>>.Return(this);
-#else
-            MultiThreadPool.Return(this);
-#endif
         }
 
         /// <summary>

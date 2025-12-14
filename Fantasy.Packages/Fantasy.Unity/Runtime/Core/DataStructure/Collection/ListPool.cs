@@ -27,11 +27,7 @@ namespace Fantasy.DataStructure.Collection
 
             _isDispose = true;
             Clear();
-#if FANTASY_WEBGL
             Pool<ListPool<T>>.Return(this);
-#else
-            MultiThreadPool.Return(this);
-#endif
         }
 
         /// <summary>
@@ -41,11 +37,7 @@ namespace Fantasy.DataStructure.Collection
         /// <returns>创建的实例。</returns>
         public static ListPool<T> Create(params T[] args)
         {
-#if FANTASY_WEBGL
             var list = Pool<ListPool<T>>.Rent();
-#else
-            var list = MultiThreadPool.Rent<ListPool<T>>();
-#endif
             list._isDispose = false;
             list._isPool = true;
 
@@ -64,11 +56,7 @@ namespace Fantasy.DataStructure.Collection
         /// <returns>创建的实例。</returns>
         public static ListPool<T> Create(List<T> args)
         {
-#if FANTASY_WEBGL
             var list = Pool<ListPool<T>>.Rent();
-#else
-            var list = MultiThreadPool.Rent<ListPool<T>>();
-#endif
             list._isDispose = false;
             list._isPool = true;
 

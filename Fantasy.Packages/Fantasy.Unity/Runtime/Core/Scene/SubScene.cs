@@ -38,7 +38,6 @@ namespace Fantasy
             TimerComponent = rootScene.TimerComponent;
             EventComponent = rootScene.EventComponent;
             EntityComponent = rootScene.EntityComponent;
-            MessagePoolComponent = rootScene.MessagePoolComponent;
             CoroutineLockComponent = rootScene.CoroutineLockComponent;
             MessageDispatcherComponent = rootScene.MessageDispatcherComponent;
             PoolGeneratorComponent = rootScene.PoolGeneratorComponent;

@@ -1,6 +1,8 @@
 #if FANTASY_NET
 using Fantasy.Async;
 using Fantasy.Entitas;
+using Fantasy.Pool;
+
 // ReSharper disable InconsistentNaming
 // ReSharper disable CheckNamespace
 
@@ -75,8 +77,12 @@ public abstract class Address<TEntity, TMessage> : IAddressMessageHandler where 
             {
                 scene = entity.Scene;
             }
-                
+
             Log.Error($"SceneConfigId:{session.Scene.SceneConfigId} ProcessConfigId:{scene.Process.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
+        }
+        finally
+        {
+            tAddressMessage.Dispose();
         }
     }
     
@@ -131,7 +137,7 @@ public abstract class AddressRPC<TEntity, TAddressRequest, TAddressResponse> : I
         }
             
         var isReply = false;
-        var response = new TAddressResponse();
+        var response = MessageObjectPool<TAddressResponse>.Rent();
             
         void Reply()
         {
@@ -167,6 +173,7 @@ public abstract class AddressRPC<TEntity, TAddressRequest, TAddressResponse> : I
         finally
         {
             Reply();
+            tAddressRequest.Dispose();
         }
     }
     

@@ -22,11 +22,7 @@ namespace Fantasy.DataStructure.Collection
         /// <returns>创建的实例。</returns>
         public static OneToManyQueuePool<TKey, TValue> Create()
         {
-#if FANTASY_WEBGL
             var a = Pool<OneToManyQueuePool<TKey, TValue>>.Rent();
-#else
-            var a = MultiThreadPool.Rent<OneToManyQueuePool<TKey, TValue>>();
-#endif
             a._isDispose = false;
             a._isPool = true;
             return a;
@@ -44,11 +40,7 @@ namespace Fantasy.DataStructure.Collection
 
             _isDispose = true;
             Clear();
-#if FANTASY_WEBGL
             Pool<OneToManyQueuePool<TKey, TValue>>.Return(this);
-#else
-            MultiThreadPool.Return(this);
-#endif
         }
 
         /// <summary>

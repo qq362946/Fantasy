@@ -6,7 +6,7 @@ namespace Fantasy
     /// <summary>
     /// 定义日志记录功能的接口。
     /// </summary>
-    public interface ILog
+    public partial interface ILog
     {
 #if FANTASY_NET
         /// <summary>

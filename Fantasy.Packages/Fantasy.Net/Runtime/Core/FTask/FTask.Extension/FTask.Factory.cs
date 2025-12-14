@@ -1,6 +1,5 @@
-#if !FANTASY_WEBGL
-using System.Collections.Concurrent;
-#endif
+#nullable enable
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -14,12 +13,18 @@ namespace Fantasy.Async
     /// </summary>
     public partial class FTask
     {
+        /// <summary>
+        /// 对象池中的最大缓存数量
+        /// </summary>
+        private const int MaxPoolSize = 2000;
+
         private bool _isPool;
-#if FANTASY_WEBGL
-        private static readonly Queue<FTask> Caches = new Queue<FTask>();
-#else
-        private static readonly ConcurrentQueue<FTask> Caches = new ConcurrentQueue<FTask>();
-#endif
+
+        /// <summary>
+        /// 线程本地的对象池栈
+        /// </summary>
+        [ThreadStatic]
+        private static Stack<FTask>? _caches;
         /// <summary>
         /// 创建一个空的任务
         /// </summary>
@@ -41,7 +46,14 @@ namespace Fantasy.Async
                 return new FTask();
             }
 
-            if (!Caches.TryDequeue(out var fTask))
+            var caches = _caches;
+            FTask fTask;
+
+            if (caches != null && caches.Count > 0)
+            {
+                fTask = caches.Pop();
+            }
+            else
             {
                 fTask = new FTask();
             }
@@ -52,14 +64,25 @@ namespace Fantasy.Async
 
         private void Return()
         {
-            if (!_isPool || Caches.Count > 2000)
+            if (!_isPool)
+            {
+                return;
+            }
+
+            var caches = _caches;
+            if (caches == null)
+            {
+                _caches = caches = new Stack<FTask>(16);
+            }
+
+            if (caches.Count >= MaxPoolSize)
             {
                 return;
             }
 
             _callBack = null;
             _status = STaskStatus.Pending;
-            Caches.Enqueue(this);
+            caches.Push(this);
         }
     }
 
@@ -69,12 +92,18 @@ namespace Fantasy.Async
     /// <typeparam name="T">任务的泛型类型</typeparam>
     public partial class FTask<T>
     {
+        /// <summary>
+        /// 对象池中的最大缓存数量
+        /// </summary>
+        private const int MaxPoolSize = 2000;
+
         private bool _isPool;
-#if FANTASY_WEBGL
-        private static readonly Queue<FTask<T>> Caches = new Queue<FTask<T>>();
-#else
-        private static readonly ConcurrentQueue<FTask<T>> Caches = new ConcurrentQueue<FTask<T>>();
-#endif
+
+        /// <summary>
+        /// 线程本地的对象池栈
+        /// </summary>
+        [ThreadStatic]
+        private static Stack<FTask<T>>? _caches;
         /// <summary>
         /// 创建一个任务
         /// </summary>
@@ -89,7 +118,14 @@ namespace Fantasy.Async
                 return new FTask<T>();
             }
 
-            if (!Caches.TryDequeue(out var fTask))
+            var caches = _caches;
+            FTask<T> fTask;
+
+            if (caches != null && caches.Count > 0)
+            {
+                fTask = caches.Pop();
+            }
+            else
             {
                 fTask = new FTask<T>();
             }
@@ -116,14 +152,25 @@ namespace Fantasy.Async
 
         private void Return()
         {
-            if (!_isPool || Caches.Count > 2000)
+            if (!_isPool)
+            {
+                return;
+            }
+
+            var caches = _caches;
+            if (caches == null)
+            {
+                _caches = caches = new Stack<FTask<T>>(16);
+            }
+
+            if (caches.Count >= MaxPoolSize)
             {
                 return;
             }
 
             _callBack = null;
             _status = STaskStatus.Pending;
-            Caches.Enqueue(this);
+            caches.Push(this);
         }
     }
 }

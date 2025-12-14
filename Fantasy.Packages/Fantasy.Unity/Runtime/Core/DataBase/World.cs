@@ -13,7 +13,7 @@ namespace Fantasy
     /// <summary>
     /// 表示一个服务器【世界】
     /// </summary>
-    public sealed class World : IDisposable
+    public sealed partial class World : IDisposable
     {
         /// <summary>
         /// 获取世界的唯一标识。

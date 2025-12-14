@@ -20,11 +20,7 @@ namespace Fantasy.DataStructure.Dictionary
         /// <returns>新创建的实例。</returns>
         public static ReuseDictionary<TM, TN> Create()
         {
-#if FANTASY_WEBGL
             var entityDictionary = Pool<ReuseDictionary<TM, TN>>.Rent();
-#else
-            var entityDictionary = MultiThreadPool.Rent<ReuseDictionary<TM, TN>>();
-#endif
             entityDictionary._isDispose = false;
             entityDictionary._isPool = true;
             return entityDictionary;
@@ -42,11 +38,7 @@ namespace Fantasy.DataStructure.Dictionary
 
             _isDispose = true;
             Clear();
-#if FANTASY_WEBGL
             Pool<ReuseDictionary<TM, TN>>.Return(this);
-#else
-            MultiThreadPool.Return(this);
-#endif
         }
 
         /// <summary>
