@@ -44,23 +44,28 @@ SphereEvent（跨服域事件系统）是一种**分布式事件发布-订阅机
 
 ## 步骤 1：定义 SphereEvent 事件类
 
-SphereEvent 事件类必须继承自 `SphereEventArgs` 基类。
+SphereEvent 事件类必须继承自 `SphereEventArgs` 基类，并使用 `[MemoryPackable]` 特性和 `partial` 关键字修饰。
 
 ### 基本定义
 
 ```csharp
 using Fantasy.Sphere;
+using MemoryPack;
 
 /// <summary>
 /// 玩家等级变化事件
 /// </summary>
-public sealed class PlayerLevelChangedEvent : SphereEventArgs
+[MemoryPackable]
+public sealed partial class PlayerLevelChangedEvent : SphereEventArgs
 {
     public long PlayerId { get; set; }
     public int OldLevel { get; set; }
     public int NewLevel { get; set; }
 }
 ```
+
+> **⚠️ 重要提示**
+> 从 Fantasy 2025.2.1410 之后的版本开始，所有 SphereEvent 事件参数必须添加 `[MemoryPackable]` 特性和 `partial` 关键字。缺少这些修饰符将导致编译错误。
 
 ### 事件类特性
 
