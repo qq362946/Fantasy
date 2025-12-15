@@ -1,5 +1,12 @@
 # SphereEvent 跨服域事件系统
 
+> **⚠️ 版本变更说明（Fantasy 2025.2.1410+）**
+> 从 Fantasy 2025.2.1410 之后的版本开始，SphereEvent 事件参数定义发生了重大变更：
+> - 所有事件类必须添加 `[MemoryPackable]` 特性
+> - 所有事件类必须使用 `partial` 关键字修饰
+> - 缺少这些修饰符将触发编译错误
+>
+
 ## 什么是 SphereEvent？
 
 SphereEvent（跨服域事件系统）是一种**分布式事件发布-订阅机制**，允许不同服务器之间通过事件进行解耦通信。
@@ -79,20 +86,32 @@ public sealed partial class PlayerLevelChangedEvent : SphereEventArgs
 **定义规范：**
 
 ```csharp
-// ✅ 正确：使用 sealed 修饰，继承 SphereEventArgs
-public sealed class TestSphereEvent : SphereEventArgs
+// ✅ 正确：使用 [MemoryPackable]、partial、sealed 修饰，继承 SphereEventArgs
+[MemoryPackable]
+public sealed partial class TestSphereEvent : SphereEventArgs
 {
     public string Tag { get; set; }
     public int Value { get; set; }
 }
 
+// ❌ 错误：缺少 [MemoryPackable] 特性
+public sealed partial class BadEvent1 : SphereEventArgs // 编译错误！
+{
+}
+
+// ❌ 错误：缺少 partial 关键字
+[MemoryPackable]
+public sealed class BadEvent2 : SphereEventArgs // 编译错误！
+{
+}
+
 // ❌ 错误：不要继承自 Entity 或其他类型
-public class BadEvent : Entity // 错误！
+public class BadEvent3 : Entity // 错误！
 {
 }
 
 // ❌ 错误：不要使用 struct
-public struct BadEvent // 错误！
+public struct BadEvent4 // 错误！
 {
 }
 ```
@@ -475,11 +494,13 @@ Gate 服务器（发布方）
 
 ```csharp
 using Fantasy.Sphere;
+using MemoryPack;
 
 /// <summary>
 /// 公会战报事件
 /// </summary>
-public sealed class GuildBattleResultEvent : SphereEventArgs
+[MemoryPackable]
+public sealed partial class GuildBattleResultEvent : SphereEventArgs
 {
     public long GuildId { get; set; }
     public string GuildName { get; set; }
@@ -840,14 +861,16 @@ event1.Dispose(); // 容易遗漏
 
 ```csharp
 // ❌ 不推荐：事件对象包含大量数据
-public sealed class BadEvent : SphereEventArgs
+[MemoryPackable]
+public sealed partial class BadEvent : SphereEventArgs
 {
     public byte[] LargeData { get; set; } // 网络传输开销大
     public List<int> LargeList { get; set; } // 序列化开销大
 }
 
 // ✅ 推荐：事件对象只包含必要数据
-public sealed class GoodEvent : SphereEventArgs
+[MemoryPackable]
+public sealed partial class GoodEvent : SphereEventArgs
 {
     public long EntityId { get; set; }      // 通过 ID 查询详细数据
     public int EventType { get; set; }
