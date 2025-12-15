@@ -48,7 +48,7 @@ namespace Fantasy.Scheduler
                     return;
                 }
                 case OpCodeType.InnerResponse:
-                case OpCodeType.InnerRouteResponse:
+                case OpCodeType.InnerAddressResponse:
                 case OpCodeType.InnerAddressableResponse:
                 case OpCodeType.InnerRoamingResponse:
                 case OpCodeType.OuterAddressableResponse:
@@ -69,7 +69,7 @@ namespace Fantasy.Scheduler
                     
                     return;
                 }
-                case OpCodeType.InnerRouteMessage:
+                case OpCodeType.InnerAddressMessage:
                 case OpCodeType.InnerAddressableMessage:
                 case OpCodeType.InnerRoamingMessage:
                 {
@@ -94,7 +94,7 @@ namespace Fantasy.Scheduler
 
                     return;
                 }
-                case OpCodeType.InnerRouteRequest:
+                case OpCodeType.InnerAddressRequest:
                 case OpCodeType.InnerAddressableRequest:
                 case OpCodeType.InnerRoamingRequest:
                 {

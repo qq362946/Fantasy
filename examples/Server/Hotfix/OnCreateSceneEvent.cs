@@ -6,16 +6,19 @@ using Fantasy.Event;
 using Fantasy.SeparateTable;
 using Fantasy.Serialize;
 using LightProto;
+using MemoryPack;
 
 namespace Fantasy;
 
-public sealed class SaveEntity : Entity
+[MemoryPackable]
+public sealed partial class SaveEntity : Entity, ISupportedSerialize
 {
 
 }
 
+[MemoryPackable]
 [SeparateTable(typeof(SaveEntity), "SubSceneTestComponent")]
-public sealed class SubSceneTestComponent : Entity
+public sealed partial class SubSceneTestComponent : Entity,ISupportedSerialize
 {
     public override void Dispose()
     {
@@ -70,27 +73,10 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             }
             case SceneType.Gate:
             {
-
-               
-                IBufferWriter<byte> buffer = new MemoryStreamBuffer();
-                object message = new C2G_TestMessage()
-                {
-                    Tag = "1111"
-                };
-                
-                
-                Serializer.Serialize<global::Fantasy.C2G_TestMessage>(buffer, (global::Fantasy.C2G_TestMessage)message, global::Fantasy.C2G_TestMessage.ProtoWriter);
-                
-                var memoryStreamBuffer = (MemoryStreamBuffer)buffer;
-                memoryStreamBuffer.Seek(0, SeekOrigin.Begin);
-                var c2GTestMessage = Serializer.Deserialize<global::Fantasy.C2G_TestMessage>(memoryStreamBuffer);
-                
-                Log.Debug($"C2G_TestMessage:{c2GTestMessage.Tag}");
-
-                //单泛型参数实体测试
-                    Entity.Create<SubSceneTestComponent>(scene).AddComponent<GenericTest.TestEntity<SaveEntity>>();
-                    //双泛型参数实体测试
-                    Entity.Create<SubSceneTestComponent>(scene).AddComponent<GenericTest.TestEntity2<SaveEntity, SaveEntity>>();
+                // //单泛型参数实体测试
+                //     Entity.Create<SubSceneTestComponent>(scene).AddComponent<GenericTest.TestEntity<SaveEntity>>();
+                //     //双泛型参数实体测试
+                //     Entity.Create<SubSceneTestComponent>(scene).AddComponent<GenericTest.TestEntity2<SaveEntity, SaveEntity>>();
                     // var saveEntity = Entity.Create<SaveEntity>(scene);
                     // saveEntity.AddComponent<SubSceneTestComponent>();
                     //

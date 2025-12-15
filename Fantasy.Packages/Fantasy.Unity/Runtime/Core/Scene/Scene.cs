@@ -112,8 +112,6 @@ namespace Fantasy
         #region Pool
 
         internal EntityPool EntityPool;
-        internal EntityListPool<Entity> EntityListPool;
-        internal EntitySortedDictionaryPool<long, Entity> EntitySortedDictionaryPool;
         internal EventAwaiterPool EventAwaiterPool;
 
         #endregion
@@ -173,8 +171,6 @@ namespace Fantasy
         private async FTask Initialize()
         {
             EntityPool = new EntityPool();
-            EntityListPool = new EntityListPool<Entity>();
-            EntitySortedDictionaryPool = new EntitySortedDictionaryPool<long, Entity>();
             EventAwaiterPool = new EventAwaiterPool();
             EntityComponent = await Create<EntityComponent>(this, false, false).Initialize();
             SceneUpdate = EntityComponent;
@@ -254,8 +250,6 @@ namespace Fantasy
 #endif
                     EntityComponent.Dispose();
                     EntityPool.Dispose();
-                    EntityListPool.Dispose();
-                    EntitySortedDictionaryPool.Dispose();
                     EventAwaiterPool.Dispose();
                     break;
                 }
@@ -275,8 +269,6 @@ namespace Fantasy
             RuntimeIdFactory = null;
 
             EntityPool = null;
-            EntityListPool = null;
-            EntitySortedDictionaryPool = null;
             EventAwaiterPool = null;
             EntityComponent = null;
             TimerComponent = null;

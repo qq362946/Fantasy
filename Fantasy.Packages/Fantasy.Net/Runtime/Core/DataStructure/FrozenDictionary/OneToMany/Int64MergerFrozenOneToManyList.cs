@@ -49,14 +49,15 @@ namespace Fantasy.DataStructure.Collection
         /// <summary>
         /// 移除指定来源的类型映射
         /// </summary>
-        public void Remove(long segmentKey)
+        public bool Remove(long segmentKey)
         {
             if (!_segments.Remove(segmentKey, out _))
             {
-                return;
+                return false;
             }
 
             RebuildDictionary();
+            return true;
         }
         
         /// <summary>

@@ -8,15 +8,16 @@ namespace Fantasy.Entitas.Interface
     public interface ISupportedMultiEntity : IDisposable
     {
     }
-#if FANTASY_NET
+    
     /// <summary>
-    /// Entity支持数据库
+    /// Entity支持数据库/序列化
     /// </summary>
-// ReSharper disable once InconsistentNaming
-    public interface ISupportedDataBase
+    public interface ISupportedSerialize
     {
     }
-
+    
+#if FANTASY_NET
+    
     // Entity支持分表存储、保存到数据库的时候不会跟随父组件保存在一个表里、会单独保存在一个表里
     // 需要配合SeparateTableAttribute一起使用、如在Entity类头部定义SeparateTableAttribute(typeOf(Unit), "UnitBag")
     // SeparateTableAttribute用来定义这个Entity是属于哪个Entity的子集以及表名
@@ -33,14 +34,6 @@ namespace Fantasy.Entitas.Interface
     public interface ISupportedTransfer
     {
     }
-
-    // /// <summary>
-    // /// Entity保存到数据库的时候会根据子组件设置分表存储特性分表存储在不同的数据库表中
-    // /// </summary>
-    // public interface ISeparateTableRoot
-    // {
-    // }
-
     
 #endif
 }

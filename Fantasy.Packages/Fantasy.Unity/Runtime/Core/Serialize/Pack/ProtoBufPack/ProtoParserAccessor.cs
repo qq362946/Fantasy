@@ -5,8 +5,8 @@ namespace Fantasy.Serialize
 {
     public static class ProtoParserAccessor<T>
     {
-        public static readonly IProtoReader<T> Reader = ProtoBufPack.GetReader<T>();
-        public static readonly IProtoWriter<T> Writer = ProtoBufPack.GetWriter<T>();
+        public static readonly IProtoReader<T> Reader = ProtoBufHelper.GetReader<T>();
+        public static readonly IProtoWriter<T> Writer = ProtoBufHelper.GetWriter<T>();
     }
 }
 #endif

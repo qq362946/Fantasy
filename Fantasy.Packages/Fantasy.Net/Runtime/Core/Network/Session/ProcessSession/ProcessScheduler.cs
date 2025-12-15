@@ -16,7 +16,7 @@ internal static class ProcessScheduler
         switch (packInfo.OpCodeIdStruct.Protocol)
         {
             case OpCodeType.InnerResponse:
-            case OpCodeType.InnerRouteResponse:
+            case OpCodeType.InnerAddressResponse:
             case OpCodeType.InnerAddressableResponse:
             case OpCodeType.InnerRoamingResponse:
             case OpCodeType.OuterAddressableResponse:
@@ -36,7 +36,7 @@ internal static class ProcessScheduler
                 
                 return;
             }
-            case OpCodeType.InnerRouteMessage:
+            case OpCodeType.InnerAddressMessage:
             {
                 using (packInfo)
                 {
@@ -66,7 +66,7 @@ internal static class ProcessScheduler
                 
                 return;
             }
-            case OpCodeType.InnerRouteRequest:
+            case OpCodeType.InnerAddressRequest:
             {
                 using (packInfo)
                 {
@@ -147,7 +147,7 @@ internal static class ProcessScheduler
         switch (opCodeIdStruct.Protocol)
         {
             case OpCodeType.InnerResponse:
-            case OpCodeType.InnerRouteResponse:
+            case OpCodeType.InnerAddressResponse:
             case OpCodeType.InnerAddressableResponse:
             case OpCodeType.InnerRoamingResponse:
             case OpCodeType.OuterAddressableResponse:
@@ -166,7 +166,7 @@ internal static class ProcessScheduler
             }
             case OpCodeType.InnerRoamingMessage:
             case OpCodeType.InnerAddressableMessage:
-            case OpCodeType.InnerRouteMessage:
+            case OpCodeType.InnerAddressMessage:
             {
                 var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref address);
                 
@@ -196,7 +196,7 @@ internal static class ProcessScheduler
             }
             case OpCodeType.InnerAddressableRequest:
             case OpCodeType.InnerRoamingRequest:
-            case OpCodeType.InnerRouteRequest:
+            case OpCodeType.InnerAddressRequest:
             {
                 var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref address);
                 

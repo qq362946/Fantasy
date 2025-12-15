@@ -7,7 +7,6 @@ namespace MemoryPack
 {
     public static partial class MemoryPackUnityFormatterProviderInitializer
     {
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         public static void RegisterInitialFormatters()
         {
             // struct

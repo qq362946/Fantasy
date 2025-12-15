@@ -3,6 +3,7 @@ using Fantasy;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Network;
+using MemoryPack;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,11 @@ public class TestEntity : Entity
 }
 
 public class TestEntity1 : Entity
+{
+    
+}
+[MemoryPackable]
+public sealed partial class Unit : Entity
 {
     
 }

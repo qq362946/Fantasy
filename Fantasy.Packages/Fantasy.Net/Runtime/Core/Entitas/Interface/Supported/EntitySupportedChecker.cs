@@ -1,3 +1,4 @@
+// ReSharper disable StaticMemberInGenericType
 namespace Fantasy.Entitas.Interface
 {
     /// <summary>
@@ -25,13 +26,13 @@ namespace Fantasy.Entitas.Interface
         public static bool IsMulti { get; }
 #if FANTASY_NET
         /// <summary>
-        /// 获取实体类型是否实现了 <see cref="ISupportedDataBase"/> 接口。
-        /// 实现该接口的实体支持数据库持久化存储。
+        /// 获取实体类型是否实现了 <see cref="ISupportedSerialize"/> 接口。
+        /// 实现该接口的实体支持数据库持久化存储和序列化。
         /// </summary>
         /// <value>
-        /// 如果实体类型实现了 <see cref="ISupportedDataBase"/> 接口，则为 <c>true</c>；否则为 <c>false</c>。
+        /// 如果实体类型实现了 <see cref="ISupportedSerialize"/> 接口，则为 <c>true</c>；否则为 <c>false</c>。
         /// </value>
-        public static bool IsDataBase { get; }
+        public static bool IsSerialize { get; }
 
         /// <summary>
         /// 获取实体类型是否实现了 <see cref="ISupportedTransfer"/> 接口。
@@ -50,7 +51,7 @@ namespace Fantasy.Entitas.Interface
             var type = typeof(T);
             IsMulti = typeof(ISupportedMultiEntity).IsAssignableFrom(type);
 #if FANTASY_NET
-            IsDataBase = typeof(ISupportedDataBase).IsAssignableFrom(type);
+            IsSerialize = typeof(ISupportedSerialize).IsAssignableFrom(type);
             IsTransfer = typeof(ISupportedTransfer).IsAssignableFrom(type);
 #endif
         }

@@ -2,7 +2,7 @@
   "dependencies": {
     "com.fantasy.unity": "file:../../../../Fantasy.Packages/Fantasy.Unity",
     "com.unity.collab-proxy": "2.9.3",
-    "com.unity.ide.rider": "3.0.37",
+    "com.unity.ide.rider": "3.0.38",
     "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.unity.timeline": "1.8.9",
     "com.unity.visualscripting": "1.9.7",

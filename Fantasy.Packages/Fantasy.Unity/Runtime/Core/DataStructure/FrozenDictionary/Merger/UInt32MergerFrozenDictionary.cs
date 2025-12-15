@@ -1,9 +1,7 @@
 // ReSharper disable UseCollectionExpression
-
 using System;
 using System.Collections.Generic;
 #pragma warning disable CS8601 // Possible null reference assignment.
-
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 namespace Fantasy.DataStructure.Dictionary
 {
@@ -15,9 +13,7 @@ namespace Fantasy.DataStructure.Dictionary
     {
         private int _count;
 
-        private UInt32FrozenDictionary<TValue> _mergedDictionary =
-            new(new uint[1] { 0 },
-                new TValue[1] { default });
+        private UInt32FrozenDictionary<TValue> _mergedDictionary = new(new uint[1] { 0 }, new TValue[1] { default });
 
         private readonly Dictionary<long, MergeSegment<uint, TValue>> _segments = new();
 
@@ -114,15 +110,15 @@ namespace Fantasy.DataStructure.Dictionary
         {
             if (_count == 0)
             {
-                _mergedDictionary = new UInt32FrozenDictionary<TValue>(Array.Empty<uint>(), Array.Empty<TValue>());
+                _mergedDictionary = new UInt32FrozenDictionary<TValue>(new uint[1] { 0 }, new TValue[1] { default });
                 return;
             }
 
             var index = 0;
-            var runtimeTypeHandles = new uint[_count];
+            var keys = new uint[_count];
             var tValueArray = new TValue[_count];
 
-            var keySpan = runtimeTypeHandles.AsSpan();
+            var keySpan = keys.AsSpan();
             var valueSpan = tValueArray.AsSpan();
 
             foreach (var segment in _segments.Values)
@@ -133,7 +129,7 @@ namespace Fantasy.DataStructure.Dictionary
                 index += count;
             }
 
-            _mergedDictionary = new UInt32FrozenDictionary<TValue>(runtimeTypeHandles, tValueArray);
+            _mergedDictionary = new UInt32FrozenDictionary<TValue>(keys, tValueArray);
         }
 
         /// <summary>

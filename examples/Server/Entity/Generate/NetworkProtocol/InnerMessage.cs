@@ -165,6 +165,8 @@ namespace Fantasy
     /// <summary>
     /// Map给另外一个Map发送Unit数据
     /// </summary>
+    [Serializable]
+    [MemoryPackable]
     public partial class M2M_SendUnitRequest : AMessage, IAddressRequest
     {
         public static M2M_SendUnitRequest Create()
@@ -178,11 +180,14 @@ namespace Fantasy
             MessageObjectPool<M2M_SendUnitRequest>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.M2M_SendUnitRequest; } 
-        [BsonIgnore]
+        [MemoryPackIgnore]
         public M2M_SendUnitResponse ResponseType { get; set; }
+        [MemoryPackOrder(1)]
         public Unit Unit { get; set; }
     }
 
+    [Serializable]
+    [MemoryPackable]
     public partial class M2M_SendUnitResponse : AMessage, IAddressResponse
     {
         public static M2M_SendUnitResponse Create()
@@ -195,6 +200,7 @@ namespace Fantasy
             MessageObjectPool<M2M_SendUnitResponse>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.M2M_SendUnitResponse; } 
+        [MemoryPackOrder(1)]
         public uint ErrorCode { get; set; }
     }
 

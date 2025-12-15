@@ -44,9 +44,9 @@ public sealed class OpCodeGenerator(bool isOuter)
             "IResponse" when isOuter => (_opCode.Response = OpCodeType.OuterResponse, _opCode.AResponse++),
             "IResponse" when !isOuter => (_opCode.Response = OpCodeType.InnerResponse, _opCode.AResponse++),
 
-            "IAddressMessage" when !isOuter => (_opCode.AddressMessage = OpCodeType.InnerRouteMessage, _opCode.AAddressMessage++),
-            "IAddressRequest" when !isOuter => (_opCode.AddressRequest = OpCodeType.InnerRouteRequest, _opCode.AAddressRequest++),
-            "IAddressResponse" when !isOuter => (_opCode.AddressResponse = OpCodeType.InnerRouteResponse, _opCode.AAddressResponse++),
+            "IAddressMessage" when !isOuter => (_opCode.AddressMessage = OpCodeType.InnerAddressMessage, _opCode.AAddressMessage++),
+            "IAddressRequest" when !isOuter => (_opCode.AddressRequest = OpCodeType.InnerAddressRequest, _opCode.AAddressRequest++),
+            "IAddressResponse" when !isOuter => (_opCode.AddressResponse = OpCodeType.InnerAddressResponse, _opCode.AAddressResponse++),
 
             "IAddressableMessage" when isOuter => (_opCode.AddressableMessage = OpCodeType.OuterAddressableMessage, _opCode.AAddressableMessage++),
             "IAddressableMessage" when !isOuter => (_opCode.AddressableMessage = OpCodeType.InnerAddressableMessage, _opCode.AAddressableMessage++),

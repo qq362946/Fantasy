@@ -46,8 +46,11 @@ namespace Fantasy.Entitas
             var tcs = FTask.Create(false);
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                _typeHandleMerger.Remove(assemblyManifest.AssemblyManifestId);
-                _frozenDictionary = _typeHandleMerger.GetFrozenDictionary();
+                if (_typeHandleMerger.Remove(assemblyManifest.AssemblyManifestId))
+                {
+                    _frozenDictionary = _typeHandleMerger.GetFrozenDictionary();
+                }
+                
                 tcs.SetResult();
             });
             await tcs;

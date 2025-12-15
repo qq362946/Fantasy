@@ -91,14 +91,15 @@ namespace Fantasy.DataStructure.Collection
         /// <para>如果指定的 segmentKey 不存在，则不执行任何操作。</para>
         /// <para>此方法常用于程序集卸载或热重载场景。</para>
         /// </remarks>
-        public void Remove(long segmentKey)
+        public bool Remove(long segmentKey)
         {
             if (!_segments.Remove(segmentKey, out _))
             {
-                return;
+                return false;
             }
 
             RebuildDictionary();
+            return true;
         }
 
         /// <summary>

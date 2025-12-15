@@ -141,10 +141,10 @@ namespace Fantasy.SeparateTable
             {
                 try
                 {
-                    _separateMerger.Remove(assemblyManifestId);
-
-                    // 重新生成冻结字典，移除已卸载程序集的信息
-                    _separateTables = _separateMerger.GetFrozenDictionary();
+                    if (_separateMerger.Remove(assemblyManifestId))
+                    {
+                        _separateTables = _separateMerger.GetFrozenDictionary();
+                    }
 
                     task.SetResult();
                 }

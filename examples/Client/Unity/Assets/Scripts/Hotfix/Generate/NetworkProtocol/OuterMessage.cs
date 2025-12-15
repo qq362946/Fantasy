@@ -44,7 +44,7 @@ namespace Fantasy
     }
 
     [Serializable]
-    [ProtoContract]
+    [MemoryPackable]
     public partial class C2G_TestMessage : AMessage, IMessage
     {
         public static C2G_TestMessage Create()
@@ -58,7 +58,7 @@ namespace Fantasy
             MessageObjectPool<C2G_TestMessage>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.C2G_TestMessage; } 
-        [ProtoMember(1)]
+        [MemoryPackOrder(1)]
         public string Tag { get; set; }
     }
 

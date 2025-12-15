@@ -3,10 +3,12 @@ using Fantasy.Network;
 using Fantasy.Network.Interface;
 using Fantasy.Platform.Net;
 using Fantasy.Sphere;
+using MemoryPack;
 
 namespace Fantasy;
 
-public sealed class TestSphereEvent : SphereEventArgs
+[MemoryPackable]
+public sealed partial class TestSphereEvent : SphereEventArgs
 {
     public string Tag { get; set; }
 }

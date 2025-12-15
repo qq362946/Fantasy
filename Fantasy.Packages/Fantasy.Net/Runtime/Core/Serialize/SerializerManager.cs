@@ -40,7 +40,7 @@ namespace Fantasy.Serialize
         /// <summary>
         /// ProtoBuf 序列化
         /// </summary>
-        public static ProtoBufPack ProtoBufPack { get; private set; }
+        public static ProtoBufHelper ProtoBufHelper { get; private set; }
 #if FANTASY_NET
         /// <summary>
         /// BSON 序列化
@@ -50,7 +50,7 @@ namespace Fantasy.Serialize
         /// <summary>
         /// MemoryPack 序列化
         /// </summary>
-        public static MemoryPack MemoryPack { get; private set; }
+        public static MemoryPackHelper MemoryPackHelper { get; private set; }
         
         private static volatile bool _isInitialized = false;
         
@@ -64,11 +64,11 @@ namespace Fantasy.Serialize
                 return;
             }
             
-            ProtoBufPack = await new ProtoBufPack().Initialize();
+            ProtoBufHelper = await new ProtoBufHelper().Initialize();
 #if FANTASY_NET
             BsonPack = await new BsonPackHelper().Initialize();
 #endif
-            MemoryPack = await new MemoryPack().Initialize();
+            MemoryPackHelper = await new MemoryPackHelper().Initialize();
             _isInitialized = true;
         }
 
@@ -85,7 +85,7 @@ namespace Fantasy.Serialize
             {
                 case FantasySerializerType.ProtoBuf:
                 {
-                    result = ProtoBufPack.Deserialize<T>(bytes);
+                    result = ProtoBufHelper.Deserialize<T>(bytes);
                     return true;
                 }
                 case FantasySerializerType.Bson:
@@ -102,7 +102,7 @@ namespace Fantasy.Serialize
                 }
                 case FantasySerializerType.MemoryPack:
                 {
-                    result = MemoryPack.Deserialize<T>(bytes);
+                    result = MemoryPackHelper.Deserialize<T>(bytes);
                     return true;
                 }
                 default:
@@ -126,7 +126,7 @@ namespace Fantasy.Serialize
             {
                 case FantasySerializerType.ProtoBuf:
                 {
-                    result = ProtoBufPack.Deserialize<T>(buffer);
+                    result = ProtoBufHelper.Deserialize<T>(buffer);
                     return true;
                 }
                 case FantasySerializerType.Bson:
@@ -143,7 +143,7 @@ namespace Fantasy.Serialize
                 }
                 case FantasySerializerType.MemoryPack:
                 {
-                    result = MemoryPack.Deserialize<T>(buffer);
+                    result = MemoryPackHelper.Deserialize<T>(buffer);
                     return true;
                 }
                 default:
@@ -167,7 +167,7 @@ namespace Fantasy.Serialize
             {
                 case FantasySerializerType.ProtoBuf:
                 {
-                    result = ProtoBufPack.Deserialize(type, bytes);
+                    result = ProtoBufHelper.Deserialize(type, bytes);
                     return true;
                 }
                 case FantasySerializerType.Bson:
@@ -184,7 +184,7 @@ namespace Fantasy.Serialize
                 }
                 case FantasySerializerType.MemoryPack:
                 {
-                    result = MemoryPack.Deserialize(type, bytes);
+                    result = MemoryPackHelper.Deserialize(type, bytes);
                     return true;
                 }
                 default:
@@ -208,7 +208,7 @@ namespace Fantasy.Serialize
             {
                 case FantasySerializerType.ProtoBuf:
                 {
-                    result = ProtoBufPack.Deserialize(type, buffer);
+                    result = ProtoBufHelper.Deserialize(type, buffer);
                     return true;
                 }
                 case FantasySerializerType.Bson:
@@ -225,7 +225,7 @@ namespace Fantasy.Serialize
                 }
                 case FantasySerializerType.MemoryPack:
                 {
-                    result = MemoryPack.Deserialize(type, buffer);
+                    result = MemoryPackHelper.Deserialize(type, buffer);
                     return true;
                 }
                 default:
@@ -249,7 +249,7 @@ namespace Fantasy.Serialize
             {
                 case FantasySerializerType.ProtoBuf:
                 {
-                    result = ProtoBufPack.Deserialize<T>(bytes, index, count);
+                    result = ProtoBufHelper.Deserialize<T>(bytes, index, count);
                     return true;
                 }
                 case FantasySerializerType.Bson:
@@ -266,7 +266,7 @@ namespace Fantasy.Serialize
                 }
                 case FantasySerializerType.MemoryPack:
                 {
-                    result = MemoryPack.Deserialize<T>(bytes, index, count);
+                    result = MemoryPackHelper.Deserialize<T>(bytes, index, count);
                     return true;
                 }
                 default:
@@ -290,7 +290,7 @@ namespace Fantasy.Serialize
             {
                 case FantasySerializerType.ProtoBuf:
                 {
-                    result = ProtoBufPack.Deserialize(type, bytes, index, count);
+                    result = ProtoBufHelper.Deserialize(type, bytes, index, count);
                     return true;
                 }
                 case FantasySerializerType.Bson:
@@ -307,7 +307,7 @@ namespace Fantasy.Serialize
                 }
                 case FantasySerializerType.MemoryPack:
                 {
-                    result = MemoryPack.Deserialize(type, bytes, index, count);
+                    result = MemoryPackHelper.Deserialize(type, bytes, index, count);
                     return true;
                 }
                 default:
@@ -331,7 +331,7 @@ namespace Fantasy.Serialize
             {
                 case FantasySerializerType.ProtoBuf:
                 {
-                    result = ProtoBufPack.Serialize<T>(obj);
+                    result = ProtoBufHelper.Serialize<T>(obj);
                     return true;
                 }
                 case FantasySerializerType.Bson:
@@ -348,7 +348,7 @@ namespace Fantasy.Serialize
                 }
                 case FantasySerializerType.MemoryPack:
                 {
-                    result = MemoryPack.Serialize<T>(obj);
+                    result = MemoryPackHelper.Serialize<T>(obj);
                     return true;
                 }
                 default:
@@ -372,7 +372,7 @@ namespace Fantasy.Serialize
             {
                 case FantasySerializerType.ProtoBuf:
                 {
-                    ProtoBufPack!.Serialize<T>(obj, buffer);
+                    ProtoBufHelper!.Serialize<T>(obj, buffer);
                     return true;
                 }
                 case FantasySerializerType.Bson:
@@ -388,7 +388,7 @@ namespace Fantasy.Serialize
                 }
                 case FantasySerializerType.MemoryPack:
                 {
-                    MemoryPack.Serialize<T>(obj, buffer);
+                    MemoryPackHelper.Serialize<T>(obj, buffer);
                     return true;
                 }
                 default:
@@ -411,7 +411,7 @@ namespace Fantasy.Serialize
             {
                 case FantasySerializerType.ProtoBuf:
                 {
-                    ProtoBufPack!.Serialize(type, obj, buffer);
+                    ProtoBufHelper!.Serialize(type, obj, buffer);
                     return true;
                 }
                 case FantasySerializerType.Bson:
@@ -427,7 +427,7 @@ namespace Fantasy.Serialize
                 }
                 case FantasySerializerType.MemoryPack:
                 {
-                    MemoryPack.Serialize(type, obj, buffer);
+                    MemoryPackHelper.Serialize(type, obj, buffer);
                     return true;
                 }
                 default:
@@ -451,7 +451,7 @@ namespace Fantasy.Serialize
                 case FantasySerializerType.ProtoBuf:
                 {
                     error = null;
-                    result = ProtoBufPack.Clone<T>(obj);
+                    result = ProtoBufHelper.Clone<T>(obj);
                     return true;
                 }
                 case FantasySerializerType.Bson:
@@ -470,7 +470,7 @@ namespace Fantasy.Serialize
                 case FantasySerializerType.MemoryPack:
                 {
                     error = null;
-                    result = MemoryPack.Clone<T>(obj);
+                    result = MemoryPackHelper.Clone<T>(obj);
                     return true;
                 }
                 default:
@@ -490,11 +490,11 @@ namespace Fantasy.Serialize
         public static void Dispose()
         {
             _isInitialized = false;
-            ProtoBufPack = null;
+            ProtoBufHelper = null;
 #if FANTASY_NET
             BsonPack = null;
 #endif
-            MemoryPack = null;
+            MemoryPackHelper = null;
         }
     }
 }

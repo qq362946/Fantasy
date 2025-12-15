@@ -140,7 +140,7 @@ namespace Fantasy.SourceGenerator.Generators
 
             // 执行手动注册MemoryPack的序列化器
             builder.AddComment("Perform manual registration of the MemoryPack serializer");
-            builder.AppendLine($"{replaceAssemblyName}_MemoryPackInitializer.Initialize();");
+            builder.AppendLine($"new {replaceAssemblyName}_MemoryPackInitializer().Initialize();");
             
             // 获取程序集并计算唯一标识
             builder.AddComment("Get assembly and calculate manifest ID");
@@ -198,6 +198,8 @@ namespace Fantasy.SourceGenerator.Generators
                 "Fantasy.Assembly.IPoolCreatorGenerator? poolCreatorGeneratorRegistrar = null;");
             builder.AppendLine(
                 "Fantasy.Assembly.IProtoBufDispatcherRegistrar? protoBufDispatcherRegistrar = null;");
+            builder.AppendLine(
+                "Fantasy.Assembly.IMemoryPackEntityGenerator? memoryPackEntityGenerator = null;");
             builder.AppendLine();
             
             // 尝试创建各个注册器（如果存在）replaceAssemblyName
@@ -217,7 +219,8 @@ namespace Fantasy.SourceGenerator.Generators
             GenerateTryCreateRegistrar(builder, $"{replaceAssemblyName}_CustomInterface", "customInterfaceRegistrar");
             GenerateTryCreateRegistrar(builder, $"{replaceAssemblyName}_PoolCreatorGenerator", "poolCreatorGeneratorRegistrar");
             GenerateTryCreateRegistrar(builder, $"{replaceAssemblyName}_ProtoBufDispatcher", "protoBufDispatcherRegistrar");
-            
+            GenerateTryCreateRegistrar(builder, $"{replaceAssemblyName}_ProtoBufDispatcher", "protoBufDispatcherRegistrar");
+            builder.AppendLine($"memoryPackEntityGenerator = new Fantasy.Generated.{replaceAssemblyName}_MemoryPackInitializer();");
             builder.AppendLine();
 
             // 注册到框架
@@ -239,7 +242,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("customInterfaceRegistrar,");
             builder.AppendLine("fantasyConfigRegistrar,");
             builder.AppendLine("poolCreatorGeneratorRegistrar,");
-            builder.AppendLine("protoBufDispatcherRegistrar);");
+            builder.AppendLine("protoBufDispatcherRegistrar,");
+            builder.AppendLine("memoryPackEntityGenerator);");
             builder.Unindent();
             builder.AppendLine("#endif", false);
             builder.AppendLine("#if FANTASY_UNITY", false);
@@ -256,7 +260,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("responseTypeRegistrar,");
             builder.AppendLine("customInterfaceRegistrar,");
             builder.AppendLine("poolCreatorGeneratorRegistrar,");
-            builder.AppendLine("protoBufDispatcherRegistrar);");
+            builder.AppendLine("protoBufDispatcherRegistrar,");
+            builder.AppendLine("memoryPackEntityGenerator);");
             builder.Unindent();
             builder.AppendLine("#endif", false);
             builder.EndMethod();

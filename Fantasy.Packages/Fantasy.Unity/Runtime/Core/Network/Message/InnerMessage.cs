@@ -1,13 +1,13 @@
 using Fantasy.Network.Interface;
 using Fantasy.Pool;
-using Fantasy.Serialize;
 using LightProto;
-using MongoDB.Bson.Serialization.Attributes;
+using MemoryPack;
 #if FANTASY_NET
 using Fantasy.Entitas;
 using Fantasy.Network.Roaming;
 using Fantasy.Sphere;
 // ReSharper disable RedundantNameQualifier
+// ReSharper disable CheckNamespace
 #endif
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 // ReSharper disable InconsistentNaming
@@ -17,7 +17,6 @@ using Fantasy.Sphere;
 
 namespace Fantasy.InnerMessage
 {
-    // [ProtoContract(Serializer = typeof(Fantasy.Serialize.EmptyMessageSerializer<BenchmarkMessage>))]
     [ProtoContract]
     public sealed partial class BenchmarkMessage : AMessage, IMessage
     {
@@ -578,8 +577,9 @@ namespace Fantasy.InnerMessage
         public uint ErrorCode { get; set; }
     }
     /// <summary>
-    ///  漫游传送终端的请求
+    /// 漫游传送终端的请求
     /// </summary>
+    [MemoryPackable]
     public partial class I_TransferTerminusRequest : AMessage, IAddressRequest
     {
         public static I_TransferTerminusRequest Create()
@@ -593,11 +593,12 @@ namespace Fantasy.InnerMessage
             MessageObjectPool<I_TransferTerminusRequest>.Return(this);
         }
         
-        [BsonIgnore]
+        [MemoryPackIgnore]
         public I_TransferTerminusResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.TransferTerminusRequest; }
         public Terminus Terminus { get; set; }
     }
+    [MemoryPackable]
     public partial class I_TransferTerminusResponse : AMessage, IAddressResponse
     {
         public static I_TransferTerminusResponse Create()
@@ -745,7 +746,7 @@ namespace Fantasy.InnerMessage
     /// <summary>
     /// 订阅一个领域事件
     /// </summary>
-    [ProtoContract]
+    [MemoryPackable]
     public partial class I_SubscribeSphereEventRequest : AMessage, IAddressRequest
     {
         public static I_SubscribeSphereEventRequest Create()
@@ -760,15 +761,13 @@ namespace Fantasy.InnerMessage
             MessageObjectPool<I_SubscribeSphereEventRequest>.Return(this);
         }
         
-        [BsonIgnore]
+        [MemoryPackIgnore]
         public I_SubscribeSphereEventResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.SubscribeSphereEventRequest; }
-        [ProtoMember(1)]
         public long Address { get; set; }
-        [ProtoMember(2)]
         public long TypeHashCode { get; set; }
     }
-    [ProtoContract]
+    [MemoryPackable]
     public partial class I_SubscribeSphereEventResponse : AMessage, IAddressResponse
     {
         public static I_SubscribeSphereEventResponse Create()
@@ -783,13 +782,12 @@ namespace Fantasy.InnerMessage
         }
         
         public uint OpCode() { return Fantasy.Network.OpCode.SubscribeSphereEventResponse; }
-        [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     /// <summary>
     /// 取消订阅一个领域事件
     /// </summary>
-    [ProtoContract]
+    [MemoryPackable]
     public partial class I_UnsubscribeSphereEventRequest : AMessage, IAddressRequest
     {
         public static I_UnsubscribeSphereEventRequest Create()
@@ -804,15 +802,13 @@ namespace Fantasy.InnerMessage
             MessageObjectPool<I_UnsubscribeSphereEventRequest>.Return(this);
         }
         
-        [BsonIgnore]
+        [MemoryPackIgnore]
         public I_UnsubscribeSphereEventResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.UnsubscribeSphereEventRequest; }
-        [ProtoMember(1)]
         public long Address { get; set; }
-        [ProtoMember(2)]
         public long TypeHashCode { get; set; }
     }
-    [ProtoContract]
+    [MemoryPackable]
     public partial class I_UnsubscribeSphereEventResponse : AMessage, IAddressResponse
     {
         public static I_UnsubscribeSphereEventResponse Create()
@@ -827,13 +823,12 @@ namespace Fantasy.InnerMessage
         }
         
         public uint OpCode() { return Fantasy.Network.OpCode.UnsubscribeSphereEventResponse; }
-        [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     /// <summary>
     /// 撤销远程订阅者的订阅领域事件
     /// </summary>
-    [ProtoContract]
+    [MemoryPackable]
     public partial class I_RevokeRemoteSubscriberRequest : AMessage, IAddressRequest
     {
         public static I_RevokeRemoteSubscriberRequest Create()
@@ -848,15 +843,13 @@ namespace Fantasy.InnerMessage
             MessageObjectPool<I_RevokeRemoteSubscriberRequest>.Return(this);
         }
         
-        [BsonIgnore]
+        [MemoryPackIgnore]
         public I_RevokeRemoteSubscriberResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.RevokeRemoteSubscriberRequest; }
-        [ProtoMember(1)]
         public long Address { get; set; }
-        [ProtoMember(2)]
         public long TypeHashCode { get; set; }
     }
-    [ProtoContract]
+    [MemoryPackable]
     public partial class I_RevokeRemoteSubscriberResponse : AMessage, IAddressResponse
     {
         public static I_RevokeRemoteSubscriberResponse Create()
@@ -871,12 +864,12 @@ namespace Fantasy.InnerMessage
         }
         
         public uint OpCode() { return Fantasy.Network.OpCode.RevokeRemoteSubscriberResponse; }
-        [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
     /// <summary>
     /// 发送一个领域事件
     /// </summary>
+    [MemoryPackable]
     public partial class I_PublishSphereEventRequest : AMessage, IAddressRequest
     {
         public static I_PublishSphereEventRequest Create()
@@ -891,12 +884,13 @@ namespace Fantasy.InnerMessage
             MessageObjectPool<I_PublishSphereEventRequest>.Return(this);
         }
         
-        [BsonIgnore]
+        [MemoryPackIgnore]
         public I_PublishSphereEventResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.PublishSphereEventRequest; }
         public long Address { get; set; }
         public SphereEventArgs SphereEventArgs { get; set; }
     }
+    [MemoryPackable]
     public partial class I_PublishSphereEventResponse : AMessage, IAddressResponse
     {
         public static I_PublishSphereEventResponse Create()

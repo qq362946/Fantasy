@@ -98,15 +98,16 @@ namespace Fantasy.DataStructure.Dictionary
         /// <summary>
         /// 移除指定来源的类型映射
         /// </summary>
-        public void Remove(long segmentKey)
+        public bool Remove(long segmentKey)
         {
             if (!_segments.Remove(segmentKey, out var segment))
             {
-                return;
+                return false;
             }
 
             _count -= segment.Count;
             RebuildDictionary();
+            return true;
         }
 
         /// <summary>

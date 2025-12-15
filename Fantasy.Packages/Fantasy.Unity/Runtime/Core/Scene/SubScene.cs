@@ -28,8 +28,6 @@ namespace Fantasy
         internal void Initialize(Scene rootScene)
         {
             EntityPool = rootScene.EntityPool;
-            EntityListPool = rootScene.EntityListPool;
-            EntitySortedDictionaryPool = rootScene.EntitySortedDictionaryPool;
             EventAwaiterPool = rootScene.EventAwaiterPool;
             SceneUpdate = rootScene.SceneUpdate;
 #if FANTASY_UNITY

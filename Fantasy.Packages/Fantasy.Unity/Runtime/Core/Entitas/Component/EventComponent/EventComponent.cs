@@ -92,10 +92,16 @@ namespace Fantasy.Event
             
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                _eventMerger.Remove(assemblyManifestId);
-                _asyncEventMerger.Remove(assemblyManifestId);
-                _events = _eventMerger.GetFrozenDictionary();
-                _asyncEvents = _asyncEventMerger.GetFrozenDictionary();
+                if (_eventMerger.Remove(assemblyManifestId))
+                {
+                    _events = _eventMerger.GetFrozenDictionary();
+                }
+
+                if (_asyncEventMerger.Remove(assemblyManifestId))
+                {
+                    _asyncEvents = _asyncEventMerger.GetFrozenDictionary();
+                }
+                
                 tcs.SetResult();
             });
             await tcs;

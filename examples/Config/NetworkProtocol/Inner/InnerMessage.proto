@@ -1,5 +1,10 @@
 syntax = "proto3";
 package Sining.Message;
+// ProtoBuf:可以在Outer和Inner文件里使用。
+// MemoryPack:可以在Outer和Inner文件里使用。
+// 使用方式:
+// 在message协议上方添加// Protocol+空格+协议名字
+// 例如:// Protocol ProtoBuf 或 // Protocol MemoryPack
 message G2A_TestMessage // IAddressMessage
 {
 	string Tag = 1;
@@ -30,12 +35,12 @@ message Chat2G_CreateRouteResponse // IAddressResponse
 	int64 ChatAddress = 1;
 }
 /// Map给另外一个Map发送Unit数据
-// Protocol Bson
+// Protocol MemoryPack
 message M2M_SendUnitRequest // IAddressRequest,M2M_SendUnitResponse
 {
 	Unit Unit = 1;
 }
-// Protocol Bson
+// Protocol MemoryPack
 message M2M_SendUnitResponse // IAddressResponse
 {
 

@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using Fantasy.Entitas.Interface;
 using Fantasy.Pool;
 using LightProto;
+using MemoryPack;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 
@@ -23,13 +24,21 @@ internal sealed class SphereEventArgPool() : PoolCore(4096);
 /// Sphere事件参数基类，用于跨进程事件传递
 /// Base class for Sphere event arguments, used for cross-process event delivery
 /// </summary>
-public abstract class SphereEventArgs : IPool, IDisposable
+[MemoryPackable(GenerateType.NoGenerate)]
+public abstract partial class SphereEventArgs : IPool, IDisposable
 {
     /// <summary>
-    /// 静态对象池实例
-    /// Static object pool instance
+    /// 静态对象池实例（每个线程独立）
+    /// Static object pool instance (per-thread)
     /// </summary>
-    private static readonly SphereEventArgPool ArgPool = new SphereEventArgPool();
+    [ThreadStatic]
+    private static SphereEventArgPool? _argPool;
+
+    /// <summary>
+    /// 获取当前线程的对象池实例
+    /// Get the object pool instance for the current thread
+    /// </summary>
+    private static SphereEventArgPool GetArgPool() => _argPool ??= new();
 
     /// <summary>
     /// 标识对象是否来自对象池
@@ -41,7 +50,7 @@ public abstract class SphereEventArgs : IPool, IDisposable
     /// 类型哈希码，用于快速类型识别
     /// Type hash code for fast type identification
     /// </summary>
-    public long TypeHashCode { get; private set; }
+    public long TypeHashCode { get; set; }
 
     /// <summary>
     /// 事件参数的实际类型
@@ -51,6 +60,7 @@ public abstract class SphereEventArgs : IPool, IDisposable
     [JsonIgnore]
     [IgnoreDataMember]
     [ProtoIgnore]
+    [MemoryPackIgnore]
     public Type SphereEventArgsType { get; private set; }
 
     /// <summary>
@@ -68,7 +78,7 @@ public abstract class SphereEventArgs : IPool, IDisposable
     /// <returns>事件参数实例 / Event argument instance</returns>
     public static T Create<T>(bool isFromPool) where T : SphereEventArgs, new()
     {
-        var sphereEventArgs = isFromPool ? ArgPool.Rent<T>() : new T();
+        var sphereEventArgs = isFromPool ? GetArgPool().Rent<T>() : new T();
         sphereEventArgs.SphereEventArgsType = typeof(T);
         sphereEventArgs.TypeHashCode = TypeHashCache<T>.HashCode;
         return sphereEventArgs;
@@ -80,7 +90,7 @@ public abstract class SphereEventArgs : IPool, IDisposable
     /// </summary>
     public void Dispose()
     {
-        ArgPool.Return(SphereEventArgsType, this);
+        GetArgPool().Return(SphereEventArgsType, this);
         TypeHashCode = 0;
         SphereEventArgsType = null;
     }

@@ -22,6 +22,10 @@ namespace Fantasy
         /// 注意:前后端设置的消息大小，一定要一样才可以，不然会不出现问题。
         /// </summary>
         public static int MaxMessageSize { get; set; } = ushort.MaxValue * 16;
+        /// <summary>
+        /// 用来表示是否在运行中
+        /// </summary>
+        internal static bool IsAppationRunning;
 #if FANTASY_NET
         /// <summary>
         /// App程序Id。

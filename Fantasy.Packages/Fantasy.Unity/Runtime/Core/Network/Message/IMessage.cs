@@ -4,6 +4,7 @@ using Fantasy.Async;
 using Fantasy.Pool;
 using Fantasy.Serialize;
 using LightProto;
+using MemoryPack;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
@@ -14,12 +15,10 @@ namespace Fantasy.Network.Interface
 {
     public abstract class AMessage : IPool
     {
-#if FANTASY_NET
-        [BsonIgnore] 
-#endif
         [JsonIgnore] 
         [IgnoreDataMember] 
         [ProtoIgnore]
+        [MemoryPackIgnore]
         private bool _isPool;
 
         public bool IsPool()

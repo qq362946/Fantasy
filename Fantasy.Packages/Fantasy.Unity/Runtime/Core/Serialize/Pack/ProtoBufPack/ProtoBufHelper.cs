@@ -17,7 +17,7 @@ namespace Fantasy.Serialize
     /// ProtoBuf 序列化实现，基于 LightProto 提供高性能的二进制序列化/反序列化功能。
     /// 支持 ASerialize 接口的序列化生命周期回调，适用于网络通信和数据持久化。
     /// </summary>
-    public sealed class ProtoBufPack : ISerialize, IAssemblyLifecycle
+    public sealed class ProtoBufHelper : ISerialize, IAssemblyLifecycle
     {
         /// <inheritdoc/>
         public string SerializeName { get; } = "ProtoBuf";
@@ -40,7 +40,7 @@ namespace Fantasy.Serialize
         /// 初始化 ProtoBuf 序列化器并注册到程序集生命周期管理。
         /// </summary>
         /// <returns>初始化后的 ProtoBufPack 实例</returns>
-        internal async FTask<ProtoBufPack> Initialize()
+        internal async FTask<ProtoBufHelper> Initialize()
         {
             await AssemblyLifecycle.Add(this);
             return this;
@@ -63,21 +63,38 @@ namespace Fantasy.Serialize
             // 所以基本不会在运行的时候热重载协议的，这样就不会有线程安全问题。
             // 所以这里没有任何关于线程安全的相关处理。
             // 如果要热更协议，这里就要做线程安全相关的处理。
-
+            
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
             var protoBufDispatcherRegistrar = assemblyManifest.ProtoBufDispatcherRegistrar;
-            var runtimeTypeHandles = protoBufDispatcherRegistrar.TypeHandles();
+
+            if (ProgramDefine.IsAppationRunning)
+            {
+                var tcs = FTask.Create(false);
+                ThreadScheduler.MainScheduler.ThreadSynchronizationContext.Post(() =>
+                {
+                    InnerOnLoad(assemblyManifestId, protoBufDispatcherRegistrar);
+                });
+                await tcs;
+                return;
+            }
             
+            InnerOnLoad(assemblyManifestId, protoBufDispatcherRegistrar);
+        }
+
+        private void InnerOnLoad(long assemblyManifestId, IProtoBufDispatcherRegistrar protoBufDispatcherRegistrar)
+        {
+            var runtimeTypeHandles = protoBufDispatcherRegistrar.TypeHandles();
+
             ReaderMerger.Add(
                 assemblyManifestId,
                 runtimeTypeHandles,
                 protoBufDispatcherRegistrar.ProtoReaders());
-            
+
             WriterMerger.Add(
                 assemblyManifestId,
                 runtimeTypeHandles,
                 protoBufDispatcherRegistrar.ProtoWriters());
-            
+
             SerializeMerger.Add(
                 assemblyManifestId,
                 runtimeTypeHandles,
@@ -94,7 +111,6 @@ namespace Fantasy.Serialize
             _writers = WriterMerger.GetFrozenDictionary();
             _serializes = SerializeMerger.GetFrozenDictionary();
             _deserializes = DeserializeMerger.GetFrozenDictionary();
-            await FTask.CompletedTask;
         }
 
         /// <summary>

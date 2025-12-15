@@ -162,18 +162,31 @@ namespace Fantasy.Entitas
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
             Scene?.ThreadSynchronizationContext.Post(() =>
             {
-                _awakeSystemMerger.Remove(assemblyManifestId);
-                _updateSystemMerger.Remove(assemblyManifestId);
-                _destroySystemMerger.Remove(assemblyManifestId);
-                _deserializeSystemMerger.Remove(assemblyManifestId);
+                if (_awakeSystemMerger.Remove(assemblyManifestId))
+                {
+                    _awakeSystems = _awakeSystemMerger.GetFrozenDictionary();
+                }
                 
-                _awakeSystems = _awakeSystemMerger.GetFrozenDictionary();
-                _updateSystems = _updateSystemMerger.GetFrozenDictionary();
-                _destroySystems = _destroySystemMerger.GetFrozenDictionary();
-                _deserializeSystems = _deserializeSystemMerger.GetFrozenDictionary();
+                if(_updateSystemMerger.Remove(assemblyManifestId))
+                {
+                    _updateSystems = _updateSystemMerger.GetFrozenDictionary();
+                }
+
+                if (_destroySystemMerger.Remove(assemblyManifestId))
+                {
+                    _destroySystems = _destroySystemMerger.GetFrozenDictionary();
+                }
+
+                if (_deserializeSystemMerger.Remove(assemblyManifestId))
+                {
+                    _deserializeSystems = _deserializeSystemMerger.GetFrozenDictionary();
+                }
+                
 #if FANTASY_UNITY
-                _lateUpdateSystemMerger.Remove(assemblyManifestId);
-                _lateUpdateSystems = _lateUpdateSystemMerger.GetFrozenDictionary();
+                if(_lateUpdateSystemMerger.Remove(assemblyManifestId))
+                {
+                    _lateUpdateSystems = _lateUpdateSystemMerger.GetFrozenDictionary();
+                }
 #endif
                 // 清理更新队列中已失效的节点（系统被卸载后，对应实体的更新系统不再存在）
                 var node = _updateQueue.First;

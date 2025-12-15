@@ -29,6 +29,8 @@ namespace Fantasy.Serialize
         /// </summary>
         public BsonPackHelper()
         {
+            BsonSerializer.RegisterSerializer(typeof(EntityTreeCollection), new EntityTreeCollectionSerializer());
+            BsonSerializer.RegisterSerializer(typeof(EntityMultiCollection), new EntityMultiCollectionSerializer());
             // 初始化 ConventionRegistry，注册 IgnoreExtraElements 约定，忽略反序列化时多余的字段
             ConventionRegistry.Register("IgnoreExtraElements",
                 new ConventionPack { new IgnoreExtraElementsConvention(true) }, type => true);
@@ -60,6 +62,7 @@ namespace Fantasy.Serialize
         public async FTask OnLoad(AssemblyManifest assemblyManifest)
         {
             var entityTypes = assemblyManifest.EntityTypeCollectionRegistrar.GetEntityTypes();
+            
             if (entityTypes.Any())
             {
                 foreach (var entityType in entityTypes)
@@ -68,7 +71,7 @@ namespace Fantasy.Serialize
                     {
                         continue;
                     }
-
+            
                     BsonClassMap.LookupClassMap(entityType);
                 }
             }
