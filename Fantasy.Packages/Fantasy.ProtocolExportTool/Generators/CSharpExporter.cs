@@ -250,9 +250,9 @@ public sealed class CSharpExporter(
                     case MessageType.RouteTypeMessage:
                         {
                             helper.AppendLine("\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                            helper.AppendLine($"\t\tpublic static void {messageDefinition.Name}(this Session session, {messageDefinition.Name} message)");
+                            helper.AppendLine($"\t\tpublic static void {messageDefinition.Name}(this Session session, {messageDefinition.Name} {messageDefinition.Name}_message)");
                             helper.AppendLine("\t\t{");
-                            helper.AppendLine("\t\t\tsession.Send(message);");
+                            helper.AppendLine($"\t\t\tsession.Send({messageDefinition.Name}_message);");
                             helper.AppendLine("\t\t}");
 
                             if (messageDefinition.Fields.Count > 0)
@@ -263,14 +263,14 @@ public sealed class CSharpExporter(
                                 helper.AppendLine("\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
                                 helper.AppendLine($"\t\tpublic static void {messageDefinition.Name}(this Session session, {parameters})");
                                 helper.AppendLine("\t\t{");
-                                helper.AppendLine($"\t\t\tusing var message = Fantasy.{messageDefinition.Name}.Create();");
+                                helper.AppendLine($"\t\t\tusing var {messageDefinition.Name}_message = Fantasy.{messageDefinition.Name}.Create();");
 
                                 foreach (var field in messageDefinition.Fields)
                                 {
-                                    helper.AppendLine($"\t\t\tmessage.{field.Name} = {char.ToLower(field.Name[0])}{field.Name[1..]};");
+                                    helper.AppendLine($"\t\t\t{messageDefinition.Name}_message.{field.Name} = {char.ToLower(field.Name[0])}{field.Name[1..]};");
                                 }
 
-                                helper.AppendLine("\t\t\tsession.Send(message);");
+                                helper.AppendLine($"\t\t\tsession.Send({messageDefinition.Name}_message);");
                                 helper.AppendLine("\t\t}");
                             }
                             else
@@ -290,9 +290,9 @@ public sealed class CSharpExporter(
                     case MessageType.RoamingRequest:
                         {
                             helper.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                            helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinition.Name}(this Session session, {messageDefinition.Name} request)");
+                            helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinition.Name}(this Session session, {messageDefinition.Name} {messageDefinition.Name}_request)");
                             helper.AppendLine("\t\t{");
-                            helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call(request);");
+                            helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call({messageDefinition.Name}_request);");
                             helper.AppendLine("\t\t}");
 
                             if (messageDefinition.Fields.Count > 0)
@@ -303,12 +303,12 @@ public sealed class CSharpExporter(
                                 helper.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
                                 helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinition.Name}(this Session session, {parameters})");
                                 helper.AppendLine("\t\t{");
-                                helper.AppendLine($"\t\t\tusing var request = Fantasy.{messageDefinition.Name}.Create();");
+                                helper.AppendLine($"\t\t\tusing var {messageDefinition.Name}_request = Fantasy.{messageDefinition.Name}.Create();");
                                 foreach (var field in messageDefinition.Fields)
                                 {
-                                    helper.AppendLine($"\t\t\trequest.{field.Name} = {char.ToLower(field.Name[0])}{field.Name[1..]};");
+                                    helper.AppendLine($"\t\t\t{messageDefinition.Name}_request.{field.Name} = {char.ToLower(field.Name[0])}{field.Name[1..]};");
                                 }
-                                helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call(request);");
+                                helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call({messageDefinition.Name}_request);");
                                 helper.AppendLine("\t\t}");
                             }
                             else
@@ -316,8 +316,8 @@ public sealed class CSharpExporter(
                                 helper.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
                                 helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinition.Name}(this Session session)");
                                 helper.AppendLine("\t\t{");
-                                helper.AppendLine($"\t\t\tusing var request = Fantasy.{messageDefinition.Name}.Create();");
-                                helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call(request);");
+                                helper.AppendLine($"\t\t\tusing var {messageDefinition.Name}_request = Fantasy.{messageDefinition.Name}.Create();");
+                                helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call({messageDefinition.Name}_request);");
                                 helper.AppendLine("\t\t}");
                             }
                             break;
