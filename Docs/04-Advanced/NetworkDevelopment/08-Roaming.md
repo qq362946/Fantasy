@@ -185,7 +185,7 @@ SessionRoamingComponent session.CreateRoaming(long roamingId, bool isAutoDispose
 CreateRoamingResult session.TryCreateRoaming(long roamingId, bool isAutoDispose, int delayRemove);
 
 // 3. 链接到后端服务器
-uint roaming.Link(Session session, SceneConfig sceneConfig, int roamingType);
+uint roaming.Link(Session session, SceneConfig sceneConfig, int roamingType, Entity? args = null);
 ```
 
 **CreateRoamingResult 结构体：**
@@ -252,6 +252,172 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
 }
 ```
 
+**传递自定义参数到后端服务器：**
+
+```csharp
+// Gate 服务器：传递初始化参数到 Chat 服务器
+public class C2G_LoginWithDataRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginResponse>
+{
+    protected override async FTask Run(
+        Session session,
+        C2G_LoginRequest request,
+        G2C_LoginResponse response,
+        Action reply)
+    {
+        var roaming = await session.CreateRoaming(
+            roamingId: request.PlayerId,
+            isAutoDispose: true,
+            delayRemove: 1000
+        );
+
+        if (roaming == null)
+        {
+            response.ErrorCode = ErrorCode.RoamingCreateFailed;
+            return;
+        }
+
+        // 创建要传递的参数实体
+        var loginData = Entity.Create<PlayerLoginData>(session.Scene);
+        loginData.PlayerName = request.PlayerName;
+        loginData.Level = request.Level;
+        loginData.VipLevel = request.VipLevel;
+
+        // 链接到 Chat 服务器并传递参数
+        var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
+        var errorCode = await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType, loginData);
+
+        if (errorCode != 0)
+        {
+            response.ErrorCode = errorCode;
+            // ⚠️ Link 失败时，参数未传递到后端，Gate 需要销毁
+            loginData.Dispose();
+            return;
+        }
+
+        // ⚠️ Link 成功后，参数已通过序列化传递到后端服务器
+        // Gate 服务器上的原始对象需要立即销毁，销毁责任已转移到后端
+        loginData.Dispose();
+
+        Log.Info($"✅ 为玩家 {request.PlayerId} 建立到Chat的漫游路由，并传递了登录数据");
+        await FTask.CompletedTask;
+    }
+}
+```
+
+**⚠️ 重要：args 参数的内存管理**
+
+`Entity.Create<T>()` 创建的 Entity 使用了对象池，**必须在后端服务器的 OnCreateTerminus 事件中手动 Dispose() 销毁**，否则会导致内存泄露：
+
+```csharp
+// Chat 服务器：接收并销毁 args 参数
+public sealed class OnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
+{
+    protected override async FTask Handler(OnCreateTerminus self)
+    {
+        switch (self.Terminus.RoamingType)
+        {
+            case RoamingType.ChatRoamingType:
+            {
+                var chatPlayer = await self.Terminus.LinkTerminusEntity<ChatPlayer>(autoDispose: true);
+
+                if (chatPlayer == null)
+                {
+                    Log.Error("创建 ChatPlayer 失败");
+
+                    // ⚠️ 创建失败时也要销毁 args 参数
+                    self.Args?.Dispose();
+                    return;
+                }
+
+                // 使用传递的参数进行初始化
+                if (self.Args is PlayerLoginData loginData)
+                {
+                    chatPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
+                    chatPlayer.PlayerName = loginData.PlayerName;
+                    chatPlayer.Level = loginData.Level;
+                    chatPlayer.VipLevel = loginData.VipLevel;
+
+                    // ⚠️ 使用完毕后立即销毁，归还对象池，防止内存泄露
+                    loginData.Dispose();
+
+                    Log.Info($"✅ Chat 服务器使用传递的参数创建了 ChatPlayer，已销毁参数");
+                }
+                else
+                {
+                    // 没有传递参数或参数类型不匹配，使用默认初始化
+                    chatPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
+                    chatPlayer.LoadData();
+
+                    // ⚠️ 即使参数类型不匹配，也要销毁参数
+                    self.Args?.Dispose();
+
+                    Log.Info($"✅ Chat 服务器创建了 ChatPlayer，使用默认初始化");
+                }
+
+                break;
+            }
+            case RoamingType.MapRoamingType:
+            {
+                var mapPlayer = Entity.Create<MapPlayer>(self.Scene);
+                mapPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
+                await self.Terminus.LinkTerminusEntity(mapPlayer, autoDispose: true);
+
+                // ⚠️ Map 不需要参数，但仍需销毁传递过来的参数
+                self.Args?.Dispose();
+
+                Log.Info($"✅ Map 服务器创建了 MapPlayer，PlayerId={mapPlayer.PlayerId}");
+                break;
+            }
+        }
+
+        await FTask.CompletedTask;
+    }
+
+    private long GetPlayerIdFromRoamingId(Terminus terminus)
+    {
+        return terminus.RuntimeId;
+    }
+}
+```
+
+**⚠️ 内存管理核心要点：**
+
+1. **Entity.Create<T>() 使用对象池**：所有通过 `Entity.Create<T>()` 创建的实体都使用对象池
+2. **Gate 服务器必须销毁**：Gate 服务器在 Link 调用后（无论成功还是失败）都必须调用 `args.Dispose()` 销毁原始对象
+3. **后端服务器必须销毁**：后端服务器在 `OnCreateTerminus` 中接收到反序列化的参数副本后，使用完毕必须调用 `Args?.Dispose()` 销毁
+4. **双端都要销毁**：参数通过序列化传递，Gate 有原始对象，后端有反序列化的副本，**两端都需要各自销毁**
+
+```csharp
+// Gate 服务器：Link 后必须销毁原始对象
+var loginData = Entity.Create<PlayerLoginData>(session.Scene);
+loginData.PlayerName = request.PlayerName;
+loginData.Level = request.Level;
+
+var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
+var errorCode = await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType, loginData);
+
+if (errorCode != 0)
+{
+    response.ErrorCode = errorCode;
+    // ⚠️ Link 失败：Gate 销毁原始对象（参数未传递）
+    loginData.Dispose();
+    return;
+}
+
+// ⚠️ Link 成功：Gate 仍需销毁原始对象（参数已序列化传递，后端会收到副本）
+loginData.Dispose();
+```
+
+**内存管理最佳实践：**
+
+| 场景 | Gate 服务器 | 后端服务器 | 说明 |
+|------|-----------|-----------|------|
+| Link 成功 | 调用 `args.Dispose()` 销毁原始对象 | 在 `OnCreateTerminus` 中调用 `Args?.Dispose()` 销毁副本 | 双端都需要销毁 |
+| Link 失败 | 调用 `args.Dispose()` 销毁原始对象 | 不涉及 | 参数未传递，只有 Gate 需要销毁 |
+| 参数类型不匹配 | 调用 `args.Dispose()` 销毁原始对象 | 调用 `Args?.Dispose()` 销毁副本 | 即使不使用参数，也必须销毁 |
+| 创建失败 | 调用 `args.Dispose()` 销毁原始对象 | 调用 `Args?.Dispose()` 销毁副本 | 即使 `LinkTerminusEntity()` 失败，也要销毁参数 |
+| 不需要参数的 RoamingType | 调用 `args.Dispose()` 销毁原始对象 | 调用 `Args?.Dispose()` 销毁副本 | 防止误传参数导致内存泄露 |
+
 **完整示例（使用 TryCreateRoaming）：**
 
 ```csharp
@@ -317,6 +483,28 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
 
 当 Gate 调用 `roaming.Link()` 时，框架会自动在后端服务器（如 Chat）上创建 `Terminus`，并触发 `OnCreateTerminus` 事件。
 
+**OnCreateTerminus 事件参数：**
+
+```csharp
+public struct OnCreateTerminus
+{
+    /// <summary>
+    /// 获取与事件关联的场景实体。
+    /// </summary>
+    public readonly Scene Scene;
+
+    /// <summary>
+    /// 获取与事件关联的Terminus。
+    /// </summary>
+    public readonly Terminus Terminus;
+
+    /// <summary>
+    /// 获取传递过来的参数（来自 Link 方法的 args 参数）
+    /// </summary>
+    public readonly Entity? Args;
+}
+```
+
 **核心 API：**
 
 ```csharp
@@ -332,6 +520,7 @@ FTask terminus.LinkTerminusEntity(Entity entity, bool autoDispose);
 - `LinkTerminusEntity()` 是**可选的**，不调用也可以正常使用 Roaming
 - 如果不调用 `LinkTerminusEntity()`，漫游消息处理器接收到的实体就是 `Terminus` 本身
 - 如果调用了 `LinkTerminusEntity()`，漫游消息处理器接收到的实体就是关联的业务实体（如 `ChatPlayer`）
+- `OnCreateTerminus.Args` 可以接收 Gate 服务器 `Link()` 方法传递的自定义参数
 
 **完整示例：**
 
@@ -379,6 +568,68 @@ public sealed class OnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
     private long GetPlayerIdFromRoamingId(Terminus terminus)
     {
         // 假设 roamingId 就是 PlayerId
+        return terminus.RuntimeId;
+    }
+}
+```
+
+**使用传递的参数：**
+
+```csharp
+// Chat 服务器：使用 Link 传递的参数初始化实体
+public sealed class OnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
+{
+    protected override async FTask Handler(OnCreateTerminus self)
+    {
+        switch (self.Terminus.RoamingType)
+        {
+            case RoamingType.ChatRoamingType:
+            {
+                var chatPlayer = await self.Terminus.LinkTerminusEntity<ChatPlayer>(autoDispose: true);
+
+                if (chatPlayer == null)
+                {
+                    Log.Error("创建 ChatPlayer 失败");
+                    // ⚠️ 创建失败时也要销毁 args 参数
+                    self.Args?.Dispose();
+                    return;
+                }
+
+                // 使用传递的参数进行初始化
+                if (self.Args is PlayerLoginData loginData)
+                {
+                    chatPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
+                    chatPlayer.PlayerName = loginData.PlayerName;
+                    chatPlayer.Level = loginData.Level;
+                    chatPlayer.VipLevel = loginData.VipLevel;
+
+                    Log.Info($"✅ Chat 服务器使用传递的参数创建了 ChatPlayer，" +
+                            $"Name={chatPlayer.PlayerName}, Level={chatPlayer.Level}");
+
+                    // ⚠️ 使用完毕后立即销毁，归还对象池
+                    loginData.Dispose();
+                }
+                else
+                {
+                    // 没有传递参数，使用默认初始化
+                    chatPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
+                    chatPlayer.LoadData();
+
+                    Log.Info($"✅ Chat 服务器创建了 ChatPlayer，使用默认初始化");
+
+                    // ⚠️ 即使没有匹配的参数类型，也要销毁 Args
+                    self.Args?.Dispose();
+                }
+
+                break;
+            }
+        }
+
+        await FTask.CompletedTask;
+    }
+
+    private long GetPlayerIdFromRoamingId(Terminus terminus)
+    {
         return terminus.RuntimeId;
     }
 }
@@ -1046,7 +1297,7 @@ Roaming 漫游系统的核心优势：
 |-----|--------|------|---------|
 | `session.CreateRoaming()` | `SessionRoamingComponent` | Gate 创建 Roaming 组件（简单版本） | 不需要详细状态时 |
 | `session.TryCreateRoaming()` | `CreateRoamingResult` | Gate 创建 Roaming 组件（详细版本，包含状态） | 需要判断创建状态时 |
-| `roaming.Link()` | `uint` | 建立到后端服务器的路由 | 客户端登录时 |
+| `roaming.Link(session, config, type, args)` | `uint` | 建立到后端服务器的路由，可选传递 Entity 参数 | 客户端登录时 |
 | `terminus.LinkTerminusEntity()` | `FTask<T>` | 关联业务实体到 Terminus | OnCreateTerminus 事件中 |
 | `entity.Send(message)` | `void` | 向客户端发送消息 | 服务器主动推送 |
 | `entity.Send(roamingType, message)` | `void` | 向其他服务器发送消息 | 服务器间通信 |

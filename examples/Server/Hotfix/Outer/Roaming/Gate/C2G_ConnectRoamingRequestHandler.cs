@@ -1,4 +1,6 @@
 using Fantasy.Async;
+using Fantasy.Entitas;
+using Fantasy.Model.Roaming;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 using Fantasy.Network.Roaming;
@@ -37,11 +39,16 @@ public sealed class C2G_ConnectRoamingRequestHandler : MessageRPC<C2G_ConnectRoa
         // 该示例工程下文件位置在Config/NetworkProtocol/RoamingType.Config
         // 执行完后漫游会自动把Session绑定到Map场景上。
         // 后面发送该类型的消息到Session上会自动转发给Map场景。
-        var linkResponse = await roaming.Link(session, mapConfig, RoamingType.MapRoamingType);
-        if (linkResponse != 0)
+        uint linkResponse = 0;
+        using (var args = Entity.Create<MaoRoamingArgs>(session.Scene))
         {
-            response.ErrorCode = linkResponse;
-            return;
+            args.Tag = "HI";
+            linkResponse = await roaming.Link(session, mapConfig, RoamingType.MapRoamingType, args);
+            if (linkResponse != 0)
+            {
+                response.ErrorCode = linkResponse;
+                return;
+            }
         }
         // 同样，你可以创建多个漫游的场景，但每个场景的AddressId和RoamingType不能重复。
         // 这里创建Chat场景的漫游。

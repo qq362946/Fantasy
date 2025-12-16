@@ -107,8 +107,7 @@ namespace Fantasy.Network
         public const uint AddressableLockResponse = 1207959556;                     // Create(ProtoBuf=0, InnerAddressResponse=9, 4)
         public const uint AddressableUnLockRequest = 1073741829;                    // Create(ProtoBuf=0, InnerAddressRequest=8, 5)
         public const uint AddressableUnLockResponse = 1207959557;                   // Create(ProtoBuf=0, InnerAddressResponse=9, 5)
-        public const uint LinkRoamingRequest = 1073741830;                          // Create(ProtoBuf=0, InnerAddressRequest=8, 6)
-        public const uint LinkRoamingResponse = 1207959558;                         // Create(ProtoBuf=0, InnerAddressResponse=9, 6)
+        
         public const uint UnLinkRoamingRequest = 1073741832;                        // Create(ProtoBuf=0, InnerAddressRequest=8, 8)
         public const uint UnLinkRoamingResponse = 1207959560;                       // Create(ProtoBuf=0, InnerAddressResponse=9, 8)
         public const uint LockTerminusIdRequest = 1073741833;                       // Create(ProtoBuf=0, InnerAddressRequest=8, 9)
@@ -134,6 +133,9 @@ namespace Fantasy.Network
         public const uint PublishSphereEventRequest = 1090519045;                   // Create(MemoryPack=2, InnerAddressRequest=8, 5)
         public const uint PublishSphereEventResponse = 1224736773;                  // Create(MemoryPack=2, InnerAddressResponse=9, 5)
 
+        public const uint LinkRoamingRequest = 1090519046;                          // Create(MemoryPack=2, InnerAddressRequest=8, 6)
+        public const uint LinkRoamingResponse = 1224736774;                         // Create(MemoryPack=2, InnerAddressResponse=9, 6)
+        
         /// <summary>
         /// 创建 OpCode（运行时使用）
         /// </summary>

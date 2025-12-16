@@ -165,9 +165,9 @@ public class PlayerAwakeSystem : AwakeSystem<Player>
 | 🍎 **macOS** | ✅ 完全支持 | 开发调试友好           |
 | 🎮 **Unity (Win/Mac/iOS/Android)** | ✅ 完全支持 | 2022.3.62+       |
 | 🌐 **Unity WebGL (H5)** | ✅ 完全支持 | WebSocket 协议     |
-| 🎯 **Godot** | ❎ 暂未支持 | .NET 版本 Godot    |
-| 🖼️ **WinForms / WPF** | ❎ 暂未支持 | GM 工具、服务器监控面板    |
-| 📟 **Console** | ❎ 暂未支持 | 独立游戏、机器人、压测工具    |
+| 🎯 **Godot** | ❌ 暂未支持 | .NET 版本 Godot    |
+| 🖼️ **WinForms / WPF** | ❌ 暂未支持 | GM 工具、服务器监控面板    |
+| 📟 **Console** | ❌ 暂未支持 | 独立游戏、机器人、压测工具    |
 
 ---
 

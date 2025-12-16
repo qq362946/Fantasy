@@ -394,7 +394,7 @@ namespace Fantasy.InnerMessage
         public uint ErrorCode { get; set; }
     }
 #if FANTASY_NET
-    [ProtoContract]
+    [MemoryPackable]
     public sealed partial class I_LinkRoamingRequest : AMessage, IAddressRequest
     {
         public static I_LinkRoamingRequest Create()
@@ -411,20 +411,22 @@ namespace Fantasy.InnerMessage
             MessageObjectPool<I_LinkRoamingRequest>.Return(this);
         }
         
-        [ProtoIgnore]
+        [MemoryPackIgnore]
         public I_LinkRoamingResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.LinkRoamingRequest; }
         public long RouteTypeOpCode() { return 1; }
-        [ProtoMember(1)]
+        [MemoryPackOrder(1)]
         public long RoamingId { get; set; }
-        [ProtoMember(2)]
+        [MemoryPackOrder(2)]
         public int RoamingType { get; set; }
-        [ProtoMember(3)]
+        [MemoryPackOrder(3)]
         public long ForwardSessionAddress { get; set; }
-        [ProtoMember(4)]
+        [MemoryPackOrder(4)]
         public long SceneAddress { get; set; }
+        [MemoryPackOrder(5)] 
+        public Entity Args { get; set; }
     }
-    [ProtoContract]
+    [MemoryPackable]
     public sealed partial class I_LinkRoamingResponse : AMessage, IAddressResponse
     {
         public static I_LinkRoamingResponse Create()
@@ -440,10 +442,12 @@ namespace Fantasy.InnerMessage
         }
         
         public uint OpCode() { return Fantasy.Network.OpCode.LinkRoamingResponse; }
-        [ProtoMember(1)]
+        [MemoryPackOrder(1)]
         public long TerminusId { get; set; }
-        [ProtoMember(2)]
+        [MemoryPackOrder(2)]
         public uint ErrorCode { get; set; }
+        [MemoryPackOrder(3)] 
+        public Entity Args { get; set; }
     }
     [ProtoContract]
     public sealed partial class I_UnLinkRoamingRequest : AMessage, IAddressRequest

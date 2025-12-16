@@ -153,10 +153,11 @@ public sealed class SessionRoamingComponent : Entity
     /// <param name="session">要建立漫游协议的目标Scene的SceneConfig。</param>
     /// <param name="targetSceneConfig">需要转发的Session</param>
     /// <param name="roamingTyp">要创建的漫游协议类型。</param>
+    /// <param name="args">要传递的Entity类型参数</param>
     /// <returns>如果建立完成会返回为0，其余不为0的都是发生错误了。可以通过InnerErrorCode.cs来查看错误。</returns>
-    public async FTask<uint> Link(Session session, SceneConfig targetSceneConfig, int roamingTyp)
+    public async FTask<uint> Link(Session session, SceneConfig targetSceneConfig, int roamingTyp, Entity? args = null)
     {
-        return await Link(targetSceneConfig.Address, session.RuntimeId, roamingTyp);
+        return await Link(targetSceneConfig.Address, session.RuntimeId, roamingTyp, args);
     }
 
     /// <summary>
@@ -165,8 +166,9 @@ public sealed class SessionRoamingComponent : Entity
     /// <param name="targetSceneAddress">要建立漫游协议的目标Scene的Address。</param>
     /// <param name="forwardSessionAddress">需要转发的Session的Address。</param>
     /// <param name="roamingType">要创建的漫游协议类型。</param>
+    /// <param name="args">要传递的Entity类型参数</param>
     /// <returns>如果建立完成会返回为0，其余不为0的都是发生错误了。可以通过InnerErrorCode.cs来查看错误。</returns>
-    public async FTask<uint> Link(long targetSceneAddress, long forwardSessionAddress, int roamingType)
+    public async FTask<uint> Link(long targetSceneAddress, long forwardSessionAddress, int roamingType, Entity? args = null)
     {
         if (_roaming.ContainsKey(roamingType))
         {
@@ -179,7 +181,8 @@ public sealed class SessionRoamingComponent : Entity
                 RoamingId = Id,
                 RoamingType = roamingType,
                 ForwardSessionAddress = forwardSessionAddress,
-                SceneAddress = Scene.RuntimeId
+                SceneAddress = Scene.RuntimeId,
+                Args = args
             });
         
         if (response.ErrorCode != 0)

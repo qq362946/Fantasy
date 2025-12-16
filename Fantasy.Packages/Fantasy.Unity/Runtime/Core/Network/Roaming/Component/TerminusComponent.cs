@@ -18,16 +18,23 @@ public struct OnCreateTerminus
     /// </summary>
     public readonly Scene Scene;
     /// <summary>
+    /// 获取传递过来的参数
+    /// </summary>
+    public readonly Entity? Args;
+    /// <summary>
     /// 获取与事件关联的Terminus。
     /// </summary>
     public readonly Terminus Terminus;
+
     /// <summary>
     /// 初始化一个新的 OnCreateTerminus 实例。
     /// </summary>
     /// <param name="scene"></param>
     /// <param name="terminus"></param>
-    public OnCreateTerminus(Scene scene, Terminus terminus)
+    /// <param name="args"></param>
+    public OnCreateTerminus(Scene scene, Terminus terminus, Entity? args)
     {
+        Args = args;
         Scene = scene;
         Terminus = terminus;
     }

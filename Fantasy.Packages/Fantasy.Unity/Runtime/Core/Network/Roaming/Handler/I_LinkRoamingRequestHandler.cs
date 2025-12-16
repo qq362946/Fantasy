@@ -23,9 +23,10 @@ internal sealed class I_LinkRoamingRequestHandler : AddressRPC<Scene, I_LinkRoam
             return;
         }
 
+        var requestArgs = request.Args;
         response.TerminusId = roamingTerminal.TerminusId;
         reply();
-        await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, roamingTerminal));
+        await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, roamingTerminal, requestArgs));
     }
 }
 #endif

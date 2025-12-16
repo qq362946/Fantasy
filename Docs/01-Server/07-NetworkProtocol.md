@@ -166,7 +166,7 @@ message G2C_TestResponse // IResponse
 
 Inner 文件夹包含所有**服务器间通信(Server-to-Server)**的网络协议定义。这些协议仅在服务器内部使用,不对客户端开放。
 
-### 支持的序列化方式
+## 支持的序列化方式
 
 Inner 协议支持两种序列化方式:
 
@@ -189,21 +189,19 @@ message G2A_TestMessage // IMessage
     string Tag = 1;
 }
 
-/// 使用 Bson 序列化(仅 Inner 支持)
-// Protocol Bson
+/// 使用 MemoryPack 序列化
+// Protocol MemoryPack
 message M2M_SendUnitRequest // Iequest,M2M_SendUnitResponse
 {
     Unit Unit = 1;
 }
 
-// Protocol Bson
+// Protocol MemoryPack
 message M2M_SendUnitResponse // IResponse
 {
 
 }
 ```
-
----
 
 ## OpCode.Cache - 协议代码缓存
 
