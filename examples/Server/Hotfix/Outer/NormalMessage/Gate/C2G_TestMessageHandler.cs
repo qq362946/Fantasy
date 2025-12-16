@@ -17,4 +17,4 @@ public sealed class C2G_TestMessageHandler : Message<C2G_TestMessage>
         Log.Debug($"Receive C2G_TestMessage ");
         await FTask.CompletedTask;
     }
-}
+} 

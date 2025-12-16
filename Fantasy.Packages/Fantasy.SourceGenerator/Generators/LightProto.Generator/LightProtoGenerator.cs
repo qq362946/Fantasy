@@ -2391,7 +2391,28 @@ public class LightProtoGenerator : IIncrementalGenerator
                 throw LightProtoGeneratorException.Member_DeclarationSyntax_Not_Found(memberName);
             }
 
-            if (initializer is null)
+            // For collection types, always regenerate initializer with fully qualified names to ensure Unity compatibility
+            if (IsCollectionType(compilation, memberType) || IsDictionaryType(compilation, memberType))
+            {
+                if (memberType is IArrayTypeSymbol arrayTypeSymbol)
+                {
+                    initializer = $"global::System.Array.Empty<{arrayTypeSymbol.ElementType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}>()";
+                }
+                else if (memberType.TypeKind == TypeKind.Interface || memberType.IsAbstract)
+                {
+                    var concreteType = ResolveConcreteTypeSymbol(
+                        compilation,
+                        (memberType as INamedTypeSymbol)!
+                    );
+                    initializer = $"new {concreteType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}()";
+                }
+                else
+                {
+                    // For concrete collection types like List<T>, use fully qualified name
+                    initializer = $"new {memberType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}()";
+                }
+            }
+            else if (initializer is null)
             {
                 if (nullableAnnotation == NullableAnnotation.Annotated)
                 {
@@ -2399,29 +2420,7 @@ public class LightProtoGenerator : IIncrementalGenerator
                 }
                 else if (HasEmptyStaticField(memberType))
                 {
-                    initializer = $"{memberType}.Empty";
-                }
-                else if (
-                    IsCollectionType(compilation, memberType)
-                    || IsDictionaryType(compilation, memberType)
-                )
-                {
-                    if (memberType is IArrayTypeSymbol arrayTypeSymbol)
-                    {
-                        initializer = $"Array.Empty<{arrayTypeSymbol.ElementType}>()";
-                    }
-                    else if (memberType.TypeKind == TypeKind.Interface || memberType.IsAbstract)
-                    {
-                        var concreteType = ResolveConcreteTypeSymbol(
-                            compilation,
-                            (memberType as INamedTypeSymbol)!
-                        );
-                        initializer = $"new {concreteType.ToDisplayString()}()";
-                    }
-                    else
-                    {
-                        initializer = "default";
-                    }
+                    initializer = $"{memberType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}.Empty";
                 }
                 else
                 {

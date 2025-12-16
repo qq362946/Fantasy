@@ -10,10 +10,9 @@ message C2G_TestEmptyMessage // IMessage
 {
 	
 }
-// Protocol MemoryPack
 message C2G_TestMessage // IMessage
 {
-	string Tag = 1;
+	string Tag = 1; 
 }
 message C2G_TestRequest // IRequest,G2C_TestResponse
 {
