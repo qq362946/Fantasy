@@ -67,7 +67,7 @@ namespace Fantasy.Serialize
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
             var protoBufDispatcherRegistrar = assemblyManifest.ProtoBufDispatcherRegistrar;
 
-            if (ProgramDefine.IsAppationRunning)
+            if (ProgramDefine.IsAppRunning)
             {
                 var tcs = FTask.Create(false);
                 ThreadScheduler.MainScheduler.ThreadSynchronizationContext.Post(() =>

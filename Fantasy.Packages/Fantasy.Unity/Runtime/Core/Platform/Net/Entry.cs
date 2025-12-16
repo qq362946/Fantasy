@@ -31,7 +31,7 @@ public static class Entry
         // 启动Process
         StartProcess().Coroutine();
         // 设置当前程序已经在运行中
-        ProgramDefine.IsAppationRunning = true;
+        ProgramDefine.IsAppRunning = true;
         await FTask.CompletedTask;
         while (true)
         {
@@ -153,7 +153,7 @@ public static class Entry
         await AssemblyManifest.Dispose();
         SerializerManager.Dispose();
         // 设置当前程序已经在停止中
-        ProgramDefine.IsAppationRunning = false;
+        ProgramDefine.IsAppRunning = false;
     }
 }
 #endif

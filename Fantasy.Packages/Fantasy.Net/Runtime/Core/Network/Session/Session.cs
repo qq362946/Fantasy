@@ -238,8 +238,8 @@ namespace Fantasy.Network
             {
                 // 如果解析失败，只有一种可能，那就是有人恶意发包。
                 // 所以这里强制关闭了当前连接。不让对方一直发包。
-                Dispose();
                 Log.Error(e);
+                Dispose();
             }
         }
 #if FANTASY_NET

@@ -59,7 +59,7 @@ namespace Fantasy.Platform.Unity
 #endif
             _isInit = true;
             // 设置当前程序已经在运行中
-            ProgramDefine.IsAppationRunning = true;
+            ProgramDefine.IsAppRunning = true;
             FantasyObject.FantasyObjectGameObject.AddComponent<Entry>();
             Log.Debug("Fantasy Initialize Complete!");
         }
@@ -108,7 +108,7 @@ namespace Fantasy.Platform.Unity
             await AssemblyManifest.Dispose();
             _isInit = false;
             // 设置当前程序已经在停止中
-            ProgramDefine.IsAppationRunning = false;
+            ProgramDefine.IsAppRunning = false;
         }
     }
 }

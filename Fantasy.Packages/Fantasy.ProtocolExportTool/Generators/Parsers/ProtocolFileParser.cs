@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Fantasy.Network;
 using Fantasy.ProtocolExportTool.Models;
 using Spectre.Console;
+#pragma warning disable CS0414 // Field is assigned but its value is never used
 
 namespace Fantasy.ProtocolExportTool.Generators.Parsers;
 

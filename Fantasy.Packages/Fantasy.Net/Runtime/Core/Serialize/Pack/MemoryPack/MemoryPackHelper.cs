@@ -70,7 +70,7 @@ namespace Fantasy.Serialize
                 return;
             }
             
-            if (ProgramDefine.IsAppationRunning)
+            if (ProgramDefine.IsAppRunning)
             {
                 var tcs = FTask.Create(false);
                 ThreadScheduler.MainScheduler.ThreadSynchronizationContext.Post(() =>
