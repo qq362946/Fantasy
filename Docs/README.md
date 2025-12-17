@@ -145,6 +145,7 @@ Unity 客户端开发的完整指南。
 
 #### 高级特性
 - ✅ [11-Timer.md](04-Advanced/CoreSystems/11-Timer.md) - Timer 系统使用指南
+- ✅ [12-EventAwaiter.md](04-Advanced/CoreSystems/12-EventAwaiter.md) - EventAwaiter 类型化异步等待系统
 
 #### 部署运维
 - [ ] 14-Deployment.md - 服务器部署指南
