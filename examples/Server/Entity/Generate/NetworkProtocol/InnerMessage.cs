@@ -71,6 +71,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<G2A_TestResponse>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.G2A_TestResponse; } 
@@ -107,6 +108,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             AddressableId = default;
             MessageObjectPool<M2G_ResponseAddressableId>.Return(this);
         }
@@ -152,6 +154,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             ChatAddress = default;
             MessageObjectPool<Chat2G_CreateRouteResponse>.Return(this);
         }
@@ -197,6 +200,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<M2M_SendUnitResponse>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.M2M_SendUnitResponse; } 
@@ -255,6 +259,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             SubSceneAddress = default;
             MessageObjectPool<M2G_CreateSubSceneResponse>.Return(this);
         }
@@ -316,6 +321,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             AddressableId = default;
             MessageObjectPool<SubScene2G_AddressableIdResponse>.Return(this);
         }
@@ -385,6 +391,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<Map2G_TestRouteMessageResponse>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.Map2G_TestRouteMessageResponse; } 
@@ -429,6 +436,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<Map2G_TestRoamingMessageResponse>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.Map2G_TestRoamingMessageResponse; } 
@@ -471,6 +479,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<G2Map_SubscribeSphereEventResponse>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.G2Map_SubscribeSphereEventResponse; } 
@@ -513,6 +522,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<Map2G_UnsubscribeSphereEventResponse>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.Map2G_UnsubscribeSphereEventResponse; } 

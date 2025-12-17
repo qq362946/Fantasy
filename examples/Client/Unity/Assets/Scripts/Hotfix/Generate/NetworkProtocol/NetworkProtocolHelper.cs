@@ -3,7 +3,6 @@ using Fantasy;
 using Fantasy.Async;
 using Fantasy.Network;
 using System.Collections.Generic;
-// ReSharper disable InconsistentNaming
 #pragma warning disable CS8618
 namespace Fantasy
 {

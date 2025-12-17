@@ -44,6 +44,7 @@ namespace Fantasy.ProtocolExportTool.Models
                     members.Add($"        [{memberAttribute}(1)]");
                 }
 
+                disposeCode.AppendLine("            ErrorCode = 0;");
                 members.Add("        public uint ErrorCode { get; set; }");
             }
 

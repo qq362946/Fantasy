@@ -234,7 +234,9 @@ public sealed class CSharpExporter(
 
             // 开始条件编译区域
             if (ifAnyCondition)
+            {
                 helper.AppendLine($"#if {kv.Key}");
+            }
 
             foreach (MessageDefinition messageDefinition in kv.Value)
             {
@@ -327,7 +329,9 @@ public sealed class CSharpExporter(
 
             // 结束条件编译区域
             if (ifAnyCondition)
+            {
                 helper.AppendLine($"#endif");
+            }
         }
         
         return $$"""

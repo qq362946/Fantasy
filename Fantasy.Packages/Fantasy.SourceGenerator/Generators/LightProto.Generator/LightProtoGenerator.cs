@@ -35,13 +35,11 @@ public class LightProtoGenerator : IIncrementalGenerator
                 }
 
                 // Check if the type has ProtoContract attribute
-                if (namedTypeSymbol.GetAttributes().Any(attr =>
-                    attr.AttributeClass?.ToDisplayString() == "LightProto.ProtoContractAttribute"))
-                {
-                    return true;
-                }
+                bool hasProtoContract = namedTypeSymbol.GetAttributes().Any(attr =>
+                    attr.AttributeClass?.ToDisplayString() == "LightProto.ProtoContractAttribute");
 
                 // Check if the type inherits from AMessage abstract class
+                bool inheritsFromAMessage = false;
                 var baseType = namedTypeSymbol.BaseType;
                 while (baseType != null)
                 {
@@ -49,12 +47,14 @@ public class LightProtoGenerator : IIncrementalGenerator
                     if (baseTypeName == "Fantasy.Network.Interface.AMessage" ||
                         baseType.Name == "AMessage")
                     {
-                        return true;
+                        inheritsFromAMessage = true;
+                        break;
                     }
                     baseType = baseType.BaseType;
                 }
 
-                return false;
+                // Must have BOTH ProtoContract attribute AND inherit from AMessage
+                return hasProtoContract && inheritsFromAMessage;
             }
         );
         var typesAndCompilation = protoContracts.Combine(context.CompilationProvider);
@@ -1849,7 +1849,14 @@ public class LightProtoGenerator : IIncrementalGenerator
             return false;
         }
 
-        // Check if inherits from AMessage abstract class
+        // Check if the type has ProtoContract attribute
+        bool hasProtoContract = memberType
+            .GetAttributes()
+            .Any(o =>
+                o.AttributeClass?.ToDisplayString() == "LightProto.ProtoContractAttribute"
+            );
+
+        // Check if inherits from AMessage abstract class or implements IProtoParser
         if (memberType is INamedTypeSymbol namedType)
         {
             var baseType = namedType.BaseType;
@@ -1859,7 +1866,8 @@ public class LightProtoGenerator : IIncrementalGenerator
                 if (baseTypeName == "Fantasy.Network.Interface.AMessage" ||
                     baseType.Name == "AMessage")
                 {
-                    return true;
+                    // Must have BOTH ProtoContract attribute AND inherit from AMessage
+                    return hasProtoContract;
                 }
                 baseType = baseType.BaseType;
             }
@@ -1872,12 +1880,8 @@ public class LightProtoGenerator : IIncrementalGenerator
             }
         }
 
-        // Fallback to ProtoContract attribute
-        return memberType
-            .GetAttributes()
-            .Any(o =>
-                o.AttributeClass?.ToDisplayString() == "LightProto.ProtoContractAttribute"
-            );
+        // Fallback: only ProtoContract attribute without AMessage
+        return hasProtoContract;
     }
 
     static bool IsArrayType(ITypeSymbol type)
@@ -2084,8 +2088,8 @@ public class LightProtoGenerator : IIncrementalGenerator
             baseType = baseType.BaseType;
         }
 
-        // Must either inherit from AMessage or have ProtoContract attribute
-        if (!inheritsFromAMessage && protoContractAttr == null)
+        // Must have BOTH ProtoContract attribute AND inherit from AMessage
+        if (!inheritsFromAMessage || protoContractAttr == null)
             return null;
 
         ImplicitFields implicitFields = (ImplicitFields)(

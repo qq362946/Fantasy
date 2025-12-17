@@ -94,6 +94,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             Tag = default;
             MessageObjectPool<G2C_TestResponse>.Return(this);
         }
@@ -174,6 +175,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<G2C_CreateAddressableResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_CreateAddressableResponse; } 
@@ -232,6 +234,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             Tag = default;
             MessageObjectPool<M2C_TestResponse>.Return(this);
         }
@@ -274,6 +277,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<G2C_CreateChatRouteResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_CreateChatRouteResponse; } 
@@ -342,6 +346,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             Tag = default;
             MessageObjectPool<Chat2C_TestMessageResponse>.Return(this);
         }
@@ -384,6 +389,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<M2C_MoveToMapResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.M2C_MoveToMapResponse; } 
@@ -490,6 +496,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<G2C_CreateSubSceneResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_CreateSubSceneResponse; } 
@@ -548,6 +555,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<G2C_CreateSubSceneAddressableResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_CreateSubSceneAddressableResponse; } 
@@ -628,6 +636,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<G2C_ConnectRoamingResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_ConnectRoamingResponse; } 
@@ -720,6 +729,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<Chat2C_TestRPCRoamingResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.Chat2C_TestRPCRoamingResponse; } 
@@ -809,6 +819,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<Map2C_TestTransferResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.Map2C_TestTransferResponse; } 
@@ -916,6 +927,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<G2C_SubscribeSphereEventResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_SubscribeSphereEventResponse; } 
@@ -955,6 +967,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<G2C_PublishSphereEventResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_PublishSphereEventResponse; } 
@@ -994,6 +1007,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<G2C_UnsubscribeSphereEventResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_UnsubscribeSphereEventResponse; } 
@@ -1033,6 +1047,7 @@ namespace Fantasy
 
         public void Dispose()
         {
+            ErrorCode = 0;
             MessageObjectPool<G2C_MapUnsubscribeSphereEventResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_MapUnsubscribeSphereEventResponse; } 

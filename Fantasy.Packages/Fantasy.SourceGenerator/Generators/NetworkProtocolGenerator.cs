@@ -348,6 +348,11 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         Compilation compilation,
         List<NetworkProtocolTypeInfo> networkProtocolTypeInfoList)
     {
+        // 只处理有 ProtoContract 特性的类型
+        var protoBufTypeInfoList = networkProtocolTypeInfoList
+            .Where(info => info.HasProtoContract)
+            .ToList();
+
         var markerClassName = compilation.GetAssemblyName("ProtoBufDispatcherRegistrar", out var assemblyName, out _);
         var builder = new SourceCodeBuilder();
 
@@ -375,12 +380,12 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.AddXmlComment("TypeHandles");
         builder.BeginMethod("public global::System.RuntimeTypeHandle[] TypeHandles()");
 
-        if (networkProtocolTypeInfoList.Any())
+        if (protoBufTypeInfoList.Any())
         {
-            builder.AppendLine($"var handles = new global::System.RuntimeTypeHandle[{networkProtocolTypeInfoList.Count}];");
-            for (int i = 0; i < networkProtocolTypeInfoList.Count; i++)
+            builder.AppendLine($"var handles = new global::System.RuntimeTypeHandle[{protoBufTypeInfoList.Count}];");
+            for (int i = 0; i < protoBufTypeInfoList.Count; i++)
             {
-                builder.AppendLine($"handles[{i}] = typeof({networkProtocolTypeInfoList[i].FullName}).TypeHandle;");
+                builder.AppendLine($"handles[{i}] = typeof({protoBufTypeInfoList[i].FullName}).TypeHandle;");
             }
             builder.AppendLine("return handles;");
         }
@@ -395,13 +400,13 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         // 生成 SerializeDelegates 方法
         builder.AddXmlComment("SerializeDelegates");
         builder.BeginMethod("public global::System.Action<global::System.Buffers.IBufferWriter<byte>, object>[] SerializeDelegates()");
-        
-        if (networkProtocolTypeInfoList.Any())
+
+        if (protoBufTypeInfoList.Any())
         {
-            builder.AppendLine($"var delegates = new global::System.Action<global::System.Buffers.IBufferWriter<byte>, object>[{networkProtocolTypeInfoList.Count}];");
-            for (var i = 0; i < networkProtocolTypeInfoList.Count; i++)
+            builder.AppendLine($"var delegates = new global::System.Action<global::System.Buffers.IBufferWriter<byte>, object>[{protoBufTypeInfoList.Count}];");
+            for (var i = 0; i < protoBufTypeInfoList.Count; i++)
             {
-                var typeInfo = networkProtocolTypeInfoList[i];
+                var typeInfo = protoBufTypeInfoList[i];
                 builder.AppendLine($"delegates[{i}] = (buffer, message) => Serializer.Serialize<{typeInfo.FullName}>(buffer, ({typeInfo.FullName})message, {typeInfo.FullName}.ProtoWriter);");
             }
             builder.AppendLine("return delegates;");
@@ -418,12 +423,12 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.AddXmlComment("DeserializeDelegates");
         builder.BeginMethod("public global::System.Func<global::System.IO.Stream, object>[] DeserializeDelegates()");
 
-        if (networkProtocolTypeInfoList.Any())
+        if (protoBufTypeInfoList.Any())
         {
-            builder.AppendLine($"var delegates = new global::System.Func<global::System.IO.Stream, object>[{networkProtocolTypeInfoList.Count}];");
-            for (int i = 0; i < networkProtocolTypeInfoList.Count; i++)
+            builder.AppendLine($"var delegates = new global::System.Func<global::System.IO.Stream, object>[{protoBufTypeInfoList.Count}];");
+            for (int i = 0; i < protoBufTypeInfoList.Count; i++)
             {
-                var typeInfo = networkProtocolTypeInfoList[i];
+                var typeInfo = protoBufTypeInfoList[i];
                 builder.AppendLine($"delegates[{i}] = (buffer) => Serializer.Deserialize<{typeInfo.FullName}>(buffer, {typeInfo.FullName}.ProtoReader);");
             }
             builder.AppendLine("return delegates;");
@@ -440,12 +445,12 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.AddXmlComment("ProtoReaders");
         builder.BeginMethod("public object[] ProtoReaders()");
 
-        if (networkProtocolTypeInfoList.Any())
+        if (protoBufTypeInfoList.Any())
         {
-            builder.AppendLine($"var readers = new object[{networkProtocolTypeInfoList.Count}];");
-            for (int i = 0; i < networkProtocolTypeInfoList.Count; i++)
+            builder.AppendLine($"var readers = new object[{protoBufTypeInfoList.Count}];");
+            for (int i = 0; i < protoBufTypeInfoList.Count; i++)
             {
-                var typeInfo = networkProtocolTypeInfoList[i];
+                var typeInfo = protoBufTypeInfoList[i];
                 builder.AppendLine($"readers[{i}] = {typeInfo.FullName}.ProtoReader;");
             }
             builder.AppendLine("return readers;");
@@ -462,12 +467,12 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         builder.AddXmlComment("ProtoWriters");
         builder.BeginMethod("public object[] ProtoWriters()");
 
-        if (networkProtocolTypeInfoList.Any())
+        if (protoBufTypeInfoList.Any())
         {
-            builder.AppendLine($"var writers = new object[{networkProtocolTypeInfoList.Count}];");
-            for (int i = 0; i < networkProtocolTypeInfoList.Count; i++)
+            builder.AppendLine($"var writers = new object[{protoBufTypeInfoList.Count}];");
+            for (int i = 0; i < protoBufTypeInfoList.Count; i++)
             {
-                var typeInfo = networkProtocolTypeInfoList[i];
+                var typeInfo = protoBufTypeInfoList[i];
                 builder.AppendLine($"writers[{i}] = {typeInfo.FullName}.ProtoWriter;");
             }
             builder.AppendLine("return writers;");
@@ -559,11 +564,16 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
             }
         }
 
+        // 检测是否有 ProtoContract 特性
+        bool hasProtoContract = symbol.GetAttributes().Any(attr =>
+            attr.AttributeClass?.ToDisplayString() == "LightProto.ProtoContractAttribute");
+
         return new NetworkProtocolTypeInfo(
             symbol.GetFullName(),
             opCodeValue.Value,
             responseTypeName,
-            routeTypeValue
+            routeTypeValue,
+            hasProtoContract
         );
     }
 
@@ -594,5 +604,6 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         string FullName,
         uint OpCode,
         string? ResponseType,
-        int? RouteType);
+        int? RouteType,
+        bool HasProtoContract);
 }

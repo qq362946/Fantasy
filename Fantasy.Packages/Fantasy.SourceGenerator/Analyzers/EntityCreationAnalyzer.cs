@@ -18,7 +18,6 @@ namespace Fantasy.SourceGenerator.Analyzers
     [SuppressMessage("MicrosoftCodeAnalysisCorrectness", "RS1036:指定分析器禁止的 API 强制设置")]
     public class EntityCreationAnalyzer : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "FANTASY002";
         private static readonly LocalizableString Title =
             "Cannot instantiate Entity directly";
         private static readonly LocalizableString MessageFormat =
@@ -27,7 +26,7 @@ namespace Fantasy.SourceGenerator.Analyzers
             "Entity and its derived classes (except Scene) must be created using the Create<T>() factory method to ensure proper initialization.";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
-            DiagnosticId,
+            DiagnosticIds.EntityCreation,
             Title,
             MessageFormat,
             "Usage",

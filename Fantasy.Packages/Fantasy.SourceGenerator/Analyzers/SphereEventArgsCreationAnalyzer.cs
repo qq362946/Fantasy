@@ -17,10 +17,6 @@ namespace Fantasy.SourceGenerator.Analyzers
     [SuppressMessage("MicrosoftCodeAnalysisCorrectness", "RS1036:指定分析器禁止的 API 强制设置")]
     public class SphereEventArgsCreationAnalyzer : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "FANTASY001";
-        public const string MissingMemoryPackableDiagnosticId = "FANTASY004";
-        public const string MissingPartialDiagnosticId = "FANTASY005";
-
         private static readonly LocalizableString Title =
             "Cannot instantiate SphereEventArgs directly";
         private static readonly LocalizableString MessageFormat =
@@ -29,7 +25,7 @@ namespace Fantasy.SourceGenerator.Analyzers
             "SphereEventArgs and its derived classes must be created using the Create<T>() factory method to ensure proper initialization.";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
-            DiagnosticId,
+            DiagnosticIds.SphereEventArgsCreation,
             Title,
             MessageFormat,
             "Usage",
@@ -45,7 +41,7 @@ namespace Fantasy.SourceGenerator.Analyzers
             "All SphereEventArgs derived classes require [MemoryPackable] attribute to enable MemoryPack serialization.";
 
         private static readonly DiagnosticDescriptor MissingMemoryPackableRule = new DiagnosticDescriptor(
-            MissingMemoryPackableDiagnosticId,
+            DiagnosticIds.SphereEventArgsMissingMemoryPackable,
             MissingMemoryPackableTitle,
             MissingMemoryPackableMessageFormat,
             "Design",
@@ -61,7 +57,7 @@ namespace Fantasy.SourceGenerator.Analyzers
             "All SphereEventArgs derived classes must be partial to allow MemoryPack source generator to add serialization code.";
 
         private static readonly DiagnosticDescriptor MissingPartialRule = new DiagnosticDescriptor(
-            MissingPartialDiagnosticId,
+            DiagnosticIds.SphereEventArgsMissingPartial,
             MissingPartialTitle,
             MissingPartialMessageFormat,
             "Design",

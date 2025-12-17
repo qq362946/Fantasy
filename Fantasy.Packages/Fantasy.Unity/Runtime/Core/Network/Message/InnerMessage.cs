@@ -8,6 +8,7 @@ using Fantasy.Network.Roaming;
 using Fantasy.Sphere;
 // ReSharper disable RedundantNameQualifier
 // ReSharper disable CheckNamespace
+// ReSharper disable MemberCanBePrivate.Global
 #endif
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 // ReSharper disable InconsistentNaming
@@ -84,6 +85,7 @@ namespace Fantasy.InnerMessage
         [ProtoMember(2)]
         public uint ErrorCode { get; set; }
     }
+    [ProtoContract]
     public sealed partial class Response : AMessage, IResponse
     {
         public static Response Create()
