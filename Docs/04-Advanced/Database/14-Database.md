@@ -143,13 +143,13 @@ var mongoDatabase = (IMongoDatabase)database.GetDatabaseInstance;
 
 ## Entity 持久化标记
 
-### ISupportedDataBase 接口
+### ISupportedSerialize 接口
 
-实体需要实现 `ISupportedDataBase` 接口才能被保存到数据库：
+实体需要实现 `ISupportedSerialize` 接口才能被保存到数据库或支持序列化：
 
 ```csharp
 // 定义可持久化的实体
-public class Player : Entity, ISupportedDataBase
+public class Player : Entity, ISupportedSerialize
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -157,7 +157,7 @@ public class Player : Entity, ISupportedDataBase
 }
 
 // 多实例 + 数据库持久化
-public class ItemComponent : Entity, ISupportedMultiEntity, ISupportedDataBase
+public class ItemComponent : Entity, ISupportedMultiEntity, ISupportedSerialize
 {
     public int ItemId { get; set; }
     public int Count { get; set; }
@@ -463,7 +463,7 @@ DataBaseSetting.MongoDbCustomInitialize = (config) =>
 
 ```csharp
 // ✅ 推荐：清晰的实体定义
-public class Player : Entity, ISupportedDataBase
+public class Player : Entity, ISupportedSerialize
 {
     // 使用属性而非字段
     public string Name { get; set; }
@@ -474,7 +474,7 @@ public class Player : Entity, ISupportedDataBase
 }
 
 // ❌ 不推荐：在实体中包含大量嵌套数据
-public class Player : Entity, ISupportedDataBase
+public class Player : Entity, ISupportedSerialize
 {
     public List<Item> Items { get; set; }  // 应该拆分为 ItemComponent
     public Dictionary<int, Buff> Buffs { get; set; }  // 应该拆分为 BuffComponent

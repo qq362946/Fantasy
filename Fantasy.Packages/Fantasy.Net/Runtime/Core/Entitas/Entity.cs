@@ -756,6 +756,10 @@ namespace Fantasy.Entitas
 
                 scene.AddEntity(this);
                 scene.EntityComponent.Deserialize(this);
+                scene.EntityComponent.RegisterUpdate(this);
+#if FANTASY_UNITY
+                scene.EntityComponent.RegisterLateUpdate(entity);
+#endif
             }
             catch (Exception e)
             {

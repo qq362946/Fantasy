@@ -302,5 +302,3 @@ Fantasy 的 ECS 系统是一个**层级化的组件系统**，核心特点：
 ## 相关文档
 
 - [02-ISupportedMultiEntity.md](02-ISupportedMultiEntity.md) - 多实例组件详解
-- 03-ISupportedDataBase.md - 数据库持久化详解（规划中）
-- 04-Scene.md - Scene 和生命周期管理（规划中）
