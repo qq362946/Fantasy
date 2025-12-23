@@ -187,7 +187,7 @@ await player.PersistAggregate<Player, PlayerInventoryEntity>(isSaveSelf: true, d
 
 ```csharp
 // 1. 定义主实体
-public class Player : Entity
+public class Player : Entity, ISupportedSerialize
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -237,8 +237,8 @@ var equipment = player.GetComponent<PlayerEquipmentEntity>();
 ### 1. 基本定义
 
 ```csharp
-// 主实体（必须实现 ISupportedDataBase）
-public class Player : Entity
+// 主实体（必须实现 ISupportedSerialize）
+public class Player : Entity, ISupportedSerialize
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -253,8 +253,8 @@ public class PlayerInventoryEntity : Entity
 ```
 
 **关键要素：**
-
 - 使用 `[SeparateTable]` 特性标记
+- 添加 `[SeparateTable]` 标记后无需再实现`ISupportedSerialize`接口
 - 第一个参数：父实体类型
 - 第二个参数：数据库集合名称
 
@@ -262,7 +262,7 @@ public class PlayerInventoryEntity : Entity
 
 ```csharp
 // 主实体
-public class Player : Entity
+public class Player : Entity, ISupportedSerialize
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -284,7 +284,7 @@ public class PlayerEquipmentEntity : Entity
 
 // 好友分表
 [SeparateTable(typeof(Player), "PlayerFriends")]
-public class PlayerFriendsEntity : Entity, ISupportedDataBase
+public class PlayerFriendsEntity : Entity
 {
     public List<long> FriendIds { get; set; }
 }
@@ -301,7 +301,7 @@ public class PlayerQuestsEntity : Entity
 
 ```csharp
 // 主实体
-public class Guild : Entity
+public class Guild : Entity, ISupportedSerialize
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -796,7 +796,7 @@ await player.PersistAggregate<Player, PlayerInventoryEntity>(isSaveSelf: false, 
 
 ```csharp
 // 主实体：玩家基本信息（经常查询）
-public class Player : Entity
+public class Player : Entity, ISupportedSerialize
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -857,7 +857,7 @@ SendQuestsToClient(quests.ActiveQuests);
 
 ```csharp
 // 主实体：公会基本信息
-public class Guild : Entity
+public class Guild : Entity, ISupportedSerialize
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -898,7 +898,7 @@ public class GuildLogsEntity : Entity
 
 ```csharp
 // 主实体：排行榜元数据
-public class Leaderboard : Entity
+public class Leaderboard : Entity, ISupportedSerialize
 {
     public int SeasonId { get; set; }
     public DateTime StartTime { get; set; }
@@ -1078,7 +1078,7 @@ await database.Remove<PlayerEquipmentEntity>(playerId);
 ```csharp
 // ❌ 不推荐
 [SeparateTable(typeof(Player), "PlayerItems")]
-public class PlayerItemEntity : Entity, ISupportedMultiEntity, ISupportedDataBase { }
+public class PlayerItemEntity : Entity, ISupportedMultiEntity { }
 
 // ✅ 推荐
 [SeparateTable(typeof(Player), "PlayerInventory")]
