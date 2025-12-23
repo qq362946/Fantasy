@@ -114,5 +114,13 @@ namespace Fantasy.Serialize
         /// <param name="t">要克隆的对象</param>
         /// <returns>克隆后的新对象实例</returns>
         T Clone<T>(T t) where T : IProtoParser<T>;
+        
+        /// <summary>
+        /// 通过序列化和反序列化创建对象的深度克隆。
+        /// </summary>
+        /// <param name="type">对象类型</param>
+        /// <param name="object">要克隆的对象</param>
+        /// <returns>克隆后的新对象实例</returns>
+        object Clone(Type type, object @object);
     }
 }

@@ -190,5 +190,13 @@ namespace Fantasy.Serialize
             var bytes = MemoryPackSerializer.Serialize(t);
             return MemoryPackSerializer.Deserialize<T>(bytes)!;
         }
+
+        /// <inheritdoc/>
+        public object Clone(Type type, object @object)
+        {
+            var bytes = MemoryPackSerializer.Serialize(type, @object);
+            var span = new ReadOnlySpan<byte>(bytes, 0, bytes.Length);
+            return MemoryPackSerializer.Deserialize(type, span)!;
+        }
     }
 }

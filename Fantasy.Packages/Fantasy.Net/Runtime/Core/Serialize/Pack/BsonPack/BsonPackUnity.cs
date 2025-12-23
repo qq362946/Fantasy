@@ -75,6 +75,12 @@ namespace Fantasy.Serialize
         {
             throw new NotImplementedException();
         }
+
+        /// <inheritdoc/>
+        public object Clone(Type type, object @object)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 #endif

@@ -194,6 +194,12 @@ namespace Fantasy.Serialize
             return BsonSerializer.Deserialize<T>(t.ToBson<T>());
         }
 
+        /// <inheritdoc/>
+        public object Clone(Type type, object @object)
+        {
+            return BsonSerializer.Deserialize(@object.ToBsonDocument(), type);
+        }
+
         /// <summary>
         /// 克隆Entity
         /// </summary>
