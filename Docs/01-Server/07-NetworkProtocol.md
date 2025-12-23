@@ -191,7 +191,7 @@ message G2A_TestMessage // IMessage
 
 /// 使用 MemoryPack 序列化
 // Protocol MemoryPack
-message M2M_SendUnitRequest // Iequest,M2M_SendUnitResponse
+message M2M_SendUnitRequest // IRequest,M2M_SendUnitResponse
 {
     Unit Unit = 1;
 }
@@ -351,9 +351,9 @@ message C2G_LoginRequest // IRequest,G2C_LoginResponse
 // 服务器返回登录结果
 message G2C_LoginResponse // IResponse
 {
-    int32 ErrorCode = 1;      // 0=成功, 非0=错误码
-    int64 PlayerId = 2;       // 玩家ID
-    string Token = 3;         // 会话Token
+    int64 PlayerId = 1;       // 玩家ID
+    string Token = 2;         // 会话Token
+    // int32 ErrorCode = 3;   // 0=成功, 非0=错误码, 生成器自动添加该字段
 }
 ```
 
@@ -518,9 +518,8 @@ message C2G_LoginRequest // IRequest,G2C_LoginResponse
 
 message G2C_LoginResponse // IResponse
 {
-    int32 ErrorCode = 1;
-    int64 PlayerId = 2;
-    string SessionToken = 3;
+    int64 PlayerId = 1;
+    string SessionToken = 2;
 }
 ```
 
