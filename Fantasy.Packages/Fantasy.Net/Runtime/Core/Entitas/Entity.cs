@@ -550,7 +550,70 @@ namespace Fantasy.Entitas
         #endregion
 
         #region RemoveComponent
-        
+
+        /// <summary>
+        /// 分离一个组件但不销毁它
+        /// </summary>
+        /// <param name="type">组件的类型</param>
+        /// <param name="component">返回分离的组件实例</param>
+        /// <returns>返回是否分离成功</returns>
+        public bool DetachComponent(Type type, out Entity component)
+        {
+            component = null;
+            
+            if (Tree == null)
+            {
+                return false;
+            }
+
+            var typeHashCode = TypeHashCache.GetHashCode(type);
+
+            if (!Tree.Remove(typeHashCode, out component!))
+            {
+                return false;
+            }
+
+            if (Tree.Count != 0)
+            {
+                return true;
+            }
+            
+            Tree.Dispose();
+            Tree = null;
+            return true;
+        }
+
+        /// <summary>
+        /// 分离一个组件但不销毁它,该组件需实现ISupportedMultiEntity接口
+        /// </summary>
+        /// <param name="id">要分离的实体Id</param>
+        /// <param name="component">返回分离的组件实例</param>
+        /// <returns>返回是否分离成功</returns>
+        public bool DetachComponent(long id, out Entity component)
+        {
+            component = null;
+
+            if (Multi == null)
+            {
+                return false;
+            }
+
+            if (!Multi.Remove(id, out component!))
+            {
+                return false;
+            }
+
+            if (Multi.Count != 0)
+            {
+                return true;
+            }
+            
+            Multi.Dispose();
+            Multi = null;
+            return true;
+
+        }
+
         /// <summary>
         /// 当前实体下删除一个实体
         /// </summary>

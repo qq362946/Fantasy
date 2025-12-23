@@ -26,7 +26,14 @@ public class LightProtoGenerator : IIncrementalGenerator
             transform: (ctx, _) => ctx.SemanticModel.GetDeclaredSymbol(ctx.Node)
         );
 
-        var protoContracts = namedTypeSymbols.Where(
+        // Deduplicate symbols to handle partial classes correctly
+        var distinctSymbols = namedTypeSymbols
+            .Where(symbol => symbol is not null)
+            .Collect()
+            .SelectMany((symbols, _) =>
+                symbols.Distinct<ISymbol>(SymbolEqualityComparer.Default));
+
+        var protoContracts = distinctSymbols.Where(
             (symbol) =>
             {
                 if (symbol is not INamedTypeSymbol namedTypeSymbol)
@@ -2112,10 +2119,15 @@ public class LightProtoGenerator : IIncrementalGenerator
             protoContractAttr?
                 .NamedArguments.FirstOrDefault(arg => arg.Key == "SkipConstructor")
                 .Value.Value?.ToString() == "True";
-        var typeDeclaration = (
-            targetType.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
-            as TypeDeclarationSyntax
-        )!;
+
+        // Get all partial declarations for the type
+        var typeDeclarations = targetType.DeclaringSyntaxReferences
+            .Select(r => r.GetSyntax() as TypeDeclarationSyntax)
+            .Where(t => t is not null)
+            .ToList();
+
+        // Use the first declaration for location reporting
+        var typeDeclaration = typeDeclarations.FirstOrDefault()!;
 
         var proxyFor = GetProxyFor(targetType.GetAttributes());
 
@@ -2222,7 +2234,7 @@ public class LightProtoGenerator : IIncrementalGenerator
             Members = GetProtoMembers(
                 compilation,
                 targetType,
-                typeDeclaration,
+                typeDeclarations,
                 implicitFields,
                 implicitFirstTag
             ),
@@ -2239,7 +2251,7 @@ public class LightProtoGenerator : IIncrementalGenerator
     private List<ProtoMember> GetProtoMembers(
         Compilation compilation,
         INamedTypeSymbol targetType,
-        TypeDeclarationSyntax typeDeclaration,
+        List<TypeDeclarationSyntax?> typeDeclarations,
         ImplicitFields implicitFields,
         uint firstImplicitTag
     )
@@ -2354,9 +2366,15 @@ public class LightProtoGenerator : IIncrementalGenerator
             if (member is IPropertySymbol property)
             {
                 memberName = property.Name;
-                var propertyDeclarationSyntax = typeDeclaration
-                    .Members.OfType<PropertyDeclarationSyntax>()
-                    .FirstOrDefault(m => m.Identifier.Text == memberName);
+                // Search for property declaration across all partial declarations
+                PropertyDeclarationSyntax? propertyDeclarationSyntax = null;
+                foreach (var decl in typeDeclarations)
+                {
+                    if (decl is null) continue;
+                    propertyDeclarationSyntax = decl.Members.OfType<PropertyDeclarationSyntax>()
+                        .FirstOrDefault(m => m.Identifier.Text == memberName);
+                    if (propertyDeclarationSyntax is not null) break;
+                }
                 memberDeclarationSyntax = propertyDeclarationSyntax;
                 initializer = propertyDeclarationSyntax?.Initializer?.Value.ToString();
                 nullableAnnotation = property.NullableAnnotation;
@@ -2369,11 +2387,17 @@ public class LightProtoGenerator : IIncrementalGenerator
             else if (member is IFieldSymbol field)
             {
                 memberName = field.Name;
-                var fieldDeclarationSyntax = typeDeclaration
-                    .Members.OfType<FieldDeclarationSyntax>()
-                    .FirstOrDefault(m =>
-                        m.Declaration.Variables.Any(v => v.Identifier.Text == memberName)
-                    );
+                // Search for field declaration across all partial declarations
+                FieldDeclarationSyntax? fieldDeclarationSyntax = null;
+                foreach (var decl in typeDeclarations)
+                {
+                    if (decl is null) continue;
+                    fieldDeclarationSyntax = decl.Members.OfType<FieldDeclarationSyntax>()
+                        .FirstOrDefault(m =>
+                            m.Declaration.Variables.Any(v => v.Identifier.Text == memberName)
+                        );
+                    if (fieldDeclarationSyntax is not null) break;
+                }
                 memberDeclarationSyntax = fieldDeclarationSyntax;
                 initializer = fieldDeclarationSyntax
                     ?.Declaration.Variables.FirstOrDefault()

@@ -73,7 +73,7 @@ PlayerFriends 集合:
 
 ```csharp
 // ❌ 问题：Player 表过大，查询慢
-public class Player : Entity, ISupportedDataBase
+public class Player : Entity, ISupportedSerialize
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -187,7 +187,7 @@ await player.PersistAggregate<Player, PlayerInventoryEntity>(isSaveSelf: true, d
 
 ```csharp
 // 1. 定义主实体
-public class Player : Entity, ISupportedDataBase
+public class Player : Entity
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -196,13 +196,13 @@ public class Player : Entity, ISupportedDataBase
 
 // 2. 定义分表组件
 [SeparateTable(typeof(Player), "PlayerInventory")]
-public class PlayerInventoryEntity : Entity, ISupportedDataBase
+public class PlayerInventoryEntity : Entity
 {
     public List<ItemData> Items { get; set; }
 }
 
 [SeparateTable(typeof(Player), "PlayerEquipment")]
-public class PlayerEquipmentEntity : Entity, ISupportedDataBase
+public class PlayerEquipmentEntity : Entity
 {
     public Dictionary<int, int> Equipments { get; set; }
 }
@@ -238,7 +238,7 @@ var equipment = player.GetComponent<PlayerEquipmentEntity>();
 
 ```csharp
 // 主实体（必须实现 ISupportedDataBase）
-public class Player : Entity, ISupportedDataBase
+public class Player : Entity
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -246,14 +246,14 @@ public class Player : Entity, ISupportedDataBase
 
 // 分表组件（使用 SeparateTable 特性标记）
 [SeparateTable(typeof(Player), "PlayerInventory")]
-public class PlayerInventoryEntity : Entity, ISupportedDataBase
+public class PlayerInventoryEntity : Entity
 {
     public List<ItemData> Items { get; set; }
 }
 ```
 
 **关键要素：**
-- 分表实体必须实现 `ISupportedDataBase`
+
 - 使用 `[SeparateTable]` 特性标记
 - 第一个参数：父实体类型
 - 第二个参数：数据库集合名称
@@ -262,7 +262,7 @@ public class PlayerInventoryEntity : Entity, ISupportedDataBase
 
 ```csharp
 // 主实体
-public class Player : Entity, ISupportedDataBase
+public class Player : Entity
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -270,14 +270,14 @@ public class Player : Entity, ISupportedDataBase
 
 // 背包分表
 [SeparateTable(typeof(Player), "PlayerInventory")]
-public class PlayerInventoryEntity : Entity, ISupportedDataBase
+public class PlayerInventoryEntity : Entity
 {
     public List<ItemData> Items { get; set; }
 }
 
 // 装备分表
 [SeparateTable(typeof(Player), "PlayerEquipment")]
-public class PlayerEquipmentEntity : Entity, ISupportedDataBase
+public class PlayerEquipmentEntity : Entity
 {
     public Dictionary<int, EquipmentData> Equipments { get; set; }
 }
@@ -291,7 +291,7 @@ public class PlayerFriendsEntity : Entity, ISupportedDataBase
 
 // 任务分表
 [SeparateTable(typeof(Player), "PlayerQuests")]
-public class PlayerQuestsEntity : Entity, ISupportedDataBase
+public class PlayerQuestsEntity : Entity
 {
     public Dictionary<int, QuestProgress> ActiveQuests { get; set; }
 }
@@ -301,7 +301,7 @@ public class PlayerQuestsEntity : Entity, ISupportedDataBase
 
 ```csharp
 // 主实体
-public class Guild : Entity, ISupportedDataBase
+public class Guild : Entity
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -309,14 +309,14 @@ public class Guild : Entity, ISupportedDataBase
 
 // 公会成员（Guild 的分表）
 [SeparateTable(typeof(Guild), "GuildMembers")]
-public class GuildMembersEntity : Entity, ISupportedDataBase
+public class GuildMembersEntity : Entity
 {
     public List<GuildMember> Members { get; set; }
 }
 
 // 公会仓库（Guild 的分表）
 [SeparateTable(typeof(Guild), "GuildWarehouse")]
-public class GuildWarehouseEntity : Entity, ISupportedDataBase
+public class GuildWarehouseEntity : Entity
 {
     public List<ItemData> Items { get; set; }
 }
@@ -796,7 +796,7 @@ await player.PersistAggregate<Player, PlayerInventoryEntity>(isSaveSelf: false, 
 
 ```csharp
 // 主实体：玩家基本信息（经常查询）
-public class Player : Entity, ISupportedDataBase
+public class Player : Entity
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -806,7 +806,7 @@ public class Player : Entity, ISupportedDataBase
 
 // 背包：物品数据（只在打开背包时加载）
 [SeparateTable(typeof(Player), "PlayerInventory")]
-public class PlayerInventoryEntity : Entity, ISupportedDataBase
+public class PlayerInventoryEntity : Entity
 {
     public List<ItemData> Items { get; set; }
     public int Capacity { get; set; }
@@ -814,14 +814,14 @@ public class PlayerInventoryEntity : Entity, ISupportedDataBase
 
 // 装备：装备数据（只在查看角色时加载）
 [SeparateTable(typeof(Player), "PlayerEquipment")]
-public class PlayerEquipmentEntity : Entity, ISupportedDataBase
+public class PlayerEquipmentEntity : Entity
 {
     public Dictionary<int, EquipmentData> Equipments { get; set; }
 }
 
 // 任务：任务进度（只在打开任务界面时加载）
 [SeparateTable(typeof(Player), "PlayerQuests")]
-public class PlayerQuestsEntity : Entity, ISupportedDataBase
+public class PlayerQuestsEntity : Entity
 {
     public List<QuestProgress> ActiveQuests { get; set; }
     public List<int> CompletedQuestIds { get; set; }
@@ -829,7 +829,7 @@ public class PlayerQuestsEntity : Entity, ISupportedDataBase
 
 // 邮件：邮件数据（只在打开邮箱时加载）
 [SeparateTable(typeof(Player), "PlayerMails")]
-public class PlayerMailsEntity : Entity, ISupportedDataBase
+public class PlayerMailsEntity : Entity
 {
     public List<MailData> Mails { get; set; }
 }
@@ -857,7 +857,7 @@ SendQuestsToClient(quests.ActiveQuests);
 
 ```csharp
 // 主实体：公会基本信息
-public class Guild : Entity, ISupportedDataBase
+public class Guild : Entity
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -867,28 +867,28 @@ public class Guild : Entity, ISupportedDataBase
 
 // 成员列表（可能有数百人）
 [SeparateTable(typeof(Guild), "GuildMembers")]
-public class GuildMembersEntity : Entity, ISupportedDataBase
+public class GuildMembersEntity : Entity
 {
     public List<GuildMember> Members { get; set; }
 }
 
 // 申请列表（临时数据，经常变化）
 [SeparateTable(typeof(Guild), "GuildApplications")]
-public class GuildApplicationsEntity : Entity, ISupportedDataBase
+public class GuildApplicationsEntity : Entity
 {
     public List<GuildApplication> Applications { get; set; }
 }
 
 // 公会仓库（大量物品数据）
 [SeparateTable(typeof(Guild), "GuildWarehouse")]
-public class GuildWarehouseEntity : Entity, ISupportedDataBase
+public class GuildWarehouseEntity : Entity
 {
     public List<ItemData> Items { get; set; }
 }
 
 // 公会日志（历史记录）
 [SeparateTable(typeof(Guild), "GuildLogs")]
-public class GuildLogsEntity : Entity, ISupportedDataBase
+public class GuildLogsEntity : Entity
 {
     public List<GuildLog> Logs { get; set; }
 }
@@ -898,7 +898,7 @@ public class GuildLogsEntity : Entity, ISupportedDataBase
 
 ```csharp
 // 主实体：排行榜元数据
-public class Leaderboard : Entity, ISupportedDataBase
+public class Leaderboard : Entity
 {
     public int SeasonId { get; set; }
     public DateTime StartTime { get; set; }
@@ -907,14 +907,14 @@ public class Leaderboard : Entity, ISupportedDataBase
 
 // 排行数据（可能有大量玩家）
 [SeparateTable(typeof(Leaderboard), "LeaderboardRankings")]
-public class LeaderboardRankingsEntity : Entity, ISupportedDataBase
+public class LeaderboardRankingsEntity : Entity
 {
     public List<RankEntry> Rankings { get; set; }
 }
 
 // 奖励配置
 [SeparateTable(typeof(Leaderboard), "LeaderboardRewards")]
-public class LeaderboardRewardsEntity : Entity, ISupportedDataBase
+public class LeaderboardRewardsEntity : Entity
 {
     public Dictionary<int, RewardData> Rewards { get; set; }
 }
@@ -1082,7 +1082,7 @@ public class PlayerItemEntity : Entity, ISupportedMultiEntity, ISupportedDataBas
 
 // ✅ 推荐
 [SeparateTable(typeof(Player), "PlayerInventory")]
-public class PlayerInventoryEntity : Entity, ISupportedDataBase
+public class PlayerInventoryEntity : Entity
 {
     public List<ItemData> Items { get; set; }  // 在组件内部使用列表
 }

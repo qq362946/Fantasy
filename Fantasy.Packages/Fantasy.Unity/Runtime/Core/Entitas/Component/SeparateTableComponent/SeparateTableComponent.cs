@@ -122,7 +122,7 @@ namespace Fantasy.SeparateTable
         /// </remarks>
         /// <exception cref="ArgumentNullException">当 assemblyManifest 为 null 时抛出。</exception>
         /// <exception cref="InvalidOperationException">当 Scene 为 null 时抛出。</exception>
-        public FTask OnUnload(AssemblyManifest assemblyManifest)
+        public async FTask OnUnload(AssemblyManifest assemblyManifest)
         {
             if (assemblyManifest == null)
             {
@@ -131,7 +131,8 @@ namespace Fantasy.SeparateTable
 
             if (Scene == null)
             {
-                throw new InvalidOperationException("Scene is null, cannot unregister separate table information");
+                return;
+                // throw new InvalidOperationException("Scene is null, cannot unregister separate table information");
             }
 
             var task = FTask.Create(false);
@@ -154,7 +155,7 @@ namespace Fantasy.SeparateTable
                 }
             });
 
-            return task;
+            await task;
         }
 
         #endregion
@@ -371,7 +372,7 @@ namespace Fantasy.SeparateTable
             // 批量保存
             await database.Save(entity.Id, saveSeparateTables);
         }
-        
+
         /// <summary>
         /// 将实体及其所有分表组件保存到数据库中。
         /// </summary>
@@ -379,6 +380,7 @@ namespace Fantasy.SeparateTable
         /// <param name="entity">需要保存的聚合根实体实例。</param>
         /// <param name="isSaveSelf">是否将聚合根实体本身也一起保存到数据库。</param>
         /// <param name="database">数据库实例。</param>
+        /// <param name="removeSeparateTable">保存后是否移除分表组件。</param>
         /// <returns>异步任务。</returns>
         /// <remarks>
         /// <para>此方法会检查实体是否配置了分表信息：</para>
@@ -405,7 +407,7 @@ namespace Fantasy.SeparateTable
         /// await separateTableComponent.PersistAggregate(player, true, db);
         /// </code>
         /// </example>
-        public async FTask PersistAggregate<T>(T entity, bool isSaveSelf, IDatabase database) where T : Entity, new()
+        public async FTask PersistAggregate<T>(T entity, bool isSaveSelf, IDatabase database, bool removeSeparateTable = true) where T : Entity, new()
         {
             if (entity == null)
             {
