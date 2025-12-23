@@ -248,7 +248,9 @@ namespace Fantasy.Serialize
         }
 
         #endregion
-        
+
+        #region Clone
+
         /// <inheritdoc/>
         public T Clone<T>(T t) where T : IProtoParser<T>
         {
@@ -271,5 +273,7 @@ namespace Fantasy.Serialize
             _serializes[type.TypeHandle](_cachedStream, @object);
             return _deserializes[type.TypeHandle](_cachedStream);
         }
+
+        #endregion
     }
 }

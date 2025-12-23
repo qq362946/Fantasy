@@ -1,5 +1,7 @@
 using System.Linq;
 using Microsoft.CodeAnalysis;
+// ReSharper disable PossibleMultipleEnumeration
+// ReSharper disable InconsistentNaming
 
 namespace Fantasy.SourceGenerator.Common
 {
@@ -234,21 +236,49 @@ namespace Fantasy.SourceGenerator.Common
             }
 
             // 2. 自动检测：根据预编译符号判断
-            
+
             if (HasFantasyNETDefine(compilation))
             {
                 return 1;   // Server
             }
-            
+
             if (HasFantasyUNITYDefine(compilation))
             {
-                return IsUnityCompilation(compilation) 
+                return IsUnityCompilation(compilation)
                     ? 2 :   // Unity
                     3;      // 有FANTASY_UNITY预编译，但没有使用Unity相关的程序集
             }
 
             // 3. 如果都没有，返回 Auto (0)
             return 0;
+        }
+
+        /// <summary>
+        /// 检查类型（INamedTypeSymbol）是否有指定特性
+        /// </summary>
+        /// <param name="typeSymbol">类型符号</param>
+        /// <param name="attributeNames">特性名称列表（可以是简称或全名）</param>
+        /// <returns>如果类型有任一指定特性则返回 true</returns>
+        public static bool HasAttribute(INamedTypeSymbol typeSymbol, params string[] attributeNames)
+        {
+            return typeSymbol.GetAttributes().Any(attr =>
+                attributeNames.Any(name =>
+                    attr.AttributeClass?.Name == name ||
+                    attr.AttributeClass?.ToDisplayString().EndsWith("." + name) == true));
+        }
+
+        /// <summary>
+        /// 检查成员（字段或属性）是否有指定特性
+        /// </summary>
+        /// <param name="member">成员符号（IFieldSymbol 或 IPropertySymbol）</param>
+        /// <param name="attributeNames">特性名称列表（可以是简称或全名）</param>
+        /// <returns>如果成员有任一指定特性则返回 true</returns>
+        public static bool HasMemberAttribute(ISymbol member, params string[] attributeNames)
+        {
+            return member.GetAttributes().Any(attr =>
+                attributeNames.Any(name =>
+                    attr.AttributeClass?.Name == name ||
+                    attr.AttributeClass?.ToDisplayString().EndsWith("." + name) == true));
         }
     }
 }

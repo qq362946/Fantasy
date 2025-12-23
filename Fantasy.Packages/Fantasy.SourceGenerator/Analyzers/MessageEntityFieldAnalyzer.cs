@@ -5,12 +5,14 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Fantasy.SourceGenerator.Common;
 
 namespace Fantasy.SourceGenerator.Analyzers
 {
     /// <summary>
     /// 检查 AMessage 网络消息中的字段/属性：
     /// 1. 如果消息有 [ProtoContract]，不能包含 Entity 或继承 Entity 的字段/属性
+    ///    (除非该字段/属性标记了 [ProtoIgnore] 特性)
     /// 2. 如果消息有 [MemoryPackable]，且字段/属性是继承自 Entity 的类型（非 Entity 本身），
     ///    则该类型必须有 [MemoryPackable] 和 partial
     /// </summary>
@@ -108,8 +110,8 @@ namespace Fantasy.SourceGenerator.Analyzers
             }
 
             // 检查是否有 ProtoContract 或 MemoryPackable 特性
-            bool hasProtoContract = HasAttribute(typeSymbol, "ProtoContractAttribute");
-            bool hasMemoryPackable = HasAttribute(typeSymbol, "MemoryPackableAttribute", "MemoryPackable");
+            bool hasProtoContract = CompilationHelper.HasAttribute(typeSymbol, "ProtoContractAttribute");
+            bool hasMemoryPackable = CompilationHelper.HasAttribute(typeSymbol, "MemoryPackableAttribute", "MemoryPackable");
 
             if (!hasProtoContract && !hasMemoryPackable)
             {
@@ -142,6 +144,12 @@ namespace Fantasy.SourceGenerator.Analyzers
                     continue;
                 }
 
+                // 如果字段/属性有 [ProtoIgnore] 特性，跳过检查
+                if (CompilationHelper.HasMemberAttribute(member, "ProtoIgnoreAttribute", "ProtoIgnore"))
+                {
+                    continue;
+                }
+
                 // 获取实际类型（处理 nullable）
                 var actualType = UnwrapNullableType(memberType);
 
@@ -168,7 +176,7 @@ namespace Fantasy.SourceGenerator.Analyzers
                     {
                         if (actualType is INamedTypeSymbol namedType)
                         {
-                            bool hasMemoryPackableAttr = HasAttribute(namedType, "MemoryPackableAttribute", "MemoryPackable");
+                            bool hasMemoryPackableAttr = CompilationHelper.HasAttribute(namedType, "MemoryPackableAttribute", "MemoryPackable");
                             bool isPartial = IsPartialClass(namedType, hasMemoryPackableAttr);
 
                             if (!hasMemoryPackableAttr && !isPartial)
@@ -301,17 +309,6 @@ namespace Fantasy.SourceGenerator.Analyzers
             }
 
             return typeSymbol;
-        }
-
-        /// <summary>
-        /// 检查类型是否有指定特性
-        /// </summary>
-        private static bool HasAttribute(INamedTypeSymbol typeSymbol, params string[] attributeNames)
-        {
-            return typeSymbol.GetAttributes().Any(attr =>
-                attributeNames.Any(name =>
-                    attr.AttributeClass?.Name == name ||
-                    attr.AttributeClass?.ToDisplayString().EndsWith("." + name) == true));
         }
 
         /// <summary>
