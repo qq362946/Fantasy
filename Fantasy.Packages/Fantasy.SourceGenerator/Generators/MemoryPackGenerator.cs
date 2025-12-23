@@ -72,6 +72,11 @@ namespace Fantasy.SourceGenerator.Generators
                 {
                     return;
                 }
+                
+                if (compilation.GetTypeByMetadataName("Fantasy.Assembly.IMemoryPackEntityGenerator") == null)
+                {
+                    return;
+                }
 
                 GenerateMemoryPackCode(spc, compilation, types!);
             });
