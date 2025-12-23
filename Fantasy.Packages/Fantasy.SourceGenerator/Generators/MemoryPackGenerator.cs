@@ -238,8 +238,8 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine();
 
             // 生成 try-catch 块来保护初始化过程
-            builder.AppendLine("try");
-            builder.OpenBrace();
+            // builder.AppendLine("try");
+            // builder.OpenBrace();
 
             // 为每个 MemoryPackable 类型触发静态构造函数
             foreach (var type in memoryPackableTypes)
@@ -251,18 +251,18 @@ namespace Fantasy.SourceGenerator.Generators
                 builder.AppendLine($"RuntimeHelpers.RunClassConstructor(typeof({fullTypeName}).TypeHandle);");
             }
 
-            builder.CloseBrace();
-            builder.AppendLine("catch (Exception ex)");
-            builder.OpenBrace();
-            builder.AddComment("Log error but don't throw - avoid breaking app startup");
-            builder.AppendLine("#if FANTASY_NET");
-            builder.AppendLine("Fantasy.Log.Error($\"Failed to initialize MemoryPack formatters: {ex}\");");
-            builder.AppendLine("#elif UNITY_EDITOR");
-            builder.AppendLine("UnityEngine.Debug.LogError($\"Failed to initialize MemoryPack formatters: {ex}\");");
-            builder.AppendLine("#else");
-            builder.AppendLine("Console.WriteLine($\"Failed to initialize MemoryPack formatters: {ex}\");");
-            builder.AppendLine("#endif");
-            builder.CloseBrace();
+            // builder.CloseBrace();
+            // builder.AppendLine("catch (Exception ex)");
+            // builder.OpenBrace();
+            // builder.AddComment("Log error but don't throw - avoid breaking app startup");
+            // builder.AppendLine("#if FANTASY_NET");
+            // builder.AppendLine("Fantasy.Log.Error($\"Failed to initialize MemoryPack formatters: {ex}\");");
+            // builder.AppendLine("#elif UNITY_EDITOR");
+            // builder.AppendLine("UnityEngine.Debug.LogError($\"Failed to initialize MemoryPack formatters: {ex}\");");
+            // builder.AppendLine("#else");
+            // builder.AppendLine("Console.WriteLine($\"Failed to initialize MemoryPack formatters: {ex}\");");
+            // builder.AppendLine("#endif");
+            // builder.CloseBrace();
 
             // 结束方法
             builder.EndMethod();
