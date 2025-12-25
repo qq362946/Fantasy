@@ -458,22 +458,23 @@ public class ProtobufValidator
         var match = Regex.Match(line, @"(\w+)\s+(\w+)\s*=\s*(\d+)\s*;?");
         if (match.Success)
         {
-            var type = match.Groups[1].Value;
-            var fieldName = match.Groups[2].Value;
+            // var type = match.Groups[1].Value;
+            // var fieldName = match.Groups[2].Value;
             var fieldNumber = int.Parse(match.Groups[3].Value);
 
-            // 检查类型是否有效
-            if (!ValidTypes.Contains(type) && !char.IsUpper(type[0]))
-            {
-                errors.Add(new ValidationError
-                {
-                    Line = lineNum,
-                    Column = match.Groups[1].Index,
-                    Offset = lineOffset + match.Groups[1].Index,
-                    Length = type.Length,
-                    Message = $"未知类型 '{type}'"
-                });
-            }
+            // 注释掉类型检查，允许任何自定义类型（如 float2、float3 等）
+            // 导出工具会原样保留非框架内置类型
+            // if (!ValidTypes.Contains(type) && !char.IsUpper(type[0]))
+            // {
+            //     errors.Add(new ValidationError
+            //     {
+            //         Line = lineNum,
+            //         Column = match.Groups[1].Index,
+            //         Offset = lineOffset + match.Groups[1].Index,
+            //         Length = type.Length,
+            //         Message = $"未知类型 '{type}'"
+            //     });
+            // }
 
             // 检查字段编号范围
             if (fieldNumber < 1 || fieldNumber > 536870911)

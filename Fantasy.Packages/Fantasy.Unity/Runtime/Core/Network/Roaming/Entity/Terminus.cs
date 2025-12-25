@@ -3,6 +3,7 @@ using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.InnerMessage;
 using Fantasy.Network.Interface;
+using LightProto;
 using MemoryPack;
 using MongoDB.Bson.Serialization.Attributes;
 // ReSharper disable UnassignedField.Global
@@ -84,17 +85,20 @@ public sealed partial class Terminus : Entity
     /// <summary>
     /// 漫游消息锁。
     /// </summary>
+    [ProtoIgnore]
     [MemoryPackIgnore]
     internal CoroutineLock? RoamingMessageLock;
     /// <summary>
     /// 是否停止发送转发代码到Roaming
     /// </summary>
+    [ProtoIgnore]
     [MemoryPackIgnore]
     internal bool StopForwarding;
     /// <summary>
     /// 存放其他漫游终端的Id。
     /// 通过这个Id可以发送消息给它。
     /// </summary>
+    [ProtoIgnore]
     [MemoryPackIgnore]
     private readonly Dictionary<int, long> _roamingTerminusId = new Dictionary<int, long>();
 
@@ -197,37 +201,52 @@ public sealed partial class Terminus : Entity
     private async FTask LinkEntity(Entity entity, bool autoDispose)
     {
         var isLocked = false;
+        var syncRoaming = TerminusId != 0;
+        var entityRuntimeId = entity.RuntimeId;
         
         try
         {
-            // 连接之前要先锁定避免中间会有消息发送
-            var lockErrorCode = await Lock();
-
-            if (lockErrorCode != 0)
+            if (syncRoaming)
             {
-                // 锁定失败，关联实体操作中止
-                Log.Error($"Failed to lock Terminus {Id} before linking entity. ErrorCode: {lockErrorCode}. Link operation aborted.");
-                return;
+                // 连接之前要先锁定避免中间会有消息发送
+                var lockErrorCode = await Lock();
+
+                if (lockErrorCode != 0)
+                {
+                    // 锁定失败，关联实体操作中止
+                    Log.Error($"Failed to lock Terminus {Id} before linking entity. ErrorCode: {lockErrorCode}. Link operation aborted.");
+                    return;
+                }
             }
 
             isLocked = true;
             TerminusEntity = entity;
-            TerminusId = TerminusEntity.RuntimeId;
+            TerminusId = entityRuntimeId;
+            
             // 给当前实体添加组件用来代表是已经关联了Terminus
+            
             entity.AddComponent<TerminusFlagComponent>().Terminus = this;
+            
             // 只有autoDispose = true的时候当前Terminus添加组件来代表已经关联了Entity
+            
             if (autoDispose)
             {
                 AddComponent<TerminusEntityFlagComponent>().LinkEntity = entity;
             }
-            // 操作完成执行解锁
-            await UnLock();
+
+            if (syncRoaming)
+            {
+                // 操作完成执行解锁
+                await UnLock();
+            }
+            
             isLocked = false;
         }
         catch (Exception e)
         {
             Log.Error(e);
-            if (isLocked)
+            
+            if (syncRoaming && isLocked)
             {
                 await UnLock();
             }

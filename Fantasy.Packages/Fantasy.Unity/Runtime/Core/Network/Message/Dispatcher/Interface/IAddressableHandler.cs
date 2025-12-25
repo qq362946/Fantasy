@@ -42,7 +42,7 @@ public abstract class Addressable<TEntity, TMessage> : IAddressMessageHandler wh
 
         if (entity is not TEntity tEntity)
         {
-            Log.Error($"{this.GetType().Name} Route type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
+            Log.Error($"{this.GetType().Name} Addressable type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
             return;
         }
 
@@ -113,7 +113,7 @@ public abstract class AddressableRPC<TEntity, TAddressRequest, TAddressResponse>
         if (entity is not TEntity tEntity)
         {
             Log.Error(
-                $"{this.GetType().Name} Route type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
+                $"{this.GetType().Name} Addressable type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
             return;
         }
 

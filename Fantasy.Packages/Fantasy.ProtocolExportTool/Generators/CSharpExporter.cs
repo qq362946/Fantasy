@@ -153,7 +153,7 @@ public sealed class CSharpExporter(
                  """;
     }
 
-    protected override string GenerateOuterMessages(CustomNamespacesByIfDefine _outerCustomNamespaces, MessagesByIfDefine messageDefinitions)
+    protected override string GenerateOuterMessages(IReadOnlySet<string> outerNamespaces, IReadOnlyList<MessageDefinition> messageDefinitions)
     {
         return messageDefinitions.Count == 0 ? string.Empty : $$"""
                                                                 using LightProto;
@@ -164,7 +164,7 @@ public sealed class CSharpExporter(
                                                                 using Fantasy.Pool;
                                                                 using Fantasy.Network.Interface;
                                                                 using Fantasy.Serialize;
-                                                                {{_outerCustomNamespaces.ToCSharpLines()}}
+                                                                {{GenerateNamespaces(outerNamespaces)}}
                                                                 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                                                                 #pragma warning disable CS8618
                                                                 // ReSharper disable InconsistentNaming
@@ -185,7 +185,7 @@ public sealed class CSharpExporter(
                                                                 """;
     }
 
-    protected override string GenerateInnerMessages(CustomNamespacesByIfDefine innerCustomNamespaces, MessagesByIfDefine messageDefinitions)
+    protected override string GenerateInnerMessages(IReadOnlySet<string> innerNamespaces, IReadOnlyList<MessageDefinition> messageDefinitions)
     {
         return messageDefinitions.Count == 0 ? string.Empty : $$"""
                                                                 using LightProto;
@@ -197,7 +197,7 @@ public sealed class CSharpExporter(
                                                                 using Fantasy.Pool;
                                                                 using Fantasy.Network.Interface;
                                                                 using Fantasy.Serialize;
-                                                                {{innerCustomNamespaces.ToCSharpLines()}}
+                                                                {{GenerateNamespaces(innerNamespaces)}}
                                                                 // ReSharper disable InconsistentNaming
                                                                 // ReSharper disable CollectionNeverUpdated.Global
                                                                 // ReSharper disable RedundantTypeArgumentsOfMethod
@@ -218,7 +218,7 @@ public sealed class CSharpExporter(
                                                                 """;
     }
 
-    protected override string GenerateOuterMessageHelper(MessagesByIfDefine messageDefinitions)
+    protected override string GenerateOuterMessageHelper(IReadOnlyList<MessageDefinition> messageDefinitions)
     {
         if (messageDefinitions.Count == 0)
         {
@@ -227,25 +227,14 @@ public sealed class CSharpExporter(
 
         var helper = new StringBuilder();
         
-        foreach (var kv in messageDefinitions)
+        foreach (var messageDefinition in messageDefinitions)
         {
-            // 是否有条件编译符
-            bool ifAnyCondition = !string.IsNullOrWhiteSpace(kv.Key);
-
-            // 开始条件编译区域
-            if (ifAnyCondition)
+            if (string.IsNullOrEmpty(messageDefinition.InterfaceType))
             {
-                helper.AppendLine($"#if {kv.Key}");
+                continue;
             }
 
-            foreach (MessageDefinition messageDefinition in kv.Value)
-            {
-                if (string.IsNullOrEmpty(messageDefinition.InterfaceType))
-                {
-                    continue;
-                }
-
-                switch (messageDefinition.MessageType)
+            switch (messageDefinition.MessageType)
                 {
                     case MessageType.Message:
                     case MessageType.RoamingMessage:
@@ -325,13 +314,6 @@ public sealed class CSharpExporter(
                             break;
                         }
                 }
-            }
-
-            // 结束条件编译区域
-            if (ifAnyCondition)
-            {
-                helper.AppendLine($"#endif");
-            }
         }
         
         return $$"""
@@ -350,13 +332,166 @@ public sealed class CSharpExporter(
                  }
                  """;
     }
+    
+    protected override string GenerateOuterEnums(IReadOnlyList<EnumDefinition> enumDefinitions)
+    {
+        return enumDefinitions.Count == 0
+            ? string.Empty
+            : $$"""
+                // ReSharper disable InconsistentNaming
+                // ReSharper disable UnusedMember.Global
+                #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+                namespace Fantasy
+                {
+                {{GenerateEnumsCode(enumDefinitions)}}
+                }
+                """;
+    }
 
-    private string GenerateMessages(string opcodeName, MessagesByIfDefine messageDefinitions)
+    protected override string GenerateInnerEnums(IReadOnlyList<EnumDefinition> enumDefinitions)
+    {
+        return enumDefinitions.Count == 0
+            ? string.Empty
+            : $$"""
+                // ReSharper disable InconsistentNaming
+                // ReSharper disable UnusedMember.Global
+                #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+                namespace Fantasy
+                {
+                {{GenerateEnumsCode(enumDefinitions)}}
+                }
+                """;
+    }
+
+    private string GenerateNamespaces(IReadOnlySet<string> namespaces)
     {
         var builder = new StringBuilder();
 
-        builder.Append(messageDefinitions.ToCSharpLines(opcodeName));
+        foreach (var @namespace in namespaces)
+        {
+            builder.AppendLine($"using {@namespace};");
+        }
+        
+        return builder.ToString();
+    }
 
+    private string GenerateMessages(string opcodeName, IReadOnlyList<MessageDefinition> messageDefinitions)
+    {
+        var builder = new StringBuilder();
+
+        foreach (var messageDefinition in messageDefinitions)
+        {
+            var disposeCode = new StringBuilder();
+            var members = new List<string>();
+            var memberAttribute = messageDefinition.Protocol.MemberAttribute;
+            var ignoreAttribute = messageDefinition.Protocol.IgnoreAttribute;
+            
+            if (messageDefinition.HasOpCode)
+            {
+                members.Add($"        public uint OpCode() {{ return {opcodeName}.{messageDefinition.Name}; }} ");
+            }
+            
+            if (IsRequestType(messageDefinition.MessageType))
+            {
+                members.Add($"        {ignoreAttribute}");
+                members.Add($"        public {messageDefinition.ResponseType} ResponseType {{ get; set; }}");
+            }
+            
+            if (IsResponseType(messageDefinition.MessageType))
+            {
+                if (memberAttribute != null)
+                {
+                    members.Add($"        [{memberAttribute}(1)]");
+                }
+
+                disposeCode.AppendLine("            ErrorCode = 0;");
+                members.Add("        public uint ErrorCode { get; set; }");
+            }
+            
+            if (HasRouteType(messageDefinition.MessageType))
+            {
+                if (memberAttribute != null)
+                {
+                    members.Add($"        {ignoreAttribute}");
+                }
+
+                members.Add($"        public int RouteType => {messageDefinition.CustomRouteType};");
+            }
+            
+            foreach (var field in messageDefinition.Fields)
+            {
+                var disposeStatement = field.CollectionType switch
+                {
+                    FieldCollectionType.Repeated => $"{field.Name}.Clear();",
+                    FieldCollectionType.Map => $"{field.Name}.Clear();",
+                    FieldCollectionType.RepeatedList => $"{field.Name} = null;",
+                    FieldCollectionType.RepeatedArray => $"{field.Name} = null;",
+                    _ => $"{field.Name} = default;"
+                };
+
+                disposeCode.AppendLine($"            {disposeStatement}");
+
+                if (field.DocumentationComments.Count > 0)
+                {
+                    members.Add("        /// <summary>");
+                    foreach (var messageDefinitionDocumentationComment in field.DocumentationComments)
+                    {
+                        members.Add($"        /// {messageDefinitionDocumentationComment}");
+                    }
+                    members.Add("        /// </summary>");
+                }
+                
+                if (memberAttribute != null)
+                {
+                    members.Add($"        [{memberAttribute}({field.KeyIndex})]");
+                }
+                
+                var fieldType = ConvertType(field);
+                var initializer = GetInitializer(field);
+                members.Add($"        public {fieldType} {field.Name} {{ get; set; }}{initializer}");
+            }
+
+            if (messageDefinition.DocumentationComments.Count > 0)
+            {
+                builder.AppendLine("    /// <summary>");
+                foreach (var messageDefinitionDocumentationComment in messageDefinition.DocumentationComments)
+                {
+                    builder.AppendLine($"    /// {messageDefinitionDocumentationComment}");
+                }
+                builder.AppendLine("    /// </summary>");
+            }
+
+            if (!string.IsNullOrEmpty(messageDefinition.Protocol.ClassAttribute))
+            {
+                builder.AppendLine($"    [Serializable]\n" +
+                                   $"    {messageDefinition.Protocol.ClassAttribute}");
+            }
+            
+            if (string.IsNullOrEmpty(messageDefinition.InterfaceType))
+            {
+                builder.AppendLine($"    public partial class {messageDefinition.Name} : AMessage");
+            }
+            else
+            {
+                builder.AppendLine($"    public partial class {messageDefinition.Name} : AMessage, {messageDefinition.InterfaceType}");
+            }
+
+            builder.AppendLine($$"""
+                                       {
+                                           public static {{messageDefinition.Name}} Create()
+                                           {
+                                               return MessageObjectPool<{{messageDefinition.Name}}>.Rent();
+                                           }
+
+                                           public void Dispose()
+                                           {
+                                   {{disposeCode}}
+                                           }
+                                   {{string.Join(Environment.NewLine, members)}}
+                                       }
+                                   """);
+        }
+        
         if (builder.Length >= Environment.NewLine.Length)
         {
             builder.Length -= Environment.NewLine.Length;
@@ -367,58 +502,192 @@ public sealed class CSharpExporter(
     
     public static string ConvertType(FieldDefinition field)
     {
-        var baseType = ConvertBaseType(field.Type);
-
-        if (!field.IsRepeated)
+        switch (field.CollectionType)
         {
-            return baseType;
+            case FieldCollectionType.Normal:
+            case FieldCollectionType.None:
+            {
+                return ConvertBaseType(field.Type);
+            }
+            case FieldCollectionType.Repeated:
+            case FieldCollectionType.RepeatedList:
+            {
+                return $"List<{ConvertBaseType(field.Type)}>";
+            }
+            case FieldCollectionType.RepeatedArray:
+            {
+                return $"{ConvertBaseType(field.Type)}[]";
+            }
+            case FieldCollectionType.Map:
+            {
+                var keyType = ConvertBaseType(field.MapKeyType);
+                var valueType = ConvertBaseType(field.MapValueType);
+                return $"Dictionary<{keyType}, {valueType}>";
+            }
+            default:
+            {
+                throw new NotSupportedException(
+                    $"Unsupported collection type '{field.CollectionType}' at line {field.SourceLineNumber}");
+            }
         }
-
-        return field.RepeatedType switch
-        {
-            RepeatedFieldType.Repeated => $"List<{baseType}>",
-            RepeatedFieldType.RepeatedArray => $"{baseType}[]",
-            RepeatedFieldType.RepeatedList => $"List<{baseType}>",
-            _ => throw new NotSupportedException($"Unsupported repeated type '{field.RepeatedType}' at line {field.SourceLineNumber}")
-        };
     }
 
     public static string GetInitializer(FieldDefinition field)
     {
-        if (field.IsRepeated && field.RepeatedType == RepeatedFieldType.Repeated)
+        switch (field.CollectionType)
         {
-            var baseType = ConvertBaseType(field.Type);
-            return $" = new List<{baseType}>();";
+            case FieldCollectionType.Repeated:
+            {
+                return $" = new List<{ConvertBaseType(field.Type)}>();";
+            }
+            case FieldCollectionType.Map:
+            {
+                var keyType = ConvertBaseType(field.MapKeyType);
+                var valueType = ConvertBaseType(field.MapValueType);
+                return $" = new Dictionary<{keyType}, {valueType}>();";
+            }
+            default:
+            {
+                return string.Empty;
+            }
         }
-
-        return string.Empty;
     }
 
     public static string ConvertBaseType(string type)
     {
-        return type switch
+        switch (type)
         {
-            "int32" => "int",
-            "uint32" => "uint",
-            "int64" => "long",
-            "uint64" => "ulong",
-            "float" => "float",
-            "double" => "double",
-            "bool" => "bool",
-            "string" => "string",
-            "int" => "int",
-            "uint" => "uint",
-            "long" => "long",
-            "ulong" => "ulong",
-            "byte" => "byte",
-            _ when IsCustomType(type) => type,
-            _ => throw new NotSupportedException($"Unsupported type '{type}'")
-        };
+            case "int32":
+            {
+                return "int";
+            }
+            case "uint32":
+            {
+                return "uint";
+            }
+            case "int64":
+            {
+                return "long";
+            }
+            case "uint64":
+            {
+                return "ulong";
+            }
+            case "float":
+            {
+                return "float";
+            }
+            case "double":
+            {
+                return "double";
+            }
+            case "bool":
+            {
+                return "bool";
+            }
+            case "string":
+            {
+                return "string";
+            }
+            case "int":
+            {
+                return "int";
+            }
+            case "uint":
+            {
+                return "uint";
+            }
+            case "long":
+            {
+                return "long";
+            }
+            case "ulong":
+            {
+                return "ulong";
+            }
+            case "byte":
+            {
+                return "byte";
+            }
+            default:
+            {
+                // 无法识别的类型，默认就按照定义的类型来输出
+                return type;
+            }
+        }
     }
 
-    public static bool IsCustomType(string type)
+    /// <summary>
+    /// 生成枚举代码（处理条件编译）
+    /// </summary>
+    private static string GenerateEnumsCode(IReadOnlyList<EnumDefinition> enumDefinitions)
     {
-        return !string.IsNullOrEmpty(type) && char.IsUpper(type[0]);
+        var builder = new StringBuilder();
+
+        foreach (var enumDefinition in enumDefinitions)
+        {
+            builder.Append(GenerateEnumCode(enumDefinition));
+        }
+
+        return builder.ToString();
     }
-  
+
+    /// <summary>
+    /// 生成单个枚举的 C# 代码
+    /// </summary>
+    private static string GenerateEnumCode(EnumDefinition enumDefinition)
+    {
+        var builder = new StringBuilder();
+
+        // 生成枚举的 XML 注释
+        if (enumDefinition.DocumentationComments.Count > 0)
+        {
+            builder.AppendLine("\t/// <summary>");
+            foreach (var comment in enumDefinition.DocumentationComments)
+            {
+                builder.AppendLine($"\t/// {comment}");
+            }
+            builder.AppendLine("\t/// </summary>");
+        }
+
+        // 生成枚举声明
+        builder.AppendLine($"\tpublic enum {enumDefinition.Name}");
+        builder.AppendLine("\t{");
+
+        // 生成枚举值
+        for (var i = 0; i < enumDefinition.Values.Count; i++)
+        {
+            var value = enumDefinition.Values[i];
+
+            // 生成枚举值的 XML 注释
+            if (value.DocumentationComments.Count > 0)
+            {
+                builder.AppendLine("\t\t/// <summary>");
+                foreach (var comment in value.DocumentationComments)
+                {
+                    builder.AppendLine($"\t\t/// {comment}");
+                }
+                builder.AppendLine("\t\t/// </summary>");
+            }
+
+            // 生成枚举值
+            var comma = i < enumDefinition.Values.Count - 1 ? "," : string.Empty;
+            builder.AppendLine($"\t\t{value.Name} = {value.Value}{comma}");
+        }
+
+        builder.AppendLine("\t}");
+        builder.AppendLine();
+
+        return builder.ToString();
+    }
+    
+    private static bool IsRequestType(MessageType type) =>
+        type is MessageType.Request or MessageType.RouteTypeRequest or MessageType.RoamingRequest;
+
+    private static bool IsResponseType(MessageType type) =>
+        type is MessageType.Response or MessageType.RouteTypeResponse or MessageType.RoamingResponse;
+
+    private static bool HasRouteType(MessageType type) =>
+        type is MessageType.RouteTypeMessage or MessageType.RoamingMessage
+            or MessageType.RoamingRequest or MessageType.RouteTypeRequest;
 }

@@ -67,6 +67,8 @@ public class ProtocolGenerator
                 var generateTask5 = ctx.AddTask("[green]生成OuterMessage代码...[/]");
                 var generateTask6 = ctx.AddTask("[green]生成InnerMessage代码...[/]");
                 var generateTask7 = ctx.AddTask("[green]生成OuterMessageHelper代码...[/]");
+                var generateTask8 = ctx.AddTask("[green]生成OuterEnum代码...[/]");
+                var generateTask9 = ctx.AddTask("[green]生成InnerEnum代码...[/]");
                 
                 var runningGenerateTask1 = Task.Run(async () =>
                 {
@@ -109,15 +111,29 @@ public class ProtocolGenerator
                     await protocolExporter.GenerateOuterMessageHelperAsync();
                     generateTask7.Increment(100);
                 }, ct);
-                
+
+                var runningGenerateTask8 = Task.Run(async () =>
+                {
+                    await protocolExporter.GenerateOuterEnumsAsync();
+                    generateTask8.Increment(100);
+                }, ct);
+
+                var runningGenerateTask9 = Task.Run(async () =>
+                {
+                    await protocolExporter.GenerateInnerEnumsAsync();
+                    generateTask9.Increment(100);
+                }, ct);
+
                 await Task.WhenAll(
-                    runningGenerateTask1, 
-                    runningGenerateTask2, 
-                    runningGenerateTask3, 
+                    runningGenerateTask1,
+                    runningGenerateTask2,
+                    runningGenerateTask3,
                     runningGenerateTask4,
                     runningGenerateTask5,
                     runningGenerateTask6,
-                    runningGenerateTask7);
+                    runningGenerateTask7,
+                    runningGenerateTask8,
+                    runningGenerateTask9);
                 
                 createdSuccessfully = true;
             });

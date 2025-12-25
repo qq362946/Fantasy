@@ -18,10 +18,16 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
     private readonly ConcurrentBag<string> _errors = new();
     private readonly Dictionary<string, int> _routeTypes = new();
     private readonly Dictionary<string, int> _roamingTypes = new();
-    private readonly CustomNamespacesByIfDefine _outerCustomNamespaces = new();
-    private readonly MessagesByIfDefine _outerMessages = new();
-    private readonly CustomNamespacesByIfDefine _innerCustomNamespaces = new();
-    private readonly MessagesByIfDefine _innerMessages = new();
+    
+    private readonly HashSet<string> _outerNamespaces = [];
+    private readonly HashSet<string> _innerNamespaces = [];
+   
+    private readonly List<MessageDefinition> _outerMessages = [];
+    private readonly List<MessageDefinition> _innerMessages = [];
+    
+    private readonly List<EnumDefinition> _outerEnums = [];
+    private readonly List<EnumDefinition> _innerEnums = [];
+    
     private readonly List<OpcodeInfo> _outerOpcode = [];
     private readonly List<OpcodeInfo> _innerOpcode = [];
     
@@ -187,8 +193,8 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
     public async Task GenerateOuterMessageAsync()
     {
         // AnsiConsole.MarkupLine($"[cyan]Generating {_outerMessages.Count} Outer messages...[/]");
-        
-        var template = GenerateOuterMessages(_outerCustomNamespaces, _outerMessages);
+
+        var template = GenerateOuterMessages(_outerNamespaces, _outerMessages);
         
         if (template == string.Empty)
         {
@@ -223,8 +229,8 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
     public async Task GenerateInnerMessageAsync()
     {
         // AnsiConsole.MarkupLine($"[cyan]Generating {_innerMessages.Count} Inner messages...[/]");
-        
-        var template = GenerateInnerMessages(_innerCustomNamespaces,_innerMessages);
+
+        var template = GenerateInnerMessages(_innerNamespaces, _innerMessages);
         
         if (template == string.Empty)
         {
@@ -247,14 +253,14 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
     public async Task GenerateOuterMessageHelperAsync()
     {
         // AnsiConsole.MarkupLine($"[cyan]Generating {_outerMessages.Count} Outer messageHelper...[/]");
-        
+
         var template = GenerateOuterMessageHelper(_outerMessages);
-        
+
         if (template == string.Empty)
         {
             return;
         }
-        
+
         if (!Directory.Exists(ClientDirectory))
         {
             Directory.CreateDirectory(ClientDirectory);
@@ -268,13 +274,75 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
         }
     }
 
+    public async Task GenerateOuterEnumsAsync()
+    {
+        // AnsiConsole.MarkupLine($"[cyan]Generating Outer enums...[/]");
+
+        var template = GenerateOuterEnums(_outerEnums);
+
+        if (template == string.Empty)
+        {
+            return;
+        }
+
+        if (protocolExportType.HasFlag(ProtocolExportType.Server))
+        {
+            if (!Directory.Exists(ServerDirectory))
+            {
+                Directory.CreateDirectory(ServerDirectory);
+            }
+
+            var filePath = Path.Combine(ServerDirectory, "OuterEnum.cs");
+            await File.WriteAllTextAsync(filePath, template);
+            // AnsiConsole.MarkupLine($"[green]Generated OuterEnum.cs at {filePath}[/]");
+        }
+
+        if (protocolExportType.HasFlag(ProtocolExportType.Client))
+        {
+            if (!Directory.Exists(ClientDirectory))
+            {
+                Directory.CreateDirectory(ClientDirectory);
+            }
+
+            var filePath = Path.Combine(ClientDirectory, "OuterEnum.cs");
+            await File.WriteAllTextAsync(filePath, template);
+            // AnsiConsole.MarkupLine($"[green]Generated OuterEnum.cs at {filePath}[/]");
+        }
+    }
+
+    public async Task GenerateInnerEnumsAsync()
+    {
+        // AnsiConsole.MarkupLine($"[cyan]Generating Inner enums...[/]");
+
+        var template = GenerateInnerEnums(_innerEnums);
+
+        if (template == string.Empty)
+        {
+            return;
+        }
+
+        if (!Directory.Exists(ServerDirectory))
+        {
+            Directory.CreateDirectory(ServerDirectory);
+        }
+
+        if (protocolExportType.HasFlag(ProtocolExportType.Server))
+        {
+            var filePath = Path.Combine(ServerDirectory, "InnerEnum.cs");
+            await File.WriteAllTextAsync(filePath, template);
+            // AnsiConsole.MarkupLine($"[green]Generated InnerEnum.cs at {filePath}[/]");
+        }
+    }
+
     protected abstract string GenerateRouteTypes(IReadOnlyDictionary<string, int> routeTypes);
     protected abstract string GenerateRoamingTypes(IReadOnlyDictionary<string, int> roamingTypes);
     protected abstract string GenerateOuterOpcode(IReadOnlyList<OpcodeInfo> opcodeInfos);
     protected abstract string GenerateInnerOpcode(IReadOnlyList<OpcodeInfo> opcodeInfos);
-    protected abstract string GenerateOuterMessages(CustomNamespacesByIfDefine _outerCustomNamespaces, MessagesByIfDefine messageDefinitions);
-    protected abstract string GenerateInnerMessages(CustomNamespacesByIfDefine _innerCustomNamespaces, MessagesByIfDefine messageDefinitions);
-    protected abstract string GenerateOuterMessageHelper(MessagesByIfDefine messageDefinitions);
+    protected abstract string GenerateOuterMessages(IReadOnlySet<string> outerNamespaces, IReadOnlyList<MessageDefinition> messageDefinitions);
+    protected abstract string GenerateInnerMessages(IReadOnlySet<string> innerNamespaces, IReadOnlyList<MessageDefinition> messageDefinitions);
+    protected abstract string GenerateOuterMessageHelper(IReadOnlyList<MessageDefinition> messageDefinitions);
+    protected abstract string GenerateOuterEnums(IReadOnlyList<EnumDefinition> enumDefinitions);
+    protected abstract string GenerateInnerEnums(IReadOnlyList<EnumDefinition> enumDefinitions);
 
     #endregion
 
@@ -383,15 +451,15 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
 
     public void ParseAndValidateOuterProtocols()
     {
-        ParseAndValidateProtocols("Outer", _outerOpcode, _outerCustomNamespaces, _outerMessages);
-    }
-    
-    public void ParseAndValidateInnerProtocols()
-    {
-        ParseAndValidateProtocols("Inner", _innerOpcode, _innerCustomNamespaces, _innerMessages);
+        ParseAndValidateProtocols("Outer", _outerOpcode, _outerNamespaces, _outerMessages, _outerEnums);
     }
 
-    private void ParseAndValidateProtocols(string protocol, List<OpcodeInfo> opcodeInfo, CustomNamespacesByIfDefine customNamespaces, MessagesByIfDefine allMessages)
+    public void ParseAndValidateInnerProtocols()
+    {
+        ParseAndValidateProtocols("Inner", _innerOpcode, _innerNamespaces, _innerMessages, _innerEnums);
+    }
+
+    private void ParseAndValidateProtocols(string protocol, List<OpcodeInfo> opcodeInfo, HashSet<string> namespaces, List<MessageDefinition> allMessages, List<EnumDefinition> allEnums)
     {
         var validator = new ProtocolValidator();
         var isOuter = protocol.Equals("Outer", StringComparison.OrdinalIgnoreCase);
@@ -401,38 +469,47 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
         foreach (var (filePath, fileLines) in ReadProtocolFilesLinesWithPath(protocol))
         {
             var parser = new ProtocolFileParser(filePath);
-            var result = parser.Parse(fileLines);
+            var parseResult = parser.Parse(fileLines);
 
             // 收集解析错误
             foreach (var error in parser.GetErrors())
             {
                 _errors.Add(error);
             }
-
-            customNamespaces.Merge(result.CustomNamespaceUsing);
-            allMessages.Merge(result.Messages);
+            
+            // 收集Namespaces
+            foreach (var @namespace in parseResult.Namespaces)
+            {
+                namespaces.Add(@namespace);
+            }
+            
+            // 收集Messages
+            allMessages.AddRange(parseResult.Messages);
+            
+            // 收集Enums
+            allEnums.AddRange(parseResult.Enums);
         }
 
         // 2. 为所有需要 OpCode 的消息生成 OpCode
-        foreach (var kv in allMessages)
+        foreach(var message in allMessages.Where(m => m.HasOpCode))
         {
-            foreach(var message in kv.Value.Where(m => m.HasOpCode))
-            {
-                message.OpCode = opCodeGenerator.Generate(message);
-                opcodeInfo.Add(message.OpCode);
-            }
+            message.OpCode = opCodeGenerator.Generate(message);
+            opcodeInfo.Add(message.OpCode);
         }
 
         // 3. 验证所有消息
-        foreach (var kv in allMessages)
+        foreach (var message in allMessages)
         {
-            foreach (var message in kv.Value.Where(m => m.HasOpCode))
-            {
-                validator.Validate(message);
-            }
+            validator.Validate(message);
+        }
+        
+        // 4. 验证所有Enum
+        foreach (var @enum in allEnums)
+        {
+            validator.Validate(@enum);
         }
 
-        // 4. 收集验证错误
+        // 5. 收集验证错误
         foreach (var error in validator.GetErrors())
         {
             _errors.Add(error);

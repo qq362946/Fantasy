@@ -42,7 +42,7 @@ public abstract class Roaming<TEntity, TMessage> : IAddressMessageHandler where 
 
         if (entity is not TEntity tEntity)
         {
-            Log.Error($"{this.GetType().Name} Route type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
+            Log.Error($"{this.GetType().Name} Roaming type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
             return;
         }
 
@@ -109,7 +109,7 @@ public abstract class RoamingRPC<TEntity, TAddressRequest, TAddressResponse> : I
 
         if (entity is not TEntity tEntity)
         {
-            Log.Error($"{this.GetType().Name} Route type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
+            Log.Error($"{this.GetType().Name} Roaming type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
             return;
         }
 

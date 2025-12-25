@@ -13,20 +13,17 @@ internal sealed class I_LinkRoamingRequestHandler : AddressRPC<Scene, I_LinkRoam
 {
     protected override async FTask Run(Scene scene, I_LinkRoamingRequest request, I_LinkRoamingResponse response, Action reply)
     {
-        var (errorCode, roamingTerminal) = scene.TerminusComponent.Create(
+        var (errorCode, roamingTerminal) = await scene.TerminusComponent.Create(
             request.RoamingId, request.RoamingType,
-            request.ForwardSessionAddress, request.SceneAddress);
+            request.ForwardSessionAddress, request.SceneAddress, request.Args);
         
         if (errorCode != 0)
         {
             response.ErrorCode = errorCode;
             return;
         }
-
-        var requestArgs = request.Args;
+        
         response.TerminusId = roamingTerminal.TerminusId;
-        reply();
-        await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, roamingTerminal, requestArgs));
     }
 }
 #endif

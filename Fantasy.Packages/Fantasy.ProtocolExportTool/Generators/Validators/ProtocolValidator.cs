@@ -11,6 +11,7 @@ namespace Fantasy.ProtocolExportTool.Generators.Validators;
 public sealed class ProtocolValidator
 {
     private readonly HashSet<string> _allMessageNames = new();
+    private readonly HashSet<string> _allEnumNames = new();
     private readonly List<string> _errors = new();
 
     /// <summary>
@@ -22,6 +23,15 @@ public sealed class ProtocolValidator
         ValidateInterfaceType(message);
         ValidateResponseType(message);
         ValidateFields(message);
+    }
+
+    /// <summary>
+    /// 验证单个枚举定义
+    /// </summary>
+    public void Validate(EnumDefinition enumDef)
+    {
+        ValidateEnumName(enumDef);
+        ValidateEnumValues(enumDef);
     }
 
     /// <summary>
@@ -138,6 +148,105 @@ public sealed class ProtocolValidator
             {
                 _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Field type is empty for field {field.Name} in message {message.Name}[/]");
             }
+
+            // 验证 map 字段的 key 和 value 类型
+            if (field.IsMap)
+            {
+                ValidateMapField(field, message);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 验证 map 字段
+    /// </summary>
+    private void ValidateMapField(FieldDefinition field, MessageDefinition message)
+    {
+        // 验证 key 类型不为空
+        if (string.IsNullOrWhiteSpace(field.MapKeyType))
+        {
+            _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Map key type is empty for field {field.Name} in message {message.Name}[/]");
+        }
+
+        // 验证 value 类型不为空
+        if (string.IsNullOrWhiteSpace(field.MapValueType))
+        {
+            _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Map value type is empty for field {field.Name} in message {message.Name}[/]");
+        }
+
+        // 验证 map 的 key 类型必须是基本类型或枚举 (不能是复杂对象)
+        var validKeyTypes = new[]
+        {
+            "int", "int32", "uint", "uint32", "long", "int64", "ulong", "uint64",
+            "string", "bool", "byte"
+        };
+
+        var isValidKeyType = validKeyTypes.Contains(field.MapKeyType) ||
+                             (!string.IsNullOrEmpty(field.MapKeyType) && char.IsUpper(field.MapKeyType[0]));
+
+        if (!isValidKeyType && !string.IsNullOrWhiteSpace(field.MapKeyType))
+        {
+            _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Invalid map key type '{field.MapKeyType}' for field {field.Name} in message {message.Name}. Key type must be a primitive type or enum.[/]");
+        }
+    }
+
+    /// <summary>
+    /// 验证枚举名称唯一性
+    /// </summary>
+    private void ValidateEnumName(EnumDefinition enumDef)
+    {
+        if (string.IsNullOrWhiteSpace(enumDef.Name))
+        {
+            _errors.Add($"[red]  {enumDef.SourceFilePath} line {enumDef.SourceLineNumber}: Enum name is empty[/]");
+            return;
+        }
+
+        if (!_allEnumNames.Add(enumDef.Name))
+        {
+            _errors.Add($"[red]  {enumDef.SourceFilePath} line {enumDef.SourceLineNumber}: Duplicate enum name: {Markup.Escape(enumDef.Name)}[/]");
+        }
+
+        // 检查枚举名称和消息名称是否冲突
+        if (_allMessageNames.Contains(enumDef.Name))
+        {
+            _errors.Add($"[red]  {enumDef.SourceFilePath} line {enumDef.SourceLineNumber}: Enum name '{Markup.Escape(enumDef.Name)}' conflicts with a message name[/]");
+        }
+    }
+
+    /// <summary>
+    /// 验证枚举值定义
+    /// </summary>
+    private void ValidateEnumValues(EnumDefinition enumDef)
+    {
+        if (enumDef.Values.Count == 0)
+        {
+            _errors.Add($"[red]  {enumDef.SourceFilePath} line {enumDef.SourceLineNumber}: Enum {Markup.Escape(enumDef.Name)} has no values[/]");
+            return;
+        }
+
+        var valueNames = new HashSet<string>();
+        var valueNumbers = new HashSet<int>();
+
+        foreach (var value in enumDef.Values)
+        {
+            // 验证枚举值名称不为空
+            if (string.IsNullOrWhiteSpace(value.Name))
+            {
+                _errors.Add($"[red]  {enumDef.SourceFilePath} line {value.SourceLineNumber}: Enum value name is empty in enum {Markup.Escape(enumDef.Name)}[/]");
+                continue;
+            }
+
+            // 验证枚举值名称唯一性
+            if (!valueNames.Add(value.Name))
+            {
+                _errors.Add($"[red]  {enumDef.SourceFilePath} line {value.SourceLineNumber}: Duplicate enum value name '{Markup.Escape(value.Name)}' in enum {Markup.Escape(enumDef.Name)}[/]");
+            }
+
+            // 验证枚举值数字唯一性
+            if (!valueNumbers.Add(value.Value))
+            {
+                _errors.Add($"[red]  {enumDef.SourceFilePath} line {value.SourceLineNumber}: Duplicate enum value {value.Value} for '{Markup.Escape(value.Name)}' in enum {Markup.Escape(enumDef.Name)}[/]");
+            }
         }
     }
 
@@ -152,6 +261,7 @@ public sealed class ProtocolValidator
     public void Clear()
     {
         _allMessageNames.Clear();
+        _allEnumNames.Clear();
         _errors.Clear();
     }
 }

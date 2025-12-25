@@ -21,8 +21,11 @@
   - [常见使用场景](#常见使用场景)
   - [选择合适的接口类型](#选择合适的接口类型)
 - [协议定义规范](#协议定义规范)
+  - [序列化方式声明](#序列化方式声明)
+  - [自定义命名空间](#自定义命名空间)
   - [支持的数据类型](#支持的数据类型)
-  - [字段重复类型](#字段重复类型)
+  - [集合类型](#集合类型)
+  - [Map/字典类型](#map字典类型)
 - [最佳实践](#最佳实践)
   - [协议组织](#1-协议组织)
   - [命名规范](#2-命名规范)
@@ -46,7 +49,7 @@
 - **内外分离**: Inner(服务器间) 和 Outer(客户端-服务器) 协议分离
 - **类型枚举**: RouteType 和 RoamingType 提供协议类型的统一管理
 - **自动生成**: 配合 `Fantasy.Tools.NetworkProtocol` 工具自动生成 C# 代码
-- **序列化支持**: 支持 ProtoBuf、MemoryPack、Bson 三种序列化方式
+- **序列化支持**: 支持 ProtoBuf、MemoryPack 两种序列化方式
 
 ---
 
@@ -166,30 +169,19 @@ message G2C_TestResponse // IResponse
 
 Inner 文件夹包含所有**服务器间通信(Server-to-Server)**的网络协议定义。这些协议仅在服务器内部使用,不对客户端开放。
 
-## 支持的序列化方式
-
-Inner 协议支持两种序列化方式:
-
-| 序列化方式 | 适用场景 | 性能 | 可读性 |
-|-----------|---------|------|--------|
-| **ProtoBuf** | 通用场景,跨语言支持 | 高 | 低(二进制) |
-| **Bson** | 需要可读性或动态数据 | 中 | 高(类JSON) |
-
-**注意**: `Bson` 序列化**仅支持在 Inner 文件中使用**,不能在 Outer 文件中使用。
-
 ### 使用示例
 
 ```protobuf
 syntax = "proto3";
 package Sining.Message;
 
-//、 默认使用 ProtoBuf 序列化
+// 默认使用 ProtoBuf 序列化
 message G2A_TestMessage // IMessage
 {
     string Tag = 1;
 }
 
-/// 使用 MemoryPack 序列化
+// 使用 MemoryPack 序列化
 // Protocol MemoryPack
 message M2M_SendUnitRequest // IRequest,M2M_SendUnitResponse
 {
@@ -586,6 +578,125 @@ message G2C_WorldMessage // IMessage
 
 ## 协议定义规范
 
+### 序列化方式声明
+
+Fantasy Framework 支持两种序列化方式，可以通过 `// Protocol` 注释指定每个消息的序列化方式。
+
+#### 支持的序列化方式
+
+| 序列化方式 | 适用场景 | 性能 | 可读性 | 支持范围 |
+|-----------|---------|------|--------|---------|
+| **ProtoBuf** | 通用场景,跨语言支持 | 高 | 低(二进制) | Outer/Inner |
+| **MemoryPack** | .NET 高性能序列化 | 极高 | 低(二进制) | Outer/Inner |
+
+#### 声明格式
+
+```protobuf
+// Protocol SerializationType
+message MessageName // IMessage
+{
+    字段定义...
+}
+```
+
+#### 使用示例
+
+```protobuf
+// 默认使用 ProtoBuf 序列化（可省略 Protocol 声明）
+message C2G_LoginRequest // IRequest,G2C_LoginResponse
+{
+    string Username = 1;
+    string Password = 2;
+}
+
+// 显式声明使用 ProtoBuf 序列化
+// Protocol ProtoBuf
+message G2A_TestMessage // IMessage
+{
+    string Tag = 1;
+}
+
+// 使用 MemoryPack 序列化（Outer/Inner 都支持）
+// Protocol MemoryPack
+message C2G_HighPerformanceRequest // IRequest,G2C_HighPerformanceResponse
+{
+    int32 Data = 1;
+}
+
+// Protocol MemoryPack
+message M2M_SendUnitRequest // IRequest,M2M_SendUnitResponse
+{
+    Unit Unit = 1;
+}
+```
+
+#### 重要说明
+
+- **Outer 和 Inner 协议**都可以使用 `ProtoBuf` 或 `MemoryPack` 序列化
+- 未声明 `// Protocol` 时默认使用 `ProtoBuf`
+- 同一个 `.proto` 文件中可以混合使用不同的序列化方式
+- `MemoryPack` 性能更高，但仅限 .NET 环境使用
+
+---
+
+### 自定义命名空间
+
+Fantasy Framework 支持通过 `// using` 注释在生成的 C# 代码中添加自定义命名空间引用。
+
+#### 声明格式
+
+```protobuf
+// using NamespaceName
+```
+
+#### 使用示例
+
+```protobuf
+// 添加自定义命名空间
+// using System.Runtime
+// using System.Reflection
+// using MyProject.CustomTypes
+
+message PlayerData
+{
+    // 现在可以使用这些命名空间中的类型
+    CustomPlayerInfo Info = 1;
+}
+```
+
+#### 生成的 C# 代码
+
+```csharp
+using LightProto;
+using System;
+using MemoryPack;
+using System.Collections.Generic;
+using Fantasy;
+using Fantasy.Pool;
+using Fantasy.Network.Interface;
+using Fantasy.Serialize;
+using System.Runtime;          // 自定义命名空间
+using System.Reflection;        // 自定义命名空间
+using MyProject.CustomTypes;    // 自定义命名空间
+
+namespace Fantasy
+{
+    public partial class PlayerData : AMessage
+    {
+        // ...
+    }
+}
+```
+
+#### 应用场景
+
+- 引用项目中的自定义类型
+- 使用第三方库的类型
+- 引用特殊的系统命名空间
+- 在协议中使用枚举或复杂类型
+
+---
+
 ### 支持的数据类型
 
 Fantasy Framework 基于 Protocol Buffers 3 (proto3) 标准，支持以下数据类型：
@@ -672,26 +783,338 @@ message InventoryInfo
     int32 MaxSlots = 2;
 }
 ```
-#### 6. 数组类型
 
-支持三种重复字段类型:
+#### 6. 自定义类型（原样保留）
 
-| 关键字 | 生成类型 | 说明 |
-|-------|---------|------|
-| `repeated` | `List<T> = new List<T>()` | 带初始化的 List |
-| `repeatedArray` | `T[]` | 数组类型 |
-| `repeatedList` | `List<T>` | 不带初始化的 List |
+**重要说明：** 如果您定义的类型不是框架识别的基本类型，协议导出工具会**原封不动**地按照您定义的样子生成到 C# 代码中。
 
-**示例:**
+这个特性允许您使用：
+- 项目中自定义的结构体类型
+- Unity 的内置类型（如 `Vector3`、`Quaternion` 等）
+- 第三方库的类型
+- 任何其他自定义类型
+
+**使用示例：**
+
+```protobuf
+// 使用 Unity 的 float2 类型（需要配合 // using 引入命名空间）
+// using Unity.Mathematics
+
+message PlayerPosition
+{
+    float2 Position = 1;      // 生成: float2 Position { get; set; }
+    float3 Rotation = 2;      // 生成: float3 Rotation { get; set; }
+}
+
+// 使用自定义结构体类型
+// using MyProject.Types
+
+message GameState
+{
+    CustomVector Position = 1;     // 生成: CustomVector Position { get; set; }
+    MyCustomType Data = 2;          // 生成: MyCustomType Data { get; set; }
+}
+```
+
+**生成的 C# 代码：**
+
+```csharp
+using Unity.Mathematics;
+using MyProject.Types;
+
+public partial class PlayerPosition : AMessage
+{
+    [ProtoMember(1)]
+    public float2 Position { get; set; }    // 原样保留
+
+    [ProtoMember(2)]
+    public float3 Rotation { get; set; }    // 原样保留
+}
+```
+
+**注意事项：**
+- ⚠️ 确保使用的自定义类型在项目中可访问
+- ⚠️ 需要通过 `// using` 引入正确的命名空间
+- ⚠️ 自定义类型必须支持所选的序列化方式（ProtoBuf/MemoryPack）
+- ⚠️ 类型名称区分大小写
+
+**适用场景：**
+- ✅ 使用 Unity 的 Mathematics 库类型（float2、float3、float4 等）
+- ✅ 使用项目中定义的结构体或类
+- ✅ 使用第三方库的数据类型
+- ✅ 需要特定类型以保持代码一致性
+
+---
+
+### 集合类型
+
+Fantasy Framework 支持三种重复字段(数组/列表)类型，用于存储多个相同类型的元素。
+
+#### 重复字段类型对比
+
+| 关键字 | 生成类型 | 初始化 | Dispose 行为 | 适用场景 |
+|-------|---------|--------|-------------|---------|
+| `repeated` | `List<T>` | ✅ 自动初始化 | `Clear()` | 默认选择，适合大多数场景 |
+| `repeatedList` | `List<T>` | ❌ 不初始化 | `= null` | 节省内存，允许 null 值 |
+| `repeatedArray` | `T[]` | ❌ 不初始化 | `= null` | 需要固定大小数组时使用 |
+
+#### 使用示例
 
 ```protobuf
 message TestMessage // IMessage
 {
     repeated int32 Ids = 1;              // 生成: List<int> Ids = new List<int>();
-    repeatedArray string Names = 2;      // 生成: string[] Names;
-    repeatedList float Scores = 3;       // 生成: List<float> Scores;
+    repeatedList string Names = 2;       // 生成: List<string> Names;
+    repeatedArray float Scores = 3;      // 生成: float[] Scores;
 }
 ```
+
+#### 生成的 C# 代码
+
+```csharp
+public partial class TestMessage : AMessage, IMessage
+{
+    public static TestMessage Create()
+    {
+        return MessageObjectPool<TestMessage>.Rent();
+    }
+
+    public void Dispose()
+    {
+        Ids.Clear();          // repeated 调用 Clear()
+        Names = null;         // repeatedList 置为 null
+        Scores = null;        // repeatedArray 置为 null
+    }
+
+    [ProtoMember(1)]
+    public List<int> Ids { get; set; } = new List<int>();
+
+    [ProtoMember(2)]
+    public List<string> Names { get; set; }
+
+    [ProtoMember(3)]
+    public float[] Scores { get; set; }
+}
+```
+
+#### 类型选择建议
+
+**使用 `repeated` (推荐):**
+- ✅ 默认选择，适合大多数场景
+- ✅ 自动初始化，避免空引用异常
+- ✅ Dispose 时调用 `Clear()` 清空元素，List 对象可复用
+
+**使用 `repeatedList`:**
+- ✅ 需要区分"空列表"和"null"的语义
+- ✅ 节省内存（不需要时可以为 null）
+- ⚠️ 使用前需要检查 null
+
+**使用 `repeatedArray`:**
+- ✅ 需要固定大小的数组
+- ✅ 与某些 API 要求数组类型
+- ⚠️ 不支持动态添加元素
+
+---
+
+### Map/字典类型
+
+Fantasy Framework 支持 `map` 类型，用于存储键值对(Key-Value)数据，生成 C# 的 `Dictionary<TKey, TValue>` 类型。
+
+#### 语法格式
+
+```protobuf
+map<KeyType, ValueType> FieldName = FieldNumber;
+```
+
+#### 支持的 Key 类型
+
+Map 的 Key 类型**必须是基本类型或枚举**，不能是复杂对象：
+
+| Key 类型分类 | 支持的类型 |
+|------------|-----------|
+| **整数类型** | `int`, `int32`, `uint`, `uint32`, `long`, `int64`, `ulong`, `uint64`, `byte` |
+| **字符串类型** | `string` |
+| **布尔类型** | `bool` |
+| **枚举类型** | 任何自定义枚举（以大写字母开头的类型） |
+
+#### 支持的 Value 类型
+
+Value 类型支持：
+- ✅ 所有基本类型（int, string, bool, float, double 等）
+- ✅ 自定义枚举类型
+- ✅ 自定义消息类型（以大写字母开头的类型）
+
+#### 使用示例
+
+```protobuf
+/// 玩家数据
+message PlayerData
+{
+    /// 玩家属性 (属性ID -> 属性值)
+    map<int32, int32> Attributes = 1;
+
+    /// 玩家装备 (装备槽位 -> 装备ID)
+    map<int32, int64> Equipment = 2;
+
+    /// 玩家好友列表 (好友ID -> 好友名称)
+    map<int64, string> Friends = 3;
+
+    /// 背包物品 (物品ID -> 物品数据)
+    map<int32, ItemData> Inventory = 4;
+}
+
+/// 物品数据
+message ItemData
+{
+    int32 ItemId = 1;
+    int32 Count = 2;
+    int32 Quality = 3;
+}
+
+/// 使用枚举作为 Key
+enum AttributeType
+{
+    Strength = 0,
+    Agility = 1,
+    Intelligence = 2
+}
+
+message PlayerAttributes
+{
+    /// 使用枚举作为 Key
+    map<AttributeType, int32> Attributes = 1;
+}
+```
+
+#### 生成的 C# 代码
+
+```csharp
+public partial class PlayerData : AMessage
+{
+    public static PlayerData Create()
+    {
+        return MessageObjectPool<PlayerData>.Rent();
+    }
+
+    public void Dispose()
+    {
+        Attributes.Clear();
+        Equipment.Clear();
+        Friends.Clear();
+        Inventory.Clear();
+    }
+
+    /// <summary>
+    /// 玩家属性 (属性ID -> 属性值)
+    /// </summary>
+    [ProtoMember(1)]
+    public Dictionary<int, int> Attributes { get; set; } = new Dictionary<int, int>();
+
+    /// <summary>
+    /// 玩家装备 (装备槽位 -> 装备ID)
+    /// </summary>
+    [ProtoMember(2)]
+    public Dictionary<int, long> Equipment { get; set; } = new Dictionary<int, long>();
+
+    /// <summary>
+    /// 玩家好友列表 (好友ID -> 好友名称)
+    /// </summary>
+    [ProtoMember(3)]
+    public Dictionary<long, string> Friends { get; set; } = new Dictionary<long, string>();
+
+    /// <summary>
+    /// 背包物品 (物品ID -> 物品数据)
+    /// </summary>
+    [ProtoMember(4)]
+    public Dictionary<int, ItemData> Inventory { get; set; } = new Dictionary<int, ItemData>();
+}
+```
+
+#### Map 特性说明
+
+| 特性 | 说明 |
+|-----|------|
+| **自动初始化** | 生成的字段会自动初始化为 `new Dictionary<TKey, TValue>()` |
+| **Dispose 行为** | 调用 `Clear()` 清空所有元素，Dictionary 对象可复用 |
+| **Key 唯一性** | Dictionary 的 Key 必须唯一，重复 Key 会覆盖值 |
+| **性能** | 查找性能为 O(1)，适合频繁查询的场景 |
+
+#### 使用示例代码
+
+```csharp
+// 使用 map 字段
+var player = PlayerData.Create();
+
+// 添加属性
+player.Attributes[1] = 100;  // 力量
+player.Attributes[2] = 50;   // 敏捷
+
+// 添加装备
+player.Equipment[1] = 10001;  // 武器槽
+player.Equipment[2] = 10002;  // 护甲槽
+
+// 添加好友
+player.Friends[1001] = "Alice";
+player.Friends[1002] = "Bob";
+
+// 添加物品
+player.Inventory[1] = new ItemData
+{
+    ItemId = 1,
+    Count = 10,
+    Quality = 3
+};
+
+// 查询
+if (player.Attributes.TryGetValue(1, out var strength))
+{
+    Log.Info($"力量值: {strength}");
+}
+
+// 遍历
+foreach (var (itemId, itemData) in player.Inventory)
+{
+    Log.Info($"物品 {itemId}: 数量 {itemData.Count}");
+}
+
+// Dispose 清理
+player.Dispose();  // 调用 Clear() 清空所有字典
+```
+
+#### 错误示例
+
+```protobuf
+// ❌ 错误：Key 类型为空
+map<, string> Data = 1;
+
+// ❌ 错误：Value 类型为空
+map<int, > Data = 1;
+
+// ❌ 错误：Key 类型是复杂对象（不支持）
+map<PlayerData, int> Data = 1;
+
+// ✅ 正确：使用基本类型作为 Key
+map<int, PlayerData> Data = 1;
+
+// ✅ 正确：使用枚举作为 Key
+map<AttributeType, int> Data = 1;
+```
+
+#### 应用场景
+
+**使用 map 的常见场景：**
+- ✅ 玩家属性系统（属性ID -> 属性值）
+- ✅ 背包系统（物品ID -> 物品数据）
+- ✅ 装备系统（装备槽位 -> 装备ID）
+- ✅ 好友列表（好友ID -> 好友信息）
+- ✅ 成就系统（成就ID -> 进度）
+- ✅ 任务系统（任务ID -> 任务状态）
+- ✅ 配置缓存（配置ID -> 配置数据）
+
+**不适合使用 map 的场景：**
+- ❌ 需要保持元素顺序（使用 `repeated` 代替）
+- ❌ 需要重复的 Key（使用 `repeated` 存储键值对对象）
+- ❌ Key 类型是复杂对象（不支持）
 
 ---
 

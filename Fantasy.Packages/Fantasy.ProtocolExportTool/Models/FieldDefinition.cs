@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Fantasy.ProtocolExportTool.Models;
@@ -28,14 +29,19 @@ public sealed class FieldDefinition
     public int KeyIndex { get; set; }
 
     /// <summary>
-    /// 是否是重复字段 (集合类型)
+    /// 字段集合类型 (普通字段、List、Array、Map 等)
     /// </summary>
-    public bool IsRepeated { get; set; }
+    public FieldCollectionType CollectionType { get; set; } = FieldCollectionType.None;
 
     /// <summary>
-    /// 重复字段类型: "repeated" (List with initialization), "repeatedArray" (Array), "repeatedList" (List without initialization)
+    /// Map 的 Key 类型 (仅当 CollectionType = Map 时有效)
     /// </summary>
-    public RepeatedFieldType RepeatedType { get; set; } = RepeatedFieldType.None;
+    public string MapKeyType { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Map 的 Value 类型 (仅当 CollectionType = Map 时有效)
+    /// </summary>
+    public string MapValueType { get; set; } = string.Empty;
 
     /// <summary>
     /// XML 注释文档
@@ -46,30 +52,55 @@ public sealed class FieldDefinition
     /// 源文件行号 (用于错误报告)
     /// </summary>
     public int SourceLineNumber { get; set; }
+
+    /// <summary>
+    /// 是否是重复字段 (包括 Repeated、RepeatedList、RepeatedArray)
+    /// </summary>
+    public bool IsRepeated => (CollectionType & FieldCollectionType.IsRepeated) != 0;
+
+    /// <summary>
+    /// 是否是 Map 类型字段
+    /// </summary>
+    public bool IsMap => CollectionType.HasFlag(FieldCollectionType.Map);
+
+    /// <summary>
+    /// 是否需要初始化 (Repeated 和 Map 需要初始化)
+    /// </summary>
+    public bool NeedsInitialization => CollectionType == FieldCollectionType.Repeated || IsMap;
 }
 
 /// <summary>
-/// 重复字段类型枚举
+/// 字段集合类型枚举
 /// </summary>
-public enum RepeatedFieldType
+[Flags]
+public enum FieldCollectionType : byte
 {
     /// <summary>
-    /// 非重复字段
+    /// 普通单值字段
     /// </summary>
-    None,
-
+    None = 0,
     /// <summary>
-    /// repeated - List&lt;T&gt; with initialization (new List&lt;T&gt;())
+    /// 普通类型
     /// </summary>
-    Repeated,
-
+    Normal = 1 << 0,
     /// <summary>
-    /// repeatedArray - T[]
+    /// Map/Dictionary 容器类型
     /// </summary>
-    RepeatedArray,
-
+    Map = 1 << 1,    
     /// <summary>
-    /// repeatedList - List&lt;T&gt; without initialization
+    /// 重复字段标志 
     /// </summary>
-    RepeatedList
+    Repeated = 1 << 2, 
+    /// <summary>
+    /// List 容器类型 (不带初始化)
+    /// </summary>
+    RepeatedList = 1 << 3,
+    /// <summary>
+    /// Array 容器类型
+    /// </summary>
+    RepeatedArray = 1 << 4,
+    /// <summary>
+    /// 是否是重复字段标志 (用于 repeated、repeatedList、repeatedArray)
+    /// </summary>
+    IsRepeated = Repeated | RepeatedList | RepeatedArray,  
 }

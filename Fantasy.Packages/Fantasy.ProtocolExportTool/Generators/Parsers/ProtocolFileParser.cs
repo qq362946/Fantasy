@@ -12,14 +12,17 @@ namespace Fantasy.ProtocolExportTool.Generators.Parsers;
 /// <summary>
 /// 解析结果
 /// </summary>
-public class ParseResult
+public struct ParseResult
 {
-    public CustomAttributesByIfDefine CustomNamespaceUsing { get; init; } = new();
-    public MessagesByIfDefine Messages { get; init; } = new();
-    public ParseResult(CustomAttributesByIfDefine customNamespaceUsing, MessagesByIfDefine messages)
+    public HashSet<string> Namespaces { get; init; } = new();
+    public List<EnumDefinition> Enums { get; init; } = new();
+    public List<MessageDefinition> Messages { get; init; } = new();
+    
+    public ParseResult(HashSet<string> namespaces, List<MessageDefinition> messages, List<EnumDefinition> enums)
     {
-        CustomNamespaceUsing = customNamespaceUsing;
+        Namespaces = namespaces;
         Messages = messages;
+        Enums = enums;
     }
 }
 
@@ -31,29 +34,40 @@ public sealed partial class ProtocolFileParser(string filePath)
     private readonly List<string> _errors = new();
 
     private ParserState _state = ParserState.WaitingForMessage;
+    private EnumDefinition? _currentEnum;
     private MessageDefinition? _currentMessage;
+    private int _currentEnumValue = 0;
     private ProtocolSettings _currentProtocolSettings = ProtocolSettings.CreateProtoBuf();
-    private CustomAttributesByIfDefine _currentCustomAttributes = new();
     private int _currentKeyIndex = 1;
     private readonly List<string> _pendingComments = new();
-    private static readonly Regex _attributesRegex = new Regex(@"^//[\p{Z}\s]*\[[^\]]+\]", RegexOptions.Compiled); //标签匹配
-    private static readonly Regex _usingRegex = new Regex(@"^//[\p{Z}\s]*Using", RegexOptions.Compiled); //命名空间导入匹配
-    private static readonly Regex _messagesIfRegex = new Regex(@"^//[\p{Z}\s]*TheseMessagesIf", RegexOptions.Compiled); //全页消息条件编译匹配
-    private static readonly Regex _syntaxIfRegex = new Regex(@"^//[\p{Z}\s]*If", RegexOptions.Compiled); //If语法匹配
-    private static readonly Regex _syntaxEndIfRegex = new Regex(@"^//[\p{Z}\s]*Endif", RegexOptions.Compiled); //EndIf语法匹配
-    private bool _needMessagesCompileCondition = false; // 是否存需要消息页级条件编译指令 (消息通常会定义很多, 导致单个信息划分条件编译会较为不便, 因此将整个文件作为一个条件编译页)
-    private string _currentMessagesIfDefine = string.Empty;
-    private bool _isInConditionalBlock = false; // 是否在条件编译块内
-    private string _currentSyntaxIfDefine = string.Empty;
+    
+    /// <summary>
+    /// 字段解析正则表达式: type name = number, 支持中日韩等非英文字符
+    /// </summary>
+    [GeneratedRegex(@"^\s*([\p{L}_][\p{L}\p{N}_]*)\s+([\p{L}_][\p{L}\p{N}_]*)\s*=\s*(\d+)\s*;$")]
+    private static partial Regex FieldRegex();
+
+    /// <summary>
+    /// 枚举值解析正则表达式: Name = Value 或 Name, 支持中日韩等非英文字符
+    /// </summary>
+    [GeneratedRegex(@"^\s*([\p{L}_][\p{L}\p{N}_]*)(?:\s*=\s*(\d+))?\s*$")]
+    private static partial Regex EnumValueRegex();
+
+    /// <summary>
+    /// Map 字段名称和编号解析正则表达式: name = number, 支持中日韩等非英文字符
+    /// </summary>
+    [GeneratedRegex(@"^\s*([\p{L}_][\p{L}\p{N}_]*)\s*=\s*(\d+)\s*;$")]
+    private static partial Regex MapFieldRegex();
 
     /// <summary>
     /// 解析协议文件的所有行，返回解析结果。
     /// </summary>
     public ParseResult Parse(string[] lines)
     {
-        var messages = new MessagesByIfDefine();
-        var customNamespaceUsing = new CustomAttributesByIfDefine();
-
+        var namespaces = new HashSet<string>();
+        var enums = new List<EnumDefinition>();
+        var messages = new List<MessageDefinition>();
+        
         for (var i = 0; i < lines.Length; i++)
         {
             var line = lines[i].Trim();
@@ -62,6 +76,20 @@ public sealed partial class ProtocolFileParser(string filePath)
             // 跳过空行
             if (string.IsNullOrWhiteSpace(line))
             {
+                continue;
+            }
+            
+            // 处理命名空间 (// using System.Runtime)
+            if (line.StartsWith("// using"))
+            {
+                // "// using".Length = 9
+                var @namespace = line.Substring(9).Trim();
+
+                if (!string.IsNullOrWhiteSpace(@namespace))
+                {
+                    namespaces.Add(@namespace);
+                }
+
                 continue;
             }
 
@@ -76,62 +104,6 @@ public sealed partial class ProtocolFileParser(string filePath)
             if (line.StartsWith("// Protocol"))
             {
                 ParseProtocolDeclaration(line, lineNumber);
-                continue;
-            }
-
-            // 处理消息页条件编译指令, 作用于当前文件所有消息 (// TheseMessagesIf)
-            var matchTheseMessagesIf = _messagesIfRegex.Match(line);
-            if (matchTheseMessagesIf.Success)
-            {
-                _currentMessagesIfDefine = line.Substring(matchTheseMessagesIf.Length).Trim(); // 移除前缀 "// TheseMessagesIf"
-                _needMessagesCompileCondition = true;
-                continue;
-            }
-
-            //处理局部语法的条件编译指令 (// If)
-            var matchIf = _syntaxIfRegex.Match(line);
-            if (matchIf.Success)
-            {
-                _isInConditionalBlock = true;
-                _currentSyntaxIfDefine = line.Substring(matchIf.Length).Trim(); // 移除前缀 "// If"
-                continue;
-            }
-
-            //条件编译结束指令 (// Endif)
-            var matchEndIf = _syntaxEndIfRegex.Match(line);
-            if (matchEndIf.Success)
-            {
-                _isInConditionalBlock = false;
-                _currentSyntaxIfDefine = string.Empty;
-                continue;
-            }
-
-            // 处理自定义标签 (// [MyCustomAttribute])
-            if (_attributesRegex.IsMatch(line))
-            {
-                var attribute = line.Substring(2).Trim(); // 移除前缀 "//"和多余的空格
-
-                if (_currentCustomAttributes.TryGetValue(_currentSyntaxIfDefine, out var attrslist))
-                    attrslist.Add(attribute);
-                else
-                    _currentCustomAttributes.Add(_currentSyntaxIfDefine, new() { attribute });
-
-                continue;
-            }
-
-            // 处理命名空间导入 (// Using Namespace.Name)
-            var matchUsing = _usingRegex.Match(line);
-            if (matchUsing.Success)
-            {
-                var @namespace = line.Substring(matchUsing.Length).Trim(); // 移除前缀 "// Using" 
-                if (string.IsNullOrWhiteSpace(@namespace))
-                    continue;
-
-                if (customNamespaceUsing.TryGetValue(_currentSyntaxIfDefine, out var namespaceList))
-                    namespaceList.Add(@namespace);
-                else
-                    customNamespaceUsing.Add(_currentSyntaxIfDefine, new() { @namespace });
-
                 continue;
             }
 
@@ -150,10 +122,53 @@ public sealed partial class ProtocolFileParser(string filePath)
                 {
                     _currentMessage = message;
                     _state = ParserState.ParsingMessageHeader;
-
                     // Response 类型的 ErrorCode 占用了索引1，所以字段从2开始
                     _currentKeyIndex = IsResponseType(message.MessageType) ? 2 : 1;
                 }
+                continue;
+            }
+
+            // 处理 enum 声明
+            if (line.StartsWith("enum"))
+            {
+                var enumDef = ParseEnumDeclaration(line, lineNumber);
+                if (enumDef != null)
+                {
+                    _currentEnum = enumDef;
+                    _state = ParserState.ParsingEnumHeader;
+                    _currentEnumValue = 0;
+                }
+                continue;
+            }
+
+            // 处理枚举头部
+            if (_state == ParserState.ParsingEnumHeader)
+            {
+                if (line == "{")
+                {
+                    _state = ParserState.ParsingEnumValues;
+                    continue;
+                }
+            }
+
+            // 处理枚举值
+            if (_state == ParserState.ParsingEnumValues)
+            {
+                if (line == "}")
+                {
+                    // 枚举解析完成
+                    if (_currentEnum != null)
+                    {
+                        enums.Add(_currentEnum);
+                        _currentEnum = null;
+                    }
+
+                    _state = ParserState.WaitingForMessage;
+                    continue;
+                }
+
+                // 解析枚举值
+                ParseEnumValue(line, lineNumber);
                 continue;
             }
 
@@ -174,14 +189,12 @@ public sealed partial class ProtocolFileParser(string filePath)
                     // 消息解析完成
                     if (_currentMessage != null)
                     {
-                        messages.TryAdd(_currentMessagesIfDefine, new List<MessageDefinition>());
-                        messages[_currentMessagesIfDefine].Add(_currentMessage);
+                        messages.Add(_currentMessage);
                         _currentMessage = null;
                     }
 
                     _state = ParserState.WaitingForMessage;
                     _currentProtocolSettings = ProtocolSettings.CreateProtoBuf();
-                    _currentCustomAttributes = new();
                     continue;
                 }
 
@@ -190,7 +203,7 @@ public sealed partial class ProtocolFileParser(string filePath)
             }
         }
 
-        return new ParseResult(customNamespaceUsing, messages);
+        return new ParseResult(namespaces, messages, enums);
     }
 
     /// <summary>
@@ -224,7 +237,6 @@ public sealed partial class ProtocolFileParser(string filePath)
             SourceFilePath = filePath,
             SourceLineNumber = lineNumber,
             Protocol = CloneProtocolSettings(_currentProtocolSettings),
-            CustomClassAttributesByIfDefine = (CustomAttributesByIfDefine)_currentCustomAttributes.CloneOne(),
             DocumentationComments = new List<string>(_pendingComments)
         };
 
@@ -354,17 +366,21 @@ public sealed partial class ProtocolFileParser(string filePath)
 
         FieldDefinition? field = null;
 
-        if (line.StartsWith("repeatedArray"))
+        if (line.StartsWith("map"))
         {
-            field = ParseRepeatedField(line, lineNumber, RepeatedFieldType.RepeatedArray, "repeatedArray");
+            field = ParseMapField(line, lineNumber);
+        }
+        else if (line.StartsWith("repeatedArray"))
+        {
+            field = ParseRepeatedField(line, lineNumber, FieldCollectionType.RepeatedArray, "repeatedArray");
         }
         else if (line.StartsWith("repeatedList"))
         {
-            field = ParseRepeatedField(line, lineNumber, RepeatedFieldType.RepeatedList, "repeatedList");
+            field = ParseRepeatedField(line, lineNumber, FieldCollectionType.RepeatedList, "repeatedList");
         }
         else if (line.StartsWith("repeated"))
         {
-            field = ParseRepeatedField(line, lineNumber, RepeatedFieldType.Repeated, "repeated");
+            field = ParseRepeatedField(line, lineNumber, FieldCollectionType.Repeated, "repeated");
         }
         else
         {
@@ -383,7 +399,7 @@ public sealed partial class ProtocolFileParser(string filePath)
     /// <summary>
     /// 解析重复字段 (repeated/repeatedArray/repeatedList type name = number)
     /// </summary>
-    private FieldDefinition? ParseRepeatedField(string line, int lineNumber, RepeatedFieldType repeatedType, string keyword)
+    private FieldDefinition? ParseRepeatedField(string line, int lineNumber, FieldCollectionType collectionType, string keyword)
     {
         // 格式: repeated int Items = 1
         var content = line.Substring(keyword.Length).Trim();
@@ -400,8 +416,7 @@ public sealed partial class ProtocolFileParser(string filePath)
             Type = match.Groups[1].Value,
             Name = match.Groups[2].Value,
             FieldNumber = int.Parse(match.Groups[3].Value),
-            IsRepeated = true,
-            RepeatedType = repeatedType,
+            CollectionType = collectionType,
             SourceLineNumber = lineNumber
         };
     }
@@ -425,10 +440,158 @@ public sealed partial class ProtocolFileParser(string filePath)
             Type = match.Groups[1].Value,
             Name = match.Groups[2].Value,
             FieldNumber = int.Parse(match.Groups[3].Value),
-            IsRepeated = false,
-            RepeatedType = RepeatedFieldType.None,
+            CollectionType = FieldCollectionType.Normal,
             SourceLineNumber = lineNumber
         };
+    }
+
+    /// <summary>
+    /// 解析 map 字段 (map<keyType, valueType> name = number)
+    /// </summary>
+    private FieldDefinition? ParseMapField(string line, int lineNumber)
+    {
+        // 格式: map<int32, string> Dic = 3;
+        // 移除 "map" 前缀
+        var content = line.Substring(3).Trim();
+
+        // 提取 <keyType, valueType>
+        var genericStart = content.IndexOf('<');
+        var genericEnd = content.IndexOf('>');
+
+        if (genericStart == -1 || genericEnd == -1 || genericEnd <= genericStart)
+        {
+            _errors.Add($"[red]  {filePath} line {lineNumber}: Invalid map format, expected 'map<keyType, valueType> name = number': {Markup.Escape(line)}[/]");
+            return null;
+        }
+
+        var genericContent = content.Substring(genericStart + 1, genericEnd - genericStart - 1).Trim();
+        var types = genericContent.Split(',');
+
+        if (types.Length != 2)
+        {
+            _errors.Add($"[red]  {filePath} line {lineNumber}: Map must have exactly 2 type parameters (key, value): {Markup.Escape(line)}[/]");
+            return null;
+        }
+
+        var keyType = types[0].Trim();
+        var valueType = types[1].Trim();
+
+        // 提取字段名和编号: name = number;
+        // 注意：这里剩余部分是 "Dic = 3;" 格式（没有类型名）
+        var remaining = content.Substring(genericEnd + 1).Trim();
+        var match = MapFieldRegex().Match(remaining);
+
+        if (!match.Success)
+        {
+            _errors.Add($"[red]  {filePath} line {lineNumber}: Invalid map field format after type parameters, expected 'name = number;': {Markup.Escape(line)}[/]");
+            return null;
+        }
+
+        return new FieldDefinition
+        {
+            Type = $"Dictionary<{keyType}, {valueType}>",  // 存储为完整类型以便后续处理
+            Name = match.Groups[1].Value,      // 第一个捕获组是字段名
+            FieldNumber = int.Parse(match.Groups[2].Value),  // 第二个捕获组是字段编号
+            CollectionType = FieldCollectionType.Map,
+            MapKeyType = keyType,
+            MapValueType = valueType,
+            SourceLineNumber = lineNumber
+        };
+    }
+
+    /// <summary>
+    /// 解析枚举声明 (enum ErrorCode)
+    /// </summary>
+    private EnumDefinition? ParseEnumDeclaration(string line, int lineNumber)
+    {
+        // 格式: enum EnumName
+        var parts = line.Split([' ', '\t'], StringSplitOptions.RemoveEmptyEntries);
+
+        if (parts.Length < 2)
+        {
+            _errors.Add($"[red]  {filePath} line {lineNumber}: Invalid enum declaration format: {Markup.Escape(line)}[/]");
+            return null;
+        }
+
+        var enumName = parts[1];
+
+        var enumDef = new EnumDefinition
+        {
+            Name = enumName,
+            SourceFilePath = filePath,
+            SourceLineNumber = lineNumber,
+            DocumentationComments = new List<string>(_pendingComments)
+        };
+
+        _pendingComments.Clear();
+        return enumDef;
+    }
+
+    /// <summary>
+    /// 解析枚举值定义 (Success = 0 或 Error = 1,)
+    /// </summary>
+    private void ParseEnumValue(string line, int lineNumber)
+    {
+        if (_currentEnum == null)
+        {
+            return;
+        }
+
+        // 提取行尾的 /// 注释
+        var commentIndex = line.IndexOf("///", StringComparison.Ordinal);
+
+        if (commentIndex > 0)
+        {
+            var inlineComment = line.Substring(commentIndex + 3).Trim();
+            if (!string.IsNullOrWhiteSpace(inlineComment))
+            {
+                _pendingComments.Add(inlineComment);
+            }
+            line = line.Substring(0, commentIndex).Trim();
+        }
+        else
+        {
+            // 移除普通的行尾注释 (// xxx)
+            commentIndex = line.IndexOf("//", StringComparison.Ordinal);
+            if (commentIndex > 0)
+            {
+                line = line.Substring(0, commentIndex).Trim();
+            }
+        }
+
+        // 移除末尾的逗号
+        line = line.TrimEnd(',').Trim();
+
+        if (string.IsNullOrWhiteSpace(line))
+        {
+            return;
+        }
+
+        // 解析枚举值: Name = Value 或 Name
+        var match = EnumValueRegex().Match(line);
+
+        if (match.Success)
+        {
+            var valueName = match.Groups[1].Value;
+            var hasExplicitValue = !string.IsNullOrWhiteSpace(match.Groups[2].Value);
+            var valueNumber = hasExplicitValue ? int.Parse(match.Groups[2].Value) : _currentEnumValue;
+
+            var enumValue = new EnumValueDefinition
+            {
+                Name = valueName,
+                Value = valueNumber,
+                SourceLineNumber = lineNumber,
+                DocumentationComments = new List<string>(_pendingComments)
+            };
+
+            _currentEnum.Values.Add(enumValue);
+            _currentEnumValue = valueNumber + 1;
+            _pendingComments.Clear();
+        }
+        else
+        {
+            _errors.Add($"[red]  {filePath} line {lineNumber}: Invalid enum value format: {Markup.Escape(line)}[/]");
+        }
     }
 
     /// <summary>
@@ -457,12 +620,6 @@ public sealed partial class ProtocolFileParser(string filePath)
     /// </summary>
     private static bool IsResponseType(MessageType type) =>
         type is MessageType.Response or MessageType.RouteTypeResponse or MessageType.RoamingResponse;
-
-    /// <summary>
-    /// 字段解析正则表达式: type name = number, 支持中日韩等非英文字符
-    /// </summary>
-    [GeneratedRegex(@"^\s*([\p{L}_][\p{L}\p{N}_]*)\s+([\p{L}_][\p{L}\p{N}_]*)\s*=\s*(\d+)\s*;$")]
-    private static partial Regex FieldRegex();
 }
 
 /// <summary>
@@ -471,7 +628,7 @@ public sealed partial class ProtocolFileParser(string filePath)
 internal enum ParserState
 {
     /// <summary>
-    /// 等待 message 声明
+    /// 等待 message/enum 声明
     /// </summary>
     WaitingForMessage,
 
@@ -483,5 +640,15 @@ internal enum ParserState
     /// <summary>
     /// 解析字段
     /// </summary>
-    ParsingFields
+    ParsingFields,
+
+    /// <summary>
+    /// 解析 enum 头部（等待左大括号）
+    /// </summary>
+    ParsingEnumHeader,
+
+    /// <summary>
+    /// 解析枚举值
+    /// </summary>
+    ParsingEnumValues
 }
