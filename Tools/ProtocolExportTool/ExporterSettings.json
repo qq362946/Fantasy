@@ -1,7 +1,7 @@
 {
     "Export": {
         "NetworkProtocolDirectory": {
-            "Value": "../Config/NetworkProtocol ",
+            "Value": "../Config/NetworkProtocol",
             "Comment": "ProtoBuf文件所在的文件夹位置"
         },
         "NetworkProtocolServerDirectory": {
@@ -9,7 +9,7 @@
             "Comment": "ProtoBuf生成到服务端的文件夹位置"
         },
         "NetworkProtocolClientDirectory": {
-            "Value": "../../Client/Unity/Assets/Scripts/Hotfix/Generate/NetworkProtocol",
+            "Value": "../../Client/Unity/Assets/Scripts/Hotfix/Generate/NetworkProtoco",
             "Comment": "ProtoBuf生成到客户端的文件夹位置"
         }
     }
