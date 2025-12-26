@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
+        <LangVersion>default</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Entity\Entity.csproj" />
+    </ItemGroup>
+
+    <!-- Source Generator Reference -->
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Fantasy.Packages\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj"
+                        OutputItemType="Analyzer"
+                        ReferenceOutputAssembly="false" />
+    </ItemGroup>
+
+    <PropertyGroup>
+      <!-- SG调试输出避免被编译器升级为Error -->
+      <WarningsNotAsErrors>$(WarningsNotAsErrors);DebugFantasySG</WarningsNotAsErrors>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Functional Examples\Benchmark\" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+{
+    "name": "UniRecast.Core",
+    "references": [
+        "DotRecast.Core",
+        "DotRecast.Recast",
+        "DotRecast.Detour",
+        "DotRecast.Detour.Crowd",
+        "DotRecast.Detour.Dynamic",
+        "DotRecast.Detour.Extras",
+        "DotRecast.Detour.TileCace",
+        "DotRecast.Recast.Toolset"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

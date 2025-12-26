@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+// GameMessage.proto
+/// 客户端登陆到Gate服务器
+message C2G_LoginGameRequest // IRequest,G2C_LoginGameResponse
+{
+	string AccountName = 1;
+}
+message G2C_LoginGameResponse // IResponse
+{
+	
+}
+/// Map服务器通知客户端有新玩家加入
+message M2C_PalyerJoin // IRoamingMessage,MapRoamingType
+{
+	UnitInfo Unit = 1;
+}
+/// Mapt通知客户端有玩家离开
+message M2C_PlayerExit // IRoamingMessage,MapRoamingType
+{
+	int64 UnitId = 1;
+}
+/// Unit信息
+message UnitInfo
+{
+	int64 UnitId = 1;			// Unit的Id
+	string Name = 2;			 // Unit的名字，如果是怪物其实可以通过配置表来拿，所以这个名字仅限于玩家
+	PositionInfo Pos = 3;		// 位置信息
+	int32 UnitType = 4;		  // Unit的类型（如:玩家、怪物、NPC等）	
+}
+// ---- 移动 Start ----
+/// 客户端发送请求移动
+message C2M_MoveRequest // IRoamingRequest,M2C_MoveResponse,MapRoamingType
+{
+	Position TargetPos = 1;
+}
+message M2C_MoveResponse // IRoamingResponse
+{
+
+}
+/// 位置信息
+message PositionInfo
+{
+	Position Pos = 1;
+}
+/// 坐标信息
+message Position
+{
+	float X = 1;
+	float Y = 2;
+	float Z = 3;
+}
+// ---- 移动 End ----

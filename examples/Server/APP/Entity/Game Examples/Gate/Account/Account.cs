@@ -1,6 +1,11 @@
+using Fantasy.Entitas;
+using Fantasy.Network;
+
 namespace Fantasy;
 
-public class Account
+public sealed class Account : Entity
 {
-    
+    public string Name;
+
+    public EntityReference<Session> Session;
 }

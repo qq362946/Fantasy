@@ -1,0 +1,22 @@
+{
+    "name": "DotRecast.Recast.Toolset",
+    "rootNamespace": "",
+    "references": [
+        "DotRecast.Core",
+        "DotRecast.Recast",
+        "DotRecast.Detour",
+        "DotRecast.Detour.Crowd",
+        "DotRecast.Detour.Dynamic",
+        "DotRecast.Detour.Extras",
+        "DotRecast.Detour.TileCace"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

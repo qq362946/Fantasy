@@ -9,6 +9,20 @@ namespace Fantasy
    public static class NetworkProtocolHelper
    {
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void C2G_TestEnumMessage(this Session session, C2G_TestEnumMessage C2G_TestEnumMessage_message)
+		{
+			session.Send(C2G_TestEnumMessage_message);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void C2G_TestEnumMessage(this Session session, ErrorCodeEnum code, string message, PlayerState state)
+		{
+			using var C2G_TestEnumMessage_message = Fantasy.C2G_TestEnumMessage.Create();
+			C2G_TestEnumMessage_message.Code = code;
+			C2G_TestEnumMessage_message.Message = message;
+			C2G_TestEnumMessage_message.State = state;
+			session.Send(C2G_TestEnumMessage_message);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void C2G_TestEmptyMessage(this Session session, C2G_TestEmptyMessage C2G_TestEmptyMessage_message)
 		{
 			session.Send(C2G_TestEmptyMessage_message);
@@ -400,31 +414,54 @@ namespace Fantasy
 			using var C2G_MapUnsubscribeSphereEventRequest_request = Fantasy.C2G_MapUnsubscribeSphereEventRequest.Create();
 			return (G2C_MapUnsubscribeSphereEventResponse)await session.Call(C2G_MapUnsubscribeSphereEventRequest_request);
 		}
-#if Godot_Platform
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void C2G_带标签的消息(this Session session, C2G_带标签的消息 C2G_带标签的消息_message)
+		public static async FTask<G2C_LoginGameResponse> C2G_LoginGameRequest(this Session session, C2G_LoginGameRequest C2G_LoginGameRequest_request)
 		{
-			session.Send(C2G_带标签的消息_message);
+			return (G2C_LoginGameResponse)await session.Call(C2G_LoginGameRequest_request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void C2G_带标签的消息(this Session session)
+		public static async FTask<G2C_LoginGameResponse> C2G_LoginGameRequest(this Session session, string accountName)
 		{
-			using var message = Fantasy.C2G_带标签的消息.Create();
-			session.Send(message);
+			using var C2G_LoginGameRequest_request = Fantasy.C2G_LoginGameRequest.Create();
+			C2G_LoginGameRequest_request.AccountName = accountName;
+			return (G2C_LoginGameResponse)await session.Call(C2G_LoginGameRequest_request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void C2M_带标签且条件编译的消息(this Session session, C2M_带标签且条件编译的消息 C2M_带标签且条件编译的消息_message)
+		public static void M2C_PalyerJoin(this Session session, M2C_PalyerJoin M2C_PalyerJoin_message)
 		{
-			session.Send(C2M_带标签且条件编译的消息_message);
+			session.Send(M2C_PalyerJoin_message);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void C2M_带标签且条件编译的消息(this Session session, string tag)
+		public static void M2C_PalyerJoin(this Session session, UnitInfo unit)
 		{
-			using var C2M_带标签且条件编译的消息_message = Fantasy.C2M_带标签且条件编译的消息.Create();
-			C2M_带标签且条件编译的消息_message.Tag = tag;
-			session.Send(C2M_带标签且条件编译的消息_message);
+			using var M2C_PalyerJoin_message = Fantasy.M2C_PalyerJoin.Create();
+			M2C_PalyerJoin_message.Unit = unit;
+			session.Send(M2C_PalyerJoin_message);
 		}
-#endif
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void M2C_PlayerExit(this Session session, M2C_PlayerExit M2C_PlayerExit_message)
+		{
+			session.Send(M2C_PlayerExit_message);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void M2C_PlayerExit(this Session session, long unitId)
+		{
+			using var M2C_PlayerExit_message = Fantasy.M2C_PlayerExit.Create();
+			M2C_PlayerExit_message.UnitId = unitId;
+			session.Send(M2C_PlayerExit_message);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static async FTask<M2C_MoveResponse> C2M_MoveRequest(this Session session, C2M_MoveRequest C2M_MoveRequest_request)
+		{
+			return (M2C_MoveResponse)await session.Call(C2M_MoveRequest_request);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static async FTask<M2C_MoveResponse> C2M_MoveRequest(this Session session, Position targetPos)
+		{
+			using var C2M_MoveRequest_request = Fantasy.C2M_MoveRequest.Create();
+			C2M_MoveRequest_request.TargetPos = targetPos;
+			return (M2C_MoveResponse)await session.Call(C2M_MoveRequest_request);
+		}
 
    }
 }

@@ -1,0 +1,27 @@
+{
+    "name": "UniRecast.Editor",
+    "rootNamespace": "UniRecast.Editor",
+    "references": [
+        "DotRecast.Core",
+        "DotRecast.Recast",
+        "DotRecast.Detour",
+        "DotRecast.Detour.Crowd",
+        "DotRecast.Detour.Dynamic",
+        "DotRecast.Detour.Extras",
+        "DotRecast.Detour.TileCace",
+        "DotRecast.Recast.Toolset",
+        "UniRecast.Core",
+        "UniRecast.Toolsets"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

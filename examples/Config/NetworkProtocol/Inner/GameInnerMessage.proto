@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+// GameInnerMessage.proto
+
+/// Map服务器通知客户端有新玩家加入
+message G2M_PalyerJoin // IRoamingMessage,MapRoamingType
+{
+	string Sex = 1;
+}

@@ -1,9 +1,14 @@
 {
   "dependencies": {
     "com.fantasy.unity": "file:../../../../Fantasy.Packages/Fantasy.Unity",
+    "com.unity.ai.navigation": "1.1.7",
+    "com.unity.cinemachine": "2.10.5",
     "com.unity.collab-proxy": "2.9.3",
     "com.unity.ide.rider": "3.0.38",
+    "com.unity.inputsystem": "1.14.0",
     "com.unity.nuget.newtonsoft-json": "3.2.1",
+    "com.unity.render-pipelines.core": "14.0.12",
+    "com.unity.render-pipelines.universal": "14.0.12",
     "com.unity.timeline": "1.8.9",
     "com.unity.visualscripting": "1.9.7",
     "com.unity.modules.ai": "1.0.0",

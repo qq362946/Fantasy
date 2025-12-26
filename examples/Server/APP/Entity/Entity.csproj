@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+        <LangVersion>default</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <!-- SG调试输出避免被编译器升级为Error -->
+      <WarningsNotAsErrors>$(WarningsNotAsErrors);DebugFantasySG</WarningsNotAsErrors>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\..\Fantasy.Packages\Fantasy.Net\Fantasy.Net.csproj" />
+        <ProjectReference Include="..\..\ThirdParty\DotRecast\DotRecast.Detour\DotRecast.Detour.csproj" />
+        <ProjectReference Include="..\..\ThirdParty\DotRecast\DotRecast.Recast\DotRecast.Recast.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Fantasy.Packages\Fantasy.SourceGenerator\Fantasy.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Update="NLog.config">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="NLog.xsd">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Fantasy.xsd">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="NLog" Version="6.0.7" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Functional Examples\" />
+      <Folder Include="Generate\NetworkProtocol\" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="Fantasy.config" />
+      <AdditionalFiles Include="Fantasy.config">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AdditionalFiles>
+    </ItemGroup>
+</Project>

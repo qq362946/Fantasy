@@ -1,0 +1,33 @@
+{
+  "name": "com.ikpil.unirecast",
+  "displayName": "UniRecast",
+  "version": "0.0.16",
+  "unity": "2019.3",
+  "description": "navigation mesh toolset for Unity3D using DotRecast",
+  "license": "MIT",
+  "author": "ikpil <ikpil0@gmail.com> (https://github.com/ikpil/UniRecast)",
+  "keywords": [
+    "recast",
+    "detour",
+    "dotrecast",
+    "navigation",
+    "navmesh",
+    "pathfinding",
+    "gamedev",
+    ".net"
+  ],
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  },
+  "repository": {
+    "url": "https://github.com/ikpil/UniRecast.git",
+    "type": "git"    
+  },
+  "samples": [
+    {
+      "displayName": "UniRecast Demo",
+      "description": "This sample demonstrates how to use DotRecast",
+      "path": "Samples~/UniRecastDemo"
+    }
+  ]
+}

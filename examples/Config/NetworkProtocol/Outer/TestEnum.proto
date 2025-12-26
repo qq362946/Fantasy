@@ -1,0 +1,34 @@
+syntax = "proto3";
+package Fantasy.Network.Message;
+
+/// 错误码枚举
+enum ErrorCodeEnum
+{
+	/// 成功
+	Success = 0,
+	/// 失败
+	Failed = 1,
+	/// 未知错误
+	UnknownError = 2,
+	/// 参数错误
+	InvalidParameter = 100,
+	/// 权限不足
+	PermissionDenied = 101
+}
+
+/// 玩家状态
+enum PlayerState
+{
+	Offline = 0,
+	Online = 1,
+	Busy = 2,
+	Away = 3
+}
+
+/// 测试使用ErrorCode枚举的消息
+message C2G_TestEnumMessage // IMessage
+{
+	ErrorCodeEnum Code = 1; /// 错误码
+	string Message = 2; /// 消息内容
+	PlayerState State = 3; /// 玩家状态
+}

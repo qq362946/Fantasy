@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net8.0;net9.0;net10.0</TargetFrameworks>
+    <PackageId>DotRecast.Detour</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Authors>ikpil</Authors>
+    <Description>DotRecast - a port of Recast Detour, Industry-standard navigation mesh toolset for .NET, C#, Unity3D, games, servers</Description>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/ikpil/DotRecast</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ikpil/DotRecast</RepositoryUrl>
+    <PackageTags>game gamedev ai csharp server unity navigation game-development unity3d pathfinding pathfinder recast detour navmesh crowd-simulation recastnavigation</PackageTags>
+    <PackageReleaseNotes>https://github.com/ikpil/DotRecast/blob/main/CHANGELOG.md</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotRecast.Core\DotRecast.Core.csproj"/>
+  </ItemGroup>
+
+</Project>
