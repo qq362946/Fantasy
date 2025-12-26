@@ -10,7 +10,7 @@
         x:Class="Fantasy.ProtocolEditor.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/app-icon.ico"
-        Title="Fantasy Protocol Editor"
+        Title="Fantasy Protocol Editor 2025.2.1419"
         Background="#2B2B2B"
         Width="1200" Height="800">
 

@@ -16,9 +16,9 @@ public struct ParseResult
 {
     public HashSet<string> Namespaces { get; init; } = new();
     public List<EnumDefinition> Enums { get; init; } = new();
-    public List<MessageDefinition> Messages { get; init; } = new();
+    public Dictionary<string, MessageDefinition> Messages { get; init; } = new();
     
-    public ParseResult(HashSet<string> namespaces, List<MessageDefinition> messages, List<EnumDefinition> enums)
+    public ParseResult(HashSet<string> namespaces, Dictionary<string, MessageDefinition> messages, List<EnumDefinition> enums)
     {
         Namespaces = namespaces;
         Messages = messages;
@@ -40,6 +40,7 @@ public sealed partial class ProtocolFileParser(string filePath)
     private ProtocolSettings _currentProtocolSettings = ProtocolSettings.CreateProtoBuf();
     private int _currentKeyIndex = 1;
     private readonly List<string> _pendingComments = new();
+    private readonly List<string> _defineConstants = new();
     
     /// <summary>
     /// 字段解析正则表达式: type name = number, 支持中日韩等非英文字符
@@ -66,7 +67,7 @@ public sealed partial class ProtocolFileParser(string filePath)
     {
         var namespaces = new HashSet<string>();
         var enums = new List<EnumDefinition>();
-        var messages = new List<MessageDefinition>();
+        var messages = new Dictionary<string, MessageDefinition>();
         
         for (var i = 0; i < lines.Length; i++)
         {
@@ -78,7 +79,14 @@ public sealed partial class ProtocolFileParser(string filePath)
             {
                 continue;
             }
-            
+
+            // 处理条件编译指令 (////开头的行，去除前缀保留后面的内容)
+            if (line.StartsWith("////"))
+            {
+                _defineConstants.Add(line.Substring(4));
+                continue;
+            }
+
             // 处理命名空间 (// using System.Runtime)
             if (line.StartsWith("// using"))
             {
@@ -189,7 +197,7 @@ public sealed partial class ProtocolFileParser(string filePath)
                     // 消息解析完成
                     if (_currentMessage != null)
                     {
-                        messages.Add(_currentMessage);
+                        messages.Add(_currentMessage.Name, _currentMessage);
                         _currentMessage = null;
                     }
 
@@ -237,10 +245,12 @@ public sealed partial class ProtocolFileParser(string filePath)
             SourceFilePath = filePath,
             SourceLineNumber = lineNumber,
             Protocol = CloneProtocolSettings(_currentProtocolSettings),
-            DocumentationComments = new List<string>(_pendingComments)
+            DocumentationComments = new List<string>(_pendingComments),
+            DefineConstants = new List<string>(_defineConstants)
         };
 
         _pendingComments.Clear();
+        _defineConstants.Clear();
 
         // 解析接口类型和参数 (// IRequest,G2C_Login,ChatRouteType)
         if (parts.Length > 1)

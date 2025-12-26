@@ -17,12 +17,9 @@ public sealed class ProtocolValidator
     /// <summary>
     /// 验证单个消息定义
     /// </summary>
-    public void Validate(MessageDefinition message)
+    public bool Validate(MessageDefinition message)
     {
-        ValidateMessageName(message);
-        ValidateInterfaceType(message);
-        ValidateResponseType(message);
-        ValidateFields(message);
+        return ValidateMessageName(message) && ValidateInterfaceType(message) && ValidateResponseType(message) && ValidateFields(message);
     }
 
     /// <summary>
@@ -37,28 +34,31 @@ public sealed class ProtocolValidator
     /// <summary>
     /// 验证消息名称唯一性
     /// </summary>
-    private void ValidateMessageName(MessageDefinition message)
+    private bool ValidateMessageName(MessageDefinition message)
     {
         if (string.IsNullOrWhiteSpace(message.Name))
         {
             _errors.Add($"[red]  {message.SourceFilePath} line {message.SourceLineNumber}: Message name is empty[/]");
-            return;
+            return false;
         }
 
         if (!_allMessageNames.Add(message.Name))
         {
             _errors.Add($"[red]  {message.SourceFilePath} line {message.SourceLineNumber}: Duplicate message name: {Markup.Escape(message.Name)}[/]");
+            return false;
         }
+        
+        return true;
     }
 
     /// <summary>
     /// 验证接口类型
     /// </summary>
-    private void ValidateInterfaceType(MessageDefinition message)
+    private bool ValidateInterfaceType(MessageDefinition message)
     {
         if (string.IsNullOrWhiteSpace(message.InterfaceType))
         {
-            return; // 没有接口类型是允许的（纯数据类）
+            return true; // 没有接口类型是允许的（纯数据类）
         }
 
         var validInterfaces = new[]
@@ -83,13 +83,16 @@ public sealed class ProtocolValidator
         if (!validInterfaces.Contains(message.InterfaceType))
         {
             _errors.Add($"[red]  {message.SourceFilePath} line {message.SourceLineNumber}: Invalid interface type '{message.InterfaceType}' for message {message.Name}[/]");
+            return false;
         }
+        
+        return true;
     }
 
     /// <summary>
     /// 验证响应类型
     /// </summary>
-    private void ValidateResponseType(MessageDefinition message)
+    private bool ValidateResponseType(MessageDefinition message)
     {
         var requestTypes = new[]
         {
@@ -105,15 +108,19 @@ public sealed class ProtocolValidator
             if (string.IsNullOrWhiteSpace(message.ResponseType))
             {
                 _errors.Add($"[red]  {message.SourceFilePath} line {message.SourceLineNumber}: Message {message.Name} is {message.InterfaceType} but missing ResponseType[/]");
+                return false;
             }
         }
+        
+        return true;
     }
 
     /// <summary>
     /// 验证字段定义
     /// </summary>
-    private void ValidateFields(MessageDefinition message)
+    private bool ValidateFields(MessageDefinition message)
     {
+        var result = true;
         var fieldNames = new HashSet<string>();
         var fieldNumbers = new HashSet<int>();
 
@@ -122,55 +129,65 @@ public sealed class ProtocolValidator
             // 验证字段名唯一性
             if (!fieldNames.Add(field.Name))
             {
+                result = false;
                 _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Duplicate field name '{field.Name}' in message {message.Name}[/]");
             }
 
             // 验证字段编号唯一性
             if (!fieldNumbers.Add(field.FieldNumber))
             {
+                result = false;
                 _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Duplicate field number {field.FieldNumber} in message {message.Name}[/]");
             }
 
             // 验证字段编号范围 (ProtoBuf 要求 1-536870911)
             if (field.FieldNumber < 1 || field.FieldNumber > 536870911)
             {
+                result = false;
                 _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Field number {field.FieldNumber} out of range (1-536870911) for field {field.Name} in message {message.Name}[/]");
             }
 
             // 验证字段名称不为空
             if (string.IsNullOrWhiteSpace(field.Name))
             {
+                result = false;
                 _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Field name is empty in message {message.Name}[/]");
             }
 
             // 验证字段类型不为空
             if (string.IsNullOrWhiteSpace(field.Type))
             {
+                result = false;
                 _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Field type is empty for field {field.Name} in message {message.Name}[/]");
             }
 
             // 验证 map 字段的 key 和 value 类型
             if (field.IsMap)
             {
-                ValidateMapField(field, message);
+                result = ValidateMapField(field, message);
             }
         }
+        
+        return result;
     }
 
     /// <summary>
     /// 验证 map 字段
     /// </summary>
-    private void ValidateMapField(FieldDefinition field, MessageDefinition message)
+    private bool ValidateMapField(FieldDefinition field, MessageDefinition message)
     {
+        var result = true;
         // 验证 key 类型不为空
         if (string.IsNullOrWhiteSpace(field.MapKeyType))
         {
+            result = false;
             _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Map key type is empty for field {field.Name} in message {message.Name}[/]");
         }
 
         // 验证 value 类型不为空
         if (string.IsNullOrWhiteSpace(field.MapValueType))
         {
+            result = false;
             _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Map value type is empty for field {field.Name} in message {message.Name}[/]");
         }
 
@@ -186,8 +203,11 @@ public sealed class ProtocolValidator
 
         if (!isValidKeyType && !string.IsNullOrWhiteSpace(field.MapKeyType))
         {
+            result = false;
             _errors.Add($"[red]  {message.SourceFilePath} line {field.SourceLineNumber}: Invalid map key type '{field.MapKeyType}' for field {field.Name} in message {message.Name}. Key type must be a primitive type or enum.[/]");
         }
+        
+        return result;
     }
 
     /// <summary>

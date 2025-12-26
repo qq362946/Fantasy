@@ -98,6 +98,7 @@ public sealed class ProcessSession : Session
         }
         finally
         {
+            ((IMessage)message).Dispose();
             _memoryStreamBufferPool.ReturnMemoryStream(memoryStream);
         }
     }

@@ -333,7 +333,7 @@ namespace Fantasy.Network.TCP
         public override void Send(uint rpcId, long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
             _sendBuffers.Enqueue(_packetParser.Pack(ref rpcId, ref address, memoryStream, message, messageType));
-
+            
             if (!_isSending)
             {
                 Send();

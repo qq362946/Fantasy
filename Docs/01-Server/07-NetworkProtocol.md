@@ -15,6 +15,7 @@
 - [OpCode.Cache - 协议代码缓存](#opcodecache---协议代码缓存)
 - [协议接口类型说明](#协议接口类型说明)
   - [基础协议接口类型](#基础协议接口类型)
+  - [网络消息对象池管理](#网络消息对象池管理)
   - [协议注释格式详解](#协议注释格式详解)
   - [文档注释 - 自动生成代码注释](#文档注释---自动生成代码注释)
   - [接口类型对比总结](#接口类型对比总结)
@@ -22,6 +23,7 @@
   - [选择合适的接口类型](#选择合适的接口类型)
 - [协议定义规范](#协议定义规范)
   - [序列化方式声明](#序列化方式声明)
+  - [原生代码注入](#原生代码注入)
   - [自定义命名空间](#自定义命名空间)
   - [支持的数据类型](#支持的数据类型)
   - [集合类型](#集合类型)
@@ -374,6 +376,103 @@ var response = await session.Call<G2C_LoginResponse>(request);
 
 ---
 
+### 网络消息对象池管理
+
+Fantasy Framework 为所有网络消息提供了高效的对象池管理机制，通过 `autoReturn` 参数控制消息对象的自动回收行为。
+
+#### Create 方法语法
+
+```csharp
+// 所有网络消息都支持 autoReturn 参数
+MessageType.Create(autoReturn: bool = true)
+```
+
+#### autoReturn 参数说明
+
+| 参数值 | 回收行为 | 适用场景 |
+|-------|---------|---------|
+| `true`（默认） | Send/Call 后自动回收到对象池 | 单次发送、常规场景 |
+| `false` | 手动控制回收时机，需调用 `Return()` | 消息群发、并发查询 |
+
+#### 使用示例
+
+**场景1: 单次发送（默认行为）**
+
+```csharp
+// IMessage 单向消息
+var message = C2G_Heartbeat.Create(); // autoReturn = true（默认）
+message.Timestamp = DateTime.UtcNow.Ticks;
+session.Send(message); // 发送后自动回收到对象池
+
+// IRequest 请求消息
+var request = C2G_LoginRequest.Create(); // autoReturn = true（默认）
+request.Username = "player1";
+request.Password = "password123";
+var response = await session.Call<G2C_LoginResponse>(request); // 发送后自动回收
+```
+
+**场景2: 消息群发（手动回收）**
+
+```csharp
+// 创建消息，禁用自动回收
+var message = G2C_NotifyMessage.Create(autoReturn: false);
+message.Content = "系统公告";
+message.MessageType = 1;
+
+// 群发给多个客户端
+foreach (var clientSession in clientSessions)
+{
+    clientSession.Send(message); // 不会自动回收
+}
+
+// 使用完成后手动回收
+message.Return();
+```
+
+**场景3: 并发查询多个服务器**
+
+```csharp
+// 创建请求，禁用自动回收
+var request = C2G_GetPlayerInfoRequest.Create(autoReturn: false);
+request.PlayerId = targetPlayerId;
+
+// 并发查询多个服务器
+var tasks = new List<Task<G2C_GetPlayerInfoResponse>>();
+foreach (var serverSession in serverSessions)
+{
+    tasks.Add(serverSession.Call<G2C_GetPlayerInfoResponse>(request));
+}
+
+// 等待所有查询完成
+var responses = await Task.WhenAll(tasks);
+
+// 处理响应...
+foreach (var response in responses)
+{
+    Log.Info($"玩家名称: {response.PlayerName}");
+}
+
+// 手动回收请求对象
+request.Return();
+```
+
+#### 优势说明
+
+使用 `autoReturn = false` 的优势：
+
+- ✅ **减少 GC 压力**: 群发或并发场景下只需创建一次对象
+- ✅ **提升性能**: 避免重复 Create/Dispose 的开销
+- ✅ **灵活控制**: 根据实际场景选择合适的回收策略
+- ✅ **内存高效**: 对象池复用，减少内存分配
+
+#### 注意事项
+
+- ⚠️ 使用 `autoReturn = false` 时，**必须手动调用 `Return()`** 回收对象，否则会导致内存泄漏
+- ⚠️ 不要在 `Send()`/`Call()` 之后继续使用消息对象（autoReturn = true 时）
+- ⚠️ 群发场景下，确保所有发送操作完成后再调用 `Return()`
+
+---
+
 ### 协议注释格式详解
 
 协议接口类型是通过**消息定义后的注释**来标识的,格式如下:
@@ -636,6 +735,66 @@ message M2M_SendUnitRequest // IRequest,M2M_SendUnitResponse
 - 未声明 `// Protocol` 时默认使用 `ProtoBuf`
 - 同一个 `.proto` 文件中可以混合使用不同的序列化方式
 - `MemoryPack` 性能更高，但仅限 .NET 环境使用
+
+---
+
+### 原生代码注入
+
+Fantasy Framework 支持通过 `////` 前缀标记将原生 C# 代码注入到生成的协议文件中。
+
+#### 声明格式
+
+```protobuf
+////代码内容
+```
+
+#### 功能说明
+
+- 以 `////` 开头的行会**原样输出**到生成的 C# 代码中（去除 `////` 前缀）
+- 适用于条件编译指令、平台特性标注等场景
+- 可以注入任何合法的 C# 代码
+
+#### 使用示例
+
+```protobuf
+////#if FANTASY_UNITY
+////[Serializable]
+////#endif
+message PlayerData // IMessage
+{
+    string Name = 1;
+    int32 Level = 2;
+}
+```
+
+#### 生成的 C# 代码
+
+```csharp
+#if FANTASY_UNITY
+[Serializable]
+#endif
+public partial class PlayerData : AMessage, IMessage
+{
+    [ProtoMember(1)]
+    public string Name { get; set; }
+
+    [ProtoMember(2)]
+    public int Level { get; set; }
+}
+```
+
+#### 应用场景
+
+- ✅ 添加条件编译指令（#if/#endif）
+- ✅ 为 Unity 平台添加 `[Serializable]` 特性
+- ✅ 添加自定义特性标注
+- ✅ 注入平台特定代码
+
+#### 注意事项
+
+- ⚠️ 确保注入的代码语法正确，否则会导致生成的 C# 代码编译失败
+- ⚠️ 条件编译指令要成对出现（#if 和 #endif）
+- ⚠️ 注入代码会影响所有目标平台，建议配合条件编译使用
 
 ---
 

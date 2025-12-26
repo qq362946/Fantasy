@@ -21,6 +21,12 @@ namespace Fantasy.Network.Interface
         [MemoryPackIgnore]
         private bool _isPool;
 
+        [JsonIgnore] 
+        [IgnoreDataMember] 
+        [ProtoIgnore] 
+        [MemoryPackIgnore]
+        protected bool AutoReturn = true;
+
         public bool IsPool()
         {
             return _isPool;

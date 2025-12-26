@@ -10,7 +10,7 @@ if not defined IN_SUBPROCESS (
 )
 
 echo ==========================================
-echo Fantasy Protocol Export Tool 2025.2.1418
+echo Fantasy Protocol Export Tool 2025.2.1419
 echo ==========================================
 echo.
 

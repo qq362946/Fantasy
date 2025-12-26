@@ -153,7 +153,7 @@ public sealed class CSharpExporter(
                  """;
     }
 
-    protected override string GenerateOuterMessages(IReadOnlySet<string> outerNamespaces, IReadOnlyList<MessageDefinition> messageDefinitions)
+    protected override string GenerateOuterMessages(IReadOnlySet<string> outerNamespaces, IReadOnlyDictionary<string, MessageDefinition> messageDefinitions)
     {
         return messageDefinitions.Count == 0 ? string.Empty : $$"""
                                                                 using LightProto;
@@ -178,6 +178,7 @@ public sealed class CSharpExporter(
                                                                 // ReSharper disable CheckNamespace
                                                                 // ReSharper disable FieldCanBeMadeReadOnly.Global
                                                                 // ReSharper disable RedundantUsingDirective
+                                                                // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
                                                                 namespace Fantasy
                                                                 {
                                                                 {{GenerateMessages("OuterOpcode", messageDefinitions)}}
@@ -185,7 +186,7 @@ public sealed class CSharpExporter(
                                                                 """;
     }
 
-    protected override string GenerateInnerMessages(IReadOnlySet<string> innerNamespaces, IReadOnlyList<MessageDefinition> messageDefinitions)
+    protected override string GenerateInnerMessages(IReadOnlySet<string> innerNamespaces, IReadOnlyDictionary<string, MessageDefinition> messageDefinitions)
     {
         return messageDefinitions.Count == 0 ? string.Empty : $$"""
                                                                 using LightProto;
@@ -209,6 +210,7 @@ public sealed class CSharpExporter(
                                                                 // ReSharper disable CheckNamespace
                                                                 // ReSharper disable FieldCanBeMadeReadOnly.Global
                                                                 // ReSharper disable RedundantUsingDirective
+                                                                // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
                                                                 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                                                                 #pragma warning disable CS8618
                                                                 namespace Fantasy
@@ -218,7 +220,7 @@ public sealed class CSharpExporter(
                                                                 """;
     }
 
-    protected override string GenerateOuterMessageHelper(IReadOnlyList<MessageDefinition> messageDefinitions)
+    protected override string GenerateOuterMessageHelper(IReadOnlyDictionary<string, MessageDefinition> messageDefinitions)
     {
         if (messageDefinitions.Count == 0)
         {
@@ -227,7 +229,7 @@ public sealed class CSharpExporter(
 
         var helper = new StringBuilder();
         
-        foreach (var messageDefinition in messageDefinitions)
+        foreach (var (messageDefinitionName, messageDefinition) in messageDefinitions)
         {
             if (string.IsNullOrEmpty(messageDefinition.InterfaceType))
             {
@@ -241,9 +243,9 @@ public sealed class CSharpExporter(
                     case MessageType.RouteTypeMessage:
                         {
                             helper.AppendLine("\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                            helper.AppendLine($"\t\tpublic static void {messageDefinition.Name}(this Session session, {messageDefinition.Name} {messageDefinition.Name}_message)");
+                            helper.AppendLine($"\t\tpublic static void {messageDefinitionName}(this Session session, {messageDefinitionName} {messageDefinitionName}_message)");
                             helper.AppendLine("\t\t{");
-                            helper.AppendLine($"\t\t\tsession.Send({messageDefinition.Name}_message);");
+                            helper.AppendLine($"\t\t\tsession.Send({messageDefinitionName}_message);");
                             helper.AppendLine("\t\t}");
 
                             if (messageDefinition.Fields.Count > 0)
@@ -252,24 +254,24 @@ public sealed class CSharpExporter(
                                     messageDefinition.Fields.Select(f =>
                                         $"{ConvertType(f)} {char.ToLower(f.Name[0])}{f.Name[1..]}"));
                                 helper.AppendLine("\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                                helper.AppendLine($"\t\tpublic static void {messageDefinition.Name}(this Session session, {parameters})");
+                                helper.AppendLine($"\t\tpublic static void {messageDefinitionName}(this Session session, {parameters})");
                                 helper.AppendLine("\t\t{");
-                                helper.AppendLine($"\t\t\tusing var {messageDefinition.Name}_message = Fantasy.{messageDefinition.Name}.Create();");
+                                helper.AppendLine($"\t\t\tusing var {messageDefinitionName}_message = Fantasy.{messageDefinitionName}.Create();");
 
                                 foreach (var field in messageDefinition.Fields)
                                 {
-                                    helper.AppendLine($"\t\t\t{messageDefinition.Name}_message.{field.Name} = {char.ToLower(field.Name[0])}{field.Name[1..]};");
+                                    helper.AppendLine($"\t\t\t{messageDefinitionName}_message.{field.Name} = {char.ToLower(field.Name[0])}{field.Name[1..]};");
                                 }
 
-                                helper.AppendLine($"\t\t\tsession.Send({messageDefinition.Name}_message);");
+                                helper.AppendLine($"\t\t\tsession.Send({messageDefinitionName}_message);");
                                 helper.AppendLine("\t\t}");
                             }
                             else
                             {
                                 helper.AppendLine("\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                                helper.AppendLine($"\t\tpublic static void {messageDefinition.Name}(this Session session)");
+                                helper.AppendLine($"\t\tpublic static void {messageDefinitionName}(this Session session)");
                                 helper.AppendLine("\t\t{");
-                                helper.AppendLine($"\t\t\tusing var message = Fantasy.{messageDefinition.Name}.Create();");
+                                helper.AppendLine($"\t\t\tusing var message = Fantasy.{messageDefinitionName}.Create();");
                                 helper.AppendLine("\t\t\tsession.Send(message);");
                                 helper.AppendLine("\t\t}");
                             }
@@ -281,9 +283,9 @@ public sealed class CSharpExporter(
                     case MessageType.RoamingRequest:
                         {
                             helper.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                            helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinition.Name}(this Session session, {messageDefinition.Name} {messageDefinition.Name}_request)");
+                            helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinitionName}(this Session session, {messageDefinitionName} {messageDefinitionName}_request)");
                             helper.AppendLine("\t\t{");
-                            helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call({messageDefinition.Name}_request);");
+                            helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call({messageDefinitionName}_request);");
                             helper.AppendLine("\t\t}");
 
                             if (messageDefinition.Fields.Count > 0)
@@ -292,23 +294,23 @@ public sealed class CSharpExporter(
                                     messageDefinition.Fields.Select(f =>
                                         $"{ConvertType(f)} {char.ToLower(f.Name[0])}{f.Name[1..]}"));
                                 helper.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                                helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinition.Name}(this Session session, {parameters})");
+                                helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinitionName}(this Session session, {parameters})");
                                 helper.AppendLine("\t\t{");
-                                helper.AppendLine($"\t\t\tusing var {messageDefinition.Name}_request = Fantasy.{messageDefinition.Name}.Create();");
+                                helper.AppendLine($"\t\t\tusing var {messageDefinitionName}_request = Fantasy.{messageDefinitionName}.Create();");
                                 foreach (var field in messageDefinition.Fields)
                                 {
-                                    helper.AppendLine($"\t\t\t{messageDefinition.Name}_request.{field.Name} = {char.ToLower(field.Name[0])}{field.Name[1..]};");
+                                    helper.AppendLine($"\t\t\t{messageDefinitionName}_request.{field.Name} = {char.ToLower(field.Name[0])}{field.Name[1..]};");
                                 }
-                                helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call({messageDefinition.Name}_request);");
+                                helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call({messageDefinitionName}_request);");
                                 helper.AppendLine("\t\t}");
                             }
                             else
                             {
                                 helper.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
-                                helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinition.Name}(this Session session)");
+                                helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinitionName}(this Session session)");
                                 helper.AppendLine("\t\t{");
-                                helper.AppendLine($"\t\t\tusing var {messageDefinition.Name}_request = Fantasy.{messageDefinition.Name}.Create();");
-                                helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call({messageDefinition.Name}_request);");
+                                helper.AppendLine($"\t\t\tusing var {messageDefinitionName}_request = Fantasy.{messageDefinitionName}.Create();");
+                                helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call({messageDefinitionName}_request);");
                                 helper.AppendLine("\t\t}");
                             }
                             break;
@@ -375,11 +377,11 @@ public sealed class CSharpExporter(
         return builder.ToString();
     }
 
-    private string GenerateMessages(string opcodeName, IReadOnlyList<MessageDefinition> messageDefinitions)
+    private string GenerateMessages(string opcodeName, IReadOnlyDictionary<string, MessageDefinition> messageDefinitions)
     {
         var builder = new StringBuilder();
 
-        foreach (var messageDefinition in messageDefinitions)
+        foreach (var (messageDefinitionName, messageDefinition) in messageDefinitions)
         {
             var disposeCode = new StringBuilder();
             var members = new List<string>();
@@ -388,7 +390,7 @@ public sealed class CSharpExporter(
             
             if (messageDefinition.HasOpCode)
             {
-                members.Add($"        public uint OpCode() {{ return {opcodeName}.{messageDefinition.Name}; }} ");
+                members.Add($"        public uint OpCode() {{ return {opcodeName}.{messageDefinitionName}; }} ");
             }
             
             if (IsRequestType(messageDefinition.MessageType))
@@ -420,14 +422,33 @@ public sealed class CSharpExporter(
             
             foreach (var field in messageDefinition.Fields)
             {
-                var disposeStatement = field.CollectionType switch
+                string? disposeStatement;
+                switch (field.CollectionType)
                 {
-                    FieldCollectionType.Repeated => $"{field.Name}.Clear();",
-                    FieldCollectionType.Map => $"{field.Name}.Clear();",
-                    FieldCollectionType.RepeatedList => $"{field.Name} = null;",
-                    FieldCollectionType.RepeatedArray => $"{field.Name} = null;",
-                    _ => $"{field.Name} = default;"
-                };
+                    case FieldCollectionType.Repeated:
+                    case FieldCollectionType.Map:
+                    {
+                        disposeStatement = $"{field.Name}.Clear();";
+                        break;
+                    }
+                    case FieldCollectionType.RepeatedList:
+                    case FieldCollectionType.RepeatedArray:
+                    {
+                        disposeStatement = $"{field.Name} = null;";
+                        break;
+                    }
+                    default:
+                    {
+                        disposeStatement = messageDefinitions.ContainsKey(field.Type) ? $$"""
+                                  if ({{field.Name}} != null)
+                                              {
+                                                  {{field.Name}}.Dispose();
+                                                  {{field.Name}} = null;
+                                              }
+                                  """ : $"{field.Name} = default;";
+                        break;
+                    }
+                }
 
                 disposeCode.AppendLine($"            {disposeStatement}");
 
@@ -450,6 +471,8 @@ public sealed class CSharpExporter(
                 var initializer = GetInitializer(field);
                 members.Add($"        public {fieldType} {field.Name} {{ get; set; }}{initializer}");
             }
+            
+            disposeCode.Append($"            MessageObjectPool<{messageDefinitionName}>.Return(this);");
 
             if (messageDefinition.DocumentationComments.Count > 0)
             {
@@ -461,6 +484,14 @@ public sealed class CSharpExporter(
                 builder.AppendLine("    /// </summary>");
             }
 
+            if (messageDefinition.DefineConstants.Count > 0)
+            {
+                foreach (var messageDefinitionDefineConstant in messageDefinition.DefineConstants)
+                {
+                    builder.AppendLine($"{messageDefinitionDefineConstant}");
+                }
+            }
+
             if (!string.IsNullOrEmpty(messageDefinition.Protocol.ClassAttribute))
             {
                 builder.AppendLine($"    [Serializable]\n" +
@@ -469,22 +500,46 @@ public sealed class CSharpExporter(
             
             if (string.IsNullOrEmpty(messageDefinition.InterfaceType))
             {
-                builder.AppendLine($"    public partial class {messageDefinition.Name} : AMessage");
+                builder.AppendLine($"    public partial class {messageDefinition.Name} : AMessage, IDisposable");
             }
             else
             {
                 builder.AppendLine($"    public partial class {messageDefinition.Name} : AMessage, {messageDefinition.InterfaceType}");
             }
 
+            var messageName = $"{char.ToLower(messageDefinitionName[0])}{messageDefinitionName[1..]}";
             builder.AppendLine($$"""
                                        {
-                                           public static {{messageDefinition.Name}} Create()
+                                           public static {{messageDefinitionName}} Create(bool autoReturn = true)
                                            {
-                                               return MessageObjectPool<{{messageDefinition.Name}}>.Rent();
+                                               var {{messageName}} = MessageObjectPool<{{messageDefinitionName}}>.Rent();
+                                               {{messageName}}.AutoReturn = autoReturn;
+                                               
+                                               if (!autoReturn)
+                                               {
+                                                   {{messageName}}.SetIsPool(false);
+                                               }
+                                               
+                                               return {{messageName}};
+                                           }
+                                           
+                                           public void Return()
+                                           {
+                                               if (!AutoReturn)
+                                               {
+                                                   SetIsPool(true);
+                                                   AutoReturn = true;
+                                               }
+                                               else if (!IsPool())
+                                               {
+                                                   return;
+                                               }
+                                               Dispose();
                                            }
 
                                            public void Dispose()
                                            {
+                                               if (!IsPool()) return; 
                                    {{disposeCode}}
                                            }
                                    {{string.Join(Environment.NewLine, members)}}

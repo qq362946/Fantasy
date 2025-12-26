@@ -21,9 +21,9 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
     
     private readonly HashSet<string> _outerNamespaces = [];
     private readonly HashSet<string> _innerNamespaces = [];
-   
-    private readonly List<MessageDefinition> _outerMessages = [];
-    private readonly List<MessageDefinition> _innerMessages = [];
+
+    private readonly Dictionary<string, MessageDefinition> _outerMessages = [];
+    private readonly Dictionary<string, MessageDefinition> _innerMessages = [];
     
     private readonly List<EnumDefinition> _outerEnums = [];
     private readonly List<EnumDefinition> _innerEnums = [];
@@ -338,9 +338,9 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
     protected abstract string GenerateRoamingTypes(IReadOnlyDictionary<string, int> roamingTypes);
     protected abstract string GenerateOuterOpcode(IReadOnlyList<OpcodeInfo> opcodeInfos);
     protected abstract string GenerateInnerOpcode(IReadOnlyList<OpcodeInfo> opcodeInfos);
-    protected abstract string GenerateOuterMessages(IReadOnlySet<string> outerNamespaces, IReadOnlyList<MessageDefinition> messageDefinitions);
-    protected abstract string GenerateInnerMessages(IReadOnlySet<string> innerNamespaces, IReadOnlyList<MessageDefinition> messageDefinitions);
-    protected abstract string GenerateOuterMessageHelper(IReadOnlyList<MessageDefinition> messageDefinitions);
+    protected abstract string GenerateOuterMessages(IReadOnlySet<string> outerNamespaces, IReadOnlyDictionary<string, MessageDefinition> messageDefinitions);
+    protected abstract string GenerateInnerMessages(IReadOnlySet<string> innerNamespaces, IReadOnlyDictionary<string, MessageDefinition> messageDefinitions);
+    protected abstract string GenerateOuterMessageHelper(IReadOnlyDictionary<string, MessageDefinition> messageDefinitions);
     protected abstract string GenerateOuterEnums(IReadOnlyList<EnumDefinition> enumDefinitions);
     protected abstract string GenerateInnerEnums(IReadOnlyList<EnumDefinition> enumDefinitions);
 
@@ -459,7 +459,7 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
         ParseAndValidateProtocols("Inner", _innerOpcode, _innerNamespaces, _innerMessages, _innerEnums);
     }
 
-    private void ParseAndValidateProtocols(string protocol, List<OpcodeInfo> opcodeInfo, HashSet<string> namespaces, List<MessageDefinition> allMessages, List<EnumDefinition> allEnums)
+    private void ParseAndValidateProtocols(string protocol, List<OpcodeInfo> opcodeInfo, HashSet<string> namespaces, Dictionary<string, MessageDefinition> allMessages, List<EnumDefinition> allEnums)
     {
         var validator = new ProtocolValidator();
         var isOuter = protocol.Equals("Outer", StringComparison.OrdinalIgnoreCase);
@@ -484,32 +484,40 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
             }
             
             // 收集Messages
-            allMessages.AddRange(parseResult.Messages);
-            
+            foreach (var (name, messageDefinition) in parseResult.Messages)
+            {
+                // 验证消息
+                if (!validator.Validate(messageDefinition))
+                {
+                    continue;
+                }
+                
+                allMessages.Add(name, messageDefinition);
+            }
+
             // 收集Enums
             allEnums.AddRange(parseResult.Enums);
         }
 
         // 2. 为所有需要 OpCode 的消息生成 OpCode
-        foreach(var message in allMessages.Where(m => m.HasOpCode))
+        foreach (var (_, messageDefinition) in allMessages)
         {
-            message.OpCode = opCodeGenerator.Generate(message);
-            opcodeInfo.Add(message.OpCode);
-        }
-
-        // 3. 验证所有消息
-        foreach (var message in allMessages)
-        {
-            validator.Validate(message);
+            if (!messageDefinition.HasOpCode)
+            {
+                continue;
+            }
+            
+            messageDefinition.OpCode = opCodeGenerator.Generate(messageDefinition);
+            opcodeInfo.Add(messageDefinition.OpCode);
         }
         
-        // 4. 验证所有Enum
+        // 3. 验证所有Enum
         foreach (var @enum in allEnums)
         {
             validator.Validate(@enum);
         }
 
-        // 5. 收集验证错误
+        // 4. 收集验证错误
         foreach (var error in validator.GetErrors())
         {
             _errors.Add(error);
