@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
-
     public class IEnumerableKeyValuePairProtoReader<TDictionary, TKey, TValue>
         : IEnumerableProtoReader<TDictionary, KeyValuePair<TKey, TValue>>
         where TDictionary : IEnumerable<KeyValuePair<TKey, TValue>>
@@ -21,8 +20,6 @@ namespace LightProto.Parser
                 addItem,
                 itemFixedSize: 0,
                 completeAction: null
-            )
-        {
-        }
+            ) { }
     }
 }

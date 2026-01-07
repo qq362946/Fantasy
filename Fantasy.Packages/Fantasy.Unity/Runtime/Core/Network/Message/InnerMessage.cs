@@ -25,18 +25,18 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<BenchmarkMessage>.Rent();
         }
-        
+
         public void Dispose()
         {
             MessageObjectPool<BenchmarkMessage>.Return(this);
         }
-        
+
         public uint OpCode()
         {
             return Fantasy.Network.OpCode.BenchmarkMessage;
         }
     }
-    
+
     [ProtoContract]
     public partial class BenchmarkRequest : AMessage, IRequest
     {
@@ -44,23 +44,23 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<BenchmarkRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             RpcId = 0;
             MessageObjectPool<BenchmarkRequest>.Return(this);
         }
-        
+
         public uint OpCode()
         {
             return Fantasy.Network.OpCode.BenchmarkRequest;
         }
-        [ProtoIgnore] 
+        [ProtoIgnore]
         public BenchmarkResponse ResponseType { get; set; }
         [ProtoMember(1)]
         public long RpcId { get; set; }
     }
-    
+
     [ProtoContract]
     public partial class BenchmarkResponse : AMessage, IResponse
     {
@@ -68,14 +68,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<BenchmarkResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             RpcId = 0;
             ErrorCode = 0;
             MessageObjectPool<BenchmarkResponse>.Return(this);
         }
-        
+
         public uint OpCode()
         {
             return Fantasy.Network.OpCode.BenchmarkResponse;
@@ -92,14 +92,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<Response>.Rent();
         }
-        
+
         public void Dispose()
         {
             RpcId = 0;
             ErrorCode = 0;
             MessageObjectPool<Response>.Return(this);
         }
-        
+
         public uint OpCode()
         {
             return Fantasy.Network.OpCode.DefaultResponse;
@@ -116,14 +116,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<AddressResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             RpcId = 0;
             ErrorCode = 0;
             MessageObjectPool<AddressResponse>.Return(this);
         }
-        
+
         public uint OpCode()
         {
             return Fantasy.Network.OpCode.DefaultAddressResponse;
@@ -133,7 +133,7 @@ namespace Fantasy.InnerMessage
         [ProtoMember(2)]
         public uint ErrorCode { get; set; }
     }
-    
+
     [ProtoContract]
     public partial class PingRequest : AMessage, IRequest
     {
@@ -141,23 +141,23 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<PingRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             RpcId = 0;
             MessageObjectPool<PingRequest>.Return(this);
         }
-        
+
         public uint OpCode()
         {
             return Fantasy.Network.OpCode.PingRequest;
         }
-        [ProtoIgnore] 
+        [ProtoIgnore]
         public PingResponse ResponseType { get; set; }
         [ProtoMember(1)]
         public long RpcId { get; set; }
     }
-    
+
     [ProtoContract]
     public partial class PingResponse : AMessage, IResponse
     {
@@ -165,7 +165,7 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<PingResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             RpcId = 0;
@@ -173,7 +173,7 @@ namespace Fantasy.InnerMessage
             Now = 0;
             MessageObjectPool<PingResponse>.Return(this);
         }
-        
+
         public uint OpCode()
         {
             return Fantasy.Network.OpCode.PingResponse;
@@ -192,7 +192,7 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_AddressableAdd_Request>.Rent();
         }
-        
+
         public void Dispose()
         {
             AddressableId = 0;
@@ -200,7 +200,7 @@ namespace Fantasy.InnerMessage
             IsLock = false;
             MessageObjectPool<I_AddressableAdd_Request>.Return(this);
         }
-        
+
         [ProtoIgnore]
         public I_AddressableAdd_Response ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableAddRequest; }
@@ -219,13 +219,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_AddressableAdd_Response>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_AddressableAdd_Response>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableAddResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
@@ -237,13 +237,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_AddressableGet_Request>.Rent();
         }
-        
+
         public void Dispose()
         {
             AddressableId = 0;
             MessageObjectPool<I_AddressableGet_Request>.Return(this);
         }
-        
+
         [ProtoIgnore]
         public I_AddressableGet_Response ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableGetRequest; }
@@ -258,14 +258,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_AddressableGet_Response>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             Address = 0;
             MessageObjectPool<I_AddressableGet_Response>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableGetResponse; }
         [ProtoMember(2)]
         public uint ErrorCode { get; set; }
@@ -279,13 +279,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_AddressableRemove_Request>.Rent();
         }
-        
+
         public void Dispose()
         {
             AddressableId = 0;
             MessageObjectPool<I_AddressableRemove_Request>.Return(this);
         }
-        
+
         [ProtoIgnore]
         public I_AddressableRemove_Response ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableRemoveRequest; }
@@ -300,13 +300,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_AddressableRemove_Response>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_AddressableRemove_Response>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableRemoveResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
@@ -318,13 +318,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_AddressableLock_Request>.Rent();
         }
-        
+
         public void Dispose()
         {
             AddressableId = 0;
             MessageObjectPool<I_AddressableLock_Request>.Return(this);
         }
-        
+
         [ProtoIgnore]
         public I_AddressableLock_Response ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableLockRequest; }
@@ -339,13 +339,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_AddressableLock_Response>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_AddressableLock_Response>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableLockResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
@@ -357,7 +357,7 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_AddressableUnLock_Request>.Rent();
         }
-        
+
         public void Dispose()
         {
             AddressableId = 0;
@@ -365,7 +365,7 @@ namespace Fantasy.InnerMessage
             Source = string.Empty;
             MessageObjectPool<I_AddressableUnLock_Request>.Return(this);
         }
-        
+
         [ProtoIgnore]
         public I_AddressableUnLock_Response ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableUnLockRequest; }
@@ -384,13 +384,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_AddressableUnLock_Response>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_AddressableUnLock_Response>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.AddressableUnLockResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
@@ -403,7 +403,7 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_LinkRoamingRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             RoamingId = 0;
@@ -412,7 +412,7 @@ namespace Fantasy.InnerMessage
             SceneAddress = 0;
             MessageObjectPool<I_LinkRoamingRequest>.Return(this);
         }
-        
+
         [MemoryPackIgnore]
         public I_LinkRoamingResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.LinkRoamingRequest; }
@@ -425,7 +425,7 @@ namespace Fantasy.InnerMessage
         public long ForwardSessionAddress { get; set; }
         [MemoryPackOrder(4)]
         public long SceneAddress { get; set; }
-        [MemoryPackOrder(5)] 
+        [MemoryPackOrder(5)]
         public Entity Args { get; set; }
     }
     [MemoryPackable]
@@ -435,21 +435,21 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_LinkRoamingResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             TerminusId = 0;
             ErrorCode = 0;
             MessageObjectPool<I_LinkRoamingResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.LinkRoamingResponse; }
         [MemoryPackOrder(1)]
         public long TerminusId { get; set; }
         [MemoryPackOrder(2)]
         public uint ErrorCode { get; set; }
-        [MemoryPackOrder(3)] 
-        public Entity Args { get; set; }
+        [MemoryPackOrder(3)]
+        public Entity? Args { get; set; }
     }
     [ProtoContract]
     public sealed partial class I_UnLinkRoamingRequest : AMessage, IAddressRequest
@@ -458,14 +458,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_UnLinkRoamingRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             RoamingId = 0;
             DisposeRoaming = false;
             MessageObjectPool<I_UnLinkRoamingRequest>.Return(this);
         }
-        
+
         [ProtoIgnore]
         public I_UnLinkRoamingResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.UnLinkRoamingRequest; }
@@ -482,13 +482,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_UnLinkRoamingResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_UnLinkRoamingResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.UnLinkRoamingResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
@@ -500,14 +500,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_LockTerminusIdRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             RoamingId = 0;
             RoamingType = 0;
             MessageObjectPool<I_LockTerminusIdRequest>.Return(this);
         }
-        
+
         [ProtoIgnore]
         public I_LockTerminusIdResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.LockTerminusIdRequest; }
@@ -523,13 +523,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_LockTerminusIdResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_LockTerminusIdResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.LockTerminusIdResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
@@ -541,7 +541,7 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_UnLockTerminusIdRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             RoamingId = 0;
@@ -550,7 +550,7 @@ namespace Fantasy.InnerMessage
             TargetSceneAddress = 0;
             MessageObjectPool<I_UnLockTerminusIdRequest>.Return(this);
         }
-        
+
         [ProtoIgnore]
         public I_UnLockTerminusIdResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.UnLockTerminusIdRequest; }
@@ -571,13 +571,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_UnLockTerminusIdResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_UnLockTerminusIdResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.UnLockTerminusIdResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
@@ -592,13 +592,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_TransferTerminusRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             Terminus = null;
             MessageObjectPool<I_TransferTerminusRequest>.Return(this);
         }
-        
+
         [MemoryPackIgnore]
         public I_TransferTerminusResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.TransferTerminusRequest; }
@@ -611,13 +611,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_TransferTerminusResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_TransferTerminusResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.TransferTerminusResponse; }
         public uint ErrorCode { get; set; }
     }
@@ -631,14 +631,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_GetTerminusIdRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             RoamingType = 0;
             RoamingId = 0;
             MessageObjectPool<I_GetTerminusIdRequest>.Return(this);
         }
-        
+
         [ProtoIgnore]
         public I_GetTerminusIdResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.GetTerminusIdRequest; }
@@ -654,14 +654,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_GetTerminusIdResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             TerminusId = 0;
             ErrorCode = 0;
             MessageObjectPool<I_GetTerminusIdResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.GetTerminusIdResponse; }
         [ProtoMember(1)]
         public long TerminusId { get; set; }
@@ -675,14 +675,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_SetForwardSessionAddressRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             RoamingId = 0;
             ForwardSessionAddress = 0;
             MessageObjectPool<I_SetForwardSessionAddressRequest>.Return(this);
         }
-        
+
         [ProtoIgnore]
         public I_SetForwardSessionAddressResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.SetForwardSessionAddressRequest; }
@@ -699,13 +699,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_SetForwardSessionAddressResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_SetForwardSessionAddressResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.SetForwardSessionAddressResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
@@ -717,13 +717,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_StopForwardingRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             RoamingId = 0;
             MessageObjectPool<I_StopForwardingRequest>.Return(this);
         }
-        
+
         [ProtoIgnore]
         public I_StopForwardingResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.StopForwardingRequest; }
@@ -738,13 +738,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_StopForwardingResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_StopForwardingResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.StopForwardingResponse; }
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
@@ -759,14 +759,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_SubscribeSphereEventRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             Address = 0;
             TypeHashCode = 0;
             MessageObjectPool<I_SubscribeSphereEventRequest>.Return(this);
         }
-        
+
         [MemoryPackIgnore]
         public I_SubscribeSphereEventResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.SubscribeSphereEventRequest; }
@@ -780,13 +780,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_SubscribeSphereEventResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_SubscribeSphereEventResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.SubscribeSphereEventResponse; }
         public uint ErrorCode { get; set; }
     }
@@ -800,14 +800,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_UnsubscribeSphereEventRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             Address = 0;
             TypeHashCode = 0;
             MessageObjectPool<I_UnsubscribeSphereEventRequest>.Return(this);
         }
-        
+
         [MemoryPackIgnore]
         public I_UnsubscribeSphereEventResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.UnsubscribeSphereEventRequest; }
@@ -821,13 +821,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_UnsubscribeSphereEventResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_UnsubscribeSphereEventResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.UnsubscribeSphereEventResponse; }
         public uint ErrorCode { get; set; }
     }
@@ -841,14 +841,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_RevokeRemoteSubscriberRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             Address = 0;
             TypeHashCode = 0;
             MessageObjectPool<I_RevokeRemoteSubscriberRequest>.Return(this);
         }
-        
+
         [MemoryPackIgnore]
         public I_RevokeRemoteSubscriberResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.RevokeRemoteSubscriberRequest; }
@@ -862,13 +862,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_RevokeRemoteSubscriberResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_RevokeRemoteSubscriberResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.RevokeRemoteSubscriberResponse; }
         public uint ErrorCode { get; set; }
     }
@@ -882,14 +882,14 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_PublishSphereEventRequest>.Rent();
         }
-        
+
         public void Dispose()
         {
             Address = 0;
             SphereEventArgs = null;
             MessageObjectPool<I_PublishSphereEventRequest>.Return(this);
         }
-        
+
         [MemoryPackIgnore]
         public I_PublishSphereEventResponse ResponseType { get; set; }
         public uint OpCode() { return Fantasy.Network.OpCode.PublishSphereEventRequest; }
@@ -903,13 +903,13 @@ namespace Fantasy.InnerMessage
         {
             return MessageObjectPool<I_PublishSphereEventResponse>.Rent();
         }
-        
+
         public void Dispose()
         {
             ErrorCode = 0;
             MessageObjectPool<I_PublishSphereEventResponse>.Return(this);
         }
-        
+
         public uint OpCode() { return Fantasy.Network.OpCode.PublishSphereEventResponse; }
         public uint ErrorCode { get; set; }
     }

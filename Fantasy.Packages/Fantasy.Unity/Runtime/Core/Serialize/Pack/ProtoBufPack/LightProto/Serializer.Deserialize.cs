@@ -68,7 +68,7 @@ namespace LightProto
                 reader = MessageWrapper<T>.ProtoReader.From(reader);
             }
 
-            using var codedStream = CodedInputStream.GetPooled(source, leaveOpen: true);
+            using var codedStream = new CodedInputStream(source, leaveOpen: true);
             ReaderContext.Initialize(codedStream, out var ctx);
             return reader.ParseFrom(ref ctx);
         }

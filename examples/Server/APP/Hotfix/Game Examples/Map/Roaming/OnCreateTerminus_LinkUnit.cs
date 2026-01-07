@@ -26,12 +26,7 @@ public sealed class OnCreateTerminus_LinkUnit : AsyncEventSystem<OnCreateTerminu
                 // 关联到Terminus后，下次接收消息会发送到playerUnit上
                 await terminus.LinkTerminusEntity(playerUnit, true);
                 // 添加到管理器中
-                PlayerUnitManageHelper.AddPlayerUnit(playerUnit, PlayerUnitManageHelper.AddPlayerUnitNotify.SyncEveryone);
-                break;
-            }
-            default:
-            {
-                Log.Error("暂不支持");
+                PlayerUnitManageHelper.AddPlayerUnit(playerUnit, PlayerUnitManageHelper.AddPlayerUnitNotify.NoNotification);
                 break;
             }
         }

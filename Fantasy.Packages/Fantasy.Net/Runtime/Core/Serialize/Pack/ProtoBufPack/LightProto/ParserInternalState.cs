@@ -34,14 +34,14 @@ namespace LightProto
         /// <summary>
         /// The absolute position of the end of the current length-delimited block (including totalBytesRetired)
         /// </summary>
-        internal int currentLimit;
+        internal long currentLimit;
 
         /// <summary>
         /// The total number of consumed before the start of the current buffer. The
         /// total bytes read up to the current position can be computed as
         /// totalBytesRetired + bufferPos.
         /// </summary>
-        internal int totalBytesRetired;
+        internal long totalBytesRetired;
 
         internal int recursionDepth; // current recursion depth
 
@@ -60,7 +60,7 @@ namespace LightProto
         internal bool hasNextTag;
 
         // these fields are configuration, they should be readonly
-        internal int sizeLimit;
+        internal long sizeLimit;
         internal int recursionLimit;
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 #pragma warning disable 1591, 0612, 3021, 8981, CS9035
+
 namespace LightProto.Parser
 {
     public sealed class DictionaryProtoReader<TKey, TValue>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Buffers.Binary;
 using System.Globalization;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
     public sealed class Decimal300ProtoParser : IProtoParser<Decimal>

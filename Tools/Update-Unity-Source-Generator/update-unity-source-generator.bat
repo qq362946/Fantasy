@@ -33,7 +33,7 @@ if not exist "%UNITY_PACKAGE_DIR%" (
 )
 
 REM 构建
-echo 步骤 1/3: 构建 Fantasy.SourceGenerator (%BUILD_CONFIG% - Roslyn 4.0.1)...
+echo 步骤 1/3: 构建 Fantasy.SourceGenerator (%BUILD_CONFIG% - Roslyn 4.3.0)...
 dotnet build "%SOURCE_GENERATOR_PROJECT%" --configuration %BUILD_CONFIG%
 
 if errorlevel 1 (
@@ -41,7 +41,7 @@ if errorlevel 1 (
     exit /b 1
 )
 
-echo [成功] 构建完成 (使用 Unity 兼容的 Roslyn 版本)
+echo [成功] 构建完成 (使用 Unity 兼容的 Roslyn 4.3.0)
 echo.
 
 REM 复制 DLL
@@ -73,7 +73,7 @@ for %%A in ("%TARGET_DLL%") do (
     echo   文件大小: %%~zA 字节
     echo   修改时间: %%~tA
 )
-echo   Roslyn 版本: 4.0.1 (Unity 兼容)
+echo   Roslyn 版本: 4.3.0 (Unity 兼容)
 echo [成功] 验证通过
 echo.
 
@@ -90,7 +90,7 @@ echo.
 echo 调试生成的代码位置:
 echo   ^<Unity项目^>/Temp/GeneratedCode/Fantasy.SourceGenerator/
 echo.
-echo 注意: 此版本使用 Roslyn 4.0.1，兼容 Unity 2020.2+
+echo 注意: 此版本使用 Roslyn 4.3.0，兼容 Unity 2022.2+
 echo.
 
 endlocal

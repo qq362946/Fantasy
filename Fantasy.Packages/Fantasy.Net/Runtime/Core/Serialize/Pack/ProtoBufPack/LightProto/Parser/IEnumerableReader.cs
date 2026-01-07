@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
     public interface ICollectionReader
@@ -63,10 +62,10 @@ namespace LightProto.Parser
                 && PackedRepeated.Support<TItem>()
             )
             {
-                int length = ctx.ReadLength();
+                var length = ctx.ReadInt64();
                 if (length <= 0)
                     return CreateWithCapacity(0);
-                int oldLimit = SegmentedBufferHelper.PushLimit(ref ctx.state, length);
+                var oldLimit = SegmentedBufferHelper.PushLimit(ref ctx.state, length);
 
                 try
                 {
@@ -82,7 +81,7 @@ namespace LightProto.Parser
                     )
                     {
                         var count = length / fixedSize;
-                        var collection = CreateWithCapacity(count);
+                        var collection = CreateWithCapacity((int)count);
                         // if littleEndian treat array as bytes and directly copy from buffer for improved performance
                         // if (
                         //     collection is List<TItem> list

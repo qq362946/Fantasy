@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Buffers.Binary;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
     public sealed class Guid300ProtoParser : IProtoParser<Guid>

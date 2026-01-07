@@ -30,6 +30,7 @@ namespace Fantasy
         public const uint G2Map_SubscribeSphereEventResponse = 1207969560;
         public const uint G2Map_UnsubscribeSphereEventRequest = 1073751833;
         public const uint Map2G_UnsubscribeSphereEventResponse = 1207969561;
-        public const uint G2M_PalyerJoin = 2952800018;
+        public const uint G2M_OfflineRequest = 3087017746;
+        public const uint M2G_OfflineResponse = 3221235474;
     }
 }

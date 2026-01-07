@@ -1,6 +1,6 @@
+namespace LightProto.Parser
+{
 #if NET5_0_OR_GREATER
-namespace LightProto.Parser;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 public sealed class HalfProtoParser : IProtoParser<Half>
 {
     public static IProtoReader<Half> ProtoReader { get; } = new HalfProtoReader();
@@ -43,3 +43,4 @@ public sealed class HalfProtoParser : IProtoParser<Half>
     }
 }
 #endif
+}

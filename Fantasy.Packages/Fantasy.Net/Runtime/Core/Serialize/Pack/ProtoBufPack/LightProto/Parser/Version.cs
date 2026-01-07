@@ -7,16 +7,16 @@ namespace LightProto.Parser
     public partial struct VersionProtoParser
     {
         [ProtoMember(1, DataFormat = DataFormat.ZigZag)]
-        public int Major { get; set; }
+        internal int Major { get; set; }
 
         [ProtoMember(2, DataFormat = DataFormat.ZigZag)]
-        public int Minor { get; set; }
+        internal int Minor { get; set; }
 
         [ProtoMember(3, DataFormat = DataFormat.ZigZag)]
-        public int Build { get; set; }
+        internal int Build { get; set; }
 
         [ProtoMember(4, DataFormat = DataFormat.ZigZag)]
-        public int Revision { get; set; }
+        internal int Revision { get; set; }
 
         public static implicit operator Version(VersionProtoParser protoParser)
         {

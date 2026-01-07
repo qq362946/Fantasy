@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
     public sealed class LazyProtoReader<

@@ -1,17 +1,15 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace LightProto
 {
     [ExcludeFromCodeCoverage]
     [AttributeUsage(
         AttributeTargets.Class
-        | AttributeTargets.Struct
-        | AttributeTargets.Interface
-        | AttributeTargets.Enum
+            | AttributeTargets.Struct
+            | AttributeTargets.Interface
+            | AttributeTargets.Enum
     )]
     public class ProtoContractAttribute : Attribute
     {
@@ -44,11 +42,6 @@ namespace LightProto
     [ExcludeFromCodeCoverage]
     public class ProtoMemberAttribute : Attribute
     {
-        public ProtoMemberAttribute(uint tag)
-        {
-            Tag = tag;
-        }
-
         public uint Tag { get; }
         public DataFormat DataFormat { get; set; } = DataFormat.Default;
 
@@ -56,10 +49,14 @@ namespace LightProto
         /// If true, the member must be present when deserializing; if it is not, an exception will be thrown.
         /// </summary>
         public bool IsRequired { get; set; } = false;
-
         public bool IsPacked { get; set; } = false;
         public string Name { get; set; } = string.Empty;
         public Type? ParserType { get; set; } = null;
+
+        public ProtoMemberAttribute(uint tag)
+        {
+            Tag = tag;
+        }
     }
 
     [ExcludeFromCodeCoverage]
@@ -80,54 +77,46 @@ namespace LightProto
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class ProtoSurrogateForAttribute : Attribute
     {
-        public ProtoSurrogateForAttribute(Type surrogateType)
+        public Type Type { get; }
+
+        public ProtoSurrogateForAttribute(Type type)
         {
-            SurrogateType = surrogateType;
+            Type = type;
         }
-
-        public Type SurrogateType { get; }
     }
-
-// donot support ProtoInclude for now
-// [Obsolete("compatibility protobuf-net only, no effect")]
-// public class ProtoIncludeAttribute(Type type, uint tag) : Attribute
-// {
-//     public Type Type { get; } = type;
-//     public uint Tag { get; } = tag;
-// }
 
     /// <summary>
     /// Defines the compatibiltiy level to use for an element
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Assembly
-        | AttributeTargets.Module
-        | AttributeTargets.Class
-        | AttributeTargets.Struct
-        | AttributeTargets.Field
-        | AttributeTargets.Property
+            | AttributeTargets.Module
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Field
+            | AttributeTargets.Property
     )]
     [ExcludeFromCodeCoverage]
     public sealed class CompatibilityLevelAttribute : Attribute
     {
-        public CompatibilityLevelAttribute(CompatibilityLevel level)
-        {
-            Level = level;
-        }
-
         /// <summary>
         /// The compatibiltiy level to use for this element
         /// </summary>
         public CompatibilityLevel Level { get; }
+
+        public CompatibilityLevelAttribute(CompatibilityLevel level)
+        {
+            Level = level;
+        }
     }
 
     [AttributeUsage(
         AttributeTargets.Assembly
-        | AttributeTargets.Module
-        | AttributeTargets.Class
-        | AttributeTargets.Struct
-        | AttributeTargets.Field
-        | AttributeTargets.Property
+            | AttributeTargets.Module
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Field
+            | AttributeTargets.Property
     )]
     [ExcludeFromCodeCoverage]
     public sealed class StringInternAttribute : Attribute
@@ -155,7 +144,7 @@ namespace LightProto
 
         public ProtoIncludeAttribute(uint tag, Type knownType)
         {
-            Tag  = tag;
+            Tag = tag;
             KnownType = knownType;
         }
     }
@@ -168,12 +157,12 @@ namespace LightProto
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public sealed class ProtoParserTypeAttribute : Attribute
     {
+        public Type ParserType { get; }
+
         public ProtoParserTypeAttribute(Type parserType)
         {
             ParserType = parserType;
         }
-
-        public Type ParserType { get; }
     }
 
     /// <summary>
@@ -184,20 +173,20 @@ namespace LightProto
     [ExcludeFromCodeCoverage]
     [AttributeUsage(
         AttributeTargets.Assembly
-        | AttributeTargets.Module
-        | AttributeTargets.Class
-        | AttributeTargets.Struct,
+            | AttributeTargets.Module
+            | AttributeTargets.Class
+            | AttributeTargets.Struct,
         AllowMultiple = true
     )]
     public sealed class ProtoParserTypeMapAttribute : Attribute
     {
+        public Type MessageType { get; }
+        public Type ParserType { get; }
+
         public ProtoParserTypeMapAttribute(Type messageType, Type parserType)
         {
             MessageType = messageType;
             ParserType = parserType;
         }
-
-        public Type MessageType { get; }
-        public Type ParserType { get; }
     }
 }

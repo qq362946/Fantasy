@@ -10,7 +10,6 @@
 using System;
 using System.IO;
 
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace LightProto
 {
     /// <summary>
@@ -19,7 +18,7 @@ namespace LightProto
     /// </summary>
     public sealed class InvalidProtocolBufferException : IOException
     {
-        public InvalidProtocolBufferException(string message)
+        InvalidProtocolBufferException(string message)
             : base(message) { }
 
         internal InvalidProtocolBufferException(string message, Exception innerException)

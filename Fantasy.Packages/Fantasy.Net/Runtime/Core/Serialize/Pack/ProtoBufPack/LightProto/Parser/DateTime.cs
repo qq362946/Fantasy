@@ -1,9 +1,8 @@
-﻿using System;
+using System;
 
 namespace LightProto.Parser
 {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-//
+    //
 //
 // message DateTime {
 // sint64 value = 1; // the offset (in units of the selected scale) from 1970/01/01

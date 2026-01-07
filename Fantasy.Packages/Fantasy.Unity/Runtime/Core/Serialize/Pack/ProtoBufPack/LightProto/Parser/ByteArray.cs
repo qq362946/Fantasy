@@ -1,6 +1,5 @@
 ﻿namespace LightProto.Parser
 {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public sealed class ByteArrayProtoParser : IProtoParser<byte[]>
     {
         public static IProtoReader<byte[]> ProtoReader { get; } = new ByteArrayProtoReader();

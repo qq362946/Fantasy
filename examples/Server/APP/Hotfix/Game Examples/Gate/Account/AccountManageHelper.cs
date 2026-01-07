@@ -21,12 +21,12 @@ public static class AccountManageHelper
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Remove(Scene scene, string accountName)
+    public static bool Remove(Scene scene, string accountName, bool isDispose = true)
     {
         var accountManageComponent = scene.GetComponent<AccountManageComponent>();
         if (accountManageComponent != null)
         {
-            return accountManageComponent.Remove(accountName);
+            return accountManageComponent.Remove(accountName, isDispose);
         }
         Log.Error("当前Scene下没有找到AccountManageComponent组件");
         return false;

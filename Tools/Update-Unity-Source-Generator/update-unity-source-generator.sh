@@ -39,7 +39,7 @@ if [ ! -d "${UNITY_PACKAGE_DIR}" ]; then
 fi
 
 # 构建 Source Generator (Unity 版本)
-echo -e "${YELLOW}步骤 1/3: 构建 Fantasy.SourceGenerator (${BUILD_CONFIG} - Roslyn 4.0.1)...${NC}"
+echo -e "${YELLOW}步骤 1/3: 构建 Fantasy.SourceGenerator (${BUILD_CONFIG} - Roslyn 4.3.0)...${NC}"
 dotnet build "${SOURCE_GENERATOR_PROJECT}" --configuration "${BUILD_CONFIG}"
 
 if [ $? -ne 0 ]; then
@@ -47,7 +47,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo -e "${GREEN}✓ 构建成功 (使用 Unity 兼容的 Roslyn 版本)${NC}"
+echo -e "${GREEN}✓ 构建成功 (使用 Unity 兼容的 Roslyn 4.3.0)${NC}"
 echo ""
 
 # 复制 DLL
@@ -74,7 +74,7 @@ DLL_DATE=$(ls -l "${TARGET_DLL}" | awk '{print $6, $7, $8}')
 echo -e "${YELLOW}步骤 3/3: 验证...${NC}"
 echo "  文件大小: ${DLL_SIZE}"
 echo "  修改时间: ${DLL_DATE}"
-echo "  Roslyn 版本: 4.0.1 (Unity 兼容)"
+echo "  Roslyn 版本: 4.3.0 (Unity 兼容)"
 echo -e "${GREEN}✓ 验证通过${NC}"
 echo ""
 
@@ -90,4 +90,4 @@ echo ""
 echo "调试生成的代码位置:"
 echo "  <Unity项目>/Temp/GeneratedCode/Fantasy.SourceGenerator/"
 echo ""
-echo "注意: 此版本使用 Roslyn 4.0.1，兼容 Unity 2020.2+"
+echo "注意: 此版本使用 Roslyn 4.3.0，兼容 Unity 2022.2+"

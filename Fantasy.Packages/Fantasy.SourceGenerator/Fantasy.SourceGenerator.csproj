@@ -42,16 +42,4 @@
         <CompilerVisibleProperty Include="ProjectDir" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Include="..\Fantasy.Net\Runtime\Core\Serialize\Pack\ProtoBufPack\LightProto\CompatibilityLevel.cs">
-        <Link>Generators\LightProto.Generator\CompatibilityLevel.cs</Link>
-      </Compile>
-      <Compile Include="..\Fantasy.Net\Runtime\Core\Serialize\Pack\ProtoBufPack\LightProto\DataFormat.cs">
-        <Link>Generators\LightProto.Generator\DataFormat.cs</Link>
-      </Compile>
-      <Compile Include="..\Fantasy.Net\Runtime\Core\Serialize\Pack\ProtoBufPack\LightProto\ImplicitFields.cs">
-        <Link>Generators\LightProto.Generator\ImplicitFields.cs</Link>
-      </Compile>
-    </ItemGroup>
-
 </Project>

@@ -72,7 +72,7 @@ namespace LightProto.Parser
             .Compile();
     }
 
-    public static Stack<T> ReverseStack(Stack<T> stack)
+    static Stack<T> ReverseStack(Stack<T> stack)
     {
         var arr = _getArray(stack);
         var size = _getSize(stack);

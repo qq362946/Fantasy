@@ -644,7 +644,6 @@ namespace LightProto
             WriteRawByte(ref buffer, ref state, (byte)(value >> 56));
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void WriteRawByte(
             ref Span<byte> buffer,
             ref WriterInternalState state,

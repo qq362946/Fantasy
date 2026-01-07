@@ -1,8 +1,8 @@
 ﻿#if NET7_0_OR_GREATER
 using System.Numerics;
 
-namespace LightProto.Parser;
-
+namespace LightProto.Parser
+{
 [ProtoContract]
 [ProtoSurrogateFor(typeof(Vector2))]
 public partial struct Vector2ProtoParser
@@ -22,5 +22,6 @@ public partial struct Vector2ProtoParser
     {
         return new Vector2ProtoParser() { X = value.X, Y = value.Y };
     }
+}
 }
 #endif

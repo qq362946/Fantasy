@@ -11,5 +11,12 @@ namespace Fantasy
             this.Z =  position.Z;
             return this;
         }
+
+        public void Transform(ref Vector3 position)
+        {
+            position.X = X;
+            position.Y = Y;
+            position.Z = Z;
+        }
     }
 }

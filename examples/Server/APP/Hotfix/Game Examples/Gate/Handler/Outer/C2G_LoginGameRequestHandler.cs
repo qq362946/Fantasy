@@ -27,20 +27,11 @@ public sealed class C2G_LoginGameRequestHandler : MessageRPC<C2G_LoginGameReques
             response.ErrorCode = 1;
             return;
         }
-session.RestartIdleChecker();
-        account.Session = session;
 
+        account.Session = session;
+        // 挂载组件用来标记这个Session下的Account，后面下线流程也会用到
+        session.AddComponent<GateAccountFlagComponent>().Account = account;
         // 执行上线流程
         await AccountHelper.Online(session, account);
-        
-        if (!session.TryGetRoaming(out var roamingComponent))
-        {
-            return;
-        }
-        
-        roamingComponent.Send(RoamingType.MapRoamingType,new G2M_PalyerJoin()
-        {
-            Sex = "6666"
-        });
     }
 }

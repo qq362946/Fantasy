@@ -18,20 +18,20 @@ internal sealed class SessionRoamingFlgComponent : Entity
     {
         var roamingId = Id;
 
-        if (!DoNotRemove)
+        if (!DoNotRemove && DelayRemove > 0)
         {
             var sceneRoamingComponent = Scene.RoamingComponent;
-            
+
             if (sceneRoamingComponent.TryGet(roamingId, out var roamingComponent))
             {
                 await roamingComponent.StopForwarding();
                 await sceneRoamingComponent.Remove(roamingId, 0, DelayRemove);
             }
-            
-            DelayRemove = 0;
-            DoNotRemove = false;
         }
 
+        DelayRemove = 0;
+        DoNotRemove = false;
+        
         base.Dispose();
     }
 }

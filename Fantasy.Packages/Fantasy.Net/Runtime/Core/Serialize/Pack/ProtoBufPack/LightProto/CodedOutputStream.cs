@@ -8,11 +8,8 @@
 #endregion
 
 using System;
-using System.Buffers;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Security;
-#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
 
 namespace LightProto
 {
@@ -40,57 +37,15 @@ namespace LightProto
         /// <summary>
         /// The buffer size used by CreateInstance(Stream).
         /// </summary>
-        public static readonly int DefaultBufferSize = 4096;
+        static readonly int DefaultBufferSize = 4096;
 
-        /// <summary>
-        /// Whether to leave the underlying stream open when disposing of this stream.
-        /// This is always true when there's no stream.
-        /// </summary>
         private readonly bool leaveOpen;
-
-        /// <summary>
-        /// Whether the buffer needs to be returned to ArrayPool
-        /// </summary>
-        private readonly bool needsReturnToPool;
-
         private readonly byte[] buffer;
         private WriterInternalState state;
 
         private readonly Stream? output;
 
-        [ThreadStatic]
-        private static CodedOutputStream? _cachedInstance;
-
         #region Construction
-
-        /// <summary>
-        /// Gets a pooled <see cref="CodedOutputStream"/> instance from thread-local cache.
-        /// This significantly reduces GC pressure in high-throughput scenarios.
-        /// </summary>
-        internal static CodedOutputStream GetPooled(Stream output, bool leaveOpen)
-        {
-            var instance = _cachedInstance;
-            if (instance != null)
-            {
-                _cachedInstance = null;
-                instance.Reset(output, leaveOpen);
-                return instance;
-            }
-
-            return new CodedOutputStream(output, leaveOpen);
-        }
-
-        /// <summary>
-        /// Returns the instance to the thread-local pool for reuse.
-        /// </summary>
-        private void ReturnToPool()
-        {
-            if (_cachedInstance == null)
-            {
-                _cachedInstance = this;
-            }
-        }
-
         /// <summary>
         /// Creates a new CodedOutputStream that writes directly to the given
         /// byte array. If more bytes are written than fit in the array,
@@ -114,15 +69,14 @@ namespace LightProto
             leaveOpen = true; // Simple way of avoiding trying to dispose of a null reference
         }
 
-        private CodedOutputStream(Stream output, byte[] buffer, bool leaveOpen, bool needsReturnToPool = false)
+        private CodedOutputStream(Stream output, byte[] buffer, bool leaveOpen)
         {
-            this.output = output;
+            this.output = ProtoPreconditions.CheckNotNull(output, nameof(output));
             this.buffer = buffer;
             this.state.position = 0;
             this.state.limit = buffer.Length;
             WriteBufferHelper.Initialize(this, out this.state.writeBufferHelper);
             this.leaveOpen = leaveOpen;
-            this.needsReturnToPool = needsReturnToPool;
         }
 
         /// <summary>
@@ -132,12 +86,7 @@ namespace LightProto
         /// <param name="leaveOpen">If <c>true</c>, <paramref name="output"/> is left open when the returned <c>CodedOutputStream</c> is disposed;
         /// if <c>false</c>, the provided stream is disposed as well.</param>
         public CodedOutputStream(Stream output, bool leaveOpen)
-            : this(
-                ProtoPreconditions.CheckNotNull(output, nameof(output)),
-                ArrayPool<byte>.Shared.Rent(DefaultBufferSize),
-                leaveOpen,
-                needsReturnToPool: true
-            ) { }
+            : this(output, DefaultBufferSize, leaveOpen) { }
 
         /// <summary>
         /// Creates a new CodedOutputStream which write to the given stream and uses
@@ -148,42 +97,8 @@ namespace LightProto
         /// <param name="leaveOpen">If <c>true</c>, <paramref name="output"/> is left open when the returned <c>CodedOutputStream</c> is disposed;
         /// if <c>false</c>, the provided stream is disposed as well.</param>
         public CodedOutputStream(Stream output, int bufferSize, bool leaveOpen)
-            : this(
-                ProtoPreconditions.CheckNotNull(output, nameof(output)),
-                ArrayPool<byte>.Shared.Rent(bufferSize),
-                leaveOpen,
-                needsReturnToPool: true
-            ) { }
+            : this(output, new byte[bufferSize], leaveOpen) { }
         #endregion
-
-        /// <summary>
-        /// Resets the CodedOutputStream to write to a new stream (for pooling).
-        /// </summary>
-        private void Reset(Stream output, bool leaveOpen)
-        {
-            // Reuse existing buffer if available, otherwise rent a new one
-            byte[] buffer;
-            if (this.buffer != null && this.buffer.Length >= DefaultBufferSize)
-            {
-                buffer = this.buffer;
-            }
-            else
-            {
-                buffer = ArrayPool<byte>.Shared.Rent(DefaultBufferSize);
-            }
-
-            // Reset all fields
-            Unsafe.AsRef(in this.output) = output;
-            Unsafe.AsRef(in this.buffer) = buffer;
-            Unsafe.AsRef(in this.leaveOpen) = leaveOpen;
-            Unsafe.AsRef(in this.needsReturnToPool) = true;
-
-            // Reset state
-            this.state = default;
-            this.state.position = 0;
-            this.state.limit = buffer.Length;
-            WriteBufferHelper.Initialize(this, out this.state.writeBufferHelper);
-        }
 
         /// <summary>
         /// Indicates that a CodedOutputStream wrapping a flat byte array
@@ -218,19 +133,12 @@ namespace LightProto
             {
                 output?.Dispose();
             }
-
-            if (needsReturnToPool)
-            {
-                ArrayPool<byte>.Shared.Return(buffer, clearArray: false);
-            }
-
-            ReturnToPool();
         }
 
         /// <summary>
         /// Flushes any buffered data to the underlying stream (if there is one).
         /// </summary>
-        public void Flush()
+        internal void Flush()
         {
             var span = new Span<byte>(buffer);
             WriteBufferHelper.Flush(ref span, ref state);

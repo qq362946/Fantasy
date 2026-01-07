@@ -1,8 +1,8 @@
 ﻿#if NET7_0_OR_GREATER
 using System.Numerics;
 
-namespace LightProto.Parser;
-
+namespace LightProto.Parser
+{
 [ProtoContract]
 [ProtoSurrogateFor(typeof(Vector3))]
 public partial struct Vector3ProtoParser
@@ -30,5 +30,6 @@ public partial struct Vector3ProtoParser
             Z = value.Z,
         };
     }
+}
 }
 #endif

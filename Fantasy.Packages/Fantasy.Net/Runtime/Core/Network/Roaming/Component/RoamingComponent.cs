@@ -111,10 +111,9 @@ public sealed class RoamingComponent : Entity
     /// </summary>
     /// <param name="session"></param>
     /// <param name="roamingId">自定义roamingId，这个Id在漫游中并没有实际作用，但用户可以用这个id来进行标记。。</param>
-    /// <param name="isAutoDispose">是否在Session断开的时候自动断开漫游功能。</param>
-    /// <param name="delayRemove">如果开启了自定断开漫游功能需要设置一个延迟多久执行断开。</param>
+    /// <param name="delayRemove">如果开启了自定断开漫游功能需要设置一个延迟多久执行断开。如果设置为0表示不会自动断开</param>
     /// <returns>创建成功会返回SessionRoamingComponent组件，这个组件提供漫游的所有功能。</returns>
-    internal async FTask<CreateRoamingResult> Create(Session session, long roamingId, bool isAutoDispose, int delayRemove)
+    internal async FTask<CreateRoamingResult> Create(Session session, long roamingId, int delayRemove)
     {
         CreateRoamingStatus status;
         SessionRoamingComponent sessionRoamingComponent;
@@ -153,7 +152,6 @@ public sealed class RoamingComponent : Entity
                         sessionRoamingFlgComponent.DoNotRemove = true;
                         parentSession.RemoveComponent<SessionRoamingFlgComponent>();
                     }
-
                     parentSession.SessionRoamingComponent = null;
                 }
                 else
@@ -170,18 +168,25 @@ public sealed class RoamingComponent : Entity
             }
         }
 
-        if (isAutoDispose)
-        {
-            session.AddComponent<SessionRoamingFlgComponent>(roamingId).DelayRemove = delayRemove;
-        }
+        session.AddComponent<SessionRoamingFlgComponent>(roamingId).DelayRemove = delayRemove;
 
         return new CreateRoamingResult(status, sessionRoamingComponent!);
+    }
+    
+    /// <summary>
+    /// 根据自定义roamingId获取漫游组件
+    /// </summary>
+    /// <param name="roamingId">自定义roamingId，这个Id在漫游中并没有实际作用，但用户可以用这个id来进行标记。</param>
+    /// <returns></returns>
+    internal SessionRoamingComponent Get(long roamingId)
+    {
+        return _sessionRoamingComponents.GetValueOrDefault(roamingId);
     }
 
     /// <summary>
     /// 根据自定义roamingId获取漫游组件
     /// </summary>
-    /// <param name="roamingId">自定义roamingId，这个Id在漫游中并没有实际作用，但用户可以用这个id来进行标记。。</param>
+    /// <param name="roamingId">自定义roamingId，这个Id在漫游中并没有实际作用，但用户可以用这个id来进行标记。</param>
     /// <param name="sessionRoamingComponent">SessionRoamingComponent组件，这个组件提供漫游的所有功能。</param>
     /// <returns></returns>
     internal bool TryGet(long roamingId, out SessionRoamingComponent sessionRoamingComponent)
@@ -302,13 +307,12 @@ public static class RoamingHelper
     /// </summary>
     /// <param name="session"></param>
     /// <param name="roamingId">自定义roamingId，这个Id在漫游中并没有实际作用，但用户可以用这个id来进行标记。</param>
-    /// <param name="isAutoDispose">是否在Session断开的时候自动断开漫游功能。</param>
     /// <param name="delayRemove">如果开启了自定断开漫游功能需要设置一个延迟多久执行断开。</param>
     /// <returns>创建成功会返回SessionRoamingComponent组件，这个组件提供漫游的所有功能。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static async FTask<SessionRoamingComponent> CreateRoaming(this Session session, long roamingId, bool isAutoDispose = true, int delayRemove = 1000 * 60 * 3)
+    public static async FTask<SessionRoamingComponent> CreateRoaming(this Session session, long roamingId, int delayRemove = 1000 * 60 * 3)
     {
-        return (await session.Scene.RoamingComponent.Create(session, roamingId, isAutoDispose, delayRemove)).Roaming;
+        return (await session.Scene.RoamingComponent.Create(session, roamingId, delayRemove)).Roaming;
     }
     
     /// <summary>
@@ -317,13 +321,37 @@ public static class RoamingHelper
     /// </summary>
     /// <param name="session"></param>
     /// <param name="roamingId">自定义roamingId，这个Id在漫游中并没有实际作用，但用户可以用这个id来进行标记。</param>
-    /// <param name="isAutoDispose">是否在Session断开的时候自动断开漫游功能。</param>
     /// <param name="delayRemove">如果开启了自定断开漫游功能需要设置一个延迟多久执行断开。</param>
     /// <returns>返回CreateRoamingResult结构体，包含创建状态和漫游组件。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static FTask<CreateRoamingResult> TryCreateRoaming(this Session session, long roamingId, bool isAutoDispose = true, int delayRemove = 1000 * 60 * 3)
+    public static FTask<CreateRoamingResult> TryCreateRoaming(this Session session, long roamingId, int delayRemove = 1000 * 60 * 3)
     {
-        return session.Scene.RoamingComponent.Create(session, roamingId, isAutoDispose, delayRemove);
+        return session.Scene.RoamingComponent.Create(session, roamingId, delayRemove);
+    }
+
+    /// <summary>
+    /// 获取指定的漫游组件
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="roamingId">自定义roamingId</param>
+    /// <returns></returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static SessionRoamingComponent GetRoaming(Scene scene, long roamingId)
+    {
+        return scene.RoamingComponent.Get(roamingId);
+    }
+    
+    /// <summary>
+    /// 获取指定的漫游组件
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="roamingId">自定义roamingId</param>
+    /// <param name="sessionRoamingComponent"></param>
+    /// <returns></returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool TryGetRoaming(Scene scene, long roamingId, out SessionRoamingComponent sessionRoamingComponent)
+    {
+        return scene.RoamingComponent.TryGet(roamingId, out sessionRoamingComponent);
     }
 
     /// <summary>

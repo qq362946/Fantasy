@@ -1060,23 +1060,23 @@ namespace Fantasy
         public uint ErrorCode { get; set; }
     }
     /// <summary>
-    /// Map服务器通知客户端有新玩家加入
+    /// 通知Map进行下线操作
     /// </summary>
     [Serializable]
     [ProtoContract]
-    public partial class G2M_PalyerJoin : AMessage, IRoamingMessage
+    public partial class G2M_OfflineRequest : AMessage, IRoamingRequest
     {
-        public static G2M_PalyerJoin Create(bool autoReturn = true)
+        public static G2M_OfflineRequest Create(bool autoReturn = true)
         {
-            var g2M_PalyerJoin = MessageObjectPool<G2M_PalyerJoin>.Rent();
-            g2M_PalyerJoin.AutoReturn = autoReturn;
+            var g2M_OfflineRequest = MessageObjectPool<G2M_OfflineRequest>.Rent();
+            g2M_OfflineRequest.AutoReturn = autoReturn;
             
             if (!autoReturn)
             {
-                g2M_PalyerJoin.SetIsPool(false);
+                g2M_OfflineRequest.SetIsPool(false);
             }
             
-            return g2M_PalyerJoin;
+            return g2M_OfflineRequest;
         }
         
         public void Return()
@@ -1096,13 +1096,56 @@ namespace Fantasy
         public void Dispose()
         {
             if (!IsPool()) return; 
-            Sex = default;
-            MessageObjectPool<G2M_PalyerJoin>.Return(this);
+            OfflineTime = default;
+            MessageObjectPool<G2M_OfflineRequest>.Return(this);
         }
-        public uint OpCode() { return InnerOpcode.G2M_PalyerJoin; } 
+        public uint OpCode() { return InnerOpcode.G2M_OfflineRequest; } 
+        [ProtoIgnore]
+        public M2G_OfflineResponse ResponseType { get; set; }
         [ProtoIgnore]
         public int RouteType => Fantasy.RoamingType.MapRoamingType;
         [ProtoMember(1)]
-        public string Sex { get; set; }
+        public int OfflineTime { get; set; }
+    }
+    [Serializable]
+    [ProtoContract]
+    public partial class M2G_OfflineResponse : AMessage, IRoamingResponse
+    {
+        public static M2G_OfflineResponse Create(bool autoReturn = true)
+        {
+            var m2G_OfflineResponse = MessageObjectPool<M2G_OfflineResponse>.Rent();
+            m2G_OfflineResponse.AutoReturn = autoReturn;
+            
+            if (!autoReturn)
+            {
+                m2G_OfflineResponse.SetIsPool(false);
+            }
+            
+            return m2G_OfflineResponse;
+        }
+        
+        public void Return()
+        {
+            if (!AutoReturn)
+            {
+                SetIsPool(true);
+                AutoReturn = true;
+            }
+            else if (!IsPool())
+            {
+                return;
+            }
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            if (!IsPool()) return; 
+            ErrorCode = 0;
+            MessageObjectPool<M2G_OfflineResponse>.Return(this);
+        }
+        public uint OpCode() { return InnerOpcode.M2G_OfflineResponse; } 
+        [ProtoMember(1)]
+        public uint ErrorCode { get; set; }
     }
 }

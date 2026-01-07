@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+#pragma warning disable 1591, 0612, 3021, 8981, CS9035
 
 namespace LightProto.Parser
 {
-#pragma warning disable 1591, 0612, 3021, 8981, CS9035
     public sealed class SortedDictionaryProtoReader<TKey, TValue>
         : IEnumerableKeyValuePairProtoReader<SortedDictionary<TKey, TValue>, TKey, TValue>
         where TKey : notnull

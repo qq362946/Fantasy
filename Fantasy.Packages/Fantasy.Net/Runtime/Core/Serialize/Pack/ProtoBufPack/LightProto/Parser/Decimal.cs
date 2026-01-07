@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
-    //
+//
 // message Decimal {
 // uint64 lo = 1; // the first 64 bits of the underlying value
 // uint32 hi = 2; // the last 32 bis of the underlying value

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
     public sealed class ByteListProtoParser : IProtoParser<List<byte>>
@@ -17,7 +16,8 @@ namespace LightProto.Parser
             public List<byte> ParseFrom(ref ReaderContext input)
             {
                 var length = input.ReadLength();
-                return new List<byte>(ParsingPrimitives.ReadRawBytes(ref input.buffer, ref input.state, length));
+                var bytes = ParsingPrimitives.ReadRawBytes(ref input.buffer, ref input.state, length);
+                return new List<byte>(bytes);
             }
         }
 

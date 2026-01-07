@@ -1,6 +1,6 @@
+namespace LightProto.Parser
+{
 #if NET5_0_OR_GREATER
-namespace LightProto.Parser;
-
 public sealed class RuneProtoParser : IProtoParser<System.Text.Rune>
 {
     public static IProtoReader<System.Text.Rune> ProtoReader { get; } = new RuneProtoReader();
@@ -34,3 +34,4 @@ public sealed class RuneProtoParser : IProtoParser<System.Text.Rune>
     }
 }
 #endif
+}

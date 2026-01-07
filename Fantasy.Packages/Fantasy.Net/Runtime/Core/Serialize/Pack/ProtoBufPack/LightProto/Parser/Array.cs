@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using LightProto.Internal;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
     public sealed class ArrayProtoWriter<T> : IEnumerableProtoWriter<T[], T>
@@ -26,7 +26,7 @@ namespace LightProto.Parser
             static list => list.Clear()
         );
 
-        public ArrayProtoReader(IProtoReader<TItem> itemReader, int itemFixedSize)
+        internal ArrayProtoReader(IProtoReader<TItem> itemReader, int itemFixedSize)
         {
             ItemReader = itemReader;
             ItemFixedSize = itemFixedSize;
@@ -50,7 +50,7 @@ namespace LightProto.Parser
                 int length = ctx.ReadLength();
                 if (length <= 0)
                     return Array.Empty<TItem>();
-                int oldLimit = SegmentedBufferHelper.PushLimit(ref ctx.state, length);
+                var oldLimit = SegmentedBufferHelper.PushLimit(ref ctx.state, length);
 
                 try
                 {

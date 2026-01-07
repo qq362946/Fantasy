@@ -2276,23 +2276,66 @@ namespace Fantasy
         public uint ErrorCode { get; set; }
     }
     /// <summary>
-    /// Map服务器通知客户端有新玩家加入
+    /// 客户端通知服务器可以接收服务器推送的消息
     /// </summary>
     [Serializable]
     [ProtoContract]
-    public partial class M2C_PalyerJoin : AMessage, IRoamingMessage
+    public partial class C2M_InitComplete : AMessage, IRoamingMessage
     {
-        public static M2C_PalyerJoin Create(bool autoReturn = true)
+        public static C2M_InitComplete Create(bool autoReturn = true)
         {
-            var m2C_PalyerJoin = MessageObjectPool<M2C_PalyerJoin>.Rent();
-            m2C_PalyerJoin.AutoReturn = autoReturn;
+            var c2M_InitComplete = MessageObjectPool<C2M_InitComplete>.Rent();
+            c2M_InitComplete.AutoReturn = autoReturn;
             
             if (!autoReturn)
             {
-                m2C_PalyerJoin.SetIsPool(false);
+                c2M_InitComplete.SetIsPool(false);
             }
             
-            return m2C_PalyerJoin;
+            return c2M_InitComplete;
+        }
+        
+        public void Return()
+        {
+            if (!AutoReturn)
+            {
+                SetIsPool(true);
+                AutoReturn = true;
+            }
+            else if (!IsPool())
+            {
+                return;
+            }
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            if (!IsPool()) return; 
+            MessageObjectPool<C2M_InitComplete>.Return(this);
+        }
+        public uint OpCode() { return OuterOpcode.C2M_InitComplete; } 
+        [ProtoIgnore]
+        public int RouteType => Fantasy.RoamingType.MapRoamingType;
+    }
+    /// <summary>
+    /// Map服务器通知客户端创建新的Unit
+    /// </summary>
+    [Serializable]
+    [ProtoContract]
+    public partial class M2C_UnitCreate : AMessage, IRoamingMessage
+    {
+        public static M2C_UnitCreate Create(bool autoReturn = true)
+        {
+            var m2C_UnitCreate = MessageObjectPool<M2C_UnitCreate>.Rent();
+            m2C_UnitCreate.AutoReturn = autoReturn;
+            
+            if (!autoReturn)
+            {
+                m2C_UnitCreate.SetIsPool(false);
+            }
+            
+            return m2C_UnitCreate;
         }
         
         public void Return()
@@ -2317,32 +2360,35 @@ namespace Fantasy
                 Unit.Dispose();
                 Unit = null;
             }
-            MessageObjectPool<M2C_PalyerJoin>.Return(this);
+            IsSelf = default;
+            MessageObjectPool<M2C_UnitCreate>.Return(this);
         }
-        public uint OpCode() { return OuterOpcode.M2C_PalyerJoin; } 
+        public uint OpCode() { return OuterOpcode.M2C_UnitCreate; } 
         [ProtoIgnore]
         public int RouteType => Fantasy.RoamingType.MapRoamingType;
         [ProtoMember(1)]
         public UnitInfo Unit { get; set; }
+        [ProtoMember(2)]
+        public bool IsSelf { get; set; }
     }
     /// <summary>
-    /// Mapt通知客户端有玩家离开
+    /// Map通知客户端有Unit离开
     /// </summary>
     [Serializable]
     [ProtoContract]
-    public partial class M2C_PlayerExit : AMessage, IRoamingMessage
+    public partial class M2C_UnitLeave : AMessage, IRoamingMessage
     {
-        public static M2C_PlayerExit Create(bool autoReturn = true)
+        public static M2C_UnitLeave Create(bool autoReturn = true)
         {
-            var m2C_PlayerExit = MessageObjectPool<M2C_PlayerExit>.Rent();
-            m2C_PlayerExit.AutoReturn = autoReturn;
+            var m2C_UnitLeave = MessageObjectPool<M2C_UnitLeave>.Rent();
+            m2C_UnitLeave.AutoReturn = autoReturn;
             
             if (!autoReturn)
             {
-                m2C_PlayerExit.SetIsPool(false);
+                m2C_UnitLeave.SetIsPool(false);
             }
             
-            return m2C_PlayerExit;
+            return m2C_UnitLeave;
         }
         
         public void Return()
@@ -2363,9 +2409,9 @@ namespace Fantasy
         {
             if (!IsPool()) return; 
             UnitId = default;
-            MessageObjectPool<M2C_PlayerExit>.Return(this);
+            MessageObjectPool<M2C_UnitLeave>.Return(this);
         }
-        public uint OpCode() { return OuterOpcode.M2C_PlayerExit; } 
+        public uint OpCode() { return OuterOpcode.M2C_UnitLeave; } 
         [ProtoIgnore]
         public int RouteType => Fantasy.RoamingType.MapRoamingType;
         [ProtoMember(1)]
@@ -2423,7 +2469,7 @@ namespace Fantasy
         [ProtoMember(2)]
         public string Name { get; set; }
         [ProtoMember(3)]
-        public PositionInfo Pos { get; set; }
+        public Position Pos { get; set; }
         [ProtoMember(4)]
         public int UnitType { get; set; }
     }
@@ -2514,58 +2560,14 @@ namespace Fantasy
         {
             if (!IsPool()) return; 
             ErrorCode = 0;
+            Data.Clear();
             MessageObjectPool<M2C_MoveResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.M2C_MoveResponse; } 
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
-    }
-    /// <summary>
-    /// 位置信息
-    /// </summary>
-    [Serializable]
-    [ProtoContract]
-    public partial class PositionInfo : AMessage, IDisposable
-    {
-        public static PositionInfo Create(bool autoReturn = true)
-        {
-            var positionInfo = MessageObjectPool<PositionInfo>.Rent();
-            positionInfo.AutoReturn = autoReturn;
-            
-            if (!autoReturn)
-            {
-                positionInfo.SetIsPool(false);
-            }
-            
-            return positionInfo;
-        }
-        
-        public void Return()
-        {
-            if (!AutoReturn)
-            {
-                SetIsPool(true);
-                AutoReturn = true;
-            }
-            else if (!IsPool())
-            {
-                return;
-            }
-            Dispose();
-        }
-
-        public void Dispose()
-        {
-            if (!IsPool()) return; 
-            if (Pos != null)
-            {
-                Pos.Dispose();
-                Pos = null;
-            }
-            MessageObjectPool<PositionInfo>.Return(this);
-        }
-        [ProtoMember(1)]
-        public Position Pos { get; set; }
+        [ProtoMember(2)]
+        public List<Position> Data { get; set; } = new List<Position>();
     }
     /// <summary>
     /// 坐标信息
@@ -2615,5 +2617,61 @@ namespace Fantasy
         public float Y { get; set; }
         [ProtoMember(3)]
         public float Z { get; set; }
+    }
+    /// <summary>
+    /// 通知客户端Unit移动状态改变
+    /// </summary>
+    [Serializable]
+    [ProtoContract]
+    public partial class M2C_UnitMoveState : AMessage, IRoamingMessage
+    {
+        public static M2C_UnitMoveState Create(bool autoReturn = true)
+        {
+            var m2C_UnitMoveState = MessageObjectPool<M2C_UnitMoveState>.Rent();
+            m2C_UnitMoveState.AutoReturn = autoReturn;
+            
+            if (!autoReturn)
+            {
+                m2C_UnitMoveState.SetIsPool(false);
+            }
+            
+            return m2C_UnitMoveState;
+        }
+        
+        public void Return()
+        {
+            if (!AutoReturn)
+            {
+                SetIsPool(true);
+                AutoReturn = true;
+            }
+            else if (!IsPool())
+            {
+                return;
+            }
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            if (!IsPool()) return; 
+            State = default;
+            UnitId = default;
+            if (Pos != null)
+            {
+                Pos.Dispose();
+                Pos = null;
+            }
+            MessageObjectPool<M2C_UnitMoveState>.Return(this);
+        }
+        public uint OpCode() { return OuterOpcode.M2C_UnitMoveState; } 
+        [ProtoIgnore]
+        public int RouteType => Fantasy.RoamingType.MapRoamingType;
+        [ProtoMember(1)]
+        public int State { get; set; }
+        [ProtoMember(2)]
+        public long UnitId { get; set; }
+        [ProtoMember(3)]
+        public Position Pos { get; set; }
     }
 }

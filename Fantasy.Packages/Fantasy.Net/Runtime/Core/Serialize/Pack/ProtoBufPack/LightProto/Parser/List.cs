@@ -2,7 +2,6 @@
 
 namespace LightProto.Parser
 {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public sealed class ListProtoWriter<T> : IEnumerableProtoWriter<List<T>, T>
     {
         public ListProtoWriter(IProtoWriter<T> itemWriter, uint tag, int itemFixedSize)

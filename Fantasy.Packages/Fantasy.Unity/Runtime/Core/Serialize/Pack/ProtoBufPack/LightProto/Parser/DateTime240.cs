@@ -2,7 +2,6 @@
 
 namespace LightProto.Parser
 {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     [ProtoContract]
     [ProtoSurrogateFor(typeof(DateTime))]
     public partial struct DateTime240ProtoParser
@@ -29,12 +28,12 @@ namespace LightProto.Parser
         /// <summary>
         /// The number of nanoseconds in a second.
         /// </summary>
-        public const int NanosecondsPerSecond = 1000000000;
+        const int NanosecondsPerSecond = 1000000000;
 
         /// <summary>
         /// The number of nanoseconds in a BCL tick (as used by <see cref="TimeSpan"/> and <see cref="DateTime"/>).
         /// </summary>
-        public const int NanosecondsPerTick = 100;
+        const int NanosecondsPerTick = 100;
 
         internal const int MaxNanos = NanosecondsPerSecond - 1;
 

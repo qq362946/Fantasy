@@ -1,8 +1,8 @@
 ﻿#if NET7_0_OR_GREATER
 using System.Numerics;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace LightProto.Parser;
 
+namespace LightProto.Parser
+{
 [ProtoContract]
 [ProtoSurrogateFor(typeof(Quaternion))]
 public partial struct QuaternionProtoParser
@@ -39,5 +39,6 @@ public partial struct QuaternionProtoParser
             Floats = new[] { value.X, value.Y, value.Z, value.W },
         };
     }
+}
 }
 #endif

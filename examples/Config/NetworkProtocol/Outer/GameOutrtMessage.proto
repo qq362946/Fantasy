@@ -10,13 +10,19 @@ message G2C_LoginGameResponse // IResponse
 {
 	
 }
-/// Map服务器通知客户端有新玩家加入
-message M2C_PalyerJoin // IRoamingMessage,MapRoamingType
+/// 客户端通知服务器可以接收服务器推送的消息
+message C2M_InitComplete // IRoamingMessage,MapRoamingType
 {
-	UnitInfo Unit = 1;
+	
 }
-/// Mapt通知客户端有玩家离开
-message M2C_PlayerExit // IRoamingMessage,MapRoamingType
+/// Map服务器通知客户端创建新的Unit
+message M2C_UnitCreate // IRoamingMessage,MapRoamingType
+{
+	UnitInfo Unit = 1;	// 单位信息
+	bool IsSelf = 2;	  // 是否是自己操作的单位
+}
+/// Map通知客户端有Unit离开
+message M2C_UnitLeave // IRoamingMessage,MapRoamingType
 {
 	int64 UnitId = 1;
 }
@@ -25,7 +31,7 @@ message UnitInfo
 {
 	int64 UnitId = 1;			// Unit的Id
 	string Name = 2;			 // Unit的名字，如果是怪物其实可以通过配置表来拿，所以这个名字仅限于玩家
-	PositionInfo Pos = 3;		// 位置信息
+	Position Pos = 3;			// 位置信息
 	int32 UnitType = 4;		  // Unit的类型（如:玩家、怪物、NPC等）	
 }
 // ---- 移动 Start ----
@@ -36,12 +42,7 @@ message C2M_MoveRequest // IRoamingRequest,M2C_MoveResponse,MapRoamingType
 }
 message M2C_MoveResponse // IRoamingResponse
 {
-
-}
-/// 位置信息
-message PositionInfo
-{
-	Position Pos = 1;
+   repeated Position Data = 1;
 }
 /// 坐标信息
 message Position
@@ -49,5 +50,12 @@ message Position
 	float X = 1;
 	float Y = 2;
 	float Z = 3;
+}
+/// 通知客户端Unit移动状态改变
+message M2C_UnitMoveState // IRoamingMessage,MapRoamingType
+{
+	int32 State = 1;	 // 1.开始移动 2.停止 
+	int64 UnitId = 2;	// UnitId
+	Position Pos = 3;	// 坐标信息
 }
 // ---- 移动 End ----

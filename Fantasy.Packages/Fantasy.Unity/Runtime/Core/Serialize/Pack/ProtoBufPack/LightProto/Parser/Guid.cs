@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Buffers.Binary;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
-    // message Guid {
+// message Guid {
 // fixed64 lo = 1; // the first 8 bytes of the guid (note:crazy-endian)
 // fixed64 hi = 2; // the second 8 bytes of the guid (note:crazy-endian)
 // }

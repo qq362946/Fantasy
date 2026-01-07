@@ -1,6 +1,5 @@
 ﻿namespace LightProto
 {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public interface IProtoParser<T>
     {
 #if NET7_0_OR_GREATER

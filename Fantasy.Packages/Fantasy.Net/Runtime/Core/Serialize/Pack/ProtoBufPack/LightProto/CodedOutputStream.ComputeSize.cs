@@ -9,7 +9,6 @@
 
 using System;
 using System.Runtime.CompilerServices;
-#pragma warning disable CS1574, CS1584, CS1581, CS1580
 
 namespace LightProto
 {

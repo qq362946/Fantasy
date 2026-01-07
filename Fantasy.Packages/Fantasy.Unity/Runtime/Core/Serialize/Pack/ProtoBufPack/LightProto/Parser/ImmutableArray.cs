@@ -1,11 +1,13 @@
 ﻿using System.Collections.Immutable;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
     public sealed class ImmutableArrayProtoWriter<T> : IEnumerableProtoWriter<ImmutableArray<T>, T>
     {
         public ImmutableArrayProtoWriter(IProtoWriter<T> itemWriter, uint tag, int itemFixedSize)
-            : base(itemWriter, tag, static collection => collection.Length, itemFixedSize) { }
+            : base(itemWriter, tag, static collection => collection.Length, itemFixedSize)
+        {
+        }
     }
 
     public sealed class ImmutableArrayProtoReader<TItem>
@@ -32,7 +34,9 @@ namespace LightProto.Parser
         }
 
         public ImmutableArrayProtoReader(IProtoReader<TItem> itemReader, uint tag, int itemFixedSize)
-            : this(itemReader, itemFixedSize) { }
+            : this(itemReader, itemFixedSize)
+        {
+        }
 
         public ImmutableArray<TItem> Empty => ImmutableArray<TItem>.Empty;
     }

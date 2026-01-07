@@ -2,7 +2,6 @@
 
 namespace LightProto.Parser
 {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public sealed class Fixed32ProtoParser : IProtoParser<UInt32>
     {
         public static IProtoReader<UInt32> ProtoReader { get; } = new Fixed32ProtoReader();

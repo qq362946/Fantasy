@@ -1,13 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 using LightProto.Internal;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
     public sealed class ReadOnlyCollectionProtoWriter<T>
         : IEnumerableProtoWriter<ReadOnlyCollection<T>, T>
     {
         public ReadOnlyCollectionProtoWriter(IProtoWriter<T> itemWriter, uint tag, int itemFixedSize)
-            : base(itemWriter, tag, static collection => collection.Count, itemFixedSize) { }
+            : base(itemWriter, tag, static collection => collection.Count, itemFixedSize)
+        {
+        }
     }
 
     public sealed class ReadOnlyCollectionProtoReader<TItem>
@@ -38,7 +40,9 @@ namespace LightProto.Parser
             uint tag,
             int itemFixedSize
         )
-            : this(itemReader, itemFixedSize) { }
+            : this(itemReader, itemFixedSize)
+        {
+        }
 
 #if NET7_0_OR_GREATER
     public ReadOnlyCollection<TItem> Empty => ReadOnlyCollection<TItem>.Empty;

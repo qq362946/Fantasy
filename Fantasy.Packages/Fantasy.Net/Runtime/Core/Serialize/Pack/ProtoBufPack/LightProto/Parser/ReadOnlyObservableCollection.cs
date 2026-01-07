@@ -11,7 +11,9 @@ namespace LightProto.Parser
             uint tag,
             int itemFixedSize
         )
-            : base(itemWriter, tag, static collection => collection.Count, itemFixedSize) { }
+            : base(itemWriter, tag, static collection => collection.Count, itemFixedSize)
+        {
+        }
     }
 
     public sealed class ReadOnlyObservableCollectionProtoReader<TItem>
@@ -37,7 +39,9 @@ namespace LightProto.Parser
             uint tag,
             int itemFixedSize
         )
-            : this(itemReader, itemFixedSize) { }
+            : this(itemReader, itemFixedSize)
+        {
+        }
 
         public ReadOnlyObservableCollectionProtoReader(
             IProtoReader<TItem> itemReader,

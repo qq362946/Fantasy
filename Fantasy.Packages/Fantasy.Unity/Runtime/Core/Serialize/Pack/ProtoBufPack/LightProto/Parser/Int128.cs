@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-namespace LightProto.Parser
+﻿namespace LightProto.Parser
 {
 #if NET7_0_OR_GREATER
 [ProtoSurrogateFor(typeof(Int128))]

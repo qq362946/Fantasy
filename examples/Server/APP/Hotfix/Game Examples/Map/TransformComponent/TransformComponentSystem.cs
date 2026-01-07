@@ -14,10 +14,8 @@ public sealed class TransformComponentDestroySystem : DestroySystem<TransformCom
 
 public static class TransformComponentSystem
 {
-    public static PositionInfo ToProtocol(this TransformComponent self)
+    public static Position ToProtocol(this TransformComponent self)
     {
-        var positionInfo = PositionInfo.Create();
-        positionInfo.Pos = self.TempPosition.Transform(self.Position);
-        return positionInfo;
+        return self.TempPosition.Transform(self.Position);
     }
 }

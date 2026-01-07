@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
     public sealed class EnumProtoParser<T> : IProtoParser<T>

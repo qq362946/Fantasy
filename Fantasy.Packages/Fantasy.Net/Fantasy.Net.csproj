@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <PackageId>Fantasy-Net</PackageId>
@@ -33,6 +33,8 @@
       <!-- 启用 Source Generator 文件输出（可选，用于调试） -->
        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles> 
        <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath> 
+       <WarningsAsErrors>;NU1605</WarningsAsErrors> 
+       <NoWarn>1701;1702;CS8600;CS8601</NoWarn> 
     </PropertyGroup>
 
     <PropertyGroup>
@@ -43,6 +45,7 @@
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
       <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <NoWarn>1701;1702;CS8600;CS8601</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -83,7 +86,7 @@
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
       <PackageReference Include="System.IO.Pipelines" Version="9.0.10" />
-    </ItemGroup>
+    </ItemGroup>    
     <Import Project="build\Fantasy-Net.props" />
     <Import Project="build\Fantasy-Net.targets" />
 </Project>

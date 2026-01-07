@@ -1,7 +1,14 @@
-﻿using System.Collections.ObjectModel;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
 namespace LightProto.Parser
 {
+    public sealed class ICollectionProtoWriter<T> : IEnumerableProtoWriter<ICollection<T>, T>
+    {
+        public ICollectionProtoWriter(IProtoWriter<T> itemWriter, uint tag, int itemFixedSize)
+            : base(itemWriter, tag, static collection => collection.Count, itemFixedSize) { }
+    }
+
     public sealed class CollectionProtoWriter<T> : IEnumerableProtoWriter<Collection<T>, T>
     {
         public CollectionProtoWriter(IProtoWriter<T> itemWriter, uint tag, int itemFixedSize)

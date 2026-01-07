@@ -1,9 +1,12 @@
 syntax = "proto3";
 
 // GameInnerMessage.proto
-
-/// Map服务器通知客户端有新玩家加入
-message G2M_PalyerJoin // IRoamingMessage,MapRoamingType
+/// 通知Map进行下线操作
+message G2M_OfflineRequest // IRoamingRequest,M2G_OfflineResponse,MapRoamingType
 {
-	string Sex = 1;
+	int32 OfflineTime = 1;		// 延迟下线时间
+}
+message M2G_OfflineResponse // IRoamingResponse
+{
+
 }

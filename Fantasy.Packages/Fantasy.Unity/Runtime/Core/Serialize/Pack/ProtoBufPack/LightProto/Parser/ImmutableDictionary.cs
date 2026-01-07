@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace LightProto.Parser
 {
     public sealed class ImmutableDictionaryProtoWriter<TKey, TValue>
@@ -12,7 +12,9 @@ namespace LightProto.Parser
             IProtoWriter<TValue> valueWriter,
             uint tag
         )
-            : base(keyWriter, valueWriter, tag, (dic) => dic.Count) { }
+            : base(keyWriter, valueWriter, tag, (dic) => dic.Count)
+        {
+        }
     }
 
     public sealed class ImmutableDictionaryProtoReader<TKey, TValue>
