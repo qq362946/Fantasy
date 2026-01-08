@@ -27,30 +27,63 @@ namespace Fantasy.Helper
         {
             try
             {
-                var addressSplit = address.Split(':');
-                if (addressSplit.Length != 2)
+                if (string.IsNullOrEmpty(address))
                 {
-                    throw new FormatException("Invalid format");
+                    throw new FormatException("Address cannot be null or empty");
                 }
 
-                var ipString = addressSplit[0];
-                var portString = addressSplit[1];
-
-                if (!IPAddress.TryParse(ipString, out var ipAddress))
+                ReadOnlySpan<char> span = address.AsSpan();
+                ReadOnlySpan<char> ipSpan;
+                ReadOnlySpan<char> portSpan;
+                // 检查是否是IPv6格式 [host]:port
+                if (span[0] == '[')
+                {
+                    var endBracketIndex = span.IndexOf(']');
+                    if (endBracketIndex == -1)
+                    {
+                        throw new FormatException("Invalid IPv6 format: missing closing bracket");
+                    }
+                    
+                    ipSpan = span.Slice(1, endBracketIndex - 1);
+                    
+                    if (endBracketIndex + 1 >= span.Length || span[endBracketIndex + 1] != ':')
+                    {
+                        throw new FormatException("Invalid format: expected ':' after IPv6 address");
+                    }
+                    
+                    portSpan = span.Slice(endBracketIndex + 2);
+                }
+                else
+                {
+                    // IPv4格式或不带方括号的地址,使用LastIndexOf
+                    var lastColonIndex = span.LastIndexOf(':');
+                    if (lastColonIndex == -1)
+                    {
+                        throw new FormatException("Invalid format: missing port separator ':'");
+                    }
+                    
+                    ipSpan = span.Slice(0, lastColonIndex);
+                    portSpan = span.Slice(lastColonIndex + 1);
+                }
+                
+                // 解析IP地址
+                if (!IPAddress.TryParse(ipSpan, out var ipAddress))
                 {
                     throw new FormatException("Invalid IP address");
                 }
-
-                if (!int.TryParse(portString, out var port) || port < 0 || port > 65535)
+                // 解析端口 
+                if (!int.TryParse(portSpan, out var port) || port < 0 || port > 65535)
                 {
                     throw new FormatException("Invalid port number");
                 }
-
+                
                 return new IPEndPoint(ipAddress, port);
             }
             catch (Exception e)
             {
-                Log.Error($"Error parsing IP and Port:{e.Message}");
+                Log.Error($"Error parsing IP and Port: '{address}'. " +
+                          $"Expected format: 'IP:Port' (e.g., '192.168.1.1:8080' or '[::1]:8080'). " +
+                          $"Error: {e.Message}");
                 return null;
             }
         }

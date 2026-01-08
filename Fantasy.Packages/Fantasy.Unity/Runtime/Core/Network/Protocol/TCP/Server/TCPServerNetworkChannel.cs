@@ -243,7 +243,7 @@ namespace Fantasy.Network.TCP
                 {
                     if (_socket.SendAsync(_sendArgs))
                     {
-                        break;
+                        return;
                     }
 
                     ReturnMemoryStream(memoryStreamBuffer);

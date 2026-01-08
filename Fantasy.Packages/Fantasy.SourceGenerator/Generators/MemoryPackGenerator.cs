@@ -54,14 +54,56 @@ namespace Fantasy.SourceGenerator.Generators
                 .Where(info => info != null)
                 .Collect();
 
-            // 组合编译信息和收集的类型
+            // 收集所有闭合泛型类型（扫描字段和属性的类型使用）
+            // 用于发现实际使用的泛型实例化
+            var closedGenericTypesProvider = context.SyntaxProvider
+                .CreateSyntaxProvider(
+                    predicate: (node, _) => node is Microsoft.CodeAnalysis.CSharp.Syntax.FieldDeclarationSyntax ||
+                                            node is Microsoft.CodeAnalysis.CSharp.Syntax.PropertyDeclarationSyntax,
+                    transform: (ctx, _) =>
+                    {
+                        ITypeSymbol typeSymbol = null;
+                        
+                        // 从字段或属性声明中提取类型
+                        if (ctx.Node is Microsoft.CodeAnalysis.CSharp.Syntax.FieldDeclarationSyntax fieldDecl)
+                        {
+                            typeSymbol = ctx.SemanticModel.GetTypeInfo(fieldDecl.Declaration.Type).Type;
+                        }
+                        else if (ctx.Node is Microsoft.CodeAnalysis.CSharp.Syntax.PropertyDeclarationSyntax propDecl)
+                        {
+                            typeSymbol = ctx.SemanticModel.GetTypeInfo(propDecl.Type).Type;
+                        }
+                        
+                        if (typeSymbol is not INamedTypeSymbol namedTypeSymbol)
+                            return null;
+
+                        // 只收集闭合泛型类型（排除开放泛型和非泛型）
+                        if (!namedTypeSymbol.IsGenericType || namedTypeSymbol.IsOpenGeneric())
+                            return null;
+
+                        // 检查是否是 Entity 或 SphereEventArgs 子类
+                        var isEntitySubclass = IsEntitySubclass(namedTypeSymbol);
+                        var isSphereEventArgsSubclass = IsSphereEventArgsSubclass(namedTypeSymbol);
+
+                        return new ClosedGenericTypeInfo
+                        {
+                            Symbol = namedTypeSymbol,
+                            IsEntity = isEntitySubclass,
+                            IsSphereEventArgs = isSphereEventArgsSubclass
+                        };
+                    })
+                .Where(info => info != null)
+                .Collect();
+
+            // 组合编译信息、MemoryPackable 类型和闭合泛型类型
             var compilationAndTypes = context.CompilationProvider
-                .Combine(memoryPackableTypesProvider);
+                .Combine(memoryPackableTypesProvider)
+                .Combine(closedGenericTypesProvider);
 
             // 注册源代码输出 - 生成 MemoryPackInitializer
             context.RegisterSourceOutput(compilationAndTypes, (spc, source) =>
             {
-                var (compilation, types) = source;
+                var ((compilation, types), closedGenericTypes) = source;
 
                 if (CompilationHelper.IsSourceGeneratorDisabled(compilation))
                 {
@@ -78,7 +120,7 @@ namespace Fantasy.SourceGenerator.Generators
                     return;
                 }
 
-                GenerateMemoryPackCode(spc, compilation, types!);
+                GenerateMemoryPackCode(spc, compilation, types!, closedGenericTypes!);
             });
         }
 
@@ -120,16 +162,73 @@ namespace Fantasy.SourceGenerator.Generators
         private static void GenerateMemoryPackCode(
             SourceProductionContext context,
             Compilation compilation,
-            IEnumerable<TypeInfo> types)
+            IEnumerable<TypeInfo> types,
+            IEnumerable<ClosedGenericTypeInfo> closedGenericTypes)
         {
             var typesList = types.ToList();
+            var closedTypesList = closedGenericTypes?.ToList() ?? new List<ClosedGenericTypeInfo>();
+            
             var targetPlatform = CompilationHelper.GetTargetPlatform(compilation);
             var className = compilation.GetAssemblyName("MemoryPackInitializer", out var assemblyName, out _);
 
-            // 分离 Entity 和普通类型
-            var entityTypes = typesList.Where(t => t.IsEntity).Select(t => t.Symbol).ToList();
-            var sphereEventArgs = typesList.Where(t => t.IsSphereEventArgs).ToList();
-            var normalTypes = typesList.Where(t => !t.IsEntity).Select(t => t.Symbol).ToList();
+            // 按 ConstructedFrom 分组闭合泛型类型
+            var closedTypesByConstructedFrom = GroupTypesByConstructedFrom(closedTypesList);
+
+            // 为每个标记了 [MemoryPackable] 的类型进行处理
+            foreach (var typeInfo in typesList)
+            {
+                var symbol = typeInfo.Symbol;
+                
+                // 判断是否为开放泛型
+                typeInfo.IsOpenGeneric = symbol.IsOpenGeneric();
+                
+                if (typeInfo.IsOpenGeneric)
+                {
+                    // 开放泛型：匹配闭合泛型实例
+                    var constructedFrom = symbol.ConstructedFrom;
+                    
+                    // 查找匹配的闭合泛型类型
+                    if (closedTypesByConstructedFrom.TryGetValue(constructedFrom, out var matchingClosedTypes))
+                    {
+                        foreach (var closedType in matchingClosedTypes)
+                        {
+                            // 验证泛型参数数量是否匹配
+                            if (closedType.TypeArguments.Length != symbol.TypeParameters.Length)
+                                continue;
+                            
+                            try
+                            {
+                                // 构造闭合的 MemoryPackable 类型
+                                var openSymbol = symbol.ConstructedFrom;
+                                var constructedSymbol = openSymbol.Construct(closedType.TypeArguments.ToArray());
+                                
+                                // 添加到闭合泛型集合（HashSet 自动去重）
+                                typeInfo.ClosedGenerics.Add(constructedSymbol);
+                            }
+                            catch
+                            {
+                                // 构造失败（泛型约束不满足等），跳过
+                            }
+                        }
+                    }
+                    
+                    // 关键：开放泛型定义本身不添加到输出
+                    // 只有其闭合泛型实例会被输出
+                }
+            }
+
+            // 分离类型：只输出非泛型和闭合泛型
+            // 1. Entity 类型（非泛型 + 从开放泛型构造的闭合泛型）
+            var entityTypes = typesList.Where(t => t.IsEntity && !t.IsOpenGeneric).ToList();
+            
+            // 2. SphereEventArgs 类型
+            var sphereEventArgs = typesList.Where(t => t.IsSphereEventArgs && !t.IsOpenGeneric).ToList();
+            
+            // 3. 普通类型（非 Entity，非泛型 + 从开放泛型构造的闭合泛型）
+            var normalTypes = typesList.Where(t => !t.IsEntity && !t.IsSphereEventArgs && !t.IsOpenGeneric).ToList();
+            
+            // 4. 收集所有有闭合泛型的开放泛型定义（用于传递闭合泛型信息）
+            var openGenericTypesWithClosures = typesList.Where(t => t.IsOpenGeneric && t.ClosedGenerics.Any()).ToList();
 
             var builder = new SourceCodeBuilder();
 
@@ -147,6 +246,7 @@ namespace Fantasy.SourceGenerator.Generators
             // 添加类注释
             builder.AddXmlComment($"Auto-generated MemoryPack initializer for {assemblyName}");
             builder.AddXmlComment("Ensures all MemoryPack formatters are registered before first use in AOT environment");
+            builder.AddXmlComment("Note: Only closed generic types are registered, not open generic definitions");
 
             // 开始类定义，实现 IMemoryPackEntityGenerator 接口
             builder.BeginClass(className, "public sealed", "Fantasy.Assembly.IMemoryPackEntityGenerator");
@@ -156,11 +256,11 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine();
 
             // 生成 Entity和SphereEventArgs 序列化方法
-            GenerateEntityArrays(builder, entityTypes, sphereEventArgs);
+            GenerateEntityArrays(builder, entityTypes, sphereEventArgs, openGenericTypesWithClosures);
             builder.AppendLine();
 
             // 生成初始化方法
-            GenerateInitializeMethod(builder, normalTypes);
+            GenerateInitializeMethod(builder, normalTypes, openGenericTypesWithClosures);
 
             // 结束类
             builder.EndClass();
@@ -173,53 +273,113 @@ namespace Fantasy.SourceGenerator.Generators
             context.AddSource($"{className}.g.cs", builder.ToString());
         }
 
-        private static void GenerateEntityArrays(SourceCodeBuilder builder, List<INamedTypeSymbol> entityTypes, IEnumerable<TypeInfo> sphereEventArgs)
+        private static void GenerateEntityArrays(
+            SourceCodeBuilder builder, 
+            List<TypeInfo> entityTypes,  // 非泛型 Entity
+            List<TypeInfo> sphereEventArgs,  // 非泛型 SphereEventArgs
+            List<TypeInfo> openGenericTypesWithClosures)  // 开放泛型（用于获取闭合泛型）
         {
             // 生成 EntityTypeHashCodes() 方法
             builder.AddXmlComment("Gets the TypeHashCode array of all Entity subclasses marked with [MemoryPackable] in this assembly");
+            builder.AddXmlComment("Includes non-generic types and closed generic instantiations only");
+            builder.AddXmlComment("Open generic definitions (e.g., TestEntity<T>) are NOT included");
             builder.BeginMethod("public long[] EntityTypeHashCodes()");
             builder.AppendLine("return new long[]");
             builder.OpenBrace();
-            foreach (var entity in entityTypes)
+            
+            // 1. 添加非泛型 Entity 类型
+            foreach (var typeInfo in entityTypes)
             {
-                var typeHashCode = HashCodeHelper.ComputeHash64(entity.GetFullName(false));
-                builder.AppendLine($"{typeHashCode}L,");
+                var typeHashCode = HashCodeHelper.ComputeHash64(typeInfo.Symbol.GetFullName(false));
+                builder.AppendLine($"{typeHashCode}L, // {typeInfo.Symbol.ToDisplayString()}");
             }
-            foreach (var sphereEventArg in sphereEventArgs)
+            
+            // 2. 添加从开放泛型构造的闭合泛型 Entity
+            foreach (var openGeneric in openGenericTypesWithClosures.Where(t => t.IsEntity))
             {
-                var typeHashCode = HashCodeHelper.ComputeHash64(sphereEventArg.Symbol.GetFullName(false));
-                builder.AppendLine($"{typeHashCode}L,");
+                foreach (var closedGeneric in openGeneric.ClosedGenerics)
+                {
+                    var closedHashCode = HashCodeHelper.ComputeHash64(closedGeneric.GetFullName(false));
+                    builder.AppendLine($"{closedHashCode}L, // {closedGeneric.ToDisplayString()}");
+                }
             }
+
+            // 3. 添加非泛型 SphereEventArgs 类型
+            foreach (var typeInfo in sphereEventArgs)
+            {
+                var typeHashCode = HashCodeHelper.ComputeHash64(typeInfo.Symbol.GetFullName(false));
+                builder.AppendLine($"{typeHashCode}L, // {typeInfo.Symbol.ToDisplayString()}");
+            }
+            
+            // 4. 添加从开放泛型构造的闭合泛型 SphereEventArgs
+            foreach (var openGeneric in openGenericTypesWithClosures.Where(t => t.IsSphereEventArgs))
+            {
+                foreach (var closedGeneric in openGeneric.ClosedGenerics)
+                {
+                    var closedHashCode = HashCodeHelper.ComputeHash64(closedGeneric.GetFullName(false));
+                    builder.AppendLine($"{closedHashCode}L, // {closedGeneric.ToDisplayString()}");
+                }
+            }
+
             builder.CloseBrace(semicolon: true);
             builder.EndMethod();
             builder.AppendLine();
 
             // 生成 EntityTypes() 方法
             builder.AddXmlComment("Gets the Type array of all Entity subclasses marked with [MemoryPackable] in this assembly");
+            builder.AddXmlComment("Includes non-generic types and closed generic instantiations only");
+            builder.AddXmlComment("Open generic definitions (e.g., TestEntity<T>) are NOT included");
             builder.BeginMethod("public System.Type[] EntityTypes()");
             builder.AppendLine("return new System.Type[]");
             builder.OpenBrace();
-            foreach (var entity in entityTypes)
+
+            // 1. 添加非泛型 Entity 类型
+            foreach (var typeInfo in entityTypes)
             {
-                
-                var fullName = entity.GetFullName(true);
+                var fullName = typeInfo.Symbol.GetFullName(true);
                 builder.AppendLine($"typeof({fullName}),");
             }
-            foreach (var sphereEventArg in sphereEventArgs)
+            
+            // 2. 添加从开放泛型构造的闭合泛型 Entity
+            foreach (var openGeneric in openGenericTypesWithClosures.Where(t => t.IsEntity))
             {
-                var fullName = sphereEventArg.Symbol.GetFullName(true);
+                foreach (var closedGeneric in openGeneric.ClosedGenerics)
+                {
+                    var closedFullName = closedGeneric.GetFullName(true);
+                    builder.AppendLine($"typeof({closedFullName}),");
+                }
+            }
+
+            // 3. 添加非泛型 SphereEventArgs 类型
+            foreach (var typeInfo in sphereEventArgs)
+            {
+                var fullName = typeInfo.Symbol.GetFullName(true);
                 builder.AppendLine($"typeof({fullName}),");
             }
+            
+            // 4. 添加从开放泛型构造的闭合泛型 SphereEventArgs
+            foreach (var openGeneric in openGenericTypesWithClosures.Where(t => t.IsSphereEventArgs))
+            {
+                foreach (var closedGeneric in openGeneric.ClosedGenerics)
+                {
+                    var closedFullName = closedGeneric.GetFullName(true);
+                    builder.AppendLine($"typeof({closedFullName}),");
+                }
+            }
+
             builder.CloseBrace(semicolon: true);
             builder.EndMethod();
         }
 
         private static void GenerateInitializeMethod(
             SourceCodeBuilder builder,
-            List<INamedTypeSymbol> memoryPackableTypes)
+            List<TypeInfo> normalTypes,  // 非泛型的普通类型
+            List<TypeInfo> openGenericTypesWithClosures)  // 开放泛型（用于获取闭合泛型）
         {
             // 生成实例 Initialize() 方法
             builder.AddXmlComment("Initializes MemoryPack serializers and triggers static constructors of all MemoryPackable types");
+            builder.AddXmlComment("Includes non-generic types and closed generic instantiations for AOT compatibility");
+            builder.AddXmlComment("Open generic definitions (e.g., TestEntity<T>) are NOT registered");
             builder.BeginMethod("public void Initialize()");
 
             // 防止重复初始化
@@ -237,38 +397,73 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AddComment("RuntimeHelpers.RunClassConstructor is supported in Native AOT");
             builder.AppendLine();
 
-            // 生成 try-catch 块来保护初始化过程
-            // builder.AppendLine("try");
-            // builder.OpenBrace();
-
-            // 为每个 MemoryPackable 类型触发静态构造函数
-            foreach (var type in memoryPackableTypes)
+            // 1. 为每个非泛型 MemoryPackable 类型触发静态构造函数
+            foreach (var typeInfo in normalTypes)
             {
-                var fullTypeName = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
-
-                // 使用 RuntimeHelpers.RunClassConstructor 触发静态构造函数
-                builder.AddComment($"Trigger static constructor for {type.Name}");
+                var fullTypeName = typeInfo.Symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+                
+                builder.AddComment($"Non-generic type: {typeInfo.Symbol.Name}");
                 builder.AppendLine($"RuntimeHelpers.RunClassConstructor(typeof({fullTypeName}).TypeHandle);");
             }
+            
+            if (normalTypes.Any())
+            {
+                builder.AppendLine();
+            }
 
-            // builder.CloseBrace();
-            // builder.AppendLine("catch (Exception ex)");
-            // builder.OpenBrace();
-            // builder.AddComment("Log error but don't throw - avoid breaking app startup");
-            // builder.AppendLine("#if FANTASY_NET");
-            // builder.AppendLine("Fantasy.Log.Error($\"Failed to initialize MemoryPack formatters: {ex}\");");
-            // builder.AppendLine("#elif UNITY_EDITOR");
-            // builder.AppendLine("UnityEngine.Debug.LogError($\"Failed to initialize MemoryPack formatters: {ex}\");");
-            // builder.AppendLine("#else");
-            // builder.AppendLine("Console.WriteLine($\"Failed to initialize MemoryPack formatters: {ex}\");");
-            // builder.AppendLine("#endif");
-            // builder.CloseBrace();
+            // 2. 为每个闭合泛型实例触发静态构造函数（关键：不注册开放泛型定义）
+            foreach (var openGeneric in openGenericTypesWithClosures)
+            {
+                if (!openGeneric.ClosedGenerics.Any())
+                    continue;
+                    
+                builder.AddComment($"Closed generic instantiations of {openGeneric.Symbol.Name}");
+                
+                foreach (var closedGeneric in openGeneric.ClosedGenerics)
+                {
+                    var closedFullTypeName = closedGeneric.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+                    builder.AppendLine($"RuntimeHelpers.RunClassConstructor(typeof({closedFullTypeName}).TypeHandle);");
+                }
+                builder.AppendLine();
+            }
 
             // 结束方法
             builder.EndMethod();
         }
 
+        /// <summary>
+        /// 按 ConstructedFrom 对闭合泛型类型进行分组
+        /// 用于后续与开放泛型定义进行匹配
+        /// </summary>
+        private static Dictionary<INamedTypeSymbol, List<INamedTypeSymbol>> GroupTypesByConstructedFrom(
+            IEnumerable<ClosedGenericTypeInfo> closedTypes)
+        {
+            var dict = new Dictionary<INamedTypeSymbol, List<INamedTypeSymbol>>(SymbolEqualityComparer.Default);
+            
+            foreach (var closedType in closedTypes)
+            {
+                var key = closedType.Symbol.ConstructedFrom;
+                if (!dict.TryGetValue(key, out var list))
+                {
+                    list = new List<INamedTypeSymbol>();
+                    dict.Add(key, list);
+                }
+                list.Add(closedType.Symbol);
+            }
+            
+            return dict;
+        }
+
         private class TypeInfo
+        {
+            public INamedTypeSymbol Symbol { get; set; }
+            public bool IsEntity { get; set; }
+            public bool IsSphereEventArgs { get; set; }
+            public bool IsOpenGeneric { get; set; }  // 是否为开放泛型
+            public HashSet<INamedTypeSymbol> ClosedGenerics { get; set; } = new(SymbolEqualityComparer.Default);  // 去重的闭合泛型集合
+        }
+
+        private class ClosedGenericTypeInfo
         {
             public INamedTypeSymbol Symbol { get; set; }
             public bool IsEntity { get; set; }

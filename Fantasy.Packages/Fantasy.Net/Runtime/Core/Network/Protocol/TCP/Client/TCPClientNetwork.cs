@@ -135,7 +135,7 @@ namespace Fantasy.Network.TCP
             });
             _packetParser = PacketParserFactory.CreateClientReadOnlyMemoryPacket(this);
             _remoteEndPoint = NetworkHelper.GetIPEndPoint(remoteAddress);
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _socket = new Socket(_remoteEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             _socket.NoDelay = true;
             _socket.SetSocketBufferToOsLimit();
             _sendArgs = new SocketAsyncEventArgs();
@@ -359,7 +359,7 @@ namespace Fantasy.Network.TCP
                 {
                     if (_socket.SendAsync(_sendArgs))
                     {
-                        break;
+                        return;
                     }
 
                     ReturnMemoryStream(memoryStreamBuffer);

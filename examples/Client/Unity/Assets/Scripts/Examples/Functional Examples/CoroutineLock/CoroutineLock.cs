@@ -50,10 +50,7 @@ public class CoroutineLock : MonoBehaviour
 
     private async FTask StartAsync()
     {
-        // 初始化框架
-        // await Fantasy.Platform.Unity.Entry.Initialize(GetType().Assembly);
-        // 创建一个Scene，这个Scene代表一个客户端的场景，客户端的所有逻辑都可以写这里
-        // 如果有自己的框架，也可以就单纯拿这个Scene做网络通讯也没问题。
+        await Fantasy.Platform.Unity.Entry.Initialize();
         _scene = await Scene.Create(SceneRuntimeMode.MainThread);
         Button1.interactable = false;
         Button2.interactable = true;

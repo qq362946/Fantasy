@@ -158,7 +158,7 @@ namespace Fantasy.Network.KCP
             _socket.Blocking = false;
             _socket.SetSocketBufferToOsLimit();
             _socket.SetSioUdpConnReset();
-            _socket.Bind(new IPEndPoint(IPAddress.Any, 0));
+            _socket.Bind(new IPEndPoint(_remoteAddress.AddressFamily == AddressFamily.InterNetworkV6 ? IPAddress.IPv6Any : IPAddress.Any, 0));
             _kcp = KCPFactory.Create(NetworkTarget, ChannelId, KcpSpanCallback, out var kcpSettings);
             _maxSndWnd = kcpSettings.MaxSendWindowSize;
             

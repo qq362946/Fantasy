@@ -11,6 +11,7 @@ using System;
 using System.Buffers;
 using System.Runtime.CompilerServices;
 using System.Security;
+#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
 
 namespace LightProto
 {
