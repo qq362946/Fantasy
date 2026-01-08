@@ -62,7 +62,7 @@ namespace Fantasy.SourceGenerator.Generators
                                             node is Microsoft.CodeAnalysis.CSharp.Syntax.PropertyDeclarationSyntax,
                     transform: (ctx, _) =>
                     {
-                        ITypeSymbol typeSymbol = null;
+                        ITypeSymbol? typeSymbol = null;
                         
                         // 从字段或属性声明中提取类型
                         if (ctx.Node is Microsoft.CodeAnalysis.CSharp.Syntax.FieldDeclarationSyntax fieldDecl)
