@@ -1054,6 +1054,31 @@ namespace Fantasy.Database
             await GetCollection<T>().Indexes.CreateManyAsync(indexModels);
         }
 
+        /// <summary>
+        /// 创建数据库的索引（加锁）。
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <param name="options"></param>
+        /// <typeparam name="T"></typeparam>
+        public async FTask CreateIndex<T>(object[]? keys, object[]? options) where T : Entity
+        {
+            if (keys == null  || options == null)
+            {
+                return;
+            }
+            
+            var indexModels = new List<CreateIndexModel<T>>();
+
+            for (var i = 0; i < keys.Length; i++)
+            {
+                var indexKeysDefinition = (IndexKeysDefinition<T>)keys[i];
+                var createIndexOptions = (CreateIndexOptions)options[i];
+                indexModels.Add(new CreateIndexModel<T>(indexKeysDefinition, createIndexOptions));
+            }
+
+            await GetCollection<T>().Indexes.CreateManyAsync(indexModels);
+        }
+
         #endregion
 
         #region CreateDB

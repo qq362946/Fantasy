@@ -412,6 +412,18 @@ await database.CreateIndex<Player>(
         .Descending(p => p.Gold)
 );
 
+// 创建唯一索引（需要传入 options，与 keys 一一对应）
+await database.CreateIndex<Player>(
+    keys: new object[]
+    {
+        Builders<Player>.IndexKeys.Ascending(p => p.Account)
+    },
+    options: new object[]
+    {
+        new CreateIndexOptions { Unique = true }
+    }
+);
+
 // 在指定集合上创建索引
 await database.CreateIndex<Player>(
     collection: "players_backup",
