@@ -1,4 +1,8 @@
 using System.Numerics;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+using LightProto;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Fantasy
 {

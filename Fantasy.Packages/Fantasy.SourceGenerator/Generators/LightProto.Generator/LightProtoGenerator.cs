@@ -2001,7 +2001,17 @@ public class LightProtoGenerator : IIncrementalGenerator
     {
         public Compilation Compilation { get; set; } = null!;
         public INamedTypeSymbol Type { get; set; } = null!;
-        public TypeDeclarationSyntax TypeDeclaration { get; set; } = null!;
+        
+        // 存储所有 partial 声明
+        public List<TypeDeclarationSyntax> TypeDeclarations { get; set; } = new();
+        
+        // 为了向后兼容，保留这个属性（返回第一个声明）
+        public TypeDeclarationSyntax TypeDeclaration 
+        { 
+            get => TypeDeclarations.FirstOrDefault()!;
+            set => TypeDeclarations = new List<TypeDeclarationSyntax> { value };
+        }
+        
         public List<ProtoMember> Members { get; set; } = new();
         public ImplicitFields ImplicitFields { get; set; }
         public uint ImplicitFirstTag { get; set; }
@@ -2054,10 +2064,22 @@ public class LightProtoGenerator : IIncrementalGenerator
             protoContractAttr
                 .NamedArguments.FirstOrDefault(arg => arg.Key == "SkipConstructor")
                 .Value.Value?.ToString() == "True";
-        var typeDeclaration = (
-            targetType.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
-            as TypeDeclarationSyntax
-        )!;
+        
+        // 收集所有 partial 声明
+        var typeDeclarations = targetType.DeclaringSyntaxReferences
+            .Select(r => r.GetSyntax() as TypeDeclarationSyntax)
+            .Where(d => d is not null)
+            .Cast<TypeDeclarationSyntax>()
+            .ToList();
+
+        if (typeDeclarations.Count == 0)
+        {
+            // 没有找到任何类型声明，返回 null
+            return null;
+        }
+
+        // 使用第一个声明作为主声明（用于错误报告等）
+        var typeDeclaration = typeDeclarations[0];
 
         var proxyFor = GetProxyFor(targetType.GetAttributes());
 
@@ -2160,11 +2182,11 @@ public class LightProtoGenerator : IIncrementalGenerator
         {
             Compilation = compilation,
             Type = targetType,
-            TypeDeclaration = typeDeclaration,
+            TypeDeclarations = typeDeclarations,
             Members = GetProtoMembers(
                 compilation,
                 targetType,
-                typeDeclaration,
+                typeDeclarations,
                 implicitFields,
                 implicitFirstTag,
                 skipConstructor,
@@ -2183,7 +2205,7 @@ public class LightProtoGenerator : IIncrementalGenerator
     private List<ProtoMember> GetProtoMembers(
         Compilation compilation,
         INamedTypeSymbol targetType,
-        TypeDeclarationSyntax typeDeclaration,
+        List<TypeDeclarationSyntax> typeDeclarations,
         ImplicitFields implicitFields,
         uint firstImplicitTag,
         bool skipConstructor,
@@ -2191,8 +2213,17 @@ public class LightProtoGenerator : IIncrementalGenerator
     )
     {
         var members = new List<ProtoMember>();
-        var semanticModel = compilation.GetSemanticModel(typeDeclaration.SyntaxTree);
-        var emitter = new ExpressionEmitter(semanticModel);
+        
+        // 为所有语法树创建 SemanticModel 映射
+        var semanticModelCache = new Dictionary<SyntaxTree, SemanticModel>();
+        foreach (var decl in typeDeclarations)
+        {
+            if (!semanticModelCache.ContainsKey(decl.SyntaxTree))
+            {
+                semanticModelCache[decl.SyntaxTree] = compilation.GetSemanticModel(decl.SyntaxTree);
+            }
+        }
+        
         foreach (var member in targetType.GetMembers())
         {
             if (member.IsStatic)
@@ -2306,8 +2337,19 @@ public class LightProtoGenerator : IIncrementalGenerator
                     .OfType<PropertyDeclarationSyntax>()
                     .FirstOrDefault();
                 memberDeclarationSyntax = propertyDeclarationSyntax;
-                var initializerSyntax = propertyDeclarationSyntax?.Initializer?.Value;
-                initializer = initializerSyntax is null ? null : emitter.Emit(initializerSyntax);
+                
+                // 使用正确的 SemanticModel
+                initializer = null;
+                if (propertyDeclarationSyntax?.Initializer?.Value is { } initializerSyntax)
+                {
+                    var syntaxTree = propertyDeclarationSyntax.SyntaxTree;
+                    if (semanticModelCache.TryGetValue(syntaxTree, out var semanticModel))
+                    {
+                        var emitter = new ExpressionEmitter(semanticModel);
+                        initializer = emitter.Emit(initializerSyntax);
+                    }
+                }
+                
                 nullableAnnotation = property.NullableAnnotation;
                 memberType = property.Type;
                 isReadOnly = property.IsReadOnly;
@@ -2330,10 +2372,23 @@ public class LightProtoGenerator : IIncrementalGenerator
                     .FirstOrDefault();
 
                 memberDeclarationSyntax = fieldDeclarationSyntax;
+                
+                // 使用正确的 SemanticModel
+                initializer = null;
                 var initializerSyntax = fieldDeclarationSyntax
                     ?.Declaration.Variables.FirstOrDefault()
                     ?.Initializer?.Value;
-                initializer = initializerSyntax is null ? null : emitter.Emit(initializerSyntax);
+                
+                if (initializerSyntax is not null && fieldDeclarationSyntax is not null)
+                {
+                    var syntaxTree = fieldDeclarationSyntax.SyntaxTree;
+                    if (semanticModelCache.TryGetValue(syntaxTree, out var semanticModel))
+                    {
+                        var emitter = new ExpressionEmitter(semanticModel);
+                        initializer = emitter.Emit(initializerSyntax);
+                    }
+                }
+                
                 nullableAnnotation = field.NullableAnnotation;
                 memberType = field.Type;
                 isReadOnly = field.IsReadOnly;

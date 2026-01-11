@@ -222,6 +222,11 @@ public partial interface IDatabase
     FTask CreateIndex<T>(params object[] keys) where T : Entity;
 
     /// <summary>
+    /// 在默认集合中创建索引，以提高类型 <typeparamref name="T"/> 实体的查询性能。
+    /// </summary>
+    FTask CreateIndex<T>(object[] keys, object[] options) where T : Entity;
+
+    /// <summary>
     /// 创建指定类型 <typeparamref name="T"/> 的数据库，用于存储实体。
     /// </summary>
     FTask CreateDB<T>() where T : Entity;

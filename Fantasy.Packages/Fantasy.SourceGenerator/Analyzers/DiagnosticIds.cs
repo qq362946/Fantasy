@@ -47,6 +47,12 @@ namespace Fantasy.SourceGenerator.Analyzers
         /// </summary>
         public const string MessageMemoryPackableEntityField = "FANTASY007";
 
-        // 预留 FANTASY008-FANTASY010 供未来使用
+        // FANTASY008 - SendCallInterfaceTypeAnalyzer
+        /// <summary>
+        /// Send&lt;T&gt; 和 Call&lt;T&gt; 方法不应传递接口类型作为泛型参数
+        /// </summary>
+        public const string SendCallInterfaceType = "FANTASY008";
+
+        // 预留 FANTASY009-FANTASY010 供未来使用
     }
 }
