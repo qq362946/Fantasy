@@ -159,7 +159,7 @@ public sealed class SessionRoamingComponent : Entity
     {
         return await Link(targetSceneConfig.Address, session.RuntimeId, roamingType, args);
     }
-
+    
     /// <summary>
     /// 建立漫游关系。
     /// </summary>
@@ -182,6 +182,7 @@ public sealed class SessionRoamingComponent : Entity
                 RoamingType = roamingType,
                 ForwardSessionAddress = forwardSessionAddress,
                 SceneAddress = Scene.RuntimeId,
+                LinkType = 0, 
                 Args = args
             });
         
@@ -198,6 +199,65 @@ public sealed class SessionRoamingComponent : Entity
         roaming.RoamingType = roamingType;
         roaming.RoamingLock = _roamingLock;
         _roaming.Add(roamingType, roaming);
+        return 0;
+    }
+
+
+    /// <summary>
+    /// 重新连接到目标服务器。用于目标服务器重启或迁移后重新建立连接。
+    /// </summary>
+    /// <param name="session">需要转发的Session</param>
+    /// <param name="targetSceneConfig">要建立漫游协议的目标Scene的SceneConfig</param>
+    /// <param name="roamingType">要重新连接的漫游类型</param>
+    /// <param name="args">要传递的Entity类型参数</param>
+    /// <returns></returns>
+    public async FTask<uint> ReLink(Session session, SceneConfig targetSceneConfig, int roamingType, Entity? args = null)
+    {
+        return await ReLink(targetSceneConfig.Address, session.RuntimeId, roamingType, args);
+    }
+
+    /// <summary>
+    /// 重新连接到目标服务器。用于目标服务器重启或迁移后重新建立连接。
+    /// </summary>
+    /// <param name="targetSceneAddress">要建立漫游协议的目标Scene的Address。</param>
+    /// <param name="forwardSessionAddress">需要转发的Session的Address。</param>
+    /// <param name="roamingType">要重新连接的漫游类型</param>
+    /// <param name="args">要传递的Entity类型参数</param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
+    public async FTask<uint> ReLink(long targetSceneAddress, long forwardSessionAddress, int roamingType, Entity? args = null)
+    {
+        if (roamingType == 0)
+        {
+            throw new ArgumentException("roamingType cannot be 0.", nameof(roamingType));
+        }
+        
+        if (!_roaming.TryGetValue(roamingType, out var roaming))
+        {
+            return InnerErrorCode.ErrNotFoundRoaming;
+        }
+        
+        roaming.TerminusId = 0;
+        roaming.TargetSceneAddress = targetSceneAddress;
+        roaming.ForwardSessionAddress = forwardSessionAddress;
+        
+        var response = (I_LinkRoamingResponse)await Scene.NetworkMessagingComponent.Call(targetSceneAddress,
+            new I_LinkRoamingRequest()
+            {
+                RoamingId = Id,
+                RoamingType = roamingType,
+                ForwardSessionAddress = forwardSessionAddress,
+                SceneAddress = Scene.RuntimeId,
+                LinkType = 1, 
+                Args = args
+            });
+        
+        if (response.ErrorCode != 0)
+        {
+            return response.ErrorCode;
+        }
+        
+        roaming.TerminusId = response.TerminusId;
         return 0;
     }
 
@@ -233,9 +293,9 @@ public sealed class SessionRoamingComponent : Entity
     /// <summary>
     /// 断开当前的漫游关系。
     /// <param name="removeRoamingType">要移除的RoamingType，默认不设置是移除所有漫游。</param>
-    /// <param name="isDisponse">如果当前没有任何连接的Roaming就移除这个组件</param>
+    /// <param name="disposeIfEmpty">如果断开后没有任何漫游连接，是否销毁整个组件</param>
     /// </summary>
-    public async FTask UnLink(int removeRoamingType, bool isDisponse)
+    public async FTask UnLink(int removeRoamingType, bool disposeIfEmpty)
     {
         if (removeRoamingType == 0)
         {
@@ -256,7 +316,7 @@ public sealed class SessionRoamingComponent : Entity
 
         roaming.Dispose();
         
-        if(isDisponse && _roaming.Count == 0)
+        if(disposeIfEmpty && _roaming.Count == 0)
         {
             Dispose();
         }
