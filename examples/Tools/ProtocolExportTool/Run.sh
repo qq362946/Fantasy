@@ -86,7 +86,7 @@ check_dotnet() {
 ##############################################
 
 echo "=========================================="
-echo "Fantasy Protocol Export Tool 2025.2.1419"
+echo "Fantasy Protocol Export Tool 2025.2.1422"
 echo "=========================================="
 echo ""
 

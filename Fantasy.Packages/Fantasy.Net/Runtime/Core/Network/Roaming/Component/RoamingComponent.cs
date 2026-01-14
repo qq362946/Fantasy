@@ -333,7 +333,7 @@ public static class RoamingHelper
     /// 获取指定的漫游组件
     /// </summary>
     /// <param name="scene"></param>
-    /// <param name="roamingId">自定义roamingId</param>
+    /// <param name="roamingId">自定义roamingId</param>zg
     /// <returns></returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static SessionRoamingComponent GetRoaming(Scene scene, long roamingId)

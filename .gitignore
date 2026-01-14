@@ -34,3 +34,4 @@ Packages.Unity/**/*.meta
 !Tools/**/.vscode
 examples/**/Unity/.vscode
 CLAUDE.md
+.claude

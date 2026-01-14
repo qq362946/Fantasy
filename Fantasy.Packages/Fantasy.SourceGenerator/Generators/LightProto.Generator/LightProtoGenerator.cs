@@ -1025,6 +1025,7 @@ public class LightProtoGenerator : IIncrementalGenerator
         name = memberType.SpecialType switch
         {
             SpecialType.System_Boolean => "Bool",
+            SpecialType.System_Byte => "Byte",
             SpecialType.System_Int32 => format == DataFormat.FixedSize ? "SFixed32"
             : format == DataFormat.ZigZag ? "SInt32"
             : "Int32",

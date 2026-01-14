@@ -17,7 +17,7 @@ Roaming（漫游）让客户端可以**通过 Gate 服务器自动路由到后�
 ```
 1. 定义协议（带 RoamingType）
    ↓
-2. 客户端登录时建立漫游路由（一次性）
+2. 客户端登录或重连时建立漫游路由
    ↓
 3. 客户端发送漫游消息
    ↓
@@ -171,7 +171,7 @@ message Map2G_GetPlayerResponse // IRoamingResponse
 
 ## 步骤 2：建立漫游路由
 
-建立漫游路由后，客户端可以通过 Gate 自动与后端服务器（如 Chat、Map）通信。这个操作**在客户端登录后执行一次**。
+建立漫游路由后，客户端可以通过 Gate 自动与后端服务器（如 Chat、Map）通信。这个操作通常在客户端首次登录时执行，断线重连时使用 ReLink 重新建立路由。
 
 ### Gate 服务器：创建 Roaming 并链接到后端服务器
 
@@ -184,8 +184,11 @@ SessionRoamingComponent session.CreateRoaming(long roamingId, bool isAutoDispose
 // 2. 创建 Roaming 组件（详细版本，返回状态信息）
 CreateRoamingResult session.TryCreateRoaming(long roamingId, bool isAutoDispose, int delayRemove);
 
-// 3. 链接到后端服务器
+// 3. 链接到后端服务器（首次连接）
 uint roaming.Link(Session session, SceneConfig sceneConfig, int roamingType, Entity? args = null);
+
+// 4. 重新链接到后端服务器（断线重连时使用）
+uint roaming.ReLink(Session session, SceneConfig sceneConfig, int roamingType, Entity? args = null);
 ```
 
 **CreateRoamingResult 结构体：**
@@ -203,7 +206,7 @@ public readonly struct CreateRoamingResult
 public enum CreateRoamingStatus
 {
     NewCreated,              // 新创建的漫游组件
-    AlreadyExists,           // 使用已存在的漫游组件
+    AlreadyExists,           // 使用已存在的漫游组件（断线重连场景）
     SessionAlreadyHasRoaming // 错误：当前Session已经创建了不同roamingId的漫游组件
 }
 ```
@@ -418,10 +421,10 @@ loginData.Dispose();
 | 创建失败 | 调用 `args.Dispose()` 销毁原始对象 | 调用 `Args?.Dispose()` 销毁副本 | 即使 `LinkTerminusEntity()` 失败，也要销毁参数 |
 | 不需要参数的 RoamingType | 调用 `args.Dispose()` 销毁原始对象 | 调用 `Args?.Dispose()` 销毁副本 | 防止误传参数导致内存泄露 |
 
-**完整示例（使用 TryCreateRoaming）：**
+**完整示例（使用 TryCreateRoaming 处理断线重连）：**
 
 ```csharp
-// Gate 服务器：处理客户端的登录请求 - 详细版本
+// Gate 服务器：处理客户端的登录/重连请求 - 支持断线重连
 public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginResponse>
 {
     protected override async FTask Run(
@@ -434,54 +437,81 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
         var result = await session.TryCreateRoaming(
             roamingId: request.PlayerId,
             isAutoDispose: true,
-            delayRemove: 1000
+            delayRemove: 180000  // 3分钟延迟删除，支持断线重连
         );
 
-        // 根据状态进行不同处理
+        var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
+
+        // 步骤 2：根据状态进行不同处理
         switch (result.Status)
         {
             case CreateRoamingStatus.NewCreated:
-                Log.Info($"✅ 为玩家 {request.PlayerId} 创建新的漫游组件");
+            {
+                // 首次登录：使用 Link 建立新的漫游连接
+                var errorCode = await result.Roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+                
+                if (errorCode != 0)
+                {
+                    response.ErrorCode = errorCode;
+                    return;
+                }
+                
+                Log.Info($"✅ 玩家 {request.PlayerId} 首次登录，建立漫游路由");
                 break;
-
+            }
             case CreateRoamingStatus.AlreadyExists:
-                Log.Info($"⚠️ 玩家 {request.PlayerId} 的漫游组件已存在，复用现有组件");
+            {
+                // 断线重连：漫游组件已存在，使用 ReLink 重新建立连接
+                var errorCode = await result.Roaming.ReLink(session, chatConfig, RoamingType.ChatRoamingType);
+                
+                if (errorCode != 0)
+                {
+                    response.ErrorCode = errorCode;
+                    return;
+                }
+                
+                Log.Info($"✅ 玩家 {request.PlayerId} 断线重连成功");
                 break;
-
+            }
             case CreateRoamingStatus.SessionAlreadyHasRoaming:
+            {
+                // 错误：当前 Session 已绑定其他玩家
                 Log.Error($"❌ Session 已经创建了其他 roamingId 的漫游组件");
                 response.ErrorCode = ErrorCode.SessionAlreadyHasRoaming;
                 return;
+            }
         }
 
-        // 步骤 2：链接到 Chat 服务器
-        var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
-        var errorCode = await result.Roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
-
-        if (errorCode != 0)
-        {
-            response.ErrorCode = errorCode;
-            return;
-        }
-
-        Log.Info($"✅ 为玩家 {request.PlayerId} 建立到Chat的漫游路由");
         await FTask.CompletedTask;
     }
 }
 ```
+
+**Link 与 ReLink 的区别：**
+
+| 方法 | 适用场景 | 后端服务器行为 | OnCreateTerminus.Type |
+|------|---------|---------------|----------------------|
+| `Link()` | 首次登录 | 创建新的 Terminus | `CreateTerminusType.Link` |
+| `ReLink()` | 断线重连 | 复用或更新现有 Terminus | `CreateTerminusType.ReLink` |
+
+**ReLink 的核心作用：**
+
+1. **重置转发地址**：更新 Terminus 的 `ForwardSessionAddress` 为新 Session 的地址
+2. **恢复消息转发**：重置 `StopForwarding` 标志，恢复消息发送能力
+3. **触发重连事件**：发布 `OnCreateTerminus` 事件（Type = ReLink），业务层可执行状态恢复逻辑
 
 **两种方法的选择：**
 
 | 方法 | 适用场景 | 优点 | 缺点 |
 |------|---------|------|------|
 | `CreateRoaming()` | 简单场景，不需要详细状态 | 代码简洁，直接获取组件 | 无法区分新创建还是已存在 |
-| `TryCreateRoaming()` | 需要详细状态判断的场景 | 可以根据不同状态做不同处理 | 代码稍复杂 |
+| `TryCreateRoaming()` | 需要详细状态判断的场景（如断线重连） | 可以根据不同状态做不同处理 | 代码稍复杂 |
 
 ---
 
 ### 后端服务器：监听 OnCreateTerminus 事件并创建业务实体
 
-当 Gate 调用 `roaming.Link()` 时，框架会自动在后端服务器（如 Chat）上创建 `Terminus`，并触发 `OnCreateTerminus` 事件。
+当 Gate 调用 `roaming.Link()` 或 `roaming.ReLink()` 时，框架会自动在后端服务器（如 Chat）上创建或更新 `Terminus`，并触发 `OnCreateTerminus` 事件。
 
 **OnCreateTerminus 事件参数：**
 
@@ -499,11 +529,25 @@ public struct OnCreateTerminus
     public readonly Terminus Terminus;
 
     /// <summary>
-    /// 获取传递过来的参数（来自 Link 方法的 args 参数）
+    /// 获取传递过来的参数（来自 Link/ReLink 方法的 args 参数）
     /// </summary>
     public readonly Entity? Args;
+
+    /// <summary>
+    /// 获取漫游终端的创建类型。
+    /// 用于区分是首次创建（Link）还是重新连接（ReLink）。
+    /// </summary>
+    public readonly CreateTerminusType Type;
 }
 ```
+
+**CreateTerminusType 枚举说明：**
+
+| 枚举值 | 说明 |
+|--------|------|
+| `None` | 未指定类型 |
+| `Link` | 首次创建漫游终端（客户端首次登录时） |
+| `ReLink` | 重新连接漫游终端（断线重连或目标服务器重启后） |
 
 **核心 API：**
 
@@ -520,12 +564,13 @@ FTask terminus.LinkTerminusEntity(Entity entity, bool autoDispose);
 - `LinkTerminusEntity()` 是**可选的**，不调用也可以正常使用 Roaming
 - 如果不调用 `LinkTerminusEntity()`，漫游消息处理器接收到的实体就是 `Terminus` 本身
 - 如果调用了 `LinkTerminusEntity()`，漫游消息处理器接收到的实体就是关联的业务实体（如 `ChatPlayer`）
-- `OnCreateTerminus.Args` 可以接收 Gate 服务器 `Link()` 方法传递的自定义参数
+- `OnCreateTerminus.Args` 可以接收 Gate 服务器 `Link()` 或 `ReLink()` 方法传递的自定义参数
+- **`OnCreateTerminus.Type` 可用于区分是首次创建还是断线重连**，业务层可根据此参数执行不同的初始化逻辑
 
-**完整示例：**
+**完整示例（区分 Link 和 ReLink）：**
 
 ```csharp
-// Chat 服务器：监听 OnCreateTerminus 事件
+// Chat 服务器：监听 OnCreateTerminus 事件，区分首次创建和断线重连
 public sealed class OnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
 {
     protected override async FTask Handler(OnCreateTerminus self)
@@ -534,20 +579,63 @@ public sealed class OnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
         {
             case RoamingType.ChatRoamingType:
             {
-                // 方式 1：创建新实体并关联
-                var chatPlayer = await self.Terminus.LinkTerminusEntity<ChatPlayer>(autoDispose: true);
-
-                if (chatPlayer == null)
+                // 根据 Type 区分首次创建和断线重连
+                switch (self.Type)
                 {
-                    Log.Error("创建 ChatPlayer 失败");
-                    return;
+                    case CreateTerminusType.Link:
+                    {
+                        // 首次连接：创建新的玩家实体
+                        var chatPlayer = await self.Terminus.LinkTerminusEntity<ChatPlayer>(autoDispose: true);
+                        
+                        if (chatPlayer == null)
+                        {
+                            Log.Error("创建 ChatPlayer 失败");
+                            self.Args?.Dispose();
+                            return;
+                        }
+                        
+                        // 初始化玩家数据
+                        chatPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
+                        chatPlayer.LoadData();
+                        
+                        Log.Info($"✅ Chat 服务器首次创建 ChatPlayer，PlayerId={chatPlayer.PlayerId}");
+                        break;
+                    }
+                    case CreateTerminusType.ReLink:
+                    {
+                        // 断线重连：恢复玩家状态
+                        // 注意：如果之前已经 LinkTerminusEntity，重连时 TerminusEntity 仍然存在
+                        var chatPlayer = self.Terminus.TerminusEntity as ChatPlayer;
+                        
+                        if (chatPlayer != null)
+                        {
+                            // 玩家实体仍在，直接恢复在线状态
+                            chatPlayer.IsOnline = true;
+                            Log.Info($"✅ ChatPlayer {chatPlayer.PlayerId} 断线重连成功，恢复在线状态");
+                        }
+                        else
+                        {
+                            // 玩家实体已销毁（可能超时被清理），需要重新创建并从数据库加载
+                            chatPlayer = await self.Terminus.LinkTerminusEntity<ChatPlayer>(autoDispose: true);
+                            
+                            if (chatPlayer == null)
+                            {
+                                Log.Error("ReLink 时创建 ChatPlayer 失败");
+                                self.Args?.Dispose();
+                                return;
+                            }
+                            
+                            chatPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
+                            await chatPlayer.LoadFromDatabase();
+                            
+                            Log.Info($"✅ ChatPlayer {chatPlayer.PlayerId} 断线重连成功，从数据库恢复数据");
+                        }
+                        break;
+                    }
                 }
-
-                // 初始化 ChatPlayer
-                chatPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
-                chatPlayer.LoadData();
-
-                Log.Info($"✅ Chat 服务器创建了 ChatPlayer，PlayerId={chatPlayer.PlayerId}");
+                
+                // ⚠️ 无论 Link 还是 ReLink，都要销毁 Args 参数
+                self.Args?.Dispose();
                 break;
             }
             case RoamingType.MapRoamingType:
@@ -558,6 +646,9 @@ public sealed class OnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
                 await self.Terminus.LinkTerminusEntity(mapPlayer, autoDispose: true);
 
                 Log.Info($"✅ Map 服务器创建了 MapPlayer，PlayerId={mapPlayer.PlayerId}");
+                
+                // ⚠️ 销毁 Args 参数
+                self.Args?.Dispose();
                 break;
             }
         }

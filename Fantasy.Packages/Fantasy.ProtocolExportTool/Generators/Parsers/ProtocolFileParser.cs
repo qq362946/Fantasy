@@ -392,7 +392,11 @@ public sealed partial class ProtocolFileParser(string filePath)
         {
             field = ParseRepeatedField(line, lineNumber, FieldCollectionType.Repeated, "repeated");
         }
-        else
+        else if (line.StartsWith("bytes"))
+        {
+            field = ParseBytesField(line, lineNumber);
+        }
+        else 
         {
             field = ParseRegularField(line, lineNumber);
         }
@@ -427,6 +431,35 @@ public sealed partial class ProtocolFileParser(string filePath)
             Name = match.Groups[2].Value,
             FieldNumber = int.Parse(match.Groups[3].Value),
             CollectionType = collectionType,
+            SourceLineNumber = lineNumber
+        };
+    }
+
+    /// <summary>
+    /// 解析 bytes 字段 (bytes name = number)
+    /// </summary>
+    /// <param name="line"></param>
+    /// <param name="lineNumber"></param>
+    /// <returns></returns>
+    private FieldDefinition? ParseBytesField(string line, int lineNumber)
+    {
+        // 格式: bytes Data = 1;
+        // var content = line.Substring("bytes".Length).Trim();
+        var match = FieldRegex().Match(line);
+        
+        if (!match.Success)
+        {
+            _errors.Add($"[red]  {filePath} line {lineNumber}: Invalid bytes field format: {Markup.Escape(line)}[/]");
+            return null;
+        }
+
+        // bytes 本质上是 byte 的数组
+        return new FieldDefinition
+        {
+            Type = "byte", // bytes → byte
+            Name = match.Groups[2].Value, // 但这里匹配的是 name，不是 type！
+            FieldNumber = int.Parse(match.Groups[3].Value),
+            CollectionType = FieldCollectionType.RepeatedArray,
             SourceLineNumber = lineNumber
         };
     }

@@ -25,10 +25,12 @@ message C2G_TestMessage // IMessage
 message C2G_TestRequest // IRequest,G2C_TestResponse
 {
 	string Tag = 1;
+	byte Data = 2;
 }
 message G2C_TestResponse // IResponse
 {
 	string Tag = 1;
+	bytes Data = 2;
 }
 message C2G_TestRequestPushMessage // IMessage
 {

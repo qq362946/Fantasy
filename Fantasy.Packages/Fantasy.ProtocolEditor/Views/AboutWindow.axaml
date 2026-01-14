@@ -49,7 +49,7 @@
                               Foreground="#FFFFFF"
                               HorizontalAlignment="Center"/>
 
-                    <TextBlock Text="Version 2025.2.1419"
+                    <TextBlock Text="Version 2025.2.1422"
                               FontSize="14"
                               Foreground="#858585"
                               HorizontalAlignment="Center"/>

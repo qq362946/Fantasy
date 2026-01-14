@@ -113,7 +113,7 @@ public sealed partial class Terminus : Entity
         }
         
         IsDisposeTerminus = true;
-        Scene.TerminusComponent.RemoveTerminus(TerminusId, false);
+        Scene.TerminusComponent.RemoveTerminus(Id, false);
 
         TerminusId = 0;
         RoamingType = 0;

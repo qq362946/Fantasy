@@ -1,4 +1,4 @@
-﻿#region Copyright notice and license
+#region Copyright notice and license
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
 //
@@ -165,6 +165,12 @@ namespace LightProto
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public uint ReadUInt32() => ParsingPrimitives.ParseRawVarint32(ref buffer, ref state);
+
+        /// <summary>
+        /// Reads a byte field value from the input.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public byte ReadByte() => (byte)ParsingPrimitives.ParseRawVarint32(ref buffer, ref state);
 
         /// <summary>
         /// Reads an enum field value from the input.

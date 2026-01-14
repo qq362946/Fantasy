@@ -128,6 +128,16 @@ namespace LightProto
 
         /// <summary>
         /// Computes the number of bytes that would be needed to encode a
+        /// byte field, including the tag.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int ComputeByteSize(byte value)
+        {
+            return ComputeUInt32Size(value);
+        }
+
+        /// <summary>
+        /// Computes the number of bytes that would be needed to encode a
         /// string field, including the tag.
         /// </summary>
         [System.Runtime.CompilerServices.MethodImpl(

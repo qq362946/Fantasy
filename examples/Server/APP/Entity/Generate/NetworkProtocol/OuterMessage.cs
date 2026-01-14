@@ -196,6 +196,7 @@ namespace Fantasy
         {
             if (!IsPool()) return; 
             Tag = default;
+            Data = default;
             MessageObjectPool<C2G_TestRequest>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.C2G_TestRequest; } 
@@ -203,6 +204,8 @@ namespace Fantasy
         public G2C_TestResponse ResponseType { get; set; }
         [ProtoMember(1)]
         public string Tag { get; set; }
+        [ProtoMember(2)]
+        public byte Data { get; set; }
     }
     [Serializable]
     [ProtoContract]
@@ -240,6 +243,7 @@ namespace Fantasy
             if (!IsPool()) return; 
             ErrorCode = 0;
             Tag = default;
+            Data = null;
             MessageObjectPool<G2C_TestResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_TestResponse; } 
@@ -247,6 +251,8 @@ namespace Fantasy
         public uint ErrorCode { get; set; }
         [ProtoMember(2)]
         public string Tag { get; set; }
+        [ProtoMember(3)]
+        public byte[] Data { get; set; }
     }
     [Serializable]
     [ProtoContract]

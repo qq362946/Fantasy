@@ -51,10 +51,11 @@ namespace Fantasy
 			return (G2C_TestResponse)await session.Call(C2G_TestRequest_request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static async FTask<G2C_TestResponse> C2G_TestRequest(this Session session, string tag)
+		public static async FTask<G2C_TestResponse> C2G_TestRequest(this Session session, string tag, byte data)
 		{
 			using var C2G_TestRequest_request = Fantasy.C2G_TestRequest.Create();
 			C2G_TestRequest_request.Tag = tag;
+			C2G_TestRequest_request.Data = data;
 			return (G2C_TestResponse)await session.Call(C2G_TestRequest_request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

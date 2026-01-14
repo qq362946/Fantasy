@@ -1,7 +1,7 @@
 ﻿using System.CommandLine;
 using Fantasy.ProtocolExportTool.Commands;
 
-var rootCommand = new RootCommand("Fantasy 网络协议导出工具 2025.2.1414")
+var rootCommand = new RootCommand("Fantasy 网络协议导出工具 2025.2.1422")
 {
     new ProtocolExportCommand()
 };

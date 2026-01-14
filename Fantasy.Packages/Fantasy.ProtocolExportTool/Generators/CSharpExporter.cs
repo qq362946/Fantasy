@@ -664,6 +664,10 @@ public sealed class CSharpExporter(
             {
                 return "byte";
             }
+            case "bytes":
+            {
+                return "byte[]";
+            }
             default:
             {
                 // 无法识别的类型，默认就按照定义的类型来输出

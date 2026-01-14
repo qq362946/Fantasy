@@ -67,9 +67,9 @@ public class CompletionService
         { "IAddressableResponse", "可寻址响应 - IAddressableRequest的回应\n所在网络: Outer & Inner \n作用对象: 特定实体\n定义规范: // IAddressableResponse" },
 
         // ===== CustomRoute 系列 =====
-        { "ICustomRouteMessage", "自定义路由消息 - 通过RouteType自定义路由逻辑的单向消息\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // ICustomRouteMessage,RouteType" },
-        { "ICustomRouteRequest", "自定义路由请求 - 通过RouteType自定义路由逻辑的请求\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // ICustomRouteRequest,ResponseTypeName,RouteType" },
-        { "ICustomRouteResponse", "自定义路由响应 - ICustomRouteRequest的回应\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // ICustomRouteResponse" },
+        { "ICustomRouteMessage", "自定义路由转发消息 - 最基础的转发消息的实现，需要自己管理注册\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // ICustomRouteMessage,RouteType" },
+        { "ICustomRouteRequest", "自定义路由转发请求 - 最基础的转发消息的实现，需要自己管理注册\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // ICustomRouteRequest,ResponseTypeName,RouteType" },
+        { "ICustomRouteResponse", "自定义路由转发响应 - ICustomRouteRequest的回应\n所在网络: Inner \n作用对象: 特定实体\n定义规范: // ICustomRouteResponse" },
 
         // ===== Roaming 系列 =====
         { "IRoamingMessage", "自动漫游消息 - 支持Gate服务器自动寻址的单向消息\n（新版推荐，IAddressableMessage的自动化升级版本）\n所在网络: Outer & Inner \n作用对象: 特定实体\n定义规范: // IRoamingMessage,RoamingType" },

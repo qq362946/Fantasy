@@ -425,7 +425,14 @@ namespace Fantasy.InnerMessage
         public long ForwardSessionAddress { get; set; }
         [MemoryPackOrder(4)]
         public long SceneAddress { get; set; }
+        /// <summary>
+        /// Link类型
+        /// 0 为创建 Link
+        /// 1:重连 Link
+        /// </summary>
         [MemoryPackOrder(5)]
+        public int LinkType { get; set; } 
+        [MemoryPackOrder(6)]
         public Entity Args { get; set; }
     }
     [MemoryPackable]

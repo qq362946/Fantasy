@@ -1,4 +1,4 @@
-﻿#region Copyright notice and license
+#region Copyright notice and license
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
 //
@@ -137,6 +137,13 @@ namespace LightProto
         /// </summary>
         /// <param name="value">The value to write</param>
         public void WriteUInt32(uint value) =>
+            WritingPrimitives.WriteUInt32(ref buffer, ref state, value);
+
+        /// <summary>
+        /// Writes a byte value, without a tag.
+        /// </summary>
+        /// <param name="value">The value to write</param>
+        public void WriteByte(byte value) =>
             WritingPrimitives.WriteUInt32(ref buffer, ref state, value);
 
         /// <summary>
