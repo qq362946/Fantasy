@@ -18,7 +18,7 @@ public struct ParseResult
     public HashSet<string> Namespaces { get; init; } = new();
     public List<EnumDefinition> Enums { get; init; } = new();
     public Dictionary<string, MessageDefinition> Messages { get; init; } = new();
-    
+
     public ParseResult(HashSet<string> namespaces, Dictionary<string, MessageDefinition> messages, List<EnumDefinition> enums)
     {
         Namespaces = namespaces;
@@ -42,23 +42,23 @@ public sealed partial class ProtocolFileParser(string filePath)
     private int _currentKeyIndex = 1;
     private readonly List<string> _pendingComments = new();
     private readonly List<string> _defineConstants = new();
-    
+
     /// <summary>
-    /// 字段解析正则表达式: type name = number, 支持中日韩等非英文字符
+    /// 字段解析正则表达式: type name = number, 支持中日韩等非英文字符, 支持C#的可空符号:?
     /// </summary>
-    [GeneratedRegex(@"^\s*([\p{L}_][\p{L}\p{N}_]*)\s+([\p{L}_][\p{L}\p{N}_]*)\s*=\s*(\d+)\s*;$")]
+    [GeneratedRegex(@"^\s*([\p{L}_][\p{L}\p{N}_]*\??)\s+([\p{L}_][\p{L}\p{N}_]*)\s*=\s*(\d+)\s*;$")]
     private static partial Regex FieldRegex();
 
     /// <summary>
-    /// 枚举值解析正则表达式: Name = Value 或 Name, 支持中日韩等非英文字符
+    /// 枚举值解析正则表达式: Name = Value 或 Name, 支持中日韩等非英文字符, 支持C#的可空符号:?
     /// </summary>
-    [GeneratedRegex(@"^\s*([\p{L}_][\p{L}\p{N}_]*)(?:\s*=\s*(\d+))?\s*$")]
+    [GeneratedRegex(@"^\s*([\p{L}_][\p{L}\p{N}_]*\??)(?:\s*=\s*(\d+))?\s*$")]
     private static partial Regex EnumValueRegex();
 
     /// <summary>
-    /// Map 字段名称和编号解析正则表达式: name = number, 支持中日韩等非英文字符
+    /// Map 字段名称和编号解析正则表达式: name = number, 支持中日韩等非英文字符, 支持C#的可空符号:?
     /// </summary>
-    [GeneratedRegex(@"^\s*([\p{L}_][\p{L}\p{N}_]*)\s*=\s*(\d+)\s*;$")]
+    [GeneratedRegex(@"^\s*([\p{L}_][\p{L}\p{N}_]*\??)\s*=\s*(\d+)\s*;$")]
     private static partial Regex MapFieldRegex();
 
     /// <summary>
@@ -69,7 +69,7 @@ public sealed partial class ProtocolFileParser(string filePath)
         var namespaces = new HashSet<string>();
         var enums = new List<EnumDefinition>();
         var messages = new Dictionary<string, MessageDefinition>();
-        
+
         for (var i = 0; i < lines.Length; i++)
         {
             var line = lines[i].Trim();
@@ -266,77 +266,77 @@ public sealed partial class ProtocolFileParser(string filePath)
             {
                 return message;
             }
-            
+
             message.InterfaceType = parameters[0];
 
             switch (parameters.Length)
             {
                 case 1:
-                {
-                    if (message.InterfaceType.Contains("IResponse") ||
-                        message.InterfaceType.Contains("IAddressableResponse") ||
-                        message.InterfaceType.Contains("IAddressResponse"))
                     {
-                        message.MessageType = MessageType.Response;
+                        if (message.InterfaceType.Contains("IResponse") ||
+                            message.InterfaceType.Contains("IAddressableResponse") ||
+                            message.InterfaceType.Contains("IAddressResponse"))
+                        {
+                            message.MessageType = MessageType.Response;
+                        }
+                        else if (message.InterfaceType.Contains("ICustomRouteResponse"))
+                        {
+                            message.MessageType = MessageType.RouteTypeResponse;
+                        }
+                        else if (message.InterfaceType.Contains("IRoamingResponse"))
+                        {
+                            message.MessageType = MessageType.RoamingResponse;
+                        }
+                        else if (message.InterfaceType.Contains("IMessage") ||
+                                message.InterfaceType.Contains("IAddressableMessage") ||
+                                message.InterfaceType.Contains("IAddressMessage"))
+                        {
+                            message.MessageType = MessageType.Message;
+                        }
+                        break;
                     }
-                    else if (message.InterfaceType.Contains("ICustomRouteResponse"))
-                    {
-                        message.MessageType = MessageType.RouteTypeResponse;
-                    }
-                    else if (message.InterfaceType.Contains("IRoamingResponse"))
-                    {
-                        message.MessageType = MessageType.RoamingResponse;
-                    }
-                    else if(message.InterfaceType.Contains("IMessage") || 
-                            message.InterfaceType.Contains("IAddressableMessage") ||
-                            message.InterfaceType.Contains("IAddressMessage"))
-                    {
-                        message.MessageType = MessageType.Message;
-                    }
-                    break;
-                }
                 case 2:
-                {
-                    var secondParam = parameters[1];
-                    
-                    if (message.InterfaceType.Contains("ICustomRouteMessage"))
                     {
-                        message.MessageType = MessageType.RouteTypeMessage;
-                        message.CustomRouteType = $"Fantasy.RouteType.{secondParam}";
+                        var secondParam = parameters[1];
+
+                        if (message.InterfaceType.Contains("ICustomRouteMessage"))
+                        {
+                            message.MessageType = MessageType.RouteTypeMessage;
+                            message.CustomRouteType = $"Fantasy.RouteType.{secondParam}";
+                        }
+                        else if (message.InterfaceType.Contains("IRoamingMessage"))
+                        {
+                            message.MessageType = MessageType.RoamingMessage;
+                            message.CustomRouteType = $"Fantasy.RoamingType.{secondParam}";
+                        }
+                        else if (message.InterfaceType.Contains("IRequest") ||
+                                 message.InterfaceType.Contains("IAddressableRequest") ||
+                                 message.InterfaceType.Contains("IAddressRequest"))
+                        {
+                            message.MessageType = MessageType.Request;
+                            message.ResponseType = secondParam;
+                        }
+                        break;
                     }
-                    else if (message.InterfaceType.Contains("IRoamingMessage"))
-                    {
-                        message.MessageType = MessageType.RoamingMessage;
-                        message.CustomRouteType = $"Fantasy.RoamingType.{secondParam}";
-                    }
-                    else if (message.InterfaceType.Contains("IRequest") ||
-                             message.InterfaceType.Contains("IAddressableRequest") ||
-                             message.InterfaceType.Contains("IAddressRequest"))
-                    {
-                        message.MessageType = MessageType.Request;
-                        message.ResponseType = secondParam;
-                    }
-                    break;
-                }
                 case 3:
-                {
-                    var secondParam = parameters[1];
-                    var thirdParam = parameters[2];
-                    
-                    if (message.InterfaceType.Contains("ICustomRouteRequest"))
                     {
-                        message.MessageType = MessageType.RouteTypeRequest;
-                        message.ResponseType = secondParam;
-                        message.CustomRouteType = $"Fantasy.RouteType.{thirdParam}";
+                        var secondParam = parameters[1];
+                        var thirdParam = parameters[2];
+
+                        if (message.InterfaceType.Contains("ICustomRouteRequest"))
+                        {
+                            message.MessageType = MessageType.RouteTypeRequest;
+                            message.ResponseType = secondParam;
+                            message.CustomRouteType = $"Fantasy.RouteType.{thirdParam}";
+                        }
+                        else if (message.InterfaceType.Contains("IRoamingRequest"))
+                        {
+                            message.MessageType = MessageType.RoamingRequest;
+                            message.ResponseType = secondParam;
+                            message.CustomRouteType = $"Fantasy.RoamingType.{thirdParam}";
+                        }
+                        break;
                     }
-                    else if (message.InterfaceType.Contains("IRoamingRequest"))
-                    {
-                        message.MessageType = MessageType.RoamingRequest;
-                        message.ResponseType = secondParam;
-                        message.CustomRouteType = $"Fantasy.RoamingType.{thirdParam}";
-                    }
-                    break;
-                }
             }
         }
 
@@ -363,7 +363,7 @@ public sealed partial class ProtocolFileParser(string filePath)
 
         // 提取行尾的 /// 注释
         var commentIndex = line.IndexOf("///", StringComparison.Ordinal);
-        
+
         if (commentIndex > 0)
         {
             var inlineComment = line.Substring(commentIndex + 3).Trim();
@@ -405,7 +405,7 @@ public sealed partial class ProtocolFileParser(string filePath)
         {
             field = ParseBytesField(line, lineNumber);
         }
-        else 
+        else
         {
             field = ParseRegularField(line, lineNumber);
         }
@@ -415,7 +415,8 @@ public sealed partial class ProtocolFileParser(string filePath)
             EndField(field, new List<string>(_pendingComments));
         }
 
-        void EndField(FieldDefinition field, List<string> documentationComments = null) {
+        void EndField(FieldDefinition field, List<string> documentationComments = null)
+        {
             field.KeyIndex = _currentKeyIndex++;
             field.DocumentationComments = documentationComments;
             _currentMessage.Fields.Add(field);
@@ -459,7 +460,7 @@ public sealed partial class ProtocolFileParser(string filePath)
         // 格式: bytes Data = 1;
         // var content = line.Substring("bytes".Length).Trim();
         var match = FieldRegex().Match(line);
-        
+
         if (!match.Success)
         {
             _errors.Add($"[red]  {filePath} line {lineNumber}: Invalid bytes field format: {Markup.Escape(line)}[/]");
