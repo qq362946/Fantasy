@@ -9,6 +9,11 @@ namespace Fantasy.ProtocolExportTool.Models;
 public sealed class FieldDefinition
 {
     /// <summary>
+    /// 自定义文本行
+    /// </summary>
+    public string? CustomTextLine { get; set; } = default;
+
+    /// <summary>
     /// 字段名称
     /// </summary>
     public string Name { get; set; } = string.Empty;

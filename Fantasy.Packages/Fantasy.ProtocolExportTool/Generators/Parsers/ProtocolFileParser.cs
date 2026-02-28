@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using Fantasy.Network;
 using Fantasy.ProtocolExportTool.Models;
@@ -352,6 +353,14 @@ public sealed partial class ProtocolFileParser(string filePath)
             return;
         }
 
+        // 优先解析自定义文本行
+        var meybe_custom_text = TryParseCustomTextLineOnField(line);
+        if (meybe_custom_text != null)
+        {
+            EndField(meybe_custom_text);
+            return;
+        }
+
         // 提取行尾的 /// 注释
         var commentIndex = line.IndexOf("///", StringComparison.Ordinal);
         
@@ -403,8 +412,12 @@ public sealed partial class ProtocolFileParser(string filePath)
 
         if (field != null)
         {
+            EndField(field, new List<string>(_pendingComments));
+        }
+
+        void EndField(FieldDefinition field, List<string> documentationComments = null) {
             field.KeyIndex = _currentKeyIndex++;
-            field.DocumentationComments = new List<string>(_pendingComments);
+            field.DocumentationComments = documentationComments;
             _currentMessage.Fields.Add(field);
             _pendingComments.Clear();
         }
@@ -485,6 +498,27 @@ public sealed partial class ProtocolFileParser(string filePath)
             FieldNumber = int.Parse(match.Groups[3].Value),
             CollectionType = FieldCollectionType.Normal,
             SourceLineNumber = lineNumber
+        };
+    }
+
+    /// <summary>
+    /// 解析字段级的自定义文本行, 未解析成功返回null
+    /// 以给定的<see cref="FieldCustomTextLineKeyword"/>关键字开头的即判定为字段级自定义文本行。
+    /// </summary>
+    public const string FieldCustomTextLineKeyword = "#";
+    private FieldDefinition? TryParseCustomTextLineOnField(string line)
+    {
+        ReadOnlySpan<char> span = line.AsSpan();
+        if (!span.StartsWith(FieldCustomTextLineKeyword))
+        {
+            return null;
+        }
+        span = span.Slice(1);
+        string result = span.ToString();
+
+        return new FieldDefinition
+        {
+            CustomTextLine = result
         };
     }
 

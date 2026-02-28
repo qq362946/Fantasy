@@ -13,6 +13,8 @@ package Fantasy.Network.Message;
 // 通过添加 // using 导出时添加自定义命名空间
 // 例如: // using System.Runtime // using System.Reflection
 
+// 自定义文本: 在消息前使用////四道斜线按照原语句导出到类定义前;
+//            在消息内部使用 # 开头的按照原语句导出到消息属性声明前。
 
 message C2G_TestEmptyMessage // IMessage
 {
