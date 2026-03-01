@@ -13,12 +13,6 @@ public sealed class C2G_ConnectRoamingRequestHandler : MessageRPC<C2G_ConnectRoa
 {
     protected override async FTask Run(Session session, C2G_ConnectRoamingRequest request, G2C_ConnectRoamingResponse response, Action reply)
     {
-        if (!session.TryGetLinkTerminus(out var terminus))
-        {
-            Log.Error("❌ Terminus 不存在，请先建立路由");
-            return;
-        }
-        
         // 给session创建一个漫游功能。
         // 这个功能很重要，这个组件是整个Roaming系统最核心的组件，这个组件会处理Roaming协议
         // 这个功能会处理Roaming协议，所以创建这个是必须的。
