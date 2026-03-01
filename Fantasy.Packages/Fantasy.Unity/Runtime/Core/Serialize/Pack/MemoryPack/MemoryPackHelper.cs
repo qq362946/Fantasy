@@ -22,10 +22,10 @@ namespace Fantasy.Serialize
     {
         /// <inheritdoc/>
         public string SerializeName { get; } = "MemoryPack";
-        
+
         private static volatile Int64FrozenDictionary<Type> _types;
         private static readonly Int64MergerFrozenDictionary<Type> TypesMerger = new();
-        
+
         public static Int64FrozenDictionary<Type> TypeDictionary => _types;
 
         #region AssemblyManifest
@@ -40,7 +40,7 @@ namespace Fantasy.Serialize
             {
                 Interlocked.CompareExchange(
                     ref _types,
-                    new Int64FrozenDictionary<Type>(new long [1] { 1 }, new Type[1] { typeof(MemoryPackHelper) }),
+                    new Int64FrozenDictionary<Type>(new long[1] { 1 }, new Type[1] { typeof(MemoryPackHelper) }),
                     null);
             }
 #if FANTASY_UNITY
@@ -52,6 +52,7 @@ namespace Fantasy.Serialize
             MemoryPackFormatterProvider.Register(new EntityFormatter());
             MemoryPackFormatterProvider.Register(new EntityTreeCollectionFormatter());
             MemoryPackFormatterProvider.Register(new EntityMultiCollectionFormatter());
+            MemoryPackFormatterProvider.Register(new IPAddressFormatter());
             await AssemblyLifecycle.Add(this);
             return this;
         }
@@ -64,12 +65,12 @@ namespace Fantasy.Serialize
         {
             var memoryPackEntityGenerator = assemblyManifest.MemoryPackEntityGenerator;
             memoryPackEntityGenerator.Initialize();
-            
+
             if (!memoryPackEntityGenerator.EntityTypes().Any())
             {
                 return;
             }
-            
+
             if (ProgramDefine.IsAppRunning)
             {
                 var tcs = FTask.Create(false);
@@ -81,17 +82,17 @@ namespace Fantasy.Serialize
                 await tcs;
                 return;
             }
-            
+
             InnerOnLoad(assemblyManifest.AssemblyManifestId, memoryPackEntityGenerator);
         }
 
-        private void InnerOnLoad(long assemblyManifestId,IMemoryPackEntityGenerator memoryPackEntityGenerator)
+        private void InnerOnLoad(long assemblyManifestId, IMemoryPackEntityGenerator memoryPackEntityGenerator)
         {
             TypesMerger.Add(
                 assemblyManifestId,
                 memoryPackEntityGenerator.EntityTypeHashCodes(),
                 memoryPackEntityGenerator.EntityTypes());
-                
+
             Interlocked.Exchange(ref _types, TypesMerger.GetFrozenDictionary());
         }
 
@@ -103,7 +104,7 @@ namespace Fantasy.Serialize
         {
             var tcs = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
-            
+
             ThreadScheduler.MainScheduler.ThreadSynchronizationContext.Post(() =>
             {
                 if (TypesMerger.Remove(assemblyManifestId))
@@ -112,7 +113,7 @@ namespace Fantasy.Serialize
                 }
                 tcs.SetResult();
             });
-            
+
             return tcs;
         }
 
