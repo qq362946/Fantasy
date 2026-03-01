@@ -4,6 +4,10 @@ using System.Net;
 using System.Runtime.InteropServices;
 using Fantasy;
 using MemoryPack;
+#pragma warning disable CS9074 // The 'scoped' modifier of parameter doesn't match overridden or implemented member.
+#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 
 public sealed class IPAddressFormatter : MemoryPackFormatter<IPAddress>
 {
@@ -49,48 +53,5 @@ public sealed class IPAddressFormatter : MemoryPackFormatter<IPAddress>
 
         value = new IPAddress(span);
         reader.Advance(length);
-    }
-}
-
-/// <summary>
-/// 测试IPAddress序列化与反序列化
-/// </summary>
-public static class MemoryPackIPAdressTest
-{
-    public static void Run()
-    {
-        var list = new List<IPAddress>
-        {
-            IPAddress.Parse("127.0.0.1"),
-            IPAddress.Parse("192.168.1.1")
-        };
-
-        Log.Debug("===== ORIGINAL =====");
-        foreach (var ip in list)
-        {
-            Log.Debug(ip.ToString());
-        }
-
-        // 序列化
-        var bytes = MemoryPackSerializer.Serialize(list);
-
-        Log.Debug("===== SERIALIZED BYTES =====");
-        Log.Debug("Length: " + bytes.Length);
-        Log.Debug(BitConverter.ToString(bytes));
-
-        // 反序列化
-        var result = MemoryPackSerializer.Deserialize<List<IPAddress>>(bytes);
-
-        Log.Debug("===== DESERIALIZED =====");
-        if (result == null)
-        {
-            Log.Debug("Result is NULL");
-            return;
-        }
-
-        foreach (var ip in result)
-        {
-            Log.Debug(ip.ToString());
-        }
     }
 }
