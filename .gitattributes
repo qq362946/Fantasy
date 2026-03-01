@@ -1,3 +1,4 @@
+@@ -1,70 +1,2 @@
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
@@ -68,3 +69,4 @@
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
 
+*.sh text eol=lf
