@@ -126,6 +126,9 @@ public sealed class ProtocolValidator
 
         foreach (var field in message.Fields)
         {
+            if (field.CustomTextLine != null) // 跳过自定义文本行
+                continue;
+
             // 验证字段名唯一性
             if (!fieldNames.Add(field.Name))
             {

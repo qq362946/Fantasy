@@ -251,8 +251,9 @@ public sealed class CSharpExporter(
                             if (messageDefinition.Fields.Count > 0)
                             {
                                 var parameters = string.Join(", ",
-                                    messageDefinition.Fields.Select(f =>
-                                        $"{ConvertType(f)} {char.ToLower(f.Name[0])}{f.Name[1..]}"));
+                                    messageDefinition.Fields
+                                    .Where(f => f.CustomTextLine == null) // 跳过自定义文本行
+                                    .Select(f => $"{ConvertType(f)} {char.ToLower(f.Name[0])}{f.Name[1..]}"));
                                 helper.AppendLine("\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
                                 helper.AppendLine($"\t\tpublic static void {messageDefinitionName}(this Session session, {parameters})");
                                 helper.AppendLine("\t\t{");
@@ -260,6 +261,8 @@ public sealed class CSharpExporter(
 
                                 foreach (var field in messageDefinition.Fields)
                                 {
+                                    if (field.CustomTextLine != null) // 跳过自定义文本行
+                                        continue;
                                     helper.AppendLine($"\t\t\t{messageDefinitionName}_message.{field.Name} = {char.ToLower(field.Name[0])}{field.Name[1..]};");
                                 }
 
@@ -291,7 +294,9 @@ public sealed class CSharpExporter(
                             if (messageDefinition.Fields.Count > 0)
                             {
                                 var parameters = string.Join(", ",
-                                    messageDefinition.Fields.Select(f =>
+                                    messageDefinition.Fields
+                                    .Where(f => f.CustomTextLine == null) // 跳过自定义文本行
+                                    .Select(f =>
                                         $"{ConvertType(f)} {char.ToLower(f.Name[0])}{f.Name[1..]}"));
                                 helper.AppendLine($"\t\t[MethodImpl(MethodImplOptions.AggressiveInlining)]");
                                 helper.AppendLine($"\t\tpublic static async FTask<{messageDefinition.ResponseType}> {messageDefinitionName}(this Session session, {parameters})");
@@ -299,6 +304,8 @@ public sealed class CSharpExporter(
                                 helper.AppendLine($"\t\t\tusing var {messageDefinitionName}_request = Fantasy.{messageDefinitionName}.Create();");
                                 foreach (var field in messageDefinition.Fields)
                                 {
+                                    if (field.CustomTextLine != null) // 跳过自定义文本行
+                                        continue;
                                     helper.AppendLine($"\t\t\t{messageDefinitionName}_request.{field.Name} = {char.ToLower(field.Name[0])}{field.Name[1..]};");
                                 }
                                 helper.AppendLine($"\t\t\treturn ({messageDefinition.ResponseType})await session.Call({messageDefinitionName}_request);");
@@ -422,6 +429,12 @@ public sealed class CSharpExporter(
             
             foreach (var field in messageDefinition.Fields)
             {
+                if(field.CustomTextLine != null) // 直接输出自定义文本行
+                {
+                    members.Add(field.CustomTextLine);
+                    continue;
+                }
+
                 string? disposeStatement;
                 switch (field.CollectionType)
                 {
