@@ -416,6 +416,17 @@ namespace Fantasy
 			return (G2C_MapUnsubscribeSphereEventResponse)await session.Call(C2G_MapUnsubscribeSphereEventRequest_request);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static async FTask<G2C_TestMemoryPackResponse> C2G_TestMemoryPackRequest(this Session session, C2G_TestMemoryPackRequest C2G_TestMemoryPackRequest_request)
+		{
+			return (G2C_TestMemoryPackResponse)await session.Call(C2G_TestMemoryPackRequest_request);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static async FTask<G2C_TestMemoryPackResponse> C2G_TestMemoryPackRequest(this Session session)
+		{
+			using var C2G_TestMemoryPackRequest_request = Fantasy.C2G_TestMemoryPackRequest.Create();
+			return (G2C_TestMemoryPackResponse)await session.Call(C2G_TestMemoryPackRequest_request);
+		}
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static async FTask<G2C_LoginGameResponse> C2G_LoginGameRequest(this Session session, C2G_LoginGameRequest C2G_LoginGameRequest_request)
 		{
 			return (G2C_LoginGameResponse)await session.Call(C2G_LoginGameRequest_request);

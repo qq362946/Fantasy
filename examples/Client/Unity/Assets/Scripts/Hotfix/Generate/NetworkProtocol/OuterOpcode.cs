@@ -56,8 +56,10 @@ namespace Fantasy
         public const uint G2C_UnsubscribeSphereEventResponse = 402663193;
         public const uint C2G_MapUnsubscribeSphereEventRequest = 268445466;
         public const uint G2C_MapUnsubscribeSphereEventResponse = 402663194;
-        public const uint C2G_LoginGameRequest = 268445467;
-        public const uint G2C_LoginGameResponse = 402663195;
+        public const uint C2G_TestMemoryPackRequest = 285222683;
+        public const uint G2C_TestMemoryPackResponse = 419440411;
+        public const uint C2G_LoginGameRequest = 268445468;
+        public const uint G2C_LoginGameResponse = 402663196;
         public const uint C2M_InitComplete = 2550146838;
         public const uint M2C_UnitCreate = 2550146839;
         public const uint M2C_UnitLeave = 2550146840;

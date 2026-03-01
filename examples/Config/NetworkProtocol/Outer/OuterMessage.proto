@@ -240,3 +240,22 @@ message G2C_MapUnsubscribeSphereEventResponse // IResponse
 {
 
 }
+message ChatInfoData
+{
+	bytes Data = 1;
+}
+// Protocol MemoryPack
+message TestMemoryPackInfo
+{
+	string A = 1;
+}
+// Protocol MemoryPack
+message C2G_TestMemoryPackRequest // IRequest,G2C_TestMemoryPackResponse
+{
+
+}
+// Protocol MemoryPack
+message G2C_TestMemoryPackResponse // IResponse
+{
+	TestMemoryPackInfo Info = 1;
+}

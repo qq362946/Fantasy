@@ -2194,6 +2194,174 @@ namespace Fantasy
         [ProtoMember(1)]
         public uint ErrorCode { get; set; }
     }
+    [Serializable]
+    [ProtoContract]
+    public partial class ChatInfoData : AMessage, IDisposable
+    {
+        public static ChatInfoData Create(bool autoReturn = true)
+        {
+            var chatInfoData = MessageObjectPool<ChatInfoData>.Rent();
+            chatInfoData.AutoReturn = autoReturn;
+            
+            if (!autoReturn)
+            {
+                chatInfoData.SetIsPool(false);
+            }
+            
+            return chatInfoData;
+        }
+        
+        public void Return()
+        {
+            if (!AutoReturn)
+            {
+                SetIsPool(true);
+                AutoReturn = true;
+            }
+            else if (!IsPool())
+            {
+                return;
+            }
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            if (!IsPool()) return; 
+            Data = null;
+            MessageObjectPool<ChatInfoData>.Return(this);
+        }
+        [ProtoMember(1)]
+        public byte[] Data { get; set; }
+    }
+    [Serializable]
+    [MemoryPackable]
+    public partial class TestMemoryPackInfo : AMessage, IDisposable
+    {
+        public static TestMemoryPackInfo Create(bool autoReturn = true)
+        {
+            var testMemoryPackInfo = MessageObjectPool<TestMemoryPackInfo>.Rent();
+            testMemoryPackInfo.AutoReturn = autoReturn;
+            
+            if (!autoReturn)
+            {
+                testMemoryPackInfo.SetIsPool(false);
+            }
+            
+            return testMemoryPackInfo;
+        }
+        
+        public void Return()
+        {
+            if (!AutoReturn)
+            {
+                SetIsPool(true);
+                AutoReturn = true;
+            }
+            else if (!IsPool())
+            {
+                return;
+            }
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            if (!IsPool()) return; 
+            A = default;
+            MessageObjectPool<TestMemoryPackInfo>.Return(this);
+        }
+        [MemoryPackOrder(1)]
+        public string A { get; set; }
+    }
+    [Serializable]
+    [MemoryPackable]
+    public partial class C2G_TestMemoryPackRequest : AMessage, IRequest
+    {
+        public static C2G_TestMemoryPackRequest Create(bool autoReturn = true)
+        {
+            var c2G_TestMemoryPackRequest = MessageObjectPool<C2G_TestMemoryPackRequest>.Rent();
+            c2G_TestMemoryPackRequest.AutoReturn = autoReturn;
+            
+            if (!autoReturn)
+            {
+                c2G_TestMemoryPackRequest.SetIsPool(false);
+            }
+            
+            return c2G_TestMemoryPackRequest;
+        }
+        
+        public void Return()
+        {
+            if (!AutoReturn)
+            {
+                SetIsPool(true);
+                AutoReturn = true;
+            }
+            else if (!IsPool())
+            {
+                return;
+            }
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            if (!IsPool()) return; 
+            MessageObjectPool<C2G_TestMemoryPackRequest>.Return(this);
+        }
+        public uint OpCode() { return OuterOpcode.C2G_TestMemoryPackRequest; } 
+        [MemoryPackIgnore]
+        public G2C_TestMemoryPackResponse ResponseType { get; set; }
+    }
+    [Serializable]
+    [MemoryPackable]
+    public partial class G2C_TestMemoryPackResponse : AMessage, IResponse
+    {
+        public static G2C_TestMemoryPackResponse Create(bool autoReturn = true)
+        {
+            var g2C_TestMemoryPackResponse = MessageObjectPool<G2C_TestMemoryPackResponse>.Rent();
+            g2C_TestMemoryPackResponse.AutoReturn = autoReturn;
+            
+            if (!autoReturn)
+            {
+                g2C_TestMemoryPackResponse.SetIsPool(false);
+            }
+            
+            return g2C_TestMemoryPackResponse;
+        }
+        
+        public void Return()
+        {
+            if (!AutoReturn)
+            {
+                SetIsPool(true);
+                AutoReturn = true;
+            }
+            else if (!IsPool())
+            {
+                return;
+            }
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            if (!IsPool()) return; 
+            ErrorCode = 0;
+            if (Info != null)
+            {
+                Info.Dispose();
+                Info = null;
+            }
+            MessageObjectPool<G2C_TestMemoryPackResponse>.Return(this);
+        }
+        public uint OpCode() { return OuterOpcode.G2C_TestMemoryPackResponse; } 
+        [MemoryPackOrder(1)]
+        public uint ErrorCode { get; set; }
+        [MemoryPackOrder(2)]
+        public TestMemoryPackInfo Info { get; set; }
+    }
     /// <summary>
     /// 客户端登陆到Gate服务器
     /// </summary>
