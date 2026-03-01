@@ -171,7 +171,7 @@ message Map2G_GetPlayerResponse // IRoamingResponse
 
 ## 步骤 2：建立漫游路由
 
-建立漫游路由后，客户端可以通过 Gate 自动与后端服务器（如 Chat、Map）通信。这个操作通常在客户端首次登录时执行，断线重连时使用 ReLink 重新建立路由。
+建立漫游路由后，客户端可以通过 Gate 自动与后端服务器（如 Chat、Map）通信。这个操作在客户端首次登录和断线重连时都可以直接调用 `Link`，框架会自动判断是首次连接还是重连。
 
 ### Gate 服务器：创建 Roaming 并链接到后端服务器
 
@@ -184,11 +184,14 @@ SessionRoamingComponent session.CreateRoaming(long roamingId, bool isAutoDispose
 // 2. 创建 Roaming 组件（详细版本，返回状态信息）
 CreateRoamingResult session.TryCreateRoaming(long roamingId, bool isAutoDispose, int delayRemove);
 
-// 3. 链接到后端服务器（首次连接）
+// 3. 链接到后端服务器（自动判断首次连接或断线重连）
 uint roaming.Link(Session session, SceneConfig sceneConfig, int roamingType, Entity? args = null);
 
-// 4. 重新链接到后端服务器（断线重连时使用）
-uint roaming.ReLink(Session session, SceneConfig sceneConfig, int roamingType, Entity? args = null);
+// 4. 判断指定 roamingType 是否已建立漫游关系
+bool roaming.IsLinked(int roamingType);
+
+// 5. 重新链接到后端服务器（已废弃，请使用 Link）
+[Obsolete] uint roaming.ReLink(Session session, SceneConfig sceneConfig, int roamingType, Entity? args = null);
 ```
 
 **CreateRoamingResult 结构体：**
@@ -440,46 +443,22 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
             delayRemove: 180000  // 3分钟延迟删除，支持断线重连
         );
 
+        if (result.Status == CreateRoamingStatus.SessionAlreadyHasRoaming)
+        {
+            Log.Error($"❌ Session 已经创建了其他 roamingId 的漫游组件");
+            response.ErrorCode = ErrorCode.SessionAlreadyHasRoaming;
+            return;
+        }
+
         var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
 
-        // 步骤 2：根据状态进行不同处理
-        switch (result.Status)
+        // 步骤 2：Link 自动判断首次连接或断线重连
+        var errorCode = await result.Roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+
+        if (errorCode != 0)
         {
-            case CreateRoamingStatus.NewCreated:
-            {
-                // 首次登录：使用 Link 建立新的漫游连接
-                var errorCode = await result.Roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
-                
-                if (errorCode != 0)
-                {
-                    response.ErrorCode = errorCode;
-                    return;
-                }
-                
-                Log.Info($"✅ 玩家 {request.PlayerId} 首次登录，建立漫游路由");
-                break;
-            }
-            case CreateRoamingStatus.AlreadyExists:
-            {
-                // 断线重连：漫游组件已存在，使用 ReLink 重新建立连接
-                var errorCode = await result.Roaming.ReLink(session, chatConfig, RoamingType.ChatRoamingType);
-                
-                if (errorCode != 0)
-                {
-                    response.ErrorCode = errorCode;
-                    return;
-                }
-                
-                Log.Info($"✅ 玩家 {request.PlayerId} 断线重连成功");
-                break;
-            }
-            case CreateRoamingStatus.SessionAlreadyHasRoaming:
-            {
-                // 错误：当前 Session 已绑定其他玩家
-                Log.Error($"❌ Session 已经创建了其他 roamingId 的漫游组件");
-                response.ErrorCode = ErrorCode.SessionAlreadyHasRoaming;
-                return;
-            }
+            response.ErrorCode = errorCode;
+            return;
         }
 
         await FTask.CompletedTask;
@@ -487,20 +466,62 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
 }
 ```
 
-**Link 与 ReLink 的区别：**
+如果需要根据首次登录和断线重连执行不同的业务逻辑，可以结合 `CreateRoamingStatus` 判断：
 
-| 方法 | 适用场景 | 后端服务器行为 | OnCreateTerminus.Type |
-|------|---------|---------------|----------------------|
-| `Link()` | 首次登录 | 创建新的 Terminus | `CreateTerminusType.Link` |
-| `ReLink()` | 断线重连 | 复用或更新现有 Terminus | `CreateTerminusType.ReLink` |
+```csharp
+switch (result.Status)
+{
+    case CreateRoamingStatus.NewCreated:
+    {
+        // 首次登录
+        var errorCode = await result.Roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+        if (errorCode != 0) { response.ErrorCode = errorCode; return; }
+        Log.Info($"✅ 玩家 {request.PlayerId} 首次登录，建立漫游路由");
+        break;
+    }
+    case CreateRoamingStatus.AlreadyExists:
+    {
+        // 断线重连
+        var errorCode = await result.Roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+        if (errorCode != 0) { response.ErrorCode = errorCode; return; }
+        Log.Info($"✅ 玩家 {request.PlayerId} 断线重连成功");
+        break;
+    }
+    case CreateRoamingStatus.SessionAlreadyHasRoaming:
+    {
+        Log.Error($"❌ Session 已经创建了其他 roamingId 的漫游组件");
+        response.ErrorCode = ErrorCode.SessionAlreadyHasRoaming;
+        return;
+    }
+}
+```
 
-**ReLink 的核心作用：**
+**Link 的行为：**
 
-1. **重置转发地址**：更新 Terminus 的 `ForwardSessionAddress` 为新 Session 的地址
-2. **恢复消息转发**：重置 `StopForwarding` 标志，恢复消息发送能力
-3. **触发重连事件**：发布 `OnCreateTerminus` 事件（Type = ReLink），业务层可执行状态恢复逻辑
+| 场景 | 内部行为 | OnCreateTerminus.Type |
+|------|---------|----------------------|
+| 首次调用（roamingType 未建立） | 创建新的 Terminus | `CreateTerminusType.Link` |
+| 再次调用（roamingType 已存在） | 复用或更新现有 Terminus | `CreateTerminusType.ReLink` |
 
-**两种方法的选择：**
+`Link` 内部通过 `IsLinked(roamingType)` 自动判断走哪条路径，无需手动区分。
+
+**`IsLinked` 的用途：**
+
+如果需要精细控制，可以用 `IsLinked()` 在调用前主动判断状态：
+
+```csharp
+if (roaming.IsLinked(RoamingType.ChatRoamingType))
+{
+    // 已建立，可以直接发消息
+}
+else
+{
+    // 尚未建立，需要先 Link
+    await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+}
+```
+
+**两种创建方法的选择：**
 
 | 方法 | 适用场景 | 优点 | 缺点 |
 |------|---------|------|------|
@@ -511,7 +532,7 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
 
 ### 后端服务器：监听 OnCreateTerminus 事件并创建业务实体
 
-当 Gate 调用 `roaming.Link()` 或 `roaming.ReLink()` 时，框架会自动在后端服务器（如 Chat）上创建或更新 `Terminus`，并触发 `OnCreateTerminus` 事件。
+当 Gate 调用 `roaming.Link()` 时，框架会自动在后端服务器（如 Chat）上创建或更新 `Terminus`，并触发 `OnCreateTerminus` 事件。
 
 **OnCreateTerminus 事件参数：**
 
@@ -529,7 +550,7 @@ public struct OnCreateTerminus
     public readonly Terminus Terminus;
 
     /// <summary>
-    /// 获取传递过来的参数（来自 Link/ReLink 方法的 args 参数）
+    /// 获取传递过来的参数（来自 Link 方法的 args 参数）
     /// </summary>
     public readonly Entity? Args;
 
@@ -564,7 +585,7 @@ FTask terminus.LinkTerminusEntity(Entity entity, bool autoDispose);
 - `LinkTerminusEntity()` 是**可选的**，不调用也可以正常使用 Roaming
 - 如果不调用 `LinkTerminusEntity()`，漫游消息处理器接收到的实体就是 `Terminus` 本身
 - 如果调用了 `LinkTerminusEntity()`，漫游消息处理器接收到的实体就是关联的业务实体（如 `ChatPlayer`）
-- `OnCreateTerminus.Args` 可以接收 Gate 服务器 `Link()` 或 `ReLink()` 方法传递的自定义参数
+- `OnCreateTerminus.Args` 可以接收 Gate 服务器 `Link()` 方法传递的自定义参数
 - **`OnCreateTerminus.Type` 可用于区分是首次创建还是断线重连**，业务层可根据此参数执行不同的初始化逻辑
 
 **完整示例（区分 Link 和 ReLink）：**
@@ -1389,7 +1410,8 @@ Roaming 漫游系统的核心优势：
 |-----|--------|------|---------|
 | `session.CreateRoaming()` | `SessionRoamingComponent` | Gate 创建 Roaming 组件（简单版本） | 不需要详细状态时 |
 | `session.TryCreateRoaming()` | `CreateRoamingResult` | Gate 创建 Roaming 组件（详细版本，包含状态） | 需要判断创建状态时 |
-| `roaming.Link(session, config, type, args)` | `uint` | 建立到后端服务器的路由，可选传递 Entity 参数 | 客户端登录时 |
+| `roaming.Link(session, config, type, args)` | `uint` | 建立到后端服务器的路由，自动判断首次连接或重连 | 客户端登录和断线重连 |
+| `roaming.IsLinked(roamingType)` | `bool` | 判断指定 roamingType 是否已建立漫游关系 | 精细控制场景 |
 | `terminus.LinkTerminusEntity()` | `FTask<T>` | 关联业务实体到 Terminus | OnCreateTerminus 事件中 |
 | `entity.Send(message)` | `void` | 向客户端发送消息 | 服务器主动推送 |
 | `entity.Send(roamingType, message)` | `void` | 向其他服务器发送消息 | 服务器间通信 |
