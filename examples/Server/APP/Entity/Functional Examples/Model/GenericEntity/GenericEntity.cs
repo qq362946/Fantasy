@@ -34,6 +34,12 @@ namespace Fantasy.GenericTest
         public Type type = typeof(TestEntity<Unit>);
     }
 
+    [MemoryPackable]
+    public sealed partial class TestEntity3<T> : Entity
+    {
+        public T Age;
+    }
+
     public sealed class TestGenericEntity2AwakeSystem<T, S> : AwakeSystem<TestEntity2<T, S>> where T : Entity
     {
         protected override void Awake(TestEntity2<T, S> self)
@@ -43,11 +49,13 @@ namespace Fantasy.GenericTest
     }
     
     // 测试用例：使用闭合泛型类型
-    public class GenericTestComponent : Entity
+    [MemoryPackable]
+    public partial class GenericTestComponent : Entity
     {
         // 这些字段会被我们的 closedGenericTypesProvider 收集
         public TestEntity<Scene> SceneEntity;
         public TestEntity2<Scene, Scene> DoubleSceneEntity;
+        public TestEntity3<int> TestEntity3;
     }
 }
 

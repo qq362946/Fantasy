@@ -117,7 +117,7 @@ namespace Fantasy.SourceGenerator.Generators
                 {
                     builder.AddXmlComment("Unity runtime initializer - automatically called when entering play mode or on app start");
                     builder.AppendLine("#if ENABLE_OBFUZ", false);
-                    builder.AppendLine("[ObfuzIgnore(ObfuzScope.TypeName | ObfuzScope.MethodName)]");
+                    builder.AppendLine("[global::Obfuz.ObfuzIgnore(global::Obfuz.ObfuzScope.TypeName | global::Obfuz.ObfuzScope.MethodName)]");
                     builder.AppendLine("#endif", false);
                     builder.AppendLine("[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]");
                     builder.BeginMethod("public static void Initialize()");
@@ -127,7 +127,7 @@ namespace Fantasy.SourceGenerator.Generators
                 {
                     builder.AddXmlComment("Module initializer - automatically called when assembly is loaded");
                     builder.AppendLine("#if ENABLE_OBFUZ", false);
-                    builder.AppendLine("[ObfuzIgnore(ObfuzScope.TypeName | ObfuzScope.MethodName)]");
+                    builder.AppendLine("[global::Obfuz.ObfuzIgnore(global::Obfuz.ObfuzScope.TypeName | global::Obfuz.ObfuzScope.MethodName)]");
                     builder.AppendLine("#endif", false);
                     builder.BeginMethod("public static void Initialize()");
                     break;
@@ -253,7 +253,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("#endif", false);
             builder.AppendLine("#if FANTASY_UNITY", false);
             builder.AppendLine("#if ENABLE_OBFUZ", false);
-            builder.AppendLine("[ObfuzIgnore(ObfuzScope.TypeName | ObfuzScope.MethodName)]");
+            builder.AppendLine("[global::Obfuz.ObfuzIgnore(global::Obfuz.ObfuzScope.TypeName | global::Obfuz.ObfuzScope.MethodName)]");
             builder.AppendLine("#endif", false);
             builder.AppendLine("Fantasy.Assembly.AssemblyManifest.Register(");
             builder.Indent();
