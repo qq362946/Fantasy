@@ -252,9 +252,6 @@ namespace Fantasy.SourceGenerator.Generators
             builder.Unindent();
             builder.AppendLine("#endif", false);
             builder.AppendLine("#if FANTASY_UNITY", false);
-            builder.AppendLine("#if ENABLE_OBFUZ", false);
-            builder.AppendLine("[global::Obfuz.ObfuzIgnore(global::Obfuz.ObfuzScope.TypeName | global::Obfuz.ObfuzScope.MethodName)]");
-            builder.AppendLine("#endif", false);
             builder.AppendLine("Fantasy.Assembly.AssemblyManifest.Register(");
             builder.Indent();
             builder.AppendLine("_assemblyManifestId,");
