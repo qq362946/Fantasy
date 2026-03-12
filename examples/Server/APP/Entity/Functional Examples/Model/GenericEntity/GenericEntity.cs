@@ -35,7 +35,7 @@ namespace Fantasy.GenericTest
     }
 
     [MemoryPackable]
-    public sealed partial class TestEntity3<T> : Entity
+    public sealed partial class TestEntity3<T> : Entity,ISupportedSerialize
     {
         public T Age;
     }
@@ -50,7 +50,7 @@ namespace Fantasy.GenericTest
     
     // 测试用例：使用闭合泛型类型
     [MemoryPackable]
-    public partial class GenericTestComponent : Entity
+    public partial class GenericTestComponent : Entity,ISupportedSerialize
     {
         // 这些字段会被我们的 closedGenericTypesProvider 收集
         public TestEntity<Scene> SceneEntity;

@@ -290,8 +290,9 @@ namespace Fantasy.SourceGenerator.Generators
             // 1. 添加非泛型 Entity 类型
             foreach (var typeInfo in entityTypes)
             {
-                var typeHashCode = HashCodeHelper.ComputeHash64(typeInfo.Symbol.GetFullName(false));
-                builder.AppendLine($"{typeHashCode}L, // {typeInfo.Symbol.ToDisplayString()}");
+                var fullName = typeInfo.Symbol.GetSimplifiedFullName();
+                var typeHashCode = HashCodeHelper.ComputeHash64(fullName);
+                builder.AppendLine($"{typeHashCode}L, // {fullName}");
             }
             
             // 2. 添加从开放泛型构造的闭合泛型 Entity
@@ -299,16 +300,18 @@ namespace Fantasy.SourceGenerator.Generators
             {
                 foreach (var closedGeneric in openGeneric.ClosedGenerics)
                 {
-                    var closedHashCode = HashCodeHelper.ComputeHash64(closedGeneric.GetFullName(false));
-                    builder.AppendLine($"{closedHashCode}L, // {closedGeneric.ToDisplayString()}");
+                    var fullName = closedGeneric.GetSimplifiedFullName();
+                    var closedHashCode = HashCodeHelper.ComputeHash64(fullName);
+                    builder.AppendLine($"{closedHashCode}L, // {fullName}");
                 }
             }
 
             // 3. 添加非泛型 SphereEventArgs 类型
             foreach (var typeInfo in sphereEventArgs)
             {
-                var typeHashCode = HashCodeHelper.ComputeHash64(typeInfo.Symbol.GetFullName(false));
-                builder.AppendLine($"{typeHashCode}L, // {typeInfo.Symbol.ToDisplayString()}");
+                var fullName = typeInfo.Symbol.GetSimplifiedFullName();
+                var typeHashCode = HashCodeHelper.ComputeHash64(fullName);
+                builder.AppendLine($"{typeHashCode}L, // {fullName}");
             }
             
             // 4. 添加从开放泛型构造的闭合泛型 SphereEventArgs
@@ -316,8 +319,9 @@ namespace Fantasy.SourceGenerator.Generators
             {
                 foreach (var closedGeneric in openGeneric.ClosedGenerics)
                 {
-                    var closedHashCode = HashCodeHelper.ComputeHash64(closedGeneric.GetFullName(false));
-                    builder.AppendLine($"{closedHashCode}L, // {closedGeneric.ToDisplayString()}");
+                    var fullName = closedGeneric.GetSimplifiedFullName();
+                    var closedHashCode = HashCodeHelper.ComputeHash64(fullName);
+                    builder.AppendLine($"{closedHashCode}L, // {fullName}");
                 }
             }
 

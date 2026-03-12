@@ -183,6 +183,11 @@
         <xs:documentation>数据库连接字符串</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="isDefault" type="xs:boolean" use="optional" default="false">
+      <xs:annotation>
+        <xs:documentation>是否为默认数据库，一个world中只能有一个数据库标记为默认</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
 
   <xs:complexType name="worldType">

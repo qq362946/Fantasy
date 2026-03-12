@@ -206,6 +206,15 @@ message C2G_TestRoamingToRoaming // IMessage
 {
 	string Tag = 1;
 }
+/// 客户端向服务器发送登录连接消息（Roaming）
+message C2G_LoginRoamingRequest // IRequest,G2C_ConnectRoamingResponse
+{
+
+}
+message G2C_LoginRoamingResponse // IResponse
+{
+
+}
 /// 通知Gate服务器发送一个内网消息通知Map服务器向Gate服务器注册一个领域事件
 message C2G_SubscribeSphereEventRequest // IRequest,G2C_SubscribeSphereEventResponse
 {

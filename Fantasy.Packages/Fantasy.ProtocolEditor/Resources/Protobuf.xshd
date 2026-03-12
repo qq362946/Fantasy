@@ -45,6 +45,8 @@
       <Word>returns</Word>
       <Word>stream</Word>
       <Word>repeated</Word>
+      <Word>repeatedList</Word>
+      <Word>repeatedArray</Word>
       <Word>optional</Word>
       <Word>required</Word>
       <Word>reserved</Word>

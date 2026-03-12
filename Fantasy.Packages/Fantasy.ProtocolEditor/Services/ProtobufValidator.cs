@@ -24,7 +24,7 @@ public class ProtobufValidator
     private static readonly HashSet<string> ValidKeywords = new()
     {
         "syntax", "package", "import", "option", "message", "enum", "service",
-        "rpc", "returns", "stream", "repeated", "optional", "required",
+        "rpc", "returns", "stream", "repeated", "repeatedList", "repeatedArray", "optional", "required",
         "reserved", "extensions", "extend", "oneof", "map", "public", "weak"
     };
 

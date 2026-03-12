@@ -49,7 +49,7 @@
                               Foreground="#FFFFFF"
                               HorizontalAlignment="Center"/>
 
-                    <TextBlock Text="Version 2025.2.1423"
+                    <TextBlock Text="Version 2026.0.1002"
                               FontSize="14"
                               Foreground="#858585"
                               HorizontalAlignment="Center"/>
@@ -123,7 +123,7 @@
                 </StackPanel>
 
                 <!-- 版权信息 -->
-                <TextBlock Text="© 2024 Fantasy Framework. All rights reserved."
+                <TextBlock Text="© 2025 Fantasy Framework. All rights reserved."
                           FontSize="12"
                           Foreground="#606060"
                           HorizontalAlignment="Center"

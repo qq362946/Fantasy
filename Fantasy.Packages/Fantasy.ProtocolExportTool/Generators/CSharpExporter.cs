@@ -439,9 +439,17 @@ public sealed class CSharpExporter(
                 switch (field.CollectionType)
                 {
                     case FieldCollectionType.Repeated:
+                    {
+                        disposeStatement = messageDefinitions.ContainsKey(field.Type) ? 
+                            $"foreach (var __t in {field.Name}) __t.Dispose();\n            {field.Name}.Clear();" : 
+                            $"{field.Name}.Clear();";
+                        break;
+                    }
                     case FieldCollectionType.Map:
                     {
-                        disposeStatement = $"{field.Name}.Clear();";
+                        disposeStatement = messageDefinitions.ContainsKey(field.MapValueType) ? 
+                            $"foreach (var __t in {field.Name}.Values) __t.Dispose();\n            {field.Name}.Clear();" : 
+                            $"{field.Name}.Clear();";
                         break;
                     }
                     case FieldCollectionType.RepeatedList:

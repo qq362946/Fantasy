@@ -21,7 +21,7 @@ public sealed class C2G_LoginGameRequestHandler : MessageRPC<C2G_LoginGameReques
             response.ErrorCode = 1;
             return;
         }
-
+        
         if (!AccountManageHelper.Add(session.Scene, accountName, out var account))
         {
             response.ErrorCode = 1;

@@ -2,6 +2,7 @@ using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Event;
 using Fantasy.GenericTest;
+using Fantasy.Helper;
 using Fantasy.Serialize;
 
 namespace Fantasy;

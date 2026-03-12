@@ -18,7 +18,7 @@ public static class AccountHelper
     {
         // 1.创建Roaming协议,用来方便的把消息通过Gate中转到Map
 
-        var createRoamingResult = await session.TryCreateRoaming(account.Id, 6000);
+        var createRoamingResult = await session.TryCreateRoaming(123, 6000);
 
         switch (createRoamingResult.Status)
         {

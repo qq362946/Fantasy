@@ -13,16 +13,18 @@ public sealed class OnCreateTerminusEvent : AsyncEventSystem<OnCreateTerminus>
         {
             case SceneType.Map:
             {
-                var maoRoamingArgs = self.Args as MaoRoamingArgs;
-
-                if (maoRoamingArgs == null)
+                if (self.Args is MaoRoamingArgs maoRoamingArgs)
                 {
-                    // Log.Error($"maoRoamingArgs is null!");
-                    break;
+                    Log.Debug($"MaoRoamingArgs {maoRoamingArgs.Tag} {self.Type.ToString()}");
                 }
                 
-                Log.Debug($"MaoRoamingArgs {maoRoamingArgs.Tag}");
+                Log.Debug($"OnCreateTerminusEvent Map {self.Type.ToString()}");
 
+                break;
+            }
+            case SceneType.Chat:
+            {
+                Log.Debug($"OnCreateTerminusEvent Chat {self.Type.ToString()}");
                 break;
             }
         }

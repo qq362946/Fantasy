@@ -33,6 +33,8 @@
 
     <ItemGroup>
       <Folder Include="Functional Examples\Benchmark\" />
+      <Folder Include="Functional Examples\Outer\Roaming\Map\Roaming1\" />
+      <Folder Include="Functional Examples\Outer\Roaming\Map\Roaming\" />
     </ItemGroup>
 
 </Project>

@@ -2,6 +2,8 @@ using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
+
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8601 // Possible null reference assignment.
 
@@ -69,6 +71,17 @@ namespace Fantasy.SourceGenerator.Common
 
             return $"{replaceAssemblyName}_{flag}";
         }
+        
+        /// <summary>
+        /// 获取类型所在的程序集名称（不包含版本信息）
+        /// </summary>
+        /// <param name="typeSymbol">类型符号</param>
+        /// <returns>程序集名称，例如：System.Private.CoreLib</returns>
+        private static string GetAssemblyName(ITypeSymbol typeSymbol)
+        {
+            var assembly = typeSymbol.ContainingAssembly;
+            return assembly == null ? "Unknown" : assembly.Identity.Name;
+        }
 
         /// <summary>
         /// 获取类型的完全限定名（包括命名空间）
@@ -77,6 +90,85 @@ namespace Fantasy.SourceGenerator.Common
         {
             var displayString = typeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
             return includeGlobal ? displayString : displayString.Replace("global::", "");
+        }
+
+        /// <summary>
+        /// 获取简化的类型全名（移除程序集版本信息），与 Runtime Type.FullName 格式一致
+        /// </summary>
+        /// <param name="typeSymbol">类型符号</param>
+        /// <returns>简化的类型全名，格式：命名空间.类型名`N[[参数类型, 程序集名],[...]]</returns>
+        /// <remarks>
+        /// 示例：
+        /// - 非泛型：System.String
+        /// - 泛型：Fantasy.GenericTest.TestEntity3`1[[System.Int32, System.Private.CoreLib]]
+        /// 移除了 Version、Culture、PublicKeyToken 信息，确保热重载和跨版本兼容
+        /// </remarks>
+        public static string GetSimplifiedFullName(this ITypeSymbol typeSymbol)
+        {
+            if (typeSymbol == null)
+            {
+                throw new ArgumentNullException(nameof(typeSymbol));
+            }
+      
+            // 处理数组类型
+            if (typeSymbol is IArrayTypeSymbol arrayType)
+            {
+                var elementType = arrayType.ElementType;
+                var rank = arrayType.Rank;
+                var brackets = rank == 1 ? "[]" : $"[{new string(',', rank - 1)}]";
+                return GetSimplifiedFullName(elementType) + brackets;
+            }
+    
+            // 处理指针类型
+            if (typeSymbol is IPointerTypeSymbol pointerType)
+            {
+                return GetSimplifiedFullName(pointerType.PointedAtType) + "*";
+            }
+            
+            // 处理非泛型类型
+            if (typeSymbol is not INamedTypeSymbol namedType || !namedType.IsGenericType)
+            {
+                // 关键修改：使用完整的命名空间.类型名格式
+                // 而不是使用 SymbolDisplayFormat.FullyQualifiedFormat（会返回 "int" 这样的别名）
+                var namespaceName = typeSymbol.ContainingNamespace?.ToDisplayString() ?? "";
+                var typeName = typeSymbol.Name;
+        
+                if (!string.IsNullOrEmpty(namespaceName) && namespaceName != "<global namespace>")
+                {
+                    return $"{namespaceName}.{typeName}";
+                }
+                return typeName;
+            }
+            
+            // 处理泛型类型
+            var sb = new StringBuilder();
+            // 1. 命名空间 + 类型名
+            var ns = namedType.ContainingNamespace?.ToDisplayString() ?? "";
+            if (!string.IsNullOrEmpty(ns) && ns != "<global namespace>")
+            {
+                sb.Append(ns);
+                sb.Append('.');
+            }
+            sb.Append(namedType.Name);
+            // 2. 泛型参数数量标记 `N
+            sb.Append('`');
+            sb.Append(namedType.TypeArguments.Length);
+            // 3. 泛型参数列表 [[参数1],[参数2]]
+            sb.Append("[[");
+            for (int i = 0; i < namedType.TypeArguments.Length; i++)
+            {
+                if (i > 0)
+                {
+                    sb.Append("],[");
+                }
+                var argType = namedType.TypeArguments[i];
+                // 递归处理泛型参数（可能也是泛型类型）
+                sb.Append(GetSimplifiedFullName(argType));
+                // 不添加程序集名称
+            }
+            sb.Append("]]");
+    
+            return sb.ToString();
         }
 
         /// <summary>
