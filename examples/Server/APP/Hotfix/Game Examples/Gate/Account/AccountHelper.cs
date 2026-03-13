@@ -18,7 +18,7 @@ public static class AccountHelper
     {
         // 1.创建Roaming协议,用来方便的把消息通过Gate中转到Map
 
-        var createRoamingResult = await session.TryCreateRoaming(123, 6000);
+        var createRoamingResult = await session.TryCreateRoaming(account.Id, 6000);
 
         switch (createRoamingResult.Status)
         {
@@ -40,6 +40,17 @@ public static class AccountHelper
             case CreateRoamingStatus.AlreadyExists:
             {
                 // 如果已经存在代表当前是断线重连，可以不需要做任何处理就可以了。因为漫游系统还存在。
+                // 2.首先登陆到Map
+                // 正常情况下这个Map需要根据玩家所在的地图来选择的。
+                // 因为这个例子没有划分地图，所以就默认拿第一来当做地图。
+                var mapSceneConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0];
+                // 创建一个Gate中间Map消息的连接，创建成功后后面的所有消息都会自动中转无需手动转发，包括MAP发送给Client
+                var linkResuilt = await createRoamingResult.Roaming.Link(session, mapSceneConfig, RoamingType.MapRoamingType);
+                if (linkResuilt != 0)
+                {
+                    Log.Error($"创建Map的漫游消息发生了错误 ErrorCode:{linkResuilt}");
+                    return linkResuilt;
+                }
                 break;
             }
             case CreateRoamingStatus.SessionAlreadyHasRoaming:

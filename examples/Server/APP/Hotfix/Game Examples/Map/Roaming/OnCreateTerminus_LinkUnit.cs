@@ -10,7 +10,7 @@ public sealed class OnCreateTerminus_LinkUnit : AsyncEventSystem<OnCreateTerminu
     {
         var scene = self.Scene;
         var terminus = self.Terminus;
-
+        
         switch (scene.SceneType)
         {
             case SceneType.Map:
@@ -21,12 +21,26 @@ public sealed class OnCreateTerminus_LinkUnit : AsyncEventSystem<OnCreateTerminu
                     // 因为逻辑不同会导致出错，所以这样参数不传递参数来过滤下
                     return;
                 }
-                // 创建一个新的Unit
-                var playerUnit = PlayerUnitFactory.CreatePlayer(scene, "Fantasy");
-                // 关联到Terminus后，下次接收消息会发送到playerUnit上
-                await terminus.LinkTerminusEntity(playerUnit, true);
-                // 添加到管理器中
-                PlayerUnitManageHelper.AddPlayerUnit(playerUnit, PlayerUnitManageHelper.AddPlayerUnitNotify.NoNotification);
+
+                switch (self.Type)
+                {
+                    case CreateTerminusType.Link:
+                    {
+                        // 创建一个新的Unit
+                        var playerUnit = PlayerUnitFactory.CreatePlayer(scene, "Fantasy");
+                        // 关联到Terminus后，下次接收消息会发送到playerUnit上
+                        await terminus.LinkTerminusEntity(playerUnit, true);
+                        // 添加到管理器中
+                        PlayerUnitManageHelper.AddPlayerUnit(playerUnit, PlayerUnitManageHelper.AddPlayerUnitNotify.NoNotification);
+                        break;
+                    }
+                    case CreateTerminusType.ReLink:
+                    {
+                        Log.Debug("ReLink");
+                        break;
+                    }
+                }
+                
                 break;
             }
         }

@@ -1,5 +1,6 @@
 using Fantasy;
 using Fantasy.Async;
+using Fantasy.Entitas;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 using Fantasy.Network.Roaming;
@@ -27,7 +28,7 @@ public sealed class C2G_LoginGameRequestHandler : MessageRPC<C2G_LoginGameReques
             response.ErrorCode = 1;
             return;
         }
-
+        // var account = Entity.Create<Account>(session.Scene);
         account.Session = session;
         // 挂载组件用来标记这个Session下的Account，后面下线流程也会用到
         session.AddComponent<GateAccountFlagComponent>().Account = account;
