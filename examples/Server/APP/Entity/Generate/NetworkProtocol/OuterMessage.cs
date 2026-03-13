@@ -2818,6 +2818,7 @@ namespace Fantasy
         {
             if (!IsPool()) return; 
             ErrorCode = 0;
+            foreach (var __t in Data) __t.Dispose();
             Data.Clear();
             MessageObjectPool<M2C_MoveResponse>.Return(this);
         }

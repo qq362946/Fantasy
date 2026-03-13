@@ -440,9 +440,14 @@ public sealed class CSharpExporter(
                 {
                     case FieldCollectionType.Repeated:
                     {
-                        disposeStatement = messageDefinitions.ContainsKey(field.Type) ? 
-                            $"foreach (var __t in {field.Name}) __t.Dispose();\n            {field.Name}.Clear();" : 
-                            $"{field.Name}.Clear();";
+                        if (messageDefinitions.ContainsKey(field.Type))
+                        {
+                            disposeStatement = $"foreach (var __t in {field.Name}) __t.Dispose();\n            {field.Name}.Clear();";
+                        }
+                        else
+                        {
+                            disposeStatement = $"{field.Name}.Clear();";
+                        }
                         break;
                     }
                     case FieldCollectionType.Map:

@@ -14,9 +14,14 @@
 - [Inner 文件夹 - 服务器间通信协议](#inner-文件夹---服务器间通信协议)
 - [OpCode.Cache - 协议代码缓存](#opcodecache---协议代码缓存)
 - [协议接口类型说明](#协议接口类型说明)
-  - [基础协议接口类型](#基础协议接口类型)
+  - [协议定义语法速查](#协议定义语法速查)
+  - [核心对照表](#核心对照表)
+  - [定义模板](#定义模板)
+  - [枚举定义格式](#枚举定义格式)
+  - [message 普通消息（IMessage）](#message-普通消息imessage)
+  - [message 请求/返回消息（IRequest/IResponse）](#message-请求返回消息irequestiresponse)
   - [网络消息对象池管理](#网络消息对象池管理)
-  - [协议注释格式详解](#协议注释格式详解)
+  - [协议注释格式与校验清单](#协议注释格式与校验清单)
   - [文档注释 - 自动生成代码注释](#文档注释---自动生成代码注释)
   - [接口类型对比总结](#接口类型对比总结)
   - [常见使用场景](#常见使用场景)
@@ -244,30 +249,96 @@ G2A_TestMessage = 20001
 
 ## 协议接口类型说明
 
-在 Fantasy Framework 中,所有网络协议消息都需要通过**注释标记**指定接口类型。这些接口类型定义了消息的传输方式、通信模式和路由行为。
+在 Fantasy Framework 中，网络协议定义主要由 `enum` 和 `message` 两部分组成。
+
+- `enum`：定义枚举类型（不需要接口注释）
+- `message`：定义消息结构（需要通过注释标记消息接口类型）
 
 > **📌 重要:**
-> 协议接口类型是通过 `.proto` 文件中的**注释**来标识的,而不是通过继承接口。
-> 代码生成工具会解析这些注释,自动生成实现对应接口的 C# 类。
+> 协议接口类型是通过 `.proto` 文件中的**注释**来标识的，而不是在 `.proto` 中写接口继承。
+> 代码生成工具会解析这些注释，自动生成实现对应接口的 C# 类。
 
-### 消息类型分类
+### 协议定义语法速查
 
-Fantasy Framework 的网络协议主要分为两大类:
+先看一眼“定义格式”全景，再看各类型细节。
 
-| 消息类型 | 通信模式 | 特点 | 适用场景 |
-|---------|---------|------|---------|
-| **单向消息** | 发送即忘(Fire-and-Forget) | 不需要响应,性能高 | 通知、状态同步、广播 |
-| **RPC 消息** | 请求-响应(Request-Response) | 需要等待响应,支持异步 | 查询数据、执行操作 |
+### 核心对照表
+
+| 定义对象 | `.proto` 定义格式 | 接口注释要求 | 是否成对 | 是否等待响应 | 典型用途 |
+|---------|-------------------|-------------|---------|-------------|---------|
+| **枚举** | `enum EnumName` | 无 | 否 | 否 | 状态、类型、错误码常量 |
+| **普通消息** | `message Xxx // IMessage` | 必须 `// IMessage` | 否 | 否 | 通知、广播、状态同步 |
+| **请求消息** | `message XxxRequest // IRequest,XxxResponse` | 必须 `// IRequest,响应名` | 是 | 是 | 查询、执行操作 |
+| **返回消息** | `message XxxResponse // IResponse` | 必须 `// IResponse` | 是（与 Request 配对） | - | 返回请求结果 |
 
 ---
 
-### 基础协议接口类型
+### 定义模板
 
-以下接口类型在 **Outer(客户端-服务器)** 和 **Inner(服务器间)** 协议中都适用:
+```protobuf
+syntax = "proto3";
+package Fantasy.Network.Message;
 
-#### 1. IMessage - 单向消息
+// 1) 枚举定义：不需要接口注释
+enum ErrorCode
+{
+    Success = 0,
+    InvalidToken = 1,
+}
+
+// 2) 普通消息：IMessage
+message C2G_Heartbeat // IMessage
+{
+    int64 Timestamp = 1;
+}
+
+// 3) 请求 + 返回：IRequest / IResponse
+message C2G_LoginRequest // IRequest,G2C_LoginResponse
+{
+    string Username = 1;
+    string Password = 2;
+}
+
+message G2C_LoginResponse // IResponse
+{
+    int64 PlayerId = 1;
+    string Token = 2;
+}
+```
+
+### 枚举定义格式
 
 **定义格式:**
+
+```protobuf
+enum EnumName
+{
+    ValueA = 0,
+    ValueB = 1,
+}
+```
+
+**说明:**
+
+- 枚举用于定义一组离散常量（状态、类型、错误码）
+- 枚举不属于消息接口体系，因此不使用 `// IMessage` 等注释
+- 枚举值建议显式编号，便于协议长期维护
+
+**使用示例:**
+
+```protobuf
+enum ChatChannel
+{
+    World = 0,
+    Guild = 1,
+    Private = 2,
+}
+```
+
+### message 普通消息（IMessage）
+
+**定义格式:**
+
 ```protobuf
 message MessageName // IMessage
 {
@@ -276,9 +347,10 @@ message MessageName // IMessage
 ```
 
 **说明:**
-- 单向消息,发送后不等待响应
-- 性能最高,适合高频通信
-- 接收方处理消息,但不返回结果
+
+- 单向消息，发送后不等待响应
+- 性能高，适合高频通信
+- 接收方处理消息，但不返回结果
 
 **使用示例:**
 
@@ -309,9 +381,10 @@ session.Send(heartbeat);
 ```
 ---
 
-#### 2. IRequest / IResponse - RPC 请求响应
+### message 请求/返回消息（IRequest/IResponse）
 
 **定义格式:**
+
 ```protobuf
 // 请求消息
 message RequestName // IRequest,ResponseName
@@ -327,9 +400,10 @@ message ResponseName // IResponse
 ```
 
 **说明:**
-- `IRequest` 消息必须在注释中指定对应的 `IResponse` 消息名
-- 请求和响应是成对定义的
-- 发送请求后会等待响应,支持异步操作
+
+- `IRequest` 必须在注释中指定对应的响应消息名
+- 请求和响应必须成对定义
+- 发送请求后会等待响应，支持异步操作
 - 框架自动处理请求-响应匹配
 
 **使用示例:**
@@ -473,7 +547,7 @@ request.Return();
 
 ---
 
-### 协议注释格式详解
+### 协议注释格式与校验清单
 
 协议接口类型是通过**消息定义后的注释**来标识的,格式如下:
 
@@ -490,6 +564,14 @@ message MessageName // InterfaceType[,AdditionalParameters]
 2. **接口类型名称必须准确**（区分大小写）
 3. **多个参数用逗号分隔**
 4. **顺序有要求**（Request 必须先指定 Response 名称）
+
+**校验清单（推荐提交前自检）:**
+
+- [ ] 每个 `message` 都写了正确接口注释（`IMessage` / `IRequest,...` / `IResponse`）
+- [ ] 每个 `IRequest` 都有且仅有一个对应的 `IResponse`
+- [ ] `IRequest` 注释中的响应名与真实 `message` 名字完全一致（区分大小写）
+- [ ] 枚举统一使用 `enum` 定义，没有误写为 `message` 或注释接口类型
+- [ ] 字段编号稳定递增，未复用、未随意改号
 
 **示例:**
 
