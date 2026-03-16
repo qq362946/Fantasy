@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
@@ -169,18 +171,21 @@ namespace Fantasy.EventAwaiter
                 return;
             }
 
+            ReuseList<ReuseList<IEventAwaiterCallback>> allLists = WaitCallbacks.ToLists();
+
             // 通知所有等待中的回调，组件已被销毁
             // 避免等待者无限等待，返回 Destroy 状态
-            foreach (var (_, wailtCallbackList) in WaitCallbacks)
+            foreach (var wailtCallbackList in allLists)
             {
-                foreach (var wailtCallback in wailtCallbackList)
+                for(int i = wailtCallbackList.Count -1; i>=0; i--)
                 {
-                    wailtCallback.SetDestroyResult();
+                    wailtCallbackList[i].SetDestroyResult();
                 }
             }
 
             // 清空所有等待队列
             WaitCallbacks.Clear();
+            allLists.DisposeAll();
             base.Dispose();
         }
     }

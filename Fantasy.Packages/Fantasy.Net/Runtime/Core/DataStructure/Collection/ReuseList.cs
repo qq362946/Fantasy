@@ -58,4 +58,21 @@ namespace Fantasy.DataStructure.Collection
             _isPool = isPool;
         }
     }
+
+    public static class ReuseListExtensions
+    {
+        public static void DisposeAll<T>(this ReuseList<ReuseList<T>> self)
+        {
+            if (self == null)
+                return;
+
+            int count = self.Count;
+            for (int i = 0; i < count; i++)
+            {
+                self[i]?.Dispose();
+            }
+
+            self.Dispose();
+        }
+    }
 }

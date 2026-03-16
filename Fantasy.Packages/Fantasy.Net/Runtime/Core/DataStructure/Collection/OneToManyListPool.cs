@@ -100,6 +100,35 @@ namespace Fantasy.DataStructure.Collection
         }
 
         /// <summary>
+        /// 转为嵌套列表
+        /// </summary>
+        /// <returns></returns>
+        public ReuseList<ReuseList<TValue>> ToLists()
+        {
+
+            var allLists = ReuseList<ReuseList<TValue>>.Create();
+            using var enumerator = GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                var list = enumerator.Current.Value;
+                if (list.Count == 0) continue;
+
+                var innerReuseList = ReuseList<TValue>.Create();
+
+                int count = list.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    innerReuseList.Add(list[i]);
+                }
+
+                allLists.Add(innerReuseList);
+            }
+
+            return allLists;
+        }
+
+        /// <summary>
         /// 判断给定的键和值是否存在于列表中。
         /// </summary>
         /// <param name="key">要搜索的键。</param>
