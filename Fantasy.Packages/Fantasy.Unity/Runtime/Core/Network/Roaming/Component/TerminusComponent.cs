@@ -180,7 +180,7 @@ public sealed class TerminusComponent : Entity
         }
         else
         {
-            terminus.TerminusId = 0;
+            // terminus.TerminusId = 0;
             terminus.StopForwarding = false;
         }
         
