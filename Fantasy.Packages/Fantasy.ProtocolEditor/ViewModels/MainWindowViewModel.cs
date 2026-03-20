@@ -448,8 +448,8 @@ public partial class MainWindowViewModel : ViewModelBase
             var config = new Fantasy.ProtocolExportTool.Models.ProtocolExportConfig
             {
                 ProtocolDir = WorkspacePath, // 使用工作区路径作为协议目录
-                ServerDir = workspaceConfig.ServerOutputDirectory,
-                ClientDir = workspaceConfig.ClientOutputDirectory,
+                ServerDir = ResolveOutputPath(WorkspacePath, workspaceConfig.ServerOutputDirectory),
+                ClientDir = ResolveOutputPath(WorkspacePath, workspaceConfig.ClientOutputDirectory),
                 ExportType = exportType
             };
 
@@ -610,5 +610,24 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             OutputText += $"保存工作区配置失败：{ex.Message}\n";
         }
+    }
+
+    /// <summary>
+    /// 将输出路径解析为绝对路径。
+    /// 若 outputPath 是相对路径，则以 workspacePath 为基准进行解析。
+    /// </summary>
+    private static string ResolveOutputPath(string workspacePath, string outputPath)
+    {
+        if (string.IsNullOrWhiteSpace(outputPath))
+        {
+            return outputPath;
+        }
+
+        if (Path.IsPathRooted(outputPath))
+        {
+            return outputPath;
+        }
+
+        return Path.GetFullPath(Path.Combine(workspacePath, outputPath));
     }
 }

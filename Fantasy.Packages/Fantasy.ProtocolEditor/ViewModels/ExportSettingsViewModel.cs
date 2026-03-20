@@ -155,7 +155,42 @@ public partial class ExportSettingsViewModel : ViewModelBase
         }
 
         IsValid = true;
-        ValidationMessage = "✅ 配置有效，可以执行导出";
+        
+        // 如果是相对路径，在提示中显示解析后的绝对路径，方便用户确认
+        var serverHint = ExportToServer && !Path.IsPathRooted(ServerOutputDirectory)
+            ? $"（解析为: {ResolveOutputPath(WorkspacePath, ServerOutputDirectory)}）"
+            : string.Empty;
+        var clientHint = ExportToClient && !Path.IsPathRooted(ClientOutputDirectory)
+            ? $"（解析为: {ResolveOutputPath(WorkspacePath, ClientOutputDirectory)}）"
+            : string.Empty;
+        
+        if (!string.IsNullOrEmpty(serverHint) || !string.IsNullOrEmpty(clientHint))
+        {
+            ValidationMessage = $"✅ 配置有效，可以执行导出 {serverHint}{clientHint}";
+        }
+        else
+        {
+            ValidationMessage = "✅ 配置有效，可以执行导出";
+        }
+    }
+
+    /// <summary>
+    /// 将输出路径解析为绝对路径。
+    /// 若 outputPath 是相对路径，则以 workspacePath 为基准进行解析。
+    /// </summary>
+    private static string ResolveOutputPath(string workspacePath, string outputPath)
+    {
+        if (string.IsNullOrWhiteSpace(outputPath) || string.IsNullOrWhiteSpace(workspacePath))
+        {
+            return outputPath;
+        }
+
+        if (Path.IsPathRooted(outputPath))
+        {
+            return outputPath;
+        }
+
+        return Path.GetFullPath(Path.Combine(workspacePath, outputPath));
     }
 
     /// <summary>
